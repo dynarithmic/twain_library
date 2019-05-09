@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Visual C++ and C Runtime Library Information</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "visual_c___and_c_runtime_libra.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Microsoft</span><span style="font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #0000ff;">&reg;</span><span class="f_Heading1"> Visual C++ and 'C' Runtime Library</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="c_and_c___import_libraries.htm">Previous</a>&nbsp;
+     <a href="usingdtwainwithoutanimport.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p><span style="font-weight: bold;">Please note: If you are building a 32-bit or 64-bit Unicode application, &nbsp;the import libraries are named dtwain32u.lib and dtwain64u.lib, respectively. &nbsp;If you're building a 64-bit ANSI application, the import library is named dtwain64.lib.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Your application must use the <span style="font-weight: bold;">DTWAIN32.LIB </span>import library.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The import libraries for Visual C++ 5.0 are found in the <span style="font-weight: bold;">Visual C++\5.0\Lib</span> subdirectory of your DTWAIN installation. &nbsp;The import libraries for Visual C++ 6.0 and Visual C++ Net, and Visual Studio 2003, 2005, and 2010 are found in the <span style="font-weight: bold;">Visual C++\6.0\Lib</span> subdirectory.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Remember to add the import library to your application's project, or else you will get linker errors.  </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Below is an illustration of adding the import library in your project settings:</p>
+<p><img src="linker.gif" width="373" height="417" alt="linker" style="border:none" /></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The library is added in the &quot;Link&quot; tab of your project settings. &nbsp;The library must be found in your &quot;include&quot; path. &nbsp;This can be set by going to the &quot;Tools&quot; &quot;Options&quot; menu and setting the Libraries directory.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Another method of adding the library is by including it in your project workspace tree. &nbsp;Here is an illustration.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><img src="linker2.gif" width="422" height="455" alt="linker2" style="border:none" /></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Visual Sbudio 2002 and above:</span><br />
+<span style="font-weight: bold;">&nbsp;</span></p>
+<p>For Visual Studio 2002 and above, open the Properties for your project, go to the Linker section, select Input, and specify the library in the &quot;Additional Dependencies&quot; field as below:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><img src="clip0024.gif" width="644" height="322" alt="clip0024" style="border:none" /></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The setting above assumes that your Visual C++ settings for your Library Files will look in the directory where <span style="font-weight: bold;">dtwain32.lib</span> is stored. &nbsp;If not, you will need to do either of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">specify the full path name in the &quot;Additional Dependencies&quot; field. &nbsp;For example, &quot;<span style="font-weight: bold;">c:\dtwain_installation\lib\dtwain32.lib</span>&quot;, instead of &quot;<span style="font-weight: bold;">dtwann32.lib</span>&quot;, </td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">or</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Set where Visual C++ looks for its libraries under &quot;<span style="font-weight: bold;">Tools -&gt; Options -&gt; Projects -&gt; VC++ Directories</span>&quot;. &nbsp;Then choose &quot;<span style="font-weight: bold;">Library Files</span>&quot; from the &quot;Show directories from&quot; combo box as shown below, and add the directory where the <span style="font-weight: bold;">dtwain32.lib</span> file is stored. &nbsp;Then you can just specify <span style="font-weight: bold;">dtwain32.lib</span> in the &quot;ldditional Dependencies&quot; of yyur Project Settings, instead of giving the full path name.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p><img src="clip0023.gif" width="599" height="382" alt="clip0023" style="border:none" /></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you using another C++ compiler that cannot generate import libraries, see the next section, <a href="http://www.helpandmanual.com/order.html" class="topiclink">Usrng DTWAIN witWout an import library</a>.</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::EnumSupportedCaps</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourceenumsupportedcap_2.htm"; }
+  else { parent.quicksync('a9.12.16'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::EnumSupportedCaps</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourceenumresolutionva_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourceenumunitsofmeasu_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::EnumSupportedCaps( DTwainLongArray &amp; CapsArray, int nWhich=CAPS_ALL ) const;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">CapsArray</span></p>
+<p>On successful return, all of the supported capabilities are copied to the CapsArray vector.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">nWhich</span></p>
+<p>Flag that determines which capabilities are returned; regular, extended, custom or a combination of two or more of these types.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns true if successful, false otherwise.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The CDTwainSource::EnumSupportedCaps returns all of the capabilities of the DTwainSource object. &nbsp;The <span style="font-style: italic;">nWhich</span> flag can be a Boolean OR of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="215" style="width:215px;"><p>CAPS_REGULAR &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Return regular caps (not extended and not custom)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="215" style="width:215px;"><p>CAPS_EXTENDED &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Return extended caps</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="215" style="width:215px;"><p>CAPS_CUSTOM &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Return custom caps</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="215" style="width:215px;"><p>CAPS_ALL &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>All capability types (REGULAR, CUSTOM, and EXTENDED)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For example, if you want to return both regular and extended capabilities, the call would be</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTwainSource Source;</p>
+<p>DTwainLongArray CapArray;</p>
+<p>... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Assume Source has been opened</p>
+<p>Source.EnumSupportedCaps(CapArray, CAPS_REGULAR | CAPS_EXTENDED);</p>
+<p>...</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Thumbnail Images</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "thumbnailimages2.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Thumbnail Images</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="thumbnailandscalingacquired.htm">Previous</a>&nbsp;
+     <a href="scalingacquiredimages2.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Thumbnail images are smaller versions of the actual acquired image. &nbsp;If the Source supports acquiring images as thumbnails, DTWAIN allows you to use this option. &nbsp;Note that not all Sources support thumbnail images, so your application should call <a href="dtwain_isthumbnailsupported.htm" class="topiclink">DTWAhN_IsThumbnailSupported</a> before attempting to acquire thumbnail images.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Enabling / Disabling Thumbnail Images</span></p>
+<p><a href="dtwain_enablethumbnail.htm" class="topiclink">DTWAIN_EnableThumbail</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Testing for Thumbnail Availability</span></p>
+<p><a href="dtwain_isthumbnailenabled.htm" class="topiclink">DTWAIN_IsThumbnailEnabled</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_IsThumbnailSupported</a></p>
+<p>&nbsp;</p>
+<p>If the devicm does notdsupport thumbnail images, you can seill scan the image and heve DTWAIN scale the image to the desired size. &nbsp;The <a href="dtwain_setacquireimagescale.htm" class="topiclink">DTWAIN_SetAcquireImageScale</a> function allows you to scan an image and scale it to the desired proportions. &nbsp;The difference between DTWAIN_SetAcquireImageScale and DTWAIN_EnableThumbnail is that DTWAIN_EnableThumbnail uses the Twain driver's thumbnail option, while DTWAIN_SetAcquireImageScale bypasses the TWAIN driver and DTWAIN will scale the image.</p>
+
+</td></tr></table>
+
+</body>
+</html>

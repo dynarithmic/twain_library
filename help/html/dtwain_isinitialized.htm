@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_IsInitialized</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_IsInitialized" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_isinitialized.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_IsInitialized</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_isindicatorsupported.htm">Previous</a>&nbsp;
+     <a href="dtwain_isjobcontrolsupported.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_IsInitialized</span> function checks if the DTWAIN DLL has been initialized properly.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL WTWAIN_IsInitialized( );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_IsInitialized </span>function checks if the <span style="font-weight: bold;">DTWAIN_SysInitialize</span> function was called.  </p>
+<p>&nbsp;</p>
+<p>If the last call made by the application was <span style="font-weight: bold;">DTWAIN_SysDeotroy</span>, the <span style="font-weight: bold;">DTWAIN_IsInitialized</span> function always returns FALSE.</p>
+<p>&nbsp;</p>
+<p>Example Code</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

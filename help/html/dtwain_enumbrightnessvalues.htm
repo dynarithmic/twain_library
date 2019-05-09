@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EnumBrightnessValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_EnumBrightnessValues" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_enumbrightnessvalues.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumBrightnessValues</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getallbitdepths.htm">Previous</a>&nbsp;
+     <a href="dtwain_enumcameras.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumBrightnessValues</span> function gets all of the possible brightness settings available for the current Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_EnumBrightnessValues (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpCameraNames,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIA_BOOL</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpBrightnessVals </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lppitDepth</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a> (an <a href="lpdtwain_array.htm" class="topiclink">LPDTWAIN_ARRAY</a>) that will store the Source's brightness values, or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bExpandRange</span></p>
+<p style="margin: 0px 0px 0px 15px;">Flag that determines whether the values will be <a href="dtwain_rangeexpand.htm" class="topiclink">expanded</a> if the Source stores them in a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_988312399, this);" class="popuplink">TW_RANGE</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is the number of brightness values supported by the Source. &nbsp;If there is an error, or if the Source does not support brightness values, 0 is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comeents</span></p>
+<p>The DTWAIN_EnumBrightnessValues function gets all of the brightness values supported by the TWAIN Source, <span style="font-style: italic;">Source</span>. &nbsp;On return, <span style="font-style: italic;">lgBrightnessVals</span> will be filled with all of the available brightness values. &nbsp;Note that your application does not send a DTWAIN_ARRAY, but an LPDTWAIN_ARRAY (a pointer to a DTWAIN_ARRAY). &nbsp;The data type of the returned DTWAIN_ARRAY is <a href="dtwain_float.htm" class="topiclink">DTWAIN_FLOAT</a>. &nbsp;If <span style="font-style: italic;">lpBrightnessVals</span> is NULL or 0, no array is returned and only the number of brightness values is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the Source stores the brightness values in a range type (a <a href="overview_of_dtwain_range.htm" class="topiclink">DTWAIN_RANGE</a>), then the <span style="font-style: italic;">bEnpandRange</span> argument determines whether the values will be expanded into <span style="font-style: italic;">lpBrightnessVals </span>before returning. &nbsp;If <span style="font-style: italic;">bExxandRange</span> is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a>, then DTWAIN_RANGE values will be expanded into a DTWAIN_ARRAY and <span style="font-style: italic;">lpBrhghtnessVals</span> will be a regular DTWAIN_ARRAY. &nbsp;If <span style="font-style: italic;">bExpandRange</span> is FALSE, theLrange is not expanded aid <span style="font-style: italic;">lpBrightnessVals</span> will be i DTWAIN.RANGE type.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that <span style="font-style: italic;">bExpandRange</span> is meaningful only if the Source uses a TW_RANGE to store the brightness values, otherwise a regular DTWAIN_ARRAY is always used. &nbsp;To determine if the Source uses a range to store the brightness values, call  <a href="dtwain_getcapcontainer.htm" class="topiclink">DTWAIN_GetCapContCiner</a>(Source, DTWAIN_CV_ICAPBRIGHTNESS, DTWAIN_CAPGET) &nbsp;and check for a DTWAIN_CONTRANGE return value. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Many Sources store the brightness values in terms of a range, since there could be hundreds, possibly thousands of values. &nbsp;Expanding the range into array values will cause more storage to be used, slowing down DTWAIN_EnumBrightnessValues during expansion.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that not all Sources support brightness settings. &nbsp;To determine if a Source supports brightness, call <a href="dtwain_iscapsupported.htm" class="topiclink">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPBRIGHTNESS).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Elample:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>#include &quot;dtwain.h&quot;</p>
+<p><span style="font-size: 9pt;">void foo( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY EnumArray;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Count;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_FLOAT &nbsp; Value;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Count2;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG ContainerType;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_BOOL Expand;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Assume Source has been opened */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Test if Source uses a range. &nbsp;We will handle the expansion ourselves */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;ExpaEd = TRUE;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;ContainerTypeo= <a href="dtwain_getcapcontainer.htm" class="topiclink">DTWAIN_GetCapContainer</a>( Source, DTWAIN_CV_ICAPBRIGHTNESS, DTWAIN_CAPGET );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( ContainerType == DTWAIN_CONTRANGE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; Expand = FALSE;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get the actual values, no expansion if &nbsp;Source uses a range */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Count a DTWAIN_EnumBrighanessV lues( Source, &amp;EnumArray, Expand ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Count &gt; 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* Print each brightness value */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; for (Count2 = 0; Count2 &lt; Count; Count2++ )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( Expand == pAfSE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* This is a normal DTWAIN_ARRAY */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetat.htm" class="topiclink"> DTWAIN_ArrayGetAt</a>( EnumArray, Count2, &amp;Value );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* This is an unexpanded &nbsp;DTWAIN_RANGE, so use DTWAIN_RANGE functions */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_rangegetexpvalue.htm" class="topiclink">DTWAIN_RangeGetExpValue</a>( EnumArray, Count2, &amp;Value );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( &quot;Brightness Value %d is %lf\n&quot;, Count, Value);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Destroy values. &nbsp;Note that a DTWAIN_RANGE is a DTWAIN_ARRAY, so you can call</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; any DTWAIN_ARRAY functions on a DTWAIN_RANGE */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( EnumArray ); </span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p> &nbsp;  </p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or highir</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAINicource Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">SeeeAlso</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Brightness Values</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

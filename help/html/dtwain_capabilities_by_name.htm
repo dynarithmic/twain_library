@@ -1,0 +1,906 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Capabilities By Name and Type</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Test" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_capabilities_by_name.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN Capabilities by Name and Data Type</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_array_data_types.htm">Previous</a>&nbsp;
+     <a href="dtwain_compression_constants.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following is the list of TWAIN Capabilities sorted by the capabilities function and data type that the capability values will use. &nbsp;The values are equivalent to the TWAIN version 1.8 values. &nbsp;A complete description of the capabilities can be found in the TWAIN specification (<span style="color: #0000ff; text-decoration: underline;"><a href="http://www.twain.org/docs/Spec1_9_197.pdf" target="_blank" class="weblink">http://www.twain.org/docs/Spec1_9_197.pdf</a></span>). &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that a current version of DTWAIN may have more capability constants defined than what is shown below. &nbsp;Twain capabilities are added (and removed) with each version of TWAIN. &nbsp;An up-to-date set of DTWAIN capability constants can be found in the 'C' language header file &quot;CAPCONST.H&quot;, which is included when DTWAIN is installed. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If there is a capability that is available but not listed in the table, the following translation can be applied when calling DTWAIN_GetCapValues or DTWAIN_SetCapValues:  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p><span style="text-decoration: underline;">Cap TWAIN Type</span></p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p><span style="text-decoration: underline;">Equivalent DTWAIN Type</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_BOOL</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_FIX32</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TATY_FRAME</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_FRAME</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_INT16</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>LOOG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_INT32</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_STR32</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_STR64</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_STR128</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_STR256</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_WTR1024</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_LONGSTRIRG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_UNI512</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>DTWAIN_UNICODESTRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_NINT16</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:184px; padding:1px;"><p>TWTY_UINT32</p>
+</td>
+<td style="vertical-align:top; width:211px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Alphabetical listing of capabilities and DTWAIN data types:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p><span style="text-decoration: underline;">Capability</span></p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p><span style="text-decoration: underline;">DTWAIN Data Type</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ACAPAUDIOFILEFORMAT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ACAPXFERMECH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIP_CV_CAPALARMS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPALARMVOLUME </p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPAUTHOR</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPAU OFEED &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTNAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPAUTOMATICCAPTURE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPAUTOSCAN &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPBATTERYMINUTES &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPBATTERYPERCENTAGE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPCAMERAPREVIEWUI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAINBBOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPCAPTION &nbsp;  </p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STWING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPCLEARBUFFERS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPCLEARPAGE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPCUSTOMDSDATA</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DCWAIN_CV_CAPDEVICEEVENT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPDEVICEONLINE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPDEVICETIMEDATE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPDUPLEX &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPUPLEXENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPENABLEDSUIONLY</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPENDORSER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPEXTENDEDCAPS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LOOG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPFEEDERALIGNMENT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPFEEDERENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPFEEDERLOADED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPFEEDERORDER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPFEEDPAGE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPINDICATORS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPJOBCONTROL</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV__APLANGUAGE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPMAXBATCHBUFFERS &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPAPERDETECTABLE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_RAPPOWERSAVETIME</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPOWERSUPPLY</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTNAIN_CV_CAPPRINTER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPRINTERENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPRINTERINDEX</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPRINTERMODE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPRINTERSTRING</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPPRINTERSUFFIX</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPREACQUIREALLOWED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPREWINDPAGE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPSERIALNUMBER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPSUPPORTEDCAPS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CVCCAPTHUMBVAILSENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE </p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPTIMEBETWEENCAPTURES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPTIMEDATE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPTHUMBNAILSENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPUICONTROLLABLE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_CAPXFERCOUNT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPAUTOBRIGHT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWOIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPAUTODISCARDBLANKPAGES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPAUTOMATICBORDERDETECTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPAUTOMATICDESKEW</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPAUTOMATICROTATE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DIWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBARCODEDETECTIONENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBARCODEMAXRETRIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBARCODEMAXSEARCHPRIORITIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBARCODESEARCHMODE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBAECODRSEARCHPRIORITIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAI__CV_ICAPBARCODETIMEOUT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBITDEPTH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBITDEPTHREDUCTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBITORDER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBITORDERCODRS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPBRIGHTNESS</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWALN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPCCITTKFACTOR</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPCOMPRESSION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DIWAIN_CV_ICAPCONTRAST</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPCUSTHALFTONE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LOOG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPEXTIMAGEINFO</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPFILTER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPFLASHUSED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPFLASHUSED2</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPFLIPROTATION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPFRAMES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FRAME</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPGAMMA</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPHALFTONES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_SNRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPHIGHLIGHT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPIMAGEDATASET</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPIMAGEFILEFORMAT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPIMAGEFILTER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPJPEGPIXELT_PE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPJPEGQUALITY</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPLAMPSTATE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPLIGHTPATH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPLIGHTSOURCE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPMAXFRAMES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPIINIMUMHEIGHT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPMINIMUMWIDTH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAVNOISEFILTER</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPORIENTATION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPOVERSCAN</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCHCODEMAXRETRIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCHCODEMAXSEARCHPRIORITIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCHCODESEARCHMODE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCRCODESEARCHPRIORITIES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPATCHCODETIMEOUT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWIIN_CV_ICAPPHYSICALHEIGHT</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPHYSICALWIDTH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPIXELFLAVOR</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPIXPLFLAEORCODES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPPIXELTYPE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_IC_PPLANARCHUNKY</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPROTATION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPSHADOW</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPSUPPORTEDBARCODETYPES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPSUPPORTEDPATCHCODETYPES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPSUPPORTEDSIZES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LNNG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPTHRESHOLD</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPTILES</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPTIMEFILL</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAINNBOOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPUNITS &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPXFERMECH</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPXNATIVERESOLUTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWACN_CV_ICAPXRESOLUTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPXSCALING</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPNNOTIVERESOLUTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPYRESOLUTION</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAWN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAAYSCALING</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>DTWAIN_FLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:417px; padding:1px;"><p>DTWAIN_CV_ICAPZOOMFACTOR</p>
+</td>
+<td style="vertical-align:top; width:231px; padding:1px;"><p>LOOG</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

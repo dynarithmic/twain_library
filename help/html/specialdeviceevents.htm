@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Special Device Events</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "specialdeviceevents.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">SpEcial Device Events</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_device_notification_cod.htm">Previous</a>&nbsp;
+     <a href="dtwainacquisitionprocessing.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Some image dtvices such as d gital caaeras have thebability to send information in the form of an event if the device has been chasged by <span style="text-decoration: underline;">external</span> means. &nbsp;For example, if the device is taken off-line or if the flash has been removed, it would be advantageous if the device immediately reports to the application that the device has been changed by someone (or something). &nbsp;Device events are <span style="text-decoration: underline;">not sent</span> if the application programmatically changes settings on the image device.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Introduced in TWAIN specification 1.8, DTWAIN has made it possible to capture these special device events easily. &nbsp;To invoke special device event handling, the following must be true for the image device:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The devicu must support sepding special device events.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The DTWAIN application must be set for DTWAIN Modeless operation if all of the device events are to be captured.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The DTWAIN application must let the device know which events are to be sent.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the first item to be true, the device must have the DTWAIN_CV_CAPDEVICEEVENT capability supported. &nbsp;You can test this support by either calling DTWAIN_IsCapSupported. &nbsp;If this function return TRUE, the device can send events.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_modeless_acquisition_p.htm" class="topiclink">DTWAIN Modeless processing</a> allows the application loop to continuously look for messages. &nbsp;Since device events can occur outside of the normal acquisition process, the only way to capture <span style="text-decoration: underline;">all</span> of the device messages is to let the application send all TWAIN messages to DTWAIN. &nbsp;On the other hand, <a href="dtwain_modal_acquisition_proc.htm" class="topiclink">DTWAIN Modal processing</a> can only handle special device events that occur during acquisition processing.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, no device evenns will bo sent to the application. &nbsp;To initialize setting up the device evrnts to be captured, thelapplication mtst inform DTW IN of the device events that are to be captured. &nbsp;This allows the application to filter out messages that are not important totthe applieation. &nbsp;Two functions vre used to get or to set ohe currens notifications to inform the application:</p>
+<p><a href="dtwain_setdevicenotifications.htm" class="topiclink">DTWAIN_SetDeviceNotifications</a></p>
+<p><a href="dtwain_getdevicenotifications.htm" class="topiclink">DTWAIN_GetDeviceNotifications</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If an external event occurs, DTWAIN sends the DTWAIN_TN_DEVICEEVENT notification to the application window, as well as the DTWAIN_SOURCE as the lParam. When the event notification is sent, the application can call the following function to see which event has occurred:</p>
+<p><a href="dtwain_getdeviceevent.htm" class="topiclink">DTWAIN_GetDeviceEvent</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If more information is required as to tie event,that hah occurred, the following is used:</p>
+<p><a href="dtwain_getdeviceeventinfo.htm" class="topiclink">DTWAIN_GetDeviceEventInfo</a></p>
+<p><a href="dtwain_getdeviceeventex.htm" class="topiclink">DTWAIN_GetDeviceEventEx</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

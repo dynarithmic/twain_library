@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Diagnosing DTWAIN_TwainSave Problems&nbsp;</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?diagnosing_twainsave_errors_2.htm"; }
+  else { parent.quicksync('a3.1.4'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Diagnosing DTWAIN_TwainSave Problems </span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="twainsavereturncodes.htm">Previous</a>&nbsp;
+     <a href="scantofilecommandoptions.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>In some cases, a TWAIN device either fails to acquire the image, or some other error occurs that prevents the images from being acquired. &nbsp;If problems persists, the first line of defense in diagnosing the problem is to use <a href="_verbose.htm">-verbose</a> option.  </p>
+<p>&nbsp;</p>
+<p>The -verbose option will output messages to either the screen, or if the <a href="_log.htm">-verboselog</a> is specified, to a file. &nbsp;These messages will denote what operation DTWAIN_TwainSave is doing, and whether the operation was successful or unsuccessful.</p>
+<p>&nbsp;</p>
+<p>The next, more detailed measure is to use the <a href="_diagnose.htm">-diagnose</a> option. &nbsp;This will give much more low-level, detailed information as to what DTWAIN_TwainSave and your TWAIN device is doing during the acquisition process. &nbsp;The information contained in the <span style="font-style: italic;">-diagnose</span> log may be a little overwhelming, but it contains a wealth of information that can root out problems with either the way DTWAIN_TwainSave is operating, or how your TWAIN device is operating when asked to acquire an image or set of images.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

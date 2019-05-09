@@ -1,0 +1,118 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::EnumOrientations</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourceenumorientations_2.htm"; }
+  else { parent.quicksync('a9.12.12'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::EnumOrientations</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourceenumcontrastvalu_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourceenumpapersizes_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::EnumOrientations( DTwainLongArray&amp; Array ) const;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p>Array that will store the supported orientation values.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>true if successful, false otherwise.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>This function returns a DTwainLongArray that denotes all of the supported orientation values for the Source. &nbsp;If the Source does not support the use of orientations for the acquired images, the return value will be false. &nbsp;Your application can call DTwainSource::IsOrientationSupported or DTwainSource::IsCapSupported(DTWAIN_CV_ICAPORIENTATION) to check if the Source supports orientation of an image.</p>
+<p>&nbsp;</p>
+<p>The returned values in the <span style="font-style: italic;">Array</span> will be equivalent to the orientation values below:</p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p><span style="text-decoration: underline;">DTWAIN Constant &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p><span style="text-decoration: underline;">Description</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><br>
+</td>
+<td valign="top" width="145" style="width:145px;"><br>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_ROT0 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>Rotate 0 degrees</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_ROT90</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>Rotate 90 degrees</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_ROT180 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>Rotate 180 degrees</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_ROT270 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>Rotate 270 degrees</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_PORTRAIT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>DTWAIN_ROT0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="202" style="width:202px;"><p>DTWAIN_OR_LANDSCAPE</p>
+</td>
+<td valign="top" width="145" style="width:145px;"><p>DTWAIN_ROT270</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

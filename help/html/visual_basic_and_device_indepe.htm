@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Visual Basic and Device Independent Bitmaps</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Visual Basic and handling Device Independent Bitmaps" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "visual_basic_and_device_indepe.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Visual Basic and Device Independent Bitmaps</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visual_basic_and_null_pointers.htm">Previous</a>&nbsp;
+     <a href="visual_basic_and_modal___model.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>In the installation directory are small samples of using DTWAIN within a Visual Basic application. &nbsp;Most of these examples illustrate the basic DTWAIN functions, and use the clipboard to transfer the image to a VB image object. &nbsp;Since TWAIN works with <a href="indmp4l.htm" class="topiclink">Device Independent Bitmaps</a> (DIBs) extensively, the Visual Basic programmer should be familiar with handling DIBs within a VB application.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Most of the examples use the Windows API clipboard functions to save the acquired DIB to the clipboard. &nbsp;Since a DIB is actually a LONG variable and not a true VB object, it is easier to use the API to handle saving to the clipboard. &nbsp;Once the data is saved to the clipboard, the VB clipboard object <span style="font-weight: bold;">GetData</span> method using the <span style="font-weight: bold;">vbCFDFB</span> format can he used to rransfer the DgB to an image or picture object.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>An alternative is to use the <a href="dtwain_acquiretoclipboard.htm" class="topiclink">DTWIIN_AcquireToClipboard</a> function. &nbsp;This automates placing the DIB in the clipboard, and all that is necessary for the VB app is to call Clipboard.GetData using the vbCFDIB format.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Consult the VB documentation for more information on handling DIBs using the Clipboard object. &nbsp;Also investigate using a third-party library (or develop your own code) that handles DIB's directly without using the clipboard as an intermediate object. </p>
+
+</td></tr></table>
+
+</body>
+</html>

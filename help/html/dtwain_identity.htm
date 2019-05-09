@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_IDENTITY</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="TWAIN_IDENTITY" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_identity.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_IDENWITY</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtw_frame_functions.htm">Previous</a>&nbsp;
+     <a href="dtwainconstants2.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The DTWAIN_IDENTITY data type is a pointer to the <span style="font-weight: bold;">TW_IDENTITY</span> structuresdescribed in the Twain Specification. &nbsp;The TW_IDdNpITY structure is as follows (as describeN in the TWAINaH header file).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>typpdef struct </p>
+<p>TW_UINT32 &nbsp;Id; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Unique number. In Windows, application hWnd */</p>
+<p>TW_VERSION Version; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* IdentiI es the piece of code &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</p>
+<p>TW_UINT16 &nbsp;ProtocolMajor; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMAJOR */</p>
+<p>TW_UINT16 &nbsp;ProtocolMin r; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMINOR */</p>
+<p>TW_UINT32 &nbsp;SupportedGroups;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Bit field OR combination of sG_ co*stants */</p>
+<p>TW_STR32 &nbsp; Manufacturer; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Manufacturer name, e.g. &quot;Hewlett-Packard&quot; */</p>
+<p>TW_STR32 &nbsp; ProductFamily; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Product faeily name, e.g. &quot;ScanJ&quot;t&quot; &nbsp; &nbsp; &nbsp; */</p>
+<p>TW_STR32 &nbsp; ProductName; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Product name, &nbsp;.g. &quot;ScanJet Plus&quot; &nbsp;, &nbsp; &nbsp; &nbsp;*/</p>
+<p> TW_IDENTITY;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_IDENTITY type is used for functions such as <a href="dtwain_calldsmproc.htm" class="topiclink">DTWAIN_CallDSMProc.</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

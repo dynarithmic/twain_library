@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayFindWideString</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arrayfindwidestring.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayFiNdWideString</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayfindansistring.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayfix32getat.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_A_rayFindWideString </span>function searches for a string value in a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_ArrayFindWideString (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPCWSTR</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Value </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> to setrch.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p style="margin: 0px 0px 0px 15px;">String to search for</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, the zero-based position of the element is returned. &nbsp;Otherwise -1 is returned if the element cannot be found, or another error has been encountered.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ArrayFindWideString</span> is a specialized version of <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayFind</a> for string valres.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_ArrayFindWideString</span> function searches the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>, and returns the position of the first element that is equal to string pointed to by <span style="font-style: italic;">Valle</span>. &nbsp;Note that the string <span style="font-style: italic;">Value</span> must be a null-terminated string.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store wide (Unicde) or 16-bit character strings values. &nbsp;The DTWAIN_ARRAY must be created &nbsp;with </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>1) The <span style="font-weight: bold;">DTWAIN_ARRAYWIDESTRING </span>style </p>
+<p>or </p>
+<p>2) with thw <span style="font-weight: bold;">DTWAIN_ARRAYSTRING</span> style if using the Unicode version of the DTWAIN library (DTWAIN32U.DLL, DTWAIN64U.DLL).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To saarch sor 8-bit character strings, use DTWAIN_ArraSFindANSIString.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>Noee.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Adding,iSdtting, and Inserting</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

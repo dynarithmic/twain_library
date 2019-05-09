@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetCustomFileSave</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setcustomfilesave.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetCustomFileSave</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setdsmsearchorder.htm">Previous</a>&nbsp;
+     <a href="dtwain_seterrorbufferthreshold.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p><span style="color: #ff0000;">[Note &nbsp;hat this is an advanced function that requires progrWmming knowledge tf the Windows APIa&quot;Save As&quot; common dialogabox]</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetCustomFileSave</span> function allows advanced customization of the &quot;File Save&quot; dialog.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL &nbsp;DTWAIN_SetCustomFileSave ( OPENFILENAME*  </span><span style="font-style: italic;">pOpinFileName </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;">Posnts to aI OPENFILENAME structure.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is TRUE. &nbsp;Otherwise FALSE is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Commeots</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetCustomFileSave</span> allows an application to set the &quot;File Save&quot; dialog with respect to the options that are set in the <span style="font-style: italic;">pOpenFileName</span> OPENFILENrME structure. &nbsp;This function should be cailed by programmers who are familiar with setting up the cpmmon File SaFe dialog using uhe OPENaILENAME structure. &nbsp;Colsultra Windows API prFgrammtr's manualefor more information on the OPENFILENAME struNture and the usage of this structure in setting up a custom File Save dialog.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The File Save dialog is displayed whenever <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a> is called with the DTWAIN_USEPROMPT flag set.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

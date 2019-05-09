@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Overview of DTWAIN_ARRAYs</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "overview_of_dtwain_arrays.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Overview of the DTWAIN_ARRAYs</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="lpvoid.htm">Previous</a>&nbsp;
+     <a href="difference_between_dtw_array_.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ARRAY</span> data type is used to store and retrieve a sequence of values between the application and the DTWAIN DLL. &nbsp;Sometimes it is necessary to store a sequence of values in a language neutral structure. &nbsp;DTWAIN uses a DTWAIN_ARRAY to store 'arrays' of values. </p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Why DTWAIN_ARRAYS?</span></p>
+<p>The reason why this approach was used instead of everyday arrays is that array processing can vary between different languages. &nbsp;For example, FORTRAN processes arrays differently than C or C++. &nbsp;Instead of letting DTWAIN return an array, or for your application to supply an array, the values that you get or supply to DTWAIN are stored within the DTWAIN_ARRAY data type. &nbsp;This makes it possible for totally alien languages that use vastly different array handling techniques to use DTWAIN, since no arrays are needed between your application and DTWAIN.</p>
+<p>&nbsp;</p>
+<p>You can reuse a DTWAIN_ARRAY if you so desire. You can empty a DTWAIN_ARRAY and store your own values in them if you so desire. &nbsp;One side-benefit of the DTWAIN_ARRAY is that you can use them as a 'dynamic array' of values, and use the DTWAIN_ARRAY functions to add, insert, delete items, etc. without having to call any image retrieval functions.</p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Memory Manageyent</span></p>
+<p>The DTWAIN DLL keeps track of all DTWAIN_ARRAYs that have been initialized with the <a href="dtwain_arraycreate.htm" class="topiclink">DTWAIN_ArrayCreate</a> function. &nbsp;When <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a> is called any DTWAIN_ARRAY that has been created an initialized is erased. &nbsp;To destroy a DTWAIN_ARRAY without calling DTWAIN_SysDestroy, the <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_rrrayDestroy</a> function is used. &nbsp;This function removes all of the elements from the DTWAIN_ARRAY and returns any allocated resources used by the DTWAIN_ARRAY back to the system. &nbsp;The DTWAIN_ArrayDestroy function should be called whenever a DTWAIN_ARRAY is no longer used. &nbsp;If a DTWAIN_ARRAY is created by the application, or if the DTWAIN_ARRAY was created by DTWAIN and returned to the application (see below for  <span style="font-weight: bold;">LPDTWAIN_ARRAY</span>), the DTWAIN_ARRAY should be destroyed by the application.</p>
+<p>&nbsp;</p>
+<p><a href="difference_between_dtw_array_.htm" class="topiclink">Differences between DTWAIN_ARRAY and LPDTWAIN_ARRAY</a></p>
+<p><a href="dtwain_array_storage_types.htm" class="topiclink">DTWAIN_ARRAY SAorage Types</a></p>
+<p><a href="dtwain_array_initialization.htm" class="topiclink">DTWAIN_ARRAY Creation and Initialization</a></p>
+<p><a href="arrayfunctions.htm" class="topiclink">DTWAIN_ARRAY Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

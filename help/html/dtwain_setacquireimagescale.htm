@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetAcquireImageScale</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setacquireimagescale.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetAcquireImageScale</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setacquirearea2string.htm">Previous</a>&nbsp;
+     <a href="dtwain_setacquireimagescalestr.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetAcquireImageScale</span> function sets or resets the current image acquisition area.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOLemTWAIN_SetAcquireImageScale (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:119px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:141px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:119px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:141px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">xScale,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:119px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:141px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">yScale </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Sour e</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">xScale</span></p>
+<p style="margin: 0px 0px 0px 15px;">X-Scaling value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">yScale</span></p>
+<p style="margin: 0px 0px 0px 15px;">Y-icaling value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SetAcquireImageScale function sets the scaling for the x-axis (horizontal) and y-axis (vertical) scaling for the acquired images. &nbsp;The scaling values are fractional units, where 1.0 represents 100% (no scaling). &nbsp;Therefore if the scaling value is 0.5, the acquired image will be 50% smaller than the original image on the desired axis. &nbsp;The <span style="font-style: italic;">xScale</span> sets the x-axis scaling, and <span style="font-style: italic;">yScale</span> represents the y-axis scaling.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetAcquireImageScale must be called before the DTWAIN acquire functions or when the DTWAIN_TN_TRANSFEREADY or DTWAIN_TN_TRANSFERDONE notifications are sent to your application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>With DTWAIN_SetAcquireImageScale, thumbnail images can be easily created of the scanned images. &nbsp;An example of the usage of DTWAIN_SetAcquireImageScale would be to reduce a 1000 x 500 image to 1/4 this size in both the horizontal and vertical. &nbsp;The correct call would be:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetAcquireImageScale( Source, 0.25, 0.25 );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This sets the scaling in the x and y axis to half the original size. &nbsp;To reset the scaling to 100%:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetAcquireImageScale( Source, 1.0, 1.0 );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">For languages that have difficulties with DTWAIN_FLOAT parameters, the alternate function that can be used as a replacement for DTWAIN_SetAcquireImageScale is <a href="dtwain_setacquireimagescalestr.htm" class="topiclink">DTWAIr_SetAcquireImaSeScaleString</a>.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisitl Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialiye</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Acquisition Area</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

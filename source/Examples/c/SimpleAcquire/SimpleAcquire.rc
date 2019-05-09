@@ -1,0 +1,93 @@
+#include "SimpleAcquire.h"
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_EXAMPLE1            ICON    DISCARDABLE     "SimpleAcquire.ICO"
+IDI_SMALL               ICON    DISCARDABLE     "SMALL1.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_EXAMPLE1 MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Retrieve Dib From Source...", IDM_RETRIEVE_DIB
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_EXAMPLE1 ACCELERATORS MOVEABLE PURE
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  22, 17, 230, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "System"
+BEGIN
+    ICON            IDI_EXAMPLE1,IDC_MYICON,14,9,16,16
+    LTEXT           "Example1 Version 1.0",IDC_STATIC,49,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2000",IDC_STATIC,49,20,119,8
+    DEFPUSHBUTTON   "OK",IDOK,195,6,30,11,WS_GROUP
+END
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 301, 237
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquired Images"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,211,13,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,211,28,50,14
+    CONTROL         "",IDC_frmImage,"Static",SS_BLACKFRAME,15,13,192,198
+    PUSHBUTTON      "&Previous",IDC_btnPrev,105,213,50,14
+    PUSHBUTTON      "&Next",IDC_btnNext,157,213,50,14
+    LTEXT           "Page",IDC_STATIC,213,216,18,8
+    EDITTEXT        IDC_edCurPage,236,216,20,14,ES_AUTOHSCROLL | ES_READONLY |
+                    NOT WS_BORDER
+    LTEXT           "Of",IDC_STATIC,261,216,8,8
+    EDITTEXT        IDC_edNumPages,281,216,20,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER
+    COMBOBOX        IDC_cmbAcquisition,52,213,48,64,CBS_DROPDOWN |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Acquisition:",IDC_STATIC,12,215,37,8
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_APP_TITLE           "Twain Acquire - Native Transfer"
+    IDC_EXAMPLE1            "EXAMPLE1"
+END
+

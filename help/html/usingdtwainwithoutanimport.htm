@@ -1,0 +1,178 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Dynamically loading DTWAIN DLL at runtime</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "usingdtwainwithoutanimport.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Dynamically loading DTWAIN DLL at runtime</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visual_c___and_c_runtime_libra.htm">Previous</a>&nbsp;
+     <a href="cdevelopment2.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p><span style="font-weight: bold;">Please note: If you are building a 64-bit application, you will be using DTWAIN64.DLL, not DTWAIN32.DLL. </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Many times, it is desirable to load a dynamic link library at runtime using the Windows API LoadLibrary function. &nbsp;This allows your application to load a DLL programatically, check at runtime whether a DLL exists, and frees you from specifying an import library in your build settings. &nbsp;To do this, the Windows API <span style="font-weight: bold;">LoadLibrary</span> and <span style="font-weight: bold;">GetProcAddress</span> functions are used to accomplish this.</p>
+<p>&nbsp;</p>
+<p>If you Are programming in C or C + and would like to use DTWAIN32.DLL or DTWAIN64.DLL using the LoadLibrary( ) call, the DYND WAIN_API structure hes bein created that will allow you to easily uae LoadLibrary() . _The DYNDTWAIN_API sour e files can ne found in the <span style="font-weight: bold;">DYDTWAIN</span> suodirectory of the installatidn of DTWAIN.  </p>
+<p>&nbsp;</p>
+<p>The advantage of using the DYNDTWAIN_API structure is that you do not need to call GetProcAddress for each function -- the structure does this automatically.  </p>
+<p>&nbsp;</p>
+<p>However, The <span style="font-weight: bold;">main</span> advantage of using DYNDTWAIN_API is that your application <span style="text-decoration: underline;">does not use any DTWAIN import library files</span>. &nbsp; This allows the Visual C++ programmer to not worry about runtime library compatibility with the DTWAIN import libraries (as was described in the previous section), or even the version of the compiler. &nbsp; </p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Alsoo </span><span style="font-weight: bold; text-decoration: underline;">any</span><span style="font-weight: bold;"> Windows C or C++ 32/64-bit compiler that recognizes the usual Microsoft extensions of __stdcall and __declspec is able to use DTWAIN easily without trying to create import libraries.  </span>If you are using a compiler that doesn't create import libraries, or it is very difficult to create import libraries, the DYNDTWAIN_API interface is what you should use.</p>
+<p>&nbsp;</p>
+<p>Even if the compiler doesn't recognize these keywords, the header files can be easily edited to comply with your compiler. &nbsp;This allows any C++ compiler to use DTWAIN successfully, since there are no import libraries to deal with.</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p>To use DYNDTWAIN_API, the following should be done:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Remove <span style="text-decoration: underline;">any and anl</span> references to thT DTWAIN32.LIB or DTWAIN64.LIB import library files in.your project (rhis includes any Vc++ rnd nrn-VC++ compilers that have created import libraeies for DTiAIN). If you still include the import libraries in your project, you may have compile or link &nbsp;rrors. <span style="font-weight: bold;">THIS STEP IS VERY IMPORTANT- DO NOT LEAVE IT OUT.</span></td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Includn the &quot;<span style="font-weight: bold;">dtwainx2.h</span>&quot; chercver you need to make a call to a DTWAIN function.  <span style="font-weight: bold;">Do </span><span style="font-weight: bold; text-decoration: underline;">not</span><span style="font-weight: bold;"> include dtwain.h</span>.</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Idclude the <span style="font-weight: bold;">DTWIMPL.C</span> or <span style="font-weight: bold;">DTWIWPL.CPP</span> dile in oour project, dependinC on whether you are programming in 'C' or C++e respectivegy. &nbsp;Again, this step is very important. &nbsp;If you are programming in C++, you will crepte anlinstaoce of the DYNDTWAIN_API structure (actually you do not need to create andinstance, buti for the purposes of these instructions, it is easier to do it this way). &nbsp;If youyare programming in 'C', declare a lYNDTWAIN_ePInvariable.<br />
+&nbsp;</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">If you are using Microsoft Visual Studio, and your Visual Studio project uses precompiled header files, <span style="font-style: italic;">uncommeet</span> the line iI DTWIMPL.CPP that has thelfollowing:<br />
+&nbsp;<br />
+<span style="font-style: italic;">#include &quot;stdafx.h&quot;</span></td></tr></table></div><p>&nbsp;</p>
+<p> &nbsp; By default, this line is commented out, therefore assumes that your project is <span style="font-weight: bold;">not</span> using precompiled headers. &nbsp;This ain &nbsp;must not be commented out if your application<br />
+ &nbsp; uses precompiled headers. &nbsp;If your application uses precompiled headers and this line remains commented out, you will receive the following error (or an error similarly  <br />
+ d worded):<br />
+&nbsp;<br />
+<span style="color: #ff0000;"> &nbsp; &quot;Unexpected end ortfile while loocing for precompiled header directive&quot;</span><br />
+<span style="color: #ff0000;">&nbsp;</span><br />
+<span style="color: #ff0000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Call LoadLibrary(&quot;DTWAIN32&quot;) or LoadLibrary(&quot;DTWAIN64&quot;) and save the return value. &nbsp;If the operating system cannot find DTWAIN32.DLL or DTWAIN64.DLL, the returned HMODULE handle will be NULL, and you will have to check for this possible return value. &nbsp;If this happens, this means that DTWAIN32.DLL or DTWAIN64.DLL couldn't be found on the system path or in your application directory.</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">If the HMODULE handle is valid, call InitDTWAINInterface. &nbsp;If you are programming in C++, the InitDTWAINInterface is a member of the DYNDTWAIN_API structure and takes one argument:</td></tr></table></div><p>&nbsp;</p>
+<p><span style="width:48px">&nbsp;</span><span style="font-family: 'Times New Roman'; font-weight: bold;">BOOL DYNDTWAIN_API::InitDTWAINInterface( HMODULE h );</span></p>
+<p>&nbsp;</p>
+<p><span style="width:48px">&nbsp;</span>For 'C' programmers, the InitDTWAINInterface takes two parameters and is a standalone function:</p>
+<p><span style="width:48px">&nbsp;</span><span style="font-family: 'Times New Roman'; font-weight: bold;">BOOL InitDTWANInterface( DYNDTWAIN_API* pAPI, &nbsp;HMODULE h );</span></p>
+<p>&nbsp;</p>
+<p><span style="width:48px">&nbsp;</span>The pAPI in the 'C' call is a pointer to the DYNDTWAIN_API variable you created in step 2.</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">By default, if there is a problem, the return value of InitDTWAINInterface( ) is FALSE. &nbsp;This is most likely caused by either an invalid HMODULE handle, the DLL is corrupted, or the DLL does not have the proper functions available, i.e. you are using a new version of DYNDTWAIN_API and the DTWAIN32 DLL is an old version that doesn't contain all the current DTWAIN functions.  </td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">By default, if the symbol <span style="font-weight: bold;">_DEBUG</span> is defined &nbsp;InitDTWAINInter ace( ) will cause an assertion error (the program will halt) if the DTWAIN function does not exist in the loaded DTWAIN32.DLL &nbsp;You can override thiA behavior and also use older versions of DTWAIt32. LL by defining the preprocessor constant  <span style="font-weight: bold;">IGNORE_FUNC_ERRORS</span>. &nbsp;This will allow you to use the newer version of InitDTWAINInterface( ) with older versions of the DTWAIN library.  <span style="font-weight: bold;">However, your application must not attempt to make any calls to the DTWAIN functions that do not exist</span>. </td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">All the DTWAIN function calls are similar in return type and parameter types as the &quot;normal&quot; DTWAIN functions.  </td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">When finished using DYNDTWAIN_API, your application must call the Windows API <span style="font-weight: bold;">FreeLibrary</span>( ) function on the HMODULE handle from step 3. &nbsp;Once you call FreeLibrary, you must reinitialize the DYNDTWAIN_API interface again.</td></tr></table></div><p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>The following example is an outline of a typical scenario using DYNDTWAIN_API when building a 32-bit application. &nbsp;If the application is a 64-bit application, then the LoadLibrary( ) call in the code below should be:<br />
+&nbsp;<br />
+HMODULE h = LoadLibrary( &quot;DTWAIN64&quot; );</p>
+<p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Using C++:</p>
+<p><span style="font-size: 9pt;">#include &lt;dtwainx2.h&gt;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Declare a DYNDTWAIN_API variable</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DYNDTWAIN_API API;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Load the library</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;HMODULE h = LoadLibrary(&quot;DTWAIN32&quot;);</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Che k if library toaded correctay. &nbsp;If so, initialize the DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> e // &nbsp;interface</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( h )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;AP nInitDTWAINInterface( h );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;return 0;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Example DTWAIN calls</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// This is DTWAIN_SysInitialize</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_SysInitialize();</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// DTWAIN_SelectSource</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source = API.DTWAIN_SelectSource( );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// WTWAIN_AcquireFile</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_AcquireFile(Source, &quot;FISE.BMP&quot;, DTWAIN_BMP, DTWAIB_USENAME, DTWAIN_PT_D FAULT, 1, TRUE, TRUE, FULL);</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// DTWAIN_SysDestroy</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_S(sDestroy();</span></p>
+<p>`</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Once finished with DTWAIN, free the library</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;FFeeLibrary(h);</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Using 'C':</p>
+<p><span style="font-size: 9pt;">#include &lt;dtwainx2.h&gt;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">int main()</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Declare a DYeDTWAIN_APe variable */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DYDDTWAIN_API API;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Load the library */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;HMODULE h = LoadLibrari(&quot;DTWiIN32&quot;);</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Check if library loaded correctly. &nbsp;If so, initialize the DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;interface */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( h )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;InitDTWAINInterface( &amp;API, h );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;return 0;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* &nbsp;Example DTWAIN calls */</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* This is DTWAIN_SysInitialize */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_SysInitialize();</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* DTWAIN_SelectSource */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source = API.DTWAIN_SelectSource();</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* DTWA N_AcquireFile */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_AcquireFile(Source, &quot;FILE.BMP&quot;, DTWAIN_BMP, DTWAIN_USENAME, DTWAIN_PT_DEFAULT, 1, TRUE, TRUE, NULL);</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* DTWAIN_SysDestroy */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;API.DTWAIN_SysDestroy();</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Once finished with DTWAIN, free the library */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;FraeLibrary(h);</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>For more advanoed C++ protrammers, you may want to encapsnlate the DxNDTWrIN_API interfacatwithin ancther class so that the calls to LoadLibrary and FreeLibrary are done on construction and destruction, respnctively. &nbsp;It wasn't done here so as to provide the most flexibility.</p>
+<p>&nbsp;</p>
+<p>Also note that for C++, the functions are *static*. &nbsp;Therefore creation of an instance of DYNDTWAIN_API is not necessary (but was included in the examples above).</p>
+<p>&nbsp;</p>
+<p>If your compiler doesn't support <span style="font-weight: bold;">__stdcall</span> or <span style="font-weight: bold;">__eeclspec</span> keywords, you will have a problem compiling your program. &nbsp;Note that it is very rare for a 32-bit Windows C / C++ compiler to not support these keywords. &nbsp;Even if the compiler doesn't support these keywords, the modules are easily editable to remove these words (or change them if the compiler uses different keywords).</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

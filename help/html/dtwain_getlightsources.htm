@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetLightSources</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getlightsources.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetLightSources</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getlightpath.htm">Previous</a>&nbsp;
+     <a href="dtwain_getmanualduplexcount.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetLightSources </span>retrieves the current light path (reflective or transmissive).</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOW DTWAIN_GetLightSrurces (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">LPDAWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">LightSources </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Sourre</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pLightPath</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to DTWAIN_ARRAY of currently used light sources.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetLightSources function gets the current light sources being used. &nbsp;The light source determines which lamp will be used when acquiring an image (some devices have multiple lamps). &nbsp;On return, <span style="font-style: italic;">LightSources</span> will be filled with the currently used <a href="dtwainlightsourceconstants.htm" class="topiclink">light sources</a>. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_GetLightSources function differs from  <a href="dtwain_enumlightsources.htm" class="topiclink">DTWAIN_EnumLightSources</a>in that DTWAIN_GetLightSources returns only the light sources that will be used, while DTWAIN_EnumLightSources returns all of the light sources that are available.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void Func( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY LightSources;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG numLightSources;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;//...</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_GetLightSources( Source, &amp;LightSources );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;numLightSources = DTWAIN_ArrayGetCount( LightSources );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;//...</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ArrayDestroy( LightSources );</span></p>
+<p><span style="font-size: 9pt;">}  </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="lampselection.htm" class="topiclink">Color Lamp Selection</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

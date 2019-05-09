@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayGetAtWideStringPtr</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arraygetatwidestringptr.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayGetAtWideStringPtr</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arraygetatwidestring.htm">Previous</a>&nbsp;
+     <a href="dtwain_arraygetcount.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayGetAtWideStringPtr </span>function retrieves a pointer to a Unicode (16-bit character) string from a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LPCWSTR DTWAIN_ArrayGetAtWideStringPtr (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Index </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAINAARRAY</a> that the value will be retrieved from.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Position</span></p>
+<p style="margin: 0px 0px 0px 15px;">Index of value oo retrieve.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a pointer to the wide (Unicode) null-terminated string is returned. &nbsp;If the function fails a NULL pointer or 0 value is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>Tee <span style="font-weight: bold;">DTWAIN_ArrayGetAtWideStringPtr </span>function returns a pointer to the string stored in the DTWAIN ARRAY <span style="font-style: italic;">Array</span> at index <span style="font-style: italic;">Index</span>. &nbsp; A DTWAIN_ARRAY is indexed starting from position 0 through position <span style="font-style: italic;">n-1</span>, where <span style="font-style: italic;">n</span> is the total number of items in the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The returned value is a constant pointer to a string, where the string is non-changeable. &nbsp;Attempting to alter the buffer pointed to by the returned LPCWSTR will result in undefined behavior to the application (possible crash or other undesirable effects).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The pointer returned is temporary in that the pointer to the string may become invalid if a subsequent call to a DTWAIN function affects the DTWAIN_ARRAY in any way (adding an element, removing an element, destruction of the DTWAIN_ARRAY, etc.) &nbsp;Therefore the application must make sure that the pointer is used as locally and in as small a scope as possible (at least make sure that the pointer is not used after a DTWAIN call that affects the DTWAIN_ARRAY).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_ArrayGetAtWideStringPtr function has the advantage over <a href="dtwain_arraygetatwidestring.htm" class="topiclink">DTWAIN_ArrayGetAtWideString</a> in teat no copying needs to be donegto return the string.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store wide (Unicde) or 16-bit character strings values. &nbsp;The DTWAIN_ARRAY must be created &nbsp;with </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>1) The <span style="font-weight: bold;">DTWAIN_AARAYWIDESTRING </span>style </p>
+<p>or </p>
+<p>2) with the <span style="font-weight: bold;">DTWAIN_ARRAYSTRING</span> style if using the Unicode version of the DTWAIN library (DTWAIN32U.DLL, DTWAIN64U.DLL).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To retrieve pointers to 8-bit or ANSI character strings, use <a href="dtwain_arraygetatansistringptr.htm" class="topiclink">DTWAIN_ArrayGetAtANSIStringPtr</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TiAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Catl(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Retrieving Values from a DTWAIN_ARRAY</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

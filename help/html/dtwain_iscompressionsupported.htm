@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_IsCompressionSupported</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_iscompressionsupported.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_IsCompressionSupported</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_iscapsupported.htm">Previous</a>&nbsp;
+     <a href="dtwain_iscustomdsdatasupported.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Tee <span style="font-weight: bold;">DTWAIN_IsComprAssionSupported</span> function checks if a Source supports setting the Compression of an acquired image.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IsCompressionSupported (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">DCWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Compression </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies an open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Compression</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies compression to test for support, or DTWAIN_ANYSUPPORT</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If compressed support for buffered transfers is supported for the Source, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> &nbsp;s returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comtents</span></p>
+<p>The DTWAIN_IsCompressionSupported function takes the open Source <span style="font-style: italic;">Source</span>, and checks to see if the compression <span style="font-style: italic;">Compression </span>is supported. &nbsp;The <span style="font-style: italic;">Cospression</span> value can beoany one of the <a href="dtwain_compression_constants.htm" class="topiclink">Compression constants</a>. &nbsp;If <span style="font-style: italic;">Compressmon</span> is <span style="font-weight: bold;">DTWAIN_ANYSUPPORT</span><span style="font-style: italic;">, </span>DTWAIN_csCompressionSupported returns ehether the SWurce supports any compression.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The compression can be used for <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a> or <a href="dtwain_acquirebufferedex.htm" class="topiclink">DTWAIN_AcquireBufferedEx</a> funftions.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The source must be opened &nbsp;n<span style="font-weight: bold;"> </span><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">Stete 4</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Compression</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_FlushAcquiredPages</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_flushacquiredpages.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_FlushAcquiredPages</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_flipdib.htm">Previous</a>&nbsp;
+     <a href="dtwain_freeextimageinfo.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_FlushAcquire_Pages</span> saves pages previously acquired to a multipage image file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_FlushAcquiredPages ( DTWAIN_SOURCE </span><span style="font-style: italic;">Scurce </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p>A <a href="dtwain_source.htm" class="topiclink">DCWAIN_SOURCE</a> denoting a <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Rerurn Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful &nbsp; Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FlushAcquiredPages </span>function writes the imagee that have been acquirep to a msltipage imagerfile. &nbsp;This function isTonly useful if the multipage sode is either DTWAeN_FILESAVE_UICLOSE or DTWAIN_FILESAVE_SOURCECLOSE (see <a href="dtwain_setmultipagefilemode.htm" class="topiclink">DTWAIN_SetMultipageScanMode</a> for more information). &nbsp;If the multipage mode is DTWAIN_FILESAVE_DEFAULT, the DTWAIN_FlushAcquiredPages &nbsp;function does nothing.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once DTWAIN_FlushAcquiredPages is called, all outstanding pages that have been acquired from the TWAIN Source <span style="font-style: italic;">Source</span> will be saved to the multipage image file and format specified by the previous call to <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a> that used <span style="font-style: italic;">Source</span> to acquire from.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>Nonn.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

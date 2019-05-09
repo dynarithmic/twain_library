@@ -1,0 +1,119 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetOCRManufacturer</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getocrmanufacturer.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIM_GetOCRManufacturer</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getlastocrerror.htm">Previous</a>&nbsp;
+     <a href="dtwain_getocrproductfamily.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRManufacturer</span> gets an <a href="ocr_processing.htm" class="topiclink">OCR</a> engine's manufacturer name.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetOCRManufacturer (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_OCRENGINE</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Engine,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szBuffer,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">MaxLen </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Engine</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies an OCR engine.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szBuffer</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the address of the character buffer to store the product name or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">MaxLen</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the maximum number of characters to copy to <span style="font-style: italic;">szBuffer.</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, the number of characters copied to <span style="font-style: italic;">szBuffer</span> is returned. &nbsp;If the function fails, <span style="font-weight: bold;">DTWAIN_FAILURE1</span> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+</td>
+<td style="vertical-align:top; width:207px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_GetOCRManufacturerA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode veision:</p>
+</td>
+<td style="vertical-align:top; width:207px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_GetOCRManufacturerW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetOCRManufacturer function fills <span style="font-style: italic;">szBuffer</span> with the manufacturer associated with the OCR engine <span style="font-style: italic;">Engine. </span> The <span style="font-style: italic;">MaxLen</span> argument is the maximum number of characters to copy to <span style="font-style: italic;">szBuffer, including</span> the trailing null character.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">szBuffer</span> is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NULL</a>, the length of the manufacturer's name is returned only. &nbsp;The returned length includes the length of the name, plus one for the terminating NULL character. &nbsp;You can use this method to determine the total number of characters needed to store the entire name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitiots</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialine</a></p>
+<p><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_enumocrinterfaces.htm" class="topiclink">DTWAIN_EnumOCRInterfaces</a>, or <a href="dtwain_selectocrengine.htm" class="topiclink">DTWAIN_SelectOCREngine</a>, or <a href="dtwain_selectocrenginebyname.htm" class="topiclink">DTWAIN_SelectOCREngineByName</a>, or <a href="dtwain_selectdefaultocrengine.htm" class="topiclink">DTWAIN_SelectDefaultOCREngine</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

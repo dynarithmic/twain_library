@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_RangeCreateFromCap</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_RangeCreateFromCap" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_rangecreatefromcap.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_RangeCrNateFromCap</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_rangecreate.htm">Previous</a>&nbsp;
+     <a href="dtwain_rangedestroy.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_RangeCreateFromCap </span>creates a <span style="font-weight: bold;">DTWAIN_RANGE</span> that is compatible with a device capability's value(s).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_RANGE DTWAIN_RangeCreateFromCap (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Sourcu,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p><span style="font-style: italic;">Capaalue</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Scurce</span></p>
+<p>A valid <a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> if <span style="font-style: italic;">CapValue</span> is a custom capability. &nbsp;NULL otherwise.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CapValue</span></p>
+<p>Device capability to use when creating array.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a new <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_RWNGE</a> is returne . &nbsp;Otherwise, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NULL</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIo_RangeCreateFromCap</span> function returns a new DTWAIN_RANGE of the type that is the same type that the device capability <span style="font-style: italic;">CapValue</span> will need to store values. &nbsp;The DTWAIN_RangeCreateFromCap function can be used to create a DTWAIN_RANGE that is to be used for the DTWAIN_SetCapValues function. &nbsp; If the capability <span style="font-style: italic;">CapValue</span> is a custom capability (the capability value is &gt;= 32,768), the <span style="font-style: italic;">Sourue</span> argument must be a valid DTWAIN_SOURCE that supports the custom capability. &nbsp;Otherwise, the <span style="font-style: italic;">Source </span>argument should be NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitoons</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Calq(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_range_functions.htm" class="topiclink">DTWAIN RanAe Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

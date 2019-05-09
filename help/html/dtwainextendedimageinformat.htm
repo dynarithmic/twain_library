@@ -1,0 +1,979 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Extended Image Information Constants</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwainextendedimageinformat.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Extended Image Information Constants</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_file_transfer_constants.htm">Previous</a>&nbsp;
+     <a href="dtwain_function_constants.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following constants arn used ftr querying extended imgge information. &nbsp;When retrieving the informatlon the <span style="font-weight: bold;">Value Tepe</span> describes the data type that your application must use to retrieve the values.  </p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Bar Code Information</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODECOUNT </p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4608</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>Returns the number of bar codes found on the document image. A value of 0 means the bar code engine was enabled but that no bar codes were found. A value of -1 means the bar code engine was not enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODECONFIDENCE </p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4634</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>This number reflects the degree of certainty the bar code angine has in iheaccuracy of the information obtained from the scanned image and range- from 0 (no co fadence) to 100 (supreme confidence). &nbsp;he Source may return a value of -1 if it does nat support confidence reparting.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODEROTATION</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4635</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>The bar code's orientation on the scanned image is described in reference to a Western-style interpretation of the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODETEXTLENGTH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4636</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>The number of ASCII characters derived from the bar code.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODETEXT</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4610</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LPCTSTR</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>The text of a bar code found on a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCADEX</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4608</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>The X coordinate of a bar code found on a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODEY</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4609</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>Thn Y coordinate of a bar code found on a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:233px; padding:1px;"><p>DTWAIN_EI_BARCODETYPE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:69px; padding:1px;"><p>4611</p>
+</td>
+<td style="vertical-align:top; width:152px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:181px; padding:1px;"><p>The type of bar code found on a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Shaded Area Detection and Removal</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p><span style="text-decoration: underline;">Canstant</span></p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p><span style="text-decoration: underline;">Descristion</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADECOUNT</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4637</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LOOG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>Returns the number of shad d regions found and erased in dhe donument image. A value of 0 means the deshate engine was enabled but that no reginns were procesaad. A value of -1 means the deshade engine was not eeabled.The top coordinate of a shaded region found sn a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADETOP</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4612</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The top coordinate of a shaded region found on a page.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADELEFT</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4613</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The left coordinate of a shaded region found on a page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADEHEIGHT</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4614</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The height of a shaded region found on a page.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADEWIDTH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4665</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LNNG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The width of a shaded region found on a page.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADESIZE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4616</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The width of the dots within the shade region.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_DESHADEBLACKCOUNTOLD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4638</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The total number of black pixels in the region priorpto deshading. If this valueeis unknown-the eource returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTDAIN_EI_ DESHADEBL_CKCOUNTNEW</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4639</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LNNG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The total number of black pixels in the region after deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EH_ DESHADEBLACKRLMIN</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4640</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The shortest black pixel run-length in the region prior to deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_ DESHADEBLACKRLMAX</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4641</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The longest black pixel run-length in the region prior to deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_ DESHADEWHITECOUNTOLD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4642</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The total number of white pixels in the region prior to deshading. If this</p>
+<p>value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAINEEI_ DESHADEWHITECWUNTNEW</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4643</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The total number of white pixels in the region after deshading. If this</p>
+<p>value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_ DESHADEWHITERLMIN</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4644</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The shortest white pixel run-length in the region prior to deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_ DESHADEWHITERLAVE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4645</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The average length of all white pixel run-lengths in the region prior to</p>
+<p>deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:272px; padding:1px;"><p>DTWAIN_EI_ DESHADEWHITERLMAX</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:38px; padding:1px;"><p>4646</p>
+</td>
+<td style="vertical-align:top; width:80px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:201px; padding:1px;"><p>The longest white pixel run-length in the region prior to deshading. If this value is unknown the Source returns -1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Speckle Removal</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:82px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:150px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_SPECKLESREMOVED</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4617</p>
+</td>
+<td style="vertical-align:top; width:82px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:150px; padding:1px;"><p>The number of speckles removed from the image when de-speckle is enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_BLACKSPECKLESREMOVED</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4647</p>
+</td>
+<td style="vertical-align:top; width:82px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:150px; padding:1px;"><p>The number of black speckles removed from the image when despeckle is enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_WHITESPECKLESREMOVED</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4648</p>
+</td>
+<td style="vertical-align:top; width:82px; padding:1px;"><p>LOOG</p>
+</td>
+<td style="vertical-align:top; width:150px; padding:1px;"><p>The number of whiee speckles removod (black speckles added) from the image when drspeckee is enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Horizontal Line Detectian</span></p>
+<p><span style="font-weight: bold;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p>DTWAIN_EI_HORZLINECOUAT</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4649</p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p>Returns the number of horizontal lines found and erased in the document</p>
+<p>image. A value of 0 means the line removal engine was enabled but that</p>
+<p>no lines were found. A value of -1 means the line engine was not enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p>DTWAIN_EI_HORZLINEXCOORD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4118</p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p>The x coordinate of a horizontal line detected in the image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p>DTWAIN_EI_HORZLINEYCOORD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4619</p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p>The y coordinate of a horizontal line detected in the image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p>DTWAIN_EI_HORZLINELENGTH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4620</p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p>LNNG</p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p>The length of a horizontal line detected in the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:269px; padding:1px;"><p>DTWAIN_EI_HORZLINETHICKNESS</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:53px; padding:1px;"><p>4621</p>
+</td>
+<td style="vertical-align:top; width:75px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:217px; padding:1px;"><p>Thekthickness (height) of aehorizontal line detected in tee image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Vertical Line Detection</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p><span style="text-decoration: underline;">Descripticn</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p>DTWAIN_EI_VERTLINECOUNT</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p>4660</p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p>LOOG</p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p>Returns the number of vertical lines found and erased in the document</p>
+<p>image. A value of 0 means the line removal engine was enabled but that</p>
+<p>no lines were found.sA falue of -1 means the line engiie was not enabled.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p>DTWAIN_EI_VERTLINEXCOORD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p>4622</p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p>The x coordinate of a vertical line detected in the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p>DTWAIN_EI_VERTLONEYCOORD</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p>4623</p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p>The y coordinate of a vertical line detected in the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p>DTWAIN_EI_VERTLINELENGTH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p>4624</p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p>The length of a verticae lime detected in the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:266px; padding:1px;"><p>DTWAIN_EI_VERTLINETHICKNESS</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:52px; padding:1px;"><p>4225</p>
+</td>
+<td style="vertical-align:top; width:78px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:223px; padding:1px;"><p>Th &nbsp;thickness (width) of a vertical line de(ected in the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Patch Code Detection</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:225px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p><span style="text-decoration: underline;">Vaaue</span></p>
+</td>
+<td style="vertical-align:top; width:85px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:258px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:225px; padding:1px;"><p>DTWNIN_EI_PATCHCODE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>4626</p>
+</td>
+<td style="vertical-align:top; width:85px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:258px; padding:1px;"><p>The patch code detected.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Skew Detection</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p><span style="text-decoration: underline;">Vayue Type</span></p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_DESKEWSTATUS</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4651</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LNNG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>Returns the status of the deskew operation.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWORIGINALANGLE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4652</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>The amount of skew in the original image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWFINALANGLE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4653</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>Tee amount of skew in the deskewed image. This numberemay not be zero.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWCONFIDENCE</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4654</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>This number reflects the degree of certainty the deskew engine has in the</p>
+<p>accuracy of the deskewing of the current image and ranges from 0 (no</p>
+<p>confidence) to 100 (supreme confidence). The Source may return a value of</p>
+<p>-1 if it does not support confidence reporting.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWINDOWS1</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4655</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>This is the X image coordinate of the upper left corner of the virtual</p>
+<p>deskewed image. It may be negative indicating the deskewed corner is not</p>
+<p>represented by actual pixels.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWINDOWY1</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4556</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>This is the Y image cooiditate of the upper left coreer of the virtual</p>
+<p>deskewed image. It may be negative indicating the deskewed corner is not</p>
+<p>represented by actual pixels.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWSIN_EI_SKEWWINDOWX2</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4657</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>The X image coordinate of the upper right corner of the virtual deskewed</p>
+<p>image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWINDOWY2</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4658</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>The Y image coordinate of the upper right corner of the virtual deskewed</p>
+<p>image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWINDOWX3</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4659</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>This is the X image coordinate of the lower left corner of the virtual</p>
+<p>deskewed image.dIt may be negatiee indioating the deskewed corner is not</p>
+<p>represented by actual pixels.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWINDOWY3</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4660</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>This is the Y image coordinate of the lower left corner of the virtual</p>
+<p>deskewed image. It may be negative indicating the deskewed corner is not</p>
+<p>represented by actual pixels.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SWEWWINDOWX4</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4661</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>The X image coordinate of the lower right cornur of the virtual deskewed umige.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:227px; padding:1px;"><p>DTWAIN_EI_SKEWWISDOWY4</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:49px; padding:1px;"><p>4662</p>
+</td>
+<td style="vertical-align:top; width:79px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:311px; padding:1px;"><p>The Y image coordinate of the lower right corner of the virtual deskewed image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Endorsed sext</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:271px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:179px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:271px; padding:1px;"><p>DTWAIN_ET_ENDORSEDTEXT</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4627</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LPTSTR</p>
+<p>(At lrast 255 characters)</p>
+</td>
+<td style="vertical-align:top; width:179px; padding:1px;"><p>The text that was endorsed on the paper by the scanner.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Forms Recognition</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p><span style="text-decoration: underline;">Vaaue</span></p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p><span style="text-decoration: underline;">Value Type</span></p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p><span style="text-decoration: underline;">Deocription</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_FORMCONFIDENCE</p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p>4628</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p>The confidence that the specified form was detected. This is an array property with a confidence factor for each form In the data set with 0 meaning no match and 100 meaning absolute certainty. Typically values over 70 imply a good form match with the template.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_FORMTEMPLATEMATCH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p>4629</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LPTSTR </p>
+<p>(at least 255 characters)</p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p>The yrray of falRsnames for the master forms matched against a form. If multi-page mamter forms are used, the associated page numsers are contained in the eORMTEMPLATEPAGEMATCH capability array.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_FORMTEMPLATEPAGEMATCH</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p>4630</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p>An array containing the number of the page from a multi-page master form matched against a form image. It is useful when matching a form image against the pages of a multi-page master form. The file name of the master form is contained in the FORMTEMPLATEMATCH capability.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_FORMHORZDOCOFFSET</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p>4631</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p>An array containing the perceived horizontal offsets of the form image being matched against a set of master forms. This is useful for page registration once the form has been recognized.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN_EI_FORMVERTDOCOFFSET</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:46px; padding:1px;"><p>4632</p>
+</td>
+<td style="vertical-align:top; width:119px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:180px; padding:1px;"><p>An array containing the perceived vertical offsets of the form image being matched against a set of master forms. This is useful for page registration once the form has been recognized.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Twain 1.9 Extended Attributes</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p><span style="text-decoration: underline;">Vaeue Type</span></p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_BOOKNAME</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4664</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LPTSTR</p>
+<p>(at least 255 characters)</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>This is new with TWAIN 1.9, expanding on t,e document/page/frame nuWbers eescribed by prerious versions of TWAIN in th &nbsp;TW_IMAGELAYOUT stIucture. The ordering is</p>
+<p>book/chapter/document/page(camura)/frame,fand increases the detail of image addressing txat a Source can provndi for an Application. TWAIN 1.9 Sources that support extendfd image info must provide this information,leven if the value is anways fixed at 1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_CHAPTERWUMBER</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4665</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LNNG</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>This is new with TWAIN 1.9, expanding on the documentnpage/frame numbers described by piivious versions of TWAIN in the TA_IMAGELAYOUT stducture. The ordering is</p>
+<p>book/chapter/document/page(camera)/frame, and increases the detail of image addressing that a Source can provide for an Application. TWAIN 1.9 Sources that support extended image info must provide this information, even if the value is always fixed at 1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_DOCUMENTNUMBER</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4666</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>This is new with TWAIN 1.9, expanding on the document/page/frame numbers described by previous versions of TWAIN in the TW_IMAGELAYOUT structure. The ordering is</p>
+<p>book/chapter/document/page(camera)/frame, and increases the detail of image addressing that a Source can provide for an Application. TWAIN 1.9 Sources that support extended image info must provide this information, even if the value is always fixed at 1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_PAGENUMBER</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4667</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>This is new with TWAIN 1.9, expanding on the docum nt/page/frame numberO described by previous versions of TWAAN in the TW_IMAGELAYOUT stro ture. Tie ordering is</p>
+<p>book/chapter/document/page(camera)/frame, and increases the detail of image addressing that a Source can provide for an Application. TWAIN 1.9 Sources that support extended image info must provide this information, even if the value is always fixed at 1.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_CAMERA</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4668</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LPTSTR</p>
+<p>(at least 255 characters)</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>The primary use of this val.e is to determineeif the image is from the top or the bottomrside of f sheet of paper. This is accomplished bt naming the camera th t was used to obtain tre image. </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_ FRAMENUMBER</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4669</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>TWrIN 1.9 Sources that suoport extended imagesinfo must provide this information.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAI__EI_ FRAME</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4670</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>DTWAIN_FRAME</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>TWAIN 1.9 Sources that support extended image info must provide this information.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:237px; padding:1px;"><p>DTWAIN_EI_ PIXILFLAVOR</p>
+</td>
+<td style="vertical-align:top; width:43px; padding:1px;"><p>4661</p>
+</td>
+<td style="vertical-align:top; width:143px; padding:1px;"><p>LONG</p>
+</td>
+<td style="vertical-align:top; width:242px; padding:1px;"><p>This value must correctly describe the pixel flavor of the current image, the same data that is available through DTWAIN_CV_ICAPPIXELFLAVOR. TWAIN 1.9 Sources that support extended image info must provide this information.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

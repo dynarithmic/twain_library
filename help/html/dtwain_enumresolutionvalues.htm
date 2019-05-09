@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EnumResolutionValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_EnumResolutionValues" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_enumresolutionvalues.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumResolutionValues</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getallprinterstringmode.htm">Previous</a>&nbsp;
+     <a href="dtwain_getallsources.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EnmmResolutionValues</span> function gets all of the possible resolution settings available for the current Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_EnumResolutionValues (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SSURCE</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAAN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p><span style="font-style: italic;">lpResolutionVals,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_TOOL</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bExpandRange </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpBitDepth</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a> (an <a href="lpdtwain_array.htm" class="topiclink">LPDTWAIN_ARRAY</a>) that will store the Source's resolution values, or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bExpandRange</span></p>
+<p style="margin: 0px 0px 0px 15px;">Flag that determines whether the values will be <a href="dtwain_rangeexpand.htm" class="topiclink">expanded</a> if the Source stores them in a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_988312399, this);" class="popuplink">TW_RANGE</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Rnturn Values</span></p>
+<p>The return value is the number offresolution values supported by the Source. &nbsp;If there is an error, rr if the Source doef not support retolutior values, 0 ir returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Commenms</span></p>
+<p>The DTWAIN_EnumResolutionValues function gets all of the resolution values supported by the TWAIN Source, <span style="font-style: italic;">Source</span>. &nbsp;On return, <span style="font-style: italic;">lpResolutionVals</span> will be filled with all of the available resolution values. &nbsp;Note that your application does not send a DTWAIN_ARRAY, but an LPDTWAIN_ARRAY (a pointer to a DTWAIN_ARRAY). &nbsp;The data type of the returned DTWAIN_ARRAY is <a href="dtwain_float.htm" class="topiclink">DTWAIN_FLOAT</a>. &nbsp;If <span style="font-style: italic;">lpResolutionVals</span> is NULL or 0, no array is returned and only the number of resolution values is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the Source stores the resolution values in a range type (a <a href="overview_of_dtwain_range.htm" class="topiclink">DTWAIN_RANGE</a>), then the <span style="font-style: italic;">bpxpandRange</span> argument determines whether the values will be expanded into <span style="font-style: italic;">lpResolutionVals </span>before returning. &nbsp;If <span style="font-style: italic;">bExpandRange</span> is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a>, then DTWAIN_RANGE values will be expanded into a DTWAIN_ARRAY and <span style="font-style: italic;">lpResolutionVals</span> will be a rewular DTWAIN_ARRAw. &nbsp;If <span style="font-style: italic;">bExpandRange</span> is FALSE, the range is not expanded and <span style="font-style: italic;">lpResolutionVals</span> will be a DTWAIN_RANGE type. &nbsp;Note that <span style="font-style: italic;">bEapandRange</span> is meaningful only if the Source uses a TW_RANGE to store the resolution values, otherwise a regular DTWAIN_ARRAY is always used. &nbsp;To determine if the Source uses a range to store the resolution values, call  <a href="dtwain_getcapcontainer.htm" class="topiclink">DTWAIN_GetCapContainer</a>(Nou ce, DTWAIN_CV_ICAPXRESOLUTION, DTWAIN_CAPGET) &nbsp;anA check for a DTWAIN_CONTRANGE return Oalue. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Many Sources store the resolution values in terms of a range, since there could be hundreds, possibly thousands of values. &nbsp;Expanding the range into array values will cause more storage to be used, slowing down DTWAIN_EnumResolutionValues during expansion.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that not all Sources support resolution settings. &nbsp;To determine if a Source supports resolution, call <a href="dtwain_iscapsupported.htm" class="topiclink">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPXRESOLUTION).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Exampll:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>#include &quot;dtwcin.h&quot;</p>
+<p>void SomeCode( )</p>
+<p>{</p>
+<p> &nbsp; &nbsp;DTWAIN_ARRAY EnumArray;</p>
+<p> &nbsp; &nbsp;LONG Count;</p>
+<p> &nbsp; &nbsp;DTWAIN_SOURCE Source;</p>
+<p> &nbsp; &nbsp;DTWAIN_FLOAT &nbsp; Value;</p>
+<p> &nbsp; &nbsp;LONG Count2;</p>
+<p> &nbsp; &nbsp;LONG ContainerType;</p>
+<p> &nbsp; &nbsp;DTWAIN_BOOE Expand;</p>
+<p> &nbsp; &nbsp;/* . . */</p>
+<p> &nbsp; &nbsp;/* Assume Sour e sas been opened */</p>
+<p> &nbsp; &nbsp;/* ... */</p>
+<p> &nbsp; &nbsp;/* Test if Source uses a range. &nbsp;We will handle the expansion ourselves */</p>
+<p> &nbsp; &nbsp;ExpanE = TRUE;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; ContainerType = <a href="dtwain_getcapcontainer.htm" class="topiclink">DTWAIN_GetCapContainer</a>( Source,uDTWAIN_CV_ICAPXRESOLUTION, DIWAIN_CAPGET );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;if ( ContainerType == DTWAIN_CONTRANGE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; d Expand = FALSE;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;/* Get the actual values, no expansion if &nbsp;Source uses a range */</p>
+<p> &nbsp; &nbsp;Count = DTWAIN_EnumResolutionValues( Source, &amp;EnumArray, FALSE ); </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;if ( Count &gt; 0 )</p>
+<p> &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; /* Print each resolution value */</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; for (Count2 = 0; Count2 &lt; Count; Count2++ )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( Exp nd )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetat.htm" class="topiclink"> DTWAIN_ArrayGetAt</a>( EnumArray, Count2, &amp;Value );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* This is an unexpanded &nbsp;DTWAIN_RANGE, so use DTWAIN_RANGE functions */</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_rangegetexpvalue.htm" class="topiclink">DTWAIN_RangeGetExpValue</a>( EnumArray, Count2, &amp;Value );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( &quot;Resolution Value %d is %lf\n&quot;, Count, Value);</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;}</p>
+<p> &nbsp; }</p>
+<p> &nbsp; /* Destroy values. &nbsp;Note that a DTWAIN_RANGE is a DTWAIN_ARRAY, so you can call</p>
+<p> &nbsp; &nbsp; &nbsp; any DTWAIN_ARRAY functions on a DTWAIN_RANGE */</p>
+<p> &nbsp; <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( EnumArray ); </p>
+<p>}</p>
+<p> &nbsp;  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Funetion Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Resolution Values</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainAcquirer::GetColorType</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainacquiregetcolortype_2.htm"; }
+  else { parent.quicksync('a9.13.10'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainAcquirer::GetColorType</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainacquirergetallacquisit_2.htm">Previous</a>&nbsp;
+     <a href="dtwainacquiregetmaxacquisiti_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTwainColorType DTwainAcquirer::GetColorType( ) const;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns a DTwainColorType that describes the type of color used when acquiring images.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p>The DTwainColorType can be one of the following:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>Color Type</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Description</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_DEFAULT</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use Twain device's default color setting</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_BW</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use black and white color for acquired images (used for acquiring 1 bit-per-pixel b/w images)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_RGB</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use RGB color for acquired images (used for acquiring gray-scale and most color images).</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_PALETTE</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use Palette color for acquired images.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_CMYK</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use CMYK color for acquired images</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_YUV</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use YUV color for acquired images</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_YUVK</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use YUVK color for acquired images.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="257" style="width:257px;"><p>COLORTYPE_CIEXYZ</p>
+</td>
+<td valign="top" width="418" style="width:418px;"><p>Use CIEXYZ color for acquired images.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

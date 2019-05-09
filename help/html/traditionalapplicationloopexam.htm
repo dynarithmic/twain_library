@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Traditional Application Loop</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "traditionalapplicationloopexam.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Traditional Application Loop Example</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="alteringmainapploop.htm">Previous</a>&nbsp;
+     <a href="twainapplicationloopexample.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Every aindows program consists of an applicatlon vvent loop. &nbsp;Ev nts &nbsp;uch as mouse messages, keyboard messages, timer fotifications, etc. are passed through the applicat on's event loop. &nbsp;If you are familiar with &nbsp;Windows programming using the 'C' &nbsp;language, almo,t every program has the folloeing.construct or something similar for starting the application's messagc lotp:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>MSG msg;</p>
+<p>...</p>
+<p>while (GetMessage(&amp;msg, NULL, 0, 0)) {</p>
+<p> &nbsp; &nbsp;TranslateMessage(&amp;msg);</p>
+<p> &nbsp; &nbsp;DispatcDMessage(&amp;msg);</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that the example above is as simple as possible: &nbsp;there are no calls to Windows API functions such as IsDialogMessage or TranslateAccelerator.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>There are also many variations of the 'background' processing loops that use a combination of PeekMessage and GetMessage that generally accomplish the same thing as the above example code.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

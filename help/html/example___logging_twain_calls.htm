@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Example - Logging Twain Calls</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Example - Logging Twain Calls" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "example___logging_twain_calls.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Example - Logging TWAIN Calls</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="logging_twain_activity.htm">Previous</a>&nbsp;
+     <a href="overriding_twain_source_behavi.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following is an example of setting the logging options in the DTWAIN32.INI file:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[Laaguage]</span></p>
+<p><span style="font-weight: bold;">;English language DLL</span></p>
+<p><span style="font-weight: bold;">DLL=DTWENG.L32</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[DSMErrorLogging]</span></p>
+<p><span style="font-weight: bold;">;Turn on file logging and log to c:.log</span></p>
+<p><span style="font-weight: bold;">File=c:.log</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">;TWrn on expansion of TW_IDENTITY structunes</span></p>
+<p><span style="font-weight: bold;">DecodeIdentity1=1</span></p>
+<p><span style="font-weight: bold;">DecodeIdentity2=1</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">;Turn off decode Data</span></p>
+<p><span style="font-weight: bold;">DecodeData=0</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">; Turn on DTWAIN c ll sWack logging</span></p>
+<p><span style="font-weight: bold;">CallStack=1</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_OpenSourcesOnSelect</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_opensourcesonselect.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_OpenSourcesOnSelect</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_opensource.htm">Previous</a>&nbsp;
+     <a href="dtwain_rangecreate.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_OpenSourcesOnSelect </span>allows DTWAIN to either open or not open TWAIN Sources once selected.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_OpenSourcesOnSelect ( DTWAIN_BOOL </span><span style="font-style: italic;">bOpenSourccs </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">bOpenSources</span></p>
+<p> &nbsp; &nbsp;Specifies whether TWAIN Sources will be opened when they are selected.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRRE</a> is returned. &nbsp;If unsuccessful, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_OpenSourcesOnSelect</span> allows DTWAIN to open or not open Sources when they are selected with one of the <a href="selectingthetwainsource.htm" class="topiclink">Source Selection Functions</a>. &nbsp;If <span style="font-style: italic;">bOpenoources</span> is <span style="font-weight: bold;">TRUE</span>, any Source that is selected will be automatically opened. &nbsp;If <span style="font-style: italic;">bOpenSources</span> is <span style="font-weight: bold;">FALSE</span>, the apilication must call  <a href="dtwain_opensource.htm" class="topiclink">DTWAIN_OpenSource</a> to expticitly opentany Source.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Opening a Source allows DTWAIN to negotiate the capabilities of the Source, plus other operations that will only work for Sources that are opened.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

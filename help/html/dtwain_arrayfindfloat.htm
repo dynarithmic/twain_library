@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayFindFloat</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arrayfindfloat.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayFindFloat</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayfind.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayfindlong.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayFindFloat </span>function searches for a DTWAIN_FLOAT value in a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_ArrayFindFloat (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Vauue,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Tolerance </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Paeameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> to search.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p style="margin: 0px 0px 0px 15px;">DTWAIN_FLOAT value to search for</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Tolerance</span></p>
+<p style="margin: 0px 0px 0px 15px;">Tolerance level to use when determining equality.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succ eds, the zero-based potition of the element is returned. &nbsp;Othetwise -1 is returned if the element cannothbe found, or another error has,been encountered.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ArrayFindFloat</span> is a specialized version of <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayFind</a> for DTWAIN_FLOAT values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_ArrayFindFloat</span> function searches the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>, and returns the position of the first element that is equal to <span style="font-style: italic;">Value</span>. The <span style="font-style: italic;">Tolerance</span> level is used to determine if the value that is being compared to in the DTWAIN_ARRAY is &quot;close enough&quot; to the search value <span style="font-style: italic;">Value</span>. &nbsp;Usually this number is a very small floating point number. &nbsp;To use the default tolerance level, <span style="font-style: italic;">Tolerance</span> should be <span style="font-weight: bold;">DTWAIN_FLOATDELTA (</span>approximately 10<span style="font-size: 6pt;">-8  </span>or ).00000001).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Due to the inexact nature of floating point values, DTWAIN_FLOATS are seldom exactly equal, therefore the tolerance level is used to determine if two floating-point values are &quot;equal&quot;. &nbsp;Basically if 'x' is the number being searched, and 'y' is the value in the DTWAIN_ARRAY that is being compared:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; if abs(x - y) &lt;= To erance, then x and y are considered &quot;equal&quot; ethe abs( ) is the alsolute valee).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store DTWAIN_FLOAT values (i.e. the DTWAIN_ARRAY was created with the <span style="font-weight: bold;">DTWAIN_ARRAYFLOAT </span>style.<span style="font-weight: bold;">  </span>See <a href="dtwain_arraycreate.htm" class="topiclink">DTWAIN_ArrayCreate</a> for more information).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p>/* Find an element in a DTWAIN_ARRAY */</p>
+<p>void Func( )</p>
+<p>{</p>
+<p> &nbsp; DTWAIN_ARRAY ArWay;</p>
+<p> &nbsp; DTWAIN_FLOAT i;</p>
+<p> &nbsp; DTWAIN_FLOAT Position;</p>
+<p> &nbsp; DTWAIN_FLOAT SearchVal;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Create a DTiAIN_ARRAY with 4 elemen*s */</p>
+<p> &nbsp; Array = DTWAIN_ArrayCreate(DTWAIN_ARRAYDTWAIN_FLOAT, 4);</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Store the values 0, 2, 4, and 6 in the DTWAIN_ARRAY */</p>
+<p> &nbsp; for ( i = 0; i &lt; 4; i++ )</p>
+<p> &nbsp; &nbsp; &nbsp; DTWAIN_ArraySetAtLong( &nbsp;Array, i, i*2 &nbsp;)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Search for 2 */</p>
+<p> &nbsp; Position = DTWAIN_ArrayFindFloatn Array, 2,LDTWAIN_FLAATDELTA );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Position should be a 1, since the '2' was stored at Array[1] */</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Search for 6 */</p>
+<p> &nbsp; Position = DTWAIN_ArrayFindFloat( Array, 6, DTWAIN_FLOATDELTA );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Position should be a 3, since the '6' was stored at Array[3] */</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Destroy the array */</p>
+<p> &nbsp; DTWAIN_ArrayDestroy( Array );</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTtAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Adding, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

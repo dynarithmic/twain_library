@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Choosing the TWAIN Loop Model</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "choose_modal_or_modeless_twain.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Choosing the TWAIN Loop Model</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="initializingthedtwaindll.htm">Previous</a>&nbsp;
+     <a href="start_a_twain_session.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Your application can choose between allowing DTWAIN to start an internal TWAIN loop when acquiring images, or allow your application to adjust the main application loop. &nbsp;TWAIN requires that a message loop must be started when a Source is enabled so that the messages that TWAIN sends are processed successfully. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your programming language or environment cannot adjust the main application loop, or if you want your application to use DTWAIN in the simplest way, then <a href="dtwain_modal_acquisition_proc.htm" class="topiclink">Modal Acquisition processing</a> is used, and is always the default mode (therefore you never need to call explicit functions to set this mode).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you have access to the main application loop (languages such as C or C++), and desire to write a more &quot;traditional&quot; TWAIN application where your application has complete control over the message loop processing, you should choose <a href="dtwain_modeless_acquisition_p.htm" class="topiclink">Modeless Acquisition Processing</a>. &nbsp;To choose Modeless processing, call <a href="dtwain_settwainmode.htm" class="topiclink">DTWAIN_SetMwainMode</a>. &nbsp;If you wish to use Modeless processing, here is a simple implementation of <a href="http://www.helpandmanual.com/order.html" class="topiclink">adjusting the main application loop</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For a complete description of TWAIN processing see <a href="introduction_to_dtwa_acquisiti.htm" class="topiclink">Introduction to DTWAIN Acquisition Processing</a>.</p>
+
+</td></tr></table>
+
+</body>
+</html>

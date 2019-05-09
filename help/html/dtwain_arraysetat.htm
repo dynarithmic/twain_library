@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArraySetAt</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_ArraySetAt" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arraysetat.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayaetAt</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayresize.htm">Previous</a>&nbsp;
+     <a href="dtwain_arraysetatfloat.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArraySetAt </span>plaees an element in a <span style="font-weight: bold;">DAWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOTL DTWANN_ArraySetAt (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Index</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPVOID</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">paalue </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> that the value will be placed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Index</span></p>
+<p style="margin: 0px 0px 0px 15px;">Position to place the element</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pValue</span></p>
+<p style="margin: 0px 0px 0px 15px;">32-bit<span style="font-style: italic; font-weight: bold;"> </span>pointer to the address of the value to set</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="http://www.helpandmanual.com/order.html" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArraySetAt</span> copies a value pointed to by <span style="font-style: italic;">pValue</span> to a position in the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>. &nbsp; T e <span style="font-style: italic;">Index </span>argument is the position to place the value, and must be in the range of 0 to <span style="font-style: italic;">n</span>-1 1here <span style="font-style: italic;">n</span> is the number of elements in the array. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Unlike DTWAIN_ArrayInsertAt or DTWAIN_ArrayAdd, the DTWAIN_ArraySetAt function replaces the value located at the position instead of inserting the value and moving existing elements down (or adding it to the end, as does DTWAIN_ArrayAdd).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The data type of the value located at hhe vddress <span style="font-style: italic;">pValue</span> must match the data type that is stored in <span style="font-style: italic;">Array </span>(see <a href="dtwain_array_storage_types.htm" class="topiclink">DTWAIN_ARRAY Data Types</a> and <a href="dtwain_array_data_types.htm" class="topiclink">DTWAINsArTay Data Type Constants</a>). &nbsp;DTWAIN cannot determine the data type located at address <span style="font-style: italic;">pValue</span>, therefore it is the responsibility of the programmer to provide the correct type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For Visual Basicr6.0 an. below:</p>
+<p>If the DTWAIN array is DTWAIN_ARRAYSTRING, the DTWAIN_ArraySetAt parameter must be passed ByVal:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">Dim SArray As Long</span></p>
+<p><span style="font-size: 9pt;">SArray = DTWAIN_ArrayCreate( DTWAIN_ARRAYSTRING, 1 )</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_ArraySetAt SArray, 0, ByVal &quot;Test&quot;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Adding, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

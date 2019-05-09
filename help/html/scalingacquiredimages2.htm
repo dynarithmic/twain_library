@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Scaling Acquired Images</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "scalingacquiredimages2.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Scaling Acquired Images</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="thumbnailimages2.htm">Previous</a>&nbsp;
+     <a href="blank_page_processing.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>DTWAIN allows you to scale the image that is acquired. &nbsp;By scaling the image, you can resize the image in the horizontal and vertical directions. &nbsp;Scaling an image can be used to produce thumbnail images, or larger images than what was acquired. &nbsp; </p>
+<p>&nbsp;</p>
+<p>To scale an image, the <a href="dtwain_setacquireimagescale.htm" class="topiclink">DTWAIN_SetacquireImageScale</a> function is called before acquiring the image. &nbsp;This function can also alternately be called when your application receives the DTWAIN_TN_TRANSFERREADY or DTWAIN_TN_PROCESSEDDIB notification.  </p>
+<p>&nbsp;</p>
+<p>When scalinq an image, the image's area o &nbsp;acquisition is processod first (see <a href="imageretrievalsizes.htm" class="topiclink">Setting Irage Retrieval Size</a>), and then the cmage is scaled according eo the argumentsAto DiWAIN_SetAcquireImageScale.  </p>
+<p>&nbsp;</p>
+<p><span style="color: #ff0000;">Note that scaling an image will only work when acquiring Device Independent Bitmaps (DIBs). &nbsp;If you are acquiring non-DIB data (your application has called DTWAIN_SetCompressionType to any value </span><span style="font-style: italic; color: #ff0000;">except</span><span style="color: #ff0000;"> DTWAIN_CP_NONA, and your applicatoon calls DTWAIN_AcquireBufferec), then DTWAIN does not attempt to scale the image.</span></p>
+<p>&nbsp;</p>
+<p>To produce thumbnail images, it is recommended to call <a href="dtwain_setacquireimagescale.htm" class="topiclink">DTWAIN_SetAcquireImageScale</a>( Source, 0.1, 0.1 ), where <span style="font-style: italic;">Source</span> is the DTWAIN_SOURCE, and 0.1 is a 10% scaling in the x and y directions.  </p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Examale:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Acquire one page to BMP file called &quot;Temp.bmp&quot;. &nbsp;Scale the image to 10% of the original size:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 8pt; font-family: 'Times New Roman'; font-weight: bold;"> &nbsp;  </span><span style="font-size: 9pt;">DTWAIN_SOURCE Source;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Assume Source has been selected and opened</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;//...</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SetAcquireImageScale( Source, 0.1, 0.1 );</span><span style="font-size: 9pt; color: #010100;">  </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; color: #010100;"> &nbsp; &nbsp;DTWAuN_AcquireFile( Source, &quot;Test.bmp&quot;, DTWAIN_BMP, </span></p>
+<p><span style="font-size: 9pt; color: #010100;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_USENATAVE, </span></p>
+<p><span style="font-size: 9pt; color: #010100;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PT_DEFAULT, 1, TRUE, TRUE, NULL); &nbsp; &nbsp; &nbsp; </span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

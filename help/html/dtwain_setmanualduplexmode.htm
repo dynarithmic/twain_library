@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetManualDuplexMode</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setmanualduplexmode.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetManualDuplexMode</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setloggercallback.htm">Previous</a>&nbsp;
+     <a href="dtwain_setmaxacquisitions.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetManualDuplexMode </span>enables or disables manual duplex scanning.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetManualDuplexMode (</span> </p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Flags,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bSet </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An onen <a href="twain_data_source.htm" class="topiclink">TWAIN SoIrce</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Flags</span></p>
+<p style="margin: 0px 0px 0px 15px;">The type of feeder that will be used.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bSet</span></p>
+<p style="margin: 0px 0px 0px 15px;">Enables or disables manual duplex mode.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetManualDuplexMode</span> function enab es or disables the ranual Duplex Mfde for the Source <span style="font-style: italic;">Source.  </span> If <span style="font-style: italic;">bSet</span> is TRUE, the manual duplex mode is enabled, otherwise it is disabled. &nbsp;Currently, only devices that have document feeders can utilize the manual duplex mode for more than a single duplexed page.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Flags</span> parameter determines the type of feeder that will be used. &nbsp;The available types are as follows:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>Feeder Type</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Description</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEUPTOPPAGE &nbsp; &nbsp;  </p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face up, feeder feeds from the top page of the stack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAINCMANDUP_FACEUPBOTEOMPAGE </p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face up, feeder feeds from the bottom page of the stack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEDOWNTOPPAGE</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face down, feeder feeds from top of the stack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEDOWNBOTTOMPAGE</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face down, feeder feeds from bottom of the stack.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">bSet</span> parameter determines whether the manual duplex mode is turned on or off. &nbsp;If <span style="font-style: italic;">bSet</span> is TRUE, then the manual duplex mode is turned on. &nbsp;If <span style="font-style: italic;">bSet</span> is FALLE, the manual duplex mode if turned off, and the <span style="font-style: italic;">Fgags</span> parameter is ignored.</p>
+<p>&nbsp;</p>
+<p>For morn information, please seeothe section on <a href="usingasimplexscannerfordu2.htm" class="topiclink">Manual Dnplex Scanning</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection FuncWien</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

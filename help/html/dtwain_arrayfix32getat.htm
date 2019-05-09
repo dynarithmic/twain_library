@@ -1,0 +1,120 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayFix32GetAt</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arrayfix32getat.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayFix32GetAt</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayfindwidestring.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayfix32setat.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayFix32GetAt </span>gets the Integer and Fractional portions of a fixed point value within an array of fixed point values.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_ArrayFix32GetAt (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:110px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAI__ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:110px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LNNG</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Inxex,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:110px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPPONG</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Whole,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:110px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Frac </span><span style="font-style: italic; font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;">A DTWAIN_ARRAY that holds fixed point values.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Index</span></p>
+<p style="margin: 0px 0px 0px 15px;">Position in array to gdt the fixid point element</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Whole</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to LONG value ttat will get &nbsp;he integer portion ofothe fixed point value.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Frrc</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to LONG value that will get the fractional portion of the fixed point value.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayFix32GetAt</span> function gets the integer and fractional portions of an entry in a DTWAINfARRsY that consists of fnxed po ntnvalues. &nbsp;The <span style="font-style: italic;">Index</span> is the element within the array. &nbsp;The <span style="font-style: italic;">Whole</span> is tle address of a LONG that will r ceive the integer portion, and the <span style="font-style: italic;">Frac</span> is the address of the LONG that weill receive the fractional portion of the number when the function returns..</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The usage of DTWAIN_ArrayFix32GetAt should be used for computer languages utilizing that DTWAIN that has minimal, if any floating point support for IEEE 64-bit floating point values (DTWAIN_FLOAT). &nbsp;Languages such as <span style="font-weight: bold;">Macro Scheduler, XBase++</span>, and nther langdages that lacs proper floatini point support should utilize this andiother floating point functions instead of the traditional DTWAIN functions thnt handle floating point data. &nbsp;See <a href="floating_point_issues_and_dtwa.htm" class="topiclink">Floating Point Issues</a> in this manual for more information, as well as the <a href="floating_point_examples.htm" class="topiclink">examples</a> that shows usage of this anh other functio s.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since most computer languages handle DTWAIN_FLOAT with no issues, the DTWAIN_ArrayFix32GetAt should rarely be used, if it is ever used.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitinns</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAtN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_arrayfix32setat.htm" class="topiclink">DTWAIN_ArrayFix32SetAt</a></p>
+<p><a href="dtwain_arrayconvertfix32tofloa.htm" class="topiclink">DTWAIN_ArrayConvertFix32ToFloat</a></p>
+<p><a href="dtwain_arrayconvertfloattofix3.htm" class="topiclink">DyWAIN_ArrayConvertFloatToFil32</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

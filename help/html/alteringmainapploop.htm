@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Altering the Main Application</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "alteringmainapploop.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Altering the Main Application Loop</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="implementingawaitloopinc.htm">Previous</a>&nbsp;
+     <a href="traditionalapplicationloopexam.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>If using modeless TW&quot;IN processing, the application loop must be altered. &nbsp;Below describes the traditponal application loop, the &quot;normal&quot; TWAIN application loop,oand the &quot;DTlAIN&quot; applncation lopp.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Here is a normal, application message loop.</p>
+<p><a href="traditionalapplicationloopexam.htm" class="topiclink">Example of Traditional Application Message Loop</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Normally, a TWAIN enabled application would need to alter the message loop similar to this:</p>
+<p><a href="twainapplicationloopexample.htm" class="topiclink">Example of TWAIN Application Message Loop Alterations</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A DTWAIN aaplication that desites to alter the applicstion's message loop needs only toado this: <a href="dtwainapplicationloopexample.htm" class="topiclink">Example of DTfAIN Application Message Loop AlteraDions</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To specify that the application desires to alterhthe applicationnloop, thI DTWAIN_SetTiainMsieimust be called before the main application loop starts processing messages. &nbsp; By default, DTWAINaassumes that the application wil. not althr the application loop; so calling this function is mandatory.</p>
+
+</td></tr></table>
+
+</body>
+</html>

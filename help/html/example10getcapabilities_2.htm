@@ -1,0 +1,125 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 10: Get Capabilities</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example10getcapabilities_2.htm"; }
+  else { parent.quicksync('a9.5.10'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 10: Get Capabilities</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example9setgammacapabilit_2.htm">Previous</a>&nbsp;
+     <a href="example11monitoringacquisi_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: Examples of getting various Twain device capabilities. &nbsp;Illustrated are the gamma values (double values), transfer mechanisms ( long values ), and author (string value). </span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>#include &lt;iostream&gt;</p>
+<p>#include &lt;string&gt;</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std; </p>
+<p>&nbsp;</p>
+<p>// Function to display all values of that have been retrieved from the Source that have</p>
+<p>// been stored in "ArrayType". &nbsp;Note that the arrays are actually STL vectors, so any</p>
+<p>// std::vector operations will work.</p>
+<p>&nbsp;</p>
+<p>template &lt;typename ArrayType&gt;</p>
+<p>void DisplayAllCapValues(const std::string&amp; CapName, const std::string&amp; CapOp, const ArrayType&amp; AT)</p>
+<p>{</p>
+<p> &nbsp; &nbsp;cout &lt;&lt; "Capability values for " &lt;&lt; CapName &lt;&lt; endl</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;&lt; "Cap operation = " &lt;&lt; CapOp &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp;ArrayType::const_iterator it = AT.begin( );</p>
+<p> &nbsp; &nbsp;ArrayType::const_iterator it2 = AT.end( );</p>
+<p> &nbsp; &nbsp;if ( it == it2 )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "No values are available..." &nbsp;&lt;&lt; endl;</p>
+<p> &nbsp; &nbsp;else</p>
+<p> &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;while ( it != it2 )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; *it &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;++it;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;}</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp;}</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; LONG CapOpType[] = { DTWAIN_CAPGET, DTWAIN_CAPGETCURRENT, DTWAIN_CAPGETDEFAULT };</p>
+<p> &nbsp; char *CapOpName[] = {"Get Values", "Get Current Values", "Get Default Values"};</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Initialize DTWAIN - return if initialization does not work</p>
+<p> &nbsp; <a href="dtwaininterface2.htm">DTwainInterface</a> TI;</p>
+<p> &nbsp; if ( !TI.IsValid( ) ) </p>
+<p> &nbsp; &nbsp; &nbsp; return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Select a Source</p>
+<p> &nbsp; DTwainSource Source = <a href="dtwainsourceselect.htm">DTwainSource::Select</a>( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Get the Gamma value of the Source</p>
+<p> &nbsp; DTwainDoubleArray GammaValue;</p>
+<p> &nbsp; int i;</p>
+<p> &nbsp; for ( i = 0; i &lt; 3; ++i )</p>
+<p> &nbsp; { &nbsp; </p>
+<p> &nbsp; &nbsp; &nbsp; <a href="dtwainsourcegetcapvalues_2.htm">Source.GetCapValues</a>( DTWAIN_CV_ICAPGAMMA, GammaValue, CapOpType[ i ] );</p>
+<p> &nbsp; &nbsp; &nbsp; DisplayAllCapValues( "DTWAIN_CV_ICAPGAMMA", CapOpName[i], GammaValue );</p>
+<p> &nbsp; }</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Get the transfer mechanism's available for the source</p>
+<p> &nbsp; DTwainLongArray XferMechValues;</p>
+<p> &nbsp; for ( i = 0; i &lt; 3; ++i )</p>
+<p> &nbsp; { &nbsp; </p>
+<p> &nbsp; &nbsp; &nbsp; Source.GetCapValues( DTWAIN_CV_ICAPXFERMECH, XferMechValues, CapOpType[ i ] );</p>
+<p> &nbsp; &nbsp; &nbsp; DisplayAllCapValues( "DTWAIN_CV_ICAPXFERMECH", CapOpName[i], XferMechValues );</p>
+<p> &nbsp; }</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Get the author values available for the source</p>
+<p> &nbsp; DTwainStringArray Author;</p>
+<p> &nbsp; for ( i = 0; i &lt; 3; ++i )</p>
+<p> &nbsp; { &nbsp; </p>
+<p> &nbsp; &nbsp; &nbsp; Source.GetCapValues( DTWAIN_CV_CAPAUTHOR, Author, CapOpType[ i ] );</p>
+<p> &nbsp; &nbsp; &nbsp; DisplayAllCapValues( "DTWAIN_CV_CAPAUTHOR", CapOpName[i], Author );</p>
+<p> &nbsp; }</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

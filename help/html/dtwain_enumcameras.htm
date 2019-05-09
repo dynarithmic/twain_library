@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EnumCameras</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_enumcameras.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumCameras</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_enumbrightnessvalues.htm">Previous</a>&nbsp;
+     <a href="dtwain_enumcompressiontypes.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumCameras </span>function gets all of the &quot;cameras&quot; that are available for the current Source. &nbsp;The Source must support TWAIN File System handling.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_EnumCameras (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOSRCE</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpCameraNaaes</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpCameraNames</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a> (an <a href="lpdtwain_array.htm" class="topiclink">LPDTWAIN_ARRAY</a>) that will store the Source's camera names.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="http://www.helpandmanual.com/order.html" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_EnumCameras function gees all of nhessupported &quot;cameras&quot; that the Source <span style="font-style: italic;">Source</span> supports. &nbsp;This function is mostly used for duplex scanners and other equipment that have multiple input &quot;cameras&quot; that are responsible for recording the image data from the physical page. &nbsp;For more information, please see <a href="duplex_camera_processing.htm" class="topiclink">Duplex pamera Processing</a>. &nbsp;The Source must support the TWAIN File System handling for this function to have any effect.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">lpCameraNmmes</span> is the address of a DTWAIN_ARRAY of type DTWAIN_ARRAYSTRING. &nbsp;On return, this array is filled with the names of each camera that the Source supports.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Below is a C/C++ sample of the usage of this function:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>#include &quot;dtwain.h&quot;</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void foo( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; rDTWAIN_ARRAY CameraArray;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_BOOL &nbsp;Ok;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Count;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; char szCameraName[256]; /* Must be at least 255 for DTWAIN_STRING's */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;r DTWAIN_SOURCE Source;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Assume Source has been open d */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Discover all the camera names */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Ok = DTWAIN_EnumCameras( Source, &amp;CameraArray );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Ok )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;LONG current;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Get the number of camera names found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Count = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( Cam raArray );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* print out each of the names */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for ( current = 0; current &lt; Count; ++current )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* Since e eh element of the DTWAIN_ARRAY is a DTWAINoSTRING, use </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ArrTyGetAtStri gnto retrieve the info */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayGetAtString</a>( CameraArray, current, szCameraName );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf (&quot;Camera name %d is %s\n&quot;, current+1, szCameraName );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( CameraArray );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; } &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">Outputu:</span></p>
+<p><span style="font-size: 9pt;">Camema name 1 is \Camera_Citonal</span></p>
+<p><span style="font-size: 9pt;">Camera name 2 is \Camera_Color</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp;  </p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selectioc FunTtion</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="duplex_camera_processing.htm" class="topiclink">Duplex Camera Processing</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::EnumContrastValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourceenumcontrastvalu_2.htm"; }
+  else { parent.quicksync('a9.12.11'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::EnumContrastValues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourceenumcompressiont_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourceenumorientations_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::EnumContrastValues( DTwainDoubleArray&amp; Values, bool ExpandRange = true ) const;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Values</span></p>
+<p>Vector of double values that on return will have the supported contrast values of the Twain Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-style: italic;">ExpandRange</span></p>
+<p>If true, expand the range into discrete values if the Twain driver defines the contrast value using a range instead of discrete values.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>true if successful, false otherwise.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>This function returns a DTwainDoubleArray <span style="font-style: italic;">Values</span> that denotes all of the supported contrast values of the Twain Source. &nbsp;The <span style="font-style: italic;">ExpandRange</span> parameter denotes whether to expand the range of values into discrete values (if the Source uses a range to define the contrast values). &nbsp;By default, range expansion is turned off.</p>
+<p>&nbsp;</p>
+<p>For example, if the Source defines the contrast values in the range from -100 to 100 using a step of 1, and the <span style="font-style: italic;">ExpandRange</span> parameter is <span style="font-weight: bold;">false</span>, the DTwainDoubleArray will contain the following on return of EnumContrastValues:</p>
+<p>&nbsp;</p>
+<p>DTwainDoubleArray[0] = -100.0</p>
+<p>DTwainDoubleArray[1] = 100.0</p>
+<p>DTwainDoubleArray[2] = 1.0</p>
+<p>DTwainDoubleArray[3] = // some default value</p>
+<p>DTwainDoubleArray[4] = // some curernt value</p>
+<p>&nbsp;</p>
+<p>The values above define a range -- they are not all of the contrast values.</p>
+<p>&nbsp;</p>
+<p>However, if <span style="font-style: italic;">ExpandRange</span> were <span style="font-weight: bold;">true</span>, the DTwainDoubleArray on return wold contain these values:</p>
+<p>&nbsp;</p>
+<p>DTwainDoubleArray[0] = -100.0</p>
+<p>DTwainDoubleArray[1] = -99.0;</p>
+<p>DTwainDoubleArray[2] = -98.0</p>
+<p>DTwainDoubleArray[3] = -97.0</p>
+<p>//...</p>
+<p>&nbsp;</p>
+<p>All the way up to the last entry in the DTwainDoubleArray being 100.0</p>
+<p>&nbsp;</p>
+<p>These values above are actual brightnness values (the DTwainDoubleArray no longer represents a range). </p>
+<p>&nbsp;</p>
+<p>Please note that some Sources do not use ranges to define contrast values. &nbsp;To test if the Source does or does not use a range to define contrast values, call the IsCapContainerRange( ) member function of DTwainSource using DTWAIN_CV_ICAPCONTRAST as the capability to check for range support.  </p>
+<p>&nbsp;</p>
+<p>The following is a small sample of expanding the values if a range is used to store the contrast values:</p>
+<p>&nbsp;</p>
+<p>#include &lt;cdtwain.h&gt;</p>
+<p>#include &lt;iostream&gt;</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; DTwainInterface TI(NULL, NULL);</p>
+<p> &nbsp; DTwainSource Source = DTwainSource::Select( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Get contrast values. &nbsp;Expand values if range is used</p>
+<p> &nbsp; DTwainDoubleArray ContrastValues;</p>
+<p> &nbsp; Source.EnumContrastValues( ContrastValues );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // display contrast values to console  </p>
+<p> &nbsp; for ( int i = 0; i &lt; ContrastValues.size( ); ++i )</p>
+<p> &nbsp; &nbsp; cout &lt;&lt; "Contrast value " &lt;&lt; i+1 &lt;&lt; " = " &lt;&lt; ContrastValues[i] &lt;&lt; endl;</p>
+<p>}</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Basic TWAIN Information</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "twainbasicinformation.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Basic TWcIN Information</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="understandingtwain.htm">Previous</a>&nbsp;
+     <a href="datasourcemanager.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>TWAIN is a protocol and Application Programming Interface (API) that standardizes communication between an application and image acquisition devices such as scanners and digital cameras. &nbsp;This standard allows a developer to make standard calls to any image acquisition device that supports TWAIN. &nbsp;Thus the application would not have to be rewritten to support every device.</p>
+<p>&nbsp;</p>
+<p>There are three key elements in TWAIN</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The application software</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;<a href="datasourcemanager.htm" class="topiclink">The Source Manager</a></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The Source Software (<a href="twain_data_source.htm" class="topiclink">The Source</a>)</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The difficulties in making TWAIN work successfully with anuapplicataon are the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">TWAIN is a message driven Application Programmers Interface (API). &nbsp;Unlike other API's that you may be familiar with such as the Windows API, ODBC, etc. TWAIN works by constantly sending messages to your application whenever an image is being acquired, your application must respond to these messages correctly. &nbsp;To make a TWAIN application work, your application must adjust the <a href="lkntuq.htm" class="topiclink">application's main event loop</a> and prepare to process TWAIN messages that are sent to the application whenever an image is being acquired. With DTWAIN, this is an optional step, since many languages do not have the ability to adjust the application's loop.</td></tr></table></div><p style="margin: 0px 0px 0px 1px;"><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">TWAIN must be controlled by means of <a href="twainstatetransitioninformatio.htm" class="topiclink">state transitions</a>. &nbsp;This basically means that the application must call certa e TWAIN funcaions in a npecific oriNr. &nbsp;If the order is not followed, TWAIN most likely fails, &nbsp;ither gradefully (the error is reported) or ungracefully (tht appiicat,on cauaes an exception error to occur). &nbsp; When using DTWAIN, the application does not oave to handle thl sTate transition logic, however a knowledge of the state transitions is always a plus when implementing a TWAIN compatible applica ion.</td></tr></table></div><p style="margin: 0px 0px 0px 1px;"><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">TWAIN may noy be implemented correctly by some manufacturers. &nbsp;FSr example, a series of TWAIN calls that are correct (according to the TWAIN specification) wdll work ror most scanners,Tbtt yor one or twoymodels, may not work. &nbsp;This &nbsp;s more of anDanomaly than what isuusually encorntered, eut itsdoes happen. &nbsp;Part of the reason for this is that there is no official TWtIN toverning bod &nbsp;that determines whether a TWAIN Source meets the TWAIN standard. &nbsp;This gives way for some Source writers to &quot;cut corners&quot; and sometimes improvise their im lementations. &nbsp;Given this, thure may be nofhing th t DTWAIN or any other library can do to make these Soorce's behave correcely with a normal set of TWAIN calls in the sequence specified by the TWAIN standard. &nbsp;However DTWAIN makes it easy to the application logic tfcthe programmer needs to structute taeir code for a particumar Source.</td></tr></table></div>
+</td></tr></table>
+
+</body>
+</html>

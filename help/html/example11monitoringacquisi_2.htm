@@ -1,0 +1,149 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 11: Monitoring acquisition using listeners</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example11monitoringacquisi_2.htm"; }
+  else { parent.quicksync('a9.5.11'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 11: Monitoring acquisition using listeners</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example10getcapabilities_2.htm">Previous</a>&nbsp;
+     <a href="example12retrievingextende_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: &nbsp;Acquire To file. &nbsp;Use a Listener to monitor the acquisition success/failure.</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #ff0000;">Note: &nbsp;The DTwainListener object must be valid (not go out of scope) for the lifetime of the acquisition. &nbsp;You can add as many listener objects as desired.</span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>#include &lt;string&gt;</p>
+<p>#include &lt;iostream&gt;</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std;</p>
+<p>&nbsp;</p>
+<p>class MyFileListener : public DTwainListener</p>
+<p>{</p>
+<p>public:</p>
+<p> &nbsp; &nbsp; &nbsp;// This function is called when a transfer is ready</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnTransferReady( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// Get the image information</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; DTwainImageInfo Info;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; Source.GetImageInfo( Info );</p>
+<p> &nbsp; &nbsp; &nbsp;  </p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "X-Res: " &lt;&lt; Info.XResolution &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "Y-Res: " &lt;&lt; Info.YResolution &lt;&lt; endl;</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; // always return 1 except for special cases.</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// This is called if there is a file save error</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnFileSaveError( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DisplayError( );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// This is called if the single page file or multi-page file was saved</p>
+<p> &nbsp; &nbsp; &nbsp;// successfully</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnFileSaveOk( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "File was saved successfully" &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// This is called if there is a particular page from a multi-page file acquisition fails</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnFilePageSaveError( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DisplayError( );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// This is called if there is a file save was cancelled</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnFileSaveCancelled( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "File acquisition cancelled " &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// Called when file page was created and saved to the single-page or multi-page file </p>
+<p> &nbsp; &nbsp; &nbsp;// successfully </p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnFilePageSaveOk( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "File page saved OK" &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p> &nbsp; &nbsp;  </p>
+<p> &nbsp; &nbsp; &nbsp;// called when transfer is done.</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnTransferDone( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout &lt;&lt; "Transfer successful" &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; private:</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; void DisplayError( )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; std::string sError = DTwainInterface::GetLastErrorString( );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; sError &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>};</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp;  <a href="dtwaininterface2.htm">DTwainInterface</a> TI; &nbsp;// Initialize DTWAIN</p>
+<p> &nbsp;  <a href="dtwainsource.htm">DTwainSource</a> Source = <a href="dtwainsourceselect.htm">DTwainSource::Select</a>( );</p>
+<p> &nbsp; &nbsp;if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;return 0;</p>
+<p> &nbsp; &nbsp;  </p>
+<p> &nbsp; &nbsp; <a href="dtwainacquirer.htm">DTwainAcquirer</a> Acq( Source );</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; // Create a listener</p>
+<p> &nbsp; &nbsp; MyFileListener FL;</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; // Add it to the list of listeners in the DTwainAcquirer object</p>
+<p> &nbsp; &nbsp; Acq.<a href="dtwainacquireaddlistener_2.htm">AddListener</a>( &amp;FL );</p>
+<p> &nbsp;  </p>
+<p> &nbsp; &nbsp; // Go</p>
+<p> &nbsp; &nbsp; Acq.<a href="dtwainacquireacquire_2.htm">Acquire</a>("DTWAIN.BMP"); &nbsp; &nbsp; &nbsp; </p>
+<p>} </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

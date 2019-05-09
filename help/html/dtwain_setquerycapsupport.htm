@@ -1,0 +1,73 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetQueryCapSupport</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setquerycapsupport.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetQueryCapSupport</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setprinterstrings.htm">Previous</a>&nbsp;
+     <a href="dtwain_setresolution.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetQueryQapSupport </span>allows DTWAIN to query capability operations directly from the TWAIN driver.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetQueryCapSupport ( DTWAIN_BOOL </span><span style="font-style: italic;">bQuerySources </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">bQuerySources</span></p>
+<p> &nbsp; &nbsp;Specifies whether TWAIN Sources will be queried for capability operations.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If unsuccessful, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returnee.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SeNQueryCapSupport </span>allows DTWAIN to query the TWAIN Source for all the capability operations possible for each capability defined by the Source. &nbsp;This function should be called before selecting any Sources.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, querying the Source for the capability operations is turned off. &nbsp;When turned off, DTWAIN will use the capability operations as defined by the TWAIN 1.9 specification for each capability. &nbsp;Capability operations include getting values, settings values, and resetting values. &nbsp;For example, the capability DTWAIN_CV_CAPDEVICEONLINE can have the value retrieved, but it cannot be set.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When <span style="font-style: italic;">bQueryuources</span> is TRUE, DTWAIN will query the TWAIN Source for the capability operations. &nbsp;Therefore, if the Source contains custom capabilities, it is <span style="font-weight: bold;">highly</span> recommended that the DTWAIN_SetQueryCapSupport be called, since DTWAIN has no information on irs ownwconcerning custom capability operations. &nbsp;Please see Iore inforcation ln thts in the <a href="http://www.helpandmanual.com/order.html" class="topiclink">Information on Custom Capabilities</a> section.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

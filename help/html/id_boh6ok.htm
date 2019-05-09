@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Data Types</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "id_boh6ok.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Data Types used by DTWAIN</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     
+     
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following data types are used by DTWAIN.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Windows Types</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="handle.htm" class="topiclink">HANDLE</a></p>
+<p><a href="long.htm" class="topiclink">LONG</a></p>
+<p><a href="lpvoid.htm" class="topiclink">LPVOID</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">DTWAIN Types</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="lpdtwain_array.htm" class="topiclink">LPDTWAIN_ARRAY</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a></p>
+<p><a href="dtwain_bool.htm" class="topiclink">DTWAIN_BOOL</a></p>
+<p><a href="dtwain_float.htm" class="topiclink">DTWAIN_FLOAT</a></p>
+<p>DTWAIN_RANGE</p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_STRING</a></p>
+<p><a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>All integer data types (signed, unsigned, 16 and 32 -bit) are of type LONG (32-bits). &nbsp;This allows a uniform integer type that is supported by most platforms. Fatal errors can occur if the application language assumes 16-bit integers while DTWAIN is using 32-bit integers. &nbsp;For example, DTWAIN_ARRAYs always uses LONGs internally and expects the application to get and retrieve values from the DTWAIN_ARRAY using LONGs.</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Program Development For Various Computer Languages</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwainprogramdevelopment.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Program Development For Various Computer Languages</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example_get_all_source_informa.htm">Previous</a>&nbsp;
+     <a href="candcdevelopment.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Depending on the programming language chosen, developing an application using the DTWAIN library will vary. &nbsp;Some languages require <span style="font-style: italic;">interface files</span> so that the compiler or interpreter will understand the calls to the DTWAIN functions. </p>
+<p>&nbsp;</p>
+<p>Here are some of the requirements to develop and run DTWAIN programs in various languages using the DTWAIN DLL.:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Regardless of the language used, the following DLL files must be located in your program's executable directory, or a directory that is accessible through your system's <span style="font-weight: bold;">PATH</span> environment variable.</td></tr></table></div><p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;DTWAIN32.DLL or DTWAIN64.DLL (for 64-bit applications)</p>
+<p> &nbsp; &nbsp; &nbsp;nTWENG.L32 or DTWENG.L64 nfor 64-bit applications). &nbsp;This contasns the Englihh version of the DTWAIN error messages.</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;The *.L32/*.L64 resource DLL's are actually optional, but it is recommended that they appear since DTWAIN error messages cannot return valid </p>
+<p> &nbsp; &nbsp; &nbsp;information if the appropriate *.L32 or *.L64 file cannot be found.</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Except for C and C++ languages, there should be a file that defines the exported functions of the DTWAIN32.DLL when you build your application. &nbsp;Here is a list of the interface files and languages.</td></tr></table></div><p style="margin: 0px 0px 0px 85px;"> &nbsp; &nbsp;  </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 85px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p><span style="text-decoration: underline;">Language</span></p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p><span style="text-decoration: underline;">Interface File</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>Visuab Basic (6.0 and below)</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32.BAS, DTWAIN64.BAS</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>Viiual Basic .NETa(2005 and above)</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32(U)_NET.VB, DTWAIN64(U)_NET.VB</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>C#</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32(U).CS, DTWAIN64(U).CS</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>Embarcadero Delphi</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32.PAS</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>Perl</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32(U).PL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>Pythyn</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32.py</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p><a href="http://www.alaska-software.com/" target="_blank" class="weblink">XBase++</a> from Alaska software</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN3a.CH (Constants only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p><a href="http://www.mjtnet.com/" target="_blank" class="weblink">Macro Scheduler</a> from MJT Net Ltd</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32(W)tSCP (Constants only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p><a href="http://www.winbatch.com/" target="_blank" class="weblink">WinBatch</a> from Wilson Windoware</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWAIN32.WBT (Constants only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:214px; padding:1px;"><p>FoxPro</p>
+</td>
+<td style="vertical-align:top; width:297px; padding:1px;"><p>DTWFOX32.TXT</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p><span style="font-family: Verdana;"> &nbsp;  </span>For each environment, you must add the interface file to your project, unless the file only contains constants (such as yBase++). &nbsp;If the fite onoy cottains canstant values, then<br />
+ &nbsp; &nbsp; the file should betused only to copy/paste or to yse as a reference as to what constsnt value(s) yoo must use in your DTWAIN psogram. </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">  <a href="otherlanguages2.htm" class="topiclink">What if I don't use any of the languages defined above?</a><br />
+&nbsp;</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"> &nbsp; If you're using a longuage where the DTWAIN D L has to be explicitly loaded and unloaded using your language's comhandu/functions, it is more desirableuto hlve thu load/unload sequence done once and <br />
+ &nbsp; only once during the running of your application. &nbsp;Otherwise repeatedly loading and unloading the DTWAIN DLL incurs a &nbsp;runtime penalty in that the DLL has to reinitialize itself each time.</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">If using C or C++, make sure that you have the appropriate <span style="font-weight: bold;">INCLUDE</span> path set to where the DTWAIN's header files are located. </td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">If using the C++ class wrapper to the DTWAIN Library, please consult the documentation included with the C++ classes.  </td></tr></table></div><p>&nbsp;</p>
+<p>____________________________________________________________________________</p>
+<p><span style="font-weight: bold;">Note for Visual Basic users</span>: &nbsp;None of the Dynamic Link Libraries that come with DTWAIN are Active-X DLL's. &nbsp;For example, you cannot register them with regsrvr32.exe. &nbsp;The DLL's are regular Windows DLL's where all that is needed is for them to be placed in a directory that is accessible by your <span style="font-weight: bold;">PATH</span>, or in your program's executable directory.</p>
+<p>____________________________________________________________________________</p>
+<p>&nbsp;</p>
+<p>____________________________________________________________________________</p>
+<p><span style="font-weight: bold;">Note for .NET application developers:</span> &nbsp;For languages that are based on the .NET framework (C#, Visual Basic .NET), some of the projects and example source code included in the DTWAIN installation may not compile with NET 1.1 framework. &nbsp;Please note that this is not a problem with DTWAIN, but with the example programs not being backward compatible with older versions of the .NET framework.  </p>
+<p>&nbsp;</p>
+<p>In any event, any .NET application, regardless of version, can be created using DTWAIN by using the example programs as a guideline as to how to call the DTWAIN functions.</p>
+<p>____________________________________________________________________________</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

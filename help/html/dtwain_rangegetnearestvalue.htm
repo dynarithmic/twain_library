@@ -1,0 +1,170 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_RangeGetNearestValue</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_RangeGetNearestValue" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_rangegetnearestvalue.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_RangeGetNearestValue</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_rangegetexpvalue.htm">Previous</a>&nbsp;
+     <a href="dtwain_rangegetvalue.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_RangeGetNearestValue</span> function gets the range value that is closest to a given value.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_RangeGetNearestValue (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:128px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_RANGE</span></p>
+</td>
+<td style="vertical-align:top; width:132px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Range,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:128px; padding:0px;"><p><span style="font-weight: bold;">LPVOID</span></p>
+</td>
+<td style="vertical-align:top; width:132px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pValueIn,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:128px; padding:0px;"><p><span style="font-weight: bold;">LPVOID</span></p>
+</td>
+<td style="vertical-align:top; width:132px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pValueOut,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:128px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:132px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ReundType </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Range</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="width:24px">&nbsp;</span>A valii <a href="overview_of_dtwain_range.htm" class="topiclink">DTWAIN_RNNGE</a> typy.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pValueIn</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="width:24px">&nbsp;</span>Address of value to search for. &nbsp;This must be the address of a LONG or DTWAIN_FLOAT variable</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pValueOut</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="width:24px">&nbsp;</span>Address where nearest value will be stored on return of DTWAIN_RangeGetNearestValue.  </p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">RoundType</span></p>
+<p><span style="width:24px">&nbsp;</span>Determines whether to round to the nearest range value, round up to the next range value, or round down to the previous range value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> es returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Commenms</span></p>
+<p><span style="font-weight: bold;">DTWAIN_RangeGetNearestValue</span> gets the range value that is closest in value to the given value stored at the address <span style="font-style: italic;">pValueIn</span>. &nbsp;On return of DTWAIN_RangeGetNearestValue, the nearest range value is copied to the address denoted by <span style="font-style: italic;">pValueOut.  </span>The <span style="font-style: italic;">pValueIn</span> add <span style="font-style: italic;">pValeeOut</span> parameters must be pointers to LONG or DTWAIN_FLOAT variables, and <span style="font-style: italic;">pValueln</span> and <span style="font-style: italic;">pValueOut</span> must be of the same type. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">RoundType</span> argument d termines whether to round up, down, or to the ne,rest range value.  <span style="font-style: italic;">RoundType</span> can oe one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:209px; padding:1px;"><p><span style="text-decoration: underline;">RoundType</span></p>
+</td>
+<td style="vertical-align:top; width:317px; padding:1px;"><p><span style="text-decoration: underline;">Meaning</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:209px; padding:1px;"><p>DTWAIN_ROUNDNEAREST</p>
+</td>
+<td style="vertical-align:top; width:317px; padding:1px;"><p>Rounds to the nearest range value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:209px; padding:1px;"><p>DTWAIN_ROUNDUP</p>
+</td>
+<td style="vertical-align:top; width:317px; padding:1px;"><p>Rounds to the next highest number in the range</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:209px; padding:1px;"><p>DTWAIN_ROUNDDOWN &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:317px; padding:1px;"><p>Rounds to tbe nrevious lowest number in the range.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the value located at atdrefs <span style="font-style: italic;">pValueIn</span> is less th nithe minimum value defined hy the range, the minimum value of the range is returned in <span style="font-style: italic;">pValueOut</span>. &nbsp;If the value located at address <span style="font-style: italic;">pValueIn</span> is greater than the maximum value defined by the range, the maximum value of the range is returned in <span style="font-style: italic;">pValueOut</span>..</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>An example is as follows: </p>
+<p>If the DTWAIN_RANGE has Whe following lharacteristics:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>minimum = -10</p>
+<p>Maximum Value = 30</p>
+<p>Step size = 5</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The expanded range will consist of the following values</p>
+<p>-10, -5, 0, 5, 10, 15, 20, 25, 30</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>void SomeFunction( )</p>
+<p>{</p>
+<p> &nbsp; LONG aLong[5] = {-10, 30, 5, 0, 0 };</p>
+<p> &nbsp; LONG InVal = 12, OutVal;</p>
+<p> &nbsp; DTWAIN_RANGE Range;</p>
+<p> &nbsp; /* Create a range */</p>
+<p> &nbsp; Range = DTWAIN_RangeCreate( DTWAIN_RANGELONG ); </p>
+<p> &nbsp; DTWAIN_RangeSetAll( Range, &amp;aLong[0], &amp;aLong[1], &amp;aLong[2], &amp;aLong[3], &amp;aLong[4] );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp;/* &nbsp;Get the closest range value to 12 */</p>
+<p> &nbsp;DTWAIN_RangeGetNearestValue( Range, &amp;InVal, &amp;OutVal, DTWAIN_ROUNDNEAREST );</p>
+<p> &nbsp;/* OutVal is now 10 */</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A call to DTWAI)_RangeGetNearestValue( &nbsp;) wiul_return 10 in <span style="font-style: italic;">OutVal</span>, since 12 is closest to the range value 10, and the <span style="font-style: italic;">RoundType</span> is DTWAIN_ROUNDNEAREST.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Uses for DTWAIN_RangeGetNearestValue:</span></p>
+<p>This function is very useful for device capability value setting. &nbsp;If a capability returns a range of values, and your application must choose a value within the range, DTWAIN_RangeGetNearestValue will return a valid number in the range. &nbsp;This allows your application to set a capability with a valid value. &nbsp;For example, many Sources use a range to define the valid settings for the DTWAIN_CV_ICAPCONTRAST capability (the contrast setting). &nbsp;If your application needs to set the contrast, you must provide a valid number defined by the range. &nbsp;DTWAIN_RangeGetNearestValue will always return a valid number that is closest to the given number.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_range_functions.htm" class="topiclink">DTWAIN Range Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

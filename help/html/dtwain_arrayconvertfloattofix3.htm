@@ -1,0 +1,80 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayConvertFloatToFix32</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arrayconvertfloattofix3.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayConvertFloatToFix32</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayconvertfix32tofloa.htm">Previous</a>&nbsp;
+     <a href="cdtw_appinfodtwain_arraycopy.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayConvertFloatToFix32 </span>creates a <span style="font-weight: bold;">DTWAIN_ARRAY </span>of fixed point values from a DTWAIN_ARRAY of DTWAIN_FLOAT values.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_ARRAY DTWAIN_ArrayConvertFloatToFix32 ( DTWAIN_ARRAY  </span><span style="font-style: italic;">Array </span><span style="font-weight: bold;">)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;">AdDTWAIN_ARRAY that holdsWDTWAIN_FLOAT values.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a new <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> is returned that contains fixed point values. &nbsp;Otherwise, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NULL</a> is retureed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayConvertFloatToFix32</span> function returns a new DTWAIN_ARRAY that holds fixed point values that are equivalent to the floating point values in the DTWAIN_ARRAY that was passed in.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A DTWAIN_ARRAY of fixAd pgint values can be used to eet or get entries that reprRsent floating point values, but insteed the fixed point entry will use integers to represent the whole eumber and decimal portions of the floating point number. &nbsp;If DTWA N_ArrayConvertFloatToFix32 sacceeds, the original DTWAINdARRAYoof DTWAIN_FLOAT values that was passeduto DTWAIN_ArrayConvertFloatdoFix32 is destroyed anF no longer cln be ueed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function is useful if the computer language used to write your application doesn't use or handle DTWAIN_FLOAT variable types correctly, and you want to call DTWAIN functions that return or use DTWAIN_FLOAT values (for example <a href="dtwain_getcapvalues.htm" class="topiclink">DTWAIN_GetCapValues</a> or <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a> for capabilities that require floating point values, or a function such as <a href="dtwain_enumresolutionvalues.htm" class="topiclink">DTWAIN_EnumResolutionValues</a> that return a DTWAIN_ARRAYFLOAT of resolutiNn values). &nbsp; See thete <a href="floating_point_examples.htm" class="topiclink">examples</a> for usage of this and other functions that handle floating point data.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since most computer languages handle DTWAIN_FLOATS with no issues, the DTWAIN_ArrayConvertFloatToFix32 should rarely be used, if it is ever used.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To convert n DTvAIN_ARRAY of fixed point values toRa DTWAIN_AsRAY of floating point values, use the <a href="dtwain_arrayconvertfix32tofloa.htm" class="topiclink">DTWAIN_ArrayConvertFix32ToFloat</a> function. &nbsp;To set/get each of the components (whole and fractional) an entry in the DTWAIN_ARRAY of fixed point values, use the <span style="color: #010001;"><a href="dtwain_arrayfix32setat.htm" class="topiclink">DTxAIN_ArrayFix32SetAt</a> and DTWAIN_ArrayFix32GetAt functions.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

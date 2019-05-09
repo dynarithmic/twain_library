@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 7: Acquire using compressed buffer transfer</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example7acquireusingcompr_2.htm"; }
+  else { parent.quicksync('a9.5.7'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 7: Acquire using compressed buffer transfer.</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example6getallbrightness_2.htm">Previous</a>&nbsp;
+     <a href="example8acquireusingtwain_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: &nbsp;Advanced acquiring using the buffered mode. &nbsp;Page data is saved as individual blobs of string data.</span></p>
+<p>&nbsp;</p>
+<p>#include &lt;iostream&gt;</p>
+<p>#include &lt;fstream&gt;</p>
+<p>#include &lt;vector&gt;</p>
+<p>#include &lt;string&gt;</p>
+<p>#include "cdtwain.h" &nbsp;// CDTwain</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std; </p>
+<p>&nbsp;</p>
+<p>class MyBufferedListener : public DTwainBufferedListener</p>
+<p>{</p>
+<p> &nbsp; &nbsp;private:</p>
+<p> &nbsp; &nbsp; &nbsp; std::vector&lt;std::string&gt; ImageData;</p>
+<p> &nbsp; &nbsp; &nbsp; </p>
+<p> &nbsp; &nbsp;public:</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;MyBufferedListener( DTwainBufferedTransfer *pTransfer) : DTwainBufferedListener("", pTransfer ) { }</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;// Save the page of data to the vector when last strip has been processed</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;LRESULT <a href="dtwainlistenerfunctions_2.htm">OnEndProcessingStrips</a>( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ImageData.push_back( GetData( ) );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;std::vector&lt;std::string&gt;&amp; GetImageData( ) { return ImageData; }</p>
+<p>};</p>
+<p>&nbsp;</p>
+<p>using namespace std;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; // Initialize DTWAIN - return if initialization does not work</p>
+<p> &nbsp; <a href="dtwaininterface2.htm">DTwainInterface</a> TI;</p>
+<p> &nbsp; if ( !TI.IsValid( ) ) </p>
+<p> &nbsp; &nbsp; &nbsp; return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Declare a Source and assign the default TWAIN source to it</p>
+<p> &nbsp; DTwainSource Source = <a href="dtwainsourceselectdefault.htm">DTwainSource::SelectDefault</a>( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Create an acquire object, attach the source</p>
+<p> &nbsp; <a href="dtwainacquirer.htm">DTwainAcquirer</a> Acq( Source );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the acquire type</p>
+<p> &nbsp; Acq.<a href="dtwainacquiresetacquiretype_2.htm">SetAcquireType</a>( TWAIN_ACQUIREBUFFERED );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the number of pages to acquire to all pages</p>
+<p> &nbsp; Acq.<a href="dtwainacquirersetmaxpagestoa_2.htm">SetMaxPages</a>( DTWAIN_MAXACQUIRE );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Create a buffered transfer helper object, and attach Source to the object, </p>
+<p> &nbsp; <a href="dtwainbufferedtransfer.htm">DTwainBufferedTransfer</a> BT(Source);</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the compression type</p>
+<p> &nbsp; // This could be any other compression type supported by the Source &nbsp; </p>
+<p> &nbsp; // For example: COMPRESS_JPEG, COMPRESS_RLE8, etc.</p>
+<p> &nbsp; // But for the example, we use no compression</p>
+<p> &nbsp; BT.<a href="dtwaincompressedtransfersetc_2.htm">SetCompressionType</a>(COMPRESS_NONE);  </p>
+<p>&nbsp;</p>
+<p> &nbsp; // Now set the strip size</p>
+<p> &nbsp; BT.<a href="dtwainbufferedtransfersetstr_2.htm">SetStripSize</a>( BT.GetPreferredStripSize( ) );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Attach to a special buffered transfer listener that saves data to memory</p>
+<p> &nbsp; MyBufferedListener Listener(&amp;BT );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Add listener to DTwainAcquirer object</p>
+<p> &nbsp; Acq.AddListener( &amp;Listener );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Go.</p>
+<p> &nbsp; Acq.<a href="dtwainacquireacquire_2.htm">Acquire</a>( BT );</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Get the data from the listener</p>
+<p> &nbsp;std::vector&lt;std::string&gt;&amp; TheData = Listener.GetImageData( );</p>
+<p>&nbsp;</p>
+<p> &nbsp;// Get the number of pages</p>
+<p> &nbsp;cout &lt;&lt; "The number of pages saved is " &lt;&lt; TheData.size( ) &lt;&lt; endl;</p>
+<p>&nbsp;</p>
+<p> &nbsp;// You can now save the images in TheData to a file, or for any other purpose.</p>
+<p> &nbsp;// Here is page 1 data, written to a file:</p>
+<p> &nbsp;ofstream ofs("page1.bin", ios::out | ios::binary);</p>
+<p> &nbsp;if ( TheData[0].size( ) &gt; 0 )</p>
+<p> &nbsp; &nbsp; &nbsp;ofs.write((const char *)TheData[0].data( ), TheData[0].size( ) );</p>
+<p>} </p>
+<p>&nbsp;</p>
+<p>This example shows the usage of the DTwainBufferedListener. &nbsp;By default, this listener saves the raw image data to files. &nbsp;Since we want to save the data to memory instead of files, a class called MyBufferedListener is derived from DTwainBufferedListener, and the OnEndProcessingStrips( ) virtual function is overridden (this "turns off" the file saving process). &nbsp;In the overridden OnEndProcessingStrips( ), the image data that has been saved is stored in a vector of pages by calling DTwainBufferedListener::GetData( ).</p>
+<p>&nbsp;</p>
+<p>When the processing is completed, the vector will contain data for page 1, page 2, etc., and it's just a matter of calling GetImageData( ) to retrieve the data. </p>
+
+</td></tr></table>
+
+</body>
+</html>

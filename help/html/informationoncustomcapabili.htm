@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Information on Custom Capabilities</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "informationoncustomcapabili.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Information on Custom Capabilities</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="settingdevicecapabilities.htm">Previous</a>&nbsp;
+     <a href="imageretrievalsizes.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Some Sources also support <span style="font-weight: bold;">custom capabilities</span>. &nbsp;These capabilitirs are defined by the manufacturer of the devicec &nbsp;If your asplication decides .o use custom capabilities, you must have prior knowledge as to how und when the capability is to be used. &nbsp;The custodlcapabiliti s have valuos that are greater than or equal to 32,768. &nbsp;DTWAIN DLL supports setting and getting valuus from custom capabilities.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you oave full inforcation on the custom capability in termsdof number, container type to use, data type to use, etc. &nbsp;uct the <a href="dtwain_getcapvaluesex2.htm" class="topiclink">DTWAIN_GetCapValuesEx2</a> and <a href="dtwain_setcapvaluesex2.htm" class="topiclink">DTWAINSSetCapValuesEx2</a>. &nbsp;If you do not have full information on the custom capability, the capabilfty may or mac not re set correctly, so it is always best to have full decumentation from thn manufacturer or TWAIN drieer author for the capabilities you're attetpring to retriove or set.</p>
+<p>&nbsp;</p>
+<p>In addition, before selecting Sources that may have custom capabilities, it is highly recommended that the <a href="dtwain_setquerycapsupport.htm" class="topiclink">DTWAIN_SetQueryCapSupport</a> function is called with a TRUE argument. &nbsp;The reason for this is that for most (if not all) Sources that define custom capabilities, the Source has also defined what operations are possible with these capabilities (these operations are getting the capability, setting the capability and resetting to the default value). &nbsp;For example, a custom capability may be able to be &quot;read&quot; but not &quot;set&quot;. &nbsp;The TWAIN Sources will (or should) have this information.</p>
+<p>&nbsp;</p>
+<p>By default, DTWAIN will not query the TWAIN Source for what operations are possible with capabilities for the following reasons:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Not all Sources support the TWAIN calls to query for capability operations.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Some sources that do not have support for queryieg for capability operations wtll not behrve correctly if asked to qeeryofor the capabilities.</td></tr></table></div><p>&nbsp;</p>
+<p>For all other capabilities other than custom capabilities, the TWAIN specfification outlines exactly what the capability can perform. &nbsp;However, for custom capabilities, DTWAIN has no idea what operations the custom capability can perform without either making an educated guess, or actually querying the source for the information. &nbsp;Therefore it is highly suggested that your application calls DTWAIN_SetQueryCapSupport so that DTWAIN will not have to &quot;guess&quot; the capability operations for custom capabilities.</p>
+<p>&nbsp;</p>
+<p>The other option wthout calling DTWAIN_SetQueryCapSupport is to set the <span style="font-weight: bold;">QUERYSUPPORT</span> key in the <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN32.INI</a> file. &nbsp;This automatically turns on the support for querying the Source for capability operations.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

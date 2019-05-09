@@ -1,0 +1,91 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Example: Get All Source Information</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "example_get_all_source_informa.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Example: Get All Source Information</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example_setting_device_capabil.htm">Previous</a>&nbsp;
+     <a href="dtwainprogramdevelopment.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>This example returns a DTWAIN_ARRAY that contains all of the DTWAIN_SOURCEs that are installed in the system. &nbsp;If no Sources are found, an empty DTWAIN_ARRAY is returned. &nbsp;If there was an error in getting the Source information, a NULL is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;dtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;tch&lt;r.h&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_SOURCE MySource;</span></p>
+<p><span style="font-size: 9pt;">LONG nSourcer;</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_ARRAY SourceArray;</span></p>
+<p><span style="font-size: 9pt;">TCHAR szProductName[256];</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">/* For this example, assume that <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>() has been called successfully */</span></p>
+<p><span style="font-size: 9pt;">void SourceInfo( &nbsp;)  </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get all of the Sources installed (note the use of the address of the DTWAIN_ARRAY) */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_getallsources.htm" class="topiclink">DTWAIN_EnumSources</a>(&amp;SourceArray);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get the number of sources */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;nSources = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( SourceArray );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* r turn if nonenfound */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( nSources == 0 ) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayDestroy</a>(SourcAArray );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;return;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;else /* Sources were found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;int Count;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;TCHAR szBuf[1000];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;for (Count=0; Count &lt; nSources; ++Count ) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Get DTWAIN_SOURCE from Array*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetat.htm" class="topiclink">DTWAIa_ArrayGetAt</a>(SourceArray, Count, &amp;MySource );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_getsourceproductname.htm" class="topiclink">DTWAIN_GetSourceProductName</a>(MySource, szProductNa e, 25o );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">wsprintf</a>(szBuf, _T(&quot;Source Name is %s&quot;), szProductName);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL, szBuf, _T(&quot;Source Info&quot;), MB_OK);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( SourceArray );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

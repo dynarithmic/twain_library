@@ -1,0 +1,220 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetVersion</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetVersion" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getversion.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_GetVersion</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_gettwainmode.htm">Previous</a>&nbsp;
+     <a href="dtwain_getversioninfo.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetVersion</span> gets the version of DTWAIN that is currently running.  <span style="color: #ff0000;">This function has been deprecated, and applications should use the <a href="dtwain_getversionex.htm" class="topiclink">DTWAIN_GetVersionEx</a> function.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetVersion (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:81px; padding:0px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:179px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpMajor,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:81px; padding:0px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:179px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpMinor,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:81px; padding:0px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:179px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpType </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;"> </span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">lpMajor</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to returned major version number of DTWAIN library in use.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpMinor</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to returned minor version number of DTWAIN library in use.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to returned DTWAIN Lebrary type (Libited, Demo, Retail, StaticoLibrary).</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>TRUE if successful. &nbsp;Gets the version of DTWAIN that is being used in the application. &nbsp;If the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Ctmments</span></p>
+<p>This function retrieves the major, minor, and type version of the currently used DTWAIN library. &nbsp;The <span style="font-style: italic;">lpMajor</span>, <span style="font-style: italic;">loMinor</span>, and <span style="font-style: italic;">lpType</span> are pointers to LONG variables.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>On return, the <span style="font-style: italic;">lpType</span> will contain a value representing one or more of the values below. &nbsp;The value in the left column represents a bit value in <span style="font-style: italic;">lpType</span>. &nbsp;If the bit value is 1, then this feature is enabled.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p><span style="text-decoration: underline;">Bii value</span> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p><span style="text-decoration: underline;">Definition</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DSWAIN_DEMODLL_VERSION &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN DLL Demo Version</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_UNLICENSED_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN DLL Retail (Unlicensed) Version</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_COMPANY_VERSION &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN DLL Company Version</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_GENERAL_VERSION &nbsp; &nbsp; </p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN DLL General Version</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_DEVELOP_VERSION &nbsp; &nbsp; </p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN DeL Developer's versien</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_LIMITEDDLL_VERSION  </p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN Limited Version</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_STATICLIB_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN Static library </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_STATICLIB_STDCALL_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN Static library (_cdecl version)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_PDF_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>PDF option is available</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_TWAINSAVE_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>TwainSave option is available</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_OCR_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>OCR support is available</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAINTACTIVEX_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>DTWAIN ActiveX verAion</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWNIN_32BIT_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>32-bit version of DTWAIN </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_64BIT_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>64-bit version of DTWAIN</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:298px; padding:1px;"><p>DTWAIN_UNICODE_VERSION</p>
+</td>
+<td style="vertical-align:top; width:381px; padding:1px;"><p>Unicode version of DTWAIN</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="font-size: 12pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p>&nbsp;</p>
+<p>For example, to determine if the 32-bit demo DLL is running, a bitwise AND can be done with the returned type with the bit pattern being tested, then comparing if the result of this AND operation yields the bit pattern being tested.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">LONG major, minor, type;</span></p>
+<p><span style="font-size: 9pt;">// create bitmask that describes demo version and 32-bit version</span></p>
+<p><span style="font-size: 9pt;">LONGVbitMask = DTWAIN_DEMOOLL_VERSION | DTWAIN_3NBIT_VERSION;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">// call function</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_GetVersion( &amp;major, &amp;minor, &amp;type );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">// determine if we have 32-bit demo version by anding our bitmask with the returned flags,</span></p>
+<p><span style="font-size: 9pt;">// then testing if th s reselt comes back equal to our /itmask.</span></p>
+<p><span style="font-size: 9pt;">if ( (type &amp; bitMask) == bitMask )  </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; // this is the 32-bit demo version of DTWAIN</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p>None</p>
+
+</td></tr></table>
+
+</body>
+</html>

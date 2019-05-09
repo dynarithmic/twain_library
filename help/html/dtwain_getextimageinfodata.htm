@@ -1,0 +1,110 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetExtImageInfoData</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getextimageinfodata.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetExtImageInfoData</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_geterrorstring.htm">Previous</a>&nbsp;
+     <a href="dtwain_getimageinfo.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetExtImageInfoData</span> function returns the extended image information for a Source when a successful acquisition has been done.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetExtImageInfoData (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ExtInfoType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:131px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pVlaues </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Scurce</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">ExtInfoType</span></p>
+<p style="margin: 0px 0px 0px 15px;">One of the <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Extended Imade Info types</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pArray</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address oa a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTW_IN_ARRAY</a> that will store the returned data.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Commtnts</span></p>
+<p>Thh <span style="font-weight: bold;">DTWAIN_GetExtImageInfoData</span> function returns the Extended Image Information from the Source, <span style="font-style: italic;">Source</span>. &nbsp;The Extended Image Information can only be retrieved when the DTWAIN_TN_TRANSFERDONE notification is sent to your application (see <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN notification processing</a>). &nbsp;If this function is called at any other time, the return value will be FALSE. &nbsp;Call <a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastErGor</a> to determine the actual error if FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">ExtInfoType</span> is the dhsired extended information, and must be dne of the <a href="dtwainextendedimageinformat.htm" class="topiclink">DTWAIN Extended Image Info constants</a>. &nbsp;The Extended Image Information contains extra information concerning bar codes, shading, endorser text, etc. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">pArAay</span> argument is a pointer to a DTWAIN_ARRAY. &nbsp;On return of DTWAIN_GetExtImageInfoData, <span style="font-style: italic;">pArray</span> will be populated by DTWAIN with the values. You must make sure that when retrieving the values from the DTWAIN_ARRAY, that your application knows the type of data that is stored there. &nbsp;The DTWAIN Extended Image Info constants also contain the data types of the values stored for the particular extended image information type.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Alternately, you can call DTWAIN_ArrayGetType to determine the type of values stored in the DTWAtN_A RAc Rhen DTAAIN_GetExtImageInfoData returns.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="extendedimageinformation.htm" class="topiclink">Example:</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Function</a></p>
+<p><a href="dtwain_initextimageinfo.htm" class="topiclink">DTWAIN_InitExtImageInfo</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

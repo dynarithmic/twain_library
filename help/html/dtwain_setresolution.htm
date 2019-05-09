@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetResolution</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetResolution" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setresolution.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_SetResolution</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setquerycapsupport.htm">Previous</a>&nbsp;
+     <a href="dtwain_setresolutionstring.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Thh <span style="font-weight: bold;">DTWAIN_SetResolution </span>function sets the current resolution value for the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetResolution (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Resolution </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p>An open <a href="twain_data_source.htm" class="topiclink">TSAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Resolution</span></p>
+<p>The resolution value to set the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetResolution</span> function setsethe current resolution value for the &nbsp;Sourse <span style="font-style: italic;">Source</span>. &nbsp;The <span style="font-style: italic;">Resolution</span> argument denotes the resolution value of the acquired image. &nbsp;Note that some Sources do not support a resolution setting, so the return value for DTWAIN_SetResolution will always be FALSE. &nbsp;If the resolution value is out of range of the Source, DTWAIN will choose the closest resolution value that the Source regards as valid.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Setting the resolution value may not work for all Sources. &nbsp;If the resolution value is not set after calling this function, either the Source does not support setting the resolution (which in this case, a <span style="font-weight: bold;">FALSE</span> value is returned form DTWAIN_SetResolution), or it does not actually set the resolution, but still returns a <span style="font-weight: bold;">TRUE</span> stating that the resolution was set. &nbsp;The latter case is a result of an improperly implemented Twain Source, and the manufacturer of the scanner should be contacted for further details.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To get the current resolution value, call <a href="dtwain_getresolution.htm" class="topiclink">DTWAIN_GetResolution</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">For languages that have difficulties with DTWAIN_FLOAT parameters, the alternate function that can be used as a replacement for DTWAIN_SetResolution is <a href="dtwain_setresolutionstring.htm" class="topiclink">DTWAIN_SetResolutionString</a>.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Souhce must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See elso</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting /GGetting X-Y Resolution Values</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

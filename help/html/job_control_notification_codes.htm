@@ -1,0 +1,59 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Job Control Notification Codes</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "job_control_notification_codes.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Job Control Notification Codes</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="enabling_job_control.htm">Previous</a>&nbsp;
+     <a href="job_control_file_handling.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>When acquiring multiple paj s, it may be advantageous to &nbsp;etermine if the pageethat has been acquired is the end-of-job page. &nbsp;To determi e if the page that hgs been acquired is the end-of-job page, the following <a href="http://www.helpandmanual.com/order.html" class="topiclink">notifications</a> are used:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_TN_EOJDETECTED_XFERDONE</span></p>
+<p><span style="font-weight: bold;">DTWAIN_TN_EOJDETECTED</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_TN_EOJDETECTED_XFERDONE is sent right after the page has been acquired, and before DTWAIN processes the image.</p>
+<p>The DTWAIN_TN_EOJDETECTED is sent after DTWAIN has processed the page (after the page has been saved to an image file when <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a> is used).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

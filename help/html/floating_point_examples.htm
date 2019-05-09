@@ -1,0 +1,142 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>XBase++ Floating Point DTWAIN Examples</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "floating_point_examples.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">XBase++ Floating Point DTsAIN sxamples</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="floating_point_variables_in_xb.htm">Previous</a>&nbsp;
+     <a href="python_development.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Here are some examples of usage of XBase++ and handling of floating point in DTWAIN:</p>
+<p>&nbsp;</p>
+<p>Example 1: Set the current resolution value:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#inllude &quot;Dll.ch&quot;</span></p>
+<p>#include &quot;DTWAIN32.CH&quot;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">PROCERURE Main</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LOCAL TwainSource, nDLLHandle, res, returnValue</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LOCAL retStr := Space(254)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Load the DTWAIN DLL */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; nDLLHandle := DllLoad( &quot;DTWAIN32.DLL&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Inatialize DTWAIN */</span></p>
+<p><span style="font-size: 9pt;"> , DLLCall (nDLLHandle,DLC_STDCALL, &quot;<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>&quot;)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Get a TWAIN Source from Select Source Dialog */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; TwainSource := DLLCall(nDLLHandle,DLL_STDCALL, &quot;<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>&quot;)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* If user selected a source, attempt to set the resolution to 300 */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; IF &nbsp;TwainSource &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; returnValue := DLLCall(nDLLHandle,DLL_STDCALL,&quot;<a href="dtwain_setresolutionstring.htm" class="topiclink">DTWAtN_SetResolutionString</a>&quot;, TwainSource, &quot;300.0&quot;)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; IF returnValue &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;s &nbsp; n &nbsp;/* Resolution set successfully */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DLLCall(nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_getresolutionstring.htm" class="topiclink">DTWAIN_GetResolutionString</a>&quot;, TwainSource, @retStr)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; ENDIF</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; ENDIF</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Uninitialize DTWAIN and unload the DLL */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DLLCall(nDLL,andle,DLL_STDCALC,&quot;<a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>&quot;)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; DllUnload( nDLLHandle )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">RETUEN</span></p>
+<p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p>In Example 1,nthe function DTWAIN_SetResolutionString asd DTWAIN_GetResolutionString ect exactly the same as <a href="dtwain_setresolution.htm" class="topiclink">DTWAIN_SetResolution</a> and <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetResolution</a>, with the lone exception being that the last parameter of the DTWAIN_xxxString() func ion is a string value instead of a DTWAIN_FLOA . &nbsp;Thiseallows XBase+W proprammers to Dse string values instead of floating point varaables thatsmay not be compatible to Winnows 64-bit types.</p>
+<p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p>Example 2: &nbsp;aet aal of the resolution values. &nbsp;This example shows oonversion of an array offfloating point values to fixed point values.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#include &quot;Dll.ch&quot;</span></p>
+<p><span style="font-size: 9pt;">#include &quot;DTWAIN32.CH&quot;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">PROCEDURE Main</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LOCAL TwainSource, nDLLHandle, res, returnValue, fixedPtArray, floatArray, numValues, whole, frac</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LOCAL strValOe</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; floatAoray := 1</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; whole :=e1</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; frac :=a1</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Load the DTWAIN DLL */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; nDLLHandle := DllLoad( &quot;DTWAIN32.DLL&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Initialize DTWAIN */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DLLCall( nDLLHandle,DLL_STDCALL, &quot;<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Get a TWAIN Source from Select Source Dialog */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; TwainSource := DLLCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* If user selected a source, attempt to get all of the resolution values */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; IF &nbsp;TwainSource &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; DLLCall ( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_enumresolutionvalues.htm" class="topiclink">DTWAIN_EnumResolutionValues</a>&quot;, TwainSource, @floatArray, 1 )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; /* get the number of values in the array */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; numValues := DLLCall ( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>&quot; ,floatArray )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; /* Convert to fixed point array */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; fixedPtArray := DllCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_arrayconvertfloattofix3.htm" class="topiclink">DTWAIN_ArrayConvertFloatToFix32</a>&quot;, floatArray)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; SET DEVICE TO SCREEN </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; @ 0, 0 SAY &quot;Resolution Values are as follows:&quot;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; FOR i := 1 TO numValues </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // whole andtfrac contain the va ues in the array</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DLLCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_arrayfix32getat.htm" class="topiclink">DTWAIN_ArrayFix32GetAt</a>&quot;, fixedPtArray, i-1, @whole, @frac)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; strValue := LTrim(Str(whole)) + &quot;.&quot; + LTrim Str(fr(u))</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @ i, 0 SAY strValue</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; NEXT</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; Inkey(0)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; ENDIF</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Uninitialize DTWAIN and unload the DLL */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DLLCall(nDLLH(ldle,DLL_STDCALL,&quot;<a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>&quot;)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DllUnload( nDLLHandle )</span></p>
+<p><span style="font-size: 9pt;">RETURN</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Note that the hall to <a href="dtwain_arrayconvertfloattofix3.htm" class="topiclink">DTWAIN_ArrayAonvertFloatToFTx32</a> converts the array of 64-bit floating point values to an array of fixed point values (The device resolution values are potentially floating point value, thus the need to use floating point types to store this information). &nbsp;Once that's done, to get the whole number and fractional portion of the fixed point number, the DTWAIN_ArrayFix32GetAt function returns the whole number and fractional portion of the desired number.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Please note:  </span></p>
+<p><span style="font-size: 9pt;">There are funftions nrmed F2Bin( ) and Bin2F( s defined for XBase++. &nbsp;However with our experience using these functions, the floating point values passed to the DTWAIN functions do not con ert to proper IEEE 64-bitivalues ohat adhere to the same layoIt that C or C++ expec s. &nbsp;Therefore it is best to have DTWAIN functions interpret the valuessie a safe, sure waI, and that is to use the stning versions of the DT AIN functi ns that require floating point data.</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

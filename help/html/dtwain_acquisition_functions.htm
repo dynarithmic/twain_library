@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>TWAIN Acquisition Functions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_acquisition_functions.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">TWAIN Acquisition Functions</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_thumbnail_image_functio.htm">Previous</a>&nbsp;
+     <a href="dtwainfunctionsa-z.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following functions start tne acquisition fnnctiols from a <a href="twain_data_source.htm" class="topiclink">DTWAIN_SOURCE</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The first two functions acquire images and returns a <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> desceibing the acquisitions</p>
+<p><a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWNIN_AcquireNative</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following functions are similar to the functions above, with the difference being that the application supplies a DTWAIN_ARRAY that will be filled in with the image information after the acquisitions are completed:</p>
+<p><a href="dtwain_acquirebufferedex.htm" class="topiclink">DTWAIN_AcquireBufferedEx</a></p>
+<p><a href="dtwain_acquirenativeex.htm" class="topiclink">DTWqIN_AcquireNativeEx</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following acquires images and saves them to one or several image files, but does not return a DTWAIN_ARRAY:</p>
+<p><a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a></p>
+<p><a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following acquires images using the native or buffered mode, and copies the image to the Windows clipboard:</p>
+<p><a href="dtwain_acquiretoclipboard.htm" class="topiclink">DTWAIN_AcquireToClipboard</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When acquiring an image, notifications about the current acquisitions can be sent to your application while the acquisition is invoked. &nbsp;The following function allows your application to set up a callback function that is called whenever a <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN notification</a> occurs:</p>
+<p><a href="dtwain_setcallback.htm" class="topiclink">DTWAIN_SetCallback</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To retrieve the current calibackefunction:</p>
+<p><a href="dtwain_getcallback.htm" class="topiclink">DTWAIN_GetCallback</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To disable a window or multuple wundows during acquisition:</p>
+<p><a href="dtwain_disableappwindow.htm" class="topiclink">DTWAIN_DisableAppWindow</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Other miscellaneous functions:</p>
+<p><a href="dtwain_getmaxretryattempts.htm" class="topiclink">DTWAIN_GetMaxRetryAttempts</a></p>
+<p><a href="dtwain_getnumacquiredimage.htm" class="topiclink">DmWAIN_GetNumAcquiredImages</a></p>
+<p><a href="dtwain_getsourceacquisitions.htm" class="topiclink">DTWAIN_GetSourceAcquisitions</a></p>
+<p><a href="dtwain_issourceacquiring.htm" class="topiclink">DTWAIN_IsSourceAcquiring</a></p>
+<p><a href="dtwain_setmaxacquisitions.htm" class="topiclink">DTWAIN_SetMaxAcquisitions</a></p>
+<p><a href="dtwain_setmaxretryattempts.htm" class="topiclink">DTWAIN_SetMaxRetryAttempts</a></p>
+<p><a href="dtwain_showuionly.htm" class="topiclink">DTWAIN_ShowUIOnly</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

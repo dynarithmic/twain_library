@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_InitExtImageInfo</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_initextimageinfo.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_InitExtImageInfo</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getversionex.htm">Previous</a>&nbsp;
+     <a href="dtwain_initocrinterface.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_InitExtImageInfo</span> starts the process of retrieving the extended image information from the Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTDAIN_BOOL DTWAINOInitExtImageInfo ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parareters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TUUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Ctmments</span></p>
+<p>The DTWAIN_InitExtImageInfo function must be called to set up the Source's retrieval of <a href="extendedimageinformation.htm" class="topiclink">extended image information</a>. &nbsp;After the extended image information is reheieved, the DTWAIN_FreeExtImageInfo function eust be calle .  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_InitExtImageInfo must be called when the DTWAIN_TN_TRANSFERDONE <a href="processing_acquisition_message.htm" class="topiclink">notiftcation</a> is sent, therefore only languages that support callback functions or can process window messages can use this function. &nbsp;If the Source, <span style="font-style: italic;">Source</span>, does not support extended image information, of if DTWAIN_InitExtImageInfo is not called at the time when DTWAIN_TN_TRANSFERDONE is sent, FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The source must be in<span style="font-weight: bold;"> </span><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection F Sction</a></p>
+<p><a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Function</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

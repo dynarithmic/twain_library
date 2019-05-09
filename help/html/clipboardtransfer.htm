@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Clipboard Transfer</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "clipboardtransfer.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Clipboard Transfer</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="troubleshootingpdfacquisitio.htm">Previous</a>&nbsp;
+     <a href="overview_of_device_capabilitie.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">Clipboard Mode</span> transeers imagei from uhe Source to the Windows Clipboard. &nbsp;This mode is useful if you want to 'Paste' an acquired image into a program that supports pasting imahes (for example Miceos ft Word's 'Paste' comasnd does this). &nbsp;DTWArN plac's each DIB in the Windows Clipboard in <span style="font-weight: bold;">CF_DIB</span> format.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>It is the responsibility of the application to obtain the DIB from the Clipboard when the page has been transferred successfully. &nbsp;Therefore it is highly recommended that the application programmer should be familiar with the Windows Clipboard functions.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This mode can use either Native or Buffered modes to do the initial transference from the Source to the Clipboard. The DTWAIN function that acquires images using the Clipboard is <a href="dtwain_acquiretoclipboard.htm" class="topiclink">DTWAIN_AcquireToClipboard</a>.</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainRange::CopyArrayToRange</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainrangecopyarraytorange.htm"; }
+  else { parent.quicksync('a9.10.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainRange::CopyArrayToRange</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="ctdrange_ctdrange.htm">Previous</a>&nbsp;
+     <a href="ctdrange_expand.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">DTwainDoubleRange&amp; DTWAIN::CopyArrayToRange( const DTwainDoubleArray&amp; Array )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTwainLongRange&amp; &nbsp;DTWAIN::CopyArrayToRange( const DTwainLongArray&amp; Array )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p>A DTwainArray whose entries denote a range.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns a <a href="cdtwainrange.htm">DTwainRange</a> type that is equivalent to <span style="font-style: italic;">Array</span>.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The CopyArrayToRange returns a DTwainRange that is equivalent to the DTwainArray <span style="font-style: italic;">Array</span>. &nbsp;If <span style="font-style: italic;">Array</span> contains 5 values that denote the following:</p>
+<p>&nbsp;</p>
+<p>Array[0] == minimum value</p>
+<p>Array[1] == maximum value</p>
+<p>Array[2] == step value</p>
+<p>Array[3] == default value</p>
+<p>Array[4] == current value</p>
+<p>&nbsp;</p>
+<p>then calling CopyArrayToRange will return the DTwainRange associated with these values. &nbsp;This function is useful if a capability returns multiple values in the form of a range, and the application wants to subsequentally use DTwainRange functions on the returned data. &nbsp;See <a href="example6getallbrightness_2.htm">Example 6</a> for usage of CopyArrayToRange.</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

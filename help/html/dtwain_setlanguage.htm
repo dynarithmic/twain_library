@@ -1,0 +1,80 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetLanguage</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetLanguage" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setlanguage.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetLanguage</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setjobcontrol.htm">Previous</a>&nbsp;
+     <a href="dtwain_setlightpath.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetLanguage</span> function sets the TWAIN language setting<span style="font-weight: bold;">.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetLanguage ( LONG </span><span style="font-style: italic;">Language </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Language</span></p>
+<p style="margin: 0px 0px 0px 15px;">Value identifying the TWAIN language setting.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRRE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetLanguage</span> function sets the TWAIN current language settings to <span style="font-style: italic; font-weight: bold;">Language.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-weight: bold;">DTWAINSSetLanguage</span> is not called by the application, DTWAIN sets the language to <span style="font-weight: bold;">DTWAIN_LANGUSI </span>(USA English)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetLanguaAe</span> must be called before the TWAIN session is started with (done by calling &nbsp; &nbsp; &nbsp;or before a Source is initially selected), since a TWAIN session sends the language information to the TWAIN Source Manager.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_language_constants.htm" class="topiclink">DTWAIN Language Constagts</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN StateiTransitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_getappinfo.htm" class="topiclink">DTWAIN_GetAppInfo</a>, <a href="dtwain_getcountry.htm" class="topiclink">DTWAIN_GetCountry</a>, <a href="dtwain_getlanguage.htm" class="topiclink">DTWAIN_GetLanguage</a>, <a href="dtwain_setappinfo.htm" class="topiclink">DTWAIN_SetAppInfo</a>, <a href="dtwain_setcountry.htm" class="topiclink">DTWAIN_SetCountry</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

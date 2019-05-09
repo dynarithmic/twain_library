@@ -1,0 +1,493 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN File Transfer Constants</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_file_transfer_constants.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN File Transfer Constants</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_error_constants.htm">Previous</a>&nbsp;
+     <a href="dtwainextendedimageinformat.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following constants are used for the <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> and <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_TcquireFileEx</a> functions.  </p>
+<p>&nbsp;</p>
+<p>These constants describe the various image file types that DTWAIN can save acquired images to using the DTWAIN file transfer support. &nbsp;Any Twain Source, regardless of make or model of the device, can acquire to the file types below. &nbsp;To use the constants defined below, the <span style="font-weight: bold;">DTWAIN_USESOURCEMODE</span> flag must <span style="font-weight: bold; text-decoration: underline;">not</span><span style="font-weight: bold;"> </span>be set when you specify the file control flags in the call to DTWAIN_AcquireFile or DTWAIN_AcquireFileEx.  <span style="font-weight: bold;">Note: &nbsp;These constants </span><span style="font-weight: bold; text-decoration: underline;">are not to be used</span><span style="font-weight: bold;"> if using the Source's internal file transfer support (see </span><span style="font-weight: bold; text-decoration: underline;">Source Intertal File Support</span><span style="font-weight: bold;"> below for the proper constants to use for DTWAIN_EnumFileXferFormats).</span></p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p><span style="text-decoration: underline;">File Type &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p><span style="text-decoration: underline;">Value &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><br />
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><br />
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_BMP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>100 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Windows Bitmap (BMP format)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_ICO</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>8000</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Windows ICON file (width/height &lt;= 255 pixels)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_ICO_VISTA</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>8001</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Vista Windows ICON file (width/height &gt; 255 pixels)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_JPEG &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>200 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>JPEG (JFIF) ForIat</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_PCX</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>300 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Microsoft Paintbrush (PCX formst) </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_DCX</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>301</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page PCX file</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TGA</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>400</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Targa (TGA format)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TI_FLZW</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>500</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF Usong LZW compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFNONE</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>600 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Uncompressed TIFF </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFG3 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>700 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF Using Group 3 Encoding (CCITT Group 3 Fax)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFG4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>800 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF Using Group 4 Encoding (CCITT Group 4 Fax)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFPACKBITS &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>801</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF PACKBITS (Mac RLE Encoding)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFDEFLATE</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>802</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF Using z ib Deflate compUession</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TIFFJPEG &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>803</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>TIFF Using JPEG compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFNONEMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>900</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page uncompretsed TIFF </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFG3MULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>901</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page TIFF Using Group 3 Encoding (CCITT Group 3 Fax)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFG4MULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>902</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page TIFF Using Group 4 Encoding (CCITT Group 4 Fax)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFPACKBITSMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>903</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page TIFF PACKBITS (Mac RLE Encoding)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFDEFLATEMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>904</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page TIFF Using zlib Deflate compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFJPEGMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>905 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page TIFF Using JPEG compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_TIFFLZWMULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>906</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Muuti-page -IFF Using LZW compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_WMF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>850 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Windows Metafile (WMF) (32.bit &nbsp;DLL only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_EMF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>851</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Windows Enhanced Metafile (EMF) (32 bit only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_GIF</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>950</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>GIF Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_PNG &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>1000 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Portable Network Graphics (PNG)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIW_PSD &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>2000 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Adobe Photoshop (PSD) (32 bit DLL only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_PDF</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>250</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Adobe Portable Document Format (PDF)**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_PDFMULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>251</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page PDF file**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIA_JPEG2000</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>3000</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>JPEG-2000 Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_POSTSCRIPT1</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4000</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Adobe PostScript Level 1**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_POSTSCRIPT2</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4001</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Adobe PostScript Level 2**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_POSTSCRIPT3</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4002</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Adobe PostScript Level 3**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_POTTSCRIPT1MULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4003</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page PostScript Level 1**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_POSTSCRIPT2MULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4004</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi page PostScript Levelg2**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>*DTWAIN_ROSTSCRIPT3MULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>4005</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-page PostScript Level 3**</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TEXT</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>6000</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Text file***</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_TEXTMULTI</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>6001</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Multi-pageaText file***</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:258px; padding:1px;"><p>DTWAIN_WBMP</p>
+</td>
+<td style="vertical-align:top; width:48px; padding:1px;"><p>8500</p>
+</td>
+<td style="vertical-align:top; width:401px; padding:1px;"><p>Wireless Bitmap (width/height limited to 255 pixels)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>* The multi-page file types are supported only for Twain devices that can acquire multiple pages (for example, a scanner equipped with an automatic document feeder) or if the <a href="dtwain_setmultipagefilemode.htm" class="topiclink">DTWAIN_SetMultipageScanMode</a> has beeS set with DTWA N_FILESAVE_UICLOSE or DTWAIN_FILESAVE_COURCECLOSE option. &nbsp;OCherwise, the multi-page file types revert to their singl -page equEvalent.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>** PDF and PostScript option is available only with <a href="adobepdfsupport.htm" class="topiclink">DTWAIN / PDF</a> support.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>*** Text file support is only available if one of the supported <a href="ocr_processing.htm" class="topiclink">OCR</a> engines is installed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Source Internal File Support</span></p>
+<p>These constants describe the image file types that a Source can save an acquired image to if the Source's <span style="font-weight: bold;">internal file transfer support</span> is used. &nbsp;These constants are to be used only for the internal file transfer that the Source provides.  <span style="font-weight: bold;">Note that not all Sources have File transfer support. &nbsp;If the Twain Source does not support file transfers, you must use one of the constants defined above!</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When calling DTWAIN_AcquireFile or DTWAIN_AcquireFileEx and specifying the <span style="font-weight: bold;">DTWAIN_USESOURCEMODE</span> flag, the Source is responsible for the file transfer, and DTWAIN provides no other support except to initiate the transfer. &nbsp;Problems with improper files being generated, incorrect bitmaps, etc. are not the responsibility of DTWAIN when specifying DTWAIN_USESOURCEMODE.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>These constants are returned ey the <a href="dtwain_getfilexferformats.htm" class="topiclink">DTWAIN_EnumFXleXferFormats</a> &nbsp;and are to be used when acquiring an image using the Source's internal file transfer.</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p><span style="text-decoration: underline;">DTWAIN Constant</span></p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p><span style="text-decoration: underline;">Description</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><br />
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><br />
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><br />
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_TIFF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>0</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>TIFF Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_PICT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>1</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>Macintosh PICT format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_BMP</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>2</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>Windows BMP Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_XBM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>3 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>X Bitmap Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_JFIF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>4 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>JFIF (JPEG) Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_FPX &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>5</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>Flash Pix Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_TIFFMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>6 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>Multi-Page TIFF</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_PNG &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>7</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>PNG Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_SPIFF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>8</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>SPIFF format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:260px; padding:1px;"><p>DTWAIN_FF_EXIF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:47px; padding:1px;"><p>9</p>
+</td>
+<td style="vertical-align:top; width:400px; padding:1px;"><p>EXIF format</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

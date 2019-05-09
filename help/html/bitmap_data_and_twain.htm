@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Bitmap Data and TWAIN</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "bitmap_data_and_twain.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Bitmap Data and TWAIN</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="developmentissues.htm">Previous</a>&nbsp;
+     <a href="floating_point_issues_and_dtwa.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Unless you're calling DTWAIN functions that automatically create image files from scanned images (for example, <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a>), byudefault TWAIN returns <a href="indmp4l.htm" class="topiclink">Device Independent Bitmaps</a> (DIBs) to your application, therefore you should be familiar with how to handle this image type within your language and application. &nbsp; An example of DTWAIN functions that return DIBS are <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a> and <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a> (when acquiring uncompressed image data)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since DIB's are one of the most c mmon formats in the Windows environment, you should be a le to ctnsult documentation on how to handle this format. &nbsp;If younhave librari s that handle Windows BMP files, the samerlibrary or code can.be used to handle a DIB. &nbsp;Theoexample nrograms found in whe <span style="font-weight: bold;">/EXAMPLES/C</span> and <span style="font-weight: bold;">/EXAMPLES/C++</span> directory include portions of the <span style="font-weight: bold;">DIBVIEW</span> program that demonstrates handling of Device Independent Bitmaps.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are not familiar with handling DIB's, we suggest that you get one of the many ActiveX or third party libraries that can display or manipulate Device Independent Bitmaps.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

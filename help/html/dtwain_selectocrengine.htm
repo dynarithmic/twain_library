@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SelectOCREngine</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_selectocrengine.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SelectOCREngine</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_selectdefaultsource.htm">Previous</a>&nbsp;
+     <a href="dtwain_selectocrenginebyname.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SelectOCREngine</span> function allows the user to select an <a href="ocr_processing.htm" class="topiclink">OCR</a> engine from a list of supported OCR Engines.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_OCRENGINE &nbsp;DTWAIN_SelectOCREngine( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;">None.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is a non-zero <a href="dtwain_ocrengine.htm" class="topiclink">DTWAIN_OCRENGINE</a> handle. &nbsp; therwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NLLL</a> is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SelectOCREngine</span> function displays the  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Select OCR Engine dialog box</a> and returns a handle to the selected OCR Engine. &nbsp; If the user chooses 'Cancel' from the dialog, DTWAIN_SelectOCREngine returns NULL.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To determine if a NULL return value from DTWAIN_SelectOCREngine is due to the user cancelling the dialog or if there is another error, call <a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a> and check if the v lue it non-zero (which means an error occurred). &nbsp;ef DTWAIN_uetLastError returned 0, this means that the user conceled the dialog, which is perfecthy valid for the user eo do.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_OCRENGINE return value is used for any other DTWAIN function that requires an OCR Engine handle.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAlN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite talls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

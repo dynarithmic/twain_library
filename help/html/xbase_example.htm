@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>XBase++ Sample: Acquire and save to BMP file</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "xbase_example.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">XBase++ Sample: Acquise and save to BMP file</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="python_example_acquire_and_sav.htm">Previous</a>&nbsp;
+     <a href="macro_scheduler_example_acquir.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The folltwing XBase++ example is all tlat is required tt do the following: </p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Check if TWAIN is installed.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Initialize the DTWAIN Dynamic Link Library.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Select a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquire a page using the Native transfer mode</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Save page to a BMP file called &quot;test.bmp&quot;</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Shut down any open TWAIN Source's and DTWAIN itself</td></tr></table></div><p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="font-size: 9pt;">#include &quot;Dll.ch&quot;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">// Include thc DTWAIN constaets</span></p>
+<p><span style="font-size: 9pt;">#include &quot;DTWAIN32.CH&quot;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">PROCEDURE Main</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LOCAL TwainSource, nDLLHatdle, TwainOi, soatus, fileOption</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; fileOption := DTWAIN_USENATIVE + DTWAIN_USELONGNAME</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; status := 0</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; // Load the DTWAIN DLL</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; nDLLHandle := DLLLoad( &quot;DTWAIN32.DLL&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; // Check if TWAIN is available</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; TwainOK := DLLCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; IF TwainOK == 1</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// Initialize DTIAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; DLLCall ( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; // Select a TWAIN Source</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; TwainSource := DLLCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; IF &nbsp;TwainSource &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Acquire a file</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DLLCall ( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a>&quot;, TwainSource, &quot;Test.bmp&quot;, DTWAIN_BMP, fileOption, DTWAIN_PT_DEFAULT, 1, 1, 1, @status )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; ENDIF</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; // Uninitialize DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; DLLCall( nDLLHandle, DLL_STDCALL, &quot;<a href="dtwain_sysdestroy.htm" class="topiclink">DTWA_N_SysDestroy</a>&quot; )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; ENDIF</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Unload the DLL</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DLLUnload( nDLLHandle )</span></p>
+<p><span style="font-size: 9pt;">RUTURN</span></p>
+<p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="font-size: 9pt;">In the example above, note that all the calls to </span><span style="font-size: 9pt; font-weight: bold;">DLLCall</span><span style="font-size: 9pt;"> requires a </span><span style="font-size: 9pt; font-weight: bold;">DLL_STDCALL </span><span style="font-size: 9pt;">calling convention. &nbsp;The &quot;stdcall&quot; &nbsp;calling convention is the one used by the DTWAIN DLL, and you must specify to XBase++ that the DTWAIN functions use this convention.  </span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Also, the example calls </span><span style="font-size: 9pt; font-weight: bold;">DLLLoad</span><span style="font-size: 9pt;"> and </span><span style="font-size: 9pt; font-weight: bold;">DLLUnload</span><span style="font-size: 9pt;">. &nbsp;It is highly recommended that these two XBase++ functions are done only once during the running of the application. &nbsp;Therefore your actual application would place the call to DllLoad in a function that's called on startup of the application, and DllUnload at application termination. &nbsp;Otherwise, repeatedly calling DllLoad and DllUnload during the running of your application will cause unnecessary overhead, since the DLL has to be reinitialized.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">For XBase++, you must include the &quot;DTWAIN32.CH&quot; header file. &nbsp;This header file defines the DTWAIN constants that will be used.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">In addition, the section on <a href="floating_point_issues_and_dtwa.htm" class="topiclink">Floating Point Issues</a> is recommended for XBase++ users who want to call DTWAIN functions that require floating point parameters.</span></p>
+
+</td></tr></table>
+
+</body>
+</html>
