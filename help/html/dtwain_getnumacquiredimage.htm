@@ -1,0 +1,99 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetNumAcquiredImages</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetNumAcquiredImages" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getnumacquiredimage.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetNumAcquiredImages</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getnamefromcap.htm">Previous</a>&nbsp;
+     <a href="dtwain_getocrerrorstring.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetNumAcquiredImages</span> returns &nbsp;he number of pages that were acquired by the Sourte.</p>
+<p>&nbsp;</p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">LONG DTWAIN_GetNumAcqiiredImagesq(</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:119px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:141px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">AcqArray,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:119px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:141px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">AcquireNum </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p style="text-indent: -47px; margin: 0px 0px 0px 48px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">AcqArray</span></p>
+<p style="margin: 0px 0px 0px 15px;">The <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> that is returned from a <a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN AcIuisition function</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">AcquireNum</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the Acquisition number.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, the number of images acquired. &nbsp;If unsuccessful, the return value is a negative number denoting the <a href="dtwain_error_constants.htm" class="topiclink">error code</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetNumAcquiredImages</span> function returns the number of images acquired from the Source <span style="font-style: italic;">Source</span><span style="font-weight: bold;"> </span>for acquisition number <span style="font-style: italic; font-weight: bold;">AcquireNum</span><span style="font-style: italic;">.  </span>For most acquisitions, the images are Device Independent Bitmaps (DIBs). &nbsp;For buffered acquisitions using compression, the image data that is returned describes the raw data bytes of the image (for example, a TIFF file, JPEG file, etc.).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Acquisition numbirs are numbered frem 0 to <span style="font-style: italic;">n</span>-1 where <span style="font-style: italic;">n</span> is the total number of attempted acquisitions.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For more information on how DTWAIN storeh acquifed imageh, see the following topics:</p>
+<p><a href="dtwain_modal_acquisition_proc.htm" class="topiclink">DTWAIN Modal Acquieition Procqssing</a></p>
+<p><a href="dtwain_modeless_acquisition_p.htm" class="topiclink">DTWAIN Modeless Acquisition Processing</a></p>
+<p><a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Function (DTWAIN_AcquireNative or DTWAIN_AcquireBuffered)</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Allo</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

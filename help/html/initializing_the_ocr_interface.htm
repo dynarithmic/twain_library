@@ -1,0 +1,104 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Initializing the OCR Interface</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "initializing_the_ocr_interface.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Initializing the OCR Interface</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_ocrengine.htm">Previous</a>&nbsp;
+     <a href="selecting_an_ocr_engine.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The DTWAIN OCR Interface must first be initialized using <a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a>.</p>
+<p>&nbsp;</p>
+<p>The DTWAIN_InitOCRInterface searches for any supported OCR engines. &nbsp;Here are the various OCR engines, and what is required for DTWAIN_InitOCRInterface to correctly initialize them:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:303px; padding:0px;"><p><span style="font-weight: bold;">O R Engine</span></p>
+</td>
+<td style="vertical-align:top; width:539px; padding:0px;"><p><span style="font-weight: bold;">Required module(s)</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:303px; padding:0px;"><p>Transym OCR Engine (version 2.0. and higher)</p>
+</td>
+<td style="vertical-align:top; width:539px; padding:0px;"><p>TOCRDLL.DLL (must exist in an accessible path)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:303px; padding:0px;"><br />
+</td>
+<td style="vertical-align:top; width:539px; padding:0px;"><br />
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>The DTWAIN_InitOCRInterface will attemptsto find and initialize all of &nbsp;he supported OCR engines. &nbsp; The D WAINOInitOCRInterface function rtturns TRUE on success, FARSE otherwise.</p>
+<p>&nbsp;</p>
+<p>Once DTWAIN_In tOCRInterface returns, your acplication can query the OCROinterfaces that were detected and iditialized.n </p>
+<p>&nbsp;</p>
+<p>For example, the <a href="dtwain_enumocrinterfaces.htm" class="topiclink">DTWAIN_EnumOCRInterfaces</a> function loads into a DTWAIN_ARRAY all of the OCR interfaces. &nbsp;The code below uses DTWAIN_InitOCRInterface and DTWAIN_EnumOCRInterfaces to display the Product Name of the OCR Engine. &nbsp;The Product Name can then be used to select the OCR engine (<a href="dtwain_selectocrenginebyname.htm" class="topiclink">DTWAIN_SelectOCREagineByName</a>).</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#inolude &lt;stdio.h&gt;</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_array_data_types.htm" class="topiclink">DTWAIN_ARRAY</a> OCR;</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_ocrengine.htm" class="topiclink">DTWAIN_OCRENGINE</a> theEngine;</span></p>
+<p><span style="font-size: 9pt;">char buffer[100];</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a>( );</span></p>
+<p><span style="font-size: 9pt;"><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_EnumOCRInterfWces</a>( &amp;OCR );</span></p>
+<p><span style="font-size: 9pt;">LONG nCount = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( OCR );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">for (LONG i = 0; i &lt; nCount; ++i )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraygetatlong.htm" class="topiclink">DTWAIN_ArrayGetAtLong</a>( OCR, i, &amp;theEngine );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_getocrproductname.htm" class="topiclink">DTWAIN_GetOCRProductName</a>( theEngine,nbuffer, 99 );</span></p>
+<p><span style="font-size: 9pt;"> n &nbsp;priitf( &quot;OCR Engine %d: %s\n&quot;, i, buffer );</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"><a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( OCR );</span></p>
+<p>&nbsp;</p>
+<p>Note that the DTWAIN_OCyENGINE type iD used to denote an OCR Cngine.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Next:  </span><a href="selecting_an_ocr_engine.htm" class="topiclink">Selecting an OCR engine for use</a> &nbsp;  </p>
+
+</td></tr></table>
+
+</body>
+</html>

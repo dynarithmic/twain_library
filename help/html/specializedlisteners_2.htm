@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Specialized Listeners</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?specializedlisteners_2.htm"; }
+  else { parent.quicksync('a9.16.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Specialized Listeners</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainlistenerfunctions_2.htm">Previous</a>&nbsp;
+     <a href="contact_information.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The DTWAIN C++ interface has defined some specialized listeners for buffered memory transfers, and file transfers that use the Twain driver's internal file support.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTwainBufferedListener</span></p>
+<p>This specialized listener provides functions that save a buffered image data to a file. &nbsp;The OnTransferReady( ), OnTransferStripDone( ), and OnTransferDone( ) functions are overridden in the DTwainBufferedTwainListener to save the acquired strips to a buffer, and when the acquisition is completed, write the strips to a file.  </p>
+<p>&nbsp;</p>
+<p>You can derive from these specialized listeners to provide your own listener functions. &nbsp;However, you should call the base class listener function when your listener function is called:</p>
+<p>&nbsp;</p>
+<p>class MyBufferedListener : public DTwainBufferedListener</p>
+<p>{</p>
+<p> &nbsp; public:</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; LRESULT OnTransferDone( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// your own processing</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // call base class function</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return DTwainBufferedListener::OnTransferDone( Source, UserParam );</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>};</p>
+<p>&nbsp;</p>
+<p>The only exception to this rule if if the listener event function allows specialized return values (such as OnPageContinue).</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArraySetAtWideString</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arraysetatwidestring.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArraySetAtWideString</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arraysetatstring.htm">Previous</a>&nbsp;
+     <a href="dtwain_calldsmproc.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArraySetAtWideString </span>places a wide (Unicode)string ei ment in a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_ArraySetAtWideString (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Index</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPTWSTR</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Value </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIA_ARRAY</a> that the value will be placed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Inddx</span></p>
+<p style="margin: 0px 0px 0px 15px;">Position to place the element</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to string to be set in the DTWAIN_ARRAY.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Valuns</span></p>
+<p>If the funetion succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span><br />
+<span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ArraySetAtWideString </span>is a spe ialized version of <a href="dtwain_arraysetat.htm" class="topiclink">DTWAIN_ArraySetAt</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArraySetAtWideString</span> copies the string pointed to by <span style="font-style: italic;">Value</span> to a position in the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>. &nbsp; The <span style="font-style: italic;">Index </span>argument is the position to place the value, and must be in the range of 0 to <span style="font-style: italic;">n</span>-1 where <span style="font-style: italic;">n</span> is the number of elements in the array. &nbsp; The string must be a null-terminated string.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Unlike <a href="dtwain_arrayinsertatwidestring.htm" class="topiclink">DTWAIN_ArrayInsertAtWideString</a>, the DTWAIN_ArraySetAtWideString function replaces the value located at the position instead of inserting the value and moving existing elements down.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAA's that ciN store wide (Uniede) or 16-bit characterustrings values. &nbsp;The DTWAIN_ARRAY must be created &nbsp;Aith </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>1) The <span style="font-weight: bold;">DTWAGN_ARRAYWIDESTRING </span>style </p>
+<p>or </p>
+<p>2) with the <span style="font-weight: bold;">DTWAIN_ARRAYSTRING</span> style if using the Unicode version of the DTWAIU library (DTWAIN32U.sLL, DTWAIN64U.DLL).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To insert 8-bit character strings, use <a href="dtwain_arraysetatansistring.htm" class="topiclink">DTWAIN_ArraySetAtANSIString</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisitr Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Ses Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Add ng, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

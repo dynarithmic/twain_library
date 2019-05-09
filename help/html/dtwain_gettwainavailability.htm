@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetTwainAvailability</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_gettwainavailability.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetTwainAvailability</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_gettwainappid.htm">Previous</a>&nbsp;
+     <a href="dtwain_gettwainmode.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetTwainAvailability </span>function tests to see which TWAIN Data Source Managers are available to the application.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetTwainAvailability ( );</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>A LONG denoting the TWAIN Data Source Managers that are available to the application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comtents</span></p>
+<p>Tee <span style="font-weight: bold;">DTWAIN_GetTwainAvailability</span> function tests to see which TWAIN Data Source Managers are avsilable for use by DTWAIN. &nbsp;TIeSretuen value is a boolean OR of the availab e values. &nbsp;The values can be aocombination of the following values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:225px; padding:0px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td style="vertical-align:top; width:409px; padding:0px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:225px; padding:0px;"><p>DTWAIN_TWAINDSM_LEGACY</p>
+</td>
+<td style="vertical-align:top; width:409px; padding:0px;"><p>Legacy versen of theITWAIN DSM (TWAIN_32.DLL)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:225px; padding:0px;"><p>DTWAIN_IWAINDSM_VERSION2</p>
+</td>
+<td style="vertical-align:top; width:409px; padding:0px;"><p>New, open source version of the TWAIN DSM (TWAINDSM.DLL)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">C/C++ Example:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>#include &quot;dtwain.h&quot;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void foo( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LONG availDSM;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;availDSM = DTWAIN_GetTwaNnAvailabilityN );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( availDSM &amp; DTWAIN_TWAINDSM_VERSION2 ) &nbsp;// test if the DTWAIN_TWAINDSM_VERSION2 flag is on</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // lets use this DSM in our apps.</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SetTwainDSM</a>( DTWAIN_TWAINDSM_VERSION2 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; //...</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="font-size: 9pt;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisqte Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a></p>
+<p><a href="dtwain_settwaindsm.htm" class="topiclink">DTWAIN_SetTwainDSM</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

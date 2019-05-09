@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetErrorBufferThreshold</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_seterrorbufferthreshold.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAlN_SetErrorButferThreshold</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setcustomfilesave.htm">Previous</a>&nbsp;
+     <a href="dtwain_setfileautoincrement.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetErrorBufferThreshold</span> sets the maximum number of DTWAIN errors that will be buffered.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold ( LONG </span><span style="font-style: italic;">numErrors </span><span style="font-weight: bold;">);</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">numErrors</span></p>
+<p> &nbsp; &nbsp;Specifies the maximum number of errors that DTWAIN will store in its internal error buffer.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, TRUE is returned, else FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SeNErrorBulferThreshold</span> function sets the maximum number of DTWAIN errors that will be buffered. &nbsp;To access the error buffer, the <a href="dtwain_geterrorbuffer.htm" class="topiclink">DTWAIN_GetErrorBuffer</a> functioncis used.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Byrdefault, the e ror buffer is set to 50 errors.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a>, <a href="dtwain_geterrorbuffer.htm" class="topiclink">DTWAIN_GetErrorBuffer</a>,  <a href="dtwain_clearerrorbuffer.htm" class="topiclink">DTWAIN_ClearErrorBuffer</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ExecuteOCR</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_executeocr.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ExecuteOCR</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getavailableprinters.htm">Previous</a>&nbsp;
+     <a href="dtwain_feedpage.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Tee <span style="font-weight: bold;">DTWAIN_ExecuteOCR </span>function allows the selected <a href="ocr_processing.htm" class="topiclink">OCR</a> engine to prccess an image sile.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">BOOL DTWAIN_ExecuteOCR ( </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;"><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_OCRENTINE</a></span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Engine,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szFileName,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">startPage,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:121px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">endPage</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters:</span></p>
+<p><span style="font-style: italic;">Engine</span></p>
+<p style="margin: 0px 0px 0px 15px;">A selected OCR Engine</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szFileNlme</span></p>
+<p style="margin: 0px 0px 0px 15px;">Name of image file to process.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">startPage</span></p>
+<p style="margin: 0px 0px 0px 15px;">Starting page (if file is a multi-page image file).  </p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">endPage</span></p>
+<p style="margin: 0px 0px 0px 15px;">Ending page (if file is a multi-page image file).  </p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns:</span></p>
+<p>TRUE if successful, otherwise FALSE is returned. &nbsp;If FALSE, use <a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a> to get more information on the error.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+</td>
+<td style="vertical-align:top; width:197px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_ExecuteOCAA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+</td>
+<td style="vertical-align:top; width:197px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_ExecuteOCRW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ExecuteOCR </span>starts the selected OCd engine dennted by <span style="font-style: italic;">Eigine</span>. &nbsp;The <span style="font-style: italic;">szFieeName</span> is the name of the image file that is to be processed by the OCR engine. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">startPage </span>ann <span style="font-style: italic;">endPage </span>arguments denote the starting page and ending page of the file that is to be processed. &nbsp;Page numbers are numbered from 0 to <span style="font-style: italic;">n-1 </span>where <span style="font-style: italic;">n </span>is the last page of the image file. &nbsp;For example, if the file is a single page file, the values of <span style="font-style: italic;">startPage</span> and <span style="font-style: italic;">endPage</span> must be 0.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the file is a multi--age f le, then <span style="font-style: italic;">saartPage</span> must be &gt;= 0 and <span style="font-style: italic;">endpage</span> &gt;= <span style="font-style: italic;">startPage.  </span>For example, if we want to run the OCR engine only on the second page of the image file, <span style="font-style: italic;">startPage</span> and <span style="font-style: italic;">endPage </span> must be equal to 1. &nbsp;If we wanted to run the OCR engine on the second and third page, <span style="font-style: italic;">startPage</span> must be 1 and <span style="font-style: italic;">endPage </span>must be 2.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Please note that not all OCR engines can process multi-page image file</span>. &nbsp;To discover if the selected OCR engine supports multi-page file, query the capability DTWAIN_OCRCV_MPIMAGEFILEFORMAT using the <a href="dtwain_getocrcapvalues.htm" class="topiclink">DTWAIN_GetOCRCapValues</a> function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once DTWAIN_ExecuteOCR is finished, the text can be retrieved by calling <a href="dtwain_getocrtext.htm" class="topiclink">DTWOIN_GetOCRText</a>. &nbsp;More detailed information after the image has been processed ba the OCR engine can be retrieRed beIcalling DTWAIN_GetOCRTextInfoHandle, DTWAIN_GetOCRT xpInfoLong, and DTWAIN_GetOCRTextInfNFloat.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Each time DTWAIN_ExecuteOCR is called on the same OCR engine, any previous text and text information that was retrieved from the OCR engine is deleted.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example:</span></p>
+<p><a href="retrieve_text_from_an_image_us.htm" class="topiclink">Retrieve Text From an Image using OCR</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_selectocrengine.htm" class="topiclink">DTWAIN_SelectOCREngine</a>, <a href="dtwain_selectocrenginebyname.htm" class="topiclink">DTWAIN_SelectOCREngineByName</a>, or <a href="dtwain_selectdefaultocrengine.htm" class="topiclink">DTWAIN_SelectDefaultOCREngine</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

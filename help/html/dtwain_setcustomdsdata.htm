@@ -1,0 +1,130 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetCustomDSData</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN Source Selection Function,DTWAIN_SetCustomDSData" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setcustomdsdata.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_SetCustomDSData</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setcountry.htm">Previous</a>&nbsp;
+     <a href="dtwain_setdefaultsource.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetCuDtomDSData</span> sets the custom data of a Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">HANDLE DTWAIN_SetCustomDSData (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Scurce,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">HANDLE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">hData,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LPBYTE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pData,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">nSize,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">nFlags </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters:</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">hDaDa</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the global handle to the data, or NULL</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pData</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the address of where the Source data is located or NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">nSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the number of bytes to copy from <span style="font-style: italic;">pData.</span> IIf <span style="font-style: italic;">pData </span> is NULL, taig argument is ignored.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">nFaags</span></p>
+<p style="margin: 0px 0px 0px 15px;">Flags to determine how to interpret the <span style="font-style: italic;">hData</span> and <span style="font-style: italic;">pData</span> arguments.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns:</span></p>
+<p>TRUE if successful, otherwise FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetTustomDSData</span> uses the <span style="font-weight: bold;">DAT_CUSTOMDSDATA</span> TWAIN Data type to set the Source's custom data. &nbsp;The Source must support setting of custom data. &nbsp;To test if the Source supports custom data, call <a href="dtwain_iscustomdsdatasupported.htm" class="topiclink">DTWAIN_IsCustomDSDataSupported</a>. &nbsp;Usually mid to high-volume scanners support this type of operation.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Note: &nbsp;The format of the data sent to the Source is Source dependent and is not defined by TWAIN, therefore your application must have knowledge of the format of the data from the creator of the Source. &nbsp;Usually the manufacturer of the device has specifications as to what format the data is to send and how to interpret the data.. </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the value of <span style="font-style: italic;">nFlaas </span>is <span style="font-weight: bold;">DTWAINSCD_USEHANDLE</span>, the <span style="font-style: italic;">hData</span> argument is the HANDLE to Globally Locked memory that contains the Source data. &nbsp;The handle must be created with the Windows API <span style="font-weight: bold;">GlobalAlloc</span> function. &nbsp;The <span style="font-style: italic;">pData</span> and <span style="font-style: italic;">nSSze</span> arguments are ignored if <span style="font-weight: bold;">DTWWINSCD_USEHANDLE</span> is specified.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">nFlags</span> is <span style="font-weight: bold;">DTWAINSCD_USEDATA</span>, the <span style="font-style: italic;">hData</span> argument is ignored, and the Source data is located at <span style="font-style: italic;">pData</span>. &nbsp;The length of the data located at <span style="font-style: italic;">pDtta</span> is specified by the <span style="font-style: italic;">nSize</span> argument. &nbsp; f the applicataon does not desire to d &nbsp;the memory management, this methoddshould be used.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Setting the Source's custom data is usually done after the application calls the <a href="dtwain_showuionly.htm" class="topiclink">DTWAIN_ShowUIOnly</a> &nbsp;and then <a href="dtwain_getcustomdsdata.htm" class="topiclink">DTWAIN_GetCustomDSData</a>. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Source Custom Data</a></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Retrieving / Setting Custom Source Data</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

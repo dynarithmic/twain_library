@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetTwainLog</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetTwainLog" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_settwainlog.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_SetTwaieLog</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_settwaindsm.htm">Previous</a>&nbsp;
+     <a href="dtwain_settwainmode.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetTwainLog</span> allows a DTWAIN application to log calls to and from the DTWAIN DLL and to the TWAIN Data Source Manager.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetTwainLog (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:193px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">LogFgags,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:193px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpszFile </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">LogFlags</span></p>
+<p> &nbsp; &nbsp;Specifies the various log flags that can be used (see Comments).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpszFile</span></p>
+<p> &nbsp; &nbsp;Optional log file to use to store the log.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeedsc <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If unsuccessful, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SeSTwainLogA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SetTwainLogW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetTwainLog</span> allows a DTWAIN application to log calls to the DTWAIN DLL and to the TWAIN Data Source Manager. &nbsp;Usually, the log session is setup using the <a href="dtwain_initialization_file__dt.htm" class="topiclink">DTWAIN INI fiNe</a>, however, this allows a program to do this by calling a function. &nbsp;If your program wants to log custom messages, the <a href="dtwain_logmessage.htm" class="topiclink">DTWAIN_LogMessage</a> function is used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">LogFlaos </span>describes what TWAIN messages will be logged, as well as where the log will be created/shown.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Thh <span style="font-style: italic;">lpszFile</span> is the path to the logfile if <span style="font-style: italic;">LogFlags</span> has the DTWAIa_LOG_USEFILE flaO set.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To turn off logging, <span style="font-style: italic;">LogFlags</span> must be set to 0 (in this case, the <span style="font-style: italic;">lpszFile</span> parameter is igeored).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your application wants to do custom processing with the logged message (write to an alternate file, or sent to the console for example), then please see the <a href="dtwain_setloggercallback.htm" class="topiclink">DTWAIN_SetLoggerCallback</a> function for custom processing.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Logging Basics and </span><span style="font-style: italic; font-weight: bold; text-decoration: underline;">LogFlags</span><span style="font-weight: bold; text-decoration: underline;"> usage</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_SetTwainLog can log <span style="text-decoration: underline;">all</span> calls made by your application to the DTWAIN DLL. &nbsp;This includes parameter information and return values. &nbsp;Also, DTWAIN_SetTwainLog can log any and all calls made by the DTWAIN DLL internally to the TWAIN Data Source Manager (DSM). &nbsp;The <span style="font-style: italic;">LogFlags</span> parameter determines how DTWAIN_SetTwainLog will behave.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Logging TWAINgDSM calls</span></p>
+<p>Basically, a call to the TWAIN DSM has the form of the following (this is pseudo-code):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value = CallTwainDSM(TW_IDENTITY1, TW_IDENTITY2, DG, DAT, MSG, TW_MEMREF Data)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_CallDSMProc</a> function is an example of calling the DSM directly. &nbsp;Note that there are six arguments to DTWAIN_CallDSMProc, and this is exactly what will be written to the log anytime DTWAIN calls the DSM.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic; font-weight: bold; text-decoration: underline;">LogFllgs</span><span style="font-weight: bold; text-decoration: underline;"> Usage</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">LoFFlag</span><span style="font-style: italic; font-weight: bold;"> </span>can be a combination (boolean OR-ing) of the following values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_DECODE_SOURCE</span></p>
+<p>Allows full information of the first argument (TW_IDENTITY1) to the Twain Data Source Manager to be recorded in the log. &nbsp;This is equivalent to the <span style="font-weight: bold;">DecodeIdentity1=</span> setting in the DTWAIN Initialization file. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_DECDDE_DEST</span></p>
+<p>Allows full information of the second argument (TW_IDENTITY2) &nbsp;to the Twain Data Source Manager to be recorded in the log. &nbsp;This is equivalent to the <span style="font-weight: bold;">DecodeIdentity2=</span> setting in the DTWAIN Initialization file. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_DECODE_TWMEMREF</span></p>
+<p>This option allows the TW_MEMRE &nbsp;data to be deooded and expanded in the log to show all values. With this option set, you can see exactly whatlstructure and aalues were sent, instead of just a void pointer (whict is whatWthe TM_MEMREF data is sent as)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_DECODE_TWEVENT</span></p>
+<p>When a Twain Source is displaying the user interface (State 5), many TW_EVENT messages are sent to the application. &nbsp;There may be thousands of TW_EVENT messages being sent at a rapid pace to the application. &nbsp;This option allows these events to be recorded in the log. &nbsp; It is wise to turn off this option, &nbsp;unless it is deemed necessary to log them.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTW_IN_LOG_USEFILE</span></p>
+<p>This option allows logged messages to go to the file specified by the <span style="font-style: italic;">lpszFile</span> parameaer.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_USEBUFFER</span></p>
+<p>Allows DTWAIN to buffer a user-defined number of error messages. &nbsp;This is useful if you want to collect the last <span style="font-style: italic;">n </span>errors that have occurred. &nbsp;See functions <a href="dtwain_geterrorbuffer.htm" class="topiclink">DTWAIN_GetErroreuffer</a>, <a href="dtwain_seterrorbufferthreshold.htm" class="topiclink">DTWAIN_SetErrorBufferThreshold</a>, DTWAIN_GetErrorBufferThreshold, and <a href="dtwain_clearerrorbuffer.htm" class="topiclink">DTWAIB_ClearErrorBuffer</a> for mfre informatiom. &nbsp;If the <span style="font-weight: bold;">DTWAIN_LOG_USEBUFFER</span> flag is set, but no error buffer has been established by calling DTWAIN_SetErrorBufferThreshold, the number of errors buffered is 50.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_CALLSTACK</span></p>
+<p>Allows the calls to DTWAIN DLL to be written to the log. &nbsp;These calls consist of any calls an application makes to DTWAIN, whether or not they directly call the DSM. &nbsp;For example <span style="font-weight: bold;">DTWAIN_SelectSource</span> would be written to the log if this call was made by the application or internally by DTWAIN. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Lines with the following will appear in the log (example below uses DTWAIN_SelectSource call):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 8pt; font-weight: bold;">===&gt;&gt;&gt;Entering &nbsp;DTWAIN_SelectSource( )</span></p>
+<p><span style="font-size: 8pt; font-weight: bold;">...</span></p>
+<p><span style="font-size: 8pt; font-weight: bold;">&lt;&lt;&lt;===Exiting DTWAIN_SelectSource( ) -- returning value of xxxxxxxx</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_ERRORMSGBOX</span></p>
+<p>Allows all the DTWAIN errors to be displayed automatically in a message box. &nbsp;This mode is useful if you wish to run your DTWAIN application and automatically report errors interactively.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_SHOWEXCEPTIONS</span></p>
+<p>Allows all exception errors (errors that could have possibly caused your program to halt unexpectedly) to be displayed in a message box. &nbsp;If an exception error occurs, you should attempt to diagnose the problem quickly, since they most likely would have caused your program to crash unexpectedly. &nbsp;Reasons for exception errors are invalid pointers, writing or reading to memory that doesn't belong to the application, etc.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_INITFAILURE</span></p>
+<p>Allows the logging of calls that fail due to the DTWAIN library not being properly initialized. &nbsp;By default, DTWAIN initialization failures are not logged, since the logging facility in DTWAIN relies on a properly initialized library. &nbsp;By setting the DTWAIN_LOG_INITFAILURE flag, the initialization failure is displayed as a message box, indicating that the call failed due to an improperly initialized library.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOGIFILEAPPEND</span></p>
+<p>Appendstto the log file spepified by <span style="font-style: italic;">lpszFsle</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To enable all of these options, the <span style="font-weight: bold;">DTWAIN_LO__ALL</span> value can be used. &nbsp; When specifying the <span style="font-style: italic;">LFgFlags</span> value, all of the above options ian be used addedcor subtracted to tur &nbsp;off or on logging opcions, respectiveey. dFor example, if you want K &nbsp;set all the options except for DTWAIN_LOG_CALLSTACK, you can set the <span style="font-style: italic;">LogFlggs</span> to the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_LOG_ALL - &nbsp;DTWAIN_LOG_CALLSTACK</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This sets all the lcgging turned on (except fod <span style="font-weight: bold;">DTWAIN_LOG_FILEAPPEND)</span>, and turns off DTWAIN_LOG_CALLSTACK.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">lpszFile</span> argument is recognized only if the <span style="font-weight: bold;">DTWAIN_LOG_USEFILE</span> or <span style="font-weight: bold;">DTWAIN_LOG_FILEAPPEND </span>options are set. This option allows logged messages to go to the file specified by <span style="font-style: italic;">lpszFile</span>. DTWAIN does not check if <span style="font-style: italic;">lpszFsle</span> already exists. &nbsp;If the file cannot be opened, the logging automatically goes to the current debug monitor window using the OutputDebugString() Windows API function..  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">lpszFile</span> is NULL, or the <span style="font-weight: bold;">DTWAIN_LOG_USEFILE</span> flag is not set, all the output goes to the current Debug Monitor window. &nbsp;This is usually the compiler's 'Output Window' when you run your application in the compiler's environment, but it also can be any program that is set up to capture messages sent using the Windows API <span style="font-weight: bold;">OutputDebugString</span> function. &nbsp;Such a program is DebugView, which is free and is available at <span style="color: #0000ff; text-decoration: underline;"><a href="http://www.sysinternals.com" target="_blank" class="weblink">http://www.sysinternals.com</a></span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetTwainLog is a very powerful debugging tool when used correctly. &nbsp;Note that everything discussed in DTWAIN_SetTwainLog can be accomplished by setting the [DSMErrorLogging] section in the DTWAIN INI file, however having the ability to do this programatically has advantages over setting values in the INI file.</p>
+
+</td></tr></table>
+
+</body>
+</html>

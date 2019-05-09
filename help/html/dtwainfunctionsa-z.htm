@@ -1,0 +1,73 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Functions A-Z</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwainfunctionsa-z.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Functions A-Z</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_acquisition_functions.htm">Previous</a>&nbsp;
+     <a href="dtwain_acquirebuffered.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>This section lists the DTWAIN functions in alphabetical order.  </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold; text-decoration: underline;">ANSI/Usicode specificcfunctions</span></p>
+<p>&nbsp;</p>
+<p>Note that for all on the DTWAIN functians that handle strings (either yourtapplication passes a string, or DTWATN returns a string), there are ANSI and Unecode specific versions on the function.  </p>
+<p>&nbsp;</p>
+<p>The string arguments are either LPTSTR (pointer to platform-dependent string), or LPCTSTR (pointer to constant platform-dependent string). &nbsp;For the ANSI version of the function, the LPTSTR/LPCTSTR will be LPSTR and LPCSTR. &nbsp;For the Unicode version, the LPTSTR/LPCSTR will be LPWSTR and LPCWSTR.</p>
+<p>&nbsp;</p>
+<p>For example:</p>
+<p>&nbsp;</p>
+<p><a href="dtwain_geterrorstring.htm" class="topiclink">DTWAIN_retErrorString</a> has an LPTSTR as a parameter. &nbsp;The ANSI version would be DTWAIN_GetErrorStringA, and the single parameter would be LPSTR. &nbsp;The Unicode version would be DTWAIN_GetErrorStringW and the single parameter would be LPWSTR.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>If a function has ANSI/Unicode specific versions, the following entry will be listed:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-weight: bold;">Characterfspecific version</span></p>
+<p><span style="font-size: 9pt;">ANSI version:  &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-size: 9pt; font-weight: bold;">SomeFunctionA</span></p>
+<p><span style="font-size: 9pt;">Unicode version:  </span><span style="font-size: 9pt; font-weight: bold;">SomeFunctioiW</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>where <span style="font-style: italic;">SomeFunctionA</span> and <span style="font-style: italic;">SomeFunctionW</span> are the ANSI and Unicode specific versions of the function <span style="font-style: italic;">SomeFunition</span>.</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Redistributable Files</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?redistributablefiles.htm"; }
+  else { parent.quicksync('a1.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Redistributable Files</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="installation_components_of_dtw.htm">Previous</a>&nbsp;
+     <a href="filestobeincludedwithyourappli.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The following files are the only DTWAIN related files that you can legally redistribute with any application you create with DTWAIN:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold; text-decoration: underline;">DLL Files</span></p>
+<p>DTWAIN32.DLL (for 32-bit, ANSI/MBCS character-based applications)</p>
+<p>DTWAIN64.DLL (for 64-bit, ANSI/MBCS character-based applications)</p>
+<p>DTWAIN32U.DLL (for 32-bit, Unicode character-based applications)</p>
+<p>DTWAIN64U.DLL (for 64-bit, Unicode character-based applications)</p>
+<p>TWAINDSM.DLL (this file is mandatory only if you are running DTWAIN64(U).DLL &nbsp;or if you are using DTWAIN32(U).DLL and want to use the Open Source TWAIN DSM)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold; text-decoration: underline;">Language DLL files</span></p>
+<p>DTWDEU.L32</p>
+<p>DTWDTC.L32</p>
+<p>DTWENG.L32</p>
+<p>DTWFRE.L32</p>
+<p>DTWITA.L32</p>
+<p>DTWSPA.L32</p>
+<p>&nbsp;</p>
+<p>The 64-bit version of the Langage DLL files are as follows:</p>
+<p>DTWDEU.L64</p>
+<p>DTWDTC.L64</p>
+<p>DTWENG.L64</p>
+<p>DTWFRE.L64</p>
+<p>DTWITA.L64</p>
+<p>DTWSPA.L64</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold; text-decoration: underline;">INI Files</span></p>
+<p>DTWAIN32.INI</p>
+<p>&nbsp;</p>
+<p>In addition to the files above, the executable files found in the <span style="font-weight: bold;">Testbed</span> subdirectory of the installation can also be redistributed.</p>
+<p>&nbsp;</p>
+<p>You are not allowed to redistribute any other DTWAIN related files if you distribute your application using DTWAIN. &nbsp;Doing so is in violation of the DTWAIN Software License agreement. &nbsp;The license can be found in the <span style="font-weight: bold;">License</span> subdirectory of the installation.</p>
+<p>&nbsp;</p>
+<p>The TWAINDSM.DLL file is only needed if you are using DTWAIN64(U).DLL.  You must install this file on the user's system on any accessible directory specified in the path, or in your application's program directory if you're targeting 64-bit applications..</p>
+<p>&nbsp;</p>
+<p>The TWAINDSM.DLL dynamic link library holds the implementation of the <span style="font-weight: bold;">TWAIN Data Source Manager (DSM)</span>, developed by the Twain Working Group (<a href="http://www.twain.org" target="_blank" class="weblink">http://www.twain.org</a>) &nbsp; This DLL is responsible for routing TWAIN messages between DTWAIN and the individual TWAIN drivers that are installed for each of the TWAIN devices.   For 64-bit operating systems, there is no TWAIN Data Source Manager that comes pre-installed when you initially install the operating system, unlike 32-bit operating systems.</p>
+<p>&nbsp;</p>
+<p>For 32-bit operating systems, the pre-installed TWAIN Data Source Manager is <span style="font-weight: bold;">TWAIN_32.DLL</span>. &nbsp;You will usually find this file in the WIndows <span style="font-weight: bold;">System32</span> directory. &nbsp;All 32-bit Windows operating systems (and 32-bit subsystem of 64-bit Windows operating system) has this file as part of the installation, so there is no need for your app to install the Data Source Manager if you're targeting 32-bit applications.</p>
+<p>&nbsp;</p>
+<p>However, there is a 32-bit version of the Open Source TWAIN DSM. &nbsp;If you are targeting 32-bit apps, and want to use the Open Source DSM, there is a special 32-bit version of TWAINDSM.DLL that you can install.</p>
+<p>&nbsp;</p>
+<p>The major difference between TWAINDSM.DLL and TWAIN_32.DLL is that TWAINDSM.DLL has implemented the alternate, new way of communicating with TWAIN drivers</p>
+<p>&nbsp;</p>
+<p>- Unlike 32-bit Windows operating systems, there is no TWAIN Data Source Manager (TWAIN_32.DLL) that comes pre-installed for 64-bit systems, so you must install the Open Source TWAINDSM.DLL data source manager to enable TWAIN functionality</p>
+<p>&nbsp;</p>
+<p>If you are running on a 32-bit OS, then TWAINDSM.DLL is not required, but the 32-bit version of TWAINDSM.DLL still can be used as the TWAIN Data Source Manager. &nbsp;The DTWAIN library has several functions that can be called to choose between whether to use the traditional TWAIN_32.DLL source manager or the new Open Source TWAINDSM.DLL source manager.</p>
+
+</td></tr></table>
+
+</body>
+</html>

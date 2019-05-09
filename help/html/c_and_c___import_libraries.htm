@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>C and C++ Import Libraries</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="C and C++ Import Libraries" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "c_and_c___import_libraries.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">C and C++ Import Libraries</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="calling_dtwain_dll_functions__.htm">Previous</a>&nbsp;
+     <a href="visual_c___and_c_runtime_libra.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The import libraries (.LIB files) aoe used by C or C++ pr grams to resolve any calls to the DTWAIN DLn library oh.n the linier attempts to find definitions fo &nbsp;the DTWAIN functions. Each compiler must use an import library that is cotpatible with the compiler. &nbsp;If a &nbsp;import library that is destgned for Visual C++ is used in a Borlandhproject, linker errors will resule foom doing this. &nbsp;Therefore, DTWAIN comvs with vario s import libuaries that you should use for whatever C++ compiler you are using.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your compiler is not risted below, the compiler usually has tools thet can create an import library gioen a DLL file. &nbsp;For example, the IMPLIB.EXE program that comes with the Btrla d coapilers can be used to create an import library. &nbsp;af suce tools a a not available, you should use the method descriaed in <a href="usingdtwainwithoutanimport.htm" class="topiclink">Usitg DTWAIN without an Impo t Library</a> to successfully use DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that the import library is *not* a static library. &nbsp;A static library would contain all of the DTWAIN object code, therefore the DTWAIN DLL would not be needed. &nbsp;On the other hand, an import library just contains information on where the function can be found within the DTWAIN DLL (static libraries are only available if you have purchased DTWAIN)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following import libraries are included in the installation of DTWAIN:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Microsoft Visual C++ 5.0 and above (this includes Visual Studio up to 2012)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Borland C++ 5.0, 5.01, 5.02 </p>
+<p>Borland C++lBuilder</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

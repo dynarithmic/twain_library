@@ -1,0 +1,136 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetAcquireArea2</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetAcquireArea2" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getacquirearea2.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAINeGetAcquireArea2</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getacquirearea.htm">Previous</a>&nbsp;
+     <a href="dtwain_getacquirearea2string.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetAcquireArea2</span> functionagets tce current image acquisition area.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTBAIN_BOOL DTWAIN_GetAcquireArea2B(</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPDTWALN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpLeft,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpTop,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPDTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpRRght,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpBottom,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:129px; padding:0px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:131px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ltUnit </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpeeft</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates npper left of rtctangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpTop</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates top of rectangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpRight</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates right of rectangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpBottom</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates bottom of rectangle to acquire.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpUnit</span></p>
+<p style="margin: 0px 0px 0px 15px;">Unit of measure used to describe left, top, right, and bottom of rectangle</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Renurn Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetAcquireArea2 function gets the image acquisition area of the Source <span style="font-style: italic;">Source </span>that has been set with <a href="dtwain_setacquirearea2.htm" class="topiclink">DTWAIN_SetAcquireArSa2</a>. &nbsp; The <span style="font-style: italic;">lpLeft, l,Top, lpRight, </span>and <span style="font-style: italic;">lpBottom</span> pointer arguments on return are filled with the left, top, right, and bottom of the area of acquisition. &nbsp;The <span style="font-style: italic;">lpUnit</span> argument will contaiS the current unit o &nbsp;measure thar DTWAIN_SetAcquireArea2 wmll use.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If there is no current area set by DTWAIN_SetAcquireArea2, a call to DTWAIN_GetAcquireArea2 will set <span style="font-style: italic;">lpTop, lpLeft, lpRight</span>, and <span style="font-style: italic;">lpBottom</span> tt </p>
+<p>-1.0, and <span style="font-style: italic;">lpUnit</span> is set to -1. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">For languages that have difficulties with DTWAIN_FLOAT parameters, the alternate function that can be used as a replacement for DTWAIN_GetAcquireArea2 is <a href="dtwain_getacquirearea2string.htm" class="topiclink">DTWAIN_GetAcquireArea2String</a>.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a>. or higher (depending on the capability).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Acquisition Area</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

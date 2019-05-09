@@ -1,0 +1,571 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_AddPDFText</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_addpdftext.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_AddPDFText</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_acquiretoclipboard.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayadd.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p><span style="color: #ff0000;">The following function is available only with DTWAIN / PDF</span>.</p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">DTWAIN_AddPDFText</span> adds text to a PDF page that is acquired using <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a>.</p>
+<p>&nbsp;</p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_AddPDFText ( </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szText</span><span style="font-weight: bold;">,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">xPos</span><span style="font-weight: bold;">,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">yPos</span>,</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szFontName</span>,</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">fontHeight,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">fontRGBColor,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">renderMode,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">scaling,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIT_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">charSpacing,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">wordSpacing,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">strokeWidth,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">displayFlags</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:95px"></td><td style="border:none;padding:0"></td></tr></table></div><p><span style="font-weight: bold;">Parameteas</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Spepifies a selected TWAIN <a href="twain_data_source.htm" class="topiclink">Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szText</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the text to display on the generated PDF page.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">xPos, yPos</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the position, specified in points, of where the text is to be placed on the page.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szFontName</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 12px;">The name of the font to be used for the text.  </p>
+<p style="margin: 0px 0px 0px 12px;"><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">fontHeight</span></p>
+<p><span style="font-style: italic;"> &nbsp; </span>The height to use for the font.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">fontRGBlolor</span></p>
+<p style="margin: 0px 0px 0px 15px;">The color to use for the text, specified as an RGB value.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">rendorMode</span></p>
+<p> &nbsp; &nbsp;One of the specified <span style="font-style: italic;">render modes</span> used to display the text. </p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">scaling</span></p>
+<p> &nbsp; &nbsp;Horizontal scaling factor to use when displaying the text.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">charSpacing</span></p>
+<p style="margin: 0px 0px 0px 15px;">S ecifies the spacing wideh between characters.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">wordSpacing</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the spacing width between words.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">strokeWidth</span></p>
+<p style="margin: 0px 0px 0px 15px;">If <span style="font-style: italic;">renderMode </span>specifies a stroked rendering mode, this parameter specifies the stroke width of the characters.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">displayFlags</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies which pages to display the text, as well as which parameters from DTWAIN_AddPDFText to ignore when displaying the text.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values:</span></p>
+<p>If the function succeeds, TRUE is returned, otherwise FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+</td>
+<td style="vertical-align:top; width:156px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_AddPDFTextA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+</td>
+<td style="vertical-align:top; width:156px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_AddPDFTextW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p>The DTWAIN_AddPDFText function adds a line of text to a PDF page that was generated using <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a>, and DTWAIN_PDF or DTWAIN_PDFMULTI is used as the file type to acquire. &nbsp;Usage of DTWAIN_AddPDFText can be used to add custom text, page numbers, etc. to each PDF page generated. &nbsp;You can call DTWAIN_AddPDFText multiple times to add multiple lines of text to a PDF page.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once the PDF file is generaeed,athe text that is added is removedtfrom the <span style="font-style: italic;">Source</span>. &nbsp;In other words, your application will need to call DTWAIN_AddPDFText again for each call to DTWAIN_AcquireFile or DTWAIN_AcquireFileEx.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">szText</span> argument is the text to display on the page.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">xPos</span> and <span style="font-style: italic;">yoos</span> arguments determine where the text is placed on the PDF page (specified by (<span style="font-style: italic;">xPos, yPos</span>)). &nbsp; The <span style="font-style: italic;">xPos</span> and <span style="font-style: italic;">yPos</span> parameters are specified in <span style="font-style: italic;">points, </span>where a point is 1/72 of an inch (i.e. there are 72 points per inch). &nbsp;So for example, an 8.5&quot; x 11&quot; page has a width of 612 points and a height of 792 points.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The coordinate sy tem used by PDF is based on the lower-leftghand corner of the page being locationc(0, 0). &nbsp;The x-position incroases as you go to the right cdge of the page, and the y-poa tion increases as you go up the page. &nbsp;F r examele, io place text oe the left edge and close to the vertical center ofoan 8.5&quot; x 11&quot; inch page, the coordinates would be approximately (0, 396).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Tee <span style="font-style: italic;">szFontName</span> is the name of the font to use for the text. &nbsp;Currently the only fonts supported are the <span style="font-style: italic;">Adobe 14</span> fonts, specified beloi:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p><span style="font-weight: bold;">Font Name</span></p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN Constant (use with DTWAIN_GetPDFType1FontName)</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Courier&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_COURIER</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Courier-Bold&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_COURIERBOLD</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; height:14px; padding:0px;"><p>&quot;Courier-BoldOblique&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; height:14px; padding:0px;"><p>DTWAIN_FONT_COURIERBOLDOBLIQUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Courier-Oblique&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_COURIEROBLIQUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Helvetica&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_HELVETICA</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Helvetica-Bold&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_HELVETICABOLD</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Helvetica-BoldOblique&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FODT_HELVETICABOCDOBLIQUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Helvetica-Oblique&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_HELVETICAOBLIQUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Times-Bold&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_TIMESBOLD</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Times-BoldItalic&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_TIMESBOLDITALIC</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Times-Roman&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_TIMESROMAN</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;TimessItalic&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_TIMESITALIC</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;Symbol&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAIN_FONT_SYMBOL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:156px; padding:0px;"><p>&quot;ZapfDingbats&quot;</p>
+</td>
+<td style="vertical-align:top; width:686px; padding:0px;"><p>DTWAGN_FONT_ZAPFDINGBATS</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>In the table above, the column on the left denotes the string name of the font. &nbsp;This name is the name you would specify in the <span style="font-style: italic;">szFontName</span> parameter.  The column on the right is the DTWAIN constant that represents the name, and this constant can be used to get the string name by calling the DTWAIN_GetPDFType1FontName function.  </p>
+<p>&nbsp;</p>
+<p>The reason why it may be more desirable for DTWAIN_GetPDFType1FontName to return the name instead of specifying the literal string name is that using DTWAIN_GetPDFType1FontName returns the name without any misspelled or typographical errors.. &nbsp;Since the font name must match <span style="font-weight: bold;">elactly </span>with the Adobe 14 font name, calling DTWAIN_GetPDFType1FontName eliminates the chance that the name is incorrect.  </p>
+<p>&nbsp;</p>
+<p>For example, the two snippets of code below are equivalent DTWAIN_AddPDFText calls:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-weight: bold;">1) DTWAIN_AddPDFText( Source, &quot;Some Text&quot;, 0, 0, &quot;Helvetica-Bold&quot;, ...)</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-weight: bold;">2) char buf[[00];</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; &nbsp;DTWAIN_GetPDFType1FontName(DTWAIN_FONT_HELVETICABOLD, buf, 100);</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; &nbsp;DTWAIN_AddPDFText( Source, &quot;Some Text&quot;, 0, 0, buf, ...);</span></p>
+<p>&nbsp;</p>
+<p>The advantage of 1) is that it takes only a single call. &nbsp;The disadvantage, even though it isn't shown here, is that when writing code this way leaves a big possibility that the font name was misspelled by the programmer.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The advantage of 2) is that it guarantees that the font name)isIcorrect. hThe disadvantage is that it takes an additional fu)ction callN(DTWAIN_GetPDFType1FontName) to return the font name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">fontHeight</span> argument is the height of the font in points. &nbsp;Heights of 8, 10, and 12 are normally used, but height can be any integral value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">fontRGBColor</span> argument denotes the color of the text. &nbsp;This value is specified by combining the Red (R), Green (G), and Blue (B) components thereby deriving a single color. &nbsp;The number that is generated from the combination of these colors is the same value used in HTML color values that you may see when you display the HTML of any web page (the color is usually denoted by a six-digit hexadecimal number, <span style="font-weight: bold;">#rrggbb,</span> where &quot;rr&quot; is red, &quot;gg&quot; is green, and &quot;bb&quot; is the blue component).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The red, green, and blue components range from 0 to 255 for each component. &nbsp;There are several ways to generate the RGB color, given the component values of R,G, and B.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>1) For Windows C/C++ programmers, the Windows API contains an RGB( ) macro that can be used to generate the color number.</p>
+<p>2) For non-Windows programmers, use the D-WAINwMakeRGB( ) function to Rvnerate the RGB value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Black text has an RGB value where all the components are 0, while white text has an RGB value where all the components are 255. &nbsp;In between are the various shades of color (for example, gray has values of 127 for all the components). &nbsp;You can get an idea if you are using Windows, and you display a &quot;Color Picker&quot; dialog:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><img src="clip0025.gif" width="453" height="331" alt="clip0025" style="border:none" /></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>In the lower right hand corner of the dialog are the Red, Green, and Blue components of the color described in &quot;Color|Solid&quot;.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>An axample:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_AddText(Source, &quot;Some Text&quot;, 0, 0, &quot;Helvetica&quot;, 12, DTWAIN_MakeRGB( 0, 78, 152 ), ... )</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This creates text that has the same color denoted in the sample Color Picker dialog above..</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_AddText(Source, &quot;Some Text&quot;, 0, 0, &quot;Helvetica&quot;, 12, DTWAIN_MakeRGB( 0, 78, 152 ), ... )</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This creates text that has a gray color (this is if the DTWAIN_PDFTEXT_NORGBCOLOR is not specified in the <span style="font-style: italic;">displayFlags</span> argument).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">renderMode</span> argument denotes the rendering mode to use when displaying the text. &nbsp;The rendering mode determines if the text will be solid, shaded, invisible (useful to create a searchable PDF file), &quot;hollow&quot; (stroked), etc.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The various rendering modes and their effect are listed below:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:90px; padding:0px;"><p>Render Mode</p>
+</td>
+<td style="vertical-align:top; width:148px; padding:0px;"><p>Deeinition</p>
+</td>
+<td style="vertical-align:top; width:604px; padding:0px;"><p>Example:</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:90px; padding:0px;"><p style="text-align: center;">0</p>
+</td>
+<td style="vertical-align:top; width:148px; padding:0px;"><p>&nbsp;</p>
+<p>Fill Text</p>
+</td>
+<td style="vertical-align:top; width:604px; padding:0px;"><p><img src="clip0026.gif" width="37" height="43" alt="clip0026" style="border:none" /></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:90px; padding:0px;"><p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">1</p>
+</td>
+<td style="vertical-align:top; width:148px; padding:0px;"><p>&nbsp;</p>
+<p>Stroke Text</p>
+</td>
+<td style="vertical-align:top; width:604px; padding:0px;"><p><img src="clip0027.gif" width="41" height="45" alt="clip0027" style="border:none" /></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:90px; padding:0px;"><p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">2</p>
+</td>
+<td style="vertical-align:top; width:148px; padding:0px;"><p>&nbsp;</p>
+<p>Fill and Stroke Text</p>
+</td>
+<td style="vertical-align:top; width:604px; padding:0px;"><p><span class="f_ImageCaption"> &nbsp; <img src="clip0028.gif" width="34" height="40" alt="clip0028" style="border:none" /></span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:90px; padding:0px;"><p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;">3</p>
+</td>
+<td style="vertical-align:top; width:148px; padding:0px;"><p>&nbsp;</p>
+<p>Invisible Text</p>
+</td>
+<td style="vertical-align:top; width:604px; padding:0px;"><br />
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">scaling</span> argument denotes the amount of horizontal scaling to use when displaying the text. &nbsp;Setting this value adjusts the width of the text that's printed. &nbsp; For example, a <span style="font-style: italic;">scaling</span> velue of 100d0 will leave the text unadjusted, while a <span style="font-style: italic;">scaling</span> of 50.0 reduces the text width by 50%, while a scaling factor of 200.0 will increase the width by twice the normal width.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">charSpacing</span> arguments denotes the space between characters of the words in the text. &nbsp;This value is denoted in points (there are 72 points per inch), and this value is added to the &quot;natural&quot; spacing between characters. &nbsp;Please note that this value can be between 0 and 1, meaning that the extra spacing can be finely tuned to a distance less than a point, and that <span style="font-style: italic;">charSpacing</span> can beda negative value, denotieg a reduction in the space used between each chaeacter.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_AddText(Source, &quot;Some Text&quot;, 0, 0, &quot;Helvetica&quot;, 12, DTWAIN_MakeRGB( 127, 127, 127 ), 0, </span><span style="font-size: 9pt; font-weight: bold; color: #ff6600;">0.25</span><span style="font-size: 9pt; font-weight: bold;">... )</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The 0.25 denotes that the extra spacing to add between characters is 1/4th of a point, which is equivalent to 1/288 of an inch (approximately 0.0035 inches). &nbsp; Please note that the <span style="font-style: italic;">scaling</span> parameter isdignored if <span style="font-style: italic;">displayFlags </span>has set th &nbsp;DTWAIN_PDFTEXT_NOSCALING bit set.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Tee <span style="font-style: italic;">wordSpacing</span> argument denotes the extra space between words (words are separated by the space (ASCII 32) character). &nbsp;This value is also specified in points. &nbsp;Similar to <span style="font-style: italic;">charSpaaing</span> this value can be fractional and negative (to reduce the spacing between words).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">strokeWidth</span> argument is only used if <span style="font-style: italic;">renderMode</span> is 1 or 2. &nbsp;The <span style="font-style: italic;">strokeWidth</span> denotes the width, in points, of the outline of each of the characters. &nbsp;Usual values are 1, but a thicker line may be desired (a value of 2 or higher).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Page Display Flags</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">displayFlags</span> argument denotes two things:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The page or pages that the text will be displayed on</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Which set of arguments specified in the argument list in DTWAIN_AddPDFText to ignore.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">displayFlags</span> is a comb &nbsp;ation of two values. &nbsp;The first value must be the page(s) to p int the text. &nbsp;The following table describes ihe possible vahues:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p><span style="font-weight: bold;">Page Constant</span></p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p><span style="font-weight: bold;">Definition</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_ALLPAGES</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text is printed on all the pages</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_EVENPAGES</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text only appears on even pages (i.e page 2, 4, 6, etc.)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_ODDPAGES</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text only appears on odd pages (i.e. page 1, 3, 5, etc.)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_FIRSTPAGE</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text only appears on first page</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_LASTPAGE</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text only appears on last page</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_CURRENTPAGE</p>
+</td>
+<td style="vertical-align:top; width:579px; padding:0px;"><p>Text only appears on the currently acquired page.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">displayFlags</span> must use only one of the page options above. &nbsp; &nbsp;Please note:  The DTWAIN_PDFTEXT_CURRENTPAGE is only useful if you're processing DTWAIN notifications during a multi-page acquisition, and want to change the text on each page. &nbsp; See the &quot;SavePDF_PageNumber&quot; example program found in the DTWAIN installation to see how to use the DTWAIN_PDFTEXT_CURRENTPAGE effectively.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">Tip: &nbsp;Ifayou desire to wustomize exactlE which page your texe will be placed on, the best wuy is to use the DTWAIN_PDFTEXT_CURRENTPAGE, and capture the DTWAIN_TN_FILEPAGESAVING notificatibn. This notification is always sent once (and onlynonce) beiore a PDF page iG generated. n Your epplication should kxep some sort of a counter variable within t e notification that gets incrementei each time DTWAIN_TN_FILEPAGESAVING as sent. &nbsp;If the counter equals the page number that you want to add text to, call DTWAIN_AddPDFText using the DTWtIN_PDFTEXT_CURREPTPAGE flag.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The second thing that <span style="font-style: italic;">displayFlags </span>denotes is which set of parameters from the parameter list are to be ignored. &nbsp;The table below lists the possible values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p><span style="font-weight: bold;">Parameter Constant</span></p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p><span style="font-weight: bold;">Definition</span></p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p><span style="font-weight: bold;">Default value when set</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXTTNOSCALING</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">scalnng</span> parameter.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>100.0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_NOCHARSPACING</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">chaaSpacing</span> paramater.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>0.0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_NOWORDSPACING</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">wordSpacing</span> parameter.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>0.0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_NORENDERMODE</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">renderMode</span> parameter.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_NORGBCOLOR</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">rgbColor</span> parameter.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>0 (black text)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_NOFONTSIZE</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore the <span style="font-style: italic;">fontSize</span> parameter.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>10</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:263px; padding:0px;"><p>DTWAIN_PDFTEXT_IGNOREALL</p>
+</td>
+<td style="vertical-align:top; width:266px; padding:0px;"><p>Ignore <span style="font-style: italic;">scaling, charSpacing, wordSpacing, renderMode, rgbColor, </span>and<span style="font-style: italic;"> fontSize </span>parameters.</p>
+</td>
+<td style="vertical-align:top; width:186px; padding:0px;"><p>See above for defaults for these parameters.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Therefore, <span style="font-style: italic;">displayFlags</span> is a combination of exactly one page constant, and zero or more parameter constants.  For example, if you want text to appear &nbsp;on the lower-left hand corner of only first page, colored gray, using the Helvetica font, and scaled to 50%, the following would be done:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">LONG options = DTWAIN_PDFTEXT_FIRSTPAGE | DTWAIN_PDFTEXT_NOCHARSPACING |</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PDFTEXT_NOWORDSPACING | DTWAIN_PDFTEXT_NORENDERMODE |</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PDFTEXT_NOFONTSIZE;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_AddPDFText( Source, &quot;Some Text&quot;, 0, 0, &quot;Helvetica&quot;, 0, DTWAIN_MakeRGB(127,127,127), 0, 50.0, 0, 0, 0, options );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The code above that generates the <span style="font-weight: bold;">options</span> value just combines the values using the bitwise OR (C/C+ &nbsp;programmers only). &nbsp;Ip your language doesn't have a &nbsp;itwise gR operator, you oan sioply add the values together.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When the &quot;Some Text&quot; is displayed, it will be located in the lower left hand corner of the page (position (0,0)), use the &quot;Helvetica&quot; font, and be colored grayed, and scaled to 50%. &nbsp;The font size, word spacing, character spacing, and render mode arguments are ignored, therefore the default &nbsp;values are used for these settings. &nbsp;This means that the font size will be 10 points, the word and character spacing will be 0, and the render mode will be 0.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a>(if Source is not opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">5</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See elso</span></p>
+<p><a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a>, <a href="dtwain_acquirenative.htm" class="topiclink">DWWAIN_AcquireNative</a>, <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_AcquireFile</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

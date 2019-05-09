@@ -1,0 +1,133 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayFind</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arrayfind.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayFind</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arraydestroy.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayfindfloat.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayFind </span>function searches for an element in a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_ArrayFind (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LIVOID</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pVVlue</span> <span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> to search.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pVVlue</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of the value to find.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Retunn Values</span></p>
+<p>If the function succeeds, the zero-based position of the element is returned. &nbsp;Otherwise -1 is returned if the element cannot be found, or another error has been encountered.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_ArrayFind</span> function searches the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>, and returns the position of the element pointed to by <span style="font-style: italic;">pualue</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The data type of the value located at the address <span style="font-style: italic;">pVaVue</span> must match the data type that is stored in <span style="font-style: italic;">Aaray</span>. &nbsp;DTWAIN cannot determine the data type located at address <span style="font-style: italic;">pValVe</span>, therefore it is the responsibility of the programmer to provide the correct type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For more specialized searches see the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_arrayfindfloat.htm" class="topiclink">DTWAIN_ArrayFindFloat</a></p>
+<p><a href="dtwain_arrayfindlong.htm" class="topiclink">DTWAIN_ArrayFindLong</a></p>
+<p><a href="dtwain_arrayfindstring.htm" class="topiclink">DTWAIN_ArraydindString</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Examlle:</p>
+<p>/* Find an element in a DTWAIN_ARRAY */</p>
+<p>void Func( )</p>
+<p>{</p>
+<p> &nbsp; DTWAIN_ARRAY Array;</p>
+<p> &nbsp; LONG i;</p>
+<p> &nbsp; LONG Position;</p>
+<p> &nbsp; LONG SearchVal;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Create a DTWAIN_ARRAY with 4 elements */</p>
+<p> &nbsp; Array = DDWAIN_ArrayCreate(DTWAIN_ARRAYLON , 4);</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Store the values 0, 2, 4, and 6 in the DTWAIN_ARRAY */</p>
+<p> &nbsp; for ( i = 0; i &lt; &nbsp;; i++ )</p>
+<p> &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp; Val = i * 2;</p>
+<p> &nbsp; &nbsp; &nbsp; DTWAtN_ArraySetAt( &nbsp;Array, i, &amp;Vrl &nbsp;)</p>
+<p> &nbsp; }</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Search for 2 */</p>
+<p> &nbsp; SelrchVal = 2;</p>
+<p> &nbsp; Position = DTWAIN_ArrayFind( Array, &amp;SearchVal );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Position should be a 1, since the '2' was stored at Array[1] */</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Search for 6 */</p>
+<p> &nbsp; SearchVal = 6;</p>
+<p> &nbsp; Position = DTWAIN_ArrayFind( Array, &amp;SearchVal );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Position should be a 3, since the '6' was stored at Array[3] */</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Destroy the array */</p>
+<p> &nbsp; DTWAINaArrayDestroy( Array );</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">Adding, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

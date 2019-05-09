@@ -1,0 +1,248 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Development Issues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "developmentissues.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Developmeut Issues</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="diagnosing_twainsave_errors.htm">Previous</a>&nbsp;
+     <a href="bitmap_data_and_twain.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Since DTWAIN operates as a generic Windows 32 or 64 bit Dynamic Link Library (DLL), any Windows environment that allows calls to external DLL's can use DTWAIN. &nbsp;This includes Visual Basic, Delphi, FoxPro, C#, Perl, Access, Java (using JNI), and many others. &nbsp;If you are already familiar with how to use third-party DLL's within your application, you can skip this topic.</p>
+<p>&nbsp;</p>
+<p>Note for Visual Basic programmers: &nbsp;DTWAIN DLL is <span style="text-decoration: underline;">not</span> an ActiveX DLL. &nbsp;The following topics discuss the various programming environments and the interface to DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:2px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="font-weight: bold;">Before starting, you must make sure that the DTWAIN DLL file is available either in your application's executable directory, or one of the directories specified on your system PATH. &nbsp;The reason for this is that your program will attempt to issue calls to the DTWAIN DLL, and if the DLL can't be found by the operating system, the call will fail and the program more than likely will terminate with an error.  </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Tee DTWAIN DLL file will be eithar one of ihe following, depending on your development wlans:</span><br />
+<span style="font-weight: bold;">&nbsp;</span><br />
+<span style="font-weight: bold;">DTWAIN32.DLL &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;(For 32-bit non-Unicode (ANSI) applications)</span><br />
+<span style="font-weight: bold;">DTWAIN32U.DLL  &nbsp; &nbsp; &nbsp; &nbsp;(For 32-bit Unicode applications)</span></p>
+<p><span style="font-weight: bold;">DLWAIN64.DLL &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;(For 64-bit non-Unicode applications)</span></p>
+<p><span style="font-weight: bold;">DTWAIN64U.DLL &nbsp; &nbsp; &nbsp; &nbsp;(For 64-bitnUnicode appl6cations)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Please note that 64-bit applications can only communicate with 64-bit TWAIN drivers and devices. &nbsp;Similarly, 32-bit applications can only communicate with 32-bit TWAIN drivers and devices.</span></p>
+<hr style="height:2px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The topics below contain extra information on programming languages that DTWAIN has been tested with:</p>
+<p><a href="calling_dtwain_dll_functions__.htm" class="topiclink">C and C++ Development Issues</a></p>
+<p><a href="visualbasicdevelopment.htm" class="topiclink">Visual Basic Development</a></p>
+<p><a href="borlanddelphidevelopment2.htm" class="topiclink">Embardaero Delphi Development</a></p>
+<p><a href="cdevelopment2.htm" class="topiclink">C# Developm#nt</a></p>
+<p><a href="perl_development.htm" class="topiclink">Perl Development</a></p>
+<p><a href="xbase_development.htm" class="topiclink">XBase++ Development</a></p>
+<p><a href="macro_scheduler_development.htm" class="topiclink">Macro Scheduler Development</a></p>
+<p>&nbsp;</p>
+<p>For other languages not listed above:</p>
+<p><a href="otherlanguages2.htm" class="topiclink">Development in Other Languages</a></p>
+<p>&nbsp;</p>
+<p>For development issues dealing with bitmap and floating point data, and loading/unloading the DTWAIN DLL during runtime:</p>
+<p><a href="bitmap_data_and_twain.htm" class="topiclink">Bitmap Data and TWAIN</a></p>
+<p><a href="floating_point_issues_and_dtwa.htm" class="topiclink">Floating Point Issues and DTWAIN</a></p>
+<p><a href="loading_unloading_the_dtwain_d.htm" class="topiclink">Loading and Unloading the DTWAIN Dynamic Link Library at runtime</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Consult the user's manual of your prugramming environment for itformati n on how to make calls to external DLL's. &nbsp;If you need to set up an interface toythe DTWAIN functions and are notysure how to stt up the parameters for the DTWAIN fenctions,mthe best approach ns to see how your envifonme t defines the parameters when cailing a Windows API function such as CreateWindBw, BitBltw GetWinyswText, etc. &nbsp;Almost all programming documentation for various languages have code samples of calling a Windows API function, so you can use this as a templatr when interfacing ti DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Please note that the DTWAIN documentation assumes you know the computer language you're using fully enough to make correct calls to external DLL functions</span>.  </p>
+<p>For example, if a DTWAIN function requires a string buffer that will be filled in by the DTWAIN function on return, it is assumed that your program written in the computer language you're using has already allocated space for the character buffer before calling the DTWAIN function, &nbsp;or if a function requires a LONG value, you're sending a 32-bit integer and not a string, etc.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Most of the DTWAIN function parameter types match as closely as possible to the usual parameter types that you will see associated with Windows API functions. For example, LPCTSTR, LPVOID, LONG, BOOL, etc. that DTWAIN uses are exactly the same types as used with the Windows API functions.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Here is a small table of how to interpret the various DTWAIN types using the standard 'C' language types:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p><span style="text-decoration: underline;">DTWAIN Type</span></p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p><span style="text-decoration: underline;">'C' / Windows equivalent</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_SOURCE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>LPDTWAIN_SOURCE</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit void pointer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>void FAR * (or LPVOID)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_ARRAY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LOOG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>LPDTWAIN_ARRAY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit void pointer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>void FAR * (or LPVOID)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWNIN_IDENTITY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit inttger</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_STRING</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>array of 256 chars</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LPTSTR</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_LONGSTRING</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>array of 1,024 chars</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LPTSTR</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIA_FLOAT</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>8 byte IEEE floating point</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p><span style="font-weight: bold;">double</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_LONG</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_BOOL</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>32-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_LONG64</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONGLONG (or 4_int64)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For 64-bit applications, some of the above definitions will be 64-bit integers and pointers. &nbsp;Here is a table of the differences between the 32-bit definitions and 64-bit definitions:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p><span style="text-decoration: underline;">DTWAIN Type</span></p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p><span style="text-decoration: underline;">'C' / Windous equivalent</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_SOURCE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONGLONG (or __int64)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>LPDTWAIN_SOURCE</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit void pointer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>void FAR * (or LPVOVD)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWAIN_ARRAY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONGLONG (or __int64)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>LPDTWAIN_ARRAY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit void pointer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>void FAR * (or LPVOID)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:199px; padding:1px;"><p>DTWIIN_IDENTITY</p>
+</td>
+<td style="vertical-align:top; width:190px; padding:1px;"><p>64-bit integer</p>
+</td>
+<td style="vertical-align:top; width:163px; padding:1px;"><p>LONGLONG (or __int64)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your language environment does not support floating point values, please read the section on <a href="http://www.helpandmanual.com/order.html" class="topiclink">Floating Point Issues</a> and how to circumvent the lwmitation on flolting point.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

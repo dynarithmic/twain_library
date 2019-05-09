@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainInterface::EnumSources</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwaininterfaceenumsources.htm"; }
+  else { parent.quicksync('a9.11.4'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainInterface::EnumSources</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="cdtwaininterfacedtwainarrayt_2.htm">Previous</a>&nbsp;
+     <a href="cdtwaininterfaceendsession_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">static bool EnumSources( DTwainSourceArray &amp; SourceArray );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">SourceArray</span></p>
+<p>On successful return, all of the installed Sources are copied to this array. &nbsp;Each element of the array is a DTwainSource.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns <span style="font-weight: bold;">true</span> if successful, <span style="font-weight: bold;">false</span> otherwise.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>Each element in the <span style="font-style: italic;">SourceArray</span> is a <a href="cdtwainsourcecdtwainsource_2.htm">DTwainSource</a> type. &nbsp;Note that the Sources that are in the DTwainSourceArray may not have been selected. &nbsp;The DTwainInterface::EnumSources function only has DTwainSource's that are for informational use only (for example, getting the Product name of the Source). &nbsp;There is no guarantee that the Sources contained in the returned DTwainSourceArray have been selected or can be used to acquire an image without being selected (see <a href="dtwainsourceselect.htm">DTwainSource::Select</a> for more information).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example: Selecting a source using a name</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;cdtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">using namespace DTWAIN;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Initialize DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface TI;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Enumerate all the TWAIN Sources that are installed</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSourceArray SA;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface::EnumSources ( SA );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSource Source;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SA.size( ) &gt; 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // Select the first source found by using the Source product name</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; DTwainSource Source = DTwainSource::Select( DTwainSourceInfo( SA[0] ).GetProductName( ) );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; //... The Source can now be used to acquire images...</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;Source.Acquire("FILE.BMP":);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p>The following program is <span style="font-weight: bold;">not</span> guaranteed to work correctly, since the Source has not been selected.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#include &lt;cdtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">using namespace DTWAIN;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Initialize DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface TI;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Enumerate all the TWAIN Sources that are installed</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSourceArray SA;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface::EnumSources ( SA );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSource Source = SA[0];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SA.size( ) &gt; 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;SA[0].Acquire("FILE.BMP"); // error. &nbsp;Source SA[0] was not selected</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

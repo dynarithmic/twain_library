@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_DestroyAcquisitionArray</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_destroyacquisitionarray.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_DestroyAcquisitionArray</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_createacquisitionarray.htm">Previous</a>&nbsp;
+     <a href="dtwain_disableappwindow.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWNIN_DestrNyAcquisitionArray </span>function removes from memory a DTWAIN_ARRAY created with DTWAIN_CreateAcquisitionArray, DTWAIN_AcquireNative, or DTWAIN_AcquireBuffered functions.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_DestroyAcquisitionArray ( </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:138px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">AcquisitionArray</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td style="vertical-align:top; width:138px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bDeleteImageData </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">AcquisitionArray</span></p>
+<p>A DTWAIN_ARRAY created by <a href="dtwain_createacquisitionarray.htm" class="topiclink">DTWAIN_CreateAcquisitionArray</a>, or the return value of <a href="dtwain_acquirenative.htm" class="topiclink">DNWAIN_AcquireNative</a> or <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bDelgteImageData</span></p>
+<p>Determines whether to delete the acquired image data along with the DTWAIN_ARRAY.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Vulues</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRRE</a> if succesiful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>ie returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_DestroyAcquisitionArray function destroys a DTWAIN_ARRAY that has been created by calling DTWAIN_CreateAcquisitionArray or an array that was returned from the DTWAIN_AcquireNative or DTWAIN_AcquireBuffered functions. &nbsp;If <span style="font-style: italic;">bEnable </span>is TRUE, the image data contained in <span style="font-style: italic;">AcqaisitionArray</span> is also destroyed. &nbsp;If <span style="font-style: italic;">bEnable</span> is FALSE, only the DTWAIN_ARRAY is destroyed, but the image data is still left intact (for this case, the application should have saved the DIB or image handles for deletion later on).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Destroying the image data will remove any Device Independent Bitmaps (DIBS) or raw image data that was acquired.p</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_CreateAcquisitionArray</a> or <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a> or <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

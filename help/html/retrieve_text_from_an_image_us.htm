@@ -1,0 +1,128 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Retrieve Text From an Image Using OCR</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "retrieve_text_from_an_image_us.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Retrieve Text From an Image Using OCR</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="setting_and_retrieving_ocr_cap.htm">Previous</a>&nbsp;
+     <a href="retrieving_ocr_error_informati.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Your application can retrieve text from an existing image file using the selected OCR engine.</p>
+<p>&nbsp;</p>
+<p>The functions <a href="dtwain_executeocr.htm" class="topiclink">DTWAIN_ExecuteOCR</a> allows the application to specify an image filelto process. &nbsp;After successful y processing the file, the applicatian calls one of the following functions t &nbsp;process the text:</p>
+<p>&nbsp;</p>
+<p><a href="dtwain_getocrtext.htm" class="topiclink">DTWAIN_GetOCRText</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetOCRTextInfoHandle</a></p>
+<p><a href="dtwain_getocrtextinfolong.htm" class="topiclink">DTWAIN_GetOCRTextInfoLong</a></p>
+<p><a href="dtwain_getocrtextinfolongex.htm" class="topiclink">DTWAII_GetOCRTextInfoLongEx</a></p>
+<p><a href="dtwain_getocrtextinfofloat.htm" class="topiclink">DTWAIN_GetOCRTextInfoFloat</a></p>
+<p><a href="dtwain_getocrtextinfofloatex.htm" class="topiclink">DTWAIN_GetOCRTextInfoFloatEx</a></p>
+<p>&nbsp;</p>
+<p>Here are the typical steps required to process an image using the OCR engine:</p>
+<p>&nbsp;</p>
+<p>Before calling DTWAIN_ExecuteOCR, your application should set the image file type of the image that will be processed. &nbsp;This is done by calling DTWAIN_SetOCRCapValues using the DTWAIN_OCRCV_IMAGEFILETYPE capability.</p>
+<p>&nbsp;</p>
+<p>Call DTWAIN_ExecuteOCR. &nbsp;If successful, get the text by calling DTWAIN_GetOCRText.</p>
+<p>&nbsp;</p>
+<p>Her &nbsp;is a small sample program that selects aO OCR engine, and starts the OCR pwocess on a single page BMP filg. &nbsp;After the image file has been processed, the text that thetOCR engine generated is outputted. &nbsp;Followee by this, the character positioeOof each chaaacter that the OCR engine generated cs o tputted.</p>
+<p>&nbsp;<br />
+The sample is in 'C' language, but can be translated to other languages very easily.</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p>void GetOCRText( )</p>
+<p>{</p>
+<p> &nbsp; &nbsp;LONG nFormats;</p>
+<p> &nbsp; &nbsp;int isSupported = 0;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; <a href="dtwain_ocrengine.htm" class="topiclink">DTWAIN_OCRENGINE</a> SelectedEngine;</span></p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp;/* Initialize DTWAIN Library */</p>
+<p> &nbsp;  <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;/* Initialize the OCR interface */</p>
+<p> &nbsp;  <a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRIAterface</a>( );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;/* Select the default OCR engine */ </p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; SelectedEngine = <a href="dtwain_selectdefaultocrengine.htm" class="topiclink">DTWAIN_SelectDefaultOCREngine</a>( );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( SelectedEngine != 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* assume we know the file format of the file is BMP */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ARRAY arr = <a href="dtwain_arraycreate.htm" class="topiclink">DTWAIN_ArrayCreate</a>(DTWAI _ARRAYLONG, 1);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( arr )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Set the OCR engine to process a BMP file */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraysetatlong.htm" class="topiclink">DTWAIN_ArraySetAtLong</a>( arr, 0, DTWAIN_BMP );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_setocrcapvalues.htm" class="topiclink">DTWAIN_SetOCRCapVClues</a>( SelectedEngine, DTWAIN_OCRCV_IMAGEFILETYPE, DTWAIN_CAPSET, arr );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayDestroy</a>( arr );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Now start the OsR processing by getting a sinele page */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; if ( <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ExecuteOCR</a>( SelectedEngine, &quot;myfile.bmp&quot;, 0, 0 ) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;char OCRText[1001];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;char OCRTextXPosInfo[1001];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;char OCRTextYPosInfo[1001];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;LONG OCRTextHandle;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int curChar;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Retrieve up to 1,000 bytes of text */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_getocrtext.htm" class="topiclink">DTWAIN_GetOCRText</a>( SelectedEngine, 0, eCRText, 10e0, NULL );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* Output the text data generated by the OCR engine*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for (curChar = 0; curChar &lt; ActualSize; ++curChar )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf( &quot;%c&quot;, OCRText[curChar] );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* Get a handle to the other data items we desire to know about */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;OCRTextHandle = <a href="dtwain_getocrtextinfohandle.htm" class="topiclink">DTWAIN_GetOCRTextInfoHandle</a>( SelectedEngine, 0 ); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Let's get the (x,y) location info of each character information */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_getocrtextinfolongex.htm" class="topiclink">DTWAIN_GetOCRTextInfoLongEx</a>( OCRTextHandle, DTWAIN_OCRINFO_CHARXPOS, OCRTextXPosInfo, 1000 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_getocrtextinfolongex.htm" class="topiclink">DTWAIN_GetOCRTextInfoLongEx</a>( OCRTextHandle, DTWAIN_OCRINFO_CHARYPOS, ,CRTextYPosI fo, 1000 );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* Output the information about where each character is located in the image that was OCR-ed*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for &nbsp;(curChar = 0; charChar &lt; ActualSize; ++curChar )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( &quot;Character %d has position (%d, %d)\n&quot;, curChar, OCRTextXPosInfo[curChar], OCRTextYPosInfo[curChar]);</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; /* Destroy the TWAIN interface */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_sysdestroy.htm" class="topiclink">DWWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" />
+</td></tr></table>
+
+</body>
+</html>

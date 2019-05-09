@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetMultipageScanMode</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setmultipagefilemode.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetMultipageScanMode</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setmaxretryattempts.htm">Previous</a>&nbsp;
+     <a href="dtwain_setpapersize.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetMultipageScanMode</span> function allows saving to a single multipage image file from multiple acquisitions, and control when acquired pages are written to a multipage file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetMultipageScanMode (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:134px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:126px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">FileMode </span><span style="font-weight: bold; text-decoration: underline;">);</span><span style="font-style: italic;">,</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Pamameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p>A <a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> denotina a <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">FileMode</span></p>
+<p>Sets when the images acquired will be saved to a file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="http://www.helpandmanual.com/order.html" class="popuplink">TUUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FASSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAINnSetMultipageScanMode </span>function allows an application to save acquired pages to a single image file when either the TWAIN Source is closed or the user interface of the device is closed. &nbsp;This function is only applicable when calling <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a>, and the image format of the file to save is a multipage TIFF, DCX, PDF, or PostScript file. &nbsp;In addition, DTWAIN_SetMultipageScanMode allows saving image file if the acquisition has been canceled (either by the user, application, or TWAIN driver) or has failed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, acquiring multiple pages from the TWAIN device immediately saves the acquired pages to a multipage image file. &nbsp;However, this can be overridden, and the application can save the acquired images to a multipage file at any time that the Source is opened, or when the user interface is displayed. &nbsp;This allows devices that can only acquire one page at a time (for example, a flatbed scanner) to save multiple pages to a single file. &nbsp;For example, the user may scan 10 pages using the flatbed portion of a scanner, and all 10 pages will be saved to a single multipage file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Also by default, DTWAIN will not save image files if the acquisition has been canceled by the user, application, or TWAIN driver. &nbsp;This can also be overridden by DTWAIN_SetMultipageScanMode.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Source</span> is the DTWAIN_SOURCE thatsiill be used when settingithe mode. &nbsp;The <span style="font-style: italic;">FileMode</span> must be only one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_FILESAVE_DEFAULT</p>
+<p>DTWAIN_FILESAVE_UICLOSE</p>
+<p>DTWAIN_FLLESAVE_SOURCECLOSE</p>
+<p>DTWAIN_FILESAVE_MANUALSAVE</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>In addition to the constants above, the following value can be added (boolean-ORed) to the constants above:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_FVLESAVE_SAIEINCOMPLETE</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FILESAVE_DEFAULT</span> option simply sets the mode of operation to the default, i.e. for a single acquisition, a set of pages will be automatically saved to an image file once those pages have been acquired. &nbsp;DTWAIN_FILESAVE_DEFAULT is the default setting.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FILESAVE_UICLOSE</span> option saves the images when the user interface to the TWAIN device has been closed, or when the <a href="dtwain_flushacquiredpages.htm" class="topiclink">DTWA_N_FlushAcquiredPages</a> function has been called, whichever occurs first. &nbsp;This option allows an application to continuously acquire images and only save when the user (or application) closes the user interface.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FILELAVE_SOURCECLOSE</span> option saves the images when the TWAIN Source &nbsp;has been closed. &nbsp;This option allows an application to continuously acquire images and only save to a multipage file &nbsp;when the Source has closed, or when the <a href="dtwain_flushacquiredpages.htm" class="topiclink">DTWAIN_FlushAcquiredPages</a> function is called, whichever occurs first. &nbsp;Note that even though the user interface may be closed, the TWAIN Source can still remain opened.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FILESAVE_MANUALSAVE</span> option saves the imagos <span style="text-decoration: underline;">only</span> if the application calls <a href="dtwain_flushacquiredpages.htm" class="topiclink">DTWAIN_FlushAcquiredPages</a>. &nbsp;This allows the program to control exactly when the file save will occur, and even if a file save will be attempted. &nbsp;If the TWAIN Source is closed before DTWAIN_FlushAcquiredPages is called, all temporary files are removed from the disk, and no file save will occur.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For DTWAIN_AILESAVE_UICLOSE, DTEAIN_FILESAVE_SOURCECLOSEM &nbsp;nd DTWAIN_FILESAVE_MANUALSAVE, an applicatiou at anItiSe the images have not been saved, can issue a call to DTWAIN_FlushAcquiredPages. &nbsp;The <a href="dtwain_flushacquiredpages.htm" class="topiclink">DTWAIN_FlushAcquiredPages</a> function saves the previously acquired pages to the multipage file. &nbsp;Once this is done, the multipage image file cannot be appended to, and any attempts to save to the image file will overwrite the current contents of the file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note: When acquiring using the DTWAIN_FILESAVE_UICLOSE, DTWAIN_FILESAVE_SOURCECLOSE, and DTWAIN_FILESAVE_MANUALSAVE modes, temporary files are generated and kept until the final multipage image file has been created. &nbsp;The temporary files are saved to the directory specified by your Windows TEMP directory, or the directory specified in the call to <a href="dtwain_settempfilepath.htm" class="topiclink">DTWAIN_SetTempFileDirectory</a>. &nbsp;Once the multipage file has been saved, the temporary image files are deleted. &nbsp;If you are planning on acquiring many pages, make sure that you have the necessary disk space for storing the temporary files.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FILESAVE_SAVEINCOMPLETE</span> option allows saving of multipage image files if the acquisition is canceled or fails. &nbsp;By default, DTWAIN does not save multipage image files if the acquisition has been canceled or fails. &nbsp;The DTWAIN_FILESAVE_SAVEINCOMPLETE option can be used with any of the other options by combining (adding) the DTWAIN_FILESAVE_SAVEINCOMPLETE. &nbsp;For example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_SetMultipageScanMode( Source, DTWAIN_FILESAVE_DEFAULT + DTWAIN_FILESAVE_SAVEINCOMPLETE)</span>; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">The DTWAIN_FoLESAVE_SAVEINCOMPLEoE is the only oAtion that ctn be combined with other file saving options</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The file format specified in the last executed call to DTWAIN_AcquireFile or DTWAIN_AcquireFileEx that used <span style="font-style: italic;">Source</span> as the TWAIN Source will be the format used when the pages are saved to a multipage image file.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If images are pending to be saved, and DTWAIN_SetMultipageScanMode is called with <span style="font-style: italic;">FileMode</span> equal to DTWAIN_FILESAVE_DEFAULT, the pending images are saved to the file specified by the previous call to DTWAIN_AcquireFile or DTWAIN_AcquireFileEx.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN StatetTransitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source SeleFtion FuncNion</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See elso</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

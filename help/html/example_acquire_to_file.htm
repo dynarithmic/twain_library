@@ -1,0 +1,185 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Example: Acquire To File</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "example_acquire_to_file.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Example: Acquire To File</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example_nativebufferedmodeless.htm">Previous</a>&nbsp;
+     <a href="example_getting_device_capabil.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The example below shows an example of a 'C' function that acquires one page from the Source using the File transfer mode. &nbsp; In the example, the File Transfer mode is DTWAIN Mode (as opposed to DTWAIN_USESOURCEMODE). &nbsp;Using DTWAIN Mode, the native mode is specified as the transfer mode to use when initially transfer the image from the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the image is acquired successfully from the Source, the file generated is a BMP file named &quot;File1.BMP&quot;.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example &nbsp;:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;dtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</span></p>
+<p><span style="font-size: 9pt;"><a href="long.htm" class="topiclink">LONG</a> ErrStatus;</span></p>
+<p><span style="font-size: 9pt;">LONG FileFlags;</span></p>
+<p><span style="font-size: 9pt;">TCHAR szBuf[255];</span></p>
+<p><span style="font-size: 9pt;">TCHAR &nbsp;FileNames[] = _T(&quot;File1.BMP&quot;);</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_BOOL AcquiredOK;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void AcquireUsingFileMode1( ) &nbsp; </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* See if TWAIN exists on the system */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Quie if TWAIN is no &nbsp;there! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* This call is added so that we can return immediately </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if no TWAIN is found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( !<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>( ) ) return;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Initialize the DTWAIN DLL. &nbsp;Quit if error! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( !<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAiN_SysInitialize</a>( )) return; </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Set the File Flags */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Use the native mode, the name of the files are supplied by a list */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;FileFlags = DTWAIN_USENATIVE | DTWAIN_USENAME;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Select the Source using TWAIN dialog */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>( ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Only do this if a source is selected */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SelectedSource )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{ &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;AcquiredOK = <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a>(</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SelectedSource, /* TWAIN Source */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FileNames, &nbsp; &nbsp;/* List of names */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_BMP,/* Acquire to BMP files */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FileFlags, &nbsp; &nbsp; &nbsp; /* Flags */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_PT_DEFAULT, /* Use default pixel setting */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Get only 1 page */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TRUE, &nbsp; &nbsp; &nbsp; &nbsp; /* Show the UI */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TRUE, &nbsp; &nbsp; &nbsp; &nbsp;/* Close Source when UI closes */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;ErrStatus &nbsp; /* Error Status */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Check if acquisition worked */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( AcquiredOK == FALSE )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* Didn't work */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessagsBox</a>(NULL, _T('TWAIN Acquisition failed!&quot;), _T(&quot;TWAIN Error&quot;), MB_ICONSTOP);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* End 'if AcquireArray */</span></p>
+<p><span style="font-size: 9pt;"> l &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MessageBox(NULL, _T(&quot;You now have a file called File1.BMP!&quot;), _T(&quot;Image Saved&quot;), MB_OK);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; /* Close up shop. &nbsp;Close all sources, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;TWAIN Sessions, the TWAIN Source Manager, */ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; /* End 'if SourceSelected... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> /* End the function */</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example 2:</p>
+<p>The example below shows an example of a 'C' function that acquires one page from the Source using DTWAIN_USESOURCEMODE. &nbsp;This example checks if the Source has internal support for file transfer mode, and will only transfer if the TIFF format is supported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;dtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;tchar.h&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</span></p>
+<p><span style="font-size: 9pt;"><a href="long.htm" class="topiclink">LONG</a> ErrStatus;</span></p>
+<p><span style="font-size: 9pt;">LONG &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;FileFlags;</span></p>
+<p><span style="font-size: 9pt;">TCHAR szBuf[255];</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_BOOL AcquiredOK;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void AcquireUsingFileMode2( ) &nbsp; </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* See if TWAIN exists on the system */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Quit if TWAIN is not there! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* This call is added so that we can return immediately </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if no TWAIN is found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( !<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>( ) ) return;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Initialize the DTWAIN DLL. &nbsp;Quit if error! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( !<a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SysInitialize</a>( )) return; </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Set the File Flags */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Use the internal Source mode, the name of the file is supplied by the user */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;FileFlags = DTWAIN_USESOURCEMODE | DTWAIN_USEPROMPT;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Select the Source using TWAIN dialog */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_Sel_ctSource</a>(;); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Only do this if a source is selected */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SelectedSource )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{ &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Check if Source supports TIFF file transfers */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; if ( !<a href="dtwain_isfilexfersupported.htm" class="topiclink">DTWAIN_IsFileXferSupported</a>( SelectedSourWe, &nbsp;DTWAIN_FF_T FF ) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; { </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCHAR szBuf[256];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TCHAR szSource[33];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_getsourceproductname.htm" class="topiclink">DTWAIN_GetSourceProductName</a>(SelectedSourceS s Source, 32);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;wsprintf(szBuf, _T(&quot;Sorry, the Source &quot;%s&quot;not support TIFF file transfers :-(&quot;), szSource);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MessageBox(NULL, szBuf, _T(&quot;No support&quot;), MB_ICONSTOP);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Not supported, so clean up and return */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; } </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Source supports TIFF file transfer. &nbsp;Start transfer! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;AcquiredOK = <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a>(</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SelectedSource, /* TWAIN Source */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_FF_TIFF, /* Acquire to TIFF file */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NULL, &nbsp;/* List of names */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;FileFlags,  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Flagss*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PT_DEFAULT, /* Use default pixel setting */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Get only 1 page */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TRUE, &nbsp;/* Show the UI */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &amp;ErrStatus /* Error Status */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Check if acquisition worked */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; Fq if ( AcquiredOK == FALSE )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Didn't work */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL,</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_T('TWAIN Acquisition failed!'),</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;r &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _T(&quot;TWAIN Error'),</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MB_ICONSTOP);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* End 'if AcquireArray */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /*/Clpse up shop. &nbsp;Close all sources, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TWAIN Sessions, the TWAIN Source Manager, */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; }/* End 'if SourceSelected... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> /* End the function */</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

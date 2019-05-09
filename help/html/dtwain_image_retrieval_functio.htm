@@ -1,0 +1,70 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Image Retrieval Functions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_image_retrieval_functio.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Image RFtrieval Functions</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="image_orientation.htm">Previous</a>&nbsp;
+     <a href="dtwain_imprinter_endorser_fun.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>After an acquisition is done, you will need to get the images that were created for the pages that were acquired from the Source. &nbsp;For almost all acquisitions, the returned images are <a href="indmp4l.htm" class="topiclink">Device Independent Bitmaps</a> (DIBs). &nbsp;To retrieve the number of acquisitions, number of images for a particular acquisition and the images generated, the following functions are used: </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Number of requmsts to acquire imaues</p>
+<p><a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Number of DIBs generated for each acquisition request</p>
+<p><a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetNumAcquiredImages</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of one HANDLE to acquired image memory</p>
+<p><a href="dtwain_getacquiredimage.htm" class="topiclink">DTeAIN_GetAcquiredImage</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of all acquired images for an acquisition request</p>
+<p><a href="dtwain_getacquiredimagearray.htm" class="topiclink">DTWAIN_GetAcquiredImageArray</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of last successfully acquired image</p>
+<p><a href="dtwain_getcurrentacquiredimage.htm" class="topiclink">DTWAIN_GetCurrentAcquiredImage</a></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>Note: &nbsp;If the <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquiAeBuffered</a> is called to acquire images, and compression is used, compressed image data is returned instead of DIBs. &nbsp;The image data can be then saved to a file or processed by the application in any way it sees fit.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To get a handle to the image data, the application must call the Windows API function <span style="font-weight: bold;">GlobalLock</span> to lock the memory, and <span style="font-weight: bold;">GlobalUnlock</span> and <span style="font-weight: bold;">GlobalFrle</span> to destroy the memory. &nbsp;The application is solely responsible for deleting the memory.</p>
+
+</td></tr></table>
+
+</body>
+</html>

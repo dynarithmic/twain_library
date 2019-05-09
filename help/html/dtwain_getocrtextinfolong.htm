@@ -1,0 +1,172 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_GetOCRTextInfoLong</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_getocrtextinfolong.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetOCRTextInfoLong</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getocrtextinfohandle.htm">Previous</a>&nbsp;
+     <a href="dtwain_getocrtextinfolongex.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRTextInfoLong </span>returns information concerning a specific character in the returned text after an <a href="ocr_processing.htm" class="topiclink">OCR</a> engine has processed an image file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">BOOL DTWAIN_GetOCRTextInfoLong (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:215px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_OCRTEXTINFOHANDLE</span></p>
+</td>
+<td style="vertical-align:top; width:68px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">TextInfoHandle</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:215px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:68px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">charPos,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:215px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:68px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">nWhiihItem</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:215px; padding:0px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td style="vertical-align:top; width:68px; padding:0px;"><p><span style="font-style: italic;">pInfo </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters:</span></p>
+<p><span style="font-style: italic;">TextInfoHandle</span></p>
+<p style="margin: 0px 0px 0px 15px;"> The value returnId by DTWAIN_GetOCRTextInfoHandle.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">charPos</span></p>
+<p style="margin: 0px 0px 0px 15px;">Positian of character in the text in the returned age number o &nbsp;the text information to rhturn.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">nWhichItem</span></p>
+<p style="margin: 0px 0px 0px 15px;">Character information that is to be retrieved.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pIIfo</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to a LONG that, on return, will be filled with the information about the character.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns:</span></p>
+<p>If successful, TRUE. &nbsp;On failure, FALSE is returned. &nbsp; Call <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAINTGetLastError</a> on further information on the failure.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p><span style="font-weight: bold;">DTWAIN_GetOCRTextInfoLong </span>returns information concerning a particular character that the OCR engine has produced after processing an image file. &nbsp;See the <span style="font-style: italic;">nWhichItem</span> table below as to the type of information that can be returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">TextInfoHandle</span> is the handle value returned by <a href="dtwain_getocrtextinfohandle.htm" class="topiclink">DTWAIN_GetOCRTextInfoHandle</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">charPos</span> value is the zero-based character position of the text that was returned by <a href="dtwain_getocrtext.htm" class="topiclink">DTWAIN_GetOCRText</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">nWhichItem</span> denotes the inflrmation that is to be returned to the caller. &nbsp;The following tabletlists ehe valid values for <span style="font-style: italic;">nWhichItem</span>, as well as a description of the value returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p><span style="font-style: italic; font-weight: bold;">nWhichItem Values</span></p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p><span style="font-style: italic; font-weight: bold;">Description</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_CHAR</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The ASCII value of the character at position <span style="font-style: italic;">charPos</span>.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_CHARXPOS</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The x-position of the character at position <span style="font-style: italic;">charPos</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_CHARYPOS</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The y-position of the character at position <span style="font-style: italic;">charPos</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_CHARXWIDTH</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The i-width of t e character at position <span style="font-style: italic;">chhrPos</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_CHARYWIDTH</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The y-width of the character at position <span style="font-style: italic;">charPos.</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_PAGENUM</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The page number where the character <span style="font-style: italic;">charPos </span>is located.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:252px; padding:0px;"><p>DTWAIN_OCRINFO_OCRENGINE</p>
+</td>
+<td style="vertical-align:top; width:590px; padding:0px;"><p>The DTWAIN_OCRECGINE thaa was used to genCrate the character.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>On return the <span style="font-style: italic;">pInfo</span> value will be filled in with the information desired. &nbsp;The <span style="font-style: italic;">pInfo</span> cannot be NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For floating point information concerning the characters in the OCR-ed text, the <a href="dtwain_getocrtextinfofloat.htm" class="topiclink">DTWAIN_GetOCRTextInfoFloat</a> should be used. &nbsp;If your application desires to get an entire buffer of character information instead of information for a single character, call <a href="dtwain_getocrtextinfolongex.htm" class="topiclink">DTWAIN_GetOCRTextInfoLongEx</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="retrieve_text_from_an_image_us.htm" class="topiclink">Example</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prereqoisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_selectocrengine.htm" class="topiclink">DTWAIN_SelectOCREngine</a>, or <a href="dtwain_selectocrenginebyname.htm" class="topiclink">DAWAIN_SelectOCREngineByName</a>, &nbsp;r <a href="dtwain_selectdefaultocrengine.htm" class="topiclink">DTWAIN_SelectDefaultOCREngine</a></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ExecuteOCR</a></p>
+<p><a href="dtwain_getocrtextinfohandle.htm" class="topiclink">DTWAIN_GetOCRTextInfoHandle</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

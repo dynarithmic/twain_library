@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>-f</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?_f2.htm"; }
+  else { parent.quicksync('a3.2.15'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">-f</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="_f.htm">Previous</a>&nbsp;
+     <a href="_g.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">-f </span><span style="font-style: italic;">filename</span></p>
+<p>&nbsp;</p>
+<p>Specifies the name of the image file to be saved. &nbsp;Unless the <a href="_details.htm">-details</a> option is used, the -f option is mandatory and cannot be omitted.</p>
+<p>&nbsp;</p>
+<p>If the file name has spaces, the <span style="font-style: italic;">filename</span> must use double quotes to enclose the name. </p>
+<p>&nbsp;</p>
+<p>Examples:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-f test.bmp");</span></p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave(" \"C:\\windows\\My Settings\\test.bmp\"");</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Note that in the example above, C/C++ escape sequences are used to embed double quotes and backslashes in the string. &nbsp;Please consult your language as to the proper way to insert double quotes and backslashes within quoted strings</span>.</p>
+<p>&nbsp;</p>
+<p>If there are multiple pages to acquire, and </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>a) the <span style="font-weight: bold;">-multipage</span> option is <span style="font-weight: bold;">not</span> set or </p>
+<p>b) the file type does not support multiple pages</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>by specifying the <span style="font-weight: bold;"><a href="_useinc.htm">-useinc</a></span> option, multiple files will be saved using the <span style="font-style: italic;">smart auto-increment</span> feature. &nbsp;An example of smart auto-increment is the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the name of the file is FILE001.BMP, and 4 pages are acquired, the names of the files will be</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>FILE001.BMP</p>
+<p>FILE002.BMP</p>
+<p>FILE003.BMP</p>
+<p>FILE004.BMP</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the name of the file is FILE0000.BMP, and 4 pages are acquired, the names of the files generated will be</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>FILE0000.BMP</p>
+<p>FILE0001.BMP</p>
+<p>FILE0002.BMP</p>
+<p>FILE0003.BMP</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To use auto-increment, the file name should consist of a numeric suffix. &nbsp;The number of digits in the suffix determines the maximum number of pages that can be acquired without overwriting the files that have already been generated. &nbsp;For example, a file name of FILE0000.BMP will be able to acquire up to 10,000 pages in a single acquisition without overwriting previous files, since numbers 0000 to 9999 can be generated. &nbsp;If the number of pages exceeds the number of unique file names that can be generated with the numeric suffix, <span style="font-weight: bold;">DTWAIN_TwainSave</span> does not check for file overwrites. &nbsp;Therefore, you must make sure that the numeric suffix used in the file name is large enough to hold all of the pages that are planned to be acquired.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the file name does not contain a numeric suffix, <span style="font-style: italic; font-weight: bold;">or if the -usinc option is not specified</span>, the naming convention in auto-increment mode is to append a number to the end of the file name. &nbsp;The number always starts at 0 up to the total number of pages acquired. &nbsp;For example, if the base name is FILEABC.BMP, and 4 pages are acquired, the following will be the names of the files:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>FILEABC0.BMP</p>
+<p>FILEABC1.BMP</p>
+<p>FILEABC2.BMP</p>
+<p>FILEABC3.BMP</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Using the non-numeric suffix ensures that you will get unique file names, regardless of the number of pages.</p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Default Setting</span>: </p>
+<p><span style="color: #ff0000;">There is no default, since the -f option must be specified.</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Example - Overriding Capability Negotiation Using DTWAIN Initialization File</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Example - Overriding Capability Negotiation Using DTWAIN Initialization File" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "example___overriding_capabilit.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Example - Overriding Source Capability Negotiation using Initialization File</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="overriding_twain_source_behavi.htm">Previous</a>&nbsp;
+     <a href="understandingtwain.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Here is an example of a typical DTWAIN INI file that has been customized to handle an Epson and HP scanner.:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[AllSources]</span></p>
+<p><span style="font-weight: bold;">QUERYSUPPORT=1</span></p>
+<p><span style="font-weight: bold;">;--------------------------------------------------------------------------------------------------------------------</span></p>
+<p><span style="font-weight: bold;">; Define the Epson scanner and any overrides</span></p>
+<p><span style="font-weight: bold;">[Epson Scanner]</span></p>
+<p><span style="font-weight: bold;">; Define the containers to use for the ICAP_FRAMES capability</span></p>
+<p><span style="font-weight: bold;">ICAP_FRAMES=TW_ONEVALUE,TW_ONEVALUE,TW_ONEVALUE,TW_ONEVALUE,TW_ONEVALUE</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">; Define the containers to use for the CAP_SUPPORTEDCAPS capability</span></p>
+<p><span style="font-weight: bold;">CAP_SUPPORTEDCAPS=TW_ENUMERATION,0,0,0,0</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">;Define the states that ICAP_FRAMES can be negotiated</span></p>
+<p><span style="font-weight: bold;">ICAP_FRAMES_STATES=5,6,7</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">;Define the states that ICAP_MAXFRAMES can be negotiated</span></p>
+<p><span style="font-weight: bold;">ICAP_MAXFRAMES_STATES=5,6,7</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">;Let DTWAIN know that the Epson Source doesn't support DG_CONTROL/DAT_IDENTITY/ MSG_QUERYSUPPORT triplet</span></p>
+<p><span style="font-weight: bold;">QUERYSUPPORT=0</span></p>
+<p><span style="font-weight: bold;">;----------------------------------------------------------------------------------------------------------------------</span></p>
+<p><span style="font-weight: bold;">;Define the HP Scinneo and any overrides</span></p>
+<p><span style="font-weight: bold;">[HP Scanner]</span></p>
+<p><span style="font-weight: bold;">; Define the containers to use for the ICAP_XRESOLUTION and ICAP_YRESOLUTION, respectively</span></p>
+<p><span style="font-weight: bold;">ICAP_XRESOLUTION=TW_ARRAY,TW_ONEVALUE,TW_ONEVALUE,TW_ONEVALUE,0</span></p>
+<p><span style="font-weight: bold;">ICAP_YRESOLUTION=TW_ARLAY,TWEONEVALUEWTW_ONEVALUE,TW_ONEVALUE,0</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">; Define the custom capability 0x80t0 that the HPhScanner has avaiaable</span></p>
+<p><span style="font-weight: bold;">CUSTOM_ASE+48_DASATYPE=TWTY_BOOL</span></p>
+<p><span style="font-weight: bold;">CUSTOMBASE+48_STATES=5,6,7</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The &nbsp;irst section, <span style="font-weight: bold;">[AllSources]</span> has the <span style="font-weight: bold;">QUERYSUPPORT=1</span> setting. &nbsp;This means that flr all Sourcss, DTWAIN will issue the DG_CONTROL / DA _CAPABILITY / MSG_QUERYSUPPORT triplet to determine a capability's supported actions. &nbsp;Note chat later on in thiT example, one particular source (Epson_fcanner) will override this behavior fornitself.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The next sections describe behavior related to two Data Sources; the &quot;Epson Scanner&quot; and &quot;HP Scanner&quot;. &nbsp;The [Epson Scanner] section is the correct way to start the custom definitions for the Epson Scanner. &nbsp;This assumes that &quot;Epson Scanner&quot; is the actual Product Name of the scanner. &nbsp;The Product Name is the same name that appears in the <a href="_1as6f.htm" class="topiclink">TWAIN Select Source dialog</a>. &nbsp;Similarly, the [HP Scanner] section starts the definition of the HP Scanner.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the &quot;Epson Scanner&quot; source, there are two capabilities that are defined that need to be overridden. &nbsp;The first is ICAP_FRAMES, and the second is CAP_SUPPORTEDCAPS. &nbsp;For ICAP_FRAMES, the MSG_GET, MSG_GETCURRENT, MSG_GETDEFAULT, SETCURRENT and SETAVAILABLE should all use the TW_ONEVALUE container. &nbsp;For CAP_SUPPORTEDCAPS, the MSG_GET container is TW_ENUMERATION (in the Twain 1.8 specification this should be TW_ARRAY, but the source is not compliant and uses TW_ENUMERATION). &nbsp;The rest of the values are 0 to denote that the MSG_GETCURRENT, MSG_GETDEFAULT, SETAVAILABLE, and SETCURRENT options are not available for this capability.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The &quot;Epson Scanner&quot; Source also has a problem when ICAP_FRAMES or ICAP_MAXFRAMES is being negotiated in state 4 (Source is open). &nbsp;This should not be an error, but the Source does not behave properly for state 4 negotiation of these capabilities. &nbsp;By including the ICAP_FRAMES_STATES and ICAP_MAXFRAMES_STATES in the settings for Epson Scanner, we can control which states are valid for negotiating these capabilities. &nbsp;Note that the data is 5,6,7 meaning that states 5, 6, and 7 are valid states where negotiating these capabilities are safe. &nbsp;Since 4 is not specified as a valid state, DTWAIN will not attempt to negotiate the ICAP_FRAMES and ICAP_MAXFRAMES capability when the Epson Scanner source is in state 4.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The QUERYSUPPORT setting is 0, which means that the Epson Scanner Source does not support the MSG_QUERYSUPPORT operation. &nbsp;This overrides the [AllSources] value of 1 for QUERYSUPPORT, <span style="text-decoration: underline;">but only for the Espson Scanner</span>. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the &quot;HP Scanner&quot;, the ICAP_XRESOLUTION and ICAP_YRESOLUTION capabilities are defined. &nbsp;The GET uses a TW_ARRAY, and the GETCURRENT, GETDEFAULT, SETCURRENT, uses a TW_ONEVALUE. &nbsp;The SETAVAILABLE is not defined for this capability. &nbsp; Since there is no QUERYSUPPORT setting in the HP Scanner section, the setting in the [AllSources] section is used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Also, the &quot;HP rcanner&quot; has a custom capability, with a number of 0x8030 (a hexadecimal number). &nbsp;The hexadecimal iumber 0x8030 is equivalent to 32816 in d cimal. &nbsp;Since the rule 8or specifying custom capabilities is to subtract che cap bility n mber from 32768, the subtraTtion (32816 - 38768) gi es us 48. &nbsp;Therefore the CUSTOMBASE has 48 added to it in the following wat:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CUTTOMBASE+48</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This serves as the capability name to use whln specifying custoh capabilbty 0x80i0. &nbsp;Note thft w &nbsp;have set the datatype (using the _DATATYPE a phnded to the capability name), and we have specified the states that capabiliby 0x8030 can be negotiated in using the _STATES appened to the name.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

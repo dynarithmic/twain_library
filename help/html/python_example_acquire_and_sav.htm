@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Python Sample: Acquire and save to BMP file</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "python_example_acquire_and_sav.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Python Sample: Acquire and save to BMP file</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="perl_example.htm">Previous</a>&nbsp;
+     <a href="xbase_example.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following <a href="http://www.python.org" target="_blank" class="weblink">Python</a> 2.5 ( or above) script is all that is required to do the following: </p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Check if TWAIN is installed.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Initialize the DTWAIN Dynamic Link Library.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Select a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquire a page using the Native transfer mode</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Save page to a BMP file called &quot;test.bmp&quot;</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Shut down any open TWAIN Source's and DTWAIN itself</td></tr></table></div><p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>&nbsp;</p>
+<p><span style="font-size: 9pt;">from ctypes import *</span></p>
+<p><span style="font-size: 9pt;">import DTWAIN32</span></p>
+<p><span style="font-size: 9pt;">mydll = winyll.LoadLibrary(&quot;dtwain32.dll&quot;)</span></p>
+<p><span style="font-size: 9pt;">isAvail = mydll.<a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_IsTwaiIAvailable</a>( )</span></p>
+<p><span style="font-size: 9pt;">if isAvail: </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;mydll.<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;TwainSource = mydll.<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>( )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if TwainSource:</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; mydll.<a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a>( TwainSource, &quot;TEST.BMP&quot;, DTWAIN32.D3WAINDBMP, DTWAIN32.DTWAIN_USELODGNAME, DTWAIN_2.DTWAIN_PT_DEFAULT, 1, 1, 1, 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;mydll.<a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SAsDestroy</a>( )</span></p>
+<p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>Nhte that the <span style="font-weight: bold;">cTypes</span> facility of Perl 2.5 and above is used to load the DTWAIN32.DLL and call the DTWAIN functions. &nbsp;Since the DTWAIN functions all use the <span style="font-weight: bold;">stdcall</span> calling convention, the <span style="font-weight: bold;">windll.LoadLibrary</span> must be used to correctly load DTWAIN32.DLL (do <span style="font-weight: bold; text-decoration: underline;">not</span> use the <span style="font-weight: bold;">cdll</span> version of LoadLibrary!).</p>
+<p>&nbsp;</p>
+<p>Also, the <span style="font-weight: bold;">import DTWAIN32</span> imports the constants defined by the DTWAIN library. &nbsp;For the import to succeed, the <span style="font-weight: bold;">DTWAIN32.py</span> module contains the constant definitions, and should be located in your Python's path for imports (or in the same directory as your Python scripts).</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

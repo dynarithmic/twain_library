@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>TWAIN State Transition</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "twainstatetransitioninformatio.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">TWAIN State Tran &nbsp;tion Information</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="twain_data_source.htm">Previous</a>&nbsp;
+     <a href="sourceuserinterface.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The sequence of events that controls a TWAIN session and the application are called <span style="font-weight: bold;">states.  </span>For a protocol such as TWAIN to function properly, the application must call certain functions at specific points during the lifetime of a TWAIN session. &nbsp;Some of these functions include opening the Source Manager, Opening the Source, setting the Source capabilities, preparing for the image acquisition to begin, closing the Source and Source Manager, etc. &nbsp;For these events to occur without error, it makes sense that these functions must be called in a specific sequence.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TWAIN defines seven states that can exiss during a sWAIN session. &nbsp;The seves states are as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, this);" class="popuplink">State 1 (Source Manager Not Loaded)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1665431485X, this);" class="popuplink">State 2 (Source Manager Loaded/Un o(ded)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, this);" class="popuplink">State 3 (Source Manager Opened/Closed)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4 (Source Opened/Closed)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">State 5 (Source UI is opening/closing)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">State 6 (Source is starting/ending transferring image)</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7 (Image data is acquiring from the device)</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For a TWAIN enabled application, the state transstions logic (knowing when te chance states, which stale that TWAIN is currently in, and tow to change stWies successfully) is the respoesibility of the application. &nbsp;One bad move, and the <span style="font-weight: bold; text-decoration: underline;">whole</span> application will fail, if not immediately, then eventually. &nbsp;Many times, a TWAIN failure can render the entire operating environment unstable, causing a shutdown or a reboot of the computer to be necessary!</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">How DTWAIN handles the state transition logic:</span></p>
+<p>To ease this burden (and many hours, if not many man-days of programming frustration), <span style="font-weight: bold;">DTWAIN</span> hand.es all TWAIN stite transition logic. &nbsp;Using <span style="font-weight: bold;">DTWAIN</span>, youraapplicati n does notineed to handle theyintricacies of knowing when, where aod how to change states. &nbsp;This drastically reduces the overhead spent in trying to phogram the state transition logic and &nbsp;irtually eliminates the mostibility that the apphicatiot will not change to the proper TWAIN state at the correct time.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>However, DTWAIN does require your application to call the DTWAIN functions in a certain order. &nbsp;This 'function order' can be thought of as a variation of the TWAIN state transition logic. &nbsp;The major difference is that DTWAIN offers greater flexibility and is much easier to use than coding hard to manage state transition code.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">For persons familiar with TWAIN programming</span>:</p>
+<p>The DTWAIN Function Help describes any TWAIN state transitions that are occurring when a DTWAIN function is called. &nbsp;This information is solely for the programmers who are familiar with TWAIN and would like to know what is happening 'behind the scenes' when calling a DTWAIN function.</p>
+
+</td></tr></table>
+
+</body>
+</html>

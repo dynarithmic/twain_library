@@ -1,0 +1,1138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Win32_DTWAINDLL_D|Win32">
+      <Configuration>Win32_DTWAINDLL_D</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win32_DTWAINDLL_U_D|Win32">
+      <Configuration>Win32_DTWAINDLL_U_D</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win32_DTWAINDLL_U|Win32">
+      <Configuration>Win32_DTWAINDLL_U</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win32_DTWAINDLL|Win32">
+      <Configuration>Win32_DTWAINDLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win64_DTWAINDLL_D|x64">
+      <Configuration>Win64_DTWAINDLL_D</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win64_DTWAINDLL_U_D|x64">
+      <Configuration>Win64_DTWAINDLL_U_D</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win64_DTWAINDLL_U|x64">
+      <Configuration>Win64_DTWAINDLL_U</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Win64_DTWAINDLL|x64">
+      <Configuration>Win64_DTWAINDLL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>DTWAIN_DLL</ProjectName>
+    <ProjectGuid>{CCA03A98-B8AB-41CA-985F-4100371FE5ED}</ProjectGuid>
+    <RootNamespace>DTWAIN_ALL</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <PlatformToolset>v90</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Template|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">binaries\$(PlatformArchitecture)bit\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">binaries\$(PlatformArchitecture)bit\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">binaries\$(PlatformArchitecture)bit\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">binaries\$(PlatformArchitecture)bit\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">.\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">.\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">.\obj\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_Release|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">false</EmbedManifest>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'">.\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'">.\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'">.\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'">.\obj\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'" />
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">dtwain$(PlatformArchitecture)ud</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">dtwain$(PlatformArchitecture)u</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">dtwain$(PlatformArchitecture)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">dtwain$(PlatformArchitecture)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'">
+    <OutDir>binaries\$(PlatformArchitecture)bit\</OutDir>
+    <TargetName>dtwain$(PlatformArchitecture)ud</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <EmbedManifest>false</EmbedManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'">
+    <OutDir>binaries\$(PlatformArchitecture)bit\</OutDir>
+    <TargetName>dtwain$(PlatformArchitecture)u</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <EmbedManifest>false</EmbedManifest>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'">
+    <OutDir>binaries\$(PlatformArchitecture)bit\</OutDir>
+    <TargetName>dtwain$(PlatformArchitecture)</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <EmbedManifest>false</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'">
+    <OutDir>binaries\$(PlatformArchitecture)bit\</OutDir>
+    <TargetName>dtwain$(PlatformArchitecture)d</TargetName>
+    <TargetExt>.dll</TargetExt>
+    <EmbedManifest>false</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">
+    <IntDir>.\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\bin\Win32_Release_6_PDF_Debug/twil32_new.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_UNICODE;_SCL_SECURE_NO_WARNINGS;DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;_DEBUG;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;vfw32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)ud$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\def\dtwain32_u_d.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <BaseAddress>0x67900000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\Win32\DebugU</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\bin\Win32_Release_6_PDF_Debug/twil32_new.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;NDEBUG;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;vfw32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)u$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\def\dtwain32_u.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <BaseAddress>0x67900000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
+      <AdditionalLibraryDirectories>.\FreeImage\Source\FreeImageLib\Win32\ReleaseU;.\boost\boost_libs\$(PlatformArchitecture)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\bin\Win32_Release_6_PDF_Debug/twil32_new.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;NDEBUG;PDFLIB_INTERNAL;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;vfw32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\def\dtwain32.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <BaseAddress>0x67900000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\Win32\Release</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+      <Outputs>%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\bin\Win32_Release_6_PDF_Debug/twil32_new.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;_DEBUG;PDFLIB_INTERNAL;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/fixed:no %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;vfw32.lib;FreeImageLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)d$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ModuleDefinitionFile>.\def\dtwain32_d.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <BaseAddress>0x67900000</BaseAddress>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <MinimumRequiredVersion>5.01</MinimumRequiredVersion>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\Win32\Debug</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>.\def\dtwain64_u_d.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\x64\DebugU</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)ud$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;_DEBUG;WIN64;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>.\def\dtwain64_u.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\x64\ReleaseU</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)u$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;NDEBUG;WIN64;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Full</Optimization>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUGNDEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>.\def\dtwain64.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\x64\Release</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;NDEBUG;WIN64;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AssemblerListingLocation>.\obj\$(Configuration)\</AssemblerListingLocation>
+      <ObjectFileName>.\obj\$(Configuration)\</ObjectFileName>
+      <ProgramDataBaseFileName>.\obj\$(Configuration)\</ProgramDataBaseFileName>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <DisableSpecificWarnings>4510;4610;4100;4706;4127;4516;4512;4702;4310;4206;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ModuleDefinitionFile>.\def\dtwain64_d.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>.\boost\boost_libs\$(PlatformArchitecture);.\FreeImage\Source\FreeImageLib\x64\Debug</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)dtwain$(PlatformArchitecture)d$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);FreeImageLib.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>DTWAIN_OPENSOURCE_DISTRIBUTION;_DEBUG;WIN64;PDFLIB_INTERNAL;UNICODE;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\h;C:\Microsoft Visual Studio 8\VC\PlatformSDK\Include;C:\Microsoft Visual Studio 8\VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)txt\*.txt $(TargetDir)*.txt</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include=".\cpp\ctlacquirearea.cpp" />
+    <ClCompile Include=".\cpp\ctlacquirebuffered.cpp" />
+    <ClCompile Include=".\cpp\ctlacquireclipboard.cpp" />
+    <ClCompile Include=".\cpp\ctlacquirefile.cpp" />
+    <ClCompile Include=".\cpp\ctlacquirenative.cpp" />
+    <ClCompile Include=".\cpp\ctlarray.cpp" />
+    <ClCompile Include=".\cpp\ctlblankpage.cpp" />
+    <ClCompile Include=".\cpp\ctlcalldsmproc.cpp" />
+    <ClCompile Include=".\cpp\ctlcapcollect.cpp" />
+    <ClCompile Include=".\cpp\ctlcapcontainerfuncs.cpp" />
+    <ClCompile Include=".\cpp\ctlcapenumfuncs.cpp" />
+    <ClCompile Include=".\cpp\ctlcapsupport.cpp" />
+    <ClCompile Include=".\cpp\ctlcompressionsize.cpp" />
+    <ClCompile Include=".\cpp\ctldeviceevents.cpp" />
+    <ClCompile Include=".\cpp\ctldtwaininit.cpp" />
+    <ClCompile Include=".\cpp\ctldtwainmem2.cpp" />
+    <ClCompile Include=".\cpp\ctlduplex.cpp" />
+    <ClCompile Include=".\cpp\ctlflipbmp.cpp" />
+    <ClCompile Include=".\cpp\ctlgetcapinfo.cpp" />
+    <ClCompile Include=".\cpp\ctlimageerrorskip.cpp" />
+    <ClCompile Include=".\cpp\ctlimageinfo.cpp" />
+    <ClCompile Include=".\cpp\ctlloggercallback.cpp" />
+    <ClCompile Include=".\cpp\ctllogmessage.cpp" />
+    <ClCompile Include=".\cpp\ctlmanualduplex.cpp" />
+    <ClCompile Include=".\cpp\ctlmaxacquires.cpp" />
+    <ClCompile Include=".\cpp\ctlmultipagescan.cpp" />
+    <ClCompile Include=".\cpp\ctlpatchsupport.cpp" />
+    <ClCompile Include=".\cpp\ctlpixbitdepth.cpp" />
+    <ClCompile Include=".\cpp\ctlprinter.cpp" />
+    <ClCompile Include=".\cpp\ctlsavefilename.cpp" />
+    <ClCompile Include=".\cpp\ctlsetgetcaps.cpp" />
+    <ClCompile Include=".\cpp\ctlshowuionly.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceacquire.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceclose.cpp" />
+    <ClCompile Include=".\cpp\ctlsourcedibs.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceenum.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceinfo.cpp" />
+    <ClCompile Include=".\cpp\ctlsourcenames.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceopen.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceretries.cpp" />
+    <ClCompile Include=".\cpp\ctlsourcescale.cpp" />
+    <ClCompile Include=".\cpp\ctlsourceselect.cpp" />
+    <ClCompile Include=".\cpp\ctlsrceoj.cpp" />
+    <ClCompile Include=".\cpp\ctltr032.cpp" />
+    <ClCompile Include=".\cpp\ctltr040.cpp" />
+    <ClCompile Include=".\cpp\ctltwaindllhandle.cpp" />
+    <ClCompile Include=".\cpp\ctltwainmsgloop.cpp" />
+    <ClCompile Include=".\cpp\ctluicontrollable.cpp" />
+    <ClCompile Include=".\cpp\ctluienabled.cpp" />
+    <ClCompile Include=".\cpp\ctltr000.cpp" />
+    <ClCompile Include=".\cpp\ctltr001.cpp" />
+    <ClCompile Include=".\cpp\ctltr002.cpp" />
+    <ClCompile Include=".\cpp\ctltr003.cpp" />
+    <ClCompile Include=".\cpp\ctltr004.cpp" />
+    <ClCompile Include=".\cpp\ctltr005.cpp" />
+    <ClCompile Include=".\cpp\ctltr006.cpp" />
+    <ClCompile Include=".\cpp\ctltr007.cpp" />
+    <ClCompile Include=".\cpp\ctltr008.cpp" />
+    <ClCompile Include=".\cpp\ctltr009.cpp" />
+    <ClCompile Include=".\cpp\ctltr010.cpp" />
+    <ClCompile Include=".\cpp\ctltr011.cpp" />
+    <ClCompile Include=".\cpp\ctltr012.cpp" />
+    <ClCompile Include=".\cpp\ctltr013.cpp" />
+    <ClCompile Include=".\cpp\ctltr014.cpp" />
+    <ClCompile Include=".\cpp\ctltr015.cpp" />
+    <ClCompile Include=".\cpp\ctltr016.cpp" />
+    <ClCompile Include=".\cpp\ctltr017.cpp" />
+    <ClCompile Include=".\cpp\ctltr018.cpp" />
+    <ClCompile Include=".\cpp\ctltr019.cpp" />
+    <ClCompile Include=".\cpp\ctltr020.cpp" />
+    <ClCompile Include=".\cpp\ctltr021.cpp" />
+    <ClCompile Include=".\cpp\ctltr022.cpp" />
+    <ClCompile Include=".\cpp\ctltr023.cpp" />
+    <ClCompile Include=".\cpp\ctltr024.cpp" />
+    <ClCompile Include=".\cpp\ctltr025.cpp" />
+    <ClCompile Include=".\cpp\ctltr026.cpp" />
+    <ClCompile Include=".\cpp\ctltr027.cpp" />
+    <ClCompile Include=".\cpp\ctltr028.cpp" />
+    <ClCompile Include=".\cpp\ctltr029.cpp" />
+    <ClCompile Include=".\cpp\ctltr030.cpp" />
+    <ClCompile Include=".\cpp\ctltr031.cpp" />
+    <ClCompile Include=".\cpp\ctltr033.cpp" />
+    <ClCompile Include=".\cpp\ctltr034.cpp" />
+    <ClCompile Include=".\cpp\ctltr035.cpp" />
+    <ClCompile Include=".\cpp\ctltr036.cpp" />
+    <ClCompile Include=".\cpp\ctltr037.cpp" />
+    <ClCompile Include=".\cpp\ctltr038.cpp" />
+    <ClCompile Include=".\cpp\ctltr039.cpp" />
+    <ClCompile Include=".\cpp\ctltrp.cpp" />
+    <ClCompile Include=".\cpp\ctlobtyp.cpp" />
+    <ClCompile Include=".\cpp\ctlunicodeimpl.cpp" />
+    <ClCompile Include=".\cpp\ctlhigh.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">false</PreprocessToFile>
+    </ClCompile>
+    <ClCompile Include=".\cpp\ctljob.cpp" />
+    <ClCompile Include=".\cpp\ctlfeed.cpp" />
+    <ClCompile Include=".\cpp\ctldevnt.cpp" />
+    <ClCompile Include=".\cpp\ctlsupport.cpp" />
+    <ClCompile Include=".\cpp\ctlfsys.cpp" />
+    <ClCompile Include=".\cpp\ctlverifysourcehandle.cpp" />
+    <ClCompile Include=".\cpp\imagexferfilewriter.cpp" />
+    <ClCompile Include=".\c\Imagefun\dtwpdf\md5c.c" />
+    <ClCompile Include=".\dtwinver\Dtwinver.cpp" />
+    <ClCompile Include=".\dtwinver\Getwinver.cpp" />
+    <ClCompile Include=".\cpp\ctlres.cpp" />
+    <ClCompile Include=".\cpp\ctltwmgr.cpp" />
+    <ClCompile Include=".\cpp\ctltwses.cpp" />
+    <ClCompile Include=".\cpp\ctltwsrc.cpp" />
+    <ClCompile Include=".\cpp\ctlwproc.cpp" />
+    <ClCompile Include=".\cpp\ctlflog.cpp" />
+    <ClCompile Include=".\cpp\errstruc.cpp" />
+    <ClCompile Include=".\cpp\logmsg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include=".\cpp\ctlreg.cpp" />
+    <ClCompile Include=".\cpp\ctlxmlparse.cpp" />
+    <ClCompile Include=".\cpp\a85decoder.cpp" />
+    <ClCompile Include=".\cpp\ctltempdir.cpp" />
+    <ClCompile Include=".\cpp\ocrengine\ocrinterface.cpp" />
+    <ClCompile Include=".\cpp\ocrengine\ocrinterface_internal.cpp" />
+    <ClCompile Include=".\cpp\imagefun\txtfun32.cpp" />
+    <ClCompile Include=".\cpp\ocrengine\transym_ocrinterface.cpp" />
+    <ClCompile Include=".\c\imagefun\dtwpdf\crc32_aux.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include=".\cpp\ctljpeg.cpp" />
+    <ClCompile Include=".\cpp\ctltiff.cpp" />
+    <ClCompile Include=".\cpp\imagefun\tiffun32.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include=".\cpp\imagefun\pcxfun32.cpp" />
+    <ClCompile Include=".\cpp\ctldib32.cpp" />
+    <ClCompile Include=".\cpp\iohandler_base.cpp" />
+    <ClCompile Include=".\cpp\iohandler_bmp.cpp" />
+    <ClCompile Include=".\cpp\iohandler_gif.cpp" />
+    <ClCompile Include=".\cpp\iohandler_ico.cpp" />
+    <ClCompile Include=".\cpp\iohandler_jpeg.cpp" />
+    <ClCompile Include=".\cpp\iohandler_jpeg2k.cpp" />
+    <ClCompile Include=".\cpp\iohandler_pcx.cpp" />
+    <ClCompile Include=".\cpp\iohandler_pdf.cpp" />
+    <ClCompile Include=".\cpp\iohandler_png.cpp" />
+    <ClCompile Include=".\cpp\iohandler_ps.cpp" />
+    <ClCompile Include=".\cpp\iohandler_psd.cpp" />
+    <ClCompile Include=".\cpp\iohandler_text.cpp" />
+    <ClCompile Include=".\cpp\iohandler_tga.cpp" />
+    <ClCompile Include=".\cpp\iohandler_tiff.cpp" />
+    <ClCompile Include=".\cpp\iohandler_wbmp.cpp" />
+    <ClCompile Include=".\cpp\iohandler_wmf.cpp" />
+    <ClCompile Include=".\cpp\imagefun\winbit32.cpp" />
+    <ClCompile Include=".\cpp\imagefun\wmffun32.cpp" />
+    <ClCompile Include=".\cpp\ctlpdf.cpp">
+    </ClCompile>
+    <ClCompile Include=".\cpp\imagefun\pdffun32.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\a85encode.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\ahexencode.cpp">
+    </ClCompile>
+    <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwainpdf.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\md5class.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\md5class2.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\pdfencrypt.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\pdflib32.cpp">
+    </ClCompile>
+    <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwgetopt.cpp">
+    </ClCompile>
+    <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwtiff2ps.cpp">
+    </ClCompile>
+    <ClCompile Include=".\imagedlls\pdflib32\pslib32.cpp">
+    </ClCompile>
+    <ClCompile Include="cpp\ctlerrorbuffer.cpp" />
+    <ClCompile Include="cpp\ctlfileappend.cpp" />
+    <ClCompile Include="cpp\ctlfileutils.cpp" />
+    <ClCompile Include="cpp\ctlgetmetrics.cpp" />
+    <ClCompile Include="cpp\ctltimeout.cpp" />
+    <ClCompile Include="cpp\ctltr041.cpp" />
+    <ClCompile Include="cpp\ctltr042.cpp" />
+    <ClCompile Include="cpp\ctltsstub.cpp" />
+    <ClCompile Include="cpp\ctlupdatedibproc.cpp" />
+    <ClCompile Include="cpp\iohandler_pbm.cpp" />
+    <ClCompile Include="cpp\iohandler_webp.cpp" />
+    <ClCompile Include="cpp\linux_versioninfo.cpp" />
+    <ClCompile Include="cpp\windows_versioninfo.cpp" />
+    <ClCompile Include="cryptolib\3way.cpp" />
+    <ClCompile Include="cryptolib\adler32.cpp" />
+    <ClCompile Include="cryptolib\algebra.cpp" />
+    <ClCompile Include="cryptolib\algparam.cpp" />
+    <ClCompile Include="cryptolib\arc4.cpp" />
+    <ClCompile Include="cryptolib\aria.cpp" />
+    <ClCompile Include="cryptolib\ariatab.cpp" />
+    <ClCompile Include="cryptolib\aria_simd.cpp" />
+    <ClCompile Include="cryptolib\asn.cpp" />
+    <ClCompile Include="cryptolib\authenc.cpp" />
+    <ClCompile Include="cryptolib\base32.cpp" />
+    <ClCompile Include="cryptolib\base64.cpp" />
+    <ClCompile Include="cryptolib\basecode.cpp" />
+    <ClCompile Include="cryptolib\bfinit.cpp" />
+    <ClCompile Include="cryptolib\blake2.cpp" />
+    <ClCompile Include="cryptolib\blake2b_simd.cpp" />
+    <ClCompile Include="cryptolib\blake2s_simd.cpp" />
+    <ClCompile Include="cryptolib\blowfish.cpp" />
+    <ClCompile Include="cryptolib\blumshub.cpp" />
+    <ClCompile Include="cryptolib\camellia.cpp" />
+    <ClCompile Include="cryptolib\cast.cpp" />
+    <ClCompile Include="cryptolib\casts.cpp" />
+    <ClCompile Include="cryptolib\cbcmac.cpp" />
+    <ClCompile Include="cryptolib\ccm.cpp" />
+    <ClCompile Include="cryptolib\chacha.cpp" />
+    <ClCompile Include="cryptolib\chachapoly.cpp" />
+    <ClCompile Include="cryptolib\chacha_avx.cpp" />
+    <ClCompile Include="cryptolib\chacha_simd.cpp" />
+    <ClCompile Include="cryptolib\cham.cpp" />
+    <ClCompile Include="cryptolib\cham_simd.cpp" />
+    <ClCompile Include="cryptolib\channels.cpp" />
+    <ClCompile Include="cryptolib\cmac.cpp" />
+    <ClCompile Include="cryptolib\cpu.cpp" />
+    <ClCompile Include="cryptolib\crc.cpp" />
+    <ClCompile Include="cryptolib\crc_simd.cpp" />
+    <ClCompile Include="cryptolib\cryptlib.cpp" />
+    <ClCompile Include="cryptolib\darn.cpp" />
+    <ClCompile Include="cryptolib\default.cpp" />
+    <ClCompile Include="cryptolib\des.cpp" />
+    <ClCompile Include="cryptolib\dessp.cpp" />
+    <ClCompile Include="cryptolib\dh.cpp" />
+    <ClCompile Include="cryptolib\dh2.cpp" />
+    <ClCompile Include="cryptolib\dll.cpp" />
+    <ClCompile Include="cryptolib\donna_32.cpp" />
+    <ClCompile Include="cryptolib\donna_64.cpp" />
+    <ClCompile Include="cryptolib\donna_sse.cpp" />
+    <ClCompile Include="cryptolib\dsa.cpp" />
+    <ClCompile Include="cryptolib\eax.cpp" />
+    <ClCompile Include="cryptolib\ec2n.cpp" />
+    <ClCompile Include="cryptolib\eccrypto.cpp" />
+    <ClCompile Include="cryptolib\ecp.cpp" />
+    <ClCompile Include="cryptolib\elgamal.cpp" />
+    <ClCompile Include="cryptolib\emsa2.cpp" />
+    <ClCompile Include="cryptolib\eprecomp.cpp" />
+    <ClCompile Include="cryptolib\esign.cpp" />
+    <ClCompile Include="cryptolib\files.cpp" />
+    <ClCompile Include="cryptolib\filters.cpp" />
+    <ClCompile Include="cryptolib\fips140.cpp" />
+    <ClCompile Include="cryptolib\fipsalgt.cpp" />
+    <ClCompile Include="cryptolib\gcm.cpp" />
+    <ClCompile Include="cryptolib\gcm_simd.cpp" />
+    <ClCompile Include="cryptolib\gf256.cpp" />
+    <ClCompile Include="cryptolib\gf2n.cpp" />
+    <ClCompile Include="cryptolib\gf2n_simd.cpp" />
+    <ClCompile Include="cryptolib\gf2_32.cpp" />
+    <ClCompile Include="cryptolib\gfpcrypt.cpp" />
+    <ClCompile Include="cryptolib\gost.cpp" />
+    <ClCompile Include="cryptolib\gzip.cpp" />
+    <ClCompile Include="cryptolib\hc128.cpp" />
+    <ClCompile Include="cryptolib\hc256.cpp" />
+    <ClCompile Include="cryptolib\hex.cpp" />
+    <ClCompile Include="cryptolib\hight.cpp" />
+    <ClCompile Include="cryptolib\hmac.cpp" />
+    <ClCompile Include="cryptolib\hrtimer.cpp" />
+    <ClCompile Include="cryptolib\ida.cpp" />
+    <ClCompile Include="cryptolib\idea.cpp" />
+    <ClCompile Include="cryptolib\integer.cpp" />
+    <ClCompile Include="cryptolib\iterhash.cpp" />
+    <ClCompile Include="cryptolib\kalyna.cpp" />
+    <ClCompile Include="cryptolib\kalynatab.cpp" />
+    <ClCompile Include="cryptolib\keccak.cpp" />
+    <ClCompile Include="cryptolib\keccak_core.cpp" />
+    <ClCompile Include="cryptolib\keccak_simd.cpp" />
+    <ClCompile Include="cryptolib\lea.cpp" />
+    <ClCompile Include="cryptolib\lea_simd.cpp" />
+    <ClCompile Include="cryptolib\luc.cpp" />
+    <ClCompile Include="cryptolib\mars.cpp" />
+    <ClCompile Include="cryptolib\marss.cpp" />
+    <ClCompile Include="cryptolib\md2.cpp" />
+    <ClCompile Include="cryptolib\md4.cpp" />
+    <ClCompile Include="cryptolib\md5.cpp" />
+    <ClCompile Include="cryptolib\misc.cpp" />
+    <ClCompile Include="cryptolib\modes.cpp" />
+    <ClCompile Include="cryptolib\mqueue.cpp" />
+    <ClCompile Include="cryptolib\mqv.cpp" />
+    <ClCompile Include="cryptolib\nbtheory.cpp" />
+    <ClCompile Include="cryptolib\neon_simd.cpp" />
+    <ClCompile Include="cryptolib\oaep.cpp" />
+    <ClCompile Include="cryptolib\osrng.cpp" />
+    <ClCompile Include="cryptolib\padlkrng.cpp" />
+    <ClCompile Include="cryptolib\panama.cpp" />
+    <ClCompile Include="cryptolib\pch.cpp" />
+    <ClCompile Include="cryptolib\pkcspad.cpp" />
+    <ClCompile Include="cryptolib\poly1305.cpp" />
+    <ClCompile Include="cryptolib\polynomi.cpp" />
+    <ClCompile Include="cryptolib\ppc_power7.cpp" />
+    <ClCompile Include="cryptolib\ppc_power8.cpp" />
+    <ClCompile Include="cryptolib\ppc_power9.cpp" />
+    <ClCompile Include="cryptolib\ppc_simd.cpp" />
+    <ClCompile Include="cryptolib\pssr.cpp" />
+    <ClCompile Include="cryptolib\pubkey.cpp" />
+    <ClCompile Include="cryptolib\queue.cpp" />
+    <ClCompile Include="cryptolib\rabbit.cpp" />
+    <ClCompile Include="cryptolib\rabin.cpp" />
+    <ClCompile Include="cryptolib\randpool.cpp" />
+    <ClCompile Include="cryptolib\rc2.cpp" />
+    <ClCompile Include="cryptolib\rc5.cpp" />
+    <ClCompile Include="cryptolib\rc6.cpp" />
+    <ClCompile Include="cryptolib\rdtables.cpp" />
+    <ClCompile Include="cryptolib\rijndael.cpp" />
+    <ClCompile Include="cryptolib\rijndael_simd.cpp" />
+    <ClCompile Include="cryptolib\ripemd.cpp" />
+    <ClCompile Include="cryptolib\rng.cpp" />
+    <ClCompile Include="cryptolib\rsa.cpp" />
+    <ClCompile Include="cryptolib\rw.cpp" />
+    <ClCompile Include="cryptolib\safer.cpp" />
+    <ClCompile Include="cryptolib\salsa.cpp" />
+    <ClCompile Include="cryptolib\scrypt.cpp" />
+    <ClCompile Include="cryptolib\seal.cpp" />
+    <ClCompile Include="cryptolib\seed.cpp" />
+    <ClCompile Include="cryptolib\serpent.cpp" />
+    <ClCompile Include="cryptolib\sha.cpp" />
+    <ClCompile Include="cryptolib\sha3.cpp" />
+    <ClCompile Include="cryptolib\shacal2.cpp" />
+    <ClCompile Include="cryptolib\shacal2_simd.cpp" />
+    <ClCompile Include="cryptolib\shake.cpp" />
+    <ClCompile Include="cryptolib\shark.cpp" />
+    <ClCompile Include="cryptolib\sharkbox.cpp" />
+    <ClCompile Include="cryptolib\sha_simd.cpp" />
+    <ClCompile Include="cryptolib\simeck.cpp" />
+    <ClCompile Include="cryptolib\simeck_simd.cpp" />
+    <ClCompile Include="cryptolib\simon.cpp" />
+    <ClCompile Include="cryptolib\simon128_simd.cpp" />
+    <ClCompile Include="cryptolib\simon64_simd.cpp" />
+    <ClCompile Include="cryptolib\simple.cpp" />
+    <ClCompile Include="cryptolib\skipjack.cpp" />
+    <ClCompile Include="cryptolib\sm3.cpp" />
+    <ClCompile Include="cryptolib\sm4.cpp" />
+    <ClCompile Include="cryptolib\sm4_simd.cpp" />
+    <ClCompile Include="cryptolib\sosemanuk.cpp" />
+    <ClCompile Include="cryptolib\speck.cpp" />
+    <ClCompile Include="cryptolib\speck128_simd.cpp" />
+    <ClCompile Include="cryptolib\speck64_simd.cpp" />
+    <ClCompile Include="cryptolib\square.cpp" />
+    <ClCompile Include="cryptolib\squaretb.cpp" />
+    <ClCompile Include="cryptolib\sse_simd.cpp" />
+    <ClCompile Include="cryptolib\strciphr.cpp" />
+    <ClCompile Include="cryptolib\tea.cpp" />
+    <ClCompile Include="cryptolib\tftables.cpp" />
+    <ClCompile Include="cryptolib\threefish.cpp" />
+    <ClCompile Include="cryptolib\tiger.cpp" />
+    <ClCompile Include="cryptolib\tigertab.cpp" />
+    <ClCompile Include="cryptolib\ttmac.cpp" />
+    <ClCompile Include="cryptolib\tweetnacl.cpp" />
+    <ClCompile Include="cryptolib\twofish.cpp" />
+    <ClCompile Include="cryptolib\vmac.cpp" />
+    <ClCompile Include="cryptolib\wake.cpp" />
+    <ClCompile Include="cryptolib\whrlpool.cpp" />
+    <ClCompile Include="cryptolib\xed25519.cpp" />
+    <ClCompile Include="cryptolib\xtr.cpp" />
+    <ClCompile Include="cryptolib\xtrcrypt.cpp" />
+    <ClCompile Include="cryptolib\zdeflate.cpp" />
+    <ClCompile Include="cryptolib\zinflate.cpp" />
+    <ClCompile Include="cryptolib\zlib.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipImage.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipMemoryIO.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipMetadataFind.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipMultiPage.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipTag.cpp" />
+    <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipWinImage.cpp" />
+    <ClCompile Include="imagedlls\pdflib32\flateencode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include=".\h\ctltr040.h" />
+    <ClInclude Include=".\h\dtwain_resource_constants.h" />
+    <ClInclude Include=".\h\dtwain_resource_constants2.h" />
+    <ClInclude Include=".\h\errorcheck.h" />
+    <ClInclude Include=".\h\capconst.h" />
+    <ClInclude Include=".\h\capstruc.h" />
+    <ClInclude Include=".\h\cppfunc.h" />
+    <ClInclude Include=".\h\ctlarray.h" />
+    <ClInclude Include=".\h\ctlcntry.h" />
+    <ClInclude Include=".\h\ctldevnt.h" />
+    <ClInclude Include=".\h\ctldib.h" />
+    <ClInclude Include=".\h\ctlenum.h" />
+    <ClInclude Include=".\h\ctlfunc.h" />
+    <ClInclude Include=".\h\ctliface.h" />
+    <ClInclude Include=".\h\ctlobstr.h" />
+    <ClInclude Include=".\h\ctlobtyp.h" />
+    <ClInclude Include=".\h\ctlreg.h" />
+    <ClInclude Include=".\h\ctltmpl3.h" />
+    <ClInclude Include=".\h\ctltmpl4.h" />
+    <ClInclude Include=".\h\ctltmpl5.h" />
+    <ClInclude Include=".\h\ctltr000.h" />
+    <ClInclude Include=".\h\ctltr001.h" />
+    <ClInclude Include=".\h\ctltr002.h" />
+    <ClInclude Include=".\h\ctltr007.h" />
+    <ClInclude Include=".\h\ctltr008.h" />
+    <ClInclude Include=".\h\ctltr009.h" />
+    <ClInclude Include=".\h\ctltr010.h" />
+    <ClInclude Include=".\h\ctltr011.h" />
+    <ClInclude Include=".\h\ctltr012.h" />
+    <ClInclude Include=".\h\ctltr013.h" />
+    <ClInclude Include=".\h\ctltr014.h" />
+    <ClInclude Include=".\h\ctltr015.h" />
+    <ClInclude Include=".\h\ctltr016.h" />
+    <ClInclude Include=".\h\ctltr017.h" />
+    <ClInclude Include=".\h\ctltr018.h" />
+    <ClInclude Include=".\h\ctltr019.h" />
+    <ClInclude Include=".\h\ctltr020.h" />
+    <ClInclude Include=".\h\ctltr021.h" />
+    <ClInclude Include=".\h\ctltr022.h" />
+    <ClInclude Include=".\h\ctltr023.h" />
+    <ClInclude Include=".\h\ctltr024.h" />
+    <ClInclude Include=".\h\ctltr025.h" />
+    <ClInclude Include=".\h\ctltr026.h" />
+    <ClInclude Include=".\h\ctltr027.h" />
+    <ClInclude Include=".\h\ctltr028.h" />
+    <ClInclude Include=".\h\ctltr029.h" />
+    <ClInclude Include=".\h\ctltr030.h" />
+    <ClInclude Include=".\h\ctltr031.h" />
+    <ClInclude Include=".\h\ctltr032.h" />
+    <ClInclude Include=".\h\ctltr033.h" />
+    <ClInclude Include=".\h\ctltr034.h" />
+    <ClInclude Include=".\h\ctltr035.h" />
+    <ClInclude Include=".\h\ctltr036.h" />
+    <ClInclude Include=".\h\ctltr038.h" />
+    <ClInclude Include=".\h\ctltrall.h" />
+    <ClInclude Include=".\h\ctltrp.h" />
+    <ClInclude Include=".\h\ctltwain.h" />
+    <ClInclude Include=".\h\ctltwmgr.h" />
+    <ClInclude Include=".\h\ctltwses.h" />
+    <ClInclude Include=".\h\ctltwsrc.h" />
+    <ClInclude Include=".\h\dtwain.h" />
+    <ClInclude Include=".\h\dtwain_verinfo.h" />
+    <ClInclude Include=".\h\dtwainc.h" />
+    <ClInclude Include=".\h\dtwaindefs.h" />
+    <ClInclude Include=".\h\dtwainx.h" />
+    <ClInclude Include=".\h\dtwpdft.h" />
+    <ClInclude Include=".\h\dtwstrfn.h" />
+    <ClInclude Include=".\h\dtwstrfn_a.h" />
+    <ClInclude Include=".\h\dtwstrfn_u.h" />
+    <ClInclude Include=".\h\enumeratorfuncs.h" />
+    <ClInclude Include=".\h\funcmac.h" />
+    <ClInclude Include=".\h\imagefun\txtfun32.h" />
+    <ClInclude Include=".\h\ocrengine\ocrinterface.h" />
+    <ClInclude Include=".\h\ocrengine\transym_ocrinterface.h" />
+    <ClInclude Include=".\h\sourceacquireopts.h" />
+    <ClInclude Include=".\h\sourceselectopts.h" />
+    <ClInclude Include=".\h\twain.h" />
+    <ClInclude Include=".\h\vcpragmas.h" />
+    <ClInclude Include=".\h\versioninfo.h" />
+    <ClInclude Include=".\h\winconst.h" />
+    <ClInclude Include=".\h\ctltr003.h" />
+    <ClInclude Include=".\h\ctltr004.h" />
+    <ClInclude Include=".\h\ctltr005.h" />
+    <ClInclude Include=".\h\ctltr006.h" />
+    <ClInclude Include=".\h\ctltr039.h" />
+    <ClInclude Include="FreeImage\Source\FreeImage.h" />
+    <ClInclude Include="FreeImage\Wrapper\FreeImagePlus\FreeImagePlus.h" />
+    <ClInclude Include="h\ansiwideconverter_generic.h" />
+    <ClInclude Include="h\ansiwideconverter_win32.h" />
+    <ClInclude Include="h\ctlfileutils.h" />
+    <ClInclude Include="h\ctlres.h" />
+    <ClInclude Include="h\ctltr037.h" />
+    <ClInclude Include="h\ctltr041.h" />
+    <ClInclude Include="h\ctltr042.h" />
+    <ClInclude Include="h\dtwain_raii.h" />
+    <ClInclude Include="h\dtwain_standard_defs.h" />
+    <ClInclude Include="h\dtwtype.h" />
+    <ClInclude Include="h\errstruc.h" />
+    <ClInclude Include="h\imagefun\pcxfun32.h" />
+    <ClInclude Include="h\imagefun\winbit32.h" />
+    <ClInclude Include="h\imagefun\wmffun32.h" />
+    <ClInclude Include="h\logmsg.h" />
+    <ClInclude Include="imagedlls\pdflib32\flateencode.h" />
+    <ClInclude Include="simpleini\SimpleIni.h" />
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\buftrans.h" />
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\cdtenum.h" />
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\cdtwain.h" />
+    <CustomBuildStep Include=".\cpp\twainsave_internal\commandlineparser.h" />
+    <CustomBuildStep Include=".\cpp\twainsave_internal\extfuncs.h" />
+    <CustomBuildStep Include=".\cpp\twainsave_internal\messages.h" />
+    <CustomBuildStep Include=".\cpp\twainsave_internal\scanstruct.h" />
+    <ClInclude Include=".\h\ImageFun\dtwpdf\pdffont_basic.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".\def\dtwain32.def" />
+    <None Include=".\def\dtwain32_d.def" />
+    <None Include=".\def\dtwain32_u.def" />
+    <None Include=".\def\dtwain32_u_d.def" />
+    <None Include=".\def\dtwain64.def" />
+    <None Include=".\def\dtwain64_d.def" />
+    <None Include=".\def\dtwain64_u.def" />
+    <None Include=".\def\dtwain64_u_d.def" />
+    <None Include=".\h\versioninfo.ipp" />
+    <None Include=".\inl\ctlstrimpl.inl" />
+    <None Include=".\inl\ctltr016.inl" />
+    <None Include=".\inl\ctltr017.inl" />
+    <None Include=".\inl\ctltr018.inl" />
+    <None Include=".\inl\ctltr019.inl" />
+    <None Include=".\inl\ctltr020.inl" />
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\capfrm.inl">
+      <FileType>Document</FileType>
+    </CustomBuildStep>
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\capint.inl">
+      <FileType>Document</FileType>
+    </CustomBuildStep>
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\capsall.inl">
+      <FileType>Document</FileType>
+    </CustomBuildStep>
+    <CustomBuildStep Include=".\cdtwain\cdtwain_internal\capstr.inl">
+      <FileType>Document</FileType>
+    </CustomBuildStep>
+    <None Include="doc.txt" />
+    <None Include="inl\linuxget_twain.inl" />
+    <None Include="inl\linuxinit_impl.inl" />
+    <None Include="inl\linuxlibraryloader_impl.inl" />
+    <None Include="inl\unix_info.inl" />
+    <None Include="inl\windowsinit_impl.inl" />
+    <None Include="inl\windows_info.inl" />
+    <None Include="inl\winget_twain.inl" />
+    <None Include="inl\winlibraryloader_impl.inl" />
+    <None Include="rc\resource_verinfo.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include=".\rc\twil32.rc">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U_D|Win32'">\rc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_U|Win32'">\rc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL|Win32'">\rc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Win32_DTWAINDLL_D|Win32'">\rc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="txt\twaininfo.txt" />
+    <Text Include="txt\twainresourcestrings_dutch.txt" />
+    <Text Include="txt\twainresourcestrings_english.txt" />
+    <Text Include="txt\twainresourcestrings_french.txt" />
+    <Text Include="txt\twainresourcestrings_german.txt" />
+    <Text Include="txt\twainresourcestrings_italian.txt" />
+    <Text Include="txt\twainresourcestrings_spanish.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties DevPartner_IsInstrumented="0" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

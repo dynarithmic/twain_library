@@ -1,0 +1,110 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>-jc</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?_jc.htm"; }
+  else { parent.quicksync('a3.2.18'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">-jc</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="_im.htm">Previous</a>&nbsp;
+     <a href="_jquality.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">-jc</span> <span style="font-style: italic;">value &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p>&nbsp;</p>
+<p>Sets the job control option when acquiring to a multipage image file. &nbsp;The device's TWAIN driver must support job control.</p>
+<p>&nbsp;</p>
+<p>The job control option allows devices to use the feature of separating multipage acquisitions from a device into different jobs or "batches". &nbsp;This is usually done by a job control page or "patch sheet" (there may be other ways of separating a batch of pages). &nbsp;When invoked, each job is saved to a separate multipage image file.</p>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">value</span> parameter must be one of the following:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="80" style="width:80px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td valign="top" width="298" style="width:298px;"><p><span style="text-decoration: underline;">Description</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="80" style="width:80px;"><p>0</p>
+</td>
+<td valign="top" width="298" style="width:298px;"><p>No job control.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="80" style="width:80px;"><p>1</p>
+</td>
+<td valign="top" width="298" style="width:298px;"><p>Include job separator sheet when scanned.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="80" style="width:80px;"><p>2</p>
+</td>
+<td valign="top" width="298" style="width:298px;"><p>Exclude job separator sheet when scanned.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>When a job control page is encountered, the current multipage image file that is being created is saved, and a new multipage image file will be created to start the next job.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Example:</span></p>
+<p>Generate multipage PDF files.  </p>
+<p>Jobs are separated by a patch page.  </p>
+<p>Patch page exists on every third page to separate the jobs:</p>
+<p>Do not include patch page in the PDF file.</p>
+<p>Name the files according to the smart auto-increment feature (-useinc)</p>
+<p>&nbsp;</p>
+<p>Assume there are a total of 10 pages in the scanner's document feeder, including the patch pages:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-f test0001.pdf -multipage -F pdf -jc 2 -useinc");</span></p>
+<p>&nbsp;</p>
+<p>If successful, four multipage PDF files will be created:</p>
+<p>&nbsp;</p>
+<p>test0001.pdf &nbsp;(2 pages -- pages 1, 2 )</p>
+<p>test0002.pdf &nbsp;(2 pages -- pages 4, 5)</p>
+<p>test0003.pdf &nbsp;(2 pages -- pages 7, 8)</p>
+<p>test0004.pdf &nbsp;(1 page -- page 10)</p>
+<p>&nbsp;</p>
+<p>Note that pages 3, 6, and 9 are not stored, since these were patch (job separator) pages.</p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Default Setting</span>: </p>
+<p><span style="color: #ff0000;">The job control is turned off (</span><span style="font-style: italic; color: #ff0000;">value</span><span style="color: #ff0000;"> is 0)</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

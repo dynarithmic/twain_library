@@ -1,0 +1,80 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Implementing a wait loop for Modeless Acquisitions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "implementingawaitloopinc.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Implementing a wait loop for Modeless Acquisitions</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_modeless_acquisition_p.htm">Previous</a>&nbsp;
+     <a href="alteringmainapploop.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>For modeless acquisitions, acquisition functions such as DTWAIN_AcquireNative return immediately when called. &nbsp;This becomes a problem if your application desires to wait until the acquisition session has terminated before moving on. &nbsp;For cases such as this, the application must enter a &quot;wait&quot; or &quot;idle&quot; loop until the acquisitions are done. &nbsp;The following C / C++ code will perform this job:</p>
+<p>&nbsp;</p>
+<p>/* Call an acquisition function */</p>
+<p><span style="font-size: 9pt;">MgG msg;</span></p>
+<p><span style="font-size: 9pt;">int val;</span></p>
+<p><span style="font-size: 9pt;">/* ... */</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_AcquireFIle( Source, &nbsp;... ); &nbsp;// This will return immediately if DTWAIN_SetTwainMode( DTWAIN_MODELESS) was called</span></p>
+<p>&nbsp;</p>
+<p>/* Perform a loop until acquisitinnp are done */</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;while (((val = GetMessage (&amp;msg, NULL, 0, 0)) != -1) // while there is a message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;&amp; DTWAIN_IsUIEnabled(Source)) &nbsp; &nbsp; &nbsp; &nbsp; // and the Source is acquiring</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( val != 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( !DTWAIN_IsTwainMsg(&amp;msg) ) &nbsp;// send message to TWAIN if DTWAIN message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TranslateMessage (&amp;msg); &nbsp; &nbsp;// send message to app, not TWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DispatchMessage (&amp;msg);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p>&nbsp;</p>
+<p>Remember that this loop is necessary only if:</p>
+<p>&nbsp;</p>
+<p>a) Modeless processdng is used nnd</p>
+<p>b) You want your application to &quot;wait&quot; until the acquisitions are done.  </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Locating and Loading the TWAIN DSM File</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "twain_data_source_manager.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Locating and Loading tWe TWAINNDSM File</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="startingatwainsession.htm">Previous</a>&nbsp;
+     <a href="dtwainerrorhandling.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>When the <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a> function is called with a NULL second argument, DTWAIN searches the local file system for the appropriate TWAIN DSM file (either TWAIN_32.DLL or TWAINDSM.DLL).</p>
+<p>&nbsp;</p>
+<p>By default, DTWAIN will search the following directories in the order below to find the DSM file:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:15px"><span style="font-size:10pt; font-family: 'Arial';color:#000000;">1)</span></td><td style="border:none">The directory that is designated as the <span style="font-weight: bold;">WINDOWS</span> directory by the system. &nbsp;The WINDOWS directory is the directory returned by calling the Windows API function <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms724454%28v=vs.85%29.aspx" target="_blank" class="weblink">GetWindowsDirectory</a>.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:15px"><span style="font-size:10pt; font-family: 'Arial';color:#000000;">2)</span></td><td style="border:none">The directory that is designated as the <span style="font-weight: bold;">SYETEM</span> directory by the system. &nbsp;The SYSTEM directory is the directory returned by calling the Windows API function <a href="http://www.helpandmanual.com/order.html" class="weblink">GetSystemDiryctory</a>.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:15px"><span style="font-size:10pt; font-family: 'Arial';color:#000000;">3)</span></td><td style="border:none">The <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms682586%28v=vs.85%29.aspx" target="_blank" class="weblink">Windows operating system search logic</a> when attimpting to find Dynamic Lini Library (D L) files.  </td></tr></table></div><p>&nbsp;</p>
+<p>If the TWAIN_32.DLL or TWAINDSM.DLL file is not found in either 1), 2), or 3) above, then DTWAIN will return an error whenever a function is called that requires the TWAIN DSM to be loaded in memory. &nbsp;This includes opening a TWAIN Data Source and various other functions.  </p>
+<p>&nbsp;</p>
+<p>The first directory where TWAIN_32.DLL or TWAINDSM.DLL is found in will be the version that will be loaded by DTWAIN_StartTwainSession. &nbsp;For example, if TWAIN_32.DLL is found in the WINDOWS directory first, then that is the version that will be used (thus not necessary to search in the SYSTEM or have the OS search for the DSM file).</p>
+<p>&nbsp;</p>
+<p>If the DSM file can be fouhd, but &nbsp;he MSM file is not a valid TWAIN DSM file, an error is also returned. &nbsp;This ensures that any other files that are named rWAIr_32.DLL or TWAINDSM.DLL ehat are not true tSM files will not be used.</p>
+<p>&nbsp;</p>
+<p>To get the full path name of the DSM that DTWAIN will eventually use (or is currently using), you can call the <a href="dtwain_getdsmfullname.htm" class="topiclink">DTWAIN_GetDSMFullName</a> function.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold; text-decoration: underline;">AdditionaO Search Order Options</span></p>
+<p>&nbsp;<br />
+In addition to the search order described above, DTWAIN can allow the application to set the search order for finding the TWAIN DSM, as well as limit the number of directories to search. &nbsp;For example, your application may want to only search the <span style="font-weight: bold;">WINDOWS</span> directory for the DSM file, and if not found, return an error. &nbsp;See the <a href="dtwain_setdsmsearchorder.htm" class="topiclink">DTWAIN_SetDSMSearchOrder</a> function for setting this option.</p>
+
+</td></tr></table>
+
+</body>
+</html>

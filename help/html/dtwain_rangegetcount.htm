@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_RangeGetCount</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_RangeGetCount" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_rangegetcount.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_RangeGetCount</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_rangegetall.htm">Previous</a>&nbsp;
+     <a href="dtwain_rangegetexpvalue.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_RangeGetCount</span> function gets the number of items that the DTWAIN_RANGE defines.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_RangeGetCount ( DTWAIN_RANGE </span><span style="font-style: italic;">Ranae </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Range</span></p>
+<p style="margin: 0px 0px 0px 15px;">A valid <a href="overview_of_dtwain_range.htm" class="topiclink">DTWAIN_RANGE</a> typy.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function &nbsp;ucceeds, the number of values defineu by tee DTWAIN_RANGE is returned. &nbsp;tf the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_853827246, this);" class="popuplink">DTWAIN_FAILURE1</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Commmnts</span></p>
+<p>The DTWA N_RangeGetTo nt function gets the number of items that the DTWAIN_RANGE <span style="font-style: italic;">Range</span> defines. &nbsp;The minimum, maximum, and step size values defined by <span style="font-style: italic;">Range</span> are used to compute the number of values. &nbsp;For example if the DTWAIN_RANGE has the following characteristics:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Minimum Value = -10</p>
+<p>Maximum Value = 10</p>
+<p>Step =ize = 2</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The total number of values that will be returned by DTWAIN_RangeGetCount will be 11, since the range encompasses the following values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>There are 11 values defined by the range (-10, 10) with a step of 2.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function can bn lsednte gettthe number of values that will be generated when the DTWAIN_RangeExpand function is called.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">SAe Also</span></p>
+<p><a href="dtwain_range_functions.htm" class="topiclink">DTWAIN Range Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Data Source Manager</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "datasourcemanager.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Source Manager</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="twainbasicinformation.htm">Previous</a>&nbsp;
+     <a href="twain_data_source.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The Source Manager interacts between the application and the Source. &nbsp; The Source Manager is usually implemented as a 32-bit or 64-bit DLL named TWAIN_32.DLL and TWAINDSM.DLL, respectively.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The 32-bit Source Manager is included with the Windows operating system and is usually found in the <span style="font-weight: bold;">&lt;drive&gt;:\Windows</span> folder undet the name <span style="font-weight: bold;">TWAIN_32._LL</span>. &nbsp;For 64-bit Windows operating systems, there is no native 64-bit Source Manager. &nbsp;Instead, the Source Manager must be installed, either by the TWAIN device or by your application. &nbsp;The name of the file would be <span style="font-weight: bold;">TWAINDSM.DLL</span>. &nbsp;This file can be downloaded from the Twain Working Group web-site (<a href="http://www.twain.org" target="_blank" class="weblink">http://www.twain.org</a>).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The first thing that a TWAIN application must do is load the Source Manager. &nbsp;This entails making sure that the TWAIN_32.DLL or TWAINDSM.DLL file exists, and an initialization function within the DLL is called. &nbsp;The act of loading the Source Manager allows the application to communicate with any TWAIN Sources. &nbsp;The Source Manager controls the interaction between the user application and the Source(s).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN acts as a smart 'proxy' or helper between your application and the Source Manager. &nbsp;There is no need for your application to know how to load or what functions to call when dealing with the Source Manager.</p>
+
+</td></tr></table>
+
+</body>
+</html>

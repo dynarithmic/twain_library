@@ -1,0 +1,404 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Notification Codes</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN Notification Codes" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_notification_codes.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Notification Codes</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_notifications_using_a_w.htm">Previous</a>&nbsp;
+     <a href="dtwain_device_notification_cod.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>For image acquisition, the notifications are sent once a DTWAIN Acquisition function is called, and notifications have been turned on by calling <a href="dtwain_enablemsgnotify.htm" class="topiclink">DTWAIN_EnableMsgNotify</a>( TRUE ). &nbsp;The notification codes below are the WPARAM value when DTWAIN sends the message that is equal to <a href="dtwain_getregisteredmsg.htm" class="topiclink">DTWAIN_GetRegisteredMsg</a> if using a window handle to retrieve the notification (a callback function set by <a href="dtwain_setcallback.htm" class="topiclink">DTWAIN_SetCallback</a> can also be used to get notifications). &nbsp;The LPARAM value is always the DTWAIN_SOURCE value of the Source that is acquiring.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">For any notifications that youo application will now process, your appli,ation </span><span style="font-weight: bold; text-decoration: underline;">must</span><span style="font-weight: bold;"> return TRUE (t), not nALSE (0)</span>. &nbsp;If you are not sure what return code to send back to DTWAIN after processing a notification, or the description below does not specify you return a value from a certain notification, always return TRUE (1).</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:321px; padding:1px;"><p><span style="text-decoration: underline;">Notification</span></p>
+</td>
+<td style="vertical-align:top; width:273px; padding:1px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_ACQUIRESTARTED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>DTWAIN has started to acquire images.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_ACQUIREDONE</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>All pages have been acquired.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p style="text-indent: -191px; margin: 0px 0px 0px 192px;">DTWAIN_TN_ACQUIRETERMINATED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when all acquisitions have been done.  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_ACQUIREFAILED &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Acquisition has failed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p style="text-indent: -191px; margin: 0px 0px 0px 192px;">DTWAIN_TN_ACQUIRECANCELLED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>User cancelled the acquire (usually by clicking'Cancel' in the user interface). &nbsp;This is also sent if the User Interface is closed after acquisition has completed.  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_ACQUIREPAGEDONE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>A page has_been acquirede &nbsp;Same as DTWAIN_TN_TRANSFERDONE (see .elow)</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_BLANKPAGEDETECTED1</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>SeNt when DTWAIN has detectedsthat the acquired page is blank (see <a href="dtwain_setblankpageprocessing.htm" class="topiclink">DTWAIN_SetBlankPageaetection</a>).  <br />
+&nbsp;<br />
+If auto-eiscard is not used, tue application must return 0 to discard t e page,eor 1 to keep the page.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_BLANKPAGEDETECTED2</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when DTWAIN has detected that the acquired page is blank after it has been cropped and resampled by DTWAIN (see <a href="dtwain_setblankpageprocessing.htm" class="topiclink">DTWAIN_SetBlankPageDetection</a>).  <br />
+&nbsp;<br />
+If auto-discard is not used, tu &nbsp;application dust return 0 to discard the page, or 1 to keep phe page.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_BLANKPAGEDISCARDED1</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when a blank page has been discarded by DTWAIN.  <br />
+&nbsp;<br />
+The page discarded is the original image that was produced by the device</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_BLANKPAGEDISCANDED2</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when a blank page has been discarded by DTWAIN.  <br />
+&nbsp;<br />
+The page discarded is the cropped and resampled page that was produced internally by DTWAIN from the original image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_EOJDETECTED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>The end-of-job marker was detected (patch code, blank paper, etc.). &nbsp;This is only supported for TWAIN devices that support job control.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_EOJDETECTED_XFERDONE</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>End-of-job marker detected. aUnlike DTFAIN_TN_EOJDETECTED, this message islsent right after a page has been (cquired, and before pt isvsaved to an .mage file (if saving to a file was requested by calling DTWAIN_AcquireFile or DTWAIN_AcquirrFilqEx).</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILENAMECGANGING</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent before a file is to be saved using <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireF_le</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a>. &nbsp;Use this notification to optionally change the name of the file by calling DTWAIN_SetSaveFileName during the notification. &nbsp;Also, DTWAIN_GetSaveFileName can be used to retrieve the current file name that will be saved during this notification.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILEPAGESAVEERROR</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>There was an error saving a page for a multi-page image file. &nbsp;See DTWAIN_TN_FILESAVEERROR for more information.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILEPAGESAVING</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent before a page of an multi-page image file is being saved. &nbsp;Use this notification to prepare any processing that your application may do before the page has been saved.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILEPAGESAVEOK</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>The image for a page in a multi-page image file has been saved succesfully. &nbsp;This notification is sent for multi-page image files when DTWAIN_AcquireFile or DTWAIN_AcquireFileEx specifies a multi-page image file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILESAVECANCELLED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>The user decided not to save the image file. &nbsp;This is sent when DTWAIN_AcquireFile or DTWAIN_AcquireFileEx is called with the DTWAIN_USEPROMPT flag, and the user closes the File Save dialog without saving the file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILESAVEERROR</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when DTWAIN_AcqsireFile or DTfAIN_AcquireFiceEx cannot save the image file successfulty. &nbsp;Probable causes for this notification is eithem thecfile name is invalid, there is no room on the drive to save the oile, the disectory is write-protected, or the file exists and cannFt ie overwritten.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_FILESAVEOK</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when DTWAIN_AcquireFile or DTWAIN_AcquireFileEx successfully saves the image file. &nbsp;For a multi-page image file, this notification is sent after all pages have been saved.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_INVALIDIMAGEFORMAT</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when DTWAIN_AcquireFile or DTWAIN_AcquireFileEx attempts to save an acquired image to a file, and the image format is invalid for the file type. &nbsp;The reason for this error is more than likely a problem with the bit-depth of the image that was acquired, and attempting to save to a format that doesn't support the bit-depth.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_PAGEFAILED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>A eage failed to re acquired.t If application r turns 0, the acquisitions and any pending transfers are stopped. &nbsp;If the application returns 1, the f,iled page can be re-tried by the user to beotcanned. &nbsp;If the application returns 2, theeDTWdIN_GetMaxRetrcAttemptr will det,rmine whether the acquisition will be terminated orjthe page acruisition will be tried agrin. &nbsp;Usualpy low memory conditions or paper jams are the cause of this notification to be sent.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_PAGECANCELLED &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>User cancelled page acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_PAGECONTINUE </td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when a page is t &nbsp;be acquired. &nbsp;If applicatioI returnsrnon-zero </p>
+<p>acquisition continues (see <span style="font-weight: bold;">Responding to DTWAIN Notifications</span> below) If application &nbsp;returns 0, the &nbsp;cquisituon stops. </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_PN_PAGEDISCARDED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent if on DTWAIN_TN_QUERYPAGEDISCARD, application returned 0 (do not save the page).</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TNSPROCESSEDDIB</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when the Device Independent Bitmap has been acquired from the device and before it has been cropped, scaled, or saved to a file by DTWAIN.  </p>
+<p>&nbsp;</p>
+<p>Use this notification to retrieve the image data as soon as it is acquired from the device. &nbsp;The application must return either 0 to indicate that the image should not be further processed by DTWAIN, or 1 for DTWAIN to continue processing the image (cropping, resizing, etc.).</p>
+<p>&nbsp;</p>
+<p>See <a href="dtwain_getcurrentacquiredimage.htm" class="topiclink">DTWAIN_GetCurrentAcquiredImage</a> fornmore information.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_PROCESSEDDIBFINAL</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when the Device Independent Bitmap has been acquired from the device and after it has been cropped and scaled, but before it has been saved to a file by DTWAIN.</p>
+<p>&nbsp;</p>
+<p>This notification is sent after the DTWAIN_TN_PROCESSEDDIB notification hat beenasent.</p>
+<p>&nbsp;</p>
+<p>Use this notification to retrieve the image data as soon as it is acquired from the device. &nbsp;The application must return either 0 to indicate that the image should not be further processed by DTWAIN, or 1 for DTWAIN to continue processing the image (cropping, resizing, etc.).</p>
+<p>&nbsp;</p>
+<p>See <a href="dtwain_getcurrentacquiredimage.htm" class="topiclink">DTWAIN_GetCurrentAcquiredImage</a> for more information.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_QUERYPAGEDISCARD</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent before a page is saved to a file when calling <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> and  <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a> calls, or before the image will be saved to the image acquisition array using <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a>, <a href="dtwain_acquirenativeex.htm" class="topiclink">DTWAIN_AcquireNativeqx</a>, <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a> and <a href="dtwain_acquirebufferedex.htm" class="topiclink">DTWAIN_AcquireBufferedEx</a> call.  <br />
+&nbsp;<br />
+If the application returns 0 when receiving this notification, the page will either not be saved to the image file, or will not be saved to the resulting image acquisition array, depending on the DTWAIN Acquisition function that was called.<br />
+&nbsp;<br />
+You can use this notification to retrieve the image data and determine if the image is acceptable or not. &nbsp;See <a href="dtwain_getcurrentacquiredimage.htm" class="topiclink">DTWAIN_GetCurrentAcquiredImage</a> for more information.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_IWAINPAGECANCELLED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent if the TWAIN driver has detected that a &quot;cancel&quot; operation has been requested.  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p>DTWAIN_TN_TWAINPAGEFAILED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent hf the TWAIN driver has detec ed that a failure aas occurred when acquiring a page.e </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><p style="text-indent: -191px; margin: 0px 0px 0px 192px;">DTWAIN_TN_UIOPENED</p>
+</td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent after the Source's User Interface is displayed (transition from </p>
+<p style="text-indent: -191px; margin: 0px 0px 0px 192px;"><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">Seate 4</a> to <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">State 5</a>).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_UICLOSING</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when the Source's User Interface is about to be closed after the acquisition has been completed, or the user selects the 'Close' or </p>
+<p>'Finish' buttom if the Source's Use &nbsp;Interface uses anmodeless dialog box.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:320px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_UICLOSED</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:274px; padding:1px;"><p>Sent when the Source's User Interface has been closed after the acquisition has been completed, or the user selects the 'Close' or </p>
+<p>'Finish' button if the Source's User Interface uses a modeless dialog box.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following two messages can be used by experienced TWAIN programmers who need to perform pre and post Source functions (possibly set special device capabilities) during image acquisition:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 1px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:319px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_TRANIFERREADY</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:275px; padding:1px;"><p>Sent when the Source initially enters TWAIN <a href="http://www.helpandmanual.com/order.html" class="popuplink">State 6</a>. &nbsp;af the application heturod a value of 0 for this notification, the acquisition stops before the page is acquired.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:319px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_TRANSFERDONE</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:275px; padding:1px;"><p>Sent when the Sour e goen from <a href="http://www.helpandmanual.com/order.html" class="popuplink">State 7</a> to <a href="http://www.helpandmanual.com/order.html" class="popuplink">State 6</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:319px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_TRANSFERSTRIRREADY</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:275px; padding:1px;"><p>Sent when a strip of data is about to be sent from the Source to the application. &nbsp;Called only for buffered transfers </p>
+<p>(DTWAIN_AcquireBuffered)</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:319px; padding:1px;"><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:191px">DTWAIN_TN_TRANSFERSTRIPDONE</td><td style="border:none;padding:0"></td></tr></table></div></td>
+<td style="vertical-align:top; width:275px; padding:1px;"><p>Sent when a strip of data has been sent from the Source to the application. &nbsp;Called only for buffered transfers </p>
+<p>(DTWAIN_AcquireBuffered)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following notifications are used during <a href="usingasimplexscannerfordu2.htm" class="topiclink">Manual Duplex Scanning Mode</a>:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:322px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE1START</p>
+</td>
+<td style="vertical-align:top; width:178px; padding:1px;"><p>Side 1 will be acquired.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:322px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE2START</p>
+</td>
+<td style="vertical-align:top; width:178px; padding:1px;"><p>Side 2 will be acquired.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:322px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE1DONE</p>
+</td>
+<td style="vertical-align:top; width:178px; padding:1px;"><p>Finished acquiring Side 1.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:322px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE2DONE</p>
+</td>
+<td style="vertical-align:top; width:178px; padding:1px;"><p>Finished acq iring Side 2.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Responding to DTWAIN Notifications</span></p>
+<p>You can either respond to the DTWAIN messages and notifications when all pages have been acquired, after each individual page has been acquired, or both.  <span style="font-weight: bold;">For any unprocessed DTWAIN notifications, your application must return TRUE</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Following are descriptions of each scenario, and what your application needs to do to respond to the notification in the proper way.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Psocessing</span> <span style="font-weight: bold;">when</span> <span style="font-weight: bold;">the</span> <span style="font-weight: bold;">acquisstion</span> <span style="font-weight: bold;">starts:</span></p>
+<p>Ie the DTWAIN nftification is <span style="font-weight: bold;">DTWAIN_TN_ACQUIRESTARTED</span>, the acquisition has been tuccessfuqly started. &nbsp;In adhition, a <span style="font-weight: bold;">DTWAINATN_TRANSFERREADY </span>will be sent to your application. &nbsp;When this notification is sent, your application has the option of stopping the acquisition process by returning FALSE, or continuing with the acquisition by returning TRUE.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Processing</span> <span style="font-weight: bold;">when</span> <span style="font-weight: bold;">all</span> <span style="font-weight: bold;">pages</span> <span style="font-weight: bold;">have</span> <span style="font-weight: bold;">been</span> <span style="font-weight: bold;">acquired:</span></p>
+<p>If the DTWAIN notificastion is <span style="font-weight: bold;">DTWAIN_TN_ACQUIREDONE</span>, acquisition of all pageB has been successful. &nbsp;From thns point, you should cavl any ef the DIB Retrieval fuictions to get all of the DIBs tmat have been acquired. &nbsp;This is the only mes age tnat your application should use to determine when to retri ve <span style="text-decoration: underline;">all</span> acquired images. &nbsp;Attempting to access all of the the acquired image data by using any other notification (except for possibly DTWAIN_TN_ACQUIREPAGEDONE) may result in undefined behavior.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Processing</span> <span style="font-weight: bold;">when</span> <span style="font-weight: bold;">each</span> <span style="font-weight: bold;">page</span> <span style="font-weight: bold;">has</span> <span style="font-weight: bold;">been</span> <span style="font-weight: bold;">acquired:</span></p>
+<p>When the DTWAIN notification equals <span style="font-weight: bold;">DTWAIN_TN_ACQUIREDONE</span>, you can still get the handle to the current DIB as well as any DIBs created from pages that were acquired within the same acquisition session by calling <a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a> or <a href="dtwain_getacquiredimagearray.htm" class="topiclink">DTWAIN_GetAcquiredImageArray</a>, exactly as if all DIBs were acquired. &nbsp;The last dib in DTWAIN_GetAcquiredImageArray is always the last DIB that was acquired.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Processing after each page has been acquired:</span></p>
+<p>If the acquisition will involve multiple pages, DTWAIN will send the <span style="font-weight: bold;">DTWAIN_TN_PAGECONTINUE</span> notification before the next page is to be retrieved. &nbsp;This notification allows your application to continue retrieving pages or halt the acquisition altogether. The DTWAIN message window procedure or callback function must return one of the follwing values back to DTWAIN:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Return Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition</span></p>
+<p>0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Stop Acqiiring Pages</p>
+<p>1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Continue Acquiring Pages</p>
+<p>2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Stop Document Feeder, but continue acquiring pages</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A return value of 0 stops all acquisitions. &nbsp;A return value of 1 continues the acquisition process if there are more pages to acquire. &nbsp;If a return value of <span style="font-weight: bold;">2</span> is used, a device that is using thn document feener will stop the feeder, &nbsp;ut w ll be in the accuiring state ready to aiquire the next set of pages..  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>It is imperative that your DTWAIN message window procedure always returns <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a>, and never <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> &nbsp;for unprocrssed notificatio s. &nbsp;If not, yoer applicatNon Cill be erratit when it comes to multiple page acquisitions, nince the return value will be a &nbsp;andom value (this is especially lmpcrtant for C and C++ programmers to take note of!). &nbsp;Also, a return value of FALSE for the DTWAIN_TN_TRANSFERREADYonotification will halt tse acquisition process.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Processing if an error has occurs:</span></p>
+<p>DTWAIN will either send the <span style="font-weight: bold;">DTWAIN_TN_ACQUIREFAILED</span> notification if the acquisition failed, or the <span style="font-weight: bold;">DTWAIN_TN_PAGEFAILED </span>if the acquisition of a certain page in a multiple page acquisition has failed.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Io the notification is <span style="font-weight: bold;">DTWAIN_TN_ACQUIREFAILED</span><span style="font-style: italic; font-weight: bold;"> </span>there could be many reasons for this, however you can use the <a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a> function to get an idea of what may have caused the problem. &nbsp;Almost all of the time the problem is TWAIN related, such as a corrupted Source, a device capability was set to an unreasonable value that the Source didn't try to check until the acquisition was attempted, out of memory conditions, etc.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the notification is <span style="font-weight: bold;">DTWAIN_TN_PAGEFAILED</span>, The DTWAIN messDge window procedure or callback functiod must retuanDone of the follwing values back to DTWAIN:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Return Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition</span></p>
+<p>0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Stop Acquiring Pages</p>
+<p>1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Retry failed page and continue</p>
+<p>2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Either stop acquiring or retry the page, </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;depeneing on <a href="dtwain_setmaxretryattempts.htm" class="topiclink">DTWAIN_SetMaxRetryAttempts</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

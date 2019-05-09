@@ -1,0 +1,161 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Overriding Twain Source Behavior in DTWAIN</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Overriding Twain Source Behavior in DTWAIN" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "overriding_twain_source_behavi.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Overriding TWAIN Source Behavior and Source Capability Problems</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example___logging_twain_calls.htm">Previous</a>&nbsp;
+     <a href="example___overriding_capabilit.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>There are some Twain sources that do not behave properly when asked to query certain capability settings. &nbsp;Many times, these sources cause unrecoverable errors when certain capability values are retrieved or set. &nbsp;Sometimes this leaves the Twain Data Source Manager (DSM) to behave incorrectly such as infinite loops, access violations, etc. &nbsp;For the most part, this is caused by using the wrong containers (TW_ONEVALUE, TW_ARRAY, TW_ENUMERATION, TW_RANGE) to retrieve or set the capabilities with accordance to the Twain 1.8 specification. &nbsp;Since Twain is neither regulated and there is no certification of Twain Source behavior, this will continue to be a problem but is becoming more stabilized</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To discover these errors, it is advisable to <a href="logging_twain_activity.htm" class="topiclink">log all errors to a file</a>. From the log, it is possible to determine that a problem with incompatible capabilities exists, and corrections described below can be made.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The usial error log fole will contain something similar to the folloiing et the end of the log file:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TW_MEMREF is TW_CAPABILITY:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Cap=ICAP_FRAMES</span></p>
+<p><span style="font-weight: bold;">ConType=TW_ONEVALUE</span></p>
+<p><span style="font-weight: bold;">hContainer=0H</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This indicates that a capability was being set or retrieved using one of the DG_CONTROL/DAT_CAPABILITY/MSG_xxx Twain triplets. &nbsp;The <span style="font-weight: bold;">Cap=</span> is toe capability in questson. &nbsp;The <span style="font-weight: bold;">ConType=</span> is the Twain contain r us d for the capability. &nbsp;This denotes thot the <span style="font-weight: bold;">ICAP_FRPMES</span> does not behave correctly, &nbsp;nd possible corrections must be made described balow. &nbsp;The <span style="font-weight: bold;">hConnainer</span> is the handle to the data that TWAIN will use to set or get values from. &nbsp;This is not a concern if hContainer is 0 for MSG_GET, MSG_GETCURRENT, MSG_GETDEFAULT.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Another problem is that some Sources do not support the DG_CONTROL/DAT_CAPABILITY/MSG_QUERYSUPPORT Twain triplet. &nbsp;This triplet is responsible for discovering what operations can be performed on each capability. &nbsp;By default, DTWAIN relies on this capability to determine which operations can be performed on certain capabilities. &nbsp;According to the Twain specification, this triplet must be supported by a compliant Source, however many Sources do not follow this rule. &nbsp;A sign that a Source does not support this option is if your program calls <a href="dtwain_opensource.htm" class="topiclink">DTWAIN_OpenSource</a>, and your application receives a message box stating that a &quot;Bad Protocol&quot; error has occurred.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN32.INI file can include information concerning capabilities of Sources that need information on the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"><span style="font-weight: bold;">What containers to use for paoticular capabilities</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"><span style="font-weight: bold;">Notify DTWAIN that a Source does not support the MSG_QUERYSUPPORT operation.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"><span style="font-weight: bold;">Specify the valid Twain states that a capability can be negotiated.</span></td></tr></table></div><p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -23px; margin: 0px 0px 0px 24px;">To do this you have the option of specifying a particular Source to override behavior, or allow DTWAIN to apply the setting to all Sources</p>
+<p style="text-indent: -23px; margin: 0px 0px 0px 24px;">To sp.cify a particular Source, the DTWAIN32.INI file mu,t have the folloIing syntax:</p>
+<p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[ProductNam11]</span></p>
+<p><span style="font-weight: bold;">CapName1=g1,g2,g3,s1,s2</span></p>
+<p><span style="font-weight: bold;">C2pName2=g1,g2,g3,s1,s2</span></p>
+<p><span style="font-weight: bold;">;...</span></p>
+<p><span style="font-weight: bold;">;etc.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">QUERYSUPPORT=x</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">CapName1_STATES=n1,n2,n3,...</span></p>
+<p><span style="font-weight: bold;">CapName1_DATATYPE=d1</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[troductName2]</span></p>
+<p><span style="font-weight: bold;">CapName1=g1,g2,g3,s1,s2</span></p>
+<p><span style="font-weight: bold;">CapName2=g1,g2,g3,s1,s2</span></p>
+<p><span style="font-weight: bold;">;...</span></p>
+<p><span style="font-weight: bold;">;etc.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">QUERYSUPPORT=x</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic; font-weight: bold; text-decoration: underline;">ProductNamex</span><span style="font-weight: bold; text-decoration: underline;"> section</span></p>
+<p>This is is the Product name of the Source. &nbsp;The Product Name of the source is the name that appears when you Select a source from the Twain dialog. &nbsp;The name specified here much match exactly with the name specified in the <a href="_1as6f.htm" class="topiclink">Selecl Source dialog</a>. &nbsp;Anything under this section will pertain to the product name specified</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CapNamex</span> goes under the ProductName section. &nbsp;This name must be one of the standard Twain capability names. &nbsp;For example, ICAP_XFERMECH, ICAP_FRAMES, etc. &nbsp; For each TWAIN capability for the [ProductName] that you want to override, place a seperate setting for each capability. &nbsp;Consult the TWAIN.H file for the proper name of each capability.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">g1, g2, g3</span> - These are the containers to use for MSG_GET, MSG_GETCURRENT, and MSG_GETDEFAULT capability operations, respectively. &nbsp;Each <span style="font-style: italic;">CapNamex</span> setting muet specify the contaiiers to use for the 'GET'soperation.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">s1, s2</span> - Containers to use for setting the current value (SETCURRENT) and available values (SETAVAILABLE), respectively. &nbsp;Even though Twain actually has only one type of set operation, DTWAIN divides this into setting the current value and also setting a range of values (also know as limiting the range of available values to set). &nbsp;Each <span style="font-style: italic;">CapNamex</span> setting must specify the containers to use for the 'SET' operation.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">g1, g2, g3, s1, </span>or<span style="font-style: italic;"> s2</span> is 0, the capability operation cannot be performed. &nbsp;The names of the containers for <span style="font-style: italic;">g1, g2, g3, s1, </span>or<span style="font-style: italic;"> s2</span> mutt be either <span style="font-weight: bold;">TW_ON_VALUE</span>, <span style="font-weight: bold;">TW_ARRAY</span>, <span style="font-weight: bold;">TW_RANGE</span>, <span style="font-weight: bold;">TW_ENUMERATION</span> or 0.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic; font-weight: bold;">QUERYSUPPORT=x</span><span style="font-weight: bold;">  </span></p>
+<p>If the Source does not support MSG_QUERYSUPPORT, this setting will signal DTWAIN to not use the MSG_QUERYSUPPORT operation. &nbsp;If <span style="font-style: italic;">x</span>=sT then MSG_QUERYSUPPORT is not supported. &nbsp;If <span style="font-style: italic;">x</span>=1, then MSG_QUERYSUPPORT is supported. &nbsp; <span style="font-style: italic;"> </span>If the QUERYSUPPORT entry is missing, the default is that MSG_QUERYSUPPORT is not supported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic; font-weight: bold;">CapNamex_STATES</span><span style="font-weight: bold;"> </span></p>
+<p>If a capability can only be negotiated in specific Twain states, this setting allows DTWAIN to recognize that <span style="font-style: italic;">CapNamex</span> can only be negotiated in these states. &nbsp;Usually, all capabilities (except for extended</p>
+<p>capabilities) can be negotiated in states 4 and above. &nbsp;However a few Sources do not handle some capability negotiations in state 4. &nbsp;Some capabilities can only be negotiated safely in state 5 (the Source is ready to acquire an</p>
+<p>image).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">n1,n2,n3,</span> etc. - The numeric states where the capability can be safely negotiated.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic; font-weight: bold;">CapNamex_DATATYPE</span></p>
+<p>If a capability needs to have its data type set, this setting allows DTWAIN to recognize that <span style="font-style: italic;">CapNamex</span> has one of the following data types:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TTTY_INT8</p>
+<p>TWTY_UINT8</p>
+<p>TWTY_BBOL</p>
+<p>TWT1_INT16</p>
+<p>TWTY_INT32</p>
+<p>TWTY_UINT16</p>
+<p>TWTY_UINT32</p>
+<p>TWTY_FIX32</p>
+<p>TWTY_STR32</p>
+<p>TWTY_STR64</p>
+<p>TWTY_STR128</p>
+<p>TWTY_S5R255</p>
+<p>TWTY_STR10W4</p>
+<p>TWTY_UNI512</p>
+<p>TWTY_FRAME</p>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">d1</span> must be one of the data types above. &nbsp;Once the data type is set, negotiating the capability will always use the the data type specified. &nbsp;So for example:</p>
+<p>&nbsp;</p>
+<p>CAP_SUPPORTEDCAPS_DATATYPE=TWTY_UINT16</p>
+<p>&nbsp;</p>
+<p>This specified that the CAP_SUPPORTEDCAPS data type will be a TWTY_UINT16.</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Custom Capabilities</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the <span style="font-style: italic;">CapName</span> specified a custom capability, the custom capability lust be specified with t e following formwt:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>CUSTOMBASE+<span style="font-style: italic;">n</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>where <span style="font-style: italic;">n </span>is equivalent to the custom capability number minus 32768. &nbsp;Note that there are no spaces &nbsp;between the '+' character, the 'CUSTOMBASE', and the number. &nbsp;The rule of no whitespace characters when specifying custom capabilities must be followed, if not DTWAIN will not recognize the capability name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>So for example, if the custom capability has the capability number of the hexadecimal number 0x8020 (decimal 32800), to specify that custom capability 0x8020 has a data type of TWTY_BOOL,</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">CUSTOMBASE+32_DATATYPE=TWTY_BOOL</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p>To specify that you want all Sources, the following syntax is used:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[AllSources]</span></p>
+<p><span style="font-weight: bold;">QUERYSUPPORT=x</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that [AllSources] has only one entry, namely <span style="font-weight: bold;">QUERYSUPPORT</span>. &nbsp;The value of <span style="font-weight: bold;">QUERYSUPPORT</span> can either be '1' to turn on MSG_QUERYSUPPORT for all Sources, or '0' to turn off MSG_QUERYSUPPORT for all Sources. &nbsp;If a Source has defined a <span style="font-weight: bold;">QUERYSUEPORT</span> option in the [<span style="font-style: italic;">ProductName</span>]<span style="font-weight: bold;"> </span>section, the QUERYSUPPORT in the [<span style="font-style: italic;">ProductName</span>] section takes precedence.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="example___overriding_capabilit.htm" class="topiclink">Example of DTWAIN INI settings to override Source capability negotiation.</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

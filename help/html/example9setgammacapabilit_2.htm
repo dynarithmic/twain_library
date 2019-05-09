@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 9: Set Capabilities</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example9setgammacapabilit_2.htm"; }
+  else { parent.quicksync('a9.5.9'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 9: Set Capabilities</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example8acquireusingtwain_2.htm">Previous</a>&nbsp;
+     <a href="example10getcapabilities_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: Set gamma value and author of the Twain device.</span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>#include &lt;iostream&gt;</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std; // for &lt;iostream&gt; </p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; // Initialize DTWAIN - return if initialization does not work</p>
+<p> &nbsp; <a href="cdtwaininterfacecdtwaininter_2.htm">DTwainInterface</a> TI;</p>
+<p> &nbsp; if ( !TI.IsValid( ) ) </p>
+<p> &nbsp; &nbsp; &nbsp; return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Select a Source</p>
+<p> &nbsp; DTwainSource Source = <a href="dtwainsourceselect.htm">DTwainSource::Select</a>( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the Gamma value of the Source</p>
+<p> &nbsp; if ( Source.<a href="dtwainsourceiscapsupported_2.htm">IsCapSupported</a>( DTWAIN_CV_ICAPGAMMA ))</p>
+<p> &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp;// Create an array of values ( 1 value, initialized to 0.0 )</p>
+<p> &nbsp; &nbsp;  <a href="arrayclasses_2.htm">DTwainDoubleArray</a> GammaValue(1, 0.0); </p>
+<p> &nbsp; &nbsp; &nbsp;if ( Source.<a href="dtwainsourcesetcapvalue_2.htm">SetCapValues</a>( DTWAIN_CV_ICAPGAMMA, GammaValue ) )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "Gamma capability was set to 0.0" &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp;else</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "Gamma capability could not be set" &lt;&lt; endl;</p>
+<p> &nbsp; }</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the author (must be supported by the source)</p>
+<p> &nbsp; if ( Source.<a href="dtwainsourceiscapsupported_2.htm">IsCapSupported</a>( DTWAIN_CV_CAPAUTHOR ))</p>
+<p> &nbsp; {</p>
+<p> &nbsp; &nbsp; &nbsp;// Create an array of string values ( 1 value, initialized to "DynaRithmic")</p>
+<p> &nbsp; &nbsp;  <a href="arrayclasses_2.htm">DTwainStringArray</a> Author(1, "DynaRithmic");</p>
+<p> &nbsp; &nbsp; &nbsp;if ( Source.SetCapValues( DTWAIN_CV_CAPAUTHOR, Author) )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "Author capability was set " &lt;&lt; endl;</p>
+<p> &nbsp; &nbsp; &nbsp;else</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cout &lt;&lt; "Author capability was not set " &lt;&lt; endl;</p>
+<p> &nbsp; } &nbsp; &nbsp; &nbsp; &nbsp; </p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

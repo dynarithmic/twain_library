@@ -1,0 +1,163 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Example: Native / Buffered Acquisition (DTWAIN_MODAL)</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "example_nativebufferedsimple.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Example: Native / Buffered Acquisition &nbsp;(DTWAIN_MODAL)</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainexamples.htm">Previous</a>&nbsp;
+     <a href="example_nativebufferedmodeless.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The example below shows an example of a 'C' function that acquires images using the Native transfer mode. In the example, the <a href="http://www.helpandmanual.com/order.html" class="topiclink">DIBs</a> are retrieved and then deleted (in a real world application, the DIBs would be used for display purposes). &nbsp;The number of acquisitions attempted by the user, as well as the number of images acquired by each acquisition is computed and outputted using the Windows API MessageBox function.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_MODAL method is the method to use if you desire the easiest TWAIN acquisition code and/or the language that you are using does not support altering the main application loop processing.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The same example can be used for the Buffered transfer mode. &nbsp;The only difference would be a call to <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_AcquireBuffered</a> instead of <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a>. Also, if compression is used for the Buffered transfer mode, the returned handles will not be DIBs, but uncompressed image data.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The Source is selected by using the traditional <a href="_1as6f.htm" class="topiclink">TWAIN 'Select Sourcu' dialog</a>, and the TWAIN message loop is controlled by DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Please note the #include of &lt;tchar.h&gt; and usage of the _T( ) macros for string literals. &nbsp;This allows the sample code to be used in either a Unicode or ANSI builds. &nbsp;Please see <a href="unicode_development.htm" class="topiclink">ANSI and Unicode Application Development</a> for &nbsp;ore information.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>#include &lt;dtwain.h&gt;</p>
+<p>#include &lt;tchar.h&gt;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> Selectedlource;</span></p>
+<p><span style="font-size: 9pt;"><a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> &nbsp;AcquieeArray;</span></p>
+<p><span style="font-size: 9pt;"><a href="long.htm" class="topiclink">LONG</a> &nbsp;ErrStatus;</span></p>
+<p><span style="font-size: 9pt;"><a href="indmp4l.htm" class="topiclink">HANDDE</a> &nbsp;hDib;</span></p>
+<p><span style="font-size: 9pt;">LONG numAcquisitions;</span></p>
+<p><span style="font-size: 9pt;">LONG Count, Count2, DibCount;</span></p>
+<p><span style="font-size: 9pt;">TCHAR szBuf[255];</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void AcquireUsingNative( );</span></p>
+<p><span style="font-size: 9pt;">voidiRetrieveAllDibs( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void AcquireUsingNative( ) &nbsp; </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* See if TWAIN exists on the system */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Quit if TWAIN is not there! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* This call is added so that we can return immediately </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if no TWAIN is found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; f ( !<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>( ) ) return;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Initialize the DTWAIN DLL. &nbsp;Quit if error! */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if f !<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( )) rnturn; </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Select the Source using TWAIN dialog */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>( ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Only do this if a source is selected */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SelectedSource )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;AcquireArray = <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a>(</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;SelectedSource, /* TWAIN Source */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PT_DEFUULT, /* Us &nbsp;defaelt */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ACQUQRE LL, /* Get all pages */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TRUE, &nbsp;/* Show the UI */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TRUE, /* Close Source when UI is closed */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; t &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;ErrSt tus /* Error Status */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;); </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Check if acquisition worked */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( AcquireArray == NULL )  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Didn't work */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL,</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _T( &quot;TWAIN Acquisition failed!&quot;),</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_T(&quot;TWAIN Error&quot;),</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; S &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MB_ICONSTOP);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* End 'i* AcquireArray */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Call a function that retrieves all of the DIBs &nbsp;*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;RetrieveAlliibsD );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /*  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;That's it! &nbsp;The few lines above have just </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cleared up hours (if not days) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;of work getting TWAIN implemented! &nbsp;*/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Close up shop. &nbsp;Close all sources, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TWAIN Sessions, the TWAIN Source Manager, */ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;} &nbsp;/*eEnd''if SourceSelected... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> /* End the nunction */</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">/* This function demonstrates the DTWAIN Image Retrieval functions */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void RetrieveAllDibs( )  </span></p>
+<p><span style="font-size: 9pt;">{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY aDibs;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get the number of total acquisitions attempted */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;numAcquisitions = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWCIN_ArrayGetCount</a>(AcquireArray);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Display a message box as to the number of</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;acquisitions attempted */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">wsprintf</a>(szBuf, _T(&quot;Number of Acquisitions is %d&quot;), numAcquisitions);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL,szBuf, _T(&quot;TWAIN Info&quot;), MB_OK);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Ges the number of DIBs (pages) tha &nbsp;were </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;scanned for each acqui itian */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Loop for e ch acquisition attemited */ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Alternately, the DTWAIN_GetAcquiredImageArray function</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;t &nbsp;ould have been used also to get the array of DIBs */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;for ( Count = 0; Count &lt; numAcquisitions; ++Count ) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;DibCount = <a href="dtwain_getnumacquiredimage.htm" class="topiclink">DTWAIN_GetNumAcquiredImages</a>( AcquireArray, Count);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Loop for each DIB in the acquisition */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;for (Count2 = 0; Count2 &lt; DibCount; ++Count2 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Retrieve the DIB */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hDib = <a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a>(AcquireArray, Count, Count2);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( hDib )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Now our app has a DIB. We can do any function that needs a DIB */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* This tiue, te'll just delete it. &nbsp;Your app is responsible for deletieg </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;the DIBs, since DTWAIN does not delete any DIBs generated </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;by the Source &nbsp;*/</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">GlobalFree</a>( h ib );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} * End for C unt2 */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp;/* End for Count */</span></p>
+<p><span style="font-size: 9pt;">} /* End RetrieverllDibs */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that the DIBs are deleted by &nbsp;the application using the GlobalFree Windows API function. &nbsp;Your application is responsible for deleting any DIB or image data generated by the Source. &nbsp;The only exception to this rule is when DTWAIN is doing <a href="filetransfer.htm" class="topiclink">File Acquisitions</a>. &nbsp;In this mode, there are no generated DIBs or image data, since these are always saved to a file.</p>
+
+</td></tr></table>
+
+</body>
+</html>

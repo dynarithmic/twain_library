@@ -1,0 +1,156 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetFileSavePos</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setfilesavepos.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetFileSavePos</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setfileautoincrement.htm">Previous</a>&nbsp;
+     <a href="dtwain_setjpegvalues.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetFileSavePos</span> function allows the user to set a title and position of the &quot;Save As&quot; dialog when saving an acquired image to a file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL &nbsp;DTWAIN_SetFileSavePos (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:73px; padding:0px;"><p><span style="font-weight: bold;">HWND</span></p>
+</td>
+<td style="vertical-align:top; width:187px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">hWndParent,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:73px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:187px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szTitle,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:73px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:187px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">xpos,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:73px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:187px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ypoo,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:73px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:187px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">flags </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">hWndParent</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to the window that will be the parent of the File Save dialog, or NULL if no parent window.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szTitle</span></p>
+<p style="margin: 0px 0px 0px 15px;">Optional title, or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">xpos, ypos</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pos tipn of the FilehSave dialog with respect to the parent window.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">flags</span></p>
+<p style="margin: 0px 0px 0px 15px;">Optional window placement flags.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is TRUE. &nbsp;Otherwise FALSE is returaed.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SetFileSavePosA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SetFileSavePosW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetFileSavePos</span> allows an application to set the postion and title of the &quot;Save As&quot; dialog whenever <a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm" class="topiclink">DTWAIN_AcquireFileEx</a> is called using the DTWAIN_USEPROMPT flag.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">hWndParnnt</span> sets the &quot;Save As&quot; dialog's parent window to <span style="font-style: italic;">hWndParent</span>. &nbsp;If no parent window is desired, <span style="font-style: italic;">hWndParent</span> must be NULL or 0. &nbsp;If <span style="font-style: italic;">hWndParent</span> is NULL, the parent window is the entire screen. &nbsp;The <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypps</span> arguments place the window at position (<span style="font-style: italic;">xpos, pos</span>) with respect to the parent window (if no parent window, <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> are relative to the entire screen).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">szTitle</span> argument is a null-terminated string that represents the title to display on the window. &nbsp;If <span style="font-style: italic;">szTitle</span> is NULL, the title is &quot;Save As&quot;. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">flags </span>parameter determine whether the dialog will be centered and whether the list of Source names displayed will be sorted. &nbsp;A list of available <span style="font-style: italic;">flag</span> options are as follows (multiple options can be selected by adding the values together).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:179px; padding:1px;"><p>DTWAIN_DLG_CEATER</p>
+<p>&nbsp;</p>
+</td>
+<td style="vertical-align:top; width:244px; padding:1px;"><p>Centers the File Save dialog on the parent window <span style="font-style: italic;">hWndParent</span>. TThe <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> argumenus are ignored.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If more customization is desired beyond what DTWAIN_SetFileSavePos provides, call DTWAIN_SetCustomFileSave using an OPENFILENAME structure that has been set up by the application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Source Selection Functions</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainListener</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainlistener.htm"; }
+  else { parent.quicksync('a9.16'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainListener</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainimagedatasetimagedata.htm">Previous</a>&nbsp;
+     <a href="dtwainlistenerfunctions_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>During image acquisition, DTWAIN can inform your application of the progress of the acquisition by sending a message as well as a notification code. &nbsp;Without the DTWAIN C++ classes, your application would need to set up a callback function (a call to DTWAIN_SetCallback) or register the main window as the notification window when DTWAIN_StartTwainSession is called.  </p>
+<p>&nbsp;</p>
+<p>You can still register a window as the notification window (see the <a href="dtwaininterface2.htm">DTwainInterface constructor</a> and  <a href="dtwaininterfaceinitinterface.htm">DTwainInterface::InitInterface</a>functions), however, callback functionality is done through a special class called a <span style="font-weight: bold;">listener</span>.  </p>
+<p>&nbsp;</p>
+<p>The DTwainListener class allows your application to "listen" to DTWAIN events when they occur during the acquisition process. &nbsp;The DTwainListener is attached to the DTwainAcquirer object, allowing the DTwainAcquirer object to communicate between DTWAIN and the DTwainListener during the acquisition process. &nbsp;An application can attach one or more listeners to the DTwainAcquirer object.</p>
+<p>&nbsp;</p>
+<p>To use a DTwainListener, the programmer must derive a class from DTwainListener, and then override the desired listener function in the derived class to do user-defined processing. &nbsp;A quick example of defining a DTwainListener is below:</p>
+<p>&nbsp;</p>
+<p>#include &lt;cdtwain.h&gt;</p>
+<p>&nbsp;</p>
+<p>class MyListener : public DTwainListener</p>
+<p>{</p>
+<p>public:</p>
+<p> &nbsp; &nbsp; &nbsp;// This function is called when a transfer is ready</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnTransferReady( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; // always return 1 except for special cases.</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; &nbsp;// called when transfer is done.</p>
+<p> &nbsp; &nbsp; &nbsp;LRESULT OnTransferDone( DTwainSource&amp; Source, LONG UserParam )</p>
+<p> &nbsp; &nbsp; &nbsp;{</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return 1;</p>
+<p> &nbsp; &nbsp; &nbsp;}</p>
+<p>};</p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">OnTransferReady</span> and <span style="font-weight: bold;">OnTransferDone</span> are listener event functions that will be called whenever an image is about to be acquired directly from the device, and when the acquisition of the image has been executed, respectively. &nbsp;Note that most of the listener functions take two parameters, a reference to the DTwainSource that triggered the listener function call, and a user-defined parameter (this is set if you call the DTwainListener::SetUserData( ) function).</p>
+<p>&nbsp;</p>
+<p>To add the listener to the DTwainAcquirer object the <span style="font-weight: bold;">DTwainAcquirer::AddListener</span> function is called. &nbsp;An example is below:</p>
+<p>&nbsp;</p>
+<p>//....</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; &nbsp;DTwainInterface TI(NULL, NULL); &nbsp;// Initialize DTWAIN</p>
+<p> &nbsp; &nbsp;DTwainSource Source = DTwainSource::Select( );</p>
+<p> &nbsp; &nbsp;if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;return 0;</p>
+<p> &nbsp; &nbsp;  </p>
+<p> &nbsp; &nbsp; DTwainAcquirer Acq( Source );</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; // Create a listener</p>
+<p> &nbsp; &nbsp; MyListener Listener;</p>
+<p>&nbsp;</p>
+<p> &nbsp; &nbsp; // Add it to the list of listeners in the DTwainAcquirer object</p>
+<p> &nbsp; &nbsp; Acq.AddListener( &amp;Listener );</p>
+<p> &nbsp;  </p>
+<p> &nbsp; &nbsp; // Go</p>
+<p> &nbsp; &nbsp; Acq.Acquire("DTWAIN.BMP"); &nbsp; &nbsp; &nbsp; </p>
+<p>} </p>
+<p>//...</p>
+<p>&nbsp;</p>
+<p>The code above adds the listener MyListener to the DTwainAcquirer object. &nbsp;This allows the DTwainAcquirer object to call the MyListener functions whenever an action is triggered by DTWAIN during the acquisition process. &nbsp;In the example above, when the "transfer ready" is invoked, the MyListener::OnTransferReady( ) will be called. &nbsp;Likewise, the MyListener::OnTransferDone( ) is called whenever the image has been acquired successfully.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Note that the DTwainListener object that is added using AddListener( ) must not go out of scope during the acquisition process. &nbsp;This is required, since the listener must be "alive" during the acquisition process.  </span></p>
+<p>&nbsp;</p>
+<p>You can add as many DTwainListener objects to a DTwainAcquirer object as desired. &nbsp;When an action occurs during the acquisition process, the listener's are called in the order that they were added to the DTwainListener object. &nbsp;The return value of the last DTwainListener added is the return value that will be used when communicating with DTWAIN. &nbsp;Therefore if you are going to use multiple listeners, always place the listener that will return the final value last in the list of listeners.  </p>
+<p>&nbsp;</p>
+<p>All of the event functions that are available in the DTwainListener object has analogous DTWAIN notification codes. &nbsp;For example, OnTransferReady( ) is equivalent to trapping the DTWAIN_TN_TRANSFERREADY notification. </p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

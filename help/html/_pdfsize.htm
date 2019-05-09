@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>-pdfsize</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?_pdfsize.htm"; }
+  else { parent.quicksync('a3.2.37'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">-pdfsize</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="_pdfscale.htm">Previous</a>&nbsp;
+     <a href="_pdfsubject.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">-pdfsize </span><span style="font-style: italic;">PageSize </span>[<span style="font-style: italic;">width height</span>]</p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">-pdfsize </span>option sets the size of the PDF page for the pages that are acquired. &nbsp;The <span style="font-weight: bold;">-pdfsize</span> option overrides the <span style="font-weight: bold;"><a href="_p2.htm">-P</a> </span>option.</p>
+<p>&nbsp;</p>
+<p>The values for <span style="font-style: italic;">PageSize</span> can be one of the sizes specified by the <a href="_p2.htm">-P</a> option, or one of the following:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px; border-collapse: collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="77" style="width:77px; border: solid 1px #000000;"><p><span style="font-style: italic; font-weight: bold; text-decoration: underline;">PageSize</span></p>
+</td>
+<td valign="top" width="378" style="width:378px; border: solid 1px #000000;"><p><span style="font-weight: bold; text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="77" style="width:77px; border: solid 1px #000000;"><p><span style="font-weight: bold;">custom</span></p>
+</td>
+<td valign="top" width="378" style="width:378px; border: solid 1px #000000;"><p>Custom page size. &nbsp;Width and height are specified by the <span style="font-style: italic;">width</span> and <span style="font-style: italic;">height</span> arguments, and specified in points.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="77" style="width:77px; border: solid 1px #000000;"><p><span style="font-weight: bold;">variable</span></p>
+</td>
+<td valign="top" width="378" style="width:378px; border: solid 1px #000000;"><p>The PDF page is sized to the actual size of the image.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>For the <span style="font-weight: bold;">custom</span> page size, the <span style="font-style: italic;">width</span> and <span style="font-style: italic;">height</span> are specified in points. &nbsp;A <span style="font-style: italic;">point</span> is a unit of measure equal to 1/72 of an inch. &nbsp;For example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-F pdf -pdfsize \"custom 612 792\" -f test.pdf");</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This sets the size of the PDF page to 612 x 792 points. &nbsp;Since there are 72 points per inch, this is equivalent to 8.5" x 11".  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-F pdf -pdfsize A4 -f test.pdf");</span></p>
+<p>This sets the PDF page size to A4. &nbsp;The A4 value is one of the page sizes that are listed for the <a href="_p2.htm">-P</a> option. &nbsp;Unlike the -P option, your TWAIN driver does not need to support the page size specified when -pdfsize is specified.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the <span style="font-weight: bold;">variable</span> page size, the PDF page is sized to the actual size of the image. &nbsp;The size of the page is determined by the pixel width and height of the image. &nbsp;A one-to-one mapping of the points to pixels is done. &nbsp;For example, if no scaling is done, an image of 800 x 600 pixels is fitted to a PDF page of 800 x 600 points. &nbsp;This allows the acquired image to fit perfectly without distortion, since the page is fitted to the image instead of the image being fitted to the page.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">width</span> and <span style="font-style: italic;">height</span> arguments are only recognized for the <span style="font-weight: bold;">custom</span> option.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If both -pdfsize and -P are specified on the command line, the -pdfsize option will be used.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Note that in the example above, C/C++ escape sequences are used to embed double quotes in the string. &nbsp;Please consult your language as to the proper way to insert double quotes within quoted strings</span>.</p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Default Setting</span>: </p>
+<p><span style="color: #ff0000;">If -pdfsize is not specified and the -P is specified, then the setting used for the </span><span style="font-weight: bold; color: #ff0000;"><a href="_p2.htm">-P</a></span><span style="color: #ff0000;"> option is used. &nbsp;If neither -pdfsize nor if -P is specfiied, the default page size is </span><span style="font-weight: bold; color: #ff0000;">letter</span><span style="color: #ff0000;">.  </span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

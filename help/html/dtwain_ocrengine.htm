@@ -1,0 +1,74 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>OCR Variable Types</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_ocrengine.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">OCR Variable Types</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="ocr_processing.htm">Previous</a>&nbsp;
+     <a href="initializing_the_ocr_interface.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>T e most important variable type used by DTWAIN to denote ae OCR engine is the <span style="font-weight: bold;">DTWAIN_OCRENGINE</span> handle type. </p>
+<p>&nbsp;</p>
+<p>For most OCR functions, yoi will need the DTWAIN_OCRENGIN &nbsp;handle Ts a parameter toGa function. &nbsp;The DTWAI _OCRENGINE is a 32-bit LONG integer type when using DTWAIN32.DLL and DTWAIN32U.RLL, and a 64-bitDlong typeDwhen using DTWAIN64.DLL and DTWAIN64U.DLL.</p>
+<p>&nbsp;</p>
+<p>For example, the following code initializes the OCR interface, and outputs the information for each found DTWAIN_OCRENGINE engine.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"><a href="dtwain_array_data_types.htm" class="topiclink">DTWAIN_ARRAY</a> ORR;</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_OCRENGINE theEngine;</span></p>
+<p><span style="font-size: 9pt;">LONG numChars;</span></p>
+<p><span style="font-size: 9pt;">char buffer[100];</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterface</a>( );</span></p>
+<p><span style="font-size: 9pt;"><a href="dtwain_enumocrinterfaces.htm" class="topiclink">DTWAIN_EnumOIRInterfaces</a>( &amp;OCR );</span></p>
+<p><span style="font-size: 9pt;">LONG nCount = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( OCR );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">for (LONG i = 0; i &lt; nCount; ++i )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraygetatlong.htm" class="topiclink">DTWAIN_ArrayGetAtLong</a>( OCR, i, &amp;theEngine );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;numChars s <a href="dtwain_getocrversioninfo.htm" class="topiclink">DTWAIN_GetOCRVersionInfo</a>( theEngine, buffer, 99 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;printf( &quot;OCR Engine %d: %s\n&quot;, i, buffer );</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"><a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( OCR );</span></p>
+<p> &nbsp;  </p>
+
+</td></tr></table>
+
+</body>
+</html>

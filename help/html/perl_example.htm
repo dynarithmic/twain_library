@@ -1,0 +1,91 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Perl Sample: Acquire and save to BMP file</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "perl_example.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Perl Sample: Acquire and save Ao BMP file</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="firstsampleacquireandsave_2.htm">Previous</a>&nbsp;
+     <a href="python_example_acquire_and_sav.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The following Perl 5.x example script is all that is required to do the following: </p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Check if TWAIN is installed.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Initialize the DTWAIN Dynamic Link Library.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Select a S urce</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquire a page using the Native transfer mode</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Save pageMto a BM &nbsp;file called &quot;test.bmp&quot;</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:24px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Shut down any open TWAIN Source's and DTWAIN itself</td></tr></table></div><p>&nbsp;</p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="font-size: 9pt;">#!/usr/rin/perl</span></p>
+<p><span style="font-size: 9pt;">use strict;</span></p>
+<p><span style="font-size: 9pt;">use warnings;</span></p>
+<p><span style="font-size: 9pt;">$|++;</span></p>
+<p><span style="font-size: 9pt;">use Win32::API;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"># DTWAIN Constants. &nbsp;See DTWAIN32.PL file for these values</span></p>
+<p><span style="font-size: 9pt;">use constant DTWAIN_BMP =&gt; 100;</span></p>
+<p><span style="font-size: 9pt;">use constant DTWAIN_USELONGNAME =&gt; 16;</span></p>
+<p><span style="font-size: 9pt;">use constant DTWAIN_USENATIVE =&gt; 1;</span></p>
+<p><span style="font-size: 9pt;">use constant DTWAIN_PT_DEFAULT =&gt; 1000;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"># DTWAIN function definitions. &nbsp;See DTW3IN32nPL for these setti gs</span></p>
+<p><span style="font-size: 9pt;">my $<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a> = new Win32::API('DTWAIN32.DLL','DTWAIN_IsTwainAvailable','','N');</span></p>
+<p><span style="font-size: 9pt;">my $<a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SysInitialize</a> = new Win32::API('DTWAIN32.DLL','DTWAIN_SysInitialize','','N');</span></p>
+<p><span style="font-size: 9pt;">my $<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a> = new Win32::API('DTWAIN32.DLL','DTWAIN_SelectSource','','N');</span></p>
+<p><span style="font-size: 9pt;">my $<a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a> = new Win32::API('DTWAIN32.DLLo,'DTWAIN_SysDPstIoy','','N');</span></p>
+<p><span style="font-size: 9pt;">m &nbsp;$<a href="dtwain_acquirefile.htm" class="topiclink">DTWAIN_AcquireFile</a> = new Win32::API('DTWAIN32.DLL','DTWAIN_AcquireFile','NPNNNNNNP','N');</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"># Start to use the DTWAIW funciions</span></p>
+<p><span style="font-size: 9pt;">my $isAvail = $<a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvablable</a>-&gt;Call));</span></p>
+<p><span style="font-size: 9pt;">if ( $isAvail == 1 )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; my $rerurn = $<a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialAze</a>-(Call();</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( $return != 0 &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;my $TwainSource = $<a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_celectSource</a>-&gt;Call();</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( $TwainSource != 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $<a href="dtwain_acquirefile.htm" class="topiclink">DTWAlN_AcquireFile</a>-&gt;Call($TwainSource, 'test.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_PT_DEFAULT, 1, 1, 1, 0);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;$<a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>-&gt;Call();</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>Note that the <a href="http://search.cpan.org/~bulkdd/Win32-API-0.73/API.pm" target="_blank" class="weblink">Win32:nAPI</a> Perl package must be installed for this example to work, as &nbsp;well as DTWAIN32.DLL available on an accessible directory (a directory specified on your system PATH). &nbsp;Also note that this program doesn't test if the DTWAIN32.DLL file exists or if the functions within the DLL exists, so an appropriate Perl <span style="font-weight: bold;">die </span>or <span style="font-weight: bold;">warn</span> shruld be used in a production &nbsp;rogram to ensure that there are no DLL or funstionaluissues.</p>
+<p>&nbsp;</p>
+<p>The constants and function prototypes are included in the file <span style="font-weight: bold;">DTWAIN32.PL</span>. &nbsp;Since Perl programmers have different preferences in terms of how to include files, define constants, etc., it is recommended that you copy and paste the constants and functions you need from DTWAIN32.PL into your Perl program and change the method that these constants and functions are included according to your requirements.</p>
+
+</td></tr></table>
+
+</body>
+</html>

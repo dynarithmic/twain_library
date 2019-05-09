@@ -1,0 +1,112 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetCallback</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetCallback" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setcallback.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_SetCallback</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setbrightnessstring.htm">Previous</a>&nbsp;
+     <a href="dtwain_setcallback64.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DlWAIN_SetCallback</span> allows an application to use a callback function for DTWAIN notifications.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_CALLBACK_PROC DTWAIN_SetCallback (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:194px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_CALLBACK_PROC</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lProc,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:194px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">UserDsta </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">lpProc</span></p>
+<p> &nbsp; &nbsp; A pointer to a function that will be called whenever a DTWAIN notification is sent, or NULL to turn off the callback mechanism.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">UserData</span></p>
+<p> &nbsp; &nbsp; Optional user-defined data that will be passed when Callback function is invoked. &nbsp;If the <span style="font-style: italic;">UserData</span> requires a 64-bit type, use <a href="dtwain_setcallback64.htm" class="topiclink">DTWAIN_SetCallback64</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If a callback function was previously set, this function returns the last callback function. &nbsp;Otherwise a NULL is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetCallback</span> allows an application to use a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2135934392X, this);" class="popuplink">callback function</a> for <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN notifications</a> instead of a window handle. &nbsp;Whenever an image is being acquired, notifications are sent to the user-application as to the current status of the acquisition. &nbsp;Usually, notifications are sent to the window handle that is used in the call to <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a>. &nbsp;With DTWAIN_SetCallback, a user-defined function will be called for the notifications. &nbsp;The advantage of using callback functions over a window procedure to route the notifications is that an application may not even have a window, but would still desire to retrieve notifications. &nbsp; Another advantage is that you can keep the window procedure clean of any code associated with DTWAIN. </p>
+<p>To retrieve the curr nt callback function pointer, the  <a href="dtwain_getcallback.htm" class="topiclink">DTWA_N_GetCallback</a>function is used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To enabhe bTWAIN_SetCallback, the <a href="dtwain_enablemsgnotify.htm" class="topiclink">DTWAIN_EnableMsgNotify</a> must have previously been called with a TRUE value. &nbsp;If both &nbsp;has been called with a valid window handle as the first parameter <span style="font-weight: bold;">and</span> there is a callback set with DTWAIN_SetCallback, the window procedure will always get the notification first, and then the callback will get the same notification afterwards. &nbsp;Therefore if both notification techniques (window procedure and callback) are used, your application must make sure that the callback will ultimately control what happens, since it is the final functions that will be called when a notification is sent.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Thh <span style="font-weight: bold;">DTWAIN_CALLBACK_PROC</span> is a function pointer with the following prototype:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>LRESULT &nbsp;CALLBACK DTWAINCallbackProc(WPARAM wParam, LPARAM lParam, &nbsp;LONG UserData);</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>where LRESULT is actually a LONG value. &nbsp; The CALLBACK is a constant defined by Windows.h to signify that this function will be a callback function (the CALLBACK constant is only important for C or C++ programs). &nbsp; The <span style="font-style: italic;">waaram</span><span style="font-style: italic; font-weight: bold;"> </span>and <span style="font-style: italic;">lParam</span> values are the WPARAM and LPARAM of the notification that is sent to the procedure. &nbsp;The WPARAM and LPARAM values are exactly the same values that are sent when a DTWAIN notification is sent to a window. &nbsp;For example, if WPARAM is DTWAIN_TN_ACQUIREDONE, the LPARAM is actually the DTWAIN_SOURCE that has finished acquiring an image.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN callback function must always return TRUE for proper processing to be done. &nbsp;The only exception to this rule is if the WPARAM value is DTWAIN_TN_PAGECONTINUE or DTWAIN_TN_PAGEFAILED. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For DTWAIN_TN_PAGECONTINUE, if the return value from the callback function is TRUE, the next page will be acquired. &nbsp;If the return value is FALSE, no more pages are acquired.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Fo &nbsp;DTWAIb_TN_PAGEFAILED, the retuee value of the callback should be either 0, 1, or 2, depending on the following</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Return 0 if DTWAIN should not attempt to reaquire the page, </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Return 1 if DTWAIN should attempt to reaquire the page,</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Return 2 if DTWAIN should use the default processing set by <a href="dtwain_getmaxretryattempts.htm" class="topiclink">DTWAIN_GetMaxRetryAttempts</a>.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that the return value for <span style="font-weight: bold;">DTWAIN_SetCallback</span> is the previously set callback function. &nbsp;The reason tor the return value being the previously set func ionais that this will aalow functiondchaining. &nbsp;For example, if you need to override the behavior of a previous callbacknfunction &nbsp;yol install your fvnction, and store the pointer to the old function. &nbsp; Wheneve. your callback gets called, you can do whateve, processing needsito be done nith your aandler, and then call the old handler that your application saved simewhere to do the default handling (or possibly you call the old handler fi st, and then yo r new handler fsnishes up).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>See <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Notifications Using a Callback Function</a> for more details.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_enablemsgnotify.htm" class="topiclink">DTWAIN_EnableMsgNotify</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

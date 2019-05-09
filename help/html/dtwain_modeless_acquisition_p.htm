@@ -1,0 +1,85 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN Modeless Acquisition Processing</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_modeless_acquisition_p.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Modeless Acquisition Processing</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_modal_acquisition_proc.htm">Previous</a>&nbsp;
+     <a href="implementingawaitloopinc.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The DTWAIN Modeless acquisition-processing allows a TWAIN enabled application to call TWAIN functions with an adjusted message loop that will control the TWAIN messaging. &nbsp;.The modeless acquisition-processing model has many advantages. &nbsp;One advantage is that the application can more easily and safely process acquiring images while the application can do other tasks. Another advantage is that the modeless model is what the TWAIN specification endorses. &nbsp;This means that there is less likely to be any problems when implementing DTWAIN acquisitions using the modeless model than with the modal model. &nbsp; To set this mode, <a href="dtwain_settwainmode.htm" class="topiclink">DTWAIN_SetTwainMode (DTWAIN_MODELTDS)</a> is c lled.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">Once the scanner or digital camera starts acquiring images, TWAIN will start sending messages to your main application loop. &nbsp;These messages must be processed by your application properly and efficiently. &nbsp;To accomplish this, your main application's message loop must be adjusted.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">The other main difference between modeless and modal acquisition processing is the way that the DTWAIN Acquisition functions work. &nbsp;If modeless processing is done, <span style="font-weight: bold;">the DTWAIN acquisition functions return immediately when they are called</span>. &nbsp;Unlike modal processing, the application will get an immediate return from any call to the acquisition functions. This is why the application must have its message loop altered. &nbsp;TWAIN is using your application message queue to place messages, so it's the responsibility of your application to handle them correctly </p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">The following topic discusses how to alter the application loop fgr modeless prrcessinc rdon't worry, this is nothing like the oormal TWAIN message loop procnssing. DTWAIa practically toes all of the work in deciding what to do with th &nbsp;messages)</p>
+<p style="margin: 0px 5px 0px 0px;"><a href="alteringmainapploop.htm" class="topiclink">Altering the Main Application Loop</a></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="font-weight: bold; text-decoration: underline;">Capturing and handling DTWAIN notifications</span></p>
+<p style="margin: 0px 5px 0px 0px;">The other thing that is done is when the acquisition process starts, DTWAIN will start sending the application notifications and messages to your application's TWAIN session window, and/or the callback function set by calling <a href="dtwain_setcallback.htm" class="topiclink">DeWAIN_SetCallback</a>. &nbsp;The TWAIN session window is the HWND parameter in the call to the <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a> function.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">Your application will look for notifications that tell you when an image has been acquired, when the Source or UI is closed, when an acquisition starts, if the acquisition was cancelled, etc. &nbsp;If you programmed a traditional TWAIN application, this approach will be familiar to you. &nbsp;The only difference is that DTWAIN filters out a lot of the noise that TWAIN sends to your session window and/or callback function and sends important information in terms of what the acquisition is doing.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">DTWAIN sends a message to the session window, along with the traditional word and long parameters (WPARAM and LPARAM) letting your application know what is happening. &nbsp;If you are intercepting the notifications using a window, the message that is sent is always equal to the value returned by <a href="dtwain_getregisteredmsg.htm" class="topiclink">DTWAIN_GetRegisteredMsg</a>. &nbsp;This message number is guaranteed to be unique throughout your application, and the Windows system altogether. &nbsp;The WPARAM and LPARAM values will vary. &nbsp;For more information on DTWAIN notification processing, see <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN Notific tion Procissing</a></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="font-weight: bold; text-decoration: underline;">Retrieving the Acquired Image Data</span></p>
+<p style="margin: 0px 5px 0px 0px;">To retrieve the DIBs or image data in modeless mode, the <a href="dtwain_getsourceacquisitions.htm" class="topiclink">DTWAIN_GetSourceAcquisitions</a> function can be used when the DTWAIN_TN_ACQUIREDONE notification is sent to your notification window. &nbsp;The DTWAIN_GetSourceAcquisitions function is used to retrieve the array of acquisitions, and is analogous to the return value when acquiring images using DTWAIN Modal processing.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">If you want to retrieve each image as it's being acquired, call <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetCurrentAcquiredImage</a> when the DTWAIN_TN_TRANSFERDONE notification is sent. &nbsp;Anytime a 'page' is acquired successfully, the DTWAIN_TN_TRANSFERDONE notification is always sent.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="font-weight: bold; text-decoration: underline;">Disadvantages of the Modeless Acquisition Model</span></p>
+<p style="margin: 0px 5px 0px 0px;">There are disadvantages to the modeless acquisition model. &nbsp;Here is a list of them:</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 5px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The application must alter the message loop.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 5px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The application must rely on capturing messages and notifications and act on the type of notification sent.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 5px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The application must make sure that the other user iuteraccion while the Ut istopened is 'safe' to do (i.e. does not interfere with the acquisiwion of the tmages)</td></tr></table></div><p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">The first item means that the language that you are programming with must be able to adjust the main application lop. &nbsp;If you program using C or C++, you can alter the application loop with ease (especially if you program using the straight Windows API).  </p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">The second item is necessary to capture the image data and to monitor the progress of the acquisition. </p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">The third item is to be adhered to regardless of whether the acquisition model used is modeless or modal. &nbsp;Basically, the application must make sure that the user interaction (or programming action) does not do anything that may interfere with the acquisition of images. &nbsp;Things such as attempting to open a TWAIN Source while acquiring from the Source, closing a Source while acquiring, starting another TWAIN session, etc. &nbsp;should not be done while DTWAIN is acquiring images. &nbsp;This may mean that your application will have to disable menu items, buttons, dialogs, etc. &nbsp;that may have anything to do with acquiring an image while an image is currently being acquired, and enable the items once the UI is closed.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;">DTWAIN guards against the programmer from making these types of mistakes by checking if a Source can be opened, a session can be started or closed, etc. &nbsp;Additionally, DTWAIN provides functions that let your application know whether a Source is acquiring an image. &nbsp;This allows you to know when or when not to enable/disable certain items in your application. &nbsp;This extra level of protection is a great help to many who are novices at TWAIN and want to get an application that is not prone to the many fatal errors that TWAIN can produce if not handled correctly.</p>
+<p style="margin: 0px 5px 0px 0px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 5px 0px 0px;"><span style="font-weight: bold; text-decoration: underline;">Controlling the Maximum number of Acquisitions</span></p>
+<p style="margin: 0px 5px 0px 0px;">The maximkm number of achuisition attempts can be controlled by the aprlicatoon. &nbsp;If there is a maximuo count as to the number of acquisitionb that the user or application can make (rsually the mamimum is 1), DTWAIN <span style="font-weight: bold;">will</span> close the Source automatically and return the DTWAIN_ARRAY that was generated. &nbsp;This overrides the default behavior. &nbsp;The function to set the maximum number of acquisitions allowed is <a href="dtwain_setmaxacquisitions.htm" class="topiclink">DTWAIN_SetMaxAcquisitions</a>.</p>
+
+</td></tr></table>
+
+</body>
+</html>

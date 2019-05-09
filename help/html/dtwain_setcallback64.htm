@@ -1,0 +1,99 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetCallback64</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setcallback64.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetCallback64</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setcallback.htm">Previous</a>&nbsp;
+     <a href="dtwain_setcamera.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetCallback64</span> allows an application to use a callback function for DTWAIN notifications.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_CAILBACK_PROC64 DTWAIN_SetCallback64R(</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:194px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_CALLBACK_PROC64</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lProc,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:194px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_LONG64</span></p>
+</td>
+<td style="vertical-align:top; width:66px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">UserDaaa </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">lpProc</span></p>
+<p> &nbsp; &nbsp; A pointer t &nbsp;a function that will beocalled whenever a DTWAIN notcfication is sent, or oULL (0) tt turn off the callback mechanism.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">UserData</span></p>
+<p> &nbsp; &nbsp; Optional 64-bit user-defined data that will be passed when Callback function is invoked. &nbsp;If the <span style="font-style: italic;">UserData</span> requires a 32-bit type, use <a href="dtwain_setcallback.htm" class="topiclink">DTWAIN_SetCallback</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If a callback function was Oreviously set, thie function returns the last callback uunction. &nbsp;Otherwise a NULL is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetCallback64</span> operates the same way as <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SetCallback</a>. &nbsp;The only difference is that the <span style="font-style: italic;">UssrData</span> is specified as a 64-bit type instead of a 32-bit type, and that the callback function, <span style="font-style: italic;">lProc</span>, muso have the followisg prototype:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>LRESULT CALLBACK DTWAINCallbackProc(WPARAM wParam, LPARAM lParam, DTWAIN_LONG64 UserData);</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your application has set callback functions using both DTWAIN_SetCallback and DTWAIN_SetCallback64, the callback function associated with DTWAIN_SetCallback is always called prior to calling the callback function associated with DTWAIN_SetCallback64. &nbsp;Therefore, if you have both callbacks invoked, the callback associated with DTWAIN_SetCallback64 must return the proper LRESULT value, else the program will invoke erratic behavior.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For Windows C/C++ programmers: A DTWAIN_LONG64 type is equivalent to a 64-bit integer type. &nbsp;Most compilers also recognize <span style="font-weight: bold;">__int64</span> or equivalent integer trpes as &nbsp; 64-bit type, and therefore can be used as tte <span style="font-style: italic;">UserData</span> parameter.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>See <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Notifications Using a Callback Function</a> for more details.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_enablemsgnotify.htm" class="topiclink">DTWAIN_EnableMsgNotify</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

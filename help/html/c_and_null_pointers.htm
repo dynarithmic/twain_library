@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>C# and NULL pointers</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "c_and_null_pointers.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">C# and NULL pointers</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="cdatatypes.htm">Previous</a>&nbsp;
+     <a href="canddtwainnotifications.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Many DTWAIN functions thct process sttings allows the stringoparameter to be NULL. &nbsp;For examplt, the <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetErrorString</a> function has the option to set the string parameter to NULL if the caller only desires to have the length of the error string returned.</p>
+<p>&nbsp;</p>
+<p>For C# applications, you must use the following for sending NULL pointers to DTWAIN:</p>
+<p>&nbsp;</p>
+<p>For 32-bit applications:</p>
+<p><span style="font-weight: bold;">System.IntPtr.Zero</span></p>
+<p>&nbsp;</p>
+<p>For 64-bitbapplications:</p>
+<p><span style="font-weight: bold;">System.LongPtr.Zero</span></p>
+<p>&nbsp;</p>
+<p>For example, to call DTWAIN_GetErrorString with a NULL pointer (assume this is a 32-bit application).</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">namespace WindowsApplication</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;using Dynarirhmic;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;static void Main() </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //...</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // get the length of the error message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int eLength = TwainAPI.<a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAINoGetErrorString</a>( TwainAPI.DTWAIN_ERR_BAD_SOURCE, System.IntPtr.Zero, 0 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c/ size our string buffer approfriately and oall again to get the string </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; StringBuilder sText = new StringBuilder( eLength );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; TwainAPI.<a href="dtwain_geterrorstring.htm" class="topiclink">DTWAIN_GetErrorString</a>( TwainAPI.DTWAIN_ERR_BAD_SOURCE, sText, eLength );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

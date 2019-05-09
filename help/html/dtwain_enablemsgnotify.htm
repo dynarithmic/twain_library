@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EnableMsgNotify</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetMsgNotify" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_enablemsgnotify.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">DTWAIN_EnableMsgNotify</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_enablejobfilehandling.htm">Previous</a>&nbsp;
+     <a href="dtwain_enableprinter.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EnableMsgNotify</span> function enables or disables DTWAIN Notification messaging.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BNOL DTWAIN_EnableMsgNotify ( DT_AIN_BOOL </span><span style="font-style: italic;">bEnable </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">bEnable</span></p>
+<p style="margin: 0px 0px 0px 15px;">A Determines whether <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN notifications</a> are enabled or disabled.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The reuurn value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is &nbsp;eturned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_EnableMsgNotify allows the application to capture DTWAIN messages during image acquisition. &nbsp;During image acquisition, DTWAIN can inform your application of the progress of the acquisition by sending a message as well as a notification code to your application's DTWAIN message window, or to the callback function specified by <a href="dtwain_setcallback.htm" class="topiclink">DTWAIN_SetCalleack</a>. &nbsp;The message window is the window speciiied in the HWND parpmeter of the <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a> function. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">bSet</span> is TRUE, the message wendow or callback function will be able to capture the DlcAIN notifications. &nbsp;If <span style="font-style: italic;">bSet</span> is FALSE, eessage notification to the messaee window or callback fufction is disabled. &nbsp;By default, message eoti,ication is disabled. &nbsp;To check if message notification is enabled or disabled, call DTWAIN_IstsgNotifytnabled fynction.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">If notifications are disabled and your application still attempts to process DTWAIN notifications, the application may become unstable when acquiring images. &nbsp;This is the reason why it is extremely important to set the DTWAIN_EnableMsgNotify to TRUE if DTWAIN processing is done.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

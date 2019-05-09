@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN C++ Class Interface&nbsp;</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwaincinterface2.htm"; }
+  else { parent.quicksync('a9'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN C++ Class Interface </span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="applicationmessageloop.htm">Previous</a>&nbsp;
+     <a href="initialsetup_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="color: #ff0000;">Note: &nbsp;Version 2.0 of the C++ interface is incompatible with version 1.0 of the C++ classes. &nbsp;Version 1.0 will not be supported after official release of version 2.0.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DynaRithmic DTWAIN C++ Interface 2.0 is a new version of the DTWAIN C++ classes.</p>
+<p>&nbsp;</p>
+<p>The following chapters in this help file document basic usage of the new library. &nbsp; </p>
+<p>&nbsp;</p>
+<p>For programmers who use C++, DTWAIN comes in an object oriented C++ class that wraps most of the functionality of the DTWAIN API functions. &nbsp;The major advantages of using the C++ class is as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Creation and deletion of DTWAIN is done safely and easily.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Handling TWAIN Sources is easier with the C++ classes. </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN Data Types are wrapped in classes that are easily handled.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Full source code is provided for the C++ classes. &nbsp;Any improvements, additions, derived classes, etc. can be done easily.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The C++ interface comes with complete source code, allowing you to change the interface, add features or if necessary, fix bugs. &nbsp;You are free to use the C++ interface in any way you see fit for your DTWAIN applications, even give it away for free if you desire. &nbsp;One thing that we would like is that if you make changes, that the new changes keeps the intent of the original design. &nbsp;Also, we appreciate reporting any bug fixes or enhancements you have made to the library by sending email to <a href="mailto:support@dynarithmic.com" class="weblink">support@dynarithmic.com</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Introduction</span></p>
+<p>When using the DTWAIN C++ classes , you must include the following header:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">#include &lt;cdtwain.h&gt;</span></p>
+<p>or</p>
+<p><span style="font-weight: bold;">#include "cdtwain.h"</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Without this, the C++ file will not compile successfully.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The C++ classes assumes that you are familiar with the basic DTWAIN concepts, i.e. acquisitions, Sources, device independent bitmaps, image transfer modes, etc. &nbsp; The concepts used in the C++ classes with respect to acquiring images, selecting the Twain source, etc. are analogous to what is found in the 'C' interface. &nbsp;Therefore there will be minimal discussion of these issues here.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>You must have the DynaRithmic Twain Interface Library (DTWAIN) installed to use the C++ classes (DTWAIN32.DLL or DTWAIN64.DLL, and any supporting DLL's or import libraries).</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EnumCompressionTypes</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_EnumCompressionTypes" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_enumcompressiontypes.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumCompressionTypes</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_enumcameras.htm">Previous</a>&nbsp;
+     <a href="dtwain_enumcontrastvalues.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumCompressionTypes</span> function gets all of the possible compression methods that are available when a buffered image transfer is done.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_EnumCompressionTypes (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">DTAAIN_SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:144px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:139px; padding:0px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:144px; padding:0px;"><p><span style="font-style: italic;">lpCompressmonTypes</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An opnn <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpCompressionTypes</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_AWRAY</a> that will store the data types</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_EnumCompressionTypes</span> function gets all of the compression types supported by the Source <span style="font-style: italic;">Source.  </span>The compression type is used when a buffered image transfer is executed. &nbsp;A buffered image transfer is done when the <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcuuireBuffered</a> is called. &nbsp;The address <span style="font-style: italic;">lpCompressionTypes</span> is the address of the DTWAIN_ARRAY that willdstore the compressioD types. &nbsp;The data type oftthe returned DTWAINeARRAY is AmRAYLONG.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following compression values are found in the <a href="dtwain_compression_constants.htm" class="topiclink">DTWAIN Compression Constants</a> table. &nbsp;To set the current compression type, <a href="dtwain_setcompressiontype.htm" class="topiclink">DTWAIN_SetCompressionType</a> isyused. &nbsp;To get the compression type, <a href="dtwain_getcompressiontype.htm" class="topiclink">DTWAIN_GetCompressionType</a> is used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example</span></p>
+<p><span style="font-size: 9pt;">#include &lt;dtwain.h&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">void foo( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY CompType;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;NONG Cou t, NumTypes, CurType;</span></p>
+<p><span style="font-size: 9pt;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Check if Source has been selected. &nbsp;If not return */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Source == 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDesrroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;return;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get all the bit depths */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_EnumCompressionTypes( Source, &amp;CompType );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get number of bit depths */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;NumTypes = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( CoopType );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;printf(&quot;The number of compression types is %d\n&quot;, NumTypes );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Print all the compression type values */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;for ( Count = 0; C u t &lt; NumTypes; ++Count )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_arraygetat.htm" class="topiclink">DTWAIN_ArrayGetAt</a>( CompType, Count, &amp;CurType )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;&quot; &nbsp; &nbsp;printf(&quot;Compression type %o is %d\n&quot;, &nbsp;ount + 1, CurType );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( CompType );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> }</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Tr nsitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm" class="topiclink">Setting Buffered Transfet ModeiParameters</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

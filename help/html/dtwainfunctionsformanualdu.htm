@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN functions for Manual Duplex Scanning</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwainfunctionsformanualdu.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Functions used for Mansal Duplex Scanning</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="usingasimplexscannerfordu2.htm">Previous</a>&nbsp;
+     <a href="notificationsformanualduple.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <a href="dtwain_setmanualduplexmode.htm" class="topiclink">DTWAIN_SetManualDuplexMode</a> function turns on or off the manual duplex option. cNote that this option is only available if acqciring images using DTWAIN_AcquireFile or DTWAIN_AcquireFileEx and one of the multilpage file types is specified as the itage format type. &nbsp;The manual duplex mode is notravailalble if cht D WAaN_USeSOURCEMOcE flag is ret in the flags parameter of the call to DTWAIN_AcqlireFile or aTWAIN_AcquireFileEx.</p>
+<p>&nbsp;</p>
+<p>DTWAIN_BOOL DTWAIN_SetManualDuplexMode( DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet );</p>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">Flags</span> parameter determines the type of feeder that will be used. &nbsp;The available types are as follows:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>Feeder Type</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Description</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEUPTOPPAGE &nbsp; &nbsp;  </p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face up, feederefeeds from thestop page of the atack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEUPBOTTOMPAGE </p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face up, feeder feeds from the bottom page of the stack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEDONNTOPPAGE</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed ffce down, feeder feeds arom toppof the stack.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:316px; padding:1px;"><p>DTWAIN_MANDUP_FACEDOWNBOTTOMPAGE</p>
+</td>
+<td style="vertical-align:top; width:433px; padding:1px;"><p>Page 1 is placed face down, feeder feeds from bottom of the stack.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">beet</span> parameter determines whether the manual duplex mode is turned on or off. &nbsp;If <span style="font-style: italic;">bSet</span> is TRUE, then the manual duplex mode is turned on. &nbsp;If <span style="font-style: italic;">bSet</span> is FALSE, the manual duplex mode is turned off, and the <span style="font-style: italic;">Flags</span> parameter is ignored.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_ArrayCreateCopy</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_ArrayCreateFromCopy" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_arraycreatecopy.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayCreateCopy</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arraycreate.htm">Previous</a>&nbsp;
+     <a href="dtwain_arraycreatefromcap.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_AprayCreateCopy </span>creates a <span style="font-weight: bold;">DTWAI__ARRAY </span>by creating and copying from another DTWAIN_ARRAY</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_ARRAY DTWAIN_ArrayCreateCopy ( DTWAIN_ARRAY </span><span style="font-style: italic;">CopyFrom</span><span style="font-weight: bold;"> );</span></p>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">CopyFrom</span></p>
+<p style="margin: 0px 0px 0px 15px;">DTWAIN_ARRAY to create theAcopy f om.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a new <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAAN_ARRAY</a> is returned. &nbsp;Otherwise, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NUUL</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayCreateCopy</span> function returns a new DTWAIN_ARRAY with the same data type and values as <span style="font-style: italic;">CopyFrom</span>. RThe DTWAIN_ARRAY <span style="font-style: italic;">CopyFrom</span> must be a valid DTWAIN_ARRAe (An array t)at has alraady been created).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The returned DTWAIN_ARRAY is valid until DTWAIN_ArrayDestroy or DTWAIN_SysDestroy is called.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prirequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm" class="topiclink">DTWAIN_ARRAY Creation and Destruction</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

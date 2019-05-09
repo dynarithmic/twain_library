@@ -1,0 +1,143 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::Select</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourceselect.htm"; }
+  else { parent.quicksync('a9.12.26'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::Select</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourceisvalid.htm">Previous</a>&nbsp;
+     <a href="dtwainsourceselectdefault.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( const std::string &amp; SourceName, bool bOpenSource=true );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( bool bOpenSource=true );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( HWND hWndParent, const std::string&amp; sTitle, int xPos, int yPos, </span></p>
+<p><span style="font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LONG flags=0, bool bOpenSource=true);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">SourceName</span></p>
+<p>Source product name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bOpenSource</span></p>
+<p>Indicates if Source is to be opened when selected.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">hWndParent</span></p>
+<p>Handle to parent window of the "Select Source" dialog or NULL if no parent window.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">sTitle</span></p>
+<p>Title of the Select Source window</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">xPos, yPos</span></p>
+<p>The x and y position of the "Select Source" dialog, relative to <span style="font-style: italic;">hWndParent</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">flags</span></p>
+<p>Centering window and sorting options when "Select Source" dialog is used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns</span></p>
+<p>On successful return, a new DTwainSource object will be returned representing the selected TWAIN Source. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The CDTwainSource::Select functions are static functions that allow the application to select the TWAIN Source. &nbsp;The DTwainSource::Select function is overloaded so as to allow different forms of selecting the Source. &nbsp;If you want to select the default Source (the last Source that was opened, or if only one TWAIN Source exists), then call DTwainSource::SelectDefault( ).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For all of these functions, the <span style="font-style: italic;">bOpenSource</span> argument determines whether the TWAIN Source will be opened when it is selected. &nbsp;All Sources must be opened before doing any operation on the Source, so by default, <span style="font-style: italic;">bOpenSource</span> is <span style="font-weight: bold;">true</span>. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the user cancels selecting the Source, then the returned DTwainSource will be invalid. &nbsp;To test this, the DTwainSource::IsValid( ) function can be used to test if the user actually selected a TWAIN Source, or just cancelled the selection.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">DTwainSource Source = DTwainSource::Select( );</span></p>
+<p><span style="font-size: 9pt;">if ( !Source.IsValid( ) )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// User didn't select a Source</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A description of each of the overloads of DTwainSource::Select are as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( const std::string &amp; SourceName, bool bOpenSource=true );</span></td></tr></table></div><p style="margin: 0px 0px 0px 13px;">This usage of Select will allow you to select a TWAIN Source by using the product name of the Source. &nbsp;The <span style="font-style: italic;">SourceName</span> is the product name of the Source. &nbsp;The TWAIN Source dialog will not be displayed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( bool bOpenSource=true );</span></td></tr></table></div><p style="margin: 0px 0px 0px 13px;">This usage of Select will display the TWAIN "Select Source" dialog.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">static DTwainSource DTwainSource::Select( HWND hWndParent, const std::string&amp; sTitle, int xPos, int yPos, </span></td></tr></table></div><p><span style="font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;LONG nOptions=0, bool bOpenSource=true);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">This usage of Select will display the TWAIN "Select Source" dialog, but with various options such as the position of the Select Source dialog, and the title used in the dialog. &nbsp;The <span style="font-style: italic;">hWndParent</span> sets the dialog's parent window to <span style="font-style: italic;">hWndParent</span>. &nbsp;If no parent window is desired, <span style="font-style: italic;">hWndParent</span> must be NULL or 0. &nbsp;If <span style="font-style: italic;">hWndParent</span> is NULL, the parent window is the entire screen.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">The <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> arguments place the window at position (<span style="font-style: italic;">xpos, pos</span>) with respect to the parent window (if no parent window, <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> are relative to the entire screen). &nbsp;The <span style="font-style: italic;">szTitle</span> argument is a null-terminated string that represents the title to display on the window. &nbsp;If <span style="font-style: italic;">szTitle</span> is a 0-length string, the title is "Select Source". &nbsp;You <span style="font-weight: bold;">must not</span> pass a NULL for <span style="font-style: italic;">szTitle</span>. &nbsp;The reason is that assigning NULL to a std::string (which the compiler will attempt to do when you pass a NULL) is undefined behavior, and may crash your program.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">The <span style="font-style: italic;">flags </span>parameter determine whether the dialog will be centered and whether the list of Source names displayed will be sorted. &nbsp;A list of available <span style="font-style: italic;">flag</span> options are as follows (multiple options can be selected by adding the values together).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 13px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>DTWAIN_DLG_CENTER</p>
+<p>&nbsp;</p>
+</td>
+<td valign="top" width="325" style="width:325px;"><p>Centers the Select Source dialog on the parent window <span style="font-style: italic;">hWndParent</span>. &nbsp;The <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> arguments are ignored.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>DTWAIN_DLG_SORTNAMES</p>
+</td>
+<td valign="top" width="325" style="width:325px;"><p>Sorts and displays the Source names in the dialog. &nbsp;Normally, the names are displayed in order of their time of installation.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">As an example, to place the Twain dialog on the center of the screen, the following would be used:</p>
+<p style="margin: 0px 0px 0px 13px;"><span style="font-weight: bold;">DTwainSource::Select( NULL, "", 0, 0, DTWAIN_DLG_CENTER );</span></p>
+<p style="margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">To place the dialog at (20,20) of a particular window, the following would be used:</p>
+<p style="margin: 0px 0px 0px 13px;"><span style="font-weight: bold;">DTwainSource::Select( hWnd, "", 20, 20 );</span></p>
+<p style="margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">To center the dialog on the screen, have the title "My Twain Dialog", and have sorted Source names:</p>
+<p style="margin: 0px 0px 0px 13px;"><span style="font-weight: bold;">DTwainSource::Select( NULL, "My Twain Dialog", 0, 0, &nbsp;DTWAIN_DLG_SORTNAMES + DTWAIN_DLG_CENTER );</span></p>
+<p style="margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">If more customization is desired in selecting a Source (for example, you may want to create your own interface that displays the Sources to select), call DTwainSource::EnumSources, get all of the product names, and then present all of the product names found in your own custom interface to the user. &nbsp;When the user chooses one of the Sources from your interface, your application would call </p>
+<p style="margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 13px;">DTwainSource::Select( "product_name"); </p>
+<p style="margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; where "product_name" would be the name of the Source you want to select.</p>
+
+</td></tr></table>
+
+</body>
+</html>

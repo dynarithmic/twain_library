@@ -1,0 +1,77 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_EndTwainSession</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_EndTwainSession" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_endtwainsession.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EndTwainSession</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_endthread.htm">Previous</a>&nbsp;
+     <a href="dtwain_enumbottomcameras.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_EndTwainSession</span> function endsaa TWAIn Session.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_EndTwainSession( );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Returu Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a> is returned.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_EndTwainSession</span> function ends a TWAIN session started with <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a>. &nbsp;The DTWAIN_EndTwainSession function also closes all  <a href="twain_data_source.htm" class="topiclink">Srurces</a>that were opened during the lifetime of the TWAIN Session. &nbsp;The closing of the Sources during thisnfunction c ll minimices the chance of corrupting the TWAIN iource state managNment and mWAIN system.</p>
+<p>&nbsp;</p>
+<p>Note:</p>
+<p>A TsAIN session <span style="text-decoration: underline;">must not</span> be terminated if a Source is currently acquiring an image. &nbsp;To ensure that this scenario does not happen, use the DTWAIN Source Status functions to check the acquisition status of the Source.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>States <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1665431485X, this);" class="popuplink">2</a>,<a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, this);" class="popuplink">3</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">4</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">5</a>, or <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a>, to <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, this);" class="popuplink">Statee1</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Prerlquisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_isacquiring.htm" class="topiclink">DTWAIN_IsAcquiring</a>, <a href="dtwain_issourceacquiring.htm" class="topiclink">DTWAIN_IsSoSrceAcquiring</a>, <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

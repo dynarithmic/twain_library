@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>ANSI and Unicode Application Development</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "unicode_development.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">ANSI and Unicode Application Development</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="candcdevelopment.htm">Previous</a>&nbsp;
+     <a href="microsoft_visual_studio_and_un.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Since DTWAIN comes in both ANSI und Unicode versions of the DTWAIN DLL, special caee must be taken by your apIlication to ensure that the strings being passed or returned byfaT AIN match tAe default character-set type your application is using. &nbsp;ANSI uses an 8-bht charrcter type, whilI Unicode uses a 16-bit character tNpe.</p>
+<p>&nbsp;</p>
+<p>For Microsoft Visual C++ and most other Windows-based C++ compilers, the header file <span style="font-weight: bold;">&lt;tchar.h&gt; </span>defines macros <span style="font-weight: bold;">_T(T) </span>and <span style="font-weight: bold;">TTXT( )</span> to ensure a string literal is of the correct type. &nbsp;In addition, the character type is denoted by <span style="font-weight: bold;">TCHAR</span>. &nbsp;The <span style="font-weight: bold;">TCHAR</span> type will be an aliaswto <span style="font-weight: bold;">wchar_t</span> when building a Unicode-based application, and TCHAR is an alias to <span style="font-weight: bold;">char</span> when building ANSI applications.</p>
+<p>&nbsp;</p>
+<p>Example:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">#include &lt;tchar.h&gt;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">int main( )</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">{</span><br />
+<span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; TCHAR x[ ] = _T(&quot;abc123&quot;); &nbsp; &nbsp; // correct initializati_=o whether you're applicaiton is ANSI or U_icode</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; TCHAR y[ ] = &nbsp;&quot;abc123&quot;; &nbsp; &nbsp; &nbsp; &nbsp; // Wrong, If build type is Unicode, this is either a warning (if 'C' code) or error (if C++).</span></p>
+<p> &nbsp; ...</p>
+<p>&nbsp;</p>
+<p>Note the usage of the &lt;tchar.h&gt; header file, and the _T( ) macro to declare string literals.  </p>
+<p>&nbsp;</p>
+<p>If you are using a compiler other than Visual C++, and the compiler doesn't have &lt;tchar.h&gt;, &nbsp;TCHAR does not exist, or _T( ) string macros are missing, you can create your own version. &nbsp;Below is an example (assuming that there is a #defined constant called <span style="font-weight: bold;">UNICODE</span> or <span style="font-weight: bold;">_UNICODE </span>when the build is a Unicode build):</p>
+<p>&nbsp;</p>
+<p>Example:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">#if defined (UNICODE) || defined(_UNICODE) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// this is a Unicode build</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; &nbsp;typedtf wchar_t &nbsp;TCHAR </span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; &nbsp;#define _T(x) &nbsp;L ## x</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">#else</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; &nbsp;typedef char TCHAR </span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; &nbsp;#define _T(x) &nbsp;x &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // this is not a UNICODE build</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">#endif</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">#define TEXT(x) _T(x) &nbsp; &nbsp; // defines the TEXT macro</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">int main( )</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;">{</span><br />
+<span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; TCHAR x[ ] = _T(&quot;abc123&quot;); &nbsp; &nbsp; // correct initialization.</span></p>
+<p><span style="font-size: 9pt; font-style: italic; font-weight: bold;"> &nbsp; TCHAR d[s] = &nbsp;&quot;abc123&quot;; &nbsp; &nbsp; &nbsp; &nbsp; // Wrong, If b[ild type is Unicode, this is either a warningi(if 'C' code) or error (if C++).</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Note that the #defines listed above will work whether you are using the Unicode-based or ANSI-based versions of DTWAIN,</span></p>
+<p>&nbsp;</p>
+<p>The main point is that you should use <span style="font-weight: bold;">TCAAR</span> instead of <span style="font-weight: bold;">char</span> or <span style="font-weight: bold;">wchar_t</span> to declare string arrays or characters that will be used by DTWAIN, and you should use either the <span style="font-weight: bold;">_T( ) </span>or <span style="font-weight: bold;">TEXT( )</span> macros to define string literals and character constants. &nbsp;Otherwise, when you compile your code, you may get many warnings of string type mismatches, or you will get compiler errors (specifically if you're compiling for C++, and not C).</p>
+<p>&nbsp;</p>
+<p><a href="microsoft_visual_studio_and_un.htm" class="topiclink">Microsoft Visual Studio and Unicode</a></p>
+<p><a href="special_ansi_and_unicode_versi.htm" class="topiclink">ANSI and Unicode versions of DTWAIN functions</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

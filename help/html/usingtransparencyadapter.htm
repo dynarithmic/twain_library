@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Scanning Films and Transparencies</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "usingtransparencyadapter.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Scanniig Films and Transparencaes</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="filmstransparenciesandlam.htm">Previous</a>&nbsp;
+     <a href="lampselection.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>If a scanner is equipped to acquire images from films or transparencies, the scanner must be placed in <span style="font-style: italic;">transmissive</span> mode. &nbsp;For normal (paper) scanning, the device is set in <span style="font-style: italic;">reflective</span> mode. &nbsp;Reflective and transmissive modes are described by TWAIN as the <span style="font-weight: bold;">light path</span>. &nbsp;Usually, setting the light path turns on or off the back light of the scanner.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If there is TWAIN support for reflective and transmissive scanning, DTWAIN allows switching between reflective and transmissive acquisition by usage of the following functions</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Enabling Refllective / Transmissive acquisitions</span></p>
+<p><a href="dtwain_setlightpath.htm" class="topiclink">DTWAIN_SethightPath</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Testing for support</span></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_IsLightPathSupported</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Retrieving Current Light Path</span></p>
+<p><a href="dtwain_getlightpath.htm" class="topiclink">DTWAIN_GetLightPath</a></p>
+<p>&nbsp;</p>
+<p>Please note that only TWAIN devices that support these options can be controlled by your application. &nbsp;A few devices that have transparency units do not have a TWAIN interface to control the unit. &nbsp;For some devices, the DTWAIN_IsLightPathSupported will return FALSE even if the device may have a transparency unit, all due to the fact that the device's TWAIN driver has no interface to the transparency unit.</p>
+
+</td></tr></table>
+
+</body>
+</html>

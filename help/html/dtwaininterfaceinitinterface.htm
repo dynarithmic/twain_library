@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainInterface::InitInterface</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwaininterfaceinitinterface.htm"; }
+  else { parent.quicksync('a9.11.15'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainInterface::InitInterface</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="cdtwaininterfacegetnamefromc_2.htm">Previous</a>&nbsp;
+     <a href="cdtwaininterfaceisacquiring_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Intializes the DTWAIN interface (starts DTWAIN, and the TWAIN system)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">bool DTwainInterface::InitInterface( );</span></p>
+<p><span style="font-weight: bold;">bool DTwainInterface::InitInterface( const DTwainAppInfo&amp; AppInfo );</span></p>
+<p><span style="font-weight: bold;">bool DTwainInterface::InitInterface( HWND hWnd, const std::string&amp; TwainDLL="" );</span></p>
+<p><span style="font-weight: bold;">bool DTwainInterface::InitInterface( const DTwainAppInfo&amp; AppInfo, HWND hWnd, const std::string&amp; TwainDLL="" );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">AppInfo</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p>Reference to a <a href="dtwainappinfo.htm">DTwainAppInfo</a> object that contains the initial TWAIN application information when the TWAIN Session is started.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;"> </span><span style="font-style: italic;">hWnd</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p>HANDLE to a window that will receive DTWAIN notifications when an acquisition is being executed, or NULL if there is no window associated with notification processing. &nbsp;A Twain session is started using this value</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">TwainDLL</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p>Name of the Twain DLL source manager. &nbsp;If this is empty, the name that will be used is "TWAIN_32.DLL". &nbsp;A Twain session is started using this value.</p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>If DTWAIN is successfully initialized, <span style="font-weight: bold;">true</span> is returned, else <span style="font-weight: bold;">false</span> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>An application must call DTwainInterface::InitInterface if the application has created a DTwainInterface object with a <span style="font-weight: bold;">false</span> argument in the <a href="cdtwaininterfacecdtwaininter_2.htm">DTwainInterface constructor</a>. &nbsp;Otherwise, the definition for each of the InitInterface calls are exactly the same as for the DTwainInterface constructor.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-weight: bold;">InitInterface</span> is called with no arguments, then the default DTWAIN/TWAIN setup is used. &nbsp;The default is that the TWAIN DLL used will be TWAIN_32.DLL, no window handle is associated with DTWAIN notifications, and the Application Informatino (DTwainAppInfo) is initialized with "&lt;?&gt;" as the information.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

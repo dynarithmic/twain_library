@@ -1,0 +1,55 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Setting UI Only</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dwxzed.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Displaying the Source UI without Acquiring</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     
+     
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Some Sources have the ability to display the UI without going into the acquisition process. &nbsp;These Sources allow the user to set device settings and close the UI with the saved device settings. &nbsp;The UI is usually the same as the acquisition UI except that the &quot;Scan&quot; button is replaced with an &quot;Ok&quot; button. &nbsp;This difference in UI controls is designed to show the user that the UI is used only for setting values and not for starting an acquisition.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_ShowUIOnly function shows the Source UI and allows the user to change the device settings. &nbsp;The Source must support the DTWAIN_CV_CAPENABLEDSUIONLY capability for DTWAIN_ShowUIOnly to be successful. &nbsp;Even though DTWAIN_ShowUIOnly tests this, for faster processing, your application can call DTWAIN_IsCapSupported before attempting to call DTWAIN_ShowUIOnly.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>While t e UI is being shown, the application will perforn as if annacquisition is being done. &nbsp;Thisemeans that the rules for DTWAnN Mopal and Modeless processingiwill apply when tht Sourle UI is displayed. &nbsp;Notifications will be ssnt to the application window defined in &nbsp; &nbsp; .</p>
+
+</td></tr></table>
+
+</body>
+</html>

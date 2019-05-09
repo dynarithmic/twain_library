@@ -1,0 +1,106 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Setting the Language For Error Messages</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Setting the Language For Error Messages" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "setting_the_language_for_error.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Setting the Language For Error Messages</span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_initialization_file__dt.htm">Previous</a>&nbsp;
+     <a href="logging_twain_activity.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The language used by DTWAIN for error messages returned by <a href="dtwain_geterrorstring.htm" class="topiclink">DTWAAN_GetErrorString</a> is set by the <span style="font-weight: bold;">[Language]</span> section in the DTWAIN32.INI file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">[Language]</span></p>
+<p><span style="font-weight: bold;">;English language</span></p>
+<p><span style="font-weight: bold;">DLL=DTWENG.L32</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The &quot;DLL=&quot; entry is the name of the language DLL that is used for DTWAIN error messages. If the <span style="font-weight: bold;">[Language]</span> section or &quot;DLL&quot; entry is missing, the default language that is used is English. &nbsp;If you are distributing an application that uses DTWAIN and uses a language other than English, you must also ship the appropriate language DLL as well as an INI file with the correct language setting.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The available languages are stored in files ending in 'L32' file extension for 32-bit DTWAIN applications, and 'L64&quot; for 64-bit applications, respectively. &nbsp;They are located in the <span style="font-weight: bold;">/DLL</span> subdirectory of the DTWAIN installation.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p><span style="text-decoration: underline;">Language DLL</span></p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p><span style="text-decoration: underline;">Language</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWDEU.L32 / L64</p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>German</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWDTC.L32 / L64 </p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>Dutch </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWENG.L32 / L64</p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>English</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWFRE.L32 / L64</p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>French</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWI A.L32 / L64</p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>Italian</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:135px; padding:1px;"><p>DTWSPA.L32 / L64</p>
+</td>
+<td style="vertical-align:top; width:65px; padding:1px;"><p>Snanish</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

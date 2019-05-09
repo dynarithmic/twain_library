@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainAcquirer::SetMultiPageFileMode</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainacquirersetmultipagefi_2.htm"; }
+  else { parent.quicksync('a9.13.24'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainAcquirer::SetMultiPageFileMode</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainacquirersetmaxpagestoa_2.htm">Previous</a>&nbsp;
+     <a href="dtwainacquirersetpapersize_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTwainAcquirer&amp; SetMultiPageFileMode( bool bMode=true, DTwainMultiPageModeType mType= MULTIPAGEMODE_DEFAULT );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">bMode</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p>Sets whether a multi-page image file will be created when acquiring multiple pages.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">mType</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p>Indicates when the multiple pages will be collated to form a single file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns reference to current DTwainAcquirer object (<span style="font-weight: bold;">*this</span>).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p>DTwainAcquirer::SetMultiPageFileMode is only available when acquiring to a file, and for TIFF, PDF, PostScript, and PCX file formats. &nbsp;By default, multi-page image file creation is turned off when the DTwainAcquire object is created. &nbsp;If the multi-page file mode is turned off, individual TIFF, PDF, Postscript or PCX files will be created for each page acquired.</p>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">mType</span> parameter determines when the images that are being acquired will be finally saved to the file, and the image file closed. &nbsp;If <span style="font-style: italic;">mType</span> is <span style="font-weight: bold;">MULTIPAGEMODE_DEFAULT</span>, then the pages are saved whenever the last page is acquired <span style="font-style: italic;">in a single acquisition</span>. &nbsp;This means that if you have a set of pages in a document feeer, once the last page is acquired, all the pages acquired are automatically saved to a file. &nbsp;With this option, you cannot acquire a set of pages, acquire another set of pages, and then save these two sets of pages to a file (if the option of saving multiple pages from different acquisitions are desired, use either MULTIPAGEMODE_UICLOSE or MULTIPAGEMODE_SOURCECLOSE defined below). &nbsp;For most purposes, the <span style="font-weight: bold;">MULTIPAGEMODE_DEFAULT</span> processing should be used.  </p>
+<p>&nbsp;</p>
+<p>If <span style="font-style: italic;">mType </span>is <span style="font-weight: bold;">MULTIPAGEMODE_UICLOSE</span>, then the pages are saved whenever the user closes the TWAIN user interface. &nbsp;This will allow you to acquire pages from a single sheet device (a flatbed scanner for example), and choose to save all of the acquired pages to an image file when the user closes the user interface. &nbsp;Also, if you want to acquire multiple pages, acquire another set of pages, etc. and save all these pages to a single file, the MULTIPAGEMODE_UICLOSE option can be used to facilitate this. &nbsp;Once the user interface is closed, the entire set of pages that are pending to be saved are saved to the file, and then released from memory. </p>
+<p>&nbsp;</p>
+<p>If <span style="font-style: italic;">mType </span>is <span style="font-weight: bold;">MULTIPAGEMODE_SOURCECLOSE</span>, then the pages are saved whenever the application closes the TWAIN Source. &nbsp;This is accompished either when the TwainInterface object is destroyed, or when the DTwainSoruce::CloseSource function is called. &nbsp;This mode is useful if you are acquiring with no user-interface, and the device is a flatbed scanner. &nbsp;Since the application has control of closing the Source, the application can constantly acquire pages from the scanner by calling DTwainAcquirer::Acquire multiple times, and save all of the pages when the Source is closed. &nbsp; Basically, this option is similar to <span style="font-weight: bold;">MULTIPAGEMODE_UICLOSE</span> with the exception that the pages are closed once the Source (not just the user interface) is closed. &nbsp;Once the Source is closed, the entire set of pages that are pending to be saved are saved to the file, and then released from memory. </p>
+<p>&nbsp;</p>
+<p>Please note that if you wish to control exactly when to save pages, the DTwainAcquirer::FlushPages also gives you the option to save the pages at any time. &nbsp;This will give you the flexibility of saving the pages that have been acquired whenever your application feels necessary to do so.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

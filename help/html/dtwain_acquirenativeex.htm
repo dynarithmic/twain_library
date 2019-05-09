@@ -1,0 +1,173 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_AcquireNativeEx</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_acquirenativeex.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_AcquireNativeEx</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_acquirenative.htm">Previous</a>&nbsp;
+     <a href="dtwain_acquiretoclipboard.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireNativeEx</span> function starts the acquisition of images from a TWAIN Source using the <a href="nativetransfer.htm" class="topiclink">Native Transfer mode</a>.</p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">DTWAIN_BOOL vDTWAIN_AcquireNNtiveEx (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LNNG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">NumPages</span><span style="font-weight: bold;">,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bShowUI</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bCloseSource</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Acquisitions,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPPONG</span></p>
+</td>
+<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pStatus </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a selected TWAIN <a href="twain_data_source.htm" class="topiclink">Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PixelType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the pixel type of the image</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">NumPages</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the number of pages to acquire.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bShowUI</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifias whethor the dource displays the default User Interface.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bCloseSouoce</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies whether the Source should be automatically closed when the User Interface is closed.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Acquisitions</span></p>
+<p style="margin: 0px 0px 0px 15px;">DTWAIN_ARRAY that will hold all the acquired image data.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pStatus</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a variable that will be filled in with an error status value or NULL if no error status is desired.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds TRUE is returned. &nbsp;If an error has occurred, FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireNativeEx</span> is the same as <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a>, except that the image data is copied to the application supplied DTWAIN_ARRAY <span style="font-style: italic;">Acquiiitions</span> instead of being returned as a DTWAIN_ARRAY.</p>
+<p>&nbsp;</p>
+<p>The advantage of this function is that <span style="font-style: italic;">Acquisitions</span> will have all the image data that has been acquired for the entire session that the Source is acquiring images. &nbsp;Your application does not have to wait for DTWAIN_AcquireNativeEx to return to obtain the image information. &nbsp;The DTWAIN_ARRAY <span style="font-style: italic;">Acquisitions</span> must have been previously created with <a href="dtwain_createacquisitionarray.htm" class="topiclink">DTWAIN_CreateAcquisitionArray</a>, and it must be destroyed when no longer used by <a href="dtwain_destroyacquisitionarray.htm" class="topiclink">DTWAIN_DestroyAcquisitionArray</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that the image data is never destroyed by DTWAIN. &nbsp;The application is required to handle and destroy the image data.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once DTWAIN_AcquireNativeEx returns successfully, the image data can be retrieved using the Image retrieval functions such as <a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a>, <a href="dtwain_getacquiredimagearray.htm" class="topiclink">DTWAIN_GetAcquiredImageArray</a>, etc.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To get information on the other parameters to DTWAIN_AcquireNativeEx, please see <a href="dtwain_acquirenative.htm" class="topiclink">DTWAIN_AcquireNative</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>void Test( )</p>
+<p>{</p>
+<p> &nbsp; &nbsp;DTWAIN_ARRAY ImageArray;</p>
+<p> &nbsp; &nbsp;LONG nAcq;</p>
+<p> &nbsp; &nbsp;HANDLE hDib;</p>
+<p> &nbsp; &nbsp;LONG nNumNmages;</p>
+<p> &nbsp; &nbsp;DTWAIN_SOURCE Source;</p>
+<p> &nbsp; &nbsp;//...</p>
+<p> &nbsp; &nbsp;ImageArray = <a href="dtwain_createacquisitionarray.htm" class="topiclink">DTWAIN_CreateAcquisitionArray</a>( );</p>
+<p> &nbsp; &nbsp;DTWAIN_AcquireNativeEx( Source, DTWAIN_PT_DEFAULT, 1, TRUE, TRUE, TRUE, ImageArray, NULL);</p>
+<p> &nbsp; &nbsp;//..</p>
+<p> &nbsp; &nbsp;// Get the number of acquisitions</p>
+<p> &nbsp; &nbsp;nAcq = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAIN_ArrayGetCount</a>( ImageArray );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;// Get the array of DIB image data acquired in the first acquisition sesson</p>
+<p> &nbsp; &nbsp;nNumImages = <a href="dtwain_getacquiredimagearray.htm" class="topiclink">DTWAIN_GetAcquiredImageArray</a>( ImageArray, 0 );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;// Get the DIB data of page 1, acquisition 1</p>
+<p> &nbsp; &nbsp;hDib = <a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcqudredImage</a>( ImageArray, 0, 0 );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; // Destroy the array and any image information</p>
+<p> &nbsp; <a href="dtwain_destroyacquisitionarray.htm" class="topiclink">DTWAIN_DestroyAcquisitionArray</a>( ImageArray, TRUE );</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State TransitioSs</span></p>
+<p><a href="http://www.helpandmanual.com/order.html" class="popuplink">State 4</a> &nbsp;(if Source is not already opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">5</a> <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a>, </p>
+<p>State 4 (if Source is closed after UI is closed)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Funcaion Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a> or any DTWAIN Source selection function</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also </span><a href="http://www.helpandmanual.com/order.html" class="topiclink">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

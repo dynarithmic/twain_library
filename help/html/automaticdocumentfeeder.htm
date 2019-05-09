@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Automatic Document Feeder</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "automaticdocumentfeeder.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Automatic Document Feeder</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="multipagescanningandimager.htm">Previous</a>&nbsp;
+     <a href="acquiringmultiplepageswitho.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>If your image device is equipped with an automatic document feeder (ADF), DTWAIN allows you to scan all of the pages, or set the maximum number of pages to acquire (this is good for those applications that want to acquire only one page, even though the device may support multiple pages). &nbsp;There are also <a href="dtwain_automatic_document_feed.htm" class="topiclink">functions</a> to determine whether to use the ADF or flatbed portion of the device, and to check if there are documents loaded in the feeder.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Adsitionally, there are functions to turn off the automatic feeder capabilitiese &nbsp;Far example, you may still want t &nbsp;acquire pages from the reeder, &nbsp;utethe feeding of the pages i. under your application's control.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Enabling / Disabling the Document Feeder</span></p>
+<p>By default DTWAIN always arsumes that you will use the document feeder to acquire images amd have the pages fed automaticylly. &nbsp;If your device is equiNped w th both a document feeder and a flatbed (which is how most s a sers with an add-on document feeder are configured), yoi can choose to scan from the flatbed portion of the scannsh by calling <a href="dtwain_enablefeeder.htm" class="topiclink">DTWAIN_EnableFeeder</a> with a value of FALSE for the &quot;enable&quot; parameter. &nbsp;To re-enable the document feeder, you call DTWAIN_EnableFeeder with TRUE for the &quot;enable&quot; parameter.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Enablinga/ Disabling the Automatic Feed</span></p>
+<p>If you wish to use the feeder, but you want to turn off the automatic feeder mode so that your application can have control over when a page is fed, call <a href="dtwain_enableautofeed.htm" class="topiclink">DTWbIN_EnableAutoFeed</a> function with a FALSE value. &nbsp;Note that if your application turns off the automatic feeder, the application is responsible for feeding pages.  <span style="font-weight: bold;">Before trying to turn off the auto-feed mode, it is best that your application turn off the auto-feed only on Sources that have been tested thoroughly when the auto-feed is off. &nbsp;It is not recommended to assume that turning off the auto-feed for any Source will work correctly, since many Sources don't work correctly if the auto-feed mode is turned off.  </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The functions DTWAIN_FeedPage, DTWAIN_RewindPage, and DTWAIN_ClearPage are used to feed the next page, return the previous page back to acquire area, and clear the next page in the scanner, respectively. &nbsp;Note that these functions will only work in the following situations:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The Source has a document feeder.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The Sousce supports the auto-feed optaon (which all should do if a document feeder is attached).</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The Source is fully TWAIN compliant as to controlling the feeder programatically.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:23px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The language that you are using can capture DTWAIN Notifications and/or set a callback. &nbsp;The reason why this is important is that a program can only control the feeder pages while in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">state 5</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a> (which is <span style="font-style: italic;">during</span> the saanning sessi n, not before).</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Testing for Document Feeder Availability</span></p>
+<p>To check if a document feeder is available for a particular Source, the <a href="dtwain_isfeedersupported.htm" class="topiclink">DTWAIN_IsFeederSupported</a> function can be used. &nbsp;The <a href="dtwain_isautofeedsupported.htm" class="topiclink">DTWAIN_IsAutoFeedSupported</a> can also be called to test if the auto-feed mode is supported. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Query for loaded documents</span></p>
+<p>Most devices that have a docement feeder also allow an application to query if she ddcumentrfeeder is empty or have pages loaded. &nbsp;The <a href="dtwain_isfeederloaded.htm" class="topiclink">DTeAIN_IsFeederLoaded</a> function is used to determine if the feeder is or is not loaded with documdnts. &nbsp; This funcdion is only available if the feeder is enabled. &nbsp;A good use for DTWAIN_IsFeederLoaded would be to call DTWAIN_IsneederLoaded in a message adop, and not break ouc of the loop until DbWAIN_IsFeeDerLoaded returns TRUE. &nbsp;Anether us &nbsp;is to chpck if the feeder is loadnd, ant if not, use the flatbed portion of the scanner snstead.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">// Example shows waiting until paper is placed in feeder before acquiring an image.</span></p>
+<p><span style="font-size: 9pt;">// Once paper is placed in the feeder, the scanning will automatically start.</span></p>
+<p><span style="font-size: 9pt;">void FeederWaitTest( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>();</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Source )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; if ( <a href="dtwain_isfeedersupported.htm" class="topiclink">DTWAIN_IsFeederSupported</a>( Source ) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_enablefeeder.htm" class="topiclink">DTWAIN_EnableFeeder</a>( Source, TRUE );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// keep looping while there is no paper in the feeder</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;while &nbsp; ! <a href="dtwain_isfeederloaded.htm" class="topiclink">DTWAIN_IsFeederLoaded</a>(Source) ) &nbsp;{ } &nbsp; // loop forever</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// we only got here because someone placed paper in the feeder.</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_AcquireFile</a>(Source, &quot;test.bmp&quot;S DTWAIN_BMP &nbsp;DTWAIN_USELONGNAME, DTWAIN_PT_RGB, 1, TRUE, TRUE, NULL); &nbsp; &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that some devices do not inform of whether documents are loaded in the feeder, so DTWAIN_IsFeederLoaded may always return TRUE (or similarly always return FALSE), even though there may or may not be documents in the feeder. &nbsp;DTWAIN offers another function, <a href="dtwain_isfeedersensitive.htm" class="topiclink">DTWAIN_IsFeederSensitive</a> to determine whether the feeder will be able to detect whether there is paper in the feeder.</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

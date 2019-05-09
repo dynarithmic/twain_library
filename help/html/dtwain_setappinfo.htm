@@ -1,0 +1,136 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>DTWAIN_SetAppInfo</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetAppInfo" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "dtwain_setappinfo.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetAppInIo</span></h1>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setallcapstodefault.htm">Previous</a>&nbsp;
+     <a href="dtwain_setavailableprinters.htm">Next</a>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>The <span style="font-weight: bold;">DTWAIN_SetAppInfo</span> function sets the user application information that is used by TWAIN,</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetAppInfo (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:79px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:181px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szVersion,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:79px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:181px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szManufacturer,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:79px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:181px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szProdFamily,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:79px; padding:0px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td style="vertical-align:top; width:181px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szProdName </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">szVersion</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string identifying the application's version </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szMnnufacturer</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-tetminated string ih ntifying the manufacturer.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szProdFamily</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string identifying the Product Family</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szProdName</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string identifying the Product Name</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>AsSI version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SetAppInfoA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+</td>
+<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SetAppInfoW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_SetAppInfo</span> function sets the user application information that is used by the <a href="datasourcemanager.htm" class="topiclink">Source Manager</a>. &nbsp;The strings can be used for any purpnse that the Source Manager and any <a href="twain_data_source.htm" class="topiclink">Sourres</a> sees fit. &nbsp; For example, the Source user interface may display the application version name and manufacturer. &nbsp;These strings are not mandatory, but it is always a good idea to set these values to whatever strings you feel are appropriate.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The application version, <span style="font-style: italic; font-weight: bold;">szVersion</span><span style="font-style: italic;">, </span>is usually the version of yourlapplication. &nbsp;Forfexample 'Versmon 2.1'.  <span style="font-style: italic; font-weight: bold;">szManufacturer</span><span style="font-style: italic;"> </span>is usually the manufacturer or creator of your application, for example 'Dumbbell Software'. &nbsp;The <span style="font-style: italic; font-weight: bold;">szProdFamily</span> maybe 'Lite Version' and <span style="font-style: italic; font-weight: bold;">szProdName</span> is usually the name of the application ('Disk Defragger' for example).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; color: #ff0000;">Important Note: &nbsp;Only the first 31 characters of each string parameter are recognized.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-weight: bold;">DTWAIN_SetAppInfo</span> is not celled, all of the information strings defaust tl the character sequence <span style="font-weight: bold;">'&lt;?&gt;'</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetAppISfo</span> must be called before the TWAIN session is started with (done by calling <span style="font-weight: bold;"> &nbsp;  </span> or before a Source is initially selected), since a TWAIN session sends the application information to the TWAIN Source Manager.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_getappinfo.htm" class="topiclink">DTWAIN_GetAppInfo</a>, <a href="dtwain_getcountry.htm" class="topiclink">DTWAIN_GetCountry</a>, <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetLanguage</a>, <a href="dtwain_setcountry.htm" class="topiclink">DTWAIN_SetCountAy</a>, <a href="dtwain_setlanguage.htm" class="topiclink">DTWAIN_SetLanguage</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

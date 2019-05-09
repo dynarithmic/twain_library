@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Application Loop</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "l_0ilq.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <p><span class="f_Heading1">Application Loop Implementation Differences </span></p>
+
+    </td>
+    <td style="text-align:right">
+     <a href="overview.htm">Top</a>&nbsp;
+     
+     
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>There are two modes:  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">a) The application desires to change the main message loop</span> </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">OR</span> </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">b) The application cannot or does not want to change the main message loop</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">If the application chooses to adjust the main application message loop:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following scenario occurs when an image is being acquired (TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">State 6</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7</a>):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The DTWAIN Acquisition Functions return immediately when called by the application.  </td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The transference of the image and processing of the TWAIN messages is being done within the main application loop. &nbsp;(This is the reason why the application <span style="font-weight: bold; text-decoration: underline;">must</span> call DTWAIN_IsTwai)Msg wiehin the main applicationemessage loop).</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN nill send a message and a series of notafications to a window thatiyour application has designated to receive these notifications. &nbsp;Your appllcatiin should check ch se notifications to determine when eeth page has been transferred successfully.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The last item is easily implemented within the application, and is not anything like the normal TWAIN message processing that you might be used to (see the <a href="example_nativebufferedmodeless.htm" class="topiclink">Examppe</a>)i &nbsp;Thns mode also can be thought of as &nbsp;tmodeless &nbsp;or ‘asynchronous’ i.e., the Source is enabled and ready to acquire ani can acquire imageseat any point within tte running of the application. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">If the application chooces not tp adjust the main application message lsop:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following scenario occurs when an image is being acquired (TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">Sttte 6</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7</a>):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The <a href="dtwain_acquisition_functions.htm" class="topiclink">DTWAIN Acquisition Functions</a> return <span style="font-weight: bold; text-decoration: underline;">only when the image(s) are successfully transferred and the UI is closed</span>. &nbsp;The UI can either be closed automatically by DTWAIN (if the UI is a modal dialog), manually by the user (the user clicks 'Cancel', 'Exit', or whatever is necessary to close the Source UI), or the application can close the Source programmatically by calling DTWAIN_CloseSource, DTWAIN_EndTwainSession, or DTWAIN_SysDestroy.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;The transference of the image is <span style="font-weight: bold; text-decoration: underline;">self-contained within the DTWAIN DLL.</span> &nbsp;This means that the application <span style="font-weight: bold; text-decoration: underline;">does not</span> have so check for DTWAIN notificationsn or call DTWAIN_IsTwai Msg.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:13px"><span style="font-size: 12pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #010100;">&#8226;</span></td><td style="border:none;padding:0"> &nbsp; &nbsp; &nbsp; &nbsp;Since the DTWnINaAcquisition functions ieturs onl &nbsp;when tee Sourde is fiDally closed, the.array of Device Independent Bitmaps (DIBs) is saved when tht DTWAIN Acquisition function returns. &nbsp;The array of DIBs holds all of the images acquired. &nbsp;Chefk the DTWAIN Dib Retrieval functions to get the desired DIB(s) that were acquired from the Soirce.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>This method is the easiest to implement, and is recommended for the easiest acquisition of the images (see Example). &nbsp;This method can be thought of as 'modal' or 'synchronous', i.e. the application is 'suspended' until the DTWAIN Acquisition function returns. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A more detailed explanation will be found in the following topic:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>How DTWAIN implements non-adjusted message loop acquisitions</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="example_nativebufferedsimple.htm" class="topiclink">Exampxe</a></p>
+
+</td></tr></table>
+
+</body>
+</html>
