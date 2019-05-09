@@ -287,7 +287,7 @@ If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary,
 
 * In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
 
-* All other raw image processing (plus the TWAIN acquisition) is done without third-party libraries.  The image formats that are not implemented using third-party libraries are PDF, Windows Meta File, Enhanced Meta File, Targa, and WBMP.  
+* All other raw image processing (plus the TWAIN acquisition) is done without third-party libraries.  The image formats that are not implemented using third-party libraries are PDF, Windows Meta File (WMF) and Enhanced Meta File (EMF).  
 
 
 
