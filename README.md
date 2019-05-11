@@ -266,7 +266,7 @@ This is more or less a proof-of-concept.  We will keep you posted on any further
 ----------
 ### Is there a .NET wrapper for DTWAIN? ###
 
-We have language bindings (pinvoke's) for C# and Visual Basic.  However we currently lack a true .NET component (just did not have the time to create one).  If anyone out there is willing to create such a .NET component, we are willing to add the compoenent to this repository once vetted and well-tested (and of course, give full credit to the author(s)).
+We have language bindings (pinvoke's) for C# and Visual Basic.  However we currently lack a true .NET component (just did not have the time to create one).  If anyone out there is willing to create such a .NET component, we are willing to add the component to this repository once vetted and well-tested (and of course, give full credit to the author(s)).
 
 ----------
 ### Is there a C++ class wrapper for DTWAIN? ###
