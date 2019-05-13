@@ -25,6 +25,7 @@
 #include "ctldib.h"
 #include "ctliface.h"
 #include "ctltwmgr.h"
+#include "ctlfileutils.h"
 
 using namespace std;
 using namespace dynarithmic;
@@ -48,5 +49,7 @@ int CTL_IcoIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhFi
         if ( height > 255 || width > 255 )
             return DTWAIN_ERR_INVALIDICONFORMAT;
     }
+	if (!parent_directory_exists(szFile))
+		return DTWAIN_ERR_FILEOPEN;
     return SaveToFile(hDib, szFile, FIF_ICO, 0, DTWAIN_INCHES, { 0,0 });
 }

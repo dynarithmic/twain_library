@@ -25,6 +25,7 @@
 #include "ctldib.h"
 #include "ctliface.h"
 #include "ctltwmgr.h"
+#include "ctlfileutils.h"
 using namespace std;
 using namespace dynarithmic;
 
@@ -50,6 +51,9 @@ int CTL_WBMPIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhF
 
     if (!IsValidBitDepth(DTWAIN_WBMP, m_pDib->GetBitsPerPixel()))
         return DTWAIN_ERR_INVALID_BITDEPTH;
+
+	if (!parent_directory_exists(szFile))
+		return DTWAIN_ERR_FILEOPEN;
 
     return SaveToFile(hDib, szFile, FIF_WBMP, 0, DTWAIN_INCHES, { 0, 0 });
 }

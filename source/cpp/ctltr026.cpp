@@ -1457,12 +1457,13 @@ bool CTL_ImageXferTriplet::ModifyAcquiredDib()
                 sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDib);
                 CTL_TwainAppMgr::WriteLogInfo(sOut);
             }
-        }
-    }
     return true;
 }
+    }
+    return false;
+}
 
-void CTL_ImageXferTriplet::ResampleAcquiredDib()
+bool CTL_ImageXferTriplet::ResampleAcquiredDib()
 {
     CTL_ITwainSource* pSource = GetSourcePtr();
     int nFileType = pSource->GetAcquireFileType();
@@ -1474,7 +1475,7 @@ void CTL_ImageXferTriplet::ResampleAcquiredDib()
     bResampleType[2] = (nFileType == TWAINFileFormat_WBMP);
 
     if (bResampleType.to_ulong() == 0)
-        return;
+        return false;
 
     CTL_ITwainSession* pSession = GetSessionPtr();
     CTL_TwainDibArray* pArray = pSource->GetDibArray();
@@ -1505,9 +1506,10 @@ void CTL_ImageXferTriplet::ResampleAcquiredDib()
                 sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDib);
                 CTL_TwainAppMgr::WriteLogInfo(sOut);
             }
-            return;
+            return true;
         }
     }
+	return false;
 }
 
 bool CTL_ImageXferTriplet::QueryAndRemoveDib(CTL_TwainAcquireEnum acquireType, size_t nWhich)

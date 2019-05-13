@@ -40,8 +40,11 @@ bool CPCXImageHandler::OpenOutputFile(LPCTSTR pFileName)
     if (m_MultiPageStruct.Stage == DIB_MULTI_FIRST || m_MultiPageStruct.Stage == 0)
     {
         m_hFile = std::make_unique<std::ofstream>(StringConversion::Convert_NativePtr_To_Ansi(pFileName).c_str(), std::ios::binary);
-        if (!m_hFile)
+		if (!(*m_hFile.get()))
+		{
+			SetError(DTWAIN_ERR_FILEOPEN);
             return false;
+    }
     }
     return true;
 }
@@ -330,6 +333,7 @@ int CPCXImageHandler::WriteImage(CTL_ImageIOHandler* ptrHandler, BYTE *pImage2, 
 
 void CPCXImageHandler::DestroyAllObjects()
 {
+	if (m_hFile && *(m_hFile.get()))
     m_hFile->close();
     if ( !m_bWriteOk )
        boost::filesystem::remove(GetOutputFileName().c_str());

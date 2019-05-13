@@ -92,8 +92,15 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
     // if only a single page TIFF
     if (m_MultiPageStruct.Stage == 0 || m_MultiPageStruct.Stage == DIB_MULTI_FIRST)
     {
-        FIMULTIBITMAP *fp = FreeImage_OpenMultiBitmap(FIF_TIFF,
-                            StringConversion::Convert_NativePtr_To_Ansi(path).c_str(), true, false, false, 0);
+		FIMULTIBITMAP *fp = nullptr;
+		CTL_String fname = StringConversion::Convert_NativePtr_To_Ansi(path).c_str();
+		{
+			std::ofstream ofs(fname.c_str());
+			if (!ofs)
+				return DTWAIN_ERR_FILEOPEN;
+		}
+
+		fp = FreeImage_OpenMultiBitmap(FIF_TIFF, fname.c_str(), true, false, false, 0);
         if ( !fp )
             return DTWAIN_ERR_FILEOPEN;
         m_MultiPageStruct.pUserData = fp;

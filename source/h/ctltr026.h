@@ -111,7 +111,7 @@ namespace dynarithmic
             void SaveJobPages(ImageXferFileWriter& FileWwriter);
             bool ModifyAcquiredDib();
             bool QueryAndRemoveDib(CTL_TwainAcquireEnum acquireType, size_t nWhich);
-            void ResampleAcquiredDib();
+            bool ResampleAcquiredDib();
 
 
 

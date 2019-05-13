@@ -378,7 +378,10 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
 
                         // Change bpp if necessary
                         if (bProcessDibEx)
-                            ModifyAcquiredDib();
+						{
+							if (ModifyAcquiredDib())
+								m_ptrOrig = nullptr;
+						}
 
                         if ( CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL,DTWAIN_TN_PROCESSEDDIBFINAL, (LPARAM)pSource) == 0 )
                         {
@@ -429,7 +432,10 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
 
                         // resample the DIB
                         if (m_nCompression == TWCP_NONE)
-                            ResampleAcquiredDib();
+						{
+							if (ResampleAcquiredDib())
+								m_ptrOrig = nullptr;
+						}
 
                         // Check if multi page file is being used
                         // Query if the page should be thrown away
