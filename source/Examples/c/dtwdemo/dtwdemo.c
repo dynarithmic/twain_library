@@ -587,11 +587,6 @@ void AcquireFile(BOOL bUseSource)
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
         return;
     }
-    else
-    {
-        MessageBox(g_hWnd, _T("Images saved successfully"), _T("Images"), MB_OK);
-    }
-
 }
 
 

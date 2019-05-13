@@ -73,7 +73,6 @@ bool CTL_ImageIOHandler::IsValidBitDepth(LONG FileType, LONG bitDepth)
 int CTL_ImageIOHandler::SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags,
                                    UINT unitOfMeasure, const std::pair<LONG, LONG>& res)
 {
-
     #ifdef _WIN32
     fipImage fw;
     if (!fipImageUtility::copyFromHandle(fw, hDib))

@@ -26,5 +26,6 @@
 namespace dynarithmic
 {
     bool delete_file(LPCTSTR filename);
+	bool parent_directory_exists(LPCTSTR filename);
 }
 #endif

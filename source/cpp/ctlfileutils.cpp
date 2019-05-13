@@ -35,4 +35,21 @@ namespace dynarithmic
         }
         return true;
     }
+
+	bool parent_directory_exists(LPCTSTR filename)
+	{
+		try
+		{
+			auto p = boost::filesystem::path(filename);
+			auto p2 = p.remove_filename();
+			std::wstring str = p2.native();
+			str = StringWrapperW::AddBackslashToDirectory(str);
+			if (boost::filesystem::exists(str))
+				return true;
+		}
+		catch (boost::filesystem::filesystem_error&)
+		{
+		}
+		return false;
+	}
 }
