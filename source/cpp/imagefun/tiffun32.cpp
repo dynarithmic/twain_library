@@ -99,10 +99,12 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
 			if (!ofs)
 				return DTWAIN_ERR_FILEOPEN;
 		}
-
+        if (m_MultiPageStruct.Stage != 0)
+        {
 		fp = FreeImage_OpenMultiBitmap(FIF_TIFF, fname.c_str(), true, false, false, 0);
         if ( !fp )
             return DTWAIN_ERR_FILEOPEN;
+        }
         m_MultiPageStruct.pUserData = fp;
         }
         else
@@ -133,6 +135,15 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
     fipTag ft;
     ft.setKeyValue("Comment", StringConversion::Convert_Native_To_Ansi(dynarithmic::GetVersionString()).c_str());
     im.setMetadata(FIMD_COMMENTS, "Comment", ft);
+
+    if (m_MultiPageStruct.Stage == 0)
+    {
+        auto retVal2 = im.save(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), compressionFlags[compression]);
+        if (retVal2 == 1)
+            return DTWAIN_NO_ERROR;
+        return DTWAIN_ERR_FILEWRITE;
+    }
+
     FreeImage_AppendPageEx(fp, im, compressionFlags[compression]);
     return 0;
 }
