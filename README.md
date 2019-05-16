@@ -12,7 +12,7 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  DTWAIN is supported under Windows XP / Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems.  
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems.  
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
 
