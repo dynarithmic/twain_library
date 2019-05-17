@@ -297,4 +297,12 @@ If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary,
 
 ### Who do I talk to if I have further questions? Who authored this library? ###
 
-* The DTWAIN library's main developer is P. McKenzie, and can be reached at paulm@dynarithmic.com.  
+The Dynarithmic TWAIN Library's principal developer is P. McKenzie (myself), and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).        
+
+My background is mostly in C and C++ programming, third-party library creation on Windows-based systems (some Linux also).    
+
+In addition to my (close to) 30 years in the industry, I have made extensive contributions to the [CodeGuru](http://www.codeguru.com) C++ and Visual C++ forums, being one of the top contributors for over 15 years starting in 1999, and since 2014, moved on to  [StackOverflow](https://stackoverflow.com/users/3133316/paulmckenzie?tab=profile), where hopefully I am making an impact with other passionate programmers.  Also, I have had the distinction of being a Microsoft MVP for 10 years running in the Visual C++ category.
+
+I am available for contracting work and code reviews (mostly using the C and C++ languages).  If you're interested in my services, please email me for further information on my availability.
+
+  
