@@ -71,7 +71,8 @@ bool CTL_ImageIOHandler::IsValidBitDepth(LONG FileType, LONG bitDepth)
 }
 
 int CTL_ImageIOHandler::SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags,
-                                   UINT unitOfMeasure, const std::pair<LONG, LONG>& res)
+                                   UINT unitOfMeasure, const std::pair<LONG, LONG>& res, 
+									const std::tuple<double, double, double, double>& multiplier_pr)
 {
     #ifdef _WIN32
     fipImage fw;
@@ -84,12 +85,12 @@ int CTL_ImageIOHandler::SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMA
     fw.loadFromMemory(FIF_TIFF, memIO, flags);
     #endif
 
-    double multiplier = 39.37;
+    double multiplier = 39.37 * std::get<0>(multiplier_pr);
     if (unitOfMeasure == DTWAIN_CENTIMETERS)
-        multiplier = 100.0;
+        multiplier = 100.0 * std::get<1>(multiplier_pr);
 
-    fw.setHorizontalResolution(static_cast<unsigned>((res.first * multiplier) + 0.5));
-    fw.setVerticalResolution(static_cast<unsigned>((res.second * multiplier) + 0.5));
+    fw.setHorizontalResolution(res.first * multiplier + std::get<2>(multiplier_pr));
+    fw.setVerticalResolution(res.second * multiplier + std::get<3>(multiplier_pr));
 
     fipTag fp;
     fp.setKeyValue("Comment", StringConversion::Convert_Native_To_Ansi(dynarithmic::GetVersionString()).c_str());

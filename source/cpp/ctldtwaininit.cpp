@@ -716,7 +716,8 @@ DTWAIN_HANDLE DLLENTRY_DEF DTWAIN_SysInitialize()
         HookTwainDLL( pHandle, FALSE );
         if ( CTL_TwainDLLHandle::s_DLLHandles.size() == 1 )
         {
-            CTL_StringType szName = _T("dtwain" DTWAIN_OSPLATFORM _T(".ini"));
+			CTL_StringType iniName = _T(".ini");
+            CTL_StringType szName = _T("dtwain" DTWAIN_OSPLATFORM) + iniName;
             CTL_StringType szLangDLL = _T("english");
             if (!CTL_TwainDLLHandle::s_sINIPath.empty())
             {
@@ -1537,8 +1538,10 @@ LONG DLLENTRY_DEF DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserDat
 
 void UnhookAllDisplays()
 {
+#ifdef _WIN32
     if (CTL_TwainDLLHandle::s_lErrorFilterFlags & DTWAIN_LOG_CONSOLE)
         FreeConsole();
+#endif
 }
 
 void dynarithmic::OutputDTWAINErrorA(CTL_TwainDLLHandle *pHandle, LPCSTR pFunc/*=NULL*/)

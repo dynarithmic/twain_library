@@ -824,3 +824,4 @@ DTWAIN_GetTwainLanguageValueW                     @17015
 DTWAIN_GetConditionCodeString                     @18000 
 DTWAIN_GetConditionCodeStringA                    @18001 
 DTWAIN_GetConditionCodeStringW                    @18002 
+DTWAIN_EnumFileTypeBitsPerPixel					  @19000

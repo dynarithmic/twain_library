@@ -1484,8 +1484,8 @@ Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void
 
 			// Set JFIF density parameters from the DIB data
 
-			cinfo.X_density = (UINT16) (0.5 + 0.0254 * FreeImage_GetDotsPerMeterX(dib));
-			cinfo.Y_density = (UINT16) (0.5 + 0.0254 * FreeImage_GetDotsPerMeterY(dib));
+			cinfo.X_density = (UINT16)(0.5 + 0.0254 * FreeImage_GetDotsPerMeterX(dib));
+			cinfo.Y_density = (UINT16)(0.5 + 0.0254 * FreeImage_GetDotsPerMeterY(dib));
 			cinfo.density_unit = 1;	// dots / inch
 
 			// thumbnail support (JFIF 1.02 extension markers)

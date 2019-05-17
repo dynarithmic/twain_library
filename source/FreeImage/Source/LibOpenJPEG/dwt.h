@@ -1,9 +1,15 @@
 /*
- * Copyright (c) 2002-2007, Communications and Remote Sensing Laboratory, Universite catholique de Louvain (UCL), Belgium
- * Copyright (c) 2002-2007, Professor Benoit Macq
+ * The copyright in this software is being made available under the 2-clauses
+ * BSD License, included below. This software may be subject to other third
+ * party and contributor rights, including patent rights, and no such rights
+ * are granted under this license.
+ *
+ * Copyright (c) 2002-2014, Universite catholique de Louvain (UCL), Belgium
+ * Copyright (c) 2002-2014, Professor Benoit Macq
  * Copyright (c) 2001-2003, David Janssens
  * Copyright (c) 2002-2003, Yannick Verschueren
- * Copyright (c) 2003-2007, Francois-Olivier Devaux and Antonin Descampe
+ * Copyright (c) 2003-2007, Francois-Olivier Devaux
+ * Copyright (c) 2003-2014, Antonin Descampe
  * Copyright (c) 2005, Herve Drolon, FreeImage Team
  * All rights reserved.
  *
@@ -29,8 +35,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __DWT_H
-#define __DWT_H
+#ifndef OPJ_DWT_H
+#define OPJ_DWT_H
 /**
 @file dwt.h
 @brief Implementation of a discrete wavelet transform (DWT)
@@ -48,19 +54,22 @@ DWT.C are used by some function in TCD.C.
 /*@{*/
 /* ----------------------------------------------------------------------- */
 /**
-Forward 5-3 wavelet tranform in 2-D. 
+Forward 5-3 wavelet transform in 2-D.
 Apply a reversible DWT transform to a component of an image.
 @param tilec Tile component information (current tile)
 */
 OPJ_BOOL opj_dwt_encode(opj_tcd_tilecomp_t * tilec);
 
 /**
-Inverse 5-3 wavelet tranform in 2-D.
+Inverse 5-3 wavelet transform in 2-D.
 Apply a reversible inverse DWT transform to a component of an image.
+@param p_tcd TCD handle
 @param tilec Tile component information (current tile)
 @param numres Number of resolution levels to decode
 */
-OPJ_BOOL opj_dwt_decode(opj_tcd_tilecomp_t* tilec, OPJ_UINT32 numres);
+OPJ_BOOL opj_dwt_decode(opj_tcd_t *p_tcd,
+                        opj_tcd_tilecomp_t* tilec,
+                        OPJ_UINT32 numres);
 
 /**
 Get the gain of a subband for the reversible 5-3 DWT.
@@ -76,18 +85,21 @@ Get the norm of a wavelet function of a subband at a specified level for the rev
 */
 OPJ_FLOAT64 opj_dwt_getnorm(OPJ_UINT32 level, OPJ_UINT32 orient);
 /**
-Forward 9-7 wavelet transform in 2-D. 
+Forward 9-7 wavelet transform in 2-D.
 Apply an irreversible DWT transform to a component of an image.
 @param tilec Tile component information (current tile)
 */
 OPJ_BOOL opj_dwt_encode_real(opj_tcd_tilecomp_t * tilec);
 /**
-Inverse 9-7 wavelet transform in 2-D. 
+Inverse 9-7 wavelet transform in 2-D.
 Apply an irreversible inverse DWT transform to a component of an image.
+@param p_tcd TCD handle
 @param tilec Tile component information (current tile)
 @param numres Number of resolution levels to decode
 */
-OPJ_BOOL opj_dwt_decode_real(opj_tcd_tilecomp_t* restrict tilec, OPJ_UINT32 numres);
+OPJ_BOOL opj_dwt_decode_real(opj_tcd_t *p_tcd,
+                             opj_tcd_tilecomp_t* OPJ_RESTRICT tilec,
+                             OPJ_UINT32 numres);
 
 /**
 Get the gain of a subband for the irreversible 9-7 DWT.
@@ -103,7 +115,7 @@ Get the norm of a wavelet function of a subband at a specified level for the irr
 */
 OPJ_FLOAT64 opj_dwt_getnorm_real(OPJ_UINT32 level, OPJ_UINT32 orient);
 /**
-Explicit calculation of the Quantization Stepsizes 
+Explicit calculation of the Quantization Stepsizes
 @param tccp Tile-component coding parameters
 @param prec Precint analyzed
 */
@@ -113,4 +125,4 @@ void opj_dwt_calc_explicit_stepsizes(opj_tccp_t * tccp, OPJ_UINT32 prec);
 
 /*@}*/
 
-#endif /* __DWT_H */
+#endif /* OPJ_DWT_H */

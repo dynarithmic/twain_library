@@ -516,6 +516,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='ReleaseU|x64'">MaxSpeed</Optimization>
     </ClCompile>
     <ClCompile Include="opj_clock.c" />
+    <ClCompile Include="opj_malloc.c" />
     <ClCompile Include="pi.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='DebugU|Win32'">Disabled</Optimization>
@@ -544,6 +545,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaxSpeed</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='ReleaseU|x64'">MaxSpeed</Optimization>
     </ClCompile>
+    <ClCompile Include="sparse_array.c" />
     <ClCompile Include="t1.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Disabled</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='DebugU|Win32'">Disabled</Optimization>
@@ -600,6 +602,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaxSpeed</Optimization>
       <Optimization Condition="'$(Configuration)|$(Platform)'=='ReleaseU|x64'">MaxSpeed</Optimization>
     </ClCompile>
+    <ClCompile Include="thread.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bio.h" />
@@ -625,11 +628,13 @@
     <ClInclude Include="opj_stdint.h" />
     <ClInclude Include="pi.h" />
     <ClInclude Include="raw.h" />
+    <ClInclude Include="sparse_array.h" />
     <ClInclude Include="t1.h" />
     <ClInclude Include="t1_luts.h" />
     <ClInclude Include="t2.h" />
     <ClInclude Include="tcd.h" />
     <ClInclude Include="tgt.h" />
+    <ClInclude Include="thread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

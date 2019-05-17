@@ -46,5 +46,7 @@ int CTL_JpegIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhF
         flags |= JPEG_PROGRESSIVE;
     flags += m_ImageInfoEx.IsPDF ? m_ImageInfoEx.nPDFJpegQuality : m_ImageInfoEx.nJpegQuality;
 
-    return SaveToFile(hDib, szFile, FIF_JPEG, flags, m_ImageInfoEx.UnitOfMeasure, { m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY });
+    return SaveToFile(hDib, szFile, FIF_JPEG, flags, m_ImageInfoEx.UnitOfMeasure, 
+	                  { m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY },
+					  { 0.01, 0.01, 0, 0 });
 }

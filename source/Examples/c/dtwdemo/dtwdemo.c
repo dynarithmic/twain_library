@@ -522,7 +522,6 @@ void AcquireFile(BOOL bUseSource)
         /* User wants to use DTWAIN File Mode instead of Source mode */
         /* All Sources can use this mode */
         DialogBox(g_hInstance, (LPCTSTR)IDD_dlgFileType, g_hWnd, (DLGPROC)DisplayFileTypesProc);
-//        FileFlags |= DTWAIN_USENATIVE;
         FileFlags |= DTWAIN_USEBUFFERED;
         FileType = g_FileType;
 
@@ -586,6 +585,14 @@ void AcquireFile(BOOL bUseSource)
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
         return;
+    }
+	else
+	{
+		if (_taccess(g_FileName, 0) == 0)
+		{
+			MessageBox(g_hWnd, _T("Images Acquired"), _T(""), MB_ICONSTOP);
+			return;
+		}
     }
 }
 

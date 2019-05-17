@@ -77,7 +77,8 @@ namespace dynarithmic
             virtual void SetImageInfo(const DTWAINImageInfoEx& /*ImageInfo*/) { }
             CTL_TwainDib* GetDib() { return m_pDib; }
             static bool IsValidBitDepth(LONG FileType, LONG bitDepth);
-            int SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags, UINT unitOfMeasure, const std::pair<LONG, LONG>& res);
+            int SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags, UINT unitOfMeasure, 
+ 						   const std::pair<LONG, LONG>& res, const std::tuple<double, double, double, double>& multipler_pr = { 1,1, 0.5, 0.5 });
             static std::unordered_map<LONG, std::vector<int>>& GetSupportedBPPMap() { return s_supportedBitDepths; }
 
         protected:
@@ -155,8 +156,10 @@ namespace dynarithmic
     {
         public:
             CTL_PngIOHandler()  : CTL_ImageIOHandler() {};
-            CTL_PngIOHandler( CTL_TwainDib *pDib ) : CTL_ImageIOHandler( pDib ) {}
+            CTL_PngIOHandler( CTL_TwainDib *pDib, DTWAINImageInfoEx& ImageInfoEx) : CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
+		private:
+			DTWAINImageInfoEx m_ImageInfoEx;
     };
 
     class CTL_PcxIOHandler : public CTL_ImageIOHandler

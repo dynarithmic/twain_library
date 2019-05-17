@@ -31,7 +31,7 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName, LPLONG pWhichSearch,
     libloader.load(strTwainDLLName, ec); 
 
     if ( ec != boost::system::errc::success )
-        return "";
+        return CTL_StringType();
 
     // Try to load the source manager
     DSMENTRYPROC lpDSMEntry;
@@ -48,6 +48,6 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName, LPLONG pWhichSearch,
         return strTwainDLLName;
     }
     libloader.unload();
-    return CTL_StringType(_T(""));
+    return CTL_StringType();
 }
 #endif
