@@ -1189,6 +1189,27 @@ isEqualPixel(BYTE* lhs, BYTE* rhs, unsigned pixel_size) {
 	}
 }
 
+static BOOL
+targa_write_comment(TGAEXTENSIONAREA& ex, FIBITMAP *dib) {
+	FITAG *tag = NULL;
+#define MAX_COMMENT_BYTES_PER_LINE 80
+#define MAX_COMMENT_LINES 4
+	// write user comment as a JPEG_COM marker
+	FreeImage_GetMetadata(FIMD_COMMENTS, dib, "Comment", &tag);
+	if (tag) 
+	{
+		const char *tag_value = (char*)FreeImage_GetTagValue(tag);
+		if (tag_value)
+		{
+			size_t len = strlen(tag_value);
+			int max_comment_length = (std::min)(sizeof(ex.author_comments) - 1, len);
+			memcpy(ex.author_comments, tag_value, max_comment_length);
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
 static void 
 saveRLE(FIBITMAP* dib, FreeImageIO* io, fi_handle handle) {
 	// Image is compressed line by line, packets don't span multiple lines (TGA2.0 recommendation)
@@ -1502,29 +1523,29 @@ Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void
 
 	
 	long extension_offset = 0 ;
-	if(hasValidThumbnail(dib)) {
-		// write extension area
-		
-		extension_offset = io->tell_proc(handle);
-		
 		TGAEXTENSIONAREA ex;
 		memset(&ex, 0, sizeof(ex));
-		
 		assert(sizeof(ex) == 495);
 		ex.extension_size = sizeof(ex);
+	bool hasComments = targa_write_comment(ex, dib);
+	bool hasThumbnail = hasValidThumbnail(dib);
+
+	if (hasThumbnail || hasComments)
+	{
+		extension_offset = io->tell_proc(handle);
 		ex.postage_stamp_offset = extension_offset + ex.extension_size + 0 /*< no Scan Line Table*/;
 		ex.attributes_type = FreeImage_GetBPP(dib) == 32 ? 3 /*< useful Alpha channel data*/ : 0 /*< no Alpha data*/;
 		
 #ifdef FREEIMAGE_BIGENDIAN
 		SwapExtensionArea(&ex);
 #endif
-
 		io->write_proc(&ex, sizeof(ex), 1, handle); 
 		
 		// (no Scan Line Table)
 		
 		// write thumbnail
-		
+		if (hasThumbnail)
+		{
 		io->seek_proc(handle, ex.postage_stamp_offset, SEEK_SET);
 		
 		FIBITMAP* thumbnail = FreeImage_GetThumbnail(dib);
@@ -1549,7 +1570,7 @@ Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void
 			io->write_proc(src_line, 1, line_size, handle); 
 		}
 	}
-	
+	}
 	// (no Color Correction Table)
 	
 	// write the footer

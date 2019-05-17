@@ -253,3 +253,31 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsPixelTypeSupported(DTWAIN_SOURCE Source, LONG 
     LOG_FUNC_EXIT_PARAMS(false)
     CATCH_BLOCK(false)
 }
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN_ARRAY Array)
+{
+	LOG_FUNC_ENTRY_PARAMS((FileType, Array))
+	CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+
+	// See if DLL Handle exists
+	DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
+
+	if (Array)
+	{
+		if (EnumeratorFunctionImpl::EnumeratorIsValid(*Array))
+			EnumeratorFunctionImpl::ClearEnumerator(*Array);
+	}
+
+	DTWAIN_ARRAY ThisArray = 0;
+	ThisArray = DTWAIN_ArrayCreate(DTWAIN_ARRAYLONG, 0);
+	DTWAINArrayLL_RAII arr(ThisArray);
+	auto& bppMap = CTL_ImageIOHandler::GetSupportedBPPMap();
+	auto iter = bppMap.find(FileType);
+	if (iter != bppMap.end())
+		for_each(iter->second.begin(), iter->second.end(),
+			[&](int val) {LONG lVal = val;  EnumeratorFunctionImpl::EnumeratorAddValue(ThisArray, &lVal); });
+	*Array = ThisArray;
+	arr.Disconnect();
+	LOG_FUNC_EXIT_PARAMS(iter != bppMap.end())
+	CATCH_BLOCK(FALSE)
+}

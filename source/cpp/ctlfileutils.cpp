@@ -42,8 +42,9 @@ namespace dynarithmic
 		{
 			auto p = boost::filesystem::path(filename);
 			auto p2 = p.remove_filename();
-			std::wstring str = p2.native();
-			str = StringWrapperW::AddBackslashToDirectory(str);
+			auto native_str = p2.native();
+			CTL_StringType str(native_str.begin(), native_str.end());
+			str = StringWrapper::AddBackslashToDirectory(str);
 			if (boost::filesystem::exists(str))
 				return true;
 		}

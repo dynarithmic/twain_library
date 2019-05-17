@@ -36,6 +36,8 @@ int CTL_PngIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhFi
     if (!IsValidBitDepth(DTWAIN_PNG, m_pDib->GetBitsPerPixel()))
         return DTWAIN_ERR_INVALID_BITDEPTH;
 
-    return SaveToFile(hDib, szFile, FIF_PNG, 0, DTWAIN_INCHES, { 0, 0});
+    return SaveToFile(hDib, szFile, FIF_PNG, 0, m_ImageInfoEx.UnitOfMeasure, 
+						{m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY},
+						{ 0.01, 0.01, 0, 0 });
 }
 

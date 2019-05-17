@@ -508,7 +508,7 @@ int CTL_TwainDib::WriteDibBitmap (DTWAINImageInfoEx& ImageInfo,
         break;
 
         case PngFormat:
-            pHandler = std::make_unique<CTL_PngIOHandler>( this );
+            pHandler = std::make_unique<CTL_PngIOHandler>( this, ImageInfo );
         break;
 
         case PcxFormat:

@@ -1,8 +1,8 @@
 /*
- * $Id: indexbox_manager.h,v 1.4 2014/03/16 12:29:52 drolon Exp $
+ * $Id: indexbox_manager.h 897 2011-08-28 21:43:57Z Kaori.Hagihara@gmail.com $
  *
- * Copyright (c) 2002-2011, Communications and Remote Sensing Laboratory, Universite catholique de Louvain (UCL), Belgium
- * Copyright (c) 2002-2011, Professor Benoit Macq
+ * Copyright (c) 2002-2014, Universite catholique de Louvain (UCL), Belgium
+ * Copyright (c) 2002-2014, Professor Benoit Macq
  * Copyright (c) 2003-2004, Yannick Verschueren
  * Copyright (c) 2010-2011, Kaori Hagihara
  * All rights reserved.
@@ -56,7 +56,7 @@
 #define JPIP_PHLD 0x70686c64   /* Place holder                    */
 
 
-/* 
+/*
  * Write tile-part Index table box (superbox)
  *
  * @param[in] coff      offset of j2k codestream
@@ -65,11 +65,12 @@
  * @param[in] cio       file output handle
  * @return              length of tpix box
  */
-int opj_write_tpix( int coff, opj_codestream_info_t cstr_info, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_tpix(int coff, opj_codestream_info_t cstr_info, int j2klen,
+                   opj_stream_private_t *cio,
+                   opj_event_mgr_t * p_manager);
 
 
-/* 
+/*
  * Write tile header index table box (superbox)
  *
  * @param[in] coff      offset of j2k codestream
@@ -77,10 +78,11 @@ int opj_write_tpix( int coff, opj_codestream_info_t cstr_info, int j2klen, opj_s
  * @param[in] cio       file output handle
  * @return              length of thix box
  */
-int opj_write_thix( int coff, opj_codestream_info_t cstr_info, opj_stream_private_t *cio, opj_event_mgr_t * p_manager );
+int opj_write_thix(int coff, opj_codestream_info_t cstr_info,
+                   opj_stream_private_t *cio, opj_event_mgr_t * p_manager);
 
 
-/* 
+/*
  * Write precinct packet index table box (superbox)
  *
  * @param[in] coff      offset of j2k codestream
@@ -90,11 +92,12 @@ int opj_write_thix( int coff, opj_codestream_info_t cstr_info, opj_stream_privat
  * @param[in] cio       file output handle
  * @return              length of ppix box
  */
-int opj_write_ppix( int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_ppix(int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused,
+                   int j2klen, opj_stream_private_t *cio,
+                   opj_event_mgr_t * p_manager);
 
 
-/* 
+/*
  * Write packet header index table box (superbox)
  *
  * @param[in] coff      offset of j2k codestream
@@ -104,11 +107,12 @@ int opj_write_ppix( int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused,
  * @param[in] cio       file output handle
  * @return              length of ppix box
  */
-int opj_write_phix( int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_phix(int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused,
+                   int j2klen, opj_stream_private_t *cio,
+                   opj_event_mgr_t * p_manager);
 
-/* 
- * Wriet manifest box (box)
+/*
+ * Write manifest box (box)
  *
  * @param[in] second number to be visited
  * @param[in] v      number of boxes
@@ -116,13 +120,13 @@ int opj_write_phix( int coff, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused,
  * @param[in] cio    file output handle
  */
 
-void opj_write_manf(int second, 
-                    int v, 
-                    opj_jp2_box_t *box, 
+void opj_write_manf(int second,
+                    int v,
+                    opj_jp2_box_t *box,
                     opj_stream_private_t *cio,
-                    opj_event_mgr_t * p_manager );
+                    opj_event_mgr_t * p_manager);
 
-/* 
+/*
  * Write main header index table (box)
  *
  * @param[in] coff offset of j2k codestream
@@ -130,19 +134,24 @@ void opj_write_manf(int second,
  * @param[in] cio  file output handle
  * @return         length of mainmhix box
  */
-int opj_write_mainmhix( int coff, opj_codestream_info_t cstr_info, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_mainmhix(int coff, opj_codestream_info_t cstr_info,
+                       opj_stream_private_t *cio,
+                       opj_event_mgr_t * p_manager);
 
-int opj_write_phixfaix( int coff, int compno, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_phixfaix(int coff, int compno, opj_codestream_info_t cstr_info,
+                       OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
+                       opj_event_mgr_t * p_manager);
 
-int opj_write_ppixfaix( int coff, int compno, opj_codestream_info_t cstr_info, OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_ppixfaix(int coff, int compno, opj_codestream_info_t cstr_info,
+                       OPJ_BOOL EPHused, int j2klen, opj_stream_private_t *cio,
+                       opj_event_mgr_t * p_manager);
 
-int opj_write_tilemhix( int coff, opj_codestream_info_t cstr_info, int tileno, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_tilemhix(int coff, opj_codestream_info_t cstr_info, int tileno,
+                       opj_stream_private_t *cio,
+                       opj_event_mgr_t * p_manager);
 
-int opj_write_tpixfaix( int coff, int compno, opj_codestream_info_t cstr_info, int j2klen, opj_stream_private_t *cio,
-              opj_event_mgr_t * p_manager );
+int opj_write_tpixfaix(int coff, int compno, opj_codestream_info_t cstr_info,
+                       int j2klen, opj_stream_private_t *cio,
+                       opj_event_mgr_t * p_manager);
 
 #endif      /* !INDEXBOX_MANAGER_H_ */
