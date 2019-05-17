@@ -221,7 +221,7 @@ In addition, you will need at least 20 GB of free disk space
 
 Note that the C++ source code should be able to be built with any C++11 or C++14 compliant compiler that recognizes the Windows API headers (MingW using g++ 5.0 or above is an example).  However we have not tested builds of the DTWAIN library that have been built with any other compiler other than the Visual Studio family.   
 
-* Start Visual Studio, and open one of the DTWAIN solution.  The DTWAIN solution files are found in the [source](https://github.com/dynarithmic/twain_library/tree/master/source) directory.  Open **dtwain_5_vs2015.sln** or **dtwain_5_vs2017.sln**, depending on whether you are using Visual Studio 2013, 2015, or 2017, respectively. 
+* Start Visual Studio, and open one of the DTWAIN solution.  The DTWAIN solution files are found in the [source](https://github.com/dynarithmic/twain_library/tree/master/source) directory.  Open **dtwain_5_vs2015.sln** or **dtwain_5_vs2017.sln**, depending on whether you are using Visual Studio 2015 or 2017, respectively. 
 
 * A full rebuild of all the configurations available is recommended.  Use the "Build -> Batch Build..." option in the Visual Studio IDE and check all of the configurations to build everything (take a coffee break -- this could take a while).  This will create a "binaries" directory that will contain the following DLLs:
 
