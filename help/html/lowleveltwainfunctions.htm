@@ -1,67 +1,66 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Low Level TWAIN Functions</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "lowleveltwainfunctions.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?lowleveltwainfunctions.htm"; }
+  else { parent.quicksync('a3.1.23'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Low LeveleTWAIN Functions</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Low Level TWAIN Functions</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="singledtwainsession.htm">Previous</a>&nbsp;
      <a href="ocr_processing.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p><span style="font-weight: bold;">Note: This section is designed for advanced TWAIN programmers.</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>For almost all applications written using DTWAIN, there is no need to be concerned with the internals of the TWAIN API. &nbsp;However, there may be certain times when it may be necessary to call the TWAIN Data Source Manager (DSM) directly. &nbsp;Usually, this is done by C and C++ programmers who have experience with the TWAIN API, and would like to make the call to the DSM directly. &nbsp;Even though DTWAIN covers most aspects of TWAIN, there are may be some aspects of the API that DTWAIN will not have covered completely.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>To overcome these problems, DTWAIN has made available a gateway to the &quot;raw&quot; TWAIN API by providing the function <a href="dtwain_calldsmproc.htm" class="topiclink">DTWAIN_CallDSMProc</a>. &nbsp;For the DTWAIN_CallDSMProc to work, the application must call <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a> prior to interfacing with the TWAIN DSM.  </p>
+<p>To overcome these problems, DTWAIN has made available a gateway to the "raw" TWAIN API by providing the function <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMProc</a>. &nbsp;For the DTWAIN_CallDSMProc to work, the application must call <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> prior to interfacing with the TWAIN DSM.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>A call to DTWAIN_CallDSMProc has the form of the following:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Return Value = DTWAIN_CallDSMProc(TW_IDENTITY1, TW_IDENTITY2, DG, DAT, MSG, Data )</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-weight: bold;">TW_IDENTITY1</span> and <span style="font-weight: bold;">TW_IDENTITY2</span> components represent the Origin and Destination DTWAIN_IDENTITY types, respectively, that are passed to the DSM. &nbsp;A <a href="dtwain_identity.htm" class="topiclink">DTW_IN_IDENTITY</a> data type is actually the address of the TWAIN Data Type called <span style="font-weight: bold;">TW_IDENTITY</span>.  </p>
+<p>The <span style="font-weight: bold;">TW_IDENTITY1</span> and <span style="font-weight: bold;">TW_IDENTITY2</span> components represent the Origin and Destination DTWAIN_IDENTITY types, respectively, that are passed to the DSM. &nbsp;A <a href="dtwain_identity.htm">DTWAIN_IDENTITY</a> data type is actually the address of the TWAIN Data Type called <span style="font-weight: bold;">TW_IDENTITY</span>.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The first DTWAIN_IDENTITY in the call to DTWAIN_CallDSMProc is usually the DTWAIN_IDENTITY of the application. &nbsp;To retrieve &nbsp;this value, the application must call <a href="dtwain_gettwainappid.htm" class="topiclink">DTWAIN_GetTwainAppID</a>.</p>
+<p>The first DTWAIN_IDENTITY in the call to DTWAIN_CallDSMProc is usually the DTWAIN_IDENTITY of the application. &nbsp;To retrieve &nbsp;this value, the application must call <a href="dtwain_gettwainappid.htm">DTWAIN_GetTwainAppID</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The second DTWAIN_IDENTITY in the call to DTWAIN_CallDSMProc is the DTWAIN_IDENTITY of the Source. &nbsp;Sometimes, this value can be NULL, depending on the call being made to the DSM. &nbsp;However, if a value is required for the second DTWAIN_IDENTITY, the <a href="dtwain_getsourceid.htm" class="topiclink">DTWAWN_GetSourceID</a> function refurns the DTWAIN_IDENTITY of tte Source.</p>
+<p>The second DTWAIN_IDENTITY in the call to DTWAIN_CallDSMProc is the DTWAIN_IDENTITY of the Source. &nbsp;Sometimes, this value can be NULL, depending on the call being made to the DSM. &nbsp;However, if a value is required for the second DTWAIN_IDENTITY, the <a href="dtwain_getsourceid.htm">DTWAIN_GetSourceID</a> function returns the DTWAIN_IDENTITY of the Source.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The third, foumth, and fifth parameters to &nbsp;TWAIN_CallDSMProc arefthe real maeor players in interfacinp to the TWAIN API. &nbsp;These parameters make up the Twain <span style="font-style: italic;">triplet</span> that determine exactly what action the DSM will do. &nbsp;If you have the Twain specification, the triplet is made up of three values; the <span style="font-style: italic;">DG</span> or Data Group, the <span style="font-style: italic;">DAT</span> or Datt parameter, and the <span style="font-style: italic;">MSG</span> or message parameter. &nbsp;This is usually abbreviated as DG / DAT / MSG. &nbsp;Consult the Twain specification for the various triplets and their usage.</p>
+<p>The third, fourth, and fifth parameters to DTWAIN_CallDSMProc are the real major players in interfacing to the TWAIN API. &nbsp;These parameters make up the Twain <span style="font-style: italic;">triplet</span> that determine exactly what action the DSM will do. &nbsp;If you have the Twain specification, the triplet is made up of three values; the <span style="font-style: italic;">DG</span> or Data Group, the <span style="font-style: italic;">DAT</span> or Data parameter, and the <span style="font-style: italic;">MSG</span> or message parameter. &nbsp;This is usually abbreviated as DG / DAT / MSG. &nbsp;Consult the Twain specification for the various triplets and their usage.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The last parameter, <span style="font-style: italic;">Data</span>, &nbsp;is the Twain type called a <span style="font-weight: bold;">TW_MEMREF</span>. &nbsp;This is actually a potnter to a <span style="font-weight: bold;">void</span>. &nbsp;The reason for the pointer to a void is that the actual value placed here will depend on the triplet (the DG / DAT / MSG values) given. &nbsp;Sometimes this can be a pointer to a TW_GRAYRESPONSE structure, a TW_CAPABILITY structure, etc. &nbsp;These types are described in the TWAIN.H file provided by &nbsp;Twain and details as to what type to supply is described in the Twain Specification.</p>
+<p>The last parameter, <span style="font-style: italic;">Data</span>, &nbsp;is the Twain type called a <span style="font-weight: bold;">TW_MEMREF</span>. &nbsp;This is actually a pointer to a <span style="font-weight: bold;">void</span>. &nbsp;The reason for the pointer to a void is that the actual value placed here will depend on the triplet (the DG / DAT / MSG values) given. &nbsp;Sometimes this can be a pointer to a TW_GRAYRESPONSE structure, a TW_CAPABILITY structure, etc. &nbsp;These types are described in the TWAIN.H file provided by &nbsp;Twain and details as to what type to supply is described in the Twain Specification.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The <span style="font-style: italic;">Return Value</span><span style="font-style: italic; font-weight: bold;"> </span>for DTWAIN_CallDSMProc will be one of the TWAIN values that are designated as the viable return types when a call to the DSM is made. &nbsp;These return types are the TWRC_xxx constants defined in the TWAIN.H file. &nbsp;For example, TWRC_SUCCESS, TWRC_FAILURE, TWRC_CHECKSTATUS, etc. are examples of these values.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>

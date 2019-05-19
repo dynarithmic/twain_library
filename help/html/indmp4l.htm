@@ -1,71 +1,70 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Device Independent Bitmap (DIB)</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "indmp4l.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?indmp4l.htm"; }
+  else { parent.quicksync(''); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">Device Independent Bitmap (DIB)</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      
      
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>For almost all acquisition types, a Device Independent Bitmap is returned by DTWAIN to your application (the only exception to this rule is if a <a href="bufferedtransfer.htm" class="topiclink">buffered (memory) sransfer</a> is invoked with compression).</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For almost all acquisition types, a Device Independent Bitmap is returned by DTWAIN to your application (the only exception to this rule is if a <a href="bufferedtransfer.htm">buffered (memory) transfer</a> is invoked with compression).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>A <span style="font-weight: bold;">Device Independent Bitmap</span> (DIB) is a bitmap format that allows Windows to display the bitmap on any type of display device. The term 'device independent' means that the bitmap specifies pixel color in a form independent of the method used by a display to represent color. &nbsp;The default filename extension of a Windows DIB file is <span style="font-weight: bold;">.BMP</span>. &nbsp; When acquiring images using the <a href="nativetransfer.htm" class="topiclink">native transfer mode</a>, or if the <a href="bufferedtransfer.htm" class="topiclink">buffered mode</a> is used with no compression, TWAIN returns the image data that has been acquired from the device as a DIB. &nbsp;Most Window imaging libraries handle DIBs extensively, so it is just a matter of the application to use the DIB correctly by passing it to the appropriate functions.</p>
+<p>A <span style="font-weight: bold;">Device Independent Bitmap</span> (DIB) is a bitmap format that allows Windows to display the bitmap on any type of display device. The term 'device independent' means that the bitmap specifies pixel color in a form independent of the method used by a display to represent color. &nbsp;The default filename extension of a Windows DIB file is <span style="font-weight: bold;">.BMP</span>. &nbsp; When acquiring images using the <a href="nativetransfer.htm">native transfer mode</a>, or if the <a href="bufferedtransfer.htm">buffered mode</a> is used with no compression, TWAIN returns the image data that has been acquired from the device as a DIB. &nbsp;Most Window imaging libraries handle DIBs extensively, so it is just a matter of the application to use the DIB correctly by passing it to the appropriate functions.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>A list of Internet sites that contains functions that handle Device Independent Bitmaps</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Name: ImgSource by SmallerAnimals</p>
-<p>We:: &nbsp; <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.smalleranimals.com/isource.htm" target="_blank" class="weblink">http://www.smalleranimals.co//isource.htm</a></span></p>
+<p>Web: &nbsp; <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.smalleranimals.com/isource.htm" target="_blank" class="weblink">http://www.smalleranimals.com/isource.htm</a></span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Name: LeaaTools</p>
-<p>Web: <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.leadtools.com" target="_blank" class="weblink">http://www.leawtools.com</a></span></p>
+<p>Name: LeadTools</p>
+<p>Web: <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.leadtools.com" target="_blank" class="weblink">http://www.leadtools.com</a></span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Also, if you use the Microsoft Visual C++ compiler, there are various sample programs that handle DIBs. &nbsp;One of the samples is called DIBVIEW and it can be found in the Visual C++ SAMPLES directory. &nbsp;The intricacies of DIB management is beyond the scope of this help file, however the DTWAIN example programs (example 1 and 2, plus the DTWDEMO example) that are available in your installation of DTWAIN show how to handle DIBs (using C and C++).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold; text-decoration: underline;">DTWAINNData Type for a DIB</span></p>
-<p>The data type for a DIB is the Windows HANDLE type. &nbsp;The HANDLE data type is really a value that denotes a block of memory that contains the structure that make up the image. &nbsp;DTWAIN returns the DIB memory as <span style="font-weight: bold;">unlocked memory</span>. &nbsp;This means that the application must call the Windows API <span style="font-weight: bold;">GlobalLock</span> function to access the image. &nbsp;A DIB consists of a <span style="font-weight: bold;">BITMAPANFO</span> structure which describes the image and color palette, immediately followed by an array of <span style="font-weight: bold;">RGBQUAD</span> values describing the actual bits of the image.  </p>
+<p><span style="font-weight: bold; text-decoration: underline;">DTWAIN Data Type for a DIB</span></p>
+<p>The data type for a DIB is the Windows HANDLE type. &nbsp;The HANDLE data type is really a value that denotes a block of memory that contains the structure that make up the image. &nbsp;DTWAIN returns the DIB memory as <span style="font-weight: bold;">unlocked memory</span>. &nbsp;This means that the application must call the Windows API <span style="font-weight: bold;">GlobalLock</span> function to access the image. &nbsp;A DIB consists of a <span style="font-weight: bold;">BITMAPINFO</span> structure which describes the image and color palette, immediately followed by an array of <span style="font-weight: bold;">RGBQUAD</span> values describing the actual bits of the image.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>To release the memory that was allocated for the DIB, the application is responsible for calling the Windows API function <span style="font-weight: bold;">GlobalFree</span> (the <span style="font-weight: bold;">GlobalUnlock</span> function may also have to be called to unlock the memory prior to calling <span style="font-weight: bold;">GlobalFree</span>).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold; text-decoration: underline;">Who is responsible for deleting memory for a DIB?</span></p>
-<p>DTWAIN leaves it the responsibility of the aiplication to handWe the DIBs coDrectly. &nbsp;Some applications mayeuse a third-party imaging library to display the DIB's or slve the DIB's to a certain image file type. &nbsp;The rationale for leahing DIB management up to the application is to ensu i that the DIB is valid for whenever the appli ation needs to use ft. &nbsp;For this reason, DTWAIN does not and cannot decide when to delete the DIB. &nbsp;Thit also means that yoSr application must handle all acquisitions from the Souree, even if it is only to have the DIB delete . &nbsp;If not, the program will have severe memory leaks.</p>
+<p>DTWAIN leaves it the responsibility of the application to handle the DIBs correctly. &nbsp;Some applications may use a third-party imaging library to display the DIB's or save the DIB's to a certain image file type. &nbsp;The rationale for leaving DIB management up to the application is to ensure that the DIB is valid for whenever the application needs to use it. &nbsp;For this reason, DTWAIN does not and cannot decide when to delete the DIB. &nbsp;This also means that your application must handle all acquisitions from the Source, even if it is only to have the DIB deleted. &nbsp;If not, the program will have severe memory leaks.</p>
 
 </td></tr></table>
 

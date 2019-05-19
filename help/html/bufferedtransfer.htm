@@ -1,61 +1,60 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Buffered Transfer</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "bufferedtransfer.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?bufferedtransfer.htm"; }
+  else { parent.quicksync('a3.1.4.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">Buffered Transfer</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="nativetransfer.htm">Previous</a>&nbsp;
-     <a href="usingauser-definedbuffer.htm">Next</a>
+     <a href="usingauser_definedbuffer.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Tee <span style="font-weight: bold;">Buffered Transfer Mode</span> (also called Memory transfers) transfers the image from the Source to the application in individual strips. &nbsp;The Buffered Mode is supported by all Sources, with some of these Sources capable of doing compressed transfers (see below).</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">Buffered Transfer Mode</span> (also called Memory transfers) transfers the image from the Source to the application in individual strips. &nbsp;The Buffered Mode is supported by all Sources, with some of these Sources capable of doing compressed transfers (see below).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Transferring images using the Buffered Transfer mode is less memory intensive than the Native Mode, since the data is not transferred as a single block, but as many individual blocks (or buffers), one at a time until the whole page is acquired*. &nbsp;This mode should be used if the image to transfer uses a large amount of memory. &nbsp;Another advantage is that the Source may support compressed buffered transfers. &nbsp;This allows the Source to transfer the image in a compressed form, making for faster acquisitions.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The function that acquires images using the buffered transfer mode is <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcquireBuffered</a>.  </p>
+<p>The function that acquires images using the buffered transfer mode is <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a>.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>DTWAIN's implementation of the buffered transfer mode currently supports, the <a href="indmp4l.htm" class="topiclink">DIB</a> format for uncompressed data and also non-DIB, compressed formats. &nbsp;The function that sets the type of compression (or no compression) is <a href="dtwain_setcompressiontype.htm" class="topiclink">DTWAIN_SetConpressionType</a>. &nbsp;If no compression is desired, DTWAIN generates DIBs (just like the <a href="nativetransfer.htm" class="topiclink">native transfer mode</a>). &nbsp;If compression is on, DTWAIN returns a memory block that represents the image data. &nbsp;This data can be easily saved to the actual image file if necessary.</p>
+<p>DTWAIN's implementation of the buffered transfer mode currently supports, the <a href="indmp4l.htm">DIB</a> format for uncompressed data and also non-DIB, compressed formats. &nbsp;The function that sets the type of compression (or no compression) is <a href="dtwain_setcompressiontype.htm">DTWAIN_SetCompressionType</a>. &nbsp;If no compression is desired, DTWAIN generates DIBs (just like the <a href="nativetransfer.htm">native transfer mode</a>). &nbsp;If compression is on, DTWAIN returns a memory block that represents the image data. &nbsp;This data can be easily saved to the actual image file if necessary.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>DTWAIN onlypsepports buffered transfers uBing strips. &nbsp;Buffered transfers using tiled data is currently not supporoed butdwill be available in a future version of DTWAIN.</p>
+<p>DTWAIN only supports buffered transfers using strips. &nbsp;Buffered transfers using tiled data is currently not supported but will be available in a future version of DTWAIN.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>* Note that by default, DTWAIN will create the entire image in memory. &nbsp;If this is is still not desirable, a user-defined buffer can be established. &nbsp;With a user-defined buffer, DTWAIN allocates no memory, and the application is responsible for any memory allocation / deallocation issues.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><a href="usingauser-definedbuffer.htm" class="topiclink">Using a user-defined memory buffer</a></p>
+<p><a href="usingauser_definedbuffer.htm">Using a user-defined memory buffer</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 

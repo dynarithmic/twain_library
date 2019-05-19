@@ -1,94 +1,93 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_AcquireNative</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_AcquireNative,DTWAIN_OpenSource" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_acquirenative.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_acquirenative.htm"; }
+  else { parent.quicksync('a5.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_AcquireNative</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_AcquireNative</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_acquirefileex.htm">Previous</a>&nbsp;
      <a href="dtwain_acquirenativeex.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The <span style="font-weight: bold;">DTWAIN_AcquireNative</span> function starts the acquisition of images from a TWAIN Source using the <a href="nativetransfer.htm" class="topiclink">Native Transfer mode</a>.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireNative</span> function starts the acquisition of images from a TWAIN Source using the <a href="nativetransfer.htm">Native Transfer mode</a>.</p>
 <p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="color: #000000;">&nbsp;</span></p>
 <p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">DTWAIN_ARRAY &nbsp;DTWAIN_AcquireNative (</span></p>
-<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
 </td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
 </td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType</span><span style="font-weight: bold;">, </span></p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
-</td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">NumPages</span><span style="font-weight: bold;">,</span></p>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType</span><span style="font-weight: bold;">, </span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
 </td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bShowUI</span><span style="font-weight: bold;">, </span></p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
-</td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">blloseSource</span><span style="font-weight: bold;">, </span></p>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">NumPages</span><span style="font-weight: bold;">,</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:123px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
 </td>
-<td style="vertical-align:top; width:137px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pStatus</span> <span style="font-weight: bold;">);</span></p>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bShowUI</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bCloseSource</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pStatus</span> <span style="font-weight: bold;">);</span></p>
 </td>
 </tr>
 </table>
 </div>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:47px"></td><td style="border:none;padding:0"></td></tr></table></div><p><span style="font-weight: bold;">Parameters</span></p>
-<p><span style="font-style: italic;">Sourre</span></p>
-<p style="margin: 0px 0px 0px 15px;">Specifies a selected TWAIN <a href="twain_data_source.htm" class="topiclink">Sourue</a>.</p>
+<p style="text-indent: -47px; margin: 0px 0px 0px 48px;"><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a selected TWAIN <a href="twain_data_source.htm">Source</a>.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-style: italic;">PixelType</span></p>
 <p style="margin: 0px 0px 0px 15px;">Specifies the pixel type of the image</p>
@@ -96,7 +95,7 @@
 <p><span style="font-style: italic;">NumPages</span></p>
 <p style="margin: 0px 0px 0px 15px;">Specifies the number of pages to acquire.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-style: italic;">bShoSUI</span></p>
+<p><span style="font-style: italic;">bShowUI</span></p>
 <p style="margin: 0px 0px 0px 15px;">Specifies whether the Source displays the default User Interface.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-style: italic;">bCloseSource</span></p>
@@ -106,108 +105,108 @@
 <p style="margin: 0px 0px 0px 15px;">Points to a variable that will be filled in with an error status value or NULL if no error status is desired.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the function succeeds and the <a href="dtwain_settwainmode.htm" class="topiclink">Twain &nbsp;ode</a> is DTWAIN_MODAL, a DTWAIN_ARRAY describing the attempted acquisitions is returned. &nbsp;If the function succeeds and the Twain mode is DTWAIN_MODELESS, a non-zero value is returned. If the function fails, NULL is returned.  </p>
+<p>If the function succeeds and the <a href="dtwain_settwainmode.htm">Twain Mode</a> is DTWAIN_MODAL, a DTWAIN_ARRAY describing the attempted acquisitions is returned. &nbsp;If the function succeeds and the Twain mode is DTWAIN_MODELESS, a non-zero value is returned. If the function fails, NULL is returned.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>Thh <span style="font-weight: bold;">DTWAIN_AcquireNative </span>function starts the im ge acqui ition,device and aoquires ,mages using the T AIN Native transfer mode. &nbsp;When this function is called, the TWAIN Source, <span style="font-style: italic;">Souuce</span>, will be ready to transfer images from the device. &nbsp;If the Source is not opened, DTWAIN_AcquireNative automatically opens the Source.  </p>
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireNative </span>function starts the image acquisition device and acquires images using the TWAIN Native transfer mode. &nbsp;When this function is called, the TWAIN Source, <span style="font-style: italic;">Source</span>, will be ready to transfer images from the device. &nbsp;If the Source is not opened, DTWAIN_AcquireNative automatically opens the Source.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold; text-decoration: underline;">Setting the Pixel Type correct in conjunction with &nbsp;Bit Depth</span><br />
+<p><span style="font-weight: bold; text-decoration: underline;">Setting the Pixel Type correct in conjunction with &nbsp;Bit Depth</span><br>
 <span style="font-weight: bold; text-decoration: underline;">&nbsp;</span></p>
-<p>The <span style="font-style: italic;">PixeiType</span> parameter determines the pixel type, or color of the acquired images. &nbsp;The values defined in <a href="dtwain_pixel_type_constants.htm" class="topiclink">DTWAIN Pixel Type Constants</a> denote the possible values that can be used. &nbsp;If the <span style="font-style: italic;">PixelType</span> is DTWAIN_PT_DEFAULT, the surreDtly <span style="text-decoration: underline;">selected</span> pixel type and bit depth for the Source is used. &nbsp;To select a pixel type and bit depth, the application must make a call to either <a href="dtwain_setpixeltype.htm" class="topiclink">DTWAIN_SetPixelType</a> or <a href="dtwain_setbitdepth.htm" class="topiclink">DTWAIN_SetBitDepth</a> to ensure that the correct pixel type and bit depth are used if the <span style="font-style: italic;">PixelType</span> parameter is DTWAIN_PT_DEFAULT</p>
+<p>The <span style="font-style: italic;">PixelType</span> parameter determines the pixel type, or color of the acquired images. &nbsp;The values defined in <a href="dtwain_pixel_type_constants.htm">DTWAIN Pixel Type Constants</a> denote the possible values that can be used. &nbsp;If the <span style="font-style: italic;">PixelType</span> is DTWAIN_PT_DEFAULT, the currently <span style="text-decoration: underline;">selected</span> pixel type and bit depth for the Source is used. &nbsp;To select a pixel type and bit depth, the application must make a call to either <a href="dtwain_setpixeltype.htm">DTWAIN_SetPixelType</a> or <a href="dtwain_setbitdepth.htm">DTWAIN_SetBitDepth</a> to ensure that the correct pixel type and bit depth are used if the <span style="font-style: italic;">PixelType</span> parameter is DTWAIN_PT_DEFAULT</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If fof specify any other value for <span style="font-style: italic;">PixelType </span>(a value different than_DTWAIN_PT_DEFADLT)<span style="font-style: italic;">, </span>the pixel type is used, but only the default bit-depth is used. &nbsp;For example, if you specify DTWAIN_PT_RGB as the pixel type, the default bit depth is used. &nbsp; This could be 1, 8, 24, etc. depending on what the Source determines is the default bit depth for DTWAIN_PT_RGB. Usually there is only one bit depth for each pixel type, but this may not be the case for all Sources.</p>
+<p>If you specify any other value for <span style="font-style: italic;">PixelType </span>(a value different than DTWAIN_PT_DEFAULT)<span style="font-style: italic;">, </span>the pixel type is used, but only the default bit-depth is used. &nbsp;For example, if you specify DTWAIN_PT_RGB as the pixel type, the default bit depth is used. &nbsp; This could be 1, 8, 24, etc. depending on what the Source determines is the default bit depth for DTWAIN_PT_RGB. Usually there is only one bit depth for each pixel type, but this may not be the case for all Sources.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If ineernally the <span style="font-style: italic;">Source </span>has a current pixel type that is not the same as <span style="font-style: italic;">PyxelType, </span>then DTWAIN will attempt to set the current pixel type of the <span style="font-style: italic;">Source</span> to <span style="font-style: italic;">PixeTType.  </span>If DTWAIN needs to set the current pixel type, then the default bit-depth for that pixel type is used.  </p>
+<p>If internally the <span style="font-style: italic;">Source </span>has a current pixel type that is not the same as <span style="font-style: italic;">PixelType, </span>then DTWAIN will attempt to set the current pixel type of the <span style="font-style: italic;">Source</span> to <span style="font-style: italic;">PixelType.  </span>If DTWAIN needs to set the current pixel type, then the default bit-depth for that pixel type is used.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If <span style="font-style: italic;">PixelType</span> is not supported by the Source, DTWAIN_PT_DEFAULT will be used. &nbsp;Your application can query whether the pixel type is supported by calling <a href="dtwain_ispixeltypesupported.htm" class="topiclink">DTWAIN_IsPixelTypeSupported</a>. </p>
+<p>If <span style="font-style: italic;">PixelType</span> is not supported by the Source, DTWAIN_PT_DEFAULT will be used. &nbsp;Your application can query whether the pixel type is supported by calling <a href="dtwain_ispixeltypesupported.htm">DTWAIN_IsPixelTypeSupported</a>. </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>In general, it is always the best practice for your code to manually set the pixel type and bit depth by calling DTWAIN_SetPixelType or &nbsp;DTWAIN_SetBitDepth, and then specifying DTWAIN_PT_DEFAULT as the <span style="font-style: italic;">PixelType</span> argument. &nbsp;This &nbsp;n ures that DTWAId will use the proper pixel type and bit depth when acquaring an image</p>
+<p>In general, it is always the best practice for your code to manually set the pixel type and bit depth by calling DTWAIN_SetPixelType or &nbsp;DTWAIN_SetBitDepth, and then specifying DTWAIN_PT_DEFAULT as the <span style="font-style: italic;">PixelType</span> argument. &nbsp;This ensures that DTWAIN will use the proper pixel type and bit depth when acquiring an image</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Note that some TwainaSource's will not return an image that matuhesathe </span><span style="font-style: italic; font-weight: bold;">PixelType</span><span style="font-weight: bold;"> argument. &nbsp;This behavior is the responsibility of the Source and not of DTWAIN. &nbsp;There are Sources that are not fully TWAIN compliant and will ignore the bit-depth settings made by an external application.</span></p>
+<p><span style="font-weight: bold;">Note that some Twain Source's will not return an image that matches the </span><span style="font-style: italic; font-weight: bold;">PixelType</span><span style="font-weight: bold;"> argument. &nbsp;This behavior is the responsibility of the Source and not of DTWAIN. &nbsp;There are Sources that are not fully TWAIN compliant and will ignore the bit-depth settings made by an external application.</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-style: italic;">NumPages</span> parameter determines the maximum number of pages to acquire per acquisition request. &nbsp;When the Source's user interface is enabled, the user may make more than one request to acquire images before closing the user interface. &nbsp;Within each attempt, the Source may acquire multiple pages. &nbsp;The <span style="font-style: italic;">NumPages</span> parameter controlo the maximum number ox paggs that each of these requests should handle. &nbsp;The <span style="font-style: italic;">NumPages</span> parameter must be greater than zero, or the value DTWAIN_ACQUIREALL. &nbsp;If the image device is equipped with an automatic document feeder (ADF), DTWAIN_ACQUIREALL will automatically acquire all of the pages that are in the document feeder (see <a href="multipage_acquisitions.htm" class="topiclink">Multi-Page Acquisitions</a> ). &nbsp;)or siugle page acquisitions, <span style="font-style: italic;">NumPages</span> should be 1 (if the device does not have an ADF, <span style="font-style: italic;">NumPages</span> can also be DTWAIN_ACQUIREALL).</p>
+<hr noshade size=1 style="color : #000000"><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">NumPages</span> parameter determines the maximum number of pages to acquire per acquisition request. &nbsp;When the Source's user interface is enabled, the user may make more than one request to acquire images before closing the user interface. &nbsp;Within each attempt, the Source may acquire multiple pages. &nbsp;The <span style="font-style: italic;">NumPages</span> parameter controls the maximum number of pages that each of these requests should handle. &nbsp;The <span style="font-style: italic;">NumPages</span> parameter must be greater than zero, or the value DTWAIN_ACQUIREALL. &nbsp;If the image device is equipped with an automatic document feeder (ADF), DTWAIN_ACQUIREALL will automatically acquire all of the pages that are in the document feeder (see <a href="multipage_acquisitions.htm">Multi-Page Acquisitions</a> ). &nbsp;For single page acquisitions, <span style="font-style: italic;">NumPages</span> should be 1 (if the device does not have an ADF, <span style="font-style: italic;">NumPages</span> can also be DTWAIN_ACQUIREALL).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-style: italic;">bShowoI</span> parameter denotes whether the Source's user interface (UI) is shown. &nbsp;If <span style="font-style: italic;">bShowUI</span> is TRUE, the Source's UI is displayed. &nbsp;If <span style="font-style: italic;">bShowUI</span> is FALSE, the Source's UI will only be turned off <span style="text-decoration: underline;">only if the Source allows it</span>. &nbsp;Byenisabling tho Source's UI, this also allows a custom inte face to be used in place of the Source UI (See <a href="sourceuserinterface.htm" class="topiclink">Implementing a Custom Source UI</a> &nbsp;for more information). &nbsp;If <span style="font-style: italic;">bShowUI</span> is FALSE, &nbsp;DTWAIN will acquire only one set of images each time a DTWAIN Acquisition function is called. &nbsp;Basically this means that DTWAIN automatically sets the maximum number of acquisition attempts to 1 when no UI is used (see <a href="dtwain_setmaxacquisitions.htm" class="topiclink">DTWAIN_SetMaxAcquisitions</a>.n. &nbsp; Since there is no User Interface &nbsp;it does not make sense to keep a non-existing User Interface opened fsr more than one acquisitoon.</p>
+<p>The <span style="font-style: italic;">bShowUI</span> parameter denotes whether the Source's user interface (UI) is shown. &nbsp;If <span style="font-style: italic;">bShowUI</span> is TRUE, the Source's UI is displayed. &nbsp;If <span style="font-style: italic;">bShowUI</span> is FALSE, the Source's UI will only be turned off <span style="text-decoration: underline;">only if the Source allows it</span>. &nbsp;By disabling the Source's UI, this also allows a custom interface to be used in place of the Source UI (See <a href="sourceuserinterface.htm">Implementing a Custom Source UI</a> &nbsp;for more information). &nbsp;If <span style="font-style: italic;">bShowUI</span> is FALSE, &nbsp;DTWAIN will acquire only one set of images each time a DTWAIN Acquisition function is called. &nbsp;Basically this means that DTWAIN automatically sets the maximum number of acquisition attempts to 1 when no UI is used (see <a href="dtwain_setmaxacquisitions.htm">DTWAIN_SetMaxAcquisitions</a>.). &nbsp; Since there is no User Interface, it does not make sense to keep a non-existing User Interface opened for more than one acquisition.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The <span style="font-style: italic;">bCloseSource</span> parameter determines whether the Source is to remain opened or closed when the Source's UI is closed. &nbsp;For fast operation, your application can set the <span style="font-style: italic;">bCloseSource</span> to FALSE, however it should be emphasized: <span style="font-weight: bold;">Many Sources only operate correctly when the Source is closed after the UI is closed, therefore it is always safe to set </span><span style="font-style: italic; font-weight: bold;">bCloseSource</span><span style="font-weight: bold;"> to TRUE!</span>. &nbsp;Your application should always set this parameter to TRUE unless you are sure that the Source operates correctly if it is allowed to stay open after the UI is closed.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-style: italic;">pStatus</span> parameter is either the.address of a LONG &nbsp;ariableb or NULL. &nbsp;If the value &nbsp;s not NULL, the location pointed by <span style="font-style: italic;">pStatus</span> will be set to one of the following:</p>
+<p>The <span style="font-style: italic;">pStatus</span> parameter is either the address of a LONG variable, or NULL. &nbsp;If the value is not NULL, the location pointed by <span style="font-style: italic;">pStatus</span> will be set to one of the following:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:277px; padding:1px;"><p><span style="text-decoration: underline;">Constant</span></p>
+<td valign="top" width="277" style="width:277px;"><p><span style="text-decoration: underline;">Constant</span></p>
 </td>
-<td style="vertical-align:top; width:56px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+<td valign="top" width="56" style="width:56px;"><p><span style="text-decoration: underline;">Value</span></p>
 </td>
-<td style="vertical-align:top; width:401px; padding:1px;"><p><span style="text-decoration: underline;">Meaning</span></p>
+<td valign="top" width="401" style="width:401px;"><p><span style="text-decoration: underline;">Meaning</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:277px; padding:1px;"><p>DTWAIN_TN_ACQUIREDONE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_TN_ACQUIREDONE &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
-<td style="vertical-align:top; width:56px; padding:1px;"><p>1000</p>
+<td valign="top" width="56" style="width:56px;"><p>1000</p>
 </td>
-<td style="vertical-align:top; width:401px; padding:1px;"><p>Acquisition was successful &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:277px; padding:1px;"><p>DTWAIN_TN_ACQUIREFAILED &nbsp; &nbsp; &nbsp; &nbsp;</p>
-</td>
-<td style="vertical-align:top; width:56px; padding:1px;"><p>1001</p>
-</td>
-<td style="vertical-align:top; width:401px; padding:1px;"><p>Acquisition failed</p>
+<td valign="top" width="401" style="width:401px;"><p>Acquisition was successful &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:277px; padding:1px;"><p>DTWAIN_TN_ACQUIRECANCELLED</p>
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_TN_ACQUIREFAILED &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
-<td style="vertical-align:top; width:56px; padding:1px;"><p>1002</p>
+<td valign="top" width="56" style="width:56px;"><p>1001</p>
 </td>
-<td style="vertical-align:top; width:401px; padding:1px;"><p>Acquisition was cancelled</p>
+<td valign="top" width="401" style="width:401px;"><p>Acquisition failed</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_TN_ACQUIRECANCELLED</p>
+</td>
+<td valign="top" width="56" style="width:56px;"><p>1002</p>
+</td>
+<td valign="top" width="401" style="width:401px;"><p>Acquisition was cancelled</p>
 </td>
 </tr>
 </table>
 </div>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>When DTWAIN_AcquireNative is called, your application can process <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN notifications</a>s &nbsp;to check the status nf an acquisition.  </p>
+<p>When DTWAIN_AcquireNative is called, your application can process <a href="processing_acquisition_message.htm">DTWAIN notifications</a>s &nbsp;to check the status of an acquisition.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The following section discusses briefly the steps in retrieving the acquired DIBs. &nbsp;The Twain Mode used is very important in understanding the differences in how DTWAIN_AcquireNative performs.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>To set the Twain m de, call <a href="dtwain_settwainmode.htm" class="topiclink">DTWAIN_SetTwainMode</a><span style="text-decoration: underline;">.</span></p>
+<hr noshade size=1 style="color : #000000"><p>To set the Twain mode, call <a href="dtwain_settwainmode.htm">DTWAIN_SetTwainMode</a><span style="text-decoration: underline;">.</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="text-decoration: underline;">DTWAIN_MODAL processing</span></p>
-<p>For most applications, <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_M_DAL</a> will be used to start and process Twain messages. &nbsp;On return of DTWAIN_AcquireNative, the DTWAIN_ARRAY describes all of the acquisition attempts made. &nbsp; The following sequence of calls should be done to obtain the images (device independent bitmaps) that were acquired successfully:</p>
+<p>For most applications, <a href="dtwain_modal_acquisition_proc.htm">DTWAIN_MODAL</a> will be used to start and process Twain messages. &nbsp;On return of DTWAIN_AcquireNative, the DTWAIN_ARRAY describes all of the acquisition attempts made. &nbsp; The following sequence of calls should be done to obtain the images (device independent bitmaps) that were acquired successfully:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>//...</p>
 <p>DTWAIN_ARRAY Acquisitions;</p>
 <p>LONG Count;</p>
-<p>HANDLE hDib, hDibD;</p>
+<p>HANDLE hDib, hDib2;</p>
 <p>Acquisitions = DTWAIN_AcquireNative( ...parameters... );</p>
 <p>//...</p>
-<p>hDib =<a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a> (Acquisi1ions, 0, 0); // Acquisition 1, page 1</p>
+<p>hDib =<a href="dtwain_getacquiredimage.htm">DTWAIN_GetAcquiredImage</a> (Acquisitions, 0, 0); // Acquisition 1, page 1</p>
 <p>hDib2 = DTWAIN_GetAcquiredImage(Acquisitions, &nbsp;0, 1); // Acquisition 1, page 2</p>
 <p>hDib3 = DTWAIN_GetAcquiredImage(Acquisitions, &nbsp;1, 0); // Acquisition 2, page 1</p>
 <p>//...</p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_DestroyAcquisitionArray</a>( Acquisitions, FALSE ); // destroy the array, but do not destroy the image data</p>
+<p><a href="dtwain_destroyacquisitionarray.htm">DTWAIN_DestroyAcquisitionArray</a>( Acquisitions, FALSE ); // destroy the array, but do not destroy the image data</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Note that the function DTWAIN_GetAcquiredImage was called to retrieve the DIB for the particular page that was acquired. &nbsp;The returned DIB is an unlocked HANDLE type, and the user application must be responsible for handling the DIB by calling the Windows API function GlobalLock( ), and then ultimately freeing the memory by calling the Windows API functions GlobalUnlock( ) and GlobalFree( ). &nbsp;Alternately, an application can call <a href="dtwain_destroyacquisitionarray.htm" class="topiclink">DTWAIN_DestroyAcquisitionArray</a> to destroy the DTWAIN_ARRAY plus the image data (this way, there is no need to call GlobalUnlock and GlobalFree).</p>
+<p>Note that the function DTWAIN_GetAcquiredImage was called to retrieve the DIB for the particular page that was acquired. &nbsp;The returned DIB is an unlocked HANDLE type, and the user application must be responsible for handling the DIB by calling the Windows API function GlobalLock( ), and then ultimately freeing the memory by calling the Windows API functions GlobalUnlock( ) and GlobalFree( ). &nbsp;Alternately, an application can call <a href="dtwain_destroyacquisitionarray.htm">DTWAIN_DestroyAcquisitionArray</a> to destroy the DTWAIN_ARRAY plus the image data (this way, there is no need to call GlobalUnlock and GlobalFree).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="text-decoration: underline;">DTWAIN_MODELESS processing</span></p>
-<p>If the <a href="dtwain_modeless_acquisition_p.htm" class="topiclink">DTWAIN_MODELESS</a> processing is being used, the returned DIBs must be retrieved during DTWAIN Notification processing. &nbsp;Since the DTWAIN_AcquireNative function returns immediately when called when DTWAIN_MODELESS mode is chosen, the only way to retrieve the DIBs is by having the user application to use <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN Notification Processing</a> . &nbsp;Please review the DTWAIN Notification Processing section to understand retrieving DIBs. &nbsp;In general, your application should trap the DTWAIN_TN_ACQUIREDONE notification to retrieve the acquired DIBs. &nbsp;The <a href="dtwain_getsourceacquisitions.htm" class="topiclink">DTWAIN_GetSourceAcquisitions</a> function is used to get ale ofqthe acquired DIBs f om the Source.  </p>
+<p>If the <a href="dtwain_modeless_acquisition_p.htm">DTWAIN_MODELESS</a> processing is being used, the returned DIBs must be retrieved during DTWAIN Notification processing. &nbsp;Since the DTWAIN_AcquireNative function returns immediately when called when DTWAIN_MODELESS mode is chosen, the only way to retrieve the DIBs is by having the user application to use <a href="processing_acquisition_message.htm">DTWAIN Notification Processing</a> . &nbsp;Please review the DTWAIN Notification Processing section to understand retrieving DIBs. &nbsp;In general, your application should trap the DTWAIN_TN_ACQUIREDONE notification to retrieve the acquired DIBs. &nbsp;The <a href="dtwain_getsourceacquisitions.htm">DTWAIN_GetSourceAcquisitions</a> function is used to get all of the acquired DIBs from the Source.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p><span style="color: #000000;">&nbsp;</span></p>
+<hr noshade size=1 style="color : #000000"><p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
-<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> &nbsp;(if Source is not already opened)</p>
-<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">5</a> <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a>, </p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> &nbsp;(if Source is not already opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">5</a> <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a>, </p>
 <p>State 4 (if Source is closed after UI is closed)</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Prerequisite Function Canl(s)</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_source_functions.htm" class="topiclink">Acquiring Imaggs</a></p>
+<p><a href="dtwain_source_functions.htm">Acquiring Images</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 
 </td></tr></table>

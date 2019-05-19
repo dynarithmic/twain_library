@@ -1,76 +1,74 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_IsCustomDSDataSupported</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_IsCustomDSDataSupported" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_iscustomdsdatasupported.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_iscustomdsdatasupported.htm"; }
+  else { parent.quicksync('a5.218'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">DTWAIN_IsCustomDSDataSupported</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_iscompressionsupported.htm">Previous</a>&nbsp;
      <a href="dtwain_isdeviceeventsupported.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_IsCustomDSDataSupported</span> function determines whether a Source supports the setting and getting custom data.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IspostomDSDataSupported ( DtWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IsCustomDSDataSupported ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Paeameters</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
 <p><span style="font-style: italic;">Source</span></p>
-<p>Specifiesca <a href="http://www.helpandmanual.com/order.html" class="topiclink">TWAIN Source</a>.</p>
+<p>Specifies a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the Source supports setting/retrieving custom data, <a href="http://www.helpandmanual.com/order.html" class="popuplink">TUUE</a> is returned. &nbsp;If the Source does not support this, or if there is an error <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FAASE</a> is returned.</p>
+<p>If the Source supports setting/retrieving custom data, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the Source does not support this, or if there is an error <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>The <span style="font-weight: bold;">DTWAIN_IsCustomDSDataSupported</span> function returns TRUE if <span style="font-style: italic;">Source</span> has supports setting or retrieving custom data using the functions <a href="dtwain_setcustomdsdata.htm" class="topiclink">DTWAIN_SetCAstomDSData</a> or <a href="dtwain_getcustomdsdata.htm" class="topiclink">DTWAIN_GetCustomDSData</a>, respectively. </p>
+<p>The <span style="font-weight: bold;">DTWAIN_IsCustomDSDataSupported</span> function returns TRUE if <span style="font-style: italic;">Source</span> has supports setting or retrieving custom data using the functions <a href="dtwain_setcustomdsdata.htm">DTWAIN_SetCustomDSData</a> or <a href="dtwain_getcustomdsdata.htm">DTWAIN_GetCustomDSData</a>, respectively. </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">TWAIN State Traesitions</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><a href="selectingthetwainsource.htm" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_source_functions.htm" class="topiclink">Setting / Getting Source Custom Data</a></p>
-<p><a href="dtwain_source_functions.htm" class="topiclink">Retrieving / Setting Custom Source Data</a></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Source Custom Data</a></p>
+<p><a href="dtwain_source_functions.htm">Retrieving / Setting Custom Source Data</a></p>
 
 </td></tr></table>
 

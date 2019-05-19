@@ -1,48 +1,47 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>TWAIN Application Loop</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "twainapplicationloopexample.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?twainapplicationloopexample.htm"; }
+  else { parent.quicksync('a3.1.21.4.4'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">TWAIN Application Loop Example</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="traditionalapplicationloopexam.htm">Previous</a>&nbsp;
      <a href="dtwainapplicationloopexample.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>Without using DTWAIN, the application's message loop must be adjusted to support a TWAIN-enabled application. &nbsp;The message loop for a TWAIN-enabled application would have to be adjusted similar to the example below (this example uses pseudo-code):</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>MSG msg;</p>
@@ -60,12 +59,12 @@
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end</p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else begin &nbsp; </p>
-<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// This isTa &nbsp;Windows message</p>
-<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TranslateMeseage(&amp;msg);</p>
-<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DisaatchMessage(&amp;msg);</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// This is a &nbsp;Windows message</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TranslateMessage(&amp;msg);</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DispatchMessage(&amp;msg);</p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end</p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else &nbsp; b gin</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else &nbsp; begin</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This is a Windows </p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;message because no Source </p>
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;is enabled</p>
@@ -73,9 +72,9 @@
 <p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DispatchMessage(&amp;msg);</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Note that the difference between the <a href="traditionalapplicationloopexam.htm" class="topiclink">traditional event loop</a> and the TWAIN compliant version is a check to see if there are any Sources in 'acquire' mode. &nbsp;If there are, the application must check if the message is a TWAIN message and act accordingly if it is (the processing of the TWAIN messages is a source of many problems when programming a TWAIN application). If it is not a TWAIN message, the traditional Translate / DispatchMessage is done. &nbsp;If there are no Sources opened, the traditional Translate / Dispatch is done.  </p>
+<p>Note that the difference between the <a href="traditionalapplicationloopexam.htm">traditional event loop</a> and the TWAIN compliant version is a check to see if there are any Sources in 'acquire' mode. &nbsp;If there are, the application must check if the message is a TWAIN message and act accordingly if it is (the processing of the TWAIN messages is a source of many problems when programming a TWAIN application). If it is not a TWAIN message, the traditional Translate / DispatchMessage is done. &nbsp;If there are no Sources opened, the traditional Translate / Dispatch is done.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The pseudo-code example above is as simple as possible for describing the traditional, TWAIN-enabled application layout. &nbsp;There are also many variations of the 'background' processing loops that use a combination of PeekMessage and GetMessage that must do similar processing to the code above. &nbsp;Note the differences between the above implementation and the simplified <a href="dtwainapplicationloopexample.htm" class="topiclink">DTWAIN Application Loop</a> that the application will use instead of code that looks like the above example.  </p>
+<p>The pseudo-code example above is as simple as possible for describing the traditional, TWAIN-enabled application layout. &nbsp;There are also many variations of the 'background' processing loops that use a combination of PeekMessage and GetMessage that must do similar processing to the code above. &nbsp;Note the differences between the above implementation and the simplified <a href="dtwainapplicationloopexample.htm">DTWAIN Application Loop</a> that the application will use instead of code that looks like the above example.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Even though the TWAIN compliant version above may be difficult to follow, the mere act of adjusting the application message loop is no problem for C and C++ programmers. &nbsp;Every C or C++ Windows program has access to the application event loop, whether directly using the raw Windows API, or indirectly through one of the myriad of class libraries such as the Microsoft Foundation Classes (MFC).  </p>
 

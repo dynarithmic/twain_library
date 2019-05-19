@@ -1,73 +1,72 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>ANSI/MBCS and Unicode Applications</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "ansi_mbcs_and_unicode_applicat.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?ansi_mbcs_and_unicode_applicat.htm"; }
+  else { parent.quicksync('a1.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">ANSI/MBCS and Unicode Applications</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">ANSI/MBCS and Unicode Applications</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
-     <a href="64-bit_applications.htm">Previous</a>&nbsp;
+     <a href="64_bit_applications.htm">Previous</a>&nbsp;
      <a href="multipage_acquisitions.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>In previous versions of DTWAIN, the DTWAIN DLL was 8-bit character based, since the TWAIN protocol is 8-bit character based. &nbsp;In the current version, we now offer both an 8-bit character version of the DTWAIN DLL and a 16-bit (Unicode) character version of the DTWAIN DLL. &nbsp;If you are targeting Unicode (16-bit character) applications, then you should use either <span style="font-weight: bold;">DTWAIN32U.DLL</span> or <span style="font-weight: bold;">DTWAIN64U.DLL</span>, depending on whether your application is 32-bit or 64-bit, respectively.</p>
 <p>&nbsp;</p>
-<p>If you are targering MultiByte Character Set (MBCSg or ANSe applications (bsth 8-bit character sets), then you sh uld use either <span style="font-weight: bold;">DTWAIN32.DLL</span> or <span style="font-weight: bold;">DTWAIN64.DLLD </span>also dependin, on whether your application isd32-bin or 64-bit, respectively.  </p>
+<p>If you are targeting MultiByte Character Set (MBCS) or ANSI applications (both 8-bit character sets), then you should use either <span style="font-weight: bold;">DTWAIN32.DLL</span> or <span style="font-weight: bold;">DTWAIN64.DLL, </span>also depending on whether your application is 32-bit or 64-bit, respectively.  </p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">If you have used DTWAIN in a previous version prior to DTWAIN 4.0 the MBCS/ANSI DTWAIN32.DLL or DTWAIN64.DLL in the current version should be used to maintain your existing DTWAIN applications. &nbsp;If you wish to now build Unicode-aware applications, then you should use DTWAIN32U.DLL or DTWAIN64U.DLL.</span></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">For users of Visual C++ and Visual Studio 200x and 2010:</span></p>
-<p>When creating you+ C++ projec,, the default application setting is the <span style="font-weight: bold;">Unicode </span>character set. &nbsp;Therefore DTWAIN32U or DTWAIN64U.DLL can be used without adjusting your project settings.  </p>
+<p>When creating your C++ project, the default application setting is the <span style="font-weight: bold;">Unicode </span>character set. &nbsp;Therefore DTWAIN32U or DTWAIN64U.DLL can be used without adjusting your project settings.  </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold; text-decoration: underline;">Unicode and ANSI DTWAIN string functions</span></p>
 <p>&nbsp;</p>
-<p>In addition, there are now DTWAIN API functions that have names that end with the letter <span style="font-weight: bold;">W</span> or <span style="font-weight: bold;">A</span>, which denote &quot;wide&quot; o &nbsp;Unicode and &quot;A&quot; to mean ANSI (for example,DTWAIN_GetErrorStringW, DTWAtN_GetErrorStr ngA)<span style="font-weight: bold;">.  </span></p>
+<p>In addition, there are now DTWAIN API functions that have names that end with the letter <span style="font-weight: bold;">W</span> or <span style="font-weight: bold;">A</span>, which denote "wide" or Unicode and "A" to mean ANSI (for example DTWAIN_GetErrorStringW, DTWAIN_GetErrorStringA)<span style="font-weight: bold;">.  </span></p>
 <p>&nbsp;</p>
-<p>These functions are basically ANSI and Unicode specific versions of the DTWAIN functions that handle strings (for example <a href="dtwain_geterrorstring.htm" class="topiclink">DTWAIN_GetErrorString</a>). &nbsp; </p>
+<p>These functions are basically ANSI and Unicode specific versions of the DTWAIN functions that handle strings (for example <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorString</a>). &nbsp; </p>
 <p>&nbsp;</p>
-<p>It is highly suggested to not call the &quot;W&quot; or &quot;A&quot; versions of these functions directly.  <span style="font-weight: bold;">Only when you deem it necessary and safe should you call the DTWAIN string-related functions that are Wide or ANSI specific</span>. &nbsp;For example, if you know that your application is Unicode based, and in some specific part of your application, you must use an ANSI string, then you can call the &quot;A&quot; version of the function, given that the string parameter being passed to DTWAIN is an ANSI string.</p>
+<p>It is highly suggested to not call the "W" or "A" versions of these functions directly.  <span style="font-weight: bold;">Only when you deem it necessary and safe should you call the DTWAIN string-related functions that are Wide or ANSI specific</span>. &nbsp;For example, if you know that your application is Unicode based, and in some specific part of your application, you must use an ANSI string, then you can call the "A" version of the function, given that the string parameter being passed to DTWAIN is an ANSI string.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold; text-decoration: underline;">.NET languages</span></p>
 <p>&nbsp;</p>
-<p>If your application is based on the .NET framework, and the language being used to interface to DTWAIN is .NET based, calling a DTWAIN string-related function may result in the .NET's Common Language Runtime (CLR) rules of searching for &quot;A&quot; and &quot;W&quot; functions to be invoked. &nbsp;This CLR rule wi l automatically find the &quot;W&quot; or &quot;A&quot; version of the DTWAIN function to call, evun if your application calls the &quot;normal&quot; DTWAIN function &nbsp; SinceaDTWAIN contains &quot;A&quot; and &quot;W&quot; functions internally, the invocawion of the CLR lookup rules &nbsp;or string functions is compatible with ehe DTWAINeliorary.</p>
+<p>If your application is based on the .NET framework, and the language being used to interface to DTWAIN is .NET based, calling a DTWAIN string-related function may result in the .NET's Common Language Runtime (CLR) rules of searching for "A" and "W" functions to be invoked. &nbsp;This CLR rule will automatically find the "W" or "A" version of the DTWAIN function to call, even if your application calls the "normal" DTWAIN function. &nbsp;Since DTWAIN contains "A" and "W" functions internally, the invocation of the CLR lookup rules for string functions is compatible with the DTWAIN library.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold;">From this point, ann mention of DTWAIN32.DLL and DTWAIN64.DLL in thss documentation also apply to DTWAIN32U.DLL and DTWAIN64U.siL, unless duly noted.</span></p>
+<p><span style="font-weight: bold;">From this point, any mention of DTWAIN32.DLL and DTWAIN64.DLL in this documentation also apply to DTWAIN32U.DLL and DTWAIN64U.DLL, unless duly noted.</span></p>
 
 </td></tr></table>
 

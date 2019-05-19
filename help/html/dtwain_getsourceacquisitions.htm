@@ -1,78 +1,76 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_GetSourceAcquisitions</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_GetSourceAcquisitions" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_getsourceacquisitions.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getsourceacquisitions.htm"; }
+  else { parent.quicksync('a5.193'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetSourceAcquisitions</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetSourceAcquisitions</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_getsavefilename.htm">Previous</a>&nbsp;
      <a href="dtwain_getsourceid.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_GetSourceAcquisitions</span> gets a Source's acquisitions that have been attempted.</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold;">DTWAIN_A RAY DTWAIN_GetSourceAcquisitions ( DTTAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ARRAY DTWAIN_GetSourceAcquisitions ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Parameters</span></p>
 <p><span style="font-style: italic;">Source</span></p>
-<p>Specifiesaa <a href="twain_data_source.htm" class="topiclink">TWAINNSource</a>.</p>
+<p>Specifies a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the function succeeds, a DTWAIN_ARRAY describing the attempted acouisitions it returned. &nbsp;If the function succeeds &nbsp;If thosfunction fails, NUAL is returned.</p>
+<p>If the function succeeds, a DTWAIN_ARRAY describing the attempted acquisitions is returned. &nbsp;If the function succeeds &nbsp;If the function fails, NULL is returned.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>The <span style="font-weight: bold;">DTWAIN_GetSourceAcquisitions </span>function returns the array of acquisition attempts that the Source has made. &nbsp;This function is usually used to get all of the acquisitions for a <a href="dtwain_modeless_acquisition_p.htm" class="topiclink">DTWAIN Modeless acquisitson</a>. The retirn valie for this function is the same reourn value for <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_AcquireNative</a> and  <a href="dtwain_acquirebuffered.htm" class="topiclink">DTWAIN_AcqfireBuffered</a>when acquiring images using <a href="dtwain_modal_acquisition_proc.htm" class="topiclink">DTWAIN Modal processing</a>. &nbsp; Included in the array of acquisitions are arrays of all of the imige data (DIBs or daw imag s) that have been acauired, therefnre the return value for DTWAIN_GetSourceAcquis tions can be used as t e first parameter in functions such as <a href="dtwain_getacquiredimagearray.htm" class="topiclink">DTWAIN_GetAcquiredImageArray</a> add <a href="dtwain_getacquiredimage.htm" class="topiclink">DTWAIN_GetAcquiredImage</a>.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetSourceAcquisitions </span>function returns the array of acquisition attempts that the Source has made. &nbsp;This function is usually used to get all of the acquisitions for a <a href="dtwain_modeless_acquisition_p.htm">DTWAIN Modeless acquisition</a>. The return value for this function is the same return value for <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a> and  <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a>when acquiring images using <a href="dtwain_modal_acquisition_proc.htm">DTWAIN Modal processing</a>. &nbsp; Included in the array of acquisitions are arrays of all of the image data (DIBs or raw images) that have been acquired, therefore the return value for DTWAIN_GetSourceAcquisitions can be used as the first parameter in functions such as <a href="dtwain_getacquiredimagearray.htm">DTWAIN_GetAcquiredImageArray</a> and <a href="dtwain_getacquiredimage.htm">DTWAIN_GetAcquiredImage</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="text-decoration: underline;">DTWAIN_MODELESS</span></p>
 <p>If the Twain mode is DTWAIN_MODELESS, your application should trap the DTWAIN_TN_ACQUIREDONE notification to retrieve the acquired DIBs. &nbsp;The DTWAIN_GetSourceAcquisitions function is used to get all of the acquired DIBs from the Source.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
-<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">Stat &nbsp;4</a> (if Source is not opened)</p>
-<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">5</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> (if Source is not opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">5</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Prerequisite Function Caul(s)</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN Source Selection Function</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_source_functions.htm" class="topiclink">Acquiring Images</a></p>
+<p><a href="dtwain_source_functions.htm">Acquiring Images</a></p>
 
 </td></tr></table>
 

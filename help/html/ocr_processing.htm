@@ -1,62 +1,61 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>OCR Processing</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "ocr_processing.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?ocr_processing.htm"; }
+  else { parent.quicksync('a3.1.24'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">OCR Processing</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">OCR Processing</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="lowleveltwainfunctions.htm">Previous</a>&nbsp;
      <a href="dtwain_ocrengine.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Included within the DTWAIN library is the ability to use third-party Optical Character Recognition (OCR) modules within the application. &nbsp;The OCR capabilities requires that you have the proper third-party OCR engine installed.  <span style="color: #ff6600;">DynaRithmic Software provides </span><span style="font-weight: bold; color: #ff6600;">no</span><span style="color: #ff6600;"> OCR engines. &nbsp;DTWAIN's role is to interface to third-party OCR engines, which must be obtained separately by the customer or programmer by contacting the manufacturer.</span></p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Included within the DTWAIN library is the ability to use third-party Optical Character Recognition (OCR) modules within the application. &nbsp;The OCR capabilities requires that you have the proper third-party OCR engine installed.  <span style="color: #ff6600;">Dynarithmic Software provides </span><span style="font-weight: bold; color: #ff6600;">no</span><span style="color: #ff6600;"> OCR engines. &nbsp;DTWAIN's role is to interface to third-party OCR engines, which must be obtained separately by the customer or programmer by contacting the manufacturer.</span></p>
 <p>&nbsp;</p>
 <p>Currently, DTWAIN supports the <span style="font-weight: bold;">TOCR Version 2.0 and above </span>OCR engine from <a href="http://www.transym.com/" target="_blank" class="weblink">Transym Computer Services</a>. &nbsp;Subsequent versions of DTWAIN will support other OCR engines.  </p>
 <p>&nbsp;</p>
 <p>The OCR processing allows your application to do the following:</p>
 <p>&nbsp;</p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Retrieve text from an gmage file using the OCR engine, and savf the converted text tt a text file.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquire a file from the TWAIN device, and use the OCR engine to translate the file to a text file.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquire and create searchable PDF files using the OCR engine to generate the text.</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Retrieve text from an image file using the OCR engine, and save the converted text to a text file.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquire a file from the TWAIN device, and use the OCR engine to translate the file to a text file.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquire and create searchable PDF files using the OCR engine to generate the text.</td></tr></table></div><p>&nbsp;</p>
 <p>Regardless of the OCR engine, DTWAIN maintains a transparent interface between your program and the particular OCR engine that is to be used. &nbsp;This means that your program will be portable between different engines, as DTWAIN acts as a proxy between your application and the OCR engine. &nbsp; </p>
 <p>&nbsp;</p>
-<p>DTWAIN accomplishes this by creating a TWAIN-like interface to the various OCR engines. &nbsp;For example, DTWAIN has defined various OCR capabilities that can be queried or set using the same set of functions, selection of the OCR engine can be done using a &quot;TWAIN&quot; dialog or by using the engine's name, etc.</p>
+<p>DTWAIN accomplishes this by creating a TWAIN-like interface to the various OCR engines. &nbsp;For example, DTWAIN has defined various OCR capabilities that can be queried or set using the same set of functions, selection of the OCR engine can be done using a "TWAIN" dialog or by using the engine's name, etc.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><a href="initializing_the_ocr_interface.htm" class="topiclink">Initializing the OCR Interface</a></p>
+<p><a href="initializing_the_ocr_interface.htm">Initializing the OCR Interface</a></p>
 <p>&nbsp;</p>
 
 </td></tr></table>

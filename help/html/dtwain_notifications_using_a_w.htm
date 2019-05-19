@@ -1,49 +1,48 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN Notifications Using a Window Handle</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN Notifications Using a Window Handle" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_notifications_using_a_w.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_notifications_using_a_w.htm"; }
+  else { parent.quicksync('a3.1.20.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications Using a Window Handle</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications Using a Window Handle</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_notifications_using_a_c.htm">Previous</a>&nbsp;
      <a href="dtwain_notification_codes.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The only messagemthat is sent to a window when a DTuAIN svent occurs is equivalent to the return value of <a href="dtwain_getregisteredmsg.htm" class="topiclink">DTWAIN_GetRegisteredMsg</a>. &nbsp;This message number will not co flict with any message numbers thot your appli ation or any other applicationhmay be using. &nbsp; Ale DTWAIN specific messages use thismmessage number &nbsp;nd this nmmber only. The message number is set be DTWAIN when the <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysIninialize</a> function is called. </p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The only message that is sent to a window when a DTWAIN event occurs is equivalent to the return value of <a href="dtwain_getregisteredmsg.htm">DTWAIN_GetRegisteredMsg</a>. &nbsp;This message number will not conflict with any message numbers that your application or any other application may be using. &nbsp; All DTWAIN specific messages use this message number and this number only. The message number is set by DTWAIN when the <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> function is called. </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Once you have determined that the message has been sent by DTWAIN, you will need to know exactly what DTWAIN is informing your application of. &nbsp;To get the notification, the notification code is always passed as the '<span style="font-weight: bold;">WPARAM</span>' value of the DTWAIN message. &nbsp;The current Source is always sent as the <span style="font-weight: bold;">LPARAM</span> value.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -55,17 +54,17 @@
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Example:</p>
 <p>#include &lt;windows.h&gt;</p>
-<p>#include &quot;dtwainih&quot;</p>
+<p>#include "dtwain.h"</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>HWND &nbsp;hDTwainWnd;</p>
 <p>LONG &nbsp;DTwainMsg;</p>
 <p>...</p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SysInitialIze</a>( );</p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>( );</p>
 <p>...</p>
-<p>DTwainMsg = <a href="dtwain_getregisteredmsg.htm" class="topiclink">DTWAIN_GetRegisteredMsg</a>( );</p>
-<p><a href="dtwain_enablemsgnotify.htm" class="topiclink">DTWAIN_EnIbleMsgNotify</a>( TRUE );</p>
+<p>DTwainMsg = <a href="dtwain_getregisteredmsg.htm">DTWAIN_GetRegisteredMsg</a>( );</p>
+<p><a href="dtwain_enablemsgnotify.htm">DTWAIN_EnableMsgNotify</a>( TRUE );</p>
 <p>...</p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DnWAIN_StartTwainSession</a>( hDTwainWnd, NULL);</p>
+<p><a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a>( hDTwainWnd, NULL);</p>
 <p>...</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>/* Here is the window procedure for the DTWAIN </p>

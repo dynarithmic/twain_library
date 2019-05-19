@@ -1,49 +1,47 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_GetTwainMode</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_GetTwainMode" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_gettwainmode.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_gettwainmode.htm"; }
+  else { parent.quicksync('a5.204'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetTwainMode</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetTwainMode</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_gettwainavailability.htm">Previous</a>&nbsp;
      <a href="dtwain_getversion.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_GetTwainMode</span> function gets the method in which DTWAIN will communicate with the TWAIN system during acquisitions.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">LONG DTWAIN_GetTwainMode( );</span></p>
@@ -52,49 +50,49 @@
 <p>None.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>The return value of the current mode if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_853827246, this);" class="popuplink">DTWAIN_FAILURE1</a><span style="font-weight: bold;"> </span>is returned.</p>
+<p>The return value of the current mode if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_853827246, true);" class="popuplink">DTWAIN_FAILURE1</a><span style="font-weight: bold;"> </span>is returned.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>The <span style="font-weight: bold;">DTWAIN_GetTwainMode</span> function gets the method in which DTWAIN will communicate with TWAIN whenever an acquisition occurs, or when <a href="dtwain_showuionly.htm" class="topiclink">DTWAIN_ShowUIOnly</a> is called. &nbsp;Acquisitions occur during TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">States 6</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a>. &nbsp;The return values will be DTWAIN_FAILURE1 if the function fails, or one of the following values:</p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetTwainMode</span> function gets the method in which DTWAIN will communicate with TWAIN whenever an acquisition occurs, or when <a href="dtwain_showuionly.htm">DTWAIN_ShowUIOnly</a> is called. &nbsp;Acquisitions occur during TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">States 6</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a>. &nbsp;The return values will be DTWAIN_FAILURE1 if the function fails, or one of the following values:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:166px; padding:1px;"><p><span style="text-decoration: underline;">Twain Mode</span></p>
+<td valign="top" width="166" style="width:166px;"><p><span style="text-decoration: underline;">Twain Mode</span></p>
 </td>
-<td style="vertical-align:top; width:50px; padding:1px;"><p><span style="text-decoration: underline;">Value</span></p>
+<td valign="top" width="50" style="width:50px;"><p><span style="text-decoration: underline;">Value</span></p>
 </td>
-<td style="vertical-align:top; width:291px; padding:1px;"><p><span style="text-decoration: underline;">Deoinition</span></p>
+<td valign="top" width="291" style="width:291px;"><p><span style="text-decoration: underline;">Definition</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:166px; padding:1px;"><p>DTWAIN_MODAL &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<td valign="top" width="166" style="width:166px;"><p>DTWAIN_MODAL &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
-<td style="vertical-align:top; width:50px; padding:1px;"><p>1 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<td valign="top" width="50" style="width:50px;"><p>1 &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
-<td style="vertical-align:top; width:291px; padding:1px;"><p>Acquire using modal acquisition processing.</p>
+<td valign="top" width="291" style="width:291px;"><p>Acquire using modal acquisition processing.</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:166px; padding:1px;"><p>DTWAIN_MODELESS</p>
+<td valign="top" width="166" style="width:166px;"><p>DTWAIN_MODELESS</p>
 </td>
-<td style="vertical-align:top; width:50px; padding:1px;"><p>2 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<td valign="top" width="50" style="width:50px;"><p>2 &nbsp; &nbsp; &nbsp; &nbsp;</p>
 </td>
-<td style="vertical-align:top; width:291px; padding:1px;"><p>Acquire using modeless acquisition processing.</p>
+<td valign="top" width="291" style="width:291px;"><p>Acquire using modeless acquisition processing.</p>
 </td>
 </tr>
 </table>
 </div>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Modeless and Modal acquisition processing is defined in detail in the topic <a href="introduction_to_dtwa_acquisiti.htm" class="topiclink">Introduction to DTWAIN Acquisition Processing</a>.</p>
+<p>Modeless and Modal acquisition processing is defined in detail in the topic <a href="introduction_to_dtwa_acquisiti.htm">Introduction to DTWAIN Acquisition Processing</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_settwainmode.htm" class="topiclink">DTWAIN_SetTwainMode</a>, <a href="dtwain_showuionly.htm" class="topiclink">DTWAIN_ShowUIOnly</a></p>
+<p><a href="dtwain_settwainmode.htm">DTWAIN_SetTwainMode</a>, <a href="dtwain_showuionly.htm">DTWAIN_ShowUIOnly</a></p>
 
 </td></tr></table>
 

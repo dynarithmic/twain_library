@@ -1,144 +1,143 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Source Functions</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN Source Functions" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_source_functions.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_source_functions.htm"; }
+  else { parent.quicksync('a4.26'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Twain Source Functions</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Twain Source Functions</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_source_selection_functi.htm">Previous</a>&nbsp;
      <a href="dtwain_thumbnail_image_functio.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The following is a comprehensive list of all DTWAIN functions that use a DTWAIN_SOURCE. &nbsp;Almost every DTWAIN function that references a  <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>. uses one of these functions.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The following is a comprehensive list of all DTWAIN functions that use a DTWAIN_SOURCE. &nbsp;Almost every DTWAIN function that references a  <a href="twain_data_source.htm">TWAIN Source</a>. uses one of these functions.</p>
 <p>&nbsp;</p>
 <p>The following functions describe the entire DTWAIN API that deals specifically with open Twain Sources. &nbsp; Most functions that your application will be concerned with are Source related.  </p>
 <p>&nbsp;</p>
 <p>The following categories are covered by the DTWAIN Source Functions:</p>
 <p>&nbsp;</p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Acquiring Images</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Automatic Document Feeder Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Automatic Deskewing / Border Detection Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Blank Page Detection and Removal</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Buffered Image Transfer Spuport</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Duplex Scanner Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Imprinter / Endorser Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Job Control Suoport</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Manual Duplex Scanning</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Opening / Clossng a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">PDF file support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting Buffered Transfer Mode Parameters</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">SettingeFile Transf r Mode Parameters</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting Pixel and Bit Bepth</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getting Acquisition Area</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting/ Getting Brightness Level</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting/ Getting Contrast Level</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getiing Frame Sizes</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getting &nbsp;ight Path (transparency and film scanning support)</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Getting Online status</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getting Orientation</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getting Source Custom Data</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting / Getting Source Unit of Measure</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Settini / Getting Twain Ctpabilities</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Setting/ Getting X-Y Resolution Values</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Spvcial Source Device Events</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Source Information Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Source Selection Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Source User Interface Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Thumbnail Imagls</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:10pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Turning on / off Progress Indicator</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquiring Images</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Automatic Document Feeder Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Automatic Deskewing / Border Detection Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Blank Page Detection and Removal</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Buffered Image Transfer Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Duplex Scanner Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Imprinter / Endorser Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Job Control Support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Manual Duplex Scanning</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Opening / Closing a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>PDF file support</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting Buffered Transfer Mode Parameters</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting File Transfer Mode Parameters</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting Pixel and Bit Depth</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Acquisition Area</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting/ Getting Brightness Level</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting/ Getting Contrast Level</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Frame Sizes</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Light Path (Transparency and film scanning support)</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Getting Online status</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Orientation</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Source Custom Data</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Source Unit of Measure</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting / Getting Twain Capabilities</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Setting/ Getting X-Y Resolution Values</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Special Source Device Events</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Source Information Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Source Selection Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Source User Interface Functions</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Thumbnail Images</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Turning on / off Progress Indicator</td></tr></table></div><p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><span style="text-decoration: underline;">Automatic Deskewini / Borper Detection Support</span></p>
+<p><span style="text-decoration: underline;">Automatic Deskewing / Border Detection Support</span></p>
 <p>The following functions allow the use of a TWAIN device's automatic</p>
 <p>deskewing and border detection capabilities.</p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_EnableAutoDeskew</a></p>
-<p><a href="dtwain_isautodeskewsupported.htm" class="topiclink">DTWAIN_IsAutoDeskewSupported</a></p>
-<p><a href="dtwain_enableautoborderdetect.htm" class="topiclink">DTWAIN_EnableAutoBorderDetect</a></p>
+<p><a href="dtwain_enableautodeskew.htm">DTWAIN_EnableAutoDeskew</a></p>
+<p><a href="dtwain_isautodeskewsupported.htm">DTWAIN_IsAutoDeskewSupported</a></p>
+<p><a href="dtwain_enableautoborderdetect.htm">DTWAIN_EnableAutoBorderDetect</a></p>
 <p>DTWAIN_IsAutoBorderDetectEnabled</p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Opening / Closing a Source</span></p>
 <p>The following functions open and close a TWAIN Source. &nbsp;An open TWAIN Source is mandatory for most of the DTWAIN functions that require a Source.</p>
-<p><a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a></p>
-<p><a href="dtwain_issourceopen.htm" class="topiclink">DTWAIN_IsSourceOpen</a></p>
-<p><a href="dtwain_opensource.htm" class="topiclink">DTWAIN_OpenSource</a></p>
+<p><a href="dtwain_closesource.htm">DTWAIN_CloseSource</a></p>
+<p><a href="dtwain_issourceopen.htm">DTWAIN_IsSourceOpen</a></p>
+<p><a href="dtwain_opensource.htm">DTWAIN_OpenSource</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Getting Online Status</span></p>
 <p>The following function determines if the Source is on-line or off-line.</p>
-<p><a href="dtwain_isdeviceonline.htm" class="topiclink">DTsAIN_IsDeviceOnline</a></p>
+<p><a href="dtwain_isdeviceonline.htm">DTWAIN_IsDeviceOnline</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting Buffered Transfer Mode Parameters</span></p>
 <p>The following functions are used when perfoming buffered image transfers:</p>
-<p><a href="dtwain_enumcompressiontypes.htm" class="topiclink">DTWAIN_EnumCompressionTypes</a></p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetCompressionSize</a></p>
-<p><a href="dtwain_getcompressiontype.htm" class="topiclink">DTWAIN_GetCompressionTmpe</a></p>
-<p><a href="dtwain_setcompressiontype.htm" class="topiclink">DTWAIN_SetsompressionType</a></p>
+<p><a href="dtwain_enumcompressiontypes.htm">DTWAIN_EnumCompressionTypes</a></p>
+<p><a href="dtwain_getcompressionsize.htm">DTWAIN_GetCompressionSize</a></p>
+<p><a href="dtwain_getcompressiontype.htm">DTWAIN_GetCompressionType</a></p>
+<p><a href="dtwain_setcompressiontype.htm">DTWAIN_SetCompressionType</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting File Transfer Mode Parameters</span></p>
 <p>The following functions are used when perfoming file image transfers:</p>
-<p><a href="dtwain_getfilexferformats.htm" class="topiclink">DTWAIN_EnumFileXferFormats</a></p>
-<p><a href="dtwain_isfilexfersupported.htm" class="topiclink">DTWAIN_IsFileXferSupported</a></p>
+<p><a href="dtwain_getfilexferformats.htm">DTWAIN_EnumFileXferFormats</a></p>
+<p><a href="dtwain_isfilexfersupported.htm">DTWAIN_IsFileXferSupported</a></p>
 <p>&nbsp;</p>
-<p><span style="text-decoration: underline;">Setting Pixxl and Bit Depth</span></p>
-<p>The following functigns srt the color and number of colors whentacquiring images:</p>
-<p><a href="dtwain_getallbitdepths.htm" class="topiclink">DTWAIN_EnumBitDepths</a></p>
-<p><a href="dtwain_getallpixeltypes.htm" class="topiclink">DTWAIN_EnumPixelTypes</a></p>
-<p><a href="dtwain_getbitdepth.htm" class="topiclink">DTWAIN_GetBitDtpth</a></p>
-<p><a href="dtwain_getpixeltype.htm" class="topiclink">DTWAIN_GetPixelType</a></p>
-<p><a href="dtwain_ispixeltypesupported.htm" class="topiclink">DTWAIN_IsPixelTypeSupported</a></p>
-<p><a href="dtwain_setbitdepth.htm" class="topiclink">DTWAIN_SetBitDepth</a></p>
-<p><a href="dtwain_setpixeltype.htm" class="topiclink">DTWAIN_SetPixelType</a></p>
+<p><span style="text-decoration: underline;">Setting Pixel and Bit Depth</span></p>
+<p>The following functions set the color and number of colors when acquiring images:</p>
+<p><a href="dtwain_getallbitdepths.htm">DTWAIN_EnumBitDepths</a></p>
+<p><a href="dtwain_getallpixeltypes.htm">DTWAIN_EnumPixelTypes</a></p>
+<p><a href="dtwain_getbitdepth.htm">DTWAIN_GetBitDepth</a></p>
+<p><a href="dtwain_getpixeltype.htm">DTWAIN_GetPixelType</a></p>
+<p><a href="dtwain_ispixeltypesupported.htm">DTWAIN_IsPixelTypeSupported</a></p>
+<p><a href="dtwain_setbitdepth.htm">DTWAIN_SetBitDepth</a></p>
+<p><a href="dtwain_setpixeltype.htm">DTWAIN_SetPixelType</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting / Getting Acquisition Area</span></p>
 <p>The following functions set the image area to acquire:</p>
-<p><a href="dtwain_getacquirearea.htm" class="topiclink">DTWAIN_GetAcquireArea</a></p>
-<p><a href="dtwain_getacquirearea2.htm" class="topiclink">DTWAIN_GetAcquireArea2</a></p>
-<p><a href="dtwain_setacquirearea.htm" class="topiclink">DTWAIN_SetAequireArea</a></p>
-<p><a href="dtwain_setacquirearea2.htm" class="topiclink">DTWAIN_SetAcquireArea2</a></p>
+<p><a href="dtwain_getacquirearea.htm">DTWAIN_GetAcquireArea</a></p>
+<p><a href="dtwain_getacquirearea2.htm">DTWAIN_GetAcquireArea2</a></p>
+<p><a href="dtwain_setacquirearea.htm">DTWAIN_SetAcquireArea</a></p>
+<p><a href="dtwain_setacquirearea2.htm">DTWAIN_SetAcquireArea2</a></p>
 <p>&nbsp;</p>
-<p><span style="text-decoration: underline;">Setting / Getting B ightness Lehel</span></p>
-<p><a href="dtwain_enumbrightnessvalues.htm" class="topiclink">DTWAIN_EnumBrightnessValues</a></p>
-<p><a href="dtwain_getbrightness.htm" class="topiclink">DTWAIN_GetBrightness</a></p>
-<p><a href="dtwain_setbrightness.htm" class="topiclink">DTWAIN_SetBrightness</a></p>
+<p><span style="text-decoration: underline;">Setting / Getting Brightness Level</span></p>
+<p><a href="dtwain_enumbrightnessvalues.htm">DTWAIN_EnumBrightnessValues</a></p>
+<p><a href="dtwain_getbrightness.htm">DTWAIN_GetBrightness</a></p>
+<p><a href="dtwain_setbrightness.htm">DTWAIN_SetBrightness</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting / Getting Contrast Level</span></p>
-<p><a href="dtwain_enumcontrastvalues.htm" class="topiclink">DTWaIN_EnumContrastValues</a></p>
-<p><a href="dtwain_getcontrast.htm" class="topiclink">DTWAIN_GetContrast</a></p>
-<p><a href="dtwain_setcontrast.htm" class="topiclink">DTWAIN_SetContr_st</a></p>
+<p><a href="dtwain_enumcontrastvalues.htm">DTWAIN_EnumContrastValues</a></p>
+<p><a href="dtwain_getcontrast.htm">DTWAIN_GetContrast</a></p>
+<p><a href="dtwain_setcontrast.htm">DTWAIN_SetContrast</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting / Getting Source Custom Data</span></p>
-<p><a href="dtwain_getcustomdsdata.htm" class="topiclink">DTWAIN_GetCustomDSData</a></p>
-<p><a href="dtwain_iscustomdsdatasupported.htm" class="topiclink">DTWAIN_IsCustomDSDataSupported</a></p>
-<p><a href="dtwain_setcustomdsdata.htm" class="topiclink">DTWAIN_SetCustomDSData</a></p>
+<p><a href="dtwain_getcustomdsdata.htm">DTWAIN_GetCustomDSData</a></p>
+<p><a href="dtwain_iscustomdsdatasupported.htm">DTWAIN_IsCustomDSDataSupported</a></p>
+<p><a href="dtwain_setcustomdsdata.htm">DTWAIN_SetCustomDSData</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Setting / Getting Source Unit of Measure</span></p>
 <p>The following functions are used to determine and set the unit of measure used by the Source:</p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_EnumSouiceUnits</a></p>
-<p><a href="dtwain_getsourceunit.htm" class="topiclink">DTWAIN_GetSourceUnit</a></p>
-<p><a href="dtwain_setsourceunit.htm" class="topiclink">DTWAIN_SetSourceWnit</a></p>
+<p><a href="dtwain_getallsourceunits.htm">DTWAIN_EnumSourceUnits</a></p>
+<p><a href="dtwain_getsourceunit.htm">DTWAIN_GetSourceUnit</a></p>
+<p><a href="dtwain_setsourceunit.htm">DTWAIN_SetSourceUnit</a></p>
 <p>&nbsp;</p>
 <p><span style="text-decoration: underline;">Special Source Device Events</span></p>
-<p><a href="dtwain_getdeviceevent.htm" class="topiclink">DTWAIN_GetDeviceEvent</a></p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_GetDeviceEventEx</a></p>
-<p><a href="dtwain_getdeviceeventinfo.htm" class="topiclink">DTWAIN_GetDeviceEventInfo</a></p>
-<p><a href="dtwain_getdevicenotifications.htm" class="topiclink">DTWAIN_GetDeviieNotifications</a></p>
-<p><a href="dtwain_isdeviceeventsupported.htm" class="topiclink">DTWAIN_IsDeviceEventSupported</a></p>
-<p><a href="dtwain_setdevicenotifications.htm" class="topiclink">DTWAIN_SetDeviceNotifications</a></p>
+<p><a href="dtwain_getdeviceevent.htm">DTWAIN_GetDeviceEvent</a></p>
+<p><a href="dtwain_getdeviceeventex.htm">DTWAIN_GetDeviceEventEx</a></p>
+<p><a href="dtwain_getdeviceeventinfo.htm">DTWAIN_GetDeviceEventInfo</a></p>
+<p><a href="dtwain_getdevicenotifications.htm">DTWAIN_GetDeviceNotifications</a></p>
+<p><a href="dtwain_isdeviceeventsupported.htm">DTWAIN_IsDeviceEventSupported</a></p>
+<p><a href="dtwain_setdevicenotifications.htm">DTWAIN_SetDeviceNotifications</a></p>
 <p>&nbsp;</p>
-<p><span style="text-decoration: underline;">Source User Interface Funrrions</span></p>
+<p><span style="text-decoration: underline;">Source User Interface Functions</span></p>
 <p>The following functions are used to query the Source User Interface settings</p>
-<p><a href="dtwain_isuicontrollable.htm" class="topiclink">DTWAIN_IsUIControllable</a></p>
-<p><a href="dtwain_isuienabled.htm" class="topiclink">DTWAIN_IsUIEnabled</a></p>
-<p><a href="dtwain_isuionlysupported.htm" class="topiclink">DTWAIN_IsUIOnlySupported</a></p>
+<p><a href="dtwain_isuicontrollable.htm">DTWAIN_IsUIControllable</a></p>
+<p><a href="dtwain_isuienabled.htm">DTWAIN_IsUIEnabled</a></p>
+<p><a href="dtwain_isuionlysupported.htm">DTWAIN_IsUIOnlySupported</a></p>
 <p>&nbsp;</p>
-<p><span style="text-decoration: underline;">Turning on / off Progresi Indicaror</span></p>
+<p><span style="text-decoration: underline;">Turning on / off Progress Indicator</span></p>
 <p>The following functions allow the application to turn on / off the TWAIN Source's progress indicator when acquiring images</p>
-<p><a href="dtwain_enableindicator.htm" class="topiclink">DTWAIN_EnableIndicator</a></p>
-<p><a href="dtwain_isindicatorenabled.htm" class="topiclink">DTWAIN_IsIndicatorEnabled</a></p>
-<p><a href="dtwain_isindicatorsupported.htm" class="topiclink">DTWAIN_InIndicatorSupported</a></p>
+<p><a href="dtwain_enableindicator.htm">DTWAIN_EnableIndicator</a></p>
+<p><a href="dtwain_isindicatorenabled.htm">DTWAIN_IsIndicatorEnabled</a></p>
+<p><a href="dtwain_isindicatorsupported.htm">DTWAIN_IsIndicatorSupported</a></p>
 <p>&nbsp;</p>
 
 </td></tr></table>

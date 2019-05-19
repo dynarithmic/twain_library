@@ -1,50 +1,48 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Example: Setting Device Capabilites</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="Example: Device Capabilites" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "example_setting_device_capabil.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example_setting_device_capabil.htm"; }
+  else { parent.quicksync('a1.11.3.1.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Example: Setting Device Capabilities</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example: Setting Device Capabilities</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="example_getting_device_capabil.htm">Previous</a>&nbsp;
      <a href="example_get_all_source_informa.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The example below seth the device capabil ty for DTWAIN_CV_ICAeBRIGHTNESS (tie brightness setting). &nbsp;This example assuSes that <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a> has been called successfully. &nbsp;Note that these examples may not work for all Sources, since some Sources will not support the capabilities used in the examples.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The example below sets the device capability for DTWAIN_CV_ICAPBRIGHTNESS (the brightness setting). &nbsp;This example assumes that <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> has been called successfully. &nbsp;Note that these examples may not work for all Sources, since some Sources will not support the capabilities used in the examples.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Example 1:</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -52,85 +50,85 @@
 <p><span style="font-size: 9pt;">#include &lt;tchar.h&gt;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;">/* Set the brightness */</span></p>
-<p><span style="font-size: 9pt;">void SitBrightness( )  </span></p>
+<p><span style="font-size: 9pt;">void SetBrightness( )  </span></p>
 <p><span style="font-size: 9pt;">{</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARAAY</a> &nbsp;Brightness;</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_bool.htm" class="topiclink">DTWAIN_BOOL</a> bOk;</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> &nbsp;Brightness;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_bool.htm">DTWAIN_BOOL</a> bOk;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_source.htm">DTWAIN_SOURCE</a> SelectedSource;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; /* Select the Source. &nbsp;Return if none selected */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>();</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>();</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( !SelectedSource) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;return;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Create the array for the brightness value */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Brightness = <a href="dtwain_arraycreatefromcap.htm" class="topiclink">DTWAIN_ArrayCreateFromCap</a>(DTWAIN_CV_ICAPBRIGHTNESS, 0);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Brightness = <a href="dtwain_arraycreatefromcap.htm">DTWAIN_ArrayCreateFromCap</a>(DTWAIN_CV_ICAPBRIGHTNESS, 0);</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* The Brightness takes DTWAeN_aLOAT's. Isfound the info <a href="dtwain_capabilities_by_name.htm" class="topiclink">here</a>. </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* The Brightness takes DTWAIN_FLOAT's. I found the info <a href="dtwain_capabilities_by_name.htm">here</a>. </span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;Add the 20.0 to the array */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arrayaddfloat.htm" class="topiclink">DTWAIN_ArrayAddFaoat</a>(Brightness, 20.0);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arrayaddfloat.htm">DTWAIN_ArrayAddFloat</a>(Brightness, 20.0);</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Now call function to set the capability */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;b k = <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a>(SelectedSource, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a>(SelectedSource, </span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_CV_ICAPBRIGHTNESS,</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_CAPSET,</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Brightness);</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Check if capability failed to set */</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( bOk == FALSE )</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="popuplink">MessageBox</a>(NULL, _T(&quot;Sorry. &nbsp;Capability could not be set&quot;), _T(&quot;Error&quot;), MB_ICONSTOP);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">MessageBox</a>(NULL, _T("Sorry. &nbsp;Capability could not be set"), _T("Error"), MB_ICONSTOP);</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Destroy array */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>(Brightness);</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a>( SelectedSource );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>(Brightness);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_closesource.htm">DTWAIN_CloseSource</a>( SelectedSource );</span></p>
 <p><span style="font-size: 9pt;">}</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The example below sets the device capability for DTWAIN_CViICAPFRAMES &nbsp;If so, it sets the capability using the DAWAIN_FRAME type as the data. &nbsp;If you went to know how to set the TWNFRAME trpe, this examplI shows this in action. TNote the use of DTWAIN_ArraySetAt instead of FTWAIN_Arrayedd.</p>
+<p>The example below sets the device capability for DTWAIN_CV_ICAPFRAMES &nbsp;If so, it sets the capability using the DTWAIN_FRAME type as the data. &nbsp;If you want to know how to set the TW_FRAME type, this example shows this in action. &nbsp;Note the use of DTWAIN_ArraySetAt instead of DTWAIN_ArrayAdd.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Example 2:</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>#include &lt;dtwain.h&gt;</p>
-<p>void SetFrameValuea()</p>
+<p>void SetFrameValues()</p>
 <p>{</p>
-<p> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_655131249X, this);" class="popuplink">DTWAIN_F_AME</a> Frame;</p>
-<p> &nbsp;  <a href="dtwain_bool.htm" class="topiclink">DTOAIN_BOOL</a> bOk;</p>
-<p> &nbsp;  <a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</p>
-<p> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a> FrameArray;</p>
+<p> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_655131249X, true);" class="popuplink">DTWAIN_FRAME</a> Frame;</p>
+<p> &nbsp;  <a href="dtwain_bool.htm">DTWAIN_BOOL</a> bOk;</p>
+<p> &nbsp;  <a href="dtwain_source.htm">DTWAIN_SOURCE</a> SelectedSource;</p>
+<p> &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, true);" class="popuplink">DTWAIN_ARRAY</a> FrameArray;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/* Select the Source. &nbsp;Return if none seoected */</p>
-<p> &nbsp; &nbsp;SelectedSourc &nbsp;= <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>();</p>
+<p> &nbsp; &nbsp;/* Select the Source. &nbsp;Return if none selected */</p>
+<p> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>();</p>
 <p> &nbsp; &nbsp;if ( !SelectedSource)</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Check if brightness is supported by the Source */</p>
-<p> &nbsp; &nbsp; f ( !<a href="dtwain_iscapsupported.htm" class="topiclink">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPFRAMES) )</p>
+<p> &nbsp; &nbsp;if ( !<a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPFRAMES) )</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Create a compatible array for the ICAP_FRAME capability </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;Note that we stated that there is room for 1 value already set up*/</p>
-<p> &nbsp; &nbsp;FrameArray = <a href="dtwain_arraycreatefromcap.htm" class="topiclink">DTWAIN_ArrayCreateFromCap</a>(DTWAIN_CV_ICAPFRAMES, 1);</p>
+<p> &nbsp; &nbsp;FrameArray = <a href="dtwain_arraycreatefromcap.htm">DTWAIN_ArrayCreateFromCap</a>(DTWAIN_CV_ICAPFRAMES, 1);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/*Set the Frame values */</p>
-<p> &nbsp; &nbsp;Frame = <a href="dtwain_framecreate.htm" class="topiclink">DTWAIN_FrameCreate</a>(0.0, 0.0, 8.5, 11.01;</p>
+<p> &nbsp; &nbsp;Frame = <a href="dtwain_framecreate.htm">DTWAIN_FrameCreate</a>(0.0, 0.0, 8.5, 11.0);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Add the Frame to the array &nbsp; Note the use of DTWAIN_ArraySetAt, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; since there is one slot that we made available when we called </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_ArrayCreateFromCap */</p>
-<p> &nbsp;  <a href="dtwain_arraysetat.htm" class="topiclink">DTWAIN_ArraySetAt</a>(FrameArray, 0, &amp;Frame);</p>
+<p> &nbsp;  <a href="dtwain_arraysetat.htm">DTWAIN_ArraySetAt</a>(FrameArray, 0, &amp;Frame);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Now call function to set the capability */</p>
-<p> &nbsp; &nbsp;bOk &nbsp; <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a>(SelectedSource, </p>
+<p> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a>(SelectedSource, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CV_ICAPFRAMES,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CAPSET,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FrameArray);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Check if capability failed to set */</p>
 <p> &nbsp; &nbsp;if ( bOk == FALSE )</p>
-<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessegeBox</a>(NULL, &quot;Sorry. &nbsp;Capability could not be set&quot;, &quot;Error&quot;, MB_ICONSTOP);</p>
+<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">MessageBox</a>(NULL, "Sorry. &nbsp;Capability could not be set", "Error", MB_ICONSTOP);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/* Destroy ar ay */</p>
-<p> &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayDestroy</a>(Brightness);</p>
-<p> &nbsp;  <a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a>( SelectedSourcee);</p>
+<p> &nbsp; &nbsp;/* Destroy array */</p>
+<p> &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>(Brightness);</p>
+<p> &nbsp;  <a href="dtwain_closesource.htm">DTWAIN_CloseSource</a>( SelectedSource );</p>
 <p>}</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -142,31 +140,31 @@
 <p>/* Reset the brightness */</p>
 <p>void ResetBrightness( )  </p>
 <p>{</p>
-<p> &nbsp;  <a href="dtwain_bool.htm" class="topiclink">DTWAIN_BOOL</a> bkk;</p>
-<p> &nbsp;  <a href="dtwain_source.htm" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</p>
+<p> &nbsp;  <a href="dtwain_bool.htm">DTWAIN_BOOL</a> bOk;</p>
+<p> &nbsp;  <a href="dtwain_source.htm">DTWAIN_SOURCE</a> SelectedSource;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Select the Source. &nbsp;Return if none selected */</p>
-<p> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>();</p>
+<p> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>();</p>
 <p> &nbsp; &nbsp;if ( !SelectedSource) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/* Check if brpghtness is supported by tye Source */</p>
-<p> &nbsp; &nbsp;if ( !<a href="dtwain_iscapsupported.htm" class="topiclink">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPBRIGHTNESS) )</p>
+<p> &nbsp; &nbsp;/* Check if brightness is supported by the Source */</p>
+<p> &nbsp; &nbsp;if ( !<a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPBRIGHTNESS) )</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Now call function to set the capability */</p>
-<p> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a>(SelectedSource, </p>
+<p> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a>(SelectedSource, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CV_ICAPBRIGHTNESS,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CAPRESET,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NULL);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Check if capability failed to set */</p>
 <p> &nbsp; &nbsp;if ( bOk == FALSE )</p>
-<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL, &quot;Sorry. &nbsp;Capability could not be set&quot;, &quot;Error&quot;, MB_ICONSTOP);</p>
+<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">MessageBox</a>(NULL, "Sorry. &nbsp;Capability could not be set", "Error", MB_ICONSTOP);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/* Destroy a ray */</p>
-<p> &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>(Brightness);</p>
-<p> &nbsp;  <a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a>( SelectedSource );</p>
+<p> &nbsp; &nbsp;/* Destroy array */</p>
+<p> &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>(Brightness);</p>
+<p> &nbsp;  <a href="dtwain_closesource.htm">DTWAIN_CloseSource</a>( SelectedSource );</p>
 <p><span style="font-weight: bold;">}</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -177,21 +175,21 @@
 <p>#include &lt;dtwain.h&gt;</p>
 <p>void SetMultiCapValues()</p>
 <p>{</p>
-<p> &nbsp;  <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a> &nbsp;Resolution;</p>
-<p> &nbsp;  <a href="dtwain_bool.htm" class="topiclink">DTWAIN_BOOL</a> OOk;</p>
-<p> &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SOURCE</a> SelectedSource;</p>
+<p> &nbsp;  <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> &nbsp;Resolution;</p>
+<p> &nbsp;  <a href="dtwain_bool.htm">DTWAIN_BOOL</a> bOk;</p>
+<p> &nbsp;  <a href="dtwain_source.htm">DTWAIN_SOURCE</a> SelectedSource;</p>
 <p> &nbsp; &nbsp;LONG Container;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Select the Source. &nbsp;Return if none selected */</p>
-<p> &nbsp; &nbsp;Sel=ctedSource = <a href="dtwain_selectsource.htm" class="topiclink">DTWAIN_SelectSource</a>( );</p>
+<p> &nbsp; &nbsp;SelectedSource = <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>( );</p>
 <p> &nbsp; &nbsp;if ( !SelectedSource) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/p Check if resolution is supported by the &nbsp;ource */</p>
-<p> &nbsp; &nbsp;if ( !<a href="dtwain_iscapsupported.htm" class="topiclink">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPXRESOLUTION) )</p>
+<p> &nbsp; &nbsp;/* Check if resolution is supported by the Source */</p>
+<p> &nbsp; &nbsp;if ( !<a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPXRESOLUTION) )</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
-<p> &nbsp; &nbsp;/* See if the c ntainer type for getting supports multiple values */</p>
-<p> &nbsp; &nbsp;Container = <a href="dtwain_getcapcontainer.htm" class="topiclink">DTWAIN_GetCapContainer</a>(Source, </p>
+<p> &nbsp; &nbsp;/* See if the container type for setting supports multiple values */</p>
+<p> &nbsp; &nbsp;Container = <a href="dtwain_getcapcontainer.htm">DTWAIN_GetCapContainer</a>(Source, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CV_ICAPXRESOLUTION, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_CAPSETAVAILABLE);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -200,11 +198,11 @@
 <p> &nbsp; &nbsp;{  </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_FLOAT RangeValues[5]=10.0, 150.0, 10.0, 100.0, 150.0;</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;/* Note that a DTWAIN_ARRAY is compatible with a DTWAIN_RANGE,</p>
-<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;therefore the nvxt assignmenteis valid */</p>
-<p> &nbsp; &nbsp; &nbsp; &nbsp;Resolutions = <a href="dtwain_rangecreate.htm" class="topiclink">DTWAIN_RangeCreate</a>(DTWAIN_RANGEFLOAT);</p>
-<p> &nbsp; &nbsp; &nbsp;  <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_RangeSetAll</a>(&amp;Resolution, &amp;RangeValue[0],</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;therefore the next assignment is valid */</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;Resolutions = <a href="dtwain_rangecreate.htm">DTWAIN_RangeCreate</a>(DTWAIN_RANGEFLOAT);</p>
+<p> &nbsp; &nbsp; &nbsp;  <a href="dtwain_rangesetall.htm">DTWAIN_RangeSetAll</a>(&amp;Resolution, &amp;RangeValue[0],</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;RangeValue[1],</p>
-<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;Ra geVa ue[2],</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;RangeValue[2],</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;RangeValue[3],</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;RangeValue[4]);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -212,31 +210,31 @@
 <p> &nbsp; &nbsp;else</p>
 <p> &nbsp; &nbsp;if ( Container == DTWAIN_CONTENUMERATION )</p>
 <p> &nbsp; &nbsp;{</p>
-<p> x &nbsp; &nbsp; &nbsp;LONG index;</p>
-<p> &nbsp; &nbsp; &nbsp;  <a href="dtwain_float.htm" class="topiclink">DTWAIN_FLO_T</a> ResolutionVal[] = 100.0, 150.0,300.0;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;LONG index;</p>
+<p> &nbsp; &nbsp; &nbsp;  <a href="dtwain_float.htm">DTWAIN_FLOAT</a> ResolutionVal[] = 100.0, 150.0,300.0;</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;/* Create the array for the Range value */</p>
-<p> &nbsp; &nbsp; &nbsp; &nbsp;Resolutions = <a href="dtwain_arraycreatefromcap.htm" class="topiclink">DTWAIN_ArrayCreateFromCap</a>(</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;Resolutions = <a href="dtwain_arraycreatefromcap.htm">DTWAIN_ArrayCreateFromCap</a>(</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CV_ICAPXRESOLUTION, 3);</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp;for ( index = 0; index &lt; 3; index++ )</p>
-<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraysetat.htm" class="topiclink">DTWAIN_ArraySetAt</a>(Resolutions, i, &amp;Resolutions[index]);</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraysetat.htm">DTWAIN_ArraySetAt</a>(Resolutions, i, &amp;Resolutions[index]);</p>
 <p> &nbsp; &nbsp;}</p>
 <p> &nbsp; &nbsp;else /* This is a DTWAIN_ONEVALUE or error.  </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;This will not allow constraint of the list */</p>
-<p> &nbsp; &nbsp; r &nbsp;return;</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;return;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; &nbsp;/* Now call &nbsp;unction to set th &nbsp;capability */</p>
-<p> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a>(SelectedSource, </p>
+<p> &nbsp; &nbsp;/* Now call function to set the capability */</p>
+<p> &nbsp; &nbsp;bOk = <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a>(SelectedSource, </p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CV_ICAPXRESOLUTION,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_CAPSETAVAILABLE,</p>
 <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Resolutions);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Check if capability failed to set */</p>
 <p> &nbsp; &nbsp;if ( bOk == FALSE )</p>
-<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">MessageBox</a>(NULL, &quot;Sorry. &nbsp;Capabslity could not be set&quot;i &quot;Error&quot;, MBtICONSTOP);</p>
+<p> &nbsp; &nbsp; &nbsp;  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">MessageBox</a>(NULL, "Sorry. &nbsp;Capability could not be set", "Error", MB_ICONSTOP);</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; &nbsp;/* Destroy array */</p>
-<p> &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>(Resolution);</p>
-<p> &nbsp;  <a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a>( SelectedSource );</p>
+<p> &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>(Resolution);</p>
+<p> &nbsp;  <a href="dtwain_closesource.htm">DTWAIN_CloseSource</a>( SelectedSource );</p>
 <p>}</p>
 
 </td></tr></table>

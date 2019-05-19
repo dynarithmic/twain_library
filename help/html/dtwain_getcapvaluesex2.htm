@@ -1,51 +1,358 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_GetCapValuesEx2</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_getcapvaluesex2.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getcapvaluesex2.htm"; }
+  else { parent.quicksync('a5.138'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetCapValuesEx2</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetCapValuesEx2</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_getcapvaluesex.htm">Previous</a>&nbsp;
      <a href="dtwain_getcompressionsize.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Lorlm ipsum dolor sit amet, consectetuereadipiscing elit. Aliquamtvelit risus, placerat et, rutrum nec, condimentum at, leo. Aliquam in aegue a magna semper pellenttsque. Suspendisse augue. Nullamuest nibh,rmilestie eget, tempor ut, consectetupr ac, pede. Vestibulum sodales heAdrerit augue. Suspendisse id mi. Aenean leo diam, sollicitudin adipiscing, posuere quis, venenatis sed, metus. Integer et nunc. Sed aiverra dolor quis justo. Lorem ipsum dolor sitNamet, consectetuer adipiscing elit. Duiu elementum. Nu,lam a arcu. Vivamus sagittis imperdiet odio. iam lonummy. Phasellus ullamcorrer velit vehicula lorem. Aliquam eu ligula.uMaecenas rhoncus. In element m eros at elit. Quisque leo dolor, rutrum sit amet, fringilla ivu tincidunt et, nisi. </p>
-<p>Donec ut eros faucibus lorem lobortis sodales. Nam vitae lectus id lectus tincidunt ornare. Aliquam sodales suscipit velit. Nullam leo erat, iaculis vehicula, dignissim vel, rhoncus id, velit. Nulla facilisi. Fusce tortor lorem, mollis sed, scelerisque eget, faucibus sed, dui. Quisque eu nisi. Etiam sed erat id lorem placerat feugiat. Pellentesque vitae orci at odio porta pretium. Cras quis tellus eu pede auctor iaculis. Donec suscipit venenatis mi. </p>
-<p>Aliquam erat volutpat. Sed congue feugiat tellus. Praesent ac nunc non nisi eleifend cursus. Sed nisi massa, mattis eu, elementum ac, luctus a, lacus. Nunc luctus malesuada ipsum. Morbi aliquam, massa eget gravida fermentum, eros nisi volutpat neque, nec placerat nisi nunc non mi. Quisque tincidunt quam nec nibh sagittis eleifend. Duis malesuada dignissim ante. Aliquam erat volutpat. Proin risus lectus, pharetra vel, mollis sit amet, suscipit ac, sapien. Fusce egestas. Curabitur ut tortor id massa egestas ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec fermentum. Curabitur ut ligula ac ante scelerisque consectetuer. Nullam at turpis quis nisl eleifend aliquam. Sed odio sapien, semper eget, rutrum a, tempor in, nibh.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetCapValuesEx2</span> function gets the capability value(s) for a Source while specifying the TWAIN container type and TWAIN data type to use.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetCapValuesEx2 (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Capability,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">GetType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Container,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">TwainDataType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pCapValues </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Capability</span></p>
+<p style="margin: 0px 0px 0px 15px;">The capability that is to be retrieved.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">GetType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates which type of retrieval to do.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Container</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates the TWAIN container to use</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">TwainDataType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates the TWAIN data type to use.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CapValues</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> containing the values retrieved.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetCapValuesEx2</span> function sets a Source's device capability.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; color: #ff0000;">Caution:</span></p>
+<p><span style="font-weight: bold; color: #ff0000;">DTWAIN_GetCapValuesEx2 is an advanced function and should be used </span><span style="font-weight: bold; color: #ff0000; text-decoration: underline;">only</span><span style="font-weight: bold; color: #ff0000;"> if you have full information (data type, container type, etc.) about a capability. &nbsp;Calling DTWAIN_GetCapValuesEx2 with the wrong data type or container type will result in undefined behavior (the application may crash, the TWAIN Source Manager may go in an infinite loop, etc.)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The difference between <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> and DTWAIN_GetCapValuesEx2 is that DTWAIN_GetCapValuesEx2 relies on the programmer to specify the TWAIN container to use and the TWAIN data type. &nbsp; The difference between DTWAIN_GetCapValuesEx and DTWAIN_GetCapValuesEx2 is that DTWAIN_GetCapValuesEx only allows you to specify the container type to use (DTWAIN determines the data type automatically).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Sometimes DTWAIN cannot determine the data type of certain capabilities, so DTWAIN_GetCapValuesEx2 is used for those programmers who have full information on how to retrieve a certain capability's values (usually this information concerning how to get the custom capability's values is given to the programmer by the manufacturer of the device).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Depending on the TWAIN container, values must be placed in the container in a certain way when retrieving capability values. &nbsp;The TWAIN container is not used explicitly by the application. &nbsp;The only two entities that use the containers are DTWAIN and TWAIN. &nbsp; The only structure that the application will use to read the retrieved values is the DTWAIN_ARRAY <span style="font-style: italic;">pCapValues</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Basically, DTWAIN extracts the values from the Source<span style="font-style: italic;"> </span>by telling TWAIN to use the container specified by <span style="font-style: italic;">Container</span>, and if successful, places the value retrieved from the Source into the DTWAIN_ARRAY specified by <span style="font-style: italic;">pCapValues</span>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To specify the container to use, Container should be one of the following values (the constants below define each container and their TWAIN equivalents):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="266" style="width:266px;"><p><span style="text-decoration: underline;">DTWAIN_Container</span></p>
+</td>
+<td valign="top" width="52" style="width:52px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td valign="top" width="202" style="width:202px;"><p><span style="text-decoration: underline;">TWAIN Equivalent</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="266" style="width:266px;"><p>DTWAIN_CONTONEVALUE</p>
+</td>
+<td valign="top" width="52" style="width:52px;"><p>1 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="202" style="width:202px;"><p>TW_ONEVALUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="266" style="width:266px;"><p>DTWAIN_CONTARRAY </p>
+</td>
+<td valign="top" width="52" style="width:52px;"><p>2 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="202" style="width:202px;"><p>TW_ARRAY</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="266" style="width:266px;"><p>DTWAIN_CONTRANGE</p>
+</td>
+<td valign="top" width="52" style="width:52px;"><p>4 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="202" style="width:202px;"><p>TW_RANGE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="266" style="width:266px;"><p>DTWAIN_CONTENUMERATION</p>
+</td>
+<td valign="top" width="52" style="width:52px;"><p>8 &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="202" style="width:202px;"><p>TW_ENUMERATION</p>
+</td>
+</tr>
+</table>
+</div>
+<p style="text-indent: -191px; margin: 0px 0px 0px 192px;"><span style="color: #000000;">&nbsp;</span></p>
+<p>Note: DTWAIN_CONTONEVALUE, DTWAIN_CONTARRAY, and DTWAIN_CONTENUMERATION, uses a DTWAIN_ARRAY of the actual values that are to be set. The only odd one is the DTWAIN_CONTRANGE, where the elements in the DTWAIN_ARRAY are to be read using the special DTWAIN Range functions.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>It is imperative that you understand the difference in the container types. &nbsp;DTWAIN simplifies the matter of setting up the containers internally; all you have to do is specify to DTWAIN which one to use, and DTWAIN does the job For an explanation of the container types, you can get the TWAIN specification from here.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">TwainDataType</span> argument must be one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Integer-based types</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TWTY_INT8</p>
+<p>TWTY_UINT8</p>
+<p>TWTY_BOOL</p>
+<p>TWTY_INT16</p>
+<p>TWTY_INT32</p>
+<p>TWTY_UINT16</p>
+<p>TWTY_UINT32</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">String-based types</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TWTY_STR32</p>
+<p>TWTY_STR64</p>
+<p>TWTY_STR128</p>
+<p>TWTY_STR255</p>
+<p>TWTY_STR1024</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Floating-point type</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TWTY_FIX32</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Frame type</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>TWTY_FRAME</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the <span style="font-style: italic;">TwainDataType, </span>the array type that will be created to store the return values depends on the <span style="font-style: italic;">TwainDataType</span> that is specified. &nbsp;A table of the <span style="font-style: italic;">TwainDataType</span> and the type of DTWAIN_ARRAY that will store the returned capability values is as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="136" style="width:136px;"><p><span style="font-style: italic; font-weight: bold;">TwainDataType</span></p>
+</td>
+<td valign="top" width="184" style="width:184px;"><p><span style="font-weight: bold;">DTWAIN Data Type</span></p>
+</td>
+<td valign="top" width="366" style="width:366px;"><p><span style="font-weight: bold;">DTWAIN_ARRAY type</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="136" style="width:136px;"><p>TW_INT8 </p>
+<p>TW_UINT8 </p>
+<p>TW_BOOL </p>
+<p>TW_INT16 </p>
+<p>TW_INT32 </p>
+<p>TW_UINT16 </p>
+<p>TW_UINT32</p>
+</td>
+<td valign="top" width="184" style="width:184px;"><p>DTWAIN_TWTY_INT8</p>
+<p>DTWAIN_TWTY_UINT8 </p>
+<p>DTWAIN_TWTY_BOOL </p>
+<p>DTWAIN_TWTY_INT16 </p>
+<p>DTWAIN_TWTY_INT32 </p>
+<p>DTWAIN_TWTY_UINT16 </p>
+<p>DTWAIN_TWTY_UINT32</p>
+</td>
+<td valign="top" width="366" style="width:366px;"><p>&nbsp;</p>
+<p>DTWAIN_ARRAYLONG</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="136" style="width:136px;"><p>&nbsp;</p>
+<p>TW_STR32 </p>
+<p>TW_STR64</p>
+<p>TW_STR128</p>
+<p>TW_STR255</p>
+<p>TW_STR1024</p>
+</td>
+<td valign="top" width="184" style="width:184px;"><p>&nbsp;</p>
+<p>DTWAIN_TWTY_STR32 </p>
+<p>DTWAIN_TWTY_STR64</p>
+<p>DTWAIN_TWTY_STR128</p>
+<p>DTWAIN_TWTY_STR255</p>
+<p>DTWAIN_TWTY_STR1024</p>
+</td>
+<td valign="top" width="366" style="width:366px;"><p>&nbsp;</p>
+<p>DTWAIN_ARRAYSTRING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="136" style="width:136px;"><p>&nbsp;</p>
+<p>TW_FIX32</p>
+</td>
+<td valign="top" width="184" style="width:184px;"><p>&nbsp;</p>
+<p>DTWAIN_TWTY_FIX32</p>
+</td>
+<td valign="top" width="366" style="width:366px;"><p>&nbsp;</p>
+<p>DTWAIN_ARRAYFLOAT</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="136" style="width:136px;"><p>&nbsp;</p>
+<p>TW_FRAME</p>
+</td>
+<td valign="top" width="184" style="width:184px;"><p>&nbsp;</p>
+<p>DTWAIN_TWTY_FRAME</p>
+</td>
+<td valign="top" width="366" style="width:366px;"><p>&nbsp;</p>
+<p>DTWAIN_ARRAYFRAME</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For more information on parameter definitions see <a href="dtwain_setcapvalues.htm">DTWAIN_GetCapValues</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<hr noshade size=1 style="color : #000000"><p><span style="font-weight: bold;">Example:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The manufacturer of a TWAIN driver has given you the following information to get a custom capability that controls the padding within the image data:</p>
+<p>&nbsp;</p>
+<hr noshade size=1 style="color : #000000"><p><span style="font-size: 9pt;">Capability Name: &nbsp; &nbsp; &nbsp; &nbsp; ICAP_IMAGEPADDING</span></p>
+<p><span style="font-size: 9pt;">Capability number: &nbsp; &nbsp; &nbsp;0x8012  </span></p>
+<p><span style="font-size: 9pt;">Capability Data Type : TW_UINT16</span></p>
+<p><span style="font-size: 9pt;">Capability Container Types: &nbsp;TW_ENUMERATION (get all values), TW_ONEVALUE (get current value and default value)</span></p>
+<p><span style="font-size: 9pt;">Possible Values:</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; 0 - Use Byte padding</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; 1 - Use Word padding</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; 2 - Use 8-byte padding &nbsp; (only supported for driver version 4.0)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; 3 - Use no padding</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; 4 - Automatically determine padding</span></p>
+<hr noshade size=1 style="color : #000000"><p><span style="color: #000000;">&nbsp;</span></p>
+<p>Assume we want to get all the possible values for this capability (and also assume we are running version 3.0 of the manufacturer's driver). &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </p>
+<p>First, we note that the capability number is 0x8012 (a hexadecimal number). &nbsp;The equivalent decimal number is 32786.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The next thing we note is that the capability's data type is TW_UINT16. &nbsp;This means that the DTWAIN_ARRAY that will be returned to us after DTWAIN_GetCapValuesEx2 is called will consist of LONG values (a DTWAIN_ARRAYLONG will be created).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Next, we note that the container type to use to retrieve all values is TW_ENUMERATION. &nbsp;This means that the DTWAIN_ARRAY will have one or more values within it.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since we want to get all the values, the correct "get" type we use is DTWAIN_CAPGET.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Given this information to call DTWAIN_GetCapValuesEx2 to set the capability to get all the values is the following (C/C++ example):</p>
+<hr noshade size=1 style="color : #000000"><p><span style="font-size: 9pt;">DTWAIN_SOURCE theSource;</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;">// Assume that theSource is pointing to a valid TWAIN Data Source...</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_ARRAY theValues;</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;">BOOL bOK = DTWAIN_GetCapValuesEx2( Source, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0x8012, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_CAPGET, </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_CONTENUMERATION,</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_TWTY_UINT16,</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &amp;theValues );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">if ( bOK ) // values retrieved successfully</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// output each value</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LONG value;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LONG i;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LONG nValues = <a href="dtwain_arraygetcount.htm">DTWAIN_ArrayGetCount</a>( theValues );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; for ( i = 0; i &lt; nValues; ++i )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_arraygetatlong.htm">DTWAIN_ArrayGetAtLong</a>( theValues, i, &amp;value );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; printf("%d\n", value);  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; //...</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>( theValues );</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<hr noshade size=1 style="color : #000000"><p><span style="color: #000000;">&nbsp;</span></p>
+<p>The code snippet above should output the following:</p>
+<p>&nbsp;</p>
+<hr noshade size=1 style="color : #000000"><p>0</p>
+<p>1</p>
+<p>3</p>
+<p>4</p>
+<hr noshade size=1 style="color : #000000"><p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that '2' is missing from the output, since we are running version 3.0 of the manufacturer's driver, and the documentation from the manufacturer stated that '2' only exists for version 4.0 of the driver.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> or higher (depending on the capability).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Twain Capabilities</a></p>
 
 </td></tr></table>
 

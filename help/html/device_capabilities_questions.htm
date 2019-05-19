@@ -1,51 +1,131 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Device Capabilities Questions</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="Device Capabilities Questions" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "device_capabilities_questions.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?device_capabilities_questions.htm"; }
+  else { parent.quicksync('a3.2.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Device Capabilities Questions</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Device Capabilities Questions</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="general_dtwain_questions.htm">Previous</a>&nbsp;
      <a href="twain_acquisition_questions.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam velit risus, placerat et, rutrum nec, condimentum at, leo. Aliquam in augue a magna semper pellentesque. Suspendisse augue. Nullam est nibh, molestie eget, tempor ut, consectetuer ac, pede. Vestibulum sodales hendrerit augue. Suspendisse id mi. Aenean leo diam, sollicitudin adipiscing, posuere quis, venenatis sed, metus. Integer et nunc. Sed viverra dolor quis justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis elementum. Nullam a arcu. Vivamus sagittis imperdiet odio. Nam nonummy. Phasellus ullamcorper velit vehicula lorem. Aliquam eu ligula. Maecenas rhoncus. In elementum eros at elit. Quisque leo dolor, rutrum sit amet, fringilla in, tincidunt et, nisi. </p>
-<p>Donec ut eros faucibus lorem lobortis sodales. Nam vitae lectus id lectus tincidunt ornare. Aliquam sodales suscipit velit. Nullam leo erat, iaculis vehicula, dignissim vel, rhoncus id, velit. Nulla facilisi. Fusce tortor lorem, mollis sed, scelerisque eget, faucibus sed, dui. Quisque eu nisi. Etiam sed erat id lorem placerat feugiat. Pellentesque vitae orci at odio porta pretium. Cras quis tellus eu pede auctor iaculis. Donec suscipit venenatis mi. </p>
-<p>Aliquam erat volutpat. Sed congue feugiat tellus. Praesent ac nunc non nisi eleifend cursus. Sed nisi massa, mattis eu, elementum ac, luctus a, lacus. Nunc luctus malesuada ipsum. Morbi aliquam, massa eget gravida fermentum, eros nisi volutpat neque, nec placerat nisi nunc non mi. Quisque tincidunt quam nec nibh sagittis eleifend. Duis malesuada dignissim ante. Aliquam erat volutpat. Proin risus lectus, pharetra vel, mollis sit amet, suscipit ac, sapien. Fusce egestas. Curabitur ut tortor id massa egestas ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec fermentum. Curabitur ut ligula ac ante scelerisque consectetuer. Nullam at turpis quis nisl eleifend aliquam. Sed odio sapien, semper eget, rutrum a, tempor in, nibh.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Q</span>: I need to check if the Source supports a certain device capability. &nbsp;How do I do this?</p>
+<p><span style="font-weight: bold;">A</span>: Use either the <a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a> or  <a href="dtwain_getsupportedcaps.htm">DTWAIN_EnumSupportedCaps</a>functions.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: TWAIN defines different container types such as TW_ONEVALUE, TW_RANGE, etc. &nbsp;Using DTWAIN, should I get involved in knowing how to use the various types?</p>
+<p><span style="font-weight: bold;">A</span>: With DTWAIN, your application does not deal with the various TWAIN container types. &nbsp;All capability values are stored in DTWAIN_ARRAY's, whether the values are being sent to the Source or retrieved from the Source (the TW_RANGE container type is mimicked by using DTWAIN_ARRAY's).</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I am calling <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> for a capability that returns multiple values if supported. &nbsp;How do you get the values with DTWAIN?</p>
+<p><span style="font-weight: bold;">A</span>: All returned capability values are returned in the DTWAIN_ARRAY that your application provides to the <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> function. &nbsp; To get the values use the various <a href="arrayfunctions.htm">DTWAIN Array functions</a> that are available such as <a href="dtwain_arraygetat.htm">DTWAIN_ArrayGetAt</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: How do I know if the returned DTWAIN_ARRAY values from <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> represents a range instead of a list of values?</p>
+<p><span style="font-weight: bold;">A</span>: Call <a href="dtwain_getcapcontainer.htm">DTWAIN_GetCapContainer</a>. &nbsp;This function will return DTWAIN_CONTRANGE if the capability stores values as a TW_RANGE. &nbsp;If the container used for the capability is TW_RANGE, the DTWAIN Range functions can be used on the returned DTWAIN_ARRAY.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I want to call DTWAIN_SetCapValues, however the capability will be determined at runtime. &nbsp;How do I know what type of data a certain capability will have so that I can set up the DTWAIN_ARRAY correctly?</p>
+<p><span style="font-weight: bold;">A</span>: Use the <a href="dtwain_arraycreatefromcap.htm">DTWAIN_ArrayCreateFromCap</a> function to create a DTWAIN_ARRAY of the correct type:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_ARRAY CapValues;</span></p>
+<p><span style="font-weight: bold;">...</span></p>
+<p><span style="font-weight: bold;">CapValues = DTWAIN_ArrayCreateFromCap(DTWAIN_CV_CAPAUTHOR);</span></p>
+<p><span style="font-weight: bold;">...</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SetCapValue(Source, AnyCap, DTWAIN_CAPSETCURRENT, CapValues);</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Why doesn't DTWAIN have separate functions for setting / getting each capability?</p>
+<p><span style="font-weight: bold;">A</span>: Two reasons. The first is that the DTWAIN library (DLL) will become extremely large if there were functions created to get or set every single TWAIN capability. &nbsp;DTWAIN compensates for this by providing four functions: DTWAIN_GetCapValues, DTWAIN_GetCapValuesEx and DTWAIN_SetCapValues, DTWAIN_SetCapValuesEx. &nbsp;This way, the library size is kept to a minimum.  </p>
+<p>&nbsp;</p>
+<p>The other reason is that the TWAIN specification is constantly changing. &nbsp;If you are using an older version of DTWAIN, the ability to set or get a new capability defined by TWAIN will still be possible. &nbsp;All you would have to do is use the appropriate TWAIN constant for the capability (Example :ICAP_XRESOLUTION), create the appropriate DTWAIN array to store/get the values, and call the appropriate DTWAIN_GetCap... or DTWAIN_SetCap... function.</p>
+<p>&nbsp;</p>
+<p>Overall, it is not difficult to add functions on your own that get or set certain capabilities:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">/* Assume that Source is an open Source.</span></p>
+<p><span style="font-weight: bold;"> &nbsp; Set the Gamma value (which is a floating point value) */</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL SetGammaValue(DTWAIN_FLOAT NewValue) </span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">DTWAIN_ARRAY NewValue;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">DTWAIN_BOOL bResult;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">/* return FALSE if not supported */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">if ( !DTWAIN_IsCapSupported(Source, DTWAIN_CV_ICAPGAMMA))</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">return FALSE;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">/* Create the array and assign the value to array */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">GammaValue = DTWAIN_ArrayCreateFromCap(DTWAIN_CV_ICAPGAMMA, 1);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">/* Set the gamma value in array */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size: 12pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;"><a href="dtwain_arraysetat.htm">DTWAIN_ArraySetAt</a></span><span style="font-weight: bold;">(GammaValue, 0, &amp;NewValue);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">/* Set the cap */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">bResult = DTWAIN_SetCapValue(Source, DTWAIN_CV_ICAPGAMMA, </span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">DTWAIN_CAPSET, GammaValue);</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">/* Destroy array and return */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">DTWAIN_ArrayDestroy(GammaValue);</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-weight: bold;">return bResult;</span></p>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: The TWAIN specification defines a data type called TW_FIX32. &nbsp;What is the equivalent DTWAIN type?</p>
+<p><span style="font-weight: bold;">A</span>: DTWAIN_FLOAT. &nbsp;DTWAIN handles all translation issues from a regular floating-point number and the TW_FIX32 type defined by TWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: I need to set up a capability, but the data type that the capability supports is the TW_FRAME type. &nbsp;How do I set up this type in DTWAIN?</p>
+<p><span style="font-weight: bold;">A</span>: Use the <a href="dtwain_frame_storage_type.htm">DTWAIN_FRAME</a> type to define a TW_FRAME. If the capability supports multiple values, use the DTWAIN_ARRAYFRAME type to store/retrieve the DTWAIN_FRAMEs.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: I need to set a capability while the Source is in  <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">State 6</a>or <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">State 7</a> (currently acquiring an image). &nbsp;When do I get a chance to call <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a> or <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> in this case?</p>
+<p><span style="font-weight: bold;">A</span>: Capture the <a href="dtwain_notification_codes.htm">DTWAIN_TN_TRANSFERREADY</a> (Source will transition from State 6 to State 7) and the <a href="dtwain_notification_codes.htm">DTWAIN_TN_TRANSFERDONE</a> (Source will transition from State 7 to State 6) notifications. You can then call the appropriate DTWAIN Capability function within your handler.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: When calling <a href="dtwain_getsupportedcaps.htm">DTWAIN_EnumSupportedCaps</a>, the Source UI was enabled. &nbsp;Why?</p>
+<p><span style="font-weight: bold;">A</span>: Some Sources do not have the ability to query the supported capabilities without going through an exhaustive search. &nbsp;If DTWAIN has to do an exhaustive search for the supported capabilities, the Source UI <span style="text-decoration: underline;">may</span> become enabled, but is immediately disabled when the Search terminates.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: I would like to set every supported capability to their default values. &nbsp;How do I do this?</p>
+<p><span style="font-weight: bold;">A</span>: Call <a href="dtwain_setallcapstodefault.htm">DTWAIN_SetAllCapsToDefault</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: I have written a Source, and I now want to thoroughly test the Source to check for bugs when setting or getting device capabilities. &nbsp;To do this, I need to try different container types to check the Source's error handling. &nbsp;Can DTWAIN allow the application to choose the TWAIN container to use?</p>
+<p><span style="font-weight: bold;">A</span>: Yes. &nbsp;The <a href="dtwain_setcapvaluesex.htm">DTWAIN_SetCapValuesEx</a> and <a href="dtwain_getcapvaluesex.htm">DTWAIN_GetCapValuesEx</a> allow you to specify the container to use for the capability values. &nbsp;These functions can be used for these purposes. &nbsp;Note that these functions are advanced functions made for those who are sure of the container types to use for a particular capability. Specifying the wrong container type when setting or getting a capability in a Source that you did not develop may result in a General Protection Fault or throw an exception, so be very careful!</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Q</span>: I have a Source that supports custom device capabilities (capabilities greater than 16384). &nbsp;Can DTWAIN allow setting and getting the values for custom capabilities?</p>
+<p><span style="font-weight: bold;">A</span>: Yes. Be aware that these capabilities are dependent on the manufacturer of the device.  </p>
 
 </td></tr></table>
 

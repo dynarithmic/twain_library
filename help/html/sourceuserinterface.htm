@@ -1,50 +1,48 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Source User Interface</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "sourceuserinterface.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?sourceuserinterface.htm"; }
+  else { parent.quicksync('a7.6'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">Source User Interface</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="twainstatetransitioninformatio.htm">Previous</a>&nbsp;
      <a href="applicationmessageloop.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>When the application desires to acquire images from the image device, the Source's user interface (UI) is usually shown. &nbsp;Some UI's can be very simple, while others may have a myriad of controls, buttons, preview scanning areas, etc. &nbsp;The UI is usually displayed during TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, this);" class="popuplink">State 5</a>.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>When the application desires to acquire images from the image device, the Source's user interface (UI) is usually shown. &nbsp;Some UI's can be very simple, while others may have a myriad of controls, buttons, preview scanning areas, etc. &nbsp;The UI is usually displayed during TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">State 5</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>When the Source displays the UI, the UI is usually implemented as a modal or modeless dialog box, or a multiple set of modal / modeless dialogs.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -52,7 +50,7 @@
 <p>If the Source is implemented as a modal dialog box, the application cannot perform any other actions until the UI is closed (except of course for interacting with the Source UI and starting the image acquisition). &nbsp;The Source is automatically closed by DTWAIN after an acquisition is done (remember that an acquisition may consist of retrieving multiple pages).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Source UI as a modeless dialog (or a set of modeless windows):</span></p>
-<p>If the Source UI is implemented as a modeless dialog, the user can perform any application action while the Source UI is opened. &nbsp;The Source UI can remain open until the user decides to close it. &nbsp;The Source UI should only be closed by the user, and not be closed by the application unless the application is terminating. &nbsp;However, this is only a good guideline to follow (TWAIN has stated that this should be the way an application handle a modeless UI). &nbsp;DTWAIN allows you to override this behavior for modeless dialog boxes by calling <a href="dtwain_closesource.htm" class="topiclink">DTWAIN_CloseSource</a>, <a href="dtwain_endtwainsession.htm" class="topiclink">DTWAIN_EndTwaidSession</a>, <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>, or <a href="dtwain_setmaxacquisitions.htm" class="topiclink">DTWAIN_SetMaxAcquisitions</a>. &nbsp;These functions can be called to close a Source, a TWAIN session, or close the entire DTWAIN DLL mechanism, respectively. &nbsp;Care must be taken that these functions are not called while an image is being acquired, i.e. the scanner is not 'in motion' when closing the Source. &nbsp;The DTWAIN Source State functions help out in this regard.</p>
+<p>If the Source UI is implemented as a modeless dialog, the user can perform any application action while the Source UI is opened. &nbsp;The Source UI can remain open until the user decides to close it. &nbsp;The Source UI should only be closed by the user, and not be closed by the application unless the application is terminating. &nbsp;However, this is only a good guideline to follow (TWAIN has stated that this should be the way an application handle a modeless UI). &nbsp;DTWAIN allows you to override this behavior for modeless dialog boxes by calling <a href="dtwain_closesource.htm">DTWAIN_CloseSource</a>, <a href="dtwain_endtwainsession.htm">DTWAIN_EndTwainSession</a>, <a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>, or <a href="dtwain_setmaxacquisitions.htm">DTWAIN_SetMaxAcquisitions</a>. &nbsp;These functions can be called to close a Source, a TWAIN session, or close the entire DTWAIN DLL mechanism, respectively. &nbsp;Care must be taken that these functions are not called while an image is being acquired, i.e. the scanner is not 'in motion' when closing the Source. &nbsp;The DTWAIN Source State functions help out in this regard.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 
 </td></tr></table>

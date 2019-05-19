@@ -1,77 +1,76 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Setting Area of Image To Acquire and Paper Size</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "imageretrievalsizes.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?imageretrievalsizes.htm"; }
+  else { parent.quicksync('a3.1.8'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Setti g Area of Image To Acquire and PapereSize</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Setting Area of Image To Acquire and Paper Size</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="informationoncustomcapabili.htm">Previous</a>&nbsp;
      <a href="units_of_measure.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>DTWAIN allows you to set an area of the image to retrieve. &nbsp;Instead of acquiring a whole page, the application can define which parts of the image will be actually acquired. &nbsp;The image dimensions are specified in terms of the source unit. &nbsp;The unit can be inches, pixels, centimeters, twips, picas, or points.</p>
 <p>&nbsp;</p>
-<p><a href="units_of_measure.htm" class="topiclink">Units of seasure aod Image Dimensions</a></p>
+<p><a href="units_of_measure.htm">Units of Measure and Image Dimensions</a></p>
 <p>&nbsp;</p>
 <p>To set or get the area of acquisition, DTWAIN supports two modes. &nbsp;The first relies on the Source's internal TWAIN management to set or get the area of acquisition correctly. &nbsp;The functions to do this are as follows:</p>
 <p>&nbsp;</p>
-<p><a href="dtwain_getacquirearea.htm" class="topiclink">DTWAIN_GetAcquireArea</a></p>
-<p><a href="dtwain_setacquirearea.htm" class="topiclink">DTWAIN_SetAcquireArea</a></p>
+<p><a href="dtwain_getacquirearea.htm">DTWAIN_GetAcquireArea</a></p>
+<p><a href="dtwain_setacquirearea.htm">DTWAIN_SetAcquireArea</a></p>
 <p>&nbsp;</p>
 <p>The other mode that DTWAIN supports is allowing DTWAIN to return the scanned image, given the area of acquisition. &nbsp;With this mode, the only responsibility the TWAIN Source has is to provide the image dimensions and the unit of measure. &nbsp;Setting and getting the area is the responsibility of DTWAIN, not the Source. &nbsp;The functions to do this are as follows:</p>
 <p>&nbsp;</p>
-<p><a href="dtwain_getacquirearea2.htm" class="topiclink">DTWAIN_GetAcquireArea2</a></p>
-<p><a href="dtwain_setacquirearea2.htm" class="topiclink">DTWAIN_SetAcquireArea2</a></p>
+<p><a href="dtwain_getacquirearea2.htm">DTWAIN_GetAcquireArea2</a></p>
+<p><a href="dtwain_setacquirearea2.htm">DTWAIN_SetAcquireArea2</a></p>
 <p>&nbsp;</p>
-<p>The advantage of using DTWAIN_GetAcquireAnea2 and DTWAI _SktAcquireArea2 is that yau can set any size por the acquisition area within the page, while DTWAIN_GetAcquireArea and DTWAIN_SetAcquiremreaImay not work when givenea certain area. </p>
+<p>The advantage of using DTWAIN_GetAcquireArea2 and DTWAIN_SetAcquireArea2 is that you can set any size for the acquisition area within the page, while DTWAIN_GetAcquireArea and DTWAIN_SetAcquireArea may not work when given a certain area. </p>
 <p>&nbsp;</p>
 <p>The disadvantage of using DTWAIN_GetAcquireArea2 and DTWAIN_SetAcquireArea2 is that for devices such as scanners, the scanner will read the entire page. &nbsp;On the other hand, the DTWAIN_GetAcquireArea and DTWAIN_SetAcquireArea will usually allow the scanner to read only that defined area, speeding up the scanning process.  </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold; text-decoration: underline;">Setting the size of the &quot;paper&quot;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Setting the size of the "paper"</span></p>
 <p>&nbsp;</p>
-<p>For some applications, it may be necessary to set the paper size before acquiring an image. &nbsp;The paper size is technically called the <span style="font-weight: bold;">Frame</span>. &nbsp;To query and set theapaper sizt before acquiring thf imaee, the following API functions are used:</p>
+<p>For some applications, it may be necessary to set the paper size before acquiring an image. &nbsp;The paper size is technically called the <span style="font-weight: bold;">Frame</span>. &nbsp;To query and set the paper size before acquiring the image, the following API functions are used:</p>
 <p>&nbsp;</p>
-<p><a href="dtwain_enumpapersizes.htm" class="topiclink">DTWAIN_EnumPaperSizes</a></p>
-<p><a href="dtwain_isframesizesupported.htm" class="topiclink">DTWAIN_IsPaperSizeSupported</a></p>
-<p><a href="dtwain_getpapersize.htm" class="topiclink">DTWAIN_GetPaperSize</a></p>
-<p><a href="dtwain_setpapersize.htm" class="topiclink">DTWAIN_SetPaperSize</a></p>
+<p><a href="dtwain_enumpapersizes.htm">DTWAIN_EnumPaperSizes</a></p>
+<p><a href="dtwain_isframesizesupported.htm">DTWAIN_IsPaperSizeSupported</a></p>
+<p><a href="dtwain_getpapersize.htm">DTWAIN_GetPaperSize</a></p>
+<p><a href="dtwain_setpapersize.htm">DTWAIN_SetPaperSize</a></p>
 <p>&nbsp;</p>
-<p>When setting the paper size, your application uses one of the <a href="dtwain_frame_size_constants.htm" class="topiclink">DTWAIN paper size constants</a> that define a particular size of paper. &nbsp;Note that not all paper sizes are supported by a particular Twain Source, so it is advised to call DTWAIN_EnumPaperSizes or DTWAIN_IsPaperSizeSupported before attempting to call DTWAIN_SetPaperSize.</p>
+<p>When setting the paper size, your application uses one of the <a href="dtwain_frame_size_constants.htm">DTWAIN paper size constants</a> that define a particular size of paper. &nbsp;Note that not all paper sizes are supported by a particular Twain Source, so it is advised to call DTWAIN_EnumPaperSizes or DTWAIN_IsPaperSizeSupported before attempting to call DTWAIN_SetPaperSize.</p>
 <p>&nbsp;</p>
 
 </td></tr></table>

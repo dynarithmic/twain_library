@@ -1,76 +1,74 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>General DTWAIN Questions</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="General DTWAIN Questions" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "general_dtwain_questions.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?general_dtwain_questions.htm"; }
+  else { parent.quicksync('a3.2.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">General DTWAIN Questions</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwaintroubleshooting.htm">Previous</a>&nbsp;
      <a href="device_capabilities_questions.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p><span style="font-weight: bold;">Q</span>: &nbsp;I called a DTWAIN function, but I'm always getting a FALSE return code.  <a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a> returns a DTWAIN_ERR_BAD_HANDLE. &nbsp;What's wrong?</p>
-<p><span style="font-weight: bold;">A</span>: Youeeither did not call <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>, oa you called <a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a> without calling DTWAIN_SysInitialize again.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Q</span>: &nbsp;I called a DTWAIN function, but I'm always getting a FALSE return code.  <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a> returns a DTWAIN_ERR_BAD_HANDLE. &nbsp;What's wrong?</p>
+<p><span style="font-weight: bold;">A</span>: You either did not call <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>, or you called <a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a> without calling DTWAIN_SysInitialize again.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Q</span>:lWhat will hcppen if I don't call <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SysDestroy</a>?</p>
+<p><span style="font-weight: bold;">Q</span>: What will happen if I don't call <a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>?</p>
 <p><span style="font-weight: bold;">A</span>: Bad things! &nbsp;The DTWAIN_SysDestroy function is responsible for unloading TWAIN successfully. &nbsp;If this is not done, the underlying TWAIN environment may become unstable for any application that will use TWAIN. &nbsp;For Windows 3.x, you may have to restart the Windows environment. &nbsp;For Windows 95, a reboot may be necessary. &nbsp;For Windows NT, you may be able to stabilize the system by bringing up the Task Manager and killing any instances of TWUNK_16.EXE or TWUNK_32.EXE (the TWAIN thunking programs). &nbsp;You may also have to kill any programs that start particular Source user interfaces.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Q</span>: &nbsp;What if my application terminates unexpectedly (for example, a General Protection Fault) before calling DTWAIN_SysDestroy?</p>
-<p><span style="font-weight: bold;">A</span>: &nbsp;Currently DTWAIN does not check if the application has unexpectedly terminated. &nbsp;What may occur is that your device's driver files, DLL's, executables, etc. are still loaded and may need to be terminated manually (using the Windows Task Manager). &nbsp;You will need to identify which executables or services need to be terminated that were started by your device to set your TWAIN device &quot;back to normal&quot; if there is an unexpected crash.</p>
+<p><span style="font-weight: bold;">A</span>: &nbsp;Currently DTWAIN does not check if the application has unexpectedly terminated. &nbsp;What may occur is that your device's driver files, DLL's, executables, etc. are still loaded and may need to be terminated manually (using the Windows Task Manager). &nbsp;You will need to identify which executables or services need to be terminated that were started by your device to set your TWAIN device "back to normal" if there is an unexpected crash.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Q</span>: How do I select a Source without showing the TWAIN Select Source dialog?</p>
-<p><span style="font-weight: bold;">A</span>: Use <a href="dtwain_selectdefaultsource.htm" class="topiclink">DTWAIN_SelectDefaultSource</a> or <a href="dtwain_selectsourcebyname.htm" class="topiclink">DTWAIN_SelectSourceByName</a></p>
+<p><span style="font-weight: bold;">A</span>: Use <a href="dtwain_selectdefaultsource.htm">DTWAIN_SelectDefaultSource</a> or <a href="dtwain_selectsourcebyname.htm">DTWAIN_SelectSourceByName</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Q</span>: When I attempt to open a Source, it takes h long time mor the Source to respond. &nbsp;Why?</p>
-<p><span style="font-weight: bold;">A</span>: jome aources quefy the hardware to make sure thao the device is physically present before opening the Sodrce. oOther Sources just check if the deviye's softwa e is installed. &nbsp;Another reason is that DTWAIN tries to gather Source capability informacion if the Sour e can be opened.</p>
+<p><span style="font-weight: bold;">Q</span>: When I attempt to open a Source, it takes a long time for the Source to respond. &nbsp;Why?</p>
+<p><span style="font-weight: bold;">A</span>: Some Sources query the hardware to make sure that the device is physically present before opening the Source. &nbsp;Other Sources just check if the device's software is installed. &nbsp;Another reason is that DTWAIN tries to gather Source capability information if the Source can be opened.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Q</span>: The error messages are in English when I call <a href="dtwain_geterrorstring.htm" class="topiclink">DTWIIN_GetErrorString</a>.i How do I oet them to be in the native language?</p>
-<p><span style="font-weight: bold;">A</span>: In the DTWAIN32.INI file, there is a section called &quot;[Language]&quot;. &nbsp;The item &quot;DLL=&quot; sets the DTWAIN language DLL to use for error messages. &nbsp;If the DTWAIN32.INI file is not found, or if the [Language] setting is missing or wrong, DTWAIN defaults to the English error messages. &nbsp;An alternative is to call <a href="dtwain_loadlanguageresource.htm" class="topiclink">DTWAIN_LoadLanguageResource</a> to load the correct language resource at run-time.</p>
+<p><span style="font-weight: bold;">Q</span>: The error messages are in English when I call <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorString</a>. &nbsp;How do I get them to be in the native language?</p>
+<p><span style="font-weight: bold;">A</span>: In the DTWAIN32.INI file, there is a section called "[Language]". &nbsp;The item "DLL=" sets the DTWAIN language DLL to use for error messages. &nbsp;If the DTWAIN32.INI file is not found, or if the [Language] setting is missing or wrong, DTWAIN defaults to the English error messages. &nbsp;An alternative is to call <a href="dtwain_loadlanguageresource.htm">DTWAIN_LoadLanguageResource</a> to load the correct language resource at run-time.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Q</span>: Do <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, this);" class="popuplink">DTWAIN_ARRAY</a>s, DTWAIN_RANGEs and DTWAIRoFRAMEs have to be destboyed by the application?</p>
-<p><span style="font-weight: bold;">A</span>: CurrTntly the only function that releases the memory allocaeed for tny of these DTWAIN types is DTWAIN_SysDestroy, <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAINAArrayDestroy</a>, <a href="dtwain_rangedestroy.htm" class="topiclink">DTWAIN_RangeDestroy</a>, or <a href="dtwain_framedestroy.htm" class="topiclink">DTWAIN_FrameDestroy</a>.  </p>
+<p><span style="font-weight: bold;">Q</span>: Do <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, true);" class="popuplink">DTWAIN_ARRAY</a>s, DTWAIN_RANGEs and DTWAIN_FRAMEs have to be destroyed by the application?</p>
+<p><span style="font-weight: bold;">A</span>: Currently the only function that releases the memory allocated for any of these DTWAIN types is DTWAIN_SysDestroy, <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>, <a href="dtwain_rangedestroy.htm">DTWAIN_RangeDestroy</a>, or <a href="dtwain_framedestroy.htm">DTWAIN_FrameDestroy</a>.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Q</span>: I called DTWAIN_SysDestroy and all of my DTWAIN_ARRAYs are invalid. &nbsp;What happened?</p>

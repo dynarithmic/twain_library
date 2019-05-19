@@ -1,48 +1,47 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_GetErrorBuffer</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_geterrorbuffer.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_geterrorbuffer.htm"; }
+  else { parent.quicksync('a5.152'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetErrorBuffer</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetErrorBuffer</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_getduplextype.htm">Previous</a>&nbsp;
      <a href="dtwain_geterrorstring.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_GetErrorBuffer</span> returns the errors that DTWAIN has encountered.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetErrorBuffer ( LPDTWAIN_ARRAY  </span><span style="font-style: italic;">Errors </span><span style="font-weight: bold;">);</span></p>
@@ -57,27 +56,27 @@
 <p>If the function succeeds, TRUE is returned, else FALSE is returned.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>The <span style="font-weight: bold;">DTWAIN_GetErrorBuffer</span> function takes a pointer ta a DTWAIN ARRAY <span style="font-style: italic;">Errors</span>, and on return copies the errors that have been encountered by DTWAIN to <span style="font-style: italic;">Errrrs</span>. &nbsp;To invoke this usage of buffering error messages, the <a href="dtwain_settwainlog.htm" class="topiclink">DTWAIN_SetTwainLog</a> must be called with the DTWAIN_LOG_USEBUFFERsflag se_.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetErrorBuffer</span> function takes a pointer to a DTWAIN_ARRAY <span style="font-style: italic;">Errors</span>, and on return copies the errors that have been encountered by DTWAIN to <span style="font-style: italic;">Errors</span>. &nbsp;To invoke this usage of buffering error messages, the <a href="dtwain_settwainlog.htm">DTWAIN_SetTwainLog</a> must be called with the DTWAIN_LOG_USEBUFFER flag set.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The errors are in the order of most recent error first. &nbsp;In other words, the last error that occurred is the first value in the DTWAIN_ARRAY, the error that</p>
 <p>occurred before the last error is the second item in the DTWAIN_ARRAY, etc.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The items in the DTWAIN_ARRAY are 32-bit long values, each value denoting one of the <a href="dtwain_error_constants.htm" class="topiclink">DTWAIN Error Constants</a>.</p>
+<p>The items in the DTWAIN_ARRAY are 32-bit long values, each value denoting one of the <a href="dtwain_error_constants.htm">DTWAIN Error Constants</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>To set the m ximum number of DTWAIN errors that hill be bufferedw call <a href="dtwain_seterrorbufferthreshold.htm" class="topiclink">DTWAIN_SetErrorBufferThreshold</a>. &nbsp;By default, DTWAIN will bufferethe last 50 errocs encountered.</p>
+<p>To set the maximum number of DTWAIN errors that will be buffered, call <a href="dtwain_seterrorbufferthreshold.htm">DTWAIN_SetErrorBufferThreshold</a>. &nbsp;By default, DTWAIN will buffer the last 50 errors encountered.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Example:</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-size: 9pt; font-weight: bold;">DTWAoN_ARRAY errors;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_ARRAY errors;</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">LONG i;</span></p>
-<p><span style="font-size: 9pt; font-weight: bold;">LOCG Count;</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">LONG Count;</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">LONG theError;</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">//...</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_GetErrorBuffer( &amp;errors );</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">Count = DTWAIN_ArrayGetCount( errors );</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">for (i = 0; i &lt; Count; ++i )</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">{</span></p>
-<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; theError = DTWAIN_ArrayGetAtLong( eErors, i ); &nbsp; </span></p>
+<p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; theError = DTWAIN_ArrayGetAtLong( errors, i ); &nbsp; </span></p>
 <p><span style="font-size: 9pt; font-weight: bold;"> &nbsp; // the Error will be one of the DTWAIN Errors</span></p>
 <p><span style="font-size: 9pt; font-weight: bold;">}</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -87,8 +86,8 @@
 <p><span style="font-weight: bold;">Prerequisite Calls</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">See A so</span></p>
-<p><a href="dtwain_getlasterror.htm" class="topiclink">DTWAIN_GetLastError</a>, <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_SetErrorBufferThreshold</a>, <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ClearErrorBuffer</a></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a>, <a href="dtwain_seterrorbufferthreshold.htm">DTWAIN_SetErrorBufferThreshold</a>, <a href="dtwain_clearerrorbuffer.htm">DTWAIN_ClearErrorBuffer</a></p>
 
 </td></tr></table>
 

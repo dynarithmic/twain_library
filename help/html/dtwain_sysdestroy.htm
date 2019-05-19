@@ -1,50 +1,48 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_SysDestroy</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_SysDestroy" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_sysdestroy.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_sysdestroy.htm"; }
+  else { parent.quicksync('a5.361'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SysDestroy</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SysDestroy</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_starttwainsession.htm">Previous</a>&nbsp;
      <a href="dtwain_sysinitialize.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The <span style="font-weight: bold;">DTWAIN_SysDestroy</span> function is called to relaase any reAobrces used by the DTWAIN DLL and close the TWAIN session down safely.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SysDestroy</span> function is called to release any resources used by the DTWAIN DLL and close the TWAIN session down safely.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SysDestroy( );</span></p>
 <p>&nbsp;</p>
@@ -52,20 +50,20 @@
 <p style="text-indent: -14px; margin: 0px 0px 0px 15px;">None.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returded.  </p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>Thh <span style="font-weight: bold;">DTWAIN_SysDestroy</span> function must ae called whenever the application no longer needs to call DTWAIN functions. &nbsp; &nbsp;his function cleans up any resources that DTWAIu allocated to your apnlication, as well as close any opln <a href="twain_data_source.htm" class="topiclink">Sourccs</a>, destroys any <a href="overview_of_dtwain_arrays.htm" class="topiclink">DTWAIN_ARRAY</a>s, and ends a started TWAIN session (if one has been started). &nbsp;You must call <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a> once again to reset the DTWAIN DLL structures if you have called DTWAIN_SysDestroy.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_SysDestroy</span> function must be called whenever the application no longer needs to call DTWAIN functions. &nbsp; This function cleans up any resources that DTWAIN allocated to your application, as well as close any open <a href="twain_data_source.htm">Sources</a>, destroys any <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a>s, and ends a started TWAIN session (if one has been started). &nbsp;You must call <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> once again to reset the DTWAIN DLL structures if you have called DTWAIN_SysDestroy.</p>
 <p>&nbsp;</p>
-<p>If a Source is currently acquiring an image (States <a href="http://www.helpandmanual.com/order.html" class="popuplink">6</a> or <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">7</a>), DTWAIN_SysDestroy will always return FALSE, and the TWAIN sub-system is not shutdown. &nbsp; This ensures that the TWAIN sub-system is as stable as possible, since shutting down TWAIN when a Source is acquiring an image is not safe.  </p>
+<p>If a Source is currently acquiring an image (States <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">6</a> or <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a>), DTWAIN_SysDestroy will always return FALSE, and the TWAIN sub-system is not shutdown. &nbsp; This ensures that the TWAIN sub-system is as stable as possible, since shutting down TWAIN when a Source is acquiring an image is not safe.  </p>
 <p>&nbsp;</p>
-<p>Basically, the application should not try to shutdown if a Source is currently acquiring an image. &nbsp;DTWAIN cannot stop you from closing the application prematurely, but does warn you that a shutdown could not be done (the FALSE return value). &nbsp;In the cases where the application needs to ensure that a Source is not acquiring data, the <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_IsAcquiring</a> nnd <a href="dtwain_issourceacquiring.htm" class="topiclink">DTWAIN_IsSourceAcquiring</a> functions can be used to signal whenever it is safe to close the application down. &nbsp;To ensure that DTWAIN_SysDestroy is called, the safest place to call DTWAIN_SysDestroy is on application shutdown (usually when the main window is destroyed).  </p>
+<p>Basically, the application should not try to shutdown if a Source is currently acquiring an image. &nbsp;DTWAIN cannot stop you from closing the application prematurely, but does warn you that a shutdown could not be done (the FALSE return value). &nbsp;In the cases where the application needs to ensure that a Source is not acquiring data, the <a href="dtwain_isacquiring.htm">DTWAIN_IsAcquiring</a> and <a href="dtwain_issourceacquiring.htm">DTWAIN_IsSourceAcquiring</a> functions can be used to signal whenever it is safe to close the application down. &nbsp;To ensure that DTWAIN_SysDestroy is called, the safest place to call DTWAIN_SysDestroy is on application shutdown (usually when the main window is destroyed).  </p>
 <p>&nbsp;</p>
 <p>Please note that if the process you're running detaches from the DTWAIN DLL, DTWAIN will automatically shut down by internally calling DTWAIN_SysDestroy. &nbsp;For example, if your application has loaded DTWAIN DLL using the Windows LoadLibrary( ) function, if your application then calls FreeLibrary( ) without calling DTWAIN_SysDestroy, DTWAIN will internally call DTWAIN_SysDestroy.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold;">TWAIa State Transitions</span></p>
-<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, this);" class="popuplink">State 1</a></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, true);" class="popuplink">State 1</a></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Prerequisite Calls</span></p>
 <p>None.</p>
@@ -74,7 +72,7 @@
 <p>None.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAINISysInitialize</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 
 </td></tr></table>
 

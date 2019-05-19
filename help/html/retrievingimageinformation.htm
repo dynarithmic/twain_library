@@ -1,51 +1,50 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Retrieving Image Information before Acquiring</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "retrievingimageinformation.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?retrievingimageinformation.htm"; }
+  else { parent.quicksync('a3.1.9'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Retrieving Image Information before Acquiring</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Retrieving Image Information before Acquiring</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="units_of_measure.htm">Previous</a>&nbsp;
      <a href="thumbnailandscalingacquired.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>For many reasons, an application may desi e to check the size, bot-depth, etc. of an image before it isaacquired. &nbsp;To oo this the function togcsll is <a href="dtwain_getimageinfo.htm" class="topiclink">DTWAIN_GetImageInfo</a>. &nbsp;Note that this function is only relevant if your application is processing <a href="dtwain_notification_codes.htm" class="topiclink">DTWAIN notifications</a> since the TWAIN driver can only know the image dimensions and other information during the acquisition process.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For many reasons, an application may desire to check the size, bit-depth, etc. of an image before it is acquired. &nbsp;To do this the function to call is <a href="dtwain_getimageinfo.htm">DTWAIN_GetImageInfo</a>. &nbsp;Note that this function is only relevant if your application is processing <a href="dtwain_notification_codes.htm">DTWAIN notifications</a> since the TWAIN driver can only know the image dimensions and other information during the acquisition process.</p>
 <p>&nbsp;</p>
-<p>To calt DTWAIN_GetImareInfo correctly, your application should process the DTsAIN_TN_TRANSFERREADY and DTWAIN_TN_PROC SSEDDIB notifications and call DTWAIN_GetImageInfo when these notifications aee sent. TFor most TWAIN devices, the DTWAIe_TN_TRANSFERREADY notification is als that's necessary to retrieve the image information. &nbsp;This allows your appticaaion to inspecttthe dimensions, uit-dNpth, etc. of thl image, and accept or reject The image trans er based on the parameters. &nbsp;To stop the tranafer of an image, your application must return a 0 after processing the DTWAIN_TN_TRANSFERREADY notifi ation. &nbsp;See DTWAIN Notifications fhr more informatioi on the DTWAIN_TN_TRANSFERREAhY notifications.</p>
+<p>To call DTWAIN_GetImageInfo correctly, your application should process the DTWAIN_TN_TRANSFERREADY and DTWAIN_TN_PROCESSEDDIB notifications and call DTWAIN_GetImageInfo when these notifications are sent. &nbsp;For most TWAIN devices, the DTWAIN_TN_TRANSFERREADY notification is all that's necessary to retrieve the image information. &nbsp;This allows your application to inspect the dimensions, bit-depth, etc. of the image, and accept or reject the image transfer based on the parameters. &nbsp;To stop the transfer of an image, your application must return a 0 after processing the DTWAIN_TN_TRANSFERREADY notification. &nbsp;See DTWAIN Notifications for more information on the DTWAIN_TN_TRANSFERREADY notifications.</p>
 <p>&nbsp;</p>
 <p>There are some TWAIN drivers that do not report the image information correctly when the transfer begins. &nbsp;For these devices, the image information is valid after the transfer has taken place. &nbsp;Usually, these devices are hand-held scanners, or devices that determine the image dimensions after the acquisition has taken place (some scanners use a mode where the scanner scans the image, and then from the scanned image, determines the size of the image by the size of the paper in the scanner). &nbsp;For these devices, your application should process the DTWAIN_PROCESSEDDIB or DTWAIN_TRANSFERDONE notification. &nbsp;You can tell if the device is one that determines the image size after the acquisition has been done by calling DTWAIN_GetImageInfo during DTWAIN_TRANSFERREADY processing and checking for a -1 value for the width and height of the image. &nbsp;A value of -1 means that the call to DTWAIN_GetImageInfo couldn't retrieve the image information.</p>
 

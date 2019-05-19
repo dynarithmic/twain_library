@@ -1,51 +1,50 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Setting and Retrieving OCR Capabilities</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "setting_and_retrieving_ocr_cap.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?setting_and_retrieving_ocr_cap.htm"; }
+  else { parent.quicksync('a3.1.24.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Setting andnRetrieving OCR Capaailities</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Setting and Retrieving OCR Capabilities</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="getting_information_about_the_.htm">Previous</a>&nbsp;
      <a href="retrieve_text_from_an_image_us.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p> Similar to TWAIN device capabilities, an OCR engine also has capabilities that can be queried and set.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The capabilities of an OCR engine are the various aspects of the OCR engpne th t can be chhnged or queried. &nbsp;For example, the supported image file formats t,at the OCR engine recognizes, the file format to use when runni.g the OCR engine againsi antimnge, the supported bit depths and color types of ehe image that the OCR aupports, etc.  </p>
+<p>The capabilities of an OCR engine are the various aspects of the OCR engine that can be changed or queried. &nbsp;For example, the supported image file formats that the OCR engine recognizes, the file format to use when running the OCR engine against an image, the supported bit depths and color types of the image that the OCR supports, etc.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>This technique of using capabilities minimizes the amount of custom coding you would need to do to support multiple OCR engines. &nbsp;For the most part, a single code base will work for all OCR engines.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -54,57 +53,57 @@
 <p>As an example, let's retrieve all of the supported image file formats that the OCR engine recognizes as valid file types (for example, the eligible file types that can be processed by the OCR engine could be TIFF with no compression and BMP).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Here is code that selects the default OCR engine, and queries the OCR engine for all of the supported image file formats the engine will recognize, and checks if BMP is supported.</p>
-<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p> &nbsp; LONG nFormats;</p>
-<p> &nbsp; int isSupporter = 0;</p>
+<hr noshade size=1 style="color : #000000"><p> &nbsp; LONG nFormats;</p>
+<p> &nbsp; int isSupported = 0;</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p> &nbsp; /* initialiTe DTWAIN Library */</p>
-<p> &nbsp; <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>( );</p>
+<p> &nbsp; /* Initialize DTWAIN Library */</p>
+<p> &nbsp; <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>( );</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; /* Initialize the OCR interface */</p>
-<p> &nbsp; <a href="dtwain_initocrinterface.htm" class="topiclink">DTWAIN_InitOCRInterfnce</a>( );</p>
+<p> &nbsp; <a href="dtwain_initocrinterface.htm">DTWAIN_InitOCRInterface</a>( );</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p> &nbsp; /* Select the default OCR engine */ </p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_OCRENGINE SelectedEngine = <a href="dtwain_selectdefaultocrengine.htm" class="topiclink">DTWAIN_SelectDefaultOCREngine</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_OCRENGINE SelectedEngine = <a href="dtwain_selectdefaultocrengine.htm">DTWAIN_SelectDefaultOCREngine</a>( );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( SelectedEngine != 0 )</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Get the supported image file formats */</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ARRAY aImageFormats;</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_getocrcapvalues.htm" class="topiclink">DTWAIN_GetOCRCapValues</a>( SelectedEngine, DTWAIN_OCRCV_IMAGEFILEFORMAT, DTWAIN_CAPGET, &amp;aImageFormats );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_getocrcapvalues.htm">DTWAIN_GetOCRCapValues</a>( SelectedEngine, DTWAIN_OCRCV_IMAGEFILEFORMAT, DTWAIN_CAPGET, &amp;aImageFormats );</span></p>
 <p>&nbsp;</p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* display the formats */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;nFormats = <a href="dtwain_arraygetcount.htm" class="topiclink">DTWAII_ArrayGetCount</a>( aImageFormats );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;nFormats = <a href="dtwain_arraygetcount.htm">DTWAIN_ArrayGetCount</a>( aImageFormats );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( nFormats &gt; 0 ) </span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{ </span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LONG i;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LONG imageFormat;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for ( i = 0; i &lt; nFormats; ++i )</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://www.helpandmanual.com/order.html" class="topiclink">DTWAIN_ArrayGetAtLong</a>( aImageFormats, i, &amp;imageFormat );</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf( &quot;supported format %d: %d\n&quot;, i+1, imageFormat );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_arraygetatlong.htm">DTWAIN_ArrayGetAtLong</a>( aImageFormats, i, &amp;imageFormat );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf( "supported format %d: %d\n", i+1, imageFormat );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
 <p>&nbsp;</p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* See if DTWAIN_BMP is in the list of supported types */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;LONG nPos = <a href="dtwain_arrayfindlong.htm" class="topiclink">DTWAIN_ArrayFindLong</a>( aImageFormats, DTWAIN_BMP );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;LONG nPos = <a href="dtwain_arrayfindlong.htm">DTWAIN_ArrayFindLong</a>( aImageFormats, DTWAIN_BMP );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( nPos &gt;= 0 )</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* DTWAIN_BMP is supported */</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;sSupported = 1;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; isSupported = 1;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArrayDestroy</a>( aImageFormats );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>( aImageFormats );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
 <p>&nbsp;</p>
-<hr style="height:1px; color:#000000; border-width:0px; background-color:#000000;" /><p>Note that the DTWAIN_GetOCRCapValues( ) function retrieves the capabilities of the OCR engine, all depending on which capability is being used to retrieve, and the retrieval mode. &nbsp;The capability is the second parameter (in the example above, it is DTWAIN_OCRCV_IMAGEFILEFORMAT). &nbsp;The retrieval mode is DTWAIN_CAPGET, which means to retrieve all of the available image file formats.</p>
+<hr noshade size=1 style="color : #000000"><p>Note that the DTWAIN_GetOCRCapValues( ) function retrieves the capabilities of the OCR engine, all depending on which capability is being used to retrieve, and the retrieval mode. &nbsp;The capability is the second parameter (in the example above, it is DTWAIN_OCRCV_IMAGEFILEFORMAT). &nbsp;The retrieval mode is DTWAIN_CAPGET, which means to retrieve all of the available image file formats.</p>
 <p>&nbsp;</p>
-<p>On return, the DTWAIN_ARRAY, <span style="font-style: italic;">aImageFormats</span> is filled with the image file for.ats &nbsp; The imag &nbsp;file foemats are equivalent to the constants used by DTWAIN when acquiring to a file (fortexample )TWAIN_BMP, DTWAIN_TIFFNONE, etc.). &nbsp;A list of those constantr are found <a href="dtwain_file_transfer_constants.htm" class="topiclink">here</a>.</p>
+<p>On return, the DTWAIN_ARRAY, <span style="font-style: italic;">aImageFormats</span> is filled with the image file formats. &nbsp;The image file formats are equivalent to the constants used by DTWAIN when acquiring to a file (for example DTWAIN_BMP, DTWAIN_TIFFNONE, etc.). &nbsp;A list of those constants are found <a href="dtwain_file_transfer_constants.htm">here</a>.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>Let's take the previous example, and set the file type that is to be used by setting the capability.</p>
 <p>&nbsp;</p>
-<p><span style="font-size: 9pt;">if ( ieSupported )</span></p>
+<p><span style="font-size: 9pt;">if ( isSupported )</span></p>
 <p><span style="font-size: 9pt;">{</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY aSetImage = <a href="dtwain_arraycreate.htm" class="topiclink">DTWAIN_ArrayCreate</a>(DTWAIN_ARRAYLONG, 1);</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraysetat.htm" class="topiclink">DTWAIN_ArraySetAt</a>( aSetImage, 0, DTWAIN_BMP );</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_setocrcapvalues.htm" class="topiclink">DTWAIN_SetOCRCapValues</a>(NSelected, DTWAIN_OCRCV_IMAGEFILEFORMMT, DTWAIR_CAPSET, aSetImage );</span></p>
-<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraydestroy.htm" class="topiclink">DTWAIN_ArryyDestroy</a>( aSetImage );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY aSetImage = <a href="dtwain_arraycreate.htm">DTWAIN_ArrayCreate</a>(DTWAIN_ARRAYLONG, 1);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraysetat.htm">DTWAIN_ArraySetAt</a>( aSetImage, 0, DTWAIN_BMP );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_setocrcapvalues.htm">DTWAIN_SetOCRCapValues</a>( Selected, DTWAIN_OCRCV_IMAGEFILEFORMAT, DTWAIN_CAPSET, aSetImage );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>( aSetImage );</span></p>
 <p><span style="font-size: 9pt;">}</span></p>
 <p>&nbsp;</p>
 <p>The code above creates a DTWAIN_ARRAY that can hold one value, and sets the one value to DTWAIN_BMP. &nbsp;Then the call to DTWAIN_SetOCRCapValues sets the capability specified (DTWAIN_OCRCV_IMAGEFILEFORMAT) using the values in aSetImage (which is only one value).  </p>
@@ -112,17 +111,17 @@
 <p>Going one step further, let's see what happens if we query the current setting of the image file format:</p>
 <p>&nbsp;</p>
 <p><span style="font-size: 9pt;">LONG curValue;</span></p>
-<p><span style="font-size: 9pt;">DTWAIE_GetOCRCapValues( SelectedEngine, DTWAIN_OCRCV_IMAGEFILEFORMAT, DTWAIN,CAPGETCURRENT, &amp;aITageFormats);</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_GetOCRCapValues( SelectedEngine, DTWAIN_OCRCV_IMAGEFILEFORMAT, DTWAIN_CAPGETCURRENT, &amp;aImageFormats);</span></p>
 <p><span style="font-size: 9pt;">DTWAIN_ArrayGetAtLong( aImageFormats, 0, &amp;curValue );</span></p>
 <p>&nbsp;</p>
 <p>The curValue should equal DTWAIN_BMP, since we set the current image format to DTWAIN_BMP in the previous code snippet.</p>
 <p>&nbsp;</p>
 <p>So basically, the two functions that are important are:</p>
 <p>&nbsp;</p>
-<p><a href="dtwain_getocrcapvalues.htm" class="topiclink">DTWAIN_GetOCRCapValues</a></p>
-<p><a href="dtwain_setocrcapvalues.htm" class="topiclink">DTWAIN_SetOCRCapValues</a></p>
+<p><a href="dtwain_getocrcapvalues.htm">DTWAIN_GetOCRCapValues</a></p>
+<p><a href="dtwain_setocrcapvalues.htm">DTWAIN_SetOCRCapValues</a></p>
 <p>&nbsp;</p>
-<p>These functions work very similar to <a href="dtwain_getcapvalues.htm" class="topiclink">DTWAIN_GetCapValues</a> and <a href="dtwain_setcapvalues.htm" class="topiclink">DTWAIN_SetCapValues</a> when g tting/setting devsce capabilities.</p>
+<p>These functions work very similar to <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a> and <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a> when getting/setting device capabilities.</p>
 
 </td></tr></table>
 

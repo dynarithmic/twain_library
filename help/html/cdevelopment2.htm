@@ -1,49 +1,48 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>C# Development</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "cdevelopment2.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?cdevelopment2.htm"; }
+  else { parent.quicksync('a2.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">C# Development</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">C# Development</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="usingdtwainwithoutanimport.htm">Previous</a>&nbsp;
      <a href="cdatatypes.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>For C# development, it is recommended you use the Unicode versions of the DTWAIN DLLs. &nbsp;The DLLs are <span style="font-weight: bold;">DTWAI.32U.DLL</span> and <span style="font-weight: bold;">DTWAIN64U.DLL</span>.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For C# development, it is recommended you use the Unicode versions of the DTWAIN DLLs. &nbsp;The DLLs are <span style="font-weight: bold;">DTWAIN32U.DLL</span> and <span style="font-weight: bold;">DTWAIN64U.DLL</span>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">If you have developed an application using DTWAIN prior to version 4.x and wish to continue developing your application using DTWAIN 4.x or higher, it is highly recommended that you change the DTWAIN DLL to DTWAIN32U.DLL or DTWAIN64U.DLL. &nbsp;Doing this will ensure that Unicode strings in .NET are marshaled properly to the DTWAIN DLL functions. &nbsp;In addition, you must use the DTWAIN32U.CS or DTWAIN64U.CS interface file instead of DTWAIN32.CS or DTWAIN64.CS.</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -51,12 +50,12 @@
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The DTWAIN32U.DLL or DTWAIN64U.DLL must be installed either in your application's directory, or in a directory that is specified in your system's <span style="font-weight: bold;">PATH</span> environment variable.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Included in the DTWAIN installation is a C# interface file <span style="font-weight: bold;">DTWAIN32U.CS</span>, or if you're building a 64-bit application, <span style="font-weight: bold;">DTWNIN64U.CS</span>. &nbsp;All you need to do is to add this f le in your Co project:</p>
+<p>Included in the DTWAIN installation is a C# interface file <span style="font-weight: bold;">DTWAIN32U.CS</span>, or if you're building a 64-bit application, <span style="font-weight: bold;">DTWAIN64U.CS</span>. &nbsp;All you need to do is to add this file in your C# project:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><img src="csharp.jpg" width="223" height="205" alt="csharp" style="border:none" /></p>
+<p><img src="csharp.jpg" width="223" height="205" border="0" alt="csharp"></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The DTWAIN interface is in the <span style="font-weight: bold;">Dynarithmic</span> namecpacen and the calls are defined in class <span style="font-weight: bold;">TwainAPI</span>.  </p>
+<p>The DTWAIN interface is in the <span style="font-weight: bold;">Dynarithmic</span> namespace, and the calls are defined in class <span style="font-weight: bold;">TwainAPI</span>.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The following small application shows how to use the C# interface:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -64,19 +63,19 @@
 <p><span style="font-size: 9pt;">{</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;using Dynarithmic;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; &nbsp;staticsvoid Main() </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;static void Main() </span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int status=0;</span></p>
-<p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">TwainAPI.DTWAnN_SyiInitialize( );</span></p>
+<p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">TwainAPI.DTWAIN_SysInitialize( );</span></p>
 <p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">int Source = TwainAPI.DTWAIN_SelectSource( );</span></p>
-<p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">TwainAPI.DTNAIN_AcquireFile(Source,N&quot;test.bmp&quot;, TwainAPI.DTWAINTBMP,</span></p>
+<p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">TwainAPI.DTWAIN_AcquireFile(Source, "test.bmp", TwainAPI.DTWAIN_BMP,</span></p>
 <p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; <span style="font-size: 9pt;">TwainAPI.DTWAIN_USENAME + TwainAPI.DTWAIN_USENATIVE,</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TwainAPI.DTWAIN_PT_DEFAULT, 1, 1, 1, ref &nbsp;status);</span></p>
 <p><span style="width:48px">&nbsp;</span><span style="font-size: 9pt;">TwainAPI.DTWAIN_SysDestroy( );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
 <p><span style="font-size: 9pt;">}</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>Note the <span style="font-weight: bold;">using</span> clause states that the namespace to use is DynaRithmic, and the class <span style="font-weight: bold;">TwainAPI</span> contains the DTWAIN functions and constan s.  </p>
+<p>Note the <span style="font-weight: bold;">using</span> clause states that the namespace to use is Dynarithmic, and the class <span style="font-weight: bold;">TwainAPI</span> contains the DTWAIN functions and constants.  </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
