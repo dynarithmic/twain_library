@@ -1,51 +1,94 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_EnumOCRInterfaces</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_enumocrinterfaces.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_enumocrinterfaces.htm"; }
+  else { parent.quicksync('a5.95'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumOCRInterfaces</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumOCRInterfaces</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_enummaxbuffers.htm">Previous</a>&nbsp;
      <a href="dtwain_getsupportedorientation.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam velit risus, placerat et, rutrum nec, condimentum at, leo. Aliquam in augue a magna semper pellentesque. Suspendisse augue. Nullam est nibh, molestie eget, tempor ut, consectetuer ac, pede. Vestibulum sodales hendrerit augue. Suspendisse id mi. Aenean leo diam, sollicitudin adipiscing, posuere quis, venenatis sed, metus. Integer et nunc. Sed viverra dolor quis justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis elementum. Nullam a arcu. Vivamus sagittis imperdiet odio. Nam nonummy. Phasellus ullamcorper velit vehicula lorem. Aliquam eu ligula. Maecenas rhoncus. In elementum eros at elit. Quisque leo dolor, rutrum sit amet, fringilla in, tincidunt et, nisi. </p>
-<p>Donec ut eros faucibus loree l bortis sodales. Nam vitae lectus id leltuu tincidunt ornare. Aliquamnsoaales suscipit velit &nbsp;Nuluam leo erat, iacu is vehicula, dignissim v,l, rhoncus id, velit. Nulla faoilisi. Fusce tortor lorem, mollis sed, scelerisque cget, faucibus sed, dui. Quisque eu nisi. Etiam sed erat id lorem placerat feugiat. Pellenteaque vitae orci at odio porta pretiume Cras quis tellus eu pede auctor iaculis. Donec suscipit venenatis mi. </p>
-<p>Aliquam erat volutpat. Sed congue feugiat tellus. Praesent ac nunc non nisi eleifend cursus. Sed nisi massa, mattis eu, elementum ac, luctus a, lacus. Nunc luctus malesuada ipsum. Morbi aliquam, massa eget gravida fermentum, eros nisi volutpat neque, nec placerat nisi nunc non mi. Quisque tincidunt quam nec nibh sagittis eleifend. Duis malesuada dignissim ante. Aliquam erat volutpat. Proin risus lectus, pharetra vel, mollis sit amet, suscipit ac, sapien. Fusce egestas. Curabitur ut tortor id massa egestas ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec fermentum. Curabitur ut ligula ac ante scelerisque consectetuer. Nullam at turpis quis nisl eleifend aliquam. Sed odio sapien, semper eget, rutrum a, tempor in, nibh.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumOCRInterfaces</span> function returns the available supported OCR interfaces that are installed.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_EnumOCRInterfaces ( LPDTWAIN_ARRAY </span><span style="font-style: italic;">lpOCRInterfaces </span><span style="font-weight: bold;">);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">lpOCRInterfaces</span></p>
+<p style="margin: 0px 0px 0px 15px;">A pointer to a DTWAIN_ARRAY that on return will be filled with the available supported OCR interfaces.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If supported, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_EnumOCRInterfaces function returns to the DTWAIN_ARRAY pointed to by <span style="font-style: italic;">lpOCRInterfaces </span>a list of the supported OCR Interfaces.  </p>
+<p>The returned DTWAIN_ARRAY is of type DTWAIN_ARRAYOCRENGINE, where each value in the DTWAIN_ARRAY is a DTWAIN_OCRENGINE handle to a particular OCR interface.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">// create a DTWAIN_ARRAY that will store long values. &nbsp;Also, create it with room for one item.</span></p>
+<p><span style="font-size: 9pt;"><a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> theOCRInterfaces;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">// Call function to set the capability</span></p>
+<p><span style="font-size: 9pt;">BOOL bOK = DTWAIN_EnumOCRInterfaces( &amp;theOCRInterfaces );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">if ( bOK ) </span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// The value was set successfully </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; LONG nCount = <a href="dtwain_arraygetcount.htm">DTWAIN_ArrayGetCount</a>( theOCRInterfaces );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; if ( nCount &gt; 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// Get the first OCR engine</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_ocrengine.htm">DTWAIN_OCRENGINE</a> curOCR;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetat.htm">DTWAIN_ArrayGetAt</a>( theOCRInterfaces, 0, &amp;curOCR );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// Now we can call other OCR functions when we have the curOCR, since it is a DTWAIN_OCRHANDLE.</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// For example, lets get the supported caps</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ARRAY SupportedCaps;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_getocrcapvalues.htm">DTWAIN_GetOCRCapValues</a>( curOCR, DTWAIN_OCRCV_SUPPORTEDCAPS, DTWAIN_CAPGET, &amp;SupportedCaps );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;//..</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// Destroy the DTWAIN_ARRAY</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>( SupportedCaps );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ArrayDestroy( theOCRInterfaces ); &nbsp; &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 
 </td></tr></table>
 

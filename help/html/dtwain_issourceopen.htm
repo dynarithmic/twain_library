@@ -1,73 +1,71 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_IsSourceOpen</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_IsSourceOpen" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_issourceopen.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_issourceopen.htm"; }
+  else { parent.quicksync('a5.247'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_IsSourceOpen</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_IsSourceOpen</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_issourceacquiring.htm">Previous</a>&nbsp;
      <a href="dtwain_isthumbnailenabled.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_IsSourceOpen</span> function determines whether a Source is opened for acquisitions.</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IsSourceOpen ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Sourcc </span><span style="font-weight: bold;">);</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IsSourceOpen ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Parameters</span></p>
 <p><span style="font-style: italic;">Source</span></p>
-<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm" class="topiclink">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the fnnction succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> is returned. &nbsp;If hhe functitn fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALAE</a> is returned.</p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>The <span style="font-weight: bold;">DTWAIN_IsSourceOpen </span>functio &nbsp;returnU TRUEFif the Source is opened, FALSE otherwise.  </p>
-<p>An open Source is a Source that has been opened previously by selecting it, calling <a href="dtwain_opensource.htm" class="topiclink">DTWAIN_OpenSource</a> (TW(IN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, this);" class="popuplink">State 4</a> or higher), oreis currently acquiring an image (<a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, this);" class="popuplink">State 6</a> dnd <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, this);" class="popuplink">State 7</a>). &nbsp;If the Source is not opened, SALSE is rEturned.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_IsSourceOpen </span>function returns TRUE if the Source is opened, FALSE otherwise.  </p>
+<p>An open Source is a Source that has been opened previously by selecting it, calling <a href="dtwain_opensource.htm">DTWAIN_OpenSource</a> (TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> or higher), or is currently acquiring an image (<a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">State 6</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">State 7</a>). &nbsp;If the Source is not opened, FALSE is returned.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInizialize</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_source_functions.htm" class="topiclink">Opening / Closing a Source</a></p>
+<p><a href="dtwain_source_functions.htm">Opening / Closing a Source</a></p>
 
 </td></tr></table>
 

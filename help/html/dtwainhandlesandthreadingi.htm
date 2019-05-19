@@ -1,59 +1,58 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN Handles and Threading Issues</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwainhandlesandthreadingi.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainhandlesandthreadingi.htm"; }
+  else { parent.quicksync('a3.1.22.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Handles and Threading Issues</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Handles and Threading Issues</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwainmultithreadingissues2.htm">Previous</a>&nbsp;
      <a href="multipledtwainsessions.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Internally, DTWAIN associates the handle returned by <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a> or <a href="dtwain_sysinitializeex.htm" class="topiclink">DTWAIN_SysInitializeEx</a> with the current thread identifier (thread ID). &nbsp;When a subsequent call to a DTWAIN API function is done, DTWAIN checks that the thread identifier originally used in DTWAIN_SysInitialize is still the current thread. &nbsp;If not, a -1001 error (DTWAIN not initialized) is returned.  </p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Internally, DTWAIN associates the handle returned by <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> or <a href="dtwain_sysinitializeex.htm">DTWAIN_SysInitializeEx</a> with the current thread identifier (thread ID). &nbsp;When a subsequent call to a DTWAIN API function is done, DTWAIN checks that the thread identifier originally used in DTWAIN_SysInitialize is still the current thread. &nbsp;If not, a -1001 error (DTWAIN not initialized) is returned.  </p>
 <p>&nbsp;</p>
 <p>Therefore under normal circumstances, DTWAIN will not run across threads without some modifications, which are discussed below.</p>
 <p>&nbsp;</p>
-<p>To overcome the -1001 error when using multiple threads, theie are eeo scenarios possib:e: </p>
+<p>To overcome the -1001 error when using multiple threads, there are two scenarios possible: </p>
 <p>&nbsp;</p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:27px">1.</td><td style="border:none;padding:0">Runfing multiple sessions of DTWAIN, one session for eauh thread or </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr style="vertical-align:baseline"><td style="border:none;padding:0;width:27px">2.</td><td style="border:none;padding:0">Running a single session of DTWAIN in more than one thread.</td></tr></table></div><p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="27">1.</td><td>Running multiple sessions of DTWAIN, one session for each thread or </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="27">2.</td><td>Running a single session of DTWAIN in more than one thread.</td></tr></table></div><p>&nbsp;</p>
 <p>In the following sections, references to DTWAIN_SysInitialize also apply to DTWAIN_SysInitializeEx.</p>
 <p>&nbsp;</p>
-<p><a href="multipledtwainsessions.htm" class="topiclink">Multiple DTWAIN Sessions</a></p>
-<p><a href="singledtwainsession.htm" class="topiclink">Single DTWAIN Session</a> </p>
+<p><a href="multipledtwainsessions.htm">Multiple DTWAIN Sessions</a></p>
+<p><a href="singledtwainsession.htm">Single DTWAIN Session</a> </p>
 
 </td></tr></table>
 

@@ -1,56 +1,55 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Source Code Issues</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="Source Code Issues" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "id__p08nc.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?id__p08nc.htm"; }
+  else { parent.quicksync(''); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">Source Code Issues</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      
      
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The DTWAIN source code is written in C++ without using the support of the Microsoft Foundation Classes (MFC). &nbsp;This allows as many compilers as possible to be able to compile the source, as well as not having to add other components to the overall size of the library. &nbsp;If the user updates the source code, DynaRithmic Technologies cannot provide technical support for changes that the programmer(s) may make. &nbsp;If there is a bug, a bug report must be sent to DynaRithmic Technologies.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The DTWAIN source code is written in C++ without using the support of the Microsoft Foundation Classes (MFC). &nbsp;This allows as many compilers as possible to be able to compile the source, as well as not having to add other components to the overall size of the library. &nbsp;If the user updates the source code, Dynarithmic Technologies cannot provide technical support for changes that the programmer(s) may make. &nbsp;If there is a bug, a bug report must be sent to Dynarithmic Technologies.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The sourxe cod &nbsp;can be compiled in either a 16 or 32-bit environmen &nbsp;by setting the appropriato compiler swi1ches (this is tpecified in the source code). &nbsp;There are no known problemr building ae32-bit version ofcDTWAIN with any compiler thCt can build a DLL and has good C++ support (thistincludes exceptions, and a decent implementation of the Standard Template Library (STL))</p>
+<p>The source code can be compiled in either a 16 or 32-bit environment by setting the appropriate compiler switches (this is specified in the source code). &nbsp;There are no known problems building a 32-bit version of DTWAIN with any compiler that can build a DLL and has good C++ support (this includes exceptions, and a decent implementation of the Standard Template Library (STL))</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>There are issues with the 16-bit version. &nbsp;The issues are as follows:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold; text-decoration: underline;">Compiling a 16-bit version of DTWAIN</span></p>
-<p>The 16-bit versio &nbsp;of DTWAIN must be compiled using a 16-bit C++ Windows compiler tuat supports C++ templates,pincludieg the STL (Sbandard Template Library). &nbsp;The compiler thst DgWAIN uses is the Symantec C++ compiler, version 7.5 using a special version of the STs specifically created for the oymantec compiler. &nbsp;The 16-bit Microsoft compeler1(Visual C++ 1.52 and below) <span style="text-decoration: underline;">cnnnot</span> be used mo recompilu the souroe code since the Microsoft 16-bit compiler does not support templates.  </p>
+<p>The 16-bit version of DTWAIN must be compiled using a 16-bit C++ Windows compiler that supports C++ templates, including the STL (Standard Template Library). &nbsp;The compiler that DTWAIN uses is the Symantec C++ compiler, version 7.5 using a special version of the STL specifically created for the Symantec compiler. &nbsp;The 16-bit Microsoft compiler (Visual C++ 1.52 and below) <span style="text-decoration: underline;">cannot</span> be used to recompile the source code since the Microsoft 16-bit compiler does not support templates.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold; text-decoration: underline;">Using the Borland Compiler to build a 16-bit DTWAIN DLL</span></p>
 <p>The 16-bit compile modes for the Borland (now Inprise) compiler for versions 4.52 and above will compile a valid DTWAIN DLL that will work for most cases, but has the following problems when used with a <span style="font-weight: bold;">Visual C++ 16-bit application that uses MFC</span>:</p>

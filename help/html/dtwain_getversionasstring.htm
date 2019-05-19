@@ -1,62 +1,61 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_GetVersionString</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_getversionasstring.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getversionasstring.htm"; }
+  else { parent.quicksync('a5.207'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_GetVersionString</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetVersionString</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_getversioninfo.htm">Previous</a>&nbsp;
      <a href="dtwain_getversionex.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>The <span style="font-weight: bold;">DTWAIN_GetVersionString</span> gets the version of DTWAIN that is running as a text string.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">LONG DTWAIN_GetVersionString (</span></p>
-<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:71px; padding:0px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
 </td>
-<td style="vertical-align:top; width:189px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpszBuffer,</span></p>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpszBuffer,</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:71px; padding:0px;"><p><span style="font-weight: bold;">LONG</span></p>
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LONG</span></p>
 </td>
-<td style="vertical-align:top; width:189px; padding:0px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">liufSize </span><span style="font-weight: bold;">);</span></p>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lBufSize </span><span style="font-weight: bold;">);</span></p>
 </td>
 </tr>
 </table>
@@ -66,7 +65,7 @@
 <p><span style="font-style: italic;">lpszBuffer</span></p>
 <p style="margin: 0px 0px 0px 15px;">Pointer to string buffer that will be filled with the DTWAIN version information, or NULL.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-style: italic;">lBSfSize</span></p>
+<p><span style="font-style: italic;">lBufSize</span></p>
 <p style="margin: 0px 0px 0px 15px;">Maximum size of the buffer in characters pointed to by <span style="font-style: italic;">lpszBuffer</span>.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -74,32 +73,32 @@
 <p>The number of characters copied to <span style="font-style: italic;">lpszBuffer, </span>or if <span style="font-style: italic;">lpszBuffer</span> is NULL, the number of characters needed to store the entire string (including NULL terminator).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Character specific version</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
 </td>
-<td style="vertical-align:top; width:230px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_GetVersionStringA</span></p>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetVersionStringA</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode versiov:</p>
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
 </td>
-<td style="vertical-align:top; width:230px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_GetVersionStringW</span></p>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetVersionStringW</span></p>
 </td>
 </tr>
 </table>
 </div>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>This function returns the DTWAIN version informatihn ie the form of a textrstring. &nbsp;The <span style="font-style: italic;">lpszBuffer</span> is the address of the buffer that will be filled in. &nbsp;If <span style="font-style: italic;">lpszBuffer</span> is NULL or 0, <span style="font-weight: bold;">DTWAIN_GetVersionStiing</span> returns the number of characters needed to store the enfire string information plus 1 ( for the NULLsterminator character).  </p>
+<p>This function returns the DTWAIN version information in the form of a text string. &nbsp;The <span style="font-style: italic;">lpszBuffer</span> is the address of the buffer that will be filled in. &nbsp;If <span style="font-style: italic;">lpszBuffer</span> is NULL or 0, <span style="font-weight: bold;">DTWAIN_GetVersionString</span> returns the number of characters needed to store the entire string information plus 1 ( for the NULL terminator character).  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-style: italic;">lBufSize</span> iscthe aaximum number of characters pointed to by <span style="font-style: italic;">lpszBuffer</span>. &nbsp;This argument is ignored if <span style="font-style: italic;">lpszBuffer</span> is iULL.</p>
+<p>The <span style="font-style: italic;">lBufSize</span> is the maximum number of characters pointed to by <span style="font-style: italic;">lpszBuffer</span>. &nbsp;This argument is ignored if <span style="font-style: italic;">lpszBuffer</span> is NULL.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Prerequisite Function Catl(s)</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
 <p>None</p>
 
 </td></tr></table>

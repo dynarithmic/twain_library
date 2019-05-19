@@ -1,51 +1,80 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Other Programming Languages</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "otherlanguages2.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?otherlanguages2.htm"; }
+  else { parent.quicksync('a2.10'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Other Programming Languages</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Other Programming Languages</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="winbatch_development.htm">Previous</a>&nbsp;
      <a href="dtwainadvancedtopics.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam velit risus, placerat et, rutrum nec, condimentum at, leo. Aliquam in augue a magna semper pellentesque. Suspendisse augue. Nullam est nibh, molestie eget, tempor ut, consectetuer ac, pede. Vestibulum sodales hendrerit augue. Suspendisse id mi. Aenean leo diam, sollicitudin adipiscing, posuere quis, venenatis sed, metus. Integer et nunc. Sed viverra dolor quis justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis elementum. Nullam a arcu. Vivamus sagittis imperdiet odio. Nam nonummy. Phasellus ullamcorper velit vehicula lorem. Aliquam eu ligula. Maecenas rhoncus. In elementum eros at elit. Quisque leo dolor, rutrum sit amet, fringilla in, tincidunt et, nisi. </p>
-<p>Donec ut eros faucibus lorem lobortis sodales. Nam vitae lectus id lectus tincidunt ornare. Aliquam sodales suscipit velit. Nullam leo erat, iaculis vehicula, dignissim vel, rhoncus id, velit. Nulla facilisi. Fusce tortor lorem, mollis sed, scelerisque eget, faucibus sed, dui. Quisque eu nisi. Etiam sed erat id lorem placerat feugiat. Pellentesque vitae orci at odio porta pretium. Cras quis tellus eu pede auctor iaculis. Donec suscipit venenatis mi. </p>
-<p>Aliquam erat volutpat. Sed congue feugiat tellus. Praesent ac nunc non nisi eleifend cursus. Sed nisi massa, mattis eu, elementum ac, luctus a, lacus. Nunc luctus malesuada ipsum. Morbi aliquam, massa eget gravida fermentum, eros nisi volutpat neque, nec placerat nisi nunc non mi. Quisque tincidunt quam nec nibh sagittis eleifend. Duis malesuada dignissim ante. Aliquam erat volutpat. Proin risus lectus, pharetra vel, mollis sit amet, suscipit ac, sapien. Fusce egestas. Curabitur ut tortor id massa egestas ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec fermentum. Curabitur ut ligula ac ante scelerisque consectetuer. Nullam at turpis quis nisl eleifend aliquam. Sed odio sapien, semper eget, rutrum a, tempor in, nibh.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>When using other Windows languages with DTWAIN, the guidelines to using DTWAIN successfully are as follows:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">1) Be familiar with how your language calls third-party Dynamic Link Library functions.  </span></p>
+<p>Since DTWAIN is a Dynamic Link Library (DLL), you must have knowledge of how your language sets up calls to functions that are included in a DLL. &nbsp;Most, if not all Microsoft Window's languages have capabilities to call DLL functions. &nbsp;Usually the programmer's manual of the language would include examples of calling the various Windows API functions. &nbsp;Use this as a guide to set up your interface to DTWAIN. &nbsp;All of DTWAIN's functions follow the Windows API model, i.e. there are no proprietary variable types (like a Visual Basic <span style="font-weight: bold;">String</span> or some other data type) and the calls are all<span style="font-weight: bold;"> stdcall</span> convention (this is not important unless you are using a language that does not follow this convention -- most languages do). &nbsp;All of DTWAIN's functions require either a LONG integer type, a pointer to an array of characters or null terminated characters (LPTSTR or LPCTSTR), or the address of a variable (for example, an LPLONG).  </p>
+<p>&nbsp;</p>
+<p>Most if not all problems start with developers not being familiar with calling DLL's from the language that they're using. &nbsp;This is something that DTWAIN support cannot solve easily, since there are so many different Windows languages, and each has a way of calling or setting up a call to a function in a DLL. &nbsp; Again, this subject should be covered in the user manual of the programming language. &nbsp;Hopefully in your manual, it shows how to interface to a function that accepts an LPCTSTR or LPTSTR or how to pass an address of one of your languages variables. &nbsp;If this is not explained in your programmer's manual, a lookup on the Internet for your language using a search engine (i.e. <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.google.com" target="_blank" class="weblink">http://www.google.com</a></span>, <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.yahoo.com" target="_blank" class="weblink">http://www.yahoo.com</a></span>, etc.), or other advanced books on the language that you're using will give you more information.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">2) Prototype the DTWAIN functions correctly for your language</span></p>
+<p>This is another stumbling block that has been discovered for programmers using other languages that want to interface to DTWAIN. &nbsp;Prototyping is simply making sure that the parameters that you are calling the DTWAIN function with are exactly the type that DTWAIN expects, and making sure that the return type for the DTWAIN function matches the correct data type for your programming language. &nbsp;For example, DTWAIN_GetSourceProductName takes 3 parameters, a DTWAIN_SOURCE, a pointer to an array of characters, and a LONG denoting the length. &nbsp;The return value is a LONG. &nbsp;This is is equivalent to providing the following:</p>
+<p>&nbsp;</p>
+<p>Parameters:</p>
+<p>32-bit integer (DTWAIN_SOURCE)</p>
+<p>Pointer to array of char (LPTSTR)</p>
+<p>32-bit integer (Length)</p>
+<p>&nbsp;</p>
+<p>On return:</p>
+<p>32-bit integer.</p>
+<p>&nbsp;<br>
+<span style="font-weight: bold;">3) Determine if your language fully supports 64-bit IEEE floating point values</span></p>
+<p>If your language does not support or properly support 64-bit IEEE floating point variables and values, you will need to use the alternate DTWAIN functions that use string parameters. &nbsp;Please see the section on <a href="floating_point_issues_and_dtwa.htm">Floating Point Issues</a> for more information.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">4) Proper usage of the DTWAIN constants</span></p>
+<p>Another source of problems is improper use of the DTWAIN constants. &nbsp;Note that the constants used by the various DTWAIN functions are <span style="font-weight: bold;">numerical</span> constants, i.e. they are LONG integer values. &nbsp;They are <span style="text-decoration: underline;">not</span> strings or character arrays. &nbsp;For example, DTWAIN_CAPSET is a numerical LONG integer -- it is not the string "DTWAIN_CAPSET".  </p>
+<p>&nbsp;</p>
+<p>To find out the actual value of DTWAIN constants, the DTWAINC.H file has a list of all the constants and their respective values. &nbsp;Even though this file is a 'C' language header file, it is very easy to find the value by opening the file in a text editor and finding the correct value.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">5) Start with the simple DTWAIN code</span></p>
+<p>Always attempt to make sure the following calls are successful:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_SysInitialize (check for non-zero here)</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_SelectSource (check if TWAIN dialog is displayed -- select a Source )</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_AcquireFile &nbsp;(acquire only a single page)</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_SysDestroy </td></tr></table></div><p>&nbsp;</p>
+<p>These are the four functions that you should always attempt first. &nbsp;Once these work correctly, you are on your way to getting DTWAIN working successfully for you.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 </td></tr></table>
 

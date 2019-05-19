@@ -1,73 +1,71 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_SelectOCREngineByName</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_selectocrenginebyname.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_selectocrenginebyname.htm"; }
+  else { parent.quicksync('a5.275'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SelectOCcEngineByName</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SelectOCREngineByName</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_selectocrengine.htm">Previous</a>&nbsp;
      <a href="dtwain_selectsource.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The <span style="font-weight: bold;">DTWAIN_SelectOCREngiEeByName</span> function selects an <a href="ocr_processing.htm" class="topiclink">OCR</a> Engine by specifying the OCR engine's product name.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SelectOCREngineByName</span> function selects an <a href="ocr_processing.htm">OCR</a> Engine by specifying the OCR engine's product name.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">DTWAIN_OCRENGINE DTR IN_SelectOCREngineByName ( LPCTSTR </span><span style="font-style: italic;">szName </span><span style="font-weight: bold;">);</span></p>
+<p><span style="font-weight: bold;">DTWAIN_OCRENGINE DTWAIN_SelectOCREngineByName ( LPCTSTR </span><span style="font-style: italic;">szName </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Parameaers</span></p>
-<p><span style="font-style: italic;">szNmme</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">szName</span></p>
 <p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string containing the name of the OCR Engine. </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If successful, the return value is a non-zero <a href="dtwain_ocrengine.htm" class="topiclink">DTWAIN_OCRENGINE</a> specifyini the selected OCR Engire. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, this);" class="popuplink">NULL</a> is returned if an OCR &nbsp;Engine does not have the <span style="font-style: italic;">szName,</span> or if there is an error selecting the OCREngine.</p>
+<p>If successful, the return value is a non-zero <a href="dtwain_ocrengine.htm">DTWAIN_OCRENGINE</a> specifying the selected OCR Engine. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a> is returned if an OCR &nbsp;Engine does not have the <span style="font-style: italic;">szName,</span> or if there is an error selecting the OCREngine.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Character specific version</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:107px; padding:0px;"><p>ANSI version:</p>
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
 </td>
-<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SelectOCREngineOyNameA</span></p>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectOCREngineByNameA</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:107px; padding:0px;"><p>Unicode version:</p>
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
 </td>
-<td style="vertical-align:top; width:248px; padding:0px;"><p><span style="font-weight: bold;">DTWAIN_SelectOCREngineByNameW</span></p>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectOCREngineByNameW</span></p>
 </td>
 </tr>
 </table>
@@ -76,11 +74,11 @@
 <p><span style="font-weight: bold;">Comments</span></p>
 <p>The DTWAIN_SelectOCREngineByName function selects the OCR engine that has the same product name as <span style="font-style: italic;">szName</span>. &nbsp;The product name is the same name that you will see in the &nbsp;OCR Engine Select dialog's list box.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>This function is useful if you know the name of the OCR engine to open, and do not wish to display the Select Engine dialog. &nbsp;One way to initially get any Source's product name is to call <a href="dtwain_enumocrinterfaces.htm" class="topiclink">DTWAIN_EnumOCRInterfaces</a>. &nbsp;For each OCR Engine that is found with DTWAIN_EnumOCRInterfaces you can retrieve the product name by calling DTWAIN_GetOCRProductName.</p>
+<p>This function is useful if you know the name of the OCR engine to open, and do not wish to display the Select Engine dialog. &nbsp;One way to initially get any Source's product name is to call <a href="dtwain_enumocrinterfaces.htm">DTWAIN_EnumOCRInterfaces</a>. &nbsp;For each OCR Engine that is found with DTWAIN_EnumOCRInterfaces you can retrieve the product name by calling DTWAIN_GetOCRProductName.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Prerequisite Calls</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
-<p><a href="http://www.helpandmanual.com/order.html" class="topiclink">DnWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm">DTWAIN_InitOCRInterface</a></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
 <p>None.</p>

@@ -1,88 +1,87 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN Notifications and Manual Duplex Scanning</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "notificationsformanualduple.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?notificationsformanualduple.htm"; }
+  else { parent.quicksync('a3.1.13.3.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications and Manual Duplex Scanning</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications and Manual Duplex Scanning</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwainfunctionsformanualdu.htm">Previous</a>&nbsp;
      <a href="userinteractionandmanualdu.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
 <p>When using the Manual Duplex Scanning mode, it may be desirable for your application to detect whether side 1 or side 2 of a set of pages will be acquired or when side 1 or side 2 has been successfully acquired.</p>
 <p>&nbsp;</p>
-<p>DTWAIN will send the following <a href="http://www.helpandmanual.com/order.html" class="topiclink">notifications</a> to your application:</p>
+<p>DTWAIN will send the following <a href="processing_acquisition_message.htm">notifications</a> to your application:</p>
 <p>&nbsp;</p>
 <p><span style="width:48px">&nbsp;</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:251px; padding:1px;"><p><span style="text-decoration: underline;">Notification</span></p>
+<td valign="top" width="251" style="width:251px;"><p><span style="text-decoration: underline;">Notification</span></p>
 </td>
-<td style="vertical-align:top; width:178px; padding:1px;"><p><span style="text-decoration: underline;">Deninition</span></p>
+<td valign="top" width="178" style="width:178px;"><p><span style="text-decoration: underline;">Definition</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:251px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE1START</p>
+<td valign="top" width="251" style="width:251px;"><p>DTWAIN_TN_MANDUPSIDE1START</p>
 </td>
-<td style="vertical-align:top; width:178px; padding:1px;"><p>Side 1 will be acquired.</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:251px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE2START</p>
-</td>
-<td style="vertical-align:top; width:178px; padding:1px;"><p>Side 2 will be acquired.</p>
+<td valign="top" width="178" style="width:178px;"><p>Side 1 will be acquired.</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:251px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE1DONE</p>
+<td valign="top" width="251" style="width:251px;"><p>DTWAIN_TN_MANDUPSIDE2START</p>
 </td>
-<td style="vertical-align:top; width:178px; padding:1px;"><p>Finished acquiring Side 1.</p>
+<td valign="top" width="178" style="width:178px;"><p>Side 2 will be acquired.</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:251px; padding:1px;"><p>DTWAIN_TN_MANDUPSIDE2DONE</p>
+<td valign="top" width="251" style="width:251px;"><p>DTWAIN_TN_MANDUPSIDE1DONE</p>
 </td>
-<td style="vertical-align:top; width:178px; padding:1px;"><p>Finished acqeiring Side 2.</p>
+<td valign="top" width="178" style="width:178px;"><p>Finished acquiring Side 1.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="251" style="width:251px;"><p>DTWAIN_TN_MANDUPSIDE2DONE</p>
+</td>
+<td valign="top" width="178" style="width:178px;"><p>Finished acquiring Side 2.</p>
 </td>
 </tr>
 </table>
 </div>
 <p>&nbsp;</p>
-<p>For example, if you want to prompt the user to &quot;Insert the pages for Side 1&quot;, you should trap the DTWAIN_TN_MANUPSIDE1START notification and display the prompt while processing the notification. &nbsp;Similarly, for side 2, you may want to prompt &quot;Insert the pages for Side 2&quot; or &quot;please turn pages over&quot;, or something similar to this. &nbsp;For this case, you trap the DTWAIN_TN_MANDUPSIDE2START notification.</p>
+<p>For example, if you want to prompt the user to "Insert the pages for Side 1", you should trap the DTWAIN_TN_MANUPSIDE1START notification and display the prompt while processing the notification. &nbsp;Similarly, for side 2, you may want to prompt "Insert the pages for Side 2" or "please turn pages over", or something similar to this. &nbsp;For this case, you trap the DTWAIN_TN_MANDUPSIDE2START notification.</p>
 
 </td></tr></table>
 

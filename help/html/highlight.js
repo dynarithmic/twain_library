@@ -1,11 +1,11 @@
 // ----------------------------------------------------------------------------
-// Zoom Search Engine 6.0 (15/Jul/2008)
-// Highlight & auto-scroll script (DOM version)
+// Zoom Search Engine 4.3 (27/6/2006)
+// Highlight & auto-scroll script
 //
 // email: zoom@wrensoft.com
 // www: http://www.wrensoft.com
 //
-// Copyright (C) Wrensoft 2008
+// Copyright (C) Wrensoft 2006
 // ----------------------------------------------------------------------------
 // Use this script to allow your search matches to highlight and scroll to
 // the matched word on the actual web page where it was found.
@@ -34,31 +34,19 @@
 //
 // For more information, consult the Users Guide and our support website at:
 // http://www.wrensoft.com/zoom/support
+//
+//
+// This script is licensed for use with the Zoom Search Engine. Original
+// development by Brett Alcock, VBasys Limited. To licence other applications 
+// email highlight@vbasys.com with the subject "license".
 
-// ----------------------------------------------------------------------------
-// Script options
-// ----------------------------------------------------------------------------
-
-// If you wish to disable the jump functionality which scrolls the browser
-// to the first occurance of the matched word, change this setting to false
-var JumpToFirstOccurance = true;
-
-// For debugging purposes, disable the following
 var CatchJSErrors = true;
-
-// This option skips highlighting withing blocks marked by ZOOMSTOP and 
-// ZOOMRESTART tags. 
-var SkipZoomStops = true;
-
-// ----------------------------------------------------------------------------
-// Main script
-// ----------------------------------------------------------------------------
-
-var IsZoomStop = 0;
 
 function catcherror() { return true; }
 if (CatchJSErrors)
+{
     window.onerror = catcherror;
+}
 
 function QueryString(key)
 {
@@ -121,11 +109,12 @@ function findPosY(obj)
     return curtop;
 }
 
-function ZRetrieveQuery()
+
+// regular expression version
+function SearchHiLite(text)
 {
     var SearchAsSubstring = 0;
     var hl;
-    var terms;
 
     hl = QueryString("zoom_highlight");
     if (hl == "" || hl == null)
@@ -146,91 +135,78 @@ function ZRetrieveQuery()
     // create array of terms        
     //var term = hl.split("+"); 
     var re = /\"(.*?)\"|[^\\+\"]+/g;
-    terms = hl.match(re);    
+    var term = hl.match(re);    
    
     // convert terms in regexp patterns
-    for (var i=0;i<terms.length;i++) // take each term in turn
+    for (var i=0;i<term.length;i++) // take each term in turn
     {       
-        if(terms[i] != "")
+        if(term[i] != "")
         {                   
-            if (terms[i].indexOf("\"") != -1)
+            if (term[i].indexOf("\"") != -1)
             {
                 // contains double quotes               
-                terms[i]=terms[i].replace(/\"/g,"");
-                terms[i]=terms[i].replace(/\+/g," "); 
+                term[i]=term[i].replace(/\"/g,"");
+                term[i]=term[i].replace(/\+/g," "); 
             }
             else
             {
-                terms[i]=terms[i].replace(/\+/g,"");  
+                term[i]=term[i].replace(/\+/g,"");  
             }                           
 
-            if (terms[i].indexOf("*") != -1 || terms[i].indexOf("?") != -1)
+            if (term[i].indexOf("*") != -1 || term[i].indexOf("?") != -1)
             {
                 // convert wildcard pattern to regexp
-                terms[i] = terms[i].replace(/\\/g, " ");
-                terms[i] = terms[i].replace(/\^/g, " ");
+                term[i] = term[i].replace(/\\/g, " ");
+                term[i] = term[i].replace(/\^/g, " ");
 
                 //term[i] = term[i].replace(/\+/g, " "); // split on this so no point in looking
 
-                terms[i] = terms[i].replace(/\#/g, " ");
-                terms[i] = terms[i].replace(/\$/g, " ");
-                terms[i] = terms[i].replace(/\./g, " ");
+                term[i] = term[i].replace(/\#/g, " ");
+                term[i] = term[i].replace(/\$/g, " ");
+                term[i] = term[i].replace(/\./g, " ");
                 
                 // check if search term only contains only wildcards
                 // if so, we will not attempt to highlight this term
                 var wildcards = /\w/;
-                if (wildcards.test(terms[i]))
+                if (wildcards.test(term[i]))
                 {
-                	terms[i] = terms[i].replace(/\*/g, "[^\\s]*");
-                	terms[i] = terms[i].replace(/\?/g, "[^\\s]"); // insist upon one non whitespace
+                	term[i] = term[i].replace(/\*/g, "[^\\s]*");
+                	term[i] = term[i].replace(/\?/g, "[^\\s]"); // insist upon one non whitespace
                 }                
                 else                
-                	terms[i] = "";                
+                	term[i] = "";                
             }
 			
-			if (terms[i] != "")
+			if (term[i] != "")
 			{
 	            if (SearchAsSubstring == 0)
 	            {	                
-	                terms[i] = "(>[\\s]*|>[^<]+[\\b\\W])("+terms[i]+")(<|[\\b\\W][^>]*<)";
+	                term[i] = "(>[\\s]*|>[^<]+[\\b\\W])("+term[i]+")(<|[\\b\\W][^>]*<)";
 	            }
 	            else
 	            {
 	                // if term leads with wildcard then allow it to match preceeding text in word
 	                var strWB="";
-	                if(terms[i].substr(0,7)=="[^\\s]*") strWB="\\b";
-	                terms[i] = "(>|>[^<]+)"+strWB+"("+terms[i]+")([^>]*<)";
+	                if(term[i].substr(0,7)=="[^\\s]*") strWB="\\b";
+	                term[i] = "(>|>[^<]+)"+strWB+"("+term[i]+")([^>]*<)";
 	            }
 	        }	        
         }
     }
-    return terms;
-}
 
-// regular expression version
-function ZHighlightText(terms, text)
-{  	
     text=text.replace(/&amp;/ig, '&');
     text=text.replace(/&nbsp;/ig, '');
 
-    for (var i=0; i<terms.length; i++) // take each term in turn
+    for (var i=0;i<term.length;i++) // take each term in turn
     {
-        if(terms[i] != "")
+        if(term[i] != "")
         {        	        	
             // we need a loop for the main search to catch all between ><
             // and we add  before each found to ignore those done etc
             // todo: develop reliable single pass regexp and dispose of loop
             var l = 0;
-            re = new RegExp(terms[i], "gi");
+            re = new RegExp(term[i], "gi");
             var count = 0; // just incase
-			
-			// Correction by Tim Green for bug with pointed brackets inside the hilighted text node
-			text = text.replace(/<(?![\/]?span)/g, "&lt;");
-			text = text.replace(">","&gt;");
-			text = text.replace(/span&gt;/g, 'span>');
-			text = text.replace(/"highlight"&gt;/g, '"highlight">');
-			// Correction end
-			
             text = ">" + text + "<"; // temporary tag marks
             do 
             {
@@ -244,81 +220,32 @@ function ZHighlightText(terms, text)
         }
     }        
     text = text.replace(eval("//g"), '');        
-    text = text.replace(eval("//g"), '&nbsp;');        
+    text = text.replace(eval("//g"), '&nbsp;');    
        
     return(text);
 }
 
 function jumpHL()
 {
-    var d = getElement("highlight");
-    if (d)
+    var d=getElement("highlight");
+    if(d)
     {
-        if (d.scrollIntoView)
-        {
-            d.scrollIntoView();
-        }
+        var y=findPosY(d);
+        // if element near top of page
+        if(y < 100)
+            window.scrollTo(0,0); // go to top of page
         else
-        {
-	        var y = findPosY(d);
-	        // if element near top of page
-	        if (y < 100)
-	            window.scrollTo(0,0); // go to top of page
-	        else
-	            window.scrollTo(0,y-50); // show space of 50 above
-		}
+            window.scrollTo(0,y-50); // show space of 50 above
     }
-}
-
-function ZHighlightReplace(q, node) 
-{
-	var node_value = node.nodeValue;  	
-	var newtext = ZHighlightText(q, node_value);
-	if (newtext != node_value)
-	{
-		var repl = document.createElement('span');
-		repl.innerHTML = newtext;
-		node.parentNode.replaceChild(repl, node);
-	}
-}
-
-function ZHighlightSearch(q, root)
-{
-	if (!root) 
-		root = document.body.childNodes;
-		
-	for (var i = 0, j = root.length; i < j; i++) 
-	{
-		ZHighlightSearch(q, root[i].childNodes);
-		
-		if (SkipZoomStops && root[i].nodeType === 8)
-		{			
-			if (root[i].nodeValue == "ZOOMSTOP")
-				IsZoomStop = 1;
-			else if (root[i].nodeValue == "ZOOMRESTART")
-				IsZoomStop = 0;
-		}
-		
-		if (IsZoomStop == 0 && root[i].nodeType === 3) 
-		{
-			ZHighlightReplace(q, root[i]);					
-		}
-  	}	
 }
 
 function highlight()
 {	
-	if (!"".match)	// check if browser supports regexp match() function
-		return;    
-	if (document.body)
-	{
-		var terms = ZRetrieveQuery();    	
-		if (terms != false)
-		{
-			IsZoomStop = 0;
-			ZHighlightSearch(terms);
-			if (JumpToFirstOccurance) 
-				jumpHL();
-		}
-	}
+    var x = document.body;
+    if (x)
+    {
+        var strHTML=SearchHiLite(x.innerHTML);
+        if (strHTML!=false) x.innerHTML = strHTML;
+        jumpHL();
+    }
 }

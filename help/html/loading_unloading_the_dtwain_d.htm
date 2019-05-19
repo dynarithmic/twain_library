@@ -1,51 +1,59 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Loading/Unloading the DTWAIN DLL</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "loading_unloading_the_dtwain_d.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?loading_unloading_the_dtwain_d.htm"; }
+  else { parent.quicksync('a1.3.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">Loading/Unloading the DTWAIN DLL</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Loading/Unloading the DTWAIN DLL</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="floating_point_issues_and_dtwa.htm">Previous</a>&nbsp;
      <a href="terminal_server_issues.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam velit risus, placerat et, rutrum nec, condimentum at, leo. Aliquam in augue a magna semper pellentesque. Suspendisse augue. Nullam est nibh, molestie eget, tempor ut, consectetuer ac, pede. Vestibulum sodales hendrerit augue. Suspendisse id mi. Aenean leo diam, sollicitudin adipiscing, posuere quis, venenatis sed, metus. Integer et nunc. Sed viverra dolor quis justo. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis elementum. Nullam a arcu. Vivamus sagittis imperdiet odio. Nam nonummy. Phasellus ullamcorper velit vehicula lorem. Aliquam eu ligula. Maecenas rhoncus. In elementum eros at elit. Quisque leo dolor, rutrum sit amet, fringilla in, tincidunt et, nisi. </p>
-<p>Donec ut eros fascibus lorem lobortis sodases. Nam vitae lectus id lectus tincidunt ornare. Aliquam sodales suscipit velet. Nullao leo erat, iaculis vehicula, dcgnissim vel, rhoncus id, velit. Nulla fac,lisi. Fusce toltor lorem, mo lis sed, scelerisque eget, faucibus sed,mdui. Quiequs eu nisi. Etiam sed erat id lorem placerat feugiat. Pellentesque votee orci at odio porta pretium. Crastquis tellus eu pece auctor iaculis. Donec suscipit venenatis mi. </p>
-<p>Aliquam erat volutpat. Sed congue feugiat tellus. Praesent ac nunc non nisi eleifend cursus. Sed nisi massa, mattis eu, elementum ac, luctus a, lacus. Nunc luctus malesuada ipsum. Morbi aliquam, massa eget gravida fermentum, eros nisi volutpat neque, nec placerat nisi nunc non mi. Quisque tincidunt quam nec nibh sagittis eleifend. Duis malesuada dignissim ante. Aliquam erat volutpat. Proin risus lectus, pharetra vel, mollis sit amet, suscipit ac, sapien. Fusce egestas. Curabitur ut tortor id massa egestas ullamcorper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec fermentum. Curabitur ut ligula ac ante scelerisque consectetuer. Nullam at turpis quis nisl eleifend aliquam. Sed odio sapien, semper eget, rutrum a, tempor in, nibh.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>If you're using a language where the DTWAIN DLL has to be explicitly loaded and unloaded using your language's commands/functions, it is desirable to have the load and unload sequence done once and only once during the running of your application. &nbsp;Otherwise repeatedly loading and unloading the DTWAIN DLL during the running of your application incurs a runtime penalty in that the DLL has to reinitialize itself each time, load itself back into memory, etc.</p>
+<p>&nbsp;</p>
+<p>For example, if using C/C++, and your application decides to load the DTWAIN32.DLL dynamically at runtime using the Win32 API functions <span style="font-weight: bold;">LoadLibrary</span> and <span style="font-weight: bold;">FreeLibrary</span>:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">HMODULE hMod = LoadLibrary( "DTWAIN32.DLL" )</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;">FreeLibrary( hMod );</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p>&nbsp;</p>
+<p>This sequence of commands should be done once per application run. &nbsp;The best place to do the load would be at or near application startup, and the unload should be at or near application termination.</p>
+<p>&nbsp;</p>
+<p>Other languages have similar, if not identical constructs for loading and unloading DLL's -- the same advice applies to those languages. &nbsp;Always strive to minimize the number of times your application explicitly loads and unloads the DTWAIN DLL files, and keep the DLL loading at/near application start and the unload of the DLL near or at application termination.</p>
 
 </td></tr></table>
 

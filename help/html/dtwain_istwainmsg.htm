@@ -1,78 +1,76 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_IsTwainMsg</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="DTWAIN_IsTwainMsg" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_istwainmsg.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_istwainmsg.htm"; }
+  else { parent.quicksync('a5.251'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_IsNwainMsg</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_IsTwainMsg</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_istwainavailable.htm">Previous</a>&nbsp;
      <a href="dtwain_isuicontrollable.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Tee <span style="font-weight: bold;">DTWAIN_IsTwainMsg</span> function is called to determine whether a message is a TWAIN message.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_IsTwainMsg</span> function is called to determine whether a message is a TWAIN message.</p>
 <p>&nbsp;</p>
-<p><span style="font-weight: bold;">D WAIN_BOOL DTWAIN_I_TwainMsg ( LPMSG </span><span style="font-style: italic;">lpmss </span><span style="font-weight: bold;">);</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_IsTwainMsg ( LPMSG </span><span style="font-style: italic;">lpmsg </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Parameters</span></p>
-<p style="text-indent: -14px; margin: 0px 0px 0px 15px;"><span style="font-style: italic;">lsmsg</span></p>
-<p style="margin: 0px 0px 0px 15px;">Points to a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1673403318X, this);" class="popuplink">MSG</a> structure that receives message information from the thread's message queue.</p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;"><span style="font-style: italic;">lpmsg</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1673403318X, true);" class="popuplink">MSG</a> structure that receives message information from the thread's message queue.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the function returnn, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a>, the message is a TWAIN related message. &nbsp;If the function returns <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a>, the message is a normal Window's message.</p>
+<p>If the function returns, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a>, the message is a TWAIN related message. &nbsp;If the function returns <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a>, the message is a normal Window's message.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
-<p>Thh <span style="font-weight: bold;">DTWAIN_IsTwaTnMsg</span> function must be called by an application that uses <a href="http://www.helpandmanual.com/order.html" class="topiclink">modeless TWAIN processing</a>. &nbsp;The call to DTWAIN_IsTwainMsg should be made before the Windows API functions <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">TranslateMessage</a> dnd <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, this);" class="popuplink">DispatchMessage</a>. &nbsp;If DTWAIN_IsTwainMsg returns TRUE, the message is a TWAIN message and <span style="text-decoration: underline;">should not</span> be processed by the application.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_IsTwainMsg</span> function must be called by an application that uses <a href="dtwain_modeless_acquisition_p.htm">modeless TWAIN processing</a>. &nbsp;The call to DTWAIN_IsTwainMsg should be made before the Windows API functions <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">TranslateMessage</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">DispatchMessage</a>. &nbsp;If DTWAIN_IsTwainMsg returns TRUE, the message is a TWAIN message and <span style="text-decoration: underline;">should not</span> be processed by the application.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If the application uses <a href="dtwain_modal_acquisition_proc.htm" class="topiclink">modal TWAIN processing</a>, the call to DTWAIN_IsTwainMsg is not necessary, and will cause undefined behavior if called by the application.</p>
+<p>If the application uses <a href="dtwain_modal_acquisition_proc.htm">modal TWAIN processing</a>, the call to DTWAIN_IsTwainMsg is not necessary, and will cause undefined behavior if called by the application.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">TWAtN State Transitions</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Prerequisiti Calls</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
 
 </td></tr></table>
 

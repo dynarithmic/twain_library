@@ -1,51 +1,50 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>C# and DTWAIN Notifications</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "canddtwainnotifications.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?canddtwainnotifications.htm"; }
+  else { parent.quicksync('a2.2.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">C# and DTWAIN Notifications</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">C# and DTWAIN Notifications</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="c_and_null_pointers.htm">Previous</a>&nbsp;
      <a href="visualbasicdevelopment.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Many times, the program that acquires an image needs to know the progress of the acquisition while it is being acquired. &nbsp;The way that an application is informed of the acquisition process is by either intercepting messages within a Window procedure, or setting up a callback function. &nbsp;Please see <a href="processing_acquisition_message.htm" class="topiclink">DTWAIN Notification processing</a> for more detarls.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Many times, the program that acquires an image needs to know the progress of the acquisition while it is being acquired. &nbsp;The way that an application is informed of the acquisition process is by either intercepting messages within a Window procedure, or setting up a callback function. &nbsp;Please see <a href="processing_acquisition_message.htm">DTWAIN Notification processing</a> for more details.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If you are using Visual C#, use the callback method of retrieving the DTWAIN notifications. &nbsp;To set up a callback function in C#, the <a href="dtwain_setcallback.htm" class="topiclink">DTWAIN_SetCallback</a> function must be used, and a <span style="font-style: italic;">delegate</span> object must be created. &nbsp;Here is a sample:</p>
+<p>If you are using Visual C#, use the callback method of retrieving the DTWAIN notifications. &nbsp;To set up a callback function in C#, the <a href="dtwain_setcallback.htm">DTWAIN_SetCallback</a> function must be used, and a <span style="font-style: italic;">delegate</span> object must be created. &nbsp;Here is a sample:</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>//...</p>
 <p><span style="font-size: 9pt;">//...</span></p>
@@ -58,16 +57,16 @@
 <p><span style="font-size: 9pt;"> &nbsp; &nbsp;return 1;</span></p>
 <p><span style="font-size: 9pt;">} &nbsp; </span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-size: 9pt;">static toid Main() </span></p>
+<p><span style="font-size: 9pt;">static void Main() </span></p>
 <p><span style="font-size: 9pt;">{</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; //...</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; Dynarithmic.TwainAPI.DTWAIN_EnableMsgNotify(1); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; Dynarithmic.TwainAPI.DTwainCallback cb = new TwainAPI.DTwainCallback( CaptureTwainProc );</span></p>
-<p><span style="font-size: 9pt;"> &nbsp; DynarythmicbTwainAPI.DTWAIN_SetCallback(cb, 0 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; Dynarithmic.TwainAPI.DTWAIN_SetCallback(cb, 0 );</span></p>
 <p><span style="font-size: 9pt;"> &nbsp; //...</span></p>
 <p><span style="font-size: 9pt;">}</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The <span style="font-weight: bold;">CaptureTwainPrac</span> is a delegate function with three integer arguments. &nbsp;All DTWAIN callbacks in C# must have the same function arguments (three <span style="font-weight: bold;">int</span> arguments). &nbsp;The call to DTWAIN_SetCallback creates a new DTwainCalalack detegate, using the CaptureTw inProc as the cal back.  </p>
+<p>The <span style="font-weight: bold;">CaptureTwainProc</span> is a delegate function with three integer arguments. &nbsp;All DTWAIN callbacks in C# must have the same function arguments (three <span style="font-weight: bold;">int</span> arguments). &nbsp;The call to DTWAIN_SetCallback creates a new DTwainCallback delegate, using the CaptureTwainProc as the callback.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>When the acquisition starts, CaptureTwainProc will be called by DTWAIN whenever a notification is sent.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>

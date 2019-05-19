@@ -1,205 +1,203 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_SetDSMSearchOrder</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_setdsmsearchorder.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_setdsmsearchorder.htm"; }
+  else { parent.quicksync('a5.306'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_SetDSMSeMrchOrder</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetDSMSearchOrder</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_setdevicenotifications.htm">Previous</a>&nbsp;
      <a href="dtwain_setcustomfilesave.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The <span style="font-weight: bold;">DTWAIN_SetDSMSearchOrder</span> function sets the direcsories thas are searched whenever DTWAIN attempts to locate and eoad &nbsp;he <a href="selecting_twain_data_source_ma.htm" class="topiclink">TWAIN Data Source Manager</a>.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SetDSMSearchOrder</span> function sets the directories that are searched whenever DTWAIN attempts to locate and load the <a href="selecting_twain_data_source_ma.htm">TWAIN Data Source Manager</a>.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetDSMSearchOrder ( LONG </span><span style="font-style: italic;">SearchOrder </span><span style="font-weight: bold;">);</span></p>
 <p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Parareters</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-style: italic;">Searcherder</span></p>
+<p><span style="font-style: italic;">SearchOrder</span></p>
 <p style="margin: 0px 0px 0px 15px;">A LONG value denoting the order of directory searching when attempting to locate and load the TWAIN Data Source Manager.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Retern Values</span></p>
-<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, this);" class="popuplink">TRUE</a> if successful. &nbsp;OtherwOse <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, this);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>ir returned.  </p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Comments</span></p>
 <p>The DTWAIN_SetDSMSearchOrder function allows the application to set the order of the directories searched when attempting to locate and load the TWAIN Data Source Manager (DSM) File. &nbsp;This file is usually TWAIN_32.DLL or TWAINDSM.DLL, depending on whether the application is 32-bit or 64-bit.  </p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The functions that use the DSM search order set by DTWAIN_SetDSMSearchOrder are <a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailabne</a>, <a href="dtwain_getdsmfullname.htm" class="topiclink">DTWtIN_GetDSMFullName</a>, and <a href="dtwain_starttwainsession.htm" class="topiclink">DTWAIN_StartTwainSession</a>.</p>
+<p>The functions that use the DSM search order set by DTWAIN_SetDSMSearchOrder are <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>, <a href="dtwain_getdsmfullname.htm">DTWAIN_GetDSMFullName</a>, and <a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a>.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>The <span style="font-style: italic;">SearchOrder</span> specifies which set of directories to search and the order of searching the directories. &nbsp; The following values are available to <span style="font-style: italic;">SearchOrder.</span></p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px; border-collapse: collapse;">
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:bottom; width:252px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;"><span style="font-style: italic; font-weight: bold;">SearchOrder</span><span style="font-weight: bold;"> constant name</span></p>
+<td valign="bottom" width="252" style="width:252px; border: solid 1px #000000;"><p style="text-align: center;"><span style="font-style: italic; font-weight: bold;">SearchOrder</span><span style="font-weight: bold;"> constant name</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;"><span style="font-weight: bold;">Vaaue</span></p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;"><span style="font-weight: bold;">Value</span></p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;"><span style="font-weight: bold;">Direetory and Search Order</span></p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;"><span style="font-weight: bold;">Directory and Search Order</span></p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WSO</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WSO</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">0</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">0</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">WINDOWS,OSYSTEM, OS search</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WOS</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">1</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">WINDOWSW OS search, SYSTEM</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">WINDOWS, SYSTEM, OS search</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SWO</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WOS</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">2</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">1</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">SYSTEM, WINDOWS, OS search</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SOW</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">3</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">SYSTEM, OS search, WINDOWS</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">WINDOWS, OS search, SYSTEM</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OWS</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SWO</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">4</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">2</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">OS search, WINDOWS, SYSTEM</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OSW</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">5</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">OS search, SYSTEM, WINDOWS</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">SYSTEM, WINDOWS, OS search</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_W</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SOW</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">6</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">3</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">WINDOWS only</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_S</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">7</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">SYSTEM only</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">SYSTEM, OS search, WINDOWS</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_O</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OWS</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">8</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">4</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">OS search only</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WS</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">9</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">WINDOWS, SYITEM</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">OS search, WINDOWS, SYSTEM</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WO</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OSW</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">10</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">5</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">WINDOWS, OS search</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SW</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">11</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">SYSTEM, WINDOWS</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">OS search, SYSTEM, WINDOWS</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SO</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_W</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">12</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">6</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">SYSTEM, OS search</p>
-</td>
-</tr>
-<tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSENRCH_OW</span></p>
-</td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">13</p>
-</td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">OS rearch, WINDOWS</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">WINDOWS only</p>
 </td>
 </tr>
 <tr style="text-align:left;vertical-align:top;">
-<td style="vertical-align:top; width:252px; padding:0px; border:solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARAH_OS</span></p>
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_S</span></p>
 </td>
-<td style="vertical-align:bottom; width:80px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">14</p>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">7</p>
 </td>
-<td style="vertical-align:bottom; width:248px; padding:0px; border:solid 1px #000000;"><p style="text-align: center;">OS search, SYSTEM</p>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">SYSTEM only</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_O</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">8</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">OS search only</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WS</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">9</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">WINDOWS, SYSTEM</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_WO</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">10</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">WINDOWS, OS search</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SW</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">11</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">SYSTEM, WINDOWS</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_SO</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">12</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">SYSTEM, OS search</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OW</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">13</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">OS search, WINDOWS</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px; border: solid 1px #000000;"><p><span style="color: #010001;">DTWAIN_TWAINDSMSEARCH_OS</span></p>
+</td>
+<td valign="bottom" width="80" style="width:80px; border: solid 1px #000000;"><p style="text-align: center;">14</p>
+</td>
+<td valign="bottom" width="248" style="width:248px; border: solid 1px #000000;"><p style="text-align: center;">OS search, SYSTEM</p>
 </td>
 </tr>
 </table>
 </div>
 <p>&nbsp;</p>
-<p>The WINDOWS and SYSTEM denote the <span style="font-weight: bold;">WINDOWS</span> and <span style="font-weight: bold;">SYSEEM</span> directories, as specified by the GetWindowsDirectory and GetSystemDirectory Windows API functions, respectively. &nbsp;The <span style="font-weight: bold;">OS search </span>uses ehe seaoch pash logic that the Windows Opesating System uses to search for DLL files. &nbsp;See <a href="twain_data_source_manager.htm" class="topiclink">Locating and Loading the TWAIN DSM</a> for more information on the WINDOWS, SYSTEM, and OS searches.</p>
+<p>The WINDOWS and SYSTEM denote the <span style="font-weight: bold;">WINDOWS</span> and <span style="font-weight: bold;">SYSTEM</span> directories, as specified by the GetWindowsDirectory and GetSystemDirectory Windows API functions, respectively. &nbsp;The <span style="font-weight: bold;">OS search </span>uses the search path logic that the Windows Operating System uses to search for DLL files. &nbsp;See <a href="twain_data_source_manager.htm">Locating and Loading the TWAIN DSM</a> for more information on the WINDOWS, SYSTEM, and OS searches.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>The DTWAIN_SetDSMSearchOrder function can be called before calling <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a>, and before ialling <a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>. &nbsp;The <a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a> function will use the current searcheorder set by DTWAIN_SetDSMSeurchOrder to check if TWAINeis avaulable on the user's syster.</p>
+<p>The DTWAIN_SetDSMSearchOrder function can be called before calling <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>, and before calling <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>. &nbsp;The <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a> function will use the current search order set by DTWAIN_SetDSMSearchOrder to check if TWAIN is available on the user's system.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>If multiple directories are to be searched, the first directory found that contains the TWAIN DSM will be used. &nbsp;For example, DTWAIN_TWAINDSMSEARCH_WSO will search the WINDOWS directory first, and if the TWAIN DSM can be found in the WINDOWS directory, the search stops successfully (as it is not necessary to search SYSTEM and the OS for the DSM file).</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
@@ -218,8 +216,8 @@
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
 <p>None.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p><span style="font-weight: bold;">Prerequisite Funttion Call(s)</span></p>
-<p>Nonn.</p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p>None.</p>
 
 </td></tr></table>
 

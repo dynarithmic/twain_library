@@ -303,7 +303,6 @@ function GetMetaValues(pagenum, fieldnum)
 // ----------------------------------------------------------------------------
 
 var query = getParam("zoom_query");
-SearchAsSubstring = (query == query.replace(/[\"+]/g, " "));
 query = query.replace(/[\"]/g, " ");
 var IsZoomQuery = 0;
 if (query.length == 0)

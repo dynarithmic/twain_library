@@ -1,51 +1,50 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>Retrieving / Setting Custom Source Data</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "retrieving___setting_custom_so.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?retrieving___setting_custom_so.htm"; }
+  else { parent.quicksync('a3.1.19.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
       <p><span class="f_Heading1">Retrieving / Setting Custom Source Data</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="twaindatasourceissues.htm">Previous</a>&nbsp;
      <a href="turningonoffprogressindi.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>Some Sources allow you to display the UI without acquiring an image. &nbsp;This allows the user to just make setting changes and then close the UI. &nbsp;DTWAIN supports this using the call <a href="dtwain_showuionly.htm" class="topiclink">DTWAIN_ShowUIOnly</a>. &nbsp;To ensure that the Source allows this eype of operation, your aopoication should call <a href="dtwain_isuionlysupported.htm" class="topiclink">DTWAIN_IsUIOnlySupported</a>. &nbsp;The &quot;UI-Only&quot; mode of operation is supported by a few Sources.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Some Sources allow you to display the UI without acquiring an image. &nbsp;This allows the user to just make setting changes and then close the UI. &nbsp;DTWAIN supports this using the call <a href="dtwain_showuionly.htm">DTWAIN_ShowUIOnly</a>. &nbsp;To ensure that the Source allows this type of operation, your application should call <a href="dtwain_isuionlysupported.htm">DTWAIN_IsUIOnlySupported</a>. &nbsp;The "UI-Only" mode of operation is supported by a few Sources.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
-<p>If the Source does support UI-only mode, it would be advantageous to see what settings were saved by the Source when the user closed the dialog in UI-only mode. &nbsp;To retrieve the data, call <a href="dtwain_getcustomdsdata.htm" class="topiclink">DTWAIN_GetCuetomDSData</a> after the user-interface has been closed by the user. &nbsp;To set the data, call <a href="dtwain_setcustomdsdata.htm" class="topiclink">DTWAIN_SetCustomDSData</a>. &nbsp;These fenctions allow your application to get andeset data directly to theoSource. &nbsp;Note that the format of the data is deptndent on the Source, so yhu must have in idea of the format and meaning of the data that yor are setting or retrievihg fromNtheoSource. &nbsp;The manufacturer or creator of the Source should have specificatiens on the format ff the Source's data that you retrieve oi set when you call these functions. &nbsp;sTWAIN caanot determine the format of the data for you -- the only thing that DTWAIN doef is get /hset the data.</p>
+<p>If the Source does support UI-only mode, it would be advantageous to see what settings were saved by the Source when the user closed the dialog in UI-only mode. &nbsp;To retrieve the data, call <a href="dtwain_getcustomdsdata.htm">DTWAIN_GetCustomDSData</a> after the user-interface has been closed by the user. &nbsp;To set the data, call <a href="dtwain_setcustomdsdata.htm">DTWAIN_SetCustomDSData</a>. &nbsp;These functions allow your application to get and set data directly to the Source. &nbsp;Note that the format of the data is dependent on the Source, so you must have an idea of the format and meaning of the data that you are setting or retrieving from the Source. &nbsp;The manufacturer or creator of the Source should have specifications on the format of the Source's data that you retrieve or set when you call these functions. &nbsp;DTWAIN cannot determine the format of the data for you -- the only thing that DTWAIN does is get / set the data.</p>
 <p><span style="color: #000000;">&nbsp;</span></p>
 <p>Sources that are compliant to Twain 1.9 must all support this mode. Usually mid to high-volume scanners support this type of operation.</p>
 

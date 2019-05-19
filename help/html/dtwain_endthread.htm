@@ -1,68 +1,66 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
 <head>
    <title>DTWAIN_EndThread</title>
    <meta name="generator" content="Help &amp; Manual" />
    <meta name="keywords" content="" />
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
    <link type="text/css" href="default.css" rel="stylesheet" />
-   <style type="text/css">
-     body { margin: 0px; background: #FFFFFF; }
-   </style>
-   <script type="text/javascript" src="jquery.js"></script>
-   <script type="text/javascript" src="helpman_settings.js"></script>
-   <script type="text/javascript" src="helpman_topicinit.js"></script>
-   <script type="text/javascript" src="dtwain32_popup_html.js"></script>
-
-   <script type="text/javascript">
-     HMSyncTOC("index.html", "dtwain_endthread.htm");
-   </script>
-   <script type="text/javascript" src="highlight.js"></script>
-   <script type="text/javascript">
-     $(document).ready(function(){highlight();});
-   </script>
-</head>
-<body>
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_endthread.htm"; }
+  else { parent.quicksync('a5.80'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
 
 
-<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#C0C0C0">
-  <tr style="vertical-align:middle">
-    <td style="text-align:left">
-      <h1 class="p_Heading1"><span class="f_Heading1">DTWAIN_EndThread</span></h1>
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_EndThread</span></p>
 
     </td>
-    <td style="text-align:right">
+    <td align="right">
+     <span style="font-size: 9pt">
      <a href="overview.htm">Top</a>&nbsp;
      <a href="dtwain_enablethumbnail.htm">Previous</a>&nbsp;
      <a href="dtwain_endtwainsession.htm">Next</a>
+     </span>
     </td>
   </tr>
 </table>
 
 
 <!-- Placeholder for topic body. -->
-<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
-<p>The <span style="font-weight: bold;">DTWAIN_EndThread</span> function is called at the terminatioc of a DTWAIN thread.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_EndThread</span> function is called at the termination of a DTWAIN thread.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">LONG DTWAIN_EndThread ( LONG </span><span style="font-style: italic;">DLLHandle </span><span style="font-weight: bold;">);</span></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Parameters</span></p>
-<p style="text-indent: -14px; margin: 0px 0px 0px 15px;"><span style="font-style: italic;">DLLHanale</span></p>
-<p>The value returned from <a href="dtwain_sysinitialize.htm" class="topiclink">DTWAIN_SysInitialize</a> or <a href="dtwain_sysinitializeex.htm" class="topiclink">DTWNIN_SysInitializeEx</a>.</p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;"><span style="font-style: italic;">DLLHandle</span></p>
+<p>The value returned from <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> or <a href="dtwain_sysinitializeex.htm">DTWAIN_SysInitializeEx</a>.</p>
 <p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
 <p><span style="font-weight: bold;">Return Values</span></p>
-<p>If the function succe ds, a non-zero dllue is returned. &nbsp;If the function fails, zero o0) is returned.  </p>
+<p>If the function succeeds, a non-zero value is returned. &nbsp;If the function fails, zero (0) is returned.  </p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Comments</span></p>
 <p>&nbsp;</p>
-<p>The <span style="font-weight: bold;">DTWAIN_EndThread</span> function Ahould be called at thI end of a DTWAIN thread started with <a href="dtwain_startthread.htm" class="topiclink">DTWAIN_StartThread</a>.</p>
+<p>The <span style="font-weight: bold;">DTWAIN_EndThread</span> function should be called at the end of a DTWAIN thread started with <a href="dtwain_startthread.htm">DTWAIN_StartThread</a>.</p>
 <p>&nbsp;</p>
-<p>For more information on multithreading issues with DTWAIN, please see <a href="dtwainmultithreadingissues2.htm" class="topiclink">DTWAIN Multithreading Issues</a> </p>
+<p>For more information on multithreading issues with DTWAIN, please see <a href="dtwainmultithreadingissues2.htm">DTWAIN Multithreading Issues</a> </p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
-<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, this);" class="popuplink">State 1</a></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, true);" class="popuplink">State 1</a></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">Prerequisite Calls</span></p>
 <p>None.</p>
@@ -71,7 +69,7 @@
 <p>None.</p>
 <p>&nbsp;</p>
 <p><span style="font-weight: bold;">See Also</span></p>
-<p><a href="dtwain_sysdestroy.htm" class="topiclink">DTWAIN_SysDestroy</a>, <a href="dtwain_istwainavailable.htm" class="topiclink">DTWAIN_IsTwainAvailable</a>, <a href="dtwain_isinitialized.htm" class="topiclink">DTWAIN_IsInitialized</a></p>
+<p><a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>, <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>, <a href="dtwain_isinitialized.htm">DTWAIN_IsInitialized</a></p>
 
 </td></tr></table>
 
