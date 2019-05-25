@@ -58,8 +58,7 @@ In addition to the dll and lib files, the text resource files must also be avail
 
 The files above are required, since they contain all the information concerning the naming of the TWAIN capabilities, triplet information, etc.  You do not need to know what these various aspects of TWAIN are -- just make sure these files reside in the same directory as the dtwain*.dll when your application is executed.
 
-If these files are not found, you will receive the [following error when running your application]
-![](https://github.com/dynarithmic/twain_library/tree/master/binaries/resource_error.jpg)
+If these files are not found, you will receive the ![following error when running your application](https://github.com/dynarithmic/twain_library/tree/master/binaries/resource_error.jpg)
 
 In addition, there are optional string resource files available that.  Here are a list of those files:
 	
