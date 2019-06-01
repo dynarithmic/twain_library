@@ -81,8 +81,8 @@
     #define UNICODE_VERSION
 #endif
 
-#define DTWAIN_VERINFO_PATCHLEVEL_NUM       3
-#define DTWAIN_VERINFO_PATCHLEVEL           "3"
+#define DTWAIN_VERINFO_PATCHLEVEL_NUM       4
+#define DTWAIN_VERINFO_PATCHLEVEL           "4"
 #define DTWAIN_VERINFO_BASEVERSION          "5.0.0."
 #define DTWAIN_VERINFO_COMMENTS             "Patch Level " DTWAIN_VERINFO_PATCHLEVEL "\0"
 #define DTWAIN_VERINFO_COMPANYNAME          "Dynarithmic Software\0"
