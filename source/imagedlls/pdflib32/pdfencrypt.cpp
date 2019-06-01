@@ -221,7 +221,6 @@ void PDFEncryption::SetupGlobalEncryptionKey(const std::string& documentID,
     m_documentID = documentID;
     mkey.resize(strength128Bits ? 16 : 5);
 
-    //fixed by ujihara in order to follow PDF refrence
     UCHARArray digest(16);
     UCHARArray ext(4);
 
@@ -233,21 +232,21 @@ void PDFEncryption::SetupGlobalEncryptionKey(const std::string& documentID,
     // This version of the MD5 checksum mimics the PDF reference
     CryptoPP::Weak1::MD5 Cryp;
     Cryp.Restart();
-    Cryp.Update(&userPad[0], userPad.size());
-    Cryp.Update(&ownerKeyParam[0], ownerKeyParam.size());
-    Cryp.Update(&ext[0], 4);
+    Cryp.Update(userPad.data(), userPad.size());
+    Cryp.Update(ownerKeyParam.data(), ownerKeyParam.size());
+    Cryp.Update(ext.data(), 4);
     {
         UCHARArray test = StringToHexArray(documentID);
-        Cryp.Update(&test[0], test.size());
+        Cryp.Update(test.data(), test.size());
     }
 
-    Cryp.Final(&digest[0]);
+    Cryp.Final(digest.data());
     if (mkey.size() == 16) 
     {
         for (int k = 0; k < 50; ++k)
         {
-            Cryp.Update(&digest[0], digest.size());
-            Cryp.Final(&digest[0]);
+            Cryp.Update(digest.data(), digest.size());
+            Cryp.Final(digest.data());
         }
     }
 
@@ -263,15 +262,15 @@ PDFEncryption::UCHARArray PDFEncryption::ComputeOwnerKey(const UCHARArray& userP
     UCHARArray digest(16);
     CryptoPP::Weak1::MD5 Cryp;
     Cryp.Restart();
-    Cryp.Update(&ownerPad[0], ownerPad.size());
-    Cryp.Final(&digest[0]);
+    Cryp.Update(ownerPad.data(), ownerPad.size());
+    Cryp.Final(digest.data());
     if (strength128Bits) 
     {
         UCHARArray mkeyValue(16);
         for (int k = 0; k < 50; ++k)
         {
-            Cryp.Update(&digest[0], digest.size());
-            Cryp.Final(&digest[0]);
+            Cryp.Update(digest.data(), digest.size());
+            Cryp.Final(digest.data());
         }
         ArrayCopy(userPad, 0, ownerKeyValue, 0, 32);
         for (int i = 0; i < 20; ++i) 
@@ -303,8 +302,8 @@ void PDFEncryption::SetupUserKey()
 
         // step 3
         UCHARArray test = StringToHexArray(m_documentID);
-        Cryp.Update(&test[0], test.size());
-        Cryp.Final(&digest[0]);
+        Cryp.Update(test.data(), test.size());
+        Cryp.Final(digest.data());
 
         // step 4
         PrepareRC4Key(mkey, 0, static_cast<int>(mkey.size()));
@@ -374,15 +373,15 @@ void PDFEncryption::SetHashKey(int number, int generation)
 	/** Work area to prepare the object/generation bytes */
 	UCHARArray extra = GetExtendedKey(number, generation);
     std::ostringstream m;
-	m.write((const char *)&mkey[0], mkey.size());
-	m.write((const char *)&extra[0],extra.size());
+	m.write((const char *)mkey.data(), mkey.size());
+	m.write((const char *)extra.data(),extra.size());
     std::string sTemp = m.str();
 
     UCHARArray tempArr = StringToByteArray(sTemp);
     CryptoPP::Weak1::MD5 Cryp;
-    Cryp.Update(&tempArr[0], tempArr.size()); //&tempArr[0], tempArr.size());
+    Cryp.Update(tempArr.data(), tempArr.size()); 
     key.resize(32);
-    Cryp.Final(&key[0]);
+    Cryp.Final(key.data());
 
     keySize = static_cast<int>(mkey.size()) + 5;
     if (keySize > 16)
@@ -460,8 +459,8 @@ void PDFEncryptionRC4::Encrypt(const std::string& dataIn, std::string& dataOut)
     std::copy (dataIn.begin(), dataIn.end(), dIn.begin());
     UCHARArray dOut(dataIn.size());
     EncryptRC4(dIn, dOut);
-    dataOut ="";
-    dataOut.append(reinterpret_cast<const char *>(&dOut[0]), dOut.size()); //.begin(), dOut.end());// = reinterpret_cast<const char *>(&dOut[0]);
+	dataOut.clear();
+    dataOut.append(reinterpret_cast<const char *>(dOut.data()), dOut.size()); 
 }
 
 void PDFEncryptionRC4::Encrypt(char *dataIn, int len)
