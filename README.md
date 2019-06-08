@@ -90,8 +90,8 @@ The simplest example is probably one that opens the TWAIN "Select Source" dialog
         DTWAIN_SysInitialize();
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
         if ( Source )
-            DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT,
-                                TRUE, TRUE, NULL);
+            DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME,
+                                DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
         DTWAIN_SysDestroy();         
     }         
 
@@ -107,8 +107,7 @@ If you desire to acquire to an image in memory instead of a file, that can be do
         DTWAIN_ARRAY images;
         if ( Source )
         {
-            images = DTWAIN_AcquireNative(Source, DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT,
-                                          TRUE, TRUE, NULL);
+            images = DTWAIN_AcquireNative(Source, DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
             HANDLE hDib = DTWAIN_GetAcquiredImage(images, 0, 0); // handle to first DIB acquired is returned
             GlobalLock(hDib); // lock image
             /*Now our app has a DIB. We can do any function that needs a DIB
@@ -124,16 +123,42 @@ The above assumes your application knows how to handle DIBs (they are basically 
 
 In addition, you can acquire images without showing a user interface by simply specifying the "show user-interface" parameter to either TRUE (1), or FALSE (0).
 
-    DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT, FALSE, TRUE, NULL);
+    DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, DTWAIN_USENATIVE | DTWAIN_USENAME, 
+                        DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, FALSE, TRUE, NULL);
 
 or if it is the second example:
 
-    images = DTWAIN_AcquireNative(Source, DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT,
-                                          FALSE, TRUE, NULL);
+    images = DTWAIN_AcquireNative(Source, DTWAIN_PT_DEFAULT, 
+                                  DTWAIN_MAXACQUIRE, FALSE, TRUE, NULL);
 
 ----------
 
-### What if I don't have Visual Studio?  I use Embarcadero/g++/clang/MingW/Dev++ (fill in with your favorite compiler or IDE).  How do I use the library?
+### What about setting device capabilities such as resolution, contrast, brightness, paper size, etc.?
+
+Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as *DTWAIN_EnumCapabilities*, *DTWAIN_GetCapValues* and *DTWAIN_SetCapValues*, or one of the functions that wrap the setting of a capability such as *DTWAIN_SetResolution*, *DTWAIN_SetBrightness*, etc.
+
+    #include "dtwain.h"
+    int main()
+    {
+        DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        DTWAIN_ARRAY images;
+        if ( Source )
+        {
+            // set the brightness level to 100
+            DTWAIN_SetResolution(Source, 300.0); // set the resolution to 300
+            //...
+        }   
+        DTWAIN_SysDestroy();         
+    }         
+ 
+Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling *DTWAIN_GetLastError*.
+
+In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support.      
+
+----------
+
+### What if I don't have Visual Studio as the compiler to use when building an application?  I use Embarcadero/g++/clang/MingW/Dev++ (fill in with your favorite compiler or IDE).  How do I use the library?
 
 You can do one of two things:
 
@@ -159,8 +184,9 @@ For the first item, some compilers have external tools that allow you to use Vis
         API.DTWAIN_SysInitialize();
         DTWAIN_SOURCE Source = API.DTWAIN_SelectSource();
         if ( Source )
-            API.DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT,
-                                TRUE, TRUE, NULL);
+            API.DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, 
+                                    DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT, 
+                                    DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
         API.DTWAIN_SysDestroy();         
     }         
 
@@ -201,6 +227,7 @@ For example, here is a bare-bones C# language example of acquiring a BMP image f
 	                                           TwainAPI.DTWAIN_PT_DEFAULT,
 	                                           1,
 	                                           1,
+                                               1,
 	                                           ref status);
 	   }
 	   TwainAPI.DTWAIN_SysDestroy();
