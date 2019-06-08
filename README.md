@@ -90,7 +90,7 @@ The simplest example is probably one that opens the TWAIN "Select Source" dialog
         DTWAIN_SysInitialize();
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
         if ( Source )
-            DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP. DTWAIN_USENATIVE | DTWAIN_USENAME,
+            DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, DTWAIN_USENATIVE | DTWAIN_USENAME,
                                 DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
         DTWAIN_SysDestroy();         
     }         
