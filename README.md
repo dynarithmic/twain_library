@@ -142,7 +142,6 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
     {
         DTWAIN_SysInitialize();
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
-        DTWAIN_ARRAY images;
         if ( Source )
         {
             // set the brightness level to 100
