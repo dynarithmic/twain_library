@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is **5.0.0.4**
+* The current version is **5.0.0.5**
 
 
 
@@ -82,11 +82,17 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
   
 ### Ok, how about a code sample?
 
-The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file.  Here is an entire C++ example that demonstrates this:
+The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
     #include "dtwain.h"
+    #include <iostream>
+
     int main()
     {
+        // display DTWAIN version, just for fun
+        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
+
+        // initialize and acquire image and save to BMP file
         DTWAIN_SysInitialize();
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
         if ( Source )

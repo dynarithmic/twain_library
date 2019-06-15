@@ -36,6 +36,7 @@
 #include "enumeratorfuncs.h"
 #include "ctlfileutils.h"
 #include "tiff.h"
+#include "boost/lexical_cast.hpp"
 using namespace std;
 using namespace dynarithmic;
 
@@ -1546,7 +1547,20 @@ int GetInitialFileNumber(const CTL_StringType& sFileName, size_t &nDigits)
         if ( i == 0 )
             break;
     }
-    return stoi(sTemp);
+	
+	// now loop until we get a good cast from the string we have
+	while (!sTemp.empty())
+	{
+		try 
+		{
+			return boost::lexical_cast<int>(sTemp);
+		}
+		catch (boost::bad_lexical_cast)
+		{
+			sTemp.erase(sTemp.begin());
+		}
+	}
+	return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

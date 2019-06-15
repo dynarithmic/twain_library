@@ -1050,6 +1050,7 @@
     <ClInclude Include="h\ctltr042.h" />
     <ClInclude Include="h\dtwain_raii.h" />
     <ClInclude Include="h\dtwain_standard_defs.h" />
+    <ClInclude Include="h\dtwain_version.h" />
     <ClInclude Include="h\dtwtype.h" />
     <ClInclude Include="h\errstruc.h" />
     <ClInclude Include="h\imagefun\pcxfun32.h" />
