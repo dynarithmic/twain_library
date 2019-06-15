@@ -18,13 +18,12 @@
     DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
     OF THIRD PARTY RIGHTS.
  */
-#ifndef DTWAIN_H_
-#define DTWAIN_H_
-#ifdef _WIN32
-    #include <windows.h>
-#endif
-#include "dtwainc.h"
-#include "dtwainx.h"
-#include "dtwain_version.h"
-#include "twain.h"
+#ifndef DTWAIN_VERSION_H
+#define DTWAIN_VERSION_H
+
+#define DTWAIN_VERINFO_PATCHLEVEL_NUM       5
+#define DTWAIN_VERINFO_PATCHLEVEL           "5"
+#define DTWAIN_VERINFO_BASEVERSION          "5.0.0."
+#define DTWAIN_VERINFO_FILEVERSION          DTWAIN_VERINFO_BASEVERSION DTWAIN_VERINFO_PATCHLEVEL "\0"
+
 #endif

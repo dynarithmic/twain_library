@@ -21,6 +21,8 @@
 #ifndef DTWAIN_VERINFO_H
 #define DTWAIN_VERINFO_H
 
+#include "dtwain_version.h"
+
 #ifdef _DEBUG
     #define DTWAIN_DEVELOP_SUFFIX "d"
 #else
@@ -81,12 +83,8 @@
     #define UNICODE_VERSION
 #endif
 
-#define DTWAIN_VERINFO_PATCHLEVEL_NUM       4
-#define DTWAIN_VERINFO_PATCHLEVEL           "4"
-#define DTWAIN_VERINFO_BASEVERSION          "5.0.0."
 #define DTWAIN_VERINFO_COMMENTS             "Patch Level " DTWAIN_VERINFO_PATCHLEVEL "\0"
 #define DTWAIN_VERINFO_COMPANYNAME          "Dynarithmic Software\0"
-#define DTWAIN_VERINFO_FILEVERSION          DTWAIN_VERINFO_BASEVERSION DTWAIN_VERINFO_PATCHLEVEL "\0"
 #define DTWAIN_VERINFO_LEGALCOPYRIGHT       "Copyright © 2019\0"
 #define DTWAIN_VERINFO_PRODUCTNAME          "Dynarithmic Software Twain Library " UNICODE_VERSION "\0"
 #define DTWAIN_VERINFO_INTERNALNAME         DTWAIN_DLLNAME
