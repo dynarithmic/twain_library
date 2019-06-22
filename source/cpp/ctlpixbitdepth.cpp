@@ -281,3 +281,11 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN
 	LOG_FUNC_EXIT_PARAMS(iter != bppMap.end())
 	CATCH_BLOCK(FALSE)
 }
+
+LONG DLLENTRY_DEF DTWAIN_MakeRGB(LONG red, LONG green, LONG blue)
+{
+	LOG_FUNC_ENTRY_PARAMS((red, green, blue))
+	LONG returnVal = RGB(red, green, blue);
+	LOG_FUNC_EXIT_PARAMS(returnVal);
+	CATCH_BLOCK(0)
+}

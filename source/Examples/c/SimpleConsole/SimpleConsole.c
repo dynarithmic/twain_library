@@ -5,6 +5,7 @@
 
 int main()
 {
+	printf("Hello DTWAIN Version %s\n", DTWAIN_VERINFO_FILEVERSION);
     DTWAIN_HANDLE isInitialized = DTWAIN_SysInitialize();
     DTWAIN_SOURCE Source;
     if (!isInitialized)

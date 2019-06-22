@@ -270,7 +270,8 @@ CTL_ITwainSource::CTL_ITwainSource( CTL_ITwainSession *pSession, LPCTSTR lpszPro
     m_ImageInfoEx.PDFPageSize = DTWAIN_FS_USLETTER;
     m_ImageInfoEx.PDFCustomSize[0] = 8.5f;
     m_ImageInfoEx.PDFCustomSize[1] = 11.0f;
-    m_ImageInfoEx.PDFUseCompression = false;
+    m_ImageInfoEx.PDFUseCompression = true;
+	m_ImageInfoEx.PDFUseNoCompression = false;
     m_ImageInfoEx.PDFCustomScale[0] = 100.0;
     m_ImageInfoEx.PDFCustomScale[1] = 100.0;
     m_ImageInfoEx.PDFUseThumbnail = false;

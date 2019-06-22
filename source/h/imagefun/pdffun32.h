@@ -61,6 +61,7 @@ namespace dynarithmic
                                          double charSpacing, double wordSpacing,
                                          LONG riseValue, LONG flags, double scalingX, double scalingY, double rotationAngle);*/
     typedef void  (CALLBACK *PDF_FUNC18)(void *pDoc, LONG Polarity);
+	typedef void  (CALLBACK *PDF_FUNC19)(void* pDoc, bool bCompress);
 
     struct PDFINFO
     {
@@ -160,6 +161,7 @@ namespace dynarithmic
             static PDF_FUNC16 m_pPDFSetSearchableText;
             static PDF_FUNC17 m_pPDFAddPageText;
             static PDF_FUNC18 m_pPDFSetPolarity;
+			static PDF_FUNC19 m_pPDFSetNoCompression;
 
             static bool s_bLibraryLoaded;
     };

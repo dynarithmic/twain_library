@@ -825,3 +825,4 @@ DTWAIN_GetConditionCodeString                     @18000
 DTWAIN_GetConditionCodeStringA                    @18001 
 DTWAIN_GetConditionCodeStringW                    @18002 
 DTWAIN_EnumFileTypeBitsPerPixel					  @19000
+DTWAIN_MakeRGB									  @19001
