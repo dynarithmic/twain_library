@@ -59,6 +59,7 @@ PDF_FUNC15 CPDFImageHandler::m_pPDFSetASCIICompression   =NULL;
 PDF_FUNC16 CPDFImageHandler::m_pPDFSetSearchableText = NULL;
 PDF_FUNC17 CPDFImageHandler::m_pPDFAddPageText = NULL;
 PDF_FUNC18 CPDFImageHandler::m_pPDFSetPolarity = NULL;
+PDF_FUNC19 CPDFImageHandler::m_pPDFSetNoCompression = NULL;
 
 CPDFImageHandler::CPDFImageHandler(const CTL_StringType& sFileName, DTWAINImageInfoEx &ImageInfoEx) :
         CDibInterface(), m_ImageInfoEx(ImageInfoEx),
@@ -90,6 +91,7 @@ bool CPDFImageHandler::LoadPDFLibrary()
     m_pPDFSetDPI              =   DTWLIB_PDFSetDPI;
     m_pPDFSetEncryption       =   DTWLIB_PDFSetEncryption;
     m_pPDFSetASCIICompression =   DTWLIB_PDFSetASCIICompression;
+	m_pPDFSetNoCompression 	  =	  DTWLIB_PDFSetNoCompression;
     m_pPDFSetSearchableText   =   DTWLIB_PDFSetSearchableText;
     m_pPDFAddPageText         =   DTWLIB_PDFAddPageText;
     m_pPDFSetPolarity         =   DTWLIB_PDFSetPolarity;
@@ -160,15 +162,17 @@ int CPDFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR p
         pPDFInfo->sFileName     = m_sFileName;
 
 
-        // Turn on the compression
         m_pPDFSetCompression(pDocument, false);
+		m_pPDFSetNoCompression(pDocument, false);
+
         // Set the ASCII Hex compression
         m_pPDFSetASCIICompression(pDocument, pPDFInfo->ImageInfoEx.PDFUseASCIICompression);
 
+		// turn on other compression flags in the PDF object
         if ( pPDFInfo->ImageInfoEx.PDFUseCompression )
-        {
-            m_pPDFSetCompression(pDocument, true);
-        }
+			m_pPDFSetCompression(pDocument, true);   // Use Flate compression
+		else
+			m_pPDFSetNoCompression(pDocument, true); // Use no compression 
 
         m_pPDFSetNameField(pDocument, PDF_AUTHOR, m_sAuthor.c_str());
         m_pPDFSetNameField(pDocument, PDF_PRODUCER, m_sProducer.c_str());

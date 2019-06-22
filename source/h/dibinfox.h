@@ -83,6 +83,7 @@ namespace dynarithmic
         bool bIsAESEncrypted;
         bool bUseStrongEncryption;
         bool PDFUseASCIICompression;
+		bool PDFUseNoCompression;
         LONG PDFPermissions;
         LONG PSType;
         LONG UnitOfMeasure;
@@ -150,7 +151,8 @@ namespace dynarithmic
             nJpegQuality(100),
             bProgressiveJpeg(false),
             PDFPageSize(DTWAIN_PDF_NOSCALING),
-            PDFUseCompression(false),
+			PDFUseCompression(true),
+			PDFUseNoCompression(false),
             PDFUseThumbnail(false)
             {
                 PDFThumbnailScale[0] =

@@ -41,6 +41,7 @@ namespace dynarithmic
     
         void FUNCCONVENTION DTWLIB_PDFGetDLLVersion(LPLONG lMajor, LPLONG lMinor, LPLONG lPatch);
         void FUNCCONVENTION DTWLIB_PDFSetASCIICompression(void *pDoc, bool bCompression);
+		void FUNCCONVENTION DTWLIB_PDFSetNoCompression(void *pDoc, bool bCompression);
         void FUNCCONVENTION DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR text);
         void FUNCCONVENTION DTWLIB_PDFAddPageText(void *pDoc, PDFTextElement* pElement); /*LPCSTR szTest, LONG xPos, LONG yPos, 
                                                   LPCSTR fontName, double fontSize, LONG colorRGB,

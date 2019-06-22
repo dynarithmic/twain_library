@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is **5.0.0.5**
+* The current version is **5.0.0.6**
 
 
 
@@ -239,6 +239,18 @@ For example, here is a bare-bones C# language example of acquiring a BMP image f
     }
           
 Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
+
+----------
+
+### Programming issues with an event driven system such as TWAIN.
+
+Since TWAIN is an event-driven system, it is advantageous for whatever language you use to be able to support "callback" functions, i.e. functions that can be called during the TWAIN acquisition / scanning process.  There are a lot of events that occur during the acquisition process that you may want to take advantage of (for example, page about to be scanned, page scanned successfully, etc.), and having the ability to capture these events will give your application the most flexibility.  
+
+For example, please see the DTWDEMO.exe example program when acquiring to a PDF file, as a page number is added to the page for each page that is acquired by the device.  This is only possible (using DTWAIN) by using callbacks.
+  
+The *DTWAIN_SetCallback* and *DTWAIN_SetCallback64* sets up your callback function to intercept these events and act accordingly.  
+
+Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the DTWAIN_SetCallback or DTWAIN_SetCallback64 to work for you, then you're not going to have any issues).
 
 ----------
 

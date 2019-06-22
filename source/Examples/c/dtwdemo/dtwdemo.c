@@ -1121,11 +1121,13 @@ INT_PTR g_nDiscardDibRetVal;
 
 LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserData)
 {
+	static pdf_page_count = 1;
 	switch (wParam)
     {
         case DTWAIN_TN_ACQUIRESTARTED:
             bPageOK = TRUE;
             nPageCount = 0;
+			pdf_page_count = 1;
         break;
 
 		/* See if we want to keep the DIB */
@@ -1142,6 +1144,18 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
 			return retVal;   // return this back to DTWAIN
 		}
 		break;
+
+		/* If this is a PDF file this code will put a page stamp on this page */
+		case DTWAIN_TN_FILEPAGESAVING:
+		{
+			TCHAR text[100];
+			wsprintf(text, _T("Page %d"), pdf_page_count); 
+			++pdf_page_count;
+			DTWAIN_AddPDFText(g_CurrentSource, text, 100, 100, _T("Helvetica"), 12, 
+							  DTWAIN_MakeRGB(127, 127, 127), 0, 100.0, 0, 0.0, 0, 
+				              DTWAIN_PDFTEXT_CURRENTPAGE);
+			return 1;
+		}
 
         case DTWAIN_TN_FILEPAGESAVEERROR:
             MessageBox(NULL, _T("Could not save image page.\nPlease try acquiring image using a different color")

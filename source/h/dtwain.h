@@ -25,5 +25,6 @@
 #endif
 #include "dtwainc.h"
 #include "dtwainx.h"
+#include "dtwain_version.h"
 #include "twain.h"
 #endif

@@ -135,6 +135,11 @@ void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetASCIICompression(void *pDoc, bool 
     ((PdfDocument *)pDoc)->SetASCIICompression(bSetCompression);
 }
 
+void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetNoCompression(void *pDoc, bool bSetCompression)
+{
+	((PdfDocument *)pDoc)->SetNoCompression(bSetCompression);
+}
+
 void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR text)
 {
     ((PdfDocument *)pDoc)->SetSearchableText(text);

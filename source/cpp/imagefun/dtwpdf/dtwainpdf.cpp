@@ -330,14 +330,19 @@ std::string MakeCompatiblePDFString(const std::string& sString)
     return sNew2;
 }
 
+static int NoCompress(const std::string& inData, std::string& outData)
+{
+	outData = inData;
+	return 1;
+}
+
 static int EncodeVectorStream(const vector<char>& InputStream,
-                              size_t InputLength,
-                                vector<char>& OutStream,
-                              PdfDocument::CompressTypes compresstype)
+                              size_t InputLength,vector<char>& OutStream,PdfDocument::CompressTypes compresstype)
 {
 
     static std::unordered_map<PdfDocument::CompressTypes, std::function<int(const std::string&, std::string&)>>
-                compress_fn = { { PdfDocument::A85_COMPRESS, ::ASCII85Encode },
+                compress_fn = { { PdfDocument::NO_COMPRESS, ::NoCompress },
+								{ PdfDocument::A85_COMPRESS, ::ASCII85Encode },
                                 { PdfDocument::AHEX_COMPRESS, ::ASCIIHexEncode },
                                 { PdfDocument::FLATE_COMPRESS, ::FlateEncode}, };
 
@@ -1450,8 +1455,8 @@ void ContentsObject::CreateFontDictAndText(int startObjNum, int& nextObjNum)
                 sprintf(szBuf, "\n%4.2lf %4.2lf %4.2lf rg", red, green, blue);
                 m_sText += szBuf;
 
-                // Test matrix multiplacation of all components
-                // Try translate x rotate x scale/scew
+                // Test matrix multiplication of all components
+                // Try translate x rotate x scale/skew
                 MatrixTranslate[0][0] = 1;
                 MatrixTranslate[0][1] = 0;
                 MatrixTranslate[1][0] = 0;
@@ -1526,6 +1531,10 @@ void ContentsObject::CreateFontDictAndText(int startObjNum, int& nextObjNum)
 
                 // Set the render mode
                 sprintf(szBuf, "\n%d Tr ", (*pIt1)->renderMode);
+                m_sText += szBuf;
+
+				// Get the position
+				sprintf(szBuf, "\n1 0 0 1 %lf %lf Tm\n", (*pIt1)->xpos, (*pIt1)->ypos);
                 m_sText += szBuf;
 
                 // Get the leading
