@@ -60,7 +60,7 @@ namespace dynarithmic
 
     void CBaseLogger::generic_outstream(std::ostream& os, const CTL_String& msg)
     {
-        os << msg;
+        os << msg << '\n';
     }
 
     void StdCout_Logger::trace(const CTL_String& msg)
