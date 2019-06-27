@@ -268,28 +268,28 @@ Here is an example C++ program that puts a page number on the acquired image fil
        if ( wParam == DTWAIN_TN_FILEPAGESAVING )
        {
             // write text to the bottom left of the PDF page 
-   			char text[50]; // create the text string
-			sprintf(text, "Page %d", pdf_page_count); 
-			++pdf_page_count;
+            char text[50]; // create the text string
+            sprintf(text, "Page %d", pdf_page_count); 
+            ++pdf_page_count;
 
             // add the text to the page 
-			DTWAIN_AddPDFTextA(current_source, 
+            DTWAIN_AddPDFTextA(current_source, 
                                text,     // text to write on the page 
                                100, 100, // (x, y) postion 
-                               "Helvetica", // font to use 
+                              "Helvetica", // font to use 
                                14, // font height, in PDF points
-							   DTWAIN_MakeRGB(255, 0, 0), // Red text 
+                               DTWAIN_MakeRGB(255, 0, 0), // Red text 
                                0, 100.0, 0, 0.0, 0, // scaling, lead, etc. 
-				               DTWAIN_PDFTEXT_CURRENTPAGE); // flags denoting when to write this text
+                               DTWAIN_PDFTEXT_CURRENTPAGE); // flags denoting when to write this text
        }
-	   return 1;
+       return 1;
     }
     
     int main()
     {
         // initialize and acquire image and save to BMP file 
         if ( !DTWAIN_SysInitialize() )
-          return 0;  // TWAIN could not be initialized 
+           return 0;  // TWAIN could not be initialized 
 
         current_source = DTWAIN_SelectSource();
         if ( current_source )
