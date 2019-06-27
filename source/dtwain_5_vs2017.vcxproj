@@ -227,7 +227,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_UNICODE;_SCL_SECURE_NO_WARNINGS;DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
@@ -288,7 +288,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
@@ -349,7 +349,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
@@ -410,7 +410,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
@@ -455,7 +455,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U_D|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
@@ -485,7 +485,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_U|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Full</Optimization>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_UNICODE;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;NDEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
@@ -515,7 +515,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Full</Optimization>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUGNDEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
@@ -545,7 +545,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win64_DTWAINDLL_D|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\imagedlls\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\FreeImage\Source\LibJPEG\;.\FreeImage\Source\ZLib\;.\FreeImage\Source\LibTIFF4\;.\FreeImage\Source;.\FreeImage\Wrapper\FreeImagePlus\;.\date-master\include;.\h;.\matrix;.\boost;.\cryptolib;.\dtwinver;.\inl;.\crypt;.\cpp\pdflib32;.\h\imagefun;.\h\ImageFun\dtwpdf;.\h\ocrengine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>FREEIMAGE_CPP_LIB;_SCL_SECURE_NO_WARNINGS;TARGETNAME=$(TargetName);DTWAIN_OPENSOURCE_DISTRIBUTION;DTWAIN_INTERNAL_MODULE;BUILDING_JPEG_DLL;BUILDING_DTWIMG32;MSC2012_COMPILER;_DEBUG;DTWAIN_USE_PDFLIB;WIN64;WIN32;_WINDOWS;USE_NAMESPACES;STRICT;FUNCTION_MACRO_DEFINED;PDFLIB_INTERNAL;NO_CONST_KEYS;JAS_WIN_MSVC_BUILD;_SECURE_SCL=0;USE_CXIMAGE_JPEG;USE_CXIMAGE_JPEG2K;CXIMAGE_NAMESPACE;INCLUDE_DTWIMG32;_CRT_SECURE_NO_WARNINGS;DTWAIN_UNLICENSED_DISTRIBUTION_SPECIAL;_VARIADIC_MAX=10;CRYPTOPP_DISABLE_ASM;%(PreprocessorDefinitions);FREEIMAGE_CPP_LIB;</PreprocessorDefinitions>
@@ -738,25 +738,11 @@
     </ClCompile>
     <ClCompile Include=".\cpp\imagefun\pdffun32.cpp">
     </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\a85encode.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\ahexencode.cpp">
-    </ClCompile>
     <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwainpdf.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\md5class.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\md5class2.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\pdfencrypt.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\pdflib32.cpp">
     </ClCompile>
     <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwgetopt.cpp">
     </ClCompile>
     <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwtiff2ps.cpp">
-    </ClCompile>
-    <ClCompile Include=".\imagedlls\pdflib32\pslib32.cpp">
     </ClCompile>
     <ClCompile Include="cpp\ctlerrorbuffer.cpp" />
     <ClCompile Include="cpp\ctlfileappend.cpp" />
@@ -770,6 +756,14 @@
     <ClCompile Include="cpp\iohandler_pbm.cpp" />
     <ClCompile Include="cpp\iohandler_webp.cpp" />
     <ClCompile Include="cpp\linux_versioninfo.cpp" />
+    <ClCompile Include="cpp\pdflib32\a85encode.cpp" />
+    <ClCompile Include="cpp\pdflib32\ahexencode.cpp" />
+    <ClCompile Include="cpp\pdflib32\flateencode.cpp" />
+    <ClCompile Include="cpp\pdflib32\md5class.cpp" />
+    <ClCompile Include="cpp\pdflib32\md5class2.cpp" />
+    <ClCompile Include="cpp\pdflib32\pdfencrypt.cpp" />
+    <ClCompile Include="cpp\pdflib32\pdflib32.cpp" />
+    <ClCompile Include="cpp\pdflib32\pslib32.cpp" />
     <ClCompile Include="cpp\windows_versioninfo.cpp" />
     <ClCompile Include="cryptolib\3way.cpp" />
     <ClCompile Include="cryptolib\adler32.cpp" />
@@ -951,7 +945,6 @@
     <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipMultiPage.cpp" />
     <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipTag.cpp" />
     <ClCompile Include="FreeImage\Wrapper\FreeImagePlus\src\fipWinImage.cpp" />
-    <ClCompile Include="imagedlls\pdflib32\flateencode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\h\ctltr040.h" />
@@ -1039,6 +1032,12 @@
     <ClInclude Include=".\h\ctltr005.h" />
     <ClInclude Include=".\h\ctltr006.h" />
     <ClInclude Include=".\h\ctltr039.h" />
+    <ClInclude Include="cpp\pdflib32\a85encode.h" />
+    <ClInclude Include="cpp\pdflib32\ahexencode.h" />
+    <ClInclude Include="cpp\pdflib32\flateencode.h" />
+    <ClInclude Include="cpp\pdflib32\md5class.h" />
+    <ClInclude Include="cpp\pdflib32\pdfencrypt.h" />
+    <ClInclude Include="cpp\pdflib32\pdflib32.h" />
     <ClInclude Include="FreeImage\Source\FreeImage.h" />
     <ClInclude Include="FreeImage\Wrapper\FreeImagePlus\FreeImagePlus.h" />
     <ClInclude Include="h\ansiwideconverter_generic.h" />

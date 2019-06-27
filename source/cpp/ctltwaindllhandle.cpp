@@ -45,6 +45,7 @@ CTL_TwainDLLHandle::CTL_TwainDLLHandle() :
             m_nSourceCloseMode(DTWAIN_SourceCloseModeFORCE),
             m_nUIMode(DTWAIN_UIModeOPEN),
             m_bNotificationsUsed(false),
+			m_bOpenSourceOnSelect(true),
             m_pCallbackFn(nullptr),
             m_pCallbackFn64(nullptr),
             m_lCallbackData(0),
