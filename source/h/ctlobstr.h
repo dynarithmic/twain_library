@@ -279,7 +279,6 @@ namespace dynarithmic
         static StringType Right(const StringType& str, size_t nNum)
         {
             size_t nLen = str.length();
-            assert(nNum >= 0);
             if (nNum == 0)
                 return StringTraits::GetEmptyString();
             if (nNum > nLen)
@@ -289,7 +288,6 @@ namespace dynarithmic
 
         static StringType Mid(const StringType& str, size_t nFirst)
         {
-            assert(nFirst >= 0);
             if (nFirst == 0)
                 return str;
             return str.substr(nFirst);

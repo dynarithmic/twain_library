@@ -108,7 +108,6 @@ void CLogSystem::GetModuleName(HINSTANCE hInst)
     #ifdef WIN32
     TCHAR buf[_MAX_PATH+1];
     GetModuleFileName(hInst, buf, _MAX_PATH);
-    CTL_StringType appDir = GetBaseDir(buf);
     m_csAppName = GetBaseName(buf);
 #else
     // code for Linux using dladdr

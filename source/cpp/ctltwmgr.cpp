@@ -627,8 +627,6 @@ bool CTL_TwainAppMgr::ShowUserInterface( const CTL_ITwainSource *pSource, bool b
     if ( bTest )
     {
         return false;  // Just return that UI can not be tested.  Assume no UI cannot be done.
-        bOld = pTempSource->IsUIOpenOnAcquire();
-        pTempSource->SetUIOpenOnAcquire(false);
     }
 
     CTL_UserInterfaceTriplet *pUITrip;
@@ -641,9 +639,6 @@ bool CTL_TwainAppMgr::ShowUserInterface( const CTL_ITwainSource *pSource, bool b
         pUITrip = &UIOnly;
     else
         pUITrip = &UIEnabled;
-
-    if (bTest && !bShowUIOnly )
-        pTempSource->SetUIOpenOnAcquire( bOld );
 
     origSourceState oState(pTempSource, pSession);
 
@@ -993,9 +988,6 @@ int CTL_TwainAppMgr::ClipboardTransfer( CTL_ITwainSession *pSession,
 int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
                                     CTL_ITwainSource  *pSource )
 {
-    // Get the supported file formats
-    CTL_IntArray rArray;
-
     // Set the file type
     CTL_StringType sFileName;
     long lFlags = pSource->GetAcquireFileFlags();
@@ -1009,11 +1001,8 @@ int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
 
         CTL_StringType sGUID = StringWrapper::GetGUID();
         szTempPath += sGUID + _T(".IDT");
-        sFileName = szTempPath;
-        StringWrapper::TrimAll(sFileName);
-        if ( sFileName.empty() )
-            return false;
-        pSource->SetAcquireFile(sFileName.c_str());
+        StringWrapper::TrimAll(szTempPath);
+        pSource->SetAcquireFile(szTempPath.c_str());
     }
     else
     {
@@ -1586,6 +1575,9 @@ LPTSTR CTL_TwainAppMgr::GetErrorString(int nError, LPTSTR lpszBuffer, int nSize)
 ///////////////////////////////////////////////////////////////////////////
 bool CTL_TwainAppMgr::IsCapabilitySupported(const CTL_ITwainSource *pSource, TW_UINT16 nCap, int nType /*=CTL_GetTypeGET*/)
 {
+	if (!pSource)
+		return false;
+
     bool supported = pSource->IsCapInSupportedList(nCap);
     if ( supported )
         return true;
@@ -1593,13 +1585,10 @@ bool CTL_TwainAppMgr::IsCapabilitySupported(const CTL_ITwainSource *pSource, TW_
     if (pSource->IsCapInUnsupportedList(nCap))
         return false;
 
-    CTL_ITwainSource *pTempSource = (CTL_ITwainSource *)pSource;
+    CTL_ITwainSource *pTempSource = const_cast<CTL_ITwainSource *>(pSource);
     bool bRet = false;
-    if ( !pSource )
-        return false;
 
-    CTL_ITwainSession* pSession =
-                        pTempSource->GetTwainSession();
+    CTL_ITwainSession* pSession = pTempSource->GetTwainSession();
 
     if ( !IsValidTwainSession( pSession) )
         return false;
@@ -2396,7 +2385,7 @@ LONG CTL_TwainAppMgr::ExtImageInfoArrayType(LONG ExtType)
 /////////////// member functions for the CTL_TwainAppMgr///////////////////
 CTL_TwainAppMgr::CTL_TwainAppMgr(  LPCTSTR lpszDLLName,
                                     HINSTANCE hInstance,
-                                    HINSTANCE /*hThisInstance*/ )
+	HINSTANCE /*hThisInstance*/) : m_nErrorTWCC(0), m_nErrorTWRC(0)
 {
     if ( !lpszDLLName || lpszDLLName[0] == _T('\0') )
         m_strTwainDLLName = GetDefaultDLLName();
@@ -2455,7 +2444,6 @@ CTL_TwainAppMgr::CTL_TwainAppMgr(  LPCTSTR lpszDLLName,
 
 void CTL_TwainAppMgr::OpenLogFile(LPCSTR lpszFile)
 {
-    m_File = fopen(lpszFile, "w");
 }
 
 
@@ -2495,7 +2483,6 @@ void CTL_TwainAppMgr::DestroySession( CTL_ITwainSession *pSession )
 
 CTL_StringType CTL_TwainAppMgr::GetDefaultDLLName()
 {
-    CTL_StringType strTemp;
     CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
     if ( pHandle )
     {
@@ -2600,20 +2587,17 @@ void CTL_TwainAppMgr::WriteLogInfo(const CTL_StringType& s, bool bFlush)
     // Always call the callback if callback exists
     if ( UserDefinedLoggerExists() )
     {
-        CTL_StringType outStr = CTL_TwainDLLHandle::s_appLog.GetDebugStringFull(s.c_str()) + crlf;
+        CTL_StringType outStr = CTL_TwainDLLHandle::s_appLog.GetDebugStringFull(s) + crlf;
         WriteUserDefinedLogMsg(outStr.c_str());
     }
 
     if ( (CTL_TwainDLLHandle::s_lErrorFilterFlags & DTWAIN_LOG_WRITE) == 0 )
         return; // no need to process further
 
-    if (CTL_TwainDLLHandle::s_lErrorFilterFlags)
-    {
         CTL_TwainDLLHandle::s_appLog.StatusOutFast( s.c_str());
         if ( bFlush )
             CTL_TwainDLLHandle::s_appLog.Flush();
     }
-}
 
 
 TW_UINT16 CTL_TwainAppMgr::CallDSMEntryProc( CTL_TwainTriplet & pTriplet )
@@ -2693,8 +2677,6 @@ TW_UINT16 CTL_TwainAppMgr::CallDSMEntryProcInternal(CTL_TwainTriplet::TwainTripl
             #endif
             WriteLogInfo(strm.str());
         }
-        if ( retcode != TWRC_SUCCESS )
-            SetLastTwainError( retcode, TWRC_Error );
         return retcode;
     }
     #ifdef _WIN32

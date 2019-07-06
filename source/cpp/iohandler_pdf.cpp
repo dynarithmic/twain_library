@@ -31,7 +31,7 @@ using namespace dynarithmic;
 struct PDFDimensions
 {
     std::array<double,4> mediabox;
-    PDFDimensions() { }
+	PDFDimensions() : mediabox{ 0,0,0,0 } { }
 
     PDFDimensions(double d1, double d2, double d3, double d4)
     {
@@ -118,7 +118,7 @@ struct AllPDFDimensions
 CTL_PDFIOHandler::CTL_PDFIOHandler(CTL_TwainDib* pDib, int /*nFormat*/, DTWAINImageInfoEx &ImageInfoEx)
 : CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx),
         m_JpegHandler(pDib, m_ImageInfoEx),
-        m_TiffHandler(pDib, CTL_TwainDib::TiffFormatNONE, m_ImageInfoEx)
+        m_TiffHandler(pDib, CTL_TwainDib::TiffFormatNONE, m_ImageInfoEx), m_nFormat(0)
 {
     // Create a JPEG and TIFF handler locally
     m_ImageInfoEx.IsPDF = true;
@@ -332,8 +332,7 @@ int CTL_PDFIOHandler::WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fhFile, LO
                                CleanupOCRText1);
 
             PDFStringToTextElement pElMap = CreatePDFTextElementMap(ocrTextInfo);
-            PDFPosition imagePos;
-
+ 
             PDFStringToTextElement::iterator itStart = pElMap.begin();
             PDFStringToTextElement::iterator itEnd = pElMap.end();
             tempExFirst = m_ImageInfoEx.PDFTextElementList.begin();
@@ -476,7 +475,7 @@ int CTL_PDFIOHandler::GetOCRText(LPCTSTR filename, int pageType, CTL_StringType&
             hNewDib = CDibInterface::IncreaseBpp(m_pDib->GetHandle(), OCRBitDepth);
         else
         if ( OCRBitDepth < defaultBitDepths[index])
-            hNewDib = hNewDib = CDibInterface::DecreaseBpp(m_pDib->GetHandle(), OCRBitDepth);
+            hNewDib = CDibInterface::DecreaseBpp(m_pDib->GetHandle(), OCRBitDepth);
         else
             hNewDib = m_pDib->GetHandle();
 
@@ -654,7 +653,6 @@ PDFStringToTextElement CreatePDFTextElementMap(OCRTextInfo& tInfo)
     LONG maxWidth;
     LONG maxHeight;
     PDFTextElement element;
-    std::pair<double, double> scalingFactor;
     for (size_t i = 0; i < strArray.size(); ++i)
     {
         element.m_text = strArray[i];

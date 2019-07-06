@@ -67,8 +67,7 @@ CTL_StringType dynarithmic::CTL_LogFunctionCall(LPCTSTR pFuncName, int nWhich, L
     }
     else
     {
-        CTL_StringType sTemp(nIndent, _T(' '));
-        s = sTemp;
+        s = CTL_StringType(nIndent, _T(' '));
     }
     if ( !pString )
         s += pFuncName;
@@ -79,12 +78,11 @@ CTL_StringType dynarithmic::CTL_LogFunctionCall(LPCTSTR pFuncName, int nWhich, L
         if (CTL_TwainDLLHandle::s_lErrorFilterFlags & DTWAIN_LOG_USEFILE)
         {
             if (!CTL_TwainDLLHandle::s_appLog.StatusOutFast( s.c_str() ) )
-                CTL_TwainDLLHandle::s_appLog.OutputDebugStringFull(s.c_str());
+                CTL_TwainDLLHandle::s_appLog.OutputDebugStringFull(s);
         }
         else
         {
-            if ( CTL_TwainDLLHandle::s_lErrorFilterFlags )
-                CTL_TwainDLLHandle::s_appLog.OutputDebugStringFull(s.c_str());
+           CTL_TwainDLLHandle::s_appLog.OutputDebugStringFull(s);
         }
     }
     return s;

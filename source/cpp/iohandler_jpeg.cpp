@@ -31,9 +31,6 @@ int CTL_JpegIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhF
 
     HANDLE hDib = NULL;
 
-    if ( !m_pDib )
-        return DTWAIN_ERR_DIB;
-
     hDib = m_pDib->GetHandle();
     if ( !hDib )
         return DTWAIN_ERR_DIB;

@@ -185,14 +185,14 @@ fipWinImage::fipWinImage(FREE_IMAGE_TYPE image_type, unsigned width, unsigned he
 
 fipWinImage::~fipWinImage() { 
 	if(_bDeleteMe) {
-		FreeImage_Unload(_display_dib);
+		fipImage::clear();
 	}
 }
 
 void fipWinImage::clear() {
 	// delete _display_dib
 	if(_bDeleteMe) {
-		FreeImage_Unload(_display_dib);
+		fipImage::clear();
 	}
 	_display_dib = NULL;
 	_bDeleteMe = FALSE;
@@ -262,7 +262,7 @@ BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
 
 		// The GetDIBits function clears the biClrUsed and biClrImportant BITMAPINFO members (dont't know why) 
 		// So we save these infos below. This is needed for palettized images only. 
-		int nColors = FreeImage_GetColorsUsed(_dib);
+		int nColors = FreeImage_GetColorsUsed(_dib.get());
 
 		// Create a device context for the bitmap
         HDC dc = GetDC(NULL);
@@ -270,9 +270,9 @@ BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
 		Success = GetDIBits(dc,								// handle to DC
 								hbmp,						// handle to bitmap
 								0,							// first scan line to set
-								FreeImage_GetHeight(_dib),	// number of scan lines to copy
-								FreeImage_GetBits(_dib),	// array for bitmap bits
-								FreeImage_GetInfo(_dib),	// bitmap data buffer
+								FreeImage_GetHeight(_dib.get()),	// number of scan lines to copy
+								FreeImage_GetBits(_dib.get()),	// array for bitmap bits
+								FreeImage_GetInfo(_dib.get()),	// bitmap data buffer
 								DIB_RGB_COLORS				// RGB 
 								);
 		if(Success == 0) {
@@ -284,8 +284,8 @@ BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
 
 		// restore BITMAPINFO members
 		
-		FreeImage_GetInfoHeader(_dib)->biClrUsed = nColors;
-		FreeImage_GetInfoHeader(_dib)->biClrImportant = nColors;
+		FreeImage_GetInfoHeader(_dib.get())->biClrUsed = nColors;
+		FreeImage_GetInfoHeader(_dib.get())->biClrImportant = nColors;
 
 		return TRUE;
     }
@@ -420,22 +420,24 @@ void fipWinImage::drawEx(HDC hDC, RECT& rcDest, BOOL useFileBkg, RGBQUAD *appBkC
 
 		FREE_IMAGE_TYPE image_type = getImageType();
 		if(image_type == FIT_BITMAP) {
-			BOOL bHasBackground = FreeImage_HasBackgroundColor(_dib);
-			BOOL bIsTransparent = FreeImage_IsTransparent(_dib);
+			BOOL bHasBackground = FreeImage_HasBackgroundColor(_dib.get());
+			BOOL bIsTransparent = FreeImage_IsTransparent(_dib.get());
 
-			if(!bIsTransparent && (!bHasBackground || !useFileBkg)) {
+			if(!bIsTransparent && (!bHasBackground || !useFileBkg)) 
+			{
 				// Copy pointer
-				_display_dib = _dib;
+				_display_dib.replace(_dib.get());// .reset(std::move(_dib);
 			}
-			else {
+			else 
+			{
 				// Create the transparent / alpha blended image
-				_display_dib = FreeImage_Composite(_dib, useFileBkg, appBkColor, bg);
+				_display_dib.replace(FreeImage_Composite(_dib.get(), useFileBkg, appBkColor, bg));
 				if(_display_dib) {
 					// Remember to delete _display_dib
 					_bDeleteMe = TRUE;
 				} else {
 					// Something failed: copy pointers
-					_display_dib = _dib;
+					_display_dib.replace(_dib.get());
 				}
 			}
 		} else {
@@ -443,32 +445,33 @@ void fipWinImage::drawEx(HDC hDC, RECT& rcDest, BOOL useFileBkg, RGBQUAD *appBkC
 
 			if(image_type == FIT_COMPLEX) {
 				// Convert to type FIT_DOUBLE
-				FIBITMAP *dib_double = FreeImage_GetComplexChannel(_dib, FICC_MAG);
+				FIBITMAP *dib_double = FreeImage_GetComplexChannel(_dib.get(), FICC_MAG);
 				// Convert to a standard bitmap (linear scaling)
-				_display_dib = FreeImage_ConvertToStandardType(dib_double, TRUE);
+				_display_dib.replace(FreeImage_ConvertToStandardType(dib_double, TRUE));
 				// Free image of type FIT_DOUBLE
 				FreeImage_Unload(dib_double);
 			} else if((image_type == FIT_RGBF) || (image_type == FIT_RGBAF) || (image_type == FIT_RGB16)) {
 				// Apply a tone mapping algorithm and convert to 24-bit 
 				switch(_tmo) {
 					case FITMO_REINHARD05:
-						_display_dib = FreeImage_TmoReinhard05Ex(_dib, _tmo_param_1, _tmo_param_2, _tmo_param_3, _tmo_param_4);
+						_display_dib.replace(FreeImage_TmoReinhard05Ex(_dib.get(), _tmo_param_1, _tmo_param_2, _tmo_param_3, _tmo_param_4));
 						break;
 					default:
-						_display_dib = FreeImage_ToneMapping(_dib, _tmo, _tmo_param_1, _tmo_param_2);
+						_display_dib.replace(FreeImage_ToneMapping(_dib.get(), _tmo, _tmo_param_1, _tmo_param_2));
 						break;
 				}
 			} else if(image_type == FIT_RGBA16) {
 				// Convert to 32-bit
-				FIBITMAP *dib32 = FreeImage_ConvertTo32Bits(_dib);
-				if(dib32) {
+				FIBITMAP *dib32 = FreeImage_ConvertTo32Bits(_dib.get());
+				if(dib32) 
+				{
 					// Create the transparent / alpha blended image
-					_display_dib = FreeImage_Composite(dib32, useFileBkg, appBkColor, bg);
+					_display_dib.replace(FreeImage_Composite(dib32, useFileBkg, appBkColor, bg));
 					FreeImage_Unload(dib32);
 				}
 			} else {
 				// Other cases: convert to a standard bitmap (linear scaling)
-				_display_dib = FreeImage_ConvertToStandardType(_dib, TRUE);
+				_display_dib.replace(FreeImage_ConvertToStandardType(_dib.get(), TRUE));
 			}
 			// Remember to delete _display_dib
 			_bDeleteMe = TRUE;

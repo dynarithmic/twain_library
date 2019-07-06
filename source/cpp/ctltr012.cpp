@@ -35,7 +35,8 @@ CTL_CapabilityGetEnumTriplet::CTL_CapabilityGetEnumTriplet(
                                                    pSource,
                                                    gType,
                                                    gCap,
-                                                   TwainDataType)
+                                                   TwainDataType),
+												   m_nNumItems(0)
 {
 }
 

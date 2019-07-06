@@ -63,7 +63,7 @@ class ARCFOUREncryption
 		int y;
 
 	public:
-		ARCFOUREncryption() : state(256) {}
+		ARCFOUREncryption() : state(256), x{}, y{} {}
 		void prepareARCFOURKey(const PDFEncryption::UCHARArray& key)
 		{ prepareARCFOURKey(key, 0, static_cast<int>(key.size())); }
 
@@ -187,7 +187,8 @@ unsigned char PDFEncryption::pad[] =
     0x69, 0x7A
 };
 
-PDFEncryption::PDFEncryption() : state(256), ownerKey(32), userKey(32)
+PDFEncryption::PDFEncryption() : state(256), ownerKey(32), userKey(32), 
+								m_xRC4Component{}, m_yRC4Component{}, keySize{}, permissions{}
 {
 }
 
@@ -351,7 +352,7 @@ void PDFEncryption::SetupUserKey()
             EncryptRC4(digest, 0, 16);
             tempkey = digest;
         }
-        userKey = tempkey;
+        userKey = std::move(tempkey);
     }
     else 
     {

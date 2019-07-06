@@ -23,7 +23,7 @@ using namespace dynarithmic;
 
 OCRCapInfo& OCREngine::GetOCRCapInfo(LONG nCap) { return m_AllCapValues[nCap]; }
 
-OCREngine::OCREngine() : m_nLastOCRError(0)
+OCREngine::OCREngine() : m_nLastOCRError(0), m_OCRIdentity{}, m_nCurrentPage(0), m_bIsActivated(false)
 {
     m_mapOperations[DTWAIN_CAPGET] = DTWAIN_CO_GET;
     m_mapOperations[DTWAIN_CAPGETDEFAULT] = DTWAIN_CO_GETDEFAULT;

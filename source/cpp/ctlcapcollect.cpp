@@ -262,7 +262,6 @@ DTWAIN_BOOL dynarithmic::DTWAIN_CacheCapabilityInfo(CTL_ITwainSource *pSource, C
         DTWAIN_ARRAY pDTWAINArray = 0;
         DTWAINArrayLL_RAII raii(pDTWAINArray);
         bool bGetINIEntry = true;
-        std::vector<int>::iterator curCapsIt;
 
         bool bOk = false;
 
@@ -297,8 +296,6 @@ DTWAIN_BOOL dynarithmic::DTWAIN_CacheCapabilityInfo(CTL_ITwainSource *pSource, C
         TW_UINT16 cStateInfo = 0xFF;
         UINT nDataType = 0;
         CTL_String strName = CTL_TwainAppMgr::GetCapNameFromCap(nCap);
-        if (bGetINIEntry)
-        {
             bOk = GetCapInfoFromIni(strName, StringConversion::Convert_Native_To_Ansi(pSource->GetProductName()), (UINT)nCap, cGet, cGetCurrent,
                 cGetDefault, cSetCurrent, cSetAvailable, cQuerySupport,
                 cEOJValue, cStateInfo, nDataType, cEntryFound, bContainerInfoFound, mapContainer);
@@ -315,9 +312,6 @@ DTWAIN_BOOL dynarithmic::DTWAIN_CacheCapabilityInfo(CTL_ITwainSource *pSource, C
                 if (cStateInfo != 0xFF)
                     pSource->AddCapToStateInfo(nCap, cStateInfo);
             }
-        }
-        else
-            bOk = false;
 
         if (bOk)
         {

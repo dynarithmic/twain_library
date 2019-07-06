@@ -40,7 +40,7 @@ TW_UINT16 CTL_TwainOpenSMTriplet::Execute()
     return CTL_TwainSMTriplet::Execute();
 }
 
-CTL_TwainSMTriplet::CTL_TwainSMTriplet(CTL_ITwainSession *pSession, TW_UINT16 nMsg, int nErr)
+CTL_TwainSMTriplet::CTL_TwainSMTriplet(CTL_ITwainSession *pSession, TW_UINT16 nMsg, int nErr) : m_nDSMVersion(0)
 {
     // Get the app manager's AppID
     m_nErr = nErr;

@@ -50,8 +50,7 @@ int ImageXferFileWriter::CopyDibToFile(CTL_TwainDibPtr pCurDib,
     if ( !bIsJobControl)
     {
         // Adjust name if the image page > 0
-        CTL_StringType strFile = m_pSource->GetAcquireFile();
-        CTL_StringType strTempFile = strFile;
+        CTL_StringType strTempFile = m_pSource->GetAcquireFile(); 
         CTL_StringType s;
 
         if ( !MultipageOption || MultipageOption == DIB_MULTI_FIRST )
@@ -258,11 +257,7 @@ LONG ImageXferFileWriter::MergeDuplexFiles()
 //    OFSTRUCT of;
 //    int nHandle;
     int MultiPageOption = DIB_MULTI_FIRST;
-    CTL_StringType strFile = m_pSource->GetImageFileName();
-    if ( 1 ) //bDoJobControl )
-        strFile = m_pSource->GetCurrentImageFileName();
-
-    CTL_StringType strTempFile = strFile;
+    CTL_StringType strTempFile = m_pSource->GetAcquireFile(); 
     m_pSource->SetActualFileName(strTempFile);
     CTL_TwainAppMgr::SendTwainMsgToWindow(m_pSource->GetTwainSession(), NULL, DTWAIN_TN_FILENAMECHANGING, (LPARAM)m_pSource);
     CTL_StringType strTempFileNew = m_pSource->GetActualFileName();
@@ -274,7 +269,7 @@ LONG ImageXferFileWriter::MergeDuplexFiles()
     bool bLastWriteDone = false;
     int nIncrement[2] = {0,0};
     int nCurPage[2] ={0,0};
-    int nWhichSide[2];
+	int nWhichSide[2] = { 0,0 };
 
     LONG nFlags = m_pSource->GetManualDuplexModeFlags();
     if ( bNotManualDuplex )
@@ -387,7 +382,7 @@ LONG ImageXferFileWriter::MergeDuplexFiles()
             else
             {
                 if ( m_pSource->IsMultiPageModeSaveAtEnd() )
-                    strTempFile = DupData.sRealFileName.c_str();
+                    strTempFile = DupData.sRealFileName;
 
                 if ( !bDoneFirstPage )
                     MultiPageOption = DIB_MULTI_FIRST;  // Fist page of multipage file
@@ -617,7 +612,7 @@ LONG ImageXferFileWriter::CopyDuplexDibToFile(CTL_TwainDibPtr pCurDib, bool bIsJ
         // Now save the information to the source for later processing
         m_pSource->AddDuplexFileData( szTempPath, static_cast<unsigned long>(ImageMemoryHandler::GlobalSize(pCurDib->GetHandle())),
                                       m_pSource->GetCurrentSideAcquired(),
-                                      sRealName.c_str());
+                                      sRealName);
     }
     if ( bIsJobControl)
     {

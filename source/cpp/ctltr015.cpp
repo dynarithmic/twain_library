@@ -36,7 +36,8 @@ CTL_CapabilityGetRangeTriplet::CTL_CapabilityGetRangeTriplet(
                                                    pSource,
                                                    gType,
                                                    gCap,
-                                                   TwainDataType)
+                                                   TwainDataType),
+												m_FirstVal{}, m_LastVal{}, m_StepVal{}, m_DefaultVal{}, m_CurrentVal{}, m_nNumRangeItems{}
 {
 }
 

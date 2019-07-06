@@ -125,6 +125,8 @@ namespace dynarithmic
 
         // Vista ICONs
         DTWAINImageInfoEx() :
+			theSession{},
+			PhotoMetric{},
             PostscriptType(0),
             IsPostscript(false),
             IsPDF(false),

@@ -464,6 +464,10 @@ PdfDocument::PdfDocument() :
     m_bIsEncrypted(false),
     m_bASCIICompression(false),
     m_bIsNoCompression(false),
+	m_nCurContentsObj(0),
+	m_nCurObjNum(0),
+	m_nCurPage(0),
+	m_nProcSetObj(0),
     CurFontRefNum(START_FONTREF_NUM)
 {
     m_mediaMap[ DTWAIN_FS_USLETTER    ] =  "[0 0 612.00 792.00]";

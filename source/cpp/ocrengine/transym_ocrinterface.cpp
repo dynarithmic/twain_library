@@ -940,7 +940,6 @@ bool TransymOCR::ProcessGetCapValues(LONG nOCRCap, LONG CapType, OCRLongArrayVal
 bool TransymOCR::ProcessGetCapValues(LONG nOCRCap, LONG CapType, OCRStringArrayValues& vals)
 {
     OCRCapInfo& CapInfo = m_AllCapValues[nOCRCap];
-    OCRLongArrayValues pt;
     vals.resize(0);
     switch(nOCRCap)
     {
@@ -1046,22 +1045,19 @@ bool TransymOCR::ProcessSetCapValues(LONG nOCRCap, LONG CapType, const OCRLongAr
 
     // now actually turn on the options if the option is one that actually changes
     // the state of the engine
-    if ( bRetval )
+    switch (nOCRCap)
     {
-        switch (nOCRCap)
+        case DTWAIN_OCRCV_ERRORREPORTMODE:
         {
-            case DTWAIN_OCRCV_ERRORREPORTMODE:
+            if ( vals[0] != DTWAIN_OCRERROR_WRITEFILE )
+                m_SDK.TOCRSetErrorMode( m_JobHandle, vals[0]);
+            else
             {
-                if ( vals[0] != DTWAIN_OCRERROR_WRITEFILE )
-                    m_SDK.TOCRSetErrorMode( m_JobHandle, vals[0]);
-                else
-                {
-                    m_SDK.TOCRSetErrorMode(m_JobHandle, TOCRERRORMODE_NONE);
-                    // open the file here??
-                }
+                m_SDK.TOCRSetErrorMode(m_JobHandle, TOCRERRORMODE_NONE);
+                // open the file here??
             }
-            break;
         }
+        break;
     }
     return true;
 }
@@ -1070,7 +1066,6 @@ bool TransymOCR::ProcessSetCapValues(LONG nOCRCap, LONG CapType,
                                      const OCRStringArrayValues& vals)
 {
     OCRCapInfo& CapInfo = m_AllCapValues[nOCRCap];
-    OCRStringArrayValues pt;
     switch(nOCRCap)
     {
         case DTWAIN_OCRCV_ERRORREPORTFILE:

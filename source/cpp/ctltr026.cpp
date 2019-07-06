@@ -65,7 +65,9 @@ CTL_ImageXferTriplet::CTL_ImageXferTriplet(CTL_ITwainSession *pSession,
                      m_nTransferType(nType),
                      m_nFailAction(0),
                      m_bPendingXfersDone(false),
-                     m_lastPendingXferCode(0)
+                     m_lastPendingXferCode(0),
+					 m_pImgHandler(nullptr),
+					 m_PendingXfers{}
 {
     switch( nType )
     {
@@ -584,10 +586,7 @@ bool CTL_ImageXferTriplet::AbortTransfer(bool bForceClose)
             // Make sure that job control is "on"
             pSource->StartJob();
 
-            if ( ptrPending->Count != 0 &&
-                (ptrPending->Count > 0 ||
-                 bJobControlContinue)
-                 ) // More to transfer
+            if ( ptrPending->Count != 0 && (ptrPending->Count > 0 || bJobControlContinue)) // More to transfer
             {
                 CTL_TwainAppMgr::WriteLogInfo(_T("More To Transfer...\n"));
                 // Check if max pages has been reached.  Some Sources do not detect when
@@ -1356,7 +1355,7 @@ void CTL_ImageXferTriplet::ResolveImageResolution(CTL_ITwainSource *pSource,  DT
                               NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL))
         {
             CTL_StringType sError = _T("Image resolution available in state 7.\n");
-            CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+            CTL_TwainAppMgr::WriteLogInfo(sError);
             ImageInfo->ResolutionX = static_cast<LONG>(ResolutionX);
             ImageInfo->ResolutionY = static_cast<LONG>(ResolutionY);
             CTL_StringStreamType strm;
@@ -1367,7 +1366,7 @@ void CTL_ImageXferTriplet::ResolveImageResolution(CTL_ITwainSource *pSource,  DT
             #endif
             sError = strm.str();
 //          StringWrapper::Format(sError, "x-Resolution=%d, y-Resolution=%d\n", ImageInfo->ResolutionX, ImageInfo->ResolutionY);
-            CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+            CTL_TwainAppMgr::WriteLogInfo(sError);
             bGotResolution = true;
         }
         else
@@ -1379,7 +1378,7 @@ void CTL_ImageXferTriplet::ResolveImageResolution(CTL_ITwainSource *pSource,  DT
     {
         // Get the image info from when we started
         CTL_StringType sError = _T("Getting image resolution from state 6.\n");
-        CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+        CTL_TwainAppMgr::WriteLogInfo(sError);
         TW_IMAGEINFO II;
         pSource->GetImageInfo( &II );
 
@@ -1402,7 +1401,7 @@ void CTL_ImageXferTriplet::ResolveImageResolution(CTL_ITwainSource *pSource,  DT
         if ( DTWAIN_GetResolution(pSource, &Resolution) )
         {
             CTL_StringType sError = _T("Image resolution obtained from TWAIN driver\n");
-            CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+            CTL_TwainAppMgr::WriteLogInfo(sError);
 
             ImageInfo->ResolutionX = static_cast<LONG>(Resolution);
             ImageInfo->ResolutionY = static_cast<LONG>(Resolution);
@@ -1418,7 +1417,7 @@ void CTL_ImageXferTriplet::ResolveImageResolution(CTL_ITwainSource *pSource,  DT
         {
             // Tried everything, just set the resolution to the default resolution
             CTL_StringType sError = _T("Could not obtain resolution in state 6/7 or through TWAIN.  Image resolution defaulted to 100 DPI\n");
-            CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+            CTL_TwainAppMgr::WriteLogInfo(sError);
             ImageInfo->ResolutionX = 100;
             ImageInfo->ResolutionY = 100;
         }

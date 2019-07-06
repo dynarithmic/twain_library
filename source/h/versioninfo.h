@@ -167,7 +167,7 @@ class VersionInfoImpl
     private:
         //  make sure that there is no assignment operator available for this
         //  class by making it private...
-        VersionInfoImpl& operator=( const VersionInfoImpl& ) { };
+        VersionInfoImpl& operator=( const VersionInfoImpl& ) = delete;
         const char_type* findVersionStringData( int nWhich ) const;
     };
 

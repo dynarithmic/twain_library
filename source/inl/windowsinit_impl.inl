@@ -155,6 +155,7 @@ void dynarithmic::DTWAIN_InvokeCallback(int nWhich, DTWAIN_HANDLE p, DTWAIN_SOUR
 
 void RegisterTwainWindowClass()
 {
+	CTL_TwainDLLHandle::s_nRegisteredDTWAINMsg = ::RegisterWindowMessage(REGISTERED_DTWAIN_MSG);
     WNDCLASS wndclass;
     memset(&wndclass, 0, sizeof(WNDCLASS));
 #ifdef DTWAIN_LIB
@@ -193,7 +194,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDll, DWORD fdwReason, LPVOID /*plvReserved*/)
         {
             CTL_TwainDLLHandle::s_lErrorFilterFlags = 0;
         }
-        CTL_TwainDLLHandle::s_nRegisteredDTWAINMsg = ::RegisterWindowMessage(REGISTERED_DTWAIN_MSG);
+//        CTL_TwainDLLHandle::s_nRegisteredDTWAINMsg = ::RegisterWindowMessage(REGISTERED_DTWAIN_MSG);
         CTL_TwainDLLHandle::s_DLLInstance = hinstDll;
     }
     return TRUE;

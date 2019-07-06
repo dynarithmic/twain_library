@@ -75,7 +75,7 @@ namespace dynarithmic
     class CPCXImageHandler : public CDibInterface
     {
         public:
-            CPCXImageHandler(DTWAINImageInfoEx &ImageInfoEx) : m_ImageInfoEx(ImageInfoEx) {}
+            CPCXImageHandler(DTWAINImageInfoEx &ImageInfoEx) : m_ImageInfoEx(ImageInfoEx), m_bWriteOk(true), m_pDCXInfo(nullptr) {}
             // Virtual interface
             virtual CTL_String GetFileExtension() const  override;
             virtual HANDLE  GetFileInformation(LPCSTR path) override;

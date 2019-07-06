@@ -60,7 +60,7 @@ char CDibInterface::bayerPattern[8][8] = {
       { 63,31,55,23,61,29,53,21  },
     };
 
-CDibInterface::CDibInterface() : m_lasterror(0) {}
+CDibInterface::CDibInterface() : m_lasterror(0), bytesleft(0), nextbyte(0), bytebuffer{} {}
 
 int  CDibInterface::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR path, HANDLE handle, void *pUserInfo)
 {
@@ -95,7 +95,6 @@ int  CDibInterface::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR pat
         int nUsedColors = CalculateUsedPaletteEntries(bpp);
         LPBITMAPINFOHEADER bi = (LPBITMAPINFOHEADER)pImage2;
         bi->biClrUsed = nUsedColors;
-        CTL_StringType szNum;
         CTL_StringStreamType strm;
         strm << nUsedColors;
         CTL_TwainAppMgr::WriteLogInfo(CTL_StringType(_T("Image has ")) + strm.str() + _T(" colors\n"));

@@ -400,10 +400,12 @@ HPALETTE CTL_TwainDibInfo::GetPalette() const
 };
 */
 // Construction
-CTL_TwainDib::CTL_TwainDib() : m_bAutoDelete(false), m_bIsValid(false), m_nJpegQuality(75)
+CTL_TwainDib::CTL_TwainDib() : m_bAutoDeletePalette(false), m_bJpegProgressive(false), 
+								m_bAutoDelete(false), m_bIsValid(false), m_nJpegQuality(75)
 { }
 
-CTL_TwainDib::CTL_TwainDib(HANDLE hDib, HWND hWnd) : m_bAutoDelete(true), m_bIsValid(true)
+CTL_TwainDib::CTL_TwainDib(HANDLE hDib, HWND hWnd) : m_bAutoDelete(true), m_bIsValid(true), 
+m_bAutoDeletePalette(false),m_bJpegProgressive(false), m_nJpegQuality(75)
 {
     m_TwainDibInfo.SetDib(hDib);
     // compute or guess a palette to use for display
@@ -419,7 +421,7 @@ CTL_TwainDib::CTL_TwainDib(LPCTSTR lpszFileName, HWND hWnd)
         m_TwainDibInfo.SetPalette( CreateDibPalette() );*/
 }
 
-CTL_TwainDib::CTL_TwainDib( const CTL_TwainDib &rDib )
+CTL_TwainDib::CTL_TwainDib( const CTL_TwainDib &rDib ) : m_bJpegProgressive(false)
 { SetEqual( rDib ); }
 
 void CTL_TwainDib::swap(CTL_TwainDib& left, CTL_TwainDib& rt)
@@ -579,6 +581,8 @@ int CTL_TwainDib::WriteDibBitmap (DTWAINImageInfoEx& ImageInfo,
                 LONG InputFormat = vValues[0];
                 pHandler = std::make_unique<CTL_TextIOHandler>(this, InputFormat, ImageInfo, pHandle->m_pOCRDefaultEngine.get());
             }
+			else
+				return DTWAIN_ERR_BADPARAM;
         }
         break;
 

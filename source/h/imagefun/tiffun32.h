@@ -67,6 +67,7 @@ namespace dynarithmic
                 m_nFormat(nFormat),
                 m_ImageInfoEx(ImageInfoEx),
                 m_bWriteOk(false),
+				m_FileName{},
                 m_nError(false)
                 {
                     m_MultiPageStruct.pUserData = nullptr;

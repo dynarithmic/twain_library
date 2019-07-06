@@ -108,7 +108,7 @@ TW_UINT16 CTL_ExtImageInfoTriplet::s_AllAttr[] = {
 CTL_ExtImageInfoTriplet::CTL_ExtImageInfoTriplet(CTL_ITwainSession *pSession,
                                                  CTL_ITwainSource* pSource,
                                                  int nInfo)
-                                               :  CTL_TwainTriplet(), m_memHandle(NULL)
+                                               :  CTL_TwainTriplet(), m_memHandle(nullptr),m_pExtImageInfo(nullptr)
 {
     InitInfo(pSession, pSource, nInfo);
 }

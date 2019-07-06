@@ -758,16 +758,21 @@ DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByName(LPCTSTR lpszName)
     // Get the OCR engine associated with the name
     OCRProductNameToEngineMap::iterator it = pHandle->m_OCRProdNameToEngine.find(lpszName);
     OCREnginePtr SelectedEngine;
-    if (it != pHandle->m_OCRProdNameToEngine.end())
-        SelectedEngine = it->second;
-    if (SelectedEngine)
-        pHandle->m_pOCRDefaultEngine = SelectedEngine;
+	DTWAIN_OCRENGINE ocrEngine_ = nullptr;
+	if (it != pHandle->m_OCRProdNameToEngine.end())
+	{
+		SelectedEngine = it->second;
+		if (SelectedEngine)
+		{
+			pHandle->m_pOCRDefaultEngine = SelectedEngine;
 
-    if (!SelectedEngine->IsActivated())
-        SelectedEngine->StartupOCREngine();
-
-    LOG_FUNC_EXIT_PARAMS((DTWAIN_OCRENGINE)SelectedEngine.get())
-        CATCH_BLOCK(DTWAIN_OCRENGINE())
+			if (!SelectedEngine->IsActivated())
+				SelectedEngine->StartupOCREngine();
+			ocrEngine_ = SelectedEngine.get();
+		}
+	}
+    LOG_FUNC_EXIT_PARAMS(ocrEngine_)
+    CATCH_BLOCK(DTWAIN_OCRENGINE())
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_InitOCRInterface()

@@ -29,9 +29,11 @@ using namespace dynarithmic;
 CTL_PSIOHandler::CTL_PSIOHandler(CTL_TwainDib* pDib, int /*nFormat*/, DTWAINImageInfoEx &ImageInfoEx,
                                  LONG PSType, bool IsMultiPage)
                                  :   CTL_ImageIOHandler( pDib ),
-                                 m_ImageInfoEx(ImageInfoEx),
-                                 m_PSType(PSType),
-                                 m_bIsMultiPage(IsMultiPage)
+									m_ImageInfoEx(ImageInfoEx),
+									m_PSType(PSType),
+									m_bIsMultiPage(IsMultiPage),
+									m_nFormat(0), 
+									m_pJpegHandler(nullptr)
 {
 
     // Create a JPEG and TIFF handler locally
