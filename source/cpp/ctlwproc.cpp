@@ -636,7 +636,7 @@ LRESULT ExecuteCallback(CallbackType Fn, HWND hWnd, UINT uMsg,
     catch(...)
     {
         CTL_StringType sError = _T("Callback did not work...\n");
-        CTL_TwainAppMgr::WriteLogInfo(sError.c_str());
+        CTL_TwainAppMgr::WriteLogInfo(sError);
     }
     return lResult;
 }

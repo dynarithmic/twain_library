@@ -37,7 +37,7 @@ CTL_ImageMemXferTriplet::CTL_ImageMemXferTriplet(CTL_ITwainSession *pSession,
                                                  TW_UINT16 nPixelType,
                                                  TW_UINT32 nNumBytes,
                                                  TW_UINT16 nCompression/*=TWCP_NONE*/)
-                     :  CTL_ImageXferTriplet(pSession, pSource, DAT_IMAGEMEMXFER)
+	: CTL_ImageXferTriplet(pSession, pSource, DAT_IMAGEMEMXFER), m_ptrTempDib(nullptr), m_origDibHandle{}
 {
     LPBITMAPINFO    pDibInfo;
 

@@ -30,7 +30,7 @@ namespace dynarithmic
     {
         public:
             // Only MSG_GET is supported
-            CTL_ExtImageInfoTriplet() : m_pExtImageInfo(NULL) { }
+			CTL_ExtImageInfoTriplet() : m_pExtImageInfo(NULL), m_memHandle{}, m_nNumInfo{} { }
             CTL_ExtImageInfoTriplet(CTL_ITwainSession *pSession,
                                    CTL_ITwainSource* pSource,
                                    int nInfo);

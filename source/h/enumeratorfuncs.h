@@ -119,10 +119,13 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
 
         static void resize(std::vector<T>&vec, size_t newSize, void* value)
         {
-            if ( value )
+            if ( !value )
                 vec.resize(newSize);
-            else
-                vec.resize(newSize, *(T*)value);
+			else
+			{
+				T defVal = *(reinterpret_cast<T*>(value));
+				vec.resize(newSize, defVal);
+			}
         }
     };
 

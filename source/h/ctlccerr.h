@@ -32,7 +32,7 @@ namespace dynarithmic
     class CTL_CondCodeInfo
     {
         public:
-            CTL_CondCodeInfo() : m_nCode(9999) { }
+            CTL_CondCodeInfo() : m_nCode(9999), m_nResourceID(0) { }
             CTL_CondCodeInfo(TW_UINT16 nCode, int nResourceID) :
                         m_nCode(nCode), m_nResourceID(nResourceID) {}
             TW_UINT16       m_nCode;

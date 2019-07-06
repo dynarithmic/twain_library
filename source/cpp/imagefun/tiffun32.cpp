@@ -93,7 +93,7 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
     if (m_MultiPageStruct.Stage == 0 || m_MultiPageStruct.Stage == DIB_MULTI_FIRST)
     {
 		FIMULTIBITMAP *fp = nullptr;
-		CTL_String fname = StringConversion::Convert_NativePtr_To_Ansi(path).c_str();
+		CTL_String fname = StringConversion::Convert_NativePtr_To_Ansi(path);
 		{
 			std::ofstream ofs(fname.c_str());
 			if (!ofs)

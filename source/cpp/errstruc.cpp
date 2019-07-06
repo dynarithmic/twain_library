@@ -635,9 +635,7 @@ CTL_StringType DecodeData(CTL_ErrorStructDecoder* pDecoder, TW_MEMREF pData, Err
             case ERRSTRUCT_TW_CIECOLOR:
             {
                 const TCHAR *CIEPointNames[4] = {_T("WhitePoint"), _T("BlackPoint"), _T("WhitePaper"), _T("BlackInk")};
-                CTL_StringType str1;
                 CTL_StringType str2;
-                CTL_StringType str3;
                 int i;
                 pTW_CIECOLOR p = (pTW_CIECOLOR)pData;
                 pTW_CIEPOINT aPoints[4] = {&p->WhitePoint, &p->BlackPoint, &p->WhitePaper,
@@ -670,7 +668,7 @@ CTL_StringType DecodeData(CTL_ErrorStructDecoder* pDecoder, TW_MEMREF pData, Err
                           _T("\n}\n");
                     }
                     int j;
-                    str2 = _T("");
+					str2.clear();
                     for ( i = 0; i < 3; i++ )
                     {
                         for ( j = 0; j < 3; j++ )

@@ -400,10 +400,9 @@ DTWAIN_ACQUIRE  dynarithmic::LLAcquireImage(SourceAcquireOptions& opts)
 
             // Turn off NATIVE and BUFFERED modes if set
             lFileFlags = lFileFlags & ~(DTWAIN_USENATIVE | DTWAIN_USEBUFFERED);
-        }
 
-        if (bUseSourceMode)
-            CTL_TwainAppMgr::GetFileTransferDefaults(pSource, strFile, nFileType);
+			CTL_TwainAppMgr::GetFileTransferDefaults(pSource, strFile, nFileType);
+        }
 
         // Check if the file type is supported
         // check if defaults were specified

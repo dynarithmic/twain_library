@@ -133,7 +133,7 @@ int CTextImageHandler::WriteImage(CTL_ImageIOHandler* ptrHandler, BYTE * /*pImag
 
         // Write the new line at the end of the file
         char ff = '\x0c';
-        ptrStream->write(reinterpret_cast<char*>(ff), 1);
+        ptrStream->write(reinterpret_cast<char*>(&ff), 1);
 
         // Write the temp file and save the OCR output
         m_pOCREngine->SetCurrentPageNumber(m_pOCREngine->GetCurrentPageNumber() + 1);

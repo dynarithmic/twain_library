@@ -69,7 +69,8 @@ CPDFImageHandler::CPDFImageHandler(const CTL_StringType& sFileName, DTWAINImageI
         m_sTitle("(None)"),
         m_sSubject("(None)"),
         m_sKeywords("(None)"),
-        m_sCreator("(None)")
+        m_sCreator("(None)"),
+		m_nImageType(0)
 {
     LoadPDFLibrary();
 }
@@ -346,7 +347,6 @@ int CPDFImageHandler::InitializePDFPage(PDFINFO *pPDFInfo, HANDLE bitmap)
         m_pPDFSetLongField(pPDFInfo->pPDFdoc, PDF_MEDIABOX, -1);
     }
     else
-    if ( pPDFInfo->ImageInfoEx.PDFPageSize == DTWAIN_PDF_PIXELSPERMETERSIZE )
     {
         // Determine the size of the page, given the DIB dimensions and bytes per meter
         LPBITMAPINFOHEADER pbi = (LPBITMAPINFOHEADER)ImageMemoryHandler::GlobalLock(bitmap);

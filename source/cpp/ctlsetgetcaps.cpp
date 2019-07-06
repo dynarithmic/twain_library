@@ -849,7 +849,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, LONG n
             size_t ItemSize;
             if ( p->GetExtImageInfoData(nWhich, DTWAIN_BYID, i, NULL, &ItemSize) )
             {
-                p->GetExtImageInfoData(nWhich, DTWAIN_BYID, i, &Temp[0], NULL);
+                p->GetExtImageInfoData(nWhich, DTWAIN_BYID, i, Temp.data(), NULL);
                 DTWAIN_ArraySetAt(A, i, &Temp[0]);
             }
         }

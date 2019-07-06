@@ -104,12 +104,12 @@ namespace dynarithmic
     class CTL_BmpIOHandler : public CTL_ImageIOHandler
     {
         public:
-            CTL_BmpIOHandler() : CTL_ImageIOHandler() {}
-            CTL_BmpIOHandler( CTL_TwainDib *pDib ) : CTL_ImageIOHandler(pDib ){}
+            CTL_BmpIOHandler() : CTL_ImageIOHandler(), m_bUseRLE(false) {}
+            CTL_BmpIOHandler( CTL_TwainDib *pDib ) : CTL_ImageIOHandler(pDib ), m_bUseRLE(false) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
 
         private:
-            BOOL m_bUseRLE;
+            bool m_bUseRLE;
     };
 
     class CTL_JpegIOHandler : public CTL_ImageIOHandler
@@ -122,7 +122,9 @@ namespace dynarithmic
 
             CTL_JpegIOHandler( CTL_TwainDib *pDib, DTWAINImageInfoEx& ImageInfoEx)
                             : CTL_ImageIOHandler(pDib ),
-                            m_ImageInfoEx(ImageInfoEx) {}
+                            m_ImageInfoEx(ImageInfoEx),
+							m_nJpegQuality(75),
+							m_bJpegProgressive(false) {}
 
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
 
@@ -155,7 +157,7 @@ namespace dynarithmic
     class CTL_PngIOHandler : public CTL_ImageIOHandler
     {
         public:
-            CTL_PngIOHandler()  : CTL_ImageIOHandler() {};
+			CTL_PngIOHandler() : CTL_ImageIOHandler() {};
             CTL_PngIOHandler( CTL_TwainDib *pDib, DTWAINImageInfoEx& ImageInfoEx) : CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
 		private:
@@ -165,7 +167,7 @@ namespace dynarithmic
     class CTL_PcxIOHandler : public CTL_ImageIOHandler
     {
         public:
-            CTL_PcxIOHandler() : CTL_ImageIOHandler() {};
+			CTL_PcxIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
             CTL_PcxIOHandler( CTL_TwainDib *pDib, int nFormat, DTWAINImageInfoEx& ImageInfoEx ) : CTL_ImageIOHandler(pDib),
             m_nFormat(nFormat), m_ImageInfoEx(ImageInfoEx) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
@@ -186,7 +188,7 @@ namespace dynarithmic
     class CTL_WmfIOHandler : public CTL_ImageIOHandler
     {
         public:
-            CTL_WmfIOHandler()  : CTL_ImageIOHandler() {};
+			CTL_WmfIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
             CTL_WmfIOHandler( CTL_TwainDib *pDib, int nFormat ) :
                                 CTL_ImageIOHandler( pDib ), m_nFormat(nFormat) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);

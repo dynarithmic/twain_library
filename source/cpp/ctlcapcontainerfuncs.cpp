@@ -124,8 +124,6 @@ LONG DLLENTRY_DEF DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG l
                 if (!bResult1 && !bResult2 && nHold)
                     LOG_FUNC_EXIT_PARAMS(nHold)
 
-                if (Value)
-                {
                     // Check container for CAPGET
                     LONG GetContainer = (LONG)std::get<1>(CapInfo);
 
@@ -161,7 +159,6 @@ LONG DLLENTRY_DEF DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG l
                     // No choice but to return other container type and hope
                     // that Source handles wrong container gracefully.
                     LOG_FUNC_EXIT_PARAMS(Value & ~GetContainer)
-                }
             }
             break;
 

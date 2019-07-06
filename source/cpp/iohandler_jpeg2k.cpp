@@ -30,7 +30,7 @@ using namespace dynarithmic;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CTL_Jpeg2KIOHandler::CTL_Jpeg2KIOHandler(CTL_TwainDib* pDib, DTWAINImageInfoEx &ImageInfoEx)
-: CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx)
+: CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx), m_nFormat(0), m_pJpegHandler(nullptr)
 { }
 
 CTL_Jpeg2KIOHandler::~CTL_Jpeg2KIOHandler()

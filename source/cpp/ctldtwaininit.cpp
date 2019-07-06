@@ -166,8 +166,6 @@ DTWAIN_BOOL DTWAIN_GetVersionInternal(LPLONG lMajor, LPLONG lMinor, LPLONG lVers
             *lMinor = _ttol(aInfo[1].c_str());
             if ( lPatch )
                 *lPatch = _ttol(aInfo[3].c_str());
-    #else
-    CTL_String szName = boost::dll::symbol_location(DTWAIN_DLLNAME).string();
     #endif
     #ifdef DTWAIN_LIB
     GetVersionFromResource(lMajor, lMinor, lPatch);
@@ -571,7 +569,7 @@ LONG DLLENTRY_DEF DTWAIN_GetDSMFullName(LONG DSMType, LPTSTR szDLLName, LONG nMa
         LOG_FUNC_EXIT_PARAMS(nTotalBytes)
     }
 
-    nTotalBytes = CopyInfoToCString(sPath.c_str(), szDLLName, nMaxLen);
+    nTotalBytes = CopyInfoToCString(sPath, szDLLName, nMaxLen);
     LOG_FUNC_EXIT_PARAMS(nTotalBytes)
     CATCH_BLOCK(false)
 }
@@ -681,8 +679,6 @@ DTWAIN_HANDLE DLLENTRY_DEF DTWAIN_SysInitialize()
     {
         typedef std::function<bool()> boolFuncs;
         boolFuncs bf[] = { &LoadTwainResources };
-        bool bOk[sizeof(bf) / sizeof(bf[0])];
-        std::fill_n(bOk, sizeof(bf) / sizeof(bf[0]), false);
         for (int i = 0; i < sizeof(bf) / sizeof(bf[0]); ++i)
         {
             bool ret = bf[i]();
@@ -1271,7 +1267,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndTwainSession()
         try
         {
             // Remove subclass from the user's window
-            if ( pHandle->m_hOrigProc && pHandle->m_hWndTwain && !pHandle->m_bUseProxy )
+            if ( pHandle->m_hOrigProc && pHandle->m_hWndTwain )
                 SubclassTwainMsgWindow(pHandle->m_hWndTwain, pHandle->m_hOrigProc);
         }
         catch(...)
@@ -1564,7 +1560,7 @@ void dynarithmic::OutputDTWAINError(CTL_TwainDLLHandle *pHandle, LPCTSTR pFunc/*
         DTWAIN_GetErrorString( pHandle->m_lLastError, szBuf, MaxMessage);
     CTL_StringType s(szBuf);
     s += _T("\n");
-    if ( (pHandle && pHandle->s_bProcessError) || !pHandle )
+    if ( !pHandle || (pHandle && pHandle->s_bProcessError) )
         CTL_TwainAppMgr::WriteLogInfo(s);
     if ( CTL_TwainDLLHandle::s_lErrorFilterFlags & DTWAIN_LOG_ERRORMSGBOX && pHandle)
         LogDTWAINErrorToMsgBox(pHandle->m_lLastError, pFunc, s);
@@ -1653,7 +1649,6 @@ CTL_StringType dynarithmic::GetVersionString()
         CTL_StringType sBits = _T("(32-bit)");
         if ( lVersionType & DTWAIN_64BIT_VERSION )
             sBits = _T("(64-bit)");
-        CTL_StringType sDistType;
 
 #ifdef DTWAIN_DEVELOP_DLL
 //        lVersionType -= 100;

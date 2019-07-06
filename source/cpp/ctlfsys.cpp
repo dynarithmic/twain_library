@@ -387,7 +387,7 @@ bool WalkFileSystem(WALKFSPROC pProc, CTL_ITwainSource* pSource, LPCTSTR szStart
                 if ( bRes )
                 {
                     DTWAIN_FSGetClose( pSource, (LPLONG)pFS->Context );
-                    return bRes?true:false;
+                    return bRes;
                 }
             break;
         }

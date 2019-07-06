@@ -35,7 +35,7 @@ CTL_CapabilityGetArrayTriplet::CTL_CapabilityGetArrayTriplet(
                                                    pSource,
                                                    gType,
                                                    gCap,
-                                                   TwainDataType)
+                                                   TwainDataType), m_nNumItems(0)
 {
 }
 

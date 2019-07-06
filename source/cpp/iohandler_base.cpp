@@ -27,14 +27,14 @@ using namespace dynarithmic;
 std::unordered_map<LONG, std::vector<int>> CTL_ImageIOHandler::s_supportedBitDepths;
 
 CTL_ImageIOHandler::CTL_ImageIOHandler() : pMultiDibData(NULL), m_nPage(0),
-m_bAllWritten(true), m_bOnePageWritten(false)
+m_bAllWritten(true), m_bOnePageWritten(false), bytesleft(0), nextbyte(0), bytebuffer{}, bittable{}, masktable{}
 {
     m_pDib = NULL;
 
 }
 
 CTL_ImageIOHandler::CTL_ImageIOHandler( CTL_TwainDib *pDib ): pMultiDibData(NULL), m_nPage(0),
-m_bAllWritten(true), m_bOnePageWritten(false)
+m_bAllWritten(true), m_bOnePageWritten(false), bytesleft(0), nextbyte(0), bytebuffer{}, bittable{}, masktable{}
 {
     m_pDib = pDib;
 }

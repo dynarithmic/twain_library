@@ -26,7 +26,7 @@
 #include <windows.h>
 #endif // _WIN32
 #include "FreeImage.h"
-
+#include <memory>
 
 // Compiler options ---------------------------------------------------------
 
@@ -108,7 +108,7 @@ class FIP_API fipImage : public fipObject
 {
 protected:
 	/// DIB data
-	FIBITMAP *_dib;
+	std::shared_ptr<FIBITMAP> _dib;
 	/// Original (or last saved) fif format if available, FIF_UNKNOWN otherwise
 	FREE_IMAGE_FORMAT _fif;
 	/// TRUE whenever the display need to be refreshed
@@ -127,7 +127,7 @@ public:
 	*/
 	fipImage(FREE_IMAGE_TYPE image_type = FIT_BITMAP, unsigned width = 0, unsigned height = 0, unsigned bpp = 0);
 	/// Destructor
-	virtual ~fipImage();
+	// virtual ~fipImage();
 	/**
 	Image allocator
 	@see FreeImage_AllocateT
@@ -144,11 +144,16 @@ public:
 	@see FreeImage_Clone
 	*/
 	fipImage(const fipImage& src);
+	fipImage(fipImage&& Image);
+
 	/**
-	Copy constructor
+	assignment operator
 	@see FreeImage_Clone
 	*/
 	fipImage& operator=(const fipImage& src);
+	fipImage& operator=(fipImage&& src);
+	void swap(fipImage& left, fipImage& right);
+
 	/**
 	<b>Assignement operator</b><br>
 	Copy the input pointer and manage its destruction
@@ -424,11 +429,11 @@ public:
 	@see operator=(FIBITMAP *dib)
 	*/
 	operator FIBITMAP*() { 
-		return _dib; 
+		return _dib.get(); 
 	}
 
     operator FIBITMAP*() const {
-        return _dib;
+        return _dib.get();
     }
 
 	/// Returns TRUE if the image is allocated, FALSE otherwise
@@ -1068,10 +1073,11 @@ public:
 	void clearMetadata();
 	//@}
 
+	BOOL replace(FIBITMAP *new_dib);
+
   protected:
 	/**@name Internal use */
 	//@{
-	  BOOL replace(FIBITMAP *new_dib);
 	//@}
 
 };
@@ -1125,6 +1131,7 @@ public:
 	Tone mapping parameters are left unchanged. 
 	@see FreeImage_Clone
 	*/
+	fipWinImage(const fipImage& Image);
 	fipWinImage& operator=(const fipImage& src);
 
 	/**
@@ -1244,12 +1251,14 @@ public:
 	void getToneMappingOperator(FREE_IMAGE_TMO *tmo, double *first_param, double *second_param, double *third_param, double *fourth_param) const;
 
 	//@}
-
+	fipImage& get_display_image() { return _display_dib; }
 protected:
 	/// DIB used for display (this allow to display non-standard bitmaps)
-	mutable FIBITMAP *_display_dib;
+	mutable fipImage _display_dib;
+
 	/// remember to delete _display_dib
 	mutable BOOL _bDeleteMe;
+
 	/// tone mapping operator
 	FREE_IMAGE_TMO _tmo;
 	/// first tone mapping algorithm parameter

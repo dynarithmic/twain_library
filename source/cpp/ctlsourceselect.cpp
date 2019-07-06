@@ -150,7 +150,6 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
 
     if (!DTWAIN_EnumSources(&pDTWAINArray))
     {
-        if (!bSessionPreStarted)
             DTWAIN_EndTwainSession();
         LOG_FUNC_EXIT_PARAMS(NULL)
     }
@@ -180,7 +179,6 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
             LOG_FUNC_EXIT_PARAMS(pDead)
         }
     }
-    if (!bSessionPreStarted)
         DTWAIN_EndTwainSession();
     LOG_FUNC_EXIT_PARAMS((DTWAIN_SOURCE)NULL)
     CATCH_BLOCK(DTWAIN_SOURCE(0))

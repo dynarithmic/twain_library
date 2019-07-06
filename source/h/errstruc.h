@@ -134,13 +134,20 @@ class CTL_ErrorStruct
         CTL_ErrorStruct() :
             m_pOrigin(nullptr),
             m_pDest(nullptr),
-            m_pData(nullptr) {}
+            m_pData(nullptr),
+			m_nStructType(0),
+			m_nTWCCErrorCodes(0),
+			m_nTWRCCodes(0),
+			m_Key(0,0,0) {}
 
         CTL_ErrorStruct(LONG nDG, UINT nDAT, UINT nMsg) :
                 m_pOrigin(nullptr),
                 m_pDest(nullptr),
                 m_pData(nullptr),
-                m_Key{nDG,nDAT,nMsg}
+				m_nStructType(0),
+				m_nTWCCErrorCodes(0),
+				m_nTWRCCodes(0),
+				m_Key{nDG,nDAT,nMsg}
         {}
 
         void    SetKey(const key_type& nVal) { m_Key = nVal; }

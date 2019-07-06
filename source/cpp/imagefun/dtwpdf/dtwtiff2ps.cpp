@@ -715,7 +715,7 @@ PSHead(FILE *fd, TIFF *tif, uint32 w, uint32 h, float pw, float ph,
     fprintf(fd, "%%!PS-Adobe-3.0%s\n", generateEPSF ? " EPSF-3.0" : "");
     dynarithmic::CTL_StringType Buffer;
     Buffer = dynarithmic::GetVersionString();
-    fprintf(fd, "%%%%Creator: %s\n", StringConversion::Convert_Native_To_Ansi(Buffer.c_str()).c_str());
+    fprintf(fd, "%%%%Creator: %s\n", StringConversion::Convert_Native_To_Ansi(Buffer).c_str());
     fprintf(fd, "%%%%Title: %s\n", szTitle);
     fprintf(fd, "%%%%CreationDate: %s", ctime(&t));
     fprintf(fd, "%%%%DocumentData: Clean7Bit\n");
@@ -1629,7 +1629,7 @@ PSDataBW(FILE* fd, TIFF* tif, uint32 w, uint32 h)
                 *cp = ~*cp;
             cp++;
         }
-        if (ascii85) {
+        if (ascii85 && ascii85_p) {
 #if defined( EXP_ASCII85ENCODER )
             ascii85_l = Ascii85EncodeBlock( ascii85_p, 1, cp, cc );
 
@@ -1744,7 +1744,7 @@ PSRawDataBW(FILE* fd, TIFF* tif, uint32 w, uint32 h)
 #if defined( EXP_ASCII85ENCODER )
             ascii85_l = Ascii85EncodeBlock( ascii85_p, 1, tf_buf, cc );
 
-            if ( ascii85_l > 0 )
+            if ( ascii85_l > 0 && ascii85_p )
                 fwrite( ascii85_p, ascii85_l, 1, fd );
 #else
             for (cp = tf_buf; cc > 0; cc--)

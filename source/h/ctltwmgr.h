@@ -511,7 +511,6 @@ namespace dynarithmic
             TW_UINT16       m_nErrorTWCC;
             unsigned int    m_nTwainMsg;
             HINSTANCE       m_Instance;
-            FILE*           m_File;
             static int               s_nLastError;
             static CTL_StringType        s_strLastError;
             static HINSTANCE         s_ThisInstance;

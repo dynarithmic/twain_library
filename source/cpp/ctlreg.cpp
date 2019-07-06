@@ -135,7 +135,6 @@ bool dynarithmic::GetCapInfoFromIni(const CTL_String& strCapName,
     rStateInfo = 0xFF;
 
     // Get the capability information from DTWAIN16/32.INI
-    CTL_IntArray rContainerTypes;
     CTL_String strKeyName = strSourceName;
     CTL_String strStates;
 
@@ -223,12 +222,10 @@ bool dynarithmic::GetCapInfoFromIni(const CTL_String& strCapName,
         return false;
 
     // Check the values in the Capability string (parse)
-    CTL_String  strValues = szBuffer;
-
     CTL_StringArray aStr;
 
     // Make sure that you parse the NULL tokens
-    StringWrapperA::Tokenize(strValues, ",", aStr, true );
+    StringWrapperA::Tokenize(szBuffer, ",", aStr, true );
 
     // Get strings and translate them to the correct values
     ContainerMap::const_iterator it;
@@ -275,8 +272,7 @@ bool dynarithmic::GetCapInfoFromIni(const CTL_String& strCapName,
     if ( !szStates.empty() )
     {
         // Make sure that you parse the NULL tokens
-        strStates = szStates;
-        StringWrapperA::Tokenize(strStates, ",", aStr, true );
+        StringWrapperA::Tokenize(szStates, ",", aStr, true );
         CTL_String strNum;
         short int tempInfo = 0;
         bool bFoundNum = false;

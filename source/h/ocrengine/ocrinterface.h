@@ -107,10 +107,12 @@ namespace dynarithmic
                                          CapDataType(capDataType),
                                          CapOperations(capOperations),
                                          CapContainerType(4,0),
-                                         m_bIsSingleValue(isSingleValue)
+                                         m_bIsSingleValue(isSingleValue),
+										 doubleData{},
+										 longData{}
                     { }
 
-        OCRCapInfo() : CapValue(0), CapDataType(-1), CapOperations(-1), m_bIsSingleValue(false) { }
+		OCRCapInfo() : CapValue(0), CapDataType(-1), CapOperations(-1), m_bIsSingleValue(false), doubleData{}, longData{} { }
 
         LONG GetCapDataType() const { return CapDataType; }
         LONG GetCapOperations() const { return CapOperations; }

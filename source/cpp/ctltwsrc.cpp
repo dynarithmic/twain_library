@@ -251,7 +251,9 @@ CTL_ITwainSource::CTL_ITwainSource( CTL_ITwainSession *pSession, LPCTSTR lpszPro
     m_ImageLayout(),
     m_FileSystem(),
     m_pImageMemXfer(nullptr),
-    m_PersistentArray(nullptr)
+    m_PersistentArray(nullptr),
+	m_bDuplexSideDone{ false,false },
+	m_bImageInfoRetrieved(false)
 {
     if ( lpszProduct != NULL )
         StringWrapperA::SafeStrcpy( m_SourceId.ProductName,
@@ -636,7 +638,6 @@ CTL_StringType CTL_ITwainSource::GetCurrentImageFileName()// const
     }
 
     long lFlags   = GetAcquireFileFlags();
-    CTL_StringType strFileBase = GetAcquireFile();
 
     if ( m_bAutoIncrementFile )
     {
@@ -1068,31 +1069,31 @@ DTWAIN_ARRAY CTL_ITwainSource::GetAcquisitionArray()
 void CTL_ITwainSource::SetPDFValue(const CTL_StringType& nWhich, const CTL_StringType& sz)
 {
     if ( nWhich == PDFAUTHORKEY)
-        m_ImageInfoEx.PDFAuthor = sz.c_str();
+        m_ImageInfoEx.PDFAuthor = sz;
     else
     if ( nWhich == PDFPRODUCERKEY)
-        m_ImageInfoEx.PDFProducer = sz.c_str();
+        m_ImageInfoEx.PDFProducer = sz;
     else
     if ( nWhich == PDFKEYWORDSKEY)
-        m_ImageInfoEx.PDFKeywords = sz.c_str();
+        m_ImageInfoEx.PDFKeywords = sz;
     else
     if ( nWhich == PDFTITLEKEY)
-        m_ImageInfoEx.PDFTitle = sz.c_str();
+        m_ImageInfoEx.PDFTitle = sz;
     else
     if ( nWhich == PDFSUBJECTKEY )
-        m_ImageInfoEx.PDFSubject = sz.c_str();
+        m_ImageInfoEx.PDFSubject = sz;
     else
     if ( nWhich == PSTITLEKEY)
-        m_ImageInfoEx.PSTitle = sz.c_str();
+        m_ImageInfoEx.PSTitle = sz;
     else
     if ( nWhich == PDFOWNERPASSKEY)
-        m_ImageInfoEx.PDFOwnerPassword = sz.c_str();
+        m_ImageInfoEx.PDFOwnerPassword = sz;
     else
     if ( nWhich == PDFUSERPASSKEY)
-        m_ImageInfoEx.PDFUserPassword = sz.c_str();
+        m_ImageInfoEx.PDFUserPassword = sz;
     else
     if ( nWhich == PDFCREATORKEY)
-        m_ImageInfoEx.PDFCreator = sz.c_str();
+        m_ImageInfoEx.PDFCreator = sz;
 }
 
 
@@ -1188,8 +1189,6 @@ static CTL_StringType GetPageFileName(const CTL_StringType &strBase,
                                   bool bUseLongNames )
 {
     CTL_StringType strFormat;
-    CTL_StringType strTemp;
-    CTL_StringType strTotal;
     CTL_StringStreamType strm;
     strm << nCurImage;
     strFormat = strm.str();
@@ -1230,13 +1229,8 @@ bool CTL_ITwainSource::InitExtImageInfo(int nNum)
         return false;
 
     m_pExtImageTriplet.reset(new CTL_ExtImageInfoTriplet(m_pSession, this, nNum));
-    if (m_pExtImageTriplet)
-    {
         return GetExtImageInfo(true);
     }
-
-    return false;
-}
 
 
 bool CTL_ITwainSource::AddExtImageInfo(const TW_INFO &Info)
@@ -1556,7 +1550,7 @@ int GetInitialFileNumber(const CTL_StringType& sFileName, size_t &nDigits)
 		{
 			return boost::lexical_cast<int>(sTemp);
 		}
-		catch (boost::bad_lexical_cast)
+		catch (boost::bad_lexical_cast&)
 		{
 			sTemp.erase(sTemp.begin());
 		}
