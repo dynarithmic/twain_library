@@ -133,6 +133,7 @@ static bool AcquireFileHelper(SourceAcquireOptions& opts)
     // Check if file type requires a loaded DLL
     DumpArrayContents(opts.getFileList(), 0);
     opts.setAcquireType(ACQUIREFILE);
+	opts.setDiscardDibs(true); // make sure we remove acquired dibs for file handling
     aDibs = SourceAcquire(opts);
     if (opts.getStatus() < 0 && !aDibs)
     {
