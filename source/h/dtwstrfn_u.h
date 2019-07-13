@@ -26,6 +26,7 @@ DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeEx2(LPCWSTR szINIPath,
                                                          LPCWSTR szImageDLLPath,
                                                          LPCWSTR szLangResourcePath);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionString(LPWSTR lpszVer, LONG nLength);
+LONG           DLLENTRY_DEF      DTWAIN_GetShortVersionString(LPWSTR lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionInfo(LPWSTR lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetErrorString(LONG lError,
                                                        LPWSTR lpszBuffer,

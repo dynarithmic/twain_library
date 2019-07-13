@@ -130,6 +130,7 @@
     <Compile Include="DibDisplayerDlg2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dtwain32u.vb" />
     <Compile Include="FileTypeDlg.Designer.vb">
       <DependentUpon>FileTypeDlg.vb</DependentUpon>
     </Compile>
@@ -153,9 +154,6 @@
     </Compile>
     <Compile Include="SourcePropertiesDlg.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dtwain32u_net.vb">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="DTwainDemo.vb">
       <SubType>Form</SubType>
