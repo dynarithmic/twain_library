@@ -1205,6 +1205,28 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionStringA(LPSTR lpszVer, LONG nLength)
 #endif
 }
 
+LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringW(LPWSTR lpszVer, LONG nLength)
+{
+#ifdef _UNICODE
+	return DTWAIN_GetShortVersionString(lpszVer, nLength);
+#else
+	CTL_String args(1024, 0);
+	LONG retVal = DTWAIN_GetShortVersionString(&args[0], static_cast<LONG>(args.size()));
+	return null_terminator_copier(args, lpszVer, retVal);
+#endif
+}
+
+LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringA(LPSTR lpszVer, LONG nLength)
+{
+#ifdef _UNICODE
+	CTL_WString args(1024, 0);
+	LONG retVal = DTWAIN_GetShortVersionString(&args[0], static_cast<LONG>(args.size()));
+	return null_terminator_copier(args, lpszVer, retVal);
+#else
+	return DTWAIN_GetShortVersionString(lpszVer, nLength);
+#endif
+}
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetXResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution)
 {
 #ifdef _UNICODE

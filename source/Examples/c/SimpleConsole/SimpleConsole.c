@@ -5,8 +5,15 @@
 
 int main()
 {
-	printf("Hello DTWAIN Version %s\n", DTWAIN_VERINFO_FILEVERSION);
+	/* This returns the compiled version */
+	printf("Hello -- we compiled DTWAIN Version %s\n", DTWAIN_VERINFO_FILEVERSION);
     DTWAIN_HANDLE isInitialized = DTWAIN_SysInitialize();
+
+	/* This gets the actual version of DTWAIN that is running */
+	char dll_version[20];
+	DTWAIN_GetShortVersionStringA(dll_version, 20);
+	printf("Hello -- we are running DTWAIN Version %s\n", dll_version);
+
     DTWAIN_SOURCE Source;
     if (!isInitialized)
     {

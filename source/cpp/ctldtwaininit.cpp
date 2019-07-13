@@ -1623,6 +1623,11 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionString(LPTSTR lpszVer, LONG nLength)
     return CopyInfoToCString(GetVersionString(),lpszVer, nLength);
 }
 
+LONG DLLENTRY_DEF DTWAIN_GetShortVersionString(LPTSTR lpszVer, LONG nLength)
+{
+	return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(DTWAIN_VERINFO_FILEVERSION), lpszVer, nLength);
+}
+
 LONG DLLENTRY_DEF DTWAIN_GetVersionInfo(LPTSTR lpszVer, LONG nLength)
 {
     return CopyInfoToCString(dynarithmic::GetVersionInfo(), lpszVer, nLength);

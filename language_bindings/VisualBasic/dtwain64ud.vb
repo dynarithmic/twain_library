@@ -2172,5 +2172,11 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_StartTwainSession Lib "DTWAIN64UD.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Ansi Function DTWAIN_StartTwainSessionA Lib "DTWAIN64UD.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Unicode Function DTWAIN_StartTwainSessionW Lib "DTWAIN64UD.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
+    Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "DTWAIN64UD.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetShortVersionString Lib "DTWAIN64UD.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "DTWAIN64UD.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetShortVersionString Lib "DTWAIN64UD.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "DTWAIN64UD.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "DTWAIN64UD.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
     
 End Class
