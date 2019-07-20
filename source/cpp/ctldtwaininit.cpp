@@ -125,10 +125,16 @@ static HMODULE GetDLLInstance();
 
 static unsigned long getThreadId()
 {
+	static std::unordered_map<std::string, unsigned long> s_thread_map;
     std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
+	auto iter = s_thread_map.find(threadId);
+	if (iter == s_thread_map.end())
+	{
     unsigned long threadNumber = 0;
     sscanf(threadId.c_str(), "%lx", &threadNumber);
-    return threadNumber;
+		iter = s_thread_map.insert({ threadId, threadNumber }).first;
+	}
+	return iter->second;
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetVersion(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType)
@@ -433,6 +439,14 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndThread( DTWAIN_HANDLE DLLHandle )
     CATCH_BLOCK(false)
 }
 
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet)
+{
+	LOG_FUNC_ENTRY_PARAMS((bSet))
+	CTL_TwainDLLHandle::s_multipleThreads = bSet ? true : false;
+	LOG_FUNC_EXIT_PARAMS(true)
+	CATCH_BLOCK(false)
+}
+
 DTWAIN_HANDLE dynarithmic::GetDTWAINHandle_Internal()
 {
     CTL_TwainDLLHandle *pHandle;
@@ -440,6 +454,14 @@ DTWAIN_HANDLE dynarithmic::GetDTWAINHandle_Internal()
     if (CTL_TwainDLLHandle::s_DLLInstance == NULL)
         return NULL;
     #endif
+
+	if (!CTL_TwainDLLHandle::s_multipleThreads)
+	{
+		if (!CTL_TwainDLLHandle::s_DLLHandles.empty())
+			return CTL_TwainDLLHandle::s_DLLHandles.back().get();
+		return nullptr;
+	}
+
     // Check if this task has already been hooked
     // Get the Current task
     DWORD hTask = getThreadId();
@@ -459,7 +481,7 @@ DTWAIN_HANDLE dynarithmic::GetDTWAINHandle_Internal()
         pHandle = std::get<3>(HookInfo);
         return pHandle;
     }
-    return NULL;
+    return nullptr;
     #endif
 }
 

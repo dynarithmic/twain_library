@@ -1,0 +1,8 @@
+DTWAIN Version changes
+
+5.1.0.0
+
+- Update LibTiff to version 4.0.10
+- Update LibPNG to version 1.6.37
+- Now requires application to call DTWAIN_UseMultipleThreads if one DTWAIN session will be used across multiple threads.
+- Speed up processing DTWAIN functions when using DTWAIN in a single thread.

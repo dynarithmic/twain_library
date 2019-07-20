@@ -652,6 +652,7 @@ namespace dynarithmic
             static bool                     s_UsingCustomResource;
             static bool                     s_DemoInitialized;
             static int                      s_TwainDSMSearchOrder;
+			static bool						s_multipleThreads;
 
             static std::unordered_set<HWND>   s_appWindowsToDisable;
             bool                            m_bOpenSourceOnSelect;
