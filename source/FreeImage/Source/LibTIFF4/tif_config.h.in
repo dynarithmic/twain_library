@@ -71,6 +71,9 @@
 /* Define to 1 if you have the `lfind' function. */
 #undef HAVE_LFIND
 
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
 /* Define to 1 if you have the `mmap' function. */
 #undef HAVE_MMAP
 
@@ -310,6 +313,9 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Support webp compression */
+#undef WEBP_SUPPORT
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
