@@ -134,7 +134,7 @@ int CPDFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR p
     }
 
     PDFINFO *pPDFInfo = NULL;
-    PdfDocument pDocument;
+    PdfDocumentPtr pDocument;
 
 
     if ( m_MultiPageStruct.Stage == DIB_MULTI_FIRST ||

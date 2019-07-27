@@ -1092,8 +1092,6 @@ PS_Lvl2ImageDict(FILE* fd, TIFF* tif, uint32 w, uint32 h)
     case COMPRESSION_THUNDERSCAN:   /* 32809: ThunderScan RLE */
     case COMPRESSION_PIXARFILM: /* 32908: Pixar companded 10bit LZW */
     case COMPRESSION_JBIG:      /* 34661: ISO JBIG */
-        use_rawdata = FALSE;
-        break;
     case COMPRESSION_SGILOG:    /* 34676: SGI LogL or LogLuv */
     case COMPRESSION_SGILOG24:  /* 34677: SGI 24-bit LogLuv */
         use_rawdata = FALSE;

@@ -498,6 +498,7 @@ namespace dynarithmic
     class CTL_TwainDLLHandle
     {
         public:
+			typedef std::unordered_map<LONG, std::pair<CTL_String, CTL_String>> CTL_PDFMediaMap;
             CTL_TwainDLLHandle();
             ~CTL_TwainDLLHandle();
             static HINSTANCE GetImageLibrary(LONG nWhich);
@@ -529,6 +530,7 @@ namespace dynarithmic
             static int              GetDATResourceID() { return 8891; }
             static int              GetMSGResourceID() { return 8892; }
             static long             GetErrorFilterFlags() { return s_lErrorFilterFlags; }
+			static CTL_PDFMediaMap& GetPDFMediaMap() { return s_PDFMediaMap; }
 
             CTL_TwainAppMgr* m_pAppMgr;
 
@@ -600,6 +602,7 @@ namespace dynarithmic
             OCRInterfaceContainer m_OCRInterfaceArray;
             OCRProductNameToEngineMap m_OCRProdNameToEngine;
             OCREnginePtr          m_pOCRDefaultEngine;
+			static CTL_PDFMediaMap s_PDFMediaMap;
 
 
             // File Save As information

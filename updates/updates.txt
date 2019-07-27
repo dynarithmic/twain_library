@@ -1,7 +1,11 @@
 DTWAIN Version changes
 
-5.1.0.0
+5.1.0.1
+- Add all supported PDF page dimensions to twaininfo.txt.  This allows customization of the PDF creation with
+  respect to the page sizing (you can add your own definitions).
+- Update sources to output Visual C++ 2019 compilation messages.
 
+5.1.0.0
 - Update LibTiff to version 4.0.10
 - Update LibPNG to version 1.6.37
 - Now requires application to call DTWAIN_UseMultipleThreads if one DTWAIN session will be used across multiple threads.

@@ -125,9 +125,26 @@ namespace dynarithmic
             CTL_StringStreamInA strm(line);
             LONG imgType;
             strm >> imgType;
+			if (imgType == -1)
+				break;
             int bppValue;
             while (strm >> bppValue)
                 bppMap.insert({ imgType, std::vector<int>() }).first->second.push_back(bppValue);
+		}
+
+		auto& mediamap = CTL_TwainDLLHandle::GetPDFMediaMap();
+		while (std::getline(ifs, line))
+		{
+			CTL_StringStreamInA strm(line);
+			LONG pageType;
+			strm >> pageType;
+			CTL_String name;
+			strm >> name;
+			name = StringWrapperA::TrimAll(name);
+			CTL_String dimensions;
+			std::getline(strm, dimensions);
+			dimensions = StringWrapperA::TrimAll(dimensions);
+			mediamap.insert({ pageType, {name, dimensions } });
         }
 
         LOG_FUNC_EXIT_PARAMS(true)

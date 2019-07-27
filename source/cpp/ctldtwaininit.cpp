@@ -265,14 +265,17 @@ LONG DLLENTRY_DEF DTWAIN_GetStaticLibVersion()
         #if _MSC_VER < 1800
             #error("Compiler must be Visual Studio 2013 or greater")
         #elif _MSC_VER == 1800
-            #pragma message ("Microsoft Visual Studio 2013 compiler used to build static library")
+            #pragma message ("Microsoft Visual Studio 2013 compiler used to build library")
             LOG_FUNC_EXIT_PARAMS(51)
         #elif _MSC_VER == 1900
-            #pragma message ("Microsoft Visual Studio 2015 compiler used to build static library")
+            #pragma message ("Microsoft Visual Studio 2015 compiler used to build library")
             LOG_FUNC_EXIT_PARAMS(61)
-        #else
-            #pragma message ("Microsoft Visual Studio 2017 compiler or greater compiler used to build static library")
+        #elif _MSC_VER >= 1910 && _MSC_VER < 1920
+            #pragma message ("Microsoft Visual Studio 2017 compiler to build library")
             LOG_FUNC_EXIT_PARAMS(71)
+		#elif _MSC_VER >= 1920
+		    #pragma message ("Microsoft Visual Studio 2019 compiler or greater compiler used to build library")
+			LOG_FUNC_EXIT_PARAMS(81)
         #endif
     #endif
     #ifndef _MSC_VER

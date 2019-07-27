@@ -498,11 +498,7 @@ HANDLE DLLENTRY_DEF DTWAIN_GetCustomDSData( DTWAIN_SOURCE Source, LPBYTE Data, L
     {
         int nMinCopy;
         char *pData = static_cast<char *>(ImageMemoryHandler::GlobalLock(h));
-
-        if( dSize == -1 )
-            nMinCopy = localActualSize;
         nMinCopy = max(min(dSize, (LONG)localActualSize), (LONG)0);
-
         memcpy(Data, pData, nMinCopy);
         ImageMemoryHandler::GlobalUnlock(h);
         ImageMemoryHandler::GlobalFree(h);
