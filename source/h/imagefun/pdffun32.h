@@ -34,7 +34,7 @@
 #include "ctlobstr.h"
 namespace dynarithmic
 {
-    typedef void * PdfDocument;
+    typedef void * PdfDocumentPtr;
 
     typedef void* (CALLBACK *PDF_FUNC1)();
     typedef BOOL  (CALLBACK *PDF_FUNC2)(void* pDoc, LPCTSTR szFile);
@@ -66,7 +66,7 @@ namespace dynarithmic
     struct PDFINFO
     {
     //    PdfDocument *pPDFdoc;
-        PdfDocument pPDFdoc;
+        PdfDocumentPtr pPDFdoc;
         int nCurrentPage;
         bool IsFileOpened;
         bool IsPDFStarted;

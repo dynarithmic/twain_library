@@ -116,6 +116,9 @@
 /* Support ZSTD compression */
 #cmakedefine ZSTD_SUPPORT 1
 
+/* Support WEBP compression */
+#cmakedefine WEBP_SUPPORT 1
+
 /* Name of package */
 #define PACKAGE "@PACKAGE_NAME@"
 

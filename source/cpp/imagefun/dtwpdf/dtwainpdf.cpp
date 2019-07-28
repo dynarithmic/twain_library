@@ -190,7 +190,7 @@ vector<unsigned char> MD5Hash (unsigned char *input)
 
   MD5Init (&context);
   MD5Update (&context, input, (unsigned int)strlen((const char *)input));
-  MD5Final (&digest[0], &context);
+  MD5Final (digest.data(), &context);
 
   return digest;
 }
@@ -222,11 +222,11 @@ std::string CreateIDString(const std::string& sName, std::string& ID1, std::stri
     WRITE_TO_LOG()
     std::string hexHash;
     WRITE_TO_LOG()
-    hexHash.append(HexString(&hash[0], 32).data(), 32);
+    hexHash.append(HexString(hash.data(), 32).data(), 32);
     WRITE_TO_LOG()
     std::string hexVersion;
     WRITE_TO_LOG()
-    hexVersion.append(HexString(&version[0], 32).data(), 32);
+    hexVersion.append(HexString(version.data(), 32).data(), 32);
     WRITE_TO_LOG()
 
     sprintf(szBuf, "[<%s> <%s>]", hexHash.c_str(), hexVersion.c_str());
@@ -253,7 +253,7 @@ static string MakeLandscapeMediaBox(const string& sBox)
 
 std::string MakeCompatiblePDFString(const PDFEncryption::UCHARArray& u)
 {
-    std::string sTemp((const char *)&u[0], u.size());
+    std::string sTemp((const char *)u.data(), u.size());
     return MakeCompatiblePDFString(sTemp);
 }
 
@@ -351,7 +351,7 @@ static int EncodeVectorStream(const vector<char>& InputStream,
         {
             std::string sTemp;
             std::string sOut;
-            sTemp.append(&InputStream[0], InputLength);
+            sTemp.append(InputStream.data(), InputLength);
             fnCall->second(sTemp, sOut);
             OutStream.resize(sOut.size());
             std::copy(sOut.begin(), sOut.end(), OutStream.begin());
@@ -435,7 +435,7 @@ int PDFObject::EncryptBlock(const std::string& sIn, std::string& sOut, int objec
 PdfDocument::PdfDocument() :
     m_byteOffset(0),
     m_sPDFVer("1.3"),
-    m_sPDFHeader("DTWAIN PDF, 2007"),
+    m_sPDFHeader("DTWAIN PDF, 2019"),
     m_sCurSysTime(GetSystemTimeInMilliseconds()),
     m_nPolarity(DTWAIN_PDFPOLARITY_POSITIVE),
     m_smediabox("[0 0 612 792]"),
@@ -468,65 +468,12 @@ PdfDocument::PdfDocument() :
 	m_nCurObjNum(0),
 	m_nCurPage(0),
 	m_nProcSetObj(0),
-    CurFontRefNum(START_FONTREF_NUM)
+    CurFontRefNum(START_FONTREF_NUM),
+	m_mediaMap(CTL_TwainDLLHandle::GetPDFMediaMap())
 {
-    m_mediaMap[ DTWAIN_FS_USLETTER    ] =  "[0 0 612.00 792.00]";
-    m_mediaMap[ DTWAIN_FS_USLEGAL     ] =  "[0 0 612.00 1008.00]";
-    m_mediaMap[ DTWAIN_FS_USEXECUTIVE ] =  "[0 0 521.86 756.00]";
-    m_mediaMap[ DTWAIN_FS_USLEDGER    ] =  "[0 0 792.00 1224.00]";
-    m_mediaMap[ DTWAIN_FS_USSTATEMENT ] =  "[0 0 396.00 792.00]";
-    m_mediaMap[ DTWAIN_FS_BUSINESSCARD] =  "[0 0 144.00 290.00]";
-
-    m_mediaMap[ DTWAIN_FS_4A0         ] =  "[0 0 4767.87 6740.79]";
-    m_mediaMap[ DTWAIN_FS_2A0         ] =  "[0 0 3370.39 4767.87]";
-
-    m_mediaMap[ DTWAIN_FS_A0          ] =  "[0 0 2383.94 3370.39]";
-    m_mediaMap[ DTWAIN_FS_A1          ] =  "[0 0 1683.78 2383.94]";
-    m_mediaMap[ DTWAIN_FS_A2          ] =  "[0 0 1190.55 1683.78]";
-    m_mediaMap[ DTWAIN_FS_A3          ] =  "[0 0 841.89 1190.55]";
-    m_mediaMap[ DTWAIN_FS_A4          ] =  "[0 0 595.28 841.89]";
-    m_mediaMap[ DTWAIN_FS_A5          ] =  "[0 0 419.53 595.28]";
-    m_mediaMap[ DTWAIN_FS_A6          ] =  "[0 0 297.64 419.53]";
-    m_mediaMap[ DTWAIN_FS_A7          ] =  "[0 0 209.76 297.64]";
-    m_mediaMap[ DTWAIN_FS_A8          ] =  "[0 0 147.40 209.76]";
-    m_mediaMap[ DTWAIN_FS_A9          ] =  "[0 0 104.88 147.40]";
-    m_mediaMap[ DTWAIN_FS_A10         ] =  "[0 0 73.70 104.88]";
-
-    m_mediaMap[ DTWAIN_FS_ISOB0       ] =  "[0 0 2834.65 4008.19]";
-    m_mediaMap[ DTWAIN_FS_ISOB1       ] =  "[0 0 2004.09 2834.65]";
-    m_mediaMap[ DTWAIN_FS_ISOB2       ] =  "[0 0 1417.32 2004.09]";
-    m_mediaMap[ DTWAIN_FS_ISOB3       ] =  "[0 0 1000.63 1417.32]";
-    m_mediaMap[ DTWAIN_FS_ISOB4       ] =  "[0 0 708.66 1000.63]";
-    m_mediaMap[ DTWAIN_FS_ISOB5       ] =  "[0 0 498.90 708.66]";
-    m_mediaMap[ DTWAIN_FS_ISOB6       ] =  "[0 0 354.33 498.90]";
-    m_mediaMap[ DTWAIN_FS_ISOB7       ] =  "[0 0 249.45 354.33]";
-    m_mediaMap[ DTWAIN_FS_ISOB8       ] =  "[0 0 175.75 249.45]";
-    m_mediaMap[ DTWAIN_FS_ISOB9       ] =  "[0 0 124.72 175.75]";
-    m_mediaMap[ DTWAIN_FS_ISOB10      ] =  "[0 0 87.87 124.72]";
-
-    m_mediaMap[ DTWAIN_FS_C0          ] =  "[0 0 2599.37 3676.54]";
-    m_mediaMap[ DTWAIN_FS_C1          ] =  "[0 0 1836.85 2599.37]";
-    m_mediaMap[ DTWAIN_FS_C2          ] =  "[0 0 1298.27 1836.85]";
-    m_mediaMap[ DTWAIN_FS_C3          ] =  "[0 0 918.43 1298.27]";
-    m_mediaMap[ DTWAIN_FS_C4          ] =  "[0 0 649.13 918.43]";
-    m_mediaMap[ DTWAIN_FS_C5          ] =  "[0 0 459.21 649.13]";
-    m_mediaMap[ DTWAIN_FS_C6          ] =  "[0 0 323.15 459.21]";
-    m_mediaMap[ DTWAIN_FS_C7          ] =  "[0 0 229.61 323.15]";
-    m_mediaMap[ DTWAIN_FS_C8          ] =  "[0 0 161.57 229.61]";
-    m_mediaMap[ DTWAIN_FS_C9          ] =  "[0 0 113.39 161.57]";
-    m_mediaMap[ DTWAIN_FS_C10         ] =  "[0 0 79.37 113.39]";
-
-    m_mediaMap[ DTWAIN_FS_JISB0       ] =  "[0 0 2923.2 4125.6]";
-    m_mediaMap[ DTWAIN_FS_JISB1       ] =  "[0 0 2066.4 2923.2]";
-    m_mediaMap[ DTWAIN_FS_JISB2       ] =  "[0 0 1461.6 2066.4]";
-    m_mediaMap[ DTWAIN_FS_JISB3       ] =  "[0 0 1029.6 1461.6]";
-    m_mediaMap[ DTWAIN_FS_JISB4       ] =  "[0 0 727.2 1029.6]";
-    m_mediaMap[ DTWAIN_FS_JISB5       ] =  "[0 0 518.4 727.2]";
-    m_mediaMap[ DTWAIN_FS_JISB6       ] =  "[0 0 360 518.4]";
-    m_mediaMap[ DTWAIN_FS_JISB7       ] =  "[0 0 259.2 360]";
-    m_mediaMap[ DTWAIN_FS_JISB8       ] =  "[0 0 180 259.2]";
-    m_mediaMap[ DTWAIN_FS_JISB9       ] =  "[0 0 129.6 180]";
-    m_mediaMap[ DTWAIN_FS_JISB10      ] =  "[0 0 93.6 129.6]";
+	auto iter = m_mediaMap.find(DTWAIN_FS_USLETTER);
+	if (iter != m_mediaMap.end())
+		m_smediabox = iter->second.second;
 }
 
 void PdfDocument::SetPDFVersion(int major, int minor)
@@ -559,7 +506,7 @@ bool PdfDocument::WriteHeaderInfo()
     if ( IsASCIICompressed() )
         ASCIIHexEncode(binheader, sOut);
     else
-        sOut = binheader;
+        sOut = std::move(binheader);
 
     strm << "%PDF-" << GetPDFVersion() << "\n" << sOut << "\r";
     string s = strm.str();
@@ -611,7 +558,6 @@ bool RemoveCurrentText(const PDFTextElement* element)
 void PdfDocument::RemoveTempTextElements()
 {
     m_vPDFText.clear();
-//    m_vPDFTextSet.clear();//erase(std::remove_if(m_vPDFText.begin(), m_vPDFText.end(), RemoveCurrentText), m_vPDFText.end());
 }
 
 bool PdfDocument::WritePage(const CTL_StringType& sImgFileName)
@@ -659,8 +605,6 @@ bool PdfDocument::WritePage(const CTL_StringType& sImgFileName)
         if ( imgObjThumb.OpenAndComposeImage(width2, height2, bpp2, rgb2, dpix2, dpiy2))
         {
             bIsDuplicateThumb = IsDuplicateImage(imgObjThumb.GetCRCVal(), nObjNumThumb);
-//            if ( !bIsDuplicateThumb )
-//                imgObjThumb.ComposeObject();
         }
     }
     // Create the contents object
@@ -676,7 +620,6 @@ bool PdfDocument::WritePage(const CTL_StringType& sImgFileName)
     {
         if ( m_Orientation == DTWAIN_PDF_LANDSCAPE )
             mbox = MakeLandscapeMediaBox(m_smediabox);
-
 
         if ( dpix > 1 )
         {
@@ -1129,7 +1072,7 @@ void PdfDocument::SetMediaBox(int mediatype)
     }
     MediaBoxMap::iterator it = m_mediaMap.find(mediatype);
     if ( it != m_mediaMap.end())
-        SetMediaBox((*it).second);
+        SetMediaBox((*it).second.second);
     m_bUseVariableMediaBox = false;
 }
 
@@ -1221,8 +1164,8 @@ void EncryptionObject::ComposeObject()
     std::string enc2;
     PDFEncryption::UCHARArray enc1Array = GetParent()->GetEncryptionEngine().GetOwnerKey();
     PDFEncryption::UCHARArray enc2Array = GetParent()->GetEncryptionEngine().GetUserKey();
-    enc1.append(reinterpret_cast<const char *>(&enc1Array[0]), 32);
-    enc2.append(reinterpret_cast<const char *>(&enc2Array[0]), 32);
+    enc1.append(reinterpret_cast<const char *>(enc1Array.data()), 32);
+    enc2.append(reinterpret_cast<const char *>(enc2Array.data()), 32);
     AppendContents("/O (");
     enc1 = MakeCompatiblePDFString(enc1);
     WriteRaw(enc1.data(), enc1.length());
@@ -1575,31 +1518,12 @@ void ContentsObject::ComposeObject()
 
     sLength = "/Length ";
     sStream = "stream\n";
-/*    int nLength;
-    sLength = "/Length ";
-    sStream = "stream\n";
-*/
+
     // Start of stream
-/*    sRealStream += "q\n";
-    sRealStream += "1.0000 0.0000 0.0000 1.0000 0.0000 0.0000 cm\n";
-    sprintf(szBuf, "%-10.5lf 0.0000 0.0000 %10.5lf 0.000 0.0000 cm\n", m_xscale, m_yscale);
-    sRealStream += szBuf;
-    sRealStream += "/" + m_sImgName + " Do\nQ\n";
-*/
+
     // Get the stream string that has already been composed
     sRealStream = m_preComposedObject + m_sFontString;
 
-/*    // now resolve the font numbers
-    pParent->CreateFontRefsFromTextElements();
-
-    int numTextElements = pParent->GetNumTextElements();
-    for ( int nElements = 0; nElements < numTextElements; ++nElements )
-    {
-        m_sText += pParent->GetTextElement(nElements).GetPDFTextString();
-    }
-    if ( nElements > 0 )
-        sRealStream += "BT\n" + m_sText + "ET\n";
-*/
     nLength = sRealStream.length();
     // end of graphics stream
 
@@ -1654,9 +1578,8 @@ void ContentsObject::ComposeObject()
         filterstr = "[" + filterstr + "]";
 
      // Encrypt this block of data if encryption is set
-    std::string sRealStreamOut;
     const char *pStreamToWrite;
-    pStreamToWrite = &VecIn[0];
+	pStreamToWrite = VecIn.data();
 
     AppendContents("<< ");
 
@@ -1714,7 +1637,6 @@ bool ImageObject::OpenAndComposeImage(int& width, int& height, int& bpp, int& rg
         dpiy = max(dpiy, 1);
     }
     else
- //       bRet = ProcessTIFFImage(width, height, bpp, rgb, dpix, dpiy);
         bRet = ProcessBMPImage(width, height, bpp, rgb, dpix, dpiy);
     return bRet;
 }
@@ -1792,7 +1714,7 @@ bool ImageObject::ProcessJPEGImage(int& width, int& height, int& bpp, int& rgb)
     }
     fclose (infile);
 
-    unsigned long crcVal = crc32_aux(0, (unsigned char *)&m_vImgStream[0], (unsigned int)m_imgLengthInBytes);
+    unsigned long crcVal = crc32_aux(0, (unsigned char *)m_vImgStream.data(), (unsigned int)m_imgLengthInBytes);
 
     m_nCurCRCVal = crcVal;
     return true;
@@ -1800,9 +1722,6 @@ bool ImageObject::ProcessJPEGImage(int& width, int& height, int& bpp, int& rgb)
 
 
 bool ImageObject::ProcessTIFFImage(int& width, int& height, int& bpp, int& /*rgb*/, int& dpix, int& dpiy)
-/*void
-panda_insertTIFF (panda_pdf * output, panda_page * target,
-          panda_object * imageObj, char *filename)*/
 {
   /**************************************************************************
     Some notes about TIFF support inside PDF files.
@@ -1873,7 +1792,7 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
     TIFFGetField (image, TIFFTAG_IMAGEWIDTH, &width);
     TIFFGetField (image, TIFFTAG_IMAGELENGTH, &height);
 
-    // Get the resoulution of the image
+    // Get the resolution of the image
     float xres;
     float yres;
 
@@ -1885,17 +1804,7 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
 
     m_Width = m_nTiffColumns = width;
     m_Height = m_nTiffRows = height;
-/*
-    // Width of the image
-    panda_adddictitem (output, imageObj, "DecodeParms/Columns",
-               panda_integervalue, width);
-  panda_adddictitem (output, imageObj, "Width", panda_integervalue, width);
 
-  // Height of the image
-  panda_adddictitem (output, imageObj, "DecodeParms/Rows",
-             panda_integervalue, height);
-  panda_adddictitem (output, imageObj, "Height", panda_integervalue, height);
-*/
   // Fillorder determines whether we convert on the fly or not, although
   // multistrip images also need to be converted
     TIFFGetField (image, TIFFTAG_FILLORDER, &fillorder);
@@ -1906,22 +1815,6 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
       Convert the image
     *************************************************************************/
 
-      //  OutputDebugString("Conversion of the image in-memory will occur.\n");
-
-      // Because of the way this is implemented to integrate with the tiff lib
-      // we need to ensure that we are the only thread that is performing this
-      // operation at the moment. This is not a well coded piece of the library,
-      // but I am at a loss as to how to do it better... We don't check if we
-      // have already used global tiff buffer, because we are still using it's
-      // old contents...
-#if 0
-#if defined _WINDOWS
-      winmutex = CreateMutex (NULL, TRUE, "Panda");
-      WaitForSingleObject (winmutex, INFINITE);
-#else
-      pthread_mutex_lock (&convMutex);
-#endif
-#endif
       m_vImgStream.resize(0);
       m_sTiffOffset = 0;
 
@@ -1976,32 +1869,17 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
             TIFFSetField (conv, TIFFTAG_GROUP4OPTIONS, 0);
 
       // Actually do the conversion
-      TIFFWriteEncodedStrip (conv, 0, &stripBuffer[0], imageOffset);
+      TIFFWriteEncodedStrip (conv, 0, stripBuffer.data(), imageOffset);
 
       // Finish up
-//      imageObj->binarystream = globalImageBuffer;
       m_imgLengthInBytes = m_sTiffOffset;
-//      imageObj->binarystreamLength = globalImageBufferOffset;
-#if 0
-#if defined _WINDOWS
-      ReleaseMutex (winmutex);
-#else
-      pthread_mutex_unlock (&convMutex);
-#endif
-#endif
     }
 
   else
     {
-        //OutputDebugString("Image is not being converted internally\n");
     /**************************************************************************
        Insert the image
     **************************************************************************/
-
-#if defined DEBUG
-      printf ("Image is not being converted internally.\n");
-#endif
-
       // We also need to add a binary stream to the object and put the image
       // data into this stream
       stripSize = TIFFStripSize (image);
@@ -2009,8 +1887,6 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
 
       int nStrips = TIFFNumberOfStrips(image);
       m_vImgStream.resize( nStrips * stripSize );
-/*      imageObj->binarystream =
-    panda_xmalloc (TIFFNumberOfStrips (image) * stripSize);*/
 
       for (stripCount = 0; stripCount < nStrips;  stripCount++)
       {
@@ -2022,15 +1898,9 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
       // read
       m_vImgStream.resize(imageOffset);
       m_imgLengthInBytes = imageOffset;
-/*      if ((tempstream = realloc (imageObj->binarystream, imageOffset)) !=
-      NULL)
-    imageObj->binarystream = tempstream;
-*/
-      // The image offset is the total size of the binary stream as well
-//      imageObj->binarystreamLength = imageOffset;
     }
 
-    unsigned long crcVal = crc32_aux(0, (unsigned char *)&m_vImgStream[0], (unsigned int)m_imgLengthInBytes);
+    unsigned long crcVal = crc32_aux(0, (unsigned char *)m_vImgStream.data(), (unsigned int)m_imgLengthInBytes);
 
     m_nCurCRCVal = crcVal;
     TIFFClose (image);
@@ -2041,7 +1911,6 @@ panda_insertTIFF (panda_pdf * output, panda_page * target,
 
 bool ImageObject::ProcessBMPImage(int& width, int& height, int& bpp, int& /*rgb*/, int& dpix, int& dpiy)
 {
-#if 1
     TIFF *image, *conv = 0;
     int stripCount, stripMax;
     tsize_t stripSize;
@@ -2134,14 +2003,6 @@ bool ImageObject::ProcessBMPImage(int& width, int& height, int& bpp, int& /*rgb*
       // but I am at a loss as to how to do it better... We don't check if we
       // have already used global tiff buffer, because we are still using it's
       // old contents...
-#if 0
-#if defined _WINDOWS
-      winmutex = CreateMutex (NULL, TRUE, "Panda");
-      WaitForSingleObject (winmutex, INFINITE);
-#else
-      pthread_mutex_lock (&convMutex);
-#endif
-#endif
       m_vImgStream.resize(0);
       m_sTiffOffset = 0;
 
@@ -2195,19 +2056,10 @@ bool ImageObject::ProcessBMPImage(int& width, int& height, int& bpp, int& /*rgb*
             TIFFSetField (conv, TIFFTAG_GROUP4OPTIONS, 0);
 
       // Actually do the conversion
-      TIFFWriteEncodedStrip (conv, 0, &stripBuffer[0], imageOffset);
+      TIFFWriteEncodedStrip (conv, 0, stripBuffer.data(), imageOffset);
 
       // Finish up
-//      imageObj->binarystream = globalImageBuffer;
       m_imgLengthInBytes = m_sTiffOffset;
-//      imageObj->binarystreamLength = globalImageBufferOffset;
-#if 0
-#if defined _WINDOWS
-      ReleaseMutex (winmutex);
-#else
-      pthread_mutex_unlock (&convMutex);
-#endif
-#endif
     }
 
   else
@@ -2238,14 +2090,13 @@ bool ImageObject::ProcessBMPImage(int& width, int& height, int& bpp, int& /*rgb*
                        PdfDocument::FLATE_COMPRESS);
 
     m_imgLengthInBytes = m_vImgStream.size();
-    unsigned long crcVal = crc32_aux(0, (unsigned char *)&m_vImgStream[0], (unsigned int)m_imgLengthInBytes);
+    unsigned long crcVal = crc32_aux(0, (unsigned char *)m_vImgStream.data(), (unsigned int)m_imgLengthInBytes);
 
     m_nCurCRCVal = crcVal;
     TIFFClose (image);
     TIFFClose (conv);
     return true;
 }
-#endif
 
 void ImageObject::ComposeObject()
 {
@@ -2257,13 +2108,15 @@ void ImageObject::ComposeObject()
     sprintf(szBuf, "/%s\n", m_sPDFImgName.c_str());
     AppendContents( szBuf );
     PdfDocument *pParent = GetParent();
+	if (!pParent)
+		return;
 
     // do a85 encoding here for a test
     if ( pParent->IsASCIICompressed() )
     {
         std::string sOut;
         std::string sIn;
-        sIn.append(&m_vImgStream[0], m_vImgStream.size());
+        sIn.append(m_vImgStream.data(), m_vImgStream.size());
         ASCII85Encode(sIn, sOut);
         m_vImgStream.resize(sOut.size());
         std::copy(sOut.begin(), sOut.end(), m_vImgStream.begin());
@@ -2312,7 +2165,7 @@ void ImageObject::ComposeObject()
     }
     else
     {
-        WriteRaw(&m_vImgStream[0], m_imgLengthInBytes);
+        WriteRaw(m_vImgStream.data(), m_imgLengthInBytes);
         AppendContents("\nendstream");
     }
 }
@@ -2323,7 +2176,7 @@ std::string ImageObject::GetStreamContents()
     PdfDocument *pParent = GetParent();
     if ( pParent && pParent->IsEncrypted() )
     {
-        s.assign(&m_vImgStream[0], m_imgLengthInBytes);
+        s.assign(m_vImgStream.data(), m_imgLengthInBytes);
         return s;
     }
     return GetContents();
@@ -2342,7 +2195,6 @@ std::string ImageObject::GetExtraInfoEnd()
 void ProcSetObject::ComposeObject()
 {
     SetContents("[/ImageB /ImageC /ImgI /PDF /Text]");
-//    SetContents("[/PDF /Text]");
 }
 
 void FontObject::ComposeObject()
@@ -2360,9 +2212,6 @@ void PageObject::ComposeObject()
     SetContents("<< /Type /Page\n"
                 "   /Parent 2 0 R\n"
                 "   /MediaBox ");
-/*    if ( m_orientation == DTWAIN_PDF_LANDSCAPE)
-        realmediabox = MakeLandscapeMediaBox(m_smediabox);
-*/
     AppendContents(realmediabox);
     AppendContents("\n");
     AppendContents("   /Contents ");
@@ -2403,30 +2252,12 @@ void PageObject::ComposeObject()
 
     m_nMaxObjectNum = max(m_nMaxObjectNum, pDoc->GetProcSetObjNum());
 
-/*    if (m_bThumbnailImage)
-    {
-        if ( !m_bDuplicateThumbImage )
-        {
-            sprintf(szBuf, " /Thumb %d 0 R\n", m_nMaxObjectNum + 1 );
-            m_nDuplicateThumbObjNum = m_nMaxObjectNum + 1;//GetObjectNum() + 4;
-        }
-        else
-            sprintf(szBuf, " /Thumb %d 0 R\n", m_nDuplicateThumbObjNum);
-        m_nMaxObjectNum = max( m_nDuplicateThumbObjNum, m_nMaxObjectNum);
-        AppendContents(szBuf);
-        sConstantText += szBuf;
-    }
-*/
-
     if ( !pDoc->IsFontObjDone() )
     {
         pDoc->SetFontObjDone(true);
     }
 
     int nextObjNum = -1;
-
-    // Create the font dictionary and object numbers
-//    std::string fontDict = pDoc->GenerateFontDictionary(m_nMaxObjectNum + 1, nextObjNum);
 
     // Now compose the contents object, since we now know the font ref numbers
     theContents->CreateFontDictAndText(m_nMaxObjectNum + 1, nextObjNum);
@@ -2445,8 +2276,7 @@ void PageObject::ComposeObject()
 
     // Get the CRC for the page contents
     vector<char> v(sConstantText.begin(), sConstantText.end());
-    m_CRCValue = crc32_aux(0, (unsigned char*)&v[0], (unsigned int)v.size());
-
+    m_CRCValue = crc32_aux(0, (unsigned char*)v.data(), (unsigned int)v.size());
 }
 
 

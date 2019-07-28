@@ -40,15 +40,10 @@
 #include "ctlobstr.h"
 #include "tiff.h"
 #include "tiffio.h"
-
+#include "ctliface.h"
 namespace dynarithmic
 {
-    #ifdef NO_CONST_KEYS
-        typedef std::map< int, std::string > MediaBoxMap;
-    #else
-        typedef std::map< const int, std::string > MediaBoxMap;
-    #endif
-
+    typedef CTL_TwainDLLHandle::CTL_PDFMediaMap MediaBoxMap;
     typedef std::map< unsigned int, PDFFont> FontRefToFontInfoMap;
     typedef std::map< CTL_StringType, PDFFont> FontNameToFontInfoMap;
     typedef std::map< unsigned int, PDFFont> FontNumberToFontInfoMap;
@@ -69,7 +64,7 @@ namespace dynarithmic
 
         public:
             PDFObject(int objNum=-1) : m_nObjNum(objNum), m_pParentDoc(NULL),
-                        m_bIsEncrypted(false), m_bASCIIHexCompression(false) { }
+                        m_bIsEncrypted(false), m_bASCIIHexCompression(false), m_byteOffset(0) { }
             virtual ~PDFObject() { }
             void SetByteOffset(unsigned long byteoffset) { m_byteOffset = byteoffset; }
             void SetASCIIHexCompression(bool bSet) { m_bASCIIHexCompression = bSet; }
@@ -125,7 +120,7 @@ namespace dynarithmic
     class ContentsObject : public PDFObject
     {
         public:
-            ContentsObject(int objnum) : PDFObject(objnum) { }
+            ContentsObject(int objnum) : PDFObject(objnum), m_xscale(0), m_yscale(0) { }
             void SetImageName(const std::string& sImgName) { m_sImgName = sImgName; }
             void SetScaling(double x, double y) { m_xscale = x; m_yscale = y; }
             void ComposeObject();
@@ -227,7 +222,7 @@ namespace dynarithmic
     class EncryptionObject : public PDFObject
     {
         public:
-            EncryptionObject(int objnum) : PDFObject(objnum) , m_RValue(2), m_bAESEncrypted(false) { }
+            EncryptionObject(int objnum) : PDFObject(objnum) , m_RValue(2), m_bAESEncrypted(false), m_nLength(0), m_nPermissions(0) { }
             void ComposeObject();
             void SetRValue(int RValue) { m_RValue = RValue; }
             void SetLength(int nLength) { m_nLength = nLength; }
@@ -460,7 +455,7 @@ namespace dynarithmic
             PagesObject m_pagesObj;
             std::string m_smediabox;
             int m_Orientation;
-            MediaBoxMap m_mediaMap;
+            MediaBoxMap& m_mediaMap;
             double m_xscale;
             double m_yscale;
             int m_scaletype;

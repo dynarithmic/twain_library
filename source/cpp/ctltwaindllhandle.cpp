@@ -141,12 +141,14 @@ CTL_TwainMemoryFunctions*     CTL_TwainDLLHandle::s_TwainMemoryFunc = nullptr;
 CTL_LegacyTwainMemoryFunctions CTL_TwainDLLHandle::s_TwainLegacyFunc;
 CTL_Twain2MemoryFunctions      CTL_TwainDLLHandle::s_Twain2Func;
 int                     CTL_TwainDLLHandle::s_TwainDSMSearchOrder = DTWAIN_TWAINDSMSEARCH_WSO;
+bool					CTL_TwainDLLHandle::s_multipleThreads = false;
 DTWAIN_LOGGER_PROC      CTL_TwainDLLHandle::s_pLoggerCallback = nullptr;
 DTWAIN_LOGGER_PROCA     CTL_TwainDLLHandle::s_pLoggerCallbackA = nullptr;
 DTWAIN_LOGGER_PROCW     CTL_TwainDLLHandle::s_pLoggerCallbackW = nullptr;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserData = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataA = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataW = 0;
+CTL_TwainDLLHandle::CTL_PDFMediaMap CTL_TwainDLLHandle::s_PDFMediaMap;
 
 bool                    CTL_TwainDLLHandle::s_TwainCallbackSet = false;
 
