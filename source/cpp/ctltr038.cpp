@@ -340,8 +340,6 @@ bool CTL_ExtImageInfoTriplet::GetItemData(int nWhichItem, int nSearch, int nWhic
 
     // Check if info has been found
     Info = GetInfo(nWhichItem, nSearch);
-    if ( Info.NumItems == -1 )
-        return false;
 
     // Check the number of items
     if ( nWhichValue >= Info.NumItems )
