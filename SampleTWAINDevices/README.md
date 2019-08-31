@@ -4,9 +4,9 @@ Note:  You may need Administrator Rights on your system to get write access to t
 
 To install, 
 
-1) Go to the Windows system directory (usually C:\Windows).  There should be a **twain_32** directory defined there.   Note:  All systems running a modern version of the Windows operating system should already have the **twain32** directory existing.
+1) Go to the Windows system directory (usually C:\Windows).  There should be a **twain_32** directory defined there.   Note:  All systems running a modern version of the Windows operating system should already have the **twain_32** directory existing.
 
-2) Copy the contents of the [twain32 folder](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/SampleTWAINDevices/twain_32) to the C:\Windows\twain32 directory.
+2) Copy the contents of the [twain32 folder](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/SampleTWAINDevices/twain_32) to the C:\Windows\twain_32 directory.
 
 3) To check the installation, you can run the DTWDEMO32.exe program [found here](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/binaries), and see if the scanner shows up in the "Select Source" dialog when selecting a Source.
 
