@@ -1926,7 +1926,6 @@ const
   function DTWAIN_InitExtImageInfo(Source:DTWAIN_SOURCE):DTWAIN_BOOL;stdcall; external 'DTWAIN64U.DLL' name 'DTWAIN_InitExtImageInfo';
   function DTWAIN_GetShortVersionStringA(lpszVer:PAnsiChar;nLength:DWORD):DWORD;stdcall; external 'DTWAIN64U.DLL' name 'DTWAIN_GetShortVersionStringA';
   function DTWAIN_GetShortVersionStringW(lpszVer:PWideChar;nLength:DWORD):DWORD;stdcall; external 'DTWAIN64U.DLL' name 'DTWAIN_GetShortVersionStringW';
-  function DTWAIN_InitExtImageInfo(Source:DTWAIN_SOURCE):DTWAIN_BOOL;stdcall; external 'DTWAIN64U.DLL' name 'DTWAIN_InitExtImageInfo';
   function DTWAIN_InitOCRInterface:DTWAIN_BOOL; stdcall;
  external 'DTWAIN64U.DLL' name 'DTWAIN_InitOCRInterface';
   function DTWAIN_IsAcquiring:DTWAIN_BOOL; stdcall;
