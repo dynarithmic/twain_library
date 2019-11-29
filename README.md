@@ -200,7 +200,7 @@ For the first item, some compilers have external tools that allow you to use Vis
 
 ### Wait...What about other computer languages?  Does this library only work for C and C++ applications? ###
 
-DTWAIN includes computer language bindings for the following computer languages and utilities found in the [language_bindings](https://github.com/dynarithmic/twain_library/tree/master/language_bindings) folder:
+DTWAIN includes computer language bindings for the following computer languages and utilities found in the [language_bindings_and_examples](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples) folder:
 
       C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
       C# 
