@@ -313,37 +313,7 @@ Languages such as C, C++, C#, can use callbacks (sometimes referred to as *deleg
 
 ### I am ambitious and would like to build the libraries, debug the internals, etc.  How do I get started? ###
 
-If you want to rebuild the libraries, you will need the following tools and computer resources:
-
-One of the following compilers:
-
-      * Visual Studio 2015 with Update 3
-      * Visual Studio 2017 (may need to install XP tools and Windows 10 SDK from the VS 2017 Installation Manager).
-      * Visual Studio 2019
-      
-In addition, you will need at least 20 GB of free disk space
-
-Note that the C++ source code should be able to be built with any C++11 or C++14 compliant compiler that recognizes the Windows API headers (MingW using g++ 5.0 or above is an example).  However we have not tested builds of the DTWAIN library that have been built with any other compiler other than the Visual Studio family.   
-
-* Start Visual Studio, and open one of the DTWAIN solution.  The DTWAIN solution files are found in the [source](https://github.com/dynarithmic/twain_library/tree/master/source) directory.  Open **dtwain_5_vs2015.sln** or **dtwain_5_vs2017.sln**, depending on whether you are using Visual Studio 2015 or 2017, respectively. 
-
-* A full rebuild of all the configurations available is recommended.  Use the "Build -> Batch Build..." option in the Visual Studio IDE and check all of the configurations to build everything (take a coffee break -- this could take a while).  This will create a "binaries" directory that will contain the following DLLs:
-
-        32bit/dtwain32.dll -32-bit ANSI (MBCS) DLL
-        32bit/dtwain32u.dll -32-bit Unicode DLL
-        32bit/dtwain32d.dll -32-bit Debug ANSI (MBCS) DLL
-        32bit/dtwain32ud.dll -32-bit Debug Unicode DLL
-        64bit/dtwain64.dll -64-bit ANSI (MBCS) DLL
-        64bit/dtwain64u.dll -64-bit Unicode DLL
-        64bit/dtwain64d.dll -64-bit Debug ANSI (MBCS) DLL
-        64bit/dtwain64ud.dll -64-bit Debug Unicode DLL
-
-* Note -- the resulting "*.lib* files that reside in these directories are import libraries compatible with the Visual Studio toolset.  Other compilers will require converting these .lib files to your compiler's import library format, or you can use the LoadLibrary / GetProcAddress approach (we have a wrapper for this -- see below in the "Getting DTWAIN to work with other programming languages" section).
-
-* When all the configurations are built, there should be multiple DTWDEMO*.exe programs residing in the **binaries** subdirectory, where the suffix used in the program name matches the DTWAIN DLL that will be loaded.  For example, DTWDEMO32U.exe will load the dtwain32u.dll library when run. The easiest way to get started is to debug DTWDEMO.EXE and single step through the program using the debugger to get a feel of the flow of the program.  You should get a good idea of how DTWAIN works if you step into one or more of the DTWAIN functions (such as DTWAIN_SysInitialize or DTWAIN_SelectSource).
-
-* DTWAIN requires an installation of the [Boost C++ library](http://www.boost.org).  The DTWAIN project files expect that a "boost" folder exists with the Boost header files located in this directory.  This repository includes boost 1.68 as part of the build.  Later versions of Boost can be used, but please make sure that if you will use a later version of Boost, the existing "boost" directory be completely replaced with the later version, and that the boost libraries that are required for your compiler are placed in the [boost_libs](https://github.com/dynarithmic/twain_library/tree/master/source/boost) directory (either [boost/boost_libs/32](https://github.com/dynarithmic/twain_library/tree/master/source/boost/boost_libs/32) or [boost/boost_lib/64](https://github.com/dynarithmic/twain_library/tree/master/source/boost/boost_libs/64), depending on whether the libraries are 32-bit or 64-bit, respectively.
-  
+The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library/tree/master/source).
 
 ----------
 
