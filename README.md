@@ -371,7 +371,7 @@ If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary,
 
 ### Who do I talk to if I have further questions? Who authored this library? ###
 
-The Dynarithmic TWAIN Library's principal developer is P. McKenzie (myself), and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).        
+The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).        
 
 My background is mostly in C and C++ programming, third-party library creation on Windows-based systems (some Linux also).    
 
