@@ -150,8 +150,8 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
         if ( Source )
         {
-            // set the brightness level to 100
-            DTWAIN_SetResolution(Source, 300.0); // set the resolution to 300
+            // set the resolution level to 300 dots-per-inch
+            DTWAIN_SetResolution(Source, 300.0); 
             //...
         }   
         DTWAIN_SysDestroy();         
@@ -159,7 +159,7 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
  
 Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling *DTWAIN_GetLastError*.
 
-In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support.      
+In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.      
 
 ----------
 
@@ -168,7 +168,7 @@ In general, DTWAIN can set or get any capability, including custom capabilities 
 You can do one of two things:
 
 1. Attempt to convert the .lib files mentioned above to your compiler's version of an import library, or
-2. Eschew using libraries altogether, and use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.
+2. Forget about using libraries altogether, and use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.
 
 For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/tree/master/language_bindings/C_CPP_DynamicLoad). 
 
