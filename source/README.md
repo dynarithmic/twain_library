@@ -37,7 +37,7 @@ SET BOOST_LIBRARY_DIR_32=C:\boost_installation\lib32-msvc-14.0
 The **BOOST_LIBRARY_DIR_64** is the directory where the 64-bit boost libraries are installed.  These libraries would be named similar to **libboost_xxxxxxxx-vcyyy-zzzz-x64.lib**.  For example:
 
 ```plaintext
-SET BOOST_LIBRARY_DIR_32=C:\boost_installation\lib64-msvc-14.0
+SET BOOST_LIBRARY_DIR_64=C:\boost_installation\lib64-msvc-14.0
 ```
 
    
