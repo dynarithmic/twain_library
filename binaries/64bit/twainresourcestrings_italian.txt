@@ -190,6 +190,8 @@
 3011 Error in getting information for function
 3012 Input
 3013 Output: return code from DSM
+3014 No information for 
+3015 returned error code
 5000 Courier
 5001 Courier-Bold
 5002 Courier-BoldOblique
