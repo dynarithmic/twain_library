@@ -4,7 +4,6 @@
 #include "..\h\cfmtwain.h"
 #include "winuser.h"
 #include "winver.h"
-#include "..\h\twilres.h"
 #include "..\h\dtwain_resource_constants.h"
 
 // Fake Twain dialog

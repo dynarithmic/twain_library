@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2019 Dynarithmic Software.
+    Copyright (c) 2002-2020 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@
 #ifndef DTWAIN_VERSION_H
 #define DTWAIN_VERSION_H
 
-#define DTWAIN_VERINFO_PATCHLEVEL_NUM       1
-#define DTWAIN_VERINFO_PATCHLEVEL           "1"
+#define DTWAIN_VERINFO_PATCHLEVEL_NUM       2
+#define DTWAIN_VERINFO_PATCHLEVEL           "2"
 #define DTWAIN_VERINFO_BASEVERSION          "5.1.0."
 #define DTWAIN_VERINFO_FILEVERSION          DTWAIN_VERINFO_BASEVERSION DTWAIN_VERINFO_PATCHLEVEL "\0"
 

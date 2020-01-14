@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2019 Dynarithmic Software.
+    Copyright (c) 2002-2020 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -27,11 +27,10 @@
 #endif
 
 #include <stdio.h>
-#include <dtwain_resource_constants.h>
+#include "dtwain_resource_constants.h"
 #include <algorithm>
 #include <set>
 #include <memory>
-#include "twilres.h"
 
 #define IDS_TWCCBASE            9500
 #define IDS_TWRCBASE            9600
