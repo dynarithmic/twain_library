@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2019 Dynarithmic Software.
+    Copyright (c) 2002-2020 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@
 
 #define DTWAIN_VERINFO_COMMENTS             "Patch Level " DTWAIN_VERINFO_PATCHLEVEL "\0"
 #define DTWAIN_VERINFO_COMPANYNAME          "Dynarithmic Software\0"
-#define DTWAIN_VERINFO_LEGALCOPYRIGHT       "Copyright © 2019\0"
+#define DTWAIN_VERINFO_LEGALCOPYRIGHT       "Copyright © 2020\0"
 #define DTWAIN_VERINFO_PRODUCTNAME          "Dynarithmic Software Twain Library " UNICODE_VERSION "\0"
 #define DTWAIN_VERINFO_INTERNALNAME         DTWAIN_DLLNAME
 #define DTWAIN_VERINFO_ORIGINALFILENAME     DTWAIN_DLLNAME
@@ -94,7 +94,7 @@
 #define DTWAIN_VERINFO_SPECIALBUILD         "Open Source Distribution (Special) " PDF_STRING_VERSION DEVELOP_DLL_VERSION "Version\0"
 #define DTWAIN_VERINFO_PRIVATEBUILD         "Open Source Distribution (Special) " PDF_STRING_VERSION DEVELOP_DLL_VERSION "Version\0"
 
-#define DTWAIN_NUMERIC_FILE_VERSION             5,0,0,DTWAIN_VERINFO_PATCHLEVEL_NUM
+#define DTWAIN_NUMERIC_FILE_VERSION             5,1,0,DTWAIN_VERINFO_PATCHLEVEL_NUM
 #define DTWAIN_NUMERIC_PRODUCT_VERSION          DTWAIN_NUMERIC_FILE_VERSION
 
 #define PDF_STRING_VERSION "PDF "
