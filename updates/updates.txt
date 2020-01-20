@@ -1,5 +1,28 @@
 DTWAIN Version changes
 
+5.1.0.3
+- Add DTWAIN_...Ex() functions that return a DTWAIN_ARRAY.  These functions are simpler versions of the DTWAIN 
+  functions that accept LPDTWAIN_ARRAY as a parameter.  This makes it simpler for languages such as Python and
+  others that have issues with pointer arguments.  Thus instead of having to do something like this:
+
+      DTWAIN_SOURCE Source;
+      DTWAIN_ARRAY Array;
+      //...
+      DTWAIN_EnumOrientations(Source, &Array)...
+
+The call can now be this:
+
+      DTWAIN_SOURCE Source;
+      //...
+      DTWAIN_ARRAY array = DTWAIN_EnumOrientations(Source);
+
+Since DTWAIN_ARRAY is actually an integer (32-bit or 64-bit, depending on the program's bit-ness), the calling 
+application can simply treat the DTWAIN_ARRAY as an integer type.
+
+For functions that already have an Ex() at the end of the function name, an Ex2() version was created, for example,
+     DTWAIN_EnumSupportedCapsEx2()
+     
+     
 5.1.0.1
 - Add all supported PDF page dimensions to twaininfo.txt.  This allows customization of the PDF creation with
   respect to the page sizing (you can add your own definitions).
