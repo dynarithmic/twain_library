@@ -30,6 +30,16 @@ using namespace std;
 using namespace dynarithmic;
 
 /////////////////////////////////////////////////////////////////////////
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCustomCapsEx2(DTWAIN_SOURCE Source)
+{
+	LOG_FUNC_ENTRY_PARAMS((Source))
+	DTWAIN_ARRAY pArray = 0;
+	DTWAIN_EnumCustomCaps(Source, &pArray);
+	LOG_FUNC_EXIT_PARAMS(pArray)
+	CATCH_BLOCK(DTWAIN_ARRAY(nullptr))
+}
+
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Array)
 {
     LOG_FUNC_ENTRY_PARAMS((Source, Array))
