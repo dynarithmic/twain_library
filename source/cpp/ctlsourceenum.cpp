@@ -27,6 +27,15 @@
 using namespace std;
 using namespace dynarithmic;
 
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumSourcesEx()
+{
+	LOG_FUNC_ENTRY_PARAMS(())
+	DTWAIN_ARRAY pArray = 0;
+	DTWAIN_EnumSources(&pArray);
+	LOG_FUNC_EXIT_PARAMS(pArray)
+	CATCH_BLOCK(DTWAIN_ARRAY(0))
+}
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSources(LPDTWAIN_ARRAY Array)
 {
     LOG_FUNC_ENTRY_PARAMS((Array))
