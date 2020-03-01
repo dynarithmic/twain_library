@@ -1,5 +1,8 @@
 DTWAIN Version changes
 
+5.1.0.4
+- Fix for erroneous return code when multipage PCX (DCX) files after saved
+
 5.1.0.3
 - Add DTWAIN_...Ex() functions that return a DTWAIN_ARRAY.  These functions are simpler versions of the DTWAIN 
   functions that accept LPDTWAIN_ARRAY as a parameter.  This makes it simpler for languages such as Python and
