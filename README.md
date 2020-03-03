@@ -71,7 +71,7 @@ In addition, there are optional string resource files available that.  Here are 
 	twainresourcestrings_spanish.txt 	Spanish strings
 
 
-If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_SetCustomLanguageResource** API function.
+If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
