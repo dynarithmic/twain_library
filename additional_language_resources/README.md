@@ -3,7 +3,7 @@ This directory contains additional language resources that can be used by DTWAIN
 By default, DTWAIN has English, Spanish, Italian, German, French and Dutch resource files.  These files are as follows:
 
 	
-	twainresourcestrings_english.txt    English resources
+	twainresourcestrings_english.txt        English resources
     twainresourcestrings_dutch.txt 	 	Dutch resources
 	twainresourcestrings_french.txt  	French resources
 	twainresourcestrings_german.txt  	German resources
