@@ -4,4 +4,4 @@ To load the resources call:
    DTWAIN text resource files.
 
 2) Change your application to call
-   DTWAIN_LoadCustomStringResources("portuguese_br");  // Portuguese-Brazilian
+   DTWAIN_LoadCustomStringResourcesA("portuguese_br");  // Portuguese-Brazilian
