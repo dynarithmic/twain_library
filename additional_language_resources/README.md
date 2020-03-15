@@ -22,13 +22,13 @@ If you want to create your own language resource, the following steps should be 
 
     **twainresourcestrings_greek.txt**
 
-The part of the file name that represents the language (in the above case, "greek"), will be used in the DTWAIN API call **DTWAIN_LoadCustomStringResources**
+The part of the file name that represents the language (in the above case, "greek"), will be used in the DTWAIN API call **DTWAIN_LoadCustomStringResourcesA**
 
 4) Make sure that the new resource file is located in the same directory as the other DTWAIN resources, i.e. where **twainresourcestrings_english.txt** is located during the running of your DTWAIN application.
 
 5) Change your DTWAIN application to add the following API call (after DTWAIN_SysInitialize is called):
 
-    **DTWAIN_LoadCustomStringResources("greek")**
+    **DTWAIN_LoadCustomStringResourcesA("greek")**
 
 Note that the name parameter used in DTWAIN_LoadCustomStringResources is the same name you gave the resource file (the part of the file name after the initial "_" character in the file name).
 
