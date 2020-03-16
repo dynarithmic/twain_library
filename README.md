@@ -172,7 +172,7 @@ You can do one of two things:
 1. Attempt to convert the .lib files mentioned above to your compiler's version of an import library, or
 2. Forget about using libraries altogether, and use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.
 
-For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/tree/master/language_bindings/C_CPP_DynamicLoad). 
+For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad). 
 
     /* Include this header */
     #include "dtwainx2.h"
