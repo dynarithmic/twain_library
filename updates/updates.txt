@@ -1,5 +1,8 @@
 DTWAIN Version changes
 
+5.1.0.5
+- Minor source code changes.  Removed LPGL wording from source files.
+
 5.1.0.4
 - Fix for erroneous return code when multipage PCX (DCX) files after saved
 

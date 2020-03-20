@@ -44,15 +44,11 @@
 #define GREY2(r,g,b) (BYTE)(((WORD)r*169 + (WORD)g*256 + (WORD)b*87) >> 9)  // .33R + 0.5G + .17B
 #define RGB565(b, g, r) (((b) >> 3) | (((g) >> 2) << 5) | (((r) >> 3) << 11))
 #define RGB555(b, g, r) (((b) >> 3) | (((g) >> 3) << 5) | (((r) >> 3) << 10))
-#define GREYVALUE(r,g,b) ((((r*30)/100) + ((g*59)/100) + ((b*11)/100)))
-#define WIDTHBYTES(i)   (((i+31)/32)*4)
-#define PIXELS2BYTES(n) ((n+7)/8)
+#define WIDTHBYTES(i)   ((((i)+31)/32)*4)
+#define PIXELS2BYTES(n) (((n)+7)/8)
 
 
 #define GetChunkyPixel(pxx,nxx) (!((nxx) & 1)) ? (((pxx)[(nxx)>>1] >> 4) & 0x0f) : ((pxx)[(nxx)>>1] & 0x0f)
-#define PutChunkyPixel(pxx,nxx,cxx) (!(nxx & 1)) ? \
-     (pxx[nxx>>1] &= 0x0f, pxx[nxx>>1] |= (char)((cxx & 0x0f) << 4)) : \
-     (pxx[nxx>>1] &= 0xf0, pxx[nxx>>1] |= (char)(cxx & 0x0f))
 #define LPBlinewidth(lpbi) (WIDTHBYTES((WORD)lpbi->biWidth*lpbi->biBitCount))
 #define LPBwidth(lpbi)  (lpbi->biWidth)
 #define LPBdepth(lpbi)  (lpbi->biHeight)

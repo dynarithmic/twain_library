@@ -707,7 +707,6 @@ bool CTL_TwainAppMgr::DisableUserInterface(const CTL_ITwainSource *pSource)
             CTL_TwainAppMgr::ProcessConditionCodeError(ccode);
             bRet = false;
         }
-        bRet = true;
     }
     if ( pTempSource->IsMultiPageModeUIMode() )
         pTempSource->ProcessMultipageFile();

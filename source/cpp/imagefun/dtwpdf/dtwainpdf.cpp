@@ -67,7 +67,8 @@
 #endif
 #undef min
 #undef max
-#define D_TO_R_SCALEFACTOR (3.141529654 / 180.0)
+#include <math.h>
+#define D_TO_R_SCALEFACTOR (3.14159265358979323846 / 180.0)
 #define DegreesToRadians(x) ((x) * D_TO_R_SCALEFACTOR)
 
 using namespace std;
@@ -1121,7 +1122,7 @@ void InfoObject::ComposeObject()
         AllEncryptedData[3].first = m_sTitle.substr(1, m_sTitle.length() - 2);
         AllEncryptedData[4].first = m_sSubject.substr(1, m_sSubject.length() - 2);
         AllEncryptedData[5].first = m_sKeywords.substr(1, m_sKeywords.length() - 2);
-        AllEncryptedData[6].first = m_sDate = m_sDate;
+        AllEncryptedData[6].first = m_sDate;
 
         for ( int i = 0; i < 7; ++i )
         {

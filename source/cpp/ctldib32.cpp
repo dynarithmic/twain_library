@@ -408,17 +408,16 @@ CTL_TwainDib::CTL_TwainDib(HANDLE hDib, HWND hWnd) : m_bAutoDelete(true), m_bIsV
 m_bAutoDeletePalette(false),m_bJpegProgressive(false), m_nJpegQuality(75)
 {
     m_TwainDibInfo.SetDib(hDib);
-    // compute or guess a palette to use for display
-    // m_TwainDibInfo.SetPalette( CreateDibPalette() );
 }
 
 // Read a Dib from a file
-CTL_TwainDib::CTL_TwainDib(LPCTSTR lpszFileName, HWND hWnd)
+CTL_TwainDib::CTL_TwainDib(LPCTSTR lpszFileName, HWND hWnd) : m_bAutoDeletePalette(false), 
+															  m_bIsValid(true), 
+															  m_bJpegProgressive(false),
+															  m_nJpegQuality(75)
 {
     Init();
     m_TwainDibInfo.SetDib( ReadDibBitmap( lpszFileName ));
-/*    if ( m_TwainDibInfo.GetDib() )
-        m_TwainDibInfo.SetPalette( CreateDibPalette() );*/
 }
 
 CTL_TwainDib::CTL_TwainDib( const CTL_TwainDib &rDib ) : m_bJpegProgressive(false)

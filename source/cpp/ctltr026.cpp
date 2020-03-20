@@ -911,7 +911,7 @@ int CTL_ImageXferTriplet::PromptAndSaveImage(size_t nImageNum)
         {
             SendFileAcquireError(pSource, pSession,
                           DTWAIN_ERR_BAD_FILENAME, DTWAIN_TN_FILESAVECANCELLED );
-            return false;
+            return 0;
         }
         boost::filesystem::path p{ strTempFile };
         boost::filesystem::ofstream ofs{p};
@@ -1030,7 +1030,7 @@ int CTL_ImageXferTriplet::PromptAndSaveImage(size_t nImageNum)
     if ( pSource->IsDeleteDibOnScan() && pArray )
         // Let array class handle deleting of the DIB (Global memory will be freed only)
         pArray->DeleteDibMemory( nImageNum );
-    return true;
+    return 1;
 }
 
 bool CTL_ImageXferTriplet::CopyDibToClipboard(CTL_ITwainSession * /*pSession*/, HANDLE hDib)

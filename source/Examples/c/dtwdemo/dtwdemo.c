@@ -147,6 +147,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     DTWAIN_StartTwainSession(g_hWnd, NULL);
     DTWAIN_SetTwainMode(DTWAIN_MODELESS);
     DTWAIN_EnableMsgNotify(TRUE);
+	DTWAIN_LoadCustomStringResources(L"portuguese_br");
 
     /* Also allow DTWAIN messages to be sent to our callback */
     DTWAIN_SetCallback(TwainCallbackProc,0);

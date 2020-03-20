@@ -255,7 +255,7 @@ LONG DLLENTRY_DEF DTWAIN_GetFeederFuncs(DTWAIN_SOURCE Source)
             ReturnVal |= (i << 1);
     }
     LOG_FUNC_EXIT_PARAMS(ReturnVal)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 bool ExecuteFeederState5Func(DTWAIN_SOURCE Source, LONG lCap)
