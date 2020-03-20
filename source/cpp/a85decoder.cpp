@@ -73,7 +73,6 @@ std::string A85Decoder::decode85()
                     tuple += pow85[count];
                     wput(output, tuple, count);
                 }
-                c = m_scratch[curinputPos++];
                 return output;
             }
         case '\n': case '\r': case '\t': case ' ':

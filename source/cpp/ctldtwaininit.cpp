@@ -332,7 +332,7 @@ LONG DLLENTRY_DEF  DTWAIN_GetErrorString(LONG lError, LPTSTR lpszBuffer, LONG nM
 
     LONG nTotalBytes = CopyInfoToCString(&szTemp[0], lpszBuffer, nMaxLen);
     LOG_FUNC_EXIT_PARAMS(nTotalBytes)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 LONG DLLENTRY_DEF DTWAIN_GetConditionCodeString(LONG CC, LPTSTR lpszBuffer, LONG nMaxLen)
@@ -341,7 +341,7 @@ LONG DLLENTRY_DEF DTWAIN_GetConditionCodeString(LONG CC, LPTSTR lpszBuffer, LONG
     LONG lError = -(IDS_TWCC_ERRORSTART + CC);
     LONG Retval = DTWAIN_GetErrorString(lError, lpszBuffer, nMaxLen);
     LOG_FUNC_EXIT_PARAMS(Retval)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_LoadLanguageResource(LONG nLanguage)
@@ -1017,8 +1017,8 @@ DTWAIN_BOOL DTWAIN_SetSourceCloseMode(LONG lCloseMode)
     // See if DLL Handle exists
     DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
     pHandle->m_nSourceCloseMode = lCloseMode?true:false;
-    LOG_FUNC_EXIT_PARAMS(true)
-    CATCH_BLOCK(false)
+    LOG_FUNC_EXIT_PARAMS(TRUE)
+    CATCH_BLOCK(FALSE)
 }
 
 LONG DTWAIN_GetSourceCloseMode()
@@ -1028,7 +1028,7 @@ LONG DTWAIN_GetSourceCloseMode()
     // See if DLL Handle exists
     DTWAIN_Check_Bad_Handle_Ex( pHandle, false, FUNC_MACRO);
     LOG_FUNC_EXIT_PARAMS(pHandle->m_nSourceCloseMode)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsSessionEnabled()

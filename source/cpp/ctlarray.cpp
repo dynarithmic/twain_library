@@ -42,14 +42,8 @@ static LONG IsValidAcqArray( DTWAIN_ARRAY pArray );
 
 static DTWAINFrameInternal* GetDTWAINFramePtr(DTWAINFrameInternal* pPtr)
 {
-    try
-    {
         return (StringTraits::StringCompare(pPtr->s_id.data(), DTWAINFrameInternalGUID)==0)?pPtr:nullptr;
     }
-    catch (...)
-    { }
-    return nullptr;
-}
 
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayInit()
 {
@@ -570,7 +564,7 @@ LONG DLLENTRY_DEF DTWAIN_ArrayGetCount( DTWAIN_ARRAY pArray )
 
     LONG Ret = EnumeratorFunctionImpl::EnumeratorGetCount(pArray);
     LOG_FUNC_EXIT_PARAMS(Ret)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 

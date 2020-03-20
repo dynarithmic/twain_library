@@ -30,7 +30,7 @@ OF THIRD PARTY RIGHTS.
 class MD5 
 {
     public:
-        MD5() { }
+		MD5() : context{}  { }
 
         std::vector<unsigned char> ComputeHash(const char *input, int len = -1);
         std::vector<unsigned char> ComputeHash();
