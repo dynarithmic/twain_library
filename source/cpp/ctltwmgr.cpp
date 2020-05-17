@@ -295,11 +295,13 @@ bool CTL_TwainAppMgr::IsValidTwainSource( CTL_ITwainSession* pSession,CTL_ITwain
 // This unloads the TWAIN source manager.  This function detaches
 // ALL apps from TWAIN.  This means that if you have a third-party app that uses
 // TWAIN, that app will not function or will GPF when a scanning request is given.
-/* static static static static static static static static static static */
 void CTL_TwainAppMgr::UnloadSourceManager()
 {
     if ( s_pGlobalAppMgr && s_pGlobalAppMgr->m_hLibModule.is_loaded() )
+	{
+		while (s_pGlobalAppMgr->m_hLibModule.is_loaded())
         s_pGlobalAppMgr->m_hLibModule.unload();
+	}
     CTL_TwainDLLHandle::s_nDSMState = DSM_STATE_NONE;
 }
 
@@ -590,7 +592,7 @@ bool CTL_TwainAppMgr::CloseSource(CTL_ITwainSession* pSession,
     return true;
 }
 
-bool CTL_TwainAppMgr::ShowUserInterface( const CTL_ITwainSource *pSource, bool bTest, bool bShowUIOnly )
+bool CTL_TwainAppMgr::ShowUserInterface( CTL_ITwainSource *pSource, bool bTest, bool bShowUIOnly )
 {
     struct origSourceState
     {
@@ -658,6 +660,33 @@ bool CTL_TwainAppMgr::ShowUserInterface( const CTL_ITwainSource *pSource, bool b
                 if ( !pSource->IsUIOpenOnAcquire() || bTest )
                     DisableUserInterface( pSource );
             break;
+
+			//Note:  This is a bug in the Galaxy Phone TWAIN driver.  TWRC_CANCEL is returned
+			// if the user interface dialog is canceled.  This is an incorrect usage, but we
+			// don't have the source code to the Samsung TWAIN driver to fix it, unfortunately.
+			case TWRC_CANCEL:
+			{
+				// This is a workaround for Sources that do not
+				// Send the MSG_xxx messages to close the user interface.
+				// This is actually a bug in the TWAIN device, not a 
+				// bug in DTWAIN.
+				CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
+					NULL,
+					DTWAIN_TN_UICLOSING,
+					(LPARAM)pSource);
+
+				CTL_TwainAppMgr::DisableUserInterface(pSource);
+
+				// Force setting the transfer done now.
+				CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle*>(GetDTWAINHandle_Internal());
+				pHandle->m_bTransferDone = true;
+
+				CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
+					NULL,
+					DTWAIN_TN_UICLOSED,
+					(LPARAM)pSource);
+				return false;
+			}
         }
 
         if ( bTest && !bShowUIOnly )
@@ -2354,6 +2383,13 @@ CTL_StringType CTL_TwainAppMgr::GetTwainDirFullName(LPCTSTR strTwainDLLName,
     return ::GetTwainDirFullName(strTwainDLLName, pWhichSearch, bLeaveLoaded, pModule);
 }
 
+CTL_StringType CTL_TwainAppMgr::GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
+													bool bLeaveLoaded/*=false*/,
+													boost::dll::shared_library *pModule)
+{
+	return ::GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
+}
+
 bool CTL_TwainAppMgr::CheckTwainExistence(const CTL_StringType& strTwainDLLName, LPLONG pWhichSearch)
 {
     if ( GetTwainDirFullName(strTwainDLLName.c_str(), pWhichSearch).empty())
@@ -2518,15 +2554,17 @@ bool CTL_TwainAppMgr::LoadSourceManager(  LPCTSTR pszDLLName/*=NULL */)
             CTL_StringType dllName = _T(" : ") + m_strTwainDLLName;
             DTWAIN_ERROR_CONDITION_EX(IDS_ErrTwainDLLNotFound, dllName, false);
         }
+		m_hLibModule = libloader;
     }
     else
     {
         // load the default TWAIN_32.DLL or TWAINDSM.DLL using the
         // normal process of finding these DLL's
+		auto tempStr = m_strTwainDLLName;
         m_strTwainDLLName = GetTwainDirFullName(m_strTwainDLLName.c_str(), NULL, true, &m_hLibModule);
         if ( m_strTwainDLLName.empty() )
         {
-            CTL_StringType dllName = _T(" : ") + m_strTwainDLLName;
+            CTL_StringType dllName = _T(" : ") + tempStr;
             DTWAIN_ERROR_CONDITION_EX(IDS_ErrTwainDLLNotFound, dllName, false);
         }
         CTL_StringType msg = CTL_StringType(_T("TWAIN DSM ")) +

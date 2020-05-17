@@ -273,6 +273,7 @@ namespace dynarithmic
     template <typename StringType, typename CharType, typename StringTraits>
     struct StringWrapper_Impl
     {
+		typedef StringTraits traits_type;
         enum { DRIVE_POS, DRIVE_PATH, DIRECTORY_POS, NAME_POS, EXTENSION_POS };
         typedef std::vector<StringType> StringArrayType;
         // define string helper functions here
@@ -464,6 +465,13 @@ namespace dynarithmic
             rArray.push_back(BOOST_GENERIC_STRING(p.parent_path()));
             rArray.push_back(BOOST_GENERIC_STRING(p.stem()));
             rArray.push_back(BOOST_GENERIC_STRING(p.extension()));
+        }
+
+		static StringArrayType SplitPath(const StringType& str)
+		{
+			StringArrayType sArrType;
+			SplitPath(str, sArrType);
+			return sArrType;
         }
 
         static StringType GetFileNameFromPath(const StringType& str)

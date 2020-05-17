@@ -870,3 +870,6 @@ DTWAIN_EnumMaxBuffersEx							  @30037
 DTWAIN_EnumResolutionValuesEx					  @30038
 DTWAIN_EnumShadowValuesEx						  @30039
 DTWAIN_EnumThresholdValuesEx					  @30040
+DTWAIN_GetLibraryPath							  @30041
+DTWAIN_GetLibraryPathA							  @30042
+DTWAIN_GetLibraryPathW							  @30043

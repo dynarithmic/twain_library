@@ -6,8 +6,8 @@
 #include <ctype.h>
 #include "dibdisplay.h"
 
-#include <tchar.h>
 
+#include <tchar.h>
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -125,8 +125,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
         return FALSE;
     }
 
-    // TODO: Place code here.
-
     // Initialize global strings
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadString(hInstance, IDC_DTWDEMO, szWindowClass, MAX_LOADSTRING);
@@ -147,7 +145,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     DTWAIN_StartTwainSession(g_hWnd, NULL);
     DTWAIN_SetTwainMode(DTWAIN_MODELESS);
     DTWAIN_EnableMsgNotify(TRUE);
-	DTWAIN_LoadCustomStringResources(L"portuguese_br");
 
     /* Also allow DTWAIN messages to be sent to our callback */
     DTWAIN_SetCallback(TwainCallbackProc,0);
@@ -432,8 +429,6 @@ void AcquireNative()
     }
 
     WaitLoop();
-    DTWAIN_IsSourceOpen( g_CurrentSource );
-    DTWAIN_OpenSource( g_CurrentSource );
     if ( DTWAIN_ArrayGetCount(g_AcquireArray) == 0 )
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);

@@ -1216,8 +1216,6 @@ static bool FindTask( DWORD hTask, int *pWhere )
     return false;
 }
 
-
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndTwainSession()
 {
     LOG_FUNC_ENTRY_PARAMS(())
@@ -1647,6 +1645,11 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionString(LPTSTR lpszVer, LONG nLength)
     return CopyInfoToCString(GetVersionString(),lpszVer, nLength);
 }
 
+LONG DLLENTRY_DEF DTWAIN_GetLibraryPath(LPTSTR lpszVer, LONG nLength)
+{
+	return CopyInfoToCString(GetDTWAINDLLPath(), lpszVer, nLength);
+}
+
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionString(LPTSTR lpszVer, LONG nLength)
 {
 	return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(DTWAIN_VERINFO_FILEVERSION), lpszVer, nLength);
@@ -1668,8 +1671,20 @@ CTL_StringType dynarithmic::GetDTWAINExecutionPath()
     return szName;
 }
 
+CTL_StringType dynarithmic::GetDTWAINDLLPath()
+{
+	if ( !CTL_TwainDLLHandle::s_DLLPath.empty())
+		return CTL_TwainDLLHandle::s_DLLPath;
+	TCHAR buffer[1024];
+	boost::winapi::GetModuleFileName(CTL_TwainDLLHandle::s_DLLInstance, buffer, 1024);
+	return buffer;
+}
+
 CTL_StringType dynarithmic::GetVersionString()
 {
+	if (!CTL_TwainDLLHandle::s_VersionString.empty())
+		return CTL_TwainDLLHandle::s_VersionString;
+
     LONG lMajor, lMinor, lVersionType, lPatch;
     // Write the version info
     if ( DTWAIN_GetVersionEx(&lMajor, &lMinor, &lVersionType, &lPatch) )
@@ -1705,11 +1720,15 @@ CTL_StringType dynarithmic::GetVersionString()
         CTL_StringStreamType strm;
         CTL_StringType sStatic;
         if (DTWAIN_GetStaticLibVersion() != 0 )
-            sStatic += _T("\nCompiler used: ") + GetStaticLibVer();
+		{
+			sStatic += _T("Compiler used: ") + GetStaticLibVer();
+			sStatic += _T("\n");
+		}
 
-        strm << _T("Dynarithmic TWAIN Library, Version ") << lMajor << _T(".") << lMinor << _T(" - ") << s << _T(" Version (Patch Level ")
-             << lPatch << _T(")\n") << sStatic;
-        return strm.str();
+		strm << sStatic << _T("Dynarithmic TWAIN Library, Version ") << lMajor << _T(".") << lMinor << _T(" - ") << s << _T(" Version (Patch Level ")
+			<< lPatch << _T(")\n") << _T("Shared Library Path: ") << GetDTWAINDLLPath();
+        CTL_TwainDLLHandle::s_VersionString = strm.str();
+		return CTL_TwainDLLHandle::s_VersionString;
     }
     return _T("");
 }

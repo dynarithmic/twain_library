@@ -83,7 +83,7 @@ namespace dynarithmic
                 try { s_pGlobalAppMgr.reset(new CTL_TwainAppMgr( lpszDLLName, hInstance, hThisInstance ));}
                 catch(...)
                 { return CTL_TwainAppMgrPtr(); }
-                if ( !s_pGlobalAppMgr->LoadSourceManager() )
+                if ( !s_pGlobalAppMgr->LoadSourceManager(lpszDLLName) )
                 { s_pGlobalAppMgr.reset(); }
                 return s_pGlobalAppMgr;
             }
@@ -214,7 +214,7 @@ namespace dynarithmic
             static bool SetupFeeder( const CTL_ITwainSource *pSource, int maxpages, bool bSet = true);
 
             // User Interface functions
-            static bool ShowUserInterface(const CTL_ITwainSource *pSource, bool bTest = false, bool bShowUIOnly = false);
+            static bool ShowUserInterface(CTL_ITwainSource *pSource, bool bTest = false, bool bShowUIOnly = false);
 
             static bool DisableUserInterface( const CTL_ITwainSource *pSource );
 
@@ -306,6 +306,9 @@ namespace dynarithmic
                                                       LPLONG pWhichSearch,
                                                       bool leaveLoaded=false,
                                                       boost::dll::shared_library* pModule=nullptr);
+			static CTL_StringType GetTwainDirFullNameEx(LPCTSTR szFileName,
+										  			  bool leaveLoaded = false,
+													  boost::dll::shared_library* pModule = nullptr);
 
             static CTL_CapStruct GetGeneralCapInfo(LONG Cap);
             static bool GetCurrentOneCapValue(const CTL_ITwainSource *pSource, void *pValue, TW_UINT16 Cap, TW_UINT16 nDataType );
@@ -334,7 +337,6 @@ namespace dynarithmic
             bool LoadDSM();
 
             // single Application manager
-//            typedef std::shared_ptr<CTL_TwainAppMgr> CTL_TwainAppMgrPtr;
             static CTL_TwainAppMgrPtr    s_pGlobalAppMgr;
 
             // Array of Twain Sessions
