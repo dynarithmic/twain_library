@@ -1194,6 +1194,28 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionStringW(LPWSTR lpszVer, LONG nLength)
 #endif
 }
 
+LONG DLLENTRY_DEF DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength)
+{
+#ifdef _UNICODE
+	CTL_WString args(1024, 0);
+	LONG retVal = DTWAIN_GetLibraryPath(&args[0], static_cast<LONG>(args.size()));
+	return null_terminator_copier(args, lpszVer, retVal);
+#else
+	return DTWAIN_GetLibraryPath(lpszVer, nLength);
+#endif
+}
+
+LONG DLLENTRY_DEF DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength)
+{
+#ifdef _UNICODE
+	return DTWAIN_GetLibraryPath(lpszVer, nLength);
+#else
+	CTL_String args(1024, 0);
+	LONG retVal = DTWAIN_GetLibraryPath(&args[0], static_cast<LONG>(args.size()));
+	return null_terminator_copier(args, lpszVer, retVal);
+#endif
+}
+
 LONG DLLENTRY_DEF DTWAIN_GetVersionStringA(LPSTR lpszVer, LONG nLength)
 {
 #ifdef _UNICODE

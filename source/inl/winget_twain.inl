@@ -19,10 +19,50 @@
     OF THIRD PARTY RIGHTS.
  */
  #ifdef _WIN32
+CTL_StringType GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
+									bool bLeaveLoaded = false,
+									boost::dll::shared_library *pModule = nullptr);
+
 CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName, 
                                     LPLONG pWhichSearch, 
                                     bool bLeaveLoaded = false, 
                                     boost::dll::shared_library *pModule = nullptr)
+{
+	static std::unordered_map<LONG, CTL_String> searchOrderMap = {
+		{DTWAIN_TWAINDSMSEARCH_WSO,"WSO"},
+		{ DTWAIN_TWAINDSMSEARCH_WOS,"WOS" },
+		{ DTWAIN_TWAINDSMSEARCH_SWO,"SWO" },
+		{ DTWAIN_TWAINDSMSEARCH_OWS,"OWS" },
+		{ DTWAIN_TWAINDSMSEARCH_W,"W" },
+		{ DTWAIN_TWAINDSMSEARCH_S,"S" },
+		{ DTWAIN_TWAINDSMSEARCH_O,"O" },
+		{ DTWAIN_TWAINDSMSEARCH_WS,"WS" },
+		{ DTWAIN_TWAINDSMSEARCH_WO,"WO" },
+		{ DTWAIN_TWAINDSMSEARCH_SW,"SW" },
+		{ DTWAIN_TWAINDSMSEARCH_SO,"SO" },
+		{ DTWAIN_TWAINDSMSEARCH_OW,"OW" },
+		{ DTWAIN_TWAINDSMSEARCH_OS,"OS" } };
+
+	auto iter = searchOrderMap.find(CTL_TwainDLLHandle::s_TwainDSMSearchOrder);
+	if (iter != searchOrderMap.end())
+	{
+		CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native(iter->second);
+		auto retVal = GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
+		if (retVal.empty())
+		{
+			CTL_StringType oldStringType = CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr;
+			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("C");
+			retVal = GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
+			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = oldStringType;
+		}
+		return retVal;
+	}
+	return CTL_StringType();
+}
+
+CTL_StringType GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
+									bool bLeaveLoaded,
+									boost::dll::shared_library *pModule)
 {
     // make sure we get only the file name.  If a directory path
     // is given in the strTwainDLLName argument, it is ignored.
@@ -33,39 +73,27 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName,
     // we first search the Windows directory.
     // if TWAIN isn't found there, check system directory.
     // if not there, then use the Windows path search logic
-    CTL_StringType dirNames[3];
+	CTL_StringType dirNames[4];
     std::set<CTL_StringType> strSet;
+	static std::unordered_map<StringWrapper::traits_type::char_type, int> searchMap = { 
+		{StringConversion::Convert_Ansi_To_Native("C")[0],3},
+		{StringConversion::Convert_Ansi_To_Native("W")[0],0},
+		{StringConversion::Convert_Ansi_To_Native("S")[0],1},
+		{StringConversion::Convert_Ansi_To_Native("O")[0],2} };
+
     dirNames[0] = StringWrapper::GetWindowsDirectory();
     dirNames[1] = StringWrapper::GetSystemDirectory();
     dirNames[2] = CTL_StringType(_T(""));
-    const int whichSearch[] = { DTWAIN_TWAINDSMSEARCH_W, DTWAIN_TWAINDSMSEARCH_S, DTWAIN_TWAINDSMSEARCH_O };
+	dirNames[3] = StringWrapper::SplitPath(GetDTWAINDLLPath())[StringWrapper::DIRECTORY_POS];
 
-    const int sSearchOrder[15][3] = { { 0,1,2 }, //WSO
-    { 0,2,1 },   //WOS
-    { 1,0,2 },   //SWO
-    { 1,2,0 },   //SOW
-    { 2,0,1 },   //OWS
-    { 2,1,0 },   //OSW
-    { 0,-1,-1 }, //W
-    { 1,-1,-1 }, //S
-    { 2,-1,-1 }, //O
-    { 0,1,-1 },  //WS
-    { 0,2,-1 },  //WO
-    { 1,0,-1 },  //SW
-    { 1,2,-1 },  //SO
-    { 2,0,-1 },  //OW
-    { 2,1,-1 } }; //OS
-
-    int curSearchOrder = CTL_TwainDLLHandle::s_TwainDSMSearchOrder;
-
+	CTL_StringType curSearchOrder = CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr;
     CTL_StringType fNameTotal;
     bool bFoundTwain = false;
-    if (pWhichSearch)
-        *pWhichSearch = DTWAIN_TWAINDSMSEARCH_NOTFOUND;
-    for (int i = 0; i < 3 && !bFoundTwain; ++i)
+	int minSize = (std::min)(4, (int)curSearchOrder.size());
+	for (int i = 0; i < minSize && !bFoundTwain; ++i)
     {
         // skip this search if -1 is given
-        int nCurDir = sSearchOrder[curSearchOrder][i];
+		int nCurDir = searchMap[curSearchOrder[i]];
         if (nCurDir == -1)
             continue;
 
@@ -118,12 +146,11 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName,
                 if (bLeaveLoaded)
                     *pModule = libloader;
             }
-            if (pWhichSearch)
-                *pWhichSearch = whichSearch[nCurDir];
             return fNameTotal;
         }
         libloader.unload();
     }
     return CTL_StringType(_T(""));
 }
+
 #endif

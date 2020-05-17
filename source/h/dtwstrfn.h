@@ -226,6 +226,8 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetVersionStringA(LPSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetVersionStringW(LPWSTR lpszVer, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringA(LPSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringW(LPWSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_IsDIBBlankStringA(HANDLE hDib, LPCSTR threshold);
@@ -256,6 +258,7 @@ DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeEx2(DTWAIN_CCHARPTRTYPE szI
                                                           DTWAIN_CCHARPTRTYPE szImageDLLPath,
                                                           DTWAIN_CCHARPTRTYPE szLangResourcePath);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionString(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
+LONG           DLLENTRY_DEF      DTWAIN_GetLibraryPath(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetShortVersionString(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);

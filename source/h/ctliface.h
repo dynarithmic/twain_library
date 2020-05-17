@@ -639,6 +639,8 @@ namespace dynarithmic
             static CTL_StringType           s_TempFilePath;
             static CTL_StringType           s_ImageDLLFilePath;
             static CTL_StringType           s_LangResourcePath;
+			static CTL_StringType			s_VersionString;
+			static CTL_StringType			s_DLLPath;
             static UINT_PTR                 s_nTimerID;
             static UINT_PTR                 s_nTimeoutID;
             static UINT                     s_nTimeoutMilliseconds;
@@ -651,6 +653,7 @@ namespace dynarithmic
             static bool                     s_UsingCustomResource;
             static bool                     s_DemoInitialized;
             static int                      s_TwainDSMSearchOrder;
+			static CTL_StringType			s_TwainDSMSearchOrderStr;
 			static bool						s_multipleThreads;
 
             static std::unordered_set<HWND>   s_appWindowsToDisable;
@@ -802,6 +805,7 @@ namespace dynarithmic
     LONG CopyInfoToCString(const CTL_StringType& strInfo, LPTSTR szInfo, LONG nMaxLen);
     CTL_StringType GetVersionString();
     CTL_StringType GetDTWAINExecutionPath();
+	CTL_StringType GetDTWAINDLLPath();
     DTWAIN_ARRAY DTWAIN_CreateFix32ArrayFromFloatArray(DTWAIN_ARRAY FloatArray);
     DTWAIN_ARRAY DTWAIN_CreateFloatArrayFromFix32Array(DTWAIN_ARRAY Fix32Array);
 

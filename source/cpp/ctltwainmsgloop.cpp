@@ -50,8 +50,10 @@ void TwainMessageLoopWindowsImpl::PerformMessageLoop(CTL_ITwainSource *pSource, 
     UIScopedRAII raii(pSource);
     pSource->SetUIOnly(isUIOnly);
 #ifdef WIN32
-    while (IsSourceOpen(pSource, isUIOnly) && GetMessage(&msg, NULL, 0, 0))
+    while (GetMessage(&msg, NULL, 0, 0))
     {
+		if (!IsSourceOpen(pSource, isUIOnly))
+			break;
         if (CanEnterDispatch(&msg))
         {
             ::TranslateMessage(&msg);

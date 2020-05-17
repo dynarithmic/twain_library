@@ -1,5 +1,10 @@
 DTWAIN Version changes
 
+5.1.0.6
+- Added custom code for TWAIN drivers that erroneously return TWRC_CANCEL when the user interface is closed.
+- Updated search logic when attempting to find / load the TWAIN Data Source manager
+- Added DTWAIN_GetLibraryPath function to return the path of the loaded DTWAIN Dll
+
 5.1.0.5
 - Minor source code changes.  Removed LPGL wording from source files.
 
