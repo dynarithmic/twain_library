@@ -91,6 +91,7 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
     bool    bPageDiscarded = false;
     bool    bProcessDibEx = true;
     bool    bKeepPage = true;
+	bool	bProcessedOne = false;
     size_t nLastDib = 0;
 
     ImageXferFileWriter FileWriter(this, pSession, pSource);
@@ -105,7 +106,7 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                                                   DTWAIN_TN_TRANSFERDONE,
                                                   (LPARAM)pSource);
             m_bJobMarkerNeedsToBeWritten = false;
-            // Check if more images are pending (job control only)
+            // Check if ``more images are pending (job control only)
             SetPendingXfersDone(false);
 
             bool bEndOfJobDetected=false;
@@ -299,18 +300,17 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                     #endif
                     if ( bKeepPage )
                     {
-                        #ifdef DTWAIN_DEMO_VERSION
-                        if (nCurImage > DEMO_MAX_PAGES && bIsMultiPageFile ) { nCurImage = DEMO_MAX_PAGES; } else
-                        #endif
                         if ( bIsMultiPageFile || pSource->IsMultiPageModeSaveAtEnd())
                         {
                             // This is the first page of the acquisition
-                            if ( nLastDib == 0 ||
+                            if ( nLastDib == 0 || !bProcessedOne  ||
                                 (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
                                 nMultiStage = DIB_MULTI_FIRST;
                             else
                             // This is a subsequent page of the acquisition
                                 nMultiStage = DIB_MULTI_NEXT;
+
+							bProcessedOne = true;
 
                             // Now check if this we are in manual duplex mode
                             // or in continuous mode
