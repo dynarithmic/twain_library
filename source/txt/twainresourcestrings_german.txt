@@ -246,5 +246,5 @@
 9609 TWRC_DATANOTAVAILABLE
 9610 TWRC_BUSY
 9611 TWRC_SCANNERLOCKED
-9700 DTWAIN Twain Library, version 5.1.0.5 (c) 2018-2020
+9700 DTWAIN Twain Library, version 5.1.0.7 (c) 2018-2020
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?

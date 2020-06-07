@@ -136,6 +136,7 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
     bool bPageDiscarded = false;
     bool    bProcessDibEx = true;
     bool    bKeepPage = true;
+	bool	bProcessedOne = false;
     size_t nLastDib;
 
     // Check if a temp buffer was allocated successfully
@@ -448,12 +449,14 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
                             if ( bIsMultiPageFile || pSource->IsMultiPageModeSaveAtEnd())
                             {
                                 // This is the fist page of the acquisition
-                                if ( nLastDib == 0 ||
+								if (nLastDib == 0 || !bProcessedOne ||
                                     (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
                                     nMultiStage = DIB_MULTI_FIRST;
                                 else
                                 // This is a subsequent page of the acquisition
                                     nMultiStage = DIB_MULTI_NEXT;
+
+								bProcessedOne = true;
 
                                 // Now check if this we are in manual duplex mode
                                 if ( pSource->IsManualDuplexModeOn() ||

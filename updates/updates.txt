@@ -1,5 +1,8 @@
 DTWAIN Version changes
 
+5.1.0.7
+- Fixed issue with program opting to discard the first page of a multi-page acquisition.
+
 5.1.0.6
 - Added custom code for TWAIN drivers that erroneously return TWRC_CANCEL when the user interface is closed.
 - Updated search logic when attempting to find / load the TWAIN Data Source manager
