@@ -325,6 +325,11 @@ namespace dynarithmic
             str = StringTraits::GetEmptyString();
         }
 
+		static StringType ReplaceAll(const StringType& str, const StringType& findStr, const StringType& replaceStr)
+		{
+			return boost::algorithm::replace_all_copy(str, findStr, replaceStr);
+		}
+
         static StringType&  TrimRight(StringType& str, const CharType *lpszTrimStr)
         {
             typename StringType::size_type nPos = str.find_last_not_of(lpszTrimStr);

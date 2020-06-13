@@ -82,10 +82,10 @@ void CTL_TwainDLLHandle::RemoveAllSourceMaps()
 
 void CTL_TwainDLLHandle::InitializeResourceRegistry()
 {
-    static std::array<const char*, 6> default_values = { { "english", "french","german","dutch", "italian", "spanish" } };
+	auto default_values = GetLangResourceNames();
     m_ResourceRegistry.clear();
     for (size_t i = 0; i < default_values.size(); ++i)
-        m_ResourceRegistry.insert({ default_values[i], boost::filesystem::exists(GetResourceFileNameA(default_values[i])) });
+        m_ResourceRegistry.insert({ default_values[i], boost::filesystem::exists(GetResourceFileNameA(default_values[i].c_str())) });
     }
 
 std::pair<CTL_ResourceRegistryMap::iterator, bool> CTL_TwainDLLHandle::AddResourceToRegistry(LPCTSTR pLangDLL)

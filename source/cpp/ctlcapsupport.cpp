@@ -59,7 +59,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCapSupported(DTWAIN_SOURCE Source, LONG lCapab
         if (p->IsCapabilityCached((TW_UINT16)lCapability))
         {
             // Get the cap array values
-            CTL_SourceCapInfo Info = pHandle->m_aSourceCapInfo[nWhere];
+            CTL_SourceCapInfo& Info = pHandle->m_aSourceCapInfo[nWhere];
             CTL_CapInfoArrayPtr pArray = std::get<1>(Info);
             CTL_EnumCapability nCap = (CTL_EnumCapability)lCapability;
             if (pArray->find(nCap) != pArray->end())
@@ -77,55 +77,39 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCapSupported(DTWAIN_SOURCE Source, LONG lCapab
             DTWAIN_Check_Error_Condition_2_Ex(pHandle, [] {return true; }, DTWAIN_ERR_CAP_NO_SUPPORT, false, FUNC_MACRO);
         }
 
-        // Check if slow cap retrieval is on
-        if (!p->IsFastCapRetrieval())
-        {
-            // Get the cap using TWAIN.  Sources that do not support CAP_SUPPORTEDCAPS will most likely
-            // be in this part of the code
-            DTWAIN_BOOL bRet = CTL_TwainAppMgr::IsCapabilitySupported(p, (TW_UINT16)lCapability, CTL_GetTypeGET);
-            if (bRet)
-                // Cache the info now
-                dynarithmic::DTWAIN_CacheCapabilityInfo(p, pHandle, static_cast<TW_UINT16>(lCapability));
-            else
-            {
-                // Add this to list of caps not supported
-                p->AddCapToUnsupportedList(static_cast<TW_UINT16>(lCapability));
-                DTWAIN_Check_Error_Condition_2_Ex(pHandle, [] { return true; }, DTWAIN_ERR_CAP_NO_SUPPORT, false, FUNC_MACRO);
-            }
-            LOG_FUNC_EXIT_PARAMS(bRet)
-        }
-        else
-            // Caps can be retrieved safely, since GetCapabilities() will use the CAP_SUPPORTEDCAPS
-            // type, or the user has forced DTWAIN to use a brute force approach to enumerate
-            // all of the capability values.
-        {
-            // Test if the capabilities have already been retrieved (but no info has
-            // been gathered)
+        // Test if the capabilities have already been retrieved.  This should only be done
+		// once per TWAIN source.
             if (!p->RetrievedAllCaps())
             {
                 // Get the capabilities using TWAIN
                 CTL_TwainCapArray rArray;
                 CTL_TwainAppMgr::GetCapabilities(p, rArray);
-                p->SetRetrievedAllCaps(true);
                 p->SetCapSupportedList(rArray);
-            }
+
             // Get the capabilities from the list in the Source
             CapList& pArray = p->GetCapSupportedList();
 
+			// Get all the information about the capability.
+			std::for_each(pArray.begin(), pArray.end(), [&](TW_UINT16 val)
+			{dynarithmic::DTWAIN_CacheCapabilityInfo(p, pHandle, static_cast<TW_UINT16>(val)); });
+
+			// We have retrieved all the capability information
+			p->SetRetrievedAllCaps(true);
+		}
+
+		// Now test if the capability is supported
+        CapList& pArray = p->GetCapSupportedList();
             bool bReturnVal = false;
             auto it = pArray.find(static_cast<TW_UINT16>(lCapability));
             if (it != pArray.end())
             {
-                // Cap has been found, so finally get some stats and return
+			// supported, so return true
                 bReturnVal = true;
-                dynarithmic::DTWAIN_CacheCapabilityInfo(p, pHandle, static_cast<TW_UINT16>(lCapability));
                 LOG_FUNC_EXIT_PARAMS(bReturnVal)
             }
             // cap not supported, so add to unsupported list
             p->AddCapToUnsupportedList(static_cast<TW_UINT16>(lCapability));
-            DTWAIN_Check_Error_Condition_2_Ex(pHandle, []{ return true; },
-            DTWAIN_ERR_CAP_NO_SUPPORT, false, FUNC_MACRO);
-        }
+        DTWAIN_Check_Error_Condition_2_Ex(pHandle, []{ return true; }, DTWAIN_ERR_CAP_NO_SUPPORT, false, FUNC_MACRO);
     }
     LOG_FUNC_EXIT_PARAMS(false)
     CATCH_BLOCK(false)

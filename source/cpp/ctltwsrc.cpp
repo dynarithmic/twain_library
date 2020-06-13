@@ -207,7 +207,7 @@ CTL_ITwainSource::CTL_ITwainSource( CTL_ITwainSession *pSession, LPCTSTR lpszPro
     m_nCompressBytes(0),
     m_bCapCached(false),
     m_bRetrievedAllCaps(false),
-    m_bFastCapRetrieval(false),
+    m_bFastCapRetrieval(true),
     m_nJpegQuality ( 0 ),
     m_bJpegProgressive ( false ),
     m_bAutoFeed(true),
