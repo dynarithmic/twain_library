@@ -9,6 +9,7 @@ By default, DTWAIN has English, Spanish, Italian, German, French and Dutch resou
 	twainresourcestrings_german.txt  	German resources
 	twainresourcestrings_italian.txt 	Italian resources
 	twainresourcestrings_spanish.txt 	Spanish strings
+    twainresourcestrings_portuguese_br.txt 	Portuguese-Brazilian strings
 
 --------------------------
 
@@ -34,14 +35,28 @@ Note that the name parameter used in DTWAIN_LoadCustomStringResources is the sam
 
 ---------------------------------
 
-If everything goes well, you can test if the custom languageresource has been loaded by calling <a href="http://www.dynarithmic.com/onlinehelp5/dtwain/dtwain_settwainlog.htm" target="_blank">DTWAIN_SetTwainLog</a> and checking if the logging information shows up in the desired language.
+If everything goes well, you can test if the custom language resource has been loaded by calling <a href="http://www.dynarithmic.com/onlinehelp5/dtwain/dtwain_settwainlog.htm" target="_blank">DTWAIN_SetTwainLog</a> and checking if the logging information shows up in the desired language.
 
 ---------------------------------
 In general, the name of the new resource file will be of the form:  
   
            twainresourcestrings_somename.txt
 
-where **somename** can be any string, and that string will be used in the DTWAIN_LoadCustomStringResources function call.
+where **somename** can be any string, and that string will be used in the DTWAIN_LoadCustomStringResourcesA function call.
+
+---------------------------------
+Note that DTWAIN_LoadCustomStringResources can also work for the following by default:
+
+**DTWAIN_LoadCustomStringResourcesA("english") 
+DTWAIN_LoadCustomStringResourcesA("spanish")   
+DTWAIN_LoadCustomStringResourcesA("french")
+DTWAIN_LoadCustomStringResourcesA("italian")
+DTWAIN_LoadCustomStringResourcesA("german")
+DTWAIN_LoadCustomStringResourcesA("dutch")
+DTWAIN_LoadCustomStringResourcesA("portuguese_br")**
+
+Thus your application can load any string resource at runtime by providing the appropriate language string to DTWAIN_LoadCustomStringResourcesA.
+
 
 -----------------------
 ### Can we submit language resources to you to place in the Git repository?

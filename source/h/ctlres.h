@@ -24,6 +24,7 @@
 
 #define DTWAINLANGRESOURCEFILE "twainresourcestrings_"
 #define DTWAINRESOURCEINFOFILE "twaininfo.txt"
+#define DTWAINLANGRESOURCENAMESFILE  "twainlanguage.txt"
 
 namespace dynarithmic
 {
@@ -36,6 +37,7 @@ namespace dynarithmic
     void UnloadStringResources();
     void UnloadErrorResources();
     void UnloadImageDLL();
+	std::vector<CTL_String> GetLangResourceNames();
     CTL_String GetResourceFileName(LPCTSTR lpszName);
     CTL_String GetResourceFileNameA(LPCSTR lpszName);
 }

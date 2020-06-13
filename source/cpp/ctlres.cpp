@@ -22,6 +22,7 @@
 #include <sstream>
 #include <boost/format.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
 #include "ctliface.h"
 #include "ctlres.h"
 #include "dtwain_resource_constants.h"
@@ -29,6 +30,7 @@
 #include "tiffun32.h"
 #include "pdffun32.h"
 #include "errorcheck.h"
+#include "dtwain_verinfo.h"
 #include <map>
 using namespace dynarithmic;
 
@@ -147,6 +149,19 @@ namespace dynarithmic
         CATCH_BLOCK(false)
     }
 
+	std::vector<CTL_String> GetLangResourceNames()
+	{
+		std::vector<CTL_String> ret;
+		CTL_String sPath = createResourceFileName(DTWAINLANGRESOURCENAMESFILE);
+		std::ifstream ifs(sPath);
+		if (!ifs)
+			return ret;
+		CTL_String s;
+		while (ifs >> s)
+			ret.push_back(s);
+		return ret;
+	}
+
     size_t GetResourceString(UINT nError, LPTSTR buffer, LONG bufSize)
     {
         auto found = CTL_TwainDLLHandle::s_ResourceStrings.find(nError);
@@ -175,21 +190,10 @@ namespace dynarithmic
         return nRealLen;
     }
 
-    static bool load2valueMap(std::ifstream& ifs, CTL_TwainLongToStringMap& theMap, const char * path)
-    {
-        int value1;
-        CTL_String value2;
-        while (ifs >> value1 >> value2)
-        {
-            if (value1 == -1999 && value2 == "END")
-                break;
-            theMap.insert({ value1, value2 });
-        }
-        return true;
-    }
-
     static bool LoadLanguageResourceFromFile(const CTL_String& sPath)
     {
+		CTL_String::value_type sVersion[100];
+		DTWAIN_GetShortVersionStringA(sVersion, 100);
         std::ifstream ifs(sPath);
         bool open = false;
         int resourceID;
@@ -206,6 +210,9 @@ namespace dynarithmic
                 {
                     getline(strm, descr);
                     StringWrapperA::TrimAll(descr);
+					descr = StringWrapperA::ReplaceAll(descr, "{short_version}", sVersion);
+					descr = StringWrapperA::ReplaceAll(descr, "{company_name}", DTWAIN_VERINFO_COMPANYNAME);
+					descr = StringWrapperA::ReplaceAll(descr, "{copyright}", DTWAIN_VERINFO_LEGALCOPYRIGHT);
                     CTL_TwainDLLHandle::s_ResourceStrings.insert({ resourceID, StringConversion::Convert_Ansi_To_Native(descr) });
                 }
             }

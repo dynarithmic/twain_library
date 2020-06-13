@@ -1,5 +1,11 @@
 DTWAIN Version changes
 
+5.1.0.8
+- Removed initial slow TWAIN capability retrieval and replaced with fast capability retrieval.
+- Fixed issue with CAP_FEEDERLOADED being considered an unsupported capability for some TWAIN devices.
+- Added additional language resource for Portuguese-Brazilian strings (thanks to user mauriciofaria).
+- Visual Studio 2019 solution added (thanks to user Dcreeron).
+
 5.1.0.7
 - Fixed issue with program opting to discard the first page of a multi-page acquisition.
 

@@ -1120,6 +1120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="txt\twaininfo.txt" />
+    <Text Include="txt\twainlanguage.txt" />
     <Text Include="txt\twainresourcestrings_dutch.txt" />
     <Text Include="txt\twainresourcestrings_english.txt" />
     <Text Include="txt\twainresourcestrings_french.txt" />
