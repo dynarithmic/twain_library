@@ -1043,6 +1043,7 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayInit(VOID_PROTOTYPE);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
 LONG DLLENTRY_DEF DTWAIN_MakeRGB(LONG red, LONG green, LONG blue);
+LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font);
 #include "dtwstrfn.h"
 #ifdef __cplusplus
 }

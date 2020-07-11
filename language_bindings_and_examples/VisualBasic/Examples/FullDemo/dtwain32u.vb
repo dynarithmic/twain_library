@@ -1,22 +1,22 @@
 REM
-REM ** Copyright (c) 2001-2012  DynaRithmic Software
+REM This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
+REM Copyright (c) 2002-2019 Dynarithmic Software.                                         
 REM
-REM ** Permission to use, copy, modify and distribute this file for any purpose is hereby
-REM ** granted without fee, provided that (i) the above copyright notices and
-REM ** this permission notice appear in all copies of the software and related
-REM ** documentation, and (ii) the name of DynaRithmic Software may not be used
-REM ** in any advertising or publicity relating to the software without the
-REM ** specific, prior written permission of DynaRithmic Software.
+REM Licensed under the Apache License, Version 2.0 (the "License");                       
+REM you may not use this file except in compliance with the License.                      
+REM You may obtain a copy of the License at                                               
 REM
-REM ** THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
-REM ** EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
-REM ** WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+REM     http://www.apache.org/licenses/LICENSE-2.0                                        
 REM
-REM ** IN NO EVENT SHALL DYNARITHMIC SOFTWARE BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
-REM ** INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
-REM ** RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF THE
-REM ** POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN
-REM ** CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+REM Unless required by applicable law or agreed to in writing, software                   
+REM distributed under the License is distributed on an "AS IS" BASIS,                     
+REM WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.              
+REM See the License for the specific language governing permissions and                   
+REM limitations under the License.                                                        
+REM                                                                                       
+REM FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY                   
+REM DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT 
+REM OF THIRD PARTY RIGHTS.                                                                
 REM
 
 REM ******************************************************************************
@@ -50,6 +50,12 @@ Class DTWAINAPI
     Public Const DTWAIN_FF_PNG As Integer  = 7
     Public Const DTWAIN_FF_SPIFF As Integer  = 8
     Public Const DTWAIN_FF_EXIF As Integer  = 9
+    Public Const DTWAIN_FF_PDF As Integer  = 10
+    Public Const DTWAIN_FF_JP2 As Integer  = 11
+    Public Const DTWAIN_FF_JPX As Integer  = 13
+    Public Const DTWAIN_FF_DEJAVU As Integer  = 14
+    Public Const DTWAIN_FF_PDFA As Integer  = 15
+    Public Const DTWAIN_FF_PDFA2 As Integer  = 16
     Public Const DTWAIN_CP_NONE As Integer  = 0
     Public Const DTWAIN_CP_PACKBITS As Integer  = 1
     Public Const DTWAIN_CP_GROUP31D As Integer  = 2
@@ -63,6 +69,8 @@ Class DTWAINAPI
     Public Const DTWAIN_CP_RLE4 As Integer  = 10
     Public Const DTWAIN_CP_RLE8 As Integer  = 11
     Public Const DTWAIN_CP_BITFIELDS As Integer  = 12
+    Public Const DTWAIN_CP_ZIP As Integer  = 13
+    Public Const DTWAIN_CP_JPEG2000 As Integer  = 14
     Public Const DTWAIN_FS_NONE As Integer  = 0
     Public Const DTWAIN_FS_A4LETTER As Integer  = 1
     Public Const DTWAIN_FS_B5LETTER As Integer  = 2
@@ -171,6 +179,7 @@ Class DTWAINAPI
     Public Const DTWAIN_POINTS As Integer  = 3
     Public Const DTWAIN_TWIPS As Integer  = 4
     Public Const DTWAIN_PIXELS As Integer  = 5
+    Public Const DTWAIN_MILLIMETERS As Integer  = 6
     Public Const DTWAIN_USENAME As Integer  = 4
     Public Const DTWAIN_USEPROMPT As Integer  = 8
     Public Const DTWAIN_USELONGNAME As Integer  = 16
@@ -235,6 +244,8 @@ Class DTWAINAPI
     Public Const DTWAIN_CAPGETDEFAULT As Integer  = 3
     Public Const DTWAIN_CAPSET As Integer  = 6
     Public Const DTWAIN_CAPRESET As Integer  = 7
+    Public Const DTWAIN_CAPRESETALL As Integer  = 8
+    Public Const DTWAIN_CAPSETCONSTRAINT As Integer  = 9
     Public Const DTWAIN_CAPSETAVAILABLE As Integer  = 8
     Public Const DTWAIN_CAPSETCURRENT As Integer  = 16
     Public Const DTWAIN_AREASET As Integer  = DTWAIN_CAPSET
@@ -245,6 +256,9 @@ Class DTWAINAPI
     Public Const DTWAIN_VER16 As Integer  = 1
     Public Const DTWAIN_VER17 As Integer  = 2
     Public Const DTWAIN_VER18 As Integer  = 3
+    Public Const DTWAIN_VER20 As Integer  = 4
+    Public Const DTWAIN_VER21 As Integer  = 5
+    Public Const DTWAIN_VER22 As Integer  = 6
     Public Const DTWAIN_ACQUIREALL As Integer  = (-1)
     Public Const DTWAIN_MAXACQUIRE As Integer  = (-1)
     Public Const DTWAIN_DX_NONE As Integer  = 0
@@ -339,6 +353,10 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PDFOCRREADY As Integer  = 1142
     Public Const DTWAIN_TN_PDFOCRDONE As Integer  = 1143
     Public Const DTWAIN_TN_PDFOCRERROR As Integer  = 1144
+    Public Const DTWAIN_TN_SETCALLBACKINIT As Integer  = 1150
+    Public Const DTWAIN_TN_SETCALLBACK64INIT As Integer  = 1151
+    Public Const DTWAIN_TN_FILENAMECHANGING As Integer  = 1160
+    Public Const DTWAIN_TN_FILENAMECHANGED As Integer  = 1161
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer  = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer  = 2
     Public Const DTWAIN_MODAL As Integer  = 0
@@ -362,6 +380,11 @@ Class DTWAINAPI
     Public Const DTWAIN_CO_GETDEFAULT As Integer  = &H0004
     Public Const DTWAIN_CO_GETCURRENT As Integer  = &H0008
     Public Const DTWAIN_CO_RESET As Integer  = &H0010
+    Public Const DTWAIN_CO_SETCONSTRAINT As Integer  = &H0020
+    Public Const DTWAIN_CO_CONSTRAINABLE As Integer  = &H0040
+    Public Const DTWAIN_CO_GETHELP As Integer  = &H0100
+    Public Const DTWAIN_CO_GETLABEL As Integer  = &H0200
+    Public Const DTWAIN_CO_GETLABELENUM As Integer  = &H0400
     Public Const DTWAIN_CNTYAFGHANISTAN As Integer  = 1001
     Public Const DTWAIN_CNTYALGERIA As Integer  = 213
     Public Const DTWAIN_CNTYAMERICANSAMOA As Integer  = 684
@@ -884,6 +907,17 @@ Class DTWAINAPI
     Public Const DTWAIN_EI_FRAMENUMBER As Integer  = &H123D
     Public Const DTWAIN_EI_FRAME As Integer  = &H123E
     Public Const DTWAIN_EI_PIXELFLAVOR As Integer  = &H123F
+    Public Const DTWAIN_EI_ICCPROFILE As Integer  = &H1240
+    Public Const DTWAIN_EI_LASTSEGMENT As Integer  = &H1241
+    Public Const DTWAIN_EI_SEGMENTNUMBER As Integer  = &H1242
+    Public Const DTWAIN_EI_MAGDATA As Integer  = &H1243
+    Public Const DTWAIN_EI_MAGTYPE As Integer  = &H1244
+    Public Const DTWAIN_EI_PAGESIDE As Integer  = &H1245
+    Public Const DTWAIN_EI_FILESYSTEMSOURCE As Integer  = &H1246
+    Public Const DTWAIN_EI_IMAGEMERGED As Integer  = &H1247
+    Public Const DTWAIN_EI_MAGDATALENGTH As Integer  = &H1248
+    Public Const DTWAIN_EI_PAPERCOUNT As Integer  = &H1249
+    Public Const DTWAIN_EI_PRINTERTEXT As Integer  = &H124A
     Public Const DTWAIN_LOG_DECODE_SOURCE As Integer  = 1
     Public Const DTWAIN_LOG_DECODE_DEST As Integer  = 2
     Public Const DTWAIN_LOG_DECODE_TWMEMREF As Integer  = 4
@@ -1025,6 +1059,7 @@ Class DTWAINAPI
     Public Const DTWAIN_32BIT_VERSION As Integer  = &H00200000
     Public Const DTWAIN_64BIT_VERSION As Integer  = &H00400000
     Public Const DTWAIN_UNICODE_VERSION As Integer  = &H00800000
+    Public Const DTWAIN_OPENSOURCE_VERSION As Integer  = &H01000000
     Public Const DTWAINOCR_RETURNHANDLE As Integer  = 1
     Public Const DTWAINOCR_COPYDATA As Integer  = 2
     Public Const DTWAIN_OCRINFO_CHAR As Integer  = 0
@@ -1069,8 +1104,11 @@ Class DTWAINAPI
     Public Const DTWAIN_TWCT_PATCH2 As Integer  = 2
     Public Const DTWAIN_TWCT_PATCH3 As Integer  = 3
     Public Const DTWAIN_TWCT_PATCH4 As Integer  = 4
-    Public Const DTWAIN_TWCT_PATCHT As Integer  = 5
+    Public Const DTWAIN_TWCT_PATCH5 As Integer  = 5
     Public Const DTWAIN_TWCT_PATCH6 As Integer  = 6
+    Public Const DTWAIN_TWDF_ULTRASONIC As Integer  = 0
+    Public Const DTWAIN_TWDF_BYLENGTH As Integer  = 1
+    Public Const DTWAIN_TWDF_INFRARED As Integer  = 2
     Public Const DTWAIN_CV_CAPCUSTOMBASE As Integer  = &H8000
     Public Const DTWAIN_CV_CAPXFERCOUNT As Integer  = &H0001
     Public Const DTWAIN_CV_ICAPCOMPRESSION As Integer  = &H0100
@@ -1130,6 +1168,32 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPBATTERYMINUTES As Integer  = &H1032
     Public Const DTWAIN_CV_CAPBATTERYPERCENTAGE As Integer  = &H1033
     Public Const DTWAIN_CV_CAPPOWERDOWNTIME As Integer  = &H1034
+    Public Const DTWAIN_CV_CAPSEGMENTED As Integer  = &H1035
+    Public Const DTWAIN_CV_CAPCAMERAENABLED As Integer  = &H1036
+    Public Const DTWAIN_CV_CAPCAMERAORDER As Integer  = &H1037
+    Public Const DTWAIN_CV_CAPMICRENABLED As Integer  = &H1038
+    Public Const DTWAIN_CV_CAPFEEDERPREP As Integer  = &H1039
+    Public Const DTWAIN_CV_CAPFEEDERPOCKET As Integer  = &H103a
+    Public Const DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM As Integer  = &H103b
+    Public Const DTWAIN_CV_CAPCUSTOMINTERFACEGUID As Integer  = &H103c
+    Public Const DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE As Integer  = &H103d
+    Public Const DTWAIN_CV_CAPSUPPORTEDDATS As Integer  = &H103e
+    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTION As Integer  = &H103f
+    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONLENGTH As Integer  = &H1040
+    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONSENSITIVITY As Integer  = &H1041
+    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONRESPONSE As Integer  = &H1042
+    Public Const DTWAIN_CV_CAPPAPERHANDLING As Integer  = &H1043
+    Public Const DTWAIN_CV_CAPINDICATORSMODE As Integer  = &H1044
+    Public Const DTWAIN_CV_CAPPRINTERVERTICALOFFSET As Integer  = &H1045
+    Public Const DTWAIN_CV_CAPPOWERSAVETIME As Integer  = &H1046
+    Public Const DTWAIN_CV_CAPPRINTERCHARROTATION As Integer  = &H1047
+    Public Const DTWAIN_CV_CAPPRINTERFONTSTYLE As Integer  = &H1048
+    Public Const DTWAIN_CV_CAPPRINTERINDEXLEADCHAR As Integer  = &H1049
+    Public Const DTWAIN_CV_CAPPRINTERINDEXMAXVALUE As Integer  = &H104A
+    Public Const DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS As Integer  = &H104B
+    Public Const DTWAIN_CV_CAPPRINTERINDEXSTEP As Integer  = &H104C
+    Public Const DTWAIN_CV_CAPPRINTERINDEXTRIGGER As Integer  = &H104D
+    Public Const DTWAIN_CV_CAPPRINTERSTRINGPREVIEW As Integer  = &H104E
     Public Const DTWAIN_CV_ICAPAUTOBRIGHT As Integer  = &H1100
     Public Const DTWAIN_CV_ICAPBRIGHTNESS As Integer  = &H1101
     Public Const DTWAIN_CV_ICAPCONTRAST As Integer  = &H1103
@@ -1203,16 +1267,22 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPAUTOMATICDESKEW As Integer  = &H1151
     Public Const DTWAIN_CV_ICAPAUTOMATICROTATE As Integer  = &H1152
     Public Const DTWAIN_CV_ICAPJPEGQUALITY As Integer  = &H1153
+    Public Const DTWAIN_CV_ICAPFEEDERTYPE As Integer  = &H1154
+    Public Const DTWAIN_CV_ICAPICCPROFILE As Integer  = &H1155
+    Public Const DTWAIN_CV_ICAPAUTOSIZE As Integer  = &H1156
+    Public Const DTWAIN_CV_ICAPAUTOMATICCROPUSESFRAME As Integer  = &H1157
+    Public Const DTWAIN_CV_ICAPAUTOMATICLENGTHDETECTION As Integer  = &H1158
+    Public Const DTWAIN_CV_ICAPAUTOMATICCOLORENABLED As Integer  = &H1159
+    Public Const DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE As Integer  = &H115a
+    Public Const DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED As Integer  = &H115b
+    Public Const DTWAIN_CV_ICAPIMAGEMERGE As Integer  = &H115c
+    Public Const DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD As Integer  = &H115d
+    Public Const DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO As Integer  = &H115e
+    Public Const DTWAIN_CV_ICAPFILMTYPE As Integer  = &H115f
+    Public Const DTWAIN_CV_ICAPMIRROR As Integer  = &H1160
+    Public Const DTWAIN_CV_ICAPJPEGSUBSAMPLING As Integer  = &H1161
     Public Const DTWAIN_CV_ACAPAUDIOFILEFORMAT As Integer  = &H1201
     Public Const DTWAIN_CV_ACAPXFERMECH As Integer  = &H1202
-    Public Const DTWAIN_CV_CAPPRINTERCHARROTATION As Integer  = &H1047
-    Public Const DTWAIN_CV_CAPPRINTERFONTSTYLE As Integer  = &H1048
-    Public Const DTWAIN_CV_CAPPRINTERINDEXLEADCHAR As Integer  = &H1049
-    Public Const DTWAIN_CV_CAPPRINTERINDEXMAXVALUE As Integer  = &H104A
-    Public Const DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS As Integer  = &H104B
-    Public Const DTWAIN_CV_CAPPRINTERINDEXSTEP As Integer  = &H104C
-    Public Const DTWAIN_CV_CAPPRINTERINDEXTRIGGER As Integer  = &H104D
-    Public Const DTWAIN_CV_CAPPRINTERSTRINGPREVIEW As Integer  = &H104E
     Public Const DTWAIN_CFMCV_CAPCFMSTART As Integer  = 2048
     Public Const DTWAIN_CFMCV_CAPDUPLEXSCANNER As Integer  = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+10)
     Public Const DTWAIN_CFMCV_CAPDUPLEXENABLE As Integer  = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+11)
@@ -1382,7 +1452,7 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_ArrayInsertAtStringNA Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByVal Val As String, ByVal num As Integer) As Integer
     Declare Ansi Function DTWAIN_ArraySetAtStringA Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByVal pStr As String) As Integer
     Declare Ansi Function DTWAIN_ExecuteOCRA Lib "DTWAIN32U.DLL" (ByVal Engine As Integer, ByVal szFileName As String, ByVal nStartPage As Integer, ByVal nEndPage As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetAcquireArea2StringA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef Unit As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetAcquireArea2StringA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef lpUnit As Integer) As Integer
     Declare Ansi Function DTWAIN_GetAppInfoA Lib "DTWAIN32U.DLL" (ByVal szVerStr As String, ByVal szManu As String, ByVal szProdFam As String, ByVal szProdName As String) As Integer
     Declare Ansi Function DTWAIN_GetAuthorA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szAuthor As String) As Integer
     Declare Ansi Function DTWAIN_GetBrightnessStringA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Contrast As String) As Integer
@@ -1487,6 +1557,8 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_ArrayFindLong Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal Val As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayFindString Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal pString As String) As Integer
     Declare Auto Function DTWAIN_ArrayFindWideString Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal pString As String) As Integer
+    Declare Auto Function DTWAIN_ArrayFix32GetAt Lib "DTWAIN32U.DLL" (ByVal aFix32 As Integer, ByVal lPos As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
+    Declare Auto Function DTWAIN_ArrayFix32SetAt Lib "DTWAIN32U.DLL" (ByVal aFix32 As Integer, ByVal lPos As Integer, ByVal Whole As Integer, ByVal Frac As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayFrameGetFrameAt Lib "DTWAIN32U.DLL" (ByVal FrameArray As Integer, ByVal nWhere As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayGetAtANSIString Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByVal pStr As String) As Integer
     Declare Auto Function DTWAIN_ArrayGetAtFloat Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByRef pVal As Double) As Integer
@@ -1566,6 +1638,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_EnumOCRInterfaces Lib "DTWAIN32U.DLL" (ByRef OCRInterfaces As Integer) As Integer
     Declare Auto Function DTWAIN_EnumOCRSupportedCaps Lib "DTWAIN32U.DLL" (ByVal Engine As Integer, ByRef SupportedCaps As Integer) As Integer
     Declare Auto Function DTWAIN_EnumOrientations Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef pArray As Integer) As Integer
+    Declare Auto Function DTWAIN_EnumOverscanValues Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef pArray As Integer) As Integer
     Declare Auto Function DTWAIN_EnumPaperSizes Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef pArray As Integer) As Integer
     Declare Auto Function DTWAIN_EnumPatchMaxPriorities Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef pArray As Integer) As Integer
     Declare Auto Function DTWAIN_EnumPatchMaxRetries Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef pArray As Integer) As Integer
@@ -1603,7 +1676,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_FreeExtImageInfo Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_GetAcquireArea Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lGetType As Integer, ByRef FloatEnum As Integer) As Integer
     Declare Auto Function DTWAIN_GetAcquireArea2 Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef left As Double, ByRef top As Double, ByRef right As Double, ByRef bottom As Double, ByRef lpUnit As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAcquireArea2String Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef Unit As Integer) As Integer
+    Declare Auto Function DTWAIN_GetAcquireArea2String Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef lpUnit As Integer) As Integer
     Declare Auto Function DTWAIN_GetAcquireStripBuffer Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_GetAcquireStripData Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef lpCompression As Integer, ByRef lpBytesPerRow As Integer, ByRef lpColumns As Integer, ByRef lpRows As Integer, ByRef XOffset As Integer, ByRef YOffset As Integer, ByRef lpBytesWritten As Integer) As Integer
     Declare Auto Function DTWAIN_GetAcquireStripSizes Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef lpMin As Integer, ByRef lpMax As Integer, ByRef lpPreferred As Integer) As Integer
@@ -1692,6 +1765,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetOCRTextInfoLongEx Lib "DTWAIN32U.DLL" (ByVal OCRTextInfo As Integer, ByVal nWhichItem As Integer, ByRef pInfo As Integer, ByVal bufSize As Integer) As Integer
     Declare Auto Function DTWAIN_GetOCRVersionInfo Lib "DTWAIN32U.DLL" (ByVal Engine As Integer, ByVal buffer As String, ByVal maxBufSize As Integer) As Integer
     Declare Auto Function DTWAIN_GetOrientation Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef lpOrient As Integer, ByVal bCurrent As Integer) As Integer
+    Declare Auto Function DTWAIN_GetOverscan Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef lpOverscan As Integer, ByVal bCurrent As Integer) As Integer
     Declare Auto Function DTWAIN_GetPDFTextElementFloat Lib "DTWAIN32U.DLL" (ByVal TextElement As Integer, ByRef val1 As Double, ByRef val2 As Double, ByVal Flags As Integer) As Integer
     Declare Auto Function DTWAIN_GetPDFTextElementLong Lib "DTWAIN32U.DLL" (ByVal TextElement As Integer, ByRef val1 As Integer, ByRef val2 As Integer, ByVal Flags As Integer) As Integer
     Declare Auto Function DTWAIN_GetPDFTextElementString Lib "DTWAIN32U.DLL" (ByVal TextElement As Integer, ByVal szData As String, ByVal maxLen As Integer, ByVal Flags As Integer) As Integer
@@ -1714,6 +1788,9 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetResolutionString Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Resolution As String) As Integer
     Declare Auto Function DTWAIN_GetRotation Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByRef Rotation As Double) As Integer
     Declare Auto Function DTWAIN_GetRotationString Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Rotation As String) As Integer
+    Declare Auto Function DTWAIN_GetSaveFileName Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String, ByVal nMaxLen As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSaveFileNameA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String, ByVal nMaxLen As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSaveFileNameW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String, ByVal nMaxLen As Integer) As Integer
     Declare Auto Function DTWAIN_GetSourceAcquisitions Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_GetSourceID Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_GetSourceManufacturer Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szProduct As String, ByVal nMaxLen As Integer) As Integer
@@ -1750,6 +1827,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_IsAutoFeedEnabled Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_IsAutoFeedSupported Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_IsAutoRotateEnabled Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
+    Declare Auto Function DTWAIN_IsAutoRotateSupported Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_IsAutoScanEnabled Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_IsBlankPageDetectionOn Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
     Declare Auto Function DTWAIN_IsCapSupported Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lCapability As Integer) As Integer
@@ -1781,6 +1859,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_IsMsgNotifyEnabled Lib  "DTWAIN32U.DLL" () As Integer
     Declare Auto Function DTWAIN_IsOCREngineActivated Lib "DTWAIN32U.DLL" (ByVal OCREngine As Integer) As Integer
     Declare Auto Function DTWAIN_IsOrientationSupported Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Orientation As Integer) As Integer
+    Declare Auto Function DTWAIN_IsOverscanSupported Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal SupportValue As Integer) As Integer
     Declare Auto Function DTWAIN_IsPDFSupported Lib  "DTWAIN32U.DLL" () As Integer
     Declare Auto Function DTWAIN_IsPNGSupported Lib  "DTWAIN32U.DLL" () As Integer
     Declare Auto Function DTWAIN_IsPaperDetectable Lib "DTWAIN32U.DLL" (ByVal Source As Integer) As Integer
@@ -1905,6 +1984,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetNoiseFilter Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal NoiseFilter As Integer) As Integer
     Declare Auto Function DTWAIN_SetOCRCapValues Lib "DTWAIN32U.DLL" (ByVal Engine As Integer, ByVal OCRCapValue As Integer, ByVal SetType As Integer, ByVal CapValues As Integer) As Integer
     Declare Auto Function DTWAIN_SetOrientation Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Orient As Integer, ByVal bSetCurrent As Integer) As Integer
+    Declare Auto Function DTWAIN_SetOverscan Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Value As Integer, ByVal bSetCurrent As Integer) As Integer
     Declare Auto Function DTWAIN_SetPDFASCIICompression Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal bSet As Integer) As Integer
     Declare Auto Function DTWAIN_SetPDFAuthor Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpAuthor As String) As Integer
     Declare Auto Function DTWAIN_SetPDFCompression Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal bCompression As Integer) As Integer
@@ -1944,6 +2024,9 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetResolutionString Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Resolution As String) As Integer
     Declare Auto Function DTWAIN_SetRotation Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Rotation As Double) As Integer
     Declare Auto Function DTWAIN_SetRotationString Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Rotation As String) As Integer
+    Declare Auto Function DTWAIN_SetSaveFileName Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String) As Integer
+    Declare Auto Function DTWAIN_SetSaveFileNameA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String) As Integer
+    Declare Auto Function DTWAIN_SetSaveFileNameW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal fileName As String) As Integer
     Declare Auto Function DTWAIN_SetSourceUnit Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpUnit As Integer) As Integer
     Declare Auto Function DTWAIN_SetTIFFCompressType Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Setting As Integer) As Integer
     Declare Auto Function DTWAIN_SetTIFFInvert Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Setting As Integer) As Integer
@@ -1981,7 +2064,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_ArrayInsertAtStringW Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByVal pVal As String) As Integer
     Declare Unicode Function DTWAIN_ArraySetAtStringW Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal nWhere As Integer, ByVal pStr As String) As Integer
     Declare Unicode Function DTWAIN_ExecuteOCRW Lib "DTWAIN32U.DLL" (ByVal Engine As Integer, ByVal szFileName As String, ByVal nStartPage As Integer, ByVal nEndPage As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetAcquireArea2StringW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef Unit As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetAcquireArea2StringW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal left As String, ByVal top As String, ByVal right As String, ByVal bottom As String, ByRef lpUnit As Integer) As Integer
     Declare Unicode Function DTWAIN_GetAppInfoW Lib "DTWAIN32U.DLL" (ByVal szVerStr As String, ByVal szManu As String, ByVal szProdFam As String, ByVal szProdName As String) As Integer
     Declare Unicode Function DTWAIN_GetAuthorW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szAuthor As String) As Integer
     Declare Unicode Function DTWAIN_GetBrightnessStringW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Contrast As String) As Integer
@@ -2089,5 +2172,11 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_StartTwainSession Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Ansi Function DTWAIN_StartTwainSessionA Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Unicode Function DTWAIN_StartTwainSessionW Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
+    Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "DTWAIN32U.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetShortVersionString Lib "DTWAIN32U.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "DTWAIN32U.DLL" (ByVal lpszVer As String, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetShortVersionString Lib "DTWAIN32U.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "DTWAIN32U.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "DTWAIN32U.DLL" (ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
     
 End Class

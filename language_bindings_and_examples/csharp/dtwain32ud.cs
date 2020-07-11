@@ -4018,6 +4018,9 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
         public static extern int DTWAIN_SetThresholdStringW(int Source,[MarshalAs(UnmanagedType.LPWStr)] string Threshold,int bSetBitDepthReduction);
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetTwainDialogFont(System.IntPtr hFont);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]

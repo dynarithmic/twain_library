@@ -959,7 +959,6 @@
     <ClInclude Include=".\h\ctldevnt.h" />
     <ClInclude Include=".\h\ctldib.h" />
     <ClInclude Include=".\h\ctlenum.h" />
-    <ClInclude Include=".\h\ctlfunc.h" />
     <ClInclude Include=".\h\ctliface.h" />
     <ClInclude Include=".\h\ctlobstr.h" />
     <ClInclude Include=".\h\ctlobtyp.h" />
