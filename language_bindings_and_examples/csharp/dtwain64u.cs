@@ -4021,6 +4021,10 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetTwainDialogFont(System.IntPtr hFont);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
         public static extern int DTWAIN_SetTwainDSM(int DSMType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,

@@ -1415,8 +1415,8 @@ void CTL_ITwainSource::GetImageInfoEx(DTWAINImageInfoEx &ImageInfoEx) const
 
 void CTL_ITwainSource::ProcessMultipageFile()
 {
-    if ( m_DuplexFileData.first.size() > 0 ||
-        m_DuplexFileData.second.size() > 0)
+    if ( !m_DuplexFileData.first.empty() ||
+         !m_DuplexFileData.second.empty() )
     {
         ImageXferFileWriter FileWriter(NULL, m_pSession ,this);
         FileWriter.CloseMultiPageDibFile(GetMutiPageScanMode() != DTWAIN_FILESAVE_MANUALSAVE);

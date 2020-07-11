@@ -29,6 +29,14 @@
 using namespace std;
 using namespace dynarithmic;
 
+LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font)
+{
+	LOG_FUNC_ENTRY_PARAMS((font))
+	CTL_TwainDLLHandle::s_DialogFont = font;
+	LOG_FUNC_EXIT_PARAMS(1)
+	CATCH_BLOCK(0)
+}
+
 static LRESULT CALLBACK DisplayTwainDlgProc(HWND, UINT, WPARAM, LPARAM);
 static CTL_StringType GetTwainDlgTextFromResource(int nID, size_t& status);
 static void DisplayLocalString(HWND hWnd, int nID, int ResID);
@@ -145,7 +153,7 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
         CTL_ITwainSource *pRealSource = (CTL_ITwainSource *)pSource;
     DTWAIN_SOURCE pDead = NULL;
 
-    DTWAIN_ARRAY pDTWAINArray = 0;// = DTWAIN_ArrayCreate( DLLHandle, CTL_EnumeratorSourceType );
+    DTWAIN_ARRAY pDTWAINArray = 0;
     bool bFound = false;
 
     if (!DTWAIN_EnumSources(&pDTWAINArray))
@@ -316,6 +324,12 @@ CTL_StringType GetTwainDlgTextFromResource(int nID, size_t& status)
 static bool ByCX(const SIZE& sz1, const SIZE& sz2)
 { return sz1.cx > sz2.cx; }
 
+static BOOL CALLBACK ChildEnumFontProc(HWND hWnd, LPARAM lParam)
+{
+	SendMessage(hWnd, WM_SETFONT, (WPARAM)lParam, 0);
+	return TRUE;
+}
+
 LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static SelectStruct *pS;
@@ -324,6 +338,12 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
     {
     case WM_INITDIALOG:
     {
+			if (CTL_TwainDLLHandle::s_DialogFont)
+			{
+				SendMessage(hWnd, WM_SETFONT, (WPARAM)CTL_TwainDLLHandle::s_DialogFont, 0);
+				EnumChildWindows(hWnd, ChildEnumFontProc, (LPARAM)CTL_TwainDLLHandle::s_DialogFont);
+			}
+
         HWND lstSources;
         CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog...\n"));
         pS = (SelectStruct*)lParam;

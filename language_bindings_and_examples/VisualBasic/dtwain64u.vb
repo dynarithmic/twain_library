@@ -2035,6 +2035,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetThresholdString Lib "DTWAIN64U.DLL" (ByVal Source As Long, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
     Declare Auto Function DTWAIN_SetThresholdStringA Lib "DTWAIN64U.DLL" (ByVal Source As Long, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
     Declare Auto Function DTWAIN_SetThresholdStringW Lib "DTWAIN64U.DLL" (ByVal Source As Long, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
+    Declare Auto Function DTWAIN_SetTwainDialogFont Lib "DTWAIN64U.DLL" (ByVal hFont As Long) As Integer
     Declare Auto Function DTWAIN_SetTwainDSM Lib "DTWAIN64U.DLL" (ByVal DSMType As Long) As Integer
     Declare Auto Function DTWAIN_SetTwainLog Lib "DTWAIN64U.DLL" (ByVal LogFlags As Long, ByVal lpszLogFile As String) As Integer
     Declare Auto Function DTWAIN_SetTwainMode Lib "DTWAIN64U.DLL" (ByVal lAcquireMode As Long) As Integer

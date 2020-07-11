@@ -1,5 +1,5 @@
 {* This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          *}
-{* Copyright (c) 2002-2019 Dynarithmic Software.                                         *}
+{* Copyright (c) 2002-2020 Dynarithmic Software.                                         *}
 {*                                                                                   *}
 {* Licensed under the Apache License, Version 2.0 (the "License");                       *}
 {* you may not use this file except in compliance with the License.                      *}
@@ -2229,6 +2229,7 @@ const
   function DTWAIN_SetThresholdString(Source:DTWAIN_SOURCE;Threshold:LPCSTR;bSetBitDepthReduction:DTWAIN_BOOL):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetThresholdString';
   function DTWAIN_SetThresholdStringA(Source:DTWAIN_SOURCE;Threshold:PAnsiChar;bSetBitDepthReduction:DTWAIN_BOOL):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetThresholdStringA';
   function DTWAIN_SetThresholdStringW(Source:DTWAIN_SOURCE;Threshold:PWideChar;bSetBitDepthReduction:DTWAIN_BOOL):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetThresholdStringW';
+  function DTWAIN_SetTwainDialogFont(HFont:DWORD):LONG;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetTwainDialogFont';
   function DTWAIN_SetTwainDSM(DSMType:DWORD):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetTwainDSM';
   function DTWAIN_SetTwainLog(LogFlags:DWORD;lpszLogFile:LPCSTR):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetTwainLog';
   function DTWAIN_SetTwainLogA(LogFlags:DWORD;lpszLogFile:PAnsiChar):DTWAIN_BOOL;stdcall; external 'DTWAIN32D.DLL' name 'DTWAIN_SetTwainLogA';

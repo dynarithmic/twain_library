@@ -151,6 +151,7 @@ DTWAIN_LOGGER_PROCW     CTL_TwainDLLHandle::s_pLoggerCallbackW = nullptr;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserData = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataA = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataW = 0;
+HFONT					CTL_TwainDLLHandle::s_DialogFont = NULL;
 CTL_TwainDLLHandle::CTL_PDFMediaMap CTL_TwainDLLHandle::s_PDFMediaMap;
 
 bool                    CTL_TwainDLLHandle::s_TwainCallbackSet = false;

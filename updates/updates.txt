@@ -1,5 +1,15 @@
 DTWAIN Version changes
 
+5.1.0.9
+- Added DTWAIN_SetTwainDialogFont() to adjust font used in TWAIN Select Source dialog (only is available
+  when calling DTWAIN_SelectSource2() function)  Usage:
+
+	DTWAIN_SetTwainDialogFont(HFONT font)
+
+  where HFONT is a handle to a Windows HFONT.  If font is 0, the default font (MS Sans Serif) is used.
+
+- Added test for CAP_SHEETCOUNT to control the number of pages that will be acquired.
+
 5.1.0.8
 - Removed initial slow TWAIN capability retrieval and replaced with fast capability retrieval.
 - Fixed issue with CAP_FEEDERLOADED being considered an unsupported capability for some TWAIN devices.

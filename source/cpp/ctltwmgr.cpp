@@ -1761,6 +1761,18 @@ int CTL_TwainAppMgr::SetTransferCount( const CTL_ITwainSource *pSource,
         strm << BOOST_FORMAT(_T("\nSetting Transfer Count.  Transfer Count = %1%\n")) % nCount;
         WriteLogInfo(strm.str());
     }
+
+	// If the device supports the CAP_SHEETCOUNT capability, use that to set the number of 
+	// pages to acquire
+	if (IsCapabilitySupported(pSource, CAP_SHEETCOUNT))
+	{
+		SetOneTwainCapValue(pSource, -1, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
+		if ( nCount == -1 )
+			SetOneTwainCapValue(pSource, 0, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
+		else
+			SetOneTwainCapValue(pSource, nCount, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
+	}
+	else
     SetOneTwainCapValue( pSource, nCount, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
     return 1;
 }

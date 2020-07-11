@@ -655,6 +655,7 @@ namespace dynarithmic
             static int                      s_TwainDSMSearchOrder;
 			static CTL_StringType			s_TwainDSMSearchOrderStr;
 			static bool						s_multipleThreads;
+			static HFONT					s_DialogFont;
 
             static std::unordered_set<HWND>   s_appWindowsToDisable;
             bool                            m_bOpenSourceOnSelect;
