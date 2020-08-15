@@ -62,7 +62,7 @@ If these files are not found, you will receive the following error when running 
 
 ![following error when running your application](/images/resource_error.jpg)
 
-In addition, there are optional string resource files available that.  Here are a list of those files:
+In addition, there are optional string resource files available.  Here are a list of those files:
 	
 	twainresourcestrings_dutch.txt 	 	Dutch resources
 	twainresourcestrings_french.txt  	French resources
