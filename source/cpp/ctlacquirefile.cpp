@@ -28,8 +28,6 @@
 using namespace std;
 using namespace dynarithmic;
 
-static bool AcquireFileHelper(SourceAcquireOptions& opts);
-
 DTWAIN_BOOL       DLLENTRY_DEF DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source,
                                                     DTWAIN_ARRAY aFileNames,
                                                     LONG     lFileType,
@@ -66,7 +64,7 @@ DTWAIN_BOOL       DLLENTRY_DEF DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source,
                 setFileList(aFileNames).setPixelType(PixelType).setMaxPages(lMaxPages).setShowUI(bShowUI ? true : false).
                 setRemainOpen(!(bCloseSource ? true : false));
 
-    bRetval = AcquireFileHelper(opts);
+    bRetval = AcquireFileHelper(opts, ACQUIREFILE);
     if (pStatus)
         *pStatus = opts.getStatus();
     LOG_FUNC_EXIT_PARAMS(bRetval)
@@ -88,7 +86,7 @@ DTWAIN_BOOL       DLLENTRY_DEF DTWAIN_AcquireFile(DTWAIN_SOURCE Source,
     lFileFlags &= ~DTWAIN_USELIST;
     SourceAcquireOptions opts = SourceAcquireOptions().setHandle(GetDTWAINHandle_Internal()).setSource(Source).setFileName(lpszFile).setFileType(lFileType).setFileFlags(lFileFlags).setPixelType(PixelType).
         setMaxPages(lMaxPages).setShowUI(bShowUI ? true : false).setRemainOpen(!(bCloseSource ? true : false)).setAcquireType(ACQUIREFILE);
-    bool bRetval = AcquireFileHelper(opts);
+    bool bRetval = AcquireFileHelper(opts, ACQUIREFILE);
     if (pStatus)
         *pStatus = opts.getStatus();
     LOG_FUNC_EXIT_PARAMS(bRetval)
@@ -118,13 +116,14 @@ DTWAIN_ACQUIRE dynarithmic::DTWAIN_LLAcquireFile(SourceAcquireOptions& opts)
     DTWAIN_ARRAY FileList = opts.getFileList();
     if (FileList)
         opts.setFileFlags(opts.getFileFlags() | DTWAIN_USELIST);
+	if ( opts.getAcquireType() != TWAINAcquireType_AudioFile)
     opts.setActualAcquireType(TWAINAcquireType_File);
     DTWAIN_ACQUIRE Ret = LLAcquireImage(opts);
     LOG_FUNC_EXIT_PARAMS(Ret)
     CATCH_BLOCK(DTWAIN_FAILURE1)
 }
 
-static bool AcquireFileHelper(SourceAcquireOptions& opts)
+bool dynarithmic::AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType)
 {
     LOG_FUNC_ENTRY_PARAMS((opts))
     DTWAIN_ARRAY aDibs = 0;
@@ -132,7 +131,7 @@ static bool AcquireFileHelper(SourceAcquireOptions& opts)
 
     // Check if file type requires a loaded DLL
     DumpArrayContents(opts.getFileList(), 0);
-    opts.setAcquireType(ACQUIREFILE);
+    opts.setAcquireType(AcquireType);
 	opts.setDiscardDibs(true); // make sure we remove acquired dibs for file handling
     aDibs = SourceAcquire(opts);
     if (opts.getStatus() < 0 && !aDibs)
@@ -144,12 +143,15 @@ static bool AcquireFileHelper(SourceAcquireOptions& opts)
     if (aDibs)
     {
         bRetval = TRUE;
+        if (DTWAIN_GetTwainMode() == DTWAIN_MODAL)
+        {
         auto vDibs = EnumeratorVectorPtr<LPVOID>(aDibs);
         if (vDibs)
             for_each(begin(*vDibs), end(*vDibs), EnumeratorFunctionImpl::EnumeratorDestroy);
         pSource->ResetAcquisitionAttempts(nullptr);
         if (EnumeratorFunctionImpl::EnumeratorIsValid(aDibs))
             EnumeratorFunctionImpl::EnumeratorDestroy(aDibs);
+        }
     }
 
     if (DTWAIN_GetTwainMode() == DTWAIN_MODAL)

@@ -69,7 +69,7 @@ LONG DLLENTRY_DEF DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source)
         LOG_FUNC_EXIT_PARAMS(-1)
     LONG retval = pSource->GetBlankPageAutoDetect();
     LOG_FUNC_EXIT_PARAMS(retval)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsBlankPageDetectionOn(DTWAIN_SOURCE Source)
@@ -95,7 +95,7 @@ LONG DLLENTRY_DEF DTWAIN_IsDIBBlankString(HANDLE hDib, LPCTSTR threshold)
     DTWAIN_FLOAT val = StringWrapper::ToDouble( threshold );
     LONG retval = DTWAIN_IsDIBBlank(hDib, val);
     LOG_FUNC_EXIT_PARAMS(retval)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }
 
 LONG DLLENTRY_DEF DTWAIN_IsDIBBlank(HANDLE hDib, DTWAIN_FLOAT threshold)
@@ -103,5 +103,5 @@ LONG DLLENTRY_DEF DTWAIN_IsDIBBlank(HANDLE hDib, DTWAIN_FLOAT threshold)
     LOG_FUNC_ENTRY_PARAMS((hDib, threshold))
     LONG retval = CDibInterface::IsBlankDIB(hDib, threshold/100.0)?1:0;
     LOG_FUNC_EXIT_PARAMS(retval)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(0)
 }

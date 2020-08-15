@@ -874,3 +874,8 @@ DTWAIN_GetLibraryPath							  @30041
 DTWAIN_GetLibraryPathA							  @30042
 DTWAIN_GetLibraryPathW							  @30043
 DTWAIN_SetTwainDialogFont						  @30044
+DTWAIN_AcquireAudioNative						  @30050
+DTWAIN_AcquireAudioFile							  @30051
+DTWAIN_AcquireAudioFileA						  @30052
+DTWAIN_AcquireAudioFileW						  @30053
+DTWAIN_AcquireAudioNativeEx						  @30054

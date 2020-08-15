@@ -73,6 +73,10 @@ namespace dynarithmic
             bool    IsMSGGetType() const;
             bool    IsMSGSetType() const;
 
+			TW_UINT32 GetDG() const { return std::get<DGPOS_>(m_TwainTripletArg); }
+			TW_UINT16 GetDAT() const { return std::get<DATPOS_>(m_TwainTripletArg); }
+			TW_UINT16 GetMSG() const { return std::get<MSGPOS_>(m_TwainTripletArg); }
+
         protected:
             CTL_ITwainSession* GetSessionPtr()
             { return m_pSession; }

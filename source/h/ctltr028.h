@@ -48,5 +48,11 @@ namespace dynarithmic
             TW_SETUPFILEXFER        m_SetupFileXfer;
 
     };
+
+	class CTL_AudioFileXferTriplet : public CTL_TwainTriplet
+	{
+		public:
+			CTL_AudioFileXferTriplet(CTL_ITwainSession *pSession, CTL_ITwainSource* pSource);
+	};
 }
 #endif

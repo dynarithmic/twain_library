@@ -263,6 +263,8 @@ namespace dynarithmic
     enum CTL_TwainAcquireEnum {     TWAINAcquireType_Native = TWSX_NATIVE,
                                     TWAINAcquireType_File   = TWSX_FILE,
                                     TWAINAcquireType_Buffer   = TWSX_MEMORY,
+									TWAINAcquireType_AudioNative = 0xFA,
+									TWAINAcquireType_AudioFile = 0xFB,
                                     TWAINAcquireType_FileUsingNative = 0xFD,
                                     TWAINAcquireType_Clipboard  =      0xFE,
                                     TWAINAcquireType_Invalid

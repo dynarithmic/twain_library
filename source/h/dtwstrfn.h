@@ -24,6 +24,9 @@
 // ANSI and Wide versions of the DTWAIN functions that take 1 or more string parameters
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileA(DTWAIN_SOURCE Source, LPCSTR lpszFile, LONG lFileType, LONG lFileFlags, LONG PixelType, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileType, LONG lFileFlags, LONG PixelType, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileA(DTWAIN_SOURCE Source, LPCSTR lpszFile, LONG lFileFlags, LONG lNumClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileFlags, LONG lNumClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppendA(LPCSTR szFile);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppendW(LPCWSTR szFile);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, LONG strokeWidth, LONG Flags);
@@ -435,5 +438,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDoubleFeedDetectLengthString(DTWAIN_SOURCE So
 LONG        DLLENTRY_DEF DTWAIN_GetTwainCountryValue(DTWAIN_CCHARPTRTYPE country);
 BOOL        DLLENTRY_DEF DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
 LONG        DLLENTRY_DEF DTWAIN_GetTwainLanguageValue(DTWAIN_CCHARPTRTYPE szName);
+
+DTWAIN_BOOL DLLENTRY_DEF  DTWAIN_AcquireAudioFile(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpszFile, LONG lFileFlags, LONG lMaxClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource,LPLONG pStatus);
+
 void DLLENTRY_DEF DTWAIN_X(DTWAIN_CCHARPTRTYPE s);
 #endif

@@ -102,6 +102,7 @@ TW_UINT16 CTL_ExtImageInfoTriplet::s_AllAttr[] = {
         DTWAIN_EI_MAGDATALENGTH          ,
         DTWAIN_EI_PAPERCOUNT             ,
         DTWAIN_EI_PRINTERTEXT            ,
+        DTWAIN_EI_TWAINDIRECTMETADATA    ,   
         0};
 
 

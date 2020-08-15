@@ -357,6 +357,9 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_SETCALLBACK64INIT As Integer  = 1151
     Public Const DTWAIN_TN_FILENAMECHANGING As Integer  = 1160
     Public Const DTWAIN_TN_FILENAMECHANGED As Integer  = 1161
+    Public Const DTWAIN_TN_PROCESSEDAUDIOFINAL As Integer =	1180
+    Public Const DTWAIN_TN_PROCESSAUDIOFINALACCEPTED As Integer = 1181
+    Public Const DTWAIN_TN_PROCESSEDAUDIOFILE As Integer =	1182
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer  = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer  = 2
     Public Const DTWAIN_MODAL As Integer  = 0
@@ -1443,6 +1446,7 @@ Class DTWAINAPI
     Public Delegate Function DTWAINLoggerCallback(ByVal sMessage As String) As Integer
 
     Declare Ansi Function DTWAIN_AcquireFileA Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileType As Long, ByVal lFileFlags As Long, ByVal PixelType As Long, ByVal lMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Ansi Function DTWAIN_AcquireAudioFileA Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Ansi Function DTWAIN_AddPDFTextA Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal szText As String, ByVal xPos As Long, ByVal yPos As Long, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Long, ByVal renderMode As Long, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Long, ByVal Flags As Long) As Integer
     Declare Ansi Function DTWAIN_ArrayAddStringA Lib "DTWAIN64D.DLL" (ByVal pArray As Long, ByVal Val As String) As Integer
     Declare Ansi Function DTWAIN_ArrayAddStringNA Lib "DTWAIN64D.DLL" (ByVal pArray As Long, ByVal Val As String, ByVal num As Long) As Integer
@@ -1523,13 +1527,15 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_SysInitializeLibEx2A Lib "DTWAIN64D.DLL" (ByVal hInstance As Long, ByVal szINIPath As String, ByVal szImageDLLPath As String, ByVal szLangResourcePath As String) As Long
     Declare Ansi Function DTWAIN_SysInitializeLibExA Lib "DTWAIN64D.DLL" (ByVal hInstance As Long, ByVal szINIPath As String) As Long
     Declare Ansi Function DTWAIN_TwainSaveA Lib "DTWAIN64D.DLL" (ByVal cmd As String) As Integer
-    Declare Ansi Sub DTWAIN_XA Lib "DTWAIN64D.DLL" (ByVal s As String) 
     Declare Auto Function DTWAIN_AcquireBuffered Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal PixelType As Long, ByVal nMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Long
     Declare Auto Function DTWAIN_AcquireBufferedEx Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal PixelType As Long, ByVal nMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Long, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireFile Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileType As Long, ByVal lFileFlags As Long, ByVal PixelType As Long, ByVal lMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioFile Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireFileEx Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal aFileNames As Long, ByVal lFileType As Long, ByVal lFileFlags As Long, ByVal PixelType As Long, ByVal lMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireNative Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal PixelType As Long, ByVal nMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Long
     Declare Auto Function DTWAIN_AcquireNativeEx Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal PixelType As Long, ByVal nMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Long, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioNative Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioNativeEx Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireToClipboard Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal PixelType As Long, ByVal nMaxPages As Long, ByVal nTransferMode As Long, ByVal bDiscardDibs As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Long
     Declare Auto Function DTWAIN_AddPDFText Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal szText As String, ByVal xPos As Long, ByVal yPos As Long, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Long, ByVal renderMode As Long, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Long, ByVal Flags As Long) As Integer
     Declare Auto Function DTWAIN_AppHandlesExceptions Lib "DTWAIN64D.DLL" (ByVal bSet As Integer) As Integer
@@ -2056,6 +2062,8 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_TwainSave Lib "DTWAIN64D.DLL" (ByVal cmd As String) As Integer
     Declare Auto Sub DTWAIN_X Lib "DTWAIN64D.DLL" (ByVal s As String) 
     Declare Unicode Function DTWAIN_AcquireFileW Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileType As Long, ByVal lFileFlags As Long, ByVal PixelType As Long, ByVal lMaxPages As Long, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Unicode Function DTWAIN_AcquireAudioFileW Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+
     Declare Unicode Function DTWAIN_AddPDFTextW Lib "DTWAIN64D.DLL" (ByVal Source As Long, ByVal szText As String, ByVal xPos As Long, ByVal yPos As Long, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Long, ByVal renderMode As Long, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Long, ByVal Flags As Long) As Integer
     Declare Unicode Function DTWAIN_ArrayAddStringNW Lib "DTWAIN64D.DLL" (ByVal pArray As Long, ByVal Val As String, ByVal num As Long) As Integer
     Declare Unicode Function DTWAIN_ArrayAddStringW Lib "DTWAIN64D.DLL" (ByVal pArray As Long, ByVal Val As String) As Integer

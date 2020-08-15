@@ -143,7 +143,7 @@ int CTL_TiffIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhF
             return DTWAIN_ERR_INVALID_BITDEPTH;
     }
 
-    if ( !IsValidBitDepth(m_nFormat, m_pDib->GetBitsPerPixel()) )
+    if (bNotLastFile && !IsValidBitDepth(m_nFormat, m_pDib->GetBitsPerPixel()) )
         return DTWAIN_ERR_INVALID_BITDEPTH;
 
     CTIFFImageHandler TIFFHandler(nLibTiff, m_ImageInfoEx);

@@ -127,7 +127,7 @@ DTWAIN_ARRAY  dynarithmic::SourceAcquire(SourceAcquireOptions& opts)
     // the default bit depth.  The user should use DTWAIN_SetPixelType and DTWAIN_SetBitDepth before
     // calling the DTWAIN_Acquirexxx() function to override this behavior.
     LONG PixelType = opts.getPixelType();
-    if (PixelType != DTWAIN_PT_DEFAULT)
+    if (PixelType != DTWAIN_PT_DEFAULT && opts.getAcquireType() != ACQUIREAUDIONATIVE)
     {
         CTL_StringType sBuf;
         CTL_TwainAppMgr::WriteLogInfo(_T("Verifying Current Pixel Type ...\n"));
@@ -313,6 +313,26 @@ DTWAIN_ARRAY dynarithmic::SourceAcquireWorkerThread(SourceAcquireOptions& opts)
                 LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
             }
             break;
+    	
+		case ACQUIREAUDIONATIVE:
+		case ACQUIREAUDIONATIVEEX:
+			if (DTWAIN_LLAcquireAudioNative(opts) == -1L)
+			{
+				opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
+				LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
+			}
+			if (opts.getAcquireType() == ACQUIREAUDIONATIVEEX)
+				pSource->SetUserAcquisitionArray(opts.getUserArray());
+			break;
+    	
+		case ACQUIREAUDIOFILE:
+			if (DTWAIN_LLAcquireAudioFile(opts) == -1L)
+			{
+				opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
+				LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
+			}
+			break;
+
     }
 
     if (Array != NULL)  // This is an immediate return

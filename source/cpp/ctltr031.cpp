@@ -136,7 +136,6 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
     bool bPageDiscarded = false;
     bool    bProcessDibEx = true;
     bool    bKeepPage = true;
-	bool	bProcessedOne = false;
     size_t nLastDib;
 
     // Check if a temp buffer was allocated successfully
@@ -366,13 +365,13 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
                         {
                             HANDLE hRetDib =
                                 (*CTL_TwainDLLHandle::s_pDibUpdateProc)
-                                        (pSource, (int)nCurImage, m_hDib);
-                            if ( hRetDib && (hRetDib != m_hDib))
+                                        (pSource, (int)nCurImage, m_hDataHandle);
+                            if ( hRetDib && (hRetDib != m_hDataHandle))
                             {
                                 // Application changed DIB.  So make this the current dib
-                                ImageMemoryHandler::GlobalFree( m_hDib );
-                                m_hDib = hRetDib;
-                                pSource->SetDibHandle( m_hDib, nLastDib );
+                                ImageMemoryHandler::GlobalFree( m_hDataHandle );
+                                m_hDataHandle = hRetDib;
+                                pSource->SetDibHandle( m_hDataHandle, nLastDib );
                                 CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL,DTWAIN_TN_APPUPDATEDDIB, (LPARAM)pSource);
                             }
                         }
@@ -416,7 +415,6 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
                             bInClip = false;
                     }
                     else
-
                     if ( pSource->GetAcquireType() == TWAINAcquireType_FileUsingNative)
                     {
                         // This may be a compressed image instead of a DIB.  Use Raw IO handler to write this file
@@ -449,14 +447,11 @@ TW_UINT16 CTL_ImageMemXferTriplet::Execute()
                             if ( bIsMultiPageFile || pSource->IsMultiPageModeSaveAtEnd())
                             {
                                 // This is the fist page of the acquisition
-								if (nLastDib == 0 || !bProcessedOne ||
-                                    (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
+								if (nLastDib == 0 || (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
                                     nMultiStage = DIB_MULTI_FIRST;
                                 else
                                 // This is a subsequent page of the acquisition
                                     nMultiStage = DIB_MULTI_NEXT;
-
-								bProcessedOne = true;
 
                                 // Now check if this we are in manual duplex mode
                                 if ( pSource->IsManualDuplexModeOn() ||

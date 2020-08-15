@@ -691,17 +691,17 @@ DTWAIN_BOOL dynarithmic::DTWAIN_GetDeviceCapByString(DTWAIN_SOURCE Source, LPTST
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution)
 {
     LOG_FUNC_ENTRY_PARAMS((Source, Resolution))
-    LONG lCap = DTWAIN_CV_ICAPXRESOLUTION;
+	LONG lCap = 0;
     if ( DTWAIN_IsCapSupported( Source, DTWAIN_CV_ICAPXRESOLUTION))
         lCap = DTWAIN_CV_ICAPXRESOLUTION;
     else
     if ( DTWAIN_IsCapSupported( Source, DTWAIN_CV_ICAPXNATIVERESOLUTION))
          lCap = DTWAIN_CV_ICAPXNATIVERESOLUTION;
     else
-        LOG_FUNC_EXIT_PARAMS(false)
+        LOG_FUNC_EXIT_PARAMS(FALSE)
     DTWAIN_BOOL bRet = GetDoubleCap( Source, lCap, Resolution);
     LOG_FUNC_EXIT_PARAMS(bRet)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(FALSE)
 }
 
 

@@ -70,6 +70,28 @@ CTL_SetupFileXferTriplet::CTL_SetupFileXferTriplet(CTL_ITwainSession *pSession,
     }
 }
 
+CTL_AudioFileXferTriplet::CTL_AudioFileXferTriplet(CTL_ITwainSession *pSession, CTL_ITwainSource* pSource) : CTL_TwainTriplet()
+{
+	SetSessionPtr(pSession);
+	SetSourcePtr(pSource);
+	// Get the app manager's AppID
+	const CTL_TwainAppMgrPtr pMgr = CTL_TwainAppMgr::GetInstance();
+
+	if (pMgr && pMgr->IsValidTwainSession(pSession))
+	{
+		if (pSource)
+		{
+			Init(pSession->GetAppIDPtr(),
+				pSource->GetSourceIDPtr(),
+				DG_CONTROL,
+				DAT_AUDIOFILEXFER,
+				MSG_GET,
+				NULL);
+			SetAlive(true);
+		}
+	}
+}
+
 struct CapGetter
 {
     CTL_ITwainSource *m_pSource;
