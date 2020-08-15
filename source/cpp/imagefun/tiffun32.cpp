@@ -138,7 +138,9 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
 
     if (m_MultiPageStruct.Stage == 0)
     {
-        auto retVal2 = im.save(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), compressionFlags[compression]);
+		int flagsValue = (int)(m_ImageInfoEx.nJpegQuality << 24) | (compressionFlags[compression]);
+		auto retVal2 = im.save(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), flagsValue);
+//								compressionFlags[compression]);
         if (retVal2 == 1)
             return DTWAIN_NO_ERROR;
         return DTWAIN_ERR_FILEWRITE;

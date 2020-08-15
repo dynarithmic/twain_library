@@ -357,6 +357,9 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_SETCALLBACK64INIT As Integer  = 1151
     Public Const DTWAIN_TN_FILENAMECHANGING As Integer  = 1160
     Public Const DTWAIN_TN_FILENAMECHANGED As Integer  = 1161
+    Public Const DTWAIN_TN_PROCESSEDAUDIOFINAL As Integer =	1180
+    Public Const DTWAIN_TN_PROCESSAUDIOFINALACCEPTED As Integer = 1181
+    Public Const DTWAIN_TN_PROCESSEDAUDIOFILE As Integer =	1182
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer  = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer  = 2
     Public Const DTWAIN_MODAL As Integer  = 0
@@ -1443,6 +1446,7 @@ Class DTWAINAPI
     Public Delegate Function DTWAINLoggerCallback(ByVal sMessage As String) As Integer
 
     Declare Ansi Function DTWAIN_AcquireFileA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileType As Integer, ByVal lFileFlags As Integer, ByVal PixelType As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Ansi Function DTWAIN_AcquireAudioFileA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Ansi Function DTWAIN_AddPDFTextA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szText As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Integer, ByVal renderMode As Integer, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Integer, ByVal Flags As Integer) As Integer
     Declare Ansi Function DTWAIN_ArrayAddStringA Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal Val As String) As Integer
     Declare Ansi Function DTWAIN_ArrayAddStringNA Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal Val As String, ByVal num As Integer) As Integer
@@ -1523,13 +1527,15 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_SysInitializeLibEx2A Lib "DTWAIN32U.DLL" (ByVal hInstance As Integer, ByVal szINIPath As String, ByVal szImageDLLPath As String, ByVal szLangResourcePath As String) As Integer
     Declare Ansi Function DTWAIN_SysInitializeLibExA Lib "DTWAIN32U.DLL" (ByVal hInstance As Integer, ByVal szINIPath As String) As Integer
     Declare Ansi Function DTWAIN_TwainSaveA Lib "DTWAIN32U.DLL" (ByVal cmd As String) As Integer
-    Declare Ansi Sub DTWAIN_XA Lib "DTWAIN32U.DLL" (ByVal s As String) 
     Declare Auto Function DTWAIN_AcquireBuffered Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal PixelType As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireBufferedEx Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal PixelType As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireFile Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileType As Integer, ByVal lFileFlags As Integer, ByVal PixelType As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioFile Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireFileEx Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal aFileNames As Integer, ByVal lFileType As Integer, ByVal lFileFlags As Integer, ByVal PixelType As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireNative Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal PixelType As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireNativeEx Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal PixelType As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Integer, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioNative Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Auto Function DTWAIN_AcquireAudioNativeEx Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal nMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByVal Acquisitions As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AcquireToClipboard Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal PixelType As Integer, ByVal nMaxPages As Integer, ByVal nTransferMode As Integer, ByVal bDiscardDibs As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_AddPDFText Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szText As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Integer, ByVal renderMode As Integer, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Integer, ByVal Flags As Integer) As Integer
     Declare Auto Function DTWAIN_AppHandlesExceptions Lib "DTWAIN32U.DLL" (ByVal bSet As Integer) As Integer
@@ -2035,6 +2041,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetThresholdString Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
     Declare Auto Function DTWAIN_SetThresholdStringA Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
     Declare Auto Function DTWAIN_SetThresholdStringW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal Threshold As String, ByVal bSetBitDepthReduction As Integer) As Integer
+    Declare Auto Function DTWAIN_SetTwainDialogFont Lib "DTWAIN32U.DLL" (ByVal hFont As Integer) As Integer
     Declare Auto Function DTWAIN_SetTwainDSM Lib "DTWAIN32U.DLL" (ByVal DSMType As Integer) As Integer
     Declare Auto Function DTWAIN_SetTwainLog Lib "DTWAIN32U.DLL" (ByVal LogFlags As Integer, ByVal lpszLogFile As String) As Integer
     Declare Auto Function DTWAIN_SetTwainMode Lib "DTWAIN32U.DLL" (ByVal lAcquireMode As Integer) As Integer
@@ -2055,6 +2062,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_TwainSave Lib "DTWAIN32U.DLL" (ByVal cmd As String) As Integer
     Declare Auto Sub DTWAIN_X Lib "DTWAIN32U.DLL" (ByVal s As String) 
     Declare Unicode Function DTWAIN_AcquireFileW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileType As Integer, ByVal lFileFlags As Integer, ByVal PixelType As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Declare Unicode Function DTWAIN_AcquireAudioFileW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal lpszFile As String, ByVal lFileFlags As Integer, ByVal lMaxPages As Integer, ByVal bShowUI As Integer, ByVal bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Declare Unicode Function DTWAIN_AddPDFTextW Lib "DTWAIN32U.DLL" (ByVal Source As Integer, ByVal szText As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal fontName As String, ByVal fontSize As Double, ByVal colorRGB As Integer, ByVal renderMode As Integer, ByVal scaling As Double, ByVal charSpacing As Double, ByVal wordSpacing As Double, ByVal strokeWidth As Integer, ByVal Flags As Integer) As Integer
     Declare Unicode Function DTWAIN_ArrayAddStringNW Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal Val As String, ByVal num As Integer) As Integer
     Declare Unicode Function DTWAIN_ArrayAddStringW Lib "DTWAIN32U.DLL" (ByVal pArray As Integer, ByVal Val As String) As Integer
@@ -2168,7 +2176,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetSourceProductNameW Lib "DTWAIN32U.DLL" (ByVal nSource As Integer, ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
     Declare Unicode Function DTWAIN_GetSourceVersionInfoW Lib "DTWAIN32U.DLL" (ByVal nSource As Integer, ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
     Declare Unicode Function DTWAIN_GetOCRErrorStringW Lib "DTWAIN32U.DLL" (ByVal nEngine As Integer, ByVal nError As Integer, ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetDSMFullNameW Lib "DTWAIN32U.DLL" (ByVal DSMType As Integer, ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer, ByRef pStatus As Integer) As Integer    
+    Declare Unicode Function DTWAIN_GetDSMFullNameW Lib "DTWAIN32U.DLL" (ByVal DSMType As Integer, ByVal szValue As System.IntPtr, ByVal nMaxLen As Integer, ByRef pStatus As Integer) As Integer
     Declare Auto Function DTWAIN_StartTwainSession Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Ansi Function DTWAIN_StartTwainSessionA Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer
     Declare Unicode Function DTWAIN_StartTwainSessionW Lib "DTWAIN32U.DLL" (ByVal hWndMsg As IntPtr, ByVal szValue As System.IntPtr) As Integer

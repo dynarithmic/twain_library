@@ -480,6 +480,11 @@
 #define DTWAIN_TN_FILENAMECHANGING         1160
 #define DTWAIN_TN_FILENAMECHANGED          1161
 
+/* Sent when an audio file has been transferred */
+#define DTWAIN_TN_PROCESSEDAUDIOFINAL		1180
+#define DTWAIN_TN_PROCESSAUDIOFINALACCEPTED 1181
+#define DTWAIN_TN_PROCESSEDAUDIOFILE		1182
+
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
 #define DTWAIN_PDFOCR_CLEANTEXT2            2
@@ -1083,6 +1088,7 @@
 #define DTWAIN_EI_MAGDATALENGTH          0x1248
 #define DTWAIN_EI_PAPERCOUNT             0x1249
 #define DTWAIN_EI_PRINTERTEXT            0x124A
+#define DTWAIN_EI_TWAINDIRECTMETADATA    0x124B
 
 /* DTWAIN Data Source Error logging functions */
 #define DTWAIN_LOG_DECODE_SOURCE      1

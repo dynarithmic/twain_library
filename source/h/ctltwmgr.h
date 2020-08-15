@@ -363,8 +363,12 @@ namespace dynarithmic
             static int  NativeTransfer( CTL_ITwainSession *pSession,
                                         CTL_ITwainSource  *pSource);
 
-            static int  FileTransfer( CTL_ITwainSession *pSession,
+			static int AudioNativeTransfer(CTL_ITwainSession *pSession,
                                       CTL_ITwainSource  *pSource );
+
+            static int  FileTransfer( CTL_ITwainSession *pSession,
+                                      CTL_ITwainSource  *pSource,
+									  CTL_TwainAcquireEnum AcquireType);
 
             static int  BufferTransfer( CTL_ITwainSession *pSession,
                                         CTL_ITwainSource  *pSource );

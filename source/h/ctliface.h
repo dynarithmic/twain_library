@@ -828,6 +828,8 @@ namespace dynarithmic
     DTWAIN_ARRAY  SourceAcquire(SourceAcquireOptions& opts);
     DTWAIN_ARRAY SourceAcquireWorkerThread(SourceAcquireOptions& opts);
     bool AcquireExHelper(SourceAcquireOptions& opts);
+	bool AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType);
+
     DTWAIN_ACQUIRE  LLAcquireImage(SourceAcquireOptions& opts);
     DTWAIN_HANDLE GetDTWAINHandle_Internal();
     bool TileModeOn(DTWAIN_SOURCE Source);

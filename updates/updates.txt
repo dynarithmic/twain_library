@@ -1,5 +1,12 @@
 DTWAIN Version changes
 
+5.2.0.0
+- Added support for audio file transfers using the TWAIN capability ACAP_AUDIOXFER.  
+  New functions are DTWAIN_AcquireAudioNative, DTWAIN_AcquireAudioFile, DTWAIN_AcquireAudioFileA, DTWAIN_AcquireAudioFileW
+
+- Fixed issue with multipage image files only saving the last page.
+
+
 5.1.0.9
 - Added DTWAIN_SetTwainDialogFont() to adjust font used in TWAIN Select Source dialog (only is available
   when calling DTWAIN_SelectSource2() function)  Usage:

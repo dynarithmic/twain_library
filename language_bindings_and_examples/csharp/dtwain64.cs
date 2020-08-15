@@ -344,6 +344,9 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_SETCALLBACK64INIT = 1151;
         public const  int DTWAIN_TN_FILENAMECHANGING = 1160;
         public const  int DTWAIN_TN_FILENAMECHANGED = 1161;
+	    public const  int DTWAIN_TN_PROCESSEDAUDIOFINAL = 1180;
+	    public const  int DTWAIN_TN_PROCESSAUDIOFINALACCEPTED = 1181;
+	    public const  int DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
         public const  int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const  int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const  int DTWAIN_MODAL = 0;
@@ -1441,6 +1444,27 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
         public static extern int DTWAIN_AcquireNativeEx(long Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,long Acquisitions,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AcquireAudioNative(long Source,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AcquireAudioFile(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AcquireAudioFileA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpszFile, int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AcquireAudioFileW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AcquireAudioNativeEx(long Source,int nMaxPages,int bShowUI,int bCloseSource,int Acquisitions,ref int pStatus);
+
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]

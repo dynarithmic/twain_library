@@ -120,7 +120,7 @@ namespace dynarithmic
                                         bool bSaveFile=true);*/
 
         protected:
-            HANDLE          m_hDib;
+            HANDLE          m_hDataHandle;
             int             m_nTotalPagesSaved;
             bool            m_bJobControlPageRecorded;
             bool            m_bJobMarkerNeedsToBeWritten;

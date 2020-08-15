@@ -71,6 +71,24 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileW(DTWAIN_SOURCE Source, LPCWSTR lpszF
 #endif
 }
 
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileA(DTWAIN_SOURCE Source, LPCSTR lpszFile, LONG lFileFlags, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus)
+{
+#ifdef _UNICODE
+	return DTWAIN_AcquireAudioFile(Source, StringConversion::Convert_Ansi_To_Native(lpszFile).c_str(), lFileFlags, lMaxPages, bShowUI, bCloseSource, pStatus);
+#else
+	return DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxPages, bShowUI, bCloseSource, pStatus);
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileFlags, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus)
+{
+#ifdef _UNICODE
+	return DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxPages, bShowUI, bCloseSource, pStatus);
+#else
+	return DTWAIN_AcquireAudioFile(Source, StringConversion::Convert_Wide_To_Native(lpszFile).c_str(), lFileFlags, lMaxPages, bShowUI, bCloseSource, pStatus);
+#endif
+}
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppendW(LPCWSTR szFile)
 {
 #ifdef _UNICODE

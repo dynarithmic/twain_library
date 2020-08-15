@@ -1044,6 +1044,11 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayInit(VOID_PROTOTYPE);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
 LONG DLLENTRY_DEF DTWAIN_MakeRGB(LONG red, LONG green, LONG blue);
 LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font);
+
+/* Audio transfers */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_AcquireAudioNative(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
+DTWAIN_BOOL  DLLENTRY_DEF DTWAIN_AcquireAudioNativeEx(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, DTWAIN_ARRAY Acquisitions, LPLONG pStatus);
+
 #include "dtwstrfn.h"
 #ifdef __cplusplus
 }

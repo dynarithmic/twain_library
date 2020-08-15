@@ -927,10 +927,14 @@ int CTL_TwainAppMgr::TransferImage(const CTL_ITwainSource *pSource,
         break;
 
         case TWAINAcquireType_File:
-            return FileTransfer( pSession, pTempSource );
+		case TWAINAcquireType_AudioFile:
+			return FileTransfer(pSession, pTempSource, AcquireType);
 
         case TWAINAcquireType_Buffer:
             return BufferTransfer( pSession, pTempSource );
+
+		case TWAINAcquireType_AudioNative:
+			return AudioNativeTransfer(pSession, pTempSource);
 
         case TWAINAcquireType_Clipboard:
             return ClipboardTransfer( pSession, pTempSource );
@@ -996,11 +1000,15 @@ bool CTL_TwainAppMgr::StoreImageLayout(CTL_ITwainSource *pSource)
 int CTL_TwainAppMgr::NativeTransfer( CTL_ITwainSession *pSession,
                                       CTL_ITwainSource  *pSource)
 {
-    CTL_ImageXferTriplet IXfer(pSession,
-                               pSource,
-                               DAT_IMAGENATIVEXFER);
-
+    CTL_ImageXferTriplet IXfer(pSession, pSource, DAT_IMAGENATIVEXFER);
     return StartTransfer( pSession, pSource, &IXfer );
+}
+
+/* All sources provide this transfer capability */
+int CTL_TwainAppMgr::AudioNativeTransfer(CTL_ITwainSession *pSession, CTL_ITwainSource  *pSource)
+{
+	CTL_ImageXferTriplet AXfer(pSession, pSource, DAT_AUDIONATIVEXFER);
+	return StartTransfer(pSession, pSource, &AXfer);
 }
 
 int CTL_TwainAppMgr::ClipboardTransfer( CTL_ITwainSession *pSession,
@@ -1013,7 +1021,8 @@ int CTL_TwainAppMgr::ClipboardTransfer( CTL_ITwainSession *pSession,
 
 
 int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
-                                    CTL_ITwainSource  *pSource )
+                                    CTL_ITwainSource  *pSource, 
+									CTL_TwainAcquireEnum AcquireType)
 {
     // Set the file type
     CTL_StringType sFileName;
@@ -1062,6 +1071,25 @@ int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
         }
         return true;
     }
+
+	// If this is an audio file, then we need to execute this triplet
+	// once per acquisition
+	if (AcquireType == TWAINAcquireType_AudioFile)
+	{
+		CTL_AudioFileXferTriplet AudioXFer(pSession, pSource);
+		// Set the file type and name
+		if (AudioXFer.Execute() == TWRC_FAILURE)
+		{
+			TW_UINT16 ccode = GetConditionCode(pSession, pSource);
+			if (ccode != TWCC_SUCCESS)
+			{
+				ProcessConditionCodeError(ccode);
+				return false;
+			}
+			return true;
+		}
+	}
+	
 
     // Start the transferring of the image
     CTL_ImageXferTriplet IXfer(pSession,
@@ -1810,8 +1838,10 @@ int CTL_TwainAppMgr::SetTransferMechanism( const CTL_ITwainSource *pSource,
     else
     if ( AcquireType == TWAINAcquireType_Clipboard)
         uTwainType = static_cast<TW_UINT16>(ClipboardTransferType);
-
+	if ( AcquireType != TWAINAcquireType_AudioNative)
     SetOneTwainCapValue( pSource, uTwainType, CTL_SetTypeSET, TwainCap_XFERMECH, TWTY_UINT16);
+	else
+		SetOneTwainCapValue(pSource, uTwainType, CTL_SetTypeSET, ACAP_XFERMECH, TWTY_UINT16);
     return 1;
 }
 

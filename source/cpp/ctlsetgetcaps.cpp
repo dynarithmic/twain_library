@@ -531,8 +531,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData( DTWAIN_SOURCE Source, HANDLE hD
     if( nFlags & DTWAINSCD_USEHANDLE )
         DST.SetData(hData, dSize);
     else
-
-    // Check if dSize is -1
     if( dSize == -1 )
     {
         if( !DTWAIN_GetCustomDSData(Source, NULL, 0, &dSize, DTWAINGCD_COPYDATA) )

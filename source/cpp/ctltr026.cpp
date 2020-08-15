@@ -52,7 +52,7 @@ CTL_ImageXferTriplet::CTL_ImageXferTriplet(CTL_ITwainSession *pSession,
                                            CTL_ITwainSource* pSource,
                                            TW_UINT16 nType)
                      :  CTL_ImageTriplet(pSession, pSource),
-                     m_hDib(nullptr),
+                     m_hDataHandle(nullptr),
                      m_nTotalPagesSaved(0),
                      m_bJobControlPageRecorded(false),
                      m_bJobMarkerNeedsToBeWritten(false),
@@ -68,7 +68,8 @@ CTL_ImageXferTriplet::CTL_ImageXferTriplet(CTL_ITwainSession *pSession,
     switch( nType )
     {
         case DAT_IMAGENATIVEXFER:
-            InitVars(nType, CTL_GetTypeGET, (void *)&m_hDib);
+		case DAT_AUDIONATIVEXFER:
+			InitVars(nType, CTL_GetTypeGET, (void *)&m_hDataHandle);
         break;
         case DAT_IMAGEFILEXFER:
             InitVars(nType, CTL_GetTypeGET, NULL );
@@ -91,7 +92,6 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
     bool    bPageDiscarded = false;
     bool    bProcessDibEx = true;
     bool    bKeepPage = true;
-	bool	bProcessedOne = false;
     size_t nLastDib = 0;
 
     ImageXferFileWriter FileWriter(this, pSession, pSource);
@@ -143,9 +143,12 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                 else
                 {
                     // temporary
+					if (GetDAT() != DAT_AUDIONATIVEXFER)
+					{
                     CTL_TwainDib theDib;
-                    theDib.SetHandle(m_hDib);
+						theDib.SetHandle(m_hDataHandle);
                     bEndOfJobDetected = theDib.IsBlankDIB(pSource->GetBlankPageThreshold());
+					}
                     bSuccess = true;
                 }
                 if ( bSuccess )
@@ -184,11 +187,12 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
             if (m_nTransferType == DAT_IMAGENATIVEXFER)
             {
                 // Get the array of current array of DIBS (this pointer allows changes to Source's internal DIB array)
+            	// If this is an audio transfer, the the "DIB" is actually WAV data (for Windows)
                 pArray = pSource->GetDibArray();
 
                 // Let Source set the handle (Source knows if this is a new or old DIB to replace)
                 // Emit an error if m_hDib is NULL
-                if (!m_hDib)
+                if (!m_hDataHandle)
                 {
                     bPageDiscarded = true;
                     // Set the error code
@@ -202,11 +206,11 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                 if (CTL_TwainDLLHandle::s_lErrorFilterFlags)
                 {
                     CTL_StringType sOut = _T("Original bitmap from device: \n");
-                    sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDib);
+                    sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDataHandle);
                     CTL_TwainAppMgr::WriteLogInfo(sOut);
                 }
 
-                pSource->SetDibHandle(m_hDib, nCurImage);
+                pSource->SetDibHandle(m_hDataHandle, nCurImage);
 
                 // Get the dib from the array (must get last dib generated)
                 nLastDib = pArray->GetSize() - 1;
@@ -228,30 +232,37 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                 }
 
                 // Callback function for access to change DIB
-                if (CTL_TwainDLLHandle::s_pDibUpdateProc != NULL)
+                if ((CTL_TwainDLLHandle::s_pDibUpdateProc != nullptr) && (GetDAT() != DAT_AUDIONATIVEXFER))
                 {
                     HANDLE hRetDib =
                         (*CTL_TwainDLLHandle::s_pDibUpdateProc)
-                        (pSource, (LONG)nLastDib, m_hDib);
-                    if (hRetDib && (hRetDib != m_hDib))
+                        (pSource, (LONG)nLastDib, m_hDataHandle);
+                    if (hRetDib && (hRetDib != m_hDataHandle))
                     {
                          // Application changed DIB.  So make this the current dib
                          #ifdef _WIN32
-                        ::GlobalFree(m_hDib);
+                        ::GlobalFree(m_hDataHandle);
                         #endif
-                        m_hDib = hRetDib;
-                        pSource->SetDibHandle(m_hDib, nLastDib);
+                        m_hDataHandle = hRetDib;
+                        pSource->SetDibHandle(m_hDataHandle, nLastDib);
                         CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, DTWAIN_TN_APPUPDATEDDIB, (LPARAM)pSource);
                     }
                 }
 
                 // Change bpp if necessary
-                if (bProcessDibEx)
+                if (bProcessDibEx && (GetDAT() != DAT_AUDIONATIVEXFER))
                     ModifyAcquiredDib();
 
-                if (CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, DTWAIN_TN_PROCESSEDDIBFINAL, (LPARAM)pSource) == 0)
+				WPARAM wParamToUse[] = { DTWAIN_TN_PROCESSEDDIBFINAL, DTWAIN_TN_PROCESSDIBFINALACCEPTED };
+            	if ( GetDAT() == DAT_AUDIONATIVEXFER )
+            	{
+					wParamToUse[0] = DTWAIN_TN_PROCESSEDAUDIOFINAL;
+					wParamToUse[1] = DTWAIN_TN_PROCESSAUDIOFINALACCEPTED;
+				}
+            	
+                if (CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, wParamToUse[0], (LPARAM)pSource) == 0)
                 {
-                    CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, DTWAIN_TN_PROCESSDIBFINALACCEPTED, (LPARAM)pSource);
+                    CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, wParamToUse[1], (LPARAM)pSource);
                     // user is satisfied with the image, so break
                     bProcessDibEx = false;
                 }
@@ -303,14 +314,11 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                         if ( bIsMultiPageFile || pSource->IsMultiPageModeSaveAtEnd())
                         {
                             // This is the first page of the acquisition
-                            if ( nLastDib == 0 || !bProcessedOne  ||
-                                (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
+                            if ( nLastDib == 0 || (pSource->IsNewJob() && pSource->IsJobFileHandlingOn()))
                                 nMultiStage = DIB_MULTI_FIRST;
                             else
                             // This is a subsequent page of the acquisition
                                 nMultiStage = DIB_MULTI_NEXT;
-
-							bProcessedOne = true;
 
                             // Now check if this we are in manual duplex mode
                             // or in continuous mode
@@ -342,14 +350,19 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
                     if ( pSource->IsDeleteDibOnScan() )
                     {
                         // Let array class handle deleting of the DIB (Global memory will be freed only)
+                    	if ( pArray )
                         pArray->DeleteDibMemory( nLastDib );
                     }
                 }
                 break;
 
                 case TWAINAcquireType_File:
+				case TWAINAcquireType_AudioFile:
                 {
+                	if ( GetDAT() != DAT_AUDIOFILEXFER )
                     CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL,DTWAIN_TN_PROCESSEDDIB,(LPARAM)pSource);
+					else                		
+						CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, DTWAIN_TN_PROCESSEDAUDIOFILE, (LPARAM)pSource);
                     long lFlags = pSource->GetAcquireFileFlags();
 
                     if ( lFlags & TWAINFileFlag_PROMPT )
@@ -393,7 +406,7 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
 
                 case TWAINAcquireType_Clipboard:
                     if ( pSource->GetSpecialTransferMode() == DTWAIN_USENATIVE )
-                        bInClip = CopyDibToClipboard( pSession, m_hDib );
+                        bInClip = CopyDibToClipboard( pSession, m_hDataHandle );
                 break;
                 default:
                     break;
@@ -415,7 +428,7 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
 
         case TWRC_FAILURE:
         {
-            m_hDib = NULL;
+            m_hDataHandle = NULL;
             FailAcquisition();
             return rc;
         }
@@ -424,7 +437,7 @@ TW_UINT16 CTL_ImageXferTriplet::Execute()
             CTL_StringStreamType strm;
             strm << _T("Unknown return code ") << rc << _T(" from DSM during transfer!  Twain driver unstable!\n");
             CTL_TwainAppMgr::WriteLogInfo(strm.str());
-            m_hDib = NULL;
+            m_hDataHandle = NULL;
             break;
         }
     }
@@ -458,7 +471,7 @@ bool CTL_ImageXferTriplet::CancelAcquisition()
 
     pSource->SetState(SOURCE_STATE_UIENABLED); // Transition to state 6
     pSource->SetTransferDone(false);
-    m_hDib = NULL;
+    m_hDataHandle = NULL;
     CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL,
         DTWAIN_TN_TWAINPAGECANCELLED,
         (LPARAM)pSource);
@@ -523,7 +536,7 @@ bool CTL_ImageXferTriplet::FailAcquisition()
 
 HANDLE  CTL_ImageXferTriplet::GetDibHandle()
 {
-    return m_hDib;
+    return m_hDataHandle;
 }
 
 TW_UINT16 CTL_ImageXferTriplet::GetImagePendingInfo(TW_PENDINGXFERS *pPI, TW_UINT16 nMsg  /* =MSG_ENDXFER */)
@@ -1169,6 +1182,8 @@ int CTL_ImageXferTriplet::ProcessBlankPage(CTL_ITwainSession *pSession,
                                            LONG message_to_send2,
                                            LONG option_to_test)
 {
+	if (GetDAT() == DAT_AUDIONATIVEXFER)
+		return 1;
     bool bIsBlankPage = IsPageBlank(pSession, pSource, CurDib)?true:false;
     if (bIsBlankPage)
     {
@@ -1183,7 +1198,7 @@ int CTL_ImageXferTriplet::ProcessBlankPage(CTL_ITwainSession *pSession,
         {
             // remove dib from array and delete the memory for the DIB
             CurDib->SetAutoDelete(true);
-            pSource->GetDibArray()->RemoveDib(m_hDib);
+            pSource->GetDibArray()->RemoveDib(m_hDataHandle);
             CTL_TwainAppMgr::SendTwainMsgToWindow(pSession, NULL, (WPARAM)message_to_send2,(LPARAM)pSource);
             return 0;  // DIB is thrown away
         }
@@ -1445,11 +1460,11 @@ bool CTL_ImageXferTriplet::ModifyAcquiredDib()
         if ((this->*adjfn[i])(pSession, pSource, CurDib))
         {
             // reset the dib handle if adjusted
-            pSource->SetDibHandle((m_hDib = CurDib->GetHandle()), nLastDib);
+            pSource->SetDibHandle((m_hDataHandle = CurDib->GetHandle()), nLastDib);
             if (CTL_TwainDLLHandle::s_lErrorFilterFlags)
             {
                 CTL_StringType sOut = msg[i];
-                sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDib);
+                sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDataHandle);
                 CTL_TwainAppMgr::WriteLogInfo(sOut);
             }
     return true;
@@ -1494,11 +1509,11 @@ bool CTL_ImageXferTriplet::ResampleAcquiredDib()
         if (bResampleType[i] && (this->*resample[i])(pSession, pSource, CurDib))
         {
             // reset the dib handle if resampled
-            pSource->SetDibHandle((m_hDib = CurDib->GetHandle()), nLastDib);
+            pSource->SetDibHandle((m_hDataHandle = CurDib->GetHandle()), nLastDib);
             if (CTL_TwainDLLHandle::s_lErrorFilterFlags)
             {
                 CTL_StringType sOut = msg[i];
-                sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDib);
+                sOut += CTL_ErrorStructDecoder().DecodeBitmap(m_hDataHandle);
                 CTL_TwainAppMgr::WriteLogInfo(sOut);
             }
             return true;
@@ -1509,6 +1524,8 @@ bool CTL_ImageXferTriplet::ResampleAcquiredDib()
 
 bool CTL_ImageXferTriplet::QueryAndRemoveDib(CTL_TwainAcquireEnum acquireType, size_t nWhich)
 {
+	if (GetDAT() == DAT_AUDIONATIVEXFER)
+		return true;
     CTL_ITwainSource* pSource = GetSourcePtr();
     CTL_TwainDibArray* pArray = pSource->GetDibArray();
     CTL_ITwainSession* pSession = GetSessionPtr();
