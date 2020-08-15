@@ -1,6 +1,6 @@
 ### What is this repository for? ###
 
-* This repository contains the DTWAIN Library from Dynarithmic Software, version 5.1.  DTWAIN is an open source programmer's library that will allow applications to acquire images from TWAIN-enabled devices.
+* This repository contains the DTWAIN Library, **Version 5.x**, from Dynarithmic Software.  DTWAIN is an open source programmer's library that will allow applications to acquire images from TWAIN-enabled devices using a simple Application Programmer's Interface (API).
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
