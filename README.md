@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is **5.2.0.0**
+* The current version is [**5.2.0.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 
 
