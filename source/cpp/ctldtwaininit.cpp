@@ -107,6 +107,7 @@ static DTWAIN_BOOL SetLangResourcePath(LPCTSTR szPath);
 static CTL_StringType GetStaticLibVer();
 static void LoadStaticData(CTL_TwainDLLHandle*);
 static bool GetDTWAINDLLVersionInfo(HMODULE hMod, LONG* lMajor, LONG* lMinor, LONG *pPatch);
+static CTL_String GetDTWAINDLLVersionInfoStr();
 static DTWAIN_BOOL DTWAIN_GetVersionInternal(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatch);
 
 #ifdef UNICODE
@@ -164,7 +165,7 @@ DTWAIN_BOOL DTWAIN_GetVersionInternal(LPLONG lMajor, LPLONG lMinor, LPLONG lVers
 
     #ifdef DTWAIN_LIB
             CTL_StringType strVer = _T(DTWAIN_VERINFO_BASEVERSION)
-                                    _T(DTWAIN_VERINFO_PATCHLEVEL);
+                                    _T(DTWAIN_VERINFO_PATCHLEVEL_VERSION);
             CTL_StringArrayType aInfo;
             StringWrapper::Tokenize(strVer, _T("."), aInfo);
             *lMajor = _ttol(aInfo[0].c_str());
@@ -1652,7 +1653,7 @@ LONG DLLENTRY_DEF DTWAIN_GetLibraryPath(LPTSTR lpszVer, LONG nLength)
 
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionString(LPTSTR lpszVer, LONG nLength)
 {
-	return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(DTWAIN_VERINFO_FILEVERSION), lpszVer, nLength);
+	return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(GetDTWAINDLLVersionInfoStr().c_str()), lpszVer, nLength);
 }
 
 LONG DLLENTRY_DEF DTWAIN_GetVersionInfo(LPTSTR lpszVer, LONG nLength)
@@ -1815,16 +1816,20 @@ CTL_WString FixPathStringW(LPCWSTR szINIPath)
 
 bool GetDTWAINDLLVersionInfo(HMODULE hMod, LONG* lMajor, LONG* lMinor, LONG *pPatch)
 {
-    CTL_String fileVer = DTWAIN_VERINFO_FILEVERSION;
-    CTL_StringArray aTokens;
-    StringWrapperA::Tokenize(fileVer, ".", aTokens);
     if ( lMajor )
-        *lMajor = stoi(aTokens[0]);
+        *lMajor = DTWAIN_MAJOR_VERSION;
     if (lMinor)
-        *lMinor = stoi(aTokens[1]);
+        *lMinor = DTWAIN_SUBVERSION_VERSION;
     if (pPatch)
-        *pPatch = stoi(aTokens[3]);
+        *pPatch = DTWAIN_VERINFO_PATCHLEVEL_VERSION;
     return true;
+}
+
+CTL_String GetDTWAINDLLVersionInfoStr()
+{
+    std::ostringstream strm;
+    strm << DTWAIN_MAJOR_VERSION << "." << DTWAIN_SUBVERSION_VERSION << "." << DTWAIN_PLACEHOLDER_VERSION << "." << DTWAIN_VERINFO_PATCHLEVEL_VERSION;
+    return strm.str();
 }
 
 CTL_StringType& dynarithmic::GetDTWAINTempFilePath()
@@ -1857,7 +1862,7 @@ void GetVersionFromResource(LPLONG lMajor, LPLONG lMinor, LPLONG patch)
     // split on the "."
     CTL_StringArrayType aStr;
     CTL_StringType ver = _T(DTWAIN_VERINFO_BASEVERSION);
-    ver += _T(DTWAIN_VERINFO_PATCHLEVEL);
+    ver += _T(DTWAIN_VERINFO_PATCHLEVEL_VERSION);
     StringWrapper::Tokenize(ver, _T("."), aStr, true);
     if ( aStr.size() == 4 )
     {

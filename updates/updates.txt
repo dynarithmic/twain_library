@@ -1,5 +1,10 @@
 DTWAIN Version changes
 
+5.2.0.1
+- Fix incorrect version number in DLL resources
+- Add missing source file ctlacquireaudio.cpp to source build project
+
+
 5.2.0.0
 - Added support for audio file transfers using the TWAIN capability ACAP_AUDIOXFER.  
   New functions are DTWAIN_AcquireAudioNative, DTWAIN_AcquireAudioFile, DTWAIN_AcquireAudioFileA, DTWAIN_AcquireAudioFileW

@@ -744,6 +744,7 @@
     </ClCompile>
     <ClCompile Include=".\cpp\imagefun\dtwpdf\dtwtiff2ps.cpp">
     </ClCompile>
+    <ClCompile Include="cpp\ctlacquireaudio.cpp" />
     <ClCompile Include="cpp\ctlerrorbuffer.cpp" />
     <ClCompile Include="cpp\ctlfileappend.cpp" />
     <ClCompile Include="cpp\ctlfileutils.cpp" />
@@ -1120,11 +1121,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="txt\twaininfo.txt" />
+    <Text Include="txt\twainlanguage.txt" />
     <Text Include="txt\twainresourcestrings_dutch.txt" />
     <Text Include="txt\twainresourcestrings_english.txt" />
     <Text Include="txt\twainresourcestrings_french.txt" />
     <Text Include="txt\twainresourcestrings_german.txt" />
     <Text Include="txt\twainresourcestrings_italian.txt" />
+    <Text Include="txt\twainresourcestrings_portuguese_br.txt" />
     <Text Include="txt\twainresourcestrings_spanish.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

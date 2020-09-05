@@ -1068,6 +1068,8 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
         case WM_INITDIALOG:
+                
+                SendMessageA(hDlg, WM_SETTEXT, 0, (LPARAM)DTWAIN_VERINFO_FILEVERSION);
                 return TRUE;
 
         case WM_COMMAND:
