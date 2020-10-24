@@ -62,6 +62,7 @@
 1047 Bad capability data type
 1048 Capability has unknown data type
 1049 Demo Version of DTWAIN does not support this file type
+1050 Selectie Geannuleerd
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

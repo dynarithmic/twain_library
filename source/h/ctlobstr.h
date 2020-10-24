@@ -113,6 +113,8 @@ namespace dynarithmic
                     { return ::GetSystemDirectoryA(buffer, _MAX_PATH); }
         static char_type* AddBackslashImpl(char_type* buffer)
                     { return ::PathAddBackslashA(buffer); }
+        static char_type* RemoveBackslashImpl(char_type* buffer)
+                    { return ::PathRemoveBackslashA(buffer); }
         static DWORD GetModuleFileNameImpl(HMODULE hModule, char_type* lpFileName, DWORD nSize)
                     { return ::GetModuleFileNameA(hModule, lpFileName, nSize); }
         #else
@@ -120,7 +122,7 @@ namespace dynarithmic
         { getcwd(buffer, 8096); return 1; }
         static UINT GetSystemDirectoryImpl(char_type* buffer)
         { getcwd(buffer, 8096); return 1; }
-        static LPSTR AddBackslashImpl(char_type* buffer)
+        static char_type* AddBackslashImpl(char_type* buffer)
         {
             auto ps = boost::filesystem::path::preferred_separator;
             auto len = StringLength(buffer);
@@ -131,6 +133,16 @@ namespace dynarithmic
             }
             return buffer;
         }
+
+        static char_type* RemoveBackslashImpl(char_type* buffer)
+        {
+            auto ps = boost::filesystem::path::preferred_separator;
+            auto len = StringLength(buffer);
+            if (buffer[len - 1] == ps)
+                buffer[len - 1] = 0;
+            return buffer;
+        }
+
         static DWORD GetModuleFileNameImpl(HMODULE hModule, char_type* lpFileName, DWORD nSize)
         {
             return 0; // ::GetModuleFileNameA(hModule, lpFileName, nSize);
@@ -161,6 +173,8 @@ namespace dynarithmic
         { return ::GetSystemDirectoryW(buffer, _MAX_PATH); }
         static LPWSTR AddBackslashImpl(char_type* buffer)
         { return ::PathAddBackslashW(buffer); }
+        static char_type* RemoveBackslashImpl(char_type* buffer)
+        { return ::PathRemoveBackslashW(buffer); }
         static DWORD GetModuleFileNameImpl(HMODULE hModule, char_type* lpFileName, DWORD nSize)
         { return ::GetModuleFileNameW(hModule, lpFileName, nSize); }
         #else
@@ -186,6 +200,15 @@ namespace dynarithmic
             }
             return buffer;
         }
+        static char_type* RemoveBackslashImpl(char_type* buffer)
+        {
+            auto ps = boost::filesystem::path::preferred_separator;
+            auto len = StringLength(buffer);
+            if (buffer[len - 1] == ps)
+                buffer[len - 1] = 0;
+            return buffer;
+        }
+
         static DWORD GetModuleFileNameImpl(HMODULE hModule, char_type* lpFileName, DWORD nSize)
         {
             return 0; // ::GetModuleFileNameA(hModule, lpFileName, nSize);
@@ -527,9 +550,17 @@ namespace dynarithmic
         static StringType AddBackslashToDirectory(const StringType& pathName)
         {
             std::vector<CharType> buffer(_MAX_PATH,0);
-            SafeStrcpy(&buffer[0], pathName.c_str(), _MAX_PATH);
-            StringTraits::AddBackslashImpl(&buffer[0]);
-            return &buffer[0];
+            SafeStrcpy(buffer.data(), pathName.c_str(), _MAX_PATH);
+            StringTraits::AddBackslashImpl(buffer.data());
+            return buffer.data();
+        }
+
+        static StringType RemoveBackslashFromDirectory(const StringType& pathName)
+        {
+            std::vector<CharType> buffer(_MAX_PATH, 0);
+            SafeStrcpy(buffer.data(), pathName.c_str(), _MAX_PATH);
+            StringTraits::RemoveBackslashImpl(buffer.data());
+            return buffer.data();
         }
 
         static StringType GetGUID()

@@ -40,7 +40,6 @@ OF THIRD PARTY RIGHTS.
 
 using namespace dynarithmic;
 using namespace date;
-using namespace std::chrono;
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -48,10 +47,12 @@ namespace dynarithmic
 {
     CTL_String CBaseLogger::getTime()
     {
-        std::ostringstream strm;
-        auto tp = std::chrono::system_clock::now();
-        strm << "[" << tp << "]";
-        return strm.str();
+        time_t     now = time(0);
+        struct tm  tstruct;
+        char       buf[80];
+        tstruct = *localtime(&now);
+        strftime(buf, sizeof(buf), "[%Y-%m-%d %X] ", &tstruct);
+        return buf;
     }
 
     void CBaseLogger::generic_outstream(std::ostream& os, const CTL_String& msg)
@@ -213,6 +214,6 @@ CTL_StringType CLogSystem::GetDebugStringFull(const CTL_StringType& s)
     CTL_StringStreamType strm;
     if ( m_csAppName.empty() )
         m_csAppName = _T("Unknown App");
-    strm << m_csAppName << _T(" : [") << system_clock::now() << _T("] : ") << s;
+    strm << m_csAppName << _T(" : ") << StringConversion::Convert_Ansi_To_Native(CBaseLogger::getTime()) << _T(" : ") << s;
     return strm.str();
 }

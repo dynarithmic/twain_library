@@ -62,6 +62,7 @@
 1047 Bad capability data type
 1048 Capability has unknown data type
 1049 Demo Version of DTWAIN does not support this file type
+1050 Selección cancelada
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

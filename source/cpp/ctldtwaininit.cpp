@@ -32,6 +32,7 @@
 #include <boost/dll/runtime_symbol_info.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
+#include <set>
 #include "ctltwmgr.h"
 #include "ctltrall.h"
 #include "ctlres.h"
@@ -109,6 +110,7 @@ static void LoadStaticData(CTL_TwainDLLHandle*);
 static bool GetDTWAINDLLVersionInfo(HMODULE hMod, LONG* lMajor, LONG* lMinor, LONG *pPatch);
 static CTL_String GetDTWAINDLLVersionInfoStr();
 static DTWAIN_BOOL DTWAIN_GetVersionInternal(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatch);
+static CTL_StringType CheckSearchOrderString(const CTL_StringType& );
 
 #ifdef UNICODE
 #define FixPathString FixPathStringW
@@ -385,6 +387,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_LoadCustomStringResources(LPCTSTR sLangDLL)
 {
     LOG_FUNC_ENTRY_PARAMS((sLangDLL))
     CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+    DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
 
     // Add the resource to the registry.
     auto exists = pHandle->AddResourceToRegistry(sLangDLL).second;
@@ -432,6 +435,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndThread( DTWAIN_HANDLE DLLHandle )
     LOG_FUNC_ENTRY_PARAMS((DLLHandle))
     int nWhere;
     CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+    DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
+
     if ( pHandle )
     {
         bool bOk = ::FindTask( getThreadId(), &nWhere );
@@ -583,18 +588,31 @@ LONG DLLENTRY_DEF DTWAIN_GetDSMFullName(LONG DSMType, LPTSTR szDLLName, LONG nMa
     else
         sName = TWAINDLLVERSION_2;
 
-    CTL_StringType sPath = CTL_TwainAppMgr::GetTwainDirFullName(sName.c_str(), pWhichSearch);
-    size_t nBytes = sPath.length();
+    CTL_StringType sPath;
+    CTL_StringType* strToSet = &sPath;
+    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+
+    if (pHandle)
+    {
+        if (DSMType == DTWAIN_TWAINDSM_LEGACY)
+            strToSet = &pHandle->m_strTWAINPath;
+        else
+            strToSet = &pHandle->m_strTWAINPath2;
+    }
+    if ( strToSet->empty() )
+        *strToSet = CTL_TwainAppMgr::GetTwainDirFullName(sName.c_str(), pWhichSearch);
+
+    size_t nBytes = strToSet->length();
     if ( nBytes == 0)
         LOG_FUNC_EXIT_PARAMS(0)
     LONG nTotalBytes;
     if ( !szDLLName )
     {
-        nTotalBytes = static_cast<LONG>(sPath.length() + 1);
+        nTotalBytes = static_cast<LONG>(strToSet->length() + 1);
         LOG_FUNC_EXIT_PARAMS(nTotalBytes)
     }
 
-    nTotalBytes = CopyInfoToCString(sPath, szDLLName, nMaxLen);
+    nTotalBytes = CopyInfoToCString(*strToSet, szDLLName, nMaxLen);
     LOG_FUNC_EXIT_PARAMS(nTotalBytes)
     CATCH_BLOCK(false)
 }
@@ -1543,6 +1561,30 @@ LONG DLLENTRY_DEF DTWAIN_GetDSMSearchOrder(VOID_PROTOTYPE)
     CATCH_BLOCK(false)
 }
 
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderEx(LPCTSTR SearchOrder, LPCTSTR UserDirectory)
+{
+    LOG_FUNC_ENTRY_PARAMS((SearchOrder))
+    CTL_StringType strValidString = CheckSearchOrderString(SearchOrder);
+    if ( !strValidString.empty() )
+    {
+        CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = strValidString;
+        if ( UserDirectory )
+            CTL_TwainDLLHandle::s_TwainDSMUserDirectory = strValidString;
+        CTL_TwainDLLHandle::s_TwainDSMSearchOrder = -1;
+        LOG_FUNC_EXIT_PARAMS(TRUE)
+    }
+    LOG_FUNC_EXIT_PARAMS(FALSE)
+    CATCH_BLOCK(false)
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePath(LPCTSTR ResourcePath)
+{
+    LOG_FUNC_ENTRY_PARAMS((ResourcePath))
+    CTL_TwainDLLHandle::s_strResourcePath = ResourcePath;
+    LOG_FUNC_EXIT_PARAMS(TRUE)
+    CATCH_BLOCK(false)
+}
+
 LONG DLLENTRY_DEF DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserData)
 {
     LOG_FUNC_ENTRY_PARAMS((wParam, lParam, UserData))
@@ -1851,6 +1893,15 @@ CTL_StringType& dynarithmic::GetDTWAINTempFilePath()
     return CTL_TwainDLLHandle::s_TempFilePath;
 }
 
+
+CTL_StringType CheckSearchOrderString(const CTL_StringType& str)
+{
+    static std::set<char> setValidChars = {'C','W','O','U','S'};
+    CTL_StringType strOut;
+    std::copy_if(str.begin(), str.end(), std::back_inserter(strOut), [&](char ch) { return setValidChars.count(toupper(ch)); });
+    std::transform(strOut.begin(), strOut.end(), strOut.begin(), [&](char ch) { return std::toupper(ch); });
+    return strOut;
+}
 
 #undef min
 #undef max

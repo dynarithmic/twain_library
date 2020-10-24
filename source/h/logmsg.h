@@ -37,11 +37,10 @@ namespace dynarithmic
 {
     class CBaseLogger
     {
-        protected:
-            static CTL_String getTime();
         public:
             virtual void trace(const CTL_String& msg) = 0;
             void generic_outstream(std::ostream& os, const CTL_String& msg);
+            static CTL_String getTime();
     };
 
     class StdCout_Logger : public CBaseLogger

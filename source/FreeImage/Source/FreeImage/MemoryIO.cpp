@@ -110,6 +110,30 @@ FreeImage_SaveToMemory(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FIMEMORY *stream, i
 	return FALSE;
 }
 
+BOOL DLL_CALLCONV
+FreeImage_SaveToMemoryEx(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FIMEMORY *stream, int page, int flags)
+{
+    if (stream)
+    {
+        FreeImageIO io;
+        SetMemoryIO(&io);
+
+        FIMEMORYHEADER *mem_header = (FIMEMORYHEADER*)(stream->data);
+
+        if (mem_header->delete_me == TRUE)
+        {
+            return FreeImage_SaveToHandleEx(fif, dib, &io, (fi_handle)stream, page, flags);
+        }
+        else
+        {
+            // do not save in a user buffer
+            FreeImage_OutputMessageProc(fif, "Memory buffer is read only");
+        }
+    }
+
+    return FALSE;
+}
+
 // =====================================================================
 // Memory stream buffer access
 // =====================================================================

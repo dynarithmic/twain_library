@@ -162,6 +162,7 @@ namespace dynarithmic
             long         GetAcquireFileFlags() const { return m_lFileFlags; }
             void         SetAcquireFileFlags(long lFileFlags) { m_lFileFlags = lFileFlags; }
             static bool  IsFileTypeMultiPage(CTL_TwainFileFormatEnum FileType);
+            static CTL_TwainFileFormatEnum GetMultiPageType(CTL_TwainFileFormatEnum FileType);
             static bool  IsFileTypeTIFF(CTL_TwainFileFormatEnum FileType);
             static bool  IsFileTypePostscript(CTL_TwainFileFormatEnum FileType);
 

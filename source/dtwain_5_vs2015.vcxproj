@@ -746,6 +746,7 @@
     </ClCompile>
     <ClCompile Include="cpp\ctlacquireaudio.cpp" />
     <ClCompile Include="cpp\ctlerrorbuffer.cpp" />
+    <ClCompile Include="cpp\ctlerrorcallback.cpp" />
     <ClCompile Include="cpp\ctlfileappend.cpp" />
     <ClCompile Include="cpp\ctlfileutils.cpp" />
     <ClCompile Include="cpp\ctlgetmetrics.cpp" />

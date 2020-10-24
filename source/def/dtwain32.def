@@ -879,3 +879,16 @@ DTWAIN_AcquireAudioFile							  @30051
 DTWAIN_AcquireAudioFileA						  @30052
 DTWAIN_AcquireAudioFileW						  @30053
 DTWAIN_AcquireAudioNativeEx						  @30054
+
+DTWAIN_SetErrorCallback                           @30060
+DTWAIN_SetErrorCallback64                         @30061
+DTWAIN_GetErrorCallback                           @30062
+DTWAIN_GetErrorCallback64                         @30063
+
+DTWAIN_SetDSMSearchOrderEx                        @30070
+DTWAIN_SetDSMSearchOrderExA                       @30071
+DTWAIN_SetDSMSearchOrderExW                       @30072
+
+DTWAIN_SetResourcePath                            @30080
+DTWAIN_SetResourcePathA                           @30081
+DTWAIN_SetResourcePathW                           @30082

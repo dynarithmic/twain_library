@@ -701,6 +701,32 @@ bool CTL_ITwainSource::IsFileTypeMultiPage(CTL_TwainFileFormatEnum FileType) // 
             );
 }
 
+CTL_TwainFileFormatEnum CTL_ITwainSource::GetMultiPageType(CTL_TwainFileFormatEnum FileType) 
+{
+    static const std::unordered_map<CTL_TwainFileFormatEnum, CTL_TwainFileFormatEnum> pageMap =
+    {
+        { TWAINFileFormat_TIFFGROUP3,      TWAINFileFormat_TIFFGROUP3MULTI },
+        { TWAINFileFormat_TIFFGROUP4,      TWAINFileFormat_TIFFGROUP4MULTI },
+        { TWAINFileFormat_TIFFNONE,        TWAINFileFormat_TIFFNONEMULTI },
+        { TWAINFileFormat_TIFFJPEG,        TWAINFileFormat_TIFFJPEGMULTI },
+        { TWAINFileFormat_TIFFPACKBITS,    TWAINFileFormat_TIFFPACKBITSMULTI },
+        { TWAINFileFormat_TIFFDEFLATE,     TWAINFileFormat_TIFFDEFLATEMULTI },
+        { TWAINFileFormat_PDF,             TWAINFileFormat_PDFMULTI },
+        { TWAINFileFormat_POSTSCRIPT1,     TWAINFileFormat_POSTSCRIPT1MULTI },
+        { TWAINFileFormat_POSTSCRIPT2,     TWAINFileFormat_POSTSCRIPT2MULTI },
+        { TWAINFileFormat_POSTSCRIPT3,     TWAINFileFormat_POSTSCRIPT3MULTI },
+        { TWAINFileFormat_TIFFLZW,         TWAINFileFormat_TIFFLZWMULTI },
+        { TWAINFileFormat_TIFFPIXARLOG,    TWAINFileFormat_TIFFPIXARLOGMULTI },
+        { TWAINFileFormat_PCX,             TWAINFileFormat_DCX },
+        { TWAINFileFormat_TEXT,            TWAINFileFormat_TEXTMULTI } 
+    };
+
+    auto iter = pageMap.find(FileType);
+    if (iter != pageMap.end())
+        return iter->second;
+    return FileType;
+}
+
 bool CTL_ITwainSource::IsFileTypeTIFF(CTL_TwainFileFormatEnum FileType)
 {
     static const std::unordered_set<CTL_TwainFileFormatEnum> setInfo = {

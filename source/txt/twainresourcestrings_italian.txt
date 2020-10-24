@@ -62,6 +62,7 @@
 1047 Bad capability data type
 1048 Capability has unknown data type
 1049 Demo Version of DTWAIN does not support this file type
+1050 Selezione Annullata
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

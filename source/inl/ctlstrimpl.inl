@@ -1959,6 +1959,44 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTempFileDirectoryA(LPCSTR szFilePath)
 #endif
 }
 
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderExW(LPCWSTR szFilePath, LPCWSTR szUserPath)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetDSMSearchOrderEx(szFilePath, szUserPath);
+#else
+    return DTWAIN_SetDSMSearchOrderEx(StringConversion::Convert_Wide_To_Native(szFilePath).c_str(),
+                                      szUserPath?StringConversion::Convert_Wide_To_Native(szUserPath).c_str():nullptr);
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderExA(LPCSTR szFilePath, LPCSTR szUserPath)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetDSMSearchOrderEx(StringConversion::Convert_Ansi_To_Native(szFilePath).c_str(),
+                                      szUserPath ? StringConversion::Convert_Ansi_To_Native(szUserPath).c_str() : nullptr);
+#else
+    return DTWAIN_SetDSMSearchOrderEx(szFilePath, szUserPath);
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathW(LPCWSTR szFilePath)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetResourcePath(szFilePath);
+#else
+    return DTWAIN_SetResourcePath(StringConversion::Convert_Wide_To_Native(szFilePath).c_str());
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathA(LPCSTR szFilePath)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetResourcePath(StringConversion::Convert_Ansi_To_Native(szFilePath).c_str());
+#else
+    return DTWAIN_SetResourcePath(szFilePath);
+#endif
+}
+
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetThresholdStringA(DTWAIN_SOURCE Source, LPCSTR Threshold, DTWAIN_BOOL bSetBitDepthReduction)
 {
 #ifdef _UNICODE

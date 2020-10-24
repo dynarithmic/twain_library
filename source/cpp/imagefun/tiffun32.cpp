@@ -102,6 +102,7 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
         if (m_MultiPageStruct.Stage != 0)
         {
 		fp = FreeImage_OpenMultiBitmap(FIF_TIFF, fname.c_str(), true, false, false, 0);
+            FreeImage_SetPageNumberEx(fp, 0);
         if ( !fp )
             return DTWAIN_ERR_FILEOPEN;
         }
@@ -139,14 +140,19 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
     if (m_MultiPageStruct.Stage == 0)
     {
 		int flagsValue = (int)(m_ImageInfoEx.nJpegQuality << 24) | (compressionFlags[compression]);
-		auto retVal2 = im.save(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), flagsValue);
-//								compressionFlags[compression]);
+		auto retVal2 = im.saveEx(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), m_MultiPageStruct.Page, flagsValue);
         if (retVal2 == 1)
+        {
+            ++m_MultiPageStruct.Page;
             return DTWAIN_NO_ERROR;
+        }
         return DTWAIN_ERR_FILEWRITE;
     }
 
+    // this is a multipage write
     FreeImage_AppendPageEx(fp, im, compressionFlags[compression]);
+    FreeImage_SetPageNumberEx(fp, FreeImage_GetPageNumber(fp) + 1);
+    ++m_MultiPageStruct.Page;
     return 0;
 }
 

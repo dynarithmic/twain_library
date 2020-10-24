@@ -129,7 +129,6 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
 {
     LOG_FUNC_ENTRY_PARAMS((options))
     CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
-    bool bSessionPreStarted = true;
 
     // See if DLL Handle exists
     DTWAIN_Check_Bad_Handle_Ex(pHandle, NULL, FUNC_MACRO);
@@ -250,7 +249,10 @@ DTWAIN_SOURCE dynarithmic::DTWAIN_LLSelectSource2(const SourceSelectionOptions& 
 
     // See if cancel was selected
     if ( S.SourceName.empty() || S.nItems == 0 )
+    {
+        CTL_TwainAppMgr::SetError(DTWAIN_ERR_SOURCESELECTION_CANCELED);
         LOG_FUNC_EXIT_PARAMS(NULL)
+    }
 
     Source = DTWAIN_SelectSourceByName(S.SourceName.c_str());
 

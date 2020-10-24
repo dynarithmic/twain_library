@@ -109,5 +109,7 @@ void CTL_CapabilityGetTriplet::Decode(void * p)
         case CTL_GetTypeQUERYSUPPORT:
             EnumCapValues(p);
             return ;
+        default:
+            return;
     }
 }
