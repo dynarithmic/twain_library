@@ -53,7 +53,7 @@ DTWAIN_BOOL dynarithmic::DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source, DTWAIN_AR
         LOG_FUNC_EXIT_PARAMS(false)
 
         // Check if array is of the correct type
-    DTWAIN_Check_Error_Condition_0_Ex(pHandle, [&]{return (!EnumeratorFunctionImpl::EnumeratorIsValidEx(pArray, CTL_EnumeratorDibType)); },
+    DTWAIN_Check_Error_Condition_0_Ex(pHandle, [&]{return (!EnumeratorFunctionImpl::EnumeratorIsValidEx(pArray, CTL_EnumeratorHandleType)); },
                                                     DTWAIN_ERR_WRONG_ARRAY_TYPE, false, FUNC_MACRO);
     DTWAIN_ARRAY pDTWAINArray = pArray;
     EnumeratorFunctionImpl::ClearEnumerator(pDTWAINArray);

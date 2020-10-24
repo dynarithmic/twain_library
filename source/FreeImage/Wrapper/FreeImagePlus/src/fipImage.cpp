@@ -587,6 +587,155 @@ BOOL fipImage::saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag)
 }
 
 ///////////////////////////////////////////////////////////////////   
+BOOL  fipImage::saveEx(FREE_IMAGE_FORMAT fif, const char* lpszPathName, int page, int flag)
+{
+    BOOL bSuccess = FreeImage_SaveEx(fif, _dib.get(), lpszPathName, page, flag);
+    _fif = fif;
+    return bSuccess;
+}
+
+BOOL fipImage::saveEx(const char* lpszPathName, int page, int flag)
+{
+    FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+    BOOL bSuccess = FALSE;
+
+    // Try to guess the file format from the file extension
+    fif = FreeImage_GetFIFFromFilename(lpszPathName);
+    if (fif != FIF_UNKNOWN)
+    {
+        // Check that the dib can be saved in this format
+        BOOL bCanSave;
+
+        FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib.get());
+        if (image_type == FIT_BITMAP)
+        {
+            // standard bitmap type
+            WORD bpp = FreeImage_GetBPP(_dib.get());
+            bCanSave = (FreeImage_FIFSupportsWriting(fif) && FreeImage_FIFSupportsExportBPP(fif, bpp));
+        }
+        else
+        {
+            // special bitmap type
+            bCanSave = FreeImage_FIFSupportsExportType(fif, image_type);
+        }
+
+        if (bCanSave)
+        {
+            bSuccess = FreeImage_Save(fif, _dib.get(), lpszPathName, flag);
+            _fif = fif;
+            return bSuccess;
+        }
+    }
+    return bSuccess;
+}
+
+BOOL  fipImage::saveUEx(FREE_IMAGE_FORMAT fif, const wchar_t* lpszPathName, int page, int flag)
+{
+    BOOL bSuccess = FreeImage_SaveU(fif, _dib.get(), lpszPathName, flag);
+    _fif = fif;
+    return bSuccess;
+}
+
+BOOL fipImage::saveUEx(const wchar_t* lpszPathName, int page, int flag)
+{
+    FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+    BOOL bSuccess = FALSE;
+
+    // Try to guess the file format from the file extension
+    fif = FreeImage_GetFIFFromFilenameU(lpszPathName);
+    if (fif != FIF_UNKNOWN)
+    {
+        // Check that the dib can be saved in this format
+        BOOL bCanSave;
+
+        FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib.get());
+        if (image_type == FIT_BITMAP)
+        {
+            // standard bitmap type
+            WORD bpp = FreeImage_GetBPP(_dib.get());
+            bCanSave = (FreeImage_FIFSupportsWriting(fif) && FreeImage_FIFSupportsExportBPP(fif, bpp));
+        }
+        else
+        {
+            // special bitmap type
+            bCanSave = FreeImage_FIFSupportsExportType(fif, image_type);
+        }
+
+        if (bCanSave)
+        {
+            bSuccess = FreeImage_SaveU(fif, _dib.get(), lpszPathName, flag);
+            _fif = fif;
+            return bSuccess;
+        }
+    }
+    return bSuccess;
+}
+
+BOOL fipImage::saveToHandleEx(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int page, int flag)
+{
+    BOOL bSuccess = FALSE;
+
+    if (fif != FIF_UNKNOWN)
+    {
+        // Check that the dib can be saved in this format
+        BOOL bCanSave;
+
+        FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib.get());
+        if (image_type == FIT_BITMAP)
+        {
+            // standard bitmap type
+            WORD bpp = FreeImage_GetBPP(_dib.get());
+            bCanSave = (FreeImage_FIFSupportsWriting(fif) && FreeImage_FIFSupportsExportBPP(fif, bpp));
+        }
+        else
+        {
+            // special bitmap type
+            bCanSave = FreeImage_FIFSupportsExportType(fif, image_type);
+        }
+
+        if (bCanSave)
+        {
+            bSuccess = FreeImage_SaveToHandle(fif, _dib.get(), io, handle, flag);
+            _fif = fif;
+            return bSuccess;
+        }
+    }
+    return bSuccess;
+}
+
+BOOL fipImage::saveToMemoryEx(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int page, int flag)
+{
+    BOOL bSuccess = FALSE;
+
+    if (fif != FIF_UNKNOWN)
+    {
+        // Check that the dib can be saved in this format
+        BOOL bCanSave;
+
+        FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib.get());
+        if (image_type == FIT_BITMAP)
+        {
+            // standard bitmap type
+            WORD bpp = FreeImage_GetBPP(_dib.get());
+            bCanSave = (FreeImage_FIFSupportsWriting(fif) && FreeImage_FIFSupportsExportBPP(fif, bpp));
+        }
+        else
+        {
+            // special bitmap type
+            bCanSave = FreeImage_FIFSupportsExportType(fif, image_type);
+        }
+
+        if (bCanSave)
+        {
+            bSuccess = memIO.save(fif, _dib.get(), flag);
+            _fif = fif;
+            return bSuccess;
+        }
+    }
+    return bSuccess;
+}
+
+///////////////////////////////////////////////////////////////////   
 // Conversion routines
 
 BOOL fipImage::convertToType(FREE_IMAGE_TYPE image_type, BOOL scale_linear) 

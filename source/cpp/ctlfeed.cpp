@@ -38,6 +38,33 @@ static bool IsFeederEnabledFunc(DTWAIN_SOURCE Source, IsEnabledFunc Func);
 static bool ExecuteFeederState5Func(DTWAIN_SOURCE Source, LONG lCap);
 static VOID CALLBACK ThisTimerProc(HWND hwnd, UINT uMsg, ULONG idEvent,DWORD dwTime);
 
+DTWAIN_BOOL DLLENTRY_DEF  DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source)
+{
+    LOG_FUNC_ENTRY_PARAMS((Source))
+
+    // Check if feeder has been enabled.  If so, then device has a feeder
+    DTWAIN_ARRAY arr = 0;
+    BOOL bOk = DTWAIN_GetCapValues(Source, DTWAIN_CV_CAPFEEDERENABLED, DTWAIN_CAPGETCURRENT, &arr);
+    DTWAINArrayLL_RAII a(arr);
+    if (!bOk)
+        LOG_FUNC_EXIT_PARAMS(false)
+
+    LONG val;
+    DTWAIN_ArrayGetAtLong(arr, 0, &val);
+    if (val == 1)
+        LOG_FUNC_EXIT_PARAMS(true);
+
+    // Enable the feeder temporarily. 
+    BOOL bRet = DTWAIN_SetCapValues(Source, DTWAIN_CV_CAPFEEDERENABLED, DTWAIN_CAPSET, arr);
+    if (!bRet)
+        LOG_FUNC_EXIT_PARAMS(false)
+
+    DTWAIN_ArraySetAtLong(arr, 0, 0);
+    bRet = DTWAIN_SetCapValues(Source, DTWAIN_CV_CAPFEEDERENABLED, DTWAIN_CAPSET, arr);
+    LOG_FUNC_EXIT_PARAMS(bRet)
+    CATCH_BLOCK(false)
+}
+
 DTWAIN_BOOL DLLENTRY_DEF  DTWAIN_IsFeederLoaded(DTWAIN_SOURCE Source)
 {
     LOG_FUNC_ENTRY_PARAMS((Source))

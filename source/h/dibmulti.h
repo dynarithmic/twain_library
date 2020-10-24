@@ -36,9 +36,10 @@ namespace dynarithmic
     struct DibMultiPageStruct
     {
         int Stage;
+        int Page;
         void *pUserData;
         CTL_StringType strName;
-        DibMultiPageStruct() : Stage(0), pUserData(NULL) { }
+        DibMultiPageStruct() : Stage(0), Page(0), pUserData(NULL) { }
     };
 }
 #endif

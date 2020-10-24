@@ -464,6 +464,38 @@ FreeImage_SaveToHandle(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FreeImageIO *io, fi
 	return FALSE;
 }
 
+BOOL DLL_CALLCONV
+FreeImage_SaveToHandleEx(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FreeImageIO *io, fi_handle handle, int page, int flags)
+{
+    // cannot save "header only" formats
+    if (FreeImage_HasPixels(dib) == FALSE)
+    {
+        FreeImage_OutputMessageProc((int)fif, "FreeImage_SaveToHandle: cannot save \"header only\" formats");
+        return FALSE;
+    }
+
+    if ((fif >= 0) && (fif < FreeImage_GetFIFCount()))
+    {
+        PluginNode *node = s_plugins->FindNodeFromFIF(fif);
+
+        if (node)
+        {
+            if (node->m_plugin->save_proc != NULL)
+            {
+                void *data = FreeImage_Open(node, io, handle, FALSE);
+
+                BOOL result = node->m_plugin->save_proc(io, dib, handle, page, flags, data);
+
+                FreeImage_Close(node, io, handle, data);
+
+                return result;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
 
 BOOL DLL_CALLCONV
 FreeImage_Save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, const char *filename, int flags) {
@@ -479,6 +511,30 @@ FreeImage_Save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, const char *filename, int f
 
 		return success;
 	} else {
+		FreeImage_OutputMessageProc((int)fif, "FreeImage_Save: failed to open file %s", filename);
+	}
+
+	return FALSE;
+}
+
+BOOL DLL_CALLCONV
+FreeImage_SaveEx(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, const char *filename, int page, int flags)
+{
+    FreeImageIO io;
+    SetDefaultIO(&io);
+
+    FILE *handle = fopen(filename, "w+b");
+
+    if (handle)
+    {
+        BOOL success = FreeImage_SaveToHandleEx(fif, dib, &io, (fi_handle)handle, page, flags);
+
+        fclose(handle);
+
+        return success;
+    }
+    else
+    {
 		FreeImage_OutputMessageProc((int)fif, "FreeImage_Save: failed to open file %s", filename);
 	}
 

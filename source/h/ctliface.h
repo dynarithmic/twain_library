@@ -263,7 +263,7 @@ namespace dynarithmic
     enum CTL_EnumeratorType { CTL_EnumeratorPtrType     = 1,
                                 CTL_EnumeratorIntType       = 2,
                                 CTL_EnumeratorDoubleType    = 3,
-                                CTL_EnumeratorDibType     = 4,
+                                CTL_EnumeratorHandleType     = 4,
                                 CTL_EnumeratorSourceType    = 5,
                                 CTL_EnumeratorStringType  = 6,
                                 CTL_EnumeratorDTWAINFrameType   = 7,
@@ -296,7 +296,7 @@ namespace dynarithmic
     typedef CTL_EnumeratorNode<int, CTL_EnumeratorIntType>                  CTL_Enumerator_int;
     typedef CTL_EnumeratorNode<LONG64, CTL_EnumeratorInt64Type>             CTL_Enumerator_LONG64;
     typedef CTL_EnumeratorNode<double, CTL_EnumeratorDoubleType>            CTL_Enumerator_double;
-    typedef CTL_EnumeratorNode<HANDLE, CTL_EnumeratorDibType>               CTL_Enumerator_HANDLE;
+    typedef CTL_EnumeratorNode<HANDLE, CTL_EnumeratorHandleType>               CTL_Enumerator_HANDLE;
     typedef CTL_EnumeratorNode<CTL_ITwainSourcePtr, CTL_EnumeratorSourceType> CTL_Enumerator_CTL_ITwainSourcePtr;
     typedef CTL_EnumeratorNode<LPVOID, CTL_EnumeratorPtrType>               CTL_Enumerator_LPVOID;
     typedef CTL_EnumeratorNode<CTL_StringType, CTL_EnumeratorStringType>        CTL_Enumerator_CTL_StringType;
@@ -564,6 +564,10 @@ namespace dynarithmic
             CTL_ResourceRegistryMap m_ResourceRegistry;
             CTL_TwainSession    m_Session;
             CTL_StringType      m_VersionString;
+            CTL_StringType      m_strTWAINPath;     // path to the TWAIN Data Source Manager that is being used
+            CTL_StringType      m_strTWAINPath2;   // path to the TWAIN Data Source Manager 2.x that is being used
+            CTL_StringType      m_strLibraryPath;   // path to the DTWAIN Library being used
+            static CTL_StringType    s_strResourcePath;  // path to the DTWAIN resource strings
             HINSTANCE           m_hInstance;
             HWND                m_hWndTwain;
             HWND                m_hNotifyWnd;
@@ -586,6 +590,10 @@ namespace dynarithmic
             bool                m_bNotificationsUsed;
             DTWAIN_CALLBACK_PROC m_pCallbackFn;
             DTWAIN_CALLBACK_PROC64 m_pCallbackFn64;
+            DTWAIN_ERROR_PROC   m_pErrorProcFn;
+            DTWAIN_ERROR_PROC64 m_pErrorProcFn64;
+            LONG                m_lErrorProcUserData;
+            LONG64              m_lErrorProcUserData64;
             static DTWAIN_LOGGER_PROC  s_pLoggerCallback;
             static DTWAIN_LOGGER_PROCA  s_pLoggerCallbackA;
             static DTWAIN_LOGGER_PROCW  s_pLoggerCallbackW;
@@ -654,6 +662,7 @@ namespace dynarithmic
             static bool                     s_DemoInitialized;
             static int                      s_TwainDSMSearchOrder;
 			static CTL_StringType			s_TwainDSMSearchOrderStr;
+            static CTL_StringType           s_TwainDSMUserDirectory;
 			static bool						s_multipleThreads;
 			static HFONT					s_DialogFont;
 

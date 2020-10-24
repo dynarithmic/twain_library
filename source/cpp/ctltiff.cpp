@@ -60,6 +60,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTIFFCompressType(DTWAIN_SOURCE Source, LONG S
 
         DTWAIN_Check_Error_Condition_1_Ex(pHandle, [&] { return !bIsCurTiff;}, DTWAIN_ERR_FILE_FORMAT, false, FUNC_MACRO);
 
+        bool bIsTiffMulti = p->IsFileTypeMultiPage(static_cast<CTL_TwainFileFormatEnum>(curAcquireType));
+        if (bIsTiffMulti)
+            p->SetAcquireFileType(p->GetMultiPageType(static_cast<CTL_TwainFileFormatEnum>(Setting)));
+        else
         p->SetAcquireFileType(static_cast<CTL_TwainFileFormatEnum>(Setting));
         LOG_FUNC_EXIT_PARAMS(true)
     }

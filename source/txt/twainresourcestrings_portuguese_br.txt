@@ -62,6 +62,7 @@
 1047 Tipo de dados da capacidade incorreto
 1048 A capacidade possui um tipo de dados desconhecido
 1049 A versão demo do DTWAIN não suporta este tipo de arquivo
+1050 Selecção cancelada
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

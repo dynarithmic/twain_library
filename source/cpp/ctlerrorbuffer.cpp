@@ -34,8 +34,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer)
     if ( !IsDLLHandleValid( pHandle, FALSE ) )
         LOG_FUNC_EXIT_PARAMS(false)
 
-    size_t nEntries = (std::min)(static_cast<size_t>(CTL_TwainDLLHandle::s_nErrorBufferThreshold),
-                                CTL_TwainDLLHandle::s_vErrorBuffer.size());
+    size_t nEntries = (std::min)(static_cast<size_t>(CTL_TwainDLLHandle::s_nErrorBufferThreshold), CTL_TwainDLLHandle::s_vErrorBuffer.size());
     DTWAIN_ARRAY A = DTWAIN_ArrayCreate(DTWAIN_ARRAYLONG, (LONG)nEntries);
     if ( A )
     {
@@ -71,7 +70,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorBufferThreshold(LONG nErrors)
         LOG_FUNC_EXIT_PARAMS(false)
 
     // Minimum of 50 errors
-
     LONG nEntries = (std::max)(nErrors, static_cast<LONG>(50));
 
     // clear buffer

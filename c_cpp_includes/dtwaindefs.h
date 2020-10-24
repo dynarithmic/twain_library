@@ -243,6 +243,9 @@
 #define DTWAIN_CAPRESETALL           8 /* Reset all capabilities */
 #define DTWAIN_CAPSETCONSTRAINT      9 /* constrain values */
 
+#define DTWAIN_CAPGETHELP            9
+#define DTWAIN_CAPGETLABEL           10
+#define DTWAIN_CAPGETLABELENUM       11
 
 /* The following values are ORed with the DTWAIN_CAPSET value */
 #define DTWAIN_CAPSETAVAILABLE       8  /* Sets available values  */
@@ -808,6 +811,7 @@
 #define DTWAIN_ERR_BAD_CAPTYPE   (-1047)
 #define DTWAIN_ERR_UNKNOWN_CAPDATATYPE   (-1048)
 #define DTWAIN_ERR_DEMO_NOFILETYPE (-1049)
+#define DTWAIN_ERR_SOURCESELECTION_CANCELED (-1050)
 
 #define DTWAIN_ERR_LAST_1       DTWAIN_ERR_DEMO_NOFILETYPE
 

@@ -438,7 +438,7 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
                 case CTL_EnumeratorIntType:
                 case CTL_EnumeratorInt64Type:
                 case CTL_EnumeratorDoubleType:
-                case CTL_EnumeratorDibType:
+                case CTL_EnumeratorHandleType:
                 case CTL_EnumeratorSourceType:
                 case CTL_EnumeratorStringType:
                 case CTL_EnumeratorANSIStringType:
@@ -457,7 +457,7 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
             ENUMERATOR_IS_VALID(int, CTL_EnumeratorIntType, pEnum)
             ENUMERATOR_IS_VALID(double, CTL_EnumeratorDoubleType, pEnum)
             ENUMERATOR_IS_VALID(LONG64, CTL_EnumeratorInt64Type, pEnum)
-            ENUMERATOR_IS_VALID(HANDLE, CTL_EnumeratorDibType, pEnum)
+            ENUMERATOR_IS_VALID(HANDLE, CTL_EnumeratorHandleType, pEnum)
             ENUMERATOR_IS_VALID(CTL_StringType, CTL_EnumeratorStringType, pEnum)
             ENUMERATOR_IS_VALID(CTL_String, CTL_EnumeratorANSIStringType, pEnum)
             ENUMERATOR_IS_VALID(CTL_WString, CTL_EnumeratorWideStringType, pEnum)
@@ -511,7 +511,7 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
             ENUMERATOR_SETUP(LONG64, EnumType, CTL_EnumeratorInt64Type)
             ENUMERATOR_SETUP(double, EnumType, CTL_EnumeratorDoubleType)
             ENUMERATOR_SETUP(CTL_StringType, EnumType, CTL_EnumeratorStringType)
-            ENUMERATOR_SETUP(HANDLE, EnumType, CTL_EnumeratorDibType)
+            ENUMERATOR_SETUP(HANDLE, EnumType, CTL_EnumeratorHandleType)
             ENUMERATOR_SETUP(CTL_ITwainSourcePtr, EnumType, CTL_EnumeratorSourceType)
             ENUMERATOR_SETUP(DTWAINFrameInternal, EnumType, CTL_EnumeratorDTWAINFrameType)
             ENUMERATOR_SETUP(TW_FRAME, EnumType, CTL_EnumeratorTWFrameType)
@@ -532,7 +532,7 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorStringType,      CTL_StringType)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorANSIStringType,  CTL_String)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorWideStringType,  CTL_WString)
-            ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorDibType,         HANDLE)
+            ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorHandleType,         HANDLE)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorSourceType,      CTL_ITwainSourcePtr)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorDTWAINFrameType, DTWAINFrameInternal)
             ENUMERATOR_COPY(sourceEnum, destEnum, enumToCheck, CTL_EnumeratorTWFrameType,     TW_FRAME)

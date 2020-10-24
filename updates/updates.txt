@@ -1,7 +1,38 @@
 DTWAIN Version changes
 
+5.2.0.2		  
+- Fixed DLL Version Information in the DLL resources.
+
+- Fixed generation of multipage TIFF files if the compression used on pages will vary.  This fix required 
+  patching the FreeImage source code. 
+
+- Fixed DTWAIN_SetTiffCompressType to properly handle non-multipage and multipage TIFF types.
+
+- Added function DTWAIN_SetDSMSearchOrderEx to allow applications to customize where DTWAIN will search for the 
+  TWAIN Data Source Manager.  This differs from DTWAIN_SetDSMSearchOrder in that the Ex version will now allow
+  searching in a custom directory.		  
+
+- Added initial support for MSG_GETHELP, MSG_GETLABEL, and MSG_GETLABELENUM using DTWAIN_GetCapValues and related functions.
+  Note that these messages were always available using the lower-level DTWAIN_CallDSM function, but now the library has made
+  these messages available using the DTWAIN_GetCapValues function.
+
+- Changed DTWAIN_IsFeederSupported to do a more thorough test to see if a feeder is supported instead of just checking
+  for the feeder being enabled.
+
+- Fixed issue with MSG_SETCONSTRAINT message not being recognized in call to DTWAIN_SetCapValues.
+
+- Added DTWAIN_GetLastError() return code of -1050 to denote that Source selection has been cancelled from the TWAIN dialog.  
+  Previously the cancellation was reported as an INVALID DTWAIN SOURCE.  This did not affect applications, since the 
+  TWAIN Source is actually NULL if the TWAIN dialog is cancelled, but this additional code is added for clarity.
+
+- DTWAIN Log now shows local time stamp intstead of UTC.
+					   
+- Other miscellaneous fixes
+
+
 5.2.0.1
 - Fix incorrect version number in DLL resources
+
 - Add missing source file ctlacquireaudio.cpp to source build project
 
 

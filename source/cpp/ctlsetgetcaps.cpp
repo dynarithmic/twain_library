@@ -250,8 +250,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCapValues( DTWAIN_SOURCE Source, LONG lCap, L
 
 // Gets capability values.  This function does not test if the capability exists, or if the container type is valid.  Use
 // with caution!!
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCapValuesEx( DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType,
-    LPDTWAIN_ARRAY pArray )
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCapValuesEx( DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType, LPDTWAIN_ARRAY pArray )
 {
     LOG_FUNC_ENTRY_PARAMS((Source, lCap, lGetType, lContainerType, pArray))
     DTWAIN_BOOL bRet = FALSE;
@@ -280,6 +279,21 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCapValuesEx2( DTWAIN_SOURCE Source, LONG lCap
     CATCH_BLOCK(false)
 }
 
+static LONG GetTwainGetType(LONG gettype)
+{
+    switch (gettype)
+    {
+        case DTWAIN_CAPGETHELP:
+            return MSG_GETHELP;
+
+        case DTWAIN_CAPGETLABEL:
+            return MSG_GETLABEL;
+
+        case DTWAIN_CAPGETLABELENUM:
+            return MSG_GETLABELENUM;
+    }
+    return gettype;
+}
 
 DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap, LONG lGetType, LONG lContainerType,
                                                          LONG nDataType, LPDTWAIN_ARRAY pArray, bool bOverrideDataType )
@@ -316,9 +330,42 @@ DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap
         DTWAIN_Check_Error_Condition_0_Ex(pHandle, [&]{return (nDataType == DTWAIN_CAPDATATYPE_UNKNOWN);},
                                           DTWAIN_ERR_UNKNOWN_CAPDATATYPE, false, FUNC_MACRO);
 
-        if( lContainerType == DTWAIN_CONTDEFAULT )
-            lContainerType = DTWAIN_GetCapContainer(Source, lCap, lGetType);
+        // adjust the container types for GETHELP, GETLABEL, and GETLABELENUM 
+        switch (lGetType)
+        {
+            case DTWAIN_CAPGETHELP:
+            case DTWAIN_CAPGETLABEL:
+                lContainerType = DTWAIN_CONTONEVALUE;
+            break;
+            case DTWAIN_CAPGETLABELENUM:
+                lContainerType = DTWAIN_CONTARRAY;
+            break;
+        }
 
+        // get the default container type if specified
+        if( lContainerType == DTWAIN_CONTDEFAULT )
+        {
+            switch (lGetType)
+            {
+                // skip these, as they're already set up
+                case DTWAIN_CAPGETHELP:
+                case DTWAIN_CAPGETLABEL:
+                case DTWAIN_CAPGETLABELENUM:
+                break;
+
+                default:
+            lContainerType = DTWAIN_GetCapContainer(Source, lCap, lGetType);
+                break;
+            }
+        }
+
+        if (lGetType == DTWAIN_CAPGETHELP || lGetType == DTWAIN_CAPGETLABEL)
+            ThisArray = performGetCap<HANDLE>(pHandle, Source, lCap, nDataType, lContainerType, GetTwainGetType(lGetType), overrideDataType, CTL_EnumeratorHandleType);
+        else
+        if ( lGetType == DTWAIN_CAPGETLABELENUM )
+            ThisArray = performGetCap<CTL_String>(pHandle, Source, lCap, nDataType, lContainerType, GetTwainGetType(lGetType), overrideDataType, CTL_EnumeratorStringType);
+        else
+        {
         if (IsIntCapType(static_cast<TW_UINT16>(nDataType)))
         {
             ThisArray = performGetCap<LONG>(pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorIntType);
@@ -350,6 +397,7 @@ DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap
         }
         else
             LOG_FUNC_EXIT_PARAMS(false)
+    }
     }
     arr.Disconnect();
     if ( bEnumeratorExists )
@@ -418,6 +466,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCapValuesEx2( DTWAIN_SOURCE Source, LONG lCap
             lSetType = DTWAIN_CAPSET;
 
         DumpArrayContents(pArray, lCap);
+
+        // Change to the real TWAIN set-constraint type
+        if ( lSetType == DTWAIN_CAPSETCONSTRAINT )
+            lSetType = MSG_SETCONSTRAINT;
 
         if (IsIntCapType(static_cast<TW_UINT16>(nDataType)))
             bOk = performSetCap<LONG, TW_UINT32>(pHandle, Source, static_cast<TW_UINT16>(lCap), pArray, lContainerType, lSetType, DTWAIN_ARRAYLONG, CTL_EnumeratorIntType, nDataType);

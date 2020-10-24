@@ -32,7 +32,9 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName,
 		{DTWAIN_TWAINDSMSEARCH_WSO,"WSO"},
 		{ DTWAIN_TWAINDSMSEARCH_WOS,"WOS" },
 		{ DTWAIN_TWAINDSMSEARCH_SWO,"SWO" },
+        { DTWAIN_TWAINDSMSEARCH_SOW,"SOW" },
 		{ DTWAIN_TWAINDSMSEARCH_OWS,"OWS" },
+        { DTWAIN_TWAINDSMSEARCH_OSW,"OSW" },
 		{ DTWAIN_TWAINDSMSEARCH_W,"W" },
 		{ DTWAIN_TWAINDSMSEARCH_S,"S" },
 		{ DTWAIN_TWAINDSMSEARCH_O,"O" },
@@ -47,23 +49,22 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName,
 	if (iter != searchOrderMap.end())
 	{
 		CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native(iter->second);
-		auto retVal = GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
-		if (retVal.empty())
-		{
-			CTL_StringType oldStringType = CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr;
-			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("C");
-			retVal = GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
-			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = oldStringType;
-		}
-		return retVal;
+		return GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
 	}
-	return CTL_StringType();
+    // This will completely use the Ex version of finding the directory
+    return GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
 }
 
 CTL_StringType GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
 									bool bLeaveLoaded,
 									boost::dll::shared_library *pModule)
 {
+    static constexpr int WinDirPos = 0;
+    static constexpr int SysDirPos = 1;
+    static constexpr int SysPathPos = 2;
+    static constexpr int CurDirPos = 3;
+    static constexpr int UserDefPos = 4;
+
     // make sure we get only the file name.  If a directory path
     // is given in the strTwainDLLName argument, it is ignored.
     StringWrapper::StringArrayType fComponents;
@@ -73,23 +74,27 @@ CTL_StringType GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
     // we first search the Windows directory.
     // if TWAIN isn't found there, check system directory.
     // if not there, then use the Windows path search logic
-	CTL_StringType dirNames[4];
     std::set<CTL_StringType> strSet;
 	static std::unordered_map<StringWrapper::traits_type::char_type, int> searchMap = { 
-		{StringConversion::Convert_Ansi_To_Native("C")[0],3},
-		{StringConversion::Convert_Ansi_To_Native("W")[0],0},
-		{StringConversion::Convert_Ansi_To_Native("S")[0],1},
-		{StringConversion::Convert_Ansi_To_Native("O")[0],2} };
+		{StringConversion::Convert_Ansi_To_Native("C")[0],CurDirPos},
+		{StringConversion::Convert_Ansi_To_Native("W")[0],WinDirPos},
+		{StringConversion::Convert_Ansi_To_Native("S")[0],SysDirPos},
+		{StringConversion::Convert_Ansi_To_Native("O")[0],SysPathPos},
+        {StringConversion::Convert_Ansi_To_Native("U")[0],UserDefPos },
+     };
 
-    dirNames[0] = StringWrapper::GetWindowsDirectory();
-    dirNames[1] = StringWrapper::GetSystemDirectory();
-    dirNames[2] = CTL_StringType(_T(""));
-	dirNames[3] = StringWrapper::SplitPath(GetDTWAINDLLPath())[StringWrapper::DIRECTORY_POS];
+    std::vector<CTL_StringType> dirNames(searchMap.size());
+
+    dirNames[WinDirPos] = StringWrapper::GetWindowsDirectory();
+    dirNames[SysDirPos] = StringWrapper::GetSystemDirectory();
+    dirNames[SysPathPos] = CTL_StringType(_T(""));
+	dirNames[CurDirPos] = StringWrapper::SplitPath(GetDTWAINDLLPath())[StringWrapper::DIRECTORY_POS];
+    dirNames[UserDefPos] = StringWrapper::SplitPath(CTL_TwainDLLHandle::s_TwainDSMUserDirectory)[StringWrapper::DIRECTORY_POS];
 
 	CTL_StringType curSearchOrder = CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr;
     CTL_StringType fNameTotal;
     bool bFoundTwain = false;
-	int minSize = (std::min)(4, (int)curSearchOrder.size());
+	int minSize = (std::min)(dirNames.size(), curSearchOrder.size());
 	for (int i = 0; i < minSize && !bFoundTwain; ++i)
     {
         // skip this search if -1 is given

@@ -36,6 +36,7 @@
 #include "Plugin.h"
 #include "Utilities.h"
 #include "FreeImage.h"
+#include <memory>
 
 namespace {
 
@@ -279,8 +280,8 @@ FreeImage_OpenMultiBitmap(FREE_IMAGE_FORMAT fif, const char *filename, BOOL crea
 					}
 				}
 
-				std::auto_ptr<FIMULTIBITMAP> bitmap (new FIMULTIBITMAP);
-				std::auto_ptr<MULTIBITMAPHEADER> header (new MULTIBITMAPHEADER);
+				std::unique_ptr<FIMULTIBITMAP> bitmap = std::make_unique<FIMULTIBITMAP>();
+				std::unique_ptr<MULTIBITMAPHEADER> header = std::make_unique<MULTIBITMAPHEADER>();
 				header->m_filename = filename;
 				// io is default
 				header->node = node;
@@ -345,8 +346,8 @@ FreeImage_OpenMultiBitmapFromHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_h
 				PluginNode *node = list->FindNodeFromFIF(fif);
 			
 				if (node) {
-					std::auto_ptr<FIMULTIBITMAP> bitmap (new FIMULTIBITMAP);
-					std::auto_ptr<MULTIBITMAPHEADER> header (new MULTIBITMAPHEADER);
+					std::unique_ptr<FIMULTIBITMAP> bitmap = std::make_unique<FIMULTIBITMAP>();
+					std::unique_ptr<MULTIBITMAPHEADER> header = std::make_unique<MULTIBITMAPHEADER>();
 					header->io = *io;
 					header->node = node;
 					header->fif = fif;
@@ -580,6 +581,17 @@ FreeImage_GetPageCount(FIMULTIBITMAP *bitmap) {
 	return 0;
 }
 
+int DLL_CALLCONV
+FreeImage_GetPageNumber(FIMULTIBITMAP *bitmap)
+{
+    if (bitmap)
+    {
+        MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);
+        return header->page_number;
+    }
+    return 0;
+}
+
 static PageBlock
 FreeImage_SavePageToBlock(MULTIBITMAPHEADER *header, FIBITMAP *data, int flags) {
 	PageBlock res;
@@ -600,7 +612,7 @@ FreeImage_SavePageToBlock(MULTIBITMAPHEADER *header, FIBITMAP *data, int flags) 
 		return res;
 	}
 	// save the file to memory
-	if(!FreeImage_SaveToMemory(header->cache_fif, data, hmem, flags)) {
+	if(!FreeImage_SaveToMemoryEx(header->cache_fif, data, hmem, header->page_number, flags)) {
 		FreeImage_CloseMemory(hmem);
 		return res;
 	}
@@ -661,6 +673,19 @@ FreeImage_InsertPage(FIMULTIBITMAP *bitmap, int page, FIBITMAP *data) {
 	}
 }
 
+
+void DLL_CALLCONV
+FreeImage_SetPageNumberEx(FIMULTIBITMAP *bitmap, int page)
+{
+    if (!bitmap)
+    {
+        return;
+    }
+
+    MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);
+    if (header)
+        header->page_number = page;
+}
 
 void DLL_CALLCONV
 FreeImage_AppendPageEx(FIMULTIBITMAP *bitmap, FIBITMAP *data, int flags) {

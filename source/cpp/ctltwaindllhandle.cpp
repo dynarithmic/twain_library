@@ -55,6 +55,10 @@ CTL_TwainDLLHandle::CTL_TwainDLLHandle() :
             m_pCallbackFn64(nullptr),
             m_lCallbackData(0),
             m_lCallbackData64(0),
+            m_pErrorProcFn(nullptr),
+            m_pErrorProcFn64(nullptr),
+            m_lErrorProcUserData(0),
+            m_lErrorProcUserData64(0),
             m_pDummySource(nullptr),
             m_pOCRDefaultEngine(nullptr)
             #ifdef _WIN32
@@ -143,7 +147,9 @@ CTL_TwainMemoryFunctions*     CTL_TwainDLLHandle::s_TwainMemoryFunc = nullptr;
 CTL_LegacyTwainMemoryFunctions CTL_TwainDLLHandle::s_TwainLegacyFunc;
 CTL_Twain2MemoryFunctions      CTL_TwainDLLHandle::s_Twain2Func;
 int                     CTL_TwainDLLHandle::s_TwainDSMSearchOrder = DTWAIN_TWAINDSMSEARCH_WSO;
-CTL_StringType			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("CWSO");
+CTL_StringType			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("CWSOU");
+CTL_StringType          CTL_TwainDLLHandle::s_TwainDSMUserDirectory;
+CTL_StringType          CTL_TwainDLLHandle::s_strResourcePath;
 bool					CTL_TwainDLLHandle::s_multipleThreads = false;
 DTWAIN_LOGGER_PROC      CTL_TwainDLLHandle::s_pLoggerCallback = nullptr;
 DTWAIN_LOGGER_PROCA     CTL_TwainDLLHandle::s_pLoggerCallbackA = nullptr;

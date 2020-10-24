@@ -355,6 +355,9 @@ namespace dynarithmic
     enum CTL_EnumGetType { CTL_GetTypeGET         = MSG_GET,
                            CTL_GetTypeGETCURRENT  = MSG_GETCURRENT,
                            CTL_GetTypeGETDEFAULT  = MSG_GETDEFAULT,
+                           CTL_GetTypeGETHELP   = MSG_GETHELP,
+                           CTL_GetTypeGETLABEL = MSG_GETLABEL,
+                           CTL_GetTypeGETLABELENUM = MSG_GETLABELENUM,
                            CTL_GetTypeQUERYSUPPORT = MSG_QUERYSUPPORT
                          };
 

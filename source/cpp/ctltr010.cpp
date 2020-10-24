@@ -224,6 +224,8 @@ TW_UINT16 CTL_CapabilityTriplet::GetItemSize( TW_UINT16 nTwainItem )
             return sizeof( TW_STR1024);
         case TWTY_UNI512:
             return sizeof( TW_UNI512);
+        case TWTY_HANDLE:
+            return sizeof(TW_HANDLE);
     }
     return 0;
 }

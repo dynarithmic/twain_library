@@ -229,7 +229,7 @@ const CTL_ITwainSource* CTL_TwainAppMgr::SelectSourceDlg(  CTL_ITwainSession *pS
     {
         case TWRC_CANCEL:
             SendTwainMsgToWindow(pSession, NULL, DTWAIN_TN_ACQUIRECANCELLED_EX, -1L);
-            return NULL;
+            DTWAIN_ERROR_CONDITION(DTWAIN_ERR_SOURCESELECTION_CANCELED, NULL)
         break;
 
         case TWRC_FAILURE:
@@ -454,6 +454,9 @@ bool CTL_TwainAppMgr::GetBestContainerType(const CTL_ITwainSource* pSource,
             rContainerSet = rContainerGet; // assume that setting and getting use the same
         else
             rContainerSet = setSave;
+        // we need to ensure that TW_ONEVALUEs are possible for custom container setting
+        if (!(rContainerSet & DTWAIN_CONTONEVALUE))
+            rContainerSet |= DTWAIN_CONTONEVALUE;
     }
 
     // container.  No way to know for sure.
@@ -1581,7 +1584,6 @@ void CTL_TwainAppMgr::SetError(int nError, const CTL_StringType& extraInfo)
         std::deque<int>::size_type nEntries = CTL_TwainDLLHandle::s_vErrorBuffer.size();
         CTL_TwainDLLHandle::s_vErrorBuffer.push_front(-nError);
 
-
         // Check if beyond reserve size
         unsigned int nReserve = CTL_TwainDLLHandle::s_nErrorBufferReserve;
 
@@ -1605,6 +1607,12 @@ void CTL_TwainAppMgr::SetError(int nError, const CTL_StringType& extraInfo)
         (*pHandle->m_pCallbackFn64)(DTWAIN_TN_GENERALERROR, -nError, (LPARAM)0);
     }
 
+    // If there is an error-only callback, call it now with the error notification
+    if ( pHandle->m_pErrorProcFn )
+        (*pHandle->m_pErrorProcFn)(-nError, pHandle->m_lErrorProcUserData);
+
+    if (pHandle->m_pErrorProcFn64)
+        (*pHandle->m_pErrorProcFn64)(-nError, pHandle->m_lErrorProcUserData64);
 }
 
 int CTL_TwainAppMgr::GetLastError()

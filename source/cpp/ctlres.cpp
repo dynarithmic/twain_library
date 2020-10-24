@@ -55,7 +55,11 @@ namespace dynarithmic
 
     static CTL_String createResourceFileName(const char *resName)
     {
-        CTL_String sPath = StringConversion::Convert_Native_To_Ansi(dynarithmic::GetDTWAINExecutionPath());
+        CTL_String sPath;
+        if ( CTL_TwainDLLHandle::s_strResourcePath.empty())
+            sPath = StringConversion::Convert_Native_To_Ansi(dynarithmic::GetDTWAINExecutionPath());
+        else
+            sPath = StringWrapperA::RemoveBackslashFromDirectory(StringConversion::Convert_Native_To_Ansi(CTL_TwainDLLHandle::s_strResourcePath.c_str()));
         sPath += boost::filesystem::path::preferred_separator;
         return sPath + resName;
     }

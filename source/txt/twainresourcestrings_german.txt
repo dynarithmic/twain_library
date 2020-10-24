@@ -62,6 +62,7 @@
 1047 Bad capability data type
 1048 Capability has unknown data type
 1049 Demo Version of DTWAIN does not support this file type
+1050 Auswahl Quelle Abgebrochen
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

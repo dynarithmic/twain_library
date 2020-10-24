@@ -222,7 +222,7 @@ namespace dynarithmic
     class EncryptionObject : public PDFObject
     {
         public:
-            EncryptionObject(int objnum) : PDFObject(objnum) , m_RValue(2), m_bAESEncrypted(false), m_nLength(0), m_nPermissions(0) { }
+            EncryptionObject(int objnum) : PDFObject(objnum) , m_RValue(2), m_bAESEncrypted(false), m_nLength(0), m_nPermissions(0), m_nVValue(0) { }
             void ComposeObject();
             void SetRValue(int RValue) { m_RValue = RValue; }
             void SetLength(int nLength) { m_nLength = nLength; }
