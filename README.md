@@ -51,7 +51,7 @@ Just make sure the DLL is located somewhere on the system path, or in your appli
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order)
 
-In addition to the dll and lib files, the text resource files must also be available (they should reside in the same directory as the DLL files above).  The  text resources files are as follows:
+In addition to the dll and lib files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
 
     twaininfo.txt -- General TWAIN information -- this is required.
 	twainresourcestrings_english.txt  	English resources -- this is required.
