@@ -87,7 +87,7 @@ The call can now be this:
 
       DTWAIN_SOURCE Source;
       //...
-      DTWAIN_ARRAY array = DTWAIN_EnumOrientations(Source);
+      DTWAIN_ARRAY array = DTWAIN_EnumOrientationsEx(Source);
 
 Since DTWAIN_ARRAY is actually an integer (32-bit or 64-bit, depending on the program's bit-ness), the calling 
 application can simply treat the DTWAIN_ARRAY as an integer type.

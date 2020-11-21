@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2019 Dynarithmic Software.
+    Copyright (c) 2002-2020 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -235,6 +235,11 @@ namespace Dynarithmic
         public const  int DTWAIN_CAPSETCONSTRAINT = 9;
         public const  int DTWAIN_CAPSETAVAILABLE = 8;
         public const  int DTWAIN_CAPSETCURRENT = 16;
+
+        public const int DTWAIN_CAPGETHELP = 9;
+        public const int DTWAIN_CAPGETLABEL = 10;
+        public const int DTWAIN_CAPGETLABELENUM = 11;
+
         public const  int DTWAIN_AREASET = DTWAIN_CAPSET;
         public const  int DTWAIN_AREARESET = DTWAIN_CAPRESET;
         public const  int DTWAIN_AREACURRENT = DTWAIN_CAPGETCURRENT;
