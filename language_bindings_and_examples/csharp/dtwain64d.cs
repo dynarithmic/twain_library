@@ -22,10 +22,18 @@ using System.Runtime.InteropServices;
  */
 namespace Dynarithmic
 {
+    using DTWAIN_SOURCE = System.Int64;
+    using DTWAIN_ARRAY = System.Int64;
+    using DTWAIN_RANGE = System.Int64;
+    using DTWAIN_FRAME = System.Int64;
+    using DTWAIN_PDFTEXTELEMENT = System.Int64;
+    using DTWAIN_HANDLE = System.Int64;
+    using DTWAIN_OCRENGINE = System.Int64;
+    using DTWAIN_OCRTEXTINFOHANDLE = System.Int64;
     public class TwainAPI
     {
         public delegate int  DTwainCallback( int wParam, int lParam, int UserData );
-        public delegate int  DTwainDibUpdateCallback( int Source, int pagenum, int dibHandle);
+        public delegate int  DTwainDibUpdateCallback( DTWAIN_SOURCE Source, int pagenum, DTWAIN_HANDLE dibHandle);
         public delegate int  DTwainCallback64( int wParam, int lParam, long UserData );
         public delegate void DTwainLoggerProc( [MarshalAs(UnmanagedType.LPTStr)] string lpszName );
         public const  int DTWAIN_FF_TIFF = 0;
@@ -1416,76 +1424,78 @@ namespace Dynarithmic
         public const  int DTWAIN_PDFTEXTTRANSFORM_KTSR = 22;
         public const  int DTWAIN_PDFTEXTTRANSFORM_KTRS = 23;
         public const  int DTWAIN_PDFTEXTTRANFORM_LAST = DTWAIN_PDFTEXTTRANSFORM_KTRS;
+        public const int DTWAIN_TWDF_ULTRASONIC = 0;
+        public const int DTWAIN_TWDF_BYLENGTH = 1;
+        public const int DTWAIN_TWDF_INFRARED = 2;
 		public const string DTWAIN_LIBRARY = "DTWAIN64D.DLL";
 		
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_AcquireBuffered(long Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern DTWAIN_ARRAY DTWAIN_AcquireBuffered(DTWAIN_SOURCE Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireBufferedEx(long Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,long Acquisitions,ref int pStatus);
+        public static extern int DTWAIN_AcquireBufferedEx(DTWAIN_SOURCE Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,DTWAIN_ARRAY Acquisitions,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireFile(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireFile(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireFileA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireFileA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireFileEx(long Source,long aFileNames,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source,int aFileNames,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireFileW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireFileW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpszFile,int lFileType,int lFileFlags,int PixelType,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_AcquireNative(long Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern DTWAIN_ARRAY DTWAIN_AcquireNative(DTWAIN_SOURCE Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireNativeEx(long Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,long Acquisitions,ref int pStatus);
+        public static extern int DTWAIN_AcquireNativeEx(DTWAIN_SOURCE Source,int PixelType,int nMaxPages,int bShowUI,int bCloseSource,DTWAIN_ARRAY Acquisitions,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireAudioNative(long Source,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern DTWAIN_ARRAY DTWAIN_AcquireAudioNative(DTWAIN_SOURCE Source,int nMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireAudioFile(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireAudioFile(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireAudioFileA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpszFile, int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireAudioFileA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpszFile, int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireAudioFileW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireAudioFileW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpszFile,int lFileFlags,int lMaxPages,int bShowUI,int bCloseSource,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AcquireAudioNativeEx(long Source,int nMaxPages,int bShowUI,int bCloseSource,int Acquisitions,ref int pStatus);
-
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_AcquireToClipboard(long Source,int PixelType,int nMaxPages,int nTransferMode,int bDiscardDibs,int bShowUI,int bCloseSource,ref int pStatus);
+        public static extern int DTWAIN_AcquireAudioNativeEx(DTWAIN_SOURCE Source,int nMaxPages,int bShowUI,int bCloseSource,DTWAIN_ARRAY Acquisitions,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddPDFText(long Source,[MarshalAs(UnmanagedType.LPTStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPTStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
+        public static extern int DTWAIN_AcquireToClipboard(DTWAIN_SOURCE Source,int PixelType,int nMaxPages,int nTransferMode,int bDiscardDibs,int bShowUI,int bCloseSource,ref int pStatus);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_AddPDFText(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPTStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddPDFTextA(long Source,[MarshalAs(UnmanagedType.LPStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
+        public static extern int DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddPDFTextW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPWStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
+        public static extern int DTWAIN_AddPDFTextW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string szText,int xPos,int yPos,[MarshalAs(UnmanagedType.LPWStr)] string fontName,double fontSize,int colorRGB,int renderMode,double scaling,double charSpacing,double wordSpacing,int strokeWidth,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1493,271 +1503,271 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddANSIString(long pArray,[MarshalAs(UnmanagedType.LPStr)] string Val);
+        public static extern int DTWAIN_ArrayAddANSIString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddANSIStringN(long pArray,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayAddANSIStringN(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddFloat(long pArray,double Val);
+        public static extern int DTWAIN_ArrayAddFloat(DTWAIN_ARRAY pArray,double Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddFloatN(long pArray,double Val,int num);
+        public static extern int DTWAIN_ArrayAddFloatN(DTWAIN_ARRAY pArray,double Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddLong(long pArray,int Val);
+        public static extern int DTWAIN_ArrayAddLong(DTWAIN_ARRAY pArray,int Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddLongN(long pArray,int Val,int num);
+        public static extern int DTWAIN_ArrayAddLongN(DTWAIN_ARRAY pArray,int Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddString(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val);
+        public static extern int DTWAIN_ArrayAddString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddStringA(long pArray,[MarshalAs(UnmanagedType.LPStr)] string Val);
+        public static extern int DTWAIN_ArrayAddStringA(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddStringN(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayAddStringN(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddStringNA(long pArray,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayAddStringNA(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddStringNW(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayAddStringNW(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddStringW(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val);
+        public static extern int DTWAIN_ArrayAddStringW(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddWideString(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val);
+        public static extern int DTWAIN_ArrayAddWideString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayAddWideStringN(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayAddWideStringN(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayConvertFix32ToFloat(long Fix32Array);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayConvertFix32ToFloat(DTWAIN_ARRAY Fix32Array);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayConvertFloatToFix32(long FloatArray);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayConvertFloatToFix32(DTWAIN_ARRAY FloatArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayCopy(long Source,long Dest);
+        public static extern int DTWAIN_ArrayCopy(DTWAIN_ARRAY Source, DTWAIN_ARRAY Dest);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayCreate(int nEnumType,int nInitialSize);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayCreate(int nEnumType,int nInitialSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayCreateCopy(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayCreateCopy(DTWAIN_ARRAY Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayCreateFromCap(long Source,int lCapType,int lSize);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayCreateFromCap(DTWAIN_SOURCE Source,int lCapType,int lSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayCreateFromLongs(ref int pCArray,int nSize);
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayCreateFromLongs(ref int pCArray,int nSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayDestroy(long pArray);
+        public static extern int DTWAIN_ArrayDestroy(DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayDestroyFrames(long FrameArray);
+        public static extern int DTWAIN_ArrayDestroyFrames(DTWAIN_ARRAY FrameArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindANSIString(long pArray,[MarshalAs(UnmanagedType.LPStr)] string pString);
+        public static extern int DTWAIN_ArrayFindANSIString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string pString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindFloat(long pArray,double Val,double Tolerance);
+        public static extern int DTWAIN_ArrayFindFloat(DTWAIN_ARRAY pArray,double Val,double Tolerance);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindLong(long pArray,int Val);
+        public static extern int DTWAIN_ArrayFindLong(DTWAIN_ARRAY pArray,int Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindString(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string pString);
+        public static extern int DTWAIN_ArrayFindString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPTStr)] string pString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindStringA(long pArray,[MarshalAs(UnmanagedType.LPStr)] string pString);
+        public static extern int DTWAIN_ArrayFindStringA(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPStr)] string pString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindStringW(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string pString);
+        public static extern int DTWAIN_ArrayFindStringW(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string pString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayFindWideString(long pArray,[MarshalAs(UnmanagedType.LPWStr)] string pString);
+        public static extern int DTWAIN_ArrayFindWideString(DTWAIN_ARRAY pArray,[MarshalAs(UnmanagedType.LPWStr)] string pString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayFrameGetFrameAt(long FrameArray,int nWhere);
+        public static extern DTWAIN_FRAME DTWAIN_ArrayFrameGetFrameAt(DTWAIN_ARRAY FrameArray,int nWhere);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtANSIString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder pStr);
+        public static extern int DTWAIN_ArrayGetAtANSIString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtFloat(long pArray,int nWhere,ref double pVal);
+        public static extern int DTWAIN_ArrayGetAtFloat(DTWAIN_ARRAY pArray,int nWhere,ref double pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtLong(long pArray,int nWhere,ref int pVal);
+        public static extern int DTWAIN_ArrayGetAtLong(DTWAIN_ARRAY pArray,int nWhere,ref int pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pStr);
+        public static extern int DTWAIN_ArrayGetAtString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtStringA(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder pStr);
+        public static extern int DTWAIN_ArrayGetAtStringA(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtStringW(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder pStr);
+        public static extern int DTWAIN_ArrayGetAtStringW(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetAtWideString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder pStr);
+        public static extern int DTWAIN_ArrayGetAtWideString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetCount(long pArray);
+        public static extern int DTWAIN_ArrayGetCount(DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetMaxStringLength(long a);
+        public static extern int DTWAIN_ArrayGetMaxStringLength(DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetStringLength(long a,int nWhichString);
+        public static extern int DTWAIN_ArrayGetStringLength(DTWAIN_ARRAY pArray, int nWhichString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayGetType(long pArray);
+        public static extern int DTWAIN_ArrayGetType(DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtANSIString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pVal);
+        public static extern int DTWAIN_ArrayInsertAtANSIString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtANSIStringN(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtANSIStringN(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtFloat(long pArray,int nWhere,double pVal);
+        public static extern int DTWAIN_ArrayInsertAtFloat(DTWAIN_ARRAY pArray,int nWhere,double pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtFloatN(long pArray,int nWhere,double Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtFloatN(DTWAIN_ARRAY pArray,int nWhere,double Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtLong(long pArray,int nWhere,int pVal);
+        public static extern int DTWAIN_ArrayInsertAtLong(DTWAIN_ARRAY pArray,int nWhere,int pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtLongN(long pArray,int nWhere,int pVal,int num);
+        public static extern int DTWAIN_ArrayInsertAtLongN(DTWAIN_ARRAY pArray,int nWhere,int pVal,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string pVal);
+        public static extern int DTWAIN_ArrayInsertAtString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtStringA(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pVal);
+        public static extern int DTWAIN_ArrayInsertAtStringA(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtStringN(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtStringN(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtStringNA(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtStringNA(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtStringNW(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtStringNW(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtStringW(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pVal);
+        public static extern int DTWAIN_ArrayInsertAtStringW(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtWideString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pVal);
+        public static extern int DTWAIN_ArrayInsertAtWideString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayInsertAtWideStringN(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
+        public static extern int DTWAIN_ArrayInsertAtWideStringN(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string Val,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayRemoveAll(long pArray);
+        public static extern int DTWAIN_ArrayRemoveAll(DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayRemoveAt(long pArray,int nWhere);
+        public static extern int DTWAIN_ArrayRemoveAt(DTWAIN_ARRAY pArray,int nWhere);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayRemoveAtN(long pArray,int nWhere,int num);
+        public static extern int DTWAIN_ArrayRemoveAtN(DTWAIN_ARRAY pArray,int nWhere,int num);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArrayResize(long pArray,int NewSize);
+        public static extern int DTWAIN_ArrayResize(DTWAIN_ARRAY pArray,int NewSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtANSIString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pStr);
+        public static extern int DTWAIN_ArraySetAtANSIString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtFloat(long pArray,int nWhere,double pVal);
+        public static extern int DTWAIN_ArraySetAtFloat(DTWAIN_ARRAY pArray,int nWhere,double pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtLong(long pArray,int nWhere,int pVal);
+        public static extern int DTWAIN_ArraySetAtLong(DTWAIN_ARRAY pArray,int nWhere,int pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string pStr);
+        public static extern int DTWAIN_ArraySetAtString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPTStr)] string pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtStringA(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pStr);
+        public static extern int DTWAIN_ArraySetAtStringA(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPStr)] string pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtStringW(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pStr);
+        public static extern int DTWAIN_ArraySetAtStringW(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ArraySetAtWideString(long pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pStr);
+        public static extern int DTWAIN_ArraySetAtWideString(DTWAIN_ARRAY pArray,int nWhere,[MarshalAs(UnmanagedType.LPWStr)] string pStr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1765,7 +1775,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ClearBuffers(long Source,int ClearBuffer);
+        public static extern int DTWAIN_ClearBuffers(DTWAIN_SOURCE Source,int ClearBuffer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1773,83 +1783,82 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ClearPDFText(long Source);
+        public static extern int DTWAIN_ClearPDFText(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ClearPage(long Source);
+        public static extern int DTWAIN_ClearPage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_CloseSource(long Source);
+        public static extern int DTWAIN_CloseSource(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_CloseSourceUI(long Source);
+        public static extern int DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_CreateAcquisitionArray();
+        public static extern DTWAIN_ARRAY DTWAIN_CreateAcquisitionArray();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_CreatePDFTextElement(long Source);
+        public static extern DTWAIN_PDFTEXTELEMENT DTWAIN_CreatePDFTextElement(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_DestroyAcquisitionArray(long aAcq,int bDestroyData);
+        public static extern int DTWAIN_DestroyAcquisitionArray(DTWAIN_ARRAY aAcq, int bDestroyData);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_DestroyPDFTextElement(long TextElement);
+        public static extern int DTWAIN_DestroyPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_DisableAppWindow(int hWnd,int bDisable);
+        public static extern int DTWAIN_DisableAppWindow(DTWAIN_HANDLE hWnd,int bDisable);
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnableAutoBorderDetect(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoBorderDetect(long Source,int bEnable);
+        public static extern int DTWAIN_EnableAutoBright(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoBright(long Source,int bSet);
+        public static extern int DTWAIN_EnableAutoDeskew(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoDeskew(long Source,int bEnable);
+        public static extern int DTWAIN_EnableAutoFeed(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoFeed(long Source,int bSet);
+        public static extern int DTWAIN_EnableAutoRotate(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoRotate(long Source,int bSet);
+        public static extern int DTWAIN_EnableAutoScan(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableAutoScan(long Source,int bEnable);
+        public static extern int DTWAIN_EnableDuplex(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableDuplex(long Source,int bEnable);
+        public static extern int DTWAIN_EnableFeeder(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableFeeder(long Source,int bSet);
+        public static extern int DTWAIN_EnableIndicator(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableIndicator(long Source,int bEnable);
+        public static extern int DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableJobFileHandling(long Source,int bSet);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableLamp(long Source,int bEnable);
+        public static extern int DTWAIN_EnableLamp(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1857,19 +1866,19 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnablePatchDetect(long Source,int bEnable);
+        public static extern int DTWAIN_EnablePatchDetect(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnablePrinter(long Source,int bEnable);
+        public static extern int DTWAIN_EnablePrinter(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnableThumbnail(long Source,int bEnable);
+        public static extern int DTWAIN_EnableThumbnail(DTWAIN_SOURCE Source,int bEnable);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EndThread(long DLLHandle);
+        public static extern int DTWAIN_EndThread(DTWAIN_HANDLE DLLHandle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1877,107 +1886,107 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAlarms(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumAlarms(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY  pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumBitDepths(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumBitDepths(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumBottomCameras(long Source,ref long Cameras);
+        public static extern int DTWAIN_EnumBottomCameras(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY Cameras);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumBrightnessValues(long Source,ref long pArray,int bExpandIfRange);
+        public static extern int DTWAIN_EnumBrightnessValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray,int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumCameras(long Source,ref long Cameras);
+        public static extern int DTWAIN_EnumCameras(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY Cameras);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumCompressionTypes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumContrastValues(long Source,ref long pArray,int bExpandIfRange);
+        public static extern int DTWAIN_EnumContrastValues(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray,int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumCustomCaps(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumCustomCaps(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumCustomCapsEx2(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx2(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDoubleFeedDetectSupported(long Source, int SupportVal);
+        public static extern int DTWAIN_IsDoubleFeedDetectSupported(DTWAIN_SOURCE Source, int SupportVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumDoubleFeedDetectLengths(long Source, ref long pArray, int bExpandIfRange);
+        public static extern int DTWAIN_EnumDoubleFeedDetectLengths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumDoubleFeedDetectLengthsEx(long Source, int bExpandIfRange);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectLengthsEx(DTWAIN_SOURCE Source, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDoubleFeedDetectLength(long Source, ref double val, int bCurrent);
+        public static extern int DTWAIN_GetDoubleFeedDetectLength(DTWAIN_SOURCE Source, ref double val, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDoubleFeedDetectLengthSupported(long Source, double val);
+        public static extern int DTWAIN_IsDoubleFeedDetectLengthSupported(DTWAIN_SOURCE Source, double val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumDoubleFeedDetectValues(long Source, ref int pArray);
+        public static extern int DTWAIN_EnumDoubleFeedDetectValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDoubleFeedDetectLength(long Source, double Value);
+        public static extern int DTWAIN_SetDoubleFeedDetectLength(DTWAIN_SOURCE Source, double Value);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDoubleFeedDetectLengthString(long Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszLength);
+        public static extern int DTWAIN_SetDoubleFeedDetectLengthString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDoubleFeedDetectLengthStringW(long Source, [MarshalAs(UnmanagedType.LPWStr)] string lpszLength);
+        public static extern int DTWAIN_SetDoubleFeedDetectLengthStringW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] string lpszLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDoubleFeedDetectLengthStringA(long Source, [MarshalAs(UnmanagedType.LPStr)] string lpszLength);
+        public static extern int DTWAIN_SetDoubleFeedDetectLengthStringA(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string lpszLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDoubleFeedDetectValues(long Source, ref long pArray);
+        public static extern int DTWAIN_GetDoubleFeedDetectValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumDoubleFeedDetectValuesEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectValuesEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDoubleFeedDetectValues(long Source, long pArray);
+        public static extern int DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, int pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumExtImageInfoTypes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumExtImageInfoTypes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumExtendedCaps(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumExtendedCaps(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumExtendedCapsEx(long Source, ref long pArray);
+        public static extern int DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_ArrayInit();
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayInit();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -1985,69 +1994,68 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumExtendedCapsEx2(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryName(int countryId, [MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryName(int countryId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryNameA(int countryId, [MarshalAs(UnmanagedType.LPStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryNameA(int countryId, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryNameW(int countryId, [MarshalAs(UnmanagedType.LPWStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryNameW(int countryId, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryValue([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryValue([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryValueA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryValueA([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainCountryValueW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainCountryValueW([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageName(int nameID, [MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainLanguageName(int nameID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageNameA(int nameID, [MarshalAs(UnmanagedType.LPStr)] string lpszName);
+        public static extern int DTWAIN_GetTwainLanguageNameA(int nameID, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageNameW(int nameID, [MarshalAs(UnmanagedType.LPWStr)] string lpszName);
-
+        public static extern int DTWAIN_GetTwainLanguageNameW(int nameID, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageValue([MarshalAs(UnmanagedType.LPTStr)] string lpszValue);
+        public static extern int DTWAIN_GetTwainLanguageValue([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszValue);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageValueA(int nameID, [MarshalAs(UnmanagedType.LPStr)] string lpszValue);
+        public static extern int DTWAIN_GetTwainLanguageValueA(int nameID, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszValue);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainLanguageValueW(int nameID, [MarshalAs(UnmanagedType.LPWStr)] string lpszValue);
+        public static extern int DTWAIN_GetTwainLanguageValueW(int nameID, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszValue);
 
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPTStr)] string lpszValue, int nLength);
+        public static extern int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszValue, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetConditionCodeStringA(int lError, [MarshalAs(UnmanagedType.LPStr)] string lpszValue, int nLength);
+        public static extern int DTWAIN_GetConditionCodeStringA(int lError, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszValue, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetConditionCodeStringW(int lError, [MarshalAs(UnmanagedType.LPWStr)] string lpszValue, int nLength);
+        public static extern int DTWAIN_GetConditionCodeStringW(int lError, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszValue, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2063,307 +2071,307 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumFileXferFormats(long Source,ref int pArray);
+        public static extern int DTWAIN_EnumFileXferFormats(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumHighlightValues(long Source,ref int pArray,int bExpandIfRange);
+        public static extern int DTWAIN_EnumHighlightValues(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray,int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumJobControls(long Source,ref int pArray);
+        public static extern int DTWAIN_EnumJobControls(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumLightPaths(long Source,ref int LightPath);
+        public static extern int DTWAIN_EnumLightPaths(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY LightPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumLightSources(long Source,ref int LightSources);
+        public static extern int DTWAIN_EnumLightSources(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY LightSources);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumMaxBuffers(long Source,ref int pMaxBufs,int bExpandRange);
+        public static extern int DTWAIN_EnumMaxBuffers(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pMaxBufs,int bExpandRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumNoiseFilters(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumOCRInterfaces(ref long OCRInterfaces);
+        public static extern int DTWAIN_EnumOCRInterfaces(ref DTWAIN_ARRAY OCRInterfaces);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumOCRSupportedCaps(long Engine,ref long SupportedCaps);
+        public static extern int DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine,ref DTWAIN_ARRAY SupportedCaps);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumOrientations(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumOrientations(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumOrientationsEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumOrientationsEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPaperSizes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPaperSizes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumPaperSizesEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumPaperSizesEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAudioXferMechs(long Source, ref long pArray);
+        public static extern int DTWAIN_EnumAudioXferMechs(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumAudioXferMechsEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumAudioXferMechsEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAlarmVolumes(long Source, ref long pArray, int expandRange);
+        public static extern int DTWAIN_EnumAlarmVolumes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int expandRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumAlarmVolumesEx(long Source, int expandIfRange);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumAlarmVolumesEx(DTWAIN_SOURCE Source, int expandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAutoFeedValues(long Source, ref long pArray);
+        public static extern int DTWAIN_EnumAutoFeedValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumAutoFeedValuesEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumAutoFeedValuesEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAutomaticCaptures(long Source, ref long pArray, int bExpandIfRange);
+        public static extern int DTWAIN_EnumAutomaticCaptures(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumAutomaticCapturesEx(long Source, int bExpandIfRange);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumAutomaticCapturesEx(DTWAIN_SOURCE Source, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumAutomaticSenseMedium(long Source, ref long pArray);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumAutomaticSenseMediumEx(long Source);
+        public static extern int DTWAIN_EnumAutomaticSenseMedium(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSourceValues(long Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszName, ref long values, int bExpandIfRange);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumAutomaticSenseMediumEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnumSourceValues(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszName, ref DTWAIN_ARRAY values, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSourceValuesA(long Source, [MarshalAs(UnmanagedType.LPStr)] string lpszName, ref long values, int bExpandIfRange);
+        public static extern int DTWAIN_EnumSourceValuesA(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string lpszName, ref DTWAIN_ARRAY values, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSourceValuesW(long Source, [MarshalAs(UnmanagedType.LPWStr)] string lpszName, ref long values, int bExpandIfRange);
+        public static extern int DTWAIN_EnumSourceValuesW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] string lpszName, ref DTWAIN_ARRAY values, int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPatchMaxPriorities(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPatchMaxPriorities(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPatchMaxRetries(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPatchMaxRetries(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPatchPriorities(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPatchPriorities(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPatchSearchModes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPatchSearchModes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPatchTimeOutValues(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPatchTimeOutValues(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPixelTypes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPixelTypes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumPrinterStringModes(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumPrinterStringModes(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumResolutionValues(long Source,ref long pArray,int bExpandIfRange);
+        public static extern int DTWAIN_EnumResolutionValues(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray,int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSourceUnits(long Source,ref long lpArray);
+        public static extern int DTWAIN_EnumSourceUnits(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY lpArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumSourceUnitsEx(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSourceUnitsEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSources(ref long lpArray);
+        public static extern int DTWAIN_EnumSources(ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumSourcesEx();
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSourcesEx();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSupportedCaps(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_EnumSupportedCapsEx2(long Source);
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumSupportedCapsEx(long Source,int MaxCustomBase,ref long pArray);
+        public static extern int DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source,int MaxCustomBase,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumThresholdValues(long Source,ref long pArray,int bExpandIfRange);
+        public static extern int DTWAIN_EnumThresholdValues(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray,int bExpandIfRange);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumTopCameras(long Source,ref long Cameras);
+        public static extern int DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY Cameras);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumTwainPrinters(long Source,ref long lpAvailPrinters);
+        public static extern int DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY lpAvailPrinters);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumTwainPrintersArray(long Source,ref long pArray);
+        public static extern int DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ExecuteOCR(long Engine,[MarshalAs(UnmanagedType.LPTStr)] string szFileName,int nStartPage,int nEndPage);
+        public static extern int DTWAIN_ExecuteOCR(DTWAIN_OCRENGINE Engine,[MarshalAs(UnmanagedType.LPTStr)] string szFileName,int nStartPage,int nEndPage);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ExecuteOCRA(long Engine,[MarshalAs(UnmanagedType.LPStr)] string szFileName,int nStartPage,int nEndPage);
+        public static extern int DTWAIN_ExecuteOCRA(DTWAIN_OCRENGINE Engine,[MarshalAs(UnmanagedType.LPStr)] string szFileName,int nStartPage,int nEndPage);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ExecuteOCRW(long Engine,[MarshalAs(UnmanagedType.LPWStr)] string szFileName,int nStartPage,int nEndPage);
+        public static extern int DTWAIN_ExecuteOCRW(DTWAIN_OCRENGINE Engine,[MarshalAs(UnmanagedType.LPWStr)] string szFileName,int nStartPage,int nEndPage);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FeedPage(long Source);
+        public static extern int DTWAIN_FeedPage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FlipBitmap(long hDib);
+        public static extern int DTWAIN_FlipBitmap(DTWAIN_HANDLE hDib);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FlushAcquiredPages(long Source);
+        public static extern int DTWAIN_FlushAcquiredPages(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ForceAcquireBitDepth(long Source,int BitDepth);
+        public static extern int DTWAIN_ForceAcquireBitDepth(DTWAIN_SOURCE Source,int BitDepth);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_FrameCreate(double Left,double Top,double Right,double Bottom);
+        public static extern DTWAIN_FRAME DTWAIN_FrameCreate(double Left,double Top,double Right,double Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_FrameCreateString([MarshalAs(UnmanagedType.LPTStr)] string Left,[MarshalAs(UnmanagedType.LPTStr)] string Top,[MarshalAs(UnmanagedType.LPTStr)] string Right,[MarshalAs(UnmanagedType.LPTStr)] string Bottom);
+        public static extern DTWAIN_FRAME DTWAIN_FrameCreateString([MarshalAs(UnmanagedType.LPTStr)] string Left,[MarshalAs(UnmanagedType.LPTStr)] string Top,[MarshalAs(UnmanagedType.LPTStr)] string Right,[MarshalAs(UnmanagedType.LPTStr)] string Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameDestroy(long Frame);
+        public static extern int DTWAIN_FrameDestroy(DTWAIN_FRAME Frame);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameGetAll(long Frame,ref double Left,ref double Top,ref double Right,ref double Bottom);
+        public static extern int DTWAIN_FrameGetAll(DTWAIN_FRAME Frame,ref double Left,ref double Top,ref double Right,ref double Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameGetAllString(long Frame,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Left,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Top,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Right,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Bottom);
+        public static extern int DTWAIN_FrameGetAllString(DTWAIN_FRAME Frame,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Left,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Top,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Right,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameGetValue(long Frame,int nWhich,ref double Value);
+        public static extern int DTWAIN_FrameGetValue(DTWAIN_FRAME Frame,int nWhich,ref double Value);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameGetValueString(long Frame,int nWhich,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Value);
+        public static extern int DTWAIN_FrameGetValueString(DTWAIN_FRAME Frame,int nWhich,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Value);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameIsValid(long Frame);
+        public static extern int DTWAIN_FrameIsValid(DTWAIN_FRAME Frame);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameSetAll(long Frame,double Left,double Top,double Right,double Bottom);
+        public static extern int DTWAIN_FrameSetAll(DTWAIN_FRAME Frame,double Left,double Top,double Right,double Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameSetAllString(long Frame,[MarshalAs(UnmanagedType.LPTStr)] string Left,[MarshalAs(UnmanagedType.LPTStr)] string Top,[MarshalAs(UnmanagedType.LPTStr)] string Right,[MarshalAs(UnmanagedType.LPTStr)] string Bottom);
+        public static extern int DTWAIN_FrameSetAllString(DTWAIN_FRAME Frame,[MarshalAs(UnmanagedType.LPTStr)] string Left,[MarshalAs(UnmanagedType.LPTStr)] string Top,[MarshalAs(UnmanagedType.LPTStr)] string Right,[MarshalAs(UnmanagedType.LPTStr)] string Bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameSetValue(long Frame,int nWhich,double Value);
+        public static extern int DTWAIN_FrameSetValue(DTWAIN_FRAME Frame,int nWhich,double Value);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FrameSetValueString(long Frame,int nWhich,[MarshalAs(UnmanagedType.LPTStr)] string Value);
+        public static extern int DTWAIN_FrameSetValueString(DTWAIN_FRAME Frame,int nWhich,[MarshalAs(UnmanagedType.LPTStr)] string Value);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_FreeExtImageInfo(long Source);
+        public static extern int DTWAIN_FreeExtImageInfo(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireArea(long Source,int lGetType,ref long FloatEnum);
+        public static extern int DTWAIN_GetAcquireArea(DTWAIN_SOURCE Source,int lGetType,ref DTWAIN_ARRAY FloatEnum);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireArea2(long Source,ref double left,ref double top,ref double right,ref double bottom,ref int lpUnit);
+        public static extern int DTWAIN_GetAcquireArea2(DTWAIN_SOURCE Source,ref double left,ref double top,ref double right,ref double bottom,ref int lpUnit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireArea2String(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder bottom,ref int Unit);
+        public static extern int DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder bottom,ref int Unit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireArea2StringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder bottom,ref int Unit);
+        public static extern int DTWAIN_GetAcquireArea2StringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder bottom,ref int Unit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireArea2StringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder bottom,ref int Unit);
+        public static extern int DTWAIN_GetAcquireArea2StringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder left,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder top,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder right,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder bottom,ref int Unit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetAcquireStripBuffer(long Source);
+        public static extern DTWAIN_HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireStripData(long Source,ref int lpCompression,ref int lpBytesPerRow,ref int lpColumns,ref int lpRows,ref int XOffset,ref int YOffset,ref int lpBytesWritten);
+        public static extern int DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source,ref int lpCompression,ref int lpBytesPerRow,ref int lpColumns,ref int lpRows,ref int XOffset,ref int YOffset,ref int lpBytesWritten);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAcquireStripSizes(long Source,ref int lpMin,ref int lpMax,ref int lpPreferred);
+        public static extern int DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source,ref int lpMin,ref int lpMax,ref int lpPreferred);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetAcquiredImage(long aAcq,int nWhichAcq,int nWhichDib);
+        public static extern DTWAIN_HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq,int nWhichAcq,int nWhichDib);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetAcquiredImageArray(long aAcq,int nWhichAcq);
+        public static extern DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq,int nWhichAcq);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAlarmVolume(long Source,ref int lpVolume);
+        public static extern int DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source,ref int lpVolume);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2379,47 +2387,47 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAuthor(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szAuthor);
+        public static extern int DTWAIN_GetAuthor(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAuthorA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szAuthor);
+        public static extern int DTWAIN_GetAuthorA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetAuthorW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szAuthor);
+        public static extern int DTWAIN_GetAuthorW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBatteryMinutes(long Source,ref int lpMinutes);
+        public static extern int DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source,ref int lpMinutes);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBatteryPercent(long Source,ref int lpPercent);
+        public static extern int DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source,ref int lpPercent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBitDepth(long Source,ref int BitDepth,int bCurrent);
+        public static extern int DTWAIN_GetBitDepth(DTWAIN_SOURCE Source,ref int BitDepth,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBlankPageAutoDetection(long Source);
+        public static extern int DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBrightness(long Source,ref double Brightness);
+        public static extern int DTWAIN_GetBrightness(DTWAIN_SOURCE Source,ref double Brightness);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBrightnessString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Brightness);
+        public static extern int DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Brightness);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBrightnessStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Contrast);
+        public static extern int DTWAIN_GetBrightnessStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetBrightnessStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Contrast);
+        public static extern int DTWAIN_GetBrightnessStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2431,19 +2439,19 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapArrayType(long Source,int nCap);
+        public static extern int DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source,int nCap);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapContainer(long Source,int nCap,int lCapType);
+        public static extern int DTWAIN_GetCapContainer(DTWAIN_SOURCE Source,int nCap,int lCapType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapContainerEx(int nCap,int bSetContainer,ref long ConTypes);
+        public static extern int DTWAIN_GetCapContainerEx(int nCap,int bSetContainer,ref int ConTypes);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapDataType(long Source,int nCap);
+        public static extern int DTWAIN_GetCapDataType(DTWAIN_SOURCE Source,int nCap);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2459,55 +2467,55 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapOperations(long Source,int lCapability,ref int lpOps);
+        public static extern int DTWAIN_GetCapOperations(DTWAIN_SOURCE Source,int lCapability,ref int lpOps);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapValues(long Source,int lCap,int lGetType,ref long pArray);
+        public static extern int DTWAIN_GetCapValues(DTWAIN_SOURCE Source,int lCap,int lGetType,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapValuesEx(long Source,int lCap,int lGetType,int lContainerType,ref long pArray);
+        public static extern int DTWAIN_GetCapValuesEx(DTWAIN_SOURCE Source,int lCap,int lGetType,int lContainerType,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCapValuesEx2(long Source,int lCap,int lGetType,int lContainerType,int nDataType,ref long pArray);
+        public static extern int DTWAIN_GetCapValuesEx2(DTWAIN_SOURCE Source,int lCap,int lGetType,int lContainerType,int nDataType,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCaption(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Caption);
+        public static extern int DTWAIN_GetCaption(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCaptionA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Caption);
+        public static extern int DTWAIN_GetCaptionA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCaptionW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Caption);
+        public static extern int DTWAIN_GetCaptionW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCompressionSize(long Source,ref int lBytes);
+        public static extern int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source,ref int lBytes);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCompressionType(long Source,ref int lpCompression,int bCurrent);
+        public static extern int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source,ref int lpCompression,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetContrast(long Source,ref double Contrast);
+        public static extern int DTWAIN_GetContrast(DTWAIN_SOURCE Source,ref double Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetContrastString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Contrast);
+        public static extern int DTWAIN_GetContrastString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetContrastStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Contrast);
+        public static extern int DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetContrastStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Contrast);
+        public static extern int DTWAIN_GetContrastStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2515,31 +2523,31 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetCurrentAcquiredImage(long Source);
+        public static extern DTWAIN_HANDLE DTWAIN_GetCurrentAcquiredImage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCurrentFileName(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szName,int MaxLen);
+        public static extern int DTWAIN_GetCurrentFileName(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szName,int MaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCurrentFileNameA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szName,int MaxLen);
+        public static extern int DTWAIN_GetCurrentFileNameA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szName,int MaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCurrentFileNameW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szName,int MaxLen);
+        public static extern int DTWAIN_GetCurrentFileNameW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szName,int MaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCurrentPageNum(long Source);
+        public static extern int DTWAIN_GetCurrentPageNum(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetCurrentRetryCount(long Source);
+        public static extern int DTWAIN_GetCurrentRetryCount(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetCustomDSData(long Source,ref int Data,int dSize,ref int pActualSize,int nFlags);
+        public static extern int DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source,ref int Data,int dSize,ref int pActualSize,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2559,39 +2567,39 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetDTWAINHandle();
+        public static extern DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceEvent(long Source,ref int lpEvent);
+        public static extern int DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source,ref int lpEvent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceEventEx(long Source,ref int lpEvent,ref long pArray);
+        public static extern int DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source,ref int lpEvent,ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceNotifications(long Source,ref int DevEvents);
+        public static extern int DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source,ref int DevEvents);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceTimeDate(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceTimeDateA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetDeviceTimeDateA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDeviceTimeDateW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetDeviceTimeDateW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetDuplexType(long Source,ref int lpDupType);
+        public static extern int DTWAIN_GetDuplexType(DTWAIN_SOURCE Source,ref int lpDupType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetErrorBuffer(ref long ArrayBuffer);
+        public static extern int DTWAIN_GetErrorBuffer(ref DTWAIN_ARRAY ArrayBuffer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2623,11 +2631,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetExtImageInfo(long Source);
+        public static extern int DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetExtImageInfoData(long Source,int nWhich,ref long Data);
+        public static extern int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source,int nWhich,ref DTWAIN_ARRAY Data);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2643,55 +2651,55 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetFeederAlignment(long Source,ref int lpAlignment);
+        public static extern int DTWAIN_GetFeederAlignment(DTWAIN_SOURCE Source,ref int lpAlignment);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetFeederFuncs(long Source);
+        public static extern int DTWAIN_GetFeederFuncs(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetFeederOrder(long Source,ref int lpOrder);
+        public static extern int DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source,ref int lpOrder);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetHighlight(long Source,ref double Highlight);
+        public static extern int DTWAIN_GetHighlight(DTWAIN_SOURCE Source,ref double Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetHighlightString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Highlight);
+        public static extern int DTWAIN_GetHighlightString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetHighlightStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Highlight);
+        public static extern int DTWAIN_GetHighlightStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetHighlightStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Highlight);
+        public static extern int DTWAIN_GetHighlightStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetImageInfo(long Source,ref double lpXResolution,ref double lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref long lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
+        public static extern int DTWAIN_GetImageInfo(DTWAIN_SOURCE Source,ref double lpXResolution,ref double lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref int lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetImageInfoString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref long lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
+        public static extern int DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref int lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetImageInfoStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref long lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
+        public static extern int DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref int lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetImageInfoStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref long lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
+        public static extern int DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder lpXResolution,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder lpYResolution,ref int lpWidth,ref int lpLength,ref int lpNumSamples,ref int lpBitsPerSample,ref int lpBitsPerPixel,ref int lpPlanar,ref int lpPixelType,ref int lpCompression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetJobControl(long Source,ref int pJobControl,int bCurrent);
+        public static extern int DTWAIN_GetJobControl(DTWAIN_SOURCE Source,ref int pJobControl,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetJpegValues(long Source,ref int pQuality,ref int Progressive);
+        public static extern int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source,ref int pQuality,ref int Progressive);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2703,31 +2711,31 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetLightPath(long Source,ref int lpLightPath);
+        public static extern int DTWAIN_GetLightPath(DTWAIN_SOURCE Source,ref int lpLightPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetLightSources(long Source,ref long LightSources);
+        public static extern int DTWAIN_GetLightSources(DTWAIN_SOURCE Source,ref DTWAIN_ARRAY LightSources);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetManualDuplexCount(long Source,ref int pSide1,ref int pSide2);
+        public static extern int DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source,ref int pSide1,ref int pSide2);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetMaxAcquisitions(long Source);
+        public static extern int DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetMaxBuffers(long Source,ref int pMaxBuf);
+        public static extern int DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source,ref int pMaxBuf);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetMaxPagesToAcquire(long Source);
+        public static extern int DTWAIN_GetMaxPagesToAcquire(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetMaxRetryAttempts(long Source);
+        public static extern int DTWAIN_GetMaxRetryAttempts(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2743,127 +2751,127 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNoiseFilter(long Source,ref int lpNoiseFilter);
+        public static extern int DTWAIN_GetNoiseFilter(DTWAIN_SOURCE Source,ref int lpNoiseFilter);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNumAcquiredImages(long aAcq,int nWhich);
+        public static extern int DTWAIN_GetNumAcquiredImages(DTWAIN_ARRAY aAcq,int nWhich);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNumAcquisitions(long aAcq);
+        public static extern int DTWAIN_GetNumAcquisitions(DTWAIN_ARRAY aAcq);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRCapValues(long Engine,int OCRCapValue,int nGetType,ref long CapValues);
+        public static extern int DTWAIN_GetOCRCapValues(DTWAIN_OCRENGINE Engine,int OCRCapValue,int nGetType,ref DTWAIN_ARRAY CapValues);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRLastError(long Engine);
+        public static extern int DTWAIN_GetOCRLastError(DTWAIN_OCRENGINE Engine);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRManufacturer(long Engine,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szManufacturer,int nMaxLen);
+        public static extern int DTWAIN_GetOCRManufacturer(DTWAIN_OCRENGINE Engine,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szManufacturer,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRManufacturerA(long Engine,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szManufacturer,int nLength);
+        public static extern int DTWAIN_GetOCRManufacturerA(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szManufacturer,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRManufacturerW(long Engine,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szManufacturer,int nLength);
+        public static extern int DTWAIN_GetOCRManufacturerW(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szManufacturer,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductFamily(long Engine,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProductFamily,int nMaxLen);
+        public static extern int DTWAIN_GetOCRProductFamily(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProductFamily,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductFamilyA(long Engine,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProductFamily,int nLength);
+        public static extern int DTWAIN_GetOCRProductFamilyA(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProductFamily,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductFamilyW(long Engine,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProductFamily,int nLength);
+        public static extern int DTWAIN_GetOCRProductFamilyW(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProductFamily,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductName(long Engine,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProductName,int nMaxLen);
+        public static extern int DTWAIN_GetOCRProductName(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProductName,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductNameA(long Engine,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProductName,int nLength);
+        public static extern int DTWAIN_GetOCRProductNameA(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProductName,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRProductNameW(long Engine,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProductName,int nLength);
+        public static extern int DTWAIN_GetOCRProductNameW(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProductName,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetOCRText(long Engine,int nPageNo,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
+        public static extern int DTWAIN_GetOCRText(DTWAIN_OCRENGINE Engine, int nPageNo,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetOCRTextA(long Engine,int nPageNo,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
+        public static extern int DTWAIN_GetOCRTextA(DTWAIN_OCRENGINE Engine, int nPageNo,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRTextInfoFloat(int OCRTextInfo,int nCharPos,int nWhichItem,ref double pInfo);
+        public static extern int DTWAIN_GetOCRTextInfoFloat(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo,int nCharPos,int nWhichItem,ref double pInfo);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRTextInfoFloatEx(int OCRTextInfo,int nWhichItem,ref double pInfo,int bufSize);
+        public static extern int DTWAIN_GetOCRTextInfoFloatEx(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo,int nWhichItem,ref double pInfo,int bufSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRTextInfoHandle(long Engine,int nPageNo);
+        public static extern int DTWAIN_GetOCRTextInfoHandle(DTWAIN_OCRENGINE Engine, int nPageNo);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRTextInfoLong(int OCRTextInfo,int nCharPos,int nWhichItem,ref int pInfo);
+        public static extern int DTWAIN_GetOCRTextInfoLong(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo,int nCharPos,int nWhichItem,ref int pInfo);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRTextInfoLongEx(int OCRTextInfo,int nWhichItem,ref int pInfo,int bufSize);
+        public static extern int DTWAIN_GetOCRTextInfoLongEx(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo,int nWhichItem,ref int pInfo,int bufSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetOCRTextW(long Engine,int nPageNo,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
+        public static extern int DTWAIN_GetOCRTextW(DTWAIN_OCRENGINE Engine, int nPageNo,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Data,int dSize,ref int pActualSize,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRVersionInfo(long Engine,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder buffer,int maxBufSize);
+        public static extern int DTWAIN_GetOCRVersionInfo(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder buffer,int maxBufSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRVersionInfoA(long Engine,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder buffer,int nLength);
+        public static extern int DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder buffer,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRVersionInfoW(long Engine,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder buffer,int nLength);
+        public static extern int DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder buffer,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOrientation(long Source,ref int lpOrient,int bCurrent);
+        public static extern int DTWAIN_GetOrientation(DTWAIN_SOURCE Source,ref int lpOrient,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPDFTextElementFloat(long TextElement,ref double val1,ref double val2,int Flags);
+        public static extern int DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement,ref double val1,ref double val2,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPDFTextElementLong(long TextElement,ref int val1,ref int val2,int Flags);
+        public static extern int DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, ref int val1,ref int val2,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPDFTextElementString(long TextElement,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
+        public static extern int DTWAIN_GetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPDFTextElementStringA(long TextElement,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
+        public static extern int DTWAIN_GetPDFTextElementStringA(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPDFTextElementStringW(long TextElement,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
+        public static extern int DTWAIN_GetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szData,int maxLen,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2879,63 +2887,63 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPaperSize(long Source,ref int lpPaperSize,int bCurrent);
+        public static extern int DTWAIN_GetPaperSize(DTWAIN_SOURCE Source,ref int lpPaperSize,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPatchMaxPriorities(long Source,ref int pMaxPriorities,int bCurrent);
+        public static extern int DTWAIN_GetPatchMaxPriorities(DTWAIN_SOURCE Source,ref int pMaxPriorities,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPatchMaxRetries(long Source,ref int pMaxRetries,int bCurrent);
+        public static extern int DTWAIN_GetPatchMaxRetries(DTWAIN_SOURCE Source,ref int pMaxRetries,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPatchPriorities(long Source,ref long SearchPriorities);
+        public static extern int DTWAIN_GetPatchPriorities(DTWAIN_SOURCE Source,ref int SearchPriorities);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPatchSearchMode(long Source,ref int pSearchMode,int bCurrent);
+        public static extern int DTWAIN_GetPatchSearchMode(DTWAIN_SOURCE Source,ref int pSearchMode,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPatchTimeOut(long Source,ref int pTimeOut,int bCurrent);
+        public static extern int DTWAIN_GetPatchTimeOut(DTWAIN_SOURCE Source,ref int pTimeOut,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPixelFlavor(long Source,ref int lpPixelFlavor);
+        public static extern int DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source,ref int lpPixelFlavor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPixelType(long Source,ref int PixelType,ref int BitDepth,int bCurrent);
+        public static extern int DTWAIN_GetPixelType(DTWAIN_SOURCE Source,ref int PixelType,ref int BitDepth,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinter(long Source,ref int lpPrinter,int bCurrent);
+        public static extern int DTWAIN_GetPrinter(DTWAIN_SOURCE Source,ref int lpPrinter,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterStartNumber(long Source,ref int nStart);
+        public static extern int DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source,ref int nStart);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterStringMode(long Source,ref int PrinterMode,int bCurrent);
+        public static extern int DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source,ref int PrinterMode,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterStrings(long Source,ref long ArrayString);
+        public static extern int DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source,ref int ArrayString);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterSuffixString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Suffix,int nMaxLen);
+        public static extern int DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Suffix,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterSuffixStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Suffix,int nLength);
+        public static extern int DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Suffix,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetPrinterSuffixStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Suffix,int nLength);
+        public static extern int DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Suffix,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -2943,107 +2951,107 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetResolution(long Source,ref double Resolution);
+        public static extern int DTWAIN_GetResolution(DTWAIN_SOURCE Source,ref double Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetResolutionString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Resolution);
+        public static extern int DTWAIN_GetResolutionString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetResolutionStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Resolution);
+        public static extern int DTWAIN_GetResolutionStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetResolutionStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Resolution);
+        public static extern int DTWAIN_GetResolutionStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetRotation(long Source,ref double Rotation);
+        public static extern int DTWAIN_GetRotation(DTWAIN_SOURCE Source,ref double Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetRotationString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Rotation);
+        public static extern int DTWAIN_GetRotationString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetRotationStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Rotation);
+        public static extern int DTWAIN_GetRotationStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetRotationStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Rotation);
+        public static extern int DTWAIN_GetRotationStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSaveFileName(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder fileName,int nMaxLen);
+        public static extern int DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder fileName,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSaveFileNameA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder fileName,int nMaxLen);
+        public static extern int DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder fileName,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSaveFileNameW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder fileName,int nMaxLen);
+        public static extern int DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder fileName,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_GetSourceAcquisitions(long Source);
+        public static extern int DTWAIN_GetSourceAcquisitions(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturer(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
+        public static extern int DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturerA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceManufacturerA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturerW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceManufacturerW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamily(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
+        public static extern int DTWAIN_GetSourceProductFamily(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamilyA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceProductFamilyA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamilyW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceProductFamilyW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductName(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
+        public static extern int DTWAIN_GetSourceProductName(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductNameA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductNameW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceUnit(long Source,ref int lpUnit);
+        public static extern int DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source,ref int lpUnit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfo(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
+        public static extern int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szProduct,int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfoA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfoW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
+        public static extern int DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szProduct,int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionNumber(long Source,ref int pMajor,ref int pMinor);
+        public static extern int DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source,ref int pMajor,ref int pMinor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3063,31 +3071,31 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetThreshold(long Source,ref double Threshold);
+        public static extern int DTWAIN_GetThreshold(DTWAIN_SOURCE Source,ref double Threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetThresholdString(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Threshold);
+        public static extern int DTWAIN_GetThresholdString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder Threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetThresholdStringA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Threshold);
+        public static extern int DTWAIN_GetThresholdStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder Threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetThresholdStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Threshold);
+        public static extern int DTWAIN_GetThresholdStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder Threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTimeDate(long Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetTimeDate(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTimeDateA(long Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetTimeDateA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTimeDateW(long Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szTimeDate);
+        public static extern int DTWAIN_GetTimeDateW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3095,7 +3103,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainHwnd();
+        public static extern DTWAIN_HANDLE DTWAIN_GetTwainHwnd();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3152,7 +3160,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_InitExtImageInfo(int Source);
+        public static extern int DTWAIN_InitExtImageInfo(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3164,127 +3172,127 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoBorderDetectEnabled(long Source);
+        public static extern int DTWAIN_IsAutoBorderDetectEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoBorderDetectSupported(long Source);
+        public static extern int DTWAIN_IsAutoBorderDetectSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoBrightEnabled(long Source);
+        public static extern int DTWAIN_IsAutoBrightEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoBrightSupported(long Source);
+        public static extern int DTWAIN_IsAutoBrightSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoDeskewEnabled(long Source);
+        public static extern int DTWAIN_IsAutoDeskewEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoDeskewSupported(long Source);
+        public static extern int DTWAIN_IsAutoDeskewSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoFeedEnabled(long Source);
+        public static extern int DTWAIN_IsAutoFeedEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoFeedSupported(long Source);
+        public static extern int DTWAIN_IsAutoFeedSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoRotateEnabled(long Source);
+        public static extern int DTWAIN_IsAutoRotateEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsAutoScanEnabled(long Source);
+        public static extern int DTWAIN_IsAutoScanEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsBlankPageDetectionOn(long Source);
+        public static extern int DTWAIN_IsBlankPageDetectionOn(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsCapSupported(long Source,int lCapability);
+        public static extern int DTWAIN_IsCapSupported(DTWAIN_SOURCE Source,int lCapability);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsCompressionSupported(long Source,int Compression);
+        public static extern int DTWAIN_IsCompressionSupported(DTWAIN_SOURCE Source,int Compression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsCustomDSDataSupported(long Source);
+        public static extern int DTWAIN_IsCustomDSDataSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDIBBlank(long hDib,double threshold);
+        public static extern int DTWAIN_IsDIBBlank(DTWAIN_HANDLE hDib,double threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDIBBlankString(long hDib,[MarshalAs(UnmanagedType.LPTStr)] string threshold);
+        public static extern int DTWAIN_IsDIBBlankString(DTWAIN_HANDLE hDib,[MarshalAs(UnmanagedType.LPTStr)] string threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDIBBlankStringA(long hDib,[MarshalAs(UnmanagedType.LPStr)] string threshold);
+        public static extern int DTWAIN_IsDIBBlankStringA(DTWAIN_HANDLE hDib,[MarshalAs(UnmanagedType.LPStr)] string threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDIBBlankStringW(long hDib,[MarshalAs(UnmanagedType.LPWStr)] string threshold);
+        public static extern int DTWAIN_IsDIBBlankStringW(DTWAIN_HANDLE hDib,[MarshalAs(UnmanagedType.LPWStr)] string threshold);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDeviceEventSupported(long Source);
+        public static extern int DTWAIN_IsDeviceEventSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDeviceOnLine(long Source);
+        public static extern int DTWAIN_IsDeviceOnLine(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDuplexEnabled(long Source);
+        public static extern int DTWAIN_IsDuplexEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsDuplexSupported(long Source);
+        public static extern int DTWAIN_IsDuplexSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsExtImageInfoSupported(long Source);
+        public static extern int DTWAIN_IsExtImageInfoSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFeederEnabled(long Source);
+        public static extern int DTWAIN_IsFeederEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFeederLoaded(long Source);
+        public static extern int DTWAIN_IsFeederLoaded(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFeederSensitive(long Source);
+        public static extern int DTWAIN_IsFeederSensitive(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFeederSupported(long Source);
+        public static extern int DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFileSystemSupported(long Source);
+        public static extern int DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsFileXferSupported(long Source,int lFileType);
+        public static extern int DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source,int lFileType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsIndicatorEnabled(long Source);
+        public static extern int DTWAIN_IsIndicatorEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsIndicatorSupported(long Source);
+        public static extern int DTWAIN_IsIndicatorSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3296,27 +3304,27 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsJobControlSupported(long Source,int JobControl);
+        public static extern int DTWAIN_IsJobControlSupported(DTWAIN_SOURCE Source,int JobControl);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsLampEnabled(long Source);
+        public static extern int DTWAIN_IsLampEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsLampSupported(long Source);
+        public static extern int DTWAIN_IsLampSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsLightPathSupported(long Source);
+        public static extern int DTWAIN_IsLightPathSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsLightSourceSupported(long Source);
+        public static extern int DTWAIN_IsLightSourceSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsMaxBuffersSupported(long Source,int MaxBuf);
+        public static extern int DTWAIN_IsMaxBuffersSupported(DTWAIN_SOURCE Source,int MaxBuf);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3324,11 +3332,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsOCREngineActivated(long OCREngine);
+        public static extern int DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsOrientationSupported(long Source,int Orientation);
+        public static extern int DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source,int Orientation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3340,35 +3348,35 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPaperDetectable(long Source);
+        public static extern int DTWAIN_IsPaperDetectable(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPaperSizeSupported(long Source,int PaperSize);
+        public static extern int DTWAIN_IsPaperSizeSupported(DTWAIN_SOURCE Source,int PaperSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPatchCapsSupported(long Source);
+        public static extern int DTWAIN_IsPatchCapsSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPatchDetectEnabled(long Source);
+        public static extern int DTWAIN_IsPatchDetectEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPatchSupported(long Source,int PatchCode);
+        public static extern int DTWAIN_IsPatchSupported(DTWAIN_SOURCE Source,int PatchCode);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPixelTypeSupported(long Source,int PixelType);
+        public static extern int DTWAIN_IsPixelTypeSupported(DTWAIN_SOURCE Source,int PixelType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPrinterEnabled(long Source,int Printer);
+        public static extern int DTWAIN_IsPrinterEnabled(DTWAIN_SOURCE Source,int Printer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsPrinterSupported(long Source);
+        public static extern int DTWAIN_IsPrinterSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3376,15 +3384,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsSkipImageInfoError(long Source);
+        public static extern int DTWAIN_IsSkipImageInfoError(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsSourceAcquiring(long Source);
+        public static extern int DTWAIN_IsSourceAcquiring(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsSourceOpen(long Source);
+        public static extern int DTWAIN_IsSourceOpen(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3392,11 +3400,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsThumbnailEnabled(long Source);
+        public static extern int DTWAIN_IsThumbnailEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsThumbnailSupported(long Source);
+        public static extern int DTWAIN_IsThumbnailSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3404,15 +3412,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsUIControllable(long Source);
+        public static extern int DTWAIN_IsUIControllable(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsUIEnabled(long Source);
+        public static extern int DTWAIN_IsUIEnabled(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_IsUIOnlySupported(long Source);
+        public static extern int DTWAIN_IsUIOnlySupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3444,7 +3452,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_OpenSource(long Source);
+        public static extern int DTWAIN_OpenSource(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3452,227 +3460,227 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_RangeCreate(int nEnumType);
+        public static extern DTWAIN_RANGE DTWAIN_RangeCreate(int nEnumType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_RangeCreateFromCap(long Source,int lCapType);
+        public static extern DTWAIN_RANGE DTWAIN_RangeCreateFromCap(DTWAIN_SOURCE Source,int lCapType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeDestroy(long pSource);
+        public static extern int DTWAIN_RangeDestroy(DTWAIN_RANGE pSource);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeExpand(long pSource,ref long pArray);
+        public static extern int DTWAIN_RangeExpand(DTWAIN_RANGE pSource, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetAllFloat(long pArray,ref double pVariantLow,ref double pVariantUp,ref double pVariantStep,ref double pVariantDefault,ref double pVariantCurrent);
+        public static extern int DTWAIN_RangeGetAllFloat(DTWAIN_RANGE pArray,ref double pVariantLow,ref double pVariantUp,ref double pVariantStep,ref double pVariantDefault,ref double pVariantCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetAllFloatString(long pArray,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dLow,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dUp,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dStep,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dDefault,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dCurrent);
+        public static extern int DTWAIN_RangeGetAllFloatString(DTWAIN_RANGE pArray,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dLow,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dUp,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dStep,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dDefault,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder dCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetAllLong(long pArray,ref int pVariantLow,ref int pVariantUp,ref int pVariantStep,ref int pVariantDefault,ref int pVariantCurrent);
+        public static extern int DTWAIN_RangeGetAllLong(DTWAIN_RANGE pArray,ref int pVariantLow,ref int pVariantUp,ref int pVariantStep,ref int pVariantDefault,ref int pVariantCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetCount(long pArray);
+        public static extern int DTWAIN_RangeGetCount(DTWAIN_RANGE pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetExpValueFloat(long pArray,int lPos,ref double pVal);
+        public static extern int DTWAIN_RangeGetExpValueFloat(DTWAIN_RANGE pArray,int lPos,ref double pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetExpValueFloatString(long pArray,int lPos,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pVal);
+        public static extern int DTWAIN_RangeGetExpValueFloatString(DTWAIN_RANGE pArray,int lPos,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetExpValueLong(long pArray,int lPos,ref int pVal);
+        public static extern int DTWAIN_RangeGetExpValueLong(DTWAIN_RANGE pArray,int lPos,ref int pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetPosFloat(long pArray,double Val,ref int pPos);
+        public static extern int DTWAIN_RangeGetPosFloat(DTWAIN_RANGE pArray,double Val,ref int pPos);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetPosFloatString(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val,ref int pPos);
+        public static extern int DTWAIN_RangeGetPosFloatString(DTWAIN_RANGE pArray,[MarshalAs(UnmanagedType.LPTStr)] string Val,ref int pPos);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetPosLong(long pArray,int Value,ref int pPos);
+        public static extern int DTWAIN_RangeGetPosLong(DTWAIN_RANGE pArray,int Value,ref int pPos);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetValueFloat(long pArray,int nWhich,ref double pVal);
+        public static extern int DTWAIN_RangeGetValueFloat(DTWAIN_RANGE pArray,int nWhich,ref double pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetValueFloatString(long pArray,int nWhich,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pVal);
+        public static extern int DTWAIN_RangeGetValueFloatString(DTWAIN_RANGE pArray,int nWhich,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeGetValueLong(long pArray,int nWhich,ref int pVal);
+        public static extern int DTWAIN_RangeGetValueLong(DTWAIN_RANGE pArray,int nWhich,ref int pVal);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeIsValid(long Range,ref int pStatus);
+        public static extern int DTWAIN_RangeIsValid(DTWAIN_RANGE Range,ref int pStatus);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeNearestValueFloat(long pArray,double dIn,ref double pOut,int RoundType);
+        public static extern int DTWAIN_RangeNearestValueFloat(DTWAIN_RANGE pArray,double dIn,ref double pOut,int RoundType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeNearestValueFloatString(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string dIn,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pOut,int RoundType);
+        public static extern int DTWAIN_RangeNearestValueFloatString(DTWAIN_RANGE pArray,[MarshalAs(UnmanagedType.LPTStr)] string dIn,[MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder pOut,int RoundType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeNearestValueLong(long pArray,int lIn,ref int pOut,int RoundType);
+        public static extern int DTWAIN_RangeNearestValueLong(DTWAIN_RANGE pArray,int lIn,ref int pOut,int RoundType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetAllFloat(long pArray,double dLow,double dUp,double dStep,double dDefault,double dCurrent);
+        public static extern int DTWAIN_RangeSetAllFloat(DTWAIN_RANGE pArray,double dLow,double dUp,double dStep,double dDefault,double dCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetAllFloatString(long pArray,[MarshalAs(UnmanagedType.LPTStr)] string dLow,[MarshalAs(UnmanagedType.LPTStr)] string dUp,[MarshalAs(UnmanagedType.LPTStr)] string dStep,[MarshalAs(UnmanagedType.LPTStr)] string dDefault,[MarshalAs(UnmanagedType.LPTStr)] string dCurrent);
+        public static extern int DTWAIN_RangeSetAllFloatString(DTWAIN_RANGE pArray,[MarshalAs(UnmanagedType.LPTStr)] string dLow,[MarshalAs(UnmanagedType.LPTStr)] string dUp,[MarshalAs(UnmanagedType.LPTStr)] string dStep,[MarshalAs(UnmanagedType.LPTStr)] string dDefault,[MarshalAs(UnmanagedType.LPTStr)] string dCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetAllLong(long pArray,int lLow,int lUp,int lStep,int lDefault,int lCurrent);
+        public static extern int DTWAIN_RangeSetAllLong(DTWAIN_RANGE pArray,int lLow,int lUp,int lStep,int lDefault,int lCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetValueFloat(long pArray,int nWhich,double Val);
+        public static extern int DTWAIN_RangeSetValueFloat(DTWAIN_RANGE pArray,int nWhich,double Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetValueFloatString(long pArray,int nWhich,[MarshalAs(UnmanagedType.LPTStr)] string Val);
+        public static extern int DTWAIN_RangeSetValueFloatString(DTWAIN_RANGE pArray,int nWhich,[MarshalAs(UnmanagedType.LPTStr)] string Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RangeSetValueLong(long pArray,int nWhich,int Val);
+        public static extern int DTWAIN_RangeSetValueLong(DTWAIN_RANGE pArray,int nWhich,int Val);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ResetPDFTextElement(long TextElement);
+        public static extern int DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_RewindPage(long Source);
+        public static extern int DTWAIN_RewindPage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectDefaultOCREngine();
+        public static extern DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectDefaultSource();
+        public static extern DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectOCREngine();
+        public static extern DTWAIN_OCRENGINE DTWAIN_SelectOCREngine();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectOCREngineByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+        public static extern DTWAIN_OCRENGINE DTWAIN_SelectOCREngineByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectOCREngineByNameA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
+        public static extern DTWAIN_OCRENGINE DTWAIN_SelectOCREngineByNameA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectOCREngineByNameW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
+        public static extern DTWAIN_OCRENGINE DTWAIN_SelectOCREngineByNameW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSource();
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSource();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSource2(int hWndParent,[MarshalAs(UnmanagedType.LPTStr)] string szTitle,int xPos,int yPos,int nOptions);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSource2(int hWndParent,[MarshalAs(UnmanagedType.LPTStr)] string szTitle,int xPos,int yPos,int nOptions);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSource2A(int hWndParent,[MarshalAs(UnmanagedType.LPStr)] string szTitle,int xPos,int yPos,int nOptions);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSource2A(int hWndParent,[MarshalAs(UnmanagedType.LPStr)] string szTitle,int xPos,int yPos,int nOptions);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSource2W(int hWndParent,[MarshalAs(UnmanagedType.LPWStr)] string szTitle,int xPos,int yPos,int nOptions);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSource2W(int hWndParent,[MarshalAs(UnmanagedType.LPWStr)] string szTitle,int xPos,int yPos,int nOptions);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSourceByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSourceByNameA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SelectSourceByNameW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireArea(long Source,int lSetType,long FloatEnum,long ActualEnum);
+        public static extern int DTWAIN_SetAcquireArea(DTWAIN_SOURCE Source,int lSetType,int FloatEnum,int ActualEnum);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireArea2(long Source,double left,double top,double right,double bottom,int lUnit,int Flags);
+        public static extern int DTWAIN_SetAcquireArea2(DTWAIN_SOURCE Source,double left,double top,double right,double bottom,int lUnit,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireArea2String(long Source,[MarshalAs(UnmanagedType.LPTStr)] string left,[MarshalAs(UnmanagedType.LPTStr)] string top,[MarshalAs(UnmanagedType.LPTStr)] string right,[MarshalAs(UnmanagedType.LPTStr)] string bottom,int lUnit,int Flags);
+        public static extern int DTWAIN_SetAcquireArea2String(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string left,[MarshalAs(UnmanagedType.LPTStr)] string top,[MarshalAs(UnmanagedType.LPTStr)] string right,[MarshalAs(UnmanagedType.LPTStr)] string bottom,int lUnit,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireArea2StringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string left,[MarshalAs(UnmanagedType.LPStr)] string top,[MarshalAs(UnmanagedType.LPStr)] string right,[MarshalAs(UnmanagedType.LPStr)] string bottom,int lUnit,int Flags);
+        public static extern int DTWAIN_SetAcquireArea2StringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string left,[MarshalAs(UnmanagedType.LPStr)] string top,[MarshalAs(UnmanagedType.LPStr)] string right,[MarshalAs(UnmanagedType.LPStr)] string bottom,int lUnit,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireArea2StringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string left,[MarshalAs(UnmanagedType.LPWStr)] string top,[MarshalAs(UnmanagedType.LPWStr)] string right,[MarshalAs(UnmanagedType.LPWStr)] string bottom,int lUnit,int Flags);
+        public static extern int DTWAIN_SetAcquireArea2StringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string left,[MarshalAs(UnmanagedType.LPWStr)] string top,[MarshalAs(UnmanagedType.LPWStr)] string right,[MarshalAs(UnmanagedType.LPWStr)] string bottom,int lUnit,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireImageNegative(long Source,int IsNegative);
+        public static extern int DTWAIN_SetAcquireImageNegative(DTWAIN_SOURCE Source,int IsNegative);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireImageScale(long Source,double xscale,double yscale);
+        public static extern int DTWAIN_SetAcquireImageScale(DTWAIN_SOURCE Source,double xscale,double yscale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireImageScaleString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string xscale,[MarshalAs(UnmanagedType.LPTStr)] string yscale);
+        public static extern int DTWAIN_SetAcquireImageScaleString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string xscale,[MarshalAs(UnmanagedType.LPTStr)] string yscale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireImageScaleStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string xscale,[MarshalAs(UnmanagedType.LPStr)] string yscale);
+        public static extern int DTWAIN_SetAcquireImageScaleStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string xscale,[MarshalAs(UnmanagedType.LPStr)] string yscale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireImageScaleStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string xscale,[MarshalAs(UnmanagedType.LPWStr)] string yscale);
+        public static extern int DTWAIN_SetAcquireImageScaleStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string xscale,[MarshalAs(UnmanagedType.LPWStr)] string yscale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireStripBuffer(long Source,long hMem);
+        public static extern int DTWAIN_SetAcquireStripBuffer(DTWAIN_SOURCE Source,int hMem);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAlarmVolume(long Source,int Volume);
+        public static extern int DTWAIN_SetAlarmVolume(DTWAIN_SOURCE Source,int Volume);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAlarms(long Source,long Alarms);
+        public static extern int DTWAIN_SetAlarms(DTWAIN_SOURCE Source,int Alarms);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAllCapsToDefault(long Source);
+        public static extern int DTWAIN_SetAllCapsToDefault(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3688,59 +3696,59 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAuthor(long Source,[MarshalAs(UnmanagedType.LPTStr)] string szAuthor);
+        public static extern int DTWAIN_SetAuthor(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAuthorA(long Source,[MarshalAs(UnmanagedType.LPStr)] string szAuthor);
+        public static extern int DTWAIN_SetAuthorA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAuthorW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string szAuthor);
+        public static extern int DTWAIN_SetAuthorW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string szAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAvailablePrinters(long Source,int lpAvailPrinters);
+        public static extern int DTWAIN_SetAvailablePrinters(DTWAIN_SOURCE Source, DTWAIN_ARRAY lpAvailPrinters);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAvailablePrintersArray(long Source,long AvailPrinters);
+        public static extern int DTWAIN_SetAvailablePrintersArray(DTWAIN_SOURCE Source, DTWAIN_ARRAY AvailPrinters);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBitDepth(long Source,int BitDepth,int bSetCurrent);
+        public static extern int DTWAIN_SetBitDepth(DTWAIN_SOURCE Source,int BitDepth,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBlankPageDetection(long Source,double threshold,int autodetect_option,int bSet);
+        public static extern int DTWAIN_SetBlankPageDetection(DTWAIN_SOURCE Source,double threshold,int autodetect_option,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBlankPageDetectionString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string threshold,int autodetect_option,int bSet);
+        public static extern int DTWAIN_SetBlankPageDetectionString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string threshold,int autodetect_option,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBlankPageDetectionStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string threshold,int autodetect_option,int bSet);
+        public static extern int DTWAIN_SetBlankPageDetectionStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string threshold,int autodetect_option,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBlankPageDetectionStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string threshold,int autodetect_option,int bSet);
+        public static extern int DTWAIN_SetBlankPageDetectionStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string threshold,int autodetect_option,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBrightness(long Source,double Brightness);
+        public static extern int DTWAIN_SetBrightness(DTWAIN_SOURCE Source,double Brightness);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBrightnessString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Brightness);
+        public static extern int DTWAIN_SetBrightnessString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Brightness);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBrightnessStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Contrast);
+        public static extern int DTWAIN_SetBrightnessStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetBrightnessStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Contrast);
+        public static extern int DTWAIN_SetBrightnessStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3752,59 +3760,59 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCamera(long Source,[MarshalAs(UnmanagedType.LPTStr)] string szCamera);
+        public static extern int DTWAIN_SetCamera(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string szCamera);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCameraA(long Source,[MarshalAs(UnmanagedType.LPStr)] string szCamera);
+        public static extern int DTWAIN_SetCameraA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string szCamera);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCameraW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string szCamera);
+        public static extern int DTWAIN_SetCameraW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string szCamera);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCapValues(long Source,int lCap,int lSetType,long pArray);
+        public static extern int DTWAIN_SetCapValues(DTWAIN_SOURCE Source,int lCap,int lSetType,DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCapValuesEx(long Source,int lCap,int lSetType,int lContainerType,long pArray);
+        public static extern int DTWAIN_SetCapValuesEx(DTWAIN_SOURCE Source,int lCap,int lSetType,int lContainerType,DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCapValuesEx2(long Source,int lCap,int lSetType,int lContainerType,int nDataType,long pArray);
+        public static extern int DTWAIN_SetCapValuesEx2(DTWAIN_SOURCE Source,int lCap,int lSetType,int lContainerType,int nDataType,DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCaption(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Caption);
+        public static extern int DTWAIN_SetCaption(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCaptionA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Caption);
+        public static extern int DTWAIN_SetCaptionA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCaptionW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Caption);
+        public static extern int DTWAIN_SetCaptionW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Caption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCompressionType(long Source,int lCompression,int bSetCurrent);
+        public static extern int DTWAIN_SetCompressionType(DTWAIN_SOURCE Source,int lCompression,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetContrast(long Source,double Contrast);
+        public static extern int DTWAIN_SetContrast(DTWAIN_SOURCE Source,double Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetContrastString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Contrast);
+        public static extern int DTWAIN_SetContrastString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetContrastStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Contrast);
+        public static extern int DTWAIN_SetContrastStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetContrastStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Contrast);
+        public static extern int DTWAIN_SetContrastStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Contrast);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3812,11 +3820,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCurrentRetryCount(long Source,int nCount);
+        public static extern int DTWAIN_SetCurrentRetryCount(DTWAIN_SOURCE Source,int nCount);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetCustomDSData(long Source,long hData,ref int Data,int dSize,int nFlags);
+        public static extern int DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, DTWAIN_HANDLE hData,ref int Data,int dSize,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3824,27 +3832,27 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDefaultSource(long Source);
+        public static extern int DTWAIN_SetDefaultSource(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDeviceNotifications(long Source,int DevEvents);
+        public static extern int DTWAIN_SetDeviceNotifications(DTWAIN_SOURCE Source,int DevEvents);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDeviceTimeDate(long Source,[MarshalAs(UnmanagedType.LPTStr)] string szTimeDate);
+        public static extern int DTWAIN_SetDeviceTimeDate(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDeviceTimeDateA(long Source,[MarshalAs(UnmanagedType.LPStr)] string szTimeDate);
+        public static extern int DTWAIN_SetDeviceTimeDateA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetDeviceTimeDateW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string szTimeDate);
+        public static extern int DTWAIN_SetDeviceTimeDateW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string szTimeDate);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetEOJDetectValue(long Source,int nValue);
+        public static extern int DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source,int nValue);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3852,55 +3860,55 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFeederAlignment(long Source,int lpAlignment);
+        public static extern int DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source,int lpAlignment);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFeederOrder(long Source,int lOrder);
+        public static extern int DTWAIN_SetFeederOrder(DTWAIN_SOURCE Source,int lOrder);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFileAutoIncrement(long Source,int Increment,int bResetOnAcquire,int bSet);
+        public static extern int DTWAIN_SetFileAutoIncrement(DTWAIN_SOURCE Source,int Increment,int bResetOnAcquire,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFileSavePos(int hWndParent,[MarshalAs(UnmanagedType.LPTStr)] string szTitle,int xPos,int yPos,int nFlags);
+        public static extern int DTWAIN_SetFileSavePos(DTWAIN_HANDLE hWndParent,[MarshalAs(UnmanagedType.LPTStr)] string szTitle,int xPos,int yPos,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFileSavePosA(int hWndParent,[MarshalAs(UnmanagedType.LPStr)] string szTitle,int xPos,int yPos,int nFlags);
+        public static extern int DTWAIN_SetFileSavePosA(DTWAIN_HANDLE hWndParent,[MarshalAs(UnmanagedType.LPStr)] string szTitle,int xPos,int yPos,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFileSavePosW(int hWndParent,[MarshalAs(UnmanagedType.LPWStr)] string szTitle,int xPos,int yPos,int nFlags);
+        public static extern int DTWAIN_SetFileSavePosW(DTWAIN_HANDLE hWndParent,[MarshalAs(UnmanagedType.LPWStr)] string szTitle,int xPos,int yPos,int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetFileXferFormat(long Source,int lFileType,int bSetCurrent);
+        public static extern int DTWAIN_SetFileXferFormat(DTWAIN_SOURCE Source,int lFileType,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetHighlight(long Source,double Highlight);
+        public static extern int DTWAIN_SetHighlight(DTWAIN_SOURCE Source,double Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetHighlightString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Highlight);
+        public static extern int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetHighlightStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Highlight);
+        public static extern int DTWAIN_SetHighlightStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetHighlightStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Highlight);
+        public static extern int DTWAIN_SetHighlightStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Highlight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetJobControl(long Source,int JobControl,int bSetCurrent);
+        public static extern int DTWAIN_SetJobControl(DTWAIN_SOURCE Source,int JobControl,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetJpegValues(long Source,int Quality,int Progressive);
+        public static extern int DTWAIN_SetJpegValues(DTWAIN_SOURCE Source,int Quality,int Progressive);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3908,15 +3916,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetLightPath(long Source,int LightPath);
+        public static extern int DTWAIN_SetLightPath(DTWAIN_SOURCE Source,int LightPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetLightPathEx(long Source,long LightPaths);
+        public static extern int DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source,int LightPaths);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetLightSources(long Source,long LightSources);
+        public static extern int DTWAIN_SetLightSources(DTWAIN_SOURCE Source,int LightSources);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -3924,259 +3932,259 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetManualDuplexMode(long Source,int Flags,int bSet);
+        public static extern int DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source,int Flags,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetMaxAcquisitions(long Source,int MaxAcquires);
+        public static extern int DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source,int MaxAcquires);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetMaxBuffers(long Source,int MaxBuf);
+        public static extern int DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source,int MaxBuf);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetMaxRetryAttempts(long Source,int nAttempts);
+        public static extern int DTWAIN_SetMaxRetryAttempts(DTWAIN_SOURCE Source,int nAttempts);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetMultipageScanMode(long Source,int ScanType);
+        public static extern int DTWAIN_SetMultipageScanMode(DTWAIN_SOURCE Source,int ScanType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetNoiseFilter(long Source,int NoiseFilter);
+        public static extern int DTWAIN_SetNoiseFilter(DTWAIN_SOURCE Source,int NoiseFilter);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetOCRCapValues(long Engine,int OCRCapValue,int SetType,long CapValues);
+        public static extern int DTWAIN_SetOCRCapValues(DTWAIN_OCRENGINE Engine, int OCRCapValue,int SetType,int CapValues);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetOrientation(long Source,int Orient,int bSetCurrent);
+        public static extern int DTWAIN_SetOrientation(DTWAIN_SOURCE Source,int Orient,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFASCIICompression(long Source,int bSet);
+        public static extern int DTWAIN_SetPDFASCIICompression(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFAuthor(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpAuthor);
+        public static extern int DTWAIN_SetPDFAuthor(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFAuthorA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpAuthor);
+        public static extern int DTWAIN_SetPDFAuthorA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFAuthorW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpAuthor);
+        public static extern int DTWAIN_SetPDFAuthorW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpAuthor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFCompression(long Source,int bCompression);
+        public static extern int DTWAIN_SetPDFCompression(DTWAIN_SOURCE Source,int bCompression);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFCreator(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpCreator);
+        public static extern int DTWAIN_SetPDFCreator(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFCreatorA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpCreator);
+        public static extern int DTWAIN_SetPDFCreatorA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFCreatorW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpCreator);
+        public static extern int DTWAIN_SetPDFCreatorW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFEncryption(long Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPTStr)] string lpszUser,[MarshalAs(UnmanagedType.LPTStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
+        public static extern int DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPTStr)] string lpszUser,[MarshalAs(UnmanagedType.LPTStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFEncryptionA(long Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPStr)] string lpszUser,[MarshalAs(UnmanagedType.LPStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
+        public static extern int DTWAIN_SetPDFEncryptionA(DTWAIN_SOURCE Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPStr)] string lpszUser,[MarshalAs(UnmanagedType.LPStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFEncryptionW(long Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPWStr)] string lpszUser,[MarshalAs(UnmanagedType.LPWStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
+        public static extern int DTWAIN_SetPDFEncryptionW(DTWAIN_SOURCE Source,int bUseEncryption,[MarshalAs(UnmanagedType.LPWStr)] string lpszUser,[MarshalAs(UnmanagedType.LPWStr)] string lpszOwner,int Permissions,int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFJpegQuality(long Source,int Quality);
+        public static extern int DTWAIN_SetPDFJpegQuality(DTWAIN_SOURCE Source,int Quality);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFKeywords(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpKeyWords);
+        public static extern int DTWAIN_SetPDFKeywords(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpKeyWords);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFKeywordsA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpKeyWords);
+        public static extern int DTWAIN_SetPDFKeywordsA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpKeyWords);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFKeywordsW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpKeyWords);
+        public static extern int DTWAIN_SetPDFKeywordsW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpKeyWords);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFOCRConversion(long Engine,int PageType,int FileType,int PixelType,int BitDepth,int Options);
+        public static extern int DTWAIN_SetPDFOCRConversion(DTWAIN_OCRENGINE Engine, int PageType,int FileType,int PixelType,int BitDepth,int Options);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFOCRMode(long Source,int bSet);
+        public static extern int DTWAIN_SetPDFOCRMode(DTWAIN_SOURCE Source,int bSet);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFOrientation(long Source,int lPOrientation);
+        public static extern int DTWAIN_SetPDFOrientation(DTWAIN_SOURCE Source,int lPOrientation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageScale(long Source,int nOptions,double xScale,double yScale);
+        public static extern int DTWAIN_SetPDFPageScale(DTWAIN_SOURCE Source,int nOptions,double xScale,double yScale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageScaleString(long Source,int nOptions,[MarshalAs(UnmanagedType.LPTStr)] string xScale,[MarshalAs(UnmanagedType.LPTStr)] string yScale);
+        public static extern int DTWAIN_SetPDFPageScaleString(DTWAIN_SOURCE Source,int nOptions,[MarshalAs(UnmanagedType.LPTStr)] string xScale,[MarshalAs(UnmanagedType.LPTStr)] string yScale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageScaleStringA(long Source,int nOptions,[MarshalAs(UnmanagedType.LPStr)] string xScale,[MarshalAs(UnmanagedType.LPStr)] string yScale);
+        public static extern int DTWAIN_SetPDFPageScaleStringA(DTWAIN_SOURCE Source,int nOptions,[MarshalAs(UnmanagedType.LPStr)] string xScale,[MarshalAs(UnmanagedType.LPStr)] string yScale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageScaleStringW(long Source,int nOptions,[MarshalAs(UnmanagedType.LPWStr)] string xScale,[MarshalAs(UnmanagedType.LPWStr)] string yScale);
+        public static extern int DTWAIN_SetPDFPageScaleStringW(DTWAIN_SOURCE Source,int nOptions,[MarshalAs(UnmanagedType.LPWStr)] string xScale,[MarshalAs(UnmanagedType.LPWStr)] string yScale);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageSize(long Source,int PageSize,double CustomWidth,double CustomHeight);
+        public static extern int DTWAIN_SetPDFPageSize(DTWAIN_SOURCE Source,int PageSize,double CustomWidth,double CustomHeight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageSizeString(long Source,int PageSize,[MarshalAs(UnmanagedType.LPTStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPTStr)] string CustomHeight);
+        public static extern int DTWAIN_SetPDFPageSizeString(DTWAIN_SOURCE Source,int PageSize,[MarshalAs(UnmanagedType.LPTStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPTStr)] string CustomHeight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageSizeStringA(long Source,int PageSize,[MarshalAs(UnmanagedType.LPStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPStr)] string CustomHeight);
+        public static extern int DTWAIN_SetPDFPageSizeStringA(DTWAIN_SOURCE Source,int PageSize,[MarshalAs(UnmanagedType.LPStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPStr)] string CustomHeight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFPageSizeStringW(long Source,int PageSize,[MarshalAs(UnmanagedType.LPWStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPWStr)] string CustomHeight);
+        public static extern int DTWAIN_SetPDFPageSizeStringW(DTWAIN_SOURCE Source,int PageSize,[MarshalAs(UnmanagedType.LPWStr)] string CustomWidth,[MarshalAs(UnmanagedType.LPWStr)] string CustomHeight);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFProducer(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpProducer);
+        public static extern int DTWAIN_SetPDFProducer(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpProducer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFProducerA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpProducer);
+        public static extern int DTWAIN_SetPDFProducerA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpProducer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFProducerW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpProducer);
+        public static extern int DTWAIN_SetPDFProducerW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpProducer);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFSubject(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpSubject);
+        public static extern int DTWAIN_SetPDFSubject(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpSubject);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFSubjectA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpSubject);
+        public static extern int DTWAIN_SetPDFSubjectA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpSubject);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFSubjectW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpSubject);
+        public static extern int DTWAIN_SetPDFSubjectW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpSubject);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFTextElementFloat(long TextElement,double val1,double val2,int Flags);
+        public static extern int DTWAIN_SetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, double val1,double val2,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFTextElementLong(long TextElement,int val1,int val2,int Flags);
+        public static extern int DTWAIN_SetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, int val1,int val2,int Flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFTitle(long Source,[MarshalAs(UnmanagedType.LPTStr)] string lpTitle);
+        public static extern int DTWAIN_SetPDFTitle(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string lpTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFTitleA(long Source,[MarshalAs(UnmanagedType.LPStr)] string lpTitle);
+        public static extern int DTWAIN_SetPDFTitleA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string lpTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPDFTitleW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string lpTitle);
+        public static extern int DTWAIN_SetPDFTitleW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string lpTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPaperSize(long Source,int PaperSize,int bSetCurrent);
+        public static extern int DTWAIN_SetPaperSize(DTWAIN_SOURCE Source,int PaperSize,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPatchMaxPriorities(long Source,int nMaxSearchRetries);
+        public static extern int DTWAIN_SetPatchMaxPriorities(DTWAIN_SOURCE Source,int nMaxSearchRetries);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPatchMaxRetries(long Source,int nMaxRetries);
+        public static extern int DTWAIN_SetPatchMaxRetries(DTWAIN_SOURCE Source,int nMaxRetries);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPatchPriorities(long Source,long SearchPriorities);
+        public static extern int DTWAIN_SetPatchPriorities(DTWAIN_SOURCE Source,int SearchPriorities);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPatchSearchMode(long Source,int nSearchMode);
+        public static extern int DTWAIN_SetPatchSearchMode(DTWAIN_SOURCE Source,int nSearchMode);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPatchTimeOut(long Source,int TimeOutValue);
+        public static extern int DTWAIN_SetPatchTimeOut(DTWAIN_SOURCE Source,int TimeOutValue);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPixelFlavor(long Source,int PixelFlavor);
+        public static extern int DTWAIN_SetPixelFlavor(DTWAIN_SOURCE Source,int PixelFlavor);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPixelType(long Source,int PixelType,int BitDepth,int bSetCurrent);
+        public static extern int DTWAIN_SetPixelType(DTWAIN_SOURCE Source,int PixelType,int BitDepth,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPostScriptTitle(long Source,[MarshalAs(UnmanagedType.LPTStr)] string szTitle);
+        public static extern int DTWAIN_SetPostScriptTitle(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string szTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPostScriptTitleA(long Source,[MarshalAs(UnmanagedType.LPStr)] string szTitle);
+        public static extern int DTWAIN_SetPostScriptTitleA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string szTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPostScriptTitleW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string szTitle);
+        public static extern int DTWAIN_SetPostScriptTitleW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string szTitle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPostScriptType(long Source,int PSType);
+        public static extern int DTWAIN_SetPostScriptType(DTWAIN_SOURCE Source,int PSType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinter(long Source,int Printer,int bCurrent);
+        public static extern int DTWAIN_SetPrinter(DTWAIN_SOURCE Source,int Printer,int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterStartNumber(long Source,int nStart);
+        public static extern int DTWAIN_SetPrinterStartNumber(DTWAIN_SOURCE Source,int nStart);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterStringMode(long Source,int PrinterMode,int bSetCurrent);
+        public static extern int DTWAIN_SetPrinterStringMode(DTWAIN_SOURCE Source,int PrinterMode,int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterStrings(long Source,long ArrayString,ref int pNumStrings);
+        public static extern int DTWAIN_SetPrinterStrings(DTWAIN_SOURCE Source,int ArrayString,ref int pNumStrings);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterSuffixString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Suffix);
+        public static extern int DTWAIN_SetPrinterSuffixString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Suffix);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterSuffixStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Suffix);
+        public static extern int DTWAIN_SetPrinterSuffixStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Suffix);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterSuffixStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Suffix);
+        public static extern int DTWAIN_SetPrinterSuffixStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Suffix);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -4184,59 +4192,59 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetResolution(long Source,double Resolution);
+        public static extern int DTWAIN_SetResolution(DTWAIN_SOURCE Source,double Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetResolutionString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Resolution);
+        public static extern int DTWAIN_SetResolutionString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetResolutionStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Resolution);
+        public static extern int DTWAIN_SetResolutionStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetResolutionStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Resolution);
+        public static extern int DTWAIN_SetResolutionStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetRotation(long Source,double Rotation);
+        public static extern int DTWAIN_SetRotation(DTWAIN_SOURCE Source,double Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetRotationString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Rotation);
+        public static extern int DTWAIN_SetRotationString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetRotationStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Rotation);
+        public static extern int DTWAIN_SetRotationStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetRotationStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Rotation);
+        public static extern int DTWAIN_SetRotationStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Rotation);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetSaveFileName(long Source,[MarshalAs(UnmanagedType.LPTStr)] string fileName);
+        public static extern int DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string fileName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetSaveFileNameA(long Source,[MarshalAs(UnmanagedType.LPStr)] string fileName);
+        public static extern int DTWAIN_SetSaveFileNameA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string fileName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetSaveFileNameW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string fileName);
+        public static extern int DTWAIN_SetSaveFileNameW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string fileName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetSourceUnit(long Source,int lpUnit);
+        public static extern int DTWAIN_SetSourceUnit(DTWAIN_SOURCE Source,int lpUnit);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetTIFFCompressType(long Source,int Setting);
+        public static extern int DTWAIN_SetTIFFCompressType(DTWAIN_SOURCE Source,int Setting);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetTIFFInvert(long Source,int Setting);
+        public static extern int DTWAIN_SetTIFFInvert(DTWAIN_SOURCE Source,int Setting);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -4252,19 +4260,19 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetThreshold(long Source,double Threshold,int bSetBithDepthReduction);
+        public static extern int DTWAIN_SetThreshold(DTWAIN_SOURCE Source,double Threshold,int bSetBithDepthReduction);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetThresholdString(long Source,[MarshalAs(UnmanagedType.LPTStr)] string Threshold,int bSetBitDepthReduction);
+        public static extern int DTWAIN_SetThresholdString(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPTStr)] string Threshold,int bSetBitDepthReduction);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetThresholdStringA(long Source,[MarshalAs(UnmanagedType.LPStr)] string Threshold,int bSetBitDepthReduction);
+        public static extern int DTWAIN_SetThresholdStringA(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPStr)] string Threshold,int bSetBitDepthReduction);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetThresholdStringW(long Source,[MarshalAs(UnmanagedType.LPWStr)] string Threshold,int bSetBitDepthReduction);
+        public static extern int DTWAIN_SetThresholdStringW(DTWAIN_SOURCE Source,[MarshalAs(UnmanagedType.LPWStr)] string Threshold,int bSetBitDepthReduction);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -4300,31 +4308,31 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ShowUIOnly(long Source);
+        public static extern int DTWAIN_ShowUIOnly(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_ShutdownOCREngine(long OCREngine);
+        public static extern int DTWAIN_ShutdownOCREngine(DTWAIN_OCRENGINE OCREngine);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SkipImageInfoError(long Source,int bSkip);
+        public static extern int DTWAIN_SkipImageInfoError(DTWAIN_SOURCE Source,int bSkip);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartThread(long DLLHandle);
+        public static extern int DTWAIN_StartThread(DTWAIN_HANDLE DLLHandle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSession(int hWndMsg,[MarshalAs(UnmanagedType.LPTStr)] string lpszDLLName);
+        public static extern int DTWAIN_StartTwainSession(DTWAIN_HANDLE hWndMsg,[MarshalAs(UnmanagedType.LPTStr)] string lpszDLLName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSessionA(int hWndMsg,[MarshalAs(UnmanagedType.LPStr)] string lpszDLLName);
+        public static extern int DTWAIN_StartTwainSessionA(DTWAIN_HANDLE hWndMsg,[MarshalAs(UnmanagedType.LPStr)] string lpszDLLName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSessionW(int hWndMsg,[MarshalAs(UnmanagedType.LPWStr)] string lpszDLLName);
+        public static extern int DTWAIN_StartTwainSessionW(DTWAIN_HANDLE hWndMsg,[MarshalAs(UnmanagedType.LPWStr)] string lpszDLLName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
@@ -4332,226 +4340,240 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitialize();
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitialize();
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeEx([MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx([MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeEx2([MarshalAs(UnmanagedType.LPTStr)] string szINIPath,[MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx2([MarshalAs(UnmanagedType.LPTStr)] string szINIPath,[MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeEx2A([MarshalAs(UnmanagedType.LPStr)] string szINIPath,[MarshalAs(UnmanagedType.LPStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx2A([MarshalAs(UnmanagedType.LPStr)] string szINIPath,[MarshalAs(UnmanagedType.LPStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeEx2W([MarshalAs(UnmanagedType.LPWStr)] string szINIPath,[MarshalAs(UnmanagedType.LPWStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPWStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx2W([MarshalAs(UnmanagedType.LPWStr)] string szINIPath,[MarshalAs(UnmanagedType.LPWStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPWStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeExA([MarshalAs(UnmanagedType.LPStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeExA([MarshalAs(UnmanagedType.LPStr)] string szINIPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeExW([MarshalAs(UnmanagedType.LPWStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeExW([MarshalAs(UnmanagedType.LPWStr)] string szINIPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLib(long hInstance);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLib(int hInstance);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibEx(long hInstance,[MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(int hInstance,[MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibEx2(long hInstance,[MarshalAs(UnmanagedType.LPTStr)] string szINIPath,[MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(int hInstance,[MarshalAs(UnmanagedType.LPTStr)] string szINIPath,[MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibEx2A(long hInstance,[MarshalAs(UnmanagedType.LPStr)] string szINIPath,[MarshalAs(UnmanagedType.LPStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2A(int hInstance,[MarshalAs(UnmanagedType.LPStr)] string szINIPath,[MarshalAs(UnmanagedType.LPStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibEx2W(long hInstance,[MarshalAs(UnmanagedType.LPWStr)] string szINIPath,[MarshalAs(UnmanagedType.LPWStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPWStr)] string szLangResourcePath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2W(int hInstance,[MarshalAs(UnmanagedType.LPWStr)] string szINIPath,[MarshalAs(UnmanagedType.LPWStr)] string szImageDLLPath,[MarshalAs(UnmanagedType.LPWStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibExA(long hInstance,[MarshalAs(UnmanagedType.LPStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibExA(int hInstance,[MarshalAs(UnmanagedType.LPStr)] string szINIPath);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern long DTWAIN_SysInitializeLibExW(long hInstance,[MarshalAs(UnmanagedType.LPWStr)] string szINIPath);
+        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeLibExW(int hInstance,[MarshalAs(UnmanagedType.LPWStr)] string szINIPath);
+
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_TwainSave([MarshalAs(UnmanagedType.LPTStr)] string cmd);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_TwainSaveA([MarshalAs(UnmanagedType.LPStr)] string cmd);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_TwainSaveW([MarshalAs(UnmanagedType.LPWStr)] string cmd);
+        public static extern int DTWAIN_GetErrorString(int nError, System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern void DTWAIN_X([MarshalAs(UnmanagedType.LPTStr)] string s);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern void DTWAIN_XA([MarshalAs(UnmanagedType.LPStr)] string s);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
-        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern void DTWAIN_XW([MarshalAs(UnmanagedType.LPWStr)] string s);
+        public static extern int DTWAIN_GetNameFromCap(int nCapValue, System.IntPtr sPtr, int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetErrorString(int nError, System.LongPtr lpszVer, int nLength);
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetVersionString(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNameFromCap(int nCapValue, System.LongPtr sPtr, int nMaxLen);
+        public static extern int DTWAIN_GetShortVersionString(System.IntPtr lpszVer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTempFileDirectory(System.IntPtr lpszVer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetVersionInfo(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTempFileDirectory(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
+        ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSourceProductFamily(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionString(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetSourceProductName(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetShortVersionString(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionInfo(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetOCRErrorString(DTWAIN_OCRENGINE Engine,  int nError, System.IntPtr lpszVer, int nLength);
 
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturer(long Source, System.LongPtr sPtr, int nLength);
 
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamily(long Source, System.LongPtr sPtr, int nLength);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductName(long Source, System.LongPtr sPtr, int nLength);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfo(long Source, System.LongPtr sPtr, int nLength);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
-        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRErrorString(long Engine, int nError, System.LongPtr lpszVer, int nLength);
-        [DllImport("DTWAIN32.DLL", CharSet = CharSet.Ansi,
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetErrorStringA(int nError, System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNameFromCapA(int nCapValue, System.LongPtr sPtr, int nMaxLen);
+        public static extern int DTWAIN_GetNameFromCapA(int nCapValue, System.IntPtr sPtr, int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionStringA(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetVersionStringA(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetShortVersionStringA(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetShortVersionStringA(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTempFileDirectoryA(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetTempFileDirectoryA(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionInfoA(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetVersionInfoA(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturerA(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceManufacturerA(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamilyA(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceProductFamilyA(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductNameA(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfoA(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRErrorStringA(int Engine, int nError, System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetOCRErrorStringA(DTWAIN_OCRENGINE Engine,  int nError, System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetErrorStringW(int nError, System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetErrorStringW(int nError, System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetNameFromCapW(int nCapValue, System.LongPtr sPtr, int nMaxLen);
+        public static extern int DTWAIN_GetNameFromCapW(int nCapValue, System.IntPtr sPtr, int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionStringW(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetVersionStringW(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetShortVersionStringW(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetShortVersionStringW(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTempFileDirectoryW(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetTempFileDirectoryW(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetVersionInfoW(System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetVersionInfoW(System.IntPtr lpszVer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceManufacturerW(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceManufacturerW(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductFamilyW(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceProductFamilyW(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceProductNameW(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetSourceVersionInfoW(int Source, System.LongPtr sPtr, int nLength);
+        public static extern int DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, System.IntPtr sPtr, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetOCRErrorStringW(int Engine, int nError, System.LongPtr lpszVer, int nLength);
+        public static extern int DTWAIN_GetOCRErrorStringW(DTWAIN_OCRENGINE Engine,  int nError, System.IntPtr lpszVer, int nLength);
         
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSession(int hWndMsg, System.IntPtr sPtr);
+        public static extern int DTWAIN_StartTwainSession(DTWAIN_HANDLE hWndMsg, System.IntPtr sPtr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Ansi,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSessionA(int hWndMsg, System.IntPtr sPtr);
+        public static extern int DTWAIN_StartTwainSessionA(DTWAIN_HANDLE hWndMsg, System.IntPtr sPtr);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Unicode,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_StartTwainSessionW(int hWndMsg, System.IntPtr sPtr);
+        public static extern int DTWAIN_StartTwainSessionW(DTWAIN_HANDLE hWndMsg, System.IntPtr sPtr);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetDSMSearchOrderEx([MarshalAs(UnmanagedType.LPTStr)] string szSearch, [MarshalAs(UnmanagedType.LPTStr)] string szUserDir);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetDSMSearchOrderExA([MarshalAs(UnmanagedType.LPStr)] string szSearch, [MarshalAs(UnmanagedType.LPStr)] string szUserDir);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetDSMSearchOrderExW([MarshalAs(UnmanagedType.LPWStr)] string szSearch, [MarshalAs(UnmanagedType.LPWStr)] string szUserDir);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetResourcePath([MarshalAs(UnmanagedType.LPTStr)] string szPath);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetResourcePathA([MarshalAs(UnmanagedType.LPStr)] string szPath);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetResourcePathW([MarshalAs(UnmanagedType.LPWStr)] string szPath);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLibraryPath([MarshalAs(UnmanagedType.LPTStr)]System.Text.StringBuilder szPath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLibraryPathA([MarshalAs(UnmanagedType.LPStr)]System.Text.StringBuilder szPath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLibraryPathW([MarshalAs(UnmanagedType.LPWStr)]System.Text.StringBuilder szPath, int nLength);
     }
 }
