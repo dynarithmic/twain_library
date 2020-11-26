@@ -4172,7 +4172,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetPrinterStrings(DTWAIN_SOURCE Source,int ArrayString,ref int pNumStrings);
+        public static extern int DTWAIN_SetPrinterStrings(DTWAIN_SOURCE Source, DTWAIN_ARRAY ArrayString,ref int pNumStrings);
 
         [DllImport(DTWAIN_LIBRARY, CharSet=CharSet.Auto,
         ExactSpelling=true, CallingConvention=CallingConvention.StdCall)]
