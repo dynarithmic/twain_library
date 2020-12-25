@@ -88,11 +88,27 @@ DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource()
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2(HWND hWndParent, LPCTSTR szTitle, LONG xPos, LONG yPos, LONG nOptions)
 {
     LOG_FUNC_ENTRY_PARAMS((hWndParent, szTitle, xPos, yPos, nOptions))
-    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle, xPos, yPos, nOptions));
+    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle, 
+                                               xPos, yPos, NULL, NULL, NULL, nOptions));
     LOG_FUNC_EXIT_PARAMS(Source);
     CATCH_BLOCK(DTWAIN_SOURCE(0))
 }
 
+DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2Ex(HWND hWndParent,
+                                                  LPCTSTR szTitle,
+                                                  LONG xPos,
+                                                  LONG yPos,
+                                                  LPCTSTR szIncludeFilter,
+                                                  LPCTSTR szExcludeFilter,
+                                                  LPCTSTR szNameMapping,
+                                                  LONG nOptions)
+{
+    LOG_FUNC_ENTRY_PARAMS((hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions))
+    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle, 
+                                               xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions));
+    LOG_FUNC_EXIT_PARAMS(Source);
+    CATCH_BLOCK(DTWAIN_SOURCE(0))
+}
 
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectDefaultSource()
 {
@@ -221,40 +237,68 @@ DTWAIN_SOURCE dynarithmic::DTWAIN_LLSelectSource2(const SourceSelectionOptions& 
 
     LPDLGTEMPLATE lpTemplate = static_cast<LPDLGTEMPLATE>(LockResource(hglb));
 
-    SelectStruct S;
-    S.CS.xpos = opts.xPos;
-    S.CS.ypos = opts.yPos;
-    S.CS.nOptions = opts.nOptions;
-    S.CS.hWndParent = opts.hWndParent;
-    S.m_pbSourcesOnSelect = &pHandle->m_bOpenSourceOnSelect;
-    S.nItems = 0;
+    SelectStruct selectStruct;
+    selectStruct.CS.xpos = opts.xPos;
+    selectStruct.CS.ypos = opts.yPos;
+    selectStruct.CS.nOptions = opts.nOptions;
+    selectStruct.CS.hWndParent = opts.hWndParent;
+    selectStruct.m_pbSourcesOnSelect = &pHandle->m_bOpenSourceOnSelect;
+    selectStruct.nItems = 0;
     if ( opts.szTitle )
-        S.CS.sTitle = opts.szTitle;
+        selectStruct.CS.sTitle = opts.szTitle;
     else
     {
         size_t status = 0;
         CTL_TwainAppMgr::WriteLogInfo(_T("Retrieving TWAIN Dialog Resources...\n"));
-        S.CS.sTitle = GetTwainDlgTextFromResource(IDS_SELECT_SOURCE_TEXT, status);
+        selectStruct.CS.sTitle = GetTwainDlgTextFromResource(IDS_SELECT_SOURCE_TEXT, status);
         CTL_TwainAppMgr::WriteLogInfo(_T("Retrieved TWAIN Dialog Resources successfully...\n"));
         if ( !status )
-            S.CS.sTitle = _T("Select Source");
+            selectStruct.CS.sTitle = _T("Select Source");
+    }
+
+    if (opts.szIncludeNames)
+        StringWrapper::Tokenize(opts.szIncludeNames, _T("|"), selectStruct.CS.aIncludeNames);
+    if (opts.szExcludeNames)
+        StringWrapper::Tokenize(opts.szExcludeNames, _T("|"), selectStruct.CS.aExcludeNames);
+    if (opts.szNameMapping)
+    {
+        std::vector<CTL_StringType> mapPairs;
+        StringWrapper::Tokenize(opts.szNameMapping, _T("|"), mapPairs);
+        for (auto& m : mapPairs)
+        {
+            std::vector<CTL_StringType> onePair;
+            StringWrapper::Tokenize(m, _T("="), onePair);
+            if (onePair.size() == 2)
+                selectStruct.CS.mapNames.insert({ onePair.front(), onePair.back() });
+        }
     }
 
     DTWAIN_SOURCE Source;
     CTL_TwainAppMgr::WriteLogInfo(_T("Displaying TWAIN Dialog...\n"));
     INT_PTR bRet = DialogBoxIndirectParam(CTL_TwainDLLHandle::s_DLLInstance, lpTemplate, opts.hWndParent,
-                          reinterpret_cast<DLGPROC>(DisplayTwainDlgProc), reinterpret_cast<LPARAM>(&S));
+                          reinterpret_cast<DLGPROC>(DisplayTwainDlgProc), reinterpret_cast<LPARAM>(&selectStruct));
     if ( bRet == -1 )
         LOG_FUNC_EXIT_PARAMS(NULL)
 
     // See if cancel was selected
-    if ( S.SourceName.empty() || S.nItems == 0 )
+    if (selectStruct.SourceName.empty() || selectStruct.nItems == 0 )
     {
         CTL_TwainAppMgr::SetError(DTWAIN_ERR_SOURCESELECTION_CANCELED);
         LOG_FUNC_EXIT_PARAMS(NULL)
     }
 
-    Source = DTWAIN_SelectSourceByName(S.SourceName.c_str());
+    // Could be a mapped name, so need to check
+    CTL_StringType actualSourceName = selectStruct.SourceName;
+    if (opts.nOptions & DTWAIN_DLG_USENAMEMAPPING)
+    {
+        auto iter = std::find_if(selectStruct.CS.mapNames.begin(), selectStruct.CS.mapNames.end(), 
+                                 [&](auto& pr)
+                                { return pr.second == actualSourceName;}
+                                );
+        if (iter != selectStruct.CS.mapNames.end())
+            actualSourceName = iter->first;
+    }
+    Source = DTWAIN_SelectSourceByName(actualSourceName.c_str());
 
     // Set the default Source
     DTWAIN_SetDefaultSource(Source);
@@ -332,6 +376,67 @@ static BOOL CALLBACK ChildEnumFontProc(HWND hWnd, LPARAM lParam)
 	return TRUE;
 }
 
+static std::vector<CTL_StringType> AdjustSourceNames(std::vector<CTL_StringType> vSourceNames, CustomPlacement CS)
+{
+    if (vSourceNames.empty())
+        return {};
+
+    bool doExclude = (CS.nOptions & DTWAIN_DLG_USEEXCLUDENAMES)?true:false;
+    bool doInclude = (CS.nOptions & DTWAIN_DLG_USEINCLUDENAMES)?true : false;
+    bool doMapping = (CS.nOptions & DTWAIN_DLG_USENAMEMAPPING)?true : false;
+
+    if (!doInclude && !doExclude && !doMapping)
+        return vSourceNames;
+
+    std::vector<CTL_StringType> vReturn = vSourceNames;
+
+    for (auto& sName : vSourceNames)
+        sName = StringWrapper::TrimAll(sName);
+
+    if (doInclude)
+    {
+        for (auto& sName : CS.aIncludeNames)
+            sName = StringWrapper::TrimAll(sName);
+        std::vector<CTL_StringType> vReturn2;
+        std::sort(vSourceNames.begin(), vSourceNames.end());
+        std::sort(CS.aIncludeNames.begin(), CS.aIncludeNames.end());
+        std::set_intersection(vSourceNames.begin(), vSourceNames.end(),
+                              CS.aIncludeNames.begin(), CS.aIncludeNames.end(), std::back_inserter(vReturn2));
+        if (!vReturn2.empty())
+            vSourceNames = vReturn2;
+    }
+
+    vReturn = vSourceNames;
+
+    if (doExclude)
+    {
+        for (auto& sName : CS.aExcludeNames)
+            sName = StringWrapper::TrimAll(sName);
+        std::vector<CTL_StringType> vReturn2;
+        std::sort(vSourceNames.begin(), vSourceNames.end());
+        std::sort(CS.aExcludeNames.begin(), CS.aExcludeNames.end());
+        std::set_difference(vSourceNames.begin(), vSourceNames.end(),
+                            CS.aExcludeNames.begin(), CS.aExcludeNames.end(), std::back_inserter(vReturn2));
+        if (!vReturn2.empty())
+            vReturn = vReturn2;
+    }
+
+    if (doMapping)
+    {
+        std::vector<CTL_StringType> vMapped;
+        for (auto& sName : vReturn)
+        {
+            auto iter = CS.mapNames.find(sName);
+            if (iter != CS.mapNames.end())
+                vMapped.push_back(iter->second);
+            else
+                vMapped.push_back(sName);
+        }
+        vReturn = vMapped;
+    }
+    return vReturn;
+}
+
 LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static SelectStruct *pS;
@@ -375,7 +480,7 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
         if (!vValues)
             nCount = 0;
         else
-            nCount = (int)vValues->size();
+				nCount = static_cast<int>(vValues->size());
         pS->nItems = nCount;
         if (nCount == 0)
         {
@@ -405,7 +510,7 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
             if (nBytes > 0)
             {
                 DefName.resize(nBytes);
-                DTWAIN_GetSourceProductName(DefSource, &DefName[0], nBytes);
+					DTWAIN_GetSourceProductName(DefSource, DefName.data(), nBytes);
                 CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Retrieved default TWAIN Source name...\n"));
             }
         }
@@ -419,27 +524,35 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
             CTL_TwainAppMgr::WriteLogInfo(strm.str());
         }
 
-        vector<CTL_StringType> SourceNames;
         vector<SIZE> TextExtents;
         HDC hdcList = NULL;
         if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
             hdcList = GetDC(lstSources);
-        SourceNames.reserve(nCount);
-        int i;
-        DTWAIN_SOURCE TempSource;
-        for (i = 0; i < nCount; i++)
-        {
-            TempSource = (*vValues)[i];
+
+            // Get all the source names
+            vector<CTL_StringType> vSourceNames;
             TCHAR ProdName[256];
-            DTWAIN_GetSourceProductName(TempSource, ProdName, 255);
-            SourceNames.push_back(ProdName);
+
+            std::transform(vValues->begin(), vValues->end(), std::back_inserter(vSourceNames),
+                           [&](CTL_ITwainSourcePtr ptr)
+                            { DTWAIN_GetSourceProductName(ptr, ProdName, 255); return ProdName; }
+                          );
+
+
+            // Remove and rename sources depending on the options
+            auto vNewSourceNames = AdjustSourceNames(vSourceNames, pS->CS);
+
+			for (auto& sName : vNewSourceNames )
+			{
             SIZE szType;
             if (hdcList)
             {
-                ::GetTextExtentPoint32(hdcList, ProdName, static_cast<int>(_tcslen(ProdName)), &szType);
+                    auto cstr = sName.c_str();
+					::GetTextExtentPoint32(hdcList, cstr, static_cast<int>(_tcslen(cstr)), &szType);
                 TextExtents.push_back(szType);
             }
         }
+
         if (hdcList)
         {
             ReleaseDC(lstSources, hdcList);
@@ -450,27 +563,27 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
         if (pS->CS.nOptions & DTWAIN_DLG_SORTNAMES)
         {
             CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Sorting TWAIN Source names...\n"));
-            sort(SourceNames.begin(), SourceNames.end());
+				sort(vSourceNames.begin(), vSourceNames.end());
         }
 
         LRESULT index;
         LRESULT DefIndex = 0;
         CTL_StringStreamType strm;
         CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Adding names to dialog...\n"));
-        strm << _T("TWAIN found ") << nCount << _T(" source names to add to TWAIN dialog...\n");
+			strm << _T("TWAIN found ") << vNewSourceNames.size() << _T(" source names to add to TWAIN dialog...\n");
         strm << _T("The TWAIN dialog window handle to add names is ") << lstSources << _T("\n");
         CTL_TwainAppMgr::WriteLogInfo(strm.str());
-        for (i = 0; i < nCount; i++)
+			for (auto& sName : vNewSourceNames)
         {
             strm.str(_T(""));
-            strm << _T("The TWAIN name being added is ") << SourceNames[i] << _T("\n");
+				strm << _T("The TWAIN name being added is ") << sName << _T("\n");
             CTL_TwainAppMgr::WriteLogInfo(strm.str());
-            index = SendMessage(lstSources, LB_ADDSTRING, 0, (LPARAM)SourceNames[i].c_str());
+				index = SendMessage(lstSources, LB_ADDSTRING, 0, (LPARAM)sName.c_str());
             CTL_TwainAppMgr::WriteLogInfo(_T("LB_ADDSTRING was sent to TWAIN dialog...\n"));
             CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now comparing names...\n"));
             if (!DefName.empty())
             {
-                if (_tcscmp(SourceNames[i].c_str(), (LPCTSTR)&DefName[0]) == 0)
+					if (_tcscmp(sName.c_str(), (LPCTSTR)&DefName[0]) == 0)
                     DefIndex = index;
             }
             CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now finished comparing names...\n"));
@@ -478,12 +591,14 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
         if (DefName.empty())
             DefIndex = 0;
 
-        if (i > 0)
+			if (!TextExtents.empty())
         {
             SendMessage(lstSources, LB_SETCURSEL, DefIndex, 0);
             if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
                 SendMessage(lstSources, LB_SETHORIZONTALEXTENT, TextExtents[0].cx, 0);
         }
+            else
+                SendMessage(lstSources, LB_SETCURSEL, 0, 0);
 
         CTL_TwainAppMgr::WriteLogInfo(_T("Finished Adding names to TWAIN dialog...\n"));
 

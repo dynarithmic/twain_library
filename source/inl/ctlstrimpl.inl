@@ -1404,7 +1404,7 @@ DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByNameA(LPCSTR lpszName)
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2A(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, LONG nOptions)
 {
 #ifdef _UNICODE
-    return DTWAIN_SelectSource2(hWndParent, StringConversion::Convert_Ansi_To_Native(szTitle).c_str(), xPos, yPos, nOptions);
+    return DTWAIN_SelectSource2(hWndParent, szTitle?StringConversion::Convert_Ansi_To_Native(szTitle).c_str():NULL, xPos, yPos, nOptions);
 #else
     return DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions);
 #endif
@@ -1415,7 +1415,38 @@ DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2W(HWND hWndParent, LPCWSTR szTitl
 #ifdef _UNICODE
     return DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions);
 #else
-    return DTWAIN_SelectSource2(hWndParent, StringConversion::Convert_Wide_To_Native(szTitle).c_str(), xPos, yPos, nOptions);
+    return DTWAIN_SelectSource2(hWndParent, 
+                                szTitle?StringConversion::Convert_Wide_To_Native(szTitle).c_str():NULL, xPos, yPos, nOptions);
+#endif
+}
+
+DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2ExA(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, 
+                                                   LPCSTR szIncludeNames, LPCSTR szExcludeNames, LPCSTR szNameMapping, LONG nOptions)
+{
+#ifdef _UNICODE
+    return DTWAIN_SelectSource2Ex(hWndParent, 
+                                  szTitle?StringConversion::Convert_Ansi_To_Native(szTitle).c_str():NULL, xPos, yPos, 
+                                  szIncludeNames?StringConversion::Convert_Ansi_To_Native(szIncludeNames).c_str():NULL, 
+                                  szExcludeNames?StringConversion::Convert_Ansi_To_Native(szExcludeNames).c_str():NULL,
+                                  szNameMapping?StringConversion::Convert_Ansi_To_Native(szNameMapping).c_str():NULL,
+                                  nOptions);
+#else
+    return DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions);
+#endif
+}
+
+DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2ExW(HWND hWndParent, LPCWSTR szTitle, LONG xPos, LONG yPos, LPCWSTR szIncludeNames, LPCWSTR szExcludeNames, LPCWSTR szNameMapping, LONG nOptions)
+{
+#ifdef _UNICODE
+    return DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions);
+#else
+    return DTWAIN_SelectSource2Ex(hWndParent, 
+                                  szTitle ? StringConversion::Convert_Wide_To_Native(szTitle).c_str() : NULL,
+                                  xPos, yPos,
+                                  szIncludeNames ? StringConversion::Convert_Wide_To_Native(szIncludeNames).c_str() : NULL,
+                                  szExcludeNames ? StringConversion::Convert_Wide_To_Native(szExcludeNames).c_str() : NULL,
+                                  szNameMapping ? StringConversion::Convert_Wide_To_Native(szNameMapping).c_str() : NULL,
+                                  nOptions);
 #endif
 }
 

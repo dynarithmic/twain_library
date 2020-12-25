@@ -1230,6 +1230,9 @@
 #define DTWAIN_DLG_USETEMPLATE          8
 #define DTWAIN_DLG_CLEAR_PARAMS         16
 #define DTWAIN_DLG_HORIZONTALSCROLL     32
+#define DTWAIN_DLG_USEINCLUDENAMES      64
+#define DTWAIN_DLG_USEEXCLUDENAMES      128 
+#define DTWAIN_DLG_USENAMEMAPPING       256 
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
