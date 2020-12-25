@@ -1,5 +1,26 @@
 DTWAIN Version changes
 
+5.2.0.3		  
+- Added functions DTWAIN_SelectSource2Ex to allow customization of the files listed in the TWAIN Select Source dialog box.
+  Customization includes including and excluding TWAIN source names in the dialog box, as well as aliasing your own names for
+  a device name.  This function can be used to only display devices that are pertinent for your application.
+
+  Example:
+    DTWAIN_SOURCE source = DTWAIN_SelectSource2Ex(NULL, "Custom Title", 0,0, NULL, "Scanner1|Scanner2", "Scanner3=My Scanner",
+                                                  DTWAIN_DLG_CENTER | DTWAIN_DLG_USEEXCLUDENAME | DTWAIN_DLG_USENAMEMAPPING);
+
+  The code above will display the TWAIN Select Source dialog, centered on the screen.  If any devices have the product name 
+  "Scanner1" or "Scanner2", they  will be removed from the dialog.  In addition the device named "Scanner3" will be named "My Scanner" 
+  in the dialog box.  
+
+  Note that you could have done this in a much longer way by calling DTWAIN_EnumSources, gathering all the product names, and 
+  displaying the products you want as selections by creating your own dialog or user-interface.  The DTWAIN_SelectSource2Ex is
+  just a much simpler way of achieving this goal.
+
+  In addition, there are functions DTWAIN_SelectSource2ExA and DTWAIN_SelectSource2ExW that represent the ANSI and Wide versions
+  of the function. 
+
+
 5.2.0.2		  
 - Fixed DLL Version Information in the DLL resources.
 

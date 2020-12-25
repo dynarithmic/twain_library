@@ -380,6 +380,64 @@ public:
 	*/
 	BOOL saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag = 0);
 
+    /**
+    Saves an image to disk, given its file name and an optional flag.
+    The function will use FreeImage_GetFIFFromFilename to get the right FREE_IMAGE_FORMAT.
+    @param lpszPathName Path and file name of the image to save.
+    @param page The current image page to save.  Only available for multipage image types
+    @param flag The signification of this flag depends on the image to be saved.
+    @return Returns TRUE if successful, FALSE otherwise.
+    @see FreeImage_Save, FreeImage_GetFIFFromFilename, FreeImage documentation
+    */
+    BOOL saveEx(const char* lpszPathName, int page, int flag = 0);
+
+    /**
+    Saves an image to disk, given its format, file name and an optional flag.
+    @param fif Format identifier (FreeImage format)
+    @param lpszPathName Path and file name of the image to save.
+    @param page The current image page to save.  Only available for multipage image types
+    @param flag The signification of this flag depends on the image to be saved.
+    @return Returns TRUE if successful, FALSE otherwise.
+    @see FreeImage_Save, FreeImage documentation
+    */
+    BOOL saveEx(FREE_IMAGE_FORMAT fif, const char* lpszPathName, int page, int flag = 0);
+
+    /**
+    UNICODE version of save (this function only works under WIN32 and does nothing on other OS)
+    @see save
+    */
+    BOOL saveUEx(const wchar_t* lpszPathName, int page, int flag = 0);
+
+    /**
+    UNICODE version of save (this function only works under WIN32 and does nothing on other OS)
+    @see save
+    */
+    BOOL saveUEx(FREE_IMAGE_FORMAT fif, const wchar_t* lpszPathName, int page, int flag = 0);
+
+    /**
+    @brief Saves an image using the specified FreeImageIO struct and fi_handle, and an optional flag.
+    @param fif Format identifier (FreeImage format)
+    @param io FreeImageIO structure
+    @param handle FreeImage fi_handle
+    @param page The current image page to save.  Only available for multipage image types
+    @param flag The signification of this flag depends on the image to be saved.
+    @return Returns TRUE if successful, FALSE otherwise.
+    @see FreeImage_SaveToHandle, FreeImage documentation
+    */
+    BOOL saveToHandleEx(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int page, int flag = 0);
+
+    /**
+    @brief Saves an image using the specified memory stream and an optional flag.
+    @param fif Format identifier (FreeImage format)
+    @param memIO FreeImage memory stream
+    @param page The current image page to save.  Only available for multipage image types
+    @param flag The signification of this flag depends on the image to be saved.
+    @return Returns TRUE if successful, FALSE otherwise.
+    @see FreeImage_SaveToMemory, FreeImage documentation
+    */
+    BOOL saveToMemoryEx(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int page, int flag = 0);
+
+
 	//@}
 
 	/**	@name Information functions

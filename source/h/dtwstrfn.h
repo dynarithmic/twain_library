@@ -181,6 +181,8 @@ DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByNameA(LPCSTR lpszName);
 DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByNameW(LPCWSTR lpszName);
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2A(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, LONG nOptions);
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2W(HWND hWndParent, LPCWSTR szTitle, LONG xPos, LONG yPos, LONG nOptions);
+DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2ExA(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, LPCSTR szIncludeNames, LPCSTR szExcludeNames, LPCSTR szNameMapping, LONG nOptions);
+DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2ExW(HWND hWndParent, LPCWSTR szTitle, LONG xPos, LONG yPos, LPCWSTR szIncludeNames, LPCWSTR szExcludeNames, LPCWSTR szNameMapping, LONG nOptions);
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSourceByNameA(LPCSTR lpszName);
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSourceByNameW(LPCWSTR lpszName);
 HANDLE DLLENTRY_DEF DTWAIN_GetOCRTextA(DTWAIN_OCRENGINE Engine, LONG nPageNo, LPSTR Data, LONG dSize, LPLONG pActualSize, LONG nFlags);
@@ -280,6 +282,11 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, 
                                                     DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle,
                                                        LONG xPos, LONG yPos, LONG nOptions);
+DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2Ex(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle, LONG xPos, LONG yPos,
+                                                        DTWAIN_CCHARPTRTYPE szIncludeFilter,
+                                                        DTWAIN_CCHARPTRTYPE szExcludeFilter,
+                                                        DTWAIN_CCHARPTRTYPE szNameMapping,
+                                                        LONG nOptions);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSourceByName(DTWAIN_CCHARPTRTYPE lpszName);
 LONG           DLLENTRY_DEF      DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source,
                                                                DTWAIN_CHARPTRTYPE szProduct,

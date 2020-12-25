@@ -892,3 +892,7 @@ DTWAIN_SetDSMSearchOrderExW                       @30072
 DTWAIN_SetResourcePath                            @30080
 DTWAIN_SetResourcePathA                           @30081
 DTWAIN_SetResourcePathW                           @30082
+
+DTWAIN_SelectSource2Ex							  @30085
+DTWAIN_SelectSource2ExA							  @30086
+DTWAIN_SelectSource2ExW							  @30087

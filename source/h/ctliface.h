@@ -197,6 +197,9 @@ namespace dynarithmic
         int ypos;
         HWND hWndParent;
         CTL_StringType sTitle;
+        std::vector<CTL_StringType> aIncludeNames;
+        std::vector<CTL_StringType> aExcludeNames;
+        std::unordered_map<CTL_StringType, CTL_StringType> mapNames;
         CustomPlacement() : nOptions(0), xpos(0), ypos(0), hWndParent(0) {}
     };
 

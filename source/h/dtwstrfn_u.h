@@ -39,6 +39,11 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetAppInfo(LPWSTR szVerStr, LPWSTR szMan
                                                    LPWSTR szProdFam, LPWSTR szProdName);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2(HWND hWndParent, LPCWSTR szTitle,
                                                       LONG xPos, LONG yPos, LONG nOptions);
+DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2Ex(HWND hWndParent, LPCWSTR szTitle, LONG xPos, LONG yPos,
+                                                        LPCWSTR szIncludeFilter,
+                                                        LPCWSTR szExcludeFilter, 
+                                                        LPCWSTR szNameMapping,
+                                                        LONG nOptions)
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSourceByName(LPCWSTR lpszName);
 LONG           DLLENTRY_DEF      DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source,
                                                               LPWSTR szProduct,

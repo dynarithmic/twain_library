@@ -35,10 +35,23 @@ namespace dynarithmic
         LPCTSTR szTitle;
         LONG xPos;
         LONG yPos;
+        LPCTSTR szIncludeNames;
+        LPCTSTR szExcludeNames;
+        LPCTSTR szNameMapping;
         LONG nOptions;
 
-        SourceSelectionOptions(int n = SELECTSOURCE, LPCTSTR sProd = NULL, HWND parent = NULL, LPCTSTR title = NULL, LONG xP = 0, LONG yP = 0, LONG opt = 0) :
-            nWhich(n), szProduct(sProd), hWndParent(parent), szTitle(title), xPos(xP), yPos(yP), nOptions(opt) {}
+        SourceSelectionOptions(int n = SELECTSOURCE, LPCTSTR sProd = NULL, HWND parent = NULL, LPCTSTR title = NULL, LONG xP = 0, LONG yP = 0, 
+                               LPCTSTR sIncludeNames = NULL, LPCTSTR sExcludeNames = NULL, LPCTSTR sNameMapping = NULL, LONG opt = 0) :
+                               nWhich(n), 
+                               szProduct(sProd), 
+                               hWndParent(parent), 
+                               szTitle(title), 
+                               xPos(xP), 
+                               yPos(yP), 
+                               szIncludeNames(sIncludeNames), 
+                               szExcludeNames(sExcludeNames), 
+                               szNameMapping(sNameMapping), 
+                               nOptions(opt) {}
         friend CTL_OutputBaseStreamType& operator << (CTL_OutputBaseStreamType& strm, const SourceSelectionOptions& src);
     };
 
@@ -51,6 +64,9 @@ namespace dynarithmic
             << _T(", title=") << (src.szTitle ? src.szTitle : nuller)
             << _T(", xPos=") << src.xPos
             << _T(", yPos=") << src.yPos
+            << _T(", includeNames=") << (src.szIncludeNames ? src.szIncludeNames : nuller)
+            << _T(", excludeNames=") << (src.szExcludeNames ? src.szExcludeNames : nuller)
+            << _T(", nameMapping=") << (src.szNameMapping ? src.szNameMapping : nuller)
             << _T(", options=") << src.nOptions;
         return strm;
     }
