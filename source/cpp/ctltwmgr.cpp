@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -298,10 +298,10 @@ bool CTL_TwainAppMgr::IsValidTwainSource( CTL_ITwainSession* pSession,CTL_ITwain
 void CTL_TwainAppMgr::UnloadSourceManager()
 {
     if ( s_pGlobalAppMgr && s_pGlobalAppMgr->m_hLibModule.is_loaded() )
-	{
-		while (s_pGlobalAppMgr->m_hLibModule.is_loaded())
+    {
+        while (s_pGlobalAppMgr->m_hLibModule.is_loaded())
         s_pGlobalAppMgr->m_hLibModule.unload();
-	}
+    }
     CTL_TwainDLLHandle::s_nDSMState = DSM_STATE_NONE;
 }
 
@@ -664,32 +664,32 @@ bool CTL_TwainAppMgr::ShowUserInterface( CTL_ITwainSource *pSource, bool bTest, 
                     DisableUserInterface( pSource );
             break;
 
-			//Note:  This is a bug in the Galaxy Phone TWAIN driver.  TWRC_CANCEL is returned
-			// if the user interface dialog is canceled.  This is an incorrect usage, but we
-			// don't have the source code to the Samsung TWAIN driver to fix it, unfortunately.
-			case TWRC_CANCEL:
-			{
-				// This is a workaround for Sources that do not
-				// Send the MSG_xxx messages to close the user interface.
-				// This is actually a bug in the TWAIN device, not a 
-				// bug in DTWAIN.
-				CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
-					NULL,
-					DTWAIN_TN_UICLOSING,
-					(LPARAM)pSource);
+            //Note:  This is a bug in the Galaxy Phone TWAIN driver.  TWRC_CANCEL is returned
+            // if the user interface dialog is canceled.  This is an incorrect usage, but we
+            // don't have the source code to the Samsung TWAIN driver to fix it, unfortunately.
+            case TWRC_CANCEL:
+            {
+                // This is a workaround for Sources that do not
+                // Send the MSG_xxx messages to close the user interface.
+                // This is actually a bug in the TWAIN device, not a
+                // bug in DTWAIN.
+                CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
+                    NULL,
+                    DTWAIN_TN_UICLOSING,
+                    (LPARAM)pSource);
 
-				CTL_TwainAppMgr::DisableUserInterface(pSource);
+                CTL_TwainAppMgr::DisableUserInterface(pSource);
 
-				// Force setting the transfer done now.
-				CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle*>(GetDTWAINHandle_Internal());
-				pHandle->m_bTransferDone = true;
+                // Force setting the transfer done now.
+                CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle*>(GetDTWAINHandle_Internal());
+                pHandle->m_bTransferDone = true;
 
-				CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
-					NULL,
-					DTWAIN_TN_UICLOSED,
-					(LPARAM)pSource);
-				return false;
-			}
+                CTL_TwainAppMgr::SendTwainMsgToWindow(pSession,
+                    NULL,
+                    DTWAIN_TN_UICLOSED,
+                    (LPARAM)pSource);
+                return false;
+            }
         }
 
         if ( bTest && !bShowUIOnly )
@@ -930,14 +930,14 @@ int CTL_TwainAppMgr::TransferImage(const CTL_ITwainSource *pSource,
         break;
 
         case TWAINAcquireType_File:
-		case TWAINAcquireType_AudioFile:
-			return FileTransfer(pSession, pTempSource, AcquireType);
+        case TWAINAcquireType_AudioFile:
+            return FileTransfer(pSession, pTempSource, AcquireType);
 
         case TWAINAcquireType_Buffer:
             return BufferTransfer( pSession, pTempSource );
 
-		case TWAINAcquireType_AudioNative:
-			return AudioNativeTransfer(pSession, pTempSource);
+        case TWAINAcquireType_AudioNative:
+            return AudioNativeTransfer(pSession, pTempSource);
 
         case TWAINAcquireType_Clipboard:
             return ClipboardTransfer( pSession, pTempSource );
@@ -1010,8 +1010,8 @@ int CTL_TwainAppMgr::NativeTransfer( CTL_ITwainSession *pSession,
 /* All sources provide this transfer capability */
 int CTL_TwainAppMgr::AudioNativeTransfer(CTL_ITwainSession *pSession, CTL_ITwainSource  *pSource)
 {
-	CTL_ImageXferTriplet AXfer(pSession, pSource, DAT_AUDIONATIVEXFER);
-	return StartTransfer(pSession, pSource, &AXfer);
+    CTL_ImageXferTriplet AXfer(pSession, pSource, DAT_AUDIONATIVEXFER);
+    return StartTransfer(pSession, pSource, &AXfer);
 }
 
 int CTL_TwainAppMgr::ClipboardTransfer( CTL_ITwainSession *pSession,
@@ -1024,8 +1024,8 @@ int CTL_TwainAppMgr::ClipboardTransfer( CTL_ITwainSession *pSession,
 
 
 int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
-                                    CTL_ITwainSource  *pSource, 
-									CTL_TwainAcquireEnum AcquireType)
+                                    CTL_ITwainSource  *pSource,
+                                    CTL_TwainAcquireEnum AcquireType)
 {
     // Set the file type
     CTL_StringType sFileName;
@@ -1075,24 +1075,24 @@ int  CTL_TwainAppMgr::FileTransfer( CTL_ITwainSession *pSession,
         return true;
     }
 
-	// If this is an audio file, then we need to execute this triplet
-	// once per acquisition
-	if (AcquireType == TWAINAcquireType_AudioFile)
-	{
-		CTL_AudioFileXferTriplet AudioXFer(pSession, pSource);
-		// Set the file type and name
-		if (AudioXFer.Execute() == TWRC_FAILURE)
-		{
-			TW_UINT16 ccode = GetConditionCode(pSession, pSource);
-			if (ccode != TWCC_SUCCESS)
-			{
-				ProcessConditionCodeError(ccode);
-				return false;
-			}
-			return true;
-		}
-	}
-	
+    // If this is an audio file, then we need to execute this triplet
+    // once per acquisition
+    if (AcquireType == TWAINAcquireType_AudioFile)
+    {
+        CTL_AudioFileXferTriplet AudioXFer(pSession, pSource);
+        // Set the file type and name
+        if (AudioXFer.Execute() == TWRC_FAILURE)
+        {
+            TW_UINT16 ccode = GetConditionCode(pSession, pSource);
+            if (ccode != TWCC_SUCCESS)
+            {
+                ProcessConditionCodeError(ccode);
+                return false;
+            }
+            return true;
+        }
+    }
+
 
     // Start the transferring of the image
     CTL_ImageXferTriplet IXfer(pSession,
@@ -1638,8 +1638,8 @@ LPTSTR CTL_TwainAppMgr::GetErrorString(int nError, LPTSTR lpszBuffer, int nSize)
 ///////////////////////////////////////////////////////////////////////////
 bool CTL_TwainAppMgr::IsCapabilitySupported(const CTL_ITwainSource *pSource, TW_UINT16 nCap, int nType /*=CTL_GetTypeGET*/)
 {
-	if (!pSource)
-		return false;
+    if (!pSource)
+        return false;
 
     bool supported = pSource->IsCapInSupportedList(nCap);
     if ( supported )
@@ -1798,18 +1798,18 @@ int CTL_TwainAppMgr::SetTransferCount( const CTL_ITwainSource *pSource,
         WriteLogInfo(strm.str());
     }
 
-	// If the device supports the CAP_SHEETCOUNT capability, use that to set the number of 
-	// pages to acquire
-	if (IsCapabilitySupported(pSource, CAP_SHEETCOUNT))
-	{
-		SetOneTwainCapValue(pSource, -1, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
-		if ( nCount == -1 )
-			SetOneTwainCapValue(pSource, 0, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
-		else
-			SetOneTwainCapValue(pSource, nCount, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
-	}
-	else
-    SetOneTwainCapValue( pSource, nCount, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
+    // If the device supports the CAP_SHEETCOUNT capability, use that to set the number of
+    // pages to acquire
+    if (IsCapabilitySupported(pSource, CAP_SHEETCOUNT))
+    {
+        SetOneTwainCapValue(pSource, -1, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
+        if ( nCount == -1 )
+            SetOneTwainCapValue(pSource, 0, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
+        else
+            SetOneTwainCapValue(pSource, nCount, CTL_SetTypeSET, CAP_SHEETCOUNT, TWTY_UINT32);
+    }
+    else
+        SetOneTwainCapValue( pSource, nCount, CTL_SetTypeSET, TwainCap_XFERCOUNT, TWTY_INT16);
     return 1;
 }
 
@@ -1846,10 +1846,10 @@ int CTL_TwainAppMgr::SetTransferMechanism( const CTL_ITwainSource *pSource,
     else
     if ( AcquireType == TWAINAcquireType_Clipboard)
         uTwainType = static_cast<TW_UINT16>(ClipboardTransferType);
-	if ( AcquireType != TWAINAcquireType_AudioNative)
-    SetOneTwainCapValue( pSource, uTwainType, CTL_SetTypeSET, TwainCap_XFERMECH, TWTY_UINT16);
-	else
-		SetOneTwainCapValue(pSource, uTwainType, CTL_SetTypeSET, ACAP_XFERMECH, TWTY_UINT16);
+    if ( AcquireType != TWAINAcquireType_AudioNative)
+        SetOneTwainCapValue( pSource, uTwainType, CTL_SetTypeSET, TwainCap_XFERMECH, TWTY_UINT16);
+    else
+        SetOneTwainCapValue(pSource, uTwainType, CTL_SetTypeSET, ACAP_XFERMECH, TWTY_UINT16);
     return 1;
 }
 
@@ -2434,10 +2434,10 @@ CTL_StringType CTL_TwainAppMgr::GetTwainDirFullName(LPCTSTR strTwainDLLName,
 }
 
 CTL_StringType CTL_TwainAppMgr::GetTwainDirFullNameEx(LPCTSTR strTwainDLLName,
-													bool bLeaveLoaded/*=false*/,
-													boost::dll::shared_library *pModule)
+                                                    bool bLeaveLoaded/*=false*/,
+                                                    boost::dll::shared_library *pModule)
 {
-	return ::GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
+    return ::GetTwainDirFullNameEx(strTwainDLLName, bLeaveLoaded, pModule);
 }
 
 bool CTL_TwainAppMgr::CheckTwainExistence(const CTL_StringType& strTwainDLLName, LPLONG pWhichSearch)
@@ -2469,7 +2469,7 @@ LONG CTL_TwainAppMgr::ExtImageInfoArrayType(LONG ExtType)
 /////////////// member functions for the CTL_TwainAppMgr///////////////////
 CTL_TwainAppMgr::CTL_TwainAppMgr(  LPCTSTR lpszDLLName,
                                     HINSTANCE hInstance,
-	HINSTANCE /*hThisInstance*/) : m_nErrorTWCC(0), m_nErrorTWRC(0)
+    HINSTANCE /*hThisInstance*/) : m_nErrorTWCC(0), m_nErrorTWRC(0)
 {
     if ( !lpszDLLName || lpszDLLName[0] == _T('\0') )
         m_strTwainDLLName = GetDefaultDLLName();
@@ -2604,13 +2604,13 @@ bool CTL_TwainAppMgr::LoadSourceManager(  LPCTSTR pszDLLName/*=NULL */)
             CTL_StringType dllName = _T(" : ") + m_strTwainDLLName;
             DTWAIN_ERROR_CONDITION_EX(IDS_ErrTwainDLLNotFound, dllName, false);
         }
-		m_hLibModule = libloader;
+        m_hLibModule = libloader;
     }
     else
     {
         // load the default TWAIN_32.DLL or TWAINDSM.DLL using the
         // normal process of finding these DLL's
-		auto tempStr = m_strTwainDLLName;
+        auto tempStr = m_strTwainDLLName;
         m_strTwainDLLName = GetTwainDirFullName(m_strTwainDLLName.c_str(), NULL, true, &m_hLibModule);
         if ( m_strTwainDLLName.empty() )
         {

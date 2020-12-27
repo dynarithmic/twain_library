@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ namespace dynarithmic
         bool bIsAESEncrypted;
         bool bUseStrongEncryption;
         bool PDFUseASCIICompression;
-		bool PDFUseNoCompression;
+        bool PDFUseNoCompression;
         LONG PDFPermissions;
         LONG PSType;
         LONG UnitOfMeasure;
@@ -125,8 +125,8 @@ namespace dynarithmic
 
         // Vista ICONs
         DTWAINImageInfoEx() :
-			theSession{},
-			PhotoMetric{},
+            theSession{},
+            PhotoMetric{},
             PostscriptType(0),
             IsPostscript(false),
             IsPDF(false),
@@ -153,8 +153,8 @@ namespace dynarithmic
             nJpegQuality(100),
             bProgressiveJpeg(false),
             PDFPageSize(DTWAIN_PDF_NOSCALING),
-			PDFUseCompression(true),
-			PDFUseNoCompression(false),
+            PDFUseCompression(true),
+            PDFUseNoCompression(false),
             PDFUseThumbnail(false)
             {
                 PDFThumbnailScale[0] =

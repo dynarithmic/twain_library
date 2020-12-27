@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ CTL_StringType GetTwainDirFullName(LPCTSTR strTwainDLLName,
 		{ DTWAIN_TWAINDSMSEARCH_WOS,"WOS" },
 		{ DTWAIN_TWAINDSMSEARCH_SWO,"SWO" },
         { DTWAIN_TWAINDSMSEARCH_SOW,"SOW" },
-		{ DTWAIN_TWAINDSMSEARCH_OWS,"OWS" },
+        { DTWAIN_TWAINDSMSEARCH_OWS,"OWS" },
         { DTWAIN_TWAINDSMSEARCH_OSW,"OSW" },
-		{ DTWAIN_TWAINDSMSEARCH_W,"W" },
+        { DTWAIN_TWAINDSMSEARCH_W,"W" },
 		{ DTWAIN_TWAINDSMSEARCH_S,"S" },
 		{ DTWAIN_TWAINDSMSEARCH_O,"O" },
 		{ DTWAIN_TWAINDSMSEARCH_WS,"WS" },

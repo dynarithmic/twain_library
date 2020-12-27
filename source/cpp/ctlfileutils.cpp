@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -36,21 +36,21 @@ namespace dynarithmic
         return true;
     }
 
-	bool parent_directory_exists(LPCTSTR filename)
-	{
-		try
-		{
-			auto p = boost::filesystem::path(filename);
-			auto p2 = p.remove_filename();
-			auto native_str = p2.native();
-			CTL_StringType str(native_str.begin(), native_str.end());
-			str = StringWrapper::AddBackslashToDirectory(str);
-			if (boost::filesystem::exists(str))
-				return true;
-		}
-		catch (boost::filesystem::filesystem_error&)
-		{
-		}
-		return false;
-	}
+    bool parent_directory_exists(LPCTSTR filename)
+    {
+        try
+        {
+            auto p = boost::filesystem::path(filename);
+            auto p2 = p.remove_filename();
+            auto native_str = p2.native();
+            CTL_StringType str(native_str.begin(), native_str.end());
+            str = StringWrapper::AddBackslashToDirectory(str);
+            if (boost::filesystem::exists(str))
+                return true;
+        }
+        catch (boost::filesystem::filesystem_error&)
+        {
+        }
+        return false;
+    }
 }

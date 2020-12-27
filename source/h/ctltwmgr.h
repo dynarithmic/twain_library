@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -306,9 +306,9 @@ namespace dynarithmic
                                                       LPLONG pWhichSearch,
                                                       bool leaveLoaded=false,
                                                       boost::dll::shared_library* pModule=nullptr);
-			static CTL_StringType GetTwainDirFullNameEx(LPCTSTR szFileName,
-										  			  bool leaveLoaded = false,
-													  boost::dll::shared_library* pModule = nullptr);
+            static CTL_StringType GetTwainDirFullNameEx(LPCTSTR szFileName,
+                                                      bool leaveLoaded = false,
+                                                      boost::dll::shared_library* pModule = nullptr);
 
             static CTL_CapStruct GetGeneralCapInfo(LONG Cap);
             static bool GetCurrentOneCapValue(const CTL_ITwainSource *pSource, void *pValue, TW_UINT16 Cap, TW_UINT16 nDataType );
@@ -363,12 +363,12 @@ namespace dynarithmic
             static int  NativeTransfer( CTL_ITwainSession *pSession,
                                         CTL_ITwainSource  *pSource);
 
-			static int AudioNativeTransfer(CTL_ITwainSession *pSession,
-                                      CTL_ITwainSource  *pSource );
+            static int AudioNativeTransfer(CTL_ITwainSession *pSession,
+                                            CTL_ITwainSource  *pSource);
 
             static int  FileTransfer( CTL_ITwainSession *pSession,
                                       CTL_ITwainSource  *pSource,
-									  CTL_TwainAcquireEnum AcquireType);
+                                      CTL_TwainAcquireEnum AcquireType);
 
             static int  BufferTransfer( CTL_ITwainSession *pSession,
                                         CTL_ITwainSource  *pSource );

@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2021 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -134,13 +134,13 @@ void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetDPI(void *pDoc, LONG dpi)
 void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetEncryption(void *pDoc, LPCTSTR szOwnerPass,
                                           LPCTSTR szUserPass, LONG Permissions,
                                           bool bUseStrongEncrypt,
-										  bool bUseAESEncryption)
+                                          bool bUseAESEncryption)
 {
     ((PdfDocument *)pDoc)->SetEncryption(szOwnerPass?szOwnerPass:_T(""),
                                          szUserPass?szUserPass:_T(""),
                                          Permissions,
                                          bUseStrongEncrypt,
-										 bUseAESEncryption);
+                                         bUseAESEncryption);
 }
 
 void FUNCCONVENTION dynarithmic::DTWLIB_PDFGetDLLVersion(LPLONG lMajor, LPLONG lMinor, LPLONG lPatch)
@@ -157,7 +157,7 @@ void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetASCIICompression(void *pDoc, bool 
 
 void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetNoCompression(void *pDoc, bool bSetCompression)
 {
-	((PdfDocument *)pDoc)->SetNoCompression(bSetCompression);
+    ((PdfDocument *)pDoc)->SetNoCompression(bSetCompression);
 }
 
 void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR text)
@@ -165,7 +165,7 @@ void FUNCCONVENTION dynarithmic::DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR 
     ((PdfDocument *)pDoc)->SetSearchableText(text);
 }
 
-void FUNCCONVENTION dynarithmic::DTWLIB_PDFAddPageText(void* pDoc, PDFTextElement* pElement) 
+void FUNCCONVENTION dynarithmic::DTWLIB_PDFAddPageText(void* pDoc, PDFTextElement* pElement)
 {
 /*    PDFTextElement element;
 
@@ -181,8 +181,8 @@ void FUNCCONVENTION dynarithmic::DTWLIB_PDFAddPageText(void* pDoc, PDFTextElemen
     element.wordSpacing = wordSpacing;
     element.charSpacing = charSpacing;
     element.displayFlags = flags;
-	element.scalingX = scalingX;
-	element.scalingY = scalingY;
+    element.scalingX = scalingX;
+    element.scalingY = scalingY;
 */
     ((PdfDocument *)pDoc)->AddTextElement(pElement);
 }

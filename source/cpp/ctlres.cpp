@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -127,44 +127,44 @@ namespace dynarithmic
             CTL_StringStreamInA strm(line);
             LONG imgType;
             strm >> imgType;
-			if (imgType == -1)
-				break;
+            if (imgType == -1)
+                break;
             int bppValue;
             while (strm >> bppValue)
                 bppMap.insert({ imgType, std::vector<int>() }).first->second.push_back(bppValue);
-		}
+        }
 
-		auto& mediamap = CTL_TwainDLLHandle::GetPDFMediaMap();
-		while (std::getline(ifs, line))
-		{
-			CTL_StringStreamInA strm(line);
-			LONG pageType;
-			strm >> pageType;
-			CTL_String name;
-			strm >> name;
-			name = StringWrapperA::TrimAll(name);
-			CTL_String dimensions;
-			std::getline(strm, dimensions);
-			dimensions = StringWrapperA::TrimAll(dimensions);
-			mediamap.insert({ pageType, {name, dimensions } });
+        auto& mediamap = CTL_TwainDLLHandle::GetPDFMediaMap();
+        while (std::getline(ifs, line))
+        {
+            CTL_StringStreamInA strm(line);
+            LONG pageType;
+            strm >> pageType;
+            CTL_String name;
+            strm >> name;
+            name = StringWrapperA::TrimAll(name);
+            CTL_String dimensions;
+            std::getline(strm, dimensions);
+            dimensions = StringWrapperA::TrimAll(dimensions);
+            mediamap.insert({ pageType, {name, dimensions } });
         }
 
         LOG_FUNC_EXIT_PARAMS(true)
         CATCH_BLOCK(false)
     }
 
-	std::vector<CTL_String> GetLangResourceNames()
-	{
-		std::vector<CTL_String> ret;
-		CTL_String sPath = createResourceFileName(DTWAINLANGRESOURCENAMESFILE);
-		std::ifstream ifs(sPath);
-		if (!ifs)
-			return ret;
-		CTL_String s;
-		while (ifs >> s)
-			ret.push_back(s);
-		return ret;
-	}
+    std::vector<CTL_String> GetLangResourceNames()
+    {
+        std::vector<CTL_String> ret;
+        CTL_String sPath = createResourceFileName(DTWAINLANGRESOURCENAMESFILE);
+        std::ifstream ifs(sPath);
+        if (!ifs)
+            return ret;
+        CTL_String s;
+        while (ifs >> s)
+            ret.push_back(s);
+        return ret;
+    }
 
     size_t GetResourceString(UINT nError, LPTSTR buffer, LONG bufSize)
     {
@@ -196,8 +196,8 @@ namespace dynarithmic
 
     static bool LoadLanguageResourceFromFile(const CTL_String& sPath)
     {
-		CTL_String::value_type sVersion[100];
-		DTWAIN_GetShortVersionStringA(sVersion, 100);
+        CTL_String::value_type sVersion[100];
+        DTWAIN_GetShortVersionStringA(sVersion, 100);
         std::ifstream ifs(sPath);
         bool open = false;
         int resourceID;
@@ -214,9 +214,9 @@ namespace dynarithmic
                 {
                     getline(strm, descr);
                     StringWrapperA::TrimAll(descr);
-					descr = StringWrapperA::ReplaceAll(descr, "{short_version}", sVersion);
-					descr = StringWrapperA::ReplaceAll(descr, "{company_name}", DTWAIN_VERINFO_COMPANYNAME);
-					descr = StringWrapperA::ReplaceAll(descr, "{copyright}", DTWAIN_VERINFO_LEGALCOPYRIGHT);
+                    descr = StringWrapperA::ReplaceAll(descr, "{short_version}", sVersion);
+                    descr = StringWrapperA::ReplaceAll(descr, "{company_name}", DTWAIN_VERINFO_COMPANYNAME);
+                    descr = StringWrapperA::ReplaceAll(descr, "{copyright}", DTWAIN_VERINFO_LEGALCOPYRIGHT);
                     CTL_TwainDLLHandle::s_ResourceStrings.insert({ resourceID, StringConversion::Convert_Ansi_To_Native(descr) });
                 }
             }

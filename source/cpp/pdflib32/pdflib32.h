@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2021 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45,30 +45,30 @@ namespace dynarithmic
         void FUNCCONVENTION DTWLIB_PDFSetLongField(void *pDoc, LONG nWhich, LONG nValue);
         BOOL FUNCCONVENTION DTWLIB_PDFWritePage(void *pDoc, LPCTSTR szPath);
         void FUNCCONVENTION DTWLIB_PDFSetScaling(void *pDoc, double xscale, double yscale);
-        void FUNCCONVENTION DTWLIB_PDFReleaseDocument(void *pDoc); 
+        void FUNCCONVENTION DTWLIB_PDFReleaseDocument(void *pDoc);
         void FUNCCONVENTION DTWLIB_PDFSetThumbnailFile(void *pDoc, LPCTSTR szPath );
         void FUNCCONVENTION DTWLIB_PDFSetDPI(void *pDoc, LONG dpi);
         void FUNCCONVENTION DTWLIB_PDFSetEncryption(void *pDoc, LPCTSTR szOwnerPass,
                                                   LPCTSTR szUserPass, LONG Permissions,
                                                   bool bUseStrongEncrypt,
-											      bool bUseAESEncryption);
+                                                  bool bUseAESEncryption);
 
         LONG FUNCCONVENTION DTWLIB_PSWriteFile(LPCTSTR szFileIn,
                                              LPCTSTR szFileOut,
                                              LONG PSType,
                                              LPCTSTR szTitle,
                                              bool bUseEncapsulated);
-    
+
         void FUNCCONVENTION DTWLIB_PDFGetDLLVersion(LPLONG lMajor, LPLONG lMinor, LPLONG lPatch);
         void FUNCCONVENTION DTWLIB_PDFSetASCIICompression(void *pDoc, bool bCompression);
-		void FUNCCONVENTION DTWLIB_PDFSetNoCompression(void *pDoc, bool bCompression);
-		void FUNCCONVENTION DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR text);
-        void FUNCCONVENTION DTWLIB_PDFAddPageText(void *pDoc, PDFTextElement* pElement); /*LPCSTR szTest, LONG xPos, LONG yPos, 
+        void FUNCCONVENTION DTWLIB_PDFSetNoCompression(void *pDoc, bool bCompression);
+        void FUNCCONVENTION DTWLIB_PDFSetSearchableText(void *pDoc, LPCSTR text);
+        void FUNCCONVENTION DTWLIB_PDFAddPageText(void *pDoc, PDFTextElement* pElement); /*LPCSTR szTest, LONG xPos, LONG yPos,
                                                   LPCSTR fontName, double fontSize, LONG colorRGB,
                                                   LONG renderMode, double scaling, double charSpacing,
                                                   double wordSpacing,
                                                   LONG riseValue, LONG flags, double scalingX, double scalingY);*/
-        void FUNCCONVENTION DTWLIB_PDFSetPolarity(void *pDoc, LONG Polarity);                                              
+        void FUNCCONVENTION DTWLIB_PDFSetPolarity(void *pDoc, LONG Polarity);
     #ifdef __cplusplus
     }
     #endif

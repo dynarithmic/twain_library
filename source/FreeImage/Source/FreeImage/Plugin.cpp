@@ -535,10 +535,10 @@ FreeImage_SaveEx(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, const char *filename, int
     }
     else
     {
-		FreeImage_OutputMessageProc((int)fif, "FreeImage_Save: failed to open file %s", filename);
-	}
+        FreeImage_OutputMessageProc((int)fif, "FreeImage_Save: failed to open file %s", filename);
+    }
 
-	return FALSE;
+    return FALSE;
 }
 
 BOOL DLL_CALLCONV

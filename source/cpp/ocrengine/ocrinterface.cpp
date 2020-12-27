@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -758,19 +758,19 @@ DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByName(LPCTSTR lpszName)
     // Get the OCR engine associated with the name
     OCRProductNameToEngineMap::iterator it = pHandle->m_OCRProdNameToEngine.find(lpszName);
     OCREnginePtr SelectedEngine;
-	DTWAIN_OCRENGINE ocrEngine_ = nullptr;
-	if (it != pHandle->m_OCRProdNameToEngine.end())
-	{
-		SelectedEngine = it->second;
-		if (SelectedEngine)
-		{
-			pHandle->m_pOCRDefaultEngine = SelectedEngine;
+    DTWAIN_OCRENGINE ocrEngine_ = nullptr;
+    if (it != pHandle->m_OCRProdNameToEngine.end())
+    {
+        SelectedEngine = it->second;
+        if (SelectedEngine)
+        {
+            pHandle->m_pOCRDefaultEngine = SelectedEngine;
 
-			if (!SelectedEngine->IsActivated())
-				SelectedEngine->StartupOCREngine();
-			ocrEngine_ = SelectedEngine.get();
-		}
-	}
+            if (!SelectedEngine->IsActivated())
+                SelectedEngine->StartupOCREngine();
+            ocrEngine_ = SelectedEngine.get();
+        }
+    }
     LOG_FUNC_EXIT_PARAMS(ocrEngine_)
     CATCH_BLOCK(DTWAIN_OCRENGINE())
 }

@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -78,37 +78,37 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCapSupported(DTWAIN_SOURCE Source, LONG lCapab
         }
 
         // Test if the capabilities have already been retrieved.  This should only be done
-		// once per TWAIN source.
-            if (!p->RetrievedAllCaps())
-            {
-                // Get the capabilities using TWAIN
-                CTL_TwainCapArray rArray;
-                CTL_TwainAppMgr::GetCapabilities(p, rArray);
-                p->SetCapSupportedList(rArray);
+        // once per TWAIN source.
+        if (!p->RetrievedAllCaps())
+        {
+            // Get the capabilities using TWAIN
+            CTL_TwainCapArray rArray;
+            CTL_TwainAppMgr::GetCapabilities(p, rArray);
+            p->SetCapSupportedList(rArray);
 
             // Get the capabilities from the list in the Source
             CapList& pArray = p->GetCapSupportedList();
 
-			// Get all the information about the capability.
-			std::for_each(pArray.begin(), pArray.end(), [&](TW_UINT16 val)
-			{dynarithmic::DTWAIN_CacheCapabilityInfo(p, pHandle, static_cast<TW_UINT16>(val)); });
+            // Get all the information about the capability.
+            std::for_each(pArray.begin(), pArray.end(), [&](TW_UINT16 val)
+            {dynarithmic::DTWAIN_CacheCapabilityInfo(p, pHandle, static_cast<TW_UINT16>(val)); });
 
-			// We have retrieved all the capability information
-			p->SetRetrievedAllCaps(true);
-		}
+            // We have retrieved all the capability information
+            p->SetRetrievedAllCaps(true);
+        }
 
-		// Now test if the capability is supported
+        // Now test if the capability is supported
         CapList& pArray = p->GetCapSupportedList();
-            bool bReturnVal = false;
-            auto it = pArray.find(static_cast<TW_UINT16>(lCapability));
-            if (it != pArray.end())
-            {
-			// supported, so return true
-                bReturnVal = true;
-                LOG_FUNC_EXIT_PARAMS(bReturnVal)
-            }
-            // cap not supported, so add to unsupported list
-            p->AddCapToUnsupportedList(static_cast<TW_UINT16>(lCapability));
+        bool bReturnVal = false;
+        auto it = pArray.find(static_cast<TW_UINT16>(lCapability));
+        if (it != pArray.end())
+        {
+            // supported, so return true
+            bReturnVal = true;
+            LOG_FUNC_EXIT_PARAMS(bReturnVal)
+        }
+        // cap not supported, so add to unsupported list
+        p->AddCapToUnsupportedList(static_cast<TW_UINT16>(lCapability));
         DTWAIN_Check_Error_Condition_2_Ex(pHandle, []{ return true; }, DTWAIN_ERR_CAP_NO_SUPPORT, false, FUNC_MACRO);
     }
     LOG_FUNC_EXIT_PARAMS(false)

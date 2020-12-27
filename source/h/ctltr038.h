@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ namespace dynarithmic
     {
         public:
             // Only MSG_GET is supported
-			CTL_ExtImageInfoTriplet() : m_pExtImageInfo(NULL), m_memHandle{}, m_nNumInfo{} { }
+            CTL_ExtImageInfoTriplet() : m_pExtImageInfo(NULL), m_memHandle{}, m_nNumInfo{} { }
             CTL_ExtImageInfoTriplet(CTL_ITwainSession *pSession,
                                    CTL_ITwainSource* pSource,
                                    int nInfo);

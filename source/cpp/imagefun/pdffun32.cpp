@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ CPDFImageHandler::CPDFImageHandler(const CTL_StringType& sFileName, DTWAINImageI
         m_sSubject("(None)"),
         m_sKeywords("(None)"),
         m_sCreator("(None)"),
-		m_nImageType(0)
+        m_nImageType(0)
 {
     LoadPDFLibrary();
 }
@@ -92,7 +92,7 @@ bool CPDFImageHandler::LoadPDFLibrary()
     m_pPDFSetDPI              =   DTWLIB_PDFSetDPI;
     m_pPDFSetEncryption       =   DTWLIB_PDFSetEncryption;
     m_pPDFSetASCIICompression =   DTWLIB_PDFSetASCIICompression;
-	m_pPDFSetNoCompression 	  =	  DTWLIB_PDFSetNoCompression;
+    m_pPDFSetNoCompression    =   DTWLIB_PDFSetNoCompression;
     m_pPDFSetSearchableText   =   DTWLIB_PDFSetSearchableText;
     m_pPDFAddPageText         =   DTWLIB_PDFAddPageText;
     m_pPDFSetPolarity         =   DTWLIB_PDFSetPolarity;
@@ -164,16 +164,16 @@ int CPDFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR p
 
 
         m_pPDFSetCompression(pDocument, false);
-		m_pPDFSetNoCompression(pDocument, false);
+        m_pPDFSetNoCompression(pDocument, false);
 
         // Set the ASCII Hex compression
         m_pPDFSetASCIICompression(pDocument, pPDFInfo->ImageInfoEx.PDFUseASCIICompression);
 
-		// turn on other compression flags in the PDF object
+        // turn on other compression flags in the PDF object
         if ( pPDFInfo->ImageInfoEx.PDFUseCompression )
-			m_pPDFSetCompression(pDocument, true);   // Use Flate compression
-		else
-			m_pPDFSetNoCompression(pDocument, true); // Use no compression 
+            m_pPDFSetCompression(pDocument, true);   // Use Flate compression
+        else
+            m_pPDFSetNoCompression(pDocument, true); // Use no compression
 
         m_pPDFSetNameField(pDocument, PDF_AUTHOR, m_sAuthor.c_str());
         m_pPDFSetNameField(pDocument, PDF_PRODUCER, m_sProducer.c_str());

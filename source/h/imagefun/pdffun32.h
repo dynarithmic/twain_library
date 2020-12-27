@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ namespace dynarithmic
                                          double charSpacing, double wordSpacing,
                                          LONG riseValue, LONG flags, double scalingX, double scalingY, double rotationAngle);*/
     typedef void  (CALLBACK *PDF_FUNC18)(void *pDoc, LONG Polarity);
-	typedef void  (CALLBACK *PDF_FUNC19)(void* pDoc, bool bCompress);
+    typedef void  (CALLBACK *PDF_FUNC19)(void* pDoc, bool bCompress);
 
     struct PDFINFO
     {
@@ -161,7 +161,7 @@ namespace dynarithmic
             static PDF_FUNC16 m_pPDFSetSearchableText;
             static PDF_FUNC17 m_pPDFAddPageText;
             static PDF_FUNC18 m_pPDFSetPolarity;
-			static PDF_FUNC19 m_pPDFSetNoCompression;
+            static PDF_FUNC19 m_pPDFSetNoCompression;
 
             static bool s_bLibraryLoaded;
     };

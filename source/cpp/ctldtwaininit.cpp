@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -127,16 +127,16 @@ static HMODULE GetDLLInstance();
 
 static unsigned long getThreadId()
 {
-	static std::unordered_map<std::string, unsigned long> s_thread_map;
+    static std::unordered_map<std::string, unsigned long> s_thread_map;
     std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
-	auto iter = s_thread_map.find(threadId);
-	if (iter == s_thread_map.end())
-	{
+    auto iter = s_thread_map.find(threadId);
+    if (iter == s_thread_map.end())
+    {
     unsigned long threadNumber = 0;
     sscanf(threadId.c_str(), "%lx", &threadNumber);
-		iter = s_thread_map.insert({ threadId, threadNumber }).first;
-	}
-	return iter->second;
+        iter = s_thread_map.insert({ threadId, threadNumber }).first;
+    }
+    return iter->second;
 }
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetVersion(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType)
@@ -275,9 +275,9 @@ LONG DLLENTRY_DEF DTWAIN_GetStaticLibVersion()
         #elif _MSC_VER >= 1910 && _MSC_VER < 1920
             #pragma message ("Microsoft Visual Studio 2017 compiler to build library")
             LOG_FUNC_EXIT_PARAMS(71)
-		#elif _MSC_VER >= 1920
-		    #pragma message ("Microsoft Visual Studio 2019 compiler or greater compiler used to build library")
-			LOG_FUNC_EXIT_PARAMS(81)
+        #elif _MSC_VER >= 1920
+            #pragma message ("Microsoft Visual Studio 2019 compiler or greater compiler used to build library")
+            LOG_FUNC_EXIT_PARAMS(81)
         #endif
     #endif
     #ifndef _MSC_VER
@@ -449,10 +449,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndThread( DTWAIN_HANDLE DLLHandle )
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet)
 {
-	LOG_FUNC_ENTRY_PARAMS((bSet))
-	CTL_TwainDLLHandle::s_multipleThreads = bSet ? true : false;
-	LOG_FUNC_EXIT_PARAMS(true)
-	CATCH_BLOCK(false)
+    LOG_FUNC_ENTRY_PARAMS((bSet))
+    CTL_TwainDLLHandle::s_multipleThreads = bSet ? true : false;
+    LOG_FUNC_EXIT_PARAMS(true)
+    CATCH_BLOCK(false)
 }
 
 DTWAIN_HANDLE dynarithmic::GetDTWAINHandle_Internal()
@@ -463,12 +463,12 @@ DTWAIN_HANDLE dynarithmic::GetDTWAINHandle_Internal()
         return NULL;
     #endif
 
-	if (!CTL_TwainDLLHandle::s_multipleThreads)
-	{
-		if (!CTL_TwainDLLHandle::s_DLLHandles.empty())
-			return CTL_TwainDLLHandle::s_DLLHandles.back().get();
-		return nullptr;
-	}
+    if (!CTL_TwainDLLHandle::s_multipleThreads)
+    {
+        if (!CTL_TwainDLLHandle::s_DLLHandles.empty())
+            return CTL_TwainDLLHandle::s_DLLHandles.back().get();
+        return nullptr;
+    }
 
     // Check if this task has already been hooked
     // Get the Current task
@@ -755,7 +755,7 @@ DTWAIN_HANDLE DLLENTRY_DEF DTWAIN_SysInitialize()
         HookTwainDLL( pHandle, FALSE );
         if ( CTL_TwainDLLHandle::s_DLLHandles.size() == 1 )
         {
-			CTL_StringType iniName = _T(".ini");
+            CTL_StringType iniName = _T(".ini");
             CTL_StringType szName = _T("dtwain" DTWAIN_OSPLATFORM) + iniName;
             CTL_StringType szLangDLL = _T("english");
             if (!CTL_TwainDLLHandle::s_sINIPath.empty())
@@ -1690,12 +1690,12 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionString(LPTSTR lpszVer, LONG nLength)
 
 LONG DLLENTRY_DEF DTWAIN_GetLibraryPath(LPTSTR lpszVer, LONG nLength)
 {
-	return CopyInfoToCString(GetDTWAINDLLPath(), lpszVer, nLength);
+    return CopyInfoToCString(GetDTWAINDLLPath(), lpszVer, nLength);
 }
 
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionString(LPTSTR lpszVer, LONG nLength)
 {
-	return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(GetDTWAINDLLVersionInfoStr().c_str()), lpszVer, nLength);
+    return CopyInfoToCString(StringConversion::Convert_AnsiPtr_To_Native(GetDTWAINDLLVersionInfoStr().c_str()), lpszVer, nLength);
 }
 
 LONG DLLENTRY_DEF DTWAIN_GetVersionInfo(LPTSTR lpszVer, LONG nLength)
@@ -1716,17 +1716,17 @@ CTL_StringType dynarithmic::GetDTWAINExecutionPath()
 
 CTL_StringType dynarithmic::GetDTWAINDLLPath()
 {
-	if ( !CTL_TwainDLLHandle::s_DLLPath.empty())
-		return CTL_TwainDLLHandle::s_DLLPath;
-	TCHAR buffer[1024];
-	boost::winapi::GetModuleFileName(CTL_TwainDLLHandle::s_DLLInstance, buffer, 1024);
-	return buffer;
+    if ( !CTL_TwainDLLHandle::s_DLLPath.empty())
+        return CTL_TwainDLLHandle::s_DLLPath;
+    TCHAR buffer[1024];
+    boost::winapi::GetModuleFileName(CTL_TwainDLLHandle::s_DLLInstance, buffer, 1024);
+    return buffer;
 }
 
 CTL_StringType dynarithmic::GetVersionString()
 {
-	if (!CTL_TwainDLLHandle::s_VersionString.empty())
-		return CTL_TwainDLLHandle::s_VersionString;
+    if (!CTL_TwainDLLHandle::s_VersionString.empty())
+        return CTL_TwainDLLHandle::s_VersionString;
 
     LONG lMajor, lMinor, lVersionType, lPatch;
     // Write the version info
@@ -1763,15 +1763,15 @@ CTL_StringType dynarithmic::GetVersionString()
         CTL_StringStreamType strm;
         CTL_StringType sStatic;
         if (DTWAIN_GetStaticLibVersion() != 0 )
-		{
-			sStatic += _T("Compiler used: ") + GetStaticLibVer();
-			sStatic += _T("\n");
-		}
+        {
+            sStatic += _T("Compiler used: ") + GetStaticLibVer();
+            sStatic += _T("\n");
+        }
 
-		strm << sStatic << _T("Dynarithmic TWAIN Library, Version ") << lMajor << _T(".") << lMinor << _T(" - ") << s << _T(" Version (Patch Level ")
-			<< lPatch << _T(")\n") << _T("Shared Library Path: ") << GetDTWAINDLLPath();
+        strm << sStatic << _T("Dynarithmic TWAIN Library, Version ") << lMajor << _T(".") << lMinor << _T(" - ") << s << _T(" Version (Patch Level ")
+            << lPatch << _T(")\n") << _T("Shared Library Path: ") << GetDTWAINDLLPath();
         CTL_TwainDLLHandle::s_VersionString = strm.str();
-		return CTL_TwainDLLHandle::s_VersionString;
+        return CTL_TwainDLLHandle::s_VersionString;
     }
     return _T("");
 }

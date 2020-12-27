@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@
 #define CTLIFACE_H_
 
 #include "dtwain_retail_def.h"
-#include "tr1defs.h"
 #include "dtwain_raii.h"
 #include <ocrinterface.h>
 #include "pdffont_basic.h"
@@ -497,7 +496,7 @@ namespace dynarithmic
     class CTL_TwainDLLHandle
     {
         public:
-			typedef std::unordered_map<LONG, std::pair<CTL_String, CTL_String>> CTL_PDFMediaMap;
+            typedef std::unordered_map<LONG, std::pair<CTL_String, CTL_String>> CTL_PDFMediaMap;
             CTL_TwainDLLHandle();
             ~CTL_TwainDLLHandle();
             static HINSTANCE GetImageLibrary(LONG nWhich);
@@ -529,7 +528,7 @@ namespace dynarithmic
             static int              GetDATResourceID() { return 8891; }
             static int              GetMSGResourceID() { return 8892; }
             static long             GetErrorFilterFlags() { return s_lErrorFilterFlags; }
-			static CTL_PDFMediaMap& GetPDFMediaMap() { return s_PDFMediaMap; }
+            static CTL_PDFMediaMap& GetPDFMediaMap() { return s_PDFMediaMap; }
 
             CTL_TwainAppMgr* m_pAppMgr;
 
@@ -609,7 +608,7 @@ namespace dynarithmic
             OCRInterfaceContainer m_OCRInterfaceArray;
             OCRProductNameToEngineMap m_OCRProdNameToEngine;
             OCREnginePtr          m_pOCRDefaultEngine;
-			static CTL_PDFMediaMap s_PDFMediaMap;
+            static CTL_PDFMediaMap s_PDFMediaMap;
 
 
             // File Save As information
@@ -650,8 +649,8 @@ namespace dynarithmic
             static CTL_StringType           s_TempFilePath;
             static CTL_StringType           s_ImageDLLFilePath;
             static CTL_StringType           s_LangResourcePath;
-			static CTL_StringType			s_VersionString;
-			static CTL_StringType			s_DLLPath;
+            static CTL_StringType           s_VersionString;
+            static CTL_StringType           s_DLLPath;
             static UINT_PTR                 s_nTimerID;
             static UINT_PTR                 s_nTimeoutID;
             static UINT                     s_nTimeoutMilliseconds;
@@ -664,10 +663,10 @@ namespace dynarithmic
             static bool                     s_UsingCustomResource;
             static bool                     s_DemoInitialized;
             static int                      s_TwainDSMSearchOrder;
-			static CTL_StringType			s_TwainDSMSearchOrderStr;
+            static CTL_StringType           s_TwainDSMSearchOrderStr;
             static CTL_StringType           s_TwainDSMUserDirectory;
-			static bool						s_multipleThreads;
-			static HFONT					s_DialogFont;
+            static bool                     s_multipleThreads;
+            static HFONT                    s_DialogFont;
 
             static std::unordered_set<HWND>   s_appWindowsToDisable;
             bool                            m_bOpenSourceOnSelect;
@@ -768,11 +767,7 @@ namespace dynarithmic
     extern "C" {
     #endif
     #ifdef _WIN32
-    LRESULT CALLBACK_DEF DTWAIN_WindowProc(HWND hWnd,
-                                               UINT uMsg,
-                                               WPARAM wParam,
-                                               LPARAM lParam);
-
+    LRESULT CALLBACK_DEF DTWAIN_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
     LRESULT CALLBACK_DEF DTWAIN_GetMessageProc(int nCode, WPARAM wParam, LPARAM lParam );
     LRESULT CALLBACK_DEF DTWAIN_MessageProc(int nCode, WPARAM wParam, LPARAM lParam );
     DTWAIN_BOOL DTWAIN_SetCallbackProc( DTWAIN_CALLBACK fnCall, LONG nWhich);
@@ -818,7 +813,7 @@ namespace dynarithmic
     LONG CopyInfoToCString(const CTL_StringType& strInfo, LPTSTR szInfo, LONG nMaxLen);
     CTL_StringType GetVersionString();
     CTL_StringType GetDTWAINExecutionPath();
-	CTL_StringType GetDTWAINDLLPath();
+    CTL_StringType GetDTWAINDLLPath();
     DTWAIN_ARRAY DTWAIN_CreateFix32ArrayFromFloatArray(DTWAIN_ARRAY FloatArray);
     DTWAIN_ARRAY DTWAIN_CreateFloatArrayFromFix32Array(DTWAIN_ARRAY Fix32Array);
 
@@ -840,7 +835,7 @@ namespace dynarithmic
     DTWAIN_ARRAY  SourceAcquire(SourceAcquireOptions& opts);
     DTWAIN_ARRAY SourceAcquireWorkerThread(SourceAcquireOptions& opts);
     bool AcquireExHelper(SourceAcquireOptions& opts);
-	bool AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType);
+    bool AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType);
 
     DTWAIN_ACQUIRE  LLAcquireImage(SourceAcquireOptions& opts);
     DTWAIN_HANDLE GetDTWAINHandle_Internal();
@@ -1075,9 +1070,9 @@ namespace dynarithmic
 
     #define IDS_DTWAIN_APPTITLE       9700
 
-        #define IDS_LIMITEDFUNCMSG1     8894
-        #define IDS_LIMITEDFUNCMSG2     8895
-        #define IDS_LIMITEDFUNCMSG3     8896
+    #define IDS_LIMITEDFUNCMSG1     8894
+    #define IDS_LIMITEDFUNCMSG2     8895
+    #define IDS_LIMITEDFUNCMSG3     8896
 
 
     #define CHECK_FOR_PDF_TYPE() \

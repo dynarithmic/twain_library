@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@
 #include <vector>
 #include <utility>
 #include "dtwdecl.h"
-#include "tr1defs.h"
 #include "dibmulti.h"
 #include "dibinfox.h"
 #include "fltrect.h"
@@ -77,8 +76,8 @@ namespace dynarithmic
             virtual void SetImageInfo(const DTWAINImageInfoEx& /*ImageInfo*/) { }
             CTL_TwainDib* GetDib() { return m_pDib; }
             static bool IsValidBitDepth(LONG FileType, LONG bitDepth);
-            int SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags, UINT unitOfMeasure, 
- 						   const std::pair<LONG, LONG>& res, const std::tuple<double, double, double, double>& multipler_pr = { 1,1, 0.5, 0.5 });
+            int SaveToFile(HANDLE hDib, LPCTSTR szFile, FREE_IMAGE_FORMAT fmt, int flags, UINT unitOfMeasure,
+                           const std::pair<LONG, LONG>& res, const std::tuple<double, double, double, double>& multipler_pr = { 1,1, 0.5, 0.5 });
             static std::unordered_map<LONG, std::vector<int>>& GetSupportedBPPMap() { return s_supportedBitDepths; }
 
         protected:
@@ -123,8 +122,8 @@ namespace dynarithmic
             CTL_JpegIOHandler( CTL_TwainDib *pDib, DTWAINImageInfoEx& ImageInfoEx)
                             : CTL_ImageIOHandler(pDib ),
                             m_ImageInfoEx(ImageInfoEx),
-							m_nJpegQuality(75),
-							m_bJpegProgressive(false) {}
+                            m_nJpegQuality(75),
+                            m_bJpegProgressive(false) {}
 
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
 
@@ -157,17 +156,17 @@ namespace dynarithmic
     class CTL_PngIOHandler : public CTL_ImageIOHandler
     {
         public:
-			CTL_PngIOHandler() : CTL_ImageIOHandler() {};
+            CTL_PngIOHandler() : CTL_ImageIOHandler() {};
             CTL_PngIOHandler( CTL_TwainDib *pDib, DTWAINImageInfoEx& ImageInfoEx) : CTL_ImageIOHandler( pDib ), m_ImageInfoEx(ImageInfoEx) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
-		private:
-			DTWAINImageInfoEx m_ImageInfoEx;
+        private:
+            DTWAINImageInfoEx m_ImageInfoEx;
     };
 
     class CTL_PcxIOHandler : public CTL_ImageIOHandler
     {
         public:
-			CTL_PcxIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
+            CTL_PcxIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
             CTL_PcxIOHandler( CTL_TwainDib *pDib, int nFormat, DTWAINImageInfoEx& ImageInfoEx ) : CTL_ImageIOHandler(pDib),
             m_nFormat(nFormat), m_ImageInfoEx(ImageInfoEx) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);
@@ -188,7 +187,7 @@ namespace dynarithmic
     class CTL_WmfIOHandler : public CTL_ImageIOHandler
     {
         public:
-			CTL_WmfIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
+            CTL_WmfIOHandler() : CTL_ImageIOHandler(), m_nFormat{} {};
             CTL_WmfIOHandler( CTL_TwainDib *pDib, int nFormat ) :
                                 CTL_ImageIOHandler( pDib ), m_nFormat(nFormat) {}
             virtual int WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fh, LONG64 UserData=0);

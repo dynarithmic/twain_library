@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ using namespace dynarithmic;
 
 LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font)
 {
-	LOG_FUNC_ENTRY_PARAMS((font))
-	CTL_TwainDLLHandle::s_DialogFont = font;
-	LOG_FUNC_EXIT_PARAMS(1)
-	CATCH_BLOCK(0)
+    LOG_FUNC_ENTRY_PARAMS((font))
+    CTL_TwainDLLHandle::s_DialogFont = font;
+    LOG_FUNC_EXIT_PARAMS(1)
+    CATCH_BLOCK(0)
 }
 
 static LRESULT CALLBACK DisplayTwainDlgProc(HWND, UINT, WPARAM, LPARAM);
@@ -88,7 +88,7 @@ DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource()
 DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2(HWND hWndParent, LPCTSTR szTitle, LONG xPos, LONG yPos, LONG nOptions)
 {
     LOG_FUNC_ENTRY_PARAMS((hWndParent, szTitle, xPos, yPos, nOptions))
-    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle, 
+    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle,
                                                xPos, yPos, NULL, NULL, NULL, nOptions));
     LOG_FUNC_EXIT_PARAMS(Source);
     CATCH_BLOCK(DTWAIN_SOURCE(0))
@@ -104,7 +104,7 @@ DTWAIN_SOURCE DLLENTRY_DEF DTWAIN_SelectSource2Ex(HWND hWndParent,
                                                   LONG nOptions)
 {
     LOG_FUNC_ENTRY_PARAMS((hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions))
-    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle, 
+    DTWAIN_SOURCE Source = SelectAndOpenSource(SourceSelectionOptions(SELECTSOURCE2, NULL, hWndParent, szTitle,
                                                xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions));
     LOG_FUNC_EXIT_PARAMS(Source);
     CATCH_BLOCK(DTWAIN_SOURCE(0))
@@ -157,7 +157,7 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
     }
 
     // Do a minimal check for TWAIN here
-    DTWAIN_SOURCE pSource = SourcefnMap[options.nWhich](options);
+    DTWAIN_SOURCE pSource = SourcefnMap[options.nWhich] (options);
 
     if (!pSource)
         LOG_FUNC_EXIT_PARAMS((DTWAIN_SOURCE)NULL)
@@ -165,7 +165,7 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
         // Open and close the source to initialize capability structure
         // Return a dead source.  This allows closing of the source without
         // destroying the source info
-        CTL_ITwainSource *pRealSource = (CTL_ITwainSource *)pSource;
+    CTL_ITwainSource *pRealSource = (CTL_ITwainSource *)pSource;
     DTWAIN_SOURCE pDead = NULL;
 
     DTWAIN_ARRAY pDTWAINArray = 0;
@@ -173,7 +173,7 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
 
     if (!DTWAIN_EnumSources(&pDTWAINArray))
     {
-            DTWAIN_EndTwainSession();
+        DTWAIN_EndTwainSession();
         LOG_FUNC_EXIT_PARAMS(NULL)
     }
 
@@ -202,7 +202,7 @@ DTWAIN_SOURCE dynarithmic::SourceSelect(const SourceSelectionOptions& options)
             LOG_FUNC_EXIT_PARAMS(pDead)
         }
     }
-        DTWAIN_EndTwainSession();
+    DTWAIN_EndTwainSession();
     LOG_FUNC_EXIT_PARAMS((DTWAIN_SOURCE)NULL)
     CATCH_BLOCK(DTWAIN_SOURCE(0))
 }
@@ -291,7 +291,7 @@ DTWAIN_SOURCE dynarithmic::DTWAIN_LLSelectSource2(const SourceSelectionOptions& 
     CTL_StringType actualSourceName = selectStruct.SourceName;
     if (opts.nOptions & DTWAIN_DLG_USENAMEMAPPING)
     {
-        auto iter = std::find_if(selectStruct.CS.mapNames.begin(), selectStruct.CS.mapNames.end(), 
+        auto iter = std::find_if(selectStruct.CS.mapNames.begin(), selectStruct.CS.mapNames.end(),
                                  [&](auto& pr)
                                 { return pr.second == actualSourceName;}
                                 );
@@ -372,8 +372,8 @@ static bool ByCX(const SIZE& sz1, const SIZE& sz2)
 
 static BOOL CALLBACK ChildEnumFontProc(HWND hWnd, LPARAM lParam)
 {
-	SendMessage(hWnd, WM_SETFONT, (WPARAM)lParam, 0);
-	return TRUE;
+    SendMessage(hWnd, WM_SETFONT, (WPARAM)lParam, 0);
+    return TRUE;
 }
 
 static std::vector<CTL_StringType> AdjustSourceNames(std::vector<CTL_StringType> vSourceNames, CustomPlacement CS)
@@ -443,91 +443,91 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
     static bool bOpenTemp;
     switch (message)
     {
-    case WM_INITDIALOG:
-    {
-			if (CTL_TwainDLLHandle::s_DialogFont)
-			{
-				SendMessage(hWnd, WM_SETFONT, (WPARAM)CTL_TwainDLLHandle::s_DialogFont, 0);
-				EnumChildWindows(hWnd, ChildEnumFontProc, (LPARAM)CTL_TwainDLLHandle::s_DialogFont);
-			}
+        case WM_INITDIALOG:
+        {
+            if (CTL_TwainDLLHandle::s_DialogFont)
+            {
+                SendMessage(hWnd, WM_SETFONT, (WPARAM)CTL_TwainDLLHandle::s_DialogFont, 0);
+                EnumChildWindows(hWnd, ChildEnumFontProc, (LPARAM)CTL_TwainDLLHandle::s_DialogFont);
+            }
 
-        HWND lstSources;
-        CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog...\n"));
-        pS = (SelectStruct*)lParam;
+            HWND lstSources;
+            CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog...\n"));
+            pS = (SelectStruct*)lParam;
 
-        bOpenTemp = *pS->m_pbSourcesOnSelect;
+            bOpenTemp = *pS->m_pbSourcesOnSelect;
 
-        if (pS->CS.nOptions & DTWAIN_DLG_CENTER_SCREEN)
-            CenterWindow(hWnd, NULL);
-        else
+            if (pS->CS.nOptions & DTWAIN_DLG_CENTER_SCREEN)
+                CenterWindow(hWnd, NULL);
+            else
             if (pS->CS.nOptions & DTWAIN_DLG_CENTER)
                 CenterWindow(hWnd, GetParent(hWnd));
             else
                 ::SetWindowPos(hWnd, NULL, pS->CS.xpos, pS->CS.ypos, 0, 0, SWP_NOSIZE);
-        lstSources = GetDlgItem(hWnd, IDC_LSTSOURCES);
+            lstSources = GetDlgItem(hWnd, IDC_LSTSOURCES);
 
-        // Set the title
-        ::SetWindowText(hWnd, pS->CS.sTitle.c_str());
+            // Set the title
+            ::SetWindowText(hWnd, pS->CS.sTitle.c_str());
 
-        // Fill the list box with the sources
-        DTWAIN_ARRAY Array = 0;
-        DTWAIN_EnumSources(&Array);
-        DTWAINArrayLL_RAII arr(Array);
+            // Fill the list box with the sources
+            DTWAIN_ARRAY Array = 0;
+            DTWAIN_EnumSources(&Array);
+            DTWAINArrayLL_RAII arr(Array);
 
-        auto vValues = EnumeratorVectorPtr<CTL_ITwainSourcePtr>(Array);
+            auto vValues = EnumeratorVectorPtr<CTL_ITwainSourcePtr>(Array);
 
-        int nCount;
-        if (!vValues)
-            nCount = 0;
-        else
-				nCount = static_cast<int>(vValues->size());
-        pS->nItems = nCount;
-        if (nCount == 0)
-        {
-            HWND hWndSelect = GetDlgItem(hWnd, IDOK);
-            if (hWndSelect)
-                EnableWindow(hWndSelect, FALSE);
-            CTL_TwainAppMgr::WriteLogInfo(_T("Finished Adding names to TWAIN dialog...\n"));
-
-            // Display the local strings if they are available:
-            DisplayLocalString(hWnd, IDOK, IDS_SELECT_TEXT);
-            DisplayLocalString(hWnd, IDCANCEL, IDS_CANCEL_TEXT);
-            DisplayLocalString(hWnd, IDC_SOURCETEXT, IDS_SOURCES_TEXT);
-            ::SetFocus(hWnd);
-            CTL_TwainAppMgr::WriteLogInfo(_T("Finished Initializing TWAIN Dialog...\n"));
-            return TRUE;
-        }
-
-        // Get the default Source
-        // Turn off default open temporarily
-        *pS->m_pbSourcesOnSelect = false;
-        CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Retrieving default TWAIN Source...\n"));
-        DTWAIN_SOURCE DefSource = DTWAIN_SelectDefaultSource();
-        std::vector<TCHAR> DefName;
-        if (DefSource)
-        {
-            LONG nBytes = DTWAIN_GetSourceProductName(DefSource, NULL, 0);
-            if (nBytes > 0)
+            int nCount;
+            if (!vValues)
+                nCount = 0;
+            else
+                nCount = static_cast<int>(vValues->size());
+            pS->nItems = nCount;
+            if (nCount == 0)
             {
-                DefName.resize(nBytes);
-					DTWAIN_GetSourceProductName(DefSource, DefName.data(), nBytes);
-                CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Retrieved default TWAIN Source name...\n"));
+                HWND hWndSelect = GetDlgItem(hWnd, IDOK);
+                if (hWndSelect)
+                    EnableWindow(hWndSelect, FALSE);
+                CTL_TwainAppMgr::WriteLogInfo(_T("Finished Adding names to TWAIN dialog...\n"));
+
+                // Display the local strings if they are available:
+                DisplayLocalString(hWnd, IDOK, IDS_SELECT_TEXT);
+                DisplayLocalString(hWnd, IDCANCEL, IDS_CANCEL_TEXT);
+                DisplayLocalString(hWnd, IDC_SOURCETEXT, IDS_SOURCES_TEXT);
+                ::SetFocus(hWnd);
+                CTL_TwainAppMgr::WriteLogInfo(_T("Finished Initializing TWAIN Dialog...\n"));
+                return TRUE;
             }
-        }
 
-        if (DefName.empty())
-            CTL_TwainAppMgr::WriteLogInfo(_T("The TWAIN default name has no characters...\n"));
-        else
-        {
-            CTL_StringStreamType strm;
-            strm << _T("The default TWAIN source is ") << &DefName[0] << _T("...\n");
-            CTL_TwainAppMgr::WriteLogInfo(strm.str());
-        }
+            // Get the default Source
+            // Turn off default open temporarily
+            *pS->m_pbSourcesOnSelect = false;
+            CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Retrieving default TWAIN Source...\n"));
+            DTWAIN_SOURCE DefSource = DTWAIN_SelectDefaultSource();
+            std::vector<TCHAR> DefName;
+            if (DefSource)
+            {
+                LONG nBytes = DTWAIN_GetSourceProductName(DefSource, NULL, 0);
+                if (nBytes > 0)
+                {
+                    DefName.resize(nBytes);
+                    DTWAIN_GetSourceProductName(DefSource, DefName.data(), nBytes);
+                    CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Retrieved default TWAIN Source name...\n"));
+                }
+            }
 
-        vector<SIZE> TextExtents;
-        HDC hdcList = NULL;
-        if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
-            hdcList = GetDC(lstSources);
+            if (DefName.empty())
+                CTL_TwainAppMgr::WriteLogInfo(_T("The TWAIN default name has no characters...\n"));
+            else
+            {
+                CTL_StringStreamType strm;
+                strm << _T("The default TWAIN source is ") << &DefName[0] << _T("...\n");
+                CTL_TwainAppMgr::WriteLogInfo(strm.str());
+            }
+
+            vector<SIZE> TextExtents;
+            HDC hdcList = NULL;
+            if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
+                hdcList = GetDC(lstSources);
 
             // Get all the source names
             vector<CTL_StringType> vSourceNames;
@@ -542,96 +542,96 @@ LRESULT CALLBACK DisplayTwainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPA
             // Remove and rename sources depending on the options
             auto vNewSourceNames = AdjustSourceNames(vSourceNames, pS->CS);
 
-			for (auto& sName : vNewSourceNames )
-			{
-            SIZE szType;
+            for (auto& sName : vNewSourceNames )
+            {
+                SIZE szType;
+                if (hdcList)
+                {
+                    auto cstr = sName.c_str();
+                    ::GetTextExtentPoint32(hdcList, cstr, static_cast<int>(_tcslen(cstr)), &szType);
+                    TextExtents.push_back(szType);
+                }
+            }
+
             if (hdcList)
             {
-                    auto cstr = sName.c_str();
-					::GetTextExtentPoint32(hdcList, cstr, static_cast<int>(_tcslen(cstr)), &szType);
-                TextExtents.push_back(szType);
+                ReleaseDC(lstSources, hdcList);
+                sort(TextExtents.begin(), TextExtents.end(), ByCX);
             }
-        }
 
-        if (hdcList)
-        {
-            ReleaseDC(lstSources, hdcList);
-            sort(TextExtents.begin(), TextExtents.end(), ByCX);
-        }
-
-        // Sort the names
-        if (pS->CS.nOptions & DTWAIN_DLG_SORTNAMES)
-        {
-            CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Sorting TWAIN Source names...\n"));
-				sort(vSourceNames.begin(), vSourceNames.end());
-        }
-
-        LRESULT index;
-        LRESULT DefIndex = 0;
-        CTL_StringStreamType strm;
-        CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Adding names to dialog...\n"));
-			strm << _T("TWAIN found ") << vNewSourceNames.size() << _T(" source names to add to TWAIN dialog...\n");
-        strm << _T("The TWAIN dialog window handle to add names is ") << lstSources << _T("\n");
-        CTL_TwainAppMgr::WriteLogInfo(strm.str());
-			for (auto& sName : vNewSourceNames)
-        {
-            strm.str(_T(""));
-				strm << _T("The TWAIN name being added is ") << sName << _T("\n");
-            CTL_TwainAppMgr::WriteLogInfo(strm.str());
-				index = SendMessage(lstSources, LB_ADDSTRING, 0, (LPARAM)sName.c_str());
-            CTL_TwainAppMgr::WriteLogInfo(_T("LB_ADDSTRING was sent to TWAIN dialog...\n"));
-            CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now comparing names...\n"));
-            if (!DefName.empty())
+            // Sort the names
+            if (pS->CS.nOptions & DTWAIN_DLG_SORTNAMES)
             {
-					if (_tcscmp(sName.c_str(), (LPCTSTR)&DefName[0]) == 0)
-                    DefIndex = index;
+                CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Sorting TWAIN Source names...\n"));
+                sort(vSourceNames.begin(), vSourceNames.end());
             }
-            CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now finished comparing names...\n"));
-        }
-        if (DefName.empty())
-            DefIndex = 0;
 
-			if (!TextExtents.empty())
-        {
-            SendMessage(lstSources, LB_SETCURSEL, DefIndex, 0);
-            if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
-                SendMessage(lstSources, LB_SETHORIZONTALEXTENT, TextExtents[0].cx, 0);
-        }
+            LRESULT index;
+            LRESULT DefIndex = 0;
+            CTL_StringStreamType strm;
+            CTL_TwainAppMgr::WriteLogInfo(_T("Initializing TWAIN Dialog -- Adding names to dialog...\n"));
+            strm << _T("TWAIN found ") << vNewSourceNames.size() << _T(" source names to add to TWAIN dialog...\n");
+            strm << _T("The TWAIN dialog window handle to add names is ") << lstSources << _T("\n");
+            CTL_TwainAppMgr::WriteLogInfo(strm.str());
+            for (auto& sName : vNewSourceNames)
+            {
+                strm.str(_T(""));
+                strm << _T("The TWAIN name being added is ") << sName << _T("\n");
+                CTL_TwainAppMgr::WriteLogInfo(strm.str());
+                index = SendMessage(lstSources, LB_ADDSTRING, 0, (LPARAM)sName.c_str());
+                CTL_TwainAppMgr::WriteLogInfo(_T("LB_ADDSTRING was sent to TWAIN dialog...\n"));
+                CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now comparing names...\n"));
+                if (!DefName.empty())
+                {
+                    if (_tcscmp(sName.c_str(), (LPCTSTR)&DefName[0]) == 0)
+                        DefIndex = index;
+                }
+                CTL_TwainAppMgr::WriteLogInfo(_T("TWAIN now finished comparing names...\n"));
+            }
+            if (DefName.empty())
+                DefIndex = 0;
+
+            if (!TextExtents.empty())
+            {
+                SendMessage(lstSources, LB_SETCURSEL, DefIndex, 0);
+                if (pS->CS.nOptions & DTWAIN_DLG_HORIZONTALSCROLL)
+                    SendMessage(lstSources, LB_SETHORIZONTALEXTENT, TextExtents[0].cx, 0);
+            }
             else
                 SendMessage(lstSources, LB_SETCURSEL, 0, 0);
 
-        CTL_TwainAppMgr::WriteLogInfo(_T("Finished Adding names to TWAIN dialog...\n"));
+            CTL_TwainAppMgr::WriteLogInfo(_T("Finished Adding names to TWAIN dialog...\n"));
 
-        // Display the local strings if they are available:
-        DisplayLocalString(hWnd, IDOK, IDS_SELECT_TEXT);
-        DisplayLocalString(hWnd, IDCANCEL, IDS_CANCEL_TEXT);
-        DisplayLocalString(hWnd, IDC_SOURCETEXT, IDS_SOURCES_TEXT);
-        ::SetFocus(hWnd);
-        CTL_TwainAppMgr::WriteLogInfo(_T("Finished Initializing TWAIN Dialog...\n"));
-        return TRUE;
-    }
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK)
-        {
-            HWND lstSources = GetDlgItem(hWnd, IDC_LSTSOURCES);
-            TCHAR sz[255];
-            LRESULT nSel = SendMessage(lstSources, LB_GETCURSEL, 0, 0);
-            SendMessage(lstSources, LB_GETTEXT, nSel, (LPARAM)sz);
-            pS->SourceName = sz;
-            *pS->m_pbSourcesOnSelect = bOpenTemp;
-            EndDialog(hWnd, LOWORD(wParam));
+            // Display the local strings if they are available:
+            DisplayLocalString(hWnd, IDOK, IDS_SELECT_TEXT);
+            DisplayLocalString(hWnd, IDCANCEL, IDS_CANCEL_TEXT);
+            DisplayLocalString(hWnd, IDC_SOURCETEXT, IDS_SOURCES_TEXT);
+            ::SetFocus(hWnd);
+            CTL_TwainAppMgr::WriteLogInfo(_T("Finished Initializing TWAIN Dialog...\n"));
             return TRUE;
         }
-        else
-            if (LOWORD(wParam) == IDCANCEL)
+
+        case WM_COMMAND:
+            if (LOWORD(wParam) == IDOK)
             {
-                pS->SourceName.clear();
+                HWND lstSources = GetDlgItem(hWnd, IDC_LSTSOURCES);
+                TCHAR sz[255];
+                LRESULT nSel = SendMessage(lstSources, LB_GETCURSEL, 0, 0);
+                SendMessage(lstSources, LB_GETTEXT, nSel, (LPARAM)sz);
+                pS->SourceName = sz;
                 *pS->m_pbSourcesOnSelect = bOpenTemp;
                 EndDialog(hWnd, LOWORD(wParam));
                 return TRUE;
             }
-        break;
+            else
+                if (LOWORD(wParam) == IDCANCEL)
+                {
+                    pS->SourceName.clear();
+                    *pS->m_pbSourcesOnSelect = bOpenTemp;
+                    EndDialog(hWnd, LOWORD(wParam));
+                    return TRUE;
+                }
+            break;
     }
     return FALSE;
 }

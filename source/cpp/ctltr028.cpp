@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -72,24 +72,24 @@ CTL_SetupFileXferTriplet::CTL_SetupFileXferTriplet(CTL_ITwainSession *pSession,
 
 CTL_AudioFileXferTriplet::CTL_AudioFileXferTriplet(CTL_ITwainSession *pSession, CTL_ITwainSource* pSource) : CTL_TwainTriplet()
 {
-	SetSessionPtr(pSession);
-	SetSourcePtr(pSource);
-	// Get the app manager's AppID
-	const CTL_TwainAppMgrPtr pMgr = CTL_TwainAppMgr::GetInstance();
+    SetSessionPtr(pSession);
+    SetSourcePtr(pSource);
+    // Get the app manager's AppID
+    const CTL_TwainAppMgrPtr pMgr = CTL_TwainAppMgr::GetInstance();
 
-	if (pMgr && pMgr->IsValidTwainSession(pSession))
-	{
-		if (pSource)
-		{
-			Init(pSession->GetAppIDPtr(),
-				pSource->GetSourceIDPtr(),
-				DG_CONTROL,
-				DAT_AUDIOFILEXFER,
-				MSG_GET,
-				NULL);
-			SetAlive(true);
-		}
-	}
+    if (pMgr && pMgr->IsValidTwainSession(pSession))
+    {
+        if (pSource)
+        {
+            Init(pSession->GetAppIDPtr(),
+                pSource->GetSourceIDPtr(),
+                DG_CONTROL,
+                DAT_AUDIOFILEXFER,
+                MSG_GET,
+                NULL);
+            SetAlive(true);
+        }
+    }
 }
 
 struct CapGetter

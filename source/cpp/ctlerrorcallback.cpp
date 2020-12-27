@@ -26,32 +26,50 @@
 #endif
 using namespace std;
 using namespace dynarithmic;
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SkipImageInfoError(DTWAIN_SOURCE Source, DTWAIN_BOOL bSkip)
-{
-    LOG_FUNC_ENTRY_PARAMS((Source, bSkip))
-    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
 
-    // See if DLL Handle exists
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC logProc, LONG UserData)
+{
+    LOG_FUNC_ENTRY_PARAMS((logProc, UserData))
+    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
     DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
-    CTL_ITwainSource *p = VerifySourceHandle(pHandle, Source);
-    if (!p)
-        LOG_FUNC_EXIT_PARAMS(false)
-    p->SetImageInfoErrors(bSkip ? true : false);
+
+    pHandle->m_pErrorProcFn = logProc;
+    pHandle->m_lErrorProcUserData = UserData;
     LOG_FUNC_EXIT_PARAMS(true)
-    CATCH_BLOCK(false)
+    CATCH_BLOCK(false);
 }
 
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsSkipImageInfoError(DTWAIN_SOURCE Source)
+DTWAIN_ERROR_PROC DLLENTRY_DEF DTWAIN_GetErrorCallback(VOID_PROTOTYPE)
 {
-    LOG_FUNC_ENTRY_PARAMS((Source))
+    LOG_FUNC_ENTRY_PARAMS(())
     CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
-
-    // See if DLL Handle exists
     DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
-    CTL_ITwainSource *p = VerifySourceHandle(pHandle, Source);
-    if (!p)
-        LOG_FUNC_EXIT_PARAMS(false)
-    LONG retval = p->SkipImageInfoErrors();
-    LOG_FUNC_EXIT_PARAMS(retval)
-    CATCH_BLOCK(false)
+
+    DTWAIN_ERROR_PROC theProc = pHandle->m_pErrorProcFn;
+    LOG_FUNC_EXIT_PARAMS(theProc)
+    CATCH_BLOCK(DTWAIN_ERROR_PROC(0))
 }
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 logProc, LONG64 UserData)
+{
+    LOG_FUNC_ENTRY_PARAMS((logProc, UserData))
+    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+    DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
+
+    pHandle->m_pErrorProcFn64 = logProc;
+    pHandle->m_lErrorProcUserData64 = UserData;
+    LOG_FUNC_EXIT_PARAMS(true)
+    CATCH_BLOCK(false);
+}
+
+DTWAIN_ERROR_PROC64 DLLENTRY_DEF DTWAIN_GetErrorCallback64(VOID_PROTOTYPE)
+{
+    LOG_FUNC_ENTRY_PARAMS(())
+    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+    DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
+
+    DTWAIN_ERROR_PROC64 theProc = pHandle->m_pErrorProcFn64;
+    LOG_FUNC_EXIT_PARAMS(theProc)
+    CATCH_BLOCK(DTWAIN_ERROR_PROC64(0))
+}
+

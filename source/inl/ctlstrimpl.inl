@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -438,8 +438,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR C
 LONG DLLENTRY_DEF DTWAIN_GetCurrentFileNameA(DTWAIN_SOURCE Source, LPSTR szName, LONG MaxLen)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetCurrentFileName(Source, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(MaxLen, 0);
+    LONG retVal = DTWAIN_GetCurrentFileName(Source, (MaxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szName, retVal);
 #else
     return DTWAIN_GetCurrentFileName(Source, szName, MaxLen);
@@ -451,8 +451,8 @@ LONG DLLENTRY_DEF DTWAIN_GetCurrentFileNameW(DTWAIN_SOURCE Source, LPWSTR szName
 #ifdef _UNICODE
     return DTWAIN_GetCurrentFileName(Source, szName, MaxLen);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetCurrentFileName(Source, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(MaxLen, 0);
+    LONG retVal = DTWAIN_GetCurrentFileName(Source, (MaxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szName, retVal);
 #endif
 }
@@ -462,8 +462,8 @@ LONG DLLENTRY_DEF DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nM
 #ifdef _UNICODE
     return DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, pWhichSearch);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetDSMFullName(DSMType, &arg[0], static_cast<LONG>(arg.size()), pWhichSearch);
+    CTL_String arg(nMaxLen, 0);
+    LONG retVal = DTWAIN_GetDSMFullName(DSMType, (nMaxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()), pWhichSearch);
     return null_terminator_copier(arg, szDLLName, retVal);
 #endif
 }
@@ -471,8 +471,8 @@ LONG DLLENTRY_DEF DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nM
 LONG DLLENTRY_DEF DTWAIN_GetDSMFullNameA(LONG DSMType, LPSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetDSMFullName(DSMType, &arg[0], static_cast<LONG>(arg.size()), pWhichSearch);
+    CTL_WString arg(nMaxLen, 0);
+    LONG retVal = DTWAIN_GetDSMFullName(DSMType, (nMaxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()), pWhichSearch);
     return null_terminator_copier(arg, szDLLName, retVal);
 #else
     return DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, pWhichSearch);
@@ -504,8 +504,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceTimeDateW(DTWAIN_SOURCE Source, LPWSTR 
 LONG DLLENTRY_DEF DTWAIN_GetErrorStringA(LONG lError, LPSTR lpszBuffer, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetErrorString(lError, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetErrorString(lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, lpszBuffer, retVal);
 #else
     return DTWAIN_GetErrorString(lError, lpszBuffer, nLength);
@@ -517,8 +517,8 @@ LONG DLLENTRY_DEF DTWAIN_GetErrorStringW(LONG lError, LPWSTR lpszBuffer, LONG nL
 #ifdef _UNICODE
     return DTWAIN_GetErrorString(lError, lpszBuffer, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetErrorString(lError, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetErrorString(lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, lpszBuffer, retVal);
 #endif
 }
@@ -526,8 +526,8 @@ LONG DLLENTRY_DEF DTWAIN_GetErrorStringW(LONG lError, LPWSTR lpszBuffer, LONG nL
 LONG DLLENTRY_DEF DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nLength)
 {
 #ifdef _UNICODE
-	CTL_WString arg(1024, 0);
-	LONG retVal = DTWAIN_GetConditionCodeString(lError, &arg[0], static_cast<LONG>(arg.size()));
+	CTL_WString arg(nLength, 0);
+	LONG retVal = DTWAIN_GetConditionCodeString(lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
 	return null_terminator_copier(arg, lpszBuffer, retVal);
 #else
 	return DTWAIN_GetConditionCodeString(lError, lpszBuffer, nLength);
@@ -539,8 +539,8 @@ LONG DLLENTRY_DEF DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer,
 #ifdef _UNICODE
 	return DTWAIN_GetConditionCodeString(lError, lpszBuffer, nLength);
 #else
-	CTL_String arg(1024, 0);
-	LONG retVal = DTWAIN_GetConditionCodeString(lError, &arg[0], static_cast<LONG>(arg.size()));
+	CTL_String arg(nLength, 0);
+	LONG retVal = DTWAIN_GetConditionCodeString(lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
 	return null_terminator_copier(arg, lpszBuffer, retVal);
 #endif
 }
@@ -568,8 +568,8 @@ LONG DLLENTRY_DEF DTWAIN_GetExtNameFromCapW(LONG nValue, LPWSTR szValue, LONG nL
 #ifdef _UNICODE
     return DTWAIN_GetExtNameFromCap(nValue, szValue, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetExtNameFromCap(nValue, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetExtNameFromCap(nValue, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szValue, retVal);
 #endif
 }
@@ -577,8 +577,8 @@ LONG DLLENTRY_DEF DTWAIN_GetExtNameFromCapW(LONG nValue, LPWSTR szValue, LONG nL
 LONG DLLENTRY_DEF DTWAIN_GetExtNameFromCapA(LONG nValue, LPSTR szValue, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetExtNameFromCap(nValue, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetExtNameFromCap(nValue, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szValue, retVal);
 #else
     return DTWAIN_GetExtNameFromCap(nValue, szValue, nLength);
@@ -661,8 +661,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR 
 LONG DLLENTRY_DEF DTWAIN_GetNameFromCapA(LONG nCapValue, LPSTR szValue, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetNameFromCap(nCapValue, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetNameFromCap(nCapValue, (nLength>0)?&arg[0]:nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szValue, retVal);
 #else
     return DTWAIN_GetNameFromCap(nCapValue, szValue, nLength);
@@ -674,9 +674,31 @@ LONG DLLENTRY_DEF DTWAIN_GetNameFromCapW(LONG nCapValue, LPWSTR szValue, LONG nL
 #ifdef _UNICODE
     return DTWAIN_GetNameFromCap(nCapValue, szValue, nLength);
 #else
-    CTL_String arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetNameFromCap(nCapValue, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetNameFromCap(nCapValue, (nLength>0) ? &arg[0] : nullptr, nLength);
     return null_terminator_copier(arg, szValue, retVal);
+#endif
+}
+
+LONG DLLENTRY_DEF DTWAIN_GetOCRErrorStringW(DTWAIN_OCRENGINE Engine, LONG lError, LPWSTR lpszBuffer, LONG nLength)
+{
+#ifdef _UNICODE
+    return DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nLength);
+#else
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRErrorString(Engine, lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
+    return null_terminator_copier(arg, lpszBuffer, retVal);
+#endif
+}
+
+LONG DLLENTRY_DEF DTWAIN_GetOCRErrorStringA(DTWAIN_OCRENGINE Engine, LONG lError, LPSTR lpszBuffer, LONG nLength)
+{
+#ifdef _UNICODE
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRErrorString(Engine, lError, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
+    return null_terminator_copier(arg, lpszBuffer, retVal);
+#else
+    return DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nLength);
 #endif
 }
 
@@ -685,8 +707,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerW(DTWAIN_OCRENGINE Engine, LPWSTR szM
 #ifdef _UNICODE
     return DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRManufacturer(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRManufacturer(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szManufacturer, retVal);
 #endif
 }
@@ -694,8 +716,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerW(DTWAIN_OCRENGINE Engine, LPWSTR szM
 LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerA(DTWAIN_OCRENGINE Engine, LPSTR szManufacturer, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRManufacturer(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRManufacturer(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szManufacturer, retVal);
 #else
     return DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nLength);
@@ -705,8 +727,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerA(DTWAIN_OCRENGINE Engine, LPSTR szMa
 LONG DLLENTRY_DEF DTWAIN_GetOCRProductFamilyA(DTWAIN_OCRENGINE Engine, LPSTR szProductFamily, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRProductFamily(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRProductFamily(Engine, (nLength > 0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szProductFamily, retVal);
 #else
     return DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nLength);
@@ -718,8 +740,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRProductFamilyW(DTWAIN_OCRENGINE Engine, LPWSTR sz
 #ifdef _UNICODE
     return DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRProductFamily(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRProductFamily(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szProductFamily, retVal);
 #endif
 }
@@ -729,8 +751,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRProductNameW(DTWAIN_OCRENGINE Engine, LPWSTR szPr
 #ifdef _UNICODE
     return DTWAIN_GetOCRProductName(Engine, szProductName, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRProductName(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRProductName(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szProductName, retVal);
 #endif
 }
@@ -738,8 +760,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRProductNameW(DTWAIN_OCRENGINE Engine, LPWSTR szPr
 LONG DLLENTRY_DEF DTWAIN_GetOCRProductNameA(DTWAIN_OCRENGINE Engine, LPSTR szProductName, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRProductName(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRProductName(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, szProductName, retVal);
 #else
     return DTWAIN_GetOCRProductName(Engine, szProductName, nLength);
@@ -749,8 +771,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRProductNameA(DTWAIN_OCRENGINE Engine, LPSTR szPro
 HANDLE DLLENTRY_DEF DTWAIN_GetOCRTextA(DTWAIN_OCRENGINE Engine, LONG nPageNo, LPSTR Data, LONG dSize, LPLONG pActualSize, LONG nFlags)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    HANDLE retVal = DTWAIN_GetOCRText(Engine, nPageNo, &arg[0], dSize, pActualSize, nFlags);
+    CTL_WString arg(dSize, 0);
+    HANDLE retVal = DTWAIN_GetOCRText(Engine, nPageNo, (dSize>0) ? &arg[0] : nullptr, dSize, pActualSize, nFlags);
     return null_terminator_copier(arg, Data, retVal);
 #else
     return DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, pActualSize, nFlags);
@@ -762,8 +784,8 @@ HANDLE DLLENTRY_DEF DTWAIN_GetOCRTextW(DTWAIN_OCRENGINE Engine, LONG nPageNo, LP
 #ifdef _UNICODE
     return DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, pActualSize, nFlags);
 #else
-    CTL_String arg(1024, 0);
-    HANDLE retVal = DTWAIN_GetOCRText(Engine, nPageNo, &arg[0], dSize, pActualSize, nFlags);
+    CTL_String arg(dSize, 0);
+    HANDLE retVal = DTWAIN_GetOCRText(Engine, nPageNo, (dSize>0)?&arg[0] : nullptr, dSize, pActualSize, nFlags);
     return null_terminator_copier(arg, Data, retVal);
 #endif
 }
@@ -771,8 +793,8 @@ HANDLE DLLENTRY_DEF DTWAIN_GetOCRTextW(DTWAIN_OCRENGINE Engine, LONG nPageNo, LP
 LONG DLLENTRY_DEF DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, LPSTR buffer, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRVersionInfo(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRVersionInfo(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, buffer, retVal);
 #else
     return DTWAIN_GetOCRVersionInfo(Engine, buffer, nLength);
@@ -784,8 +806,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buff
 #ifdef _UNICODE
     return DTWAIN_GetOCRVersionInfo(Engine, buffer, nLength);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetOCRVersionInfo(Engine, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    LONG retVal = DTWAIN_GetOCRVersionInfo(Engine, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, buffer, retVal);
 #endif
 }
@@ -793,8 +815,8 @@ LONG DLLENTRY_DEF DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buff
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementStringA(DTWAIN_PDFTEXTELEMENT TextElement, LPSTR szData, LONG maxLen, LONG Flags)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetPDFTextElementString(TextElement, &arg[0], static_cast<LONG>(arg.size()), Flags);
+    CTL_WString arg(maxLen, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetPDFTextElementString(TextElement, (maxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()), Flags);
     return null_terminator_copier(arg, szData, retVal);
 #else
     return DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags);
@@ -806,8 +828,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT T
 #ifdef _UNICODE
     return DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags);
 #else
-    CTL_String arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetPDFTextElementString(TextElement, &arg[0], static_cast<LONG>(arg.size()), Flags);
+    CTL_String arg(maxLen, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetPDFTextElementString(TextElement, (maxLen>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()), Flags);
     return null_terminator_copier(arg, szData, retVal);
 #endif
 }
@@ -815,8 +837,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT T
 LONG DLLENTRY_DEF DTWAIN_GetPDFType1FontNameA(LONG FontVal, LPSTR szFont, LONG nChars)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    LONG retVal = DTWAIN_GetPDFType1FontName(FontVal, &arg[0], nChars);
+    CTL_WString arg(nChars, 0);
+    LONG retVal = DTWAIN_GetPDFType1FontName(FontVal, (nChars>0) ? &arg[0] : nullptr, nChars);
     return null_terminator_copier(arg, szFont, retVal);
 #else
     return DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars);
@@ -828,8 +850,8 @@ LONG DLLENTRY_DEF DTWAIN_GetPDFType1FontNameW(LONG FontVal, LPWSTR szFont, LONG 
 #ifdef _UNICODE
     return DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars);
 #else
-    CTL_String arg(1024, 0);
-    LONG retVal = DTWAIN_GetPDFType1FontName(FontVal, &arg[0], nChars);
+    CTL_String arg(nChars, 0);
+    LONG retVal = DTWAIN_GetPDFType1FontName(FontVal, (nChars>0) ? &arg[0] : nullptr, nChars);
     return null_terminator_copier(arg, szFont, retVal);
 #endif
 }
@@ -837,8 +859,8 @@ LONG DLLENTRY_DEF DTWAIN_GetPDFType1FontNameW(LONG FontVal, LPWSTR szFont, LONG 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source, LPSTR Suffix, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetPrinterSuffixString(Source, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_WString arg(nLength, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetPrinterSuffixString(Source, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, Suffix, retVal);
 #else
     return DTWAIN_GetPrinterSuffixString(Source, Suffix, nLength);
@@ -850,8 +872,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source, LP
 #ifdef _UNICODE
     return DTWAIN_GetPrinterSuffixString(Source, Suffix, nLength);
 #else
-    CTL_String arg(1024, 0);
-    DTWAIN_BOOL retVal = DTWAIN_GetPrinterSuffixString(Source, &arg[0], static_cast<LONG>(arg.size()));
+    CTL_String arg(nLength, 0);
+    DTWAIN_BOOL retVal = DTWAIN_GetPrinterSuffixString(Source, (nLength>0) ? &arg[0] : nullptr, static_cast<LONG>(arg.size()));
     return null_terminator_copier(arg, Suffix, retVal);
 #endif
 }
@@ -905,8 +927,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LO
 #ifdef _UNICODE
     return DTWAIN_GetSaveFileName(Source, fName, nMaxLen);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetSaveFileName(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nMaxLen, 0);
+    LONG retVal = DTWAIN_GetSaveFileName(Source, (nMaxLen>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, fName, retVal);
 #endif
 }
@@ -914,8 +936,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LO
 LONG DLLENTRY_DEF DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetSaveFileName(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nMaxLen, 0);
+    LONG retVal = DTWAIN_GetSaveFileName(Source, (nMaxLen>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, fName, retVal);
 #else
     return DTWAIN_GetSaveFileName(Source, fName, nMaxLen);
@@ -947,8 +969,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetShadowStringA(DTWAIN_SOURCE Source, LPSTR Sha
 LONG DLLENTRY_DEF DTWAIN_GetSourceManufacturerA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceManufacturer(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceManufacturer(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #else
     return DTWAIN_GetSourceManufacturer(Source, szProduct, nLength);
@@ -960,8 +982,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceManufacturerW(DTWAIN_SOURCE Source, LPWSTR szP
 #ifdef _UNICODE
     return DTWAIN_GetSourceManufacturer(Source, szProduct, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceManufacturer(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceManufacturer(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #endif
 }
@@ -971,8 +993,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceProductFamilyW(DTWAIN_SOURCE Source, LPWSTR sz
 #ifdef _UNICODE
     return DTWAIN_GetSourceProductFamily(Source, szProduct, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceProductFamily(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceProductFamily(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #endif
 }
@@ -980,8 +1002,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceProductFamilyW(DTWAIN_SOURCE Source, LPWSTR sz
 LONG DLLENTRY_DEF DTWAIN_GetSourceProductFamilyA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceProductFamily(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceProductFamily(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #else
     return DTWAIN_GetSourceProductFamily(Source, szProduct, nLength);
@@ -991,8 +1013,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceProductFamilyA(DTWAIN_SOURCE Source, LPSTR szP
 LONG DLLENTRY_DEF DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceProductName(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceProductName(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #else
     return DTWAIN_GetSourceProductName(Source, szProduct, nLength);
@@ -1004,8 +1026,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szPr
 #ifdef _UNICODE
     return DTWAIN_GetSourceProductName(Source, szProduct, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceProductName(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceProductName(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #endif
 }
@@ -1013,8 +1035,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szPr
 LONG DLLENTRY_DEF DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceVersionInfo(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceVersionInfo(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #else
     return DTWAIN_GetSourceVersionInfo(Source, szProduct, nLength);
@@ -1026,8 +1048,8 @@ LONG DLLENTRY_DEF DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, LPWSTR szPr
 #ifdef _UNICODE
     return DTWAIN_GetSourceVersionInfo(Source, szProduct, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetSourceVersionInfo(Source, &args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetSourceVersionInfo(Source, (nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szProduct, retVal);
 #endif
 }
@@ -1037,8 +1059,8 @@ LONG DLLENTRY_DEF DTWAIN_GetTempFileDirectoryW(LPWSTR szFilePath, LONG nLength)
 #ifdef _UNICODE
     return DTWAIN_GetTempFileDirectory(szFilePath, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetTempFileDirectory(&args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetTempFileDirectory((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szFilePath, retVal);
 #endif
 }
@@ -1046,8 +1068,8 @@ LONG DLLENTRY_DEF DTWAIN_GetTempFileDirectoryW(LPWSTR szFilePath, LONG nLength)
 LONG DLLENTRY_DEF DTWAIN_GetTempFileDirectoryA(LPSTR szFilePath, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetTempFileDirectory(&args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetTempFileDirectory((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, szFilePath, retVal);
 #else
     return DTWAIN_GetTempFileDirectory(szFilePath, nLength);
@@ -1184,8 +1206,8 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength)
 #ifdef _UNICODE
     return DTWAIN_GetVersionInfo(lpszVer, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetVersionInfo(&args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetVersionInfo((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, lpszVer, retVal);
 #endif
 }
@@ -1193,8 +1215,8 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength)
 LONG DLLENTRY_DEF DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetVersionInfo(&args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetVersionInfo((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, lpszVer, retVal);
 #else
     return DTWAIN_GetVersionInfo(lpszVer, nLength);
@@ -1206,8 +1228,8 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionStringW(LPWSTR lpszVer, LONG nLength)
 #ifdef _UNICODE
     return DTWAIN_GetVersionString(lpszVer, nLength);
 #else
-    CTL_String args(1024, 0);
-    LONG retVal = DTWAIN_GetVersionString(&args[0], static_cast<LONG>(args.size()));
+    CTL_String args(nLength, 0);
+    LONG retVal = DTWAIN_GetVersionString((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, lpszVer, retVal);
 #endif
 }
@@ -1215,8 +1237,8 @@ LONG DLLENTRY_DEF DTWAIN_GetVersionStringW(LPWSTR lpszVer, LONG nLength)
 LONG DLLENTRY_DEF DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength)
 {
 #ifdef _UNICODE
-	CTL_WString args(1024, 0);
-	LONG retVal = DTWAIN_GetLibraryPath(&args[0], static_cast<LONG>(args.size()));
+	CTL_WString args(nLength, 0);
+	LONG retVal = DTWAIN_GetLibraryPath((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
 	return null_terminator_copier(args, lpszVer, retVal);
 #else
 	return DTWAIN_GetLibraryPath(lpszVer, nLength);
@@ -1228,8 +1250,8 @@ LONG DLLENTRY_DEF DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength)
 #ifdef _UNICODE
 	return DTWAIN_GetLibraryPath(lpszVer, nLength);
 #else
-	CTL_String args(1024, 0);
-	LONG retVal = DTWAIN_GetLibraryPath(&args[0], static_cast<LONG>(args.size()));
+	CTL_String args(nLength, 0);
+	LONG retVal = DTWAIN_GetLibraryPath((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
 	return null_terminator_copier(args, lpszVer, retVal);
 #endif
 }
@@ -1237,8 +1259,8 @@ LONG DLLENTRY_DEF DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength)
 LONG DLLENTRY_DEF DTWAIN_GetVersionStringA(LPSTR lpszVer, LONG nLength)
 {
 #ifdef _UNICODE
-    CTL_WString args(1024, 0);
-    LONG retVal = DTWAIN_GetVersionString(&args[0], static_cast<LONG>(args.size()));
+    CTL_WString args(nLength, 0);
+    LONG retVal = DTWAIN_GetVersionString((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
     return null_terminator_copier(args, lpszVer, retVal);
 #else
     return DTWAIN_GetVersionString(lpszVer, nLength);
@@ -1250,8 +1272,8 @@ LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringW(LPWSTR lpszVer, LONG nLength)
 #ifdef _UNICODE
 	return DTWAIN_GetShortVersionString(lpszVer, nLength);
 #else
-	CTL_String args(1024, 0);
-	LONG retVal = DTWAIN_GetShortVersionString(&args[0], static_cast<LONG>(args.size()));
+	CTL_String args(nLength, 0);
+	LONG retVal = DTWAIN_GetShortVersionString((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
 	return null_terminator_copier(args, lpszVer, retVal);
 #endif
 }
@@ -1259,8 +1281,8 @@ LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringW(LPWSTR lpszVer, LONG nLength)
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringA(LPSTR lpszVer, LONG nLength)
 {
 #ifdef _UNICODE
-	CTL_WString args(1024, 0);
-	LONG retVal = DTWAIN_GetShortVersionString(&args[0], static_cast<LONG>(args.size()));
+	CTL_WString args(nLength, 0);
+	LONG retVal = DTWAIN_GetShortVersionString((nLength>0) ? &args[0] : nullptr, static_cast<LONG>(args.size()));
 	return null_terminator_copier(args, lpszVer, retVal);
 #else
 	return DTWAIN_GetShortVersionString(lpszVer, nLength);
@@ -2205,5 +2227,23 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDoubleFeedDetectLengthStringW(DTWAIN_SOURCE S
     return DTWAIN_SetDoubleFeedDetectLengthString(Source, szLength);
 #else
     return DTWAIN_SetDoubleFeedDetectLengthString(Source, StringConversion::Convert_Wide_To_Native(szLength).c_str());
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT TextElement, LPCWSTR szString, LONG Flags)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetPDFTextElementString(TextElement, szString, Flags);
+#else
+    return DTWAIN_SetPDFTextElementString(TextElement, StringConversion::Convert_Wide_To_Native(szString).c_str(), Flags);
+#endif
+}
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringA(DTWAIN_PDFTEXTELEMENT TextElement, LPCSTR szString, LONG Flags)
+{
+#ifdef _UNICODE
+    return DTWAIN_SetPDFTextElementString(TextElement, StringConversion::Convert_Ansi_To_Native(szString).c_str(), Flags);
+#else
+    return DTWAIN_SetPDFTextElementString(TextElement, szString, Flags);
 #endif
 }

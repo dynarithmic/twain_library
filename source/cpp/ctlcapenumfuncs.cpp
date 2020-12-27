@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ using namespace dynarithmic;
 /////////////////////////////////////////////////////////////////////////
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCustomCapsEx2(DTWAIN_SOURCE Source)
 {
-	LOG_FUNC_ENTRY_PARAMS((Source))
-	DTWAIN_ARRAY pArray = 0;
-	DTWAIN_EnumCustomCaps(Source, &pArray);
-	LOG_FUNC_EXIT_PARAMS(pArray)
-	CATCH_BLOCK(DTWAIN_ARRAY(nullptr))
+    LOG_FUNC_ENTRY_PARAMS((Source))
+    DTWAIN_ARRAY pArray = 0;
+    DTWAIN_EnumCustomCaps(Source, &pArray);
+    LOG_FUNC_EXIT_PARAMS(pArray)
+    CATCH_BLOCK(DTWAIN_ARRAY(nullptr))
 }
 
 

@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -36,8 +36,8 @@ int CTL_PngIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhFi
     if (!IsValidBitDepth(DTWAIN_PNG, m_pDib->GetBitsPerPixel()))
         return DTWAIN_ERR_INVALID_BITDEPTH;
 
-    return SaveToFile(hDib, szFile, FIF_PNG, 0, m_ImageInfoEx.UnitOfMeasure, 
-						{m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY},
-						{ 0.01, 0.01, 0, 0 });
+    return SaveToFile(hDib, szFile, FIF_PNG, 0, m_ImageInfoEx.UnitOfMeasure,
+                        {m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY},
+                        { 0.01, 0.01, 0, 0 });
 }
 

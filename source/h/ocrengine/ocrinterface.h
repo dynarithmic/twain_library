@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@
 #include <algorithm>
 
 #include "dtwainc.h"
-#include "tr1defs.h"
 #include "ctlobstr.h"
 #define OCROPTION_GETINFO         0
 #define OCROPTION_STORECLEANTEXT1 1
@@ -108,11 +107,11 @@ namespace dynarithmic
                                          CapOperations(capOperations),
                                          CapContainerType(4,0),
                                          m_bIsSingleValue(isSingleValue),
-										 doubleData{},
-										 longData{}
+                                         doubleData{},
+                                         longData{}
                     { }
 
-		OCRCapInfo() : CapValue(0), CapDataType(-1), CapOperations(-1), m_bIsSingleValue(false), doubleData{}, longData{} { }
+        OCRCapInfo() : CapValue(0), CapDataType(-1), CapOperations(-1), m_bIsSingleValue(false), doubleData{}, longData{} { }
 
         LONG GetCapDataType() const { return CapDataType; }
         LONG GetCapOperations() const { return CapOperations; }

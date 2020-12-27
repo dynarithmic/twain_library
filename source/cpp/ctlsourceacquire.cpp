@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -313,25 +313,25 @@ DTWAIN_ARRAY dynarithmic::SourceAcquireWorkerThread(SourceAcquireOptions& opts)
                 LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
             }
             break;
-    	
-		case ACQUIREAUDIONATIVE:
-		case ACQUIREAUDIONATIVEEX:
-			if (DTWAIN_LLAcquireAudioNative(opts) == -1L)
-			{
-				opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
-				LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
-			}
-			if (opts.getAcquireType() == ACQUIREAUDIONATIVEEX)
-				pSource->SetUserAcquisitionArray(opts.getUserArray());
-			break;
-    	
-		case ACQUIREAUDIOFILE:
-			if (DTWAIN_LLAcquireAudioFile(opts) == -1L)
-			{
-				opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
-				LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
-			}
-			break;
+
+        case ACQUIREAUDIONATIVE:
+        case ACQUIREAUDIONATIVEEX:
+            if (DTWAIN_LLAcquireAudioNative(opts) == -1L)
+            {
+                opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
+                LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
+            }
+            if (opts.getAcquireType() == ACQUIREAUDIONATIVEEX)
+                pSource->SetUserAcquisitionArray(opts.getUserArray());
+            break;
+
+        case ACQUIREAUDIOFILE:
+            if (DTWAIN_LLAcquireAudioFile(opts) == -1L)
+            {
+                opts.setStatus(DTWAIN_TN_ACQUIREFAILED);
+                LOG_FUNC_EXIT_PARAMS((DTWAIN_ARRAY)NULL)
+            }
+            break;
 
     }
 
@@ -421,7 +421,7 @@ DTWAIN_ACQUIRE  dynarithmic::LLAcquireImage(SourceAcquireOptions& opts)
             // Turn off NATIVE and BUFFERED modes if set
             lFileFlags = lFileFlags & ~(DTWAIN_USENATIVE | DTWAIN_USEBUFFERED);
 
-			CTL_TwainAppMgr::GetFileTransferDefaults(pSource, strFile, nFileType);
+            CTL_TwainAppMgr::GetFileTransferDefaults(pSource, strFile, nFileType);
         }
 
         // Check if the file type is supported

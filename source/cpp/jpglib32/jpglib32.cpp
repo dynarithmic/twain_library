@@ -142,8 +142,8 @@ LONG FUNCCONVENTION DTWLIB_JPEGWriteFile(LPCTSTR szFile,
             factor = 1.0;
         break;
     }
-    cinfo.X_density = (UINT16)(ResX * factor); 
-    cinfo.Y_density = (UINT16)(ResY * factor); 
+    cinfo.X_density = (UINT16)(ResX * factor);
+    cinfo.Y_density = (UINT16)(ResY * factor);
 
     if (IsGrayScale( pImageToUse, bpp))
     {
@@ -242,16 +242,16 @@ int GetDibPalette(LPBITMAPINFO lpbi,LPSTR palette)
 bool IsGrayScale(BYTE *pImage, int bpp)
 {
     LPBITMAPINFOHEADER pHeader = (LPBITMAPINFOHEADER)pImage;
-	RGBQUAD* ppal=GetPalettePtr(pImage, bpp);
-	if(!ppal || pHeader->biClrUsed == 0 )
+    RGBQUAD* ppal=GetPalettePtr(pImage, bpp);
+    if(!ppal || pHeader->biClrUsed == 0 )
         return false;
 
-	for(DWORD i=0; i<pHeader->biClrUsed;i++)
+    for(DWORD i=0; i<pHeader->biClrUsed;i++)
     {
-		if (ppal[i].rgbBlue!=i || ppal[i].rgbGreen!=i || ppal[i].rgbRed!=i)
+        if (ppal[i].rgbBlue!=i || ppal[i].rgbGreen!=i || ppal[i].rgbRed!=i)
             return false;
-	}
-	return true;
+    }
+    return true;
 }
 
 BYTE * GetDibBits(BYTE *pDib)
@@ -268,14 +268,14 @@ BYTE * GetDibBits(BYTE *pDib)
 
 void RGB2BGR(BYTE *buffer, int length, int nColors)
 {
-	if (buffer &&  nColors ==0)
+    if (buffer &&  nColors ==0)
     {
-		BYTE temp;
-		for (int i=0;i<length;i+=3)
+        BYTE temp;
+        for (int i=0;i<length;i+=3)
         {
-			temp = buffer[i]; buffer[i] = buffer[i+2]; buffer[i+2] = temp;
-		}
-	}
+            temp = buffer[i]; buffer[i] = buffer[i+2]; buffer[i+2] = temp;
+        }
+    }
 }
 
 RGBQUAD* GetPalettePtr(BYTE *pDibData, int bpp)
