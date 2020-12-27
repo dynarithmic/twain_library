@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ int ImageXferFileWriter::CopyDibToFile(CTL_TwainDibPtr pCurDib,
     if ( !bIsJobControl)
     {
         // Adjust name if the image page > 0
-        CTL_StringType strTempFile = m_pSource->GetAcquireFile(); 
+        CTL_StringType strTempFile = m_pSource->GetAcquireFile();
         CTL_StringType s;
 
         if ( !MultipageOption || MultipageOption == DIB_MULTI_FIRST )
@@ -257,7 +257,7 @@ LONG ImageXferFileWriter::MergeDuplexFiles()
 //    OFSTRUCT of;
 //    int nHandle;
     int MultiPageOption = DIB_MULTI_FIRST;
-    CTL_StringType strTempFile = m_pSource->GetAcquireFile(); 
+    CTL_StringType strTempFile = m_pSource->GetAcquireFile();
     m_pSource->SetActualFileName(strTempFile);
     CTL_TwainAppMgr::SendTwainMsgToWindow(m_pSource->GetTwainSession(), NULL, DTWAIN_TN_FILENAMECHANGING, (LPARAM)m_pSource);
     CTL_StringType strTempFileNew = m_pSource->GetActualFileName();
@@ -269,7 +269,7 @@ LONG ImageXferFileWriter::MergeDuplexFiles()
     bool bLastWriteDone = false;
     int nIncrement[2] = {0,0};
     int nCurPage[2] ={0,0};
-	int nWhichSide[2] = { 0,0 };
+    int nWhichSide[2] = { 0,0 };
 
     LONG nFlags = m_pSource->GetManualDuplexModeFlags();
     if ( bNotManualDuplex )

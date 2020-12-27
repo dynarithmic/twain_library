@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 namespace dynarithmic
 {
     enum { ACQUIRENATIVE=1, ACQUIREBUFFER, ACQUIREFILE, ACQUIRECLIPBOARD, ACQUIRENATIVEEX, ACQUIREBUFFEREX,
-		ACQUIREAUDIONATIVE, ACQUIREAUDIOFILE, ACQUIREAUDIONATIVEEX};
+        ACQUIREAUDIONATIVE, ACQUIREAUDIOFILE, ACQUIREAUDIONATIVEEX};
     struct SourceAcquireOptions : NotImpl<SourceAcquireOptions>
     {
         DTWAIN_HANDLE DLLHandle;
@@ -141,7 +141,7 @@ namespace dynarithmic
     DTWAIN_ACQUIRE    DTWAIN_LLAcquireBuffered( SourceAcquireOptions& opts);
     DTWAIN_ACQUIRE    DTWAIN_LLAcquireFile( SourceAcquireOptions& opts );
     DTWAIN_ACQUIRE    DTWAIN_LLAcquireToClipboard( SourceAcquireOptions& opts);
-	DTWAIN_ACQUIRE    DTWAIN_LLAcquireAudioNative(SourceAcquireOptions& opts);
-	DTWAIN_ACQUIRE	  DTWAIN_LLAcquireAudioFile(SourceAcquireOptions& opts);
+    DTWAIN_ACQUIRE    DTWAIN_LLAcquireAudioNative(SourceAcquireOptions& opts);
+    DTWAIN_ACQUIRE    DTWAIN_LLAcquireAudioFile(SourceAcquireOptions& opts);
 }
 #endif

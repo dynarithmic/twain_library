@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -131,19 +131,19 @@ class CTL_ErrorStruct
             m_pOrigin(nullptr),
             m_pDest(nullptr),
             m_pData(nullptr),
-			m_nStructType(0),
-			m_nTWCCErrorCodes(0),
-			m_nTWRCCodes(0),
-			m_Key(0,0,0) {}
+            m_nStructType(0),
+            m_nTWCCErrorCodes(0),
+            m_nTWRCCodes(0),
+            m_Key(0,0,0) {}
 
         CTL_ErrorStruct(LONG nDG, UINT nDAT, UINT nMsg) :
                 m_pOrigin(nullptr),
                 m_pDest(nullptr),
                 m_pData(nullptr),
-				m_nStructType(0),
-				m_nTWCCErrorCodes(0),
-				m_nTWRCCodes(0),
-				m_Key{nDG,nDAT,nMsg}
+                m_nStructType(0),
+                m_nTWCCErrorCodes(0),
+                m_nTWRCCodes(0),
+                m_Key{nDG,nDAT,nMsg}
         {}
 
         void    SetKey(const key_type& nVal) { m_Key = nVal; }

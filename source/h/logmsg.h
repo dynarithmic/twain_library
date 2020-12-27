@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -67,17 +67,17 @@ namespace dynarithmic
     class CLogSystem
     {
     public:
-            enum {FILE_LOGGING, DEBUG_WINDOW_LOGGING, CONSOLE_LOGGING};
+        enum {FILE_LOGGING, DEBUG_WINDOW_LOGGING, CONSOLE_LOGGING};
 
        /////////////////////////////////////////////////////////////////////////////
-            std::unordered_map<int, std::shared_ptr<CBaseLogger>> app_logger_map;
+        std::unordered_map<int, std::shared_ptr<CBaseLogger>> app_logger_map;
         CLogSystem();
        ~CLogSystem();
 
        /////////////////////////////////////////////////////////////////////////////
-           void     InitFileLogging(LPCTSTR pOutputFilename, HINSTANCE hInst, bool bAppend);
-           void     InitConsoleLogging(HINSTANCE hInst); // adds console.
-           void     InitDebugWindowLogging(HINSTANCE hInst); // adds win debug logging.
+       void     InitFileLogging(LPCTSTR pOutputFilename, HINSTANCE hInst, bool bAppend);
+       void     InitConsoleLogging(HINSTANCE hInst); // adds console.
+       void     InitDebugWindowLogging(HINSTANCE hInst); // adds win debug logging.
 
        /////////////////////////////////////////////////////////////////////////////
        // output text, just like TRACE or printf
@@ -102,33 +102,33 @@ namespace dynarithmic
 
        bool     Flush();
 
-           void     PrintBanner(bool bStarted = true);
+       void     PrintBanner(bool bStarted = true);
 
        CTL_StringType GetAppName() const {return m_csAppName;}
        void OutputDebugStringFull(const CTL_StringType& s);
        CTL_StringType GetDebugStringFull(const CTL_StringType& s);
 
     protected:
-        CTL_StringType  m_csAppName;
-        CTL_StringType  m_csFileName;
+       CTL_StringType  m_csAppName;
+       CTL_StringType  m_csFileName;
 
        /////////////////////////////////////////////////////////////////////////////
        // controlling stuff
-        bool     m_bEnable;
-        bool     m_bPrintTime;
-        bool     m_bPrintAppName;
-        bool     m_bFileOpenedOK;
-        bool     m_bErrorDisplayed;
+       bool     m_bEnable;
+       bool     m_bPrintTime;
+       bool     m_bPrintAppName;
+       bool     m_bFileOpenedOK;
+       bool     m_bErrorDisplayed;
 
        /////////////////////////////////////////////////////////////////////////////
        // string utils
        CTL_StringType GetBaseDir(const CTL_StringType & path);
        CTL_StringType GetBaseName(const CTL_StringType & path);
-           void GetModuleName(HINSTANCE hInst);
-        bool WriteOnDemand(const CTL_String& fmt);
+       void GetModuleName(HINSTANCE hInst);
+       bool WriteOnDemand(const CTL_String& fmt);
 
-           private:
-               void InitLogger(int loggerType, LPCTSTR pOutputFilename, HINSTANCE hInst, bool bAppend);
+       private:
+           void InitLogger(int loggerType, LPCTSTR pOutputFilename, HINSTANCE hInst, bool bAppend);
     };
 }
 #endif

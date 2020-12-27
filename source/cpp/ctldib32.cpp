@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -400,21 +400,21 @@ HPALETTE CTL_TwainDibInfo::GetPalette() const
 };
 */
 // Construction
-CTL_TwainDib::CTL_TwainDib() : m_bAutoDeletePalette(false), m_bJpegProgressive(false), 
-								m_bAutoDelete(false), m_bIsValid(false), m_nJpegQuality(75)
+CTL_TwainDib::CTL_TwainDib() : m_bAutoDeletePalette(false), m_bJpegProgressive(false),
+                                m_bAutoDelete(false), m_bIsValid(false), m_nJpegQuality(75)
 { }
 
-CTL_TwainDib::CTL_TwainDib(HANDLE hDib, HWND hWnd) : m_bAutoDelete(true), m_bIsValid(true), 
+CTL_TwainDib::CTL_TwainDib(HANDLE hDib, HWND hWnd) : m_bAutoDelete(true), m_bIsValid(true),
 m_bAutoDeletePalette(false),m_bJpegProgressive(false), m_nJpegQuality(75)
 {
     m_TwainDibInfo.SetDib(hDib);
 }
 
 // Read a Dib from a file
-CTL_TwainDib::CTL_TwainDib(LPCTSTR lpszFileName, HWND hWnd) : m_bAutoDeletePalette(false), 
-															  m_bIsValid(true), 
-															  m_bJpegProgressive(false),
-															  m_nJpegQuality(75)
+CTL_TwainDib::CTL_TwainDib(LPCTSTR lpszFileName, HWND hWnd) : m_bAutoDeletePalette(false),
+                                                              m_bIsValid(true),
+                                                              m_bJpegProgressive(false),
+                                                              m_nJpegQuality(75)
 {
     Init();
     m_TwainDibInfo.SetDib( ReadDibBitmap( lpszFileName ));
@@ -580,8 +580,8 @@ int CTL_TwainDib::WriteDibBitmap (DTWAINImageInfoEx& ImageInfo,
                 LONG InputFormat = vValues[0];
                 pHandler = std::make_unique<CTL_TextIOHandler>(this, InputFormat, ImageInfo, pHandle->m_pOCRDefaultEngine.get());
             }
-			else
-				return DTWAIN_ERR_BADPARAM;
+            else
+                return DTWAIN_ERR_BADPARAM;
         }
         break;
 
@@ -1221,7 +1221,7 @@ bool CTL_TwainDib::FlipBitMap(bool /*bRGB*/)
 
             // Copy temp over hBM
             pbuffer = (unsigned char HUGEDEF *) pdib;
-            pbuffer += sizeof(BITMAPINFOHEADER);
+             pbuffer += sizeof(BITMAPINFOHEADER);
             pbuffer += pdib->bmiHeader.biClrUsed * sizeof(RGBQUAD);
 
             memcpy(pbuffer, tempptrsave, SizeImage);

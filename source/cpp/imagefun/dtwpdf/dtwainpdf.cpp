@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -333,8 +333,8 @@ std::string MakeCompatiblePDFString(const std::string& sString)
 
 static int NoCompress(const std::string& inData, std::string& outData)
 {
-	outData = inData;
-	return 1;
+    outData = inData;
+    return 1;
 }
 
 static int EncodeVectorStream(const vector<char>& InputStream,
@@ -343,7 +343,7 @@ static int EncodeVectorStream(const vector<char>& InputStream,
 
     static std::unordered_map<PdfDocument::CompressTypes, std::function<int(const std::string&, std::string&)>>
                 compress_fn = { { PdfDocument::NO_COMPRESS, ::NoCompress },
-								{ PdfDocument::A85_COMPRESS, ::ASCII85Encode },
+                                { PdfDocument::A85_COMPRESS, ::ASCII85Encode },
                                 { PdfDocument::AHEX_COMPRESS, ::ASCIIHexEncode },
                                 { PdfDocument::FLATE_COMPRESS, ::FlateEncode}, };
 
@@ -465,16 +465,16 @@ PdfDocument::PdfDocument() :
     m_bIsEncrypted(false),
     m_bASCIICompression(false),
     m_bIsNoCompression(false),
-	m_nCurContentsObj(0),
-	m_nCurObjNum(0),
-	m_nCurPage(0),
-	m_nProcSetObj(0),
+    m_nCurContentsObj(0),
+    m_nCurObjNum(0),
+    m_nCurPage(0),
+    m_nProcSetObj(0),
     CurFontRefNum(START_FONTREF_NUM),
-	m_mediaMap(CTL_TwainDLLHandle::GetPDFMediaMap())
+    m_mediaMap(CTL_TwainDLLHandle::GetPDFMediaMap())
 {
-	auto iter = m_mediaMap.find(DTWAIN_FS_USLETTER);
-	if (iter != m_mediaMap.end())
-		m_smediabox = iter->second.second;
+    auto iter = m_mediaMap.find(DTWAIN_FS_USLETTER);
+    if (iter != m_mediaMap.end())
+        m_smediabox = iter->second.second;
 }
 
 void PdfDocument::SetPDFVersion(int major, int minor)
@@ -1481,8 +1481,8 @@ void ContentsObject::CreateFontDictAndText(int startObjNum, int& nextObjNum)
                 sprintf(szBuf, "\n%d Tr ", (*pIt1)->renderMode);
                 m_sText += szBuf;
 
-				// Get the position
-				sprintf(szBuf, "\n1 0 0 1 %lf %lf Tm\n", (*pIt1)->xpos, (*pIt1)->ypos);
+                // Get the position
+                sprintf(szBuf, "\n1 0 0 1 %lf %lf Tm\n", (*pIt1)->xpos, (*pIt1)->ypos);
                 m_sText += szBuf;
 
                 // Get the leading
@@ -1580,7 +1580,7 @@ void ContentsObject::ComposeObject()
 
      // Encrypt this block of data if encryption is set
     const char *pStreamToWrite;
-	pStreamToWrite = VecIn.data();
+    pStreamToWrite = VecIn.data();
 
     AppendContents("<< ");
 
@@ -2109,8 +2109,8 @@ void ImageObject::ComposeObject()
     sprintf(szBuf, "/%s\n", m_sPDFImgName.c_str());
     AppendContents( szBuf );
     PdfDocument *pParent = GetParent();
-	if (!pParent)
-		return;
+    if (!pParent)
+        return;
 
     // do a85 encoding here for a test
     if ( pParent->IsASCIICompressed() )

@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -45,12 +45,12 @@ CTL_TwainDLLHandle::CTL_TwainDLLHandle() :
             m_nSourceCloseMode(DTWAIN_SourceCloseModeFORCE),
             m_nUIMode(DTWAIN_UIModeOPEN),
             m_bNotificationsUsed(false),
-			m_bOpenSourceOnSelect(true),
-			m_pAppMgr(nullptr),
-			m_nSaveAsFlags(0),
-			m_SaveAsPos{},
-			m_pSaveAsDlgProc(nullptr),
-			m_bUseProxy(false),
+            m_bOpenSourceOnSelect(true),
+            m_pAppMgr(nullptr),
+            m_nSaveAsFlags(0),
+            m_SaveAsPos{},
+            m_pSaveAsDlgProc(nullptr),
+            m_bUseProxy(false),
             m_pCallbackFn(nullptr),
             m_pCallbackFn64(nullptr),
             m_lCallbackData(0),
@@ -86,7 +86,7 @@ void CTL_TwainDLLHandle::RemoveAllSourceMaps()
 
 void CTL_TwainDLLHandle::InitializeResourceRegistry()
 {
-	auto default_values = GetLangResourceNames();
+    auto default_values = GetLangResourceNames();
     m_ResourceRegistry.clear();
     for (size_t i = 0; i < default_values.size(); ++i)
         m_ResourceRegistry.insert({ default_values[i], boost::filesystem::exists(GetResourceFileNameA(default_values[i].c_str())) });
@@ -147,17 +147,17 @@ CTL_TwainMemoryFunctions*     CTL_TwainDLLHandle::s_TwainMemoryFunc = nullptr;
 CTL_LegacyTwainMemoryFunctions CTL_TwainDLLHandle::s_TwainLegacyFunc;
 CTL_Twain2MemoryFunctions      CTL_TwainDLLHandle::s_Twain2Func;
 int                     CTL_TwainDLLHandle::s_TwainDSMSearchOrder = DTWAIN_TWAINDSMSEARCH_WSO;
-CTL_StringType			CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("CWSOU");
+CTL_StringType          CTL_TwainDLLHandle::s_TwainDSMSearchOrderStr = StringConversion::Convert_Ansi_To_Native("CWSOU");
 CTL_StringType          CTL_TwainDLLHandle::s_TwainDSMUserDirectory;
 CTL_StringType          CTL_TwainDLLHandle::s_strResourcePath;
-bool					CTL_TwainDLLHandle::s_multipleThreads = false;
+bool                    CTL_TwainDLLHandle::s_multipleThreads = false;
 DTWAIN_LOGGER_PROC      CTL_TwainDLLHandle::s_pLoggerCallback = nullptr;
 DTWAIN_LOGGER_PROCA     CTL_TwainDLLHandle::s_pLoggerCallbackA = nullptr;
 DTWAIN_LOGGER_PROCW     CTL_TwainDLLHandle::s_pLoggerCallbackW = nullptr;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserData = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataA = 0;
 DTWAIN_LONG64           CTL_TwainDLLHandle::s_pLoggerCallback_UserDataW = 0;
-HFONT					CTL_TwainDLLHandle::s_DialogFont = NULL;
+HFONT                   CTL_TwainDLLHandle::s_DialogFont = NULL;
 CTL_TwainDLLHandle::CTL_PDFMediaMap CTL_TwainDLLHandle::s_PDFMediaMap;
 
 bool                    CTL_TwainDLLHandle::s_TwainCallbackSet = false;

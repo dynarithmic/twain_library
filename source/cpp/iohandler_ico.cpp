@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ int CTL_IcoIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhFi
         if ( height > 255 || width > 255 )
             return DTWAIN_ERR_INVALIDICONFORMAT;
     }
-	if (!parent_directory_exists(szFile))
-		return DTWAIN_ERR_FILEOPEN;
+    if (!parent_directory_exists(szFile))
+        return DTWAIN_ERR_FILEOPEN;
     return SaveToFile(hDib, szFile, FIF_ICO, 0, DTWAIN_INCHES, { 0,0 });
 }

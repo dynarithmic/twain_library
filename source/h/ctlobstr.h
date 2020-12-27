@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -296,7 +296,7 @@ namespace dynarithmic
     template <typename StringType, typename CharType, typename StringTraits>
     struct StringWrapper_Impl
     {
-		typedef StringTraits traits_type;
+        typedef StringTraits traits_type;
         enum { DRIVE_POS, DRIVE_PATH, DIRECTORY_POS, NAME_POS, EXTENSION_POS };
         typedef std::vector<StringType> StringArrayType;
         // define string helper functions here
@@ -348,10 +348,10 @@ namespace dynarithmic
             str = StringTraits::GetEmptyString();
         }
 
-		static StringType ReplaceAll(const StringType& str, const StringType& findStr, const StringType& replaceStr)
-		{
-			return boost::algorithm::replace_all_copy(str, findStr, replaceStr);
-		}
+        static StringType ReplaceAll(const StringType& str, const StringType& findStr, const StringType& replaceStr)
+        {
+            return boost::algorithm::replace_all_copy(str, findStr, replaceStr);
+        }
 
         static StringType&  TrimRight(StringType& str, const CharType *lpszTrimStr)
         {
@@ -495,11 +495,11 @@ namespace dynarithmic
             rArray.push_back(BOOST_GENERIC_STRING(p.extension()));
         }
 
-		static StringArrayType SplitPath(const StringType& str)
-		{
-			StringArrayType sArrType;
-			SplitPath(str, sArrType);
-			return sArrType;
+        static StringArrayType SplitPath(const StringType& str)
+        {
+            StringArrayType sArrType;
+            SplitPath(str, sArrType);
+            return sArrType;
         }
 
         static StringType GetFileNameFromPath(const StringType& str)

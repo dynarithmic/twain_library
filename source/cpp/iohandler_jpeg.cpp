@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ int CTL_JpegIOHandler::WriteBitmap(LPCTSTR szFile, bool /*bOpenFile*/, int /*fhF
         flags |= JPEG_PROGRESSIVE;
     flags += m_ImageInfoEx.IsPDF ? m_ImageInfoEx.nPDFJpegQuality : m_ImageInfoEx.nJpegQuality;
 
-    return SaveToFile(hDib, szFile, FIF_JPEG, flags, m_ImageInfoEx.UnitOfMeasure, 
-	                  { m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY },
-					  { 0.01, 0.01, 0, 0 });
+    return SaveToFile(hDib, szFile, FIF_JPEG, flags, m_ImageInfoEx.UnitOfMeasure,
+                      { m_ImageInfoEx.ResolutionX, m_ImageInfoEx.ResolutionY },
+                      { 0.01, 0.01, 0, 0 });
 }

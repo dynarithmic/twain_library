@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -92,26 +92,26 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
     // if only a single page TIFF
     if (m_MultiPageStruct.Stage == 0 || m_MultiPageStruct.Stage == DIB_MULTI_FIRST)
     {
-		FIMULTIBITMAP *fp = nullptr;
-		CTL_String fname = StringConversion::Convert_NativePtr_To_Ansi(path);
-		{
-			std::ofstream ofs(fname.c_str());
-			if (!ofs)
-				return DTWAIN_ERR_FILEOPEN;
-		}
+        FIMULTIBITMAP *fp = nullptr;
+        CTL_String fname = StringConversion::Convert_NativePtr_To_Ansi(path);
+        {
+            std::ofstream ofs(fname.c_str());
+            if (!ofs)
+                return DTWAIN_ERR_FILEOPEN;
+        }
         if (m_MultiPageStruct.Stage != 0)
         {
-		fp = FreeImage_OpenMultiBitmap(FIF_TIFF, fname.c_str(), true, false, false, 0);
+            fp = FreeImage_OpenMultiBitmap(FIF_TIFF, fname.c_str(), true, false, false, 0);
             FreeImage_SetPageNumberEx(fp, 0);
-        if ( !fp )
-            return DTWAIN_ERR_FILEOPEN;
+            if ( !fp )
+                return DTWAIN_ERR_FILEOPEN;
         }
         m_MultiPageStruct.pUserData = fp;
-        }
-        else
-        if (m_MultiPageStruct.Stage == DIB_MULTI_LAST)
-        {
-            m_bWriteOk = TRUE;
+    }
+    else
+    if (m_MultiPageStruct.Stage == DIB_MULTI_LAST)
+    {
+        m_bWriteOk = TRUE;
         return DTWAIN_NO_ERROR;
     }
 
@@ -139,8 +139,8 @@ int CTIFFImageHandler::WriteGraphicFile(CTL_ImageIOHandler* ptrHandler, LPCTSTR 
 
     if (m_MultiPageStruct.Stage == 0)
     {
-		int flagsValue = (int)(m_ImageInfoEx.nJpegQuality << 24) | (compressionFlags[compression]);
-		auto retVal2 = im.saveEx(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), m_MultiPageStruct.Page, flagsValue);
+        int flagsValue = (int)(m_ImageInfoEx.nJpegQuality << 24) | (compressionFlags[compression]);
+        auto retVal2 = im.saveEx(FIF_TIFF, StringConversion::Convert_Native_To_Ansi(path).c_str(), m_MultiPageStruct.Page, flagsValue);
         if (retVal2 == 1)
         {
             ++m_MultiPageStruct.Page;

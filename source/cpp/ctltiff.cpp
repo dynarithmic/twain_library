@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTIFFCompressType(DTWAIN_SOURCE Source, LONG S
         if (bIsTiffMulti)
             p->SetAcquireFileType(p->GetMultiPageType(static_cast<CTL_TwainFileFormatEnum>(Setting)));
         else
-        p->SetAcquireFileType(static_cast<CTL_TwainFileFormatEnum>(Setting));
+            p->SetAcquireFileType(static_cast<CTL_TwainFileFormatEnum>(Setting));
         LOG_FUNC_EXIT_PARAMS(true)
     }
     LOG_FUNC_EXIT_PARAMS(false)

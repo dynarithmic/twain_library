@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -647,7 +647,9 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumLightSources(DTWAIN_SOURCE Source, LPDTWAIN_
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumLightSourcesEx(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsLightSourceSupported(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetLightSource(DTWAIN_SOURCE Source, LONG LightSource);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetLightSources(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY LightSources);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetLightSource(DTWAIN_SOURCE Source, LPLONG LightSource);
 
 /* Page failure action (sets what to do if a page fails to be acquired successfully) */
 /* These functions are not guaranteed to work if the Data Source does not behave correctly
@@ -699,10 +701,22 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumExtImageInfoTypes(DTWAIN_SOURCE Source, LPDT
    will exist */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
 
+/* Application adds an item to query the image information.  Before getting the Extended
+Image Information, the application will call DTWAIN_AddExtImageInfoQuery multiple times,
+each time for each Image Information desired  */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, LONG ExtImageInfo);
+
 /* This returns the data that the Source returned when the item is queried.  Application
    must make sure that the LPVOID passed in fits the data that is returned from the Source.
    Use DTWAIN_GetExtImageInfoItem to determine the type of data.   */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, LONG nWhich, LPDTWAIN_ARRAY Data);
+
+/* This returns the information pertaining to a certain item in the list.  The application
+will call this for each information retrieved from the Source.  This function does not
+return the actual data, only the information as to the number of items, data type, etc.
+that the Source reports for the data item.  Use DTWAIN_GetExtImageInfoData to get the
+data */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoItem(DTWAIN_SOURCE Source, LONG nWhich, LPLONG InfoID, LPLONG NumItems, LPLONG Type);
 
 /* Uninitializes the Extended Inmage information interface.  This also must be called  */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FreeExtImageInfo(DTWAIN_SOURCE Source);
@@ -845,6 +859,10 @@ DTWAIN_ARRAY		 DLLENTRY_DEF    DTWAIN_EnumHighlightValuesEx(DTWAIN_SOURCE Source
 /* ICAP_HALFTONES */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumHalftones(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumHalftonesEx(DTWAIN_SOURCE Source);
+
+/* ICAP_XRESOLUTION, ICAP_YRESOLUTION */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetXResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT xResolution);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetYResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT yResolution);
 
 /* ICAP_NOISEFILTERS */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumNoiseFilters( DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);

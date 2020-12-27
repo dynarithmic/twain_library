@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2021 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,10 +27,10 @@ OF THIRD PARTY RIGHTS.
 #include <md5c.h>
 #include <vector>
 #include <string>
-class MD5 
+class MD5
 {
     public:
-		MD5() : context{}  { }
+        MD5() : context{}  { }
 
         std::vector<unsigned char> ComputeHash(const char *input, int len = -1);
         std::vector<unsigned char> ComputeHash();

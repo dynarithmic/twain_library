@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -668,7 +668,7 @@ CTL_StringType DecodeData(CTL_ErrorStructDecoder* pDecoder, TW_MEMREF pData, Err
                           _T("\n}\n");
                     }
                     int j;
-					str2.clear();
+                    str2.clear();
                     for ( i = 0; i < 3; i++ )
                     {
                         for ( j = 0; j < 3; j++ )

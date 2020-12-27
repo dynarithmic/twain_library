@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -64,8 +64,8 @@
         #pragma message ("Microsoft Visual Studio 2015 compiler defined")
     #elif _MSC_VER >= 1910 && _MSC_VER < 1920
         #pragma message ("Microsoft Visual Studio 2017 compiler defined")
-	#elif _MSC_VER >= 1920
-		#pragma message ("Microsoft Visual Studio 2019 compiler defined")
+    #elif _MSC_VER >= 1920
+        #pragma message ("Microsoft Visual Studio 2019 compiler defined")
     #endif
 #endif
 

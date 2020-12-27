@@ -54,11 +54,11 @@ void FUNCCONVENTION DTWLIB_TIFFSetPlanarConfig(LIBTIFF_NAMESPACE TIFF* pTiff, LO
 void FUNCCONVENTION DTWLIB_TIFFSetPhotometric(LIBTIFF_NAMESPACE TIFF* pTiff, LONG nPhoto);
 void FUNCCONVENTION DTWLIB_TIFFSetRowsPerStrip(LIBTIFF_NAMESPACE TIFF* pTiff, LONG nRows);
 void FUNCCONVENTION DTWLIB_TIFFSetColorMap(LIBTIFF_NAMESPACE TIFF* pTiff, uint16 *pRed,
-                                  uint16 *pGreen, 
+                                  uint16 *pGreen,
                                   uint16 *pBlue);
 void FUNCCONVENTION DTWLIB_TIFFSetJpegQuality(LIBTIFF_NAMESPACE TIFF* pTiff, LONG nQuality);
-LONG FUNCCONVENTION DTWLIB_TIFFSetScanLine(LIBTIFF_NAMESPACE TIFF *pTiff, LIBTIFF_NAMESPACE tdata_t buf, uint32 row, 
-										   LIBTIFF_NAMESPACE tsample_t sample);
+LONG FUNCCONVENTION DTWLIB_TIFFSetScanLine(LIBTIFF_NAMESPACE TIFF *pTiff, LIBTIFF_NAMESPACE tdata_t buf, uint32 row,
+                                           LIBTIFF_NAMESPACE tsample_t sample);
 void FUNCCONVENTION DTWLIB_TIFFCloseImage(LIBTIFF_NAMESPACE TIFF* pTiff);
 void FUNCCONVENTION DTWLIB_TIFFFreeColorMap(uint16 *pRed, uint16 *pGreen, uint16 *pBlue);
 LIBTIFF_NAMESPACE tdata_t FUNCCONVENTION DTWLIB_TIFFAlloc(LIBTIFF_NAMESPACE tsize_t nSize);
@@ -71,4 +71,4 @@ void FUNCCONVENTION DTWLIB_TIFFWriteSoftware(LIBTIFF_NAMESPACE TIFF *pTiff, LPCT
 }
 #endif
 
-#endif 
+#endif

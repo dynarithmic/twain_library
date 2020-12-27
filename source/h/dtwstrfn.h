@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -43,6 +43,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayInsertAtStringNW(DTWAIN_ARRAY pArray, LONG 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayInsertAtStringW(DTWAIN_ARRAY pArray, LONG nWhere, LPCWSTR pVal);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArraySetAtStringA(DTWAIN_ARRAY pArray, LONG nWhere, LPCSTR pStr);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArraySetAtStringW(DTWAIN_ARRAY pArray, LONG nWhere, LPCWSTR pStr);
+LONG        DLLENTRY_DEF DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
+LONG        DLLENTRY_DEF DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSourceValuesA(DTWAIN_SOURCE Source, LPCSTR capName, LPDTWAIN_ARRAY values, DTWAIN_BOOL bExpandIfRange);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSourceValuesW(DTWAIN_SOURCE Source, LPCWSTR capName, LPDTWAIN_ARRAY values, DTWAIN_BOOL bExpandIfRange);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ExecuteOCRA(DTWAIN_OCRENGINE Engine, LPCSTR szFileName, LONG nStartPage, LONG nEndPage);
@@ -205,6 +207,8 @@ LONG DLLENTRY_DEF DTWAIN_GetExtNameFromCapA(LONG nValue, LPSTR szValue, LONG nLe
 LONG DLLENTRY_DEF DTWAIN_GetExtNameFromCapW(LONG nValue, LPWSTR szValue, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetNameFromCapA(LONG nCapValue, LPSTR szValue, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetNameFromCapW(LONG nCapValue, LPWSTR szValue, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetOCRErrorStringA(DTWAIN_OCRENGINE Engine, LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
+LONG DLLENTRY_DEF DTWAIN_GetOCRErrorStringW(DTWAIN_OCRENGINE Engine, LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
 LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerA(DTWAIN_OCRENGINE Engine, LPSTR szManufacturer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetOCRManufacturerW(DTWAIN_OCRENGINE Engine, LPWSTR szManufacturer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetOCRProductFamilyA(DTWAIN_OCRENGINE Engine, LPSTR szProductFamily, LONG nLength);
@@ -243,6 +247,9 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderExW(LPCWSTR SearchOrder, LPCWST
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathA(LPCSTR ResourcePath);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathW(LPCWSTR ResourcePath);
+
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringA(DTWAIN_PDFTEXTELEMENT TextElement, LPCSTR szString, LONG Flags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT TextElement, LPCWSTR szString, LONG Flags);
 
 LONG DLLENTRY_DEF DTWAIN_TwainSaveA(LPCSTR cmd);
 LONG DLLENTRY_DEF DTWAIN_TwainSaveW(LPCWSTR cmd);
@@ -456,6 +463,8 @@ BOOL        DLLENTRY_DEF DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTR
 LONG        DLLENTRY_DEF DTWAIN_GetTwainLanguageValue(DTWAIN_CCHARPTRTYPE szName);
 
 DTWAIN_BOOL DLLENTRY_DEF  DTWAIN_AcquireAudioFile(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpszFile, LONG lFileFlags, LONG lMaxClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource,LPLONG pStatus);
+LONG        DLLENTRY_DEF DTWAIN_GetOCRErrorString(DTWAIN_OCRENGINE Engine, LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, DTWAIN_CCHARPTRTYPE val1, LONG Flags);
 
 void DLLENTRY_DEF DTWAIN_X(DTWAIN_CCHARPTRTYPE s);
 #endif

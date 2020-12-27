@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -343,7 +343,7 @@ DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap
         }
 
         // get the default container type if specified
-        if( lContainerType == DTWAIN_CONTDEFAULT )
+        if (lContainerType == DTWAIN_CONTDEFAULT)
         {
             switch (lGetType)
             {
@@ -354,7 +354,7 @@ DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap
                 break;
 
                 default:
-            lContainerType = DTWAIN_GetCapContainer(Source, lCap, lGetType);
+                    lContainerType = DTWAIN_GetCapContainer(Source, lCap, lGetType);
                 break;
             }
         }
@@ -366,38 +366,38 @@ DTWAIN_BOOL DTWAIN_GetCapValuesEx_Internal( DTWAIN_SOURCE Source, TW_UINT16 lCap
             ThisArray = performGetCap<CTL_String>(pHandle, Source, lCap, nDataType, lContainerType, GetTwainGetType(lGetType), overrideDataType, CTL_EnumeratorStringType);
         else
         {
-        if (IsIntCapType(static_cast<TW_UINT16>(nDataType)))
-        {
-            ThisArray = performGetCap<LONG>(pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorIntType);
-            if ( !ThisArray )
+            if (IsIntCapType(static_cast<TW_UINT16>(nDataType)))
+            {
+                ThisArray = performGetCap<LONG>(pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorIntType);
+                if ( !ThisArray )
+                    LOG_FUNC_EXIT_PARAMS(false)
+            }
+            else
+            if (IsFloatCapType(static_cast<TW_UINT16>(nDataType)))
+            {
+                ThisArray = performGetCap<double>(pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorDoubleType);
+                if (!ThisArray)
+                    LOG_FUNC_EXIT_PARAMS(false)
+            }
+            else
+            if ( IsStringCapType(static_cast<TW_UINT16>(nDataType)))
+            {
+                ThisArray = performGetCap<CTL_String, CTL_StringType, StringGetCapConverter>
+                            (pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorStringType);
+                if (!ThisArray)
+                    LOG_FUNC_EXIT_PARAMS(false)
+            }
+            else
+            if ( IsFrameCapType(static_cast<TW_UINT16>(nDataType)))
+            {
+                ThisArray = performGetCap<TW_FRAME, DTWAIN_FRAME, FrameGetCapConverter>
+                    (pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorTWFrameType);
+                if (!ThisArray)
+                    LOG_FUNC_EXIT_PARAMS(false)
+            }
+            else
                 LOG_FUNC_EXIT_PARAMS(false)
-        }
-        else
-        if (IsFloatCapType(static_cast<TW_UINT16>(nDataType)))
-        {
-            ThisArray = performGetCap<double>(pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorDoubleType);
-            if (!ThisArray)
-                LOG_FUNC_EXIT_PARAMS(false)
-        }
-        else
-        if ( IsStringCapType(static_cast<TW_UINT16>(nDataType)))
-        {
-            ThisArray = performGetCap<CTL_String, CTL_StringType, StringGetCapConverter>
-                        (pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorStringType);
-            if (!ThisArray)
-                LOG_FUNC_EXIT_PARAMS(false)
-        }
-        else
-        if ( IsFrameCapType(static_cast<TW_UINT16>(nDataType)))
-        {
-            ThisArray = performGetCap<TW_FRAME, DTWAIN_FRAME, FrameGetCapConverter>
-                (pHandle, Source, lCap, nDataType, lContainerType, lGetType, overrideDataType, CTL_EnumeratorTWFrameType);
-            if (!ThisArray)
-                LOG_FUNC_EXIT_PARAMS(false)
-        }
-        else
-            LOG_FUNC_EXIT_PARAMS(false)
-    }
+         }
     }
     arr.Disconnect();
     if ( bEnumeratorExists )
@@ -806,7 +806,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, LONG 
     CATCH_BLOCK(false)
 }
 
-/* This function actualy initiates the querying of the ext image information.  This function
+/* This function actually initiates the querying of the ext image information.  This function
    will query the TWAIN Source.  If your TWAIN Source has bugs, this will be where any problem
    will exist */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source)

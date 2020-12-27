@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -252,8 +252,8 @@ CTL_ITwainSource::CTL_ITwainSource( CTL_ITwainSession *pSession, LPCTSTR lpszPro
     m_FileSystem(),
     m_pImageMemXfer(nullptr),
     m_PersistentArray(nullptr),
-	m_bDuplexSideDone{ false,false },
-	m_bImageInfoRetrieved(false)
+    m_bDuplexSideDone{ false,false },
+    m_bImageInfoRetrieved(false)
 {
     if ( lpszProduct != NULL )
         StringWrapperA::SafeStrcpy( m_SourceId.ProductName,
@@ -273,7 +273,7 @@ CTL_ITwainSource::CTL_ITwainSource( CTL_ITwainSession *pSession, LPCTSTR lpszPro
     m_ImageInfoEx.PDFCustomSize[0] = 8.5f;
     m_ImageInfoEx.PDFCustomSize[1] = 11.0f;
     m_ImageInfoEx.PDFUseCompression = true;
-	m_ImageInfoEx.PDFUseNoCompression = false;
+    m_ImageInfoEx.PDFUseNoCompression = false;
     m_ImageInfoEx.PDFCustomScale[0] = 100.0;
     m_ImageInfoEx.PDFCustomScale[1] = 100.0;
     m_ImageInfoEx.PDFUseThumbnail = false;
@@ -701,7 +701,7 @@ bool CTL_ITwainSource::IsFileTypeMultiPage(CTL_TwainFileFormatEnum FileType) // 
             );
 }
 
-CTL_TwainFileFormatEnum CTL_ITwainSource::GetMultiPageType(CTL_TwainFileFormatEnum FileType) 
+CTL_TwainFileFormatEnum CTL_ITwainSource::GetMultiPageType(CTL_TwainFileFormatEnum FileType)
 {
     static const std::unordered_map<CTL_TwainFileFormatEnum, CTL_TwainFileFormatEnum> pageMap =
     {
@@ -718,7 +718,7 @@ CTL_TwainFileFormatEnum CTL_ITwainSource::GetMultiPageType(CTL_TwainFileFormatEn
         { TWAINFileFormat_TIFFLZW,         TWAINFileFormat_TIFFLZWMULTI },
         { TWAINFileFormat_TIFFPIXARLOG,    TWAINFileFormat_TIFFPIXARLOGMULTI },
         { TWAINFileFormat_PCX,             TWAINFileFormat_DCX },
-        { TWAINFileFormat_TEXT,            TWAINFileFormat_TEXTMULTI } 
+        { TWAINFileFormat_TEXT,            TWAINFileFormat_TEXTMULTI }
     };
 
     auto iter = pageMap.find(FileType);
@@ -1568,20 +1568,20 @@ int GetInitialFileNumber(const CTL_StringType& sFileName, size_t &nDigits)
         if ( i == 0 )
             break;
     }
-	
-	// now loop until we get a good cast from the string we have
-	while (!sTemp.empty())
-	{
-		try 
-		{
-			return boost::lexical_cast<int>(sTemp);
-		}
-		catch (boost::bad_lexical_cast&)
-		{
-			sTemp.erase(sTemp.begin());
-		}
-	}
-	return 0;
+
+    // now loop until we get a good cast from the string we have
+    while (!sTemp.empty())
+    {
+        try
+        {
+            return boost::lexical_cast<int>(sTemp);
+        }
+        catch (boost::bad_lexical_cast&)
+        {
+            sTemp.erase(sTemp.begin());
+        }
+    }
+    return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

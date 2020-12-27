@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -263,12 +263,12 @@ namespace dynarithmic
     enum CTL_TwainAcquireEnum {     TWAINAcquireType_Native = TWSX_NATIVE,
                                     TWAINAcquireType_File   = TWSX_FILE,
                                     TWAINAcquireType_Buffer   = TWSX_MEMORY,
-									TWAINAcquireType_AudioNative = 0xFA,
-									TWAINAcquireType_AudioFile = 0xFB,
+                                    TWAINAcquireType_AudioNative = 0xFA,
+                                    TWAINAcquireType_AudioFile = 0xFB,
                                     TWAINAcquireType_FileUsingNative = 0xFD,
-                                    TWAINAcquireType_Clipboard  =      0xFE,
+                                    TWAINAcquireType_Clipboard  = 0xFE,
                                     TWAINAcquireType_Invalid
-                             };
+                            };
     /*        enum { DibFormat=1,
                    BmpFormat=2,
                    JpegFormat=3,

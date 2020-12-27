@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -116,8 +116,8 @@ DTWAIN_ACQUIRE dynarithmic::DTWAIN_LLAcquireFile(SourceAcquireOptions& opts)
     DTWAIN_ARRAY FileList = opts.getFileList();
     if (FileList)
         opts.setFileFlags(opts.getFileFlags() | DTWAIN_USELIST);
-	if ( opts.getAcquireType() != TWAINAcquireType_AudioFile)
-    opts.setActualAcquireType(TWAINAcquireType_File);
+    if ( opts.getAcquireType() != TWAINAcquireType_AudioFile)
+        opts.setActualAcquireType(TWAINAcquireType_File);
     DTWAIN_ACQUIRE Ret = LLAcquireImage(opts);
     LOG_FUNC_EXIT_PARAMS(Ret)
     CATCH_BLOCK(DTWAIN_FAILURE1)
@@ -132,7 +132,7 @@ bool dynarithmic::AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType
     // Check if file type requires a loaded DLL
     DumpArrayContents(opts.getFileList(), 0);
     opts.setAcquireType(AcquireType);
-	opts.setDiscardDibs(true); // make sure we remove acquired dibs for file handling
+    opts.setDiscardDibs(true); // make sure we remove acquired dibs for file handling
     aDibs = SourceAcquire(opts);
     if (opts.getStatus() < 0 && !aDibs)
     {
@@ -145,12 +145,12 @@ bool dynarithmic::AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType
         bRetval = TRUE;
         if (DTWAIN_GetTwainMode() == DTWAIN_MODAL)
         {
-        auto vDibs = EnumeratorVectorPtr<LPVOID>(aDibs);
-        if (vDibs)
-            for_each(begin(*vDibs), end(*vDibs), EnumeratorFunctionImpl::EnumeratorDestroy);
-        pSource->ResetAcquisitionAttempts(nullptr);
-        if (EnumeratorFunctionImpl::EnumeratorIsValid(aDibs))
-            EnumeratorFunctionImpl::EnumeratorDestroy(aDibs);
+            auto vDibs = EnumeratorVectorPtr<LPVOID>(aDibs);
+            if (vDibs)
+                for_each(begin(*vDibs), end(*vDibs), EnumeratorFunctionImpl::EnumeratorDestroy);
+            pSource->ResetAcquisitionAttempts(nullptr);
+            if (EnumeratorFunctionImpl::EnumeratorIsValid(aDibs))
+                EnumeratorFunctionImpl::EnumeratorDestroy(aDibs);
         }
     }
 
@@ -159,8 +159,8 @@ bool dynarithmic::AcquireFileHelper(SourceAcquireOptions& opts, LONG AcquireType
         if (!aDibs)
             bRetval = false;
         else
-            if (opts.getStatus() == DTWAIN_TN_ACQUIREDONE)
-                bRetval = true;
+        if (opts.getStatus() == DTWAIN_TN_ACQUIREDONE)
+            bRetval = true;
     }
     else
     if (DTWAIN_GetTwainMode() == DTWAIN_MODELESS)

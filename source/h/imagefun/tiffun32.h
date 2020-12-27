@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ namespace dynarithmic
                 m_nFormat(nFormat),
                 m_ImageInfoEx(ImageInfoEx),
                 m_bWriteOk(false),
-				m_FileName{},
+                m_FileName{},
                 m_nError(false)
                 {
                     m_MultiPageStruct.pUserData = nullptr;

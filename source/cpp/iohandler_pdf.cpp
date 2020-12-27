@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ using namespace dynarithmic;
 struct PDFDimensions
 {
     std::array<double,4> mediabox;
-	PDFDimensions() : mediabox{ 0,0,0,0 } { }
+    PDFDimensions() : mediabox{ 0,0,0,0 } { }
 
     PDFDimensions(double d1, double d2, double d3, double d4)
     {
@@ -332,7 +332,7 @@ int CTL_PDFIOHandler::WriteBitmap(LPCTSTR szFile, bool bOpenFile, int fhFile, LO
                                CleanupOCRText1);
 
             PDFStringToTextElement pElMap = CreatePDFTextElementMap(ocrTextInfo);
- 
+
             PDFStringToTextElement::iterator itStart = pElMap.begin();
             PDFStringToTextElement::iterator itEnd = pElMap.end();
             tempExFirst = m_ImageInfoEx.PDFTextElementList.begin();

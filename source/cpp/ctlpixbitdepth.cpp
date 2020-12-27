@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -256,36 +256,36 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsPixelTypeSupported(DTWAIN_SOURCE Source, LONG 
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN_ARRAY Array)
 {
-	LOG_FUNC_ENTRY_PARAMS((FileType, Array))
-	CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
+    LOG_FUNC_ENTRY_PARAMS((FileType, Array))
+    CTL_TwainDLLHandle *pHandle = static_cast<CTL_TwainDLLHandle *>(GetDTWAINHandle_Internal());
 
-	// See if DLL Handle exists
-	DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
+    // See if DLL Handle exists
+    DTWAIN_Check_Bad_Handle_Ex(pHandle, false, FUNC_MACRO);
 
-	if (Array)
-	{
-		if (EnumeratorFunctionImpl::EnumeratorIsValid(*Array))
-			EnumeratorFunctionImpl::ClearEnumerator(*Array);
-	}
+    if (Array)
+    {
+        if (EnumeratorFunctionImpl::EnumeratorIsValid(*Array))
+            EnumeratorFunctionImpl::ClearEnumerator(*Array);
+    }
 
-	DTWAIN_ARRAY ThisArray = 0;
-	ThisArray = DTWAIN_ArrayCreate(DTWAIN_ARRAYLONG, 0);
-	DTWAINArrayLL_RAII arr(ThisArray);
-	auto& bppMap = CTL_ImageIOHandler::GetSupportedBPPMap();
-	auto iter = bppMap.find(FileType);
-	if (iter != bppMap.end())
-		for_each(iter->second.begin(), iter->second.end(),
-			[&](int val) {LONG lVal = val;  EnumeratorFunctionImpl::EnumeratorAddValue(ThisArray, &lVal); });
-	*Array = ThisArray;
-	arr.Disconnect();
-	LOG_FUNC_EXIT_PARAMS(iter != bppMap.end())
-	CATCH_BLOCK(FALSE)
+    DTWAIN_ARRAY ThisArray = 0;
+    ThisArray = DTWAIN_ArrayCreate(DTWAIN_ARRAYLONG, 0);
+    DTWAINArrayLL_RAII arr(ThisArray);
+    auto& bppMap = CTL_ImageIOHandler::GetSupportedBPPMap();
+    auto iter = bppMap.find(FileType);
+    if (iter != bppMap.end())
+        for_each(iter->second.begin(), iter->second.end(),
+            [&](int val) {LONG lVal = val;  EnumeratorFunctionImpl::EnumeratorAddValue(ThisArray, &lVal); });
+    *Array = ThisArray;
+    arr.Disconnect();
+    LOG_FUNC_EXIT_PARAMS(iter != bppMap.end())
+    CATCH_BLOCK(FALSE)
 }
 
 LONG DLLENTRY_DEF DTWAIN_MakeRGB(LONG red, LONG green, LONG blue)
 {
-	LOG_FUNC_ENTRY_PARAMS((red, green, blue))
-	LONG returnVal = RGB(red, green, blue);
-	LOG_FUNC_EXIT_PARAMS(returnVal);
-	CATCH_BLOCK(0)
+    LOG_FUNC_ENTRY_PARAMS((red, green, blue))
+    LONG returnVal = RGB(red, green, blue);
+    LOG_FUNC_EXIT_PARAMS(returnVal);
+    CATCH_BLOCK(0)
 }

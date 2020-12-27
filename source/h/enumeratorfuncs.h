@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -121,11 +121,11 @@ inline bool operator != (const TW_FRAME& lhs, const TW_FRAME& rhs)
         {
             if ( !value )
                 vec.resize(newSize);
-			else
-			{
-				T defVal = *(reinterpret_cast<T*>(value));
-				vec.resize(newSize, defVal);
-			}
+            else
+            {
+                T defVal = *(reinterpret_cast<T*>(value));
+                vec.resize(newSize, defVal);
+            }
         }
     };
 

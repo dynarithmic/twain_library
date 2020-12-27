@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2018 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@
     directory of the DTWAIN installation covers the restrictions under the LGPL license.
     Please read this file before deploying or distributing any application using DTWAIN.
  */
-#ifndef _DIBMULTI_H
-#define _DIBMULTI_H
+#ifndef DIBMULTI_H
+#define DIBMULTI_H
 
 #define DIB_MULTI_FIRST     1
 #define DIB_MULTI_NEXT      2

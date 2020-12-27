@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2020 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -265,15 +265,15 @@ static bool GetStringCapability(DTWAIN_SOURCE Source, TW_UINT16 Cap, LPTSTR valu
 
 #define EXPORT_ENUM_CAP_VALUES_EX(FuncName, Cap) \
     DTWAIN_ARRAY DLLENTRY_DEF FuncName(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandIfRange) {\
-		DTWAIN_ARRAY pArray = 0; \
+        DTWAIN_ARRAY pArray = 0; \
         EnumCapInternal(Source, Cap, &pArray, bExpandIfRange, GetAllCapValues, __FUNCTION__, GENERATE_PARAM_LOG((Source, bExpandIfRange))); \
         return pArray; }
 
 #define EXPORT_ENUM_CAP_VALUES_NOEXPAND_EX(FuncName, Cap) \
     DTWAIN_ARRAY DLLENTRY_DEF FuncName(DTWAIN_SOURCE Source) {\
-			DTWAIN_ARRAY pArray = 0; \
+            DTWAIN_ARRAY pArray = 0; \
             EnumCapInternal(Source, Cap, &pArray, false, GetAllCapValues, __FUNCTION__, GENERATE_PARAM_LOG((Source))); \
-			return pArray; }
+            return pArray; }
 
 #define EXPORT_SET_CAP_VALUE(FuncName, Cap, CapDataType, CapFn) \
     DTWAIN_BOOL  DLLENTRY_DEF FuncName(DTWAIN_SOURCE Source, CapDataType value) \
@@ -690,7 +690,7 @@ DTWAIN_BOOL dynarithmic::DTWAIN_GetDeviceCapByString(DTWAIN_SOURCE Source, LPTST
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution)
 {
     LOG_FUNC_ENTRY_PARAMS((Source, Resolution))
-	LONG lCap = 0;
+    LONG lCap = 0;
     if ( DTWAIN_IsCapSupported( Source, DTWAIN_CV_ICAPXRESOLUTION))
         lCap = DTWAIN_CV_ICAPXRESOLUTION;
     else

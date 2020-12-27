@@ -536,6 +536,8 @@ DTWAIN_ResetPDFTextElement                        @9306
 DTWAIN_GetPDFTextElementFloat                     @9307                    
 DTWAIN_GetPDFTextElementLong                      @9308                    
 DTWAIN_GetPDFTextElementString                    @9309                    
+DTWAIN_SetPDFTextElementStringA					  @9310
+DTWAIN_SetPDFTextElementStringW					  @9311
 DTWAIN_SetTwainDSM                                @9600                    
 DTWAIN_GetTwainAvailability                       @9602                    
 DTWAIN_ArrayCreateFromLong64s                     @9700                    

@@ -1,5 +1,15 @@
 DTWAIN Version changes
 
+5.2.0.4		  
+- Changed DTWAIN ANSI and wide string functions to use the "length" parameters correctly.
+
+- Updated dtwainx.h and dtwstrnfn.h to add missing exported API function declarations.
+
+- Updated the C++ interface found in the \language_bindings_and_examples\C_CPP_DynamicLoad\ directory.
+
+- Updated copyright message to stated year 2021.
+
+
 5.2.0.3		  
 - Added functions DTWAIN_SelectSource2Ex to allow customization of the files listed in the TWAIN Select Source dialog box.
   Customization includes including and excluding TWAIN source names in the dialog box, as well as aliasing your own names for
