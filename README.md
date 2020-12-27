@@ -31,23 +31,36 @@
 ----------
 
 ### How do I get set up using DTWAIN? ###
-  
-If you do not want to rebuild the source code and just get started using DTWAIN, the [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the Dynamic Link Libraries (DLL).
 
-    32bit/dtwain32.dll/lib -- 32-bit ANSI (MBCS) DLL
-    32bit/dtwain32u.dll/lib -- 32-bit Unicode DLL
-    64bit/dtwain64.dll/lib -- 64-bit ANSI (MBCS) DLL
-    64bit/dtwain64u.dll/lib -- 64-bit Unicode DLL
+This section deals with building a C or C++ based DTWAIN application.  Later on in this document will be a discussion on using DTWAIN for [other languages and environments](#otherlanguages).  
+
+----
+
+**Building the application:**
+<a name="dtwaindllusage"></a>
+The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the Dynamic Link Libraries (DLL) and Visual C++ compatible import libraries necessary to build your application. (If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).
+
+    32bit/dtwain32.dll/lib -- 32-bit ANSI (MBCS) DLL and import library
+    32bit/dtwain32u.dll/lib -- 32-bit Unicode DLL and import library
     
-If you are using C or C++, you will need to include the header files in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
+    64bit/dtwain64.dll/lib -- 64-bit ANSI (MBCS) DLL and import library
+    64bit/dtwain64u.dll/lib -- 64-bit Unicode DLL and import library
+    
+You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
-Basically, you just need to build your application and link it to one of the .lib files above that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors (assuming you're using Visual C++), and the **dtwain32u.dll** file above is what is loaded when your application is running .  
+Basically, you just need to build your application and link it to one of the import libraries that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors.
 
-Just make sure the DLL is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
+**If you are not using Visual C++ but another brand of C or C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers).**
+
+----
+<a name="runningapplication"></a>
+**Running the application:**
+
+After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order)
 
-In addition to the dll and lib files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
+In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
 
     twaininfo.txt -- General TWAIN information -- this is required.
 	twainresourcestrings_english.txt  	English resources -- this is required.
@@ -161,6 +174,7 @@ In general, DTWAIN can set or get any capability, including custom capabilities 
 
 ----------
 
+<a name="alternatecompilers"></a>
 ### What if I don't have Visual Studio as the compiler to use when building an application?  I use Embarcadero/g++/clang/MingW/Dev++ (fill in with your favorite compiler or IDE).  How do I use the library?
 
 You can do one of two things:
@@ -196,7 +210,12 @@ For the first item, some compilers have external tools that allow you to use Vis
 
 ----------
 
+<a name="otherlanguages"></a>
 ### Wait...What about other computer languages?  Does this library only work for C and C++ applications? ###
+
+Note: To utilize other computer languages, it still requires that one of the [DTWAIN dynamic link libraries (DLL)](#dtwaindllusage) is available at runtime that matches the environment (32-bit or 64-bit), and character set (ANSI, Unicode).  In addition the section on [running your application](#runningapplication) also applies.
+
+----
 
 DTWAIN includes computer language bindings for the following computer languages and utilities found in the [language_bindings_and_examples](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples) folder:
 
