@@ -36,13 +36,9 @@ If you do not want to rebuild the source code and just get started using DTWAIN,
 
     32bit/dtwain32.dll/lib -- 32-bit ANSI (MBCS) DLL
     32bit/dtwain32u.dll/lib -- 32-bit Unicode DLL
-    32bit/dtwain32d.dll/lib -- 32-bit Debug ANSI (MBCS) DLL
-    32bit/dtwain32ud.dll/lib -- 32-bit Debug Unicode DLL
     64bit/dtwain64.dll/lib -- 64-bit ANSI (MBCS) DLL
     64bit/dtwain64u.dll/lib -- 64-bit Unicode DLL
-    64bit/dtwain64d.dll/lib -- 64-bit Debug ANSI (MBCS) DLL
-    64bit/dtwain64ud.dll/lib -- 64-bit Debug Unicode DLL
-
+    
 If you are using C or C++, you will need to include the header files in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
 Basically, you just need to build your application and link it to one of the .lib files above that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors (assuming you're using Visual C++), and the **dtwain32u.dll** file above is what is loaded when your application is running .  
