@@ -1,0 +1,23 @@
+#include "dibdisplayres.h"
+
+IDD_dlgDib DIALOG DISCARDABLE  0, 0, 301, 237
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquired Images"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,211,13,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,211,28,50,14
+    CONTROL         "",IDC_frmImage,"Static",SS_BLACKFRAME,15,13,192,198
+    PUSHBUTTON      "&Previous",IDC_btnPrev,105,213,50,14
+    PUSHBUTTON      "&Next",IDC_btnNext,157,213,50,14
+    LTEXT           "Page",IDC_txtPAGE,213,216,18,8
+    LTEXT           "Blank page", IDC_txtBLANKPAGE,213,216,90,8
+    EDITTEXT        IDC_edCurPage,236,216,20,14,ES_AUTOHSCROLL | ES_READONLY |
+                    NOT WS_BORDER
+    LTEXT           "Of",IDC_txtOF,261,216,8,8
+    EDITTEXT        IDC_edNumPages,281,216,20,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER
+    COMBOBOX        IDC_cmbAcquisition,52,213,48,64,CBS_DROPDOWN |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Acquisition:",IDC_txtAcquisition,12,215,37,8
+END
