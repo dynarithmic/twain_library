@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
 * The current version is [**5.2.0.4** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
-**Please note that the source code for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
+**Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
 ----
 
