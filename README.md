@@ -6,7 +6,9 @@
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
 * The current version is [**5.2.0.4** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
+**Please note that the source code for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
+----
 
 ### Ok, so what is this Dynarithmic TWAIN library, or "DTWAIN" as you call it? ###
 
@@ -38,13 +40,15 @@ This section deals with building a C or C++ based DTWAIN application.  Later on 
 
 **Building the application:**
 <a name="dtwaindllusage"></a>
-The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the Dynamic Link Libraries (DLL) and Visual C++ compatible import libraries necessary to build your application. (If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).
+The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the Visual C++ compatible import libraries necessary to build your application. (If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).  In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
 
-    32bit/dtwain32.dll/lib -- 32-bit ANSI (MBCS) DLL and import library
-    32bit/dtwain32u.dll/lib -- 32-bit Unicode DLL and import library
+    32bit/dtwain32.lib -- 32-bit ANSI (MBCS) import library
+    32bit/dtwain32u.lib -- 32-bit Unicode import library
+    32bit/release_pdb -- Zip file containing the 32-bit PDB files for dtwain32.dll and dtwain32u.dll
     
-    64bit/dtwain64.dll/lib -- 64-bit ANSI (MBCS) DLL and import library
-    64bit/dtwain64u.dll/lib -- 64-bit Unicode DLL and import library
+    64bit/dtwain64.lib -- 64-bit ANSI (MBCS) import library
+    64bit/dtwain64u.lib -- 64-bit Unicode import library
+    64bit/release_pdb -- Zip file containing the 64-bit PDB files for dtwain64.dll and dtwain64u.dll
     
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
@@ -58,8 +62,16 @@ Basically, you just need to build your application and link it to one of the imp
 
 After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
 
-[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order)
+[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
+The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the DLL files required to run your applicaiton.
+
+    32bit/dtwain32.dll -- 32-bit ANSI (MBCS) DLL 
+    32bit/dtwain32u.dll -- 32-bit Unicode DLL
+    
+    64bit/dtwain64.dll -- 64-bit ANSI (MBCS) DLL
+    64bit/dtwain64u.dll -- 64-bit Unicode DLL
+    
 In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
 
     twaininfo.txt -- General TWAIN information -- this is required.
@@ -336,7 +348,7 @@ Languages such as C, C++, C#, can use callbacks (sometimes referred to as *deleg
 
 ### I am ambitious and would like to build the libraries, debug the internals, etc.  How do I get started? ###
 
-The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library/tree/master/source).
+The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library_source/tree/main). 
 
 ----------
 
