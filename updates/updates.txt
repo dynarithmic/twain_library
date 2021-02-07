@@ -1,5 +1,18 @@
 DTWAIN Version changes
 
+5.2.0.5		  
+- Added following functions:
+  DTWAIN_ArrayGetSourceAt -- Use this function in conjunction with DTWAIN_EnumSources to easily retrieve each TWAIN Source found.
+  DTWAIN_GetTwainAppIDEx --  Use this function to fill in a TW_IDENTITY structure that describes the TWAIN application ID values.
+  DTWAIN_GetSourceIDEx   --  Use this function to fill in a TW_IDENTITY structure that describes a TWAIN Source.
+
+  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added:
+
+  DTWAIN_IsAutomaticSenseMediumEnabled
+  DTWAIN_IsAutomaticSenseMediumSupported
+  DTWAIN_EnableAutomaticSenseMedium
+ 
+
 5.2.0.4		  
 - Changed DTWAIN ANSI and wide string functions to use the "length" parameters correctly.
 

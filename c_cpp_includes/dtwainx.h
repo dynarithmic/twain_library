@@ -21,6 +21,9 @@
 #ifndef DTWAINX_H
 #define DTWAINX_H
 
+/* Include the basic definitions used by TWAIN */
+#include "twain.h"
+
 /* ///////////////////////////////// DTWAIN Exported functions //////////////////////////// */
 #ifdef __cplusplus
   extern "C" {
@@ -92,9 +95,7 @@ DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource(VOID_PROTOTYPE);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_CloseSourceUI( DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceSelected(DTWAIN_SOURCE Source);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectDefaultSource(VOID_PROTOTYPE);
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source,
-                                                               LPLONG pMajor,
-                                                               LPLONG pMinor);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source,LPLONG pMajor,LPLONG pMinor);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetDefaultSource( DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceAcquiring( DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceOpen( DTWAIN_SOURCE Source);
@@ -179,8 +180,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetAcquireArea(DTWAIN_SOURCE Source,
                                                         DTWAIN_ARRAY ActualEnum);
 
 /* DTWAIN Array functions */
-DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreate(LONG nEnumType,
-                                                           LONG nInitialSize );
+DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreate(LONG nEnumType,LONG nInitialSize );
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromLongs(LPLONG pCArray, LONG nSize);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromLong64s(LPLONG64 pCArray, LONG nSize);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromReals(double* pCArray, LONG nSize);
@@ -206,6 +206,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetAt(DTWAIN_ARRAY pArray, LONG nWh
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetAtLong(DTWAIN_ARRAY pArray, LONG nWhere, LPLONG pVal);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetAtLong64(DTWAIN_ARRAY pArray, LONG nWhere, LPLONG64 pVal);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetAtFloat(DTWAIN_ARRAY pArray, LONG nWhere, LPDTWAIN_FLOAT pVal);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetSourceAt(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_SOURCE* ppSource);
 
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAt(DTWAIN_ARRAY pArray, LONG nWhere, LPVOID pVariant);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAtLong(DTWAIN_ARRAY pArray, LONG nWhere, LONG pVal);
@@ -478,6 +479,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ShowUIOnly(DTWAIN_SOURCE Source);
 
 /* Used if the TWAIN DSM is to be called directly by the application */
 DTWAIN_IDENTITY  DLLENTRY_DEF DTWAIN_GetTwainAppID(VOID_PROTOTYPE);
+
 DTWAIN_IDENTITY DLLENTRY_DEF DTWAIN_GetSourceID(DTWAIN_SOURCE Source);
 LONG             DLLENTRY_DEF DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId,
                                                  LONG lDG, LONG lDAT, LONG lMSG, LPVOID pData);
@@ -519,6 +521,9 @@ DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsFeederEnabled(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsFeederLoaded(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsFeederSensitive(DTWAIN_SOURCE Source);
+DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_EnableAutomaticSenseMedium(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
+DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsAutomaticSenseMediumEnabled(DTWAIN_SOURCE Source);
+DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_IsAutomaticSenseMediumSupported(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_FeedPage(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_RewindPage(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF       DTWAIN_ClearPage(DTWAIN_SOURCE Source);
@@ -1071,6 +1076,10 @@ LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font);
 /* Audio transfers */
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_AcquireAudioNative(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL  DLLENTRY_DEF DTWAIN_AcquireAudioNativeEx(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, DTWAIN_ARRAY Acquisitions, LPLONG pStatus);
+
+TWAIN_IDENTITY  DLLENTRY_DEF DTWAIN_GetTwainAppIDEx(TW_IDENTITY* pIdentity);
+TWAIN_IDENTITY  DLLENTRY_DEF DTWAIN_GetSourceIDEx(DTWAIN_SOURCE Source, TW_IDENTITY* pIdentity);
+
 
 #include "dtwstrfn.h"
 #ifdef __cplusplus
