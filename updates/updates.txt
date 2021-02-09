@@ -6,7 +6,7 @@ DTWAIN Version changes
   DTWAIN_GetTwainAppIDEx --  Use this function to fill in a TW_IDENTITY structure that describes the TWAIN application ID values.
   DTWAIN_GetSourceIDEx   --  Use this function to fill in a TW_IDENTITY structure that describes a TWAIN Source.
 
-  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added:
+  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added (user Daniel Creeron is credited with this change):
 
   DTWAIN_IsAutomaticSenseMediumEnabled
   DTWAIN_IsAutomaticSenseMediumSupported
