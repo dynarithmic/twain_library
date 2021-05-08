@@ -1077,10 +1077,12 @@ LONG DLLENTRY_DEF DTWAIN_SetTwainDialogFont(HFONT font);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_AcquireAudioNative(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL  DLLENTRY_DEF DTWAIN_AcquireAudioNativeEx(DTWAIN_SOURCE Source, LONG nMaxAudioClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, DTWAIN_ARRAY Acquisitions, LPLONG pStatus);
 
+/* Get the application and TWAIN Source TW_IDENTITY */
 TWAIN_IDENTITY  DLLENTRY_DEF DTWAIN_GetTwainAppIDEx(TW_IDENTITY* pIdentity);
 TWAIN_IDENTITY  DLLENTRY_DEF DTWAIN_GetSourceIDEx(DTWAIN_SOURCE Source, TW_IDENTITY* pIdentity);
 
-
+/* Convert DIB to HBITMAP */
+HANDLE DLLENTRY_DEF DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette);
 #include "dtwstrfn.h"
 #ifdef __cplusplus
 }
