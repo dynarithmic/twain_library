@@ -1,12 +1,28 @@
 DTWAIN Version changes
 
+5.2.0.6		  
+- Added following function:
+  DTWAIN_ConvertDIBToBitmap -- Converts a Device Independent Bitmap to a Device Dependent Bitmap
+
+- The functions were missing from the .DEF files:
+  DTWAIN_ArrayGetSourceAt
+  DTWAIN_GetTwainAppIDEx
+  DTWAIN_GetSourceIDEx
+
+- The dtwainx.h header file now includes <commdlg.h> and replaces LPCBYTE with const BYTE*.
+  The reason for this is that if WIN32_LEAN_AND_MEAN are defined by the application, and 
+  dtwain.h is #included after this definition, the OPENFILENAME and LPCBYTE were not defined.
+
+- Miscellaneous code refactoring.
+
+
 5.2.0.5		  
 - Added following functions:
   DTWAIN_ArrayGetSourceAt -- Use this function in conjunction with DTWAIN_EnumSources to easily retrieve each TWAIN Source found.
   DTWAIN_GetTwainAppIDEx --  Use this function to fill in a TW_IDENTITY structure that describes the TWAIN application ID values.
   DTWAIN_GetSourceIDEx   --  Use this function to fill in a TW_IDENTITY structure that describes a TWAIN Source.
 
-  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added (user Daniel Creeron is credited with this change):
+  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added:
 
   DTWAIN_IsAutomaticSenseMediumEnabled
   DTWAIN_IsAutomaticSenseMediumSupported
