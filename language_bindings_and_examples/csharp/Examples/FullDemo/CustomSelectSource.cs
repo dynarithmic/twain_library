@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Dynarithmic;
-using DTWAIN_ARRAY = System.Int32;
-using DTWAIN_SOURCE = System.Int32;
+using DTWAIN_ARRAY = System.IntPtr;
+using DTWAIN_SOURCE = System.IntPtr;
 // using DTWAIN_ARRAY = System.Long; // Use this if compiling for 64-bits
 // using DTWAIN_SOURCE = System.Long;
 
@@ -29,18 +29,18 @@ namespace TWAINDemo
         private void CustomSelectSource_Load(object sender, EventArgs e)
         {
             sourceSelected = false;
-            DTWAIN_ARRAY SourceArray = 0;
+            DTWAIN_ARRAY SourceArray = IntPtr.Zero;
             TwainAPI.DTWAIN_EnumSources(ref SourceArray);
             int nCount = TwainAPI.DTWAIN_ArrayGetCount(SourceArray);
             if ( nCount <= 0 )
                 Close();
 
             // Display the sources
-            DTWAIN_SOURCE CurSource = 0;
+            DTWAIN_SOURCE CurSource = IntPtr.Zero;
             for (int i = 0; i < nCount; ++i)
             {
                 StringBuilder szName = new StringBuilder(256);
-                TwainAPI.DTWAIN_ArrayGetAtLong(SourceArray, i, ref CurSource);
+                TwainAPI.DTWAIN_ArrayGetSourceAt(SourceArray, i, ref CurSource);
                 TwainAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255);
                 listSources.Items.Add(szName.ToString());
             }

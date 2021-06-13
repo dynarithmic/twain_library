@@ -9,18 +9,18 @@ using System.Text;
 using System.Diagnostics;
 
 // For 32-bit apps, use these definitions
-using DTWAIN_ARRAY = System.Int32;
+using DTWAIN_ARRAY = System.IntPtr;
 using DTWAIN_BOOL = System.Int32;
 using DTWAIN_FLOAT = System.Double;
-using DTWAIN_FRAME = System.Int32;
-using HANDLE = System.Int32;
+using DTWAIN_FRAME = System.IntPtr;
+using HANDLE = System.IntPtr;
 using DTWAIN_IDENTITY = System.Int32;
-using DTWAIN_OCRENGINE = System.Int32;
+using DTWAIN_OCRENGINE = System.IntPtr;
 using DTWAIN_LONG = System.Int32;
 using DTWAIN_LONG64 = System.Int64;
-using DTWAIN_PDFTEXTELEMENT = System.Int32;
-using DTWAIN_RANGE = System.Int32;
-using DTWAIN_SOURCE = System.Int32;
+using DTWAIN_PDFTEXTELEMENT = System.IntPtr;
+using DTWAIN_RANGE = System.IntPtr;
+using DTWAIN_SOURCE = System.IntPtr;
     
 /*  Use this instead of above for 64-bit compilation
     using DTWAIN_ARRAY = System.Int64;
@@ -58,7 +58,7 @@ namespace TWAINDemo
         private MenuItem menuItem7;
         private MenuItem ExitDemo;
 
-		private DTWAIN_SOURCE SelectedSource=0;
+		private DTWAIN_SOURCE SelectedSource = IntPtr.Zero;
         private MenuItem menuItem1;
         private MenuItem AcquireNative;
         private MenuItem AcquireBuffered;
@@ -85,7 +85,7 @@ namespace TWAINDemo
 			//
             sOrigTitle = this.Text;
 			TwainAPI.DTWAIN_SysInitialize();
-            SelectedSource = 0;
+            SelectedSource = IntPtr.Zero;
 			if ( TwainAPI.DTWAIN_IsTwainAvailable() == 0)
 			{
 				SelectSource.Enabled = false;
@@ -356,7 +356,7 @@ namespace TWAINDemo
 
         private void SelectTheSource(int nWhich)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 DialogResult nReturn;
                 nReturn = MessageBox.Show("For this demo, only one Source can be opened.  Close current Source?",
@@ -364,7 +364,7 @@ namespace TWAINDemo
                 if (nReturn == DialogResult.Yes)
                 {
                     TwainAPI.DTWAIN_CloseSource(SelectedSource);
-                    SelectedSource = 0;
+                    SelectedSource = IntPtr.Zero;
                     // EnableSourceItems( FALSE );
                 }
                 else
@@ -401,7 +401,7 @@ namespace TWAINDemo
             }
             this.Enabled = true;  // re-enable the main form
 
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 if (TwainAPI.DTWAIN_OpenSource(SelectedSource) != 0)
                 {
@@ -431,7 +431,7 @@ namespace TWAINDemo
         {
             StringBuilder szSourceName = new StringBuilder(256);
             string sTitle = sOrigTitle;
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_GetSourceProductName(SelectedSource, szSourceName, 255);
                 sTitle += " - ";
@@ -444,7 +444,7 @@ namespace TWAINDemo
 
         private void SourceProperties_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 SourcePropertiesDlg sPropDlg = new SourcePropertiesDlg(SelectedSource);
                 sPropDlg.ShowDialog();
@@ -453,10 +453,10 @@ namespace TWAINDemo
 
         private void CloseSource_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_CloseSource(SelectedSource);
-                SelectedSource = 0;
+                SelectedSource = IntPtr.Zero;
                 SetCaptionToSourceName();
                 EnableSourceItems(false);
             }
@@ -469,7 +469,7 @@ namespace TWAINDemo
 
         private void AcquireNative_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
                                                       (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY, 
@@ -502,7 +502,7 @@ namespace TWAINDemo
 
         private void AcquireBuffered_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
                                                       (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
@@ -545,7 +545,7 @@ namespace TWAINDemo
 
         private void AcquireToFile(int nWhich)
         {
-            if (SelectedSource != 0)
+            if (SelectedSource != IntPtr.Zero)
             {
                 int status = 0;
                 int bError = 0;
