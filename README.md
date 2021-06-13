@@ -243,11 +243,12 @@ DTWAIN includes computer language bindings for the following computer languages 
       WinBatch
       XBase++ (Alaska Software)
   
-For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system:
+For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
 
 ```plaintext
 using System;
-using Dynarithmic;
+// The additional dtwain*.cs file needs to be added to your project for these definitions.
+using Dynarithmic; 
 
 namespace Test
 {    
