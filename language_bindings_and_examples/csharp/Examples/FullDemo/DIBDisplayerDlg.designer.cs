@@ -159,7 +159,9 @@
             this.Name = "DIBDisplayerDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bitmap Displayer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DIBDispalyerDlg_FormClosing);
             this.Load += new System.EventHandler(this.DIBDisplayerDlg_Load);
+            this.Leave += new System.EventHandler(this.DIBDisplayreDlg_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dibBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

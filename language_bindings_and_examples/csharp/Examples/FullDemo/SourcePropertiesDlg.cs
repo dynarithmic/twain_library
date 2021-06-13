@@ -7,8 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using Dynarithmic;
 
-using DTWAIN_SOURCE = System.Int32;
-using DTWAIN_ARRAY = System.Int32;
+using DTWAIN_SOURCE = System.IntPtr;
+using DTWAIN_ARRAY = System.IntPtr;
 
 namespace TWAINDemo
 {
@@ -39,7 +39,7 @@ namespace TWAINDemo
             string sVersion = lMajor.ToString() + "." + lMinor.ToString();
             this.edVersion.Text = sVersion;
 
-            DTWAIN_ARRAY AllCaps = 0;
+            DTWAIN_ARRAY AllCaps = IntPtr.Zero;
             int Val = 0;
 			TwainAPI.DTWAIN_EnumSupportedCaps(m_Source,ref AllCaps);
 			int nSize = TwainAPI.DTWAIN_ArrayGetCount(AllCaps);

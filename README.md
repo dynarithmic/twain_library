@@ -243,29 +243,49 @@ DTWAIN includes computer language bindings for the following computer languages 
       WinBatch
       XBase++ (Alaska Software)
   
-For example, here is a bare-bones C# language example of acquiring a BMP image from a default TWAIN device installed on your system:
+For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system:
 
-    using DynaRithmic;
-    [STAThread]
-    static void Main()
+```plaintext
+using System;
+using Dynarithmic;
+
+namespace Test
+{    
+    class Program
     {
-	   TwainAPI.DTWAIN_SysInitialize();
-	   int SelectedSource = TwainAPI.DTWAIN_SelectSource();
-	   if ( SelectedSource != 0 )
-	   {
-	      int status = 0;
-	      TwainAPI.DTWAIN_AcquireFile(SelectedSource,
-	                                          "Test",
-	                                           TwainAPI.DTWAIN_BMP,
-	                                           TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_USENAME,
-	                                           TwainAPI.DTWAIN_PT_DEFAULT,
-	                                           1,
-	                                           1,
-                                               1,
-	                                           ref status);
-	   }
-	   TwainAPI.DTWAIN_SysDestroy();
+        static void Main(string[] args)
+        {
+            // Initialize DTWAIN
+            var TwainHandle = TwainAPI.DTWAIN_SysInitialize();
+            if (TwainHandle == IntPtr.Zero)
+                Console.WriteLine("TWAIN Failed to be initialized.  Exiting...");
+            else
+            {
+                // Select a TWAIN Source from the TWAIN Dialog
+                var SelectedSource = TwainAPI.DTWAIN_SelectSource();
+
+                // We test against IntPtr.Zero, since the SelectedSource maybe 32-bit or 64-bit 
+                // depending on the application type.
+                if (SelectedSource != IntPtr.Zero)
+                {
+                    int status = 0;
+                    // Acquire the BMP file named Test.bmp
+                    TwainAPI.DTWAIN_AcquireFile(SelectedSource,
+                                                "Test.bmp",
+                                                 TwainAPI.DTWAIN_BMP,
+                                                 TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_USENAME,
+                                                 TwainAPI.DTWAIN_PT_DEFAULT,
+                                                 1,
+                                                 1,
+                                                 1,
+                                                 ref status);
+                }
+                TwainAPI.DTWAIN_SysDestroy();
+            }
+        }
     }
+}
+```
           
 Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
 

@@ -9,44 +9,13 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.IO;
 using Dynarithmic;
-
-using DTWAIN_ARRAY = System.Int32;
-
+using DTWAIN_ARRAY = System.IntPtr;
+using DTWAIN_HANDLE = System.IntPtr;
 
 namespace TWAINDemo
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct BITMAPINFOHEADER
-    {
-       public uint biSize;
-       public int biWidth;
-       public int biHeight;
-       public ushort biPlanes;
-       public ushort biBitCount;
-       public uint biCompression;
-       public uint biSizeImage;
-       public int biXPelsPerMeter;
-       public int biYPelsPerMeter;
-       public uint biClrUsed;
-       public uint biClrImportant;
-
-       public void Init()
-       {
-           biSize = (uint)Marshal.SizeOf(this);
-       }
-    }
-
     public partial class DIBDisplayerDlg : Form
     {
-        [DllImport("GdiPlus.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-        private static extern int GdipCreateBitmapFromGdiDib(IntPtr pBIH, IntPtr pPix, out IntPtr pBitmap);
-
-        [DllImport("kernel32.dll", CharSet=CharSet.Auto, ExactSpelling=true)]
-        public static extern IntPtr GlobalLock(int handle);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern int GlobalUnlock(IntPtr handle);
-
         private DTWAIN_ARRAY AcquireArray;
         private int nCurrentAcquisition;
         private int nCurDib;
@@ -90,40 +59,7 @@ namespace TWAINDemo
 
         private static Bitmap BitmapFromDIB(IntPtr pDIB)
         {
-            //get pointer to bitmap header info       
-            IntPtr pPix = GetPixelInfo(pDIB);
-
-            //Call external GDI method
-            MethodInfo mi = typeof(Bitmap).GetMethod("FromGDIplus", BindingFlags.Static | BindingFlags.NonPublic);
-            if (mi == null)
-                return null;
-
-            // Initialize memory pointer where Bitmap will be saved
-            IntPtr pBmp = IntPtr.Zero;
-
-            //Call external method that saves bitmap into pointer
-            int status = GdipCreateBitmapFromGdiDib(pDIB, pPix, out pBmp);
-
-            //If success return bitmap, if failed return null
-            if ((status == 0) && (pBmp != IntPtr.Zero))
-                return (Bitmap)mi.Invoke(null, new object[] { pBmp });
-            else
-                return null;
-        }
-
-        // THIS METHOD GETS THE POINTER TO THE BITMAP HEADER INFO
-        private static IntPtr GetPixelInfo(IntPtr bmpPtr)
-        {
-           BITMAPINFOHEADER bmi = (BITMAPINFOHEADER)Marshal.PtrToStructure(bmpPtr, typeof(BITMAPINFOHEADER));
-
-           if (bmi.biSizeImage == 0)
-               bmi.biSizeImage = (uint)(((((bmi.biWidth * bmi.biBitCount) + 31) & ~31) >> 3) * bmi.biHeight);
-
-           int p = (int)bmi.biClrUsed;
-           if ((p == 0) && (bmi.biBitCount <= 8))
-               p = 1 << bmi.biBitCount;
-           p = (p * 4) + (int)bmi.biSize + (int)bmpPtr;
-           return (IntPtr)p;
+            return Bitmap.FromHbitmap(TwainAPI.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero);
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
@@ -135,10 +71,8 @@ namespace TWAINDemo
         // Displays the DIB bitmap for acquisition nCurrentAcquisition, page nCurDib
         private void DisplayTheDib()
         {
-            int dib = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
-            IntPtr dibPtr = GlobalLock(dib);
-            this.dibBox.Image = BitmapFromDIB(dibPtr);
-            GlobalUnlock(dibPtr);
+            DTWAIN_HANDLE dib = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
+            this.dibBox.Image = BitmapFromDIB(dib);
             EnablePageButtons();
         }
 
@@ -155,6 +89,25 @@ namespace TWAINDemo
                 nCurrentAcquisition = this.cmbAcquisition.SelectedIndex;
                 nCurDib = 0;
                 DisplayTheDib();
+            }
+        }
+
+        private void DIBDisplayreDlg_Leave(object sender, EventArgs e)
+        {
+        }
+
+        private void DIBDispalyerDlg_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            int acquisitionCount = TwainAPI.DTWAIN_GetNumAcquisitions(AcquireArray);
+            for (int i = 0; i < acquisitionCount; ++i)
+            {
+                int imageCount = TwainAPI.DTWAIN_GetNumAcquiredImages(AcquireArray, i);
+                for (int j = 0; j < imageCount; ++j)
+                {
+                    DTWAIN_HANDLE handle = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, i, j);
+                    TwainAPI.GlobalUnlock(handle);
+                    TwainAPI.GlobalFree(handle);
+                }
             }
         }
     }
