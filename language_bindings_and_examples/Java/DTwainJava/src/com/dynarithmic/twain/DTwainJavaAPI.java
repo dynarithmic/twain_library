@@ -152,7 +152,7 @@ public class DTwainJavaAPI
     public native int DTWAIN_GetCountry() throws DTwainJavaAPIException;
     public native int DTWAIN_GetLanguage() throws DTwainJavaAPIException;
     public native boolean DTWAIN_IsMsgNotifyEnabled() throws DTwainJavaAPIException;
-    public native int DTWAIN_GetTwainHwnd() throws DTwainJavaAPIException;
+    public native long DTWAIN_GetTwainHwnd() throws DTwainJavaAPIException;
     public native boolean DTWAIN_IsAcquiring() throws DTwainJavaAPIException;     
     public native long DTWAIN_CreateAcquisitionArray() throws DTwainJavaAPIException;
     public native int DTWAIN_ClearErrorBuffer() throws DTwainJavaAPIException;

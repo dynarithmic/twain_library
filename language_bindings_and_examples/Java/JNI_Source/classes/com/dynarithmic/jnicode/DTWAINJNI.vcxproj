@@ -116,7 +116,7 @@
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>DTwainJavaAPID</TargetName>
+    <TargetName>dtwainjni32d</TargetName>
     <EmbedManifest>false</EmbedManifest>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
@@ -124,7 +124,7 @@
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>DTwainJavaAPIUD</TargetName>
+    <TargetName>dtwainjni32ud</TargetName>
     <EmbedManifest>false</EmbedManifest>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
@@ -132,7 +132,7 @@
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>DTwainJavaAPI</TargetName>
+    <TargetName>dtwainjni32</TargetName>
     <EmbedManifest>false</EmbedManifest>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
@@ -140,7 +140,7 @@
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>DTwainJavaAPIU</TargetName>
+    <TargetName>dtwainjni32u</TargetName>
     <EmbedManifest>false</EmbedManifest>
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
@@ -150,25 +150,25 @@
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
     <TargetExt>.dll</TargetExt>
     <GenerateManifest>false</GenerateManifest>
-    <TargetName>DTwainJavaAPI64</TargetName>
+    <TargetName>dtwainjni64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseU|x64'">
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
-    <TargetName>DTwainJavaAPI64U</TargetName>
+    <TargetName>dtwainjni64u</TargetName>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugU|x64'">
     <GenerateManifest>false</GenerateManifest>
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
-    <TargetName>DTwainJavaAPI64UD</TargetName>
+    <TargetName>dtwainjni64ud</TargetName>
     <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.\$(Configuration)$(PlatformArchitecture)/</OutDir>
     <IntDir>.\$(Configuration)$(PlatformArchitecture)/</IntDir>
-    <TargetName>DTwainJavaAPI64D</TargetName>
+    <TargetName>dtwainjni64d</TargetName>
     <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -182,7 +182,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -197,6 +197,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Async</ExceptionHandling>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -212,7 +213,7 @@
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>dtwain$(PlatformArchitecture)d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_32);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
     <Bscmake>
@@ -232,7 +233,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;_UNICODE;_DEBUG;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -247,6 +248,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ExceptionHandling>Async</ExceptionHandling>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -263,7 +265,7 @@
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>dtwain$(PlatformArchitecture)ud.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_32);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
     <Bscmake>
@@ -289,7 +291,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -315,7 +317,7 @@
       <DataExecutionPrevention />
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_32);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>dtwain32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -343,7 +345,7 @@
     <ClCompile>
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;_UNICODE;NDEBUG;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -370,7 +372,7 @@
       </DataExecutionPrevention>
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_32);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>dtwain32u.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -382,7 +384,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>dtwain64d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>.\$(Configuration)$(PlatformArchitecture)/\$(TargetName).dll</OutputFile>
@@ -390,7 +392,7 @@
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>Async</ExceptionHandling>
       <Optimization>Full</Optimization>
       <PreprocessorDefinitions>_WIN64;WIN32;_WINDOWS;;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
@@ -402,7 +404,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseU|x64'">
     <Link>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>dtwain64u.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <OutputFile>.\$(Configuration)$(PlatformArchitecture)/\$(TargetName).dll</OutputFile>
@@ -410,7 +412,7 @@
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;_UNICODE;NDEBUG;WIN64;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <AssemblerListingLocation>.\$(Configuration)$(PlatformArchitecture)/</AssemblerListingLocation>
@@ -418,6 +420,7 @@
       <ProgramDataBaseFileName>.\$(Configuration)$(PlatformArchitecture)/</ProgramDataBaseFileName>
       <Optimization>Full</Optimization>
       <PrecompiledHeaderOutputFile />
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugU|x64'">
@@ -426,12 +429,12 @@
       <AdditionalDependencies>dtwain$(PlatformArchitecture)ud.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ProgramDatabaseFile>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.pdb</ProgramDatabaseFile>
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;_UNICODE;_DEBUG;_WIN64;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <Optimization>Disabled</Optimization>
       <OmitFramePointers>false</OmitFramePointers>
@@ -441,20 +444,21 @@
       <ObjectFileName>.\$(Configuration)$(PlatformArchitecture)/</ObjectFileName>
       <ProgramDataBaseFileName>.\$(Configuration)$(PlatformArchitecture)/</ProgramDataBaseFileName>
       <PrecompiledHeaderOutputFile />
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalDependencies>dtwain$(PlatformArchitecture)d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>.\$(Configuration)$(PlatformArchitecture)/\$(TargetName).dll</OutputFile>
-      <AdditionalLibraryDirectories>$(DTWAIN_LIB_PATH)\$(PlatformArchitecture)bit;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DTWAIN_LIBRARY_DIR_64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <ProgramDatabaseFile>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.pdb</ProgramDatabaseFile>
       <ImportLibrary>.\$(Configuration)$(PlatformArchitecture)/dtwainjni.lib</ImportLibrary>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JDK_INCLUDE);$(JDK_INCLUDE)\win32;$(DTWAIN_INCLUDE_DIR);$(DTWAIN_DYNAMIC_INCLUDE);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WIN64;WIN32;_WINDOWS;_USRDLL;DTWAINJNI_EXPORTS;DTWAIN_USEDYNDTWAIN;DTWAIN_JAVA_DEMO_DISTRIBUTION;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -463,6 +467,7 @@
       <ObjectFileName>.\$(Configuration)$(PlatformArchitecture)/</ObjectFileName>
       <ProgramDataBaseFileName>.\$(Configuration)$(PlatformArchitecture)/</ProgramDataBaseFileName>
       <PrecompiledHeaderOutputFile />
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

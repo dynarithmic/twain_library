@@ -23,6 +23,29 @@ struct JavaLongArrayTraits
 	{ return env->GetLongArrayElements(arr, 0); }
 };
 
+struct JavaLong64ArrayTraits
+{
+    typedef jlongArray array_type;
+    typedef jlong base_type;
+    typedef int64_t api_base_type;
+    enum { dtwain_array_type = DTWAIN_ARRAYLONG64 };
+
+    static array_type CreateJArray(JNIEnv* env, int nCount)
+    {
+        return env->NewLongArray(nCount);
+    }
+
+    static void SetJArrayRegion(JNIEnv* env, array_type ret, int nCount, const std::vector<base_type>& vj)
+    {
+        env->SetLongArrayRegion(ret, 0, nCount, &vj[0]);
+    }
+
+    static base_type* GetJArrayElements(JNIEnv *env, array_type arr)
+    {
+        return env->GetLongArrayElements(arr, 0);
+    }
+};
+
 struct JavaIntArrayTraits
 {
 	typedef jintArray array_type;

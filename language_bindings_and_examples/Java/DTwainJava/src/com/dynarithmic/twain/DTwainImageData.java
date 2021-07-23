@@ -8,7 +8,7 @@ import java.util.zip.Inflater;
 public class DTwainImageData
 {
    private byte[] dibdata;
-   private int	   origDibHandle;
+   private long origDibHandle;
     
     public DTwainImageData()
     {    }
@@ -18,12 +18,12 @@ public class DTwainImageData
     	setImageData(data);
     }
 
-    public void setDibHandle(int dibHandle)
+    public void setDibHandle(long dibHandle)
     {
     	origDibHandle = dibHandle;
     }
     
-    int getDibHandle() 
+    long getDibHandle() 
     {
     	return origDibHandle;
     }
