@@ -118,7 +118,7 @@ class JavaCallback : public JavaAdapter
         // these functions are sent to DTWAIN for the callback setup
         static LRESULT CALLBACK DTWAINCallback(WPARAM w, LPARAM l, callback_type This);
 
-        static void CALLBACK DTWAINLoggerCallback(LPCTSTR str);
+        static LRESULT CALLBACK DTWAINLoggerCallback(LPCTSTR str, LONG64);
 
         // Constructor        
         JavaCallback(JNIEnv * pEnv);
@@ -154,11 +154,11 @@ LRESULT CALLBACK JavaCallback::DTWAINCallback(WPARAM w, LPARAM l, JavaCallback::
     return (callback_type)retval;
 }
 
-void CALLBACK JavaCallback::DTWAINLoggerCallback(LPCTSTR str)
+LRESULT CALLBACK JavaCallback::DTWAINLoggerCallback(LPCTSTR str, LONG64)
 {
     JavaCallbackPtr pCallback = g_pDTwainAPICallback;
     if ( !pCallback )
-        return;
+        return 1;
 
     // Now call the Java method
     JavaCallback::JCallbackInfo& pCallInfo = pCallback->m_jCallbackInfo[LOGGERFN];
@@ -167,13 +167,14 @@ void CALLBACK JavaCallback::DTWAINLoggerCallback(LPCTSTR str)
     pEnv->CallStaticVoidMethod(pCallInfo.m_jCallbackClass, 
                                pCallInfo.m_jCallbackMethodID, 
                                CreateJStringFromCString(pEnv, str));
+    return 0;
 }
 
 JavaCallback::JavaCallback(JNIEnv * pEnv) : JavaAdapter(pEnv)
 {
     Init(pEnv);
-    const JCallbackInfo jCallInfo[] = { {"com/dynarithmic/twain/DTwainJavaAPIListener", "onTwainEvent", "(IJ)I" ,0, 0,},
-                                        {"com/dynarithmic/twain/DTwainJavaAPILogger", "logEvent",  "(Ljava/lang/String;)V", 0, 0 }
+    const JCallbackInfo jCallInfo[] = { {"com/dynarithmic/twain/DTwainMessageListener", "onTwainEvent", "(IJ)I" ,0, 0,},
+                                        {"com/dynarithmic/twain/DTwainLogger", "logEvent",  "(Ljava/lang/String;)V", 0, 0 }
                                         };
 
     for ( int i = 0; i < 2; ++i )                                            
@@ -253,7 +254,7 @@ JNIEXPORT jlong JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1SysInit
       if ( retValue )                                                
       {
           // set the callback for the DTWAIN logger
-          DTWAIN_SetLoggerCallback(JavaCallback::DTWAINLoggerCallback);
+          DTWAIN_SetLoggerCallback(JavaCallback::DTWAINLoggerCallback, 0LL);
 		  JavaCallbackPtr pCallback = g_pDTwainAPICallback;
 		  if ( pCallback )
 			  DTWAIN_SetCallback(JavaCallback::DTWAINCallback, reinterpret_cast<JavaCallback::callback_type>(pCallback.get()));
@@ -406,13 +407,13 @@ JNIEXPORT jboolean JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1IsMs
 /*
  * Class:     com_dynarithmic_twain_DTwainJavaAPI
  * Method:    DTWAIN_GetTwainHwnd
- * Signature: ()I
+ * Signature: ()J
  */
-JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1GetTwainHwnd
+JNIEXPORT jlong JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1GetTwainHwnd
   (JNIEnv *env, jobject)
 {
     DTWAIN_TRY
-    return (jint)DTWAIN_FUNCTION_CALLER0(DTWAIN_GetTwainHwnd,HV);
+    return (jlong)DTWAIN_FUNCTION_CALLER0(DTWAIN_GetTwainHwnd,HV);
     DTWAIN_CATCH(env)
 }
   
@@ -434,7 +435,7 @@ JNIEXPORT jboolean JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1IsAc
 /*
  * Class:     com_dynarithmic_twain_DTwainJavaAPI
  * Method:    DTWAIN_CreateAcquisitionArray
- * Signature: ()I
+ * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1CreateAcquisitionArray
   (JNIEnv *env, jobject)
@@ -1452,7 +1453,11 @@ JNIEXPORT jlongArray JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1En
     DTWAIN_ARRAY A=0;
     BOOL bRet = DTWAIN_EnumSources(&A);
     DTWAINArray_RAII arr(A);    
+    #ifdef _WIN64
+    return CreateJArrayFromDTWAINArray<JavaLong64ArrayTraits>(env, A, bRet ? true : false);
+    #else
     return CreateJArrayFromDTWAINArray<JavaLongArrayTraits>(env, A, bRet?true:false);
+    #endif
     DTWAIN_CATCH(env)
 }
 
@@ -4470,7 +4475,7 @@ JNIEXPORT jintArray JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1Get
         throw "DTwain Module not loaded";
     DTWAIN_ARRAY arr = 0;
     DTWAINArray_RAII raii(arr);        
-    DTWAIN_FUNCTION_CALLER4(DTWAIN_GetOCRCapValues, LLLLa, (DTWAIN_OCRENGINE)ocr, capValue, getType, &arr);
+    DTWAIN_FUNCTION_CALLER4(DTWAIN_GetOCRCapValues, LOLLa, (DTWAIN_OCRENGINE)ocr, capValue, getType, &arr);
     return CreateJArrayFromDTWAINArray<JavaIntArrayTraits>(env, arr, 0);
     DTWAIN_CATCH(env)
 }  
@@ -4488,7 +4493,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1
         throw "DTwain Module not loaded";
     DTWAIN_ARRAY arr = 0;
     DTWAINArray_RAII raii(arr);        
-	DTWAIN_FUNCTION_CALLER4(DTWAIN_GetOCRCapValues, LLLLa, (DTWAIN_OCRENGINE)ocr, capValue, getType, &arr);
+	DTWAIN_FUNCTION_CALLER4(DTWAIN_GetOCRCapValues, LOLLa, (DTWAIN_OCRENGINE)ocr, capValue, getType, &arr);
     return CreateJStringArrayFromDTWAIN(env, arr);
     DTWAIN_CATCH(env)
 }
@@ -4501,7 +4506,7 @@ JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1SetOCRCa
         throw "DTwain Module not loaded";
     DTWAIN_ARRAY arr = CreateDTWAINArrayFromJArray<JavaIntArrayTraits>(env, jarr);
     DTWAINArray_RAII raii(arr);        
-    return DTWAIN_FUNCTION_CALLER4(DTWAIN_SetOCRCapValues, LLLLA, (DTWAIN_OCRENGINE)ocr, capValue, setType, arr);
+    return DTWAIN_FUNCTION_CALLER4(DTWAIN_SetOCRCapValues, LOLLA, (DTWAIN_OCRENGINE)ocr, capValue, setType, arr);
     DTWAIN_CATCH(env)
 }
 
@@ -4518,7 +4523,7 @@ JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1SetOCRCa
         throw "DTwain Module not loaded";
     DTWAIN_ARRAY arr = CreateDTWAINArrayFromJStringArray(env, jarr);
     DTWAINArray_RAII raii(arr);        
-	return DTWAIN_FUNCTION_CALLER4(DTWAIN_SetOCRCapValues, LLLLA, (DTWAIN_OCRENGINE)ocr, capValue, setType, arr);
+	return DTWAIN_FUNCTION_CALLER4(DTWAIN_SetOCRCapValues, LOLLA, (DTWAIN_OCRENGINE)ocr, capValue, setType, arr);
     DTWAIN_CATCH(env)
 }  
 
@@ -4534,7 +4539,7 @@ JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1Shutdown
     DTWAIN_TRY
     if ( !g_JNIGlobals.g_DTWAINModule )
         throw "DTwain Module not loaded";
-    return DTWAIN_FUNCTION_CALLER1(DTWAIN_ShutdownOCREngine, LL, (DTWAIN_OCRENGINE)ocr);
+    return DTWAIN_FUNCTION_CALLER1(DTWAIN_ShutdownOCREngine, LO, (DTWAIN_OCRENGINE)ocr);
     DTWAIN_CATCH(env)
 }  
 
@@ -4549,7 +4554,7 @@ JNIEXPORT jboolean JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1IsOC
     DTWAIN_TRY
     if ( !g_JNIGlobals.g_DTWAINModule )
         throw "DTwain Module not loaded";
-    return DTWAIN_FUNCTION_CALLER1(DTWAIN_IsOCREngineActivated, LL, (DTWAIN_OCRENGINE)ocr)?JNI_TRUE:JNI_FALSE;    
+    return DTWAIN_FUNCTION_CALLER1(DTWAIN_IsOCREngineActivated, LO, (DTWAIN_OCRENGINE)ocr)?JNI_TRUE:JNI_FALSE;    
     DTWAIN_CATCH(env)
 }  
 
@@ -4564,7 +4569,7 @@ JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1SetPDFOC
     DTWAIN_TRY
     if ( !g_JNIGlobals.g_DTWAINModule )
         throw "DTwain Module not loaded";
-    return DTWAIN_FUNCTION_CALLER6(DTWAIN_SetPDFOCRConversion,LLLLLLL,(DTWAIN_OCRENGINE)ocr, pageType, fileType, pixelType, bitDepth, options);
+    return DTWAIN_FUNCTION_CALLER6(DTWAIN_SetPDFOCRConversion,LOLLLLL,(DTWAIN_OCRENGINE)ocr, pageType, fileType, pixelType, bitDepth, options);
     DTWAIN_CATCH(env)
 }  
 
@@ -4595,7 +4600,7 @@ JNIEXPORT jint JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1ExecuteO
     DTWAIN_TRY
     if ( !g_JNIGlobals.g_DTWAINModule )
         throw "DTwain Module not loaded";
-    return DTWAIN_FUNCTION_CALLER4(DTWAIN_ExecuteOCR, LLtLL, (DTWAIN_OCRENGINE)ocr, GetStringCharsHandler(env, szFileName).GetWindowsStringChars(),
+    return DTWAIN_FUNCTION_CALLER4(DTWAIN_ExecuteOCR, LOtLL, (DTWAIN_OCRENGINE)ocr, GetStringCharsHandler(env, szFileName).GetWindowsStringChars(),
 			                         startPage, endPage);
     DTWAIN_CATCH(env)
 }  
@@ -4642,11 +4647,11 @@ JNIEXPORT jbyteArray JNICALL Java_com_dynarithmic_twain_DTwainJavaAPI_DTWAIN_1Ge
     if ( !g_JNIGlobals.g_DTWAINModule )
         throw "DTwain Module not loaded";
     LONG actualSize;        
-    HANDLE hReturn = DTWAIN_FUNCTION_CALLER6(DTWAIN_GetOCRText, HLLTLlL, (DTWAIN_OCRENGINE)ocr, pageNum, (LPTSTR)0, 0, &actualSize, DTWAINOCR_COPYDATA);
+    HANDLE hReturn = DTWAIN_FUNCTION_CALLER6(DTWAIN_GetOCRText, HOLTLlL, (DTWAIN_OCRENGINE)ocr, pageNum, (LPTSTR)0, 0, &actualSize, DTWAINOCR_COPYDATA);
     if (hReturn)
     {
         std::vector<TCHAR> ts(actualSize);
-        DTWAIN_FUNCTION_CALLER6(DTWAIN_GetOCRText, HLLTLlL, (DTWAIN_OCRENGINE)ocr, pageNum, &ts[0], ts.size(), &actualSize, DTWAINOCR_COPYDATA);
+        DTWAIN_FUNCTION_CALLER6(DTWAIN_GetOCRText, HOLTLlL, (DTWAIN_OCRENGINE)ocr, pageNum, &ts[0], ts.size(), &actualSize, DTWAINOCR_COPYDATA);
         return CreateJArrayFromCArray<JavaByteArrayTraits<TCHAR> >(env, &ts[0], ts.size()*sizeof(TCHAR));
     }
     return CreateJArrayFromCArray<JavaByteArrayTraits<TCHAR> >(env, NULL,0);

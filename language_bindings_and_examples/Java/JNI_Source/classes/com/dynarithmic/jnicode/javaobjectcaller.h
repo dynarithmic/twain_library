@@ -297,16 +297,16 @@ public:
 		return 0;		
 	}		
 
-	long callLongMethod(const std::string& methodName) 
+	int64_t callLongMethod(const std::string& methodName) 
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
-			return (long)m_pJavaEnv->CallLongMethod(m_jObject, defs.m_jMethodID);
+			return m_pJavaEnv->CallLongMethod(m_jObject, defs.m_jMethodID);
 		return 0;				
 	}		
 
 	template <typename T1>
-	long callLongMethod(const std::string& methodName, T1 t) 
+	int64_t callLongMethod(const std::string& methodName, T1 t) 
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -315,7 +315,7 @@ public:
 	}		
 
 	template <typename T1, typename T2>
-	long callLongMethod(const std::string& methodName, T1 t, T2 t2) 
+    int64_t callLongMethod(const std::string& methodName, T1 t, T2 t2)
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -324,7 +324,7 @@ public:
 	}		
 
 	template <typename T1, typename T2, typename T3>
-	long callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3) 
+    int64_t callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3)
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -333,7 +333,7 @@ public:
 	}		
 
 	template <typename T1, typename T2, typename T3, typename T4>
-	long callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4) 
+    int64_t callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4)
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -342,7 +342,7 @@ public:
 	}		
 
 	template <typename T1, typename T2, typename T3, typename T4, typename T5>
-	long callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4, T5 t5) 
+    int64_t callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4, T5 t5)
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -351,7 +351,7 @@ public:
 	}		
 
 	template <typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-	long callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) 
+    int64_t callLongMethod(const std::string& methodName, T1 t, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
 	{ 
 		JObjectCallerDefs defs = getFunctionDef(methodName);
 		if ( !defs.m_jMethodName.empty() )
@@ -742,7 +742,7 @@ public:
 		setDefaultConstructorPos(0);
 		registerMethod("", "()V");
 		registerMethod("setImageData", "([B)V");
-		registerMethod("setDibHandle", "(I)V");
+		registerMethod("setDibHandle", "(J)V");
 		initializeMethods();
 	}
 };
@@ -788,7 +788,7 @@ class JavaAcquirerInfo
 			// Call the method
 			m_jImageData.setObject(jImageDataObject);
 			m_jImageData.callVoidMethod("setImageData", bArray);
-			m_jImageData.callVoidMethod("setDibHandle", (jint)handle);
+			m_jImageData.callVoidMethod("setDibHandle", handle);
 			// release the array for internal Java GC
 			env->DeleteLocalRef(bArray);
 		}
