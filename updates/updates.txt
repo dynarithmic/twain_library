@@ -1,5 +1,8 @@
 DTWAIN Version changes
 
+5.2.0.7
+- Corrected issue with duplex scanning only scanning the first page if pending image count was not 0.
+
 5.2.0.6		  
 - Added following function:
   DTWAIN_ConvertDIBToBitmap -- Converts a Device Independent Bitmap to a Device Dependent Bitmap
