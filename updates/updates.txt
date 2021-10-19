@@ -1,5 +1,9 @@
 DTWAIN Version changes
 
+5.2.0.8
+- Corrected issue with single page PCX files not being generated.
+- Corrected issue with acquiring to text files with no available OCR support library.
+
 5.2.0.7
 - Corrected issue with duplex scanning only scanning the first page if pending image count was not 0.
 
