@@ -67,10 +67,28 @@ After building your application, for your application to run successfully, you m
 The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the DLL files required to run your applicaiton.
 
     32bit/dtwain32.dll -- 32-bit ANSI (MBCS) DLL 
+    Checksums:
+    SHA1    99b59fa4350172e69d02d85e43d42ccf3f767d5a
+    SHA-256 3a262921b2f4a44898e78248675455d59115eea4b95c3213f520e4d41e667cc0
+    MD5     a115ec3cddc252486d43f2e67b82383c
+    
     32bit/dtwain32u.dll -- 32-bit Unicode DLL
+    Checksums:
+    SHA1    14e25fdfb54945b758c2371108517b6cd3c9c8fc
+    SHA-256 49f8080b58de200fad5c59e4a0a798ddb8cf22fe0afb89eeea9c1d0b9c89b8d3
+    MD5     d29f219e85348c640ce74303f0d051a1
     
     64bit/dtwain64.dll -- 64-bit ANSI (MBCS) DLL
+    Checksums:
+    SHA1    592cd8bf4c4bbc1b9f806e81f2a9e6aa87ac4e96
+    SHA-256 0c69bb782c17aec27aa717408fc3d8dc5ae87ad0a718796b1371dcf8586d2e03
+    MD5     6e3e8c0541425d23b2a9f84d36d431df
+    
     64bit/dtwain64u.dll -- 64-bit Unicode DLL
+    Checksums:
+    SHA1    20319ac3c663a388098d096f5e20fb60bc0632f6
+    SHA-256 71912ce39106c7aad4e7fc65d37cc1297687b07f49e9e14f32e210a622304b1b
+    MD5     e9e6cf2d45be5ca9f048eee89317b236
     
 In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
 
