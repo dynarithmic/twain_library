@@ -1,0 +1,136 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_AcquireBuffered</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="CDTwainAppInfo::CDTwainAppInfo,CDTwainAppInfo::GetProductFamily,DTWAIN_AcquireBuffered" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_acquirebuffered.htm"; }
+  else { parent.quicksync('a5.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_AcquireBuffered</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainfunctionsa_z.htm">Previous</a>&nbsp;
+     <a href="dtwain_acquirebufferedex.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireBuffered</span> function starts the acquisition of images from a TWAIN Source.</p>
+<p>&nbsp;</p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">DTWAIN_ARRAY &nbsp;DTWAIN_AcquireBuffered ( </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">NumPages</span><span style="font-weight: bold;">,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bShowUI</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bCloseSource</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pStatus</span> <span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a selected <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PixelType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the pixel type of the image</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">NumPages</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the number of pages to acquire.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bShowUI</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies whether the Source displays the default User Interface.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bCloseSource</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies whether the Source should be automatically closed when the User Interface is closed.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pStatus</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a variable that will be filled in with an error status value.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds and the <a href="dtwain_settwainmode.htm">Twain Mode</a> is DTWAIN_MODAL, a <a href="dtwain_array_data_types.htm">DTWAIN_ARRAY</a> describing the attempted acquisitions is returned. &nbsp;If the function succeeds and the Twain mode is DTWAIN_MODELESS, a non-zero value is returned. &nbsp;On failure, the function returns NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_AcquireBuffered function starts the image acquisition device. &nbsp;The images are acquired using the <a href="bufferedtransfer.htm">Buffered Transfer Mode</a>. &nbsp; If the Source supports compressed files for buffered transfers, the <a href="dtwain_setcompressiontype.htm">DTWAIN_SetCompressionType</a> function can be used to set the compression type. &nbsp; For example, if the Source supports JPEG compressed images, the following would be done:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetCompressionType( Source, DTWAIN_CP_JPEG, TRUE );</p>
+<p>//...</p>
+<p>DTWAIN_AcquireBuffered( Source, ... ); </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For compressed mode, the returned DTWAIN_ARRAY defines raw image data and not Device Independent Bitmaps. &nbsp;If compression is used, capturing the <a href="processing_acquisition_message.htm">DTWAIN_TN_TRANSFERDONE notification</a> and calling <a href="dtwain_getcompressionsize.htm">DTWAIN_GetCompressionSize</a> should be done to get the size in bytes of the acquired image. &nbsp;Your application will need this information if your application desires to save the image to a file. &nbsp;Optionally, your application can also access each strip of data that has been acquired by capturing the DTWAIN_TN_TRANSFERSTRIPDONE notification.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_AcquireBuffered differs from <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a> only in the way the image transfer is done by the Source. &nbsp;See DTWAIN_AcquireNative for more information on the arguments to the DTWAIN_AcquireBuffered function.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>(if Source is not opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">5</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a></p>
+<p>State 4 (if Source is closed after acquisitions)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

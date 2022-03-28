@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SysInitialize</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SysInitialize" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_sysinitialize.htm"; }
+  else { parent.quicksync('a5.362'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SysInitialize</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_sysdestroy.htm">Previous</a>&nbsp;
+     <a href="dtwain_sysinitializeex.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SysInitialize</span> function initializes the DTWAIN DLL for use with the application.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_SysInitialize( );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;">None.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a non-zero value is returned. &nbsp;If the function fails, zero (0) is returned.  </p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">DTWAIN_SysInitialize</span> function must be called before attempting to call most of the other DTWAIN DLL functions. &nbsp;This function is responsible for initializing various structures and variables within the DTWAIN DLL. &nbsp;If DTWAIN_SysInitialize is called, a subsequent <a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a> must also be called.  </p>
+<p>&nbsp;</p>
+<p>The best place to call DTWAIN_SysInitialize is on application startup, with DTWAIN_SysDestroy called on application shutdown. &nbsp;Although app startup and shutdown are the safest place to call these functions, your application will still work successfully if you desire to place all of the DTWAIN code within a function block or procedure. &nbsp;In the latter case, the first function would be DTWAIN_SysInitialize followed by other DTWAIN functions, and the last function would be DTWAIN_SysDestroy.</p>
+<p>&nbsp;</p>
+<p>If DTWAIN_SysInitialize is called again without an intervening DTWAIN_SysDestroy, the LONG value returned from the first call to DTWAIN_SysInitialize is returned.  </p>
+<p>&nbsp;</p>
+<p>Note:</p>
+<p>The return value of DTWAIN_SysInitialize is a handle to the DTWAIN library API, and is associated with the identifier of the thread that is currently running when DTWAIN_SysInitialize is called. &nbsp;All subsequent DTWAIN API calls will check the current thread ID against this handle. &nbsp;If the current thread id is not associated with the handle, the DTWAIN function will return a -1001 error (DTWAIN not initialized). &nbsp;This means that the thread that calls DTWAIN_SysInitialize must be the same thread where all other DTWAIN functions will be called from.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, true);" class="popuplink">State 1</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>, <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>, <a href="dtwain_isinitialized.htm">DTWAIN_IsInitialized</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

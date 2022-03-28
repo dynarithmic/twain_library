@@ -1,0 +1,106 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SetTwainDSM</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_settwaindsm.htm"; }
+  else { parent.quicksync('a5.354'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetTwainDSM</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_settiffcompresstype.htm">Previous</a>&nbsp;
+     <a href="dtwain_settwainlog.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SetTwainDSM </span>function selects the TWAIN Data Source Manager that will be used by the application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetTwainDSM ( LONG </span><span style="font-style: italic;">DSMType </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">DSMType</span></p>
+<p style="margin: 0px 0px 0px 15px;">TWAIN Data Source Manager to use for subsequent TWAIN sessions.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetTwainDSM</span> function allows an application to choose the TWAIN Data Source Manager to use when communicating with TWAIN devices. &nbsp;The TWAIN Data Source Manager (DSM) is the program that allows DTWAIN to communicate with the various TWAIN drivers installed on the system. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">DSMType</span> argument can be one of the following values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="225" style="width:225px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td valign="top" width="409" style="width:409px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="225" style="width:225px;"><p>DTWAIN_TWAINDSM_LEGACY</p>
+</td>
+<td valign="top" width="409" style="width:409px;"><p>Legacy verson of the TWAIN DSM (TWAIN_32.DLL)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="225" style="width:225px;"><p>DTWAIN_TWAINDSM_VERSION2</p>
+</td>
+<td valign="top" width="409" style="width:409px;"><p>New, open source version of the TWAIN DSM (TWAINDSM.DLL)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For 32-bit applications, the valid constants are either DTWAIN_TWAINDSM_LEGACY or DTWAIN_TWAINDSM_VERSION2. &nbsp; If the application being run is 64-bit, a call to DTWAIN_SetTwainDSM has no effect, since the only DSM available for 64-bit applications is DTWAIN_TWAINDSM_VERSION2.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, for 32-bit applications, DTWAIN will always choose TWAIN_32.DLL as the DSM, unless a call to DTWAIN_SetTwainDSM is issued to override this choice. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For most applications, there is no need to call DTWAIN_SetTwainDSM as DTWAIN will always select the DSM that is compatible with the application automatically, whether the application is a 32-bit application or 64-bit application. &nbsp;The DTWAIN_SetTwainDSM function is provided for developers who are developing 32-bit applications, but want to use the 32-bit open source version of the DSM (TWAINDSM.DLL for 32-bit systems).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function should be called directly after <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> to ensure that DTWAIN will use the DSM set by this function instead of using the default DSM.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span><br>
+<span style="font-weight: bold;">None</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_gettwainavailability.htm">DTWAIN_GetTwainAvailability</a></p>
+<p><a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

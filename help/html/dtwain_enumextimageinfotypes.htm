@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_EnumExtImageInfoTypes</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_enumextimageinfotypes.htm"; }
+  else { parent.quicksync('a5.89'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumExtImageInfoTypes</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getcustomcaps.htm">Previous</a>&nbsp;
+     <a href="dtwain_getextendedcaps.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumExtImageInfoTypes</span> function fills a DTWAIN_ARRAY with all of a Source's supported extended image information types.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_EnumExtImageInfoTypes (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array</span><span style="font-weight: bold;"> );</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies an open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;">A pointer to a <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> that will contain the types.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_EnumExtImageInfoTypes function fills the DTWAIN_ARRAY pointed to by <span style="font-style: italic;">Array</span> with all of the <a href="extendedimageinformation.htm">extended image information</a> supported by the Source. &nbsp;This function can only be called when the DTWAIN_TN_TRANSFERDONE <a href="processing_acquisition_message.htm">notification</a> is sent, therefore this function is only available for languages that support callback functions or can intercept messages using a window handle.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the return value for DTWAIN_EnumExtImageInfoTypes is FALSE, the Source may not support querying for extended image information. &nbsp;The DTWAIN_ARRAY type that is used is to store the capability constants is DTWAIN_ARRAYLONG. &nbsp;The values stored in the array correspond to the values found in the <a href="dtwainextendedimageinformat.htm">Extended Image Information constants</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The source must be in<span style="font-weight: bold;"> </span><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">State 7</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_acquisition_functions.htm">DTWAIN Acquisition Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

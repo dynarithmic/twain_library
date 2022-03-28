@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetJobControl</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetJobControl" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getjobcontrol.htm"; }
+  else { parent.quicksync('a5.157'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_GetJobControl</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getimageinfostring.htm">Previous</a>&nbsp;
+     <a href="dtwain_getlanguage.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetJobControl</span> function gets the current job control type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetJobControl (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpJobControl,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bGetCurrent </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpPaperSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a LONG variable that will store the current job control type.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bGetCurrent</span></p>
+<p style="margin: 0px 0px 0px 15px;">Determines whether to get the current job control type or default job control type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetJobControl</span> function gets the current job control type for the Source <span style="font-style: italic;">Source</span>. &nbsp;The <span style="font-style: italic;">lpJobControl</span> is the address of a LONG that will be filled in with the job control type on successful return. &nbsp;If <span style="font-style: italic;">bGetCurrent</span> is TRUE, the job control type returned is the current job control type. &nbsp;If <span style="font-style: italic;">bGetCurrent</span> is FALSE, the default job control type is returned. &nbsp;The value stored at the <span style="font-style: italic;">lpPaperSize</span> address on return can be any one of the following <a href="dtwain_job_control_constants.htm">Job Control Constants</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Job control is usually found on high-end scanners. &nbsp;To see if job control is supported for a Source, call DTWAIN_IsJobControlSupported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Job Control Support</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,482 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_TwainSave Command Overview</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?commandoverview.htm"; }
+  else { parent.quicksync('a3.2.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_TwainSave Command Overview</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="scantofilecommandoptions.htm">Previous</a>&nbsp;
+     <a href="_a.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>DTWAIN_TwainSave can take various command options. &nbsp;The only required command-line option is <span style="font-weight: bold;"><a href="_f2.htm">-f</a> </span>(the name of the image file to be saved). &nbsp;Otherwise, DTWAIN_TwainSave uses the default setting for the option if the option is not specified. &nbsp;If <span style="font-weight: bold;">DTWAIN_TwainSave </span>detects that an illegal command-line option is given, a dialog is displayed that has a summary of all the commands, and the DTWAIN_TwainSave returns an error code denoting that the operation failed.</p>
+<p>&nbsp;</p>
+<p>When producing Acrobat PDF files, DTWAIN_TwainSave has various options including setting the producer, keywords, encryption, and other useful PDF options. &nbsp;The options that are PDF specific start named <span style="font-weight: bold;">-pdfxxxx</span> where "xxxx" is the option.</p>
+<p>&nbsp;</p>
+<p>The DTWAIN_TwainSave options can be one or more of the following:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px; border-collapse: collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_a.htm">-A</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use the automatic document feeder (default is feeder is not used).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_af.htm">-AF</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use the automatic document feeder, and if no paper is detected in feeder, use the flatbed portion of the device (detection of paper in feeder must be supported by the TWAIN driver).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_area.htm">-area</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Specifies the acquisition area to acquire.  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_b.htm">-B</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Brightness level (must be supported by the TWAIN driver).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_blankthreshold.htm">-blankthreshold</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the threshold (percentage) value for DTWAIN_TwainSave to determine if a page is blank. &nbsp;The threshold is the ratio of white pixels to dark pixels on the page. &nbsp;Use this option with <a href="_noblankpages.htm">-noblankpages</a><br>
+&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_bpp.htm">-bpp</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Bits-per-pixel used to acquire the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_c.htm">-C</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Set the contrast of the image</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_color.htm">-color</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the color setting of the device. &nbsp;  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_d.htm">-D</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use the duplex unit. &nbsp;Default is to not use the duplex unit.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_details.htm">-details</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Writes to a file all TWAIN device names and color/bits-per-pixel information for each TWAIN device.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_diagnose.htm">-diagnose</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Turn on diagnostic mode.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_diagnoselog.htm">-diagnoselog</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Log diagnostic messages to the specified file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_f.htm">-F</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>File type of the saved image. &nbsp;Default is "bmp". &nbsp;See <a href="_f.htm">-F</a> for all the various file types.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_f2.htm">-f</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>File name of the image file.  <br>
+&nbsp;<br>
+Unless the <a href="_details.htm">-details</a> option is used, the -f option is a <span style="font-weight: bold; text-decoration: underline;">required</span><span style="font-weight: bold;"> command option.</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_g.htm">-G</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Gamma value used for the image.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p>-help</p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Display DTWAIN_TwainSave help.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_im.htm">-im</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the imprinter string.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_jc.htm">-jc</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets job control options.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_jquality.htm">-jquality</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the JPEG quality factor for JPEG files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_multipage.htm">-multipage</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Save all pages scanned to a multi-page file.  </p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_multipage2.htm">-multipage2</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Save all pages scanned to a multi-page file only when the device user interface is closed.<br>
+&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_noblankpages.htm">-noblankpages</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Discard any blank pages that have been acquired from the TWAIN device.<br>
+&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_noui.htm">-noui</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Do not display the TWAIN device user interface when acquiring pages.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_orientation.htm">-orientation</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Specifies page orientation when acquiring pages.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_p.htm">-p</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Number of pages to acquire. &nbsp;Default is 0 (acquire all pages).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfascii.htm">-pdfascii</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Turns on ASCII compression for PDF files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfauthor.htm">-pdfauthor</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF author setting for the file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfcreator.htm">-pdfcreator</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Creator field in PDF files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfencrypt.htm">-pdfencrypt</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Turns on encryption for PDF file generation.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfkeywords.htm">-pdfkeywords</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Keywords setting for the file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfownerpass.htm">-pdfownerpass</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF owner password for encrypted files</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfpermit.htm">-pdfpermit</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Permissions for an encrypted file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfproducer.htm">-pdfproducer</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Producer field for the PDF file </p>
+<p>(deprecated -- please use <span style="font-weight: bold;">-pdfcreator</span>).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfquality.htm">-pdfquality</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the JPEG quality used in PDF files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfsize.htm">-pdfsize</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the size of the PDF page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfsubject.htm">-pdfsubject</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Subject field for the PDF file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdftitle.htm">-pdftitle</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF Title field for the PDF file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfuserpass.htm">-pdfuserpass</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF user password for encrypted files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdf128.htm">-pdf128</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use 128-bit encryption for PDF files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdforient.htm">-pdforient</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF orientation (landscape or portrait).</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfscale.htm">-pdfscale</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the PDF scaling for the PDF file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_pdfsize.htm">-pdfsize</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the size of the PDF page.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_p2.htm">-P</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Paper size. Default is US letter (8.5" x 11").</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_saveoncancel.htm">-saveoncancel</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Save image file even if user cancels scanning.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_s0.htm">-sd</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Select the default TWAIN device.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_s.htm">-sn</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Select the TWAIN device by using the name of the device.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_tempdir.htm">-tempdir</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Denotes path where temporary image files will be stored.<br>
+&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_thumbnail.htm">-thumbnail</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Produces thumbnail images.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_trans.htm">-trans</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use the transparency unit.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_u.htm">-U</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Sets the unit of measure.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_uiperm.htm">-uiperm</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Allows the TWAIN device's user interface to remain visible after a set of images have been acquired.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_useinc.htm">-useinc</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use the smart auto-incrementing feature when saving multiple pages to multiple files.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_verbose.htm">-verbose</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Outputs to the screen or file the current action that DTWAIN_TwainSave is executing.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_log.htm">-verboselog</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Send <a href="_verbose.htm">-verbose</a> output to a file.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="96" style="width:96px; border: solid 1px #000000;"><p><a href="_.htm">-@</a></p>
+</td>
+<td valign="top" width="467" style="width:467px; border: solid 1px #000000;"><p>Use a command file to specify commands.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>Here are a few examples of usage:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-sd -F bmp -f mybmp.bmp");</span></p>
+<p>Selects the default device (-sd), saves to BMP format (-F bmp), and the name of the file is mybmp.bmp.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-F gif -f mygif.gif");</span></p>
+<p>Displays the TWAIN "Select TWAIN device" dialog to select the device, saves to GIF format (-F gif), and the name of the file is mygif.gif.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-F tif3 -color 0 -f mytifg3.tif -noui"); </span></p>
+<p>Displays the TWAIN "Select TWAIN device" dialog to select the device (-sd), saves to TIFF Group3 format (-F tif3).</p>
+<p>The color is set to black and white (-color 0) to ensure that Group 3 format is created correctly (Group 3 must use black and white). &nbsp;No user interface of the TWAIN device is displayed.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-C 20 -f mybmp.bmp");</span></p>
+<p>Acquires to a BMP file and sets the contrast of the image to 20.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-C 20 -f mybmp.bmp -uiperm");</span></p>
+<p>Same as above, except that the TWAIN user interface for the device does not close after a set of pages are acquired (the user must close the user interface).</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-sn "Fujitsu Twain Driver" -bpp 8 -F tif7 -f mytif.tif -noui -D"); </span></p>
+<p>Uses the TWAIN driver named "Fujitsu Twain Driver",</p>
+<p>bits-per-pixel is 8</p>
+<p>Save to TIFF-LZW format</p>
+<p>Name of the file is mytif.tif</p>
+<p>Do not display the user interface of the device</p>
+<p>Use the duplex unit.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-verbose");</span></p>
+<p>Uses defaults and displays the progress of the acquisition on the screen.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-f test.bmp");</span></p>
+<p>Just specifying the filename does the following defaults:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Show the TWAIN "Select TWAIN device" window to select the TWAIN driver.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Displays the TWAIN driver's user interface.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquires entire page to a Windows BMP file.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The color used is black and white (1 bit per pixel), or the first available color that the TWAIN device supports that is compatble with BMP files.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Closes the TWAIN user-interface displayed after acquiring the image (see the <a href="_uiperm.htm">-uiperm</a> option to leave the user interface displayed after an acquistion)</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>No verbose output.</td></tr></table></div><p>&nbsp;</p>
+<p>Note that some options may cancel out other options. &nbsp;For example, an option to specify the PDFpage size (-pdfsize) will override the -P option. &nbsp;Make sure that you choose options that do not conflict with other options in terms of functionality.</p>
+<p>&nbsp;</p>
+<p>Also note that many of these command-line options can be overridden by the user of DTWAIN_TwainSave if the TWAIN user interface of the device is displayed (if you do not specify <span style="font-weight: bold;">-noui</span>) . &nbsp;For example, if you specify on the command-line to use color (the <span style="font-weight: bold;">-color 2 </span>option), and the user changes this by selecting a different color type in the user interface, DTWAIN_TwainSave cannot override the user's choices, and will attempt to scan and save the image based on the choices in the user interface.</p>
+
+</td></tr></table>
+
+</body>
+</html>

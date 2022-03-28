@@ -1,0 +1,99 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetManualDuplexCount</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getmanualduplexcount.htm"; }
+  else { parent.quicksync('a5.162'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetManualDuplexCount</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getlightsources.htm">Previous</a>&nbsp;
+     <a href="dtwain_getmaxacquisitions.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetManualDuplexCount</span> function gets the number of pages acquired when using the <a href="usingasimplexscannerfordu2.htm">Manual Duplex Mode</a>.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetManualDuplexCount (  </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pSide1, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pSide2 </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">A <a href="dtwain_source.htm">DTWAIN_SOURCE</a> that denotes a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pSide1</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to LONG type. &nbsp;On return, will denote the number of pages acquired for side 1.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pSide2</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to LONG type. &nbsp;On return, will denote the number of pages acquired for side 2.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If this function is successful, TRUE is returned, otherwise FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetManualDuplexCount</span> gets the number of pages acquired for side 1 and side 2 when the manual duplex mode option is selected. &nbsp;This function should be called during <a href="processing_acquisition_message.htm">DTWAIN Notification processing</a>, and can be used to determine if the number of pages acquired for both sides of the paper are the same.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><a href="dtwain_setmanualduplexmode.htm">DTWAIN_SetManualDuplexMode</a></p>
+<p><a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

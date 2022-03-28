@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Floating Point Issues and DTWAIN</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?floating_point_issues_and_dtwa.htm"; }
+  else { parent.quicksync('a1.3.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Floating Point Issues and DTWAIN</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="bitmap_data_and_twain_2.htm">Previous</a>&nbsp;
+     <a href="loading_unloading_the_dtwain_d.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For floating point parameters &nbsp;DTWAIN relies on the <a href="dtwain_float.htm">DTWAIN_FLOAT</a>, or 64-bit IEEE floating point type (this is equivalent to a <span style="font-weight: bold;">double</span> in C or C++). &nbsp;Most languages support this type, however for some languages (examples are XBase++ from <a href="http://www.alaska-software.com/" target="_blank" class="weblink">Alaska Software</a>, or a scripting language such as <a href="http://www.mjtnet.com/index.htm" target="_blank" class="weblink">Macro Scheduler</a>), this type is minimally supported and/or the programmer will have difficulty getting the language to support this type. &nbsp;This issue is evident if a <a href="dtwain_settwainlog.htm">log</a> of the DTWAIN function is inspected, and instead of the floating point value being passed to the function, a garbage or totally wrong floating point number is passed to the DTWAIN function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For this situation, DTWAIN has alternate functions to set and get floating point values, as well as set/get functions that requires usage of the <a href="dtwain_array_data_types.htm">DTWAIN_ARRAY'</a>s that hold DTWAIN_FLOAT types. &nbsp;These functions are as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #010001;"><a href="dtwain_getacquirearea2string.htm">DTWAIN_GetAcquireArea2String</a></span></p>
+<p><a href="dtwain_getbrightnessstring.htm">DTWAIN_GetBrightnessString</a></p>
+<p><span style="color: #010001;"><a href="dtwain_getcontraststring.htm">DTWAIN_GetContrastString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_getimageinfostring.htm">DTWAIN_GetImageInfoString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_getresolutionstring.htm">DTWAIN_GetResolutionString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_getrotationstring.htm">DTWAIN_GetRotationString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setacquirearea2string.htm">DTWAIN_SetAcquireArea2String</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setacquireimagescalestr.htm">DTWAIN_SetAcquireImageScaleString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setblankpagedetectionst.htm">DTWAIN_SetBlankPageDetectionString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setbrightnessstring.htm">DTWAIN_SetBrightnessString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setcontraststring.htm">DTWAIN_SetContrastString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setpdfpagescalestring.htm">DTWAIN_SetPDFPageScaleString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setpdfpagesizestring.htm">DTWAIN_SetPDFPageSizeString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setresolutionstring.htm">DTWAIN_SetResolutionString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_setrotationstring.htm">DTWAIN_SetRotationString</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_isdibblankstring.htm">DTWAIN_IsDIBBlankString</a></span></p>
+<p>&nbsp;</p>
+<p><span style="color: #010001;">All of these functions substitute the DTWAIN_FLOAT parameter with an LPCTSTR parameter. &nbsp;Since almost every (if not every) computer language that is available on the Windows platform handles strings with no issues, it is recommended to use the functions above to set certain capability values.</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="color: #010001;">For DTWAIN_ARRAY usage and setting/getting capability values:</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #010001;"><a href="dtwain_arrayfix32setat.htm">DTWAIN_ArrayFix32SetAt</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_arrayfix32getat.htm">DTWAIN_ArrayFix32GetAt</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_arrayconvertfloattofix3.htm">DTWAIN_ArrayConvertFloatToFix32</a></span></p>
+<p><span style="color: #010001;"><a href="dtwain_arrayconvertfix32tofloa.htm">DTWAIN_ArrayConvertFix32ToFloat</a></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="color: #010001;">The 4 functions above allow you to call functions such as DTWAIN_GetCapValues and DTWAIN_SetCapValues, where the capability requires DTWAIN_FLOAT values to get/set values. &nbsp;The "Fix32" is a special TWAIN type called a </span><span style="font-weight: bold; color: #010001;">TW_FIX32.  </span><span style="color: #010001;">This type consists of a whole and a fractional setting, allowing your application to create pseudo-floating point numbers that the DTWAIN library can process.  </span></p>
+<p>&nbsp;</p>
+<p><span style="color: #010001;">Here is a small 'C' example of using these functions (note that this example never needs to be done using 'C', since 'C' handles DTWAIN_FLOAT values with no issues. &nbsp;The example is only for illustrative purposes):</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; #include "dtwain.h"</span></p>
+<p> &nbsp;#include &lt;stdio.h&gt;</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; void Test()</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; LONG TwainSource;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; TwainSource = <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; if ( TwainSource )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LONG i, Whole, Frac, numValues;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; double dVal;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_ARRAY floatArray, fixedPtArray;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* get the resolution values that are used by the Source */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_enumresolutionvalues.htm">DTWAIN_EnumResolutionValues</a>( TwainSource, &amp;floatArray, TRUE );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; numValues = <a href="dtwain_arraygetcount.htm">DTWAIN_ArrayGetCount</a>( floatArray );</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* Convert to fixed point DTWAIN_ARRAY */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fixedPtArray = <a href="dtwain_arrayconvertfloattofix3.htm">DTWAIN_ArrayConvertFloatToFix32</a>( floatArray );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (i = 0; i &lt; numValues; ++i )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Whole and Frac contain the values in the array */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arrayfix32getat.htm">DTWAIN_ArrayFix32GetAt</a>( fixedPtArrray, i, &amp;Whole, &amp;Frac );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( "%d.%d\n", Whole, Frac );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* to test, convert the fixed point array back to a DTWAIN_ARRAYFLOAT array */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; floatArray = <a href="dtwain_arrayconvertfix32tofloa.htm">DTWAIN_ArrayConvertFix32ToFloat</a>( fixedPtArray ); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* print out the floating point values */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (i = 0; i &lt; numValues; ++i )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetatfloat.htm">DTWAIN_ArrayGetAtFloat</a>( floatArray, i, &amp;dVal );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( "%lf\n", dVal );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;  <a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp;}</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

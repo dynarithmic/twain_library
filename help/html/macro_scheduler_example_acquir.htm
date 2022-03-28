@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Macro Scheduler Sample: Acquire and save to BMP file</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?macro_scheduler_example_acquir.htm"; }
+  else { parent.quicksync('a1.11.2.9'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Macro Scheduler Sample: Acquire and save to BMP file</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="xbase_example.htm">Previous</a>&nbsp;
+     <a href="winbatch_sample_acquire_and_sa.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The following <a href="http://www.mjtnet.com/index.htm" target="_blank" class="weblink">Macro Scheduler</a> script is all that is required to do the following: </p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Check if TWAIN is installed.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Initialize the DTWAIN Dynamic Link Library.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Select a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquire a page using the Native transfer mode</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Save page to a BMP file called "TEST.BMP"</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Shut down any open TWAIN Source's and DTWAIN itself</td></tr></table></div><p style="text-indent: -24px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+<hr noshade size=1 style="color : #000000"><p>&nbsp;</p>
+<p><span style="font-size: 9pt;">LibLoad&gt; DTWAIN32.DLL,hLib</span></p>
+<p><span style="font-size: 9pt;">If&gt; hLib &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; // check if TWAIN is available</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LibFunc&gt; hLib,<a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>,avail</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; If&gt; avail&lt;&gt; 0 </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // Initialize the library </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; LibFunc&gt; hLib,<a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>,ret</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;// Select the source</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; LibFunc&gt; hLib,<a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a>,TwainSource</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; If&gt; TwainSource &lt;&gt; 0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // acquire to a BMP file</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LibFunc&gt; hLib,<a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a>,bOk,TwainSource,TEST.BMP,100,17,1000,1,1,1,0</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; ENDIF</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // Close Source and shutdown DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; LibFunc&gt; hLib,<a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>,ret2</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; ENDIF</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; // Unload the DLL</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LibFree&gt; hLib</span></p>
+<p><span style="font-size: 9pt;">Endif</span></p>
+<p>&nbsp;</p>
+<hr noshade size=1 style="color : #000000"><p><span style="font-size: 9pt;">In the example above, note that the </span><span style="font-size: 9pt; font-weight: bold;">LibLoad</span><span style="font-size: 9pt;"> and </span><span style="font-size: 9pt; font-weight: bold;">LibFree</span><span style="font-size: 9pt;"> commands are used to load and unload the DTWAIN librrary. &nbsp;The </span><span style="font-size: 9pt; font-weight: bold;">LibFunc</span><span style="font-size: 9pt;"> command calls the desired DTWAIN function with the appropriate parameters. &nbsp;Please consult your Macro Scheduler documentation for more information on </span><span style="font-size: 9pt; font-weight: bold;">LibLoad, LibFree, </span><span style="font-size: 9pt;">and </span><span style="font-size: 9pt; font-weight: bold;">LibFunc</span><span style="font-size: 9pt;"> commands.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">In addition, the call to <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> has numeric arguments (100, 17, 1000, etc.). &nbsp;These are the DTWAIN constant values that correspond to DTWAIN_BMP, DTWAIN_USELONGNAME, etc. &nbsp; For Macro Scheduler, it is required that the literal constants be used when calling DTWAIN functions, instead of the symbolic names. &nbsp; To get the constant's value, please see the </span><span style="font-size: 9pt; font-weight: bold;">DTWAIN32.scp</span><span style="font-size: 9pt;"> file for a list of the symbolic names and their constant value.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Last, the section on <a href="floating_point_issues_and_dtwa.htm">Floating Point Issues</a> is recommended for Macro Scheduler users who want to call DTWAIN functions that require floating point parameters.</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

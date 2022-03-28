@@ -1,0 +1,153 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SetPDFPageSize</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_setpdfpagesize.htm"; }
+  else { parent.quicksync('a5.335'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetPDFPageSize</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setpdfpagescalestring.htm">Previous</a>&nbsp;
+     <a href="dtwain_setpdfpagesizestring.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="color: #ff0000;">The following function is available only with DTWAIN / PDF</span>.</p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetPDFPageSize</span> sets the current page size of the PDF page.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetPDFPageSize (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PageSize,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">CustomWidth,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">CustomHeight </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PageSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">The current page size,</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CustomWidth</span></p>
+<p style="margin: 0px 0px 0px 15px;">Custom width in points.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CustomHeight</span></p>
+<p style="margin: 0px 0px 0px 15px;">Custom height in points.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SetPDFPageSize sets the current page size of the PDF page when acquiring images to PDF file(s) using <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">PageSize</span> argument can be one of the <a href="dtwain_frame_size_constants.htm">DTWAIN Paper Size constants</a>, DTWAIN_PDF_CUSTOMSIZE, DTWAIN_PDF_PIXELSPERMETERSIZE, or DTWAIN_PDF_VARIABLEPAGESIZE. If one of the DTWAIN Frame Size constants are used or DTWAIN_PDF_VARIABLEPAGE is specified, the <span style="font-style: italic;">CustomWidth</span> and <span style="font-style: italic;">CustomHeight</span> arguments are ignored.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN_PDF_CUSTOMSIZE is used, the page width and height are determined by the <span style="font-style: italic;">CustomWidth</span> and <span style="font-style: italic;">CustomHeight</span> arguments. &nbsp;Note that these arguments must be specified in terms of <span style="font-style: italic;">points</span>. &nbsp;There are 72 points per inch, therefore a custom page size of 10" x 12" would be specified as 720 x 864 points.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN_PDF_PIXELSPERMETERSIZE is used, the page width and height are proportional to the size of the image in pixels per unit. &nbsp;For all images produced by a TWAIN device, the unit of measurement within the bitmap is based on pixels per meter (39.37 inches per meter). &nbsp;So for &nbsp;example, if an image has dimensions 2486 X 3488, and the pixel per meter setting for the image is 11,814 for both width and height, the resulting PDF page size would be computed thusly:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>11814 / 39.37 is approximately 300 pixels per inch.</p>
+<p>2486 / 300 = 8.28 inches (horizontal size)</p>
+<p>3488 / 300 = 11.62 inches (vertical size)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>So the resulting PDF page will be 8.28 X 11.62 inches, or approximately A4 paper size. &nbsp;The pixel-per-meter setting, as well as the bitmap width and height, are all part of the bitmap information returned by the TWAIN driver before and after acquiring the image. &nbsp;If this information returned by the TWAIN driver is wrong or missing, the PDF page will be distorted. &nbsp;Therefore DTWAIN assumes that the TWAIN driver describes the image that has been acquired correctly.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN_PDF_VARIABLEPAGESIZE is specified, the PDF page is sized to the actual size of the image. &nbsp;The size of the page is determined by the pixel width and height of the image. &nbsp;A one-to-one mapping of the points to pixels is done. &nbsp;For example, if no scaling is done, an image of 800 x 600 pixels is fitted to a PDF page of 800 x 600 points. &nbsp;This allows the acquired image to fit perfectly without distortion, since the page is fitted to the image instead of the image being fitted to the page. &nbsp;If DTWAIN_PDF_VARIABLEPAGE is used, and there is also custom scaling (DTWAIN_SetPDFPageScale using DTWAIN_PDF_CUSTOMSCALE), the image is scaled and a PDF page is created with the same dimensions as the scaled image.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_PDF_PIXELSPERMETERSIZE is the best setting to use if what is desired is the closest match of the PDF page size to the actual size the image represents. &nbsp;All other settings will usually scale the page size, unless the scaled page matches what DTWAIN_PDF_PIXELSPERMETERSIZE would have produced.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, the page size is set for DTWAIN_FS_USLETTER (8.5" x 11" or in points, &nbsp;612 x 792).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example</span></p>
+<p>To set the page size to A4:</p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_FS_A4, 0.0, 0.0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To set the page size to LEGAL</p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_FS_USLEGAL, 0.0, 0.0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To set the page size to 5" x 7.5"</p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_PDF_CUSTOMSIZE, 5.0*72.0, 7.5*72.0 );</span></p>
+<p>The last two arguments multiply 5 by 72 and 7.5 by 72, since there are 72 points per inch.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">To set the page size equal to the image size:</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_FS_VARIABLEPAGE, 0.0, 0.0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">To set the page size equal to the image size and scale the image by half in both x and y directions:</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_PDF_VARIABLEPAGE, 0.0, 0.0 );</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageScale( Source, DTWAIN_PDF_CUSTOMSCALE, 50.0, 50.0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">To set the page size equal to the pixel per meter setting of the image:</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">DTWAIN_SetPDFPageSize( Source, DTWAIN_PDF_PIXELSPERUNITSIZE, 0.0, 0.0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">For languages that have difficulties with DTWAIN_FLOAT parameters, the alternate function that can be used as a replacement for DTWAIN_SetPDFPageSize is <a href="dtwain_setpdfpagesizestring.htm">DTWAIN_SetPDFPageSizeString</a>.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p>PDF File Options</p>
+
+</td></tr></table>
+
+</body>
+</html>

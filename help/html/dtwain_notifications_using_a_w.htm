@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN Notifications Using a Window Handle</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN Notifications Using a Window Handle" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_notifications_using_a_w.htm"; }
+  else { parent.quicksync('a3.1.20.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications Using a Window Handle</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_notifications_using_a_c.htm">Previous</a>&nbsp;
+     <a href="dtwain_notification_codes.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The only message that is sent to a window when a DTWAIN event occurs is equivalent to the return value of <a href="dtwain_getregisteredmsg.htm">DTWAIN_GetRegisteredMsg</a>. &nbsp;This message number will not conflict with any message numbers that your application or any other application may be using. &nbsp; All DTWAIN specific messages use this message number and this number only. The message number is set by DTWAIN when the <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> function is called. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once you have determined that the message has been sent by DTWAIN, you will need to know exactly what DTWAIN is informing your application of. &nbsp;To get the notification, the notification code is always passed as the '<span style="font-weight: bold;">WPARAM</span>' value of the DTWAIN message. &nbsp;The current Source is always sent as the <span style="font-weight: bold;">LPARAM</span> value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieving messages sent to a window differ depending on the language that you use for application development. &nbsp;C and C++ programmers can handle message retrieval easily, since messaging is intrinsic to a program written in those languages. &nbsp;Visual Basic programmers that use version 4.0 and below will have to use one of the 'message blaster' type VBX's or OCX's that are available, since VB 4.0 and below had no way of capturing user-defined messages </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Regardless of the language, you must be familiar with how your language allows message processing. &nbsp;If your language does not provide a facility to capture messages, you can still use DTWAIN to a great extent, but you will not be able to 'fine-tune' the application in as far as checking for the progress of an acquisition, allow users to stop a multi-page acquisition, etc.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following is a small skeleton example of how to use the notifications. &nbsp;The example is in 'C', however almost all Windows programming languages has the facility to process window messages: </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p>#include &lt;windows.h&gt;</p>
+<p>#include "dtwain.h"</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>HWND &nbsp;hDTwainWnd;</p>
+<p>LONG &nbsp;DTwainMsg;</p>
+<p>...</p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a>( );</p>
+<p>...</p>
+<p>DTwainMsg = <a href="dtwain_getregisteredmsg.htm">DTWAIN_GetRegisteredMsg</a>( );</p>
+<p><a href="dtwain_enablemsgnotify.htm">DTWAIN_EnableMsgNotify</a>( TRUE );</p>
+<p>...</p>
+<p><a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a>( hDTwainWnd, NULL);</p>
+<p>...</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>/* Here is the window procedure for the DTWAIN </p>
+<p>message window hDTwainWnd */</p>
+<p>LONG MyProc( HWND hWnd, UINT nMsg, </p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; WORD wParam, LONG lParam)  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>...</p>
+<p> &nbsp;if ( nMsg == DTwainMsg)  </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;if ( wParam == DTWAIN_TN_ACQUIRESTARTED ) </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN Started an image acquisition </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;else</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;if ( wParam == DTWAIN_TN_ACQUIRECANCELLED)</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acquisition Cancelled </p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;...</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;/* Possibly more tests for other notifications */</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;...</p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-family: 'Times New Roman'; color: #ff0000;">/* STOP! LOOK! LISTEN! &nbsp;IMPORTANT! */</span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-family: 'Times New Roman'; color: #ff0000;">return 1; &nbsp;/* Must always return 1 for </span></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-family: 'Times New Roman'; color: #ff0000;">unprocessed notifications*/</span></p>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; /* end of if */</p>
+<p>else   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* This is NOT a DTWAIN message </p>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;/*This is a 'normal' window message */</p>
+<p style="margin: 0px 0px 0px 48px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>...</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that in the above example, DTWAIN_GetRegisteredMsg returns the message that is always sent to your message window if the message was generated by DTWAIN. &nbsp;Also DTWAIN_EnableMsgNotify is set to TRUE to invoke processing DTWAIN messages.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">DTWAIN message processing requires that your window procedure return the value of TRUE for unprocessed DTWAIN messages. &nbsp;This is very important and should not be overlooked!!</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

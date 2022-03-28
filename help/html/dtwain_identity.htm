@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_IDENTITY</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="TWAIN_IDENTITY" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_identity.htm"; }
+  else { parent.quicksync('a3.3.2.4.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_IDENTITY</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtw_frame_functions.htm">Previous</a>&nbsp;
+     <a href="dtwainconstants2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The DTWAIN_IDENTITY data type is a pointer to the <span style="font-weight: bold;">TW_IDENTITY</span> structure described in the Twain Specification. &nbsp;The TW_IDENTITY structure is as follows (as described in the TWAIN.H header file).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>typedef struct </p>
+<p>TW_UINT32 &nbsp;Id; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Unique number. In Windows, application hWnd */</p>
+<p>TW_VERSION Version; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Identifies the piece of code &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</p>
+<p>TW_UINT16 &nbsp;ProtocolMajor; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMAJOR */</p>
+<p>TW_UINT16 &nbsp;ProtocolMinor; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMINOR */</p>
+<p>TW_UINT32 &nbsp;SupportedGroups;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Bit field OR combination of DG_ constants */</p>
+<p>TW_STR32 &nbsp; Manufacturer; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Manufacturer name, e.g. "Hewlett-Packard" */</p>
+<p>TW_STR32 &nbsp; ProductFamily; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Product family name, e.g. "ScanJet" &nbsp; &nbsp; &nbsp; */</p>
+<p>TW_STR32 &nbsp; ProductName; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Product name, e.g. "ScanJet Plus" &nbsp; &nbsp; &nbsp; &nbsp; */</p>
+<p> TW_IDENTITY;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_IDENTITY type is used for functions such as <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMProc.</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

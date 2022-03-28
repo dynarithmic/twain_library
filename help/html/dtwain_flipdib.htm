@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_FlipBitmap</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_flipdib.htm"; }
+  else { parent.quicksync('a5.108'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_FlipBitmap</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_feedpage.htm">Previous</a>&nbsp;
+     <a href="dtwain_flushacquiredpages.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_FlipBitmap</span> rotates a Device Independent Bitmap (DIB) 180 degrees and swaps the DIBs color components.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_FlipBitmap ( HANDLE  </span><span style="font-style: italic;">hDib </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">hDib</span></p>
+<p>Specifies a handle to a Device Independent Bitmap.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="color: #ff0000;">The DTWAIN_FlipBitmap should only be used for correcting the returned DIB from calling DTWAIN_AcquireBuffered and using a user-defined buffer.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_FlipBitmap</span> function takes a Device Independent Bitmap (DIB) and swaps the color components and rotates the DIB 180 degrees. &nbsp;This function should rarely be used by a DTWAIN application, however it is most useful when an application has called <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a> and has set up a <a href="usingauser_definedbuffer.htm">user defined buffer</a> to retrieve the image.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since DTWAIN does not handle the image data for buffered transfers that utilize a user-defined buffer, the application will have to make sure that the returned DIB has been properly inverted and color components swapped, since the returned DIB from the TWAIN device has swapped color components and is "upside-down". &nbsp;Without "flipping" the DIB, the DIB will have the wrong colors and will be upside-down when saved or displayed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">hDib</span> parameter is the handle to the DIB. &nbsp;On return, the DIB will be rotated 180 degrees and swaps the color components.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><span style="font-weight: bold;">None.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p>None.</p>
+
+</td></tr></table>
+
+</body>
+</html>

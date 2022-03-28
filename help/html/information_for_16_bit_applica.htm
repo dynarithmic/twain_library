@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Information for 16-bit Applications</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Information for 16-bit Applications" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?information_for_16_bit_applica.htm"; }
+  else { parent.quicksync(''); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Information for 16-bit Applications</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     
+     
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For the DTWAIN DLL 16-bit version, it is highly recommended that you choose the Large memory model for your application. &nbsp;DTWAIN has not been tested with a Medium memory model application. &nbsp;We believe that DTWAIN will work with a Medium memory model application, but as stated, this has not been tested.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Another important topic when developing a 16-bit DTWAIN application are the initial stack and heap sizes for the application. &nbsp;It is important that you define your stack and heap sizes large enough within your application. &nbsp;The usual way of doing this is to create a module definition file and specify the values within the definition file (usually these files have a .DEF extension). &nbsp;If a module definition file is not used, there is a good chance that your application will act erratically, and may fail.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The minimum stack and heap size tested at Dynarithmic Software has been 10,000 bytes of heap space and 10,000 bytes of stack space. If no module definition file exists, many compilers default to the minimum size for stack and heap, which is not nearly enough. &nbsp;The 16-bit examples contain sample DEF files.</p>
+
+</td></tr></table>
+
+</body>
+</html>

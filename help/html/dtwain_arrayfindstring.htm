@@ -1,0 +1,136 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_ArrayFindString</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_arrayfindstring.htm"; }
+  else { parent.quicksync('a5.27'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayFindString</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayfindlong64.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayfindansistring.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayFindString </span>function searches for a string value in a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_ArrayFindString (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Value </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> to search.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p style="margin: 0px 0px 0px 15px;">String to search for</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, the zero-based position of the element is returned. &nbsp;Otherwise -1 is returned if the element cannot be found, or another error has been encountered.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="185" style="width:185px;"><p><span style="font-weight: bold;">DTWAIN_ArrayFindStringA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="185" style="width:185px;"><p><span style="font-weight: bold;">DTWAIN_ArrayFindStringW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_ArrayFindString</span> is a specialized version of <a href="dtwain_arrayfind.htm">DTWAIN_ArrayFind</a> for string values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_ArrayFindString</span> function searches the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>, and returns the position of the first element that is equal to string pointed to by <span style="font-style: italic;">Value</span>. &nbsp;Note that the string <span style="font-style: italic;">Value</span> must be a null-terminated string.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store string values (i.e. the DTWAIN_ARRAY was created with the <span style="font-weight: bold;">DTWAIN_ARRAYSTRING </span>style.<span style="font-weight: bold;">  </span>See <a href="dtwain_arraycreate.htm">DTWAIN_ArrayCreate</a> for more information).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p>/* Find an element in a DTWAIN_ARRAY */</p>
+<p>void Func( )</p>
+<p>{</p>
+<p> &nbsp; DTWAIN_ARRAY Array;</p>
+<p> &nbsp; LONG i;</p>
+<p> &nbsp; LONG Position;</p>
+<p> &nbsp; LONG SearchVal;</p>
+<p> &nbsp; char Str1[] = "Test1";</p>
+<p> &nbsp; char Str2[] = "Test2";</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Create a DTWAIN_ARRAY with 4 elements */</p>
+<p> &nbsp; Array = DTWAIN_ArrayCreate(DTWAIN_ARRAYSTRING, 2);</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; DTWAIN_ArraySetAtString( &nbsp;Array, 0, Str1 &nbsp;)</p>
+<p> &nbsp; DTWAIN_ArraySetAtString( &nbsp;Array, 1, Str2 &nbsp;)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Search for 2 */</p>
+<p> &nbsp; Position = DTWAIN_ArrayFindString( Array, Str1 );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Position should be a 0, since the "Test1" was stored at Array[0] */</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; /* Destroy the array */</p>
+<p> &nbsp; DTWAIN_ArrayDestroy( Array );</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm">Adding, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_RangeSetValue</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_RangeSetValue" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_rangesetvalue.htm"; }
+  else { parent.quicksync('a5.270'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_RangeSetValue</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_rangesetall.htm">Previous</a>&nbsp;
+     <a href="dtwain_rewindpage.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_RangeSetValue</span> function sets either the low, high, step, default, or current values in the DTWAIN_RANGE<span style="font-weight: bold;">.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_RangeSetValue (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_RANGE</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Range,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">WhichValue,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">LPVOID</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpValue </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Range</span></p>
+<p style="margin: 0px 0px 0px 15px;">A valid <a href="overview_of_dtwain_range.htm">DTWAIN_RANGE</a> type.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">WhichValue</span></p>
+<p style="margin: 0px 0px 0px 15px;">Range value to set</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpValue</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of the new value to set in the DTWAIN_RANGE</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_RangeSetValue</span> function sets a value in the DTWAIN_RANGE <span style="font-style: italic; font-weight: bold;">Range</span>. &nbsp;The <span style="font-style: italic; font-weight: bold;">WhichValue</span> denotes the value in the DTWAIN_RANGE that is to be set. &nbsp;The <span style="font-style: italic; font-weight: bold;">WhichValue</span><span style="font-style: italic;"> </span>can be one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p><span style="text-decoration: underline;">Constant</span></p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p><span style="text-decoration: underline;">Value &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p><span style="text-decoration: underline;">Defintion</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p>DTWAIN_RANGEMIN</p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p>1</p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p>Minimum value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p>DTWAIN_RANGEMAX</p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p>2</p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p>Maximum value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p>DTWAIN_RANGESTEP</p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p>3</p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p>Step size</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p>DTWAIN_RANGEDEFAULT</p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p>4</p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p>Default value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="219" style="width:219px;"><p>DTWAIN_RANGECURRENT</p>
+</td>
+<td valign="top" width="43" style="width:43px;"><p>5</p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p>Current value</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic; font-weight: bold;">lpValue</span> is the address of the value that is to be used to set in the DTWAIN_RANGE. &nbsp;Since DTWAIN_RANGEs can differ in data types, the caller to this function is responsible in seeing that the data type residing at <span style="font-style: italic; font-weight: bold;">lpValue</span> matches the data type stored in <span style="font-style: italic; font-weight: bold;">Range.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_range_functions.htm">DTWAIN Range Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

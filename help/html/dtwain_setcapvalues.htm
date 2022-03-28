@@ -1,0 +1,173 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SetCapValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetCapValues" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_setcapvalues.htm"; }
+  else { parent.quicksync('a5.296'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetCapValues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setcamera.htm">Previous</a>&nbsp;
+     <a href="dtwain_setcapvaluesex.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SetCapValues</span> function sets the capability value(s) for a Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetCapValues (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="135" style="width:135px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="125" style="width:125px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="135" style="width:135px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="125" style="width:125px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Capability,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="135" style="width:135px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="125" style="width:125px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">SetType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="135" style="width:135px;"><p><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="125" style="width:125px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">CapValues </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Capability</span></p>
+<p style="margin: 0px 0px 0px 15px;">The capability that is to be set.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">SetType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates whether to set the capability or to the default capability value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">CapValues</span></p>
+<p style="margin: 0px 0px 0px 15px;">A <a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> containing the values to set for the capability or NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SetCapValues function sets a Source's device capability  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The Source <span style="font-style: italic;">Source</span> must be selected using one of the <a href="selectingthetwainsource.htm">Source Selection Functions</a>. &nbsp;The capability <span style="font-style: italic;">Capability</span> is the Source's capability that is to be set. &nbsp;A list of the capabilities as well as the capabilities data type can be found in the topic <a href="dtwain_capabilities_by_name.htm">DTWAIN Capability Constants</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">Please note: If you are setting the value(s) of</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">1) a custom capability, or</span></p>
+<p><span style="color: #ff0000;">2) not one of the standard TWAIN capabilities, or </span></p>
+<p><span style="color: #ff0000;">3) a capability that the DTWAIN library has no previous knowledge of (for example, a recently added capability from a new TWAIN standard), </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">and you have full information on the capability (number, type of container to use, etc.), use the <a href="dtwain_setcapvaluesex2.htm">DTWAIN_SetCapValuesEx2</a> function instead of DTWAIN_SetCapValues.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">SetType</span> determines whether the capability will be set to new values or to the default capability value(s). &nbsp;The values of <span style="font-style: italic;">SetType</span> can be one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p><span style="text-decoration: underline;">SetType</span></p>
+</td>
+<td valign="top" width="545" style="width:545px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>DTWAIN_CAPSET &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="545" style="width:545px;"><p>Sets the current value of the capability (single value only)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>DTWAIN_CAPSETCURRENT</p>
+</td>
+<td valign="top" width="545" style="width:545px;"><p>Sets the current values of the capability.(multiple values)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>DTWAIN_CAPSETCONSTRAINT</p>
+</td>
+<td valign="top" width="545" style="width:545px;"><p>Sets the current values of the capability (multiple values) (supported for TWAIN 2.x sources)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>DTWAIN_CAPRESET</p>
+</td>
+<td valign="top" width="545" style="width:545px;"><p>Sets the capability to the device's default value(s).</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">SetType</span> is DTWAIN_CAPSET, only a single value is used to set the capability. &nbsp;This is usually the case, since setting multiple values is usually not done. &nbsp;However, DTWAIN supports setting of multiple values using the DTWAIN_CAPSETCURRENT or DTWAIN_CAPSETCONSTRAINT constant. &nbsp; The capability will be set to the new value(s) found in the DTWAIN_ARRAY <span style="font-style: italic;">CapValues</span>. &nbsp;If <span style="font-style: italic;">SetType</span> is DTWAIN_CAPRESET the <span style="font-style: italic;">CapValues</span> argument is ignored and should be <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a>. &nbsp;The device's default values are usually the 'power-on' values for the device, but there really is no hard rule as to what the 'default' values really are.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_ARRAY <span style="font-style: italic;">CapValues</span> must be initialized before storing values by calling the DTWAIN_ArrayCreateFromCap<span style="font-style: italic;"> </span>function or DTWAIN_ArrayCreate function. The data type of <span style="font-style: italic;">CapValues</span> must match the data type that <span style="font-style: italic;">Capability</span> uses. &nbsp;For example, if <span style="font-style: italic;">Capability</span> accepts LONGs, <span style="font-style: italic;">CapValues</span> must be of type DTWAIN_ARRAYLONG. &nbsp;To ensure that <span style="font-style: italic;">CapValues</span> is of the correct type, the DTWAIN_ArrayCreateFromCap function should be used to create a DTWAIN_ARRAY that will be of the correct data type for <span style="font-style: italic;">Capability.  </span>Alternately, you can initialize a DTWAIN_ARRAY with DTWAIN_ArrayCreate using the correct data type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetCapValues always uses the 'safest' TWAIN Container when setting the values. &nbsp;If you desire to use a different TWAIN container type, use DTWAIN_SetCapValuesEx.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the DTWAIN_SetCapValues function to return TRUE, the following must take place:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The Source must be opened.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The Source supports the capability and support setting current or available values. &nbsp;Some Sources allow setting current values, but not available values.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The values used to set the capability are valid (the values are processed by the Source).</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The data type for the capability must be known by DTWAIN.</td></tr></table></div><p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+<p>The <a href="dtwain_getcapdatatype.htm">DTWAIN_GetCapDataType</a> function can be used to test if DTWAIN was successful in determining the data type of the capability when the TWAIN Source was initially opened. &nbsp;If DTWAIN_GetCapDataType returns a negative number, then you must use <a href="dtwain_setcapvaluesex2.htm">DTWAIN_SetCapValuesEx2</a>, or set the data type in the DTWAIN32.INI file for the capability.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>All standard TWAIN capabilities defined by the TWAIN 1.9 specification will have their data types known by DTWAIN. &nbsp;However, custom capabilities defined solely by the manufacturer of the TWAIN driver may or may not have their data types known to DTWAIN when the TWAIN Source is opened. &nbsp;Therefore DTWAIN_SetCapValuesEx2 should be used in this case, or use the low-level <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMProc</a> to set the capability.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN function DTWAIN_IsSourceOpen can be used to test the first condition.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a> function can be used to test if the capability is supported. &nbsp;DTWAIN always checks if the capability is supported when the DTWAIN_SetCapValues function is called, however if the application knows beforehand that the capability is not supported, this will result in faster performance.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="example_setting_device_capabil.htm">Example</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher (depending on the capability).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Twain Capabilities</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

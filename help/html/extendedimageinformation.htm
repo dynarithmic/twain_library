@@ -1,0 +1,160 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Handling Extended Image Information</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?extendedimageinformation.htm"; }
+  else { parent.quicksync('a3.1.18'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Handling Extended Image Information</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="high_speedscanning.htm">Previous</a>&nbsp;
+     <a href="twaindatasourceissues.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Some image devices support getting information as to imprinter strings, barcode detection, patch code information, and other specialized information concerning the acquired image.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To retrieve this information, the TWAIN Source usually supports <span style="font-weight: bold;">Extended Image Information</span>. &nbsp;In general, the extended image information is supported by high-end scanners with Twain drivers that support these modes of operation. &nbsp;DTWAIN allows the application to retrieve this information using a series of function calls. &nbsp;The application can only retrieve the information during the acquisition of the image, therefore the application must process <a href="processing_acquisition_message.htm">DTWAIN notifications</a>. &nbsp;For these reasons, retrieving extended image information is reserved for computer languages that can process notifications, either by window handle or callback function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Before retrieving this information, the application must verify whether the device supports Extended Image Information. &nbsp;The <a href="dtwain_isextimageinfosupported.htm">DTWAIN_IsExtImageInfoSupported</a> function must return TRUE before proceeding.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The application must capture the DTWAIN_TN_TRANSFERDONE notification to retrieve the information. &nbsp;The next step is to determine what extended image information is supported by the Source. &nbsp;The <a href="dtwain_enumextimageinfotypes.htm">DTWAIN_EnumExtImageInfoTypes</a> is called to get a list of the supported types for the Source. &nbsp;Once the supported types have been established, the next &nbsp;thing to do is to initialize the extended image information structures used by the Source. &nbsp;The <a href="dtwain_initextimageinfo.htm">DTWAIN_InitExtImageInfo</a> initializes the Source to retrieve extended image information. &nbsp;This function must be called before attempting to retrieve the image information.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The application must then call <a href="dtwain_getextimageinfodata.htm">DTWAIN_GetExtImageInfoData</a> to retrieve the extended image information that is desired.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The last function that is called is to release the memory that was used to initialize and store the extended image information. &nbsp;The <a href="dtwain_freeextimageinfo.htm">DTWAIN_FreeExtImageInfo</a> release all of this memory. &nbsp;Failure to call this function will result in a memory leak in your application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>So to summarize:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>1) Check if the Source supports extended image information by calling DTWAIN_IsExtImageInfoSupported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When the DTWAIN_TN_TRANSFERDONE notification is sent do, steps 2 - 5</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2) If extended image information is supported, get a list of extended image information types that the Source supports by calling &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </p>
+<p><span style="width:48px">&nbsp;</span> &nbsp; &nbsp;DTWAIN_EnumExtImageInfoTypes (your code can optimize this step by calling it only once and storing the values in an array)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:48px">&nbsp;</span>3) Your application can now retrieve the extended information. &nbsp;To initiate this, the DTWAIN_InitExtImageInfo is called.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:48px">&nbsp;</span>4) Retrieve the results of the query by calling DTWAIN_GetImageInfoData.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="width:48px">&nbsp;</span>5) Call DTWAIN_FreeExtImageInfo to release the memory.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Here is a small 'C' example of how to do these steps. &nbsp;It is assumed that the application wants to query the barcode types found, and the Source <span style="font-style: italic;">Source</span> has been selected and opened.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">/*******************************************************************/</span></p>
+<p><span style="font-size: 9pt;">/* Here is the notification function that was set up with a call to DTWAIN_SetCallback &nbsp;*/</span></p>
+<p><span style="font-size: 9pt;">/* i.e. DTWAIN_SetCallback( NotificationCallback, 0 ); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */</span></p>
+<p><span style="font-size: 9pt;">/*******************************************************************/</span></p>
+<p><span style="font-size: 9pt;">LRESULT CALLBACK NotificationCallback(WPARAM wParam, LPARAM lParam, LONG UserInfo )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( wParam == DTWAIN_TN_TRANSFERDONE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; LONG numBarCodeTypes;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; LONG Count;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; LONG CurBarCode;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; DTWAIN_ARRAY AllBarCodeTypes;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;/* Check if this is supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; if ( CheckFunc( ) == 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return TRUE;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* Get the barcode information */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;/* First initialize ext image info retrieval */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; DTWAIN_InitExtImageInfo( Source );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;/* Retrieve results for the barcode type */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( DTWAIN_GetExtImageInfoData( Source, &nbsp;DTWAIN_EI_BARCODETYPE, &amp;AllBarCodeTypes/* Item to retrieve info */) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; { &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* Now get each barcode type found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; numBarCodeTypes = DTWAIN_ArrayGetCount( AllBarCodeTypes );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; for ( Count = 0; Count &lt; numBarCodeTypes; ++Count )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_ArrayGetAt( AllBarCodeTypes, Count, &amp;CurBarCode );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Now CurBarCode contains a barcode type that was found */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DTWAIN_ArrayDetroy( AllBarCodeTypes );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Reclaim memory used by the image information */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_FreeExtImageInfo( Source );  </span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="font-size: 9pt;">/***********************************************************/</span></p>
+<p><span style="font-size: 9pt;">/* Function to get the extended image types that are supported &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; */</span></p>
+<p><span style="font-size: 9pt;">/***********************************************************/</span></p>
+<p><span style="font-size: 9pt;">int CheckFunc( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LONG NumTypes;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LONG ExtImageInfoType = DTWAIN_EI_BARCODETYPE;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; DTWAIN_ARRAY ExtTypes;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; LONG PosInArray;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; /* Check if ext. image info supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; if ( DTWAIN_IsExtImageInfoSupported( Source ) == 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; return 0; &nbsp;/* Not supported, so return */</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Check what types of information are supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_EnumExtImageInfoTypes( Source, &amp;ExtTypes );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get the number of ext image information supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;NumTypes = DTWAIN_ArrayGetCount( ExtTypes );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* return if NumTypes is 0 */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( NumTypes == 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_ArrayDestroy( ExtTypes );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; return 0; &nbsp;/* No Types */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* See if &nbsp;BARCODETYPE is one of the types by searching for it in the</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;returned DTWAIN_ARRAY */ &nbsp; &nbsp; </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;PosInArray = DTWAIN_ArrayFindLong( ExtTypes, DTWAIN_EI_BARCODETYPE );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( PosInArray != -1 ) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* BARCODETYPE is supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* See if BARCODECOUNT is supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;PosInArray = DTWAIN_ArrayFindLong( ExtTypes, DTWAIN_EI_BARCODECOUNT );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( PosInArray != -1 ) </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* BARCODECOUNT is supported */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* destroy the array and return */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ArrayDestroy( ExtTypes );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;return 1;</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </p>
+<p>A list of image information types and their respective data types are found in the DTWAIN Extended Image Information Types. &nbsp;You will need to know this information to determine the data types that are used for each image information type.</p>
+
+</td></tr></table>
+
+</body>
+</html>

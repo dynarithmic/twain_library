@@ -1,0 +1,119 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetSaveFileName</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getsavefilename.htm"; }
+  else { parent.quicksync('a5.192'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetSaveFileName</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getrotationstring.htm">Previous</a>&nbsp;
+     <a href="dtwain_getsourceacquisitions.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetSaveFileName </span>function gets the full path name of the file that will be saved on acquisition. &nbsp;This function can only be used during the acquisition process.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">LONG &nbsp;DTWAIN_GetSaveFileName (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="124" style="width:124px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="136" style="width:136px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="124" style="width:124px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
+</td>
+<td valign="top" width="136" style="width:136px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpFilename, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="124" style="width:124px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="136" style="width:136px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">MaxLen </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p>An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpFilename</span></p>
+<p>String buffer. &nbsp;On return, this is filled in with the current file name. &nbsp;Ignored if value is NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">MaxLen</span></p>
+<p>Maximum number of characters to write to <span style="font-style: italic;">lpFilename</span>. &nbsp;This argument is ignored if <span style="font-style: italic;">lpResolution</span> is NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is the total number of characters copied to <span style="font-style: italic;">lpFilename</span>, or if <span style="font-style: italic;">lpFileName</span> is NULL, the total number of characters that make up the file name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetSaveFileNameA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetSaveFileNameW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetSaveFileName</span> returns the name of the file that will be saved when <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a> is used. &nbsp;This function can only be used during the acquisition process, thus it will only return a valid name during <a href="processing_acquisition_message.htm">DTWAIN Notification Processing</a></p>
+<p>.</p>
+<p>The notification that the <span style="font-weight: bold;">DTWAIN_GetSaveFileName</span> is most used for is <span style="font-weight: bold;">DTWAIN_TN_FILENAMECHANGING</span>. &nbsp;If an application desires to change the name of the file during the acquisition process, the DTWAIN_GetSaveFileName can be used to retrieve the current file name, and a subsequent call to <a href="dtwain_setsavefilename.htm">DTWAIN_SetSaveFileName</a> can be used to change the name of the file during these notifications.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a><a href="dtwain_starttwainsession.htm">.</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a><br>
+<span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Implementing a wait loop for Modeless Acquisitions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?implementingawaitloopinc.htm"; }
+  else { parent.quicksync('a3.1.21.4.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Implementing a wait loop for Modeless Acquisitions</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_modeless_acquisition_p.htm">Previous</a>&nbsp;
+     <a href="alteringmainapploop.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For modeless acquisitions, acquisition functions such as DTWAIN_AcquireNative return immediately when called. &nbsp;This becomes a problem if your application desires to wait until the acquisition session has terminated before moving on. &nbsp;For cases such as this, the application must enter a "wait" or "idle" loop until the acquisitions are done. &nbsp;The following C / C++ code will perform this job:</p>
+<p>&nbsp;</p>
+<p>/* Call an acquisition function */</p>
+<p><span style="font-size: 9pt;">MSG msg;</span></p>
+<p><span style="font-size: 9pt;">int val;</span></p>
+<p><span style="font-size: 9pt;">/* ... */</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_AcquireFIle( Source, &nbsp;... ); &nbsp;// This will return immediately if DTWAIN_SetTwainMode( DTWAIN_MODELESS) was called</span></p>
+<p>&nbsp;</p>
+<p>/* Perform a loop until acquisitions are done */</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;while (((val = GetMessage (&amp;msg, NULL, 0, 0)) != -1) // while there is a message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;&amp; DTWAIN_IsUIEnabled(Source)) &nbsp; &nbsp; &nbsp; &nbsp; // and the Source is acquiring</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;if ( val != 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( !DTWAIN_IsTwainMsg(&amp;msg) ) &nbsp;// send message to TWAIN if DTWAIN message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TranslateMessage (&amp;msg); &nbsp; &nbsp;// send message to app, not TWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DispatchMessage (&amp;msg);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p>&nbsp;</p>
+<p>Remember that this loop is necessary only if:</p>
+<p>&nbsp;</p>
+<p>a) Modeless processing is used and</p>
+<p>b) You want your application to "wait" until the acquisitions are done.  </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

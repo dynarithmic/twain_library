@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Visual Basic and DTWAIN Notifications</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Visual Basic and DTWAIN Notifications" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?visual_basic_and_dtwain_notifi.htm"; }
+  else { parent.quicksync('a2.3.7'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Visual Basic and DTWAIN Notifications</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visual_basic_and_modal___model.htm">Previous</a>&nbsp;
+     <a href="borlanddelphidevelopment2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Many times, the program that acquires an image needs to know the progress of the acquisition while it is being acquired. &nbsp;The way that an application is informed of the acquisition process is by either intercepting messages within a Window procedure, or setting up a callback function. &nbsp;Please see <a href="processing_acquisition_message.htm">DTWAIN Notification processing</a> for more details.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using Visual Basic 5.0 or above, the only way that we have found notifications to work correctly is to use the callback (or function pointer) method of retrieving the DTWAIN notifications. &nbsp;To set up a callback function in VB 6.0 and below, the  <a href="dtwain_setcallback.htm">DTWAIN_SetCallback</a> function must be used, and the callback function must be the following prototype:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">For Visual Basic 6.0 and below:</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">Function CallbackProc(ByVal WParam As Long, ByVal LParam As Long, ByVal UserData As Long) As Long</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When calling DTWAIN_SetCallback, the <span style="font-weight: bold;">AddressOf</span> operator on the argument to DTWAIN_SetCallback is used to set the function pointer:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_SetCallback(AddressOf MyCallback, 0)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Function pointers in Visaul Basic are somewhat strict and more restrictive than function pointers in 'C' or C++. &nbsp;Please consult the Visual Basic documentation that comes with the VB software for more information on function pointers.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">If you are using a version of Visual Basic below 5.0, the callback mechanism is not available. &nbsp;However, there are OCX and VBX controls called "message blasters" that allow retrieval of messages. &nbsp;However, these "message blasters" have not been tested with DTWAIN</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">For Visual Basic .NET/2005/2008/2010 and later</span></p>
+<p><span style="font-size: 9pt; font-weight: bold;">Function CallbackProc(ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Integer) As Integer</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For both Visual Basic and VB .NET, <span style="font-weight: bold;"> MyCallback </span>is a function that has the same parameters and return type as <span style="font-weight: bold;">CallbackProc</span>. &nbsp;The <span style="font-weight: bold;">MyCallback</span> function is then called anytime DTWAIN sends a message back to the application. &nbsp;The example program in the VisualBasic\examples\Notifications subdirectory has an example of using the callback mechanism.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

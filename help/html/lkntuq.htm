@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Application Message Loop</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?lkntuq.htm"; }
+  else { parent.quicksync(''); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Application Message Loop Issues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     
+     
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The first problem that many TWAIN programs encounter is the issue of changing the main application loop. &nbsp;To acquire images, it is mandatory that the messages sent by the TWAIN are processed by the application. &nbsp;With DTWAIN, this step is not necessary, since DTWAIN has an <span style="text-decoration: underline;">optional</span> built-in application loop. &nbsp;Unlike traditional TWAIN applications, altering the main application is optional with DTWAIN. &nbsp;However it is always best to consider altering the message loop (if your programming language allows you to do so).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">If your programming language can alter the main Application Message Loop:</span></p>
+<p>If you use a language that allows programmable access to the application's <a href="traditionalapplicationloopexam.htm">main message loop</a>, you can alter the message loop while DTWAIN handles all of the tricky details. &nbsp;These languages include C and C++. &nbsp;Even though message loop alteration in DTWAIN is not necessary, under certain conditions it may be desirous for the TWAIN application to handle the necessary changes to the application's message loop. &nbsp;One reason is that the TWAIN specification documents this method as the 'safest' way to acquire images without causing programming problems.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">If your language cannot alter the Main Application Message Loop or you do not desire to alter the loop within your application:</span></p>
+<p>If you use a language that does not allow easy access to the main application's message queue (such as Borland Delphi, Visual Basic, Foxpro, SQL Windows, various 'script' languages, etc.), or if you desire not to alter the application's main message loop, you must use DTWAIN using the built-in DTWAIN Modal Application Message Loop.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To inform DTWAIN of which method of TWAIN application loop processing that is to be done, the <a href="dtwain_settwainmode.htm">DTWAIN_SetTwainMode</a> is used to set the mode. &nbsp;This should be called before acquiring any images using the <a href="dtwain_acquisition_functions.htm">DTWAIN Acquisition functions</a>.</p>
+
+</td></tr></table>
+
+</body>
+</html>

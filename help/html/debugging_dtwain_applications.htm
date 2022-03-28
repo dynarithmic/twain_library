@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Debugging DTWAIN Applications</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?debugging_dtwain_applications.htm"; }
+  else { parent.quicksync('a1.3.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Debugging DTWAIN Applications</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="terminal_server_issues.htm">Previous</a>&nbsp;
+     <a href="64_bit_applications.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Debugging a DTWAIN application is allowed within a debugger such as found in <span style="font-weight: bold;">Microsoft Visual Studio</span>. &nbsp; However, please be aware that some TWAIN drivers will not work properly under a debugger. &nbsp;The reason for this is that the manufacturer of the TWAIN driver has purposefully disallowed running their driver under a debugging environment.</p>
+<p>&nbsp;</p>
+<p>For example, the <span style="font-weight: bold;">CanoScan LIDE</span> series of drivers disallows debugging of the driver, and any application must run outside of a debugging environment for these particular scanners to work properly. &nbsp;This particular driver will fail to open (functions such as <a href="dtwain_opensource.htm">DTWAIN_OpenSource</a> or <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a> will fail for this driver if running under a debugger).</p>
+<p>&nbsp;</p>
+<p>Therefore if you have a TWAIN driver that runs erratically or fails to open when debugging an application, your only option is to run your application outside the debugger.</p>
+
+</td></tr></table>
+
+</body>
+</html>

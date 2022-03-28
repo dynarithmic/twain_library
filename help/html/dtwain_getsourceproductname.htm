@@ -1,0 +1,124 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetSourceProductName</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetSourceProductName" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getsourceproductname.htm"; }
+  else { parent.quicksync('a5.197'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetSourceProductName</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getsourceproductfamily.htm">Previous</a>&nbsp;
+     <a href="dtwain_getsourceunit.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetSourceProductName</span> gets a Source's product name.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetSourceProductName (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szBuffer</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Maxlen </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szBuffer</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the address of the character buffer to store the product name or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">MaxLen</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the maximum number of characters to copy to <span style="font-style: italic;">szBuffer.</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, the number of characters copied to <span style="font-style: italic;">szBuffer</span> is returned. &nbsp;If the function fails, <span style="font-weight: bold;">DTWAIN_FAILURE1</span> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetSourceProductNameA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="230" style="width:230px;"><p><span style="font-weight: bold;">DTWAIN_GetSourceProductNameW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetSourceProductName function fills <span style="font-style: italic;">szBuffer</span> with the Product Name associated with the Source <span style="font-style: italic;">Source</span> The <span style="font-style: italic;">MaxLen</span> argument is the maximum number of characters to copy to <span style="font-style: italic;">szBuffer, </span>including the trailing null character. &nbsp; For example, if you want to return a maximum of 10 visible characters, the <span style="font-style: italic;">MaxLen</span> argument should be 11 (one more to store the terminating NULL).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If <span style="font-style: italic;">szBuffer</span> is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a>, the length of the product name, plus 1 for the trailing NULL, is returned. &nbsp;The <span style="font-style: italic;">MaxLen</span> argument is ignored and no characters are copied to <span style="font-style: italic;">szBuffer</span>.  You can use this method to determine the total number of characters needed to store the entire name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The Product Name is the name that is displayed in the list of Source Names in the TWAIN <a href="_1as6f.htm">'Select Source' dialog box</a>. &nbsp;You can then use the Product Name in the <a href="dtwain_selectsourcebyname.htm">DTWAIN_SelectSourceByName</a> function to select the Source</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p>Either of these functions can be used to get the Source:</p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="font-weight: bold;">or</span></p>
+<p><a href="dtwain_getallsources.htm">DTWAIN_EnumSources</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Source Information Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>-pdfascii</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?_pdfascii.htm"; }
+  else { parent.quicksync('a3.2.26'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">-pdfascii</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="_p.htm">Previous</a>&nbsp;
+     <a href="_pdfauthor.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">-pdfascii</span></p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">-pdfascii </span>option allows the PDF file(s) to be compressed to a file that consists of printable ASCII data instead of non-printable binary data. &nbsp;A PDF file that is created using printable ASCII data is allowed to be printed, viewed with a text editor, transferred &nbsp;via FTP text mode, etc. without any issues of encountering invalid binary characters within the PDF file. &nbsp;All characters within the PDF file will be one of the printable ASCII characters in the range from ASCII 32 (the space character) to ASCII 127 (the "~" or &nbsp;'tilde' character), plus the carriage-return/line feed characters.</p>
+<p>&nbsp;</p>
+<p>For example, a typical PDF file that contains compressed, binary data will invariably contain binary zeros (NULL characters) within the file. &nbsp;Files with embedded NULL characters can cause issues and problems with third-party products (such as editors, file transfer programs) that work exclusively on text-only files. &nbsp;Using the <span style="font-weight: bold;">-pdfascii</span> option guarantees that the generated PDF file will contain only printable ASCII characters, thereby allowing such programs to process the file successfully.</p>
+<p>&nbsp;</p>
+<p>If <span style="font-weight: bold;">-pdfascii</span> is not specified, the PDF file will be created using various compression schemes (Flate, DCTDecode, and other compression types). &nbsp;Usage of these compression schemes will produce non-printable binary data within the PDF file.</p>
+<p>&nbsp;</p>
+<p>If the <span style="font-weight: bold;">-pdfascii</span> is used, then <span style="font-weight: bold;">-pdfencrypt</span> cannot be used. &nbsp;Encrypted PDF files by design contain binary data, therefore the <span style="font-weight: bold;">-pdfascii</span> option cannot be used to generate encrypted PDF files.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="text-decoration: underline;">Default Setting</span>: </p>
+<p><span style="color: #ff0000;">The -pdfascii setting is disabled, and the PDF file will contain binary (non-printable) ASCII characters..</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_ArrayAddLong</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_arrayaddinteger.htm"; }
+  else { parent.quicksync('a5.11'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayAddLong</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arrayaddfloat.htm">Previous</a>&nbsp;
+     <a href="dtwain_arrayaddlong64.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayAddLong </span>function adds a LONG value to the end of a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_ArrayAddLong (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Value </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> that the value will be added to.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p style="margin: 0px 0px 0px 15px;">32-bit<span style="font-style: italic; font-weight: bold;"> </span>long integer value.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The<span style="font-weight: bold;"> DTWAIN_ArrayAddLong</span> function appends the value <span style="font-style: italic;">Value </span>to the end of the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>. &nbsp;The number of elements in the DTWAIN_ARRAY is increased by 1. &nbsp;DTWAIN_ArrayAddLong is a specialized version of <a href="dtwain_arrayadd.htm">DTWAIN_ArrayAdd</a> for LONG values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store LONG values (i.e. the DTWAIN_ARRAY was created with the <span style="font-weight: bold;">DTWAIN_ARRAYLONG </span>style.<span style="font-weight: bold;">  </span>See <a href="dtwain_arraycreate.htm">DTWAIN_ArrayCreate</a> for more information).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm">Adding, Setting, and Inserting elements in a DTWAIN_ARRAY</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetCapContainer</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetCapContainer" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getcapcontainer.htm"; }
+  else { parent.quicksync('a5.132'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetCapContainer</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getcaparraytype.htm">Previous</a>&nbsp;
+     <a href="dtwain_getcapdatatype.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetCapContainer</span> function gets the container type for a specific capability and capability operation.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetCapContainer (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Capability,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="129" style="width:129px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ContainerOp </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Capability</span></p>
+<p style="margin: 0px 0px 0px 15px;">The capability that is to be used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">ContainerOp</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates which type of container operation to check</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is the TWAIN container type to use for the capability. A zero is returned if there is an error, or the Source does not support the capability or operation.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetCapContainer function gets a Source's capability container to use. &nbsp;The <span style="font-style: italic;">Source</span> is the Source to check. &nbsp;The <span style="font-style: italic;">Capability </span>is the <a href="dtwain_capabilities_by_name.htm">capability</a> to test. &nbsp;The <span style="font-style: italic;">ContainerOp</span> is one of the following values:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p><span style="text-decoration: underline;">Operation</span></p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>DTWAIN_CAPGET &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p>Get capability value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>DTWAIN_CAPGETCURRENT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p>Get current value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>DTWAIN_CAPGETDEFAULT</p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p>Get default value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>DTWAIN_CAPSETCURRENT</p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p>Set current value</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>DTWAIN_CAPSETAVAILABLE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="162" style="width:162px;"><p>Set available values</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>On return of DTWAIN_GetCapContainer, one of the following values can be returned:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p><span style="text-decoration: underline;">Container</span></p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p><span style="text-decoration: underline;">TWAIN Equivalent</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p>DTWAIN_CONTONEVALUE</p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p>TW_ONEVALUE type</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p>DTWAIN_CONTARRAY &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p>TW_ARRAY &nbsp;type</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p>DTWAIN_CONTRANGE &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p>TW_RANGE &nbsp;type</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p>DTWAIN_CONTENUMERATION &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p>TW_ENUMERATION &nbsp;type</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="256" style="width:256px;"><p>0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="207" style="width:207px;"><p>Error</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_GetCapContainer gives information concerning a TWAIN container type.</span> &nbsp;Your application can use this information to set up the DTWAIN_ARRAY to use when calling <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValue</a> For example, if DTWAIN_GetCapContainer returns a DTWAIN_CONTARRAY or DTWAIN_CONTENUMERATION, your DTWAIN_ARRAY should be initialized with a series of values instead of a single value. &nbsp;If the return type is DTWAIN_RANGE, you should set up a DTWAIN_RANGE type and use that as the DTWAIN_ARRAY to send to DTWAIN_SetCapValue. &nbsp;If the return type is DTWAIN_ONEVALUE, the DTWAIN_ARRAY should contain only one value (if there is more than one value, DTWAIN_SetCapValue will ignore the remaining entries)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN application never needs to explicitly handle the TWAIN containers (such as TW_ARRAY, TW_RANGE, etc.), since the DTWAIN_ARRAY and DTWAIN handles these details.</p>
+<p>.</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> or higher (depending on the capability).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Twain Capabilities</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

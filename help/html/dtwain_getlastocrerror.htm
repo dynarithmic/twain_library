@@ -1,0 +1,79 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetOCRLastError</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getlastocrerror.htm"; }
+  else { parent.quicksync('a5.169'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetOCRLastError</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getocrcapvalues.htm">Previous</a>&nbsp;
+     <a href="dtwain_getocrmanufacturer.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRLastError</span> function returns the last error that occurred when a page has gone through character recognition using an OCR engine.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_GetOCRLastError ( DTWAIN_OCRENGINE  </span><span style="font-style: italic;">Engine </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Engine</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies an OCR engine.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If 0 is returned, no error occurred. &nbsp;Otherwise a non-zero value denoting the error code.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRLastError</span> returns the last error that occurred when <a href="dtwain_executeocr.htm">DTWAIN_ExecuteOCR</a> is called. &nbsp;A return code of 0 means that no error occurred.</p>
+<p>&nbsp;</p>
+<p>DTWAIN resets error code to 0 at the start of DTWAIN_ExecuteOCR, or when a page is automatically OCRed during acquiring to text or when creating searchable PDF files.</p>
+<p>&nbsp;</p>
+<p>If the error code is &lt; 0, this is a <a href="dtwain_error_constants.htm">DTWAIN error code</a> for items such as invalid <span style="font-style: italic;">pEngine, </span>invalid DTWAIN session, etc. </p>
+<p>&nbsp;</p>
+<p>If the error code is &gt; 0, this error is specific to the OCR engine that is being used (the <span style="font-style: italic;">pEngine</span> parameter). &nbsp;To get a meaningful error string given an error code &gt; 0, call the <a href="dtwain_getocrerrorstring.htm">DTWAIN_GetOCRErrorString</a> function to get more information on the error.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_getocrerrorstring.htm">DTWAIN_GetOCRErrorString</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

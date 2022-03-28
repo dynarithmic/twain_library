@@ -1,0 +1,68 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Device Capabilities</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?overview_of_device_capabilitie.htm"; }
+  else { parent.quicksync('a3.1.7'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Device Capabilities</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="clipboardtransfer.htm">Previous</a>&nbsp;
+     <a href="capability_container_types.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The capabilities of an image acquisition device are the various aspects of the device that can be changed or queried. &nbsp;For example, the resolution, pixel depth, gamma correction, page orientation, halftone patterns, duplex scanning, etc. are considered device capabilities. &nbsp; The number and types of capabilities vary between devices. &nbsp;For example, some devices may support changing the resolution, while others may not.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The list of all possible device capabilities and what each one does is available in the current Twain 1.9 specification. &nbsp;The specification can be obtained at the following URLs:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="http://www.dynasoft.com/Download/Spec1_9_197.pdf" target="_blank" class="weblink">http://www.dynarithmic.com/Download/Spec1_9_197.pdf</a></p>
+<p><a href="http://www.twain.org/docs/Spec1_9_197.pdf" target="_blank" class="weblink">http://www.twain.org/docs/Spec1_9_197.pdf</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Negotiating</span> is the term used to define the functions of getting and setting capability values for a particular Source. &nbsp;DTWAIN allows you to negotiate the capabilities available easily. &nbsp;You can also query whether a capability is supported for a particular Source, as well as get all of the supported capabilities for a device.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The capabilities are usually set when the Source is opened, but not yet acquiring images (TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>). &nbsp;There are other capabilities called <span style="font-weight: bold;">extended capabilities</span> that are negotiated when the Source is in the acquisition states (<a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">State 5</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">State 6</a>). &nbsp;The extended capabilities include ejecting a blank page (e.g. use the blank page as a job separator). &nbsp;Currently, a majority of the Sources do not have extended capabilities.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Some Sources also support <span style="font-weight: bold;">custom capabilities</span>. &nbsp;These capabilities are defined by the manufacturer of the device. &nbsp;If your application decides to use custom capabilities, you must have prior knowledge as to how and when the capability is to be used. &nbsp;The custom capabilities have values that are greater than or equal to 32,768. &nbsp;DTWAIN DLL supports setting and getting values from custom capabilities.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="capability_container_types.htm">Capability Containers and DTWAIN</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN has encapsulated <span style="font-style: italic;">some</span> capabilities with functions such as DTWAIN_SetBrightness, DTWAIN_GetContrast, DTWAIN_EnableFeeder, etc. &nbsp;However, if your application needs to supply functionality that has no DTWAIN functional equivalent, the way to provide the support is to set the capability yourself using <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="settingdevicecapabilities.htm">Setting Device Capabilities using DTWAIN</a>  </p>
+<p><a href="informationoncustomcapabili.htm">Information on Custom Capabilities</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

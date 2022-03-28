@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 8: Acquire using Twain driver file support</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example8acquireusingtwain_2.htm"; }
+  else { parent.quicksync('a9.5.8'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 8: Acquire using Twain driver file support</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example7acquireusingcompr_2.htm">Previous</a>&nbsp;
+     <a href="example9setgammacapabilit_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: &nbsp;Acquiring using the Twain drivers file transfer support (not DTWAIN file support). &nbsp;Twain driver must support BMP transfer for this example to work.</span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h" &nbsp;// CDTwain</p>
+<p>using namespace DTWAIN;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; // Initialize DTWAIN - return if initialization does not work</p>
+<p> &nbsp; <a href="dtwaininterface2.htm">DTwainInterface</a> TI;</p>
+<p> &nbsp; if ( !TI.<a href="cdtwaininterfaceisvalid_2.htm">IsValid</a>( ) ) </p>
+<p> &nbsp; &nbsp; &nbsp; return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Select a source</p>
+<p> &nbsp; DTwainSource Source = <a href="dtwainsourceselect.htm">DTwainSource::Select</a>( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Create an acquire object, attach the source</p>
+<p> &nbsp; <a href="dtwainacquirer.htm">DTwainAcquirer</a> Acq( Source );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Create a source mode file transfer helper object, and attach Source to the object, </p>
+<p> &nbsp; <a href="dtwainsourcefiletransferdtwa_2.htm">DTwainSourceFileTransfer</a> FT(Source);</p>
+<p>&nbsp;</p>
+<p> &nbsp; // check if BMP file transfers are supported by the Source</p>
+<p> &nbsp; if ( !FT.IsSupported( FILETYPE_SOURCE_BMP ) )</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp;return 0; &nbsp;// not supported</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Set the transfer type</p>
+<p> &nbsp; FT.<a href="dtwainsourcefiletransfersett_2.htm">SetTransferType</a>( FILETYPE_SOURCE_BMP ); </p>
+<p>&nbsp;</p>
+<p> &nbsp; // Go.</p>
+<p> &nbsp; Acq.<a href="dtwainacquireacquire_2.htm">Acquire</a>( FT, "FILE.BMP" &nbsp;);<span style="font-size: 12pt;"> &nbsp;  </span></p>
+<p>} // If acquisition completed, a file called FILE.BMP contains the raw image data that was transferred.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

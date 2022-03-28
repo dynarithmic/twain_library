@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainRange::GetValuePosition</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="CDTwainRange::GetValuePosition" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?ctdrange_getvalueposition.htm"; }
+  else { parent.quicksync('a9.10.12'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainRange::GetValuePosition</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="ctdrange_getstepvalue.htm">Previous</a>&nbsp;
+     <a href="ctdrange_setcurrent.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">DTwainDoubleArray:</span></p>
+<p><span style="font-weight: bold;">long GetValuePosition( double Value ) const;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTwainLongRange:</span></p>
+<p><span style="font-weight: bold;">long GetValuePosition( long Value ) const;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Value</span></p>
+<p>Value to search for</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns the position of the value <span style="font-style: italic;">Value</span> within the range &nbsp;If unsuccessful, -1 is returned.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTwainRange::GetValuePosition</span> gets the position of a value within an expanded range. &nbsp;Range expansion is the act of taking a range and generating all of the numbers that the range defines. &nbsp;The minimum, maximum, and step sizes determine the expanded numbers. For example if the DTwainRange has the following characteristics:</p>
+<p>&nbsp;</p>
+<p>minimum = -10</p>
+<p>Maximum Value = 10</p>
+<p>Step size = 2</p>
+<p>&nbsp;</p>
+<p>The expanded range will consist of the following values</p>
+<p>-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10</p>
+<p>&nbsp;</p>
+<p>DTwainRange::GetValuePosition(-6) would be equal to 2, since -6 is the third number in the range, and that position numbers are zero based ( 3 - 1 = 2 ) </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

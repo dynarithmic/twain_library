@@ -1,0 +1,196 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetOCRText</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getocrtext.htm"; }
+  else { parent.quicksync('a5.174'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetOCRText</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getocrversioninfo.htm">Previous</a>&nbsp;
+     <a href="dtwain_getocrtextinfofloat.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRText </span>retrieves the text data after a selected  <a href="ocr_processing.htm">OCR</a> engine has processed an image file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">HANDLE DTWAIN_GetOCRText (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">DTWAIN_OCRENGINE</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Engine,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pageNumber,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">LPTSTR</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">textBuffer,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bufferSize,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">actualBufferSize,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="147" style="width:147px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="113" style="width:113px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Flags </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters:</span></p>
+<p><span style="font-style: italic;">Engine</span></p>
+<p style="margin: 0px 0px 0px 15px;"> A selected OCR engine.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pageNumber</span></p>
+<p style="margin: 0px 0px 0px 15px;">Page number of the text to return.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">textBuffer</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the pointer to the buffer that will be filled with the text, or NULL (0).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bufferSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">Size of the buffer, in number of characters.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">actualBufferSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">On return, size of the actual text buffer that was generated after the OCR processing has completed. &nbsp;NULL can also be specified to ignore this argument.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Flags</span></p>
+<p>Flags to determine how to return the OCR text back to the caller (by handle or using a buffer). &nbsp;Currently only the buffer method is supported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns:</span></p>
+<p>1 if successful, NULL otherwise. &nbsp; Call <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a> on further information on the failure.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="219" style="width:219px;"><p><span style="font-weight: bold;">DTWAIN_GetOCRTextA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="219" style="width:219px;"><p><span style="font-weight: bold;">DTWAIN_GetOCRTextW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p><span style="font-weight: bold;">DTWAIN_GetOCRText</span> is used to get the text that was processed by the OCR engine after the call to <a href="dtwain_executeocr.htm">DTWAIN_ExecuteOCR</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Engine</span> argument is the selected OCR engine.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">pageNumber</span> is the page number of the returned text. &nbsp;The <span style="font-style: italic;">pageNumber</span> argument starts from 0 to <span style="font-style: italic;">n-1</span> where <span style="font-style: italic;">n </span> is the number of total text pages returned from DTWAIN_ExecuteOCR. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN_ExecuteOCR was called using a single page image file, <span style="font-style: italic;">pageNumber</span> must be 0. &nbsp;If DTWAIN_ExecuteOCR was called using a multipage image file, and more than one page of the image file was processed, <span style="font-style: italic;">pageNumber</span> will always start at 0 up to the number of returned OCR-ed text pages, less 1. &nbsp;For example, if the multi-page image file consists of 10 pages, and DTWAIN_ExecuteOCR was applied to pages 5 and 6, the call to DTWAIN_GetOCRText will consist of 2 pages of text, page 0 and page 1.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">textBuffer</span> is the start of a character buffer that will hold the returned text on return. &nbsp;If this value is NULL, no text is returned. &nbsp;Usually a NULL value is used to denote that the caller only wants to know the number of characters that will be copied to <span style="font-style: italic;">textBuffer </span>(see the <span style="font-style: italic;">actualBufferSize </span>argument below). </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">bufferSize</span> is the number of characters that <span style="font-style: italic;">textBuffer</span> points to. &nbsp;This argument is ignored if <span style="font-style: italic;">textBuffer</span> is NULL. &nbsp;The maximum number of characters that will be copied from the OCR buffer to <span style="font-style: italic;">textBuffer</span> will not exceed <span style="font-style: italic;">bufferSize</span> (but could be less than <span style="font-style: italic;">bufferSize</span>).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">actualBufferSize</span> argument will be filled on return with the actual size of the text that the OCR engine place (or will place) in <span style="font-style: italic;">textBuffer</span>. &nbsp;If this argument is NULL, <span style="font-style: italic;">actualBufferSize</span> is ignored.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Flags</span> argument are a set of flags that determine how to return the text back to the caller. &nbsp;Currently, the only mode is to return the text in the buffer provided by <span style="font-style: italic;">textBuffer  </span>(DTWAINOCR_COPYDATA). &nbsp; Below are the set of flags that are available.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="204" style="width:204px;"><p><span style="font-weight: bold;">Flags Value</span></p>
+</td>
+<td valign="top" width="430" style="width:430px;"><p><span style="font-weight: bold;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="204" style="width:204px;"><p>DTWAINOCR_COPYDATA</p>
+</td>
+<td valign="top" width="430" style="width:430px;"><p>Copies text data to the buffer provided by the caller.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your application needs to set the size of the buffer equal to the actual size of the text, call DTWAIN_GetOCRText with the <span style="font-style: italic;">textBuffer</span> set to NULL, and query the <span style="font-style: italic;">actualBufferSize</span> argument on return. &nbsp;Then call DTWAIN_GetOCRText again with the <span style="font-style: italic;">textBuffer</span> sized appropriately using the value of <span style="font-style: italic;">actualBufferSize. </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example (Using C language):</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>/* Initiate the OCR processing */</p>
+<p>#include &lt;tchar.h&gt;</p>
+<p>/* ... */</p>
+<p>if ( <a href="dtwain_executeocr.htm">DTWAIN_ExecuteOCR</a>( SomeEngine, "imagefile.bmp", 0, 0) )</p>
+<p>{</p>
+<p> &nbsp; &nbsp; LPTSTR pBuf;</p>
+<p> &nbsp; &nbsp; LONG bufSize;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp; /* Get the number of character of the OCR-ed text */</p>
+<p> &nbsp; &nbsp; DTWAIN_GetOCRText( SomeEngine, 0, 0, 0, &amp;bufSize, DTWAINOCR_COPYDATA ); // first get the buffer size</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp; /* now create a character buffer of that size and call DTWAIN_GetOCRText again. */</p>
+<p> &nbsp; &nbsp; pBuf = (LPTSTR) malloc( bufSize * sizeof(TCHAR) );</p>
+<p> &nbsp; &nbsp; DTWAIN_GetOCRText ( SomeEngine, 0, pBuf, bufSize, NULL, DTWAINOCR_COPYDATA );</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p> &nbsp; &nbsp;/* Now text from OCR has been retrieved in pBuf */</p>
+<p> &nbsp; &nbsp;/*... */</p>
+<p> &nbsp; &nbsp; &nbsp;free( pBuf );</p>
+<p>}</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note the use of TCHAR as the type in the call to malloc(). &nbsp;This ensures that this code will work for both ANSI/MBCS and Unicode versions of DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm">DTWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_selectocrengine.htm">DTWAIN_SelectOCREngine</a>, or <a href="dtwain_selectocrenginebyname.htm">DTWAIN_SelectOCREngineByName</a>, or <a href="dtwain_selectdefaultocrengine.htm">DTWAIN_SelectDefaultOCREngine</a></p>
+<p><a href="dtwain_executeocr.htm">DTWAIN_ExecuteOCR</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

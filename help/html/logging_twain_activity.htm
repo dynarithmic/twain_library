@@ -1,0 +1,121 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Logging TWAIN Activity</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Loggin TWAIN Activity" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?logging_twain_activity.htm"; }
+  else { parent.quicksync('a6.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Logging TWAIN Activity with DTWAIN</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="setting_the_language_for_error.htm">Previous</a>&nbsp;
+     <a href="example___logging_twain_calls.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>When running an application using DTWAIN, DTWAIN has the ability to log all calls made to the TWAIN Data Source Manager (DSM). &nbsp;This allows you to view all TWAIN traffic that is being sent and returned from the DSM that DTWAIN is making, and is a great debugging aid if something goes wrong. &nbsp;You should be somewhat familiar to the Twain specification to use the log efficiently. Regardless, the log attempts to lay out as simple as possible what is going on internally.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that starting with DTWAIN 1.1.0.9, you can set these values programatically using the <a href="dtwain_settwainlog.htm">DTWAIN_SetTwainLog</a> function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When a call is made to the DSM, there are five components that you should be aware of:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">TW_IDENTITY1</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">TW_IDENTITY2</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">DG / DAT / MSG</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">TW_MEMREF Data</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td><span style="font-weight: bold;">Return Value</span></td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>A call to the DSM has the form of the following (this is pseudo-code):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value = CallTwainDSM(TW_IDENTITY1, TW_IDENTITY2, DG, DAT, MSG, TW_MEMREF Data)</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">TW_IDENTITY1</span> and <span style="font-weight: bold;">TW_IDENTITY2</span> components represent the Origin and Destination TW_IDENTITY pointers, respectively, that are passed to the DSM when a call is made to the DSM.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following describes the breakdown of the TW_IDENTITY structure &nbsp;(From the TWAIN.H header file):</p>
+<p><span style="font-weight: bold;">*************************************************************************</span></p>
+<p><span style="font-weight: bold;">TW_UINT32 &nbsp;Id; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp;/* Unique number. In Windows, application hWnd */</span></p>
+<p><span style="font-weight: bold;">TW_VERSION Version; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;/* Identifies the piece of code &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;*/</span></p>
+<p><span style="font-weight: bold;">TW_UINT16 &nbsp;ProtocolMajor; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMAJOR */</span></p>
+<p><span style="font-weight: bold;">TW_UINT16 &nbsp;ProtocolMinor; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;/* Application and DS must set to TWON_PROTOCOLMINOR */</span></p>
+<p><span style="font-weight: bold;">TW_UINT32 &nbsp;SupportedGroups; /* Bit field OR combination of DG_ constants */</span></p>
+<p><span style="font-weight: bold;">TW_STR32 &nbsp; Manufacturer; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp;/* Manufacturer name, e.g. "Hewlett-Packard" */</span></p>
+<p><span style="font-weight: bold;">TW_STR32 &nbsp; ProductFamily; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;/* Product family name, e.g. "ScanJet" &nbsp; &nbsp; &nbsp; */</span></p>
+<p><span style="font-weight: bold;">TW_STR32 &nbsp; ProductName; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;/* Product name, e.g. "ScanJet Plus" &nbsp; &nbsp; &nbsp; &nbsp; */</span></p>
+<p><span style="font-weight: bold;">****************************************************************************</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DG, DAT, and MSG make up the components of the Twain triplet that is sent to the DSM when the call is made. &nbsp;The definition of the DG, DAT, and MSG parameters is defined by the Twain specification (see the description of <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMProc</a> above for more info).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">TW_MEMREF</span> <span style="font-weight: bold;">Data</span> is the data that is sent to the DSM. &nbsp;The data that is sent depends on the value of DG / DAT / MSG. &nbsp;The data can be the form of a structure, value, NULL, etc. &nbsp;If you read the Twain.h header file, this data is represented as a <span style="font-weight: bold;">void</span> pointer. &nbsp;Even though this is a void pointer, the DTWAIN logging facility has the ability to decode the void pointer and display exactly what the structure being sent is, as well as the values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The Return Value represents the return code from the call to the DSM. &nbsp;This is either 0, meaning the call was successful, or a TWAIN failure code.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">[DSMErrorLogging]</span> section is responsible for setting the DTWAIN error logging. &nbsp;With the DTWAIN logging feature, you can customize how much information you want displayed in the log by setting certain parameters within the &nbsp;[DSMErrorLogging] section.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following can be placed in the [DSMErrorLogging] section:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">File=filename</span></p>
+<p>This option allows logged messages to go to the file specified by "filename". DTWAIN does not check if "filename" already exists, so you must be careful! If the file cannot be opened, the logging automatically goes to the current debug monitor window using the OutputDebugString() Windows API function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DecodeIdentity1=</span></p>
+<p>This option allows the TW_IDENTITY1 structure to be expanded in the log to show all values. &nbsp;The valid values that DecodeIdentity1 can use is "0" (no expansion) or "1" (expand). &nbsp;By default, no expansion is done.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DecodeIdentity2=</span></p>
+<p>This option allows the TW_IDENTITY2 structure to be expanded in the log to show all values. &nbsp;The valid values that DecodeIdentity2 can use is "0" (no expansion) or "1" (expand). &nbsp;By default, no expansion is done.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DecodeData=</span></p>
+<p>This option allows the TW_MEMREF data to be decoded and expanded in the log to show all values. &nbsp;The valid values that DecodeData can use is "0" (no expansion) or "1" (expand). &nbsp;By default, no expansion is done. &nbsp;With this option set to "1", you can see exactly what structure and values were sent, instead of just a void pointer (which is what the TW_MEMREF data is sent as)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DecodeEvents=</span></p>
+<p>When a Twain Source is displaying the user interface (State 5), many TW_EVENT messages are sent to the application. &nbsp;There may be hundreds of TW_EVENT messages being sent at a rapid pace to the application. &nbsp;The DecodeEvents option allows these events to be recorded in the log. The valid values that DecodeEvents can use are "0" for no logged TW_EVENTs, "1" for full logging of TW_EVENTs. &nbsp;By default, the value is "0". &nbsp;It is wise to turn off this option, (DebugEvents=0) unless it is deemed necessary to log them. &nbsp;The log can get very large with this option turned on!</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">EnableAll=</span></p>
+<p>This option is a shortcut that allows you to enable all of the options above (DecodeIdentity1, DecodeIdentity2, DecodeData, and DecodeEvents). &nbsp;The valid values that EnableAll can use is "1" (enable all options) or "0" (do not enable all options; just use the options that are specified). &nbsp;By default, the value is "0".</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">EnableNone=</span></p>
+<p>This option is a shortcut that allows you to disable all of the options above (DecodeIdentity1, DecodeIdentity2, and DecodeData). &nbsp;The valid values that EnableNone can use is "1" (disable all options) or "0" (do not disable all options; use the options that are specified). &nbsp;By default, the value is "0". If EnableAll and EnableNone are specified, the EnableAll takes precedence.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">CallStack=</span></p>
+<p>This option will log DTWAIN calls internally. &nbsp;When this option is turned on, entries in the log are created that shows the program flow of the DTWAIN library. &nbsp;Lines starting with either</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Entering DTWAIN Function &nbsp; &nbsp; xxx</span></p>
+<p>or</p>
+<p><span style="font-weight: bold;">Exiting DTWAIN Functions &nbsp; &nbsp; xxx</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>will appear in the log file (' &nbsp; &nbsp;xx' is a name of a DTWAIN function). &nbsp;This option is very useful to see the flow of the DTWAIN calls within the program. The valid values that <span style="font-weight: bold;">CallStack</span> can use are "1" (enable) or "0" (disable). &nbsp;By default, the value is "0".</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">ShowExceptions=</span></p>
+<p>This option will display any exception errors in a message box that may occur when you run your DTWAIN applications. &nbsp;Exception errors are errors that can crash your application. &nbsp;If this value is set to 1, the exception errors are displayed.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DisplayLibErrors=</span></p>
+<p>This option will display any DTWAIN errors in a message box that may occur when you run your DTWAIN applications.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example of DTWAIN.INI file setting</p>
+
+</td></tr></table>
+
+</body>
+</html>

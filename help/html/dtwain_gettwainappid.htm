@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetTwainAppID</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetTwainAppID" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_gettwainappid.htm"; }
+  else { parent.quicksync('a5.202'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_GetTwainAppID</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_gettempfiledirectory.htm">Previous</a>&nbsp;
+     <a href="dtwain_gettwainavailability.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetTwainAppID</span> returns the DTWAIN_IDENTITY of the Twain Application Session.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_IDENTITY DTWAIN_GetTwainAppID( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a <a href="dtwain_identity.htm">DTWAIN_IDENTITY</a> of the Twain Application Session is returned. &nbsp;If the function fails, NULL is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetTwainAppID returns the DTWAIN_IDENTITY of the Twain Application Session. &nbsp;This session is started whenever <a href="dtwain_starttwainsession.htm">.</a> is called either implicitly by DTWAIN, or explicitly by the user application. &nbsp;The DTWAIN_IDENTITY is a pointer to a TW_IDENTITY structure that is defined by the TWAIN Specification.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function is meant to be used by the <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMProc</a> function and is designed for advanced TWAIN programmers who want to control the TWAIN session by making direct calls to the TWAIN Data Source Manager (DSM).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_low_level_twain_functio.htm">Low-Level DTWAIN functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

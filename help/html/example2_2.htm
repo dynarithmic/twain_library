@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 2: Application Information</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example2_2.htm"; }
+  else { parent.quicksync('a9.5.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 2: Application Information</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example1minimal_2.htm">Previous</a>&nbsp;
+     <a href="example3acquiretoatiffg_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example: Starting DTWAIN with our custom information (this information may be displayed by some</span></p>
+<p><span style="font-weight: bold;">Twain driver's user interface in one capacity or another).  </span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>using namespace DTWAIN;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; <a href="dtwainappinfo.htm">DTwainAppInfo</a> Info;</p>
+<p> &nbsp; Info.<a href="cdtwainappinfosetmanufacture_2.htm">SetManufacturer</a>("My Company");</p>
+<p> &nbsp; Info.<a href="cdtwainappinfosetproductname_2.htm">SetProductName</a>( "My Product");</p>
+<p>&nbsp;</p>
+<p> &nbsp; <a href="dtwaininterface2.htm">DTwainInterface</a> TI(Info); &nbsp;// Initialize the DTWAIN interface, passing in our application information</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Start an acquisition</p>
+<p> &nbsp; <a href="dtwainacquireacquire_2.htm">DTwainAcquirer</a>( <a href="dtwainsourceselectdefault.htm">DTwainSource::SelectDefault</a>( ) ).<a href="dtwainacquireacquire_2.htm">Acquire</a>("DTWAIN.BMP" ); // selects the default Source and acquires to file DTWAIN.BMP</p>
+<p>} </p>
+<p>&nbsp;</p>
+<p>Alternative version using function chaining:</p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>using namespace DTWAIN;</p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; // Initialize DTWAIN using the application information</p>
+<p> &nbsp; DTwainInterface TI(</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTwainAppInfo( ).</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SetManufacturer("My Company").</p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SetProductName("My Product")</p>
+<p> &nbsp; &nbsp;);  </p>
+<p>&nbsp;</p>
+<p> &nbsp; // Start an acquisition</p>
+<p> &nbsp; DTwainAcquirer( DTwainSource::SelectDefault( ) ).Acquire( "DTWAIN.BMP" ); // selects the default Source and acquires to file DTWAIN.BMP</p>
+<p>} </p>
+<p>&nbsp;</p>
+<p>Note that the SetManufacturer and SetProductName member functions of DTwainAppInfo return references to the current object. &nbsp;This allows your program to chain the commands together.</p>
+
+</td></tr></table>
+
+</body>
+</html>

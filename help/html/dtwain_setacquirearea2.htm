@@ -1,0 +1,205 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SetAcquireArea2</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SetAcquireArea2" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_setacquirearea2.htm"; }
+  else { parent.quicksync('a5.280'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetAcquireArea2</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setacquirearea.htm">Previous</a>&nbsp;
+     <a href="dtwain_setacquirearea2string.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SetAcquireArea2</span> function sets or resets the current image acquisition area.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetAcquireArea2 ( </span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">left,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">top,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">right,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">DTWAIN_FLOAT</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bottom,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Unit,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="119" style="width:119px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="141" style="width:141px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Flags </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">left</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates upper left of rectangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">top</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates top of rectangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">right</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates right of rectangle to acquire.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bottom</span></p>
+<p style="margin: 0px 0px 0px 15px;">Indicates bottom of rectangle to acquire.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Unit</span></p>
+<p style="margin: 0px 0px 0px 15px;">Unit of measure used to describe left, top, right, and bottom of rectangle</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Flags</span></p>
+<p style="margin: 0px 0px 0px 15px;">Optional flags. &nbsp;Currently only TRUE or FALSE is supported.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SetAcquireArea2 function sets or resets the image acquisition area of the Source <span style="font-style: italic;">Source</span>. &nbsp; The DTWAIN_SetAcquireArea2 <span style="text-decoration: underline;">does not</span> use the TWAIN device's settings for valid acquisition areas. &nbsp;Note that DTWAIN_SetAcquireArea2 is the <span style="text-decoration: underline;">more reliable</span> function than <a href="dtwain_setacquirearea.htm">DTWAIN_SetAcquireArea</a> in setting the area to acquire, due to the fact that DTWAIN_SetAcquireArea relies solely on the TWAIN Source to set the acquisition area. &nbsp;Many times, the Source will not set the area specified in DTWAIN_SetAcquireArea.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Use DTWAIN_SetAcquireArea if you need to set the acquisition area for non-DIB image data (i.e. DTWAIN_AcquireBuffered for compressed streams, or DTWAIN_AcquireFile / DTWAIN_AcquireFileEx with the DTWAIN_USESOURCEMODE flag set).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The following illustration shows the definition of the image area of acquisition and <span style="font-style: italic;">left, top, right, </span>and <span style="font-style: italic;">bottom</span> values denote:</p>
+<p><span style="width:24px">&nbsp;</span><img src="clip0001.jpg" width="430" height="348" border="0" alt="clip0001"></p>
+<p>The origin of the page (top left-hand corner) always has an (x,y) coordinate of (0,0). &nbsp;Going right from the origin, the x-values increase. &nbsp;Going down from the origin, the y-values increase. &nbsp;There are no negative coordinates.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Unit</span> parameter can be any one of the following</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p><span style="text-decoration: underline;">Unit</span></p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_INCHES &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in inches.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_CENTIMETERS &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in centimeters.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_PIXELS</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in pixels.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_PICAS</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in picas (6 picas per inch).</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_POINTS</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in points (72 points per inch)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="252" style="width:252px;"><p>DTWAIN_TWIPS</p>
+</td>
+<td valign="top" width="352" style="width:352px;"><p>Units are specified in twips (1,440 twips per inch)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Regardless of the current unit of measure used by the TWAIN Source, the application can specify the area to acquire in any of the above units. &nbsp;DTWAIN_SetAcquireArea2 will perform the correct conversion from the unit specified to the actual unit the Source uses to acquire the image. &nbsp;For example, if the Source's unit of measure is inches, and DTWAIN_SetAcquireArea2 specifies DTWAIN_POINTS, the <span style="font-style: italic;">left, top, right, </span>and <span style="font-style: italic;">bottom</span> units are converted internally from points to inches. &nbsp;This makes it easier for an application to specify and use just one unit of measure instead of keeping track of the current unit of measure used by the TWAIN source and writing code to do the conversion. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">flags</span> parameter can either be TRUE or FALSE. &nbsp;If TRUE, the acquisition area is set to the <span style="font-style: italic;">left, top, right, </span>and <span style="font-style: italic;">bottom</span> arguments. &nbsp;If FALSE, the acquisition area is not used when acquiring an image and the <span style="font-style: italic;">left, top, right,</span> and <span style="font-style: italic;">bottom</span> arguments are ignored. &nbsp;In future versions of DTWAIN, the <span style="font-style: italic;">flags</span> parameter will expand to other values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Even though DTWAIN_SetAcquireArea2 does not use the TWAIN Source to set the area of acquisition, the Source must provide the unit of measure, and for images whose dimensions are determined after the page has been scanned, the Source must provide the image information after the page has been acquired. &nbsp;If the TWAIN device cannot provide this information, DTWAIN_SetAcquireArea2 will not work correctly, and the entire page is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note: All TWAIN Sources support getting the unit of measure and retrieving the image information before and after a page is acquired. &nbsp;If not, the Source is not TWAIN compliant.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For most acquisitions, the DTWAIN_SetAcquireArea2 function is preferred over DTWAIN_SetAcquireArea. &nbsp;However, DTWAIN_SetAcquireArea2 cannot be used for the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_AcquireBuffer acquisitions that specify a compressed data stream or in other words, the data being transferred is not a Device Independent Bitmap (DIB).</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN_AcquireFile when the DTWAIN_USESOURCEMODE flag is set.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">For languages that have difficulties with DTWAIN_FLOAT parameters, the alternate function that can be used as a replacement for DTWAIN_SetAcquireArea2 is <a href="dtwain_setacquirearea2string.htm">DTWAIN_SetAcquireArea2String</a>.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher (depending on the capability).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Acquisition Area</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

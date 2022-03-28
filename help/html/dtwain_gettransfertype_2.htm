@@ -1,0 +1,127 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSourceFileTransfer::GetTransferType</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_gettransfertype_2.htm"; }
+  else { parent.quicksync('a9.14.12.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSourceFileTransfer::GetTransferType</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourcefiletransfergeta_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourcefiletransfersett_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">LONG DTwainSourceFileTransfer::GetTransferType( ) const;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns the current transfer type used when doing a file transfer. &nbsp;The return value will be one of the values listed in the <span style="font-weight: bold;">Comments</span>, or -1 if the Source does not support file transfers.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The transfer types available are below:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_TIFF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>TIFF Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_PICT &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>Macintosh PICT format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_BMP</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>Windows BMP Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_XBM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>X Bitmap Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_JFIF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>JFIF (JPEG) Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_FPX &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>Flash Pix Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_TIFFMULTI &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>Multi-Page TIFF</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_PNG &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>PNG Format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_SPIFF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>SPIFF format</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="248" style="width:248px;"><p>FILETYPE_SOURCE_EXIF &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="222" style="width:222px;"><p>EXIF format</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

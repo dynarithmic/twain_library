@@ -1,0 +1,187 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetDeviceEvent</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetDeviceEvent" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getdeviceevent.htm"; }
+  else { parent.quicksync('a5.146'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetDeviceEvent</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getcustomdsdata.htm">Previous</a>&nbsp;
+     <a href="dtwain_getdeviceeventex.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetDeviceEvent</span> function gets the last device event that occurred.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetDeviceEvent (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpDeviceValues </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpDeviceValues</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of LONG to store the last device event that occurred.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetDeviceEvent function gets the last device event that the Source <span style="font-style: italic;">Source</span> has detected. &nbsp;The <span style="font-style: italic;">lpDeviceValues</span> address points to a LONG that will be filled in with the last device event that occurred. &nbsp;The DTWAIN_GetDeviceEvent function is usually called when the DTWAIN_TN_DEVICEEVENT notification is sent to the application window.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The device event will be equal to one of the values defined below:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p><span style="text-decoration: underline;">Meaning</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKAUTOCAPTURE</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The automatic capture settings &nbsp; &nbsp; &nbsp; &nbsp;on the device have been changed.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKBATTERY &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>Status of the battery has changed.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKDEVICEONLINE</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The device may have been powered off.  </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKFLASH &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The flash setting has changed.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKPOWERSUPPLY</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The power supply has changed.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_CHKRESOLUTION &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The resolution of the device has changed.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_DEVICEADDED &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>A device has been added to the Source.  </p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_DEVICEOFFLINE &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The device has become unavailable. The device is assumed to be connected.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_DEVICEREADY</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>A device is ready to capture another image.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_DEVICEREMOVED</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>A device has been removed from the Source.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_DEVICEOFFLINE</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>The device is off-line.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_PAPERDOUBLEFEED</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>Report a double feed to the application.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="277" style="width:277px;"><p>DTWAIN_DE_PAPERJAM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="415" style="width:415px;"><p>Report a paper jam to the application.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Depending on the event that occurred, extra information can be retrieved concerning the event. &nbsp;The <a href="dtwain_getdeviceeventex.htm">DTWAIN_GetDeviceEventEx</a> &nbsp;function will return any extra device event information with respect to the last event that occurred.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For more information on device events, see the topic <a href="specialdeviceevents.htm">Capturing Source Device Events.</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Special Source Device Events</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

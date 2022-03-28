@@ -1,0 +1,85 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>How to Start using DTWAIN</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?simplesampleprogram.htm"; }
+  else { parent.quicksync('a1.11'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">How to Start using DTWAIN</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="quickstart.htm">Previous</a>&nbsp;
+     <a href="advancedimplementation.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">DTWAIN has so many functions, where do I start?</span></p>
+<p>&nbsp;</p>
+<p>The first path is to start using DTWAIN is to try a very simple example using the API functions. &nbsp; Even though the functions are low-level, you just need a few calls to get a workable TWAIN-enabled program up and running.  </p>
+<p>&nbsp;</p>
+<p>Once you are comfortable with an easy example, you can progress to the other aspects of DTWAIN such as setting device capabilities, setting the contrast/brightness/resolution, define the area of acquisition, using the document feeder, and other aspects that the simple example doesn't address.</p>
+<p>&nbsp;</p>
+<p><a href="dtwainadvancedtopics.htm">DTWAIN Detailed Information</a> describes all of the "advanced" topics.</p>
+<p>&nbsp;</p>
+<p>The following illustrates a very simple example of a function that acquires a single page to a BMP file.  </p>
+<p>&nbsp;</p>
+<p><a href="firstsampleacquireandsave.htm">C/C++ Example</a></p>
+<p><a href="firstsampleacquireandsave_2_2.htm">Visual Basic Example</a></p>
+<p><a href="firstsampleacquireandsave_2_3.htm">Visual Basic .NET Example</a></p>
+<p><a href="firstsampleacquireandsave_2_4.htm">Borland Delphi Example</a></p>
+<p><a href="firstsampleacquireandsave_2.htm">C# Example</a></p>
+<p><a href="xbase_example.htm">XBase++ Example</a></p>
+<p><a href="perl_example.htm">Perl Example</a></p>
+<p><a href="python_example_acquire_and_sav.htm">Python Example</a></p>
+<p><a href="macro_scheduler_example_acquir.htm">Macro Scheduler Example</a></p>
+<p><a href="winbatch_sample_acquire_and_sa.htm">WinBatch Example</a></p>
+<p>&nbsp;</p>
+<p>Note that if your language is not one of the ones listed above, DTWAIN will still work for you if the language that you're using has the ability to call exported DLL functions. &nbsp;Most Microsoft Windows-based languages have the ability to do this. &nbsp;Please consult your programmer's manual for more information.  </p>
+<p>&nbsp;</p>
+<p>Note that the example is very simple in terms of function calls (acquiring a single page to a BMP file), and should be enough to get you started. &nbsp;However, in the simple example, there is a lot of power in those few function calls. &nbsp;The difference in the amount of programming code and time to implement the simple example and what you would have to write if not using DTWAIN, is enormous.</p>
+<p>&nbsp;</p>
+<p>The example just scratches the surface of what DTWAIN can do. &nbsp;For example, if you want to acquire to a multipage TIFF file, no problem. &nbsp;Just use the example program and change the file type to one of the multipage TIFF types (for example DTWAIN_TIFFLZWMULTI), change the number of pages to acquire to DTWAIN_ACQUIREALL instead of 1, and that's it.</p>
+<p>&nbsp;</p>
+<p>If you wanted to acquire an image so that you can use the image data for some purpose (maybe you have your own imaging library), just change the call from <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> to <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a> or <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a>, for example, and you can then process the raw image data in the form of a memory block of information. &nbsp;If you want to acquire the image to the Windows clipboard, you have <a href="dtwain_acquiretoclipboard.htm">DTWAIN_AcquireToClipboard</a> (there are more acquisition functions to choose from that will surely fit your needs).</p>
+<p>&nbsp;</p>
+<p>Of course you can set various aspects of the TWAIN device such as resolution, contrast, brightness, and any capability supported by the TWAIN device.</p>
+<p>&nbsp;</p>
+<p>Note that in the simple sample program there is no check for error return values. &nbsp;This is done for brevity, however your application should check for potential error return values from the DTWAIN functions.</p>
+<p>&nbsp;</p>
+<p>For more advanced examples, the DTWAIN installation contains samples of more advanced DTWAIN processing. &nbsp;Also see <a href="dtwainadvancedtopics.htm">DTWAIN Advanced Topics</a> for a thorough rundown and explanation of each of the aspects of using DTWAIN to its fullest potential.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

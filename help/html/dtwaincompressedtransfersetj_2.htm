@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainCompressedTransfer::SetJPEGQuality</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwaincompressedtransfersetj_2.htm"; }
+  else { parent.quicksync('a9.14.10'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainCompressedTransfer::SetJPEGQuality</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwaincompressedtransfersetc_2.htm">Previous</a>&nbsp;
+     <a href="dtwainbufferedtransfer.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTwainCompressedTransfer&amp; DTwainCompressedTransfer::SetJPEGQuality( LONG Quality );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>Returns reference to current DTwainCompressedTransfer object (<span style="font-weight: bold;">*this</span>).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;">&nbsp;</span></p>
+<p>Sets the JPEG quality factor when acquiring buffered images using JPEG compression. &nbsp;The Source must support JPEG compressed transfers. &nbsp;To check this, the DTwainCompressedTransfer::IsJPEGCompressionSupported( ) must return <span style="font-weight: bold;">true</span>.  </p>
+<p>&nbsp;</p>
+<p>The quality factor of a JPEG file determines the lossyness of the data. &nbsp;Since JPEG is a lossy format, the higher the quality factor, the better quality the image. &nbsp;However, higher quality images means that the image is larger in size (in bytes). &nbsp;The <span style="font-style: italic;">Quality</span> must be between 0 and 99, where 0 is the lowest quality, and 99 is the highest quality.  <span style="font-style: italic;">Quality</span> can also be one of these special values:</p>
+<p>&nbsp;</p>
+<p>Quality &nbsp; &nbsp; &nbsp;Definition</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="62" style="width:62px;"><p>-3</p>
+</td>
+<td valign="top" width="116" style="width:116px;"><p>Low quality</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="62" style="width:62px;"><p>-2</p>
+</td>
+<td valign="top" width="116" style="width:116px;"><p>Medium quality</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="62" style="width:62px;"><p>-1</p>
+</td>
+<td valign="top" width="116" style="width:116px;"><p>High quality</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Loading/Unloading the DTWAIN DLL</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?loading_unloading_the_dtwain_d.htm"; }
+  else { parent.quicksync('a1.3.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Loading/Unloading the DTWAIN DLL</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="floating_point_issues_and_dtwa.htm">Previous</a>&nbsp;
+     <a href="terminal_server_issues.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>If you're using a language where the DTWAIN DLL has to be explicitly loaded and unloaded using your language's commands/functions, it is desirable to have the load and unload sequence done once and only once during the running of your application. &nbsp;Otherwise repeatedly loading and unloading the DTWAIN DLL during the running of your application incurs a runtime penalty in that the DLL has to reinitialize itself each time, load itself back into memory, etc.</p>
+<p>&nbsp;</p>
+<p>For example, if using C/C++, and your application decides to load the DTWAIN32.DLL dynamically at runtime using the Win32 API functions <span style="font-weight: bold;">LoadLibrary</span> and <span style="font-weight: bold;">FreeLibrary</span>:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">HMODULE hMod = LoadLibrary( "DTWAIN32.DLL" )</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p><span style="font-size: 9pt;">FreeLibrary( hMod );</span></p>
+<p><span style="font-size: 9pt;">//...</span></p>
+<p>&nbsp;</p>
+<p>This sequence of commands should be done once per application run. &nbsp;The best place to do the load would be at or near application startup, and the unload should be at or near application termination.</p>
+<p>&nbsp;</p>
+<p>Other languages have similar, if not identical constructs for loading and unloading DLL's -- the same advice applies to those languages. &nbsp;Always strive to minimize the number of times your application explicitly loads and unloads the DTWAIN DLL files, and keep the DLL loading at/near application start and the unload of the DLL near or at application termination.</p>
+
+</td></tr></table>
+
+</body>
+</html>

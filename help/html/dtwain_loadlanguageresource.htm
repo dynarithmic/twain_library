@@ -1,0 +1,133 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_LoadLanguageResource</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_loadlanguageresource.htm"; }
+  else { parent.quicksync('a5.256'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_LoadLanguageResource</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_loadcustomlangresource.htm">Previous</a>&nbsp;
+     <a href="dtwain_logmessage.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_LoadLanguageResource</span> loads one of the DTWAIN Language Resource DLL's for use by DTWAIN.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_LoadLanguageResource ( &nbsp;LONG </span><span style="font-style: italic;">nLanguage </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="font-style: italic;">nLanguage</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the DTWAIN Language Resource DLL to load.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_LoadLanguageResource</span> function allows an application to load a specific DTWAIN Language Resource DLL. &nbsp;The Language Resource DLL determines the language that the DTWAIN error strings returned from <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorString</a> will be displayed in.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">nLanguage</span> must be one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p><span style="font-style: italic; text-decoration: underline;">nLanguage</span><span style="text-decoration: underline;"> Value</span></p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p><span style="text-decoration: underline;">Resource DLL Name</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><br>
+</td>
+<td valign="top" width="134" style="width:134px;"><br>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_ENGLISH</p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWENG.L32</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_FRENCH </p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWFRA.L32</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_SPANISH</p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWSPA.L32</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_DUTCH &nbsp;  </p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWDTC.L32</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_GERMAN </p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWDEU.L32</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="176" style="width:176px;"><p>DTWAIN_RES_ITALIAN &nbsp;  </p>
+</td>
+<td valign="top" width="134" style="width:134px;"><p>DTWITA.L32</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-weight: bold;">Resource DLL Name </span>is the name of the resource DLL that contains all of the language strings used by DTWAIN. &nbsp;This DLL must be available to the application before calling DTWAIN_LoadLanguageResource. &nbsp;The language resource DLL's have the <span style="font-weight: bold;">.L32</span> file name extension.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN_LoadLanguageResource is called multiple times, the currently used resource DLL is unloaded and the resource DLL specified by <span style="font-style: italic;">nLanguage</span> is loaded. &nbsp;This allows your application to dynamically change the resource strings without having to restart DTWAIN.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, the language that is always loaded is DTWAIN_RES_ENGLISH, unless there is an override specified in the <a href="setting_the_language_for_error.htm">DTWAIN32.INI</a> file to specify a different language resource DLL to initially load.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If your language is not listed here, you can add any SBCS (Single Byte Character Set) language translation resource using the <a href="dtwain_loadcustomlangresource.htm">DTWAIN_LoadCustomStringResource</a> function.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

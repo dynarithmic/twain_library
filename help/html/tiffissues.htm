@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>TIFF File Issues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?tiffissues.htm"; }
+  else { parent.quicksync('a3.1.4.4.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">TIFF File Issues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="filetransfer.htm">Previous</a>&nbsp;
+     <a href="text_files.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold; text-decoration: underline;">Changing/specifying compression type used on each TIFF page</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since TIFF files can have multiple pages, DTWAIN allows your application to change the TIFF compression used for each page when acquiring to a multipage TIFF file. The application must set up <a href="processing_acquisition_message.htm">notification processing</a> to take advantage of this feature.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, when a multi-page TIFF file is acquired, the TIFF type specified in the call to <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a> is the type that's used for all the pages in the TIFF file. &nbsp;For most applications, this behavior is adequate (the TIFF file has all pages consisting of one compression type). &nbsp;However, there are valid cases where the application may want to store each page in the TIFF file using the best compression available for the type of image that is stored. &nbsp;This results in smaller TIFF files.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For example, assume that page 1 is a black and white (1 bit per pixel) image, and that page 2 is a 24-bit color image. &nbsp;Since page 1 is a b/w image, it is better to acquire this page as a Group 3 or Group 4 fax type, since these compression types produce the smallest images in terms of size. &nbsp;The second page can use the LZW or JPEG compression, since LZW and JPEG compression are very good at compressing color images (while Group 3 and Group 4 compression only works for black/white images).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When the DTWAIN_TN_TRANSFERREADY or DTWAIN_TN_TRANSFERDONE notifications are sent to your application, you can call the <a href="dtwain_settiffcompresstype.htm">DTWAIN_SetTIFFCompressType</a> function to set the compression for that page. &nbsp;To determine what type of image will be acquired, you can call <a href="dtwain_getimageinfo.htm">DTWAIN_GetImageInfo</a> when the DTWAIN_TN_TRANSFERREADY or DTWAIN_TN_TRANSFERDONE and inspect the returned bits-per-pixel value. &nbsp; Depending on the bits-per-pixel value, call <a href="dtwain_settiffcompresstype.htm">DTWAIN_SetTIFFCompressType</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">JPEG-in-TIFF (TIFF-JPEG) files</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you're saving the file to TIFF-JPEG format, please note that DTWAIN saves these files in the new TIFF-JPEG format, as opposed to the older, buggy TIFF-JPEG format that many viewers still support. &nbsp;If you have an image viewer that only views TIFF-JPEG files that have been saved in the old format, please contact the creator of the software and kindly suggest that they support the newer TIFF-JPEG format. &nbsp;The older format has been officially been out of support from Adobe, the creators of the TIFF format. &nbsp;All viewers should now use the newer format.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

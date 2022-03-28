@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Delphi Development</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="notifications" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?borlanddelphidevelopment2.htm"; }
+  else { parent.quicksync('a2.4'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Delphi Development</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visual_basic_and_dtwain_notifi.htm">Previous</a>&nbsp;
+     <a href="delhidtwaindatatypes.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Please note: &nbsp;Late breaking news as of the writing of this manual is Delphi now supports 64-bit applications. &nbsp; For 64-bit applications, DTWAIN64.DLL is used, as well as DTWAIN64.PAS is used as the interface file instead of DTWAIN32.PAS. &nbsp;In the information below, any reference to DTWAIN32.DLL and DTWAIN32.PAS pertains to DTWAIN64.DLL and DTWAIN64.PAS, respectively.</span></p>
+<p>&nbsp;</p>
+<p>DTWAIN32 DLL is a standard 32-bit Windows Dynamic Link that exposes its functionality using the "stdcall" calling convention. &nbsp; Currently DTWAIN is not a true Delphi component, but only a Dynamic Link Library. &nbsp;Included in the DTWAIN installation is a Delphi interface file <span style="font-weight: bold;">DTWAIN32.PAS</span>. &nbsp;All you need to do is include this file in your Delphi application, and in the <span style="font-weight: bold;">uses</span> clause in the interface section, specify <span style="font-weight: bold;">DTWAIN32</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since DTWAIN has 64-bit types, the DTWAIN32.PAS file is compatible with <span style="font-weight: bold;">Delphi 4</span> and above. &nbsp;Earlier versions of Delphi did not have 64-bit integer types, therefore if you're using an earlier version of Delphi, you will need to use the DTWAIN32_PRE4.PAS file.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN32.DLL must be installed either in your application's directory, or in a directory that is specified in your system's <span style="font-weight: bold;">PATH</span> environment variable.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>There are example Delphi programs that demonstrate how to use DTWAIN. &nbsp;The programs are very simple, and are meant to illustrate how to get started with various aspects of TWAIN. &nbsp;All of the demo programs should compile with Delphi 4 or higher. &nbsp;The only demo program that will not compile for Delphi 3 and below is CAPINFO, as this demo uses features of Delphi that exist only in version 4 and above.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Delphi supports callback functions, so you can monitor the progress of a TWAIN acquisition using <a href="processing_acquisition_message.htm">notifications</a> using Delphi.</p>
+<p>&nbsp;</p>
+<p><span style="color: #c0504d;">As of this writing of the manual, only an ANSI version of the Delphi interface file is available. &nbsp;This means that DTWAIN32.DLL and DTWAIN64.DLL will work correctly for Delphi applications, therefore it is recommended that you to use DTWAIN32.DLL or DTWAIN64.DLL.  </span></p>
+<p>&nbsp;</p>
+<p><span style="color: #c0504d;">If you wish to use the Unicode version of DTWAIN (DTWAIN32U.DLL or DTWAIN64U.DLL), you will need to change the definitions in the *.PAS files to ensure that the strings are passed and received correctly from the Unicode DTWAIN functions to your Delphi program.</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SelectSourceByName</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SelectSourceByName" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_selectsourcebyname.htm"; }
+  else { parent.quicksync('a5.278'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_SelectSourceByName</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_selectsource2.htm">Previous</a>&nbsp;
+     <a href="dtwain_setacquirearea.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SelectSourceByName</span> function selects a TWAIN Source by specifying the Source's product name.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SOURCE DTWAIN_SelectSourceByName ( LPCTSTR </span><span style="font-style: italic;">szName </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">szName</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string containing the name of the TWAIN Source. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is a non-zero <a href="dtwain_source.htm">DTWAIN_SOURCE</a> handle to the selected <a href="twain_data_source.htm">Source</a>. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a> is returned if a Source does not have the <span style="font-style: italic;">szName,</span> or if there is an error selecting the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectSourceByNameA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectSourceByNameW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SelectSourceByName function selects the TWAIN source that has the same product name as <span style="font-style: italic;">szName</span>. &nbsp;The product name is the same name that you will see in the <a href="_1as6f.htm">TWAIN Select Source dialog</a>'s list box. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function is useful if you know the name of the Source to open, and do not wish to display the TWAIN Select Source dialog. &nbsp;One way to initially get any Source's product name is to call <a href="dtwain_getallsources.htm">DTWAIN_EnumSources</a>. &nbsp;For each Source that is found with DTWAIN_EnumSources you can retrieve the product name by calling <a href="dtwain_getsourceproductname.htm">DTWAIN_GetSourceProductName</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>Remains in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, true);" class="popuplink">State 3</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Source Selection Functions</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

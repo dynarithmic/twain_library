@@ -1,0 +1,109 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::EnumUnitsOfMeasure</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourceenumunitsofmeasu_2.htm"; }
+  else { parent.quicksync('a9.12.17'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::EnumUnitsOfMeasure</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourceenumsupportedcap_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourcegetcapcontainer_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">bool EnumUnitsOfMeasure( DTwainLongArray&amp; Array ) const;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p>Array that will store the supported units of measure.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>true if successful, false otherwise.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>This function returns a DTwainLongArray that denotes all of the supported units of measure of the Source when acquiring an image.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The size of the image is usually specified in units of inches. &nbsp;However, other units of measure can be used to specify the units used to measure the image. &nbsp;The units of measure are constants that are equal to the following values:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p><span style="text-decoration: underline;">Unit</span></p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>INCHES</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>0</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>CENTIMETERS</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>1</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>PICAS &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>2</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>POINTS</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>3</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>TWIPS &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>4</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="141" style="width:141px;"><p>PIXELS</p>
+</td>
+<td valign="top" width="70" style="width:70px;"><p>5</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

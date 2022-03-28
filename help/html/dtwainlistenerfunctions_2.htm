@@ -1,0 +1,365 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainListener Event functions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainlistenerfunctions_2.htm"; }
+  else { parent.quicksync('a9.16.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainListener Event functions</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainlistener.htm">Previous</a>&nbsp;
+     <a href="specializedlisteners_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>All of the event functions (except OnDefaultHandler) have the following prototype:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">virtual LRESULT Onxxxxxx( DTwainSource&amp; Source, LONG UserParam);</span></p>
+<p>&nbsp;</p>
+<p>The Onxxxxxx would be the name of the DTwainListener function. &nbsp;The <span style="font-style: italic;">Source</span> parameter is the current DTwainSource that the listener is associated with. &nbsp;The <span style="font-style: italic;">UserParam</span> is a user-defined parameter set by calling DTwainListener::SetUserParam.</p>
+<p>&nbsp;</p>
+<p>There is one special function, <span style="font-weight: bold;">OnDefaultHandler</span>, that does not have the same prototype as the other event functions:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">virtual LRESULT OnDefaultHandler( DTwainSource&amp; Source, WPARAM wParam, LPARAM lParam, LONG UserParam);</span></p>
+<p>&nbsp;</p>
+<p>The OnDefaultHandler( ) function is called if the event isn't one of the event functions defined below. &nbsp;This allows the programmer to track events that do not have a corresponding event handler function. &nbsp;This allows your application to adapt to any events that the DTWAIN interface may send in future versions of DTWAIN.</p>
+<p>&nbsp;</p>
+<p>When you derive from DTwainListener, the following functions are available that you can override in your derived class. &nbsp;Below is a table of these functions, and when they will be triggered. &nbsp;Also illustrated is the equivalent <a href="dtwain_notification_codes.htm">DTWAIN notification</a>.</p>
+<p>&nbsp;</p>
+<p>Event functions associated with acquisition start, stop, and failure.</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnAcqureCancelled</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when an acquisition has been cancelled.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_ACQUIRECANCELLED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnAcquireDone</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when acquisition has been completed</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_ACQUIREDONE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnAcquireFailed</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when there is a failure to acquire an image.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_ACQUIREFAILED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnAcquireStarted</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when an acquisition has started</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_ACQUIRESTARTED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnAcquireTerminated</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when an acquisition has terminated (called regardless of whether acquistion is successful or not)</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_ACQUIRETERMINATED</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Event functions associated with acquiring a page from a set of pages.</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnPageCancelled</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when an acquired page has not been processed (program terminated the page acquisition).</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_PAGECANCELLED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnPageContinue</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called after a page has been acquired from a multi-page acquisition. </p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_PAGECONTINUE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnPageFailed</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when there is a failure acquiring a page.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_PAGEFAILED</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Even functions associated with the Source user interface</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnUIClosed</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>The Source user interface has been closed.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_UICLOSED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnUIClosing</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>The Source user interface is about to be closed.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_UICLOSING</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnUIOpened</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>The Source user interface is opened.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_UIOPENED</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Event functions called while an image is being transferred between the device and DTWAIN:</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferCancelled</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when the transferring of an image from the device to DTWAIN has been cancelled.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERCANCELLED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferDone</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when transferring of an image from the device has been completed successfully.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERDONE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferReady</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when the transferring of data from the device to DTWAIN is about to start (transferring the image has not started).</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERREADY</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferStripReady</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called during buffered transfer, before each strip of image data is acquired from the device.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERSTRIPREADY</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferStripDone</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called during buffered transfer, after a strip of image data has been acquired successfully.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERSTRIPDONE</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnTransferStripFailed</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called during buffered transfer, the strip of image data has not been acquired due to cancellation by the user.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_TRANSFERSTRIPFAILED</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Event functions called when during file acquisition processing:</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnFilePageSaveOk</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>One particular page of the image file has been processed successfully.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_FILEPAGESAVEOK</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnFilePageSaveError</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Error in saving one a page to an image file. &nbsp;Called when either a single page or if a </p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_FILEPAGESAVEERROR</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnFileSaveOk</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called when the entire image file (multi-page or single page image file) has been saved successfully.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_FILESAVEOK</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnFileSaveError</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Error in saving the image file (multi-page or single page file).</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_FILESAVEERROR</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnFileSaveCancelled</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>User cancelled the saving of the image file.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_FILESAVECANCELLED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnInvalidImageFormat</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Called if an image has an invalid format (invalid bit depth, for example)</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_INVALIDIMAGEFORMAT</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>Event function called when an external device event is triggered:</p>
+<p>&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnDeviceEvent</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>External device event has been triggered.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_DEVICEEVENT</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Events when blank page is detected:<br>
+&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnBlankPageDetected1</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Blank page generated by TWAIN device has been detected</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_BLANKPAGEDETECTED1</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnBlankPageDetected2</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Blank page generated by DTWAIN after processing original page from device</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_BLANKPAGEDETECTED2</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnBlankPageDiscarded1</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Blank page has been discarded by application (generated from OnBlankPageDetected1).</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_BLANKPAGEDISCARDED1</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnBlankPageDiscarded2</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>Blank page has been discarded by application (generated from OnBlankPageDetected2)</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_BLANKPAGEDISCARDED2</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>Events when an end-of-job page is detected:<br>
+&nbsp;</p>
+<p>Event Function &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Definition &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Equivalent DTWAIN Notification</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnEOJDetected</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>An end-of-job page was detected.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_EOJDETECTED</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="190" style="width:190px;"><p>OnEOJDectectedTransferDone</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>An end-of-job page was detected after it has been transferred.</p>
+</td>
+<td valign="top" width="315" style="width:315px;"><p>DTWAIN_TN_EOJDETECTEDTRANSFERDONE</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>All of the event functions, if not overridden in the derived class, return a value of 1. &nbsp;On some of the event functions, alternate return values are accepted if overridden by the derived class. &nbsp;For example if OnPageContinue is overridden, a return value of 0 will terminate the acquisition. &nbsp;Please refer to <a href="dtwain_notification_codes.htm">DTWAIN Notification</a> processing to check for special return codes.</p>
+
+</td></tr></table>
+
+</body>
+</html>

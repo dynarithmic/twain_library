@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetCurrentAcquiredImage</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetCurrentAcquiredImage" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getcurrentacquiredimage.htm"; }
+  else { parent.quicksync('a5.144'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_GetCurrentAcquiredImage</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getcountry.htm">Previous</a>&nbsp;
+     <a href="dtwain_getcustomdsdata.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetCurrentAcquiredImage</span> function returns the handle to the last image that was acquired successfully.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">HANDLE &nbsp;DTWAIN_GetCurrentAcquiredImage ( DTWAIN_SOURCE </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">)</span></p>
+<p style="text-indent: -47px; margin: 0px 0px 0px 48px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">The DTWAIN_SOURCE that is acquiring images.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, an image block is returned. If the function fails, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a> is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTWAIN_GetCurrentAcquiredImage</span> returns a HANDLE to the last image that was acquired successfully. &nbsp;You must use the Windows API <span style="font-weight: bold;">GlobalLock</span> on the return value to access the data. &nbsp;At some point in your application, you must call the Windows API <span style="font-weight: bold;">GlobalUnlock</span> (if it was locked) and <span style="font-weight: bold;">GlobalFree</span> to destroy the data. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The returned HANDLE can be a <a href="indmp4l.htm">Device Independent Bitmap</a>, or if calling DTWAIN_AcquireBuffered using compression, a HANDLE to a series of bytes representing compressed image data (to get the number of bytes of compressed image data, use the Windows API <span style="font-weight: bold;">GlobalSize</span> function on the returned HANDLE, or call <a href="dtwain_getcompressionsize.htm">DTWAIN_GetCompressionSize</a> function).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_GetCurrentAcquiredImage function is useful if you are acquiring images and you desire to process each image as it is being acquired successfully. &nbsp; For example, you may want to show the user a preview of the image that was last acquired so that you can query the user as to whether the image should be kept or discarded (see the DTWDEMO testbed program to see how this works). &nbsp;The easiest way to do this is to use <a href="processing_acquisition_message.htm">DTWAIN Notification Processing</a>, capture <span style="font-weight: bold;">DTWAIN_QUERYDISCARDPAGE </span>and during the time the notification is being processed, call DTWAIN_GetCurrentAcquiredImage to retrieve the image data and display the image to the user.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><a href="dtwain_acquisition_functions.htm">DTWAIN Acquisition Function (DTWAIN_AcquireNative or DTWAIN_AcquireBuffered)</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

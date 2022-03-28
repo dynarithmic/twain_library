@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Image Retrieval Functions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_image_retrieval_functio.htm"; }
+  else { parent.quicksync('a4.11'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Image Retrieval Functions</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="image_orientation.htm">Previous</a>&nbsp;
+     <a href="dtwain_imprinter_endorser_fun.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>After an acquisition is done, you will need to get the images that were created for the pages that were acquired from the Source. &nbsp;For almost all acquisitions, the returned images are <a href="indmp4l.htm">Device Independent Bitmaps</a> (DIBs). &nbsp;To retrieve the number of acquisitions, number of images for a particular acquisition and the images generated, the following functions are used: </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Number of requests to acquire images</p>
+<p><a href="dtwain_arraygetcount.htm">DTWAIN_ArrayGetCount</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Number of DIBs generated for each acquisition request</p>
+<p><a href="dtwain_getacquiredimage.htm">DTWAIN_GetNumAcquiredImages</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of one HANDLE to acquired image memory</p>
+<p><a href="dtwain_getacquiredimage.htm">DTWAIN_GetAcquiredImage</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of all acquired images for an acquisition request</p>
+<p><a href="dtwain_getacquiredimagearray.htm">DTWAIN_GetAcquiredImageArray</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Retrieval of last successfully acquired image</p>
+<p><a href="dtwain_getcurrentacquiredimage.htm">DTWAIN_GetCurrentAcquiredImage</a></p>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>Note: &nbsp;If the <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a> is called to acquire images, and compression is used, compressed image data is returned instead of DIBs. &nbsp;The image data can be then saved to a file or processed by the application in any way it sees fit.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To get a handle to the image data, the application must call the Windows API function <span style="font-weight: bold;">GlobalLock</span> to lock the memory, and <span style="font-weight: bold;">GlobalUnlock</span> and <span style="font-weight: bold;">GlobalFree</span> to destroy the memory. &nbsp;The application is solely responsible for deleting the memory.</p>
+
+</td></tr></table>
+
+</body>
+</html>

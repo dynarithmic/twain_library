@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SysInitializeEx</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_sysinitializeex.htm"; }
+  else { parent.quicksync('a5.363'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SysInitializeEx</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_sysinitialize.htm">Previous</a>&nbsp;
+     <a href="dtwain_sysinitializeex2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SysInitializeEx</span> function initializes the DTWAIN DLL for use with the application.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_SysInitializeEx ( LPCTSTR </span><span style="font-style: italic;">szINIPath </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;"><span style="font-style: italic;">szIniPath</span></p>
+<p> &nbsp; Path where DTWAIN32.INI is installed.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a non-zero value is returned. &nbsp;If the function fails, zero (0) is returned.  </p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SysInitializeExA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SysInitializeExW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SysInitializeEx </span>function does exactly the same as the <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> function. &nbsp;The <span style="font-style: italic;">szINIPath </span>is the path of where the DTWAIN32.INI file is stored. &nbsp;By default, the DTWAIN32.INI file must be located in the Windows system directory, however DTWAIN_SysInitializeEx gives you the flexibility to store the DTWAIN32.INI file in any accessible directory.</p>
+<p>&nbsp;</p>
+<p>A description of the DTWAIN32.INI file and customization can be found <a href="dtwain_initialization_file__dt.htm">here</a>.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, true);" class="popuplink">State 1</a></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a>, <a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a>, <a href="dtwain_isinitialized.htm">DTWAIN_IsInitialized</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

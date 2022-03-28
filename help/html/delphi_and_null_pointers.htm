@@ -1,0 +1,67 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Delphi and NULL pointers</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?delphi_and_null_pointers.htm"; }
+  else { parent.quicksync('a2.4.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Delphi and NULL pointers</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="delhidtwaindatatypes.htm">Previous</a>&nbsp;
+     <a href="perl_development.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Many DTWAIN functions that process strings allows the string parameter to be NULL. &nbsp;For example, the <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorString</a> function has the option to set the string parameter to NULL if the caller only desires to have the length of the error string returned.</p>
+<p>&nbsp;</p>
+<p>For Delphi applications, you must use the <span style="font-weight: bold;">nil</span> keyword for sending NULL pointers to DTWAIN:</p>
+<p>&nbsp;</p>
+<p>For example, to call DTWAIN_GetErrorString with a NULL pointer</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; var</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; ErrSize : Integer;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; MsgBuf: &nbsp;Array of AnsiChar;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; begin</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ Get Size of error string }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ErrSize := DTWAIN_GetErrorString( DTWAIN_ERR_BAD_SOURCE, nil, 0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{ Set the size and get the string }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SetSize( MsgBuf, ErrSize );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_GetErrorString( DTWAIN_ERR_BAD_SOURCE, PAnsiChar(MsgBuf), ErrSize );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

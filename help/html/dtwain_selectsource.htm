@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SelectSource</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_SelectSource" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_selectsource.htm"; }
+  else { parent.quicksync('a5.276'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_SelectSource</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_selectocrenginebyname.htm">Previous</a>&nbsp;
+     <a href="dtwain_selectsource2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SelectSource</span> function allows the user to select the TWAIN Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SOURCE &nbsp;DTWAIN_SelectSource( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p style="text-indent: -14px; margin: 0px 0px 0px 15px;">None.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is a non-zero <a href="dtwain_source.htm">DTWAIN_SOURCE</a> handle to the selected <a href="twain_data_source.htm">Source</a>. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a> is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SelectSource</span> function displays the  <a href="_1as6f.htm">TWAIN 'Select Source' dialog box</a> and returns a handle to the Source that is selected by the user. &nbsp; If the user chooses 'Cancel' from the dialog, DTWAIN_SelectSource returns NULL. &nbsp;If there is an error in opening the Source (by default, the Source will be attempted to be opened as well as selected -- please see <a href="dtwain_opensourcesonselect.htm">DTWAIN_OpenSourceOnSelect</a> for more information), the return value is NULL.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To determine if a NULL return value from DTWAIN_SelectSource is due to the user cancelling the dialog or if there is another error, call <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a> and check if the value is non-zero (which means an error occurred). &nbsp;If DTWAIN_GetLastError returned 0, this means that the user canceled the dialog, which is perfectly valid for the user to do.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_SOURCE return value is used for any other DTWAIN function that requires a Source handle.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To position the TWAIN dialog and customize the title, use <a href="dtwain_selectsource2.htm">DTWAIN_SelectSource2</a>. &nbsp;If more customization is desired beyond what DTWAIN_SelectSource and DTWAIN_SelectSource2 provides, call <a href="dtwain_getallsources.htm">DTWAIN_EnumSources</a>, get all of the product names, and then present all of the product names found in your own custom interface to the user. &nbsp;When the user chooses one of the Sources, your application would call <a href="dtwain_selectsourcebyname.htm">DTWAIN_SelectSourceByName</a> to actually select the Source. &nbsp;See the DTWAIN demo program DTWDEMO.EXE for a code sample of how to accomplish this.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To select the default Source, use <a href="dtwain_selectdefaultsource.htm">DTWAIN_SelectDefaultSource</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>Remains in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, true);" class="popuplink">State 3</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Source Selection Functions</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>
