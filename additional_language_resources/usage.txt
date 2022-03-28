@@ -1,7 +1,0 @@
-To load the resources call:
-
-1) Make sure resource file is located in the same runtime directory as other 
-   DTWAIN text resource files.
-
-2) Change your application to call
-   DTWAIN_LoadCustomStringResourcesA("portuguese_br");  // Portuguese-Brazilian
