@@ -1,11 +1,82 @@
 DTWAIN Version changes
 
+5.2.0.9		  
+
+- Added DTWAIN_SysInitializeNoBlocking() --
+
+  This new function works identical to DTWAIN_SysIntialize, except that DTWAIN_SysInitializeNoBlocking 
+  will not display the "DTWAIN Resource Error" message box if the DTWAIN resource text files cannot be found.  
+  This will allow DTWAIN to not block the application if there is a resource error.
+
+- Updated blank page handling.
+
+  Prior versions of the blank page handling always tested for a blank page for the image that is directly coming
+  from the TWAIN device, and a second time a test for blank page after the image has been cropped and resampled.  
+  This version now gives the ability to test for a blank page in either or both scenarios.  
+
+  The new DTWAIN_SetBlankPageDetectionEx sets up testing for blank pages using the method outlined above.
+
+      DTWAIN_SetBlankPageDetectionEx(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, LONG autodetect, LONG detectOpts, DTWAIN_BOOL bSet)
+
+  Note that this function works similar to the DTWAIN_SetBlankPageDetection function, except for the new detectOpts parameter.
+  The detectOpts parameter is a combination of the following:
+
+  DTWAIN_BP_DETECTORIGINAL - Detect blank pages for the original image that the device generated.
+  DTWAIN_BP_DETECTADJUSTED - Detect blank pages for the adjusted image (after cropping, rescaling etc.)
+  DTWAIN_BP_DETECTALL	   - Detect blank pages for both the original and adjusted images (this is the legacy behavior).
+
+- Corrected blank page handling for gray-scale images
+
+  If blank page handling is turned on, and the image acquired is an 8-bit that requires a palette to define the colors used,
+  the blank page detection will detect pages that have a single solid color within the threshold given by the caller.  
+
+  For example, if the threshold limit is 98%, and 98% or above of the entire page is red, the page is now considered blank.  
+
+- Added missing ANSI and Wide functions for DTWAIN_Range... and DTWAIN_Frame... functions that have 
+  pointers to strings as parameters.
+
+- Added function DTWAIN_GetActiveDSMPath, DTWAIN_GetActiveDSMPathA, and DTWAIN_GetActiveDSMPathW to return the 
+  full path of the TWAIN DSM that is being used.
+
+- Added function DTWAIN_GetTwainStringName, DTWAIN_GetTwainStringNameA, and DTWAIN_GetTwainStringNameW
+  to return a string version of one of the triplet components.  This function is merely a utility function that allows 
+  you to get the string versions of the values used in the DG/DAT/MSG triplet combination.
+
+      For example: 
+          char buffer[100];    
+          DTWAIN_GetStringNameA(DTWAIN_DATNAME, 0x0009, buffer, 100);
+
+      will have buffer set to "DAT_USERINTERFACE", since 9 is the TWAIN Data Argument Type (DAT) for the DG_CONTROL name 
+      associated with value 9 (see the twain.h header file provided in the include path for DAT names and their 
+      corresponding values).
+
+      The first parameter can be one of the values below:
+      DTWAIN_DGNAME - The data group name as a string
+      DTWAIN_DATNAME - The data argument type as a string
+      DTWAIN_MSGNAME - The message name (for example, "MSG_GET")
+     
+
+- Formerly undocumented DTWAIN_AddPDFTextEx is now available.  The function adds text to a PDF page 
+  given a DTWAIN_PDFTEXTELEMENT.
+
+- DTWAIN_SysIntialize and DTWAIN_SysInitializeNoBlocking() will now set DTWAIN_GetLastError() to -1051
+  if the DTWAIN resource text files cannot be found.  If DTWAIN_SysInitialize or DTWAIN_SysInitializeNoBlocking 
+  return 0, your application should immediately call DTWAIN_GetLastError() to confirm that the error received 
+  is -1051, indicating that the resources could not be found.
+
+- Fix and update the C#, Visual Basic Net, and the C/C++ LoadLibrary/GetProcAddress wrappers (using the 
+  LoadLibrary and GetProcAddress wrappers, no import library is required by C and C++ applications 
+  that wish to use the DTWAIN library)
+
+
 5.2.0.8
 - Corrected issue with single page PCX files not being generated.
 - Corrected issue with acquiring to text files with no available OCR support library.
 
+
 5.2.0.7
 - Corrected issue with duplex scanning only scanning the first page if pending image count was not 0.
+
 
 5.2.0.6		  
 - Added following function:
