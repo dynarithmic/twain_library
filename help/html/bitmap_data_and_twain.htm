@@ -1,0 +1,71 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Bitmap Data and TWAIN</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?bitmap_data_and_twain.htm"; }
+  else { parent.quicksync('a1.6.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Bitmap Data and TWAIN</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="developmentissues.htm">Previous</a>&nbsp;
+     <a href="floating_point_issues_and_dtwa.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Unless you're calling DTWAIN functions that automatically create image files from scanned images (for example, <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a>), by default TWAIN returns <a href="indmp4l.htm">Device Independent Bitmaps</a> (DIBs) to your application, therefore you should be familiar with how to handle this image type within your language and application. &nbsp; An example of DTWAIN functions that return DIBS are <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a> and <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a> (when acquiring uncompressed image data)</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Since DIB's are one of the most common formats in the Windows environment, you should be able to consult documentation on how to handle this format. &nbsp;If you have libraries that handle Windows BMP files, the same library or code can be used to handle a DIB. &nbsp;The example programs found in the <span style="font-weight: bold;">/EXAMPLES/C</span> and <span style="font-weight: bold;">/EXAMPLES/C++</span> directory include portions of the <span style="font-weight: bold;">DIBVIEW</span> program that demonstrates handling of Device Independent Bitmaps.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are not familiar with handling DIB's, we suggest that you get one of the many ActiveX or third party libraries that can display or manipulate Device Independent Bitmaps. &nbsp;Here are a few libraries with their web site address:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>ImgSource by SmallerAnimals Inc. &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="270" style="width:270px;"><p><span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.smalleranimals.com" target="_blank" class="weblink">http://www.smalleranimals.com</a></span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="264" style="width:264px;"><p>FreeImage (Open Source)</p>
+</td>
+<td valign="top" width="270" style="width:270px;"><p><span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff; text-decoration: underline;"><a href="http://www.lead.com" target="_blank" class="weblink">freeimage.sourceforge.net/</a></span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

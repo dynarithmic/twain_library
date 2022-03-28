@@ -1,0 +1,148 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Acquisition Questions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Acquisition Questions" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?twain_acquisition_questions.htm"; }
+  else { parent.quicksync('a3.2.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Acquisition Questions</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="device_capabilities_questions.htm">Previous</a>&nbsp;
+     <a href="dtwaindatatypes.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Q</span>: I called <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a>, but the device is not responding. &nbsp;Why?</p>
+<p><span style="font-weight: bold;">A</span>: First, you may be using modeless acquisition processing.  <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a> and all of the other DTWAIN Acquisition functions return immediately if modeless acquisitions are being done. &nbsp;If you are not using modeless processing, the return value will be NULL, indicating that an error occurred. &nbsp;The error can be determined by inspecting the last parameter of the DTWAIN Acquisition call (<span style="font-style: italic; font-weight: bold;">pStatus</span>), or by calling <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: How do you specify to acquire a certain number of pages?</p>
+<p><span style="font-weight: bold;">A</span>: The third parameter to all of the DTWAIN Acquisition functions, <span style="font-style: italic; font-weight: bold;">MaxPages,</span> allows you to set the number of pages to acquire.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: When I attempt to acquire multiple pages, I only get a single page and then the acquisition terminates. &nbsp; I have enabled the document feeder by calling DTWAIN_EnableFeeder, and I have specified DTWAIN_ACQUIREALL for the DTWAIN_Acquire... functions. &nbsp;What could be the problem?</p>
+<p><span style="font-weight: bold;">A</span>: Check if you have <a href="processing_acquisition_message.htm">DTWAIN notifications</a> enabled, and if they are, check that you are returning <span style="font-weight: bold;">TRUE</span> from your window procedure or callback that captures the DTWAIN messages. &nbsp; If you do not do this, the DTWAIN_TN_PAGECONTINUE notification will be sent to your window when attempting to acquire the next page,and your window procedure may be returning <span style="font-weight: bold;">FALSE</span> by mistake, which in effect stops the acqusition. &nbsp;Remember that DTWAIN_TN_PAGECONTINUE expects a return value of <span style="font-weight: bold;">TRUE</span> to continue acquiring pages. &nbsp;If the return value is <span style="font-weight: bold;">FALSE</span> for this notification, acquisition terminates.  </p>
+<p>&nbsp;</p>
+<p>By default, DTWAIN always starts with notifications disabled when DTWAIN_SysInitialize is called. &nbsp;To check if DTWAIN notification processing is enabled, the <a href="dtwain_ismsgnotifyenabled.htm">DTWAIN_IsMsgNotifyEnabled</a> function can be called. &nbsp;To enable or disable DTWAIN Notification processing, call the <a href="dtwain_enablemsgnotify.htm">DTWAIN_EnableMsgNotify</a> function before acquiring any images.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: When I acquire images and close the Source user interface, I can't reopen the Source user interface again if I try to acquire more images. &nbsp;Why does this happen?</p>
+<p><span style="font-weight: bold;">A</span>: You might be using a Source that does not behave correctly if the Source remains opened after the user interface is shut down. &nbsp;Remember that a Source can remain open, even though the user interface has been closed, however some Sources are poorly written and do not respond well if they remain open when you make subsequent attempts to acquire images. &nbsp;These Sources require that they must be closed once the user interface is shut down. &nbsp;To circumvent this problem, the Source should be closed after the UI has been closed. &nbsp;All of the DTWAIN acquisition functions have a DTWAIN_BOOL argument denoting whether the Source should automatically close if the user interface is closed. &nbsp;Make sure that you specify <span style="font-weight: bold;">TRUE </span>for this value. &nbsp;If not, your application can still call <span style="font-weight: bold;">DTWAIN_CloseSource</span> to close the Source.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: How do I get the returned image data once the acquisition has completed? &nbsp;I do not want to save the image data to a file.</p>
+<p><span style="font-weight: bold;">A</span>: For DTWAIN_MODAL processing Call the <a href="dtwain_getacquiredimage.htm">DTWAIN_GetAcquiredImage</a>, <a href="dtwain_getcurrentacquiredimage.htm">DTWAIN_GetCurrentAcquiredImage</a>, or the, <a href="dtwain_getacquiredimagearray.htm">DTWAIN_GetAcquiredImageArray</a> &nbsp;on the return value of the DTWAIN_AcquireNative or DTWAIN_AcquireBuffered function. &nbsp;These functions allow you to access the returned DIBs or raw image data. &nbsp;If the image data is a DIB, your application must use <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">GlobalLock</a> on the returned HANDLEs to get the image data. &nbsp;Your application is also responsible for calling <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">GlobalUnlock</a> (if the memory was locked) and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">GlobalFree</a> to free the image memory.  </p>
+<p>&nbsp;</p>
+<p>For DTWAIN_MODELESS operation, the <a href="dtwain_getsourceacquisitions.htm">DTWAIN_GetSourceAcquisitions</a> function returns the array of Source acquisitions. &nbsp;This array of values is the same value that is returned when DTWAIN_AcquireNative or DTWAIN_AcquireBuffered is called in DTWAIN_MODAL mode. &nbsp;This function should be called when DTWAIN sends the DTWAIN_TN_ACQUIREDONE notification during image acquisition.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Do I need to process the images once they are retrieved, or will DTWAIN delete them if not processed?</p>
+<p><span style="font-weight: bold;">A</span>: It must be emphasized that except for <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> and <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a>, <span style="font-weight: bold;">DTWAIN does not delete </span><span style="font-weight: bold; text-decoration: underline;">any</span><span style="font-weight: bold;"> images generated by the image device</span>. &nbsp;Your application must be ready to process any image that is generated by the Source. &nbsp;This includes deletion of the images (using <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">GlobalFree</a>). &nbsp;If not, the program will have a memory leak, since DTWAIN resets the acquisition count to zero when the DTWAIN Acquisition function is called, and there is no way for DTWAIN to remember the addresses of the image data that was previously acquired.  </p>
+<p>&nbsp;</p>
+<p>The reason why DTWAIN does not do anything with the image is that the application should be responsible for handling the image. &nbsp;Other TWAIN related libraries may delete the image at a specific time, however this is a restrictive and dangerous practice. &nbsp;Since image handling is somewhat independent of acquiring the image, DTWAIN's responsibility stops at the point that the image has been generated. &nbsp;Once this is done, the image is independent of DTWAIN. &nbsp;You can even unload DTWAIN (DTWAIN_SysDestroy) and the acquired images are still valid. &nbsp;This frees your application from having to worry about a 'surprise' deletion of the image by DTWAIN.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I am trying to acquire an image with no UI, however the DTWAIN Acquisition functions return with an error and the <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a> is equal to DTWAIN_ERR_UI_ERROR. &nbsp;Why can't I acquire an image without the default UI?</p>
+<p><span style="font-weight: bold;">A</span>: Some Sources do not allow acquisitions without the UI displayed. &nbsp;DTWAIN returns an error if you attempt to acquire an image without a UI for the Sources that do not allow this mode. &nbsp;You can test if the Source will allow operation without a UI by calling the <a href="dtwain_isuicontrollable.htm">DTWAIN_IsUIControllable</a> function.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I want to acquire an image to an image file, however DTWAIN does not support the file format that I desire. &nbsp;What do I do now?</p>
+<p><span style="font-weight: bold;">A</span>: Acquire the image using the native (<a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a>) or buffered (<a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a>) mode, and handle the returned images using a third-party library or source code that converts and saves image's to the file format that you desire.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Can I check if a Source is acquiring an image? &nbsp;I need to disable some controls so that the user doesn't inadvertently start another TWAIN session.</p>
+<p><span style="font-weight: bold;">A</span>: Yes. &nbsp;Use the <a href="dtwain_issourceacquiring.htm">DTWAIN_IsSourceAcquiring</a> and  <a href="dtwain_isacquiring.htm">DTWAIN_IsAcquiring</a>functions. &nbsp;You should also use these functions to test if it is safe to close your application.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Does DTWAIN support the 'Acquire To File' that some Sources include internally?</p>
+<p><span style="font-weight: bold;">A</span>: Yes. &nbsp;If you specify DTWAIN_USESOURCEMODE as one of the flags when you call <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a>, DTWAIN will attempt to use the Source's internal file support.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span> How do I set the acquisition pixel type when I scan an image?</p>
+<p><span style="font-weight: bold;">A</span>: The <span style="font-style: italic; font-weight: bold;">PixelType</span> parameter in the DTWAIN Acquire Functions sets the pixel type (color) of the acquired image.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Does <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a> support compression?</p>
+<p><span style="font-weight: bold;">A</span>: Yes. &nbsp;You must call <a href="dtwain_setcompressiontype.htm">DTWAIN_SetCompressionType</a> to set the compression to use.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Does <a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a> support tiled data?</p>
+<p><span style="font-weight: bold;">A</span>: No. &nbsp;Currently, only strips are supported.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I want to acquire an area of the image and not the entire page. &nbsp;How do I do this with DTWAIN?</p>
+<p><span style="font-weight: bold;">A</span>: Call the <a href="dtwain_setacquirearea.htm">DTWAIN_SetAcquireArea</a> function or  <a href="dtwain_setacquirearea2.htm">DTWAIN_SetAcquireArea2</a>function.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I want to get the handle to the images as they are being acquired by the Source. &nbsp;How do I do this?</p>
+<p><span style="font-weight: bold;">A</span>: &nbsp;Handle the <span style="font-weight: bold;">DTWAIN_TN_ACQUIREDONE</span> notification. &nbsp;To get the handle to the image call the  <a href="dtwain_getcurrentacquiredimage.htm">DTWAIN_GetCurrentAcquiredImage</a>function. &nbsp;Handling notifications can be done with either Modal or Modeless acquisitions.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I need to get/set a capability when I get a MSG_XFERREADY message from TWAIN. &nbsp;What is the equivalent of doing this with DTWAIN?</p>
+<p><span style="font-weight: bold;">A</span>: Capture the <span style="font-weight: bold;">DTWAIN_TN_TRANSFERREADY</span> notification. &nbsp;You can then get/set the device capability.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: DTWAIN notifications simplify things a lot, however I'm a hard-core TWAIN programmer and would like to receive all of the TWAIN messages. &nbsp;Can I do this with DTWAIN?</p>
+<p><span style="font-weight: bold;">A</span>: Yes. To get the handle to the TWAIN window, call DTWAIN_GetTwainHwnd.  </p>
+<p>Once you get the HWND, you can then <span style="font-weight: bold;">subclass</span> this window and intercept the messages before DTWAIN sees them (subclassing involves writing a custom window procedure). &nbsp;Make sure that every message that is processed by your window procedure is sent to DTWAIN. &nbsp;The topic of subclassing a window is advanced, so no further discussion of this topic will be done.</p>
+<p>&nbsp;</p>
+<p>If your application called <a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a> with a NULL window handle, or if you allowed DTWAIN to start the TWAIN session automatically without a window handle, DTWAIN creates a window for that will receive the messages. Otherwise the HWND specified by DTWAIN_StartTwainSession is used as the message window. &nbsp;Even though the window may be have been created by your application, you still must subclass the window for DTWAIN to work properly.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Can I limit the number of acquisitions attempted when using the Modal Processing? &nbsp;I want the Source UI to close as soon as the acquisitions are completed.</p>
+<p><span style="font-weight: bold;">A</span>: Yes. &nbsp;Call <a href="dtwain_setmaxacquisitions.htm">DTWAIN_SetMaxAcquisitions</a> before calling the DTWAIN Acquisition function. &nbsp;To allow the Source to close immediately, set the count parameter in DTWAIN_SetMaxAcquisitions to 1.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: Describe the process of acquiring with no UI.</p>
+<p><span style="font-weight: bold;">A</span>: DTWAIN allows your application to acquire images with no Source UI (if the Source allows this operation). &nbsp;DTWAIN will acquire one <span style="font-weight: bold;">and only one </span>set of images each time a DTWAIN Acquisition function is called. &nbsp;Basically this means that DTWAIN automatically sets the maximum number of acquisition attempts to one when no UI is used.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I am using DTWAIN Modal Acquisition. &nbsp;I can acquire images, however the application gives a General Protection Fault, or closes down for no reason after the user closes the UI. &nbsp;What could be the problem?</p>
+<p><span style="font-weight: bold;">A</span>: The problem could be a number of things. &nbsp;The first thing is to make sure that only one DTWAIN Acquisition function is attempted per application message. &nbsp;Successive calls to the DTWAIN Acquisition functions (one call right after the other) while using modal acquisitions results in message processing problems with some Sources. One possible reason for this is that the Source UI is implemented in such a way that the there may be a conflict in the processing of the application's message loop, and the messages that are sent to the Source UI. </p>
+<p>&nbsp;</p>
+<p>Also, make sure that you are not calling DTWAIN_IsTwainMsg, since DTWAIN handles the message processing when doing a Modal Acquisition.  <span style="font-weight: bold;"> </span></p>
+<p>&nbsp;</p>
+<p>Another reason is that the Source may have bugs. &nbsp;The way to test this is to either a) use the Modeless Acquisition processing or b) run another application (such as Photoshop) that allows you to choose a Source and acquire an image. If the problem persists in none of the above cases, the Source is not the problem. &nbsp;If the problem persists only in the DTWAIN Modeless application, the problem is with DTWAIN and you should send a bug report to Dynarithmic Technologies. &nbsp;If the DTWAIN Modeless application works fine, then you should also send a bug report to Dynarithmic Technologies, since the Source does not like Modal Acquisitions</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Q</span>: I am using DTWAIN Modeless Acquisition, but the Source UI does not respond to any mouse clicks, accelerator keys, etc. &nbsp;Why?</p>
+<p><span style="font-weight: bold;">A</span>: Make sure that <a href="dtwain_istwainmsg.htm">DTWAIN_IsTwainMsg</a> is called in your application's main message loop before calling <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">TranslateMessage</a> and <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1003832297X, true);" class="popuplink">DispatchMessage</a> &nbsp;See the topic <a href="dtwain_modal_acquisition_proc.htm">Modeless Acquisition Processing</a> for more information.  </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

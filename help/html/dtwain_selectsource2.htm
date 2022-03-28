@@ -1,0 +1,223 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SelectSource2</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_selectsource2.htm"; }
+  else { parent.quicksync('a5.277'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_SelectSource2</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_selectsource.htm">Previous</a>&nbsp;
+     <a href="dtwain_selectsourcebyname.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_SelectSource2</span> function allows the user to select the TWAIN Source and position the TWAIN Select Source dialog.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_SOURCE &nbsp;DTWAIN_SelectSource2 ( &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">HWND</span></p>
+</td>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">hWndParent,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szTitle,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">xpos,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">ypos,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="71" style="width:71px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="189" style="width:189px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">flags </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">hWndParent</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to the window that will be the parent of the Twain Select Source dialog, or NULL if no parent window.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szTitle</span></p>
+<p style="margin: 0px 0px 0px 15px;">Optional title, or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">xpos, ypos</span></p>
+<p style="margin: 0px 0px 0px 15px;">Position of the Select Source dialog with respect to the parent window.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">flags</span></p>
+<p style="margin: 0px 0px 0px 15px;">Optional window placement flags.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If successful, the return value is a non-zero <a href="dtwain_source.htm">DTWAIN_SOURCE</a> handle to the selected <a href="twain_data_source.htm">Source</a>. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2454855, true);" class="popuplink">NULL</a> is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectSource2A</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_SelectSource2W</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_SelectSource2</span> function displays the <a href="_1as6f.htm">TWAIN 'Select Source' dialog box</a> and returns a handle to the Source that is selected by the user. &nbsp; If the user chooses 'Cancel' from the dialog, DTWAIN_SelectSource2 returns NULL. &nbsp;The DTWAIN_SOURCE return value is used for any other DTWAIN function that requires a Source handle.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The difference between DTWAIN_SelectSource2 and <a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a> is that DTWAIN_SelectSource2 allows the application to position the Select Source dialog on the screen and place a title on the window. &nbsp;The <span style="font-style: italic;">hWndParent</span> sets the dialog's parent window to <span style="font-style: italic;">hWndParent</span>. &nbsp;If no parent window is desired, <span style="font-style: italic;">hWndParent</span> must be NULL or 0. &nbsp;If <span style="font-style: italic;">hWndParent</span> is NULL, the parent window is the entire screen.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Another difference is that DTWAIN_SelectSource2 will allow the various controls within the dialog to use a custom language setting. &nbsp;Depending on the resources loaded (see <a href="dtwain_loadlanguageresource.htm">DTWAIN_LoadLanguageResource</a> and <a href="dtwain_loadcustomlangresource.htm">DTWAIN_LoadCustomStringResource</a>), the various controls and buttons will display the text in the language selected.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> arguments place the window at position (<span style="font-style: italic;">xpos, pos</span>) with respect to the parent window (if no parent window, <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> are relative to the entire screen).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">szTitle</span> argument is a null-terminated string that represents the title to display on the window. &nbsp;If <span style="font-style: italic;">szTitle</span> is NULL, the title is "Select Source". </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">flags </span>parameter determine whether the dialog will be centered and whether the list of Source names displayed will be sorted. &nbsp;A list of available <span style="font-style: italic;">flag</span> options are as follows (multiple options can be selected by adding the values together).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="237" style="width:237px;"><p>DTWAIN_DLG_CENTER</p>
+<p>&nbsp;</p>
+</td>
+<td valign="top" width="278" style="width:278px;"><p>Centers the Select Source dialog on the parent window <span style="font-style: italic;">hWndParent</span>. &nbsp;The <span style="font-style: italic;">xpos</span> and <span style="font-style: italic;">ypos</span> arguments are ignored.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="237" style="width:237px;"><p>DTWAIN_DLG_SORTNAMES</p>
+</td>
+<td valign="top" width="278" style="width:278px;"><p>Sorts and displays the Source names in the dialog. &nbsp;Normally, the names are displayed in order of their time of installation.</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="237" style="width:237px;"><p>DTWAIN_DLG_HORIZONTALSCROLL</p>
+</td>
+<td valign="top" width="278" style="width:278px;"><p>Add horizontal scroll bar to list box that displays the Source Names. &nbsp;Use this option if the Source Name(s) will not fit horizontally within the list box.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>As an example, to place the Twain dialog on the center of the screen, the following would be used:</p>
+<p><span style="font-weight: bold;">DTWAIN_SelectSource2( NULL,NULL 0, 0, DTWAIN_DLG_CENTER );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To place the dialog at (20,20) of a particular window, the following would be used:</p>
+<p><span style="font-weight: bold;">DTWAIN_SelectSource2( hWnd, NULL, 20, 20, 0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To center the dialog on the screen, have the title "My Twain Dialog", and have sorted Source names:</p>
+<p><span style="font-weight: bold;">DTWAIN_SelectSource2( NULL, "My Twain Dialog", 0, 0, &nbsp;DTWAIN_DLG_SORTNAMES + DTWAIN_DLG_CENTER );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If more customization is desired beyond what DTWAIN_SelectSource2 provides, call <a href="dtwain_getallsources.htm">DTWAIN_EnumSources</a>, get all of the product names, and then present all of the product names found in your own custom interface to the user. &nbsp;When the user chooses one of the Sources from your interface, your application would call <a href="dtwain_selectsourcebyname.htm">DTWAIN_SelectSourceByName</a> to actually select the Source. &nbsp;See the DTWAIN demo program DTWDEMO.EXE for a code sample of how to accomplish this.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To change the language used for the various buttons and text, a call to DTWAIN_LoadLanguageResource can be used, or a call to DTWAIN_LoadCustomStringResource can be used. &nbsp;If DTWAIN_LoadCustomStringResource is used, the following DTWAIN constants define the various components of the dialog:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><p><span style="font-weight: bold;">Resource Name</span></p>
+</td>
+<td valign="top" width="245" style="width:245px;"><p><span style="font-weight: bold;">Description</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><p>IDS_SELECT_SOURCE_TEXT</p>
+</td>
+<td valign="top" width="245" style="width:245px;"><p>Dialog Title</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><p>IDS_SELECT_TEXT</p>
+</td>
+<td valign="top" width="245" style="width:245px;"><p>"Select" button text</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><p>IDS_CANCEL_TEXT</p>
+</td>
+<td valign="top" width="245" style="width:245px;"><p>"Cancel" button text</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><p>IDS_SOURCES_TEXT</p>
+</td>
+<td valign="top" width="245" style="width:245px;"><p>Text above the Sources list box.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="200" style="width:200px;"><br>
+</td>
+<td valign="top" width="245" style="width:245px;"><br>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>Remains in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, true);" class="popuplink">State 3</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Calls</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Optional Prerequisite Calls</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Source Selection Functions</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

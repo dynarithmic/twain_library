@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Visual Basic and Modal / Modeless Processing</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Visual Basic and Modal / Modeless Processing" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?visual_basic_and_modal___model.htm"; }
+  else { parent.quicksync('a2.3.6'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Visual Basic and Modal / Modeless Processing</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visual_basic_and_device_indepe.htm">Previous</a>&nbsp;
+     <a href="visual_basic_and_dtwain_notifi.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The best way to implement image retrieval in a Visual Basic program is to use <a href="dtwain_modal_acquisition_proc.htm">Modal acquisitions</a>. &nbsp;The reason for this is that it is difficult for Visual Basic to intercept the application messages so that they can be sent to the TWAIN Source Manager during image acquisition. &nbsp;With modal acquisitions, DTWAIN is responsible for sending the messages to the Twain Source Manager -- however, some Sources cannot work with Modal acquisitions (most do, but a few still have problems).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_modeless_acquisition_p.htm">Modeless acquisitions</a> rely on the application to intercept the application message loop. The tell-tale sign that a TWAIN Source relies on modeless processing is that if modal processing is used, the Source user interface may display, but the user interface does not respond to any user interaction, or the acquisitions show erratic behavior.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The best option is to not use Visual Basic for these types of Sources, and use C or C++ to control the device using modeless acquisitions. &nbsp;The other option which may work is to attempt modeless acquisitions in Visual Basic in the following manner:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>a) Call DTWAIN_SetTwainMode with the DTWAIN_MODELESS argument after the call to DTWAIN_SysInitialize</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>b) When an acquisition function is called, i.e. DTWAIN_AcquireNative, DTWAIN_AcquireFile, etc. &nbsp;write a "wait" loop to process and send messages to either your application or to the TWAIN Source Manager: &nbsp;Here is an example</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">Dim message As WinMsg</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">Dim Source As Long</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">'</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">DTWAIN_SetTwainMode DTWAIN_MODELESS</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">'</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">Source = DTWAIN_SelectSource</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">' Call the acquisition function</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">DTWAIN_AcquireFile params</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span class="f_ImageCaption" style="font-weight: normal;">' Wait for the acquisitions to finish</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp;While GetMessage(message, 0, 0, 0) And DTWAIN_IsUIEnabled(source)</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp;If DTWAIN_IsTwainMsg(message) = 0 Then</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp; &nbsp; &nbsp; TranslateMessage message</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp; &nbsp; &nbsp; DispatchMessage message</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp;End If</span></p>
+<p><span style="font-size: 8pt;">Wend</span></p>
+<p>&nbsp;</p>
+<p>The GetMessage, TranslateMessage, and DispatchMessage functions are Windows API functions. &nbsp;Their prototypes for Visual Basic is as follows:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Declare Function GetMessage Lib "user32" Alias "GetMessageA" \</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (lpMsg As WinMsg, ByVal hwnd As Long, ByVal wMsgFilterMin As Long, ByVal wMsgFilterMax As Long) As Long</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Declare Function TranslateMessage Lib "user32" (lpMsg As WinMsg) As Long</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Declare Function DispatchMessage Lib "user32" Alias "DispatchMessageA" (lpMsg As WinMsg) As Long</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>For VB .NET/2005/2008/2010, the following declarations are as follows:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 8pt;">Declare Ansi Function GetMessage Lib "user32" Alias "GetMessageA" \</span></p>
+<p><span style="font-size: 8pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (lpMsg As WinMsg, ByVal hwnd As IntPtr, ByVal wMsgFilterMin As Integer, ByVal wMsgFilterMax As Integer) As Integer</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 8pt;">Declare Ansi Function TranslateMessage Lib "user32" (lpMsg As WinMsg) As Integer</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 8pt;">Declare Ansi Function DispatchMessage Lib "user32" Alias "DispatchMessageA" (lpMsg As WinMsg) As Integer</span></p>
+<p>&nbsp;</p>
+<p>The loop basically calls DTWAIN_IsTwainMsg and checks if the next message is meant for the TWAIN manager. &nbsp;If it isn't, then it is sent to your application. &nbsp;This loop terminates when the acquisition terminates (the DTWAIN_IsUIEnabled determines if the interface is still shown -- even if you don't use a user interface when acquiring images, DTWAIN_IsUIEnabled will still reflect whether the device is still acquiring an image).</p>
+<p>&nbsp;</p>
+<p>One caveat is that this may still not work for some Sources due to the fact that Visual Basic is still enclosed in a wrapper that may not allow all the messages to be sent or come through to the application. &nbsp;However, give this method a try if you need to accomplish modeless processing in Visual Basic.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

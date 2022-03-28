@@ -1,0 +1,142 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_StartTwainSession</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_StartTwainSession" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_starttwainsession.htm"; }
+  else { parent.quicksync('a5.360'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">DTWAIN_StartTwainSession</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_startthread.htm">Previous</a>&nbsp;
+     <a href="dtwain_sysdestroy.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_StartTwainSession</span> function starts a TWAIN Session.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_StartTwainSession (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">HWND</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">hWndSession,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="134" style="width:134px;"><p><span style="font-weight: bold;">LPCTSTR</span></p>
+</td>
+<td valign="top" width="126" style="width:126px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">szDLLName </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">hWndSession</span></p>
+<p style="margin: 0px 0px 0px 15px;">Handle to TWAIN message window or NULL<span style="font-weight: bold;"> </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">szDLLName</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a null-terminated string identifying the TWAIN DLL or NULL.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the function fails <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a> is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Character specific version</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>ANSI version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_StartTwainSessionA</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="107" style="width:107px;"><p>Unicode version:</p>
+</td>
+<td valign="top" width="248" style="width:248px;"><p><span style="font-weight: bold;">DTWAIN_StartTwainSessionW</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_StartTwainSession</span> function starts a TWAIN session. &nbsp; When a TWAIN session is started, DTWAIN obtains the ability to interact with the TWAIN Data Source Manager (DSM). &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that DTWAIN_StartTwainSession is not a mandatory function. &nbsp;If a TWAIN session has not been started by the application, DTWAIN will start a TWAIN session whenever the first Source Selection function is executed. &nbsp; However, there are cases where a TWAIN session should be started explicitly by the application, which is described in the <span style="font-style: italic;">hWndSession </span>description below.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Only one TWAIN session can be started at any one time. &nbsp;There is no harm in calling DTWAIN_StartTwainSession if the session is already started. &nbsp;If this is the case, DTWAIN ignores the request to start another session and uses the original session. &nbsp;To end a session, call <a href="dtwain_endtwainsession.htm">DTWAIN_EndTwainSession</a></p>
+<p>&nbsp;</p>
+<p>The first parameter, <span style="font-style: italic;">hWndSession</span> is a handle to the window that will handle DTWAIN messages and notifications if notifications are enabled (see <a href="dtwain_enablemsgnotify.htm">DTWAIN_EnableMsgNotify</a>), and will also serve as the parent window to other TWAIN related user interface windows (for example, many TWAIN Source user interface's rely on the position of <span style="font-style: italic;">hWndSession</span> to position their own windows).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">hWndSession</span> window will be sent DTWAIN notifications whenever acquisition of an image is being done. &nbsp;If <span style="font-style: italic;">hWndSession</span> is NULL, then no notification window is used. If <span style="font-style: italic;">hWndSession</span> is not NULL, the window must be opened for the lifetime of the session, since DTWAIN will be sending <a href="processing_acquisition_message.htm">notifications</a> to it for the lifetime of the acquisition. &nbsp;To ensure that the window will be available, it is always wise to use the main application window handle.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Since a non-NULL </span><span style="font-style: italic; font-weight: bold;">hWndSession</span><span style="font-weight: bold;"> will be used for notifications, it is important that any unprocessed DTWAIN messages sent to the the window return TRUE (1) by default. &nbsp;A failure to do this will result in erratic behavior.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example (assume WndProc is the window procedure for the notification window):</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( msg == DTWAIN_GetRegisteredMsg( ) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; // This is a DTWAIN message</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; return TRUE; &nbsp;// for unprocessed DTWAIN messages</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; ...</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The second parameter, <span style="font-style: italic;">szDLLName</span> is the name of the TWAIN DSM file or NULL (0). &nbsp;If the default name is desired, <span style="font-style: italic;">szDLLName</span> should be <span style="font-weight: bold;">NULL </span>or empty string (a null-terminated string with no characters). &nbsp; <span style="font-weight: bold;">It is recommended that you call this function specifying NULL or null-terminated empty string as the </span><span style="font-style: italic; font-weight: bold;">szDLLName</span><span style="font-weight: bold;"> value</span>. &nbsp;Specifying an explicit name is reserved only for diagnostic purposes.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the <a href="dtwain_settwaindsm.htm">DTWAIN_SetTwainDSM</a> function is called prior to DTWAIN_StartTwainSession, the DSM file used is the one specified by the DTWAIN_SetTwainDSM function, otherwise the DSM file is TWAIN_32.DLL for 32-bit applications, and TWAINDSM.DLL for 64-bit applications.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If DTWAIN needs to start a TWAIN session automatically, DTWAIN calls DTWAIN_StartTwainSession with both <span style="font-style: italic;">hWndSession</span> and <span style="font-style: italic;">szDLLName</span> set to NULL. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If a TWAIN session has not been started prior to DTWAIN_StartTwainSession being called, and the <span style="font-style: italic;">szDLLName </span>is <span style="font-weight: bold;">NULL</span>, DTWAIN will search for the TWAIN_32.DLL or TWAINDSM.DLL file on the system using the search order specified by the DTWAIN_GetDSMSearchOrder function. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note:</p>
+<p>A TWAIN session <span style="text-decoration: underline;">must not</span> be terminated if a <a href="twain_data_source.htm">Source</a> is currently acquiring an image. &nbsp;To ensure that this scenario does not happen, use the DTWAIN Source Status functions to check the acquisition status of the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1491286190X, true);" class="popuplink">State 1</a> to <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1665431485X, true);" class="popuplink">State 2</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_endtwainsession.htm">DTWAIN_EndTwainSession</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

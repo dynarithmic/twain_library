@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Starting a TWAIN Session</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?startingatwainsession.htm"; }
+  else { parent.quicksync('a3.1.2.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Starting a TWAIN Session</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="selecting_twain_data_source_ma.htm">Previous</a>&nbsp;
+     <a href="twain_data_source_manager.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Before a TWAIN application can open a Source, it is necessary for the application to communicate with the TWAIN Data Source Manager (transition from TWAIN <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1665431485X, true);" class="popuplink">State 2</a> to <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_935026813X, true);" class="popuplink">State 3</a>). &nbsp;To do this, the  <a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a> function is called. &nbsp;The TWAIN Data Source Manager (DSM) is implemented in either <span style="font-weight: bold;">TWAIN_32.DLL</span> or <span style="font-weight: bold;">TWAINDSM.DLL</span>, depending on whether your application will use the legacy Source Manager, or the version 2.x Source Manager, respectively (you can set the Source Manager to use by calling the <a href="dtwain_settwaindsm.htm">DTWAIN_SetTwainDSM</a>).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Normally, DTWAIN_StartTwainSession is automatically called by <span style="font-weight: bold;">DTWAIN</span> if a TWAIN session has not been started, and the application wants to select a TWAIN Source.  <span style="font-weight: bold;">DTWAIN</span> is smart enough to start the TWAIN session if one has not been started.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>However, the application can call DTWAIN_StartTwainSession explicitly. &nbsp;The application will need to start a TWAIN session explicitly if it needs to do any of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Monitor and control the acquisition process by setting the notification window and capturing DTWAIN notifications and messages.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Use a different TWAIN_32.DLL or TWAINDSM.DLL (the TWAIN Data Source Manager) other than the default. &nbsp;This rarely, if ever, needs to be done by an application, but is provided as a diagnostic aid.</td></tr></table></div><p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><a href="twain_data_source_manager.htm">Locating and Loading the TWAIN DSM File</a></p>
+<p style="text-indent: -23px; margin: 0px 0px 0px 24px;"><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

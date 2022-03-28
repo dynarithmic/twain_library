@@ -1,0 +1,66 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>ANSI and Unicode Application Development</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?ansi_and_unicode_application_d.htm"; }
+  else { parent.quicksync('a2.3.1'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">ANSI and Unicode Application Development</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="visualbasicdevelopment.htm">Previous</a>&nbsp;
+     <a href="visualbasicexampleprograms.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold; text-decoration: underline;">For Visual Basic .NET and above (including VB 2005, 2008, 2010, etc.):</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using Visual Basic .NET or Visual Basic 2005/2008/2010, it is highly recommended to use the Unicode version of the DTWAIN libraries, <span style="font-weight: bold;">DTWAIN32U.DLL</span> and <span style="font-weight: bold;">DTWAIN64U.DLL</span>. &nbsp;The reason is that these languages use .NET, and .NET uses Unicode strings by default. &nbsp;By using the Unicode versions of the DTWAIN library, it will ensure that strings that you pass to or receive from the DTWAIN DLL functions are of the correct character set type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Please note for Visual Studio users:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>By default, Visual Studio assumes that your VB applications are <span style="font-weight: bold;">Unicode</span> enabled. &nbsp;This means that all <span style="font-weight: bold;">new</span> Visual Studio projects use DTWAIN32U.DLL or DTWAIN64U.DLL, depending on whether the application will be a 32-bit application or 64-bit application. &nbsp; To use the Unicode versions of DTWAIN, you must use the <span style="font-weight: bold;">DTWAIN32U_NET.VB</span> or <span style="font-weight: bold;">DTWAIN64U_NET.VB</span> interface files in your VB project, so that all string related DTWAIN functions are called correctly without issues. &nbsp;Otherwise, your application may crash or experience erratic behavior.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you have developed a VB.NET/2005/2006/2010 application using DTWAIN prior to version DTWAIN 4.x and wish to continue developing your application using DTWAIN 4.x or above, it is highly recommended to use the Unicode version of DTWAIN DLL's, plus use the DTWAIN32U_NET.VB or DTWAIN64U_NET.VB interface files.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">For Visual Basic 6.0 and below</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>It is highly recommended you use only the ANSI version of the DTWAIN DLL's, DTWAIN32.DLL and DTWAIN64.DLL, in addition using the ANSI version of the interface files (DTWAIN32.BAS, DTWAIN64.BAS). &nbsp;Even though the DTWAIN DLL would be ANSI-based, you can still call the Unicode specific DTWAIN functions directly (for example, <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorStringW</a>) if you have a need to process Unicode strings.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

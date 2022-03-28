@@ -1,0 +1,296 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainSource::GetCapValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwainsourcegetcapvalues_2.htm"; }
+  else { parent.quicksync('a9.12.19'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainSource::GetCapValues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainsourcegetcapcontainer_2.htm">Previous</a>&nbsp;
+     <a href="dtwainsourcegetcapoperations_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::GetCapValues( LONG Cap, DTwainLongArray&amp; Values, LONG GetType=DTWAIN_CAPGET ) const;</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::GetCapValues( LONG Cap, DTwainStringArray&amp; Values, LONG GetType=DTWAIN_CAPGET ) const;</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::GetCapValues( LONG Cap, DTwainDoubleArray&amp; Values, LONG GetType=DTWAIN_CAPGET ) const;</span></p>
+<p><span style="font-weight: bold;">bool DTwainSource::GetCapValues( LONG Cap, DTwainFrameArray&amp; Values, LONG GetType=DTWAIN_CAPGET ) const;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Cap</span></p>
+<p>Capability values to get.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Values</span></p>
+<p>On return, capability values retrieved from the Source.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">GetType</span></p>
+<p>Capability retrieval mode. &nbsp;Either DTWAIN_CAPGET, DTWAIN_CAPGETCURRENT, or DTWAIN_CAPGETDEFAULT.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p><span style="font-weight: bold;">true</span> if successful, <span style="font-weight: bold;">false</span> if unsuccessful.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTwainSource::GetCapValues function retrieves capability values from the Source, and fills an array with these values on return. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>There are four forms of CDTwainSource::GetCapValues. &nbsp;All the forms are both equivalent in terms of every parameter except the <span style="font-style: italic;">Values</span> parameter. &nbsp;The <span style="font-style: italic;">lCap</span> parameter is one of the capability constants (for example, DTWAIN_CV_ICAPBITDEPTH or DTWAIN_CV_CAPAUTHOR. &nbsp;See the main help manual for a complete list of these constants).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">GetType</span> determines whether the capability value that will be retrieved is the current value, default value, or all the values supported by the capability. The values of <span style="font-style: italic;">GetType</span> can be one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="227" style="width:227px;"><p><span style="text-decoration: underline;">SetType</span></p>
+</td>
+<td valign="top" width="602" style="width:602px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="227" style="width:227px;"><p>DTWAIN_CAPGET &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="602" style="width:602px;"><p>Gets the value(s) of the capability.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="227" style="width:227px;"><p>DTWAIN_CAPGETCURRENT</p>
+</td>
+<td valign="top" width="602" style="width:602px;"><p>Gets the current value of the capability.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="227" style="width:227px;"><p>DTWAIN_CAPGETDEFAULT</p>
+</td>
+<td valign="top" width="602" style="width:602px;"><p>Gets the default value of the capability.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the <span style="font-style: italic;">GetType</span> parameter is omitted, then all the values supported by the capability are returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Values</span> parameter will be either an STL vector of long values, string values, double (real) values, or DTwainFrame values. &nbsp;The type of vector to use depends on the <span style="font-style: italic;">lCap</span> parameter. &nbsp;If the wrong vector type is used for the <span style="font-style: italic;">lCap</span> value type, DTwainSource::GetCapValues returns <span style="font-weight: bold;">false</span>. &nbsp;The DTWAIN C++ library uses typedef's for the various vector types. &nbsp;These typedef's that are used for capability setting and retrieval are DTwainLongArray, DTwainStringArray, DTwainDoubleArray, and DTwainFrameArray. &nbsp;In general, the vector types are determined by the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the capability supports an integer type (long, int, boolean, etc.), the vector to use is DTwainLongArray.</p>
+<p>If the capability supports a floating point type, the vector to use is DTwainDoubleArray</p>
+<p>If the capability supports a string type, the vector to use is DTwainStringArray.</p>
+<p>If the capability supports a TW_FRAME type, the vector to use is DTwainFrameArray.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To get the data type for a specific capability, you can get the data type defined in the DTWAIN Capability constants in the main help manual, or call DTwainSource::GetCapDataType( ) to determine the type. &nbsp;Here is a table of the return value from DTwainSource::GetCapDataType, and the correspoding vector type to use:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p><span style="text-decoration: underline;">Return from GetCapDataType( )</span></p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p><span style="text-decoration: underline;">vector to use</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_INT8 &nbsp; &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_INT16 &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_INT32 &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_UINT8 &nbsp;  </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_UINT16  </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_UINT32  </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_BOOL &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainLongArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_FIX32 &nbsp; &nbsp;  </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainDoubleArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_FRAME &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainFrameArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_STR32 &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainStringArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_STR64 &nbsp; &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainStringArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_STR128 &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainStringArray</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="228" style="width:228px;"><p>TWTY_STR255 &nbsp; </p>
+</td>
+<td valign="top" width="131" style="width:131px;"><p>DTwainStringArray</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A return value of <span style="font-weight: bold;">false</span> from DTwainSource::GetCapValues could mean one of the following:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The source does not support the capability.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The <span style="font-style: italic;">Values</span> parameter specifies the wrong vector type.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>DTWAIN was not initialized</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="13"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>The Source is not valid (i.e. was not selected and/or did not open successfully).</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p>As an example, to get the capability values for DTWAIN_CV_ICAPXRESOLUTION, the data types that will be stored &nbsp;are DTWAIN_FLOATs. &nbsp;In this case, the call to DTwainSource::GetCapValues must use a reference to a DTwainDoubleArray as the <span style="font-style: italic;">Values</span> parameter. &nbsp; </p>
+<p>To get all of the X-resolution values, the following code snippet shows how this is done:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;cdtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;iostream&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">using namespace DTWAIN;</span></p>
+<p><span style="font-size: 9pt;">using namespace std;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface TI( NULL, NULL ); // start DTWAIN and a Twain session</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSource Source = DTwainSource::Select( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// get the resolution values</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainDoubleArray Resolutions;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source.GetCapValues( DTWAIN_CV_ICAPXRESOLUTION, Resolutions );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// display values on the console</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;for (int i = 0; i &lt; Resolutions.size( ); ++i )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;std::cout &lt;&lt; Resolutions[i] &lt;&lt; std::endl;</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p>The <span style="font-style: italic;">Values</span> parameter is an STL vector type, so all of the functions that can apply to vectors can apply to the <span style="font-style: italic;">Values</span> parameter. For example, note the use of the size( ) member function that returns the number of elements in the vector.  </p>
+<p>&nbsp;</p>
+<p>The only capability that returns a DTwainFrameArray is DTWAIN_CV_ICAPFRAMES. &nbsp;The following example shows how to get the current value of this capability.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#include &lt;cdtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;iostream&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">using namespace DTWAIN;</span></p>
+<p><span style="font-size: 9pt;">using namespace std;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface TI( NULL, NULL ); // start DTWAIN and a Twain session</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSource Source = DTwainSource::Select( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// get the resolution values</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainFrameArray AllFrames;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source.GetCapValues( DTWAIN_CV_ICAPFRAMES, AllFrames );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// display all values on the console</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Let's use an iterator in this example.</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DTwainFrameArray::iterator cur = AllFrames.begin( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; DTwainFrameArray::iterator last = AllFrames.end( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; // loop for all frames</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; while ( cur != last )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;// display (Left, top, right, bottom) of the frame </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;std::cout &lt;&lt; "(" &lt;&lt; cur-&gt;Left( ) &lt;&lt; ", " &lt;&lt; cur-&gt;Top( ) &lt;&lt; ", " &lt;&lt;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cur-&gt;Right( ) &lt;&lt; ", " &lt;&lt; cur-&gt;Bottom( ) &lt;&lt; ")" &lt;&lt; std::endl;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;// go to next frame in the array</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; ++cur;  </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p>If the capability returns a range of values, it is sometimes advantageous to expand the range into discrete values. &nbsp;Here is a revised example of the example above that returns the x-resolution values. </p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">#include &lt;cdtwain.h&gt;</span></p>
+<p><span style="font-size: 9pt;">#include &lt;iostream&gt;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">using namespace DTWAIN;</span></p>
+<p><span style="font-size: 9pt;">using namespace std;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">int main( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainInterface TI( NULL, NULL ); // start DTWAIN and a Twain session</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainSource Source = DTwainSource::Select( );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// get the resolution values</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTwainDoubleArray Resolutions;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Source.GetCapValues( DTWAIN_CV_ICAPXRESOLUTION, Resolutions );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Check if this returns a range</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Source.IsCapContainerRange( DTWAIN_CV_ICAPXRESOLUTION ) )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // create a range using the values from Resolution, and expand the values</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; // back into the Resolution vector</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;MakeDoubleRange( Resolutions ).Expand( Resolutions );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;}</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// display values on the console</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;for (int i = 0; i &lt; Resolutions.size( ); ++i )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;std::cout &lt;&lt; Resolutions[i] &lt;&lt; std::endl;</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p>&nbsp;</p>
+<p>Note the usage of MakeDoubleRange( ) which creates a range from a DTwainDoubleArray that actually contains a range definition. &nbsp;The Expand( ) function then expands the range values into discrete values.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

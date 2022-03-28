@@ -1,0 +1,80 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Example 5: Output numeric and string capability values</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?example5outputnumericand_2.htm"; }
+  else { parent.quicksync('a9.5.5'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Example 5: Output numeric and string capability values</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="example4acquireinnativem_2.htm">Previous</a>&nbsp;
+     <a href="example6getallbrightness_2.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Example : &nbsp;Enumerate all of a Source's capabilities and output the numeric and string values of the capabilities</span></p>
+<p>&nbsp;</p>
+<p>#include "cdtwain.h"</p>
+<p>#include &lt;iostream&gt;</p>
+<p>&nbsp;</p>
+<p>using namespace DTWAIN;</p>
+<p>using namespace std; // for &lt;iostream&gt; </p>
+<p>&nbsp;</p>
+<p>int main( )</p>
+<p>{</p>
+<p> &nbsp; // Initialize DTWAIN - return if initialization does not work</p>
+<p> &nbsp; <a href="dtwaininterface2.htm">DTwainInterface</a> TI;</p>
+<p> &nbsp; if ( !TI.<a href="cdtwaininterfaceisvalid_2.htm">IsValid</a>( ) ) </p>
+<p> &nbsp; &nbsp; &nbsp; return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Declare a Source and assign the default TWAIN source to it</p>
+<p> &nbsp; DTwainSource Source = <a href="dtwainsourceselectdefault.htm">DTwainSource::SelectDefault</a>( );</p>
+<p> &nbsp; if ( !Source.IsValid( ) )</p>
+<p> &nbsp; &nbsp; &nbsp;return 0;</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Get all the capabilities</p>
+<p> &nbsp; <a href="arrayclasses_2.htm">DTwainLongArray</a> Caps;</p>
+<p> &nbsp; Source.<a href="dtwainsourceenumsupportedcap_2.htm">EnumSupportedCaps</a>( Caps );</p>
+<p>&nbsp;</p>
+<p> &nbsp; // Output the numeric and string values of all the caps</p>
+<p> &nbsp; int nCount = Caps.size( ); &nbsp;// DTwainLongArray is a std::vector, so vector functions work here</p>
+<p> &nbsp; for ( int i = 0; i &lt; nCount; ++i )</p>
+<p> &nbsp; &nbsp; &nbsp; cout &lt;&lt; Caps[i] &lt;&lt; " " &lt;&lt; DTwainInterface::<a href="cdtwaininterfacegetnamefromc_2.htm">GetNameFromCap</a>( Caps[i] ) &lt;&lt; endl;</p>
+<p>&nbsp;</p>
+<p>} &nbsp;// Twain is shut down automatically on exit</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

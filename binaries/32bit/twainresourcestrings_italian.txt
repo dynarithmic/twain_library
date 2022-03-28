@@ -1,0 +1,251 @@
+1 NULL Finestra Maneggia
+2 Memoria Allocazione Fallimento
+3 Invalido DLL Maneggia
+4 Invalido Fonte Maneggia
+5 TWAIN. DLL non Basa
+6 Invalid TWAIN. DLL
+7 Invalido Seduta Maneggia
+8 Invalid Twain Dirigente
+9 Non colmando TWAIN. DLL
+10 Non aprendo TWAIN Fonte
+11 Non chiudendo TWAIN Fonte
+12 TWAIN Fonte apra avanti eseguendo comando.
+27 Non finendo scan.   X/Y o Risolutezze calo da diverso valute
+28 Invalido Archivia Nome Precisato
+1000 ***
+1001 Invalido DTWAIN_HANDLE
+1002 Invalido DTWAIN_SOURCE
+1003 Invalido DTWAIN_ARRAY
+1004 Incorretto DTWAIN_ARRAY tipo
+1005 Ago fuori da frontiere da DTWAIN_ARRAY
+1006 Fuori da mucchio memoria
+1007 DTWAIN non crei TWAIN finestra
+1008 Invalido Pixel Dattilografa
+1009 Invalido DTWAIN_CAPCONTAINER
+1010 Nessun DTWAIN Seduta cominciò.
+1011 Invalido DTWAIN_ACQUIRE numero
+1012 Invalid TWAIN Capacità
+1013 Fonte non caldeggia capacità
+1014 Generale TWAIN Errore.
+1015 Fallii Agganciare applicazione messaggio coda
+1016 Cattivo Schedario nome discussione passò
+1017 DTWAIN_ARRAY non contiene valute
+1018 Invalido immagine archivia formato precisato
+1019 Invalido Dib page
+1020 Fonte attualmente acquista immagine
+1021 Invalido parametro passò
+1022 Invalido Portata precisò: Controllo upper/lower o basso confini o gradino statura
+1023 TWAIN utente interfaccia non cominci.   Congegno errore o Acquisto avendo utente interfaccia.
+1024 Fonte non caldeggia precisato congegno unità
+1025 Lingua risorsa DLL non basa
+1026 TWAIN Fonte sta aperto
+1027 Fonte Congegno Eventi non caldeggiai
+1028 Fonte UI Solo modo non caldeggiai
+1029 Fonte UI già apre
+1030 No caldeggio da calando capacità
+1031 Fonte non caldeggia schedario cessioni
+1032 Precisai pezzo profondo non caldeggiai
+1033 Fonte non ha capacità.   Possibly corruppe o ferramenta fallimento
+1034 Buffered cessioni usando Tegole non caldeggiai
+1035 Invalido DTWAIN_FRAME.   Dati tipo sia DTWAIN_FLOAT, elemento conta mosto= 4
+1036 Questo funzione non caldeggia dentro limitato versione di DTWAIN. Voi upgrade verso registrato versione di DTWAIN
+1037 Fonte o congegno non caldeggio documento feeder
+1038 Fonte o congegno non caldeggio querying se documenti colmano in documento feeder
+1039 Memoria eccezione errore while chiamando Twain DSM.   DSM siano in inconsistente stato.  
+1040 Invalid TWAIN state transition
+1041 Unsupported extended image info type
+1042 DLL Resource file not found
+1043 DTWAIN Not initialized
+1044 No TWAIN Sources found
+1045 TWAIN is not installed
+1046 Incorrect thread of execution
+1047 Bad capability data type
+1048 Capability has unknown data type
+1049 Demo Version of DTWAIN does not support this file type
+1050 Selezione Annullata
+1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
+1101 TWAIN Condizione Codice: Errore
+1102 TWAIN Condiziona Codice: Unknown causa di fallimento
+1103 TWAIN Condizione Codice: Dati Fonte
+1104 TWAIN Condizione Codice: Dati Fonte connette verso massimale possibile applicazioni
+1105 TWAIN Condizione Codice: Dati Fonte di Dati Fonte Dirigente riportò errore.   Applicazione non responsabile.
+1106 TWAIN Condiziona Codice: Unknown TWAIN capacità scontrato
+1107 TWAIN Condizione Codice: Dati parametro è fuori da portata
+1108 TWAIN Condizione Codice: Unrecognized TWAIN terzina combinazione
+1109 TWAIN Condiziona Codice: TWAIN terzina fuori da aspetta successione
+1110 TWAIN Condizione Codice: Sconosciuto meta Applicazione in DSM _Entry funzione
+1111 TWAIN Condizione Codice: Capacità non caldeggia con Dati Fonte
+1112 TWAIN Condizione Codice: Operazione non caldeggia con capacità
+1113 TWAIN Condizione Codice: Capacità ha dependancy sopra another capacità
+1114 TWAIN Condizione Codice: Schedario protegge
+1115 TWAIN Condizione Codice: Archivia già esiste
+1116 TWAIN Condizione Codice: non Archivia non basare
+1117 TWAIN Condizione Codice: Elenco sta empty
+1118 TWAIN Condizione Codice: Feeder blocca
+1119 TWAIN Condizione Codice: Feeder detected multiplo pagine
+1120 TWAIN Condizione Codice: Errore scrivendo archivia (disco sia pieno)
+1121 TWAIN Condizione Codice: Congegno andò offline durante operazione
+1123 TWAIN Condition Code: Operation failed (cover or door on device is opened)
+1124 TWAIN Condition Code: Operation failed (document has a damaged corner)
+1125 TWAIN Condition Code: Operation failed (focus error during document capture)
+1126 TWAIN Condition Code: Operation failed (document too light)
+1127 TWAIN Condition Code: Operation failed (document too dark)
+1128 TWAIN Condition Code: Operation failed (source has nothing to capture for transfer)
+2000  
+2001 Dalla memoria
+2002 L'archivio non ha potuto essere aperto
+2003 Archivio della lettura di errore
+2004 Archivio di scrittura di errore
+2005 Parametro non valido specificato per a memoria d'immagine la funzione
+2006 Archivio non valido di BMP
+2007 Archivio non valido di BMP con RLE
+2008  
+2009 Formato non valido del JPEG
+2010 Contesto Non valido Del Dispositivo
+2011 Non validi DIB
+2012  
+2013 Nessun errore delle risorse
+2014  
+2015 Archivio non valido del PNG
+2016 Non ha potuto creare l'archivio del PNG
+2017 Interno errore
+2018 Non valida serie completa di caratteri
+2019  
+2020 non valido TIFF archivio
+2021 TIFF LZW compressione non sosten
+2022 non valido PCX formato
+2023 pot non cre BMP
+2024  
+2025  
+2026  
+2027 non valido Window metafile
+2028 difettoso bit profondità
+2029 BitBlt ven a mancare
+2030 amplificatore troppo piccolo
+2031 immagine troppo colore
+2032 non valido TGA
+2033  
+2034  
+2035 DIB pot non essere cre
+2036 LZW compressione non sosten
+2037  
+2038  
+2039  
+2040  
+2041 errore regol Window metafile bit
+2042 errore otten Window metafile bit
+2043 errore pax archivio parola d'accesso
+2044 non valido PAX
+2045  
+2046 non valido PSD formato
+2047 PSD non sosten
+2048 Errore di decryption
+2049 Errore di crittografia
+2050 Errore di compressione
+2051 Errore di decompressione
+2052  
+2053  
+2054 Modifica Non valida Del TIFF
+2055  
+2056 Formato non valido di EXIF
+2057  
+2058 TIFLIB32.DLL non trovato
+2059 TIFLIB16.DLL non trovato
+2060 PNGLIB16.DLL non trovato
+2061 JPGLIB16.DLL non trovato
+2062 Il Bit-per-pixel non valido ha specificato
+2063 Versione errata di DTWIMG32.DLL
+2064 DTWPDF32.DLL non trovato
+2065 Versione errata di DTWPDF32.DLL
+2066 DTWIMG32.DLL non trovato
+2067 Versione errata di DTWIMG32.DLL
+2068 DTWIMG32.DLL non trovato
+2069 Versione errata di DTWIMG32.DLL	
+2070 DTWIMG32.DLL not found
+2071 Wrong version of DTWIMG32.DLL
+2072 Manual Duplex mode unavailable in this version of DTWAIN
+2074 Invalid bitmap width/height for non-Vista Windows ICO format
+2075 TWAIN_32.DLL or specified TWAIN Data Source Manager not found, corrupted, or could not be opened
+2076 TWAINDSM.DLL or specified TWAIN Data Source Manager not found, corrupted, or could not be opened
+2081 No filename specified.  Use -f option
+2082 TWAIN not available
+2083 Cannot communicate with TWAIN device
+2084 Error saving output file
+2085 Illegal TwainSave command
+2086 TwainSave acquisition was cancelled
+2087 Failure to acquire image
+2088 Invalid color space.  Only RGB, Grayscale, and Black/White color spaces are supported
+2089 PDF not supported.
+2090 Missing or corrupt DTWTS.DLL.  TwainSave not available
+2100 Invalid OCR page specified
+3000 Selezioni Fonte
+3001 &Selezionar
+3002 &Annullare
+3003 Fonti:
+3005 Entering
+3006 Exiting
+3007 returning value of
+3008 Exception Error
+3009 Module
+3010 No parameter info
+3011 Error in getting information for function
+3012 Input
+3013 Output: return code from DSM
+3014 No information for 
+3015 returned error code
+5000 Courier
+5001 Courier-Bold
+5002 Courier-BoldOblique
+5003 Courier-Oblique
+5004 Helvetica
+5005 Helvetica-Bold
+5006 Helvetica-BoldOblique
+5007 Helvetica-Oblique
+5008 Times-Bold
+5009 Times-BoldItalic
+5010 Times-Roman
+5011 Times-Italic
+5012 Symbol
+5013 ZapfDingbats
+9500 TWCC_SUCCESS
+9501 TWCC_BUMMER
+9502 TWCC_LOWMEMORY
+9503 TWCC_NODS
+9504 TWCC_MAXCONNECTIONS
+9505 TWCC_OPERATIONERROR
+9506 TWCC_BADCAP
+9509 TWCC_BADPROTOCOL
+9510 TWCC_BADVALUE
+9511 TWCC_SEQERROR
+9512 TWCC_BADDEST
+9513 TWCC_CAPUNSUPPORTED
+9514 TWCC_CAPBADOPERATION
+9515 TWCC_CAPSEQERROR
+9516 TWCC_DENIED
+9517 TWCC_FILEEXISTS
+9518 TWCC_FILENOTFOUND
+9519 TWCC_NOTEMPTY
+9520 TWCC_PAPERJAM
+9521 TWCC_PAPERDOUBLEFEED
+9522 TWCC_FILEWRITEERROR
+9523 TWCC_CHECKDEVICEONLINE
+9524 TWCC_INTERLOCK
+9525 TWCC_DAMAGEDCORNER
+9526 TWCC_FOCUSERROR
+9527 TWCC_DOCTOOLIGHT
+9528 TWCC_DOCTOODARK
+9529 TWCC_NOMEDIA
+9600 TWRC_SUCCESS
+9601 TWRC_FAILURE
+9602 TWRC_CHECKSTATUS
+9603 TWRC_CANCEL
+9604 TWRC_DSEVENT
+9605 TWRC_NOTDSEVENT
+9606 TWRC_XFERDONE
+9607 TWRC_ENDOFLIST
+9608 TWRC_INFONOTSUPPORTED
+9609 TWRC_DATANOTAVAILABLE
+9610 TWRC_BUSY
+9611 TWRC_SCANNERLOCKED
+9700 DTWAIN Twain Library, version {short_version}, {company_name}, {copyright}
+9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?

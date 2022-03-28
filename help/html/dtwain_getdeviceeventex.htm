@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetDeviceEventEx</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_GetDeviceEventEx" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getdeviceeventex.htm"; }
+  else { parent.quicksync('a5.147'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetDeviceEventEx</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getdeviceevent.htm">Previous</a>&nbsp;
+     <a href="dtwain_getdeviceeventinfo.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetDeviceEventEx</span> function gets supplemental information on the last device event that occurred.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_GetDeviceEventEx (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpDeviceEvents,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="131" style="width:131px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="129" style="width:129px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpArray </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpDeviceEvent</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of &nbsp;LONG to store the last device event that occurred.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpArray</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, true);" class="popuplink">DTWAIN_ARRAY</a> that will store extra information about the event that occurred.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_GetDeviceEventEx function gets the last device event that the Source <span style="font-style: italic;">Source</span> has detected and any subsequent information about the event. &nbsp;The <span style="font-style: italic;">lpDeviceEvent</span> address points to a LONG that will be filled in with the last device event that occurred. &nbsp;The device event will be equal one of the values defined in the DTWAIN_GetDeviceEvent function. &nbsp;The <span style="font-style: italic;">lpArray</span> is the address of a DTWAIN_ARRAY that will be filled with the extra information.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_GetDeviceEventEx function is usually called when the DTWAIN_TN_DEVICEEVENT notification is sent to the application window. &nbsp;For some events, there is no extra information that can be retrieved. &nbsp;Once the DTWAIN_ARRAY has been created, you can use the DTWAIN Array functions to determine the type of data, the number of elements, and retrieve the actual data itself.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>A list of the current device events that produce extra information that DTWAIN is aware of is following. &nbsp;All the values in the <span style="text-decoration: underline;">Extra Information</span> column are in order of their position in the DTWAIN_ARRAY. &nbsp;For example, the DTWAIN_DE_CHKBATTERY information can be found in position 0 and 1 of the DTWAIN_ARRAY, with position 0 containing the minutes and posiiton 1 containing the percentage.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p><span style="text-decoration: underline;">Device Event &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p><span style="text-decoration: underline;">Extra Information &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p>DTWAIN_DE_CHKBATTERY &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p>Minutes (LONG) </p>
+<p>Percentage (16-bit integer)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p>DTWAIN_DE_CHKPOWERSUPPLY </p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p>Current Power Supply (LONG)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p>DTWAIN_DE_CHKRESOLUTION &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p>X-Res (DTWAIN_FLOAT)</p>
+<p>Y-Res (DTWAIN_FLOAT)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p>DTWAIN_DE_CHKFLASH &nbsp; &nbsp; &nbsp; &nbsp;</p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p>Current Flash Setting (LONG)</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="265" style="width:265px;"><p>DTWAIN_DE_CHKAUTOCAPTURE</p>
+</td>
+<td valign="top" width="255" style="width:255px;"><p>Number of Images (LONG)</p>
+<p>Time Before First Capture (LONG)</p>
+<p>Time Between Captures (LONG)</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If a device event does not return any extra information, the application can still get any information concerning the event by calling <a href="dtwain_getdeviceeventinfo.htm">DTWAIN_GetDeviceEventInfo</a>. &nbsp;The advantage of using DTWAIN_GetDeviceEventEx is that DTWAIN knows which device events are guaranteed to return extra information. &nbsp;In the event that a Source does return extra information for a device event that DTWAIN may not be aware of, the DTWAIN_GetDeviceEventInfo should be used.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For more information on device events, see the topic <a href="specialdeviceevents.htm">Capturing Source Device Events.</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>. or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Special Source Device Events</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

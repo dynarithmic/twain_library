@@ -1,0 +1,61 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN Notifications</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?processing_acquisition_message.htm"; }
+  else { parent.quicksync('a3.1.20'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN Notifications</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="turningonoffprogressindi.htm">Previous</a>&nbsp;
+     <a href="dtwain_notifications_using_a_c.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>During image acquisition, DTWAIN can inform your application of the progress of the acquisition by sending a message as well as a notification code. &nbsp; In addition, an application can change aspects of the acquired image and other attributes (for example, change the file name to save the image to) during image acquisitions by using notifications sent to your application.</p>
+<p>&nbsp;</p>
+<p>The messages and notifications can be sent &nbsp;to your application's DTWAIN message window (the message window is the window specified in the HWND parameter of the <a href="dtwain_starttwainsession.htm">DTWAIN_StartTwainSession</a> function) or by using a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2135934392X, true);" class="popuplink">callback function</a>. &nbsp; </p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">By default, DTWAIN assumes that notifications are turned off. &nbsp;To turn on DTWAIN notifications, a call to </span><span style="font-size: 12pt; font-family: 'Times New Roman'; font-weight: bold; color: #010100;"><a href="dtwain_enablemsgnotify.htm">DTWAIN_EnableMsgNotify</a></span><span style="font-weight: bold;"> must be issued with TRUE as the argument. &nbsp;If this function is not called, or if DTWAIN_EnableMsgNotify is called with a FALSE argument, no notifications are sent.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Once you have determined that the message has been sent by DTWAIN, you will need to know exactly what DTWAIN is informing your application of. &nbsp;To get the notification, the notification code is always passed as the '<span style="font-weight: bold;">WPARAM</span>' value of the DTWAIN message. &nbsp;The current Source is always sent as the <span style="font-weight: bold;">LPARAM</span> value.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For a list of notifications and what each means, see <a href="dtwain_notification_codes.htm">DTWAIN Notification Codes</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="dtwain_notifications_using_a_w.htm">DTWAIN Notifications Using a Window Handle</a>.</p>
+<p><a href="dtwain_notifications_using_a_c.htm">DTWAIN Notifications using a Callback Function</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

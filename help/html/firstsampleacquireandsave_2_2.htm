@@ -1,0 +1,83 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Visual Basic (6.0 and below) Sample: Acquire and save to BMP file</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?firstsampleacquireandsave_2_2.htm"; }
+  else { parent.quicksync('a1.11.2.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Visual Basic (6.0 and below) Sample: Acquire and save to BMP file</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="firstsampleacquireandsave.htm">Previous</a>&nbsp;
+     <a href="firstsampleacquireandsave_2_3.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The following Visual Basic (6.0 and below) function is all that is required to do the following: </p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Check if TWAIN is installed.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Initialize the DTWAIN Dynamic Link Library.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Select a Source</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Acquire a page using the Native transfer mode</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Save page to a BMP file called "test.bmp"</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="24"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Shut down any open TWAIN Source's and DTWAIN itself</td></tr></table></div><p><span style="font-size: 12pt; font-family: 'Verdana';">___________________________________________________________________</span></p>
+<p><span style="font-size: 9pt;">Private Sub ExampleFunction( )</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Dim SelectedSource As Long</span></p>
+<p><span style="font-size: 9pt;">Dim RetVal As Long</span></p>
+<p><span style="font-size: 9pt;">Dim ErrStatus As Long</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">Rem Check for Twain</span></p>
+<p><span style="font-size: 9pt;">if </span><span style="font-size: 9pt;"><a href="dtwain_istwainavailable.htm">DTWAIN_IsTwainAvailable</a></span><span style="font-size: 9pt;"> Then</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;Rem Initialize DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;  </span><span style="font-size: 9pt;"><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;Rem open a TWAIN Source</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp;SelectedSource = </span><span style="font-size: 9pt;"><a href="dtwain_selectsource.htm">DTWAIN_SelectSource</a></span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; if SelectedSource Then</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Rem Acquire to a BMP file</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RetVal = </span><span style="font-size: 9pt;"><a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a></span><span style="font-size: 9pt;">(SelectedSource, &nbsp;"test.bmp", DTWAIN_BMP, _ </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_USENATIVE + DTWAIN_USENAME, &nbsp;_</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DTWAIN_PT_DEFAULT, 1, 1, 1, ErrStatus)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; End If</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; Rem Shut down DTWAIN</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; </span><span style="font-size: 9pt;"><a href="dtwain_sysdestroy.htm">DTWAIN_SysDestroy</a></span><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </span></p>
+<p><span style="font-size: 9pt;">End If</span></p>
+<p><span style="font-size: 9pt;">EndSub</span></p>
+<p><span style="font-size: 9pt;">________________________________________________</span></p>
+<p>&nbsp;</p>
+<p>Add the DTWAIN32.BAS interface to the Visual Basic project to define the DTWAIN functions, and that is all that's needed to compile the function correctly. &nbsp;Note that this is function shows <span style="text-decoration: underline;">complete</span> usage of DTWAIN from start to finish. &nbsp;There are no other "hidden" DTWAIN calls or setup to do. &nbsp;Of course, your VB application would more than likely be more advanced, however this example illustrates what can be done with just a few lines of code.</p>
+<p>&nbsp;</p>
+<p>To acquire to the other file types other than BMP, the parameter that specifies DTWAIN_BMP can be any of the other file types such as DTWAIN_GIF, DTWAIN_JPEG, etc.. &nbsp;Therefore just 5 calls can save a file to any of many file types by just changing the third parameter to DTWAIN_AcquireFile</p>
+<p>&nbsp;</p>
+<p>We will boldly challenge you to try to implement TWAIN image retrieval without DTWAIN, especially if you use Visual Basic. &nbsp;You will realize that you will save weeks and possibly months of programming time using DTWAIN than if you tried to implement this yourself.</p>
+
+</td></tr></table>
+
+</body>
+</html>

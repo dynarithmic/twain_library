@@ -1,0 +1,175 @@
+DTWAIN Version changes
+
+5.2.0.8
+- Corrected issue with single page PCX files not being generated.
+- Corrected issue with acquiring to text files with no available OCR support library.
+
+5.2.0.7
+- Corrected issue with duplex scanning only scanning the first page if pending image count was not 0.
+
+5.2.0.6		  
+- Added following function:
+  DTWAIN_ConvertDIBToBitmap -- Converts a Device Independent Bitmap to a Device Dependent Bitmap
+
+- The functions were missing from the .DEF files:
+  DTWAIN_ArrayGetSourceAt
+  DTWAIN_GetTwainAppIDEx
+  DTWAIN_GetSourceIDEx
+
+- The dtwainx.h header file now includes <commdlg.h> and replaces LPCBYTE with const BYTE*.
+  The reason for this is that if WIN32_LEAN_AND_MEAN are defined by the application, and 
+  dtwain.h is #included after this definition, the OPENFILENAME and LPCBYTE were not defined.
+
+- Miscellaneous code refactoring.
+
+
+5.2.0.5		  
+- Added following functions:
+  DTWAIN_ArrayGetSourceAt -- Use this function in conjunction with DTWAIN_EnumSources to easily retrieve each TWAIN Source found.
+  DTWAIN_GetTwainAppIDEx --  Use this function to fill in a TW_IDENTITY structure that describes the TWAIN application ID values.
+  DTWAIN_GetSourceIDEx   --  Use this function to fill in a TW_IDENTITY structure that describes a TWAIN Source.
+
+  The following set of functions handling the CAP_AUTOMATICSENSEMEDIUM capability are added:
+
+  DTWAIN_IsAutomaticSenseMediumEnabled
+  DTWAIN_IsAutomaticSenseMediumSupported
+  DTWAIN_EnableAutomaticSenseMedium
+ 
+
+5.2.0.4		  
+- Changed DTWAIN ANSI and wide string functions to use the "length" parameters correctly.
+
+- Updated dtwainx.h and dtwstrnfn.h to add missing exported API function declarations.
+
+- Updated the C++ interface found in the \language_bindings_and_examples\C_CPP_DynamicLoad\ directory.
+
+- Updated copyright message to stated year 2021.
+
+
+5.2.0.3		  
+- Added functions DTWAIN_SelectSource2Ex to allow customization of the files listed in the TWAIN Select Source dialog box.
+  Customization includes including and excluding TWAIN source names in the dialog box, as well as aliasing your own names for
+  a device name.  This function can be used to only display devices that are pertinent for your application.
+
+  Example:
+    DTWAIN_SOURCE source = DTWAIN_SelectSource2Ex(NULL, "Custom Title", 0,0, NULL, "Scanner1|Scanner2", "Scanner3=My Scanner",
+                                                  DTWAIN_DLG_CENTER | DTWAIN_DLG_USEEXCLUDENAME | DTWAIN_DLG_USENAMEMAPPING);
+
+  The code above will display the TWAIN Select Source dialog, centered on the screen.  If any devices have the product name 
+  "Scanner1" or "Scanner2", they  will be removed from the dialog.  In addition the device named "Scanner3" will be named "My Scanner" 
+  in the dialog box.  
+
+  Note that you could have done this in a much longer way by calling DTWAIN_EnumSources, gathering all the product names, and 
+  displaying the products you want as selections by creating your own dialog or user-interface.  The DTWAIN_SelectSource2Ex is
+  just a much simpler way of achieving this goal.
+
+  In addition, there are functions DTWAIN_SelectSource2ExA and DTWAIN_SelectSource2ExW that represent the ANSI and Wide versions
+  of the function. 
+
+
+5.2.0.2		  
+- Fixed DLL Version Information in the DLL resources.
+
+- Fixed generation of multipage TIFF files if the compression used on pages will vary.  This fix required 
+  patching the FreeImage source code. 
+
+- Fixed DTWAIN_SetTiffCompressType to properly handle non-multipage and multipage TIFF types.
+
+- Added function DTWAIN_SetDSMSearchOrderEx to allow applications to customize where DTWAIN will search for the 
+  TWAIN Data Source Manager.  This differs from DTWAIN_SetDSMSearchOrder in that the Ex version will now allow
+  searching in a custom directory.		  
+
+- Added initial support for MSG_GETHELP, MSG_GETLABEL, and MSG_GETLABELENUM using DTWAIN_GetCapValues and related functions.
+  Note that these messages were always available using the lower-level DTWAIN_CallDSM function, but now the library has made
+  these messages available using the DTWAIN_GetCapValues function.
+
+- Changed DTWAIN_IsFeederSupported to do a more thorough test to see if a feeder is supported instead of just checking
+  for the feeder being enabled.
+
+- Fixed issue with MSG_SETCONSTRAINT message not being recognized in call to DTWAIN_SetCapValues.
+
+- Added DTWAIN_GetLastError() return code of -1050 to denote that Source selection has been cancelled from the TWAIN dialog.  
+  Previously the cancellation was reported as an INVALID DTWAIN SOURCE.  This did not affect applications, since the 
+  TWAIN Source is actually NULL if the TWAIN dialog is cancelled, but this additional code is added for clarity.
+
+- DTWAIN Log now shows local time stamp intstead of UTC.
+					   
+- Other miscellaneous fixes
+
+
+5.2.0.1
+- Fix incorrect version number in DLL resources
+
+- Add missing source file ctlacquireaudio.cpp to source build project
+
+
+5.2.0.0
+- Added support for audio file transfers using the TWAIN capability ACAP_AUDIOXFER.  
+  New functions are DTWAIN_AcquireAudioNative, DTWAIN_AcquireAudioFile, DTWAIN_AcquireAudioFileA, DTWAIN_AcquireAudioFileW
+
+- Fixed issue with multipage image files only saving the last page.
+
+
+5.1.0.9
+- Added DTWAIN_SetTwainDialogFont() to adjust font used in TWAIN Select Source dialog (only is available
+  when calling DTWAIN_SelectSource2() function)  Usage:
+
+	DTWAIN_SetTwainDialogFont(HFONT font)
+
+  where HFONT is a handle to a Windows HFONT.  If font is 0, the default font (MS Sans Serif) is used.
+
+- Added test for CAP_SHEETCOUNT to control the number of pages that will be acquired.
+
+5.1.0.8
+- Removed initial slow TWAIN capability retrieval and replaced with fast capability retrieval.
+- Fixed issue with CAP_FEEDERLOADED being considered an unsupported capability for some TWAIN devices.
+- Added additional language resource for Portuguese-Brazilian strings (thanks to user mauriciofaria).
+- Visual Studio 2019 solution added (thanks to user Dcreeron).
+
+5.1.0.7
+- Fixed issue with program opting to discard the first page of a multi-page acquisition.
+
+5.1.0.6
+- Added custom code for TWAIN drivers that erroneously return TWRC_CANCEL when the user interface is closed.
+- Updated search logic when attempting to find / load the TWAIN Data Source manager
+- Added DTWAIN_GetLibraryPath function to return the path of the loaded DTWAIN Dll
+
+5.1.0.5
+- Minor source code changes.  Removed LPGL wording from source files.
+
+5.1.0.4
+- Fix for erroneous return code when multipage PCX (DCX) files after saved
+
+5.1.0.3
+- Add DTWAIN_...Ex() functions that return a DTWAIN_ARRAY.  These functions are simpler versions of the DTWAIN 
+  functions that accept LPDTWAIN_ARRAY as a parameter.  This makes it simpler for languages such as Python and
+  others that have issues with pointer arguments.  Thus instead of having to do something like this:
+
+      DTWAIN_SOURCE Source;
+      DTWAIN_ARRAY Array;
+      //...
+      DTWAIN_EnumOrientations(Source, &Array)...
+
+The call can now be this:
+
+      DTWAIN_SOURCE Source;
+      //...
+      DTWAIN_ARRAY array = DTWAIN_EnumOrientationsEx(Source);
+
+Since DTWAIN_ARRAY is actually an integer (32-bit or 64-bit, depending on the program's bit-ness), the calling 
+application can simply treat the DTWAIN_ARRAY as an integer type.
+
+For functions that already have an Ex() at the end of the function name, an Ex2() version was created, for example,
+     DTWAIN_EnumSupportedCapsEx2()
+     
+     
+5.1.0.1
+- Add all supported PDF page dimensions to twaininfo.txt.  This allows customization of the PDF creation with
+  respect to the page sizing (you can add your own definitions).
+- Update sources to output Visual C++ 2019 compilation messages.
+
+5.1.0.0
+- Update LibTiff to version 4.0.10
+- Update LibPNG to version 1.6.37
+- Now requires application to call DTWAIN_UseMultipleThreads if one DTWAIN session will be used across multiple threads.
+- Speed up processing DTWAIN functions when using DTWAIN in a single thread.

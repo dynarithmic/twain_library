@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Setting and Getting Device Capabilities</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?settingdevicecapabilities.htm"; }
+  else { parent.quicksync('a3.1.7.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Setting and Getting Device Capabilities</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="capability_container_types.htm">Previous</a>&nbsp;
+     <a href="informationoncustomcapabili.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>To set the Source's device capabilities, the following functions are used:</p>
+<p><a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a> </p>
+<p><a href="dtwain_setcapvaluesex.htm">DTWAIN_SetCapValuesEx</a>  </p>
+<p><a href="dtwain_setcapvaluesex2.htm">DTWAIN_SetCapValuesEx2</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To retrieve a device's capability setting, the following functions are used:</p>
+<p><a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a></p>
+<p><a href="dtwain_getcapvaluesex.htm">DTWAIN_GetCapValuesEx</a></p>
+<p><a href="dtwain_getcapvaluesex2.htm">DTWAIN_GetCapValuesEx2</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To check if a capability exists for a particular Source, the following functions are used:</p>
+<p><a href="dtwain_getsupportedcaps.htm">DTWAIN_EnumSupportedCaps</a></p>
+<p><a href="dtwain_getextendedcaps.htm">DTWAIN_EnumExtendedCaps</a></p>
+<p><a href="dtwain_getcustomcaps.htm">DTWAIN_EnumCustomCaps</a></p>
+<p><a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff6600;">In addition, you can get or set any capability using the low-level <a href="dtwain_calldsmproc.htm">DTWAIN_CallDSMFunction</a> using the DG_CONTROL/DAT_CAPABILITY/MSG_xxxx TWAIN triplet. &nbsp;Please note that this function should only be used by persons familiar with TWAIN triplets and setting up the TWAIN triplet mechanism when making calls to the Data Source Manager.</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold; text-decoration: underline;">Detailed steps in setting or retrieving capability values:</span></p>
+<p>In general, the requirements to set or retrieve capability values with DTWAIN are as follows:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Determine the proper <a href="dtwain_capabilities_by_name.htm">capability constant</a>.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Check if the capability is supported by the Source.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px;"><table border="0" cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline" valign="baseline"><td width="23"><span style="font-size: 10pt; font-family: 'Arial Unicode MS', 'Lucida Sans Unicode', 'Arial'; color: #000000;">&#8226;</span></td><td>Call <a href="dtwain_setcapvalues.htm">DTWAIN_SetCapValues</a> or <a href="dtwain_setcapvaluesex.htm">DTWAIN_SetCapValuesEx</a> to set the capability. &nbsp;Call <a href="dtwain_getcapvalues.htm">DTWAIN_GetCapValues</a>, <a href="dtwain_getcapvaluesex.htm">DTWAIN_GetCapValuesEx</a>, or <a href="dtwain_getcapvaluesex2.htm">DTWAIN_GetCapValuesEx2</a>_ to get capability values.</td></tr></table></div><p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Determine the proper capability constant:</span></p>
+<p>This requires the application programmer to decide which capability that needs to be set or retrieved. &nbsp; For example, if the application needs to query the current unit of measure used by the Source, the capability constant to use would be DTWAIN_CV_ICAPUNITS. &nbsp;A list of the capabilities and their data types are found <a href="dtwain_capabilities_by_name.htm">here</a></p>
+<p style="text-indent: -13px; margin: 0px 0px 0px 13px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Check if the capability is supported by the Source:</span></p>
+<p>The next step is to determine if the capability constant is supported by the Source. &nbsp; There are some capabilities that will not be supported by the Source, so the application may want to check if the capability is supported before proceeding to set or get capability values. &nbsp;By default, DTWAIN always does a check for capability support whenever the DTWAIN_GetCapValues or DTWAIN_SetCapValues is called, but letting your application do the check results in faster code. &nbsp;To check for capability support the <a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a> function is used. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Now you must either set or get the capability values:</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Setting Capability Values</span></p>
+<p>a) Call <span style="font-weight: bold;"><a href="dtwain_arraycreatefromcap.htm">DTWAIN_ArrayCreateFromCap</a></span> to create the appropriate DTWAIN_ARRAY that matches the same data type as the capability.  </p>
+<p>b) Add the desired values to the DTWAIN_ARRAY that you want to set the capability to.  </p>
+<p>c) Call <span style="font-weight: bold;">DTWAIN_SetCapValues</span> to complete the process of setting the device's capability to your DTWAIN_ARRAY's values.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Getting Capability Values</span></p>
+<p>a) Determine the data type for the capability values. &nbsp;Use the <span style="font-weight: bold;">DTWAIN_GetCapDataType</span> function to get the correct data type. &nbsp;The data types may be LONG's, DTWAIN_FLOAT's, etc.</p>
+<p>b) Declare a DTWAIN_ARRAY.  <span style="font-weight: bold;">Do not call DTWAIN_ArrayCreateFromCap</span>.</p>
+<p>c) Call <span style="font-weight: bold;">DTWAIN_GetCapValues</span> to get the device capability values. &nbsp;This function requires that the <span style="font-weight: bold;">address of the DTWAIN_ARRAY</span> from step 2) is passed as a parameter.</p>
+<p>d) You can now extract the capability values from the DTWAIN_ARRAY declared in step 2 using the <span style="font-weight: bold;">DTWAIN_ArrayGetAt</span> function. &nbsp;The data type that the extracted values are to be stored in was determined by step 1.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="example_getting_device_capabil.htm">'C' Example of Getting Capabilities</a></p>
+<p><a href="example_setting_device_capabil.htm">'C' Example of Setting Capabilities</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Calling DTWAIN DLL Functions (C or C++)</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="Calling DTWAIN DLL from C and C++ Programs" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?calling_dtwain_dll_functions__.htm"; }
+  else { parent.quicksync('a2.1.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p><span class="f_Heading1">Calling DTWAIN DLL Functions (C or C++)</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="migrating_existing_unicode_app.htm">Previous</a>&nbsp;
+     <a href="c_and_c___import_libraries.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For most programmers, using DTWAIN will require you to include the header file <span style="font-weight: bold;">DTWAIN.H</span> in any source file that calls DTWAIN functions, and specify an <span style="font-weight: bold;">import library</span> (the file with the .LIB extension) in your build settings so that the linker will find the DTWAIN functions that your application calls. &nbsp; </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The other way to successfully use DTWAIN is to use the Windows API functions <span style="font-weight: bold;">LoadLibrary</span> and <span style="font-weight: bold;">GetProcAddress</span> to load the DTWAIN DLL at runtime and to call the DTWAIN functions using function pointers. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The first method of using an import library is the preferred method, since there is very little setup on the programmer's part except to make sure that the import library is included in the build settings for the application. &nbsp;The second method of calling DTWAIN functions (using LoadLibrary and GetProcAddress) is desirable for various reasons, one being that you don't need an import library, and second, any Windows C++ compiler can utilize DTWAIN, even if the compiler cannot generate import libraries.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The topic, <a href="visual_c___and_c_runtime_libra.htm">Visual C++ and C Runtime Library Information</a>, describes how to set up your application's build settings for usage of the import library method. &nbsp;Note that this is Visual C++ specific. &nbsp;If your compiler is not Visual C++ and you would like to utilize import libraries, you should investigate how to create import libraries from a DLL for your particular compiler. &nbsp;Note that import libraries are incompatible between compiler brands and sometimes compiler versions. &nbsp;For example, a Visual C++ 6.0 import library cannot be used in a C++ Builder 5.0 application. &nbsp; DTWAIN includes import libraries for Visual C++ 5.0, 6.0/Net and Visual Studio 2005 - 2010, Borland C++ 5.0x, and C++ Builder. &nbsp;It is just a matter of including the proper import library for your application run-time version and compiler. &nbsp;See <a href="c_and_c___import_libraries.htm">C and C++ import libraries</a> for more information.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using a C or C++ compiler that doesn't generate import libraries, or you would like to not use import libraries at all, you can utilize the method of using the &nbsp;Windows API functions LoadLibrary and GetProcAddress to load the DTWAIN DLL library at runtime. &nbsp;DTWAIN has support for this method, and information can be found in the topic <a href="usingdtwainwithoutanimport.htm">Using DTWAIN without an import library</a>. This is the preferred method for non-Visual C++ compilers such as Dev-C++, Digital Mars, CodeWarrior, etc.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you have purchased a full DTWAIN license and would like to utilize the static DTWAIN libraries, please read the section on usage of the Static Libraries.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #ff0000;">If you are attempting to build the enclosed DTWAIN C or C++ examples, and you wish to use an import library, make sure that the import library is in your library path settings or is included in your project's workspace, or specified on the command-line (if you are using a command-line driven compiler). &nbsp;Errors when linking such as "could not find dtwain32.lib" or many errors where the linker cannot find the DTWAIN functions is almost always caused by not including the import library in your project, or the linker could not find the import library.</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

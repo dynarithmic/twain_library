@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Single DTWAIN Session</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?singledtwainsession.htm"; }
+  else { parent.quicksync('a3.1.22.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Single DTWAIN Session</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="multipledtwainsessions.htm">Previous</a>&nbsp;
+     <a href="lowleveltwainfunctions.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>For applications that must call <a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a> in one thread, and then call other DTWAIN functions in another thread using the same DTWAIN session, you must use the <a href="dtwain_startthread.htm">DTWAIN_StartThread</a> at the start of the new thread with the previous value returned from DTWAIN_SysInitialize. &nbsp;This prevents DTWAIN from issuing the -1001 error for an uninitialized DLL. Before the thread exits, you should call DTWAIN_EndThread:</p>
+<p>&nbsp;</p>
+<p>For example:</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">//Thread 1:</span></p>
+<p><span style="font-size: 9pt;">LONG Handle = DTWAIN_SysInitialize( );</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_SOURCE Source = DTWAIN_SelectSource( );</span></p>
+<p><span style="font-size: 9pt;">//....</span></p>
+<p><span style="font-size: 9pt;">// Start of thread 2 (assume values from thread 1 have been passed to thread 2)</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_StartThread( Handle );</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_CloseSource( Source ); &nbsp;// no -1001 error since we associated the handle in thread 1 with thread 2</span></p>
+<p><span style="font-size: 9pt;">//....</span></p>
+<p><span style="font-size: 9pt;">// before the end of thread 2</span></p>
+<p><span style="font-size: 9pt;">DTWAIN_EndThread( Handle );</span></p>
+<p><span style="font-size: 9pt;">// ....</span></p>
+<p>&nbsp;</p>
+<p>Using the above scenario allows your application to call DTWAIN functions that returned a value in one thread in another completely different thread.  </p>
+<p>&nbsp;</p>
+<p>A final important note is that many TWAIN Sources do <span style="font-weight: bold;">not</span> work correctly if they are selected in one thread, and an image retrieval is attempted in another thread. Therefore it is highly recommended to use DTWAIN in a single thread, or use multiple instances of DTWAIN in multiple threads. &nbsp;This is more stable than using one instance of DTWAIN across multiple threads.  </p>
+<p>&nbsp;</p>
+<p>Also, as stated earlier, an acquisition must be started in the same thread as where the TWAIN session was created. &nbsp; A workaround to the problem of having to start a TWAIN session is to use the product name of the TWAIN Source to select and open the Source in the desired thread. &nbsp;The following psuedo-code should illustrate this.</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 9pt;">//Thread 1:</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;char SourceName[255];</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Handle = DTWAIN_SysInitialize( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source = DTWAIN_SelectSource( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SourceGetProductName( Source, SourceName, 255 );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_EndTwainSession( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;CreateThread( ... ); &nbsp;// Create and start Start thread 2</span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p><span style="font-size: 9pt;">//....</span></p>
+<p><span style="font-size: 9pt;">// Thread 2:</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// Start of thread 2 (assume values from thread 1 have been passed to thread 2)</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_StartThread( Handle );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE MySource = DTWAIN_SelectSourceByName( SourceName ); &nbsp;// reselect the source from thread 1. &nbsp;This also starts a TWAIN session</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_AcquireFile(...); &nbsp;// Acquire a file</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;//....</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// before the end of thread 2</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_EndTwainSession( );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_EndThread( Handle );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// ....</span></p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>The code above initially queries the user for the Source to select in thread 1, records the source name, and ends the TWAIN session in thread 1. &nbsp;When thread 2 starts, the TWAIN session is started automatically by DTWAIN when the application reselects the Source using DTWAIN_SelectSourceByName. &nbsp;This ensures that the DTWAIN_AcquireFile will work correctly, since the TWAIN session has been started in the same thread as the "acquire" function. &nbsp;Alternately, you can explicitly start the TWAIN session by calling DTWAIN_StartTwainSession in the second thread.</p>
+<p>&nbsp;</p>
+<p>Also, it is highly recommended that you use <a href="dtwain_modeless_acquisition_p.htm">DTWAIN modeless processing</a> if you desire to use a single instance of DTWAIN across multiple threads.  </p>
+
+</td></tr></table>
+
+</body>
+</html>

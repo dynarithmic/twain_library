@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Visual Basic Development</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?visualbasicdevelopment.htm"; }
+  else { parent.quicksync('a2.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Visual Basic Development</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="canddtwainnotifications.htm">Previous</a>&nbsp;
+     <a href="ansi_and_unicode_application_d.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>DTWAIN32 DLL, DTWAIN32U.DLL, DTWAIN64.DLL and DTWAIN64U.DLL are standard 32-bit and 64-bit Windows Dynamic Link Libraries that exposes its functionality using the "stdcall" calling convention. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">DTWAIN32(U) DLL</span> and <span style="font-weight: bold;">DTWAIN64(U).DLL </span>are not Active X controls or servers. &nbsp;DTWAIN cannot be "registered" with RegSvr.exe or similar programs. The DTWAIN DLL's must be located either in your application's program directory, or in a directory specified by your system's PATH environment variable. &nbsp;If not, you will not be able to call the DTWAIN functions successfully.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using Visual Basic and are not familiar with calling functions located in DLL's, most VB tutorials, books, and the various VB reference manuals usually contain many examples of making calls to various Windows API functions that are located in the Windows system DLLs (such as KERNEL32, USER.EXE and GDI32.DLL).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using Visual Basic 6.0 or below, the <span style="font-weight: bold;">DTWAIN32.BAS</span> file for 32-bit VB programs found in the <span style="font-weight: bold;">\VisualBasic\Bas</span> subdirectory of the installation defines the functions and constants used by the DTWAIN32 library. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If you are using Visual Basic .NET or Visual Basic 2005/2008/2010, it is highly recommended to use the Unicode version of the DTWAIN libraries, DTWAIN32U.DLL and DTWAIN64U.DLL. &nbsp;The reason is that these languages use .NET, and .NET uses Unicode strings by default. &nbsp;By using the Unicode versions of the DTWAIN library, it will ensure that strings that you pass or receive from the DTWAIN DLL functions are of the correct character set type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>the <span style="font-weight: bold;">DTWAIN32_NET.BAS </span>interface to DTWAIN is found in the <span style="font-weight: bold;">\VisualBasic\Net</span> subdirectory of the installation. &nbsp;In addition, the <span style="font-weight: bold;">DTWAIN64_NET.VB</span> is the interface file for 64-bit applications developed in Visual Basic .NET (there are no 64-bit interface files for Visual Basic 6.0 or below).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Also included is the <span style="font-weight: bold;">WIN32.BAS</span> file that should be used for Windows API calls. &nbsp;This file is necessary if you want to call <span style="font-weight: bold;">GlobalLock</span> or <span style="font-weight: bold;">GlobalFree</span> in your VB application.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Also, take note that DTWAIN is a generic Windows-type DLL and not an ActiveX control. &nbsp;Therefore passing VB specific data types to DTWAIN (for example VB strings instead of null-terminated strings) will not work. &nbsp;The DTWAIN32.BAS file contains the prototypes of the functions and the arguments/return types expected.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The Visual Basic examples found in the <span style="font-weight: bold;">\Examples\VisualBasic</span> folder contain Visual Basic form (.FRM) files and possibly (.BAS) files that are Visual Basic 6.0 compatible. &nbsp;To create the sample, you must define a Visual Basic project and include the files in each of the subfolders. &nbsp;For example, the <span style="font-weight: bold;">/NoUI</span> example contains files <span style="font-weight: bold;">Form2.frm</span> and <span style="font-weight: bold;">Form4.frm</span>. &nbsp;Create a Visual Basic project, and include the files Form2.frm, Form4.frm, DTWAIN32.BAS, and WIN32.BAS. Compile the project, and the NoUI example will be created.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="ansi_and_unicode_application_d.htm">ANSI and Unicode Application Development</a></p>
+<p><a href="visualbasicexampleprograms.htm">Visual Basic Example Programs</a></p>
+<p><a href="visualbasicdtwaindatatyp.htm">Visual Basic / DTWAIN Data Types</a></p>
+<p><a href="visual_basic_and_device_indepe.htm">Visual Basic and Device Independent Bitmaps</a></p>
+<p><a href="visual_basic_and_modal___model.htm">Visual Basic TWAIN Processing</a></p>
+<p><a href="visual_basic_and_dtwain_notifi.htm">Using DTWAIN Notifications with Visual Basic</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

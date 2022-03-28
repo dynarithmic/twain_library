@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>ANSI and Unicode versions of DTWAIN functions</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?special_ansi_and_unicode_versi.htm"; }
+  else { parent.quicksync('a2.1.1.2'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">ANSI and Unicode versions of DTWAIN functions</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="microsoft_visual_studio_and_un.htm">Previous</a>&nbsp;
+     <a href="migrating_existing_unicode_app.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>There are now DTWAIN API functions that have names that end with the letter <span style="font-weight: bold;">A </span>or <span style="font-weight: bold;">W</span>. &nbsp;The functions that end with "A" are ANSI specific string functions, and the functions that end with "W" are wide-string/Unicode specific string functions.  </p>
+<p>&nbsp;</p>
+<p>For example, <span style="font-weight: bold;">DTWAIN_GetErrorStringA</span>, <span style="font-weight: bold;">DTWAIN_GetErrorStringW</span> are ANSI and Unicode specific functions for the function <a href="dtwain_geterrorstring.htm">DTWAIN_GetErrorString</a>, since DTWAIN_GetErrorString has as one of the arguments a pointer to a string (LPTSTR). &nbsp;For DTWAIN_GetErrorStringA, the string must be an ANSI string, for DTWAIN_GetErrorStringW, the string must be a Unicode string.</p>
+<p>  </p>
+<p>However, it is highly suggested that if you're developing a Unicode application, to refrain from calling the "A" versions of these functions. &nbsp; Similarly, if you're developing an ANSI version of the DTWAIN DLL, you should rarely, if ever call the DTWAIN "W" functions explicitly.  <span style="font-weight: bold;">Only when you deem it necessary and safe should you call the DTWAIN string-related functions that are ANSI or Unicode specific</span>.  </p>
+<p>&nbsp;</p>
+<p>Calling the "A" or "W" specific functions may require a string conversion to be done internally by DTWAIN. &nbsp;This internal conversion is slower than just making the "natural" call to the DTWAIN DLL function (in our example, the "natural" function would be DTWAIN_GetErrorString). &nbsp;In addition, the translation may not work correctly due to code page interpretation and other issues.  </p>
+<p>&nbsp;</p>
+<p>So please use caution when calling the "A" or "W" versions of the DTWAIN functions that handle strings. &nbsp;Make sure that if you're calling the ANSI/Unicode specific functions, your application will behave correctly and consistently with respect to locale, code pages in effect, etc.</p>
+
+</td></tr></table>
+
+</body>
+</html>

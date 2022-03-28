@@ -1,0 +1,77 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTwainRange::Expand</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="CDTwainRange::Expand" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?ctdrange_expand.htm"; }
+  else { parent.quicksync('a9.10.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTwainRange::Expand</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwainrangecopyarraytorange.htm">Previous</a>&nbsp;
+     <a href="ctdrange_getcount.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">Syntax</span></p>
+<p><span style="font-weight: bold;">long Expand( DTwainLongArray&amp; Array ) const;</span></p>
+<p><span style="font-weight: bold;">long Expand( DTwainDoubleArray&amp; Array ) const;</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p>Array to copy the expanded range to.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Return Value</span></p>
+<p>If successful, the number of elements in the expanded range. &nbsp;If not successul, -1 is returned.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p><span style="font-weight: bold;">DTwainRange:::Expand</span> generates all of the values defined by the DTwainRange and copies the values to the DTwainLongArray or DTwainDoubleArray <span style="font-style: italic;">Array</span>. &nbsp;The only possible array types allowed are <span style="font-weight: bold;">DTwainLongArray</span> and <span style="font-weight: bold;">DTwainDoubleArray</span>, denoting a DTwainLongRange and DTwainDoubleRange objects respectively.</p>
+<p>&nbsp;</p>
+<p>Range expansion is the act of taking a range and generating all of the numbers that the range defines. &nbsp;The minimum, maximum, and step sizes determine the expanded numbers. For example if the DTWAIN_RANGE has the following characteristics:</p>
+<p>&nbsp;</p>
+<p>Minimum Value = -10</p>
+<p>Maximum Value = 10</p>
+<p>Step size = 2</p>
+<p>&nbsp;</p>
+<p>The expanded range will consist of the following values</p>
+<p>&nbsp;</p>
+<p>-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Note:</span></p>
+<p>Care must be taken in that the <span style="font-weight: bold;">DTwainRange</span> may expand to many values. &nbsp;For example, a range defined as -1000.0 min, 1000.0 max, with a step size of 0.1, will generate over 20,000 values &nbsp;The <span style="font-weight: bold;">DTwainRange::GetCount</span><span style="font-style: italic;"> </span>can be used to get the a count of the total number of expanded values before attempting to call <span style="font-weight: bold;">DTwainRange::Expand</span>. &nbsp;If only a few values are required from an expanded range, use the <span style="font-weight: bold;">DTwainRange::GetExpandedValue</span> or <span style="font-weight: bold;">DTwainRange::operator[ ]</span> function instead</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

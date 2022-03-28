@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>-R</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?_r.htm"; }
+  else { parent.quicksync('a3.2.43'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">-R</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="_p2.htm">Previous</a>&nbsp;
+     <a href="_saveoncancel.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="font-weight: bold;">-R</span> <span style="font-style: italic;">value</span></p>
+<p>&nbsp;</p>
+<p>Sets the resolution of the acquired images. &nbsp;The <span style="font-style: italic;">value</span> can be any numerical value. &nbsp;The units used by the <span style="font-weight: bold;">-R</span> command are in the same units described by the <span style="font-weight: bold;"><a href="_u.htm">-U</a></span> parameter (the default unit is dots-per-inch (DPI)).</p>
+<p>&nbsp;</p>
+<p>The actual resolution used for the images will be a resolution supported by the TWAIN device that is as close to <span style="font-style: italic;">value</span> as possible. &nbsp;For example, if <span style="font-style: italic;">value</span> is 300 DPI (assuming the units are in DPI), and the device only supports up to 100 DPI, then the resolution used is 100 DPI.  </p>
+<p>&nbsp;</p>
+<p>Since setting the resolution requires a compliant TWAIN driver, sometimes setting the resolution may not be successful for non-compliant TWAIN devices.</p>
+<p>&nbsp;</p>
+<p>Example:</p>
+<p><span style="font-weight: bold;">DTWAIN_TwainSave("-R 200</span> ");</p>
+<p>&nbsp;</p>
+<p style="text-indent: -27px; margin: 0px 0px 0px 27px;">Sets the resolution of the scanned images to 200.</p>
+<p style="text-indent: -27px; margin: 0px 0px 0px 27px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="text-decoration: underline;">Default Setting</span>: </p>
+<p><span style="color: #ff0000;">The device's default resolution for a particular image type. &nbsp;This is usually set in the device's user interface when scanning images.</span></p>
+<p style="text-indent: -27px; margin: 0px 0px 0px 27px;"><span style="color: #000000;">&nbsp;</span></p>
+
+</td></tr></table>
+
+</body>
+</html>

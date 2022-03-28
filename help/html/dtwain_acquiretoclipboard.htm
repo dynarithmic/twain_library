@@ -1,0 +1,190 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_AcquireToClipboard</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_AcquireToClipboard" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_acquiretoclipboard.htm"; }
+  else { parent.quicksync('a5.7'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_AcquireToClipboard</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_acquirenativeex.htm">Previous</a>&nbsp;
+     <a href="dtwain_addpdftext.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_AcquireToClipboard</span> starts the image acquisition from a Source and transfers the image to the Windows Clipboard.</p>
+<p>&nbsp;</p>
+<p style="text-indent: -95px; margin: 0px 0px 0px 96px;"><span style="font-weight: bold;">DTWAIN_ARRAY &nbsp;DTWAIN_AcquireToClipboard (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN SOURCE</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">NumPages</span><span style="font-weight: bold;">,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">TransferMode,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bDiscardImages,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bShowUI</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bCloseSource</span><span style="font-weight: bold;">, </span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pStatus</span> <span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a selected TWAIN <a href="twain_data_source.htm">Source</a>.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PixelType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the pixel type of the image</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">NumPages</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies the number of pages to acquire.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">TransferMode</span></p>
+<p><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p style="margin: 0px 0px 0px 12px;">Specifies which transfer mode to use.</p>
+<p style="margin: 0px 0px 0px 12px;"><span style="font-size: 2pt; font-family: 'Times New Roman'; color: #010100;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bDiscardImages</span></p>
+<p><span style="font-style: italic;"> &nbsp; </span>Specifies whether images are destroyed instead of saved in returned DTWAIN_ARRAY.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bShowUI</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies whether the Source displays the default User Interface.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bCloseSource</span></p>
+<p> &nbsp; &nbsp;Specifies whether the Source should be closed after the User Interface is shut down.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pStatus</span></p>
+<p style="margin: 0px 0px 0px 15px;">Points to a variable that will be filled in with an error status value or NULL if no error status is desired.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values:</span></p>
+<p>If the function succeeds, a DTWAIN_ARRAY describing the attempted acquisitions is returned. &nbsp;If the function fails, NULL is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p>Starts the image acquisition from a TWAIN device and saves the acquired image(s) to the Windows Clipboard. &nbsp;This allows an application to simply use the "Paste" function to retrieve the image data (if the image is a Device Independent Bitmap). &nbsp;Most applications implement "Paste" as retrieving data from the Clipboard.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">bDiscardImages</span> flag determines whether the images that are acquired, <span style="font-style: italic; text-decoration: underline;">except for the last image acquired</span> are to be discarded. &nbsp;If the value of <span style="font-style: italic;">bDiscardImages</span> is TRUE, no images are saved within the returned DTWAIN_ARRAY, and the returned DTWAIN_ARRAY is equal to 1 on success. &nbsp;If <span style="font-style: italic;">bDiscardImages</span> is FALSE, the returned DTWAIN_ARRAY is an array of acquisitions attempted, along with the array of images (see the return value to DTWAIN_AcquireNative).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that this behavior of the <span style="font-style: italic;">bDiscardImages</span> flag is only valid if the TWAIN mode is DTWAIN_MODAL (see DTWAIN_SetTwainMode). &nbsp;If the TWAIN mode is DTWAIN_MODELESS, all of the images are saved, and it is the responsibility of the application to discard the image memory.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Regardless of the state of the <span style="font-style: italic;">bDiscardImages</span> parameter, only the last page of the acquisition is saved to the clipboard if multiple pages are acquired, or if the program allows more than one acquisition to be attempted per open Source session.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The arguments <span style="font-style: italic;">PixelType, Source, MaxPage, bShowUI </span>and<span style="font-style: italic;"> pStatus</span> all have the same definitions as DTWAIN_AcquireNative.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">TransferMode</span> determines whether the native or buffered mode will be used to acquire the image(s). &nbsp;To control which image transfer mode the Source will use, the <span style="font-style: italic;">TransferMode</span> must be one of the following values</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="1" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="189" style="width:189px;"><p><span style="text-decoration: underline;">Transfer Mode</span></p>
+</td>
+<td valign="top" width="47" style="width:47px;"><p><span style="text-decoration: underline;">Value</span></p>
+</td>
+<td valign="top" width="401" style="width:401px;"><p><span style="text-decoration: underline;">Definition</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="189" style="width:189px;"><p>DTWAIN_USENATIVE </p>
+</td>
+<td valign="top" width="47" style="width:47px;"><p>1</p>
+</td>
+<td valign="top" width="401" style="width:401px;"><p>Use the Native Transfer Mode.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="189" style="width:189px;"><p>DTWAIN_USEBUFFERED </p>
+</td>
+<td valign="top" width="47" style="width:47px;"><p>2</p>
+</td>
+<td valign="top" width="401" style="width:401px;"><p>Use the Buffered Transfer Mode.</p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>It is advised that you should be familiar with the Window's API Clipboard functions. &nbsp;You will need to use them if you want to retrieve the DIBs from the clipboard successfully. The data that is stored in the clipboard is of type CF_DIB.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function is suitable for Visual Basic programmers who are familiar with handling the Clipboard object. &nbsp;A call to <span style="font-size: 12pt; font-family: 'Times New Roman'; color: #0000ff;">Clipboard.GetData</span> using the vbCFDIB data format is all that is required for a VB program to copy and display the data in an image or picture control.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note: If multiple pages are desired using the clipboard, the application must be set up to capture DTWAIN notifications that indicate when a page has been transferred successfully, since each new page saved to the clipboard will overwrite any previous page. &nbsp;If this is not done, only the last page from a multi-page acquire will be saved to the clipboard when the Source UI is closed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p><a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a>(if Source is not opened)</p>
+<p>State <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1530542323X, true);" class="popuplink">5</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_831869247, true);" class="popuplink">6</a>, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_1591487050X, true);" class="popuplink">7</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_acquirebuffered.htm">DTWAIN_AcquireBuffered</a>, <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a>, <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

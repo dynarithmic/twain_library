@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_SetPDFOCRConversion</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_setpdfocrconversion.htm"; }
+  else { parent.quicksync('a5.330'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_SetPDFOCRConversion</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setpdfkeywords.htm">Previous</a>&nbsp;
+     <a href="dtwain_setpdfocrmode.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p><span style="color: #ff0000;">The following function is available only with DTWAIN / PDF</span>.</p>
+<p>&nbsp;</p>
+<p>The <span style="font-weight: bold;">DTWAIN_SetPDFOCRConversion</span> sets the conversion parameters for the <a href="ocr_processing.htm">OCR</a> engine when creating searchable PDF files.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_SetPDFOCRConversion (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;"><a href="dtwain_ocrengine.htm">DTWAIN_OCRENGINE</a></span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Engine,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PageType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">FileType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">PixelType,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">BitDepth,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="148" style="width:148px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="112" style="width:112px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Options </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Engine</span></p>
+<p style="margin: 0px 0px 0px 15px;">A selected OCR engine.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PageType</span></p>
+<p style="margin: 0px 0px 0px 15px;">The PDF page type that the conversion parameters will be used on.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">FileType</span></p>
+<p style="margin: 0px 0px 0px 15px;">The image file type that the OCR engine supports for retrieving the text.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">PixelType</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pixel type of the image file that the OCR engine supports.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">BitDepth</span></p>
+<p style="margin: 0px 0px 0px 15px;">Bit depth of the image file that the OCR engine supports.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Options</span></p>
+<p style="margin: 0px 0px 0px 15px;">Other miscellaneous OCR options.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_SetPDFOCRConversion sets up the conversion parameters to use when creating searchable PDF files using <a href="dtwain_acquirefile.htm">DTWAIN_AcquireFile</a> or <a href="dtwain_acquirefileex.htm">DTWAIN_AcquireFileEx</a> (to allow creation of searchable PDF files, the <a href="dtwain_setpdfocrmode.htm">DTWAIN_SetPDFOCRMode</a> must be called with the second argument as TRUE).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When DTWAIN acquires pages to a PDF file, DTWAIN will create temporary image files, and from these files the PDF pages are produced. &nbsp;Since these temporary image files may contain "text", the OCR engine can be allowed to recognize the text in the image file, and then save this text to the PDF page as searchable (invisible) text.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To allow DTWAIN to use the OCR engine, the OCR engine must be set up to recognize the text in the image file correctly. &nbsp;The only way for this to work is to tell DTWAIN exactly how the selected OCR engine handles image files, for example, what types of image files that the OCR engine supports. &nbsp;This is exactly what DTWAIN_SetPDFOCRConversion does -- informs DTWAIN how your OCR engine handles image files, and the proper way for DTWAIN to set up the OCR engine to recognize text that will be placed in the PDF file as searchable text.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Engine</span> parameter is the selected OCR engine.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">PageType </span>parameter must be one of the following:  <span style="font-weight: bold;">DTWAIN_PDFPAGETYPE_BW</span> for black and white PDF pages, and <span style="font-weight: bold;">DTWAIN_PDFPAGETYPE_COLOR</span> for color (RGB) PDF pages. &nbsp;Since DTWAIN creates PDF pages as black and white or color (depending on the original acquired image), DTWAIN should be informed how the OCR engine handles each type. &nbsp;If <span style="font-style: italic;">PageType</span> is DTWAIN_PDFPAGETYPE_BW, the <span style="font-style: italic;">FileType, PixelType, </span>and <span style="font-style: italic;">BitDepth</span> describes the file format, pixel and bit depth of the type of image file that the OCR engine can use for text recoginition when the page is black and white. &nbsp;If <span style="font-style: italic;">PageType</span> is DTWAIN_PDFPAGETYPE_COLOR, the <span style="font-style: italic;">FileType, PixelType, </span>and <span style="font-style: italic;">BitDepth</span> parameters describes the file format, pixel and bit depth of the type of image file that the OCR engine can use to recognize text for color PDF pages.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that many OCR engines do not support recognizing text in color image files, however that does not mean that a color PDF file is not able to store searchable text if the OCR engine only supports black/white images. &nbsp;The simplest way to overcome this limitation is to tell DTWAIN that for DTWAIN_PDFPAGETYPE_COLOR, use the same <span style="font-style: italic;">FileTye, PixelType, </span>and <span style="font-style: italic;">BitDepth</span> values for black/white images. &nbsp;The reason why this works is that DTWAIN is intelligent enough to convert the color image into a temporary black/white image, call the OCR engine to recognize the text, and then destroy the temporary black/white image.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN will only create a temporary file if it discovers that the PDF page type does not match the specified OCR engine conversion type.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">FileType</span> parameter must be one of the following:</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_TIFFNONE</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>Uncompressed TIFF</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_TIFFG3</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>CCITTFaxDecode Group 3 TIFF</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_TIFFG4</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>CCITTFaxDecode Group 4 TIFF</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_TIFFLZW</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>TIFF/LZW compression</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_BMP</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>Windows Bitmap file</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="175" style="width:175px;"><p><span style="font-weight: bold;">DTWAIN_JPEG</span></p>
+</td>
+<td valign="top" width="667" style="width:667px;"><p>JPEG file -- color PDF pages only</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>Your OCR engine must support processing at least one of the above image types for proper processing of searchable PDF text:</p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">PixelType </span>parameter describes the color type that the image file that the OCR engine can support. &nbsp;This value is either DTWAIN_PT_BW (black/whte) or DTWAIN_PT_RGB (color).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">BitDepth</span> is the bits-per-pixel of the image that is supported by the OCR engine. &nbsp;Usually for black/whte images, this value is 1. &nbsp;For color images, this can be 4, 8, 16, 24, etc. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For the supported pixel types and bit depths of your OCR engine, you can call the <a href="dtwain_getocrcapvalues.htm">DTWAIN_GetOCRCapValues</a> using the DTWAIN_OCRCV_PIXELTYPE and DTWAIN_OCRCV_BITDEPTH capability values.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">Options</span> parameter is one or more of the following values, added together to obtain the final <span style="font-style: italic;">Options</span> value.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_PDFOCR_CLEANTEXT &nbsp; &nbsp; &nbsp; &nbsp;1 &nbsp; &nbsp; &nbsp; &nbsp;1</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_PDFOCR_CLEANTEXT1 will inform DTWAIN to only store printable ASCII characters (characters in the range of ASCII 32 (space) to ASCII 255. &nbsp;In other words, all control characters (characters that have ASCII values less than 32) are stripped out of the text and replace with spaces.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Example</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="creating_searchable_text_in_pd.htm">Creating Searchable PDF files</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm">DTWAIN_InitOCREngine</a></p>
+<p><a href="dtwain_selectocrengine.htm">DTWAIN_SelectOCREngine</a>, <a href="dtwain_selectdefaultocrengine.htm">DTWAIN_SelectDefaultOCREngine</a>, <a href="dtwain_selectocrenginebyname.htm">DTWAIN_SelectOCREngineByName</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_GetOCRTextInfoLongEx</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_getocrtextinfolongex.htm"; }
+  else { parent.quicksync('a5.179'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_GetOCRTextInfoLongEx</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_getocrtextinfolong.htm">Previous</a>&nbsp;
+     <a href="dtwain_getorientation.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_GetOCRTextInfoLongEx </span>returns information concerning the characters in the returned text after an <a href="ocr_processing.htm">OCR</a> engine has processed an image file.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">BOOL DTWAIN_GetOCRTextInfoLongEx (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="218" style="width:218px;"><p><span style="font-weight: bold;">DTWAIN_OCRTEXTINFOHANDLE</span></p>
+</td>
+<td valign="top" width="73" style="width:73px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">TextInfoHandle</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="218" style="width:218px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="73" style="width:73px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">nWhichItem,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="218" style="width:218px;"><p><span style="font-weight: bold;">LPLONG</span></p>
+</td>
+<td valign="top" width="73" style="width:73px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">pBuffer,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="218" style="width:218px;"><p><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="73" style="width:73px;"><p><span style="font-style: italic;">bufSize </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters:</span></p>
+<p><span style="font-style: italic;">TextInfoHandle</span></p>
+<p style="margin: 0px 0px 0px 15px;"> The value returned by DTWAIN_GetOCRTextInfoHandle.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">nWhichItem</span></p>
+<p style="margin: 0px 0px 0px 15px;">Character information that is to be retrieved.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">pBuffer</span></p>
+<p style="margin: 0px 0px 0px 15px;">Pointer to a buffer of LONG values that, on return, will be filled with the information about the characters.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bufSize</span></p>
+<p style="margin: 0px 0px 0px 15px;">Maximum size of the buffer <span style="font-style: italic;">pBuffer.</span></p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Returns:</span></p>
+<p>If successful, TRUE. &nbsp;On failure, FALSE is returned. &nbsp; Call <a href="dtwain_getlasterror.htm">DTWAIN_GetLastError</a> on further information on the failure.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments:</span></p>
+<p><span style="font-weight: bold;">DTWAIN_GetOCRTextInfoLongEx </span>returns information concerning characters that the OCR engine has produced after processing an image file. &nbsp;See the <span style="font-style: italic;">nWhichItem</span> table in the <a href="dtwain_getocrtextinfolong.htm">DTWAIN_GetOCRTextInfoLong</a> topic as to the type of information that can be returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">pBuffer</span> is a pointer to a buffer of LONG values that the caller must supply to the function. &nbsp;On return, <span style="font-style: italic;">pBuffer</span> will be filled in with the requested character information.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">bufSize</span> is the maximum number of characters that <span style="font-style: italic;">bufSize</span> can hold.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The <span style="font-style: italic;">DTWAIN_GetOCRTextInfoLongEx</span> works exactly the same way as <span style="font-style: italic;">DTWAIN_GetOCRTextInfoLong</span>, except that DTWAIN_GetOCRTextInfoLong only returns information for a single character, while DTWAIN_GetOCRTextInfoLongEx returns all of the information to a buffer supplied by the caller.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For floating point information concerning the characters in the OCR-ed text, the <a href="dtwain_getocrtextinfofloat.htm">DTWAIN_GetOCRTextInfoFloatEx</a> should be used. &nbsp;If your application desires to get just a single character's information, call <a href="dtwain_getocrtextinfolong.htm">DTWAIN_GetOCRTextInfoLong</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><a href="dtwain_initocrinterface.htm">DTWAIN_InitOCRInterface</a></p>
+<p><a href="dtwain_selectocrengine.htm">DTWAIN_SelectOCREngine</a>, or <a href="dtwain_selectocrenginebyname.htm">DTWAIN_SelectOCREngineByName</a>, or <a href="dtwain_selectdefaultocrengine.htm">DTWAIN_SelectDefaultOCREngine</a></p>
+<p><a href="dtwain_executeocr.htm">DTWAIN_ExecuteOCR</a></p>
+<p><a href="dtwain_getocrtextinfohandle.htm">DTWAIN_GetOCRTextInfoHandle</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_DisableAppWindow</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_disableappwindow.htm"; }
+  else { parent.quicksync('a5.68'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_DisableAppWindow</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_destroyacquisitionarray.htm">Previous</a>&nbsp;
+     <a href="dtwain_enableautoborderdetect.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_DisableAppWindow </span>function allows a window to be disabled when acquiring images.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_DisableAppWindow (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">HWND</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">hWindow</span></p>
+</td>
+</tr>
+</table>
+</div>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bDisable </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="font-weight: bold;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">hWindow</span></p>
+<p>Window handle of window to be disabled.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bDisable</span></p>
+<p>Determines whether to disable the window when acquisition starts.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> if successful. &nbsp;Otherwise <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_76618539, true);" class="popuplink">FALSE</a><span style="font-weight: bold;"> </span>is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_DisableAppWindow function allows a window in an application to be disabled when acquiring images. &nbsp;The <span style="font-style: italic;">hWindow</span> is the window handle (HWND) of the window, and <span style="font-style: italic;">bDisable</span> determines whether <span style="font-style: italic;">hWindow</span> is to be disabled when acquiring images. &nbsp;If <span style="font-style: italic;">bDisable</span> is TRUE, then <span style="font-style: italic;">hWindow</span> will be disabled when acquiring images. &nbsp;If <span style="font-style: italic;">bDisable</span> is FALSE, <span style="font-style: italic;">hWindow</span> will not be enabled or disabled when the acquisitions start (the current state of the window is retained).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>For acquisitions that allow the Source user-interface (UI), the windows will be re-enabled when the user interface is closed. &nbsp;For acquisitions that are acquiring images with no user interface, the windows are re-enabled when the acquisitions are completed.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>DTWAIN_DisableAppWindow should be called before calling a <a href="dtwain_acquisition_functions.htm">DTWAIN Acquisition function</a>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Calling DTWAIN_DisableAppWindow will not immediately disable a window -- the window will be disabled only when the acquisitions or Source UI are started, and re-enabled when the acquisitions or Source UI are terminated.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Multiple calls to DTWAIN_DisableAppWindow with different window handles allows multiple windows to be disabled when the acquisitions are occuring. &nbsp;Therefore, if your application needs to disable a set of controls during acquisition (assuming each control is a window), a call to DTWAIN_DisableAppWindow for each window will disable all the controls when acquisitions are started.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>To remove a window from the list of windows that will be disabled by DTWAIN_DisableAppWindow, call DTWAIN_DisableAppWindow with <span style="font-style: italic;">bDisable</span> as FALSE for the window (HWND).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

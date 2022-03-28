@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_ArrayGetAtStringPtr</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_arraygetatstringptr.htm"; }
+  else { parent.quicksync('a5.39'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_ArrayGetAtStringPtr</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_arraygetatansistringptr.htm">Previous</a>&nbsp;
+     <a href="dtwain_arraygetatwidestring.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayGetAtStringPtr </span>function retrieves a pointer to a string value from a <span style="font-weight: bold;">DTWAIN_ARRAY.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LPCTSTR DTWAIN_ArrayGetAtStringPtr (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">DTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Array,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="123" style="width:123px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-weight: bold;">LONG</span></p>
+</td>
+<td valign="top" width="137" style="width:137px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Index </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="width:24px">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Array</span></p>
+<p style="margin: 0px 0px 0px 15px;"><a href="overview_of_dtwain_arrays.htm">DTWAIN_ARRAY</a> that the value will be retrieved from.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">Position</span></p>
+<p style="margin: 0px 0px 0px 15px;">Index of value to retrieve.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the function succeeds, a pointer to the null-terminated string is returned. &nbsp;If the function fails a NULL pointer or 0 value is returned.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The <span style="font-weight: bold;">DTWAIN_ArrayGetAtStringPtr </span>function returns a pointer to the string stored in the DTWAIN ARRAY <span style="font-style: italic;">Array</span> at index <span style="font-style: italic;">Index</span>. &nbsp; A DTWAIN_ARRAY is indexed starting from position 0 through position <span style="font-style: italic;">n-1</span>, where <span style="font-style: italic;">n</span> is the total number of items in the DTWAIN_ARRAY <span style="font-style: italic;">Array</span>.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The returned value is a constant pointer to a string, where the string is non-changeable. &nbsp;Attempting to alter the buffer pointed to by the returned LPCTSTR will result in undefined behavior to the application (possible crash or other undesirable effects).  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The pointer returned is temporary in that the pointer to the string may become invalid if a subsequent call to a DTWAIN function affects the DTWAIN_ARRAY in any way (adding an element, removing an element, destruction of the DTWAIN_ARRAY, etc.) &nbsp;Therefore the application must make sure that the pointer is used as locally and in as small a scope as possible (at least make sure that the pointer is not used after a DTWAIN call that affects the DTWAIN_ARRAY).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>The DTWAIN_ArrayGetAtStringPtr function has the advantage over <a href="dtwain_arraygetatstring.htm">DTWAIN_ArrayGetAtString</a> in that no copying needs to be done to return the string.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Below is a small C++ code example of ensuring that strings are retrieved correctly from a buffer. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;#include &lt;tchar.h&gt; &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p> &nbsp; //...</p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY sArray;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; // create the array </span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;sArray = <a href="dtwain_arraycreate.htm">DTWAIN_ArrayCreate</a>( DTWAIN_ARRAYSTRING, 1);</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// set a string at the first element </span></p>
+<p><span style="font-size: 9pt;"> &nbsp;  <a href="dtwain_arraysetatstring.htm">DTWAIN_ArraySetAtString</a>( sArray, 0, _T("This is a string"));</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;// get a pointer to the string.</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;TCHAR *ptr = DTWAIN_ArrayGetAtStringPtr( sArray, 0 );</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>This function will only work for DTWAIN_ARRAY's that can store string values (i.e. the DTWAIN_ARRAY was created with the <span style="font-weight: bold;">DTWAIN_ARRAYSTRING </span>style.<span style="font-weight: bold;">  </span>See <a href="dtwain_arraycreate.htm">DTWAIN_ArrayCreate</a> for more information).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="arrayfunctions.htm">Retrieving Values from a DTWAIN_ARRAY</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

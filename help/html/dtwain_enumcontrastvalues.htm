@@ -1,0 +1,151 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_EnumContrastValues</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN_EnumContrastValues" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_enumcontrastvalues.htm"; }
+  else { parent.quicksync('a5.87'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_EnumContrastValues</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_enumcompressiontypes.htm">Previous</a>&nbsp;
+     <a href="dtwain_getcustomcaps.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_EnumContrastValues</span> function gets all of the possible contrast settings for a Source.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">LONG DTWAIN_EnumContrastValues (</span></p>
+<div style="text-align: left; text-indent: -67px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 68px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">DTWAIN_SOURCE</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">Source,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">LPDTWAIN_ARRAY</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">lpContrastVals,</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="139" style="width:139px;"><p><span style="font-weight: bold;">DTWAIN_BOOL</span></p>
+</td>
+<td valign="top" width="121" style="width:121px;"><p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="font-style: italic;">bExpandRange </span><span style="font-weight: bold;">);</span></p>
+</td>
+</tr>
+</table>
+</div>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">An open <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">lpBitDepth</span></p>
+<p style="margin: 0px 0px 0px 15px;">Address of a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_228338154X, true);" class="popuplink">DTWAIN_ARRAY</a> (an <a href="lpdtwain_array.htm">LPDTWAIN_ARRAY</a>) that will store the Source's contrast values, or NULL.</p>
+<p style="margin: 0px 0px 0px 15px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-style: italic;">bExpandRange</span></p>
+<p style="margin: 0px 0px 0px 15px;">Flag that determines whether the values will be <a href="dtwain_rangeexpand.htm">expanded</a> if the Source stores them in a <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_988312399, true);" class="popuplink">TW_RANGE</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>The return value is the number of contrast values supported by the Source. &nbsp;If there is an error, or if the Source does not support contrast values, 0 is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_EnumContrastValues function gets all of the contrast values supported by the TWAIN Source, <span style="font-style: italic;">Source</span>. &nbsp;On return, <span style="font-style: italic;">lpContrastVals</span> will be filled with all of the available contrast values. &nbsp;Note that your application does not send a DTWAIN_ARRAY, but an LPDTWAIN_ARRAY (a pointer to a DTWAIN_ARRAY). &nbsp;The data type of the returned DTWAIN_ARRAY is <a href="dtwain_float.htm">DTWAIN_FLOAT</a>. &nbsp;If <span style="font-style: italic;">lpContrastVals</span> is NULL or 0, no array is returned and only the number of contrast values is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>If the Source stores the contrast values in a range type (a <a href="overview_of_dtwain_range.htm">DTWAIN_RANGE</a>), then the <span style="font-style: italic;">bExpandRange</span> argument determines whether the values will be expanded into <span style="font-style: italic;">lpContrastVals </span>before returning. &nbsp;If <span style="font-style: italic;">bExpandRange</span> is <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a>, then DTWAIN_RANGE values will be expanded into a DTWAIN_ARRAY and <span style="font-style: italic;">lpContrastVals</span> will be a regular DTWAIN_ARRAY. &nbsp;If <span style="font-style: italic;">bExpandRange</span> is FALSE, the range is not expanded and <span style="font-style: italic;">lpContrastVals</span> will be a DTWAIN_RANGE type. &nbsp;Note that <span style="font-style: italic;">bExpandRange</span> is meaningful only if the Source uses a TW_RANGE to store the contrast values, otherwise a regular DTWAIN_ARRAY is always used. &nbsp;To determine if the Source uses a range to store the contrast values, call  <a href="dtwain_getcapcontainer.htm">DTWAIN_GetCapContainer</a>(Source, DTWAIN_CV_ICAPCONTRAST, DTWAIN_CAPGET) &nbsp;and check for a DTWAIN_CONTRANGE return value. </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Many Sources store the contrast values in terms of a range, since there could be hundreds, or possibly thousands of values. &nbsp;Expanding the range into array values will cause more storage to be used, slowing down DTWAIN_EnumContrastValues during expansion.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Note that not all Sources support contrast settings. &nbsp;To determine if a Source supports contrast, call <a href="dtwain_iscapsupported.htm">DTWAIN_IsCapSupported</a>(Source, DTWAIN_CV_ICAPCONTRAST).</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>Example:</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;">#include "dtwain.h"</span></p>
+<p><span style="font-size: 9pt;">void SomeCode( )</span></p>
+<p><span style="font-size: 9pt;">{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_ARRAY EnumArray;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Count;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_SOURCE Source;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_FLOAT &nbsp; Value;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG Count2;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;LONG ContainerType;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;DTWAIN_BOOL Expand;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Assume Source has been opened */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* ... */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Test if Source uses a range. &nbsp;We will handle the expansion ourselves */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Expand = TRUE;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;ContainerType = <a href="dtwain_getcapcontainer.htm">DTWAIN_GetCapContainer</a>( Source, DTWAIN_CV_ICAPCONTRAST, DTWAIN_CAPGET );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( ContainerType == DTWAIN_CONTRANGE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; Expand = FALSE;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;/* Get the actual values, no expansion if &nbsp;Source uses a range */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;Count = DTWAIN_EnumContrastValues( Source, &amp;EnumArray, Expand ); </span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;if ( Count &gt; 0 )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp;{</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; /* Print each contrast value */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; for (Count2 = 0; Count2 &lt; Count; Count2++ )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; {</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( Expand == FALSE )</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* This is a normal DTWAIN_ARRAY */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <a href="dtwain_arraygetat.htm"> DTWAIN_ArrayGetAt</a>( EnumArray, Count2, &amp;Value );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* This is an unexpanded &nbsp;DTWAIN_RANGE, so use DTWAIN_RANGE functions */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="dtwain_rangegetexpvalue.htm">DTWAIN_RangeGetExpValue</a>( EnumArray, Count2, &amp;Value );</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;printf( "Contrast Value %d is %lf\n", Count, Value);</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; &nbsp;}</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; }</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; /* Destroy values. &nbsp;Note that a DTWAIN_RANGE is a DTWAIN_ARRAY, so you can call</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; &nbsp; &nbsp; any DTWAIN_ARRAY functions on a DTWAIN_RANGE */</span></p>
+<p><span style="font-size: 9pt;"> &nbsp; <a href="dtwain_arraydestroy.htm">DTWAIN_ArrayDestroy</a>( EnumArray ); </span></p>
+<p><span style="font-size: 9pt;">}</span></p>
+<p> &nbsp;  </p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>The Source must be in <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_995107139X, true);" class="popuplink">State 4</a> or higher</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Setting / Getting Contrast Values</a></p>
+<p>&nbsp;</p>
+
+</td></tr></table>
+
+</body>
+</html>

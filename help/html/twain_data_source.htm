@@ -1,0 +1,58 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>TWAIN Data Source</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?twain_data_source.htm"; }
+  else { parent.quicksync('a7.4'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">TWAIN Source</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="datasourcemanager.htm">Previous</a>&nbsp;
+     <a href="twainstatetransitioninformatio.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The Twain Data Source (or simply, Source) is the software that controls each image acquisition device, and is responsible for compliance with the TWAIN specification. &nbsp; The Source is the software that is included with almost every scanner or digital camera. &nbsp;The manufacturer of the image acquisition device is usually responsible for writing the Source software, however many third-party software companies and consultants may have written the Source for a particular device. &nbsp;The Source is always implemented as a DLL, however the file extension is not .DLL, but <span style="font-weight: bold;">.DS</span>. &nbsp;The Source files are usually installed in a subdirectory of the TWAIN installation directory.</p>
+<p>&nbsp;</p>
+<p>The Source software usually includes a user interface (UI) that is displayed when TWAIN requests that an image is to be acquired. &nbsp; The UI is not a requirement for a Source, but most do have one. &nbsp; Some Source's allow the programmer to disable the default UI, and either show a custom UI or allow the Source to work without showing a UI (see <a href="sourceuserinterface.htm">Source User Interface Issues</a> for more information).  </p>
+<p>&nbsp;</p>
+<p>Once the User interface is enabled, and the user (or possibly the application) selects to start the acquisition process, the Source is responsible for transferring the data from the image device to the application (in our case, the application is <span style="font-weight: bold;">DTWAIN</span>). &nbsp;The transference of image data from the device to the application is done by using a certain <a href="imagetransfermodes.htm">image transfer mode</a>. Once the image has been transferred from the device to the application, the resulting image is stored as a <a href="indmp4l.htm">Device Independent Bitmap</a> (or <span style="font-weight: bold;">DIB</span> for short), or if compression is used, the result is a series of bytes describing an actual image file (TIFF, JPEG. etc).</p>
+<p>&nbsp;</p>
+<p>Another aspect of the Source is that it allows the user to set or retrieve the image acquisition device's <a href="settingdevicecapabilities.htm">capabilities</a>. &nbsp; With each Source, there are various aspects of the image acquisition such as resolution, color / black and white settings, gamma correction, etc.</p>
+<p>&nbsp;</p>
+<p>From a DTWAIN application's viewpoint, the most important aspect is the Source. &nbsp;DTWAIN encapsulates the Source (this entity is called a <a href="dtwain_source.htm">DTWAIN_SOURCE</a>) so that it is easy to use and control. &nbsp;With many DTWAIN function, the Source is a requirement.</p>
+
+</td></tr></table>
+
+</body>
+</html>

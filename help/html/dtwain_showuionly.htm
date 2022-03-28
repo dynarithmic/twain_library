@@ -1,0 +1,78 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>DTWAIN_ShowUIOnly</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="DTWAIN Source Selection Function,DTWAIN_ShowUIOnly" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="dtwain32_popup_html.js"></script><script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?dtwain_showuionly.htm"; }
+  else { parent.quicksync('a5.358'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">DTWAIN_ShowUIOnly</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="dtwain_setupdatedibproc.htm">Previous</a>&nbsp;
+     <a href="dtwain_startthread.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>The <span style="font-weight: bold;">DTWAIN_ShowUIOnly</span> function displays the Source UI for Source setting changes only.</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_BOOL DTWAIN_ShowUIOnly ( DTWAIN_SOURCE  </span><span style="font-style: italic;">Source </span><span style="font-weight: bold;">);</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="text-indent: -67px; margin: 0px 0px 0px 68px;"><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Parameters</span></p>
+<p><span style="font-style: italic;">Source</span></p>
+<p style="margin: 0px 0px 0px 15px;">Specifies a <a href="twain_data_source.htm">TWAIN Source</a>.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Return Values</span></p>
+<p>If the Source's UI can be displayed without acquiring images, <a href="javascript:void(0);" onclick="return hmshowPopup(event, popid_2926730, true);" class="popuplink">TRUE</a> is returned. &nbsp;If the UI cannot be shown in this mode, FALSE is returned.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Comments</span></p>
+<p>The DTWAIN_ShowUIOnly function displays the <span style="font-style: italic;">Source</span> user interface (UI), but does not allow the user to acquire images. &nbsp;Most UI's are shown only when it is time to acquire an image, however the "UI-only" mode allows the user to display the UI, but only to allow the user to change Source values (brightness, gamma, resolution, etc.). &nbsp;The application can call <a href="dtwain_isuionlysupported.htm">DTWAIN_IsUIOnlySupported</a> to see if the Source allows the UI to be shown in the "acquireless" mode.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>When DTWAIN_ShowUIOnly is called, the application will go through the same series of steps as if an image is being acquired using <a href="dtwain_acquirenative.htm">DTWAIN_AcquireNative</a>, without actually acquiring any images. &nbsp;For example, if <a href="dtwain_gettwainmode.htm">DTWAIN_GetTwainMode</a> is DTWAIN_MODAL, the application should be suspended (i.e., the main app window should be disabled) as the UI is displayed; if DTWAIN_GetTwainMode is DTWAIN_MODELESS, the application will continue to run as the UI is shown.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p>After this function is called and the User Interface is finally closed, your application should call <a href="dtwain_getcustomdsdata.htm">DTWAIN_GetCustomDSData</a> to retrieve any information that was saved by the Source when in the UI-only mode. &nbsp;This data usually has information on the settings that were selected.  </p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">TWAIN State Transitions</span></p>
+<p>None.</p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">Prerequisite Function Call(s)</span></p>
+<p><a href="dtwain_sysinitialize.htm">DTWAIN_SysInitialize</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><a href="selectingthetwainsource.htm">DTWAIN Source Selection Function</a></p>
+<p><span style="color: #000000;">&nbsp;</span></p>
+<p><span style="font-weight: bold;">See Also</span></p>
+<p><a href="dtwain_source_functions.htm">Acquiring Images</a></p>
+
+</td></tr></table>
+
+</body>
+</html>

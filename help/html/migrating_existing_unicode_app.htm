@@ -1,0 +1,119 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Migrating Older Unicode Applications To 4.0</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+<!--
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?migrating_existing_unicode_app.htm"; }
+  else { parent.quicksync('a2.1.1.3'); }
+}
+//-->
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #FFFFFF;" onload="highlight();">
+<div id="hmpopupDiv" style="visibility:hidden; position:absolute; z-index:1000; "></div>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#D0D0D0">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Migrating Older Unicode Applications To 4.x</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="overview.htm">Top</a>&nbsp;
+     <a href="special_ansi_and_unicode_versi.htm">Previous</a>&nbsp;
+     <a href="calling_dtwain_dll_functions__.htm">Next</a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p>Prior to version 4.x of DTWAIN, the only DTWAIN DLL available was ANSI based. &nbsp;This means that any Unicode-based applications using DTWAIN would use the ANSI version of DTWAIN, and call the string-related DTWAIN functions without having to specify character specific functions (the "A" and "W" functions discussed in <a href="ansi_mbcs_and_unicode_applicat.htm">ANSI and Unicode versions of DTWAIN functions</a>).</p>
+<p>&nbsp;</p>
+<p>For example, a Unicode application that used DTWAIN prior to version 4.x. would call DTWAIN_GetErrorString, and that function would automatically be ANSI, as that was the only version of DTWAIN that existed at that time. &nbsp;However, it may become a problem with version 4.x of DTWAIN, as calling DTWAIN_GetErrorString in a Unicode build will, by default, generate a call to DTWAIN_GetErrorString that expects the application to provide a Unicode character-based buffer, and not an ANSI-based character buffer.</p>
+<p>&nbsp;</p>
+<p>If you have developed a Unicode application that uses DTWAIN prior to version DTWAIN 4.x, and you want to continue using the ANSI DTWAIN DLL <span style="font-weight: bold;">and</span> you do not want to change your source code to call the ANSI specific versions of the DTWAIN functions, then you must rebuild your application defining the following compiler preprocessor constant:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">DTWAIN_ANSIDLL</span></p>
+<p>&nbsp;</p>
+<p>If this constant is defined, then all calls to the string-related DTWAIN functions will remain ANSI-based, and you can continue using DTWAIN32.DLL or DTWAIN64.DLL without any changes to your program source.  </p>
+<p>&nbsp;</p>
+<p>To define a compiler preprocessor symbol, most compilers have a <span style="font-weight: bold;">-D</span> or <span style="font-weight: bold;">/D </span>command-line parameter setting:</p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">/D "DTWAIN_ANSIDLL"</span></p>
+<p>&nbsp;</p>
+<p>If using the Microsoft Visual Studio Integrated Environment, the preprocessor symbols can be specified in the project options as below:</p>
+<p>&nbsp;</p>
+<p><img src="projopts2.jpg" width="589" height="161" border="0" alt="projopts2"></p>
+<p>&nbsp;</p>
+<hr noshade size=1 style="color : #000000"><p>&nbsp;</p>
+<p>The table below describes the various scenarios when building an application with DTWAIN using the various DTWAIN DLL types and application types.</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table cellspacing="0" cellpadding="0" border="0" style="border: none; border-spacing:0px; border-collapse: collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="217" style="width:217px; border: solid 2px #000000;"><p><span style="font-weight: bold;">Application Character Set Type</span></p>
+</td>
+<td valign="top" width="129" style="width:129px; border: solid 2px #000000;"><p><span style="font-weight: bold;">DTWAIN DLL Type</span></p>
+</td>
+<td valign="top" width="239" style="width:239px; border: solid 2px #000000;"><p><span style="font-weight: bold;">Preprocessor Constant to define</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="217" style="width:217px; border: solid 2px #000000;"><p>ANSI</p>
+</td>
+<td valign="top" width="129" style="width:129px; border: solid 2px #000000;"><p>ANSI</p>
+</td>
+<td valign="top" width="239" style="width:239px; border: solid 2px #000000;"><p>Not applicable</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="217" style="width:217px; border: solid 2px #000000;"><p>ANSI</p>
+</td>
+<td valign="top" width="129" style="width:129px; border: solid 2px #000000;"><p>Unicode</p>
+</td>
+<td valign="top" width="239" style="width:239px; border: solid 2px #000000;"><p>DTWAIN_UNICODEDLL</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="217" style="width:217px; border: solid 2px #000000;"><p>Unicode</p>
+</td>
+<td valign="top" width="129" style="width:129px; border: solid 2px #000000;"><p>Unicode</p>
+</td>
+<td valign="top" width="239" style="width:239px; border: solid 2px #000000;"><p>Not applicable</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td valign="top" width="217" style="width:217px; border: solid 2px #000000;"><p>Unicode</p>
+</td>
+<td valign="top" width="129" style="width:129px; border: solid 2px #000000;"><p>ANSI</p>
+</td>
+<td valign="top" width="239" style="width:239px; border: solid 2px #000000;"><p>DTWAIN_ANSIDLL</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>The "Not applicable" means that no preprocessor symbol needs to be defined.  </p>
+<p>&nbsp;</p>
+<p>If you're building a Unicode application, and you want to use the ANSI DTWAIN DLL, you must define <span style="font-weight: bold;">DTWAIN_ANSIDLL</span> when compiling your application. &nbsp;This forces DTWAIN to use ANSI string arguments for the DTWAIN functions instead of Unicode string arguments. &nbsp; </p>
+<p>&nbsp;</p>
+<p>If you're building an ANSI application, and you want to use the Unicode DTWAIN DLL, you must define <span style="font-weight: bold;">DTWAIN_UNICODEDLL</span> when compiling your application. &nbsp;This forces DTWAIN to use Unicode string arguments for the DTWAIN functions instead of ANSI string arguments. &nbsp; </p>
+
+</td></tr></table>
+
+</body>
+</html>
