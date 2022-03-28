@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is [**5.2.0.8** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version is [**5.2.0.9** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -38,17 +38,49 @@ This section deals with building a C or C++ based DTWAIN application.  Later on 
 
 ----
 
-**Building the application:**
-<a name="dtwaindllusage"></a>
-The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the Visual C++ compatible import libraries necessary to build your application. (If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).  In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
+**<u>Building the DTWAIN application</u>**
 
-    32bit/dtwain32.lib -- 32-bit ANSI (MBCS) import library
-    32bit/dtwain32u.lib -- 32-bit Unicode import library
-    32bit/release_pdb -- Zip file containing the 32-bit PDB files for dtwain32.dll and dtwain32u.dll
+<a name="dtwaindllusage"></a>
+For 32-bit applications, use the binaries found in **release_libraries.zip** in [this directory](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit).  
+
+The checksum for release_libraries.zip is as follows:
+
+MD5:    **33a675b2bdc1703242ddb6115949f902**  
+SHA1:   **2f2daaf7a2ef3d2ba4d9bbcce005e6f33e8a29a1**  
+SHA256: **31395b4723c4477ef174e13a0d94359eebb09c45b555baa59e8a32babfdcf40b**
+
+----
+
+For 64-bit applications, use the binaries found in **release_libraries.zip** in [this directory](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit).
+
+MD5:    **7897e7e3bb9ba79f381aad67f99d73ff**  
+SHA1:   **d694e0b6988fe3e81c26e918a2ccfcb27138bbe1**  
+SHA256: **a9d53130d03e839418f933dd0cb82cf178982a5866c54b0609f764f39c0e007e**
+
+----
+The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  Similarly, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available. 
+
+(If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).  
+
+In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
+
+----
+
+A breakdown of the files contained in **release_libraries.zip** is as follows:
+
+    dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
+    dtwain32.lib   --  32-bit ANSI (MBCS) import library
+    dtwain32.pdb   --  32-bit PDB files for dtwain32.dll
+    dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
+    dtwain32u.lib  --  32-bit Unicode import library
+    dtwain32u.pdb  --  32-bit PDB files for dtwain32u.dll
     
-    64bit/dtwain64.lib -- 64-bit ANSI (MBCS) import library
-    64bit/dtwain64u.lib -- 64-bit Unicode import library
-    64bit/release_pdb -- Zip file containing the 64-bit PDB files for dtwain64.dll and dtwain64u.dll
+    dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
+    dtwain64.lib   --  64-bit ANSI (MBCS) import library
+    dtwain64.pdb   --  64-bit PDB files for dtwain64.dll
+    dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
+    dtwain64u.lib  --  64-bit Unicode import library
+    dtwain64u.pdb  --  64-bit PDB files for dtwain64u.dll
     
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
@@ -58,39 +90,15 @@ Basically, you just need to build your application and link it to one of the imp
 
 ----
 <a name="runningapplication"></a>
-**Running the application:**
+**<u>Running the application</u>**
 
 After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-The [binaries](https://github.com/dynarithmic/twain_library/tree/master/binaries) directory contains all of the DLL files required to run your applicaiton.
+In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-    32bit/dtwain32.dll -- 32-bit ANSI (MBCS) DLL 
-    Checksums:
-    SHA1    99b59fa4350172e69d02d85e43d42ccf3f767d5a
-    SHA-256 3a262921b2f4a44898e78248675455d59115eea4b95c3213f520e4d41e667cc0
-    MD5     a115ec3cddc252486d43f2e67b82383c
-    
-    32bit/dtwain32u.dll -- 32-bit Unicode DLL
-    Checksums:
-    SHA1    14e25fdfb54945b758c2371108517b6cd3c9c8fc
-    SHA-256 49f8080b58de200fad5c59e4a0a798ddb8cf22fe0afb89eeea9c1d0b9c89b8d3
-    MD5     d29f219e85348c640ce74303f0d051a1
-    
-    64bit/dtwain64.dll -- 64-bit ANSI (MBCS) DLL
-    Checksums:
-    SHA1    592cd8bf4c4bbc1b9f806e81f2a9e6aa87ac4e96
-    SHA-256 0c69bb782c17aec27aa717408fc3d8dc5ae87ad0a718796b1371dcf8586d2e03
-    MD5     6e3e8c0541425d23b2a9f84d36d431df
-    
-    64bit/dtwain64u.dll -- 64-bit Unicode DLL
-    Checksums:
-    SHA1    20319ac3c663a388098d096f5e20fb60bc0632f6
-    SHA-256 71912ce39106c7aad4e7fc65d37cc1297687b07f49e9e14f32e210a622304b1b
-    MD5     e9e6cf2d45be5ca9f048eee89317b236
-    
-In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  The  text resources files are as follows:
+The  text resources files are as follows:
 
     twaininfo.txt -- General TWAIN information -- this is required.
 	twainresourcestrings_english.txt  	English resources -- this is required.
@@ -101,13 +109,16 @@ If these files are not found, you will receive the following error when running 
 
 ![following error when running your application](/images/resource_error.jpg)
 
+Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  The error return code will be **-1051** if DTWAIN_SysInitializeNoBlocking detects an error initializing the library, and 0 if there is no error and the initialization was successful.
+
 In addition, there are optional string resource files available.  Here are a list of those files:
 	
-	twainresourcestrings_dutch.txt 	 	Dutch resources
-	twainresourcestrings_french.txt  	French resources
-	twainresourcestrings_german.txt  	German resources
-	twainresourcestrings_italian.txt 	Italian resources
-	twainresourcestrings_spanish.txt 	Spanish strings
+	twainresourcestrings_dutch.txt 	 	    Dutch resources
+	twainresourcestrings_french.txt  	    French resources 
+	twainresourcestrings_german.txt  	    German resources
+	twainresourcestrings_italian.txt 	    Italian resources
+	twainresourcestrings_spanish.txt 	    Spanish resources
+	twainresourcestrings_portuguese_br.txt      Portugeuse-Brazilian resources
 
 
 If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.  
@@ -142,7 +153,7 @@ The simplest example is probably one that opens the TWAIN "Select Source" dialog
         DTWAIN_SysDestroy();         
     }         
 
-That's it. 
+That's it.  
 
 If you desire to acquire to an image in memory instead of a file, that can be done also.  By default, a Windows-based TWAIN driver always returns a Device Independent Bitmap (DIB) as the memory image.    
 
@@ -212,7 +223,9 @@ You can do one of two things:
 1. Attempt to convert the .lib files mentioned above to your compiler's version of an import library, or
 2. Forget about using libraries altogether, and use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.
 
-For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad). 
+For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.
+
+For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad). 
 
     /* Include this header */
     #include "dtwainx2.h"
