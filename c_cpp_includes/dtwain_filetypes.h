@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2022 Dynarithmic Software.
+Copyright (c) 2002-2021 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,7 +17,12 @@ limitations under the License.
 FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
 DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
 OF THIRD PARTY RIGHTS.
+
+For more information, the license file named LICENSE that is located in the root
+directory of the DTWAIN installation covers the restrictions under the LGPL license.
+Please read this file before deploying or distributing any application using DTWAIN.
 */
+
 #ifndef DTWAIN_FILETYPES_H
 #define DTWAIN_FILETYPES_H
 
@@ -48,7 +53,7 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_TIFFDEFLATEMULTI   904   /* Multi-pageTIFF, zlib compression */
 #define DTWAIN_TIFFJPEGMULTI   905   /* Multi-pageTIFF, JPEG compression */
 #define DTWAIN_TIFFLZWMULTI 906   /* Multi-page TIFF, LZW compression */
-#define DTWAIN_TIFFJBIGMULTI 907  /* Multi-page TIFF, JBIG compression (not implememted due to patent) */
+#define DTWAIN_TIFFJBIGMULTI 907  /* Multi-page TIFF, JBIG compression (not implememnted due to patent) */
 #define DTWAIN_TIFFPIXARLOGMULTI 908   /* Multi-page TIFF Pixar Log compression (not implemented )*/
 #define DTWAIN_WMF          850   /* Windows meta-file */
 #define DTWAIN_EMF          851   /* Enhanced Windows meta-file */
@@ -56,12 +61,12 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_PNG          1000  /* Portable Network Graphics */
 #define DTWAIN_PSD          2000  /* Adobe Photoshop PSD file */
 #define DTWAIN_JPEG2000     3000  /* JPEG-2000 file */
-#define DTWAIN_POSTSCRIPT1  4000  /* Postscript Level 1 */
-#define DTWAIN_POSTSCRIPT2  4001  /* Postscript Level 2 */
-#define DTWAIN_POSTSCRIPT3  4002  /* Postscript Level 3 */
-#define DTWAIN_POSTSCRIPT1MULTI  4003  /* Postscript Level 1 Multipage */
-#define DTWAIN_POSTSCRIPT2MULTI  4004  /* Postscript Level 2 Multipage */
-#define DTWAIN_POSTSCRIPT3MULTI  4005  /* Postscript Level 3 Multipage */
+#define DTWAIN_POSTSCRIPT1  4000  /* Postcript Level 1 */
+#define DTWAIN_POSTSCRIPT2  4001  /* Postcript Level 2 */
+#define DTWAIN_POSTSCRIPT3  4002  /* Postcript Level 3 */
+#define DTWAIN_POSTSCRIPT1MULTI  4003  /* Postcript Level 1 Multipage */
+#define DTWAIN_POSTSCRIPT2MULTI  4004  /* Postcript Level 2 Multipage */
+#define DTWAIN_POSTSCRIPT3MULTI  4005  /* Postcript Level 3 Multipage */
 #define DTWAIN_TEXT              6000  /* Text file produced from OCR */
 #define DTWAIN_TEXTMULTI         6001  /* Multi-page text file */
 #define DTWAIN_TIFFMULTI         7000  /* Only to be used for standalone OCR engines */
@@ -71,5 +76,4 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_WEBP              8501  /* Google webp format */
 #define DTWAIN_PCD               9000  /* Kodak PCD */
 #define DTWAIN_PBM               10000 /* Portable bitmap*/
-#define DTWAIN_PPM               DTWAIN_PBM /* Portable bitmap*/
 #endif

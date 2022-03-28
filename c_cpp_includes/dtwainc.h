@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2022 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -21,7 +21,11 @@
 #ifndef DTWAINC_H
 #define DTWAINC_H
 
+#include "winconst.h"
+#include "capconst.h"
+#include "dtwaindefs.h"
 #include "dtwtype.h"
+#include "dtwpdft.h"
 
 /* Callback functions */
 typedef void (*DTWAIN_CALLBACK)(DTWAIN_HANDLE, DTWAIN_SOURCE, WPARAM, LPARAM);
