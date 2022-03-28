@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2022 Dynarithmic Software.
+    Copyright (c) 2002-2021 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -290,10 +290,6 @@
 #define DTWAIN_DEFAULT     (-1)
 #define DTWAIN_FLOATDEFAULT (-9999.0)
 
-#define DTWAIN_DGNAME   0
-#define DTWAIN_DATNAME  1
-#define DTWAIN_MSGNAME  2
-
 /* DTWAIN Callback constants */
 #define DTWAIN_CallbackERROR      1
 #define DTWAIN_CallbackMESSAGE    2
@@ -488,13 +484,9 @@
 #define DTWAIN_TN_FILENAMECHANGED          1161
 
 /* Sent when an audio file has been transferred */
-#define DTWAIN_TN_PROCESSEDAUDIOFINAL       1180
+#define DTWAIN_TN_PROCESSEDAUDIOFINAL		1180
 #define DTWAIN_TN_PROCESSAUDIOFINALACCEPTED 1181
-#define DTWAIN_TN_PROCESSEDAUDIOFILE        1182
-
-/* Sent when a TWAIN triplet is being processed */
-#define DTWAIN_TN_TWAINTRIPLETBEGIN         1183
-#define DTWAIN_TN_TWAINTRIPLETEND           1184
+#define DTWAIN_TN_PROCESSEDAUDIOFILE		1182
 
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
@@ -820,7 +812,6 @@
 #define DTWAIN_ERR_UNKNOWN_CAPDATATYPE   (-1048)
 #define DTWAIN_ERR_DEMO_NOFILETYPE (-1049)
 #define DTWAIN_ERR_SOURCESELECTION_CANCELED (-1050)
-#define DTWAIN_ERR_RESOURCES_NOT_FOUND (-1051)
 
 #define DTWAIN_ERR_LAST_1       DTWAIN_ERR_DEMO_NOFILETYPE
 
@@ -1151,30 +1142,21 @@
 #define DTWAIN_LOG_CONSOLE         65536
 
 #define DTWAIN_LOG_DEBUGMONITOR    131072
-#define DTWAIN_LOG_ISTWAINMSG      262144
-#define DTWAIN_LOG_LOWLEVELTWAIN   524288
 
 /* log everything, including displaying exceptions */
-#define DTWAIN_LOG_ALL               (0xFFFFF7FF &~ (DTWAIN_LOG_NOCALLBACK))
+#define DTWAIN_LOG_ALL               0xFFFFF7FF
 
 /* log everything using new log file */
-#define DTWAIN_LOG_ALL_APPEND        (0xFFFFFFFF &~ (DTWAIN_LOG_NOCALLBACK))
+#define DTWAIN_LOG_ALL_APPEND        0xFFFFFFFF
 
 /* log only using console */
-#define DTWAIN_LOGONLY_CONSOLE ((DTWAIN_LOG_ALL &~ (DTWAIN_LOG_DEBUGMONITOR | DTWAIN_LOG_USEFILE)))
+#define DTWAIN_LOGONLY_CONSOLE (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_DEBUGMONITOR | DTWAIN_LOG_USEFILE))
 
 /* log only using debug window*/
-#define DTWAIN_LOGONLY_DEBUGWINDOW ((DTWAIN_LOG_ALL &~ (DTWAIN_LOG_CONSOLE | DTWAIN_LOG_USEFILE)))
+#define DTWAIN_LOGONLY_DEBUGWINDOW (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_CONSOLE | DTWAIN_LOG_USEFILE))
 
 /* log only using file */
-#define DTWAIN_LOGONLY_FILE ((DTWAIN_LOG_ALL &~ (DTWAIN_LOG_CONSOLE | DTWAIN_LOG_DEBUGMONITOR)))
-
-/* log only using callback (if defined) */
-#define DTWAIN_LOGONLY_USECALLBACK ((DTWAIN_LOG_ALL &~ (DTWAIN_LOG_CONSOLE | DTWAIN_LOG_DEBUGMONITOR | DTWAIN_LOG_USEFILE | DTWAIN_LOG_WRITE)))
-
-/* turn off the DTWAIN_IsTwainMsg logging */
-#define DTWAIN_LOG_NOISTWAINMSG(x) { if (x | DTWAIN_LOG_ISTWAINMSG) x &= ~DTWAIN_LOG_ISTWAINMSG; }
-#define DTWAIN_LOG_NOLOWLEVELTWAIN(x) { x &= ~(DTWAIN_LOG_LOWLEVELTWAIN); }
+#define DTWAIN_LOGONLY_FILE (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_CONSOLE | DTWAIN_LOG_DEBUGMONITOR))
 
 /* CAP_CUSTOMDSDATA constants */
 #define DTWAINGCD_RETURNHANDLE      1
@@ -1226,9 +1208,6 @@
 #define DTWAIN_BP_AUTODISCARD_NONE         0
 #define DTWAIN_BP_AUTODISCARD_IMMEDIATE    1
 #define DTWAIN_BP_AUTODISCARD_AFTERPROCESS 2
-#define DTWAIN_BP_DETECTORIGINAL        1
-#define DTWAIN_BP_DETECTADJUSTED        2
-#define DTWAIN_BP_DETECTALL         (DTWAIN_BP_DETECTORIGINAL | DTWAIN_BP_DETECTADJUSTED)
 #define DTWAIN_BP_AUTODISCARD_ANY          0xFFFF
 
 /* Lightpath */
@@ -1252,8 +1231,8 @@
 #define DTWAIN_DLG_CLEAR_PARAMS         16
 #define DTWAIN_DLG_HORIZONTALSCROLL     32
 #define DTWAIN_DLG_USEINCLUDENAMES      64
-#define DTWAIN_DLG_USEEXCLUDENAMES      128
-#define DTWAIN_DLG_USENAMEMAPPING       256
+#define DTWAIN_DLG_USEEXCLUDENAMES      128 
+#define DTWAIN_DLG_USENAMEMAPPING       256 
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
