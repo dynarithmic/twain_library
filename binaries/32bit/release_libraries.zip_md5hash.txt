@@ -1,0 +1,1 @@
+﻿MD5 hash of "release_libraries.zip" (16 bytes) = 33a675b2bdc1703242ddb6115949f902
