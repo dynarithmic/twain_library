@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2021 Dynarithmic Software.
+    Copyright (c) 2002-2022 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileA(DTWAIN_SOURCE Source, LPCSTR lpszFi
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileType, LONG lFileFlags, LONG PixelType, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileA(DTWAIN_SOURCE Source, LPCSTR lpszFile, LONG lFileFlags, LONG lNumClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireAudioFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileFlags, LONG lNumClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppendA(LPCSTR szFile);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppendW(LPCWSTR szFile);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, LONG strokeWidth, LONG Flags);
@@ -93,8 +92,8 @@ LONG        DLLENTRY_DEF DTWAIN_GetTwainLanguageValueA(LPCSTR lang);
 LONG        DLLENTRY_DEF DTWAIN_GetTwainLanguageValueW(LPCWSTR lang);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetXResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetXResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetYesolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetYesolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetYResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetYResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_InitImageFileAppendA(LPCSTR szFile, LONG fType);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_InitImageFileAppendW(LPCWSTR szFile, LONG fType);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_LoadCustomStringResourcesA(LPCSTR sLangDLL);
@@ -111,6 +110,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAuthorA(DTWAIN_SOURCE Source, LPCSTR szAuthor
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAuthorW(DTWAIN_SOURCE Source, LPCWSTR szAuthor);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionStringA(DTWAIN_SOURCE Source, LPCSTR threshold, LONG autodetect_option, DTWAIN_BOOL bSet);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionStringW(DTWAIN_SOURCE Source, LPCWSTR threshold, LONG autodetect_option, DTWAIN_BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionExStringA(DTWAIN_SOURCE Source, LPCSTR threshold, LONG autodetect_option, LONG detectOpts, DTWAIN_BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionExStringW(DTWAIN_SOURCE Source, LPCWSTR threshold, LONG autodetect_option, LONG detectOpts, DTWAIN_BOOL bSet);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBrightnessStringA(DTWAIN_SOURCE Source, LPCSTR Contrast);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBrightnessStringW(DTWAIN_SOURCE Source, LPCWSTR Contrast);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCameraA(DTWAIN_SOURCE Source, LPCSTR szCamera);
@@ -239,20 +240,51 @@ LONG DLLENTRY_DEF DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringA(LPSTR lpszVer, LONG nLength);
 LONG DLLENTRY_DEF DTWAIN_GetShortVersionStringW(LPWSTR lpszVer, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetTwainStringNameA(LONG category, LONG TwainID, LPSTR lpszBuffer, LONG nMaxLen);
+LONG DLLENTRY_DEF DTWAIN_GetTwainStringNameW(LONG category, LONG TwainID, LPWSTR lpszBuffer, LONG nMaxLen);
+LONG DLLENTRY_DEF DTWAIN_GetTwainIDFromNameA(LPSTR lpszBuffer);
+LONG DLLENTRY_DEF DTWAIN_GetTwainIDFromNameW(LPWSTR lpszBuffer);
+LONG DLLENTRY_DEF DTWAIN_GetActiveDSMPathA(LPSTR lpszBuffer, LONG nMaxLen);
+LONG DLLENTRY_DEF DTWAIN_GetActiveDSMPathW(LPWSTR lpszBuffer, LONG nMaxLen);
+LONG DLLENTRY_DEF DTWAIN_GetFileTypeNameA(LONG nType, LPSTR lpszName, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetFileTypeNameW(LONG nType, LPWSTR lpszName, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetFileTypeExtensionsA(LONG nType, LPSTR lpszName, LONG nLength);
+LONG DLLENTRY_DEF DTWAIN_GetFileTypeExtensionsW(LONG nType, LPWSTR lpszName, LONG nLength);
+
+
 LONG DLLENTRY_DEF DTWAIN_IsDIBBlankStringA(HANDLE hDib, LPCSTR threshold);
 LONG DLLENTRY_DEF DTWAIN_IsDIBBlankStringW(HANDLE hDib, LPCWSTR threshold);
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderExA(LPCSTR SearchOrder, LPCSTR szUserPath);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDSMSearchOrderExW(LPCWSTR SearchOrder, LPCWSTR szUserPath);
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathA(LPCSTR ResourcePath);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetResourcePathW(LPCWSTR ResourcePath);
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringA(DTWAIN_PDFTEXTELEMENT TextElement, LPCSTR szString, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementStringW(DTWAIN_PDFTEXTELEMENT TextElement, LPCWSTR szString, LONG Flags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetAllFloatStringA(DTWAIN_RANGE pArray, LPSTR dLow, LPSTR dUp, LPSTR dStep, LPSTR dDefault, LPSTR dCurrent);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetAllFloatStringW(DTWAIN_RANGE pArray, LPWSTR dLow, LPWSTR dUp, LPWSTR dStep, LPWSTR dDefault, LPWSTR dCurrent);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeSetAllFloatStringA(DTWAIN_RANGE pArray, LPCSTR dLow, LPCSTR dUp, LPCSTR dStep, LPCSTR dDefault, LPCSTR dCurrent);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeSetAllFloatStringW(DTWAIN_RANGE pArray, LPCWSTR dLow, LPCWSTR dUp, LPCWSTR dStep, LPCWSTR dDefault, LPCWSTR dCurrent);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeSetValueFloatStringW(DTWAIN_RANGE pArray, LONG nWhich, LPCWSTR dValue);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeSetValueFloatStringA(DTWAIN_RANGE pArray, LONG nWhich, LPCSTR dValue);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeNearestValueFloatStringW(DTWAIN_RANGE pArray, LPCWSTR dIn, LPWSTR dOut, LONG RoundType);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeNearestValueFloatStringA(DTWAIN_RANGE pArray, LPCSTR dIn, LPSTR dOut, LONG RoundType);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetValueFloatStringA(DTWAIN_RANGE pArray, LONG nWhich, LPSTR dValue);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetValueFloatStringW(DTWAIN_RANGE pArray, LONG nWhich, LPWSTR dValue);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetPosFloatStringA(DTWAIN_RANGE pArray, LPCSTR Val, LPLONG pPos);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetPosFloatStringW(DTWAIN_RANGE pArray, LPCWSTR Val, LPLONG pPos);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetExpValueFloatStringA(DTWAIN_RANGE pArray, LONG lPos, LPSTR pVal);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetExpValueFloatStringW(DTWAIN_RANGE pArray, LONG lPos, LPWSTR pVal);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameSetValueStringA(DTWAIN_FRAME Frame, LONG nWhich, LPCSTR Value);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameSetValueStringW(DTWAIN_FRAME Frame, LONG nWhich, LPCWSTR Value);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameSetAllStringA(DTWAIN_FRAME Frame, LPCSTR Left, LPCSTR Top, LPCSTR Right, LPCSTR Bottom);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameSetAllStringW(DTWAIN_FRAME Frame, LPCWSTR Left, LPCWSTR Top, LPCWSTR Right, LPCWSTR Bottom);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameGetValueStringA(DTWAIN_FRAME Frame, LONG nWhich, LPSTR Value);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameGetValueStringW(DTWAIN_FRAME Frame, LONG nWhich, LPWSTR Value);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameGetAllStringA(DTWAIN_FRAME Frame, LPSTR Left, LPSTR Top, LPSTR Right, LPSTR Bottom);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FrameGetAllStringW(DTWAIN_FRAME Frame, LPWSTR Left, LPWSTR Top, LPWSTR Right, LPWSTR Bottom);
+DTWAIN_FRAME DLLENTRY_DEF DTWAIN_FrameCreateStringA(LPCSTR Left, LPCSTR Top, LPCSTR Right, LPCSTR Bottom);
+DTWAIN_FRAME DLLENTRY_DEF DTWAIN_FrameCreateStringW(LPCWSTR Left, LPCWSTR Top, LPCWSTR Right, LPCWSTR Bottom);
 
-LONG DLLENTRY_DEF DTWAIN_TwainSaveA(LPCSTR cmd);
-LONG DLLENTRY_DEF DTWAIN_TwainSaveW(LPCWSTR cmd);
 
 #ifdef DTWAIN_ANSIDLL
     #define DTWAIN_CHARPTRTYPE LPSTR
@@ -273,44 +305,29 @@ LONG DLLENTRY_DEF DTWAIN_TwainSaveW(LPCWSTR cmd);
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //// These are the TCHAR versions (default to ANSI or Wide, depending on DTWAIN DLL type
 DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeEx(DTWAIN_CCHARPTRTYPE szINIPath);
-DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeEx2(DTWAIN_CCHARPTRTYPE szINIPath,
-                                                          DTWAIN_CCHARPTRTYPE szImageDLLPath,
-                                                          DTWAIN_CCHARPTRTYPE szLangResourcePath);
+DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeEx2(DTWAIN_CCHARPTRTYPE szINIPath,DTWAIN_CCHARPTRTYPE szImageDLLPath,DTWAIN_CCHARPTRTYPE szLangResourcePath);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionString(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetLibraryPath(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetShortVersionString(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
 LONG           DLLENTRY_DEF      DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
 LONG           DLLENTRY_DEF      DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetTwainStringName(LONG category, LONG TwainID, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetTwainIDFromName(DTWAIN_CCHARPTRTYPE lpszBuffer);
+LONG           DLLENTRY_DEF      DTWAIN_GetActiveDSMPath(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_StartTwainSession(HWND hWndMsg, DTWAIN_CCHARPTRTYPE lpszDLLName);
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetAppInfo(DTWAIN_CCHARPTRTYPE szVerStr, DTWAIN_CCHARPTRTYPE szManu,
-                                                    DTWAIN_CCHARPTRTYPE szProdFam, DTWAIN_CCHARPTRTYPE szProdName);
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu,
-                                                    DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
-DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle,
-                                                       LONG xPos, LONG yPos, LONG nOptions);
-DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2Ex(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle, LONG xPos, LONG yPos,
-                                                        DTWAIN_CCHARPTRTYPE szIncludeFilter,
-                                                        DTWAIN_CCHARPTRTYPE szExcludeFilter,
-                                                        DTWAIN_CCHARPTRTYPE szNameMapping,
-                                                        LONG nOptions);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetAppInfo(DTWAIN_CCHARPTRTYPE szVerStr, DTWAIN_CCHARPTRTYPE szManu,DTWAIN_CCHARPTRTYPE szProdFam, DTWAIN_CCHARPTRTYPE szProdName);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu,DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
+DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle,LONG xPos, LONG yPos, LONG nOptions);
+DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSource2Ex(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle, LONG xPos, LONG yPos,DTWAIN_CCHARPTRTYPE szIncludeFilter,DTWAIN_CCHARPTRTYPE szExcludeFilter,DTWAIN_CCHARPTRTYPE szNameMapping,LONG nOptions);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSourceByName(DTWAIN_CCHARPTRTYPE lpszName);
-LONG           DLLENTRY_DEF      DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source,
-                                                               DTWAIN_CHARPTRTYPE szProduct,
-                                                               LONG nMaxLen);
-LONG           DLLENTRY_DEF      DTWAIN_GetSourceProductFamily(DTWAIN_SOURCE Source,
-                                                                DTWAIN_CHARPTRTYPE szProduct,
-                                                                LONG nMaxLen);
-LONG           DLLENTRY_DEF      DTWAIN_GetSourceProductName(DTWAIN_SOURCE Source,
-                                                              DTWAIN_CHARPTRTYPE szProduct,
-                                                              LONG nMaxLen);
-LONG           DLLENTRY_DEF      DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source,
-                                                              DTWAIN_CHARPTRTYPE szProduct,
-                                                              LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source,DTWAIN_CHARPTRTYPE szProduct,LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetSourceProductFamily(DTWAIN_SOURCE Source,DTWAIN_CHARPTRTYPE szProduct,LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetSourceProductName(DTWAIN_SOURCE Source,DTWAIN_CHARPTRTYPE szProduct,LONG nMaxLen);
+LONG           DLLENTRY_DEF      DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source,DTWAIN_CHARPTRTYPE szProduct,LONG nMaxLen);
 LONG           DLLENTRY_DEF      DTWAIN_GetNameFromCap(LONG nCapValue, DTWAIN_CHARPTRTYPE szValue, LONG nMaxLen );
 LONG           DLLENTRY_DEF      DTWAIN_GetCapFromName( DTWAIN_CCHARPTRTYPE szName );
 BOOL           DLLENTRY_DEF      DTWAIN_GetTwainCountryName(LONG countryId, DTWAIN_CHARPTRTYPE szName);
-
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromStrings(DTWAIN_CCHARPTRTYPE* pCArray, LONG nSize);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayAddString(DTWAIN_ARRAY pArray, DTWAIN_CCHARPTRTYPE Val );
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayAddStringN( DTWAIN_ARRAY pArray, DTWAIN_CCHARPTRTYPE Val, LONG num );
@@ -319,7 +336,6 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayGetAtString(DTWAIN_ARRAY pArray, LO
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAtString(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_CCHARPTRTYPE pVal);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAtStringN(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_CCHARPTRTYPE Val, LONG num);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArraySetAtString(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_CCHARPTRTYPE pStr);
-
 /* Specialized ANSI/Wide array functions (these are not the same as the W/A versions of the array functions */
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayAddWideString(DTWAIN_ARRAY pArray, LPCWSTR Val );
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayAddANSIString(DTWAIN_ARRAY pArray, LPCSTR Val );
@@ -335,41 +351,23 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAtWideStringN(DTWAIN_ARRAY pA
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayInsertAtANSIStringN(DTWAIN_ARRAY pArray, LONG nWhere, LPCSTR Val, LONG num);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArraySetAtWideString(DTWAIN_ARRAY pArray, LONG nWhere, LPCWSTR pStr);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArraySetAtANSIString(DTWAIN_ARRAY pArray, LONG nWhere, LPCSTR pStr);
-
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireFile(DTWAIN_SOURCE Source,
-                                                     DTWAIN_CCHARPTRTYPE   lpszFile,
-                                                     LONG     lFileType,
-                                                     LONG     lFileFlags,
-                                                     LONG     PixelType,
-                                                     LONG     lMaxPages,
-                                                     DTWAIN_BOOL bShowUI,
-                                                     DTWAIN_BOOL bCloseSource,
-                                                     LPLONG pStatus);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireFile(DTWAIN_SOURCE Source,DTWAIN_CCHARPTRTYPE lpszFile,LONG lFileType,LONG     lFileFlags,LONG     PixelType,LONG     lMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
 LONG           DLLENTRY_DEF      DTWAIN_GetCurrentFileName( DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szName, LONG MaxLen );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSourceValues(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE capName, LPDTWAIN_ARRAY values, DTWAIN_BOOL bExpandIfRange);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Suffix);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Suffix, LONG nMaxLen);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTwainLog(LONG LogFlags, DTWAIN_CCHARPTRTYPE lpszLogFile);
 DTWAIN_HANDLE DLLENTRY_DEF  DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath);
-DTWAIN_HANDLE DLLENTRY_DEF  DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath,
-                                                        DTWAIN_CCHARPTRTYPE szImageDLLPath,
-                                                        DTWAIN_CCHARPTRTYPE szLangResourcePath);
+DTWAIN_HANDLE DLLENTRY_DEF  DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath,DTWAIN_CCHARPTRTYPE szImageDLLPath,DTWAIN_CCHARPTRTYPE szLangResourcePath);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFAuthor(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpAuthor);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFProducer(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpProducer);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFCreator(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpCreator);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTitle(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpTitle);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFSubject(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpSubject);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFKeywords(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpKeyWords);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source, DTWAIN_BOOL bUseEncryption,
-                                                  DTWAIN_CCHARPTRTYPE lpszUser, DTWAIN_CCHARPTRTYPE lpszOwner,
-                                                  LONG Permissions, DTWAIN_BOOL UseStrongEncryption);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source, DTWAIN_BOOL bUseEncryption,DTWAIN_CCHARPTRTYPE lpszUser, DTWAIN_CCHARPTRTYPE lpszOwner,LONG Permissions, DTWAIN_BOOL UseStrongEncryption);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPostScriptTitle(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szTitle);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddPDFText(DTWAIN_SOURCE Source,
-                                            DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos,
-                                            DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB,
-                                            LONG renderMode, DTWAIN_FLOAT scaling,
-                                            DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing,
-                                            LONG strokeWidth, LONG Flags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddPDFText(DTWAIN_SOURCE Source,DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos,DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB,LONG renderMode, DTWAIN_FLOAT scaling,DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing,LONG strokeWidth, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, DTWAIN_CHARPTRTYPE szData, LONG maxLen, LONG Flags);
 LONG        DLLENTRY_DEF DTWAIN_GetPDFType1FontName(LONG FontVal, DTWAIN_CHARPTRTYPE szFont, LONG nChars);
 LONG DLLENTRY_DEF DTWAIN_GetExtCapFromName(DTWAIN_CCHARPTRTYPE szName);
@@ -391,29 +389,13 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetTimeDate( DTWAIN_SOURCE Source, DTWAIN_CHARPT
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_InitImageFileAppend(DTWAIN_CCHARPTRTYPE szFile, LONG fType);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddFileToAppend(DTWAIN_CCHARPTRTYPE szFile);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_LogMessage(DTWAIN_CCHARPTRTYPE message);
-LONG        DLLENTRY_DEF DTWAIN_TwainSave(DTWAIN_CCHARPTRTYPE cmd);
-LONG   DLLENTRY_DEF DTWAIN_GetOCRVersionInfo(DTWAIN_OCRENGINE Engine, DTWAIN_CHARPTRTYPE buffer,
-                                              LONG maxBufSize);
-LONG   DLLENTRY_DEF DTWAIN_GetOCRProductName(DTWAIN_OCRENGINE Engine,
-                                              DTWAIN_CHARPTRTYPE szProductName,
-                                              LONG nMaxLen);
-LONG   DLLENTRY_DEF DTWAIN_GetOCRProductFamily(DTWAIN_OCRENGINE Engine,
-                                                DTWAIN_CHARPTRTYPE szProductFamily,
-                                                LONG nMaxLen);
-LONG   DLLENTRY_DEF DTWAIN_GetOCRManufacturer(DTWAIN_OCRENGINE Engine,
-                                               DTWAIN_CHARPTRTYPE szManufacturer,
-                                               LONG nMaxLen);
+LONG   DLLENTRY_DEF DTWAIN_GetOCRVersionInfo(DTWAIN_OCRENGINE Engine, DTWAIN_CHARPTRTYPE buffer,LONG maxBufSize);
+LONG   DLLENTRY_DEF DTWAIN_GetOCRProductName(DTWAIN_OCRENGINE Engine,DTWAIN_CHARPTRTYPE szProductName,LONG nMaxLen);
+LONG   DLLENTRY_DEF DTWAIN_GetOCRProductFamily(DTWAIN_OCRENGINE Engine,DTWAIN_CHARPTRTYPE szProductFamily,LONG nMaxLen);
+LONG   DLLENTRY_DEF DTWAIN_GetOCRManufacturer(DTWAIN_OCRENGINE Engine,DTWAIN_CHARPTRTYPE szManufacturer,LONG nMaxLen);
 DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngineByName(DTWAIN_CCHARPTRTYPE lpszName);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ExecuteOCR(DTWAIN_OCRENGINE Engine,
-                                            DTWAIN_CCHARPTRTYPE szFileName,
-                                            LONG nStartPage,
-                                            LONG nEndPage);
-HANDLE DLLENTRY_DEF DTWAIN_GetOCRText(DTWAIN_OCRENGINE Engine,
-                                       LONG nPageNo,
-                                       DTWAIN_CHARPTRTYPE Data,
-                                       LONG dSize,
-                                       LPLONG pActualSize,
-                                       LONG nFlags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ExecuteOCR(DTWAIN_OCRENGINE Engine,DTWAIN_CCHARPTRTYPE szFileName,LONG nStartPage,LONG nEndPage);
+HANDLE DLLENTRY_DEF DTWAIN_GetOCRText(DTWAIN_OCRENGINE Engine,LONG nPageNo,DTWAIN_CHARPTRTYPE Data,LONG dSize,LPLONG pActualSize,LONG nFlags);
 LONG        DLLENTRY_DEF DTWAIN_GetDSMFullName(LONG DSMType, LPTSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE left, DTWAIN_CHARPTRTYPE top, DTWAIN_CHARPTRTYPE right, DTWAIN_CHARPTRTYPE bottom, LPLONG Unit);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Brightness);
@@ -428,6 +410,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetRotationString(DTWAIN_SOURCE Source, DTWAIN_C
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE left, DTWAIN_CCHARPTRTYPE top, DTWAIN_CCHARPTRTYPE right, DTWAIN_CCHARPTRTYPE bottom, LONG lUnit, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAcquireImageScaleString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE xscale, DTWAIN_CCHARPTRTYPE yscale);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE threshold, LONG autodetect_option, DTWAIN_BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionExString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE threshold, LONG autodetect_option, LONG detectOpts, DTWAIN_BOOL bSet);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Brightness);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetContrastString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Contrast);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Highlight);
@@ -461,10 +444,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDoubleFeedDetectLengthString(DTWAIN_SOURCE So
 LONG        DLLENTRY_DEF DTWAIN_GetTwainCountryValue(DTWAIN_CCHARPTRTYPE country);
 BOOL        DLLENTRY_DEF DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
 LONG        DLLENTRY_DEF DTWAIN_GetTwainLanguageValue(DTWAIN_CCHARPTRTYPE szName);
-
 DTWAIN_BOOL DLLENTRY_DEF  DTWAIN_AcquireAudioFile(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE lpszFile, LONG lFileFlags, LONG lMaxClips, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource,LPLONG pStatus);
 LONG        DLLENTRY_DEF DTWAIN_GetOCRErrorString(DTWAIN_OCRENGINE Engine, LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, DTWAIN_CCHARPTRTYPE val1, LONG Flags);
+LONG        DLLENTRY_DEF DTWAIN_GetFileTypeName(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
+LONG        DLLENTRY_DEF DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
 
-void DLLENTRY_DEF DTWAIN_X(DTWAIN_CCHARPTRTYPE s);
 #endif

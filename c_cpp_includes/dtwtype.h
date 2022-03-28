@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2021 Dynarithmic Software.
+    Copyright (c) 2002-2022 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -48,9 +48,9 @@ typedef void*       DTWAIN_MEMORY_PTR;
 typedef char        DTWAIN_LONGSTRING[1026];
     typedef unsigned short DTWAIN_UNICODESTRING[512];
 
-typedef DTWAIN_ARRAY FAR* LPDTWAIN_ARRAY;
+typedef DTWAIN_ARRAY * LPDTWAIN_ARRAY;
 typedef LONG        DTWAIN_BOOL;
-typedef DTWAIN_FLOAT FAR * LPDTWAIN_FLOAT;
+typedef DTWAIN_FLOAT * LPDTWAIN_FLOAT;
 typedef void *   TWAIN_IDENTITY;
 typedef TWAIN_IDENTITY DTWAIN_IDENTITY;
 typedef DTWAIN_SOURCE           DTWAIN_OCRENGINE;
