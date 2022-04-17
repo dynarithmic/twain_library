@@ -1,5 +1,11 @@
 DTWAIN Version changes
 
+5.2.0.10		  
+
+- Fixed issue when acquiring a file using memory/buffered transfer, where an invalid bitmap was sent to the
+  application to query if the bitmap should be discarded.
+
+
 5.2.0.9		  
 
 - Added DTWAIN_SysInitializeNoBlocking() --
