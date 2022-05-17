@@ -30,6 +30,7 @@
 
 * Please note -- since DTWAIN prior to version 5.0 used source code in some modules that could not be released to the general public due to licensing issues, we had to revamp these portions of the codebase so as to allow DTWAIN to become an open source library.  We have made all strives to make sure that these changes to DTWAIN will not cause issues, but as most of you know, bugs can exist.  If bugs are found, we will be addressing them in a short manner.
 
+
 ----------
 
 ### How do I get set up using DTWAIN? ###
@@ -452,6 +453,18 @@ If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary,
 
 * All other raw image processing (plus the TWAIN acquisition) is done without third-party libraries.  The image formats that are not implemented using third-party libraries are PDF, Windows Meta File (WMF) and Enhanced Meta File (EMF).  
 
+
+----------
+
+### Final note for developers
+
+We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came acrosss a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
+
+Given this, the secondary goal of making DTWAIN open source is for you to contribute your fixes to the current DTWAIN code if you come across a device that doesn't work properly with DTWAIN.  There are literally thousands of TWAIN enabled devices out there, old and new, some manufacturers may have discontinued the device model, or maybe even the device manufacturer has gone out-of-business.  
+
+Thus, the nature of "fixing" DTWAIN to work with a device that has issues is not possible to be done from a distance without having the device on-hand.  Since there are thousands of devices out there, and more than just a few have TWAIN compliance issues, we rely on our contributors who have the faulty TWAIN device ready and on-hand to debug the issue.  
+
+You can download the source code [here](https://github.com/dynarithmic/twain_library_source/tree/main), follow the directions, and thus debug a very simple program that utilizes the device you have in-house.  Note that you should be familiar with C++, as the base library is written in this language.
 
 
 ----------
