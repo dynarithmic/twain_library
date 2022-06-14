@@ -97,7 +97,7 @@ After building your application, for your application to run successfully, you m
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-In addition to the DLL files, the text resource files must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
+In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text resource files</a> must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
 The  text resources files are as follows:
 
