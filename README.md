@@ -46,17 +46,17 @@ For 32-bit applications, use the binaries found in **release_libraries.zip** in 
 
 The checksum for release_libraries.zip is as follows:
 
-MD5:    **5ce6e6ba3ff759c58ae605e0c459f72e**  
-SHA1:   **fb26741011ed08ac435c583394ac12778ed88c14**  
-SHA256: **be1e8c949d2317fe5551fc2333344d2f37a86a2bae14fdff6554469d3f04a5d7**
+MD5:    **ce52b4e0fb65e988cff725b4b75d460c**  
+SHA1:   **4914361257245be62ec103613eb06ca4980dbbb5**  
+SHA256: **c31ab272eb9ec20d8cc0616db20e69c5ce57e64cfd5caa71d3b89c4f7d3b4bbd**
 
 ----
 
 For 64-bit applications, use the binaries found in **release_libraries.zip** in [this directory](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit).
 
-MD5:    **7925885187c807ade76fb08e9b9b5e9e**  
-SHA1:   **268eb3176f3c3d738656c0c7e5a7f58b8020b9ac**  
-SHA256: **c87ad34f6bb3437b5a6af46d39adacc2686959efd5b42d3d77ecee8a101e59f4**
+MD5:    **91928715228a2a2ff7d3c7012e551f2d**  
+SHA1:   **d166f07aeca040727ef579204427b3f1e1aa85fb**  
+SHA256: **e5ad0d5ba509ea39e9b34844353dc4a4e40bee1793552937d7490287712bc058**
 
 ----
 The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  Similarly, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available. 
