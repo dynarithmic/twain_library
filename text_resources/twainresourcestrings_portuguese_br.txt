@@ -64,6 +64,10 @@
 1049 A versão demo do DTWAIN não suporta este tipo de arquivo
 1050 Selecção cancelada
 1051 DTWAIN Resources not found
+1052 A string não corresponde ao tipo de array
+1053 DTWAIN ARRAY not the same type
+1054 Source not installed
+1055 Source does not support memory file transfers
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida
@@ -178,6 +182,8 @@
 2088 Espaço de cores inválido. Apenas os espaços de cores RGB, Escala de cinza e Preto / Branco são suportados
 2089 PDF não suportado.
 2090 DTWTS.DLL ausente ou corrompido. TwainSave não disponível
+2500 Não foi possível abrir o dispositivo TWAIN
+2501 Não foi possível fechar o dispositivo TWAIN
 2100 Página OCR inválida especificada
 3000 Selecionar fonte
 3001 &Select
@@ -250,3 +256,9 @@
 9611 TWRC_SCANNERLOCKED
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Ocorreu um erro de exceção durante a chamada para o Twain DSM. Possível sessão Twain corrompida
+10000 [Mensagem do usuário]
+10001 Error in closing Twain DSM
+10002 Error in closing Twain Session
+10003 Error in closing DTWAIN Manager
+10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
+10005 Could not remove subclass from user window

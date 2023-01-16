@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is [**5.2.0.10** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version is [**5.3.0.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -14,7 +14,8 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems.  
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  
+
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
 
@@ -24,6 +25,15 @@
 
 ----------
 
+### Preliminaries
+
+DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
+
+Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
+
+However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
+
+----------
 ### Is DTWAIN 5.x really Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
@@ -46,17 +56,17 @@ For 32-bit applications, use the binaries found in **release_libraries.zip** in 
 
 The checksum for release_libraries.zip is as follows:
 
-MD5:    **ce52b4e0fb65e988cff725b4b75d460c**  
-SHA1:   **4914361257245be62ec103613eb06ca4980dbbb5**  
-SHA256: **c31ab272eb9ec20d8cc0616db20e69c5ce57e64cfd5caa71d3b89c4f7d3b4bbd**
+MD5:    **ab124e7af2c9654d9370f58474a7d56c**  
+SHA1:   **b3f24364ec20f4d48ecf390410a8e9b52f4fa137**  
+SHA256: **5092331bf9b7b06203b5b14423cf085747bb873b73aadc7e5339034445a134b7**
 
 ----
 
 For 64-bit applications, use the binaries found in **release_libraries.zip** in [this directory](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit).
 
-MD5:    **91928715228a2a2ff7d3c7012e551f2d**  
-SHA1:   **d166f07aeca040727ef579204427b3f1e1aa85fb**  
-SHA256: **e5ad0d5ba509ea39e9b34844353dc4a4e40bee1793552937d7490287712bc058**
+MD5:    **d60d3cee71db6e9ba77b03c33f616a7e**  
+SHA1:   **3e74ef0dd4a77693c1a17b3c150a8479e4c3fff7**  
+SHA256: **df37e57f474d6e4a8fbeef270ed56e2410dfdc571a382bdc6cf35605b1080618**
 
 ----
 The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  Similarly, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available. 
@@ -267,12 +277,9 @@ DTWAIN includes computer language bindings for the following computer languages 
       C# 
       Delphi
       Java (using the Java Native Interface JNI)
-      Macro Scheduler
       Perl
       Python 
-      Visual Basic 6.0 (old, but we support it)
       Visual Basic .NET 
-      WinBatch
       XBase++ (Alaska Software)
   
 For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
@@ -435,7 +442,7 @@ We have language bindings (pinvoke's) for C# and Visual Basic.  However we curre
 ----------
 ### Is there a C++ class wrapper for DTWAIN? ###
 
-If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN, however it is rather crude for todays C++ standards, even though it does make DTWAIN simpler to use.  Thus we are in the process of creating a "better" C++ wrapper using templates, less "fat" classes, RAII techniques, etc.
+If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/cpp_wrapper" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
 
 ----------
 
