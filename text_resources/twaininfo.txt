@@ -611,6 +611,27 @@
 4173	CAP_PRINTERINDEXTRIGGER	4	8	8
 4174	CAP_PRINTERSTRINGPREVIEW	12	8	0
 4175    CAP_SHEETCOUNT  5   96  96 
+4176    CAP_IMAGEADDRESSENABLED 6	32	32
+4177	CAP_IAFIELDA_LEVEL 	4	48	48
+4178	CAP_IAFIELDB_LEVEL 	4	48	48
+4179	CAP_IAFIELDC_LEVEL 	4	48	48
+4180	CAP_IAFIELDD_LEVEL 	4	48	48
+4181	CAP_IAFIELDE_LEVEL 	4	48	48
+4182	CAP_IAFIELDA_PRINTFORMAT 9 	32	32
+4183	CAP_IAFIELDB_PRINTFORMAT 9 	32	32
+4184	CAP_IAFIELDC_PRINTFORMAT 9 	32	32
+4185	CAP_IAFIELDD_PRINTFORMAT 9 	32	32
+4186	CAP_IAFIELDE_PRINTFORMAT 9 	32	32
+4187	CAP_IAFIELDA_VALUE 	4	32	32
+4188	CAP_IAFIELDB_VALUE 	4	32	32
+4189	CAP_IAFIELDC_VALUE 	4	32	32
+4190	CAP_IAFIELDD_VALUE 	4	32	32
+4191	CAP_IAFIELDE_VALUE  	4	32	32
+4192    CAP_IAFIELDA_LASTPAGE   4	48	0 
+4193    CAP_IAFIELDB_LASTPAGE   4	48	0 
+4194    CAP_IAFIELDC_LASTPAGE   4	48	0 
+4195    CAP_IAFIELDD_LASTPAGE   4	48	0 
+4196    CAP_IAFIELDE_LASTPAGE   4	48	0 
 4352	ICAP_AUTOBRIGHT	6	32	32
 4353	ICAP_BRIGHTNESS	7	112	112
 4355	ICAP_CONTRAST	7	112	112
@@ -772,6 +793,14 @@
 5681	TWEI_PAPERCOUNT	5	0	0
 5682	TWEI_PRINTERTEXT	12	0	0
 5683	TWEI_TWAINDIRECTMETADATA	15	0	0
+5684	TWEI_IAFIELDA_VALUE 9 0 0
+5685	TWEI_IAFIELDB_VALUE 9 0 0
+5686	TWEI_IAFIELDC_VALUE 9 0 0
+5687	TWEI_IAFIELDD_VALUE 9 0 0
+5688	TWEI_IAFIELDE_VALUE 9 0 0
+5689    TWEI_IALEVEL 4 0 0
+5690    TWEI_PRINTER 4 0 0
+5691    TWEI_BARCODETEXT2 15 0 0
 32768	CAP_CUSTOMBASE	5	0	0
 -1000 END 0 0 0
 100  1 4 8 16 24 32
@@ -799,6 +828,7 @@
 8000  1  4  8  16  24  32 
 8500  1
 -1 0
+0 NONE		[0 0 0 0]	
 1 A4            [0 0 595.28 841.89]
 2 JISB5         [0 0 518.4 727.2]
 3 USLETTER      [0 0 612.00 792.00]
@@ -851,13 +881,14 @@
 51 C10          [0 0 79.37 113.39]
 52 USSTATEMENT  [0 0 396.00 792.00]
 53 BUSINESSCARD [0 0 144.00 290.00]
+54 MAXSIZE      [0 0 0 0]
 -1 0
 100   Windows-BMP-Single  bmp                             
 200   JPEG-Single         jpg jpeg                     
 250   Adobe-PDF-Single    pdf                             
 251   Adobe-PDF-Multi     pdf
 300   PCX-Single 	      pcx	
-301   DCX/PCX-Multi       dcx	
+301   DCX-PCX-Multi       dcx	
 400   TARGA-Single 	      tga
 500   TIFF-LZW-Single     tif tiff	
 600   TIFF-Uncompressed-Single tif tiff	
@@ -892,3 +923,623 @@
 8500  WBMP-Wireless-Bitmap-Single wbmp
 8501  WEBP-Google-Format-Single webp
 10000 PPM-Portable-Bitmap-Single ppm 
+-1
+0 TWPT_BW                
+1 TWPT_GRAY              
+2 TWPT_RGB               
+3 TWPT_PALETTE           
+4 TWPT_CMY               
+5 TWPT_CMYK              
+6 TWPT_YUV               
+7 TWPT_YUVK              
+8 TWPT_CIEXYZ            
+9 TWPT_LAB               
+10 TWPT_SRGB              
+11 TWPT_SCRGB             
+16 TWPT_INFRARED          
+-9999
+0 TWUN_INCHES              
+1 TWUN_CENTIMETERS         
+2 TWUN_PICAS               
+3 TWUN_POINTS              
+4 TWUN_TWIPS               
+5 TWUN_PIXELS              
+6 TWUN_MILLIMETERS         
+-9999
+1001 TWCY_AFGHANISTAN   
+ 213 TWCY_ALGERIA       
+ 684 TWCY_AMERICANSAMOA 
+  33 TWCY_ANDORRA       
+1002 TWCY_ANGOLA        
+8090 TWCY_ANGUILLA      
+8091 TWCY_ANTIGUA       
+  54 TWCY_ARGENTINA     
+ 297 TWCY_ARUBA         
+ 247 TWCY_ASCENSIONI    
+  61 TWCY_AUSTRALIA     
+  43 TWCY_AUSTRIA       
+8092 TWCY_BAHAMAS       
+ 973 TWCY_BAHRAIN       
+ 880 TWCY_BANGLADESH    
+8093 TWCY_BARBADOS      
+  32 TWCY_BELGIUM       
+ 501 TWCY_BELIZE        
+ 229 TWCY_BENIN         
+8094 TWCY_BERMUDA       
+1003 TWCY_BHUTAN        
+ 591 TWCY_BOLIVIA       
+ 267 TWCY_BOTSWANA      
+   6 TWCY_BRITAIN       
+8095 TWCY_BRITVIRGINIS  
+  55 TWCY_BRAZIL        
+ 673 TWCY_BRUNEI        
+ 359 TWCY_BULGARIA      
+1004 TWCY_BURKINAFASO   
+1005 TWCY_BURMA         
+1006 TWCY_BURUNDI       
+ 237 TWCY_CAMAROON      
+   2 TWCY_CANADA        
+ 238 TWCY_CAPEVERDEIS   
+8096 TWCY_CAYMANIS      
+1007 TWCY_CENTRALAFREP  
+1008 TWCY_CHAD          
+  56 TWCY_CHILE         
+  86 TWCY_CHINA         
+1009 TWCY_CHRISTMASIS   
+1009 TWCY_COCOSIS       
+  57 TWCY_COLOMBIA      
+1010 TWCY_COMOROS       
+1011 TWCY_CONGO         
+1012 TWCY_COOKIS        
+ 506 TWCY_COSTARICA     
+   5 TWCY_CUBA          
+ 357 TWCY_CYPRUS        
+  42 TWCY_CZECHOSLOVAKIA
+  45 TWCY_DENMARK       
+1013 TWCY_DJIBOUTI      
+8097 TWCY_DOMINICA      
+8098 TWCY_DOMINCANREP   
+1014 TWCY_EASTERIS      
+ 593 TWCY_ECUADOR       
+  20 TWCY_EGYPT         
+ 503 TWCY_ELSALVADOR    
+1015 TWCY_EQGUINEA      
+ 251 TWCY_ETHIOPIA      
+1016 TWCY_FALKLANDIS    
+ 298 TWCY_FAEROEIS      
+ 679 TWCY_FIJIISLANDS   
+ 358 TWCY_FINLAND       
+  33 TWCY_FRANCE        
+ 596 TWCY_FRANTILLES    
+ 594 TWCY_FRGUIANA      
+ 689 TWCY_FRPOLYNEISA   
+1043 TWCY_FUTANAIS      
+ 241 TWCY_GABON         
+ 220 TWCY_GAMBIA        
+  49 TWCY_GERMANY       
+ 233 TWCY_GHANA         
+ 350 TWCY_GIBRALTER     
+  30 TWCY_GREECE        
+ 299 TWCY_GREENLAND     
+8099 TWCY_GRENADA       
+8015 TWCY_GRENEDINES    
+ 590 TWCY_GUADELOUPE    
+ 671 TWCY_GUAM          
+5399 TWCY_GUANTANAMOBAY 
+ 502 TWCY_GUATEMALA     
+ 224 TWCY_GUINEA        
+1017 TWCY_GUINEABISSAU  
+ 592 TWCY_GUYANA        
+ 509 TWCY_HAITI         
+ 504 TWCY_HONDURAS      
+ 852 TWCY_HONGKONG      
+  36 TWCY_HUNGARY       
+ 354 TWCY_ICELAND       
+  91 TWCY_INDIA         
+  62 TWCY_INDONESIA     
+  98 TWCY_IRAN          
+ 964 TWCY_IRAQ          
+ 353 TWCY_IRELAND       
+ 972 TWCY_ISRAEL        
+  39 TWCY_ITALY         
+ 225 TWCY_IVORYCOAST    
+8010 TWCY_JAMAICA       
+  81 TWCY_JAPAN         
+ 962 TWCY_JORDAN        
+ 254 TWCY_KENYA         
+1018 TWCY_KIRIBATI      
+  82 TWCY_KOREA         
+ 965 TWCY_KUWAIT        
+1019 TWCY_LAOS          
+1020 TWCY_LEBANON       
+ 231 TWCY_LIBERIA       
+ 218 TWCY_LIBYA         
+  41 TWCY_LIECHTENSTEIN 
+ 352 TWCY_LUXENBOURG    
+ 853 TWCY_MACAO         
+1021 TWCY_MADAGASCAR    
+ 265 TWCY_MALAWI        
+  60 TWCY_MALAYSIA      
+ 960 TWCY_MALDIVES      
+1022 TWCY_MALI          
+ 356 TWCY_MALTA         
+ 692 TWCY_MARSHALLIS    
+1023 TWCY_MAURITANIA    
+ 230 TWCY_MAURITIUS     
+   3 TWCY_MEXICO        
+ 691 TWCY_MICRONESIA    
+ 508 TWCY_MIQUELON      
+  33 TWCY_MONACO        
+1024 TWCY_MONGOLIA      
+8011 TWCY_MONTSERRAT    
+ 212 TWCY_MOROCCO       
+1025 TWCY_MOZAMBIQUE    
+ 264 TWCY_NAMIBIA       
+1026 TWCY_NAURU         
+ 977 TWCY_NEPAL         
+  31 TWCY_NETHERLANDS   
+ 599 TWCY_NETHANTILLES  
+8012 TWCY_NEVIS         
+ 687 TWCY_NEWCALEDONIA  
+  64 TWCY_NEWZEALAND    
+ 505 TWCY_NICARAGUA     
+ 227 TWCY_NIGER         
+ 234 TWCY_NIGERIA       
+1027 TWCY_NIUE          
+1028 TWCY_NORFOLKI      
+  47 TWCY_NORWAY        
+ 968 TWCY_OMAN          
+  92 TWCY_PAKISTAN      
+1029 TWCY_PALAU         
+ 507 TWCY_PANAMA        
+ 595 TWCY_PARAGUAY      
+  51 TWCY_PERU          
+  63 TWCY_PHILLIPPINES  
+1030 TWCY_PITCAIRNIS    
+ 675 TWCY_PNEWGUINEA    
+  48 TWCY_POLAND        
+ 351 TWCY_PORTUGAL      
+ 974 TWCY_QATAR         
+1031 TWCY_REUNIONI      
+  40 TWCY_ROMANIA       
+ 250 TWCY_RWANDA        
+ 670 TWCY_SAIPAN        
+  39 TWCY_SANMARINO     
+1033 TWCY_SAOTOME       
+ 966 TWCY_SAUDIARABIA   
+ 221 TWCY_SENEGAL       
+1034 TWCY_SEYCHELLESIS  
+1035 TWCY_SIERRALEONE   
+  65 TWCY_SINGAPORE     
+1036 TWCY_SOLOMONIS     
+1037 TWCY_SOMALI        
+  27 TWCY_SOUTHAFRICA   
+  34 TWCY_SPAIN         
+  94 TWCY_SRILANKA      
+1032 TWCY_STHELENA      
+8013 TWCY_STKITTS       
+8014 TWCY_STLUCIA       
+ 508 TWCY_STPIERRE      
+8015 TWCY_STVINCENT     
+1038 TWCY_SUDAN         
+ 597 TWCY_SURINAME      
+ 268 TWCY_SWAZILAND     
+  46 TWCY_SWEDEN        
+  41 TWCY_SWITZERLAND   
+1039 TWCY_SYRIA         
+ 886 TWCY_TAIWAN        
+ 255 TWCY_TANZANIA      
+  66 TWCY_THAILAND      
+8016 TWCY_TOBAGO        
+ 228 TWCY_TOGO          
+ 676 TWCY_TONGAIS       
+8016 TWCY_TRINIDAD      
+ 216 TWCY_TUNISIA       
+  90 TWCY_TURKEY        
+8017 TWCY_TURKSCAICOS   
+1040 TWCY_TUVALU        
+ 256 TWCY_UGANDA        
+   7 TWCY_USSR          
+ 971 TWCY_UAEMIRATES    
+  44 TWCY_UNITEDKINGDOM 
+   1 TWCY_USA           
+ 598 TWCY_URUGUAY       
+1041 TWCY_VANUATU       
+  39 TWCY_VATICANCITY   
+  58 TWCY_VENEZUELA     
+1042 TWCY_WAKE          
+1043 TWCY_WALLISIS      
+1044 TWCY_WESTERNSAHARA 
+1045 TWCY_WESTERNSAMOA  
+1046 TWCY_YEMEN         
+  38 TWCY_YUGOSLAVIA    
+ 243 TWCY_ZAIRE         
+ 260 TWCY_ZAMBIA        
+ 263 TWCY_ZIMBABWE      
+ 355 TWCY_ALBANIA       
+ 374 TWCY_ARMENIA       
+ 994 TWCY_AZERBAIJAN    
+ 375 TWCY_BELARUS       
+ 387 TWCY_BOSNIAHERZGO  
+ 855 TWCY_CAMBODIA      
+ 385 TWCY_CROATIA       
+ 420 TWCY_CZECHREPUBLIC 
+ 246 TWCY_DIEGOGARCIA   
+ 291 TWCY_ERITREA       
+ 372 TWCY_ESTONIA       
+ 995 TWCY_GEORGIA       
+ 371 TWCY_LATVIA        
+ 266 TWCY_LESOTHO       
+ 370 TWCY_LITHUANIA     
+ 389 TWCY_MACEDONIA     
+ 269 TWCY_MAYOTTEIS     
+ 373 TWCY_MOLDOVA       
+  95 TWCY_MYANMAR       
+ 850 TWCY_NORTHKOREA    
+ 787 TWCY_PUERTORICO    
+   7 TWCY_RUSSIA        
+ 381 TWCY_SERBIA        
+ 421 TWCY_SLOVAKIA      
+ 386 TWCY_SLOVENIA      
+  82 TWCY_SOUTHKOREA    
+ 380 TWCY_UKRAINE       
+ 340 TWCY_USVIRGINIS    
+  84 TWCY_VIETNAM       
+-9999     
+0 TWAL_ALARM               
+1 TWAL_FEEDERERROR         
+2 TWAL_FEEDERWARNING       
+3 TWAL_BARCODE             
+4 TWAL_DOUBLEFEED          
+5 TWAL_JAM                 
+6 TWAL_PATCHCODE           
+7 TWAL_POWER               
+8 TWAL_SKEW                
+-9999
+0 TWAS_NONE                
+1 TWAS_AUTO                
+2 TWAS_CURRENT             
+-9999
+0 TWBCOR_ROT0              
+1 TWBCOR_ROT90             
+2 TWBCOR_ROT180            
+3 TWBCOR_ROT270            
+4 TWBCOR_ROTX              
+-9999
+0 TWBD_HORZ                
+1 TWBD_VERT                
+2 TWBD_HORZVERT            
+3 TWBD_VERTHORZ            
+-9999
+0 TWBO_LSBFIRST            
+1 TWBO_MSBFIRST            
+-9999
+-2 TWBP_DISABLE            
+-1 TWBP_AUTO               
+-9999
+0 TWBR_THRESHOLD           
+1 TWBR_HALFTONE            
+2 TWBR_CUSTHALFTONE        
+3 TWBR_DIFFUSION           
+4 TWBR_DYNAMICTHRESHOLD    
+-9999
+0 TWBT_3OF9                 
+1 TWBT_2OF5INTERLEAVED      
+2 TWBT_2OF5NONINTERLEAVED   
+3 TWBT_CODE93               
+4 TWBT_CODE128              
+5 TWBT_UCC128               
+6 TWBT_CODABAR              
+7 TWBT_UPCA                 
+8 TWBT_UPCE                 
+9 TWBT_EAN8                 
+10 TWBT_EAN13                
+11 TWBT_POSTNET              
+12 TWBT_PDF417               
+13 TWBT_2OF5INDUSTRIAL       
+14 TWBT_2OF5MATRIX           
+15 TWBT_2OF5DATALOGIC        
+16 TWBT_2OF5IATA             
+17 TWBT_3OF9FULLASCII        
+18 TWBT_CODABARWITHSTARTSTOP 
+19 TWBT_MAXICODE             
+20 TWBT_QRCODE               
+-9999
+ 0 TWCP_NONE               
+ 1 TWCP_PACKBITS           
+ 2 TWCP_GROUP31D           
+ 3 TWCP_GROUP31DEOL        
+ 4 TWCP_GROUP32D           
+ 5 TWCP_GROUP4             
+ 6 TWCP_JPEG               
+ 7 TWCP_LZW                
+ 8 TWCP_JBIG               
+ 9 TWCP_PNG                
+10 TWCP_RLE4               
+11 TWCP_RLE8               
+12 TWCP_BITFIELDS          
+13 TWCP_ZIP                
+14 TWCP_JPEG2000           
+-9999
+0 TWCS_BOTH                
+1 TWCS_TOP                 
+2 TWCS_BOTTOM              
+-9999
+32768  TWDE_CUSTOMEVENTS           
+0      TWDE_CHECKAUTOMATICCAPTURE  
+1      TWDE_CHECKBATTERY           
+2      TWDE_CHECKDEVICEONLINE      
+3      TWDE_CHECKFLASH             
+4      TWDE_CHECKPOWERSUPPLY       
+5      TWDE_CHECKRESOLUTION        
+6      TWDE_DEVICEADDED            
+7      TWDE_DEVICEOFFLINE          
+8      TWDE_DEVICEREADY            
+9      TWDE_DEVICEREMOVED          
+10     TWDE_IMAGECAPTURED          
+11     TWDE_IMAGEDELETED           
+12     TWDE_PAPERDOUBLEFEED        
+13     TWDE_PAPERJAM               
+14     TWDE_LAMPFAILURE            
+15     TWDE_POWERSAVE              
+16     TWDE_POWERSAVENOTIFY        
+-9999
+1 TWDR_GET                 
+2 TWDR_SET                 
+-9999
+0 TWDSK_SUCCESS            
+1 TWDSK_REPORTONLY         
+2 TWDSK_FAIL               
+3 TWDSK_DISABLED           
+-9999
+0 TWDX_NONE                
+1 TWDX_1PASSDUPLEX         
+2 TWDX_2PASSDUPLEX         
+-9999
+0 TWFA_NONE                
+1 TWFA_LEFT                
+2 TWFA_CENTER              
+3 TWFA_RIGHT               
+-9999
+0 TWFE_GENERAL             
+1 TWFE_PHOTO               
+-9999
+ 0 TWFF_TIFF               
+ 1 TWFF_PICT               
+ 2 TWFF_BMP                
+ 3 TWFF_XBM                
+ 4 TWFF_JFIF               
+ 5 TWFF_FPX                
+ 6 TWFF_TIFFMULTI          
+ 7 TWFF_PNG                
+ 8 TWFF_SPIFF              
+ 9 TWFF_EXIF               
+10 TWFF_PDF                
+11 TWFF_JP2                
+13 TWFF_JPX                
+14 TWFF_DEJAVU             
+15 TWFF_PDFA               
+16 TWFF_PDFA2              
+17 TWFF_PDFRASTER          
+-9999
+0 TWFL_NONE                
+1 TWFL_OFF                 
+2 TWFL_ON                  
+3 TWFL_AUTO                
+4 TWFL_REDEYE              
+-9999
+0 TWFO_FIRSTPAGEFIRST      
+1 TWFO_LASTPAGEFIRST       
+-9999
+ 0 TWFP_POCKETERROR        
+ 1 TWFP_POCKET1            
+ 2 TWFP_POCKET2            
+ 3 TWFP_POCKET3            
+ 4 TWFP_POCKET4            
+ 5 TWFP_POCKET5            
+ 6 TWFP_POCKET6            
+ 7 TWFP_POCKET7            
+ 8 TWFP_POCKET8            
+ 9 TWFP_POCKET9            
+10 TWFP_POCKET10           
+11 TWFP_POCKET11           
+12 TWFP_POCKET12           
+13 TWFP_POCKET13           
+14 TWFP_POCKET14           
+15 TWFP_POCKET15           
+16 TWFP_POCKET16           
+-9999
+0 TWFR_BOOK                
+1 TWFR_FANFOLD             
+-9999
+0 TWFT_RED                
+1 TWFT_GREEN              
+2 TWFT_BLUE               
+3 TWFT_NONE               
+4 TWFT_WHITE              
+5 TWFT_CYAN               
+6 TWFT_MAGENTA            
+7 TWFT_YELLOW             
+8 TWFT_BLACK              
+-9999
+0 TWFY_CAMERA              
+1 TWFY_CAMERATOP           
+2 TWFY_CAMERABOTTOM        
+3 TWFY_CAMERAPREVIEW       
+4 TWFY_DOMAIN              
+5 TWFY_HOST                
+6 TWFY_DIRECTORY           
+7 TWFY_IMAGE               
+8 TWFY_UNKNOWN             
+-9999  
+0 TWIA_UNUSED              
+1 TWIA_FIXED               
+2 TWIA_LEVEL1              
+3 TWIA_LEVEL2              
+4 TWIA_LEVEL3              
+5 TWIA_LEVEL4              
+-9999  
+0 TWIC_NONE                
+1 TWIC_LINK                
+2 TWIC_EMBED               
+-9999  
+0 TWIF_NONE                
+1 TWIF_AUTO                
+2 TWIF_LOWPASS             
+3 TWIF_BANDPASS,TWIF_TEXT            
+4 TWIF_HIGHPASS,TWIF_FINELINE            
+-9999  
+ 0 TWIM_NONE               
+ 1 TWIM_FRONTONTOP         
+ 2 TWIM_FRONTONBOTTOM      
+ 3 TWIM_FRONTONLEFT        
+ 4 TWIM_FRONTONRIGHT       
+-9999     
+ 0 TWJC_NONE               
+ 1 TWJC_JSIC               
+ 2 TWJC_JSIS               
+ 3 TWJC_JSXC               
+ 4 TWJC_JSXS               
+-9999     
+-4 TWJQ_UNKNOWN            
+-3 TWJQ_LOW                
+-2 TWJQ_MEDIUM             
+-1 TWJQ_HIGH               
+-9999     
+ 0 TWLP_REFLECTIVE         
+ 1 TWLP_TRANSMISSIVE       
+-9999     
+ 0 TWLS_RED                
+ 1 TWLS_GREEN              
+ 2 TWLS_BLUE               
+ 3 TWLS_NONE               
+ 4 TWLS_WHITE              
+ 5 TWLS_UV                 
+ 6 TWLS_IR                 
+-9999     
+ 0 TWMD_MICR               
+ 1 TWMD_RAW                
+ 2 TWMD_INVALID            
+-9999     
+ 0     TWNF_NONE               
+ 1     TWNF_AUTO               
+ 2     TWNF_LONEPIXEL          
+ 3     TWNF_MAJORITYRULE       
+-9999  
+ 0     TWOR_ROT0,TWOR_PORTRAIT               
+ 1     TWOR_ROT90              
+ 2     TWOR_ROT180             
+ 3     TWOR_ROT270,TWOR_LANDSCAPE             
+ 4     TWOR_AUTO               
+ 5     TWOR_AUTOTEXT           
+ 6     TWOR_AUTOPICTURE        
+-9999  
+ 0     TWOV_NONE               
+ 1     TWOV_AUTO               
+ 2     TWOV_TOPBOTTOM          
+ 3     TWOV_LEFTRIGHT          
+ 4     TWOV_ALL                
+-9999     
+0 TWPA_RGB         
+1 TWPA_GRAY        
+2 TWPA_CMY         
+-9999     
+0 TWPC_CHUNKY              
+1 TWPC_PLANAR              
+-9999     
+ 0 TWPCH_PATCH1            
+ 1 TWPCH_PATCH2            
+ 2 TWPCH_PATCH3            
+ 3 TWPCH_PATCH4            
+ 4 TWPCH_PATCH6            
+ 5 TWPCH_PATCHT            
+-9999     
+ 0 TWPF_CHOCOLATE          
+ 1 TWPF_VANILLA            
+-9999     
+ 0 TWPM_SINGLESTRING       
+ 1 TWPM_MULTISTRING        
+ 2 TWPM_COMPOUNDSTRING     
+ 3 TWPM_IMAGEADDRESSSTRING 
+-9999     
+0 TWPR_IMPRINTERTOPBEFORE     
+1 TWPR_IMPRINTERTOPAFTER      
+2 TWPR_IMPRINTERBOTTOMBEFORE  
+3 TWPR_IMPRINTERBOTTOMAFTER   
+4 TWPR_ENDORSERTOPBEFORE      
+5 TWPR_ENDORSERTOPAFTER       
+6 TWPR_ENDORSERBOTTOMBEFORE   
+7 TWPR_ENDORSERBOTTOMAFTER    
+-9999     
+0 TWPF_NORMAL              
+1 TWPF_BOLD                
+2 TWPF_ITALIC              
+3 TWPF_LARGESIZE           
+4 TWPF_SMALLSIZE           
+-9999     
+0 TWCT_PAGE                
+1 TWCT_PATCH1              
+2 TWCT_PATCH2              
+3 TWCT_PATCH3              
+4 TWCT_PATCH4              
+5 TWCT_PATCHT              
+6 TWCT_PATCH6              
+-9999     
+0 TWPS_EXTERNAL            
+1 TWPS_BATTERY             
+-9999     
+0   TWSS_NONE              
+1   TWSS_A4                
+2   TWSS_JISB5             
+3   TWSS_USLETTER          
+4   TWSS_USLEGAL           
+5   TWSS_A5                
+6   TWSS_ISOB4             
+7   TWSS_ISOB6             
+9   TWSS_USLEDGER          
+10  TWSS_USEXECUTIVE       
+11  TWSS_A3                
+12  TWSS_ISOB3             
+13  TWSS_A6                
+14  TWSS_C4                
+15  TWSS_C5                
+16  TWSS_C6                
+17  TWSS_4A0               
+18  TWSS_2A0               
+19  TWSS_A0                
+20  TWSS_A1                
+21  TWSS_A2                
+22  TWSS_A7                
+23  TWSS_A8                
+24  TWSS_A9                
+25  TWSS_A10               
+26  TWSS_ISOB0             
+27  TWSS_ISOB1             
+28  TWSS_ISOB2             
+29  TWSS_ISOB5             
+30  TWSS_ISOB7             
+31  TWSS_ISOB8             
+32  TWSS_ISOB9             
+33  TWSS_ISOB10            
+34  TWSS_JISB0             
+35  TWSS_JISB1             
+36  TWSS_JISB2             
+37  TWSS_JISB3             
+38  TWSS_JISB4             
+39  TWSS_JISB6             
+40  TWSS_JISB7             
+41  TWSS_JISB8             
+42  TWSS_JISB9             
+43  TWSS_JISB10            
+44  TWSS_C0                
+45  TWSS_C1                
+46  TWSS_C2                
+47  TWSS_C3                
+48  TWSS_C7                
+49  TWSS_C8                
+50  TWSS_C9                
+51  TWSS_C10               
+52  TWSS_USSTATEMENT       
+53  TWSS_BUSINESSCARD      
+54  TWSS_MAXSIZE           
+-9999    
