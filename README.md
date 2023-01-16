@@ -27,7 +27,7 @@
 
 ### Preliminaries
 
-DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
+DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 / Windows 11 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
 
 Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
 
