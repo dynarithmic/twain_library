@@ -14,7 +14,8 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems.  
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  
+
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
 
@@ -24,6 +25,15 @@
 
 ----------
 
+### Preliminaries
+
+DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
+
+Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
+
+However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
+
+----------
 ### Is DTWAIN 5.x really Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
@@ -267,12 +277,9 @@ DTWAIN includes computer language bindings for the following computer languages 
       C# 
       Delphi
       Java (using the Java Native Interface JNI)
-      Macro Scheduler
       Perl
       Python 
-      Visual Basic 6.0 (old, but we support it)
       Visual Basic .NET 
-      WinBatch
       XBase++ (Alaska Software)
   
 For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
@@ -435,7 +442,7 @@ We have language bindings (pinvoke's) for C# and Visual Basic.  However we curre
 ----------
 ### Is there a C++ class wrapper for DTWAIN? ###
 
-If you're a C++ programmer, and want a small wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN, however it is rather crude for todays C++ standards, even though it does make DTWAIN simpler to use.  Thus we are in the process of creating a "better" C++ wrapper using templates, less "fat" classes, RAII techniques, etc.
+If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/cpp_wrapper" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
 
 ----------
 
