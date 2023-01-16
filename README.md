@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is [**5.2.0.10** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version is [**5.3.0.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -46,17 +46,17 @@ For 32-bit applications, use the binaries found in **release_libraries.zip** in 
 
 The checksum for release_libraries.zip is as follows:
 
-MD5:    **ce52b4e0fb65e988cff725b4b75d460c**  
-SHA1:   **4914361257245be62ec103613eb06ca4980dbbb5**  
-SHA256: **c31ab272eb9ec20d8cc0616db20e69c5ce57e64cfd5caa71d3b89c4f7d3b4bbd**
+MD5:    **ab124e7af2c9654d9370f58474a7d56c**  
+SHA1:   **b3f24364ec20f4d48ecf390410a8e9b52f4fa137**  
+SHA256: **5092331bf9b7b06203b5b14423cf085747bb873b73aadc7e5339034445a134b7**
 
 ----
 
 For 64-bit applications, use the binaries found in **release_libraries.zip** in [this directory](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit).
 
-MD5:    **91928715228a2a2ff7d3c7012e551f2d**  
-SHA1:   **d166f07aeca040727ef579204427b3f1e1aa85fb**  
-SHA256: **e5ad0d5ba509ea39e9b34844353dc4a4e40bee1793552937d7490287712bc058**
+MD5:    **d60d3cee71db6e9ba77b03c33f616a7e**  
+SHA1:   **3e74ef0dd4a77693c1a17b3c150a8479e4c3fff7**  
+SHA256: **df37e57f474d6e4a8fbeef270ed56e2410dfdc571a382bdc6cf35605b1080618**
 
 ----
 The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  Similarly, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available. 

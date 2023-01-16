@@ -1,0 +1,214 @@
+#include "dtwdemo.h"
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_DTWDEMO             ICON    DISCARDABLE     "DTWDEMO.ICO"
+IDI_SMALL               ICON    DISCARDABLE     "DTWDEMO.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_DTWDEMO  MENU DISCARDABLE
+BEGIN
+    POPUP "&Source Selection Test"
+    BEGIN
+        MENUITEM "S&elect Source...",            IDM_SELECT_SOURCE
+        MENUITEM "Select Source By &Name...",    IDM_SELECT_SOURCE_BY_NAME
+        MENUITEM "Select &Default Source...",    IDM_SELECT_DEFAULT_SOURCE
+        MENUITEM "Select Source &Custom...",     IDM_SELECT_SOURCE_CUSTOM
+        MENUITEM SEPARATOR
+        MENUITEM "Source &Properties...",         IDM_SOURCE_PROPS
+        MENUITEM SEPARATOR
+        MENUITEM "&Close Source...",              IDM_CLOSE_SOURCE
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit Demo",                  IDM_EXIT
+    END
+
+    POPUP "&Acquire Test"
+    BEGIN
+        MENUITEM "Acquire Native...",                   IDM_ACQUIRE_NATIVE
+        MENUITEM "Acquire Buffered...",                 IDM_ACQUIRE_BUFFERED
+        MENUITEM "Acquire File ...",                    IDM_ACQUIRE_FILE_DTWAIN
+        MENUITEM "Acquire File (Source Mode)...",       IDM_ACQUIRE_FILE_SOURCE
+        MENUITEM SEPARATOR
+		MENUITEM "Show Preview",						IDM_SHOW_PREVIEW
+        MENUITEM "Use Source UI",                       IDM_USE_SOURCE_UI
+        MENUITEM "Discard Blank Pages...",              IDM_DISCARD_BLANKS
+    END
+
+
+    POPUP "&TWAIN Logging"
+    BEGIN
+        MENUITEM "Logging Options...",                  IDM_LOGGING_OPTIONS
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_EXAMPLE1 ACCELERATORS MOVEABLE PURE
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  22, 17, 230, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "System"
+BEGIN
+    ICON            IDI_DTWDEMO,IDC_MYICON,14,9,16,16
+    LTEXT           "DTWDEMO Example",IDC_STATIC,49,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2017",IDC_STATIC,49,20,119,8
+    DEFPUSHBUTTON   "OK",IDOK,195,6,30,11,WS_GROUP
+END
+
+IDD_dlgEnterSourceName DIALOG DISCARDABLE  0, 0, 175, 53
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Source Name"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_edSourceName,61,13,101,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,60,31,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,113,31,50,14
+    LTEXT           "Source Name:",IDC_STATIC,7,14,46,8
+END
+
+IDD_dlgSelectCustom DIALOG DISCARDABLE  0, 0, 229, 133
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Custom Select Source Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Select",IDOK,169,13,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,169,28,50,14
+    LISTBOX         IDC_lstSources,5,13,157,99,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_edNumSources,8,118,22,12,ES_RIGHT | ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    LTEXT           "TWAIN Source(s) Available for Selection",IDC_STATIC,31,
+                    118,129,8
+    LTEXT           "Sorted Source Names:",IDC_STATIC,8,3,72,8
+END
+
+IDD_dlgProperties DIALOG DISCARDABLE  0, 0, 253, 245
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Source Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_edProductName,84,17,155,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edFamilyName,83,32,155,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edManufacturer,83,47,155,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edVersionInfo,83,62,155,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edVersion,83,77,155,14,ES_AUTOHSCROLL | ES_READONLY |
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,71,226,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,132,226,50,14
+    LTEXT           "Product Name:",IDC_STATIC,19,17,48,8
+    LTEXT           "Family Name:",IDC_STATIC,24,32,43,8
+    LTEXT           "Manufacturer:",IDC_STATIC,22,46,45,8
+    LTEXT           "Version Info:",IDC_STATIC,27,61,40,8
+    LTEXT           "Version:",IDC_STATIC,41,77,26,8
+    GROUPBOX        "General Info",IDC_STATIC,6,4,237,91
+    LISTBOX         IDC_lstCapabilities,13,114,116,98,LBS_SORT |
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Total Caps:",IDC_STATIC,147,116,37,8
+    RTEXT           "Custom Caps:",IDC_STATIC,135,130,49,8
+    RTEXT           "Extended Caps:",IDC_STATIC,133,145,51,8
+    EDITTEXT        IDC_edTotalCaps,197,116,40,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edCustomCaps,197,131,40,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edExtendedCaps,197,146,40,14,ES_AUTOHSCROLL |
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    GROUPBOX        "Capability Info",IDC_STATIC,6,103,237,119
+END
+
+#include "dibdisplay.rc"
+
+IDD_dlgSettings DIALOG DISCARDABLE  0, 0, 152, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Acquire Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,25,43,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,76,43,50,14
+    CONTROL         "Use Document Feeder",IDC_chkUseFeeder,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,9,5,96,10
+    CONTROL         "Duplex Scanning",IDC_chkUseDuplex,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,9,19,84,10
+END
+
+IDD_dlgFileType DIALOG DISCARDABLE  0, 0, 120, 111
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Type"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,34,91,50,14
+    COMBOBOX        IDC_cmbFileType,5,17,110,94,CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Choose File Type:",IDC_STATIC,7,4,79,8
+    LTEXT           "Choose File name:",IDC_STATIC,7,48,59,8
+    EDITTEXT        IDC_edFileName,6,60,106,14,ES_AUTOHSCROLL
+END
+
+IDD_dlgDebug DIALOGEX 0, 0, 227, 159
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Log File Selection"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_edLogFileName,66,44,136,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,45,123,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,133,123,50,14
+    CONTROL         "No Logging",IDC_radNoLogging,"Button",BS_AUTORADIOBUTTON,13,20,51,10
+    CONTROL         "Log to File:",IDC_radLogToFile,"Button",BS_AUTORADIOBUTTON,13,46,51,10
+    CONTROL         "Log to Debug Monitor",IDC_radToMonitor,"Button",BS_AUTORADIOBUTTON,13,70,85,10
+    CONTROL         "Log to Console", IDC_radToConsole, "Button", BS_AUTORADIOBUTTON, 13, 96, 85, 10
+END
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_APP_TITLE           "DTWAIN Demo Program"
+    IDC_DTWDEMO             "DTWAIN Demo Program"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// The following must be added if you are using the DTWAIN static library!!!
+// DTWAIN_LIB must be defined for the resource file, either by an IDE setting
+// or manually placing the constant on the RC command line.
+#ifdef DTWAIN_LIB
+#include "twcodes.rc"
+#endif
+
