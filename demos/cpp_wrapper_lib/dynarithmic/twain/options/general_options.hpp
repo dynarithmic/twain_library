@@ -76,7 +76,7 @@ namespace dynarithmic
                 int get_max_acquisitions() const 
                 { return m_nMaxAcquisitions; }
 
-                color_value::value_type get_pixel_type() const
+                color_value::value_type get_pixeltype() const
                 { return m_pixelType; }
 
                 sourceaction_type get_source_action() const
