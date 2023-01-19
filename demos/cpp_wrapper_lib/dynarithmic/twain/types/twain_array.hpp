@@ -27,6 +27,7 @@ OF THIRD PARTY RIGHTS.
 #include <algorithm>
 #include <string>
 #include <exception>
+#include <stdexcept>
 #include <dtwain.h>
 #include <dynarithmic/twain/types/twain_frame.hpp>
 #include <dynarithmic/twain/dtwain_twain.hpp>
@@ -283,8 +284,8 @@ namespace dynarithmic
                     return;
                 for (size_t i = 0; i < sz; ++i)
                 {
-                    API_INSTANCE DTWAIN_ArrayGetAtStringA(ta.get_array(), static_cast<LONG>(i), &v_char[0]);
-                    vFrm[0] = &v_char[0];
+                    std::string vTemp = API_INSTANCE DTWAIN_ArrayGetAtANSIStringPtr(ta.get_array(), static_cast<LONG>(i));
+                    vFrm[0] = &vTemp[0];
                     std::copy(vFrm.begin(), vFrm.end(), std::inserter(C, C.end()));
                 }
             }
