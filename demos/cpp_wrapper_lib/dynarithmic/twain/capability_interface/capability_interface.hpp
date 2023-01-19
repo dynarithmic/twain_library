@@ -1150,7 +1150,7 @@ namespace twain {
 
         cap_return_type get_last_error() const { return m_return_type; }
 
-        static int get_variant_index(const twaintype_variant_type& vt) 
+        static size_t get_variant_index(const twaintype_variant_type& vt) 
         {
             return variant_get_type_(vt);
         }

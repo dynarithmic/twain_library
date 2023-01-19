@@ -60,11 +60,14 @@ namespace twain {
      class acquire_characteristics
      {
          private:
+
              audiblealarms_options m_audiblealarms_options;
              autoadjust_options m_autoadjust_options;
              autocapture_options m_autocapture_options;
              autoscanning_options m_autoscanning_options;
              barcodedetection_options m_barcodedetection_options;
+             blankpage_options m_blankpage_options;
+             buffered_transfer_options m_bufferedtransfer_options;
              capnegotiation_options m_capnegotiation_options;
              color_options m_color_options;
              compression_options m_compression_options;
@@ -75,20 +78,18 @@ namespace twain {
              general_options m_general_options;
              imageinformation_options m_imageinformation_options;
              imageparameter_options m_imageparameter_options;
+             imagetype_options m_imagetype_options;
              imprinter_options m_imprinter_options;
-             pages_options m_pages_options;
-             pdf_options m_pdf_options;
-             resolution_options m_resolution_options;
              jobcontrol_options m_jobcontrol_options;
+             language_options m_language_options;
              micr_options m_micr_options;
+             pages_options m_pages_options;
              paperhandling_options m_paperhandling_options;
              patchcode_options m_patchcode_options;
-             imagetype_options m_imagetype_options;
-             buffered_transfer_options m_bufferedtransfer_options;
-             language_options m_language_options;
-             userinterface_options m_userinterface_options;
-             blankpage_options m_blankpage_options;
+             pdf_options m_pdf_options;
              powermonitor_options m_powermonitor_options;
+             resolution_options m_resolution_options;
+             userinterface_options m_userinterface_options;
 
              friend class twain_source;
 
