@@ -466,8 +466,6 @@ void AcquireBuffered()
         return;
     }
     WaitLoop();
-    DTWAIN_IsSourceOpen( g_CurrentSource );
-    DTWAIN_OpenSource( g_CurrentSource );
     if ( DTWAIN_ArrayGetCount(g_AcquireArray) == 0 )
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);

@@ -421,8 +421,7 @@ void AcquireNative()
                     FALSE,  /* Close Source when UI is closed */
                     g_AcquireArray,
                     &ErrStatus /* Error Status */
-                    )
-          )
+    ))
     {
         MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
         return;
@@ -432,6 +431,7 @@ void AcquireNative()
     if ( DTWAIN_ArrayGetCount(g_AcquireArray) == 0 )
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
+        DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
         return;
     }
 
@@ -450,6 +450,7 @@ void AcquireBuffered()
     DTWAIN_DisableAppWindow(g_hWnd, TRUE);
 
     g_AcquireArray = DTWAIN_CreateAcquisitionArray();
+
     if ( !DTWAIN_AcquireBufferedEx(
                     g_CurrentSource,
                     DTWAIN_PT_DEFAULT, /* Use default */
@@ -461,11 +462,10 @@ void AcquireBuffered()
                     ))
     {
         MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
+        DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
         return;
     }
     WaitLoop();
-    DTWAIN_IsSourceOpen( g_CurrentSource );
-    DTWAIN_OpenSource( g_CurrentSource );
     if ( DTWAIN_ArrayGetCount(g_AcquireArray) == 0 )
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
@@ -485,7 +485,7 @@ void AcquireFile(BOOL bUseSource)
     BOOL bError;
     DTWAIN_ARRAY AFileNames = 0;
     BOOL UseUI;
-   
+
     if ( bUseSource )
     {
         /* User wants to use the internal Source
@@ -616,7 +616,7 @@ void DisplaySourceProps()
 
 void DisplayLoggingOptions()
 {
-    LONG LogFlags = DTWAIN_LOG_ALL &~ DTWAIN_LOG_ERRORMSGBOX;
+    LONG LogFlags = DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_DECODE_TWEVENT | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_ISTWAINMSG;
     if ( DialogBox(g_hInstance, (LPCTSTR)IDD_dlgDebug, g_hWnd, (DLGPROC)DisplayLoggingProc) == IDOK )
     {
         switch (g_LogType)
@@ -626,15 +626,15 @@ void DisplayLoggingOptions()
             break;
 
             case 1:
-                DTWAIN_SetTwainLog(DTWAIN_LOGONLY_FILE, g_LogFileName);
+                DTWAIN_SetTwainLog(DTWAIN_LOG_USEFILE | LogFlags, g_LogFileName);
             break;
 
             case 2:
-                DTWAIN_SetTwainLog(DTWAIN_LOGONLY_DEBUGWINDOW, _T(""));
+                DTWAIN_SetTwainLog(DTWAIN_LOG_DEBUGMONITOR | LogFlags, _T(""));
             break;
 
             case 3:
-                DTWAIN_SetTwainLog(DTWAIN_LOGONLY_CONSOLE, _T(""));
+                DTWAIN_SetTwainLog(DTWAIN_LOG_CONSOLE | LogFlags, _T(""));
             break;
         }
     }
@@ -1005,7 +1005,7 @@ LRESULT CALLBACK DisplayFileTypesProc(HWND hDlg, UINT message, WPARAM wParam, LP
                     /* Get the current selection */
                         SendMessage( hWndEdit, WM_GETTEXT, 256, (LPARAM)g_FileName);
 
-                    if ( lstrlen(g_FileName) == 0 || IsAllSpace(g_FileName))
+                    if ( g_FileName[0] == 0 || IsAllSpace(g_FileName))
                     {
                         MessageBox(hDlg, _T("A file name must be entered"), _T("Error"), MB_ICONSTOP);
                     }
