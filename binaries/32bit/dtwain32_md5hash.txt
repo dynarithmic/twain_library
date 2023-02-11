@@ -1,1 +1,0 @@
-﻿MD5 hash of "dtwain32.dll" (16 bytes) = e87c17adea0febfa1d36bde6e2267a5a
