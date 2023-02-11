@@ -1,5 +1,10 @@
 DTWAIN Version changes
 
+5.3.0.1		  
+
+- Fix issue with buffered mode file transfers.
+
+
 5.3.0.0		  
 
 - Initial support for latest TWAIN 2.5 capabilities (mostly Image Addressing).
