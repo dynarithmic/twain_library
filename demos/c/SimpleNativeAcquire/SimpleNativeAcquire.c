@@ -63,7 +63,7 @@ int SimpleNativeAcquire()
             {
                 printf("      Image %lu: %p\n", j + 1, hDib);
                 SIZE_T imageDataSize = GlobalSize(hDib);
-                printf("      Image size in bytes: %llu\n", imageDataSize);
+                printf("      Image size in bytes: %llu\n", (LONG64)imageDataSize);
 
                 /* From here, we can call GlobalLock(hDib) to get the image data. */
                 /* We won't do that here, but this is where your application can */
