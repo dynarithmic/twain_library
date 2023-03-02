@@ -34,7 +34,7 @@ typedef DTWAIN_ARRAY  DTWAIN_RANGE;
 typedef void *   DTWAIN_FRAME;
 typedef DTWAIN_ARRAY  DTWAIN_FIX32;
 typedef void *   DTWAIN_SOURCE;
-typedef LONG        DTWAIN_ACQUIRE;
+typedef LONG_PTR    DTWAIN_ACQUIRE;
 typedef LONG        DTWAIN_LONG;
 typedef LONGLONG    DTWAIN_LONG64;
 typedef DTWAIN_LONG64*  LPLONG64;
