@@ -143,7 +143,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     DTWAIN_CheckHandles(FALSE);
     /* Allow DTWAIN messages to be sent directly to our Window proc */
     DTWAIN_StartTwainSession(g_hWnd, NULL);
-    DTWAIN_SetTwainMode(DTWAIN_MODELESS);
+    // DTWAIN_SetTwainMode(DTWAIN_MODELESS);
     DTWAIN_EnableMsgNotify(TRUE);
 
     /* Also allow DTWAIN messages to be sent to our callback */
@@ -413,7 +413,7 @@ void AcquireNative()
     DTWAIN_SetBlankPageDetection(g_CurrentSource, 98.0, DTWAIN_BP_AUTODISCARD_ANY, 
                                  GetToggleMenuState(IDM_DISCARD_BLANKS));
 
-    if ( !DTWAIN_AcquireNativeEx(
+    if (!DTWAIN_AcquireNativeEx(
                     g_CurrentSource,
                     DTWAIN_PT_DEFAULT, /* Use default */
                     DTWAIN_ACQUIREALL, /* Get all pages */
@@ -591,8 +591,6 @@ void AcquireFile(BOOL bUseSource)
 		}
     }
 }
-
-
 
 
 DTWAIN_SOURCE DisplayGetNameDlg()
@@ -1097,10 +1095,15 @@ BOOL IsAllSpace(LPCTSTR p)
 
 void WaitLoop()
 {
+    if (DTWAIN_GetTwainMode() != DTWAIN_MODELESS)
+        return;
+
+    // When in DTWAIN_MODELESS mode, this application is responsible for the TWAIN loop
+    // during when the source is enabled and acquiring images
     MSG msg;
     int val;
     while (((val = GetMessage (&msg, NULL, 0, 0)) != -1) // while there is a message
-            && DTWAIN_IsUIEnabled(g_CurrentSource))         // and the Source is acquiring
+            && DTWAIN_IsSourceAcquiringEx(g_CurrentSource, FALSE)) // and the Source is acquiring
     {
         if ( val != 0 )
         {
