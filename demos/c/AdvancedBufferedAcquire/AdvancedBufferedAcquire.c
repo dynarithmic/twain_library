@@ -36,31 +36,35 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
         case DTWAIN_TN_TRANSFERSTRIPDONE:
         case DTWAIN_TN_TRANSFERDONE:
         {
-            LONG bytesWritten;
-            BYTE *pTheDibStrip;
+            if (rawFile)
+            {
+                LONG bytesWritten;
+                BYTE* pTheDibStrip;
 
-            ++bufferWritten;
+                ++bufferWritten;
 
-            /* Add the strip to the buffer */
-            /* First, get the number of bytes received (that's all we care about in the example) */
-            DTWAIN_GetAcquireStripData(theSource, NULL, NULL, NULL, NULL, NULL, NULL, &bytesWritten);
+                /* Add the strip to the buffer */
+                /* First, get the number of bytes received (that's all we care about in the example) */
+                DTWAIN_GetAcquireStripData(theSource, NULL, NULL, NULL, NULL, NULL, NULL, &bytesWritten);
 
-            printf("\nWriting buffer strip %lu.  Number of bytes written will be %lu", bufferWritten, bytesWritten);
+                printf("\nWriting buffer strip %lu.  Number of bytes written will be %lu", bufferWritten, bytesWritten);
 
-            /* Lock the strip of data to a pointer */
-            pTheDibStrip = (BYTE *)GlobalLock(hTheDibStrip);
+                /* Lock the strip of data to a pointer */
+                pTheDibStrip = (BYTE*)GlobalLock(hTheDibStrip);
 
-            /* Write the strip of data to the output file */
-            if ( rawFile )
-                fwrite(pTheDibStrip, bytesWritten, 1, rawFile);
+                /* Write the strip of data to the output file */
+                if (rawFile)
+                    fwrite(pTheDibStrip, bytesWritten, 1, rawFile);
 
-            GlobalUnlock(pTheDibStrip);
+                GlobalUnlock(pTheDibStrip);
 
-            if (wParam == DTWAIN_TN_TRANSFERDONE)
-            { 
-                /* close the output file */
-                fclose(rawFile);
-            }   
+                if (wParam == DTWAIN_TN_TRANSFERDONE)
+                {
+                    /* close the output file */
+                    fclose(rawFile);
+                    rawFile = NULL;
+                }
+            }
             return TRUE;
         }
 

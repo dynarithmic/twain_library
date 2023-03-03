@@ -7,9 +7,12 @@ DTWAIN Version changes
 - For 64-bit drivers -- General fixes for various functions that query the state of the TWAIN device
   (for example DTWAIN_IsFeederLoaded(), DTWAIN_IsDeviceOnLine()).
 
+- When specifying the number of pages to acquire for duplex scanning, if the number of actual images 
+  acquired is greater than the number of pages that will be acquired, some sources will hang.  This has been fixed.
+
 - Change to DTWAIN_SetDefaultSource() to use the setting in DTWAIN32.INI and DTWAIN64.INI files.
   This change was necessary since the current operation of DTWAIN_SetDefaultSource() is no longer supported by the 
-  TWAIN specfication 2.x.  Thus the default source product name is now kept in the DTWAIN32.INI and DTWAIN64.INI 
+  TWAIN specification 2.x.  Thus the default source product name is now kept in the DTWAIN32.INI and DTWAIN64.INI 
   files under the [Sources] section.
 
 
