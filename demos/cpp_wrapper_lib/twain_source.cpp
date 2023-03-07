@@ -463,7 +463,7 @@ namespace dynarithmic
             auto retval = API_INSTANCE DTWAIN_AcquireFileA(m_theSource, ftOptions.get_name().c_str(),
                 file_type,
                 dtwain_transfer_type,
-                gOpts.get_pixeltype(),
+                gOpts.get_pixel_type(),
                 static_cast<LONG>(gOpts.get_max_page_count()),
                 ac.get_userinterface_options().is_shown(),
                 gOpts.get_source_action() == sourceaction_type::closeafteracquire,

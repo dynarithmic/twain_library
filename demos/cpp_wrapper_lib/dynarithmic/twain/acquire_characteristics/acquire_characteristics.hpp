@@ -60,7 +60,6 @@ namespace twain {
      class acquire_characteristics
      {
          private:
-
              audiblealarms_options m_audiblealarms_options;
              autoadjust_options m_autoadjust_options;
              autocapture_options m_autocapture_options;
