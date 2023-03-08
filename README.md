@@ -31,7 +31,7 @@ DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 / Windows 11 for 
 
 Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
 
-However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
+However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries [here](https://aka.ms/vs/17/release/vc_redist.x86.exe) under the **Visual Studio 2015, 2017, 2019, and 2022** category.  Choose **X86** for 32-bit applications, and **X64** for 64-bit applications.
 
 ----------
 ### Is DTWAIN 5.x really Open Source Software (OSS)? 
