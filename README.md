@@ -132,9 +132,9 @@ More detailed instructions on adding your own resource file can be found <a href
 
 **Important Note**:
 
-There has been an ongoing issue using **WIA** (Windows Image Acquisition) drivers and DTWAIN, especially in console-based applications.  The DTWAIN library is designed for true **TWAIN** drivers.  Therefore, if the manufacturer for your device has both a TWAIN driver and WIA drivers, choose the TWAIN driver (you will know the driver is WIA if the name in the "Select Source" dialog box starts with **WIA-**).  
+There has been an ongoing issue using **WIA** (Windows Image Acquisition) drivers and DTWAIN and TWAIN, especially in console-based applications.  Therefore, if the manufacturer for your device has both a TWAIN driver and WIA driver, choose the TWAIN driver, and only choose the WIA/TWAIN driver as a secondary choice if the TWAIN driver is not available (you will know the driver is WIA/TWAIN if the name in the "Select Source" dialog box starts with "**WIA-**").  
 
-You can still select WIA drivers from the Select Source dialog, but the correct behavior of the driver is not guaranteed, and especially for console-based applications.  Measures have been made to allow WIA drivers to operate correctly within DTWAIN, but their stability is not guaranteed.  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN, but as of this time, it is best to use only TWAIN drivers.
+Measures have been made to allow WIA drivers to operate correctly within DTWAIN (the upcoming version 5.3.0.3 of DTWAIN addresses these issues with WIA as best as possible).  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN.
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
