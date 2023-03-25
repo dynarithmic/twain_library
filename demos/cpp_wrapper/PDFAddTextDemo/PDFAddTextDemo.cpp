@@ -8,18 +8,14 @@
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/pdf/pdf_text_element.hpp> // for pdf_text_element
 #include <dynarithmic/twain/acquire_characteristics.hpp> // for acquire_characteristics
+#include "..\Runner\runnerbase.h"
 
-using namespace dynarithmic::twain;
-struct Runner
+struct Runner : RunnerBase
 {
     int Run();
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
 };
+
+using namespace dynarithmic::twain;
 
 // Derive from twain_callback to trap any notifications sent by
 // the TWAIN retrieval process

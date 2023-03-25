@@ -5,19 +5,15 @@
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/acquire_characteristics.hpp>  // for acquire_characteristics
+#include "..\Runner\runnerbase.h"
+
+struct Runner : RunnerBase
+{
+    int Run();
+};
 
 using namespace dynarithmic::twain;
 
-struct Runner
-{
-    int Run();
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
-};
 
 class buffered_callback : public twain_callback 
 {

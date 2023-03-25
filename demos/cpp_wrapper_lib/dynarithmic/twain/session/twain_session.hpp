@@ -702,6 +702,15 @@ namespace dynarithmic
                 /// @see set_dsm_search_order() get_dsm_search_order() twain_session::get_dsm_path() twain_session::start()
                 twain_session& set_dsm(dsm_type dsm) noexcept;
 
+                /// @param[in] search_order Directory search order
+                /// @param[in] user_directory Optional user-defined directory
+                /// @returns Reference to current twain_session object (**this**)
+                /// @note the default search order is "WSOCU"
+                /// @see set_dsm_search_order() get_dsm_search_order() twain_session::get_dsm_path() twain_session::start()
+                twain_session& set_dsm_search_order(std::string search_order, std::string user_directory) noexcept;
+                twain_session& set_dsm_search_order(int search_order) noexcept;
+
+
                 /// Sets whether acquiring images requires a user-defined TWAIN message loop to run.
                 /// 
                 ///   An application that desires to have a customized TWAIN acquisition loop must call this function with a **true** value when twain_source::acquire() is called. Once this is done

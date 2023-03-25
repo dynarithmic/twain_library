@@ -8,7 +8,7 @@
 #include "dtwainx2.h"
 
 /* Change this to the output directory that fits your environment */
-char outputDir[1024] = "c:\\dtwain_ctest\\";
+char outputDir[1024] = "";
 
 struct DynamicHandler
 {

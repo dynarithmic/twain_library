@@ -14,7 +14,7 @@ namespace dynarithmic
         {
 
         public:
-            static std::string generate_details(twain_session& ts, const std::vector<std::string>& allSources);
+            static std::string generate_details(twain_session& ts, const std::vector<std::string>& allSources, bool bWeOpenSource = false);
         };
     }
 }

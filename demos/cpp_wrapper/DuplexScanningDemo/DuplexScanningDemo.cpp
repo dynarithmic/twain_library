@@ -4,16 +4,11 @@
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/acquire_characteristics.hpp> // for acquire_characteristics
 #include <dynarithmic/twain/capability_interface.hpp> // for capability_interface
+#include "..\Runner\runnerbase.h"
 
-struct Runner
+struct Runner : RunnerBase
 {
     int Run();
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
 };
 
 int Runner::Run()

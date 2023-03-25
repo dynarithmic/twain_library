@@ -660,6 +660,34 @@ namespace dynarithmic
             return std::move(ih);
         }
 
+        std::vector<twain_source::custom_data_type> twain_source::get_custom_data() const
+        {
+            const capability_interface& ci = get_capability_interface();
+            if (!ci.is_customdsdata_supported())
+                return {};
+            long actualSize = 0;
+            if (!API_INSTANCE DTWAIN_GetCustomDSData(m_theSource, nullptr, 0, &actualSize, DTWAINGCD_COPYDATA))
+                return {};
+            if (actualSize > 0)
+            {
+                std::vector<custom_data_type> retContainer(actualSize);
+                API_INSTANCE DTWAIN_GetCustomDSData(m_theSource, retContainer.data(), actualSize, nullptr, DTWAINGCD_COPYDATA);
+                return retContainer;
+            }
+            return {};
+        }
+
+        bool twain_source::showui_only()
+        {
+            const capability_interface& ci = get_capability_interface();
+            if (!ci.is_customdsdata_supported())
+                return false;
+            if (!API_INSTANCE DTWAIN_ShowUIOnly(m_theSource))
+                return false;
+            return true;
+        }
+
+
         const capability_interface& twain_source::get_capability_interface() const noexcept { return *(m_pTwainSourceImpl->m_capability_info); }
         buffered_transfer_info& twain_source::get_buffered_transfer_info() noexcept { return *(m_pTwainSourceImpl->m_buffered_info); }
         acquire_characteristics& twain_source::get_acquire_characteristics() { return *(m_pTwainSourceImpl->m_acquire_characteristics); }

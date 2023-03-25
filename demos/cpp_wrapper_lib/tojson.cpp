@@ -213,7 +213,7 @@ namespace dynarithmic
             return join_string(returnFileTypes.begin(), returnFileTypes.end());
         }
 
-        std::string json_generator::generate_details(twain_session& ts, const std::vector<std::string>& allSources)
+        std::string json_generator::generate_details(twain_session& ts, const std::vector<std::string>& allSources, bool bWeOpenSource/*=false*/)
         {
             using boost::algorithm::join;
             using boost::adaptors::transformed;
@@ -270,19 +270,15 @@ namespace dynarithmic
                 // the details
                 std::unique_ptr<twain_source> pCurrentSourcePtr;
 
-                bool bWeOpenedSource = false;
                 auto sourceStatus = ts.get_source_status(curSource);
                 if (sourceStatus == twain_session::source_status::closed ||
                     sourceStatus == twain_session::source_status::unknown)
                 {
-                    auto select_info = ts.select_source(select_byname(curSource), false);
+                    auto select_info = ts.select_source(select_byname(curSource), bWeOpenSource);
                     if (select_info.source_handle)
                     {
-                        bWeOpenedSource = true;
                         pCurrentSourcePtr = std::make_unique<twain_source>(select_info);
                     }
-                    else
-                        continue;
                 }
                 else
                 {
@@ -293,7 +289,16 @@ namespace dynarithmic
                     pCurrentSourcePtr->make_weak();
                 }
 
-                if (pCurrentSourcePtr->is_selected())
+                if (!pCurrentSourcePtr && bWeOpenSource)
+                {
+                    // try to select the source only
+                    auto select_info = ts.select_source(select_byname(curSource), false);
+                    if (select_info.source_handle)
+                    {
+                        pCurrentSourcePtr = std::make_unique<twain_source>(select_info);
+                    }
+                }
+                if (pCurrentSourcePtr && pCurrentSourcePtr->is_selected())
                 {
                     devOpen[0] = true;
                     if (pCurrentSourcePtr->is_open())
@@ -540,25 +545,27 @@ namespace dynarithmic
                         deviceInfoString[7] = "\"jobcontrol-supported\":false";
                         deviceInfoString[8] = "\"transparencyunit-supported\":false";
                     }
-
-                    std::string partString;
-                    if (devOpen[0] && devOpen[1])
-                        partString = "\"<selected, opened>\"";
-                    else
-                    if (!devOpen[0] && !devOpen[1])
-                        partString = "\"<error>\"";
-                    else
-                    if (devOpen[0] && !devOpen[1])
-                        partString = "\"<selected, unopened>\"";
-
-                    partString = "\"device-status\":" + partString + ",";
-                    std::string imageInfoStringVal = join_string(imageInfoString, imageInfoString +
-                        sizeof(imageInfoString) / sizeof(imageInfoString[0])) + ",";
-                    std::string deviceInfoStringVal = join_string(deviceInfoString, deviceInfoString +
-                        sizeof(deviceInfoString) / sizeof(deviceInfoString[0])) + ",";
-                    jsonString = "{" + partString + jColorInfo + resUnitInfo + imageInfoStringVal + deviceInfoStringVal + jsonString.substr(1);
-                    array_twain_identity.push_back(json::parse(jsonString));
                 }
+                std::string partString = "\"device-name\":\"" + curSource + "\",";
+                std::string strStatus;
+                if (devOpen[0] && devOpen[1])
+                    strStatus = "\"<selected, opened>\"";
+                else
+                if (!devOpen[0] && !devOpen[1])
+                    strStatus = "\"<error>\"";
+                else
+                if (devOpen[0] && !devOpen[1])
+                    strStatus = "\"<selected, unopened>\"";
+
+                partString += "\"device-status\":" + strStatus + ",";
+                std::string imageInfoStringVal = join_string(imageInfoString, imageInfoString +
+                    sizeof(imageInfoString) / sizeof(imageInfoString[0])) + ",";
+                std::string deviceInfoStringVal = join_string(deviceInfoString, deviceInfoString +
+                    sizeof(deviceInfoString) / sizeof(deviceInfoString[0])) + ",";
+                if (jsonString.empty())
+                    jsonString = " }";
+                jsonString = "{" + partString + jColorInfo + resUnitInfo + imageInfoStringVal + deviceInfoStringVal + jsonString.substr(1);
+                array_twain_identity.push_back(json::parse(jsonString));
             }
 
             glob_json["device-info"] = array_twain_identity;

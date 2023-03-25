@@ -9,20 +9,16 @@
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/capability_interface.hpp>  // for capability_interface
 #include <dynarithmic/twain/acquire_characteristics.hpp>  // for acquire_characteristics
+#include "..\Runner\runnerbase.h"
+
+struct Runner : RunnerBase
+{
+    int Run();
+};
 
 using namespace dynarithmic::twain;
 
 const char * unit[] = { "Dots per Inch", "Dots per centimeter", "Picas", "Points", "TWIPS", "Pixels" };
-struct Runner
-{
-    int Run();
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
-};
 
 template <typename dataType>
 void PrintResolutionValues(const std::vector<dataType>& aResValues, LONG unitOfMeasure, char whichRes)

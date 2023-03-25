@@ -5,28 +5,32 @@
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/acquire_characteristics.hpp>  // for acquire_characteristics
+#include "..\Runner\runnerbase.h"
+
+struct Runner : RunnerBase
+{
+    int m_argc;
+    std::vector<std::string> m_argv;
+
+    Runner(int argc, char* argv[]) : m_argv(argc)
+    {
+        for (int i = 0; i < argc; ++i)
+            m_argv.push_back(argv[i]);
+    }
+    int Run();
+};
 
 void TestMultiOrSingleFile(std::string outDir, bool bTestSingle);
 
 using namespace dynarithmic::twain;
-struct Runner
-{
-    int Run(int argc, char* argv[]);
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
-};
 
 // Global TWAIN session (not started here)
 twain_session session;
 
-int Runner::Run(int argc, char* argv[])
+int Runner::Run()
 {
     int value = 0;
-    if (argc < 3)
+    if (m_argc < 3)
     {
         std::cout << "Usage: TestImageFileCreation test-to-run[1,2,3] output-directory\n\n";
         std::cout << "1 --> Single page files\n2 --> Multipage files\n3 --> Single and multipage files\n\n";
@@ -36,7 +40,7 @@ int Runner::Run(int argc, char* argv[])
 
     try
     {
-        value = std::stoi(argv[1]);
+        value = std::stoi(m_argv[1]);
     }
     catch (std::exception& e)
     {
@@ -44,7 +48,7 @@ int Runner::Run(int argc, char* argv[])
         return -1;
     }
 
-    std::string outDir = argv[2];
+    std::string outDir = m_argv[2];
     if (outDir.back() != '\\')
         outDir.push_back('\\');
 
@@ -80,7 +84,7 @@ int Runner::Run(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-    Runner().Run(argc, argv);
+    Runner(argc, argv).Run();
 }
 
 void TestMultiOrSingleFile(std::string outDir, bool bTestSingle)

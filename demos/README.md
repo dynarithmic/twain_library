@@ -23,5 +23,11 @@ The DTWAIN libraries themselves, dtwain32.dll, dtwain32u.dll, etc. are always ch
 
 * dtwain32.dll
 * dtwain32u.dll
+* dtwain32d.dll
+* dtwain32ud.dll
 * dtwain64.dll
 * dtwain64u.dll
+* dtwain64d.dll
+* dtwain64ud.dll
+
+The files that end with **d**, for example, dtwain32d.dll, are special debug versions of the DLL, and are available in the <a href="https://github.com/dynarithmic/twain_library_source/tree/main/binaries" target="_blank">twain_library_source repo</a>.
