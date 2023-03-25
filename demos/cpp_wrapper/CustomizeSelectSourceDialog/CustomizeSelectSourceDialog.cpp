@@ -2,19 +2,16 @@
 #include <string>
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
+#include "..\Runner\runnerbase.h"
+
+struct Runner : RunnerBase
+{
+    std::string sName;
+    int Run();
+    Runner(std::string name="") : sName(std::move(name)) {}
+};
 
 using namespace dynarithmic::twain;
-
-struct Runner
-{
-    int Run(const char *sourceName);
-    ~Runner()
-    {
-        printf("\nPress Enter key to exit application...\n");
-        char temp;
-        std::cin.get(temp);
-    }
-};
 
 void ShowResults(twain_source& source, const char *ptrInfo)
 {
@@ -60,9 +57,9 @@ void DefaultSelectSource(twain_session& session)
     ShowResults(theSource, "\n (Default source was opened) \n");
 }
 
-void NamedSelectSource(twain_session& session, const char *sourceName)
+void NamedSelectSource(twain_session& session, std::string sourceName)
 {
-    if (sourceName)
+    if (!sourceName.empty())
     {
         twain_source theSource = session.select_source(select_byname(sourceName));
         ShowResults(theSource, "\n (TWAIN Source selected by name) \n");
@@ -81,7 +78,7 @@ void FrenchSelectSource(twain_session& session)
     }
 }
 
-int Runner::Run(const char *sourceName)
+int Runner::Run()
 {
     // Create a TWAIN session and automatically open the TWAIN data source manager
     twain_session session(startup_mode::autostart);
@@ -92,7 +89,7 @@ int Runner::Run(const char *sourceName)
         PlainSelectSource(session);
         CustomSelectSource(session, "Custom dialog");
         DefaultSelectSource(session);
-        NamedSelectSource(session, sourceName);
+        NamedSelectSource(session, sName);
         FrenchSelectSource(session);
     }
     else
@@ -106,7 +103,7 @@ int Runner::Run(const char *sourceName)
 int main(int argc, char *argv[])
 {
     if (argc > 1)
-        Runner().Run(argv[1]);  // The argument is the product name of the source to open
+        Runner(argv[1]).Run();  // The argument is the product name of the source to open
     else
-        Runner().Run(nullptr);
+        Runner().Run();
 }

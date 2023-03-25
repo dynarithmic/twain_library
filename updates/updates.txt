@@ -1,5 +1,31 @@
 DTWAIN Version changes
 
+5.3.0.3		  
+
+- Handle issue WIA-based drivers that close the user-interface of the TWAIN source before issuing a request to
+  start acquiring pages.  
+
+  Previously, many WIA drivers would not acquire an image depending on the program
+  setup (GUI programs would usually work correctly, console applications most times would not start the 
+  acquisition process).  You must use the latest dtwain32.ini and dtwain64.ini files for the WIA drivers
+  to work properly.
+
+- For acquiring to files, if the bits-per-pixel of the original image data does not match the required
+  bits-per-pixel of the image file type, the image will be resampled to fit the bits-per-pixel of the image
+  file type.  
+
+  For example, if a TIFF Group 4 file is specified (which can only be 1 bit-per-pixel), but the original image
+  obtained by the device returns an 8 bit-per-pixel image, the 8-bit-per-pixel will be automatically resampled
+  to 1 bit-per-pixel.  This change will allow less bit-per-pixel matching failures if a device returns an 
+  "incorrect" image with the wrong number of bits-per-pixel.
+
+- Reduced the size of the DTWAIN DLL's by approximately 4 MB.  
+
+- Internal library changes:  
+    a) Removed unused FreeImage code.  
+    b) Added CXImage code to allow for more bitmap transformations to be done.
+
+
 5.3.0.2		  
 
 - Internal TWAIN message loop has now been restructured to start before the source UI is displayed.

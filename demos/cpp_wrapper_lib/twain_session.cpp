@@ -474,6 +474,19 @@ namespace dynarithmic
         /// @see set_dsm_search_order() get_dsm_search_order() twain_session::get_dsm_path() twain_session::start()
         twain_session& twain_session::set_dsm(dsm_type dsm) noexcept { m_twain_characteristics.set_dsm(dsm); return *this; }
 
+
+        twain_session& twain_session::set_dsm_search_order(std::string search_order, std::string user_directory) noexcept
+        {
+            m_twain_characteristics.set_dsm_search_order(search_order, user_directory);
+            return *this;
+        }
+
+        twain_session& twain_session::set_dsm_search_order(int search_order) noexcept
+        {
+            m_twain_characteristics.set_dsm_search_order(search_order);
+            return *this;
+        }
+
         /// Sets whether acquiring images requires a user-defined TWAIN message loop to run.
         /// 
         ///   An application that desires to have a customized TWAIN acquisition loop must call this function with a **true** value when twain_source::acquire() is called. Once this is done
