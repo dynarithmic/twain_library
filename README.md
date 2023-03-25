@@ -3,8 +3,8 @@
 * This repository contains the DTWAIN Library, **Version 5.x**, from Dynarithmic Software.  DTWAIN is an open source programmer's library that will allow applications to acquire images from TWAIN-enabled devices using a simple Application Programmer's Interface (API).
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
-* The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DynarithmicTWAINLibraryOverview.html).
-* The current version is [**5.3.0.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
+* The current version is [**5.3.0.3** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -31,7 +31,7 @@ DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 / Windows 11 for 
 
 Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
 
-However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries [here](https://aka.ms/vs/17/release/vc_redist.x86.exe) under the **Visual Studio 2015, 2017, 2019, and 2022** category.  Choose **X86** for 32-bit applications, and **X64** for 64-bit applications.
+However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
 ----------
 ### Is DTWAIN 5.x really Open Source Software (OSS)? 
