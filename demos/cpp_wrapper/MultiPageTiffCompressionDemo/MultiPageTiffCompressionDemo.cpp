@@ -1,5 +1,3 @@
-// AutoFileNamingDemo.cpp : Defines the entry point for the console application.
-//
 #include <iostream>
 #include <string>
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
@@ -12,14 +10,34 @@ struct Runner : RunnerBase
     int Run();
 };
 
+using namespace dynarithmic::twain;
+
+// Derive from twain_callback to trap any notifications sent by
+// the TWAIN retrieval process
+class my_callback : public twain_callback
+{
+    int page = 1;
+public:
+    // Ready to transfer a file.  Change the TIFF compression type
+    int transferready(twain_source& ts) override
+    {
+        // Odd numbered pages have no compression, even numbered pages are compressed 
+        // using Group 4 FAX
+        if (page % 2)
+            ts.set_tiff_compress_type(tiffcompress_value::nocompress);
+        else
+            ts.set_tiff_compress_type(tiffcompress_value::group4);
+        ++page;
+        return 1;
+    }
+};
+
 int Runner::Run()
 {
-    using namespace dynarithmic::twain;
-
     // Create a TWAIN session and automatically open the TWAIN data source manager
     twain_session session(startup_mode::autostart);
 
-    // Now check if session was started successfully.  
+    // In this example, we will test whether the session was started successfully
     if (session)
     {
         // select a source
@@ -38,26 +56,21 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
+            // we listen for the "transfer ready" notification during the acquisition process.
+            // Once notified, we set the TIFF compression.
+            session.register_callback(twsource, my_callback());
+
             // set the characteristics to acquire to a file.
-            // Set to a TIFF-LZW file.
-            // For each page acquired, the filename that will be saved will have an incrementing
-            // number at the end of the filename.  For example:
-            // tiff00000.tif, tiff0001.tif, tiff0002, etc.
-            //
-            // For tiff00000.tif, we can have up to 100000 files starting with name tiff00000.tif and
-            // going up to tiff99999.tif.  
+            // By default, this will acquire to a Windows multipage TIFF file
+            auto& ac = twsource.get_acquire_characteristics();
+            ac.get_file_transfer_options().
+               set_name("tiffdifferentcompressions.tif").set_type(filetype_value::tiffnocompressmulti);
 
-            // Get the file transfer options
-            auto& file_options = twsource.get_acquire_characteristics().get_file_transfer_options();
+            // enable the feeder (may need to do this for "devices" that do not 
+            // use hardware to acquire images.
+            ac.get_paperhandling_options().enable_feeder(true);
 
-            // Set the initial name and the file type
-            file_options.set_name("tiff00000.tif").  // Initial file name
-                         set_type(filetype_value::tifflzw);  // set the file type to TIFF-LZW
-
-            // Get the rules of how we want to increment the filename, and enable the file naming option
-            file_options.get_filename_increment_options().enable(true).set_increment(1); // we increment the number by 1 for each page
-
-            // Start the acquisition process.
+            // Start the acquisition
             auto retval = twsource.acquire();
 
             // If there is an internal error, get the error
@@ -79,7 +92,7 @@ int Runner::Run()
         std::cout << twain_session::get_error_string(twain_session::get_last_error());
     }
     return 1;
-} // The twain_session session will automatically close on exit of this function
+}
 
 int main()
 {

@@ -36,9 +36,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             //  List the capabilities available for the device 
             auto& capInterface = twsource.get_capability_interface();
 

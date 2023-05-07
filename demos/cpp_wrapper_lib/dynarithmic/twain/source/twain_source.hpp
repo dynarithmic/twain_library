@@ -41,6 +41,8 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/imagehandler/image_handler.hpp>
 #include <dynarithmic/twain/info/file_transfer_info.hpp>
 #include <dynarithmic/twain/info/buffered_transfer_info.hpp>
+#include <dynarithmic/twain/twain_details.hpp>
+
 namespace dynarithmic
 {
     namespace twain 
@@ -153,7 +155,8 @@ namespace dynarithmic
                 static bool acquire_timed_out(int32_t errCode);
                 static bool acquire_internal_error(int32_t errCode);
                 const twain_session* get_session() const;
-                std::string& get_details(bool refresh = false);
+                std::string& get_details(details_info info = {true, 2});
+                bool set_tiff_compress_type(tiffcompress_value::value_type compress_type);
         };
 
         inline std::ostream& operator <<(std::ostream& os, const image_information& ii)

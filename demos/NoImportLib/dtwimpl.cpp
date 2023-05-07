@@ -515,6 +515,9 @@
     D_GETSAVEFILENAMEAFUNC                                            DYNDTWAIN_API::DTWAIN_GetSaveFileNameA = nullptr;
     D_GETSAVEFILENAMEFUNC                                             DYNDTWAIN_API::DTWAIN_GetSaveFileName = nullptr;
     D_GETSAVEFILENAMEWFUNC                                            DYNDTWAIN_API::DTWAIN_GetSaveFileNameW = nullptr;
+    D_GETSESSIONDETAILSFUNC                                           DYNDTWAIN_API::DTWAIN_GetSessionDetails = nullptr;
+    D_GETSESSIONDETAILSAFUNC                                          DYNDTWAIN_API::DTWAIN_GetSessionDetailsA = nullptr;
+    D_GETSESSIONDETAILSWFUNC                                          DYNDTWAIN_API::DTWAIN_GetSessionDetailsW = nullptr;
     D_GETSHADOWFUNC                                                   DYNDTWAIN_API::DTWAIN_GetShadow = nullptr;
     D_GETSHADOWSTRINGAFUNC                                            DYNDTWAIN_API::DTWAIN_GetShadowStringA = nullptr;
     D_GETSHADOWSTRINGFUNC                                             DYNDTWAIN_API::DTWAIN_GetShadowString = nullptr;
@@ -523,6 +526,9 @@
     D_GETSHORTVERSIONSTRINGFUNC                                       DYNDTWAIN_API::DTWAIN_GetShortVersionString = nullptr;
     D_GETSHORTVERSIONSTRINGWFUNC                                      DYNDTWAIN_API::DTWAIN_GetShortVersionStringW = nullptr;
     D_GETSOURCEACQUISITIONSFUNC                                       DYNDTWAIN_API::DTWAIN_GetSourceAcquisitions = nullptr;
+    D_GETSOURCEDETAILSFUNC                                            DYNDTWAIN_API::DTWAIN_GetSourceDetails = nullptr;
+    D_GETSOURCEDETAILSAFUNC                                           DYNDTWAIN_API::DTWAIN_GetSourceDetailsA = nullptr;
+    D_GETSOURCEDETAILSWFUNC                                           DYNDTWAIN_API::DTWAIN_GetSourceDetailsW = nullptr;
     D_GETSOURCEIDEXFUNC                                               DYNDTWAIN_API::DTWAIN_GetSourceIDEx = nullptr;
     D_GETSOURCEIDFUNC                                                 DYNDTWAIN_API::DTWAIN_GetSourceID = nullptr;
     D_GETSOURCEMANUFACTURERAFUNC                                      DYNDTWAIN_API::DTWAIN_GetSourceManufacturerA = nullptr;
@@ -983,7 +989,6 @@
     D_USEMULTIPLETHREADSFUNC                                          DYNDTWAIN_API::DTWAIN_UseMultipleThreads = nullptr;
 #endif
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Implementation
 #ifdef __cplusplus
@@ -1033,7 +1038,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
               if (Major >= DTWAIN_MAJOR_VERSION)
               {
                   if (Minor >= DTWAIN_MINOR_VERSION)
-                      DTWAINAPI_ASSERT(Patch >= DTWAIN_SUBMINOR_VERSION)
+                      DTWAINAPI_ASSERT(Patch >= DTWAIN_PATCHLEVEL_VERSION)
                   else
                       DTWAINAPI_ASSERT(Minor >= DTWAIN_MINOR_VERSION)
               }
@@ -1517,6 +1522,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileNameW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSessionDetails, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSessionDetailsA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSessionDetailsW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetShadow, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetShadowStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetShadowString, hModule);
@@ -1525,6 +1533,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetShortVersionString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetShortVersionStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSourceAcquisitions, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSourceDetails, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSourceDetailsA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetSourceDetailsW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSourceIDEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSourceID, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSourceManufacturerA, hModule);

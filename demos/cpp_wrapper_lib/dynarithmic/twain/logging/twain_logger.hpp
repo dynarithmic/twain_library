@@ -68,7 +68,7 @@ namespace dynarithmic
                     m_verbose_settings[1] = DTWAIN_LOG_CALLSTACK;
                     m_verbose_settings[2] = m_verbose_settings[1] | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_DECODE_DEST | DTWAIN_LOG_DECODE_SOURCE;
                     m_verbose_settings[3] = m_verbose_settings[2] | DTWAIN_LOG_DECODE_TWMEMREF;
-                    m_verbose_settings[4] = m_verbose_settings[3] | DTWAIN_LOG_DECODE_TWEVENT;
+                    m_verbose_settings[4] = m_verbose_settings[3] | DTWAIN_LOG_DECODE_TWEVENT | DTWAIN_LOG_MISCELLANEOUS;
                 }
 
                 twain_logger& enable(bool bEnable = true) { m_bEnabled = bEnable; return *this; }

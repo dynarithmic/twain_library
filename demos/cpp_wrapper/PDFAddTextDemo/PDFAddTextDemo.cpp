@@ -84,9 +84,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             // register our callback
             session.register_callback(twsource, pdf_callback_helper());
 

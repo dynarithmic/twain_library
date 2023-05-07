@@ -24,7 +24,6 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/twain_session.hpp>
 #include <dynarithmic/twain/info/paperhandling_info.hpp>
 #include <dynarithmic/twain/types/twain_timer.hpp>
-#include <dynarithmic/twain/tostring/tojson.hpp>
 #include <dynarithmic/twain/source/twain_source_pimpl.hpp>
 
 namespace dynarithmic
@@ -585,10 +584,10 @@ namespace dynarithmic
             return;
         }
  
-        std::string& twain_source::get_details(bool refresh)
+        std::string& twain_source::get_details(dynarithmic::twain::details_info info)
         {
             bool bGetDetails = false;
-            if (!refresh)
+            if (!info.bRefresh)
             {
                 if (m_source_details.empty())
                     bGetDetails = true;
@@ -596,7 +595,13 @@ namespace dynarithmic
             else
                 bGetDetails = true;
             if (bGetDetails)
-                m_source_details = dynarithmic::twain::json_generator::generate_details(*m_pSession, { get_source_info().get_product_name() });
+            {
+                auto nChars = API_INSTANCE DTWAIN_GetSourceDetailsA(get_source_info().get_product_name().c_str(), nullptr, 0, info.indentFactor); 
+                m_source_details.clear();
+                m_source_details.resize(nChars);
+                API_INSTANCE DTWAIN_GetSourceDetailsA(get_source_info().get_product_name().c_str(), &m_source_details[0], 
+                                                        static_cast<LONG>(m_source_details.size()), info.indentFactor);
+            }
             return m_source_details;
         }
 
@@ -696,5 +701,7 @@ namespace dynarithmic
         bool twain_source::is_open() const { return API_INSTANCE DTWAIN_IsSourceOpen(m_theSource) ? true : false; }
         twain_source& twain_source::set_acquire_characteristics(const acquire_characteristics& ac) noexcept 
                     { *(m_pTwainSourceImpl->m_acquire_characteristics) = ac; return *this; }
+        bool twain_source::set_tiff_compress_type(tiffcompress_value::value_type compress_type) 
+             { return API_INSTANCE DTWAIN_SetCompressionType(m_theSource, static_cast<LONG>(compress_type), true); }
 	}
 }

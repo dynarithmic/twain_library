@@ -51,6 +51,7 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/twain_values.hpp>
 #include <dynarithmic/twain/types/twain_callback.hpp>
 #include <dynarithmic/twain/types/twain_array.hpp>
+#include <dynarithmic/twain/twain_details.hpp>
 #include <dtwain.h>
 
 #pragma warning( push )  // Stores the current warning state for every warning.
@@ -180,6 +181,7 @@ namespace dynarithmic
             using twain_app_info = twain_identity;
             using twain_source_info = twain_identity;
             using error_logger_func = std::function<void(LONG)>;
+            using logger_type = std::pair<twain_session*, std::unique_ptr<twain_logger>>;
 
             enum class source_status
             {
@@ -212,7 +214,6 @@ namespace dynarithmic
             };
 
         private:                
-            using logger_type = std::pair<twain_session*, std::unique_ptr<twain_logger>>;
             using callback_map_type = std::unordered_map<twain_source*, std::unique_ptr<twain_callback>>;
             using source_basic_info = twain_app_info;
 
@@ -741,13 +742,12 @@ namespace dynarithmic
                 /// @see set_app_info()
                 twain_app_info& get_app_info();
 
-                template <typename Container = std::vector<std::string>>
-                std::string get_details(Container container, bool refresh = false);
-
+                std::string get_details(const std::vector<std::string>& container, details_info info = {true, 2});
+                std::string get_details(details_info info = { true, 2 });
                 source_status get_source_status(const twain_source& ts);
                 source_status get_source_status(std::string prodName);
                 DTWAIN_SOURCE get_source_handle_from_name(std::string prodName);
-
+                logger_type& get_logger() noexcept { return m_logger; }
         };
     }
 }

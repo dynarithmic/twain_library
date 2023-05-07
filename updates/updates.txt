@@ -1,5 +1,22 @@
 DTWAIN Version changes
 
+5.3.0.4 
+
+- Allow DTWAIN_IsTwainAvailable() to properly detect TWAINDSM.DLL for 32-bit applications.
+
+- Address issues with DTWAIN_TN_PAGEFAILED on page acquisition failure.
+
+- Address issue with string-based TWAIN capabilities not being retrieved correctly.
+
+- Ensure DTWAIN_TN_PAGExxxx notifications are sent on every successful page acquisition.
+
+- Add DTWAIN_GetSessionDetails and DTWAIN_GetSourceDetails to return a JSON string describing the TWAIN session
+  and TWAIN sources, respectively.
+
+- Internal source code changes.
+
+
+
 5.3.0.3		  
 
 - Handle issue WIA-based drivers that close the user-interface of the TWAIN source before issuing a request to

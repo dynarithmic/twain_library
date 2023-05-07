@@ -1,7 +1,12 @@
-// SimpleFileAcquireToBMP.cpp : Defines the entry point for the console application.
+// ShowCustomDSData.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+
+// GetCustomDSData.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
 #include <iostream>
 #include <string>
+#include <deque>
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/acquire_characteristics.hpp>  // for acquire_characteristics
@@ -14,7 +19,7 @@ struct Runner : RunnerBase
 
 int Runner::Run()
 {
-    using namespace dynarithmic::twain; 
+    using namespace dynarithmic::twain;
 
     // Create a TWAIN session and automatically open the TWAIN data source manager
     twain_session session(startup_mode::autostart);
@@ -35,21 +40,19 @@ int Runner::Run()
     // check if we were able to open the source
     if (twsource.is_open())
     {
-        // set the characteristics to acquire to a file.
-        // By default, this will acquire to a Windows BMP file
-        twsource.get_acquire_characteristics().
-            get_file_transfer_options().
-            set_name("bmp_from_wrapper.bmp");  // Name of the file
-
-        // Start the acquisition
-        auto retval = twsource.acquire();
-
-        // If there is an internal error, get the error
-        if (twsource.acquire_internal_error(retval.first))
-            std::cout << twain_session::get_error_string(twain_session::get_last_error());
+        // output the source product name
+        std::cout << twsource.get_source_info().get_product_name() << "\n\n";
+        auto cData = twsource.get_custom_data();
+        if (cData.empty())
+            std::cout << "Device does not support custom DS data.\n";
         else
-            // Check if user scanned and/or canceled
-            std::cout << (retval.first == twsource.acquire_canceled ? "Canceled" : "OK");
+        {
+            std::cout << "The custom data for device is:\n";
+            std::cout.write((char*)cData.data(), cData.size());
+
+            std::cout << "\n\nNow will show the UI that will allow changes (but not acquire images):\n\n";
+            twsource.showui_only();
+        }
     }
     else
     {

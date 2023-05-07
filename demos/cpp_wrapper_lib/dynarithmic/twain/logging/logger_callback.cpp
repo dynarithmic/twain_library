@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2023 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,17 +19,28 @@ DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRING
 OF THIRD PARTY RIGHTS.
 */
 
-#ifndef DTWAIN_LOGGER_CALLBACK_HPP
-#define DTWAIN_LOGGER_CALLBACK_HPP
-
 #include <dynarithmic/twain/twain_values.hpp>
-#include <dynarithmic/twain/session/twain_session_base.hpp>
+#include <dynarithmic/twain/session/twain_session.hpp>
+#include <dynarithmic/twain/logging/logger_callback.hpp>
 
 namespace dynarithmic
 {
     namespace twain
     {
-        LRESULT CALLBACK logger_callback_proc(const char* msg, DTWAIN_LONG64 UserData);
+        LRESULT CALLBACK logger_callback_proc(const char* msg, DTWAIN_LONG64 UserData)
+        {
+            const auto thisObject = reinterpret_cast<twain_session*>(UserData);
+            if (thisObject)
+            {
+                twain_session::logger_type& sesObject = thisObject->get_logger();
+                if (sesObject.second && sesObject.second->is_enabled())
+                {
+                    const auto& fn = sesObject.second->get_custom_function();
+                    if (fn)
+                        fn(msg);
+                }
+            }
+            return 1;
+        }
     }
 }
-#endif

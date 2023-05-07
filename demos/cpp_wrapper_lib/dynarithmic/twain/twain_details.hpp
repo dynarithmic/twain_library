@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2022 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,17 +19,26 @@ DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRING
 OF THIRD PARTY RIGHTS.
 */
 
-#ifndef DTWAIN_LOGGER_CALLBACK_HPP
-#define DTWAIN_LOGGER_CALLBACK_HPP
+#ifndef DTWAIN_TWAIN_DETAILS_HPP
+#define DTWAIN_TWAIN_DETAILS_HPP
 
-#include <dynarithmic/twain/twain_values.hpp>
-#include <dynarithmic/twain/session/twain_session_base.hpp>
+#pragma warning( push )  // Stores the current warning state for every warning.
+#pragma warning( disable:4996)
 
 namespace dynarithmic
 {
     namespace twain
     {
-        LRESULT CALLBACK logger_callback_proc(const char* msg, DTWAIN_LONG64 UserData);
+        struct details_info
+        {
+            bool bRefresh = true;
+            int indentFactor = 2;
+            details_info& refresh(bool bSet) { bRefresh = bSet; return *this; }
+            details_info& indent(int indentVal) { indentFactor = indentVal; return *this; }
+        };
+
     }
 }
+
+#pragma warning(pop)
 #endif

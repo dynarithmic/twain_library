@@ -36,9 +36,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             // set the characteristics to acquire to a file.
             // By default, this will acquire to a Windows BMP file
             auto& ac = twsource.get_acquire_characteristics();
