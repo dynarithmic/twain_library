@@ -24,7 +24,11 @@ OF THIRD PARTY RIGHTS.
 
 #include <unordered_map>
 #include <functional>
+#ifndef DTWAIN_NOIMPORTLIB 
 #include <dtwain.h>
+#else
+    #include <dtwainx2.h>
+#endif
 #include <dynarithmic/twain/types/twain_callback.hpp>
 #include <dynarithmic/twain/twain_values.hpp>
 #include <dynarithmic/twain/source/twain_source.hpp>

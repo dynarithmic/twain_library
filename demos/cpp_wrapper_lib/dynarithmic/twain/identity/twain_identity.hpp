@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2023 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ namespace dynarithmic
             twain_identity& set_minor_num(uint16_t val) { m_identity.Version.MinorNum = val; return *this; }
             twain_identity& set_language(uint16_t val) { m_identity.Version.Language = val; return *this; }
             twain_identity& set_country(uint16_t val) { m_identity.Version.Country = val; return *this; }
-
+			twain_identity& set_id(uint32_t id)     { m_identity.Id = id; }
             uint16_t get_protocol_major() const     {  return m_identity.ProtocolMajor; }   
             uint16_t get_protocol_minor() const     {  return m_identity.ProtocolMinor; }   
             uint32_t get_supported_groups() const   {  return m_identity.SupportedGroups; } 
@@ -87,6 +87,7 @@ namespace dynarithmic
             uint16_t get_language() const           {  return m_identity.Version.Language; }
             uint16_t get_country() const            {  return m_identity.Version.Country; } 
             std::string get_version_info() const    {  return m_identity.Version.Info; }    
+            uint32_t get_id() const                 { return m_identity.Id; }
             static std::string get_supported_groups_string(uint32_t sgroups)
             {
                 static const uint32_t dgroups[] = { DG_CONTROL, DG_IMAGE, DG_AUDIO, DF_DSM2, DF_APP2, DF_DS2 };

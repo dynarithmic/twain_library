@@ -37,9 +37,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             // We will only run this demo for devices that have a document feeder
             // that can detect if paper has been inserted.  We didn't have to return
             // but for the sake of this demo, we will only continue to show the 

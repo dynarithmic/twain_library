@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2022 Dynarithmic Software.
+    Copyright (c) 2002-2023 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -980,6 +980,12 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEX)                   
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRINGA)            (DTWAIN_SOURCE, LPCSTR, LONG, LONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRINGW)            (DTWAIN_SOURCE, LPCWSTR, LONG, LONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRING)             (DTWAIN_SOURCE, LPCTSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSFUNC)                      (LPCTSTR, LPTSTR, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSAFUNC)                     (LPCSTR, LPSTR, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSWFUNC)                     (LPCWSTR, LPWSTR, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSFUNC)                     (LPTSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSAFUNC)                    (LPSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    (LPWSTR, LONG, LONG, DTWAIN_BOOL);
 #ifdef __cplusplus
 }
 #endif
@@ -1473,6 +1479,9 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRING)             
     STATIC D_GETSAVEFILENAMEAFUNC                           DTWAIN_GetSaveFileNameA;
     STATIC D_GETSAVEFILENAMEFUNC                            DTWAIN_GetSaveFileName;
     STATIC D_GETSAVEFILENAMEWFUNC                           DTWAIN_GetSaveFileNameW;
+    STATIC D_GETSESSIONDETAILSFUNC                          DTWAIN_GetSessionDetails;
+    STATIC D_GETSESSIONDETAILSAFUNC                         DTWAIN_GetSessionDetailsA;
+    STATIC D_GETSESSIONDETAILSWFUNC                         DTWAIN_GetSessionDetailsW;
     STATIC D_GETSHADOWFUNC                                  DTWAIN_GetShadow;
     STATIC D_GETSHADOWSTRINGAFUNC                           DTWAIN_GetShadowStringA;
     STATIC D_GETSHADOWSTRINGFUNC                            DTWAIN_GetShadowString;
@@ -1481,6 +1490,9 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRING)             
     STATIC D_GETSHORTVERSIONSTRINGFUNC                      DTWAIN_GetShortVersionString;
     STATIC D_GETSHORTVERSIONSTRINGWFUNC                     DTWAIN_GetShortVersionStringW;
     STATIC D_GETSOURCEACQUISITIONSFUNC                      DTWAIN_GetSourceAcquisitions;
+    STATIC D_GETSOURCEDETAILSFUNC                           DTWAIN_GetSourceDetails;
+    STATIC D_GETSOURCEDETAILSAFUNC                          DTWAIN_GetSourceDetailsA;
+    STATIC D_GETSOURCEDETAILSWFUNC                          DTWAIN_GetSourceDetailsW;
     STATIC D_GETSOURCEIDEXFUNC                              DTWAIN_GetSourceIDEx;
     STATIC D_GETSOURCEIDFUNC                                DTWAIN_GetSourceID;
     STATIC D_GETSOURCEMANUFACTURERAFUNC                     DTWAIN_GetSourceManufacturerA;

@@ -356,13 +356,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="buffered_transfer_info.cpp" />
+    <ClCompile Include="dynarithmic\twain\logging\logger_callback.cpp" />
     <ClCompile Include="options_base.cpp" />
     <ClCompile Include="paperhandling_info.cpp" />
     <ClCompile Include="pdf_text_element.cpp" />
-    <ClCompile Include="tojson.cpp" />
     <ClCompile Include="twain_callback.cpp" />
     <ClCompile Include="twain_session.cpp" />
     <ClCompile Include="twain_source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dynarithmic\twain\acquire_characteristics.hpp" />
+    <ClInclude Include="dynarithmic\twain\acquire_characteristics\acquire_characteristics.hpp" />
+    <ClInclude Include="dynarithmic\twain\capability_interface.hpp" />
+    <ClInclude Include="dynarithmic\twain\compiler_details.hpp" />
+    <ClInclude Include="dynarithmic\twain\dtwain_twain.hpp" />
+    <ClInclude Include="dynarithmic\twain\twain_callback.hpp" />
+    <ClInclude Include="dynarithmic\twain\twain_details.hpp" />
+    <ClInclude Include="dynarithmic\twain\twain_session.hpp" />
+    <ClInclude Include="dynarithmic\twain\twain_source.hpp" />
+    <ClInclude Include="dynarithmic\twain\twain_values.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_array.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_callback.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_capbasics.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_frame.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_range.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_timer.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\twain_types.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\underlying_type.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
