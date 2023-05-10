@@ -85,6 +85,10 @@ namespace dynarithmic
             API_INSTANCE DTWAIN_GetLibraryPathA(retBuf.data(), static_cast<int32_t>(retBuf.size()));
             m_dtwain_path = retBuf.data();
 
+            retBuf.resize(1024);
+            API_INSTANCE DTWAIN_GetVersionCopyrightA(retBuf.data(), static_cast<int32_t>(retBuf.size()));
+            m_version_copyright = retBuf.data();
+
             if (m_logger.second && m_logger.second->is_enabled())
                 setup_logging();
 #ifdef _WIN64

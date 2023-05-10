@@ -581,6 +581,9 @@
     D_GETVERSIONINFOAFUNC                                             DYNDTWAIN_API::DTWAIN_GetVersionInfoA = nullptr;
     D_GETVERSIONINFOFUNC                                              DYNDTWAIN_API::DTWAIN_GetVersionInfo = nullptr;
     D_GETVERSIONINFOWFUNC                                             DYNDTWAIN_API::DTWAIN_GetVersionInfoW = nullptr;
+    D_GETVERSIONCOPYRIGHTFUNC                                         DYNDTWAIN_API::DTWAIN_GetVersionCopyright = nullptr;
+    D_GETVERSIONCOPYRIGHTAFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightA = nullptr;
+    D_GETVERSIONCOPYRIGHTWFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightW = nullptr;
     D_GETVERSIONSTRINGAFUNC                                           DYNDTWAIN_API::DTWAIN_GetVersionStringA = nullptr;
     D_GETVERSIONSTRINGFUNC                                            DYNDTWAIN_API::DTWAIN_GetVersionString = nullptr;
     D_GETVERSIONSTRINGWFUNC                                           DYNDTWAIN_API::DTWAIN_GetVersionStringW = nullptr;
@@ -1591,6 +1594,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetVersionStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionStringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyrightA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyrightW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyright, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetXResolution, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetXResolutionStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetXResolutionString, hModule);

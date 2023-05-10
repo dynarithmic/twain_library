@@ -291,6 +291,8 @@ LONG        DLLENTRY_DEF DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LON
 LONG        DLLENTRY_DEF DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
 LONG        DLLENTRY_DEF DTWAIN_GetSourceDetailsA(LPCSTR szSources, LPSTR szBuf, LONG nSize, LONG indentFactor);
 LONG        DLLENTRY_DEF DTWAIN_GetSourceDetailsW(LPCWSTR szSources, LPWSTR szBuf, LONG nSize, LONG indentFactor);
+LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength);
+LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
 
 #ifdef DTWAIN_ANSIDLL
     #define DTWAIN_CHARPTRTYPE LPSTR
@@ -461,4 +463,5 @@ LONG        DLLENTRY_DEF DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LON
 LONG        DLLENTRY_DEF DTWAIN_GetWindowsVersionInfo(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
 LONG        DLLENTRY_DEF DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
 LONG        DLLENTRY_DEF DTWAIN_GetSourceDetails(DTWAIN_CCHARPTRTYPE szSources, DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor);
+LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyright(DTWAIN_CHARPTRTYPE lpszApp, LONG nLength);
 #endif
