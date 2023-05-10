@@ -226,6 +226,7 @@ namespace dynarithmic
             std::string m_long_name;
             std::string m_short_name;
             std::string m_dtwain_path;
+            std::string m_version_copyright;
             DTWAIN_HANDLE m_Handle = nullptr;
             logger_type m_logger;
             callback_map_type m_mapcallback;
@@ -448,6 +449,11 @@ namespace dynarithmic
                 /// 
                 /// @returns a int32_t version string that identifies the version of the underlying DTWAIN library in use.
                 std::string get_long_version_name() const noexcept { return m_long_name; }
+
+                /// Returns a short string that identifies the version and copyright of the Dynarithmic TWAIN Library version
+                /// 
+                /// @returns a string that identifies the version and copyright of the underlying DTWAIN library in use.
+                std::string get_version_copyright() const  noexcept { return m_version_copyright; }
 
                 /// Returns the full path of the TWAIN Data Source Manager in use.
                 /// 

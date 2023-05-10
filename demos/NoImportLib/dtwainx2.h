@@ -986,6 +986,9 @@ typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSWFUNC)                     
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSFUNC)                     (LPTSTR, LONG, LONG, DTWAIN_BOOL);
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSAFUNC)                    (LPSTR, LONG, LONG, DTWAIN_BOOL);
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    (LPWSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTFUNC)                   (LPTSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTAFUNC)                  (LPSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTWFUNC)                  (LPWSTR, LONG);
 #ifdef __cplusplus
 }
 #endif
@@ -1295,6 +1298,9 @@ typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    
     STATIC D_GETAPPINFOAFUNC                                DTWAIN_GetAppInfoA;
     STATIC D_GETAPPINFOFUNC                                 DTWAIN_GetAppInfo;
     STATIC D_GETAPPINFOWFUNC                                DTWAIN_GetAppInfoW;
+    STATIC D_GETVERSIONCOPYRIGHTFUNC                        DTWAIN_GetVersionCopyright;  
+    STATIC D_GETVERSIONCOPYRIGHTAFUNC                       DTWAIN_GetVersionCopyrightA;
+    STATIC D_GETVERSIONCOPYRIGHTWFUNC                       DTWAIN_GetVersionCopyrightW;
     STATIC D_GETAUTHORAFUNC                                 DTWAIN_GetAuthorA;
     STATIC D_GETAUTHORFUNC                                  DTWAIN_GetAuthor;
     STATIC D_GETAUTHORWFUNC                                 DTWAIN_GetAuthorW;

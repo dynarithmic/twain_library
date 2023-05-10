@@ -386,6 +386,9 @@
   <ItemGroup>
     <ResourceCompile Include="dtwdemo.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="DTWDEMO.ICO" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
