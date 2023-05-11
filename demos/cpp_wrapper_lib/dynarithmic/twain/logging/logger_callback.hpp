@@ -29,23 +29,7 @@ namespace dynarithmic
 {
     namespace twain
     {
-        class twain_session;
-        inline LRESULT CALLBACK logger_callback_proc(const char* msg, DTWAIN_LONG64 UserData)
-        {
-            const auto thisObject = reinterpret_cast<twain_session_base*>(UserData);
-            if (thisObject)
-            {
-                twain_session_base::logger_type& sesObject = thisObject->get_logger();
-                if (sesObject.second && sesObject.second->is_enabled())
-                {
-                    const auto& fn = sesObject.second->get_custom_function();
-                    if (fn)
-                        fn(msg);
-                }
-            }
-            return 1;
-        }
-
+        LRESULT CALLBACK logger_callback_proc(const char* msg, DTWAIN_LONG64 UserData);
     }
 }
 #endif

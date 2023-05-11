@@ -18,7 +18,12 @@ FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
 DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
 OF THIRD PARTY RIGHTS.
 */
+#ifndef DTWAIN_NOIMPORTLIB 
 #include <dtwain.h>
+#else
+    #include <dtwainx2.h>
+    #include <dtwpdft.h>
+#endif
 #include <dynarithmic/twain/pdf/pdf_text_element.hpp>
 #include <dynarithmic/twain/source/twain_source.hpp>
 
@@ -38,7 +43,7 @@ namespace dynarithmic
             }
             flags |= m_printpage;
 
-            BOOL retval = DTWAIN_AddPDFTextA(src,
+            BOOL retval = API_INSTANCE DTWAIN_AddPDFTextA(src,
                 m_text.c_str(),
                 m_position.first,
                 m_position.second,

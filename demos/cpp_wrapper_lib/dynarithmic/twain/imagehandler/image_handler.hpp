@@ -25,7 +25,11 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 #include <memory>
 #include <utility>
+#ifndef DTWAIN_NOIMPORTLIB 
 #include <dtwain.h>
+#else
+    #include <dtwainx2.h>
+#endif
 
 #include <dynarithmic/twain/dtwain_twain.hpp>
 

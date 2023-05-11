@@ -16,6 +16,14 @@ SET BOOST_INCLUDE_DIR = c:\boost_installation
 and the directory c:\boost_installation should have a folder called **boost** which would be the root of the  header files.
 
 ----
+### Running the C++ demos
+
+1) Make sure that the [DTWAIN DLL's](https://github.com/dynarithmic/twain_library/tree/master/binaries) are available (system PATH, your exe directory, etc.) when the demo program you are running starts.  A missing DLL will result in a "Dynamic Link Library not found" error at runtime.
+
+2) Make sure the files found in <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text_resources</a> are available in the same directory as the DTWAIN DLL's.  Missing text resources will result in a "DTWAIN Resources not found" error.
+
+
+----
 ### Why not have the demo projects already pre-built?  Why do I need to build them myself?
 It has come to our attention that some of the executables, if prebuilt, generate false positive warnings on a select few virus checkers.  The reason why you should rebuild the demo applications yourself is to be assured that you are not running a virus (even though it is a false positive).  
 

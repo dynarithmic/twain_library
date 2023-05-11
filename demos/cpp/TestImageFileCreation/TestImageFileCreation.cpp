@@ -12,7 +12,7 @@ struct Runner : RunnerBase
     int m_argc;
     std::vector<std::string> m_argv;
 
-    Runner(int argc, char* argv[]) : m_argv(argc)
+    Runner(int argc, char* argv[]) : m_argc(argc)
     {
         for (int i = 0; i < argc; ++i)
             m_argv.push_back(argv[i]);
@@ -119,14 +119,6 @@ void TestMultiOrSingleFile(std::string outDir, bool bTestSingle)
 
     std::string filePrefix = outDir;
 
-    // These are the black and white, 1 bit-per-pixel types
-    std::set<filetype_value::value_type> sBlackWhite = { filetype_value::tiffgroup3multi,
-                                                        filetype_value::tiffgroup4multi,
-                                                        filetype_value::tiffgroup3,
-                                                        filetype_value::tiffgroup4,
-                                                        filetype_value::text,
-                                                        filetype_value::textmulti };
-
     auto& ac = Source.get_acquire_characteristics();
 
     // Set the base file options for all file types
@@ -157,15 +149,6 @@ void TestMultiOrSingleFile(std::string outDir, bool bTestSingle)
 
         // Set the name and type
         fc.set_name(fileName).set_type(fileType);
-
-        // Make sure pixel type is black/white for the corresponding
-        // file type (TIFF G3, TIFF g4, etc.)
-        color_value::value_type pt = color_value::default_color;
-        if (sBlackWhite.count(fileType) )
-            pt = color_value::bw;
-
-        // Set the pixel type
-        gOpts.set_pixeltype(pt);
 
         // Start the acquisition
         Source.acquire();

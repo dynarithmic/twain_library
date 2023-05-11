@@ -40,9 +40,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             auto& ac = twsource.get_acquire_characteristics();
 
             // set the characteristics to acquire to a file.

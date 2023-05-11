@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](http://www.dynarithmic.com/onlinehelp5/dtwain/index.html).
-* The current version is [**5.3.0.3** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version is [**5.3.0.4** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -79,7 +79,7 @@ A breakdown of the files contained in **release_libraries.zip** is as follows:
     dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
     dtwain32u.lib  --  32-bit Unicode import library
     dtwain32u.pdb  --  32-bit PDB files for dtwain32u.dll
-    
+
     dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
     dtwain64.lib   --  64-bit ANSI (MBCS) import library
     dtwain64.pdb   --  64-bit PDB files for dtwain64.dll
@@ -453,8 +453,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
   * crypto++   - Public domain cryptography library by [Wei Dei](https://www.cryptopp.com/)
   * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
   * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
-
-
+  * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
 
 * In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
 

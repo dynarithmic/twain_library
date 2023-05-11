@@ -22,8 +22,8 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/session/twain_session.hpp>
 #include <dynarithmic/twain/logging/logger_callback.hpp>
 #include <dynarithmic/twain/twain_source.hpp>
-#include <dynarithmic/twain/tostring/tojson.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
 namespace dynarithmic
 {
     namespace twain
@@ -33,13 +33,20 @@ namespace dynarithmic
 #ifdef DTWAIN_NOIMPORTLIB
             if (bCleanStart && !get_dllhandle())
             {
+#ifndef DTWAIN_USELOADEDLIB
                 HMODULE hDTwainModule = ::LoadLibraryA(DTWAIN_DLLNAME);
+#else
+                HMODULE hDTwainModule = ::GetModuleHandleA(DTWAIN_DLLNAME);
+#endif
                 if (hDTwainModule)
                     set_dllhandle(hDTwainModule);
                 else
                     return false;
             }
 #endif 
+#ifdef DTWAIN_USELOADEDLIB
+            return true;
+#else
             m_source_detail_map.clear();
             m_error_logger.clear();
             m_error_logger.set_maxsize(m_twain_characteristics.get_errorlogger_details().get_maxsize());
@@ -77,6 +84,10 @@ namespace dynarithmic
             retBuf.resize(1024);
             API_INSTANCE DTWAIN_GetLibraryPathA(retBuf.data(), static_cast<int32_t>(retBuf.size()));
             m_dtwain_path = retBuf.data();
+
+            retBuf.resize(1024);
+            API_INSTANCE DTWAIN_GetVersionCopyrightA(retBuf.data(), static_cast<int32_t>(retBuf.size()));
+            m_version_copyright = retBuf.data();
 
             if (m_logger.second && m_logger.second->is_enabled())
                 setup_logging();
@@ -132,6 +143,7 @@ namespace dynarithmic
                 return true;
             }
             return false;
+    #endif
         }
 
 
@@ -517,11 +529,24 @@ namespace dynarithmic
         /// @see set_app_info()
         twain_identity& twain_session::get_app_info() { return m_twain_characteristics.get_app_info(); }
 
-        template <typename Container>
-        std::string twain_session::get_details(Container container, bool refresh)
+        std::string twain_session::get_details(details_info info)
         {
-            std::transform(std::begin(container), std::end(container), std::begin(container),
+            auto v = get_all_source_info();
+            std::vector<std::string> vSourceNames;
+            std::transform(v.begin(), v.end(), std::back_inserter(vSourceNames), [](twain_identity& id) { return id.get_product_name();});
+            return get_details(vSourceNames, info);
+        }
+
+        std::string twain_session::get_details(const std::vector<std::string>& container_in, details_info info)
+        {
+            auto container = container_in;
+            std::transform(std::begin(container_in), std::end(container_in), std::begin(container),
                 [](const std::string& s) { return boost::algorithm::trim_copy(s); });
+            std::string sAllDetails;
+#ifdef DTWAIN_USELOADEDLIB
+            sAllDetails = json_generator().generate_details(*this, container,true);
+            return sAllDetails;
+#else
             std::sort(std::begin(container), std::end(container));
             std::string sMapKey = std::accumulate(container.begin(), container.end(), std::string(),
                 [&](const std::string& total, const std::string& current)
@@ -529,7 +554,7 @@ namespace dynarithmic
                     return total + "\x01" + current;
                 });
             auto iter = m_source_detail_map.find(sMapKey);
-            if (!refresh && iter != m_source_detail_map.end())
+            if (!info.bRefresh && iter != m_source_detail_map.end())
                 return iter->second;
             if (iter != m_source_detail_map.end())
                 m_source_detail_map.erase(iter);
@@ -546,9 +571,16 @@ namespace dynarithmic
             }
             if (aValidSources.empty())
                 return {};
-            auto sAllDetails = json_generator().generate_details(*this, aValidSources);
+            std::string sources = boost::algorithm::join(aValidSources, "|");
+            LONG nChars = API_INSTANCE DTWAIN_GetSessionDetailsA(nullptr, 0, info.indentFactor, TRUE);
+            if (nChars > 0)
+            {
+                sAllDetails.resize(nChars);
+                API_INSTANCE DTWAIN_GetSessionDetailsA(&sAllDetails[0], nChars, info.indentFactor, FALSE);
+            }
             m_source_detail_map.insert({ sMapKey, sAllDetails });
             return sAllDetails;
+#endif
         }
 
         LRESULT CALLBACK twain_session::error_callback_proc(LONG error, LONG64 UserData)

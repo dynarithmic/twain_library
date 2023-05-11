@@ -525,6 +525,18 @@ namespace dynarithmic
             static constexpr value_type  pdfraster_source_mode = DTWAIN_FF_PDFRASTER;
         };
 
+        struct tiffcompress_value
+        {
+            typedef uint16_t value_type;
+            static constexpr value_type  deflate = DTWAIN_TIFFDEFLATE;
+            static constexpr value_type  group3 = DTWAIN_TIFFG3;
+            static constexpr value_type  group4 = DTWAIN_TIFFG4;
+            static constexpr value_type  jpeg = DTWAIN_TIFFJPEG;
+            static constexpr value_type  lzw = DTWAIN_TIFFLZW;
+            static constexpr value_type  nocompress = DTWAIN_TIFFNONE;
+            static constexpr value_type  packbits = DTWAIN_TIFFPACKBITS;
+        };
+
         struct filmtype_value
         {
             static constexpr uint16_t positive  = TWFM_POSITIVE;

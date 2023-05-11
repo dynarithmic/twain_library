@@ -80,9 +80,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::cout << twsource.get_source_info().get_product_name() << "\n";
-
             // set the characteristics to acquire in native mode.
             // Arrays of Device Independent Bitmap's will be returned for each page scanned
             twsource.get_acquire_characteristics().

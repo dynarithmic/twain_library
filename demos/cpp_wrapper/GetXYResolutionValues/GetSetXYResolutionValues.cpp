@@ -56,10 +56,6 @@ int Runner::Run()
         // check if we were able to open the source
         if (twsource.is_open())
         {
-            // output the source product name
-            std::string prodName = twsource.get_source_info().get_product_name();
-            std::cout << prodName << "\n";
-
             // Get the interface to the capabilities of the device
             auto& ci = twsource.get_capability_interface();
 
@@ -67,7 +63,8 @@ int Runner::Run()
             auto vUnits = ci.get_units(capability_interface::get_current());
             if ( vUnits.empty() )
             { 
-                std::cout << "Could not obtain the unit of measure for device \"" << prodName << "\"\n";
+                std::cout << "Could not obtain the unit of measure for device \"" << 
+                    twsource.get_source_info().get_product_name() << "\"\n";
                 return 0;
             }
 
