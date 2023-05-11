@@ -232,7 +232,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>USE_DTWAIN_DEBUG_LIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)c_cpp_includes;$(SolutionDir)cpp_wrapper_lib;$(BOOST_INCLUDE_DIR)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4800;4996</DisableSpecificWarnings>
       <ConformanceMode>true</ConformanceMode>
