@@ -75,7 +75,7 @@ namespace dynarithmic
             twain_identity& set_minor_num(uint16_t val) { m_identity.Version.MinorNum = val; return *this; }
             twain_identity& set_language(uint16_t val) { m_identity.Version.Language = val; return *this; }
             twain_identity& set_country(uint16_t val) { m_identity.Version.Country = val; return *this; }
-			twain_identity& set_id(uint32_t id)     { m_identity.Id = id; }
+			twain_identity& set_id(uint32_t id)     { m_identity.Id = id; return *this; }
             uint16_t get_protocol_major() const     {  return m_identity.ProtocolMajor; }   
             uint16_t get_protocol_minor() const     {  return m_identity.ProtocolMinor; }   
             uint32_t get_supported_groups() const   {  return m_identity.SupportedGroups; } 
@@ -90,8 +90,8 @@ namespace dynarithmic
             uint32_t get_id() const                 { return m_identity.Id; }
             static std::string get_supported_groups_string(uint32_t sgroups)
             {
-                static const uint32_t dgroups[] = { DG_CONTROL, DG_IMAGE, DG_AUDIO, DF_DSM2, DF_APP2, DF_DS2 };
-                static const char * dgroupsStr[] = { "DG_CONTROL", "DG_IMAGE", "DG_AUDIO", "DF_DSM2", "DF_APP2", "DF_DS2" };
+                constexpr uint32_t dgroups[] = { DG_CONTROL, DG_IMAGE, DG_AUDIO, DF_DSM2, DF_APP2, DF_DS2 };
+                constexpr const char * dgroupsStr[] = { "DG_CONTROL", "DG_IMAGE", "DG_AUDIO", "DF_DSM2", "DF_APP2", "DF_DS2" };
                 std::string ret;
                 int i = 0;
                 for (auto g : dgroups)

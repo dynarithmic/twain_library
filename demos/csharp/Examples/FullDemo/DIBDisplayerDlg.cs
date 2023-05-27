@@ -20,6 +20,17 @@ namespace TWAINDemo
         private int nCurrentAcquisition;
         private int nCurDib;
 
+        public struct DibInfo
+        {
+            public int acquisition;
+            public int pageNum;
+        }
+
+        private Dictionary<DibInfo, Bitmap> DibDictionary = new Dictionary<DibInfo, Bitmap>();
+
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject([In] IntPtr hObject);
         public DIBDisplayerDlg(DTWAIN_ARRAY AcqArray)
         {
             AcquireArray = AcqArray;
@@ -59,7 +70,8 @@ namespace TWAINDemo
 
         private static Bitmap BitmapFromDIB(IntPtr pDIB)
         {
-            return Bitmap.FromHbitmap(TwainAPI.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero);
+            Bitmap theBitmap = Bitmap.FromHbitmap(TwainAPI.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero);
+            return theBitmap;
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)
@@ -71,8 +83,21 @@ namespace TWAINDemo
         // Displays the DIB bitmap for acquisition nCurrentAcquisition, page nCurDib
         private void DisplayTheDib()
         {
-            DTWAIN_HANDLE dib = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
-            this.dibBox.Image = BitmapFromDIB(dib);
+            DibInfo keyCurrent = new DibInfo();
+            keyCurrent.acquisition = nCurrentAcquisition;
+            keyCurrent.pageNum = nCurDib;
+            Bitmap theBitmap;
+            if (DibDictionary.ContainsKey(keyCurrent))
+            {
+                theBitmap = DibDictionary[keyCurrent];
+                this.dibBox.Image = theBitmap;
+            }
+            else
+            {
+                DTWAIN_HANDLE dibToUse = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
+                this.dibBox.Image = BitmapFromDIB(dibToUse);
+                DibDictionary.Add(keyCurrent, (Bitmap)this.dibBox.Image);
+            }
             EnablePageButtons();
         }
 
@@ -98,17 +123,9 @@ namespace TWAINDemo
 
         private void DIBDispalyerDlg_FormClosing(object sender, FormClosingEventArgs e)
         {
-            int acquisitionCount = TwainAPI.DTWAIN_GetNumAcquisitions(AcquireArray);
-            for (int i = 0; i < acquisitionCount; ++i)
-            {
-                int imageCount = TwainAPI.DTWAIN_GetNumAcquiredImages(AcquireArray, i);
-                for (int j = 0; j < imageCount; ++j)
-                {
-                    DTWAIN_HANDLE handle = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, i, j);
-                    TwainAPI.GlobalUnlock(handle);
-                    TwainAPI.GlobalFree(handle);
-                }
-            }
+            foreach (KeyValuePair<DibInfo, Bitmap> pair in DibDictionary)
+                DeleteObject(pair.Value.GetHbitmap());
+            TwainAPI.DTWAIN_DestroyAcquisitionArray(AcquireArray, 1);
         }
     }
 }

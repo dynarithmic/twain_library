@@ -482,12 +482,14 @@ namespace TWAINDemo
                      TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
                 {
                     MessageBox.Show("Acquisition Failed", "TWAIN Error");
+                    this.Enabled = true;
                     return;
                 }
 
                 if (TwainAPI.DTWAIN_ArrayGetCount(acquireArray) == 0)
                 {
                     MessageBox.Show("No Images Acquired", "");
+                    this.Enabled = true;
                     return;
                 }
 
@@ -515,12 +517,14 @@ namespace TWAINDemo
                      TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
                 {
                     MessageBox.Show("Acquisition Failed", "TWAIN Error");
+                    this.Enabled = true;
                     return;
                 }
 
                 if (TwainAPI.DTWAIN_ArrayGetCount(acquireArray) == 0)
                 {
                     MessageBox.Show("No Images Acquired", "");
+                    this.Enabled = true;
                     return;
                 }
 
@@ -564,6 +568,7 @@ namespace TWAINDemo
                         tFileName = fDlg.GetFileName();
                         StringBuilder szSourceName = new StringBuilder(tFileName);
                         fileType = fDlg.GetFileType();
+                        this.Enabled = true;
                         break;
 
                     case 1:
@@ -578,6 +583,7 @@ namespace TWAINDemo
                             sText += "However, the DTWAIN library will support all built-in formats if your driver\r\n";
                             sText += "supports other formats.";
                             MessageBox.Show(sText);
+                            this.Enabled = true;
                             return;
                         }
                         FileFlags = TwainAPI.DTWAIN_USESOURCEMODE | TwainAPI.DTWAIN_USELONGNAME;
@@ -605,6 +611,7 @@ namespace TWAINDemo
                     MessageBox.Show("Image file saved successfully");
                 else
                     MessageBox.Show("The acquisition returned a status of " + status.ToString());
+                this.Enabled = true;
             }
         }
 
@@ -640,6 +647,7 @@ namespace TWAINDemo
                         TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags & ~TwainAPI.DTWAIN_LOG_USEFILE), "");
                         MessageBox.Show("The DebugView debug monitor will start...");
                         Process.Start("DbgView.exe");
+                        this.Enabled = true;
                     break;
                 }
             }

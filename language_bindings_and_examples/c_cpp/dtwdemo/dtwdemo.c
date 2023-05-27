@@ -102,6 +102,8 @@ AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("Windows ICON File (ICO)"), DTWAIN_ICO, _T("test.ico")},
                             {_T("Windows ICON File- Vista compatible (ICO)"), DTWAIN_ICO_VISTA, _T("test.ico")},
                             {_T("Wireless Bitmap File (WBMP)"), DTWAIN_WBMP, _T("test.wbmp")},
+                            {_T("Google WebP (WEBP)"), DTWAIN_WEBP, _T("test.webp")},
+
                         };
 
 AllTypes g_allTypesDemo[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
@@ -143,7 +145,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     DTWAIN_CheckHandles(FALSE);
     /* Allow DTWAIN messages to be sent directly to our Window proc */
     DTWAIN_StartTwainSession(g_hWnd, NULL);
-    DTWAIN_SetTwainMode(DTWAIN_MODELESS);
+    // DTWAIN_SetTwainMode(DTWAIN_MODELESS);
     DTWAIN_EnableMsgNotify(TRUE);
 
     /* Also allow DTWAIN messages to be sent to our callback */
@@ -591,8 +593,6 @@ void AcquireFile(BOOL bUseSource)
 		}
     }
 }
-
-
 
 
 DTWAIN_SOURCE DisplayGetNameDlg()
@@ -1068,9 +1068,15 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
         case WM_INITDIALOG:
-                
-                SendMessageA(hDlg, WM_SETTEXT, 0, (LPARAM)DTWAIN_VERINFO_FILEVERSION);
+        {
+            char szBuf[1000];
+            HWND hWndEdit = GetDlgItem(hDlg, IDC_edCopyright);
+            DTWAIN_GetShortVersionStringA(szBuf, 100);
+            SendMessageA(hDlg, WM_SETTEXT, 0, (LPARAM)szBuf);
+            DTWAIN_GetVersionCopyrightA(szBuf, 1000);
+            SendMessageA(hWndEdit, WM_SETTEXT, 0, (LPARAM)szBuf);
                 return TRUE;
+        }
 
         case WM_COMMAND:
             if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
@@ -1097,10 +1103,15 @@ BOOL IsAllSpace(LPCTSTR p)
 
 void WaitLoop()
 {
+    if (DTWAIN_GetTwainMode() != DTWAIN_MODELESS)
+        return;
+
+    // When in DTWAIN_MODELESS mode, this application is responsible for the TWAIN loop
+    // during when the source is enabled and acquiring images
     MSG msg;
     int val;
     while (((val = GetMessage (&msg, NULL, 0, 0)) != -1) // while there is a message
-            && DTWAIN_IsUIEnabled(g_CurrentSource))         // and the Source is acquiring
+            && DTWAIN_IsSourceAcquiringEx(g_CurrentSource, FALSE)) // and the Source is acquiring
     {
         if ( val != 0 )
         {

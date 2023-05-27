@@ -1,6 +1,6 @@
 REM
 REM This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-REM Copyright (c) 2002-2021 Dynarithmic Software.                                         
+REM Copyright (c) 2002-2023 Dynarithmic Software.                                         
 REM                                                                                       
 REM Licensed under the Apache License, Version 2.0 (the "License");                       
 REM you may not use this file except in compliance with the License.                      
@@ -233,11 +233,16 @@ Class DTWAINAPI
     Public Const DTWAIN_TWIPS As Integer  = 4
     Public Const DTWAIN_PIXELS As Integer  = 5
     Public Const DTWAIN_MILLIMETERS As Integer  = 6
-    Public Const DTWAIN_USENAME As Integer  = 4
-    Public Const DTWAIN_USEPROMPT As Integer  = 8
-    Public Const DTWAIN_USELONGNAME As Integer  = 16
-    Public Const DTWAIN_USESOURCEMODE As Integer  = 32
-    Public Const DTWAIN_USELIST As Integer  = 64
+    Public Const DTWAIN_USENATIVE As Integer = 1
+    Public Const DTWAIN_USEBUFFERED As Integer = 2
+    Public Const DTWAIN_USECOMPRESSION As Integer = 4
+    Public Const DTWAIN_USEMEMFILE As Integer = 8
+    Public Const DTWAIN_USENAME As Integer = 16
+    Public Const DTWAIN_USEPROMPT As Integer = 32
+    Public Const DTWAIN_USELONGNAME As Integer = 64
+    Public Const DTWAIN_USESOURCEMODE As Integer = 128
+    Public Const DTWAIN_USELIST As Integer = 256
+    Public Const DTWAIN_CREATE_DIRECTORY As Integer = 512
     Public Const DTWAIN_ARRAYANY As Integer  = 1
     Public Const DTWAIN_ArrayTypePTR As Integer  = 1
     Public Const DTWAIN_ARRAYLONG As Integer  = 2
@@ -332,9 +337,6 @@ Class DTWAINAPI
     Public Const DTWAIN_FLOATDEFAULT As Double  = (-9999.0)
     Public Const DTWAIN_CallbackERROR As Integer  = 1
     Public Const DTWAIN_CallbackMESSAGE As Integer  = 2
-    Public Const DTWAIN_USENATIVE As Integer  = 1
-    Public Const DTWAIN_USEBUFFERED As Integer  = 2
-    Public Const DTWAIN_USECOMPRESSION As Integer  = 4
     Public Const DTWAIN_FAILURE1 As Integer  = (-1)
     Public Const DTWAIN_FAILURE2 As Integer  = (-2)
     Public Const DTWAIN_DELETEALL As Integer  = (-1)
@@ -413,6 +415,8 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PROCESSEDAUDIOFINAL As Integer =	1180
     Public Const DTWAIN_TN_PROCESSAUDIOFINALACCEPTED As Integer = 1181
     Public Const DTWAIN_TN_PROCESSEDAUDIOFILE As Integer =	1182
+    Public Const DTWAIN_TN_TWAINTRIPLETBEGIN As Integer = 1183
+    Public Const DTWAIN_TN_TWAINTRIPLETEND As Integer = 1184
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer  = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer  = 2
     Public Const DTWAIN_MODAL As Integer  = 0
@@ -423,7 +427,7 @@ Class DTWAINAPI
     Public Const DTWAIN_ROUNDNEAREST As Integer  = 0
     Public Const DTWAIN_ROUNDUP As Integer  = 1
     Public Const DTWAIN_ROUNDDOWN As Integer  = 2
-    Public Const DTWAIN_FLOATDELTA As Double  = 1.0E-08
+    Public Const DTWAIN_FLOATDELTA As Double = 0.00000001
     Public Const DTWAIN_OR_ROT0 As Integer  = 0
     Public Const DTWAIN_OR_ROT90 As Integer  = 1
     Public Const DTWAIN_OR_ROT180 As Integer  = 2
@@ -431,20 +435,20 @@ Class DTWAINAPI
     Public Const DTWAIN_OR_PORTRAIT As Integer  = DTWAIN_OR_ROT0
     Public Const DTWAIN_OR_LANDSCAPE As Integer  = DTWAIN_OR_ROT270
     Public Const DTWAIN_OR_ANYROTATION As Integer  = (-1)
-    Public Const DTWAIN_CO_GET As Integer  = &H0001
-    Public Const DTWAIN_CO_SET As Integer  = &H0002
-    Public Const DTWAIN_CO_GETDEFAULT As Integer  = &H0004
-    Public Const DTWAIN_CO_GETCURRENT As Integer  = &H0008
-    Public Const DTWAIN_CO_RESET As Integer  = &H0010
-    Public Const DTWAIN_CO_SETCONSTRAINT As Integer  = &H0020
-    Public Const DTWAIN_CO_CONSTRAINABLE As Integer  = &H0040
-    Public Const DTWAIN_CO_GETHELP As Integer  = &H0100
-    Public Const DTWAIN_CO_GETLABEL As Integer  = &H0200
-    Public Const DTWAIN_CO_GETLABELENUM As Integer  = &H0400
+    Public Const DTWAIN_CO_GET As Integer = &H1
+    Public Const DTWAIN_CO_SET As Integer = &H2
+    Public Const DTWAIN_CO_GETDEFAULT As Integer = &H4
+    Public Const DTWAIN_CO_GETCURRENT As Integer = &H8
+    Public Const DTWAIN_CO_RESET As Integer = &H10
+    Public Const DTWAIN_CO_SETCONSTRAINT As Integer = &H20
+    Public Const DTWAIN_CO_CONSTRAINABLE As Integer = &H40
+    Public Const DTWAIN_CO_GETHELP As Integer = &H100
+    Public Const DTWAIN_CO_GETLABEL As Integer = &H200
+    Public Const DTWAIN_CO_GETLABELENUM As Integer = &H400
     Public Const DTWAIN_CNTYAFGHANISTAN As Integer  = 1001
     Public Const DTWAIN_CNTYALGERIA As Integer  = 213
     Public Const DTWAIN_CNTYAMERICANSAMOA As Integer  = 684
-    Public Const DTWAIN_CNTYANDORRA As Integer  = 033
+    Public Const DTWAIN_CNTYANDORRA As Integer = 33
     Public Const DTWAIN_CNTYANGOLA As Integer  = 1002
     Public Const DTWAIN_CNTYANGUILLA As Integer  = 8090
     Public Const DTWAIN_CNTYANTIGUA As Integer  = 8091
@@ -487,7 +491,7 @@ Class DTWAINAPI
     Public Const DTWAIN_CNTYCONGO As Integer  = 1011
     Public Const DTWAIN_CNTYCOOKIS As Integer  = 1012
     Public Const DTWAIN_CNTYCOSTARICA As Integer  = 506
-    Public Const DTWAIN_CNTYCUBA As Integer  = 005
+    Public Const DTWAIN_CNTYCUBA As Integer = 5
     Public Const DTWAIN_CNTYCYPRUS As Integer  = 357
     Public Const DTWAIN_CNTYCZECHOSLOVAKIA As Integer  = 42
     Public Const DTWAIN_CNTYDENMARK As Integer  = 45
@@ -885,21 +889,21 @@ Class DTWAINAPI
     Public Const DTWAIN_PM_SINGLESTRING As Integer  = 0
     Public Const DTWAIN_PM_MULTISTRING As Integer  = 1
     Public Const DTWAIN_PM_COMPOUNDSTRING As Integer  = 2
-    Public Const DTWAIN_TWTY_INT8 As Integer  = &H0000
-    Public Const DTWAIN_TWTY_INT16 As Integer  = &H0001
-    Public Const DTWAIN_TWTY_INT32 As Integer  = &H0002
-    Public Const DTWAIN_TWTY_UINT8 As Integer  = &H0003
-    Public Const DTWAIN_TWTY_UINT16 As Integer  = &H0004
-    Public Const DTWAIN_TWTY_UINT32 As Integer  = &H0005
-    Public Const DTWAIN_TWTY_BOOL As Integer  = &H0006
-    Public Const DTWAIN_TWTY_FIX32 As Integer  = &H0007
-    Public Const DTWAIN_TWTY_FRAME As Integer  = &H0008
-    Public Const DTWAIN_TWTY_STR32 As Integer  = &H0009
-    Public Const DTWAIN_TWTY_STR64 As Integer  = &H000A
-    Public Const DTWAIN_TWTY_STR128 As Integer  = &H000B
-    Public Const DTWAIN_TWTY_STR255 As Integer  = &H000C
-    Public Const DTWAIN_TWTY_STR1024 As Integer  = &H000D
-    Public Const DTWAIN_TWTY_UNI512 As Integer  = &H000E
+    Public Const DTWAIN_TWTY_INT8 As Integer = &H0
+    Public Const DTWAIN_TWTY_INT16 As Integer = &H1
+    Public Const DTWAIN_TWTY_INT32 As Integer = &H2
+    Public Const DTWAIN_TWTY_UINT8 As Integer = &H3
+    Public Const DTWAIN_TWTY_UINT16 As Integer = &H4
+    Public Const DTWAIN_TWTY_UINT32 As Integer = &H5
+    Public Const DTWAIN_TWTY_BOOL As Integer = &H6
+    Public Const DTWAIN_TWTY_FIX32 As Integer = &H7
+    Public Const DTWAIN_TWTY_FRAME As Integer = &H8
+    Public Const DTWAIN_TWTY_STR32 As Integer = &H9
+    Public Const DTWAIN_TWTY_STR64 As Integer = &HA
+    Public Const DTWAIN_TWTY_STR128 As Integer = &HB
+    Public Const DTWAIN_TWTY_STR255 As Integer = &HC
+    Public Const DTWAIN_TWTY_STR1024 As Integer = &HD
+    Public Const DTWAIN_TWTY_UNI512 As Integer = &HE
     Public Const DTWAIN_EI_BARCODEX As Integer  = &H1200
     Public Const DTWAIN_EI_BARCODEY As Integer  = &H1201
     Public Const DTWAIN_EI_BARCODETEXT As Integer  = &H1202
@@ -974,24 +978,41 @@ Class DTWAINAPI
     Public Const DTWAIN_EI_MAGDATALENGTH As Integer  = &H1248
     Public Const DTWAIN_EI_PAPERCOUNT As Integer  = &H1249
     Public Const DTWAIN_EI_PRINTERTEXT As Integer  = &H124A
-    Public Const DTWAIN_LOG_DECODE_SOURCE As Integer  = 1
-    Public Const DTWAIN_LOG_DECODE_DEST As Integer  = 2
-    Public Const DTWAIN_LOG_DECODE_TWMEMREF As Integer  = 4
-    Public Const DTWAIN_LOG_DECODE_TWEVENT As Integer  = 8
-    Public Const DTWAIN_LOG_USEFILE As Integer  = 16
-    Public Const DTWAIN_LOG_CALLSTACK As Integer  = 32
-    Public Const DTWAIN_LOG_USEWINDOW As Integer  = 64
-    Public Const DTWAIN_LOG_SHOWEXCEPTIONS As Integer  = 128
-    Public Const DTWAIN_LOG_ERRORMSGBOX As Integer  = 256
-    Public Const DTWAIN_LOG_INITFAILURE As Integer  = 512
-    Public Const DTWAIN_LOG_USEBUFFER As Integer  = 1024
-    Public Const DTWAIN_LOG_FILEAPPEND As Integer  = 2048
-    Public Const DTWAIN_LOG_DECODE_BITMAP As Integer  = 4096
+
+
+    Public Const DTWAIN_LOG_DECODE_SOURCE As Integer = &H1
+    Public Const DTWAIN_LOG_DECODE_DEST As Integer = &H2
+    Public Const DTWAIN_LOG_DECODE_TWMEMREF As Integer = &H4
+    Public Const DTWAIN_LOG_DECODE_TWEVENT As Integer = &H8
+    Public Const DTWAIN_LOG_CALLSTACK As Integer = &H10
+    Public Const DTWAIN_LOG_ISTWAINMSG As Integer = &H20
+    Public Const DTWAIN_LOG_INITFAILURE As Integer = &H40
+    Public Const DTWAIN_LOG_LOWLEVELTWAIN As Integer = &H80
+    Public Const DTWAIN_LOG_DECODE_BITMAP As Integer = &H100
+    Public Const DTWAIN_LOG_NOTIFICATIONS As Integer = &H200
+    Public Const DTWAIN_LOG_MISCELLANEOUS As Integer = &H400
+    Public Const DTWAIN_LOG_DTWAINERRORS As Integer = &H800
+    Public Const DTWAIN_LOG_USEFILE As Integer = &H10000
+    Public Const DTWAIN_LOG_SHOWEXCEPTIONS As Integer = &H20000
+    Public Const DTWAIN_LOG_ERRORMSGBOX As Integer = &H40000
+    Public Const DTWAIN_LOG_USEBUFFER As Integer = &H80000
+    Public Const DTWAIN_LOG_FILEAPPEND As Integer = &H100000
+    Public Const DTWAIN_LOG_USECALLBACK As Integer = &H200000
+    Public Const DTWAIN_LOG_USECRLF As Integer = &H400000
+    Public Const DTWAIN_LOG_CONSOLE As Integer = &H800000
+    Public Const DTWAIN_LOG_DEBUGMONITOR As Integer = &H1000000
+    Public Const DTWAIN_LOG_USEWINDOW As Integer = &H2000000
+
     Public Const DTWAIN_LOG_NOCALLBACK As Integer  = 8192
     Public Const DTWAIN_LOG_WRITE As Integer  = 16384
-    Public Const DTWAIN_LOG_USECRLF As Integer  = 32768
-    Public Const DTWAIN_LOG_ALL As Integer  = &HFFFFF7FF
+    Public Const DTWAIN_LOG_ALL As Integer = (DTWAIN_LOG_DECODE_SOURCE Or DTWAIN_LOG_DECODE_DEST Or DTWAIN_LOG_DECODE_TWEVENT _
+                        Or DTWAIN_LOG_DECODE_TWMEMREF Or DTWAIN_LOG_CALLSTACK Or DTWAIN_LOG_ISTWAINMSG Or DTWAIN_LOG_INITFAILURE _
+                        Or DTWAIN_LOG_LOWLEVELTWAIN Or DTWAIN_LOG_NOTIFICATIONS Or DTWAIN_LOG_MISCELLANEOUS Or DTWAIN_LOG_DTWAINERRORS _
+                        Or DTWAIN_LOG_DECODE_BITMAP)
+
     Public Const DTWAIN_LOG_ALL_APPEND As Integer  = &HFFFFFFFF
+
+
     Public Const DTWAINGCD_RETURNHANDLE As Integer  = 1
     Public Const DTWAINGCD_COPYDATA As Integer  = 2
     Public Const DTWAIN_BYPOSITION As Integer  = 0
@@ -1097,25 +1118,25 @@ Class DTWAINAPI
     Public Const DTWAIN_MANDUP_SIDE2RESCAN As Integer  = 3
     Public Const DTWAIN_MANDUP_RESCANALL As Integer  = 4
     Public Const DTWAIN_MANDUP_PAGEMISSING As Integer  = 5
-    Public Const DTWAIN_DEMODLL_VERSION As Integer  = &H00000001
-    Public Const DTWAIN_UNLICENSED_VERSION As Integer  = &H00000002
-    Public Const DTWAIN_COMPANY_VERSION As Integer  = &H00000004
-    Public Const DTWAIN_GENERAL_VERSION As Integer  = &H00000008
-    Public Const DTWAIN_DEVELOP_VERSION As Integer  = &H00000010
-    Public Const DTWAIN_JAVA_VERSION As Integer  = &H00000020
-    Public Const DTWAIN_TOOLKIT_VERSION As Integer  = &H00000040
-    Public Const DTWAIN_LIMITEDDLL_VERSION As Integer  = &H00000080
-    Public Const DTWAIN_STATICLIB_VERSION As Integer  = &H00000100
-    Public Const DTWAIN_STATICLIB_STDCALL_VERSION As Integer  = &H00000200
-    Public Const DTWAIN_PDF_VERSION As Integer  = &H00010000
-    Public Const DTWAIN_TWAINSAVE_VERSION As Integer  = &H00020000
-    Public Const DTWAIN_OCR_VERSION As Integer  = &H00040000
-    Public Const DTWAIN_BARCODE_VERSION As Integer  = &H00080000
-    Public Const DTWAIN_ACTIVEX_VERSION As Integer  = &H00100000
-    Public Const DTWAIN_32BIT_VERSION As Integer  = &H00200000
-    Public Const DTWAIN_64BIT_VERSION As Integer  = &H00400000
-    Public Const DTWAIN_UNICODE_VERSION As Integer  = &H00800000
-    Public Const DTWAIN_OPENSOURCE_VERSION As Integer  = &H01000000
+    Public Const DTWAIN_DEMODLL_VERSION As Integer = &H1
+    Public Const DTWAIN_UNLICENSED_VERSION As Integer = &H2
+    Public Const DTWAIN_COMPANY_VERSION As Integer = &H4
+    Public Const DTWAIN_GENERAL_VERSION As Integer = &H8
+    Public Const DTWAIN_DEVELOP_VERSION As Integer = &H10
+    Public Const DTWAIN_JAVA_VERSION As Integer = &H20
+    Public Const DTWAIN_TOOLKIT_VERSION As Integer = &H40
+    Public Const DTWAIN_LIMITEDDLL_VERSION As Integer = &H80
+    Public Const DTWAIN_STATICLIB_VERSION As Integer = &H100
+    Public Const DTWAIN_STATICLIB_STDCALL_VERSION As Integer = &H200
+    Public Const DTWAIN_PDF_VERSION As Integer = &H10000
+    Public Const DTWAIN_TWAINSAVE_VERSION As Integer = &H20000
+    Public Const DTWAIN_OCR_VERSION As Integer = &H40000
+    Public Const DTWAIN_BARCODE_VERSION As Integer = &H80000
+    Public Const DTWAIN_ACTIVEX_VERSION As Integer = &H100000
+    Public Const DTWAIN_32BIT_VERSION As Integer = &H200000
+    Public Const DTWAIN_64BIT_VERSION As Integer = &H400000
+    Public Const DTWAIN_UNICODE_VERSION As Integer = &H800000
+    Public Const DTWAIN_OPENSOURCE_VERSION As Integer = &H1000000
     Public Const DTWAINOCR_RETURNHANDLE As Integer  = 1
     Public Const DTWAINOCR_COPYDATA As Integer  = 2
     Public Const DTWAIN_OCRINFO_CHAR As Integer  = 0
@@ -1166,11 +1187,11 @@ Class DTWAINAPI
     Public Const DTWAIN_TWDF_BYLENGTH As Integer  = 1
     Public Const DTWAIN_TWDF_INFRARED As Integer  = 2
     Public Const DTWAIN_CV_CAPCUSTOMBASE As Integer  = &H8000
-    Public Const DTWAIN_CV_CAPXFERCOUNT As Integer  = &H0001
-    Public Const DTWAIN_CV_ICAPCOMPRESSION As Integer  = &H0100
-    Public Const DTWAIN_CV_ICAPPIXELTYPE As Integer  = &H0101
-    Public Const DTWAIN_CV_ICAPUNITS As Integer  = &H0102
-    Public Const DTWAIN_CV_ICAPXFERMECH As Integer  = &H0103
+    Public Const DTWAIN_CV_CAPXFERCOUNT As Integer = &H1
+    Public Const DTWAIN_CV_ICAPCOMPRESSION As Integer = &H100
+    Public Const DTWAIN_CV_ICAPPIXELTYPE As Integer = &H101
+    Public Const DTWAIN_CV_ICAPUNITS As Integer = &H102
+    Public Const DTWAIN_CV_ICAPXFERMECH As Integer = &H103
     Public Const DTWAIN_CV_CAPAUTHOR As Integer  = &H1000
     Public Const DTWAIN_CV_CAPCAPTION As Integer  = &H1001
     Public Const DTWAIN_CV_CAPFEEDERENABLED As Integer  = &H1002
@@ -1181,12 +1202,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPAUTOFEED As Integer  = &H1007
     Public Const DTWAIN_CV_CAPCLEARPAGE As Integer  = &H1008
     Public Const DTWAIN_CV_CAPFEEDPAGE As Integer  = &H1009
-    Public Const DTWAIN_CV_CAPREWINDPAGE As Integer  = &H100a
-    Public Const DTWAIN_CV_CAPINDICATORS As Integer  = &H100b
-    Public Const DTWAIN_CV_CAPSUPPORTEDCAPSEXT As Integer  = &H100c
-    Public Const DTWAIN_CV_CAPPAPERDETECTABLE As Integer  = &H100d
-    Public Const DTWAIN_CV_CAPUICONTROLLABLE As Integer  = &H100e
-    Public Const DTWAIN_CV_CAPDEVICEONLINE As Integer  = &H100f
+    Public Const DTWAIN_CV_CAPREWINDPAGE As Integer = &H100A
+    Public Const DTWAIN_CV_CAPINDICATORS As Integer = &H100B
+    Public Const DTWAIN_CV_CAPSUPPORTEDCAPSEXT As Integer = &H100C
+    Public Const DTWAIN_CV_CAPPAPERDETECTABLE As Integer = &H100D
+    Public Const DTWAIN_CV_CAPUICONTROLLABLE As Integer = &H100E
+    Public Const DTWAIN_CV_CAPDEVICEONLINE As Integer = &H100F
     Public Const DTWAIN_CV_CAPAUTOSCAN As Integer  = &H1010
     Public Const DTWAIN_CV_CAPTHUMBNAILSENABLED As Integer  = &H1011
     Public Const DTWAIN_CV_CAPDUPLEX As Integer  = &H1012
@@ -1197,12 +1218,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPJOBCONTROL As Integer  = &H1017
     Public Const DTWAIN_CV_CAPALARMS As Integer  = &H1018
     Public Const DTWAIN_CV_CAPALARMVOLUME As Integer  = &H1019
-    Public Const DTWAIN_CV_CAPAUTOMATICCAPTURE As Integer  = &H101a
-    Public Const DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE As Integer  = &H101b
-    Public Const DTWAIN_CV_CAPTIMEBETWEENCAPTURES As Integer  = &H101c
-    Public Const DTWAIN_CV_CAPCLEARBUFFERS As Integer  = &H101d
-    Public Const DTWAIN_CV_CAPMAXBATCHBUFFERS As Integer  = &H101e
-    Public Const DTWAIN_CV_CAPDEVICETIMEDATE As Integer  = &H101f
+    Public Const DTWAIN_CV_CAPAUTOMATICCAPTURE As Integer = &H101A
+    Public Const DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE As Integer = &H101B
+    Public Const DTWAIN_CV_CAPTIMEBETWEENCAPTURES As Integer = &H101C
+    Public Const DTWAIN_CV_CAPCLEARBUFFERS As Integer = &H101D
+    Public Const DTWAIN_CV_CAPMAXBATCHBUFFERS As Integer = &H101E
+    Public Const DTWAIN_CV_CAPDEVICETIMEDATE As Integer = &H101F
     Public Const DTWAIN_CV_CAPPOWERSUPPLY As Integer  = &H1020
     Public Const DTWAIN_CV_CAPCAMERAPREVIEWUI As Integer  = &H1021
     Public Const DTWAIN_CV_CAPDEVICEEVENT As Integer  = &H1022
@@ -1213,12 +1234,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPPRINTERENABLED As Integer  = &H1027
     Public Const DTWAIN_CV_CAPPRINTERINDEX As Integer  = &H1028
     Public Const DTWAIN_CV_CAPPRINTERMODE As Integer  = &H1029
-    Public Const DTWAIN_CV_CAPPRINTERSTRING As Integer  = &H102a
-    Public Const DTWAIN_CV_CAPPRINTERSUFFIX As Integer  = &H102b
-    Public Const DTWAIN_CV_CAPLANGUAGE As Integer  = &H102c
-    Public Const DTWAIN_CV_CAPFEEDERALIGNMENT As Integer  = &H102d
-    Public Const DTWAIN_CV_CAPFEEDERORDER As Integer  = &H102e
-    Public Const DTWAIN_CV_CAPPAPERBINDING As Integer  = &H102f
+    Public Const DTWAIN_CV_CAPPRINTERSTRING As Integer = &H102A
+    Public Const DTWAIN_CV_CAPPRINTERSUFFIX As Integer = &H102B
+    Public Const DTWAIN_CV_CAPLANGUAGE As Integer = &H102C
+    Public Const DTWAIN_CV_CAPFEEDERALIGNMENT As Integer = &H102D
+    Public Const DTWAIN_CV_CAPFEEDERORDER As Integer = &H102E
+    Public Const DTWAIN_CV_CAPPAPERBINDING As Integer = &H102F
     Public Const DTWAIN_CV_CAPREACQUIREALLOWED As Integer  = &H1030
     Public Const DTWAIN_CV_CAPPASSTHRU As Integer  = &H1031
     Public Const DTWAIN_CV_CAPBATTERYMINUTES As Integer  = &H1032
@@ -1229,12 +1250,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPCAMERAORDER As Integer  = &H1037
     Public Const DTWAIN_CV_CAPMICRENABLED As Integer  = &H1038
     Public Const DTWAIN_CV_CAPFEEDERPREP As Integer  = &H1039
-    Public Const DTWAIN_CV_CAPFEEDERPOCKET As Integer  = &H103a
-    Public Const DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM As Integer  = &H103b
-    Public Const DTWAIN_CV_CAPCUSTOMINTERFACEGUID As Integer  = &H103c
-    Public Const DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE As Integer  = &H103d
-    Public Const DTWAIN_CV_CAPSUPPORTEDDATS As Integer  = &H103e
-    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTION As Integer  = &H103f
+    Public Const DTWAIN_CV_CAPFEEDERPOCKET As Integer = &H103A
+    Public Const DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM As Integer = &H103B
+    Public Const DTWAIN_CV_CAPCUSTOMINTERFACEGUID As Integer = &H103C
+    Public Const DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE As Integer = &H103D
+    Public Const DTWAIN_CV_CAPSUPPORTEDDATS As Integer = &H103E
+    Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTION As Integer = &H103F
     Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONLENGTH As Integer  = &H1040
     Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONSENSITIVITY As Integer  = &H1041
     Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONRESPONSE As Integer  = &H1042
@@ -1259,10 +1280,10 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPFLASHUSED As Integer  = &H1107
     Public Const DTWAIN_CV_ICAPGAMMA As Integer  = &H1108
     Public Const DTWAIN_CV_ICAPHALFTONES As Integer  = &H1109
-    Public Const DTWAIN_CV_ICAPHIGHLIGHT As Integer  = &H110a
-    Public Const DTWAIN_CV_ICAPIMAGEFILEFORMAT As Integer  = &H110c
-    Public Const DTWAIN_CV_ICAPLAMPSTATE As Integer  = &H110d
-    Public Const DTWAIN_CV_ICAPLIGHTSOURCE As Integer  = &H110e
+    Public Const DTWAIN_CV_ICAPHIGHLIGHT As Integer = &H110A
+    Public Const DTWAIN_CV_ICAPIMAGEFILEFORMAT As Integer = &H110C
+    Public Const DTWAIN_CV_ICAPLAMPSTATE As Integer = &H110D
+    Public Const DTWAIN_CV_ICAPLIGHTSOURCE As Integer = &H110E
     Public Const DTWAIN_CV_ICAPORIENTATION As Integer  = &H1110
     Public Const DTWAIN_CV_ICAPPHYSICALWIDTH As Integer  = &H1111
     Public Const DTWAIN_CV_ICAPPHYSICALHEIGHT As Integer  = &H1112
@@ -1272,12 +1293,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPYNATIVERESOLUTION As Integer  = &H1117
     Public Const DTWAIN_CV_ICAPXRESOLUTION As Integer  = &H1118
     Public Const DTWAIN_CV_ICAPYRESOLUTION As Integer  = &H1119
-    Public Const DTWAIN_CV_ICAPMAXFRAMES As Integer  = &H111a
-    Public Const DTWAIN_CV_ICAPTILES As Integer  = &H111b
-    Public Const DTWAIN_CV_ICAPBITORDER As Integer  = &H111c
-    Public Const DTWAIN_CV_ICAPCCITTKFACTOR As Integer  = &H111d
-    Public Const DTWAIN_CV_ICAPLIGHTPATH As Integer  = &H111e
-    Public Const DTWAIN_CV_ICAPPIXELFLAVOR As Integer  = &H111f
+    Public Const DTWAIN_CV_ICAPMAXFRAMES As Integer = &H111A
+    Public Const DTWAIN_CV_ICAPTILES As Integer = &H111B
+    Public Const DTWAIN_CV_ICAPBITORDER As Integer = &H111C
+    Public Const DTWAIN_CV_ICAPCCITTKFACTOR As Integer = &H111D
+    Public Const DTWAIN_CV_ICAPLIGHTPATH As Integer = &H111E
+    Public Const DTWAIN_CV_ICAPPIXELFLAVOR As Integer = &H111F
     Public Const DTWAIN_CV_ICAPPLANARCHUNKY As Integer  = &H1120
     Public Const DTWAIN_CV_ICAPROTATION As Integer  = &H1121
     Public Const DTWAIN_CV_ICAPSUPPORTEDSIZES As Integer  = &H1122
@@ -1287,12 +1308,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPBITORDERCODES As Integer  = &H1126
     Public Const DTWAIN_CV_ICAPPIXELFLAVORCODES As Integer  = &H1127
     Public Const DTWAIN_CV_ICAPJPEGPIXELTYPE As Integer  = &H1128
-    Public Const DTWAIN_CV_ICAPTIMEFILL As Integer  = &H112a
-    Public Const DTWAIN_CV_ICAPBITDEPTH As Integer  = &H112b
-    Public Const DTWAIN_CV_ICAPBITDEPTHREDUCTION As Integer  = &H112c
-    Public Const DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE As Integer  = &H112d
-    Public Const DTWAIN_CV_ICAPIMAGEDATASET As Integer  = &H112e
-    Public Const DTWAIN_CV_ICAPEXTIMAGEINFO As Integer  = &H112f
+    Public Const DTWAIN_CV_ICAPTIMEFILL As Integer = &H112A
+    Public Const DTWAIN_CV_ICAPBITDEPTH As Integer = &H112B
+    Public Const DTWAIN_CV_ICAPBITDEPTHREDUCTION As Integer = &H112C
+    Public Const DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE As Integer = &H112D
+    Public Const DTWAIN_CV_ICAPIMAGEDATASET As Integer = &H112E
+    Public Const DTWAIN_CV_ICAPEXTIMAGEINFO As Integer = &H112F
     Public Const DTWAIN_CV_ICAPMINIMUMHEIGHT As Integer  = &H1130
     Public Const DTWAIN_CV_ICAPMINIMUMWIDTH As Integer  = &H1131
     Public Const DTWAIN_CV_ICAPAUTOBORDERDETECTION As Integer  = &H1132
@@ -1303,12 +1324,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPBARCODEDETECTIONENABLED As Integer  = &H1137
     Public Const DTWAIN_CV_ICAPSUPPORTEDBARCODETYPES As Integer  = &H1138
     Public Const DTWAIN_CV_ICAPBARCODEMAXSEARCHPRIORITIES As Integer  = &H1139
-    Public Const DTWAIN_CV_ICAPBARCODESEARCHPRIORITIES As Integer  = &H113a
-    Public Const DTWAIN_CV_ICAPBARCODESEARCHMODE As Integer  = &H113b
-    Public Const DTWAIN_CV_ICAPBARCODEMAXRETRIES As Integer  = &H113c
-    Public Const DTWAIN_CV_ICAPBARCODETIMEOUT As Integer  = &H113d
-    Public Const DTWAIN_CV_ICAPZOOMFACTOR As Integer  = &H113e
-    Public Const DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED As Integer  = &H113f
+    Public Const DTWAIN_CV_ICAPBARCODESEARCHPRIORITIES As Integer = &H113A
+    Public Const DTWAIN_CV_ICAPBARCODESEARCHMODE As Integer = &H113B
+    Public Const DTWAIN_CV_ICAPBARCODEMAXRETRIES As Integer = &H113C
+    Public Const DTWAIN_CV_ICAPBARCODETIMEOUT As Integer = &H113D
+    Public Const DTWAIN_CV_ICAPZOOMFACTOR As Integer = &H113E
+    Public Const DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED As Integer = &H113F
     Public Const DTWAIN_CV_ICAPSUPPORTEDPATCHCODETYPES As Integer  = &H1140
     Public Const DTWAIN_CV_ICAPPATCHCODEMAXSEARCHPRIORITIES As Integer  = &H1141
     Public Const DTWAIN_CV_ICAPPATCHCODESEARCHPRIORITIES As Integer  = &H1142
@@ -1329,12 +1350,12 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_ICAPAUTOMATICCROPUSESFRAME As Integer  = &H1157
     Public Const DTWAIN_CV_ICAPAUTOMATICLENGTHDETECTION As Integer  = &H1158
     Public Const DTWAIN_CV_ICAPAUTOMATICCOLORENABLED As Integer  = &H1159
-    Public Const DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE As Integer  = &H115a
-    Public Const DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED As Integer  = &H115b
-    Public Const DTWAIN_CV_ICAPIMAGEMERGE As Integer  = &H115c
-    Public Const DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD As Integer  = &H115d
-    Public Const DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO As Integer  = &H115e
-    Public Const DTWAIN_CV_ICAPFILMTYPE As Integer  = &H115f
+    Public Const DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE As Integer = &H115A
+    Public Const DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED As Integer = &H115B
+    Public Const DTWAIN_CV_ICAPIMAGEMERGE As Integer = &H115C
+    Public Const DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD As Integer = &H115D
+    Public Const DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO As Integer = &H115E
+    Public Const DTWAIN_CV_ICAPFILMTYPE As Integer = &H115F
     Public Const DTWAIN_CV_ICAPMIRROR As Integer  = &H1160
     Public Const DTWAIN_CV_ICAPJPEGSUBSAMPLING As Integer  = &H1161
     Public Const DTWAIN_CV_ACAPAUDIOFILEFORMAT As Integer  = &H1201
@@ -1406,97 +1427,151 @@ Class DTWAINAPI
     Public Const DTWAIN_OCRERROR_MODENONE As Integer  = 0
     Public Const DTWAIN_OCRERROR_SHOWMSGBOX As Integer  = 1
     Public Const DTWAIN_OCRERROR_WRITEFILE As Integer  = 2
-    Public Const DTWAIN_PDFTEXT_ALLPAGES As Integer  = &H00000001
-    Public Const DTWAIN_PDFTEXT_EVENPAGES As Integer  = &H00000002
-    Public Const DTWAIN_PDFTEXT_ODDPAGES As Integer  = &H00000004
-    Public Const DTWAIN_PDFTEXT_FIRSTPAGE As Integer  = &H00000008
-    Public Const DTWAIN_PDFTEXT_LASTPAGE As Integer  = &H00000010
-    Public Const DTWAIN_PDFTEXT_CURRENTPAGE As Integer  = &H00000020
-    Public Const DTWAIN_PDFTEXT_DISABLED As Integer  = &H00000040
-    Public Const DTWAIN_PDFTEXT_TOPLEFT As Integer  = &H00000100
-    Public Const DTWAIN_PDFTEXT_TOPRIGHT As Integer  = &H00000200
-    Public Const DTWAIN_PDFTEXT_HORIZCENTER As Integer  = &H00000400
-    Public Const DTWAIN_PDFTEXT_VERTCENTER As Integer  = &H00000800
-    Public Const DTWAIN_PDFTEXT_BOTTOMLEFT As Integer  = &H00001000
-    Public Const DTWAIN_PDFTEXT_BOTTOMRIGHT As Integer  = &H00002000
-    Public Const DTWAIN_PDFTEXT_BOTTOMCENTER As Integer  = &H00004000
-    Public Const DTWAIN_PDFTEXT_TOPCENTER As Integer  = &H00008000
-    Public Const DTWAIN_PDFTEXT_XCENTER As Integer  = &H00010000
-    Public Const DTWAIN_PDFTEXT_YCENTER As Integer  = &H00020000
-    Public Const DTWAIN_PDFTEXT_NOSCALING As Integer  = &H00100000
-    Public Const DTWAIN_PDFTEXT_NOCHARSPACING As Integer  = &H00200000
-    Public Const DTWAIN_PDFTEXT_NOWORDSPACING As Integer  = &H00400000
-    Public Const DTWAIN_PDFTEXT_NOSTROKEWIDTH As Integer  = &H00800000
-    Public Const DTWAIN_PDFTEXT_NORENDERMODE As Integer  = &H01000000
-    Public Const DTWAIN_PDFTEXT_NORGBCOLOR As Integer  = &H02000000
-    Public Const DTWAIN_PDFTEXT_NOFONTSIZE As Integer  = &H04000000
-    Public Const DTWAIN_PDFTEXT_NOABSPOSITION As Integer  = &H08000000
-    Public Const DTWAIN_PDFTEXT_IGNOREALL As Integer  = &HFFF00000
-    Public Const DTWAIN_FONT_COURIER As Integer  = 0
-    Public Const DTWAIN_FONT_COURIERBOLD As Integer  = 1
-    Public Const DTWAIN_FONT_COURIERBOLDOBLIQUE As Integer  = 2
-    Public Const DTWAIN_FONT_COURIEROBLIQUE As Integer  = 3
-    Public Const DTWAIN_FONT_HELVETICA As Integer  = 4
-    Public Const DTWAIN_FONT_HELVETICABOLD As Integer  = 5
-    Public Const DTWAIN_FONT_HELVETICABOLDOBLIQUE As Integer  = 6
-    Public Const DTWAIN_FONT_HELVETICAOBLIQUE As Integer  = 7
-    Public Const DTWAIN_FONT_TIMESBOLD As Integer  = 8
-    Public Const DTWAIN_FONT_TIMESBOLDITALIC As Integer  = 9
-    Public Const DTWAIN_FONT_TIMESROMAN As Integer  = 10
-    Public Const DTWAIN_FONT_TIMESITALIC As Integer  = 11
-    Public Const DTWAIN_FONT_SYMBOL As Integer  = 12
-    Public Const DTWAIN_FONT_ZAPFDINGBATS As Integer  = 13
-    Public Const DTWAIN_PDFRENDER_FILL As Integer  = 0
-    Public Const DTWAIN_PDFRENDER_STROKE As Integer  = 1
-    Public Const DTWAIN_PDFRENDER_FILLSTROKE As Integer  = 2
-    Public Const DTWAIN_PDFRENDER_INVISIBLE As Integer  = 3
-    Public Const DTWAIN_PDFTEXTELEMENT_SCALINGXY As Integer  = 0
-    Public Const DTWAIN_PDFTEXTELEMENT_FONTHEIGHT As Integer  = 1
-    Public Const DTWAIN_PDFTEXTELEMENT_WORDSPACING As Integer  = 2
-    Public Const DTWAIN_PDFTEXTELEMENT_POSITION As Integer  = 3
-    Public Const DTWAIN_PDFTEXTELEMENT_COLOR As Integer  = 4
-    Public Const DTWAIN_PDFTEXTELEMENT_STROKEWIDTH As Integer  = 5
-    Public Const DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS As Integer  = 6
-    Public Const DTWAIN_PDFTEXTELEMENT_FONTNAME As Integer  = 7
-    Public Const DTWAIN_PDFTEXTELEMENT_TEXT As Integer  = 8
-    Public Const DTWAIN_PDFTEXTELEMENT_RENDERMODE As Integer  = 9
-    Public Const DTWAIN_PDFTEXTELEMENT_CHARSPACING As Integer  = 10
-    Public Const DTWAIN_PDFTEXTELEMENT_ROTATIONANGLE As Integer  = 11
-    Public Const DTWAIN_PDFTEXTELEMENT_LEADING As Integer  = 12
-    Public Const DTWAIN_PDFTEXTELEMENT_SCALING As Integer  = 13
-    Public Const DTWAIN_PDFTEXTELEMENT_TEXTLENGTH As Integer  = 14
-    Public Const DTWAIN_PDFTEXTELEMENT_SKEWANGLES As Integer  = 15
-    Public Const DTWAIN_PDFTEXTELEMENT_TRANSFORMORDER As Integer  = 16
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TSRK As Integer  = 0
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TSKR As Integer  = 1
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TKSR As Integer  = 2
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TKRS As Integer  = 3
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TRSK As Integer  = 4
-    Public Const DTWAIN_PDFTEXTTRANSFORM_TRKS As Integer  = 5
-    Public Const DTWAIN_PDFTEXTTRANSFORM_STRK As Integer  = 6
-    Public Const DTWAIN_PDFTEXTTRANSFORM_STKR As Integer  = 7
-    Public Const DTWAIN_PDFTEXTTRANSFORM_SKTR As Integer  = 8
-    Public Const DTWAIN_PDFTEXTTRANSFORM_SKRT As Integer  = 9
-    Public Const DTWAIN_PDFTEXTTRANSFORM_SRTK As Integer  = 10
-    Public Const DTWAIN_PDFTEXTTRANSFORM_SRKT As Integer  = 11
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RSTK As Integer  = 12
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RSKT As Integer  = 13
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RTSK As Integer  = 14
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RTKT As Integer  = 15
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RKST As Integer  = 16
-    Public Const DTWAIN_PDFTEXTTRANSFORM_RKTS As Integer  = 17
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KSTR As Integer  = 18
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KSRT As Integer  = 19
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KRST As Integer  = 20
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KRTS As Integer  = 21
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KTSR As Integer  = 22
-    Public Const DTWAIN_PDFTEXTTRANSFORM_KTRS As Integer  = 23
-    Public Const DTWAIN_PDFTEXTTRANFORM_LAST As Integer  = DTWAIN_PDFTEXTTRANSFORM_KTRS
+    Public Const DTWAIN_PDFTEXT_ALLPAGES As Integer = &H1
+    Public Const DTWAIN_PDFTEXT_EVENPAGES As Integer = &H2
+    Public Const DTWAIN_PDFTEXT_ODDPAGES As Integer = &H4
+    Public Const DTWAIN_PDFTEXT_FIRSTPAGE As Integer = &H8
+    Public Const DTWAIN_PDFTEXT_LASTPAGE As Integer = &H10
+    Public Const DTWAIN_PDFTEXT_CURRENTPAGE As Integer = &H20
+    Public Const DTWAIN_PDFTEXT_DISABLED As Integer = &H40
+    Public Const DTWAIN_PDFTEXT_TOPLEFT As Integer = &H100
+    Public Const DTWAIN_PDFTEXT_TOPRIGHT As Integer = &H200
+    Public Const DTWAIN_PDFTEXT_HORIZCENTER As Integer = &H400
+    Public Const DTWAIN_PDFTEXT_VERTCENTER As Integer = &H800
+    Public Const DTWAIN_PDFTEXT_BOTTOMLEFT As Integer = &H1000
+    Public Const DTWAIN_PDFTEXT_BOTTOMRIGHT As Integer = &H2000
+    Public Const DTWAIN_PDFTEXT_BOTTOMCENTER As Integer = &H4000
+    Public Const DTWAIN_PDFTEXT_TOPCENTER As Integer = &H8000
+    Public Const DTWAIN_PDFTEXT_XCENTER As Integer = &H10000
+    Public Const DTWAIN_PDFTEXT_YCENTER As Integer = &H20000
+    Public Const DTWAIN_PDFTEXT_NOSCALING As Integer = &H100000
+    Public Const DTWAIN_PDFTEXT_NOCHARSPACING As Integer = &H200000
+    Public Const DTWAIN_PDFTEXT_NOWORDSPACING As Integer = &H400000
+    Public Const DTWAIN_PDFTEXT_NOSTROKEWIDTH As Integer = &H800000
+    Public Const DTWAIN_PDFTEXT_NORENDERMODE As Integer = &H1000000
+    Public Const DTWAIN_PDFTEXT_NORGBCOLOR As Integer = &H2000000
+    Public Const DTWAIN_PDFTEXT_NOFONTSIZE As Integer = &H4000000
+    Public Const DTWAIN_PDFTEXT_NOABSPOSITION As Integer = &H8000000
+    Public Const DTWAIN_PDFTEXT_IGNOREALL As Integer = &HFFF00000
+    Public Const DTWAIN_FONT_COURIER As Integer = 0
+    Public Const DTWAIN_FONT_COURIERBOLD As Integer = 1
+    Public Const DTWAIN_FONT_COURIERBOLDOBLIQUE As Integer = 2
+    Public Const DTWAIN_FONT_COURIEROBLIQUE As Integer = 3
+    Public Const DTWAIN_FONT_HELVETICA As Integer = 4
+    Public Const DTWAIN_FONT_HELVETICABOLD As Integer = 5
+    Public Const DTWAIN_FONT_HELVETICABOLDOBLIQUE As Integer = 6
+    Public Const DTWAIN_FONT_HELVETICAOBLIQUE As Integer = 7
+    Public Const DTWAIN_FONT_TIMESBOLD As Integer = 8
+    Public Const DTWAIN_FONT_TIMESBOLDITALIC As Integer = 9
+    Public Const DTWAIN_FONT_TIMESROMAN As Integer = 10
+    Public Const DTWAIN_FONT_TIMESITALIC As Integer = 11
+    Public Const DTWAIN_FONT_SYMBOL As Integer = 12
+    Public Const DTWAIN_FONT_ZAPFDINGBATS As Integer = 13
+    Public Const DTWAIN_PDFRENDER_FILL As Integer = 0
+    Public Const DTWAIN_PDFRENDER_STROKE As Integer = 1
+    Public Const DTWAIN_PDFRENDER_FILLSTROKE As Integer = 2
+    Public Const DTWAIN_PDFRENDER_INVISIBLE As Integer = 3
+    Public Const DTWAIN_PDFTEXTELEMENT_SCALINGXY As Integer = 0
+    Public Const DTWAIN_PDFTEXTELEMENT_FONTHEIGHT As Integer = 1
+    Public Const DTWAIN_PDFTEXTELEMENT_WORDSPACING As Integer = 2
+    Public Const DTWAIN_PDFTEXTELEMENT_POSITION As Integer = 3
+    Public Const DTWAIN_PDFTEXTELEMENT_COLOR As Integer = 4
+    Public Const DTWAIN_PDFTEXTELEMENT_STROKEWIDTH As Integer = 5
+    Public Const DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS As Integer = 6
+    Public Const DTWAIN_PDFTEXTELEMENT_FONTNAME As Integer = 7
+    Public Const DTWAIN_PDFTEXTELEMENT_TEXT As Integer = 8
+    Public Const DTWAIN_PDFTEXTELEMENT_RENDERMODE As Integer = 9
+    Public Const DTWAIN_PDFTEXTELEMENT_CHARSPACING As Integer = 10
+    Public Const DTWAIN_PDFTEXTELEMENT_ROTATIONANGLE As Integer = 11
+    Public Const DTWAIN_PDFTEXTELEMENT_LEADING As Integer = 12
+    Public Const DTWAIN_PDFTEXTELEMENT_SCALING As Integer = 13
+    Public Const DTWAIN_PDFTEXTELEMENT_TEXTLENGTH As Integer = 14
+    Public Const DTWAIN_PDFTEXTELEMENT_SKEWANGLES As Integer = 15
+    Public Const DTWAIN_PDFTEXTELEMENT_TRANSFORMORDER As Integer = 16
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TSRK As Integer = 0
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TSKR As Integer = 1
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TKSR As Integer = 2
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TKRS As Integer = 3
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TRSK As Integer = 4
+    Public Const DTWAIN_PDFTEXTTRANSFORM_TRKS As Integer = 5
+    Public Const DTWAIN_PDFTEXTTRANSFORM_STRK As Integer = 6
+    Public Const DTWAIN_PDFTEXTTRANSFORM_STKR As Integer = 7
+    Public Const DTWAIN_PDFTEXTTRANSFORM_SKTR As Integer = 8
+    Public Const DTWAIN_PDFTEXTTRANSFORM_SKRT As Integer = 9
+    Public Const DTWAIN_PDFTEXTTRANSFORM_SRTK As Integer = 10
+    Public Const DTWAIN_PDFTEXTTRANSFORM_SRKT As Integer = 11
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RSTK As Integer = 12
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RSKT As Integer = 13
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RTSK As Integer = 14
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RTKT As Integer = 15
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RKST As Integer = 16
+    Public Const DTWAIN_PDFTEXTTRANSFORM_RKTS As Integer = 17
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KSTR As Integer = 18
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KSRT As Integer = 19
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KRST As Integer = 20
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KRTS As Integer = 21
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KTSR As Integer = 22
+    Public Const DTWAIN_PDFTEXTTRANSFORM_KTRS As Integer = 23
+    Public Const DTWAIN_PDFTEXTTRANFORM_LAST As Integer = DTWAIN_PDFTEXTTRANSFORM_KTRS
 
-    Public Delegate Function DTwainCallback( ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Integer) As Integer
-    Public Delegate Function DTwainCallback64( ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Long) As Integer
-    Public Delegate Function DTwainErrorProc( ByVal param1 As Integer, ByVal param2 As Integer ) As Integer
-    Public Delegate Function DTwainErrorProc64( ByVal param1 As Integer, ByVal param2 As Long ) As Integer
+    Public Const DTWAIN_TWAS_NONE As Integer = 0
+    Public Const DTWAIN_TWAS_AUTO As Integer = 1
+    Public Const DTWAIN_TWAS_CURRENT As Integer = 2
+    Public Const DTWAIN_TWFR_BOOK As Integer = 0
+    Public Const DTWAIN_TWFR_FANFOLD As Integer = 1
+    Public Const DTWAIN_CONSTANT_TWPT As Integer = 0
+    Public Const DTWAIN_CONSTANT_TWUN As Integer = 1
+    Public Const DTWAIN_CONSTANT_TWCY As Integer = 2
+    Public Const DTWAIN_CONSTANT_TWAL As Integer = 3
+    Public Const DTWAIN_CONSTANT_TWAS As Integer = 4
+    Public Const DTWAIN_CONSTANT_TWBCOR As Integer = 5
+    Public Const DTWAIN_CONSTANT_TWBD As Integer = 6
+    Public Const DTWAIN_CONSTANT_TWBO As Integer = 7
+    Public Const DTWAIN_CONSTANT_TWBP As Integer = 8
+    Public Const DTWAIN_CONSTANT_TWBR As Integer = 9
+    Public Const DTWAIN_CONSTANT_TWBT As Integer = 10
+    Public Const DTWAIN_CONSTANT_TWCP As Integer = 11
+    Public Const DTWAIN_CONSTANT_TWCS As Integer = 12
+    Public Const DTWAIN_CONSTANT_TWDE As Integer = 13
+    Public Const DTWAIN_CONSTANT_TWDR As Integer = 14
+    Public Const DTWAIN_CONSTANT_TWDSK As Integer = 15
+    Public Const DTWAIN_CONSTANT_TWDX As Integer = 16
+    Public Const DTWAIN_CONSTANT_TWFA As Integer = 17
+    Public Const DTWAIN_CONSTANT_TWFE As Integer = 18
+    Public Const DTWAIN_CONSTANT_TWFF As Integer = 19
+    Public Const DTWAIN_CONSTANT_TWFL As Integer = 20
+    Public Const DTWAIN_CONSTANT_TWFO As Integer = 21
+    Public Const DTWAIN_CONSTANT_TWFP As Integer = 22
+    Public Const DTWAIN_CONSTANT_TWFR As Integer = 23
+    Public Const DTWAIN_CONSTANT_TWFT As Integer = 24
+    Public Const DTWAIN_CONSTANT_TWFY As Integer = 22
+    Public Const DTWAIN_CONSTANT_TWIA As Integer = 23
+    Public Const DTWAIN_CONSTANT_TWIC As Integer = 27
+    Public Const DTWAIN_CONSTANT_TWIF As Integer = 28
+    Public Const DTWAIN_CONSTANT_TWIM As Integer = 29
+    Public Const DTWAIN_CONSTANT_TWJC As Integer = 30
+    Public Const DTWAIN_CONSTANT_TWJQ As Integer = 31
+    Public Const DTWAIN_CONSTANT_TWLP As Integer = 32
+    Public Const DTWAIN_CONSTANT_TWLS As Integer = 33
+    Public Const DTWAIN_CONSTANT_TWMD As Integer = 34
+    Public Const DTWAIN_CONSTANT_TWNF As Integer = 35
+    Public Const DTWAIN_CONSTANT_TWOR As Integer = 36
+    Public Const DTWAIN_CONSTANT_TWOV As Integer = 37
+    Public Const DTWAIN_CONSTANT_TWPA As Integer = 38
+    Public Const DTWAIN_CONSTANT_TWPC As Integer = 39
+    Public Const DTWAIN_CONSTANT_TWPCH As Integer = 40
+    Public Const DTWAIN_CONSTANT_TWPF As Integer = 41
+    Public Const DTWAIN_CONSTANT_TWPM As Integer = 42
+    Public Const DTWAIN_CONSTANT_TWPR As Integer = 43
+    Public Const DTWAIN_CONSTANT_TWPF2 As Integer = 44
+    Public Const DTWAIN_CONSTANT_TWCT As Integer = 45
+    Public Const DTWAIN_CONSTANT_TWPS As Integer = 46
+    Public Const DTWAIN_CONSTANT_TWSS As Integer = 47
+
+    Public Delegate Function DTwainCallback(ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Integer) As Integer
+    Public Delegate Function DTwainCallback64(ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Long) As Integer
+    Public Delegate Function DTwainErrorProc(ByVal param1 As Integer, ByVal param2 As Integer) As Integer
+    Public Delegate Function DTwainErrorProc64(ByVal param1 As Integer, ByVal param2 As Long) As Integer
     Public Delegate Function DTwainLoggerProcA(<MarshalAs(UnmanagedType.LPStr)> lpszName As String, ByVal UserData As Long) As Integer
     Public Delegate Function DTwainLoggerProcW(<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, ByVal UserData As Long) As Integer
     Public Delegate Function DTwainLoggerProc(<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, ByVal UserData As Long) As Integer
@@ -2452,4 +2527,43 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetVersionString Lib "dtwain32u.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
     Declare Auto Function DTWAIN_StartTwainSession Lib "dtwain32u.dll" (ByVal hWndMsg As System.IntPtr, ByVal sz As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_CallDSMProc Lib "dtwain32u.dll" (ByRef source As TW_IDENTITY, ByRef app As TW_IDENTITY, ByVal lDG As Integer, ByVal lDAT As Integer, ByVal lMSG As Integer, ByVal pData As System.IntPtr) As Integer
+
+    Declare Auto Function DTWAIN_EnumSupportedSinglePageFileTypes Lib "dtwain32u.dll" () As System.IntPtr
+    Declare Auto Function DTWAIN_EnumSupportedMultiPageFileTypes Lib "dtwain32u.dll" () As System.IntPtr
+    Declare Ansi Function DTWAIN_GetTwainNameFromConstantA Lib "dtwain32u.dll" (ByVal constant_type As Integer, ByVal constant_val As Integer, <MarshalAs(UnmanagedType.LPStr)> constant_name As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetTwainNameFromConstantW Lib "dtwain32u.dll" (ByVal constant_type As Integer, ByVal constant_val As Integer, <MarshalAs(UnmanagedType.LPWStr)> constant_name As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_GetTwainNameFromConstant Lib "dtwain32u.dll" (ByVal constant_type As Integer, ByVal constant_val As Integer, <MarshalAs(UnmanagedType.LPTStr)> constant_name As StringBuilder, ByVal nSize As Integer) As Integer
+
+    Declare Auto Function DTWAIN_SetLastError Lib "dtwain32u.dll" (ByVal nValue As Integer) As Integer
+    Declare Auto Function DTWAIN_GetAPIHandleStatus Lib "dtwain32u.dll" (ByVal dllHandle As System.IntPtr) As Integer
+    Declare Ansi Function DTWAIN_GetFileTypeNameA Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetFileTypeNameW Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_GetFileTypeName Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetFileTypeExtensionsW Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_GetFileTypeExtensions Lib "dtwain32u.dll" (ByVal filetype As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_SetBlankPageDetectionEx Lib "dtwain32u.dll" (ByVal source As System.IntPtr, ByVal threshold As Double, ByVal autodetect As Integer, ByVal detectOps As Integer, ByVal bSet As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_SetBlankPageDetectionExStringA Lib "dtwain32u.dll" (ByVal source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szName As String, ByVal autodetect As Integer, ByVal detectOps As Integer, ByVal bSet As Integer) As Integer
+    Declare Unicode Function DTWAIN_SetBlankPageDtectionExStringW Lib "dtwain32u.dll" (ByVal source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szName As String, ByVal autodetect As Integer, ByVal detectOps As Integer, ByVal bSet As Integer) As Integer
+    Declare Auto Function DTWAIN_SetBlankPageDtectionExString Lib "dtwain32u.dll" (ByVal source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szName As String, ByVal autodetect As Integer, ByVal detectOps As Integer, ByVal bSet As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetSourceDetailsA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> szSources As String, <MarshalAs(UnmanagedType.LPStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSourceDetails Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetVersionCopyrightA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetVersionCopyrightW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_GetVersionCopyright Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
+
+    Declare Auto Function DTWAIN_IsSourceValid Lib "dtwain32u.dll" (ByVal source As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_EnableTripletsNotify Lib "dtwain32u.dll" (ByVal bEnable As Integer) As Integer
+    Declare Auto Function DTWAIN_IsNotifyTripletsEnabled Lib "dtwain32u.dll" () As Integer
+
+    Declare Auto Function DTWAIN_DeleteDIB Lib "dtwain32u.dll" (ByVal dibHandle As System.IntPtr) As Integer
+
 End Class

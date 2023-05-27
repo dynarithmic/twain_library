@@ -980,12 +980,18 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEX)                   
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRINGA)            (DTWAIN_SOURCE, LPCSTR, LONG, LONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRINGW)            (DTWAIN_SOURCE, LPCWSTR, LONG, LONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETBLANKPAGEDETECTIONEXSTRING)             (DTWAIN_SOURCE, LPCTSTR, LONG, LONG, DTWAIN_BOOL);
-typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSFUNC)                      (LPCTSTR, LPTSTR, LONG, DTWAIN_BOOL);
-typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSAFUNC)                     (LPCSTR, LPSTR, LONG, DTWAIN_BOOL);
-typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSWFUNC)                     (LPCWSTR, LPWSTR, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSFUNC)                      (LPCTSTR, LPTSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSAFUNC)                     (LPCSTR, LPSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETSOURCEDETAILSWFUNC)                     (LPCWSTR, LPWSTR, LONG, LONG, DTWAIN_BOOL);
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSFUNC)                     (LPTSTR, LONG, LONG, DTWAIN_BOOL);
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSAFUNC)                    (LPSTR, LONG, LONG, DTWAIN_BOOL);
 typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    (LPWSTR, LONG, LONG, DTWAIN_BOOL);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTFUNC)                   (LPTSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTAFUNC)                  (LPSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETVERSIONCOPYRIGHTWFUNC)                  (LPWSTR, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ISSOURCEVALIDFUNC)                         (DTWAIN_SOURCE);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ENABLETRIPLETSNOTIFYFUNC)                  (DTWAIN_BOOL);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ISNOTIFYTRIPLETSENABLEDFUNC)               (VOID_PROTOTYPE);
 #ifdef __cplusplus
 }
 #endif
@@ -1147,6 +1153,7 @@ typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    
     STATIC D_ENABLEPATCHDETECTFUNC                          DTWAIN_EnablePatchDetect;
     STATIC D_ENABLEPRINTERFUNC                              DTWAIN_EnablePrinter;
     STATIC D_ENABLETHUMBNAILFUNC                            DTWAIN_EnableThumbnail;
+    STATIC D_ENABLETRIPLETSNOTIFYFUNC                       DTWAIN_EnableTripletsNotify;
     STATIC D_ENDTHREADFUNC                                  DTWAIN_EndThread;
     STATIC D_ENDTWAINSESSIONFUNC                            DTWAIN_EndTwainSession;
     STATIC D_ENUMALARMSEXFUNC                               DTWAIN_EnumAlarmsEx;
@@ -1295,6 +1302,9 @@ typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    
     STATIC D_GETAPPINFOAFUNC                                DTWAIN_GetAppInfoA;
     STATIC D_GETAPPINFOFUNC                                 DTWAIN_GetAppInfo;
     STATIC D_GETAPPINFOWFUNC                                DTWAIN_GetAppInfoW;
+    STATIC D_GETVERSIONCOPYRIGHTFUNC                        DTWAIN_GetVersionCopyright;  
+    STATIC D_GETVERSIONCOPYRIGHTAFUNC                       DTWAIN_GetVersionCopyrightA;
+    STATIC D_GETVERSIONCOPYRIGHTWFUNC                       DTWAIN_GetVersionCopyrightW;
     STATIC D_GETAUTHORAFUNC                                 DTWAIN_GetAuthorA;
     STATIC D_GETAUTHORFUNC                                  DTWAIN_GetAuthor;
     STATIC D_GETAUTHORWFUNC                                 DTWAIN_GetAuthorW;
@@ -1607,6 +1617,7 @@ typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    
     STATIC D_ISLIGHTSOURCESUPPORTEDFUNC                     DTWAIN_IsLightSourceSupported;
     STATIC D_ISMAXBUFFERSSUPPORTEDFUNC                      DTWAIN_IsMaxBuffersSupported;
     STATIC D_ISMSGNOTIFYENABLEDFUNC                         DTWAIN_IsMsgNotifyEnabled;
+    STATIC D_ISNOTIFYTRIPLETSENABLEDFUNC                    DTWAIN_IsNotifyTripletsEnabled;
     STATIC D_ISOCRENGINEACTIVATEDFUNC                       DTWAIN_IsOCREngineActivated;
     STATIC D_ISORIENTATIONSUPPORTEDFUNC                     DTWAIN_IsOrientationSupported;
     STATIC D_ISOVERSCANSUPPORTEDFUNC                        DTWAIN_IsOverscanSupported;
@@ -1626,6 +1637,7 @@ typedef LONG        (DLLENTRY_DEF* D_GETSESSIONDETAILSWFUNC)                    
     STATIC D_ISSOURCEACQUIRINGFUNC                          DTWAIN_IsSourceAcquiring;
     STATIC D_ISSOURCEOPENFUNC                               DTWAIN_IsSourceOpen;
     STATIC D_ISSOURCESELECTEDFUNC                           DTWAIN_IsSourceSelected;
+    STATIC D_ISSOURCEVALIDFUNC                              DTWAIN_IsSourceValid;
     STATIC D_ISTHUMBNAILENABLEDFUNC                         DTWAIN_IsThumbnailEnabled;
     STATIC D_ISTHUMBNAILSUPPORTEDFUNC                       DTWAIN_IsThumbnailSupported;
     STATIC D_ISTIFFSUPPORTEDFUNC                            DTWAIN_IsTIFFSupported;

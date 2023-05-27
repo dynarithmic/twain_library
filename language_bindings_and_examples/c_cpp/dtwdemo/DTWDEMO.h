@@ -71,4 +71,6 @@
 #define IDM_LOGGING_OPTIONS                 7007
 #define IDC_radToConsole                    7008
 
+#define IDC_edCopyright                     7010
+
 #endif
