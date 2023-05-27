@@ -2,31 +2,25 @@
 Imports System.Drawing
 Imports System.Reflection
 Imports System.Runtime.InteropServices
-
-Public Structure BITMAPINFOHEADER
-    Public biSize As Int32
-    Public biWidth As Int32
-    Public biHeight As Int32
-    Public biPlanes As Int16
-    Public biBitCount As Int16
-    Public biCompression As Int32
-    Public biSizeImage As Int32
-    Public biXPelsperMeter As Int32
-    Public biYPelsPerMeter As Int32
-    Public biClrUsed As Int32
-    Public biClrImportant As Int32
-End Structure
+Imports System.Collections.Generic
 
 Public Class DibDisplayerDlg
     Declare Auto Function GlobalLock Lib "kernel32.DLL" (ByVal handle As Integer) As Integer
     Declare Auto Function GlobalUnlock Lib "kernel32.dll" (ByVal handle As IntPtr) As Integer
     Declare Unicode Function GdipCreateBitmapFromGdiDib Lib "GdiPlus.dll" (ByVal pBIH As IntPtr, ByVal pPix As IntPtr, ByRef pBitmap As IntPtr) As Integer
+    Declare Auto Function DeleteObject Lib "gdi32.dll" (hObject As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
-    Private AcquireArray As Integer
+    Private AcquireArray As System.IntPtr
     Private nCurrentAcquisition As Integer
     Private nCurDib As Integer
+    Private Structure DibInfo
+        Public acquisition As Integer
+        Public pageNum As Integer
+    End Structure
 
-    Public Sub New(ByVal item As Integer)
+    Private DibDictionary As Dictionary(Of DibInfo, Bitmap) = New Dictionary(Of DibInfo, Bitmap)
+
+    Public Sub New(ByVal item As System.IntPtr)
         InitializeComponent() ' This call is required by the Windows Form Designer.
         AcquireArray = item
     End Sub
@@ -42,53 +36,26 @@ Public Class DibDisplayerDlg
     End Sub
 
     Private Sub DisplayTheDib()
-        Dim dib As Integer = DTWAINAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib)
-        If dib <> 0 Then
-            Dim dibPtr As IntPtr = GlobalLock(dib)
-            Me.dibBox.Image = BitmapFromDIB(dibPtr)
-            GlobalUnlock(dibPtr)
+        Dim keyCurrent As New DibInfo()
+        Dim dib As System.IntPtr
+        keyCurrent.pageNum = nCurDib
+        keyCurrent.acquisition = nCurrentAcquisition
+        If DibDictionary.ContainsKey(keyCurrent) Then
+            Me.dibBox.Image = DibDictionary.Item(keyCurrent)
+        Else
+            dib = DTWAINAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib)
+            If dib <> 0 Then
+                Me.dibBox.Image = BitmapFromDIB(dib)
+                DibDictionary.Add(keyCurrent, Me.dibBox.Image)
+            End If
         End If
         EnablePageButtons()
     End Sub
 
     Private Shared Function BitmapFromDIB(ByVal pDIB As IntPtr) As Bitmap
-        'get pointer to bitmap header info       
-        Dim pPix As IntPtr = GetPixelInfo(pDIB)
-
-        'Call external GDI method
-        Dim mi As MethodInfo = GetType(Bitmap).GetMethod("FromGDIplus", BindingFlags.[Static] Or BindingFlags.NonPublic)
-        If mi Is Nothing Then
-            Return Nothing
-        End If
-
-        ' Initialize memory pointer where Bitmap will be saved
-        Dim pBmp As IntPtr = IntPtr.Zero
-
-        'Call external method that saves bitmap into pointer
-        Dim status As Integer = GdipCreateBitmapFromGdiDib(pDIB, pPix, pBmp)
-
-        'If success return bitmap, if failed return null
-        If (status = 0) AndAlso (pBmp <> IntPtr.Zero) Then
-            Return DirectCast(mi.Invoke(Nothing, New Object() {pBmp}), Bitmap)
-        Else
-            Return Nothing
-        End If
+        Return Bitmap.FromHbitmap(DTWAINAPI.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero)
     End Function
-            
-    Private Shared Function GetPixelInfo(ByVal bmpPtr As IntPtr) As IntPtr
-        Dim bmi As BITMAPINFOHEADER = DirectCast(Marshal.PtrToStructure(bmpPtr, GetType(BITMAPINFOHEADER)), BITMAPINFOHEADER)
 
-        If bmi.biSizeImage = 0 Then
-            bmi.biSizeImage = CUInt(((((bmi.biWidth * bmi.biBitCount) + 31) And Not 31) >> 3) * bmi.biHeight)
-        End If
-
-        Dim p As Integer = CInt(bmi.biClrUsed)
-        If (p = 0) AndAlso (bmi.biBitCount <= 8) Then
-            p = 1 << bmi.biBitCount
-        End If
-        p = (p * 4) + CInt(bmi.biSize) + CInt(bmpPtr)
-        Return New IntPtr(p)
-    End Function
     Private Sub EnablePageButtons()
         Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquiredImages(AcquireArray, nCurrentAcquisition)
         Me.buttonNext.Enabled = (nCurDib < nCount - 1)
@@ -101,7 +68,12 @@ Public Class DibDisplayerDlg
             Me.edPageTotal.Text = nCount.ToString()
         End If
     End Sub
-
+    Private Sub DibDisplayerDlg_Unload(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Closed
+        For Each pair As KeyValuePair(Of DibInfo, Bitmap) In DibDictionary
+            DeleteObject(pair.Value.GetHbitmap())
+        Next
+        DTWAINAPI.DTWAIN_DestroyAcquisitionArray(AcquireArray, 1)
+    End Sub
 
     Private Sub DibDisplayerDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         nCurrentAcquisition = 0

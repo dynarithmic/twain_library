@@ -75,7 +75,9 @@ namespace dynarithmic
 
                 twain_source(const twain_source&) = delete;
                 twain_source& operator=(const twain_source&) = delete;
-                twain_source(twain_source&& rhs) noexcept
+                twain_source(twain_source&& rhs) noexcept : m_bUIOnlyOn(rhs.m_bUIOnlyOn), 
+                                                            m_theSource(rhs.m_theSource), 
+                                                            m_bWeakAttach(rhs.m_bWeakAttach)
                 {
                     swap(*this, rhs);
                     rhs.m_theSource = nullptr;

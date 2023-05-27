@@ -12,7 +12,7 @@ Public Class CustomSelectSource
 
     Private Sub CustomSelectSource_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         sourceSelected = False
-        Dim SourceArray As Integer = 0
+        Dim SourceArray As System.IntPtr
         DTWAINAPI.DTWAIN_EnumSources(SourceArray)
         Dim nCount As Integer = DTWAINAPI.DTWAIN_ArrayGetCount(SourceArray)
         If nCount <= 0 Then
