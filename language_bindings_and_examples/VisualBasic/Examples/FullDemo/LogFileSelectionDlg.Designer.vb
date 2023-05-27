@@ -22,13 +22,13 @@ Partial Class LogFileSelectionDlg
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.edFileName = New System.Windows.Forms.TextBox
-        Me.OKbutton = New System.Windows.Forms.Button
-        Me.radioLogDebugMonitor = New System.Windows.Forms.RadioButton
-        Me.radioLogToFile = New System.Windows.Forms.RadioButton
-        Me.radioNoLogging = New System.Windows.Forms.RadioButton
-        Me.groupBox1 = New System.Windows.Forms.GroupBox
-        Me.Button1 = New System.Windows.Forms.Button
+        Me.edFileName = New System.Windows.Forms.TextBox()
+        Me.OKbutton = New System.Windows.Forms.Button()
+        Me.radioLogConsole = New System.Windows.Forms.RadioButton()
+        Me.radioLogToFile = New System.Windows.Forms.RadioButton()
+        Me.radioNoLogging = New System.Windows.Forms.RadioButton()
+        Me.groupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'edFileName
@@ -52,14 +52,14 @@ Partial Class LogFileSelectionDlg
         '
         'radioLogDebugMonitor
         '
-        Me.radioLogDebugMonitor.AutoSize = True
-        Me.radioLogDebugMonitor.Location = New System.Drawing.Point(35, 99)
-        Me.radioLogDebugMonitor.Name = "radioLogDebugMonitor"
-        Me.radioLogDebugMonitor.Size = New System.Drawing.Size(128, 17)
-        Me.radioLogDebugMonitor.TabIndex = 9
-        Me.radioLogDebugMonitor.TabStop = True
-        Me.radioLogDebugMonitor.Text = "Log to Debug Monitor"
-        Me.radioLogDebugMonitor.UseVisualStyleBackColor = True
+        Me.radioLogConsole.AutoSize = True
+        Me.radioLogConsole.Location = New System.Drawing.Point(35, 99)
+        Me.radioLogConsole.Name = "radioLogDebugMonitor"
+        Me.radioLogConsole.Size = New System.Drawing.Size(96, 17)
+        Me.radioLogConsole.TabIndex = 9
+        Me.radioLogConsole.TabStop = True
+        Me.radioLogConsole.Text = "Log to Console"
+        Me.radioLogConsole.UseVisualStyleBackColor = True
         '
         'radioLogToFile
         '
@@ -110,7 +110,7 @@ Partial Class LogFileSelectionDlg
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.edFileName)
         Me.Controls.Add(Me.OKbutton)
-        Me.Controls.Add(Me.radioLogDebugMonitor)
+        Me.Controls.Add(Me.radioLogConsole)
         Me.Controls.Add(Me.radioLogToFile)
         Me.Controls.Add(Me.radioNoLogging)
         Me.Controls.Add(Me.groupBox1)
@@ -128,7 +128,7 @@ Partial Class LogFileSelectionDlg
     Private WithEvents edFileName As System.Windows.Forms.TextBox
     '    Private WithEvents Cancelbutton As System.Windows.Forms.Button
     Private WithEvents OKbutton As System.Windows.Forms.Button
-    Private WithEvents radioLogDebugMonitor As System.Windows.Forms.RadioButton
+    Private WithEvents radioLogConsole As System.Windows.Forms.RadioButton
     Private WithEvents radioLogToFile As System.Windows.Forms.RadioButton
     Private WithEvents radioNoLogging As System.Windows.Forms.RadioButton
     Private WithEvents groupBox1 As System.Windows.Forms.GroupBox

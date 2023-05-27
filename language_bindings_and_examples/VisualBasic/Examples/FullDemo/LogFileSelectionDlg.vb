@@ -26,12 +26,16 @@ Public Class LogFileSelectionDlg
         If radioLogToFile.Checked Then
             sFileName = edFileName.Text
             nWhichOption = 2
-        ElseIf radioLogDebugMonitor.Checked Then
+        ElseIf radioLogConsole.Checked Then
             nWhichOption = 3
         End If
     End Sub
 
     Private Sub LogFileSelectionDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub radioLogDebugMonitor_CheckedChanged(sender As Object, e As EventArgs) Handles radioLogConsole.CheckedChanged
 
     End Sub
 End Class

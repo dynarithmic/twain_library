@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2021 Dynarithmic Software.
+    Copyright (c) 2002-2023 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -278,6 +278,11 @@ namespace Dynarithmic
         public const  int DTWAIN_POINTS = 3;
         public const  int DTWAIN_TWIPS = 4;
         public const  int DTWAIN_PIXELS = 5;
+        public const  int DTWAIN_USENAME = 4;
+        public const  int DTWAIN_USEPROMPT = 8;
+        public const  int DTWAIN_USELONGNAME = 16;
+        public const  int DTWAIN_USESOURCEMODE = 32;
+        public const  int DTWAIN_USELIST = 64;
         public const  int DTWAIN_ARRAYANY = 1;
         public const  int DTWAIN_ArrayTypePTR = 1;
         public const  int DTWAIN_ARRAYLONG = 2;
@@ -377,16 +382,9 @@ namespace Dynarithmic
         public const  double DTWAIN_FLOATDEFAULT = (-9999.0);
         public const  int DTWAIN_CallbackERROR = 1;
         public const  int DTWAIN_CallbackMESSAGE = 2;
-        public const int  DTWAIN_USENATIVE         =  1;
-        public const int  DTWAIN_USEBUFFERED       =  2;
-        public const int  DTWAIN_USECOMPRESSION    =  4;
-        public const int  DTWAIN_USEMEMFILE        =  8;
-        public const int  DTWAIN_USENAME           = 16;
-        public const int  DTWAIN_USEPROMPT         = 32;
-        public const int  DTWAIN_USELONGNAME       = 64;
-        public const int  DTWAIN_USESOURCEMODE     = 128;
-        public const int  DTWAIN_USELIST           = 256;
-        public const int  DTWAIN_CREATE_DIRECTORY  = 512;
+        public const  int DTWAIN_USENATIVE = 1;
+        public const  int DTWAIN_USEBUFFERED = 2;
+        public const  int DTWAIN_USECOMPRESSION = 4;
         public const  int DTWAIN_FAILURE1 = (-1);
         public const  int DTWAIN_FAILURE2 = (-2);
         public const  int DTWAIN_DELETEALL = (-1);
@@ -465,6 +463,8 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_PROCESSEDAUDIOFINAL = 1180;
         public const  int DTWAIN_TN_PROCESSAUDIOFINALACCEPTED = 1181;
         public const  int DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
+        public const  int DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
+        public const  int DTWAIN_TN_TWAINTRIPLETEND = 1184;
         public const  int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const  int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const  int DTWAIN_MODAL = 0;
@@ -1017,26 +1017,36 @@ namespace Dynarithmic
         public const  int DTWAIN_EI_FRAMENUMBER = 0x123D;
         public const  int DTWAIN_EI_FRAME = 0x123E;
         public const  int DTWAIN_EI_PIXELFLAVOR = 0x123F;
-        public const  int DTWAIN_LOG_DECODE_SOURCE = 1;
-        public const  int DTWAIN_LOG_DECODE_DEST = 2;
-        public const  int DTWAIN_LOG_DECODE_TWMEMREF = 4;
-        public const  int DTWAIN_LOG_DECODE_TWEVENT = 8;
-        public const  int DTWAIN_LOG_USEFILE = 16;
-        public const  int DTWAIN_LOG_CALLSTACK = 32;
-        public const  int DTWAIN_LOG_USEWINDOW = 64;
-        public const  int DTWAIN_LOG_SHOWEXCEPTIONS = 128;
-        public const  int DTWAIN_LOG_ERRORMSGBOX = 256;
-        public const  int DTWAIN_LOG_INITFAILURE = 512;
-        public const  int DTWAIN_LOG_USEBUFFER = 1024;
-        public const  int DTWAIN_LOG_FILEAPPEND = 2048;
-        public const  int DTWAIN_LOG_DECODE_BITMAP = 4096;
-        public const  int DTWAIN_LOG_NOCALLBACK = 8192;
-        public const  int DTWAIN_LOG_WRITE = 16384;
-        public const  int DTWAIN_LOG_USECRLF = 32768;
-        public const int DTWAIN_LOG_CONSOLE = 65536;
-        public const int DTWAIN_LOG_DEBUGMONITOR = 131072;
-        public const  uint DTWAIN_LOG_ALL = 0xFFFFF7FF;
+
+        public const int DTWAIN_LOG_DECODE_SOURCE = 0x1      ;
+        public const int DTWAIN_LOG_DECODE_DEST = 0x2        ;
+        public const int DTWAIN_LOG_DECODE_TWMEMREF = 0x4    ;
+        public const int DTWAIN_LOG_DECODE_TWEVENT = 0x8     ;
+        public const int DTWAIN_LOG_CALLSTACK = 0x10         ;
+        public const int DTWAIN_LOG_ISTWAINMSG = 0x20        ;
+        public const int DTWAIN_LOG_INITFAILURE = 0x40       ;
+        public const int DTWAIN_LOG_LOWLEVELTWAIN = 0x80     ;
+        public const int DTWAIN_LOG_DECODE_BITMAP = 0x100    ;
+        public const int DTWAIN_LOG_NOTIFICATIONS = 0x200    ;
+        public const int DTWAIN_LOG_MISCELLANEOUS = 0x400    ;
+        public const int DTWAIN_LOG_DTWAINERRORS = 0x800     ;
+        public const int DTWAIN_LOG_USEFILE = 0x10000        ;
+        public const int DTWAIN_LOG_SHOWEXCEPTIONS = 0x20000 ;
+        public const int DTWAIN_LOG_ERRORMSGBOX = 0x40000    ;
+        public const int DTWAIN_LOG_USEBUFFER = 0x80000      ;
+        public const int DTWAIN_LOG_FILEAPPEND = 0x100000    ;
+        public const int DTWAIN_LOG_USECALLBACK = 0x200000   ;
+        public const int DTWAIN_LOG_USECRLF = 0x400000       ;
+        public const int DTWAIN_LOG_CONSOLE = 0x800000       ;
+        public const int DTWAIN_LOG_DEBUGMONITOR = 0x1000000 ;
+        public const int DTWAIN_LOG_USEWINDOW = 0x2000000    ;
+        public const int DTWAIN_LOG_ALL = (DTWAIN_LOG_DECODE_SOURCE | DTWAIN_LOG_DECODE_DEST | DTWAIN_LOG_DECODE_TWEVENT
+                        | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_ISTWAINMSG | DTWAIN_LOG_INITFAILURE
+                        | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_NOTIFICATIONS | DTWAIN_LOG_MISCELLANEOUS | DTWAIN_LOG_DTWAINERRORS
+                        | DTWAIN_LOG_DECODE_BITMAP);
+
         public const  uint DTWAIN_LOG_ALL_APPEND = 0xFFFFFFFF;
+
         public const  int DTWAINGCD_RETURNHANDLE = 1;
         public const  int DTWAINGCD_COPYDATA = 2;
         public const  int DTWAIN_BYPOSITION = 0;
@@ -1547,6 +1557,57 @@ namespace Dynarithmic
         public const int DTWAIN_TWAS_CURRENT = 2;
         public const int DTWAIN_TWFR_BOOK = 0;
         public const int DTWAIN_TWFR_FANFOLD = 1;
+        public const int DTWAIN_CONSTANT_TWPT    = 0 ;
+        public const int DTWAIN_CONSTANT_TWUN    = 1 ;
+        public const int DTWAIN_CONSTANT_TWCY    = 2 ;
+        public const int DTWAIN_CONSTANT_TWAL    = 3 ;
+        public const int DTWAIN_CONSTANT_TWAS    = 4 ;
+        public const int DTWAIN_CONSTANT_TWBCOR  = 5 ;
+        public const int DTWAIN_CONSTANT_TWBD    = 6 ;
+        public const int DTWAIN_CONSTANT_TWBO    = 7 ;
+        public const int DTWAIN_CONSTANT_TWBP    = 8 ;
+        public const int DTWAIN_CONSTANT_TWBR    = 9 ;
+        public const int DTWAIN_CONSTANT_TWBT    = 10;
+        public const int DTWAIN_CONSTANT_TWCP    = 11;
+        public const int DTWAIN_CONSTANT_TWCS    = 12;
+        public const int DTWAIN_CONSTANT_TWDE    = 13;
+        public const int DTWAIN_CONSTANT_TWDR    = 14;
+        public const int DTWAIN_CONSTANT_TWDSK   = 15;
+        public const int DTWAIN_CONSTANT_TWDX    = 16;
+        public const int DTWAIN_CONSTANT_TWFA    = 17;
+        public const int DTWAIN_CONSTANT_TWFE    = 18;
+        public const int DTWAIN_CONSTANT_TWFF    = 19;
+        public const int DTWAIN_CONSTANT_TWFL    = 20;
+        public const int DTWAIN_CONSTANT_TWFO    = 21;
+        public const int DTWAIN_CONSTANT_TWFP    = 22;
+        public const int DTWAIN_CONSTANT_TWFR    = 23;
+        public const int DTWAIN_CONSTANT_TWFT    = 24;
+        public const int DTWAIN_CONSTANT_TWFY    = 22;
+        public const int DTWAIN_CONSTANT_TWIA    = 23;
+        public const int DTWAIN_CONSTANT_TWIC    = 27;
+        public const int DTWAIN_CONSTANT_TWIF    = 28;
+        public const int DTWAIN_CONSTANT_TWIM    = 29;
+        public const int DTWAIN_CONSTANT_TWJC    = 30;
+        public const int DTWAIN_CONSTANT_TWJQ    = 31;
+        public const int DTWAIN_CONSTANT_TWLP    = 32;
+        public const int DTWAIN_CONSTANT_TWLS    = 33;
+        public const int DTWAIN_CONSTANT_TWMD    = 34;
+        public const int DTWAIN_CONSTANT_TWNF    = 35;
+        public const int DTWAIN_CONSTANT_TWOR    = 36;
+        public const int DTWAIN_CONSTANT_TWOV    = 37;
+        public const int DTWAIN_CONSTANT_TWPA    = 38;
+        public const int DTWAIN_CONSTANT_TWPC    = 39;
+        public const int DTWAIN_CONSTANT_TWPCH   = 40;
+        public const int DTWAIN_CONSTANT_TWPF    = 41;
+        public const int DTWAIN_CONSTANT_TWPM    = 42;
+        public const int DTWAIN_CONSTANT_TWPR    = 43;
+        public const int DTWAIN_CONSTANT_TWPF2   = 44;
+        public const int DTWAIN_CONSTANT_TWCT    = 45;
+        public const int DTWAIN_CONSTANT_TWPS    = 46;
+        public const int DTWAIN_CONSTANT_TWSS    = 47;
+
+        public const int DTWAIN_APIHANDLEOK    = 1;
+        public const int DTWAIN_TWAINSESSIONOK = 2;
 
         public const string DTWAIN_LIBRARY = "dtwain32ud.dll";
 
@@ -5365,6 +5426,126 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_CallDSMProc([In] TW_IDENTITY AppID, System.IntPtr SourceId, int lDG, int lDAT, int lMSG, System.IntPtr pData);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSupportedSinglePageFileTypes();
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSupportedMultiPageFileTypes();
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetTwainNameFromConstantA(int constantType, int twainConstant, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetTwainNameFromConstantW(int constantType, int twainConstant, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetTwainNameFromConstant(int constantType, int twainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_SetLastError(int nError);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetAPIHandleStatus(DTWAIN_HANDLE handle);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeNameA(int nType, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeNameW(int nType, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeName(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeExtensionsA(int nType, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeExtensionsW(int nType, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetFileTypeExtensions(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_SetBlankPageDetectionEx(DTWAIN_SOURCE Source, double threshold, int autodetect, int detectOpts, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_SetBlankPageDetectionExStringA(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string threshold, int autodetect, int detectOpt, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_SetBlankPageDetectionExStringW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] string threshold, int autodetect, int detectOpt, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_SetBlankPageDetectionExString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string threshold, int autodetect, int detectOpt, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSourceDetailsA([MarshalAs(UnmanagedType.LPStr)] string szSources, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSourceDetailsW([MarshalAs(UnmanagedType.LPWStr)] string szSources, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSourceDetails([MarshalAs(UnmanagedType.LPTStr)] string zSources, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSessionDetailsA([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSessionDetailsW([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetVersionCopyrightA([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szBuf, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetVersionCopyrightW([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szBuf, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetVersionCopyright([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsSourceValid(DTWAIN_SOURCE source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnableTripletsNotify(int bEnable);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsNotifyTripletsEnabled();
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_DeleteDIB(System.IntPtr handle);
 
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]

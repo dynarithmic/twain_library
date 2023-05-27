@@ -596,11 +596,11 @@ namespace dynarithmic
                 bGetDetails = true;
             if (bGetDetails)
             {
-                auto nChars = API_INSTANCE DTWAIN_GetSourceDetailsA(get_source_info().get_product_name().c_str(), nullptr, 0, info.indentFactor); 
+                auto nChars = API_INSTANCE DTWAIN_GetSourceDetailsA(get_source_info().get_product_name().c_str(), nullptr, 0, info.indentFactor, TRUE); 
                 m_source_details.clear();
                 m_source_details.resize(nChars);
                 API_INSTANCE DTWAIN_GetSourceDetailsA(get_source_info().get_product_name().c_str(), &m_source_details[0], 
-                                                        static_cast<LONG>(m_source_details.size()), info.indentFactor);
+                                                        static_cast<LONG>(m_source_details.size()), info.indentFactor, FALSE);
             }
             return m_source_details;
         }

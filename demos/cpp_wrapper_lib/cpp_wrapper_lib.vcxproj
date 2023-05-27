@@ -356,7 +356,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="buffered_transfer_info.cpp" />
+    <ClCompile Include="dynarithmic\twain\acquire_characteristics\acquire_characteristics.cpp" />
     <ClCompile Include="dynarithmic\twain\logging\logger_callback.cpp" />
+    <ClCompile Include="dynarithmic\twain\session\twain_characteristics.cpp" />
     <ClCompile Include="options_base.cpp" />
     <ClCompile Include="paperhandling_info.cpp" />
     <ClCompile Include="pdf_text_element.cpp" />
@@ -370,6 +372,7 @@
     <ClInclude Include="dynarithmic\twain\capability_interface.hpp" />
     <ClInclude Include="dynarithmic\twain\compiler_details.hpp" />
     <ClInclude Include="dynarithmic\twain\dtwain_twain.hpp" />
+    <ClInclude Include="dynarithmic\twain\session\twain_characteristics.hpp" />
     <ClInclude Include="dynarithmic\twain\twain_callback.hpp" />
     <ClInclude Include="dynarithmic\twain\twain_details.hpp" />
     <ClInclude Include="dynarithmic\twain\twain_session.hpp" />

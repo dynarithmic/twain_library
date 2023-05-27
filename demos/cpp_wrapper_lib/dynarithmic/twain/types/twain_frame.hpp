@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2022 Dynarithmic Software.
+Copyright (c) 2002-2023 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -29,14 +29,18 @@ namespace dynarithmic
     namespace twain
     {
         // mimics the TW_FRAME type
-        template <typename FrameType = double>
+        template <typename FrameType = double, 
+                  typename CompareEq = std::equal_to<FrameType>>
         struct twain_frame
         {
             typedef FrameType value_type;
+            typedef CompareEq comparereq_type;
+
             FrameType left = (std::numeric_limits<FrameType>::min)();
             FrameType top = (std::numeric_limits<FrameType>::min)();
             FrameType right = (std::numeric_limits<FrameType>::min)();
             FrameType bottom = (std::numeric_limits<FrameType>::min)();
+            comparereq_type comparereq;
 
             twain_frame(const FrameType& singlevalue) : left(singlevalue), top(singlevalue), right(singlevalue),
                                                         bottom(singlevalue)
@@ -49,10 +53,10 @@ namespace dynarithmic
 
             bool operator==(const twain_frame& tf) const
             {
-                return tf.left == left &&
-                       tf.top == top &&
-                       tf.right == right &&
-                       tf.bottom == bottom;
+                return comparereq(tf.left, left) &&
+                       comparereq(tf.top, top) &&
+                       comparereq(tf.right, right) &&
+                       comparereq(tf.bottom, bottom);
             }
 
             bool operator!=(const twain_frame& tf) const

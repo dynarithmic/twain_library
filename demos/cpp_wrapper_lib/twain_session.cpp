@@ -28,6 +28,13 @@ namespace dynarithmic
 {
     namespace twain
     {
+        template <typename T>
+        static uint64_t PtrToInt64(T p)
+        {
+            const void* ptr = reinterpret_cast<const void*>(p);
+            return static_cast<uint64_t>(reinterpret_cast<uintptr_t>(ptr));
+        }                
+
         bool twain_session::start(bool bCleanStart)
         {
 #ifdef DTWAIN_NOIMPORTLIB
@@ -68,7 +75,11 @@ namespace dynarithmic
                     return false;
                 }
             }
-            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
+
+            const void* ptr = reinterpret_cast<const void*>(this);
+            uint64_t ui64 = static_cast<uint64_t>(reinterpret_cast<uintptr_t>(ptr));
+
+            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this)); 
             API_INSTANCE DTWAIN_LoadCustomStringResourcesA(m_twain_characteristics.get_language().c_str());
 
             auto sz = API_INSTANCE DTWAIN_GetShortVersionStringA(nullptr, 0);
@@ -137,7 +148,8 @@ namespace dynarithmic
                 }
 
                 API_INSTANCE DTWAIN_EnableMsgNotify(TRUE);
-                API_INSTANCE DTWAIN_SetCallback64(callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
+                API_INSTANCE DTWAIN_EnableTripletsNotify(m_bTripletsNotify);
+                API_INSTANCE DTWAIN_SetCallback64(callback_proc, PtrToInt64(this));
                 m_source_cache.clear();
                 m_bStarted = true;
                 return true;
@@ -149,7 +161,7 @@ namespace dynarithmic
 
         void twain_session::setup_error_logging()
         {
-            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
+            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this));
         }
 
         void twain_session::setup_logging()
@@ -161,7 +173,7 @@ namespace dynarithmic
                 const int32_t log_verbosity = static_cast<int32_t>(details.get_verbosity_aslong());
                 if (details.is_custom_enabled())
                     log_destination |= DTWAIN_LOG_USECALLBACK;
-                API_INSTANCE DTWAIN_SetLoggerCallbackA(dynarithmic::twain::logger_callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
+                API_INSTANCE DTWAIN_SetLoggerCallbackA(dynarithmic::twain::logger_callback_proc, PtrToInt64(this));
                 API_INSTANCE DTWAIN_SetTwainLogA(log_destination | log_verbosity, details.get_filename().c_str());
             }
         }
@@ -175,8 +187,8 @@ namespace dynarithmic
             m_source_cache = std::move(rhs.m_source_cache);
             m_twain_characteristics = std::move(rhs.m_twain_characteristics);
             m_error_logger_func = std::move(rhs.m_error_logger_func);
-            API_INSTANCE DTWAIN_SetCallback64(callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
-            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, reinterpret_cast<DTWAIN_LONG64>(this));
+            API_INSTANCE DTWAIN_SetCallback64(callback_proc, PtrToInt64(this));
+            API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this));
             rhs.m_Handle = nullptr;
         }
 
@@ -610,6 +622,14 @@ namespace dynarithmic
         bool twain_session::is_custom_twain_loop()
         {
             return m_twain_characteristics.is_custom_twain_loop();
+        }
+
+        twain_session& twain_session::enable_triplets_notification(bool bEnable)
+        {
+            m_bTripletsNotify = bEnable;
+            if ( started() )
+                API_INSTANCE DTWAIN_EnableTripletsNotify(bEnable?1:0);
+            return *this;
         }
 
         void twain_session::update_source_status(const twain_source& ts)

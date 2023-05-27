@@ -1,9 +1,9 @@
 ﻿Imports System.Windows.Forms
 
 Public Class SourcePropertiesDlg
-    Private m_Source As Integer
+    Private m_Source As System.IntPtr
 
-    Public Sub New(ByVal item As Long)
+    Public Sub New(ByVal item As System.IntPtr)
         InitializeComponent() ' This call is required by the Windows Form Designer.
         m_Source = item
     End Sub
@@ -18,8 +18,7 @@ Public Class SourcePropertiesDlg
     End Sub
 
     Private Sub SourcePropertiesDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim szInfo As String
-        szInfo = Space$(256)
+        Dim szInfo As New System.Text.StringBuilder(256)
         DTWAINAPI.DTWAIN_GetSourceProductName(m_Source, szInfo, 255)
         Me.edProductName.Text = szInfo.ToString()
         DTWAINAPI.DTWAIN_GetSourceProductFamily(m_Source, szInfo, 255)
@@ -38,7 +37,7 @@ Public Class SourcePropertiesDlg
         sVersion = lMajor.ToString() + "." + lMinor.ToString()
         Me.edVersion.Text = sVersion
 
-        Dim AllCaps As Integer
+        Dim AllCaps As System.IntPtr
         Dim Val As Integer
         DTWAINAPI.DTWAIN_EnumSupportedCaps(m_Source, AllCaps)
         Dim nSize As Integer

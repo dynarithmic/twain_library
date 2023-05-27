@@ -14,8 +14,7 @@ Public Class AboutDlg
 
     Private Sub AboutDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim nChars As Integer = DTWAINAPI.DTWAIN_GetVersionInfo(IntPtr.Zero, -1)
-        Dim szInfo As String
-        szInfo = (Space(nChars + 1))
+        Dim szInfo As New System.Text.StringBuilder(nChars)
         DTWAINAPI.DTWAIN_GetVersionInfo(szInfo, nChars)
         edInfo.Text = szInfo.ToString()
     End Sub

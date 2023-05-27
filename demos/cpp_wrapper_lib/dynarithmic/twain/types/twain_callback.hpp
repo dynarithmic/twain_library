@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2022 Dynarithmic Software.
+Copyright (c) 2002-2023 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ namespace dynarithmic
 
             LONG m_UserData;
             bool m_bDefaultHandler;
+            bool m_bEnableTripletNotification;
             LONG m_nNotificationID;
             twain_callback_map m_functionMap;
 
@@ -103,6 +104,8 @@ namespace dynarithmic
             virtual int blankpagediscardedadjusted(twain_source&) { return 1; }
             virtual int filenamechanging(twain_source&) { return 1; }
             virtual int filenamechanged(twain_source&) { return 1; }
+            virtual int tripletbegin(twain_source&) { return 1; }
+            virtual int tripletend(twain_source&) { return 1; }
 
         public:
             twain_callback() : m_UserData(0), m_bDefaultHandler(false), m_nNotificationID(0), m_functionMap({
@@ -159,11 +162,14 @@ namespace dynarithmic
                 {DTWAIN_TN_BLANKPAGEDISCARDED2, &twain_callback::blankpagediscardedadjusted},
                 {DTWAIN_TN_FILENAMECHANGING, &twain_callback::filenamechanging},
                 {DTWAIN_TN_FILENAMECHANGED, &twain_callback::filenamechanged},
-                {DTWAIN_TN_UIOPENFAILURE, &twain_callback::uiopenfailure}
+                {DTWAIN_TN_UIOPENFAILURE, &twain_callback::uiopenfailure},
+                {DTWAIN_TN_TWAINTRIPLETBEGIN, &twain_callback::tripletbegin},
+                {DTWAIN_TN_TWAINTRIPLETEND, &twain_callback::tripletend}
                 })
             {}
 
             LRESULT call_func(WPARAM wParm, LPARAM lParm, twain_source* pSource);
+            void enable_triplet_notify(bool bSet) { m_bEnableTripletNotification = bSet; }
             virtual ~twain_callback() = default;
         };
     }

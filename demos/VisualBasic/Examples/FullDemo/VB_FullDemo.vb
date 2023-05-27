@@ -5,7 +5,7 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Diagnostics
 
-Public Class DTwainDemo
+Public Class VB_FullDemo
     Inherits System.Windows.Forms.Form
 
 #Region " Windows Form Designer generated code "
@@ -212,12 +212,12 @@ Public Class DTwainDemo
         Me.DTWAINVersion.Index = 0
         Me.DTWAINVersion.Text = "DTWAIN Version..."
         '
-        'DTwainDemo
+        'VB_FullDemo
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
         Me.ClientSize = New System.Drawing.Size(664, 641)
         Me.Menu = Me.MainMenu1
-        Me.Name = "DTwainDemo"
+        Me.Name = "VB_FullDemo"
         Me.Text = "DTWAIN VB .NET Example"
         Me.ResumeLayout(False)
 
@@ -226,14 +226,15 @@ Public Class DTwainDemo
 #End Region
 
     Private TwainOK As Integer
-    Private SelectedSource As Integer
+    Private TwainHandle As System.IntPtr
+    Private Shared SelectedSource As System.IntPtr
     Private sOrigTitle As String
-    Private Shared thisObject As DTwainDemo
+    Private Shared thisObject As VB_FullDemo
     Private dllExists As Boolean
-    Private Shared cb As DTWAINAPI.DTWAINCallback = New DTWAINAPI.DTWAINCallback(AddressOf callbackfn)
+    Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf callbackfn)
 
 
-    Private Sub DTwainDemo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub VB_FullDemo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.SelectSource.Enabled = False
         dllExists = True
         sOrigTitle = Me.Text
@@ -245,10 +246,10 @@ Public Class DTwainDemo
             Dispose()
         End Try
         SelectedSource = 0
-        If TwainOK = 1 Then
-            TwainOK = DTWAINAPI.DTWAIN_SysInitialize()
+        If TwainOK <> 0 Then
+            TwainHandle = DTWAINAPI.DTWAIN_SysInitialize()
             Me.SelectSource.Enabled = True
-            If TwainOK Then
+            If TwainHandle <> 0 Then
                 DTWAINAPI.DTWAIN_EnableMsgNotify(1)
                 DTWAINAPI.DTWAIN_SetCallback(cb, 0)
             End If
@@ -260,7 +261,7 @@ Public Class DTwainDemo
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
-                    Dim sDIBDlg As New DibDisplayerDlg2(DTWAINAPI.DTWAIN_GetCurrentAcquiredImage(lparam))
+                    Dim sDIBDlg As New DibDisplayerDlg2(DTWAINAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource))
                     If sDIBDlg.ShowDialog() = DialogResult.Cancel Then
                         Return 0
                     End If
@@ -400,7 +401,7 @@ Public Class DTwainDemo
             End If
 
             DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY, isChecked)
-            Dim acquireArray As Integer = DTWAINAPI.DTWAIN_CreateAcquisitionArray()
+            Dim acquireArray As System.IntPtr = DTWAINAPI.DTWAIN_CreateAcquisitionArray()
             Me.Enabled = False
             Dim status As Integer = 0
             If DTWAINAPI.DTWAIN_AcquireNativeEx(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, isUI, 0, acquireArray, status) = 0 Then
@@ -576,9 +577,7 @@ Public Class DTwainDemo
                     DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
                     Exit Select
                 Case 3
-                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags And Not DTWAINAPI.DTWAIN_LOG_USEFILE), "")
-                    MessageBox.Show("The DebugView debug monitor will start...")
-                    Process.Start("DbgView.exe")
+                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
                     Exit Select
             End Select
         End If

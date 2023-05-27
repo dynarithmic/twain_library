@@ -126,28 +126,7 @@ namespace dynarithmic
                 return *this;
             }
 
-            twain_characteristics& set_dsm_search_order(int search_order) noexcept
-            {
-                static const std::unordered_map<int, std::string> sMap = { {0,"WSO"},
-                                                                      { 1,"WOS"},
-                                                                      { 2,"SWO"},
-                                                                      { 3,"SOW" },
-                                                                      { 4,"OWS" },
-                                                                      { 5,"OSW" },
-                                                                      { 6,"W" },
-                                                                      { 7,"S" },
-                                                                      { 8,"O" },
-                                                                      { 9,"WS" },
-                                                                      { 10,"WO" },
-                                                                      { 11,"SW" },
-                                                                      { 12,"SO" },
-                                                                      { 13,"OW" },
-                                                                      { 14,"OS" } };
-                auto iter = sMap.find(search_order);
-                if (iter != sMap.end())
-                    set_dsm_search_order(iter->second, "");
-                return *this;
-            }
+            twain_characteristics& set_dsm_search_order(int search_order) noexcept;
 
             /// Sets whether acquiring images requires a user-defined TWAIN message loop to run.
             /// 

@@ -187,6 +187,7 @@
     D_ENABLEPATCHDETECTFUNC                                           DYNDTWAIN_API::DTWAIN_EnablePatchDetect = nullptr;
     D_ENABLEPRINTERFUNC                                               DYNDTWAIN_API::DTWAIN_EnablePrinter = nullptr;
     D_ENABLETHUMBNAILFUNC                                             DYNDTWAIN_API::DTWAIN_EnableThumbnail = nullptr;
+    D_ENABLETRIPLETSNOTIFYFUNC                                        DYNDTWAIN_API::DTWAIN_EnableTripletsNotify = nullptr;
     D_ENDTHREADFUNC                                                   DYNDTWAIN_API::DTWAIN_EndThread = nullptr;
     D_ENDTWAINSESSIONFUNC                                             DYNDTWAIN_API::DTWAIN_EndTwainSession = nullptr;
     D_ENUMALARMSEXFUNC                                                DYNDTWAIN_API::DTWAIN_EnumAlarmsEx = nullptr;
@@ -628,6 +629,7 @@
     D_ISDOUBLEFEEDDETECTSUPPORTEDFUNC                                 DYNDTWAIN_API::DTWAIN_IsDoubleFeedDetectSupported = nullptr;
     D_ISDUPLEXENABLEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsDuplexEnabled = nullptr;
     D_ISDUPLEXSUPPORTEDFUNC                                           DYNDTWAIN_API::DTWAIN_IsDuplexSupported = nullptr;
+    D_ISNOTIFYTRIPLETSENABLEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsNotifyTripletsEnabled = nullptr;
     D_ISEXTIMAGEINFOSUPPORTEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsExtImageInfoSupported = nullptr;
     D_ISFEEDERENABLEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsFeederEnabled = nullptr;
     D_ISFEEDERLOADEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsFeederLoaded = nullptr;
@@ -665,6 +667,7 @@
     D_ISSOURCEACQUIRINGFUNC                                           DYNDTWAIN_API::DTWAIN_IsSourceAcquiring = nullptr;
     D_ISSOURCEOPENFUNC                                                DYNDTWAIN_API::DTWAIN_IsSourceOpen = nullptr;
     D_ISSOURCESELECTEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsSourceSelected = nullptr;
+    D_ISSOURCEVALIDFUNC                                               DYNDTWAIN_API::DTWAIN_IsSourceValid = nullptr;
     D_ISTHUMBNAILENABLEDFUNC                                          DYNDTWAIN_API::DTWAIN_IsThumbnailEnabled = nullptr;
     D_ISTHUMBNAILSUPPORTEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsThumbnailSupported = nullptr;
     D_ISTIFFSUPPORTEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsTIFFSupported = nullptr;
@@ -1198,6 +1201,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnablePrinter, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableThumbnail, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EndThread, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnableTripletsNotify, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EndTwainSession, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumAlarmsEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumAlarms, hModule);
@@ -1638,6 +1642,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsDoubleFeedDetectSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsDuplexEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsDuplexSupported, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsNotifyTripletsEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsExtImageInfoSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsFeederEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsFeederLoaded, hModule);
@@ -1675,6 +1680,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsSourceAcquiring, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceOpen, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceSelected, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsSourceValid, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsThumbnailEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsThumbnailSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsTIFFSupported, hModule);

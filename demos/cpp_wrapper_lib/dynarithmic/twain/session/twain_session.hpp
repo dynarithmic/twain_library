@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2022 Dynarithmic Software.
+Copyright (c) 2002-2023 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -222,6 +222,7 @@ namespace dynarithmic
             std::vector<std::string> m_fileExtensions;
             twain_characteristics m_twain_characteristics;
             bool m_bStarted = false;
+            bool m_bTripletsNotify = false;
             std::string m_dsm_path;
             std::string m_long_name;
             std::string m_short_name;
@@ -520,6 +521,12 @@ namespace dynarithmic
                 /// session has started.
                 /// @param[in] enable if **true** the logging is enabled, **false**, logging is disabled.
                 void enable_logger(bool enable = true);
+
+                /// Sets the enabling of triplet notifications being sent to the application
+                /// 
+                /// @returns reference to the object that identifies this session by TWAIN.
+                twain_session& enable_triplets_notification(bool bEnable);
+
                 /// Returns the complete object that represents this TWAIN session's identity.
                 /// 
                 /// @returns reference to the object that identifies this session by TWAIN.

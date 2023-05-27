@@ -19,9 +19,34 @@ DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRING
 OF THIRD PARTY RIGHTS.
 */
 
-#ifndef ACQUIRE_CHARACTERISTICS_HPP
-#define ACQUIRE_CHARACTERISTICS_HPP
-
 #include <dynarithmic/twain/acquire_characteristics/acquire_characteristics.hpp>
+#include <algorithm>
 
-#endif
+namespace dynarithmic
+{
+    namespace twain
+    {
+        acquire_characteristics::acquire_characteristics()
+        {
+            static constexpr uint8_t default_appliers[] =
+            {
+                apply_generaloptions,
+                apply_pdfoptions,
+                apply_coloroptions,
+                apply_filetransferoptions,
+                apply_bufferedtransferoptions,
+                apply_jobcontroloptions,
+                apply_compressionoptions,
+                apply_paperhandlingoptions,
+                apply_userinterfaceoptions,
+                apply_blankpageoptions,
+                apply_resolutionoptions,
+                apply_imagetypeoptions
+            };
+
+            std::fill_n(m_aAppliers.begin(), m_aAppliers.size(), false);
+            for (auto n : default_appliers)
+                m_aAppliers[n] = true;
+        }
+    }
+}
