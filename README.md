@@ -276,13 +276,15 @@ DTWAIN includes computer language bindings for the following computer languages 
       C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
       C# 
       Delphi
-      Java (using the Java Native Interface JNI)
       Perl
       Python 
       Visual Basic .NET 
       XBase++ (Alaska Software)
   
-For example, here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
+There is also a [Java](https://www.oracle.com/java/) interface that is found in the [twain_library-java repository](https://github.com/dynarithmic/twain_library-java).
+
+###### Quick Example (C#)  
+Here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
 
 ```plaintext
 using System;
@@ -333,7 +335,8 @@ A full C# demo can be found <a href="https://github.com/dynarithmic/twain_librar
 
 A full Visual Basic .NET demo can be found <a href="https://github.com/dynarithmic/twain_library-visualbasic_demo" target="_blank">here</a>.
 
-Other demos for other languages will be coming soon.
+For Java, it is recommended to look through the numerous demo programs in the [Java interface to DTWAIN repository](https://github.com/dynarithmic/twain_library-java).
+
 
 ----------
 
