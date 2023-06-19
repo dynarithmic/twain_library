@@ -68,6 +68,7 @@
 1053 DTWAIN ARRAY not the same type
 1054 Source not installed
 1055 Source does not support memory file transfers
+1056 A matriz de área é muito pequena. A matriz deve ter pelo menos 4 itens.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida
