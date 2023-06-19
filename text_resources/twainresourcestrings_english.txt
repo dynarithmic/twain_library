@@ -68,6 +68,7 @@
 1053 DTWAIN ARRAY not the same type
 1054 Source not installed
 1055 Source does not support memory file transfers
+1056 Area array is too small.  Array should have at least 4 items.
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure
