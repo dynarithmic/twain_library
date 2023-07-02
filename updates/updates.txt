@@ -1,5 +1,12 @@
 DTWAIN Version changes
 
+5.3.0.8 
+
+- Fixed possible crash with DTWAIN_SetMultipageScanMode and acquiring to multipage image files 
+  when attempting to obtain the current TWAIN session handle.
+
+
+
 5.3.0.7 
 
 - Fix issue with DTWAIN_SetAcquireArea when resetting the acquisition area of interest.
