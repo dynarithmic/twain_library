@@ -283,10 +283,11 @@ DTWAIN includes computer language bindings for the following computer languages 
   
 There is also a [Java](https://www.oracle.com/java/) interface that is found in the [twain_library-java repository](https://github.com/dynarithmic/twain_library-java).
 
+----
 ###### Quick Example (C#)  
 Here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
 
-```plaintext
+```csharp
 using System;
 // The additional dtwain*.cs file needs to be added to your project for these definitions.
 using Dynarithmic; 
@@ -328,7 +329,43 @@ namespace Test
     }
 }
 ```
-          
+----
+###### Quick Example (Python)  
+
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/Python) file that defines the DTWAIN constants.  The program gives an example of acquiring a BMP image from a TWAIN device installed on your system:
+
+
+```python
+from ctypes import *
+import dtwain
+import ctypes as ct
+
+def test_dtwain():
+    # Load the DTWAIN library (make sure "dtwain32u.dll" is accessible)
+    # You can use a full pathname here also, to ensure python finds the dll
+    dtwain_dll = windll.LoadLibrary("dtwain32u.dll") 
+    
+    # Initialize DTWAIN
+    dtwain_dll.DTWAIN_SysInitialize()
+    
+    # Select a TWAIN source
+    TwainSource = dtwain_dll.DTWAIN_SelectSource()
+    if TwainSource:
+        # Display the product name of the Source
+        mystrbuf = ct.create_string_buffer(100)
+        dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource,mystrbuf,len(mystrbuf))
+        print (mystrbuf.value)
+        
+        # Acquire to a BMP file
+        dtwain_dll.DTWAIN_AcquireFile(TwainSource, "TEST.BMP", dtwain.DTWAIN_BMP, dtwain.DTWAIN_USELONGNAME,
+                                      dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, 0)
+    # Close down DTWAIN                                      
+    dtwain_dll.DTWAIN_SysDestroy()
+
+if __name__ == '__main__':
+    test_dtwain()
+```
+----
 Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
 
 A full C# demo can be found <a href="https://github.com/dynarithmic/twain_library-csharp_demo" target="_blank">here</a>.
