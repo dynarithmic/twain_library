@@ -328,7 +328,40 @@ namespace Test
     }
 }
 ```
-          
+----
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/Python) file that defines the DTWAIN constants:
+
+```python
+from ctypes import *
+import dtwain
+import ctypes as ct
+
+def test_dtwain():
+    # Load the DTWAIN library (make sure "dtwain32u.dll" is accessible)
+    # You can use a full pathname here also, to ensure python finds the dll
+    dtwain_dll = windll.LoadLibrary("dtwain32u.dll") 
+    
+    # Initialize DTWAIN
+    dtwain_dll.DTWAIN_SysInitialize()
+    
+    # Select a TWAIN source
+    TwainSource = dtwain_dll.DTWAIN_SelectSource()
+    if TwainSource:
+        # Display the product name of the Source
+        mystrbuf = ct.create_string_buffer(100)
+        dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource,mystrbuf,len(mystrbuf))
+        print (mystrbuf.value)
+        
+        # Acquire to a BMP file
+        dtwain_dll.DTWAIN_AcquireFile(TwainSource, "TEST.BMP", dtwain.DTWAIN_BMP, dtwain.DTWAIN_USELONGNAME,
+                                      dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, 0)
+    # Close down DTWAIN                                      
+    dtwain_dll.DTWAIN_SysDestroy()
+
+if __name__ == '__main__':
+    test_dtwain()
+```
+----
 Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
 
 A full C# demo can be found <a href="https://github.com/dynarithmic/twain_library-csharp_demo" target="_blank">here</a>.
