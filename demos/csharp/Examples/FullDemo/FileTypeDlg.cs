@@ -53,9 +53,9 @@ namespace TWAINDemo
                                  new AllTypes("TIFF (LZW compression)", TwainAPI.DTWAIN_TIFFLZWMULTI, "test.tif"),
                                  new AllTypes("Targa (TGA) File", TwainAPI.DTWAIN_TGA, "test.tga"),
                                  new AllTypes("Windows Meta File (WMF)", TwainAPI.DTWAIN_WMF, "test.wmf"),
-                                 new AllTypes("Windows ICON File (ICO)", TwainAPI.DTWAIN_ICO, "test.ico"),
+                                 new AllTypes("Windows ICON File (ICO)", TwainAPI.DTWAIN_ICO_RESIZED, "test.ico"),
                                  new AllTypes("Windows ICON File- Vista compatible (ICO)", TwainAPI.DTWAIN_ICO_VISTA, "test.ico"),
-                                 new AllTypes("Wireless Bitmap File (WBMP)", TwainAPI.DTWAIN_WBMP, "test.wbmp")};
+                                 new AllTypes("Wireless Bitmap File (WBMP)", TwainAPI.DTWAIN_WBMP_RESIZED, "test.wbmp")};
 
 
         public FileTypeDlg()

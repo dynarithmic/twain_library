@@ -35,7 +35,7 @@ int Runner::Run()
             std::cout << "    Product Name: " << source.get_product_name() << "\n";
 
         // Select a source and display the information using JSON format
-        twain_source source = session.select_source();
+        twain_source source = RunnerBase::SelectDialog(session);
 
         if (source.is_selected())
         {

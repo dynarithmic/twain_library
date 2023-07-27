@@ -412,41 +412,6 @@ namespace dynarithmic
             }
         }
 
-        /// Selects a TWAIN Device that will be used to acquire images.
-        /// 
-        /// Allows selection of a TWAIN Source using one of 3 methods, as denoted by the selector parameter:
-        /// <ul>
-        ///     <li>1. Using the TWAIN Select Source dialog</li>
-        ///     <li>2. Select a source by using the product name of the device</li>
-        ///     <li>3. Select the default TWAIN Source</li>
-        /// </ul>
-        /// If no device is selected, the returned source_select_info will have the source_select_info::creation_status set to **false**.
-        /// @param[in] selector The type of selection to use (dialog, by product name, or default)
-        /// @param[in] open_source If **true**, and a TWAIN device is successfully selected, automatically opens the device for further operations. 
-        /// @returns A source_select_info that describes the DTWAIN_SOURCE selected.
-        /// @note if the **open_source** parameter is **false**, the program must call the twain_source::open() function.
-        /// @see dynarithmic::twain::source_selector<select_type::use_dialog>() dynarithmic::twain::source_selector<select_type::use_name>() dynarithmic::twain::source_selector<select_type::use_default>()
-        /// 
-        /**
-        \code {.cpp}
-         #include <dynarithmic\twain\twain_session.hpp>
-         #include <dynarithmic\twain\twain_source.hpp>
-         using namespace dynarithmic::twain;
-         int main()
-         {
-            twain_session session;
-            if (session.start())
-            {
-               twain_source source = session.select_source(); // select a source and automatically open
-               if ( source.is_selected() )
-               {
-                  // Source was selected
-               }
-            }
-        }
-        \endcode
-        */
-
         /** Adds an error value to the error log
         *
         */

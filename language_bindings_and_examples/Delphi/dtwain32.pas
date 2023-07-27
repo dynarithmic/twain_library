@@ -1,5 +1,5 @@
 {* This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          *}
-{* Copyright (c) 2002-2021 Dynarithmic Software.                                         *}
+{* Copyright (c) 2002-2023 Dynarithmic Software.                                         *}
 {*                                                                                       *}
 {* Licensed under the Apache License, Version 2.0 (the "License");                       *}
 {* you may not use this file except in compliance with the License.                      *}
@@ -179,9 +179,9 @@ type
   { Function types }
    DTwainCallback = function(wParam:Integer;lParam:Integer;userData:Integer) : Integer; stdcall;
    DTwainDibUpdateCallback = function(Source:DTWAIN_SOURCE;pageNum:Integer;dibHandle:DTWAIN_HANDLE): Integer; stdcall;
-   DTwainCallback64 = function(wParam:Integer;lParam:Integer;userData:LongInt):Integer; stdcall;
+   DTwainCallback64 = function(wParam:Integer;lParam:Integer;userData:Int64):Integer; stdcall;
    DTwainErrorProc = function( param1:Integer;param2:Integer):Integer;stdcall;
-   DTwainErrorProc64 = function( param1:Integer;param2:LongInt):Integer;stdcall;
+   DTwainErrorProc64 = function( param1:Integer;param2:Int64):Integer;stdcall;
    DTwainLoggerProcA = function(lpszName:LPSTR;userData:LongInt):Integer;stdcall;
    DTwainLoggerProcW = function(lpszName:LPWSTR;userData:LongInt):Integer;stdcall;
    DTwainLoggerProc = function(lpszName:LPTSTR;userData:LongInt):Integer;stdcall;
@@ -320,7 +320,9 @@ const
   DTWAIN_TIFFMULTI = 7000;
   DTWAIN_ICO = 8000;
   DTWAIN_ICO_VISTA = 8001;
+  DTWAIN_ICO_RESIZED = 8002;
   DTWAIN_WBMP = 8500;
+  DTWAIN_WBMP_RESIZED = 11000;
   DTWAIN_INCHES = 0;
   DTWAIN_CENTIMETERS = 1;
   DTWAIN_PICAS = 2;
@@ -328,11 +330,12 @@ const
   DTWAIN_TWIPS = 4;
   DTWAIN_PIXELS = 5;
   DTWAIN_MILLIMETERS = 6;
-  DTWAIN_USENAME = 4;
-  DTWAIN_USEPROMPT = 8;
-  DTWAIN_USELONGNAME = 16;
-  DTWAIN_USESOURCEMODE = 32;
-  DTWAIN_USELIST = 64;
+  DTWAIN_USENAME = 16;
+  DTWAIN_USEPROMPT = 32;
+  DTWAIN_USELONGNAME = 64;
+  DTWAIN_USESOURCEMODE = 128;
+  DTWAIN_USELIST = 256;
+  DTWAIN_CREATEDIRECTORY = 512;
   DTWAIN_ARRAYANY = 1;
   DTWAIN_ArrayTypePTR = 1;
   DTWAIN_ARRAYLONG = 2;
@@ -505,6 +508,11 @@ const
   DTWAIN_TN_SETCALLBACK64INIT = 1151;
   DTWAIN_TN_FILENAMECHANGING = 1160;
   DTWAIN_TN_FILENAMECHANGED = 1161;
+  DTWAIN_TN_PROCESSEDAUDIOFINAL = 1180;
+  DTWAIN_TN_PROCESSAUDIOFINALACCEPTED = 1181;
+  DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
+  DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
+  DTWAIN_TN_TWAINTRIPLETEND = 1184;
   DTWAIN_PDFOCR_CLEANTEXT1 = 1;
   DTWAIN_PDFOCR_CLEANTEXT2 = 2;
   DTWAIN_MODAL = 0;
@@ -536,7 +544,7 @@ const
   DTWAIN_CNTYAFGHANISTAN = 1001;
   DTWAIN_CNTYALGERIA = 213;
   DTWAIN_CNTYAMERICANSAMOA = 684;
-  DTWAIN_CNTYANDORRA = 033;
+  DTWAIN_CNTYANDORRA = 33;
   DTWAIN_CNTYANGOLA = 1002;
   DTWAIN_CNTYANGUILLA = 8090;
   DTWAIN_CNTYANTIGUA = 8091;
@@ -579,7 +587,7 @@ const
   DTWAIN_CNTYCONGO = 1011;
   DTWAIN_CNTYCOOKIS = 1012;
   DTWAIN_CNTYCOSTARICA = 506;
-  DTWAIN_CNTYCUBA = 005;
+  DTWAIN_CNTYCUBA = 5;
   DTWAIN_CNTYCYPRUS = 357;
   DTWAIN_CNTYCZECHOSLOVAKIA = 42;
   DTWAIN_CNTYDENMARK = 45;
@@ -808,7 +816,14 @@ const
   DTWAIN_ERR_BAD_CAPTYPE = (-1047);
   DTWAIN_ERR_UNKNOWN_CAPDATATYPE = (-1048);
   DTWAIN_ERR_DEMO_NOFILETYPE = (-1049);
-  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_DEMO_NOFILETYPE;
+  DTWAIN_ERR_SOURCESELECTION_CANCELED = (-1050);
+  DTWAIN_ERR_RESOURCES_NOT_FOUND = (-1051);
+  DTWAIN_ERR_STRINGTYPE_MISMATCH = (-1052);
+  DTWAIN_ERR_ARRAYTYPE_MISMATCH = (-1053);
+  DTWAIN_ERR_SOURCENAME_NOTINSTALLED = (-1054);
+  DTWAIN_ERR_NO_MEMFILE_XFER = (-1055);
+  DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
+  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_AREA_ARRAY_TOO_SMALL;
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -1066,24 +1081,34 @@ const
   DTWAIN_EI_MAGDATALENGTH = $1248;
   DTWAIN_EI_PAPERCOUNT = $1249;
   DTWAIN_EI_PRINTERTEXT = $124A;
-  DTWAIN_LOG_DECODE_SOURCE = 1;
-  DTWAIN_LOG_DECODE_DEST = 2;
-  DTWAIN_LOG_DECODE_TWMEMREF = 4;
-  DTWAIN_LOG_DECODE_TWEVENT = 8;
-  DTWAIN_LOG_USEFILE = 16;
-  DTWAIN_LOG_CALLSTACK = 32;
-  DTWAIN_LOG_USEWINDOW = 64;
-  DTWAIN_LOG_SHOWEXCEPTIONS = 128;
-  DTWAIN_LOG_ERRORMSGBOX = 256;
-  DTWAIN_LOG_INITFAILURE = 512;
-  DTWAIN_LOG_USEBUFFER = 1024;
-  DTWAIN_LOG_FILEAPPEND = 2048;
-  DTWAIN_LOG_DECODE_BITMAP = 4096;
-  DTWAIN_LOG_NOCALLBACK = 8192;
-  DTWAIN_LOG_WRITE = 16384;
-  DTWAIN_LOG_USECRLF = 32768;
-  DTWAIN_LOG_ALL = $FFFFF7FF;
-  DTWAIN_LOG_ALL_APPEND = $FFFFFFFF;
+
+  DTWAIN_LOG_DECODE_SOURCE = $1      ;
+  DTWAIN_LOG_DECODE_DEST = $2        ;
+  DTWAIN_LOG_DECODE_TWMEMREF = $4    ;
+  DTWAIN_LOG_DECODE_TWEVENT = $8     ;
+  DTWAIN_LOG_CALLSTACK = $10         ;
+  DTWAIN_LOG_ISTWAINMSG = $20        ;
+  DTWAIN_LOG_INITFAILURE = $40       ;
+  DTWAIN_LOG_LOWLEVELTWAIN = $80     ;
+  DTWAIN_LOG_DECODE_BITMAP = $100    ;
+  DTWAIN_LOG_NOTIFICATIONS = $200    ;
+  DTWAIN_LOG_MISCELLANEOUS = $400    ;
+  DTWAIN_LOG_DTWAINERRORS = $800     ;
+  DTWAIN_LOG_USEFILE = $10000        ;
+  DTWAIN_LOG_SHOWEXCEPTIONS = $20000 ;
+  DTWAIN_LOG_ERRORMSGBOX = $40000    ;
+  DTWAIN_LOG_USEBUFFER = $80000      ;
+  DTWAIN_LOG_FILEAPPEND = $100000    ;
+  DTWAIN_LOG_USECALLBACK = $200000   ;
+  DTWAIN_LOG_USECRLF = $400000       ;
+  DTWAIN_LOG_CONSOLE = $800000       ;
+  DTWAIN_LOG_DEBUGMONITOR = $1000000 ;
+  DTWAIN_LOG_USEWINDOW = $2000000    ;
+  DTWAIN_LOG_ALL = (DTWAIN_LOG_DECODE_SOURCE Or DTWAIN_LOG_DECODE_DEST Or DTWAIN_LOG_DECODE_TWEVENT
+                  Or DTWAIN_LOG_DECODE_TWMEMREF Or DTWAIN_LOG_CALLSTACK Or DTWAIN_LOG_ISTWAINMSG Or DTWAIN_LOG_INITFAILURE
+                  Or DTWAIN_LOG_LOWLEVELTWAIN Or DTWAIN_LOG_NOTIFICATIONS Or DTWAIN_LOG_MISCELLANEOUS Or DTWAIN_LOG_DTWAINERRORS
+                  Or DTWAIN_LOG_DECODE_BITMAP);
+
   DTWAINGCD_RETURNHANDLE = 1;
   DTWAINGCD_COPYDATA = 2;
   DTWAIN_BYPOSITION = 0;
@@ -1126,12 +1151,22 @@ const
   DTWAIN_LS_WHITE = 4;
   DTWAIN_LS_UV = 5;
   DTWAIN_LS_IR = 6;
+
   DTWAIN_DLG_SORTNAMES = 1;
   DTWAIN_DLG_CENTER = 2;
   DTWAIN_DLG_CENTER_SCREEN = 4;
   DTWAIN_DLG_USETEMPLATE = 8;
   DTWAIN_DLG_CLEAR_PARAMS = 16;
   DTWAIN_DLG_HORIZONTALSCROLL = 32;
+  DTWAIN_DLG_USEINCLUDENAMES = 64;
+  DTWAIN_DLG_USEEXCLUDENAMES = 128;
+  DTWAIN_DLG_USENAMEMAPPING = 256;
+  DTWAIN_DLG_TOPMOSTWINDOW = 1024;
+  DTWAIN_DLG_OPENONSELECT = 2048;
+  DTWAIN_DLG_OPENONSELECTOVERRIDE = 4096;
+  DTWAIN_DLG_OPENONSELECTON = (DTWAIN_DLG_OPENONSELECT Or DTWAIN_DLG_OPENONSELECTOVERRIDE);
+  DTWAIN_DLG_OPENONSELECTOFF = DTWAIN_DLG_OPENONSELECTOVERRIDE;
+
   DTWAIN_RES_ENGLISH = 0;
   DTWAIN_RES_FRENCH = 1;
   DTWAIN_RES_SPANISH = 2;
@@ -2520,27 +2555,31 @@ function DTWAIN_SysInitializeEx2(szINIPath:LPCTSTR; szImageDLLPath:LPCTSTR; szLa
 function DTWAIN_SysInitializeLibEx(hInstance:NativeInt; szINIPath:LPCTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_SysInitializeLibEx';
 function DTWAIN_SysInitializeLibEx2(hInstance:NativeInt; szINIPath:LPCTSTR; szImageDLLPath:LPCTSTR; szLangResourcePath:LPCTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_SysInitializeLibEx2';
 function DTWAIN_CallDSMProc(AppID:DTWAIN_IDENTITY; SourceId:DTWAIN_IDENTITY; lDG:LONG; lDAT:LONG; lMSG:LONG; pData:LPVOID):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_CallDSMProc';
-function DTWAIN_GetDSMFullNameA(DSMType:LONG; sz:DTWAIN_HANDLE; nMaxLen:LONG; WhichSearch:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullNameA';
-function DTWAIN_GetLibraryPathA(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetLibraryPathA';
-function DTWAIN_GetShortVersionStringA(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetShortVersionStringA';
-function DTWAIN_GetTempFileDirectoryA(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetTempFileDirectoryA';
-function DTWAIN_GetVersionInfoA(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionInfoA';
-function DTWAIN_GetVersionStringA(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionStringA';
+function DTWAIN_GetDSMFullNameA(DSMType:LONG; sz:LPSTR; nMaxLen:LONG; WhichSearch:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullNameA';
 function DTWAIN_StartTwainSessionA(hWndMsg:DTWAIN_HANDLE; sz:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_StartTwainSessionA';
-function DTWAIN_GetDSMFullNameW(DSMType:LONG; sz:DTWAIN_HANDLE; nMaxLen:LONG; WhichSearch:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullNameW';
-function DTWAIN_GetLibraryPathW(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetLibraryPathW';
-function DTWAIN_GetShortVersionStringW(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetShortVersionStringW';
-function DTWAIN_GetTempFileDirectoryW(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetTempFileDirectoryW';
-function DTWAIN_GetVersionInfoW(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionInfoW';
-function DTWAIN_GetVersionStringW(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionStringW';
+function DTWAIN_GetDSMFullNameW(DSMType:LONG; sz:LPWSTR; nMaxLen:LONG; WhichSearch:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullNameW';
 function DTWAIN_StartTwainSessionW(hWndMsg:DTWAIN_HANDLE; sz:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_StartTwainSessionW';
-function DTWAIN_GetDSMFullName(DSMType:LONG; sz:DTWAIN_HANDLE; nMaxLen:LONG; WhichSearch:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullName';
-function DTWAIN_GetLibraryPath(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetLibraryPath';
-function DTWAIN_GetShortVersionString(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetShortVersionString';
-function DTWAIN_GetTempFileDirectory(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetTempFileDirectory';
-function DTWAIN_GetVersionInfo(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionInfo';
-function DTWAIN_GetVersionString(sz:DTWAIN_HANDLE; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetVersionString';
+function DTWAIN_GetDSMFullName(DSMType:LONG; sz:LPTSTR; nMaxLen:LONG; WhichSearch:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetDSMFullName';
+function DTWAIN_GetLibraryPath(sz:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetLibraryPath';
 function DTWAIN_StartTwainSession(hWndMsg:DTWAIN_HANDLE; sz:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_StartTwainSession';
 function DTWAIN_CallDSMProc(source:pTW_IDENTITY; app:pTW_IDENTITY; lDG:LONG; lDAT:LONG; lMSG:LONG; pData:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_CallDSMProc';
+function DTWAIN_GetSourceDetailsA(szSources:LPCSTR; szBuf:LPSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSourceDetailsA';
+function DTWAIN_GetSourceDetailsW(szSources:LPCWSTR; szBuf:LPWSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSourceDetailsW';
+function DTWAIN_GetSourceDetails(szSources:LPCTSTR; szBuf:LPTSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSourceDetails';
+function DTWAIN_GetSessionDetailsA(szBuf:LPSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSessionDetailsA';
+function DTWAIN_GetSessionDetailsW(szBuf:LPWSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSessionDetailsW';
+function DTWAIN_GetSessionDetails(szBuf:LPTSTR; nSize:LONG; indentFactor:LONG; bReset:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetSessionDetails';
+function DTWAIN_GetVersionCopyrightA(szBuf:LPSTR; nSize:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetVersionCopyrightA';
+function DTWAIN_GetVersionCopyrightW(szBuf:LPWSTR; nSize:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetVersionCopyrightW';
+function DTWAIN_GetVersionCopyright(szBuf:LPTSTR; nSize:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_GetVersionCopyright';
+function DTWAIN_IsSourceValid(source:DTWAIN_SOURCE):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_IsSourceValid';
+function DTWAIN_EnableTripletNotify(bEnable:LONG):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_EnableTripletNotify';
+function DTWAIN_IsNotifyTripletEnabled():LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_IsNotifyTripletEnabled';
+function DTWAIN_DeleteDIB(DIB:DTWAIN_HANDLE):LONG;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_DeleteDIB';
+function DTWAIN_SelectSourceWithOpen(bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_SelectSourceWithOpen';
+function DTWAIN_SelectDefaultSourceWithOpen(bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_SelectDefaultSourceWithOpen';
+function DTWAIN_SelectSourceByNameWithOpen(szName:LPCTSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_SelectSourceByNameWithOpen';
+function DTWAIN_SelectSourceByNameWithOpenA(szName:LPCSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_SelectSourceByNameWithOpenA';
+function DTWAIN_SelectSourceByNameWithOpenW(szName:LPCWSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain32.dll' name 'DTWAIN_SelectSourceByNameWithOpenW';
     implementation
 end.
