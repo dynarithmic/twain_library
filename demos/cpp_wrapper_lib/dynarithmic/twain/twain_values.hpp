@@ -490,8 +490,10 @@ namespace dynarithmic
             static constexpr value_type  tiffpackbits = DTWAIN_TIFFPACKBITS;
             static constexpr value_type  windowsicon = DTWAIN_ICO;
             static constexpr value_type  windowsvistaicon = DTWAIN_ICO_VISTA;
+            static constexpr value_type  windowsiconresized = DTWAIN_ICO_RESIZED;
             static constexpr value_type  windowsmetafile = DTWAIN_WMF;
             static constexpr value_type  wirelessbmp = DTWAIN_WBMP;
+            static constexpr value_type  wirelessbmpresized = DTWAIN_WBMP_RESIZED;
             static constexpr value_type  portablebitmap = DTWAIN_PBM;
             static constexpr value_type  dcxmulti = DTWAIN_DCX;
             static constexpr value_type  pdfmulti = DTWAIN_PDFMULTI;
@@ -1682,8 +1684,10 @@ namespace dynarithmic
                 filetype_value::tiffnocompress,
                 filetype_value::tiffpackbits,
                 filetype_value::windowsicon,
+                filetype_value::windowsiconresized,
                 filetype_value::windowsmetafile,
-                filetype_value::wirelessbmp
+                filetype_value::wirelessbmp,
+                filetype_value::wirelessbmpresized
             };
 
             static constexpr filetype_value::value_type aMulti [] = 
@@ -1778,9 +1782,11 @@ namespace dynarithmic
                     filetype_value::tiffpackbits,
                     filetype_value::windowsicon,
                     filetype_value::windowsvistaicon,
+                    filetype_value::windowsiconresized,
                     filetype_value::portablebitmap,
                     filetype_value::windowsmetafile,
                     filetype_value::wirelessbmp,
+                    filetype_value::wirelessbmpresized,
                     filetype_value::dcxmulti,
                     filetype_value::pdfmulti,
                     filetype_value::postscript1multi,

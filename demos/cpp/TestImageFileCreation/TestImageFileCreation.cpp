@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
 void TestMultiOrSingleFile(std::string outDir, bool bTestSingle)
 {
     // select a source
-    auto selection = session.select_source();
+    auto selection = RunnerBase::SelectDialog(session);
 
     // check if user canceled the selection
     if (selection.canceled())

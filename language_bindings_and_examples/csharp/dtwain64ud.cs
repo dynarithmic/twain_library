@@ -270,19 +270,23 @@ namespace Dynarithmic
         public const  int DTWAIN_TIFFMULTI = 7000;
         public const  int DTWAIN_ICO = 8000;
         public const  int DTWAIN_ICO_VISTA = 8001;
+        public const  int DTWAIN_ICO_RESIZED = 8002;
         public const  int DTWAIN_WBMP = 8500;
         public const int DTWAIN_WEBP = 8501;
+        public const  int DTWAIN_PPM = 10000;
+        public const int DTWAIN_WBMP_RESIZED = 11000;
         public const  int DTWAIN_INCHES = 0;
         public const  int DTWAIN_CENTIMETERS = 1;
         public const  int DTWAIN_PICAS = 2;
         public const  int DTWAIN_POINTS = 3;
         public const  int DTWAIN_TWIPS = 4;
         public const  int DTWAIN_PIXELS = 5;
-        public const  int DTWAIN_USENAME = 4;
-        public const  int DTWAIN_USEPROMPT = 8;
-        public const  int DTWAIN_USELONGNAME = 16;
-        public const  int DTWAIN_USESOURCEMODE = 32;
-        public const  int DTWAIN_USELIST = 64;
+        public const  int DTWAIN_USENAME = 16;
+        public const  int DTWAIN_USEPROMPT = 32;
+        public const  int DTWAIN_USELONGNAME = 64;
+        public const  int DTWAIN_USESOURCEMODE = 128;
+        public const  int DTWAIN_USELIST = 256;
+        public const  int DTWAIN_CREATEDIRECTORY = 512;
         public const  int DTWAIN_ARRAYANY = 1;
         public const  int DTWAIN_ArrayTypePTR = 1;
         public const  int DTWAIN_ARRAYLONG = 2;
@@ -496,7 +500,7 @@ namespace Dynarithmic
         public const  int DTWAIN_CNTYAFGHANISTAN = 1001;
         public const  int DTWAIN_CNTYALGERIA = 213;
         public const  int DTWAIN_CNTYAMERICANSAMOA = 684;
-        public const  int DTWAIN_CNTYANDORRA = 033;
+        public const  int DTWAIN_CNTYANDORRA = 33;
         public const  int DTWAIN_CNTYANGOLA = 1002;
         public const  int DTWAIN_CNTYANGUILLA = 8090;
         public const  int DTWAIN_CNTYANTIGUA = 8091;
@@ -539,7 +543,7 @@ namespace Dynarithmic
         public const  int DTWAIN_CNTYCONGO = 1011;
         public const  int DTWAIN_CNTYCOOKIS = 1012;
         public const  int DTWAIN_CNTYCOSTARICA = 506;
-        public const  int DTWAIN_CNTYCUBA = 005;
+        public const  int DTWAIN_CNTYCUBA = 5;
         public const  int DTWAIN_CNTYCYPRUS = 357;
         public const  int DTWAIN_CNTYCZECHOSLOVAKIA = 42;
         public const  int DTWAIN_CNTYDENMARK = 45;
@@ -769,6 +773,12 @@ namespace Dynarithmic
         public const  int DTWAIN_ERR_UNKNOWN_CAPDATATYPE = (-1048);
         public const  int DTWAIN_ERR_DEMO_NOFILETYPE = (-1049);
         public const int DTWAIN_ERR_SOURCESELECTION_CANCELED = (-1050);
+        public const  int DTWAIN_ERR_RESOURCES_NOT_FOUND = (-1051);
+        public const  int DTWAIN_ERR_STRINGTYPE_MISMATCH = (-1052);
+        public const int DTWAIN_ERR_ARRAYTYPE_MISMATCH = (-1053);
+        public const int DTWAIN_ERR_SOURCENAME_NOTINSTALLED = (-1054);
+        public const int DTWAIN_ERR_NO_MEMFILE_XFER = (-1055);
+        public const int DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
 
         public const  int DTWAIN_ERR_LAST_1 = DTWAIN_ERR_DEMO_NOFILETYPE;
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
@@ -1079,6 +1089,9 @@ namespace Dynarithmic
         public const  int DTWAIN_BP_AUTODISCARD_NONE = 0;
         public const  int DTWAIN_BP_AUTODISCARD_IMMEDIATE = 1;
         public const  int DTWAIN_BP_AUTODISCARD_AFTERPROCESS = 2;
+        public const int  DTWAIN_BP_DETECTORIGINAL = 1;
+        public const int  DTWAIN_BP_DETECTADJUSTED = 2;
+        public const int  DTWAIN_BP_DETECTALL = (DTWAIN_BP_DETECTORIGINAL | DTWAIN_BP_DETECTADJUSTED);
         public const int DTWAIN_BP_DISABLE = (-2);
         public const int DTWAIN_BP_AUTO = (-1);
         public const  uint DTWAIN_BP_AUTODISCARD_ANY = 0xFFFF;
@@ -1100,6 +1113,11 @@ namespace Dynarithmic
         public const int DTWAIN_DLG_USEINCLUDENAMES = 64;
         public const int DTWAIN_DLG_USEEXCLUDENAMES = 128;
         public const int DTWAIN_DLG_USENAMEMAPPING = 256;
+        public const int DTWAIN_DLG_TOPMOSTWINDOW = 1024;
+        public const int DTWAIN_DLG_OPENONSELECT = 2048;
+        public const int DTWAIN_DLG_OPENONSELECTOVERRIDE = 4096;
+        public const int DTWAIN_DLG_OPENONSELECTON = (DTWAIN_DLG_OPENONSELECT | DTWAIN_DLG_OPENONSELECTOVERRIDE);
+        public const int DTWAIN_DLG_OPENONSELECTOFF = DTWAIN_DLG_OPENONSELECTOVERRIDE;
         public const  int DTWAIN_RES_ENGLISH = 0;
         public const  int DTWAIN_RES_FRENCH = 1;
         public const  int DTWAIN_RES_SPANISH = 2;
@@ -2570,7 +2588,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, int LPBYTE, ref int Data, int dSize);
+        public static extern  DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] LPBYTE, int dSize, ref int Data, int flags);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, System.IntPtr retPtr, int dSize, ref int Data, int flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -2867,6 +2889,10 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  DTWAIN_IDENTITY DTWAIN_GetTwainAppIDEx(DTWAIN_IDENTITY pIdentity);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_IDENTITY DTWAIN_GetTwainAppIDEx(TW_IDENTITY pIdentity);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3363,6 +3389,10 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  int DTWAIN_SetAcquireStripBuffer(DTWAIN_SOURCE Source, DTWAIN_HANDLE hMem);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetAcquireStripSize(DTWAIN_SOURCE Source, int nSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -5506,7 +5536,23 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_GetSourceDetails([MarshalAs(UnmanagedType.LPTStr)] string zSources, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+        public static extern  int DTWAIN_GetSourceDetails([MarshalAs(UnmanagedType.LPTStr)] string szSources, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSourceDetailsA([MarshalAs(UnmanagedType.LPStr)] string szSources, System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSourceDetailsW([MarshalAs(UnmanagedType.LPWStr)] string szSources, System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSourceDetails([MarshalAs(UnmanagedType.LPTStr)] string zSources, System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -5518,7 +5564,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bReset);
+        public static extern  int DTWAIN_GetSessionDetails(System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSessionDetailsA(System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSessionDetailsW(System.IntPtr szBuf, int nSize, int indentFactor, int bReset);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -5555,5 +5609,37 @@ namespace Dynarithmic
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GlobalFree(System.IntPtr hMem);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetErrorStringA(int lError, System.IntPtr lpszBuffer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetErrorStringW(int lError, System.IntPtr lpszBuffer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetErrorString(int lError, System.IntPtr lpszBuffer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceWithOpen(int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameWithOpenA([MarshalAs(UnmanagedType.LPStr)] string szSource, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameWithOpenW([MarshalAs(UnmanagedType.LPWStr)] string szSource, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameWithOpen([MarshalAs(UnmanagedType.LPTStr)] string szSource, int bSet);
     }
 }

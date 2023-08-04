@@ -1,5 +1,51 @@
 DTWAIN Version changes
 
+5.4.0
+
+- DTWAIN Version numbering will now use 3 components: 
+	  MajorVersion.MinorVersion.PatchVersion
+
+- For DTWAIN_AcquireFile(), DTWAIN_AcquireFileEx(), added image file type DTWAIN_ICO_RESIZED
+  and DTWAIN_WBMP_RESIZED.  These are Windows ICON file and Wireless Bitmap files, respectively,
+  that are a resized version of the image acquired if the image's original width and/or height 
+  exceeds a length of 255.  The image will be resampled to a 255 x 255 bitmap if either 
+  the width or height exceeds 255.
+
+  This differs from DTWAIN_ICO and DTWAIN_WBMP in that if the image's width or height acquired 
+  exceeds 255, the image will be invalid and thus no image file will be created.
+
+- Added DTWAIN_SelectSource alternative functions:
+
+	DTWAIN_SelectSourceByNameWithOpen       
+	DTWAIN_SelectSourceByNameWithOpenA      
+	DTWAIN_SelectSourceByNameWithOpenW      
+	DTWAIN_SelectSourceWithOpen             
+	DTWAIN_SelectDefaultSourceWithOpen      
+
+  Each of these functions allow selecting a TWAIN source with the option to also open the 
+  source once it has been selected.  For example:
+
+        DTWAIN_SOURCE source = DTWAIN_SelectSourceWithOpen(FALSE);  // Select, but do not open the source
+	DTWAIN_OpenSource(source); // Open the selected source
+
+  This will easily allow applications to just select the source, if there is a possibility
+  that opening the source after selection may cause issues (hardware issue, driver issue, etc.).
+
+  These new functions should be used to control opening a selected source instead of the 
+  DTWAIN_OpenSourcesOnSelect() function, as DTWAIN_OpenSourcesOnSelect() is a global setting.  
+  The new DTWAIN_SelectSource...WithOpen() functions will not use the DTWAIN_OpenSourcesOnSelect()
+  setting.
+
+- Added the following select source options to functions DTWAIN_SelectSource2() and DTWAIN_SelectSource2Ex():
+
+     DTWAIN_DLG_OPENONSELECTON  - Open source if selected
+     DTWAIN_DLG_OPENONSELECTOFF - Do not open source if selected
+
+  These new options now control if a selected source will be opened or not opened on selection.  If both
+  options are used, DTWAIN_DLG_OPENONSELECTON is assumed.
+
+
+
 5.3.0.8 
 
 - Fixed possible crash with DTWAIN_SetMultipageScanMode and acquiring to multipage image files 
