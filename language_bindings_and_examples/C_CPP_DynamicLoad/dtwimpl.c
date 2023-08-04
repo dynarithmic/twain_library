@@ -38,7 +38,6 @@
 
 /* declare function pointers */
 #ifdef __cplusplus
-
     D_ACQUIREAUDIOFILEAFUNC                                           DYNDTWAIN_API::DTWAIN_AcquireAudioFileA = nullptr;
     D_ACQUIREAUDIOFILEFUNC                                            DYNDTWAIN_API::DTWAIN_AcquireAudioFile = nullptr;
     D_ACQUIREAUDIOFILEWFUNC                                           DYNDTWAIN_API::DTWAIN_AcquireAudioFileW = nullptr;
@@ -993,6 +992,11 @@
     D_UNLOCKMEMORYEXFUNC                                              DYNDTWAIN_API::DTWAIN_UnlockMemoryEx = nullptr;
     D_UNLOCKMEMORYFUNC                                                DYNDTWAIN_API::DTWAIN_UnlockMemory = nullptr;
     D_USEMULTIPLETHREADSFUNC                                          DYNDTWAIN_API::DTWAIN_UseMultipleThreads = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENFUNC                                  DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpen = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENAFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenA = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENWFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenW = nullptr;
+    D_SELECTSOURCEWITHOPENFUNC                                        DYNDTWAIN_API::DTWAIN_SelectSourceWithOpen = nullptr;
+    D_SELECTDEFAULTSOURCEWITHOPENFUNC                                 DYNDTWAIN_API::DTWAIN_SelectDefaultSourceWithOpen = nullptr;
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1767,6 +1771,11 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SelectSourceByName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectSourceByNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectSource, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SelectSourceByNameWithOpen, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SelectSourceByNameWithOpenA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SelectSourceByNameWithOpenW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SelectSourceWithOpen, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SelectDefaultSourceWithOpen, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireArea2, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireArea2StringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireArea2String, hModule);

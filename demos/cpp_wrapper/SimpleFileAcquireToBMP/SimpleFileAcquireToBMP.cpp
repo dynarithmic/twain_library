@@ -22,6 +22,9 @@ int Runner::Run()
     // select a source
     auto selection = session.select_source();
 
+    // For a centered dialog, uncomment the line below:
+    // auto selection = RunnerBase::SelectDialog(session);
+
     // check if user canceled the selection
     if (selection.canceled())
     {

@@ -225,7 +225,9 @@ Class DTWAINAPI
     Public Const DTWAIN_TIFFMULTI As Integer  = 7000
     Public Const DTWAIN_ICO As Integer  = 8000
     Public Const DTWAIN_ICO_VISTA As Integer  = 8001
+    Public Const DTWAIN_ICO_RESIZED As Integer  = 8002
     Public Const DTWAIN_WBMP As Integer  = 8500
+    Public Const DTWAIN_WBMP_RESIZED As Integer  = 11000
     Public Const DTWAIN_INCHES As Integer  = 0
     Public Const DTWAIN_CENTIMETERS As Integer  = 1
     Public Const DTWAIN_PICAS As Integer  = 2
@@ -720,7 +722,15 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_BAD_CAPTYPE As Integer  = (-1047)
     Public Const DTWAIN_ERR_UNKNOWN_CAPDATATYPE As Integer  = (-1048)
     Public Const DTWAIN_ERR_DEMO_NOFILETYPE As Integer  = (-1049)
-    Public Const DTWAIN_ERR_LAST_1 As Integer  = DTWAIN_ERR_DEMO_NOFILETYPE
+    Public Const DTWAIN_ERR_SOURCESELECTION_CANCELED As Integer = (-1050)
+    Public Const DTWAIN_ERR_RESOURCES_NOT_FOUND As Integer = (-1051)
+    Public Const DTWAIN_ERR_STRINGTYPE_MISMATCH As Integer = (-1052)
+    Public Const DTWAIN_ERR_ARRAYTYPE_MISMATCH As Integer = (-1053)
+    Public Const DTWAIN_ERR_SOURCENAME_NOTINSTALLED As Integer = (-1054)
+    Public Const DTWAIN_ERR_NO_MEMFILE_XFER As Integer = (-1055)
+    Public Const DTWAIN_ERR_AREA_ARRAY_TOO_SMALL As Integer = (-1056)
+
+    Public Const DTWAIN_ERR_LAST_1 As Integer = DTWAIN_ERR_AREA_ARRAY_TOO_SMALL
     Public Const TWAIN_ERR_LOW_MEMORY As Integer  = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer  = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer  = (-1102)
@@ -1061,6 +1071,14 @@ Class DTWAINAPI
     Public Const DTWAIN_DLG_USETEMPLATE As Integer  = 8
     Public Const DTWAIN_DLG_CLEAR_PARAMS As Integer  = 16
     Public Const DTWAIN_DLG_HORIZONTALSCROLL As Integer  = 32
+    Public Const DTWAIN_DLG_USEINCLUDENAMES As Integer = 64
+    Public Const DTWAIN_DLG_USEEXCLUDENAMES As Integer = 128
+    Public Const DTWAIN_DLG_USENAMEMAPPING As Integer = 256
+    Public Const DTWAIN_DLG_TOPMOSTWINDOW As Integer = 1024
+    Public Const DTWAIN_DLG_OPENONSELECT As Integer = 2048
+    Public Const DTWAIN_DLG_OPENONSELECTOVERRIDE As Integer = 4096
+    Public Const DTWAIN_DLG_OPENONSELECTON As Integer = (DTWAIN_DLG_OPENONSELECT Or DTWAIN_DLG_OPENONSELECTOVERRIDE)
+    Public Const DTWAIN_DLG_OPENONSELECTOFF As Integer = DTWAIN_DLG_OPENONSELECTOVERRIDE
     Public Const DTWAIN_RES_ENGLISH As Integer  = 0
     Public Const DTWAIN_RES_FRENCH As Integer  = 1
     Public Const DTWAIN_RES_SPANISH As Integer  = 2
@@ -2563,6 +2581,11 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_EnableTripletsNotify Lib "dtwain64.dll" (ByVal bEnable As Integer) As Integer
     Declare Auto Function DTWAIN_IsNotifyTripletsEnabled Lib "dtwain64.dll" () As Integer
 
-    Declare Auto Function DTWAIN_DeleteDIB Lib "dtwain32u.dll" (ByVal dibHandle As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_DeleteDIB Lib "dtwain64.dll" (ByVal dibHandle As System.IntPtr) As Integer
 
+    Declare Auto Function DTWAIN_SelectSourceWithOpen Lib "dtwain64.dll" (ByVal bOpen As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectDefaultSourceWithOpen Lib "dtwain64.dll" (ByVal bOpen As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectSourceByNameWithOpen Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
+    Declare Ansi Function DTWAIN_SelectSourceByNameWithOpenA Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectSourceByNameWithOpenW Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
 End Class

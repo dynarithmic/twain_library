@@ -827,7 +827,9 @@
 1  1  8  16  24 
 0  1  8  16  24  
 8000  1  4  8  16  24  32 
+8002  1  4  8  16  24  32 
 8500  1
+11000 1
 -1 0
 0 NONE		[0 0 0 0]	
 1 A4            [0 0 595.28 841.89]
@@ -921,9 +923,11 @@
 6001  OCR-Text-Multi txt
 8000  Windows-ICON-Single ico
 8001  Windows-Vista-ICON-Single ico
+8002  Windows-ICON-Resized-Single ico
 8500  WBMP-Wireless-Bitmap-Single wbmp
 8501  WEBP-Google-Format-Single webp
 10000 PPM-Portable-Bitmap-Single ppm 
+11000 WBMP-Wireless-Bitmap-Resized-Single wbmp
 -1
 0 TWPT_BW                
 1 TWPT_GRAY              
@@ -1557,6 +1561,7 @@
 [2000] Adobe PSD [ 24 ] [[1 24] [4 24] [8 24] [16 24] [32 24]] 
 [3000] JPEG-2000  [8 16 24 32] [[1 24] [4 24]]
 [8500] WBMP [1] [[4 1] [8 1] [16 1] [24 1] [32 1]]
+[11000] WBMP [1] [[4 1] [8 1] [16 1] [24 1] [32 1]]
 [8501] WEBP [24 32] [[1 24] [4 24] [8 24] [16 24]]
 END END END
 

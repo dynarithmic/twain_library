@@ -47,6 +47,30 @@ int BasicTwainInfo()
     }
     DTWAIN_ArrayDestroy(aAllSource);
 
+    // Select a source and display the information using JSON format
+    DTWAIN_SOURCE source = DTWAIN_SelectSource();
+
+    if (source)
+    {
+        char szProductName[100];
+        char* szBuf = 0;
+        DTWAIN_GetSourceProductNameA(source, szProductName, 100);
+
+        /* Get the number of bytes for the info */
+        int nBytes = DTWAIN_GetSourceDetailsA(szProductName,0,0,2,TRUE);
+
+        /* Allocate the space and call function again with the cached results
+         from the last call */
+        szBuf = (char *)malloc(nBytes);
+        if (szBuf)
+        {
+            DTWAIN_GetSourceDetailsA(szProductName, szBuf, nBytes, 2, FALSE);
+            printf("\n\nThe detail information for \"%s\" in JSON format is:\n", szProductName);
+            printf(szBuf);
+            free(szBuf);
+        }
+    }
+
     /* Shutdown DTWAIN */
     DTWAIN_SysDestroy();
 
