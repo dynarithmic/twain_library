@@ -1,5 +1,13 @@
 DTWAIN Version changes
 
+5.4.1
+
+- Address issue with DTWAIN_SetTwainLog() and resetting the logging options to "no logging" if 
+  logging has already been set.
+
+- Optimize various calls to the internal API functions.
+
+
 5.4.0
 
 - DTWAIN Version numbering will now use 3 components: 

@@ -169,12 +169,11 @@ namespace dynarithmic
             if (m_logger.second)
             {
                 auto& details = *(m_logger.second.get());
-                int32_t log_destination = static_cast<int32_t>(details.get_destination());
+                int32_t log_destination = 0; // static_cast<int32_t>(details.get_destination());
                 const int32_t log_verbosity = static_cast<int32_t>(details.get_verbosity_aslong());
-                if (details.is_custom_enabled())
-                    log_destination |= DTWAIN_LOG_USECALLBACK;
+                log_destination |= DTWAIN_LOG_USECALLBACK;
                 API_INSTANCE DTWAIN_SetLoggerCallbackA(dynarithmic::twain::logger_callback_proc, PtrToInt64(this));
-                API_INSTANCE DTWAIN_SetTwainLogA(log_destination | log_verbosity, details.get_filename().c_str());
+                API_INSTANCE DTWAIN_SetTwainLogA(log_destination | log_verbosity, "");
             }
         }
 
@@ -386,15 +385,6 @@ namespace dynarithmic
                 m_mapcallback.erase(handle);
             return iter != m_mapcallback.end();
         }
-
-        /// Removes logger from this TWAIN session
-        /// 
-        /// @see register_logger
-        void twain_session::unregister_logger()
-        {
-            m_logger = { nullptr, nullptr };
-        }
-
 
         /// Allows logging to be turned on or off during a TWAIN Session.
         /// 
