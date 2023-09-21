@@ -19,7 +19,7 @@ int Runner::Run()
     twain_session ts(startup_mode::autostart);
 
     // select a source (TWAIN session will automatically start)
-    auto selection = ts.select_source();
+    auto selection = RunnerBase::SelectDialog(ts);
 
     // check if user canceled the selection
     if (selection.canceled())

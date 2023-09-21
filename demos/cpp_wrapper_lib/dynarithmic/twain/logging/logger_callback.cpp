@@ -32,12 +32,11 @@ namespace dynarithmic
             const auto thisObject = reinterpret_cast<twain_session*>(UserData);
             if (thisObject)
             {
-                twain_session::logger_type& sesObject = thisObject->get_logger();
+                twain_session::logger_type& sesObject = thisObject->get_logger_type();
                 if (sesObject.second && sesObject.second->is_enabled())
                 {
-                    const auto& fn = sesObject.second->get_custom_function();
-                    if (fn)
-                        fn(msg);
+                    const auto& fn = sesObject.second;
+                    fn->log(msg);
                 }
             }
             return 1;

@@ -72,7 +72,7 @@ int Runner::Run()
     if (session)
     {
         // select a source
-        auto selection = session.select_source();
+        auto selection = RunnerBase::SelectDialog(session);
 
         // check if user canceled the selection
         if (selection.canceled())

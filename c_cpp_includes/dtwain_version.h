@@ -23,7 +23,7 @@
 
 #define DTWAIN_MAJOR_VERSION           5
 #define DTWAIN_MINOR_VERSION           4
-#define DTWAIN_PATCHLEVEL_VERSION      0
+#define DTWAIN_PATCHLEVEL_VERSION      1
 
 #define DTWAIN_STRINGER_2_(x) #x
 #define DTWAIN_STRINGER_(x) DTWAIN_STRINGER_2_(x)
