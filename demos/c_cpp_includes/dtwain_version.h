@@ -43,13 +43,13 @@
 #endif
 
 #ifdef _WIN32
-	#ifdef UNICODE
-		#define UNICODE_VERSION "(Unicode)"
-		#define UNICODE_SUFFIX  "u"
-	#else
-		#define UNICODE_VERSION
-		#define UNICODE_SUFFIX ""
-	#endif
+    #ifdef UNICODE
+        #define UNICODE_VERSION "(Unicode)"
+        #define UNICODE_SUFFIX  "u"
+    #else
+        #define UNICODE_VERSION
+        #define UNICODE_SUFFIX ""
+    #endif
 
     #ifdef DTWAIN_LEAN_AND_MEAN
         #define DTWAIN_LM_VERSION "_lm"
@@ -58,15 +58,15 @@
     #endif
 
     #define DTWAIN_BASE_NAME "dtwain"
-	#if defined (WIN64) || (_WIN64)
-		#define DTWAIN_OSPLATFORM "64"
-	#else
-		#define DTWAIN_OSPLATFORM "32"
-	#endif
+    #if defined (WIN64) || (_WIN64)
+        #define DTWAIN_OSPLATFORM "64"
+    #else
+        #define DTWAIN_OSPLATFORM "32"
+    #endif
     #define DTWAIN_BASE_NAME_EX DTWAIN_BASE_NAME DTWAIN_OSPLATFORM
     #define DTWAIN_FILEDESCRIPTION DTWAIN_BASE_NAME_EX UNICODE_SUFFIX DTWAIN_DEVELOP_SUFFIX DTWAIN_LM_VERSION
-	#define DTWAIN_DLLNAME      DTWAIN_FILEDESCRIPTION ".dll"
-	#define DTWAIN_IMPORTLIBNAME DTWAIN_FILEDESCRIPTION ".lib"
+    #define DTWAIN_DLLNAME      DTWAIN_FILEDESCRIPTION ".dll"
+    #define DTWAIN_IMPORTLIBNAME DTWAIN_FILEDESCRIPTION ".lib"
     #define DTWAIN_ININAME DTWAIN_BASE_NAME_EX ".ini"
     #define DTWAIN_ININAME_NATIVE _T(DTWAIN_ININAME)
 #endif
