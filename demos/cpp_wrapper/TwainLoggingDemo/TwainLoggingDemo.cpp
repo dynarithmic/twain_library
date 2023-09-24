@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
+
 #include <dynarithmic/twain/twain_session.hpp> // for dynarithmic::twain::twain_session
 #include <dynarithmic/twain/twain_source.hpp>  // for dynarithmic::twain::twain_source
 #include <dynarithmic/twain/acquire_characteristics.hpp>  // for acquire_characteristics
+#include <dynarithmic\/twain/logging/twain_logger.hpp>
 #include "..\Runner\runnerbase.h"
 
 struct Runner : RunnerBase
@@ -13,6 +15,19 @@ struct Runner : RunnerBase
 
 using namespace dynarithmic::twain;
 
+struct twain_derived_logger : public twain_logger
+{
+    public:
+        twain_derived_logger()
+        {
+            std::cout << "Derived Logger Created" << "\n";
+        }
+        virtual void log(const char* msg) override
+        {
+            std::cout << "I got a message for this logger: " << msg << "\n";
+        }
+};
+
 int Runner::Run()
 {
     // Create a TWAIN session and automatically open the TWAIN data source manager
@@ -21,20 +36,14 @@ int Runner::Run()
     twain_session session;
 
     // create a logger and set the twain session to use the logger
-    session.register_logger(twain_logger().enable().
-                            set_destination(logger_destination::toconsole). // log to the console
-                            set_verbosity(logger_verbosity::verbose2). // verbosity level
-                            enable_custom(true). // enable the custom log destination to our logger's custom handler
-                            set_custom_function([](const char* msg)
-                                {
-                                    std::string s = "I got a message: " + std::string(msg) + "\n";
-                                    OutputDebugStringA(s.c_str());
-                                }));
+    auto& logger = session.register_logger<twain_derived_logger>();
+    logger.enable().
+        set_verbosity(logger_verbosity::verbose2); // verbosity level
     // Start the session
     session.start();
 
     // select a source
-    auto selection = session.select_source();
+    auto selection = RunnerBase::SelectDialog(session);
 
     // check if user canceled the selection
     if (selection.canceled())

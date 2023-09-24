@@ -115,11 +115,8 @@ int Runner::Run()
     // In this example, we will test whether the session was started successfully
     if (session)
     {
-        // For a centered dialog, uncomment the line below:
-        // auto selection = RunnerBase::SelectDialog(session);
-
         // select a source
-        auto selection = session.select_source();
+        auto selection = RunnerBase::SelectDialog(session);
 
         // check if user canceled the selection
         if (selection.canceled())
