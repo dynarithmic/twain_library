@@ -20,7 +20,7 @@ int Runner::Run()
     twain_session session(startup_mode::autostart);
 
     // select a source
-    auto selection = session.select_source();
+    auto selection = RunnerBase::SelectDialog(session);
 
     // For a centered dialog, uncomment the line below:
     // auto selection = RunnerBase::SelectDialog(session);

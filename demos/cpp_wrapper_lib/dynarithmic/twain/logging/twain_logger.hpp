@@ -30,18 +30,6 @@ namespace dynarithmic
 {
     namespace twain
     {
-        enum class logger_destination
-        {
-            tofile = DTWAIN_LOG_USEFILE,
-            toconsole = DTWAIN_LOG_CONSOLE,
-            todebug = DTWAIN_LOG_DEBUGMONITOR,
-            tofile_and_console = tofile | toconsole,
-            tofile_and_debug = tofile | todebug,
-            toconsole_and_debug = toconsole | todebug,
-            toall = tofile | todebug | toconsole,
-            tonone = 0
-        };
-
         enum class logger_verbosity
         {
             verbose0 = 0,
@@ -53,15 +41,16 @@ namespace dynarithmic
 
         class twain_logger
         {
-            logger_destination m_log_destination = logger_destination::tonone;
             logger_verbosity m_log_verbosity = logger_verbosity::verbose4;
-            std::string m_log_filename;
             std::array<LONG, 5> m_verbose_settings;
             bool m_bEnabled = false;
             bool m_bCustomEnabled = false;
-            std::function<void(const char*)> m_customFunc;
+            std::vector<std::function<void(twain_logger&, const char*)>> m_vCustomFuncs;
             public:
-                typedef std::function<void(const char*)> custom_function_type;
+                typedef std::function<void(twain_logger&, const char*)> log_proc_type;
+                virtual ~twain_logger() = default;
+                virtual void log(const char* /*msg*/) {}
+
                 twain_logger() : m_log_verbosity(logger_verbosity::verbose1)
                 {
                     m_verbose_settings[0] = 0;
@@ -72,19 +61,10 @@ namespace dynarithmic
                 }
 
                 twain_logger& enable(bool bEnable = true) { m_bEnabled = bEnable; return *this; }
-                twain_logger& enable_custom(bool bEnable = true) { m_bCustomEnabled = bEnable; return *this; }
-                twain_logger& set_destination(logger_destination ld) { m_log_destination = ld; return *this; }
-                logger_destination get_destination() const { return m_log_destination; }
                 twain_logger& set_verbosity(logger_verbosity lv) { m_log_verbosity = lv; return *this; }
                 logger_verbosity get_verbosity() const { return m_log_verbosity; }
                 long  get_verbosity_aslong() const { return m_verbose_settings[static_cast<LONG>(m_log_verbosity)];}
-                twain_logger& set_filename(const std::string& filename) { m_log_filename = filename; return *this; }
-                std::string get_filename() const { return m_log_filename; }
                 bool is_enabled() const { return m_bEnabled; }
-                bool is_custom_enabled() const { return m_bCustomEnabled; }
-                twain_logger& set_custom_function(custom_function_type fn) { m_customFunc = fn; return *this; }
-                custom_function_type get_custom_function() const { return m_customFunc; }
-
                 /// Logs a custom error message to the logging system
                 /// 
                 /// This function will pass a message to the logging system.  The message will show up in the log with time stamp.
