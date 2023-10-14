@@ -1,5 +1,19 @@
 DTWAIN Version changes
 
+5.4.2
+
+- Upgraded following internal image, compression, and cryptography libraries:
+
+      crypto++ --> 8.9
+      libtiff  --> 4.6
+      libpng   --> 1.6.39
+      libjpg (IJG) --> 9e
+      libwebp  --> 1.3.2
+      openjpeg --> 2.5.0
+      zlib     --> 1.3.0.1
+      
+- Dynarithmic Software version information is now embedded in generated JPEG-2000 image files.
+
 5.4.1
 
 - Address issue with DTWAIN_SetTwainLog() and resetting the logging options to "no logging" if 

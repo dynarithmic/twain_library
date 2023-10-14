@@ -59,7 +59,7 @@ int Runner::Run()
 
             // Set the file transfer options
             fileOptions.
-                set_name("c:\\dtwain_ctest\\PDFDemo.pdf").  // File name
+                set_name("PDFDemo.pdf").  // File name
                 set_type(filetype_value::pdf);  // set the file type to PDF
 
             // Start the acquisition process
