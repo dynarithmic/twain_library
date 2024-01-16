@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2023 Dynarithmic Software.
+    Copyright (c) 2002-2024 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #define DTWAIN_MAJOR_VERSION           5
 #define DTWAIN_MINOR_VERSION           4
-#define DTWAIN_PATCHLEVEL_VERSION      2
+#define DTWAIN_PATCHLEVEL_VERSION      3
 
 #define DTWAIN_STRINGER_2_(x) #x
 #define DTWAIN_STRINGER_(x) DTWAIN_STRINGER_2_(x)
