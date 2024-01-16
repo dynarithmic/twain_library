@@ -1,5 +1,27 @@
 DTWAIN Version changes
 
+5.4.3
+
+- Updated page handling logic when scanning duplex pages.  
+
+The number of pages specified by the DTWAIN_Acquire...() family of functions will automatically be doubled
+when the following occurs:
+
+1) acquiring duplex pages 
+   (DTWAIN_EnableDuplex has been called to set the duplexer to TRUE, or the device's only method of acquiring 
+    images is duplex)
+
+and
+
+2) The TWAIN Source user-interface is disabled.
+
+For 2) if the user interface *is* enabled, there is no way for DTWAIN to know if the user selected or deselected the duplex
+option (if one exists), so the page count cannot be automatically doubled.  In this case, the driver is responsible for the 
+duplexing to work properly if the user desired to enable duplexing.
+
+- Updated the copyright notices on source files, DLL's, etc. to the year 2024.
+
+
 5.4.2
 
 - Upgraded following internal image, compression, and cryptography libraries:
