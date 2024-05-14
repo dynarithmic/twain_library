@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2023 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -702,6 +702,6 @@ namespace dynarithmic
         twain_source& twain_source::set_acquire_characteristics(const acquire_characteristics& ac) noexcept 
                     { *(m_pTwainSourceImpl->m_acquire_characteristics) = ac; return *this; }
         bool twain_source::set_tiff_compress_type(tiffcompress_value::value_type compress_type) 
-             { return API_INSTANCE DTWAIN_SetCompressionType(m_theSource, static_cast<LONG>(compress_type), true); }
+             { return API_INSTANCE DTWAIN_SetTIFFCompressType(m_theSource, static_cast<LONG>(compress_type)); }
 	}
 }

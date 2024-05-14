@@ -1,5 +1,10 @@
 DTWAIN Version changes
 
+5.4.4
+
+- Fixed possible null pointer access when retrieving the default TWAIN Source.
+
+
 5.4.3
 
 - Updated page handling logic when scanning duplex pages.  
