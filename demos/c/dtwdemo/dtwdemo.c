@@ -5,7 +5,7 @@
 #include "dtwain.h"
 #include <ctype.h>
 #include "dibdisplay.h"
-
+#include <io.h>
 
 #include <tchar.h>
 #define MAX_LOADSTRING 100
@@ -79,6 +79,7 @@ typedef struct
 } AllTypes ;
 
 AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
+                            {_T("BMP File (RLE)"), DTWAIN_BMP_RLE, _T("test.bmp")},
                             {_T("Multi-page DCX File"),DTWAIN_DCX, _T("test.dcx")},
                             {_T("Enhanced Meta File (EMF)"),DTWAIN_EMF, _T("test.emf")},
                             {_T("GIF File"), DTWAIN_GIF, _T("test.gif")},
@@ -98,6 +99,7 @@ AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("TIFF (Flate compression)"), DTWAIN_TIFFDEFLATEMULTI, _T("test.tif")},
                             {_T("TIFF (LZW compression)"), DTWAIN_TIFFLZWMULTI, _T("test.tif")},
                             {_T("Targa (TGA) File"), DTWAIN_TGA, _T("test.tga")},
+                            {_T("Targa Run Length Encoded(TGA) File"), DTWAIN_TGA_RLE, _T("test.tga")},
                             {_T("Windows Meta File (WMF)"), DTWAIN_WMF, _T("test.wmf")},
                             {_T("Windows ICON File (ICO)"), DTWAIN_ICO_RESIZED, _T("test.ico")},
                             {_T("Windows ICON File- Vista compatible (ICO)"), DTWAIN_ICO_VISTA, _T("test.ico")},
@@ -142,6 +144,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     /* Initialize DTWAIN.  Quit if error! */
     if ( !DTWAIN_SysInitialize( )) 
         return 0;
+
+    
+    DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
     DTWAIN_CheckHandles(FALSE);
     /* Allow DTWAIN messages to be sent directly to our Window proc */
     DTWAIN_StartTwainSession(g_hWnd, NULL);
@@ -520,7 +525,7 @@ void AcquireFile(BOOL bUseSource)
         /* User wants to use DTWAIN File Mode instead of Source mode */
         /* All Sources can use this mode */
         DialogBox(g_hInstance, (LPCTSTR)IDD_dlgFileType, g_hWnd, (DLGPROC)DisplayFileTypesProc);
-        FileFlags |= DTWAIN_USEBUFFERED;
+        FileFlags |= DTWAIN_USENATIVE;
         FileType = g_FileType;
 
         /* This is just one of many options that can be set

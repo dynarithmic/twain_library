@@ -20,34 +20,34 @@ IDC_DTWDEMO  MENU DISCARDABLE
 BEGIN
     POPUP "&Source Selection Test"
     BEGIN
-        MENUITEM "S&elect Source...",            IDM_SELECT_SOURCE
-        MENUITEM "Select Source By &Name...",    IDM_SELECT_SOURCE_BY_NAME
-        MENUITEM "Select &Default Source...",    IDM_SELECT_DEFAULT_SOURCE
-        MENUITEM "Select Source &Custom...",     IDM_SELECT_SOURCE_CUSTOM
+        MENUITEM "S&elect Source...",           IDM_SELECT_SOURCE
+        MENUITEM "Select Source By &Name...",   IDM_SELECT_SOURCE_BY_NAME
+        MENUITEM "Select &Default Source...",   IDM_SELECT_DEFAULT_SOURCE
+        MENUITEM "Select Source &Custom...",    IDM_SELECT_SOURCE_CUSTOM
         MENUITEM SEPARATOR
-        MENUITEM "Source &Properties...",         IDM_SOURCE_PROPS
+        MENUITEM "Source &Properties...",       IDM_SOURCE_PROPS
         MENUITEM SEPARATOR
-        MENUITEM "&Close Source...",              IDM_CLOSE_SOURCE
+        MENUITEM "&Close Source...",            IDM_CLOSE_SOURCE
         MENUITEM SEPARATOR
         MENUITEM "E&xit Demo",                  IDM_EXIT
     END
 
     POPUP "&Acquire Test"
     BEGIN
-        MENUITEM "Acquire Native...",                   IDM_ACQUIRE_NATIVE
-        MENUITEM "Acquire Buffered...",                 IDM_ACQUIRE_BUFFERED
-        MENUITEM "Acquire File ...",                    IDM_ACQUIRE_FILE_DTWAIN
-        MENUITEM "Acquire File (Source Mode)...",       IDM_ACQUIRE_FILE_SOURCE
+        MENUITEM "Acquire Native...",           IDM_ACQUIRE_NATIVE
+        MENUITEM "Acquire Buffered...",         IDM_ACQUIRE_BUFFERED
+        MENUITEM "Acquire File ...",            IDM_ACQUIRE_FILE_DTWAIN
+        MENUITEM "Acquire File (Source Mode)...", IDM_ACQUIRE_FILE_SOURCE
         MENUITEM SEPARATOR
-		MENUITEM "Show Preview",						IDM_SHOW_PREVIEW
-        MENUITEM "Use Source UI",                       IDM_USE_SOURCE_UI
-        MENUITEM "Discard Blank Pages...",              IDM_DISCARD_BLANKS
+        MENUITEM "Show Preview",                IDM_SHOW_PREVIEW
+        MENUITEM "Use Source UI",               IDM_USE_SOURCE_UI
+        MENUITEM "Discard Blank Pages...",      IDM_DISCARD_BLANKS
     END
 
 
     POPUP "&TWAIN Logging"
     BEGIN
-        MENUITEM "Logging Options...",                  IDM_LOGGING_OPTIONS
+        MENUITEM "Logging Options...",          IDM_LOGGING_OPTIONS
     END
 
     POPUP "&Help"
@@ -166,14 +166,13 @@ BEGIN
                     BS_AUTOCHECKBOX | WS_TABSTOP,9,19,84,10
 END
 
-IDD_dlgFileType DIALOG DISCARDABLE  0, 0, 120, 111
+IDD_dlgFileType DIALOG DISCARDABLE  0, 0, 189, 119
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "File Type"
 FONT 8, "MS Sans Serif"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,34,91,50,14
-    COMBOBOX        IDC_cmbFileType,5,17,110,94,CBS_DROPDOWNLIST |
-                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,69,91,50,14
+    COMBOBOX        IDC_cmbFileType,5,17,171,94,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Choose File Type:",IDC_STATIC,7,4,79,8
     LTEXT           "Choose File name:",IDC_STATIC,7,48,59,8
     EDITTEXT        IDC_edFileName,6,60,106,14,ES_AUTOHSCROLL

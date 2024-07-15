@@ -1,8 +1,33 @@
 DTWAIN Version changes
 
+5.4.5
+
+- Upgraded following internal image, compression, and cryptography libraries:
+
+      libpng   --> 1.6.43
+      libwebp  --> 1.4.0
+      zlib     --> 1.3.1
+      	
+- Fixed issue with saving to files using the DTWAIN_USEPROMPT flag when calling DTWAIN_AcquireFile.
+
+- Fixed issue with DTWAIN_AcquireFileEx when using the DTWAIN_CREATE_DIRECTORY file flag.
+
+- Added generation of Targa Run Length Encoded files to DTWAIN_AcquireFile.  The new constant to use to
+  generate thee files is DTWAIN_TGA_RLE.
+
+- Added generation of BMP Run Length Encoded files to DTWAIN_AcquireFile.  The new constant to use to
+  generate these files is DTWAIN_BMP_RLE.  Usage of RLE reduces the size of the resulting BMP file.
+  Note that this is only available for 8 bit-per-pixel BMP files.
+ 
+- Fixed issue with DTWAIN_SelectOCREngine not showing product name of available OCR engines.
+
+- Added entry to twaininfo.txt to properly handle text obtained from 1 bit-per-pixel OCR-ed images.
+
+
 5.4.4
 
 - Fixed possible null pointer access when retrieving the default TWAIN Source.
+
 
 
 5.4.3

@@ -459,7 +459,15 @@ namespace dynarithmic
             bool isModeless = m_pSession->is_custom_twain_loop();
             API_INSTANCE DTWAIN_SetTwainMode(isModeless ? DTWAIN_MODELESS : DTWAIN_MODAL);
             LONG status;
-            auto retval = API_INSTANCE DTWAIN_AcquireFileA(m_theSource, ftOptions.get_name().c_str(),
+
+            /* Create the array of names.  This function is to be used
+               since the user may have entered a file name that has
+               embedded spaces */
+            auto AFileNames = DTWAIN_ArrayCreate(DTWAIN_ARRAYANSISTRING, 1);
+            twain_array ta(AFileNames);
+            DTWAIN_ArraySetAtANSIString(AFileNames, 0, ftOptions.get_name().c_str());
+
+            auto retval = API_INSTANCE DTWAIN_AcquireFileEx(m_theSource, AFileNames,
                 file_type,
                 dtwain_transfer_type,
                 gOpts.get_pixel_type(),

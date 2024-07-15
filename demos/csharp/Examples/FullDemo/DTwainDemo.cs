@@ -559,7 +559,7 @@ namespace TWAINDemo
                 switch (nWhich)
                 {
                     case 0:
-                        FileFlags = TwainAPI.DTWAIN_USELONGNAME | TwainAPI.DTWAIN_USENATIVE;
+                        FileFlags = TwainAPI.DTWAIN_USELONGNAME | TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_CREATE_DIRECTORY;
                         TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
                                                               (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
                                                               DiscardBlankPages.Checked ? 1 : 0);

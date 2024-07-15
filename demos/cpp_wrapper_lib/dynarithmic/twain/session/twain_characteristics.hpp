@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2023 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -184,7 +184,7 @@ namespace dynarithmic
             /// 
             /// @returns string representing the current temporary directory.
             /// @see set_dsm_search_order()
-            std::string get_dsm_search_order() const noexcept { return m_strSearchDirectory; }
+            std::string get_dsm_search_order() const noexcept { return m_strSearchOrder; }
 
             /// Gets the current user-defined directory for the TWAIN Data Source Manager to be searched
             /// 

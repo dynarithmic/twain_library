@@ -372,7 +372,8 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Dim Status As Integer
         If SelectedSource <> 0 Then
-            If DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, FileName, FileType, DTWAINAPI.DTWAIN_USENATIVE + DTWAINAPI.DTWAIN_USELONGNAME, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, 1, 0, Status) Then
+            If DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, FileName, FileType, DTWAINAPI.DTWAIN_USENATIVE + DTWAINAPI.DTWAIN_USELONGNAME + DTWAINAPI.DTWAIN_CREATE_DIRECTORY,
+                                            DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, 1, 0, Status) Then
                 MsgBox(FileName + " has been created")
             End If
         End If
@@ -537,7 +538,7 @@ Public Class VB_FullDemo
             ' Use default 
             ' Get all pages 
             ' Close Source when UI is closed 
-            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsSourceUI(), 1, status)
+            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags + DTWAINAPI.DTWAIN_CREATE_DIRECTORY), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsSourceUI(), 1, status)
 
             If bError = 0 Then
                 MessageBox.Show("Error acquiring or saving file.")

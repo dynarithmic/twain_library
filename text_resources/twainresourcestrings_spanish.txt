@@ -173,6 +173,8 @@
 2074 Invalid bitmap width/height for non-Vista Windows ICO format
 2075 TWAIN_32.DLL no encontrados
 2076 TWAINDSM.DLL no encontrados	 
+2078 No se pudo crear el directorio
+2079 Transym OCR DLL no encontrados	 
 2081 No filename specified.  Use -f option
 2082 TWAIN not available
 2083 Cannot communicate with TWAIN device
