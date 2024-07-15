@@ -2,7 +2,7 @@
 #  dtwain.py
 # 
 #  This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-#  Copyright (c) 2002-2023 Dynarithmic Software.                                         
+#  Copyright (c) 2002-2024 Dynarithmic Software.                                         
 #                                                                                        
 #  Licensed under the Apache License, Version 2.0 (the "License");                       
 #  you may not use this file except in compliance with the License.                      
@@ -156,6 +156,8 @@ DTWAIN_ICO_VISTA = 8001
 DTWAIN_ICO_RESIZED = 8002
 DTWAIN_WBMP = 8500
 DTWAIN_WBMP_RESIZED = 11000
+DTWAIN_TGA_RLE = 11001
+DTWAIN_BMP_RLE = 11002
 DTWAIN_INCHES = 0
 DTWAIN_CENTIMETERS = 1
 DTWAIN_PICAS = 2

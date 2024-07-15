@@ -33,6 +33,7 @@ namespace TWAINDemo
         }
 
         private AllTypes[] g_allTypes = {new AllTypes("BMP File", TwainAPI.DTWAIN_BMP, "test.bmp"),
+                                 new AllTypes("BMP RLE File",TwainAPI.DTWAIN_BMP_RLE, "testrle.bmp"),
                                  new AllTypes("Multi-page DCX File",TwainAPI.DTWAIN_DCX, "test.dcx"),
                                  new AllTypes("Enhanced Meta File (EMF)",TwainAPI.DTWAIN_EMF, "test.emf"),
                                  new AllTypes("GIF File", TwainAPI.DTWAIN_GIF, "test.gif"),
@@ -52,6 +53,7 @@ namespace TWAINDemo
                                  new AllTypes("TIFF (Flate compression)", TwainAPI.DTWAIN_TIFFDEFLATEMULTI, "test.tif"),
                                  new AllTypes("TIFF (LZW compression)", TwainAPI.DTWAIN_TIFFLZWMULTI, "test.tif"),
                                  new AllTypes("Targa (TGA) File", TwainAPI.DTWAIN_TGA, "test.tga"),
+                                 new AllTypes("Targa RLE (TGA) File",TwainAPI.DTWAIN_TGA_RLE, "testrle.tga"),
                                  new AllTypes("Windows Meta File (WMF)", TwainAPI.DTWAIN_WMF, "test.wmf"),
                                  new AllTypes("Windows ICON File (ICO)", TwainAPI.DTWAIN_ICO_RESIZED, "test.ico"),
                                  new AllTypes("Windows ICON File- Vista compatible (ICO)", TwainAPI.DTWAIN_ICO_VISTA, "test.ico"),

@@ -1,6 +1,6 @@
 REM
 REM This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-REM Copyright (c) 2002-2023 Dynarithmic Software.                                         
+REM Copyright (c) 2002-2024 Dynarithmic Software.                                         
 REM                                                                                       
 REM Licensed under the Apache License, Version 2.0 (the "License");                       
 REM you may not use this file except in compliance with the License.                      
@@ -228,6 +228,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ICO_RESIZED As Integer  = 8002
     Public Const DTWAIN_WBMP As Integer  = 8500
     Public Const DTWAIN_WBMP_RESIZED As Integer  = 11000
+    Public Const DTWAIN_TGA_RLE As Integer = 11001
+    Public Const DTWAIN_BMP_RLE As Integer = 11002
     Public Const DTWAIN_INCHES As Integer  = 0
     Public Const DTWAIN_CENTIMETERS As Integer  = 1
     Public Const DTWAIN_PICAS As Integer  = 2
@@ -837,6 +839,9 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_INVALIDICONFORMAT As Integer  = (-2074)
     Public Const DTWAIN_ERR_TWAIN32DSMNOTFOUND As Integer  = (-2075)
     Public Const DTWAIN_ERR_TWAINOPENSOURCEDSMNOTFOUND As Integer  = (-2076)
+    Public Const DTWAIN_ERR_INVALID_DIRECTORY As Integer = (-2077)
+    Public Const DTWAIN_ERR_CREATE_DIRECTORY As Integer = (-2078)
+    Public Const DTWAIN_ERR_OCRLIBRARY_NOTFOUND As Integer = (-2079)
     Public Const DTWAIN_TWAINSAVE_OK As Integer  = (0)
     Public Const DTWAIN_ERR_TS_FIRST As Integer  = (-2080)
     Public Const DTWAIN_ERR_TS_NOFILENAME As Integer  = (-2081)
