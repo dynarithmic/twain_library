@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2023 Dynarithmic Software.
+    Copyright (c) 2002-2024 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -275,6 +275,8 @@ namespace Dynarithmic
         public const int DTWAIN_WEBP = 8501;
         public const  int DTWAIN_PPM = 10000;
         public const int DTWAIN_WBMP_RESIZED = 11000;
+        public const int DTWAIN_TGA_RLE = 11001;
+        public const int DTWAIN_BMP_RLE = 11002;
         public const  int DTWAIN_INCHES = 0;
         public const  int DTWAIN_CENTIMETERS = 1;
         public const  int DTWAIN_PICAS = 2;
@@ -286,7 +288,8 @@ namespace Dynarithmic
         public const  int DTWAIN_USELONGNAME = 64;
         public const  int DTWAIN_USESOURCEMODE = 128;
         public const  int DTWAIN_USELIST = 256;
-        public const  int DTWAIN_CREATEDIRECTORY = 512;
+        public const  int DTWAIN_CREATE_DIRECTORY = 512;
+        public const  int DTWAIN_CREATEDIRECTORY = DTWAIN_CREATE_DIRECTORY;
         public const  int DTWAIN_ARRAYANY = 1;
         public const  int DTWAIN_ArrayTypePTR = 1;
         public const  int DTWAIN_ARRAYLONG = 2;

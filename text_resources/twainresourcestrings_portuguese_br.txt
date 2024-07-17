@@ -173,6 +173,8 @@
 2074 Largura / altura de bitmap inválida para o formato ICO do Windows não Vista
 2075 TWAIN_32.DLL ou TWAIN Data Source Manager especificado não encontrado, corrompido ou não pôde ser aberto
 2076 TWAINDSM.DLL ou TWAIN Data Source Manager especificado não encontrado, corrompido ou não pôde ser aberto
+2078 Não foi possível criar o diretório
+2079 Transym OCR DLL especificado não encontrado, corrompido ou não pôde ser aberto
 2081 Nenhum nome de arquivo especificado. Use a opção -f
 2082 TWAIN não disponível
 2083 Não foi possível se comunicar com o dispositivo TWAIN

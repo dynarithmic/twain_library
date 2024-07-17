@@ -4,7 +4,7 @@
 
 * The Dynarithmic TWAIN Library is open source and licensed under the Apache 2.0 License.  Please read the [LICENSE](https://github.com/dynarithmic/twain_library/tree/master/LICENSE) file for more information.
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html).
-* The current version is [**5.4.4** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version is [**5.4.5** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
 
@@ -103,7 +103,9 @@ After building your application, for your application to run successfully, you m
 
 In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text resource files</a> must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-The  text resources files are as follows:
+* Make sure that you are running the latest version of the text resources, as changes to these files can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get these resources whenever you use a newer release of the DTWAIN DLL's.
+
+The text resources files are as follows:
 
     twaininfo.txt -- General TWAIN information -- this is required.
 	twainresourcestrings_english.txt  	English resources -- this is required.
@@ -116,6 +118,7 @@ If these files are not found, you will receive the following error when running 
 
 Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  The error return code will be **-1051** if DTWAIN_SysInitializeNoBlocking detects an error initializing the library, and 0 if there is no error and the initialization was successful.
 
+Note: Make sure that you use the latest version of the text resources.  If you are not using a version of 
 In addition, there are optional string resource files available.  Here are a list of those files:
 	
 	twainresourcestrings_dutch.txt 	 	    Dutch resources
@@ -134,7 +137,7 @@ More detailed instructions on adding your own resource file can be found <a href
 
 There has been an ongoing issue using **WIA** (Windows Image Acquisition) drivers and DTWAIN and TWAIN, especially in console-based applications.  Therefore, if the manufacturer for your device has both a TWAIN driver and WIA driver, choose the TWAIN driver, and only choose the WIA/TWAIN driver as a secondary choice if the TWAIN driver is not available (you will know the driver is WIA/TWAIN if the name in the "Select Source" dialog box starts with "**WIA-**").  
 
-Measures have been made to allow WIA drivers to operate correctly within DTWAIN (the upcoming version 5.3.0.3 of DTWAIN addresses these issues with WIA as best as possible).  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN.
+Measures have been made to allow WIA drivers to operate correctly within DTWAIN (version 5.3.0.3 and higher of DTWAIN addresses these issues with WIA as best as possible).  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN.
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
