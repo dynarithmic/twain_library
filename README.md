@@ -103,7 +103,7 @@ After building your application, for your application to run successfully, you m
 
 In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text resource files</a> must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-* Make sure that you are running the latest version of the text resources, as changes to these files can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get these resources whenever you update your release of the DTWAIN dynamic link libraries.
+* Make sure that you are running the latest version of the text resources, as changes to these files can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get these resources whenever you use a newer release of the DTWAIN DLL's.
 
 The text resources files are as follows:
 
