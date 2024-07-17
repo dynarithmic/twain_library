@@ -74,4 +74,6 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_PBM               10000 /* Portable bitmap*/
 #define DTWAIN_PPM               DTWAIN_PBM /* Portable bitmap*/
 #define DTWAIN_WBMP_RESIZED      11000 /* Wireless Bitmap (WBMP) format for bitmaps with height > 255 or width > 255 pixels */
+#define DTWAIN_TGA_RLE           11001 /* Targa with Run Length Encoding */
+#define DTWAIN_BMP_RLE           11002 /* BMP with Run Length Encoding */
 #endif

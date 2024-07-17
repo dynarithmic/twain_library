@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2023 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -466,6 +466,7 @@ namespace dynarithmic
         {
             typedef uint16_t value_type;
             static constexpr value_type  bmp = DTWAIN_BMP;
+            static constexpr value_type  bmprle = DTWAIN_BMP_RLE;
             static constexpr value_type  dcx = DTWAIN_DCX;
             static constexpr value_type  enhancedmetafile = DTWAIN_EMF;
             static constexpr value_type  gif = DTWAIN_GIF;
@@ -480,6 +481,7 @@ namespace dynarithmic
             static constexpr value_type  postscript3 = DTWAIN_POSTSCRIPT3;
             static constexpr value_type  psd = DTWAIN_PSD;
             static constexpr value_type  targa = DTWAIN_TGA;
+            static constexpr value_type  targarle = DTWAIN_TGA_RLE;
             static constexpr value_type  text = DTWAIN_TEXT;
             static constexpr value_type  tiffdeflate = DTWAIN_TIFFDEFLATE;
             static constexpr value_type  tiffgroup3 = DTWAIN_TIFFG3;
@@ -1661,6 +1663,7 @@ namespace dynarithmic
             static constexpr filetype_value::value_type aSingle[] =
             {
                 filetype_value::bmp,
+                filetype_value::bmprle,
                 filetype_value::dcx,
                 filetype_value::enhancedmetafile,
                 filetype_value::gif,
@@ -1675,6 +1678,7 @@ namespace dynarithmic
                 filetype_value::postscript3,
                 filetype_value::psd,
                 filetype_value::targa,
+                filetype_value::targarle,
                 filetype_value::text,
                 filetype_value::tiffdeflate,
                 filetype_value::tiffgroup3,
@@ -1758,6 +1762,7 @@ namespace dynarithmic
                 static std::unordered_set<filetype_value::value_type> supported_set =
                 {
                     filetype_value::bmp,
+                    filetype_value::bmprle,
                     filetype_value::dcx,
                     filetype_value::enhancedmetafile,
                     filetype_value::gif,
@@ -1772,6 +1777,7 @@ namespace dynarithmic
                     filetype_value::postscript3,
                     filetype_value::psd,
                     filetype_value::targa,
+                    filetype_value::targarle,
                     filetype_value::text,
                     filetype_value::tiffdeflate,
                     filetype_value::tiffgroup3,
