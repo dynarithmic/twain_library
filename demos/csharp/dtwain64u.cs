@@ -1630,7 +1630,7 @@ namespace Dynarithmic
         public const int DTWAIN_APIHANDLEOK    = 1;
         public const int DTWAIN_TWAINSESSIONOK = 2;
 
-`        public const string DTWAIN_LIBRARY = "dtwain64u.dll";
+        public const string DTWAIN_LIBRARY = "dtwain64u.dll";
 
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,

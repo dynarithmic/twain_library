@@ -1,5 +1,12 @@
 DTWAIN Version changes
 
+5.4.6
+
+- Increase width of the label field in the TWAIN "Select Source" dialog when using DTWAIN_SelectSource2()
+
+- Fix typo in dtwain64u.cs file.
+
+
 5.4.5
 
 - Upgraded following internal image, compression, and cryptography libraries:
@@ -22,6 +29,8 @@ DTWAIN Version changes
 - Fixed issue with DTWAIN_SelectOCREngine not showing product name of available OCR engines.
 
 - Added entry to twaininfo.txt to properly handle text obtained from 1 bit-per-pixel OCR-ed images.
+
+- Added versioning check for twaininfo.txt.
 
 
 5.4.4
