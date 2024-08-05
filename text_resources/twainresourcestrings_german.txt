@@ -203,6 +203,8 @@
 3013 Output: return code from DSM
 3014 No information for 
 3015 returned error code
+3016 Fehler
+3017 Das temporäre Dateiverzeichnis existiert nicht
 5000 Courier
 5001 Courier-Bold
 5002 Courier-BoldOblique
