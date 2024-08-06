@@ -63,11 +63,16 @@ For 64-bit applications, use the binaries found in **release_libraries.zip** in 
 Checksum values are found [here](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/release_ziphashes64.txt).
 
 ----
-The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  Similarly, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available. 
-
-(If you do not use Visual C++, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues).  
+The **release_libraries.zip** contains all of the DLL's required to start using DTWAIN for 32-bit and 64-bit applications.  
 
 In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
+
+----
+###### For C and C++ programmers:
+
+If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
+If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
+
 
 ----
 
@@ -86,7 +91,9 @@ A breakdown of the files contained in **release_libraries.zip** is as follows:
     dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
     dtwain64u.lib  --  64-bit Unicode import library
     dtwain64u.pdb  --  64-bit PDB files for dtwain64u.dll
-    
+
+###### For C and C++ programmers:
+
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
 Basically, you just need to build your application and link it to one of the import libraries that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors.
