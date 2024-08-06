@@ -349,7 +349,7 @@ void SelectTheSource(int nWhich)
     switch (nWhich)
     {
         case IDM_SELECT_SOURCE:
-            tempSource = DTWAIN_SelectSource();
+            tempSource = DTWAIN_SelectSource2(NULL, _T("Select Source"),0,0,DTWAIN_DLG_CENTER_SCREEN);
         break;
 
         case IDM_SELECT_DEFAULT_SOURCE:
@@ -489,9 +489,10 @@ void AcquireFile(BOOL bUseSource)
     LONG ErrStatus;
     LONG FileFlags = DTWAIN_USELONGNAME;
     LONG FileType;
-    BOOL bError;
+    BOOL bAcquireOK = TRUE;
     DTWAIN_ARRAY AFileNames = 0;
     BOOL UseUI;
+    TCHAR szError[256];
 
     if ( bUseSource )
     {
@@ -567,16 +568,20 @@ void AcquireFile(BOOL bUseSource)
 
     /* Acquire the file */
     UseUI = GetToggleMenuState(IDM_USE_SOURCE_UI);
-    bError = DTWAIN_AcquireFileEx(g_CurrentSource,
+    bAcquireOK = DTWAIN_AcquireFileEx(g_CurrentSource,
                                   AFileNames,
                                   FileType,
-                                  FileFlags,
+                                  FileFlags | DTWAIN_CREATE_DIRECTORY,
                                   DTWAIN_PT_DEFAULT, /* Use default */
                                   DTWAIN_ACQUIREALL, /* Get all pages */
                                   UseUI,
                                   TRUE,  /* Close Source when UI is closed */
                                   &ErrStatus /* Error Status */
                                   );
+    if (!bAcquireOK)
+    {
+        DTWAIN_GetErrorString(DTWAIN_GetLastError(), szError, 255);
+    }
     WaitLoop();
     EnableWindow(g_hWnd, TRUE);
 
@@ -584,9 +589,12 @@ void AcquireFile(BOOL bUseSource)
        (to be safe) */
     DTWAIN_ArrayDestroy( AFileNames );
     DTWAIN_OpenSource( g_CurrentSource );
-    if ( !bError || nPageCount == 0 || !bPageOK )
+    if ( !bAcquireOK || nPageCount == 0 || !bPageOK )
     {
-        MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
+        if ( !bAcquireOK)
+            MessageBox(g_hWnd, szError, _T(""), MB_ICONSTOP);
+        else
+            MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
         return;
     }
 	else
