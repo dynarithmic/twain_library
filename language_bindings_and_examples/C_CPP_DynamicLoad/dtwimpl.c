@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2023 Dynarithmic Software.
+    Copyright (c) 2002-2024 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -31,10 +31,12 @@
 
 #include "dtwainx2.h"
 #include <assert.h>
-#include <commdlg.h>
-#pragma warning (push)
-#pragma warning (disable:4113)
-#pragma warning (disable:4047)
+#ifdef _WIN32
+    #include <commdlg.h>
+    #pragma warning (push)
+    #pragma warning (disable:4113)
+    #pragma warning (disable:4047)
+#endif
 
 /* declare function pointers */
 #ifdef __cplusplus
@@ -400,6 +402,9 @@
     D_GETERRORSTRINGAFUNC                                             DYNDTWAIN_API::DTWAIN_GetErrorStringA = nullptr;
     D_GETERRORSTRINGFUNC                                              DYNDTWAIN_API::DTWAIN_GetErrorString = nullptr;
     D_GETERRORSTRINGWFUNC                                             DYNDTWAIN_API::DTWAIN_GetErrorStringW = nullptr;
+    D_GETRESOURCESTRINGAFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringA = nullptr;
+    D_GETRESOURCESTRINGFUNC                                           DYNDTWAIN_API::DTWAIN_GetResourceString = nullptr;
+    D_GETRESOURCESTRINGWFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringW = nullptr;
     D_GETEXTCAPFROMNAMEAFUNC                                          DYNDTWAIN_API::DTWAIN_GetExtCapFromNameA = nullptr;
     D_GETEXTCAPFROMNAMEFUNC                                           DYNDTWAIN_API::DTWAIN_GetExtCapFromName = nullptr;
     D_GETEXTCAPFROMNAMEWFUNC                                          DYNDTWAIN_API::DTWAIN_GetExtCapFromNameW = nullptr;
@@ -1015,7 +1020,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
 #endif
 #ifdef __cplusplus
     #define DTWAIN_INSTANCE DYNDTWAIN_API::
-    int DYNDTWAIN_API::InitDTWAINInterface(HMODULE hModule)
+    int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
     {
 #else
     #define DTWAIN_INSTANCE pApi->
@@ -1418,6 +1423,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetErrorStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetErrorString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetErrorStringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetResourceStringA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetResourceString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetResourceStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtCapFromNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtCapFromName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtCapFromNameW, hModule);
