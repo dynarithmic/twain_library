@@ -1626,6 +1626,10 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_TWCT    = 45;
         public const int DTWAIN_CONSTANT_TWPS    = 46;
         public const int DTWAIN_CONSTANT_TWSS    = 47;
+        public const int DTWAIN_CONSTANT_TWPH    = 48;
+        public const int DTWAIN_CONSTANT_TWCI    = 49;
+        public const int DTWAIN_USERRES_START    = 20000;
+        public const int DTWAIN_USERRES_MAXSIZE  = 8192;
 
         public const int DTWAIN_APIHANDLEOK    = 1;
         public const int DTWAIN_TWAINSESSIONOK = 2;
@@ -3939,6 +3943,10 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetResourceStringA(int lResource, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszBuffer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  int DTWAIN_GetExtCapFromNameA([MarshalAs(UnmanagedType.LPStr)] string szName);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
@@ -4432,6 +4440,10 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  int DTWAIN_GetErrorStringW(int lError, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszBuffer, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetResourceStringW(int lResourceId, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszBuffer, int nLength);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -4980,6 +4992,10 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  int DTWAIN_GetErrorString(int lError, [MarshalAs(UnmanagedType.LPTStr)]  System.Text.StringBuilder lpszBuffer, int nMaxLen);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetResourceString(int lResourceId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]

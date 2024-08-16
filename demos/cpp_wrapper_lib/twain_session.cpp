@@ -77,7 +77,6 @@ namespace dynarithmic
             }
 
             const void* ptr = reinterpret_cast<const void*>(this);
-            uint64_t ui64 = static_cast<uint64_t>(reinterpret_cast<uintptr_t>(ptr));
 
             API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this)); 
             API_INSTANCE DTWAIN_LoadCustomStringResourcesA(m_twain_characteristics.get_language().c_str());
@@ -315,16 +314,55 @@ namespace dynarithmic
             return API_INSTANCE DTWAIN_CallDSMProc(pSource, pDest, dg, dat, msg, pdata);
         }
 
+
+        /// Selects a TWAIN source by using the passed-in traits object
+        /// 
+        /// @Returns a source_select_info describing the selection of the source 
+        source_select_info twain_session::select_source(select_source_traits& traits)
+        {
+            switch (traits.get_select_type())
+            {
+                case select_source_traits::use_legacy:
+                {
+                    return select_source();
+                }
+                break;
+                case select_source_traits::use_enhanced_dialog:
+                {
+                    return select_source(select_usedialog(traits.get_enhanced_dialog()));
+                }
+                break;
+                case select_source_traits::use_name:
+                {
+                    return select_source(select_byname(traits.get_source_name()));
+                }
+                break;
+                case select_source_traits::use_default:
+                {
+                    return select_source(select_default());
+                }
+                break;
+            }
+            return {};
+        }
+
         /// Returns an error string that describes the error given by **error_number**
         /// 
         /// @param[in] error_number The number of the error.
         /// @returns An error string that describes the error
         /// @see get_last_error() twain_characteristics.get_language()
         /// @note The error string will be in the language specified by twain_characteristics::get_language()
-         std::string twain_session::get_error_string(int32_t error_number)
+        std::string twain_session::get_error_string(int32_t error_number)
         {
-            char sz[1024] = {};
-            API_INSTANCE DTWAIN_GetErrorStringA(error_number, sz, 1024);
+            char sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
+            API_INSTANCE DTWAIN_GetErrorStringA(error_number, sz, DTWAIN_USERRES_MAXSIZE);
+            return sz;
+        }
+
+        std::string twain_session::get_resource_string(int32_t resource_id)
+        {
+            char sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
+            API_INSTANCE DTWAIN_GetResourceStringA(resource_id, sz, DTWAIN_USERRES_MAXSIZE);
             return sz;
         }
 

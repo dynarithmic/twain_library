@@ -30,7 +30,7 @@ int SimpleFileAcquireToBMP()
     DynamicHandler dynHandler(hDTwainModule);
 
     DYNDTWAIN_API API;
-    API.InitDTWAINInterface(hDTwainModule);
+    API.InitDTWAINInterface(&API, hDTwainModule);
     
     /* Initialize DTWAIN */
     DTWAIN_HANDLE handle = API.DTWAIN_SysInitialize();

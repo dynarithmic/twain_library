@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2023 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -27,12 +27,9 @@ OF THIRD PARTY RIGHTS.
 #include <utility>
 #include <unordered_map>
 #include <vector>
-#include <tuple>
-#include <chrono>
-#include <thread>
 #include <type_traits>
 #include <functional>
-#include <numeric>
+#include <memory>
 
 #if __cplusplus >= 201703L
 #include <optional>
@@ -54,9 +51,10 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/twain_details.hpp>
 #include <dtwain.h>
 
-#pragma warning( push )  // Stores the current warning state for every warning.
-#pragma warning( disable:4996)
-
+#ifdef _MSC_VER
+    #pragma warning( push )  // Stores the current warning state for every warning.
+    #pragma warning( disable:4996)
+#endif
 namespace dynarithmic
 {
     namespace twain
@@ -169,6 +167,29 @@ namespace dynarithmic
         using select_byname = source_selector<select_type::use_name>;
         using select_usedialog = source_selector<select_type::use_dialog>;
 
+        /* Non-template calls to select_source using this struct */
+        struct select_source_traits
+        {
+            enum source_select_type
+            {
+                use_legacy,
+                use_enhanced_dialog,
+                use_name,
+                use_default
+            };
+            source_select_type m_selectType = use_legacy;
+            twain_select_dialog m_useEnhancedDialog;
+            std::string m_sourceName;
+            bool m_selectDefault;
+
+            select_source_traits& set_select_type(source_select_type sType) { m_selectType = sType; return *this; }
+            select_source_traits& set_enhanced_dialog(twain_select_dialog& dlg) { m_useEnhancedDialog = dlg; return *this; }
+            select_source_traits& set_source_name(std::string name) { m_sourceName = name; return *this; }
+            source_select_type get_select_type() const { return m_selectType; }
+            twain_select_dialog& get_enhanced_dialog() { return m_useEnhancedDialog; }
+            std::string get_source_name() const { return m_sourceName; }
+        };
+
         /**
             The twain_session class is the main class that allows the startup and stopping of the TWAIN system.<br> 
             This is the main driver class, as no TWAIN interaction can occur without instantiating a twain_session.
@@ -250,7 +271,7 @@ namespace dynarithmic
             void set_dllhandle(HMODULE h) 
             { 
                 m_DynamicHandle = h;  
-                RuntimeDLL::DTWAIN_API__.InitDTWAINInterface(h); 
+                RuntimeDLL::DTWAIN_API__.InitDTWAINInterface(nullptr, h); 
             }
             HMODULE get_dllhandle() const { return m_DynamicHandle; }
         #endif  
@@ -424,6 +445,13 @@ namespace dynarithmic
                 /// @see get_last_error() twain_characteristics.get_language()
                 /// @note The error string will be in the language specified by twain_characteristics::get_language()
                 static std::string get_error_string(int32_t error_number);
+
+                /// Returns a resource string 
+                /// 
+                /// @param[in] resource id.  For user-defined resources, this value should be >= DTWAIN_USERRES_START
+                /// @returns A resource string
+                /// @note The string will be in the language specified by twain_characteristics::get_language()
+                static std::string get_resource_string(int32_t resource_id);
 
                 /// Returns the last error encountered by the underlying DTWAIN library
                 /// 
@@ -700,6 +728,8 @@ namespace dynarithmic
                 return sRet;
             }
 
+            source_select_info select_source(select_source_traits& traits);
+
             /** Adds an error value to the error log
             *
             */
@@ -779,5 +809,7 @@ namespace dynarithmic
         };
     }
 }
+#ifdef _MSC_VER
 #pragma warning(pop)
+#endif
 #endif

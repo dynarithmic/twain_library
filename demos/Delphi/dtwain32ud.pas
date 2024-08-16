@@ -1,5 +1,5 @@
 {* This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          *}
-{* Copyright (c) 2002-2023 Dynarithmic Software.                                         *}
+{* Copyright (c) 2002-2024 Dynarithmic Software.                                         *}
 {*                                                                                       *}
 {* Licensed under the Apache License, Version 2.0 (the "License");                       *}
 {* you may not use this file except in compliance with the License.                      *}
@@ -23,7 +23,7 @@
 {                                                       }
 {*******************************************************}
 
-unit dtwain32;
+unit dtwain32ud;
 {$A+,Z+}
 
 interface
@@ -323,6 +323,8 @@ const
   DTWAIN_ICO_RESIZED = 8002;
   DTWAIN_WBMP = 8500;
   DTWAIN_WBMP_RESIZED = 11000;
+  DTWAIN_TGA_RLE = 11001;
+  DTWAIN_BMP_RLE = 11002;
   DTWAIN_INCHES = 0;
   DTWAIN_CENTIMETERS = 1;
   DTWAIN_PICAS = 2;
@@ -1620,6 +1622,60 @@ const
   DTWAIN_PDFTEXTTRANSFORM_KTRS = 23;
   DTWAIN_PDFTEXTTRANFORM_LAST = DTWAIN_PDFTEXTTRANSFORM_KTRS;
 
+  DTWAIN_CONSTANT_TWPT    = 0 ;
+  DTWAIN_CONSTANT_TWUN    = 1 ;
+  DTWAIN_CONSTANT_TWCY    = 2 ;
+  DTWAIN_CONSTANT_TWAL    = 3 ;
+  DTWAIN_CONSTANT_TWAS    = 4 ;
+  DTWAIN_CONSTANT_TWBCOR  = 5 ;
+  DTWAIN_CONSTANT_TWBD    = 6 ;
+  DTWAIN_CONSTANT_TWBO    = 7 ;
+  DTWAIN_CONSTANT_TWBP    = 8 ;
+  DTWAIN_CONSTANT_TWBR    = 9 ;
+  DTWAIN_CONSTANT_TWBT    = 10;
+  DTWAIN_CONSTANT_TWCP    = 11;
+  DTWAIN_CONSTANT_TWCS    = 12;
+  DTWAIN_CONSTANT_TWDE    = 13;
+  DTWAIN_CONSTANT_TWDR    = 14;
+  DTWAIN_CONSTANT_TWDSK   = 15;
+  DTWAIN_CONSTANT_TWDX    = 16;
+  DTWAIN_CONSTANT_TWFA    = 17;
+  DTWAIN_CONSTANT_TWFE    = 18;
+  DTWAIN_CONSTANT_TWFF    = 19;
+  DTWAIN_CONSTANT_TWFL    = 20;
+  DTWAIN_CONSTANT_TWFO    = 21;
+  DTWAIN_CONSTANT_TWFP    = 22;
+  DTWAIN_CONSTANT_TWFR    = 23;
+  DTWAIN_CONSTANT_TWFT    = 24;
+  DTWAIN_CONSTANT_TWFY    = 22;
+  DTWAIN_CONSTANT_TWIA    = 23;
+  DTWAIN_CONSTANT_TWIC    = 27;
+  DTWAIN_CONSTANT_TWIF    = 28;
+  DTWAIN_CONSTANT_TWIM    = 29;
+  DTWAIN_CONSTANT_TWJC    = 30;
+  DTWAIN_CONSTANT_TWJQ    = 31;
+  DTWAIN_CONSTANT_TWLP    = 32;
+  DTWAIN_CONSTANT_TWLS    = 33;
+  DTWAIN_CONSTANT_TWMD    = 34;
+  DTWAIN_CONSTANT_TWNF    = 35;
+  DTWAIN_CONSTANT_TWOR    = 36;
+  DTWAIN_CONSTANT_TWOV    = 37;
+  DTWAIN_CONSTANT_TWPA    = 38;
+  DTWAIN_CONSTANT_TWPC    = 39;
+  DTWAIN_CONSTANT_TWPCH   = 40;
+  DTWAIN_CONSTANT_TWPF    = 41;
+  DTWAIN_CONSTANT_TWPM    = 42;
+  DTWAIN_CONSTANT_TWPR    = 43;
+  DTWAIN_CONSTANT_TWPF2   = 44;
+  DTWAIN_CONSTANT_TWCT    = 45;
+  DTWAIN_CONSTANT_TWPS    = 46;
+  DTWAIN_CONSTANT_TWSS    = 47;
+  DTWAIN_CONSTANT_TWPH    = 48;
+  DTWAIN_CONSTANT_TWCI    = 49;			
+  DTWAIN_USERRES_START    = 20000;
+  DTWAIN_USERRES_MAXSIZE  = 8192;
+
+
 { DTWAIN DLL functional interface }
 function DTWAIN_AcquireAudioNative(Source:DTWAIN_SOURCE; nMaxAudioClips:LONG; bShowUI:BOOL; bCloseSource:BOOL; pStatus:LPLONG):DTWAIN_ARRAY;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_AcquireAudioNative';
 function DTWAIN_AcquireAudioNativeEx(Source:DTWAIN_SOURCE; nMaxAudioClips:LONG; bShowUI:BOOL; bCloseSource:BOOL; Acquisitions:DTWAIN_ARRAY; pStatus:LPLONG):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_AcquireAudioNativeEx';
@@ -2200,6 +2256,7 @@ function DTWAIN_GetCurrentFileNameA(Source:DTWAIN_SOURCE; szName:LPSTR; MaxLen:L
 function DTWAIN_GetDSMFullNameA(DSMType:LONG; szDLLName:LPSTR; nMaxLen:LONG; pWhichSearch:LPLONG):LONG;overload;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDSMFullNameA';
 function DTWAIN_GetDeviceTimeDateA(Source:DTWAIN_SOURCE; szTimeDate:LPSTR):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDeviceTimeDateA';
 function DTWAIN_GetErrorStringA(lError:LONG; lpszBuffer:LPSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetErrorStringA';
+function DTWAIN_GetResourceStringA(lResource:LONG; lpszBuffer:LPSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetResourceStringA';
 function DTWAIN_GetExtCapFromNameA(szName:LPCSTR):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtCapFromNameA';
 function DTWAIN_GetExtNameFromCapA(nValue:LONG; szValue:LPSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtNameFromCapA';
 function DTWAIN_GetHalftoneA(Source:DTWAIN_SOURCE; lpHalftone:LPSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetHalftoneA';
@@ -2232,6 +2289,9 @@ function DTWAIN_GetTwainCountryNameA(countryId:LONG; szName:LPSTR):BOOL;stdcall;
 function DTWAIN_GetTwainCountryValueA(country:LPCSTR):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetTwainCountryValueA';
 function DTWAIN_GetTwainLanguageNameA(lang:LONG; szName:LPSTR):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetTwainLanguageNameA';
 function DTWAIN_GetTwainLanguageValueA(lang:LPCSTR):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetTwainLanguageValueA';
+function DTWAIN_GetTwainNameFromConstant(lConstantType:LONG; TwainConstant:LONG; lpszOut:LPTSTR; nSize:LONG):LONG;stdcall;external 'dtwain32ud.dll' name 'DTWAIN_GetTwainNameFromConstant';
+function DTWAIN_GetTwainNameFromConstantA(lConstantType:LONG; TwainConstant:LONG; lpszOut:LPSTR; nSize:LONG):LONG;stdcall;external 'dtwain32ud.dll' name 'DTWAIN_GetTwainNameFromConstantA';
+function DTWAIN_GetTwainNameFromConstantW(lConstantType:LONG; TwainConstant:LONG; lpszOut:LPWSTR; nSize:LONG):LONG;stdcall;external 'dtwain32ud.dll' name 'DTWAIN_GetTwainNameFromConstantW';
 function DTWAIN_GetVersionInfoA(lpszVer:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetVersionInfoA';
 function DTWAIN_GetVersionStringA(lpszVer:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetVersionStringA';
 function DTWAIN_GetXResolutionStringA(Source:DTWAIN_SOURCE; Resolution:LPSTR):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetXResolutionStringA';
@@ -2324,6 +2384,7 @@ function DTWAIN_GetCurrentFileNameW(Source:DTWAIN_SOURCE; szName:LPWSTR; MaxLen:
 function DTWAIN_GetDSMFullNameW(DSMType:LONG; szDLLName:LPWSTR; nMaxLen:LONG; pWhichSearch:LPLONG):LONG;overload;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDSMFullNameW';
 function DTWAIN_GetDeviceTimeDateW(Source:DTWAIN_SOURCE; szTimeDate:LPWSTR):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDeviceTimeDateW';
 function DTWAIN_GetErrorStringW(lError:LONG; lpszBuffer:LPWSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetErrorStringW';
+function DTWAIN_GetResourceStringW(lResource:LONG; lpszBuffer:LPWSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetResourceStringW';
 function DTWAIN_GetExtCapFromNameW(szName:LPCWSTR):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtCapFromNameW';
 function DTWAIN_GetExtNameFromCapW(nValue:LONG; szValue:LPWSTR; nLength:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtNameFromCapW';
 function DTWAIN_GetHalftoneW(Source:DTWAIN_SOURCE; lpHalftone:LPWSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetHalftoneW';
@@ -2461,6 +2522,7 @@ function DTWAIN_GetCurrentFileName(Source:DTWAIN_SOURCE; szName:LPTSTR; MaxLen:L
 function DTWAIN_GetDSMFullName(DSMType:LONG; szDLLName:LPTSTR; nMaxLen:LONG; pWhichSearch:LPLONG):LONG;overload;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDSMFullName';
 function DTWAIN_GetDeviceTimeDate(Source:DTWAIN_SOURCE; szTimeDate:LPTSTR):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetDeviceTimeDate';
 function DTWAIN_GetErrorString(lError:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetErrorString';
+function DTWAIN_GetResourceString(lResource:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetResourceString';
 function DTWAIN_GetExtCapFromName(szName:LPCTSTR):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtCapFromName';
 function DTWAIN_GetExtNameFromCap(nValue:LONG; szValue:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetExtNameFromCap';
 function DTWAIN_GetHalftone(Source:DTWAIN_SOURCE; lpHalftone:LPTSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain32ud.dll'   name 'DTWAIN_GetHalftone';

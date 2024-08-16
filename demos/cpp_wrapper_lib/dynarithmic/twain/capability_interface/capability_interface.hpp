@@ -216,7 +216,7 @@ namespace twain {
             long supported_ops;
             long data_type;
             std::array<int8_t, 7> container_type; 
-            twain_cap_info(const twain_string_type& n = "", int ops = 0, long type_=TWTY_INT16, long ct=-1) :
+            twain_cap_info(const twain_string_type& n = "", int ops = 0, long type_=TWTY_INT16, long =-1) :
                             name(n), supported_ops(ops), data_type(type_), container_type{-1,-1,-1,-1,-1,-1,-1} {}
         };
 
@@ -456,7 +456,6 @@ namespace twain {
             if (!retVal)
                 return { false, API_INSTANCE DTWAIN_GetLastError() };
             container.clear();
-            const auto array_type = API_INSTANCE DTWAIN_GetCapArrayType(m_Source, capvalue);
             twain_array_copy_traits::copy_from_twain_array(ta, ta.get_count(), container);
             if (is_cache)
                 copy_to_cache(container, capvalue);
@@ -653,7 +652,6 @@ namespace twain {
                 return {false, DTWAIN_ERR_CAP_NO_SUPPORT};
 
             twain_array ta;
-            const auto array_type = API_INSTANCE DTWAIN_GetCapArrayType(theSource, capvalue);
             BOOL retval = FALSE;
             if ( C.empty() )
                 retval = API_INSTANCE DTWAIN_SetCapValues(theSource, capvalue, DTWAIN_CAPRESET, NULL);
@@ -741,7 +739,6 @@ namespace twain {
                 if (iter != m_cap_cache.end())
                 {
                     auto& vect = iter->second;
-                    twain_container_type::value_type cType = get_cap_container_type(capToTest, get());
                     auto iter = std::find_if(std::begin(vect), std::end(vect), 
                                                  [&](cache_vector_type::value_type& vt)
                                                  { return variant_get_<std::string>(vt) == capvalue; });

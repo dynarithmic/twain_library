@@ -25,7 +25,7 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 #include <iterator>
 #include <algorithm>
-#include <climits>
+#include <limits>
 
 #include <dynarithmic/twain/twain_values.hpp>
 
@@ -52,7 +52,7 @@ namespace dynarithmic
 
                 doublefeed_options() : m_detection(doublefeeddetection_value::default_val),
                                                            m_sensitivity(doublefeedsensitivity_value::default_val),
-                                                           m_length(DBL_MIN), m_bEnable(false) {}
+                                                           m_length((std::numeric_limits<double>::min)()), m_bEnable(false) {}
 
                 doublefeed_options& enable(bool bEnable = true) { m_bEnable = bEnable; return *this; }
                 bool is_enabled() const { return m_bEnable; }
@@ -68,7 +68,7 @@ namespace dynarithmic
 
                 doublefeeddetection_value::value_type get_detection() const { return m_detection; }
                 std::vector<doublefeedresponse_value::value_type> get_responses() const { return m_vResponses; }
-                length_type get_length(double length) const { return m_length; }
+                length_type get_length() const { return m_length; }
                 doublefeedsensitivity_value::value_type get_sensitivity() const { return m_sensitivity; }
 
                 template <typename Container=std::vector<doublefeedresponse_value::value_type>>
@@ -85,8 +85,6 @@ namespace dynarithmic
                                                                      CAP_DOUBLEFEEDDETECTIONSENSITIVITY, CAP_DOUBLEFEEDDETECTIONRESPONSE };
                     return affected_caps;
                 }
-
-
         };
     }
 }

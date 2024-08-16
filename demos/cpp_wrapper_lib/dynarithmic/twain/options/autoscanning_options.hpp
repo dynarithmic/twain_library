@@ -22,10 +22,10 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_AUTOSCANNING_OPTIONS_HPP
 #define DTWAIN_AUTOSCANNING_OPTIONS_HPP
 
-#include <vector>
-#include <algorithm>
 #include <array>
+#include <dynarithmic/twain/types/twain_types.hpp>
 #include <dynarithmic/twain/twain_values.hpp>
+#include <dynarithmic/twain/types/twain_capbasics.hpp>
 
 namespace dynarithmic
 {
