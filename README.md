@@ -237,40 +237,60 @@ In general, DTWAIN can set or get any capability, including custom capabilities 
 ----------
 
 <a name="alternatecompilers"></a>
-### What if I don't have Visual Studio as the compiler to use when building an application?  I use Embarcadero/g++/clang/MingW/Dev++ (fill in with your favorite compiler or IDE).  How do I use the library?
+### What if I don't have Visual C++ as the compiler to use when building an application?  The Visual C++ import libraries will not work for me.  I use Embarcadero/g++/clang/MingW (fill in with your favorite compiler or IDE).  So how do I use the library?
 
 You can do one of two things:
 
 1. Attempt to convert the .lib files mentioned above to your compiler's version of an import library, or
-2. Forget about using libraries altogether, and use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.
+2. Use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.  Usage of this method requires no import libraries to be used (which makes this a better choice).
 
-For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.
+For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  However, there still may be some quirks in those tools that do not create correct import libraries.  
 
-For the second item, there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary, without you having to tediously write the interface.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad). 
+For the second item, no import libraries are required, thus makes this choice the recommended option.  
 
-    /* Include this header */
-    #include "dtwainx2.h"
-    
-    /* declare the API instance and the handle to the loaded library */
-    DYNDTWAIN_API API;
-    HMODULE h;
+There are many DTWAIN functions, and you might be fearful of having to write code that tediously tries to create function pointers, call **GetProcAddress**, etc.  There is no need to do that, as there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary Windows API functions.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad).  
+
+In addition, one of the files in the set of bindings is the C/C++ source file **dtwimpl.cpp** (or **dtwimpl.c** if you are using plain C) -- this file will need to be added to your project, as it contains the needed infrastructure for the binding to work properly.  Failure to add this source file will result in linker errors when building your application.
+
+Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" DTWAIN usage of import libraries.
+
+    #ifdef USING_LOADLIBRARY
+       /* Include this header */
+        #include "dtwainx2.h"
+        #define API_INSTANCE API.
+        
+        /* declare the API instance and the handle to the loaded library */
+        DYNDTWAIN_API API;
+        HMODULE h;
+    #else
+        #include "dtwain.h"
+        #define API_INSTANCE
+    #endif
 
     int main()
     {
+        #ifdef USING_LOADLIBRARY
         /* Load the library dynamically, and hook up the external functions */  
         h = LoadLibraryA("dtwain32.dll");
-        InitDTWAINInterface(&API, h);
- 
-        /* Use the API hook code */
-        API.DTWAIN_SysInitialize();
-        DTWAIN_SOURCE Source = API.DTWAIN_SelectSource();
+        if ( !h )
+            return -1; /* DTWAIN DLL was not found or could not be loaded */
+        API_INSTANCE InitDTWAINInterface(&API, h);
+        #endif
+        
+        API_INSTANCE DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = API_INSTANCE DTWAIN_SelectSource();
         if ( Source )
-            API.DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, 
+            API_INSTANCE DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, 
                                     DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT, 
                                     DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
-        API.DTWAIN_SysDestroy();         
+        API_INSTANCE DTWAIN_SysDestroy();         
     }         
 
+The code above makes use of a preprocessor macro called **USING_LOADLIBRARY** that when defined will use the LoadLibrary technique.  If **USING_LOADLIBRARY** is defined, then the header file **dtwainx2.h** is utilized, otherwise the normal **dtwain.h** header is used.  In addition, the **API_INSTANCE** prefix is set to the **API.** text.
+
+Note that your code has to call **LoadLibrary** with the appropriate DTWAIN DLL name.  If the DLL is found at runtime, the **InitDTWAINInterface** is called with the address of the API instance and the returned module handle from the **LoadLibrary** call.
+
+The **InitDTWAINInterface** function fills the API instance with all of the function pointers that exist in the DLL, where each function pointer matches the name of the DTWAIN function.  Basically, all of the calls to **GetProcAddress** that you would have had to normally write is taken care of in the **InitDTWAINInterface** function.  From there, all you have to do is preface all the DTWAIN calls with **API_INSTANCE**, since it will either be **API.** or blank, depending on whether the **USING_LOADLIBRARY** was defined.
 
 ----------
 
