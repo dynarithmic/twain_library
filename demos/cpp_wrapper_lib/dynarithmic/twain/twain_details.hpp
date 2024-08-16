@@ -21,10 +21,10 @@ OF THIRD PARTY RIGHTS.
 
 #ifndef DTWAIN_TWAIN_DETAILS_HPP
 #define DTWAIN_TWAIN_DETAILS_HPP
-
-#pragma warning( push )  // Stores the current warning state for every warning.
-#pragma warning( disable:4996)
-
+#ifdef _MSC_VER
+    #pragma warning( push )  // Stores the current warning state for every warning.
+    #pragma warning( disable:4996)
+#endif
 namespace dynarithmic
 {
     namespace twain
@@ -40,5 +40,7 @@ namespace dynarithmic
     }
 }
 
-#pragma warning(pop)
+#ifdef _MSC_VER
+    #pragma warning(pop)
+#endif
 #endif

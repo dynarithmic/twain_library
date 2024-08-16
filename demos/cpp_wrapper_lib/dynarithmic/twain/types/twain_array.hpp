@@ -20,13 +20,14 @@ OF THIRD PARTY RIGHTS.
 */
 #ifndef DTWAIN_TWAIN_ARRAY_HPP
 #define DTWAIN_TWAIN_ARRAY_HPP
-#pragma warning (push)
-#pragma warning (disable: 4996)
-#pragma warning (disable: 4800)
+#ifdef _MSC_VER
+    #pragma warning (push)
+    #pragma warning (disable: 4996)
+    #pragma warning (disable: 4800)
+#endif
 #include <array>
 #include <algorithm>
 #include <string>
-#include <exception>
 #include <stdexcept>
 #include <dtwain.h>
 #include <dynarithmic/twain/types/twain_frame.hpp>
@@ -378,5 +379,7 @@ namespace dynarithmic
 
     }
 }
+#ifdef _MSC_VER
 #pragma warning (pop)
+#endif
 #endif

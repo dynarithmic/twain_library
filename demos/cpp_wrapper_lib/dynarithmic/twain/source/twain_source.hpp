@@ -84,6 +84,7 @@ namespace dynarithmic
                 }
                 twain_source& operator=(twain_source&& rhs) noexcept;
                 twain_source(const source_select_info& select_info = source_select_info());
+                twain_source& operator=(const source_select_info& select_info);
 
                 ~twain_source() noexcept;
 

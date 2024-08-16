@@ -215,7 +215,7 @@ namespace dynarithmic
                         pdf_page_scale m_pagescale;
                         custom_scale_type m_pagescale_custom;
                     public:
-                        static constexpr double default_scale = DBL_MAX;
+                        static constexpr double default_scale = (std::numeric_limits<double>::max)();
 
                         pdf_page_scale_options() : m_pagescale(pdf_page_scale::none),
                                                    m_pagescale_custom({ default_scale, default_scale }) {}

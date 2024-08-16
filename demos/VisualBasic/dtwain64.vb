@@ -1590,6 +1590,10 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWCT As Integer = 45
     Public Const DTWAIN_CONSTANT_TWPS As Integer = 46
     Public Const DTWAIN_CONSTANT_TWSS As Integer = 47
+    Public Const DTWAIN_CONSTANT_TWPH As Integer = 48
+    Public Const DTWAIN_CONSTANT_TWCI As Integer = 49
+    Public Const DTWAIN_USERRES_START As Integer = 20000
+    Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
 
     Public Delegate Function DTwainCallback( ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Integer) As Integer
     Public Delegate Function DTwainCallback64( ByVal WParam As Integer, ByVal LParam As Integer, ByVal UserData As Long) As Integer
@@ -2173,6 +2177,7 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_GetDSMFullNameA Lib "dtwain64.dll" (ByVal DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, ByVal nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
     Declare Ansi Function DTWAIN_GetDeviceTimeDateA Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
     Declare Ansi Function DTWAIN_GetErrorStringA Lib "dtwain64.dll" (ByVal lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetResourceStringA Lib "dtwain64.dll" (ByVal lResource As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, ByVal nLength As Integer) As Integer
     Declare Ansi Function DTWAIN_GetExtCapFromNameA Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPStr)> szName As String) As Integer
     Declare Ansi Function DTWAIN_GetExtNameFromCapA Lib "dtwain64.dll" (ByVal nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, ByVal nLength As Integer) As Integer
     Declare Ansi Function DTWAIN_GetHalftoneA Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, ByVal lGetType As Integer) As Integer
@@ -2297,6 +2302,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetDSMFullNameW Lib "dtwain64.dll" (ByVal DSMType As Integer, <MarshalAs(UnmanagedType.LPWStr)> szDLLName As StringBuilder, ByVal nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
     Declare Unicode Function DTWAIN_GetDeviceTimeDateW Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
     Declare Unicode Function DTWAIN_GetErrorStringW Lib "dtwain64.dll" (ByVal lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetResourceStringW Lib "dtwain64.dll" (ByVal lResource As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, ByVal nLength As Integer) As Integer
     Declare Unicode Function DTWAIN_GetExtCapFromNameW Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPWStr)> szName As String) As Integer
     Declare Unicode Function DTWAIN_GetExtNameFromCapW Lib "dtwain64.dll" (ByVal nValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, ByVal nLength As Integer) As Integer
     Declare Unicode Function DTWAIN_GetHalftoneW Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpHalftone As StringBuilder, ByVal lGetType As Integer) As Integer
@@ -2434,6 +2440,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetDSMFullName Lib "dtwain64.dll" (ByVal DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, ByVal nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
     Declare Auto Function DTWAIN_GetDeviceTimeDate Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
     Declare Auto Function DTWAIN_GetErrorString Lib "dtwain64.dll" (ByVal lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, ByVal nMaxLen As Integer) As Integer
+    Declare Auto Function DTWAIN_GetResourceString Lib "dtwain64.dll" (ByVal lResource As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, ByVal nMaxLen As Integer) As Integer
     Declare Auto Function DTWAIN_GetExtCapFromName Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPTStr)> szName As String) As Integer
     Declare Auto Function DTWAIN_GetExtNameFromCap Lib "dtwain64.dll" (ByVal nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, ByVal nMaxLen As Integer) As Integer
     Declare Auto Function DTWAIN_GetHalftone Lib "dtwain64.dll" (ByVal Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, ByVal lGetType As Integer) As Integer
@@ -2550,6 +2557,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetVersionString Lib "dtwain64.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
     Declare Auto Function DTWAIN_StartTwainSession Lib "dtwain64.dll" (ByVal hWndMsg As System.IntPtr, ByVal sz As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_CallDSMProc Lib "dtwain64.dll" (ByRef source As TW_IDENTITY, ByRef app As TW_IDENTITY, ByVal lDG As Integer, ByVal lDAT As Integer, ByVal lMSG As Integer, ByVal pData As System.IntPtr) As Integer
+
     Declare Auto Function DTWAIN_EnumSupportedSinglePageFileTypes Lib "dtwain64.dll" () As System.IntPtr
     Declare Auto Function DTWAIN_EnumSupportedMultiPageFileTypes Lib "dtwain64.dll" () As System.IntPtr
     Declare Ansi Function DTWAIN_GetTwainNameFromConstantA Lib "dtwain64.dll" (ByVal constant_type As Integer, ByVal constant_val As Integer, <MarshalAs(UnmanagedType.LPStr)> constant_name As StringBuilder, ByVal nSize As Integer) As Integer
