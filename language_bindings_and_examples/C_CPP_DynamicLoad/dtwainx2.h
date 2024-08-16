@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2023 Dynarithmic Software.
+    Copyright (c) 2002-2024 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@
 
 #include <dtwainc.h>
 #include <capconst.h>
-#include <commdlg.h>
+#ifdef _WIN32
+    #include <commdlg.h>
+#endif
 #include <twain.h>
 #include <winconst.h>
 #include <dtwaindefs.h>
@@ -275,7 +277,7 @@ typedef LONG (DLLENTRY_DEF * D_GETCOUNTRYFUNC)                                  
 typedef HANDLE (DLLENTRY_DEF * D_GETCURRENTACQUIREDIMAGEFUNC)                   (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETCURRENTPAGENUMFUNC)                           (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETCURRENTRETRYCOUNTFUNC)                        (DTWAIN_SOURCE);
-typedef HANDLE (DLLENTRY_DEF * D_GETCUSTOMDSDATAFUNC)                           (DTWAIN_SOURCE, LONG, LPLONG, LONG);
+typedef HANDLE (DLLENTRY_DEF * D_GETCUSTOMDSDATAFUNC)                           (DTWAIN_SOURCE, LPBYTE, LONG, LPLONG, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETDSMSEARCHORDERFUNC)                           (VOID_PROTOTYPE);
 typedef DTWAIN_HANDLE (DLLENTRY_DEF * D_GETDTWAINHANDLEFUNC)                    (VOID_PROTOTYPE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETDEVICEEVENTFUNC)                       (DTWAIN_SOURCE, LPLONG);
@@ -493,7 +495,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCOMPRESSIONTYPEFUNC)                   
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCONTRASTFUNC)                          (DTWAIN_SOURCE, DTWAIN_FLOAT);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCOUNTRYFUNC)                           (LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCURRENTRETRYCOUNTFUNC)                 (DTWAIN_SOURCE, LONG);
-typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCUSTOMDSDATAFUNC)                      (DTWAIN_SOURCE, HANDLE, LONG, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCUSTOMDSDATAFUNC)                      (DTWAIN_SOURCE, HANDLE, LPCBYTE, LONG, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETCUSTOMFILESAVEFUNC)                    (OPENFILENAME*);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETDSMSEARCHORDERFUNC)                    (LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETDEFAULTSOURCEFUNC)                     (DTWAIN_SOURCE);
@@ -610,6 +612,7 @@ typedef LONG (DLLENTRY_DEF * D_GETCURRENTFILENAMEAFUNC)                         
 typedef LONG (DLLENTRY_DEF * D_GETDSMFULLNAMEAFUNC)                             (LONG, LPSTR, LONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETDEVICETIMEDATEAFUNC)                   (DTWAIN_SOURCE, LPSTR);
 typedef LONG (DLLENTRY_DEF * D_GETERRORSTRINGAFUNC)                             (LONG, LPSTR, LONG);
+typedef LONG (DLLENTRY_DEF * D_GETRESOURCESTRINGAFUNC)                          (LONG, LPSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEAFUNC)                          (LPCSTR);
 typedef LONG (DLLENTRY_DEF * D_GETEXTNAMEFROMCAPAFUNC)                          (LONG, LPSTR, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETHALFTONEAFUNC)                         (DTWAIN_SOURCE, LPSTR, LONG);
@@ -733,6 +736,7 @@ typedef LONG (DLLENTRY_DEF * D_GETCURRENTFILENAMEWFUNC)                         
 typedef LONG (DLLENTRY_DEF * D_GETDSMFULLNAMEWFUNC)                             (LONG, LPWSTR, LONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETDEVICETIMEDATEWFUNC)                   (DTWAIN_SOURCE, LPWSTR);
 typedef LONG (DLLENTRY_DEF * D_GETERRORSTRINGWFUNC)                             (LONG, LPWSTR, LONG);
+typedef LONG (DLLENTRY_DEF * D_GETRESOURCESTRINGWFUNC)                          (LONG, LPWSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEWFUNC)                          (LPCWSTR);
 typedef LONG (DLLENTRY_DEF * D_GETEXTNAMEFROMCAPWFUNC)                          (LONG, LPWSTR, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETHALFTONEWFUNC)                         (DTWAIN_SOURCE, LPWSTR, LONG);
@@ -870,6 +874,7 @@ typedef LONG (DLLENTRY_DEF * D_GETCURRENTFILENAMEFUNC)                          
 typedef LONG (DLLENTRY_DEF * D_GETDSMFULLNAMEFUNC)                              (LONG, LPTSTR, LONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETDEVICETIMEDATEFUNC)                    (DTWAIN_SOURCE, LPTSTR);
 typedef LONG (DLLENTRY_DEF * D_GETERRORSTRINGFUNC)                              (LONG, LPTSTR, LONG);
+typedef LONG (DLLENTRY_DEF * D_GETRESOURCESTRINGFUNC)                           (LONG, LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEFUNC)                           (LPCTSTR);
 typedef LONG (DLLENTRY_DEF * D_GETEXTNAMEFROMCAPFUNC)                           (LONG, LPTSTR, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETHALFTONEFUNC)                          (DTWAIN_SOURCE, LPTSTR, LONG);
@@ -1378,6 +1383,9 @@ typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTDEFAULTSOURCEWITHOPENFUNC)         
     STATIC D_GETERRORSTRINGAFUNC                            DTWAIN_GetErrorStringA;
     STATIC D_GETERRORSTRINGFUNC                             DTWAIN_GetErrorString;
     STATIC D_GETERRORSTRINGWFUNC                            DTWAIN_GetErrorStringW;
+    STATIC D_GETRESOURCESTRINGAFUNC                         DTWAIN_GetResourceStringA;
+    STATIC D_GETRESOURCESTRINGFUNC                          DTWAIN_GetResourceString;
+    STATIC D_GETRESOURCESTRINGWFUNC                         DTWAIN_GetResourceStringW;
     STATIC D_GETEXTCAPFROMNAMEAFUNC                         DTWAIN_GetExtCapFromNameA;
     STATIC D_GETEXTCAPFROMNAMEFUNC                          DTWAIN_GetExtCapFromName;
     STATIC D_GETEXTCAPFROMNAMEWFUNC                         DTWAIN_GetExtCapFromNameW;
@@ -1975,7 +1983,7 @@ typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTDEFAULTSOURCEWITHOPENFUNC)         
     STATIC D_UNLOCKMEMORYFUNC                               DTWAIN_UnlockMemory;
     STATIC D_USEMULTIPLETHREADSFUNC                         DTWAIN_UseMultipleThreads;
 #ifdef __cplusplus
-        static int InitDTWAINInterface(HMODULE h);
+        static int InitDTWAINInterface(DYNDTWAIN_API*, HMODULE h);
 };
 #else
 } DYNDTWAIN_API;
