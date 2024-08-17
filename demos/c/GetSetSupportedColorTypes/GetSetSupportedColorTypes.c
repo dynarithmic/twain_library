@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include "dtwain.h"
 
-/* Pixel types supported by TWAIN */
-const char * pixelTypes[] = 
-        {"TWPT_BW", "TWPT_GRAY", "TWPT_RGB", "TWPT_PALETTE", "TWPT_CMY", "TWPT_CMYK", "TWPT_YUV",
-        "TWPT_YUVK", "TWPT_CIEXYZ", "TWPT_LAB", "TWPT_SRGB", "TWPT_SCRGB", "TWPT_BGR","TWPT_CIELAB",
-        "TWPT_CIELUV", "TWPT_YCBCR", "TWPT_INFRARED","TWPT_DEFAULT"};
-
 int GetColorTypes()
 {
     char pixelTypeName[255];

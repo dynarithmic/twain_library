@@ -56,6 +56,18 @@ int GetSetCapabilitiesDemo()
     /* See if the current value actually has been set */
     DTWAIN_ARRAY retArray;
     DTWAIN_GetCapValues(theSource, DTWAIN_CV_ICAPSUPPORTEDSIZES,DTWAIN_CAPGETCURRENT,&retArray);
+    
+    if (DTWAIN_ArrayGetCount(retArray) > 0)
+    {
+        LONG testValue;
+        DTWAIN_ArrayGetAtLong(retArray, 0, &testValue);
+        if (testValue == firstValue)
+        {
+            char szName[256];
+            DTWAIN_GetPaperSizeNameA(testValue, szName, 256);
+            printf("The current page size is: %s\n", szName);
+        }
+    }
 
     /* Test if the CAP_SERIALNUMBER capability is supported */
     if (DTWAIN_IsCapSupported(theSource, DTWAIN_CV_CAPSERIALNUMBER))
