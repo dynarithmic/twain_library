@@ -33,9 +33,11 @@
 #include <assert.h>
 #ifdef _WIN32
     #include <commdlg.h>
-    #pragma warning (push)
-    #pragma warning (disable:4113)
-    #pragma warning (disable:4047)
+    #ifdef _MSC_VER
+        #pragma warning (push)
+        #pragma warning (disable:4113)
+        #pragma warning (disable:4047)
+    #endif
 #endif
 
 /* declare function pointers */
@@ -2031,5 +2033,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
     }
     return 1;
 }
-#pragma warning (pop)
-
+#ifdef _MSC_VER
+    #pragma warning (pop)
+#endif
