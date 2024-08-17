@@ -30,6 +30,7 @@
 #include <winconst.h>
 #include <dtwaindefs.h>
 #include <dtwain_version.h>
+#include <dtwpdft.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

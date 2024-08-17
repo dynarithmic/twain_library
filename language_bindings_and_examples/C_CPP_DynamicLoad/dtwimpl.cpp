@@ -38,6 +38,10 @@
         #pragma warning (disable:4113)
         #pragma warning (disable:4047)
     #endif
+    #ifdef __GNUC__
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wcast-function-type"
+     #endif
 #endif
 
 /* declare function pointers */
@@ -2036,3 +2040,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
 #ifdef _MSC_VER
     #pragma warning (pop)
 #endif
+#ifdef __GNUC__
+    #pragma GCC diagnostic pop
+#endif
+
