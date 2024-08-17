@@ -25,7 +25,7 @@ SET BOOST_INCLUDE_DIR = c:\boost_installation
 and the directory c:\boost_installation should have a folder called **boost** which would be the root of the  header files.
 
 ----
-### Running the C++ demos
+### Running the demos
 
 1) Make sure that the [DTWAIN DLL's](https://github.com/dynarithmic/twain_library/tree/master/binaries) are available (system PATH, your exe directory, etc.) when the demo program you are running starts.  A missing DLL will result in a "Dynamic Link Library not found" error at runtime.
 
