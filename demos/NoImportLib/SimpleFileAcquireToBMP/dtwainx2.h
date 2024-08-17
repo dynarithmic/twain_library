@@ -24,12 +24,13 @@
 #include <dtwainc.h>
 #include <capconst.h>
 #ifdef _WIN32
-    #include <commdlg.h>
+   #include <commdlg.h>
 #endif
 #include <twain.h>
 #include <winconst.h>
 #include <dtwaindefs.h>
 #include <dtwain_version.h>
+#include <dtwpdft.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

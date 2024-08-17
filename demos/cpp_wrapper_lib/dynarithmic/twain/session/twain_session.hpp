@@ -180,7 +180,7 @@ namespace dynarithmic
             source_select_type m_selectType = use_legacy;
             twain_select_dialog m_useEnhancedDialog;
             std::string m_sourceName;
-            bool m_selectDefault;
+            bool m_selectDefault = false;
 
             select_source_traits& set_select_type(source_select_type sType) { m_selectType = sType; return *this; }
             select_source_traits& set_enhanced_dialog(twain_select_dialog& dlg) { m_useEnhancedDialog = dlg; return *this; }
@@ -712,7 +712,7 @@ namespace dynarithmic
                 }
                 bool isCanceled = false;
                 DTWAIN_SOURCE ret = nullptr;
-                if (selector.value == select_type::use_dialog)
+                if (static_cast<int>(selector.value) == static_cast<int>(select_type::use_dialog))
                 {
                     auto dlg = selector.get_dialog();
                     ret = select_source_impl(selector, dlg, open_source);

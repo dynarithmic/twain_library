@@ -25,7 +25,8 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/info/paperhandling_info.hpp>
 #include <dynarithmic/twain/types/twain_timer.hpp>
 #include <dynarithmic/twain/source/twain_source_pimpl.hpp>
-
+#include <chrono>
+#include <thread>
 namespace dynarithmic
 {
 	namespace twain
@@ -705,7 +706,7 @@ namespace dynarithmic
                 for (size_t j = 0; j < image_count; ++j)
                     ih.push_back_image(handleBuffer[j]);
             }
-            return std::move(ih);
+            return ih;
         }
 
         std::vector<twain_source::custom_data_type> twain_source::get_custom_data() const
