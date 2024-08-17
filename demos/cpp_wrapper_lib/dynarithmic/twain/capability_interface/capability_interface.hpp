@@ -120,14 +120,15 @@ namespace twain {
     {
          public:
     
-        capability_interface(capability_interface&& rhs) noexcept :  m_caps(std::move(rhs.m_caps)),
+        capability_interface(capability_interface&& rhs) noexcept :
+                          m_Source(rhs.m_Source),
+                          m_caps(std::move(rhs.m_caps)),
                           m_custom_caps(std::move(rhs.m_custom_caps)),
                           m_extended_caps(std::move(rhs.m_extended_caps)),
                           m_extendedimage_caps(std::move(rhs.m_extendedimage_caps)),
                           m_cap_cache(std::move(rhs.m_cap_cache)),
-                          m_return_type(std::move(rhs.m_return_type)),
                           m_cacheable_set(std::move(rhs.m_cacheable_set)),
-                          m_Source(rhs.m_Source)
+                          m_return_type(std::move(rhs.m_return_type))
         {
             rhs.m_Source = nullptr;
         }

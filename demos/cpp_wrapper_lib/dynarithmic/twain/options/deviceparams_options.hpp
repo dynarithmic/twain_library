@@ -21,12 +21,10 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_DEVICEPARAMS_OPTIONS_HPP
 #define DTWAIN_DEVICEPARAMS_OPTIONS_HPP
 
-#include <vector>
-#include <string>
 #include <array>
 
 #include <dynarithmic/twain/twain_values.hpp>
-
+#include <dynarithmic/twain/types/twain_capbasics.hpp>
 namespace dynarithmic
 {
     namespace twain
@@ -50,7 +48,8 @@ namespace dynarithmic
                     m_ImageFilter(imagefilter_value::default_val), m_lightpath(lightpath_value::default_val),
                     m_filmType(filmtype_value::default_val), m_lightsource(lightsource_value::default_val),
                     m_noisefilter(noisefilter_value::default_val), m_overscan(overscan_value::default_val),
-                    m_zoomFactor((std::numeric_limits<capability_type::zoomfactor_type>::min)()), m_unitvalue(units_value::default_val) {}
+                    m_unitvalue(units_value::default_val),
+                    m_zoomFactor((std::numeric_limits<capability_type::zoomfactor_type>::min)())  {}
 
                 deviceparams_options& set_exposuretime(double exptime)
                 { m_ExposureTime = exptime; return *this; }

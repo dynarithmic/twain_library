@@ -174,6 +174,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "No Import Lib", "No Import 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleFileAcquireToBMP", "NoImportLib\SimpleFileAcquireToBMP\SimpleFileAcquireToBMP.vcxproj", "{B6B58489-1A28-4DD9-B070-38DBF112C7DA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestImageFileCreation", "cpp_wrapper\TestImageFileCreation\TestImageFileCreation.vcxproj", "{6695B037-1585-4567-B349-21988A5F1182}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -590,6 +592,14 @@ Global
 		{B6B58489-1A28-4DD9-B070-38DBF112C7DA}.Release|x64.Build.0 = Release|x64
 		{B6B58489-1A28-4DD9-B070-38DBF112C7DA}.Release|x86.ActiveCfg = Release|Win32
 		{B6B58489-1A28-4DD9-B070-38DBF112C7DA}.Release|x86.Build.0 = Release|Win32
+		{6695B037-1585-4567-B349-21988A5F1182}.Debug|x64.ActiveCfg = Debug|x64
+		{6695B037-1585-4567-B349-21988A5F1182}.Debug|x64.Build.0 = Debug|x64
+		{6695B037-1585-4567-B349-21988A5F1182}.Debug|x86.ActiveCfg = Debug|Win32
+		{6695B037-1585-4567-B349-21988A5F1182}.Debug|x86.Build.0 = Debug|Win32
+		{6695B037-1585-4567-B349-21988A5F1182}.Release|x64.ActiveCfg = Release|x64
+		{6695B037-1585-4567-B349-21988A5F1182}.Release|x64.Build.0 = Release|x64
+		{6695B037-1585-4567-B349-21988A5F1182}.Release|x86.ActiveCfg = Release|Win32
+		{6695B037-1585-4567-B349-21988A5F1182}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -645,6 +655,7 @@ Global
 		{80449DFA-4000-4DD7-A981-467D31D7D2DB} = {03F1957A-5358-4DE0-A56F-EB0DD11D3540}
 		{9314D071-38B6-40A5-84C4-146F71A368A5} = {03F1957A-5358-4DE0-A56F-EB0DD11D3540}
 		{B6B58489-1A28-4DD9-B070-38DBF112C7DA} = {95E48B0F-A4EB-4463-8437-4137C7F6BA84}
+		{6695B037-1585-4567-B349-21988A5F1182} = {03F1957A-5358-4DE0-A56F-EB0DD11D3540}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40217B6C-1B1F-4883-8669-B59E7D62CB06}

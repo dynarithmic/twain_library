@@ -23,10 +23,11 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/logging/logger_callback.hpp>
 #include <dynarithmic/twain/twain_source.hpp>
 #include <dynarithmic/twain/utilities/string_utilities.hpp>
+#include <chrono>
+#include <thread>
 
 #if __cplusplus >= 201703L
     #include <numeric>
-    #include <sstream>
     #include <algorithm>
     #define USE_CPPSTRING_FUNCS 
     #define join_strings_ dynarithmic::twain::join
@@ -89,8 +90,6 @@ namespace dynarithmic
                     return false;
                 }
             }
-
-            const void* ptr = reinterpret_cast<const void*>(this);
 
             API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this)); 
             API_INSTANCE DTWAIN_LoadCustomStringResourcesA(m_twain_characteristics.get_language().c_str());

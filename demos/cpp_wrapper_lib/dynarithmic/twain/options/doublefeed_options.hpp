@@ -48,11 +48,16 @@ namespace dynarithmic
 
             public:
                 doublefeed_options& set_responses(doublefeedresponse_value::value_type v)
-                { return set_responses({v}); }
+                { 
+                    std::vector<doublefeedresponse_value::value_type> vtemp {v};
+                    return set_responses(vtemp); 
+                }
 
-                doublefeed_options() : m_detection(doublefeeddetection_value::default_val),
-                                                           m_sensitivity(doublefeedsensitivity_value::default_val),
-                                                           m_length((std::numeric_limits<double>::min)()), m_bEnable(false) {}
+                doublefeed_options() : m_bEnable(false),
+                                       m_detection(doublefeeddetection_value::default_val),
+                                       m_length((std::numeric_limits<double>::min)()),
+                                       m_sensitivity(doublefeedsensitivity_value::default_val)
+                {}
 
                 doublefeed_options& enable(bool bEnable = true) { m_bEnable = bEnable; return *this; }
                 bool is_enabled() const { return m_bEnable; }

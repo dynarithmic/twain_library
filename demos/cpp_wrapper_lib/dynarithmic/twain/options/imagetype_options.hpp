@@ -22,11 +22,11 @@ OF THIRD PARTY RIGHTS.
 #define DTWAIN_IMAGETYPE_OPTIONS_HPP
 
 #include <vector>
-#include <iterator>
 #include <string>
 #include <array>
 #include <algorithm>
 #include <dynarithmic/twain/twain_values.hpp>
+#include <dynarithmic/twain/types/twain_types.hpp>
 
 namespace dynarithmic
 {
@@ -52,14 +52,14 @@ namespace dynarithmic
 
             public:
                 imagetype_options() : m_BitDepth(0),
-                                    m_bNegateImage(false),
+                                    m_PixelType(color_value::default_color),
                                     m_BitDepthReduction(bitdepthreduction_value::default_val),
                                     m_BitOrderValue(bitorder_value::default_val),
                                     m_PixelFlavor(pixelflavor_value::chocolate),
-                                    m_PixelType(color_value::default_color),
-                                    m_bCustomHalfToneEnabled(false),
                                     m_Threshold(default_threshold),
-                                    m_nJPegQuality(m_nJPegQuality) {}
+                                    m_bNegateImage(false),
+                                    m_bCustomHalfToneEnabled(false),
+                                    m_nJPegQuality(default_jpegquality) {}
 
                 imagetype_options& enable_customhalftones(bool bEnable = true) { m_bCustomHalfToneEnabled = bEnable; return *this; }
                 bool is_customhalftones_enabled() const { return m_bCustomHalfToneEnabled; }
