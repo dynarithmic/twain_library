@@ -1020,6 +1020,11 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
 #endif
 #ifdef __cplusplus
     #define DTWAIN_INSTANCE DYNDTWAIN_API::
+    int DYNDTWAIN_API::InitDTWAINInterface(HMODULE hModule)
+    {
+        return InitDTWAINInterface(nullptr, hModule);
+    }
+
     int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
     {
 #else
