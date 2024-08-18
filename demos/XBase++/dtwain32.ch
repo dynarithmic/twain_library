@@ -1,25 +1,28 @@
 //////////////////////////////////////////////////////////////////////
 //    This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-//    Copyright (c) 2002-2019 Dynarithmic Software.
-// 
+//    Copyright (c) 2002-2024 Dynarithmic Software.
+//
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
 //
 //        http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
-//    limitations under the License. 
-// 
+//    limitations under the License.
+//
 //    FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
 //    DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
 //    OF THIRD PARTY RIGHTS.
 //
-#ifndef _DTWAIN32UD_CH
-#define _DTWAIN32UD_CH
+#ifndef _DTWAIN32_CH
+#define _DTWAIN32_CH
+
+#define DTWAIN_TRUE           1
+#define DTWAIN_FALSE          0
 
 #define DTWAIN_FF_TIFF        0
 #define DTWAIN_FF_PICT        1
@@ -37,6 +40,9 @@
 #define DTWAIN_FF_DEJAVU      14
 #define DTWAIN_FF_PDFA        15
 #define DTWAIN_FF_PDFA2       16
+#define DTWAIN_FF_PDFRASTER   17
+
+/* Compression Types for buffered and file transfers */
 #define DTWAIN_CP_NONE        0
 #define DTWAIN_CP_PACKBITS    1
 #define DTWAIN_CP_GROUP31D    2
@@ -50,8 +56,13 @@
 #define DTWAIN_CP_RLE4        10
 #define DTWAIN_CP_RLE8        11
 #define DTWAIN_CP_BITFIELDS   12
-#define DTWAIN_CP_ZIP		  13  
+#define DTWAIN_CP_ZIP         13
 #define DTWAIN_CP_JPEG2000    14
+
+
+/* Frame Sizes.  Same as TWAIN 1.8.  Use these values for
+   setting the frame size, or to specify a PDF page size
+   if acquiring to PDF files */
 #define DTWAIN_FS_NONE        0
 #define DTWAIN_FS_A4LETTER    1
 #define DTWAIN_FS_B5LETTER    2
@@ -110,11 +121,17 @@
 #define DTWAIN_FS_C10          51
 #define DTWAIN_FS_USSTATEMENT  52
 #define DTWAIN_FS_BUSINESSCARD 53
+
+
+/* Parameter used when any support is desired */
 #define DTWAIN_ANYSUPPORT   (-1)
+
 #define DTWAIN_BMP          100   /* Windows BMP file */
-#define DTWAIN_JPEG         200   /* JPEG - See DTWAIN_SetJPEGQuality  */
+#define DTWAIN_JPEG         200   /* JPEG - See DTWAIN_SetJpegValues  */
+
 #define DTWAIN_PDF          250   /* Adobe Acrobat PDF File */
 #define DTWAIN_PDFMULTI     251   /* Multi-page PDF file */
+
 #define DTWAIN_PCX          300   /* ZSoft file */
 #define DTWAIN_DCX          301   /* Multi-page PCX file */
 #define DTWAIN_TGA          400   /* TARGA */
@@ -124,7 +141,7 @@
 #define DTWAIN_TIFFG4       800   /* Group 4 CCITT Tiff (FAX format) */
 #define DTWAIN_TIFFPACKBITS 801   /* Huffman encoded Tiff */
 #define DTWAIN_TIFFDEFLATE  802   /* TIFF packed with z-lib encoded data*/
-#define DTWAIN_TIFFJPEG     803   /* See DTWAIN_SetJPEGQuality  */
+#define DTWAIN_TIFFJPEG     803
 #define DTWAIN_TIFFJBIG     804   /* TIFF-JBIG compression (not implemented due to patent) */
 #define DTWAIN_TIFFPIXARLOG 805   /* TIFF Pixar Log compression (not implemented )*/
 #define DTWAIN_TIFFNONEMULTI  900 /* Multi-page TIFF, No compression by default */
@@ -134,7 +151,7 @@
 #define DTWAIN_TIFFDEFLATEMULTI   904   /* Multi-pageTIFF, zlib compression */
 #define DTWAIN_TIFFJPEGMULTI   905   /* Multi-pageTIFF, JPEG compression */
 #define DTWAIN_TIFFLZWMULTI 906   /* Multi-page TIFF, LZW compression */
-#define DTWAIN_TIFFJBIGMULTI 907  /* Multi-page TIFF, JBIG compression (not implememnted due to patent) */
+#define DTWAIN_TIFFJBIGMULTI 907  /* Multi-page TIFF, JBIG compression (not implememted due to patent) */
 #define DTWAIN_TIFFPIXARLOGMULTI 908   /* Multi-page TIFF Pixar Log compression (not implemented )*/
 #define DTWAIN_WMF          850   /* Windows meta-file */
 #define DTWAIN_EMF          851   /* Enhanced Windows meta-file */
@@ -142,31 +159,51 @@
 #define DTWAIN_PNG          1000  /* Portable Network Graphics */
 #define DTWAIN_PSD          2000  /* Adobe Photoshop PSD file */
 #define DTWAIN_JPEG2000     3000  /* JPEG-2000 file */
-#define DTWAIN_POSTSCRIPT1  4000  /* Postcript Level 1 */
-#define DTWAIN_POSTSCRIPT2  4001  /* Postcript Level 2 */
-#define DTWAIN_POSTSCRIPT3  4002  /* Postcript Level 3 */
-#define DTWAIN_POSTSCRIPT1MULTI  4003  /* Postcript Level 1 Multipage */
-#define DTWAIN_POSTSCRIPT2MULTI  4004  /* Postcript Level 2 Multipage */
-#define DTWAIN_POSTSCRIPT3MULTI  4005  /* Postcript Level 3 Multipage */
+#define DTWAIN_POSTSCRIPT1  4000  /* Postscript Level 1 */
+#define DTWAIN_POSTSCRIPT2  4001  /* Postscript Level 2 */
+#define DTWAIN_POSTSCRIPT3  4002  /* Postscript Level 3 */
+#define DTWAIN_POSTSCRIPT1MULTI  4003  /* Postscript Level 1 Multipage */
+#define DTWAIN_POSTSCRIPT2MULTI  4004  /* Postscript Level 2 Multipage */
+#define DTWAIN_POSTSCRIPT3MULTI  4005  /* Postscript Level 3 Multipage */
 #define DTWAIN_TEXT              6000  /* Text file produced from OCR */
 #define DTWAIN_TEXTMULTI         6001  /* Multi-page text file */
 #define DTWAIN_TIFFMULTI         7000  /* Only to be used for standalone OCR engines */
 #define DTWAIN_ICO               8000  /* Windows ICO (icon) format */
 #define DTWAIN_ICO_VISTA         8001  /* Windows ICO (icon) format for Vista and above OS */
-#define DTWAIN_WBMP              8500  /* Wireless Bitmap (WAP) format */
+#define DTWAIN_ICO_RESIZED       8002  /* Windows ICO (icon) format for bitmaps with height > 255 or width > 255 pixels */
+#define DTWAIN_WBMP              8500  /* Wireless Bitmap (WBMP) format */
+#define DTWAIN_WEBP              8501  /* Google webp format */
+#define DTWAIN_PCD               9000  /* Kodak PCD */
+#define DTWAIN_PBM               10000 /* Portable bitmap*/
+#define DTWAIN_PPM               DTWAIN_PBM /* Portable bitmap*/
+#define DTWAIN_WBMP_RESIZED      11000 /* Wireless Bitmap (WBMP) format for bitmaps with height > 255 or width > 255 pixels */
+#define DTWAIN_TGA_RLE           11001 /* Targa with Run Length Encoding */
+#define DTWAIN_BMP_RLE           11002 /* BMP with Run Length Encoding */
+
+/* Units of measure */
 #define DTWAIN_INCHES      0
 #define DTWAIN_CENTIMETERS 1
 #define DTWAIN_PICAS       2
 #define DTWAIN_POINTS      3
 #define DTWAIN_TWIPS       4
 #define DTWAIN_PIXELS      5
-#define DTWAIN_USENAME            4
-#define DTWAIN_USEPROMPT          8
-#define DTWAIN_USELONGNAME        16
-#define DTWAIN_USESOURCEMODE      32
-#define DTWAIN_USELIST            64
+#define DTWAIN_MILLIMETERS 6
+
+/* File Acquire flags */
+#define DTWAIN_USENATIVE           1
+#define DTWAIN_USEBUFFERED         2
+#define DTWAIN_USECOMPRESSION      4
+#define DTWAIN_USEMEMFILE          8
+#define DTWAIN_USENAME            16
+#define DTWAIN_USEPROMPT          32
+#define DTWAIN_USELONGNAME        64
+#define DTWAIN_USESOURCEMODE      128
+#define DTWAIN_USELIST            256
+#define DTWAIN_CREATE_DIRECTORY   512
+
+
+/* DTWAIN_ARRAY types */
 #define DTWAIN_ARRAYANY             1
-#define DTWAIN_ArrayTypePTR         1
 #define DTWAIN_ARRAYLONG            2
 #define DTWAIN_ARRAYFLOAT           3
 #define DTWAIN_ARRAYHANDLE          4
@@ -176,62 +213,111 @@
 #define DTWAIN_ARRAYBOOL            DTWAIN_ARRAYLONG
 #define DTWAIN_ARRAYLONGSTRING      8
 #define DTWAIN_ARRAYUNICODESTRING   9
-#define DTWAIN_ARRAYLONG64			10
+#define DTWAIN_ARRAYLONG64          10
+#define DTWAIN_ArrayTypePTR         DTWAIN_ARRAYHANDLE
+#define DTWAIN_ARRAYOFHANDLEARRAYS  2000
+/* Same string type as DTWAIN_ARRAYSTRING
+   if compiling non-UNICODE (MBCS) applications */
 #define DTWAIN_ARRAYANSISTRING      11
+
+/* Same string type as DTWAIN_ARRAYSTRING
+   if compiling UNICODE applications */
 #define DTWAIN_ARRAYWIDESTRING      12
-#define DTWAIN_ARRAYTWFIX32         200  
+#define DTWAIN_ARRAYTWFIX32         200
+
 #define DTWAIN_ArrayTypeINVALID     0
+
+/* DTWAIN_ARRAY interpreted constants (used to distinguish integer types)
+   All integer types are stored as LONG or LONG64.  The interpreter is used to
+   let the app know what type of LONGs are stored (signed, unsigned, 16 bit signed
+   16-bit unsigned, BOOLs
+ */
 #define DTWAIN_ARRAYINT16         100
 #define DTWAIN_ARRAYUINT16        110
 #define DTWAIN_ARRAYUINT32        120
 #define DTWAIN_ARRAYINT32         130
-#define DTWAIN_ARRAYINT64		  140
+#define DTWAIN_ARRAYINT64         140
+
+/* DTWAIN_RANGE types */
 #define DTWAIN_RANGELONG      DTWAIN_ARRAYLONG
 #define DTWAIN_RANGEFLOAT     DTWAIN_ARRAYFLOAT
+
+/* DTWAIN_RANGE constants */
 #define DTWAIN_RANGEMIN     0
 #define DTWAIN_RANGEMAX     1
 #define DTWAIN_RANGESTEP    2
 #define DTWAIN_RANGEDEFAULT   3
 #define DTWAIN_RANGECURRENT   4
+
+/* DTWAIN_FRAME constants */
 #define DTWAIN_FRAMELEFT      0
 #define DTWAIN_FRAMETOP       1
 #define DTWAIN_FRAMERIGHT     2
 #define DTWAIN_FRAMEBOTTOM    3
+
+/* DTWAIN_FIX32 constants */
 #define DTWAIN_FIX32WHOLE     0
 #define DTWAIN_FIX32FRAC      1
+
+/* DTWAIN Job Control constants */
 #define DTWAIN_JC_NONE        0
 #define DTWAIN_JC_JSIC        1
 #define DTWAIN_JC_JSIS        2
 #define DTWAIN_JC_JSXC        3
 #define DTWAIN_JC_JSXS        4
+
+/* Constant used for unknown capability type */
 #define DTWAIN_CAPDATATYPE_UNKNOWN  (-10)
+
+/* These job control constants are for devices that do
+   not have TWAIN job control support */
 #define DTWAIN_JCBP_JSIC        5
 #define DTWAIN_JCBP_JSIS        6
 #define DTWAIN_JCBP_JSXC        7
 #define DTWAIN_JCBP_JSXS        8
+
+
+/* DTWAIN Feeder control constants */
 #define DTWAIN_FEEDPAGEON    1
 #define DTWAIN_CLEARPAGEON   2
 #define DTWAIN_REWINDPAGEON  4
+
+/* Source settings */
 #define DTWAIN_AppOwnsDib              1
 #define DTWAIN_SourceOwnsDib           2
+
+/* Container Types */
+/* Start at 2^3=8 since the TWAIN constants start at 3 and are contiguous */
 #define DTWAIN_CONTARRAY           8
 #define DTWAIN_CONTENUMERATION     16
 #define DTWAIN_CONTONEVALUE        32
 #define DTWAIN_CONTRANGE           64
 #define DTWAIN_CONTDEFAULT         0
+
+/* Get capability types */
 #define DTWAIN_CAPGET                1
 #define DTWAIN_CAPGETCURRENT         2
 #define DTWAIN_CAPGETDEFAULT         3
+
 #define DTWAIN_CAPSET                6 /* Set one or more values                   */
 #define DTWAIN_CAPRESET              7 /* Set current value to default value       */
 #define DTWAIN_CAPRESETALL           8 /* Reset all capabilities */
-#define DTWAIN_CAPSETCONSTRAINT		 9 /* constrain values */
+#define DTWAIN_CAPSETCONSTRAINT      9 /* constrain values */
+
+#define DTWAIN_CAPGETHELP            9
+#define DTWAIN_CAPGETLABEL           10
+#define DTWAIN_CAPGETLABELENUM       11
+
+/* The following values are ORed with the DTWAIN_CAPSET value */
 #define DTWAIN_CAPSETAVAILABLE       8  /* Sets available values  */
 #define DTWAIN_CAPSETCURRENT         16 /* Sets current values    */
+
 #define DTWAIN_AREASET               DTWAIN_CAPSET
 #define DTWAIN_AREARESET             DTWAIN_CAPRESET
 #define DTWAIN_AREACURRENT           DTWAIN_CAPGETCURRENT
 #define DTWAIN_AREADEFAULT           DTWAIN_CAPGETDEFAULT
+
+/* Twain version types */
 #define DTWAIN_VER15                0
 #define DTWAIN_VER16                1
 #define DTWAIN_VER17                2
@@ -239,12 +325,18 @@
 #define DTWAIN_VER20                4
 #define DTWAIN_VER21                5
 #define DTWAIN_VER22                6
+
+/* DTWAIN transfer */
 #define DTWAIN_ACQUIREALL            (-1)
 #define DTWAIN_MAXACQUIRE            (-1)
+
+/* DTWAIN Duplex constants */
 #define DTWAIN_DX_NONE         0
 #define DTWAIN_DX_1PASSDUPLEX  1
 #define DTWAIN_DX_2PASSDUPLEX  2
-#define DTWAIN_PT_BW      0 /* Black and White */
+
+/* Twain Pixel Types */
+#define DTWAIN_PT_BW      0
 #define DTWAIN_PT_GRAY    1
 #define DTWAIN_PT_RGB     2
 #define DTWAIN_PT_PALETTE 3
@@ -253,101 +345,250 @@
 #define DTWAIN_PT_YUV     6
 #define DTWAIN_PT_YUVK    7
 #define DTWAIN_PT_CIEXYZ  8
+#define DTWAIN_PT_LAB     9
+#define DTWAIN_PT_SRGB    10
+#define DTWAIN_PT_SCRGB   11
+#define DTWAIN_PT_INFRARED 16
 #define DTWAIN_PT_DEFAULT 1000
+
 #define DTWAIN_CURRENT     (-2)
 #define DTWAIN_DEFAULT     (-1)
 #define DTWAIN_FLOATDEFAULT (-9999.0)
+
+#define DTWAIN_DGNAME   0
+#define DTWAIN_DATNAME  1
+#define DTWAIN_MSGNAME  2
+
+/* DTWAIN Callback constants */
 #define DTWAIN_CallbackERROR      1
 #define DTWAIN_CallbackMESSAGE    2
-#define DTWAIN_USENATIVE      1
-#define DTWAIN_USEBUFFERED    2
-#define DTWAIN_USECOMPRESSION 4
+
+/* DTWAIN Special Failure codes */
 #define DTWAIN_FAILURE1       (-1)
 #define DTWAIN_FAILURE2       (-2)
+
+/* Other miscellaneous constants */
 #define DTWAIN_DELETEALL      (-1)
+
+/* Page total page(s) transferred wParam's */
+/* Sent when an acquisition has been successful */
 #define  DTWAIN_TN_ACQUIREDONE                    1000
+
+/* Sent when an acquisition has been failed */
 #define  DTWAIN_TN_ACQUIREFAILED                  1001
+/* Cancelled the acquisition */
 #define  DTWAIN_TN_ACQUIRECANCELLED               1002
+#define  DTWAIN_TN_ACQUIRECANCELED                1002
+/* Started an acquisition */
 #define  DTWAIN_TN_ACQUIRESTARTED                 1003
+
+/* Sent when DTWAIN transfers individual pages for a multi-page scan */
+/* Do we get the next page? */
 #define  DTWAIN_TN_PAGECONTINUE                   1004
+/* Page failed to be acquired */
 #define  DTWAIN_TN_PAGEFAILED                     1005
+/* Page cancelled */
 #define  DTWAIN_TN_PAGECANCELLED                  1006
+#define  DTWAIN_TN_PAGECANCELED                   1006
+
+/* Sent when TWAIN is in the "Transfer ready" state (State 6) */
 #define  DTWAIN_TN_TRANSFERREADY                  1009
+/* Sent when TWAIN is in the "Transfer done" state (State 7) */
 #define  DTWAIN_TN_TRANSFERDONE                   1010
 #define  DTWAIN_TN_ACQUIREPAGEDONE                1010
+
+/* Source closing/opening wParam's */
 #define  DTWAIN_TN_UICLOSING                      1011
 #define  DTWAIN_TN_UICLOSED                       1012
 #define  DTWAIN_TN_UIOPENED                       1013
 #define  DTWAIN_TN_UIOPENING                      1055
 #define  DTWAIN_TN_UIOPENFAILURE                  1060
+
+/* Twain page transferrance wParam's */
 #define  DTWAIN_TN_CLIPTRANSFERDONE               1014
+
+/* Invalid image file format specified or image could not be saved to file */
 #define  DTWAIN_TN_INVALIDIMAGEFORMAT             1015
+
+/* Sent when the UI is closed, and all processing of DIBs has been done */
 #define  DTWAIN_TN_ACQUIRETERMINATED              1021
+
+/* Sent when a strip has been successfully transferred from a buffered
+   transfer */
 #define DTWAIN_TN_TRANSFERSTRIPREADY              1022
 #define DTWAIN_TN_TRANSFERSTRIPDONE               1023
+
+/* Sent if a buffered strip transfer fails due to lack of memory */
 #define DTWAIN_TN_TRANSFERSTRIPFAILED             1029
+
+/* Sent if the image info is invalid */
 #define DTWAIN_TN_IMAGEINFOERROR                  1024
+
+/* Sent if program decides to cancel the initial
+   transfer */
 #define DTWAIN_TN_TRANSFERCANCELLED          1030
+#define DTWAIN_TN_TRANSFERCANCELED           1030
+
+/* Sent if user cancels the saving of a file using the file prompt */
 #define DTWAIN_TN_FILESAVECANCELLED         1031
+#define DTWAIN_TN_FILESAVECANCELED         1031
 #define DTWAIN_TN_FILESAVEOK                1032
 #define DTWAIN_TN_FILESAVEERROR             1033
 #define DTWAIN_TN_FILEPAGESAVEOK            1034
 #define DTWAIN_TN_FILEPAGESAVEERROR         1035
 #define DTWAIN_TN_PROCESSEDDIB              1036
+
+
+/* Sent if document feeder has paper loaded */
 #define DTWAIN_TN_FEEDERLOADED              1037
+
+/* Sent whenever a DTWAIN error is generated
+ * This is only available for DTWAIN_SetCallback
+ * functions */
 #define DTWAIN_TN_GENERALERROR             1038
+
+/* Sent when in manual duplex mode */
+/* Side 1 completed successfully */
 #define DTWAIN_TN_MANDUPFLIPPAGES          1040
+
+/* Side 1 completed, maybe successful depending on return value */
 #define DTWAIN_TN_MANDUPSIDE1DONE          1041
+
+/* Side 2 completed, maybe successful depending on return value */
 #define DTWAIN_TN_MANDUPSIDE2DONE          1042
+
+/* Both sides done, but page count mismatch occurred */
 #define DTWAIN_TN_MANDUPPAGECOUNTERROR     1043
+
+/* Both sides done, everything is successful */
 #define DTWAIN_TN_MANDUPACQUIREDONE        1044
+
+/* Side 1 started */
 #define DTWAIN_TN_MANDUPSIDE1START         1045
+
+/* Side 2 started */
 #define DTWAIN_TN_MANDUPSIDE2START         1046
+
+/* Error when merging the acquired pages */
 #define DTWAIN_TN_MANDUPMERGEERROR         1047
+
+/* Error when attempting to allocate memory for duplexed page */
 #define DTWAIN_TN_MANDUPMEMORYERROR        1048
+
+/* Error when attempting to read image data for duplexed page */
 #define DTWAIN_TN_MANDUPFILEERROR          1049
+
+/* Error when attempting to save duplex file */
 #define DTWAIN_TN_MANDUPFILESAVEERROR      1050
+
+/* End of Job control message */
 #define DTWAIN_TN_ENDOFJOBDETECTED         1051
 #define DTWAIN_TN_EOJDETECTED              1051
+
+/* End of job when message when transfer is initially done */
 #define DTWAIN_TN_EOJDETECTED_XFERDONE    1052
+
+/* Query if page should be saved or discarded */
 #define DTWAIN_TN_QUERYPAGEDISCARD          1053
+
+/* Send if page was discarded from save */
 #define DTWAIN_TN_PAGEDISCARDED             1054
+
+/* Sent to application to acknowledge that
+   the page will no longer go through further processing when acquired
+   from device */
 #define DTWAIN_TN_PROCESSDIBACCEPTED   1055
 #define DTWAIN_TN_PROCESSDIBFINALACCEPTED   1056
+
+/* Miscellaneous file transfer notifications */
+#define DTWAIN_TN_CLOSEDIBFAILED       1057
+
+
+/* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
+
+/* Sent if TWAIN driver sends cancel code during acquisition */
 #define DTWAIN_TN_TWAINPAGECANCELLED       1105
+#define DTWAIN_TN_TWAINPAGECANCELED        1105
+
+/* Sent if TWAIN driver sends failure code during acquisition */
 #define DTWAIN_TN_TWAINPAGEFAILED          1106
+
+/* Sent if application changes DIB */
 #define DTWAIN_TN_APPUPDATEDDIB            1107
+
+/* Sent when saving a page using the
+   DTWAIN_FILESAVE_UICLOSE, DTWAIN_FILESAVE_SOURCECLOSE option is used */
 #define DTWAIN_TN_FILEPAGESAVING           1110
+
+/* Sent when job is being saved to file */
 #define DTWAIN_TN_EOJBEGINFILESAVE         1112
+
+/* Sent after job saved to file (sent regardless if there is an error) */
 #define DTWAIN_TN_EOJENDFILESAVE           1113
-#define DTWAIN_TN_CROPFAILED			   1120
-#define DTWAIN_TN_PROCESSEDDIBFINAL		   1121
+
+/* Sent when copping DIB fails */
+#define DTWAIN_TN_CROPFAILED               1120
+
+/* Sent on naive or buffered transfer done
+ * and DIB has been fully processed by DTWAIN */
+#define DTWAIN_TN_PROCESSEDDIBFINAL        1121
+
+/* Determine if blank page has been detected */
 #define DTWAIN_TN_BLANKPAGEDETECTED1       1130
 #define DTWAIN_TN_BLANKPAGEDETECTED2       1131
 #define DTWAIN_TN_BLANKPAGEDETECTED3       1132
 #define DTWAIN_TN_BLANKPAGEDISCARDED1      1133
 #define DTWAIN_TN_BLANKPAGEDISCARDED2      1134
+
+/* Messages sent when text acquired from OCR */
 #define DTWAIN_TN_OCRTEXTRETRIEVED         1140
 #define DTWAIN_TN_QUERYOCRTEXT             1141
-#define DTWAIN_TN_PDFOCRREADY			   1142
-#define DTWAIN_TN_PDFOCRDONE			   1143
-#define DTWAIN_TN_PDFOCRERROR			   1144
-#define DTWAIN_TN_SETCALLBACKINIT		   1150
-#define DTWAIN_TN_SETCALLBACK64INIT		   1151
-#define DTWAIN_TN_FILENAMECHANGING		   1160	
-#define DTWAIN_TN_FILENAMECHANGED		   1161	
-#define DTWAIN_PDFOCR_CLEANTEXT1			1
-#define DTWAIN_PDFOCR_CLEANTEXT2			2
+#define DTWAIN_TN_PDFOCRREADY              1142
+#define DTWAIN_TN_PDFOCRDONE               1143
+#define DTWAIN_TN_PDFOCRERROR              1144
+
+/* Message sent when DTWAIN_SetCallback() is invoked on a non-NULL callback function */
+#define DTWAIN_TN_SETCALLBACKINIT          1150
+#define DTWAIN_TN_SETCALLBACK64INIT        1151
+
+/* Sent when a file name is generated when saving images to files */
+#define DTWAIN_TN_FILENAMECHANGING         1160
+#define DTWAIN_TN_FILENAMECHANGED          1161
+
+/* Sent when an audio file has been transferred */
+#define DTWAIN_TN_PROCESSEDAUDIOFINAL       1180
+#define DTWAIN_TN_PROCESSAUDIOFINALACCEPTED 1181
+#define DTWAIN_TN_PROCESSEDAUDIOFILE        1182
+
+/* Sent when a TWAIN triplet is being processed */
+#define DTWAIN_TN_TWAINTRIPLETBEGIN         1183
+#define DTWAIN_TN_TWAINTRIPLETEND           1184
+
+/* Sent if document feeder has no paper loaded */
+#define DTWAIN_TN_FEEDERNOTLOADED           1200
+
+/* PDF OCR clean text flags */
+#define DTWAIN_PDFOCR_CLEANTEXT1            1
+#define DTWAIN_PDFOCR_CLEANTEXT2            2
+
+/* DTWAIN Acquire Modes */
 #define  DTWAIN_MODAL                        0
 #define  DTWAIN_MODELESS                     1
+
+/* DTWAIN Source UI Mode */
 #define DTWAIN_UIModeCLOSE                    0
 #define DTWAIN_UIModeOPEN                     1
+
 #define DTWAIN_REOPEN_SOURCE                  2
+
+/* DTWAIN Rounding for range values */
 #define DTWAIN_ROUNDNEAREST   0
 #define DTWAIN_ROUNDUP        1
 #define DTWAIN_ROUNDDOWN      2
 #define DTWAIN_FLOATDELTA    (+1.0e-8)
+
+/* Rotations (same as TWAIN definitions) */
 #define DTWAIN_OR_ROT0           0
 #define DTWAIN_OR_ROT90          1
 #define DTWAIN_OR_ROT180         2
@@ -355,6 +596,8 @@
 #define DTWAIN_OR_PORTRAIT       DTWAIN_OR_ROT0
 #define DTWAIN_OR_LANDSCAPE      DTWAIN_OR_ROT270
 #define DTWAIN_OR_ANYROTATION    (-1)
+
+/* Cap operation support constants (same as TWAIN 2.x ) */
 #define DTWAIN_CO_GET           0x0001
 #define DTWAIN_CO_SET           0x0002
 #define DTWAIN_CO_GETDEFAULT    0x0004
@@ -365,10 +608,13 @@
 #define DTWAIN_CO_GETHELP          0x0100
 #define DTWAIN_CO_GETLABEL         0x0200
 #define DTWAIN_CO_GETLABELENUM     0x0400
+
+
+/* Country information */
 #define DTWAIN_CNTYAFGHANISTAN             1001
 #define DTWAIN_CNTYALGERIA                  213
 #define DTWAIN_CNTYAMERICANSAMOA            684
-#define DTWAIN_CNTYANDORRA                  033
+#define DTWAIN_CNTYANDORRA                   33
 #define DTWAIN_CNTYANGOLA                  1002
 #define DTWAIN_CNTYANGUILLA                8090
 #define DTWAIN_CNTYANTIGUA                 8091
@@ -411,7 +657,7 @@
 #define DTWAIN_CNTYCONGO                   1011
 #define DTWAIN_CNTYCOOKIS                  1012
 #define DTWAIN_CNTYCOSTARICA               506
-#define DTWAIN_CNTYCUBA                     005
+#define DTWAIN_CNTYCUBA                     5
 #define DTWAIN_CNTYCYPRUS                   357
 #define DTWAIN_CNTYCZECHOSLOVAKIA            42
 #define DTWAIN_CNTYDENMARK                   45
@@ -575,6 +821,9 @@
 #define DTWAIN_CNTYZAIRE                    243
 #define DTWAIN_CNTYZAMBIA                   260
 #define DTWAIN_CNTYZIMBABWE                 263
+
+
+/* Language information */
 #define DTWAIN_LANGDANISH                     0
 #define DTWAIN_LANGDUTCH                      1
 #define DTWAIN_LANGINTERNATIONALENGLISH       2
@@ -589,6 +838,12 @@
 #define DTWAIN_LANGSPANISH                   11
 #define DTWAIN_LANGSWEDISH                   12
 #define DTWAIN_LANGUSAENGLISH                13
+
+/* DTWAIN API and Twain status flags */
+#define DTWAIN_APIHANDLEOK                    1
+#define DTWAIN_TWAINSESSIONOK                 2
+
+/* Error codes (returned by DTWAIN_GetLastError() */
 #define DTWAIN_NO_ERROR               (0)
 #define DTWAIN_ERR_FIRST              (-1000)
 #define DTWAIN_ERR_BAD_HANDLE         (-1001)
@@ -640,7 +895,16 @@
 #define DTWAIN_ERR_BAD_CAPTYPE   (-1047)
 #define DTWAIN_ERR_UNKNOWN_CAPDATATYPE   (-1048)
 #define DTWAIN_ERR_DEMO_NOFILETYPE (-1049)
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_DEMO_NOFILETYPE
+#define DTWAIN_ERR_SOURCESELECTION_CANCELED (-1050)
+#define DTWAIN_ERR_RESOURCES_NOT_FOUND (-1051)
+#define DTWAIN_ERR_STRINGTYPE_MISMATCH (-1052)
+#define DTWAIN_ERR_ARRAYTYPE_MISMATCH (-1053)
+#define DTWAIN_ERR_SOURCENAME_NOTINSTALLED (-1054)
+#define DTWAIN_ERR_NO_MEMFILE_XFER       (-1055)
+#define DTWAIN_ERR_AREA_ARRAY_TOO_SMALL  (-1056)
+
+#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_AREA_ARRAY_TOO_SMALL
+
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
 #define TWAIN_ERR_BUMMER            (-1102)
@@ -664,12 +928,14 @@
 #define TWAIN_ERR_FEEDERWRITEERROR    (-1120)
 #define TWAIN_ERR_DEVICEOFFLINE       (-1121)
 #define TWAIN_ERR_NULL_CONTAINER      (-1122)
-#define TWAIN_ERR_INTERLOCK			  (-1123)
+#define TWAIN_ERR_INTERLOCK           (-1123)
 #define TWAIN_ERR_DAMAGEDCORNER       (-1124)
 #define TWAIN_ERR_FOCUSERROR          (-1125)
 #define TWAIN_ERR_DOCTOOLIGHT         (-1126)
 #define TWAIN_ERR_DOCTOODARK          (-1127)
 #define TWAIN_ERR_NOMEDIA             (-1128)
+
+/* File errors generated when calling DTWAIN_AcquireFile or DTWAIN_AcquireFileEx */
 #define DTWAIN_ERR_FILEXFERSTART    (-2000)
 #define DTWAIN_ERR_MEM              (-2001)
 #define DTWAIN_ERR_FILEOPEN         (-2002)
@@ -747,6 +1013,11 @@
 #define DTWAIN_ERR_INVALIDICONFORMAT       (-2074)
 #define DTWAIN_ERR_TWAIN32DSMNOTFOUND      (-2075)
 #define DTWAIN_ERR_TWAINOPENSOURCEDSMNOTFOUND (-2076)
+#define DTWAIN_ERR_INVALID_DIRECTORY (-2077)
+#define DTWAIN_ERR_CREATE_DIRECTORY (-2078)
+#define DTWAIN_ERR_OCRLIBRARY_NOTFOUND (-2079)
+
+/* TwainSave errors */
 #define DTWAIN_TWAINSAVE_OK                (0)
 #define DTWAIN_ERR_TS_FIRST                (-2080)
 #define DTWAIN_ERR_TS_NOFILENAME           (-2081)
@@ -759,6 +1030,8 @@
 #define DTWAIN_ERR_TS_INVALIDCOLORSPACE    (-2088)
 #define DTWAIN_ERR_TS_PDFNOTSUPPORTED      (-2089)
 #define DTWAIN_ERR_TS_NOTAVAILABLE         (-2090)
+
+/* OCR errors */
 #define DTWAIN_ERR_OCR_FIRST               (-2100)
 #define DTWAIN_ERR_OCR_INVALIDPAGENUM      (-2101)
 #define DTWAIN_ERR_OCR_INVALIDENGINE       (-2102)
@@ -766,9 +1039,15 @@
 #define DTWAIN_ERR_OCR_INVALIDFILETYPE     (-2104)
 #define DTWAIN_ERR_OCR_INVALIDPIXELTYPE    (-2105)
 #define DTWAIN_ERR_OCR_INVALIDBITDEPTH     (-2106)
-#define DTWAIN_ERR_OCR_RECOGNITIONERROR	   (-2107)
+#define DTWAIN_ERR_OCR_RECOGNITIONERROR    (-2107)
 #define DTWAIN_ERR_OCR_LAST                (-2108)
-#define DTWAIN_ERR_LAST                    DTWAIN_ERR_OCR_LAST
+#define DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   (-2500)
+#define DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  (-2501)
+
+#define DTWAIN_ERR_LAST                    DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE
+#define DTWAIN_ERR_USER_START              (-80000)
+
+/* Device event constants (same as TWAIN 1.8 value plus 1)*/
 #define DTWAIN_DE_CHKAUTOCAPTURE    1
 #define DTWAIN_DE_CHKBATTERY        2
 #define DTWAIN_DE_CHKDEVICEONLINE   4
@@ -787,6 +1066,8 @@
 #define DTWAIN_DE_POWERSAVE         32768
 #define DTWAIN_DE_POWERSAVENOTIFY   65536
 #define DTWAIN_DE_CUSTOMEVENTS       0x8000
+
+/* DTWAIN Constants used for getting Device Event Info*/
 #define DTWAIN_GETDE_EVENT           0
 #define DTWAIN_GETDE_DEVNAME         1
 #define DTWAIN_GETDE_BATTERYMINUTES  2
@@ -798,6 +1079,8 @@
 #define DTWAIN_GETDE_TIMEBEFORECAPTURE 8
 #define DTWAIN_GETDE_TIMEBETWEENCAPTURES  9
 #define DTWAIN_GETDE_POWERSUPPLY      10
+
+/* DTWAIN Imprinter/Endorser Constants  (TWAIN 1.8 values)*/
 #define DTWAIN_IMPRINTERTOPBEFORE     1   /*(0)*/
 #define DTWAIN_IMPRINTERTOPAFTER      2   /*(1)*/
 #define DTWAIN_IMPRINTERBOTTOMBEFORE  4   /*(2)*/
@@ -806,9 +1089,22 @@
 #define DTWAIN_ENDORSERTOPAFTER       32  /*(5)*/
 #define DTWAIN_ENDORSERBOTTOMBEFORE   64  /*(6)*/
 #define DTWAIN_ENDORSERBOTTOMAFTER    128 /*(7)*/
+
+#define DTWAIN_TWPR_IMPRINTERTOPBEFORE     0
+#define DTWAIN_TWPR_IMPRINTERTOPAFTER      1
+#define DTWAIN_TWPR_IMPRINTERBOTTOMBEFORE  2
+#define DTWAIN_TWPR_IMPRINTERBOTTOMAFTER   3
+#define DTWAIN_TWPR_ENDORSERTOPBEFORE      4
+#define DTWAIN_TWPR_ENDORSERTOPAFTER       5
+#define DTWAIN_TWPR_ENDORSERBOTTOMBEFORE   6
+#define DTWAIN_TWPR_ENDORSERBOTTOMAFTER    7
+
+/* DTWAIN Printermode constants (same as TWAIN 1.8) */
 #define DTWAIN_PM_SINGLESTRING     0
 #define DTWAIN_PM_MULTISTRING      1
 #define DTWAIN_PM_COMPOUNDSTRING   2
+
+/* TWAIN Data Types */
 #define DTWAIN_TWTY_INT8        0x0000
 #define DTWAIN_TWTY_INT16       0x0001
 #define DTWAIN_TWTY_INT32       0x0002
@@ -824,6 +1120,8 @@
 #define DTWAIN_TWTY_STR255      0x000C
 #define DTWAIN_TWTY_STR1024     0x000D
 #define DTWAIN_TWTY_UNI512      0x000E
+
+/* Extended image attributes */
 #define DTWAIN_EI_BARCODEX               0x1200
 #define DTWAIN_EI_BARCODEY               0x1201
 #define DTWAIN_EI_BARCODETEXT            0x1202
@@ -887,41 +1185,137 @@
 #define DTWAIN_EI_FRAMENUMBER            0x123D
 #define DTWAIN_EI_FRAME                  0x123E
 #define DTWAIN_EI_PIXELFLAVOR            0x123F
-#define DTWAIN_LOG_DECODE_SOURCE      1
-#define DTWAIN_LOG_DECODE_DEST        2
-#define DTWAIN_LOG_DECODE_TWMEMREF    4
-#define DTWAIN_LOG_DECODE_TWEVENT     8
-#define DTWAIN_LOG_USEFILE           16
-#define DTWAIN_LOG_CALLSTACK         32
-#define DTWAIN_LOG_USEWINDOW        64
-#define DTWAIN_LOG_SHOWEXCEPTIONS  128
-#define DTWAIN_LOG_ERRORMSGBOX     256
-#define DTWAIN_LOG_INITFAILURE       512
-#define DTWAIN_LOG_USEBUFFER         1024
-#define DTWAIN_LOG_FILEAPPEND        2048
-#define DTWAIN_LOG_DECODE_BITMAP	 4096
-#define DTWAIN_LOG_NOCALLBACK        8192
-#define DTWAIN_LOG_WRITE           16384
-#define DTWAIN_LOG_USECRLF         32768
-#define DTWAIN_LOG_ALL               0xFFFFF7FF
-#define DTWAIN_LOG_ALL_APPEND        0xFFFFFFFF
+#define DTWAIN_EI_ICCPROFILE             0x1240
+#define DTWAIN_EI_LASTSEGMENT            0x1241
+#define DTWAIN_EI_SEGMENTNUMBER          0x1242
+#define DTWAIN_EI_MAGDATA                0x1243
+#define DTWAIN_EI_MAGTYPE                0x1244
+#define DTWAIN_EI_PAGESIDE               0x1245
+#define DTWAIN_EI_FILESYSTEMSOURCE       0x1246
+#define DTWAIN_EI_IMAGEMERGED            0x1247
+#define DTWAIN_EI_MAGDATALENGTH          0x1248
+#define DTWAIN_EI_PAPERCOUNT             0x1249
+#define DTWAIN_EI_PRINTERTEXT            0x124A
+#define DTWAIN_EI_TWAINDIRECTMETADATA    0x124B
+
+/* TWAIN Data Source Error logging functions */
+#define DTWAIN_LOG_DECODE_SOURCE      0x00000001
+#define DTWAIN_LOG_DECODE_DEST        0x00000002
+#define DTWAIN_LOG_DECODE_TWMEMREF    0x00000004
+#define DTWAIN_LOG_DECODE_TWEVENT     0x00000008
+
+/* DTWAIN Call stack logging */
+#define DTWAIN_LOG_CALLSTACK          0x00000010
+
+/* DTWAIN LOG DTWAIN_IsTwainMsg
+ * Note that enabling this will produce very large log files.
+ */
+#define DTWAIN_LOG_ISTWAINMSG         0x00000020
+
+/* Display message if DTWAIN function called on bad DLL
+If this flag is not set, calls to an uninitialized
+DTWAIN DLL are not displayed */
+#define DTWAIN_LOG_INITFAILURE        0x00000040
+
+/* All other lower-level TWAIN activity*/
+#define DTWAIN_LOG_LOWLEVELTWAIN      0x00000080
+
+/* Decode bitmap info returned by TWAIN device when acquiring images*/
+#define DTWAIN_LOG_DECODE_BITMAP      0x00000100
+
+/* Log DTWAIN_TN_ notifications  */
+#define DTWAIN_LOG_NOTIFICATIONS      0x00000200
+
+/* All other DTWAIN information such as CAP listings, etc.*/
+#define DTWAIN_LOG_MISCELLANEOUS      0x00000400
+
+/* Any DTWAIN errors (not TWAIN related) */
+#define DTWAIN_LOG_DTWAINERRORS       0x00000800
+
+#define DTWAIN_LOG_ALL (DTWAIN_LOG_DECODE_SOURCE | ;
+                        DTWAIN_LOG_DECODE_DEST |    ;
+                        DTWAIN_LOG_DECODE_TWEVENT |  ;
+                        DTWAIN_LOG_DECODE_TWMEMREF |  ;
+                        DTWAIN_LOG_CALLSTACK |        ;
+                        DTWAIN_LOG_ISTWAINMSG |      ;
+                        DTWAIN_LOG_INITFAILURE |     ;
+                        DTWAIN_LOG_LOWLEVELTWAIN |   ;
+                        DTWAIN_LOG_NOTIFICATIONS |   ;
+                        DTWAIN_LOG_MISCELLANEOUS |   ;
+                        DTWAIN_LOG_DTWAINERRORS |    ;
+                        DTWAIN_LOG_DECODE_BITMAP)
+
+/* ------------------------- */
+
+/* DTWAIN Log to a file */
+#define DTWAIN_LOG_USEFILE         0x00010000
+
+/* log exception errors to message boxes */
+#define DTWAIN_LOG_SHOWEXCEPTIONS  0x00020000
+
+/* Display standard message box if DTWAIN error */
+#define DTWAIN_LOG_ERRORMSGBOX     0x00040000
+
+/* Log errors to a buffer of all DTWAIN errors */
+#define DTWAIN_LOG_USEBUFFER       0x00080000
+
+/* Append to log file */
+#define DTWAIN_LOG_FILEAPPEND      0x00100000
+
+/* If this flag is ON, a callback function is invoked */
+#define DTWAIN_LOG_USECALLBACK     0x00200000
+
+/* If cr/lf is added to end of log message when writing to
+   debug monitor, this flag is ON */
+#define DTWAIN_LOG_USECRLF         0x00400000
+
+/* Log to the console */
+#define DTWAIN_LOG_CONSOLE         0x00800000
+
+/* Log to debug monitor */
+#define DTWAIN_LOG_DEBUGMONITOR    0x01000000
+
+/* DTWAIN Log to window (not yet implemented) */
+#define DTWAIN_LOG_USEWINDOW       0x02000000
+
+/* log everything, including displaying exceptions */
+#define DTWAIN_LOG_ALL_NOCALLBACK   (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_USECALLBACK))
+
+/* log everything using new log file */
+#define DTWAIN_LOG_ALL_FILEAPPEND    (DTWAIN_LOG_FILEAPPEND | DTWAIN_LOG_ALL)
+
+/* turn off the DTWAIN_IsTwainMsg logging */
+#define DTWAIN_LOG_NOISTWAINMSG(x) { if ((x) | DTWAIN_LOG_ISTWAINMSG) (x) &= ~DTWAIN_LOG_ISTWAINMSG; }
+#define DTWAIN_LOG_NOLOWLEVELTWAIN(x) { (x) &= ~(DTWAIN_LOG_LOWLEVELTWAIN); }
+
+/* CAP_CUSTOMDSDATA constants */
 #define DTWAINGCD_RETURNHANDLE      1
 #define DTWAINGCD_COPYDATA          2
+
+/* DTWAIN Search constants */
 #define DTWAIN_BYPOSITION           0
 #define DTWAIN_BYID                 1
+
 #define DTWAINSCD_USEHANDLE         1
 #define DTWAINSCD_USEDATA           2
-#define DTWAIN_PAGEFAIL_RETRY		1
-#define DTWAIN_PAGEFAIL_TERMINATE	2
+
+/* DTWAIN Page Failure Action constants */
+#define DTWAIN_PAGEFAIL_RETRY       1
+#define DTWAIN_PAGEFAIL_TERMINATE   2
 #define DTWAIN_MAXRETRY_ATTEMPTS    3 /* Can be set by DTWAIN_SetMaxRetryAttempts() */
 #define DTWAIN_RETRY_FOREVER        (-1)
+
+/* PDF page settings */
 #define DTWAIN_PDF_NOSCALING         128  /* Places image as-is on PDF page */
 #define DTWAIN_PDF_FITPAGE           256  /* Fits the image into the page size */
 #define DTWAIN_PDF_VARIABLEPAGESIZE  512  /* PDF page is determined by acquired page. */
 #define DTWAIN_PDF_CUSTOMSIZE        1024  /* Page size is custom */
 #define DTWAIN_PDF_USECOMPRESSION    2048  /* Use zlib compression */
 #define DTWAIN_PDF_CUSTOMSCALE       4096  /* Custom scaling value */
-#define DTWAIN_PDF_PIXELSPERMETERSIZE 8192  /* Determine PDF page size given image bit depth, 
+#define DTWAIN_PDF_PIXELSPERMETERSIZE 8192  /* Determine PDF page size given image bit depth,
+                                              image dimensions, and pixels per meter setting */
+
+/* PDF encryption settings */
 #define DTWAIN_PDF_ALLOWPRINTING     2052 /* (2048 + 4) */
 #define DTWAIN_PDF_ALLOWMOD          8
 #define DTWAIN_PDF_ALLOWCOPY         16
@@ -930,16 +1324,30 @@
 #define DTWAIN_PDF_ALLOWEXTRACTION   512
 #define DTWAIN_PDF_ALLOWASSEMBLY     1024
 #define DTWAIN_PDF_ALLOWDEGRADEDPRINTING 4
+
+/* PDF Orientation */
 #define DTWAIN_PDF_PORTRAIT         0
 #define DTWAIN_PDF_LANDSCAPE        1
+
+
+/* Postscript options */
 #define DTWAIN_PS_REGULAR           0
 #define DTWAIN_PS_ENCAPSULATED      1
+
+/* Blank page detection options */
 #define DTWAIN_BP_AUTODISCARD_NONE         0
 #define DTWAIN_BP_AUTODISCARD_IMMEDIATE    1
 #define DTWAIN_BP_AUTODISCARD_AFTERPROCESS 2
+#define DTWAIN_BP_DETECTORIGINAL        1
+#define DTWAIN_BP_DETECTADJUSTED        2
+#define DTWAIN_BP_DETECTALL         (DTWAIN_BP_DETECTORIGINAL | DTWAIN_BP_DETECTADJUSTED)
 #define DTWAIN_BP_AUTODISCARD_ANY          0xFFFF
+
+/* Lightpath */
 #define DTWAIN_LP_REFLECTIVE        0
 #define DTWAIN_LP_TRANSMISSIVE      1
+
+/* Light Source */
 #define DTWAIN_LS_RED               0
 #define DTWAIN_LS_GREEN             1
 #define DTWAIN_LS_BLUE              2
@@ -947,18 +1355,33 @@
 #define DTWAIN_LS_WHITE             4
 #define DTWAIN_LS_UV                5
 #define DTWAIN_LS_IR                6
+
+/* DTWAIN Twain dialog options */
 #define DTWAIN_DLG_SORTNAMES            1
 #define DTWAIN_DLG_CENTER               2
 #define DTWAIN_DLG_CENTER_SCREEN        4
 #define DTWAIN_DLG_USETEMPLATE          8
 #define DTWAIN_DLG_CLEAR_PARAMS         16
 #define DTWAIN_DLG_HORIZONTALSCROLL     32
+#define DTWAIN_DLG_USEINCLUDENAMES      64
+#define DTWAIN_DLG_USEEXCLUDENAMES      128
+#define DTWAIN_DLG_USENAMEMAPPING       256
+#define DTWAIN_DLG_USEDEFAULTTITLE      512
+#define DTWAIN_DLG_TOPMOSTWINDOW        1024
+#define DTWAIN_DLG_OPENONSELECT         2048
+#define DTWAIN_DLG_OPENONSELECTOVERRIDE 4096
+#define DTWAIN_DLG_OPENONSELECTON       (DTWAIN_DLG_OPENONSELECT | DTWAIN_DLG_OPENONSELECTOVERRIDE)
+#define DTWAIN_DLG_OPENONSELECTOFF      (DTWAIN_DLG_OPENONSELECTOVERRIDE)
+
+/* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
 #define DTWAIN_RES_FRENCH               1
 #define DTWAIN_RES_SPANISH              2
 #define DTWAIN_RES_DUTCH                3
 #define DTWAIN_RES_GERMAN               4
 #define DTWAIN_RES_ITALIAN              5
+
+/* DTWAIN Alarm constants */
 #define DTWAIN_AL_ALARM             0
 #define DTWAIN_AL_FEEDERERROR       1
 #define DTWAIN_AL_FEEDERWARNING     2
@@ -968,6 +1391,8 @@
 #define DTWAIN_AL_PATCHCODE         6
 #define DTWAIN_AL_POWER             7
 #define DTWAIN_AL_SKEW              8
+
+/* DTWAIN File System constants */
 #define DTWAIN_FT_CAMERA         0
 #define DTWAIN_FT_CAMERATOP      1
 #define DTWAIN_FT_CAMERABOTTOM   2
@@ -977,39 +1402,57 @@
 #define DTWAIN_FT_DIRECTORY      6
 #define DTWAIN_FT_IMAGE          7
 #define DTWAIN_FT_UNKNOWN        8
+
+/* DTWAIN Noise Filter constants */
 #define DTWAIN_NF_NONE           0
 #define DTWAIN_NF_AUTO           1
 #define DTWAIN_NF_LONEPIXEL      2
 #define DTWAIN_NF_MAJORITYRULE   3
+
+/* DTWAIN Clear Buffers */
 #define DTWAIN_CB_AUTO          0
 #define DTWAIN_CB_CLEAR         1
 #define DTWAIN_CB_NOCLEAR       2
+
+/* DTWAIN Feeder Alignment */
 #define DTWAIN_FA_NONE          0
 #define DTWAIN_FA_LEFT          1
 #define DTWAIN_FA_CENTER        2
 #define DTWAIN_FA_RIGHT         3
+
+/* DTWAIN Pixel Flavor */
 #define DTWAIN_PF_CHOCOLATE     0
 #define DTWAIN_PF_VANILLA       1
+
+/* DTWAIN Feeder Order */
 #define DTWAIN_FO_FIRSTPAGEFIRST 0
 #define DTWAIN_FO_LASTPAGEFIRST  1
+
+/* DTWAIN File increment flags */
 #define DTWAIN_INCREMENT_STATIC  0
 #define DTWAIN_INCREMENT_DYNAMIC 1
 #define DTWAIN_INCREMENT_DEFAULT -1
+
+/* DTWAIN Manual Duplex mode constants */
 #define DTWAIN_MANDUP_FACEUPTOPPAGE      0
 #define DTWAIN_MANDUP_FACEUPBOTTOMPAGE   1
 #define DTWAIN_MANDUP_FACEDOWNTOPPAGE    2
 #define DTWAIN_MANDUP_FACEDOWNBOTTOMPAGE 3
+
 #define DTWAIN_FILESAVE_DEFAULT          0
 #define DTWAIN_FILESAVE_UICLOSE          1
 #define DTWAIN_FILESAVE_SOURCECLOSE      2
 #define DTWAIN_FILESAVE_ENDACQUIRE       3
 #define DTWAIN_FILESAVE_MANUALSAVE       4
 #define DTWAIN_FILESAVE_SAVEINCOMPLETE   128
+
 #define DTWAIN_MANDUP_SCANOK                    1 /* must be 1 for
+                                                     proper processing */
 #define DTWAIN_MANDUP_SIDE1RESCAN               2
 #define DTWAIN_MANDUP_SIDE2RESCAN               3
 #define DTWAIN_MANDUP_RESCANALL                 4
 #define DTWAIN_MANDUP_PAGEMISSING               5
+
 #define DTWAIN_DEMODLL_VERSION                  0x00000001
 #define DTWAIN_UNLICENSED_VERSION               0x00000002
 #define DTWAIN_COMPANY_VERSION                  0x00000004
@@ -1020,16 +1463,21 @@
 #define DTWAIN_LIMITEDDLL_VERSION               0x00000080
 #define DTWAIN_STATICLIB_VERSION                0x00000100
 #define DTWAIN_STATICLIB_STDCALL_VERSION        0x00000200
-#define DTWAIN_PDF_VERSION                      0x00010000 
+#define DTWAIN_PDF_VERSION                      0x00010000
 #define DTWAIN_TWAINSAVE_VERSION                0x00020000
 #define DTWAIN_OCR_VERSION                      0x00040000
 #define DTWAIN_BARCODE_VERSION                  0x00080000
 #define DTWAIN_ACTIVEX_VERSION                  0x00100000
-#define DTWAIN_32BIT_VERSION					0x00200000
-#define DTWAIN_64BIT_VERSION					0x00400000
+#define DTWAIN_32BIT_VERSION                    0x00200000
+#define DTWAIN_64BIT_VERSION                    0x00400000
 #define DTWAIN_UNICODE_VERSION                  0x00800000
+#define DTWAIN_OPENSOURCE_VERSION               0x01000000
+
+
+/* OCR defines */
 #define DTWAINOCR_RETURNHANDLE                  1
 #define DTWAINOCR_COPYDATA                      2
+
 #define DTWAIN_OCRINFO_CHAR                     0
 #define DTWAIN_OCRINFO_CHARXPOS                 1
 #define DTWAIN_OCRINFO_CHARYPOS                 2
@@ -1038,12 +1486,17 @@
 #define DTWAIN_OCRINFO_CHARCONFIDENCE           5
 #define DTWAIN_OCRINFO_PAGENUM                  6
 #define DTWAIN_OCRINFO_OCRENGINE                7
-#define DTWAIN_OCRINFO_TEXTLENGTH				8
+#define DTWAIN_OCRINFO_TEXTLENGTH               8
+
 #define DTWAIN_PDFPAGETYPE_COLOR                0
 #define DTWAIN_PDFPAGETYPE_BW                   1
+
+/* DSM types */
 #define DTWAIN_TWAINDSM_LEGACY                  1
 #define DTWAIN_TWAINDSM_VERSION2                2
 #define DTWAIN_TWAINDSM_LATESTVERSION           4
+
+/* Windows TWAIN DSM search logic constants */
 #define DTWAIN_TWAINDSMSEARCH_NOTFOUND         (-1)
 #define DTWAIN_TWAINDSMSEARCH_WSO               0
 #define DTWAIN_TWAINDSMSEARCH_WOS               1
@@ -1060,345 +1513,89 @@
 #define DTWAIN_TWAINDSMSEARCH_SO                12
 #define DTWAIN_TWAINDSMSEARCH_OW                13
 #define DTWAIN_TWAINDSMSEARCH_OS                14
+#define DTWAIN_TWAINDSMSEARCH_C                 15
+
 #define DTWAIN_PDFPOLARITY_POSITIVE             1
 #define DTWAIN_PDFPOLARITY_NEGATIVE             2
+
+/* CAP_PRINTERFONTSTYLE */
 #define DTWAIN_TWPF_NORMAL              0
 #define DTWAIN_TWPF_BOLD                1
 #define DTWAIN_TWPF_ITALIC              2
 #define DTWAIN_TWPF_LARGESIZE           3
 #define DTWAIN_TWPF_SMALLSIZE           4
+
+/* CAP_PRINTERINDEXTRIGGER Added 2.3 */
 #define DTWAIN_TWCT_PAGE                0
 #define DTWAIN_TWCT_PATCH1              1
 #define DTWAIN_TWCT_PATCH2              2
 #define DTWAIN_TWCT_PATCH3              3
 #define DTWAIN_TWCT_PATCH4              4
-#define DTWAIN_TWCT_PATCHT              5
+#define DTWAIN_TWCT_PATCH5              5
 #define DTWAIN_TWCT_PATCH6              6
-#define DTWAIN_CV_CAPCUSTOMBASE                     0x8000
-#define DTWAIN_CV_CAPXFERCOUNT                      0x0001
-#define DTWAIN_CV_ICAPCOMPRESSION                   0x0100
-#define DTWAIN_CV_ICAPPIXELTYPE                     0x0101
-#define DTWAIN_CV_ICAPUNITS                         0x0102
-#define DTWAIN_CV_ICAPXFERMECH                      0x0103
-#define DTWAIN_CV_CAPAUTHOR                         0x1000
-#define DTWAIN_CV_CAPCAPTION                        0x1001
-#define DTWAIN_CV_CAPFEEDERENABLED                  0x1002
-#define DTWAIN_CV_CAPFEEDERLOADED                   0x1003
-#define DTWAIN_CV_CAPTIMEDATE                       0x1004
-#define DTWAIN_CV_CAPSUPPORTEDCAPS                  0x1005
-#define DTWAIN_CV_CAPEXTENDEDCAPS                   0x1006
-#define DTWAIN_CV_CAPAUTOFEED                       0x1007
-#define DTWAIN_CV_CAPCLEARPAGE                      0x1008
-#define DTWAIN_CV_CAPFEEDPAGE                       0x1009
-#define DTWAIN_CV_CAPREWINDPAGE                     0x100a
-#define DTWAIN_CV_CAPINDICATORS                     0x100b
-#define DTWAIN_CV_CAPSUPPORTEDCAPSEXT               0x100c
-#define DTWAIN_CV_CAPPAPERDETECTABLE                0x100d
-#define DTWAIN_CV_CAPUICONTROLLABLE                 0x100e
-#define DTWAIN_CV_CAPDEVICEONLINE                   0x100f
-#define DTWAIN_CV_CAPAUTOSCAN                       0x1010
-#define DTWAIN_CV_CAPTHUMBNAILSENABLED              0x1011
-#define DTWAIN_CV_CAPDUPLEX                         0x1012
-#define DTWAIN_CV_CAPDUPLEXENABLED                  0x1013
-#define DTWAIN_CV_CAPENABLEDSUIONLY                 0x1014
-#define DTWAIN_CV_CAPCUSTOMDSDATA                   0x1015
-#define DTWAIN_CV_CAPENDORSER                       0x1016
-#define DTWAIN_CV_CAPJOBCONTROL                     0x1017
-#define DTWAIN_CV_CAPALARMS                         0x1018
-#define DTWAIN_CV_CAPALARMVOLUME                    0x1019
-#define DTWAIN_CV_CAPAUTOMATICCAPTURE               0x101a
-#define DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE         0x101b
-#define DTWAIN_CV_CAPTIMEBETWEENCAPTURES            0x101c
-#define DTWAIN_CV_CAPCLEARBUFFERS                   0x101d
-#define DTWAIN_CV_CAPMAXBATCHBUFFERS                0x101e
-#define DTWAIN_CV_CAPDEVICETIMEDATE                 0x101f
-#define DTWAIN_CV_CAPPOWERSUPPLY                    0x1020
-#define DTWAIN_CV_CAPCAMERAPREVIEWUI                0x1021
-#define DTWAIN_CV_CAPDEVICEEVENT                    0x1022
-#define DTWAIN_CV_CAPPAGEMULTIPLEACQUIRE            0x1023
-#define DTWAIN_CV_CAPSERIALNUMBER                   0x1024
-#define DTWAIN_CV_CAPFILESYSTEM                     0x1025
-#define DTWAIN_CV_CAPPRINTER                        0x1026
-#define DTWAIN_CV_CAPPRINTERENABLED                 0x1027
-#define DTWAIN_CV_CAPPRINTERINDEX                   0x1028
-#define DTWAIN_CV_CAPPRINTERMODE                    0x1029
-#define DTWAIN_CV_CAPPRINTERSTRING                  0x102a
-#define DTWAIN_CV_CAPPRINTERSUFFIX                  0x102b
-#define DTWAIN_CV_CAPLANGUAGE                       0x102c
-#define DTWAIN_CV_CAPFEEDERALIGNMENT                0x102d
-#define DTWAIN_CV_CAPFEEDERORDER                    0x102e
-#define DTWAIN_CV_CAPPAPERBINDING                   0x102f
-#define DTWAIN_CV_CAPREACQUIREALLOWED               0x1030
-#define DTWAIN_CV_CAPPASSTHRU                       0x1031
-#define DTWAIN_CV_CAPBATTERYMINUTES                 0x1032
-#define DTWAIN_CV_CAPBATTERYPERCENTAGE              0x1033
-#define DTWAIN_CV_CAPPOWERDOWNTIME                  0x1034
-#define DTWAIN_CV_CAPSEGMENTED				        0x1035
-#define DTWAIN_CV_CAPCAMERAENABLED					0x1036
-#define DTWAIN_CV_CAPCAMERAORDER					0x1037
-#define DTWAIN_CV_CAPMICRENABLED					0x1038
-#define DTWAIN_CV_CAPFEEDERPREP						0x1039
-#define DTWAIN_CV_CAPFEEDERPOCKET					0x103a
-#define DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM			0x103b
-#define DTWAIN_CV_CAPCUSTOMINTERFACEGUID			0x103c
-#define DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE     0x103d
-#define DTWAIN_CV_CAPSUPPORTEDDATS					0x103e
-#define DTWAIN_CV_CAPDOUBLEFEEDDETECTION			0x103f
-#define DTWAIN_CV_CAPDOUBLEFEEDDETECTIONLENGTH		0x1040
-#define DTWAIN_CV_CAPDOUBLEFEEDDETECTIONSENSITIVITY 0x1041
-#define DTWAIN_CV_CAPDOUBLEFEEDDETECTIONRESPONSE	0x1042
-#define DTWAIN_CV_CAPPAPERHANDLING					0x1043
-#define DTWAIN_CV_CAPINDICATORSMODE					0x1044
-#define DTWAIN_CV_CAPPRINTERVERTICALOFFSET			0x1045
-#define DTWAIN_CV_CAPPOWERSAVETIME					0x1046
-#define DTWAIN_CV_CAPPRINTERCHARROTATION			0x1047
-#define DTWAIN_CV_CAPPRINTERFONTSTYLE				0x1048
-#define DTWAIN_CV_CAPPRINTERINDEXLEADCHAR			0x1049
-#define DTWAIN_CV_CAPPRINTERINDEXMAXVALUE			0x104A
-#define DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS			0x104B
-#define DTWAIN_CV_CAPPRINTERINDEXSTEP				0x104C
-#define DTWAIN_CV_CAPPRINTERINDEXTRIGGER			0x104D
-#define DTWAIN_CV_CAPPRINTERSTRINGPREVIEW			0x104E
-#define DTWAIN_CV_ICAPAUTOBRIGHT                    0x1100
-#define DTWAIN_CV_ICAPBRIGHTNESS                    0x1101
-#define DTWAIN_CV_ICAPCONTRAST                      0x1103
-#define DTWAIN_CV_ICAPCUSTHALFTONE                  0x1104
-#define DTWAIN_CV_ICAPEXPOSURETIME                  0x1105
-#define DTWAIN_CV_ICAPFILTER                        0x1106
-#define DTWAIN_CV_ICAPFLASHUSED                     0x1107
-#define DTWAIN_CV_ICAPGAMMA                         0x1108
-#define DTWAIN_CV_ICAPHALFTONES                     0x1109
-#define DTWAIN_CV_ICAPHIGHLIGHT                     0x110a
-#define DTWAIN_CV_ICAPIMAGEFILEFORMAT               0x110c
-#define DTWAIN_CV_ICAPLAMPSTATE                     0x110d
-#define DTWAIN_CV_ICAPLIGHTSOURCE                   0x110e
-#define DTWAIN_CV_ICAPORIENTATION                   0x1110
-#define DTWAIN_CV_ICAPPHYSICALWIDTH                 0x1111
-#define DTWAIN_CV_ICAPPHYSICALHEIGHT                0x1112
-#define DTWAIN_CV_ICAPSHADOW                        0x1113
-#define DTWAIN_CV_ICAPFRAMES                        0x1114
-#define DTWAIN_CV_ICAPXNATIVERESOLUTION             0x1116
-#define DTWAIN_CV_ICAPYNATIVERESOLUTION             0x1117
-#define DTWAIN_CV_ICAPXRESOLUTION                   0x1118
-#define DTWAIN_CV_ICAPYRESOLUTION                   0x1119
-#define DTWAIN_CV_ICAPMAXFRAMES                     0x111a
-#define DTWAIN_CV_ICAPTILES                         0x111b
-#define DTWAIN_CV_ICAPBITORDER                      0x111c
-#define DTWAIN_CV_ICAPCCITTKFACTOR                  0x111d
-#define DTWAIN_CV_ICAPLIGHTPATH                     0x111e
-#define DTWAIN_CV_ICAPPIXELFLAVOR                   0x111f
-#define DTWAIN_CV_ICAPPLANARCHUNKY                  0x1120
-#define DTWAIN_CV_ICAPROTATION                      0x1121
-#define DTWAIN_CV_ICAPSUPPORTEDSIZES                0x1122
-#define DTWAIN_CV_ICAPTHRESHOLD                     0x1123
-#define DTWAIN_CV_ICAPXSCALING                      0x1124
-#define DTWAIN_CV_ICAPYSCALING                      0x1125
-#define DTWAIN_CV_ICAPBITORDERCODES                 0x1126
-#define DTWAIN_CV_ICAPPIXELFLAVORCODES              0x1127
-#define DTWAIN_CV_ICAPJPEGPIXELTYPE                 0x1128
-#define DTWAIN_CV_ICAPTIMEFILL                      0x112a
-#define DTWAIN_CV_ICAPBITDEPTH                      0x112b
-#define DTWAIN_CV_ICAPBITDEPTHREDUCTION             0x112c
-#define DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE            0x112d
-#define DTWAIN_CV_ICAPIMAGEDATASET                  0x112e
-#define DTWAIN_CV_ICAPEXTIMAGEINFO                  0x112f
-#define DTWAIN_CV_ICAPMINIMUMHEIGHT                 0x1130
-#define DTWAIN_CV_ICAPMINIMUMWIDTH                  0x1131
-#define DTWAIN_CV_ICAPAUTOBORDERDETECTION           0x1132
-#define DTWAIN_CV_ICAPAUTODESKEW                    0x1133
-#define DTWAIN_CV_ICAPAUTODISCARDBLANKPAGES         0x1134
-#define DTWAIN_CV_ICAPAUTOROTATE                    0x1135
-#define DTWAIN_CV_ICAPFLIPROTATION                  0x1136
-#define DTWAIN_CV_ICAPBARCODEDETECTIONENABLED       0x1137
-#define DTWAIN_CV_ICAPSUPPORTEDBARCODETYPES         0x1138
-#define DTWAIN_CV_ICAPBARCODEMAXSEARCHPRIORITIES    0x1139
-#define DTWAIN_CV_ICAPBARCODESEARCHPRIORITIES       0x113a
-#define DTWAIN_CV_ICAPBARCODESEARCHMODE             0x113b
-#define DTWAIN_CV_ICAPBARCODEMAXRETRIES             0x113c
-#define DTWAIN_CV_ICAPBARCODETIMEOUT                0x113d
-#define DTWAIN_CV_ICAPZOOMFACTOR                    0x113e
-#define DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED     0x113f
-#define DTWAIN_CV_ICAPSUPPORTEDPATCHCODETYPES       0x1140
-#define DTWAIN_CV_ICAPPATCHCODEMAXSEARCHPRIORITIES  0x1141
-#define DTWAIN_CV_ICAPPATCHCODESEARCHPRIORITIES     0x1142
-#define DTWAIN_CV_ICAPPATCHCODESEARCHMODE           0x1143
-#define DTWAIN_CV_ICAPPATCHCODEMAXRETRIES           0x1144
-#define DTWAIN_CV_ICAPPATCHCODETIMEOUT              0x1145
-#define DTWAIN_CV_ICAPFLASHUSED2                    0x1146
-#define DTWAIN_CV_ICAPIMAGEFILTER                   0x1147
-#define DTWAIN_CV_ICAPNOISEFILTER                   0x1148
-#define DTWAIN_CV_ICAPOVERSCAN                      0x1149
-#define DTWAIN_CV_ICAPAUTOMATICBORDERDETECTION      0x1150
-#define DTWAIN_CV_ICAPAUTOMATICDESKEW               0x1151
-#define DTWAIN_CV_ICAPAUTOMATICROTATE               0x1152
-#define DTWAIN_CV_ICAPJPEGQUALITY                   0x1153
-#define DTWAIN_CV_ICAPFEEDERTYPE                    0x1154
-#define DTWAIN_CV_ICAPICCPROFILE                    0x1155
-#define DTWAIN_CV_ICAPAUTOSIZE                      0x1156
-#define DTWAIN_CV_ICAPAUTOMATICCROPUSESFRAME        0x1157
-#define DTWAIN_CV_ICAPAUTOMATICLENGTHDETECTION      0x1158
-#define DTWAIN_CV_ICAPAUTOMATICCOLORENABLED         0x1159
-#define DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE 0x115a
-#define DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED        0x115b
-#define DTWAIN_CV_ICAPIMAGEMERGE                    0x115c
-#define DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD     0x115d
-#define DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO         0x115e
-#define DTWAIN_CV_ICAPFILMTYPE                      0x115f
-#define DTWAIN_CV_ICAPMIRROR                        0x1160
-#define DTWAIN_CV_ICAPJPEGSUBSAMPLING               0x1161
-#define DTWAIN_CV_ACAPAUDIOFILEFORMAT               0x1201
-#define DTWAIN_CV_ACAPXFERMECH                      0x1202
-#define DTWAIN_CFMCV_CAPCFMSTART                2048
-#define DTWAIN_CFMCV_CAPDUPLEXSCANNER           (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+10)
-#define DTWAIN_CFMCV_CAPDUPLEXENABLE            (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+11)
-#define DTWAIN_CFMCV_CAPSCANNERNAME             (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+12)
-#define DTWAIN_CFMCV_CAPSINGLEPASS              (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+13)
-#define DTWAIN_CFMCV_CAPERRHANDLING             (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+20)
-#define DTWAIN_CFMCV_CAPFEEDERSTATUS            (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+21)
-#define DTWAIN_CFMCV_CAPFEEDMEDIUMWAIT          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+22)
-#define DTWAIN_CFMCV_CAPFEEDWAITTIME            (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+23)
-#define DTWAIN_CFMCV_ICAPWHITEBALANCE           (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+24)
-#define DTWAIN_CFMCV_ICAPAUTOBINARY             (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+25)
-#define DTWAIN_CFMCV_ICAPIMAGESEPARATION        (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+26)
-#define DTWAIN_CFMCV_ICAPHARDWARECOMPRESSION    (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+27)
-#define DTWAIN_CFMCV_ICAPIMAGEEMPHASIS          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+28)
-#define DTWAIN_CFMCV_ICAPOUTLINING              (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+29)
-#define DTWAIN_CFMCV_ICAPDYNTHRESHOLD           (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+30)
-#define DTWAIN_CFMCV_ICAPVARIANCE               (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+31)
-#define DTWAIN_CFMCV_CAPENDORSERAVAILABLE       (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+32)
-#define DTWAIN_CFMCV_CAPENDORSERENABLE          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+33)
-#define DTWAIN_CFMCV_CAPENDORSERCHARSET         (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+34)
-#define DTWAIN_CFMCV_CAPENDORSERSTRINGLENGTH    (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+35)
-#define DTWAIN_CFMCV_CAPENDORSERSTRING          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+36)
-#define DTWAIN_CFMCV_ICAPDYNTHRESHOLDCURVE      (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+48)
-#define DTWAIN_CFMCV_ICAPSMOOTHINGMODE          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+49)
-#define DTWAIN_CFMCV_ICAPFILTERMODE             (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+50)
-#define DTWAIN_CFMCV_ICAPGRADATION              (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+51)
-#define DTWAIN_CFMCV_ICAPMIRROR                 (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+52)
-#define DTWAIN_CFMCV_ICAPEASYSCANMODE           (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+53)
-#define DTWAIN_CFMCV_ICAPSOFTWAREINTERPOLATION  (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+54)
-#define DTWAIN_CFMCV_ICAPIMAGESEPARATIONEX      (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+55)
-#define DTWAIN_CFMCV_CAPDUPLEXPAGE              (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+56)
-#define DTWAIN_CFMCV_ICAPINVERTIMAGE            (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+57)
-#define DTWAIN_CFMCV_ICAPSPECKLEREMOVE          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+58)
-#define DTWAIN_CFMCV_ICAPUSMFILTER              (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+59)
-#define DTWAIN_CFMCV_ICAPNOISEFILTERCFM         (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+60)
-#define DTWAIN_CFMCV_ICAPDESCREENING            (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+61)
-#define DTWAIN_CFMCV_ICAPQUALITYFILTER          (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+62)
-#define DTWAIN_CFMCV_ICAPBINARYFILTER           (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+63)
-#define DTWAIN_OCRCV_IMAGEFILEFORMAT  0x1000
-#define DTWAIN_OCRCV_DESKEW           0x1001
-#define DTWAIN_OCRCV_DESHADE          0x1002
-#define DTWAIN_OCRCV_ORIENTATION      0x1003
-#define DTWAIN_OCRCV_NOISEREMOVE      0x1004
-#define DTWAIN_OCRCV_LINEREMOVE       0x1005
-#define DTWAIN_OCRCV_INVERTPAGE       0x1006
-#define DTWAIN_OCRCV_INVERTZONES      0x1007
-#define DTWAIN_OCRCV_LINEREJECT       0x1008
-#define DTWAIN_OCRCV_CHARACTERREJECT  0x1009
-#define DTWAIN_OCRCV_ERRORREPORTMODE  0x1010
-#define DTWAIN_OCRCV_ERRORREPORTFILE  0x1011
-#define DTWAIN_OCRCV_PIXELTYPE        0x1012
-#define DTWAIN_OCRCV_BITDEPTH         0x1013
-#define DTWAIN_OCRCV_RETURNCHARINFO   0x1014
-#define DTWAIN_OCRCV_NATIVEFILEFORMAT 0x1015
-#define DTWAIN_OCRCV_MPNATIVEFILEFORMAT 0x1016
-#define DTWAIN_OCRCV_SUPPORTEDCAPS    0x1017
-#define DTWAIN_OCRCV_DISABLECHARACTERS 0x1018
-#define DTWAIN_OCRCV_REMOVECONTROLCHARS 0x1019
-#define DTWAIN_OCRORIENT_OFF          0
-#define DTWAIN_OCRORIENT_AUTO         1
-#define DTWAIN_OCRORIENT_90           2
-#define DTWAIN_OCRORIENT_180          3
-#define DTWAIN_OCRORIENT_270          4
-#define DTWAIN_OCRIMAGEFORMAT_AUTO       10000
-#define DTWAIN_OCRERROR_MODENONE      0
-#define DTWAIN_OCRERROR_SHOWMSGBOX    1
-#define DTWAIN_OCRERROR_WRITEFILE     2
-#define DTWAIN_PDFTEXT_ALLPAGES       0x00000001
-#define DTWAIN_PDFTEXT_EVENPAGES      0x00000002
-#define DTWAIN_PDFTEXT_ODDPAGES       0x00000004
-#define DTWAIN_PDFTEXT_FIRSTPAGE      0x00000008
-#define DTWAIN_PDFTEXT_LASTPAGE       0x00000010
-#define DTWAIN_PDFTEXT_CURRENTPAGE    0x00000020
-#define DTWAIN_PDFTEXT_DISABLED       0x00000040  // text is ignored 
-#define DTWAIN_PDFTEXT_TOPLEFT        0x00000100
-#define DTWAIN_PDFTEXT_TOPRIGHT       0x00000200
-#define DTWAIN_PDFTEXT_HORIZCENTER    0x00000400
-#define DTWAIN_PDFTEXT_VERTCENTER     0x00000800
-#define DTWAIN_PDFTEXT_BOTTOMLEFT     0x00001000
-#define DTWAIN_PDFTEXT_BOTTOMRIGHT    0x00002000
-#define DTWAIN_PDFTEXT_BOTTOMCENTER   0x00004000
-#define DTWAIN_PDFTEXT_TOPCENTER      0x00008000
-#define DTWAIN_PDFTEXT_XCENTER        0x00010000
-#define DTWAIN_PDFTEXT_YCENTER        0x00020000
-#define DTWAIN_PDFTEXT_NOSCALING      0x00100000
-#define DTWAIN_PDFTEXT_NOCHARSPACING  0x00200000
-#define DTWAIN_PDFTEXT_NOWORDSPACING  0x00400000
-#define DTWAIN_PDFTEXT_NOSTROKEWIDTH  0x00800000
-#define DTWAIN_PDFTEXT_NORENDERMODE   0x01000000
-#define DTWAIN_PDFTEXT_NORGBCOLOR     0x02000000
-#define DTWAIN_PDFTEXT_NOFONTSIZE     0x04000000
-#define DTWAIN_PDFTEXT_NOABSPOSITION  0x08000000
-#define DTWAIN_PDFTEXT_IGNOREALL      0xFFF00000
-#define DTWAIN_FONT_COURIER              0
-#define DTWAIN_FONT_COURIERBOLD          1
-#define DTWAIN_FONT_COURIERBOLDOBLIQUE   2
-#define DTWAIN_FONT_COURIEROBLIQUE       3
-#define DTWAIN_FONT_HELVETICA            4
-#define DTWAIN_FONT_HELVETICABOLD        5
-#define DTWAIN_FONT_HELVETICABOLDOBLIQUE 6
-#define DTWAIN_FONT_HELVETICAOBLIQUE     7
-#define DTWAIN_FONT_TIMESBOLD            8
-#define DTWAIN_FONT_TIMESBOLDITALIC      9
-#define DTWAIN_FONT_TIMESROMAN          10
-#define DTWAIN_FONT_TIMESITALIC         11
-#define DTWAIN_FONT_SYMBOL              12
-#define DTWAIN_FONT_ZAPFDINGBATS        13
-#define DTWAIN_PDFRENDER_FILL       0
-#define DTWAIN_PDFRENDER_STROKE     1
-#define DTWAIN_PDFRENDER_FILLSTROKE 2
-#define DTWAIN_PDFRENDER_INVISIBLE  3  // the text exists, but is not visible
-#define DTWAIN_PDFTEXTELEMENT_SCALINGXY		0
-#define DTWAIN_PDFTEXTELEMENT_FONTHEIGHT	1
-#define DTWAIN_PDFTEXTELEMENT_WORDSPACING	2
-#define DTWAIN_PDFTEXTELEMENT_POSITION		3
-#define DTWAIN_PDFTEXTELEMENT_COLOR			4
-#define DTWAIN_PDFTEXTELEMENT_STROKEWIDTH	5
-#define DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS	6
-#define DTWAIN_PDFTEXTELEMENT_FONTNAME		7
-#define DTWAIN_PDFTEXTELEMENT_TEXT			8
-#define DTWAIN_PDFTEXTELEMENT_RENDERMODE	9
-#define DTWAIN_PDFTEXTELEMENT_CHARSPACING	10
-#define DTWAIN_PDFTEXTELEMENT_ROTATIONANGLE	11
-#define DTWAIN_PDFTEXTELEMENT_LEADING		12
-#define DTWAIN_PDFTEXTELEMENT_SCALING		13
-#define DTWAIN_PDFTEXTELEMENT_TEXTLENGTH    14
-#define DTWAIN_PDFTEXTELEMENT_SKEWANGLES    15
-#define DTWAIN_PDFTEXTELEMENT_TRANSFORMORDER 16
-#define DTWAIN_PDFTEXTTRANSFORM_TSRK       0
-#define DTWAIN_PDFTEXTTRANSFORM_TSKR       1
-#define DTWAIN_PDFTEXTTRANSFORM_TKSR       2
-#define DTWAIN_PDFTEXTTRANSFORM_TKRS       3
-#define DTWAIN_PDFTEXTTRANSFORM_TRSK       4 
-#define DTWAIN_PDFTEXTTRANSFORM_TRKS       5 
-#define DTWAIN_PDFTEXTTRANSFORM_STRK       6 
-#define DTWAIN_PDFTEXTTRANSFORM_STKR       7
-#define DTWAIN_PDFTEXTTRANSFORM_SKTR       8
-#define DTWAIN_PDFTEXTTRANSFORM_SKRT       9
-#define DTWAIN_PDFTEXTTRANSFORM_SRTK       10
-#define DTWAIN_PDFTEXTTRANSFORM_SRKT       11
-#define DTWAIN_PDFTEXTTRANSFORM_RSTK       12
-#define DTWAIN_PDFTEXTTRANSFORM_RSKT       13
-#define DTWAIN_PDFTEXTTRANSFORM_RTSK       14
-#define DTWAIN_PDFTEXTTRANSFORM_RTKT       15
-#define DTWAIN_PDFTEXTTRANSFORM_RKST       16
-#define DTWAIN_PDFTEXTTRANSFORM_RKTS       17
-#define DTWAIN_PDFTEXTTRANSFORM_KSTR        18
-#define DTWAIN_PDFTEXTTRANSFORM_KSRT        19
-#define DTWAIN_PDFTEXTTRANSFORM_KRST        20
-#define DTWAIN_PDFTEXTTRANSFORM_KRTS        21
-#define DTWAIN_PDFTEXTTRANSFORM_KTSR        22
-#define DTWAIN_PDFTEXTTRANSFORM_KTRS        23
-#define DTWAIN_PDFTEXTTRANFORM_LAST         DTWAIN_PDFTEXTTRANSFORM_KTRS
+
+/* CAP_DOUBLEFEED... */
+#define DTWAIN_TWDF_ULTRASONIC          0
+#define DTWAIN_TWDF_BYLENGTH            1
+#define DTWAIN_TWDF_INFRARED            2
+
+/* DTWAIN Twain name lookup constants */
+#define DTWAIN_CONSTANT_TWPT     0
+#define DTWAIN_CONSTANT_TWUN     1
+#define DTWAIN_CONSTANT_TWCY     2
+#define DTWAIN_CONSTANT_TWAL     3
+#define DTWAIN_CONSTANT_TWAS     4
+#define DTWAIN_CONSTANT_TWBCOR   5
+#define DTWAIN_CONSTANT_TWBD     6
+#define DTWAIN_CONSTANT_TWBO     7
+#define DTWAIN_CONSTANT_TWBP     8
+#define DTWAIN_CONSTANT_TWBR     9
+#define DTWAIN_CONSTANT_TWBT     10
+#define DTWAIN_CONSTANT_TWCP     11
+#define DTWAIN_CONSTANT_TWCS     12
+#define DTWAIN_CONSTANT_TWDE     13
+#define DTWAIN_CONSTANT_TWDR     14
+#define DTWAIN_CONSTANT_TWDSK    15
+#define DTWAIN_CONSTANT_TWDX     16
+#define DTWAIN_CONSTANT_TWFA     17
+#define DTWAIN_CONSTANT_TWFE     18
+#define DTWAIN_CONSTANT_TWFF     19
+#define DTWAIN_CONSTANT_TWFL     20
+#define DTWAIN_CONSTANT_TWFO     21
+#define DTWAIN_CONSTANT_TWFP     22
+#define DTWAIN_CONSTANT_TWFR     23
+#define DTWAIN_CONSTANT_TWFT     24
+#define DTWAIN_CONSTANT_TWFY     22
+#define DTWAIN_CONSTANT_TWIA     23
+#define DTWAIN_CONSTANT_TWIC     27
+#define DTWAIN_CONSTANT_TWIF     28
+#define DTWAIN_CONSTANT_TWIM     29
+#define DTWAIN_CONSTANT_TWJC     30
+#define DTWAIN_CONSTANT_TWJQ     31
+#define DTWAIN_CONSTANT_TWLP     32
+#define DTWAIN_CONSTANT_TWLS     33
+#define DTWAIN_CONSTANT_TWMD     34
+#define DTWAIN_CONSTANT_TWNF     35
+#define DTWAIN_CONSTANT_TWOR     36
+#define DTWAIN_CONSTANT_TWOV     37
+#define DTWAIN_CONSTANT_TWPA     38
+#define DTWAIN_CONSTANT_TWPC     39
+#define DTWAIN_CONSTANT_TWPCH    40
+#define DTWAIN_CONSTANT_TWPF     41
+#define DTWAIN_CONSTANT_TWPM     42
+#define DTWAIN_CONSTANT_TWPR     43
+#define DTWAIN_CONSTANT_TWPF2    44
+#define DTWAIN_CONSTANT_TWCT     45
+#define DTWAIN_CONSTANT_TWPS     46
+#define DTWAIN_CONSTANT_TWSS     47
+#define DTWAIN_CONSTANT_TWPH     48
+#define DTWAIN_CONSTANT_TWCI     49
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_TWCI + 1)
+
+/* This ID is the start of user-defined custom resources */
+#define DTWAIN_USERRES_START     20000
+
+/* Maximum length for a resource string*/
+#define DTWAIN_USERRES_MAXSIZE   8192
+
 #endif

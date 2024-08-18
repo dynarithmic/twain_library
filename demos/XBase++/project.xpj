@@ -1,0 +1,24 @@
+[PROJECT]
+    TARGET_DIR    = .\run
+    VERSION       = 2.3
+    Project.xpj
+
+[Project.xpj]
+    runner.exe
+
+[runner.exe]
+    COMPILE              = xpp
+    COMPILE_FLAGS        = /wi /wl /wu /q /w
+    DEBUG                = yes
+    GUI                  = no
+    LINKER               = alink
+    LINK_FLAGS           = 
+    RC_COMPILE           = arc
+    RC_FLAGS             = 
+    INTERMEDIATE_DEBUG   = .debug
+    INTERMEDIATE_RELEASE = .release
+// $START-AUTODEPEND
+    main.obj
+// $STOP-AUTODEPEND
+    main.prg
+
