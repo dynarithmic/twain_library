@@ -26,8 +26,9 @@ OF THIRD PARTY RIGHTS.
 #include <utility>
 #include <cstdlib>
 #include <vector>
-#include <numeric>
-#include <algorithm>
+#include <cstdint>
+#include <cstring>
+#include <dtwpdft.h>
 
 namespace dynarithmic
 {
@@ -36,20 +37,20 @@ namespace dynarithmic
         class twain_source;
         struct pdf_rendermode_value
         {
-            static constexpr LONG fill = DTWAIN_PDFRENDER_FILL;
-            static constexpr LONG stroke = DTWAIN_PDFRENDER_STROKE;
-            static constexpr LONG fillstroke = DTWAIN_PDFRENDER_FILLSTROKE;
-            static constexpr LONG invisible = DTWAIN_PDFRENDER_INVISIBLE;
+            static constexpr int32_t fill = DTWAIN_PDFRENDER_FILL;
+            static constexpr int32_t stroke = DTWAIN_PDFRENDER_STROKE;
+            static constexpr int32_t fillstroke = DTWAIN_PDFRENDER_FILLSTROKE;
+            static constexpr int32_t invisible = DTWAIN_PDFRENDER_INVISIBLE;
         };
 
         struct pdf_printpage_value
         {
-            static constexpr LONG allpages = DTWAIN_PDFTEXT_ALLPAGES;
-            static constexpr LONG evenpages = DTWAIN_PDFTEXT_EVENPAGES;
-            static constexpr LONG oddpages = DTWAIN_PDFTEXT_ODDPAGES;
-            static constexpr LONG firstpage = DTWAIN_PDFTEXT_FIRSTPAGE;
-            static constexpr LONG lastpage = DTWAIN_PDFTEXT_LASTPAGE;
-            static constexpr LONG currentpage = DTWAIN_PDFTEXT_CURRENTPAGE;
+            static constexpr int32_t allpages = DTWAIN_PDFTEXT_ALLPAGES;
+            static constexpr int32_t evenpages = DTWAIN_PDFTEXT_EVENPAGES;
+            static constexpr int32_t oddpages = DTWAIN_PDFTEXT_ODDPAGES;
+            static constexpr int32_t firstpage = DTWAIN_PDFTEXT_FIRSTPAGE;
+            static constexpr int32_t lastpage = DTWAIN_PDFTEXT_LASTPAGE;
+            static constexpr int32_t currentpage = DTWAIN_PDFTEXT_CURRENTPAGE;
         };
 
         enum class pdf_pageignore_flag : uint32_t
@@ -71,12 +72,12 @@ namespace dynarithmic
             std::string m_font;
             int m_fontsize;
             uint32_t m_color;
-            LONG m_rendermode;
+            int32_t m_rendermode;
             double m_scaling;
             double m_charspacing;
             double m_wordspacing;
             uint32_t m_strokewidth;
-            LONG m_printpage;
+            int32_t m_printpage;
             std::vector<pdf_pageignore_flag> m_vIgnoreflags;
 
             static constexpr const char * fontnames[] = {
@@ -100,17 +101,17 @@ namespace dynarithmic
                 typedef std::vector<pdf_pageignore_flag> pdf_ignoreflag_container;
                 using position_type = std::pair<int32_t, int32_t>;
 
-                pdf_text_element() : m_font("Helvetica"), 
+                pdf_text_element() : m_position{},
+                                     m_font("Helvetica"),
                                      m_fontsize(10), 
-                                     m_color(RGB(0, 0, 0)), 
+                                     m_color(0),
                                      m_rendermode(pdf_rendermode_value::fill),
                                      m_scaling(100.0),
                                      m_charspacing(0),
                                      m_wordspacing(0),
                                      m_strokewidth(0),
-                                     m_printpage(pdf_printpage_value::currentpage),
-                                     m_vIgnoreflags{pdf_pageignore_flag::ignorenone},
-                                     m_position{} {}
+                                     m_printpage(pdf_printpage_value::currentpage)
+                {}
 
                 static bool is_supported_font(const char* fontName)
                 {
@@ -129,12 +130,12 @@ namespace dynarithmic
                 pdf_text_element& set_font(const std::string& s) { m_font = s; return *this; }
                 pdf_text_element& set_color(uint32_t color) { m_color = color; return *this; }
                 pdf_text_element& set_fontsize(int sz) { m_fontsize = sz; return *this; }
-                pdf_text_element& set_rendermode(LONG rm) { m_rendermode = rm; return *this; }
+                pdf_text_element& set_rendermode(int32_t rm) { m_rendermode = rm; return *this; }
                 pdf_text_element& set_scaling(double val) { m_scaling = val; return *this; }
                 pdf_text_element& set_charspacing(double val) { m_charspacing = val; return *this; }
                 pdf_text_element& set_wordspacing(double val) { m_wordspacing = val; return *this; }
                 pdf_text_element& set_strokewidth(uint32_t val) { m_strokewidth = val; return *this; }
-                pdf_text_element& set_whichpages(LONG whichpage) { m_printpage = whichpage; return *this; }
+                pdf_text_element& set_whichpages(int32_t whichpage) { m_printpage = whichpage; return *this; }
                 pdf_text_element& set_ignoreflags(const pdf_ignoreflag_container& vectFlags) { m_vIgnoreflags = vectFlags; return *this; }
 
                 std::string get_text() const { return m_text; }
@@ -144,12 +145,12 @@ namespace dynarithmic
                 std::string get_font() const  { return m_font; }
                 uint32_t get_color() const { return m_color; }
                 int get_fontsize() const { return m_fontsize; }
-                LONG get_rendermode() const { return m_rendermode; }
+                int32_t get_rendermode() const { return m_rendermode; }
                 double get_scaling() const { return m_scaling; }
                 double get_charspacing() const { return m_charspacing; }
                 double get_wordspacing() const { return m_wordspacing; }
                 uint32_t get_strokewidth() const { return m_strokewidth; }
-                LONG get_whichpages() const { return m_printpage; }
+                int32_t get_whichpages() const { return m_printpage; }
                 pdf_ignoreflag_container get_ignoreflags() const { return m_vIgnoreflags; }
                 pdf_ignoreflag_container& get_ignoreflags_ref() { return m_vIgnoreflags; }
 

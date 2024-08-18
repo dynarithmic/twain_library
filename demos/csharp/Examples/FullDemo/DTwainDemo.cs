@@ -376,7 +376,7 @@ namespace TWAINDemo
             {
                 case 0:
                     // Select the source
-                    SelectedSource = TwainAPI.DTWAIN_SelectSource();
+                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero,"Select Source",0,0, TwainAPI.DTWAIN_DLG_CENTER_SCREEN);
                 break;
 
                 case 1:
@@ -627,27 +627,24 @@ namespace TWAINDemo
 
         private void LoggingOptions_Click(object sender, EventArgs e)
         {
-            long LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~TwainAPI.DTWAIN_LOG_ERRORMSGBOX;
+            long LogFlags = TwainAPI.DTWAIN_LOG_CALLSTACK | TwainAPI.DTWAIN_LOG_LOWLEVELTWAIN | TwainAPI.DTWAIN_LOG_DECODE_TWEVENT 
+                | TwainAPI.DTWAIN_LOG_DECODE_TWMEMREF | TwainAPI.DTWAIN_LOG_ISTWAINMSG;
             LogFileSelectionDlg logDlg = new LogFileSelectionDlg();
             DialogResult nResult = logDlg.ShowDialog();
             if (nResult == DialogResult.OK)
             {
                 int debugOption = logDlg.GetDebugOption();
+                TwainAPI.DTWAIN_SetTwainLog(0, "");
                 switch (debugOption)
                 {
                     case 0:
-                        break;
                     case 1:
-                        TwainAPI.DTWAIN_SetTwainLog(0, "");
                     break;
                     case 2:
                         TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName());
                     break;
                     case 3:
-                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags & ~TwainAPI.DTWAIN_LOG_USEFILE), "");
-                        MessageBox.Show("The DebugView debug monitor will start...");
-                        Process.Start("DbgView.exe");
-                        this.Enabled = true;
+                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_DEBUGMONITOR), "");
                     break;
                 }
             }

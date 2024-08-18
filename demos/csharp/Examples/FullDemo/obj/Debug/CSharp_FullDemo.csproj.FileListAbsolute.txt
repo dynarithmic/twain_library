@@ -1,0 +1,17 @@
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\bin\Debug\FullDemo.exe.config
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\bin\Debug\FullDemo.exe
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\bin\Debug\FullDemo.pdb
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\CSharp_FullDemo.csproj.AssemblyReference.cache
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.AboutDlg.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.CustomSelectSource.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.DIBDisplayerDlg.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.DTwainDemo.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.FileTypeDlg.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.LogFileSelectionDlg.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\FullDemo.Properties.Resources.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\TWAINDemo.SelectSourceByNameBox.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\FullDemo.SourcePropertiesDlg.resources
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\CSharp_FullDemo.csproj.GenerateResource.cache
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\CSharp_FullDemo.csproj.CoreCompileInputs.cache
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\FullDemo.exe
+C:\Repos-Copy\Dynarithmic\twain_library_source\development_2019\demos\csharp\Examples\FullDemo\obj\Debug\FullDemo.pdb

@@ -21,8 +21,7 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_TWAIN_ERROR_LOGGER_DETAILS_HPP
 #define DTWAIN_TWAIN_ERROR_LOGGER_DETAILS_HPP
 
-#include <deque>
-#include <dtwain.h>
+#include <cstddef>
 
 namespace dynarithmic
 {

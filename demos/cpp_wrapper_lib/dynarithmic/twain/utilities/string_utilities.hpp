@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2022 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,9 +24,13 @@ OF THIRD PARTY RIGHTS.
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <sstream>
+#include <numeric>
 
-#pragma warning( push )  // Stores the current warning state for every warning.
-#pragma warning( disable:4996)
+#ifdef _MSC_VER
+    #pragma warning( push )  // Stores the current warning state for every warning.
+    #pragma warning( disable:4996)
+#endif
 
 namespace dynarithmic
 {
@@ -58,17 +62,33 @@ namespace dynarithmic
             return rtrim(str);
         }
 
-        std::string trim_copy(const std::string& str)
+        std::string trim_copy(std::string str)
         {
-            auto s = str;
-            return ltrim(rtrim(s));
+            return ltrim(rtrim(str));
         }
 
         std::string& trim(std::string& str)
         {
             return ltrim(rtrim(str));
         }
+
+        template <typename Container>
+        std::string join(const Container& ct, std::string separator)
+        {
+            return std::accumulate(ct.begin(), ct.end(), std::string(),
+                [&](const auto& str, typename Container::value_type val)
+                {
+                    std::ostringstream strm;
+                    if (!str.empty())
+                        strm << str << separator << val;
+                    else
+                        strm << val;
+                    return strm.str();
+                });
+        }
     }
 }
-#pragma warning(pop)
+#ifdef _MSC_VER
+    #pragma warning(pop)
+#endif
 #endif

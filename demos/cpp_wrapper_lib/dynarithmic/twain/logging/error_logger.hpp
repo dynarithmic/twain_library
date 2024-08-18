@@ -22,6 +22,7 @@ OF THIRD PARTY RIGHTS.
 #define DTWAIN_TWAIN_ERROR_DETAILS_HPP
 
 #include <deque>
+#include <cstdint>
 
 namespace dynarithmic
 {

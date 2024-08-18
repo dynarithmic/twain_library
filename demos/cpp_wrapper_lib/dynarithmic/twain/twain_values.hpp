@@ -30,6 +30,7 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <limits>
 #include <dynarithmic/twain/tostring/tostring.hpp>
 
 #define DTWAIN_DEFINE_STRING_MAP()  static const std::map<value_type, std::pair<const char *, const char*>>& get_names() \

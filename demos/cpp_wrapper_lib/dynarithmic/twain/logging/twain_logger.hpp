@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2023 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ OF THIRD PARTY RIGHTS.
 #include <string>
 #include <array>
 #include <functional>
-#include <dtwain.h>
+#include <dynarithmic/twain/dtwain_twain.hpp>
 
 namespace dynarithmic
 {
@@ -44,7 +44,6 @@ namespace dynarithmic
             logger_verbosity m_log_verbosity = logger_verbosity::verbose4;
             std::array<LONG, 5> m_verbose_settings;
             bool m_bEnabled = false;
-            bool m_bCustomEnabled = false;
             std::vector<std::function<void(twain_logger&, const char*)>> m_vCustomFuncs;
             public:
                 typedef std::function<void(twain_logger&, const char*)> log_proc_type;
@@ -70,7 +69,7 @@ namespace dynarithmic
                 /// This function will pass a message to the logging system.  The message will show up in the log with time stamp.
                 /// @param[in] msg Message that will be logged to the logging system.
                 /// @returns **true** if the message was sent to the logging system successfully, **false** otherwise.
-                static bool log_custom_message(std::string msg) { return DTWAIN_LogMessageA(msg.c_str()) ? true : false; }
+                static bool log_custom_message(std::string msg) { return API_INSTANCE DTWAIN_LogMessageA(msg.c_str()) ? true : false; }
         };
     }
 }

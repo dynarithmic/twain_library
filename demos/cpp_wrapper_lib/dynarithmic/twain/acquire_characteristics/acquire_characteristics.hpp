@@ -224,7 +224,7 @@ namespace twain {
              file_transfer_options&      get_file_transfer_options() noexcept { return m_filetransfer_options; }
              general_options&            get_general_options() noexcept { return m_general_options; }
              imageinformation_options&   get_imageinformation_options() noexcept { return m_imageinformation_options; }
-             imageparameter_options&     get_imageparamter_options() noexcept { return m_imageparameter_options; }
+             imageparameter_options&     get_imageparameter_options() noexcept { return m_imageparameter_options; }
              imagetype_options&          get_imagetype_options() noexcept { return m_imagetype_options; }
              imprinter_options&          get_imprinter_options() noexcept { return m_imprinter_options; }
              jobcontrol_options&         get_jobcontrol_options() noexcept { return m_jobcontrol_options; }

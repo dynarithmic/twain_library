@@ -22,12 +22,7 @@ OF THIRD PARTY RIGHTS.
 #define DTWAIN_TWAIN_SOURCE_HPP
 
 #include <utility>
-#include <unordered_map>
-#include <functional>
 #include <algorithm>
-#include <chrono>
-#include <thread>
-#include <tuple>
 #include <numeric>
 #include <string>
 #include <vector>
@@ -75,15 +70,16 @@ namespace dynarithmic
 
                 twain_source(const twain_source&) = delete;
                 twain_source& operator=(const twain_source&) = delete;
-                twain_source(twain_source&& rhs) noexcept : m_bUIOnlyOn(rhs.m_bUIOnlyOn), 
-                                                            m_theSource(rhs.m_theSource), 
-                                                            m_bWeakAttach(rhs.m_bWeakAttach)
+                twain_source(twain_source&& rhs) noexcept :  m_theSource(rhs.m_theSource),
+                                                             m_bUIOnlyOn(rhs.m_bUIOnlyOn),
+                                                             m_bWeakAttach(rhs.m_bWeakAttach)
                 {
                     swap(*this, rhs);
                     rhs.m_theSource = nullptr;
                 }
                 twain_source& operator=(twain_source&& rhs) noexcept;
                 twain_source(const source_select_info& select_info = source_select_info());
+                twain_source& operator=(const source_select_info& select_info);
 
                 ~twain_source() noexcept;
 

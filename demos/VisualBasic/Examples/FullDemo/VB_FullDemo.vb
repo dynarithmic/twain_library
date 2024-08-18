@@ -299,7 +299,7 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Select Case nWhich
             Case 0
-                SelectedSource = DTWAINAPI.DTWAIN_SelectSource
+                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, "Select Source", 0, 0, DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN)
             Case 1
                 Dim objSelectSourceByName As SelectSourceByName = New SelectSourceByName()
                 Dim nResult As DialogResult = objSelectSourceByName.ShowDialog()
@@ -568,11 +568,11 @@ Public Class VB_FullDemo
         Dim nResult As DialogResult = logDlg.ShowDialog()
         If nResult = DialogResult.OK Then
             Dim debugOption As Integer = logDlg.GetDebugOption()
+            DTWAINAPI.DTWAIN_SetTwainLog(0, "")
             Select Case debugOption
                 Case 0
                     Exit Select
                 Case 1
-                    DTWAINAPI.DTWAIN_SetTwainLog(0, "")
                     Exit Select
                 Case 2
                     DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())

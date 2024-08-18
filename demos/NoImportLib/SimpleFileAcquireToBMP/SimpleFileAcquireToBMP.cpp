@@ -1,6 +1,8 @@
 // SimpleFileAcquireToBMP.cpp : Defines the entry point for the console application.
 //
-
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include "stdafx.h"
 #include <stdio.h>
 #include <string.h>

@@ -24,7 +24,7 @@ OF THIRD PARTY RIGHTS.
 /* DTWAIN File Types.  Use only if Source does not support File Transfer, or
 if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_BMP          100   /* Windows BMP file */
-#define DTWAIN_JPEG         200   /* JPEG - See DTWAIN_SetJPEGQuality  */
+#define DTWAIN_JPEG         200   /* JPEG - See DTWAIN_SetJpegValues  */
 
 #define DTWAIN_PDF          250   /* Adobe Acrobat PDF File */
 #define DTWAIN_PDFMULTI     251   /* Multi-page PDF file */
@@ -38,7 +38,7 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_TIFFG4       800   /* Group 4 CCITT Tiff (FAX format) */
 #define DTWAIN_TIFFPACKBITS 801   /* Huffman encoded Tiff */
 #define DTWAIN_TIFFDEFLATE  802   /* TIFF packed with z-lib encoded data*/
-#define DTWAIN_TIFFJPEG     803   /* See DTWAIN_SetJPEGQuality  */
+#define DTWAIN_TIFFJPEG     803   
 #define DTWAIN_TIFFJBIG     804   /* TIFF-JBIG compression (not implemented due to patent) */
 #define DTWAIN_TIFFPIXARLOG 805   /* TIFF Pixar Log compression (not implemented )*/
 #define DTWAIN_TIFFNONEMULTI  900 /* Multi-page TIFF, No compression by default */
