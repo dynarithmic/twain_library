@@ -20,10 +20,10 @@ OF THIRD PARTY RIGHTS.
 */
 #ifndef DTWAIN_TWAIN_HPP
 #define DTWAIN_TWAIN_HPP
-
-#pragma warning( push )  
-#pragma warning (disable:4996)
-
+#ifdef _MSC_VER
+    #pragma warning( push )
+    #pragma warning (disable:4996)
+#endif
 #ifdef  DTWAIN_NOIMPORTLIB
     #define API_INSTANCE dynarithmic::twain::RuntimeDLL::DTWAIN_API__.
     #include "dtwainx2.h"
@@ -43,6 +43,9 @@ namespace dynarithmic
         };
         #endif
     };
-    #pragma warning( pop )  
+#ifdef _MSC_VER
+    #pragma warning( pop )
+#endif
 }
+
 #endif

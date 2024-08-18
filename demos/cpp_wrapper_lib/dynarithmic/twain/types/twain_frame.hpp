@@ -22,7 +22,7 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_TWAIN_FRAME_HPP
 #define DTWAIN_TWAIN_FRAME_HPP
 
-#include <climits>
+#include <limits>
 
 namespace dynarithmic
 {

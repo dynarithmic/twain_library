@@ -54,9 +54,13 @@ namespace dynarithmic
                 DTWAIN_SOURCE m_twain_source;
             
             public:
-                buffered_transfer_info() : m_hStrip(nullptr), m_nStripSize(0),
-                                            m_nMinSize(0), m_nMaxSize(0), m_nPrefSize(0), 
-                                            m_twain_source(nullptr), m_nCurrentStripSize(0)
+                buffered_transfer_info() : m_hStrip(nullptr),
+                                            m_nStripSize(0),
+                                            m_nCurrentStripSize(0),
+                                            m_nMinSize(0),
+                                            m_nMaxSize(0),
+                                            m_nPrefSize(0),
+                                            m_twain_source(nullptr)
                 {}
 
                 ~buffered_transfer_info();

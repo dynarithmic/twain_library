@@ -128,7 +128,7 @@ namespace dynarithmic
                     }
 
                     public:
-                       pdf_encryption_options() : m_useStrong(true), m_useEncryption(false), m_permissions(0), m_bAutoGenPassword(false) {}
+                       pdf_encryption_options() : m_useStrong(true), m_useEncryption(false), m_bAutoGenPassword(false), m_permissions(0) {}
                        pdf_encryption_options& use_encryption(bool bSet, bool useStrong = true) { m_useEncryption = bSet; m_useStrong = useStrong; return *this; }
                        pdf_encryption_options& use_strong_encryption(bool bSet = true) { m_useEncryption = true; m_useStrong = bSet; return *this; }
                        pdf_encryption_options& use_autogen_password(bool bSet = true) { m_bAutoGenPassword = true; m_useStrong = bSet; return *this; }
@@ -189,10 +189,10 @@ namespace dynarithmic
                         pdf_paper_size_custom m_size_opt;
 
                     public:
-                        static constexpr int default_size = UINT32_MAX;
+                        static constexpr uint32_t default_size = (std::numeric_limits<uint32_t>::max)();
                         pdf_page_size_options() : m_pagesize(papersize_value::USLETTER),
-                                                  m_size_opt(pdf_paper_size_custom::none),
-                                                  m_pagesize_custom({ default_size, default_size }) {}
+                                                  m_pagesize_custom({ default_size, default_size }),
+                                                  m_size_opt(pdf_paper_size_custom::none) {}
 
                         pdf_page_size_options& set_custom_size(uint32_t width, uint32_t height) { m_pagesize_custom = { width, height }; return *this; }
                         pdf_page_size_options& set_page_size(papersize_value::value_type ps) { m_pagesize = ps; return *this; }
@@ -215,7 +215,7 @@ namespace dynarithmic
                         pdf_page_scale m_pagescale;
                         custom_scale_type m_pagescale_custom;
                     public:
-                        static constexpr double default_scale = DBL_MAX;
+                        static constexpr double default_scale = (std::numeric_limits<double>::max)();
 
                         pdf_page_scale_options() : m_pagescale(pdf_page_scale::none),
                                                    m_pagescale_custom({ default_scale, default_scale }) {}

@@ -24,9 +24,8 @@ OF THIRD PARTY RIGHTS.
 #include <ostream>
 #include <vector>
 #include <memory>
-#include <utility>
 #ifndef DTWAIN_NOIMPORTLIB 
-#include <dtwain.h>
+    #include <dtwain.h>
 #else
     #include <dtwainx2.h>
 #endif
@@ -66,6 +65,27 @@ namespace dynarithmic
             image_handler(bool containsImages=true) : vect_image_handle_ptr(containsImages ? new images_vector : nullptr),
                                                                        m_bAutoDestroy(false)
             {}
+
+            image_handler(const image_handler&) = delete;
+            image_handler& operator=(const image_handler&) = delete;
+
+            image_handler(image_handler&& rhs) :
+                vect_image_handle_ptr(rhs.vect_image_handle_ptr),
+                dummy(rhs.dummy),
+                m_bAutoDestroy(rhs.m_bAutoDestroy)
+            {
+                rhs.m_bAutoDestroy = false;
+            }
+
+            image_handler& operator=(image_handler&& rhs)
+            {
+                destroy_image_handles();
+                vect_image_handle_ptr = rhs.vect_image_handle_ptr;
+                dummy = rhs.dummy;
+                m_bAutoDestroy = rhs.m_bAutoDestroy;
+                rhs.m_bAutoDestroy = false;
+                return *this;
+            }
 
             image_handler& set_contains_images(bool bSet)
             {

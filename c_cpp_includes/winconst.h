@@ -33,24 +33,25 @@
 #endif
 
 #if defined (WIN32) || defined (_WIN64)
-#define DllExport       __declspec( dllexport )
-//#define HUGEDEF
-#define DLLEXPORTDEF    DllExport
-#define EXPORTDEF
+    #define DllExport       __declspec( dllexport )
+    //#define HUGEDEF
+    #define DLLEXPORTDEF    DllExport
+    #define EXPORTDEF
 #else
 #ifdef WINDOWS_16
-//#define HUGEDEF         huge
-#define DLLEXPORTDEF
-#define EXPORTDEF       _export
+    //#define HUGEDEF         huge
+    #define DLLEXPORTDEF
+    #define EXPORTDEF       _export
+    #endif
 #endif
 #endif
 
 #ifdef DLLENTRY_DEF
-#undef DLLENTRY_DEF
+    #undef DLLENTRY_DEF
 #endif
 
 #ifdef IMGFUNC_DEF
-#undef IMGFUNC_DEF
+    #undef IMGFUNC_DEF
 #endif
 
 #define CALLCONVENTION_DEF
@@ -67,72 +68,61 @@
     #elif _MSC_VER >= 1920 && _MSC_VER < 1930
         #pragma message ("Microsoft Visual Studio 2019 compiler defined")
     #elif _MSC_VER >= 1930
-        #pragma message ("Microsoft Visual Studio 2022 compiler defined")
+        #pragma message ("Microsoft Visual Studio 2022 (or greater) compiler defined")
     #endif
 #endif
 
-#ifndef _MSC_VER
-    #pragma message("Unsupported compiler being used to compile DTWAIN")
-#endif
-
-#if defined (UNICODE) || defined (_UNICODE)
-    #pragma message ("DTWAIN Library using Unicode is active")
-#else
-    #pragma message ("DTWAIN Library using ANSI/MBCS is active")
+#ifdef _MSC_VER
+    #if defined (UNICODE) || defined (_UNICODE)
+        #pragma message ("DTWAIN Library using Unicode is active")
+    #else
+        #pragma message ("DTWAIN Library using ANSI/MBCS is active")
+    #endif
 #endif
 
 #if defined(DTWAIN_STDCALL) || !defined(DTWAIN_LIB)
     #undef CALLCONVENTION_DEF
     #define CALLCONVENTION_DEF __stdcall
-    #pragma message ("DTWAIN Using __stdcall calling convention")
+    #ifdef _MSC_VER
+        #pragma message ("DTWAIN Using __stdcall calling convention")
+    #endif
 #else
     #undef CALLCONVENTION_DEF
     #define CALLCONVENTION_DEF __cdecl
-    #pragma message ("DTWAIN Using __cdecl calling convention")
-#endif
-
-#ifdef BUILDING_DTWAINDLL
-    #ifdef _DEBUG
-	    #pragma message ("DTWAIN Debug Library building...")
-    #else
-	    #pragma message ("DTWAIN Release Library building...")
+    #ifdef _MSC_VER
+        #pragma message ("DTWAIN Using __cdecl calling convention")
     #endif
 #endif
 
-#if defined(DTWAIN_LIB)
-    #define DLLENTRY_DEF CALLCONVENTION_DEF
-    #define EXPORTDEF
-    #define DLLEXORTDEF
-    #define CALLBACK_DEF  __stdcall
-    #if defined (WIN64) || defined (_WIN64)
-        #pragma message("DTWAIN static LIB for Win64")
-        #define IMGFUNC_DEF  __stdcall
-    #else
-    #if defined(WIN32) || defined(_WIN32)
-         #pragma message("DTWAIN static LIB for Win32")
-        #define IMGFUNC_DEF  __stdcall
-    #else
-         #pragma message("DTWAIN static LIB for Win16")
-        #define IMGFUNC_DEF  FAR PASCAL
+#ifdef _MSC_VER
+    #ifdef BUILDING_DTWAINDLL
+        #ifdef _DEBUG
+            #pragma message ("DTWAIN Debug Library building...")
+        #else
+            #pragma message ("DTWAIN Release Library building...")
+        #endif
     #endif
-    #endif
-#else
-    #undef CALLCONVENTION_DEF
-    #define CALLCONVENTION_DEF __stdcall
-    #define DECLSPEC_DEF
-    #define CALLBACK_DEF DECLSPEC_DEF __stdcall
-    #if defined(WIN32) || defined(_WIN32) || defined (WIN64) || defined(_WIN64)
-        #if defined(DTWAIN_DLL) || defined(DTWAIN_OCX) || defined(DTWAIN_VB)
-            #define DLLENTRY_DEF DECLSPEC_DEF CALLCONVENTION_DEF
-            #define IMGFUNC_DEF  __stdcall
+#endif
+
+#undef CALLCONVENTION_DEF
+#define CALLCONVENTION_DEF __stdcall
+#define DECLSPEC_DEF
+#define CALLBACK_DEF DECLSPEC_DEF __stdcall
+#if defined(WIN32) || defined(_WIN32) || defined (WIN64) || defined(_WIN64)
+    #ifdef DTWAIN_DLL
+        #define DLLENTRY_DEF DECLSPEC_DEF CALLCONVENTION_DEF
+        #define IMGFUNC_DEF  __stdcall
+        #ifdef _MSC_VER
             #if defined(WIN64) || defined (_WIN64)
                 #pragma message("Building 64-bit DTWAIN DLL")
             #else
-            #pragma message("Building 32-bit DTWAIN DLL, OCX or VB version")
+                #pragma message("Building 32-bit DTWAIN DLL, OCX or VB version")
             #endif
-        #else
-            #define DLLENTRY_DEF __stdcall
-            #define IMGFUNC_DEF __declspec(dllexport) CALLCONVENTION_DEF
+        #endif
+    #else
+        #define DLLENTRY_DEF __stdcall
+        #define IMGFUNC_DEF __declspec(dllexport) CALLCONVENTION_DEF
+        #ifdef _MSC_VER
             #if defined (WIN64) || defined(_WIN64)
                 #pragma message("Including 64-bit DTWAIN DLL definitions")
             #else
@@ -140,7 +130,6 @@
             #endif
         #endif
     #endif
-#endif
 #endif
 #define HUGEDEF
 typedef unsigned char HUGEDEF* HUGEPTR_CHAR;

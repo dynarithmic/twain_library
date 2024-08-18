@@ -61,10 +61,11 @@ namespace dynarithmic
         public:
             twain_characteristics() : dsmToUse(dsm_type::legacy_dsm),
                 m_strSearchOrder("WSOCU"),
-                m_bUsingCustomLoop(false),
-                m_bCheckHandles(true),
+                m_strlibLanguage("english"),
                 m_classicSearchOrder(-1),
-                m_strlibLanguage("english") {}
+                m_bUsingCustomLoop(false),
+                m_bCheckHandles(true)
+            {}
 
             /// Indicates the TWAIN Data Source Manager to use (version 1.x or 2.x, or default) when the TWAIN session is started.
             /// @param[in] dsm TWAIN Data Source Manager to use when TWAIN session is started.

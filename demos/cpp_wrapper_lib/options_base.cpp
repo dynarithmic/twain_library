@@ -363,11 +363,11 @@ namespace dynarithmic
         void options_base::apply(twain_source& ts, autoscanning_options& ao)
         {
             auto& ci = ts.get_capability_interface();
-            ao.enable_autoscan({ ao.m_bAutoScan });
-            ao.enable_camerahandling({ ao.m_bCameraEnabled });
-            ao.set_cameraside({ ao.m_CameraSide });
-            ao.set_cameraorder(ao.m_vCameraOrder);
-            ao.set_maxbatchbuffers({ ao.m_MaxBatchBuffers });
+            ci.set_cap_values<CAP_AUTOSCAN_>({ ao.m_bAutoScan });
+            ci.set_cap_values<CAP_CAMERAENABLED_>({ ao.m_bCameraEnabled });
+            ci.set_cap_values<CAP_CAMERASIDE_>({ ao.m_CameraSide });
+            ci.set_cap_values<CAP_CAMERAORDER_>(ao.m_vCameraOrder);
+            ci.set_cap_values<CAP_MAXBATCHBUFFERS_>({ ao.m_MaxBatchBuffers });
         }
     }
 }

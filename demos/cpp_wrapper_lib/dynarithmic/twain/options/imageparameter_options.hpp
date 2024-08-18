@@ -34,6 +34,7 @@ namespace dynarithmic
         {
             friend class options_base;
             bool m_bThumbnailsEnabled;
+            bool m_bForceScaling;
             bool m_bAutoBright;
             double m_Brightness;
             double m_Contrast;
@@ -47,7 +48,7 @@ namespace dynarithmic
             double m_yScaling;
     
             public:
-                imageparameter_options() : m_bThumbnailsEnabled(false), m_bAutoBright(false),
+                imageparameter_options() : m_bThumbnailsEnabled(false), m_bForceScaling(false), m_bAutoBright(false),
                                             m_Brightness(0), m_Contrast(0), m_Highlight(255),
                                             m_MirrorValue(mirror_value::none),
                                             m_OrientationValue(orientation_value::portrait),
@@ -56,6 +57,9 @@ namespace dynarithmic
 
                 imageparameter_options& enable_thumbnails(bool bEnable)
                 { m_bThumbnailsEnabled = bEnable; return *this; }
+
+                imageparameter_options& enable_forced_scaling(bool bEnable)
+                { m_bForceScaling = bEnable; return *this; }
 
                 imageparameter_options& enable_autobright(bool bEnable)
                 { m_bAutoBright = bEnable; return *this; }
@@ -88,6 +92,7 @@ namespace dynarithmic
                 { m_yScaling = val; return *this; }
 
                 bool is_thumbnails_enabled() const { return m_bThumbnailsEnabled; }
+                bool is_force_scaling_enabled() const { return m_bForceScaling; }
                 bool is_autobright_enabled() const { return m_bAutoBright; }
                 double get_brightness() const { return m_Brightness; }
                 double get_contrast() const { return m_Contrast; }
@@ -118,7 +123,6 @@ namespace dynarithmic
                                                                         ICAP_YSCALING };
                         return affected_caps;
                  }
-
         };
     }
 }

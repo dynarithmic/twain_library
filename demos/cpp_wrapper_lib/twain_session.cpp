@@ -22,8 +22,23 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/session/twain_session.hpp>
 #include <dynarithmic/twain/logging/logger_callback.hpp>
 #include <dynarithmic/twain/twain_source.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/join.hpp>
+#include <dynarithmic/twain/utilities/string_utilities.hpp>
+#include <chrono>
+#include <thread>
+
+#if __cplusplus >= 201703L
+    #include <numeric>
+    #include <algorithm>
+    #define USE_CPPSTRING_FUNCS 
+    #define join_strings_ dynarithmic::twain::join
+    #define trim_copy_string_ dynarithmic::twain::trim_copy
+#else
+    #include <boost/algorithm/string.hpp>
+    #include <boost/algorithm/string/join.hpp>
+    #define join_strings_ boost::algorithm::join
+    #define trim_copy_string_ boost::algorithm::trim_copy
+#endif
+
 namespace dynarithmic
 {
     namespace twain
@@ -75,9 +90,6 @@ namespace dynarithmic
                     return false;
                 }
             }
-
-            const void* ptr = reinterpret_cast<const void*>(this);
-            uint64_t ui64 = static_cast<uint64_t>(reinterpret_cast<uintptr_t>(ptr));
 
             API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this)); 
             API_INSTANCE DTWAIN_LoadCustomStringResourcesA(m_twain_characteristics.get_language().c_str());
@@ -315,16 +327,55 @@ namespace dynarithmic
             return API_INSTANCE DTWAIN_CallDSMProc(pSource, pDest, dg, dat, msg, pdata);
         }
 
+
+        /// Selects a TWAIN source by using the passed-in traits object
+        /// 
+        /// @Returns a source_select_info describing the selection of the source 
+        source_select_info twain_session::select_source(select_source_traits& traits)
+        {
+            switch (traits.get_select_type())
+            {
+                case select_source_traits::use_legacy:
+                {
+                    return select_source();
+                }
+                break;
+                case select_source_traits::use_enhanced_dialog:
+                {
+                    return select_source(select_usedialog(traits.get_enhanced_dialog()));
+                }
+                break;
+                case select_source_traits::use_name:
+                {
+                    return select_source(select_byname(traits.get_source_name()));
+                }
+                break;
+                case select_source_traits::use_default:
+                {
+                    return select_source(select_default());
+                }
+                break;
+            }
+            return {};
+        }
+
         /// Returns an error string that describes the error given by **error_number**
         /// 
         /// @param[in] error_number The number of the error.
         /// @returns An error string that describes the error
         /// @see get_last_error() twain_characteristics.get_language()
         /// @note The error string will be in the language specified by twain_characteristics::get_language()
-         std::string twain_session::get_error_string(int32_t error_number)
+        std::string twain_session::get_error_string(int32_t error_number)
         {
-            char sz[1024] = {};
-            API_INSTANCE DTWAIN_GetErrorStringA(error_number, sz, 1024);
+            char sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
+            API_INSTANCE DTWAIN_GetErrorStringA(error_number, sz, DTWAIN_USERRES_MAXSIZE);
+            return sz;
+        }
+
+        std::string twain_session::get_resource_string(int32_t resource_id)
+        {
+            char sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
+            API_INSTANCE DTWAIN_GetResourceStringA(resource_id, sz, DTWAIN_USERRES_MAXSIZE);
             return sz;
         }
 
@@ -508,7 +559,7 @@ namespace dynarithmic
         {
             auto container = container_in;
             std::transform(std::begin(container_in), std::end(container_in), std::begin(container),
-                [](const std::string& s) { return boost::algorithm::trim_copy(s); });
+                [](const std::string& s) { return trim_copy_string_(s); });
             std::string sAllDetails;
 #ifdef DTWAIN_USELOADEDLIB
             sAllDetails = json_generator().generate_details(*this, container,true);
@@ -529,7 +580,7 @@ namespace dynarithmic
             auto allSources = get_all_source_info();
             for (auto& sourceName : container)
             {
-                std::string sKeyToUse = boost::algorithm::trim_copy(sourceName);
+                std::string sKeyToUse = trim_copy_string_(sourceName);
                 if (std::find_if(allSources.begin(), allSources.end(),
                     [&](const source_basic_info& info) { return info.get_product_name() == sKeyToUse; }) ==
                     allSources.end())
@@ -538,7 +589,7 @@ namespace dynarithmic
             }
             if (aValidSources.empty())
                 return {};
-            std::string sources = boost::algorithm::join(aValidSources, "|");
+            std::string sources = join_strings_(aValidSources, "|");
             LONG nChars = API_INSTANCE DTWAIN_GetSessionDetailsA(nullptr, 0, info.indentFactor, TRUE);
             if (nChars > 0)
             {
