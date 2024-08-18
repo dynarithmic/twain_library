@@ -248,7 +248,7 @@ For the first item, some compilers have external tools that allow you to use Vis
 
 For the second item, no import libraries are required, thus makes this choice the recommended option.  
 
-There are many DTWAIN functions, and you might be fearful of having to write code that tediously tries to create function pointers, call **GetProcAddress**, etc.  There is no need to do that, as there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary Windows API functions.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/language_bindings_and_examples/C_CPP_DynamicLoad).  
+There are many DTWAIN functions, and you might be fearful of having to write code that tediously tries to create function pointers, call **GetProcAddress**, etc.  There is no need to do that, as there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary Windows API functions.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/programming_language_bindings/C_CPP_DynamicLoad).  
 
 In addition, one of the files in the set of bindings is the C/C++ source file **dtwimpl.cpp** (or **dtwimpl.c** if you are using plain C) -- this file will need to be added to your project, as it contains the needed infrastructure for the binding to work properly.  Failure to add this source file will result in linker errors when building your application.
 
@@ -301,7 +301,7 @@ Note: To utilize other computer languages, it still requires that one of the [DT
 
 ----
 
-DTWAIN includes computer language bindings for the following computer languages and utilities found in the [language_bindings_and_examples](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples) folder:
+DTWAIN includes computer language bindings for the following computer languages and utilities found in the [language_bindings_and_examples](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
       C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
       C# 
@@ -362,7 +362,7 @@ namespace Test
 ----
 ###### Quick Example (Python)  
 
-Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/language_bindings_and_examples/Python) file that defines the DTWAIN constants.  The program gives an example of acquiring a BMP image from a TWAIN device installed on your system:
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of acquiring a BMP image from a TWAIN device installed on your system:
 
 
 ```python
