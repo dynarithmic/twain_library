@@ -125,7 +125,8 @@ If these files are not found, you will receive the following error when running 
 
 Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  If **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, a subsequent call to **DTWAIN_GetLastError** will return **-1051**, indicating that the DTWAIN resources were not loaded.
 
-Note: Make sure that you use the latest version of the text resources.  If you are not using a version of 
+Note: Make sure that you use the latest version of the text resources.  A check for the resource version is done by DTWAIN when **DTWAIN_SysInitialize** is called.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+
 In addition, there are optional string resource files available.  Here are a list of those files:
 	
 	twainresourcestrings_dutch.txt 	 	    Dutch resources
