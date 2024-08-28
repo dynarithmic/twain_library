@@ -70,7 +70,7 @@
 #define IDC_btnBrowse                       7006
 #define IDM_LOGGING_OPTIONS                 7007
 #define IDC_radToConsole                    7008
-
+#define IDC_edDSData                        7009
 #define IDC_edCopyright                     7010
 
 #endif

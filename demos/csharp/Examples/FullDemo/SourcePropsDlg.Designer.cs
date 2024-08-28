@@ -1,6 +1,7 @@
-﻿namespace TWAINDemo
+﻿
+namespace TWAINDemo
 {
-    partial class SourcePropertiesDlg
+    partial class SourcePropsDlg
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.OK_button = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,8 +48,15 @@
             this.edExtendedCaps = new System.Windows.Forms.TextBox();
             this.edCustomCaps = new System.Windows.Forms.TextBox();
             this.edTotalCaps = new System.Windows.Forms.TextBox();
+            this.GroupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtDSData = new System.Windows.Forms.TextBox();
+            this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.TextBox2 = new System.Windows.Forms.TextBox();
+            this.TextBox3 = new System.Windows.Forms.TextBox();
+            this.OK_button = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.GroupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -64,10 +71,10 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(11, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(394, 173);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Info";
             // 
@@ -166,16 +173,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Product Name:";
             // 
-            // OK_button
-            // 
-            this.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK_button.Location = new System.Drawing.Point(165, 424);
-            this.OK_button.Name = "OK_button";
-            this.OK_button.Size = new System.Drawing.Size(75, 23);
-            this.OK_button.TabIndex = 1;
-            this.OK_button.Text = "OK";
-            this.OK_button.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label8);
@@ -185,10 +182,10 @@
             this.groupBox2.Controls.Add(this.edExtendedCaps);
             this.groupBox2.Controls.Add(this.edCustomCaps);
             this.groupBox2.Controls.Add(this.edTotalCaps);
-            this.groupBox2.Location = new System.Drawing.Point(13, 198);
+            this.groupBox2.Location = new System.Drawing.Point(10, 194);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(394, 220);
-            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Capability Info";
             // 
@@ -259,23 +256,86 @@
             this.edTotalCaps.TabIndex = 1;
             this.edTotalCaps.TabStop = false;
             // 
-            // SourcePropertiesDlg
+            // GroupBox3
+            // 
+            this.GroupBox3.Controls.Add(this.txtDSData);
+            this.GroupBox3.Controls.Add(this.TextBox1);
+            this.GroupBox3.Controls.Add(this.TextBox2);
+            this.GroupBox3.Controls.Add(this.TextBox3);
+            this.GroupBox3.Location = new System.Drawing.Point(417, 15);
+            this.GroupBox3.Name = "GroupBox3";
+            this.GroupBox3.Size = new System.Drawing.Size(317, 405);
+            this.GroupBox3.TabIndex = 7;
+            this.GroupBox3.TabStop = false;
+            this.GroupBox3.Text = "Custom Data";
+            // 
+            // txtDSData
+            // 
+            this.txtDSData.Location = new System.Drawing.Point(7, 19);
+            this.txtDSData.Multiline = true;
+            this.txtDSData.Name = "txtDSData";
+            this.txtDSData.ReadOnly = true;
+            this.txtDSData.Size = new System.Drawing.Size(304, 380);
+            this.txtDSData.TabIndex = 2;
+            // 
+            // TextBox1
+            // 
+            this.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox1.Location = new System.Drawing.Point(331, 113);
+            this.TextBox1.Name = "TextBox1";
+            this.TextBox1.ReadOnly = true;
+            this.TextBox1.Size = new System.Drawing.Size(42, 13);
+            this.TextBox1.TabIndex = 1;
+            this.TextBox1.TabStop = false;
+            // 
+            // TextBox2
+            // 
+            this.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox2.Location = new System.Drawing.Point(331, 72);
+            this.TextBox2.Name = "TextBox2";
+            this.TextBox2.ReadOnly = true;
+            this.TextBox2.Size = new System.Drawing.Size(42, 13);
+            this.TextBox2.TabIndex = 1;
+            this.TextBox2.TabStop = false;
+            // 
+            // TextBox3
+            // 
+            this.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox3.Location = new System.Drawing.Point(331, 32);
+            this.TextBox3.Name = "TextBox3";
+            this.TextBox3.ReadOnly = true;
+            this.TextBox3.Size = new System.Drawing.Size(42, 13);
+            this.TextBox3.TabIndex = 1;
+            this.TextBox3.TabStop = false;
+            // 
+            // OK_button
+            // 
+            this.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OK_button.Location = new System.Drawing.Point(343, 443);
+            this.OK_button.Name = "OK_button";
+            this.OK_button.Size = new System.Drawing.Size(75, 23);
+            this.OK_button.TabIndex = 8;
+            this.OK_button.Text = "OK";
+            this.OK_button.UseVisualStyleBackColor = true;
+            // 
+            // SourcePropsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 458);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(761, 479);
             this.Controls.Add(this.OK_button);
+            this.Controls.Add(this.GroupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "SourcePropertiesDlg";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "SourcePropsDlg";
             this.Text = "Source Properties";
-            this.Load += new System.EventHandler(this.SourcePropertiesDlg_Load);
+            this.Load += new System.EventHandler(this.SourcePropsDlg_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.GroupBox3.ResumeLayout(false);
+            this.GroupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -283,24 +343,29 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox edVersion;
+        private System.Windows.Forms.TextBox edVersionInfo;
+        private System.Windows.Forms.TextBox edManufacturer;
+        private System.Windows.Forms.TextBox edFamilyName;
+        private System.Windows.Forms.TextBox edProductName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox edVersionInfo;
-        private System.Windows.Forms.TextBox edManufacturer;
-        private System.Windows.Forms.TextBox edFamilyName;
-        private System.Windows.Forms.TextBox edProductName;
-        private System.Windows.Forms.TextBox edVersion;
-        private System.Windows.Forms.Button OK_button;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox listCaps;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox edTotalCaps;
+        private System.Windows.Forms.ListBox listCaps;
         private System.Windows.Forms.TextBox edExtendedCaps;
         private System.Windows.Forms.TextBox edCustomCaps;
+        private System.Windows.Forms.TextBox edTotalCaps;
+        private System.Windows.Forms.GroupBox GroupBox3;
+        internal System.Windows.Forms.TextBox txtDSData;
+        private System.Windows.Forms.TextBox TextBox1;
+        private System.Windows.Forms.TextBox TextBox2;
+        private System.Windows.Forms.TextBox TextBox3;
+        private System.Windows.Forms.Button OK_button;
     }
 }

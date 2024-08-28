@@ -325,6 +325,21 @@ const
   DTWAIN_WBMP_RESIZED = 11000;
   DTWAIN_TGA_RLE = 11001;
   DTWAIN_BMP_RLE = 11002;
+  DTWAIN_BIGTIFFLZW        = 11003;       
+  DTWAIN_BIGTIFFLZWMULTI   = 11004;       
+  DTWAIN_BIGTIFFNONE       = 11005;       
+  DTWAIN_BIGTIFFNONEMULTI  = 11006;       
+  DTWAIN_BIGTIFFPACKBITS   = 11007;       
+  DTWAIN_BIGTIFFPACKBITSMULTI  = 11008;   
+  DTWAIN_BIGTIFFDEFLATE    = 11009;     
+  DTWAIN_BIGTIFFDEFLATEMULTI  = 11010;  
+  DTWAIN_BIGTIFFG3         = 11011;   
+  DTWAIN_BIGTIFFG3MULTI    = 11012;     
+  DTWAIN_BIGTIFFG4         = 11013;     
+  DTWAIN_BIGTIFFG4MULTI    = 11014;     
+  DTWAIN_BIGTIFFJPEG       = 11015;     
+  DTWAIN_BIGTIFFJPEGMULTI  = 11016;     
+
   DTWAIN_INCHES = 0;
   DTWAIN_CENTIMETERS = 1;
   DTWAIN_PICAS = 2;
@@ -932,6 +947,10 @@ const
   DTWAIN_ERR_INVALIDICONFORMAT = (-2074);
   DTWAIN_ERR_TWAIN32DSMNOTFOUND = (-2075);
   DTWAIN_ERR_TWAINOPENSOURCEDSMNOTFOUND = (-2076);
+  DTWAIN_ERR_INVALID_DIRECTORY = (-2077);
+  DTWAIN_ERR_CREATE_DIRECTORY = (-2078);
+  DTWAIN_ERR_OCRLIBRARY_NOTFOUND = (-2079);
+
   DTWAIN_TWAINSAVE_OK = (0);
   DTWAIN_ERR_TS_FIRST = (-2080);
   DTWAIN_ERR_TS_NOFILENAME = (-2081);
@@ -2262,7 +2281,7 @@ function DTWAIN_GetExtNameFromCapA(nValue:LONG; szValue:LPSTR; nLength:LONG):LON
 function DTWAIN_GetHalftoneA(Source:DTWAIN_SOURCE; lpHalftone:LPSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHalftoneA';
 function DTWAIN_GetHighlightStringA(Source:DTWAIN_SOURCE; Highlight:LPSTR):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHighlightStringA';
 function DTWAIN_GetImageInfoStringA(Source:DTWAIN_SOURCE; lpXResolution:LPSTR; lpYResolution:LPSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetImageInfoStringA';
-function DTWAIN_GetLibraryPathA(lpszVer:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPathA';
+function DTWAIN_GetLibraryPathA(lpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPathA';
 function DTWAIN_GetNameFromCapA(nCapValue:LONG; szValue:LPSTR; nLength:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetNameFromCapA';
 function DTWAIN_GetOCRErrorStringA(Engine:DTWAIN_OCRENGINE; lError:LONG; lpszBuffer:LPSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRErrorStringA';
 function DTWAIN_GetOCRManufacturerA(Engine:DTWAIN_OCRENGINE; szManufacturer:LPSTR; nLength:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRManufacturerA';
@@ -2390,7 +2409,7 @@ function DTWAIN_GetExtNameFromCapW(nValue:LONG; szValue:LPWSTR; nLength:LONG):LO
 function DTWAIN_GetHalftoneW(Source:DTWAIN_SOURCE; lpHalftone:LPWSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHalftoneW';
 function DTWAIN_GetHighlightStringW(Source:DTWAIN_SOURCE; Highlight:LPWSTR):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHighlightStringW';
 function DTWAIN_GetImageInfoStringW(Source:DTWAIN_SOURCE; lpXResolution:LPWSTR; lpYResolution:LPWSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetImageInfoStringW';
-function DTWAIN_GetLibraryPathW(lpszVer:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPathW';
+function DTWAIN_GetLibraryPathW(lpszPathr:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPathW';
 function DTWAIN_GetNameFromCapW(nCapValue:LONG; szValue:LPWSTR; nLength:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetNameFromCapW';
 function DTWAIN_GetOCRErrorStringW(Engine:DTWAIN_OCRENGINE; lError:LONG; lpszBuffer:LPWSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRErrorStringW';
 function DTWAIN_GetOCRManufacturerW(Engine:DTWAIN_OCRENGINE; szManufacturer:LPWSTR; nLength:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRManufacturerW';
@@ -2528,7 +2547,7 @@ function DTWAIN_GetExtNameFromCap(nValue:LONG; szValue:LPTSTR; nMaxLen:LONG):LON
 function DTWAIN_GetHalftone(Source:DTWAIN_SOURCE; lpHalftone:LPTSTR; lGetType:LONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHalftone';
 function DTWAIN_GetHighlightString(Source:DTWAIN_SOURCE; Highlight:LPTSTR):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetHighlightString';
 function DTWAIN_GetImageInfoString(Source:DTWAIN_SOURCE; lpXResolution:LPTSTR; lpYResolution:LPTSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetImageInfoString';
-function DTWAIN_GetLibraryPath(lpszVer:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPath';
+function DTWAIN_GetLibraryPath(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetLibraryPath';
 function DTWAIN_GetNameFromCap(nCapValue:LONG; szValue:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetNameFromCap';
 function DTWAIN_GetOCRErrorString(Engine:DTWAIN_OCRENGINE; lError:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRErrorString';
 function DTWAIN_GetOCRManufacturer(Engine:DTWAIN_OCRENGINE; szManufacturer:LPTSTR; nMaxLen:LONG):LONG;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetOCRManufacturer';
@@ -2643,5 +2662,11 @@ function DTWAIN_SelectDefaultSourceWithOpen(bOpen:LONG):DTWAIN_SOURCE;overload;s
 function DTWAIN_SelectSourceByNameWithOpen(szName:LPCTSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain64ud.dll' name 'DTWAIN_SelectSourceByNameWithOpen';
 function DTWAIN_SelectSourceByNameWithOpenA(szName:LPCSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain64ud.dll' name 'DTWAIN_SelectSourceByNameWithOpenA';
 function DTWAIN_SelectSourceByNameWithOpenW(szName:LPCWSTR; bOpen:LONG):DTWAIN_SOURCE;overload;stdcall; external 'dtwain64ud.dll' name 'DTWAIN_SelectSourceByNameWithOpenW';
+function DTWAIN_IsTwainAvailableExA(lpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_IsTwainAvailableExA';
+function DTWAIN_IsTwainAvailableExW(lpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_IsTwainAvailableExW';
+function DTWAIN_IsTwainAvailableEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_IsTwainAvailableEx';
+function DTWAIN_GetTwainAvailabilityExA(lpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetTwainAvailabilityExA';
+function DTWAIN_GetTwainAvailabilityExW(lpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetTwainAvailabilityExW';
+function DTWAIN_GetTwainAvailabilityEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_GetTwainAvailabilityEx';
     implementation
 end.

@@ -51,6 +51,9 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 #include <algorithm>
 #include <set>
+#ifdef _WIN32
+    #include <windows.h>
+#endif
 #include "twain.h"
 #include <dynarithmic/twain/types/twain_capbasics.hpp>
 #include <dynarithmic/twain/types/twain_types.hpp>
@@ -2193,8 +2196,6 @@ namespace twain {
         twain_container_type::value_type get_yresolution_container_type(const setcap_operation_info& scType) { return get_cap_container_type(0x1119, scType); }
         twain_container_type::value_type get_yscaling_container_type(const setcap_operation_info& scType) { return get_cap_container_type(0x1125, scType); }
         twain_container_type::value_type get_zoomfactor_container_type(const setcap_operation_info& scType) { return get_cap_container_type(0x113e, scType); }
-
-//        #include <dynarithmic/twain/capability_interface/generated_capfuncs.ipp>
     };
 
     class capability_listener

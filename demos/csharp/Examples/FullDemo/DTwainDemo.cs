@@ -446,7 +446,7 @@ namespace TWAINDemo
         {
             if (SelectedSource != IntPtr.Zero)
             {
-                SourcePropertiesDlg sPropDlg = new SourcePropertiesDlg(SelectedSource);
+                SourcePropsDlg sPropDlg = new SourcePropsDlg(SelectedSource);
                 sPropDlg.ShowDialog();
             }
         }

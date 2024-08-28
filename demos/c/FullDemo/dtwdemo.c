@@ -101,6 +101,13 @@ AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("TIFF (Packbits)"), DTWAIN_TIFFPACKBITSMULTI, _T("test.tif")},
                             {_T("TIFF (Flate compression)"), DTWAIN_TIFFDEFLATEMULTI, _T("test.tif")},
                             {_T("TIFF (LZW compression)"), DTWAIN_TIFFLZWMULTI, _T("test.tif")},
+                            {_T("BigTIFF (No compression)"), DTWAIN_BIGTIFFNONEMULTI, _T("test.tif")},
+                            {_T("BigTIFF (CCITT Group 3)"), DTWAIN_BIGTIFFG3MULTI, _T("test.tif")},
+                            {_T("BigTIFF (CCITT Group 4)"), DTWAIN_BIGTIFFG4MULTI, _T("test.tif")},
+                            {_T("BigTIFF (JPEG compression)"), DTWAIN_BIGTIFFJPEGMULTI, _T("test.tif")},
+                            {_T("BigTIFF (Packbits)"), DTWAIN_BIGTIFFPACKBITSMULTI, _T("test.tif")},
+                            {_T("BigTIFF (Flate compression)"), DTWAIN_BIGTIFFDEFLATEMULTI, _T("test.tif")},
+                            {_T("BigTIFF (LZW compression)"), DTWAIN_BIGTIFFLZWMULTI, _T("test.tif")},
                             {_T("Targa (TGA) File"), DTWAIN_TGA, _T("test.tga")},
                             {_T("Targa Run Length Encoded(TGA) File"), DTWAIN_TGA_RLE, _T("test.tga")},
                             {_T("Windows Meta File (WMF)"), DTWAIN_WMF, _T("test.wmf")},
@@ -150,7 +157,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
     
     DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
-    DTWAIN_CheckHandles(FALSE);
+
     /* Allow DTWAIN messages to be sent directly to our Window proc */
     DTWAIN_StartTwainSession(g_hWnd, NULL);
     // DTWAIN_SetTwainMode(DTWAIN_MODELESS);
@@ -352,7 +359,7 @@ void SelectTheSource(int nWhich)
     switch (nWhich)
     {
         case IDM_SELECT_SOURCE:
-            tempSource = DTWAIN_SelectSource2(NULL, _T("Select Source"),0,0,DTWAIN_DLG_CENTER_SCREEN);
+            tempSource = DTWAIN_SelectSource2(NULL, _T("Select Source"),0,0, DTWAIN_DLG_CENTER_SCREEN | DTWAIN_DLG_SORTNAMES);
         break;
 
         case IDM_SELECT_DEFAULT_SOURCE:
@@ -528,7 +535,9 @@ void AcquireFile(BOOL bUseSource)
     {
         /* User wants to use DTWAIN File Mode instead of Source mode */
         /* All Sources can use this mode */
-        DialogBox(g_hInstance, (LPCTSTR)IDD_dlgFileType, g_hWnd, (DLGPROC)DisplayFileTypesProc);
+        INT_PTR nDlgFileType = DialogBox(g_hInstance, (LPCTSTR)IDD_dlgFileType, g_hWnd, (DLGPROC)DisplayFileTypesProc);
+        if (nDlgFileType == 0)
+            return;
         FileFlags |= DTWAIN_USENATIVE;
         FileType = g_FileType;
 
@@ -635,10 +644,11 @@ void DisplayLoggingOptions()
     LONG LogFlags = DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_DECODE_TWEVENT | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_ISTWAINMSG;
     if ( DialogBox(g_hInstance, (LPCTSTR)IDD_dlgDebug, g_hWnd, (DLGPROC)DisplayLoggingProc) == IDOK )
     {
+        // Make sure we make this exclusive by turning off all logging
+        DTWAIN_SetTwainLog(0, _T(""));
         switch (g_LogType)
         {
             case 0:
-                DTWAIN_SetTwainLog(0,_T(""));
             break;
 
             case 1:
@@ -871,7 +881,6 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             LONG nCapCount;
             LONG nIndex;
             LONG nCapValue;
-
             HWND hWndName =     GetDlgItem(hDlg,  IDC_edProductName);
             HWND hWndFamily =   GetDlgItem(hDlg,  IDC_edFamilyName);
             HWND hWndManu =     GetDlgItem(hDlg,  IDC_edManufacturer);
@@ -881,6 +890,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HWND hWndNumCaps =  GetDlgItem(hDlg,  IDC_edTotalCaps);
             HWND hWndNumCustomCaps =  GetDlgItem(hDlg,  IDC_edCustomCaps);
             HWND hWndNumExtendedCaps =  GetDlgItem(hDlg,  IDC_edExtendedCaps);
+            HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
 
             DTWAIN_GetSourceProductName(g_CurrentSource, szBuf, 255);
             SetWindowText(hWndName, szBuf);
@@ -918,6 +928,22 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             DTWAIN_EnumExtendedCaps(g_CurrentSource, &CapArray);
             wsprintf(szBuf, _T("%d"), (int)DTWAIN_ArrayGetCount(CapArray));
             SetWindowText(hWndNumExtendedCaps, szBuf);
+
+            BYTE* szData = NULL;
+            LONG actualSize;
+            /* First, get the size of the Source's custom DS data */
+            HANDLE h = DTWAIN_GetCustomDSData(g_CurrentSource, NULL, 0, &actualSize, DTWAINGCD_COPYDATA);
+            if ( h )
+            {
+                /* Allocate memory for the data */
+                szData = malloc(actualSize * sizeof(BYTE));
+                memset(szData, actualSize, 0);
+
+                /* Second call actually gets the data */
+                DTWAIN_GetCustomDSData(g_CurrentSource, szData, actualSize, &actualSize, DTWAINGCD_COPYDATA);
+                SetWindowTextA(hWndDSData, szData);
+                free(szData);
+            }
 
             DTWAIN_ArrayDestroy( CapArray );
             return TRUE;
@@ -1042,7 +1068,7 @@ LRESULT CALLBACK DisplayFileTypesProc(HWND hDlg, UINT message, WPARAM wParam, LP
                 break;
                 case IDCANCEL:
                      g_FileType = g_allTypes[(int)SendMessage(hWndCombo, CB_GETCURSEL, 0, 0)].DTWAINType;
-                     EndDialog(hDlg, 1);
+                     EndDialog(hDlg, 0);
                 break;
                 case IDC_cmbFileType:
                 {

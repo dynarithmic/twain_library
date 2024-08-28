@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 
 #include <dynarithmic/twain/capability_interface.hpp>
+#include <dynarithmic/twain/types/twain_capbasics.hpp>
+
 namespace dynarithmic
 {
     namespace twain
@@ -35,16 +37,16 @@ namespace dynarithmic
             std::string m_sAuthor;
             std::string m_sCaption;
             std::string m_TimeDate;
-            std::vector<extimageinfo_type> m_vExtImageInfo;
-            std::vector<supportedextimageinfo_type> m_vSupportedExtImageInfo;
+            std::vector<capability_type::extimageinfo_type> m_vExtImageInfo;
+            std::vector<capability_type::supportedextimageinfo_type> m_vSupportedExtImageInfo;
 
             public:
 
                 std::string get_author() const { return m_sAuthor; }
                 std::string get_caption() const { return m_sCaption; }
                 std::string get_timedate() const { return m_TimeDate; }
-                std::vector<extimageinfo_type> get_extimageinfo() const { return m_vExtImageInfo; }
-                std::vector<supportedextimageinfo_type> get_supportedextimageinfo() const { return m_vSupportedExtImageInfo; }
+                std::vector<capability_type::extimageinfo_type> get_extimageinfo() const { return m_vExtImageInfo; }
+                std::vector<capability_type::supportedextimageinfo_type> get_supportedextimageinfo() const { return m_vSupportedExtImageInfo; }
 
                 bool get(capability_interface& capInterface)
                 {

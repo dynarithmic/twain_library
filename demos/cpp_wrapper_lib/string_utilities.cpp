@@ -22,31 +22,57 @@ OF THIRD PARTY RIGHTS.
 // processing on acquisition startup, UI opening and closing, etc.  See the DTWAIN help manual for a list of
 // the various events.
 
-#ifndef DTWAIN_NOIMPORTLIB
-    #include <dtwain.h>
-#else
-    #include <dtwainx2.h>
+#include <string>
+#include <algorithm>
+#include <cctype>
+#include <dynarithmic/twain/utilities/string_utilities.hpp>
+
+#ifdef _MSC_VER
+	#pragma warning( push )  // Stores the current warning state for every warning.
+	#pragma warning( disable:4996)
 #endif
-#include <dynarithmic/twain/types/twain_callback.hpp>
-#include <dynarithmic/twain/twain_values.hpp>
-#include <dynarithmic/twain/source/twain_source.hpp>
+
 namespace dynarithmic
 {
-    namespace twain
-    {
-        LRESULT twain_callback::call_func(WPARAM wParm, LPARAM lParm, twain_source* pSource)
-        {
-            // Always called when handler starts
-            int status = 0;
-            m_nNotificationID = static_cast<LONG>(wParm);
-            if (!starthandler(*pSource, wParm, lParm, status))
-                return status;
+	namespace twain
+	{
+		std::string& ltrim(std::string& str)
+		{
+			auto it2 = std::find_if(str.begin(), str.end(), [](unsigned char ch)
+				{ return !isspace(ch); });
+			str.erase(str.begin(), it2);
+			return str;
+		}
 
-            const auto it = m_functionMap.find(static_cast<LONG>(wParm));
-            if (it != m_functionMap.end())
-                return (this->*((*it).second))(*pSource);
-            return defaulthandler(*pSource, wParm, lParm, m_UserData);
+		std::string& rtrim(std::string& str)
+		{
+			auto it1 = std::find_if(str.rbegin(), str.rend(), [](unsigned char ch)
+				{ return !isspace(ch); });
+			str.erase(it1.base(), str.end());
+			return str;
+		}
 
-        }
-    }
+		std::string ltrim_copy(std::string str)
+		{
+			return ltrim(str);
+		}
+
+		std::string rtrim_copy(std::string str)
+		{
+			return rtrim(str);
+		}
+
+		std::string trim_copy(std::string str)
+		{
+			return ltrim(rtrim(str));
+		}
+
+		std::string& trim(std::string& str)
+		{
+			return ltrim(rtrim(str));
+		}
+	}
 }
+#ifdef _MSC_VER
+	#pragma warning(pop)
+#endif
