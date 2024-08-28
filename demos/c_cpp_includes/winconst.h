@@ -73,6 +73,18 @@
 #endif
 
 #ifdef _MSC_VER
+    #ifdef BUILDING_DTWAINDLL
+        #if _MSC_VER < 1920
+            #error("Visual C++ compiler must be Visual Studio 2019 or greater to build DTWAIN")
+        #endif
+        #if (__cplusplus < 201703L)
+            #error("Visual C++ Compiler must use C++17 standard or greaater to build DTWAIN")
+        #endif
+    #endif
+#endif
+
+
+#ifdef _MSC_VER
     #if defined (UNICODE) || defined (_UNICODE)
         #pragma message ("DTWAIN Library using Unicode is active")
     #else
@@ -116,7 +128,7 @@
             #if defined(WIN64) || defined (_WIN64)
                 #pragma message("Building 64-bit DTWAIN DLL")
             #else
-                #pragma message("Building 32-bit DTWAIN DLL, OCX or VB version")
+                #pragma message("Building 32-bit DTWAIN DLL")
             #endif
         #endif
     #else

@@ -27,6 +27,12 @@ OF THIRD PARTY RIGHTS.
 #include <algorithm>
 #include <sstream>
 #include <numeric>
+#include <vector>
+#include <dynarithmic/twain/utilities/string_utilities.hpp>
+
+#ifdef _WIN32
+    #include <windows.h>
+#endif
 #include "twain.h"
 
 namespace dynarithmic
@@ -92,21 +98,17 @@ namespace dynarithmic
             {
                 constexpr uint32_t dgroups[] = { DG_CONTROL, DG_IMAGE, DG_AUDIO, DF_DSM2, DF_APP2, DF_DS2 };
                 constexpr const char * dgroupsStr[] = { "DG_CONTROL", "DG_IMAGE", "DG_AUDIO", "DF_DSM2", "DF_APP2", "DF_DS2" };
-                std::string ret;
+                std::vector<std::string> ret;
                 int i = 0;
                 for (auto g : dgroups)
                 {
                     if (sgroups & g)
-                    {
-                        if (i > 0)
-                            ret += ",";
-                        ret += dgroupsStr[i];
-                    }
+                        ret.push_back(dgroupsStr[i]);
                     ++i;
                 }
                 if (ret.empty())
                     return "<unknown>";
-                return ret;
+                return join(ret, ",");
             }
 
             TW_IDENTITY& get_identity()             { return m_identity; };

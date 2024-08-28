@@ -930,7 +930,20 @@
 11000 WBMP-Wireless-Bitmap-Resized-Single wbmp
 11001 TARGA-RLE-Single 	      tga
 11002 Windows-BMP-RLE-Single  bmp                             
-
+11003 BigTIFF-LZW-Single tif tiff	
+11004 BigTIFF-LZW-Multi tif tiff	
+11005 BigTIFF-Uncompressed-Single tif tiff	
+11006 BigTIFF-Uncompressed-Multi tif tiff	
+11007 BigTIFF-Packbits-Single tif tiff	
+11008 BigTIFF-Packbits-Multi tif tiff	
+11009 BigTIFF-Deflate-Single tif tiff
+11010 BigTIFF-Deflate-Multi tif tiff
+11011 BigTIFF-G3-Single tif tiff  
+11012 BigTIFF-G3-Multi tif tiff  
+11013 BigTIFF-G4-Single tif tiff  
+11014 BigTIFF-G4-Multi tif tiff  
+11015 BigTIFF-JPEG-Single tif tiff  
+11016 BigTIFF-JPEG-Multi tif tiff  
 -1
 0 TWPT_BW                
 1 TWPT_GRAY              
@@ -1568,8 +1581,8 @@
 [300 301] PCX/DCX [1 8 24] [[4 8] [16 24] [32 24]] 
 [400] Targa   [8 24 32] [[1 8] [4 8] [16 24]]
 [11001] Targa RLE  [8 24 32] [[1 8] [4 8] [16 24]]
-[700 800 901 902] TIFF-G3/G4 [1] [[4 1][8 1][16 1][24 1] [32 1]]
-[803 905] TIFF-JPEG [8 24] [[1 8] [4 8] [16 24] [32 24]]
+[700 800 901 902 11011 11012 11013 11014] TIFF-G3/G4 [1] [[4 1][8 1][16 1][24 1] [32 1]]
+[803 905 11015 11016] TIFF-JPEG [8 24] [[1 8] [4 8] [16 24] [32 24]]
 [850 851] WMF/EMF [24] [[1 24] [4 24] [8 24] [16 24] [32 24]] 
 [950] GIF [8] [[1 8][4 8][16 8][24 8][32 8]]
 [1000] PNG [8 16 24] [[1 8] [4 8] [32 24]]
@@ -1581,6 +1594,6 @@
 [8501] WEBP [24 32] [[1 24] [4 24] [8 24] [16 24]]
 [6000 6001] TXT [1] [[4 1][8 1][16 1][24 1] [32 1]]
 -9999
-5.4.6
+5.5.0
 END END END
 

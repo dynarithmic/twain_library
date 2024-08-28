@@ -1,5 +1,40 @@
 DTWAIN Version changes
 
+5.5.0
+
+- Add support for Big TIFF files when calling DTWAIN_AcquireFile and DTWAIN_AcquireFileEx.  
+  For more information, see the new file type constants (DTWAIN_BIGTIFFNONE, DTWAIN_BIGTIFFLZW, etc.)
+  Big TIFF files are TIFF files that are allowed to be greater than 4 Gigabytes in size.
+
+- Update the DTWDEMO.exe demo program, as well as the C# and Visual Basic full 
+  demo programs to display the TWAIN Source's custom data when displaying the Source Properties dialog box.
+
+- Optimize DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx() when an unsupported file type is 
+  specified.
+
+- Optimize DTWAIN_IsTwainAvailable() when determining whether TWAIN is installed.  The
+  optimization is for the case where DTWAIN_IsTwainAvailable() is called before 
+  DTWAIN_SysInitialize().
+
+- Add function DTWAIN_IsTwainAvailableEx() to return a pipe-delimited string denoting
+  the full TWAIN paths of both TWAIN 1.x and TWAIN 2.x Data Source managers.
+
+- Optimize DTWAIN_OpenSource() 
+    a) if called more than once on a TWAIN Source, and
+    b) When initially opening a TWAIN Source by not checking for the status of the feeder.
+
+- Optimize DTWAIN_GetCapValues() and DTWAIN_SetCapValues() if a capability is not supported
+  by the TWAIN Source.
+
+- Update twaininfo.txt to add the new Big TIFF file type information.
+
+- Ensure that DTWAIN_GetCapValues and other internal functions that call
+  DTWAIN_GetCapValues clears the returned user array of values if the TWAIN 
+  capability being tested is not supported by the device.
+
+- Other minor bug fixes and optimizations.
+
+
 5.4.8
 
 - Add additional TWAIN constants to twaininfo.txt

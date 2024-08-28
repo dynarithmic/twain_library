@@ -24,7 +24,7 @@
 #include <dtwainc.h>
 #include <capconst.h>
 #ifdef _WIN32
-    #include <commdlg.h>
+   #include <commdlg.h>
 #endif
 #include <twain.h>
 #include <winconst.h>
@@ -1003,6 +1003,13 @@ typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTSOURCEBYNAMEWITHOPENAFUNC)         
 typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTSOURCEBYNAMEWITHOPENWFUNC)         (LPCWSTR, DTWAIN_BOOL);
 typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTSOURCEWITHOPENFUNC)                (DTWAIN_BOOL);
 typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTDEFAULTSOURCEWITHOPENFUNC)         (DTWAIN_BOOL);
+typedef LONG          (DLLENTRY_DEF* D_GETTWAINAVAILABILITYEXFUNC)               (LPTSTR, LONG);
+typedef LONG          (DLLENTRY_DEF* D_GETTWAINAVAILABILITYEXAFUNC)              (LPSTR, LONG);
+typedef LONG          (DLLENTRY_DEF* D_GETTWAINAVAILABILITYEXWFUNC)              (LPWSTR, LONG);
+typedef LONG          (DLLENTRY_DEF*  D_ISTWAINAVAILABLEEXFUNC)                   (LPTSTR, LONG);
+typedef LONG          (DLLENTRY_DEF*  D_ISTWAINAVAILABLEEXAFUNC)                  (LPSTR, LONG);
+typedef LONG          (DLLENTRY_DEF*  D_ISTWAINAVAILABLEEXWFUNC)                  (LPWSTR, LONG);
+
 #ifdef __cplusplus
 }
 #endif
@@ -1547,6 +1554,9 @@ typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTDEFAULTSOURCEWITHOPENFUNC)         
     STATIC D_GETTWAINAPPIDEXFUNC                            DTWAIN_GetTwainAppIDEx;
     STATIC D_GETTWAINAPPIDFUNC                              DTWAIN_GetTwainAppID;
     STATIC D_GETTWAINAVAILABILITYFUNC                       DTWAIN_GetTwainAvailability;
+    STATIC D_GETTWAINAVAILABILITYEXFUNC                     DTWAIN_GetTwainAvailabilityEx;
+    STATIC D_GETTWAINAVAILABILITYEXAFUNC                    DTWAIN_GetTwainAvailabilityExA;
+    STATIC D_GETTWAINAVAILABILITYEXWFUNC                    DTWAIN_GetTwainAvailabilityExW;
     STATIC D_GETTWAINCOUNTRYNAMEAFUNC                       DTWAIN_GetTwainCountryNameA;
     STATIC D_GETTWAINCOUNTRYNAMEFUNC                        DTWAIN_GetTwainCountryName;
     STATIC D_GETTWAINCOUNTRYNAMEWFUNC                       DTWAIN_GetTwainCountryNameW;
@@ -1656,6 +1666,9 @@ typedef DTWAIN_SOURCE (DLLENTRY_DEF* D_SELECTDEFAULTSOURCEWITHOPENFUNC)         
     STATIC D_ISTHUMBNAILSUPPORTEDFUNC                       DTWAIN_IsThumbnailSupported;
     STATIC D_ISTIFFSUPPORTEDFUNC                            DTWAIN_IsTIFFSupported;
     STATIC D_ISTWAINAVAILABLEFUNC                           DTWAIN_IsTwainAvailable;
+    STATIC D_ISTWAINAVAILABLEEXFUNC                         DTWAIN_IsTwainAvailableEx;
+    STATIC D_ISTWAINAVAILABLEEXAFUNC                        DTWAIN_IsTwainAvailableExA;
+    STATIC D_ISTWAINAVAILABLEEXWFUNC                        DTWAIN_IsTwainAvailableExW;
     STATIC D_ISTWAINMSGFUNC                                 DTWAIN_IsTwainMsg;
     STATIC D_ISUICONTROLLABLEFUNC                           DTWAIN_IsUIControllable;
     STATIC D_ISUIENABLEDFUNC                                DTWAIN_IsUIEnabled;

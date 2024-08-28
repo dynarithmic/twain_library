@@ -104,132 +104,147 @@ Class DTWAINAPI
     Public Const DTWAIN_FF_SPIFF As Integer  = 8
     Public Const DTWAIN_FF_EXIF As Integer  = 9
     Public Const DTWAIN_FF_PDF As Integer  = 10
-    Public Const DTWAIN_FF_JP2 As Integer  = 11
-    Public Const DTWAIN_FF_JPX As Integer  = 13
-    Public Const DTWAIN_FF_DEJAVU As Integer  = 14
-    Public Const DTWAIN_FF_PDFA As Integer  = 15
-    Public Const DTWAIN_FF_PDFA2 As Integer  = 16
-    Public Const DTWAIN_CP_NONE As Integer  = 0
-    Public Const DTWAIN_CP_PACKBITS As Integer  = 1
-    Public Const DTWAIN_CP_GROUP31D As Integer  = 2
-    Public Const DTWAIN_CP_GROUP31DEOL As Integer  = 3
-    Public Const DTWAIN_CP_GROUP32D As Integer  = 4
-    Public Const DTWAIN_CP_GROUP4 As Integer  = 5
-    Public Const DTWAIN_CP_JPEG As Integer  = 6
-    Public Const DTWAIN_CP_LZW As Integer  = 7
-    Public Const DTWAIN_CP_JBIG As Integer  = 8
-    Public Const DTWAIN_CP_PNG As Integer  = 9
-    Public Const DTWAIN_CP_RLE4 As Integer  = 10
-    Public Const DTWAIN_CP_RLE8 As Integer  = 11
-    Public Const DTWAIN_CP_BITFIELDS As Integer  = 12
-    Public Const DTWAIN_CP_ZIP As Integer  = 13
-    Public Const DTWAIN_CP_JPEG2000 As Integer  = 14
-    Public Const DTWAIN_FS_NONE As Integer  = 0
-    Public Const DTWAIN_FS_A4LETTER As Integer  = 1
-    Public Const DTWAIN_FS_B5LETTER As Integer  = 2
-    Public Const DTWAIN_FS_USLETTER As Integer  = 3
-    Public Const DTWAIN_FS_USLEGAL As Integer  = 4
-    Public Const DTWAIN_FS_A5 As Integer  = 5
-    Public Const DTWAIN_FS_B4 As Integer  = 6
-    Public Const DTWAIN_FS_B6 As Integer  = 7
-    Public Const DTWAIN_FS_USLEDGER As Integer  = 9
-    Public Const DTWAIN_FS_USEXECUTIVE As Integer  = 10
-    Public Const DTWAIN_FS_A3 As Integer  = 11
-    Public Const DTWAIN_FS_B3 As Integer  = 12
-    Public Const DTWAIN_FS_A6 As Integer  = 13
-    Public Const DTWAIN_FS_C4 As Integer  = 14
-    Public Const DTWAIN_FS_C5 As Integer  = 15
-    Public Const DTWAIN_FS_C6 As Integer  = 16
-    Public Const DTWAIN_FS_4A0 As Integer  = 17
-    Public Const DTWAIN_FS_2A0 As Integer  = 18
-    Public Const DTWAIN_FS_A0 As Integer  = 19
-    Public Const DTWAIN_FS_A1 As Integer  = 20
-    Public Const DTWAIN_FS_A2 As Integer  = 21
-    Public Const DTWAIN_FS_A4 As Integer  = DTWAIN_FS_A4LETTER
-    Public Const DTWAIN_FS_A7 As Integer  = 22
-    Public Const DTWAIN_FS_A8 As Integer  = 23
-    Public Const DTWAIN_FS_A9 As Integer  = 24
-    Public Const DTWAIN_FS_A10 As Integer  = 25
-    Public Const DTWAIN_FS_ISOB0 As Integer  = 26
-    Public Const DTWAIN_FS_ISOB1 As Integer  = 27
-    Public Const DTWAIN_FS_ISOB2 As Integer  = 28
-    Public Const DTWAIN_FS_ISOB3 As Integer  = DTWAIN_FS_B3
-    Public Const DTWAIN_FS_ISOB4 As Integer  = DTWAIN_FS_B4
-    Public Const DTWAIN_FS_ISOB5 As Integer  = 29
-    Public Const DTWAIN_FS_ISOB6 As Integer  = DTWAIN_FS_B6
-    Public Const DTWAIN_FS_ISOB7 As Integer  = 30
-    Public Const DTWAIN_FS_ISOB8 As Integer  = 31
-    Public Const DTWAIN_FS_ISOB9 As Integer  = 32
-    Public Const DTWAIN_FS_ISOB10 As Integer  = 33
-    Public Const DTWAIN_FS_JISB0 As Integer  = 34
-    Public Const DTWAIN_FS_JISB1 As Integer  = 35
-    Public Const DTWAIN_FS_JISB2 As Integer  = 36
-    Public Const DTWAIN_FS_JISB3 As Integer  = 37
-    Public Const DTWAIN_FS_JISB4 As Integer  = 38
-    Public Const DTWAIN_FS_JISB5 As Integer  = DTWAIN_FS_B5LETTER
-    Public Const DTWAIN_FS_JISB6 As Integer  = 39
-    Public Const DTWAIN_FS_JISB7 As Integer  = 40
-    Public Const DTWAIN_FS_JISB8 As Integer  = 41
-    Public Const DTWAIN_FS_JISB9 As Integer  = 42
-    Public Const DTWAIN_FS_JISB10 As Integer  = 43
-    Public Const DTWAIN_FS_C0 As Integer  = 44
-    Public Const DTWAIN_FS_C1 As Integer  = 45
-    Public Const DTWAIN_FS_C2 As Integer  = 46
-    Public Const DTWAIN_FS_C3 As Integer  = 47
-    Public Const DTWAIN_FS_C7 As Integer  = 48
-    Public Const DTWAIN_FS_C8 As Integer  = 49
-    Public Const DTWAIN_FS_C9 As Integer  = 50
-    Public Const DTWAIN_FS_C10 As Integer  = 51
-    Public Const DTWAIN_FS_USSTATEMENT As Integer  = 52
-    Public Const DTWAIN_FS_BUSINESSCARD As Integer  = 53
-    Public Const DTWAIN_ANYSUPPORT As Integer  = (-1)
-    Public Const DTWAIN_BMP As Integer  = 100
-    Public Const DTWAIN_JPEG As Integer  = 200
-    Public Const DTWAIN_PDF As Integer  = 250
-    Public Const DTWAIN_PDFMULTI As Integer  = 251
-    Public Const DTWAIN_PCX As Integer  = 300
-    Public Const DTWAIN_DCX As Integer  = 301
-    Public Const DTWAIN_TGA As Integer  = 400
-    Public Const DTWAIN_TIFFLZW As Integer  = 500
-    Public Const DTWAIN_TIFFNONE As Integer  = 600
-    Public Const DTWAIN_TIFFG3 As Integer  = 700
-    Public Const DTWAIN_TIFFG4 As Integer  = 800
-    Public Const DTWAIN_TIFFPACKBITS As Integer  = 801
-    Public Const DTWAIN_TIFFDEFLATE As Integer  = 802
-    Public Const DTWAIN_TIFFJPEG As Integer  = 803
-    Public Const DTWAIN_TIFFJBIG As Integer  = 804
-    Public Const DTWAIN_TIFFPIXARLOG As Integer  = 805
-    Public Const DTWAIN_TIFFNONEMULTI As Integer  = 900
-    Public Const DTWAIN_TIFFG3MULTI As Integer  = 901
-    Public Const DTWAIN_TIFFG4MULTI As Integer  = 902
-    Public Const DTWAIN_TIFFPACKBITSMULTI As Integer  = 903
-    Public Const DTWAIN_TIFFDEFLATEMULTI As Integer  = 904
-    Public Const DTWAIN_TIFFJPEGMULTI As Integer  = 905
-    Public Const DTWAIN_TIFFLZWMULTI As Integer  = 906
-    Public Const DTWAIN_TIFFJBIGMULTI As Integer  = 907
-    Public Const DTWAIN_TIFFPIXARLOGMULTI As Integer  = 908
-    Public Const DTWAIN_WMF As Integer  = 850
-    Public Const DTWAIN_EMF As Integer  = 851
-    Public Const DTWAIN_GIF As Integer  = 950
-    Public Const DTWAIN_PNG As Integer  = 1000
-    Public Const DTWAIN_PSD As Integer  = 2000
-    Public Const DTWAIN_JPEG2000 As Integer  = 3000
-    Public Const DTWAIN_POSTSCRIPT1 As Integer  = 4000
-    Public Const DTWAIN_POSTSCRIPT2 As Integer  = 4001
-    Public Const DTWAIN_POSTSCRIPT3 As Integer  = 4002
-    Public Const DTWAIN_POSTSCRIPT1MULTI As Integer  = 4003
-    Public Const DTWAIN_POSTSCRIPT2MULTI As Integer  = 4004
-    Public Const DTWAIN_POSTSCRIPT3MULTI As Integer  = 4005
-    Public Const DTWAIN_TEXT As Integer  = 6000
-    Public Const DTWAIN_TEXTMULTI As Integer  = 6001
-    Public Const DTWAIN_TIFFMULTI As Integer  = 7000
-    Public Const DTWAIN_ICO As Integer  = 8000
-    Public Const DTWAIN_ICO_VISTA As Integer  = 8001
-    Public Const DTWAIN_ICO_RESIZED As Integer  = 8002
-    Public Const DTWAIN_WBMP As Integer  = 8500
+    Public Const DTWAIN_FF_JP2 As Integer = 11
+    Public Const DTWAIN_FF_JPX As Integer = 13
+    Public Const DTWAIN_FF_DEJAVU As Integer = 14
+    Public Const DTWAIN_FF_PDFA As Integer = 15
+    Public Const DTWAIN_FF_PDFA2 As Integer = 16
+    Public Const DTWAIN_CP_NONE As Integer = 0
+    Public Const DTWAIN_CP_PACKBITS As Integer = 1
+    Public Const DTWAIN_CP_GROUP31D As Integer = 2
+    Public Const DTWAIN_CP_GROUP31DEOL As Integer = 3
+    Public Const DTWAIN_CP_GROUP32D As Integer = 4
+    Public Const DTWAIN_CP_GROUP4 As Integer = 5
+    Public Const DTWAIN_CP_JPEG As Integer = 6
+    Public Const DTWAIN_CP_LZW As Integer = 7
+    Public Const DTWAIN_CP_JBIG As Integer = 8
+    Public Const DTWAIN_CP_PNG As Integer = 9
+    Public Const DTWAIN_CP_RLE4 As Integer = 10
+    Public Const DTWAIN_CP_RLE8 As Integer = 11
+    Public Const DTWAIN_CP_BITFIELDS As Integer = 12
+    Public Const DTWAIN_CP_ZIP As Integer = 13
+    Public Const DTWAIN_CP_JPEG2000 As Integer = 14
+    Public Const DTWAIN_FS_NONE As Integer = 0
+    Public Const DTWAIN_FS_A4LETTER As Integer = 1
+    Public Const DTWAIN_FS_B5LETTER As Integer = 2
+    Public Const DTWAIN_FS_USLETTER As Integer = 3
+    Public Const DTWAIN_FS_USLEGAL As Integer = 4
+    Public Const DTWAIN_FS_A5 As Integer = 5
+    Public Const DTWAIN_FS_B4 As Integer = 6
+    Public Const DTWAIN_FS_B6 As Integer = 7
+    Public Const DTWAIN_FS_USLEDGER As Integer = 9
+    Public Const DTWAIN_FS_USEXECUTIVE As Integer = 10
+    Public Const DTWAIN_FS_A3 As Integer = 11
+    Public Const DTWAIN_FS_B3 As Integer = 12
+    Public Const DTWAIN_FS_A6 As Integer = 13
+    Public Const DTWAIN_FS_C4 As Integer = 14
+    Public Const DTWAIN_FS_C5 As Integer = 15
+    Public Const DTWAIN_FS_C6 As Integer = 16
+    Public Const DTWAIN_FS_4A0 As Integer = 17
+    Public Const DTWAIN_FS_2A0 As Integer = 18
+    Public Const DTWAIN_FS_A0 As Integer = 19
+    Public Const DTWAIN_FS_A1 As Integer = 20
+    Public Const DTWAIN_FS_A2 As Integer = 21
+    Public Const DTWAIN_FS_A4 As Integer = DTWAIN_FS_A4LETTER
+    Public Const DTWAIN_FS_A7 As Integer = 22
+    Public Const DTWAIN_FS_A8 As Integer = 23
+    Public Const DTWAIN_FS_A9 As Integer = 24
+    Public Const DTWAIN_FS_A10 As Integer = 25
+    Public Const DTWAIN_FS_ISOB0 As Integer = 26
+    Public Const DTWAIN_FS_ISOB1 As Integer = 27
+    Public Const DTWAIN_FS_ISOB2 As Integer = 28
+    Public Const DTWAIN_FS_ISOB3 As Integer = DTWAIN_FS_B3
+    Public Const DTWAIN_FS_ISOB4 As Integer = DTWAIN_FS_B4
+    Public Const DTWAIN_FS_ISOB5 As Integer = 29
+    Public Const DTWAIN_FS_ISOB6 As Integer = DTWAIN_FS_B6
+    Public Const DTWAIN_FS_ISOB7 As Integer = 30
+    Public Const DTWAIN_FS_ISOB8 As Integer = 31
+    Public Const DTWAIN_FS_ISOB9 As Integer = 32
+    Public Const DTWAIN_FS_ISOB10 As Integer = 33
+    Public Const DTWAIN_FS_JISB0 As Integer = 34
+    Public Const DTWAIN_FS_JISB1 As Integer = 35
+    Public Const DTWAIN_FS_JISB2 As Integer = 36
+    Public Const DTWAIN_FS_JISB3 As Integer = 37
+    Public Const DTWAIN_FS_JISB4 As Integer = 38
+    Public Const DTWAIN_FS_JISB5 As Integer = DTWAIN_FS_B5LETTER
+    Public Const DTWAIN_FS_JISB6 As Integer = 39
+    Public Const DTWAIN_FS_JISB7 As Integer = 40
+    Public Const DTWAIN_FS_JISB8 As Integer = 41
+    Public Const DTWAIN_FS_JISB9 As Integer = 42
+    Public Const DTWAIN_FS_JISB10 As Integer = 43
+    Public Const DTWAIN_FS_C0 As Integer = 44
+    Public Const DTWAIN_FS_C1 As Integer = 45
+    Public Const DTWAIN_FS_C2 As Integer = 46
+    Public Const DTWAIN_FS_C3 As Integer = 47
+    Public Const DTWAIN_FS_C7 As Integer = 48
+    Public Const DTWAIN_FS_C8 As Integer = 49
+    Public Const DTWAIN_FS_C9 As Integer = 50
+    Public Const DTWAIN_FS_C10 As Integer = 51
+    Public Const DTWAIN_FS_USSTATEMENT As Integer = 52
+    Public Const DTWAIN_FS_BUSINESSCARD As Integer = 53
+    Public Const DTWAIN_ANYSUPPORT As Integer = (-1)
+    Public Const DTWAIN_BMP As Integer = 100
+    Public Const DTWAIN_JPEG As Integer = 200
+    Public Const DTWAIN_PDF As Integer = 250
+    Public Const DTWAIN_PDFMULTI As Integer = 251
+    Public Const DTWAIN_PCX As Integer = 300
+    Public Const DTWAIN_DCX As Integer = 301
+    Public Const DTWAIN_TGA As Integer = 400
+    Public Const DTWAIN_TIFFLZW As Integer = 500
+    Public Const DTWAIN_TIFFNONE As Integer = 600
+    Public Const DTWAIN_TIFFG3 As Integer = 700
+    Public Const DTWAIN_TIFFG4 As Integer = 800
+    Public Const DTWAIN_TIFFPACKBITS As Integer = 801
+    Public Const DTWAIN_TIFFDEFLATE As Integer = 802
+    Public Const DTWAIN_TIFFJPEG As Integer = 803
+    Public Const DTWAIN_TIFFJBIG As Integer = 804
+    Public Const DTWAIN_TIFFPIXARLOG As Integer = 805
+    Public Const DTWAIN_TIFFNONEMULTI As Integer = 900
+    Public Const DTWAIN_TIFFG3MULTI As Integer = 901
+    Public Const DTWAIN_TIFFG4MULTI As Integer = 902
+    Public Const DTWAIN_TIFFPACKBITSMULTI As Integer = 903
+    Public Const DTWAIN_TIFFDEFLATEMULTI As Integer = 904
+    Public Const DTWAIN_TIFFJPEGMULTI As Integer = 905
+    Public Const DTWAIN_TIFFLZWMULTI As Integer = 906
+    Public Const DTWAIN_TIFFJBIGMULTI As Integer = 907
+    Public Const DTWAIN_TIFFPIXARLOGMULTI As Integer = 908
+    Public Const DTWAIN_WMF As Integer = 850
+    Public Const DTWAIN_EMF As Integer = 851
+    Public Const DTWAIN_GIF As Integer = 950
+    Public Const DTWAIN_PNG As Integer = 1000
+    Public Const DTWAIN_PSD As Integer = 2000
+    Public Const DTWAIN_JPEG2000 As Integer = 3000
+    Public Const DTWAIN_POSTSCRIPT1 As Integer = 4000
+    Public Const DTWAIN_POSTSCRIPT2 As Integer = 4001
+    Public Const DTWAIN_POSTSCRIPT3 As Integer = 4002
+    Public Const DTWAIN_POSTSCRIPT1MULTI As Integer = 4003
+    Public Const DTWAIN_POSTSCRIPT2MULTI As Integer = 4004
+    Public Const DTWAIN_POSTSCRIPT3MULTI As Integer = 4005
+    Public Const DTWAIN_TEXT As Integer = 6000
+    Public Const DTWAIN_TEXTMULTI As Integer = 6001
+    Public Const DTWAIN_TIFFMULTI As Integer = 7000
+    Public Const DTWAIN_ICO As Integer = 8000
+    Public Const DTWAIN_ICO_VISTA As Integer = 8001
+    Public Const DTWAIN_ICO_RESIZED As Integer = 8002
+    Public Const DTWAIN_WBMP As Integer = 8500
     Public Const DTWAIN_WBMP_RESIZED As Integer = 11000
     Public Const DTWAIN_TGA_RLE As Integer = 11001
     Public Const DTWAIN_BMP_RLE As Integer = 11002
+    Public Const DTWAIN_BIGTIFFLZW As Integer = 11003
+    Public Const DTWAIN_BIGTIFFLZWMULTI As Integer = 11004
+    Public Const DTWAIN_BIGTIFFNONE As Integer = 11005
+    Public Const DTWAIN_BIGTIFFNONEMULTI As Integer = 11006
+    Public Const DTWAIN_BIGTIFFPACKBITS As Integer = 11007
+    Public Const DTWAIN_BIGTIFFPACKBITSMULTI As Integer = 11008
+    Public Const DTWAIN_BIGTIFFDEFLATE As Integer = 11009
+    Public Const DTWAIN_BIGTIFFDEFLATEMULTI As Integer = 11010
+    Public Const DTWAIN_BIGTIFFG3 As Integer = 11011
+    Public Const DTWAIN_BIGTIFFG3MULTI As Integer = 11012
+    Public Const DTWAIN_BIGTIFFG4 As Integer = 11013
+    Public Const DTWAIN_BIGTIFFG4MULTI As Integer = 11014
+    Public Const DTWAIN_BIGTIFFJPEG As Integer = 11015
+    Public Const DTWAIN_BIGTIFFJPEGMULTI As Integer = 11016
+
     Public Const DTWAIN_INCHES As Integer = 0
     Public Const DTWAIN_CENTIMETERS As Integer = 1
     Public Const DTWAIN_PICAS As Integer = 2
@@ -731,8 +746,9 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_SOURCENAME_NOTINSTALLED As Integer = (-1054)
     Public Const DTWAIN_ERR_NO_MEMFILE_XFER As Integer = (-1055)
     Public Const DTWAIN_ERR_AREA_ARRAY_TOO_SMALL As Integer = (-1056)
+    Public Const DTWAIN_ERR_LOG_CREATE_ERROR As Integer = (-1057)
 
-    Public Const DTWAIN_ERR_LAST_1 As Integer = DTWAIN_ERR_AREA_ARRAY_TOO_SMALL
+    Public Const DTWAIN_ERR_LAST_1 As Integer = DTWAIN_ERR_LOG_CREATE_ERROR
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -1843,7 +1859,8 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetCurrentAcquiredImage Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr) As System.IntPtr
     Declare Auto Function DTWAIN_GetCurrentPageNum Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_GetCurrentRetryCount Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCustomDSData Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr, ByVal LPBYTE As Integer, ByRef Data As Integer, ByVal dSize As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_GetCustomDSData Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr, ByVal LPBYTE As Integer, ByVal dSize As Integer, ByRef Data As Integer, ByVal flags As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_GetCustomDSData Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr, ByVal DSData As Byte(), ByVal dSize As Integer, ByRef Data As Integer, ByVal flags As Integer) As System.IntPtr
     Declare Auto Function DTWAIN_GetDSMSearchOrder Lib "dtwain32ud.dll" () As Integer
     Declare Auto Function DTWAIN_GetDTWAINHandle Lib "dtwain32ud.dll" () As System.IntPtr
     Declare Auto Function DTWAIN_GetDeviceEvent Lib "dtwain32ud.dll" (ByVal Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
@@ -2601,4 +2618,19 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SelectSourceByNameWithOpen Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
     Declare Ansi Function DTWAIN_SelectSourceByNameWithOpenA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
     Declare Unicode Function DTWAIN_SelectSourceByNameWithOpenW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, ByVal bOpen As Integer) As System.IntPtr
+
+    Declare Ansi Function DTWAIN_IsTwainAvailableExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_IsTwainAvailableExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_IsTwainAvailableEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_IsTwainAvailableExA Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_IsTwainAvailableExW Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_IsTwainAvailableEx Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetTwainAvailabilityExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetTwainAvailabilityExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetTwainAvailabilityExA Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetTwainAvailabilityExW Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain32ud.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+
 End Class

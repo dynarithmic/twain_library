@@ -27,6 +27,8 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/source/twain_source_pimpl.hpp>
 #include <chrono>
 #include <thread>
+
+namespace tb_namespace = dynarithmic::twain::tribool;
 namespace dynarithmic
 {
 	namespace twain
@@ -38,6 +40,7 @@ namespace dynarithmic
             m_bCloseable{},
             m_theSource{},
             m_bUIOnlyOn{},
+            m_bUIOnlySupported{tb_namespace::make_tribool(0)},
             m_bWeakAttach{},
             m_pTwainSourceImpl{}
         {
@@ -56,6 +59,7 @@ namespace dynarithmic
                 m_bCloseable = {};
                 m_theSource = {};
                 m_bUIOnlyOn = {};
+                m_bUIOnlySupported = {tb_namespace::tribool::indeterminate};
                 m_bWeakAttach = {};
                 m_pTwainSourceImpl = {};
                 m_theSource = select_info.source_handle;
@@ -88,6 +92,7 @@ namespace dynarithmic
             std::swap(left.m_source_details, right.m_source_details);
             std::swap(left.m_theSource, right.m_theSource);
             std::swap(left.m_bUIOnlyOn, right.m_bUIOnlyOn);
+			std::swap(left.m_bUIOnlySupported, right.m_bUIOnlySupported);
             std::swap(left.m_pTwainSourceImpl, right.m_pTwainSourceImpl);
         }
 
@@ -107,6 +112,13 @@ namespace dynarithmic
             m_sourceInfo = *p_id;
         }
 
+        const TW_IDENTITY* twain_source::get_twain_id(bool bRefresh/* = true*/)
+        {
+            if (bRefresh)
+                get_source_info_internal();
+            return &m_sourceInfo.get_identity();
+        }
+
         void twain_source::attach(twain_session& twSession, DTWAIN_SOURCE source)
         {
             m_pSession = &twSession;
@@ -124,6 +136,11 @@ namespace dynarithmic
                 m_bIsSelected = true;
                 m_source_details.clear();
                 m_pSession->update_source_status(*this);
+                if (m_pSession->get_source_status(*this) == twain_session::source_status::opened)
+                {
+                    auto uiOnlySupported = API_INSTANCE DTWAIN_IsUIOnlySupported(m_theSource);
+                    m_bUIOnlySupported = uiOnlySupported ? tribool::make_tribool(1) : tribool::make_tribool(-1);
+                }
             }
             else
                 m_bIsSelected = false;
@@ -747,5 +764,26 @@ namespace dynarithmic
                     { *(m_pTwainSourceImpl->m_acquire_characteristics) = ac; return *this; }
         bool twain_source::set_tiff_compress_type(tiffcompress_value::value_type compress_type) 
              { return API_INSTANCE DTWAIN_SetTIFFCompressType(m_theSource, static_cast<LONG>(compress_type)); }
+
+        bool twain_source::is_acquiring() const
+        {
+            if (m_theSource)
+                return API_INSTANCE DTWAIN_IsSourceAcquiring(m_theSource);
+            return false;
+        }
+
+        bool twain_source::is_uienabled() const
+        {
+            if (m_theSource)
+                return API_INSTANCE DTWAIN_IsUIEnabled(m_theSource);
+            return false;
+        }
+
+		bool twain_source::is_uionlysupported() const
+		{
+			if (m_theSource)
+                return tribool::true_(m_bUIOnlySupported) ? true : false;
+			return false;
+		}
 	}
 }

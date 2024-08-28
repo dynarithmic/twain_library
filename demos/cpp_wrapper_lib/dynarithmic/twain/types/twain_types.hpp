@@ -23,7 +23,6 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_TWAIN_TYPES_HPP
 #define DTWAIN_TWAIN_TYPES_HPP
 
-#include <vector>
 #include <dtwain.h>
 #include <ostream>
 

@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms
+Imports System.Text
 
 Public Class SourcePropertiesDlg
     Private m_Source As System.IntPtr
@@ -53,5 +54,14 @@ Public Class SourcePropertiesDlg
         Me.edCustomCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
         DTWAINAPI.DTWAIN_EnumExtendedCaps(m_Source, AllCaps)
         Me.edExtendedCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
+
+        Dim customDSLength As Integer
+        Dim enc8 As Encoding = Encoding.UTF8
+        DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
+        Dim szCustomData(customDSLength) As Byte
+        DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
+        Dim contents As String
+        contents = enc8.GetString(szCustomData, 0, customDSLength)
+        Me.txtDSData.Text = contents
     End Sub
 End Class

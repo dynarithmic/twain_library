@@ -18,12 +18,10 @@ FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
 DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
 OF THIRD PARTY RIGHTS.
 */
-#ifndef STRING_UTILITIES_H
-#define STRING_UTILITIES_H
+#ifndef STRING_UTILITIES_HPP
+#define STRING_UTILITIES_HPP
 
 #include <string>
-#include <algorithm>
-#include <cctype>
 #include <sstream>
 #include <numeric>
 
@@ -36,41 +34,12 @@ namespace dynarithmic
 {
     namespace twain
     {
-        std::string& ltrim(std::string& str)
-        {
-            auto it2 = std::find_if(str.begin(), str.end(), [](unsigned char ch) 
-                                    { return !isspace(ch); });
-            str.erase(str.begin(), it2);
-            return str;
-        }
-
-        std::string& rtrim(std::string& str)
-        {
-            auto it1 = std::find_if(str.rbegin(), str.rend(), [](unsigned char ch)
-                                    { return !isspace(ch); });
-            str.erase(it1.base(), str.end());
-            return str;
-        }
-
-        std::string ltrim_copy(std::string str)
-        {
-            return ltrim(str);
-        }
-
-        std::string rtrim_copy(std::string str)
-        {
-            return rtrim(str);
-        }
-
-        std::string trim_copy(std::string str)
-        {
-            return ltrim(rtrim(str));
-        }
-
-        std::string& trim(std::string& str)
-        {
-            return ltrim(rtrim(str));
-        }
+        std::string& ltrim(std::string& str);
+        std::string& rtrim(std::string& str);
+        std::string ltrim_copy(std::string str);
+        std::string rtrim_copy(std::string str);
+        std::string trim_copy(std::string str);
+        std::string& trim(std::string& str);
 
         template <typename Container>
         std::string join(const Container& ct, std::string separator)

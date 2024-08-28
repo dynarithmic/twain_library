@@ -37,7 +37,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsTwainAvailable(VOID_PROTOTYPE);
 DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitialize(VOID_PROTOTYPE);
 
 /* Initialize DTWAIN without having the "Resources not found" error box blocking the client */
-DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlocking(VOID_PROTOTYPE);
+DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlocking();
 
 /* Uninitialize DTWAIN (closes all open sources, shuts down the link to the TWAIN DSM) */
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SysDestroy(VOID_PROTOTYPE);
