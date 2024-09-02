@@ -411,13 +411,19 @@ namespace TWAINDemo
                     return;
                 }
                 else
+                {
                     MessageBox.Show("Error Opening Source", "TWAIN Error", MessageBoxButtons.OK);
+                    SetCaptionToSourceName();
+                    EnableSourceItems(false);
+                }
             }
             else
+            {
                 MessageBox.Show("Error Selecting Source", "TWAIN Error", MessageBoxButtons.OK);
-            EnableSourceItems(false);
+                SetCaptionToSourceName();
+                EnableSourceItems(false);
+            }
         }
-
         private void EnableSourceItems(bool bEnable)
         {
             SourceProperties.Enabled = bEnable;

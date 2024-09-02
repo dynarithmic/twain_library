@@ -30,7 +30,7 @@ Class DTWAINAPI
         Dim y As Integer
     End Structure
 
-    <StructLayout(LayoutKind.Sequential, Pack:=8)>  
+    <StructLayout(LayoutKind.Sequential, Pack:=8)>
     Structure WinMsg
         Dim hwnd As Integer
         Dim message As Integer
@@ -48,8 +48,8 @@ Class DTWAINAPI
         Dim Country As System.UInt16
 
         <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=34)>
-        Dim Info As String                                 
-    End Structure    
+        Dim Info As String
+    End Structure
 
     <StructLayout(LayoutKind.Sequential, Pack:=2)>
     Structure TW_IDENTITY
@@ -93,17 +93,17 @@ Class DTWAINAPI
         Dim lpTemplateName As String
     End Structure
 
-    Public Const DTWAIN_FF_TIFF As Integer  = 0
-    Public Const DTWAIN_FF_PICT As Integer  = 1
-    Public Const DTWAIN_FF_BMP As Integer  = 2
-    Public Const DTWAIN_FF_XBM As Integer  = 3
-    Public Const DTWAIN_FF_JFIF As Integer  = 4
-    Public Const DTWAIN_FF_FPX As Integer  = 5
-    Public Const DTWAIN_FF_TIFFMULTI As Integer  = 6
-    Public Const DTWAIN_FF_PNG As Integer  = 7
-    Public Const DTWAIN_FF_SPIFF As Integer  = 8
-    Public Const DTWAIN_FF_EXIF As Integer  = 9
-    Public Const DTWAIN_FF_PDF As Integer  = 10
+    Public Const DTWAIN_FF_TIFF As Integer = 0
+    Public Const DTWAIN_FF_PICT As Integer = 1
+    Public Const DTWAIN_FF_BMP As Integer = 2
+    Public Const DTWAIN_FF_XBM As Integer = 3
+    Public Const DTWAIN_FF_JFIF As Integer = 4
+    Public Const DTWAIN_FF_FPX As Integer = 5
+    Public Const DTWAIN_FF_TIFFMULTI As Integer = 6
+    Public Const DTWAIN_FF_PNG As Integer = 7
+    Public Const DTWAIN_FF_SPIFF As Integer = 8
+    Public Const DTWAIN_FF_EXIF As Integer = 9
+    Public Const DTWAIN_FF_PDF As Integer = 10
     Public Const DTWAIN_FF_JP2 As Integer = 11
     Public Const DTWAIN_FF_JPX As Integer = 13
     Public Const DTWAIN_FF_DEJAVU As Integer = 14
@@ -2633,4 +2633,6 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetTwainAvailabilityExW Lib "dtwain64u.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
     Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain64u.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
 
+    Declare Auto Function DTWAIN_TestGetCap Lib "dtwain64u.dll" (ByVal Source As System.IntPtr, ByVal lCapability As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_EnumCamerasEx Lib "dtwain64u.dll" (ByVal Source As System.IntPtr, ByVal lWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
 End Class
