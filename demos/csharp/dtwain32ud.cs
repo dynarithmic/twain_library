@@ -5728,6 +5728,12 @@ namespace Dynarithmic
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetTwainAvailabilityExW(NULL_HANDLE sz, int nLength);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, int nCapability);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, int nWhichCameras, ref DTWAIN_ARRAY Cameras);
     }
 }

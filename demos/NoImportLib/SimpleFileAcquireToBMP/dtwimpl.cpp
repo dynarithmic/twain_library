@@ -216,6 +216,7 @@
     D_ENUMBRIGHTNESSVALUESEXFUNC                                      DYNDTWAIN_API::DTWAIN_EnumBrightnessValuesEx = nullptr;
     D_ENUMBRIGHTNESSVALUESFUNC                                        DYNDTWAIN_API::DTWAIN_EnumBrightnessValues = nullptr;
     D_ENUMCAMERASFUNC                                                 DYNDTWAIN_API::DTWAIN_EnumCameras = nullptr;
+    D_ENUMCAMERASEXFUNC                                               DYNDTWAIN_API::DTWAIN_EnumCamerasEx = nullptr;
     D_ENUMCOMPRESSIONTYPESEXFUNC                                      DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx = nullptr;
     D_ENUMCOMPRESSIONTYPESFUNC                                        DYNDTWAIN_API::DTWAIN_EnumCompressionTypes = nullptr;
     D_ENUMCONTRASTVALUESEXFUNC                                        DYNDTWAIN_API::DTWAIN_EnumContrastValuesEx = nullptr;
@@ -337,6 +338,9 @@
     D_GETACQUIRESTRIPBUFFERFUNC                                       DYNDTWAIN_API::DTWAIN_GetAcquireStripBuffer = nullptr;
     D_GETACQUIRESTRIPDATAFUNC                                         DYNDTWAIN_API::DTWAIN_GetAcquireStripData = nullptr;
     D_GETACQUIRESTRIPSIZESFUNC                                        DYNDTWAIN_API::DTWAIN_GetAcquireStripSizes = nullptr;
+    D_GETACTIVEDSMPATHFUNC                                            DYNDTWAIN_API::DTWAIN_GetActiveDSMPath = nullptr;
+    D_GETACTIVEDSMPATHAFUNC                                           DYNDTWAIN_API::DTWAIN_GetActiveDSMPathA = nullptr;
+    D_GETACTIVEDSMPATHWFUNC                                           DYNDTWAIN_API::DTWAIN_GetActiveDSMPathW = nullptr;
     D_GETALARMVOLUMEFUNC                                              DYNDTWAIN_API::DTWAIN_GetAlarmVolume = nullptr;
     D_GETAPIHANDLESTATUS                                              DYNDTWAIN_API::DTWAIN_GetAPIHandleStatus = nullptr;
     D_GETAPPINFOAFUNC                                                 DYNDTWAIN_API::DTWAIN_GetAppInfoA = nullptr;
@@ -584,8 +588,12 @@
     D_GETTWAINLANGUAGEVALUEFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageValue = nullptr;
     D_GETTWAINLANGUAGEVALUEWFUNC                                      DYNDTWAIN_API::DTWAIN_GetTwainLanguageValueW = nullptr;
     D_GETTWAINMODEFUNC                                                DYNDTWAIN_API::DTWAIN_GetTwainMode = nullptr;
+    D_GETTWAINNAMEFROMCONSTANT                                        DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstant = nullptr;
     D_GETTWAINNAMEFROMCONSTANTA                                       DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantA = nullptr;
     D_GETTWAINNAMEFROMCONSTANTW                                       DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantW = nullptr;
+    D_GETTWAINSTRINGNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainStringName = nullptr;
+    D_GETTWAINSTRINGNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainStringNameA = nullptr;
+    D_GETTWAINSTRINGNAMEWFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainStringNameW = nullptr;
     D_GETTWAINTIMEOUTFUNC                                             DYNDTWAIN_API::DTWAIN_GetTwainTimeout = nullptr;
     D_GETVERSIONEXFUNC                                                DYNDTWAIN_API::DTWAIN_GetVersionEx = nullptr;
     D_GETVERSIONFUNC                                                  DYNDTWAIN_API::DTWAIN_GetVersion = nullptr;
@@ -775,6 +783,7 @@
     D_SETACQUIREIMAGESCALESTRINGFUNC                                  DYNDTWAIN_API::DTWAIN_SetAcquireImageScaleString = nullptr;
     D_SETACQUIREIMAGESCALESTRINGWFUNC                                 DYNDTWAIN_API::DTWAIN_SetAcquireImageScaleStringW = nullptr;
     D_SETACQUIRESTRIPBUFFERFUNC                                       DYNDTWAIN_API::DTWAIN_SetAcquireStripBuffer = nullptr;
+    D_SETACQUIRESTRIPSIZEFUNC                                         DYNDTWAIN_API::DTWAIN_SetAcquireStripSize = nullptr;
     D_SETALARMSFUNC                                                   DYNDTWAIN_API::DTWAIN_SetAlarms = nullptr;
     D_SETALARMVOLUMEFUNC                                              DYNDTWAIN_API::DTWAIN_SetAlarmVolume = nullptr;
     D_SETALLCAPSTODEFAULTFUNC                                         DYNDTWAIN_API::DTWAIN_SetAllCapsToDefault = nullptr;
@@ -1249,6 +1258,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnumBrightnessValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumBrightnessValuesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCameras, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypes, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumContrastValues, hModule);
@@ -1370,6 +1380,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripBuffer, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripData, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripSizes, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPath, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPathA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPathW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAlarmVolume, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAPIHandleStatus, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAppInfo, hModule);
@@ -1620,8 +1633,12 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageValueA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageValueW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainMode, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstant, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringName, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringNameA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainTimeout, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersion, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyright, hModule);
@@ -1819,6 +1836,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireImageScaleStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireImageScaleStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAcquireStripBuffer, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetAcquireStripSize, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAlarms, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAlarmVolume, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetAllCapsToDefault, hModule);

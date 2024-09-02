@@ -69,6 +69,7 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 Area array is te klein. Array moet ten minste 4 items bevatten
+1057 Source does not support TWAIN file system.
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

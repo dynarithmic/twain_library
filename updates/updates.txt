@@ -2,9 +2,11 @@ DTWAIN Version changes
 
 5.5.0
 
-- Add support for Big TIFF files when calling DTWAIN_AcquireFile and DTWAIN_AcquireFileEx.  
+- Add support for Big TIFF files when calling DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx().  
   For more information, see the new file type constants (DTWAIN_BIGTIFFNONE, DTWAIN_BIGTIFFLZW, etc.)
   Big TIFF files are TIFF files that are allowed to be greater than 4 Gigabytes in size.
+
+- Update twaininfo.txt to add the new Big TIFF file type information.
 
 - Update the DTWDEMO.exe demo program, as well as the C# and Visual Basic full 
   demo programs to display the TWAIN Source's custom data when displaying the Source Properties dialog box.
@@ -19,20 +21,71 @@ DTWAIN Version changes
 - Add function DTWAIN_IsTwainAvailableEx() to return a pipe-delimited string denoting
   the full TWAIN paths of both TWAIN 1.x and TWAIN 2.x Data Source managers.
 
-- Optimize DTWAIN_OpenSource() 
-    a) if called more than once on a TWAIN Source, and
-    b) When initially opening a TWAIN Source by not checking for the status of the feeder.
+- Optimize DTWAIN_OpenSource() in these scenarios:
+    a) if called more than once on a TWAIN Source
+    b) When initially opening a TWAIN Source by not checking for the status of the feeder
+    c) Capability processing has been minimized when calling DTWAIN_OpenSource().
 
 - Optimize DTWAIN_GetCapValues() and DTWAIN_SetCapValues() if a capability is not supported
   by the TWAIN Source.
 
-- Update twaininfo.txt to add the new Big TIFF file type information.
+- Fixed an issue with DTWAIN_GetCapValuesEx2(), where the passed-in TWAIN data type was not
+  being processed correctly for all scenarios.
 
-- Ensure that DTWAIN_GetCapValues and other internal functions that call
-  DTWAIN_GetCapValues clears the returned user array of values if the TWAIN 
-  capability being tested is not supported by the device.
+- Fixed issue with DTWAIN_EnumCameras() not returning all of the camera information (only top
+  and bottom cameras were returned).  Please note that "camera" in this context does not mean
+  "digital camera", but instead the mechanism that scans the image.  Only TWAIN devices that
+  support an internal file system (DTWAIN_IsFileSystemSupported()) will have the ability to 
+  enumerate camera types.
 
-- Other minor bug fixes and optimizations.
+- Fixed minor issue with DTWAIN_EnumCameras() and logging, where unsupported TWAIN drivers that
+  do not have an internal file system would log an exception instead of returning an error.
+
+- Added DTWAIN_EnumCamerasEx() that allows the application to enumerate any of the (currently)
+  9 specific camera types defined by TWAIN.  The camera types are described by the TWAIN
+  constants:
+
+      DTWAIN_FT_CAMERA         
+      DTWAIN_FT_CAMERATOP      
+      DTWAIN_FT_CAMERABOTTOM   
+      DTWAIN_FT_CAMERAPREVIEW  
+      DTWAIN_FT_DOMAIN         
+      DTWAIN_FT_HOST           
+      DTWAIN_FT_DIRECTORY      
+      DTWAIN_FT_IMAGE          
+      DTWAIN_FT_UNKNOWN        
+
+- Ensure that DTWAIN_GetCapValues() and other internal functions that call DTWAIN_GetCapValues() 
+  clears the returned user array of values if the TWAIN capability being tested is not supported 
+  by the device.
+
+- Adjust twaininfo.txt to properly reflect the new TWAIN 2.x capability information.  
+  Note: This new version of twaininfo.txt must be used with the current DTWAIN 5.5.x. 
+  The older version of twaininfo.txt can only be used with DTWAIN version 5.4.x or below. 
+
+- Updated the various language bindings (C#, Delphi, Visual Basic, etc.) to reflect the new
+  additions of the Big TIFF file type.
+
+- Updated the C/C++ "No import library" method of using DTWAIN to reflect the new functions,
+  plus added missing DTWAIN API functions to dtwainx2.h and dtwimpl.cpp(.c).
+
+- Added the function DTWAIN_TestGetCap() that allows testing of a TWAIN Source's capability's
+  MSG_GET functionality for all containers and data types.  This function basically calls
+  DTWAIN_GetCapValues(), checking for successful retrieval of information from the TWAIN
+  device for each container type and data type supported by TWAIN.  The DTWAIN_TestGetCap() 
+  function can be useful to determine a custom capability's container and data type if this 
+  information is not known by the programmer.
+
+  The return value for DTWAIN_TestGetCap() is a DTWAIN_ARRAY, where the array consists of LONG (32-bit) values.  
+  The upper 16 bits of each value in the array denotes the successful data type, and the lower 16 bits 
+  denote the successful data type.  The container type can be DTWAIN_CONTONEVALUE, DTWAIN_CONTRANGE,
+  DTWAIN_CONTENUMERATION, and DTWAIN_CONTRANGE, while the data type will be one of the types defined
+  in twain.h, i.e. TWTY_BOOL, TWTY_FRAME, TWTY_UINT16, etc.
+
+  Note:  Use DTWAIN_TestGetCap() with caution, as DTWAIN will attempt to test *every* container type and 
+  data type combination for the passed-in capability value.
+
+- Other minor bug fixes and enhancements.
 
 
 5.4.8

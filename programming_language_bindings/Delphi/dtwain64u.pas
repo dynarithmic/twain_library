@@ -1821,6 +1821,7 @@ function DTWAIN_EnumBottomCameras(Source:DTWAIN_SOURCE; Cameras:LPDTWAIN_ARRAY):
 function DTWAIN_EnumBrightnessValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY; bExpandIfRange:BOOL):LONG;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumBrightnessValues';
 function DTWAIN_EnumBrightnessValuesEx(Source:DTWAIN_SOURCE; bExpandIfRange:BOOL):DTWAIN_ARRAY;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumBrightnessValuesEx';
 function DTWAIN_EnumCameras(Source:DTWAIN_SOURCE; Cameras:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumCameras';
+function DTWAIN_EnumCamerasEx(Source:DTWAIN_SOURCE; WhichCameras:LONG, Cameras:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumCamerasEx';
 function DTWAIN_EnumCompressionTypes(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumCompressionTypes';
 function DTWAIN_EnumCompressionTypesEx(Source:DTWAIN_SOURCE):DTWAIN_ARRAY;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumCompressionTypesEx';
 function DTWAIN_EnumContrastValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY; bExpandIfRange:BOOL):LONG;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_EnumContrastValues';
@@ -2668,5 +2669,7 @@ function DTWAIN_IsTwainAvailableEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;
 function DTWAIN_GetTwainAvailabilityExA(lpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_GetTwainAvailabilityExA';
 function DTWAIN_GetTwainAvailabilityExW(lpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_GetTwainAvailabilityExW';
 function DTWAIN_GetTwainAvailabilityEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_GetTwainAvailabilityEx';
+function DTWAIN_TestGetCap(source:DTWAIN_SOURCE; nCapability:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain64u.dll'   name 'DTWAIN_TestGetCap';
+
     implementation
 end.

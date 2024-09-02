@@ -323,9 +323,14 @@ Public Class VB_FullDemo
                 EnableSourceItems(True)
                 Return
             Else
-                MessageBox.Show("Error Selecting Source", "TWAIN Error", MessageBoxButtons.OK)
+                MessageBox.Show("Error Opening selected Source", "TWAIN Error", MessageBoxButtons.OK)
+                SetCaptionToSourceName()
                 EnableSourceItems(False)
             End If
+        Else
+            MessageBox.Show("Error Selecting Source", "TWAIN Error", MessageBoxButtons.OK)
+            SetCaptionToSourceName()
+            EnableSourceItems(False)
         End If
     End Sub
 
