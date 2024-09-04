@@ -69,7 +69,8 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 A matriz de área é muito pequena. A matriz deve ter pelo menos 4 itens.
-1057 Source does not support TWAIN file system.
+1057 Erro ao criar arquivo de log.
+1058 Source does not support TWAIN file system.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

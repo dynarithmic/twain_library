@@ -369,11 +369,11 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_TRANSFERREADY As Integer = 1009
     Public Const DTWAIN_TN_TRANSFERDONE As Integer = 1010
     Public Const DTWAIN_TN_ACQUIREPAGEDONE As Integer = 1010
-    Public Const DTWAIN_TN_UICLOSING As Integer = 1011
-    Public Const DTWAIN_TN_UICLOSED As Integer = 1012
-    Public Const DTWAIN_TN_UIOPENED As Integer = 1013
-    Public Const DTWAIN_TN_UIOPENING As Integer = 1055
-    Public Const DTWAIN_TN_UIOPENFAILURE As Integer = 1060
+    Public Const DTWAIN_TN_UICLOSING As Integer = 3000
+    Public Const DTWAIN_TN_UICLOSED As Integer = 3001
+    Public Const DTWAIN_TN_UIOPENED As Integer = 3002
+    Public Const DTWAIN_TN_UIOPENING As Integer = 3003
+    Public Const DTWAIN_TN_UIOPENFAILURE As Integer = 3004
     Public Const DTWAIN_TN_CLIPTRANSFERDONE As Integer = 1014
     Public Const DTWAIN_TN_INVALIDIMAGEFORMAT As Integer = 1015
     Public Const DTWAIN_TN_ACQUIRETERMINATED As Integer = 1021

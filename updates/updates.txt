@@ -32,6 +32,8 @@ DTWAIN Version changes
 - Fixed an issue with DTWAIN_GetCapValuesEx2(), where the passed-in TWAIN data type was not
   being processed correctly for all scenarios.
 
+- Fixed issue with DTWAIN_TN_UIOPENING not being sent during DTWAIN notification processing.
+
 - Fixed issue with DTWAIN_EnumCameras() not returning all of the camera information (only top
   and bottom cameras were returned).  Please note that "camera" in this context does not mean
   "digital camera", but instead the mechanism that scans the image.  Only TWAIN devices that

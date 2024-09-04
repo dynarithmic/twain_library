@@ -421,11 +421,11 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_TRANSFERREADY = 1009;
         public const  int DTWAIN_TN_TRANSFERDONE = 1010;
         public const  int DTWAIN_TN_ACQUIREPAGEDONE = 1010;
-        public const  int DTWAIN_TN_UICLOSING = 1011;
-        public const  int DTWAIN_TN_UICLOSED = 1012;
-        public const  int DTWAIN_TN_UIOPENED = 1013;
-        public const  int DTWAIN_TN_UIOPENING = 1055;
-        public const  int DTWAIN_TN_UIOPENFAILURE = 1060;
+        public const  int DTWAIN_TN_UICLOSING = 3000;
+        public const  int DTWAIN_TN_UICLOSED = 3001;
+        public const  int DTWAIN_TN_UIOPENED = 3002;
+        public const  int DTWAIN_TN_UIOPENING = 3003;
+        public const  int DTWAIN_TN_UIOPENFAILURE = 3004;
         public const  int DTWAIN_TN_CLIPTRANSFERDONE = 1014;
         public const  int DTWAIN_TN_INVALIDIMAGEFORMAT = 1015;
         public const  int DTWAIN_TN_ACQUIRETERMINATED = 1021;
