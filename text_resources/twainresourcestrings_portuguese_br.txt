@@ -1,3 +1,4 @@
+0 Nenhum erro
 1 Identificador de janela NULL
 2 Falha na alocação de memória
 3 Identificador de DLL inválido
