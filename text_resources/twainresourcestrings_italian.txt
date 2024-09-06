@@ -1,3 +1,4 @@
+0 Nessun errore
 1 NULL Finestra Maneggia
 2 Memoria Allocazione Fallimento
 3 Invalido DLL Maneggia
@@ -69,6 +70,8 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 Area array è troppo piccolo. La matrice deve contenere almeno 4 elementi.
+1057 Errore di creazione del file di registro.
+1058 Source does not support TWAIN file system.
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

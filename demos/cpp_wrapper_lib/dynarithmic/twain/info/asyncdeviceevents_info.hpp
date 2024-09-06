@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,30 +20,28 @@ OF THIRD PARTY RIGHTS.
 */
 #ifndef DTWAIN_ASYNCDEVICEEVENTS_INFO_HPP
 #define DTWAIN_ASYNCDEVICEEVENTS_INFO_HPP
-
 #include <vector>
-
-#include "dtwain_capability_interface.hpp"
-#include "dtwain_capinfo_base.hpp"
-#include "dtwain_twain_values.hpp"
+#include <dynarithmic/twain/twain_values.hpp>
+#include <dynarithmic/twain/capability_interface.hpp>
 
 namespace dynarithmic
 {
     namespace twain
     {
-        class deviceevent_info : public twain_capinfo_base
+        class deviceevent_info
         {
-            std::vector<deviceevent_value::value_type> m_vDeviceEvents;
+            std::vector<dynarithmic::twain::CAP_DEVICEEVENT_::value_type> m_vDeviceEvents;
 
             protected:
-                bool get(capability_interface& capInterface) override 
-                { m_vDeviceEvents = capInterface.get_deviceevent(); return true; }
+                bool get(capability_interface& capInterface)
+                { 
+                    m_vDeviceEvents = capInterface.get_deviceevent();
+                    return true; 
+                }
 
             public:
                 std::vector<deviceevent_value::value_type> get_deviceevents() const { return m_vDeviceEvents; }
         };
-
-        deviceevent_info get_deviceevent_info() { return deviceeent_info().get_deviceevents(); }
     }
 }
 #endif

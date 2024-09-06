@@ -112,7 +112,7 @@ namespace dynarithmic
             API_INSTANCE DTWAIN_GetVersionCopyrightA(retBuf.data(), static_cast<int32_t>(retBuf.size()));
             m_version_copyright = retBuf.data();
 
-            if (m_logger.second && m_logger.second->is_enabled())
+            if (m_logger.second/* && m_logger.second->is_enabled()*/)
                 setup_logging();
 #ifdef _WIN64
             m_twain_characteristics.set_dsm(dsm_type::version2_dsm);
@@ -181,12 +181,19 @@ namespace dynarithmic
             if (m_logger.second)
             {
                 auto& details = *(m_logger.second.get());
-                int32_t log_destination = 0; // static_cast<int32_t>(details.get_destination());
-                const int32_t log_verbosity = static_cast<int32_t>(details.get_verbosity_aslong());
-                log_destination |= DTWAIN_LOG_USECALLBACK;
-                API_INSTANCE DTWAIN_SetLoggerCallbackA(dynarithmic::twain::logger_callback_proc, PtrToInt64(this));
-                API_INSTANCE DTWAIN_SetTwainLogA(log_destination | log_verbosity, "");
+                if (details.is_enabled())
+                {
+                    auto log_destination = details.get_destination_aslong();
+                    auto log_verbosity = details.get_verbosity_aslong();
+                    log_destination |= DTWAIN_LOG_USECALLBACK;
+                    API_INSTANCE DTWAIN_SetLoggerCallbackA(dynarithmic::twain::logger_callback_proc, PtrToInt64(this));
+                    API_INSTANCE DTWAIN_SetTwainLogA(log_destination | log_verbosity, details.get_filename().c_str());
+                }
+                else
+                    // Turn off logging
+					API_INSTANCE DTWAIN_SetTwainLogA(0, "");
             }
+
         }
 
         void twain_session::mover(twain_session&& rhs) noexcept

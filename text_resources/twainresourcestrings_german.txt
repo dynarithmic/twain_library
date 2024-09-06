@@ -1,3 +1,4 @@
+0 Kein Fehler
 1 Ungültiges Fenster Handle
 2 Speicherallokierung fehlgeschlagen
 3 Ungültiges DLL Handle
@@ -69,6 +70,8 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 Das Bereichsarray ist zu klein. Das Array sollte mindestens 4 Elemente enthalten.
+1057 Protokolldatei konnte nicht erstellt werden
+1058 Source does not support TWAIN file system.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

@@ -38,7 +38,7 @@ int Runner::Run()
     // create a logger and set the twain session to use the logger
     auto& logger = session.register_logger<twain_derived_logger>();
     logger.enable().
-        set_verbosity(logger_verbosity::verbose2); // verbosity level
+        set_verbosity(logger_verbosity::verbose2).set_destination(logger_destination::to_custom); // verbosity level
     // Start the session
     session.start();
 

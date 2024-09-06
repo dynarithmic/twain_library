@@ -531,278 +531,278 @@
  340     USVIRGINIS    
   84     VIETNAM       
  -1000  END
-1	CAP_XFERCOUNT	1	32	32
-256	ICAP_COMPRESSION	4	48	48
-257	ICAP_PIXELTYPE	4	48	48
-258	ICAP_UNITS	4	48	48
-259	ICAP_XFERMECH	4	48	48
-4096	CAP_AUTHOR	11	32	32
-4097	CAP_CAPTION	11	32	32
-4098	CAP_FEEDERENABLED	6	32	32
-4099	CAP_FEEDERLOADED	6	32	0
-4100	CAP_TIMEDATE	9	32	0
-4101	CAP_SUPPORTEDCAPS	4	24	0
-4102	CAP_EXTENDEDCAPS	4	8	8
-4103	CAP_AUTOFEED	6	32	32
-4104	CAP_CLEARPAGE	6	32	32
-4105	CAP_FEEDPAGE	6	32	32
-4106	CAP_REWINDPAGE	6	32	32
-4107	CAP_INDICATORS	6	32	32
-4108	CAP_SUPPORTEDCAPSEXT	6	8	0
-4109	CAP_PAPERDETECTABLE	6	32	0
-4110	CAP_UICONTROLLABLE	6	32	0
-4111	CAP_DEVICEONLINE	6	32	0
-4112	CAP_AUTOSCAN  	6	32	8
-4113	CAP_THUMBNAILSENABLED	6	32	32
-4114	CAP_DUPLEX	4	32	0
-4115	CAP_DUPLEXENABLED	6	32	32
-4116	CAP_ENABLEDSUIONLY	6	32	0
-4117	CAP_CUSTOMDSDATA	6	32	0
-4118	CAP_ENDORSER	5	32	32
-4119	CAP_JOBCONTROL	4	48	32
-4120	CAP_ALARMS	4	8	8
-4121	CAP_ALARMVOLUME	2	96	96
-4122	CAP_AUTOMATICCAPTURE	2	96	96
-4123	CAP_TIMEBEFOREFIRSTCAPTURE	2	96	96
-4124	CAP_TIMEBETWEENCAPTURES	2	96	96
-4125	CAP_CLEARBUFFERS	4	32	32
-4126	CAP_MAXBATCHBUFFERS	5	112	32
-4127	CAP_DEVICETIMEDATE	9	32	32
-4128	CAP_POWERSUPPLY	4	48	0
-4129	CAP_CAMERAPREVIEWUI	6	32	0
-4130	CAP_DEVICEEVENT	4	8	8
-4132	CAP_SERIALNUMBER	12	32	0
-4134	CAP_PRINTER	4	48	48
-4135	CAP_PRINTERENABLED	6	32	32
-4136	CAP_PRINTERINDEX	5	32	32
-4137	CAP_PRINTERMODE	4	48	32
-4138	CAP_PRINTERSTRING	12	48	48
-4139	CAP_PRINTERSUFFIX	12	32	32
-4140	CAP_LANGUAGE	4	48	48
-4141	CAP_FEEDERALIGNMENT	4	32	32
-4142	CAP_FEEDERORDER	4	32	32
-4144	CAP_REACQUIREALLOWED	6	0	0
-4146	CAP_BATTERYMINUTES	2	96	0
-4147	CAP_BATTERYPERCENTAGE	2	32	0
-4148	CAP_CAMERASIDE	4	48	48
-4149	CAP_SEGMENTED	4	48	48
-4150	CAP_CAMERAENABLED	6	32	32
-4151	CAP_CAMERAORDER	4	8	8
-4152	CAP_MICRENABLED	6	48	48
-4153	CAP_FEEDERPREP	6	48	48
-4154	CAP_FEEDERPOCKET	4	8	8
-4155	CAP_AUTOMATICSENSEMEDIUM	6	48	48
-4156	CAP_CUSTOMINTERFACEGUID	12	32	32
-4157	CAP_SUPPORTEDCAPSSEGMENTUNIQUE	4	8	0
-4158	CAP_SUPPORTEDDATS	5	8	0
-4159	CAP_DOUBLEFEEDDETECTION	4	8	32
-4160	CAP_DOUBLEFEEDDETECTIONLENGTH	7	96	32
-4161	CAP_DOUBLEFEEDDETECTIONSENSITIVITY	4	48	32
-4162	CAP_DOUBLEFEEDDETECTIONRESPONSE	4	8	32
-4163	CAP_PAPERHANDLING	4	8	32
-4164	CAP_INDICATORSMODE	4	8	32
-4165	CAP_PRINTERVERTICALOFFSET	7	96	32
-4166	CAP_POWERSAVETIME	1	32	32
-4167	CAP_PRINTERCHARROTATION	5	112	112
-4168	CAP_PRINTERFONTSTYLE	4	8	8
-4169	CAP_PRINTERINDEXLEADCHAR	9	48	48
-4170	CAP_PRINTERINDEXMAXVALUE	5	112	112
-4171	CAP_PRINTERINDEXNUMDIGITS	5	112	112
-4172	CAP_PRINTERINDEXSTEP	5	112	112
-4173	CAP_PRINTERINDEXTRIGGER	4	8	8
-4174	CAP_PRINTERSTRINGPREVIEW	12	8	0
-4175    CAP_SHEETCOUNT  5   96  96 
-4176    CAP_IMAGEADDRESSENABLED 6	32	32
-4177	CAP_IAFIELDA_LEVEL 	4	48	48
-4178	CAP_IAFIELDB_LEVEL 	4	48	48
-4179	CAP_IAFIELDC_LEVEL 	4	48	48
-4180	CAP_IAFIELDD_LEVEL 	4	48	48
-4181	CAP_IAFIELDE_LEVEL 	4	48	48
-4182	CAP_IAFIELDA_PRINTFORMAT 9 	32	32
-4183	CAP_IAFIELDB_PRINTFORMAT 9 	32	32
-4184	CAP_IAFIELDC_PRINTFORMAT 9 	32	32
-4185	CAP_IAFIELDD_PRINTFORMAT 9 	32	32
-4186	CAP_IAFIELDE_PRINTFORMAT 9 	32	32
-4187	CAP_IAFIELDA_VALUE 	4	32	32
-4188	CAP_IAFIELDB_VALUE 	4	32	32
-4189	CAP_IAFIELDC_VALUE 	4	32	32
-4190	CAP_IAFIELDD_VALUE 	4	32	32
-4191	CAP_IAFIELDE_VALUE  	4	32	32
-4192    CAP_IAFIELDA_LASTPAGE   4	48	0 
-4193    CAP_IAFIELDB_LASTPAGE   4	48	0 
-4194    CAP_IAFIELDC_LASTPAGE   4	48	0 
-4195    CAP_IAFIELDD_LASTPAGE   4	48	0 
-4196    CAP_IAFIELDE_LASTPAGE   4	48	0 
-4352	ICAP_AUTOBRIGHT	6	32	32
-4353	ICAP_BRIGHTNESS	7	112	112
-4355	ICAP_CONTRAST	7	112	112
-4356	ICAP_CUSTHALFTONE	3	8	8
-4357	ICAP_EXPOSURETIME	7	112	112
-4358	ICAP_FILTER	4	40	40
-4359	ICAP_FLASHUSED	6	32	32
-4360	ICAP_GAMMA	7	32	32
-4361	ICAP_HALFTONES	9	56	56
-4362	ICAP_HIGHLIGHT	7	112	112
-4364	ICAP_IMAGEFILEFORMAT	4	48	48
-4365	ICAP_LAMPSTATE	6	48	32
-4366	ICAP_LIGHTSOURCE	4	48	48
-4368	ICAP_ORIENTATION	4	48	48
-4369	ICAP_PHYSICALWIDTH	7	32	0
-4370	ICAP_PHYSICALHEIGHT	7	32	0
-4371	ICAP_SHADOW	7	112	112
-4372	ICAP_FRAMES	8	48	48
-4374	ICAP_XNATIVERESOLUTION	7	48	0
-4375	ICAP_YNATIVERESOLUTION	7	48	0
-4376	ICAP_XRESOLUTION	7	112	112
-4377	ICAP_YRESOLUTION	7	112	112
-4378	ICAP_MAXFRAMES	4	32	32
-4379	ICAP_TILES	6	32	32
-4380	ICAP_BITORDER	4	48	32
-4381	ICAP_CCITTKFACTOR	4	32	32
-4382	ICAP_LIGHTPATH	4	48	32
-4383	ICAP_PIXELFLAVOR	4	48	32
-4384	ICAP_PLANARCHUNKY	4	48	48
-4385	ICAP_ROTATION	7	112	32
-4386	ICAP_SUPPORTEDSIZES	4	48	48
-4387	ICAP_THRESHOLD	7	112	112
-4388	ICAP_XSCALING	7	112	112
-4389	ICAP_YSCALING	7	112	112
-4390	ICAP_BITORDERCODES	4	48	32
-4391	ICAP_PIXELFLAVORCODES	4	48	32
-4392	ICAP_JPEGPIXELTYPE	4	48	48
-4394	ICAP_TIMEFILL	4	96	32
-4395	ICAP_BITDEPTH	4	48	48
-4396	ICAP_BITDEPTHREDUCTION	4	48	48
-4397	ICAP_UNDEFINEDIMAGESIZE	6	32	32
-4398	ICAP_IMAGEDATASET	5	104	104
-4399	ICAP_EXTIMAGEINFO	6	32	32
-4400	ICAP_MINIMUMHEIGHT	7	32	0
-4401	ICAP_MINIMUMWIDTH	7	32	0
-4404	ICAP_AUTODISCARDBLANKPAGES	2	96	96
-4406	ICAP_FLIPROTATION	4	32	32
-4407	ICAP_BARCODEDETECTIONENABLED	6	32	32
-4408	ICAP_SUPPORTEDBARCODETYPES	4	8	0
-4409	ICAP_BARCODEMAXSEARCHPRIORITIES	5	112	32
-4410	ICAP_BARCODESEARCHPRIORITIES	4	8	8
-4411	ICAP_BARCODESEARCHMODE	4	48	32
-4412	ICAP_BARCODEMAXRETRIES	5	112	32
-4413	ICAP_BARCODETIMEOUT	5	112	32
-4414	ICAP_ZOOMFACTOR	1	112	32
-4415	ICAP_PATCHCODEDETECTIONENABLED	6	32	32
-4416	ICAP_SUPPORTEDPATCHCODETYPES	4	40	0
-4417	ICAP_PATCHCODEMAXSEARCHPRIORITIES	5	112	32
-4418	ICAP_PATCHCODESEARCHPRIORITIES	4	8	8
-4419	ICAP_PATCHCODESEARCHMODE	4	48	32
-4420	ICAP_PATCHCODEMAXRETRIES	5	112	32
-4421	ICAP_PATCHCODETIMEOUT	5	112	32
-4422	ICAP_FLASHUSED2	4	48	48
-4423	ICAP_IMAGEFILTER	4	48	48
-4424	ICAP_NOISEFILTER	4	48	48
-4425	ICAP_OVERSCAN	4	48	48
-4432	ICAP_AUTOMATICBORDERDETECTION	6	32	32
-4433	ICAP_AUTOMATICDESKEW	6	32	32
-4434	ICAP_AUTOMATICROTATE	6	32	32
-4435	ICAP_JPEGQUALITY	1	112	112
-4436	ICAP_FEEDERTYPE	4	32	32
-4437	ICAP_ICCPROFILE	4	48	32
-4438	ICAP_AUTOSIZE	4	16	16
-4439	ICAP_AUTOMATICCROPUSESFRAME	6	48	0
-4440	ICAP_AUTOMATICLENGTHDETECTION	6	48	48
-4441	ICAP_AUTOMATICCOLORENABLED	6	48	48
-4442	ICAP_AUTOMATICCOLORNONCOLORPIXELTYPE	4	48	48
-4443	ICAP_COLORMANAGEMENTENABLED	6	48	48
-4444	ICAP_IMAGEMERGE	4	48	48
-4445	ICAP_IMAGEMERGEHEIGHTTHRESHOLD	7	96	96
-4446	ICAP_SUPPORTEDEXTIMAGEINFO	4	8	0
-4447	ICAP_FILMTYPE	4	48	32
-4448	ICAP_MIRROR	4	48	32
-4449	ICAP_JPEGSUBSAMPLING	4	48	32
-4609	ACAP_AUDIOFILEFORMAT	4	48	48
-4610	ACAP_XFERMECH	4	48	48
-5608	TWEI_BARCODEX	5	0	0
-5609	TWEI_BARCODEY	5	0	0
-5610	TWEI_BARCODETEXT	16	0	0
-5611	TWEI_BARCODETYPE	5	0	0
-5612	TWEI_DESHADETOP	5	0	0
-5613	TWEI_DESHADELEFT	5	0	0
-5614	TWEI_DESHADEHEIGHT	5	0	0
-5615	TWEI_DESHADEWIDTH	5	0	0
-5616	TWEI_DESHADESIZE	5	0	0
-5617	TWEI_SPECKLESREMOVED	5	0	0
-5618	TWEI_HORZLINEXCOORD	5	0	0
-5619	TWEI_HORZLINEYCOORD	5	0	0
-5620	TWEI_HORZLINELENGTH	5	0	0
-5621	TWEI_HORZLINETHICKNESS	5	0	0
-5622	TWEI_VERTLINEXCOORD	5	0	0
-5623	TWEI_VERTLINEYCOORD	5	0	0
-5624	TWEI_VERTLINELENGTH	5	0	0
-5625	TWEI_VERTLINETHICKNESS	5	0	0
-5626	TWEI_PATCHCODE	5	0	0
-5627	TWEI_ENDORSEDTEXT	12	0	0
-5628	TWEI_FORMCONFIDENCE	5	0	0
-5629	TWEI_FORMTEMPLATEMATCH	12	0	0
-5630	TWEI_FORMTEMPLATEPAGEMATCH	5	0	0
-5631	TWEI_FORMHORZDOCOFFSET	5	0	0
-5632	TWEI_FORMVERTDOCOFFSET	5	0	0
-5633	TWEI_BARCODECOUNT	5	0	0
-5634	TWEI_BARCODECONFIDENCE	5	0	0
-5635	TWEI_BARCODEROTATION	5	0	0
-5636	TWEI_BARCODETEXTLENGTH	5	0	0
-5637	TWEI_DESHADECOUNT	5	0	0
-5638	TWEI_DESHADEBLACKCOUNTOLD	5	0	0
-5639	TWEI_DESHADEBLACKCOUNTNEW	5	0	0
-5640	TWEI_DESHADEBLACKRLMIN	5	0	0
-5641	TWEI_DESHADEBLACKRLMAX	5	0	0
-5642	TWEI_DESHADEWHITECOUNTOLD	5	0	0
-5643	TWEI_DESHADEWHITECOUNTNEW	5	0	0
-5644	TWEI_DESHADEWHITERLMIN	5	0	0
-5645	TWEI_DESHADEWHITERLAVE	5	0	0
-5646	TWEI_DESHADEWHITERLMAX	5	0	0
-5647	TWEI_BLACKSPECKLESREMOVED	5	0	0
-5648	TWEI_WHITESPECKLESREMOVED	5	0	0
-5649	TWEI_HORZLINECOUNT	5	0	0
-5650	TWEI_VERTLINECOUNT	5	0	0
-5651	TWEI_DESKEWSTATUS	5	0	0
-5652	TWEI_SKEWORIGINALANGLE	5	0	0
-5653	TWEI_SKEWFINALANGLE	5	0	0
-5654	TWEI_SKEWCONFIDENCE	5	0	0
-5655	TWEI_SKEWWINDOWX1	5	0	0
-5656	TWEI_SKEWWINDOWY1	5	0	0
-5657	TWEI_SKEWWINDOWX2	5	0	0
-5658	TWEI_SKEWWINDOWY2	5	0	0
-5659	TWEI_SKEWWINDOWX3	5	0	0
-5660	TWEI_SKEWWINDOWY3	5	0	0
-5661	TWEI_SKEWWINDOWX4	5	0	0
-5662	TWEI_SKEWWINDOWY4	5	0	0
-5664	TWEI_BOOKNAME	12	0	0
-5665	TWEI_CHAPTERNUMBER	5	0	0
-5666	TWEI_DOCUMENTNUMBER	5	0	0
-5667	TWEI_PAGENUMBER	5	0	0
-5668	TWEI_CAMERA	12	0	0
-5669	TWEI_FRAMENUMBER	5	0	0
-5670	TWEI_FRAME	8	0	0
-5671	TWEI_PIXELFLAVOR	4	0	0
-5672	TWEI_ICCPROFILE	12	0	0
-5673	TWEI_LASTSEGMENT	6	0	0
-5674	TWEI_SEGMENTNUMBER	5	0	0
-5675	TWEI_MAGDATA	12	0	0
-5676	TWEI_MAGTYPE	4	0	0
-5677	TWEI_PAGESIDE	4	0	0
-5678	TWEI_FILESYSTEMSOURCE	12	0	0
-5679	TWEI_IMAGEMERGED	6	0	0
-5680	TWEI_MAGDATALENGTH	5	0	0
-5681	TWEI_PAPERCOUNT	5	0	0
-5682	TWEI_PRINTERTEXT	12	0	0
-5683	TWEI_TWAINDIRECTMETADATA	15	0	0
-5684	TWEI_IAFIELDA_VALUE 9 0 0
-5685	TWEI_IAFIELDB_VALUE 9 0 0
-5686	TWEI_IAFIELDC_VALUE 9 0 0
-5687	TWEI_IAFIELDD_VALUE 9 0 0
-5688	TWEI_IAFIELDE_VALUE 9 0 0
-5689    TWEI_IALEVEL 4 0 0
-5690    TWEI_PRINTER 4 0 0
-5691    TWEI_BARCODETEXT2 15 0 0
-32768	CAP_CUSTOMBASE	5	0	0
+1         CAP_XFERCOUNT                           1    96   32   32   32   32   32   32                                 
+256       ICAP_COMPRESSION                        4    48   32   32   32   48   32   32                                 
+257       ICAP_PIXELTYPE                          4    48   32   32   32   48   32   32                                 
+258       ICAP_UNITS                              4    48   32   32   32   48   32   32                                 
+259       ICAP_XFERMECH                           4    48   32   32   32   48   32   32                                 
+4096      CAP_AUTHOR                              11   32   32   32   32   32   32   32                                 
+4097      CAP_CAPTION                             11   32   32   32   32   32   32   32                                 
+4098      CAP_FEEDERENABLED                       6    48   32   32   32   48   32   32                                 
+4099      CAP_FEEDERLOADED                        6    48   32   32   0    0    0    32                                 
+4100      CAP_TIMEDATE                            9    32   32   32   0    0    0    32                                 
+4101      CAP_SUPPORTEDCAPS                       4    8    8    8    0    0    0    32                                 
+4102      CAP_EXTENDEDCAPS                        4    8    8    8    40   40   8    32                                 
+4103      CAP_AUTOFEED                            6    48   32   32   32   48   32   32                                 
+4104      CAP_CLEARPAGE                           6    48   32   32   32   48   32   32                                 
+4105      CAP_FEEDPAGE                            6    48   32   32   32   48   32   32                                 
+4106      CAP_REWINDPAGE                          6    48   32   32   32   48   32   32                                 
+4107      CAP_INDICATORS                          6    48   32   32   32   48   32   32                                 
+4108      CAP_SUPPORTEDCAPSEXT                    6    8    8    8    0    0    0    32                                 
+4109      CAP_PAPERDETECTABLE                     6    48   32   32   0    0    0    32                                 
+4110      CAP_UICONTROLLABLE                      6    48   32   32   0    0    0    32                                 
+4111      CAP_DEVICEONLINE                        6    48   32   32   0    0    0    32                                 
+4112      CAP_AUTOSCAN                            6    48   32   32   32   48   32   32                                 
+4113      CAP_THUMBNAILSENABLED                   6    48   32   32   32   48   32   32                                 
+4114      CAP_DUPLEX                              4    32   32   32   0    0    0    32                                 
+4115      CAP_DUPLEXENABLED                       6    48   32   32   32   48   32   32                                 
+4116      CAP_ENABLEDSUIONLY                      6    48   32   32   0    0    0    32                                 
+4117      CAP_CUSTOMDSDATA                        6    48   32   32   0    0    0    32                                 
+4118      CAP_ENDORSER                            5    96   32   32   32   32   32   32                                 
+4119      CAP_JOBCONTROL                          4    48   32   32   32   48   32   32                                 
+4120      CAP_ALARMS                              4    8    8    8    40   8    40   32                                 
+4121      CAP_ALARMVOLUME                         2    96   32   32   32   96   32   32                                 
+4122      CAP_AUTOMATICCAPTURE                    2    96   32   32   32   96   32   32                                 
+4123      CAP_TIMEBEFOREFIRSTCAPTURE              2    96   32   32   32   96   32   32                                 
+4124      CAP_TIMEBETWEENCAPTURES                 2    96   32   32   32   96   32   32                                 
+4125      CAP_CLEARBUFFERS                        4    48   32   32   32   48   32   32                                 
+4126      CAP_MAXBATCHBUFFERS                     5    112  32   32   32   112  32   32                                 
+4127      CAP_DEVICETIMEDATE                      9    32   32   32   32   32   32   32                                 
+4128      CAP_POWERSUPPLY                         4    48   32   32   0    0    0    32                                 
+4129      CAP_CAMERAPREVIEWUI                     6    48   32   32   0    0    0    32                                 
+4130      CAP_DEVICEEVENT                         4    8    8    8    40   40   8    32                                 
+4132      CAP_SERIALNUMBER                        12   32   32   32   0    0    0    32                                 
+4134      CAP_PRINTER                             4    48   32   32   32   48   32   32                                 
+4135      CAP_PRINTERENABLED                      6    48   32   32   32   48   32   32                                 
+4136      CAP_PRINTERINDEX                        5    96   32   32   32   32   32   32                                 
+4137      CAP_PRINTERMODE                         4    48   32   32   32   48   32   32                                 
+4138      CAP_PRINTERSTRING                       12   48   32   32   48   48   32   32                                 
+4139      CAP_PRINTERSUFFIX                       12   32   32   32   32   32   32   32                                 
+4140      CAP_LANGUAGE                            4    48   32   32   32   48   32   32                                 
+4141      CAP_FEEDERALIGNMENT                     4    48   32   32   32   32   32   32                                 
+4142      CAP_FEEDERORDER                         4    48   32   32   32   32   32   32                                 
+4144      CAP_REACQUIREALLOWED                    6    48   32   32   0    0    0    32                                 
+4146      CAP_BATTERYMINUTES                      2    32   32   32   0    0    0    32                                 
+4147      CAP_BATTERYPERCENTAGE                   2    32   32   32   0    0    0    32                                 
+4148      CAP_CAMERASIDE                          4    48   32   32   32   48   32   32                                 
+4149      CAP_SEGMENTED                           4    48   32   32   32   48   32   32                                 
+4150      CAP_CAMERAENABLED                       6    48   32   32   32   48   32   32                                 
+4151      CAP_CAMERAORDER                         4    8    8    8    40   40   8    32                                 
+4152      CAP_MICRENABLED                         6    48   32   32   32   48   32   32                                 
+4153      CAP_FEEDERPREP                          6    48   32   32   32   48   32   32                                 
+4154      CAP_FEEDERPOCKET                        4    8    8    8    40   40   8    32                                 
+4155      CAP_AUTOMATICSENSEMEDIUM                6    48   32   32   32   48   32   32                                 
+4156      CAP_CUSTOMINTERFACEGUID                 12   32   32   32   0    0    0    32                                 
+4157      CAP_SUPPORTEDCAPSSEGMENTUNIQUE          4    8    8    8    0    0    0    32                                 
+4158      CAP_SUPPORTEDDATS                       5    8    8    8    0    0    0    32                                 
+4159      CAP_DOUBLEFEEDDETECTION                 4    8    8    8    40   40   8    32                                 
+4160      CAP_DOUBLEFEEDDETECTIONLENGTH           7    64   32   32   32   96   32   32                                 
+4161      CAP_DOUBLEFEEDDETECTIONSENSITIVITY      4    16   32   32   32   48   32   32                                 
+4162      CAP_DOUBLEFEEDDETECTIONRESPONSE         4    8    8    8    40   40   8    32                                 
+4163      CAP_PAPERHANDLING                       4    8    8    8    40   40   8    32                                 
+4164      CAP_INDICATORSMODE                      4    8    8    8    40   40   8    32                                 
+4165      CAP_PRINTERVERTICALOFFSET               7    96   32   32   32   96   32   32                                 
+4166      CAP_POWERSAVETIME                       1    96   32   32   32   32   32   32                                 
+4167      CAP_PRINTERCHARROTATION                 5    112  32   32   112  112  32   32                                 
+4168      CAP_PRINTERFONTSTYLE                    4    8    8    8    8    8    8    32                                 
+4169      CAP_PRINTERINDEXLEADCHAR                9    48   32   32   48   48   32   32                                 
+4170      CAP_PRINTERINDEXMAXVALUE                5    112  32   32   112  112  32   32                                 
+4171      CAP_PRINTERINDEXNUMDIGITS               5    112  32   32   112  112  32   32                                 
+4172      CAP_PRINTERINDEXSTEP                    5    112  32   32   112  112  32   32                                 
+4173      CAP_PRINTERINDEXTRIGGER                 4    8    8    8    8    8    8    32                                 
+4174      CAP_PRINTERSTRINGPREVIEW                12   8    8    8    0    0    0    32                                 
+4175      CAP_SHEETCOUNT                          5    96   32   32   96   64   32   32                                 
+4176      CAP_IMAGEADDRESSENABLED                 6    48   32   32   48   48   32   32                                 
+4177      CAP_IAFIELDA_LEVEL                      4    16   32   32   0    0    0    32                                 
+4178      CAP_IAFIELDB_LEVEL                      4    16   32   32   0    0    0    32                                 
+4179      CAP_IAFIELDC_LEVEL                      4    16   32   32   0    0    0    32                                 
+4180      CAP_IAFIELDD_LEVEL                      4    16   32   32   0    0    0    32                                 
+4181      CAP_IAFIELDE_LEVEL                      4    16   32   32   0    0    0    32                                 
+4182      CAP_IAFIELDA_PRINTFORMAT                9    32   32   32   32   32   32   32                                 
+4183      CAP_IAFIELDB_PRINTFORMAT                9    32   32   32   32   32   32   32                                 
+4184      CAP_IAFIELDC_PRINTFORMAT                9    32   32   32   32   32   32   32                                 
+4185      CAP_IAFIELDD_PRINTFORMAT                9    32   32   32   32   32   32   32                                 
+4186      CAP_IAFIELDE_PRINTFORMAT                9    32   32   32   32   32   32   32                                 
+4187      CAP_IAFIELDA_VALUE                      4    32   32   32   32   32   32   32                                 
+4188      CAP_IAFIELDB_VALUE                      4    32   32   32   32   32   32   32                                 
+4189      CAP_IAFIELDC_VALUE                      4    32   32   32   32   32   32   32                                 
+4190      CAP_IAFIELDD_VALUE                      4    32   32   32   32   32   32   32                                 
+4191      CAP_IAFIELDE_VALUE                      4    32   32   32   32   32   32   32                                 
+4192      CAP_IAFIELDA_LASTPAGE                   4    16   32   32   0    0    0    32                                 
+4193      CAP_IAFIELDB_LASTPAGE                   4    16   32   32   0    0    0    32                                 
+4194      CAP_IAFIELDC_LASTPAGE                   4    16   32   32   0    0    0    32                                 
+4195      CAP_IAFIELDD_LASTPAGE                   4    16   32   32   0    0    0    32                                 
+4196      CAP_IAFIELDE_LASTPAGE                   4    16   32   32   0    0    0    32                                 
+4352      ICAP_AUTOBRIGHT                         6    48   32   32   32   48   32   32                                 
+4353      ICAP_BRIGHTNESS                         7    112  32   32   32   112  32   32                                 
+4355      ICAP_CONTRAST                           7    112  32   32   32   112  32   32                                 
+4356      ICAP_CUSTHALFTONE                       3    8    8    8    40   8    8    32                                 
+4357      ICAP_EXPOSURETIME                       7    112  32   32   32   112  32   32                                 
+4358      ICAP_FILTER                             4    48   32   32   32   48   32   32                                 
+4359      ICAP_FLASHUSED                          6    48   32   32   32   48   32   32                                 
+4360      ICAP_GAMMA                              7    96   32   32   32   32   32   32                                 
+4361      ICAP_HALFTONES                          9    48   32   32   16   48   32   32                                 
+4362      ICAP_HIGHLIGHT                          7    112  32   32   32   112  32   32                                 
+4364      ICAP_IMAGEFILEFORMAT                    4    48   32   32   32   48   32   32                                 
+4365      ICAP_LAMPSTATE                          6    48   32   32   32   48   32   32                                 
+4366      ICAP_LIGHTSOURCE                        4    48   32   32   32   48   32   32                                 
+4368      ICAP_ORIENTATION                        4    48   32   32   32   48   32   32                                 
+4369      ICAP_PHYSICALWIDTH                      7    32   32   32   0    0    0    32                                 
+4370      ICAP_PHYSICALHEIGHT                     7    32   32   32   0    0    0    32                                 
+4371      ICAP_SHADOW                             7    112  32   32   32   112  32   32                                 
+4372      ICAP_FRAMES                             8    48   32   32   32   48   32   32                                 
+4374      ICAP_XNATIVERESOLUTION                  7    48   32   32   0    0    0    32                                 
+4375      ICAP_YNATIVERESOLUTION                  7    48   32   32   0    0    0    32                                 
+4376      ICAP_XRESOLUTION                        7    112  32   32   32   112  32   32                                 
+4377      ICAP_YRESOLUTION                        7    112  32   32   32   112  32   32                                 
+4378      ICAP_MAXFRAMES                          4    96   32   32   32   32   32   32                                 
+4379      ICAP_TILES                              6    48   32   32   32   48   32   32                                 
+4380      ICAP_BITORDER                           4    48   32   32   32   48   32   32                                 
+4381      ICAP_CCITTKFACTOR                       4    96   32   32   32   32   32   32                                 
+4382      ICAP_LIGHTPATH                          4    48   32   32   32   48   32   32                                 
+4383      ICAP_PIXELFLAVOR                        4    48   32   32   32   48   32   32                                 
+4384      ICAP_PLANARCHUNKY                       4    48   32   32   32   48   32   32                                 
+4385      ICAP_ROTATION                           7    112  32   32   32   112  32   32                                 
+4386      ICAP_SUPPORTEDSIZES                     4    48   32   32   32   48   32   32                                 
+4387      ICAP_THRESHOLD                          7    112  32   32   32   112  32   32                                 
+4388      ICAP_XSCALING                           7    112  32   32   32   112  32   32                                 
+4389      ICAP_YSCALING                           7    112  32   32   32   112  32   32                                 
+4390      ICAP_BITORDERCODES                      4    48   32   32   32   48   32   32                                 
+4391      ICAP_PIXELFLAVORCODES                   4    48   32   32   32   48   32   32                                 
+4392      ICAP_JPEGPIXELTYPE                      4    48   32   32   32   48   32   32                                 
+4394      ICAP_TIMEFILL                           4    96   32   32   32   96   32   32                                 
+4395      ICAP_BITDEPTH                           4    48   32   32   32   48   32   32                                 
+4396      ICAP_BITDEPTHREDUCTION                  4    48   32   32   32   48   32   32                                 
+4397      ICAP_UNDEFINEDIMAGESIZE                 6    48   32   32   32   48   32   32                                 
+4398      ICAP_IMAGEDATASET                       5    104  8    8    104  104  8    32                                 
+4399      ICAP_EXTIMAGEINFO                       6    48   32   32   32   48   32   32                                 
+4400      ICAP_MINIMUMHEIGHT                      7    32   32   32   0    0    0    32                                 
+4401      ICAP_MINIMUMWIDTH                       7    32   32   32   0    0    0    32                                 
+4404      ICAP_AUTODISCARDBLANKPAGES              2    96   32   32   32   96   32   32                                 
+4406      ICAP_FLIPROTATION                       4    48   32   32   32   48   32   32                                 
+4407      ICAP_BARCODEDETECTIONENABLED            6    48   32   32   32   48   32   32                                 
+4408      ICAP_SUPPORTEDBARCODETYPES              4    8    8    8    0    0    0    32                                 
+4409      ICAP_BARCODEMAXSEARCHPRIORITIES         5    112  32   32   32   112  32   32                                 
+4410      ICAP_BARCODESEARCHPRIORITIES            4    8    8    8    40   40   8    32                                 
+4411      ICAP_BARCODESEARCHMODE                  4    48   32   32   32   48   32   32                                 
+4412      ICAP_BARCODEMAXRETRIES                  5    112  32   32   32   112  32   32                                 
+4413      ICAP_BARCODETIMEOUT                     5    112  32   32   32   112  32   32                                 
+4414      ICAP_ZOOMFACTOR                         1    112  32   32   32   112  32   32                                 
+4415      ICAP_PATCHCODEDETECTIONENABLED          6    48   32   32   32   48   32   32                                 
+4416      ICAP_SUPPORTEDPATCHCODETYPES            4    8    8    8    0    0    0    32                                 
+4417      ICAP_PATCHCODEMAXSEARCHPRIORITIES       5    112  32   32   32   112  32   32                                 
+4418      ICAP_PATCHCODESEARCHPRIORITIES          4    8    8    8    40   40   8    32                                 
+4419      ICAP_PATCHCODESEARCHMODE                4    48   32   32   32   48   32   32                                 
+4420      ICAP_PATCHCODEMAXRETRIES                5    112  32   32   32   112  32   32                                 
+4421      ICAP_PATCHCODETIMEOUT                   5    112  32   32   32   112  32   32                                 
+4422      ICAP_FLASHUSED2                         4    48   32   32   32   48   32   32                                 
+4423      ICAP_IMAGEFILTER                        4    48   32   32   32   48   32   32                                 
+4424      ICAP_NOISEFILTER                        4    48   32   32   32   48   32   32                                 
+4425      ICAP_OVERSCAN                           4    48   32   32   32   48   32   32                                 
+4432      ICAP_AUTOMATICBORDERDETECTION           6    48   32   32   32   48   32   32                                 
+4433      ICAP_AUTOMATICDESKEW                    6    48   32   32   32   48   32   32                                 
+4434      ICAP_AUTOMATICROTATE                    6    48   32   32   32   49   32   32                                 
+4435      ICAP_JPEGQUALITY                        1    112  32   32   32   112  32   32                                 
+4436      ICAP_FEEDERTYPE                         4    48   32   32   32   48   32   32                                 
+4437      ICAP_ICCPROFILE                         4    48   32   32   32   48   32   32                                 
+4438      ICAP_AUTOSIZE                           4    48   32   32   32   48   32   32                                 
+4439      ICAP_AUTOMATICCROPUSESFRAME             6    48   32   32   0    0    0    32                                 
+4440      ICAP_AUTOMATICLENGTHDETECTION           6    48   32   32   32   48   32   32                                 
+4441      ICAP_AUTOMATICCOLORENABLED              6    48   32   32   32   48   32   32                                 
+4442      ICAP_AUTOMATICCOLORNONCOLORPIXELTYPE    4    48   32   32   32   48   32   32                                 
+4443      ICAP_COLORMANAGEMENTENABLED             6    48   32   32   32   48   32   32                                 
+4444      ICAP_IMAGEMERGE                         4    48   32   32   32   48   32   32                                 
+4445      ICAP_IMAGEMERGEHEIGHTTHRESHOLD          7    96   32   32   32   96   32   32                                 
+4446      ICAP_SUPPORTEDEXTIMAGEINFO              4    8    8    8    0    0    0    32                                 
+4447      ICAP_FILMTYPE                           4    16   32   32   32   48   32   32                                 
+4448      ICAP_MIRROR                             4    16   32   32   32   48   32   32                                 
+4449      ICAP_JPEGSUBSAMPLING                    4    16   32   32   32   48   32   32                                 
+4609      ACAP_AUDIOFILEFORMAT                    4    48   32   32   32   48   32   32                                 
+4610      ACAP_XFERMECH                           4    48   32   32   32   48   32   32                                 
+5608      TWEI_BARCODEX                           5    0    0    0    0    0    0    0                                  
+5609      TWEI_BARCODEY                           5    0    0    0    0    0    0    0                                  
+5610      TWEI_BARCODETEXT                        16   0    0    0    0    0    0    0                                  
+5611      TWEI_BARCODETYPE                        5    0    0    0    0    0    0    0                                  
+5612      TWEI_DESHADETOP                         5    0    0    0    0    0    0    0                                  
+5613      TWEI_DESHADELEFT                        5    0    0    0    0    0    0    0                                  
+5614      TWEI_DESHADEHEIGHT                      5    0    0    0    0    0    0    0                                  
+5615      TWEI_DESHADEWIDTH                       5    0    0    0    0    0    0    0                                  
+5616      TWEI_DESHADESIZE                        5    0    0    0    0    0    0    0                                  
+5617      TWEI_SPECKLESREMOVED                    5    0    0    0    0    0    0    0                                  
+5618      TWEI_HORZLINEXCOORD                     5    0    0    0    0    0    0    0                                  
+5619      TWEI_HORZLINEYCOORD                     5    0    0    0    0    0    0    0                                  
+5620      TWEI_HORZLINELENGTH                     5    0    0    0    0    0    0    0                                  
+5621      TWEI_HORZLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
+5622      TWEI_VERTLINEXCOORD                     5    0    0    0    0    0    0    0                                  
+5623      TWEI_VERTLINEYCOORD                     5    0    0    0    0    0    0    0                                  
+5624      TWEI_VERTLINELENGTH                     5    0    0    0    0    0    0    0                                  
+5625      TWEI_VERTLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
+5626      TWEI_PATCHCODE                          5    0    0    0    0    0    0    0                                  
+5627      TWEI_ENDORSEDTEXT                       12   0    0    0    0    0    0    0                                  
+5628      TWEI_FORMCONFIDENCE                     5    0    0    0    0    0    0    0                                  
+5629      TWEI_FORMTEMPLATEMATCH                  12   0    0    0    0    0    0    0                                  
+5630      TWEI_FORMTEMPLATEPAGEMATCH              5    0    0    0    0    0    0    0                                  
+5631      TWEI_FORMHORZDOCOFFSET                  5    0    0    0    0    0    0    0                                  
+5632      TWEI_FORMVERTDOCOFFSET                  5    0    0    0    0    0    0    0                                  
+5633      TWEI_BARCODECOUNT                       5    0    0    0    0    0    0    0                                  
+5634      TWEI_BARCODECONFIDENCE                  5    0    0    0    0    0    0    0                                  
+5635      TWEI_BARCODEROTATION                    5    0    0    0    0    0    0    0                                  
+5636      TWEI_BARCODETEXTLENGTH                  5    0    0    0    0    0    0    0                                  
+5637      TWEI_DESHADECOUNT                       5    0    0    0    0    0    0    0                                  
+5638      TWEI_DESHADEBLACKCOUNTOLD               5    0    0    0    0    0    0    0                                  
+5639      TWEI_DESHADEBLACKCOUNTNEW               5    0    0    0    0    0    0    0                                  
+5640      TWEI_DESHADEBLACKRLMIN                  5    0    0    0    0    0    0    0                                  
+5641      TWEI_DESHADEBLACKRLMAX                  5    0    0    0    0    0    0    0                                  
+5642      TWEI_DESHADEWHITECOUNTOLD               5    0    0    0    0    0    0    0                                  
+5643      TWEI_DESHADEWHITECOUNTNEW               5    0    0    0    0    0    0    0                                  
+5644      TWEI_DESHADEWHITERLMIN                  5    0    0    0    0    0    0    0                                  
+5645      TWEI_DESHADEWHITERLAVE                  5    0    0    0    0    0    0    0                                  
+5646      TWEI_DESHADEWHITERLMAX                  5    0    0    0    0    0    0    0                                  
+5647      TWEI_BLACKSPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
+5648      TWEI_WHITESPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
+5649      TWEI_HORZLINECOUNT                      5    0    0    0    0    0    0    0                                  
+5650      TWEI_VERTLINECOUNT                      5    0    0    0    0    0    0    0                                  
+5651      TWEI_DESKEWSTATUS                       5    0    0    0    0    0    0    0                                  
+5652      TWEI_SKEWORIGINALANGLE                  5    0    0    0    0    0    0    0                                  
+5653      TWEI_SKEWFINALANGLE                     5    0    0    0    0    0    0    0                                  
+5654      TWEI_SKEWCONFIDENCE                     5    0    0    0    0    0    0    0                                  
+5655      TWEI_SKEWWINDOWX1                       5    0    0    0    0    0    0    0                                  
+5656      TWEI_SKEWWINDOWY1                       5    0    0    0    0    0    0    0                                  
+5657      TWEI_SKEWWINDOWX2                       5    0    0    0    0    0    0    0                                  
+5658      TWEI_SKEWWINDOWY2                       5    0    0    0    0    0    0    0                                  
+5659      TWEI_SKEWWINDOWX3                       5    0    0    0    0    0    0    0                                  
+5660      TWEI_SKEWWINDOWY3                       5    0    0    0    0    0    0    0                                  
+5661      TWEI_SKEWWINDOWX4                       5    0    0    0    0    0    0    0                                  
+5662      TWEI_SKEWWINDOWY4                       5    0    0    0    0    0    0    0                                  
+5664      TWEI_BOOKNAME                           12   0    0    0    0    0    0    0                                  
+5665      TWEI_CHAPTERNUMBER                      5    0    0    0    0    0    0    0                                  
+5666      TWEI_DOCUMENTNUMBER                     5    0    0    0    0    0    0    0                                  
+5667      TWEI_PAGENUMBER                         5    0    0    0    0    0    0    0                                  
+5668      TWEI_CAMERA                             12   0    0    0    0    0    0    0                                  
+5669      TWEI_FRAMENUMBER                        5    0    0    0    0    0    0    0                                  
+5670      TWEI_FRAME                              8    0    0    0    0    0    0    0                                  
+5671      TWEI_PIXELFLAVOR                        4    0    0    0    0    0    0    0                                  
+5672      TWEI_ICCPROFILE                         12   0    0    0    0    0    0    0                                  
+5673      TWEI_LASTSEGMENT                        6    0    0    0    0    0    0    0                                  
+5674      TWEI_SEGMENTNUMBER                      5    0    0    0    0    0    0    0                                  
+5675      TWEI_MAGDATA                            12   0    0    0    0    0    0    0                                  
+5676      TWEI_MAGTYPE                            4    0    0    0    0    0    0    0                                  
+5677      TWEI_PAGESIDE                           4    0    0    0    0    0    0    0                                  
+5678      TWEI_FILESYSTEMSOURCE                   12   0    0    0    0    0    0    0                                  
+5679      TWEI_IMAGEMERGED                        6    0    0    0    0    0    0    0                                  
+5680      TWEI_MAGDATALENGTH                      5    0    0    0    0    0    0    0                                  
+5681      TWEI_PAPERCOUNT                         5    0    0    0    0    0    0    0                                  
+5682      TWEI_PRINTERTEXT                        12   0    0    0    0    0    0    0                                  
+5683      TWEI_TWAINDIRECTMETADATA                15   0    0    0    0    0    0    0                                  
+5684      TWEI_IAFIELDA_VALUE                     9    0    0    0    0    0    0    0                                  
+5685      TWEI_IAFIELDB_VALUE                     9    0    0    0    0    0    0    0                                  
+5686      TWEI_IAFIELDC_VALUE                     9    0    0    0    0    0    0    0                                  
+5687      TWEI_IAFIELDD_VALUE                     9    0    0    0    0    0    0    0                                  
+5688      TWEI_IAFIELDE_VALUE                     9    0    0    0    0    0    0    0                                  
+5689      TWEI_IALEVEL                            4    0    0    0    0    0    0    0                                  
+5690      TWEI_PRINTER                            4    0    0    0    0    0    0    0                                  
+5691      TWEI_BARCODETEXT2                       15   0    0    0    0    0    0    0                                  
+32768     CAP_CUSTOMBASE                          5    0    0    0    0    0    0    0                                  
 -1000 END 0 0 0
 100  1 4 8 16 24 32
 200  8  16  24
@@ -930,7 +930,20 @@
 11000 WBMP-Wireless-Bitmap-Resized-Single wbmp
 11001 TARGA-RLE-Single 	      tga
 11002 Windows-BMP-RLE-Single  bmp                             
-
+11003 BigTIFF-LZW-Single tif tiff	
+11004 BigTIFF-LZW-Multi tif tiff	
+11005 BigTIFF-Uncompressed-Single tif tiff	
+11006 BigTIFF-Uncompressed-Multi tif tiff	
+11007 BigTIFF-Packbits-Single tif tiff	
+11008 BigTIFF-Packbits-Multi tif tiff	
+11009 BigTIFF-Deflate-Single tif tiff
+11010 BigTIFF-Deflate-Multi tif tiff
+11011 BigTIFF-G3-Single tif tiff  
+11012 BigTIFF-G3-Multi tif tiff  
+11013 BigTIFF-G4-Single tif tiff  
+11014 BigTIFF-G4-Multi tif tiff  
+11015 BigTIFF-JPEG-Single tif tiff  
+11016 BigTIFF-JPEG-Multi tif tiff  
 -1
 0 TWPT_BW                
 1 TWPT_GRAY              
@@ -1568,8 +1581,8 @@
 [300 301] PCX/DCX [1 8 24] [[4 8] [16 24] [32 24]] 
 [400] Targa   [8 24 32] [[1 8] [4 8] [16 24]]
 [11001] Targa RLE  [8 24 32] [[1 8] [4 8] [16 24]]
-[700 800 901 902] TIFF-G3/G4 [1] [[4 1][8 1][16 1][24 1] [32 1]]
-[803 905] TIFF-JPEG [8 24] [[1 8] [4 8] [16 24] [32 24]]
+[700 800 901 902 11011 11012 11013 11014] TIFF-G3/G4 [1] [[4 1][8 1][16 1][24 1] [32 1]]
+[803 905 11015 11016] TIFF-JPEG [8 24] [[1 8] [4 8] [16 24] [32 24]]
 [850 851] WMF/EMF [24] [[1 24] [4 24] [8 24] [16 24] [32 24]] 
 [950] GIF [8] [[1 8][4 8][16 8][24 8][32 8]]
 [1000] PNG [8 16 24] [[1 8] [4 8] [32 24]]
@@ -1581,6 +1594,6 @@
 [8501] WEBP [24 32] [[1 24] [4 24] [8 24] [16 24]]
 [6000 6001] TXT [1] [[4 1][8 1][16 1][24 1] [32 1]]
 -9999
-5.4.6
+5.5.0
 END END END
 

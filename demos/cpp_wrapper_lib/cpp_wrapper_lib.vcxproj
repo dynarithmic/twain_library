@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="acquire_characteristics.cpp" />
     <ClCompile Include="buffered_transfer_info.cpp" />
+    <ClCompile Include="imprinter_info.cpp" />
     <ClCompile Include="logger_callback.cpp" />
     <ClCompile Include="options_base.cpp" />
     <ClCompile Include="paperhandling_info.cpp" />
     <ClCompile Include="pdf_text_element.cpp" />
+    <ClCompile Include="string_utilities.cpp" />
     <ClCompile Include="twain_callback.cpp" />
     <ClCompile Include="twain_characteristics.cpp" />
     <ClCompile Include="twain_session.cpp" />
@@ -86,6 +88,8 @@
     <ClInclude Include="dynarithmic\twain\source\twain_source.hpp" />
     <ClInclude Include="dynarithmic\twain\source\twain_source_pimpl.hpp" />
     <ClInclude Include="dynarithmic\twain\tostring\tostring.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\constexpr_utils.hpp" />
+    <ClInclude Include="dynarithmic\twain\types\eternal_map\include\mapbox\eternal.hpp" />
     <ClInclude Include="dynarithmic\twain\types\twain_array.hpp" />
     <ClInclude Include="dynarithmic\twain\types\twain_callback.hpp" />
     <ClInclude Include="dynarithmic\twain\types\twain_capbasics.hpp" />
@@ -94,6 +98,7 @@
     <ClInclude Include="dynarithmic\twain\types\twain_timer.hpp" />
     <ClInclude Include="dynarithmic\twain\types\twain_types.hpp" />
     <ClInclude Include="dynarithmic\twain\types\underlying_type.hpp" />
+    <ClInclude Include="dynarithmic\twain\utilities\misc_utilities.hpp" />
     <ClInclude Include="dynarithmic\twain\utilities\string_utilities.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

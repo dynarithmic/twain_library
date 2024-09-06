@@ -22,10 +22,8 @@ OF THIRD PARTY RIGHTS.
 // processing on acquisition startup, UI opening and closing, etc.  See the DTWAIN help manual for a list of
 // the various events.
 
-#include <unordered_map>
-#include <functional>
-#ifndef DTWAIN_NOIMPORTLIB 
-#include <dtwain.h>
+#ifndef DTWAIN_NOIMPORTLIB
+    #include <dtwain.h>
 #else
     #include <dtwainx2.h>
 #endif

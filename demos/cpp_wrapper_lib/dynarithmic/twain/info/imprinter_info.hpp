@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,12 +24,13 @@ OF THIRD PARTY RIGHTS.
 #include <vector>
 #include <string>
 #include <dynarithmic/twain/twain_values.hpp>
-#include <dynarithmic/twain/source/twain_source_base.hpp>
+#include <dynarithmic/twain/types/twain_capbasics.hpp>
 
 namespace dynarithmic
 {
     namespace twain
     {
+        class twain_source;
         class imprinter_info
         {
             std::vector<capability_type::endorser_type> m_vEndorser;
@@ -51,35 +52,12 @@ namespace dynarithmic
 
             public:
                 imprinter_info() {}
-                imprinter_info(twain_source_base& ts) 
+                imprinter_info(twain_source& ts) 
                 {
                     get_info(ts);
                 }
 
-                bool get_info(twain_source_base& ts)
-                {
-                    auto& capInterface = ts.get_capability_interface();
-                    m_vEndorser = capInterface.get_endorser();
-                    m_vPrinter = capInterface.get_printer();
-                    m_vCharRotation = capInterface.get_printercharrotation();
-                    m_vPrinterEnabled = capInterface.get_printerenabled();
-                    m_vFontStyle = capInterface.get_printerfontstyle();
-                    m_vPrinterIndex = capInterface.get_printerindex();
-                    m_vPrinterLeadChar = capInterface.get_printerindexleadchar();
-                    m_vMaxValue = capInterface.get_printerindexmaxvalue();
-                    m_vNumDigits = capInterface.get_printerindexnumdigits();
-                    m_vIndexStep = capInterface.get_printerindexstep();
-                    m_vIndexTrigger = capInterface.get_printerindextrigger();
-                    m_vPrinterMode = capInterface.get_printermode();
-                    m_vPrinterString = capInterface.get_printerstring();
-                    m_vPrinterStringPreview = capInterface.get_printerstringpreview();
-                    auto v  = capInterface.get_printersuffix();
-                    if (!v.empty())
-                        m_PrinterSuffix = v.front();
-                    m_vPrinterVerticalOffset = capInterface.get_printerverticaloffset();
-                    return true;
-                }
-
+                bool get_info(twain_source& ts);
                 bool is_supported() const { return !m_vEndorser.empty() || !m_vPrinter.empty(); }
                 std::vector<capability_type::endorser_type> get_endorser() const { return m_vEndorser; }
                 std::vector<printertype_value::value_type> get_printer() const { return m_vPrinter; }

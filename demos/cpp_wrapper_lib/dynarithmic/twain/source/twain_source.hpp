@@ -37,6 +37,7 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/info/file_transfer_info.hpp>
 #include <dynarithmic/twain/info/buffered_transfer_info.hpp>
 #include <dynarithmic/twain/twain_details.hpp>
+#include <dynarithmic/twain/utilities/misc_utilities.hpp>
 
 namespace dynarithmic
 {
@@ -72,6 +73,7 @@ namespace dynarithmic
                 twain_source& operator=(const twain_source&) = delete;
                 twain_source(twain_source&& rhs) noexcept :  m_theSource(rhs.m_theSource),
                                                              m_bUIOnlyOn(rhs.m_bUIOnlyOn),
+                                                             m_bUIOnlySupported(rhs.m_bUIOnlySupported),
                                                              m_bWeakAttach(rhs.m_bWeakAttach)
                 {
                     swap(*this, rhs);
@@ -96,6 +98,7 @@ namespace dynarithmic
                 std::string m_source_details;
                 DTWAIN_SOURCE m_theSource;
                 bool m_bUIOnlyOn;
+                tribool::tribool m_bUIOnlySupported;
                 bool m_bWeakAttach;
                 std::shared_ptr<twain_source_pimpl> m_pTwainSourceImpl;
 
@@ -129,7 +132,7 @@ namespace dynarithmic
                 const capability_interface& get_capability_interface() const noexcept;
                 acquire_return_type acquire();
                 bool showui_only();
-                TW_IDENTITY* get_twain_id();
+                const TW_IDENTITY* get_twain_id(bool bRefresh = true);
                 static image_handler get_images(const twain_array& images);
                 bool open();
                 bool close();

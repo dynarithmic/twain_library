@@ -22,7 +22,6 @@ OF THIRD PARTY RIGHTS.
 #define DTWAIN_ACQUIRE_CHARACTERISTICS_HPP
 
 #include <array>
-#include <algorithm>
 
 #include <dynarithmic/twain/options/pages_options.hpp>
 #include <dynarithmic/twain/options/jobcontrol_options.hpp>
@@ -186,7 +185,7 @@ namespace twain {
 
              /// The autoscanning_options specifies automatic delivery of images, buffering images etc.
              /// The autoscanning_options are described by the following TWAIN capabilities:\n
-             /// **CAP_AUTOSCAN** -- Enables the source’s automatic document scanning process.<br>
+             /// **CAP_AUTOSCAN** -- Enables the TWAIN source automatic document scanning process.<br>
              /// **CAP_CAMERAENABLED** -- Delivers images from the current camera.<br>
              /// **CAP_CAMERAORDER** -- Selects the order of output for Single Document Multiple Image mode.<br>
              /// **CAP_CAMERASIDE** -- Sets the top and bottom values of cameras in a scanning device.<br>

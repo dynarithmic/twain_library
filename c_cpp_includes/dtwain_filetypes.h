@@ -76,4 +76,18 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_WBMP_RESIZED      11000 /* Wireless Bitmap (WBMP) format for bitmaps with height > 255 or width > 255 pixels */
 #define DTWAIN_TGA_RLE           11001 /* Targa with Run Length Encoding */
 #define DTWAIN_BMP_RLE           11002 /* BMP with Run Length Encoding */
+#define DTWAIN_BIGTIFFLZW        11003 /* BigTIFF with LZW compression */
+#define DTWAIN_BIGTIFFLZWMULTI   11004 /* BigTIFF with LZW compression, multipage */
+#define DTWAIN_BIGTIFFNONE       11005 /* BigTIFF with no compression */
+#define DTWAIN_BIGTIFFNONEMULTI  11006 /* BigTIFF with no compression, multipage */
+#define DTWAIN_BIGTIFFPACKBITS   11007 /* BigTIFF with Packbits compression */
+#define DTWAIN_BIGTIFFPACKBITSMULTI  11008 /* BigTIFF with Packbits compression, multipage */
+#define DTWAIN_BIGTIFFDEFLATE    11009   /* BigTIFF packed with z-lib encoded data */
+#define DTWAIN_BIGTIFFDEFLATEMULTI  11010   /* BigTIFF packed with z-lib encoded data (multipage) */
+#define DTWAIN_BIGTIFFG3         11011   /* BigTIFF Group 3 CCITT Tiff (FAX format) */
+#define DTWAIN_BIGTIFFG3MULTI    11012   /* BigTIFF Group 3 CCITT Tiff (FAX format) (multipage) */
+#define DTWAIN_BIGTIFFG4         11013   /* BigTIFF Group 4 CCITT Tiff (FAX format) */
+#define DTWAIN_BIGTIFFG4MULTI    11014   /* BigTIFF Group 4 CCITT Tiff (FAX format) (multipage) */
+#define DTWAIN_BIGTIFFJPEG       11015   /* BigTIFF JPEG */
+#define DTWAIN_BIGTIFFJPEGMULTI  11016   /* BigTIFF JPEG (Multipage) */
 #endif

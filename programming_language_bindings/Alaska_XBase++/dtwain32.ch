@@ -346,11 +346,11 @@
 #define  DTWAIN_TN_ACQUIREPAGEDONE                1010
 
 /* Source closing/opening wParam's */
-#define  DTWAIN_TN_UICLOSING                      1011
-#define  DTWAIN_TN_UICLOSED                       1012
-#define  DTWAIN_TN_UIOPENED                       1013
-#define  DTWAIN_TN_UIOPENING                      1055
-#define  DTWAIN_TN_UIOPENFAILURE                  1060
+#define  DTWAIN_TN_UICLOSING                      3000
+#define  DTWAIN_TN_UICLOSED                       3001
+#define  DTWAIN_TN_UIOPENED                       3002
+#define  DTWAIN_TN_UIOPENING                      3003
+#define  DTWAIN_TN_UIOPENFAILURE                  3004
 
 /* Twain page transferrance wParam's */
 #define  DTWAIN_TN_CLIPTRANSFERDONE               1014

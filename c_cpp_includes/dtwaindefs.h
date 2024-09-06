@@ -346,11 +346,11 @@
 #define  DTWAIN_TN_ACQUIREPAGEDONE                1010
 
 /* Source closing/opening wParam's */
-#define  DTWAIN_TN_UICLOSING                      1011
-#define  DTWAIN_TN_UICLOSED                       1012
-#define  DTWAIN_TN_UIOPENED                       1013
-#define  DTWAIN_TN_UIOPENING                      1055
-#define  DTWAIN_TN_UIOPENFAILURE                  1060
+#define  DTWAIN_TN_UICLOSING                      3000
+#define  DTWAIN_TN_UICLOSED                       3001
+#define  DTWAIN_TN_UIOPENED                       3002
+#define  DTWAIN_TN_UIOPENING                      3003
+#define  DTWAIN_TN_UIOPENFAILURE                  3004
 
 /* Twain page transferrance wParam's */
 #define  DTWAIN_TN_CLIPTRANSFERDONE               1014
@@ -379,7 +379,7 @@
 
 /* Sent if user cancels the saving of a file using the file prompt */
 #define DTWAIN_TN_FILESAVECANCELLED         1031
-#define DTWAIN_TN_FILESAVECANCELED         1031
+#define DTWAIN_TN_FILESAVECANCELED          1031
 #define DTWAIN_TN_FILESAVEOK                1032
 #define DTWAIN_TN_FILESAVEERROR             1033
 #define DTWAIN_TN_FILEPAGESAVEOK            1034
@@ -850,8 +850,10 @@
 #define DTWAIN_ERR_SOURCENAME_NOTINSTALLED (-1054)
 #define DTWAIN_ERR_NO_MEMFILE_XFER       (-1055)
 #define DTWAIN_ERR_AREA_ARRAY_TOO_SMALL  (-1056)
+#define DTWAIN_ERR_LOG_CREATE_ERROR  (-1057)
+#define DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED (-1058)
 
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_AREA_ARRAY_TOO_SMALL
+#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -989,6 +991,8 @@
 #define DTWAIN_ERR_OCR_INVALIDBITDEPTH     (-2106)
 #define DTWAIN_ERR_OCR_RECOGNITIONERROR    (-2107)
 #define DTWAIN_ERR_OCR_LAST                (-2108)
+
+/* Extra TWAIN Source errors */
 #define DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   (-2500)
 #define DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  (-2501)
 
@@ -1226,11 +1230,18 @@ DTWAIN DLL are not displayed */
 /* DTWAIN Log to window (not yet implemented) */
 #define DTWAIN_LOG_USEWINDOW       0x02000000
 
+/* Create directory if logging to file */
+#define DTWAIN_LOG_CREATEDIRECTORY 0x04000000
+
 /* log everything, including displaying exceptions */
 #define DTWAIN_LOG_ALL_NOCALLBACK   (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_USECALLBACK))
 
 /* log everything using new log file */
 #define DTWAIN_LOG_ALL_FILEAPPEND    (DTWAIN_LOG_FILEAPPEND | DTWAIN_LOG_ALL)
+
+/* log everything to a file and create directory */
+#define DTWAIN_LOG_ALL_FILEAPPEND_CREATEDIRECTORY  (DTWAIN_LOG_FILEAPPEND | DTWAIN_LOG_ALL | DTWAIN_LOG_CREATEDIRECTORY)
+#define DTWAIN_LOG_ALL_FILE_CREATEDIRECTORY  (DTWAIN_LOG_FILE | DTWAIN_LOG_ALL | DTWAIN_LOG_CREATEDIRECTORY)
 
 /* turn off the DTWAIN_IsTwainMsg logging */
 #define DTWAIN_LOG_NOISTWAINMSG(x) { if ((x) | DTWAIN_LOG_ISTWAINMSG) (x) &= ~DTWAIN_LOG_ISTWAINMSG; }
