@@ -21,7 +21,6 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_COMPRESSION_OPTIONS_HPP
 #define DTWAIN_COMPRESSION_OPTIONS_HPP
 
-#include <vector>
 #include <array>
 
 #include <dynarithmic/twain/twain_values.hpp>

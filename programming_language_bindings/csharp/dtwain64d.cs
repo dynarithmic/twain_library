@@ -28,6 +28,7 @@ namespace Dynarithmic
     using DTWAIN_FRAME = System.IntPtr;
     using DTWAIN_PDFTEXTELEMENT = System.IntPtr;
     using DTWAIN_HANDLE = System.IntPtr;
+    using NULL_HANDLE = System.IntPtr;
     using DTWAIN_IDENTITY = System.IntPtr;
     using DTWAIN_OCRENGINE = System.IntPtr;
     using DTWAIN_OCRTEXTINFOHANDLE = System.IntPtr;
@@ -277,6 +278,21 @@ namespace Dynarithmic
         public const int DTWAIN_WBMP_RESIZED = 11000;
         public const int DTWAIN_TGA_RLE = 11001;
         public const int DTWAIN_BMP_RLE = 11002;
+        public const int DTWAIN_BIGTIFFLZW         = 11003;   
+        public const int DTWAIN_BIGTIFFLZWMULTI   = 11004;    
+        public const int DTWAIN_BIGTIFFNONE       = 11005;    
+        public const int DTWAIN_BIGTIFFNONEMULTI  = 11006;    
+        public const int DTWAIN_BIGTIFFPACKBITS   = 11007;    
+        public const int DTWAIN_BIGTIFFPACKBITSMULTI  = 11008;
+        public const int DTWAIN_BIGTIFFDEFLATE    = 11009;    
+        public const int DTWAIN_BIGTIFFDEFLATEMULTI  = 11010; 
+        public const int DTWAIN_BIGTIFFG3         = 11011;    
+        public const int DTWAIN_BIGTIFFG3MULTI    = 11012;    
+        public const int DTWAIN_BIGTIFFG4         = 11013;    
+        public const int DTWAIN_BIGTIFFG4MULTI    = 11014;    
+        public const int DTWAIN_BIGTIFFJPEG       = 11015;    
+        public const int DTWAIN_BIGTIFFJPEGMULTI  = 11016;    
+
         public const  int DTWAIN_INCHES = 0;
         public const  int DTWAIN_CENTIMETERS = 1;
         public const  int DTWAIN_PICAS = 2;
@@ -405,11 +421,11 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_TRANSFERREADY = 1009;
         public const  int DTWAIN_TN_TRANSFERDONE = 1010;
         public const  int DTWAIN_TN_ACQUIREPAGEDONE = 1010;
-        public const  int DTWAIN_TN_UICLOSING = 1011;
-        public const  int DTWAIN_TN_UICLOSED = 1012;
-        public const  int DTWAIN_TN_UIOPENED = 1013;
-        public const  int DTWAIN_TN_UIOPENING = 1055;
-        public const  int DTWAIN_TN_UIOPENFAILURE = 1060;
+        public const  int DTWAIN_TN_UICLOSING = 3000;
+        public const  int DTWAIN_TN_UICLOSED = 3001;
+        public const  int DTWAIN_TN_UIOPENED = 3002;
+        public const  int DTWAIN_TN_UIOPENING = 3003;
+        public const  int DTWAIN_TN_UIOPENFAILURE = 3004;
         public const  int DTWAIN_TN_CLIPTRANSFERDONE = 1014;
         public const  int DTWAIN_TN_INVALIDIMAGEFORMAT = 1015;
         public const  int DTWAIN_TN_ACQUIRETERMINATED = 1021;
@@ -890,6 +906,10 @@ namespace Dynarithmic
         public const  int DTWAIN_ERR_INVALIDICONFORMAT = (-2074);
         public const  int DTWAIN_ERR_TWAIN32DSMNOTFOUND = (-2075);
         public const  int DTWAIN_ERR_TWAINOPENSOURCEDSMNOTFOUND = (-2076);
+        public const int DTWAIN_ERR_INVALID_DIRECTORY = (-2077);
+        public const int DTWAIN_ERR_CREATE_DIRECTORY = (-2078);
+        public const int DTWAIN_ERR_OCRLIBRARY_NOTFOUND = (-2079);
+
         public const  int DTWAIN_TWAINSAVE_OK = (0);
         public const  int DTWAIN_ERR_TS_FIRST = (-2080);
         public const  int DTWAIN_ERR_TS_NOFILENAME = (-2081);
@@ -5660,5 +5680,61 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_SOURCE DTWAIN_SelectSourceByNameWithOpen([MarshalAs(UnmanagedType.LPTStr)] string szSource, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFilePath, int nMaxLen);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableExA([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szFilePath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableExW([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szFilePath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableEx(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableExA(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsTwainAvailableExW(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFilePath, int nMaxLen);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityExA([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szFilePath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityExW([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szFilePath, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityEx(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityExA(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainAvailabilityExW(NULL_HANDLE sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, int nCapability);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, int nWhichCameras, ref DTWAIN_ARRAY Cameras);
     }
 }

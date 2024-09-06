@@ -1,3 +1,4 @@
+0 Sin errores
 1 Ventana nula Maneja
 2 El Fracaso De Asignación De Memoria
 3 Los DLL inválido Maneja
@@ -69,6 +70,8 @@
 1054 Source not installed
 1055 Procedencia no apoya archivo las transferencias (transferencia de memoria)
 1056 La matriz de área es demasiado pequeña. La matriz debe tener al menos 4 elementos.
+1057 Error de creación del archivo de registro.
+1058 Source does not support TWAIN file system.
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

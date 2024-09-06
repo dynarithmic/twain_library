@@ -36,7 +36,8 @@ namespace dynarithmic
                 if (sesObject.second && sesObject.second->is_enabled())
                 {
                     const auto& fn = sesObject.second;
-                    fn->log(msg);
+                    if (static_cast<int>(fn->get_destination_aslong()) & static_cast<int>(logger_destination::to_custom))
+                        fn->log(msg);
                 }
             }
             return 1;

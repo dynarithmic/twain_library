@@ -20,34 +20,34 @@ IDC_DTWDEMO  MENU DISCARDABLE
 BEGIN
     POPUP "&Source Selection Test"
     BEGIN
-        MENUITEM "S&elect Source...",            IDM_SELECT_SOURCE
-        MENUITEM "Select Source By &Name...",    IDM_SELECT_SOURCE_BY_NAME
-        MENUITEM "Select &Default Source...",    IDM_SELECT_DEFAULT_SOURCE
-        MENUITEM "Select Source &Custom...",     IDM_SELECT_SOURCE_CUSTOM
+        MENUITEM "S&elect Source...",           IDM_SELECT_SOURCE
+        MENUITEM "Select Source By &Name...",   IDM_SELECT_SOURCE_BY_NAME
+        MENUITEM "Select &Default Source...",   IDM_SELECT_DEFAULT_SOURCE
+        MENUITEM "Select Source &Custom...",    IDM_SELECT_SOURCE_CUSTOM
         MENUITEM SEPARATOR
-        MENUITEM "Source &Properties...",         IDM_SOURCE_PROPS
+        MENUITEM "Source &Properties...",       IDM_SOURCE_PROPS
         MENUITEM SEPARATOR
-        MENUITEM "&Close Source...",              IDM_CLOSE_SOURCE
+        MENUITEM "&Close Source...",            IDM_CLOSE_SOURCE
         MENUITEM SEPARATOR
         MENUITEM "E&xit Demo",                  IDM_EXIT
     END
 
     POPUP "&Acquire Test"
     BEGIN
-        MENUITEM "Acquire Native...",                   IDM_ACQUIRE_NATIVE
-        MENUITEM "Acquire Buffered...",                 IDM_ACQUIRE_BUFFERED
-        MENUITEM "Acquire File ...",                    IDM_ACQUIRE_FILE_DTWAIN
-        MENUITEM "Acquire File (Source Mode)...",       IDM_ACQUIRE_FILE_SOURCE
+        MENUITEM "Acquire Native...",           IDM_ACQUIRE_NATIVE
+        MENUITEM "Acquire Buffered...",         IDM_ACQUIRE_BUFFERED
+        MENUITEM "Acquire File ...",            IDM_ACQUIRE_FILE_DTWAIN
+        MENUITEM "Acquire File (Source Mode)...", IDM_ACQUIRE_FILE_SOURCE
         MENUITEM SEPARATOR
-		MENUITEM "Show Preview",						IDM_SHOW_PREVIEW
-        MENUITEM "Use Source UI",                       IDM_USE_SOURCE_UI
-        MENUITEM "Discard Blank Pages...",              IDM_DISCARD_BLANKS
+        MENUITEM "Show Preview",                IDM_SHOW_PREVIEW
+        MENUITEM "Use Source UI",               IDM_USE_SOURCE_UI
+        MENUITEM "Discard Blank Pages...",      IDM_DISCARD_BLANKS
     END
 
 
     POPUP "&TWAIN Logging"
     BEGIN
-        MENUITEM "Logging Options...",                  IDM_LOGGING_OPTIONS
+        MENUITEM "Logging Options...",          IDM_LOGGING_OPTIONS
     END
 
     POPUP "&Help"
@@ -114,41 +114,34 @@ BEGIN
     LTEXT           "Sorted Source Names:",IDC_STATIC,8,3,72,8
 END
 
-IDD_dlgProperties DIALOG DISCARDABLE  0, 0, 253, 245
+IDD_dlgProperties DIALOG DISCARDABLE  0, 0, 435, 245
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Source Properties"
 FONT 8, "MS Sans Serif"
 BEGIN
-    EDITTEXT        IDC_edProductName,84,17,155,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edFamilyName,83,32,155,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edManufacturer,83,47,155,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edVersionInfo,83,62,155,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edVersion,83,77,155,14,ES_AUTOHSCROLL | ES_READONLY |
-                    NOT WS_BORDER | NOT WS_TABSTOP
-    DEFPUSHBUTTON   "OK",IDOK,71,226,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,132,226,50,14
+    EDITTEXT        IDC_edProductName,84,17,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edFamilyName,83,32,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edManufacturer,83,47,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edVersionInfo,83,62,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edVersion,83,77,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,158,226,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,219,226,50,14
     LTEXT           "Product Name:",IDC_STATIC,19,17,48,8
     LTEXT           "Family Name:",IDC_STATIC,24,32,43,8
     LTEXT           "Manufacturer:",IDC_STATIC,22,46,45,8
     LTEXT           "Version Info:",IDC_STATIC,27,61,40,8
     LTEXT           "Version:",IDC_STATIC,41,77,26,8
     GROUPBOX        "General Info",IDC_STATIC,6,4,237,91
-    LISTBOX         IDC_lstCapabilities,13,114,116,98,LBS_SORT |
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_lstCapabilities,13,114,116,98,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     RTEXT           "Total Caps:",IDC_STATIC,147,116,37,8
     RTEXT           "Custom Caps:",IDC_STATIC,135,130,49,8
     RTEXT           "Extended Caps:",IDC_STATIC,133,145,51,8
-    EDITTEXT        IDC_edTotalCaps,197,116,40,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edCustomCaps,197,131,40,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    EDITTEXT        IDC_edExtendedCaps,197,146,40,14,ES_AUTOHSCROLL |
-                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edTotalCaps,197,116,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edCustomCaps,197,131,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_edExtendedCaps,197,146,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
     GROUPBOX        "Capability Info",IDC_STATIC,6,103,237,119
+    GROUPBOX        "Custom DS Data",IDC_STATIC,250,4,172,217
+    EDITTEXT        IDC_edDSData,258,15,153,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY
 END
 
 #include "dibdisplay.rc"
@@ -166,14 +159,13 @@ BEGIN
                     BS_AUTOCHECKBOX | WS_TABSTOP,9,19,84,10
 END
 
-IDD_dlgFileType DIALOG DISCARDABLE  0, 0, 120, 111
+IDD_dlgFileType DIALOG DISCARDABLE  0, 0, 189, 119
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "File Type"
 FONT 8, "MS Sans Serif"
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,34,91,50,14
-    COMBOBOX        IDC_cmbFileType,5,17,110,94,CBS_DROPDOWNLIST |
-                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,69,91,50,14
+    COMBOBOX        IDC_cmbFileType,5,17,171,94,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Choose File Type:",IDC_STATIC,7,4,79,8
     LTEXT           "Choose File name:",IDC_STATIC,7,48,59,8
     EDITTEXT        IDC_edFileName,6,60,106,14,ES_AUTOHSCROLL
@@ -204,3 +196,5 @@ BEGIN
 END
 
 /////////////////////////////////////////////////////////////////////////////
+
+

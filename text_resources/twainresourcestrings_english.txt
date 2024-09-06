@@ -1,3 +1,4 @@
+0 No Error
 1 NULL Window Handle
 2 Memory Allocation Failure
 3 Invalid DLL Handle
@@ -69,6 +70,8 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 Area array is too small.  Array should have at least 4 items.
+1057 Could not create DTWAIN log file.
+1058 Source does not support TWAIN file system.
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

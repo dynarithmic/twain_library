@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2020 Dynarithmic Software.
+Copyright (c) 2002-2024 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,111 +21,76 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_TWAIN_LOOP_HPP
 #define DTWAIN_TWAIN_LOOP_HPP
 
-#include <dynarithmic/twain/source/twain_source_base.hpp>
-#include <dtwain.h>
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+#include <dynarithmic/twain/dtwain_twain.hpp>
+#include <dynarithmic/twain/twain_source.hpp>
 
-namespace dynarithmic {
-namespace twain {
-
-    struct twain_default_enter_dispatch
+namespace dynarithmic 
+{
+    namespace twain 
     {
-        bool enter_dispatch(twain_source_base&) { return true; }
-    };
-
-    // This can be used for TWAIN 1.x and 2.x Data Source Managers
-    template <typename dispatcher = twain_default_enter_dispatch>
-    struct twain_looper_win32
-    {
-        twain_looper_win32(twain_source_base&) {}
-        dispatcher m_dispatcher;
-
-        void perform_loop(twain_source_base& ts)
+        struct twain_default_enter_dispatch
         {
-            MSG msg;
-            while (GetMessage(&msg, NULL, 0, 0))
-            {
-                if (!twain_loop<twain_looper_win32>::is_source_open(ts))
-                    break;
-                if (!DTWAIN_IsTwainMsg(&msg) && m_dispatcher.enter_dispatch(ts))
-                {
-                    ::TranslateMessage(&msg);
-                    ::DispatchMessage(&msg);
-                }
-            }
-
-            if (ts.is_uionlyenabled() && DTWAIN_GetTwainMode() == DTWAIN_MODELESS)
-                ts.set_uionlyenabled(false);
-        }
-    };
-
-    // This version should only be used for version 2.x and higher TWAIN Data Source Manager
-    template <typename dispatcher = twain_default_enter_dispatch>
-    struct twain_looper_nowin32
-    {
-        dispatcher m_dispatcher;
-
-        void perform_loop(twain_source_base& ts)
-        {
-            MSG msg = {};
-            while (twain_loop<twain_looper_nowin32>::is_source_open(ts))
-                DTWAIN_IsTwainMsg(&msg);
-            if (ts.is_uionlyenabled() && DTWAIN_GetTwainMode() == DTWAIN_MODELESS)
-                ts.set_uionlyenabled(false);
-        }
-    };
-
-    template <typename looper>
-    class twain_loop
-    {
-        public:
-            static bool is_source_open(twain_source_base& ts)
-            {
-                if (ts.is_uionlyenabled())
-                    return ts.is_uienabled();
-                return ts.is_acquiring();
-            }
-
-        public:
-            void perform_loop(twain_source_base& ts) 
-            {
-                looper(ts).perform_loop(ts);
-            }
-    };
-        
-    typedef twain_loop<twain_looper_win32<>> twain_loop_windows;
-    typedef twain_loop<twain_looper_nowin32<>> twain_loop_ver2;
-
-/*    void TwainMessageLoopWindowsImpl::PerformMessageLoop(CTL_ITwainSource* pSource, bool isUIOnly)
-    {
-        MSG msg;
-        struct UIScopedRAII
-        {
-            CTL_ITwainSource* m_pSource;
-            bool m_bOld;
-            UIScopedRAII(CTL_ITwainSource* pSource) : m_pSource(pSource), m_bOld(m_pSource->IsUIOnly()) {}
-            ~UIScopedRAII() { m_pSource->SetUIOnly(m_bOld); }
+            bool enter_dispatch(twain_source&) { return true; }
         };
 
-        UIScopedRAII raii(pSource);
-        pSource->SetUIOnly(isUIOnly);
-#ifdef WIN32
-        while (GetMessage(&msg, NULL, 0, 0))
+        // This can be used for TWAIN 1.x and 2.x Data Source Managers
+        template <typename dispatcher = twain_default_enter_dispatch>
+        struct twain_looper_win32
         {
-            if (!IsSourceOpen(pSource, isUIOnly))
-                break;
-            if (CanEnterDispatch(&msg))
+            twain_looper_win32(twain_source&) {}
+            dispatcher m_dispatcher;
+
+            void perform_loop(twain_source& ts)
             {
-                ::TranslateMessage(&msg);
-                ::DispatchMessage(&msg);
+                MSG msg;
+                while (GetMessage(&msg, NULL, 0, 0))
+                {
+                    if (!twain_loop<twain_looper_win32>::is_source_open(ts) || !ts.is_uienabled())
+                        break;
+                    if (!API_INSTANCE DTWAIN_IsTwainMsg(&msg) && m_dispatcher.enter_dispatch(ts))
+                    {
+                        ::TranslateMessage(&msg);
+                        ::DispatchMessage(&msg);
+                    }
+                }
             }
-        }
-#else
-        while (IsSourceOpen(pSource, isUIOnly))
+        };
+
+        // This version should only be used for version 2.x and higher TWAIN Data Source Manager
+        template <typename dispatcher = twain_default_enter_dispatch>
+        struct twain_looper_nowin32
         {
-            CanEnterDispatch(&msg);
-        }
-#endif
-    }*/
-}
+            dispatcher m_dispatcher;
+
+            void perform_loop(twain_source& ts)
+            {
+                MSG msg = {};
+                while (twain_loop<twain_looper_nowin32>::is_source_open(ts) && ts.is_uienabled())
+                    API_INSTANCE DTWAIN_IsTwainMsg(&msg);
+            }
+        };
+
+        template <typename looper>
+        class twain_loop
+        {
+            public:
+                static bool is_source_open(twain_source& ts)
+                {
+                    return ts.is_uienabled();
+                }
+
+            public:
+                void perform_loop(twain_source& ts) 
+                {
+                    looper(ts).perform_loop(ts);
+                }
+        };
+        
+        typedef twain_loop<twain_looper_win32<>> twain_loop_windows;
+        typedef twain_loop<twain_looper_nowin32<>> twain_loop_ver2;
+    }
 }
 #endif

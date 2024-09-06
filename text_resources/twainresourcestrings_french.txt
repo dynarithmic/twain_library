@@ -1,3 +1,4 @@
+0 Aucune erreur
 1 Fenêtre inefficace Manipule
 2 Raté D'Affectation De Mémoire
 3 Mauvais DLL Manipule
@@ -69,6 +70,8 @@
 1054 Source not installed
 1055 Source does not support memory file transfers
 1056 Area array est trop petit. Le tableau doit comporter au moins 4 éléments.
+1057 Impossible de créer le fichier journal.
+1058 Source does not support TWAIN file system.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
