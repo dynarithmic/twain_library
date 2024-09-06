@@ -1,3 +1,4 @@
+0 Sin errores
 1 Ventana nula Maneja
 2 El Fracaso De Asignación De Memoria
 3 Los DLL inválido Maneja

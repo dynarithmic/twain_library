@@ -1,3 +1,4 @@
+0 Nessun errore
 1 NULL Finestra Maneggia
 2 Memoria Allocazione Fallimento
 3 Invalido DLL Maneggia

@@ -1,3 +1,4 @@
+0 Kein Fehler
 1 Ungültiges Fenster Handle
 2 Speicherallokierung fehlgeschlagen
 3 Ungültiges DLL Handle

@@ -1,3 +1,4 @@
+0 Geen fout
 1 NULL Raam Hanteert
 2 Herinnering Allocation Mislukking
 3 Kwalijken DLL Hanteert

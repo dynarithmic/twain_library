@@ -1,3 +1,4 @@
+0 No Error
 1 NULL Window Handle
 2 Memory Allocation Failure
 3 Invalid DLL Handle

@@ -1,3 +1,4 @@
+0 Aucune erreur
 1 Fenêtre inefficace Manipule
 2 Raté D'Affectation De Mémoire
 3 Mauvais DLL Manipule
