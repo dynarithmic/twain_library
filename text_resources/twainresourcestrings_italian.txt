@@ -188,26 +188,38 @@
 2088 Invalid color space.  Only RGB, Grayscale, and Black/White color spaces are supported
 2089 PDF not supported.
 2090 Missing or corrupt DTWTS.DLL.  TwainSave not available
-2100 Invalid OCR page specified
+2101 Invalid OCR page specified
 2500 Non colmando TWAIN. DLL
 2501 Non aprendo TWAIN Fonte
+2102 OCR non valido  
+2103 OCR non attivo  
+2104 Tipo di file OCR non valido  
+2105 Tipo di pixel OCR non valido  
+2106 Profondità di bit OCR non valida  
+2107 Errore di riconoscimento OCR  
+2502 Informazioni sull'immagine non valide
+2503 Errore durante la scrittura dei dati nel file
 3000 Selezioni Fonte
 3001 &Selezionar
 3002 &Annullare
 3003 Fonti:
-3005 Entering
-3006 Exiting
-3007 returning value of
+3005 Entrando
+3006 In uscita
+3007 valore restituito di
 3008 Exception Error
 3009 Module
 3010 No parameter info
 3011 Error in getting information for function
-3012 Input
-3013 Output: return code from DSM
+3012 Ingresso
+3013 Produzione: codice di ritorno da DSM
 3014 No information for 
 3015 returned error code
 3016 Errore
 3017 La directory dei file temporanei non esiste
+3018 è stato chiamato
+3019 Il file di immagine temporaneo è
+3020 Errore durante la creazione del file immagine temporaneo
+3021 File immagine creato con successo
 5000 Courier
 5001 Courier-Bold
 5002 Courier-BoldOblique
