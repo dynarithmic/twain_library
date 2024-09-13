@@ -8,7 +8,7 @@
     The .CHM file and online-help are being updated to version 5.5 on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
 * The current version of DTWAIN is [**5.5.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
-**Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/master)**.
+**Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
 ----
 
