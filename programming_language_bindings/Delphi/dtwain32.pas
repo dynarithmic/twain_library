@@ -840,7 +840,10 @@ const
   DTWAIN_ERR_SOURCENAME_NOTINSTALLED = (-1054);
   DTWAIN_ERR_NO_MEMFILE_XFER = (-1055);
   DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
-  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_AREA_ARRAY_TOO_SMALL;
+  DTWAIN_ERR_LOG_CREATE_ERROR  = (-1057);
+  DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED = (-1058);
+
+  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED;
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -973,6 +976,10 @@ const
   DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
   DTWAIN_ERR_OCR_LAST = (-2108);
   DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
+  DTWAIN_ERR_SOURCE_COULD_NOT_OPEN    = (-2500);
+  DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE   = (-2501);
+  DTWAIN_ERR_IMAGEINFO_INVALID        = (-2502);
+  DTWAIN_ERR_WRITEDATA_TOFILE         = (-2503);
   DTWAIN_DE_CHKAUTOCAPTURE = 1;
   DTWAIN_DE_CHKBATTERY = 2;
   DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -1125,6 +1132,8 @@ const
   DTWAIN_LOG_CONSOLE = $800000       ;
   DTWAIN_LOG_DEBUGMONITOR = $1000000 ;
   DTWAIN_LOG_USEWINDOW = $2000000    ;
+  DTWAIN_LOG_CREATEDIRECTORY = $4000000;
+
   DTWAIN_LOG_ALL = (DTWAIN_LOG_DECODE_SOURCE Or DTWAIN_LOG_DECODE_DEST Or DTWAIN_LOG_DECODE_TWEVENT
                   Or DTWAIN_LOG_DECODE_TWMEMREF Or DTWAIN_LOG_CALLSTACK Or DTWAIN_LOG_ISTWAINMSG Or DTWAIN_LOG_INITFAILURE
                   Or DTWAIN_LOG_LOWLEVELTWAIN Or DTWAIN_LOG_NOTIFICATIONS Or DTWAIN_LOG_MISCELLANEOUS Or DTWAIN_LOG_DTWAINERRORS
@@ -1184,9 +1193,8 @@ const
   DTWAIN_DLG_USENAMEMAPPING = 256;
   DTWAIN_DLG_TOPMOSTWINDOW = 1024;
   DTWAIN_DLG_OPENONSELECT = 2048;
-  DTWAIN_DLG_OPENONSELECTOVERRIDE = 4096;
-  DTWAIN_DLG_OPENONSELECTON = (DTWAIN_DLG_OPENONSELECT Or DTWAIN_DLG_OPENONSELECTOVERRIDE);
-  DTWAIN_DLG_OPENONSELECTOFF = DTWAIN_DLG_OPENONSELECTOVERRIDE;
+  DTWAIN_DLG_NOOPENONSELECT = 4096;
+  DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
 
   DTWAIN_RES_ENGLISH = 0;
   DTWAIN_RES_FRENCH = 1;
@@ -1393,6 +1401,27 @@ const
   DTWAIN_CV_CAPPRINTERCHARROTATION = $1047;
   DTWAIN_CV_CAPPRINTERFONTSTYLE = $1048;
   DTWAIN_CV_CAPPRINTERINDEXLEADCHAR = $1049;
+  DTWAIN_CV_CAPIMAGEADDRESSENABLED            = $1050;
+  DTWAIN_CV_CAPIAFIELDA_LEVEL                 = $1051;
+  DTWAIN_CV_CAPIAFIELDB_LEVEL                 = $1052;
+  DTWAIN_CV_CAPIAFIELDC_LEVEL                 = $1053;
+  DTWAIN_CV_CAPIAFIELDD_LEVEL                 = $1054; 
+  DTWAIN_CV_CAPIAFIELDE_LEVEL                 = $1055; 
+  DTWAIN_CV_CAPIAFIELDA_PRINTFORMAT           = $1056; 
+  DTWAIN_CV_CAPIAFIELDB_PRINTFORMAT           = $1057; 
+  DTWAIN_CV_CAPIAFIELDC_PRINTFORMAT           = $1058; 
+  DTWAIN_CV_CAPIAFIELDD_PRINTFORMAT           = $1059; 
+  DTWAIN_CV_CAPIAFIELDE_PRINTFORMAT           = $105A; 
+  DTWAIN_CV_CAPIAFIELDA_VALUE                 = $105B; 
+  DTWAIN_CV_CAPIAFIELDB_VALUE                 = $105C; 
+  DTWAIN_CV_CAPIAFIELDC_VALUE                 = $105D; 
+  DTWAIN_CV_CAPIAFIELDD_VALUE                 = $105E; 
+  DTWAIN_CV_CAPIAFIELDE_VALUE                 = $105F; 
+  DTWAIN_CV_CAPIAFIELDA_LASTPAGE              = $1060; 
+  DTWAIN_CV_CAPIAFIELDB_LASTPAGE              = $1061; 
+  DTWAIN_CV_CAPIAFIELDC_LASTPAGE              = $1062; 
+  DTWAIN_CV_CAPIAFIELDD_LASTPAGE              = $1063; 
+  DTWAIN_CV_CAPIAFIELDE_LASTPAGE              = $1064; 
   DTWAIN_CV_CAPPRINTERINDEXMAXVALUE = $104A;
   DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS = $104B;
   DTWAIN_CV_CAPPRINTERINDEXSTEP = $104C;
@@ -2319,6 +2348,7 @@ function DTWAIN_GetYResolutionStringA(Source:DTWAIN_SOURCE; Resolution:LPSTR):BO
 function DTWAIN_InitImageFileAppendA(szFile:LPCSTR; fType:LONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_InitImageFileAppendA';
 function DTWAIN_IsDIBBlankStringA(hDib:DTWAIN_HANDLE; threshold:LPCSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsDIBBlankStringA';
 function DTWAIN_LoadCustomStringResourcesA(sLangDLL:LPCSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResourcesA';
+function DTWAIN_LoadCustomStringResourcesExA(sLangDLL:LPCSTR; clearEntries:BOOL):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResourcesExA';
 function DTWAIN_LogMessageA(message:LPCSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LogMessageA';
 function DTWAIN_RangeGetAllFloatStringA(pArray:DTWAIN_RANGE; dLow:LPSTR; dUp:LPSTR; dStep:LPSTR; dDefault:LPSTR; dCurrent:LPSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetAllFloatStringA';
 function DTWAIN_RangeGetExpValueFloatStringA(pArray:DTWAIN_RANGE; lPos:LONG; pVal:LPSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetExpValueFloatStringA';
@@ -2444,6 +2474,7 @@ function DTWAIN_GetYResolutionStringW(Source:DTWAIN_SOURCE; Resolution:LPWSTR):B
 function DTWAIN_InitImageFileAppendW(szFile:LPCWSTR; fType:LONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_InitImageFileAppendW';
 function DTWAIN_IsDIBBlankStringW(hDib:DTWAIN_HANDLE; threshold:LPCWSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsDIBBlankStringW';
 function DTWAIN_LoadCustomStringResourcesW(sLangDLL:LPCWSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResourcesW';
+function DTWAIN_LoadCustomStringResourcesExW(sLangDLL:LPCWSTR; clearEntries:BOOL):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResourcesExW';
 function DTWAIN_LogMessageW(message:LPCWSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LogMessageW';
 function DTWAIN_RangeGetAllFloatStringW(pArray:DTWAIN_RANGE; dLow:LPWSTR; dUp:LPWSTR; dStep:LPWSTR; dDefault:LPWSTR; dCurrent:LPWSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetAllFloatStringW';
 function DTWAIN_RangeGetExpValueFloatStringW(pArray:DTWAIN_RANGE; lPos:LONG; pVal:LPWSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetExpValueFloatStringW';
@@ -2582,6 +2613,7 @@ function DTWAIN_GetYResolutionString(Source:DTWAIN_SOURCE; Resolution:LPTSTR):BO
 function DTWAIN_InitImageFileAppend(szFile:LPCTSTR; fType:LONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_InitImageFileAppend';
 function DTWAIN_IsDIBBlankString(hDib:DTWAIN_HANDLE; threshold:LPCTSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsDIBBlankString';
 function DTWAIN_LoadCustomStringResources(sLangDLL:LPCTSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResources';
+function DTWAIN_LoadCustomStringResourcesEx(sLangDLL:LPCTSTR; clearEntries:BOOL):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LoadCustomStringResourcesEx';
 function DTWAIN_LogMessage(message:LPCTSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_LogMessage';
 function DTWAIN_RangeGetAllFloatString(pArray:DTWAIN_RANGE; dLow:LPTSTR; dUp:LPTSTR; dStep:LPTSTR; dDefault:LPTSTR; dCurrent:LPTSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetAllFloatString';
 function DTWAIN_RangeGetExpValueFloatString(pArray:DTWAIN_RANGE; lPos:LONG; pVal:LPTSTR):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_RangeGetExpValueFloatString';

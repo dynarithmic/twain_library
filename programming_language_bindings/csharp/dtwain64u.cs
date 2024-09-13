@@ -798,6 +798,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_SOURCENAME_NOTINSTALLED = (-1054);
         public const int DTWAIN_ERR_NO_MEMFILE_XFER = (-1055);
         public const int DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
+        public const int DTWAIN_ERR_LOG_CREATE_ERROR  = (-1057);
+        public const int DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED = (-1058);
 
         public const  int DTWAIN_ERR_LAST_1 = DTWAIN_ERR_DEMO_NOFILETYPE;
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
@@ -932,6 +934,10 @@ namespace Dynarithmic
         public const  int DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
         public const  int DTWAIN_ERR_OCR_LAST = (-2108);
         public const  int DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
+        public const  int DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   = (-2500);
+        public const  int DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  = (-2501);
+        public const  int DTWAIN_ERR_IMAGEINFO_INVALID       = (-2502);
+        public const  int DTWAIN_ERR_WRITEDATA_TOFILE        = (-2503);
         public const  int DTWAIN_DE_CHKAUTOCAPTURE = 1;
         public const  int DTWAIN_DE_CHKBATTERY = 2;
         public const  int DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -1073,6 +1079,7 @@ namespace Dynarithmic
         public const int DTWAIN_LOG_CONSOLE = 0x800000       ;
         public const int DTWAIN_LOG_DEBUGMONITOR = 0x1000000 ;
         public const int DTWAIN_LOG_USEWINDOW = 0x2000000    ;
+        public const int DTWAIN_LOG_CREATEDIRECTORY = 0x04000000;
         public const int DTWAIN_LOG_ALL = (DTWAIN_LOG_DECODE_SOURCE | DTWAIN_LOG_DECODE_DEST | DTWAIN_LOG_DECODE_TWEVENT
                         | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_ISTWAINMSG | DTWAIN_LOG_INITFAILURE
                         | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_NOTIFICATIONS | DTWAIN_LOG_MISCELLANEOUS | DTWAIN_LOG_DTWAINERRORS
@@ -1133,14 +1140,13 @@ namespace Dynarithmic
         public const  int DTWAIN_DLG_USETEMPLATE = 8;
         public const  int DTWAIN_DLG_CLEAR_PARAMS = 16;
         public const  int DTWAIN_DLG_HORIZONTALSCROLL = 32;
-        public const int DTWAIN_DLG_USEINCLUDENAMES = 64;
-        public const int DTWAIN_DLG_USEEXCLUDENAMES = 128;
-        public const int DTWAIN_DLG_USENAMEMAPPING = 256;
-        public const int DTWAIN_DLG_TOPMOSTWINDOW = 1024;
-        public const int DTWAIN_DLG_OPENONSELECT = 2048;
-        public const int DTWAIN_DLG_OPENONSELECTOVERRIDE = 4096;
-        public const int DTWAIN_DLG_OPENONSELECTON = (DTWAIN_DLG_OPENONSELECT | DTWAIN_DLG_OPENONSELECTOVERRIDE);
-        public const int DTWAIN_DLG_OPENONSELECTOFF = DTWAIN_DLG_OPENONSELECTOVERRIDE;
+        public const  int DTWAIN_DLG_USEINCLUDENAMES = 64;
+        public const  int DTWAIN_DLG_USEEXCLUDENAMES = 128;
+        public const  int DTWAIN_DLG_USENAMEMAPPING = 256;
+        public const  int DTWAIN_DLG_TOPMOSTWINDOW = 1024;
+        public const  int DTWAIN_DLG_OPENONSELECT = 2048;
+        public const  int DTWAIN_DLG_NOOPENONSELECT = 4096;
+        public const  int DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
         public const  int DTWAIN_RES_ENGLISH = 0;
         public const  int DTWAIN_RES_FRENCH = 1;
         public const  int DTWAIN_RES_SPANISH = 2;
@@ -1343,6 +1349,27 @@ namespace Dynarithmic
         public const  int DTWAIN_CV_CAPPRINTERCHARROTATION = 0x1047;
         public const  int DTWAIN_CV_CAPPRINTERFONTSTYLE = 0x1048;
         public const  int DTWAIN_CV_CAPPRINTERINDEXLEADCHAR = 0x1049;
+        public const  int DTWAIN_CV_CAPIMAGEADDRESSENABLED  = 0x1050;
+        public const  int DTWAIN_CV_CAPIAFIELDA_LEVEL       = 0x1051;
+        public const  int DTWAIN_CV_CAPIAFIELDB_LEVEL       = 0x1052;
+        public const  int DTWAIN_CV_CAPIAFIELDC_LEVEL       = 0x1053;
+        public const  int DTWAIN_CV_CAPIAFIELDD_LEVEL       = 0x1054; 
+        public const  int DTWAIN_CV_CAPIAFIELDE_LEVEL       = 0x1055; 
+        public const  int DTWAIN_CV_CAPIAFIELDA_PRINTFORMAT = 0x1056; 
+        public const  int DTWAIN_CV_CAPIAFIELDB_PRINTFORMAT = 0x1057; 
+        public const  int DTWAIN_CV_CAPIAFIELDC_PRINTFORMAT = 0x1058; 
+        public const  int DTWAIN_CV_CAPIAFIELDD_PRINTFORMAT = 0x1059; 
+        public const  int DTWAIN_CV_CAPIAFIELDE_PRINTFORMAT = 0x105A; 
+        public const  int DTWAIN_CV_CAPIAFIELDA_VALUE       = 0x105B; 
+        public const  int DTWAIN_CV_CAPIAFIELDB_VALUE       = 0x105C; 
+        public const  int DTWAIN_CV_CAPIAFIELDC_VALUE       = 0x105D; 
+        public const  int DTWAIN_CV_CAPIAFIELDD_VALUE       = 0x105E; 
+        public const  int DTWAIN_CV_CAPIAFIELDE_VALUE       = 0x105F; 
+        public const  int DTWAIN_CV_CAPIAFIELDA_LASTPAGE    = 0x1060; 
+        public const  int DTWAIN_CV_CAPIAFIELDB_LASTPAGE    = 0x1061; 
+        public const  int DTWAIN_CV_CAPIAFIELDC_LASTPAGE    = 0x1062; 
+        public const  int DTWAIN_CV_CAPIAFIELDD_LASTPAGE    = 0x1063; 
+        public const  int DTWAIN_CV_CAPIAFIELDE_LASTPAGE    = 0x1064; 
         public const  int DTWAIN_CV_CAPPRINTERINDEXMAXVALUE = 0x104A;
         public const  int DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS = 0x104B;
         public const  int DTWAIN_CV_CAPPRINTERINDEXSTEP = 0x104C;
@@ -1655,7 +1682,6 @@ namespace Dynarithmic
         public const int DTWAIN_TWAINSESSIONOK = 2;
 
         public const string DTWAIN_LIBRARY = "dtwain64u.dll";
-
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -5736,5 +5762,18 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, int nWhichCameras, ref DTWAIN_ARRAY Cameras);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_LoadCustomStringResourcesExA([MarshalAs(UnmanagedType.LPStr)] string sLangDLL, int clearExisting);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_LoadCustomStringResourcesExW([MarshalAs(UnmanagedType.LPWStr)] string sLangDLL, int clearExisting);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_LoadCustomStringResourcesEx([MarshalAs(UnmanagedType.LPTStr)] string sLangDLL, int clearExisting);
+
     }
 }

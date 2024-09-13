@@ -880,6 +880,10 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_OCR_RECOGNITIONERROR As Integer = (-2107)
     Public Const DTWAIN_ERR_OCR_LAST As Integer = (-2108)
     Public Const DTWAIN_ERR_LAST As Integer = DTWAIN_ERR_OCR_LAST
+    Public Const DTWAIN_ERR_SOURCE_COULD_NOT_OPEN  As Integer  = (-2500)
+    Public Const DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE As Integer  = (-2501)
+    Public Const DTWAIN_ERR_IMAGEINFO_INVALID      As Integer  = (-2502)
+    Public Const DTWAIN_ERR_WRITEDATA_TOFILE       As Integer  = (-2503)
     Public Const DTWAIN_DE_CHKAUTOCAPTURE As Integer = 1
     Public Const DTWAIN_DE_CHKBATTERY As Integer = 2
     Public Const DTWAIN_DE_CHKDEVICEONLINE As Integer = 4
@@ -1033,6 +1037,7 @@ Class DTWAINAPI
     Public Const DTWAIN_LOG_CONSOLE As Integer = &H800000
     Public Const DTWAIN_LOG_DEBUGMONITOR As Integer = &H1000000
     Public Const DTWAIN_LOG_USEWINDOW As Integer = &H2000000
+    Public Const DTWAIN_LOG_CREATEDIRECTORY As Integer = &H04000000
 
     Public Const DTWAIN_LOG_NOCALLBACK As Integer = 8192
     Public Const DTWAIN_LOG_WRITE As Integer = 16384
@@ -1097,9 +1102,9 @@ Class DTWAINAPI
     Public Const DTWAIN_DLG_USENAMEMAPPING As Integer = 256
     Public Const DTWAIN_DLG_TOPMOSTWINDOW As Integer = 1024
     Public Const DTWAIN_DLG_OPENONSELECT As Integer = 2048
-    Public Const DTWAIN_DLG_OPENONSELECTOVERRIDE As Integer = 4096
-    Public Const DTWAIN_DLG_OPENONSELECTON As Integer = (DTWAIN_DLG_OPENONSELECT Or DTWAIN_DLG_OPENONSELECTOVERRIDE)
-    Public Const DTWAIN_DLG_OPENONSELECTOFF As Integer = DTWAIN_DLG_OPENONSELECTOVERRIDE
+    Public Const DTWAIN_DLG_NOOPENONSELECT As Integer = 4096
+    Public Const DTWAIN_DLG_HIGHLIGHTFIRST As Integer = 8192
+
     Public Const DTWAIN_RES_ENGLISH As Integer = 0
     Public Const DTWAIN_RES_FRENCH As Integer = 1
     Public Const DTWAIN_RES_SPANISH As Integer = 2
@@ -1305,6 +1310,27 @@ Class DTWAINAPI
     Public Const DTWAIN_CV_CAPPRINTERCHARROTATION As Integer = &H1047
     Public Const DTWAIN_CV_CAPPRINTERFONTSTYLE As Integer = &H1048
     Public Const DTWAIN_CV_CAPPRINTERINDEXLEADCHAR As Integer = &H1049
+    Public Const DTWAIN_CV_CAPIMAGEADDRESSENABLED            As Integer =  &H1050
+    Public Const DTWAIN_CV_CAPIAFIELDA_LEVEL                 As Integer =  &H1051
+    Public Const DTWAIN_CV_CAPIAFIELDB_LEVEL                 As Integer =  &H1052
+    Public Const DTWAIN_CV_CAPIAFIELDC_LEVEL                 As Integer =  &H1053
+    Public Const DTWAIN_CV_CAPIAFIELDD_LEVEL                 As Integer =  &H1054 
+    Public Const DTWAIN_CV_CAPIAFIELDE_LEVEL                 As Integer =  &H1055 
+    Public Const DTWAIN_CV_CAPIAFIELDA_PRINTFORMAT           As Integer =  &H1056 
+    Public Const DTWAIN_CV_CAPIAFIELDB_PRINTFORMAT           As Integer =  &H1057 
+    Public Const DTWAIN_CV_CAPIAFIELDC_PRINTFORMAT           As Integer =  &H1058 
+    Public Const DTWAIN_CV_CAPIAFIELDD_PRINTFORMAT           As Integer =  &H1059 
+    Public Const DTWAIN_CV_CAPIAFIELDE_PRINTFORMAT           As Integer =  &H105A 
+    Public Const DTWAIN_CV_CAPIAFIELDA_VALUE                 As Integer =  &H105B 
+    Public Const DTWAIN_CV_CAPIAFIELDB_VALUE                 As Integer =  &H105C 
+    Public Const DTWAIN_CV_CAPIAFIELDC_VALUE                 As Integer =  &H105D 
+    Public Const DTWAIN_CV_CAPIAFIELDD_VALUE                 As Integer =  &H105E 
+    Public Const DTWAIN_CV_CAPIAFIELDE_VALUE                 As Integer =  &H105F 
+    Public Const DTWAIN_CV_CAPIAFIELDA_LASTPAGE              As Integer =  &H1060 
+    Public Const DTWAIN_CV_CAPIAFIELDB_LASTPAGE              As Integer =  &H1061 
+    Public Const DTWAIN_CV_CAPIAFIELDC_LASTPAGE              As Integer =  &H1062 
+    Public Const DTWAIN_CV_CAPIAFIELDD_LASTPAGE              As Integer =  &H1063 
+    Public Const DTWAIN_CV_CAPIAFIELDE_LASTPAGE              As Integer =  &H1064 
     Public Const DTWAIN_CV_CAPPRINTERINDEXMAXVALUE As Integer = &H104A
     Public Const DTWAIN_CV_CAPPRINTERINDEXNUMDIGITS As Integer = &H104B
     Public Const DTWAIN_CV_CAPPRINTERINDEXSTEP As Integer = &H104C
@@ -2234,6 +2260,7 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_InitImageFileAppendA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> szFile As String, ByVal fType As Integer) As Integer
     Declare Ansi Function DTWAIN_IsDIBBlankStringA Lib "dtwain32u.dll" (ByVal hDib As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> threshold As String) As Integer
     Declare Ansi Function DTWAIN_LoadCustomStringResourcesA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> sLangDLL As String) As Integer
+    Declare Ansi Function DTWAIN_LoadCustomStringResourcesExA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> sLangDLL As String, clearEntries As Integer) As Integer
     Declare Ansi Function DTWAIN_LogMessageA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> message As String) As Integer
     Declare Ansi Function DTWAIN_RangeGetAllFloatStringA Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
     Declare Ansi Function DTWAIN_RangeGetExpValueFloatStringA Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, ByVal lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
@@ -2359,6 +2386,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_InitImageFileAppendW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> szFile As String, ByVal fType As Integer) As Integer
     Declare Unicode Function DTWAIN_IsDIBBlankStringW Lib "dtwain32u.dll" (ByVal hDib As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> threshold As String) As Integer
     Declare Unicode Function DTWAIN_LoadCustomStringResourcesW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> sLangDLL As String) As Integer
+    Declare Unicode Function DTWAIN_LoadCustomStringResourcesExW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> sLangDLL As String, clearEntries As Integer) As Integer
     Declare Unicode Function DTWAIN_LogMessageW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> message As String) As Integer
     Declare Unicode Function DTWAIN_RangeGetAllFloatStringW Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dCurrent As StringBuilder) As Integer
     Declare Unicode Function DTWAIN_RangeGetExpValueFloatStringW Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, ByVal lPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> pVal As StringBuilder) As Integer
@@ -2497,6 +2525,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_InitImageFileAppend Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szFile As String, ByVal fType As Integer) As Integer
     Declare Auto Function DTWAIN_IsDIBBlankString Lib "dtwain32u.dll" (ByVal hDib As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> threshold As String) As Integer
     Declare Auto Function DTWAIN_LoadCustomStringResources Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> sLangDLL As String) As Integer
+    Declare Auto Function DTWAIN_LoadCustomStringResourcesEx Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> sLangDLL As String, clearEntries As Integer) As Integer
     Declare Auto Function DTWAIN_LogMessage Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> message As String) As Integer
     Declare Auto Function DTWAIN_RangeGetAllFloatString Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
     Declare Auto Function DTWAIN_RangeGetExpValueFloatString Lib "dtwain32u.dll" (ByVal pArray As System.IntPtr, ByVal lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
