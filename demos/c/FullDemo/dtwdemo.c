@@ -935,14 +935,19 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HANDLE h = DTWAIN_GetCustomDSData(g_CurrentSource, NULL, 0, &actualSize, DTWAINGCD_COPYDATA);
             if ( h )
             {
-                /* Allocate memory for the data */
-                szData = malloc(actualSize * sizeof(BYTE));
-                memset(szData, actualSize, 0);
+                /* Allocate memory for the data.  We add an extra byte,
+                   since the data is not guaranteed to be null-terminated */
+                szData = malloc((actualSize + 1) * sizeof(BYTE));
+                if (szData)
+                {
+                    // Fill the memory with 0
+                    memset(szData, 0, actualSize + 1);
 
                 /* Second call actually gets the data */
                 DTWAIN_GetCustomDSData(g_CurrentSource, szData, actualSize, &actualSize, DTWAINGCD_COPYDATA);
                 SetWindowTextA(hWndDSData, szData);
                 free(szData);
+                }
             }
 
             DTWAIN_ArrayDestroy( CapArray );

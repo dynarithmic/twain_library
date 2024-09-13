@@ -376,7 +376,8 @@ namespace TWAINDemo
             {
                 case 0:
                     // Select the source
-                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero,"Select Source",0,0, TwainAPI.DTWAIN_DLG_CENTER_SCREEN);
+                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero,"Select Source",0,0, 
+                            TwainAPI.DTWAIN_DLG_CENTER_SCREEN  | TwainAPI.DTWAIN_DLG_HIGHLIGHTFIRST | TwainAPI.DTWAIN_DLG_SORTNAMES);
                 break;
 
                 case 1:

@@ -1,5 +1,20 @@
 DTWAIN Version changes
 
+5.5.1
+
+- Load default English resources if twainresourcestrings_english.txt is not found, and
+  additional language resources are not specified.
+
+- Optimizations to internal functions.
+
+- Fix DTWAIN_SetDefaultSource() for TWAIN 2.x data source managers (TWAINDSM.DLL).  Note that
+  DTWAIN_SetDefaultSource() is not guaranteed to work for TWAIN 1.x data source managers (TWAIN_32.DLL).
+
+- Fix issue with DTWAIN_SelectOCREngine() not working for Unicode builds of DTWAIN.
+
+- Adjust DTWAIN OCR error constants to match OCR error messages.
+
+  
 5.5.0
 
 - Add support for Big TIFF files when calling DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx().  
