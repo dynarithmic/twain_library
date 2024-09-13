@@ -697,6 +697,9 @@
     D_LOADCUSTOMSTRINGRESOURCESAFUNC                                  DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesA = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESFUNC                                   DYNDTWAIN_API::DTWAIN_LoadCustomStringResources = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESWFUNC                                  DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesW = nullptr;
+    D_LOADCUSTOMSTRINGRESOURCESEXAFUNC                                DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesExA = nullptr;
+    D_LOADCUSTOMSTRINGRESOURCESEXFUNC                                 DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesEx = nullptr;
+    D_LOADCUSTOMSTRINGRESOURCESEXWFUNC                                DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesExW = nullptr;
     D_LOADLANGUAGERESOURCEFUNC                                        DYNDTWAIN_API::DTWAIN_LoadLanguageResource = nullptr;
     D_LOCKMEMORYEXFUNC                                                DYNDTWAIN_API::DTWAIN_LockMemoryEx = nullptr;
     D_LOCKMEMORYFUNC                                                  DYNDTWAIN_API::DTWAIN_LockMemory = nullptr;
@@ -1745,6 +1748,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResources, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesEx, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesExA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesExW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadLanguageResource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LockMemory, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LockMemoryEx, hModule);
