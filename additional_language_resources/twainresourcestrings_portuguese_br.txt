@@ -1,3 +1,4 @@
+0 Nenhum erro
 1 Identificador de janela NULL
 2 Falha na alocação de memória
 3 Identificador de DLL inválido
@@ -62,6 +63,15 @@
 1047 Tipo de dados da capacidade incorreto
 1048 A capacidade possui um tipo de dados desconhecido
 1049 A versão demo do DTWAIN não suporta este tipo de arquivo
+1050 Selecção cancelada
+1051 DTWAIN Resources not found
+1052 A string não corresponde ao tipo de array
+1053 DTWAIN ARRAY not the same type
+1054 Source not installed
+1055 Source does not support memory file transfers
+1056 A matriz de área é muito pequena. A matriz deve ter pelo menos 4 itens.
+1057 Erro ao criar arquivo de log.
+1058 Source does not support TWAIN file system.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida
@@ -166,6 +176,8 @@
 2074 Largura / altura de bitmap inválida para o formato ICO do Windows não Vista
 2075 TWAIN_32.DLL ou TWAIN Data Source Manager especificado não encontrado, corrompido ou não pôde ser aberto
 2076 TWAINDSM.DLL ou TWAIN Data Source Manager especificado não encontrado, corrompido ou não pôde ser aberto
+2078 Não foi possível criar o diretório
+2079 Transym OCR DLL especificado não encontrado, corrompido ou não pôde ser aberto
 2081 Nenhum nome de arquivo especificado. Use a opção -f
 2082 TWAIN não disponível
 2083 Não foi possível se comunicar com o dispositivo TWAIN
@@ -176,7 +188,17 @@
 2088 Espaço de cores inválido. Apenas os espaços de cores RGB, Escala de cinza e Preto / Branco são suportados
 2089 PDF não suportado.
 2090 DTWTS.DLL ausente ou corrompido. TwainSave não disponível
-2100 Página OCR inválida especificada
+2500 Não foi possível abrir o dispositivo TWAIN
+2501 Não foi possível fechar o dispositivo TWAIN
+2502 Informações de imagem inválidas
+2503 Erro ao gravar dados no arquivo
+2101 Página OCR inválida especificada
+2102 OCR inválido  
+2103 OCR não ativo  
+2104 Tipo de arquivo OCR inválido  
+2105 Tipo de pixel OCR inválido  
+2106 Profundidade de bits OCR inválida  
+2107 Erro de reconhecimento OCR  
 3000 Selecionar fonte
 3001 &Select
 3002 &Cancel
@@ -188,10 +210,16 @@
 3009 Modulo
 3010 Nenhuma informação de parâmetro
 3011 Erro ao obter informações para a função
-3012 Input
+3012 Entrada
 3013 Saída: código de retorno do DSM
 3014 No information for 
 3015 returned error code
+3016 Erro
+3017 O diretório de arquivos temporários não existe
+3018 foi chamado
+3019 Arquivo de imagem temporário é
+3020 Erro ao criar arquivo de imagem temporário
+3021 Arquivo de imagem criado com sucesso
 5000 Courier
 5001 Courier-Bold
 5002 Courier-BoldOblique
@@ -246,5 +274,11 @@
 9609 TWRC_DATANOTAVAILABLE
 9610 TWRC_BUSY
 9611 TWRC_SCANNERLOCKED
-9700 DTWAIN Twain Library, version 5.1.0.3 (c) 2018-2020
+9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Ocorreu um erro de exceção durante a chamada para o Twain DSM. Possível sessão Twain corrompida
+10000 [Mensagem do usuário]
+10001 Error in closing Twain DSM
+10002 Error in closing Twain Session
+10003 Error in closing DTWAIN Manager
+10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
+10005 Could not remove subclass from user window
