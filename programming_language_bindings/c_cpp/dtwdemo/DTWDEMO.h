@@ -72,5 +72,6 @@
 #define IDC_radToConsole                    7008
 #define IDC_edDSData                        7009
 #define IDC_edCopyright                     7010
+#define IDC_edJSONDetails                   7011
 
 #endif

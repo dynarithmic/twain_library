@@ -173,6 +173,9 @@
     D_CLOSESOURCEFUNC                                                 DYNDTWAIN_API::DTWAIN_CloseSource = nullptr;
     D_CLOSESOURCEUIFUNC                                               DYNDTWAIN_API::DTWAIN_CloseSourceUI = nullptr;
     D_CONVERTDIBTOBITMAPFUNC                                          DYNDTWAIN_API::DTWAIN_ConvertDIBToBitmap = nullptr;
+    D_CONVERTTOAPISTRINGAFUNC                                         DYNDTWAIN_API::DTWAIN_ConvertToAPIStringA = nullptr;
+    D_CONVERTTOAPISTRINGFUNC                                          DYNDTWAIN_API::DTWAIN_ConvertToAPIString = nullptr;
+    D_CONVERTTOAPISTRINGWFUNC                                         DYNDTWAIN_API::DTWAIN_ConvertToAPIStringW = nullptr;
     D_CREATEACQUISITIONARRAYFUNC                                      DYNDTWAIN_API::DTWAIN_CreateAcquisitionArray = nullptr;
     D_CREATEPDFTEXTELEMENTFUNC                                        DYNDTWAIN_API::DTWAIN_CreatePDFTextElement = nullptr;
     D_DESTROYACQUISITIONARRAYFUNC                                     DYNDTWAIN_API::DTWAIN_DestroyAcquisitionArray = nullptr;
@@ -215,8 +218,8 @@
     D_ENUMBOTTOMCAMERASFUNC                                           DYNDTWAIN_API::DTWAIN_EnumBottomCameras = nullptr;
     D_ENUMBRIGHTNESSVALUESEXFUNC                                      DYNDTWAIN_API::DTWAIN_EnumBrightnessValuesEx = nullptr;
     D_ENUMBRIGHTNESSVALUESFUNC                                        DYNDTWAIN_API::DTWAIN_EnumBrightnessValues = nullptr;
-    D_ENUMCAMERASFUNC                                                 DYNDTWAIN_API::DTWAIN_EnumCameras = nullptr;
     D_ENUMCAMERASEXFUNC                                               DYNDTWAIN_API::DTWAIN_EnumCamerasEx = nullptr;
+    D_ENUMCAMERASFUNC                                                 DYNDTWAIN_API::DTWAIN_EnumCameras = nullptr;
     D_ENUMCOMPRESSIONTYPESEXFUNC                                      DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx = nullptr;
     D_ENUMCOMPRESSIONTYPESFUNC                                        DYNDTWAIN_API::DTWAIN_EnumCompressionTypes = nullptr;
     D_ENUMCONTRASTVALUESEXFUNC                                        DYNDTWAIN_API::DTWAIN_EnumContrastValuesEx = nullptr;
@@ -285,8 +288,8 @@
     D_ENUMSUPPORTEDCAPSEX2FUNC                                        DYNDTWAIN_API::DTWAIN_EnumSupportedCapsEx2 = nullptr;
     D_ENUMSUPPORTEDCAPSEXFUNC                                         DYNDTWAIN_API::DTWAIN_EnumSupportedCapsEx = nullptr;
     D_ENUMSUPPORTEDCAPSFUNC                                           DYNDTWAIN_API::DTWAIN_EnumSupportedCaps = nullptr;
-    D_ENUMSUPPORTEDSINGLEPAGEFILETYPES                                DYNDTWAIN_API::DTWAIN_EnumSupportedSinglePageFileTypes = nullptr;
     D_ENUMSUPPORTEDMULTIPAGEFILETYPES                                 DYNDTWAIN_API::DTWAIN_EnumSupportedMultiPageFileTypes = nullptr;
+    D_ENUMSUPPORTEDSINGLEPAGEFILETYPES                                DYNDTWAIN_API::DTWAIN_EnumSupportedSinglePageFileTypes = nullptr;
     D_ENUMTHRESHOLDVALUESEXFUNC                                       DYNDTWAIN_API::DTWAIN_EnumThresholdValuesEx = nullptr;
     D_ENUMTHRESHOLDVALUESFUNC                                         DYNDTWAIN_API::DTWAIN_EnumThresholdValues = nullptr;
     D_ENUMTOPCAMERASFUNC                                              DYNDTWAIN_API::DTWAIN_EnumTopCameras = nullptr;
@@ -338,8 +341,8 @@
     D_GETACQUIRESTRIPBUFFERFUNC                                       DYNDTWAIN_API::DTWAIN_GetAcquireStripBuffer = nullptr;
     D_GETACQUIRESTRIPDATAFUNC                                         DYNDTWAIN_API::DTWAIN_GetAcquireStripData = nullptr;
     D_GETACQUIRESTRIPSIZESFUNC                                        DYNDTWAIN_API::DTWAIN_GetAcquireStripSizes = nullptr;
-    D_GETACTIVEDSMPATHFUNC                                            DYNDTWAIN_API::DTWAIN_GetActiveDSMPath = nullptr;
     D_GETACTIVEDSMPATHAFUNC                                           DYNDTWAIN_API::DTWAIN_GetActiveDSMPathA = nullptr;
+    D_GETACTIVEDSMPATHFUNC                                            DYNDTWAIN_API::DTWAIN_GetActiveDSMPath = nullptr;
     D_GETACTIVEDSMPATHWFUNC                                           DYNDTWAIN_API::DTWAIN_GetActiveDSMPathW = nullptr;
     D_GETALARMVOLUMEFUNC                                              DYNDTWAIN_API::DTWAIN_GetAlarmVolume = nullptr;
     D_GETAPIHANDLESTATUS                                              DYNDTWAIN_API::DTWAIN_GetAPIHandleStatus = nullptr;
@@ -357,6 +360,7 @@
     D_GETBRIGHTNESSSTRINGAFUNC                                        DYNDTWAIN_API::DTWAIN_GetBrightnessStringA = nullptr;
     D_GETBRIGHTNESSSTRINGFUNC                                         DYNDTWAIN_API::DTWAIN_GetBrightnessString = nullptr;
     D_GETBRIGHTNESSSTRINGWFUNC                                        DYNDTWAIN_API::DTWAIN_GetBrightnessStringW = nullptr;
+    D_GETBUFFEREDTRANSFERINFOFUNC                                     DYNDTWAIN_API::DTWAIN_GetBufferedTransferInfo = nullptr; 
     D_GETCALLBACK64FUNC                                               DYNDTWAIN_API::DTWAIN_GetCallback64 = nullptr;
     D_GETCALLBACKFUNC                                                 DYNDTWAIN_API::DTWAIN_GetCallback = nullptr;
     D_GETCAPARRAYTYPEFUNC                                             DYNDTWAIN_API::DTWAIN_GetCapArrayType = nullptr;
@@ -412,9 +416,6 @@
     D_GETERRORSTRINGAFUNC                                             DYNDTWAIN_API::DTWAIN_GetErrorStringA = nullptr;
     D_GETERRORSTRINGFUNC                                              DYNDTWAIN_API::DTWAIN_GetErrorString = nullptr;
     D_GETERRORSTRINGWFUNC                                             DYNDTWAIN_API::DTWAIN_GetErrorStringW = nullptr;
-    D_GETRESOURCESTRINGAFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringA = nullptr;
-    D_GETRESOURCESTRINGFUNC                                           DYNDTWAIN_API::DTWAIN_GetResourceString = nullptr;
-    D_GETRESOURCESTRINGWFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringW = nullptr;
     D_GETEXTCAPFROMNAMEAFUNC                                          DYNDTWAIN_API::DTWAIN_GetExtCapFromNameA = nullptr;
     D_GETEXTCAPFROMNAMEFUNC                                           DYNDTWAIN_API::DTWAIN_GetExtCapFromName = nullptr;
     D_GETEXTCAPFROMNAMEWFUNC                                          DYNDTWAIN_API::DTWAIN_GetExtCapFromNameW = nullptr;
@@ -427,12 +428,12 @@
     D_GETFEEDERALIGNMENTFUNC                                          DYNDTWAIN_API::DTWAIN_GetFeederAlignment = nullptr;
     D_GETFEEDERFUNCSFUNC                                              DYNDTWAIN_API::DTWAIN_GetFeederFuncs = nullptr;
     D_GETFEEDERORDERFUNC                                              DYNDTWAIN_API::DTWAIN_GetFeederOrder = nullptr;
-    D_GETFILETYPENAME                                                 DYNDTWAIN_API::DTWAIN_GetFileTypeName = nullptr;
-    D_GETFILETYPENAMEA                                                DYNDTWAIN_API::DTWAIN_GetFileTypeNameA = nullptr;
-    D_GETFILETYPENAMEW                                                DYNDTWAIN_API::DTWAIN_GetFileTypeNameW = nullptr;
     D_GETFILETYPEEXTENSIONS                                           DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSA                                          DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsA = nullptr;
     D_GETFILETYPEEXTENSIONSW                                          DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsW = nullptr;
+    D_GETFILETYPENAME                                                 DYNDTWAIN_API::DTWAIN_GetFileTypeName = nullptr;
+    D_GETFILETYPENAMEA                                                DYNDTWAIN_API::DTWAIN_GetFileTypeNameA = nullptr;
+    D_GETFILETYPENAMEW                                                DYNDTWAIN_API::DTWAIN_GetFileTypeNameW = nullptr;
     D_GETHALFTONEAFUNC                                                DYNDTWAIN_API::DTWAIN_GetHalftoneA = nullptr;
     D_GETHALFTONEFUNC                                                 DYNDTWAIN_API::DTWAIN_GetHalftone = nullptr;
     D_GETHALFTONEWFUNC                                                DYNDTWAIN_API::DTWAIN_GetHalftoneW = nullptr;
@@ -523,6 +524,9 @@
     D_GETRESOLUTIONSTRINGAFUNC                                        DYNDTWAIN_API::DTWAIN_GetResolutionStringA = nullptr;
     D_GETRESOLUTIONSTRINGFUNC                                         DYNDTWAIN_API::DTWAIN_GetResolutionString = nullptr;
     D_GETRESOLUTIONSTRINGWFUNC                                        DYNDTWAIN_API::DTWAIN_GetResolutionStringW = nullptr;
+    D_GETRESOURCESTRINGAFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringA = nullptr;
+    D_GETRESOURCESTRINGFUNC                                           DYNDTWAIN_API::DTWAIN_GetResourceString = nullptr;
+    D_GETRESOURCESTRINGWFUNC                                          DYNDTWAIN_API::DTWAIN_GetResourceStringW = nullptr;
     D_GETROTATIONFUNC                                                 DYNDTWAIN_API::DTWAIN_GetRotation = nullptr;
     D_GETROTATIONSTRINGAFUNC                                          DYNDTWAIN_API::DTWAIN_GetRotationStringA = nullptr;
     D_GETROTATIONSTRINGFUNC                                           DYNDTWAIN_API::DTWAIN_GetRotationString = nullptr;
@@ -530,8 +534,8 @@
     D_GETSAVEFILENAMEAFUNC                                            DYNDTWAIN_API::DTWAIN_GetSaveFileNameA = nullptr;
     D_GETSAVEFILENAMEFUNC                                             DYNDTWAIN_API::DTWAIN_GetSaveFileName = nullptr;
     D_GETSAVEFILENAMEWFUNC                                            DYNDTWAIN_API::DTWAIN_GetSaveFileNameW = nullptr;
-    D_GETSESSIONDETAILSFUNC                                           DYNDTWAIN_API::DTWAIN_GetSessionDetails = nullptr;
     D_GETSESSIONDETAILSAFUNC                                          DYNDTWAIN_API::DTWAIN_GetSessionDetailsA = nullptr;
+    D_GETSESSIONDETAILSFUNC                                           DYNDTWAIN_API::DTWAIN_GetSessionDetails = nullptr;
     D_GETSESSIONDETAILSWFUNC                                          DYNDTWAIN_API::DTWAIN_GetSessionDetailsW = nullptr;
     D_GETSHADOWFUNC                                                   DYNDTWAIN_API::DTWAIN_GetShadow = nullptr;
     D_GETSHADOWSTRINGAFUNC                                            DYNDTWAIN_API::DTWAIN_GetShadowStringA = nullptr;
@@ -541,8 +545,8 @@
     D_GETSHORTVERSIONSTRINGFUNC                                       DYNDTWAIN_API::DTWAIN_GetShortVersionString = nullptr;
     D_GETSHORTVERSIONSTRINGWFUNC                                      DYNDTWAIN_API::DTWAIN_GetShortVersionStringW = nullptr;
     D_GETSOURCEACQUISITIONSFUNC                                       DYNDTWAIN_API::DTWAIN_GetSourceAcquisitions = nullptr;
-    D_GETSOURCEDETAILSFUNC                                            DYNDTWAIN_API::DTWAIN_GetSourceDetails = nullptr;
     D_GETSOURCEDETAILSAFUNC                                           DYNDTWAIN_API::DTWAIN_GetSourceDetailsA = nullptr;
+    D_GETSOURCEDETAILSFUNC                                            DYNDTWAIN_API::DTWAIN_GetSourceDetails = nullptr;
     D_GETSOURCEDETAILSWFUNC                                           DYNDTWAIN_API::DTWAIN_GetSourceDetailsW = nullptr;
     D_GETSOURCEIDEXFUNC                                               DYNDTWAIN_API::DTWAIN_GetSourceIDEx = nullptr;
     D_GETSOURCEIDFUNC                                                 DYNDTWAIN_API::DTWAIN_GetSourceID = nullptr;
@@ -573,6 +577,9 @@
     D_GETTIMEDATEWFUNC                                                DYNDTWAIN_API::DTWAIN_GetTimeDateW = nullptr;
     D_GETTWAINAPPIDEXFUNC                                             DYNDTWAIN_API::DTWAIN_GetTwainAppIDEx = nullptr;
     D_GETTWAINAPPIDFUNC                                               DYNDTWAIN_API::DTWAIN_GetTwainAppID = nullptr;
+    D_GETTWAINAVAILABILITYEXAFUNC                                     DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExA = nullptr;
+    D_GETTWAINAVAILABILITYEXFUNC                                      DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityEx = nullptr;
+    D_GETTWAINAVAILABILITYEXWFUNC                                     DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExW = nullptr;
     D_GETTWAINAVAILABILITYFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainAvailability = nullptr;
     D_GETTWAINCOUNTRYNAMEAFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainCountryNameA = nullptr;
     D_GETTWAINCOUNTRYNAMEFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainCountryName = nullptr;
@@ -591,18 +598,18 @@
     D_GETTWAINNAMEFROMCONSTANT                                        DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstant = nullptr;
     D_GETTWAINNAMEFROMCONSTANTA                                       DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantA = nullptr;
     D_GETTWAINNAMEFROMCONSTANTW                                       DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantW = nullptr;
-    D_GETTWAINSTRINGNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainStringName = nullptr;
     D_GETTWAINSTRINGNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainStringNameA = nullptr;
+    D_GETTWAINSTRINGNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainStringName = nullptr;
     D_GETTWAINSTRINGNAMEWFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainStringNameW = nullptr;
     D_GETTWAINTIMEOUTFUNC                                             DYNDTWAIN_API::DTWAIN_GetTwainTimeout = nullptr;
+    D_GETVERSIONCOPYRIGHTAFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightA = nullptr;
+    D_GETVERSIONCOPYRIGHTFUNC                                         DYNDTWAIN_API::DTWAIN_GetVersionCopyright = nullptr;
+    D_GETVERSIONCOPYRIGHTWFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightW = nullptr;
     D_GETVERSIONEXFUNC                                                DYNDTWAIN_API::DTWAIN_GetVersionEx = nullptr;
     D_GETVERSIONFUNC                                                  DYNDTWAIN_API::DTWAIN_GetVersion = nullptr;
     D_GETVERSIONINFOAFUNC                                             DYNDTWAIN_API::DTWAIN_GetVersionInfoA = nullptr;
     D_GETVERSIONINFOFUNC                                              DYNDTWAIN_API::DTWAIN_GetVersionInfo = nullptr;
     D_GETVERSIONINFOWFUNC                                             DYNDTWAIN_API::DTWAIN_GetVersionInfoW = nullptr;
-    D_GETVERSIONCOPYRIGHTFUNC                                         DYNDTWAIN_API::DTWAIN_GetVersionCopyright = nullptr;
-    D_GETVERSIONCOPYRIGHTAFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightA = nullptr;
-    D_GETVERSIONCOPYRIGHTWFUNC                                        DYNDTWAIN_API::DTWAIN_GetVersionCopyrightW = nullptr;
     D_GETVERSIONSTRINGAFUNC                                           DYNDTWAIN_API::DTWAIN_GetVersionStringA = nullptr;
     D_GETVERSIONSTRINGFUNC                                            DYNDTWAIN_API::DTWAIN_GetVersionString = nullptr;
     D_GETVERSIONSTRINGWFUNC                                           DYNDTWAIN_API::DTWAIN_GetVersionStringW = nullptr;
@@ -634,6 +641,8 @@
     D_ISAUTOROTATESUPPORTEDFUNC                                       DYNDTWAIN_API::DTWAIN_IsAutoRotateSupported = nullptr;
     D_ISAUTOSCANENABLEDFUNC                                           DYNDTWAIN_API::DTWAIN_IsAutoScanEnabled = nullptr;
     D_ISBLANKPAGEDETECTIONONFUNC                                      DYNDTWAIN_API::DTWAIN_IsBlankPageDetectionOn = nullptr;
+    D_ISBUFFEREDTILEMODEONFUNC                                        DYNDTWAIN_API::DTWAIN_IsBufferedTileModeOn = nullptr;
+    D_ISBUFFEREDTILEMODESUPPORTEDFUNC                                 DYNDTWAIN_API::DTWAIN_IsBufferedTileModeSupported = nullptr;
     D_ISCAPSUPPORTEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsCapSupported = nullptr;
     D_ISCOMPRESSIONSUPPORTEDFUNC                                      DYNDTWAIN_API::DTWAIN_IsCompressionSupported = nullptr;
     D_ISCUSTOMDSDATASUPPORTEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsCustomDSDataSupported = nullptr;
@@ -647,7 +656,6 @@
     D_ISDOUBLEFEEDDETECTSUPPORTEDFUNC                                 DYNDTWAIN_API::DTWAIN_IsDoubleFeedDetectSupported = nullptr;
     D_ISDUPLEXENABLEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsDuplexEnabled = nullptr;
     D_ISDUPLEXSUPPORTEDFUNC                                           DYNDTWAIN_API::DTWAIN_IsDuplexSupported = nullptr;
-    D_ISNOTIFYTRIPLETSENABLEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsNotifyTripletsEnabled = nullptr;
     D_ISEXTIMAGEINFOSUPPORTEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsExtImageInfoSupported = nullptr;
     D_ISFEEDERENABLEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsFeederEnabled = nullptr;
     D_ISFEEDERLOADEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsFeederLoaded = nullptr;
@@ -666,6 +674,7 @@
     D_ISLIGHTSOURCESUPPORTEDFUNC                                      DYNDTWAIN_API::DTWAIN_IsLightSourceSupported = nullptr;
     D_ISMAXBUFFERSSUPPORTEDFUNC                                       DYNDTWAIN_API::DTWAIN_IsMaxBuffersSupported = nullptr;
     D_ISMSGNOTIFYENABLEDFUNC                                          DYNDTWAIN_API::DTWAIN_IsMsgNotifyEnabled = nullptr;
+    D_ISNOTIFYTRIPLETSENABLEDFUNC                                     DYNDTWAIN_API::DTWAIN_IsNotifyTripletsEnabled = nullptr;
     D_ISOCRENGINEACTIVATEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsOCREngineActivated = nullptr;
     D_ISORIENTATIONSUPPORTEDFUNC                                      DYNDTWAIN_API::DTWAIN_IsOrientationSupported = nullptr;
     D_ISOVERSCANSUPPORTEDFUNC                                         DYNDTWAIN_API::DTWAIN_IsOverscanSupported = nullptr;
@@ -689,17 +698,20 @@
     D_ISTHUMBNAILENABLEDFUNC                                          DYNDTWAIN_API::DTWAIN_IsThumbnailEnabled = nullptr;
     D_ISTHUMBNAILSUPPORTEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsThumbnailSupported = nullptr;
     D_ISTIFFSUPPORTEDFUNC                                             DYNDTWAIN_API::DTWAIN_IsTIFFSupported = nullptr;
+    D_ISTWAINAVAILABLEEXAFUNC                                         DYNDTWAIN_API::DTWAIN_IsTwainAvailableExA = nullptr;
+    D_ISTWAINAVAILABLEEXFUNC                                          DYNDTWAIN_API::DTWAIN_IsTwainAvailableEx = nullptr;
+    D_ISTWAINAVAILABLEEXWFUNC                                         DYNDTWAIN_API::DTWAIN_IsTwainAvailableExW = nullptr;
     D_ISTWAINAVAILABLEFUNC                                            DYNDTWAIN_API::DTWAIN_IsTwainAvailable = nullptr;
     D_ISTWAINMSGFUNC                                                  DYNDTWAIN_API::DTWAIN_IsTwainMsg = nullptr;
     D_ISUICONTROLLABLEFUNC                                            DYNDTWAIN_API::DTWAIN_IsUIControllable = nullptr;
     D_ISUIENABLEDFUNC                                                 DYNDTWAIN_API::DTWAIN_IsUIEnabled = nullptr;
     D_ISUIONLYSUPPORTEDFUNC                                           DYNDTWAIN_API::DTWAIN_IsUIOnlySupported = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESAFUNC                                  DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesA = nullptr;
-    D_LOADCUSTOMSTRINGRESOURCESFUNC                                   DYNDTWAIN_API::DTWAIN_LoadCustomStringResources = nullptr;
-    D_LOADCUSTOMSTRINGRESOURCESWFUNC                                  DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesW = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESEXAFUNC                                DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesExA = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESEXFUNC                                 DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesEx = nullptr;
     D_LOADCUSTOMSTRINGRESOURCESEXWFUNC                                DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesExW = nullptr;
+    D_LOADCUSTOMSTRINGRESOURCESFUNC                                   DYNDTWAIN_API::DTWAIN_LoadCustomStringResources = nullptr;
+    D_LOADCUSTOMSTRINGRESOURCESWFUNC                                  DYNDTWAIN_API::DTWAIN_LoadCustomStringResourcesW = nullptr;
     D_LOADLANGUAGERESOURCEFUNC                                        DYNDTWAIN_API::DTWAIN_LoadLanguageResource = nullptr;
     D_LOCKMEMORYEXFUNC                                                DYNDTWAIN_API::DTWAIN_LockMemoryEx = nullptr;
     D_LOCKMEMORYFUNC                                                  DYNDTWAIN_API::DTWAIN_LockMemory = nullptr;
@@ -761,6 +773,7 @@
     D_REWINDPAGEFUNC                                                  DYNDTWAIN_API::DTWAIN_RewindPage = nullptr;
     D_SELECTDEFAULTOCRENGINEFUNC                                      DYNDTWAIN_API::DTWAIN_SelectDefaultOCREngine = nullptr;
     D_SELECTDEFAULTSOURCEFUNC                                         DYNDTWAIN_API::DTWAIN_SelectDefaultSource = nullptr;
+    D_SELECTDEFAULTSOURCEWITHOPENFUNC                                 DYNDTWAIN_API::DTWAIN_SelectDefaultSourceWithOpen = nullptr;
     D_SELECTOCRENGINEBYNAMEAFUNC                                      DYNDTWAIN_API::DTWAIN_SelectOCREngineByNameA = nullptr;
     D_SELECTOCRENGINEBYNAMEFUNC                                       DYNDTWAIN_API::DTWAIN_SelectOCREngineByName = nullptr;
     D_SELECTOCRENGINEBYNAMEWFUNC                                      DYNDTWAIN_API::DTWAIN_SelectOCREngineByNameW = nullptr;
@@ -774,7 +787,11 @@
     D_SELECTSOURCEBYNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_SelectSourceByNameA = nullptr;
     D_SELECTSOURCEBYNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_SelectSourceByName = nullptr;
     D_SELECTSOURCEBYNAMEWFUNC                                         DYNDTWAIN_API::DTWAIN_SelectSourceByNameW = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENAFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenA = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENFUNC                                  DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpen = nullptr;
+    D_SELECTSOURCEBYNAMEWITHOPENWFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenW = nullptr;
     D_SELECTSOURCEFUNC                                                DYNDTWAIN_API::DTWAIN_SelectSource = nullptr;
+    D_SELECTSOURCEWITHOPENFUNC                                        DYNDTWAIN_API::DTWAIN_SelectSourceWithOpen = nullptr;
     D_SETACQUIREAREA2FUNC                                             DYNDTWAIN_API::DTWAIN_SetAcquireArea2 = nullptr;
     D_SETACQUIREAREA2STRINGAFUNC                                      DYNDTWAIN_API::DTWAIN_SetAcquireArea2StringA = nullptr;
     D_SETACQUIREAREA2STRINGFUNC                                       DYNDTWAIN_API::DTWAIN_SetAcquireArea2String = nullptr;
@@ -799,18 +816,19 @@
     D_SETAVAILABLEPRINTERSARRAYFUNC                                   DYNDTWAIN_API::DTWAIN_SetAvailablePrintersArray = nullptr;
     D_SETAVAILABLEPRINTERSFUNC                                        DYNDTWAIN_API::DTWAIN_SetAvailablePrinters = nullptr;
     D_SETBITDEPTHFUNC                                                 DYNDTWAIN_API::DTWAIN_SetBitDepth = nullptr;
-    D_SETBLANKPAGEDETECTIONFUNC                                       DYNDTWAIN_API::DTWAIN_SetBlankPageDetection = nullptr;
-    D_SETBLANKPAGEDETECTIONSTRINGAFUNC                                DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionStringA = nullptr;
-    D_SETBLANKPAGEDETECTIONSTRINGFUNC                                 DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionString = nullptr;
-    D_SETBLANKPAGEDETECTIONSTRINGWFUNC                                DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionStringW = nullptr;
     D_SETBLANKPAGEDETECTIONEX                                         DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionEx = nullptr;
     D_SETBLANKPAGEDETECTIONEXSTRING                                   DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExString = nullptr;
     D_SETBLANKPAGEDETECTIONEXSTRINGA                                  DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExStringA = nullptr;
     D_SETBLANKPAGEDETECTIONEXSTRINGW                                  DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExStringW = nullptr;
+    D_SETBLANKPAGEDETECTIONFUNC                                       DYNDTWAIN_API::DTWAIN_SetBlankPageDetection = nullptr;
+    D_SETBLANKPAGEDETECTIONSTRINGAFUNC                                DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionStringA = nullptr;
+    D_SETBLANKPAGEDETECTIONSTRINGFUNC                                 DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionString = nullptr;
+    D_SETBLANKPAGEDETECTIONSTRINGWFUNC                                DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionStringW = nullptr;
     D_SETBRIGHTNESSFUNC                                               DYNDTWAIN_API::DTWAIN_SetBrightness = nullptr;
     D_SETBRIGHTNESSSTRINGAFUNC                                        DYNDTWAIN_API::DTWAIN_SetBrightnessStringA = nullptr;
     D_SETBRIGHTNESSSTRINGFUNC                                         DYNDTWAIN_API::DTWAIN_SetBrightnessString = nullptr;
     D_SETBRIGHTNESSSTRINGWFUNC                                        DYNDTWAIN_API::DTWAIN_SetBrightnessStringW = nullptr;
+    D_SETBUFFEREDTILEMODEFUNC                                         DYNDTWAIN_API::DTWAIN_SetBufferedTileMode = nullptr;
     D_SETCALLBACK64FUNC                                               DYNDTWAIN_API::DTWAIN_SetCallback64 = nullptr;
     D_SETCALLBACKFUNC                                                 DYNDTWAIN_API::DTWAIN_SetCallback = nullptr;
     D_SETCAMERAAFUNC                                                  DYNDTWAIN_API::DTWAIN_SetCameraA = nullptr;
@@ -1015,18 +1033,6 @@
     D_UNLOCKMEMORYEXFUNC                                              DYNDTWAIN_API::DTWAIN_UnlockMemoryEx = nullptr;
     D_UNLOCKMEMORYFUNC                                                DYNDTWAIN_API::DTWAIN_UnlockMemory = nullptr;
     D_USEMULTIPLETHREADSFUNC                                          DYNDTWAIN_API::DTWAIN_UseMultipleThreads = nullptr;
-    D_SELECTSOURCEBYNAMEWITHOPENFUNC                                  DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpen = nullptr;
-    D_SELECTSOURCEBYNAMEWITHOPENAFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenA = nullptr;
-    D_SELECTSOURCEBYNAMEWITHOPENWFUNC                                 DYNDTWAIN_API::DTWAIN_SelectSourceByNameWithOpenW = nullptr;
-    D_SELECTSOURCEWITHOPENFUNC                                        DYNDTWAIN_API::DTWAIN_SelectSourceWithOpen = nullptr;
-    D_SELECTDEFAULTSOURCEWITHOPENFUNC                                 DYNDTWAIN_API::DTWAIN_SelectDefaultSourceWithOpen = nullptr;
-    D_GETTWAINAVAILABILITYEXFUNC                                      DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityEx = nullptr;
-    D_GETTWAINAVAILABILITYEXAFUNC                                     DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExA = nullptr;
-    D_GETTWAINAVAILABILITYEXWFUNC                                     DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExW = nullptr;
-    D_ISTWAINAVAILABLEEXFUNC                                          DYNDTWAIN_API::DTWAIN_IsTwainAvailableEx = nullptr;
-    D_ISTWAINAVAILABLEEXAFUNC                                         DYNDTWAIN_API::DTWAIN_IsTwainAvailableExA = nullptr;
-    D_ISTWAINAVAILABLEEXWFUNC                                         DYNDTWAIN_API::DTWAIN_IsTwainAvailableExW = nullptr;
-
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1218,6 +1224,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_CloseSource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CloseSourceUI, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ConvertDIBToBitmap, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ConvertToAPIString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ConvertToAPIStringA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ConvertToAPIStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CreateAcquisitionArray, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CreatePDFTextElement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_DestroyAcquisitionArray, hModule);
@@ -1402,6 +1411,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetBrightnessString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetBrightnessStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetBrightnessStringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetBufferedTransferInfo, hModule); 
           LOADFUNCTIONIMPL(DTWAIN_GetCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapArrayType, hModule);
@@ -1682,6 +1692,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsAutoRotateSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsAutoScanEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsBlankPageDetectionOn, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsBufferedTileModeOn, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsBufferedTileModeSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsCapSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsCompressionSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsCustomDSDataSupported, hModule);
@@ -1747,10 +1759,10 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsUIOnlySupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResources, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesExA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesExW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_LoadCustomStringResourcesW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LoadLanguageResource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LockMemory, hModule);
           LOADFUNCTIONIMPL(DTWAIN_LockMemoryEx, hModule);
@@ -1867,6 +1879,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetBrightnessString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetBrightnessStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetBrightnessStringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetBufferedTileMode, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetCamera, hModule);

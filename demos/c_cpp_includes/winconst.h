@@ -34,12 +34,10 @@
 
 #if defined (WIN32) || defined (_WIN64)
     #define DllExport       __declspec( dllexport )
-    //#define HUGEDEF
     #define DLLEXPORTDEF    DllExport
     #define EXPORTDEF
 #else
 #ifdef WINDOWS_16
-    //#define HUGEDEF         huge
     #define DLLEXPORTDEF
     #define EXPORTDEF       _export
     #endif
@@ -56,6 +54,7 @@
 
 #define CALLCONVENTION_DEF
 
+/* Compiler used to build application */
 #ifdef _MSC_VER
     #if _MSC_VER < 1800
         #error("Compiler must be Visual Studio 2013 or greater")
@@ -72,6 +71,7 @@
     #endif
 #endif
 
+/* Error if obsolete compiler used to build DTWAIN Library */
 #ifdef _MSC_VER
     #ifdef BUILDING_DTWAINDLL
         #if _MSC_VER < 1920
@@ -83,7 +83,7 @@
     #endif
 #endif
 
-
+/* Determine if Unicode or ANSI build */
 #ifdef _MSC_VER
     #if defined (UNICODE) || defined (_UNICODE)
         #pragma message ("DTWAIN Library using Unicode is active")
@@ -92,38 +92,23 @@
     #endif
 #endif
 
-#if defined(DTWAIN_STDCALL) || !defined(DTWAIN_LIB)
-    #undef CALLCONVENTION_DEF
-    #define CALLCONVENTION_DEF __stdcall
+/* Determine calling for 32-bit and 64-bit builds convention */
+#undef DLLENTRY_DEF
+#if defined (WIN64) || defined(_WIN64)
+    #define DLLENTRY_DEF
+    #ifdef _MSC_VER
+        #pragma message ("DTWAIN Using 64-bit calling convention")
+    #endif
+#else
+    #define DLLENTRY_DEF __stdcall
     #ifdef _MSC_VER
         #pragma message ("DTWAIN Using __stdcall calling convention")
     #endif
-#else
-    #undef CALLCONVENTION_DEF
-    #define CALLCONVENTION_DEF __cdecl
-    #ifdef _MSC_VER
-        #pragma message ("DTWAIN Using __cdecl calling convention")
-    #endif
 #endif
 
-#ifdef _MSC_VER
-    #ifdef BUILDING_DTWAINDLL
-        #ifdef _DEBUG
-            #pragma message ("DTWAIN Debug Library building...")
-        #else
-            #pragma message ("DTWAIN Release Library building...")
-        #endif
-    #endif
-#endif
-
-#undef CALLCONVENTION_DEF
-#define CALLCONVENTION_DEF __stdcall
-#define DECLSPEC_DEF
-#define CALLBACK_DEF DECLSPEC_DEF __stdcall
+/* Define if we are building the DLL or compiling an application using DTWAIN */
 #if defined(WIN32) || defined(_WIN32) || defined (WIN64) || defined(_WIN64)
     #ifdef DTWAIN_DLL
-        #define DLLENTRY_DEF DECLSPEC_DEF CALLCONVENTION_DEF
-        #define IMGFUNC_DEF  __stdcall
         #ifdef _MSC_VER
             #if defined(WIN64) || defined (_WIN64)
                 #pragma message("Building 64-bit DTWAIN DLL")
@@ -132,8 +117,6 @@
             #endif
         #endif
     #else
-        #define DLLENTRY_DEF __stdcall
-        #define IMGFUNC_DEF __declspec(dllexport) CALLCONVENTION_DEF
         #ifdef _MSC_VER
             #if defined (WIN64) || defined(_WIN64)
                 #pragma message("Including 64-bit DTWAIN DLL definitions")

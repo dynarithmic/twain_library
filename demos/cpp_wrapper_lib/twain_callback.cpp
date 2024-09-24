@@ -22,7 +22,7 @@ OF THIRD PARTY RIGHTS.
 // processing on acquisition startup, UI opening and closing, etc.  See the DTWAIN help manual for a list of
 // the various events.
 
-#ifndef DTWAIN_NOIMPORTLIB
+#ifndef DTWAIN_CPP_NOIMPORTLIB
     #include <dtwain.h>
 #else
     #include <dtwainx2.h>
