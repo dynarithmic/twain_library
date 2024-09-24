@@ -8,14 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dynarithmic;
-
+using System.Runtime.InteropServices;
 using DTWAIN_SOURCE = System.IntPtr;
 using DTWAIN_ARRAY = System.IntPtr;
 
+
 namespace TWAINDemo
 {
+
     public partial class SourcePropsDlg : Form
     {
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GlobalLock(IntPtr hMem);
+
+        [DllImport("kernel32.dll")]
+        static extern bool GlobalUnlock(IntPtr hMem);
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GlobalFree(IntPtr hMem);
         public SourcePropsDlg()
         {
             InitializeComponent();
@@ -32,8 +42,9 @@ namespace TWAINDemo
         private void SourcePropsDlg_Load(object sender, EventArgs e)
         {
             StringBuilder szInfo = new StringBuilder(256);
-            TwainAPI.DTWAIN_GetSourceProductName(m_Source, szInfo, 255);
-            this.edProductName.Text = szInfo.ToString();
+            StringBuilder szNameInfo = new StringBuilder(256);
+            TwainAPI.DTWAIN_GetSourceProductName(m_Source, szNameInfo, 255);
+            this.edProductName.Text = szNameInfo.ToString();
             TwainAPI.DTWAIN_GetSourceProductFamily(m_Source, szInfo, 255);
             this.edFamilyName.Text = szInfo.ToString();
             TwainAPI.DTWAIN_GetSourceManufacturer(m_Source, szInfo, 255);
@@ -72,6 +83,24 @@ namespace TWAINDemo
             byte [] szCustomData = new byte[customDSLength];
             TwainAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
             this.txtDSData.Text = enc8.GetString(szCustomData, 0, customDSLength);
+
+            string sName = szNameInfo.ToString();
+            int nBytes = TwainAPI.DTWAIN_GetSourceDetails(sName, IntPtr.Zero, 0, 2, 1);
+            szInfo = new StringBuilder(nBytes);
+            TwainAPI.DTWAIN_GetSourceDetails(sName, szInfo, nBytes, 2, 1);
+
+            // Need to convert the JSON new lines to /r/n for edit controls
+            IntPtr handle = TwainAPI.DTWAIN_ConvertToAPIString(szInfo.ToString());
+
+            // We get a handle back, so need to convert it to string by using
+            // Windows API
+            IntPtr newData = GlobalLock(handle);
+            string sNewData = Marshal.PtrToStringAuto(newData);
+            this.txtJSON.Text = sNewData;
+
+            // unlock and free handle
+            GlobalUnlock(handle);
+            GlobalFree(handle);
         }
     }
 }

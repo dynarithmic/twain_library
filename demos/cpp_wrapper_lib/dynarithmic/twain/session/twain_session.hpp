@@ -259,13 +259,13 @@ namespace dynarithmic
             std::unordered_map<std::string, std::string> m_source_detail_map;
             std::unordered_map<std::string, source_status> m_source_status_map;
             std::unordered_map<std::string, DTWAIN_SOURCE> m_source_name_to_handle;
-        #ifdef DTWAIN_NOIMPORTLIB
+        #ifdef DTWAIN_CPP_NOIMPORTLIB
             HMODULE m_DynamicHandle = 0;
             bool    m_bCacheHandle = true;
         #endif  
         public:
 
-        #ifdef DTWAIN_NOIMPORTLIB
+        #ifdef DTWAIN_CPP_NOIMPORTLIB
             twain_session& cache_dll_handle(bool b = true) { m_bCacheHandle = b; return *this; }
             bool is_dllhandle_cached() const { return m_bCacheHandle; }
             void set_dllhandle(HMODULE h) 

@@ -1,7 +1,15 @@
 ﻿Imports System.Windows.Forms
+Imports System.Runtime.InteropServices
+
 Imports System.Text
 
+
 Public Class SourcePropertiesDlg
+
+    Declare Auto Function GlobalLock Lib "kernel32.dll" (ByVal handle As IntPtr) As IntPtr
+    Declare Auto Function GlobalUnlock Lib "kernel32.dll" (ByVal handle As IntPtr) As Integer
+    Declare Auto Function GlobalFree Lib "kernel32.dll" (ByVal handle As IntPtr) As IntPtr
+
     Private m_Source As System.IntPtr
 
     Public Sub New(ByVal item As System.IntPtr)
@@ -20,8 +28,9 @@ Public Class SourcePropertiesDlg
 
     Private Sub SourcePropertiesDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim szInfo As New System.Text.StringBuilder(256)
-        DTWAINAPI.DTWAIN_GetSourceProductName(m_Source, szInfo, 255)
-        Me.edProductName.Text = szInfo.ToString()
+        Dim szInfoName As New System.Text.StringBuilder(256)
+        DTWAINAPI.DTWAIN_GetSourceProductName(m_Source, szInfoName, 255)
+        Me.edProductName.Text = szInfoName.ToString()
         DTWAINAPI.DTWAIN_GetSourceProductFamily(m_Source, szInfo, 255)
         Me.edFamilyName.Text = szInfo.ToString()
         DTWAINAPI.DTWAIN_GetSourceManufacturer(m_Source, szInfo, 255)
@@ -56,6 +65,7 @@ Public Class SourcePropertiesDlg
         Me.edExtendedCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
 
         Dim customDSLength As Integer
+        Dim jsonLength As Integer
         Dim enc8 As Encoding = Encoding.UTF8
         DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
         Dim szCustomData(customDSLength) As Byte
@@ -63,5 +73,23 @@ Public Class SourcePropertiesDlg
         Dim contents As String
         contents = enc8.GetString(szCustomData, 0, customDSLength)
         Me.txtDSData.Text = contents
+        Dim sName As String
+        sName = szInfoName.ToString()
+        jsonLength = DTWAINAPI.DTWAIN_GetSourceDetails(sName, IntPtr.Zero, 0, 2, 1)
+        szInfo = New StringBuilder(jsonLength)
+        DTWAINAPI.DTWAIN_GetSourceDetails(sName, szInfo, jsonLength, 2, 1)
+
+        ' Convert string to one with /r/n, since these are the types of strings for edit controls
+        Dim Handle As IntPtr = DTWAINAPI.DTWAIN_ConvertToAPIString(szInfo.ToString())
+
+        ' Need to use WinAPI to lock the handle and get the string
+        Dim newData As IntPtr = GlobalLock(Handle)
+        Dim sNewData As String = Marshal.PtrToStringAuto(newData)
+        Me.txtJSON.Text = sNewData
+
+        ' Free the handle
+        GlobalUnlock(Handle)
+        GlobalFree(Handle)
+
     End Sub
 End Class

@@ -52,7 +52,7 @@ namespace dynarithmic
 
         bool twain_session::start(bool bCleanStart)
         {
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             if (bCleanStart && !get_dllhandle())
             {
 #ifndef DTWAIN_USELOADEDLIB
@@ -224,7 +224,7 @@ namespace dynarithmic
         twain_session::~twain_session()
         {
             try {
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
                 cache_dll_handle(false);
 #endif
                 stop();
@@ -269,7 +269,7 @@ namespace dynarithmic
         bool twain_session::stop()
         {
             using namespace std::chrono_literals;
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             struct HandleCloser
             {
                 HMODULE h_;
@@ -303,7 +303,7 @@ namespace dynarithmic
                     return true;
                 }
             }
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             hCloser.detach();
 #endif
             return false;

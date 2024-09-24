@@ -876,6 +876,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
         case WM_INITDIALOG:
         {
             TCHAR szBuf[256];
+            char szBufName[256];
             LONG nMajor, nMinor;
             DTWAIN_ARRAY CapArray = 0;
             LONG nCapCount;
@@ -891,9 +892,10 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HWND hWndNumCustomCaps =  GetDlgItem(hDlg,  IDC_edCustomCaps);
             HWND hWndNumExtendedCaps =  GetDlgItem(hDlg,  IDC_edExtendedCaps);
             HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
+            HWND hWndJSONDetails = GetDlgItem(hDlg, IDC_edJSONDetails);
 
-            DTWAIN_GetSourceProductName(g_CurrentSource, szBuf, 255);
-            SetWindowText(hWndName, szBuf);
+            DTWAIN_GetSourceProductNameA(g_CurrentSource, szBufName, 255);
+            SetWindowTextA(hWndName, szBufName);
 
             DTWAIN_GetSourceProductFamily(g_CurrentSource, szBuf, 255);
             SetWindowText(hWndFamily, szBuf);
@@ -940,7 +942,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 szData = malloc((actualSize + 1) * sizeof(BYTE));
                 if (szData)
                 {
-                    // Fill the memory with 0
+                    /* Fill the memory with 0 */
                     memset(szData, 0, actualSize + 1);
 
                 /* Second call actually gets the data */
@@ -950,6 +952,31 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 }
             }
 
+            /* Get JSON details of the Source */
+            {
+                LONG numChars = DTWAIN_GetSourceDetailsA(szBufName, NULL, 0, 2, TRUE);
+                if (numChars > 0)
+                {
+                    szData = malloc(numChars + 1);
+                    if (szData)
+                    {
+                        /* Fill the memory with 0 */
+                        memset(szData, 0, numChars + 1);
+                        DTWAIN_GetSourceDetailsA(szBufName, szData, numChars, 2, FALSE);
+
+                        /* Edit controls need \r\n and not \n new lines. */
+                        HANDLE h = DTWAIN_ConvertToAPIStringA(szData);
+                        if (h)
+                        {
+                            LPCSTR pData = GlobalLock(h);
+                            SetWindowTextA(hWndJSONDetails, pData);
+                            GlobalUnlock(h);
+                            GlobalFree(h);
+                        }
+                        free(szData);
+                    }
+                }
+            }
             DTWAIN_ArrayDestroy( CapArray );
             return TRUE;
         }

@@ -24,7 +24,7 @@ OF THIRD PARTY RIGHTS.
 #include <ostream>
 #include <vector>
 #include <memory>
-#ifndef DTWAIN_NOIMPORTLIB 
+#ifndef DTWAIN_CPP_NOIMPORTLIB 
     #include <dtwain.h>
 #else
     #include <dtwainx2.h>
