@@ -72,6 +72,7 @@
 1056 Area array è troppo piccolo. La matrice deve contenere almeno 4 elementi.
 1057 Errore di creazione del file di registro.
 1058 Source does not support TWAIN file system.
+1059 Modalità tile non supportata per questa sorgente TWAIN.
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
@@ -220,60 +221,6 @@
 3019 Il file di immagine temporaneo è
 3020 Errore durante la creazione del file immagine temporaneo
 3021 File immagine creato con successo
-5000 Courier
-5001 Courier-Bold
-5002 Courier-BoldOblique
-5003 Courier-Oblique
-5004 Helvetica
-5005 Helvetica-Bold
-5006 Helvetica-BoldOblique
-5007 Helvetica-Oblique
-5008 Times-Bold
-5009 Times-BoldItalic
-5010 Times-Roman
-5011 Times-Italic
-5012 Symbol
-5013 ZapfDingbats
-9500 TWCC_SUCCESS
-9501 TWCC_BUMMER
-9502 TWCC_LOWMEMORY
-9503 TWCC_NODS
-9504 TWCC_MAXCONNECTIONS
-9505 TWCC_OPERATIONERROR
-9506 TWCC_BADCAP
-9509 TWCC_BADPROTOCOL
-9510 TWCC_BADVALUE
-9511 TWCC_SEQERROR
-9512 TWCC_BADDEST
-9513 TWCC_CAPUNSUPPORTED
-9514 TWCC_CAPBADOPERATION
-9515 TWCC_CAPSEQERROR
-9516 TWCC_DENIED
-9517 TWCC_FILEEXISTS
-9518 TWCC_FILENOTFOUND
-9519 TWCC_NOTEMPTY
-9520 TWCC_PAPERJAM
-9521 TWCC_PAPERDOUBLEFEED
-9522 TWCC_FILEWRITEERROR
-9523 TWCC_CHECKDEVICEONLINE
-9524 TWCC_INTERLOCK
-9525 TWCC_DAMAGEDCORNER
-9526 TWCC_FOCUSERROR
-9527 TWCC_DOCTOOLIGHT
-9528 TWCC_DOCTOODARK
-9529 TWCC_NOMEDIA
-9600 TWRC_SUCCESS
-9601 TWRC_FAILURE
-9602 TWRC_CHECKSTATUS
-9603 TWRC_CANCEL
-9604 TWRC_DSEVENT
-9605 TWRC_NOTDSEVENT
-9606 TWRC_XFERDONE
-9607 TWRC_ENDOFLIST
-9608 TWRC_INFONOTSUPPORTED
-9609 TWRC_DATANOTAVAILABLE
-9610 TWRC_BUSY
-9611 TWRC_SCANNERLOCKED
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Messaggio dell'utente]
