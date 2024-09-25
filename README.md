@@ -41,15 +41,15 @@ However, if for some reason your system does not have the proper runtime compone
 
 * Please note -- since DTWAIN prior to version 5.0 used source code in some modules that could not be released to the general public due to licensing issues, we had to revamp these portions of the codebase so as to allow DTWAIN to become an open source library.  We have made all strives to make sure that these changes to DTWAIN will not cause issues, but as most of you know, bugs can exist.  If bugs are found, we will be addressing them in a short manner.
 
+----------
+### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
+There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
 
 ----------
-
-### How do I get set up using DTWAIN? ###
-
-This section deals with building a C or C++ based DTWAIN application.  Later on in this document will be a discussion on using DTWAIN for [other languages and environments](#otherlanguages).  
-
 ----
 
+### How do I get set up using DTWAIN? ###
+----
 **<u>Building the DTWAIN application</u>**
 
 <a name="dtwaindllusage"></a>
@@ -68,38 +68,31 @@ The **release_libraries.zip** contains all of the DLL's required to start using 
 
 In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
 
-----
-###### For C and C++ programmers:
+A breakdown of the files contained in **release_libraries.zip** is as follows:
+
+    dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
+    dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
+    dtwain32.lib   --  32-bit ANSI (MBCS) Visual C++ import library
+    dtwain32u.lib  --  32-bit Unicode Visual C++ import library
+    dtwain32.pdb   --  32-bit PDB (Microsoft debug) files for dtwain32.dll
+    dtwain32u.pdb  --  32-bit PDB (Microsoft debug) files for dtwain32u.dll
+
+    dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
+    dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
+    dtwain64.lib   --  64-bit ANSI (MBCS) Visual C++ import library
+    dtwain64u.lib  --  64-bit Unicode Visual C++ import library
+    dtwain64.pdb   --  64-bit PDB (Microsoft debug) files for dtwain64.dll
+    dtwain64u.pdb  --  64-bit PDB (Microsoft debug) files for dtwain64u.dll
+
+
+###### Information for C and C++ programmers:
 
 If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
 If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
 
-
-----
-
-A breakdown of the files contained in **release_libraries.zip** is as follows:
-
-    dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
-    dtwain32.lib   --  32-bit ANSI (MBCS) import library
-    dtwain32.pdb   --  32-bit PDB files for dtwain32.dll
-    dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
-    dtwain32u.lib  --  32-bit Unicode import library
-    dtwain32u.pdb  --  32-bit PDB files for dtwain32u.dll
-
-    dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
-    dtwain64.lib   --  64-bit ANSI (MBCS) import library
-    dtwain64.pdb   --  64-bit PDB files for dtwain64.dll
-    dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
-    dtwain64u.lib  --  64-bit Unicode import library
-    dtwain64u.pdb  --  64-bit PDB files for dtwain64u.dll
-
-###### For C and C++ programmers:
-
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
 Basically, you just need to build your application and link it to one of the import libraries that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors.
-
-**If you are not using Visual C++ but another brand of C or C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers).**
 
 ----
 <a name="runningapplication"></a>
@@ -113,13 +106,15 @@ In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_
 
 * Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.
 
-If **twaininfo.txt** is not found, you will receive the following error when running your application;
+If **twaininfo.txt** is not found, corrupted, incorrect version, or some other issue that prevents the file from being loaded, you will receive the following message box displayed, with one or more reasons for the error listed:
 
 ![following error when running your application](/images/resource_error.jpg)
 
+The error message will differ depending on the reason for the error.
+
 Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  
 
-Note: Make sure that you use the latest version of **twaininfo.txt**.  A check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+Make sure that you use the latest version of **twaininfo.txt**.  A check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
 
 If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
 
@@ -133,19 +128,7 @@ If you want to use a different resource file or even add your own language resou
 
 More detailed instructions on adding your own resource file can be found <a href="https://github.com/dynarithmic/twain_library/tree/master/additional_language_resources" target="_blank">here</a>.
 
-**Important Note**:
-
-There has been an ongoing issue using **WIA** (Windows Image Acquisition) drivers and DTWAIN and TWAIN, especially in console-based applications.  Therefore, if the manufacturer for your device has both a TWAIN driver and WIA driver, choose the TWAIN driver, and only choose the WIA/TWAIN driver as a secondary choice if the TWAIN driver is not available (you will know the driver is WIA/TWAIN if the name in the "Select Source" dialog box starts with "**WIA-**").  
-
-Measures have been made to allow WIA drivers to operate correctly within DTWAIN (version 5.3.0.3 and higher of DTWAIN addresses these issues with WIA as best as possible).  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN.
-
 ----------
-### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
-There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
-
-----------
-
-  
 ### Ok, how about a code sample?
 
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
@@ -245,7 +228,7 @@ There are many DTWAIN functions, and you might be fearful of having to write cod
 
 In addition, one of the files in the set of bindings is the C/C++ source file **dtwimpl.cpp** (or **dtwimpl.c** if you are using plain C) -- this file will need to be added to your project, as it contains the needed infrastructure for the binding to work properly.  Failure to add this source file will result in linker errors when building your application.
 
-Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" DTWAIN usage of import libraries.
+Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" sDTWAIN usage of import libraries.
 
     #ifdef USING_LOADLIBRARY
        /* Include this header */
