@@ -16,8 +16,7 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  
-
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Java and numerous other languages.
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
 
@@ -110,34 +109,25 @@ After building your application, for your application to run successfully, you m
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text resource files</a> must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
+In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a> must also be available (by default, it should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, it can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-* Make sure that you are running the latest version of the text resources, as changes to these files can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get these resources whenever you use a newer release of the DTWAIN DLL's.
+* Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.
 
-The text resources files are as follows:
-
-    twaininfo.txt -- General TWAIN information -- this is required.
-	twainresourcestrings_english.txt  	English resources -- this is required.
-
-The files above are required, since they contain all the information concerning the naming of the TWAIN capabilities, triplet information, etc.  You do not need to know what these various aspects of TWAIN are -- just make sure these files reside in the same directory as the dtwain*.dll when your application is executed.
-
-If these files are not found, you will receive the following error when running your application;
+If **twaininfo.txt** is not found, you will receive the following error when running your application;
 
 ![following error when running your application](/images/resource_error.jpg)
 
-Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  If **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, a subsequent call to **DTWAIN_GetLastError** will return **-1051**, indicating that the DTWAIN resources were not loaded.
+Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  
 
-Note: Make sure that you use the latest version of the text resources.  A check for the resource version is done by DTWAIN when **DTWAIN_SysInitialize** is called.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+Note: Make sure that you use the latest version of **twaininfo.txt**.  A check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
 
-In addition, there are optional string resource files available.  Here are a list of those files:
-	
-	twainresourcestrings_dutch.txt 	 	    Dutch resources
-	twainresourcestrings_french.txt  	    French resources 
-	twainresourcestrings_german.txt  	    German resources
-	twainresourcestrings_italian.txt 	    Italian resources
-	twainresourcestrings_spanish.txt 	    Spanish resources
-	twainresourcestrings_portuguese_br.txt      Portugeuse-Brazilian resources
+If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
 
+----
+
+In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  
+
+These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.
 
 If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.  
 
@@ -217,7 +207,7 @@ or if it is the second example:
 
 ### What about setting device capabilities such as resolution, contrast, brightness, paper size, etc.?
 
-Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as *DTWAIN_EnumCapabilities*, *DTWAIN_GetCapValues* and *DTWAIN_SetCapValues*, or one of the functions that wrap the setting of a capability such as *DTWAIN_SetResolution*, *DTWAIN_SetBrightness*, etc.
+Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as **DTWAIN_EnumCapabilities**, **DTWAIN_GetCapValues** and **DTWAIN_SetCapValues**, or one of the functions that wrap the setting of a capability such as **DTWAIN_SetResolution**, **DTWAIN_SetBrightness**, etc.
 
     #include "dtwain.h"
     int main()
@@ -233,7 +223,7 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
         DTWAIN_SysDestroy();         
     }         
  
-Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling *DTWAIN_GetLastError*.
+Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling **DTWAIN_GetLastError**.
 
 In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.      
 
@@ -399,7 +389,7 @@ if __name__ == '__main__':
     test_dtwain()
 ```
 ----
-Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
+Other languages can be supported, as long as the language is capable of calling exported DLL functions.  The ones listed above just have proper interfaces to the exported functions already set up.
 
 A full C# demo can be found <a href="https://github.com/dynarithmic/twain_library-csharp_demo" target="_blank">here</a>.
 
@@ -416,7 +406,7 @@ Since TWAIN is an event-driven system, it is advantageous for whatever language 
 
 For example, please see the DTWDEMO.exe example program when acquiring to a PDF file, as a page number is added to the page for each page that is acquired by the device.  This is only possible (using DTWAIN) by using callbacks.
   
-The *DTWAIN_SetCallback* and *DTWAIN_SetCallback64* sets up your callback function to intercept these events and act accordingly.  
+The **DTWAIN_SetCallback** and **DTWAIN_SetCallback64** sets up your callback function to intercept these events and act accordingly.  
 
 Here is an example C++ program that puts a page number on the acquired image files, saved as a PDF document.  
 
@@ -474,7 +464,7 @@ Here is an example C++ program that puts a page number on the acquired image fil
     }         
 
 
-Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the DTWAIN_SetCallback or DTWAIN_SetCallback64 to work for you, then you're not going to have any issues).
+Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the **DTWAIN_SetCallback** or **DTWAIN_SetCallback64** to work for you, then you're not going to have any issues).
 
 ----------
 
@@ -537,7 +527,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 
 ### Final note for developers
 
-We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came acrosss a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
+We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came across a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
 
 Given this, the secondary goal of making DTWAIN open source is for you to contribute your fixes to the current DTWAIN code if you come across a device that doesn't work properly with DTWAIN.  There are literally thousands of TWAIN enabled devices out there, old and new, some manufacturers may have discontinued the device model, or maybe even the device manufacturer has gone out-of-business.  
 
