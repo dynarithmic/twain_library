@@ -537,7 +537,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 
 ### Final note for developers
 
-We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came acrosss a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
+We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came across a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
 
 Given this, the secondary goal of making DTWAIN open source is for you to contribute your fixes to the current DTWAIN code if you come across a device that doesn't work properly with DTWAIN.  There are literally thousands of TWAIN enabled devices out there, old and new, some manufacturers may have discontinued the device model, or maybe even the device manufacturer has gone out-of-business.  
 
