@@ -102,11 +102,9 @@ After building your application, for your application to run successfully, you m
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a> must also be available (by default, it should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, it can reside in the directory specified by **DTWAIN_SetResourcePath**).  
+In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a>, the <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain32.ini" target="_blank">dtwain32.ini</a> for 32-bit applications, and <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain64.ini" target="_blank">dtwain64.ini</a> for 64-bit applications </a> must also be available (by default, these files should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, these files can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-* Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.
-
-If **twaininfo.txt** is not found, corrupted, incorrect version, or some other issue that prevents the file from being loaded, you will receive the following message box displayed, with one or more reasons for the error listed:
+If **twaininfo.txt** or the INI files are not found, corrupted, incorrect version, or some other issue that prevents these files from being loaded, you will receive the following message box displayed, with one or more reasons for the error listed:
 
 ![following error when running your application](/images/resource_error.jpg)
 
@@ -114,7 +112,9 @@ The error message will differ depending on the reason for the error.
 
 Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  
 
-Make sure that you use the latest version of **twaininfo.txt**.  A check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+* Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.  
+
+An internal check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
 
 If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
 
