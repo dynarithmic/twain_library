@@ -852,8 +852,12 @@
 #define DTWAIN_ERR_AREA_ARRAY_TOO_SMALL  (-1056)
 #define DTWAIN_ERR_LOG_CREATE_ERROR  (-1057)
 #define DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED (-1058)
-
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_AREA_ARRAY_TOO_SMALL
+#define DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED (-1058)
+#define DTWAIN_ERR_TILEMODE_NOTSET (-1059)
+#define DTWAIN_ERR_INI32_NOT_FOUND (-1060)
+#define DTWAIN_ERR_INI64_NOT_FOUND (-1061)
+#define DTWAIN_ERR_CRC_CHECK (-1062)
+#define DTWAIN_ERR_RESOURCES_BAD_VERSION (-1063)
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1229,6 +1233,12 @@ DTWAIN DLL are not displayed */
 
 /* DTWAIN Log to window (not yet implemented) */
 #define DTWAIN_LOG_USEWINDOW       0x02000000
+
+/* Create directory if logging to file */
+#define DTWAIN_LOG_CREATEDIRECTORY 0x04000000
+
+/* Use DTWAIN's console handler if console logging is selected */
+#define DTWAIN_LOG_CONSOLEWITHHANDLER (0x08000000 | DTWAIN_LOG_CONSOLE)
 
 /* log everything, including displaying exceptions */
 #define DTWAIN_LOG_ALL_NOCALLBACK   (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_USECALLBACK))
