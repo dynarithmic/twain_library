@@ -692,6 +692,7 @@
     D_ISSESSIONENABLEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsSessionEnabled = nullptr;
     D_ISSKIPIMAGEINFOERRORFUNC                                        DYNDTWAIN_API::DTWAIN_IsSkipImageInfoError = nullptr;
     D_ISSOURCEACQUIRINGFUNC                                           DYNDTWAIN_API::DTWAIN_IsSourceAcquiring = nullptr;
+    D_ISSOURCEINUIONLYMODEFUNC                                        DYNDTWAIN_API::DTWAIN_IsSourceInUIOnlyMode = nullptr;
     D_ISSOURCEOPENFUNC                                                DYNDTWAIN_API::DTWAIN_IsSourceOpen = nullptr;
     D_ISSOURCESELECTEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsSourceSelected = nullptr;
     D_ISSOURCEVALIDFUNC                                               DYNDTWAIN_API::DTWAIN_IsSourceValid = nullptr;
@@ -1743,6 +1744,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsSessionEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSkipImageInfoError, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceAcquiring, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsSourceInUIOnlyMode, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceOpen, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceSelected, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsSourceValid, hModule);

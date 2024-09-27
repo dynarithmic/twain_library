@@ -19,7 +19,7 @@ DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRING
 OF THIRD PARTY RIGHTS.
 */
 #ifndef DTWAIN_CPP_NOIMPORTLIB 
-#include <dtwain.h>
+    #include <dtwain.h>
 #else
     #include <dtwainx2.h>
     #include <dtwpdft.h>

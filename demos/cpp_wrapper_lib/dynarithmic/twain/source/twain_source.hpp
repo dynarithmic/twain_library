@@ -27,8 +27,11 @@ OF THIRD PARTY RIGHTS.
 #include <string>
 #include <vector>
 #include <memory>
-
-#include <dtwain.h>
+#ifdef DTWAIN_CPP_NOIMPORTLIB
+    #include <dtwainx2.h>
+#else
+    #include <dtwain.h>
+#endif
 #include <dynarithmic/twain/identity/twain_identity.hpp>
 #include <dynarithmic/twain/types/twain_array.hpp>
 #include <dynarithmic/twain/twain_values.hpp>
@@ -101,6 +104,7 @@ namespace dynarithmic
                 tribool::tribool m_bUIOnlySupported;
                 bool m_bWeakAttach;
                 std::shared_ptr<twain_source_pimpl> m_pTwainSourceImpl;
+                std::vector<xfermech_value::value_type> m_vAllXferMechs;
 
                 void create_interfaces();
                 void get_source_info_internal();
@@ -158,6 +162,11 @@ namespace dynarithmic
                 const twain_session* get_session() const;
                 std::string& get_details(details_info info = {true, 2});
                 bool set_tiff_compress_type(tiffcompress_value::value_type compress_type);
+                std::vector<xfermech_value::value_type>& get_xfermechs() { return m_vAllXferMechs; }
+                bool is_xfermech_supported(xfermech_value::value_type xfermech) const
+                {
+                    return std::find(m_vAllXferMechs.begin(), m_vAllXferMechs.end(), xfermech) != m_vAllXferMechs.end();
+                }
         };
 
         inline std::ostream& operator <<(std::ostream& os, const image_information& ii)

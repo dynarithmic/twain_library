@@ -155,7 +155,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     if ( !DTWAIN_SysInitialize( )) 
         return 0;
 
-    
     DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
 
     /* Allow DTWAIN messages to be sent directly to our Window proc */
@@ -413,8 +412,7 @@ void SetCaptionToSourceName()
         SetWindowText(g_hWnd, szTitle);
 }
 
-
-void AcquireNative()
+void GenericAcquire(LONG nWhichOne)
 {
     LONG ErrStatus;
     g_AcquireArray = DTWAIN_CreateAcquisitionArray();
@@ -430,15 +428,32 @@ void AcquireNative()
     DTWAIN_SetBlankPageDetection(g_CurrentSource, 98.0, DTWAIN_BP_AUTODISCARD_ANY, 
                                  GetToggleMenuState(IDM_DISCARD_BLANKS));
 
-    if ( !DTWAIN_AcquireNativeEx(
-                    g_CurrentSource,
-                    DTWAIN_PT_DEFAULT, /* Use default */
-                    DTWAIN_ACQUIREALL, /* Get all pages */
-                    GetToggleMenuState(IDM_USE_SOURCE_UI),
-                    FALSE,  /* Close Source when UI is closed */
-                    g_AcquireArray,
-                    &ErrStatus /* Error Status */
-    ))
+    BOOL bRet = FALSE;
+    if (nWhichOne == 0)
+    {
+        bRet = DTWAIN_AcquireNativeEx(
+            g_CurrentSource,
+            DTWAIN_PT_DEFAULT, /* Use default */
+            DTWAIN_ACQUIREALL, /* Get all pages */
+            GetToggleMenuState(IDM_USE_SOURCE_UI),
+            FALSE,  /* Close Source when UI is closed */
+            g_AcquireArray,
+            &ErrStatus /* Error Status */
+        );
+    }
+    else
+    {
+        bRet = DTWAIN_AcquireBufferedEx(
+            g_CurrentSource,
+            DTWAIN_PT_DEFAULT, /* Use default */
+            DTWAIN_ACQUIREALL, /* Get all pages */
+            GetToggleMenuState(IDM_USE_SOURCE_UI),
+            TRUE,  /* Close Source when UI is closed */
+            g_AcquireArray,
+            &ErrStatus /* Error Status */
+        );
+    }
+    if (!bRet)
     {
         MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
         return;
@@ -451,46 +466,18 @@ void AcquireNative()
         DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
         return;
     }
-
     RetrieveAndDisplayDibs(g_hInstance, g_AcquireArray, IDD_dlgDib, g_hWnd);
     DTWAIN_DestroyAcquisitionArray( g_AcquireArray, FALSE );
 }
 
+void AcquireNative()
+{
+    GenericAcquire(0);
+}
+
 void AcquireBuffered()
 {
-    LONG ErrStatus;
-    /* Check if feeder or duplex is supported */
-    if ( DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
-        DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
-
-    /* Disable main window */
-    DTWAIN_DisableAppWindow(g_hWnd, TRUE);
-
-    g_AcquireArray = DTWAIN_CreateAcquisitionArray();
-
-    if ( !DTWAIN_AcquireBufferedEx(
-                    g_CurrentSource,
-                    DTWAIN_PT_DEFAULT, /* Use default */
-                    DTWAIN_ACQUIREALL, /* Get all pages */
-                    GetToggleMenuState(IDM_USE_SOURCE_UI),
-                    TRUE,  /* Close Source when UI is closed */
-                    g_AcquireArray,
-                    &ErrStatus /* Error Status */
-                    ))
-    {
-        MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
-        DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
-        return;
-    }
-    WaitLoop();
-    if ( DTWAIN_ArrayGetCount(g_AcquireArray) == 0 )
-    {
-        MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
-        return;
-    }
-
-    RetrieveAndDisplayDibs(g_hInstance, g_AcquireArray, IDD_dlgDib, g_hWnd);
-    DTWAIN_DestroyAcquisitionArray( g_AcquireArray, FALSE );
+    GenericAcquire(1);
 }
 
 
@@ -937,7 +924,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HANDLE h = DTWAIN_GetCustomDSData(g_CurrentSource, NULL, 0, &actualSize, DTWAINGCD_COPYDATA);
             if ( h )
             {
-                /* Allocate memory for the data.  We add an extra byte,
+                /* Allocate memory for the data.  We add an extra byte, 
                    since the data is not guaranteed to be null-terminated */
                 szData = malloc((actualSize + 1) * sizeof(BYTE));
                 if (szData)
