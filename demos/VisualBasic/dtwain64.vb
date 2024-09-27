@@ -751,8 +751,11 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_LOG_CREATE_ERROR As Integer = (-1057)
     Public Const DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED As Integer = (-1058)
     Public Const DTWAIN_ERR_TILEMODE_NOTSET As Integer = (-1059)
+    Public Const DTWAIN_ERR_INI32_NOT_FOUND As Integer = (-1060)
+    Public Const DTWAIN_ERR_INI64_NOT_FOUND As Integer = (-1061)
+    Public Const DTWAIN_ERR_CRC_CHECK As Integer = (-1062)
+    Public Const DTWAIN_ERR_RESOURCES_BAD_VERSION As Integer = (-1063)
 
-    Public Const DTWAIN_ERR_LAST_1 As Integer = DTWAIN_ERR_LOG_CREATE_ERROR
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -2699,4 +2702,5 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_ConvertToAPIStringA Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPStr)> sString As String) As System.IntPtr
     Declare Unicode Function DTWAIN_ConvertToAPIStringW Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPWStr)> sString As String) As System.IntPtr
     Declare Auto Function DTWAIN_ConvertToAPIString Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPTStr)> sString As String) As System.IntPtr
-   End Class
+    Declare Auto Function DTWAIN_IsSourceInUIOnlyMode Lib "dtwain64.dll" (ByVal Source As System.IntPtr) As Integer
+    End Class

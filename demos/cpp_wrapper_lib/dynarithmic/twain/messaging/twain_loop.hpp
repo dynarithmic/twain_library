@@ -36,6 +36,22 @@ namespace dynarithmic
             bool enter_dispatch(twain_source&) { return true; }
         };
 
+        template <typename looper>
+        class twain_loop
+        {
+        public:
+            static bool is_source_open(twain_source& ts)
+            {
+                return ts.is_uienabled();
+            }
+
+        public:
+            void perform_loop(twain_source& ts)
+            {
+                looper(ts).perform_loop(ts);
+            }
+        };
+
         // This can be used for TWAIN 1.x and 2.x Data Source Managers
         template <typename dispatcher = twain_default_enter_dispatch>
         struct twain_looper_win32
@@ -60,7 +76,7 @@ namespace dynarithmic
         };
 
         // This version should only be used for version 2.x and higher TWAIN Data Source Manager
-        template <typename dispatcher = twain_default_enter_dispatch>
+        template <typename dispatcher=twain_default_enter_dispatch>
         struct twain_looper_nowin32
         {
             dispatcher m_dispatcher;
@@ -73,21 +89,6 @@ namespace dynarithmic
             }
         };
 
-        template <typename looper>
-        class twain_loop
-        {
-            public:
-                static bool is_source_open(twain_source& ts)
-                {
-                    return ts.is_uienabled();
-                }
-
-            public:
-                void perform_loop(twain_source& ts) 
-                {
-                    looper(ts).perform_loop(ts);
-                }
-        };
         
         typedef twain_loop<twain_looper_win32<>> twain_loop_windows;
         typedef twain_loop<twain_looper_nowin32<>> twain_loop_ver2;

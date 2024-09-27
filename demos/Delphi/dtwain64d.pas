@@ -844,8 +844,12 @@ const
   DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
   DTWAIN_ERR_LOG_CREATE_ERROR  = (-1057);
   DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED = (-1058);
-  DTWAIN_ERR_TILEMODE_NOTSET = (-1059)
-  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED;
+  DTWAIN_ERR_TILEMODE_NOTSET = (-1059);
+  DTWAIN_ERR_INI32_NOT_FOUND = (-1060);
+  DTWAIN_ERR_INI64_NOT_FOUND = (-1061);
+  DTWAIN_ERR_CRC_CHECK = (-1062);
+  DTWAIN_ERR_RESOURCES_BAD_VERSION = (-1063);
+
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -2721,5 +2725,7 @@ function DTWAIN_IsBufferedTileModeSupported(Source:DTWAIN_SOURCE):LONG;stdcall; 
 function DTWAIN_ConvertToAPIStringA Lib(sString:LPCSTR):DTWAIN_HANDLE;stdcall; external 'dtwain64d.dll'   name 'DTWAIN_ConvertToAPIStringA';
 function DTWAIN_ConvertToAPIStringW Lib(sString:LPWSTR):DTWAIN_HANDLE;stdcall; external 'dtwain64d.dll'   name 'DTWAIN_ConvertToAPIStringW'; 
 function DTWAIN_ConvertToAPIString Lib(sString:LPTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain64d.dll'   name 'DTWAIN_ConvertToAPIString'; 
+function DTWAIN_IsSourceInUIOnlyMode(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain64d.dll'   name 'DTWAIN_IsSourceInUIOnlyMode';
+
     implementation
 end.

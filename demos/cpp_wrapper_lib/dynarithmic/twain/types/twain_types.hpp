@@ -23,7 +23,11 @@ OF THIRD PARTY RIGHTS.
 #ifndef DTWAIN_TWAIN_TYPES_HPP
 #define DTWAIN_TWAIN_TYPES_HPP
 
-#include <dtwain.h>
+#ifdef DTWAIN_CPP_NOIMPORTLIB
+    #include <dtwainx2.h>
+#else
+    #include <dtwain.h>
+#endif
 #include <ostream>
 
 namespace dynarithmic

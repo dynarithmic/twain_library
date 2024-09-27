@@ -32,7 +32,7 @@
 #include <dtwain_version.h>
 #include <dtwpdft.h>
 #ifndef DTWAIN_NOIMPORTLIB
-#define DTWAIN_NOIMPORTLIB
+    #define DTWAIN_NOIMPORTLIB
 #endif
 #include <dtwain_library_selector.h>
 #ifdef __cplusplus
@@ -429,6 +429,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISROTATIONSUPPORTEDFUNC)                  
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSESSIONENABLEDFUNC)                     (VOID_PROTOTYPE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSKIPIMAGEINFOERRORFUNC)                 (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSOURCEACQUIRINGFUNC)                    (DTWAIN_SOURCE);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSOURCEINUIONLYMODEFUNC)                 (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSOURCEOPENFUNC)                         (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISSOURCESELECTEDFUNC)                     (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ISTIFFSUPPORTEDFUNC)                      (VOID_PROTOTYPE);
@@ -1696,6 +1697,7 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_ISSESSIONENABLEDFUNC                           DTWAIN_IsSessionEnabled;
     STATIC D_ISSKIPIMAGEINFOERRORFUNC                       DTWAIN_IsSkipImageInfoError;
     STATIC D_ISSOURCEACQUIRINGFUNC                          DTWAIN_IsSourceAcquiring;
+    STATIC D_ISSOURCEINUIONLYMODEFUNC                       DTWAIN_IsSourceInUIOnlyMode;
     STATIC D_ISSOURCEOPENFUNC                               DTWAIN_IsSourceOpen;
     STATIC D_ISSOURCESELECTEDFUNC                           DTWAIN_IsSourceSelected;
     STATIC D_ISSOURCEVALIDFUNC                              DTWAIN_IsSourceValid;

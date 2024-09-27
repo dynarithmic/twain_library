@@ -120,9 +120,9 @@ If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or
 
 ----
 
-In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  
+In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.
 
-These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.
+These files should be placed in the same directory as the **twaininfo.txt** file and INI files.
 
 If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.  
 

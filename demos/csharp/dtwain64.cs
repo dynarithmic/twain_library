@@ -803,6 +803,11 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_LOG_CREATE_ERROR  = (-1057);
         public const int DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED = (-1058);
         public const int DTWAIN_ERR_TILEMODE_NOTSET = (-1059);
+        public const int DTWAIN_ERR_INI32_NOT_FOUND = (-1060);
+        public const int DTWAIN_ERR_INI64_NOT_FOUND = (-1061);
+        public const int DTWAIN_ERR_CRC_CHECK = (-1062);
+        public const int DTWAIN_ERR_RESOURCES_BAD_VERSION = (-1063);
+
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const  int TWAIN_ERR_BUMMER = (-1102);
@@ -5826,5 +5831,10 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_HANDLE DTWAIN_ConvertToAPIStringW([MarshalAs(UnmanagedType.LPWStr)] string str);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern  int DTWAIN_IsSourceInUIOnlyMode(DTWAIN_SOURCE Source);
+
     }
 }

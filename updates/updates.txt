@@ -5,10 +5,13 @@ DTWAIN Version changes
 - Add support for acquiring buffered images using tiled data (DTWAIN_SetBufferedTileMode()).  
   The device must support the ICAP_TILES capability for tiled data to be sent.
 
-- Fix issue with custom resource files being loaded into memory using DTWAIN_LoadCustomStringResources()
+- Fixed issue with custom resource files being loaded into memory using DTWAIN_LoadCustomStringResources()
 
 - Fixed issue DTWAIN_EnumCameras returning strings that were not properly encoded when using Unicode
   build of DTWAIN.
+
+- Fixed issues with DTWAIN_AcquireFile(Ex) and handling of file transfers directly from the TWAIN Source
+  (DTWAIN_USESOURCEMODE flag).
 
 - Add DTWAIN_LOG_CONSOLEWITHHANDLER to list of available flags to DTWAIN_SetTwainLog().  This flag is only
   applicable when logging to the console.  This flag allows safe(r) shutdown of DTWAIN if the logging
@@ -17,6 +20,9 @@ DTWAIN Version changes
 - Add some missing C# and VB interface functions.
 
 - Ensure that when logging to the console, the console is using UTF-8 encoding.
+
+- More thorough test for corruption of the twaininfo.txt resource file when DTWAIN_SysInitialize()
+  is called.
 
 - Update C/C++ full demo program (DTWDEMO32 and DTWDEMO64) to show the JSON description of the opened 
   TWAIN Source when displaying the source properties.  The C# and VB version of DTWDEMOxx has also 
