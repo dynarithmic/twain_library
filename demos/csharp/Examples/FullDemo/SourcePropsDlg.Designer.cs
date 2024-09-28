@@ -54,9 +54,15 @@ namespace TWAINDemo
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.TextBox3 = new System.Windows.Forms.TextBox();
             this.OK_button = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtJSON = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.GroupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -262,7 +268,7 @@ namespace TWAINDemo
             this.GroupBox3.Controls.Add(this.TextBox1);
             this.GroupBox3.Controls.Add(this.TextBox2);
             this.GroupBox3.Controls.Add(this.TextBox3);
-            this.GroupBox3.Location = new System.Drawing.Point(417, 15);
+            this.GroupBox3.Location = new System.Drawing.Point(417, 9);
             this.GroupBox3.Name = "GroupBox3";
             this.GroupBox3.Size = new System.Drawing.Size(317, 405);
             this.GroupBox3.TabIndex = 7;
@@ -271,11 +277,12 @@ namespace TWAINDemo
             // 
             // txtDSData
             // 
-            this.txtDSData.Location = new System.Drawing.Point(7, 19);
+            this.txtDSData.Location = new System.Drawing.Point(7, 11);
             this.txtDSData.Multiline = true;
             this.txtDSData.Name = "txtDSData";
             this.txtDSData.ReadOnly = true;
-            this.txtDSData.Size = new System.Drawing.Size(304, 380);
+            this.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtDSData.Size = new System.Drawing.Size(304, 387);
             this.txtDSData.TabIndex = 2;
             // 
             // TextBox1
@@ -311,19 +318,73 @@ namespace TWAINDemo
             // OK_button
             // 
             this.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK_button.Location = new System.Drawing.Point(343, 443);
+            this.OK_button.Location = new System.Drawing.Point(499, 443);
             this.OK_button.Name = "OK_button";
             this.OK_button.Size = new System.Drawing.Size(75, 23);
             this.OK_button.TabIndex = 8;
             this.OK_button.Text = "OK";
             this.OK_button.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtJSON);
+            this.groupBox4.Controls.Add(this.textBox5);
+            this.groupBox4.Controls.Add(this.textBox6);
+            this.groupBox4.Controls.Add(this.textBox7);
+            this.groupBox4.Location = new System.Drawing.Point(743, 9);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(317, 405);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "JSON Details";
+            // 
+            // txtJSON
+            // 
+            this.txtJSON.Location = new System.Drawing.Point(7, 11);
+            this.txtJSON.Multiline = true;
+            this.txtJSON.Name = "txtJSON";
+            this.txtJSON.ReadOnly = true;
+            this.txtJSON.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtJSON.Size = new System.Drawing.Size(304, 387);
+            this.txtJSON.TabIndex = 2;
+            // 
+            // textBox5
+            // 
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox5.Location = new System.Drawing.Point(331, 113);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(42, 13);
+            this.textBox5.TabIndex = 1;
+            this.textBox5.TabStop = false;
+            // 
+            // textBox6
+            // 
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Location = new System.Drawing.Point(331, 72);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(42, 13);
+            this.textBox6.TabIndex = 1;
+            this.textBox6.TabStop = false;
+            // 
+            // textBox7
+            // 
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox7.Location = new System.Drawing.Point(331, 32);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(42, 13);
+            this.textBox7.TabIndex = 1;
+            this.textBox7.TabStop = false;
+            // 
             // SourcePropsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 479);
+            this.ClientSize = new System.Drawing.Size(1072, 479);
             this.Controls.Add(this.OK_button);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.GroupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -336,6 +397,8 @@ namespace TWAINDemo
             this.groupBox2.PerformLayout();
             this.GroupBox3.ResumeLayout(false);
             this.GroupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -367,5 +430,10 @@ namespace TWAINDemo
         private System.Windows.Forms.TextBox TextBox2;
         private System.Windows.Forms.TextBox TextBox3;
         private System.Windows.Forms.Button OK_button;
+        private System.Windows.Forms.GroupBox groupBox4;
+        internal System.Windows.Forms.TextBox txtJSON;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

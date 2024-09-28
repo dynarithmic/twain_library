@@ -530,6 +530,8 @@ const
   DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
   DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
   DTWAIN_TN_TWAINTRIPLETEND = 1184;
+  DTWAIN_TN_TRANSFERTILEREADY = 1300;
+  DTWAIN_TN_TRANSFERTILEDONE = 1301;
   DTWAIN_PDFOCR_CLEANTEXT1 = 1;
   DTWAIN_PDFOCR_CLEANTEXT2 = 2;
   DTWAIN_MODAL = 0;
@@ -842,8 +844,12 @@ const
   DTWAIN_ERR_AREA_ARRAY_TOO_SMALL = (-1056);
   DTWAIN_ERR_LOG_CREATE_ERROR  = (-1057);
   DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED = (-1058);
+  DTWAIN_ERR_TILEMODE_NOTSET = (-1059);
+  DTWAIN_ERR_INI32_NOT_FOUND = (-1060);
+  DTWAIN_ERR_INI64_NOT_FOUND = (-1061);
+  DTWAIN_ERR_CRC_CHECK = (-1062);
+  DTWAIN_ERR_RESOURCES_BAD_VERSION = (-1063);
 
-  DTWAIN_ERR_LAST_1 = DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED;
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -1133,6 +1139,7 @@ const
   DTWAIN_LOG_DEBUGMONITOR = $1000000 ;
   DTWAIN_LOG_USEWINDOW = $2000000    ;
   DTWAIN_LOG_CREATEDIRECTORY = $4000000;
+  DTWAIN_LOG_CONSOLEWITHHANDLER = ($8000000 Or DTWAIN_LOG_CONSOLE);
 
   DTWAIN_LOG_ALL = (DTWAIN_LOG_DECODE_SOURCE Or DTWAIN_LOG_DECODE_DEST Or DTWAIN_LOG_DECODE_TWEVENT
                   Or DTWAIN_LOG_DECODE_TWMEMREF Or DTWAIN_LOG_CALLSTACK Or DTWAIN_LOG_ISTWAINMSG Or DTWAIN_LOG_INITFAILURE
@@ -1720,6 +1727,15 @@ const
   DTWAIN_CONSTANT_TWSS    = 47;
   DTWAIN_CONSTANT_TWPH    = 48;
   DTWAIN_CONSTANT_TWCI    = 49;			
+  DTWAIN_CONSTANT_FONTNAME = 50;
+  DTWAIN_CONSTANT_TWEI     = 51;
+  DTWAIN_CONSTANT_TWEJ     = 52;
+  DTWAIN_CONSTANT_TWCC     = 53;
+  DTWAIN_CONSTANT_TWQC     = 54;
+  DTWAIN_CONSTANT_TWRC     = 55;
+  DTWAIN_CONSTANT_MSG      = 56;
+  DTWAIN_CONSTANT_TWLG     = 57;
+
   DTWAIN_USERRES_START    = 20000;
   DTWAIN_USERRES_MAXSIZE  = 8192;
 
@@ -2702,6 +2718,14 @@ function DTWAIN_GetTwainAvailabilityExA(lpszPath:LPSTR; nLength:LONG):LONG;overl
 function DTWAIN_GetTwainAvailabilityExW(lpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetTwainAvailabilityExW';
 function DTWAIN_GetTwainAvailabilityEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetTwainAvailabilityEx';
 function DTWAIN_TestGetCap(source:DTWAIN_SOURCE; nCapability:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32.dll'   name 'DTWAIN_TestGetCap';
+function DTWAIN_GetBufferedTransferInfo(Source:DTWAIN_SOURCE; Compression:LPDWORD; BytesPerRow:LPDWORD; Columns:LPDWORD; XOffset:LPDWORD; YOffset:LPDWORD; Flags:LPDWORD; BytesWritten:LPDWORD; MemoryLength:LPDWORD):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_GetBufferedTransferInfo';
+function DTWAIN_SetBufferedTileMode(Source:DTWAIN_SOURCE, nSet:LONG):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_SetBufferedTileMode';
+function DTWAIN_IsBufferedTileModeOn(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsBufferedTileModeOn';
+function DTWAIN_IsBufferedTileModeSupported(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsBufferedTileSupported';
+function DTWAIN_ConvertToAPIStringA Lib(sString:LPCSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ConvertToAPIStringA';
+function DTWAIN_ConvertToAPIStringW Lib(sString:LPWSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ConvertToAPIStringW'; 
+function DTWAIN_ConvertToAPIString Lib(sString:LPTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ConvertToAPIString'; 
+function DTWAIN_IsSourceInUIOnlyMode(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsSourceInUIOnlyMode';
 
     implementation
 end.

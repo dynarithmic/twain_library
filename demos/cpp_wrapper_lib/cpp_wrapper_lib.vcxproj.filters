@@ -45,6 +45,12 @@
     <ClCompile Include="twain_characteristics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imprinter_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string_utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynarithmic\twain\capability_interface\capability_interface.hpp">
@@ -237,6 +243,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dynarithmic\twain\utilities\string_utilities.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dynarithmic\twain\types\constexpr_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dynarithmic\twain\types\eternal_map\include\mapbox\eternal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dynarithmic\twain\utilities\misc_utilities.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -436,6 +436,8 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PROCESSEDAUDIOFILE As Integer = 1182
     Public Const DTWAIN_TN_TWAINTRIPLETBEGIN As Integer = 1183
     Public Const DTWAIN_TN_TWAINTRIPLETEND As Integer = 1184
+    Public Const DTWAIN_TN_TRANSFERTILEREADY As Integer = 1300
+    Public Const DTWAIN_TN_TRANSFERTILEDONE As Integer = 1301
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
     Public Const DTWAIN_MODAL As Integer = 0
@@ -747,8 +749,13 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_NO_MEMFILE_XFER As Integer = (-1055)
     Public Const DTWAIN_ERR_AREA_ARRAY_TOO_SMALL As Integer = (-1056)
     Public Const DTWAIN_ERR_LOG_CREATE_ERROR As Integer = (-1057)
+    Public Const DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED As Integer = (-1058)
+    Public Const DTWAIN_ERR_TILEMODE_NOTSET As Integer = (-1059)
+    Public Const DTWAIN_ERR_INI32_NOT_FOUND As Integer = (-1060)
+    Public Const DTWAIN_ERR_INI64_NOT_FOUND As Integer = (-1061)
+    Public Const DTWAIN_ERR_CRC_CHECK As Integer = (-1062)
+    Public Const DTWAIN_ERR_RESOURCES_BAD_VERSION As Integer = (-1063)
 
-    Public Const DTWAIN_ERR_LAST_1 As Integer = DTWAIN_ERR_LOG_CREATE_ERROR
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -1036,8 +1043,9 @@ Class DTWAINAPI
     Public Const DTWAIN_LOG_USECRLF As Integer = &H400000
     Public Const DTWAIN_LOG_CONSOLE As Integer = &H800000
     Public Const DTWAIN_LOG_DEBUGMONITOR As Integer = &H1000000
-    Public Const DTWAIN_LOG_USEWINDOW As Integer = &H2000000
-    Public Const DTWAIN_LOG_CREATEDIRECTORY As Integer = &H04000000
+    Public Const DTWAIN_LOG_USEWINDOW As Integer =       &H2000000
+    Public Const DTWAIN_LOG_CREATEDIRECTORY As Integer = &H4000000
+    Public Const DTWAIN_LOG_CONSOLEWITHHANDLER As Integer = (&H8000000 Or DTWAIN_LOG_CONSOLE)
 
     Public Const DTWAIN_LOG_NOCALLBACK As Integer = 8192
     Public Const DTWAIN_LOG_WRITE As Integer = 16384
@@ -1634,6 +1642,15 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWSS As Integer = 47
     Public Const DTWAIN_CONSTANT_TWPH As Integer = 48
     Public Const DTWAIN_CONSTANT_TWCI As Integer = 49
+    Public Const DTWAIN_CONSTANT_FONTNAME As Integer = 50
+    Public Const DTWAIN_CONSTANT_TWEI  As Integer =   51
+    Public Const DTWAIN_CONSTANT_TWEJ  As Integer =   52
+    Public Const DTWAIN_CONSTANT_TWCC  As Integer =   53
+    Public Const DTWAIN_CONSTANT_TWQC  As Integer =   54
+    Public Const DTWAIN_CONSTANT_TWRC  As Integer =   55
+    Public Const  DTWAIN_CONSTANT_MSG  As Integer =   56
+    Public Const DTWAIN_CONSTANT_TWLG  As Integer =   57
+
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
 
@@ -2628,13 +2645,25 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPWStr)> szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
     Declare Auto Function DTWAIN_GetSourceDetails Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
 
+    Declare Ansi Function DTWAIN_GetSourceDetailsA Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szSources As String, ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPWStr)> szSources As String, ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSourceDetails Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> szSources As String, ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentFactor As Integer, ByVal bRefresh As Integer) As Integer
+
     Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
     Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPWStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
     Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> szOut As StringBuilder, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
 
+    Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+    Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer, ByVal indentSize As Integer, ByVal bRefresh As Integer) As Integer
+
     Declare Ansi Function DTWAIN_GetVersionCopyrightA Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
     Declare Unicode Function DTWAIN_GetVersionCopyrightW Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPWStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
     Declare Auto Function DTWAIN_GetVersionCopyright Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> szSources As StringBuilder, ByVal nSize As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetVersionCopyrightA Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetVersionCopyrightW Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer) As Integer
+    Declare Auto Function DTWAIN_GetVersionCopyright Lib "dtwain32.dll" (ByVal szOut As System.IntPtr, ByVal nSize As Integer) As Integer
 
     Declare Auto Function DTWAIN_IsSourceValid Lib "dtwain32.dll" (ByVal source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_EnableTripletsNotify Lib "dtwain32.dll" (ByVal bEnable As Integer) As Integer
@@ -2664,4 +2693,14 @@ Class DTWAINAPI
 
     Declare Auto Function DTWAIN_TestGetCap Lib "dtwain32.dll" (ByVal Source As System.IntPtr, ByVal lCapability As Integer) As System.IntPtr
     Declare Auto Function DTWAIN_EnumCamerasEx Lib "dtwain32.dll" (ByVal Source As System.IntPtr, ByVal lWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
-End Class
+
+    Declare Auto Function DTWAIN_GetBufferedTransferInfo Lib "dtwain32.dll" (ByVal Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
+    Declare Auto Function DTWAIN_SetBufferedTileMode Lib "dtwain32.dll" (ByVal Source As System.IntPtr, ByVal nSet As Integer) As Integer
+    Declare Auto Function DTWAIN_IsBufferedTileModeOn Lib "dtwain32.dll" (ByVal Source As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_IsBufferedTileModeSupported Lib "dtwain32.dll" (ByVal Source As System.IntPtr) As Integer
+
+    Declare Ansi Function DTWAIN_ConvertToAPIStringA Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> sString As String) As System.IntPtr
+    Declare Unicode Function DTWAIN_ConvertToAPIStringW Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPWStr)> sString As String) As System.IntPtr
+    Declare Auto Function DTWAIN_ConvertToAPIString Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> sString As String) As System.IntPtr
+    Declare Auto Function DTWAIN_IsSourceInUIOnlyMode Lib "dtwain32.dll" (ByVal Source As System.IntPtr) As Integer
+    End Class

@@ -24,7 +24,7 @@ OF THIRD PARTY RIGHTS.
     #pragma warning( push )
     #pragma warning (disable:4996)
 #endif
-#ifdef  DTWAIN_NOIMPORTLIB
+#ifdef  DTWAIN_CPP_NOIMPORTLIB
     #define API_INSTANCE dynarithmic::twain::RuntimeDLL::DTWAIN_API__.
     #include "dtwainx2.h"
 #else
@@ -36,7 +36,7 @@ namespace dynarithmic
 {
     namespace twain
     {
-        #ifdef  DTWAIN_NOIMPORTLIB
+        #ifdef  DTWAIN_CPP_NOIMPORTLIB
         struct RuntimeDLL
         {
             static DYNDTWAIN_API DTWAIN_API__;

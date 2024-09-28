@@ -1,5 +1,42 @@
 DTWAIN Version changes
 
+5.5.2
+
+- Add support for acquiring buffered images using tiled data (DTWAIN_SetBufferedTileMode()).  
+  The device must support the ICAP_TILES capability for tiled data to be sent.
+
+- Fixed issue with custom resource files being loaded into memory using DTWAIN_LoadCustomStringResources()
+
+- Fixed issue DTWAIN_EnumCameras returning strings that were not properly encoded when using Unicode
+  build of DTWAIN.
+
+- Fixed issues with DTWAIN_AcquireFile(Ex) and handling of file transfers directly from the TWAIN Source
+  (DTWAIN_USESOURCEMODE flag).
+
+- Add DTWAIN_LOG_CONSOLEWITHHANDLER to list of available flags to DTWAIN_SetTwainLog().  This flag is only
+  applicable when logging to the console.  This flag allows safe(r) shutdown of DTWAIN if the logging
+  console is terminated by Ctrl-C, closing the console window by clicking the 'X', etc.
+
+- Add some missing C# and VB interface functions.
+
+- Ensure that when logging to the console, the console is using UTF-8 encoding.
+
+- More thorough test for corruption of the twaininfo.txt resource file when DTWAIN_SysInitialize()
+  is called.
+
+- Update C/C++ full demo program (DTWDEMO32 and DTWDEMO64) to show the JSON description of the opened 
+  TWAIN Source when displaying the source properties.  The C# and VB version of DTWDEMOxx has also 
+  been updated to show this information (see the FullDemo projects for C# and VB).
+
+- Remove some resource constants from the language resource files.  These constants have now been moved to 
+  twaininfo.txt.
+
+- Updated code to detect the running Windows OS version when starting a DTWAIN log.  The new code
+  now detects the latest Windows 11 version(s).  The new code is courtesy of PJ Naughter.
+
+- Add various language files (Romanian, Russian, Portuguese, Simplified Chinese).
+
+
 5.5.1
 
 - Load default English resources if twainresourcestrings_english.txt is not found, and
