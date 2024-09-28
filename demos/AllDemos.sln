@@ -61,6 +61,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdvancedBufferedAcquire", "
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoFileNamingDemo", "cpp_wrapper\AutoFileNamingDemo\AutoFileNamingDemo.vcxproj", "{14BBD600-520B-4D54-9CF0-398876D8D3D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicTwainInfo", "cpp_wrapper\BasicTwainInfo\BasicTwainInfo.vcxproj", "{8EA15F01-0517-411B-854A-375742340948}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -68,6 +71,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicTwainInfo", "cpp_wrapp
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChooseTWAINVersion2DSM", "cpp_wrapper\ChooseTWAINVersion2DSM\ChooseTWAINVersion2DSM.vcxproj", "{F0E958AE-EF58-44C3-9A55-586EBCD62382}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomizeSelectSourceDialog", "cpp_wrapper\CustomizeSelectSourceDialog\CustomizeSelectSourceDialog.vcxproj", "{89D16E47-9D0C-41A2-B342-10E7AA1CA705}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -80,10 +86,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DiscardBlankPagesDemo", "cp
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuplexScanningDemo", "cpp_wrapper\DuplexScanningDemo\DuplexScanningDemo.vcxproj", "{2FF6592A-3448-4A17-AB56-2C7A3BA63BE3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetAllColorTypesAndBitDepths", "cpp_wrapper\GetAllColorTypesAndBitDepths\GetAllColorTypesAndBitDepths.vcxproj", "{D03C047F-DF8F-40B0-AF01-F3223F5E6ECF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetSetCapabilities", "cpp_wrapper\GetSetCapabilities\GetSetCapabilities.vcxproj", "{EAF7D73E-B332-4222-B02E-B8C74A84F21F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetXYResolutionValues", "cpp_wrapper\GetXYResolutionValues\GetXYResolutionValues.vcxproj", "{F2A1C472-E2C5-4713-909E-609A407556E7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -175,6 +190,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleFileAcquireToBMP", "NoImportLib\SimpleFileAcquireToBMP\SimpleFileAcquireToBMP.vcxproj", "{B6B58489-1A28-4DD9-B070-38DBF112C7DA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestImageFileCreation", "cpp_wrapper\TestImageFileCreation\TestImageFileCreation.vcxproj", "{6695B037-1585-4567-B349-21988A5F1182}"
+	ProjectSection(ProjectDependencies) = postProject
+		{829672CE-D35E-4225-89FA-911780F7880F} = {829672CE-D35E-4225-89FA-911780F7880F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
