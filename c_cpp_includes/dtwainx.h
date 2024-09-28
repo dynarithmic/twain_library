@@ -102,6 +102,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetDefaultSource( DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceAcquiring( DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceAcquiringEx(DTWAIN_SOURCE Source, BOOL bUIOnly);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceOpen( DTWAIN_SOURCE Source);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsSourceInUIOnlyMode(DTWAIN_SOURCE Source);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectSourceWithOpen(DTWAIN_BOOL bOpen);
 DTWAIN_SOURCE  DLLENTRY_DEF      DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsAcquiring(VOID_PROTOTYPE);
@@ -228,7 +229,15 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_FrameIsValid(DTWAIN_FRAME Frame);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_AcquireNative(DTWAIN_SOURCE Source,LONG PixelType,LONG nMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_AcquireBuffered(DTWAIN_SOURCE Source,LONG PixelType,LONG nMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_AcquireToClipboard(DTWAIN_SOURCE Source,LONG PixelType,LONG nMaxPages,LONG nTransferMode,DTWAIN_BOOL bDiscardDibs,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source,DTWAIN_ARRAY aFileNames,LONG     lFileType,LONG     lFileFlags,LONG     PixelType,LONG     lMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source,DTWAIN_ARRAY aFileNames,LONG lFileType,LONG lFileFlags,LONG PixelType,LONG lMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,LPLONG pStatus);
+
+/* Set whether a buffered transfer will use tile mode */
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetBufferedTileMode(DTWAIN_SOURCE Source, DTWAIN_BOOL bTileMode);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsBufferedTileModeOn(DTWAIN_SOURCE Source);
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsBufferedTileModeSupported(DTWAIN_SOURCE Source);
+
+/* Use when a buffered transfer has sent a tile or strip */
+HANDLE         DLLENTRY_DEF      DTWAIN_GetBufferedTransferInfo(DTWAIN_SOURCE Source, LPDWORD Compression, LPDWORD BytesPerRow, LPDWORD Columns, LPDWORD Rows, LPDWORD XOffset, LPDWORD YOffset, LPDWORD Flags, LPDWORD BytesWritten, LPDWORD MemoryLength);
 
 /* Getting acquired images after successful acquisition */
 LONG           DLLENTRY_DEF      DTWAIN_GetNumAcquisitions( DTWAIN_ARRAY aAcq);

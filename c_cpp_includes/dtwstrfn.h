@@ -303,7 +303,8 @@ LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength
 LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
 LONG        DLLENTRY_DEF DTWAIN_IsTwainAvailableExA(LPSTR directories, LONG nMaxLen);
 LONG        DLLENTRY_DEF DTWAIN_IsTwainAvailableExW(LPWSTR directories, LONG nMaxLen);
-
+HANDLE      DLLENTRY_DEF DTWAIN_ConvertToAPIStringA(LPCSTR lpOrigString);
+HANDLE      DLLENTRY_DEF DTWAIN_ConvertToAPIStringW(LPCWSTR lpOrigString);
 #ifdef DTWAIN_ANSIDLL
     #define DTWAIN_CHARPTRTYPE LPSTR
     #define DTWAIN_CCHARPTRTYPE LPCSTR
@@ -485,4 +486,6 @@ LONG        DLLENTRY_DEF DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG
 LONG        DLLENTRY_DEF DTWAIN_GetSourceDetails(DTWAIN_CCHARPTRTYPE szSources, DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
 LONG        DLLENTRY_DEF DTWAIN_GetVersionCopyright(DTWAIN_CHARPTRTYPE lpszApp, LONG nLength);
 LONG        DLLENTRY_DEF DTWAIN_GetTwainAvailabilityEx(DTWAIN_CHARPTRTYPE directories, LONG nMaxLen);
+HANDLE      DLLENTRY_DEF DTWAIN_ConvertToAPIString(DTWAIN_CCHARPTRTYPE lpOrigString);
+
 #endif

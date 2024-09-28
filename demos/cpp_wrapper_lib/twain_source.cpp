@@ -64,8 +64,29 @@ namespace dynarithmic
                 m_pTwainSourceImpl = {};
                 m_theSource = select_info.source_handle;
                 m_pSession = select_info.session_handle;
+                m_pSession->add_source(this);
                 create_interfaces();
                 attach(select_info);
+            }
+            return *this;
+        }
+
+        twain_source& twain_source::operator=(twain_source&& rhs) noexcept
+        {
+            if (rhs.m_theSource != m_theSource)
+            {
+                detach();
+                m_bIsSelected = rhs.m_bIsSelected;
+                m_bCloseable = rhs.m_bCloseable;
+                m_bUIOnlyOn = rhs.m_bUIOnlyOn;
+                m_bUIOnlySupported = rhs.m_bUIOnlySupported;
+                m_bWeakAttach = rhs.m_bWeakAttach;
+                m_pTwainSourceImpl = rhs.m_pTwainSourceImpl;
+                m_theSource = rhs.m_theSource;
+                m_pSession = rhs.m_pSession;
+                m_sourceInfo = rhs.m_sourceInfo;
+                rhs.m_theSource = nullptr;
+                rhs.m_pSession = nullptr;
             }
             return *this;
         }
@@ -140,6 +161,10 @@ namespace dynarithmic
                 {
                     auto uiOnlySupported = API_INSTANCE DTWAIN_IsUIOnlySupported(m_theSource);
                     m_bUIOnlySupported = uiOnlySupported ? tribool::make_tribool(1) : tribool::make_tribool(-1);
+                    auto vXferMechs = get_capability_interface().get_image_xfermech();
+                    m_vAllXferMechs.clear();
+                    for (auto value : vXferMechs)
+                        m_vAllXferMechs.push_back(static_cast<xfermech_value::value_type>(value));
                 }
             }
             else
@@ -184,12 +209,16 @@ namespace dynarithmic
 
         bool twain_source::close()
         {
-            if (m_theSource)
+            bool retVal = true;
+            if (m_theSource && m_pSession)
             {
-                bool retVal = API_INSTANCE DTWAIN_CloseSource(m_theSource) ? true : false;
+                if (API_INSTANCE DTWAIN_IsSourceValid( m_theSource ))
+                    retVal = API_INSTANCE DTWAIN_CloseSource(m_theSource) ? true : false;
+                m_pSession->remove_source(this);
                 m_bIsSelected = false;
                 m_pSession->update_source_status(*this);
                 m_theSource = nullptr;
+                m_pSession = nullptr;
                 return retVal;
             }
             return false;
@@ -465,14 +494,26 @@ namespace dynarithmic
             LONG dtwain_transfer_type = DTWAIN_USENATIVE;
             if (transtype == transfer_type::file_using_buffered)
                 dtwain_transfer_type = DTWAIN_USEBUFFERED;
+            else
+            if (transtype == transfer_type::file_using_source)
+                dtwain_transfer_type = DTWAIN_USESOURCEMODE;
             dtwain_transfer_type |= static_cast<LONG>(ftOptions.get_transfer_flags());
 
-            const auto ft = ftOptions.get_type();
-            if (!file_type_info::is_universal_support(ft))
+            const auto file_type = ftOptions.get_type();
+            if (!file_type_info::is_universal_support(file_type))
             {
-                dtwain_transfer_type |= DTWAIN_USESOURCEMODE;
-                // Set the compression type
-                API_INSTANCE DTWAIN_SetCompressionType(m_theSource, static_cast<LONG>(ft), 1);
+                // Test for file transfer support
+                if (dtwain_transfer_type & DTWAIN_USESOURCEMODE)
+                {
+                    if (!API_INSTANCE DTWAIN_IsFileXferSupported(m_theSource, file_type))
+                        return { API_INSTANCE DTWAIN_GetLastError(), {} };
+                }
+
+                // Check and set the compression type
+                auto compress_option = ac.get_compression_options().get_compression();
+                auto compressOk = API_INSTANCE DTWAIN_SetCompressionType(m_theSource, compress_option, 1);
+                if ( !compressOk )
+                    return { API_INSTANCE DTWAIN_GetLastError(), {} };
             }
 
             if (ftOptions.is_autocreate_directory())
@@ -484,7 +525,12 @@ namespace dynarithmic
             API_INSTANCE DTWAIN_SetFileAutoIncrement(m_theSource, inc.get_increment(), inc.is_reset_count_used() ? TRUE : FALSE,
                 inc.is_enabled() ? TRUE : FALSE);
             API_INSTANCE DTWAIN_EnableMsgNotify(1);
-            auto file_type = ftOptions.get_type();
+
+            if (dtwain_transfer_type & DTWAIN_USESOURCEMODE)
+            {
+                if ( !API_INSTANCE DTWAIN_IsFileXferSupported(m_theSource, file_type) )
+                    return { API_INSTANCE DTWAIN_GetLastError(), {} };
+            }
             if (file_type_info::is_multipage_type(file_type))
             {
                 auto& paper_options = ac.get_paperhandling_options();
@@ -532,6 +578,7 @@ namespace dynarithmic
             }
             return { API_INSTANCE DTWAIN_GetLastError(), {} };
         }
+
         twain_source::acquire_return_type twain_source::acquire_to_image_handles(transfer_type transtype)
         {
             acquire_characteristics& ac = *(m_pTwainSourceImpl->m_acquire_characteristics);

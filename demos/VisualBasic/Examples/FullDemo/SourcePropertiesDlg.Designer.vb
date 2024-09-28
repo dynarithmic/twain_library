@@ -43,13 +43,19 @@ Partial Class SourcePropertiesDlg
         Me.label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtDSData = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.txtDSData = New System.Windows.Forms.TextBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.txtJSON = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.groupBox2.SuspendLayout()
         Me.groupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'groupBox2
@@ -138,7 +144,7 @@ Partial Class SourcePropertiesDlg
         'OK_button
         '
         Me.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.OK_button.Location = New System.Drawing.Point(337, 424)
+        Me.OK_button.Location = New System.Drawing.Point(511, 424)
         Me.OK_button.Name = "OK_button"
         Me.OK_button.Size = New System.Drawing.Size(75, 23)
         Me.OK_button.TabIndex = 4
@@ -272,6 +278,16 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Custom Data"
         '
+        'txtDSData
+        '
+        Me.txtDSData.Location = New System.Drawing.Point(7, 19)
+        Me.txtDSData.Multiline = True
+        Me.txtDSData.Name = "txtDSData"
+        Me.txtDSData.ReadOnly = True
+        Me.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtDSData.Size = New System.Drawing.Size(304, 380)
+        Me.txtDSData.TabIndex = 2
+        '
         'TextBox1
         '
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -302,20 +318,65 @@ Partial Class SourcePropertiesDlg
         Me.TextBox3.TabIndex = 1
         Me.TextBox3.TabStop = False
         '
-        'txtDSData
+        'GroupBox4
         '
-        Me.txtDSData.Location = New System.Drawing.Point(7, 19)
-        Me.txtDSData.Multiline = True
-        Me.txtDSData.Name = "txtDSData"
-        Me.txtDSData.ReadOnly = True
-        Me.txtDSData.Size = New System.Drawing.Size(304, 380)
-        Me.txtDSData.TabIndex = 2
+        Me.GroupBox4.Controls.Add(Me.txtJSON)
+        Me.GroupBox4.Controls.Add(Me.TextBox5)
+        Me.GroupBox4.Controls.Add(Me.TextBox6)
+        Me.GroupBox4.Controls.Add(Me.TextBox7)
+        Me.GroupBox4.Location = New System.Drawing.Point(767, 13)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(317, 405)
+        Me.GroupBox4.TabIndex = 6
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "JSON Details"
+        '
+        'txtJSON
+        '
+        Me.txtJSON.Location = New System.Drawing.Point(7, 19)
+        Me.txtJSON.Multiline = True
+        Me.txtJSON.Name = "txtJSON"
+        Me.txtJSON.ReadOnly = True
+        Me.txtJSON.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtJSON.Size = New System.Drawing.Size(304, 380)
+        Me.txtJSON.TabIndex = 2
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox5.Location = New System.Drawing.Point(331, 113)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.Size = New System.Drawing.Size(42, 13)
+        Me.TextBox5.TabIndex = 1
+        Me.TextBox5.TabStop = False
+        '
+        'TextBox6
+        '
+        Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox6.Location = New System.Drawing.Point(331, 72)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.ReadOnly = True
+        Me.TextBox6.Size = New System.Drawing.Size(42, 13)
+        Me.TextBox6.TabIndex = 1
+        Me.TextBox6.TabStop = False
+        '
+        'TextBox7
+        '
+        Me.TextBox7.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox7.Location = New System.Drawing.Point(331, 32)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ReadOnly = True
+        Me.TextBox7.Size = New System.Drawing.Size(42, 13)
+        Me.TextBox7.TabIndex = 1
+        Me.TextBox7.TabStop = False
         '
         'SourcePropertiesDlg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 469)
+        Me.ClientSize = New System.Drawing.Size(1096, 469)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.groupBox2)
         Me.Controls.Add(Me.OK_button)
@@ -333,6 +394,8 @@ Partial Class SourcePropertiesDlg
         Me.groupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -361,4 +424,9 @@ Partial Class SourcePropertiesDlg
     Private WithEvents TextBox1 As Windows.Forms.TextBox
     Private WithEvents TextBox2 As Windows.Forms.TextBox
     Private WithEvents TextBox3 As Windows.Forms.TextBox
+    Private WithEvents GroupBox4 As Windows.Forms.GroupBox
+    Friend WithEvents txtJSON As Windows.Forms.TextBox
+    Private WithEvents TextBox5 As Windows.Forms.TextBox
+    Private WithEvents TextBox6 As Windows.Forms.TextBox
+    Private WithEvents TextBox7 As Windows.Forms.TextBox
 End Class

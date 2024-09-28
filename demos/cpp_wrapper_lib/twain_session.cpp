@@ -52,7 +52,7 @@ namespace dynarithmic
 
         bool twain_session::start(bool bCleanStart)
         {
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             if (bCleanStart && !get_dllhandle())
             {
 #ifndef DTWAIN_USELOADEDLIB
@@ -224,7 +224,7 @@ namespace dynarithmic
         twain_session::~twain_session()
         {
             try {
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
                 cache_dll_handle(false);
 #endif
                 stop();
@@ -269,7 +269,7 @@ namespace dynarithmic
         bool twain_session::stop()
         {
             using namespace std::chrono_literals;
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             struct HandleCloser
             {
                 HMODULE h_;
@@ -299,11 +299,16 @@ namespace dynarithmic
                     m_Handle = nullptr;
                     m_logger = { nullptr, nullptr };
                     m_source_cache.clear();
+                    while (!m_selected_sources.empty())
+                    {
+                        auto iter = m_selected_sources.begin();
+                        (*iter)->close();
+                    }
                     m_bStarted = false;
                     return true;
                 }
             }
-#ifdef DTWAIN_NOIMPORTLIB
+#ifdef DTWAIN_CPP_NOIMPORTLIB
             hCloser.detach();
 #endif
             return false;
@@ -606,6 +611,36 @@ namespace dynarithmic
             m_source_detail_map.insert({ sMapKey, sAllDetails });
             return sAllDetails;
 #endif
+        }
+
+        struct HandleDestroyer
+        {
+            HANDLE h;
+            HandleDestroyer(HANDLE h_) : h(h_) {}
+            ~HandleDestroyer() { if (h) { GlobalUnlock(h); GlobalFree(h); } }
+        };
+
+        std::string twain_session::to_api_string(const std::string& str)
+        {
+            HANDLE h = API_INSTANCE DTWAIN_ConvertToAPIStringA(str.c_str());
+            if (h)
+            {
+                HandleDestroyer hRAII(h);
+                LPCSTR pData = (LPCSTR)GlobalLock(h);
+                if ( pData )
+                    return std::string(pData, GlobalSize(h));
+            }
+            return {};
+        }
+
+        void twain_session::add_source(twain_source* pSource)
+        {
+            m_selected_sources.insert(pSource);
+        }
+
+        void twain_session::remove_source(twain_source* pSource)
+        {
+            m_selected_sources.erase(pSource);
         }
 
         LRESULT CALLBACK twain_session::error_callback_proc(LONG error, LONG64 UserData)

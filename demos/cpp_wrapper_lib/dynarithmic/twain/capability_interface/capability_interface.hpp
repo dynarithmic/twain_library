@@ -1111,7 +1111,7 @@ namespace twain {
                 return false;
             if ( !ret.second )
             {
-                auto vect = get_cap_values<std::vector<typename Cap::value_type>>(capToTest); 
+                auto vect = get_cap_values<std::vector<typename Cap::value_type>>(static_cast<typename CAP_SUPPORTEDCAPS_::value_type>(capToTest));
                 auto cType = get_cap_container_type(capToTest, get());
                 if ( cType != twain_container_type::CONTAINER_RANGE)
                 {

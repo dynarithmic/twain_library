@@ -27,7 +27,7 @@ OF THIRD PARTY RIGHTS.
 #include <utility>
 #include <iterator>
 #include <algorithm>
-#ifndef DTWAIN_NOIMPORTLIB
+#ifndef DTWAIN_CPP_NOIMPORTLIB
     #include <dtwain.h>
 #else
     #include <dtwainx2.h>

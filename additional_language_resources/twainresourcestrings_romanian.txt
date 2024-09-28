@@ -1,0 +1,232 @@
+0 Nicio eroare  
+1 Mâner de fereastră NULL  
+2 Eșec la alocarea memoriei  
+3 Mâner DLL invalid  
+4 Mâner sursă invalid  
+5 Managerul sursei de date TWAIN (DSM) nu a fost găsit  
+6 TWAIN.DLL invalid  
+7 Mâner de sesiune invalid  
+8 Manager Twain invalid  
+9 Nu s-a putut încărca TWAIN.DLL  
+10 Nu s-a putut deschide sursa TWAIN  
+11 Nu s-a putut închide sursa TWAIN  
+12 Sursa TWAIN trebuie să fie deschisă înainte de a executa comanda.  
+27 Nu s-a putut finaliza scanarea. Rezoluțiile X/Y setate pentru valori diferite  
+28 Nume de fișier specificat invalid  
+1000 ***  
+1001 DTWAIN_HANDLE invalid  
+1002 DTWAIN_SOURCE invalid  
+1003 DTWAIN_ARRAY invalid  
+1004 Tip DTWAIN_ARRAY incorect  
+1005 Index în afara limitelor pentru DTWAIN_ARRAY  
+1006 Memorie heap epuizată  
+1007 DTWAIN nu a putut crea fereastra TWAIN  
+1008 Tip de pixel invalid  
+1009 DTWAIN_CAPCONTAINER invalid  
+1010 Nici o sesiune DTWAIN nu a fost începută. Trebuie să apelați DTWAIN_StartTwainSession()  
+1011 Număr DTWAIN_ACQUIRE invalid  
+1012 Capacitate TWAIN invalidă  
+1013 Sursa nu suportă capacitatea  
+1014 Eroare generală TWAIN. Verificați DTWAIN_GetTwainError() pentru mai multe informații  
+1015 Eșec la conectarea cozii de mesaje a aplicației  
+1016 Argumentul numelui fișierului a fost transmis incorect  
+1017 DTWAIN_ARRAY nu conține valori  
+1018 Format de fișier de imagine specificat invalid  
+1019 Pagina Dib invalidă  
+1020 Sursa este în prezent în proces de achiziție a unei imagini  
+1021 Un parametru invalid a fost transmis  
+1022 Interval specificat invalid: Verificați limitele superioare/inferioare sau dimensiunea pasului  
+1023 Interfața utilizatorului TWAIN nu a putut fi pornită. Eroare de dispozitiv sau achiziția trebuie să aibă o interfață utilizator.  
+1024 Sursa nu suportă unitatea de dispozitiv specificată  
+1025 Resursa de limbă DLL nu a fost găsită
+1026 Sursa TWAIN nu este deschisă  
+1027 Evenimentele dispozitivului sursă nu sunt acceptate  
+1028 Modul UI doar sursă nu este acceptat  
+1029 UI-ul sursei este deja deschis  
+1030 Nu există suport pentru setarea capacității  
+1031 Sursa nu suportă transferul de fișiere  
+1032 Adâncimea de biți specificată nu este acceptată  
+1033 Sursa nu are capacități. Posibil coruptă sau eșec hardware  
+1034 Transferurile tamponate utilizând plăci nu sunt acceptate  
+1035 DTWAIN_FRAME invalid. Tipul de date trebuie să fie DTWAIN_FLOAT, numărul de elemente trebuie să fie = 4  
+1036 Această funcție nu este acceptată în versiunea limitată a DTWAIN. Trebuie să faceți upgrade la versiunea înregistrată a DTWAIN  
+1037 Sursa sau dispozitivul nu suportă un alimentator de documente  
+1038 Sursa sau dispozitivul nu suportă interogarea dacă documentele sunt încărcate în alimentatorul de documente  
+1039 Eroare de excepție de memorie în timpul apelării DSM TWAIN. DSM poate fi într-o stare inconsistentă.  
+1040 Tranziție de stare TWAIN invalidă  
+1041 Tip de informații extinse despre imagine nesuportat  
+1042 Fișierul resursă DLL nu a fost găsit  
+1043 DTWAIN nu a fost inițializat  
+1044 Nici o sursă TWAIN găsită  
+1045 TWAIN nu este instalat  
+1046 Fir de execuție incorect  
+1047 Tip de date de capacitate incorect  
+1048 Capacitatea are un tip de date necunoscut  
+1049 Versiunea demo a DTWAIN nu suportă acest tip de fișier  
+1050 Selecția sursei anulată  
+1051 Resursele DTWAIN nu au fost găsite  
+1052 Șirul nu se potrivește cu tipul de matrice  
+1053 DTWAIN ARRAY nu este același tip  
+1054 Sursa nu este instalată  
+1055 Sursa nu suportă transferurile de fișiere în memorie  
+1056 Matricea de zonă este prea mică. Matricea ar trebui să aibă cel puțin 4 elemente.
+1057 Nu s-a putut crea fișierul de jurnal DTWAIN.  
+1058 Sursa nu suportă sistemul de fișiere TWAIN.  
+1059 Modul tile nu este suportat pentru această sursă TWAIN.
+1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
+1101 Codul de condiție TWAIN: Fără eroare  
+1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  
+1103 Codul de condiție TWAIN: Fără sursă de date  
+1104 Codul de condiție TWAIN: Sursa de date este conectată la maximum posibil de aplicații  
+1105 Codul de condiție TWAIN: Sursa de date a managerului de surse de date a raportat o eroare. Aplicația nu este responsabilă.  
+1106 Codul de condiție TWAIN: Capacitate TWAIN necunoscută întâlnită  
+1107 Codul de condiție TWAIN: Parametrul de date este în afara intervalului  
+1108 Codul de condiție TWAIN: Combinație de triplet TWAIN nerecunoscută  
+1109 Codul de condiție TWAIN: Tripletul TWAIN este în afara secvenței așteptate  
+1110 Codul de condiție TWAIN: Aplicația destinație necunoscută în funcția DSM_Entry  
+1111 Codul de condiție TWAIN: Capacitatea nu este suportată de sursa de date  
+1112 Codul de condiție TWAIN: Operațiunea nu este suportată de capacitate  
+1113 Codul de condiție TWAIN: Capacitatea depinde de o altă capacitate  
+1114 Codul de condiție TWAIN: Fișierul este protejat  
+1115 Codul de condiție TWAIN: Fișierul există deja  
+1116 Codul de condiție TWAIN: Fișierul nu a fost găsit  
+1117 Codul de condiție TWAIN: Directorul nu este gol  
+1118 Codul de condiție TWAIN: Alimentatorul este blocat  
+1119 Codul de condiție TWAIN: Alimentatorul a detectat mai multe pagini  
+1120 Codul de condiție TWAIN: Eroare la scrierea fișierului (disc poate fi plin)  
+1121 Codul de condiție TWAIN: Dispozitivul a ieșit offline în timpul operațiunii  
+1123 Cod de condiție TWAIN: Operațiune eșuată (capac sau ușă pe dispozitiv este deschisă)  
+1124 Cod de condiție TWAIN: Operațiune eșuată (documentul are un colț deteriorat)  
+1125 Cod de condiție TWAIN: Operațiune eșuată (eroare de focalizare în timpul capturării documentului)  
+1126 Cod de condiție TWAIN: Operațiune eșuată (document prea deschis)  
+1127 Cod de condiție TWAIN: Operațiune eșuată (document prea întunecat)  
+1128 Cod de condiție TWAIN: Operațiune eșuată (sursa nu are nimic de capturat pentru transfer)  
+2000  
+2001 Memorie insuficientă  
+2002 Fișierul nu a putut fi deschis  
+2003 Eroare la citirea fișierului  
+2004 Eroare la scrierea fișierului  
+2005 Parametru invalid specificat pentru funcția bitmap  
+2006 Fișier BMP invalid  
+2007 Fișier BMP invalid cu RLE  
+2008  
+2009 Format JPEG invalid  
+2010 Context de dispozitiv invalid  
+2011 DIB invalid  
+2012  
+2013 Eroare de resurse insuficiente  
+2014  
+2015 Fișier PNG invalid  
+2016 Nu s-a putut crea fișier PNG  
+2017 Eroare internă  
+2018 Font invalid  
+2019  
+2020 Fișier TIFF invalid  
+2021 Compresia TIFF LZW nu este suportată  
+2022 Format PCX invalid  
+2023 Nu s-a putut crea BMP  
+2024  
+2025  
+2026  
+2027 Fișier Metafile Windows invalid  
+2028 Adâncime de biți incorectă  
+2029 BitBlt eșuat  
+2030 Buffer prea mic  
+2031 Imaginea are prea multe culori  
+2032 TGA invalid  
+2033  
+2034  
+2035 DIB nu a putut fi creat  
+2036 Compresia LZW nu este suportată  
+2037  
+2038  
+2039  
+2040  
+2041 Eroare la setarea biților Metafile Windows  
+2042 Eroare la obținerea biților Metafile Windows  
+2043 Eroare în parola fișierului PAX  
+2044 PAX invalid  
+2045 Tip de fișier sau opțiune utilizator nesuportată  
+2046 Format PSD invalid  
+2047 PSD nesuportat  
+2048 Eroare de decriptare  
+2049 Eroare de criptare  
+2050 Eroare de compresie  
+2051 Eroare de decomprimare  
+2052  
+2053 Lățime/înălțime bitmap invalidă pentru formatul Wireless Bitmap (WBMP)  
+2054 Etichetă TIFF invalidă  
+2055  
+2056 Format EXIF invalid  
+2057  
+2058 DTWIMG32.DLL nu a fost găsit  
+2059 TIFLIB16.DLL nu a fost găsit  
+2060 PNGLIB16.DLL nu a fost găsit  
+2061 JPGLIB16.DLL nu a fost găsit  
+2062 Bits-per-pixel specificat invalid  
+2063 Versiune greșită a DTWIMG32.DLL  
+2064 DTWPDF32.DLL nu a fost găsit  
+2065 Versiune greșită a DTWPDF32.DLL  
+2066 DTWIMG32.DLL nu a fost găsit  
+2067 Versiune greșită a DTWIMG32.DLL  
+2068 DTWIMG32.DLL nu a fost găsit  
+2069 Versiune greșită a DTWIMG32.DLL  
+2070 DTWIMG32.DLL nu a fost găsit  
+2071 Versiune greșită a DTWIMG32.DLL  
+2072 Mod Duplex manual indisponibil în această versiune a DTWAIN  
+2074 Lățime/înălțime bitmap invalidă pentru formatul ICO non-Vista Windows  
+2075 TWAIN_32.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis  
+2076 TWAINDSM.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis  
+2077 Director invalid sau inexistent  
+2078 Nu s-a putut crea directorul  
+2079 DLL-ul Transym OCR nu a fost găsit sau nu a putut fi încărcat.  
+2081 Niciun nume de fișier specificat. Folosiți opțiunea -f  
+2082 TWAIN indisponibil  
+2083 Nu se poate comunica cu dispozitivul TWAIN  
+2084 Eroare la salvarea fișierului de ieșire  
+2085 Comandă TwainSave ilegală  
+2086 Achiziția TwainSave a fost anulată  
+2087 Eșec la achiziționarea imaginii  
+2088 Spațiu de culoare invalid. Numai spațiile de culoare RGB, Grayscale și Alb/negru sunt acceptate  
+2089 PDF nesuportat.  
+2090 Lipsă sau corupție DTWTS.DLL. TwainSave nu este disponibil  
+2101 Pagină OCR specificată invalidă  
+2102 OCR invalid  
+2103 OCR inactiv  
+2104 Tip de fișier OCR invalid  
+2105 Tip de pixel OCR invalid  
+2106 Adâncime de bit OCR invalidă  
+2107 Eroare de recunoaștere OCR  
+2500 Nu s-a putut deschide sursa TWAIN  
+2501 Nu s-a putut închide sursa TWAIN  
+2502 Informații de imagine invalide la achiziționarea imaginii  
+2503 Eroare la scrierea datelor în fișier  
+3000 Selectați sursa  
+3001 &Selectați  
+3002 &Anulați  
+3003 Surse:  
+3005 Intrare  
+3006 Ieșire  
+3007 returnând valoarea de  
+3008 Eroare de excepție  
+3009 Modul  
+3010 Fără informații despre parametru  
+3011 Eroare la obținerea informațiilor pentru funcție  
+3012 Intrare  
+3013 Ieșire: cod de returnare din DSM  
+3014 Fără informații pentru  
+3015 cod de eroare returnat  
+3016 Eroare  
+3017 Directorul fișierului temporar nu există  
+3018 apelat  
+3019 Fișierul de imagine temporar este  
+3020 Eroare la crearea fișierului de imagine temporar  
+3021 Fișierul de imagine a fost creat cu succes  
+9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
+10000 [Mesaj utilizator]
+10001 Eroare la închiderea DSM Twain
+10002 Eroare la închiderea sesiunii Twain
+10003 Eroare la închiderea Managerului DTWAIN
+10004 Managerul surselor TWAIN, sesiunea și DTWAIN au fost închise cu succes
+10005 Nu s-a putut elimina subclasa din fereastra utilizatorului

@@ -516,6 +516,10 @@
 /* Sent if document feeder has no paper loaded */
 #define DTWAIN_TN_FEEDERNOTLOADED           1200
 
+/* Sent when tiled data has been sent */
+#define DTWAIN_TN_TRANSFERTILEREADY         1300
+#define DTWAIN_TN_TRANSFERTILEDONE          1301
+
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
 #define DTWAIN_PDFOCR_CLEANTEXT2            2
@@ -852,8 +856,13 @@
 #define DTWAIN_ERR_AREA_ARRAY_TOO_SMALL  (-1056)
 #define DTWAIN_ERR_LOG_CREATE_ERROR  (-1057)
 #define DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED (-1058)
+#define DTWAIN_ERR_TILEMODE_NOTSET (-1059)
+#define DTWAIN_ERR_INI32_NOT_FOUND (-1060)
+#define DTWAIN_ERR_INI64_NOT_FOUND (-1061)
+#define DTWAIN_ERR_CRC_CHECK (-1062)
+#define DTWAIN_ERR_RESOURCES_BAD_VERSION (-1063)
 
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED
+#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_RESOURCES_BAD_VERSION
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1237,6 +1246,9 @@ DTWAIN DLL are not displayed */
 /* Create directory if logging to file */
 #define DTWAIN_LOG_CREATEDIRECTORY 0x04000000
 
+/* Use DTWAIN's console handler if console logging is selected */
+#define DTWAIN_LOG_CONSOLEWITHHANDLER (0x08000000 | DTWAIN_LOG_CONSOLE)
+
 /* log everything, including displaying exceptions */
 #define DTWAIN_LOG_ALL_NOCALLBACK   (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_USECALLBACK))
 
@@ -1552,7 +1564,16 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWSS     47  
 #define DTWAIN_CONSTANT_TWPH     48
 #define DTWAIN_CONSTANT_TWCI     49
-#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_TWCI + 1) 
+#define DTWAIN_CONSTANT_FONTNAME 50
+#define DTWAIN_CONSTANT_TWEI     51
+#define DTWAIN_CONSTANT_TWEJ     52
+#define DTWAIN_CONSTANT_TWCC     53
+#define DTWAIN_CONSTANT_TWQC     54
+#define DTWAIN_CONSTANT_TWRC     55
+#define DTWAIN_CONSTANT_MSG      56
+#define DTWAIN_CONSTANT_TWLG     57
+#define DTWAIN_CONSTANT_DLLINFO  58
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_DLLINFO + 1) 
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

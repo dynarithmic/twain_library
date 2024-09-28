@@ -1,0 +1,233 @@
+0 Sem Erro  
+1 Manipulador de Janela NULL  
+2 Falha na Alocação de Memória  
+3 Manipulador de DLL Inválido  
+4 Manipulador de Fonte Inválido  
+5 Gerenciador de Fonte de Dados TWAIN (DSM) Não Encontrado  
+6 TWAIN.DLL Inválido  
+7 Manipulador de Sessão Inválido  
+8 Gerenciador Twain Inválido  
+9 Não foi possível carregar TWAIN.DLL  
+10 Não foi possível abrir a fonte TWAIN  
+11 Não foi possível fechar a fonte TWAIN  
+12 A fonte TWAIN deve ser aberta antes de executar o comando.  
+27 Não foi possível completar a digitalização. Resoluções X/Y definidas para valores diferentes  
+28 Nome de Arquivo Inválido Especificado  
+1000 ***  
+1001 Manipulador DTWAIN Inválido  
+1002 Fonte DTWAIN Inválida  
+1003 ARRAY DTWAIN Inválido  
+1004 Tipo de ARRAY DTWAIN Incorreto  
+1005 Índice fora dos limites para ARRAY DTWAIN  
+1006 Fora da memória heap  
+1007 DTWAIN Não conseguiu criar a janela TWAIN  
+1008 Tipo de Pixel Inválido  
+1009 CapContainer DTWAIN inválido  
+1010 Nenhuma sessão DTWAIN foi iniciada. Você deve chamar DTWAIN_StartTwainSession()  
+1011 Número DTWAIN_ACQUIRE inválido  
+1012 Capacidade TWAIN inválida  
+1013 Fonte não suporta a capacidade  
+1014 Erro geral TWAIN. Verifique DTWAIN_GetTwainError() para mais informações  
+1015 Falha ao conectar a fila de mensagens da aplicação  
+1016 Argumento de nome de arquivo inválido foi passado  
+1017 DTWAIN_ARRAY não contém valores  
+1018 Formato de arquivo de imagem inválido especificado  
+1019 Página Dib inválida  
+1020 Fonte está atualmente adquirindo uma imagem  
+1021 Parâmetro inválido foi passado  
+1022 Faixa inválida especificada: verifique os limites superior/inferior ou o tamanho do passo  
+1023 Interface do usuário TWAIN não pôde ser iniciada. Erro de dispositivo ou Aquisição deve ter uma interface de usuário.  
+1024 Fonte não suporta a unidade de dispositivo especificada  
+1025 DLL de recurso de idioma não encontrada  
+1026 Fonte TWAIN não está aberta  
+1027 Eventos do dispositivo da fonte não suportados  
+1028 Modo apenas UI da fonte não suportado  
+1029 UI da fonte já está aberta  
+1030 Sem suporte para definir capacidade  
+1031 Fonte não suporta transferências de arquivos  
+1032 Profundidade de bits especificada não suportada  
+1033 Fonte não possui capacidades. Possivelmente corrompida ou falha de hardware  
+1034 Transferências em buffer usando Tiles não suportadas  
+1035 DTWAIN_FRAME inválido. O tipo de dado deve ser DTWAIN_FLOAT, a contagem de elementos deve ser = 4  
+1036 Esta função não é suportada na versão limitada do DTWAIN. Você deve atualizar para a versão registrada do DTWAIN  
+1037 Fonte ou dispositivo não suporta alimentador de documentos  
+1038 Fonte ou dispositivo não suporta consultar se documentos estão carregados no alimentador de documentos  
+1039 Erro de exceção de memória ao chamar o DSM Twain. O DSM pode estar em um estado inconsistente.  
+1040 Transição de estado TWAIN inválida  
+1041 Tipo de informação de imagem estendida não suportado  
+1042 Arquivo de recurso DLL não encontrado  
+1043 DTWAIN não inicializado  
+1044 Nenhuma fonte TWAIN encontrada  
+1045 TWAIN não está instalado  
+1046 Fluxo de execução incorreto  
+1047 Tipo de dado de capacidade inválido  
+1048 Capacidade tem tipo de dado desconhecido  
+1049 A versão de demonstração do DTWAIN não suporta este tipo de arquivo  
+1050 Seleção de fonte cancelada  
+1051 Recursos DTWAIN não encontrados  
+1052 A string não corresponde ao tipo de array  
+1053 ARRAY DTWAIN não é do mesmo tipo  
+1054 Fonte não instalada  
+1055 Fonte não suporta transferências de arquivos em memória  
+1056 O array de área é muito pequeno. O array deve ter pelo menos 4 itens.  
+1057 Não foi possível criar o arquivo de log do DTWAIN.  
+1058 Fonte não suporta sistema de arquivos TWAIN.  
+1059 Modo de ladrilho não suportado para esta Fonte TWAIN.  
+1100 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
+1101 Código de Condição TWAIN: Sem Erro  
+1102 Código de Condição TWAIN: Causa desconhecida da falha  
+1103 Código de Condição TWAIN: Sem Fonte de Dados  
+1104 Código de Condição TWAIN: Fonte de Dados conectada ao número máximo possível de aplicações  
+1105 Código de Condição TWAIN: Fonte de Dados do Gerenciador de Fonte de Dados relatou erro. Aplicativo não é responsável.  
+1106 Código de Condição TWAIN: Capacidade TWAIN desconhecida encontrada  
+1107 Código de Condição TWAIN: Parâmetro de dados está fora do intervalo  
+1108 Código de Condição TWAIN: Combinação de triplet TWAIN não reconhecida  
+1109 Código de Condição TWAIN: Triplet TWAIN está fora da sequência esperada  
+1110 Código de Condição TWAIN: Aplicativo de destino desconhecido na função DSM_Entry  
+1111 Código de Condição TWAIN: Capacidade não é suportada pela Fonte de Dados  
+1112 Código de Condição TWAIN: Operação não é suportada pela capacidade  
+1113 Código de Condição TWAIN: Capacidade depende de outra capacidade  
+1114 Código de Condição TWAIN: Arquivo está protegido  
+1115 Código de Condição TWAIN: Arquivo já existe  
+1116 Código de Condição TWAIN: Arquivo não encontrado  
+1117 Código de Condição TWAIN: Diretório não está vazio  
+1118 Código de Condição TWAIN: Alimentador está atolado  
+1119 Código de Condição TWAIN: Alimentador detectou várias páginas  
+1120 Código de Condição TWAIN: Erro ao escrever arquivo (o disco pode estar cheio)  
+1121 Código de Condição TWAIN: Dispositivo ficou offline durante a operação  
+1123 Código de Condição TWAIN: Operação falhou (capa ou porta do dispositivo está aberta)  
+1124 Código de Condição TWAIN: Operação falhou (documento com canto danificado)  
+1125 Código de Condição TWAIN: Operação falhou (erro de foco durante a captura do documento)  
+1126 Código de Condição TWAIN: Operação falhou (documento muito claro)  
+1127 Código de Condição TWAIN: Operação falhou (documento muito escuro)  
+1128 Código de Condição TWAIN: Operação falhou (fonte não tem nada para capturar para transferência)  
+2000  
+2001 Sem memória  
+2002 O arquivo não pôde ser aberto  
+2003 Erro ao ler o arquivo  
+2004 Erro ao escrever o arquivo  
+2005 Parâmetro inválido especificado para a função de bitmap  
+2006 Arquivo BMP inválido  
+2007 Arquivo BMP inválido com RLE  
+2008  
+2009 Formato JPEG inválido  
+2010 Contexto de Dispositivo inválido  
+2011 DIB inválido  
+2012  
+2013 Erro sem recurso  
+2014  
+2015 Arquivo PNG inválido  
+2016 Não foi possível criar o arquivo PNG  
+2017 Erro interno  
+2018 Fonte inválida  
+2019  
+2020 Arquivo TIFF inválido  
+2021 Compressão TIFF LZW não suportada  
+2022 Formato PCX inválido  
+2023 Não foi possível criar BMP  
+2024  
+2025  
+2026  
+2027 Metarquivo do Windows inválido  
+2028 Profundidade de bits inválida  
+2029 BitBlt falhou  
+2030 Buffer muito pequeno  
+2031 A imagem tem cores demais  
+2032 TGA inválido  
+2033  
+2034  
+2035 DIB não pôde ser criado  
+2036 Compressão LZW não suportada  
+2037  
+2038  
+2039  
+2040  
+2041 Erro ao definir os bits do Metarquivo do Windows  
+2042 Erro ao obter os bits do Metarquivo do Windows  
+2043 Erro na senha do arquivo PAX  
+2044 PAX inválido  
+2045 Tipo de arquivo ou opção do usuário não suportada  
+2046 Formato PSD inválido  
+2047 PSD não suportado  
+2048 Erro de descriptografia  
+2049 Erro de criptografia  
+2050 Erro de compressão  
+2051 Erro de descompressão  
+2052  
+2053 Largura/altura de bitmap inválida para o formato de bitmap sem fio (WBMP)  
+2054 Tag TIFF inválida  
+2055  
+2056 Formato EXIF inválido  
+2057  
+2058 DTWIMG32.DLL não encontrado  
+2059 TIFLIB16.DLL não encontrado  
+2060 PNGLIB16.DLL não encontrado  
+2061 JPGLIB16.DLL não encontrado  
+2062 Bits por pixel especificados inválidos  
+2063 Versão errada do DTWIMG32.DLL  
+2064 DTWPDF32.DLL não encontrado  
+2065 Versão errada do DTWPDF32.DLL  
+2066 DTWIMG32.DLL não encontrado  
+2067 Versão errada do DTWIMG32.DLL  
+2068 DTWIMG32.DLL não encontrado  
+2069 Versão errada do DTWIMG32.DLL  
+2070 DTWIMG32.DLL não encontrado  
+2071 Versão errada do DTWIMG32.DLL  
+2072 Modo duplex manual indisponível nesta versão do DTWAIN  
+2074 Largura/altura de bitmap inválida para o formato ICO do Windows não-Vista  
+2075 TWAIN_32.DLL ou Gerenciador de Fonte de Dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto  
+2076 TWAINDSM.DLL ou Gerenciador de Fonte de Dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto  
+2077 Diretório inválido ou inexistente  
+2078 Não foi possível criar o diretório  
+2079 DLL do Transym OCR não encontrada ou não pôde ser carregada.  
+2081 Nenhum nome de arquivo especificado. Use a opção -f  
+2082 TWAIN não disponível  
+2083 Não é possível comunicar com o dispositivo TWAIN  
+2084 Erro ao salvar o arquivo de saída  
+2085 Comando TwainSave ilegal  
+2086 Aquisição do TwainSave foi cancelada  
+2087 Falha ao adquirir imagem  
+2088 Espaço de cor inválido. Apenas espaços de cor RGB, Escala de Cinza e Preto/Branco são suportados  
+2089 PDF não suportado.  
+2090 DTWTS.DLL ausente ou corrompido. TwainSave não disponível  
+2101 Página OCR inválida especificada  
+2102 Motor OCR inválido  
+2103 Motor OCR não ativo  
+2104 Tipo de arquivo OCR inválido  
+2105 Tipo de pixel OCR inválido  
+2106 Profundidade de bits OCR inválida  
+2107 Erro de reconhecimento OCR  
+2500 Não foi possível abrir a fonte TWAIN  
+2501 Não foi possível fechar a fonte TWAIN  
+2502 Informações de imagem inválidas ao adquirir imagem  
+2503 Erro ao gravar dados no arquivo  
+3000 Selecionar Fonte  
+3001 &Selecionar  
+3002 &Cancelar  
+3003 Fontes:  
+3005 Entrando  
+3006 Saindo  
+3007 retornando valor de  
+3008 Erro de Exceção  
+3009 Módulo  
+3010 Sem informações de parâmetro  
+3011 Erro ao obter informações para a função  
+3012 Entrada  
+3013 Saída: código de retorno do DSM  
+3014 Sem informações para  
+3015 código de erro retornado  
+3016 Erro  
+3017 Diretório de arquivo temporário não existe  
+3018 chamado  
+3019 Arquivo de Imagem Temporário é  
+3020 Erro ao criar arquivo de Imagem Temporário  
+3021 Arquivo de imagem criado com sucesso  
+9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
+9999 Ocorreu um erro de exceção durante a chamada ao DSM Twain. Sessão Twain possivelmente corrompida?
+10000 [Mensagem do Usuário]
+10001 Erro ao fechar o DSM Twain
+10002 Erro ao fechar a Sessão Twain
+10003 Erro ao fechar o Gerenciador DTWAIN
+10004 Gerenciador de Fonte TWAIN, Sessão e DTWAIN fechados com sucesso
+10005 Não foi possível remover a subclasse da janela do usuário

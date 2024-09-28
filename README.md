@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.5 on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.5.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.5.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -16,8 +16,7 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported `C` based functions are provided.  
-
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Java and numerous other languages.
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
 
@@ -42,15 +41,15 @@ However, if for some reason your system does not have the proper runtime compone
 
 * Please note -- since DTWAIN prior to version 5.0 used source code in some modules that could not be released to the general public due to licensing issues, we had to revamp these portions of the codebase so as to allow DTWAIN to become an open source library.  We have made all strives to make sure that these changes to DTWAIN will not cause issues, but as most of you know, bugs can exist.  If bugs are found, we will be addressing them in a short manner.
 
+----------
+### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
+There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
 
 ----------
-
-### How do I get set up using DTWAIN? ###
-
-This section deals with building a C or C++ based DTWAIN application.  Later on in this document will be a discussion on using DTWAIN for [other languages and environments](#otherlanguages).  
-
 ----
 
+### How do I get set up using DTWAIN? ###
+----
 **<u>Building the DTWAIN application</u>**
 
 <a name="dtwaindllusage"></a>
@@ -69,38 +68,31 @@ The **release_libraries.zip** contains all of the DLL's required to start using 
 
 In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
 
-----
-###### For C and C++ programmers:
+A breakdown of the files contained in **release_libraries.zip** is as follows:
+
+    dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
+    dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
+    dtwain32.lib   --  32-bit ANSI (MBCS) Visual C++ import library
+    dtwain32u.lib  --  32-bit Unicode Visual C++ import library
+    dtwain32.pdb   --  32-bit PDB (Microsoft debug) files for dtwain32.dll
+    dtwain32u.pdb  --  32-bit PDB (Microsoft debug) files for dtwain32u.dll
+
+    dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
+    dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
+    dtwain64.lib   --  64-bit ANSI (MBCS) Visual C++ import library
+    dtwain64u.lib  --  64-bit Unicode Visual C++ import library
+    dtwain64.pdb   --  64-bit PDB (Microsoft debug) files for dtwain64.dll
+    dtwain64u.pdb  --  64-bit PDB (Microsoft debug) files for dtwain64u.dll
+
+
+###### Information for C and C++ programmers:
 
 If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
 If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
 
-
-----
-
-A breakdown of the files contained in **release_libraries.zip** is as follows:
-
-    dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
-    dtwain32.lib   --  32-bit ANSI (MBCS) import library
-    dtwain32.pdb   --  32-bit PDB files for dtwain32.dll
-    dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
-    dtwain32u.lib  --  32-bit Unicode import library
-    dtwain32u.pdb  --  32-bit PDB files for dtwain32u.dll
-
-    dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
-    dtwain64.lib   --  64-bit ANSI (MBCS) import library
-    dtwain64.pdb   --  64-bit PDB files for dtwain64.dll
-    dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
-    dtwain64u.lib  --  64-bit Unicode import library
-    dtwain64u.pdb  --  64-bit PDB files for dtwain64u.dll
-
-###### For C and C++ programmers:
-
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
 
 Basically, you just need to build your application and link it to one of the import libraries that matches the environment your application is targeted for.  For example, if the application you're developing is a 32-bit, Unicode-based application, you would use the **dtwain32u.lib** file to allow your C/C++ application to link without errors.
-
-**If you are not using Visual C++ but another brand of C or C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers).**
 
 ----
 <a name="runningapplication"></a>
@@ -110,52 +102,33 @@ After building your application, for your application to run successfully, you m
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text resource files</a> must also be available (by default, they should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, they can reside in the directory specified by **DTWAIN_SetResourcePath**).  
+In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a>, the <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain32.ini" target="_blank">dtwain32.ini</a> for 32-bit applications, and <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain64.ini" target="_blank">dtwain64.ini</a> for 64-bit applications </a> must also be available (by default, these files should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, these files can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
-* Make sure that you are running the latest version of the text resources, as changes to these files can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get these resources whenever you use a newer release of the DTWAIN DLL's.
-
-The text resources files are as follows:
-
-    twaininfo.txt -- General TWAIN information -- this is required.
-	twainresourcestrings_english.txt  	English resources -- this is required.
-
-The files above are required, since they contain all the information concerning the naming of the TWAIN capabilities, triplet information, etc.  You do not need to know what these various aspects of TWAIN are -- just make sure these files reside in the same directory as the dtwain*.dll when your application is executed.
-
-If these files are not found, you will receive the following error when running your application;
+If **twaininfo.txt** or the INI files are not found, corrupted, incorrect version, or some other issue that prevents these files from being loaded, you will receive the following message box displayed, with one or more reasons for the error listed:
 
 ![following error when running your application](/images/resource_error.jpg)
 
-Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  If **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, a subsequent call to **DTWAIN_GetLastError** will return **-1051**, indicating that the DTWAIN resources were not loaded.
+The error message will differ depending on the reason for the error.
 
-Note: Make sure that you use the latest version of the text resources.  A check for the resource version is done by DTWAIN when **DTWAIN_SysInitialize** is called.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  
 
-In addition, there are optional string resource files available.  Here are a list of those files:
-	
-	twainresourcestrings_dutch.txt 	 	    Dutch resources
-	twainresourcestrings_french.txt  	    French resources 
-	twainresourcestrings_german.txt  	    German resources
-	twainresourcestrings_italian.txt 	    Italian resources
-	twainresourcestrings_spanish.txt 	    Spanish resources
-	twainresourcestrings_portuguese_br.txt      Portugeuse-Brazilian resources
+* Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.  
 
+An internal check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
+
+If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
+
+----
+
+In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.
+
+These files should be placed in the same directory as the **twaininfo.txt** file and INI files.
 
 If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.  
 
 More detailed instructions on adding your own resource file can be found <a href="https://github.com/dynarithmic/twain_library/tree/master/additional_language_resources" target="_blank">here</a>.
 
-**Important Note**:
-
-There has been an ongoing issue using **WIA** (Windows Image Acquisition) drivers and DTWAIN and TWAIN, especially in console-based applications.  Therefore, if the manufacturer for your device has both a TWAIN driver and WIA driver, choose the TWAIN driver, and only choose the WIA/TWAIN driver as a secondary choice if the TWAIN driver is not available (you will know the driver is WIA/TWAIN if the name in the "Select Source" dialog box starts with "**WIA-**").  
-
-Measures have been made to allow WIA drivers to operate correctly within DTWAIN (version 5.3.0.3 and higher of DTWAIN addresses these issues with WIA as best as possible).  In future versions of DTWAIN, WIA native support may be added that does not use TWAIN.
-
 ----------
-### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
-There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
-
-----------
-
-  
 ### Ok, how about a code sample?
 
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
@@ -217,7 +190,7 @@ or if it is the second example:
 
 ### What about setting device capabilities such as resolution, contrast, brightness, paper size, etc.?
 
-Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as *DTWAIN_EnumCapabilities*, *DTWAIN_GetCapValues* and *DTWAIN_SetCapValues*, or one of the functions that wrap the setting of a capability such as *DTWAIN_SetResolution*, *DTWAIN_SetBrightness*, etc.
+Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as **DTWAIN_EnumCapabilities**, **DTWAIN_GetCapValues** and **DTWAIN_SetCapValues**, or one of the functions that wrap the setting of a capability such as **DTWAIN_SetResolution**, **DTWAIN_SetBrightness**, etc.
 
     #include "dtwain.h"
     int main()
@@ -233,7 +206,7 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
         DTWAIN_SysDestroy();         
     }         
  
-Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling *DTWAIN_GetLastError*.
+Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling **DTWAIN_GetLastError**.
 
 In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.      
 
@@ -255,7 +228,7 @@ There are many DTWAIN functions, and you might be fearful of having to write cod
 
 In addition, one of the files in the set of bindings is the C/C++ source file **dtwimpl.cpp** (or **dtwimpl.c** if you are using plain C) -- this file will need to be added to your project, as it contains the needed infrastructure for the binding to work properly.  Failure to add this source file will result in linker errors when building your application.
 
-Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" DTWAIN usage of import libraries.
+Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" sDTWAIN usage of import libraries.
 
     #ifdef USING_LOADLIBRARY
        /* Include this header */
@@ -399,7 +372,7 @@ if __name__ == '__main__':
     test_dtwain()
 ```
 ----
-Other languages can be supported, as long as the language is capable of calling exported DLL functions (all exported functions are *stdcall* and have a C compatible interface, similar to the Windows API functions).  The ones listed above just have proper interfaces to the exported functions already set up.
+Other languages can be supported, as long as the language is capable of calling exported DLL functions.  The ones listed above just have proper interfaces to the exported functions already set up.
 
 A full C# demo can be found <a href="https://github.com/dynarithmic/twain_library-csharp_demo" target="_blank">here</a>.
 
@@ -416,7 +389,7 @@ Since TWAIN is an event-driven system, it is advantageous for whatever language 
 
 For example, please see the DTWDEMO.exe example program when acquiring to a PDF file, as a page number is added to the page for each page that is acquired by the device.  This is only possible (using DTWAIN) by using callbacks.
   
-The *DTWAIN_SetCallback* and *DTWAIN_SetCallback64* sets up your callback function to intercept these events and act accordingly.  
+The **DTWAIN_SetCallback** and **DTWAIN_SetCallback64** sets up your callback function to intercept these events and act accordingly.  
 
 Here is an example C++ program that puts a page number on the acquired image files, saved as a PDF document.  
 
@@ -474,7 +447,7 @@ Here is an example C++ program that puts a page number on the acquired image fil
     }         
 
 
-Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the DTWAIN_SetCallback or DTWAIN_SetCallback64 to work for you, then you're not going to have any issues).
+Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the **DTWAIN_SetCallback** or **DTWAIN_SetCallback64** to work for you, then you're not going to have any issues).
 
 ----------
 
