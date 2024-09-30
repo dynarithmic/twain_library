@@ -19,8 +19,15 @@ The part of the file name that represents the language (in the above case, "gree
 5) Change your DTWAIN application to add the following API call (after DTWAIN_SysInitialize is called):
 
     **DTWAIN_LoadCustomStringResourcesA("greek")**
-
+    
 Note that the name parameter used in DTWAIN_LoadCustomStringResources is the same name you gave the resource file (the part of the file name after the initial "_" character in the file name).
+
+6) Edit the [twainlanguage.txt](https://github.com/dynarithmic/twain_library/blob/master/additional_language_resources/twainlanguage.txt) file, and add at the end of the file your custom language name.  In the example using "greek", you would add the line
+
+**greek**
+
+to the list of supported languages.
+
 
 ---------------------------------
 
