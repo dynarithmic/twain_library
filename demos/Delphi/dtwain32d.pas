@@ -1866,7 +1866,7 @@ function DTWAIN_EnumBottomCameras(Source:DTWAIN_SOURCE; Cameras:LPDTWAIN_ARRAY):
 function DTWAIN_EnumBrightnessValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY; bExpandIfRange:BOOL):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumBrightnessValues';
 function DTWAIN_EnumBrightnessValuesEx(Source:DTWAIN_SOURCE; bExpandIfRange:BOOL):DTWAIN_ARRAY;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumBrightnessValuesEx';
 function DTWAIN_EnumCameras(Source:DTWAIN_SOURCE; Cameras:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumCameras';
-function DTWAIN_EnumCamerasEx(Source:DTWAIN_SOURCE; WhichCameras:LONG, Cameras:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumCamerasEx';
+function DTWAIN_EnumCamerasEx(Source:DTWAIN_SOURCE; WhichCameras:LONG; Cameras:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumCamerasEx';
 function DTWAIN_EnumCompressionTypes(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumCompressionTypes';
 function DTWAIN_EnumCompressionTypesEx(Source:DTWAIN_SOURCE):DTWAIN_ARRAY;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumCompressionTypesEx';
 function DTWAIN_EnumContrastValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY; bExpandIfRange:BOOL):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_EnumContrastValues';
@@ -2719,12 +2719,12 @@ function DTWAIN_GetTwainAvailabilityExW(lpszPath:LPWSTR; nLength:LONG):LONG;over
 function DTWAIN_GetTwainAvailabilityEx(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_GetTwainAvailabilityEx';
 function DTWAIN_TestGetCap(source:DTWAIN_SOURCE; nCapability:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_TestGetCap';
 function DTWAIN_GetBufferedTransferInfo(Source:DTWAIN_SOURCE; Compression:LPDWORD; BytesPerRow:LPDWORD; Columns:LPDWORD; XOffset:LPDWORD; YOffset:LPDWORD; Flags:LPDWORD; BytesWritten:LPDWORD; MemoryLength:LPDWORD):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_GetBufferedTransferInfo';
-function DTWAIN_SetBufferedTileMode(Source:DTWAIN_SOURCE, nSet:LONG):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_SetBufferedTileMode';
+function DTWAIN_SetBufferedTileMode(Source:DTWAIN_SOURCE; nSet:LONG):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_SetBufferedTileMode';
 function DTWAIN_IsBufferedTileModeOn(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_IsBufferedTileModeOn';
 function DTWAIN_IsBufferedTileModeSupported(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_IsBufferedTileSupported';
-function DTWAIN_ConvertToAPIStringA Lib(sString:LPCSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIStringA';
-function DTWAIN_ConvertToAPIStringW Lib(sString:LPWSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIStringW'; 
-function DTWAIN_ConvertToAPIString Lib(sString:LPTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIString'; 
+function DTWAIN_ConvertToAPIStringA(sString:LPCSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIStringA';
+function DTWAIN_ConvertToAPIStringW(sString:LPWSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIStringW';
+function DTWAIN_ConvertToAPIString(sString:LPTSTR):DTWAIN_HANDLE;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_ConvertToAPIString';
 function DTWAIN_IsSourceInUIOnlyMode(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32d.dll'   name 'DTWAIN_IsSourceInUIOnlyMode';
 
     implementation
