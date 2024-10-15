@@ -73,6 +73,14 @@
 1057 Impossible de créer le fichier journal.
 1058 Source does not support TWAIN file system.
 1059 Le mode de tuiles n'est pas pris en charge pour cette source TWAIN.
+1060 DTWAIN32.INI non trouvé  
+1061 DTWAIN64.INI non trouvé  
+1062 Échec de la vérification CRC. Vérifiez le fichier twaininfo.txt corrompu  
+1063 La version du fichier twaininfo.txt est invalide pour cette version de DTWAIN  
+1064 Erreur de l'API Windows  
+1065 Aucun ID TWAIN ne correspond à la chaîne  
+1066 ID de ressource dupliqué trouvé  
+1067 Valeur d'information d'image étendue indisponible  
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
@@ -214,6 +222,7 @@
 3001 &Sélectionner
 3002 &Annuler
 3003 Sources:
+3004 Sélectionner OCR
 3005 Entrer
 3006 Sortie
 3007 valeur de retour de
@@ -233,9 +242,9 @@
 3021 Fichier image créé avec succès
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
-10000 Message de l'utilisateur
-10001 Error in closing Twain DSM
-10002 Error in closing Twain Session
-10003 Error in closing DTWAIN Manager
-10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
-10005 Could not remove subclass from user window
+10001 Erreur lors de la fermeture de Twain DSM  
+10002 Erreur lors de la fermeture de la session Twain  
+10003 Erreur lors de la fermeture du gestionnaire DTWAIN  
+10004 Gestionnaire de source TWAIN, session et DTWAIN fermés avec succès  
+10005 Impossible de retirer la sous-classe de la fenêtre utilisateur  
+10006 Le type de périphérique et le type requis par TWAIN ne correspondent pas.

@@ -648,14 +648,6 @@ namespace dynarithmic
                 return;
             }
 
-            bool ispaperdetectable = m_pTwainSourceImpl->m_capability_info->is_cap_supported(CAP_PAPERDETECTABLE);
-            if (!ispaperdetectable)
-            {
-                // Cannot detect if paper is in feeder
-                status = true;
-                return;
-            }
-
             bool isfeederloaded = m_pTwainSourceImpl->m_capability_info->is_cap_supported(CAP_FEEDERLOADED);
             if (!isfeederloaded)
             {
@@ -830,6 +822,45 @@ namespace dynarithmic
 		{
 			if (m_theSource)
                 return tribool::true_(m_bUIOnlySupported) ? true : false;
+            return false;
+        }
+
+        bool twain_source::feederwait_supported() const
+        {
+            if (m_theSource)
+            {
+                const capability_interface& ci = get_capability_interface();
+
+                // First check if ICAP_FEEDERENABLED is supported, and if so, get the
+                // current value.
+                auto vect = ci.get_feederenabled();
+                if (!vect.empty())
+                {
+                    // Supported, so see if we can actually use the feeder    
+                    if (vect[0] == false)
+                    {
+                        // Feeder turned off, so
+                        // temporarily enable the feeder
+                        ci.set_feederenabled({ true });
+
+                        // See if we enabled it successfully
+                        bool feederenabled = false;
+                        vect = ci.get_feederenabled();
+                        feederenabled = !vect.empty() && vect[0] == true;
+
+                        if (feederenabled)
+                        {
+                            // reset to original value
+                            ci.set_feederenabled({ false });
+                        }
+                        else
+                            return false; // couldn't enable the feeder, so can't really
+                                          // test the feederloaded capability.
+                    }
+                    // check to see if ICAP_FEEDERLOADED capability is supported.
+                    return ci.is_feederloaded_supported();
+                }
+            }
 			return false;
 		}
 	}

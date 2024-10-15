@@ -72,6 +72,14 @@
 1057 无法创建 DTWAIN 日志文件。  
 1058 源不支持 TWAIN 文件系统。  
 1059 此 TWAIN 源不支持平铺模式。  
+1060 找不到 DTWAIN32.INI  
+1061 找不到 DTWAIN64.INI  
+1062 CRC 检查失败。检查是否损坏了 twaininfo.txt 文件  
+1063 twaininfo.txt 文件版本与此版本的 DTWAIN 无效  
+1064 Windows API 错误  
+1065 没有与字符串匹配的 TWAIN ID  
+1066 找到重复的资源 ID  
+1067 不可用的扩展图像信息值  
 1100 TWAIN 条件代码：无法完成操作。内存不足。  
 1101 TWAIN 条件代码：没有错误  
 1102 TWAIN 条件代码：未知的故障原因  
@@ -204,6 +212,7 @@
 3001 &选择  
 3002 &取消  
 3003 源：  
+3004 选择 OCR
 3005 进入中  
 3006 退出中  
 3007 返回值为  
@@ -224,8 +233,9 @@
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 在调用 Twain DSM 时发生异常错误。可能是 Twain 会话损坏？
 10000 [用户消息]
-10001 关闭 Twain DSM 时出错
-10002 关闭 Twain 会话时出错
-10003 关闭 DTWAIN 管理器时出错
-10004 TWAIN 源管理器、会话和 DTWAIN 成功关闭
-10005 无法从用户窗口中移除子类
+10001 关闭 Twain DSM 时出错  
+10002 关闭 Twain 会话时出错  
+10003 关闭 DTWAIN 管理器时出错  
+10004 TWAIN 源管理器、会话和 DTWAIN 成功关闭  
+10005 无法从用户窗口中移除子类  
+10006 设备类型与所需的 TWAIN 类型不匹配。

@@ -35,6 +35,8 @@
             this.Cancelbutton = new System.Windows.Forms.Button();
             this.edFileName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioLogToConsole = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // radioNoLogging
@@ -74,7 +76,7 @@
             // OKbutton
             // 
             this.OKbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKbutton.Location = new System.Drawing.Point(68, 139);
+            this.OKbutton.Location = new System.Drawing.Point(68, 177);
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(75, 23);
             this.OKbutton.TabIndex = 4;
@@ -85,7 +87,7 @@
             // Cancelbutton
             // 
             this.Cancelbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancelbutton.Location = new System.Drawing.Point(208, 139);
+            this.Cancelbutton.Location = new System.Drawing.Point(208, 177);
             this.Cancelbutton.Name = "Cancelbutton";
             this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
             this.Cancelbutton.TabIndex = 5;
@@ -104,18 +106,31 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioLogToConsole);
             this.groupBox1.Location = new System.Drawing.Point(2, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(351, 112);
+            this.groupBox1.Size = new System.Drawing.Size(351, 144);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Logging Options";
+            // 
+            // radioLogToConsole
+            // 
+            this.radioLogToConsole.AutoSize = true;
+            this.radioLogToConsole.Location = new System.Drawing.Point(20, 104);
+            this.radioLogToConsole.Name = "radioLogToConsole";
+            this.radioLogToConsole.Size = new System.Drawing.Size(96, 17);
+            this.radioLogToConsole.TabIndex = 3;
+            this.radioLogToConsole.TabStop = true;
+            this.radioLogToConsole.Text = "Log to Console";
+            this.radioLogToConsole.UseVisualStyleBackColor = true;
+            this.radioLogToConsole.CheckedChanged += new System.EventHandler(this.radioLogToConsole_CheckedChanged);
             // 
             // LogFileSelectionDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 175);
+            this.ClientSize = new System.Drawing.Size(357, 209);
             this.Controls.Add(this.edFileName);
             this.Controls.Add(this.Cancelbutton);
             this.Controls.Add(this.OKbutton);
@@ -127,6 +142,8 @@
             this.Name = "LogFileSelectionDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logging Options";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,5 +158,6 @@
         private System.Windows.Forms.Button Cancelbutton;
         private System.Windows.Forms.TextBox edFileName;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioLogToConsole;
     }
 }

@@ -21,6 +21,9 @@ void RetrieveAndDisplayDibs(HINSTANCE hInstance, DTWAIN_ARRAY AcquireArray, UINT
     /* Get the number of total acquisitions attempted */
     numAcquisitions = DTWAIN_ArrayGetCount(AcquireArray);
 
+    if (numAcquisitions == 0)
+        return;
+
     /* Display the acquired pages in a dialog */
     DisplayDibPages(hInstance, AcquireArray, resID, wndHandle);
 
@@ -144,6 +147,8 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                 /* Setup DIB Rectangle */
                 SetRect(&rectDib,0,0,widthDib,heightDib);
             }
+            else
+                MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
 
             /* Enable/Disabe Next, Prev buttons */
             nCurrentAcquisition = 0;
@@ -212,6 +217,10 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                 /* Go to next/prev DIB */
                 nCurDib += (nControl == IDC_btnPrev)?-1:1;
                 hDibLocal = DTWAIN_GetAcquiredImage(AcquireArray, (LONG)nCurrentAcquisition, nCurDib);
+
+                if (!hDibLocal)
+                    MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
+
                 /* Redo page buttons */
                 EnablePageButtons(hWndPrev, hWndNext, hWndCurPage, hWndNumPages, 
                     hwndPage, hWndOf, hwndBlank, nCurDib, (int)nCurrentAcquisition, AcquireArray);         
@@ -248,6 +257,8 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                             /* Setup DIB Rectangle */
                             SetRect(&rectDib,0,0,widthDib,heightDib);
                         }
+                        else
+                            MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
                         EnablePageButtons(hWndPrev, hWndNext, hWndCurPage, hWndNumPages,
                                           hwndPage, hWndOf, hwndBlank, nCurDib,
                                           (int)nCurrentAcquisition, AcquireArray);
