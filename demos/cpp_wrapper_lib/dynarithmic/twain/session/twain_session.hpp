@@ -68,10 +68,55 @@ namespace dynarithmic
         class twain_source;
         class twain_identity;
 
-        template <int N>
+        struct source_functions_twain
+        {
+            typedef DTWAIN_SOURCE value_type;
+            static constexpr bool try_open = true;
+            static value_type Select()
+            { 
+                return API_INSTANCE DTWAIN_SelectSource(); 
+            }
+            
+            static value_type Select2ExA(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, LPCSTR szIncludeNames, LPCSTR szExcludeNames, LPCSTR szNameMapping, LONG nOptions)
+            {
+                return API_INSTANCE DTWAIN_SelectSource2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions);
+            }
+
+            static value_type SelectDefault()
+            { 
+                return API_INSTANCE DTWAIN_SelectDefaultSource();  
+            }
+
+            static value_type SelectByNameA(LPCSTR name) { return API_INSTANCE DTWAIN_SelectSourceByNameA(name); }
+        };
+
+        struct source_functions_ocr
+        {
+            typedef DTWAIN_OCRENGINE value_type;
+            static constexpr bool try_open = false;
+            static value_type Select()
+            {
+                return API_INSTANCE DTWAIN_SelectOCREngine();
+            }
+
+            static value_type Select2ExA(HWND hWndParent, LPCSTR szTitle, LONG xPos, LONG yPos, LPCSTR szIncludeNames, LPCSTR szExcludeNames, LPCSTR szNameMapping, LONG nOptions)
+            {
+                return API_INSTANCE DTWAIN_SelectOCREngine2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions);
+            }
+
+            static value_type SelectDefault()
+            {
+                return API_INSTANCE DTWAIN_SelectDefaultOCREngine();
+            }
+
+            static value_type SelectByNameA(LPCSTR name) { return API_INSTANCE DTWAIN_SelectOCREngineByNameA(name); }
+        };
+
+        template <typename SourceFn, int N>
         struct source_selector
         {
             enum { value = N };
+            SourceFn source_fn;
             twain_select_dialog get_dialog() const { return twain_select_dialog{}; }
         };
 
@@ -79,13 +124,14 @@ namespace dynarithmic
             Template instantiation denoting to use the TWAIN Select Source dialog when selecting a TWAIN Data Source.
             This is aliased by dynarithmic::twain::select_usedialog()
          */
-        template <>
-        struct source_selector<select_type::use_orig_dialog>
+        template <typename SourceFn>
+        struct source_selector<SourceFn, select_type::use_orig_dialog>
         {
+            typedef SourceFn source_value_type;
             enum { value = select_type::use_orig_dialog };
             twain_select_dialog get_dialog() const { return twain_select_dialog{}; }
 
-            static DTWAIN_SOURCE select(twain_select_dialog& dlg)
+            static typename SourceFn::value_type select(twain_select_dialog& dlg)
             {
                 #ifdef _WIN32
                 auto position = dlg.get_position();
@@ -94,7 +140,7 @@ namespace dynarithmic
                 for (auto& f : flags)
                 {
                     if (f == twain_select_dialog::uselegacy)
-                        return API_INSTANCE DTWAIN_SelectSource();
+                        return SourceFn::Select(); 
                     allFlags |= static_cast<int32_t>(f);
                 }
                 if (allFlags & static_cast<int32_t>(twain_select_dialog::useposition))
@@ -102,7 +148,7 @@ namespace dynarithmic
 
                 std::string strTitle = dlg.get_title();
                 API_INSTANCE DTWAIN_SetTwainDialogFont(dlg.get_font());
-                return API_INSTANCE DTWAIN_SelectSource2ExA(dlg.get_parent_window(),
+                return SourceFn::Select2ExA(dlg.get_parent_window(),
                                             (allFlags & twain_select_dialog::usedefaulttitle)?nullptr:strTitle.c_str(),
                                             position.first,
                                             position.second,
@@ -112,7 +158,7 @@ namespace dynarithmic
                                             allFlags);
 
                 #else
-                    return API_INSTANCE DTWAIN_SelectSource();
+                    return API_INSTANCE SourceFn::Select();
                 #endif
             }
         };
@@ -120,56 +166,63 @@ namespace dynarithmic
         /**
             Template instantiation denoting to select the default TWAIN Data Source
          */
-        template <>
-        struct source_selector<select_type::use_default>
+        template <typename SourceFn>
+        struct source_selector<SourceFn, select_type::use_default>
         {
             enum { value = 1 };
+            typedef SourceFn source_value_type;
             twain_select_dialog get_dialog() const { return twain_select_dialog{}; }
-            static DTWAIN_SOURCE select(twain_select_dialog&) { return API_INSTANCE DTWAIN_SelectDefaultSource(); }
+            static typename SourceFn::value_type select(twain_select_dialog&) { return SourceFn::SelectDefault(); } // API_INSTANCE DTWAIN_SelectDefaultSource();
         };
 
         /**
             Template instantiation denoting to select the TWAIN source using the Product Name
          */
-        template <>
-        struct source_selector<select_type::use_name>
+        template <typename SourceFn>
+        struct source_selector<SourceFn, select_type::use_name>
         {
             enum { value = select_type::use_name };
+            typedef SourceFn source_value_type;
             twain_select_dialog get_dialog() const { return twain_select_dialog{}; }
             private:
                 std::string m_name;
             public:
                 source_selector(std::string name /**< [in] Product Name of the TWAIN device to open */) : m_name(std::move(name)) {}
-                DTWAIN_SOURCE select(twain_select_dialog&) const { return API_INSTANCE DTWAIN_SelectSourceByNameA(m_name.c_str()); }
+                typename SourceFn::value_type select(twain_select_dialog&) const { return SourceFn::SelectByNameA(m_name.c_str()); }// API_INSTANCE DTWAIN_SelectSourceByNameA(m_name.c_str());
         };
 
         /**
         Template instantiation denoting to select the TWAIN source using the Product Name
         */
-        template <>
-        struct source_selector<select_type::use_dialog>
+        template <typename SourceFn>
+        struct source_selector<SourceFn, select_type::use_dialog>
         {
             enum { value = select_type::use_dialog };
+            typedef SourceFn source_value_type;
             twain_select_dialog get_dialog() const { return m_user_dialog; }
 
             private:
                 twain_select_dialog m_user_dialog;
             public:
                 source_selector(twain_select_dialog& dlg /**< [in] User-defined twain_dialog to use */) : m_user_dialog(dlg) {}
-                DTWAIN_SOURCE select(twain_select_dialog& user_dialog) const
-            {
-                return source_selector<select_type::use_orig_dialog>::select(user_dialog);
-            }
+                typename SourceFn::value_type select(twain_select_dialog& user_dialog) const
+                {
+                    return source_selector<SourceFn, select_type::use_orig_dialog>::select(user_dialog);
+                }
         };
 
 
         /**
             Template instantiation denoting to use the TWAIN Select Source dialog when selecting a TWAIN Data Source
          */
-        using select_useorigdialog = source_selector<select_type::use_orig_dialog>;
-        using select_default = source_selector<select_type::use_default>;
-        using select_byname = source_selector<select_type::use_name>;
-        using select_usedialog = source_selector<select_type::use_dialog>;
+        using select_useorigdialog = source_selector<source_functions_twain, select_type::use_orig_dialog>;
+        using select_default = source_selector<source_functions_twain, select_type::use_default>;
+        using select_byname = source_selector<source_functions_twain, select_type::use_name>;
+        using select_usedialog = source_selector<source_functions_twain, select_type::use_dialog>;
+        using ocrselect_useorigdialog = source_selector<source_functions_ocr, select_type::use_orig_dialog>;
+        using ocrselect_default = source_selector<source_functions_ocr, select_type::use_default>;
+        using ocrselect_byname = source_selector<source_functions_ocr, select_type::use_name>;
+        using ocrselect_usedialog = source_selector<source_functions_ocr, select_type::use_dialog>;
 
         /* Non-template calls to select_source using this struct */
         struct select_source_traits
@@ -249,6 +302,7 @@ namespace dynarithmic
             std::vector<std::string> m_fileExtensions;
             twain_characteristics m_twain_characteristics;
             bool m_bStarted = false;
+            bool m_bOCRStarted = false;
             bool m_bTripletsNotify = false;
             std::string m_dsm_path;
             std::string m_long_name;
@@ -298,11 +352,12 @@ namespace dynarithmic
                 void update_source_status(const twain_source& ts);
 
                 template <typename SourceSelector>
-                DTWAIN_SOURCE select_source_impl(const SourceSelector& selector, twain_select_dialog& dlg, bool bOpen = true)
+                typename SourceSelector::source_value_type::value_type select_source_impl(const SourceSelector& selector, twain_select_dialog& dlg, bool bOpen = true)
                 {
                     if (m_Handle)
                     {
-                        API_INSTANCE DTWAIN_OpenSourcesOnSelect(bOpen ? TRUE : FALSE);
+                        if (SourceSelector::source_value_type::try_open)
+                            API_INSTANCE DTWAIN_OpenSourcesOnSelect(bOpen ? TRUE : FALSE);
                         auto src = selector.select(dlg);
                         return src;
                     }
@@ -704,9 +759,9 @@ namespace dynarithmic
             }
             \endcode
             */
-            template <typename T = select_useorigdialog>
-            source_select_info select_source(const T& selector = dynarithmic::twain::source_selector<select_type::use_orig_dialog>(),
-                bool open_source = true)
+
+            template <typename SourceFn = source_functions_twain, typename T = select_useorigdialog>
+            source_select_info select_source(const T& selector = dynarithmic::twain::source_selector<SourceFn, select_type::use_orig_dialog>(),bool open_source = true)
             {
                 if (!started())
                 {
@@ -717,7 +772,7 @@ namespace dynarithmic
                     }
                 }
                 bool isCanceled = false;
-                DTWAIN_SOURCE ret = nullptr;
+                typename SourceFn::value_type ret = nullptr;
                 if (static_cast<int>(selector.value) == static_cast<int>(select_type::use_dialog))
                 {
                     auto dlg = selector.get_dialog();
@@ -736,6 +791,26 @@ namespace dynarithmic
 
             source_select_info select_source(select_source_traits& traits);
 
+            source_select_info select_ocr()
+            {
+                return select_source<source_functions_ocr, ocrselect_useorigdialog>();
+            }
+
+            source_select_info select_ocr(std::string name)
+            {
+                return select_source<source_functions_ocr, ocrselect_byname>(source_selector<source_functions_ocr, select_type::use_name>(name.c_str()));
+            }
+
+            source_select_info select_default_ocr()
+            {
+                return select_source<source_functions_ocr, ocrselect_default>(source_selector<source_functions_ocr, select_type::use_default>());
+            }
+
+            source_select_info select_ocr(twain_select_dialog& dialog)
+            {
+                return select_source<source_functions_ocr, ocrselect_usedialog>(source_selector<source_functions_ocr, select_type::use_dialog>(dialog));
+            }
+            
             /** Adds an error value to the error log
             *
             */
@@ -815,6 +890,8 @@ namespace dynarithmic
                 return m_dummy_logger;
             }
             logger_type& get_logger_type() noexcept { return m_logger; }
+
+            bool is_ocr_available() { return m_bOCRStarted; }
         };
     }
 }

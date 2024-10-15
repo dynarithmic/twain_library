@@ -1976,8 +1976,9 @@ namespace dynarithmic
         class twain_session;
         struct source_select_info
         {
-            DTWAIN_SOURCE source_handle = nullptr;      /**< [out] Low-level source_handle */
-            twain_session* session_handle = nullptr;    /**< [out] twain_session that opened the source */
+            DTWAIN_SOURCE source_handle = nullptr;      /**< [out] Low-level source handle */
+            DTWAIN_OCRENGINE ocrengine_handle = nullptr; /**< [out] Low-level ocr engine handle */
+            twain_session* session_handle = nullptr;    /**< [out] twain_session that opened the source or ocr engine */
             bool is_canceled = false;                   /**< [out] status indicator */
             bool canceled() const { return is_canceled; }
         };

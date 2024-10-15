@@ -20,10 +20,10 @@ Public Class CustomSelectSource
         End If
 
         ' Display the sources
-        Dim CurSource As Integer = 0
+        Dim CurSource As System.IntPtr
         For i As Integer = 0 To nCount - 1
             Dim szName As New System.Text.StringBuilder(256)
-            DTWAINAPI.DTWAIN_ArrayGetAtLong(SourceArray, i, CurSource)
+            DTWAINAPI.DTWAIN_ArrayGetSourceAt(SourceArray, i, CurSource)
             DTWAINAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255)
             listSources.Items.Add(szName.ToString())
         Next

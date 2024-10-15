@@ -37,6 +37,7 @@
 
 #define IDD_dlgEnterSourceName              1000
 #define IDC_edSourceName                    1001
+#define IDD_dlgEnterCustomLangName          1002
 
 #define IDD_dlgSelectCustom                 2000
 #define IDC_lstSources                      2001
@@ -73,5 +74,19 @@
 #define IDC_edDSData                        7009
 #define IDC_edCopyright                     7010
 #define IDC_edJSONDetails                   7011
+#define IDC_edLangName                      7012
+
+#define ID_LANGUAGE_ENGLISH             32771
+#define ID_LANGUAGE_FRENCH              32772
+#define ID_LANGUAGE_SPANISH             32773
+#define ID_LANGUAGE_ITALIAN             32774
+#define ID_LANGUAGE_GERMAN              32775
+#define ID_LANGUAGE_DUTCH               32776
+#define ID_LANGUAGE_RUSSIAN             32777
+#define ID_LANGUAGE_ROMANIAN            32778
+#define ID_LANGUAGE_SIMPLIFIEDCHINESE   32779
+#define ID_LANGUAGE_CUSTOMLANGUAGE      32780
+#define ID_LANGUAGE_PORTUGUESE          32781
+
 
 #endif

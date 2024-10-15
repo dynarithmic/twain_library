@@ -73,6 +73,14 @@
 1057 Protokolldatei konnte nicht erstellt werden
 1058 Source does not support TWAIN file system.
 1059 Kachelmodus wird für diese TWAIN-Quelle nicht unterstützt.
+1060 DTWAIN32.INI nicht gefunden  
+1061 DTWAIN64.INI nicht gefunden  
+1062 CRC-Prüfung fehlgeschlagen. Überprüfen Sie die beschädigte twaininfo.txt-Datei  
+1063 Die Version der twaininfo.txt-Datei ist ungültig für diese Version von DTWAIN  
+1064 Windows-API-Fehler  
+1065 Keine TWAIN-ID entspricht der Zeichenfolge  
+1066 Doppelte Ressourcen-ID gefunden  
+1067 Nicht verfügbarer Wert für erweiterte Bildinformationen
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
@@ -204,6 +212,7 @@
 3001 &Wählen
 3002 &Abbrechen
 3003 Quellen:
+3004 OCR auswählen
 3005 Eintreten
 3006 Verlassen
 3007 Rückgabewert von
@@ -224,8 +233,9 @@
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Benutzernachricht]
-10001 Error in closing Twain DSM
-10002 Error in closing Twain Session
-10003 Error in closing DTWAIN Manager
-10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
-10005 Could not remove subclass from user window
+10001 Fehler beim Schließen von Twain DSM  
+10002 Fehler beim Schließen der Twain-Sitzung  
+10003 Fehler beim Schließen des DTWAIN-Managers  
+10004 TWAIN-Quellenmanager, Sitzung und DTWAIN erfolgreich geschlossen  
+10005 Unterklasse konnte nicht aus dem Benutzerfenster entfernt werden  
+10006 Gerätespezifikation und erforderlicher TWAIN-Typ stimmen nicht überein.

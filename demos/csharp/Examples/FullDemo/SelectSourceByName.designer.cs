@@ -82,6 +82,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SelectSourceByNameBox";
             this.Text = "Select Source By Name";
+            this.Load += new System.EventHandler(this.SelectSourceByNameBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

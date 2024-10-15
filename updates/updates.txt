@@ -1,5 +1,28 @@
 DTWAIN Version changes
 
+5.5.3
+
+- Fixed several issues with retrieving extended image information (for example, barcode text, 
+  imprinter text, etc.) from TWAIN Sources using the DTWAIN Extended Image Information retrieval 
+  functions (DTWAIN_InitExtImageInfo, DTWAIN_GetExtImageInfoData, etc.).
+
+- Fixed issue with DTWAIN_ArrayGet...() functions possibly returning the incorrect status
+  code.
+
+- TWAIN Select Source dialog and OCR Select Engine dialogs are now similar and have the same
+  functionality.  This includes adding DTWAIN_SelectOCREngine2() function that is similar
+  to the current DTWAIN_SelectSource2() function, which allows positioning, sorting of the names
+  in the dialog, etc.
+
+- More thorough checks are done to detect an invalid twaininfo.txt at startup.  
+
+- Update C++, C#, and Visual Basic full demo programs to include on the main menu
+  a "Language" option.  This option allows you to dynamically switch the language used
+  (for example, French, German, etc.) while the demo is running.  The changes in the
+  language will be seen in the TWAIN Select Source dialog, and in the logging text if
+  logging is chosen.
+
+
 5.5.2
 
 - Add support for acquiring buffered images using tiled data (DTWAIN_SetBufferedTileMode()).  

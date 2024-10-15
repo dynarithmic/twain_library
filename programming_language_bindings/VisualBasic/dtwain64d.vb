@@ -755,6 +755,10 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_INI64_NOT_FOUND As Integer = (-1061)
     Public Const DTWAIN_ERR_CRC_CHECK As Integer = (-1062)
     Public Const DTWAIN_ERR_RESOURCES_BAD_VERSION As Integer = (-1063)
+    Public Const DTWAIN_ERR_WIN32_ERROR As Integer = (-1064)
+    Public Const DTWAIN_ERR_STRINGID_NOTFOUND As Integer = (-1065)
+    Public Const DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND As Integer = (-1066)
+    Public Const DTWAIN_ERR_UNAVAILABLE_EXTINFO As Integer = (-1067)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
@@ -1055,7 +1059,7 @@ Class DTWAINAPI
                         Or DTWAIN_LOG_DECODE_BITMAP)
 
     Public Const DTWAIN_LOG_ALL_APPEND As Integer = &HFFFFFFFF
-
+    Public Const DTWAIN_TEMPDIR_CREATEDIRECTORY As Integer = DTWAIN_LOG_CREATEDIRECTORY
 
     Public Const DTWAINGCD_RETURNHANDLE As Integer = 1
     Public Const DTWAINGCD_COPYDATA As Integer = 2
@@ -1650,6 +1654,11 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWRC  As Integer =   55
     Public Const  DTWAIN_CONSTANT_MSG  As Integer =   56
     Public Const DTWAIN_CONSTANT_TWLG  As Integer =   57
+    Public Const DTWAIN_CONSTANT_DLLINFO  As Integer = 58
+    Public Const DTWAIN_CONSTANT_DG       As Integer = 59
+    Public Const DTWAIN_CONSTANT_DAT      As Integer= 60
+    Public Const DTWAIN_CONSTANT_DF       As Integer= 61
+    Public Const DTWAIN_CONSTANT_TWTY     As Integer= 62
 
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
@@ -2703,4 +2712,48 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_ConvertToAPIStringW Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPWStr)> sString As String) As System.IntPtr
     Declare Auto Function DTWAIN_ConvertToAPIString Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> sString As String) As System.IntPtr
     Declare Auto Function DTWAIN_IsSourceInUIOnlyMode Lib "dtwain64d.dll" (ByVal Source As System.IntPtr) As Integer
-    End Class
+
+    Declare Ansi Function DTWAIN_SelectOCREngine2A Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Ansi Function DTWAIN_SelectOCREngine2ExA Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectOCREngine2ExW Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectOCREngine2W Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectOCREngine2 Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectOCREngine2Ex Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTitle As String, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> szIncludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szExcludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+
+    Declare Ansi Function DTWAIN_SelectOCREngine2A Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Ansi Function DTWAIN_SelectOCREngine2ExA Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectOCREngine2ExW Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectOCREngine2W Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectOCREngine2 Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectOCREngine2Ex Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> szIncludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szExcludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+
+    Declare Ansi Function DTWAIN_SelectSource2A Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Ansi Function DTWAIN_SelectSource2ExA Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectSource2ExW Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> szIncludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szExcludeNames As String, <MarshalAs(UnmanagedType.LPWStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+    Declare Unicode Function DTWAIN_SelectSource2W Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectSource2 Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, ByVal nOptions As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_SelectSource2Ex Lib "dtwain64d.dll" (ByVal hWndParent As System.IntPtr, ByVal szTitle As System.IntPtr, ByVal xPos As Integer, ByVal yPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> szIncludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szExcludeFilter As String, <MarshalAs(UnmanagedType.LPTStr)> szNameMapping As String, ByVal nOptions As Integer) As System.IntPtr
+
+    Declare Ansi Function DTWAIN_SetTempFileDirectoryExA Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPStr)> szFilePath As String, ByVal options As UInteger) As Integer
+    Declare Unicode Function DTWAIN_SetTempFileDirectoryExW Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPWStr)> szFilePath As String, ByVal options As UInteger) As Integer
+    Declare Auto Function DTWAIN_SetTempFileDirectoryEx Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> szFilePath As String, ByVal options As UInteger) As Integer
+
+    Declare Auto Function DTWAIN_ArrayGetAtSource Lib "dtwain64d.dll" (ByVal pArray As System.IntPtr, ByVal nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_GetSavedFilesCount Lib "dtwain64d.dll" (ByVal Source As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_GetOCRMajorMinorVersion Lib "dtwain64d.dll" (ByVal OCREngine As System.IntPtr, ByRef lpMajor As Integer, ByRef lpMinor As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetActiveDSMPathA Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszPath As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetActiveDSMPathW Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszPath As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetActiveDSMPath Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszPath As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetActiveDSMPathA Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetActiveDSMPathW Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetActiveDSMPath Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+
+    Declare Ansi Function DTWAIN_GetActiveDSMVersionInfoA Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVersionInfo As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetActiveDSMVersionInfoW Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVersionInfo As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVersionInfo As StringBuilder, ByVal nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetActiveDSMVersionInfoA Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetActiveDSMVersionInfoW Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain64d.dll" (ByVal sz As System.IntPtr, ByVal nLength As Integer) As Integer
+
+End Class

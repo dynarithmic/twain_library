@@ -73,6 +73,14 @@
 1057 Errore di creazione del file di registro.
 1058 Source does not support TWAIN file system.
 1059 Modalità tile non supportata per questa sorgente TWAIN.
+1060 DTWAIN32.INI non trovato  
+1061 DTWAIN64.INI non trovato  
+1062 Verifica CRC fallita. Controlla il file twaininfo.txt corrotto  
+1063 La versione del file twaininfo.txt non è valida per questa versione di DTWAIN  
+1064 Errore API di Windows  
+1065 Nessun ID TWAIN corrisponde alla stringa  
+1066 ID risorsa duplicato trovato  
+1067 Valore di info immagine estesa non disponibile  
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
@@ -204,6 +212,7 @@
 3001 &Selezionar
 3002 &Annullare
 3003 Fonti:
+3004 Seleziona OCR
 3005 Entrando
 3006 In uscita
 3007 valore restituito di
@@ -224,8 +233,9 @@
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Messaggio dell'utente]
-10001 Error in closing Twain DSM
-10002 Error in closing Twain Session
-10003 Error in closing DTWAIN Manager
-10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
-10005 Could not remove subclass from user window
+10001 Errore nella chiusura di Twain DSM  
+10002 Errore nella chiusura della sessione Twain  
+10003 Errore nella chiusura del gestore DTWAIN  
+10004 Gestore delle sorgenti TWAIN, sessione e DTWAIN chiusi con successo  
+10005 Impossibile rimuovere il sottotipo dalla finestra utente  
+10006 Il tipo di dispositivo e il tipo richiesto da TWAIN non corrispondono.

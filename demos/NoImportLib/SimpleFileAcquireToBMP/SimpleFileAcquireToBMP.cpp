@@ -12,27 +12,11 @@
 /* Change this to the output directory that fits your environment */
 char outputDir[1024] = "";
 
-struct DynamicHandler
-{
-    HMODULE h_;
-    DynamicHandler(HMODULE h) : h_(h) {}
-    ~DynamicHandler() { FreeLibrary(h_); }
-};
-
 int SimpleFileAcquireToBMP()
 {
     /* Dynamically load DTWAIN */
-    HMODULE hDTwainModule = ::LoadLibraryA(DTWAIN_DLLNAME);
-    if (!hDTwainModule)
-    {
-        std::cout << "Could not find DLL -- " << DTWAIN_DLLNAME << "\n";
-        return -1;
-    }
-
-    DynamicHandler dynHandler(hDTwainModule);
-
+    DYNDTWAIN_API_Scoped dynHandler(DTWAIN_DLLNAME);
     DYNDTWAIN_API API;
-    API.InitDTWAINInterface(hDTwainModule);
     
     /* Initialize DTWAIN */
     DTWAIN_HANDLE handle = API.DTWAIN_SysInitialize();
@@ -76,10 +60,10 @@ int SimpleFileAcquireToBMP()
                                     TRUE,    /* Close the source when DTWAIN_AcquireFileA returns*/
                                     &status); /* return status */
 
-                                              /* Test if acquisition process was started and ended successfully.  
-                                              Please note that this will *not* tell you if the acquisition was cancelled, an error
-                                              occurred such as a paper jam, etc.  To check for specific errors such as these 
-                                              while the acquisition process is occurring, see the SimpleFileAcquireToBMPErrorHandling.c demo */
+    /* Test if acquisition process was started and ended successfully.
+    Please note that this will *not* tell you if the acquisition was cancelled, an error
+    occurred such as a paper jam, etc.  To check for specific errors such as these
+    while the acquisition process is occurring, see the SimpleFileAcquireToBMPErrorHandling.c demo */
     if ( fileError != DTWAIN_TRUE )
     {
         printf("File could not be acquired: %ld\nstatus code: %ld", API.DTWAIN_GetLastError(), status);

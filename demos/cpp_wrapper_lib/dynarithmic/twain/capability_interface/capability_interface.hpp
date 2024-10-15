@@ -310,6 +310,7 @@ namespace twain {
         mutable cap_return_type m_return_type;
 
         struct capability_info_struct;
+        bool m_feeder_supported = false;
 
         template <typename Container>
         void copy_to_cache(const Container& ct, int capvalue) const
@@ -395,6 +396,10 @@ namespace twain {
                 DTWAIN_LONG theType = API_INSTANCE DTWAIN_GetCapDataType(m_Source, s + 1000);
                 m_extendedimage_caps[s] = { szBuffer, DTWAIN_CO_GET, theType };
             }
+
+            // get the feeder status
+            m_feeder_supported = API_INSTANCE DTWAIN_IsFeederSupported(m_Source);
+
             return !vCaps.empty();
         }
 
@@ -1099,6 +1104,12 @@ namespace twain {
         bool is_extendedimage_cap_supported(twain_cap_type capValue) const
         {
             return m_extendedimage_caps.find(capValue) != m_extendedimage_caps.end();
+        }
+
+        // Special case
+        bool is_feeder_supported() const
+        {
+            return m_feeder_supported;
         }
 
         template <typename Cap, typename std::enable_if<

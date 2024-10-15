@@ -73,6 +73,14 @@
 1057 Não foi possível criar o arquivo de log do DTWAIN.  
 1058 Fonte não suporta sistema de arquivos TWAIN.  
 1059 Modo de ladrilho não suportado para esta Fonte TWAIN.  
+1060 DTWAIN32.INI não encontrado  
+1061 DTWAIN64.INI não encontrado  
+1062 Verificação de CRC falhou. Verifique se o arquivo twaininfo.txt está corrompido  
+1063 A versão do arquivo twaininfo.txt é inválida para esta versão do DTWAIN  
+1064 Erro da API do Windows
+1065 Nenhum ID TWAIN corresponde à string  
+1066 ID de recurso duplicado encontrado  
+1067 Valor de informação de imagem estendida indisponível
 1100 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erro  
 1102 Código de Condição TWAIN: Causa desconhecida da falha  
@@ -205,6 +213,7 @@
 3001 &Selecionar  
 3002 &Cancelar  
 3003 Fontes:  
+3004 Selecionar OCR
 3005 Entrando  
 3006 Saindo  
 3007 retornando valor de  
@@ -226,8 +235,9 @@
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 9999 Ocorreu um erro de exceção durante a chamada ao DSM Twain. Sessão Twain possivelmente corrompida?
 10000 [Mensagem do Usuário]
-10001 Erro ao fechar o DSM Twain
-10002 Erro ao fechar a Sessão Twain
-10003 Erro ao fechar o Gerenciador DTWAIN
-10004 Gerenciador de Fonte TWAIN, Sessão e DTWAIN fechados com sucesso
-10005 Não foi possível remover a subclasse da janela do usuário
+10001 Erro ao fechar o DSM do Twain  
+10002 Erro ao fechar a sessão do Twain  
+10003 Erro ao fechar o gerenciador DTWAIN  
+10004 Gerenciador de fonte TWAIN, sessão e DTWAIN fechados com sucesso  
+10005 Não foi possível remover a subclasse da janela do usuário  
+10006 O tipo de dispositivo e o tipo exigido pelo TWAIN não correspondem.

@@ -36,6 +36,7 @@
 #endif
 #include <dtwain_library_selector.h>
 #ifdef __cplusplus
+#include <string>
 extern "C" {
 #endif
 
@@ -91,6 +92,7 @@ typedef LPVOID (DLLENTRY_DEF * D_ARRAYGETBUFFERFUNC)                            
 typedef LONG (DLLENTRY_DEF * D_ARRAYGETCOUNTFUNC)                               (DTWAIN_ARRAY);
 typedef LONG (DLLENTRY_DEF * D_ARRAYGETMAXSTRINGLENGTHFUNC)                     (DTWAIN_ARRAY);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYGETSOURCEATFUNC)                     (DTWAIN_ARRAY, LONG, DTWAIN_SOURCE*);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYGETATSOURCEFUNC)                     (DTWAIN_ARRAY, LONG, DTWAIN_SOURCE*);
 typedef LONG (DLLENTRY_DEF * D_ARRAYGETSTRINGLENGTHFUNC)                        (DTWAIN_ARRAY, LONG);
 typedef LONG (DLLENTRY_DEF * D_ARRAYGETTYPEFUNC)                                (DTWAIN_ARRAY);
 typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_ARRAYINITFUNC)                           (VOID_PROTOTYPE);
@@ -1033,7 +1035,20 @@ typedef HANDLE        (DLLENTRY_DEF*  D_GETBUFFEREDTRANSFERINFOFUNC)            
 typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGFUNC)                  (LPCTSTR);
 typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGAFUNC)                 (LPCSTR);
 typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                 (LPCWSTR);
-
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2FUNC)                  (HWND, LPCTSTR,LONG, LONG, LONG);
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2AFUNC)                 (HWND, LPCSTR,LONG, LONG, LONG);
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2WFUNC)                 (HWND, LPCWSTR,LONG, LONG, LONG);
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2EXFUNC)                (HWND, LPCTSTR, LONG, LONG, LPCTSTR, LPCTSTR, LPCTSTR, LONG);
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2EXAFUNC)               (HWND, LPCSTR, LONG, LONG, LPCSTR, LPCSTR, LPCSTR, LONG);
+typedef DTWAIN_OCRENGINE (DLLENTRY_DEF* D_SELECTOCRENGINE2EXWFUNC)               (HWND, LPCWSTR, LONG, LONG, LPCWSTR, LPCWSTR, LPCWSTR, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETTEMPFILEDIRECTORYEXFUNC)                 (LPCTSTR, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETTEMPFILEDIRECTORYEXAFUNC)                (LPCSTR, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_SETTEMPFILEDIRECTORYEXWFUNC)                (LPCWSTR, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_GETOCRMAJORMINORVERSIONFUNC)                (DTWAIN_OCRENGINE, LPLONG, LPLONG);
+typedef LONG        (DLLENTRY_DEF* D_GETSAVEDFILESCOUNTFUNC)                     (DTWAIN_SOURCE);
+typedef LONG        (DLLENTRY_DEF* D_GETACTIVEDSMVERSIONINFOFUNC)                (LPTSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETACTIVEDSMVERSIONINFOAFUNC)               (LPSTR, LONG);
+typedef LONG        (DLLENTRY_DEF* D_GETACTIVEDSMVERSIONINFOWFUNC)               (LPWSTR, LONG);
 #ifdef __cplusplus
 }
 #endif
@@ -1118,6 +1133,7 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_ARRAYGETATFUNC                                 DTWAIN_ArrayGetAt;
     STATIC D_ARRAYGETATLONG64FUNC                           DTWAIN_ArrayGetAtLong64;
     STATIC D_ARRAYGETATLONGFUNC                             DTWAIN_ArrayGetAtLong;
+    STATIC D_ARRAYGETATSOURCEFUNC                           DTWAIN_ArrayGetAtSource;
     STATIC D_ARRAYGETATSTRINGAFUNC                          DTWAIN_ArrayGetAtStringA;
     STATIC D_ARRAYGETATSTRINGFUNC                           DTWAIN_ArrayGetAtString;
     STATIC D_ARRAYGETATSTRINGPTRFUNC                        DTWAIN_ArrayGetAtStringPtr;
@@ -1346,6 +1362,9 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_GETACTIVEDSMPATHAFUNC                          DTWAIN_GetActiveDSMPathA;
     STATIC D_GETACTIVEDSMPATHFUNC                           DTWAIN_GetActiveDSMPath;
     STATIC D_GETACTIVEDSMPATHWFUNC                          DTWAIN_GetActiveDSMPathW;
+    STATIC D_GETACTIVEDSMVERSIONINFOAFUNC                   DTWAIN_GetActiveDSMVersionInfoA;
+    STATIC D_GETACTIVEDSMVERSIONINFOFUNC                    DTWAIN_GetActiveDSMVersionInfo;
+    STATIC D_GETACTIVEDSMVERSIONINFOWFUNC                   DTWAIN_GetActiveDSMVersionInfoW;
     STATIC D_GETALARMVOLUMEFUNC                             DTWAIN_GetAlarmVolume;
     STATIC D_GETAPIHANDLESTATUS                             DTWAIN_GetAPIHandleStatus;
     STATIC D_GETAPPINFOAFUNC                                DTWAIN_GetAppInfoA;
@@ -1479,6 +1498,7 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_GETOCRERRORSTRINGFUNC                          DTWAIN_GetOCRErrorString;
     STATIC D_GETOCRERRORSTRINGWFUNC                         DTWAIN_GetOCRErrorStringW;
     STATIC D_GETOCRLASTERRORFUNC                            DTWAIN_GetOCRLastError;
+    STATIC D_GETOCRMAJORMINORVERSIONFUNC                    DTWAIN_GetOCRMajorMinorVersion;
     STATIC D_GETOCRMANUFACTURERAFUNC                        DTWAIN_GetOCRManufacturerA;
     STATIC D_GETOCRMANUFACTURERFUNC                         DTWAIN_GetOCRManufacturer;
     STATIC D_GETOCRMANUFACTURERWFUNC                        DTWAIN_GetOCRManufacturerW;
@@ -1536,6 +1556,7 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_GETROTATIONSTRINGAFUNC                         DTWAIN_GetRotationStringA;
     STATIC D_GETROTATIONSTRINGFUNC                          DTWAIN_GetRotationString;
     STATIC D_GETROTATIONSTRINGWFUNC                         DTWAIN_GetRotationStringW;
+    STATIC D_GETSAVEDFILESCOUNTFUNC                         DTWAIN_GetSavedFilesCount;
     STATIC D_GETSAVEFILENAMEAFUNC                           DTWAIN_GetSaveFileNameA;
     STATIC D_GETSAVEFILENAMEFUNC                            DTWAIN_GetSaveFileName;
     STATIC D_GETSAVEFILENAMEWFUNC                           DTWAIN_GetSaveFileNameW;
@@ -1780,6 +1801,12 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_SELECTDEFAULTOCRENGINEFUNC                     DTWAIN_SelectDefaultOCREngine;
     STATIC D_SELECTDEFAULTSOURCEFUNC                        DTWAIN_SelectDefaultSource;
     STATIC D_SELECTDEFAULTSOURCEWITHOPENFUNC                DTWAIN_SelectDefaultSourceWithOpen;
+    STATIC D_SELECTOCRENGINE2AFUNC                          DTWAIN_SelectOCREngine2A;
+    STATIC D_SELECTOCRENGINE2EXAFUNC                        DTWAIN_SelectOCREngine2ExA;
+    STATIC D_SELECTOCRENGINE2EXFUNC                         DTWAIN_SelectOCREngine2Ex;
+    STATIC D_SELECTOCRENGINE2EXWFUNC                        DTWAIN_SelectOCREngine2ExW;
+    STATIC D_SELECTOCRENGINE2FUNC                           DTWAIN_SelectOCREngine2;
+    STATIC D_SELECTOCRENGINE2WFUNC                          DTWAIN_SelectOCREngine2W;
     STATIC D_SELECTOCRENGINEBYNAMEAFUNC                     DTWAIN_SelectOCREngineByNameA;
     STATIC D_SELECTOCRENGINEBYNAMEFUNC                      DTWAIN_SelectOCREngineByName;
     STATIC D_SELECTOCRENGINEBYNAMEWFUNC                     DTWAIN_SelectOCREngineByNameW;
@@ -1989,6 +2016,9 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_SETSHADOWSTRINGWFUNC                           DTWAIN_SetShadowStringW;
     STATIC D_SETSOURCEUNITFUNC                              DTWAIN_SetSourceUnit;
     STATIC D_SETTEMPFILEDIRECTORYAFUNC                      DTWAIN_SetTempFileDirectoryA;
+    STATIC D_SETTEMPFILEDIRECTORYEXAFUNC                    DTWAIN_SetTempFileDirectoryExA;
+    STATIC D_SETTEMPFILEDIRECTORYEXFUNC                     DTWAIN_SetTempFileDirectoryEx;
+    STATIC D_SETTEMPFILEDIRECTORYEXWFUNC                    DTWAIN_SetTempFileDirectoryExW;
     STATIC D_SETTEMPFILEDIRECTORYFUNC                       DTWAIN_SetTempFileDirectory;
     STATIC D_SETTEMPFILEDIRECTORYWFUNC                      DTWAIN_SetTempFileDirectoryW;
     STATIC D_SETTHRESHOLDFUNC                               DTWAIN_SetThreshold;
@@ -2040,10 +2070,60 @@ typedef HANDLE        (DLLENTRY_DEF*  D_CONVERTTOAPISTRINGWFUNC)                
     STATIC D_UNLOCKMEMORYEXFUNC                             DTWAIN_UnlockMemoryEx;
     STATIC D_UNLOCKMEMORYFUNC                               DTWAIN_UnlockMemory;
     STATIC D_USEMULTIPLETHREADSFUNC                         DTWAIN_UseMultipleThreads;
-
 #ifdef __cplusplus
         static int InitDTWAINInterface(DYNDTWAIN_API*, HMODULE h);
         static int InitDTWAINInterface(HMODULE h);
+};
+
+class DYNDTWAIN_API_Scoped
+{
+    HMODULE m_hModule;
+    std::string m_sModuleName;
+private:
+    void tryDLL_Load()
+    {
+        m_hModule = ::LoadLibraryA(m_sModuleName.c_str());
+        if (m_hModule)
+        {
+            int ret = DYNDTWAIN_API::InitDTWAINInterface(m_hModule);
+            if (!ret)
+                throw "DTWAIN Module failed to load";
+        }
+    }
+
+public:
+    DYNDTWAIN_API_Scoped(std::string moduleName = "") : m_hModule(NULL), m_sModuleName(moduleName)
+    {
+        if (!moduleName.empty())
+            tryDLL_Load();
+    }
+
+    DYNDTWAIN_API_Scoped(DYNDTWAIN_API_Scoped&);
+    DYNDTWAIN_API_Scoped& operator=(DYNDTWAIN_API_Scoped&);
+
+    void LoadDLL(std::string moduleName)
+    {
+        ::FreeLibrary(m_hModule);
+        m_sModuleName = moduleName;
+        tryDLL_Load();
+    }
+
+    HMODULE GetHandle() const
+    {
+        return m_hModule;
+    }
+
+    void FreeDLL()
+    {
+        if (m_hModule)
+            ::FreeLibrary(m_hModule);
+        m_hModule = NULL;
+    }
+
+    ~DYNDTWAIN_API_Scoped()
+    {
+        FreeDLL();
+    }
 };
 #else
 } DYNDTWAIN_API;

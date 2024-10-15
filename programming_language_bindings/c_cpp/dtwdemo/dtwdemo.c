@@ -9,7 +9,6 @@
 #include <ctype.h>
 #include "dibdisplay.h"
 #include <io.h>
-
 #include <tchar.h>
 #define MAX_LOADSTRING 100
 
@@ -51,9 +50,12 @@ void ToggleCheckedItem(UINT resId);
 BOOL GetToggleMenuState(UINT resID);
 BOOL IsTypeAvailable(LONG filetype);
 void DisplayLoggingOptions();
+void LoadLanguage(int message);
+void LoadLanguageStrings(LPCTSTR szLang);
+void DisplayCustomLangDlg();
+LRESULT CALLBACK EnterCustomLangNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 BOOL bPageOK;
-LONG nPageCount=0;
 LONG nMajorVer, nMinorVer, nDTwainType;
 
 void WaitLoop();
@@ -80,6 +82,12 @@ typedef struct
     LONG DTWAINType;
     LPCTSTR defName;
 } AllTypes ;
+
+typedef struct  
+{
+    LONG langID;
+    LPCTSTR language;
+} AllLanguages;
 
 AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("BMP File (RLE)"), DTWAIN_BMP_RLE, _T("test.bmp")},
@@ -118,13 +126,26 @@ AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
 
                         };
 
-AllTypes g_allTypesDemo[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
+AllTypes g_allTypesDemo[] = {{_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("JPEG File"), DTWAIN_JPEG, _T("test.jpg")},
                             {_T("Adobe PDF File"), DTWAIN_PDFMULTI, _T("test.pdf")},
                             {_T("Text File"), DTWAIN_TEXTMULTI, _T("test.txt")},
                             {_T("TIFF (No compression)"), DTWAIN_TIFFNONEMULTI, _T("test.tif")},
                             {_T("TIFF (CCITT Group 4)"), DTWAIN_TIFFG4MULTI, _T("test.tif")},
                        };
+
+AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("english")},
+                                 {ID_LANGUAGE_FRENCH                , _T("french")},
+                                 {ID_LANGUAGE_SPANISH               , _T("spanish")},
+                                 {ID_LANGUAGE_ITALIAN               , _T("italian")},
+                                 {ID_LANGUAGE_GERMAN                , _T("german")},
+                                 {ID_LANGUAGE_DUTCH                 , _T("dutch")},
+                                 {ID_LANGUAGE_RUSSIAN               , _T("russian")},
+                                 {ID_LANGUAGE_ROMANIAN              , _T("romanian")},
+                                 {ID_LANGUAGE_PORTUGUESE              , _T("portuguese")},
+                                 {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")} 
+                                };
+TCHAR g_CustomLanguage[256];
 
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -304,6 +325,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     DisplayLoggingOptions();
                 break;
 
+                case ID_LANGUAGE_ENGLISH            : 
+                case ID_LANGUAGE_FRENCH             : 
+                case ID_LANGUAGE_SPANISH            : 
+                case ID_LANGUAGE_ITALIAN            : 
+                case ID_LANGUAGE_GERMAN             : 
+                case ID_LANGUAGE_DUTCH              : 
+                case ID_LANGUAGE_RUSSIAN            : 
+                case ID_LANGUAGE_ROMANIAN           : 
+                case ID_LANGUAGE_SIMPLIFIEDCHINESE  : 
+                case ID_LANGUAGE_PORTUGUESE:
+                    LoadLanguage(wmId);
+                break;
+
+                case ID_LANGUAGE_CUSTOMLANGUAGE:
+                    DisplayCustomLangDlg();
+                break;
+
                 case IDM_EXIT:
                    DestroyWindow(hWnd);
                    break;
@@ -318,6 +356,30 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             return DefWindowProc(hWnd, message, wParam, lParam);
    }
    return 0;
+}
+
+void LoadLanguage(int message)
+{
+    LPCSTR langugeToLoad = NULL;
+    int numLanguages = sizeof(g_allLanguages) / sizeof(g_allLanguages[0]);
+    for (int i = 0; i < numLanguages; ++i)
+    {
+        if (message == g_allLanguages[i].langID)
+        {
+            LoadLanguageStrings(g_allLanguages[i].language);
+            return;
+        }
+    }
+    MessageBox(NULL, _T("Could not load language resource"), _T("Language Resource Error"), MB_ICONSTOP);
+}
+
+void LoadLanguageStrings(LPCTSTR szLang)
+{
+    BOOL bRet = DTWAIN_LoadCustomStringResources(szLang);
+    if (!bRet)
+        MessageBox(NULL, _T("Could not load language resource"), _T("Language Resource Error"), MB_ICONSTOP);
+    else
+        MessageBox(g_hWnd, _T("Custom resource loaded.  Select a Source or choose Logging to see the new language being used"), _T("Success"), MB_OK);
 }
 
 void ToggleCheckedItem(UINT resId)
@@ -358,7 +420,7 @@ void SelectTheSource(int nWhich)
     switch (nWhich)
     {
         case IDM_SELECT_SOURCE:
-            tempSource = DTWAIN_SelectSource2(NULL, _T("Select Source"),0,0, DTWAIN_DLG_CENTER_SCREEN | DTWAIN_DLG_SORTNAMES);
+            tempSource = DTWAIN_SelectSource2(NULL, NULL,0,0, DTWAIN_DLG_CENTER_SCREEN | DTWAIN_DLG_SORTNAMES);
         break;
 
         case IDM_SELECT_DEFAULT_SOURCE:
@@ -372,6 +434,7 @@ void SelectTheSource(int nWhich)
         case IDM_SELECT_SOURCE_CUSTOM:
             tempSource = DisplayCustomDlg();
         break;
+
 
     }
 
@@ -388,12 +451,16 @@ void SelectTheSource(int nWhich)
         }
         else
             MessageBox(g_hWnd, _T("Error Opening Source"), _T("TWAIN Error"), MB_ICONSTOP);
-
     }
     else
-        MessageBox(g_hWnd, _T("Error Selecting Source"), _T("TWAIN Error"), MB_ICONSTOP);
+    {
+        LONG lastError = DTWAIN_GetLastError();
+        if (lastError == DTWAIN_ERR_SOURCESELECTION_CANCELED)
+            MessageBox(g_hWnd, _T("Canceled Selecting Source"), _T("Information"), MB_ICONSTOP);
+        else
+            MessageBox(g_hWnd, _T("Error Selecting Source"), _T("TWAIN Error"), MB_ICONSTOP);
+    }
 }
-
 
 void SetCaptionToSourceName()
 {
@@ -429,6 +496,7 @@ void GenericAcquire(LONG nWhichOne)
                                  GetToggleMenuState(IDM_DISCARD_BLANKS));
 
     BOOL bRet = FALSE;
+    EnableSourceItems(FALSE);
     if (nWhichOne == 0)
     {
         bRet = DTWAIN_AcquireNativeEx(
@@ -453,9 +521,13 @@ void GenericAcquire(LONG nWhichOne)
             &ErrStatus /* Error Status */
         );
     }
+    EnableSourceItems(TRUE);
     if (!bRet)
     {
-        MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
+        if (ErrStatus == DTWAIN_TN_ACQUIRECANCELED)
+            MessageBox(NULL, _T("Acquisition cancelled without acquiring any images"), _T("Information"), MB_ICONSTOP);
+        else
+            MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
         return;
     }
 
@@ -567,6 +639,7 @@ void AcquireFile(BOOL bUseSource)
 
     /* Acquire the file */
     UseUI = GetToggleMenuState(IDM_USE_SOURCE_UI);
+    EnableSourceItems(FALSE);
     bAcquireOK = DTWAIN_AcquireFileEx(g_CurrentSource,
                                   AFileNames,
                                   FileType,
@@ -583,24 +656,26 @@ void AcquireFile(BOOL bUseSource)
     }
     WaitLoop();
     EnableWindow(g_hWnd, TRUE);
+    EnableSourceItems(TRUE);
 
     /* Reopen source since we closed it after the acquisition
        (to be safe) */
     DTWAIN_ArrayDestroy( AFileNames );
     DTWAIN_OpenSource( g_CurrentSource );
-    if ( !bAcquireOK || nPageCount == 0 || !bPageOK )
+    LONG pageCount = DTWAIN_GetSavedFilesCount(g_CurrentSource);
+    if ( !bAcquireOK || pageCount == 0 || !bPageOK )
     {
         if ( !bAcquireOK)
             MessageBox(g_hWnd, szError, _T(""), MB_ICONSTOP);
         else
-            MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
+            MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_OK);
         return;
     }
 	else
 	{
 		if (_taccess(g_FileName, 0) == 0)
 		{
-			MessageBox(g_hWnd, _T("Images Acquired"), _T(""), MB_ICONSTOP);
+			MessageBox(g_hWnd, _T("Images Acquired"), _T(""), MB_OK);
 			return;
 		}
     }
@@ -612,6 +687,11 @@ DTWAIN_SOURCE DisplayGetNameDlg()
     g_NamedSource = NULL;
     DialogBox(g_hInstance, (LPCTSTR)IDD_dlgEnterSourceName, g_hWnd, (DLGPROC)EnterSourceNameProc);
     return g_NamedSource;
+}
+
+void DisplayCustomLangDlg()
+{
+    DialogBox(g_hInstance, (LPCTSTR)IDD_dlgEnterCustomLangName, g_hWnd, (DLGPROC)EnterCustomLangNameProc);
 }
 
 DTWAIN_SOURCE DisplayCustomDlg()
@@ -628,7 +708,7 @@ void DisplaySourceProps()
 
 void DisplayLoggingOptions()
 {
-    LONG LogFlags = DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_DECODE_TWEVENT | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_ISTWAINMSG;
+    LONG LogFlags = DTWAIN_LOG_ALL &~ (DTWAIN_LOG_ISTWAINMSG | DTWAIN_LOG_USEFILE | DTWAIN_LOG_DEBUGMONITOR | DTWAIN_LOG_CONSOLE);
     if ( DialogBox(g_hInstance, (LPCTSTR)IDD_dlgDebug, g_hWnd, (DLGPROC)DisplayLoggingProc) == IDOK )
     {
         // Make sure we make this exclusive by turning off all logging
@@ -672,7 +752,46 @@ void EnableSourceItems(BOOL bEnable)
 }
 
 
-/* Dialog box to display DIB */
+/* Dialog box to enter custom language name */
+LRESULT CALLBACK EnterCustomLangNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+        case WM_INITDIALOG:
+        {
+            return TRUE;
+        }
+
+        case WM_COMMAND:
+        {
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
+
+            switch( nControl )
+            {
+                /* Quit the dialog */
+                case IDOK:
+                {
+                    HWND hWndEdit = GetDlgItem(hDlg, IDC_edLangName);
+                    GetWindowText(hWndEdit, g_CustomLanguage, 255);
+                    LoadLanguageStrings(g_CustomLanguage);
+                    EndDialog(hDlg, LOWORD(wParam));
+                }
+                break;
+
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+    }
+    return FALSE;
+}
+
+
+/* Dialog box to display source name to open */
 LRESULT CALLBACK EnterSourceNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -880,7 +999,10 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HWND hWndNumExtendedCaps =  GetDlgItem(hDlg,  IDC_edExtendedCaps);
             HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
             HWND hWndJSONDetails = GetDlgItem(hDlg, IDC_edJSONDetails);
-
+            int maxTextLength = 0;
+            int curStringLength;
+            HDC hdcList = GetDC(hWndCaps);
+            SIZE textSize;
             DTWAIN_GetSourceProductNameA(g_CurrentSource, szBufName, 255);
             SetWindowTextA(hWndName, szBufName);
 
@@ -904,7 +1026,13 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 DTWAIN_ArrayGetAt( CapArray, nIndex, &nCapValue );
                 DTWAIN_GetNameFromCap( nCapValue, szBuf, 255);
                 SendMessage( hWndCaps, LB_ADDSTRING, 0, (LPARAM)szBuf);
+                curStringLength = lstrlen(szBuf);
+                GetTextExtentPoint32(hdcList, szBuf, curStringLength, &textSize);
+                if (textSize.cx > maxTextLength)
+                    maxTextLength = textSize.cx;
             }
+            ReleaseDC(hWndCaps, hdcList);
+            SendMessage(hWndCaps, LB_SETHORIZONTALEXTENT, maxTextLength, 0);
 
             wsprintf(szBuf, _T("%d"), nCapCount);
             SetWindowText(hWndNumCaps, szBuf);
@@ -1196,7 +1324,6 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
     {
         case DTWAIN_TN_ACQUIRESTARTED:
             bPageOK = TRUE;
-            nPageCount = 0;
 			pdf_page_count = 1;
         break;
 
@@ -1251,7 +1378,6 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
 
         case DTWAIN_TN_FILESAVEOK:
             bPageOK = TRUE;
-            ++nPageCount;
             return 1;
 
         case DTWAIN_TN_PAGECONTINUE:
