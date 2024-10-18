@@ -81,6 +81,7 @@
 1065 No TWAIN ID matches the string
 1066 Duplicate resource ID found
 1067 Unavailable extended image info value
+1068 Invalid bitmap returned by TWAIN Source (TWAINDSM 2.x)
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

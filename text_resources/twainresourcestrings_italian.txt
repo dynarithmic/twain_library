@@ -81,6 +81,7 @@
 1065 Nessun ID TWAIN corrisponde alla stringa  
 1066 ID risorsa duplicato trovato  
 1067 Valore di info immagine estesa non disponibile  
+1068 Bitmap non valido restituito dalla sorgente TWAIN (TWAINDSM 2.x)
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

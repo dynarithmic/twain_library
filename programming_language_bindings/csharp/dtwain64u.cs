@@ -460,6 +460,9 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_PAGEDISCARDED = 1054;
         public const  int DTWAIN_TN_PROCESSDIBACCEPTED = 1055;
         public const  int DTWAIN_TN_PROCESSDIBFINALACCEPTED = 1056;
+        public const  int DTWAIN_TN_CLOSEDIBFAILED = 1057;
+        public const  int DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
+
         public const  int DTWAIN_TN_DEVICEEVENT = 1100;
         public const  int DTWAIN_TN_TWAINPAGECANCELLED = 1105;
         public const  int DTWAIN_TN_TWAINPAGEFAILED = 1106;
@@ -811,6 +814,7 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_STRINGID_NOTFOUND = (-1065);
         public const int DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND = (-1066);
         public const int DTWAIN_ERR_UNAVAILABLE_EXTINFO = (-1067);
+        public const int DTWAIN_ERR_TWAINDSM2_BADBITMAP = (-1068);
 
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);

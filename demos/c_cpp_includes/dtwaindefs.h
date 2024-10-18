@@ -451,6 +451,9 @@
 /* Miscellaneous file transfer notifications */
 #define DTWAIN_TN_CLOSEDIBFAILED       1057
 
+/* Sent if a TWAIN Source fails to return a proper bitmap 
+   when using TWAINDSM.DLL as the data source manager */
+#define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
@@ -865,8 +868,9 @@
 #define DTWAIN_ERR_STRINGID_NOTFOUND (-1065)
 #define DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND (-1066)
 #define DTWAIN_ERR_UNAVAILABLE_EXTINFO (-1067)
+#define DTWAIN_ERR_TWAINDSM2_BADBITMAP (-1068)
 
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_UNAVAILABLE_EXTINFO
+#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_TWAINDSM2_BADBITMAP
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
