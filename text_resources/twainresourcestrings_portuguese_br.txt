@@ -81,6 +81,7 @@
 1065 Nenhum ID TWAIN corresponde à string  
 1066 ID de recurso duplicado encontrado  
 1067 Valor de informação de imagem estendida indisponível
+1068 Bitmap inválido retornado pela Fonte TWAIN (TWAINDSM 2.x)
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

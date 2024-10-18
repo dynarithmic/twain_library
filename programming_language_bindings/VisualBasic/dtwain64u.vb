@@ -408,6 +408,9 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PAGEDISCARDED As Integer = 1054
     Public Const DTWAIN_TN_PROCESSDIBACCEPTED As Integer = 1055
     Public Const DTWAIN_TN_PROCESSDIBFINALACCEPTED As Integer = 1056
+    Public Const DTWAIN_TN_CLOSEDIBFAILED As Integer = 1057
+    Public Const DTWAIN_TN_INVALID_TWAINDSM2_BITMAP As Integer = 1058
+
     Public Const DTWAIN_TN_DEVICEEVENT As Integer = 1100
     Public Const DTWAIN_TN_TWAINPAGECANCELLED As Integer = 1105
     Public Const DTWAIN_TN_TWAINPAGEFAILED As Integer = 1106
@@ -759,6 +762,7 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_STRINGID_NOTFOUND As Integer = (-1065)
     Public Const DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND As Integer = (-1066)
     Public Const DTWAIN_ERR_UNAVAILABLE_EXTINFO As Integer = (-1067)
+    Public Const DTWAIN_ERR_TWAINDSM2_BADBITMAP As Integer = (-1068)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)

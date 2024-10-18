@@ -81,6 +81,7 @@
 1065 Aucun ID TWAIN ne correspond à la chaîne  
 1066 ID de ressource dupliqué trouvé  
 1067 Valeur d'information d'image étendue indisponible  
+1068 Bitmap invalide retourné par la source TWAIN (TWAINDSM 2.x)
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

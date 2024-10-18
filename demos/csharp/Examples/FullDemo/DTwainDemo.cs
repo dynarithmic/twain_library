@@ -613,21 +613,35 @@ namespace TWAINDemo
             this.Close();
         }
 
-        private void AcquireNative_Click(object sender, EventArgs e)
+        private void GenericAcquire(int nWhich)
         {
             if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY, 
-                                                      DiscardBlankPages.Checked?1:0);
+                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
+                                                      DiscardBlankPages.Checked ? 1 : 0);
 
                 DTWAIN_ARRAY acquireArray = TwainAPI.DTWAIN_CreateAcquisitionArray();
                 this.Enabled = false;
                 int status = 0;
-                if ( TwainAPI.DTWAIN_AcquireNativeEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
-                     TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
+                int retVal = 0;
+                if (nWhich == 0)
+                    retVal = TwainAPI.DTWAIN_AcquireNativeEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                else
+                    retVal = TwainAPI.DTWAIN_AcquireBufferedEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                if ( retVal == 0)
                 {
-                    MessageBox.Show("Acquisition Failed", "TWAIN Error");
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
+                        MessageBox.Show("No Images Acquired", "TWAIN Information");
+                    else
+                    { 
+                        StringBuilder errMsg = new StringBuilder(256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        MessageBox.Show(errMsg.ToString(), "TWAIN Error");
+                    }
                     this.Enabled = true;
                     return;
                 }
@@ -647,40 +661,14 @@ namespace TWAINDemo
                 this.Enabled = true;
             }
         }
+        private void AcquireNative_Click(object sender, EventArgs e)
+        {
+            GenericAcquire(0);
+        }
 
         private void AcquireBuffered_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != IntPtr.Zero)
-            {
-                TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
-                                                      DiscardBlankPages.Checked ? 1 : 0);
-
-                DTWAIN_ARRAY acquireArray = TwainAPI.DTWAIN_CreateAcquisitionArray();
-                this.Enabled = false;
-                int status = 0;
-                if (TwainAPI.DTWAIN_AcquireBufferedEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
-                     TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
-                {
-                    MessageBox.Show("Acquisition Failed", "TWAIN Error");
-                    this.Enabled = true;
-                    return;
-                }
-
-                if (TwainAPI.DTWAIN_ArrayGetCount(acquireArray) == 0)
-                {
-                    MessageBox.Show("No Images Acquired", "");
-                    this.Enabled = true;
-                    return;
-                }
-
-                // Display the DIBS
-                //...
-                DIBDisplayerDlg sDIBDlg = new DIBDisplayerDlg(acquireArray);
-                sDIBDlg.ShowDialog();
-                TwainAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0);
-                this.Enabled = true;
-            }
+            GenericAcquire(1);
         }
 
         private void AcquireFile_Click(object sender, EventArgs e)
@@ -752,9 +740,17 @@ namespace TWAINDemo
 
                 if (bError == 0)
                 {
-                    StringBuilder errorString = new StringBuilder(256);
-                    TwainAPI.DTWAIN_GetErrorString(TwainAPI.DTWAIN_GetLastError(), errorString, 256);
-                    MessageBox.Show("Error acquiring or saving file.  " + errorString.ToString());
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
+                        MessageBox.Show("No Images Acquired", "TWAIN Information");
+                    else
+                    {
+                        StringBuilder errMsg = new StringBuilder(256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        MessageBox.Show(errMsg.ToString(), "TWAIN Error");
+                    }
+                    this.Enabled = true;
+                    return;
                 }
                 else
                 if (status == TwainAPI.DTWAIN_TN_ACQUIREDONE)
@@ -767,7 +763,6 @@ namespace TWAINDemo
                 this.Enabled = true;
             }
         }
-
         private void UseSourceUI_Click(object sender, EventArgs e)
         {
             UseSourceUI.Checked = !UseSourceUI.Checked;

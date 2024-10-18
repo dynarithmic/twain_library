@@ -81,6 +81,7 @@
 1065 Niciun ID TWAIN nu se potrivește cu șirul  
 1066 ID de resursă duplicat găsit  
 1067 Valoare de informații extinse despre imagine indisponibilă  
+1068 Bitmap invalid returnat de sursa TWAIN (TWAINDSM 2.x)
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  

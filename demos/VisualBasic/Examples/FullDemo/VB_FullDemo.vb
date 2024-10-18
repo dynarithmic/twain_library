@@ -495,8 +495,7 @@ Public Class VB_FullDemo
             sPropDlg.ShowDialog()
         End If
     End Sub
-
-    Private Sub AcquireNative_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireNative.Click
+    Private Sub GenericAcquire(ByVal nWhich As Integer)
         If SelectedSource <> 0 Then
             Dim isChecked As Integer
             Dim isUI As Integer
@@ -513,19 +512,99 @@ Public Class VB_FullDemo
             Dim acquireArray As System.IntPtr = DTWAINAPI.DTWAIN_CreateAcquisitionArray()
             Me.Enabled = False
             Dim status As Integer = 0
-            If DTWAINAPI.DTWAIN_AcquireNativeEx(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, isUI, 0, acquireArray, status) = 0 Then
-                MessageBox.Show("Acquisition Failed", "TWAIN Error")
-                Return
+            Dim returnVal As Integer = 0
+            If nWhich = 0 Then
+                returnVal = DTWAINAPI.DTWAIN_AcquireNativeEx(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, isUI, 0, acquireArray, status)
+            Else
+                returnVal = DTWAINAPI.DTWAIN_AcquireBufferedEx(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, isUI, 0, acquireArray, status)
             End If
-            If DTWAINAPI.DTWAIN_ArrayGetCount(acquireArray) = 0 Then
-                MessageBox.Show("No Images Acquired", "")
+
+            If returnVal = 0 Then
+                If status = DTWAINAPI.DTWAIN_TN_ACQUIRECANCELLED Then
+                    MessageBox.Show("No Images acquired", "TWAIN Information")
+                Else
+                    Dim errorVal As Integer = DTWAINAPI.DTWAIN_GetLastError()
+                    Dim errorString As StringBuilder = New StringBuilder(256)
+                    DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
+                    MessageBox.Show(errorString.ToString(), "TWAIN Information")
+                End If
+                Me.Enabled = True
                 Return
             End If
 
             Dim sDIBDlg As DibDisplayerDlg = New DibDisplayerDlg(acquireArray)
-            sDIBDlg.ShowDialog()
-            DTWAINAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0)
+                sDIBDlg.ShowDialog()
+                DTWAINAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0)
+                Me.Enabled = True
+            End If
+    End Sub
+
+    Private Sub AcquireNative_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireNative.Click
+        GenericAcquire(0)
+    End Sub
+    Private Sub AcquireBuffered_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireBuffered.Click
+        GenericAcquire(1)
+    End Sub
+    Private Sub AcquireToFile(ByVal nWhich As Integer)
+        If SelectedSource <> 0 Then
+            Dim status As Integer = 0
+            Dim bError As Integer = 0
+            Dim FileFlags As Long = 0
+            Dim tFileName As String = ""
+            Dim fileType As Integer = 0
+            Select Case nWhich
+                Case 0
+                    FileFlags = DTWAINAPI.DTWAIN_USELONGNAME Or DTWAINAPI.DTWAIN_USENATIVE
+                    DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, CInt(DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY), IsDiscardPages())
+                    Dim fDlg As New FileTypeDlg()
+                    fDlg.ShowDialog()
+                    tFileName = fDlg.GetFileName()
+                    Dim szSourceName As New StringBuilder(tFileName)
+                    fileType = fDlg.GetFileType()
+                    Exit Select
+
+                Case 1
+                    If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_ANYSUPPORT) = 0 Then
+                        MessageBox.Show("Sorry.  The selected driver does Not have built-in file transfer support.")
+                        Return
+                    End If
+                    If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_FF_BMP) = 0 Then
+                        Dim sText As String = "Sorry.  This demo program only supports built-in BMP file transfers." & vbCr & vbLf
+                        sText += "However, the DTWAIN library will support all built-in formats if your driver" & vbCr & vbLf
+                        sText += "supports other formats."
+                        MessageBox.Show(sText)
+                        Return
+                    End If
+                    FileFlags = DTWAINAPI.DTWAIN_USESOURCEMODE Or DTWAINAPI.DTWAIN_USELONGNAME
+                    fileType = DTWAINAPI.DTWAIN_FF_BMP
+                    tFileName = ".\IMAGE.BMP"
+                    MessageBox.Show("The name of the image file that will be saved is IMAGE.BMP" & vbLf)
+                    Exit Select
+            End Select
+
+            ' Use default 
+            ' Get all pages 
+            ' Close Source when UI is closed 
+            Me.Enabled = False
+            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags + DTWAINAPI.DTWAIN_CREATE_DIRECTORY), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsSourceUI(), 1, status)
             Me.Enabled = True
+
+            If bError = 0 Then
+                If status = DTWAINAPI.DTWAIN_TN_ACQUIRECANCELLED Then
+                    MessageBox.Show("No Images acquired", "TWAIN Information")
+                Else
+                    Dim errorVal As Integer = DTWAINAPI.DTWAIN_GetLastError()
+                    Dim errorString As StringBuilder = New StringBuilder(256)
+                    DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
+                    MessageBox.Show(errorString.ToString(), "TWAIN Information")
+                End If
+                Return
+            End If
+            If DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource) = 0 Then
+                MessageBox.Show("No files were saved")
+            Else
+                MessageBox.Show("Image file saved successfully")
+            End If
         End If
     End Sub
 
@@ -576,87 +655,7 @@ Public Class VB_FullDemo
         Return 0
     End Function
 
-    Private Sub AcquireBuffered_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireBuffered.Click
-        If SelectedSource <> 0 Then
-            DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, CInt(DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY), IsDiscardPages())
-            Dim acquireArray As Integer = DTWAINAPI.DTWAIN_CreateAcquisitionArray()
-            Me.Enabled = False
-            Dim status As Integer = 0
-            Dim IsUIChecked As Integer = 0
-            If UseSourceUI.Checked Then
-                IsUIChecked = 1
-            End If
-            If DTWAINAPI.DTWAIN_AcquireBufferedEx(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsUIChecked, 0, acquireArray,
-             status) = 0 Then
-                MessageBox.Show("Acquisition Failed", "TWAIN Error")
-                Return
-            End If
 
-            If DTWAINAPI.DTWAIN_ArrayGetCount(acquireArray) = 0 Then
-                MessageBox.Show("No Images Acquired", "")
-                Return
-            End If
-
-            ' Display the DIBS
-            '...
-            Dim sDIBDlg As New DibDisplayerDlg(acquireArray)
-            sDIBDlg.ShowDialog()
-            DTWAINAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0)
-            Me.Enabled = True
-        End If
-    End Sub
-
-    Private Sub AcquireToFile(ByVal nWhich As Integer)
-        If SelectedSource <> 0 Then
-            Dim status As Integer = 0
-            Dim bError As Integer = 0
-            Dim FileFlags As Long = 0
-            Dim tFileName As String = ""
-            Dim fileType As Integer = 0
-            Select Case nWhich
-                Case 0
-                    FileFlags = DTWAINAPI.DTWAIN_USELONGNAME Or DTWAINAPI.DTWAIN_USENATIVE
-                    DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, CInt(DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY), IsDiscardPages())
-                    Dim fDlg As New FileTypeDlg()
-                    fDlg.ShowDialog()
-                    tFileName = fDlg.GetFileName()
-                    Dim szSourceName As New StringBuilder(tFileName)
-                    fileType = fDlg.GetFileType()
-                    Exit Select
-
-                Case 1
-                    If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_ANYSUPPORT) = 0 Then
-                        MessageBox.Show("Sorry.  The selected driver does Not have built-in file transfer support.")
-                        Return
-                    End If
-                    If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_FF_BMP) = 0 Then
-                        Dim sText As String = "Sorry.  This demo program only supports built-in BMP file transfers." & vbCr & vbLf
-                        sText += "However, the DTWAIN library will support all built-in formats if your driver" & vbCr & vbLf
-                        sText += "supports other formats."
-                        MessageBox.Show(sText)
-                        Return
-                    End If
-                    FileFlags = DTWAINAPI.DTWAIN_USESOURCEMODE Or DTWAINAPI.DTWAIN_USELONGNAME
-                    fileType = DTWAINAPI.DTWAIN_FF_BMP
-                    tFileName = ".\IMAGE.BMP"
-                    MessageBox.Show("The name of the image file that will be saved is IMAGE.BMP" & vbLf)
-                    Exit Select
-            End Select
-
-            ' Use default 
-            ' Get all pages 
-            ' Close Source when UI is closed 
-            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags + DTWAINAPI.DTWAIN_CREATE_DIRECTORY), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsSourceUI(), 1, status)
-
-            If bError = 0 Then
-                MessageBox.Show("Error acquiring or saving file.")
-            ElseIf status = DTWAINAPI.DTWAIN_TN_ACQUIREDONE Then
-                MessageBox.Show("Image file saved successfully")
-            Else
-                MessageBox.Show("The acquisition returned a status of " & status.ToString())
-            End If
-        End If
-    End Sub
 
     Private Sub AcquireFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireFile.Click
         AcquireToFile(0)

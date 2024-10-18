@@ -148,7 +148,7 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                 SetRect(&rectDib,0,0,widthDib,heightDib);
             }
             else
-                MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
+                MessageBox(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
 
             /* Enable/Disabe Next, Prev buttons */
             nCurrentAcquisition = 0;
@@ -219,7 +219,7 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                 hDibLocal = DTWAIN_GetAcquiredImage(AcquireArray, (LONG)nCurrentAcquisition, nCurDib);
 
                 if (!hDibLocal)
-                    MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
+                    MessageBox(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
 
                 /* Redo page buttons */
                 EnablePageButtons(hWndPrev, hWndNext, hWndCurPage, hWndNumPages, 
@@ -258,7 +258,7 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
                             SetRect(&rectDib,0,0,widthDib,heightDib);
                         }
                         else
-                            MessageBoxA(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
+                            MessageBox(hDlg, _T("Image was discarded or not available"), _T("Image not available"), MB_OK);
                         EnablePageButtons(hWndPrev, hWndNext, hWndCurPage, hWndNumPages,
                                           hwndPage, hWndOf, hwndBlank, nCurDib,
                                           (int)nCurrentAcquisition, AcquireArray);
