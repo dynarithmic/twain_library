@@ -44,9 +44,16 @@ namespace TWAINDemo
             else
             if (radioLogDebugMonitor.Checked)
                 nWhichOption = 3;
+            else
+            if (radioLogToConsole.Checked)
+                nWhichOption = 4;
         }
 
         private void Cancelbutton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void radioLogToConsole_CheckedChanged(object sender, EventArgs e)
         {
         }
     }

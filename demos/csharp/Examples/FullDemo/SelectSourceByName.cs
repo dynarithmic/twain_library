@@ -19,5 +19,9 @@ namespace TWAINDemo
         {
             InitializeComponent();
         }
+
+        private void SelectSourceByNameBox_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

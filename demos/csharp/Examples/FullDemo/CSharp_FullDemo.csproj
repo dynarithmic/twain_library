@@ -113,6 +113,12 @@
     <Compile Include="FileTypeDlg.designer.cs">
       <DependentUpon>FileTypeDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomLanguageDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomLanguageDlg.Designer.cs">
+      <DependentUpon>CustomLanguageDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="SourcePropsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     <EmbeddedResource Include="FileTypeDlg.resx">
       <DependentUpon>FileTypeDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomLanguageDlg.resx">
+      <DependentUpon>CustomLanguageDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SourcePropsDlg.resx">
       <DependentUpon>SourcePropsDlg.cs</DependentUpon>

@@ -31,6 +31,7 @@
             this.radioNoLogging = new System.Windows.Forms.RadioButton();
             this.radioLogToFile = new System.Windows.Forms.RadioButton();
             this.radioLogDebugMonitor = new System.Windows.Forms.RadioButton();
+            this.radioLogToConsole = new System.Windows.Forms.RadioButton();
             this.OKbutton = new System.Windows.Forms.Button();
             this.Cancelbutton = new System.Windows.Forms.Button();
             this.edFileName = new System.Windows.Forms.TextBox();
@@ -71,13 +72,25 @@
             this.radioLogDebugMonitor.Text = "Log to Debug Monitor";
             this.radioLogDebugMonitor.UseVisualStyleBackColor = true;
             // 
+            // radioLogToConsole
+            // 
+            this.radioLogToConsole.AutoSize = true;
+            this.radioLogToConsole.Location = new System.Drawing.Point(22, 113);
+            this.radioLogToConsole.Name = "radioLogToConsole";
+            this.radioLogToConsole.Size = new System.Drawing.Size(96, 17);
+            this.radioLogToConsole.TabIndex = 4;
+            this.radioLogToConsole.TabStop = true;
+            this.radioLogToConsole.Text = "Log to Console";
+            this.radioLogToConsole.UseVisualStyleBackColor = true;
+            this.radioLogToConsole.CheckedChanged += new System.EventHandler(this.radioLogToConsole_CheckedChanged);
+            // 
             // OKbutton
             // 
             this.OKbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKbutton.Location = new System.Drawing.Point(68, 139);
+            this.OKbutton.Location = new System.Drawing.Point(68, 177);
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(75, 23);
-            this.OKbutton.TabIndex = 4;
+            this.OKbutton.TabIndex = 5;
             this.OKbutton.Text = "&OK";
             this.OKbutton.UseVisualStyleBackColor = true;
             this.OKbutton.Click += new System.EventHandler(this.OKbutton_Click);
@@ -85,10 +98,10 @@
             // Cancelbutton
             // 
             this.Cancelbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancelbutton.Location = new System.Drawing.Point(208, 139);
+            this.Cancelbutton.Location = new System.Drawing.Point(208, 177);
             this.Cancelbutton.Name = "Cancelbutton";
             this.Cancelbutton.Size = new System.Drawing.Size(75, 23);
-            this.Cancelbutton.TabIndex = 5;
+            this.Cancelbutton.TabIndex = 6;
             this.Cancelbutton.Text = "&Cancel";
             this.Cancelbutton.UseVisualStyleBackColor = true;
             this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
@@ -106,8 +119,8 @@
             // 
             this.groupBox1.Location = new System.Drawing.Point(2, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(351, 112);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.Size = new System.Drawing.Size(351, 144);
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Logging Options";
             // 
@@ -115,13 +128,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 175);
+            this.ClientSize = new System.Drawing.Size(357, 209);
             this.Controls.Add(this.edFileName);
             this.Controls.Add(this.Cancelbutton);
             this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.radioLogDebugMonitor);
             this.Controls.Add(this.radioLogToFile);
             this.Controls.Add(this.radioNoLogging);
+            this.Controls.Add(this.radioLogToConsole);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "LogFileSelectionDlg";
@@ -141,5 +155,6 @@
         private System.Windows.Forms.Button Cancelbutton;
         private System.Windows.Forms.TextBox edFileName;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioLogToConsole;
     }
 }

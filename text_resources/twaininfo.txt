@@ -81,100 +81,7 @@
 1 20 2817 35 11 0
 1 19 1 36 11 0
 -1000 -1000 -1000 -1000 -1000 -1000
-8890 1 DG_CONTROL
-8890 2 DG_IMAGE
-8890 4 DG_AUDIO
-8890 268435456 DF_DSM2
-8890 536870912 DF_APP2
-8890 1073741824 DF_DS2
-8891 0 DAT_NULL
-8891 -32768 DAT_CUSTOMBASE
-8891 1 DAT_CAPABILITY
-8891 1027 DAT_ENTRYPOINT
-8891 2 DAT_EVENT
-8891 3 DAT_IDENTITY
-8891 4 DAT_PARENT
-8891 5 DAT_PENDINGXFERS
-8891 6 DAT_SETUPMEMXFER
-8891 7 DAT_SETUPFILEXFER
-8891 8 DAT_STATUS
-8891 9 DAT_USERINTERFACE
-8891 10 DAT_XFERGROUP
-8891 11 DAT_TWUNKIDENTITY
-8891 12 DAT_CUSTOMDSDATA
-8891 13 DAT_DEVICEEVENT
-8891 14 DAT_FILESYSTEM
-8891 15 DAT_PASSTHRU
-8891 257 DAT_IMAGEINFO
-8891 258 DAT_IMAGELAYOUT
-8891 259 DAT_IMAGEMEMXFER
-8891 260 DAT_IMAGENATIVEXFER
-8891 261 DAT_IMAGEFILEXFER
-8891 262 DAT_CIECOLOR
-8891 263 DAT_GRAYRESPONSE
-8891 264 DAT_RGBRESPONSE
-8891 265 DAT_JPEGCOMPRESSION
-8891 266 DAT_PALETTE8
-8891 267 DAT_EXTIMAGEINFO
-8891 268 DAT_FILTER
-8891 513 DAT_AUDIOFILEXFER
-8891 514 DAT_AUDIOINFO
-8891 515 DAT_AUDIONATIVEXFER
-8891 1025 DAT_ICCPROFILE
-8891 1026 DAT_IMAGEMEMFILEXFER
-8891 1027 DAT_ENTRYPOINT
-8891 17 DAT_STATUSUTF8
-8891 16 DAT_CALLBACK
-8891 18 DAT_CALLBACK2
-8891 20 DAT_TWAINDIRECT
-8891 19 DAT_METRICS
-8892 0 MSG_NULL
-8892 -32768 MSG_CUSTOMBASE
-8892 1 MSG_GET
-8892 2 MSG_GETCURRENT
-8892 3 MSG_GETDEFAULT
-8892 4 MSG_GETFIRST
-8892 5 MSG_GETNEXT
-8892 6 MSG_SET
-8892 12 MSG_SETCONSTRAINT
-8892 7 MSG_RESET
-8892 2561 MSG_RESETALL
-8892 8 MSG_QUERYSUPPORT
-8892 257 MSG_XFERREADY
-8892 258 MSG_CLOSEDSREQ
-8892 259 MSG_CLOSEDSOK
-8892 260 MSG_DEVICEEVENT
-8892 513 MSG_CHECKSTATUS
-8892 769 MSG_OPENDSM
-8892 770 MSG_CLOSEDSM
-8892 1025 MSG_OPENDS
-8892 1026 MSG_CLOSEDS
-8892 1027 MSG_USERSELECT
-8892 1281 MSG_DISABLEDS
-8892 1282 MSG_ENABLEDS
-8892 1283 MSG_ENABLEDSUIONLY
-8892 1537 MSG_PROCESSEVENT
-8892 1793 MSG_ENDXFER
-8892 2049 MSG_CHANGEDIRECTORY
-8892 2050 MSG_CREATEDIRECTORY
-8892 2051 MSG_DELETE
-8892 2052 MSG_FORMATMEDIA
-8892 2053 MSG_GETCLOSE
-8892 2054 MSG_GETFIRSTFILE
-8892 2055 MSG_GETINFO
-8892 2056 MSG_GETNEXTFILE
-8892 2057 MSG_RENAME
-8892 2305 MSG_PASSTHRU
-8892 10 MSG_GETLABEL
-8892 11 MSG_GETLABELENUM
-8892 9 MSG_GETHELP
-8892 2059 MSG_AUTOMATICCAPTUREDIRECTORY
-8892 2058 MSG_COPY
-8892 1794 MSG_STOPFEEDER
-8892 2306 MSG_REGISTER_CALLBACK
-8892 2307 MSG_INVOKE_CALLBACK
-8892 2817 MSG_SETTASK
--1000 -1000 END
+4096
 1         CAP_XFERCOUNT                           1    96   32   32   32   32   32   32                                 
 256       ICAP_COMPRESSION                        4    48   32   32   32   48   32   32                                 
 257       ICAP_PIXELTYPE                          4    48   32   32   32   48   32   32                                 
@@ -363,90 +270,90 @@
 4449      ICAP_JPEGSUBSAMPLING                    4    16   32   32   32   48   32   32                                 
 4609      ACAP_AUDIOFILEFORMAT                    4    48   32   32   32   48   32   32                                 
 4610      ACAP_XFERMECH                           4    48   32   32   32   48   32   32                                 
-5608      TWEI_BARCODEX                           5    0    0    0    0    0    0    0                                  
-5609      TWEI_BARCODEY                           5    0    0    0    0    0    0    0                                  
-5610      TWEI_BARCODETEXT                        16   0    0    0    0    0    0    0                                  
-5611      TWEI_BARCODETYPE                        5    0    0    0    0    0    0    0                                  
-5612      TWEI_DESHADETOP                         5    0    0    0    0    0    0    0                                  
-5613      TWEI_DESHADELEFT                        5    0    0    0    0    0    0    0                                  
-5614      TWEI_DESHADEHEIGHT                      5    0    0    0    0    0    0    0                                  
-5615      TWEI_DESHADEWIDTH                       5    0    0    0    0    0    0    0                                  
-5616      TWEI_DESHADESIZE                        5    0    0    0    0    0    0    0                                  
-5617      TWEI_SPECKLESREMOVED                    5    0    0    0    0    0    0    0                                  
-5618      TWEI_HORZLINEXCOORD                     5    0    0    0    0    0    0    0                                  
-5619      TWEI_HORZLINEYCOORD                     5    0    0    0    0    0    0    0                                  
-5620      TWEI_HORZLINELENGTH                     5    0    0    0    0    0    0    0                                  
-5621      TWEI_HORZLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
-5622      TWEI_VERTLINEXCOORD                     5    0    0    0    0    0    0    0                                  
-5623      TWEI_VERTLINEYCOORD                     5    0    0    0    0    0    0    0                                  
-5624      TWEI_VERTLINELENGTH                     5    0    0    0    0    0    0    0                                  
-5625      TWEI_VERTLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
-5626      TWEI_PATCHCODE                          5    0    0    0    0    0    0    0                                  
-5627      TWEI_ENDORSEDTEXT                       12   0    0    0    0    0    0    0                                  
-5628      TWEI_FORMCONFIDENCE                     5    0    0    0    0    0    0    0                                  
-5629      TWEI_FORMTEMPLATEMATCH                  12   0    0    0    0    0    0    0                                  
-5630      TWEI_FORMTEMPLATEPAGEMATCH              5    0    0    0    0    0    0    0                                  
-5631      TWEI_FORMHORZDOCOFFSET                  5    0    0    0    0    0    0    0                                  
-5632      TWEI_FORMVERTDOCOFFSET                  5    0    0    0    0    0    0    0                                  
-5633      TWEI_BARCODECOUNT                       5    0    0    0    0    0    0    0                                  
-5634      TWEI_BARCODECONFIDENCE                  5    0    0    0    0    0    0    0                                  
-5635      TWEI_BARCODEROTATION                    5    0    0    0    0    0    0    0                                  
-5636      TWEI_BARCODETEXTLENGTH                  5    0    0    0    0    0    0    0                                  
-5637      TWEI_DESHADECOUNT                       5    0    0    0    0    0    0    0                                  
-5638      TWEI_DESHADEBLACKCOUNTOLD               5    0    0    0    0    0    0    0                                  
-5639      TWEI_DESHADEBLACKCOUNTNEW               5    0    0    0    0    0    0    0                                  
-5640      TWEI_DESHADEBLACKRLMIN                  5    0    0    0    0    0    0    0                                  
-5641      TWEI_DESHADEBLACKRLMAX                  5    0    0    0    0    0    0    0                                  
-5642      TWEI_DESHADEWHITECOUNTOLD               5    0    0    0    0    0    0    0                                  
-5643      TWEI_DESHADEWHITECOUNTNEW               5    0    0    0    0    0    0    0                                  
-5644      TWEI_DESHADEWHITERLMIN                  5    0    0    0    0    0    0    0                                  
-5645      TWEI_DESHADEWHITERLAVE                  5    0    0    0    0    0    0    0                                  
-5646      TWEI_DESHADEWHITERLMAX                  5    0    0    0    0    0    0    0                                  
-5647      TWEI_BLACKSPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
-5648      TWEI_WHITESPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
-5649      TWEI_HORZLINECOUNT                      5    0    0    0    0    0    0    0                                  
-5650      TWEI_VERTLINECOUNT                      5    0    0    0    0    0    0    0                                  
-5651      TWEI_DESKEWSTATUS                       5    0    0    0    0    0    0    0                                  
-5652      TWEI_SKEWORIGINALANGLE                  5    0    0    0    0    0    0    0                                  
-5653      TWEI_SKEWFINALANGLE                     5    0    0    0    0    0    0    0                                  
-5654      TWEI_SKEWCONFIDENCE                     5    0    0    0    0    0    0    0                                  
-5655      TWEI_SKEWWINDOWX1                       5    0    0    0    0    0    0    0                                  
-5656      TWEI_SKEWWINDOWY1                       5    0    0    0    0    0    0    0                                  
-5657      TWEI_SKEWWINDOWX2                       5    0    0    0    0    0    0    0                                  
-5658      TWEI_SKEWWINDOWY2                       5    0    0    0    0    0    0    0                                  
-5659      TWEI_SKEWWINDOWX3                       5    0    0    0    0    0    0    0                                  
-5660      TWEI_SKEWWINDOWY3                       5    0    0    0    0    0    0    0                                  
-5661      TWEI_SKEWWINDOWX4                       5    0    0    0    0    0    0    0                                  
-5662      TWEI_SKEWWINDOWY4                       5    0    0    0    0    0    0    0                                  
-5664      TWEI_BOOKNAME                           12   0    0    0    0    0    0    0                                  
-5665      TWEI_CHAPTERNUMBER                      5    0    0    0    0    0    0    0                                  
-5666      TWEI_DOCUMENTNUMBER                     5    0    0    0    0    0    0    0                                  
-5667      TWEI_PAGENUMBER                         5    0    0    0    0    0    0    0                                  
-5668      TWEI_CAMERA                             12   0    0    0    0    0    0    0                                  
-5669      TWEI_FRAMENUMBER                        5    0    0    0    0    0    0    0                                  
-5670      TWEI_FRAME                              8    0    0    0    0    0    0    0                                  
-5671      TWEI_PIXELFLAVOR                        4    0    0    0    0    0    0    0                                  
-5672      TWEI_ICCPROFILE                         12   0    0    0    0    0    0    0                                  
-5673      TWEI_LASTSEGMENT                        6    0    0    0    0    0    0    0                                  
-5674      TWEI_SEGMENTNUMBER                      5    0    0    0    0    0    0    0                                  
-5675      TWEI_MAGDATA                            12   0    0    0    0    0    0    0                                  
-5676      TWEI_MAGTYPE                            4    0    0    0    0    0    0    0                                  
-5677      TWEI_PAGESIDE                           4    0    0    0    0    0    0    0                                  
-5678      TWEI_FILESYSTEMSOURCE                   12   0    0    0    0    0    0    0                                  
-5679      TWEI_IMAGEMERGED                        6    0    0    0    0    0    0    0                                  
-5680      TWEI_MAGDATALENGTH                      5    0    0    0    0    0    0    0                                  
-5681      TWEI_PAPERCOUNT                         5    0    0    0    0    0    0    0                                  
-5682      TWEI_PRINTERTEXT                        12   0    0    0    0    0    0    0                                  
-5683      TWEI_TWAINDIRECTMETADATA                15   0    0    0    0    0    0    0                                  
-5684      TWEI_IAFIELDA_VALUE                     9    0    0    0    0    0    0    0                                  
-5685      TWEI_IAFIELDB_VALUE                     9    0    0    0    0    0    0    0                                  
-5686      TWEI_IAFIELDC_VALUE                     9    0    0    0    0    0    0    0                                  
-5687      TWEI_IAFIELDD_VALUE                     9    0    0    0    0    0    0    0                                  
-5688      TWEI_IAFIELDE_VALUE                     9    0    0    0    0    0    0    0                                  
-5689      TWEI_IALEVEL                            4    0    0    0    0    0    0    0                                  
-5690      TWEI_PRINTER                            4    0    0    0    0    0    0    0                                  
-5691      TWEI_BARCODETEXT2                       15   0    0    0    0    0    0    0                                  
-32768     CAP_CUSTOMBASE                          5    0    0    0    0    0    0    0                                  
+0x1200    TWEI_BARCODEX                           5    0    0    0    0    0    0    0                                  
+0x1201    TWEI_BARCODEY                           5    0    0    0    0    0    0    0                                  
+0x1202    TWEI_BARCODETEXT                        15   0    0    0    0    0    0    0                                  
+0x1203    TWEI_BARCODETYPE                        5    0    0    0    0    0    0    0                                  
+0x1204    TWEI_DESHADETOP                         5    0    0    0    0    0    0    0                                  
+0x1205    TWEI_DESHADELEFT                        5    0    0    0    0    0    0    0                                  
+0x1206    TWEI_DESHADEHEIGHT                      5    0    0    0    0    0    0    0                                  
+0x1207    TWEI_DESHADEWIDTH                       5    0    0    0    0    0    0    0                                  
+0x1208    TWEI_DESHADESIZE                        5    0    0    0    0    0    0    0                                  
+0x1209    TWEI_SPECKLESREMOVED                    5    0    0    0    0    0    0    0                                  
+0x120A    TWEI_HORZLINEXCOORD                     5    0    0    0    0    0    0    0                                  
+0x120B    TWEI_HORZLINEYCOORD                     5    0    0    0    0    0    0    0                                  
+0x120C    TWEI_HORZLINELENGTH                     5    0    0    0    0    0    0    0                                  
+0x120D    TWEI_HORZLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
+0x120E    TWEI_VERTLINEXCOORD                     5    0    0    0    0    0    0    0                                  
+0x120F    TWEI_VERTLINEYCOORD                     5    0    0    0    0    0    0    0                                  
+0x1210    TWEI_VERTLINELENGTH                     5    0    0    0    0    0    0    0                                  
+0x1211    TWEI_VERTLINETHICKNESS                  5    0    0    0    0    0    0    0                                  
+0x1212    TWEI_PATCHCODE                          5    0    0    0    0    0    0    0                                  
+0x1213    TWEI_ENDORSEDTEXT                       12   0    0    0    0    0    0    0                                  
+0x1214    TWEI_FORMCONFIDENCE                     5    0    0    0    0    0    0    0                                  
+0x1215    TWEI_FORMTEMPLATEMATCH                  12   0    0    0    0    0    0    0                                  
+0x1216    TWEI_FORMTEMPLATEPAGEMATCH              5    0    0    0    0    0    0    0                                  
+0x1217    TWEI_FORMHORZDOCOFFSET                  5    0    0    0    0    0    0    0                                  
+0x1218    TWEI_FORMVERTDOCOFFSET                  5    0    0    0    0    0    0    0                                  
+0x1219    TWEI_BARCODECOUNT                       5    0    0    0    0    0    0    0                                  
+0x121A    TWEI_BARCODECONFIDENCE                  5    0    0    0    0    0    0    0                                  
+0x121B    TWEI_BARCODEROTATION                    5    0    0    0    0    0    0    0                                  
+0x121C    TWEI_BARCODETEXTLENGTH                  5    0    0    0    0    0    0    0                                  
+0x121D    TWEI_DESHADECOUNT                       5    0    0    0    0    0    0    0                                  
+0x121E    TWEI_DESHADEBLACKCOUNTOLD               5    0    0    0    0    0    0    0                                  
+0x121F    TWEI_DESHADEBLACKCOUNTNEW               5    0    0    0    0    0    0    0                                  
+0x1220    TWEI_DESHADEBLACKRLMIN                  5    0    0    0    0    0    0    0                                  
+0x1221    TWEI_DESHADEBLACKRLMAX                  5    0    0    0    0    0    0    0                                  
+0x1222    TWEI_DESHADEWHITECOUNTOLD               5    0    0    0    0    0    0    0                                  
+0x1223    TWEI_DESHADEWHITECOUNTNEW               5    0    0    0    0    0    0    0                                  
+0x1224    TWEI_DESHADEWHITERLMIN                  5    0    0    0    0    0    0    0                                  
+0x1225    TWEI_DESHADEWHITERLAVE                  5    0    0    0    0    0    0    0                                  
+0x1226    TWEI_DESHADEWHITERLMAX                  5    0    0    0    0    0    0    0                                  
+0x1227    TWEI_BLACKSPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
+0x1228    TWEI_WHITESPECKLESREMOVED               5    0    0    0    0    0    0    0                                  
+0x1229    TWEI_HORZLINECOUNT                      5    0    0    0    0    0    0    0                                  
+0x122A    TWEI_VERTLINECOUNT                      5    0    0    0    0    0    0    0                                  
+0x122B    TWEI_DESKEWSTATUS                       5    0    0    0    0    0    0    0                                  
+0x122C    TWEI_SKEWORIGINALANGLE                  5    0    0    0    0    0    0    0                                  
+0x122D    TWEI_SKEWFINALANGLE                     5    0    0    0    0    0    0    0                                  
+0x122E    TWEI_SKEWCONFIDENCE                     5    0    0    0    0    0    0    0                                  
+0x122F    TWEI_SKEWWINDOWX1                       5    0    0    0    0    0    0    0                                  
+0x1230    TWEI_SKEWWINDOWY1                       5    0    0    0    0    0    0    0                                  
+0x1231    TWEI_SKEWWINDOWX2                       5    0    0    0    0    0    0    0                                  
+0x1232    TWEI_SKEWWINDOWY2                       5    0    0    0    0    0    0    0                                  
+0x1233    TWEI_SKEWWINDOWX3                       5    0    0    0    0    0    0    0                                  
+0x1234    TWEI_SKEWWINDOWY3                       5    0    0    0    0    0    0    0                                  
+0x1235    TWEI_SKEWWINDOWX4                       5    0    0    0    0    0    0    0                                  
+0x1236    TWEI_SKEWWINDOWY4                       5    0    0    0    0    0    0    0                                  
+0x1238    TWEI_BOOKNAME                           12   0    0    0    0    0    0    0                                  
+0x1239    TWEI_CHAPTERNUMBER                      5    0    0    0    0    0    0    0                                  
+0x123A    TWEI_DOCUMENTNUMBER                     5    0    0    0    0    0    0    0                                  
+0x123B    TWEI_PAGENUMBER                         5    0    0    0    0    0    0    0                                  
+0x123C    TWEI_CAMERA                             12   0    0    0    0    0    0    0                                  
+0x123D    TWEI_FRAMENUMBER                        5    0    0    0    0    0    0    0                                  
+0x123E    TWEI_FRAME                              8    0    0    0    0    0    0    0                                  
+0x123F    TWEI_PIXELFLAVOR                        4    0    0    0    0    0    0    0                                  
+0x1240    TWEI_ICCPROFILE                         12   0    0    0    0    0    0    0                                  
+0x1241    TWEI_LASTSEGMENT                        6    0    0    0    0    0    0    0                                  
+0x1242    TWEI_SEGMENTNUMBER                      5    0    0    0    0    0    0    0                                  
+0x1243    TWEI_MAGDATA                            12   0    0    0    0    0    0    0                                  
+0x1244    TWEI_MAGTYPE                            4    0    0    0    0    0    0    0                                  
+0x1245    TWEI_PAGESIDE                           4    0    0    0    0    0    0    0                                  
+0x1246    TWEI_FILESYSTEMSOURCE                   12   0    0    0    0    0    0    0                                  
+0x1247    TWEI_IMAGEMERGED                        6    0    0    0    0    0    0    0                                  
+0x1248    TWEI_MAGDATALENGTH                      5    0    0    0    0    0    0    0                                  
+0x1249    TWEI_PAPERCOUNT                         5    0    0    0    0    0    0    0                                  
+0x124A    TWEI_PRINTERTEXT                        12   0    0    0    0    0    0    0                                  
+0x124B    TWEI_TWAINDIRECTMETADATA                15   0    0    0    0    0    0    0                                  
+0x124C    TWEI_IAFIELDA_VALUE                     9    0    0    0    0    0    0    0                                  
+0x124D    TWEI_IAFIELDB_VALUE                     9    0    0    0    0    0    0    0                                  
+0x124E    TWEI_IAFIELDC_VALUE                     9    0    0    0    0    0    0    0                                  
+0x124F    TWEI_IAFIELDD_VALUE                     9    0    0    0    0    0    0    0                                  
+0x1250    TWEI_IAFIELDE_VALUE                     9    0    0    0    0    0    0    0                                  
+0x1251    TWEI_IALEVEL                            4    0    0    0    0    0    0    0                                  
+0x1252    TWEI_PRINTER                            4    0    0    0    0    0    0    0                                  
+0x1253    TWEI_BARCODETEXT2                       15   0    0    0    0    0    0    0                                  
+32768     CAP_CUSTOMBASE          		          5    0    0    0    0    0    0    0                                  
 -1000 END 0 0 0
 100  1 4 8 16 24 32
 200  8  16  24
@@ -1544,6 +1451,73 @@
 -9999    
 9700 DTWAIN#Twain#Library,#v{short_version},#{company_name},#{copyright}
 -9999
+0x0001 DG_CONTROL
+0x0002 DG_IMAGE  
+0x0004 DG_AUDIO  
+0xFFFF DG_MASK
+-9999
+0 DAT_NULL
+-32768 DAT_CUSTOMBASE
+1 DAT_CAPABILITY
+2 DAT_EVENT
+3 DAT_IDENTITY
+4 DAT_PARENT
+5 DAT_PENDINGXFERS
+6 DAT_SETUPMEMXFER
+7 DAT_SETUPFILEXFER
+8 DAT_STATUS
+9 DAT_USERINTERFACE
+10 DAT_XFERGROUP
+11 DAT_TWUNKIDENTITY
+12 DAT_CUSTOMDSDATA
+13 DAT_DEVICEEVENT
+14 DAT_FILESYSTEM
+15 DAT_PASSTHRU
+16 DAT_CALLBACK
+17 DAT_STATUSUTF8
+18 DAT_CALLBACK2
+19 DAT_METRICS
+20 DAT_TWAINDIRECT
+257 DAT_IMAGEINFO
+258 DAT_IMAGELAYOUT
+259 DAT_IMAGEMEMXFER
+260 DAT_IMAGENATIVEXFER
+261 DAT_IMAGEFILEXFER
+262 DAT_CIECOLOR
+263 DAT_GRAYRESPONSE
+264 DAT_RGBRESPONSE
+265 DAT_JPEGCOMPRESSION
+266 DAT_PALETTE8
+267 DAT_EXTIMAGEINFO
+268 DAT_FILTER
+513 DAT_AUDIOFILEXFER
+514 DAT_AUDIOINFO
+515 DAT_AUDIONATIVEXFER
+1025 DAT_ICCPROFILE
+1026 DAT_IMAGEMEMFILEXFER
+1027 DAT_ENTRYPOINT
+-9999
+0x10000000 DF_DSM2  
+0x20000000 DF_APP2  
+0x40000000 DF_DS2   
+-9999
+0x0000 TWTY_INT8       
+0x0001 TWTY_INT16      
+0x0002 TWTY_INT32      
+0x0003 TWTY_UINT8      
+0x0004 TWTY_UINT16     
+0x0005 TWTY_UINT32     
+0x0006 TWTY_BOOL       
+0x0007 TWTY_FIX32      
+0x0008 TWTY_FRAME      
+0x0009 TWTY_STR32      
+0x000a TWTY_STR64      
+0x000b TWTY_STR128     
+0x000c TWTY_STR255    
+0x000d TWTY_STR1024
+0x000e TWTY_UNI512
+0x000f TWTY_HANDLE     
+-9999
 [100] BMP  [1 4 8 16 24 32] [[]]
 [200] JPEG [8 16 24] [[1 24] [4 24] [32 24]]
 [250 251] Adobe PDF [1 8 16 24] [[32 24]]
@@ -1563,6 +1537,6 @@
 [8501] WEBP [24 32] [[1 24] [4 24] [8 24] [16 24]]
 [6000 6001] TXT [1] [[4 1][8 1][16 1][24 1] [32 1]]
 -9999
-5.5.2
-1826419124
+5.5.3
+1763482828
 END END END

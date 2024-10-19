@@ -21,6 +21,7 @@ using DTWAIN_LONG64 = System.Int64;
 using DTWAIN_PDFTEXTELEMENT = System.IntPtr;
 using DTWAIN_RANGE = System.IntPtr;
 using DTWAIN_SOURCE = System.IntPtr;
+using DTWAIN_HANDLE = System.IntPtr;
     
 /*  Use this instead of above for 64-bit compilation
     using DTWAIN_ARRAY = System.Int64;
@@ -71,28 +72,46 @@ namespace TWAINDemo
         private MenuItem AcquireFileUsingDevice;
         private MenuItem menuItem2;
         private MenuItem About;
+        private MenuItem menuItem6;
+        private MenuItem idlang_dutch;
+        private MenuItem idlang_english;
+        private MenuItem idlang_french;
+        private MenuItem idlang_german;
+        private MenuItem idlang_italian;
+        private MenuItem idlang_portuguese;
+        private MenuItem idlang_romanian;
+        private MenuItem idlang_russian;
+        private MenuItem idlang_simplified_chinese;
+        private MenuItem idlang_spanish;
+        private MenuItem idlang_custom;
         private String sOrigTitle;
+        private Boolean initialized;
 
-		public DTwainDemo()
+        public DTwainDemo()
 		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
+            initialized = false;
+            InitializeComponent();
 
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
             sOrigTitle = this.Text;
-			TwainAPI.DTWAIN_SysInitialize();
-            SelectedSource = IntPtr.Zero;
-			if ( TwainAPI.DTWAIN_IsTwainAvailable() == 0)
-			{
-				SelectSource.Enabled = false;
-				SelectSourceByNameBox.Enabled = false;
-			}
+			DTWAIN_HANDLE handle = TwainAPI.DTWAIN_SysInitialize();
+            if (handle == IntPtr.Zero)
+            {
+                initialized = false;
+                return;
+            }
+            else
+            {
+                initialized = true;
+                SelectedSource = IntPtr.Zero;
+                if (TwainAPI.DTWAIN_IsTwainAvailable() == 0)
+                {
+                    SelectSource.Enabled = false;
+                    SelectSourceByNameBox.Enabled = false;
+                }
+            }
 		}
 
+        public Boolean InitializedOk() { return initialized; }
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
@@ -117,7 +136,6 @@ namespace TWAINDemo
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Configuration.AppSettingsReader configurationAppSettings = new System.Configuration.AppSettingsReader();
             this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem = new System.Windows.Forms.MenuItem();
             this.SelectSource = new System.Windows.Forms.MenuItem();
@@ -140,6 +158,18 @@ namespace TWAINDemo
             this.DiscardBlankPages = new System.Windows.Forms.MenuItem();
             this.TwainLogging = new System.Windows.Forms.MenuItem();
             this.LoggingOptions = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.idlang_dutch = new System.Windows.Forms.MenuItem();
+            this.idlang_english = new System.Windows.Forms.MenuItem();
+            this.idlang_french = new System.Windows.Forms.MenuItem();
+            this.idlang_german = new System.Windows.Forms.MenuItem();
+            this.idlang_italian = new System.Windows.Forms.MenuItem();
+            this.idlang_portuguese = new System.Windows.Forms.MenuItem();
+            this.idlang_romanian = new System.Windows.Forms.MenuItem();
+            this.idlang_russian = new System.Windows.Forms.MenuItem();
+            this.idlang_simplified_chinese = new System.Windows.Forms.MenuItem();
+            this.idlang_spanish = new System.Windows.Forms.MenuItem();
+            this.idlang_custom = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.About = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
@@ -150,6 +180,7 @@ namespace TWAINDemo
             this.menuItem,
             this.menuItem1,
             this.TwainLogging,
+            this.menuItem6,
             this.menuItem2});
             // 
             // menuItem
@@ -170,7 +201,6 @@ namespace TWAINDemo
             // 
             // SelectSource
             // 
-            this.SelectSource.Enabled = true;
             this.SelectSource.Index = 0;
             this.SelectSource.Text = "Select Source...";
             this.SelectSource.Click += new System.EventHandler(this.SelectSource_Click);
@@ -294,9 +324,92 @@ namespace TWAINDemo
             this.LoggingOptions.Text = "Logging Options...";
             this.LoggingOptions.Click += new System.EventHandler(this.LoggingOptions_Click);
             // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 3;
+            this.menuItem6.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.idlang_dutch,
+            this.idlang_english,
+            this.idlang_french,
+            this.idlang_german,
+            this.idlang_italian,
+            this.idlang_portuguese,
+            this.idlang_romanian,
+            this.idlang_russian,
+            this.idlang_simplified_chinese,
+            this.idlang_spanish,
+            this.idlang_custom});
+            this.menuItem6.Text = "Language";
+            // 
+            // idlang_dutch
+            // 
+            this.idlang_dutch.Index = 0;
+            this.idlang_dutch.Text = "Dutch";
+            this.idlang_dutch.Click += new System.EventHandler(this.idlang_dutch_Click);
+            // 
+            // idlang_english
+            // 
+            this.idlang_english.Index = 1;
+            this.idlang_english.Text = "English";
+            this.idlang_english.Click += new System.EventHandler(this.idlang_english_Click);
+            // 
+            // idlang_french
+            // 
+            this.idlang_french.Index = 2;
+            this.idlang_french.Text = "French";
+            this.idlang_french.Click += new System.EventHandler(this.idlang_french_Click);
+            // 
+            // idlang_german
+            // 
+            this.idlang_german.Index = 3;
+            this.idlang_german.Text = "German";
+            this.idlang_german.Click += new System.EventHandler(this.idlang_german_Click);
+            // 
+            // idlang_italian
+            // 
+            this.idlang_italian.Index = 4;
+            this.idlang_italian.Text = "Italian";
+            this.idlang_italian.Click += new System.EventHandler(this.idlang_italian_Click);
+            // 
+            // idlang_portuguese
+            // 
+            this.idlang_portuguese.Index = 5;
+            this.idlang_portuguese.Text = "Portuguese";
+            this.idlang_portuguese.Click += new System.EventHandler(this.idlang_portuguese_Click);
+            // 
+            // idlang_romanian
+            // 
+            this.idlang_romanian.Index = 6;
+            this.idlang_romanian.Text = "Romanian";
+            this.idlang_romanian.Click += new System.EventHandler(this.idlang_romanian_Click);
+            // 
+            // idlang_russian
+            // 
+            this.idlang_russian.Index = 7;
+            this.idlang_russian.Text = "Russian";
+            this.idlang_russian.Click += new System.EventHandler(this.idlang_russian_Click);
+            // 
+            // idlang_simplified_chinese
+            // 
+            this.idlang_simplified_chinese.Index = 8;
+            this.idlang_simplified_chinese.Text = "Simplified Chinese";
+            this.idlang_simplified_chinese.Click += new System.EventHandler(this.idlang_simplified_chinese_Click);
+            // 
+            // idlang_spanish
+            // 
+            this.idlang_spanish.Index = 9;
+            this.idlang_spanish.Text = "Spanish";
+            this.idlang_spanish.Click += new System.EventHandler(this.idlang_spanish_Click);
+            // 
+            // idlang_custom
+            // 
+            this.idlang_custom.Index = 10;
+            this.idlang_custom.Text = "Custom Language...";
+            this.idlang_custom.Click += new System.EventHandler(this.idlang_custom_Click);
+            // 
             // menuItem2
             // 
-            this.menuItem2.Index = 3;
+            this.menuItem2.Index = 4;
             this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.About});
             this.menuItem2.Text = "Help";
@@ -310,7 +423,7 @@ namespace TWAINDemo
             // DTwainDemo
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(577, 441);
+            this.ClientSize = new System.Drawing.Size(577, 421);
             this.Menu = this.mainMenu;
             this.Name = "DTwainDemo";
             this.Text = "DTWAIN C# Demo Program";
@@ -326,7 +439,9 @@ namespace TWAINDemo
 		[STAThread]
 		static void Main() 
 		{
-			Application.Run(new DTwainDemo());
+            DTwainDemo theDemo = new DTwainDemo();
+            if (theDemo.InitializedOk())
+                Application.Run(theDemo);
 		}
 
 		
@@ -371,13 +486,29 @@ namespace TWAINDemo
                     return;
             }
 
+            DTWAIN_ARRAY pArray = System.IntPtr.Zero;
+            if (TwainAPI.DTWAIN_EnumSources(ref pArray) > 0)
+            {
+                DTWAIN_SOURCE src = IntPtr.Zero;
+                int nSources = TwainAPI.DTWAIN_ArrayGetCount(pArray);
+                StringBuilder szBuf = new StringBuilder(256);
+                for (int i = 0; i < nSources; ++i)
+                {
+                    TwainAPI.DTWAIN_ArrayGetSourceAt(pArray, i, ref src);
+                    TwainAPI.DTWAIN_GetSourceProductName(src, szBuf, 256);
+                    Console.WriteLine("The source name is " + szBuf);
+                }
+            }
+
+
             this.Enabled = false;  // disable the main form
             switch (nWhich)
             {
                 case 0:
                     // Select the source
-                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero,"Select Source",0,0, 
-                            TwainAPI.DTWAIN_DLG_CENTER_SCREEN  | TwainAPI.DTWAIN_DLG_HIGHLIGHTFIRST | TwainAPI.DTWAIN_DLG_SORTNAMES);
+                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero, IntPtr.Zero,0,0, 
+                            TwainAPI.DTWAIN_DLG_CENTER_SCREEN  | TwainAPI.DTWAIN_DLG_HIGHLIGHTFIRST | TwainAPI.DTWAIN_DLG_SORTNAMES
+                            | TwainAPI.DTWAIN_DLG_TOPMOSTWINDOW);
                 break;
 
                 case 1:
@@ -420,7 +551,15 @@ namespace TWAINDemo
             }
             else
             {
-                MessageBox.Show("Error Selecting Source", "TWAIN Error", MessageBoxButtons.OK);
+                int lastError = TwainAPI.DTWAIN_GetLastError();
+                if (lastError == TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED)
+                    MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK);
+                else
+                {
+                    StringBuilder szErr = new StringBuilder(100);
+                    TwainAPI.DTWAIN_GetErrorString(lastError, szErr, 100);
+                    MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK);
+                }
                 SetCaptionToSourceName();
                 EnableSourceItems(false);
             }
@@ -474,21 +613,35 @@ namespace TWAINDemo
             this.Close();
         }
 
-        private void AcquireNative_Click(object sender, EventArgs e)
+        private void GenericAcquire(int nWhich)
         {
             if (SelectedSource != IntPtr.Zero)
             {
                 TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY, 
-                                                      DiscardBlankPages.Checked?1:0);
+                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
+                                                      DiscardBlankPages.Checked ? 1 : 0);
 
                 DTWAIN_ARRAY acquireArray = TwainAPI.DTWAIN_CreateAcquisitionArray();
                 this.Enabled = false;
                 int status = 0;
-                if ( TwainAPI.DTWAIN_AcquireNativeEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
-                     TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
+                int retVal = 0;
+                if (nWhich == 0)
+                    retVal = TwainAPI.DTWAIN_AcquireNativeEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                else
+                    retVal = TwainAPI.DTWAIN_AcquireBufferedEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                if ( retVal == 0)
                 {
-                    MessageBox.Show("Acquisition Failed", "TWAIN Error");
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
+                        MessageBox.Show("No Images Acquired", "TWAIN Information");
+                    else
+                    { 
+                        StringBuilder errMsg = new StringBuilder(256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        MessageBox.Show(errMsg.ToString(), "TWAIN Error");
+                    }
                     this.Enabled = true;
                     return;
                 }
@@ -508,40 +661,14 @@ namespace TWAINDemo
                 this.Enabled = true;
             }
         }
+        private void AcquireNative_Click(object sender, EventArgs e)
+        {
+            GenericAcquire(0);
+        }
 
         private void AcquireBuffered_Click(object sender, EventArgs e)
         {
-            if (SelectedSource != IntPtr.Zero)
-            {
-                TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
-                                                      DiscardBlankPages.Checked ? 1 : 0);
-
-                DTWAIN_ARRAY acquireArray = TwainAPI.DTWAIN_CreateAcquisitionArray();
-                this.Enabled = false;
-                int status = 0;
-                if (TwainAPI.DTWAIN_AcquireBufferedEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
-                     TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status) == 0)
-                {
-                    MessageBox.Show("Acquisition Failed", "TWAIN Error");
-                    this.Enabled = true;
-                    return;
-                }
-
-                if (TwainAPI.DTWAIN_ArrayGetCount(acquireArray) == 0)
-                {
-                    MessageBox.Show("No Images Acquired", "");
-                    this.Enabled = true;
-                    return;
-                }
-
-                // Display the DIBS
-                //...
-                DIBDisplayerDlg sDIBDlg = new DIBDisplayerDlg(acquireArray);
-                sDIBDlg.ShowDialog();
-                TwainAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0);
-                this.Enabled = true;
-            }
+            GenericAcquire(1);
         }
 
         private void AcquireFile_Click(object sender, EventArgs e)
@@ -612,16 +739,30 @@ namespace TWAINDemo
                                     );
 
                 if (bError == 0)
-                    MessageBox.Show("Error acquiring or saving file.");
+                {
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
+                        MessageBox.Show("No Images Acquired", "TWAIN Information");
+                    else
+                    {
+                        StringBuilder errMsg = new StringBuilder(256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        MessageBox.Show(errMsg.ToString(), "TWAIN Error");
+                    }
+                    this.Enabled = true;
+                    return;
+                }
                 else
                 if (status == TwainAPI.DTWAIN_TN_ACQUIREDONE)
                     MessageBox.Show("Image file saved successfully");
+                else
+                if (TwainAPI.DTWAIN_GetSavedFilesCount(SelectedSource) == 0)
+                    MessageBox.Show("No Images acquired");
                 else
                     MessageBox.Show("The acquisition returned a status of " + status.ToString());
                 this.Enabled = true;
             }
         }
-
         private void UseSourceUI_Click(object sender, EventArgs e)
         {
             UseSourceUI.Checked = !UseSourceUI.Checked;
@@ -634,8 +775,7 @@ namespace TWAINDemo
 
         private void LoggingOptions_Click(object sender, EventArgs e)
         {
-            long LogFlags = TwainAPI.DTWAIN_LOG_CALLSTACK | TwainAPI.DTWAIN_LOG_LOWLEVELTWAIN | TwainAPI.DTWAIN_LOG_DECODE_TWEVENT 
-                | TwainAPI.DTWAIN_LOG_DECODE_TWMEMREF | TwainAPI.DTWAIN_LOG_ISTWAINMSG;
+            long LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~(TwainAPI.DTWAIN_LOG_ISTWAINMSG | TwainAPI.DTWAIN_LOG_USEFILE | TwainAPI.DTWAIN_LOG_DEBUGMONITOR | TwainAPI.DTWAIN_LOG_CONSOLE);
             LogFileSelectionDlg logDlg = new LogFileSelectionDlg();
             DialogResult nResult = logDlg.ShowDialog();
             if (nResult == DialogResult.OK)
@@ -653,6 +793,9 @@ namespace TWAINDemo
                     case 3:
                         TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_DEBUGMONITOR), "");
                     break;
+                    case 4:
+                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_CONSOLEWITHHANDLER), "");
+                    break;
                 }
             }
         }
@@ -668,5 +811,73 @@ namespace TWAINDemo
             aDlg.ShowDialog();
         }
 
-	}
+        private void idlang_dutch_Click(object sender, EventArgs e)
+        {
+            load_language("dutch");
+        }
+
+        private void idlang_english_Click(object sender, EventArgs e)
+        {
+            load_language("english");
+        }
+
+        private void idlang_french_Click(object sender, EventArgs e)
+        {
+            load_language("french");
+        }
+
+        private void idlang_german_Click(object sender, EventArgs e)
+        {
+            load_language("german");
+        }
+
+        private void idlang_italian_Click(object sender, EventArgs e)
+        {
+            load_language("italian");
+        }
+
+        private void idlang_portuguese_Click(object sender, EventArgs e)
+        {
+            load_language("portuguese");
+        }
+
+        private void idlang_romanian_Click(object sender, EventArgs e)
+        {
+            load_language("romanian");
+        }
+
+        private void idlang_russian_Click(object sender, EventArgs e)
+        {
+            load_language("russian");
+        }
+
+        private void idlang_simplified_chinese_Click(object sender, EventArgs e)
+        {
+            load_language("simplified_chinese");
+        }
+
+        private void idlang_spanish_Click(object sender, EventArgs e)
+        {
+            load_language("spanish");
+        }
+
+        private void idlang_custom_Click(object sender, EventArgs e)
+        {
+            CustomLanguageDlg objCustomLanguage = new CustomLanguageDlg();
+            DialogResult nResult = objCustomLanguage.ShowDialog();
+            if (nResult == DialogResult.OK)
+            {
+                load_language(objCustomLanguage.GetText());
+            }
+        }
+
+        private void load_language(string language)
+        {
+            int retVal = TwainAPI.DTWAIN_LoadCustomStringResourcesA(language);
+            if (retVal == 0)
+                MessageBox.Show("Could not load language resource " + language, "Error", MessageBoxButtons.OK);
+            else
+                MessageBox.Show("Language " + " loaded successfully.  Select a Source or choose Logging/Log To Console to see the results");
+        }
+    }
 }
