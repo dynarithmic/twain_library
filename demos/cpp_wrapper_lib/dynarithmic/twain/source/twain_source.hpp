@@ -146,6 +146,7 @@ namespace dynarithmic
                 bool is_acquiring() const;
                 bool is_uienabled() const;
                 bool is_uionlysupported() const;
+                bool feederwait_supported() const;
                 image_information get_current_image_information() const;
                 bool set_current_camera(const cameraside_value::value_type& camera);
                 DTWAIN_SOURCE get_source() const noexcept { return m_theSource; }

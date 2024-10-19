@@ -32,7 +32,7 @@ OF THIRD PARTY RIGHTS.
 #ifdef DTWAIN_CPP_NOIMPORTLIB
     #include <dtwainx2.h>
 #else
-#include <dtwain.h>
+    #include <dtwain.h>
 #endif
 #include <dynarithmic/twain/types/twain_frame.hpp>
 #include <dynarithmic/twain/dtwain_twain.hpp>

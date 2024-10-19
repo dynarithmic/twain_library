@@ -41,9 +41,10 @@ int Runner::Run()
             // that can detect if paper has been inserted.  We didn't have to return
             // but for the sake of this demo, we will only continue to show the 
             // affect of waiting for the feeder.
+            if (!twsource.feederwait_supported())
+                return 0; // Not supported
+
             auto& ci = twsource.get_capability_interface();
-            if (!ci.is_paperdetectable_supported())
-                return 0;
 
             // get the file saving characteristics
             auto& ac = twsource.get_acquire_characteristics();
@@ -70,6 +71,9 @@ int Runner::Run()
 
             // We will only acquire 2 pages
             ac.get_general_options().set_max_page_count(2);
+
+            // Turn off the UI
+            ac.get_userinterface_options().show(false);
 
             auto retval = twsource.acquire();
 

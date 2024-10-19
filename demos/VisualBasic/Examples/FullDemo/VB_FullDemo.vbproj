@@ -115,6 +115,12 @@
     <Compile Include="AboutDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CustomLanguageDlg.Designer.vb">
+      <DependentUpon>CustomLanguageDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomLanguageDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CustomSelectSource.Designer.vb">
       <DependentUpon>CustomSelectSource.vb</DependentUpon>
     </Compile>
@@ -168,6 +174,9 @@
     </Compile>
     <EmbeddedResource Include="AboutDlg.resx">
       <DependentUpon>AboutDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomLanguageDlg.resx">
+      <DependentUpon>CustomLanguageDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomSelectSource.resx">
       <DependentUpon>CustomSelectSource.vb</DependentUpon>

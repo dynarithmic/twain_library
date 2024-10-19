@@ -22,13 +22,6 @@ The part of the file name that represents the language (in the above case, "gree
     
 Note that the name parameter used in DTWAIN_LoadCustomStringResources is the same name you gave the resource file (the part of the file name after the initial "_" character in the file name).
 
-6) Edit the [twainlanguage.txt](https://github.com/dynarithmic/twain_library/blob/master/additional_language_resources/twainlanguage.txt) file, and add at the end of the file your custom language name.  In the example using "greek", you would add the line
-
-**greek**
-
-to the list of supported languages.
-
-
 ---------------------------------
 
 If everything goes well, you can test if the custom language resource has been loaded by calling <a href="http://www.dynarithmic.com/onlinehelp5/dtwain/dtwain_settwainlog.htm" target="_blank">DTWAIN_SetTwainLog</a> and checking if the logging information shows up in the desired language.

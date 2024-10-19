@@ -73,6 +73,15 @@
 1057 Kan logbestand niet maken.
 1058 Source does not support TWAIN file system.
 1059 Tegelmodus wordt niet ondersteund voor deze TWAIN-bron.
+1060 DTWAIN32.INI niet gevonden  
+1061 DTWAIN64.INI niet gevonden  
+1062 CRC-controle mislukt. Controleer op een beschadigd twaininfo.txt-bestand  
+1063 De versie van het twaininfo.txt-bestand is ongeldig voor deze versie van DTWAIN  
+1064 Windows API-fout  
+1065 Geen TWAIN-ID komt overeen met de string  
+1066 Dubbele resource-ID gevonden  
+1067 Beschikbare uitgebreide afbeeldingsinformatie waarde
+1068 Ongeldig bitmap teruggegeven door TWAIN-bron (TWAINDSM 2.x)
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
@@ -204,6 +213,7 @@
 3001 &Selecteer
 3002 &Annuleer
 3003 Bronen:
+3004 Selecteer OCR
 3005 Binnenkomen
 3006 Afsluiten
 3007 terugkerende waarde van
@@ -224,8 +234,9 @@
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]
-10001 Error in closing Twain DSM
-10002 Error in closing Twain Session
-10003 Error in closing DTWAIN Manager
-10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
-10005 Could not remove subclass from user window
+10001 Fout bij het sluiten van Twain DSM  
+10002 Fout bij het sluiten van Twain-sessie  
+10003 Fout bij het sluiten van DTWAIN Manager  
+10004 TWAIN Source Manager, sessie en DTWAIN succesvol gesloten  
+10005 Kon subklasse niet verwijderen van gebruikersvenster  
+10006 Apparaattype en vereiste TWAIN-type komen niet overeen.

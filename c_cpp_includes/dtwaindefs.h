@@ -451,6 +451,9 @@
 /* Miscellaneous file transfer notifications */
 #define DTWAIN_TN_CLOSEDIBFAILED       1057
 
+/* Sent if a TWAIN Source fails to return a proper bitmap 
+   when using TWAINDSM.DLL as the data source manager */
+#define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
@@ -861,8 +864,13 @@
 #define DTWAIN_ERR_INI64_NOT_FOUND (-1061)
 #define DTWAIN_ERR_CRC_CHECK (-1062)
 #define DTWAIN_ERR_RESOURCES_BAD_VERSION (-1063)
+#define DTWAIN_ERR_WIN32_ERROR (-1064)
+#define DTWAIN_ERR_STRINGID_NOTFOUND (-1065)
+#define DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND (-1066)
+#define DTWAIN_ERR_UNAVAILABLE_EXTINFO (-1067)
+#define DTWAIN_ERR_TWAINDSM2_BADBITMAP (-1068)
 
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_RESOURCES_BAD_VERSION
+#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_TWAINDSM2_BADBITMAP
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1162,6 +1170,14 @@
 #define DTWAIN_EI_PAPERCOUNT             0x1249
 #define DTWAIN_EI_PRINTERTEXT            0x124A
 #define DTWAIN_EI_TWAINDIRECTMETADATA    0x124B
+#define DTWAIN_EI_IAFIELDA_VALUE         0x124C
+#define DTWAIN_EI_IAFIELDB_VALUE         0x124D
+#define DTWAIN_EI_IAFIELDC_VALUE         0x124E
+#define DTWAIN_EI_IAFIELDD_VALUE         0x124F
+#define DTWAIN_EI_IAFIELDE_VALUE         0x1250
+#define DTWAIN_EI_IALEVEL                0x1251
+#define DTWAIN_EI_PRINTER                0x1252
+#define DTWAIN_EI_BARCODETEXT2           0x1253
 
 /* TWAIN Data Source Error logging functions */
 #define DTWAIN_LOG_DECODE_SOURCE      0x00000001
@@ -1245,6 +1261,7 @@ DTWAIN DLL are not displayed */
 
 /* Create directory if logging to file */
 #define DTWAIN_LOG_CREATEDIRECTORY 0x04000000
+#define DTWAIN_TEMPDIR_CREATEDIRECTORY DTWAIN_LOG_CREATEDIRECTORY
 
 /* Use DTWAIN's console handler if console logging is selected */
 #define DTWAIN_LOG_CONSOLEWITHHANDLER (0x08000000 | DTWAIN_LOG_CONSOLE)
@@ -1573,7 +1590,11 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_MSG      56
 #define DTWAIN_CONSTANT_TWLG     57
 #define DTWAIN_CONSTANT_DLLINFO  58
-#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_DLLINFO + 1) 
+#define DTWAIN_CONSTANT_DG       59
+#define DTWAIN_CONSTANT_DAT      60
+#define DTWAIN_CONSTANT_DF       61
+#define DTWAIN_CONSTANT_TWTY     62
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_TWTY + 1) 
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000
