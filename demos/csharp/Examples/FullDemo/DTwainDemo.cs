@@ -775,8 +775,7 @@ namespace TWAINDemo
 
         private void LoggingOptions_Click(object sender, EventArgs e)
         {
-            long LogFlags = TwainAPI.DTWAIN_LOG_CALLSTACK | TwainAPI.DTWAIN_LOG_LOWLEVELTWAIN | TwainAPI.DTWAIN_LOG_DECODE_TWEVENT 
-                | TwainAPI.DTWAIN_LOG_DECODE_TWMEMREF | TwainAPI.DTWAIN_LOG_ISTWAINMSG;
+            long LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~(TwainAPI.DTWAIN_LOG_ISTWAINMSG | TwainAPI.DTWAIN_LOG_USEFILE | TwainAPI.DTWAIN_LOG_DEBUGMONITOR | TwainAPI.DTWAIN_LOG_CONSOLE);
             LogFileSelectionDlg logDlg = new LogFileSelectionDlg();
             DialogResult nResult = logDlg.ShowDialog();
             if (nResult == DialogResult.OK)
