@@ -1856,11 +1856,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_ArrayFix32GetAt(DTWAIN_ARRAY aFix32, ref int DTWAIN_LONG, ref int lPos);
+        public static extern  int DTWAIN_ArrayFix32GetAt(DTWAIN_ARRAY aFix32, int nWhere, ref int whole, ref int frac);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32);
+        public static extern  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32, int nWhere, int whole, int frac);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]

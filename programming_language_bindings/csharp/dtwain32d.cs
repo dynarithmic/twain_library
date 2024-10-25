@@ -1705,6 +1705,16 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_DAT      = 60;
         public const int DTWAIN_CONSTANT_DF       = 61;
         public const int DTWAIN_CONSTANT_TWTY     = 62;
+        public const int DTWAIN_CONSTANT_TWCB     = 63;
+        public const int DTWAIN_CONSTANT_TWAF     = 64;
+        public const int DTWAIN_CONSTANT_TWFS     = 65;
+        public const int DTWAIN_CONSTANT_TWJS     = 66;
+        public const int DTWAIN_CONSTANT_TWMR     = 67;
+        public const int DTWAIN_CONSTANT_TWDP     = 68;
+        public const int DTWAIN_CONSTANT_TWUS     = 69;
+        public const int DTWAIN_CONSTANT_TWDF     = 70;
+        public const int DTWAIN_CONSTANT_TWFM     = 71;
+        public const int DTWAIN_CONSTANT_TWSG     = 72;
 
         public const int DTWAIN_USERRES_START    = 20000;
         public const int DTWAIN_USERRES_MAXSIZE  = 8192;
@@ -1856,11 +1866,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_ArrayFix32GetAt(DTWAIN_ARRAY aFix32, ref int DTWAIN_LONG, ref int lPos);
+        public static extern  int DTWAIN_ArrayFix32GetAt(DTWAIN_ARRAY aFix32, int nWhere, ref int whole, ref int frac);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32);
+        public static extern  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32, int nWhere, int whole, int frac);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
