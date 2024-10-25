@@ -1,5 +1,20 @@
 DTWAIN Version changes
 
+5.5.4
+
+- Addressed issue with multiple calls to DTWAIN_SysInitialize() and DTWAIN_SysDestroy() not loading
+  the twaininfo.txt file.
+
+- Fixed issue with TW_FRAME and Extended Image Information not being processed correctly for
+  the TWEI_FRAME setting.
+
+- Fixed several incorrect language bindings for C#, Visual Basic, and Delphi.  Also corrected
+  a few incorrect function pointer definitions in dtwimpl.h (used when using DTWAIN in a 
+  C/C++ program that does not utilize import libraries). 
+
+- Added missing constants to twaininfo.txt
+
+
 5.5.3
 
 - Fixed several issues with retrieving extended image information (for example, barcode text, 
