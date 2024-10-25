@@ -1750,6 +1750,16 @@ const
   DTWAIN_CONSTANT_DAT       = 60;
   DTWAIN_CONSTANT_DF        = 61;
   DTWAIN_CONSTANT_TWTY      = 62;
+  DTWAIN_CONSTANT_TWCB      = 63;
+  DTWAIN_CONSTANT_TWAF      = 64;
+  DTWAIN_CONSTANT_TWFS      = 65;
+  DTWAIN_CONSTANT_TWJS      = 66;
+  DTWAIN_CONSTANT_TWMR      = 67;
+  DTWAIN_CONSTANT_TWDP      = 68;
+  DTWAIN_CONSTANT_TWUS      = 69;
+  DTWAIN_CONSTANT_TWDF      = 70;
+  DTWAIN_CONSTANT_TWFM      = 71;
+  DTWAIN_CONSTANT_TWSG      = 72;
 
   DTWAIN_USERRES_START    = 20000;
   DTWAIN_USERRES_MAXSIZE  = 8192;
@@ -1819,8 +1829,8 @@ function DTWAIN_ArrayFindString(pArray:DTWAIN_ARRAY; pString:LPCTSTR):LONG;stdca
 function DTWAIN_ArrayFindStringA(pArray:DTWAIN_ARRAY; pString:LPCSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFindStringA';
 function DTWAIN_ArrayFindStringW(pArray:DTWAIN_ARRAY; pString:LPCWSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFindStringW';
 function DTWAIN_ArrayFindWideString(pArray:DTWAIN_ARRAY; pString:LPCWSTR):LONG;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFindWideString';
-function DTWAIN_ArrayFix32GetAt(aFix32:DTWAIN_ARRAY; DTWAIN_LONG:LPLONG; lPos:LPLONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFix32GetAt';
-function DTWAIN_ArrayFix32SetAt(aFix32:DTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFix32SetAt';
+function DTWAIN_ArrayFix32GetAt(aFix32:DTWAIN_ARRAY; nWhere:LONG; Whole:LPLONG; Frac:LPLONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFix32GetAt';
+function DTWAIN_ArrayFix32SetAt(aFix32:DTWAIN_ARRAY; nWhere:LONG; Whole:LONG; Frac:LONG):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFix32SetAt';
 function DTWAIN_ArrayFrameGetAt(FrameArray:DTWAIN_ARRAY; nWhere:LONG; pleft:LPDTWAIN_FLOAT; ptop:LPDTWAIN_FLOAT; pright:LPDTWAIN_FLOAT; pbottom:LPDTWAIN_FLOAT):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFrameGetAt';
 function DTWAIN_ArrayFrameGetFrameAt(FrameArray:DTWAIN_ARRAY; nWhere:LONG):DTWAIN_FRAME;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFrameGetFrameAt';
 function DTWAIN_ArrayFrameSetAt(FrameArray:DTWAIN_ARRAY; nWhere:LONG; left:DTWAIN_FLOAT; top:DTWAIN_FLOAT; right:DTWAIN_FLOAT; bottom:DTWAIN_FLOAT):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_ArrayFrameSetAt';
