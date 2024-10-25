@@ -1660,9 +1660,19 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWLG  As Integer =   57
     Public Const DTWAIN_CONSTANT_DLLINFO  As Integer = 58
     Public Const DTWAIN_CONSTANT_DG       As Integer = 59
-    Public Const DTWAIN_CONSTANT_DAT      As Integer= 60
-    Public Const DTWAIN_CONSTANT_DF       As Integer= 61
-    Public Const DTWAIN_CONSTANT_TWTY     As Integer= 62
+    Public Const DTWAIN_CONSTANT_DAT      As Integer = 60
+    Public Const DTWAIN_CONSTANT_DF       As Integer = 61
+    Public Const DTWAIN_CONSTANT_TWTY     As Integer = 62
+    Public Const DTWAIN_CONSTANT_TWCB     As Integer = 63
+    Public Const DTWAIN_CONSTANT_TWAF     As Integer = 64
+    Public Const DTWAIN_CONSTANT_TWFS     As Integer = 65
+    Public Const DTWAIN_CONSTANT_TWJS     As Integer = 66
+    Public Const DTWAIN_CONSTANT_TWMR     As Integer = 67
+    Public Const DTWAIN_CONSTANT_TWDP     As Integer = 68
+    Public Const DTWAIN_CONSTANT_TWUS     As Integer = 69
+    Public Const DTWAIN_CONSTANT_TWDF     As Integer = 70
+    Public Const DTWAIN_CONSTANT_TWFM     As Integer = 71
+    Public Const DTWAIN_CONSTANT_TWSG     As Integer = 72
 
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
@@ -1711,8 +1721,8 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_ArrayFindFloat Lib "dtwain32d.dll" (ByVal pArray As System.IntPtr, ByVal Val As Double, ByVal Tolerance As Double) As Integer
     Declare Auto Function DTWAIN_ArrayFindLong Lib "dtwain32d.dll" (ByVal pArray As System.IntPtr, ByVal Val As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayFindLong64 Lib "dtwain32d.dll" (ByVal pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayFix32GetAt Lib "dtwain32d.dll" (ByVal aFix32 As System.IntPtr, ByRef DTWAIN_LONG As Integer, ByRef lPos As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayFix32SetAt Lib "dtwain32d.dll" (ByVal aFix32 As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_ArrayFix32GetAt Lib "dtwain32d.dll" (ByVal aFix32 As System.IntPtr, ByVal nWhere As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
+    Declare Auto Function DTWAIN_ArrayFix32SetAt Lib "dtwain32d.dll" (ByVal aFix32 As System.IntPtr, ByVal nWhere As Integer, ByVal Whole As Integer, ByVal Frac As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayFrameGetAt Lib "dtwain32d.dll" (ByVal FrameArray As System.IntPtr, ByVal nWhere As Integer, ByRef pleft As Double, ByRef ptop As Double, ByRef pright As Double, ByRef pbottom As Double) As Integer
     Declare Auto Function DTWAIN_ArrayFrameGetFrameAt Lib "dtwain32d.dll" (ByVal FrameArray As System.IntPtr, ByVal nWhere As Integer) As System.IntPtr
     Declare Auto Function DTWAIN_ArrayFrameSetAt Lib "dtwain32d.dll" (ByVal FrameArray As System.IntPtr, ByVal nWhere As Integer, ByVal left As Double, ByVal top As Double, ByVal right As Double, ByVal bottom As Double) As Integer
