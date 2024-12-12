@@ -54,24 +54,24 @@
 1038 Quelle unterstützt nicht die Abfrage ob der Dokumenteneinzug geladen ist
 1039 Speicher Ausnahmeverletzung während Twain DSM. DSM kann in einem ungültigen Status sein.
 1040 Invalid TWAIN state transition
-1041 Unsupported extended image info type
-1042 DLL Resource file not found
-1043 DTWAIN Not initialized
-1044 No TWAIN Sources found
-1045 TWAIN is not installed
-1046 Incorrect thread of execution
-1047 Bad capability data type
-1048 Capability has unknown data type
+1041 Nicht unterstützter Typ erweiterter Bildinformationen
+1042 DLL-Ressourcendatei nicht gefunden  
+1043 DTWAIN nicht initialisiert  
+1044 Keine TWAIN-Quellen gefunden  
+1045 TWAIN ist nicht installiert  
+1046 Falscher Ausführungs-Thread  
+1047 Ungültiger Datentyp für Fähigkeit  
+1048 Fähigkeit hat unbekannten Datentyp  
 1049 Demo Version of DTWAIN does not support this file type
 1050 Auswahl Quelle Abgebrochen
 1051 DTWAIN Resources not found
 1052 String stimmt nicht mit Array-Typ überein
 1053 DTWAIN ARRAY not the same type
-1054 Source not installed
-1055 Source does not support memory file transfers
+1054 Quelle nicht installiert  
+1055 Quelle unterstützt keine Speicherdateiübertragungen
 1056 Das Bereichsarray ist zu klein. Das Array sollte mindestens 4 Elemente enthalten.
 1057 Protokolldatei konnte nicht erstellt werden
-1058 Source does not support TWAIN file system.
+1058 Quelle unterstützt das TWAIN-Dateisystem nicht.
 1059 Kachelmodus wird für diese TWAIN-Quelle nicht unterstützt.
 1060 DTWAIN32.INI nicht gefunden  
 1061 DTWAIN64.INI nicht gefunden  
@@ -82,6 +82,10 @@
 1066 Doppelte Ressourcen-ID gefunden  
 1067 Nicht verfügbarer Wert für erweiterte Bildinformationen
 1068 Ungültiges Bitmap von TWAIN-Quelle zurückgegeben (TWAINDSM 2.x)
+1069 Keine Bilder erfasst.
+1070 Bildfehler  
+1071 Unbekannter TWAIN-Rückgabecode  
+1072 Unbekannter TWAIN-Bedingungscode  
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
@@ -209,6 +213,7 @@
 2501 TWAIN Quelle konnte nicht geschlossen werden
 2502 Ungültige Bildinformationen
 2503 Fehler beim Schreiben der Daten in die Datei
+2504 Operation nicht unterstützt  
 3000 Wählen TWAIN Quelle
 3001 &Wählen
 3002 &Abbrechen
@@ -231,6 +236,10 @@
 3019 Temporäre Bilddatei ist
 3020 Fehler beim Erstellen der temporären Bilddatei
 3021 Bilddatei erfolgreich erstellt
+3022 Werte beim Zurückgeben gesetzt
+3023 Mehr
+3024 Fähigkeitsliste
+3025 Standardquelle
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Benutzernachricht]

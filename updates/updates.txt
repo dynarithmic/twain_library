@@ -1,5 +1,35 @@
 DTWAIN Version changes
 
+5.5.5
+
+- Update CAP_PRINTERSTRING to use (by default) TWON_ONEVALUE container on setting capability.
+
+- Change internal TWAIN message loop to loop indefinitely until the Source UI is closed.
+
+- Ensure setting string capabilities uses ANSI strings.
+
+- Create versions of DTWAIN DLL that contains full logging and minimal logging.  The minimal
+  logging versions of DTWAIN results in smaller sizes for the DLL files.
+
+- Add Japanese, Traditional Chinese, and Greek text resources.
+
+- All lines in the logs generated with DTWAIN_SetTwainLog() have timestamps (with the 
+  by-product of this change being that all the log lines are properly indented).
+
+- DTWDEMO32 and DTWDEMO64 programs now do not require VCRUNTIME140.DLL to be present.
+
+- On return of DTWAIN functions that handle pointers as input, the values that the pointers
+  will point to are now logged (only available with full logging versions of DTWAIN DLL). 
+
+- Added missing constants to twaininfo.txt
+
+- DTWAIN_SelectDefaultSource() will now only make a call to the TWAIN DSM if the DSM is version 2
+  or greater (TWAINDSM.DLL).
+
+- DTWAIN_GetSourceDetails() now correctly reports custom capabilities that are also extended capabilities.
+
+
+
 5.5.4
 
 - Addressed issue with multiple calls to DTWAIN_SysInitialize() and DTWAIN_SysDestroy() not loading
