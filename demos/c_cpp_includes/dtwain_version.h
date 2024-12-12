@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2024 Dynarithmic Software.
+    Copyright (c) 2002-2025 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@
 
 #define DTWAIN_MAJOR_VERSION           5
 #define DTWAIN_MINOR_VERSION           5
-#define DTWAIN_PATCHLEVEL_VERSION      4
+#define DTWAIN_PATCHLEVEL_VERSION      5
 
 #define DTWAIN_TEXTRESOURCE_MIN_MAJOR_VERSION           5
 #define DTWAIN_TEXTRESOURCE_MIN_MINOR_VERSION           5
-#define DTWAIN_TEXTRESOURCE_MIN_PATCHLEVEL_VERSION      4
+#define DTWAIN_TEXTRESOURCE_MIN_PATCHLEVEL_VERSION      5
 
 #define DTWAIN_STRINGER_2_(x) #x
 #define DTWAIN_STRINGER_(x) DTWAIN_STRINGER_2_(x)
@@ -42,7 +42,7 @@
 
 #define DTWAIN_BUILDVERSION_TOP 0
 #define DTWAIN_BUILDVERSION_MIDDLE 0
-#define DTWAIN_BUILDVERSION_BOTTOM 1
+#define DTWAIN_BUILDVERSION_BOTTOM 4
 #define DTWAIN_BUILDVERSION DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_TOP) DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_MIDDLE) DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_BOTTOM)
 
 #ifdef _MSC_VER

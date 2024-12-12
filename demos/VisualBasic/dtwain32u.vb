@@ -1,6 +1,6 @@
 REM
 REM This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-REM Copyright (c) 2002-2024 Dynarithmic Software.                                         
+REM Copyright (c) 2002-2025 Dynarithmic Software.                                         
 REM                                                                                       
 REM Licensed under the Apache License, Version 2.0 (the "License");                       
 REM you may not use this file except in compliance with the License.                      
@@ -410,6 +410,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PROCESSDIBFINALACCEPTED As Integer = 1056
     Public Const DTWAIN_TN_CLOSEDIBFAILED As Integer = 1057
     Public Const DTWAIN_TN_INVALID_TWAINDSM2_BITMAP As Integer = 1058
+    Public Const DTWAIN_TN_IMAGE_RESAMPLE_FAILURE As Integer = 1059
 
     Public Const DTWAIN_TN_DEVICEEVENT As Integer = 1100
     Public Const DTWAIN_TN_TWAINPAGECANCELLED As Integer = 1105
@@ -763,6 +764,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND As Integer = (-1066)
     Public Const DTWAIN_ERR_UNAVAILABLE_EXTINFO As Integer = (-1067)
     Public Const DTWAIN_ERR_TWAINDSM2_BADBITMAP As Integer = (-1068)
+    Public Const DTWAIN_ERR_ACQUISITION_CANCELED As Integer = (-1069)
+    Public Const DTWAIN_ERR_IMAGE_RESAMPLED As Integer = (-1070)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
@@ -817,7 +820,7 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_NOTIFFLZW As Integer = (-2021)
     Public Const DTWAIN_ERR_INVALIDPCX As Integer = (-2022)
     Public Const DTWAIN_ERR_CREATEBMP As Integer = (-2023)
-    Public Const DTWAIN_ERR_NOLINES As Integer = (-2024)
+    Public Const DTWAIN_ERR_NOLINES As Integer = (-2025)
     Public Const DTWAIN_ERR_GETDIB As Integer = (-2025)
     Public Const DTWAIN_ERR_NODEVOP As Integer = (-2026)
     Public Const DTWAIN_ERR_INVALIDWMF As Integer = (-2027)
@@ -1660,9 +1663,23 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWLG  As Integer =   57
     Public Const DTWAIN_CONSTANT_DLLINFO  As Integer = 58
     Public Const DTWAIN_CONSTANT_DG       As Integer = 59
-    Public Const DTWAIN_CONSTANT_DAT      As Integer= 60
-    Public Const DTWAIN_CONSTANT_DF       As Integer= 61
-    Public Const DTWAIN_CONSTANT_TWTY     As Integer= 62
+    Public Const DTWAIN_CONSTANT_DAT      As Integer = 60
+    Public Const DTWAIN_CONSTANT_DF       As Integer = 61
+    Public Const DTWAIN_CONSTANT_TWTY     As Integer = 62
+    Public Const DTWAIN_CONSTANT_TWCB     As Integer = 63
+    Public Const DTWAIN_CONSTANT_TWAF     As Integer = 64
+    Public Const DTWAIN_CONSTANT_TWFS     As Integer = 65
+    Public Const DTWAIN_CONSTANT_TWJS     As Integer = 66
+    Public Const DTWAIN_CONSTANT_TWMR     As Integer = 67
+    Public Const DTWAIN_CONSTANT_TWDP     As Integer = 68
+    Public Const DTWAIN_CONSTANT_TWUS     As Integer = 69
+    Public Const DTWAIN_CONSTANT_TWDF     As Integer = 70
+    Public Const DTWAIN_CONSTANT_TWFM     As Integer = 71
+    Public Const DTWAIN_CONSTANT_TWSG     As Integer = 72
+    Public Const DTWAIN_CONSTANT_DTWAIN_TN As Integer = 73
+    Public Const DTWAIN_CONSTANT_TWON     As Integer = 74
+    Public Const DTWAIN_CONSTANT_TWMF     As Integer = 75
+    Public Const DTWAIN_CONSTANT_TWSX     As Integer = 76
 
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
