@@ -54,24 +54,24 @@
 1038 Procedencia o aparato no apoyaba a inquirir si los documentos son cargados en el alimentador de documento
 1039 Error de excepción de memoria while a le pregonar a la Twain DSM.   Quizás los DSM esté en situación inconsecuente.
 1040 Invalid TWAIN state transition
-1041 Unsupported extended image info type
-1042 DLL Resource file not found
-1043 DTWAIN Not initialized
-1044 No TWAIN Sources found
-1045 TWAIN is not installed
-1046 Incorrect thread of execution
-1047 Bad capability data type
-1048 Capability has unknown data type
+1041 Tipo de información de imagen extendida no soportado
+1042 Archivo de recursos DLL no encontrado  
+1043 DTWAIN no inicializado  
+1044 No se encontraron fuentes TWAIN  
+1045 TWAIN no está instalado  
+1046 Hilo de ejecución incorrecto  
+1047 Tipo de dato de capacidad incorrecto  
+1048 La capacidad tiene un tipo de dato desconocido  
 1049 Demo Version of DTWAIN does not support this file type
 1050 Selección cancelada
 1051 DTWAIN Resources not found
 1052 La cadena no coincide con el tipo de matriz
 1053 DTWAIN ARRAY not the same type
-1054 Source not installed
-1055 Procedencia no apoya archivo las transferencias (transferencia de memoria)
+1054 Fuente no instalada  
+1055 La fuente no soporta transferencias de archivos en memoria
 1056 La matriz de área es demasiado pequeña. La matriz debe tener al menos 4 elementos.
 1057 Error de creación del archivo de registro.
-1058 Source does not support TWAIN file system.
+1058 La fuente no soporta el sistema de archivos TWAIN.
 1059 Modo de azulejos no soportado para esta fuente TWAIN.
 1060 DTWAIN32.INI no encontrado  
 1061 DTWAIN64.INI no encontrado  
@@ -82,6 +82,10 @@
 1066 Se encontró un ID de recurso duplicado  
 1067 Valor de información de imagen extendida no disponible  
 1068 Bitmap inválido devuelto por la fuente TWAIN (TWAINDSM 2.x)
+1069 No se adquirieron imágenes.
+1070 Error de imagen  
+1071 Código de retorno TWAIN desconocido  
+1072 Código de condición TWAIN desconocido  
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso
@@ -209,6 +213,7 @@
 2501 No le podríamos tapar a TWAIN origen
 2502 Información de imagen no válida
 2503 Error al escribir datos en el archivo
+2504 Operación no soportada  
 3000 Seleccionar Fuente  
 3001 &Seleccionar  
 3002 &Cancelar
@@ -231,6 +236,10 @@
 3019 El archivo de imagen temporal es
 3020 Error al crear un archivo de imagen temporal
 3021 Archivo de imagen creado exitosamente
+3022 Valores establecidos en el retorno
+3023 Más
+3024 Listado de capacidades
+3025 Fuente Predeterminada
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Mensaje de usuario]
