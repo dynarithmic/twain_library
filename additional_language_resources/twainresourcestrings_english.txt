@@ -82,6 +82,10 @@
 1066 Duplicate resource ID found
 1067 Unavailable extended image info value
 1068 Invalid bitmap returned by TWAIN Source (TWAINDSM 2.x)
+1069 No images acquired.
+1070 Image resample error
+1071 Unknown TWAIN Return Code
+1072 Unknown TWAIN Condition Code
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure
@@ -210,6 +214,7 @@
 2501 Could not close TWAIN source
 2502 Invalid Image Information on acquiring image
 2503 Error writing data to file
+2504 Operation not supported
 3000 Select Source
 3001 &Select
 3002 &Cancel
@@ -232,6 +237,10 @@
 3019 Temporary Image File is
 3020 Error creating temporary Image File
 3021 Image file created successfully
+3022 Values set on return
+3023 More
+3024 Capability listing
+3025 Default Source
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [User Message]
