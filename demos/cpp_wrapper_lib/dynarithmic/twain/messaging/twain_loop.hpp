@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2024 Dynarithmic Software.
+Copyright (c) 2002-2025 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ namespace dynarithmic
         };
 
         // This can be used for TWAIN 1.x and 2.x Data Source Managers
-        template <typename dispatcher = twain_default_enter_dispatch>
+        template <typename dispatcher=twain_default_enter_dispatch>
         struct twain_looper_win32
         {
             twain_looper_win32(twain_source&) {}
