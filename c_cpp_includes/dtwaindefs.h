@@ -933,7 +933,7 @@
 #define DTWAIN_ERR_NOTIFFLZW        (-2021)
 #define DTWAIN_ERR_INVALIDPCX       (-2022)
 #define DTWAIN_ERR_CREATEBMP        (-2023)
-#define DTWAIN_ERR_NOLINES          (-2025)
+#define DTWAIN_ERR_NOLINES          (-2024)
 #define DTWAIN_ERR_GETDIB           (-2025)
 #define DTWAIN_ERR_NODEVOP          (-2026)
 #define DTWAIN_ERR_INVALIDWMF       (-2027)
