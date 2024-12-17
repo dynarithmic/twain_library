@@ -2,7 +2,7 @@
 #  dtwain.py
 # 
 #  This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-#  Copyright (c) 2002-2024 Dynarithmic Software.                                         
+#  Copyright (c) 2002-2025 Dynarithmic Software.                                         
 #                                                                                        
 #  Licensed under the Apache License, Version 2.0 (the "License");                       
 #  you may not use this file except in compliance with the License.                      
@@ -336,6 +336,7 @@ DTWAIN_TN_PROCESSDIBACCEPTED = 1055
 DTWAIN_TN_PROCESSDIBFINALACCEPTED = 1056
 DTWAIN_TN_CLOSEDIBFAILED = 1057
 DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
+DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
 
 DTWAIN_TN_DEVICEEVENT = 1100
 DTWAIN_TN_TWAINPAGECANCELLED = 1105
@@ -689,6 +690,8 @@ DTWAIN_ERR_STRINGID_NOTFOUND = (-1065)
 DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND = (-1066)
 DTWAIN_ERR_UNAVAILABLE_EXTINFO = (-1067)
 DTWAIN_ERR_TWAINDSM2_BADBITMAP = (-1068)
+DTWAIN_ERR_ACQUISITION_CANCELED = (-1069)
+DTWAIN_ERR_IMAGE_RESAMPLED = (-1070)
 
 TWAIN_ERR_LOW_MEMORY = (-1100)
 TWAIN_ERR_FALSE_ALARM = (-1101)
@@ -1593,6 +1596,10 @@ DTWAIN_CONSTANT_TWUS     = 69
 DTWAIN_CONSTANT_TWDF     = 70
 DTWAIN_CONSTANT_TWFM     = 71
 DTWAIN_CONSTANT_TWSG     = 72
+DTWAIN_CONSTANT_DTWAIN_TN = 73
+DTWAIN_CONSTANT_TWON      = 74
+DTWAIN_CONSTANT_TWMF      = 75
+DTWAIN_CONSTANT_TWSX      = 76
 
 DTWAIN_USERRES_START    = 20000
 DTWAIN_USERRES_MAXSIZE  = 8192

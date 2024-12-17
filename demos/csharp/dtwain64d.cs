@@ -818,7 +818,9 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_TWAINDSM2_BADBITMAP = (-1068);
         public const int DTWAIN_ERR_ACQUISITION_CANCELED = (-1069);
         public const int DTWAIN_ERR_IMAGE_RESAMPLED = (-1070);
-
+        public const int DTWAIN_ERR_UNKNOWN_TWAIN_RC = (-1071);
+        public const int DTWAIN_ERR_UNKNOWN_TWAIN_CC = (-1072);
+        public const int DTWAIN_ERR_RESOURCES_DATA_EXCEPTION = (-1073);
 
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);
@@ -873,7 +875,7 @@ namespace Dynarithmic
         public const  int DTWAIN_ERR_NOTIFFLZW = (-2021);
         public const  int DTWAIN_ERR_INVALIDPCX = (-2022);
         public const  int DTWAIN_ERR_CREATEBMP = (-2023);
-        public const  int DTWAIN_ERR_NOLINES = (-2025);
+        public const  int DTWAIN_ERR_NOLINES = (-2024);
         public const  int DTWAIN_ERR_GETDIB = (-2025);
         public const  int DTWAIN_ERR_NODEVOP = (-2026);
         public const  int DTWAIN_ERR_INVALIDWMF = (-2027);
@@ -956,6 +958,8 @@ namespace Dynarithmic
         public const  int DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  = (-2501);
         public const  int DTWAIN_ERR_IMAGEINFO_INVALID       = (-2502);
         public const  int DTWAIN_ERR_WRITEDATA_TOFILE        = (-2503);
+        public const  int DTWAIN_ERR_OPERATION_NOTSUPPORTED  = (-2504);
+
         public const  int DTWAIN_DE_CHKAUTOCAPTURE = 1;
         public const  int DTWAIN_DE_CHKBATTERY = 2;
         public const  int DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -2582,11 +2586,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, ref int lpCompression, ref int lpBytesPerRow, ref int lpColumns, ref int lpRows, ref int XOffset, ref int YOffset, ref int lpBytesWritten);
+        public static extern  int DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, ref int lpCompression, ref uint lpBytesPerRow, ref uint lpColumns, ref uint lpRows, ref uint XOffset, ref uint YOffset, ref uint lpBytesWritten);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, ref int lpMin, ref int lpMax, ref int lpPreferred);
+        public static extern  int DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, ref uint lpMin, ref uint lpMax, ref uint lpPreferred);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -2690,11 +2694,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] LPBYTE, int dSize, ref int Data, int flags);
+        public static extern  DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] LPBYTE, uint dSize, ref uint Data, int flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, System.IntPtr retPtr, int dSize, ref int Data, int flags);
+        public static extern DTWAIN_HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, System.IntPtr retPtr, uint dSize, ref uint Data, int flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3494,7 +3498,7 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetAcquireStripSize(DTWAIN_SOURCE Source, int nSize);
+        public static extern int DTWAIN_SetAcquireStripSize(DTWAIN_SOURCE Source, uint nSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3566,7 +3570,12 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  int DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, DTWAIN_HANDLE hData, int LPCBYTE, int Data);
+        public static extern  int DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, DTWAIN_HANDLE hData,
+                                         [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U8, SizeParamIndex = 3)] byte[] lpData, uint size, int flags);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, DTWAIN_HANDLE hData, System.IntPtr lpData, uint size, int flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -6011,5 +6020,42 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern  int DTWAIN_GetActiveDSMVersionInfo(System.IntPtr sz, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainIDFromNameA([MarshalAs(UnmanagedType.LPStr)] string lpszName);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainIDFromNameW([MarshalAs(UnmanagedType.LPWStr)] string lpszName);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainIDFromName([MarshalAs(UnmanagedType.LPTStr)] string lpszName);
+
+        ////////////////////////////////////////////////////////////////////////
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringNameA(int category, int twainID, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszName, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringNameW(int category, int twainID, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszName, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringName(int category, int twainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringNameA(int category, int twainID, System.IntPtr lpszName, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringNameW(int category, int twainID, System.IntPtr lpszName, int nLength);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetTwainStringName(int category, int twainID, System.IntPtr lpszName, int nLength);
     }
 }

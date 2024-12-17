@@ -140,11 +140,15 @@ AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("engli
                                  {ID_LANGUAGE_SPANISH               , _T("spanish")},
                                  {ID_LANGUAGE_ITALIAN               , _T("italian")},
                                  {ID_LANGUAGE_GERMAN                , _T("german")},
+                                 {ID_LANGUAGE_GREEK                 , _T("greek")},
                                  {ID_LANGUAGE_DUTCH                 , _T("dutch")},
                                  {ID_LANGUAGE_RUSSIAN               , _T("russian")},
                                  {ID_LANGUAGE_ROMANIAN              , _T("romanian")},
                                  {ID_LANGUAGE_PORTUGUESE              , _T("portuguese")},
-                                 {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")} 
+                                 {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")},
+                                 {ID_LANGUAGE_TRADITIONALCHINESE    , _T("traditional_chinese")},
+                                 {ID_LANGUAGE_JAPANESE              , _T("japanese")},
+                                 {ID_LANGUAGE_KOREAN                , _T("korean")}
                                 };
 TCHAR g_CustomLanguage[256];
 
@@ -332,6 +336,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case ID_LANGUAGE_ITALIAN            : 
                 case ID_LANGUAGE_GERMAN             : 
                 case ID_LANGUAGE_DUTCH              : 
+                case ID_LANGUAGE_GREEK              :
+                case ID_LANGUAGE_JAPANESE           :
+                case ID_LANGUAGE_KOREAN             :
+                case ID_LANGUAGE_TRADITIONALCHINESE :
                 case ID_LANGUAGE_RUSSIAN            : 
                 case ID_LANGUAGE_ROMANIAN           : 
                 case ID_LANGUAGE_SIMPLIFIEDCHINESE  : 
@@ -455,10 +463,9 @@ void SelectTheSource(int nWhich)
     else
     {
         LONG lastError = DTWAIN_GetLastError();
-        if (lastError == DTWAIN_ERR_SOURCESELECTION_CANCELED)
-            MessageBox(g_hWnd, _T("Canceled Selecting Source"), _T("Information"), MB_ICONSTOP);
-        else
-            MessageBox(g_hWnd, _T("Error Selecting Source"), _T("TWAIN Error"), MB_ICONSTOP);
+        TCHAR szCancelMsg[256];
+        DTWAIN_GetErrorString(lastError, szCancelMsg, 256);
+        MessageBox(g_hWnd, szCancelMsg, _T("Information"), MB_ICONSTOP);
     }
 }
 

@@ -86,6 +86,7 @@
 1070 Image resample error
 1071 Unknown TWAIN Return Code
 1072 Unknown TWAIN Condition Code
+1073 Resource data error: Exception thrown
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

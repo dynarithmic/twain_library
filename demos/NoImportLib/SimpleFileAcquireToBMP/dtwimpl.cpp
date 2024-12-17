@@ -596,6 +596,9 @@
     D_GETTWAINCOUNTRYVALUEFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainCountryValue = nullptr;
     D_GETTWAINCOUNTRYVALUEWFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainCountryValueW = nullptr;
     D_GETTWAINHWNDFUNC                                                DYNDTWAIN_API::DTWAIN_GetTwainHwnd = nullptr;
+    D_GETTWAINIDFROMNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainIDFromName = nullptr;
+    D_GETTWAINIDFROMNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainIDFromNameA = nullptr;
+    D_GETTWAINIDFROMNAMEWFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainIDFromNameW = nullptr;
     D_GETTWAINLANGUAGENAMEAFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameA = nullptr;
     D_GETTWAINLANGUAGENAMEFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainLanguageName = nullptr;
     D_GETTWAINLANGUAGENAMEWFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameW = nullptr;
@@ -1663,6 +1666,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainHwnd, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromName, hModule); 
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromNameA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameW, hModule);

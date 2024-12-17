@@ -64,7 +64,7 @@ Public Class SourcePropertiesDlg
         DTWAINAPI.DTWAIN_EnumExtendedCaps(m_Source, AllCaps)
         Me.edExtendedCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
 
-        Dim customDSLength As Integer
+        Dim customDSLength As UInteger
         Dim jsonLength As Integer
         Dim enc8 As Encoding = Encoding.UTF8
         DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)

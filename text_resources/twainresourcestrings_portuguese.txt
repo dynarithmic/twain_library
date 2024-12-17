@@ -86,6 +86,7 @@
 1070 Erro de imagem  
 1071 Código de retorno TWAIN desconhecido  
 1072 Código de condição TWAIN desconhecido  
+1073 Erro de dados de recurso: Exceção lançada
 1100 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erro  
 1102 Código de Condição TWAIN: Causa desconhecida da falha  

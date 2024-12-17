@@ -1,5 +1,5 @@
 {* This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          *}
-{* Copyright (c) 2002-2024 Dynarithmic Software.                                         *}
+{* Copyright (c) 2002-2025 Dynarithmic Software.                                         *}
 {*                                                                                       *}
 {* Licensed under the Apache License, Version 2.0 (the "License");                       *}
 {* you may not use this file except in compliance with the License.                      *}
@@ -46,7 +46,7 @@ type
   DTWAIN_CALLBACK_PROC64 = Pointer;
   DTWAIN_DIBUPDATE_PROC = Pointer;
   DTWAIN_LOGGER_PROC = Pointer;
-  DWORD = Integer;
+  DWORD = UInt32;
   BOOL = LongBool;
   PBOOL = ^BOOL;
   PByte = ^Byte;
@@ -504,6 +504,7 @@ const
   DTWAIN_TN_PROCESSDIBFINALACCEPTED = 1056;
   DTWAIN_TN_CLOSEDIBFAILED = 1057;
   DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
+  DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059;
 
   DTWAIN_TN_DEVICEEVENT = 1100;
   DTWAIN_TN_TWAINPAGECANCELLED = 1105;
@@ -857,6 +858,8 @@ const
   DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND = (-1066);
   DTWAIN_ERR_UNAVAILABLE_EXTINFO = (-1067);
   DTWAIN_ERR_TWAINDSM2_BADBITMAP = (-1068);
+  DTWAIN_ERR_ACQUISITION_CANCELED = (-1069);
+  DTWAIN_ERR_IMAGE_RESAMPLED = (-1070);
 
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
@@ -1760,6 +1763,10 @@ const
   DTWAIN_CONSTANT_TWDF      = 70;
   DTWAIN_CONSTANT_TWFM      = 71;
   DTWAIN_CONSTANT_TWSG      = 72;
+  DTWAIN_CONSTANT_DTWAIN_TN  = 73;
+  DTWAIN_CONSTANT_TWON       = 74;
+  DTWAIN_CONSTANT_TWMF       = 75;
+  DTWAIN_CONSTANT_TWSX       = 76;
 
   DTWAIN_USERRES_START    = 20000;
   DTWAIN_USERRES_MAXSIZE  = 8192;
@@ -2063,8 +2070,8 @@ function DTWAIN_GetAcquiredImage(aAcq:DTWAIN_ARRAY; nWhichAcq:LONG; nWhichDib:LO
 function DTWAIN_GetAcquiredImageArray(aAcq:DTWAIN_ARRAY; nWhichAcq:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquiredImageArray';
 function DTWAIN_GetAcquireMetrics(source:DTWAIN_SOURCE; ImageCount:LPLONG; SheetCount:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireMetrics';
 function DTWAIN_GetAcquireStripBuffer(Source:DTWAIN_SOURCE):DTWAIN_HANDLE;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireStripBuffer';
-function DTWAIN_GetAcquireStripData(Source:DTWAIN_SOURCE; lpCompression:LPLONG; lpBytesPerRow:LPLONG; lpColumns:LPLONG; lpRows:LPLONG; XOffset:LPLONG; YOffset:LPLONG; lpBytesWritten:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireStripData';
-function DTWAIN_GetAcquireStripSizes(Source:DTWAIN_SOURCE; lpMin:LPLONG; lpMax:LPLONG; lpPreferred:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireStripSizes';
+function DTWAIN_GetAcquireStripData(Source:DTWAIN_SOURCE; lpCompression:LPLONG; lpBytesPerRow:LPDWORD; lpColumns:LPDWORD; lpRows:LPDWORD; XOffset:LPDWORD; YOffset:LPDWORD; lpBytesWritten:LPDWORD):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireStripData';
+function DTWAIN_GetAcquireStripSizes(Source:DTWAIN_SOURCE; lpMin:LPDWORD; lpMax:LPDWORD; lpPreferred:LPDWORD):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAcquireStripSizes';
 function DTWAIN_GetAlarmVolume(Source:DTWAIN_SOURCE; lpVolume:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAlarmVolume';
 function DTWAIN_GetAppInfo(szVerStr:LPTSTR; szManu:LPTSTR; szProdFam:LPTSTR; szProdName:LPTSTR):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAppInfo';
 function DTWAIN_GetAppInfoA(szVerStr:LPSTR; szManu:LPSTR; szProdFam:LPSTR; szProdName:LPSTR):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetAppInfoA';
@@ -2115,7 +2122,7 @@ function DTWAIN_GetCurrentFileNameA(Source:DTWAIN_SOURCE; szName:LPSTR; MaxLen:L
 function DTWAIN_GetCurrentFileNameW(Source:DTWAIN_SOURCE; szName:LPWSTR; MaxLen:LONG):LONG;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetCurrentFileNameW';
 function DTWAIN_GetCurrentPageNum(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetCurrentPageNum';
 function DTWAIN_GetCurrentRetryCount(Source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetCurrentRetryCount';
-function DTWAIN_GetCustomDSData(Source:DTWAIN_SOURCE; LPBYTE:LONG; Data:LPLONG; dSize:LONG):DTWAIN_HANDLE;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetCustomDSData';
+function DTWAIN_GetCustomDSData(Source:DTWAIN_SOURCE; Data:PByte; DataSizeRet:LPDWORD; dSize:DWORD):DTWAIN_HANDLE;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetCustomDSData';
 function DTWAIN_GetDeviceEvent(Source:DTWAIN_SOURCE; lpEvent:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetDeviceEvent';
 function DTWAIN_GetDeviceEventEx(Source:DTWAIN_SOURCE; lpEvent:LPLONG; pArray:LPDTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetDeviceEventEx';
 function DTWAIN_GetDeviceEventInfo(Source:DTWAIN_SOURCE; nWhichInfo:LONG; pValue:LPVOID):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetDeviceEventInfo';
@@ -2528,6 +2535,7 @@ function DTWAIN_SetAcquireImageScaleString(Source:DTWAIN_SOURCE; xscale:LPCTSTR;
 function DTWAIN_SetAcquireImageScaleStringA(Source:DTWAIN_SOURCE; xscale:LPCSTR; yscale:LPCSTR):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAcquireImageScaleStringA';
 function DTWAIN_SetAcquireImageScaleStringW(Source:DTWAIN_SOURCE; xscale:LPCWSTR; yscale:LPCWSTR):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAcquireImageScaleStringW';
 function DTWAIN_SetAcquireStripBuffer(Source:DTWAIN_SOURCE; hMem:DTWAIN_HANDLE):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAcquireStripBuffer';
+function DTWAIN_SetAcquireStripSize(Source:DTWAIN_SOURCE; nSize:DWORD):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAcquireStripSize';
 function DTWAIN_SetAlarms(Source:DTWAIN_SOURCE; Alarms:DTWAIN_ARRAY):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAlarms';
 function DTWAIN_SetAlarmVolume(Source:DTWAIN_SOURCE; Volume:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAlarmVolume';
 function DTWAIN_SetAllCapsToDefault(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetAllCapsToDefault';
@@ -2567,7 +2575,7 @@ function DTWAIN_SetContrastStringA(Source:DTWAIN_SOURCE; Contrast:LPCSTR):BOOL;s
 function DTWAIN_SetContrastStringW(Source:DTWAIN_SOURCE; Contrast:LPCWSTR):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetContrastStringW';
 function DTWAIN_SetCountry(nCountry:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetCountry';
 function DTWAIN_SetCurrentRetryCount(Source:DTWAIN_SOURCE; nCount:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetCurrentRetryCount';
-function DTWAIN_SetCustomDSData(Source:DTWAIN_SOURCE; hData:DTWAIN_HANDLE; LPCBYTE:LONG; Data:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetCustomDSData';
+function DTWAIN_SetCustomDSData(Source:DTWAIN_SOURCE; hData:DTWAIN_HANDLE; byteData:PByte; Size:DWORD; Flags:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetCustomDSData';
 function DTWAIN_SetCustomFileSave(lpOpenFileStruct:TOpenFilenamePtr):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetCustomFileSave';
 function DTWAIN_SetDefaultSource(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetDefaultSource';
 function DTWAIN_SetDeviceNotifications(Source:DTWAIN_SOURCE; DevEvents:LONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_SetDeviceNotifications';
@@ -2769,6 +2777,14 @@ function DTWAIN_GetActiveDSMVersionInfoA(LpszPath:LPSTR; nLength:LONG):LONG;over
 function DTWAIN_GetActiveDSMVersionInfoW(LpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetActiveDSMVersionInfoW';
 function DTWAIN_GetOCRMajorMinorVersion(ocrEngine:DTWAIN_OCRENGINE; lpMajor:LPLONG; lpMinor:LPLONG; lpVersionType:LPLONG):BOOL;stdcall; external 'dtwain32u.dll' name 'DTWAIN_GetOCRMajorMinorVersion';
 function DTWAIN_GetSavedFilesCount(source:DTWAIN_SOURCE):LONG;stdcall; external 'dtwain32u.dll' name 'DTWAIN_GetSavedFilesCount';
+
+function DTWAIN_GetTwainIDFromName(LpszPath:LPTSTR):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetTwainIDFromName';
+function DTWAIN_GetTwainIDFromNameA(LpszPath:LPSTR):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetTwainIDFromNameA';
+function DTWAIN_GetTwainIDFromNameW(LpszPath:LPWSTR):LONG;overload;stdcall; external 'dtwain32u.dll'  name 'DTWAIN_GetTwainIDFromNameW';
+
+function DTWAIN_GetTwainStringName(Category:LONG; ID:LONG; LpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetTwainStringName';
+function DTWAIN_GetTwainStringNameA(Category:LONG; ID:LONG; LpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetTwainStringNameA';
+function DTWAIN_GetTwainStringNameW(Category:LONG; ID:LONG; LpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'  name 'DTWAIN_GetTwainStringNameW';
 
 implementation
 

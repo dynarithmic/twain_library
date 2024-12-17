@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //    This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-//    Copyright (c) 2002-2024 Dynarithmic Software.
+//    Copyright (c) 2002-2025 Dynarithmic Software.
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -451,6 +451,7 @@
 /* Miscellaneous file transfer notifications */
 #define DTWAIN_TN_CLOSEDIBFAILED       1057
 #define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
+#define DTWAIN_TN_IMAGE_RESAMPLE_FAILURE 1059
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
@@ -1003,8 +1004,7 @@
 #define DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  (-2501)
 #define DTWAIN_ERR_IMAGEINFO_INVALID       (-2502)
 #define DTWAIN_ERR_WRITEDATA_TOFILE        (-2503)
-
-#define DTWAIN_ERR_LAST                    DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE
+#define DTWAIN_ERR_OPERATION_NOTSUPPORTED  (-2504)
 #define DTWAIN_ERR_USER_START              (-80000)
 
 /* Device event constants (same as TWAIN 1.8 value plus 1)*/
@@ -1573,6 +1573,10 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWDF     70
 #define DTWAIN_CONSTANT_TWFM     71
 #define DTWAIN_CONSTANT_TWSG     72
+#define DTWAIN_CONSTANT_DTWAIN_TN 73
+#define DTWAIN_CONSTANT_TWON     74
+#define DTWAIN_CONSTANT_TWMF     75
+#define DTWAIN_CONSTANT_TWSX     76
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

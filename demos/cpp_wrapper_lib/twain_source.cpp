@@ -770,7 +770,7 @@ namespace dynarithmic
             const capability_interface& ci = get_capability_interface();
             if (!ci.is_customdsdata_supported())
                 return {};
-            long actualSize = 0;
+            DWORD actualSize = 0;
             if (!API_INSTANCE DTWAIN_GetCustomDSData(m_theSource, nullptr, 0, &actualSize, DTWAINGCD_COPYDATA))
                 return {};
             if (actualSize > 0)

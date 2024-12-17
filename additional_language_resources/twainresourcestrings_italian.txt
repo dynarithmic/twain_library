@@ -86,6 +86,7 @@
 1070 Errore immagine  
 1071 Codice di ritorno TWAIN sconosciuto  
 1072 Codice di condizione TWAIN sconosciuto  
+1073 Errore dei dati delle risorse: Eccezione sollevata
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
