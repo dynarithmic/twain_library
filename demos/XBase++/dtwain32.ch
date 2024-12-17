@@ -1192,17 +1192,17 @@ DTWAIN DLL are not displayed */
 /* Any DTWAIN errors (not TWAIN related) */
 #define DTWAIN_LOG_DTWAINERRORS       0x00000800
 
-#define DTWAIN_LOG_ALL (DTWAIN_LOG_DECODE_SOURCE | \
-                        DTWAIN_LOG_DECODE_DEST | \
-                        DTWAIN_LOG_DECODE_TWEVENT | \
-                        DTWAIN_LOG_DECODE_TWMEMREF | \
-                        DTWAIN_LOG_CALLSTACK | \
-                        DTWAIN_LOG_ISTWAINMSG | \
-                        DTWAIN_LOG_INITFAILURE | \
-                        DTWAIN_LOG_LOWLEVELTWAIN | \
-                        DTWAIN_LOG_NOTIFICATIONS | \
-                        DTWAIN_LOG_MISCELLANEOUS | \
-                        DTWAIN_LOG_DTWAINERRORS | \
+#define DTWAIN_LOG_ALL (DTWAIN_LOG_DECODE_SOURCE | ;
+                        DTWAIN_LOG_DECODE_DEST | ;
+                        DTWAIN_LOG_DECODE_TWEVENT | ;
+                        DTWAIN_LOG_DECODE_TWMEMREF | ;
+                        DTWAIN_LOG_CALLSTACK | ;
+                        DTWAIN_LOG_ISTWAINMSG | ;
+                        DTWAIN_LOG_INITFAILURE | ;
+                        DTWAIN_LOG_LOWLEVELTWAIN | ;
+                        DTWAIN_LOG_NOTIFICATIONS | ;
+                        DTWAIN_LOG_MISCELLANEOUS | ;
+                        DTWAIN_LOG_DTWAINERRORS | ;
                         DTWAIN_LOG_DECODE_BITMAP)
 
 /* ------------------------- */
