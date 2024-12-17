@@ -85,7 +85,8 @@
 1069 Geen afbeeldingen verkregen.
 1070 Afbeeldingsfout  
 1071 Onbekende TWAIN Terugkeer Code  
-1072 Onbekende TWAIN Voorwaarde Code  
+1072 Onbekende TWAIN Voorwaarde Code 
+1073 Hulpbron gegevensfout: Uitzondering opgetreden 
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

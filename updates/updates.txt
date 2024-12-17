@@ -2,14 +2,18 @@ DTWAIN Version changes
 
 5.5.5
 
+- Create versions of DTWAIN DLL that contains full logging and minimal logging.  The minimal
+  logging versions of DTWAIN results in smaller sizes for the DLL files.
+
 - Update CAP_PRINTERSTRING to use (by default) TWON_ONEVALUE container on setting capability.
 
 - Change internal TWAIN message loop to loop indefinitely until the Source UI is closed.
 
 - Ensure setting string capabilities uses ANSI strings.
 
-- Create versions of DTWAIN DLL that contains full logging and minimal logging.  The minimal
-  logging versions of DTWAIN results in smaller sizes for the DLL files.
+- Change parameters to certain API functions from LONG to DWORD to delineate signed versus unsigned values.  
+  The sizes of LONG and DWORD, the only difference is that DWORD is an unsigned 32-bit integer 
+  while LONG is a signed 32-bit integer.
 
 - Add Japanese, Traditional Chinese, and Greek text resources.
 

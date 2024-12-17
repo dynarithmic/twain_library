@@ -86,6 +86,7 @@
 1070 Bildfehler  
 1071 Unbekannter TWAIN-Rückgabecode  
 1072 Unbekannter TWAIN-Bedingungscode  
+1073 Ressourcendatenfehler: Ausnahme ausgelöst
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
