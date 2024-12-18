@@ -73,7 +73,7 @@ The **partial_logging** directory contains the DLL's that are built without call
 
 If you are not concerned with sizes of the DLL's, the **full_logging** DLL's should be used.  If you desire DLL's that are a bit smaller and can "sacrifice" call stack / return value logging, the **partial_logging** DLL's should be used.
 
-To distinguish between whether the full or partial logging DLL's are in use, see [the following information]().
+To distinguish between whether the full or partial logging DLL's are in use, see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
 ----
 
