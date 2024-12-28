@@ -87,6 +87,7 @@
 1071 Cod de returnare TWAIN necunoscut  
 1072 Cod de condiție TWAIN necunoscut  
 1073 Eroare de date resursă: Excepție generată
+1074 Transferurile audio nu sunt acceptate.
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  

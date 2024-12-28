@@ -2791,10 +2791,14 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetTwainIDFromNameW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszName As String) As Integer
     Declare Auto Function DTWAIN_GetTwainIDFromName Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszName As String) As Integer
 
-    Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32u.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32u.dll" (sz As System.IntPtr, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32u.dll" (sz As System.IntPtr, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32u.dll" (sz As System.IntPtr, nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32u.dll" (Category As Long, TwainID As Long, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32u.dll" (Category As Long, TwainID As Long, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32u.dll" (Category As Long, TwainID As Long, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
+    Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
+    Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
+
+    Declare Auto Function DTWAIN_EnablePeekMessageLoop Lib "dtwain32u.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Declare Auto Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain32u.dll" (Source As System.IntPtr) As Integer
+
 End Class

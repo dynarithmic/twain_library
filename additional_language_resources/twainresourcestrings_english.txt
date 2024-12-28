@@ -87,6 +87,7 @@
 1071 Unknown TWAIN Return Code
 1072 Unknown TWAIN Condition Code
 1073 Resource data error: Exception thrown
+1074 Audio transfers are not supported
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure
