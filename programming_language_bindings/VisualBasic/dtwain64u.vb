@@ -2797,4 +2797,8 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain64u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
     Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain64u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
     Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain64u.dll" (Category As Long, TwainID As Long, sz As System.IntPtr, nLength As Integer) As Integer
+
+    Declare Auto Function DTWAIN_EnablePeekMessageLoop Lib "dtwain64u.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Declare Auto Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain64u.dll" (Source As System.IntPtr) As Integer
+
 End Class

@@ -1052,6 +1052,9 @@ typedef LONG        (DLLENTRY_DEF* D_GETACTIVEDSMVERSIONINFOWFUNC)              
 typedef LONG        (DLLENTRY_DEF* D_GETTWAINIDFROMNAMEFUNC)                     (LPTSTR);
 typedef LONG        (DLLENTRY_DEF* D_GETTWAINIDFROMNAMEAFUNC)                    (LPSTR);
 typedef LONG        (DLLENTRY_DEF* D_GETTWAINIDFROMNAMEWFUNC)                    (LPWSTR);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ISPEEKMESSAGELOOPENABLEDFUNC)               (DTWAIN_SOURCE);
+typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ENABLEPEEKMESSAGELOOPFUNC)                  (DTWAIN_SOURCE, DTWAIN_BOOL);
+
 #ifdef __cplusplus
 }
 #endif
@@ -1215,6 +1218,7 @@ typedef LONG        (DLLENTRY_DEF* D_GETTWAINIDFROMNAMEWFUNC)                   
     STATIC D_ENABLELAMPFUNC                                 DTWAIN_EnableLamp;
     STATIC D_ENABLEMSGNOTIFYFUNC                            DTWAIN_EnableMsgNotify;
     STATIC D_ENABLEPATCHDETECTFUNC                          DTWAIN_EnablePatchDetect;
+    STATIC D_ENABLEPEEKMESSAGELOOPFUNC                      DTWAIN_EnablePeekMessageLoop;
     STATIC D_ENABLEPRINTERFUNC                              DTWAIN_EnablePrinter;
     STATIC D_ENABLETHUMBNAILFUNC                            DTWAIN_EnableThumbnail;
     STATIC D_ENABLETRIPLETSNOTIFYFUNC                       DTWAIN_EnableTripletsNotify;
@@ -1715,6 +1719,7 @@ typedef LONG        (DLLENTRY_DEF* D_GETTWAINIDFROMNAMEWFUNC)                   
     STATIC D_ISPATCHCAPSSUPPORTEDFUNC                       DTWAIN_IsPatchCapsSupported;
     STATIC D_ISPATCHDETECTENABLEDFUNC                       DTWAIN_IsPatchDetectEnabled;
     STATIC D_ISPATCHSUPPORTEDFUNC                           DTWAIN_IsPatchSupported;
+    STATIC D_ISPEEKMESSAGELOOPENABLEDFUNC                   DTWAIN_IsPeekMessageLoopEnabled;
     STATIC D_ISPDFSUPPORTEDFUNC                             DTWAIN_IsPDFSupported;
     STATIC D_ISPIXELTYPESUPPORTEDFUNC                       DTWAIN_IsPixelTypeSupported;
     STATIC D_ISPNGSUPPORTEDFUNC                             DTWAIN_IsPNGSupported;

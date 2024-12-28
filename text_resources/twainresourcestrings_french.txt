@@ -87,6 +87,7 @@
 1071 Code de retour TWAIN inconnu  
 1072 Code de condition TWAIN inconnu  
 1073 Erreur de données de ressource: Exception levée
+1074 Les transferts audio ne sont pas pris en charge.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

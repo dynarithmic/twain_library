@@ -2786,6 +2786,9 @@ function DTWAIN_GetTwainStringName(Category:LONG; ID:LONG; LpszPath:LPTSTR; nLen
 function DTWAIN_GetTwainStringNameA(Category:LONG; ID:LONG; LpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetTwainStringNameA';
 function DTWAIN_GetTwainStringNameW(Category:LONG; ID:LONG; LpszPath:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'  name 'DTWAIN_GetTwainStringNameW';
 
+function DTWAIN_EnablePeekMessageLoop(Source:DTWAIN_SOURCE; bEnable:BOOL):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_EnablePeekMessageLoop';
+function DTWAIN_IsPeekMessageLoopEnabled(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_IsPeekMessageLoopEnabled';
+
 implementation
 
 end.

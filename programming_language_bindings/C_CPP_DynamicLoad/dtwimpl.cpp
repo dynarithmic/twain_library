@@ -198,6 +198,7 @@
     D_ENABLELAMPFUNC                                                  DYNDTWAIN_API::DTWAIN_EnableLamp = nullptr;
     D_ENABLEMSGNOTIFYFUNC                                             DYNDTWAIN_API::DTWAIN_EnableMsgNotify = nullptr;
     D_ENABLEPATCHDETECTFUNC                                           DYNDTWAIN_API::DTWAIN_EnablePatchDetect = nullptr;
+    D_ENABLEPEEKMESSAGELOOPFUNC                                       DYNDTWAIN_API::DTWAIN_EnablePeekMessageLoop = nullptr;
     D_ENABLEPRINTERFUNC                                               DYNDTWAIN_API::DTWAIN_EnablePrinter = nullptr;
     D_ENABLETHUMBNAILFUNC                                             DYNDTWAIN_API::DTWAIN_EnableThumbnail = nullptr;
     D_ENABLETRIPLETSNOTIFYFUNC                                        DYNDTWAIN_API::DTWAIN_EnableTripletsNotify = nullptr;
@@ -695,6 +696,7 @@
     D_ISPATCHDETECTENABLEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsPatchDetectEnabled = nullptr;
     D_ISPATCHSUPPORTEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsPatchSupported = nullptr;
     D_ISPDFSUPPORTEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsPDFSupported = nullptr;
+    D_ISPEEKMESSAGELOOPENABLEDFUNC                                    DYNDTWAIN_API::DTWAIN_IsPeekMessageLoopEnabled = nullptr;
     D_ISPIXELTYPESUPPORTEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsPixelTypeSupported = nullptr;
     D_ISPNGSUPPORTEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsPNGSupported = nullptr;
     D_ISPRINTERENABLEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsPrinterEnabled = nullptr;
@@ -1268,6 +1270,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnableLamp, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableMsgNotify, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnablePatchDetect, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnablePeekMessageLoop, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnablePrinter, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableThumbnail, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableTripletsNotify, hModule);
@@ -1765,6 +1768,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsPatchDetectEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPatchSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPDFSupported, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsPeekMessageLoopEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPixelTypeSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPNGSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPrinterEnabled, hModule);

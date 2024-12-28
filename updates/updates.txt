@@ -7,7 +7,16 @@ DTWAIN Version changes
 
 - Update CAP_PRINTERSTRING to use (by default) TWON_ONEVALUE container on setting capability.
 
-- Change internal TWAIN message loop to loop indefinitely until the Source UI is closed.
+- Allow internal TWAIN message loop to loop indefinitely until the Source UI is closed.  A new
+  DTWAIN32.INI and DTWAIN64.INI section ("TwainLoopPeek") will list the TWAIN Product
+  Names that will use the new looping mechanism using the Windows API function PeekMessage().  
+  By default, the looping method used will be the same as previous versions of DTWAIN 
+  (using the Windows API function GetMessage()).  
+
+- Related to the update of the TWAIN message loop, functions DTWAIN_EnablePeekMessageLoop() and
+  DTWAIN_IsPeekMessageLoopEnabled() allows programmatic control of which type of TWAIN message
+  loop will be executed with a given TWAIN Source.  By default, the message loop uses the 
+  Windows API function GetMessage() instead of PeekMessage().
 
 - Ensure setting string capabilities uses ANSI strings.
 
