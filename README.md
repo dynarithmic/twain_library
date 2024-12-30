@@ -56,7 +56,7 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 For 32-bit applications, use either the binaries found in **release_libraries.zip** in  [full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging) or 
 [partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging) directories.
 
-[Checksum values for full_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes64.txt) and [partial_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes64.txt) are also available in these directories.  
+[Checksum values for full_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes32.txt) and [partial_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes32.txt) are also available in these directories.  
 
 ----
 
