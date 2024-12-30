@@ -82,6 +82,12 @@
 1066 ID de recurso duplicado encontrado  
 1067 Valor de informação de imagem estendida indisponível
 1068 Bitmap inválido retornado pela Fonte TWAIN (TWAINDSM 2.x)
+1069 Nenhuma imagem adquirida.
+1070 Erro de imagem  
+1071 Código de retorno TWAIN desconhecido  
+1072 Código de condição TWAIN desconhecido  
+1073 Erro de dados de recurso: Exceção lançada
+1074 Transferências de áudio não são suportadas
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida
@@ -202,7 +208,7 @@
 2501 Não foi possível fechar o dispositivo TWAIN
 2502 Informações de imagem inválidas
 2503 Erro ao gravar dados no arquivo
-2101 Página OCR inválida especificada
+2504 Operação não suportada  
 2102 OCR inválido  
 2103 OCR não ativo  
 2104 Tipo de arquivo OCR inválido  
@@ -231,6 +237,10 @@
 3019 Arquivo de imagem temporário é
 3020 Erro ao criar arquivo de imagem temporário
 3021 Arquivo de imagem criado com sucesso
+3022 Valores definidos no retorno2101 Página OCR inválida especificada
+3023 Mais
+3024 Lista de Capacidades
+3025 Fonte Padrão
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Ocorreu um erro de exceção durante a chamada para o Twain DSM. Possível sessão Twain corrompida
 10000 [Mensagem do usuário]

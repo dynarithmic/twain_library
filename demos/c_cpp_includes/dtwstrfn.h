@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2024 Dynarithmic Software.
+    Copyright (c) 2002-2025 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -313,6 +313,8 @@ DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngine2ExA(HWND hWndParent, LPCSTR
 DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngine2ExW(HWND hWndParent, LPCWSTR szTitle, LONG xPos, LONG yPos, LPCWSTR szIncludeNames, LPCWSTR szExcludeNames, LPCWSTR szNameMapping, LONG nOptions);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTempFileDirectoryExA(LPCSTR szFilePath, LONG CreationFlags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTempFileDirectoryExW(LPCWSTR szFilePath, LONG CreationFlags);
+LONG DLLENTRY_DEF DTWAIN_ConvertToAPIStringExA(LPCSTR lpOrigString, LPSTR lpOutString, LONG nSize);
+LONG DLLENTRY_DEF DTWAIN_ConvertToAPIStringExW(LPCWSTR lpOrigString, LPWSTR lpOutString, LONG nSize);
 
 #ifdef DTWAIN_ANSIDLL
     #define DTWAIN_CHARPTRTYPE LPSTR
@@ -500,4 +502,6 @@ HANDLE      DLLENTRY_DEF DTWAIN_ConvertToAPIString(DTWAIN_CCHARPTRTYPE lpOrigStr
 DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngine2(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle, LONG xPos, LONG yPos, LONG nOptions);
 DTWAIN_OCRENGINE DLLENTRY_DEF DTWAIN_SelectOCREngine2Ex(HWND hWndParent, DTWAIN_CCHARPTRTYPE szTitle, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE szIncludeFilter, DTWAIN_CCHARPTRTYPE szExcludeFilter, DTWAIN_CCHARPTRTYPE szNameMapping, LONG nOptions);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTempFileDirectoryEx(DTWAIN_CCHARPTRTYPE szFilePath, LONG CreationFlags);
+LONG        DLLENTRY_DEF DTWAIN_ConvertToAPIStringEx(DTWAIN_CCHARPTRTYPE lpOrigString, DTWAIN_CHARPTRTYPE lpOutString, LONG nSize);
+
 #endif

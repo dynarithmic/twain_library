@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2024 Dynarithmic Software.
+    Copyright (c) 2002-2025 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -343,7 +343,6 @@
 #define  DTWAIN_TN_TRANSFERREADY                  1009
 /* Sent when TWAIN is in the "Transfer done" state (State 7) */
 #define  DTWAIN_TN_TRANSFERDONE                   1010
-#define  DTWAIN_TN_ACQUIREPAGEDONE                1010
 
 /* Source closing/opening wParam's */
 #define  DTWAIN_TN_UICLOSING                      3000
@@ -455,6 +454,9 @@
    when using TWAINDSM.DLL as the data source manager */
 #define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
 
+/* Sent if a resampling of an acquired image was attempted, but failed */
+#define DTWAIN_TN_IMAGE_RESAMPLE_FAILURE 1059
+
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
 
@@ -517,7 +519,7 @@
 #define DTWAIN_TN_TWAINTRIPLETEND           1184
 
 /* Sent if document feeder has no paper loaded */
-#define DTWAIN_TN_FEEDERNOTLOADED           1200
+#define DTWAIN_TN_FEEDERNOTLOADED           1201
 
 /* Sent when tiled data has been sent */
 #define DTWAIN_TN_TRANSFERTILEREADY         1300
@@ -869,8 +871,14 @@
 #define DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND (-1066)
 #define DTWAIN_ERR_UNAVAILABLE_EXTINFO (-1067)
 #define DTWAIN_ERR_TWAINDSM2_BADBITMAP (-1068)
+#define DTWAIN_ERR_ACQUISITION_CANCELED (-1069)
+#define DTWAIN_ERR_IMAGE_RESAMPLED (-1070)
+#define DTWAIN_ERR_UNKNOWN_TWAIN_RC (-1071)
+#define DTWAIN_ERR_UNKNOWN_TWAIN_CC (-1072)
+#define DTWAIN_ERR_RESOURCES_DATA_EXCEPTION (-1073)
+#define DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED (-1074)
 
-#define DTWAIN_ERR_LAST_1       DTWAIN_ERR_TWAINDSM2_BADBITMAP
+#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -902,7 +910,7 @@
 #define TWAIN_ERR_DOCTOODARK          (-1127)
 #define TWAIN_ERR_NOMEDIA             (-1128)
 
-/* File errors generated when calling DTWAIN_AcquireFile or DTWAIN_AcquireFileEx */
+/* General errors  */
 #define DTWAIN_ERR_FILEXFERSTART    (-2000)
 #define DTWAIN_ERR_MEM              (-2001)
 #define DTWAIN_ERR_FILEOPEN         (-2002)
@@ -1016,6 +1024,7 @@
 /* Miscellaneous errors */
 #define DTWAIN_ERR_IMAGEINFO_INVALID       (-2502)
 #define DTWAIN_ERR_WRITEDATA_TOFILE        (-2503)
+#define DTWAIN_ERR_OPERATION_NOTSUPPORTED  (-2504)
 
 #define DTWAIN_ERR_LAST                    (DTWAIN_ERR_USER_START + 1)
 #define DTWAIN_ERR_USER_START              (-80000)  
@@ -1463,7 +1472,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_64BIT_VERSION                    0x00400000
 #define DTWAIN_UNICODE_VERSION                  0x00800000
 #define DTWAIN_OPENSOURCE_VERSION               0x01000000
-
+#define DTWAIN_CALLSTACK_LOGGING                0x02000000
+#define DTWAIN_CALLSTACK_LOGGING_PLUS           0x04000000
 
 /* OCR defines */
 #define DTWAINOCR_RETURNHANDLE                  1
@@ -1604,7 +1614,11 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWDF     70
 #define DTWAIN_CONSTANT_TWFM     71
 #define DTWAIN_CONSTANT_TWSG     72
-#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_TWSG + 1) 
+#define DTWAIN_CONSTANT_DTWAIN_TN 73
+#define DTWAIN_CONSTANT_TWON     74
+#define DTWAIN_CONSTANT_TWMF     75
+#define DTWAIN_CONSTANT_TWSX     76
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_TWSX + 1) 
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

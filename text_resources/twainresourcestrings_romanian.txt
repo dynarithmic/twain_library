@@ -82,6 +82,12 @@
 1066 ID de resursă duplicat găsit  
 1067 Valoare de informații extinse despre imagine indisponibilă  
 1068 Bitmap invalid returnat de sursa TWAIN (TWAINDSM 2.x)
+1069 Nicio imagine achiziționată.
+1070 Eroare de imagine  
+1071 Cod de returnare TWAIN necunoscut  
+1072 Cod de condiție TWAIN necunoscut  
+1073 Eroare de date resursă: Excepție generată
+1074 Transferurile audio nu sunt acceptate.
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  
@@ -210,6 +216,7 @@
 2501 Nu s-a putut închide sursa TWAIN  
 2502 Informații de imagine invalide la achiziționarea imaginii  
 2503 Eroare la scrierea datelor în fișier  
+2504 Operațiune nesuportată  
 3000 Selectați sursa  
 3001 &Selectați  
 3002 &Anulați  
@@ -232,6 +239,10 @@
 3019 Fișierul de imagine temporar este  
 3020 Eroare la crearea fișierului de imagine temporar  
 3021 Fișierul de imagine a fost creat cu succes  
+3022 Valori setate la returnare
+3023 Mai mult
+3024 Lista de capabilități
+3025 Sursa Implicită
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
 10000 [Mesaj utilizator]

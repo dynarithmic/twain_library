@@ -1,5 +1,48 @@
 DTWAIN Version changes
 
+5.5.5
+
+- Create versions of DTWAIN DLL that contains full logging and minimal logging.  The minimal
+  logging versions of DTWAIN results in smaller sizes for the DLL files.
+
+- Update CAP_PRINTERSTRING to use (by default) TWON_ONEVALUE container on setting capability.
+
+- Allow internal TWAIN message loop to loop indefinitely until the Source UI is closed.  A new
+  DTWAIN32.INI and DTWAIN64.INI section ("TwainLoopPeek") will list the TWAIN Product
+  Names that will use the new looping mechanism using the Windows API function PeekMessage().  
+  By default, the looping method used will be the same as previous versions of DTWAIN 
+  (using the Windows API function GetMessage()).  
+
+- Related to the update of the TWAIN message loop, functions DTWAIN_EnablePeekMessageLoop() and
+  DTWAIN_IsPeekMessageLoopEnabled() allows programmatic control of which type of TWAIN message
+  loop will be executed with a given TWAIN Source.  By default, the message loop uses the 
+  Windows API function GetMessage() instead of PeekMessage().
+
+- Ensure setting string capabilities uses ANSI strings.
+
+- Change parameters to certain API functions from LONG to DWORD to delineate signed versus unsigned values.  
+  The size in bits of LONG and DWORD are the same, the only difference is that DWORD is an unsigned 32-bit integer 
+  while LONG is a signed 32-bit integer.
+
+- Add Japanese, Traditional Chinese, and Greek text resources.
+
+- All lines in the logs generated with DTWAIN_SetTwainLog() have timestamps (with the 
+  by-product of this change being that all the log lines are properly indented).
+
+- DTWDEMO32 and DTWDEMO64 programs now do not require VCRUNTIME140.DLL to be present.
+
+- On return of DTWAIN functions that handle pointers as input, the values that the pointers
+  will point to are now logged (only available with full logging versions of DTWAIN DLL). 
+
+- Added missing constants to twaininfo.txt
+
+- DTWAIN_SelectDefaultSource() will now only make a call to the TWAIN DSM if the DSM is version 2
+  or greater (TWAINDSM.DLL).
+
+- DTWAIN_GetSourceDetails() now correctly reports custom capabilities that are also extended capabilities.
+
+
+
 5.5.4
 
 - Addressed issue with multiple calls to DTWAIN_SysInitialize() and DTWAIN_SysDestroy() not loading

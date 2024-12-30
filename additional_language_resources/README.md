@@ -6,19 +6,19 @@ If you want to create your own language resource, the following steps should be 
 
 1) Make a copy of **twainresourcestrings_english.txt**, and name the new file **twainresourcestrings_aaa.txt**
 
-2) Edit **twainresourcestrings_aaa.txt** using any text editor and change the English text to your language's equivalent wording.  Save the changes.
+2) Edit **twainresourcestrings_aaa.txt** using any text editor and change the English text to your language's equivalent wording.  Save the changes.  If the text uses non-English or non-Latin characters, ensure that the file is saved using **UTF-8** encoding.
 
-3) This step is very important:  Rename the **twainresourcestrings_aaa.txt** by changing the "aaa" portion of the file name to something meaningful.  For example, if the new file represents Greek resources, a good name would be:
+3) This step is very important:  Rename the **twainresourcestrings_aaa.txt** by changing the "aaa" portion of the file name to something meaningful.  For example, if the new file represents Swedish resources, a good name would be:
 
-    **twainresourcestrings_greek.txt**
+    **twainresourcestrings_swedish.txt**
 
-The part of the file name that represents the language (in the above case, "greek"), will be used in the DTWAIN API call **DTWAIN_LoadCustomStringResourcesA**
+The part of the file name that represents the language (in the above case, "swedish"), will be used in the DTWAIN API call **DTWAIN_LoadCustomStringResourcesA**
 
 4) Make sure that the new resource file is located in the same directory as the other DTWAIN resources, i.e. where **twainresourcestrings_english.txt** is located during the running of your DTWAIN application.
 
 5) Change your DTWAIN application to add the following API call (after DTWAIN_SysInitialize is called):
 
-    **DTWAIN_LoadCustomStringResourcesA("greek")**
+    **DTWAIN_LoadCustomStringResourcesA("swedish")**
     
 Note that the name parameter used in DTWAIN_LoadCustomStringResources is the same name you gave the resource file (the part of the file name after the initial "_" character in the file name).
 

@@ -54,24 +54,24 @@
 1038 Bron or middel niet gesteund querying of document laden in document feeder
 1039 Herinnering uitzondering vergissing while belt Twain DSM.   DSM stel in inconsistenten staat
 1040 Invalid TWAIN state transition
-1041 Unsupported extended image info type
-1042 DLL Resource file not found
-1043 DTWAIN Not initialized
-1044 No TWAIN Sources found
-1045 TWAIN is not installed
-1046 Incorrect thread of execution
-1047 Bad capability data type
-1048 Capability has unknown data type
+1041 Niet-ondersteund type van uitgebreide afbeeldingsinformatie
+1042 DLL-bronbestand niet gevonden  
+1043 DTWAIN Niet geïnitialiseerd  
+1044 Geen TWAIN-bronnen gevonden  
+1045 TWAIN is niet geïnstalleerd  
+1046 Onjuiste uitvoeringsdraad  
+1047 Slechte capaciteitsgegevens type  
+1048 Capaciteit heeft onbekend gegevenstype  
 1049 Demo Version of DTWAIN does not support this file type
 1050 Selectie Geannuleerd
 1051 DTWAIN Resources not found
 1052 String komt niet overeen met arraytype
 1053 DTWAIN ARRAY not the same type
-1054 Source not installed
-1055 Source does not support memory file transfers
+1054 Bron niet geïnstalleerd  
+1055 Bron ondersteunt geen geheugenbestandoverdrachten
 1056 Area array is te klein. Array moet ten minste 4 items bevatten
 1057 Kan logbestand niet maken.
-1058 Source does not support TWAIN file system.
+1058 Bron ondersteunt het TWAIN-bestandssysteem niet.
 1059 Tegelmodus wordt niet ondersteund voor deze TWAIN-bron.
 1060 DTWAIN32.INI niet gevonden  
 1061 DTWAIN64.INI niet gevonden  
@@ -82,6 +82,12 @@
 1066 Dubbele resource-ID gevonden  
 1067 Beschikbare uitgebreide afbeeldingsinformatie waarde
 1068 Ongeldig bitmap teruggegeven door TWAIN-bron (TWAINDSM 2.x)
+1069 Geen afbeeldingen verkregen.
+1070 Afbeeldingsfout  
+1071 Onbekende TWAIN Terugkeer Code  
+1072 Onbekende TWAIN Voorwaarde Code 
+1073 Hulpbron gegevensfout: Uitzondering opgetreden
+1074 Audiotransfers worden niet ondersteund 
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
@@ -209,6 +215,7 @@
 2501 Niet afsluiten TWAIN bron
 2502 Ongeldige afbeeldingsinformatie
 2503 Fout bij het schrijven van gegevens naar bestand
+2504 Operatie niet ondersteund  
 3000 Selecteer bron
 3001 &Selecteer
 3002 &Annuleer
@@ -231,6 +238,10 @@
 3019 Tijdelijk beeldbestand is
 3020 Fout bij het maken van een tijdelijk afbeeldingsbestand
 3021 Afbeeldingsbestand is succesvol aangemaakt
+3022 Waarden ingesteld bij terugkeer
+3023 Meer
+3024 Capaciteitenlijst
+3025 Standaardbron
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]

@@ -80,7 +80,7 @@
 1 17 1 30 10 0
 1 20 2817 35 11 0
 1 19 1 36 11 0
--1000 -1000 -1000 -1000 -1000 -1000
+9999 9999 9999 9999 9999 9999
 4096
 1         CAP_XFERCOUNT                           1    96   32   32   32   32   32   32                                 
 256       ICAP_COMPRESSION                        4    48   32   32   32   48   32   32                                 
@@ -127,7 +127,7 @@
 4135      CAP_PRINTERENABLED                      6    48   32   32   32   48   32   32                                 
 4136      CAP_PRINTERINDEX                        5    96   32   32   32   32   32   32                                 
 4137      CAP_PRINTERMODE                         4    48   32   32   32   48   32   32                                 
-4138      CAP_PRINTERSTRING                       12   48   32   32   48   48   32   32                                 
+4138      CAP_PRINTERSTRING                       12   48   32   32   32   32   32   32                                 
 4139      CAP_PRINTERSUFFIX                       12   32   32   32   32   32   32   32                                 
 4140      CAP_LANGUAGE                            4    48   32   32   32   48   32   32                                 
 4141      CAP_FEEDERALIGNMENT                     4    48   32   32   32   32   32   32                                 
@@ -1464,7 +1464,7 @@
 0xFFFF DG_MASK
 -9999
 0 DAT_NULL
--32768 DAT_CUSTOMBASE
+0x8000 DAT_CUSTOMBASE
 1 DAT_CAPABILITY
 2 DAT_EVENT
 3 DAT_IDENTITY
@@ -1570,6 +1570,114 @@
 1 TWSG_AUTO 
 2 TWSG_MANUAL
 -9999
+1000 DTWAIN_TN_ACQUIREDONE                     
+1001 DTWAIN_TN_ACQUIREFAILED                   
+1002 DTWAIN_TN_ACQUIRECANCELED                 
+1003 DTWAIN_TN_ACQUIRESTARTED                  
+1004 DTWAIN_TN_PAGECONTINUE                    
+1005 DTWAIN_TN_PAGEFAILED                      
+1006 DTWAIN_TN_PAGECANCELED                    
+1009 DTWAIN_TN_TRANSFERREADY                   
+1010 DTWAIN_TN_TRANSFERDONE                    
+1014 DTWAIN_TN_CLIPTRANSFERDONE                
+1015 DTWAIN_TN_INVALIDIMAGEFORMAT              
+1021 DTWAIN_TN_ACQUIRETERMINATED               
+1022 DTWAIN_TN_TRANSFERSTRIPREADY              
+1023 DTWAIN_TN_TRANSFERSTRIPDONE               
+1024 DTWAIN_TN_IMAGEINFOERROR                  
+1029 DTWAIN_TN_TRANSFERSTRIPFAILED             
+1030 DTWAIN_TN_TRANSFERCANCELED                
+1031 DTWAIN_TN_FILESAVECANCELED                
+1032 DTWAIN_TN_FILESAVEOK                      
+1033 DTWAIN_TN_FILESAVEERROR                   
+1034 DTWAIN_TN_FILEPAGESAVEOK                  
+1035 DTWAIN_TN_FILEPAGESAVEERROR               
+1036 DTWAIN_TN_PROCESSEDDIB                    
+1037 DTWAIN_TN_FEEDERLOADED                    
+1038 DTWAIN_TN_GENERALERROR                           
+1040 DTWAIN_TN_MANDUPFLIPPAGES                                                          
+1041 DTWAIN_TN_MANDUPSIDE1DONE                                                          
+1042 DTWAIN_TN_MANDUPSIDE2DONE                                                          
+1043 DTWAIN_TN_MANDUPPAGECOUNTERROR                                                     
+1044 DTWAIN_TN_MANDUPACQUIREDONE                                                        
+1045 DTWAIN_TN_MANDUPSIDE1START                                                         
+1046 DTWAIN_TN_MANDUPSIDE2START                                                         
+1047 DTWAIN_TN_MANDUPMERGEERROR                                                         
+1048 DTWAIN_TN_MANDUPMEMORYERROR                                                        
+1049 DTWAIN_TN_MANDUPFILEERROR                                                          
+1050 DTWAIN_TN_MANDUPFILESAVEERROR                                                      
+1051 DTWAIN_TN_EOJDETECTED                              
+1052 DTWAIN_TN_EOJDETECTED_XFERDONE                   
+1053 DTWAIN_TN_QUERYPAGEDISCARD                                                        
+1054 DTWAIN_TN_PAGEDISCARDED                                                           
+1055 DTWAIN_TN_PROCESSDIBACCEPTED                                                           
+1056 DTWAIN_TN_PROCESSDIBFINALACCEPTED                                                 
+1057 DTWAIN_TN_CLOSEDIBFAILED                                                               
+1058 DTWAIN_TN_INVALID_TWAINDSM2_BITMAP                                                 
+1059 DTWAIN_TN_IMAGE_RESAMPLE_FAILURE
+1100 DTWAIN_TN_DEVICEEVENT                                                       
+1105 DTWAIN_TN_TWAINPAGECANCELED                     
+1106 DTWAIN_TN_TWAINPAGEFAILED                                                          
+1107 DTWAIN_TN_APPUPDATEDDIB                                                            
+1110 DTWAIN_TN_FILEPAGESAVING                                                           
+1112 DTWAIN_TN_EOJBEGINFILESAVE                                                         
+1113 DTWAIN_TN_EOJENDFILESAVE                                                           
+1120 DTWAIN_TN_CROPFAILED                                                               
+1121 DTWAIN_TN_PROCESSEDDIBFINAL                                                        
+1130 DTWAIN_TN_BLANKPAGEDETECTED1                                                       
+1131 DTWAIN_TN_BLANKPAGEDETECTED2                                                       
+1132 DTWAIN_TN_BLANKPAGEDETECTED3                                                       
+1133 DTWAIN_TN_BLANKPAGEDISCARDED1                   
+1134 DTWAIN_TN_BLANKPAGEDISCARDED2                   
+1140 DTWAIN_TN_OCRTEXTRETRIEVED                                                         
+1141 DTWAIN_TN_QUERYOCRTEXT                                                             
+1142 DTWAIN_TN_PDFOCRREADY                                                              
+1143 DTWAIN_TN_PDFOCRDONE                                                               
+1144 DTWAIN_TN_PDFOCRERROR                                                              
+1150 DTWAIN_TN_SETCALLBACKINIT                                                          
+1151 DTWAIN_TN_SETCALLBACK64INIT                                                        
+1160 DTWAIN_TN_FILENAMECHANGING                                                         
+1161 DTWAIN_TN_FILENAMECHANGED                                                          
+1180 DTWAIN_TN_PROCESSEDAUDIOFINAL                                                     
+1181 DTWAIN_TN_PROCESSAUDIOFINALACCEPTED                                               
+1182 DTWAIN_TN_PROCESSEDAUDIOFILE                                                      
+1183 DTWAIN_TN_TWAINTRIPLETBEGIN                                                       
+1184 DTWAIN_TN_TWAINTRIPLETEND                                                         
+1200 DTWAIN_TN_ACQUIRECANCELLED_EX             
+1201 DTWAIN_TN_FEEDERNOTLOADED                      
+1205 DTWAIN_TN_ACQUIREDONE_EX                  
+1300 DTWAIN_TN_TRANSFERTILEREADY                    
+1301 DTWAIN_TN_TRANSFERTILEDONE                     
+1500 DTWAIN_TN_MESSAGELOOPERROR                
+3000 DTWAIN_TN_UICLOSING                       
+3001 DTWAIN_TN_UICLOSED                        
+3002 DTWAIN_TN_UIOPENED                        
+3003 DTWAIN_TN_UIOPENING                       
+3004 DTWAIN_TN_UIOPENFAILURE                   
+-9999
+ 3          TWON_ARRAY           
+ 4          TWON_ENUMERATION     
+ 5          TWON_ONEVALUE        
+ 6          TWON_RANGE           
+ 962        TWON_ICONID          
+ 461        TWON_DSMID           
+ 63         TWON_DSMCODEID       
+ 0xff       TWON_DONTCARE8       
+ 0xffff     TWON_DONTCARE16      
+ 0xffffffff TWON_DONTCARE32      
+-9999
+0x0001 TWMF_APPOWNS     
+0x0002 TWMF_DSMOWNS     
+0x0004 TWMF_DSOWNS      
+0x0008 TWMF_POINTER     
+0x0010 TWMF_HANDLE      
+-9999
+0 TWSX_NATIVE              
+1 TWSX_FILE                
+2 TWSX_MEMORY              
+3 TWSX_FILE2
+4 TWSX_MEMFILE             
+-9999
 [100] BMP  [1 4 8 16 24 32] [[]]
 [200] JPEG [8 16 24] [[1 24] [4 24] [32 24]]
 [250 251] Adobe PDF [1 8 16 24] [[32 24]]
@@ -1589,6 +1697,6 @@
 [8501] WEBP [24 32] [[1 24] [4 24] [8 24] [16 24]]
 [6000 6001] TXT [1] [[4 1][8 1][16 1][24 1] [32 1]]
 -9999
-5.5.4
-3511523181
+5.5.5
+275792850
 END END END
