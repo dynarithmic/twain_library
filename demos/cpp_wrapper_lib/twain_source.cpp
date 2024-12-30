@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2024 Dynarithmic Software.
+Copyright (c) 2002-2025 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -770,7 +770,7 @@ namespace dynarithmic
             const capability_interface& ci = get_capability_interface();
             if (!ci.is_customdsdata_supported())
                 return {};
-            long actualSize = 0;
+            DWORD actualSize = 0;
             if (!API_INSTANCE DTWAIN_GetCustomDSData(m_theSource, nullptr, 0, &actualSize, DTWAINGCD_COPYDATA))
                 return {};
             if (actualSize > 0)

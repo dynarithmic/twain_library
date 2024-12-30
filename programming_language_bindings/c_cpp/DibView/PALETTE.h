@@ -80,14 +80,14 @@ enum PAL_SIZE
 
 #ifndef WIN32
 long FAR PASCAL __export PaletteWndProc (HWND hwnd,
-				UINT message,
-				WPARAM wParam,
-				LPARAM lParam);
+                UINT message,
+                WPARAM wParam,
+                LPARAM lParam);
 #else
 long PaletteWndProc (HWND hwnd,
-				UINT message,
-				WPARAM wParam,
-				LPARAM lParam);
+                UINT message,
+                WPARAM wParam,
+                LPARAM lParam);
 #endif
 
 void SetPaletteWindowsPal (HWND hWnd, HPALETTE hPal);

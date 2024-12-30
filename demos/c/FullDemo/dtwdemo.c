@@ -39,6 +39,7 @@ TCHAR         g_LogFileName[MAX_PATH];
 
 void SelectTheSource(int nWhich);
 void EnableSourceItems(BOOL bEnable);
+void EnableSelectSourceItems(BOOL bEnable);
 DTWAIN_SOURCE DisplayGetNameDlg();
 DTWAIN_SOURCE DisplayCustomDlg();
 void DisplaySourceProps();
@@ -140,11 +141,15 @@ AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("engli
                                  {ID_LANGUAGE_SPANISH               , _T("spanish")},
                                  {ID_LANGUAGE_ITALIAN               , _T("italian")},
                                  {ID_LANGUAGE_GERMAN                , _T("german")},
+                                 {ID_LANGUAGE_GREEK                 , _T("greek")},
                                  {ID_LANGUAGE_DUTCH                 , _T("dutch")},
                                  {ID_LANGUAGE_RUSSIAN               , _T("russian")},
                                  {ID_LANGUAGE_ROMANIAN              , _T("romanian")},
                                  {ID_LANGUAGE_PORTUGUESE              , _T("portuguese")},
-                                 {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")} 
+                                 {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")},
+                                 {ID_LANGUAGE_TRADITIONALCHINESE    , _T("traditional_chinese")},
+                                 {ID_LANGUAGE_JAPANESE              , _T("japanese")},
+                                 {ID_LANGUAGE_KOREAN                , _T("korean")}
                                 };
 TCHAR g_CustomLanguage[256];
 
@@ -332,6 +337,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case ID_LANGUAGE_ITALIAN            : 
                 case ID_LANGUAGE_GERMAN             : 
                 case ID_LANGUAGE_DUTCH              : 
+                case ID_LANGUAGE_GREEK              :
+                case ID_LANGUAGE_JAPANESE           :
+                case ID_LANGUAGE_KOREAN             :
+                case ID_LANGUAGE_TRADITIONALCHINESE :
                 case ID_LANGUAGE_RUSSIAN            : 
                 case ID_LANGUAGE_ROMANIAN           : 
                 case ID_LANGUAGE_SIMPLIFIEDCHINESE  : 
@@ -403,7 +412,7 @@ BOOL GetToggleMenuState(UINT resID)
 
 void SelectTheSource(int nWhich)
 {
-    DTWAIN_SOURCE tempSource = NULL;
+    DTWAIN_SOURCE tempSource=NULL;
     if ( g_CurrentSource )
     {
         int nReturn = MessageBox(g_hWnd, _T("For this demo, only one Source can be opened.\r\n")
@@ -418,6 +427,7 @@ void SelectTheSource(int nWhich)
             return;
     }
 
+    EnableSelectSourceItems(FALSE);
     switch (nWhich)
     {
         case IDM_SELECT_SOURCE:
@@ -435,10 +445,8 @@ void SelectTheSource(int nWhich)
         case IDM_SELECT_SOURCE_CUSTOM:
             tempSource = DisplayCustomDlg();
         break;
-
-
     }
-
+    EnableSelectSourceItems(TRUE);
     if ( tempSource )
     {
         if ( DTWAIN_OpenSource(tempSource) )
@@ -452,12 +460,15 @@ void SelectTheSource(int nWhich)
         }
         else
             MessageBox(g_hWnd, _T("Error Opening Source"), _T("TWAIN Error"), MB_ICONSTOP);
-
     }
     else
-        MessageBox(g_hWnd, _T("Error Selecting Source"), _T("TWAIN Error"), MB_ICONSTOP);
+    {
+        LONG lastError = DTWAIN_GetLastError();
+        TCHAR szCancelMsg[256];
+        DTWAIN_GetErrorString(lastError, szCancelMsg, 256);
+        MessageBox(g_hWnd, szCancelMsg, _T("Information"), MB_ICONSTOP);
+    }
 }
-
 
 void SetCaptionToSourceName()
 {
@@ -521,10 +532,15 @@ void GenericAcquire(LONG nWhichOne)
     EnableSourceItems(TRUE);
     if (!bRet)
     {
+        LONG lastError = DTWAIN_GetLastError();
+        char szError[1024];
         if (ErrStatus == DTWAIN_TN_ACQUIRECANCELED)
             MessageBox(NULL, _T("Acquisition cancelled without acquiring any images"), _T("Information"), MB_ICONSTOP);
         else
-        MessageBox(NULL, _T("Acquisition failed"), _T("TWAIN Error"), MB_ICONSTOP);
+        {
+            DTWAIN_GetErrorStringA(lastError, szError, 1023);
+            MessageBoxA(NULL, szError, "TWAIN Error", MB_ICONSTOP);
+        }
         return;
     }
 
@@ -748,6 +764,19 @@ void EnableSourceItems(BOOL bEnable)
     EnableMenuItem(g_Menu,IDM_ACQUIRE_OPTIONS, nOptions);
 }
 
+void EnableSelectSourceItems(BOOL bEnable)
+{
+    UINT nOptions;
+    if (!bEnable)
+        nOptions = MF_BYCOMMAND | MF_GRAYED;
+    else
+        nOptions = MF_BYCOMMAND | MF_ENABLED;
+    EnableMenuItem(g_Menu, IDM_SELECT_SOURCE, nOptions);
+    EnableMenuItem(g_Menu, IDM_SELECT_SOURCE_BY_NAME, nOptions);
+    EnableMenuItem(g_Menu, IDM_SELECT_SOURCE_CUSTOM, nOptions);
+    EnableMenuItem(g_Menu, IDM_SELECT_DEFAULT_SOURCE, nOptions);
+    EnableMenuItem(g_Menu, IDM_EXIT, nOptions);
+}
 
 /* Dialog box to enter custom language name */
 LRESULT CALLBACK EnterCustomLangNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)

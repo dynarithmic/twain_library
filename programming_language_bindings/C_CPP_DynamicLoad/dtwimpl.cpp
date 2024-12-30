@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2024 Dynarithmic Software.
+    Copyright (c) 2002-2025 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@
         #pragma warning (push)
         #pragma warning (disable:4113)
         #pragma warning (disable:4047)
+        #pragma warning (disable:4706)
     #endif
     #ifdef __GNUC__
         #pragma GCC diagnostic push
@@ -197,6 +198,7 @@
     D_ENABLELAMPFUNC                                                  DYNDTWAIN_API::DTWAIN_EnableLamp = nullptr;
     D_ENABLEMSGNOTIFYFUNC                                             DYNDTWAIN_API::DTWAIN_EnableMsgNotify = nullptr;
     D_ENABLEPATCHDETECTFUNC                                           DYNDTWAIN_API::DTWAIN_EnablePatchDetect = nullptr;
+    D_ENABLEPEEKMESSAGELOOPFUNC                                       DYNDTWAIN_API::DTWAIN_EnablePeekMessageLoop = nullptr;
     D_ENABLEPRINTERFUNC                                               DYNDTWAIN_API::DTWAIN_EnablePrinter = nullptr;
     D_ENABLETHUMBNAILFUNC                                             DYNDTWAIN_API::DTWAIN_EnableThumbnail = nullptr;
     D_ENABLETRIPLETSNOTIFYFUNC                                        DYNDTWAIN_API::DTWAIN_EnableTripletsNotify = nullptr;
@@ -595,6 +597,9 @@
     D_GETTWAINCOUNTRYVALUEFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainCountryValue = nullptr;
     D_GETTWAINCOUNTRYVALUEWFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainCountryValueW = nullptr;
     D_GETTWAINHWNDFUNC                                                DYNDTWAIN_API::DTWAIN_GetTwainHwnd = nullptr;
+    D_GETTWAINIDFROMNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainIDFromName = nullptr;
+    D_GETTWAINIDFROMNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainIDFromNameA = nullptr;
+    D_GETTWAINIDFROMNAMEWFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainIDFromNameW = nullptr;
     D_GETTWAINLANGUAGENAMEAFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameA = nullptr;
     D_GETTWAINLANGUAGENAMEFUNC                                        DYNDTWAIN_API::DTWAIN_GetTwainLanguageName = nullptr;
     D_GETTWAINLANGUAGENAMEWFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameW = nullptr;
@@ -691,6 +696,7 @@
     D_ISPATCHDETECTENABLEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsPatchDetectEnabled = nullptr;
     D_ISPATCHSUPPORTEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsPatchSupported = nullptr;
     D_ISPDFSUPPORTEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsPDFSupported = nullptr;
+    D_ISPEEKMESSAGELOOPENABLEDFUNC                                    DYNDTWAIN_API::DTWAIN_IsPeekMessageLoopEnabled = nullptr;
     D_ISPIXELTYPESUPPORTEDFUNC                                        DYNDTWAIN_API::DTWAIN_IsPixelTypeSupported = nullptr;
     D_ISPNGSUPPORTEDFUNC                                              DYNDTWAIN_API::DTWAIN_IsPNGSupported = nullptr;
     D_ISPRINTERENABLEDFUNC                                            DYNDTWAIN_API::DTWAIN_IsPrinterEnabled = nullptr;
@@ -1264,6 +1270,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnableLamp, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableMsgNotify, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnablePatchDetect, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnablePeekMessageLoop, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnablePrinter, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableThumbnail, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableTripletsNotify, hModule);
@@ -1662,6 +1669,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainHwnd, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromName, hModule); 
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromNameA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetTwainIDFromNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameW, hModule);
@@ -1758,6 +1768,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsPatchDetectEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPatchSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPDFSupported, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsPeekMessageLoopEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPixelTypeSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPNGSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsPrinterEnabled, hModule);

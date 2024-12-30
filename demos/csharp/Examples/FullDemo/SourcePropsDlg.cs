@@ -77,12 +77,12 @@ namespace TWAINDemo
             TwainAPI.DTWAIN_EnumExtendedCaps(m_Source, ref AllCaps);
             this.edExtendedCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
 
-            int customDSLength = 0;
+            uint customDSLength = 0;
             Encoding enc8 = Encoding.UTF8;
             TwainAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
             byte [] szCustomData = new byte[customDSLength];
             TwainAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
-            this.txtDSData.Text = enc8.GetString(szCustomData, 0, customDSLength);
+            txtDSData.Text = enc8.GetString(szCustomData, 0, (int)customDSLength);
 
             string sName = szNameInfo.ToString();
             int nBytes = TwainAPI.DTWAIN_GetSourceDetails(sName, IntPtr.Zero, 0, 2, 1);
