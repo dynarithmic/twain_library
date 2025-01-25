@@ -41,7 +41,7 @@ DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit op
 
 ----
 
-The "standard" versions of the DTWAIN library will not require an installation of the Visual C++ runtime files, so there shouldn't be an issue when using the standard versions.  However the standard versions are larger in size (up to a megabyte or so) than the versions that require an installation of the Visual C++ runtime already installed on the system that DTWAIN will be running on.
+The "standard" versions of the DTWAIN library ("standard" meaning the DLL's found in the **full_logging** and **partial_logging** directories -- See below in the **How do I get set up using DTWAIN** section) will not require an installation of the Visual C++ runtime files, so there shouldn't be an issue when using the standard versions.  However the standard versions are larger in size (up to a megabyte or so) than the versions that require an installation of the Visual C++ runtime already installed on the system that DTWAIN will be running on.
 
 Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
@@ -76,20 +76,20 @@ For 64-bit applications, use the binaries found in **release_libraries.zip** in 
 
 ----
 
-The **full_logging** directory contains the DLL's that are 
+The **full_logging** directory contains the DLL's that have the following characteristics: 
 1) Built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
 2) Do not require an installation of the Visual C++ Runtime on the target system.
 
-The **partial_logging** directory contains the DLL's that are 
-1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available.
+The **partial_logging** directory contains the DLL's that are:
+1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available, and
 2) Do not require an installation of the Visual C++ Runtime on the target system.
 
 The **full_logging_require_vcruntime** directory contains the DLL's that are 
-1) Built with full logging capabilities, exactly the same as **full_logging** described above.
+1) Built with full logging capabilities, exactly the same as **full_logging** described above, and
 2) Requires an installation of the Visual C++ Runtime on the target system.
 
 The **partial_logging_require_vcruntime** directory contains the DLL's that are 
-1) Built without call stack and return values being logged, exactly the same as **partial_logging** described above.
+1) Built without call stack and return values being logged, exactly the same as **partial_logging** described above, and
 2) Requires an installation of the Visual C++ Runtime on the target system.
 
 If you are not concerned with sizes of the DLL's, the **full_logging** DLL's should be used.  If you desire DLL's that are a bit smaller and can "sacrifice" call stack / return value logging, the **partial_logging** DLL's should be used.  
