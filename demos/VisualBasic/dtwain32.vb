@@ -769,6 +769,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_UNKNOWN_TWAIN_RC As Integer = (-1071)
     Public Const DTWAIN_ERR_UNKNOWN_TWAIN_CC As Integer = (-1072)
     Public Const DTWAIN_ERR_RESOURCES_DATA_EXCEPTION As Integer = (-1073)
+    Public Const DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED As Integer = (-1074)
+    Public Const DTWAIN_ERR_FEEDER_COMPLIANCY As Integer = (-1075)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)

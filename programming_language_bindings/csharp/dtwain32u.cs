@@ -821,6 +821,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_UNKNOWN_TWAIN_RC = (-1071);
         public const int DTWAIN_ERR_UNKNOWN_TWAIN_CC = (-1072);
         public const int DTWAIN_ERR_RESOURCES_DATA_EXCEPTION = (-1073);
+        public const int DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED (-1074);
+        public const int DTWAIN_ERR_FEEDER_COMPLIANCY (-1075);
 
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);

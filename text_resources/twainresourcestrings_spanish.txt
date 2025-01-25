@@ -88,6 +88,7 @@
 1072 Código de condición TWAIN desconocido  
 1073 Error de datos de recurso: Se lanzó una excepción
 1074 Las transferencias de audio no son compatibles.
+1075 La fuente informa que el alimentador está disponible, pero no supera la prueba de conformidad TWAIN (CAP_PAPERDETECTABLE)
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso
