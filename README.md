@@ -43,7 +43,7 @@ DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit op
 
 The "standard" versions of the DTWAIN library will not require an installation of the Visual C++ runtime files, so there shouldn't be an issue when using the standard versions.  However the standard versions are larger in size (up to a megabyte or so) than the versions that require an installation of the Visual C++ runtime already installed on the system that DTWAIN will be running on.
 
-Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
+Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
