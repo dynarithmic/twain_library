@@ -88,6 +88,7 @@
 1072 Onbekende TWAIN Voorwaarde Code 
 1073 Hulpbron gegevensfout: Uitzondering opgetreden
 1074 Audiotransfers worden niet ondersteund 
+1075 Bronrapport feeder is beschikbaar, maar slaagt niet voor de TWAIN-conformiteitstest (CAP_PAPERDETECTABLE)
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

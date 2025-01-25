@@ -432,7 +432,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN
 
 /* Support for CAP_CUSTOMDSDATA */
 HANDLE DLLENTRY_DEF DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, LPBYTE Data, DWORD dSize, LPDWORD pActualSize,LONG nFlags);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, LPCBYTE Data, DWORD dSize, LONG nFlags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, const BYTE* Data, DWORD dSize, LONG nFlags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCustomDSDataSupported(DTWAIN_SOURCE Source);
 
 /* Only to be used by static libraries.  This is mapped to DTWAIN_SysInitializexxx() for DLL */

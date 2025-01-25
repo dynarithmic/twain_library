@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.5 on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.5.5** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.6.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -25,21 +25,25 @@
 (There is nothing wrong with understanding the TWAIN specification, as this will enhance your knowledge of how the DTWAIN library works internally.  However the high-level of abstraction of the TWAIN protocol makes this library simple for even the novice programmer to use).
 
 ----------
-
-### Preliminaries
-
-DTWAIN is supported under Windows 7 / Windows 8.x / Windows 10 / Windows 11 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
-
-Since most Windows systems within the past 8 years has this runtime already installed by other applications, this may not be an issue, and DTWAIN will work right out-of-the-box.  
-
-However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
-
-----------
 ### Is DTWAIN 5.x really Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
 
 * Please note -- since DTWAIN prior to version 5.0 used source code in some modules that could not be released to the general public due to licensing issues, we had to revamp these portions of the codebase so as to allow DTWAIN to become an open source library.  We have made all strives to make sure that these changes to DTWAIN will not cause issues, but as most of you know, bugs can exist.  If bugs are found, we will be addressing them in a short manner.
+
+----------
+
+### Preliminaries
+
+DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
+
+*There is no official support for Windows 7 / Windows 8.x, as newer versions of DTWAIN are only tested for Windows versions 10 and 11.  Note that this is not to say that DTWAIN will not work for Windows 7 / 8, but it hasn't been tested with these operating systems for the past few years.  If you require support for Windows 7 or 8, please open an [issue](https://github.com/dynarithmic/twain_library/issues) to see if this can be addressed.
+
+----
+
+The "standard" versions of the DTWAIN library will not require an installation of the Visual C++ runtime files, so there shouldn't be an issue when using the standard versions.  However the standard versions are larger in size (up to a megabyte or so) than the versions that require an installation of the Visual C++ runtime already installed on the system that DTWAIN will be running on.
+
+Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48145" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
@@ -53,31 +57,50 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 **<u>Building the DTWAIN application</u>**
 
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use either the binaries found in **release_libraries.zip** in  [full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging) or 
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging) directories.
+For 32-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
 
-[Checksum values for full_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes32.txt) and [partial_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes32.txt) are also available in these directories.  
-
-----
-
-For 64-bit applications, use either the binaries found in **release_libraries.zip** in  [full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging) or
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging) directories
-
-[Checksum values for full_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging/release_ziphashes64.txt) and [partial_logging](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging/release_ziphashes64.txt) are also available in these directories.  
+[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes32.txt)</br>
+[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes32.txt)</br>
+[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging_require_vcruntime/release_ziphashes32.txt)</br>
+[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging_require_vcruntime/release_ziphashes32.txt)</br> 
 
 ----
 
-The **full_logging** directory contains the DLL's that are built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
+For 64-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
 
-The **partial_logging** directory contains the DLL's that are built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available.
+[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging/release_ziphashes64.txt)</br>
+[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging/release_ziphashes64.txt)</br>
+[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging_require_vcruntime/release_ziphashes64.txt)</br>
+[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging_require_vcruntime/release_ziphashes64.txt)</br> 
 
-If you are not concerned with sizes of the DLL's, the **full_logging** DLL's should be used.  If you desire DLL's that are a bit smaller and can "sacrifice" call stack / return value logging, the **partial_logging** DLL's should be used.
-
-To distinguish between whether the full or partial logging DLL's are in use, see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
 ----
+
+The **full_logging** directory contains the DLL's that are 
+1) Built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
+2) Do not require an installation of the Visual C++ Runtime on the target system.
+
+The **partial_logging** directory contains the DLL's that are 
+1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available.
+2) Do not require an installation of the Visual C++ Runtime on the target system.
+
+The **full_logging_require_vcruntime** directory contains the DLL's that are 
+1) Built with full logging capabilities, exactly the same as **full_logging** described above.
+2) Requires an installation of the Visual C++ Runtime on the target system.
+
+The **partial_logging_require_vcruntime** directory contains the DLL's that are 
+1) Built without call stack and return values being logged, exactly the same as **partial_logging** described above.
+2) Requires an installation of the Visual C++ Runtime on the target system.
+
+If you are not concerned with sizes of the DLL's, the **full_logging** DLL's should be used.  If you desire DLL's that are a bit smaller and can "sacrifice" call stack / return value logging, the **partial_logging** DLL's should be used.  
+
+If you will install the Visual C++ Runtime yourself, or assume that the systems you will run DTWAIN on have the Visual C++ Runtime already installed, you can use the DLL's in the "*_require_vcruntime" directories, further reducing the size of the DTWAIN DLL's being used.
+
+To distinguish between whether the full or partial logging DLL's are in use (since the names of the DTWAIN DLL's themselves are the same, regardless of which ones are used), see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
 In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
+
+----
 
 A breakdown of the files contained in **release_libraries.zip** is as follows:
 
