@@ -252,3 +252,4 @@
 10004 Gestor de fuentes TWAIN, sesión y DTWAIN cerrados con éxito  
 10005 No se pudo eliminar la subclase de la ventana del usuario  
 10006 El tipo de dispositivo y el tipo requerido de TWAIN no coinciden.
+10007 Advertencia: El tipo de compresión de archivo es desconocido o no coincide con el tipo de imagen seleccionado.
