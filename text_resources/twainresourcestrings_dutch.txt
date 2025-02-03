@@ -252,3 +252,4 @@
 10004 TWAIN Source Manager, sessie en DTWAIN succesvol gesloten  
 10005 Kon subklasse niet verwijderen van gebruikersvenster  
 10006 Apparaattype en vereiste TWAIN-type komen niet overeen.
+10007 Waarschuwing: Bestandscompressietype is onbekend of komt niet overeen met het gekozen afbeeldings type.
