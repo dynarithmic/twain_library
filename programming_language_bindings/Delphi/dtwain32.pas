@@ -536,6 +536,7 @@ const
   DTWAIN_TN_TWAINTRIPLETEND = 1184;
   DTWAIN_TN_TRANSFERTILEREADY = 1300;
   DTWAIN_TN_TRANSFERTILEDONE = 1301;
+  DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
   DTWAIN_PDFOCR_CLEANTEXT1 = 1;
   DTWAIN_PDFOCR_CLEANTEXT2 = 2;
   DTWAIN_MODAL = 0;
@@ -2793,6 +2794,10 @@ function DTWAIN_GetTwainStringNameW(Category:LONG; ID:LONG; LpszPath:LPWSTR; nLe
 
 function DTWAIN_EnablePeekMessageLoop(Source:DTWAIN_SOURCE; bEnable:BOOL):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_EnablePeekMessageLoop';
 function DTWAIN_IsPeekMessageLoopEnabled(Source:DTWAIN_SOURCE):BOOL;stdcall; external 'dtwain32.dll'   name 'DTWAIN_IsPeekMessageLoopEnabled';
+
+function DTWAIN_EnumCompressionTypesEx2(Source:DTWAIN_SOURCE; FileType:LONG; UseBufferedMode:LONG):DTWAIN_ARRAY; stdcall;external 'dtwain32.dll' name 'DTWAIN_EnumCompressionTypesEx2';
+function DTWAIN_GetFileCompressionType(Source:DTWAIN_SOURCE):LONG; stdcall; external 'dtwain32.dll' name 'DTWAIN_GetFileCompressionType';
+function DTWAIN_SetFileCompressionType(Source:DTWAIN_SOURCE; FileType:LONG; bIsCustom:BOOL):BOOL; stdcall; external 'dtwain32.dll' name 'DTWAIN_SetFileCompressionType';
 
 implementation
 

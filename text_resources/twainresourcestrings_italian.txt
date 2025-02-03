@@ -252,3 +252,4 @@
 10004 Gestore delle sorgenti TWAIN, sessione e DTWAIN chiusi con successo  
 10005 Impossibile rimuovere il sottotipo dalla finestra utente  
 10006 Il tipo di dispositivo e il tipo richiesto da TWAIN non corrispondono.
+10007 Avviso: Il tipo di compressione del file è sconosciuto o non corrisponde al tipo di immagine scelto.
