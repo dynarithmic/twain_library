@@ -252,3 +252,4 @@
 10004 TWAIN-Quellenmanager, Sitzung und DTWAIN erfolgreich geschlossen  
 10005 Unterklasse konnte nicht aus dem Benutzerfenster entfernt werden  
 10006 Gerätespezifikation und erforderlicher TWAIN-Typ stimmen nicht überein.
+10007 Warnung: Der Dateikompressionstyp ist unbekannt oder stimmt nicht mit dem gewählten Bildtyp überein.

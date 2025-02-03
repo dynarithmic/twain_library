@@ -442,6 +442,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_TWAINTRIPLETEND As Integer = 1184
     Public Const DTWAIN_TN_TRANSFERTILEREADY As Integer = 1300
     Public Const DTWAIN_TN_TRANSFERTILEDONE As Integer = 1301
+    Public Const DTWAIN_TN_FILECOMPRESSTYPEMISMATCH As Integer = 1302
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
     Public Const DTWAIN_MODAL As Integer = 0
@@ -2802,5 +2803,9 @@ Class DTWAINAPI
 
     Declare Auto Function DTWAIN_EnablePeekMessageLoop Lib "dtwain32u.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Declare Auto Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain32u.dll" (Source As System.IntPtr) As Integer
+
+    Declare Auto Function DTWAIN_EnumCompressionTypesEx2 Lib "dtwain32u.dll" (Source As System.IntPtr, FileType As Long, UseBufferedMode As Long) As System.IntPtr
+    Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain32u.dll" (Source As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_SetFileCompressionType Lib "dtwain32u.dll" (Source As System.IntPtr, FileType As Long) As Integer
 
 End Class

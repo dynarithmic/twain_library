@@ -253,3 +253,4 @@
 10004 TWAIN Source Manager, Session, and DTWAIN closed successfully
 10005 Could not remove subclass from user window
 10006 Device type and TWAIN required type do not match.
+10007 Warning: File compression type is unknown, or does not match the chosen image type.

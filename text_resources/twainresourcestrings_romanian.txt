@@ -253,3 +253,4 @@
 10004 Managerul surselor TWAIN, sesiunea și DTWAIN s-au închis cu succes  
 10005 Nu s-a putut elimina subclasa din fereastra utilizatorului  
 10006 Tipul de dispozitiv și tipul necesar TWAIN nu se potrivesc.
+10007 Avertisment: Tipul de compresie a fișierului este necunoscut sau nu se potrivește cu tipul de imagine ales.
