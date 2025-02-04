@@ -1,5 +1,64 @@
 DTWAIN Version changes
 
+5.6.0
+
+- Added versions of the DTWAIN DLL that requires an installation of the Visual C++
+  Runtime on the target machine.  This further reduces the disk size of the DTWAIN DLL's.
+
+  The application must run on a system that has the Visual C++ Redistributables 
+  (versions 2015 and above) already installed.  Since many applications would have 
+  already installed the VC++ redistributables, the reduction in size of the DTWAIN DLL's 
+  may be advantageous for your application. 
+
+  For more information on this, and receiving the VC++ redistributables (if you want to install these
+  files yourself):
+
+  https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022
+
+
+- Upgraded following internal image libraries:
+
+      libpng   --> 1.6.44
+      libwebp  --> 1.5.0
+      libtiff  --> 4.7.0
+      libopenjpeg --> 2.5.0
+  
+- Changed determination of whether a TWAIN source can sense paper by
+  querying the CAP_PAPERDETECTABLE capability, and if not supported
+  query the CAP_FEEDERENABLED capability (for TWAIN driver compliancy testing --
+  see the update below).  
+
+- Report TWAIN compliancy error if CAP_PAPERDETECTABLE is not supported,
+  but CAP_FEEDERENABLED is supported (CAP_PAPERDETECTABLE must be supported
+  for a source/driver that supports a document feeder to be TWAIN compliant).
+
+- For the above issues with CAP_PAPERDETECABLE, allow overrides of whether a 
+  source/driver supports a paper sensor by introducing a [PaperDetectionStatus] setting
+  in dtwain32.ini and dtwain64.ini.  Currently, only the Avision 176U scanners are
+  set for this override.  
+
+- Optimize queries to the source for paper detection and feeder status.  Previously,
+  the underlying calls to the TWAIN subsystem were always done after the first time 
+  the device was queried for this information.  As of this version, the first results are
+  now cached instead of having to go to the TWAIN subsystem on subsequent queries.
+
+- For DTWAIN_AcquireFile(), when using the source file transfer mode, send 
+  DTWAIN_TN_FILEPAGESAVEOK and DTWAIN_TN_FILESAVEOK notifications on successful
+  file transfer.  Currently, these two notifications are only sent when using 
+  the native or buffered transfer modes when acquiring to an image file).
+
+- Add function DTWAIN_SetFileCompressionType() and DTWAIN_GetFileCompressionType() to 
+  ensure that the compression type used by source file transfer mode is utilized.
+  Currently, the compression type other than TWCP_NONE is not guaranteed to be
+  used, even if the compression type is supported.  
+
+  The DTWAIN_SetFileCompressionType() function should be called before DTWAIN_AcquireFile()
+  or DTWAIN_AcquireFileEx() (with the DTWAIN_USESOURCEFLAG mode set for these calls) to
+  ensure the compression type will be used for the file transfer.
+
+- Fixed memory leak in DTWAIN_ARRAY internal handling.
+
+
 5.5.5
 
 - Create versions of DTWAIN DLL that contains full logging and minimal logging.  The minimal
@@ -18,10 +77,12 @@ DTWAIN Version changes
   loop will be executed with a given TWAIN Source.  By default, the message loop uses the 
   Windows API function GetMessage() instead of PeekMessage().
 
+- Fix issue with determining if TWAIN source supports DAT_FILESYSTEM functionality.
+
 - Ensure setting string capabilities uses ANSI strings.
 
 - Change parameters to certain API functions from LONG to DWORD to delineate signed versus unsigned values.  
-  The size in bits of LONG and DWORD are the same, the only difference is that DWORD is an unsigned 32-bit integer 
+  The sizes of LONG and DWORD, the only difference is that DWORD is an unsigned 32-bit integer 
   while LONG is a signed 32-bit integer.
 
 - Add Japanese, Traditional Chinese, and Greek text resources.

@@ -88,6 +88,7 @@
 1072 Code de condition TWAIN inconnu  
 1073 Erreur de données de ressource: Exception levée
 1074 Les transferts audio ne sont pas pris en charge.
+1075 La source signale que le chargeur est disponible, mais échoue au test de conformité TWAIN (CAP_PAPERDETECTABLE)
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
@@ -260,3 +261,4 @@
 10004 Gestionnaire de source TWAIN, session et DTWAIN fermés avec succès  
 10005 Impossible de retirer la sous-classe de la fenêtre utilisateur  
 10006 Le type de périphérique et le type requis par TWAIN ne correspondent pas.
+10007 Avertissement : Le type de compression de fichier est inconnu ou ne correspond pas au type d'image choisi.

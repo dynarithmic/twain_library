@@ -494,6 +494,8 @@ namespace Dynarithmic
         public const  int DTWAIN_TN_TWAINTRIPLETEND = 1184;
         public const  int DTWAIN_TN_TRANSFERTILEREADY = 1300;
         public const  int DTWAIN_TN_TRANSFERTILEDONE = 1301;
+        public const  int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
+
         public const  int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const  int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const  int DTWAIN_MODAL = 0;
@@ -821,6 +823,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_UNKNOWN_TWAIN_RC = (-1071);
         public const int DTWAIN_ERR_UNKNOWN_TWAIN_CC = (-1072);
         public const int DTWAIN_ERR_RESOURCES_DATA_EXCEPTION = (-1073);
+        public const int DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED = (-1074);
+        public const int DTWAIN_ERR_FEEDER_COMPLIANCY = (-1075);
 
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);
@@ -6065,5 +6069,17 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_IsPeekMessageLoopEnabled(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, int lFileType, int bUseBufferedMode);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
+        ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetFileCompressionType(DTWAIN_SOURCE Source, int lCompression);
     }
 }
