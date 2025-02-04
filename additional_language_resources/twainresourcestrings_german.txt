@@ -88,6 +88,7 @@
 1072 Unbekannter TWAIN-Bedingungscode  
 1073 Ressourcendatenfehler: Ausnahme ausgelöst
 1074 Audioübertragungen werden nicht unterstützt.
+1075 Quellberichte: Der Zufuhrmechanismus ist verfügbar, besteht jedoch den TWAIN-Konformitätstest (CAP_PAPERDETECTABLE) nicht
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
@@ -251,3 +252,4 @@
 10004 TWAIN-Quellenmanager, Sitzung und DTWAIN erfolgreich geschlossen  
 10005 Unterklasse konnte nicht aus dem Benutzerfenster entfernt werden  
 10006 Gerätespezifikation und erforderlicher TWAIN-Typ stimmen nicht überein.
+10007 Warnung: Der Dateikompressionstyp ist unbekannt oder stimmt nicht mit dem gewählten Bildtyp überein.

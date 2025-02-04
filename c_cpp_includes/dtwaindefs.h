@@ -525,6 +525,10 @@
 #define DTWAIN_TN_TRANSFERTILEREADY         1300
 #define DTWAIN_TN_TRANSFERTILEDONE          1301
 
+/* Sent when issuing a file transfer, and the compression chosen is
+ * not recognized for the file type */
+#define DTWAIN_TN_FILECOMPRESSTYPEMISMATCH  1302
+
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
 #define DTWAIN_PDFOCR_CLEANTEXT2            2
@@ -877,8 +881,9 @@
 #define DTWAIN_ERR_UNKNOWN_TWAIN_CC (-1072)
 #define DTWAIN_ERR_RESOURCES_DATA_EXCEPTION (-1073)
 #define DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED (-1074)
+#define DTWAIN_ERR_FEEDER_COMPLIANCY (-1075)
 
-#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED
+#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_FEEDER_COMPLIANCY
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)

@@ -88,6 +88,7 @@
 1072 Codice di condizione TWAIN sconosciuto  
 1073 Errore dei dati delle risorse: Eccezione sollevata
 1074 I trasferimenti audio non sono supportati
+1075 La fonte riporta che il caricatore è disponibile, ma non supera il test di conformità TWAIN (CAP_PAPERDETECTABLE)
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
@@ -251,3 +252,4 @@
 10004 Gestore delle sorgenti TWAIN, sessione e DTWAIN chiusi con successo  
 10005 Impossibile rimuovere il sottotipo dalla finestra utente  
 10006 Il tipo di dispositivo e il tipo richiesto da TWAIN non corrispondono.
+10007 Avviso: Il tipo di compressione del file è sconosciuto o non corrisponde al tipo di immagine scelto.
