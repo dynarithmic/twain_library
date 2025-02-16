@@ -88,6 +88,11 @@
 1073 资源数据错误：抛出异常
 1074 不支持音频传输
 1075 源报告显示进纸器可用，但未通过 TWAIN 合规性测试 (CAP_PAPERDETECTABLE)
+1076 源报告显示没有能力。CAP_SUPPORTEDCAPS的合规性测试失败  
+1077 CAP_SUPPORTEDCAPS的合规性测试失败。CAP_SUPPORTEDCAPS、ICAP_PIXELTYPE或ICAP_XFERMECH缺失于能力列表中  
+1078 ICAP_PIXELTYPE的合规性测试失败。  
+1079 ICAP_PIXELTYPE的合规性测试失败。没有像素类型信息。  
+1080 ICAP_BITDEPTH的合规性测试失败。  
 1100 TWAIN 条件代码：无法完成操作。内存不足。  
 1101 TWAIN 条件代码：没有错误  
 1102 TWAIN 条件代码：未知的故障原因  

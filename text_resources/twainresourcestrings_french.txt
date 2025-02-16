@@ -89,6 +89,11 @@
 1073 Erreur de données de ressource: Exception levée
 1074 Les transferts audio ne sont pas pris en charge.
 1075 La source signale que le chargeur est disponible, mais échoue au test de conformité TWAIN (CAP_PAPERDETECTABLE)
+1076 La source rapporte qu'il n'y a pas de capacités. Échec du test de conformité pour CAP_SUPPORTEDCAPS  
+1077 Échec du test de conformité pour CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE ou ICAP_XFERMECH est manquant dans la liste des capacités  
+1078 Échec du test de conformité pour ICAP_PIXELTYPE.  
+1079 Échec du test de conformité pour ICAP_PIXELTYPE. Aucune information sur le type de pixel.  
+1080 Échec du test de conformité pour ICAP_BITDEPTH.    
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
