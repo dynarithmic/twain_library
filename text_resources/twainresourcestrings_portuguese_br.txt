@@ -89,6 +89,11 @@
 1073 Erro de dados de recurso: Exceção lançada
 1074 Transferências de áudio não são suportadas
 1075 Relatórios de fonte indicam que o alimentador está disponível, mas falha no teste de conformidade TWAIN (CAP_PAPERDETECTABLE)
+1076 Fonte relata que não há capacidades. Falha no teste de conformidade para CAP_SUPPORTEDCAPS  
+1077 Falha no teste de conformidade para CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE ou ICAP_XFERMECH está faltando na lista de capacidades  
+1078 Falha no teste de conformidade para ICAP_PIXELTYPE.  
+1079 Falha no teste de conformidade para ICAP_PIXELTYPE. Nenhuma informação sobre o tipo de pixel.  
+1080 Falha no teste de conformidade para ICAP_BITDEPTH.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

@@ -89,6 +89,11 @@
 1073 資源數據錯誤：拋出異常
 1074 不支援音訊傳輸
 1075 來源報告顯示供應器可用，但未通過 TWAIN 相容性測試 (CAP_PAPERDETECTABLE)
+1076 來源報告顯示沒有能力。CAP_SUPPORTEDCAPS 的合規測試失敗  
+1077 CAP_SUPPORTEDCAPS 的合規測試失敗。CAP_SUPPORTEDCAPS、ICAP_PIXELTYPE 或 ICAP_XFERMECH 缺失於能力列表中  
+1078 ICAP_PIXELTYPE 的合規測試失敗。  
+1079 ICAP_PIXELTYPE 的合規測試失敗。沒有像素類型信息。  
+1080 ICAP_BITDEPTH 的合規測試失敗。  
 1100 TWAIN狀態代碼：無法完成操作。內存不足。  
 1101 TWAIN狀態代碼：無錯誤  
 1102 TWAIN狀態代碼：未知的故障原因  
