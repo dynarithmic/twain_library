@@ -89,6 +89,11 @@
 1073 리소스 데이터 오류: 예외 발생
 1074 오디오 전송은 지원되지 않습니다.
 1075 소스 보고서 공급기가 사용 가능하지만 TWAIN 호환성 테스트(CAP_PAPERDETECTABLE)에 실패합니다.
+1076 소스 보고서에 따르면 기능이 없습니다. CAP_SUPPORTEDCAPS에 대한 준수 테스트 실패  
+1077 CAP_SUPPORTEDCAPS에 대한 준수 테스트 실패. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE 또는 ICAP_XFERMECH가 기능 목록에 없습니다.  
+1078 ICAP_PIXELTYPE에 대한 준수 테스트 실패.  
+1079 ICAP_PIXELTYPE에 대한 준수 테스트 실패. 픽셀 유형 정보가 없습니다.  
+1080 ICAP_BITDEPTH에 대한 준수 테스트 실패.  
 1100 TWAIN 상태 코드: 작업을 완료할 수 없습니다. 메모리가 부족합니다.  
 1101 TWAIN 상태 코드: 오류 없음  
 1102 TWAIN 상태 코드: 실패의 원인이 불명확합니다.  

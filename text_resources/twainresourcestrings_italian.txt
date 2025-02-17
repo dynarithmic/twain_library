@@ -89,6 +89,11 @@
 1073 Errore dei dati delle risorse: Eccezione sollevata
 1074 I trasferimenti audio non sono supportati
 1075 La fonte riporta che il caricatore è disponibile, ma non supera il test di conformità TWAIN (CAP_PAPERDETECTABLE)
+1076 La fonte riporta che non ci sono capacità. Test di conformità non superato per CAP_SUPPORTEDCAPS  
+1077 Fallimento del test di conformità per CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE o ICAP_XFERMECH mancano dall'elenco delle capacità  
+1078 Fallimento del test di conformità per ICAP_PIXELTYPE.  
+1079 Fallimento del test di conformità per ICAP_PIXELTYPE. Nessuna informazione sul tipo di pixel.  
+1080 Fallimento del test di conformità per ICAP_BITDEPTH.
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
