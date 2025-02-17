@@ -1,5 +1,18 @@
 DTWAIN Version changes
 
+5.6.1
+
+- Fixed issue with setting the ICAP_FRAMES capability when calling 
+  DTWAIN_GetCapValues() and DTWAIN_SetCapValues().
+
+- Fixed issue with capability setting using MSG_RESETALL operation.
+
+- Ensure that the TWAIN condition code (TWCC_xxxx) is retrieved for every call
+  to the TWAIN Data Source Manager.  This included successful calls to the
+  TWAIN DSM as well as DTWAIN calls that fail.  
+
+
+
 5.6.0
 
 - Added versions of the DTWAIN DLL that requires an installation of the Visual C++

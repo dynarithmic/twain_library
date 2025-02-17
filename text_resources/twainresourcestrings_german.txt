@@ -89,6 +89,11 @@
 1073 Ressourcendatenfehler: Ausnahme ausgelöst
 1074 Audioübertragungen werden nicht unterstützt.
 1075 Quellberichte: Der Zufuhrmechanismus ist verfügbar, besteht jedoch den TWAIN-Konformitätstest (CAP_PAPERDETECTABLE) nicht
+1076 Quelle berichtet, dass keine Fähigkeiten vorhanden sind. Fehlgeschlagener Konformitätstest für CAP_SUPPORTEDCAPS  
+1077 Fehlgeschlagener Konformitätstest für CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE oder ICAP_XFERMECH fehlen in der Liste der Fähigkeiten  
+1078 Fehlgeschlagener Konformitätstest für ICAP_PIXELTYPE.  
+1079 Fehlgeschlagener Konformitätstest für ICAP_PIXELTYPE. Keine Informationen zum Pixeltype.  
+1080 Fehlgeschlagener Konformitätstest für ICAP_BITDEPTH.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
