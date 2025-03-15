@@ -41,6 +41,7 @@ OF THIRD PARTY RIGHTS.
 #include <dynarithmic/twain/info/buffered_transfer_info.hpp>
 #include <dynarithmic/twain/twain_details.hpp>
 #include <dynarithmic/twain/utilities/misc_utilities.hpp>
+#include <dynarithmic/twain/extimageinfo/extendedimage_info.hpp>
 
 namespace dynarithmic
 {
@@ -105,7 +106,7 @@ namespace dynarithmic
                 bool m_bWeakAttach;
                 std::shared_ptr<twain_source_pimpl> m_pTwainSourceImpl;
                 std::vector<xfermech_value::value_type> m_vAllXferMechs;
-
+                extendedimage_info m_extImageInfo;
                 void create_interfaces();
                 void get_source_info_internal();
                 void start_apply();
@@ -156,6 +157,8 @@ namespace dynarithmic
                 {
                     return API_INSTANCE DTWAIN_SetCustomDSData(m_theSource, NULL, s.data(), static_cast<LONG>(s.size()), DTWAINSCD_USEDATA) ? true : false;
                 }
+
+                std::unique_ptr<extendedimage_info> init_extendedimage_info();
 
                 static bool acquire_no_error(int32_t errCode);
                 static bool acquire_timed_out(int32_t errCode);

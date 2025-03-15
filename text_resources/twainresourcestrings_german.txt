@@ -94,6 +94,10 @@
 1078 Fehlgeschlagener Konformitätstest für ICAP_PIXELTYPE.  
 1079 Fehlgeschlagener Konformitätstest für ICAP_PIXELTYPE. Keine Informationen zum Pixeltype.  
 1080 Fehlgeschlagener Konformitätstest für ICAP_BITDEPTH.
+1081 Kompatibilitätstestfehler für ICAP_XFERMECH.  
+1082 Kompatibilitätstestfehler für die Standardfunktionen.  
+1083 Fehlanpassung des erweiterten Bildinformations Typs. TWAIN-Kompatibilitätsfehler.
+1084 Fehler beim Abrufen von erweiterten Bildinformationen.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

@@ -89,6 +89,15 @@
 1073 Hulpbron gegevensfout: Uitzondering opgetreden
 1074 Audiotransfers worden niet ondersteund 
 1075 Bronrapport feeder is beschikbaar, maar slaagt niet voor de TWAIN-conformiteitstest (CAP_PAPERDETECTABLE)
+1076 Bron meldt dat er geen mogelijkheden zijn. Mislukte conformiteitstest voor CAP_SUPPORTEDCAPS  
+1077 Mislukking van het conformiteitstest voor CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE of ICAP_XFERMECH ontbreekt op de lijst van mogelijkheden  
+1078 Mislukking van het conformiteitstest voor ICAP_PIXELTYPE.  
+1079 Mislukking van het conformiteitstest voor ICAP_PIXELTYPE. Geen pixeltype-informatie.  
+1080 Mislukking van het conformiteitstest voor ICAP_BITDEPTH.
+1081 Fout bij de conformiteitstest voor ICAP_XFERMECH.
+1082 Fout bij de conformiteitstest voor de standaardmogelijkheden.
+1083 Mismatch in het type uitgebreide afbeeldingsinformatie. Fout bij de TWAIN-conformiteit.
+1084 Fout bij het ophalen van uitgebreide afbeeldingsinformatie.
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
