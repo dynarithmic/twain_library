@@ -115,6 +115,7 @@ namespace dynarithmic
             std::swap(left.m_bUIOnlyOn, right.m_bUIOnlyOn);
 			std::swap(left.m_bUIOnlySupported, right.m_bUIOnlySupported);
             std::swap(left.m_pTwainSourceImpl, right.m_pTwainSourceImpl);
+            std::swap(left.m_extImageInfo, right.m_extImageInfo);
         }
 
         void twain_source::create_interfaces()
@@ -780,6 +781,13 @@ namespace dynarithmic
                 return retContainer;
             }
             return {};
+        }
+
+        std::unique_ptr<extendedimage_info> twain_source::init_extendedimage_info()
+        {
+            auto extInfo = std::make_unique<extendedimage_info>();
+            extInfo->attach(this);
+            return extInfo;
         }
 
         bool twain_source::showui_only()

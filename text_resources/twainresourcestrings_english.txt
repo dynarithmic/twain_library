@@ -94,6 +94,10 @@
 1078 Compliancy test failure for ICAP_PIXELTYPE.
 1079 Compliancy test failure for ICAP_PIXELTYPE.  No pixel type information.
 1080 Compliancy test failure for ICAP_BITDEPTH.
+1081 Compliancy test failure for ICAP_XFERMECH.
+1082 Compliancy test failure for the standard capabilities
+1083 Extended Image Information type mismatch.  TWAIN compliancy failure.
+1084 Error retrieving Extended Image Information.
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

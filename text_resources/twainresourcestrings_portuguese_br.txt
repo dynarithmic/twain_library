@@ -94,6 +94,10 @@
 1078 Falha no teste de conformidade para ICAP_PIXELTYPE.  
 1079 Falha no teste de conformidade para ICAP_PIXELTYPE. Nenhuma informação sobre o tipo de pixel.  
 1080 Falha no teste de conformidade para ICAP_BITDEPTH.
+1081 Falha no teste de conformidade para ICAP_XFERMECH.  
+1082 Falha no teste de conformidade para as capacidades padrão.  
+1083 Incompatibilidade de tipo de Informação de Imagem Estendida. Falha de conformidade TWAIN.  
+1084 Erro ao recuperar Informações de Imagem Estendidas.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida
