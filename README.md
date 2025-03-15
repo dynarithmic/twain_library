@@ -331,6 +331,7 @@ Here is a bare-bones C# language example of acquiring a BMP image from a TWAIN d
 using System;
 // The additional dtwain*.cs file needs to be added to your project for these definitions.
 using Dynarithmic; 
+using DTWAIN_ARRAY = System.IntPtr;
 
 namespace Test
 {    
@@ -346,11 +347,32 @@ namespace Test
             {
                 // Select a TWAIN Source from the TWAIN Dialog
                 var SelectedSource = TwainAPI.DTWAIN_SelectSource();
-
-                // We test against IntPtr.Zero, since the SelectedSource maybe 32-bit or 64-bit 
-                // depending on the application type.
                 if (SelectedSource != IntPtr.Zero)
                 {
+                    // Display the product name of the Source
+                    StringBuilder szInfo = new StringBuilder(256);
+                    TwainAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256);
+                    Console.WriteLine("The source product name is " + szInfo.ToString());
+
+                    // Get the capabilities the device supports
+                    DTWAIN_ARRAY dtwain_array = IntPtr.Zero;
+                    TwainAPI.DTWAIN_EnumSupportedCaps(SelectedSource, ref dtwain_array);
+
+                    // Get the number of items in the array
+                    int arrcount = TwainAPI.DTWAIN_ArrayGetCount(dtwain_array);
+                    Console.WriteLine("There are " + arrcount + " device capabilities");
+
+                    // Print each capability
+                    for (int curCap = 1; curCap <= arrcount; ++curCap)
+                    {
+                        int int_val = 0;
+                        
+                        // Note that LONG values in the DTWAIN API are 32-bit integers.
+                        TwainAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap-1, ref int_val);
+                        TwainAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256);
+                        Console.WriteLine("Capability " + curCap + ": " + szInfo.ToString() + "  Value: " +                     int_val);
+                    }
+
                     int status = 0;
                     // Acquire the BMP file named Test.bmp
                     TwainAPI.DTWAIN_AcquireFile(SelectedSource,
