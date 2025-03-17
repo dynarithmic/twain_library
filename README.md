@@ -609,14 +609,17 @@ You can download the source code [here](https://github.com/dynarithmic/twain_lib
 
 ----------
 
-### Who do I talk to if I have further questions? Who authored this library? ###
+### Who do I talk to if I have further questions?  What if I have issues with the DTWAIN Library?
 
-The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).        
+All questions concerning usage, possible bugs, etc. of the Dynarithmic TWAIN Library must have an issue created on the [Issue page](https://github.com/dynarithmic/twain_library/issues) so as to allow further investigation.
 
-My background is mostly in C and C++ programming, third-party library creation on Windows-based systems (some Linux also).    
+Note that issues will **not** be addressed at **dynarithmic.com** (website or email domain), and instead all issues must be directed to the Github issues page noted above.
+
+--------
+
+### Who authored the Dynarithmic TWAIN Library?
+
+The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
 
 In addition to 30+ years in the industry, I have made extensive contributions to the [CodeGuru](http://www.codeguru.com) C++ and Visual C++ forums, being one of the top contributors for over 15 years starting in 1999, and since 2014, moved on to  [StackOverflow](https://stackoverflow.com/users/3133316/paulmckenzie?tab=profile), where hopefully I am making an impact with other passionate programmers.  Also, I have had the distinction of being a Microsoft MVP for 10 years running in the Visual C++ category.
-
-I am available for contracting work and code reviews (mostly using the C and C++ languages).  If you're interested in my services, please email me for further information on my availability.
-
-  
+ 
