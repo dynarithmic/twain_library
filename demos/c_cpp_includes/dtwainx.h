@@ -576,6 +576,7 @@ return the actual data, only the information as to the number of items, data typ
 that the Source reports for the data item.  Use DTWAIN_GetExtImageInfoData to get the
 data */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoItem(DTWAIN_SOURCE Source, LONG nWhich, LPLONG InfoID, LPLONG NumItems, LPLONG Type);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoItemEx(DTWAIN_SOURCE Source, LONG nWhich, LPLONG InfoID, LPLONG NumItems, LPLONG Type, LPLONG ReturnCode);
 
 /* Uninitializes the Extended Inmage information interface.  This also must be called  */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FreeExtImageInfo(DTWAIN_SOURCE Source);
@@ -602,6 +603,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FlipBitmap( HANDLE hDib );
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSupportedCapsEx( DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSupportedExtImageInfo(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
 
 /* Test DTWAIN support libraries for various image types */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsTIFFSupported(VOID_PROTOTYPE);
@@ -903,20 +905,28 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_RangeGetPosLong( DTWAIN_RANGE pArray, LONG Value
 /* load the language resource */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_LoadLanguageResource(LONG nLanguage);
 
-/* get a frame from a DTWAIN_ARRAYFRAME */
+/* specific DTWAIN_ARRAYFRAME functions */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayFrameGetAt(DTWAIN_ARRAY FrameArray, LONG nWhere, LPDTWAIN_FLOAT pleft, LPDTWAIN_FLOAT ptop, LPDTWAIN_FLOAT pright, LPDTWAIN_FLOAT pbottom );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayFrameSetAt(DTWAIN_ARRAY FrameArray, LONG nWhere, DTWAIN_FLOAT left, DTWAIN_FLOAT top, DTWAIN_FLOAT right, DTWAIN_FLOAT bottom );
 DTWAIN_FRAME DLLENTRY_DEF DTWAIN_ArrayFrameGetFrameAt(DTWAIN_ARRAY FrameArray, LONG nWhere );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayFrameSetFrameAt(DTWAIN_ARRAY FrameArray, LONG nWhere, DTWAIN_FRAME theFrame);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayAddFrameN(DTWAIN_ARRAY pArray, DTWAIN_FRAME frame, LONG num);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayAddFrame(DTWAIN_ARRAY pArray, DTWAIN_FRAME frame);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayInsertAtFrameN(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_FRAME frame, LONG num);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayInsertAtFrame(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_FRAME frame);
+DTWAIN_FRAME DLLENTRY_DEF DTWAIN_ArrayGetAtFrame(DTWAIN_ARRAY FrameArray, LONG nWhere);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArraySetAtFrame(DTWAIN_ARRAY FrameArray, LONG nWhere, DTWAIN_FRAME theFrame);
+
 
 /* TWAIN 1.x memory allocation functions */
-HANDLE      DLLENTRY_DEF DTWAIN_AllocateMemory(LONG memSize);
+HANDLE      DLLENTRY_DEF DTWAIN_AllocateMemory(DWORD memSize);
+HANDLE      DLLENTRY_DEF DTWAIN_AllocateMemory64(ULONG64 memSize);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FreeMemory(HANDLE h);
 DTWAIN_MEMORY_PTR DLLENTRY_DEF DTWAIN_LockMemory(HANDLE h);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UnlockMemory(HANDLE h);
 
 /* TWAIN 2.x memory allocation functions (actual low-level functions determined by TWAINDSM.DLL) */
-HANDLE      DLLENTRY_DEF DTWAIN_AllocateMemoryEx(LONG memSize);
+HANDLE      DLLENTRY_DEF DTWAIN_AllocateMemoryEx(DWORD memSize);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FreeMemoryEx(HANDLE h);
 DTWAIN_MEMORY_PTR DLLENTRY_DEF DTWAIN_LockMemoryEx(HANDLE h);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UnlockMemoryEx(HANDLE h);

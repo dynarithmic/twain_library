@@ -630,6 +630,12 @@ namespace dynarithmic
             ~HandleDestroyer() { if (h) { GlobalUnlock(h); GlobalFree(h); } }
         };
 
+        int twain_session::get_twain_constant(std::string twainName)
+        {
+            auto val = API_INSTANCE DTWAIN_GetTwainIDFromNameA(twainName.c_str());
+            return val;
+        }
+
         std::string twain_session::to_api_string(const std::string& str)
         {
             HANDLE h = API_INSTANCE DTWAIN_ConvertToAPIStringA(str.c_str());

@@ -89,6 +89,15 @@
 1073 Resource data error: Exception thrown
 1074 Audio transfers are not supported
 1075 Source reports feeder is available, but fails TWAIN compliancy test (CAP_PAPERDETECTABLE).
+1076 Source reports that there are no capabilities.  Failed compliancy test for CAP_SUPPORTEDCAPS
+1077 Compliancy test failure for CAP_SUPPORTEDCAPS.  CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE, or ICAP_XFERMECH is missing from the list of capabilities
+1078 Compliancy test failure for ICAP_PIXELTYPE.
+1079 Compliancy test failure for ICAP_PIXELTYPE.  No pixel type information.
+1080 Compliancy test failure for ICAP_BITDEPTH.
+1081 Compliancy test failure for ICAP_XFERMECH.
+1082 Compliancy test failure for the standard capabilities
+1083 Extended Image Information type mismatch.  TWAIN compliancy failure.
+1084 Error retrieving Extended Image Information.
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

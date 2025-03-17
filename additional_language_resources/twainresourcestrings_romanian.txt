@@ -89,6 +89,15 @@
 1073 Eroare de date resursă: Excepție generată
 1074 Transferurile audio nu sunt acceptate.
 1075 Sursa raportează că alimentatorul este disponibil, dar nu trece testul de conformitate TWAIN (CAP_PAPERDETECTABLE)
+1076 Sursa raportează că nu există capacități. Test de conformitate eșuat pentru CAP_SUPPORTEDCAPS  
+1077 Eșec al testului de conformitate pentru CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE sau ICAP_XFERMECH lipsesc din lista de capacități  
+1078 Eșec al testului de conformitate pentru ICAP_PIXELTYPE.  
+1079 Eșec al testului de conformitate pentru ICAP_PIXELTYPE. Informații despre tipul de pixel lipsesc.  
+1080 Eșec al testului de conformitate pentru ICAP_BITDEPTH.  
+1081 Eșecul testului de conformitate pentru ICAP_XFERMECH.  
+1082 Eșecul testului de conformitate pentru capabilitățile standard.  
+1083 Neconformitate a tipului de informații extinse despre imagine. Eșec de conformitate TWAIN.
+1084 Eroare la recuperarea informațiilor extinse despre imagine.
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  
