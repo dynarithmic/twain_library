@@ -879,7 +879,7 @@ namespace dynarithmic
             std::string get_details(details_info info = { true, 2 });
             source_status get_source_status(const twain_source& ts);
             source_status get_source_status(std::string prodName);
-
+            int get_twain_constant(std::string twainName);
             std::string to_api_string(const std::string& str);
 
             DTWAIN_SOURCE get_source_handle_from_name(std::string prodName);

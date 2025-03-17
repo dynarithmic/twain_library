@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="acquire_characteristics.cpp" />
     <ClCompile Include="buffered_transfer_info.cpp" />
+    <ClCompile Include="extendedimage_info.cpp" />
     <ClCompile Include="imprinter_info.cpp" />
     <ClCompile Include="logger_callback.cpp" />
     <ClCompile Include="options_base.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="dynarithmic\twain\capability_interface\capability_interface.hpp" />
     <ClInclude Include="dynarithmic\twain\capability_interface\generated_capfuncs.hpp" />
     <ClInclude Include="dynarithmic\twain\characteristics\twain_select_dialog.hpp" />
+    <ClInclude Include="dynarithmic\twain\extimageinfo\extendedimage_info.hpp" />
     <ClInclude Include="dynarithmic\twain\identity\twain_identity.hpp" />
     <ClInclude Include="dynarithmic\twain\imagehandler\image_handler.hpp" />
     <ClInclude Include="dynarithmic\twain\info\asyncdeviceevents_info.hpp" />

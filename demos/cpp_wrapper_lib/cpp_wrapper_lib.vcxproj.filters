@@ -51,6 +51,9 @@
     <ClCompile Include="string_utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extendedimage_info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynarithmic\twain\capability_interface\capability_interface.hpp">
@@ -252,6 +255,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dynarithmic\twain\utilities\misc_utilities.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dynarithmic\twain\extimageinfo\extendedimage_info.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

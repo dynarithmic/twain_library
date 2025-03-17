@@ -42,6 +42,7 @@ BEGIN
         MENUITEM "Show Preview",                IDM_SHOW_PREVIEW
         MENUITEM "Use Source UI",               IDM_USE_SOURCE_UI
         MENUITEM "Discard Blank Pages...",      IDM_DISCARD_BLANKS
+        MENUITEM "Show Barcode Information",    IDM_SHOW_BARCODEINFO
     END
 
 
@@ -213,7 +214,17 @@ BEGIN
     CONTROL         "No Logging",IDC_radNoLogging,"Button",BS_AUTORADIOBUTTON,13,20,51,10
     CONTROL         "Log to File:",IDC_radLogToFile,"Button",BS_AUTORADIOBUTTON,13,46,51,10
     CONTROL         "Log to Debug Monitor",IDC_radToMonitor,"Button",BS_AUTORADIOBUTTON,13,70,85,10
-    CONTROL         "Log to Console", IDC_radToConsole, "Button", BS_AUTORADIOBUTTON, 13, 96, 85, 10
+    CONTROL         "Log to Console",IDC_radToConsole,"Button",BS_AUTORADIOBUTTON,13,96,85,10
+END
+
+IDD_dlgBarCodes DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Bar Codes Found"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,155,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
+    EDITTEXT        IDC_edBarCodes,15,15,278,134,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 /////////////////////////////////////////////////////////////////////////////
 //

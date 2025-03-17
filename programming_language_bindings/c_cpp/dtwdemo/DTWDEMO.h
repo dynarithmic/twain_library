@@ -33,6 +33,7 @@
 #define IDM_USE_SOURCE_UI                   307
 #define IDM_DISCARD_BLANKS                  308
 #define IDM_SHOW_PREVIEW                    309
+#define IDM_SHOW_BARCODEINFO                310
 
 
 #define IDD_dlgEnterSourceName              1000
@@ -75,6 +76,8 @@
 #define IDC_edCopyright                     7010
 #define IDC_edJSONDetails                   7011
 #define IDC_edLangName                      7012
+#define IDC_edBarCodes                      7013
+#define IDD_dlgBarCodes                     7014
 
 #define ID_LANGUAGE_ENGLISH             32771
 #define ID_LANGUAGE_FRENCH              32772

@@ -94,6 +94,10 @@
 1078 Échec du test de conformité pour ICAP_PIXELTYPE.  
 1079 Échec du test de conformité pour ICAP_PIXELTYPE. Aucune information sur le type de pixel.  
 1080 Échec du test de conformité pour ICAP_BITDEPTH.    
+1081 Échec du test de conformité pour ICAP_XFERMECH.  
+1082 Échec du test de conformité pour les capacités standard.  
+1083 Incompatibilité de type d'informations d'image étendues. Échec de conformité TWAIN.
+1084 Erreur lors de la récupération des informations d'image étendues.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

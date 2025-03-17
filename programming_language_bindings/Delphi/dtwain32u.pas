@@ -47,7 +47,7 @@ type
   DTWAIN_DIBUPDATE_PROC = Pointer;
   DTWAIN_LOGGER_PROC = Pointer;
   DWORD = UInt32;
-  BOOL = LongBool;
+  BOOL = LONG;
   PBOOL = ^BOOL;
   PByte = ^Byte;
   PINT = ^Integer;
@@ -866,6 +866,15 @@ const
   DTWAIN_ERR_RESOURCES_DATA_EXCEPTION = (-1073);
   DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED = (-1074);
   DTWAIN_ERR_FEEDER_COMPLIANCY = (-1075);
+  DTWAIN_ERR_SUPPORTEDCAPS_COMPLIANCY1 = (-1076);
+  DTWAIN_ERR_SUPPORTEDCAPS_COMPLIANCY2 = (-1077);
+  DTWAIN_ERR_ICAPPIXELTYPE_COMPLIANCY1 = (-1078);
+  DTWAIN_ERR_ICAPPIXELTYPE_COMPLIANCY2 = (-1079);
+  DTWAIN_ERR_ICAPBITDEPTH_COMPLIANCY1  = (-1080);
+  DTWAIN_ERR_XFERMECH_COMPLIANCY       = (-1081);
+  DTWAIN_ERR_STANDARDCAPS_COMPLIANCY   = (-1082);
+  DTWAIN_ERR_EXTIMAGEINFO_DATATYPE_MISMATCH = (-1083);
+  DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL = (-1084);
 
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
@@ -1773,10 +1782,11 @@ const
   DTWAIN_CONSTANT_TWON       = 74;
   DTWAIN_CONSTANT_TWMF       = 75;
   DTWAIN_CONSTANT_TWSX       = 76;
+  DTWAIN_CONSTANT_CAP        = 77;
+  DTWAIN_CONSTANT_ICAP       = 78;
 
   DTWAIN_USERRES_START    = 20000;
   DTWAIN_USERRES_MAXSIZE  = 8192;
-
 
 { DTWAIN DLL functional interface }
 function DTWAIN_AcquireAudioFile(Source:DTWAIN_SOURCE; lpszFile:LPCTSTR; lFileFlags:LONG; lMaxClips:LONG; bShowUI:BOOL; bCloseSource:BOOL; pStatus:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_AcquireAudioFile';
@@ -2182,7 +2192,6 @@ function DTWAIN_GetJpegValues(Source:DTWAIN_SOURCE; pQuality:LPLONG; Progressive
 function DTWAIN_GetLanguage:LONG;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLanguage';
 function DTWAIN_GetLastError:LONG;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLastError';
 function DTWAIN_GetLibraryPath(lpszPath:LPTSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLibraryPath';
-function DTWAIN_GetLibraryPath(sz:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLibraryPath';
 function DTWAIN_GetLibraryPathA(lpszPath:LPSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLibraryPathA';
 function DTWAIN_GetLibraryPathW(lpszPathr:LPWSTR; nLength:LONG):LONG;overload;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLibraryPathW';
 function DTWAIN_GetLightPath(Source:DTWAIN_SOURCE; lpLightPath:LPLONG):BOOL;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_GetLightPath';
@@ -2798,6 +2807,17 @@ function DTWAIN_IsPeekMessageLoopEnabled(Source:DTWAIN_SOURCE):BOOL;stdcall; ext
 function DTWAIN_EnumCompressionTypesEx2(Source:DTWAIN_SOURCE; FileType:LONG; UseBufferedMode:LONG):DTWAIN_ARRAY; stdcall;external 'dtwain32u.dll' name 'DTWAIN_EnumCompressionTypesEx2';
 function DTWAIN_GetFileCompressionType(Source:DTWAIN_SOURCE):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_GetFileCompressionType';
 function DTWAIN_SetFileCompressionType(Source:DTWAIN_SOURCE; FileType:LONG; bIsCustom:BOOL):BOOL; stdcall; external 'dtwain32u.dll' name 'DTWAIN_SetFileCompressionType';
+
+function DTWAIN_AllocateMemory64(nBytes:UInt64):DTWAIN_HANDLE; stdcall; external 'dtwain32u.dll' name 'DTWAIN_AllocateMemory64';
+function DTWAIN_GetExtImageInfoItemEx(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; DataType:LPLONG; ReturnCode:LPLONG):BOOL stdcall; external 'dtwain32u.dll' name 'DTWAIN_GetExtImageInfoItemEx'; 
+function DTWAIN_EnumSupportedExtImageInfo(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY):BOOL; stdcall; external 'dtwain32u.dll'   name 'DTWAIN_EnumSupportedExtImageInfo';
+
+function DTWAIN_ArrayAddFrameN(pArray:DTWAIN_ARRAY; theFrame:DTWAIN_FRAME; num:LONG):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayAddFrameN'; 
+function DTWAIN_ArrayAddFrame(pArray:DTWAIN_ARRAY; theFrame:DTWAIN_FRAME):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayAddFrame'; 
+function DTWAIN_ArrayInsertAtFrameN(pArray:DTWAIN_ARRAY; insertPoint:LONG; theFrame:DTWAIN_FRAME; num:LONG):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayInsertAtFrameN'; 
+function DTWAIN_ArrayInsertAtFrame(pArray:DTWAIN_ARRAY; insertPoint:LONG; theFrame:DTWAIN_FRAME):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayInsertAtFrame'; 
+function DTWAIN_ArrayGetAtFrame(pArray:DTWAIN_ARRAY; nWhere:LONG):DTWAIN_FRAME; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayGetAtFrame'; 
+function DTWAIN_ArraySetAtFrame(pArray:DTWAIN_ARRAY; nWhere:LONG; theFrame:DTWAIN_FRAME):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArraySetAtFrame'; 
 
 implementation
 

@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.6.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.6.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -325,12 +325,13 @@ There is also a [Java](https://www.oracle.com/java/) interface that is found in 
 
 ----
 ###### Quick Example (C#)  
-Here is a bare-bones C# language example of acquiring a BMP image from a TWAIN device installed on your system.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
+Here is a bare-bones C# language example of selecting a TWAIN device, displaying the capabilities available on the device, and acquiring a BMP image from the TWAIN device.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
 
 ```csharp
 using System;
 // The additional dtwain*.cs file needs to be added to your project for these definitions.
 using Dynarithmic; 
+using DTWAIN_ARRAY = System.IntPtr;
 
 namespace Test
 {    
@@ -346,11 +347,32 @@ namespace Test
             {
                 // Select a TWAIN Source from the TWAIN Dialog
                 var SelectedSource = TwainAPI.DTWAIN_SelectSource();
-
-                // We test against IntPtr.Zero, since the SelectedSource maybe 32-bit or 64-bit 
-                // depending on the application type.
                 if (SelectedSource != IntPtr.Zero)
                 {
+                    // Display the product name of the Source
+                    StringBuilder szInfo = new StringBuilder(256);
+                    TwainAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256);
+                    Console.WriteLine("The source product name is " + szInfo.ToString());
+
+                    // Get the capabilities the device supports
+                    DTWAIN_ARRAY dtwain_array = IntPtr.Zero;
+                    TwainAPI.DTWAIN_EnumSupportedCaps(SelectedSource, ref dtwain_array);
+
+                    // Get the number of items in the array
+                    int arrcount = TwainAPI.DTWAIN_ArrayGetCount(dtwain_array);
+                    Console.WriteLine("There are " + arrcount + " device capabilities");
+
+                    // Print each capability
+                    for (int curCap = 1; curCap <= arrcount; ++curCap)
+                    {
+                        int int_val = 0;
+                        
+                        // Note that LONG values in the DTWAIN API are 32-bit integers.
+                        TwainAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap-1, ref int_val);
+                        TwainAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256);
+                        Console.WriteLine("Capability " + curCap + ": " + szInfo.ToString() + "  Value: " +                     int_val);
+                    }
+
                     int status = 0;
                     // Acquire the BMP file named Test.bmp
                     TwainAPI.DTWAIN_AcquireFile(SelectedSource,
@@ -372,19 +394,25 @@ namespace Test
 ----
 ###### Quick Example (Python)  
 
-Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of acquiring a BMP image from a TWAIN device installed on your system:
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image:
 
 
 ```python
 from ctypes import *
 import dtwain
+import struct
 import ctypes as ct
 
 def test_dtwain():
-    # Load the DTWAIN library (make sure "dtwain32u.dll" is accessible)
+    # Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
     # You can use a full pathname here also, to ensure python finds the dll
-    dtwain_dll = windll.LoadLibrary("dtwain32u.dll") 
     
+    # Check for the python environment, and load the 64-bit or 32-bit DLL
+    if struct.calcsize("P") * 8 == 64:
+        dtwain_dll = dtwain.load_dtwaindll("dtwain64u.dll")
+    else:
+        dtwain_dll = dtwain.load_dtwaindll("dtwain32u.dll")
+
     # Initialize DTWAIN
     dtwain_dll.DTWAIN_SysInitialize()
     
@@ -396,7 +424,33 @@ def test_dtwain():
         dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource,mystrbuf,len(mystrbuf))
         print (mystrbuf.value)
         
-        # Acquire to a BMP file
+        # Example usage of DTWAIN_ARRAY:
+        # Get the device capabilities supported by the device
+        #
+        # Note: The DTWAIN_ARRAY, DTWAIN_SOURCE, DTWAIN_FRAME, and DTWAIN_RANGE are actually void pointers
+        # so you have to declare them as such if a DTWAIN function requires a parameter to be of this type.
+        #
+        # Note: An LPDTWAIN_ARRAY is the address of the DTWAIN_ARRAY, i.e. a ctypes.byref() value
+        dtwain_array = ct.pointer(ct.c_void_p(0))
+
+        # Note that the second parameter is the address a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
+        dtwain_dll.DTWAIN_EnumSupportedCaps(TwainSource, ct.byref(dtwain_array))
+
+        # Get the number of items in the array
+        arrcount = dtwain_dll.DTWAIN_ArrayGetCount(dtwain_array)
+        print(f"There are {arrcount} device capabilities")
+
+        #print each capability
+        for i in range(arrcount):
+            long_val = ct.c_long(0)
+            dtwain_dll.DTWAIN_ArrayGetAtLong(dtwain_array, i, ct.byref(long_val))
+            dtwain_dll.DTWAIN_GetNameFromCapA(long_val, mystrbuf, len(mystrbuf))
+            print(f"Capability {i+1}: {mystrbuf.value}  Value: {long_val.value}")
+
+        # Destroy the array when done
+        dtwain_dll.DTWAIN_ArrayDestroy(dtwain_array)
+
+        # Now Acquire to a BMP file
         dtwain_dll.DTWAIN_AcquireFile(TwainSource, "TEST.BMP", dtwain.DTWAIN_BMP, dtwain.DTWAIN_USELONGNAME,
                                       dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, 0)
     # Close down DTWAIN                                      
@@ -555,14 +609,17 @@ You can download the source code [here](https://github.com/dynarithmic/twain_lib
 
 ----------
 
-### Who do I talk to if I have further questions? Who authored this library? ###
+### Who do I talk to if I have further questions?  What if I have issues with the DTWAIN Library?
 
-The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).        
+All questions concerning usage, possible bugs, etc. of the Dynarithmic TWAIN Library must have an issue created on the [Issue page](https://github.com/dynarithmic/twain_library/issues) so as to allow further investigation.
 
-My background is mostly in C and C++ programming, third-party library creation on Windows-based systems (some Linux also).    
+Note that issues will **not** be addressed at **dynarithmic.com** (website or email domain), and instead all issues must be directed to the Github issues page noted above.
+
+--------
+
+### Who authored the Dynarithmic TWAIN Library?
+
+The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
 
 In addition to 30+ years in the industry, I have made extensive contributions to the [CodeGuru](http://www.codeguru.com) C++ and Visual C++ forums, being one of the top contributors for over 15 years starting in 1999, and since 2014, moved on to  [StackOverflow](https://stackoverflow.com/users/3133316/paulmckenzie?tab=profile), where hopefully I am making an impact with other passionate programmers.  Also, I have had the distinction of being a Microsoft MVP for 10 years running in the Visual C++ category.
-
-I am available for contracting work and code reviews (mostly using the C and C++ languages).  If you're interested in my services, please email me for further information on my availability.
-
-  
+ 
