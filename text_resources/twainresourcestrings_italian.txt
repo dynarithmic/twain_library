@@ -13,6 +13,7 @@
 12 TWAIN Fonte apra avanti eseguendo comando.
 27 Non finendo scan.   X/Y o Risolutezze calo da diverso valute
 28 Invalido Archivia Nome Precisato
+32 triplet TWAIN non eseguito.  Twain Manager non valido.
 1000 ***
 1001 Invalido DTWAIN_HANDLE
 1002 Invalido DTWAIN_SOURCE
@@ -98,6 +99,8 @@
 1082 Fallimento del test di conformità per le capacità standard.  
 1083 Incongruenza del tipo di informazione sull'immagine estesa. Fallimento di conformità TWAIN.  
 1084 Errore nel recuperare informazioni estese sull'immagine.
+1085 Il valore DTWAIN_RANGE è fuori dai limiti  
+1086 DTWAIN_RANGE ha una dimensione del passo di 0
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

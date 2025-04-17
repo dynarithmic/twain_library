@@ -13,6 +13,7 @@
 12 TWAIN source must be opened before executing command.
 27 Could not complete scan.  X/Y Resolutions set for different values
 28 Invalid File Name Specified
+32 TWAIN triplet not executed.  Invalid Twain Manager
 1000 ***
 1001 Invalid DTWAIN_HANDLE
 1002 Invalid DTWAIN_SOURCE
@@ -98,6 +99,9 @@
 1082 Compliancy test failure for the standard capabilities
 1083 Extended Image Information type mismatch.  TWAIN compliancy failure.
 1084 Error retrieving Extended Image Information.
+1085 DTWAIN_RANGE value is out of bounds
+1086 DTWAIN_RANGE has a step size of 0
+
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

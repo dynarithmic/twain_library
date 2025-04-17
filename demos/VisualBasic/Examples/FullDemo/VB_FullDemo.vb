@@ -532,11 +532,17 @@ Public Class VB_FullDemo
                 Return
             End If
 
-            Dim sDIBDlg As DibDisplayerDlg = New DibDisplayerDlg(acquireArray)
-                sDIBDlg.ShowDialog()
-                DTWAINAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0)
+            Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquisitions(acquireArray)
+            If nCount = 0 Then
+                MessageBox.Show("No Images acquired", "TWAIN Information")
                 Me.Enabled = True
+                Return
             End If
+
+            Dim sDIBDlg As DibDisplayerDlg = New DibDisplayerDlg(acquireArray)
+            sDIBDlg.ShowDialog()
+            Me.Enabled = True
+        End If
     End Sub
 
     Private Sub AcquireNative_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireNative.Click

@@ -657,7 +657,6 @@ namespace TWAINDemo
                 //...
                 DIBDisplayerDlg sDIBDlg = new DIBDisplayerDlg(acquireArray);
                 sDIBDlg.ShowDialog();
-                TwainAPI.DTWAIN_DestroyAcquisitionArray(acquireArray, 0);
                 this.Enabled = true;
             }
         }

@@ -49,6 +49,7 @@ public:
             {
                 std::cout << "Bar code " << curInfo << ":\n";
                 std::cout << "    Text: " << info.get_text() << "\n";
+                std::cout << "    Length: " << info.get_length() << "\n";
                 std::cout << "    Position (x,y): (" << info.get_xCoordinate() << "," << info.get_yCoordinate() << ")\n";
                 std::cout << "    Rotation: " << (barcodeinfo.is_rotation_supported() ?
                                                   std::to_string(info.get_rotation()) : " (not supported) ") << "\n";
