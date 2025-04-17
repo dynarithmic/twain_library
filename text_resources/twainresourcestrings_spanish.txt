@@ -13,6 +13,7 @@
 12 Origen de TWAIN abre a ejecutar el mandato adelante.
 27 No podríamos completar la scan.   Los X/Y o los las Resoluciones sienta para los valores diferentes
 28 Inválido Lima Nombre Especificado
+32 triplete TWAIN no ejecutado. El administrador de Twain no es válido.
 1000 ***
 1001 Los  inválido DTWAIN_HANDLE
 1002 Invalid los DTWAIN_SOURCE
@@ -98,6 +99,8 @@
 1082 Fallo en la prueba de cumplimiento para las capacidades estándar.  
 1083 Desajuste en el tipo de información de imagen extendida. Fallo en el cumplimiento de TWAIN.  
 1084 Error al recuperar información de imagen extendida.
+1085 El valor de DTWAIN_RANGE está fuera de los límites  
+1086 DTWAIN_RANGE tiene un tamaño de paso de 0
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

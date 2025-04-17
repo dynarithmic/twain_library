@@ -85,20 +85,22 @@ namespace dynarithmic
             if (iter == m_vSupportedExtInfo.end())
                 return;
 
-            static constexpr std::array<std::pair<int, int>, 6> aAllData = { {
+            static constexpr std::array<std::pair<int, int>, barcode_info::TEXT_SUPPORTED + 1> aAllData = { {
                 {barcode_info::CONFIDENCE_SUPPORTED, TWEI_BARCODECONFIDENCE},
                 {barcode_info::ROTATION_SUPPORTED, TWEI_BARCODEROTATION},
                 {barcode_info::XCOORDINATE_SUPPORTED, TWEI_BARCODEX},
                 {barcode_info::YCOORDINATE_SUPPORTED, TWEI_BARCODEY},
                 {barcode_info::TYPE_SUPPORTED, TWEI_BARCODETYPE},
-                {barcode_info::TEXT_SUPPORTED, TWEI_BARCODETEXT}} };
+                {barcode_info::TEXTLENGTH_SUPPORTED, TWEI_BARCODETEXTLENGTH},
+                {barcode_info::TEXT_SUPPORTED, TWEI_BARCODETEXT}}};
 
             using memPtr = decltype(&barcode_info::barcode_single_info::m_xCoordinate);
             std::vector<memPtr> individual_items = { &barcode_info::barcode_single_info::m_confidence ,
                                                      &barcode_info::barcode_single_info::m_rotation ,
                                                      &barcode_info::barcode_single_info::m_xCoordinate ,
                                                      &barcode_info::barcode_single_info::m_yCoordinate ,
-                                                     &barcode_info::barcode_single_info::m_type};
+                                                     &barcode_info::barcode_single_info::m_type,
+                                                     &barcode_info::barcode_single_info::m_length };
 
 			// Get the barcode information
 			DTWAIN_ARRAY aValues = {};
@@ -113,14 +115,14 @@ namespace dynarithmic
 				m_barcodeInfo.set_count(m_barcodeInfo.count);
 			}
 			auto& barCodeInfos = m_barcodeInfo.get_barcode_infos();
-			std::array<DTWAIN_ARRAY, 6> aDTwainArrays = {};
+			std::array<DTWAIN_ARRAY, aAllData.size()> aDTwainArrays = {};
             for (auto& pr : aAllData)
 			    m_barcodeInfo.m_supported[pr.first] = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), pr.second, &aDTwainArrays[pr.first]);
 
             // Get the texts
             m_barcodeInfo.m_supported[barcode_info::TEXT_SUPPORTED] = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_BARCODETEXT, &aDTwainArrays[barcode_info::TEXT_SUPPORTED]);
 
-            std::array<twain_array, 6> aTwainArrays;
+            std::array<twain_array, aAllData.size()> aTwainArrays;
 			int curArray = 0;
 			for (auto& val : aTwainArrays)
 			{
@@ -134,7 +136,7 @@ namespace dynarithmic
 			for (size_t curInfo = 0; curInfo < barCodeInfos.size(); ++curInfo)
 			{
                 auto* curObject = &barCodeInfos[curInfo];
-                for (int i = 0; i < 6; ++i)
+                for (int i = 0; i < aAllData.size(); ++i)
                 {
                     if (aAllData[i].first != barcode_info::TEXT_SUPPORTED)
                     {

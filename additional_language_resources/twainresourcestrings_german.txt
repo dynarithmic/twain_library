@@ -13,6 +13,7 @@
 12 TWAIN Quelle muß geöffnet werden bevor dieser Befehl ausgeführt werden kann.
 27 Scanvorgang konnte nicht vollständig ausgeführt werden. X/Y Auflösung enthält unterschiedliche Werte
 28 Ungültiger Dateiname
+32 TWAIN-Dreifach nicht ausgeführt. Ungültiger Twain-Manager
 1000 ***
 1001 Ungültiges DTWAIN_HANDLE
 1002 Ungültige DTWAIN_SOURCE
@@ -98,6 +99,8 @@
 1082 Kompatibilitätstestfehler für die Standardfunktionen.  
 1083 Fehlanpassung des erweiterten Bildinformations Typs. TWAIN-Kompatibilitätsfehler.
 1084 Fehler beim Abrufen von erweiterten Bildinformationen.
+1085 DTWAIN_RANGE-Wert liegt außerhalb der Grenzen  
+1086 DTWAIN_RANGE hat eine Schrittgröße von 0
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

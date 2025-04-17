@@ -850,7 +850,9 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYADDSTRINGFUNC)                       
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYADDSTRINGNFUNC)                      (DTWAIN_ARRAY, LPCTSTR, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYADDWIDESTRINGFUNC)                   (DTWAIN_ARRAY, LPCWSTR);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_ARRAYADDWIDESTRINGNFUNC)                  (DTWAIN_ARRAY, LPCWSTR, LONG);
-typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_ARRAYCREATEFROMSTRINGSFUNC)              (LONG);
+typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_ARRAYCREATEFROMSTRINGSFUNC)              (LPCTSTR*, LONG);
+typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_ARRAYCREATEFROMSTRINGSAFUNC)             (LPCSTR*, LONG);
+typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_ARRAYCREATEFROMSTRINGSWFUNC)             (LPCWSTR*, LONG);
 typedef LONG (DLLENTRY_DEF * D_ARRAYFINDANSISTRINGFUNC)                         (DTWAIN_ARRAY, LPCSTR);
 typedef LONG (DLLENTRY_DEF * D_ARRAYFINDSTRINGFUNC)                             (DTWAIN_ARRAY, LPCTSTR);
 typedef LONG (DLLENTRY_DEF * D_ARRAYFINDWIDESTRINGFUNC)                         (DTWAIN_ARRAY, LPCWSTR);
@@ -1130,7 +1132,9 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ARRAYSETATFRAMEFUNC)                       
     STATIC D_ARRAYCREATEFROMLONG64SFUNC                     DTWAIN_ArrayCreateFromLong64s;
     STATIC D_ARRAYCREATEFROMLONGSFUNC                       DTWAIN_ArrayCreateFromLongs;
     STATIC D_ARRAYCREATEFROMREALSFUNC                       DTWAIN_ArrayCreateFromReals;
+    STATIC D_ARRAYCREATEFROMSTRINGSAFUNC                    DTWAIN_ArrayCreateFromStringsA;
     STATIC D_ARRAYCREATEFROMSTRINGSFUNC                     DTWAIN_ArrayCreateFromStrings;
+    STATIC D_ARRAYCREATEFROMSTRINGSWFUNC                    DTWAIN_ArrayCreateFromStringsW;
     STATIC D_ARRAYCREATEFUNC                                DTWAIN_ArrayCreate;
     STATIC D_ARRAYDESTROYFRAMESFUNC                         DTWAIN_ArrayDestroyFrames;
     STATIC D_ARRAYDESTROYFUNC                               DTWAIN_ArrayDestroy;
@@ -1481,11 +1485,11 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ARRAYSETATFRAMEFUNC)                       
     STATIC D_GETFEEDERFUNCSFUNC                             DTWAIN_GetFeederFuncs;
     STATIC D_GETFEEDERORDERFUNC                             DTWAIN_GetFeederOrder;
     STATIC D_GETFILECOMPRESSIONTYPEFUNC                     DTWAIN_GetFileCompressionType;
-    STATIC D_GETFILETYPEEXTENSIONSFUNC                      DTWAIN_GetFileTypeExtensions;
     STATIC D_GETFILETYPEEXTENSIONSAFUNC                     DTWAIN_GetFileTypeExtensionsA;
+    STATIC D_GETFILETYPEEXTENSIONSFUNC                      DTWAIN_GetFileTypeExtensions;
     STATIC D_GETFILETYPEEXTENSIONSWFUNC                     DTWAIN_GetFileTypeExtensionsW;
-    STATIC D_GETFILETYPENAMEFUNC                            DTWAIN_GetFileTypeName;
     STATIC D_GETFILETYPENAMEAFUNC                           DTWAIN_GetFileTypeNameA;
+    STATIC D_GETFILETYPENAMEFUNC                            DTWAIN_GetFileTypeName;
     STATIC D_GETFILETYPENAMEWFUNC                           DTWAIN_GetFileTypeNameW;
     STATIC D_GETHALFTONEAFUNC                               DTWAIN_GetHalftoneA;
     STATIC D_GETHALFTONEFUNC                                DTWAIN_GetHalftone;
@@ -1654,8 +1658,8 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ARRAYSETATFRAMEFUNC)                       
     STATIC D_GETTWAINLANGUAGEVALUEFUNC                      DTWAIN_GetTwainLanguageValue;
     STATIC D_GETTWAINLANGUAGEVALUEWFUNC                     DTWAIN_GetTwainLanguageValueW;
     STATIC D_GETTWAINMODEFUNC                               DTWAIN_GetTwainMode;
-    STATIC D_GETTWAINNAMEFROMCONSTANTFUNC                   DTWAIN_GetTwainNameFromConstant;
     STATIC D_GETTWAINNAMEFROMCONSTANTAFUNC                  DTWAIN_GetTwainNameFromConstantA;
+    STATIC D_GETTWAINNAMEFROMCONSTANTFUNC                   DTWAIN_GetTwainNameFromConstant;
     STATIC D_GETTWAINNAMEFROMCONSTANTWFUNC                  DTWAIN_GetTwainNameFromConstantW;
     STATIC D_GETTWAINSTRINGNAMEAFUNC                        DTWAIN_GetTwainStringNameA;
     STATIC D_GETTWAINSTRINGNAMEFUNC                         DTWAIN_GetTwainStringName;
@@ -1884,8 +1888,8 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF* D_ARRAYSETATFRAMEFUNC)                       
     STATIC D_SETAVAILABLEPRINTERSFUNC                       DTWAIN_SetAvailablePrinters;
     STATIC D_SETBITDEPTHFUNC                                DTWAIN_SetBitDepth;
     STATIC D_SETBLANKPAGEDETECTIONEXFUNC                    DTWAIN_SetBlankPageDetectionEx;
-    STATIC D_SETBLANKPAGEDETECTIONEXSTRINGFUNC              DTWAIN_SetBlankPageDetectionExString;
     STATIC D_SETBLANKPAGEDETECTIONEXSTRINGAFUNC             DTWAIN_SetBlankPageDetectionExStringA;
+    STATIC D_SETBLANKPAGEDETECTIONEXSTRINGFUNC              DTWAIN_SetBlankPageDetectionExString;
     STATIC D_SETBLANKPAGEDETECTIONEXSTRINGWFUNC             DTWAIN_SetBlankPageDetectionExStringW;
     STATIC D_SETBLANKPAGEDETECTIONFUNC                      DTWAIN_SetBlankPageDetection;
     STATIC D_SETBLANKPAGEDETECTIONSTRINGAFUNC               DTWAIN_SetBlankPageDetectionStringA;
