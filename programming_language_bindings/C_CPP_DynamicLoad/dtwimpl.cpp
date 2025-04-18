@@ -99,7 +99,9 @@
     D_ARRAYCREATEFROMLONG64SFUNC                                      DYNDTWAIN_API::DTWAIN_ArrayCreateFromLong64s = nullptr;
     D_ARRAYCREATEFROMLONGSFUNC                                        DYNDTWAIN_API::DTWAIN_ArrayCreateFromLongs = nullptr;
     D_ARRAYCREATEFROMREALSFUNC                                        DYNDTWAIN_API::DTWAIN_ArrayCreateFromReals = nullptr;
+    D_ARRAYCREATEFROMSTRINGSAFUNC                                     DYNDTWAIN_API::DTWAIN_ArrayCreateFromStringsA = nullptr;
     D_ARRAYCREATEFROMSTRINGSFUNC                                      DYNDTWAIN_API::DTWAIN_ArrayCreateFromStrings = nullptr;
+    D_ARRAYCREATEFROMSTRINGSWFUNC                                     DYNDTWAIN_API::DTWAIN_ArrayCreateFromStringsW = nullptr;
     D_ARRAYCREATEFUNC                                                 DYNDTWAIN_API::DTWAIN_ArrayCreate = nullptr;
     D_ARRAYDESTROYFRAMESFUNC                                          DYNDTWAIN_API::DTWAIN_ArrayDestroyFrames = nullptr;
     D_ARRAYDESTROYFUNC                                                DYNDTWAIN_API::DTWAIN_ArrayDestroy = nullptr;
@@ -446,11 +448,11 @@
     D_GETFEEDERFUNCSFUNC                                              DYNDTWAIN_API::DTWAIN_GetFeederFuncs = nullptr;
     D_GETFEEDERORDERFUNC                                              DYNDTWAIN_API::DTWAIN_GetFeederOrder = nullptr;
     D_GETFILECOMPRESSIONTYPEFUNC                                      DYNDTWAIN_API::DTWAIN_GetFileCompressionType = nullptr;
-    D_GETFILETYPEEXTENSIONSFUNC                                       DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSAFUNC                                      DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsA = nullptr;
+    D_GETFILETYPEEXTENSIONSFUNC                                       DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSWFUNC                                      DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsW = nullptr;
-    D_GETFILETYPENAMEFUNC                                             DYNDTWAIN_API::DTWAIN_GetFileTypeName = nullptr;
     D_GETFILETYPENAMEAFUNC                                            DYNDTWAIN_API::DTWAIN_GetFileTypeNameA = nullptr;
+    D_GETFILETYPENAMEFUNC                                             DYNDTWAIN_API::DTWAIN_GetFileTypeName = nullptr;
     D_GETFILETYPENAMEWFUNC                                            DYNDTWAIN_API::DTWAIN_GetFileTypeNameW = nullptr;
     D_GETHALFTONEAFUNC                                                DYNDTWAIN_API::DTWAIN_GetHalftoneA = nullptr;
     D_GETHALFTONEFUNC                                                 DYNDTWAIN_API::DTWAIN_GetHalftone = nullptr;
@@ -618,8 +620,8 @@
     D_GETTWAINLANGUAGEVALUEFUNC                                       DYNDTWAIN_API::DTWAIN_GetTwainLanguageValue = nullptr;
     D_GETTWAINLANGUAGEVALUEWFUNC                                      DYNDTWAIN_API::DTWAIN_GetTwainLanguageValueW = nullptr;
     D_GETTWAINMODEFUNC                                                DYNDTWAIN_API::DTWAIN_GetTwainMode = nullptr;
-    D_GETTWAINNAMEFROMCONSTANTFUNC                                    DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstant = nullptr;
     D_GETTWAINNAMEFROMCONSTANTAFUNC                                   DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantA = nullptr;
+    D_GETTWAINNAMEFROMCONSTANTFUNC                                    DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstant = nullptr;
     D_GETTWAINNAMEFROMCONSTANTWFUNC                                   DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantW = nullptr;
     D_GETTWAINSTRINGNAMEAFUNC                                         DYNDTWAIN_API::DTWAIN_GetTwainStringNameA = nullptr;
     D_GETTWAINSTRINGNAMEFUNC                                          DYNDTWAIN_API::DTWAIN_GetTwainStringName = nullptr;
@@ -848,8 +850,8 @@
     D_SETAVAILABLEPRINTERSFUNC                                        DYNDTWAIN_API::DTWAIN_SetAvailablePrinters = nullptr;
     D_SETBITDEPTHFUNC                                                 DYNDTWAIN_API::DTWAIN_SetBitDepth = nullptr;
     D_SETBLANKPAGEDETECTIONEXFUNC                                     DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionEx = nullptr;
-    D_SETBLANKPAGEDETECTIONEXSTRINGFUNC                               DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExString = nullptr;
     D_SETBLANKPAGEDETECTIONEXSTRINGAFUNC                              DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExStringA = nullptr;
+    D_SETBLANKPAGEDETECTIONEXSTRINGFUNC                               DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExString = nullptr;
     D_SETBLANKPAGEDETECTIONEXSTRINGWFUNC                              DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionExStringW = nullptr;
     D_SETBLANKPAGEDETECTIONFUNC                                       DYNDTWAIN_API::DTWAIN_SetBlankPageDetection = nullptr;
     D_SETBLANKPAGEDETECTIONSTRINGAFUNC                                DYNDTWAIN_API::DTWAIN_SetBlankPageDetectionStringA = nullptr;
@@ -1185,6 +1187,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromLongs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromReals, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromStrings, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromStringsA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromStringsW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroy, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroyFrames, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFind, hModule);

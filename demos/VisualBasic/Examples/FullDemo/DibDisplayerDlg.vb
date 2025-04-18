@@ -5,9 +5,6 @@ Imports System.Runtime.InteropServices
 Imports System.Collections.Generic
 
 Public Class DibDisplayerDlg
-    Declare Auto Function GlobalLock Lib "kernel32.DLL" (ByVal handle As Integer) As Integer
-    Declare Auto Function GlobalUnlock Lib "kernel32.dll" (ByVal handle As IntPtr) As Integer
-    Declare Unicode Function GdipCreateBitmapFromGdiDib Lib "GdiPlus.dll" (ByVal pBIH As IntPtr, ByVal pPix As IntPtr, ByRef pBitmap As IntPtr) As Integer
     Declare Auto Function DeleteObject Lib "gdi32.dll" (hObject As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
     Private AcquireArray As System.IntPtr
@@ -47,6 +44,8 @@ Public Class DibDisplayerDlg
             If dib <> 0 Then
                 Me.dibBox.Image = BitmapFromDIB(dib)
                 DibDictionary.Add(keyCurrent, Me.dibBox.Image)
+            Else
+                MessageBox.Show("Image was discarded or not available", "Image not available")
             End If
         End If
         EnablePageButtons()

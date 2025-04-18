@@ -781,6 +781,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_STANDARDCAPS_COMPLIANCY  As Integer = (-1082)
     Public Const DTWAIN_ERR_EXTIMAGEINFO_DATATYPE_MISMATCH As Integer = (-1083)
     Public Const DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL As Integer = (-1084)
+    Public Const DTWAIN_ERR_RANGE_OUTOFBOUNDS As Integer = (-1085)
+    Public Const DTWAIN_ERR_RANGE_STEPISZERO As Integer = (-1086)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
@@ -1048,7 +1050,15 @@ Class DTWAINAPI
     Public Const DTWAIN_EI_MAGDATALENGTH As Integer = &H1248
     Public Const DTWAIN_EI_PAPERCOUNT As Integer = &H1249
     Public Const DTWAIN_EI_PRINTERTEXT As Integer = &H124A
-
+    Public Const DTWAIN_EI_TWAINDIRECTMETADATA As Integer   =  &H124B
+    Public Const DTWAIN_EI_IAFIELDA_VALUE As Integer        =  &H124C
+    Public Const DTWAIN_EI_IAFIELDB_VALUE As Integer        =  &H124D
+    Public Const DTWAIN_EI_IAFIELDC_VALUE As Integer        =  &H124E
+    Public Const DTWAIN_EI_IAFIELDD_VALUE As Integer        =  &H124F
+    Public Const DTWAIN_EI_IAFIELDE_VALUE As Integer        =  &H1250
+    Public Const DTWAIN_EI_IALEVEL As Integer               =  &H1251
+    Public Const DTWAIN_EI_PRINTER As Integer               =  &H1252
+    Public Const DTWAIN_EI_BARCODETEXT2 As Integer          =  &H1253
 
     Public Const DTWAIN_LOG_DECODE_SOURCE As Integer = &H1
     Public Const DTWAIN_LOG_DECODE_DEST As Integer = &H2
@@ -1722,8 +1732,8 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_AcquireToClipboard Lib "dtwain64d.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, nTransferMode As Integer, bDiscardDibs As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
     Declare Auto Function DTWAIN_AddExtImageInfoQuery Lib "dtwain64d.dll" (Source As System.IntPtr, ExtImageInfo As Integer) As Integer
     Declare Auto Function DTWAIN_AddPDFTextEx Lib "dtwain64d.dll" (Source As System.IntPtr, TextElement As System.IntPtr, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_AllocateMemory Lib "dtwain64d.dll" (memSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_AllocateMemoryEx Lib "dtwain64d.dll" (memSize As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_AllocateMemory Lib "dtwain64d.dll" (memSize As System.UInt32) As System.IntPtr
+    Declare Auto Function DTWAIN_AllocateMemoryEx Lib "dtwain64d.dll" (memSize As System.UInt32) As System.IntPtr
     Declare Auto Function DTWAIN_AppHandlesExceptions Lib "dtwain64d.dll" (bSet As Integer) As Integer
     Declare Auto Function DTWAIN_ArrayAdd Lib "dtwain64d.dll" (pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_ArrayAddFloat Lib "dtwain64d.dll" (pArray As System.IntPtr, Val As Double) As Integer

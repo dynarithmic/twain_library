@@ -1,5 +1,26 @@
 DTWAIN Version changes
 
+5.6.3
+
+- Fix code to check for invalid DTWAIN_FRAMEs being passed to DTWAIN_Frame...() functions.
+
+- Fix issue with DTWAIN_RangeGetNearestValue() when using floating point range values.
+
+- Various NULL pointer checks for some DTWAIN API functions that allow pointer values to be
+  passed.
+
+- Add missing TWEI_BARCODETEXTLENGTH to the data returned by utilizing Extended Image Information.
+
+- For DTWAIN_TN_QUERYPAGEDISCARD notification, an additional return value of 2 from this notification
+  allows the current generated page from the TWAIN device to not be destroyed, but will also not 
+  be stored internally by DTWAIN.  This allows applications to take complete control of the generated 
+  page without DTWAIN intervening in the management of the page.  
+
+  In contrast, a return value of 1 from DTWAIN_TN_QUERYPAGEDISCARD keeps both the page generated, 
+  and DTWAIN's handling of the page.  A return value of 0 will always discard the page, including
+  the bitmap data representing the page.
+
+
 5.6.2
 
 - Fix potential exception from occurring when attempting to close a TWAIN source that did not 

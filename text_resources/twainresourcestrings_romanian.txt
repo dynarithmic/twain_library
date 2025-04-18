@@ -13,6 +13,7 @@
 12 Sursa TWAIN trebuie să fie deschisă înainte de a executa comanda.  
 27 Nu s-a putut finaliza scanarea. Rezoluțiile X/Y setate pentru valori diferite  
 28 Nume de fișier specificat invalid  
+32 TWAIN triplet nu a fost executat. Managerul Twain este invalid.
 1000 ***  
 1001 DTWAIN_HANDLE invalid  
 1002 DTWAIN_SOURCE invalid  
@@ -98,6 +99,8 @@
 1082 Eșecul testului de conformitate pentru capabilitățile standard.  
 1083 Neconformitate a tipului de informații extinse despre imagine. Eșec de conformitate TWAIN.
 1084 Eroare la recuperarea informațiilor extinse despre imagine.
+1085 Valoarea DTWAIN_RANGE este în afara limitelor  
+1086 DTWAIN_RANGE are o dimensiune a pasului de 0
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  

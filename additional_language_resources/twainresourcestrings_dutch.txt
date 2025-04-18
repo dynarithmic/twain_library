@@ -13,6 +13,7 @@
 12 TWAIN bron before uitgevoerd bevel.
 27 Niet voleindigde scan.   X/Y Resolutions want verschillende waarden
 28 Kwalijkene File Namen Gespecificeerd
+32 TWAIN-drieling niet uitgevoerd. Ongeldige Twain Manager
 1000 ***
 1001 Kwalijken DTWAIN_HANDLE
 1002 Kwalijken DTWAIN_SOURCE
@@ -98,6 +99,8 @@
 1082 Fout bij de conformiteitstest voor de standaardmogelijkheden.
 1083 Mismatch in het type uitgebreide afbeeldingsinformatie. Fout bij de TWAIN-conformiteit.
 1084 Fout bij het ophalen van uitgebreide afbeeldingsinformatie.
+1085 DTWAIN_RANGE waarde is buiten de grenzen
+1086 DTWAIN_RANGE heeft een stapgrootte van 0
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
