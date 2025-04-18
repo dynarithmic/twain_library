@@ -13,6 +13,7 @@
 12 A fonte TWAIN deve ser aberta antes de executar o comando.  
 27 Não foi possível completar a digitalização. Resoluções X/Y definidas para valores diferentes  
 28 Nome de Arquivo Inválido Especificado  
+32 Triplo TWAIN não executado. Gerenciador Twain inválido.
 1000 ***  
 1001 Manipulador DTWAIN Inválido  
 1002 Fonte DTWAIN Inválida  
@@ -98,6 +99,8 @@
 1082 Falha no teste de conformidade para as capacidades padrão.  
 1083 Incompatibilidade de tipo de Informação de Imagem Estendida. Falha de conformidade TWAIN.  
 1084 Erro ao recuperar Informações de Imagem Estendidas.
+1085 O valor DTWAIN_RANGE está fora dos limites  
+1086 DTWAIN_RANGE tem um tamanho de passo de 0
 1100 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erro  
 1102 Código de Condição TWAIN: Causa desconhecida da falha  

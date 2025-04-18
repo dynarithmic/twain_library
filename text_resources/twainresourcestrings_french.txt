@@ -13,6 +13,7 @@
 12 Source de Twain doit être ouverte au-devant exécuter le commande
 27 Ne pouvions pas parachever échographie.   X/Y ou Résolutions met pour les valeurs différentes
 28 Mauvais Dossier Nomme Spécifié
+32 triplet TWAIN non exécuté. Gestionnaire Twain invalide.
 1000 ***
 1001 Invalide DTWAIN_HANDLE
 1002 Invalide DTWAIN_SOURCE
@@ -98,6 +99,8 @@
 1082 Échec du test de conformité pour les capacités standard.  
 1083 Incompatibilité de type d'informations d'image étendues. Échec de conformité TWAIN.
 1084 Erreur lors de la récupération des informations d'image étendues.
+1085 La valeur DTWAIN_RANGE est hors des limites  
+1086 DTWAIN_RANGE a une taille de pas de 0
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

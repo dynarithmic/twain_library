@@ -47,8 +47,8 @@ namespace dynarithmic
                 friend extendedimage_info;
                 uint32_t count = 0;
                 enum { CONFIDENCE_SUPPORTED, ROTATION_SUPPORTED, XCOORDINATE_SUPPORTED,
-                       YCOORDINATE_SUPPORTED, TYPE_SUPPORTED, TEXT_SUPPORTED };
-                std::bitset<6> m_supported = {};
+                       YCOORDINATE_SUPPORTED, TYPE_SUPPORTED, TEXTLENGTH_SUPPORTED, TEXT_SUPPORTED};
+                std::bitset<TEXT_SUPPORTED + 1> m_supported = {};
                 class barcode_single_info
                 {
                     friend extendedimage_info;
@@ -57,6 +57,7 @@ namespace dynarithmic
                     uint32_t m_xCoordinate = 0;
                     uint32_t m_yCoordinate = 0;
                     uint32_t m_type = 0;
+                    uint32_t m_length = 0;
                     std::string m_text;
 
                 public:
@@ -83,6 +84,11 @@ namespace dynarithmic
                     uint32_t get_type() const
                     {
                         return m_type;
+                    }
+
+                    uint32_t get_length() const
+                    {
+                        return m_length;
                     }
 
                     std::string get_typename() const
@@ -131,6 +137,11 @@ namespace dynarithmic
                 bool is_text_supported() const
                 {
                     return m_supported[TEXT_SUPPORTED];
+                }
+
+                bool is_text_length_supported() const
+                {
+                    return m_supported[TEXTLENGTH_SUPPORTED];
                 }
 
             private:

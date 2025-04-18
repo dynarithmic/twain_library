@@ -837,6 +837,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_STANDARDCAPS_COMPLIANCY   = (-1082);
         public const int DTWAIN_ERR_EXTIMAGEINFO_DATATYPE_MISMATCH = (-1083);
         public const int DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL = (-1084);
+        public const int DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085);
+        public const int DTWAIN_ERR_RANGE_STEPISZERO  = (-1086);
 
         public const  int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const  int TWAIN_ERR_FALSE_ALARM = (-1101);
@@ -1094,6 +1096,26 @@ namespace Dynarithmic
         public const  int DTWAIN_EI_FRAMENUMBER = 0x123D;
         public const  int DTWAIN_EI_FRAME = 0x123E;
         public const  int DTWAIN_EI_PIXELFLAVOR = 0x123F;
+        public const int DTWAIN_EI_ICCPROFILE           =  0x1240;
+        public const int DTWAIN_EI_LASTSEGMENT          =  0x1241;
+        public const int DTWAIN_EI_SEGMENTNUMBER        =  0x1242;
+        public const int DTWAIN_EI_MAGDATA              =  0x1243;
+        public const int DTWAIN_EI_MAGTYPE              =  0x1244;
+        public const int DTWAIN_EI_PAGESIDE               =  0x1245;
+        public const int DTWAIN_EI_FILESYSTEMSOURCE       =  0x1246;
+        public const int DTWAIN_EI_IMAGEMERGED            =  0x1247;
+        public const int DTWAIN_EI_MAGDATALENGTH          =  0x1248;
+        public const int DTWAIN_EI_PAPERCOUNT             =  0x1249;
+        public const int DTWAIN_EI_PRINTERTEXT            =  0x124A;
+        public const int DTWAIN_EI_TWAINDIRECTMETADATA    =  0x124B;
+        public const int DTWAIN_EI_IAFIELDA_VALUE         =  0x124C;
+        public const int DTWAIN_EI_IAFIELDB_VALUE         =  0x124D;
+        public const int DTWAIN_EI_IAFIELDC_VALUE         =  0x124E;
+        public const int DTWAIN_EI_IAFIELDD_VALUE         =  0x124F;
+        public const int DTWAIN_EI_IAFIELDE_VALUE         =  0x1250;
+        public const int DTWAIN_EI_IALEVEL                =  0x1251;
+        public const int DTWAIN_EI_PRINTER                =  0x1252;
+        public const int DTWAIN_EI_BARCODETEXT2           =  0x1253;
 
         public const int DTWAIN_LOG_DECODE_SOURCE = 0x1      ;
         public const int DTWAIN_LOG_DECODE_DEST = 0x2        ;
@@ -1796,11 +1818,11 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  DTWAIN_HANDLE DTWAIN_AllocateMemory(int memSize);
+        public static extern  DTWAIN_HANDLE DTWAIN_AllocateMemory(uint memSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern  DTWAIN_HANDLE DTWAIN_AllocateMemoryEx(int memSize);
+        public static extern  DTWAIN_HANDLE DTWAIN_AllocateMemoryEx(uint memSize);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto,
         ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
