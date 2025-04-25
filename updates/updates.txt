@@ -6,9 +6,7 @@ DTWAIN Version changes
   immediately unloaded from the application when determined that the invalid DSM cannot be 
   utilized by DTWAIN.
 
-- Remove unused imaging code.  This results in the DTWAIN DLL's being reduced by at least 
-  100K bytes in size.
-
+- Remove unused imaging code.  
 
 5.6.3
 
