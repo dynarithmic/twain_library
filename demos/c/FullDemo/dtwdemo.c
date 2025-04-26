@@ -94,6 +94,7 @@ typedef struct
 
 AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("BMP File (RLE)"), DTWAIN_BMP_RLE, _T("test.bmp")},
+                            {_T("PCX File"),DTWAIN_PCX, _T("test.pcx")},
                             {_T("Multi-page DCX File"),DTWAIN_DCX, _T("test.dcx")},
                             {_T("Enhanced Meta File (EMF)"),DTWAIN_EMF, _T("test.emf")},
                             {_T("GIF File"), DTWAIN_GIF, _T("test.gif")},
