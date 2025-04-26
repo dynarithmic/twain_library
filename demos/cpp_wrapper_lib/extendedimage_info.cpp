@@ -549,7 +549,7 @@ namespace dynarithmic
                 if (m_pagesourceInfo.m_supported[i])
                 {
                     bool bRet = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), aAllData[i].second, &aValues);
-                    if (bRet && aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+                    if (bRet && aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                     {
                         twain_array ta;
                         ta.set_array(aValues);
@@ -568,7 +568,7 @@ namespace dynarithmic
                     twain_array ta;
                     ta.set_array(aFrame);
                     twain_frame frame;
-                    DTWAIN_FrameGetAll(aFrame, &frame.left, &frame.top, &frame.right, &frame.bottom);
+                    API_INSTANCE DTWAIN_FrameGetAll(aFrame, &frame.left, &frame.top, &frame.right, &frame.bottom);
                     m_pagesourceInfo.m_frame = frame;
                 }
             }
@@ -619,7 +619,7 @@ namespace dynarithmic
                 if (m_imagesegmentationInfo.m_supported[i])
                 {
                     bool bRet = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), aAllData[i].second, &aValues);
-                    if (bRet && aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+                    if (bRet && aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                     {
                         twain_array ta;
                         ta.set_array(aValues);
@@ -636,7 +636,7 @@ namespace dynarithmic
                 if (m_imagesegmentationInfo.m_supported[i])
                 {
                     bool bRet = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), aAllData[i].second, &aValues);
-                    if (bRet && aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+                    if (bRet && aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                     {
                         twain_array ta;
                         ta.set_array(aValues);
@@ -663,7 +663,7 @@ namespace dynarithmic
 
             DTWAIN_ARRAY aMagType = {};
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_MAGTYPE, &aMagType);
-            if (aMagType && DTWAIN_ArrayGetCount(aMagType) > 0)
+            if (aMagType && API_INSTANCE DTWAIN_ArrayGetCount(aMagType) > 0)
             {
                 twain_array ta;
                 ta.set_array(aMagType);
@@ -693,15 +693,15 @@ namespace dynarithmic
             twain_array ta;
             ta.set_array(aValues);
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_MAGDATALENGTH, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
             {
                 LONG lVal = 0;
-                DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
+                API_INSTANCE DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
                 m_extendedimageinfo21.m_maglength = static_cast<uint32_t>(lVal);
             }
 
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_MAGDATA, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
             {
                 auto strData = get_text_from_info(aValues, 0);
                 strData.pop_back();
@@ -709,22 +709,22 @@ namespace dynarithmic
             }
 
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_FILESYSTEMSOURCE, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                 m_extendedimageinfo21.m_fileSystemSource = get_text_from_info(aValues, 0);
 
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_PAGESIDE, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
             {
                 LONG lVal = 0;
-                DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
+                API_INSTANCE DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
                 m_extendedimageinfo21.m_pageSide = static_cast<TW_UINT16>(lVal);
             }
 
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_IMAGEMERGED, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
             {
                 LONG lVal = 0;
-                DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
+                API_INSTANCE DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
                 m_extendedimageinfo21.m_bImageMerged = lVal;
             }
         }
@@ -748,10 +748,10 @@ namespace dynarithmic
             twain_array ta;
             ta.set_array(aValues);
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_PAPERCOUNT, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
             {
                 LONG lVal = 0;
-                DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
+                API_INSTANCE DTWAIN_ArrayGetAtLong(aValues, 0, &lVal);
                 m_extendedimageinfo22.paperCount = static_cast<uint32_t>(lVal);
             }
         }
@@ -775,7 +775,7 @@ namespace dynarithmic
             twain_array ta;
             ta.set_array(aValues);
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_PRINTERTEXT, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                 m_extendedimageinfo23.m_printerText = get_text_from_info(aValues, 0);
         }
 
@@ -798,7 +798,7 @@ namespace dynarithmic
             twain_array ta;
             ta.set_array(aValues);
             API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), TWEI_TWAINDIRECTMETADATA, &aValues);
-            if (aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+            if (aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                 m_extendedimageinfo24.m_twaindirectdata = get_text_from_info(aValues, 0);
         }
 
@@ -857,7 +857,7 @@ namespace dynarithmic
                 if (m_extendedimageinfo25.m_supported[i])
                 {
                     bool bRet = API_INSTANCE DTWAIN_GetExtImageInfoData(m_pSource->get_source(), aAllData[i].second, &aValues);
-                    if (bRet && aValues && DTWAIN_ArrayGetCount(aValues) > 0)
+                    if (bRet && aValues && API_INSTANCE DTWAIN_ArrayGetCount(aValues) > 0)
                     {
                         twain_array ta;
                         ta.set_array(aValues);
