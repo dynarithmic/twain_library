@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //    This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-//    Copyright (c) 2002-2024 Dynarithmic Software.
+//    Copyright (c) 2002-2025 Dynarithmic Software.
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -862,6 +862,25 @@
 #define DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND (-1066)
 #define DTWAIN_ERR_UNAVAILABLE_EXTINFO (-1067)
 #define DTWAIN_ERR_TWAINDSM2_BADBITMAP (-1068)
+#define DTWAIN_ERR_ACQUISITION_CANCELED (-1069)
+#define DTWAIN_ERR_IMAGE_RESAMPLED (-1070)
+#define DTWAIN_ERR_UNKNOWN_TWAIN_RC (-1071)
+#define DTWAIN_ERR_UNKNOWN_TWAIN_CC (-1072)
+#define DTWAIN_ERR_RESOURCES_DATA_EXCEPTION (-1073)
+#define DTWAIN_ERR_AUDIO_TRANSFER_NOTSUPPORTED (-1074)
+#define DTWAIN_ERR_FEEDER_COMPLIANCY (-1075)
+#define DTWAIN_ERR_SUPPORTEDCAPS_COMPLIANCY1 (-1076)
+#define DTWAIN_ERR_SUPPORTEDCAPS_COMPLIANCY2 (-1077)
+#define DTWAIN_ERR_ICAPPIXELTYPE_COMPLIANCY1 (-1078)
+#define DTWAIN_ERR_ICAPPIXELTYPE_COMPLIANCY2 (-1079)
+#define DTWAIN_ERR_ICAPBITDEPTH_COMPLIANCY1 (-1080)
+#define DTWAIN_ERR_XFERMECH_COMPLIANCY      (-1081)
+#define DTWAIN_ERR_STANDARDCAPS_COMPLIANCY  (-1082)
+#define DTWAIN_ERR_EXTIMAGEINFO_DATATYPE_MISMATCH (-1083)
+#define DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL (-1084)
+#define DTWAIN_ERR_RANGE_OUTOFBOUNDS      (-1085)
+#define DTWAIN_ERR_RANGE_STEPISZERO       (-1086)
+#define DTWAIN_ERR_BLANKNAMEDETECTED   (-1087)
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1157,6 +1176,14 @@
 #define DTWAIN_EI_PAPERCOUNT             0x1249
 #define DTWAIN_EI_PRINTERTEXT            0x124A
 #define DTWAIN_EI_TWAINDIRECTMETADATA    0x124B
+#define DTWAIN_EI_IAFIELDA_VALUE         0x124C
+#define DTWAIN_EI_IAFIELDB_VALUE         0x124D
+#define DTWAIN_EI_IAFIELDC_VALUE         0x124E
+#define DTWAIN_EI_IAFIELDD_VALUE         0x124F
+#define DTWAIN_EI_IAFIELDE_VALUE         0x1250
+#define DTWAIN_EI_IALEVEL                0x1251
+#define DTWAIN_EI_PRINTER                0x1252
+#define DTWAIN_EI_BARCODETEXT2           0x1253
 
 /* TWAIN Data Source Error logging functions */
 #define DTWAIN_LOG_DECODE_SOURCE      0x00000001
@@ -1573,6 +1600,12 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWDF     70
 #define DTWAIN_CONSTANT_TWFM     71
 #define DTWAIN_CONSTANT_TWSG     72
+#define DTWAIN_CONSTANT_DTWAIN_TN 73
+#define DTWAIN_CONSTANT_TWON     74
+#define DTWAIN_CONSTANT_TWMF     75
+#define DTWAIN_CONSTANT_TWSX     76
+#define DTWAIN_CONSTANT_CAP      77
+#define DTWAIN_CONSTANT_ICAP     78
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

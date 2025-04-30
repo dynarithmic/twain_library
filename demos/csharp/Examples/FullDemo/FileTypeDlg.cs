@@ -34,6 +34,7 @@ namespace TWAINDemo
 
         private AllTypes[] g_allTypes = {new AllTypes("BMP File", TwainAPI.DTWAIN_BMP, "test.bmp"),
                                  new AllTypes("BMP RLE File",TwainAPI.DTWAIN_BMP_RLE, "testrle.bmp"),
+                                 new AllTypes("PCX File",TwainAPI.DTWAIN_PCX, "test.pcx"),
                                  new AllTypes("Multi-page DCX File",TwainAPI.DTWAIN_DCX, "test.dcx"),
                                  new AllTypes("Enhanced Meta File (EMF)",TwainAPI.DTWAIN_EMF, "test.emf"),
                                  new AllTypes("GIF File", TwainAPI.DTWAIN_GIF, "test.gif"),

@@ -101,6 +101,7 @@
 1084 Error retrieving Extended Image Information.
 1085 DTWAIN_RANGE value is out of bounds
 1086 DTWAIN_RANGE has a step size of 0
+1087 Empty or blank name was detected
 
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error

@@ -783,6 +783,7 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL As Integer = (-1084)
     Public Const DTWAIN_ERR_RANGE_OUTOFBOUNDS As Integer = (-1085)
     Public Const DTWAIN_ERR_RANGE_STEPISZERO As Integer = (-1086)
+    Public Const DTWAIN_ERR_BLANKNAMEDETECTED As Integer = (-1087)
 
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
