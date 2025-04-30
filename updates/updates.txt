@@ -6,7 +6,15 @@ DTWAIN Version changes
   immediately unloaded from the application when determined that the invalid DSM cannot be 
   utilized by DTWAIN.
 
-- Remove unused imaging code.  
+- Remove unused imaging code.  This results in the DTWAIN DLL's being reduced by at least 
+  100K bytes in size.
+
+- Allow DTWAIN_SetDSMSearchOrderEx() to be recognized before calling DTWAIN_SysInitialize().
+  This will allow querying for the availability of the TWAIN DSM using DTWAIN_IsTwainAvailable(),
+  using a user-defined search logic for the TWAIN DSM DLL files, all before calling 
+  DTWAIN_SysInitialize().  Before version 5.6.4, DTWAIN_SysInitialize() must always be called before 
+  calling DTWAIN_SetDSMSearchOrderEx().
+
 
 5.6.3
 

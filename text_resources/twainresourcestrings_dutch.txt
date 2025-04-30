@@ -101,6 +101,7 @@
 1084 Fout bij het ophalen van uitgebreide afbeeldingsinformatie.
 1085 DTWAIN_RANGE waarde is buiten de grenzen
 1086 DTWAIN_RANGE heeft een stapgrootte van 0
+1087 Leeg of blanco naam gedetecteerd
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
