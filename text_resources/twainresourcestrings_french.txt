@@ -101,6 +101,7 @@
 1084 Erreur lors de la récupération des informations d'image étendues.
 1085 La valeur DTWAIN_RANGE est hors des limites  
 1086 DTWAIN_RANGE a une taille de pas de 0
+1087 Un nom vide ou vide a été détecté
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
