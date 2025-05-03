@@ -40,6 +40,8 @@ TCHAR         g_LogFileName[MAX_PATH];
 void SelectTheSource(int nWhich);
 void EnableSourceItems(BOOL bEnable);
 void EnableSelectSourceItems(BOOL bEnable);
+void EnableAllMenuItems(BOOL bEnable);
+void EnableBarcodeAndFileXferItems(DTWAIN_SOURCE source);
 DTWAIN_SOURCE DisplayGetNameDlg();
 DTWAIN_SOURCE DisplayCustomDlg();
 void DisplaySourceProps();
@@ -94,6 +96,7 @@ typedef struct
 
 AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("BMP File (RLE)"), DTWAIN_BMP_RLE, _T("test.bmp")},
+                            {_T("PCX File"),DTWAIN_PCX, _T("test.pcx")},
                             {_T("Multi-page DCX File"),DTWAIN_DCX, _T("test.dcx")},
                             {_T("Enhanced Meta File (EMF)"),DTWAIN_EMF, _T("test.emf")},
                             {_T("GIF File"), DTWAIN_GIF, _T("test.gif")},
@@ -152,6 +155,23 @@ AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("engli
                                  {ID_LANGUAGE_JAPANESE              , _T("japanese")},
                                  {ID_LANGUAGE_KOREAN                , _T("korean")}
                                 };
+
+UINT g_AllMenuItems[] = { IDM_SELECT_SOURCE,
+                          IDM_SELECT_SOURCE_BY_NAME,
+                          IDM_SELECT_DEFAULT_SOURCE,
+                          IDM_SELECT_SOURCE_CUSTOM,
+                          IDM_SOURCE_PROPS,
+                          IDM_CLOSE_SOURCE,
+                          IDM_EXIT,
+                          IDM_ACQUIRE_NATIVE,
+                          IDM_ACQUIRE_BUFFERED,
+                          IDM_ACQUIRE_FILE_DTWAIN,
+                          IDM_ACQUIRE_FILE_SOURCE,
+                          IDM_SHOW_PREVIEW,
+                          IDM_USE_SOURCE_UI,
+                          IDM_DISCARD_BLANKS,
+                          IDM_SHOW_BARCODEINFO };
+
 TCHAR g_CustomLanguage[256];
 
 int APIENTRY WinMain(HINSTANCE hInstance,
@@ -301,15 +321,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
 
                 case IDM_ACQUIRE_NATIVE:
+                    EnableAllMenuItems(FALSE);
                     AcquireNative();
+                    EnableAllMenuItems(TRUE);
                 break;
 
                 case IDM_ACQUIRE_BUFFERED:
+                    EnableAllMenuItems(FALSE);
                     AcquireBuffered();
+                    EnableAllMenuItems(TRUE);
                 break;
-
                 case IDM_ACQUIRE_FILE_DTWAIN:
+                    EnableAllMenuItems(FALSE);
                     AcquireFile(FALSE);
+                    EnableAllMenuItems(TRUE);
                 break;
 
                 case IDM_ACQUIRE_FILE_SOURCE:
@@ -358,12 +383,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
 
                 case IDM_EXIT:
-                   DestroyWindow(hWnd);
-                   break;
+                    if (!DTWAIN_IsAcquiring())
+                        DestroyWindow(hWnd);
+                    else
+                        MessageBox(NULL, _T("Cannot close application.  Images are still being acquired.\r\nPlease close the device user interface."), _T("Device is acquiring"), MB_OK);
+                    return 0;
                 default:
                    return DefWindowProc(hWnd, message, wParam, lParam);
             }
             break;
+        case WM_CLOSE:
+            if (!DTWAIN_IsAcquiring())
+                DestroyWindow(hWnd);
+            else
+                MessageBox(NULL, _T("Cannot close application.  Images are still being acquired.\r\nPlease close the device user interface."), _T("Device is acquiring"), MB_OK);
+            return 0;
+        break;
+
         case WM_DESTROY:
             PostQuitMessage(0);
             break;
@@ -456,14 +492,9 @@ void SelectTheSource(int nWhich)
     {
         if ( DTWAIN_OpenSource(tempSource) )
         {
-            if ( !DTWAIN_IsExtImageInfoSupported(tempSource) )
-                EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
-            else
-                EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND| MF_ENABLED);
-            g_CurrentSource = tempSource;
+            EnableBarcodeAndFileXferItems(tempSource);
             EnableSourceItems(TRUE);
-            if ( !DTWAIN_IsFileXferSupported(tempSource, DTWAIN_ANYSUPPORT))
-                EnableMenuItem(g_Menu, IDM_ACQUIRE_FILE_SOURCE, MF_BYCOMMAND | MF_GRAYED);
+            g_CurrentSource = tempSource;
             SetCaptionToSourceName();
             DTWAIN_EnableFeeder(tempSource, TRUE);
         }
@@ -1550,3 +1581,27 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
     return 1;
 }
 
+void EnableAllMenuItems(BOOL bEnable)
+{
+    const int numItems = sizeof(g_AllMenuItems) / sizeof(g_AllMenuItems[0]);
+    int i = 0;
+    UINT nOptions;
+    if (!bEnable)
+        nOptions = MF_BYCOMMAND | MF_GRAYED;
+    else
+        nOptions = MF_BYCOMMAND | MF_ENABLED;
+    EnableMenuItem(g_Menu, IDC_DTWDEMO, nOptions);
+    for (i = 0; i < numItems; ++i)
+        EnableMenuItem(g_Menu, g_AllMenuItems[i], nOptions);
+    EnableBarcodeAndFileXferItems(g_CurrentSource);
+}
+
+void EnableBarcodeAndFileXferItems(DTWAIN_SOURCE source)
+{
+    if (!DTWAIN_IsExtImageInfoSupported(source))
+        EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
+    else
+        EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_ENABLED);
+    if (!DTWAIN_IsFileXferSupported(source, DTWAIN_ANYSUPPORT))
+        EnableMenuItem(g_Menu, IDM_ACQUIRE_FILE_SOURCE, MF_BYCOMMAND | MF_GRAYED);
+}
