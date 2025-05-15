@@ -1501,6 +1501,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWAINDSMSEARCH_OW                13
 #define DTWAIN_TWAINDSMSEARCH_OS                14
 #define DTWAIN_TWAINDSMSEARCH_C                 15
+#define DTWAIN_TWAINDSMSEARCH_U                 16
 
 #define DTWAIN_PDFPOLARITY_POSITIVE             1
 #define DTWAIN_PDFPOLARITY_NEGATIVE             2

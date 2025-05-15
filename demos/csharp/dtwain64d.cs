@@ -1318,6 +1318,9 @@ namespace Dynarithmic
         public const  int DTWAIN_TWAINDSMSEARCH_SO = 12;
         public const  int DTWAIN_TWAINDSMSEARCH_OW = 13;
         public const  int DTWAIN_TWAINDSMSEARCH_OS = 14;
+        public const  int DTWAIN_TWAINDSMSEARCH_C = 15;
+        public const  int DTWAIN_TWAINDSMSEARCH_U = 16;
+
         public const  int DTWAIN_PDFPOLARITY_POSITIVE = 1;
         public const  int DTWAIN_PDFPOLARITY_NEGATIVE = 2;
         public const  int DTWAIN_TWPF_NORMAL = 0;
