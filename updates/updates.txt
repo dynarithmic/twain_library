@@ -1,5 +1,17 @@
 DTWAIN Version changes
 
+5.6.5
+
+- Fix issue with missing TWAIN log header information.
+
+- Fix issue with truncated DTWAIN version information being saved in 
+  generated image files.
+
+- Small speed optimization for DTWAIN_IsCapSupported().
+
+- Internal code refactoring and cleanup.
+
+
 5.6.4
 
 - Ensure that invalid TWAIN Data Source Manager DLL's that attempt to be loaded at runtime are 
