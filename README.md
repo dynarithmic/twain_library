@@ -98,7 +98,7 @@ If you will install the Visual C++ Runtime yourself, or assume that the systems 
 
 To distinguish between whether the full or partial logging DLL's are in use (since the names of the DTWAIN DLL's themselves are the same, regardless of which ones are used), see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
-In addition, the release version of the Program Database (.PDB) files are available.  This will aid in debugging any issues involving DTWAIN.
+In addition, the [release version of the Program Database (.PDB) files](https://github.com/dynarithmic/dtwain-pdb) are available.  This will aid in debugging any issues involving DTWAIN.
 
 ----
 
