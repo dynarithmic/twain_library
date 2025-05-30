@@ -180,7 +180,7 @@ DTWAIN Version changes
 - Ensure setting string capabilities uses ANSI strings.
 
 - Change parameters to certain API functions from LONG to DWORD to delineate signed versus unsigned values.  
-  The sizes of LONG and DWORD, the only difference is that DWORD is an unsigned 32-bit integer 
+  The sizes of LONG and DWORD are always equal, the only difference is that DWORD is an unsigned 32-bit integer 
   while LONG is a signed 32-bit integer.
 
 - Add Japanese, Traditional Chinese, and Greek text resources.
