@@ -9,7 +9,7 @@ DTWAIN Version changes
 
 - Small speed optimization for DTWAIN_IsCapSupported().
 
-- Internal code refactoring and cleanup.
+- Internal code refactoring and cleanup, resulting in smaller DLL files.
 
 
 5.6.4
