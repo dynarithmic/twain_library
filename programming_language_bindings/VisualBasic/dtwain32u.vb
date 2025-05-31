@@ -1260,6 +1260,9 @@ Class DTWAINAPI
     Public Const DTWAIN_TWAINDSMSEARCH_SO As Integer = 12
     Public Const DTWAIN_TWAINDSMSEARCH_OW As Integer = 13
     Public Const DTWAIN_TWAINDSMSEARCH_OS As Integer = 14
+    Public Const DTWAIN_TWAINDSMSEARCH_C As Integer = 15
+    Public Const DTWAIN_TWAINDSMSEARCH_U As Integer = 16
+
     Public Const DTWAIN_PDFPOLARITY_POSITIVE As Integer = 1
     Public Const DTWAIN_PDFPOLARITY_NEGATIVE As Integer = 2
     Public Const DTWAIN_TWPF_NORMAL As Integer = 0

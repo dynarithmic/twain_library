@@ -203,6 +203,7 @@
 2070 DTWIMG32.DLL nu a fost găsit  
 2071 Versiune greșită a DTWIMG32.DLL  
 2072 Mod Duplex manual indisponibil în această versiune a DTWAIN  
+2073 Operațiunea a expirat.
 2074 Lățime/înălțime bitmap invalidă pentru formatul ICO non-Vista Windows  
 2075 TWAIN_32.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis  
 2076 TWAINDSM.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis  

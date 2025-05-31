@@ -203,6 +203,7 @@
 2070 找不到 DTWIMG32.DLL  
 2071 DTWIMG32.DLL 版本錯誤  
 2072 此版本的 DTWAIN 不支持手動雙面模式  
+2073 操作已超時
 2074 無效的非 Vista Windows ICO 格式的位圖寬度/高度  
 2075 找不到 TWAIN_32.DLL 或指定的 TWAIN 數據源管理器，已損壞或無法打開  
 2076 找不到 TWAINDSM.DLL 或指定的 TWAIN 數據源管理器，已損壞或無法打開  
