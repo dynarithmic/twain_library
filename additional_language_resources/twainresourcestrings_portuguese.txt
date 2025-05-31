@@ -203,6 +203,7 @@
 2070 DTWIMG32.DLL não encontrado  
 2071 Versão errada do DTWIMG32.DLL  
 2072 Modo duplex manual indisponível nesta versão do DTWAIN  
+2073 A operação expirou
 2074 Largura/altura de bitmap inválida para o formato ICO do Windows não-Vista  
 2075 TWAIN_32.DLL ou Gerenciador de Fonte de Dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto  
 2076 TWAINDSM.DLL ou Gerenciador de Fonte de Dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto  
