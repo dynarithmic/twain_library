@@ -134,7 +134,7 @@ Basically, you just need to build your application and link it to one of the imp
 
 After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
 
-[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
+[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order)).
 
 In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a>, the <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain32.ini" target="_blank">dtwain32.ini</a> for 32-bit applications, and <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain64.ini" target="_blank">dtwain64.ini</a> for 64-bit applications </a> must also be available (by default, these files should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, these files can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
