@@ -13,6 +13,14 @@ DTWAIN Version changes
 - Ensure that TWAIN sources are not re-enumerated if already enumerated by previous DTWAIN
   functions.
 
+- Removed unnecessary calls to the TWAIN logger if logging is not enabled.
+
+- Removed some extraneous carriage returns when logging information.
+
+- TWAIN condition codes are now only queried when TWRC_FAILURE is returned from the
+  TWAIN Data Source Manager.  This is a change that alters the behavior that is detailed 
+  in the version 5.6.1 update.
+
 
 5.6.5
 
