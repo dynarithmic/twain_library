@@ -17,5 +17,6 @@ Public Class AboutDlg
         Dim szInfo As New System.Text.StringBuilder(nChars)
         DTWAINAPI.DTWAIN_GetVersionInfo(szInfo, nChars)
         edInfo.Text = szInfo.ToString()
+        edInfo.Text = edInfo.Text.Replace(vbLf, vbCrLf)
     End Sub
 End Class
