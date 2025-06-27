@@ -1,31 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dynarithmic;
-using System.Runtime.InteropServices;
 using DTWAIN_SOURCE = System.IntPtr;
 using DTWAIN_ARRAY = System.IntPtr;
-
 
 namespace TWAINDemo
 {
 
     public partial class SourcePropsDlg : Form
     {
-        [DllImport("kernel32.dll")]
-        static extern IntPtr GlobalLock(IntPtr hMem);
-
-        [DllImport("kernel32.dll")]
-        static extern bool GlobalUnlock(IntPtr hMem);
-
-        [DllImport("kernel32.dll")]
-        static extern IntPtr GlobalFree(IntPtr hMem);
         public SourcePropsDlg()
         {
             InitializeComponent();
@@ -89,18 +73,8 @@ namespace TWAINDemo
             szInfo = new StringBuilder(nBytes);
             TwainAPI.DTWAIN_GetSourceDetails(sName, szInfo, nBytes, 2, 1);
 
-            // Need to convert the JSON new lines to /r/n for edit controls
-            IntPtr handle = TwainAPI.DTWAIN_ConvertToAPIString(szInfo.ToString());
-
-            // We get a handle back, so need to convert it to string by using
-            // Windows API
-            IntPtr newData = GlobalLock(handle);
-            string sNewData = Marshal.PtrToStringAuto(newData);
-            this.txtJSON.Text = sNewData;
-
-            // unlock and free handle
-            GlobalUnlock(handle);
-            GlobalFree(handle);
+            // Need to convert the JSON new lines to \r\n for edit controls
+            this.txtJSON.Text = szInfo.ToString().Replace("\n", "\r\n");
         }
     }
 }
