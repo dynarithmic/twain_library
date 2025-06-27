@@ -1,5 +1,27 @@
 DTWAIN Version changes
 
+5.6.6
+
+- Upgraded following internal image libraries:
+
+    libpng   --> 1.6.48
+
+- If DTWAIN_SysInitializeNoBlocking() is called and returns 0, an errorlog*.txt file is
+  created in the directory where the text resources would be found.  The file will 
+  describes the error if DTWAIN could not be initialized.
+
+- Ensure that TWAIN sources are not re-enumerated if already enumerated by previous DTWAIN
+  functions.
+
+- Removed unnecessary calls to the TWAIN logger if logging is not enabled.
+
+- Removed some extraneous carriage returns when logging information.
+
+- TWAIN condition codes are now only queried when TWRC_FAILURE is returned from the
+  TWAIN Data Source Manager.  This is a change that alters the behavior that is detailed 
+  in the version 5.6.1 update.
+
+
 5.6.5
 
 - Fix issue with missing TWAIN log header information.
@@ -180,7 +202,7 @@ DTWAIN Version changes
 - Ensure setting string capabilities uses ANSI strings.
 
 - Change parameters to certain API functions from LONG to DWORD to delineate signed versus unsigned values.  
-  The sizes of LONG and DWORD are always equal, the only difference is that DWORD is an unsigned 32-bit integer 
+  The sizes of LONG and DWORD, the only difference is that DWORD is an unsigned 32-bit integer 
   while LONG is a signed 32-bit integer.
 
 - Add Japanese, Traditional Chinese, and Greek text resources.

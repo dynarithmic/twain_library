@@ -43,6 +43,7 @@ int Runner::Run()
             std::cout << "Device does not support custom DS data.\n";
         else
         {
+            std::cout << "There are " << cData.size() << " bytes of custom DS data\n";
             std::cout << "The custom data for device is:\n";
             std::cout.write((char*)cData.data(), cData.size());
 
