@@ -167,8 +167,8 @@ More detailed instructions on adding your own resource file can be found <a href
 
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
-    #include "dtwain.h"
     #include <iostream>
+    #include "dtwain.h"
 
     int main()
     {
