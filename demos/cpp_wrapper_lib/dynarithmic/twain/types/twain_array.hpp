@@ -309,7 +309,7 @@ namespace dynarithmic
                 std::vector<twain_frame<>> vFrm(1);
                 for (size_t i = 0; i < sz; ++i)
                 {
-                    API_INSTANCE DTWAIN_ArrayFrameGetAt(ta.get_array(), static_cast<LONG>(i), 
+                    API_INSTANCE DTWAIN_ArrayGetAtFrame(ta.get_array(), static_cast<LONG>(i), 
                                                         &(vFrm[0].left), 
                                                         &(vFrm[0].top), 
                                                         &(vFrm[0].right),
@@ -370,7 +370,7 @@ namespace dynarithmic
             {
                 ta.set_array(API_INSTANCE DTWAIN_ArrayCreateFromCap(theSource, cap_value, static_cast<LONG>(C.size())));
                 for (size_t i = 0; i < C.size(); ++i)
-                    API_INSTANCE DTWAIN_ArrayFrameSetAt(ta.get_array(), static_cast<LONG>(i), C[i].left, C[i].top, C[i].right, C[i].bottom);
+                    API_INSTANCE DTWAIN_ArraySetAtFrame(ta.get_array(), static_cast<LONG>(i), C[i].left, C[i].top, C[i].right, C[i].bottom);
             }
 
             template <typename T, typename Container, typename std::enable_if<
