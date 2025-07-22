@@ -174,6 +174,7 @@ BEGIN
     EDITTEXT        IDC_edDSData,258,15,153,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
     GROUPBOX        "JSON Details",IDC_STATIC,433,4,199,217
     EDITTEXT        IDC_edJSONDetails,438,15,189,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    PUSHBUTTON      "Test Capability (Get)...",IDC_btnTestCap,135,164,81,14
 END
 
 #include "dibdisplay.rc"
@@ -214,7 +215,7 @@ BEGIN
     CONTROL         "No Logging",IDC_radNoLogging,"Button",BS_AUTORADIOBUTTON,13,20,51,10
     CONTROL         "Log to File:",IDC_radLogToFile,"Button",BS_AUTORADIOBUTTON,13,46,51,10
     CONTROL         "Log to Debug Monitor",IDC_radToMonitor,"Button",BS_AUTORADIOBUTTON,13,70,85,10
-    CONTROL         "Log to Console",IDC_radToConsole,"Button",BS_AUTORADIOBUTTON,13,96,85,10
+    CONTROL         "Log to Console", IDC_radToConsole, "Button", BS_AUTORADIOBUTTON, 13, 96, 85, 10
 END
 
 IDD_dlgBarCodes DIALOGEX 0, 0, 309, 176
@@ -226,6 +227,27 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,252,155,50,14
     EDITTEXT        IDC_edBarCodes,15,15,278,134,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
+
+IDD_dlgTestCap DIALOGEX 0, 0, 349, 196
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Test Capability"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_cmbGetTypes,23,36,77,60,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbContainer,112,36,106,68,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbDataType,243,36,68,67,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Start test ",IDC_btnTest,104,60,50,14
+    PUSHBUTTON      "Reset to Default",IDC_btnReset,163,60,82,14
+    LISTBOX         IDC_lstResults,25,99,292,53, LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,120,163,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,179,163,50,14
+    LTEXT           "Get Operation:",IDC_STATIC,25,24,69,8
+    LTEXT           "Container:",IDC_STATIC,115,24,35,8
+    LTEXT           "Data Type:",IDC_STATIC,243,24,37,8
+    LTEXT           "Results:",IDC_STATIC,25,81,27,8
+    LTEXT           "Note: Testing using non-default container or data type may have undesirable results.",IDC_STATIC,30,10,288,8
+END
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
@@ -238,5 +260,3 @@ BEGIN
 END
 
 /////////////////////////////////////////////////////////////////////////////
-
-
