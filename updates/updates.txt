@@ -1,5 +1,40 @@
 DTWAIN Version changes
 
+5.6.7
+
+- Corrected various constants in the TWAIN constant lookup table.  
+
+- Updated the DTWDEMO32/64 program to allow testing of the capabilities of the device ("Get" testing only).
+  The "Source Properties" dialog now will have a "Test" button in the lower left list box where the 
+  capability listing is located.  Selecting a capability and selecting "Test" will display an additional
+  dialog with container and data type testing for the selected capability.
+
+- Fixed python language binding for DTWAIN functions that requires parameters to be floating point.
+
+- Breaking changes to the DTWAIN_FRAME related functions:
+
+      1) Removed the following DTWAIN_FRAME related functions:
+         DTWAIN_ArrayFrameGetAt
+         DTWAIN_ArrayFrameSetAt
+
+      2) Changed the signature of the following DTWAIN_FRAME related functions:
+         DTWAIN_ArrayGetAtFrame now takes pointers to left, top, right, and bottom components.
+         DTWAIN_ArraySetAtFrame now takes left, top, right, and bottom components. 
+
+Note that the changes above may require a rebuild of your application if you utilize the mentioned 
+DTWAIN_FRAME related functions.
+
+- Updated the C++ wrapper class, C#, Visual Basic, Delphi, and python language bindings.  You 
+  must use these new bindings so that they are in synch with the updated DTWAIN_FRAME functions.
+
+- Added DTWAIN_ArraySetAtFloatString(), DTWAIN_ArrayGetAtFloatString(), DTWAIN_ArrayInsertAtFloatString(), 
+  DTWAIN_ArrayInsertAtFloatStringN() and DTWAIN_ArrayFindFloatString() that allow string values to be used 
+  when setting and retrieving floating point values within a DTWAIN_ARRAY that stores floating point values.
+
+- Fixed issue with DTWAIN_ArrayFindFloat() failing to find certain floating point values stored in a 
+  DTWAIN_ARRAY.
+
+
 5.6.6
 
 - Upgraded following internal image libraries:
