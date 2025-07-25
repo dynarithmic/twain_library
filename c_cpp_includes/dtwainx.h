@@ -37,7 +37,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsTwainAvailable(VOID_PROTOTYPE);
 DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitialize(VOID_PROTOTYPE);
 
 /* Initialize DTWAIN without having the "Resources not found" error box blocking the client */
-DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlocking();
+DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlocking(VOID_PROTOTYPE);
 
 /* Uninitialize DTWAIN (closes all open sources, shuts down the link to the TWAIN DSM) */
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SysDestroy(VOID_PROTOTYPE);
@@ -71,7 +71,7 @@ LONG           DLLENTRY_DEF      DTWAIN_GetAPIHandleStatus(DTWAIN_HANDLE pHandle
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_EnableMsgNotify(DTWAIN_BOOL bSet);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsMsgNotifyEnabled(VOID_PROTOTYPE);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_EnableTripletsNotify(DTWAIN_BOOL bSet);
-DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsNotifyTripletsEnabled();
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsNotifyTripletsEnabled(VOID_PROTOTYPE);
 
 /* Callback procedure for alternate DTWAIN message notification */
 DTWAIN_CALLBACK_PROC DLLENTRY_DEF DTWAIN_SetCallback(DTWAIN_CALLBACK_PROC Fn,LONG UserData);
@@ -434,7 +434,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN
 
 /* Support for CAP_CUSTOMDSDATA */
 HANDLE DLLENTRY_DEF DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, LPBYTE Data, DWORD dSize, LPDWORD pActualSize,LONG nFlags);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, const BYTE* Data, DWORD dSize, LONG nFlags);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, LPCBYTE Data, DWORD dSize, LONG nFlags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCustomDSDataSupported(DTWAIN_SOURCE Source);
 
 /* Only to be used by static libraries.  This is mapped to DTWAIN_SysInitializexxx() for DLL */
@@ -619,12 +619,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, LONG nWhichC
 
 
 /* Blank page detection functions */
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetection(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold,
-                                                      LONG discard_option, DTWAIN_BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetection(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, LONG discard_option, DTWAIN_BOOL bSet);
 LONG DLLENTRY_DEF DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsBlankPageDetectionOn(DTWAIN_SOURCE Source);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionEx(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold,
-                                                        LONG autodetect, LONG detectOpts, DTWAIN_BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetBlankPageDetectionEx(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold,LONG autodetect, LONG detectOpts, DTWAIN_BOOL bSet);
 LONG DLLENTRY_DEF DTWAIN_IsDIBBlank(HANDLE hDib, DTWAIN_FLOAT threshold);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_DeleteDIB(HANDLE hDib);
 
@@ -880,8 +878,8 @@ DTWAIN_LOGGER_PROCA DLLENTRY_DEF DTWAIN_GetLoggerCallbackA(VOID_PROTOTYPE);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
 DTWAIN_LOGGER_PROCW DLLENTRY_DEF DTWAIN_GetLoggerCallbackW(VOID_PROTOTYPE);
 
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC, LONG UserData);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64, DTWAIN_LONG64 UserData64);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC proc, LONG UserData);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 proc, DTWAIN_LONG64 UserData64);
 DTWAIN_ERROR_PROC DLLENTRY_DEF DTWAIN_GetErrorCallback(VOID_PROTOTYPE);
 DTWAIN_ERROR_PROC64 DLLENTRY_DEF DTWAIN_GetErrorCallback64(VOID_PROTOTYPE);
 
