@@ -394,7 +394,9 @@ namespace Test
 ----
 ###### Quick Example (Python)  
 
-Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image:
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
+
+Note: You can only use the Unicode versions of the DTWAIN DLL, i.e. `dtwain32u.dll`, `dtwain32ud.dll`, `dtwain64u.dll` or `dtwain64ud.dll`.  
 
 
 ```python
@@ -407,7 +409,7 @@ def test_dtwain():
     # Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
     # You can use a full pathname here also, to ensure python finds the dll
     
-    # Check for the python environment, and load the 64-bit or 32-bit DLL
+    # Check for the python environment, and load the Unicode 64-bit or 32-bit DLL
     if struct.calcsize("P") * 8 == 64:
         dtwain_dll = dtwain.load_dtwaindll("dtwain64u.dll")
     else:
@@ -419,9 +421,16 @@ def test_dtwain():
     # Select a TWAIN source
     TwainSource = dtwain_dll.DTWAIN_SelectSource()
     if TwainSource:
+
         # Display the product name of the Source
+        # Create a char buffer to allow calling DTWAIN_GetSourceProductNameA
+        #
+        # If instead you wanted to call DTWAIN_GetSourceProductName, you will need a Unicode
+        # buffer, i.e. ct.create_unicode_buffer(100), as python must use the Unicode versions
+        # of the DTWWAIN DLL
+        #
         mystrbuf = ct.create_string_buffer(100)
-        dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource,mystrbuf,len(mystrbuf))
+        dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource, mystrbuf, len(mystrbuf))
         print (mystrbuf.value)
         
         # Example usage of DTWAIN_ARRAY:
@@ -429,9 +438,7 @@ def test_dtwain():
         #
         # Note: The DTWAIN_ARRAY, DTWAIN_SOURCE, DTWAIN_FRAME, and DTWAIN_RANGE are actually void pointers
         # so you have to declare them as such if a DTWAIN function requires a parameter to be of this type.
-        #
-        # Note: An LPDTWAIN_ARRAY is the address of the DTWAIN_ARRAY, i.e. a ctypes.byref() value
-        dtwain_array = ct.pointer(ct.c_void_p(0))
+        dtwain_array = ct.c_void_p(0)
 
         # Note that the second parameter is the address a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
         dtwain_dll.DTWAIN_EnumSupportedCaps(TwainSource, ct.byref(dtwain_array))
@@ -452,7 +459,7 @@ def test_dtwain():
 
         # Now Acquire to a BMP file
         dtwain_dll.DTWAIN_AcquireFile(TwainSource, "TEST.BMP", dtwain.DTWAIN_BMP, dtwain.DTWAIN_USELONGNAME,
-                                      dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, 0)
+                                       dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, None)
     # Close down DTWAIN                                      
     dtwain_dll.DTWAIN_SysDestroy()
 
