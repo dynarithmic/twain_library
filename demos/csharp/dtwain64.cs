@@ -1773,6 +1773,7 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_CAP      = 77;
         public const int DTWAIN_CONSTANT_ICAP     = 78;
         public const int DTWAIN_CONSTANT_DTWAIN_CONT = 79;
+        public const int DTWAIN_CONSTANT_CAPCODE_MAP = 80;
 
         public const int DTWAIN_USERRES_START    = 20000;
         public const int DTWAIN_USERRES_MAXSIZE  = 8192;
