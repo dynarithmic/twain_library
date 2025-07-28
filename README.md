@@ -396,8 +396,6 @@ namespace Test
 
 Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
-Note: You can only use the Unicode versions of the DTWAIN DLL, i.e. `dtwain32u.dll`, `dtwain32ud.dll`, `dtwain64u.dll` or `dtwain64ud.dll`.  
-
 
 ```python
 from ctypes import *
@@ -426,8 +424,8 @@ def test_dtwain():
         # Create a char buffer to allow calling DTWAIN_GetSourceProductNameA
         #
         # If instead you wanted to call DTWAIN_GetSourceProductName, you will need a Unicode
-        # buffer, i.e. ct.create_unicode_buffer(100), as python must use the Unicode versions
-        # of the DTWWAIN DLL
+        # buffer, i.e. ct.create_unicode_buffer(100), as python loaded the Unicode versions
+        # of the DTWAIN DLL
         #
         mystrbuf = ct.create_string_buffer(100)
         dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource, mystrbuf, len(mystrbuf))
