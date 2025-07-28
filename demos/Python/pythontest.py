@@ -38,7 +38,7 @@ def test_dtwain():
         # so you have to declare them as such if a DTWAIN function requires a parameter to be of this type.
         dtwain_array = ct.c_void_p(0)
 
-        # Note that the second parameter is the address a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
+        # Note that the second parameter is the address of a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
         dtwain_dll.DTWAIN_EnumSupportedCaps(TwainSource, ct.byref(dtwain_array))
 
         # Get the number of items in the array
