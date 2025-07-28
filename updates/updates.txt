@@ -10,8 +10,7 @@ DTWAIN Version changes
   dialog with container and data type testing for the selected capability.
 
 - For Python developers: Fixed python language binding for DTWAIN functions that requires parameters to be floating point, 
-  in addition to defining the return type and argument types for all DTWAIN functions using 
-  ctypes.  
+  in addition to defining the return type and argument types for all DTWAIN functions using ctypes.  
 
   Note that using this updated version of the python language binding may require you to 
   change some calls you are making now to DTWAIN functions that require pointers or strings. 
