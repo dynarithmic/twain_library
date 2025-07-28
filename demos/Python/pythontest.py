@@ -24,8 +24,8 @@ def test_dtwain():
         # Create a char buffer to allow calling DTWAIN_GetSourceProductNameA
         #
         # If instead you wanted to call DTWAIN_GetSourceProductName, you will need a Unicode
-        # buffer, i.e. ct.create_unicode_buffer(100), as python must use the Unicode versions
-        # of the DTWWAIN DLL
+        # buffer, i.e. ct.create_unicode_buffer(100), since python loaded the Unicode version
+        # of the DTWAIN DLL
         #
         mystrbuf = ct.create_string_buffer(100)
         dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource, mystrbuf, len(mystrbuf))
@@ -38,7 +38,7 @@ def test_dtwain():
         # so you have to declare them as such if a DTWAIN function requires a parameter to be of this type.
         dtwain_array = ct.c_void_p(0)
 
-        # Note that the second parameter is the address of a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
+        # Note that the second parameter is the address a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
         dtwain_dll.DTWAIN_EnumSupportedCaps(TwainSource, ct.byref(dtwain_array))
 
         # Get the number of items in the array
