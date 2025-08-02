@@ -5147,5 +5147,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_ArrayAddFloatStringN(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType);
+
     }
 }

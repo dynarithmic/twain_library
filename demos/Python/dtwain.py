@@ -1799,6 +1799,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArrayGetAtWideString.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtWideStringPtr.restype = ct.c_wchar_p
      theDLL.DTWAIN_ArrayGetBuffer.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValues.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValuesEx.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValuesEx2.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayGetCount.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetMaxStringLength.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetSourceAt.restype = ct.c_long
@@ -2215,7 +2218,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPDFType1FontNameA.restype = ct.c_long
      theDLL.DTWAIN_GetPDFType1FontNameW.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSize.restype = ct.c_long
-     theDLL.DTWAIN_GetPaperSizeName.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeName.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeNameA.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeNameW.restype = ct.c_long
@@ -2888,6 +2890,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArrayGetAtWideString.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_ArrayGetAtWideStringPtr.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_ArrayGetBuffer.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValuesEx.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValuesEx2.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_ArrayGetCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetMaxStringLength.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetSourceAt.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
@@ -3283,7 +3288,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPDFType1FontNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPDFType1FontNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
-     theDLL.DTWAIN_GetPaperSizeName.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeName.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -3944,6 +3948,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArrayGetAtWideString.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtWideStringPtr.restype = ct.c_wchar_p
      theDLL.DTWAIN_ArrayGetBuffer.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValues.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValuesEx.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayGetCapValuesEx2.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayGetCount.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetMaxStringLength.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetSourceAt.restype = ct.c_long
@@ -4360,7 +4367,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPDFType1FontNameA.restype = ct.c_long
      theDLL.DTWAIN_GetPDFType1FontNameW.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSize.restype = ct.c_long
-     theDLL.DTWAIN_GetPaperSizeName.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeName.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeNameA.restype = ct.c_long
      theDLL.DTWAIN_GetPaperSizeNameW.restype = ct.c_long
@@ -5033,6 +5039,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArrayGetAtWideString.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_ArrayGetAtWideStringPtr.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_ArrayGetBuffer.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValuesEx.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayGetCapValuesEx2.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_ArrayGetCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetMaxStringLength.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetSourceAt.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
@@ -5428,7 +5437,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPDFType1FontNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPDFType1FontNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
-     theDLL.DTWAIN_GetPaperSizeName.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeName.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPaperSizeNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]

@@ -2862,6 +2862,10 @@ function DTWAIN_ArrayAddFloatStringNA(pArray:DTWAIN_ARRAY; Val:LPCSTR; num:LONG)
 function DTWAIN_ArrayAddFloatStringNW(pArray:DTWAIN_ARRAY; Val:LPCWSTR; num:LONG):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayAddFloatStringNW';
 function DTWAIN_ArrayAddFloatStringN(pArray:DTWAIN_ARRAY; Val:LPCTSTR; num:LONG):LONG; stdcall; external 'dtwain32u.dll' name 'DTWAIN_ArrayAddFloatStringN';
 
+function DTWAIN_ArrayGetCapValues(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_ArrayGetCapValues';
+function DTWAIN_ArrayGetCapValuesEx(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_ArrayGetCapValuesEx';
+function DTWAIN_ArrayGetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG; nDataType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain32u.dll'   name 'DTWAIN_ArrayGetCapValuesEx2';
+
 implementation
 
 end.

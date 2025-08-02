@@ -976,6 +976,12 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, L
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bDoubleCount);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsDoublePageCountOnDuplex(DTWAIN_SOURCE Source);
 
+/* Get the capability values and return the DTWAIN_ARRAY of cap values.  These functions mimic 
+   the DTWAIN_GetCapValues... set of API functions */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValuesEx(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType, LONG nDataType);
+
 #include "dtwstrfn.h"
 
 #ifdef __cplusplus

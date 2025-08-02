@@ -147,6 +147,9 @@
     D_ARRAYGETATWIDESTRINGFUNC                       DYNDTWAIN_API::DTWAIN_ArrayGetAtWideString = nullptr;
     D_ARRAYGETATWIDESTRINGPTRFUNC                    DYNDTWAIN_API::DTWAIN_ArrayGetAtWideStringPtr = nullptr;
     D_ARRAYGETBUFFERFUNC                             DYNDTWAIN_API::DTWAIN_ArrayGetBuffer = nullptr;
+    D_ARRAYGETCAPVALUESEX2FUNC                       DYNDTWAIN_API::DTWAIN_ArrayGetCapValuesEx2 = nullptr;
+    D_ARRAYGETCAPVALUESEXFUNC                        DYNDTWAIN_API::DTWAIN_ArrayGetCapValuesEx = nullptr;
+    D_ARRAYGETCAPVALUESFUNC                          DYNDTWAIN_API::DTWAIN_ArrayGetCapValues = nullptr; 
     D_ARRAYGETCOUNTFUNC                              DYNDTWAIN_API::DTWAIN_ArrayGetCount = nullptr;
     D_ARRAYGETMAXSTRINGLENGTHFUNC                    DYNDTWAIN_API::DTWAIN_ArrayGetMaxStringLength = nullptr;
     D_ARRAYGETSOURCEATFUNC                           DYNDTWAIN_API::DTWAIN_ArrayGetSourceAt = nullptr;
@@ -1259,6 +1262,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtWideString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtWideStringPtr, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetBuffer, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetCapValues, hModule); 
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetCapValuesEx, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetCapValuesEx2, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetCount, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetMaxStringLength, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetSourceAt, hModule);
