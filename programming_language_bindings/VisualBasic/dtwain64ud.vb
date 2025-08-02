@@ -1714,6 +1714,8 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_TWSX As Integer = 76
     Public Const DTWAIN_CONSTANT_CAP As Integer =  77
     Public Const DTWAIN_CONSTANT_ICAP As Integer = 78
+    Public Const DTWAIN_CONSTANT_DTWAIN_CONT As Integer = 79
+    Public Const DTWAIN_CONSTANT_CAPCODE_MAP As Integer = 80
 
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
@@ -2871,4 +2873,9 @@ Class DTWAINAPI
     Declare Ansi Function    DTWAIN_ArrayAddFloatStringNA Lib "dtwain64ud.dll" (theArray As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Val As String, num As Integer) As Integer
     Declare Unicode Function DTWAIN_ArrayAddFloatStringNW Lib "dtwain64ud.dll" (theArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Val As String, num As Integer) As Integer
     Declare Auto Function    DTWAIN_ArrayAddFloatStringN Lib "dtwain64ud.dll" (theArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Val As String, num As Integer) As Integer
+
+    Declare Auto Function DTWAIN_ArrayGetCapValues Lib "dtwain64ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_ArrayGetCapValuesEx Lib "dtwain64ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer) As System.IntPtr
+    Declare Auto Function DTWAIN_ArrayGetCapValuesEx2 Lib "dtwain64ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer) As System.IntPtr
+
 End Class

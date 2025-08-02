@@ -512,7 +512,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementString(DTWAIN_PDFTEXTELEMENT Te
 LONG        DLLENTRY_DEF DTWAIN_GetFileTypeName(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
 LONG        DLLENTRY_DEF DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
 LONG        DLLENTRY_DEF DTWAIN_GetPaperSizeName(LONG paperNumber, DTWAIN_CHARPTRTYPE outName, LONG nSize);
-LONG        DLLENTRY_DEF DTWAIN_GetPaperSizeName(LONG paperNumber, DTWAIN_CHARPTRTYPE outName, LONG nSize);
 LONG        DLLENTRY_DEF DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
 LONG        DLLENTRY_DEF DTWAIN_GetWindowsVersionInfo(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
 LONG        DLLENTRY_DEF DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);

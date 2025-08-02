@@ -36,8 +36,16 @@ DTWAIN_FRAME related functions.
   DTWAIN_ArrayInsertAtFloatStringN() and DTWAIN_ArrayFindFloatString() that allow string values to be used 
   when setting and retrieving floating point values within a DTWAIN_ARRAY that stores floating point values.
 
+- Add functions DTWAIN_ArrayGetCapValues, DTWAIN_ArrayGetCapValuesEx, and DTWAIN_ArrayGetCapValuesEx2 that 
+  are equivalent to DTWAIN_GetCapValues, DTWAIN_GetCapValuesEx, and DTWAIN_GetCapValuesEx2 except that 
+  the DTWAIN_ArrayGet...  functions will return the DTWAIN_ARRAY of values instead of the client having 
+  to pass the address of a DTWAIN_ARRAY as the last parameter.  This allows getting the capability values 
+  easier for languages that do not have the facility to pass the address of a pointer (address of an address).
+
 - Fixed issue with DTWAIN_ArrayFindFloat() failing to find certain floating point values stored in a 
   DTWAIN_ARRAY.
+
+- Updated Perl language binding to use DTWAIN 5.6.7 API functions and constants.
 
 
 5.6.6
