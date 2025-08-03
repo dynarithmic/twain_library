@@ -185,6 +185,7 @@
 #define DTWAIN_ARRAYUINT32        120
 #define DTWAIN_ARRAYINT32         130
 #define DTWAIN_ARRAYINT64         140
+#define DTWAIN_ARRAYUINT64        150
 
 /* DTWAIN_RANGE types */
 #define DTWAIN_RANGELONG      DTWAIN_ARRAYLONG
@@ -1022,6 +1023,7 @@
 #define DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  (-2501)
 #define DTWAIN_ERR_IMAGEINFO_INVALID       (-2502)
 #define DTWAIN_ERR_WRITEDATA_TOFILE        (-2503)
+#define DTWAIN_ERR_OPERATION_NOTSUPPORTED  (-2504)
 
 #define DTWAIN_ERR_LAST                    DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE
 #define DTWAIN_ERR_USER_START              (-80000)
@@ -1552,8 +1554,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWFP     22
 #define DTWAIN_CONSTANT_TWFR     23
 #define DTWAIN_CONSTANT_TWFT     24
-#define DTWAIN_CONSTANT_TWFY     22
-#define DTWAIN_CONSTANT_TWIA     23
+#define DTWAIN_CONSTANT_TWFY     25
+#define DTWAIN_CONSTANT_TWIA     26
 #define DTWAIN_CONSTANT_TWIC     27
 #define DTWAIN_CONSTANT_TWIF     28
 #define DTWAIN_CONSTANT_TWIM     29
@@ -1606,6 +1608,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWSX     76
 #define DTWAIN_CONSTANT_CAP      77
 #define DTWAIN_CONSTANT_ICAP     78
+#define DTWAIN_CONSTANT_DTWAIN_CONT 79
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

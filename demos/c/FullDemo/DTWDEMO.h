@@ -54,6 +54,7 @@
 #define IDC_edTotalCaps                     3007
 #define IDC_edCustomCaps                    3008
 #define IDC_edExtendedCaps                  3009
+#define IDC_btnTestCap                      3010
 
 #define IDD_dlgSettings                     5000
 #define IDC_chkUseFeeder                    5001
@@ -78,6 +79,14 @@
 #define IDC_edLangName                      7012
 #define IDC_edBarCodes                      7013
 #define IDD_dlgBarCodes                     7014
+
+#define IDD_dlgTestCap                      8000
+#define IDC_cmbGetTypes                     8001
+#define IDC_lstResults                      8002  
+#define IDC_btnTest                         8003
+#define IDC_cmbContainer                    8004
+#define IDC_cmbDataType                     8005
+#define IDC_btnReset                        8006
 
 #define ID_LANGUAGE_ENGLISH             32771
 #define ID_LANGUAGE_FRENCH              32772
