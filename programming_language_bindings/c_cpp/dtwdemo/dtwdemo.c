@@ -4,12 +4,14 @@
     #define _CRT_SECURE_NO_WARNINGS
 #endif
 #include <windows.h>
+#include <windowsx.h>
 #include "dtwdemo.h"
 #include "dtwain.h"
 #include <ctype.h>
 #include "dibdisplay.h"
 #include <io.h>
 #include <tchar.h>
+#include <stdio.h>
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -40,6 +42,8 @@ TCHAR         g_LogFileName[MAX_PATH];
 void SelectTheSource(int nWhich);
 void EnableSourceItems(BOOL bEnable);
 void EnableSelectSourceItems(BOOL bEnable);
+void EnableAllMenuItems(BOOL bEnable);
+void EnableBarcodeAndFileXferItems(DTWAIN_SOURCE source);
 DTWAIN_SOURCE DisplayGetNameDlg();
 DTWAIN_SOURCE DisplayCustomDlg();
 void DisplaySourceProps();
@@ -55,6 +59,11 @@ void DisplayLoggingOptions();
 void LoadLanguage(int message);
 void LoadLanguageStrings(LPCTSTR szLang);
 void DisplayCustomLangDlg();
+void DisplayTestCapDlg(HWND parent, const char *szName);
+LONG InitTestControls(HWND hWnd, const char* szName);
+void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue);
+void TestCap(HWND hWnd, LONG capValue);
+
 LRESULT CALLBACK EnterCustomLangNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 BOOL bPageOK;
@@ -75,6 +84,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
 LRESULT CALLBACK DisplayAcquireSettingsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK DisplayFileTypesProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK DisplayLoggingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 INT_PTR DisplayOneDibPage(HINSTANCE hInstance, HANDLE hDib, UINT resID, HWND wndHandle);
 
 
@@ -153,7 +163,32 @@ AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("engli
                                  {ID_LANGUAGE_JAPANESE              , _T("japanese")},
                                  {ID_LANGUAGE_KOREAN                , _T("korean")}
                                 };
+
+UINT g_AllMenuItems[] = { IDM_SELECT_SOURCE,
+                          IDM_SELECT_SOURCE_BY_NAME,
+                          IDM_SELECT_DEFAULT_SOURCE,
+                          IDM_SELECT_SOURCE_CUSTOM,
+                          IDM_SOURCE_PROPS,
+                          IDM_CLOSE_SOURCE,
+                          IDM_EXIT,
+                          IDM_ACQUIRE_NATIVE,
+                          IDM_ACQUIRE_BUFFERED,
+                          IDM_ACQUIRE_FILE_DTWAIN,
+                          IDM_ACQUIRE_FILE_SOURCE,
+                          IDM_SHOW_PREVIEW,
+                          IDM_USE_SOURCE_UI,
+                          IDM_DISCARD_BLANKS,
+                          IDM_SHOW_BARCODEINFO };
+
 TCHAR g_CustomLanguage[256];
+
+TCHAR* g_AllContainerTypes[] = { _T("TW_ARRAY"), _T("TW_ENUMERATION"), _T("TW_ONEVALUE"), _T("TW_RANGE") };
+LONG g_AllContainerTypesID[] = { DTWAIN_CONTARRAY, DTWAIN_CONTENUMERATION, DTWAIN_CONTONEVALUE, DTWAIN_CONTRANGE };
+TCHAR* g_AllGetTypes[] = { _T("MSG_GET"), _T("MSG_GETCURRENT"), _T("MSG_GETDEFAULT") };
+TCHAR* g_AllDataTypes[] = { _T("TWTY_INT8"), _T("TWTY_INT16"), _T("TWTY_INT32"), _T("TWTY_UINT8"),_T("TWTY_UINT16"),
+                            _T("TWTY_UINT32"), _T("TWTY_BOOL"), _T("TWTY_FIX32"), _T("TWTY_FRAME"), _T("TWTY_STR32"),
+                            _T("TWTY_STR64"), _T("TWTY_STR128"), _T("TWTY_STR255"), _T("TWTY_STR1024"), _T("TWTY_UNI512"),
+                            _T("TWTY_HANDLE") };
 
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -302,15 +337,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
 
                 case IDM_ACQUIRE_NATIVE:
+                    EnableAllMenuItems(FALSE);
                     AcquireNative();
+                    EnableAllMenuItems(TRUE);
                 break;
 
                 case IDM_ACQUIRE_BUFFERED:
+                    EnableAllMenuItems(FALSE);
                     AcquireBuffered();
+                    EnableAllMenuItems(TRUE);
                 break;
-
                 case IDM_ACQUIRE_FILE_DTWAIN:
+                    EnableAllMenuItems(FALSE);
                     AcquireFile(FALSE);
+                    EnableAllMenuItems(TRUE);
                 break;
 
                 case IDM_ACQUIRE_FILE_SOURCE:
@@ -359,12 +399,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
 
                 case IDM_EXIT:
-                   DestroyWindow(hWnd);
-                   break;
+                    if (!DTWAIN_IsAcquiring())
+                        DestroyWindow(hWnd);
+                    else
+                        MessageBox(NULL, _T("Cannot close application.  Images are still being acquired.\r\nPlease close the device user interface."), _T("Device is acquiring"), MB_OK);
+                    return 0;
                 default:
                    return DefWindowProc(hWnd, message, wParam, lParam);
             }
             break;
+        case WM_CLOSE:
+            if (!DTWAIN_IsAcquiring())
+                DestroyWindow(hWnd);
+            else
+                MessageBox(NULL, _T("Cannot close application.  Images are still being acquired.\r\nPlease close the device user interface."), _T("Device is acquiring"), MB_OK);
+            return 0;
+        break;
+
         case WM_DESTROY:
             PostQuitMessage(0);
             break;
@@ -457,14 +508,9 @@ void SelectTheSource(int nWhich)
     {
         if ( DTWAIN_OpenSource(tempSource) )
         {
-            if ( !DTWAIN_IsExtImageInfoSupported(tempSource) )
-                EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
-            else
-                EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND| MF_ENABLED);
-            g_CurrentSource = tempSource;
+            EnableBarcodeAndFileXferItems(tempSource);
             EnableSourceItems(TRUE);
-            if ( !DTWAIN_IsFileXferSupported(tempSource, DTWAIN_ANYSUPPORT))
-                EnableMenuItem(g_Menu, IDM_ACQUIRE_FILE_SOURCE, MF_BYCOMMAND | MF_GRAYED);
+            g_CurrentSource = tempSource;
             SetCaptionToSourceName();
             DTWAIN_EnableFeeder(tempSource, TRUE);
         }
@@ -1188,6 +1234,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             }
             ReleaseDC(hWndCaps, hdcList);
             SendMessage(hWndCaps, LB_SETHORIZONTALEXTENT, maxTextLength, 0);
+            SendMessage(hWndCaps, LB_SETCURSEL, 0, 0);
 
             wsprintf(szBuf, _T("%d"), nCapCount);
             SetWindowText(hWndNumCaps, szBuf);
@@ -1263,7 +1310,13 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 case IDCANCEL:
                      EndDialog(hDlg, 1);
                 break;
-
+                case IDC_btnTestCap:
+                {
+                    char szCap[100];
+                    LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_lstCapabilities), LB_GETCURSEL, 0, 0);
+                    SendMessageA(GetDlgItem(hDlg, IDC_lstCapabilities), LB_GETTEXT, nCurSel, (LPARAM)szCap);
+                    DisplayTestCapDlg(hDlg, szCap);
+                }
             }
         }
         break;
@@ -1271,6 +1324,244 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
     return FALSE;
 }
 
+
+void DisplayTestCapDlg(HWND parent, const char *szCapName)
+{
+    DialogBoxParam(g_hInstance, (LPCTSTR)IDD_dlgTestCap, parent, (DLGPROC)DisplayTestCapProc, (LPARAM)(szCapName));
+}
+
+LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    static LONG curCapValue;
+    switch (message)
+    {
+        case WM_INITDIALOG:
+        {
+            const char* szName = (const char*)lParam;
+            char szTitle[256];
+            strcpy(szTitle, "Test Capability (");
+            strcat(szTitle, szName);
+            strcat(szTitle, ")");
+            SetWindowTextA(hDlg, szTitle);
+            curCapValue = InitTestControls(hDlg, szName);
+            return TRUE;
+        }
+        break;
+        case WM_COMMAND:
+        {
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
+
+            switch (nControl)
+            {
+                case IDC_cmbGetTypes:
+                {
+                    if (nNotification == CBN_SELCHANGE)
+                    {
+                        TCHAR szGetType[100];
+                        LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
+                        SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                        SetTestSelection(hDlg, szGetType, curCapValue);
+                    }
+                }
+                break;
+
+                case IDC_btnTest:
+                    TestCap(hDlg, curCapValue);
+                break;
+
+                case IDC_btnReset:
+                {
+                    /* Get the Get type*/
+                    TCHAR szGetType[100];
+                    LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
+                    SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                    SetTestSelection(hDlg, szGetType, curCapValue);
+                }
+                break;
+
+                /* Quit the dialog */
+                case IDOK:
+                {
+                    EndDialog(hDlg, 1);
+                }
+                break;
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+    }
+    return FALSE;
+}
+
+LONG InitTestControls(HWND hWnd, const char* szName)
+{
+    HWND hWndGetTypes = GetDlgItem(hWnd, IDC_cmbGetTypes);
+    HWND hWndContainerTypes = GetDlgItem(hWnd, IDC_cmbContainer);
+    HWND hWndDataTypes = GetDlgItem(hWnd, IDC_cmbDataType);
+
+    LONG capValue = DTWAIN_GetCapFromNameA(szName);
+    if (capValue == -1)
+        return -1;
+
+    int i = 0;
+    int numGetTypes = sizeof(g_AllGetTypes) / sizeof(g_AllGetTypes[0]);
+    for (i = 0; i < numGetTypes; ++i)
+        SendMessage(hWndGetTypes, CB_ADDSTRING, 0, (LPARAM)g_AllGetTypes[i]);
+
+    int numContainerTypes = sizeof(g_AllContainerTypes) / sizeof(g_AllContainerTypes[0]);
+    for (i = 0; i < numContainerTypes; ++i)
+        SendMessage(hWndContainerTypes, CB_ADDSTRING, 0, (LPARAM)g_AllContainerTypes[i]);
+
+    int numDataTypes = sizeof(g_AllDataTypes) / sizeof(g_AllDataTypes[0]);
+    for (i = 0; i < numDataTypes; ++i)
+        SendMessage(hWndDataTypes, CB_ADDSTRING, 0, (LPARAM)g_AllDataTypes[i]);
+
+    SetTestSelection(hWnd, _T("MSG_GET"), capValue);
+    return capValue;
+}
+
+void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue)
+{
+    HWND hWndGetTypes = GetDlgItem(hWnd, IDC_cmbGetTypes);
+    HWND hWndContainerTypes = GetDlgItem(hWnd, IDC_cmbContainer);
+    HWND hWndDataTypes = GetDlgItem(hWnd, IDC_cmbDataType);
+
+    int nPos = ComboBox_FindString(hWndGetTypes, -1, getType);
+    SendMessage(hWndGetTypes, CB_SETCURSEL, nPos, 0);
+
+    /* Get the equivalent MSG_GET type matching the one passed in */
+    LONG nID = DTWAIN_GetTwainIDFromName(getType);
+
+    /* Choose the best container type for the capability */
+    LONG bestContainer = DTWAIN_GetCapContainer(g_CurrentSource, capValue, nID);
+
+    TCHAR szBestContainer[100];
+    DTWAIN_GetTwainNameFromConstant(DTWAIN_CONSTANT_DTWAIN_CONT, bestContainer, szBestContainer, 100);
+
+    nPos = ComboBox_FindString(hWndContainerTypes, -1, szBestContainer);
+    if (nPos != CB_ERR)
+        SendMessage(hWndContainerTypes, CB_SETCURSEL, nPos, 0);
+
+    /* Choose the data type */
+    LONG bestDataType = DTWAIN_GetCapDataType(g_CurrentSource, capValue);
+
+    TCHAR szBestDataType[100];
+    DTWAIN_GetTwainNameFromConstant(DTWAIN_CONSTANT_TWTY, bestDataType, szBestDataType, 100);
+
+    nPos = ComboBox_FindString(hWndDataTypes, -1, szBestDataType);
+    if (nPos != CB_ERR)
+        SendMessage(hWndDataTypes, CB_SETCURSEL, nPos, 0);
+}
+
+void TestCap(HWND hWnd, LONG capValue)
+{
+    HWND hWndGetTypes = GetDlgItem(hWnd, IDC_cmbGetTypes);
+    HWND hWndContainerTypes = GetDlgItem(hWnd, IDC_cmbContainer);
+    HWND hWndDataTypes = GetDlgItem(hWnd, IDC_cmbDataType);
+    HWND hWndResults = GetDlgItem(hWnd, IDC_lstResults);
+
+    SendMessage(hWndResults, LB_RESETCONTENT, 0, 0);
+
+    /* Get the get type, container, and data type */
+    TCHAR szGetType[100];
+    LRESULT nCurSel = SendMessage(hWndGetTypes, CB_GETCURSEL, 0, 0);
+    SendMessage(hWndGetTypes, CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+    LONG nGetType = DTWAIN_GetTwainIDFromName(szGetType);
+
+    /* Get the container type */
+    nCurSel = SendMessage(hWndContainerTypes, CB_GETCURSEL, 0, 0);
+    LONG nContainerType = g_AllContainerTypesID[nCurSel];
+
+    /* Get the data type */
+    TCHAR szDataType[100];
+    nCurSel = SendMessage(hWndDataTypes, CB_GETCURSEL, 0, 0);
+    SendMessage(hWndDataTypes, CB_GETLBTEXT, nCurSel, (LPARAM)szDataType);
+    LONG nDataType = DTWAIN_GetTwainIDFromName(szDataType);
+
+    /* Get the translation (if it exists) for the cap return values */
+    LONG nTranslationID = -1;
+    BOOL bGotID = FALSE;
+    BOOL bIsCapNameSupported = (capValue == CAP_SUPPORTEDCAPS || capValue == CAP_EXTENDEDCAPS || capValue == CAP_SUPPORTEDCAPSSEGMENTUNIQUE);
+    if (!bIsCapNameSupported)
+    {
+        /* Get the TWAIN constant name mapping, given the capability value */
+        char szTranslationID[100];
+        nTranslationID = -1;
+        bGotID = DTWAIN_GetTwainNameFromConstantA(DTWAIN_CONSTANT_CAPCODE_MAP, capValue, szTranslationID, 100);
+        if (bGotID)
+            nTranslationID = atoi(szTranslationID);
+    }
+    /* Call the capability function */
+    DTWAIN_ARRAY values;
+    LONG ret = DTWAIN_GetCapValuesEx2(g_CurrentSource, capValue, nGetType, nContainerType, nDataType, &values);
+    if (ret)
+    {
+        char szValues[1024];
+        /* Display the results in the list box */
+        LONG numItems = DTWAIN_ArrayGetCount(values);
+        LONG nArrayType = DTWAIN_ArrayGetType(values);
+        LONG i = 0;
+        for (i = 0; i < numItems; ++i)
+        {
+            if (i >= 1000)
+            {
+                SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)"~ Number of values exceeded 1000 ... ~");
+                break;
+            }
+            switch (nArrayType)
+            {
+                case DTWAIN_ARRAYLONG:
+                {
+                    LONG lVal;
+                    DTWAIN_ArrayGetAtLong(values, i, &lVal);
+                    if (bIsCapNameSupported)
+                        DTWAIN_GetNameFromCapA(lVal, szValues, 256);
+                    else
+                    if (nDataType == TWTY_BOOL)
+                        sprintf(szValues, "%s", lVal == 1 ? "TRUE" : "FALSE");
+                    else
+                    if (bGotID)
+                        DTWAIN_GetTwainNameFromConstantA(nTranslationID, lVal, szValues, 256);
+                    else
+                        sprintf(szValues, "%d", lVal);
+                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                }
+                break;
+
+                case DTWAIN_ARRAYFLOAT:
+                {
+                    double dVal;
+                    DTWAIN_ArrayGetAtFloat(values, i, &dVal);
+                    sprintf(szValues, "%lf", dVal);
+                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                }
+                break;
+
+                case DTWAIN_ARRAYANSISTRING:
+                {
+                    DTWAIN_ArrayGetAtANSIString(values, i, szValues);
+                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                }
+                break;
+
+                case DTWAIN_ARRAYFRAME:
+                {
+                    double left, top, right, bottom;
+                    DTWAIN_ArrayGetAtFrame(values, i, &left, &top, &right, &bottom);
+                    sprintf(szValues, "Left: %lf  Top: %lf  Right: %lf  Bottom: %lf", left, top, right, bottom);
+                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                }
+                break;
+
+            }
+        }
+        DTWAIN_ArrayDestroy(values);
+    }
+}
 
 LRESULT CALLBACK DisplayAcquireSettingsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -1551,3 +1842,27 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
     return 1;
 }
 
+void EnableAllMenuItems(BOOL bEnable)
+{
+    const int numItems = sizeof(g_AllMenuItems) / sizeof(g_AllMenuItems[0]);
+    int i = 0;
+    UINT nOptions;
+    if (!bEnable)
+        nOptions = MF_BYCOMMAND | MF_GRAYED;
+    else
+        nOptions = MF_BYCOMMAND | MF_ENABLED;
+    EnableMenuItem(g_Menu, IDC_DTWDEMO, nOptions);
+    for (i = 0; i < numItems; ++i)
+        EnableMenuItem(g_Menu, g_AllMenuItems[i], nOptions);
+    EnableBarcodeAndFileXferItems(g_CurrentSource);
+}
+
+void EnableBarcodeAndFileXferItems(DTWAIN_SOURCE source)
+{
+    if (!DTWAIN_IsExtImageInfoSupported(source))
+        EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
+    else
+        EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_ENABLED);
+    if (!DTWAIN_IsFileXferSupported(source, DTWAIN_ANYSUPPORT))
+        EnableMenuItem(g_Menu, IDM_ACQUIRE_FILE_SOURCE, MF_BYCOMMAND | MF_GRAYED);
+}

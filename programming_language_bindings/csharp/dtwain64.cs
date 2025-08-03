@@ -330,6 +330,7 @@ namespace Dynarithmic
         public const  int DTWAIN_ARRAYUINT32 = 120;
         public const  int DTWAIN_ARRAYINT32 = 130;
         public const  int DTWAIN_ARRAYINT64 = 140;
+        public const  int DTWAIN_ARRAYUINT64 = 150;
         public const  int DTWAIN_RANGELONG = DTWAIN_ARRAYLONG;
         public const  int DTWAIN_RANGEFLOAT = DTWAIN_ARRAYFLOAT;
         public const  int DTWAIN_RANGEMIN = 0;
@@ -1717,8 +1718,8 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_TWFP    = 22;
         public const int DTWAIN_CONSTANT_TWFR    = 23;
         public const int DTWAIN_CONSTANT_TWFT    = 24;
-        public const int DTWAIN_CONSTANT_TWFY    = 22;
-        public const int DTWAIN_CONSTANT_TWIA    = 23;
+        public const int DTWAIN_CONSTANT_TWFY    = 25;
+        public const int DTWAIN_CONSTANT_TWIA    = 26;
         public const int DTWAIN_CONSTANT_TWIC    = 27;
         public const int DTWAIN_CONSTANT_TWIF    = 28;
         public const int DTWAIN_CONSTANT_TWIM    = 29;
@@ -1771,6 +1772,8 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_TWSX     = 76;
         public const int DTWAIN_CONSTANT_CAP      = 77;
         public const int DTWAIN_CONSTANT_ICAP     = 78;
+        public const int DTWAIN_CONSTANT_DTWAIN_CONT = 79;
+        public const int DTWAIN_CONSTANT_CAPCODE_MAP = 80;
 
         public const int DTWAIN_USERRES_START    = 20000;
         public const int DTWAIN_USERRES_MAXSIZE  = 8192;
@@ -1892,13 +1895,11 @@ namespace Dynarithmic
         public static extern  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32, int nWhere, int whole, int frac);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern  int DTWAIN_ArrayFrameGetAt(DTWAIN_ARRAY FrameArray, int nWhere, ref double pleft, ref double ptop, ref double pright, ref double pbottom);
+        public static extern  int DTWAIN_ArrayGetAtFrame(DTWAIN_ARRAY FrameArray, int nWhere, ref double pleft, ref double ptop, ref double pright, ref double pbottom);
+
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern  DTWAIN_FRAME DTWAIN_ArrayFrameGetFrameAt(DTWAIN_ARRAY FrameArray, int nWhere);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern  int DTWAIN_ArrayFrameSetAt(DTWAIN_ARRAY FrameArray, int nWhere, double left, double top, double right, double bottom);
+        public static extern  int DTWAIN_ArraySetAtFrame(DTWAIN_ARRAY FrameArray, int nWhere, double left, double top, double right, double bottom);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern  int DTWAIN_ArrayGetAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
@@ -5061,9 +5062,100 @@ namespace Dynarithmic
         public static extern  int DTWAIN_ArrayInsertAtFrame(DTWAIN_ARRAY pArray, LONG insertPoint, DTWAIN_FRAME theFrame);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern DTWAIN_FRAME DTWAIN_ArrayGetAtFrame(DTWAIN_ARRAY pArray, LONG nWhere);
+        public static extern int DTWAIN_ArrayGetAtFrameEx(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_FRAME theFrame);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern int DTWAIN_ArraySetAtFrame(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_FRAME theFrame);
+        public static extern int DTWAIN_ArraySetAtFrameEx(DTWAIN_ARRAY pArray, LONG nWhere, DTWAIN_FRAME theFrame);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFrameStringA(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Left, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Top, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Right, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFrameStringW(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder Left, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder Top, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder Right, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFrameString(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Left, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Top, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Right, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFrameStringA(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] string Left, [MarshalAs(UnmanagedType.LPStr)] string Top, [MarshalAs(UnmanagedType.LPStr)] string Right, [MarshalAs(UnmanagedType.LPStr)] string Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFrameStringW(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Left, [MarshalAs(UnmanagedType.LPWStr)] string Top, [MarshalAs(UnmanagedType.LPWStr)] string Right, [MarshalAs(UnmanagedType.LPWStr)] string Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFrameString(DTWAIN_FRAME pFrame, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Left, [MarshalAs(UnmanagedType.LPTStr)] string Top, [MarshalAs(UnmanagedType.LPTStr)] string Right, [MarshalAs(UnmanagedType.LPTStr)] string Bottom);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFloatStringA(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFloatStringW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArraySetAtFloatString(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFloatStringA(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFloatStringW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayGetAtFloatString(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatStringA(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatStringW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatString(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatStringNA(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatStringNW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayInsertAtFloatStringN(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayFindFloatStringA(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPStr)] string Val, [MarshalAs(UnmanagedType.LPStr)] string Tolerance);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayFindFloatStringW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val, [MarshalAs(UnmanagedType.LPStr)] string Tolerance);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayFindFloatString(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, [MarshalAs(UnmanagedType.LPStr)] string Tolerance);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatStringA(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatStringW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatString(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatStringNA(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatStringNW(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPWStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_ArrayAddFloatStringN(DTWAIN_ARRAY pArray, LONG nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, LONG num);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType);
+
     }
 }

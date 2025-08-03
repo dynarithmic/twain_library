@@ -136,7 +136,7 @@ namespace dynarithmic
 			for (size_t curInfo = 0; curInfo < barCodeInfos.size(); ++curInfo)
 			{
                 auto* curObject = &barCodeInfos[curInfo];
-                for (int i = 0; i < aAllData.size(); ++i)
+                for (size_t i = 0; i < aAllData.size(); ++i)
                 {
                     if (aAllData[i].first != barcode_info::TEXT_SUPPORTED)
                     {
