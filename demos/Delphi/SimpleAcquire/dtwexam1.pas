@@ -28,7 +28,7 @@ implementation
 procedure TForm1.RetrieveDib(Sender: TObject);
 
 var
-   SelectedSource: DWORD;
+   SelectedSource: DTWAIN_SOURCE;
    ErrStatus: LONG;
    AcquisitionArray: DWORD;
    SourceName, SourceDetails: AnsiString;
