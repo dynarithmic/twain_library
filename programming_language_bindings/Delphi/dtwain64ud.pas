@@ -1212,6 +1212,7 @@ const
   DTWAIN_PDF_ALLOWEXTRACTION = 512;
   DTWAIN_PDF_ALLOWASSEMBLY = 1024;
   DTWAIN_PDF_ALLOWDEGRADEDPRINTING = 4;
+  DTWAIN_PDF_ALLOWALL: Cardinal = $FFFFFFFC;
   DTWAIN_PDF_PORTRAIT = 0;
   DTWAIN_PDF_LANDSCAPE = 1;
   DTWAIN_PS_REGULAR = 0;
@@ -2674,9 +2675,9 @@ function DTWAIN_SetPDFCompression(Source:DTWAIN_SOURCE; bCompression:BOOL):BOOL;
 function DTWAIN_SetPDFCreator(Source:DTWAIN_SOURCE; lpCreator:LPCTSTR):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFCreator';
 function DTWAIN_SetPDFCreatorA(Source:DTWAIN_SOURCE; lpCreator:LPCSTR):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFCreatorA';
 function DTWAIN_SetPDFCreatorW(Source:DTWAIN_SOURCE; lpCreator:LPCWSTR):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFCreatorW';
-function DTWAIN_SetPDFEncryption(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCTSTR; lpszOwner:LPCTSTR; Permissions:LONG; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryption';
-function DTWAIN_SetPDFEncryptionA(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCSTR; lpszOwner:LPCSTR; Permissions:LONG; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryptionA';
-function DTWAIN_SetPDFEncryptionW(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCWSTR; lpszOwner:LPCWSTR; Permissions:LONG; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryptionW';
+function DTWAIN_SetPDFEncryption(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCTSTR; lpszOwner:LPCTSTR; Permissions:DWORD; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryption';
+function DTWAIN_SetPDFEncryptionA(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCSTR; lpszOwner:LPCSTR; Permissions:DWORD; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryptionA';
+function DTWAIN_SetPDFEncryptionW(Source:DTWAIN_SOURCE; bUseEncryption:BOOL; lpszUser:LPCWSTR; lpszOwner:LPCWSTR; Permissions:DWORD; UseStrongEncryption:BOOL):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFEncryptionW';
 function DTWAIN_SetPDFJpegQuality(Source:DTWAIN_SOURCE; Quality:LONG):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFJpegQuality';
 function DTWAIN_SetPDFKeywords(Source:DTWAIN_SOURCE; lpKeyWords:LPCTSTR):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFKeywords';
 function DTWAIN_SetPDFKeywordsA(Source:DTWAIN_SOURCE; lpKeyWords:LPCSTR):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_SetPDFKeywordsA';
@@ -2832,9 +2833,16 @@ function DTWAIN_ArrayAddFrameN(pArray:DTWAIN_ARRAY; theFrame:DTWAIN_FRAME; num:L
 function DTWAIN_ArrayAddFrame(pArray:DTWAIN_ARRAY; theFrame:DTWAIN_FRAME):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArrayAddFrame'; 
 function DTWAIN_ArrayInsertAtFrameN(pArray:DTWAIN_ARRAY; insertPoint:LONG; theFrame:DTWAIN_FRAME; num:LONG):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArrayInsertAtFrameN'; 
 function DTWAIN_ArrayInsertAtFrame(pArray:DTWAIN_ARRAY; insertPoint:LONG; theFrame:DTWAIN_FRAME):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArrayInsertAtFrame'; 
-function DTWAIN_ArrayGetAtFrame(FrameArray:DTWAIN_ARRAY; nWhere:LONG; pleft:LPDTWAIN_FLOAT; ptop:LPDTWAIN_FLOAT; pright:LPDTWAIN_FLOAT; pbottom:LPDTWAIN_FLOAT):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetAtFrame';
-function DTWAIN_ArraySetAtFrame(FrameArray:DTWAIN_ARRAY; nWhere:LONG; left:DTWAIN_FLOAT; top:DTWAIN_FLOAT; right:DTWAIN_FLOAT; bottom:DTWAIN_FLOAT):BOOL;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_ArraySetAtFrame';
+function DTWAIN_ArrayGetAtFrame(FrameArray:DTWAIN_ARRAY; nWhere:LONG; pleft:LPDTWAIN_FLOAT; ptop:LPDTWAIN_FLOAT; pright:LPDTWAIN_FLOAT; pbottom:LPDTWAIN_FLOAT):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetAtFrame';
+function DTWAIN_ArraySetAtFrame(FrameArray:DTWAIN_ARRAY; nWhere:LONG; left:DTWAIN_FLOAT; top:DTWAIN_FLOAT; right:DTWAIN_FLOAT; bottom:DTWAIN_FLOAT):BOOL; external 'dtwain64ud.dll'   name 'DTWAIN_ArraySetAtFrame';
 
+function DTWAIN_ArrayGetAtFrameStringA(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPSTR; Top:LPSTR; Right:LPSTR; Bottom:LPSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArrayGetAtFrameStringA';
+function DTWAIN_ArrayGetAtFrameStringW(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPWSTR; Top:LPWSTR; Right:LPWSTR; Bottom:LPWSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArrayGetAtFrameStringW';
+function DTWAIN_ArrayGetAtFrameString(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPTSTR; Top:LPTSTR; Right:LPTSTR; Bottom:LPTSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArrayGetAtFrameString';
+
+function DTWAIN_ArraySetAtFrameStringA(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPCSTR; Top:LPCSTR; Right:LPCSTR; Bottom:LPCSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFrameStringA';
+function DTWAIN_ArraySetAtFrameStringW(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPCWSTR; Top:LPCWSTR; Right:LPCWSTR; Bottom:LPCWSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFrameStringW';
+function DTWAIN_ArraySetAtFrameString(pArray:DTWAIN_ARRAY; nWhere:LONG; Left:LPCTSTR; Top:LPCTSTR; Right:LPCTSTR; Bottom:LPCTSTR):LONG; external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFrameString';
 function DTWAIN_ArraySetAtFloatStringA(pArray:DTWAIN_ARRAY; nWhere:LONG; Val:LPCSTR):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFloatStringA';
 function DTWAIN_ArraySetAtFloatStringW(pArray:DTWAIN_ARRAY; nWhere:LONG; Val:LPCWSTR):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFloatStringW';
 function DTWAIN_ArraySetAtFloatString(pArray:DTWAIN_ARRAY; nWhere:LONG; Val:LPCTSTR):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArraySetAtFloatString';
@@ -2863,9 +2871,9 @@ function DTWAIN_ArrayAddFloatStringNA(pArray:DTWAIN_ARRAY; Val:LPCSTR; num:LONG)
 function DTWAIN_ArrayAddFloatStringNW(pArray:DTWAIN_ARRAY; Val:LPCWSTR; num:LONG):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArrayAddFloatStringNW';
 function DTWAIN_ArrayAddFloatStringN(pArray:DTWAIN_ARRAY; Val:LPCTSTR; num:LONG):LONG;  external 'dtwain64ud.dll' name 'DTWAIN_ArrayAddFloatStringN';
 
-function DTWAIN_ArrayGetCapValues(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValues';
-function DTWAIN_ArrayGetCapValuesEx(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValuesEx';
-function DTWAIN_ArrayGetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG; nDataType:LONG):DTWAIN_ARRAY;stdcall; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValuesEx2';
+function DTWAIN_ArrayGetCapValues(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG):DTWAIN_ARRAY; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValues';
+function DTWAIN_ArrayGetCapValuesEx(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG):DTWAIN_ARRAY; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValuesEx';
+function DTWAIN_ArrayGetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG; nDataType:LONG):DTWAIN_ARRAY; external 'dtwain64ud.dll'   name 'DTWAIN_ArrayGetCapValuesEx2';
 
 implementation
 

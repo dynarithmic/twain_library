@@ -1114,14 +1114,15 @@ Class DTWAINAPI
     Public Const DTWAIN_PDF_USECOMPRESSION As Integer = 2048
     Public Const DTWAIN_PDF_CUSTOMSCALE As Integer = 4096
     Public Const DTWAIN_PDF_PIXELSPERMETERSIZE As Integer = 8192
-    Public Const DTWAIN_PDF_ALLOWPRINTING As Integer = 2052
-    Public Const DTWAIN_PDF_ALLOWMOD As Integer = 8
-    Public Const DTWAIN_PDF_ALLOWCOPY As Integer = 16
-    Public Const DTWAIN_PDF_ALLOWMODANNOTATIONS As Integer = 32
-    Public Const DTWAIN_PDF_ALLOWFILLIN As Integer = 256
-    Public Const DTWAIN_PDF_ALLOWEXTRACTION As Integer = 512
-    Public Const DTWAIN_PDF_ALLOWASSEMBLY As Integer = 1024
-    Public Const DTWAIN_PDF_ALLOWDEGRADEDPRINTING As Integer = 4
+    Public Const DTWAIN_PDF_ALLOWPRINTING As UInteger = 2052
+    Public Const DTWAIN_PDF_ALLOWMOD As UInteger = 8
+    Public Const DTWAIN_PDF_ALLOWCOPY As UInteger = 16
+    Public Const DTWAIN_PDF_ALLOWMODANNOTATIONS As UInteger = 32
+    Public Const DTWAIN_PDF_ALLOWFILLIN As UInteger = 256
+    Public Const DTWAIN_PDF_ALLOWEXTRACTION As UInteger = 512
+    Public Const DTWAIN_PDF_ALLOWASSEMBLY As UInteger = 1024
+    Public Const DTWAIN_PDF_ALLOWDEGRADEDPRINTING As UInteger = 4
+    Public Const DTWAIN_PDF_ALLOWALL As UInteger = &HFFFFFFFCUI
     Public Const DTWAIN_PDF_PORTRAIT As Integer = 0
     Public Const DTWAIN_PDF_LANDSCAPE As Integer = 1
     Public Const DTWAIN_PS_REGULAR As Integer = 0
@@ -2375,7 +2376,7 @@ Class DTWAINAPI
     Declare Ansi Function DTWAIN_SetHighlightStringA Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As String) As Integer
     Declare Ansi Function DTWAIN_SetPDFAuthorA Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpAuthor As String) As Integer
     Declare Ansi Function DTWAIN_SetPDFCreatorA Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpCreator As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFEncryptionA Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPStr)> lpszOwner As String, Permissions As Integer, UseStrongEncryption As Integer) As Integer
+    Declare Ansi Function DTWAIN_SetPDFEncryptionA Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPStr)> lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
     Declare Ansi Function DTWAIN_SetPDFKeywordsA Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpKeyWords As String) As Integer
     Declare Ansi Function DTWAIN_SetPDFPageScaleStringA Lib "dtwain32u.dll" (Source As System.IntPtr, nOptions As Integer, <MarshalAs(UnmanagedType.LPStr)> xScale As String, <MarshalAs(UnmanagedType.LPStr)> yScale As String) As Integer
     Declare Ansi Function DTWAIN_SetPDFPageSizeStringA Lib "dtwain32u.dll" (Source As System.IntPtr, PageSize As Integer, <MarshalAs(UnmanagedType.LPStr)> CustomWidth As String, <MarshalAs(UnmanagedType.LPStr)> CustomHeight As String) As Integer
@@ -2501,7 +2502,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_SetHighlightStringW Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Highlight As String) As Integer
     Declare Unicode Function DTWAIN_SetPDFAuthorW Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpAuthor As String) As Integer
     Declare Unicode Function DTWAIN_SetPDFCreatorW Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpCreator As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFEncryptionW Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPWStr)> lpszOwner As String, Permissions As Integer, UseStrongEncryption As Integer) As Integer
+    Declare Unicode Function DTWAIN_SetPDFEncryptionW Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPWStr)> lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
     Declare Unicode Function DTWAIN_SetPDFKeywordsW Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpKeyWords As String) As Integer
     Declare Unicode Function DTWAIN_SetPDFPageScaleStringW Lib "dtwain32u.dll" (Source As System.IntPtr, nOptions As Integer, <MarshalAs(UnmanagedType.LPWStr)> xScale As String, <MarshalAs(UnmanagedType.LPWStr)> yScale As String) As Integer
     Declare Unicode Function DTWAIN_SetPDFPageSizeStringW Lib "dtwain32u.dll" (Source As System.IntPtr, PageSize As Integer, <MarshalAs(UnmanagedType.LPWStr)> CustomWidth As String, <MarshalAs(UnmanagedType.LPWStr)> CustomHeight As String) As Integer
@@ -2640,7 +2641,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetHighlightString Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Highlight As String) As Integer
     Declare Auto Function DTWAIN_SetPDFAuthor Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpAuthor As String) As Integer
     Declare Auto Function DTWAIN_SetPDFCreator Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpCreator As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFEncryption Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPTStr)> lpszOwner As String, Permissions As Integer, UseStrongEncryption As Integer) As Integer
+    Declare Auto Function DTWAIN_SetPDFEncryption Lib "dtwain32u.dll" (Source As System.IntPtr, bUseEncryption As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszUser As String, <MarshalAs(UnmanagedType.LPTStr)> lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
     Declare Auto Function DTWAIN_SetPDFKeywords Lib "dtwain32u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpKeyWords As String) As Integer
     Declare Auto Function DTWAIN_SetPDFPageScaleString Lib "dtwain32u.dll" (Source As System.IntPtr, nOptions As Integer, <MarshalAs(UnmanagedType.LPTStr)> xScale As String, <MarshalAs(UnmanagedType.LPTStr)> yScale As String) As Integer
     Declare Auto Function DTWAIN_SetPDFPageSizeString Lib "dtwain32u.dll" (Source As System.IntPtr, PageSize As Integer, <MarshalAs(UnmanagedType.LPTStr)> CustomWidth As String, <MarshalAs(UnmanagedType.LPTStr)> CustomHeight As String) As Integer
@@ -2846,7 +2847,15 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_ArrayGetAtFrameEx Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, FrameArray As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_ArraySetAtFrameEx Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, FrameArray As System.IntPtr) As Integer
 
-    Declare Ansi Function    DTWAIN_ArraySetAtFloatStringA Lib "dtwain32u.dll" (theArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As String) As Integer
+    Declare Ansi Function DTWAIN_ArrayGetAtFrameStringA Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Bottom As StringBuilder) As Integer
+    Declare Unicode Function DTWAIN_ArrayGetAtFrameStringW Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Bottom As StringBuilder) As Integer
+    Declare Auto Function DTWAIN_ArrayGetAtFrameString Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Bottom As StringBuilder) As Integer
+
+    Declare Ansi Function DTWAIN_ArraySetAtFrameStringA Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Left As String, <MarshalAs(UnmanagedType.LPStr)> Top As String, <MarshalAs(UnmanagedType.LPStr)> Right As String, <MarshalAs(UnmanagedType.LPStr)> Bottom As String) As Integer
+    Declare Unicode Function DTWAIN_ArraySetAtFrameStringW Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Left As String, <MarshalAs(UnmanagedType.LPWStr)> Top As String, <MarshalAs(UnmanagedType.LPWStr)> Right As String, <MarshalAs(UnmanagedType.LPWStr)> Bottom As String) As Integer
+    Declare Auto Function DTWAIN_ArraySetAtFrameString Lib "dtwain32u.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Left As String, <MarshalAs(UnmanagedType.LPTStr)> Top As String, <MarshalAs(UnmanagedType.LPTStr)> Right As String, <MarshalAs(UnmanagedType.LPTStr)> Bottom As String) As Integer
+
+    Declare Ansi Function DTWAIN_ArraySetAtFloatStringA Lib "dtwain32u.dll" (theArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As String) As Integer
     Declare Unicode Function DTWAIN_ArraySetAtFloatStringW Lib "dtwain32u.dll" (theArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Val As String) As Integer
     Declare Auto Function    DTWAIN_ArraySetAtFloatString Lib "dtwain32u.dll" (theArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As String) As Integer
 

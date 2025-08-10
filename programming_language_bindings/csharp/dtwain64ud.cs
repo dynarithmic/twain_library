@@ -1169,14 +1169,15 @@ namespace Dynarithmic
         public const  int DTWAIN_PDF_USECOMPRESSION = 2048;
         public const  int DTWAIN_PDF_CUSTOMSCALE = 4096;
         public const  int DTWAIN_PDF_PIXELSPERMETERSIZE = 8192;
-        public const  int DTWAIN_PDF_ALLOWPRINTING = 2052;
-        public const  int DTWAIN_PDF_ALLOWMOD = 8;
-        public const  int DTWAIN_PDF_ALLOWCOPY = 16;
-        public const  int DTWAIN_PDF_ALLOWMODANNOTATIONS = 32;
-        public const  int DTWAIN_PDF_ALLOWFILLIN = 256;
-        public const  int DTWAIN_PDF_ALLOWEXTRACTION = 512;
-        public const  int DTWAIN_PDF_ALLOWASSEMBLY = 1024;
-        public const  int DTWAIN_PDF_ALLOWDEGRADEDPRINTING = 4;
+        public const  uint DTWAIN_PDF_ALLOWPRINTING = 2052;
+        public const  uint DTWAIN_PDF_ALLOWMOD = 8;
+        public const  uint DTWAIN_PDF_ALLOWCOPY = 16;
+        public const  uint DTWAIN_PDF_ALLOWMODANNOTATIONS = 32;
+        public const  uint DTWAIN_PDF_ALLOWFILLIN = 256;
+        public const  uint DTWAIN_PDF_ALLOWEXTRACTION = 512;
+        public const  uint DTWAIN_PDF_ALLOWASSEMBLY = 1024;
+        public const  uint DTWAIN_PDF_ALLOWDEGRADEDPRINTING = 4;
+        public const  uint DTWAIN_PDF_ALLOWALL = 0xFFFFFFFCU;
         public const  int DTWAIN_PDF_PORTRAIT = 0;
         public const  int DTWAIN_PDF_LANDSCAPE = 1;
         public const  int DTWAIN_PS_REGULAR = 0;
@@ -3721,7 +3722,7 @@ namespace Dynarithmic
         public static extern  int DTWAIN_SetPDFCreatorA(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
-        public static extern  int DTWAIN_SetPDFEncryptionA(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPStr)] string lpszUser, [MarshalAs(UnmanagedType.LPStr)] string lpszOwner, int Permissions, int UseStrongEncryption);
+        public static extern  int DTWAIN_SetPDFEncryptionA(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPStr)] string lpszUser, [MarshalAs(UnmanagedType.LPStr)] string lpszOwner, uint Permissions, int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern  int DTWAIN_SetPDFKeywordsA(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string lpKeyWords);
@@ -4096,7 +4097,7 @@ namespace Dynarithmic
         public static extern  int DTWAIN_SetPDFCreatorW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
-        public static extern  int DTWAIN_SetPDFEncryptionW(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPWStr)] string lpszUser, [MarshalAs(UnmanagedType.LPWStr)] string lpszOwner, int Permissions, int UseStrongEncryption);
+        public static extern  int DTWAIN_SetPDFEncryptionW(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPWStr)] string lpszUser, [MarshalAs(UnmanagedType.LPWStr)] string lpszOwner, uint Permissions, int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
         public static extern  int DTWAIN_SetPDFKeywordsW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] string lpKeyWords);
@@ -4510,7 +4511,7 @@ namespace Dynarithmic
         public static extern  int DTWAIN_SetPDFCreator(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpCreator);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern  int DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPTStr)] string lpszUser, [MarshalAs(UnmanagedType.LPTStr)] string lpszOwner, int Permissions, int UseStrongEncryption);
+        public static extern  int DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPTStr)] string lpszUser, [MarshalAs(UnmanagedType.LPTStr)] string lpszOwner, uint Permissions, int UseStrongEncryption);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern  int DTWAIN_SetPDFKeywords(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpKeyWords);
@@ -5157,5 +5158,28 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumPixelTypesEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_RangeExpandEx(DTWAIN_RANGE range);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumSupportedExtImageInfoEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumExtImageInfoTypesEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumCamerasEx3(DTWAIN_SOURCE Source, int nWhichCamera);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumBottomCamerasEx(DTWAIN_SOURCE Source);
     }
 }
