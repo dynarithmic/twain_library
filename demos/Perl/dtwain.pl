@@ -1,5 +1,3 @@
-#   DTWAIN64.PL
-#  
 #   This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
 #   Copyright (c) 2002-2025 Dynarithmic Software.                                         
 #                                                                                         
@@ -544,7 +542,7 @@ use constant DTWAIN_CNTYNICARAGUA => 505;
 use constant DTWAIN_CNTYNIGER => 227;
 use constant DTWAIN_CNTYNIGERIA => 234;
 use constant DTWAIN_CNTYNIUE => 1027;
-use constant DTWAIN_CNTYNORFOLKI => 1028;
+use constant DTWAIN_CNTYNORFOLKI => 1028; 
 use constant DTWAIN_CNTYNORWAY => 47;
 use constant DTWAIN_CNTYOMAN => 968;
 use constant DTWAIN_CNTYPAKISTAN => 92;

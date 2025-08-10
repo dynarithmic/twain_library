@@ -688,10 +688,10 @@ Public Class VB_FullDemo
                 Case 1
                     Exit Select
                 Case 2
-                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
+                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE, logDlg.GetFileName())
                     Exit Select
                 Case 3
-                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
+                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE, "")
                     Exit Select
             End Select
         End If
