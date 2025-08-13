@@ -63,13 +63,14 @@ namespace TWAINDemo
 
             uint customDSLength = 0;
             Encoding enc8 = Encoding.UTF8;
-            TwainAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
+
+            TwainAPI.DTWAIN_GetCustomDSData(m_Source, null, 0, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
             byte [] szCustomData = new byte[customDSLength];
             TwainAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
             txtDSData.Text = enc8.GetString(szCustomData, 0, (int)customDSLength);
 
             string sName = szNameInfo.ToString();
-            int nBytes = TwainAPI.DTWAIN_GetSourceDetails(sName, IntPtr.Zero, 0, 2, 1);
+            int nBytes = TwainAPI.DTWAIN_GetSourceDetails(sName, null, 0, 2, 1);
             szInfo = new StringBuilder(nBytes);
             TwainAPI.DTWAIN_GetSourceDetails(sName, szInfo, nBytes, 2, 1);
 

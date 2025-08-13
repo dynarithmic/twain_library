@@ -386,7 +386,9 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Select Case nWhich
             Case 0
-                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, IntPtr.Zero, 0, 0,
+                Dim nullString As String
+                nullString = IntPtr.Zero
+                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2A(IntPtr.Zero, Nothing, 0, 0,
                                                                 DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
             Case 1
                 Dim objSelectSourceByName As SelectSourceByName = New SelectSourceByName()

@@ -14,6 +14,11 @@ DTWAIN Version changes
 
   will allow all operations on the encrypted PDF except for copying (copying will be disabled).
 
+- Added AES-128 bit encryption option when creating encrypted PDF files.  To enable this option, the
+  DTWAIN_SetPDFAESEncryption() function must be called with the second argument as TRUE.  
+  Note that you will still need to call DTWAIN_SetPDFEncryption() to set up the initial encryption 
+  options (user/owner password, permissions, etc.)
+
 - Added the following functions that return DTWAIN_ARRAYs, rather than the user having to supply a pointer
   to the DTWAIN_ARRAY as a parameter.  A table of the new functions and the equivalent functions is as follows
 
@@ -31,7 +36,16 @@ DTWAIN Version changes
 - Fixed Delphi demo program when run using 64-bit DTWAIN.
 
 - Updated C#, Visual Basic, and Delphi language bindings.  You should use these new language bindings
-  with version 5.6.8 of the DTWAIN DLL's.
+  with version 5.6.8 of the DTWAIN DLL's.  
+
+  In addition, some of the C# and Visual Basic function definitions have changes with respect to strings and 
+  null value parameters.  If you get a compilation error in your existing C# or Visual Basic code using the 
+  updated language bindings, more than likely the error will point to the improper usage of specifying
+  a null parameter value.  Please adjust your code accordingly (for example, for Visual Basic, this 
+  may mean using "Nothing" as the argument instead of IntPtr.Zero).  
+
+  The VB and C# demos have been updated so you can view the demo source code if you are unsure how to pass 
+  the NULL values to the DTWAIN functions that have NULL parameters.
 
 
 5.6.7
