@@ -13,7 +13,7 @@ Public Class AboutDlg
     End Sub
 
     Private Sub AboutDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim nChars As Integer = DTWAINAPI.DTWAIN_GetVersionInfo(IntPtr.Zero, -1)
+        Dim nChars As Integer = DTWAINAPI.DTWAIN_GetVersionInfo(Nothing, -1)
         Dim szInfo As New System.Text.StringBuilder(nChars)
         DTWAINAPI.DTWAIN_GetVersionInfo(szInfo, nChars)
         edInfo.Text = szInfo.ToString()

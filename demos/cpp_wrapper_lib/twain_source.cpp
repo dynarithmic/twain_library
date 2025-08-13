@@ -422,6 +422,7 @@ namespace dynarithmic
                     encrypt_opts.get_owner_password().c_str(),
                     encrypt_opts.get_permissions_int(),
                     encrypt_opts.is_use_strong_encryption());
+                API_INSTANCE DTWAIN_SetPDFAESEncryption(source, encrypt_opts.is_use_AES_encryption());
             }
         }
 

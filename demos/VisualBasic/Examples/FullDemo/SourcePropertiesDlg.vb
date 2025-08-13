@@ -60,7 +60,7 @@ Public Class SourcePropertiesDlg
         Dim customDSLength As UInteger
         Dim jsonLength As Integer
         Dim enc8 As Encoding = Encoding.UTF8
-        DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, IntPtr.Zero, 0, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
+        DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, Nothing, 0, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
         Dim szCustomData(customDSLength) As Byte
         DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
         Dim contents As String
@@ -68,7 +68,7 @@ Public Class SourcePropertiesDlg
         Me.txtDSData.Text = contents
         Dim sName As String
         sName = szInfoName.ToString()
-        jsonLength = DTWAINAPI.DTWAIN_GetSourceDetails(sName, IntPtr.Zero, 0, 2, 1)
+        jsonLength = DTWAINAPI.DTWAIN_GetSourceDetails(sName, Nothing, 0, 2, 1)
         szInfo = New StringBuilder(jsonLength)
         DTWAINAPI.DTWAIN_GetSourceDetails(sName, szInfo, jsonLength, 2, 1)
 
