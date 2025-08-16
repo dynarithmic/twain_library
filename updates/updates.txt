@@ -33,6 +33,8 @@ DTWAIN Version changes
   DTWAIN_EnumTopCamerasEx                   DTWAIN_EnumTopCameras 
   DTWAIN_RangeExpandEx                      DTWAIN_RangeExpand 
 
+- [New]: Added Ruby language binding.  
+
 - Fixed Delphi demo program when run using 64-bit DTWAIN.
 
 - Updated C#, Visual Basic, and Delphi language bindings.  You should use these new language bindings
