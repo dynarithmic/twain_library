@@ -386,7 +386,9 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Select Case nWhich
             Case 0
-                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, IntPtr.Zero, 0, 0,
+                Dim nullString As String
+                nullString = IntPtr.Zero
+                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2A(IntPtr.Zero, Nothing, 0, 0,
                                                                 DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
             Case 1
                 Dim objSelectSourceByName As SelectSourceByName = New SelectSourceByName()
@@ -688,10 +690,10 @@ Public Class VB_FullDemo
                 Case 1
                     Exit Select
                 Case 2
-                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
+                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE, logDlg.GetFileName())
                     Exit Select
                 Case 3
-                    DTWAINAPI.DTWAIN_SetTwainLog(CInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
+                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE, "")
                     Exit Select
             End Select
         End If

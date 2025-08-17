@@ -506,7 +506,7 @@ namespace TWAINDemo
             {
                 case 0:
                     // Select the source
-                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero, IntPtr.Zero,0,0, 
+                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero, null, 0,0, 
                             TwainAPI.DTWAIN_DLG_CENTER_SCREEN  | TwainAPI.DTWAIN_DLG_HIGHLIGHTFIRST | TwainAPI.DTWAIN_DLG_SORTNAMES
                             | TwainAPI.DTWAIN_DLG_TOPMOSTWINDOW);
                 break;
@@ -774,7 +774,7 @@ namespace TWAINDemo
 
         private void LoggingOptions_Click(object sender, EventArgs e)
         {
-            long LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~(TwainAPI.DTWAIN_LOG_ISTWAINMSG | TwainAPI.DTWAIN_LOG_USEFILE | TwainAPI.DTWAIN_LOG_DEBUGMONITOR | TwainAPI.DTWAIN_LOG_CONSOLE);
+            uint LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~(TwainAPI.DTWAIN_LOG_ISTWAINMSG | TwainAPI.DTWAIN_LOG_USEFILE | TwainAPI.DTWAIN_LOG_DEBUGMONITOR | TwainAPI.DTWAIN_LOG_CONSOLE);
             LogFileSelectionDlg logDlg = new LogFileSelectionDlg();
             DialogResult nResult = logDlg.ShowDialog();
             if (nResult == DialogResult.OK)
@@ -787,13 +787,13 @@ namespace TWAINDemo
                     case 1:
                     break;
                     case 2:
-                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName());
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_USEFILE, logDlg.GetFileName());
                     break;
                     case 3:
-                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_DEBUGMONITOR), "");
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_DEBUGMONITOR, "");
                     break;
                     case 4:
-                        TwainAPI.DTWAIN_SetTwainLog((int)(LogFlags | TwainAPI.DTWAIN_LOG_CONSOLEWITHHANDLER), "");
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_CONSOLEWITHHANDLER, "");
                     break;
                 }
             }

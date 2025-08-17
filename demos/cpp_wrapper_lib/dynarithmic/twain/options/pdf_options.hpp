@@ -92,6 +92,7 @@ namespace dynarithmic
                     std::string m_owner_password;
                     bool m_useStrong;
                     bool m_useEncryption;
+                    bool m_useAESEncryption;
                     bool m_bAutoGenPassword;
                     int32_t m_permissions;
                 
@@ -128,8 +129,9 @@ namespace dynarithmic
                     }
 
                     public:
-                       pdf_encryption_options() : m_useStrong(true), m_useEncryption(false), m_bAutoGenPassword(false), m_permissions(0) {}
+                       pdf_encryption_options() : m_useStrong(true), m_useEncryption(false), m_useAESEncryption(false), m_bAutoGenPassword(false), m_permissions(0) {}
                        pdf_encryption_options& use_encryption(bool bSet, bool useStrong = true) { m_useEncryption = bSet; m_useStrong = useStrong; return *this; }
+                       pdf_encryption_options& use_AES_encryption(bool bSet) { m_useAESEncryption = bSet; return *this; }
                        pdf_encryption_options& use_strong_encryption(bool bSet = true) { m_useEncryption = true; m_useStrong = bSet; return *this; }
                        pdf_encryption_options& use_autogen_password(bool bSet = true) { m_bAutoGenPassword = true; m_useStrong = bSet; return *this; }
                        pdf_encryption_options& set_user_password(const std::string& pwd = "") { return set_password(m_user_password, pwd, 0);}
@@ -153,6 +155,7 @@ namespace dynarithmic
                        std::string get_owner_password() const { return m_owner_password; }
                        bool is_use_encryption() const { return m_useEncryption; }
                        bool is_use_strong_encryption() const { return m_useStrong; }
+                       bool is_use_AES_encryption() const { return m_useAESEncryption; }
                        bool is_use_autogen_password() const { return m_bAutoGenPassword; }
 
                        template <typename C = std::vector<pdf_permission>> 
