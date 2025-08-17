@@ -1,5 +1,58 @@
 DTWAIN Version changes
 
+5.6.8
+
+- Replaced crypto++ with Portable C++ Hashing Library by Stephan Brumme, resulting in 
+  smaller binaries.
+
+- Added DTWAIN_PDF_ALLOWALL option to DTWAIN_SetPDFEncryption() set of encryption permissions. 
+  This allows easier manipulation if you want to allow all operations on an encrypted PDF
+  except for a few options, simply by subtracting the option(s) you want to disable 
+  from DTWAIN_PDF_ALLOWALL.  For example: 
+ 
+  DTWAIN_SetPDFEncryption(Source, TRUE, "Owner", "User", DTWAIN_PDF_ALLOWALL - DTWAIN_PDF_ALLOWCOPY, TRUE);
+
+  will allow all operations on the encrypted PDF except for copying (copying will be disabled).
+
+- Added AES-128 bit encryption option when creating encrypted PDF files.  To enable this option, the
+  DTWAIN_SetPDFAESEncryption() function must be called with the second argument as TRUE.  
+  Note that you will still need to call DTWAIN_SetPDFEncryption() to set up the initial encryption 
+  options (user/owner password, permissions, etc.)
+
+- Added the following functions that return DTWAIN_ARRAYs, rather than the user having to supply a pointer
+  to the DTWAIN_ARRAY as a parameter.  A table of the new functions and the equivalent functions is as follows
+
+  New function                              Equivalent function
+  ------------                              ------------------- 
+  DTWAIN_EnumBottomCamerasEx                DTWAIN_EnumBottomCameras 
+  DTWAIN_EnumCamerasEx2                     DTWAIN_EnumCameras 
+  DTWAIN_EnumCamerasEx3                     DTWAIN_EnumCamerasEx 
+  DTWAIN_EnumExtImageInfoTypesEx            DTWAIN_EnumExtImageInfoTypes 
+  DTWAIN_EnumPixelTypesEx                   DTWAIN_EnumPixelTypes 
+  DTWAIN_EnumSupportedExtImageInfoEx        DTWAIN_EnumSupportedExtImageInfo 
+  DTWAIN_EnumTopCamerasEx                   DTWAIN_EnumTopCameras 
+  DTWAIN_RangeExpandEx                      DTWAIN_RangeExpand 
+
+- [New]: Added Ruby language binding.  
+
+- The DTWAIN demo program is now DTWDEMO32.exe and DTWDEMO64.exe instead of DTWDEMO32U.exe and 
+  DTWDEMO64U.exe, respectively.
+
+- Fixed Delphi demo program when run using 64-bit DTWAIN.
+
+- Updated C#, Visual Basic, and Delphi language bindings.  You should use these new language bindings
+  with version 5.6.8 of the DTWAIN DLL's.  
+
+  In addition, some of the C# and Visual Basic function definitions have changes with respect to strings and 
+  null value parameters.  If you get a compilation error in your existing C# or Visual Basic code using the 
+  updated language bindings, more than likely the error will point to the improper usage of specifying
+  a null parameter value.  Please adjust your code accordingly (for example, for Visual Basic, this 
+  may mean using "Nothing" as the argument instead of IntPtr.Zero).  
+
+  The VB and C# demos have been updated so you can view the demo source code if you are unsure how to pass 
+  the NULL values to the DTWAIN functions that have NULL parameters.
+
+
 5.6.7
 
 - Corrected various constants in the TWAIN constant lookup table.  
