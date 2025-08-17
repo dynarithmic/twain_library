@@ -590,15 +590,14 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 
 * Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
 
-  * crypto++   - Public domain cryptography library by [Wei Dei](https://www.cryptopp.com/)
   * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
   * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
   * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
+  * AES encryption - [Hallo Weeks](https://github.com/halloweeks/AES-128-CBC)
 
 * In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
-
-* All other raw image processing (plus the TWAIN acquisition) is done without third-party libraries.  The image formats that are not implemented using third-party libraries are PDF, Windows Meta File (WMF) and Enhanced Meta File (EMF).  
-
+  
+* All other raw image processing, plus the interface to the TWAIN system itself, is done without third-party libraries or third-party source code.  
 
 ----------
 
