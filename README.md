@@ -226,6 +226,75 @@ or if it is the second example:
 
 Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as **DTWAIN_EnumCapabilities**, **DTWAIN_GetCapValues** and **DTWAIN_SetCapValues**, or one of the functions that wrap the setting of a capability such as **DTWAIN_SetResolution**, **DTWAIN_SetBrightness**, etc.
 
+Here is an example of setting the ICAP_PIXELTYPE capability:
+
+    #include "dtwain.h"
+    int main()
+    {
+        DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        if ( Source )
+        {
+            // set the pixel type to TWPT_RGB
+            
+            // First, create a DTWAIN_ARRAY to hold the value(s) we will set
+            DTWAIN_ARRAY aPixelTypeValue = DTWAIN_ArrayCreateFromCap(Source, ICAP_PIXELTYPE, 0);
+            
+            // Add the TWPT_RGB value to our array of values
+            DTWAIN_ArrayAddLong(aPixelTypeValue, TWPT_RGB);
+            
+            // Call function to set the ICAP_PIXELTYPE capability
+            DTWAIN_BOOL result = DTWAIN_SetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPSET, aPixelTypeValue);
+            
+            if ( result )
+            {
+                // Capability was set
+            }
+            
+            // Dispose of the array
+            DTWAIN_ArrayDestroy(aPixelTypeValue);
+        }   
+        DTWAIN_SysDestroy();         
+    }         
+
+
+Here is an example of getting all of the available ICAP_PIXELTYPE values:
+
+    #include <stdio.h>
+    #include "dtwain.h"
+    int main()
+    {
+        DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        if ( Source )
+        {
+            // Get the pixel type values
+            
+            // First, declare a DTWAIN_ARRAY that will hold all the value(s) retrieved from the device
+            DTWAIN_ARRAY aPixelTypeValues;
+            
+            // Call function to get all the ICAP_PIXELTYPE capability
+            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET, &aPixelTypeValues);
+            
+            if ( result )
+            {
+                // Now array has all of the values.  Print each one:
+                LONG numItems = DTWAIN_ArrayGetCount(aPixelTypeValues);
+                LONG pixValue;
+                for (int i = 0; i < numItems; ++i)
+                {
+                   DTWAIN_ArrayGetAtLong(aPixelTypeValues, i, &pixValue);                   
+                   printf("Pixel Type value %d is %d\n", i+1, pixValue);
+                }
+                DTWAIN_ArrayDestroy(aPixelTypeValues);
+            }               
+        }   
+        DTWAIN_SysDestroy();         
+    }         
+
+
+Here is an example that calls the high-level function DTWAIN_SetResolution that sets the resolution to 300 DPI.  Note that DTWAIN_SetResolution() is just a "shortcut" way of setting the `ICAP_XRESOLUTION` and `ICAP_YRESOLUTION` capabilities:
+
     #include "dtwain.h"
     int main()
     {
@@ -242,7 +311,9 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
  
 Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling **DTWAIN_GetLastError**.
 
-In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.      
+In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.  
+
+
 
 ----------
 
