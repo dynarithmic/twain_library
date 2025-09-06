@@ -1,5 +1,3 @@
-#   DTWAIN64.PL
-#  
 #   This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
 #   Copyright (c) 2002-2025 Dynarithmic Software.                                         
 #                                                                                         
@@ -19,6 +17,7 @@
 #   DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT 
 #   OF THIRD PARTY RIGHTS.                                                                
 #   
+
 
 use constant DTWAIN_FF_TIFF => 0;
 use constant DTWAIN_FF_PICT => 1;
@@ -174,6 +173,7 @@ use constant DTWAIN_BIGTIFFG4 => 11013;
 use constant DTWAIN_BIGTIFFG4MULTI => 11014;
 use constant DTWAIN_BIGTIFFJPEG => 11015;
 use constant DTWAIN_BIGTIFFJPEGMULTI => 11016;
+use constant DTWAIN_JPEGXR => 12000;
 use constant DTWAIN_INCHES => 0;
 use constant DTWAIN_CENTIMETERS => 1;
 use constant DTWAIN_PICAS => 2;
@@ -1044,6 +1044,8 @@ use constant DTWAIN_PDF_ALLOWEXTRACTION => 512;
 use constant DTWAIN_PDF_ALLOWASSEMBLY => 1024;
 use constant DTWAIN_PDF_ALLOWDEGRADEDPRINTING => 4;
 use constant DTWAIN_PDF_ALLOWALL => 0xFFFFFFFC;
+use constant DTWAIN_PDF_ALLOWANYMOD => (DTWAIN_PDF_ALLOWMOD | DTWAIN_PDF_ALLOWFILLIN | DTWAIN_PDF_ALLOWMODANNOTATIONS | DTWAIN_PDF_ALLOWASSEMBLY);
+use constant DTWAIN_PDF_ALLOWANYPRINTING => (DTWAIN_PDF_ALLOWPRINTING | DTWAIN_PDF_ALLOWDEGRADEDPRINTING);
 use constant DTWAIN_PDF_PORTRAIT => 0;
 use constant DTWAIN_PDF_LANDSCAPE => 1;
 use constant DTWAIN_PS_REGULAR => 0;
@@ -1647,9 +1649,12 @@ use constant DTWAIN_USERRES_START => 20000;
 use constant DTWAIN_USERRES_MAXSIZE => 8192;
 use constant DTWAIN_APIHANDLEOK => 1;
 use constant DTWAIN_TWAINSESSIONOK => 2;
+use constant DTWAIN_PDF_AES128 => 1;
+use constant DTWAIN_PDF_AES256 => 2;
 
 # DTWAIN function definitions. 
 my $dtwain_dllName = 'DTWAIN64.DLL';  # This is the placeholder for the DLL Name that will be loaded.
+
 
 my $DTWAIN_AcquireAudioFile = new Win32::API($dtwain_dllName, 'DTWAIN_AcquireAudioFile', 'NPiiIIP', 'I');
 my $DTWAIN_AcquireAudioFileA = new Win32::API($dtwain_dllName, 'DTWAIN_AcquireAudioFileA', 'NPiiIIP', 'I');
@@ -1674,6 +1679,7 @@ my $DTWAIN_AllocateMemory = new Win32::API($dtwain_dllName, 'DTWAIN_AllocateMemo
 my $DTWAIN_AllocateMemory64 = new Win32::API($dtwain_dllName, 'DTWAIN_AllocateMemory64', 'Q', 'P');
 my $DTWAIN_AllocateMemoryEx = new Win32::API($dtwain_dllName, 'DTWAIN_AllocateMemoryEx', 'I', 'P');
 my $DTWAIN_AppHandlesExceptions = new Win32::API($dtwain_dllName, 'DTWAIN_AppHandlesExceptions', 'I', 'I');
+my $DTWAIN_ArrayANSIStringToFloat = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayANSIStringToFloat', 'N', 'N');
 my $DTWAIN_ArrayAdd = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayAdd', 'NP', 'I');
 my $DTWAIN_ArrayAddANSIString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayAddANSIString', 'NP', 'I');
 my $DTWAIN_ArrayAddANSIStringN = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayAddANSIStringN', 'NPi', 'I');
@@ -1725,6 +1731,9 @@ my $DTWAIN_ArrayFindStringW = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFindS
 my $DTWAIN_ArrayFindWideString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFindWideString', 'NP', 'i');
 my $DTWAIN_ArrayFix32GetAt = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFix32GetAt', 'NIPP', 'I');
 my $DTWAIN_ArrayFix32SetAt = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFix32SetAt', 'NIII', 'I');
+my $DTWAIN_ArrayFloatToANSIString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFloatToANSIString', 'N', 'N');
+my $DTWAIN_ArrayFloatToString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFloatToString', 'N', 'N');
+my $DTWAIN_ArrayFloatToWideString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayFloatToWideString', 'N', 'N');
 my $DTWAIN_ArrayGetAt = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetAt', 'NiP', 'I');
 my $DTWAIN_ArrayGetAtANSIString = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetAtANSIString', 'NiP', 'I');
 my $DTWAIN_ArrayGetAtANSIStringPtr = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetAtANSIStringPtr', 'Ni', 'P');
@@ -1803,6 +1812,8 @@ my $DTWAIN_ArraySetAtString = new Win32::API($dtwain_dllName, 'DTWAIN_ArraySetAt
 my $DTWAIN_ArraySetAtStringA = new Win32::API($dtwain_dllName, 'DTWAIN_ArraySetAtStringA', 'NiP', 'I');
 my $DTWAIN_ArraySetAtStringW = new Win32::API($dtwain_dllName, 'DTWAIN_ArraySetAtStringW', 'NiP', 'I');
 my $DTWAIN_ArraySetAtWideString = new Win32::API($dtwain_dllName, 'DTWAIN_ArraySetAtWideString', 'NiP', 'I');
+my $DTWAIN_ArrayStringToFloat = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayStringToFloat', 'N', 'N');
+my $DTWAIN_ArrayWideStringToFloat = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayWideStringToFloat', 'N', 'N');
 my $DTWAIN_CallCallback = new Win32::API($dtwain_dllName, 'DTWAIN_CallCallback', 'iii', 'i');
 my $DTWAIN_CallCallback64 = new Win32::API($dtwain_dllName, 'DTWAIN_CallCallback64', 'iiq', 'i');
 my $DTWAIN_CallDSMProc = new Win32::API($dtwain_dllName, 'DTWAIN_CallDSMProc', 'PPiiiP', 'i');
@@ -2114,6 +2125,7 @@ my $DTWAIN_GetImageInfoStringA = new Win32::API($dtwain_dllName, 'DTWAIN_GetImag
 my $DTWAIN_GetImageInfoStringW = new Win32::API($dtwain_dllName, 'DTWAIN_GetImageInfoStringW', 'NPPPPPPPPPP', 'I');
 my $DTWAIN_GetJobControl = new Win32::API($dtwain_dllName, 'DTWAIN_GetJobControl', 'NPI', 'I');
 my $DTWAIN_GetJpegValues = new Win32::API($dtwain_dllName, 'DTWAIN_GetJpegValues', 'NPP', 'I');
+my $DTWAIN_GetJpegXRValues = new Win32::API($dtwain_dllName, 'DTWAIN_GetJpegXRValues', 'NPP', 'I');
 my $DTWAIN_GetLanguage = new Win32::API($dtwain_dllName, 'DTWAIN_GetLanguage', '', 'i');
 my $DTWAIN_GetLastError = new Win32::API($dtwain_dllName, 'DTWAIN_GetLastError', '', 'i');
 my $DTWAIN_GetLibraryPath = new Win32::API($dtwain_dllName, 'DTWAIN_GetLibraryPath', 'Pi', 'i');
@@ -2595,6 +2607,7 @@ my $DTWAIN_SetHighlightStringA = new Win32::API($dtwain_dllName, 'DTWAIN_SetHigh
 my $DTWAIN_SetHighlightStringW = new Win32::API($dtwain_dllName, 'DTWAIN_SetHighlightStringW', 'NP', 'I');
 my $DTWAIN_SetJobControl = new Win32::API($dtwain_dllName, 'DTWAIN_SetJobControl', 'NiI', 'I');
 my $DTWAIN_SetJpegValues = new Win32::API($dtwain_dllName, 'DTWAIN_SetJpegValues', 'Nii', 'I');
+my $DTWAIN_SetJpegXRValues = new Win32::API($dtwain_dllName, 'DTWAIN_SetJpegXRValues', 'Nii', 'I');
 my $DTWAIN_SetLanguage = new Win32::API($dtwain_dllName, 'DTWAIN_SetLanguage', 'i', 'I');
 my $DTWAIN_SetLastError = new Win32::API($dtwain_dllName, 'DTWAIN_SetLastError', 'i', 'i');
 my $DTWAIN_SetLightPath = new Win32::API($dtwain_dllName, 'DTWAIN_SetLightPath', 'Ni', 'I');
@@ -2613,7 +2626,7 @@ my $DTWAIN_SetNoiseFilter = new Win32::API($dtwain_dllName, 'DTWAIN_SetNoiseFilt
 my $DTWAIN_SetOCRCapValues = new Win32::API($dtwain_dllName, 'DTWAIN_SetOCRCapValues', 'PiiN', 'I');
 my $DTWAIN_SetOrientation = new Win32::API($dtwain_dllName, 'DTWAIN_SetOrientation', 'NiI', 'I');
 my $DTWAIN_SetOverscan = new Win32::API($dtwain_dllName, 'DTWAIN_SetOverscan', 'NiI', 'I');
-my $DTWAIN_SetPDFAESEncryption = new Win32::API($dtwain_dllName, 'DTWAIN_SetPDFAESEncryption', 'NI', 'I');
+my $DTWAIN_SetPDFAESEncryption = new Win32::API($dtwain_dllName, 'DTWAIN_SetPDFAESEncryption', 'NiI', 'I');
 my $DTWAIN_SetPDFASCIICompression = new Win32::API($dtwain_dllName, 'DTWAIN_SetPDFASCIICompression', 'NI', 'I');
 my $DTWAIN_SetPDFAuthor = new Win32::API($dtwain_dllName, 'DTWAIN_SetPDFAuthor', 'NP', 'I');
 my $DTWAIN_SetPDFAuthorA = new Win32::API($dtwain_dllName, 'DTWAIN_SetPDFAuthorA', 'NP', 'I');

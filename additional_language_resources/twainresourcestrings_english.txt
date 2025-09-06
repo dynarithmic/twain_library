@@ -269,3 +269,31 @@
 10005 Could not remove subclass from user window
 10006 Device type and TWAIN required type do not match.
 10007 Warning: File compression type is unknown, or does not match the chosen image type.
+9500 TWAIN Condition Code: No Error
+9501 TWAIN Condition Code: Unknown cause of failure
+9502 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
+9503 TWAIN Condition Code: No Data Source
+9504 TWAIN Condition Code: Data Source is connected to maximum possible applications
+9505 TWAIN Condition Code: Data Source of Data Source Manager reported error.  Application not responsible.
+9506 TWAIN Condition Code: Unknown TWAIN capability encountered
+9509 TWAIN Condition Code: Unrecognized TWAIN triplet combination
+9510 TWAIN Condition Code: Data parameter is out of range
+9511 TWAIN Condition Code: TWAIN triplet is out of expected sequence
+9512 TWAIN Condition Code: Unknown destination Application in the DSM_Entry function
+9513 TWAIN Condition Code: Capability is not supported by the Data Source
+9514 TWAIN Condition Code: Operation is not supported by the capability
+9515 TWAIN Condition Code: Capability has dependancy on another capability
+9516 TWAIN Condition Code: File is protected
+9517 TWAIN Condition Code: File already exists
+9518 TWAIN Condition Code: File not found
+9519 TWAIN Condition Code: Directory is not empty
+9520 TWAIN Condition Code: Feeder is jammed
+9521 TWAIN Condition Code: Feeder detected multiple pages
+9522 TWAIN Condition Code: Error writing file (disk may be full)
+9523 TWAIN Condition Code: Device went offline during operation
+9524 TWAIN Condition Code: Operation failed (cover or door on device is opened)
+9525 TWAIN Condition Code: Operation failed (document has a damaged corner)
+9526 TWAIN Condition Code: Operation failed (focus error during document capture)
+9527 TWAIN Condition Code: Operation failed (document too light)
+9528 TWAIN Condition Code: Operation failed (document too dark)
+9529 TWAIN Condition Code: Operation failed (source has nothing to capture for transfer)
