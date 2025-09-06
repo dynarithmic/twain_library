@@ -1,5 +1,55 @@
 DTWAIN Version changes
 
+5.7.0
+
+- Added support for generating JPEG-XR files when using DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx().
+  The DTWAIN file constant to use is DTWAIN_JPEGXR.  In addition, the DTWAIN_SetJpegXRValues() can be 
+  used to set the quality factor and whether a progressive JPEG-XR file will be generated.  By default.
+  the quality factor is 80 (the scale goes from 1 to 100, where 100 is lossless compression), and
+  the default file is not a progressive JPEG-XR file.
+
+- Updated twaininfo.txt file to support DTWAIN_JPEGXR settings.  You must use the updated twaininfo.txt
+  file with DTWAIN version 5.7.0.
+
+- Changed signature of DTWAIN_SetPDFAESEncryption() function introduced in version 5.6.9 to allow 
+  AES 128-bit and the newly introduced AES 256-bit encryption to be used when creating encrypted PDF
+  files (see below).  To enable 128-bit encryption, the second argument to DTWAIN_SetPDFAESEncryption()
+  must be DTWAIN_PDF_AES128, and the third argument as TRUE.
+
+- Added AES-256 bit encryption option when creating encrypted PDF files.  To enable this option, the
+  DTWAIN_SetPDFAESEncryption() function must be called with the second argument as DTWAIN_PDF_AES256.
+  and the third argument as TRUE.  Note that you will still need to call DTWAIN_SetPDFEncryption() to 
+  set up the initial encryption options (user/owner password, permissions, etc.)
+
+- Fixed possible issue with creating valid PDF files that contain PDF streams with embedded left 
+  or right parentheses characters.  
+
+- Ensure C# language binding compile without warnings for C# version 8.0 and above.
+
+- Added DTWAIN_ARRAY functions:
+
+     DTWAIN_ArrayFloatToANSIString 
+     DTWAIN_ArrayFloatToWideString
+     DTWAIN_ArrayANSIStringToFloat
+     DTWAIN_ArayWideStringToFloat
+     DTWAIN_ArrayFloatToString
+     DTWAIN_ArrayStringToFloat
+
+   The functions above allow conversions from DTWAIN_ARRAY's that consist of floats to string types and
+   vice-versa.  This allows languages that have difficulty with C/C++ double types (for example, XBase++)
+   to call functions that return DTWAIN_ARRAYs of floating point values, and also to call DTWAIN functions
+   that require floating point arrays.
+
+   Example pseudo-code:
+      DTWAIN_ARRAY a = DTWAIN_ArrayGetCapValues(Source, ICAP_XRESOLUTION, DTWAIN_CAPGET);
+      // convert to string, since our language can't handle float variables
+      DTWAIN_ARRAY converted = DTWAIN_ArrayFloatToANSIString(a);
+      // Now converted has the string versions of the floating point values.
+
+   Note that to prevent memory leaks in the above code, both "converted" and "a" need to be eventually destroyed 
+   using DTWAIN_ArrayDestroy, since a copy of the DTWAIN_ARRAY a has the converted values.
+
+
 5.6.8
 
 - Replaced crypto++ with Portable C++ Hashing Library by Stephan Brumme, resulting in 

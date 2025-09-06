@@ -267,3 +267,31 @@
 10005 Kon subklasse niet verwijderen van gebruikersvenster  
 10006 Apparaattype en vereiste TWAIN-type komen niet overeen.
 10007 Waarschuwing: Bestandscompressietype is onbekend of komt niet overeen met het gekozen afbeeldings type.
+9500 TWAIN Gesteldheid Code: Vergissing
+9501 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
+9502 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
+9503 TWAIN Gesteldheid Code: Nulpunt Bron
+9504 TWAIN Gesteldheid Code: Nulpunt Bron verbonden naar maximaal mogelijke toepassing
+9505 TWAIN Gesteldheid Code: Nulpunt Bron of Nulpunt Bron Manager rapporteert vergissing.   Toepassing niet verantwoordelijken
+9506 TWAIN Gesteldheid Code: Unknown TWAIN vermogen tegenkomt
+9509 TWAIN Gesteldheid Code: Unrecognized TWAIN triplet combinatie
+9510 TWAIN Gesteldheid Code: Nulpunt parameter stel out of reikwijdte
+9511 TWAIN Condition Code: TWAIN triplet out of verwachtte opeenvolging
+9512 TWAIN Gesteldheid Code: Onbekenden bestemming Toepassing in DSM _Entry functies
+9513 TWAIN Gesteldheid Code: Vermogen niet gesteund bij Nulpunt Bron
+9514 TWAIN Gesteldheid Code: Operaties niet gesteund bij vermogen
+9515 TWAIN Gesteldheid Code: Vermogen heeft dependancy op een andere vermogen
+9516 TWAIN Gesteldheid Code: Bestanden beschermde
+9517 TWAIN Gesteldheid Code: File reeds bestaan
+9518 TWAIN Gesteldheid Code: niet File niet grondend
+9519 TWAIN Gesteldheid Code: Adresboek is empty
+9520 TWAIN Gesteldheid Code: Feeder Vergissing
+9521 TWAIN Gesteldheid Code: Feeder detected multiple pagina
+9522 TWAIN Gesteldheid Code: Vergissing geschreven file (schijf stel vollen
+9523 TWAIN Gesteldheid Code: Middel ging offline overdag operaties
+9524 TWAIN Statuscode: Bewerking mislukt (deksel of klep van het apparaat is geopend)
+9525 TWAIN Statuscode: Bewerking mislukt (document heeft een beschadigde hoek)
+9526 TWAIN Statuscode: Bewerking mislukt (fout bij scherpstelling tijdens documentcaptatie)
+9527 TWAIN Statuscode: Bewerking mislukt (document is te licht)
+9528 TWAIN Statuscode: Bewerking mislukt (document is te donker)
+9529 TWAIN Statuscode: Bewerking mislukt (bron heeft niets om te capturen voor overdracht)

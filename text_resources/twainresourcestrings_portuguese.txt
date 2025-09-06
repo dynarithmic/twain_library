@@ -269,3 +269,31 @@
 10005 Não foi possível remover a subclasse da janela do usuário  
 10006 O tipo de dispositivo e o tipo exigido pelo TWAIN não correspondem.
 10007 Aviso: O tipo de compressão de arquivo é desconhecido ou não corresponde ao tipo de imagem escolhido.
+9500 Código de Condição TWAIN: Sem Erro  
+9501 Código de Condição TWAIN: Causa desconhecida da falha  
+9502 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
+9503 Código de Condição TWAIN: Sem Fonte de Dados  
+9504 Código de Condição TWAIN: Fonte de Dados conectada ao número máximo possível de aplicações  
+9505 Código de Condição TWAIN: Fonte de Dados do Gerenciador de Fonte de Dados relatou erro. Aplicativo não é responsável.  
+9506 Código de Condição TWAIN: Capacidade TWAIN desconhecida encontrada  
+9509 Código de Condição TWAIN: Combinação de triplet TWAIN não reconhecida  
+9510 Código de Condição TWAIN: Parâmetro de dados está fora do intervalo  
+9511 Código de Condição TWAIN: Triplet TWAIN está fora da sequência esperada  
+9512 Código de Condição TWAIN: Aplicativo de destino desconhecido na função DSM_Entry  
+9513 Código de Condição TWAIN: Capacidade não é suportada pela Fonte de Dados  
+9514 Código de Condição TWAIN: Operação não é suportada pela capacidade  
+9515 Código de Condição TWAIN: Capacidade depende de outra capacidade  
+9516 Código de Condição TWAIN: Arquivo está protegido  
+9517 Código de Condição TWAIN: Arquivo já existe  
+9518 Código de Condição TWAIN: Arquivo não encontrado  
+9519 Código de Condição TWAIN: Diretório não está vazio  
+9520 Código de Condição TWAIN: Alimentador está atolado  
+9521 Código de Condição TWAIN: Alimentador detectou várias páginas  
+9522 Código de Condição TWAIN: Erro ao escrever arquivo (o disco pode estar cheio)  
+9523 Código de Condição TWAIN: Dispositivo ficou offline durante a operação  
+9524 Código de Condição TWAIN: Operação falhou (capa ou porta do dispositivo está aberta)  
+9525 Código de Condição TWAIN: Operação falhou (documento com canto danificado)  
+9526 Código de Condição TWAIN: Operação falhou (erro de foco durante a captura do documento)  
+9527 Código de Condição TWAIN: Operação falhou (documento muito claro)  
+9528 Código de Condição TWAIN: Operação falhou (documento muito escuro)  
+9529 Código de Condição TWAIN: Operação falhou (fonte não tem nada para capturar para transferência)  

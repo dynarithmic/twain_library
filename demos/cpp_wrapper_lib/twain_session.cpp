@@ -519,6 +519,9 @@ namespace dynarithmic
         /// @see set_temporary_directory()
         std::string twain_session::get_temporary_directory() const noexcept { return m_twain_characteristics.get_temporary_directory(); }
 
+        twain_session& twain_session::set_resource_directory(std::string dir) noexcept { m_twain_characteristics.set_resource_directory(dir); return *this; }
+        std::string twain_session::get_resource_directory() const noexcept { return m_twain_characteristics.get_resource_directory(); }
+
         /// Indicates the TWAIN Data Source Manager to use (version 1.x or 2.x, or default) when the TWAIN session is started.
         /// @param[in] dsm TWAIN Data Source Manager to use when TWAIN session is started.
         /// @returns Reference to current twain_session object (**this**)

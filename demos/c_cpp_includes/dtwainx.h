@@ -445,6 +445,8 @@ DTWAIN_HANDLE DLLENTRY_DEF  DTWAIN_SysInitializeLib(HINSTANCE hInstance);
 /* Set JPEG Quality for JPEG file transfers */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
 
 /* Set PDF Options for PDF file transfers */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFOrientation(DTWAIN_SOURCE Source, LONG lPOrientation);
@@ -453,7 +455,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFPageScale(DTWAIN_SOURCE Source, LONG nOpti
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFCompression(DTWAIN_SOURCE Source, DTWAIN_BOOL bCompression);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFASCIICompression(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFAESEncryption(DTWAIN_SOURCE Source, DTWAIN_BOOL bUseAES);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFAESEncryption(DTWAIN_SOURCE Source, LONG nWhichEncryption, DTWAIN_BOOL bUseAES);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPostScriptType(DTWAIN_SOURCE Source, LONG PSType);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFJpegQuality(DTWAIN_SOURCE Source, LONG Quality);
@@ -905,6 +907,16 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayConvertFix32ToFloat(DTWAIN_ARRAY Fix32Arra
 /* functions to get string length, max string length in a DTWAIN_ARRAY that holds strings */
 LONG DLLENTRY_DEF DTWAIN_ArrayGetStringLength(DTWAIN_ARRAY a, LONG nWhichString);
 LONG DLLENTRY_DEF DTWAIN_ArrayGetMaxStringLength(DTWAIN_ARRAY a);
+
+/* functions to create array of strings from array of DTWAIN_FLOATs */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayFloatToANSIString(DTWAIN_ARRAY FloatArray);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayFloatToWideString(DTWAIN_ARRAY FloatArray);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayFloatToString(DTWAIN_ARRAY FloatArray);
+
+/* functions to create array of doubles from array of strings */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayANSIStringToFloat(DTWAIN_ARRAY StringArray);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayWideStringToFloat(DTWAIN_ARRAY StringArray);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayStringToFloat(DTWAIN_ARRAY StringArray);
 
 /* function to destroy array of DTWAIN_FRAME objects */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayDestroyFrames(DTWAIN_ARRAY FrameArray);

@@ -74,6 +74,7 @@
     D_ALLOCATEMEMORY64FUNC                        DYNDTWAIN_API::DTWAIN_AllocateMemory64 = nullptr;
     D_ALLOCATEMEMORYEXFUNC                        DYNDTWAIN_API::DTWAIN_AllocateMemoryEx = nullptr;
     D_APPHANDLESEXCEPTIONSFUNC                    DYNDTWAIN_API::DTWAIN_AppHandlesExceptions = nullptr;
+    D_ARRAYANSISTRINGTOFLOATFUNC                  DYNDTWAIN_API::DTWAIN_ArrayANSIStringToFloat = nullptr;
     D_ARRAYADDFUNC                                DYNDTWAIN_API::DTWAIN_ArrayAdd = nullptr;
     D_ARRAYADDANSISTRINGFUNC                      DYNDTWAIN_API::DTWAIN_ArrayAddANSIString = nullptr;
     D_ARRAYADDANSISTRINGNFUNC                     DYNDTWAIN_API::DTWAIN_ArrayAddANSIStringN = nullptr;
@@ -128,6 +129,9 @@
     D_ARRAYFINDWIDESTRINGFUNC                     DYNDTWAIN_API::DTWAIN_ArrayFindWideString = nullptr;
     D_ARRAYFIX32GETATFUNC                         DYNDTWAIN_API::DTWAIN_ArrayFix32GetAt = nullptr;
     D_ARRAYFIX32SETATFUNC                         DYNDTWAIN_API::DTWAIN_ArrayFix32SetAt = nullptr;
+    D_ARRAYFLOATTOANSISTRINGFUNC                  DYNDTWAIN_API::DTWAIN_ArrayFloatToANSIString = nullptr;
+    D_ARRAYFLOATTOSTRINGFUNC                      DYNDTWAIN_API::DTWAIN_ArrayFloatToString = nullptr;
+    D_ARRAYFLOATTOWIDESTRINGFUNC                  DYNDTWAIN_API::DTWAIN_ArrayFloatToWideString = nullptr;
     D_ARRAYGETATFUNC                              DYNDTWAIN_API::DTWAIN_ArrayGetAt = nullptr;
     D_ARRAYGETATANSISTRINGFUNC                    DYNDTWAIN_API::DTWAIN_ArrayGetAtANSIString = nullptr;
     D_ARRAYGETATANSISTRINGPTRFUNC                 DYNDTWAIN_API::DTWAIN_ArrayGetAtANSIStringPtr = nullptr;
@@ -206,6 +210,8 @@
     D_ARRAYSETATSTRINGAFUNC                       DYNDTWAIN_API::DTWAIN_ArraySetAtStringA = nullptr;
     D_ARRAYSETATSTRINGWFUNC                       DYNDTWAIN_API::DTWAIN_ArraySetAtStringW = nullptr;
     D_ARRAYSETATWIDESTRINGFUNC                    DYNDTWAIN_API::DTWAIN_ArraySetAtWideString = nullptr;
+    D_ARRAYSTRINGTOFLOATFUNC                      DYNDTWAIN_API::DTWAIN_ArrayStringToFloat = nullptr;
+    D_ARRAYWIDESTRINGTOFLOATFUNC                  DYNDTWAIN_API::DTWAIN_ArrayWideStringToFloat = nullptr;
     D_CALLCALLBACKFUNC                            DYNDTWAIN_API::DTWAIN_CallCallback = nullptr;
     D_CALLCALLBACK64FUNC                          DYNDTWAIN_API::DTWAIN_CallCallback64 = nullptr;
     D_CALLDSMPROCFUNC                             DYNDTWAIN_API::DTWAIN_CallDSMProc = nullptr;
@@ -517,6 +523,7 @@
     D_GETIMAGEINFOSTRINGWFUNC                     DYNDTWAIN_API::DTWAIN_GetImageInfoStringW = nullptr;
     D_GETJOBCONTROLFUNC                           DYNDTWAIN_API::DTWAIN_GetJobControl = nullptr;
     D_GETJPEGVALUESFUNC                           DYNDTWAIN_API::DTWAIN_GetJpegValues = nullptr;
+    D_GETJPEGXRVALUESFUNC                         DYNDTWAIN_API::DTWAIN_GetJpegXRValues = nullptr;
     D_GETLANGUAGEFUNC                             DYNDTWAIN_API::DTWAIN_GetLanguage = nullptr;
     D_GETLASTERRORFUNC                            DYNDTWAIN_API::DTWAIN_GetLastError = nullptr;
     D_GETLIBRARYPATHFUNC                          DYNDTWAIN_API::DTWAIN_GetLibraryPath = nullptr;
@@ -1000,6 +1007,7 @@
     D_SETHIGHLIGHTSTRINGWFUNC                     DYNDTWAIN_API::DTWAIN_SetHighlightStringW = nullptr;
     D_SETJOBCONTROLFUNC                           DYNDTWAIN_API::DTWAIN_SetJobControl = nullptr;
     D_SETJPEGVALUESFUNC                           DYNDTWAIN_API::DTWAIN_SetJpegValues = nullptr;
+    D_SETJPEGXRVALUESFUNC                         DYNDTWAIN_API::DTWAIN_SetJpegXRValues = nullptr;
     D_SETLANGUAGEFUNC                             DYNDTWAIN_API::DTWAIN_SetLanguage = nullptr;
     D_SETLASTERRORFUNC                            DYNDTWAIN_API::DTWAIN_SetLastError = nullptr;
     D_SETLIGHTPATHFUNC                            DYNDTWAIN_API::DTWAIN_SetLightPath = nullptr;
@@ -1245,6 +1253,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_AllocateMemory64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_AllocateMemoryEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_AppHandlesExceptions, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayANSIStringToFloat, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayAdd, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayAddANSIString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayAddANSIStringN, hModule);
@@ -1299,6 +1308,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayFindWideString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFix32GetAt, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFix32SetAt, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayFloatToANSIString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayFloatToString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayFloatToWideString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAt, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtANSIString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtANSIStringPtr, hModule);
@@ -1377,6 +1389,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArraySetAtStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArraySetAtStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArraySetAtWideString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayStringToFloat, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayWideStringToFloat, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CallCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CallCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CallDSMProc, hModule);
@@ -1688,6 +1702,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetImageInfoStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetJobControl, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetJpegValues, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetJpegXRValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetLanguage, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetLastError, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetLibraryPath, hModule);
@@ -2171,6 +2186,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetHighlightStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetJobControl, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetJpegValues, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetJpegXRValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLanguage, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLastError, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLightPath, hModule);
