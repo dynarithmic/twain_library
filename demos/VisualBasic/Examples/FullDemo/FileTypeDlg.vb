@@ -40,6 +40,7 @@ Public Class FileTypeDlg
      New AllTypes("GIF File", DTWAINAPI.DTWAIN_GIF, "test.gif"),
      New AllTypes("JPEG File", DTWAINAPI.DTWAIN_JPEG, "test.jpg"),
      New AllTypes("JPEG-2000 File", DTWAINAPI.DTWAIN_JPEG2000, "test.jp2"),
+     New AllTypes("JPEG-XR File", DTWAINAPI.DTWAIN_JPEGXR, "test.jxr"),
      New AllTypes("Adobe PDF File", DTWAINAPI.DTWAIN_PDFMULTI, "test.pdf"),
      New AllTypes("Postscript Level 1 File", DTWAINAPI.DTWAIN_POSTSCRIPT1MULTI, "test.ps"),
      New AllTypes("Postscript Level 2 File", DTWAINAPI.DTWAIN_POSTSCRIPT2MULTI, "test.ps"),

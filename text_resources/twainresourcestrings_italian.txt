@@ -207,6 +207,7 @@
 2074 Invalid bitmap width/height for non-Vista Windows ICO format
 2075 TWAIN_32.DLL or specified TWAIN Data Source Manager not found, corrupted, or could not be opened
 2076 TWAINDSM.DLL or specified TWAIN Data Source Manager not found, corrupted, or could not be opened
+2077 Directory non valida o inesistente
 2078 Impossibile creare la directory
 2079 Transym OCR DLL not found
 2081 No filename specified.  Use -f option
@@ -267,3 +268,31 @@
 10005 Impossibile rimuovere il sottotipo dalla finestra utente  
 10006 Il tipo di dispositivo e il tipo richiesto da TWAIN non corrispondono.
 10007 Avviso: Il tipo di compressione del file è sconosciuto o non corrisponde al tipo di immagine scelto.
+9500 TWAIN Condizione Codice: Errore
+9501 TWAIN Condiziona Codice: Unknown causa di fallimento
+9502 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
+9503 TWAIN Condizione Codice: Dati Fonte
+9504 TWAIN Condizione Codice: Dati Fonte connette verso massimale possibile applicazioni
+9505 TWAIN Condizione Codice: Dati Fonte di Dati Fonte Dirigente riportò errore.   Applicazione non responsabile.
+9506 TWAIN Condiziona Codice: Unknown TWAIN capacità scontrato
+9509 TWAIN Condizione Codice: Unrecognized TWAIN terzina combinazione
+9510 TWAIN Condizione Codice: Dati parametro è fuori da portata
+9511 TWAIN Condiziona Codice: TWAIN terzina fuori da aspetta successione
+9512 TWAIN Condizione Codice: Sconosciuto meta Applicazione in DSM _Entry funzione
+9513 TWAIN Condizione Codice: Capacità non caldeggia con Dati Fonte
+9514 TWAIN Condizione Codice: Operazione non caldeggia con capacità
+9515 TWAIN Condizione Codice: Capacità ha dependancy sopra another capacità
+9516 TWAIN Condizione Codice: Schedario protegge
+9517 TWAIN Condizione Codice: Archivia già esiste
+9518 TWAIN Condizione Codice: non Archivia non basare
+9519 TWAIN Condizione Codice: Elenco sta empty
+9520 TWAIN Condizione Codice: Feeder blocca
+9521 TWAIN Condizione Codice: Feeder detected multiplo pagine
+9522 TWAIN Condizione Codice: Errore scrivendo archivia (disco sia pieno)
+9523 TWAIN Condizione Codice: Congegno andò offline durante operazione
+9524 Codice di Condizione TWAIN: Operazione fallita (copertura o sportello del dispositivo aperto)
+9525 Codice di Condizione TWAIN: Operazione fallita (documento con angolo danneggiato)
+9526 Codice di Condizione TWAIN: Operazione fallita (errore di messa a fuoco durante la cattura del documento)
+9527 Codice di Condizione TWAIN: Operazione fallita (documento troppo chiaro)
+9528 Codice di Condizione TWAIN: Operazione fallita (documento troppo scuro)
+9529 Codice di Condizione TWAIN: Operazione fallita (la sorgente non ha nulla da catturare per il trasferimento)

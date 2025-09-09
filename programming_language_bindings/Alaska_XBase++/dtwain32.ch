@@ -1,26 +1,26 @@
-//////////////////////////////////////////////////////////////////////
-//    This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-//    Copyright (c) 2002-2025 Dynarithmic Software.
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//        http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
-//
-//    FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
-//    DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
-//    OF THIRD PARTY RIGHTS.
-//
-#ifndef _DTWAIN32_CH
-#define _DTWAIN32_CH
+/*
+    This file is part of the Dynarithmic TWAIN Library (DTWAIN).
+    Copyright (c) 2002-2025 Dynarithmic Software.
 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+    FOR ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY
+    DYNARITHMIC SOFTWARE. DYNARITHMIC SOFTWARE DISCLAIMS THE WARRANTY OF NON INFRINGEMENT
+    OF THIRD PARTY RIGHTS.
+ */
+#ifndef DTWAIN_CH
+#define DTWAIN_CH
+/* Start of DTWAIN constant definitions */
 #define DTWAIN_TRUE           1
 #define DTWAIN_FALSE          0
 
@@ -344,7 +344,6 @@
 #define  DTWAIN_TN_TRANSFERREADY                  1009
 /* Sent when TWAIN is in the "Transfer done" state (State 7) */
 #define  DTWAIN_TN_TRANSFERDONE                   1010
-#define  DTWAIN_TN_ACQUIREPAGEDONE                1010
 
 /* Source closing/opening wParam's */
 #define  DTWAIN_TN_UICLOSING                      3000
@@ -380,7 +379,7 @@
 
 /* Sent if user cancels the saving of a file using the file prompt */
 #define DTWAIN_TN_FILESAVECANCELLED         1031
-#define DTWAIN_TN_FILESAVECANCELED         1031
+#define DTWAIN_TN_FILESAVECANCELED          1031
 #define DTWAIN_TN_FILESAVEOK                1032
 #define DTWAIN_TN_FILESAVEERROR             1033
 #define DTWAIN_TN_FILEPAGESAVEOK            1034
@@ -451,7 +450,13 @@
 
 /* Miscellaneous file transfer notifications */
 #define DTWAIN_TN_CLOSEDIBFAILED       1057
+
+/* Sent if a TWAIN Source fails to return a proper bitmap
+   when using TWAINDSM.DLL as the data source manager */
 #define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
+
+/* Sent if a resampling of an acquired image was attempted, but failed */
+#define DTWAIN_TN_IMAGE_RESAMPLE_FAILURE 1059
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
@@ -515,7 +520,15 @@
 #define DTWAIN_TN_TWAINTRIPLETEND           1184
 
 /* Sent if document feeder has no paper loaded */
-#define DTWAIN_TN_FEEDERNOTLOADED           1200
+#define DTWAIN_TN_FEEDERNOTLOADED           1201
+
+/* Sent when tiled data has been sent */
+#define DTWAIN_TN_TRANSFERTILEREADY         1300
+#define DTWAIN_TN_TRANSFERTILEDONE          1301
+
+/* Sent when issuing a file transfer, and the compression chosen is
+ * not recognized for the file type */
+#define DTWAIN_TN_FILECOMPRESSTYPEMISMATCH  1302
 
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
@@ -853,13 +866,13 @@
 #define DTWAIN_ERR_AREA_ARRAY_TOO_SMALL  (-1056)
 #define DTWAIN_ERR_LOG_CREATE_ERROR  (-1057)
 #define DTWAIN_ERR_FILESYSTEM_NOT_SUPPORTED (-1058)
-#define DTWAIN_ERR_TILEMODE_NOTSET   (-1059)
-#define DTWAIN_ERR_INI32_NOT_FOUND   (-1060)
-#define DTWAIN_ERR_INI64_NOT_FOUND  (-1061)
-#define DTWAIN_ERR_CRC_CHECK   (-1062)
-#define DTWAIN_ERR_RESOURCES_BAD_VERSION  (-1063)
-#define DTWAIN_ERR_WIN32_ERROR  (-1064)
-#define DTWAIN_ERR_STRINGID_NOTFOUND  (-1065)
+#define DTWAIN_ERR_TILEMODE_NOTSET (-1059)
+#define DTWAIN_ERR_INI32_NOT_FOUND (-1060)
+#define DTWAIN_ERR_INI64_NOT_FOUND (-1061)
+#define DTWAIN_ERR_CRC_CHECK (-1062)
+#define DTWAIN_ERR_RESOURCES_BAD_VERSION (-1063)
+#define DTWAIN_ERR_WIN32_ERROR (-1064)
+#define DTWAIN_ERR_STRINGID_NOTFOUND (-1065)
 #define DTWAIN_ERR_RESOURCES_DUPLICATEID_FOUND (-1066)
 #define DTWAIN_ERR_UNAVAILABLE_EXTINFO (-1067)
 #define DTWAIN_ERR_TWAINDSM2_BADBITMAP (-1068)
@@ -882,6 +895,8 @@
 #define DTWAIN_ERR_RANGE_OUTOFBOUNDS      (-1085)
 #define DTWAIN_ERR_RANGE_STEPISZERO       (-1086)
 #define DTWAIN_ERR_BLANKNAMEDETECTED   (-1087)
+
+#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_RANGE_STEPISZERO
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -913,7 +928,7 @@
 #define TWAIN_ERR_DOCTOODARK          (-1127)
 #define TWAIN_ERR_NOMEDIA             (-1128)
 
-/* File errors generated when calling DTWAIN_AcquireFile or DTWAIN_AcquireFileEx */
+/* General errors  */
 #define DTWAIN_ERR_FILEXFERSTART    (-2000)
 #define DTWAIN_ERR_MEM              (-2001)
 #define DTWAIN_ERR_FILEOPEN         (-2002)
@@ -1019,13 +1034,17 @@
 #define DTWAIN_ERR_OCR_INVALIDBITDEPTH     (-2106)
 #define DTWAIN_ERR_OCR_RECOGNITIONERROR    (-2107)
 #define DTWAIN_ERR_OCR_LAST                (-2108)
+
+/* Extra TWAIN Source errors */
 #define DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   (-2500)
 #define DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE  (-2501)
+
+/* Miscellaneous errors */
 #define DTWAIN_ERR_IMAGEINFO_INVALID       (-2502)
 #define DTWAIN_ERR_WRITEDATA_TOFILE        (-2503)
 #define DTWAIN_ERR_OPERATION_NOTSUPPORTED  (-2504)
 
-#define DTWAIN_ERR_LAST                    DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE
+#define DTWAIN_ERR_LAST                    (DTWAIN_ERR_USER_START + 1)
 #define DTWAIN_ERR_USER_START              (-80000)
 
 /* Device event constants (same as TWAIN 1.8 value plus 1)*/
@@ -1221,18 +1240,7 @@ DTWAIN DLL are not displayed */
 /* Any DTWAIN errors (not TWAIN related) */
 #define DTWAIN_LOG_DTWAINERRORS       0x00000800
 
-#define DTWAIN_LOG_ALL (DTWAIN_LOG_DECODE_SOURCE | ;
-                        DTWAIN_LOG_DECODE_DEST | ;
-                        DTWAIN_LOG_DECODE_TWEVENT | ;
-                        DTWAIN_LOG_DECODE_TWMEMREF | ;
-                        DTWAIN_LOG_CALLSTACK | ;
-                        DTWAIN_LOG_ISTWAINMSG | ;
-                        DTWAIN_LOG_INITFAILURE | ;
-                        DTWAIN_LOG_LOWLEVELTWAIN | ;
-                        DTWAIN_LOG_NOTIFICATIONS | ;
-                        DTWAIN_LOG_MISCELLANEOUS | ;
-                        DTWAIN_LOG_DTWAINERRORS | ;
-                        DTWAIN_LOG_DECODE_BITMAP)
+#define DTWAIN_LOG_ALL (DTWAIN_LOG_DECODE_SOURCE | DTWAIN_LOG_DECODE_DEST | DTWAIN_LOG_DECODE_TWEVENT | DTWAIN_LOG_DECODE_TWMEMREF | DTWAIN_LOG_CALLSTACK | DTWAIN_LOG_ISTWAINMSG | DTWAIN_LOG_INITFAILURE | DTWAIN_LOG_LOWLEVELTWAIN | DTWAIN_LOG_NOTIFICATIONS | DTWAIN_LOG_MISCELLANEOUS | DTWAIN_LOG_DTWAINERRORS | DTWAIN_LOG_DECODE_BITMAP)
 
 /* ------------------------- */
 
@@ -1267,11 +1275,22 @@ DTWAIN DLL are not displayed */
 /* DTWAIN Log to window (not yet implemented) */
 #define DTWAIN_LOG_USEWINDOW       0x02000000
 
+/* Create directory if logging to file */
+#define DTWAIN_LOG_CREATEDIRECTORY 0x04000000
+#define DTWAIN_TEMPDIR_CREATEDIRECTORY DTWAIN_LOG_CREATEDIRECTORY
+
+/* Use DTWAIN's console handler if console logging is selected */
+#define DTWAIN_LOG_CONSOLEWITHHANDLER (0x08000000 | DTWAIN_LOG_CONSOLE)
+
 /* log everything, including displaying exceptions */
 #define DTWAIN_LOG_ALL_NOCALLBACK   (DTWAIN_LOG_ALL &~ (DTWAIN_LOG_USECALLBACK))
 
 /* log everything using new log file */
 #define DTWAIN_LOG_ALL_FILEAPPEND    (DTWAIN_LOG_FILEAPPEND | DTWAIN_LOG_ALL)
+
+/* log everything to a file and create directory */
+#define DTWAIN_LOG_ALL_FILEAPPEND_CREATEDIRECTORY  (DTWAIN_LOG_FILEAPPEND | DTWAIN_LOG_ALL | DTWAIN_LOG_CREATEDIRECTORY)
+#define DTWAIN_LOG_ALL_FILE_CREATEDIRECTORY  (DTWAIN_LOG_FILE | DTWAIN_LOG_ALL | DTWAIN_LOG_CREATEDIRECTORY)
 
 /* turn off the DTWAIN_IsTwainMsg logging */
 #define DTWAIN_LOG_NOISTWAINMSG(x) { if ((x) | DTWAIN_LOG_ISTWAINMSG) (x) &= ~DTWAIN_LOG_ISTWAINMSG; }
@@ -1358,9 +1377,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_DLG_USEDEFAULTTITLE      512
 #define DTWAIN_DLG_TOPMOSTWINDOW        1024
 #define DTWAIN_DLG_OPENONSELECT         2048
-#define DTWAIN_DLG_OPENONSELECTOVERRIDE 4096
-#define DTWAIN_DLG_OPENONSELECTON       (DTWAIN_DLG_OPENONSELECT | DTWAIN_DLG_OPENONSELECTOVERRIDE)
-#define DTWAIN_DLG_OPENONSELECTOFF      (DTWAIN_DLG_OPENONSELECTOVERRIDE)
+#define DTWAIN_DLG_NOOPENONSELECT       4096
+#define DTWAIN_DLG_HIGHLIGHTFIRST       8192
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
@@ -1461,7 +1479,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_64BIT_VERSION                    0x00400000
 #define DTWAIN_UNICODE_VERSION                  0x00800000
 #define DTWAIN_OPENSOURCE_VERSION               0x01000000
-
+#define DTWAIN_CALLSTACK_LOGGING                0x02000000
+#define DTWAIN_CALLSTACK_LOGGING_PLUS           0x04000000
 
 /* OCR defines */
 #define DTWAINOCR_RETURNHANDLE                  1
@@ -1503,6 +1522,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWAINDSMSEARCH_OW                13
 #define DTWAIN_TWAINDSMSEARCH_OS                14
 #define DTWAIN_TWAINDSMSEARCH_C                 15
+#define DTWAIN_TWAINDSMSEARCH_U                 16
 
 #define DTWAIN_PDFPOLARITY_POSITIVE             1
 #define DTWAIN_PDFPOLARITY_NEGATIVE             2
@@ -1609,6 +1629,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_CAP      77
 #define DTWAIN_CONSTANT_ICAP     78
 #define DTWAIN_CONSTANT_DTWAIN_CONT 79
+#define DTWAIN_CONSTANT_CAPCODE_MAP 80
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_CAPCODE_MAP + 1)
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000

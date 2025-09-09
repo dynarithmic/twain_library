@@ -22,21 +22,6 @@ using DTWAIN_PDFTEXTELEMENT = System.IntPtr;
 using DTWAIN_RANGE = System.IntPtr;
 using DTWAIN_SOURCE = System.IntPtr;
 using DTWAIN_HANDLE = System.IntPtr;
-    
-/*  Use this instead of above for 64-bit compilation
-    using DTWAIN_ARRAY = System.Int64;
-    using DTWAIN_BOOL = System.Int32;
-    using DTWAIN_FLOAT = System.Double;
-    using DTWAIN_FRAME = System.Int64;
-    using HANDLE = System.Int64;
-    using DTWAIN_IDENTITY = System.Int64;
-    using DTWAIN_OCRENGINE = System.Int64;
-    using DTWAIN_LONG = System.Int32;
-    using DTWAIN_LONG64 = System.Int64;
-    using DTWAIN_PDFTEXTELEMENT = System.Int64;
-    using DTWAIN_RANGE = System.Int64;
-    using DTWAIN_SOURCE = System.Int64;
-*/
 
 namespace TWAINDemo
 {

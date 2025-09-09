@@ -533,6 +533,8 @@ namespace dynarithmic
 
                 error_logger& get_error_logger() noexcept { return m_error_logger; }
 
+                twain_characteristics& get_twain_characteristics() { return m_twain_characteristics; }
+
                 /// Returns a short string that identifies the name of the Dynarithmic TWAIN Library version
                 ///
                 /// @returns a string that identifies the version of the underlying DTWAIN library in use.
@@ -828,6 +830,9 @@ namespace dynarithmic
             /// @returns string representing the current temporary directory.
             /// @see set_temporary_directory()
             std::string get_temporary_directory() const noexcept;
+
+            twain_session& set_resource_directory(std::string dir) noexcept;
+            std::string get_resource_directory() const noexcept;
 
             /// Indicates the TWAIN Data Source Manager to use (version 1.x or 2.x, or default) when the TWAIN session is started.
             /// @param[in] dsm TWAIN Data Source Manager to use when TWAIN session is started.

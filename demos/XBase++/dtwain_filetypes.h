@@ -90,4 +90,5 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_BIGTIFFG4MULTI    11014   /* BigTIFF Group 4 CCITT Tiff (FAX format) (multipage) */
 #define DTWAIN_BIGTIFFJPEG       11015   /* BigTIFF JPEG */
 #define DTWAIN_BIGTIFFJPEGMULTI  11016   /* BigTIFF JPEG (Multipage) */
+#define DTWAIN_JPEGXR            12000   /* JPEG-XR format */
 #endif

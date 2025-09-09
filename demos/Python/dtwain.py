@@ -179,6 +179,7 @@ DTWAIN_BIGTIFFG4 = 11013
 DTWAIN_BIGTIFFG4MULTI = 11014
 DTWAIN_BIGTIFFJPEG = 11015
 DTWAIN_BIGTIFFJPEGMULTI = 11016
+DTWAIN_JPEGXR = 12000
 DTWAIN_INCHES = 0
 DTWAIN_CENTIMETERS = 1
 DTWAIN_PICAS = 2
@@ -1049,6 +1050,8 @@ DTWAIN_PDF_ALLOWEXTRACTION = 512
 DTWAIN_PDF_ALLOWASSEMBLY = 1024
 DTWAIN_PDF_ALLOWDEGRADEDPRINTING = 4
 DTWAIN_PDF_ALLOWALL = 0xFFFFFFFC
+DTWAIN_PDF_ALLOWANYMOD = (DTWAIN_PDF_ALLOWMOD | DTWAIN_PDF_ALLOWFILLIN | DTWAIN_PDF_ALLOWMODANNOTATIONS | DTWAIN_PDF_ALLOWASSEMBLY)
+DTWAIN_PDF_ALLOWANYPRINTING = (DTWAIN_PDF_ALLOWPRINTING | DTWAIN_PDF_ALLOWDEGRADEDPRINTING)
 DTWAIN_PDF_PORTRAIT = 0
 DTWAIN_PDF_LANDSCAPE = 1
 DTWAIN_PS_REGULAR = 0
@@ -1652,6 +1655,8 @@ DTWAIN_USERRES_START = 20000
 DTWAIN_USERRES_MAXSIZE = 8192
 DTWAIN_APIHANDLEOK = 1
 DTWAIN_TWAINSESSIONOK = 2
+DTWAIN_PDF_AES128 = 1
+DTWAIN_PDF_AES256 = 2
 
 # Example:
 # load the 64-bit unicode version of the dtwain dll
@@ -1735,6 +1740,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_AllocateMemory64.restype = ct.c_void_p
      theDLL.DTWAIN_AllocateMemoryEx.restype = ct.c_void_p
      theDLL.DTWAIN_AppHandlesExceptions.restype = ct.c_long
+     theDLL.DTWAIN_ArrayANSIStringToFloat.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayAdd.restype = ct.c_long
      theDLL.DTWAIN_ArrayAddANSIString.restype = ct.c_long
      theDLL.DTWAIN_ArrayAddANSIStringN.restype = ct.c_long
@@ -1786,6 +1792,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArrayFindWideString.restype = ct.c_long
      theDLL.DTWAIN_ArrayFix32GetAt.restype = ct.c_long
      theDLL.DTWAIN_ArrayFix32SetAt.restype = ct.c_long
+     theDLL.DTWAIN_ArrayFloatToANSIString.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayFloatToString.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayFloatToWideString.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayGetAt.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtANSIString.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtANSIStringPtr.restype = ct.c_char_p
@@ -1864,6 +1873,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArraySetAtStringA.restype = ct.c_long
      theDLL.DTWAIN_ArraySetAtStringW.restype = ct.c_long
      theDLL.DTWAIN_ArraySetAtWideString.restype = ct.c_long
+     theDLL.DTWAIN_ArrayStringToFloat.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayWideStringToFloat.restype = ct.c_void_p
      theDLL.DTWAIN_CallCallback.restype = ct.c_long
      theDLL.DTWAIN_CallCallback64.restype = ct.c_long
      theDLL.DTWAIN_CallDSMProc.restype = ct.c_long
@@ -2175,6 +2186,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
+     theDLL.DTWAIN_GetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
      theDLL.DTWAIN_GetLastError.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPath.restype = ct.c_long
@@ -2656,6 +2668,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetHighlightStringW.restype = ct.c_long
      theDLL.DTWAIN_SetJobControl.restype = ct.c_long
      theDLL.DTWAIN_SetJpegValues.restype = ct.c_long
+     theDLL.DTWAIN_SetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_SetLanguage.restype = ct.c_long
      theDLL.DTWAIN_SetLastError.restype = ct.c_long
      theDLL.DTWAIN_SetLightPath.restype = ct.c_long
@@ -2809,6 +2822,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_TestGetCap.restype = ct.c_void_p
      theDLL.DTWAIN_UnlockMemory.restype = ct.c_long
      theDLL.DTWAIN_UnlockMemoryEx.restype = ct.c_long
+     theDLL.DTWAIN_UseMultipleThreads.restype = ct.c_long
 
      #set up the argument types
      theDLL.DTWAIN_AcquireAudioFile.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long, ct.c_long, ct.POINTER(ct.c_long)]
@@ -2834,6 +2848,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_AllocateMemory64.argtypes = [ct.c_uint64]
      theDLL.DTWAIN_AllocateMemoryEx.argtypes = [ct.c_ulong]
      theDLL.DTWAIN_AppHandlesExceptions.argtypes = [ct.c_long]
+     theDLL.DTWAIN_ArrayANSIStringToFloat.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayAdd.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ArrayAddANSIString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_ArrayAddANSIStringN.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
@@ -2885,6 +2900,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArrayFindWideString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_ArrayFix32GetAt.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_ArrayFix32SetAt.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayFloatToANSIString.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayFloatToString.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayFloatToWideString.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetAt.argtypes = [ct.c_void_p, ct.c_long, ct.c_void_p]
      theDLL.DTWAIN_ArrayGetAtANSIString.argtypes = [ct.c_void_p, ct.c_long, ct.c_char_p]
      theDLL.DTWAIN_ArrayGetAtANSIStringPtr.argtypes = [ct.c_void_p, ct.c_long]
@@ -2962,6 +2980,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ArraySetAtStringA.argtypes = [ct.c_void_p, ct.c_long, ct.c_char_p]
      theDLL.DTWAIN_ArraySetAtStringW.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_ArraySetAtWideString.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
+     theDLL.DTWAIN_ArrayStringToFloat.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayWideStringToFloat.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_CallCallback.argtypes = [ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_CallCallback64.argtypes = [ct.c_long, ct.c_long, ct.c_int64]
      theDLL.DTWAIN_CallDSMProc.argtypes = [ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_long, ct.c_long, ct.c_void_p]
@@ -3258,6 +3278,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -3711,6 +3732,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetHighlightStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetJobControl.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_SetJpegXRValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetLanguage.argtypes = [ct.c_long]
      theDLL.DTWAIN_SetLastError.argtypes = [ct.c_long]
      theDLL.DTWAIN_SetLightPath.argtypes = [ct.c_void_p, ct.c_long]
@@ -3729,7 +3751,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetOCRCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_void_p]
      theDLL.DTWAIN_SetOrientation.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetOverscan.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
-     theDLL.DTWAIN_SetPDFAESEncryption.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_SetPDFAESEncryption.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetPDFASCIICompression.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetPDFAuthor.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetPDFAuthorA.argtypes = [ct.c_void_p, ct.c_char_p]
@@ -3861,6 +3883,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_TestGetCap.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_UnlockMemory.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_UnlockMemoryEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_UseMultipleThreads.argtypes = [ct.c_long]
 
 def setup_ansi(theDLL):
      # set up the callback types
@@ -3900,6 +3923,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_AllocateMemory64.restype = ct.c_void_p
      theDLL.DTWAIN_AllocateMemoryEx.restype = ct.c_void_p
      theDLL.DTWAIN_AppHandlesExceptions.restype = ct.c_long
+     theDLL.DTWAIN_ArrayANSIStringToFloat.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayAdd.restype = ct.c_long
      theDLL.DTWAIN_ArrayAddANSIString.restype = ct.c_long
      theDLL.DTWAIN_ArrayAddANSIStringN.restype = ct.c_long
@@ -3951,6 +3975,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArrayFindWideString.restype = ct.c_long
      theDLL.DTWAIN_ArrayFix32GetAt.restype = ct.c_long
      theDLL.DTWAIN_ArrayFix32SetAt.restype = ct.c_long
+     theDLL.DTWAIN_ArrayFloatToANSIString.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayFloatToString.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayFloatToWideString.restype = ct.c_void_p
      theDLL.DTWAIN_ArrayGetAt.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtANSIString.restype = ct.c_long
      theDLL.DTWAIN_ArrayGetAtANSIStringPtr.restype = ct.c_char_p
@@ -4029,6 +4056,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArraySetAtStringA.restype = ct.c_long
      theDLL.DTWAIN_ArraySetAtStringW.restype = ct.c_long
      theDLL.DTWAIN_ArraySetAtWideString.restype = ct.c_long
+     theDLL.DTWAIN_ArrayStringToFloat.restype = ct.c_void_p
+     theDLL.DTWAIN_ArrayWideStringToFloat.restype = ct.c_void_p
      theDLL.DTWAIN_CallCallback.restype = ct.c_long
      theDLL.DTWAIN_CallCallback64.restype = ct.c_long
      theDLL.DTWAIN_CallDSMProc.restype = ct.c_long
@@ -4340,6 +4369,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
+     theDLL.DTWAIN_GetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
      theDLL.DTWAIN_GetLastError.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPath.restype = ct.c_long
@@ -4821,6 +4851,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetHighlightStringW.restype = ct.c_long
      theDLL.DTWAIN_SetJobControl.restype = ct.c_long
      theDLL.DTWAIN_SetJpegValues.restype = ct.c_long
+     theDLL.DTWAIN_SetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_SetLanguage.restype = ct.c_long
      theDLL.DTWAIN_SetLastError.restype = ct.c_long
      theDLL.DTWAIN_SetLightPath.restype = ct.c_long
@@ -4974,6 +5005,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_TestGetCap.restype = ct.c_void_p
      theDLL.DTWAIN_UnlockMemory.restype = ct.c_long
      theDLL.DTWAIN_UnlockMemoryEx.restype = ct.c_long
+     theDLL.DTWAIN_UseMultipleThreads.restype = ct.c_long
 
      #set up the argument types
      theDLL.DTWAIN_AcquireAudioFile.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long, ct.c_long, ct.POINTER(ct.c_long)]
@@ -4999,6 +5031,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_AllocateMemory64.argtypes = [ct.c_uint64]
      theDLL.DTWAIN_AllocateMemoryEx.argtypes = [ct.c_ulong]
      theDLL.DTWAIN_AppHandlesExceptions.argtypes = [ct.c_long]
+     theDLL.DTWAIN_ArrayANSIStringToFloat.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayAdd.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ArrayAddANSIString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_ArrayAddANSIStringN.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
@@ -5050,6 +5083,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArrayFindWideString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_ArrayFix32GetAt.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_ArrayFix32SetAt.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_ArrayFloatToANSIString.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayFloatToString.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayFloatToWideString.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_ArrayGetAt.argtypes = [ct.c_void_p, ct.c_long, ct.c_void_p]
      theDLL.DTWAIN_ArrayGetAtANSIString.argtypes = [ct.c_void_p, ct.c_long, ct.c_char_p]
      theDLL.DTWAIN_ArrayGetAtANSIStringPtr.argtypes = [ct.c_void_p, ct.c_long]
@@ -5127,6 +5163,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ArraySetAtStringA.argtypes = [ct.c_void_p, ct.c_long, ct.c_char_p]
      theDLL.DTWAIN_ArraySetAtStringW.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_ArraySetAtWideString.argtypes = [ct.c_void_p, ct.c_long, ct.c_wchar_p]
+     theDLL.DTWAIN_ArrayStringToFloat.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_ArrayWideStringToFloat.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_CallCallback.argtypes = [ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_CallCallback64.argtypes = [ct.c_long, ct.c_long, ct.c_int64]
      theDLL.DTWAIN_CallDSMProc.argtypes = [ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_long, ct.c_long, ct.c_void_p]
@@ -5423,6 +5461,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -5876,6 +5915,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetHighlightStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetJobControl.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
+     theDLL.DTWAIN_SetJpegXRValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetLanguage.argtypes = [ct.c_long]
      theDLL.DTWAIN_SetLastError.argtypes = [ct.c_long]
      theDLL.DTWAIN_SetLightPath.argtypes = [ct.c_void_p, ct.c_long]
@@ -5894,7 +5934,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetOCRCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_void_p]
      theDLL.DTWAIN_SetOrientation.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetOverscan.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
-     theDLL.DTWAIN_SetPDFAESEncryption.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_SetPDFAESEncryption.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetPDFASCIICompression.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetPDFAuthor.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetPDFAuthorA.argtypes = [ct.c_void_p, ct.c_char_p]
@@ -6026,3 +6066,4 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_TestGetCap.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_UnlockMemory.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_UnlockMemoryEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_UseMultipleThreads.argtypes = [ct.c_long]
