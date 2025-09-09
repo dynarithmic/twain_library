@@ -267,3 +267,31 @@
 10005 Unterklasse konnte nicht aus dem Benutzerfenster entfernt werden  
 10006 Gerätespezifikation und erforderlicher TWAIN-Typ stimmen nicht überein.
 10007 Warnung: Der Dateikompressionstyp ist unbekannt oder stimmt nicht mit dem gewählten Bildtyp überein.
+9500 TWAIN-Bedingungscode: Kein Fehler
+9501 TWAIN-Bedingungscode: Unbekannte Fehlerursache
+9502 TWAIN-Bedingungscode: Zu wenig Speicher
+9503 TWAIN-Bedingungscode: Keine Datenquelle
+9504 TWAIN-Bedingungscode: Datenquelle ist zur maximalen Anzahl an Anwendungen verbunden
+9505 TWAIN-Bedingungscode: Datenquelle des Datenquellenmanagers hat einen Fehler berichtet. Diese Anwendung ist nicht zuständig für den Fehler.
+9506 TWAIN-Bedingungscode: Ungültige TWAIN Fähigkeit erkannt
+9509 TWAIN-Bedingungscode: Ungültige TWAIN Triplet Kombination
+9510 TWAIN-Bedingungscode: Datenparameter ist außerhalb des erlaubten Bereichs
+9511 TWAIN-Bedingungscode: TWAIN Triplet ist in falscher Reihenfolge
+9512 TWAIN-Bedingungscode: Unbekannte Zielanwendung in DSM_Entry Funktion
+9513 TWAIN-Bedingungscode: Fähigkeit wird von der Quelle nicht unterstützt
+9514 TWAIN-Bedingungscode: Operation wird von der Fähigkeit nicht unterstützt
+9515 TWAIN-Bedingungscode: Fähigkeit hat Abhängigkeit auf andere Fähigkeit
+9516 TWAIN-Bedingungscode: Datei ist gesperrt
+9517 TWAIN-Bedingungscode: Datei existiert bereits
+9518 TWAIN-Bedingungscode: Datei nicht gefunden
+9519 TWAIN-Bedingungscode: Verzeichnis ist nicht leer
+9520 TWAIN-Bedingungscode: Dokumenteneinzug wird blockiert
+9521 TWAIN-Bedingungscode: Dokumenteneinzug hat mehrere Seiten erkannt
+9522 TWAIN-Bedingungscode: Fehler beim Schreiben in die Datei(Möglicherweise Festplatte voll)
+9523 TWAIN-Bedingungscode: Gerät ist während Operation Offline gegangen
+9524 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Abdeckung oder Tür am Gerät ist geöffnet)
+9525 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Dokument hat eine beschädigte Ecke)
+9526 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Fokusfehler während der Dokumentenerfassung)
+9527 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Dokument zu hell)
+9528 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Dokument zu dunkel)
+9529 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Quelle hat nichts zum Erfassen für die Übertragung)

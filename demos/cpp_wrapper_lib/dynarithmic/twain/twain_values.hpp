@@ -516,6 +516,7 @@ namespace dynarithmic
             static constexpr value_type  tiffnocompressmulti = DTWAIN_TIFFNONEMULTI;
             static constexpr value_type  tiffpackbitsmulti = DTWAIN_TIFFPACKBITSMULTI;
             static constexpr value_type  textmulti = DTWAIN_TEXTMULTI;
+            static constexpr value_type  jpegxr = DTWAIN_JPEGXR;
             static constexpr value_type  bigtifflzw = DTWAIN_BIGTIFFLZW;
             static constexpr value_type  bigtifflzwmulti = DTWAIN_BIGTIFFLZWMULTI;
             static constexpr value_type  bigtiffnocompress = DTWAIN_BIGTIFFNONE;
@@ -1690,6 +1691,7 @@ namespace dynarithmic
                 filetype_value::googlewebp,
                 filetype_value::jpeg,
                 filetype_value::jpeg2k,
+                filetype_value::jpegxr,
                 filetype_value::pcx,
                 filetype_value::pdf,
                 filetype_value::png,
@@ -1835,7 +1837,7 @@ namespace dynarithmic
             static constexpr bool is_universal_support(filetype_value::value_type ft)
             {
                 #if __cplusplus >= 202002L
-                constexpr std::array<filetype_value::value_type, 58> supported_types =
+                constexpr std::array<filetype_value::value_type, 59> supported_types =
                 #else    
                 constexpr filetype_value::value_type supported_types [] = 
                 #endif
@@ -1848,6 +1850,7 @@ namespace dynarithmic
                     filetype_value::googlewebp,
                     filetype_value::jpeg,
                     filetype_value::jpeg2k,
+                    filetype_value::jpegxr,
                     filetype_value::pcx,
                     filetype_value::pdf,
                     filetype_value::png,

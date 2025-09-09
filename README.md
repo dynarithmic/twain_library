@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.6.8** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.7.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -18,7 +18,7 @@
 
 * DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Java, Ruby, and numerous other languages.
 
-* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python** (and other languages) application, you've come to the right place.  
+* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Java, Visual Basic, Perl, Python, Ruby** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
 
@@ -226,6 +226,75 @@ or if it is the second example:
 
 Setting and getting device capabilities is an integral part of using a TWAIN-enabled device.  This is easily done by using the generic capability functions such as **DTWAIN_EnumCapabilities**, **DTWAIN_GetCapValues** and **DTWAIN_SetCapValues**, or one of the functions that wrap the setting of a capability such as **DTWAIN_SetResolution**, **DTWAIN_SetBrightness**, etc.
 
+Here is an example of setting the ICAP_PIXELTYPE capability:
+
+    #include "dtwain.h"
+    int main()
+    {
+        DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        if ( Source )
+        {
+            // set the pixel type to TWPT_RGB
+            
+            // First, create a DTWAIN_ARRAY to hold the value(s) we will set
+            DTWAIN_ARRAY aPixelTypeValue = DTWAIN_ArrayCreateFromCap(Source, ICAP_PIXELTYPE, 0);
+            
+            // Add the TWPT_RGB value to our array of values
+            DTWAIN_ArrayAddLong(aPixelTypeValue, TWPT_RGB);
+            
+            // Call function to set the ICAP_PIXELTYPE capability
+            DTWAIN_BOOL result = DTWAIN_SetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPSET, aPixelTypeValue);
+            
+            if ( result )
+            {
+                // Capability was set
+            }
+            
+            // Dispose of the array
+            DTWAIN_ArrayDestroy(aPixelTypeValue);
+        }   
+        DTWAIN_SysDestroy();         
+    }         
+
+
+Here is an example of getting all of the available ICAP_PIXELTYPE values:
+
+    #include <stdio.h>
+    #include "dtwain.h"
+    int main()
+    {
+        DTWAIN_SysInitialize();
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        if ( Source )
+        {
+            // Get the pixel type values
+            
+            // First, declare a DTWAIN_ARRAY that will hold all the value(s) retrieved from the device
+            DTWAIN_ARRAY aPixelTypeValues;
+            
+            // Call function to get all the ICAP_PIXELTYPE capabilities
+            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET,                 &aPixelTypeValues);
+            
+            if ( result )
+            {
+                // Now array has all of the values.  Print each one:
+                LONG numItems = DTWAIN_ArrayGetCount(aPixelTypeValues);
+                LONG pixValue;
+                for (int i = 0; i < numItems; ++i)
+                {
+                   DTWAIN_ArrayGetAtLong(aPixelTypeValues, i, &pixValue);                   
+                   printf("Pixel Type value %d is %d\n", i+1, pixValue);
+                }
+                DTWAIN_ArrayDestroy(aPixelTypeValues);
+            }               
+        }   
+        DTWAIN_SysDestroy();         
+    }         
+
+
+Here is an example that calls the high-level function DTWAIN_SetResolution that sets the resolution to 300 DPI.  Note that DTWAIN_SetResolution() is just a "shortcut" way of setting the `ICAP_XRESOLUTION` and `ICAP_YRESOLUTION` capabilities:
+
     #include "dtwain.h"
     int main()
     {
@@ -242,7 +311,9 @@ Setting and getting device capabilities is an integral part of using a TWAIN-ena
  
 Of course, if the capability does not exist on the device, or if the values given to the capability are not supported (for example, if the device only supports 200 DPI and the function attempts to set the DPI to 300), the function returns FALSE and the error can be determined by calling **DTWAIN_GetLastError**.
 
-In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.      
+In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.  
+
+
 
 ----------
 
@@ -593,8 +664,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
   * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
   * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
   * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
-  * AES encryption - [Hallo Weeks](https://github.com/halloweeks/AES-128-CBC)
-
+  
 * In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
   
 * All other raw image processing, plus the interface to the TWAIN system itself, is done without third-party libraries or third-party source code.  

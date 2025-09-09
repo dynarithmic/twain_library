@@ -83,13 +83,13 @@ namespace Dynarithmic
             public TW_UINT32 SupportedGroups;                   // Bit field OR combination of DG_ constants
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = (int)TWSTR.STR32)]
-            public string Manufacturer;                         // Manufacturer name, e.g. "Hewlett-Packard"
+            public string Manufacturer = string.Empty;                         // Manufacturer name, e.g. "Hewlett-Packard"
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = (int)TWSTR.STR32)]
-            public string ProductFamily;                        // Product family name, e.g. "ScanJet"
+            public string ProductFamily = string.Empty;                        // Product family name, e.g. "ScanJet"
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = (int)TWSTR.STR32)]
-            public string ProductName;                          // Product name, e.g. "ScanJet Plus"
+            public string ProductName = string.Empty;                          // Product name, e.g. "ScanJet Plus"
         }
 
         public struct POINT
@@ -115,23 +115,23 @@ namespace Dynarithmic
             public int      structSize = 0;
             public System.IntPtr   dlgOwner = System.IntPtr.Zero;
             public System.IntPtr   instance = System.IntPtr.Zero;
-            public string   filter = null;
-            public string   customFilter = null;
+            public string   filter = string.Empty;
+            public string   customFilter = string.Empty;
             public int      maxCustFilter = 0;
             public int      filterIndex = 0;
-            public string   file = null;
+            public string   file = string.Empty;
             public int      maxFile = 0;
-            public string   fileTitle = null;
+            public string   fileTitle = string.Empty;
             public int      maxFileTitle = 0;
-            public string   initialDir = null;
-            public string   title = null;
+            public string   initialDir = string.Empty;
+            public string   title = string.Empty;
             public int      flags = 0;
             public short    fileOffset = 0;
             public short    fileExtension = 0;
-            public string   defExt = null;
+            public string   defExt = string.Empty;
             public System.IntPtr   custData = System.IntPtr.Zero;
             public System.IntPtr   hook = System.IntPtr.Zero;
-            public string   templateName = null;
+            public string templateName = string.Empty;
             public System.IntPtr   reservedPtr = System.IntPtr.Zero;
             public int      reservedInt = 0;
             public int      flagsEx = 0;
@@ -300,6 +300,7 @@ namespace Dynarithmic
         public const int DTWAIN_BIGTIFFG4MULTI = 11014;
         public const int DTWAIN_BIGTIFFJPEG = 11015;
         public const int DTWAIN_BIGTIFFJPEGMULTI = 11016;
+        public const int DTWAIN_JPEGXR = 12000;
         public const int DTWAIN_INCHES = 0;
         public const int DTWAIN_CENTIMETERS = 1;
         public const int DTWAIN_PICAS = 2;
@@ -1170,6 +1171,8 @@ namespace Dynarithmic
         public const uint DTWAIN_PDF_ALLOWASSEMBLY = 1024;
         public const uint DTWAIN_PDF_ALLOWDEGRADEDPRINTING = 4;
         public const uint DTWAIN_PDF_ALLOWALL = 0xFFFFFFFCU;
+        public const uint DTWAIN_PDF_ALLOWANYMOD = (DTWAIN_PDF_ALLOWMOD | DTWAIN_PDF_ALLOWFILLIN | DTWAIN_PDF_ALLOWMODANNOTATIONS | DTWAIN_PDF_ALLOWASSEMBLY);
+        public const uint DTWAIN_PDF_ALLOWANYPRINTING = (DTWAIN_PDF_ALLOWPRINTING | DTWAIN_PDF_ALLOWDEGRADEDPRINTING);
         public const int DTWAIN_PDF_PORTRAIT = 0;
         public const int DTWAIN_PDF_LANDSCAPE = 1;
         public const int DTWAIN_PS_REGULAR = 0;
@@ -1773,6 +1776,8 @@ namespace Dynarithmic
         public const int DTWAIN_USERRES_MAXSIZE = 8192;
         public const int DTWAIN_APIHANDLEOK = 1;
         public const int DTWAIN_TWAINSESSIONOK = 2;
+        public const int DTWAIN_PDF_AES128 = 1;
+        public const int DTWAIN_PDF_AES256 = 2;
 
         public const string DTWAIN_LIBRARY = "dtwain64u.dll";
 
@@ -1853,6 +1858,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_AppHandlesExceptions(int bSet);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayANSIStringToFloat(DTWAIN_ARRAY StringArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_ArrayAdd(DTWAIN_ARRAY pArray, System.IntPtr pVariant);
@@ -2006,6 +2014,15 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32, int lPos, int Whole, int Frac);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayFloatToANSIString(DTWAIN_ARRAY FloatArray);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayFloatToString(DTWAIN_ARRAY FloatArray);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayFloatToWideString(DTWAIN_ARRAY FloatArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_ArrayGetAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
@@ -2231,6 +2248,12 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
         public static extern int DTWAIN_ArraySetAtWideString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPWStr)] string pStr);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayStringToFloat(DTWAIN_ARRAY StringArray);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_ArrayWideStringToFloat(DTWAIN_ARRAY StringArray);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_CallCallback(int wParam, int lParam, int UserData);
@@ -3164,6 +3187,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetLanguage();
@@ -4615,6 +4641,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, int Quality, int Progressive);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, int Quality, int Progressive);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_SetLanguage(int nLanguage);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -4669,7 +4698,7 @@ namespace Dynarithmic
         public static extern int DTWAIN_SetOverscan(DTWAIN_SOURCE Source, int Value, int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern int DTWAIN_SetPDFAESEncryption(DTWAIN_SOURCE Source, int bUseAES);
+        public static extern int DTWAIN_SetPDFAESEncryption(DTWAIN_SOURCE Source, int nWhichEncryption, int bUseAES);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_SetPDFASCIICompression(DTWAIN_SOURCE Source, int bSet);

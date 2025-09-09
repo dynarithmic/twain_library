@@ -40,6 +40,7 @@ namespace TWAINDemo
                                  new AllTypes("GIF File", TwainAPI.DTWAIN_GIF, "test.gif"),
                                  new AllTypes("JPEG File", TwainAPI.DTWAIN_JPEG, "test.jpg"),
                                  new AllTypes("JPEG-2000 File", TwainAPI.DTWAIN_JPEG2000, "test.jp2"),
+                                 new AllTypes("JPEG-XR File", TwainAPI.DTWAIN_JPEGXR, "test.jxr"),
                                  new AllTypes("Adobe PDF File", TwainAPI.DTWAIN_PDFMULTI,"test.pdf"),
                                  new AllTypes("Postscript Level 1 File", TwainAPI.DTWAIN_POSTSCRIPT1MULTI, "test.ps"),
                                  new AllTypes("Postscript Level 2 File", TwainAPI.DTWAIN_POSTSCRIPT2MULTI, "test.ps"),
