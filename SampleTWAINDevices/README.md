@@ -15,7 +15,7 @@ Only use the second method if for some reason, the automatic installation fails 
 
 3) There should be a subfolder with the name of **sample2** that was created.  In the **sample2** folder should be a file with a **.ds** extension.  This is the main file that the TWAIN Data Source Manager will communicate with when querying the installed TWAIN devices.
 
-4) To check the installation, you can run the DTWDEMO32.exe program [found here](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/binaries), and see if the scanner shows up in the "Select Source" dialog when selecting a Source.  
+4) To check the installation, you can run the DTWDEMO32.exe program [found here](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit) in the 32bit_FullDemo.zip archive, and see if the scanner shows up in the "Select Source" dialog when selecting a Source.  
 
 5) Using DTWDEMO32.exe, attempt to acquire to a bitmap by selecting "Acquire Test -> Acquire Native" from the main menu, and check if the user-interface for the TWAIN device shows up. The user interface should look similar to the following:
 
@@ -29,7 +29,7 @@ If there is an error displaying the user-interface above, then a manual installa
 
 2) Copy the contents of the [twain32 folder](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices/twain_32) to the C:\Windows\twain_32 directory.
 
-3) To check the installation, run the DTWDEMO32.exe program [found here](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/binaries), and see if the scanner shows up in the "Select Source" dialog when selecting a Source.
+3) To check the installation, run the DTWDEMO32.exe program [found here](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit) in the 32bit_FullDemo.zip archive, and see if the scanner shows up in the "Select Source" dialog when selecting a Source.
 
 4) Using DTWDEMO32.exe, attempt to acquire to a bitmap by selecting "Acquire Test -> Acquire Native" from the main menu, and check if the user-interface for the TWAIN device shows up. The user interface should look similar to the interface shown in step 5) in the **Automatic installation** instructions.
 
@@ -51,7 +51,7 @@ Only use the second method if for some reason, the automatic installation fails 
 
 4) Check in the C:\Windows or C:\Windows\System32 directory for a file named **TWAINDSM.DLL**.  If the file does not exist, copy the version found here in the twain_64 directory to C:\Windows
 
-5) To check the installation, you can run the DTWDEMO64.exe program [found here](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/binaries), and see if the scanner shows up in the "Select Source" dialog when selecting a Source. 
+5) To check the installation, you can run the DTWDEMO64.exe program [found here](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit) in the 64bit_FullDemo.zip archive, and see if the scanner shows up in the "Select Source" dialog when selecting a Source. 
 
 6) Using DTWDEMO64.exe, attempt to acquire to a bitmap by selecting "Acquire Test -> Acquire Native" from the main menu, and check if the user-interface for the TWAIN device shows up. The user interface should look similar to the following:
 
@@ -67,6 +67,6 @@ If there is an error displaying the user-interface above, then a manual installa
 
 3) Check in the C:\Windows directory for a file named **TWAINDSM.DLL**.  If the file does not exist, copy the version found here in the twain_64 directory to C:\Windows
 
-4) To check the installation, you can run the DTWDEMO64.exe program [found here](https://github.com/dynarithmic/dtwain/tree/dtwain_apache/binaries), and see if the scanner shows up in the "Select Source" dialog when selecting a Source. 
+4) To check the installation, you can run the DTWDEMO64.exe program [found here](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit) in the 64bit_FullDemo.zip archive, and see if the scanner shows up in the "Select Source" dialog when selecting a Source. 
 
 5) Using DTWDEMO64.exe, attempt to acquire to a bitmap by selecting "Acquire Test -> Acquire Native" from the main menu, and check if the user-interface for the TWAIN device shows up. The user interface should look similar to the interface shown in step 6) in the **Automatic installation** instructions.
