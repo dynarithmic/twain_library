@@ -102,6 +102,7 @@
 1085 O valor DTWAIN_RANGE está fora dos limites  
 1086 DTWAIN_RANGE tem um tamanho de passo de 0
 1087 Nome vazio ou em branco foi detectado
+1088 O alimentador de documentos não possui sensor de papel ou o sensor de papel não foi detectado
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

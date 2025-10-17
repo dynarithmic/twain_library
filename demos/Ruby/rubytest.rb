@@ -20,7 +20,7 @@
 #
 
 #!/usr/bin/env ruby
-require_relative 'dynarithmic'
+require_relative 'dtwain'
 
 if __FILE__ == $0
   # Initialize DTWAIN
@@ -28,7 +28,7 @@ if __FILE__ == $0
   # load the 64-bit Unicode version of DTWAIN DLL. 
   # If you are running in a 32-bit environment, then the DLL should be dtwain32.dll, dtwain32u.dll, etc.
 
-  dtwain_dll = DTWAINAPI.new('c:/dtwain_bin/dtwain64u.dll') # replace with the absolute path to the dll here
+  dtwain_dll = DTWAINAPI.new('dtwain64u.dll') # replace with the absolute path to the dll here
   if !dtwain_dll.isInitialized()
       puts "Not initialized: #{dtwain_dll.isInitialized}" 
       return

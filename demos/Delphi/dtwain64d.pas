@@ -543,6 +543,11 @@ const
   DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
   DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
   DTWAIN_TN_TWAINTRIPLETEND = 1184;
+  DTWAIN_TN_FEEDERNOTLOADED = 1201;
+  DTWAIN_TN_FEEDERTIMEOUT = 1202;
+  DTWAIN_TN_FEEDERNOTENABLED = 1203;
+  DTWAIN_TN_FEEDERNOTSUPPORTED = 1204;
+  DTWAIN_TN_FEEDERTOFLATBED = 1205;
   DTWAIN_TN_TRANSFERTILEREADY = 1300;
   DTWAIN_TN_TRANSFERTILEDONE = 1301;
   DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
@@ -887,6 +892,7 @@ const
   DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085);
   DTWAIN_ERR_RANGE_STEPISZERO = (-1086);
   DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
+  DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -1821,6 +1827,8 @@ const
   DTWAIN_TWAINSESSIONOK = 2;
   DTWAIN_PDF_AES128 = 1;
   DTWAIN_PDF_AES256 = 2;
+  DTWAIN_FEEDER_TERMINATE = 1;
+  DTWAIN_FEEDER_USEFLATBED = 2;
 
 { DTWAIN DLL functional interface }
 
@@ -2279,6 +2287,7 @@ function DTWAIN_GetExtNameFromCapW(nValue:LONG; szValue:LPWSTR; nLength:LONG) : 
 function DTWAIN_GetFeederAlignment(Source:DTWAIN_SOURCE; lpAlignment:LPLONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetFeederAlignment';
 function DTWAIN_GetFeederFuncs(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetFeederFuncs';
 function DTWAIN_GetFeederOrder(Source:DTWAIN_SOURCE; lpOrder:LPLONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetFeederOrder';
+function DTWAIN_GetFeederWaitTime(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetFeederWaitTime';
 function DTWAIN_GetFileCompressionType(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetFileCompressionType';
 function DTWAIN_GetFileTypeExtensions(nType:LONG; lpszName:LPTSTR; nLength:LONG) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetFileTypeExtensions';
 function DTWAIN_GetFileTypeExtensionsA(nType:LONG; lpszName:LPSTR; nLength:LONG) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetFileTypeExtensionsA';
@@ -2768,6 +2777,7 @@ function DTWAIN_SetErrorCallback(proc:DTwainErrorProc; UserData:LONG) : BOOL; ex
 function DTWAIN_SetErrorCallback64(proc:DTwainErrorProc64; UserData64:Int64) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetErrorCallback64';
 function DTWAIN_SetFeederAlignment(Source:DTWAIN_SOURCE; lpAlignment:LONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFeederAlignment';
 function DTWAIN_SetFeederOrder(Source:DTWAIN_SOURCE; lOrder:LONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFeederOrder';
+function DTWAIN_SetFeederWaitTime(Source:DTWAIN_SOURCE; waitTime:LONG; flags:LONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFeederWaitTime';
 function DTWAIN_SetFileAutoIncrement(Source:DTWAIN_SOURCE; Increment:LONG; bResetOnAcquire:BOOL; bSet:BOOL) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFileAutoIncrement';
 function DTWAIN_SetFileCompressionType(Source:DTWAIN_SOURCE; lCompression:LONG; bIsCustom:BOOL) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFileCompressionType';
 function DTWAIN_SetFileSavePos(hWndParent:NativeInt; szTitle:LPCTSTR; xPos:LONG; yPos:LONG; nFlags:LONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_SetFileSavePos';

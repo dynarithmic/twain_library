@@ -102,7 +102,7 @@
 1085 DTWAIN_RANGE value is out of bounds
 1086 DTWAIN_RANGE has a step size of 0
 1087 Empty or blank name was detected
-
+1088 Document feeder has no paper sensor or paper sensor not detected
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

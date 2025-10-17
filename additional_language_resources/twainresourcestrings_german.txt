@@ -102,6 +102,7 @@
 1085 DTWAIN_RANGE-Wert liegt außerhalb der Grenzen  
 1086 DTWAIN_RANGE hat eine Schrittgröße von 0
 1087 Leer oder leerer Name wurde erkannt
+1088 Der Dokumenteneinzug hat keinen Papiersensor oder der Papiersensor wird nicht erkannt.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
@@ -207,7 +208,7 @@
 2074 Invalid bitmap width/height for non-Vista Windows ICO format
 2075 TWAIN_32.DLL nicht gefunden
 2076 TWAINDSM.DLL nicht gefunden   
-2078 Could not create directory
+2078 Konnte Verzeichnis nicht erstellen
 2079 Transym OCR DLL nicht gefunden
 2081 No filename specified.  Use -f option
 2082 TWAIN not available
