@@ -521,6 +521,10 @@
 
 /* Sent if document feeder has no paper loaded */
 #define DTWAIN_TN_FEEDERNOTLOADED           1201
+#define DTWAIN_TN_FEEDERTIMEOUT             1202
+#define DTWAIN_TN_FEEDERNOTENABLED          1203
+#define DTWAIN_TN_FEEDERNOTSUPPORTED        1204
+#define DTWAIN_TN_FEEDERTOFLATBED           1205
 
 /* Sent when tiled data has been sent */
 #define DTWAIN_TN_TRANSFERTILEREADY         1300
@@ -895,8 +899,9 @@
 #define DTWAIN_ERR_RANGE_OUTOFBOUNDS      (-1085)
 #define DTWAIN_ERR_RANGE_STEPISZERO       (-1086)
 #define DTWAIN_ERR_BLANKNAMEDETECTED   (-1087)
+#define DTWAIN_ERR_FEEDER_NOPAPERSENSOR   (-1088)
 
-#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_RANGE_STEPISZERO
+#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_FEEDER_NOPAPERSENSOR
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1654,6 +1659,11 @@ DTWAIN DLL are not displayed */
 
 /* Maximum length for a resource string*/
 #define DTWAIN_USERRES_MAXSIZE   8192
+
+/* Feeder wait time constants */
+#define DTWAIN_WAIT_INFINITE  (-1)
+#define DTWAIN_FEEDER_TERMINATE 1
+#define DTWAIN_FEEDER_USEFLATBED 2
 
 #endif
 

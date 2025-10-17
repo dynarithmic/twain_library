@@ -503,6 +503,7 @@
     D_GETFEEDERALIGNMENTFUNC                      DYNDTWAIN_API::DTWAIN_GetFeederAlignment = nullptr;
     D_GETFEEDERFUNCSFUNC                          DYNDTWAIN_API::DTWAIN_GetFeederFuncs = nullptr;
     D_GETFEEDERORDERFUNC                          DYNDTWAIN_API::DTWAIN_GetFeederOrder = nullptr;
+    D_GETFEEDERWAITTIMEFUNC                       DYNDTWAIN_API::DTWAIN_GetFeederWaitTime = nullptr;
     D_GETFILECOMPRESSIONTYPEFUNC                  DYNDTWAIN_API::DTWAIN_GetFileCompressionType = nullptr;
     D_GETFILETYPEEXTENSIONSFUNC                   DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSAFUNC                  DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsA = nullptr;
@@ -992,6 +993,7 @@
     D_SETERRORCALLBACK64FUNC                      DYNDTWAIN_API::DTWAIN_SetErrorCallback64 = nullptr;
     D_SETFEEDERALIGNMENTFUNC                      DYNDTWAIN_API::DTWAIN_SetFeederAlignment = nullptr;
     D_SETFEEDERORDERFUNC                          DYNDTWAIN_API::DTWAIN_SetFeederOrder = nullptr;
+    D_SETFEEDERWAITTIMEFUNC                       DYNDTWAIN_API::DTWAIN_SetFeederWaitTime = nullptr;
     D_SETFILEAUTOINCREMENTFUNC                    DYNDTWAIN_API::DTWAIN_SetFileAutoIncrement = nullptr;
     D_SETFILECOMPRESSIONTYPEFUNC                  DYNDTWAIN_API::DTWAIN_SetFileCompressionType = nullptr;
     D_SETFILESAVEPOSFUNC                          DYNDTWAIN_API::DTWAIN_SetFileSavePos = nullptr;
@@ -1682,6 +1684,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetFeederAlignment, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFeederFuncs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFeederOrder, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetFeederWaitTime, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileCompressionType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensions, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensionsA, hModule);
@@ -2171,6 +2174,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetErrorCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFeederAlignment, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFeederOrder, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetFeederWaitTime, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileAutoIncrement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileCompressionType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileSavePos, hModule);

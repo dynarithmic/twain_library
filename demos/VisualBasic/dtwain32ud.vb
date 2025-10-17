@@ -447,6 +447,11 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_PROCESSEDAUDIOFILE As Integer = 1182
     Public Const DTWAIN_TN_TWAINTRIPLETBEGIN As Integer = 1183
     Public Const DTWAIN_TN_TWAINTRIPLETEND As Integer = 1184
+    Public Const DTWAIN_TN_FEEDERNOTLOADED As Integer = 1201
+    Public Const DTWAIN_TN_FEEDERTIMEOUT As Integer = 1202
+    Public Const DTWAIN_TN_FEEDERNOTENABLED As Integer = 1203
+    Public Const DTWAIN_TN_FEEDERNOTSUPPORTED As Integer = 1204
+    Public Const DTWAIN_TN_FEEDERTOFLATBED As Integer = 1205
     Public Const DTWAIN_TN_TRANSFERTILEREADY As Integer = 1300
     Public Const DTWAIN_TN_TRANSFERTILEDONE As Integer = 1301
     Public Const DTWAIN_TN_FILECOMPRESSTYPEMISMATCH As Integer = 1302
@@ -791,6 +796,7 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_RANGE_OUTOFBOUNDS As Integer = (-1085)
     Public Const DTWAIN_ERR_RANGE_STEPISZERO As Integer = (-1086)
     Public Const DTWAIN_ERR_BLANKNAMEDETECTED As Integer = (-1087)
+    Public Const DTWAIN_ERR_FEEDER_NOPAPERSENSOR As Integer = (-1088)
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -1725,6 +1731,8 @@ Class DTWAINAPI
     Public Const DTWAIN_TWAINSESSIONOK As Integer = 2
     Public Const DTWAIN_PDF_AES128 As Integer = 1
     Public Const DTWAIN_PDF_AES256 As Integer = 2
+    Public Const DTWAIN_FEEDER_TERMINATE As Integer = 1
+    Public Const DTWAIN_FEEDER_USEFLATBED As Integer = 2
     Public Delegate Function DTwainCallback(WParam As Integer, LParam As Integer, UserData As Integer) As Integer
     Public Delegate Function DTwainCallback64(WParam As Integer, LParam As Integer, UserData As Long) As Integer
     Public Delegate Function DTwainErrorProc(param1 As Integer, param2 As Integer) As Integer
@@ -2183,6 +2191,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_GetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpAlignment As Integer) As Integer
     Declare Auto Function DTWAIN_GetFeederFuncs Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_GetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
+    Declare Auto Function DTWAIN_GetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_GetFileTypeExtensions Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
     Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
@@ -2672,6 +2681,7 @@ Class DTWAINAPI
     Declare Auto Function DTWAIN_SetErrorCallback64 Lib "dtwain32ud.dll" (proc As DTwainErrorProc64, UserData64 As System.Int64) As Integer
     Declare Auto Function DTWAIN_SetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAlignment As Integer) As Integer
     Declare Auto Function DTWAIN_SetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, lOrder As Integer) As Integer
+    Declare Auto Function DTWAIN_SetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr, waitTime As Integer, flags As Integer) As Integer
     Declare Auto Function DTWAIN_SetFileAutoIncrement Lib "dtwain32ud.dll" (Source As System.IntPtr, Increment As Integer, bResetOnAcquire As Integer, bSet As Integer) As Integer
     Declare Auto Function DTWAIN_SetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, lCompression As Integer, bIsCustom As Integer) As Integer
     Declare Auto Function DTWAIN_SetFileSavePos Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
