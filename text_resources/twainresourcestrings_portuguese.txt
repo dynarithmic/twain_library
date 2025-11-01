@@ -259,6 +259,8 @@
 3023 Mais
 3024 Lista de Capacidades
 3025 Fonte Padrão
+3026 Registro iniciado  
+3027 Registro encerrado
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 9999 Ocorreu um erro de exceção durante a chamada ao DSM Twain. Sessão Twain possivelmente corrompida?

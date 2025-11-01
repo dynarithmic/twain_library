@@ -259,6 +259,8 @@
 3023 Di più
 3024 Elenco delle capacità
 3025 Fonte Predefinita
+3026 Registrazione avviata
+3027 Registrazione terminata
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Messaggio dell'utente]

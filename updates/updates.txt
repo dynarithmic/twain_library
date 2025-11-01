@@ -4,6 +4,12 @@ DTWAIN Version changes
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb
 
+- Added notification code DTWAIN_TN_PREACQUIRESTART notification.  This is always sent prior to the 
+  device acquiring the first image of the first acquisition attempted, i.e., any call to the 
+  DTWAIN_Acquire... family of functions will send this notification.  If the application processes
+  this notification, a return value of 1 from this notification will start the acquisitions, a return
+  value of 0 will stop the acquisitions.
+
 - Added the DTWAIN_SetFeederWaitTime() API function.  This function allows devices with document feeders that
   can detect whether paper is placed within the feeder to wait for a specified number of seconds before
   automatically starting the acquisition process.  DTWAIN_SetFeederWaitTime() only works if the 

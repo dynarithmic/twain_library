@@ -259,6 +259,8 @@
 3023 もっと
 3024 能力リスト
 3025 デフォルトソース
+3026 ログ開始
+3027 ログ終了
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Twain DSMへの呼び出し中に例外エラーが発生しました。破損したTwainセッションの可能性がありますか？
 10000 [ユーザーメッセージ]

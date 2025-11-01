@@ -505,6 +505,7 @@ namespace Dynarithmic
         public const int DTWAIN_TN_FEEDERNOTENABLED = 1203;
         public const int DTWAIN_TN_FEEDERNOTSUPPORTED = 1204;
         public const int DTWAIN_TN_FEEDERTOFLATBED = 1205;
+        public const int DTWAIN_TN_PREACQUIRESTART = 1206;
         public const int DTWAIN_TN_TRANSFERTILEREADY = 1300;
         public const int DTWAIN_TN_TRANSFERTILEDONE = 1301;
         public const int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
