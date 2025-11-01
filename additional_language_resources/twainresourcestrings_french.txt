@@ -259,6 +259,8 @@
 3023 Plus
 3024 Liste des capacités
 3025 Source par défaut
+3026 Journal démarré  
+3027 Journal terminé
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Message de l'utilisateur]

@@ -259,6 +259,8 @@
 3023 Mai mult
 3024 Lista de capabilități
 3025 Sursa Implicită
+3026 Jurnal început  
+3027 Jurnal încheiat
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
 10000 [Mesaj utilizator]

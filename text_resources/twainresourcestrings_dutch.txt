@@ -258,6 +258,8 @@
 3023 Meer
 3024 Capaciteitenlijst
 3025 Standaardbron
+3026 Log gestart  
+3027 Log beëindigd
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]

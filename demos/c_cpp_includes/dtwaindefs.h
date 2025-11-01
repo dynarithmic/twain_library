@@ -526,6 +526,9 @@
 #define DTWAIN_TN_FEEDERNOTSUPPORTED        1204
 #define DTWAIN_TN_FEEDERTOFLATBED           1205
 
+/* Sent before the start of the first acquisition */
+#define DTWAIN_TN_PREACQUIRESTART           1206
+
 /* Sent when tiled data has been sent */
 #define DTWAIN_TN_TRANSFERTILEREADY         1300
 #define DTWAIN_TN_TRANSFERTILEDONE          1301

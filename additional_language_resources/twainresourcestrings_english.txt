@@ -259,6 +259,8 @@
 3023 More
 3024 Capability listing
 3025 Default Source
+3026 Log started
+3027 Log ended
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [User Message]
