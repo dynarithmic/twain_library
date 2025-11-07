@@ -1,12 +1,8 @@
 using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Data;
 using Dynarithmic;
 using System.Text;
-using System.Diagnostics;
 
 // For 32-bit apps, use these definitions
 using DTWAIN_ARRAY = System.IntPtr;
@@ -22,6 +18,7 @@ using DTWAIN_PDFTEXTELEMENT = System.IntPtr;
 using DTWAIN_RANGE = System.IntPtr;
 using DTWAIN_SOURCE = System.IntPtr;
 using DTWAIN_HANDLE = System.IntPtr;
+using FullDemo;
 
 namespace TWAINDemo
 {
@@ -71,6 +68,20 @@ namespace TWAINDemo
         private MenuItem idlang_custom;
         private String sOrigTitle;
         private Boolean initialized;
+        private TwainAPI.DTwainCallback theCallback;
+
+        public int CallbackProc(int wParam, int lParam, int UserData)
+        {
+            switch (wParam)
+            {
+                case TwainAPI.DTWAIN_TN_QUERYPAGEDISCARD:
+                    DIBDisplayerDlg2 sDIBDlg = new DIBDisplayerDlg2(TwainAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource));
+                    if (sDIBDlg.ShowDialog() == DialogResult.Cancel)
+                        return 0;
+                break;
+            }
+            return 1;
+        }
 
         public DTwainDemo()
 		{
@@ -94,7 +105,10 @@ namespace TWAINDemo
                     SelectSourceByNameBox.Enabled = false;
                 }
             }
-		}
+            theCallback += CallbackProc;
+            TwainAPI.DTWAIN_EnableMsgNotify(1);
+            TwainAPI.DTWAIN_SetCallback(theCallback, 0);
+        }
 
         public Boolean InitializedOk() { return initialized; }
 		/// <summary>

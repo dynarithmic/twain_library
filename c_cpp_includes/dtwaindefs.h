@@ -1055,7 +1055,8 @@
 #define DTWAIN_ERR_LAST                    (DTWAIN_ERR_USER_START + 1)
 #define DTWAIN_ERR_USER_START              (-80000)  
 
-/* Device event constants (same as TWAIN 1.8 value plus 1)*/
+/* Device event constants (these values are pow(2, value), where value
+   is the TWAIN 1.8 value)*/
 #define DTWAIN_DE_CHKAUTOCAPTURE    1
 #define DTWAIN_DE_CHKBATTERY        2
 #define DTWAIN_DE_CHKDEVICEONLINE   4
@@ -1404,6 +1405,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_DLG_OPENONSELECT         2048
 #define DTWAIN_DLG_NOOPENONSELECT       4096
 #define DTWAIN_DLG_HIGHLIGHTFIRST       8192
+#define DTWAIN_DLG_SAVELASTSCREENPOS    16384
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
