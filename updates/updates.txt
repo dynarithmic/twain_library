@@ -4,6 +4,14 @@ DTWAIN Version changes
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb
 
+- Added DTWAIN_DLG_SAVELASTSCREENPOS flag to DTWAIN_SelectSource2() that will allow the "Select Source"
+  dialog box to be positioned at the previous position when a prior call to DTWAIN_SelectSource2() was
+  called.  
+
+  This allows the user to position the Select Source dialog, close the dialog, and if the dialog box
+  is opened again using DTWAIN_SelectSource2(), the dialog box is positioned at the previous location on
+  the screen.
+
 - Added notification code DTWAIN_TN_PREACQUIRESTART notification.  This is always sent prior to the 
   device acquiring the first image of the first acquisition attempted, i.e., any call to the 
   DTWAIN_Acquire... family of functions will send this notification.  If the application processes
