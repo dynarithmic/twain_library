@@ -47,7 +47,7 @@ Since most Windows systems within the past 8 years has the Visual C++ runtime al
 
 ----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
-There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_library/tree/master/SampleTWAINDevices).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
+There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_virtual-drivers).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
 
 ----------
 ----
