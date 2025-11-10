@@ -4,6 +4,10 @@ DTWAIN Version changes
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb
 
+- Upgraded following internal image library:
+
+      libtiff  --> 4.7.1
+
 - Added DTWAIN_DLG_SAVELASTSCREENPOS flag to DTWAIN_SelectSource2() that will allow the "Select Source"
   dialog box to be positioned at the previous position when a prior call to DTWAIN_SelectSource2() was
   called.  

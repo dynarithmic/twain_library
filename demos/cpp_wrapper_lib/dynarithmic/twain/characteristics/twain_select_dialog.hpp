@@ -92,7 +92,8 @@ namespace dynarithmic
             static constexpr int useexcludelist = DTWAIN_DLG_USEEXCLUDENAMES; /*! Do not display the Source names in the TWAIN Select Source dialog */
             static constexpr int usenamemapping = DTWAIN_DLG_USENAMEMAPPING; /*! Maps the actual name of the Source to the aliased name */
             static constexpr int usedefaulttitle = DTWAIN_DLG_USEDEFAULTTITLE; /*! Use default tile ("Select Source" for the English language) */
-            static constexpr int topmostwindow = DTWAIN_DLG_TOPMOSTWINDOW; /*! Use default tile ("Select Source" for the English language) */
+            static constexpr int topmostwindow = DTWAIN_DLG_TOPMOSTWINDOW; /*! Ensure "Select Source" dialog is the topmost window */
+            static constexpr int savescreenpos = DTWAIN_DLG_SAVELASTSCREENPOS; /*! Save/Restore the last screen position of the Select Source dialog */
 
             static constexpr int useposition = 2048; /*! Use the position defined by twain_select_dialog::get_position() */
             static constexpr int uselegacy = 4096; /*! Use the legacy (default) TWAIN Select Source dialog. Customization is not possible if this flag is set */
