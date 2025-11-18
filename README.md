@@ -387,13 +387,15 @@ DTWAIN includes computer language bindings for the following computer languages 
       C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
       C# 
       Delphi
+      Java (separate repository -- see Note below)
+      Lua
       Perl
       Python 
       Ruby
       Visual Basic .NET 
       XBase++ (Alaska Software)
   
-There is also a [Java](https://www.oracle.com/java/) interface that is found in the [twain_library-java repository](https://github.com/dynarithmic/twain_library-java).
+* Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
 ----
 ###### Quick Example (C#)  
