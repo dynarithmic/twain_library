@@ -4,23 +4,14 @@ DTWAIN Version changes
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb
 
-- Upgraded following internal image library:
+- Added Lua language binding (binding uses LuaJit)
+
+- Upgraded following internal image libraries:
 
       libtiff  --> 4.7.1
-
-- Added DTWAIN_DLG_SAVELASTSCREENPOS flag to DTWAIN_SelectSource2() that will allow the "Select Source"
-  dialog box to be positioned at the previous position when a prior call to DTWAIN_SelectSource2() was
-  called.  
-
-  This allows the user to position the Select Source dialog, close the dialog, and if the dialog box
-  is opened again using DTWAIN_SelectSource2(), the dialog box is positioned at the previous location on
-  the screen.
-
-- Added notification code DTWAIN_TN_PREACQUIRESTART notification.  This is always sent prior to the 
-  device acquiring the first image of the first acquisition attempted, i.e., any call to the 
-  DTWAIN_Acquire... family of functions will send this notification.  If the application processes
-  this notification, a return value of 1 from this notification will start the acquisitions, a return
-  value of 0 will stop the acquisitions.
+      libpng   --> 1.6.50
+      libopenjpeg --> 2.5.4
+      libwebp  --> 1.6.0
 
 - Added the DTWAIN_SetFeederWaitTime() API function.  This function allows devices with document feeders that
   can detect whether paper is placed within the feeder to wait for a specified number of seconds before
@@ -61,7 +52,26 @@ DTWAIN Version changes
   When DTWAIN_AcquireNative() is called, if the device has a feeder that can detect paper, a maximum of
   30 seconds will elapse before the acquisition is terminated.  If before 30 seconds has elapsed, paper
   is placed in the feeder, the acquisition will immediately start.
-  
+
+- Added DTWAIN_GetExtImageInfoDataEx() function.  This function performs the same as the
+  DTWAIN_GetExtImageInfoData() function, with the only difference being that DTWAIN_GetExtImageInfoDataEx()
+  function returns the DTWAIN_ARRAY instead of the client providing the address of a DTWAIN_ARRAY.
+
+- Added DTWAIN_DLG_SAVELASTSCREENPOS flag to DTWAIN_SelectSource2() that will allow the "Select Source"
+  dialog box to be positioned at the previous position when a prior call to DTWAIN_SelectSource2() was
+  called.  
+
+  This allows the user to position the Select Source dialog, close the dialog, and if the dialog box
+  is opened again using DTWAIN_SelectSource2(), the dialog box is positioned at the previous location on
+  the screen.
+
+- Added notification code DTWAIN_TN_PREACQUIRESTART notification.  This is always sent prior to the 
+  device acquiring the first image of the first acquisition attempted, i.e., any call to the 
+  DTWAIN_Acquire... family of functions will send this notification.  If the application processes
+  this notification, a return value of 1 from this notification will start the acquisitions, a return
+  value of 0 will stop the acquisitions.
+
+ 
 
 5.7.0
 
