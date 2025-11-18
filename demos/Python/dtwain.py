@@ -2168,6 +2168,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
+     theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoItemEx.restype = ct.c_long
      theDLL.DTWAIN_GetExtNameFromCap.restype = ct.c_long
@@ -3262,6 +3263,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtImageInfoItemEx.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtNameFromCap.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -4355,6 +4357,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
+     theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoItemEx.restype = ct.c_long
      theDLL.DTWAIN_GetExtNameFromCap.restype = ct.c_long
@@ -5449,6 +5452,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtImageInfoItemEx.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtNameFromCap.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]

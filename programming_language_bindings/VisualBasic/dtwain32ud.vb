@@ -2185,6 +2185,7 @@ Class DTWAINAPI
     Declare Unicode Function DTWAIN_GetExtCapFromNameW Lib "dtwain32ud.dll" (szName As String) As Integer
     Declare Auto Function DTWAIN_GetExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
     Declare Auto Function DTWAIN_GetExtImageInfoData Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
+    Declare Auto Function DTWAIN_GetExtImageInfoDataEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer) As System.IntPtr
     Declare Auto Function DTWAIN_GetExtImageInfoItem Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
     Declare Auto Function DTWAIN_GetExtImageInfoItemEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer, ByRef ReturnCode As Integer) As Integer
     Declare Auto Function DTWAIN_GetExtNameFromCap Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
