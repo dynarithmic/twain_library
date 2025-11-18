@@ -2281,6 +2281,7 @@ function DTWAIN_GetExtCapFromNameA(szName:LPCSTR) : LONG; stdcall;  external 'dt
 function DTWAIN_GetExtCapFromNameW(szName:LPCWSTR) : LONG; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtCapFromNameW';
 function DTWAIN_GetExtImageInfo(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtImageInfo';
 function DTWAIN_GetExtImageInfoData(Source:DTWAIN_SOURCE; nWhich:LONG; Data:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtImageInfoData';
+function DTWAIN_GetExtImageInfoDataEx(Source:DTWAIN_SOURCE; nWhich:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtImageInfoDataEx';
 function DTWAIN_GetExtImageInfoItem(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; Type_:LPLONG) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtImageInfoItem';
 function DTWAIN_GetExtImageInfoItemEx(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; Type_:LPLONG; ReturnCode:LPLONG) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtImageInfoItemEx';
 function DTWAIN_GetExtNameFromCap(nValue:LONG; szValue:LPTSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_GetExtNameFromCap';

@@ -2107,6 +2107,7 @@ my $DTWAIN_GetExtCapFromNameA = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtCa
 my $DTWAIN_GetExtCapFromNameW = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtCapFromNameW', 'P', 'i');
 my $DTWAIN_GetExtImageInfo = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfo', 'N', 'I');
 my $DTWAIN_GetExtImageInfoData = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoData', 'NiP', 'I');
+my $DTWAIN_GetExtImageInfoDataEx = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoDataEx', 'Ni', 'N');
 my $DTWAIN_GetExtImageInfoItem = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoItem', 'NiPPP', 'I');
 my $DTWAIN_GetExtImageInfoItemEx = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoItemEx', 'NiPPPP', 'I');
 my $DTWAIN_GetExtNameFromCap = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtNameFromCap', 'iPi', 'i');

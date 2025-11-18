@@ -564,7 +564,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumExtImageInfoTypes(DTWAIN_SOURCE Source, LPDT
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumExtImageInfoTypesEx(DTWAIN_SOURCE Source);
 
 
-/* This function actualy initiates the querying of the ext image information.  This function
+/* This function actually initiates the querying of the ext image information.  This function
    will query the TWAIN Source.  If your TWAIN Source has bugs, this will be where any problem
    will exist */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
@@ -574,10 +574,9 @@ Image Information, the application will call DTWAIN_AddExtImageInfoQuery multipl
 each time for each Image Information desired  */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, LONG ExtImageInfo);
 
-/* This returns the data that the Source returned when the item is queried.  Application
-   must make sure that the LPVOID passed in fits the data that is returned from the Source.
-   Use DTWAIN_GetExtImageInfoItem to determine the type of data.   */
+/* This returns the data that the Source returned when the item is queried.  */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, LONG nWhich, LPDTWAIN_ARRAY Data);
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_GetExtImageInfoDataEx(DTWAIN_SOURCE Source, LONG nWhich);
 
 /* This returns the information pertaining to a certain item in the list.  The application
 will call this for each information retrieved from the Source.  This function does not

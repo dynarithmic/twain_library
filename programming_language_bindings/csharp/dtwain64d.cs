@@ -3115,6 +3115,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_GetExtImageInfoDataEx(DTWAIN_SOURCE Source, int nWhich);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetExtImageInfoItem(DTWAIN_SOURCE Source, int nWhich, ref int InfoID, ref int NumItems, ref int Type);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]

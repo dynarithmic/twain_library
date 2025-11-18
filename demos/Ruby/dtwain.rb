@@ -464,6 +464,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetExtCapFromNameW
    attr_reader :DTWAIN_GetExtImageInfo
    attr_reader :DTWAIN_GetExtImageInfoData
+   attr_reader :DTWAIN_GetExtImageInfoDataEx
    attr_reader :DTWAIN_GetExtImageInfoItem
    attr_reader :DTWAIN_GetExtImageInfoItemEx
    attr_reader :DTWAIN_GetExtNameFromCap
@@ -3256,6 +3257,7 @@ class DTWAINAPI
        @DTWAIN_GetExtCapFromNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfo'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetExtImageInfoDataEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoDataEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetExtImageInfoItem = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItem'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoItemEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItemEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtNameFromCap = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtNameFromCap'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
