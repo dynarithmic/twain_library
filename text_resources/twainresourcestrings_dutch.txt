@@ -102,6 +102,7 @@
 1085 DTWAIN_RANGE waarde is buiten de grenzen
 1086 DTWAIN_RANGE heeft een stapgrootte van 0
 1087 Leeg of blanco naam gedetecteerd
+1088 De documentinvoer heeft geen papiersensor of de papiersensor wordt niet gedetecteerd.
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
@@ -207,7 +208,7 @@
 2074 Invalid bitmap width/height for non-Vista Windows ICO format
 2075 TWAIN_32.DLL niet grondend
 2076 TWAINDSM.DLL niet grondend
-2078 Could not create directory
+2078 Kon map niet aanmaken 
 2079 Transym OCR DLL niet grondend
 2081 No filename specified.  Use -f option
 2082 TWAIN not available
@@ -257,6 +258,8 @@
 3023 Meer
 3024 Capaciteitenlijst
 3025 Standaardbron
+3026 Log gestart  
+3027 Log beëindigd
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]

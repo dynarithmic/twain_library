@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.7.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.7.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -387,13 +387,15 @@ DTWAIN includes computer language bindings for the following computer languages 
       C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
       C# 
       Delphi
+      Java (separate repository -- see Note below)
+      Lua
       Perl
       Python 
       Ruby
       Visual Basic .NET 
       XBase++ (Alaska Software)
   
-There is also a [Java](https://www.oracle.com/java/) interface that is found in the [twain_library-java repository](https://github.com/dynarithmic/twain_library-java).
+* Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
 ----
 ###### Quick Example (C#)  

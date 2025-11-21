@@ -1,5 +1,5 @@
 #   This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-#   Copyright (c) 2002-2025 Dynarithmic Software.                                         
+#   Copyright (c) 2002-2026 Dynarithmic Software.                                         
 #                                                                                         
 #   Licensed under the Apache License, Version 2.0 (the "License");                       
 #   you may not use this file except in compliance with the License.                      
@@ -373,6 +373,12 @@ use constant DTWAIN_TN_PROCESSAUDIOFINALACCEPTED => 1181;
 use constant DTWAIN_TN_PROCESSEDAUDIOFILE => 1182;
 use constant DTWAIN_TN_TWAINTRIPLETBEGIN => 1183;
 use constant DTWAIN_TN_TWAINTRIPLETEND => 1184;
+use constant DTWAIN_TN_FEEDERNOTLOADED => 1201;
+use constant DTWAIN_TN_FEEDERTIMEOUT => 1202;
+use constant DTWAIN_TN_FEEDERNOTENABLED => 1203;
+use constant DTWAIN_TN_FEEDERNOTSUPPORTED => 1204;
+use constant DTWAIN_TN_FEEDERTOFLATBED => 1205;
+use constant DTWAIN_TN_PREACQUIRESTART => 1206;
 use constant DTWAIN_TN_TRANSFERTILEREADY => 1300;
 use constant DTWAIN_TN_TRANSFERTILEDONE => 1301;
 use constant DTWAIN_TN_FILECOMPRESSTYPEMISMATCH => 1302;
@@ -717,6 +723,7 @@ use constant DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL => (-1084);
 use constant DTWAIN_ERR_RANGE_OUTOFBOUNDS => (-1085);
 use constant DTWAIN_ERR_RANGE_STEPISZERO => (-1086);
 use constant DTWAIN_ERR_BLANKNAMEDETECTED => (-1087);
+use constant DTWAIN_ERR_FEEDER_NOPAPERSENSOR => (-1088);
 use constant TWAIN_ERR_LOW_MEMORY => (-1100);
 use constant TWAIN_ERR_FALSE_ALARM => (-1101);
 use constant TWAIN_ERR_BUMMER => (-1102);
@@ -1081,6 +1088,7 @@ use constant DTWAIN_DLG_TOPMOSTWINDOW => 1024;
 use constant DTWAIN_DLG_OPENONSELECT => 2048;
 use constant DTWAIN_DLG_NOOPENONSELECT => 4096;
 use constant DTWAIN_DLG_HIGHLIGHTFIRST => 8192;
+use constant DTWAIN_DLG_SAVELASTSCREENPOS => 16384;
 use constant DTWAIN_RES_ENGLISH => 0;
 use constant DTWAIN_RES_FRENCH => 1;
 use constant DTWAIN_RES_SPANISH => 2;
@@ -1651,6 +1659,8 @@ use constant DTWAIN_APIHANDLEOK => 1;
 use constant DTWAIN_TWAINSESSIONOK => 2;
 use constant DTWAIN_PDF_AES128 => 1;
 use constant DTWAIN_PDF_AES256 => 2;
+use constant DTWAIN_FEEDER_TERMINATE => 1;
+use constant DTWAIN_FEEDER_USEFLATBED => 2;
 
 # DTWAIN function definitions. 
 my $dtwain_dllName = 'DTWAIN64.DLL';  # This is the placeholder for the DLL Name that will be loaded.
@@ -2097,6 +2107,7 @@ my $DTWAIN_GetExtCapFromNameA = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtCa
 my $DTWAIN_GetExtCapFromNameW = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtCapFromNameW', 'P', 'i');
 my $DTWAIN_GetExtImageInfo = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfo', 'N', 'I');
 my $DTWAIN_GetExtImageInfoData = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoData', 'NiP', 'I');
+my $DTWAIN_GetExtImageInfoDataEx = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoDataEx', 'Ni', 'N');
 my $DTWAIN_GetExtImageInfoItem = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoItem', 'NiPPP', 'I');
 my $DTWAIN_GetExtImageInfoItemEx = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtImageInfoItemEx', 'NiPPPP', 'I');
 my $DTWAIN_GetExtNameFromCap = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtNameFromCap', 'iPi', 'i');
@@ -2105,6 +2116,7 @@ my $DTWAIN_GetExtNameFromCapW = new Win32::API($dtwain_dllName, 'DTWAIN_GetExtNa
 my $DTWAIN_GetFeederAlignment = new Win32::API($dtwain_dllName, 'DTWAIN_GetFeederAlignment', 'NP', 'I');
 my $DTWAIN_GetFeederFuncs = new Win32::API($dtwain_dllName, 'DTWAIN_GetFeederFuncs', 'N', 'i');
 my $DTWAIN_GetFeederOrder = new Win32::API($dtwain_dllName, 'DTWAIN_GetFeederOrder', 'NP', 'I');
+my $DTWAIN_GetFeederWaitTime = new Win32::API($dtwain_dllName, 'DTWAIN_GetFeederWaitTime', 'N', 'i');
 my $DTWAIN_GetFileCompressionType = new Win32::API($dtwain_dllName, 'DTWAIN_GetFileCompressionType', 'N', 'i');
 my $DTWAIN_GetFileTypeExtensions = new Win32::API($dtwain_dllName, 'DTWAIN_GetFileTypeExtensions', 'iPi', 'i');
 my $DTWAIN_GetFileTypeExtensionsA = new Win32::API($dtwain_dllName, 'DTWAIN_GetFileTypeExtensionsA', 'iPi', 'i');
@@ -2592,6 +2604,7 @@ my $DTWAIN_SetErrorCallback = new Win32::API($dtwain_dllName, 'DTWAIN_SetErrorCa
 my $DTWAIN_SetErrorCallback64 = new Win32::API($dtwain_dllName, 'DTWAIN_SetErrorCallback64', 'q', 'I');
 my $DTWAIN_SetFeederAlignment = new Win32::API($dtwain_dllName, 'DTWAIN_SetFeederAlignment', 'Ni', 'I');
 my $DTWAIN_SetFeederOrder = new Win32::API($dtwain_dllName, 'DTWAIN_SetFeederOrder', 'Ni', 'I');
+my $DTWAIN_SetFeederWaitTime = new Win32::API($dtwain_dllName, 'DTWAIN_SetFeederWaitTime', 'Nii', 'I');
 my $DTWAIN_SetFileAutoIncrement = new Win32::API($dtwain_dllName, 'DTWAIN_SetFileAutoIncrement', 'NiII', 'I');
 my $DTWAIN_SetFileCompressionType = new Win32::API($dtwain_dllName, 'DTWAIN_SetFileCompressionType', 'NiI', 'I');
 my $DTWAIN_SetFileSavePos = new Win32::API($dtwain_dllName, 'DTWAIN_SetFileSavePos', 'NPiii', 'I');

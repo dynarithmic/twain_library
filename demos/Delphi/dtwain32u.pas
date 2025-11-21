@@ -1,5 +1,5 @@
 {* This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          *}
-{* Copyright (c) 2002-2025 Dynarithmic Software.                                         *}
+{* Copyright (c) 2002-2026 Dynarithmic Software.                                         *}
 {*                                                                                       *}
 {* Licensed under the Apache License, Version 2.0 (the "License");                       *}
 {* you may not use this file except in compliance with the License.                      *}
@@ -543,6 +543,12 @@ const
   DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
   DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
   DTWAIN_TN_TWAINTRIPLETEND = 1184;
+  DTWAIN_TN_FEEDERNOTLOADED = 1201;
+  DTWAIN_TN_FEEDERTIMEOUT = 1202;
+  DTWAIN_TN_FEEDERNOTENABLED = 1203;
+  DTWAIN_TN_FEEDERNOTSUPPORTED = 1204;
+  DTWAIN_TN_FEEDERTOFLATBED = 1205;
+  DTWAIN_TN_PREACQUIRESTART = 1206;
   DTWAIN_TN_TRANSFERTILEREADY = 1300;
   DTWAIN_TN_TRANSFERTILEDONE = 1301;
   DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
@@ -887,6 +893,7 @@ const
   DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085);
   DTWAIN_ERR_RANGE_STEPISZERO = (-1086);
   DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
+  DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -1251,6 +1258,7 @@ const
   DTWAIN_DLG_OPENONSELECT = 2048;
   DTWAIN_DLG_NOOPENONSELECT = 4096;
   DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
+  DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
   DTWAIN_RES_ENGLISH = 0;
   DTWAIN_RES_FRENCH = 1;
   DTWAIN_RES_SPANISH = 2;
@@ -1821,6 +1829,8 @@ const
   DTWAIN_TWAINSESSIONOK = 2;
   DTWAIN_PDF_AES128 = 1;
   DTWAIN_PDF_AES256 = 2;
+  DTWAIN_FEEDER_TERMINATE = 1;
+  DTWAIN_FEEDER_USEFLATBED = 2;
 
 { DTWAIN DLL functional interface }
 
@@ -2271,6 +2281,7 @@ function DTWAIN_GetExtCapFromNameA(szName:LPCSTR) : LONG; stdcall;  external 'dt
 function DTWAIN_GetExtCapFromNameW(szName:LPCWSTR) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtCapFromNameW';
 function DTWAIN_GetExtImageInfo(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtImageInfo';
 function DTWAIN_GetExtImageInfoData(Source:DTWAIN_SOURCE; nWhich:LONG; Data:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtImageInfoData';
+function DTWAIN_GetExtImageInfoDataEx(Source:DTWAIN_SOURCE; nWhich:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtImageInfoDataEx';
 function DTWAIN_GetExtImageInfoItem(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; Type_:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtImageInfoItem';
 function DTWAIN_GetExtImageInfoItemEx(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; Type_:LPLONG; ReturnCode:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtImageInfoItemEx';
 function DTWAIN_GetExtNameFromCap(nValue:LONG; szValue:LPTSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetExtNameFromCap';
@@ -2279,6 +2290,7 @@ function DTWAIN_GetExtNameFromCapW(nValue:LONG; szValue:LPWSTR; nLength:LONG) : 
 function DTWAIN_GetFeederAlignment(Source:DTWAIN_SOURCE; lpAlignment:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederAlignment';
 function DTWAIN_GetFeederFuncs(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederFuncs';
 function DTWAIN_GetFeederOrder(Source:DTWAIN_SOURCE; lpOrder:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederOrder';
+function DTWAIN_GetFeederWaitTime(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederWaitTime';
 function DTWAIN_GetFileCompressionType(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileCompressionType';
 function DTWAIN_GetFileTypeExtensions(nType:LONG; lpszName:LPTSTR; nLength:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileTypeExtensions';
 function DTWAIN_GetFileTypeExtensionsA(nType:LONG; lpszName:LPSTR; nLength:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileTypeExtensionsA';
@@ -2768,6 +2780,7 @@ function DTWAIN_SetErrorCallback(proc:DTwainErrorProc; UserData:LONG) : BOOL; st
 function DTWAIN_SetErrorCallback64(proc:DTwainErrorProc64; UserData64:Int64) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetErrorCallback64';
 function DTWAIN_SetFeederAlignment(Source:DTWAIN_SOURCE; lpAlignment:LONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFeederAlignment';
 function DTWAIN_SetFeederOrder(Source:DTWAIN_SOURCE; lOrder:LONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFeederOrder';
+function DTWAIN_SetFeederWaitTime(Source:DTWAIN_SOURCE; waitTime:LONG; flags:LONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFeederWaitTime';
 function DTWAIN_SetFileAutoIncrement(Source:DTWAIN_SOURCE; Increment:LONG; bResetOnAcquire:BOOL; bSet:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFileAutoIncrement';
 function DTWAIN_SetFileCompressionType(Source:DTWAIN_SOURCE; lCompression:LONG; bIsCustom:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFileCompressionType';
 function DTWAIN_SetFileSavePos(hWndParent:NativeInt; szTitle:LPCTSTR; xPos:LONG; yPos:LONG; nFlags:LONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetFileSavePos';

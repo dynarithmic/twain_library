@@ -102,7 +102,7 @@
 1085 La valeur DTWAIN_RANGE est hors des limites  
 1086 DTWAIN_RANGE a une taille de pas de 0
 1087 Un nom vide ou vide a été détecté
-
+1088 Le chargeur de documents ne dispose pas de capteur de papier ou le capteur de papier n'est pas détecté.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté
@@ -209,7 +209,7 @@
 2075 TWAIN_32.DLL non trouvé
 2076 TWAINDSM.DLL non trouvé  
 2077 Répertoire de fichiers invalide
-2078 Could not create directory
+2078 Impossible de créer le répertoire
 2079 Transym OCR DLL non trouvé 
 2081 No filename specified.  Use -f option
 2082 TWAIN not available
@@ -259,6 +259,8 @@
 3023 Plus
 3024 Liste des capacités
 3025 Source par défaut
+3026 Journal démarré  
+3027 Journal terminé
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Message de l'utilisateur]

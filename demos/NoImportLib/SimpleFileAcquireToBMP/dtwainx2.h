@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2025 Dynarithmic Software.
+    Copyright (c) 2002-2026 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -488,6 +488,7 @@ typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEAFUNC)                          
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEWFUNC)                          (LPCWSTR);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFOFUNC)                      (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFODATAFUNC)                  (DTWAIN_SOURCE, LONG, LPDTWAIN_ARRAY);
+typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_GETEXTIMAGEINFODATAEXFUNC)               (DTWAIN_SOURCE, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFOITEMFUNC)                  (DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFOITEMEXFUNC)                (DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG, LPLONG);
 typedef LONG (DLLENTRY_DEF * D_GETEXTNAMEFROMCAPFUNC)                           (LONG, LPTSTR, LONG);
@@ -496,6 +497,7 @@ typedef LONG (DLLENTRY_DEF * D_GETEXTNAMEFROMCAPWFUNC)                          
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETFEEDERALIGNMENTFUNC)                   (DTWAIN_SOURCE, LPLONG);
 typedef LONG (DLLENTRY_DEF * D_GETFEEDERFUNCSFUNC)                              (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETFEEDERORDERFUNC)                       (DTWAIN_SOURCE, LPLONG);
+typedef LONG (DLLENTRY_DEF * D_GETFEEDERWAITTIMEFUNC)                           (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETFILECOMPRESSIONTYPEFUNC)                      (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETFILETYPEEXTENSIONSFUNC)                       (LONG, LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETFILETYPEEXTENSIONSAFUNC)                      (LONG, LPSTR, LONG);
@@ -985,6 +987,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETERRORCALLBACKFUNC)                     
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETERRORCALLBACK64FUNC)                   (DTWAIN_ERROR_PROC64, DTWAIN_LONG64);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFEEDERALIGNMENTFUNC)                   (DTWAIN_SOURCE, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFEEDERORDERFUNC)                       (DTWAIN_SOURCE, LONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFEEDERWAITTIMEFUNC)                    (DTWAIN_SOURCE, LONG, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFILEAUTOINCREMENTFUNC)                 (DTWAIN_SOURCE, LONG, DTWAIN_BOOL, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFILECOMPRESSIONTYPEFUNC)               (DTWAIN_SOURCE, LONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETFILESAVEPOSFUNC)                       (HWND, LPCTSTR, LONG, LONG, LONG);
@@ -1617,6 +1620,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETEXTCAPFROMNAMEWFUNC                         DTWAIN_GetExtCapFromNameW;
     STATIC D_GETEXTIMAGEINFOFUNC                            DTWAIN_GetExtImageInfo;
     STATIC D_GETEXTIMAGEINFODATAFUNC                        DTWAIN_GetExtImageInfoData;
+    STATIC D_GETEXTIMAGEINFODATAEXFUNC                      DTWAIN_GetExtImageInfoDataEx;
     STATIC D_GETEXTIMAGEINFOITEMFUNC                        DTWAIN_GetExtImageInfoItem;
     STATIC D_GETEXTIMAGEINFOITEMEXFUNC                      DTWAIN_GetExtImageInfoItemEx;
     STATIC D_GETEXTNAMEFROMCAPFUNC                          DTWAIN_GetExtNameFromCap;
@@ -1625,6 +1629,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETFEEDERALIGNMENTFUNC                         DTWAIN_GetFeederAlignment;
     STATIC D_GETFEEDERFUNCSFUNC                             DTWAIN_GetFeederFuncs;
     STATIC D_GETFEEDERORDERFUNC                             DTWAIN_GetFeederOrder;
+    STATIC D_GETFEEDERWAITTIMEFUNC                          DTWAIN_GetFeederWaitTime;
     STATIC D_GETFILECOMPRESSIONTYPEFUNC                     DTWAIN_GetFileCompressionType;
     STATIC D_GETFILETYPEEXTENSIONSFUNC                      DTWAIN_GetFileTypeExtensions;
     STATIC D_GETFILETYPEEXTENSIONSAFUNC                     DTWAIN_GetFileTypeExtensionsA;
@@ -2114,6 +2119,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_SETERRORCALLBACK64FUNC                         DTWAIN_SetErrorCallback64;
     STATIC D_SETFEEDERALIGNMENTFUNC                         DTWAIN_SetFeederAlignment;
     STATIC D_SETFEEDERORDERFUNC                             DTWAIN_SetFeederOrder;
+    STATIC D_SETFEEDERWAITTIMEFUNC                          DTWAIN_SetFeederWaitTime;
     STATIC D_SETFILEAUTOINCREMENTFUNC                       DTWAIN_SetFileAutoIncrement;
     STATIC D_SETFILECOMPRESSIONTYPEFUNC                     DTWAIN_SetFileCompressionType;
     STATIC D_SETFILESAVEPOSFUNC                             DTWAIN_SetFileSavePos;

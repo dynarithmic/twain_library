@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2025 Dynarithmic Software.
+    Copyright (c) 2002-2026 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -495,6 +495,7 @@
     D_GETEXTCAPFROMNAMEWFUNC                      DYNDTWAIN_API::DTWAIN_GetExtCapFromNameW = nullptr;
     D_GETEXTIMAGEINFOFUNC                         DYNDTWAIN_API::DTWAIN_GetExtImageInfo = nullptr;
     D_GETEXTIMAGEINFODATAFUNC                     DYNDTWAIN_API::DTWAIN_GetExtImageInfoData = nullptr;
+    D_GETEXTIMAGEINFODATAEXFUNC                   DYNDTWAIN_API::DTWAIN_GetExtImageInfoDataEx = nullptr;
     D_GETEXTIMAGEINFOITEMFUNC                     DYNDTWAIN_API::DTWAIN_GetExtImageInfoItem = nullptr;
     D_GETEXTIMAGEINFOITEMEXFUNC                   DYNDTWAIN_API::DTWAIN_GetExtImageInfoItemEx = nullptr;
     D_GETEXTNAMEFROMCAPFUNC                       DYNDTWAIN_API::DTWAIN_GetExtNameFromCap = nullptr;
@@ -503,6 +504,7 @@
     D_GETFEEDERALIGNMENTFUNC                      DYNDTWAIN_API::DTWAIN_GetFeederAlignment = nullptr;
     D_GETFEEDERFUNCSFUNC                          DYNDTWAIN_API::DTWAIN_GetFeederFuncs = nullptr;
     D_GETFEEDERORDERFUNC                          DYNDTWAIN_API::DTWAIN_GetFeederOrder = nullptr;
+    D_GETFEEDERWAITTIMEFUNC                       DYNDTWAIN_API::DTWAIN_GetFeederWaitTime = nullptr;
     D_GETFILECOMPRESSIONTYPEFUNC                  DYNDTWAIN_API::DTWAIN_GetFileCompressionType = nullptr;
     D_GETFILETYPEEXTENSIONSFUNC                   DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSAFUNC                  DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsA = nullptr;
@@ -992,6 +994,7 @@
     D_SETERRORCALLBACK64FUNC                      DYNDTWAIN_API::DTWAIN_SetErrorCallback64 = nullptr;
     D_SETFEEDERALIGNMENTFUNC                      DYNDTWAIN_API::DTWAIN_SetFeederAlignment = nullptr;
     D_SETFEEDERORDERFUNC                          DYNDTWAIN_API::DTWAIN_SetFeederOrder = nullptr;
+    D_SETFEEDERWAITTIMEFUNC                       DYNDTWAIN_API::DTWAIN_SetFeederWaitTime = nullptr;
     D_SETFILEAUTOINCREMENTFUNC                    DYNDTWAIN_API::DTWAIN_SetFileAutoIncrement = nullptr;
     D_SETFILECOMPRESSIONTYPEFUNC                  DYNDTWAIN_API::DTWAIN_SetFileCompressionType = nullptr;
     D_SETFILESAVEPOSFUNC                          DYNDTWAIN_API::DTWAIN_SetFileSavePos = nullptr;
@@ -1674,6 +1677,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetExtCapFromNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtImageInfo, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtImageInfoData, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetExtImageInfoDataEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtImageInfoItem, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtImageInfoItemEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetExtNameFromCap, hModule);
@@ -1682,6 +1686,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetFeederAlignment, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFeederFuncs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFeederOrder, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetFeederWaitTime, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileCompressionType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensions, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensionsA, hModule);
@@ -2171,6 +2176,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetErrorCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFeederAlignment, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFeederOrder, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetFeederWaitTime, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileAutoIncrement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileCompressionType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetFileSavePos, hModule);

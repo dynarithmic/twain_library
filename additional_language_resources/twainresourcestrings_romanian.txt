@@ -102,6 +102,7 @@
 1085 Valoarea DTWAIN_RANGE este în afara limitelor  
 1086 DTWAIN_RANGE are o dimensiune a pasului de 0
 1087 Nume gol sau necompletat a fost detectat
+1088 Alimentatorul de documente nu are senzor de hârtie sau senzorul de hârtie nu este detectat
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  
@@ -258,6 +259,8 @@
 3023 Mai mult
 3024 Lista de capabilități
 3025 Sursa Implicită
+3026 Jurnal început  
+3027 Jurnal încheiat
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
 10000 [Mesaj utilizator]
