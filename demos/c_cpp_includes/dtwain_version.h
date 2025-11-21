@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2025 Dynarithmic Software.
+    Copyright (c) 2002-2026 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@
 
 #define DTWAIN_BUILDVERSION_TOP 0
 #define DTWAIN_BUILDVERSION_MIDDLE 1
-#define DTWAIN_BUILDVERSION_BOTTOM 5
+#define DTWAIN_BUILDVERSION_BOTTOM 6
 #define DTWAIN_BUILDVERSION DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_TOP) DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_MIDDLE) DTWAIN_STRINGER_(DTWAIN_BUILDVERSION_BOTTOM)
 
 #ifdef USE_DTWAIN_DEBUG_LIB
