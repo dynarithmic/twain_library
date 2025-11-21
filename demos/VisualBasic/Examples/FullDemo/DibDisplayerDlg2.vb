@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports System.Drawing
-Imports System.Reflection
+﻿Imports System.Drawing
 Imports System.Runtime.InteropServices
 
 Public Class DibDisplayerDlg2

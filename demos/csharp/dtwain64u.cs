@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2025 Dynarithmic Software.
+    Copyright (c) 2002-2026 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -500,6 +500,12 @@ namespace Dynarithmic
         public const int DTWAIN_TN_PROCESSEDAUDIOFILE = 1182;
         public const int DTWAIN_TN_TWAINTRIPLETBEGIN = 1183;
         public const int DTWAIN_TN_TWAINTRIPLETEND = 1184;
+        public const int DTWAIN_TN_FEEDERNOTLOADED = 1201;
+        public const int DTWAIN_TN_FEEDERTIMEOUT = 1202;
+        public const int DTWAIN_TN_FEEDERNOTENABLED = 1203;
+        public const int DTWAIN_TN_FEEDERNOTSUPPORTED = 1204;
+        public const int DTWAIN_TN_FEEDERTOFLATBED = 1205;
+        public const int DTWAIN_TN_PREACQUIRESTART = 1206;
         public const int DTWAIN_TN_TRANSFERTILEREADY = 1300;
         public const int DTWAIN_TN_TRANSFERTILEDONE = 1301;
         public const int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
@@ -844,6 +850,7 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085);
         public const int DTWAIN_ERR_RANGE_STEPISZERO = (-1086);
         public const int DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
+        public const int DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -1208,6 +1215,7 @@ namespace Dynarithmic
         public const int DTWAIN_DLG_OPENONSELECT = 2048;
         public const int DTWAIN_DLG_NOOPENONSELECT = 4096;
         public const int DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
+        public const int DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
         public const int DTWAIN_RES_ENGLISH = 0;
         public const int DTWAIN_RES_FRENCH = 1;
         public const int DTWAIN_RES_SPANISH = 2;
@@ -1778,6 +1786,8 @@ namespace Dynarithmic
         public const int DTWAIN_TWAINSESSIONOK = 2;
         public const int DTWAIN_PDF_AES128 = 1;
         public const int DTWAIN_PDF_AES256 = 2;
+        public const int DTWAIN_FEEDER_TERMINATE = 1;
+        public const int DTWAIN_FEEDER_USEFLATBED = 2;
 
         public const string DTWAIN_LIBRARY = "dtwain64u.dll";
 
@@ -3105,6 +3115,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_GetExtImageInfoDataEx(DTWAIN_SOURCE Source, int nWhich);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetExtImageInfoItem(DTWAIN_SOURCE Source, int nWhich, ref int InfoID, ref int NumItems, ref int Type);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -3127,6 +3140,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, ref int lpOrder);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
@@ -4594,6 +4610,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_SetFeederOrder(DTWAIN_SOURCE Source, int lOrder);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern int DTWAIN_SetFeederWaitTime(DTWAIN_SOURCE Source, int waitTime, int flags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int DTWAIN_SetFileAutoIncrement(DTWAIN_SOURCE Source, int Increment, int bResetOnAcquire, int bSet);

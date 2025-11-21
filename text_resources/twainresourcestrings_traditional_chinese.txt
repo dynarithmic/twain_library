@@ -102,6 +102,7 @@
 1085 DTWAIN_RANGE 值超出範圍  
 1086 DTWAIN_RANGE 的步長為 0
 1087 偵測到空白或空的名稱
+1088 文件進紙器沒有紙張感應器或未檢測到紙張感應器
 1100 TWAIN狀態代碼：無法完成操作。內存不足。  
 1101 TWAIN狀態代碼：無錯誤  
 1102 TWAIN狀態代碼：未知的故障原因  
@@ -258,6 +259,8 @@
 3023 更多
 3024 能力清單
 3025 預設來源
+3026 日誌開始  
+3027 日誌結束
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 在呼叫 Twain DSM 時發生例外錯誤。可能的損壞 Twain 會話？
 10000 [用戶消息]

@@ -101,6 +101,7 @@
 1085 DTWAIN_RANGE 值超出范围  
 1086 DTWAIN_RANGE 的步长为 0
 1087 检测到空或空白名称
+1088 自动进纸器无纸张传感器或未检测到纸张传感器
 1100 TWAIN 条件代码：无法完成操作。内存不足。  
 1101 TWAIN 条件代码：没有错误  
 1102 TWAIN 条件代码：未知的故障原因  
@@ -257,6 +258,8 @@
 3023 更多
 3024 能力清单
 3025 默认源
+3026 日志开始  
+3027 日志结束
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 在调用 Twain DSM 时发生异常错误。可能是 Twain 会话损坏？
 10000 [用户消息]

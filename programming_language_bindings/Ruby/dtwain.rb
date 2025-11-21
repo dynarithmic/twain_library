@@ -1,6 +1,6 @@
 #
 # This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-# Copyright (c) 2002-2025 Dynarithmic Software.                                         
+# Copyright (c) 2002-2026 Dynarithmic Software.                                         
 #                                                                                       
 # Licensed under the Apache License, Version 2.0 (the "License");                       
 # you may not use this file except in compliance with the License.                      
@@ -464,6 +464,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetExtCapFromNameW
    attr_reader :DTWAIN_GetExtImageInfo
    attr_reader :DTWAIN_GetExtImageInfoData
+   attr_reader :DTWAIN_GetExtImageInfoDataEx
    attr_reader :DTWAIN_GetExtImageInfoItem
    attr_reader :DTWAIN_GetExtImageInfoItemEx
    attr_reader :DTWAIN_GetExtNameFromCap
@@ -472,6 +473,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetFeederAlignment
    attr_reader :DTWAIN_GetFeederFuncs
    attr_reader :DTWAIN_GetFeederOrder
+   attr_reader :DTWAIN_GetFeederWaitTime
    attr_reader :DTWAIN_GetFileCompressionType
    attr_reader :DTWAIN_GetFileTypeExtensions
    attr_reader :DTWAIN_GetFileTypeExtensionsA
@@ -959,6 +961,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetErrorCallback64
    attr_reader :DTWAIN_SetFeederAlignment
    attr_reader :DTWAIN_SetFeederOrder
+   attr_reader :DTWAIN_SetFeederWaitTime
    attr_reader :DTWAIN_SetFileAutoIncrement
    attr_reader :DTWAIN_SetFileCompressionType
    attr_reader :DTWAIN_SetFileSavePos
@@ -1483,6 +1486,12 @@ class DTWAINAPI
    DTWAIN_TN_PROCESSEDAUDIOFILE = 1182
    DTWAIN_TN_TWAINTRIPLETBEGIN = 1183
    DTWAIN_TN_TWAINTRIPLETEND = 1184
+   DTWAIN_TN_FEEDERNOTLOADED = 1201
+   DTWAIN_TN_FEEDERTIMEOUT = 1202
+   DTWAIN_TN_FEEDERNOTENABLED = 1203
+   DTWAIN_TN_FEEDERNOTSUPPORTED = 1204
+   DTWAIN_TN_FEEDERTOFLATBED = 1205
+   DTWAIN_TN_PREACQUIRESTART = 1206
    DTWAIN_TN_TRANSFERTILEREADY = 1300
    DTWAIN_TN_TRANSFERTILEDONE = 1301
    DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302
@@ -1827,6 +1836,7 @@ class DTWAINAPI
    DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085)
    DTWAIN_ERR_RANGE_STEPISZERO = (-1086)
    DTWAIN_ERR_BLANKNAMEDETECTED = (-1087)
+   DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088)
    TWAIN_ERR_LOW_MEMORY = (-1100)
    TWAIN_ERR_FALSE_ALARM = (-1101)
    TWAIN_ERR_BUMMER = (-1102)
@@ -2191,6 +2201,7 @@ class DTWAINAPI
    DTWAIN_DLG_OPENONSELECT = 2048
    DTWAIN_DLG_NOOPENONSELECT = 4096
    DTWAIN_DLG_HIGHLIGHTFIRST = 8192
+   DTWAIN_DLG_SAVELASTSCREENPOS = 16384
    DTWAIN_RES_ENGLISH = 0
    DTWAIN_RES_FRENCH = 1
    DTWAIN_RES_SPANISH = 2
@@ -2761,6 +2772,8 @@ class DTWAINAPI
    DTWAIN_TWAINSESSIONOK = 2
    DTWAIN_PDF_AES128 = 1
    DTWAIN_PDF_AES256 = 2
+   DTWAIN_FEEDER_TERMINATE = 1
+   DTWAIN_FEEDER_USEFLATBED = 2
 
    @isinit = false
 
@@ -3244,6 +3257,7 @@ class DTWAINAPI
        @DTWAIN_GetExtCapFromNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfo'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetExtImageInfoDataEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoDataEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetExtImageInfoItem = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItem'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoItemEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItemEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtNameFromCap = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtNameFromCap'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3252,6 +3266,7 @@ class DTWAINAPI
        @DTWAIN_GetFeederAlignment = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederAlignment'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetFeederFuncs = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederFuncs'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetFeederOrder = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederOrder'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetFeederWaitTime = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederWaitTime'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileCompressionType'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileTypeExtensions = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileTypeExtensions'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileTypeExtensionsA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileTypeExtensionsA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3739,6 +3754,7 @@ class DTWAINAPI
        @DTWAIN_SetErrorCallback64 = Fiddle::Function::new(dtwain_dll['DTWAIN_SetErrorCallback64'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetFeederAlignment = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFeederAlignment'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetFeederOrder = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFeederOrder'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetFeederWaitTime = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFeederWaitTime'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetFileAutoIncrement = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFileAutoIncrement'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetFileCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFileCompressionType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetFileSavePos = Fiddle::Function::new(dtwain_dll['DTWAIN_SetFileSavePos'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)

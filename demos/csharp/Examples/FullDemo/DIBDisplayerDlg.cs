@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.IO;
 using Dynarithmic;
 using DTWAIN_ARRAY = System.IntPtr;
 using DTWAIN_HANDLE = System.IntPtr;
@@ -95,6 +90,11 @@ namespace TWAINDemo
             else
             {
                 DTWAIN_HANDLE dibToUse = TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
+                if (dibToUse == System.IntPtr.Zero)
+                {
+                    MessageBox.Show("Image was discarded or not available", "DTWAIN Message", MessageBoxButtons.OK);
+                    return;
+                }
                 this.dibBox.Image = BitmapFromDIB(dibToUse);
                 DibDictionary.Add(keyCurrent, (Bitmap)this.dibBox.Image);
             }

@@ -102,6 +102,7 @@
 1085 Il valore DTWAIN_RANGE è fuori dai limiti  
 1086 DTWAIN_RANGE ha una dimensione del passo di 0
 1087 Nome vuoto o mancante è stato rilevato
+1088 L'alimentatore documenti non ha un sensore carta o il sensore carta non viene rilevato
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento
@@ -258,6 +259,8 @@
 3023 Di più
 3024 Elenco delle capacità
 3025 Fonte Predefinita
+3026 Registrazione avviata
+3027 Registrazione terminata
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Messaggio dell'utente]

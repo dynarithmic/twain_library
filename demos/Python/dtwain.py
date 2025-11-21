@@ -2,7 +2,7 @@
 #  dtwain.py
 # 
 #  This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
-#  Copyright (c) 2002-2025 Dynarithmic Software.                                         
+#  Copyright (c) 2002-2026 Dynarithmic Software.                                         
 #                                                                                        
 #  Licensed under the Apache License, Version 2.0 (the "License");                       
 #  you may not use this file except in compliance with the License.                      
@@ -379,6 +379,12 @@ DTWAIN_TN_PROCESSAUDIOFINALACCEPTED = 1181
 DTWAIN_TN_PROCESSEDAUDIOFILE = 1182
 DTWAIN_TN_TWAINTRIPLETBEGIN = 1183
 DTWAIN_TN_TWAINTRIPLETEND = 1184
+DTWAIN_TN_FEEDERNOTLOADED = 1201
+DTWAIN_TN_FEEDERTIMEOUT = 1202
+DTWAIN_TN_FEEDERNOTENABLED = 1203
+DTWAIN_TN_FEEDERNOTSUPPORTED = 1204
+DTWAIN_TN_FEEDERTOFLATBED = 1205
+DTWAIN_TN_PREACQUIRESTART = 1206
 DTWAIN_TN_TRANSFERTILEREADY = 1300
 DTWAIN_TN_TRANSFERTILEDONE = 1301
 DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302
@@ -723,6 +729,7 @@ DTWAIN_ERR_EXTIMAGEINFO_RETRIEVAL = (-1084)
 DTWAIN_ERR_RANGE_OUTOFBOUNDS = (-1085)
 DTWAIN_ERR_RANGE_STEPISZERO = (-1086)
 DTWAIN_ERR_BLANKNAMEDETECTED = (-1087)
+DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088)
 TWAIN_ERR_LOW_MEMORY = (-1100)
 TWAIN_ERR_FALSE_ALARM = (-1101)
 TWAIN_ERR_BUMMER = (-1102)
@@ -1087,6 +1094,7 @@ DTWAIN_DLG_TOPMOSTWINDOW = 1024
 DTWAIN_DLG_OPENONSELECT = 2048
 DTWAIN_DLG_NOOPENONSELECT = 4096
 DTWAIN_DLG_HIGHLIGHTFIRST = 8192
+DTWAIN_DLG_SAVELASTSCREENPOS = 16384
 DTWAIN_RES_ENGLISH = 0
 DTWAIN_RES_FRENCH = 1
 DTWAIN_RES_SPANISH = 2
@@ -1657,6 +1665,8 @@ DTWAIN_APIHANDLEOK = 1
 DTWAIN_TWAINSESSIONOK = 2
 DTWAIN_PDF_AES128 = 1
 DTWAIN_PDF_AES256 = 2
+DTWAIN_FEEDER_TERMINATE = 1
+DTWAIN_FEEDER_USEFLATBED = 2
 
 # Example:
 # load the 64-bit unicode version of the dtwain dll
@@ -2158,6 +2168,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
+     theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoItemEx.restype = ct.c_long
      theDLL.DTWAIN_GetExtNameFromCap.restype = ct.c_long
@@ -2166,6 +2177,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetFeederAlignment.restype = ct.c_long
      theDLL.DTWAIN_GetFeederFuncs.restype = ct.c_long
      theDLL.DTWAIN_GetFeederOrder.restype = ct.c_long
+     theDLL.DTWAIN_GetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_GetFileCompressionType.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensions.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsA.restype = ct.c_long
@@ -2653,6 +2665,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetErrorCallback64.restype = ct.c_long
      theDLL.DTWAIN_SetFeederAlignment.restype = ct.c_long
      theDLL.DTWAIN_SetFeederOrder.restype = ct.c_long
+     theDLL.DTWAIN_SetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_SetFileAutoIncrement.restype = ct.c_long
      theDLL.DTWAIN_SetFileCompressionType.restype = ct.c_long
      theDLL.DTWAIN_SetFileSavePos.restype = ct.c_long
@@ -3250,6 +3263,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtImageInfoItemEx.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtNameFromCap.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -3258,6 +3272,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetFeederAlignment.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetFeederFuncs.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFeederOrder.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetFeederWaitTime.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileCompressionType.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileTypeExtensions.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
@@ -3717,6 +3732,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetErrorCallback64.argtypes = [theDLL.SETERRORPROC64_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetFeederAlignment.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetFeederOrder.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_SetFeederWaitTime.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileAutoIncrement.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileCompressionType.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileSavePos.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
@@ -4341,6 +4357,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
+     theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoItemEx.restype = ct.c_long
      theDLL.DTWAIN_GetExtNameFromCap.restype = ct.c_long
@@ -4349,6 +4366,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetFeederAlignment.restype = ct.c_long
      theDLL.DTWAIN_GetFeederFuncs.restype = ct.c_long
      theDLL.DTWAIN_GetFeederOrder.restype = ct.c_long
+     theDLL.DTWAIN_GetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_GetFileCompressionType.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensions.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsA.restype = ct.c_long
@@ -4836,6 +4854,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetErrorCallback64.restype = ct.c_long
      theDLL.DTWAIN_SetFeederAlignment.restype = ct.c_long
      theDLL.DTWAIN_SetFeederOrder.restype = ct.c_long
+     theDLL.DTWAIN_SetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_SetFileAutoIncrement.restype = ct.c_long
      theDLL.DTWAIN_SetFileCompressionType.restype = ct.c_long
      theDLL.DTWAIN_SetFileSavePos.restype = ct.c_long
@@ -5433,6 +5452,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtImageInfoItemEx.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetExtNameFromCap.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
@@ -5441,6 +5461,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetFeederAlignment.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetFeederFuncs.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFeederOrder.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetFeederWaitTime.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileCompressionType.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileTypeExtensions.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
@@ -5900,6 +5921,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetErrorCallback64.argtypes = [theDLL.SETERRORPROC64_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetFeederAlignment.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetFeederOrder.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_SetFeederWaitTime.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileAutoIncrement.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileCompressionType.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetFileSavePos.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
