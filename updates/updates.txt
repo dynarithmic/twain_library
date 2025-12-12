@@ -1,5 +1,17 @@
 DTWAIN Version changes
 
+5.7.2
+
+- Fixed potential issue with setting the CAP_CAPTION capability.
+
+- Added Rust language bindings (dtwainapi.rs).
+
+- Added Go language bindings (dtwainapi.go).
+
+- Updated C# and Visual Basic language bindings to properly handle DTWAIN
+  callback functions.
+
+
 5.7.1
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb

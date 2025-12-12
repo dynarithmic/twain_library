@@ -375,6 +375,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetAcquireArea2String
    attr_reader :DTWAIN_GetAcquireArea2StringA
    attr_reader :DTWAIN_GetAcquireArea2StringW
+   attr_reader :DTWAIN_GetAcquireAreaEx
    attr_reader :DTWAIN_GetAcquireMetrics
    attr_reader :DTWAIN_GetAcquireStripBuffer
    attr_reader :DTWAIN_GetAcquireStripData
@@ -388,6 +389,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetActiveDSMVersionInfoA
    attr_reader :DTWAIN_GetActiveDSMVersionInfoW
    attr_reader :DTWAIN_GetAlarmVolume
+   attr_reader :DTWAIN_GetAllSourceDibs
    attr_reader :DTWAIN_GetAppInfo
    attr_reader :DTWAIN_GetAppInfoA
    attr_reader :DTWAIN_GetAppInfoW
@@ -408,6 +410,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetCapArrayType
    attr_reader :DTWAIN_GetCapContainer
    attr_reader :DTWAIN_GetCapContainerEx
+   attr_reader :DTWAIN_GetCapContainerEx2
    attr_reader :DTWAIN_GetCapDataType
    attr_reader :DTWAIN_GetCapFromName
    attr_reader :DTWAIN_GetCapFromNameA
@@ -3168,6 +3171,7 @@ class DTWAINAPI
        @DTWAIN_GetAcquireArea2String = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireArea2String'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAcquireArea2StringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireArea2StringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAcquireArea2StringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireArea2StringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetAcquireAreaEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireAreaEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetAcquireMetrics = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireMetrics'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAcquireStripBuffer = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireStripBuffer'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetAcquireStripData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAcquireStripData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3181,6 +3185,7 @@ class DTWAINAPI
        @DTWAIN_GetActiveDSMVersionInfoA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetActiveDSMVersionInfoA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetActiveDSMVersionInfoW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetActiveDSMVersionInfoW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetAlarmVolume = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAlarmVolume'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetAllSourceDibs = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAllSourceDibs'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetAppInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAppInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAppInfoA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAppInfoA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAppInfoW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAppInfoW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3201,6 +3206,7 @@ class DTWAINAPI
        @DTWAIN_GetCapArrayType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapArrayType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapContainer = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapContainer'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapContainerEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapContainerEx'],[Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
+       @DTWAIN_GetCapContainerEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapContainerEx2'],[Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetCapDataType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapDataType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapFromName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapFromName'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapFromNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapFromNameA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)

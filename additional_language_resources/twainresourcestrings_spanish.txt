@@ -261,6 +261,7 @@
 3025 Fuente Predeterminada
 3026 Registro iniciado  
 3027 Registro finalizado
+3028 Último error
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Mensaje de usuario]

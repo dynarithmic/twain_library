@@ -261,6 +261,7 @@
 3025 預設來源
 3026 日誌開始  
 3027 日誌結束
+3028 最後錯誤
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 在呼叫 Twain DSM 時發生例外錯誤。可能的損壞 Twain 會話？
 10000 [用戶消息]
