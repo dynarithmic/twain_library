@@ -130,8 +130,11 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetAllCapsToDefault(DTWAIN_SOURCE Source
 LONG           DLLENTRY_DEF      DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, LONG nCap);
 LONG           DLLENTRY_DEF      DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, LONG nCap);
 LONG           DLLENTRY_DEF      DTWAIN_GetCapContainerEx(LONG nCap,DTWAIN_BOOL bSetContainer,LPDTWAIN_ARRAY ConTypes);
+DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_GetCapContainerEx2(LONG nCap, DTWAIN_BOOL bSetContainer);
+
 LONG           DLLENTRY_DEF      DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap,LONG lCapType);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetAcquireArea(DTWAIN_SOURCE Source,LONG lGetType,LPDTWAIN_ARRAY FloatEnum);
+DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, LONG lGetType);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetAcquireArea(DTWAIN_SOURCE Source,LONG lSetType,DTWAIN_ARRAY FloatEnum,DTWAIN_ARRAY ActualEnum);
 
 /* DTWAIN Array functions */
@@ -254,6 +257,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireNativeEx(DTWAIN_SOURCE Source,LON
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_AcquireBufferedEx(DTWAIN_SOURCE Source,LONG PixelType,LONG nMaxPages,DTWAIN_BOOL bShowUI,DTWAIN_BOOL bCloseSource,DTWAIN_ARRAY Acquisitions,LPLONG pStatus);
 
 HANDLE         DLLENTRY_DEF      DTWAIN_GetCurrentAcquiredImage( DTWAIN_SOURCE Source );
+DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
 LONG           DLLENTRY_DEF      DTWAIN_GetCurrentPageNum( DTWAIN_SOURCE Source );
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_GetSourceAcquisitions(DTWAIN_SOURCE Source);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetMaxAcquisitions( DTWAIN_SOURCE Source, LONG MaxAcquires);

@@ -260,6 +260,7 @@
 3025 Standardquelle
 3026 Protokoll gestartet  
 3027 Protokoll beendet
+3028 Letzter Fehler
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Benutzernachricht]

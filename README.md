@@ -16,9 +16,9 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Java, Ruby, Rust, and numerous other languages.
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, and numerous other languages.
 
-* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust** (and other languages) application, you've come to the right place.  
+* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
 
@@ -384,18 +384,30 @@ Note: To utilize other computer languages, it still requires that one of the [DT
 
 DTWAIN includes computer language bindings for the following computer languages and utilities found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-      C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
-      C# 
-      Delphi
-      Java (separate repository -- see Note below)
-      Lua
-      Perl
-      Python 
-      Ruby
-      Rust
-      Visual Basic .NET 
-      XBase++ (Alaska Software)
+  [C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad)
   
+  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/csharp)
+  
+  [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
+  
+  [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
+  
+  [Java*](https://github.com/dynarithmic/twain_library-java)
+  
+  [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/lua)
+  
+  [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)
+  
+  [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
+  
+  [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)
+  
+  [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
+  
+  [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
+  
+  [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
+
 * Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
 ----

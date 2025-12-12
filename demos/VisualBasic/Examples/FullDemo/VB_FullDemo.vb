@@ -343,8 +343,13 @@ Public Class VB_FullDemo
         End If
         EnableSourceItems(False)
     End Sub
-
+    REM Windows callback functions have differing WPARAM And LPARAM sizes, so make sure callback fits the correct
+    REM function prototype
+#If _X64 Then
+    Public Shared Function callbackfn(ByVal wparam As Long, ByVal lparam As Long, ByVal userval As Long) As Long
+#Else
     Public Shared Function callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
+#End If
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
@@ -441,7 +446,7 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Dim Status As Integer
         If SelectedSource <> 0 Then
-            If DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status) Then
+            If CBool(DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status)) Then
                 'setting clipboard data to picturebox 
                 Me.Focus()
             End If

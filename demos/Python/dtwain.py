@@ -2079,6 +2079,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetAcquireArea2String.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireArea2StringA.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireArea2StringW.restype = ct.c_long
+     theDLL.DTWAIN_GetAcquireAreaEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquireMetrics.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireStripBuffer.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquireStripData.restype = ct.c_long
@@ -2092,6 +2093,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetActiveDSMVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMVersionInfoW.restype = ct.c_long
      theDLL.DTWAIN_GetAlarmVolume.restype = ct.c_long
+     theDLL.DTWAIN_GetAllSourceDibs.restype = ct.c_void_p
      theDLL.DTWAIN_GetAppInfo.restype = ct.c_long
      theDLL.DTWAIN_GetAppInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetAppInfoW.restype = ct.c_long
@@ -2112,6 +2114,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCapArrayType.restype = ct.c_long
      theDLL.DTWAIN_GetCapContainer.restype = ct.c_long
      theDLL.DTWAIN_GetCapContainerEx.restype = ct.c_long
+     theDLL.DTWAIN_GetCapContainerEx2.restype = ct.c_void_p
      theDLL.DTWAIN_GetCapDataType.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameA.restype = ct.c_long
@@ -3182,6 +3185,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetAcquireArea2String.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireArea2StringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireArea2StringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetAcquireAreaEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetAcquireMetrics.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireStripBuffer.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetAcquireStripData.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
@@ -3195,6 +3199,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetActiveDSMVersionInfoA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMVersionInfoW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetAlarmVolume.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetAllSourceDibs.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetAppInfo.argtypes = [ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetAppInfoA.argtypes = [ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p]
      theDLL.DTWAIN_GetAppInfoW.argtypes = [ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p]
@@ -3213,6 +3218,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCapArrayType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapContainer.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetCapContainerEx.argtypes = [ct.c_long, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetCapContainerEx2.argtypes = [ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetCapDataType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapFromName.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetCapFromNameA.argtypes = [ct.c_char_p]
@@ -4268,6 +4274,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetAcquireArea2String.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireArea2StringA.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireArea2StringW.restype = ct.c_long
+     theDLL.DTWAIN_GetAcquireAreaEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquireMetrics.restype = ct.c_long
      theDLL.DTWAIN_GetAcquireStripBuffer.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquireStripData.restype = ct.c_long
@@ -4281,6 +4288,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetActiveDSMVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMVersionInfoW.restype = ct.c_long
      theDLL.DTWAIN_GetAlarmVolume.restype = ct.c_long
+     theDLL.DTWAIN_GetAllSourceDibs.restype = ct.c_void_p
      theDLL.DTWAIN_GetAppInfo.restype = ct.c_long
      theDLL.DTWAIN_GetAppInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetAppInfoW.restype = ct.c_long
@@ -4301,6 +4309,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCapArrayType.restype = ct.c_long
      theDLL.DTWAIN_GetCapContainer.restype = ct.c_long
      theDLL.DTWAIN_GetCapContainerEx.restype = ct.c_long
+     theDLL.DTWAIN_GetCapContainerEx2.restype = ct.c_void_p
      theDLL.DTWAIN_GetCapDataType.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameA.restype = ct.c_long
@@ -5371,6 +5380,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetAcquireArea2String.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireArea2StringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireArea2StringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetAcquireAreaEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetAcquireMetrics.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetAcquireStripBuffer.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetAcquireStripData.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
@@ -5384,6 +5394,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetActiveDSMVersionInfoA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMVersionInfoW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetAlarmVolume.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetAllSourceDibs.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetAppInfo.argtypes = [ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p]
      theDLL.DTWAIN_GetAppInfoA.argtypes = [ct.c_char_p, ct.c_char_p, ct.c_char_p, ct.c_char_p]
      theDLL.DTWAIN_GetAppInfoW.argtypes = [ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p, ct.c_wchar_p]
@@ -5402,6 +5413,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCapArrayType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapContainer.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetCapContainerEx.argtypes = [ct.c_long, ct.c_long, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetCapContainerEx2.argtypes = [ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetCapDataType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapFromName.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetCapFromNameA.argtypes = [ct.c_char_p]

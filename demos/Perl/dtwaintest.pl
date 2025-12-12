@@ -80,7 +80,7 @@ if ( $isAvail == 1 )
             $DTWAIN_ArrayDestroy->Call($dtwain_array);
 
             # Acquire the image
-            $DTWAIN_AcquireFile->Call($TwainSource, 'c:\saved_images\testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
+            $DTWAIN_AcquireFile->Call($TwainSource, 'testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
                                       DTWAIN_PT_DEFAULT, 1, 1, 1, 0);
        }
    }

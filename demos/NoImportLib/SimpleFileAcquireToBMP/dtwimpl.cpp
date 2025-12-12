@@ -406,6 +406,7 @@
     D_GETACQUIREAREA2STRINGFUNC                   DYNDTWAIN_API::DTWAIN_GetAcquireArea2String = nullptr;
     D_GETACQUIREAREA2STRINGAFUNC                  DYNDTWAIN_API::DTWAIN_GetAcquireArea2StringA = nullptr;
     D_GETACQUIREAREA2STRINGWFUNC                  DYNDTWAIN_API::DTWAIN_GetAcquireArea2StringW = nullptr;
+    D_GETACQUIREAREAEXFUNC                        DYNDTWAIN_API::DTWAIN_GetAcquireAreaEx = nullptr;
     D_GETACQUIREMETRICSFUNC                       DYNDTWAIN_API::DTWAIN_GetAcquireMetrics = nullptr;
     D_GETACQUIRESTRIPBUFFERFUNC                   DYNDTWAIN_API::DTWAIN_GetAcquireStripBuffer = nullptr;
     D_GETACQUIRESTRIPDATAFUNC                     DYNDTWAIN_API::DTWAIN_GetAcquireStripData = nullptr;
@@ -419,6 +420,7 @@
     D_GETACTIVEDSMVERSIONINFOAFUNC                DYNDTWAIN_API::DTWAIN_GetActiveDSMVersionInfoA = nullptr;
     D_GETACTIVEDSMVERSIONINFOWFUNC                DYNDTWAIN_API::DTWAIN_GetActiveDSMVersionInfoW = nullptr;
     D_GETALARMVOLUMEFUNC                          DYNDTWAIN_API::DTWAIN_GetAlarmVolume = nullptr;
+    D_GETALLSOURCEDIBSFUNC                        DYNDTWAIN_API::DTWAIN_GetAllSourceDibs = nullptr;
     D_GETAPPINFOFUNC                              DYNDTWAIN_API::DTWAIN_GetAppInfo = nullptr;
     D_GETAPPINFOAFUNC                             DYNDTWAIN_API::DTWAIN_GetAppInfoA = nullptr;
     D_GETAPPINFOWFUNC                             DYNDTWAIN_API::DTWAIN_GetAppInfoW = nullptr;
@@ -439,6 +441,7 @@
     D_GETCAPARRAYTYPEFUNC                         DYNDTWAIN_API::DTWAIN_GetCapArrayType = nullptr;
     D_GETCAPCONTAINERFUNC                         DYNDTWAIN_API::DTWAIN_GetCapContainer = nullptr;
     D_GETCAPCONTAINEREXFUNC                       DYNDTWAIN_API::DTWAIN_GetCapContainerEx = nullptr;
+    D_GETCAPCONTAINEREX2FUNC                      DYNDTWAIN_API::DTWAIN_GetCapContainerEx2 = nullptr;
     D_GETCAPDATATYPEFUNC                          DYNDTWAIN_API::DTWAIN_GetCapDataType = nullptr;
     D_GETCAPFROMNAMEFUNC                          DYNDTWAIN_API::DTWAIN_GetCapFromName = nullptr;
     D_GETCAPFROMNAMEAFUNC                         DYNDTWAIN_API::DTWAIN_GetCapFromNameA = nullptr;
@@ -1588,6 +1591,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireArea2String, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireArea2StringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireArea2StringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAcquireAreaEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireMetrics, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripBuffer, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripData, hModule);
@@ -1601,6 +1605,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMVersionInfoA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMVersionInfoW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAlarmVolume, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAllSourceDibs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAppInfo, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAppInfoA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAppInfoW, hModule);
@@ -1621,6 +1626,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetCapArrayType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapContainer, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapContainerEx, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapContainerEx2, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapDataType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromNameA, hModule);
