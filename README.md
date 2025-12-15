@@ -122,7 +122,7 @@ Please note that the files with the "u" in the name are Unicode aware.  If your 
 
 For example, if you plan to use the [language text resources](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources) that use UTF-8 character sequences that have issues displaying properly using the ANSI version of the library (for example, Greek), you should use one of the "u" DLL's listed above.  More info on the language text resources are found later in this README.
 
-The DTWAIN API has available ANSI-aware functions even in the Unicode versions of the library, in the event your Unicode application needs to process ANSI strings.  This is usually done by the API function ends with "A", for example `DTWAIN_GetSourceProductNameA` for the ANSI version of the function.
+The DTWAIN API has available ANSI-aware functions even in the Unicode versions of the library, in the event your Unicode application needs to process ANSI strings.  This is usually done by the API function ends with "A", for example `DTWAIN_GetSourceProductNameA` for the ANSI version of the function `DTWAIN_GetSourceProductName`.  Similarly, there are Unicode or wide-character functions available for the ANSI version of the DLL's in the event your ANSI-based application needs to process wide/Unicode strings (for example `DTWAIN_GetSourceProductNameW` for the wide-character version of the function `DTWAIN_GetSourceProductName`).
 
 ----
 
