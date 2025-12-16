@@ -4,8 +4,6 @@ There are two basic methods of using the DTWAIN library within a C# application.
 
 [Method 2:](#use_method_2) -- At runtime, your application controls which one of the DTWAIN DLL's listed above is loaded (dynamically load DTWAIN at runtime).
 
-To access the various constants such as **DTWAIN_BMP**, **DTWAIN_TN_ACQUIREDONE**, etc. these constants are defined in the `Dynarithmic.Constants` class that is available in the C# language binding files.
-
 ----
 
 <a name="use_method_1">
@@ -186,11 +184,9 @@ namespace Test
                     // Acquire the BMP file named Test.bmp
                     TwainAPI.DTWAIN_AcquireFile(SelectedSource,
                                                 "Test.bmp",
-                                                 // All of the DTWAIN constants are defined in a 
-                                                 // separate Dynarithmic.Constants class
-                                                 Dynarithmic.Constants.DTWAIN_BMP,
-                                                 Dynarithmic.Constants.DTWAIN_USENATIVE | Dynarithmic.Constants.DTWAIN_USENAME,
-                                                 Dynarithmic.Constants.DTWAIN_PT_DEFAULT,
+                                                 TwainAPI.DTWAIN_BMP,
+                                                 TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_USENAME,
+                                                 TwainAPI.DTWAIN_PT_DEFAULT,
                                                  1,
                                                  1,
                                                  1,
@@ -202,8 +198,3 @@ namespace Test
     }
 }
 ```
-----
-<a name="dtwain_constants">
-
-##### DTWAIN constants
-All of the constants described by the DTWAIN library (for example, **DTWAIN_BMP**, **DTWAIN_USENATIVE**, etc.) are defined within the **Dynarithmic.Constants** class as separate, public constant member variables (see above examples for usage).

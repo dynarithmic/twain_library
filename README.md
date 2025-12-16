@@ -393,7 +393,7 @@ DTWAIN includes computer language bindings for the following computer languages 
 
   [C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad)
   
-  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/csharp)
+  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)
   
   [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
   
