@@ -110,9 +110,14 @@ namespace Test
 ###### Using Method 2:
 
 Use Method 2 if: 
+
    a) You are using C# 9.0 or greater
+
+   and
    
    b) Your application is Unicode only,  
+
+   and
    
    c) You want to load the DTWAIN DLL at runtime, where your application can control exactly which DTWAIN DLL is being loaded, as well as where to find the DTWAIN DLL (in other words, your application is not relying solely on the Windows DLL search logic to find the DLL)
 
