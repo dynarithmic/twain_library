@@ -1744,1116 +1744,1117 @@ Class DTWAINAPI
     Public Delegate Function DTwainLoggerProc(<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, UserData As Long) As Integer
     Public Delegate Function DTwainDIBUpdateProc(TheSource As System.IntPtr, currentImage As Integer, DibData As System.IntPtr) As System.IntPtr
 
-    Declare Auto Function DTWAIN_AcquireAudioFile Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lMaxClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Ansi Function DTWAIN_AcquireAudioFileA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Unicode Function DTWAIN_AcquireAudioFileW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireAudioNative Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_AcquireAudioNativeEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireBuffered Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_AcquireBufferedEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireFile Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Ansi Function DTWAIN_AcquireFileA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireFileEx Lib "dtwain32ud.dll" (Source As System.IntPtr, aFileNames As System.IntPtr, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Unicode Function DTWAIN_AcquireFileW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireNative Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_AcquireNativeEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_AcquireToClipboard Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, nTransferMode As Integer, bDiscardDibs As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_AddExtImageInfoQuery Lib "dtwain32ud.dll" (Source As System.IntPtr, ExtImageInfo As Integer) As Integer
-    Declare Auto Function DTWAIN_AddFileToAppend Lib "dtwain32ud.dll" (szFile As String) As Integer
-    Declare Ansi Function DTWAIN_AddFileToAppendA Lib "dtwain32ud.dll" (szFile As String) As Integer
-    Declare Unicode Function DTWAIN_AddFileToAppendW Lib "dtwain32ud.dll" (szFile As String) As Integer
-    Declare Auto Function DTWAIN_AddPDFText Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-    Declare Ansi Function DTWAIN_AddPDFTextA Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-    Declare Auto Function DTWAIN_AddPDFTextEx Lib "dtwain32ud.dll" (Source As System.IntPtr, TextElement As System.IntPtr, Flags As UInteger) As Integer
-    Declare Unicode Function DTWAIN_AddPDFTextW Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-    Declare Auto Function DTWAIN_AllocateMemory Lib "dtwain32ud.dll" (memSize As UInteger) As System.IntPtr
-    Declare Auto Function DTWAIN_AllocateMemory64 Lib "dtwain32ud.dll" (memSize As System.UInt64) As System.IntPtr
-    Declare Auto Function DTWAIN_AllocateMemoryEx Lib "dtwain32ud.dll" (memSize As UInteger) As System.IntPtr
-    Declare Auto Function DTWAIN_AppHandlesExceptions Lib "dtwain32ud.dll" (bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayANSIStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayAdd Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddANSIStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFloatN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFloatStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddFloatStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddFloatStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFrame Lib "dtwain32ud.dll" (pArray As System.IntPtr, frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayAddFrameN Lib "dtwain32ud.dll" (pArray As System.IntPtr, frame As System.IntPtr, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64) As Integer
-    Declare Auto Function DTWAIN_ArrayAddLong64N Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddLongN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddN Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayAddString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArrayAddStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Ansi Function DTWAIN_ArrayAddStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayAddWideStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayConvertFix32ToFloat Lib "dtwain32ud.dll" (Fix32Array As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayConvertFloatToFix32 Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCopy Lib "dtwain32ud.dll" (Source As System.IntPtr, Dest As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayCreate Lib "dtwain32ud.dll" (nEnumType As Integer, nInitialSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCreateCopy Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCreateFromCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapType As Integer, lSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCreateFromLong64s Lib "dtwain32ud.dll" (ByRef pCArray As System.Int64, nSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCreateFromLongs Lib "dtwain32ud.dll" (ByRef pCArray As Integer, nSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayCreateFromReals Lib "dtwain32ud.dll" (ByRef pCArray As System.Double, nSize As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayDestroy Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayDestroyFrames Lib "dtwain32ud.dll" (FrameArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayFind Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-    Declare Ansi Function DTWAIN_ArrayFindANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
-    Declare Auto Function DTWAIN_ArrayFindFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, Tolerance As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArrayFindFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayFindFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayFindFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-    Declare Auto Function DTWAIN_ArrayFindLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayFindLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64) As Integer
-    Declare Auto Function DTWAIN_ArrayFindString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayFindStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayFindStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayFindWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
-    Declare Auto Function DTWAIN_ArrayFix32GetAt Lib "dtwain32ud.dll" (aFix32 As System.IntPtr, lPos As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayFix32SetAt Lib "dtwain32ud.dll" (aFix32 As System.IntPtr, lPos As Integer, Whole As Integer, Frac As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayFloatToANSIString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayFloatToString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayFloatToWideString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayGetAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-    Declare Ansi Function DTWAIN_ArrayGetAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_ArrayGetAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_ArrayGetAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Val As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtFrame Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, ByRef pleft As System.Double, ByRef ptop As System.Double, ByRef pright As System.Double, ByRef pbottom As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtFrameEx Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtFrameString Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_ArrayGetAtFrameStringA Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_ArrayGetAtFrameStringW Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtSource Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayGetAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> pStr As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_ArrayGetAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_ArrayGetAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_ArrayGetAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_ArrayGetBuffer Lib "dtwain32ud.dll" (pArray As System.IntPtr, nPos As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayGetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayGetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayGetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayGetCount Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayGetMaxStringLength Lib "dtwain32ud.dll" (a As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayGetSourceAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayGetStringLength Lib "dtwain32ud.dll" (a As System.IntPtr, nWhichString As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayGetType Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayInit Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayInsertAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtANSIStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFloatN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Double, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFloatStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtFloatStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtFloatStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFrame Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtFrameN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtLong64N Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtLongN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-    Declare Auto Function DTWAIN_ArrayInsertAtStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Ansi Function DTWAIN_ArrayInsertAtStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-    Declare Unicode Function DTWAIN_ArrayInsertAtWideStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayRemoveAll Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArrayRemoveAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayRemoveAtN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, num As Integer) As Integer
-    Declare Auto Function DTWAIN_ArrayResize Lib "dtwain32ud.dll" (pArray As System.IntPtr, NewSize As Integer) As Integer
-    Declare Auto Function DTWAIN_ArraySetAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-    Declare Ansi Function DTWAIN_ArraySetAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Ansi Function DTWAIN_ArraySetAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Unicode Function DTWAIN_ArraySetAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtFrame Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtFrameEx Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtFrameString Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-    Declare Ansi Function DTWAIN_ArraySetAtFrameStringA Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-    Declare Unicode Function DTWAIN_ArraySetAtFrameStringW Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-    Declare Auto Function DTWAIN_ArraySetAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-    Declare Ansi Function DTWAIN_ArraySetAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-    Declare Unicode Function DTWAIN_ArraySetAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-    Declare Unicode Function DTWAIN_ArraySetAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-    Declare Auto Function DTWAIN_ArrayStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ArrayWideStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_CallCallback Lib "dtwain32ud.dll" (wParam As Integer, lParam As Integer, UserData As Integer) As Integer
-    Declare Auto Function DTWAIN_CallCallback64 Lib "dtwain32ud.dll" (wParam As Integer, lParam As Integer, UserData As System.Int64) As Integer
-    Declare Auto Function DTWAIN_CallDSMProc Lib "dtwain32ud.dll" (AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_CheckHandles Lib "dtwain32ud.dll" (bCheck As Integer) As Integer
-    Declare Auto Function DTWAIN_ClearBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ClearBuffer As Integer) As Integer
-    Declare Auto Function DTWAIN_ClearErrorBuffer Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_ClearPDFText Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ClearPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_CloseSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_CloseSourceUI Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ConvertDIBToBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr, hPalette As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_ConvertDIBToFullBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr, isBMP As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ConvertToAPIString Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_ConvertToAPIStringA Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
-    Declare Auto Function DTWAIN_ConvertToAPIStringEx Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPTStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-    Declare Ansi Function DTWAIN_ConvertToAPIStringExA Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-    Declare Unicode Function DTWAIN_ConvertToAPIStringExW Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPWStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-    Declare Unicode Function DTWAIN_ConvertToAPIStringW Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
-    Declare Auto Function DTWAIN_CreateAcquisitionArray Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_CreatePDFTextElement Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_DeleteDIB Lib "dtwain32ud.dll" (hDib As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_DestroyAcquisitionArray Lib "dtwain32ud.dll" (aAcq As System.IntPtr, bDestroyData As Integer) As Integer
-    Declare Auto Function DTWAIN_DestroyPDFTextElement Lib "dtwain32ud.dll" (TextElement As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_DisableAppWindow Lib "dtwain32ud.dll" (hWnd As System.IntPtr, bDisable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoBorderDetect Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoBright Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoDeskew Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoFeed Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoRotate Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutoScan Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableAutomaticSenseMedium Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableFeeder Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableIndicator Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableJobFileHandling Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableLamp Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableMsgNotify Lib "dtwain32ud.dll" (bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnablePatchDetect Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnablePeekMessageLoop Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EnablePrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableThumbnail Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
-    Declare Auto Function DTWAIN_EnableTripletsNotify Lib "dtwain32ud.dll" (bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_EndThread Lib "dtwain32ud.dll" (DLLHandle As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EndTwainSession Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_EnumAlarmVolumes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, expandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumAlarmVolumesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, expandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumAlarms Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumAlarmsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumAudioXferMechs Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumAudioXferMechsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumAutoFeedValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumAutoFeedValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumAutomaticCaptures Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumAutomaticCapturesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumAutomaticSenseMedium Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumAutomaticSenseMediumEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumBitDepths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumBitDepthsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumBitDepthsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumBottomCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumBottomCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumBrightnessValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumBrightnessValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumCamerasEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumCamerasEx3 Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumCompressionTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumCompressionTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumCompressionTypesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer, bUseBufferedMode As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumContrastValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumContrastValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumCustomCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumCustomCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumDoubleFeedDetectLengths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumDoubleFeedDetectLengthsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumDoubleFeedDetectValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumExtImageInfoTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumExtImageInfoTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumExtendedCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumExtendedCapsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumExtendedCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumFileTypeBitsPerPixel Lib "dtwain32ud.dll" (FileType As Integer, ByRef Array As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumFileXferFormats Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumFileXferFormatsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumHalftones Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumHalftonesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumHighlightValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumHighlightValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumJobControls Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumJobControlsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumLightPaths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightPath As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumLightPathsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumLightSourcesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxBufs As System.IntPtr, bExpandRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumMaxBuffersEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumNoiseFilters Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumNoiseFiltersEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumOCRInterfaces Lib "dtwain32ud.dll" (ByRef OCRInterfaces As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumOCRSupportedCaps Lib "dtwain32ud.dll" (Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumOrientations Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumOrientationsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumOverscanValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumOverscanValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPaperSizes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPaperSizesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchCodes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchCodesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchMaxPrioritiesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchMaxRetriesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchPrioritiesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchSearchModes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchSearchModesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPatchTimeOutValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPatchTimeOutValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPixelTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPixelTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumPrinterStringModes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumPrinterStringModesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumShadowValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumShadowValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSourceUnits Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumSourceUnitsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSourceValues Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Ansi Function DTWAIN_EnumSourceValuesA Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Unicode Function DTWAIN_EnumSourceValuesW Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumSources Lib "dtwain32ud.dll" (ByRef lpArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumSourcesEx Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSupportedCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumSupportedCapsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumSupportedCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSupportedExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumSupportedExtImageInfoEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSupportedFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSupportedMultiPageFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_EnumSupportedSinglePageFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_EnumThresholdValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumThresholdValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumTopCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumTopCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumTwainPrinters Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumTwainPrintersArray Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_EnumTwainPrintersArrayEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumTwainPrintersEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumXResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumXResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_EnumYResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-    Declare Auto Function DTWAIN_EnumYResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_ExecuteOCR Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-    Declare Ansi Function DTWAIN_ExecuteOCRA Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-    Declare Unicode Function DTWAIN_ExecuteOCRW Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-    Declare Auto Function DTWAIN_FeedPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FlipBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FlushAcquiredPages Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ForceAcquireBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, BitDepth As Integer) As Integer
-    Declare Auto Function DTWAIN_ForceScanOnNoUI Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_FrameCreate Lib "dtwain32ud.dll" (Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
-    Declare Auto Function DTWAIN_FrameCreateString Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_FrameCreateStringA Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_FrameCreateStringW Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-    Declare Auto Function DTWAIN_FrameDestroy Lib "dtwain32ud.dll" (Frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FrameGetAll Lib "dtwain32ud.dll" (Frame As System.IntPtr, ByRef Left As System.Double, ByRef Top As System.Double, ByRef Right As System.Double, ByRef Bottom As System.Double) As Integer
-    Declare Auto Function DTWAIN_FrameGetAllString Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Bottom As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_FrameGetAllStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Bottom As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_FrameGetAllStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Bottom As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_FrameGetValue Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, ByRef Value As System.Double) As Integer
-    Declare Auto Function DTWAIN_FrameGetValueString Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> Value As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_FrameGetValueStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> Value As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_FrameGetValueStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> Value As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_FrameIsValid Lib "dtwain32ud.dll" (Frame As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FrameSetAll Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As Integer
-    Declare Auto Function DTWAIN_FrameSetAllString Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-    Declare Ansi Function DTWAIN_FrameSetAllStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-    Declare Unicode Function DTWAIN_FrameSetAllStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-    Declare Auto Function DTWAIN_FrameSetValue Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As System.Double) As Integer
-    Declare Auto Function DTWAIN_FrameSetValueString Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-    Declare Ansi Function DTWAIN_FrameSetValueStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-    Declare Unicode Function DTWAIN_FrameSetValueStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-    Declare Auto Function DTWAIN_FreeExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FreeMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_FreeMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetAPIHandleStatus Lib "dtwain32ud.dll" (pHandle As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetAcquireArea Lib "dtwain32ud.dll" (Source As System.IntPtr, lGetType As Integer, ByRef FloatEnum As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetAcquireArea2 Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef left As System.Double, ByRef top As System.Double, ByRef right As System.Double, ByRef bottom As System.Double, ByRef lpUnit As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAcquireArea2String Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetAcquireArea2StringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetAcquireArea2StringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAcquireMetrics Lib "dtwain32ud.dll" (source As System.IntPtr, ByRef ImageCount As Integer, ByRef SheetCount As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAcquireStripBuffer Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_GetAcquireStripData Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, ByRef lpBytesPerRow As UInteger, ByRef lpColumns As UInteger, ByRef lpRows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef lpBytesWritten As UInteger) As Integer
-    Declare Auto Function DTWAIN_GetAcquireStripSizes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpMin As UInteger, ByRef lpMax As UInteger, ByRef lpPreferred As UInteger) As Integer
-    Declare Auto Function DTWAIN_GetAcquiredImage Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhichAcq As Integer, nWhichDib As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetAcquiredImageArray Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhichAcq As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetActiveDSMPath Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetActiveDSMPathA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetActiveDSMPathW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetActiveDSMVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetActiveDSMVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAlarmVolume Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
-    Declare Auto Function DTWAIN_GetAppInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdName As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetAppInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetAppInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdName As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szAuthor As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szAuthor As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szAuthor As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetBatteryMinutes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
-    Declare Auto Function DTWAIN_GetBatteryPercent Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetBlankPageAutoDetection Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetBrightness Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetBrightnessString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetBrightnessStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetBrightnessStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetBufferedTransferInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
-    Declare Auto Function DTWAIN_GetCallback Lib "dtwain32ud.dll" () As DTwainCallback
-    Declare Auto Function DTWAIN_GetCallback64 Lib "dtwain32ud.dll" () As DTwainCallback64
-    Declare Auto Function DTWAIN_GetCapArrayType Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCapContainer Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer, lCapType As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCapContainerEx Lib "dtwain32ud.dll" (nCap As Integer, bSetContainer As Integer, ByRef ConTypes As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCapDataType Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCapFromName Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Ansi Function DTWAIN_GetCapFromNameA Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Unicode Function DTWAIN_GetCapFromNameW Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Auto Function DTWAIN_GetCapOperations Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCaption Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetCaptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Caption As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetCaptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Caption As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetCompressionSize Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lBytes As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetConditionCodeString Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetConditionCodeStringA Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetConditionCodeStringW Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetContrast Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetContrastString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetContrastStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetContrastStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetCountry Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetCurrentAcquiredImage Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_GetCurrentFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetCurrentFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetCurrentFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetCurrentPageNum Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCurrentRetryCount Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetCurrentTwainTriplet Lib "dtwain32ud.dll" (ByRef pAppID As TW_IDENTITY, ByRef pSourceID As TW_IDENTITY, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
-    Declare Auto Function DTWAIN_GetCustomDSData Lib "dtwain32ud.dll" (Source As System.IntPtr, Data As Byte(), dSize As UInteger, ByRef pActualSize As UInteger, nFlags As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetDSMFullName Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetDSMFullNameA Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetDSMFullNameW Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPWStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-    Declare Auto Function DTWAIN_GetDSMSearchOrder Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetDTWAINHandle Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_GetDeviceEvent Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetDeviceEventEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetDeviceEventInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetDeviceNotifications Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef DevEvents As Integer) As Integer
-    Declare Auto Function DTWAIN_GetDeviceTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetDeviceTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetDeviceTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetDoubleFeedDetectLength Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Value As System.Double, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetDuplexType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
-    Declare Auto Function DTWAIN_GetErrorBuffer Lib "dtwain32ud.dll" (ByRef ArrayBuffer As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetErrorBufferThreshold Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetErrorCallback Lib "dtwain32ud.dll" () As DTwainErrorProc
-    Declare Auto Function DTWAIN_GetErrorCallback64 Lib "dtwain32ud.dll" () As DTwainErrorProc64
-    Declare Auto Function DTWAIN_GetErrorString Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetErrorStringA Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetErrorStringW Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetExtCapFromName Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Ansi Function DTWAIN_GetExtCapFromNameA Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Unicode Function DTWAIN_GetExtCapFromNameW Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Auto Function DTWAIN_GetExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetExtImageInfoData Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetExtImageInfoDataEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetExtImageInfoItem Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
-    Declare Auto Function DTWAIN_GetExtImageInfoItemEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer, ByRef ReturnCode As Integer) As Integer
-    Declare Auto Function DTWAIN_GetExtNameFromCap Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetExtNameFromCapA Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetExtNameFromCapW Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpAlignment As Integer) As Integer
-    Declare Auto Function DTWAIN_GetFeederFuncs Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
-    Declare Auto Function DTWAIN_GetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetFileTypeExtensions Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetFileTypeExtensionsW Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetFileTypeName Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetFileTypeNameA Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetFileTypeNameW Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetHalftone Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetHalftoneA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetHalftoneW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-    Declare Auto Function DTWAIN_GetHighlight Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Highlight As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetHighlightString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Highlight As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetHighlightStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetHighlightStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Highlight As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-    Declare Auto Function DTWAIN_GetImageInfoString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetImageInfoStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetImageInfoStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-    Declare Auto Function DTWAIN_GetJobControl Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetJpegValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-    Declare Auto Function DTWAIN_GetJpegXRValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-    Declare Auto Function DTWAIN_GetLanguage Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetLastError Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetLibraryPath Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetLibraryPathA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetLibraryPathW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetLightPath Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
-    Declare Auto Function DTWAIN_GetLightSource Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSource As Integer) As Integer
-    Declare Auto Function DTWAIN_GetLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetLoggerCallback Lib "dtwain32ud.dll" () As DTwainLoggerProc
-    Declare Auto Function DTWAIN_GetLoggerCallbackA Lib "dtwain32ud.dll" () As DTwainLoggerProcA
-    Declare Auto Function DTWAIN_GetLoggerCallbackW Lib "dtwain32ud.dll" () As DTwainLoggerProcW
-    Declare Auto Function DTWAIN_GetManualDuplexCount Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
-    Declare Auto Function DTWAIN_GetMaxAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxBuf As Integer) As Integer
-    Declare Auto Function DTWAIN_GetMaxPagesToAcquire Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetMaxRetryAttempts Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetNameFromCap Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetNameFromCapA Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetNameFromCapW Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetNoiseFilter Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpNoiseFilter As Integer) As Integer
-    Declare Auto Function DTWAIN_GetNumAcquiredImages Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhich As Integer) As Integer
-    Declare Auto Function DTWAIN_GetNumAcquisitions Lib "dtwain32ud.dll" (aAcq As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetOCRCapValues Lib "dtwain32ud.dll" (Engine As System.IntPtr, OCRCapValue As Integer, TypeOfGet As Integer, ByRef CapValues As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetOCRErrorString Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetOCRErrorStringA Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRErrorStringW Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRLastError Lib "dtwain32ud.dll" (Engine As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetOCRMajorMinorVersion Lib "dtwain32ud.dll" (Engine As System.IntPtr, ByRef lpMajor As Integer, ByRef lpMinor As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRManufacturer Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szManufacturer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetOCRManufacturerA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRManufacturerW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRProductFamily Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductFamily As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetOCRProductFamilyA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRProductFamilyW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRProductName Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductName As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetOCRProductNameA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRProductNameW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRText Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPTStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_GetOCRTextA Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetOCRTextInfoFloat Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetOCRTextInfoFloatEx Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As System.Double, bufSize As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRTextInfoHandle Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetOCRTextInfoLong Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOCRTextInfoLongEx Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As Integer, bufSize As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRTextW Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPWStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_GetOCRVersionInfo Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> buffer As StringBuilder, maxBufSize As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetOCRVersionInfoA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> buffer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetOCRVersionInfoW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> buffer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetOverscan Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPDFTextElementFloat Lib "dtwain32ud.dll" (TextElement As System.IntPtr, ByRef val1 As System.Double, ByRef val2 As System.Double, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPDFTextElementLong Lib "dtwain32ud.dll" (TextElement As System.IntPtr, ByRef val1 As Integer, ByRef val2 As Integer, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPDFTextElementString Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetPDFTextElementStringA Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetPDFTextElementStringW Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPDFType1FontName Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPTStr)> szFont As StringBuilder, nChars As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetPDFType1FontNameA Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPStr)> szFont As StringBuilder, nChars As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetPDFType1FontNameW Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPWStr)> szFont As StringBuilder, nChars As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPaperSize Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPaperSize As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPaperSizeName Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPTStr)> outName As StringBuilder, nSize As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetPaperSizeNameA Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPStr)> outName As StringBuilder, nSize As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetPaperSizeNameW Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPWStr)> outName As StringBuilder, nSize As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetPatchSearchMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPatchTimeOut Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPixelFlavor Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPixelType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPrinterStartNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef nStart As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPrinterStringMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_GetPrinterStrings Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetPrinterSuffixString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetPrinterSuffixStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetPrinterSuffixStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetRegisteredMsg Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetResourceString Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetResourceStringA Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetResourceStringW Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetRotation Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetRotationString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetRotationStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetRotationStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Rotation As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetSaveFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSaveFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSaveFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSavedFilesCount Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Auto Function DTWAIN_GetShadow Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Shadow As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetShadowString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Shadow As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetShadowStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Shadow As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetShadowStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Shadow As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetShortVersionString Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_GetSourceDetails Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSourceDetailsA Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceID Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AcquireAudioFile Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lMaxClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_AcquireAudioFileA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_AcquireAudioFileW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireAudioNative Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AcquireAudioNativeEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireBuffered Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AcquireBufferedEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireFile Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_AcquireFileA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireFileEx Lib "dtwain32ud.dll" (Source As System.IntPtr, aFileNames As System.IntPtr, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_AcquireFileW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireNative Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AcquireNativeEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AcquireToClipboard Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, nTransferMode As Integer, bDiscardDibs As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AddExtImageInfoQuery Lib "dtwain32ud.dll" (Source As System.IntPtr, ExtImageInfo As Integer) As Integer
+    Public Declare Auto Function DTWAIN_AddFileToAppend Lib "dtwain32ud.dll" (szFile As String) As Integer
+    Public Declare Ansi Function DTWAIN_AddFileToAppendA Lib "dtwain32ud.dll" (szFile As String) As Integer
+    Public Declare Unicode Function DTWAIN_AddFileToAppendW Lib "dtwain32ud.dll" (szFile As String) As Integer
+    Public Declare Auto Function DTWAIN_AddPDFText Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
+    Public Declare Ansi Function DTWAIN_AddPDFTextA Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
+    Public Declare Auto Function DTWAIN_AddPDFTextEx Lib "dtwain32ud.dll" (Source As System.IntPtr, TextElement As System.IntPtr, Flags As UInteger) As Integer
+    Public Declare Unicode Function DTWAIN_AddPDFTextW Lib "dtwain32ud.dll" (Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
+    Public Declare Auto Function DTWAIN_AllocateMemory Lib "dtwain32ud.dll" (memSize As UInteger) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AllocateMemory64 Lib "dtwain32ud.dll" (memSize As System.UInt64) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AllocateMemoryEx Lib "dtwain32ud.dll" (memSize As UInteger) As System.IntPtr
+    Public Declare Auto Function DTWAIN_AppHandlesExceptions Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayANSIStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayAdd Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddANSIStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFloatN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFloatStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddFloatStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddFloatStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFrame Lib "dtwain32ud.dll" (pArray As System.IntPtr, frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddFrameN Lib "dtwain32ud.dll" (pArray As System.IntPtr, frame As System.IntPtr, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddLong64N Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddLongN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddN Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayAddStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayAddStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayAddWideStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayConvertFix32ToFloat Lib "dtwain32ud.dll" (Fix32Array As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayConvertFloatToFix32 Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCopy Lib "dtwain32ud.dll" (Source As System.IntPtr, Dest As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayCreate Lib "dtwain32ud.dll" (nEnumType As Integer, nInitialSize As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCreateCopy Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCreateFromCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapType As Integer, lSize As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCreateFromLong64s Lib "dtwain32ud.dll" (ByRef pCArray As System.Int64, nSize As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCreateFromLongs Lib "dtwain32ud.dll" (ByRef pCArray As Integer, nSize As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayCreateFromReals Lib "dtwain32ud.dll" (ByRef pCArray As System.Double, nSize As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayDestroy Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayDestroyFrames Lib "dtwain32ud.dll" (FrameArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFind Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayFindANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFindFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, Tolerance As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFindFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayFindFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayFindFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFindLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFindLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFindString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayFindStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayFindStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayFindWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, pString As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFix32GetAt Lib "dtwain32ud.dll" (aFix32 As System.IntPtr, lPos As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFix32SetAt Lib "dtwain32ud.dll" (aFix32 As System.IntPtr, lPos As Integer, Whole As Integer, Frac As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayFloatToANSIString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayFloatToString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayFloatToWideString Lib "dtwain32ud.dll" (FloatArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayGetAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayGetAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayGetAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayGetAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Val As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtFrame Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, ByRef pleft As System.Double, ByRef ptop As System.Double, ByRef pright As System.Double, ByRef pbottom As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtFrameEx Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtFrameString Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayGetAtFrameStringA Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayGetAtFrameStringW Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtSource Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> pStr As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayGetAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayGetAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayGetAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetBuffer Lib "dtwain32ud.dll" (pArray As System.IntPtr, nPos As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayGetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayGetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayGetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayGetCount Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetMaxStringLength Lib "dtwain32ud.dll" (a As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetSourceAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetStringLength Lib "dtwain32ud.dll" (a As System.IntPtr, nWhichString As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayGetType Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInit Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayInsertAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtANSIStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFloatN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Double, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFloatStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtFloatStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtFloatStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFrame Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtFrameN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtLong64N Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtLongN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayInsertAtStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ArrayInsertAtStringNA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtStringNW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArrayInsertAtWideStringN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayRemoveAll Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArrayRemoveAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayRemoveAtN Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, num As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArrayResize Lib "dtwain32ud.dll" (pArray As System.IntPtr, NewSize As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAt Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
+    Public Declare Ansi Function DTWAIN_ArraySetAtANSIString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArraySetAtFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArraySetAtFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtFrame Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtFrameEx Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtFrameString Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArraySetAtFrameStringA Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArraySetAtFrameStringW Lib "dtwain32ud.dll" (FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtLong64 Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_ArraySetAtString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
+    Public Declare Ansi Function DTWAIN_ArraySetAtStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArraySetAtStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
+    Public Declare Unicode Function DTWAIN_ArraySetAtWideString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
+    Public Declare Auto Function DTWAIN_ArrayStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ArrayWideStringToFloat Lib "dtwain32ud.dll" (StringArray As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_CallCallback Lib "dtwain32ud.dll" (wParam As Integer, lParam As Integer, UserData As Integer) As Integer
+    Public Declare Auto Function DTWAIN_CallCallback64 Lib "dtwain32ud.dll" (wParam As Integer, lParam As Integer, UserData As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_CallDSMProc Lib "dtwain32ud.dll" (AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_CheckHandles Lib "dtwain32ud.dll" (bCheck As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ClearBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ClearBuffer As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ClearErrorBuffer Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_ClearPDFText Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ClearPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_CloseSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_CloseSourceUI Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ConvertDIBToBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr, hPalette As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ConvertDIBToFullBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr, isBMP As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ConvertToAPIString Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_ConvertToAPIStringA Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ConvertToAPIStringEx Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPTStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ConvertToAPIStringExA Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ConvertToAPIStringExW Lib "dtwain32ud.dll" (lpOrigString As String, <MarshalAs(UnmanagedType.LPWStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ConvertToAPIStringW Lib "dtwain32ud.dll" (lpOrigString As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_CreateAcquisitionArray Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_CreatePDFTextElement Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_DeleteDIB Lib "dtwain32ud.dll" (hDib As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_DestroyAcquisitionArray Lib "dtwain32ud.dll" (aAcq As System.IntPtr, bDestroyData As Integer) As Integer
+    Public Declare Auto Function DTWAIN_DestroyPDFTextElement Lib "dtwain32ud.dll" (TextElement As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_DisableAppWindow Lib "dtwain32ud.dll" (hWnd As System.IntPtr, bDisable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoBorderDetect Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoBright Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoDeskew Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoFeed Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoRotate Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutoScan Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableAutomaticSenseMedium Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableFeeder Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableIndicator Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableJobFileHandling Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableLamp Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableMsgNotify Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnablePatchDetect Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnablePeekMessageLoop Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnablePrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableThumbnail Lib "dtwain32ud.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnableTripletsNotify Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EndThread Lib "dtwain32ud.dll" (DLLHandle As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EndTwainSession Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_EnumAlarmVolumes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, expandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumAlarmVolumesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, expandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumAlarms Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumAlarmsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumAudioXferMechs Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumAudioXferMechsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumAutoFeedValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumAutoFeedValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumAutomaticCaptures Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumAutomaticCapturesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumAutomaticSenseMedium Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumAutomaticSenseMediumEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumBitDepths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumBitDepthsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumBitDepthsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumBottomCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumBottomCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumBrightnessValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumBrightnessValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumCamerasEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumCamerasEx3 Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumCompressionTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumCompressionTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumCompressionTypesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer, bUseBufferedMode As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumContrastValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumContrastValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumCustomCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumCustomCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumDoubleFeedDetectLengths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumDoubleFeedDetectLengthsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumDoubleFeedDetectValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumExtImageInfoTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumExtImageInfoTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumExtendedCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumExtendedCapsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumExtendedCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumFileTypeBitsPerPixel Lib "dtwain32ud.dll" (FileType As Integer, ByRef Array As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumFileXferFormats Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumFileXferFormatsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumHalftones Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumHalftonesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumHighlightValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumHighlightValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumJobControls Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumJobControlsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumLightPaths Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightPath As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumLightPathsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumLightSourcesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxBufs As System.IntPtr, bExpandRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumMaxBuffersEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumNoiseFilters Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumNoiseFiltersEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumOCRInterfaces Lib "dtwain32ud.dll" (ByRef OCRInterfaces As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumOCRSupportedCaps Lib "dtwain32ud.dll" (Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumOrientations Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumOrientationsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumOverscanValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumOverscanValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPaperSizes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPaperSizesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchCodes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchCodesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchMaxPrioritiesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchMaxRetriesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchPrioritiesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchSearchModes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchSearchModesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPatchTimeOutValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPatchTimeOutValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPixelTypes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPixelTypesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumPrinterStringModes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumPrinterStringModesEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumShadowValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumShadowValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSourceUnits Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumSourceUnitsEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSourceValues Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_EnumSourceValuesA Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_EnumSourceValuesW Lib "dtwain32ud.dll" (Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumSources Lib "dtwain32ud.dll" (ByRef lpArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumSourcesEx Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSupportedCaps Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumSupportedCapsEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumSupportedCapsEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSupportedExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumSupportedExtImageInfoEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSupportedFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSupportedMultiPageFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumSupportedSinglePageFileTypes Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumThresholdValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumThresholdValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumTopCameras Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumTopCamerasEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumTwainPrinters Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumTwainPrintersArray Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_EnumTwainPrintersArrayEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumTwainPrintersEx Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumXResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumXResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_EnumYResolutionValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
+    Public Declare Auto Function DTWAIN_EnumYResolutionValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_ExecuteOCR Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_ExecuteOCRA Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_ExecuteOCRW Lib "dtwain32ud.dll" (Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
+    Public Declare Auto Function DTWAIN_FeedPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FlipBitmap Lib "dtwain32ud.dll" (hDib As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FlushAcquiredPages Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ForceAcquireBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, BitDepth As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ForceScanOnNoUI Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_FrameCreate Lib "dtwain32ud.dll" (Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
+    Public Declare Auto Function DTWAIN_FrameCreateString Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_FrameCreateStringA Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_FrameCreateStringW Lib "dtwain32ud.dll" (Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_FrameDestroy Lib "dtwain32ud.dll" (Frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FrameGetAll Lib "dtwain32ud.dll" (Frame As System.IntPtr, ByRef Left As System.Double, ByRef Top As System.Double, ByRef Right As System.Double, ByRef Bottom As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_FrameGetAllString Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Bottom As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_FrameGetAllStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Bottom As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_FrameGetAllStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Bottom As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_FrameGetValue Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, ByRef Value As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_FrameGetValueString Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> Value As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_FrameGetValueStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> Value As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_FrameGetValueStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> Value As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_FrameIsValid Lib "dtwain32ud.dll" (Frame As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FrameSetAll Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_FrameSetAllString Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
+    Public Declare Ansi Function DTWAIN_FrameSetAllStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
+    Public Declare Unicode Function DTWAIN_FrameSetAllStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
+    Public Declare Auto Function DTWAIN_FrameSetValue Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_FrameSetValueString Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
+    Public Declare Ansi Function DTWAIN_FrameSetValueStringA Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
+    Public Declare Unicode Function DTWAIN_FrameSetValueStringW Lib "dtwain32ud.dll" (Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
+    Public Declare Auto Function DTWAIN_FreeExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FreeMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_FreeMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetAPIHandleStatus Lib "dtwain32ud.dll" (pHandle As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireArea Lib "dtwain32ud.dll" (Source As System.IntPtr, lGetType As Integer, ByRef FloatEnum As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireArea2 Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef left As System.Double, ByRef top As System.Double, ByRef right As System.Double, ByRef bottom As System.Double, ByRef lpUnit As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireArea2String Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetAcquireArea2StringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetAcquireArea2StringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireMetrics Lib "dtwain32ud.dll" (source As System.IntPtr, ByRef ImageCount As Integer, ByRef SheetCount As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireStripBuffer Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetAcquireStripData Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, ByRef lpBytesPerRow As UInteger, ByRef lpColumns As UInteger, ByRef lpRows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef lpBytesWritten As UInteger) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireStripSizes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpMin As UInteger, ByRef lpMax As UInteger, ByRef lpPreferred As UInteger) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquiredImage Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhichAcq As Integer, nWhichDib As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetAcquiredImageArray Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhichAcq As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetActiveDSMPath Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetActiveDSMPathA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetActiveDSMPathW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetActiveDSMVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetActiveDSMVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAlarmVolume Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAppInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdName As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetAppInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetAppInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdName As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szAuthor As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szAuthor As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szAuthor As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetBatteryMinutes Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetBatteryPercent Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetBlankPageAutoDetection Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetBrightness Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetBrightnessString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetBrightnessStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetBrightnessStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetBufferedTransferInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetCallback Lib "dtwain32ud.dll" () As DTwainCallback
+    Public Declare Auto Function DTWAIN_GetCallback64 Lib "dtwain32ud.dll" () As DTwainCallback64
+    Public Declare Auto Function DTWAIN_GetCapArrayType Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCapContainer Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer, lCapType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCapContainerEx Lib "dtwain32ud.dll" (nCap As Integer, bSetContainer As Integer, ByRef ConTypes As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCapContainerEx2 Lib "dtwain32ud.dll" (nCap As Integer, bSetContainer As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetCapDataType Lib "dtwain32ud.dll" (Source As System.IntPtr, nCap As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCapFromName Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Ansi Function DTWAIN_GetCapFromNameA Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Unicode Function DTWAIN_GetCapFromNameW Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Auto Function DTWAIN_GetCapOperations Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCaption Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetCaptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Caption As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetCaptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Caption As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetCompressionSize Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lBytes As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetConditionCodeString Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetConditionCodeStringA Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetConditionCodeStringW Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetContrast Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetContrastString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetContrastStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetContrastStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetCountry Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetCurrentAcquiredImage Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetCurrentFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, MaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetCurrentFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, MaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetCurrentFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, MaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetCurrentPageNum Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCurrentRetryCount Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCurrentTwainTriplet Lib "dtwain32ud.dll" (ByRef pAppID As TW_IDENTITY, ByRef pSourceID As TW_IDENTITY, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_GetCustomDSData Lib "dtwain32ud.dll" (Source As System.IntPtr, Data As Byte(), dSize As UInteger, ByRef pActualSize As UInteger, nFlags As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetDSMFullName Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetDSMFullNameA Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetDSMFullNameW Lib "dtwain32ud.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPWStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetDSMSearchOrder Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetDTWAINHandle Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetDeviceEvent Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetDeviceEventEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetDeviceEventInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetDeviceNotifications Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef DevEvents As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetDeviceTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetDeviceTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetDeviceTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetDoubleFeedDetectLength Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Value As System.Double, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetDuplexType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetErrorBuffer Lib "dtwain32ud.dll" (ByRef ArrayBuffer As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetErrorBufferThreshold Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetErrorCallback Lib "dtwain32ud.dll" () As DTwainErrorProc
+    Public Declare Auto Function DTWAIN_GetErrorCallback64 Lib "dtwain32ud.dll" () As DTwainErrorProc64
+    Public Declare Auto Function DTWAIN_GetErrorString Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetErrorStringA Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetErrorStringW Lib "dtwain32ud.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetExtCapFromName Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Ansi Function DTWAIN_GetExtCapFromNameA Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Unicode Function DTWAIN_GetExtCapFromNameW Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Auto Function DTWAIN_GetExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetExtImageInfoData Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetExtImageInfoDataEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetExtImageInfoItem Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetExtImageInfoItemEx Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer, ByRef ReturnCode As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetExtNameFromCap Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetExtNameFromCapA Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetExtNameFromCapW Lib "dtwain32ud.dll" (nValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpAlignment As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetFeederFuncs Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetFileTypeExtensions Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetFileTypeExtensionsW Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetFileTypeName Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetFileTypeNameA Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetFileTypeNameW Lib "dtwain32ud.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetHalftone Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetHalftoneA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetHalftoneW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetHighlight Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Highlight As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetHighlightString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Highlight As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetHighlightStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetHighlightStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Highlight As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetImageInfoString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetImageInfoStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetImageInfoStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetJobControl Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetJpegValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetJpegXRValues Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetLanguage Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetLastError Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetLibraryPath Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetLibraryPathA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetLibraryPathW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetLightPath Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetLightSource Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSource As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetLoggerCallback Lib "dtwain32ud.dll" () As DTwainLoggerProc
+    Public Declare Auto Function DTWAIN_GetLoggerCallbackA Lib "dtwain32ud.dll" () As DTwainLoggerProcA
+    Public Declare Auto Function DTWAIN_GetLoggerCallbackW Lib "dtwain32ud.dll" () As DTwainLoggerProcW
+    Public Declare Auto Function DTWAIN_GetManualDuplexCount Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetMaxAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxBuf As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetMaxPagesToAcquire Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetMaxRetryAttempts Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetNameFromCap Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetNameFromCapA Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetNameFromCapW Lib "dtwain32ud.dll" (nCapValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetNoiseFilter Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpNoiseFilter As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetNumAcquiredImages Lib "dtwain32ud.dll" (aAcq As System.IntPtr, nWhich As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetNumAcquisitions Lib "dtwain32ud.dll" (aAcq As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRCapValues Lib "dtwain32ud.dll" (Engine As System.IntPtr, OCRCapValue As Integer, TypeOfGet As Integer, ByRef CapValues As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRErrorString Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetOCRErrorStringA Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRErrorStringW Lib "dtwain32ud.dll" (Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRLastError Lib "dtwain32ud.dll" (Engine As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRMajorMinorVersion Lib "dtwain32ud.dll" (Engine As System.IntPtr, ByRef lpMajor As Integer, ByRef lpMinor As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRManufacturer Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szManufacturer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetOCRManufacturerA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRManufacturerW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRProductFamily Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductFamily As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetOCRProductFamilyA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRProductFamilyW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRProductName Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductName As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetOCRProductNameA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRProductNameW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductName As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRText Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPTStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_GetOCRTextA Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetOCRTextInfoFloat Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRTextInfoFloatEx Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As System.Double, bufSize As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRTextInfoHandle Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetOCRTextInfoLong Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOCRTextInfoLongEx Lib "dtwain32ud.dll" (OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As Integer, bufSize As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRTextW Lib "dtwain32ud.dll" (Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPWStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetOCRVersionInfo Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> buffer As StringBuilder, maxBufSize As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetOCRVersionInfoA Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> buffer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetOCRVersionInfoW Lib "dtwain32ud.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> buffer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetOverscan Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPDFTextElementFloat Lib "dtwain32ud.dll" (TextElement As System.IntPtr, ByRef val1 As System.Double, ByRef val2 As System.Double, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPDFTextElementLong Lib "dtwain32ud.dll" (TextElement As System.IntPtr, ByRef val1 As Integer, ByRef val2 As Integer, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPDFTextElementString Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetPDFTextElementStringA Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetPDFTextElementStringW Lib "dtwain32ud.dll" (TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPDFType1FontName Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPTStr)> szFont As StringBuilder, nChars As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetPDFType1FontNameA Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPStr)> szFont As StringBuilder, nChars As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetPDFType1FontNameW Lib "dtwain32ud.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPWStr)> szFont As StringBuilder, nChars As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPaperSize Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPaperSize As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPaperSizeName Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPTStr)> outName As StringBuilder, nSize As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetPaperSizeNameA Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPStr)> outName As StringBuilder, nSize As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetPaperSizeNameW Lib "dtwain32ud.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPWStr)> outName As StringBuilder, nSize As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetPatchSearchMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPatchTimeOut Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPixelFlavor Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPixelType Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPrinterStartNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef nStart As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPrinterStringMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetPrinterStrings Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetPrinterSuffixString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetPrinterSuffixStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Suffix As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetPrinterSuffixStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Suffix As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetRegisteredMsg Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetResourceString Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetResourceStringA Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetResourceStringW Lib "dtwain32ud.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetRotation Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetRotationString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetRotationStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetRotationStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Rotation As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetSaveFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSaveFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSaveFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSavedFilesCount Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetShadow Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Shadow As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetShadowString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Shadow As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetShadowStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Shadow As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetShadowStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Shadow As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetShortVersionString Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetShortVersionStringA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetShortVersionStringW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetSourceDetails Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSourceDetailsA Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain32ud.dll" (szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceID Lib "dtwain32ud.dll" (Source As System.IntPtr) As System.IntPtr
     Declare Auto Function DTWAIN_GetSourceIDEx Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pIdentity As TW_IDENTITY) As TW_IDENTITY
-    Declare Auto Function DTWAIN_GetSourceManufacturer Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSourceManufacturerA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSourceManufacturerW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceProductFamily Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSourceProductFamilyA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSourceProductFamilyW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceProductName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSourceProductNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSourceProductNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceUnit Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceVersionInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetSourceVersionInfoA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetSourceVersionInfoW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetSourceVersionNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMajor As Integer, ByRef pMinor As Integer) As Integer
-    Declare Auto Function DTWAIN_GetStaticLibVersion Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetTempFileDirectory Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szFilePath As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetTempFileDirectoryA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTempFileDirectoryW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetThreshold Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Threshold As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetThresholdString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Threshold As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetThresholdStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Threshold As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetThresholdStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Threshold As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetTwainAppID Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetSourceManufacturer Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSourceManufacturerA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSourceManufacturerW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceProductFamily Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSourceProductFamilyA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSourceProductFamilyW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceProductName Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSourceProductNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSourceProductNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceUnit Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceVersionInfo Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetSourceVersionInfoA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetSourceVersionInfoW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetSourceVersionNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef pMajor As Integer, ByRef pMinor As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetStaticLibVersion Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetTempFileDirectory Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> szFilePath As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetTempFileDirectoryA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetTempFileDirectoryW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetThreshold Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Threshold As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetThresholdString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Threshold As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetThresholdStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Threshold As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetThresholdStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Threshold As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainAppID Lib "dtwain32ud.dll" () As System.IntPtr
     Declare Auto Function DTWAIN_GetTwainAppIDEx Lib "dtwain32ud.dll" (ByRef pIdentity As TW_IDENTITY) As TW_IDENTITY
-    Declare Auto Function DTWAIN_GetTwainAvailability Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetTwainAvailabilityExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTwainAvailabilityExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetTwainCountryName Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetTwainCountryNameA Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetTwainCountryNameW Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetTwainCountryValue Lib "dtwain32ud.dll" (country As String) As Integer
-    Declare Ansi Function DTWAIN_GetTwainCountryValueA Lib "dtwain32ud.dll" (country As String) As Integer
-    Declare Unicode Function DTWAIN_GetTwainCountryValueW Lib "dtwain32ud.dll" (country As String) As Integer
-    Declare Auto Function DTWAIN_GetTwainHwnd Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_GetTwainIDFromName Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
-    Declare Ansi Function DTWAIN_GetTwainIDFromNameA Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
-    Declare Unicode Function DTWAIN_GetTwainIDFromNameW Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
-    Declare Auto Function DTWAIN_GetTwainLanguageName Lib "dtwain32ud.dll" (nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetTwainLanguageNameA Lib "dtwain32ud.dll" (lang As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetTwainLanguageNameW Lib "dtwain32ud.dll" (lang As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetTwainLanguageValue Lib "dtwain32ud.dll" (szName As String) As Integer
-    Declare Ansi Function DTWAIN_GetTwainLanguageValueA Lib "dtwain32ud.dll" (lang As String) As Integer
-    Declare Unicode Function DTWAIN_GetTwainLanguageValueW Lib "dtwain32ud.dll" (lang As String) As Integer
-    Declare Auto Function DTWAIN_GetTwainMode Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetTwainNameFromConstant Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetTwainNameFromConstantA Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTwainNameFromConstantW Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-    Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetTwainTimeout Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_GetVersion Lib "dtwain32ud.dll" (ByRef lpMajor As Integer, ByRef lpMinor As Integer, ByRef lpVersionType As Integer) As Integer
-    Declare Auto Function DTWAIN_GetVersionCopyright Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetVersionCopyrightA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetVersionCopyrightW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetVersionEx Lib "dtwain32ud.dll" (ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
-    Declare Auto Function DTWAIN_GetVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetVersionString Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetVersionStringA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetVersionStringW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-    Declare Auto Function DTWAIN_GetWindowsVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_GetWindowsVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_GetWindowsVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_GetXResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetXResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetXResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetXResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_GetYResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_GetYResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_GetYResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_GetYResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_InitExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_InitImageFileAppend Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
-    Declare Ansi Function DTWAIN_InitImageFileAppendA Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
-    Declare Unicode Function DTWAIN_InitImageFileAppendW Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
-    Declare Auto Function DTWAIN_InitOCRInterface Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsAcquiring Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsAudioXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, supportVal As Integer) As Integer
-    Declare Auto Function DTWAIN_IsAutoBorderDetectEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoBorderDetectSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoBrightEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoBrightSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoDeskewEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoDeskewSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoFeedEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoFeedSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoRotateEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoRotateSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutoScanEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutomaticSenseMediumEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsAutomaticSenseMediumSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsBlankPageDetectionOn Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsBufferedTileModeOn Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsBufferedTileModeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsCapSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer) As Integer
-    Declare Auto Function DTWAIN_IsCompressionSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, Compression As Integer) As Integer
-    Declare Auto Function DTWAIN_IsCustomDSDataSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsDIBBlank Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As System.Double) As Integer
-    Declare Auto Function DTWAIN_IsDIBBlankString Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
-    Declare Ansi Function DTWAIN_IsDIBBlankStringA Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
-    Declare Unicode Function DTWAIN_IsDIBBlankStringW Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
-    Declare Auto Function DTWAIN_IsDeviceEventSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsDeviceOnLine Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsDoubleFeedDetectLengthSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, value As System.Double) As Integer
-    Declare Auto Function DTWAIN_IsDoubleFeedDetectSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, SupportVal As Integer) As Integer
-    Declare Auto Function DTWAIN_IsDoublePageCountOnDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsDuplexEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsDuplexSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsExtImageInfoSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFeederEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFeederLoaded Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFeederSensitive Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFeederSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFileSystemSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsFileXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldALastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldALevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldAPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldAValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldBLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldBLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldBPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldBValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldCLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldCLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldCPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldCValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldDLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldDLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldDPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldDValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldELastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldELevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldEPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIAFieldEValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsImageAddressingSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIndicatorEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsIndicatorSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsInitialized Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsJPEGSupported Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsJobControlSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, JobControl As Integer) As Integer
-    Declare Auto Function DTWAIN_IsLampEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsLampSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsLightPathSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsLightSourceSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsMaxBuffersSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxBuf As Integer) As Integer
-    Declare Auto Function DTWAIN_IsMemFileXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsMsgNotifyEnabled Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsNotifyTripletsEnabled Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsOCREngineActivated Lib "dtwain32ud.dll" (OCREngine As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsOpenSourcesOnSelect Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsOrientationSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, Orientation As Integer) As Integer
-    Declare Auto Function DTWAIN_IsOverscanSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, SupportValue As Integer) As Integer
-    Declare Auto Function DTWAIN_IsPDFSupported Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsPNGSupported Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsPaperDetectable Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsPaperSizeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PaperSize As Integer) As Integer
-    Declare Auto Function DTWAIN_IsPatchCapsSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsPatchDetectEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsPatchSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PatchCode As Integer) As Integer
-    Declare Auto Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsPixelTypeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer) As Integer
-    Declare Auto Function DTWAIN_IsPrinterEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer) As Integer
-    Declare Auto Function DTWAIN_IsPrinterSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsRotationSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSessionEnabled Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsSkipImageInfoError Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSourceAcquiring Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSourceAcquiringEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bUIOnly As Integer) As Integer
-    Declare Auto Function DTWAIN_IsSourceInUIOnlyMode Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSourceOpen Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSourceSelected Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsSourceValid Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsTIFFSupported Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsThumbnailEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsThumbnailSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsTwainAvailable Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_IsTwainAvailableEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Ansi Function DTWAIN_IsTwainAvailableExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Unicode Function DTWAIN_IsTwainAvailableExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-    Declare Auto Function DTWAIN_IsTwainMsg Lib "dtwain32ud.dll" (ByRef pMsg As WinMsg) As Integer
-    Declare Auto Function DTWAIN_IsUIControllable Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsUIEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_IsUIOnlySupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_LoadCustomStringResources Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
-    Declare Ansi Function DTWAIN_LoadCustomStringResourcesA Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
-    Declare Auto Function DTWAIN_LoadCustomStringResourcesEx Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
-    Declare Ansi Function DTWAIN_LoadCustomStringResourcesExA Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
-    Declare Unicode Function DTWAIN_LoadCustomStringResourcesExW Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
-    Declare Unicode Function DTWAIN_LoadCustomStringResourcesW Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
-    Declare Auto Function DTWAIN_LoadLanguageResource Lib "dtwain32ud.dll" (nLanguage As Integer) As Integer
-    Declare Auto Function DTWAIN_LockMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_LockMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_LogMessage Lib "dtwain32ud.dll" (message As String) As Integer
-    Declare Ansi Function DTWAIN_LogMessageA Lib "dtwain32ud.dll" (message As String) As Integer
-    Declare Unicode Function DTWAIN_LogMessageW Lib "dtwain32ud.dll" (message As String) As Integer
-    Declare Auto Function DTWAIN_MakeRGB Lib "dtwain32ud.dll" (red As Integer, green As Integer, blue As Integer) As Integer
-    Declare Auto Function DTWAIN_OpenSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_OpenSourcesOnSelect Lib "dtwain32ud.dll" (bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeCreate Lib "dtwain32ud.dll" (nEnumType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_RangeCreateFromCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapType As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_RangeDestroy Lib "dtwain32ud.dll" (pSource As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeExpand Lib "dtwain32ud.dll" (pSource As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeExpandEx Lib "dtwain32ud.dll" (Range As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_RangeGetAll Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeGetAllFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, ByRef pVariantLow As System.Double, ByRef pVariantUp As System.Double, ByRef pVariantStep As System.Double, ByRef pVariantDefault As System.Double, ByRef pVariantCurrent As System.Double) As Integer
-    Declare Auto Function DTWAIN_RangeGetAllFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_RangeGetAllFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dCurrent As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_RangeGetAllFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dCurrent As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_RangeGetAllLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, ByRef pVariantLow As Integer, ByRef pVariantUp As Integer, ByRef pVariantStep As Integer, ByRef pVariantDefault As Integer, ByRef pVariantCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetCount Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeGetExpValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeGetExpValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, ByRef pVal As System.Double) As Integer
-    Declare Auto Function DTWAIN_RangeGetExpValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_RangeGetExpValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPStr)> pVal As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_RangeGetExpValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> pVal As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_RangeGetExpValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, ByRef pVal As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetNearestValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantIn As System.IntPtr, pVariantOut As System.IntPtr, RoundType As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetPos Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr, ByRef pPos As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetPosFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, ByRef pPos As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetPosFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-    Declare Ansi Function DTWAIN_RangeGetPosFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-    Declare Unicode Function DTWAIN_RangeGetPosFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetPosLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Value As Integer, ByRef pPos As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeGetValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, pVariant As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeGetValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, ByRef pVal As System.Double) As Integer
-    Declare Auto Function DTWAIN_RangeGetValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-    Declare Ansi Function DTWAIN_RangeGetValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> dValue As StringBuilder) As Integer
-    Declare Unicode Function DTWAIN_RangeGetValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> dValue As StringBuilder) As Integer
-    Declare Auto Function DTWAIN_RangeGetValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, ByRef pVal As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeIsValid Lib "dtwain32ud.dll" (Range As System.IntPtr, ByRef pStatus As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeNearestValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As System.Double, ByRef pOut As System.Double, RoundType As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeNearestValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPTStr)> pOut As StringBuilder, RoundType As Integer) As Integer
-    Declare Ansi Function DTWAIN_RangeNearestValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-    Declare Unicode Function DTWAIN_RangeNearestValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPWStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeNearestValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lIn As Integer, ByRef pOut As Integer, RoundType As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeSetAll Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeSetAllFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As System.Double, dUp As System.Double, dStep As System.Double, dDefault As System.Double, dCurrent As System.Double) As Integer
-    Declare Auto Function DTWAIN_RangeSetAllFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-    Declare Ansi Function DTWAIN_RangeSetAllFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-    Declare Unicode Function DTWAIN_RangeSetAllFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-    Declare Auto Function DTWAIN_RangeSetAllLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lLow As Integer, lUp As Integer, lStep As Integer, lDefault As Integer, lCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_RangeSetValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, pVal As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RangeSetValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As System.Double) As Integer
-    Declare Auto Function DTWAIN_RangeSetValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As String) As Integer
-    Declare Ansi Function DTWAIN_RangeSetValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-    Declare Unicode Function DTWAIN_RangeSetValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-    Declare Auto Function DTWAIN_RangeSetValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As Integer) As Integer
-    Declare Auto Function DTWAIN_ResetPDFTextElement Lib "dtwain32ud.dll" (TextElement As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_RewindPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SelectDefaultOCREngine Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_SelectDefaultSource Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_SelectDefaultSourceWithOpen Lib "dtwain32ud.dll" (bOpen As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectOCREngine Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_SelectOCREngine2 Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectOCREngine2A Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectOCREngine2Ex Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectOCREngine2ExA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectOCREngine2ExW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectOCREngine2W Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectOCREngineByName Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectOCREngineByNameA Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectOCREngineByNameW Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSource Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSource2 Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectSource2A Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSource2Ex Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectSource2ExA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectSource2ExW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectSource2W Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSourceByName Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectSourceByNameA Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectSourceByNameW Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSourceByNameWithOpen Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
-    Declare Ansi Function DTWAIN_SelectSourceByNameWithOpenA Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
-    Declare Unicode Function DTWAIN_SelectSourceByNameWithOpenW Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SelectSourceWithOpen Lib "dtwain32ud.dll" (bOpen As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_SetAcquireArea Lib "dtwain32ud.dll" (Source As System.IntPtr, lSetType As Integer, FloatEnum As System.IntPtr, ActualEnum As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetAcquireArea2 Lib "dtwain32ud.dll" (Source As System.IntPtr, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double, lUnit As Integer, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetAcquireArea2String Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetAcquireArea2StringA Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetAcquireArea2StringW Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetAcquireImageNegative Lib "dtwain32ud.dll" (Source As System.IntPtr, IsNegative As Integer) As Integer
-    Declare Auto Function DTWAIN_SetAcquireImageScale Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As System.Double, yscale As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetAcquireImageScaleString Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
-    Declare Ansi Function DTWAIN_SetAcquireImageScaleStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
-    Declare Unicode Function DTWAIN_SetAcquireImageScaleStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
-    Declare Auto Function DTWAIN_SetAcquireStripBuffer Lib "dtwain32ud.dll" (Source As System.IntPtr, hMem As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetAcquireStripSize Lib "dtwain32ud.dll" (Source As System.IntPtr, StripSize As UInteger) As Integer
-    Declare Auto Function DTWAIN_SetAlarmVolume Lib "dtwain32ud.dll" (Source As System.IntPtr, Volume As Integer) As Integer
-    Declare Auto Function DTWAIN_SetAlarms Lib "dtwain32ud.dll" (Source As System.IntPtr, Alarms As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetAllCapsToDefault Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetAppInfo Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-    Declare Ansi Function DTWAIN_SetAppInfoA Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-    Declare Unicode Function DTWAIN_SetAppInfoW Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-    Declare Auto Function DTWAIN_SetAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
-    Declare Ansi Function DTWAIN_SetAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
-    Declare Unicode Function DTWAIN_SetAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
-    Declare Auto Function DTWAIN_SetAvailablePrinters Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAvailPrinters As Integer) As Integer
-    Declare Auto Function DTWAIN_SetAvailablePrintersArray Lib "dtwain32ud.dll" (Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetBlankPageDetection Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As System.Double, discard_option As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetBlankPageDetectionEx Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As System.Double, autodetect As Integer, detectOpts As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetBlankPageDetectionExString Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetBlankPageDetectionExStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetBlankPageDetectionExStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetBlankPageDetectionString Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetBlankPageDetectionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetBlankPageDetectionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetBrightness Lib "dtwain32ud.dll" (Source As System.IntPtr, Brightness As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetBrightnessString Lib "dtwain32ud.dll" (Source As System.IntPtr, Brightness As String) As Integer
-    Declare Ansi Function DTWAIN_SetBrightnessStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
-    Declare Unicode Function DTWAIN_SetBrightnessStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
-    Declare Auto Function DTWAIN_SetBufferedTileMode Lib "dtwain32ud.dll" (Source As System.IntPtr, bTileMode As Integer) As Integer
-    Declare Auto Function DTWAIN_SetCallback Lib "dtwain32ud.dll" (Fn As DTwainCallback, UserData As Integer) As DTwainCallback
-    Declare Auto Function DTWAIN_SetCallback64 Lib "dtwain32ud.dll" (Fn As DTwainCallback64, UserData As System.Int64) As DTwainCallback64
-    Declare Auto Function DTWAIN_SetCamera Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
-    Declare Ansi Function DTWAIN_SetCameraA Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
-    Declare Unicode Function DTWAIN_SetCameraW Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
-    Declare Auto Function DTWAIN_SetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, nDataType As Integer, pArray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetCaption Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
-    Declare Ansi Function DTWAIN_SetCaptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
-    Declare Unicode Function DTWAIN_SetCaptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
-    Declare Auto Function DTWAIN_SetCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetContrast Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetContrastString Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
-    Declare Ansi Function DTWAIN_SetContrastStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
-    Declare Unicode Function DTWAIN_SetContrastStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
-    Declare Auto Function DTWAIN_SetCountry Lib "dtwain32ud.dll" (nCountry As Integer) As Integer
-    Declare Auto Function DTWAIN_SetCurrentRetryCount Lib "dtwain32ud.dll" (Source As System.IntPtr, nCount As Integer) As Integer
-    Declare Auto Function DTWAIN_SetCustomDSData Lib "dtwain32ud.dll" (Source As System.IntPtr, hData As System.IntPtr, <MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.U8, SizeParamIndex:=3)> Data As Byte(), dSize As UInteger, nFlags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetDSMSearchOrder Lib "dtwain32ud.dll" (SearchPath As Integer) As Integer
-    Declare Auto Function DTWAIN_SetDSMSearchOrderEx Lib "dtwain32ud.dll" (SearchOrder As String, UserPath As String) As Integer
-    Declare Ansi Function DTWAIN_SetDSMSearchOrderExA Lib "dtwain32ud.dll" (SearchOrder As String, szUserPath As String) As Integer
-    Declare Unicode Function DTWAIN_SetDSMSearchOrderExW Lib "dtwain32ud.dll" (SearchOrder As String, szUserPath As String) As Integer
-    Declare Auto Function DTWAIN_SetDefaultSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetDeviceNotifications Lib "dtwain32ud.dll" (Source As System.IntPtr, DevEvents As Integer) As Integer
-    Declare Auto Function DTWAIN_SetDeviceTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
-    Declare Ansi Function DTWAIN_SetDeviceTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
-    Declare Unicode Function DTWAIN_SetDeviceTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
-    Declare Auto Function DTWAIN_SetDoubleFeedDetectLength Lib "dtwain32ud.dll" (Source As System.IntPtr, Value As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetDoubleFeedDetectLengthString Lib "dtwain32ud.dll" (Source As System.IntPtr, value As String) As Integer
-    Declare Ansi Function DTWAIN_SetDoubleFeedDetectLengthStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, szLength As String) As Integer
-    Declare Unicode Function DTWAIN_SetDoubleFeedDetectLengthStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, szLength As String) As Integer
-    Declare Auto Function DTWAIN_SetDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, prray As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetDoublePageCountOnDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr, bDoubleCount As Integer) As Integer
-    Declare Auto Function DTWAIN_SetEOJDetectValue Lib "dtwain32ud.dll" (Source As System.IntPtr, nValue As Integer) As Integer
-    Declare Auto Function DTWAIN_SetErrorBufferThreshold Lib "dtwain32ud.dll" (nErrors As Integer) As Integer
-    Declare Auto Function DTWAIN_SetErrorCallback Lib "dtwain32ud.dll" (proc As DTwainErrorProc, UserData As Integer) As Integer
-    Declare Auto Function DTWAIN_SetErrorCallback64 Lib "dtwain32ud.dll" (proc As DTwainErrorProc64, UserData64 As System.Int64) As Integer
-    Declare Auto Function DTWAIN_SetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAlignment As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, lOrder As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr, waitTime As Integer, flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFileAutoIncrement Lib "dtwain32ud.dll" (Source As System.IntPtr, Increment As Integer, bResetOnAcquire As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, lCompression As Integer, bIsCustom As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFileSavePos Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetFileSavePosA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetFileSavePosW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetFileXferFormat Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetHalftone Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
-    Declare Ansi Function DTWAIN_SetHalftoneA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
-    Declare Unicode Function DTWAIN_SetHalftoneW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
-    Declare Auto Function DTWAIN_SetHighlight Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetHighlightString Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
-    Declare Ansi Function DTWAIN_SetHighlightStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
-    Declare Unicode Function DTWAIN_SetHighlightStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
-    Declare Auto Function DTWAIN_SetJobControl Lib "dtwain32ud.dll" (Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetJpegValues Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-    Declare Auto Function DTWAIN_SetJpegXRValues Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-    Declare Auto Function DTWAIN_SetLanguage Lib "dtwain32ud.dll" (nLanguage As Integer) As Integer
-    Declare Auto Function DTWAIN_SetLastError Lib "dtwain32ud.dll" (nError As Integer) As Integer
-    Declare Auto Function DTWAIN_SetLightPath Lib "dtwain32ud.dll" (Source As System.IntPtr, LightPath As Integer) As Integer
-    Declare Auto Function DTWAIN_SetLightPathEx Lib "dtwain32ud.dll" (Source As System.IntPtr, LightPaths As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetLightSource Lib "dtwain32ud.dll" (Source As System.IntPtr, LightSource As Integer) As Integer
-    Declare Auto Function DTWAIN_SetLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, LightSources As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetLoggerCallback Lib "dtwain32ud.dll" (logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
-    Declare Auto Function DTWAIN_SetLoggerCallbackA Lib "dtwain32ud.dll" (logProc As DTwainLoggerProcA, UserData As System.Int64) As Integer
-    Declare Auto Function DTWAIN_SetLoggerCallbackW Lib "dtwain32ud.dll" (logProc As DTwainLoggerProcW, UserData As System.Int64) As Integer
-    Declare Auto Function DTWAIN_SetManualDuplexMode Lib "dtwain32ud.dll" (Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetMaxAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxAcquires As Integer) As Integer
-    Declare Auto Function DTWAIN_SetMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxBuf As Integer) As Integer
-    Declare Auto Function DTWAIN_SetMaxRetryAttempts Lib "dtwain32ud.dll" (Source As System.IntPtr, nAttempts As Integer) As Integer
-    Declare Auto Function DTWAIN_SetMultipageScanMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ScanType As Integer) As Integer
-    Declare Auto Function DTWAIN_SetNoiseFilter Lib "dtwain32ud.dll" (Source As System.IntPtr, NoiseFilter As Integer) As Integer
-    Declare Auto Function DTWAIN_SetOCRCapValues Lib "dtwain32ud.dll" (Engine As System.IntPtr, OCRCapValue As Integer, SetType As Integer, CapValues As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, Orient As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetOverscan Lib "dtwain32ud.dll" (Source As System.IntPtr, Value As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFAESEncryption Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichEncryption As Integer, bUseAES As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFASCIICompression Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFCompression Lib "dtwain32ud.dll" (Source As System.IntPtr, bCompression As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFCreator Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFCreatorA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFCreatorW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFEncryption Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetPDFEncryptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetPDFEncryptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFJpegQuality Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFKeywords Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFKeywordsA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFKeywordsW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFOCRConversion Lib "dtwain32ud.dll" (Engine As System.IntPtr, PageType As Integer, FileType As Integer, PixelType As Integer, BitDepth As Integer, Options As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFOCRMode Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, lPOrientation As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFPageScale Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As System.Double, yScale As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetPDFPageScaleString Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFPageScaleStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFPageScaleStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFPageSize Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As System.Double, CustomHeight As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetPDFPageSizeString Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFPageSizeStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFPageSizeStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFPolarity Lib "dtwain32ud.dll" (Source As System.IntPtr, Polarity As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFProducer Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFProducerA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFProducerW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFSubject Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFSubjectA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFSubjectW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
-    Declare Auto Function DTWAIN_SetPDFTextElementFloat Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As System.Double, val2 As System.Double, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFTextElementLong Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As Integer, val2 As Integer, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFTextElementString Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As String, Flags As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetPDFTextElementStringA Lib "dtwain32ud.dll" (TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetPDFTextElementStringW Lib "dtwain32ud.dll" (TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPDFTitle Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
-    Declare Ansi Function DTWAIN_SetPDFTitleA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
-    Declare Unicode Function DTWAIN_SetPDFTitleW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
-    Declare Auto Function DTWAIN_SetPaperSize Lib "dtwain32ud.dll" (Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxRetries As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SetPatchSearchMode Lib "dtwain32ud.dll" (Source As System.IntPtr, nSearchMode As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPatchTimeOut Lib "dtwain32ud.dll" (Source As System.IntPtr, TimeOutValue As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPixelFlavor Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelFlavor As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPixelType Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, BitDepth As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPostScriptTitle Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
-    Declare Ansi Function DTWAIN_SetPostScriptTitleA Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
-    Declare Unicode Function DTWAIN_SetPostScriptTitleW Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
-    Declare Auto Function DTWAIN_SetPostScriptType Lib "dtwain32ud.dll" (Source As System.IntPtr, PSType As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinterEx Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinterStartNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, nStart As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinterStringMode Lib "dtwain32ud.dll" (Source As System.IntPtr, PrinterMode As Integer, bSetCurrent As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinterStrings Lib "dtwain32ud.dll" (Source As System.IntPtr, ArrayString As System.IntPtr, ByRef pNumStrings As Integer) As Integer
-    Declare Auto Function DTWAIN_SetPrinterSuffixString Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
-    Declare Ansi Function DTWAIN_SetPrinterSuffixStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
-    Declare Unicode Function DTWAIN_SetPrinterSuffixStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
-    Declare Auto Function DTWAIN_SetQueryCapSupport Lib "dtwain32ud.dll" (bSet As Integer) As Integer
-    Declare Auto Function DTWAIN_SetResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Ansi Function DTWAIN_SetResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Unicode Function DTWAIN_SetResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Auto Function DTWAIN_SetResourcePath Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
-    Declare Ansi Function DTWAIN_SetResourcePathA Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
-    Declare Unicode Function DTWAIN_SetResourcePathW Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
-    Declare Auto Function DTWAIN_SetRotation Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetRotationString Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
-    Declare Ansi Function DTWAIN_SetRotationStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
-    Declare Unicode Function DTWAIN_SetRotationStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
-    Declare Auto Function DTWAIN_SetSaveFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
-    Declare Ansi Function DTWAIN_SetSaveFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
-    Declare Unicode Function DTWAIN_SetSaveFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
-    Declare Auto Function DTWAIN_SetShadow Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetShadowString Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
-    Declare Ansi Function DTWAIN_SetShadowStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
-    Declare Unicode Function DTWAIN_SetShadowStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
-    Declare Auto Function DTWAIN_SetSourceUnit Lib "dtwain32ud.dll" (Source As System.IntPtr, Unit As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTIFFCompressType Lib "dtwain32ud.dll" (Source As System.IntPtr, Setting As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTIFFInvert Lib "dtwain32ud.dll" (Source As System.IntPtr, Setting As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTempFileDirectory Lib "dtwain32ud.dll" (szFilePath As String) As Integer
-    Declare Ansi Function DTWAIN_SetTempFileDirectoryA Lib "dtwain32ud.dll" (szFilePath As String) As Integer
-    Declare Auto Function DTWAIN_SetTempFileDirectoryEx Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetTempFileDirectoryExA Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetTempFileDirectoryExW Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetTempFileDirectoryW Lib "dtwain32ud.dll" (szFilePath As String) As Integer
-    Declare Auto Function DTWAIN_SetThreshold Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As System.Double, bSetBithDepthReduction As Integer) As Integer
-    Declare Auto Function DTWAIN_SetThresholdString Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-    Declare Ansi Function DTWAIN_SetThresholdStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-    Declare Unicode Function DTWAIN_SetThresholdStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTwainDSM Lib "dtwain32ud.dll" (DSMType As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTwainLog Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
-    Declare Ansi Function DTWAIN_SetTwainLogA Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
-    Declare Unicode Function DTWAIN_SetTwainLogW Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
-    Declare Auto Function DTWAIN_SetTwainMode Lib "dtwain32ud.dll" (lAcquireMode As Integer) As Integer
-    Declare Auto Function DTWAIN_SetTwainTimeout Lib "dtwain32ud.dll" (milliseconds As Integer) As Integer
-    Declare Auto Function DTWAIN_SetUpdateDibProc Lib "dtwain32ud.dll" (DibProc As DTwainDIBUpdateProc) As DTwainDIBUpdateProc
-    Declare Auto Function DTWAIN_SetXResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, xResolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetXResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Ansi Function DTWAIN_SetXResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Unicode Function DTWAIN_SetXResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Auto Function DTWAIN_SetYResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, yResolution As System.Double) As Integer
-    Declare Auto Function DTWAIN_SetYResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Ansi Function DTWAIN_SetYResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Unicode Function DTWAIN_SetYResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
-    Declare Auto Function DTWAIN_ShowUIOnly Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_ShutdownOCREngine Lib "dtwain32ud.dll" (OCREngine As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_SkipImageInfoError Lib "dtwain32ud.dll" (Source As System.IntPtr, bSkip As Integer) As Integer
-    Declare Auto Function DTWAIN_StartThread Lib "dtwain32ud.dll" (DLLHandle As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_StartTwainSession Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-    Declare Ansi Function DTWAIN_StartTwainSessionA Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-    Declare Unicode Function DTWAIN_StartTwainSessionW Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-    Declare Auto Function DTWAIN_SysDestroy Lib "dtwain32ud.dll" () As Integer
-    Declare Auto Function DTWAIN_SysInitialize Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeEx Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeEx2 Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SysInitializeEx2A Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SysInitializeEx2W Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SysInitializeExA Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SysInitializeExW Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeLib Lib "dtwain32ud.dll" (hInstance As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeLibEx Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeLibEx2 Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SysInitializeLibEx2A Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SysInitializeLibEx2W Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Declare Ansi Function DTWAIN_SysInitializeLibExA Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-    Declare Unicode Function DTWAIN_SysInitializeLibExW Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-    Declare Auto Function DTWAIN_SysInitializeNoBlocking Lib "dtwain32ud.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_TestGetCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr
-    Declare Auto Function DTWAIN_UnlockMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_UnlockMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
-    Declare Auto Function DTWAIN_UseMultipleThreads Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainAvailability Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainAvailabilityExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainAvailabilityExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainCountryName Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainCountryNameA Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainCountryNameW Lib "dtwain32ud.dll" (countryId As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainCountryValue Lib "dtwain32ud.dll" (country As String) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainCountryValueA Lib "dtwain32ud.dll" (country As String) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainCountryValueW Lib "dtwain32ud.dll" (country As String) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainHwnd Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_GetTwainIDFromName Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainIDFromNameA Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainIDFromNameW Lib "dtwain32ud.dll" (lpszBuffer As String) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainLanguageName Lib "dtwain32ud.dll" (nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainLanguageNameA Lib "dtwain32ud.dll" (lang As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainLanguageNameW Lib "dtwain32ud.dll" (lang As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainLanguageValue Lib "dtwain32ud.dll" (szName As String) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainLanguageValueA Lib "dtwain32ud.dll" (lang As String) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainLanguageValueW Lib "dtwain32ud.dll" (lang As String) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainMode Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetTwainNameFromConstant Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainNameFromConstantA Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainNameFromConstantW Lib "dtwain32ud.dll" (lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainStringName Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetTwainStringNameA Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetTwainStringNameW Lib "dtwain32ud.dll" (category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetTwainTimeout Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_GetVersion Lib "dtwain32ud.dll" (ByRef lpMajor As Integer, ByRef lpMinor As Integer, ByRef lpVersionType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetVersionCopyright Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetVersionCopyrightA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetVersionCopyrightW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetVersionEx Lib "dtwain32ud.dll" (ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetVersionString Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetVersionStringA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetVersionStringW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetWindowsVersionInfo Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetWindowsVersionInfoA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetWindowsVersionInfoW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetXResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetXResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetXResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetXResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_GetYResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_GetYResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_GetYResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetYResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_InitExtImageInfo Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_InitImageFileAppend Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_InitImageFileAppendA Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_InitImageFileAppendW Lib "dtwain32ud.dll" (szFile As String, fType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_InitOCRInterface Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsAcquiring Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsAudioXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, supportVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoBorderDetectEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoBorderDetectSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoBrightEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoBrightSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoDeskewEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoDeskewSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoFeedEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoFeedSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoRotateEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoRotateSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutoScanEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutomaticSenseMediumEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsAutomaticSenseMediumSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsBlankPageDetectionOn Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsBufferedTileModeOn Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsBufferedTileModeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsCapSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsCompressionSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, Compression As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsCustomDSDataSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsDIBBlank Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_IsDIBBlankString Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
+    Public Declare Ansi Function DTWAIN_IsDIBBlankStringA Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
+    Public Declare Unicode Function DTWAIN_IsDIBBlankStringW Lib "dtwain32ud.dll" (hDib As System.IntPtr, threshold As String) As Integer
+    Public Declare Auto Function DTWAIN_IsDeviceEventSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsDeviceOnLine Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsDoubleFeedDetectLengthSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, value As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_IsDoubleFeedDetectSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, SupportVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsDoublePageCountOnDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsDuplexEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsDuplexSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsExtImageInfoSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFeederEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFeederLoaded Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFeederSensitive Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFeederSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFileSystemSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsFileXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldALastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldALevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldAPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldAValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldBLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldBLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldBPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldBValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldCLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldCLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldCPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldCValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldDLastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldDLevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldDPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldDValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldELastPageSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldELevelSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldEPrintFormatSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIAFieldEValueSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsImageAddressingSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIndicatorEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsIndicatorSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsInitialized Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsJPEGSupported Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsJobControlSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, JobControl As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsLampEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsLampSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsLightPathSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsLightSourceSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsMaxBuffersSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxBuf As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsMemFileXferSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsMsgNotifyEnabled Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsNotifyTripletsEnabled Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsOCREngineActivated Lib "dtwain32ud.dll" (OCREngine As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsOpenSourcesOnSelect Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsOrientationSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, Orientation As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsOverscanSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, SupportValue As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsPDFSupported Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsPNGSupported Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsPaperDetectable Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsPaperSizeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PaperSize As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsPatchCapsSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsPatchDetectEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsPatchSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PatchCode As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsPixelTypeSupported Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsPrinterEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsPrinterSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsRotationSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSessionEnabled Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsSkipImageInfoError Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceAcquiring Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceAcquiringEx Lib "dtwain32ud.dll" (Source As System.IntPtr, bUIOnly As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceInUIOnlyMode Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceOpen Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceSelected Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsSourceValid Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsTIFFSupported Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsThumbnailEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsThumbnailSupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsTwainAvailable Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_IsTwainAvailableEx Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_IsTwainAvailableExA Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_IsTwainAvailableExW Lib "dtwain32ud.dll" (<MarshalAs(UnmanagedType.LPWStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Auto Function DTWAIN_IsTwainMsg Lib "dtwain32ud.dll" (ByRef pMsg As WinMsg) As Integer
+    Public Declare Auto Function DTWAIN_IsUIControllable Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsUIEnabled Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_IsUIOnlySupported Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_LoadCustomStringResources Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
+    Public Declare Ansi Function DTWAIN_LoadCustomStringResourcesA Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
+    Public Declare Auto Function DTWAIN_LoadCustomStringResourcesEx Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_LoadCustomStringResourcesExA Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_LoadCustomStringResourcesExW Lib "dtwain32ud.dll" (sLangDLL As String, bClear As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_LoadCustomStringResourcesW Lib "dtwain32ud.dll" (sLangDLL As String) As Integer
+    Public Declare Auto Function DTWAIN_LoadLanguageResource Lib "dtwain32ud.dll" (nLanguage As Integer) As Integer
+    Public Declare Auto Function DTWAIN_LockMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_LockMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_LogMessage Lib "dtwain32ud.dll" (message As String) As Integer
+    Public Declare Ansi Function DTWAIN_LogMessageA Lib "dtwain32ud.dll" (message As String) As Integer
+    Public Declare Unicode Function DTWAIN_LogMessageW Lib "dtwain32ud.dll" (message As String) As Integer
+    Public Declare Auto Function DTWAIN_MakeRGB Lib "dtwain32ud.dll" (red As Integer, green As Integer, blue As Integer) As Integer
+    Public Declare Auto Function DTWAIN_OpenSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_OpenSourcesOnSelect Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeCreate Lib "dtwain32ud.dll" (nEnumType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_RangeCreateFromCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapType As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_RangeDestroy Lib "dtwain32ud.dll" (pSource As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeExpand Lib "dtwain32ud.dll" (pSource As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeExpandEx Lib "dtwain32ud.dll" (Range As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_RangeGetAll Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetAllFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, ByRef pVariantLow As System.Double, ByRef pVariantUp As System.Double, ByRef pVariantStep As System.Double, ByRef pVariantDefault As System.Double, ByRef pVariantCurrent As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetAllFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_RangeGetAllFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dCurrent As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_RangeGetAllFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dCurrent As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetAllLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, ByRef pVariantLow As Integer, ByRef pVariantUp As Integer, ByRef pVariantStep As Integer, ByRef pVariantDefault As Integer, ByRef pVariantCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetCount Lib "dtwain32ud.dll" (pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetExpValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetExpValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, ByRef pVal As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetExpValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_RangeGetExpValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPStr)> pVal As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_RangeGetExpValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> pVal As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetExpValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lPos As Integer, ByRef pVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetNearestValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantIn As System.IntPtr, pVariantOut As System.IntPtr, RoundType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetPos Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariant As System.IntPtr, ByRef pPos As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetPosFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As System.Double, ByRef pPos As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetPosFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_RangeGetPosFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_RangeGetPosFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetPosLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, Value As Integer, ByRef pPos As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, pVariant As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, ByRef pVal As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
+    Public Declare Ansi Function DTWAIN_RangeGetValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> dValue As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_RangeGetValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> dValue As StringBuilder) As Integer
+    Public Declare Auto Function DTWAIN_RangeGetValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, ByRef pVal As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeIsValid Lib "dtwain32ud.dll" (Range As System.IntPtr, ByRef pStatus As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeNearestValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As System.Double, ByRef pOut As System.Double, RoundType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeNearestValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPTStr)> pOut As StringBuilder, RoundType As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_RangeNearestValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPStr)> dOut As StringBuilder, RoundType As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_RangeNearestValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPWStr)> dOut As StringBuilder, RoundType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeNearestValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lIn As Integer, ByRef pOut As Integer, RoundType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetAll Lib "dtwain32ud.dll" (pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetAllFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As System.Double, dUp As System.Double, dStep As System.Double, dDefault As System.Double, dCurrent As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetAllFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
+    Public Declare Ansi Function DTWAIN_RangeSetAllFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
+    Public Declare Unicode Function DTWAIN_RangeSetAllFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetAllLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, lLow As Integer, lUp As Integer, lStep As Integer, lDefault As Integer, lCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetValue Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, pVal As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetValueFloat Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetValueFloatString Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As String) As Integer
+    Public Declare Ansi Function DTWAIN_RangeSetValueFloatStringA Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
+    Public Declare Unicode Function DTWAIN_RangeSetValueFloatStringW Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
+    Public Declare Auto Function DTWAIN_RangeSetValueLong Lib "dtwain32ud.dll" (pArray As System.IntPtr, nWhich As Integer, Val As Integer) As Integer
+    Public Declare Auto Function DTWAIN_ResetPDFTextElement Lib "dtwain32ud.dll" (TextElement As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_RewindPage Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SelectDefaultOCREngine Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectDefaultSource Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectDefaultSourceWithOpen Lib "dtwain32ud.dll" (bOpen As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectOCREngine Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectOCREngine2 Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectOCREngine2A Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectOCREngine2Ex Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectOCREngine2ExA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectOCREngine2ExW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectOCREngine2W Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectOCREngineByName Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectOCREngineByNameA Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectOCREngineByNameW Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSource Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSource2 Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectSource2A Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSource2Ex Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectSource2ExA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectSource2ExW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectSource2W Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSourceByName Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectSourceByNameA Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectSourceByNameW Lib "dtwain32ud.dll" (lpszName As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSourceByNameWithOpen Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SelectSourceByNameWithOpenA Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SelectSourceByNameWithOpenW Lib "dtwain32ud.dll" (lpszName As String, bOpen As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SelectSourceWithOpen Lib "dtwain32ud.dll" (bOpen As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SetAcquireArea Lib "dtwain32ud.dll" (Source As System.IntPtr, lSetType As Integer, FloatEnum As System.IntPtr, ActualEnum As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireArea2 Lib "dtwain32ud.dll" (Source As System.IntPtr, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double, lUnit As Integer, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireArea2String Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetAcquireArea2StringA Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetAcquireArea2StringW Lib "dtwain32ud.dll" (Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireImageNegative Lib "dtwain32ud.dll" (Source As System.IntPtr, IsNegative As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireImageScale Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As System.Double, yscale As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireImageScaleString Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetAcquireImageScaleStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetAcquireImageScaleStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, xscale As String, yscale As String) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireStripBuffer Lib "dtwain32ud.dll" (Source As System.IntPtr, hMem As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetAcquireStripSize Lib "dtwain32ud.dll" (Source As System.IntPtr, StripSize As UInteger) As Integer
+    Public Declare Auto Function DTWAIN_SetAlarmVolume Lib "dtwain32ud.dll" (Source As System.IntPtr, Volume As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetAlarms Lib "dtwain32ud.dll" (Source As System.IntPtr, Alarms As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetAllCapsToDefault Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetAppInfo Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetAppInfoA Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetAppInfoW Lib "dtwain32ud.dll" (szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
+    Public Declare Auto Function DTWAIN_SetAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, szAuthor As String) As Integer
+    Public Declare Auto Function DTWAIN_SetAvailablePrinters Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAvailPrinters As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetAvailablePrintersArray Lib "dtwain32ud.dll" (Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetBitDepth Lib "dtwain32ud.dll" (Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetBlankPageDetection Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As System.Double, discard_option As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetBlankPageDetectionEx Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As System.Double, autodetect As Integer, detectOpts As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetBlankPageDetectionExString Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetBlankPageDetectionExStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetBlankPageDetectionExStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetBlankPageDetectionString Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetBlankPageDetectionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetBlankPageDetectionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetBrightness Lib "dtwain32ud.dll" (Source As System.IntPtr, Brightness As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetBrightnessString Lib "dtwain32ud.dll" (Source As System.IntPtr, Brightness As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetBrightnessStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetBrightnessStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
+    Public Declare Auto Function DTWAIN_SetBufferedTileMode Lib "dtwain32ud.dll" (Source As System.IntPtr, bTileMode As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetCallback Lib "dtwain32ud.dll" (Fn As DTwainCallback, UserData As Integer) As DTwainCallback
+    Public Declare Auto Function DTWAIN_SetCallback64 Lib "dtwain32ud.dll" (Fn As DTwainCallback64, UserData As System.Int64) As DTwainCallback64
+    Public Declare Auto Function DTWAIN_SetCamera Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetCameraA Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetCameraW Lib "dtwain32ud.dll" (Source As System.IntPtr, szCamera As String) As Integer
+    Public Declare Auto Function DTWAIN_SetCapValues Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetCapValuesEx Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetCapValuesEx2 Lib "dtwain32ud.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, nDataType As Integer, pArray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetCaption Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetCaptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetCaptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, Caption As String) As Integer
+    Public Declare Auto Function DTWAIN_SetCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetContrast Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetContrastString Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetContrastStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetContrastStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Contrast As String) As Integer
+    Public Declare Auto Function DTWAIN_SetCountry Lib "dtwain32ud.dll" (nCountry As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetCurrentRetryCount Lib "dtwain32ud.dll" (Source As System.IntPtr, nCount As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetCustomDSData Lib "dtwain32ud.dll" (Source As System.IntPtr, hData As System.IntPtr, <MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.U8, SizeParamIndex:=3)> Data As Byte(), dSize As UInteger, nFlags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetDSMSearchOrder Lib "dtwain32ud.dll" (SearchPath As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetDSMSearchOrderEx Lib "dtwain32ud.dll" (SearchOrder As String, UserPath As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetDSMSearchOrderExA Lib "dtwain32ud.dll" (SearchOrder As String, szUserPath As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetDSMSearchOrderExW Lib "dtwain32ud.dll" (SearchOrder As String, szUserPath As String) As Integer
+    Public Declare Auto Function DTWAIN_SetDefaultSource Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetDeviceNotifications Lib "dtwain32ud.dll" (Source As System.IntPtr, DevEvents As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetDeviceTimeDate Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetDeviceTimeDateA Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetDeviceTimeDateW Lib "dtwain32ud.dll" (Source As System.IntPtr, szTimeDate As String) As Integer
+    Public Declare Auto Function DTWAIN_SetDoubleFeedDetectLength Lib "dtwain32ud.dll" (Source As System.IntPtr, Value As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetDoubleFeedDetectLengthString Lib "dtwain32ud.dll" (Source As System.IntPtr, value As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetDoubleFeedDetectLengthStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, szLength As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetDoubleFeedDetectLengthStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, szLength As String) As Integer
+    Public Declare Auto Function DTWAIN_SetDoubleFeedDetectValues Lib "dtwain32ud.dll" (Source As System.IntPtr, prray As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetDoublePageCountOnDuplex Lib "dtwain32ud.dll" (Source As System.IntPtr, bDoubleCount As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetEOJDetectValue Lib "dtwain32ud.dll" (Source As System.IntPtr, nValue As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetErrorBufferThreshold Lib "dtwain32ud.dll" (nErrors As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetErrorCallback Lib "dtwain32ud.dll" (proc As DTwainErrorProc, UserData As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetErrorCallback64 Lib "dtwain32ud.dll" (proc As DTwainErrorProc64, UserData64 As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_SetFeederAlignment Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAlignment As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFeederOrder Lib "dtwain32ud.dll" (Source As System.IntPtr, lOrder As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFeederWaitTime Lib "dtwain32ud.dll" (Source As System.IntPtr, waitTime As Integer, flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFileAutoIncrement Lib "dtwain32ud.dll" (Source As System.IntPtr, Increment As Integer, bResetOnAcquire As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFileCompressionType Lib "dtwain32ud.dll" (Source As System.IntPtr, lCompression As Integer, bIsCustom As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFileSavePos Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetFileSavePosA Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetFileSavePosW Lib "dtwain32ud.dll" (hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetFileXferFormat Lib "dtwain32ud.dll" (Source As System.IntPtr, lFileType As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetHalftone Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetHalftoneA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetHalftoneW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
+    Public Declare Auto Function DTWAIN_SetHighlight Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetHighlightString Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetHighlightStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetHighlightStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Highlight As String) As Integer
+    Public Declare Auto Function DTWAIN_SetJobControl Lib "dtwain32ud.dll" (Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetJpegValues Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetJpegXRValues Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetLanguage Lib "dtwain32ud.dll" (nLanguage As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetLastError Lib "dtwain32ud.dll" (nError As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetLightPath Lib "dtwain32ud.dll" (Source As System.IntPtr, LightPath As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetLightPathEx Lib "dtwain32ud.dll" (Source As System.IntPtr, LightPaths As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetLightSource Lib "dtwain32ud.dll" (Source As System.IntPtr, LightSource As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetLightSources Lib "dtwain32ud.dll" (Source As System.IntPtr, LightSources As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetLoggerCallback Lib "dtwain32ud.dll" (logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_SetLoggerCallbackA Lib "dtwain32ud.dll" (logProc As DTwainLoggerProcA, UserData As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_SetLoggerCallbackW Lib "dtwain32ud.dll" (logProc As DTwainLoggerProcW, UserData As System.Int64) As Integer
+    Public Declare Auto Function DTWAIN_SetManualDuplexMode Lib "dtwain32ud.dll" (Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetMaxAcquisitions Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxAcquires As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetMaxBuffers Lib "dtwain32ud.dll" (Source As System.IntPtr, MaxBuf As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetMaxRetryAttempts Lib "dtwain32ud.dll" (Source As System.IntPtr, nAttempts As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetMultipageScanMode Lib "dtwain32ud.dll" (Source As System.IntPtr, ScanType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetNoiseFilter Lib "dtwain32ud.dll" (Source As System.IntPtr, NoiseFilter As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetOCRCapValues Lib "dtwain32ud.dll" (Engine As System.IntPtr, OCRCapValue As Integer, SetType As Integer, CapValues As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, Orient As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetOverscan Lib "dtwain32ud.dll" (Source As System.IntPtr, Value As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFAESEncryption Lib "dtwain32ud.dll" (Source As System.IntPtr, nWhichEncryption As Integer, bUseAES As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFASCIICompression Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFAuthor Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFAuthorA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFAuthorW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpAuthor As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFCompression Lib "dtwain32ud.dll" (Source As System.IntPtr, bCompression As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFCreator Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFCreatorA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFCreatorW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpCreator As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFEncryption Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFEncryptionA Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFEncryptionW Lib "dtwain32ud.dll" (Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFJpegQuality Lib "dtwain32ud.dll" (Source As System.IntPtr, Quality As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFKeywords Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFKeywordsA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFKeywordsW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpKeyWords As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFOCRConversion Lib "dtwain32ud.dll" (Engine As System.IntPtr, PageType As Integer, FileType As Integer, PixelType As Integer, BitDepth As Integer, Options As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFOCRMode Lib "dtwain32ud.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFOrientation Lib "dtwain32ud.dll" (Source As System.IntPtr, lPOrientation As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFPageScale Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As System.Double, yScale As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFPageScaleString Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFPageScaleStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFPageScaleStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFPageSize Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As System.Double, CustomHeight As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFPageSizeString Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFPageSizeStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFPageSizeStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFPolarity Lib "dtwain32ud.dll" (Source As System.IntPtr, Polarity As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFProducer Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFProducerA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFProducerW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpProducer As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFSubject Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFSubjectA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFSubjectW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpSubject As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFTextElementFloat Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As System.Double, val2 As System.Double, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFTextElementLong Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As Integer, val2 As Integer, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFTextElementString Lib "dtwain32ud.dll" (TextElement As System.IntPtr, val1 As String, Flags As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFTextElementStringA Lib "dtwain32ud.dll" (TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFTextElementStringW Lib "dtwain32ud.dll" (TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPDFTitle Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPDFTitleA Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPDFTitleW Lib "dtwain32ud.dll" (Source As System.IntPtr, lpTitle As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPaperSize Lib "dtwain32ud.dll" (Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPatchMaxPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPatchMaxRetries Lib "dtwain32ud.dll" (Source As System.IntPtr, nMaxRetries As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPatchPriorities Lib "dtwain32ud.dll" (Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SetPatchSearchMode Lib "dtwain32ud.dll" (Source As System.IntPtr, nSearchMode As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPatchTimeOut Lib "dtwain32ud.dll" (Source As System.IntPtr, TimeOutValue As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPixelFlavor Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelFlavor As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPixelType Lib "dtwain32ud.dll" (Source As System.IntPtr, PixelType As Integer, BitDepth As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPostScriptTitle Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPostScriptTitleA Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPostScriptTitleW Lib "dtwain32ud.dll" (Source As System.IntPtr, szTitle As String) As Integer
+    Public Declare Auto Function DTWAIN_SetPostScriptType Lib "dtwain32ud.dll" (Source As System.IntPtr, PSType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinter Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinterEx Lib "dtwain32ud.dll" (Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinterStartNumber Lib "dtwain32ud.dll" (Source As System.IntPtr, nStart As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinterStringMode Lib "dtwain32ud.dll" (Source As System.IntPtr, PrinterMode As Integer, bSetCurrent As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinterStrings Lib "dtwain32ud.dll" (Source As System.IntPtr, ArrayString As System.IntPtr, ByRef pNumStrings As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetPrinterSuffixString Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetPrinterSuffixStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetPrinterSuffixStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Suffix As String) As Integer
+    Public Declare Auto Function DTWAIN_SetQueryCapSupport Lib "dtwain32ud.dll" (bSet As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Auto Function DTWAIN_SetResourcePath Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetResourcePathA Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetResourcePathW Lib "dtwain32ud.dll" (ResourcePath As String) As Integer
+    Public Declare Auto Function DTWAIN_SetRotation Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetRotationString Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetRotationStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetRotationStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Rotation As String) As Integer
+    Public Declare Auto Function DTWAIN_SetSaveFileName Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetSaveFileNameA Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetSaveFileNameW Lib "dtwain32ud.dll" (Source As System.IntPtr, fName As String) As Integer
+    Public Declare Auto Function DTWAIN_SetShadow Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetShadowString Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetShadowStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetShadowStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Shadow As String) As Integer
+    Public Declare Auto Function DTWAIN_SetSourceUnit Lib "dtwain32ud.dll" (Source As System.IntPtr, Unit As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTIFFCompressType Lib "dtwain32ud.dll" (Source As System.IntPtr, Setting As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTIFFInvert Lib "dtwain32ud.dll" (Source As System.IntPtr, Setting As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTempFileDirectory Lib "dtwain32ud.dll" (szFilePath As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetTempFileDirectoryA Lib "dtwain32ud.dll" (szFilePath As String) As Integer
+    Public Declare Auto Function DTWAIN_SetTempFileDirectoryEx Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetTempFileDirectoryExA Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetTempFileDirectoryExW Lib "dtwain32ud.dll" (szFilePath As String, CreationFlags As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetTempFileDirectoryW Lib "dtwain32ud.dll" (szFilePath As String) As Integer
+    Public Declare Auto Function DTWAIN_SetThreshold Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As System.Double, bSetBithDepthReduction As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetThresholdString Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_SetThresholdStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_SetThresholdStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTwainDSM Lib "dtwain32ud.dll" (DSMType As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTwainLog Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetTwainLogA Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetTwainLogW Lib "dtwain32ud.dll" (LogFlags As UInteger, lpszLogFile As String) As Integer
+    Public Declare Auto Function DTWAIN_SetTwainMode Lib "dtwain32ud.dll" (lAcquireMode As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetTwainTimeout Lib "dtwain32ud.dll" (milliseconds As Integer) As Integer
+    Public Declare Auto Function DTWAIN_SetUpdateDibProc Lib "dtwain32ud.dll" (DibProc As DTwainDIBUpdateProc) As DTwainDIBUpdateProc
+    Public Declare Auto Function DTWAIN_SetXResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, xResolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetXResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetXResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetXResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Auto Function DTWAIN_SetYResolution Lib "dtwain32ud.dll" (Source As System.IntPtr, yResolution As System.Double) As Integer
+    Public Declare Auto Function DTWAIN_SetYResolutionString Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetYResolutionStringA Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetYResolutionStringW Lib "dtwain32ud.dll" (Source As System.IntPtr, Resolution As String) As Integer
+    Public Declare Auto Function DTWAIN_ShowUIOnly Lib "dtwain32ud.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_ShutdownOCREngine Lib "dtwain32ud.dll" (OCREngine As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_SkipImageInfoError Lib "dtwain32ud.dll" (Source As System.IntPtr, bSkip As Integer) As Integer
+    Public Declare Auto Function DTWAIN_StartThread Lib "dtwain32ud.dll" (DLLHandle As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_StartTwainSession Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
+    Public Declare Ansi Function DTWAIN_StartTwainSessionA Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
+    Public Declare Unicode Function DTWAIN_StartTwainSessionW Lib "dtwain32ud.dll" (hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
+    Public Declare Auto Function DTWAIN_SysDestroy Lib "dtwain32ud.dll" () As Integer
+    Public Declare Auto Function DTWAIN_SysInitialize Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeEx Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeEx2 Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SysInitializeEx2A Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SysInitializeEx2W Lib "dtwain32ud.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SysInitializeExA Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SysInitializeExW Lib "dtwain32ud.dll" (szINIPath As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeLib Lib "dtwain32ud.dll" (hInstance As System.IntPtr) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeLibEx Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeLibEx2 Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SysInitializeLibEx2A Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SysInitializeLibEx2W Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_SysInitializeLibExA Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
+    Public Declare Unicode Function DTWAIN_SysInitializeLibExW Lib "dtwain32ud.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
+    Public Declare Auto Function DTWAIN_SysInitializeNoBlocking Lib "dtwain32ud.dll" () As System.IntPtr
+    Public Declare Auto Function DTWAIN_TestGetCap Lib "dtwain32ud.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr
+    Public Declare Auto Function DTWAIN_UnlockMemory Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_UnlockMemoryEx Lib "dtwain32ud.dll" (h As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_UseMultipleThreads Lib "dtwain32ud.dll" (bSet As Integer) As Integer
 
 End Class
