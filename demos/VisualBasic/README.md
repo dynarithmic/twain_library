@@ -10,7 +10,7 @@ There are two basic methods of using the DTWAIN library within a Visual Basic ap
 
 ###### Using Method 1:
 
-Use Method 1 above if you are certain which DTWAIN DLL you want to be used for your application, and you are relying on the Windows operating to find the DLL's at runtime without your application having to specify the exact location of where the DLL will be found.  
+Use Method 1 if you are certain which DTWAIN DLL you want to be used for your application, and you are relying on the Windows operating to find the DLL's at runtime without your application having to specify the exact location of where the DLL will be found.  
 
 Note that the DTWAIN DLL must be located where the [Windows DLL search logic](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order) will be used to find DLL's (which in simpler terms means that the DTWAIN DLL can be placed in the current executable directory, or a directory specified by the system PATH environment variable).  
 
