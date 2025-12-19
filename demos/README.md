@@ -1,8 +1,6 @@
 ### Demo programs ###
 
-The demo programs consist of Visual Studio 2019 projects and a Delphi (Lazarus) project.  
-
-The projects are C and C++ projects, with an additional C#, Visual Basic, and Delphi project.  The Delphi project was tested with the <a href="https://www.lazarus-ide.org/" target="_blank">Lazarus Delphi</a> environment.
+The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a Delphi project.  The other languages do not have "project files", instead the full source code of each demo program is presented in each of the respective language's folder.
 
 ----
 ### <a name="build-demo"></a> Building the demo applications
@@ -37,20 +35,3 @@ This project is by default, setup for 32-bit Unicode (the dtwain32u.vb is part o
 
 2) Make sure the files found in <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text_resources</a> are available in the same directory as the DTWAIN DLL's.  Missing text resources will result in a "DTWAIN Resources not found" error.
 
-
-----
-### Why not have the demo projects already pre-built?  Why do I need to build them myself?
-It has come to our attention that some of the executables, if prebuilt, generate false positive warnings on a select few virus checkers.  The reason why you should rebuild the demo applications yourself is to be assured that you are not running a virus (even though it is a false positive).  
-
-The DTWAIN libraries themselves, dtwain32.dll, dtwain32u.dll, etc. are always checked for false positives on all the major virus checkers (using <a href="https://www.virustotal.com/gui/home/upload" target="_blank">Virus Total</a> as the baseline).  If any of the following DLL's produce any issues containing false positives, we resolve these issues before we make the DLL's available on the master branch.
-
-* dtwain32.dll
-* dtwain32u.dll
-* dtwain32d.dll
-* dtwain32ud.dll
-* dtwain64.dll
-* dtwain64u.dll
-* dtwain64d.dll
-* dtwain64ud.dll
-
-The files that end with **d**, for example, dtwain32d.dll, are special debug versions of the DLL, and are available in the <a href="https://github.com/dynarithmic/twain_library_source/tree/main/binaries" target="_blank">twain_library_source repo</a>.
