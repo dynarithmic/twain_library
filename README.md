@@ -352,7 +352,7 @@ DTWAIN includes computer language bindings and demo programs for the following c
   [Java*](https://github.com/dynarithmic/twain_library-java)\
   [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)\
   [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)\
-  [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
+  [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)\
   [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)\
   [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)\
   [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)\
