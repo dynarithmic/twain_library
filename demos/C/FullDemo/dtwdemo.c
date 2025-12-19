@@ -521,9 +521,11 @@ void SelectTheSource(int nWhich)
     else
     {
         LONG lastError = DTWAIN_GetLastError();
-        TCHAR szCancelMsg[256];
-        DTWAIN_GetErrorString(lastError, szCancelMsg, 256);
-        MessageBox(g_hWnd, szCancelMsg, _T("Information"), MB_ICONSTOP);
+        wchar_t szCancelMsg[256];
+
+        // We will use the wide version, to ensure we get the proper UTF-8 string
+        DTWAIN_GetErrorStringW(lastError, szCancelMsg, 256);
+        MessageBoxW(g_hWnd, szCancelMsg, L"Information", MB_ICONSTOP);
     }
 }
 
