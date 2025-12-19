@@ -1,6 +1,6 @@
 ### Demo programs ###
 
-The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a Delphi project.  The other languages do not have "project files", instead the full source code of each demo program is presented in each of the respective language's folder.
+The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a [Delphi project](https://github.com/dynarithmic/twain_library/tree/master-staging/demos/Delphi/SimpleAcquire).  The other languages do not have "project files", instead the full source code of each demo program is presented in each of the respective language's folder.
 
 ----
 ### <a name="build-demo"></a> Building the demo applications
