@@ -345,27 +345,17 @@ To utilize other computer languages, it still requires that one of the [DTWAIN d
 
 DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-  [C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad)<br>
-  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)
-  
-  [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
-  
-  [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
-  
-  [Java*](https://github.com/dynarithmic/twain_library-java)
-  
-  [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/lua)
-  
-  [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)
-  
+  [C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad)\
+  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
+  [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
+  [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)\
+  [Java*](https://github.com/dynarithmic/twain_library-java)\
+  [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)\
+  [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)\
   [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
-  
-  [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)
-  
-  [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
-  
-  [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)
-  
+  [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)\
+  [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)\
+  [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)\
   [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
 
 * Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
@@ -529,4 +519,3 @@ Note that issues will **not** be addressed at **dynarithmic.com** (website or em
 The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
 
 In addition to 30+ years in the industry, I have made extensive contributions to the [CodeGuru](http://www.codeguru.com) C++ and Visual C++ forums, being one of the top contributors for over 15 years starting in 1999, and since 2014, moved on to  [StackOverflow](https://stackoverflow.com/users/3133316/paulmckenzie?tab=profile), where hopefully I am making an impact with other passionate programmers.  Also, I have had the distinction of being a Microsoft MVP for 10 years running in the Visual C++ category.
- 
