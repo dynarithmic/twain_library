@@ -8,8 +8,16 @@ DTWAIN Version changes
 
 - Added Go language bindings (dtwainapi.go).
 
+- Added F# language bindings (dtwainapi.fs).
+
 - Updated C# and Visual Basic language bindings to properly handle DTWAIN
   callback functions.
+
+- Ruby language binding now includes a Ruby definition for the TWAIN TW_IDENTITY struct.
+
+- Addressed issues with some language resources (Chinese, Greek, Japanese, etc.)
+  not displaying strings correctly within the TWAIN "Select Source" dialog when 
+  calling DTWAIN_SelectSource2() (this fix is only for the Unicode build of the DTWAIN DLL's)
 
 
 5.7.1
