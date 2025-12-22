@@ -1657,7 +1657,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_ICAP     78
 #define DTWAIN_CONSTANT_DTWAIN_CONT 79
 #define DTWAIN_CONSTANT_CAPCODE_MAP 80
-#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_CAPCODE_MAP + 1) 
+#define DTWAIN_CONSTANT_ACAP        81
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_ACAP + 1) 
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000
