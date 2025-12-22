@@ -1616,6 +1616,7 @@ local dtwain_constants = {}
    dtwain_constants.DTWAIN_CONSTANT_ICAP = 78
    dtwain_constants.DTWAIN_CONSTANT_DTWAIN_CONT = 79
    dtwain_constants.DTWAIN_CONSTANT_CAPCODE_MAP = 80
+   dtwain_constants.DTWAIN_CONSTANT_ACAP = 81
    dtwain_constants.DTWAIN_USERRES_START = 20000
    dtwain_constants.DTWAIN_USERRES_MAXSIZE = 8192
    dtwain_constants.DTWAIN_APIHANDLEOK = 1
