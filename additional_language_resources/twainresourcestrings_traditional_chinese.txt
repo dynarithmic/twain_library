@@ -19,7 +19,7 @@
 1002 無效的 DTWAIN_SOURCE  
 1003 無效的 DTWAIN_ARRAY  
 1004 錯誤的 DTWAIN_ARRAY 類型  
-1005 DTWAIN_ARRAY 的索引超出範圍  
+1005 DTWAIN_ARRAY 的索引超出範圍  : %1
 1006 堆記憶體不足  
 1007 DTWAIN 無法創建 TWAIN 視窗  
 1008 無效的像素類型  
@@ -27,7 +27,7 @@
 1010 未啟動任何 DTWAIN 會話。您必須調用 DTWAIN_StartTwainSession()  
 1011 無效的 DTWAIN_ACQUIRE 編號  
 1012 無效的 TWAIN 能力  
-1013 來源不支持該能力  
+1013 來源不支持該能力 : %1 
 1014 一般 TWAIN 錯誤。請檢查 DTWAIN_GetTwainError() 獲取更多信息  
 1015 無法掛接應用程式消息隊列  
 1016 傳遞了無效的檔案名稱參數  
@@ -300,3 +300,15 @@
 9527 TWAIN 狀態碼：操作失敗（文件過於淺色）  
 9528 TWAIN 狀態碼：操作失敗（文件過於深色）  
 9529 TWAIN 狀態碼：操作失敗（來源沒有可捕獲的內容以進行傳輸）  
+9600 TWAIN 返回碼：TWRC_SUCCESS  
+9601 TWAIN 返回碼：TWRC_FAILURE  
+9602 TWAIN 返回碼：TWRC_CHECKSTATUS  
+9603 TWAIN 返回碼：TWRC_CANCEL  
+9604 TWAIN 返回碼：TWRC_DSEVENT  
+9605 TWAIN 返回碼：TWRC_NOTDSEVENT  
+9606 TWAIN 返回碼：TWRC_XFERDONE  
+9607 TWAIN 返回碼：TWRC_ENDOFLIST  
+9608 TWAIN 返回碼：TWRC_INFONOTSUPPORTED  
+9609 TWAIN 返回碼：TWRC_DATANOTAVAILABLE  
+9610 TWAIN 返回碼：TWRC_BUSY  
+9611 TWAIN 返回碼：TWRC_SCANNERLOCKED

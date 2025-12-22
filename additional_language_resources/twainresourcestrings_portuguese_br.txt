@@ -19,7 +19,7 @@
 1002 DTWAIN_SOURCE inválido
 1003 DTWAIN_ARRAY inválido
 1004 Tipo DTWAIN_ARRAY incorreto
-1005 Índice fora dos limites para DTWAIN_ARRAY
+1005 Índice fora dos limites para DTWAIN_ARRAY: %1
 1006 Memória insuficiente
 1007 DTWAIN Não conseguiu criar uma janela TWAIN
 1008 Tipo de pixel inválido
@@ -27,7 +27,7 @@
 1010 Nenhuma sessão DTWAIN foi iniciada. Você precisa chamar DTWAIN_StartTwainSession()
 1011 Número DTWAIN_ACQUIRE inválido
 1012 Capacidade TWAIN inválida
-1013 O dispositivo não suporta a capacidade
+1013 O dispositivo não suporta a capacidade: %1
 1014 Erro geral de TWAIN. Verifique DTWAIN_GetTwainError() para mais informações
 1015 Falha ao conectar a fila de mensagens do aplicativo
 1016 Argumento de nome de arquivo incorreto foi passado
@@ -298,3 +298,15 @@
 9527 Código de Condição TWAIN: Falha na operação (documento muito claro)
 9528 Código de Condição TWAIN: Falha na operação (documento muito escuro)
 9529 Código de Condição TWAIN: Falha na operação (o dispositivo não tem nada para capturar para transferência)
+9600 Código de Retorno TWAIN: TWRC_SUCESSO  
+9601 Código de Retorno TWAIN: TWRC_FALHA  
+9602 Código de Retorno TWAIN: TWRC_VERIFICARSTATUS  
+9603 Código de Retorno TWAIN: TWRC_CANCELAR  
+9604 Código de Retorno TWAIN: TWRC_EVENTODSE  
+9605 Código de Retorno TWAIN: TWRC_NAOEVENTODSE  
+9606 Código de Retorno TWAIN: TWRC_TRANSFERENCIACONCLUIDA  
+9607 Código de Retorno TWAIN: TWRC_FIMDALISTA  
+9608 Código de Retorno TWAIN: TWRC_INFORMACAONAOAPOIADA  
+9609 Código de Retorno TWAIN: TWRC_DADOSNAOINDISPONIVEIS  
+9610 Código de Retorno TWAIN: TWRC_OCUPADO  
+9611 Código de Retorno TWAIN: TWRC_SCANNERBLOQUEADO
