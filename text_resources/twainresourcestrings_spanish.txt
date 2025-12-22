@@ -19,7 +19,7 @@
 1002 Invalid los DTWAIN_SOURCE
 1003 Los  inválido DTWAIN_ARRAY
 1004 Los incorrecto DTWAIN_ARRAY tipo
-1005 Índice fuera de los saltos para los DTWAIN ARRAY
+1005 Índice fuera de los saltos para los DTWAIN ARRAY: %1
 1006 Fuera de memoria de montón
 1007 Los DTWAIN no le podría crear ventana a TWAIN
 1008 Los Pixel Inválido Teclea
@@ -27,7 +27,7 @@
 1010 Ninguna Sesión de los DTWAIN fue empezada.
 1011 Los inválido DTWAIN_ACQUIRE número
 1012 Le Invalid la Capacidad a TWAIN
-1013 Procedencia no apoya la capacidad
+1013 Procedencia no apoya la capacidad: %1
 1014 Error general de TWAIN.
 1015 Fracasé a para Enganchar solicitud mensaje cola
 1016 Argumento de nombre de Archivo malo fue pasado
@@ -301,3 +301,15 @@
 9527 Código de condición TWAIN: Operación fallida (documento demasiado claro)  
 9528 Código de condición TWAIN: Operación fallida (documento demasiado oscuro)  
 9529 Código de condición TWAIN: Operación fallida (la fuente no tiene nada para capturar y transferir)
+9600 Código de retorno TWAIN: TWRC_SUCCESS  
+9601 Código de retorno TWAIN: TWRC_FAILURE  
+9602 Código de retorno TWAIN: TWRC_CHECKSTATUS  
+9603 Código de retorno TWAIN: TWRC_CANCEL  
+9604 Código de retorno TWAIN: TWRC_DSEVENT  
+9605 Código de retorno TWAIN: TWRC_NOTDSEVENT  
+9606 Código de retorno TWAIN: TWRC_XFERDONE  
+9607 Código de retorno TWAIN: TWRC_ENDOFLIST  
+9608 Código de retorno TWAIN: TWRC_INFONOTSUPPORTED  
+9609 Código de retorno TWAIN: TWRC_DATANOTAVAILABLE  
+9610 Código de retorno TWAIN: TWRC_BUSY  
+9611 Código de retorno TWAIN: TWRC_SCANNERLOCKED
