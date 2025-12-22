@@ -3,13 +3,13 @@ The Lua language binding makes usage of the [LuaJit ffi library](https://luajit.
 Thus using the DTWAIN binding requires that you are running the [LuaJit compiler](https://luajit.org/luajit.html).  
 
 ----
-Here is a Lua example using the  [dtwain.lua and dtwain_constants.lua](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Lua) interface files that defines the DTWAIN constants and functions.  
+Here is a Lua example using the  [dtwainapi.lua and dtwainapi_constants.lua](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Lua) interface files that defines the DTWAIN constants and functions.  
 
 The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
 ```lua
-local dtwain = require("dtwain")
-local dconstants = require("dtwain_constants")
+local dtwain = require("dtwainapi")
+local dconstants = require("dtwainapi_constants")
 
 -- Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
 -- You can use a full pathname here also, to ensure lua finds the dll

@@ -429,6 +429,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE left, DTWAIN_CHARPTRTYPE top, DTWAIN_CHARPTRTYPE right, DTWAIN_CHARPTRTYPE bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringA(DTWAIN_SOURCE Source, LPSTR left, LPSTR top, LPSTR right, LPSTR bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringW(DTWAIN_SOURCE Source, LPWSTR left, LPWSTR top, LPWSTR right, LPWSTR bottom, LPLONG Unit);
+        DTWAIN_ARRAY DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, LONG lGetType);
         DTWAIN_BOOL DTWAIN_GetAcquireMetrics(DTWAIN_SOURCE source, LPLONG ImageCount, LPLONG SheetCount);
         HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, LPLONG lpCompression, LPDWORD lpBytesPerRow, LPDWORD lpColumns, LPDWORD lpRows, LPDWORD XOffset, LPDWORD YOffset, LPDWORD lpBytesWritten);
@@ -442,6 +443,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu, DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoA(LPSTR szVerStr, LPSTR szManu, LPSTR szProdFam, LPSTR szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoW(LPWSTR szVerStr, LPWSTR szManu, LPWSTR szProdFam, LPWSTR szProdName);
@@ -462,6 +464,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG lCapType);
         LONG DTWAIN_GetCapContainerEx(LONG nCap, DTWAIN_BOOL bSetContainer, LPDTWAIN_ARRAY ConTypes);
+        DTWAIN_ARRAY DTWAIN_GetCapContainerEx2(LONG nCap, DTWAIN_BOOL bSetContainer);
         LONG DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
@@ -1595,6 +1598,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE left, DTWAIN_CHARPTRTYPE top, DTWAIN_CHARPTRTYPE right, DTWAIN_CHARPTRTYPE bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringA(DTWAIN_SOURCE Source, LPSTR left, LPSTR top, LPSTR right, LPSTR bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringW(DTWAIN_SOURCE Source, LPWSTR left, LPWSTR top, LPWSTR right, LPWSTR bottom, LPLONG Unit);
+        DTWAIN_ARRAY DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, LONG lGetType);
         DTWAIN_BOOL DTWAIN_GetAcquireMetrics(DTWAIN_SOURCE source, LPLONG ImageCount, LPLONG SheetCount);
         HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, LPLONG lpCompression, LPDWORD lpBytesPerRow, LPDWORD lpColumns, LPDWORD lpRows, LPDWORD XOffset, LPDWORD YOffset, LPDWORD lpBytesWritten);
@@ -1608,6 +1612,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu, DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoA(LPSTR szVerStr, LPSTR szManu, LPSTR szProdFam, LPSTR szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoW(LPWSTR szVerStr, LPWSTR szManu, LPWSTR szProdFam, LPWSTR szProdName);
@@ -1628,6 +1633,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG lCapType);
         LONG DTWAIN_GetCapContainerEx(LONG nCap, DTWAIN_BOOL bSetContainer, LPDTWAIN_ARRAY ConTypes);
+        DTWAIN_ARRAY DTWAIN_GetCapContainerEx2(LONG nCap, DTWAIN_BOOL bSetContainer);
         LONG DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
@@ -2761,6 +2767,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE left, DTWAIN_CHARPTRTYPE top, DTWAIN_CHARPTRTYPE right, DTWAIN_CHARPTRTYPE bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringA(DTWAIN_SOURCE Source, LPSTR left, LPSTR top, LPSTR right, LPSTR bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringW(DTWAIN_SOURCE Source, LPWSTR left, LPWSTR top, LPWSTR right, LPWSTR bottom, LPLONG Unit);
+        DTWAIN_ARRAY DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, LONG lGetType);
         DTWAIN_BOOL DTWAIN_GetAcquireMetrics(DTWAIN_SOURCE source, LPLONG ImageCount, LPLONG SheetCount);
         HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, LPLONG lpCompression, LPDWORD lpBytesPerRow, LPDWORD lpColumns, LPDWORD lpRows, LPDWORD XOffset, LPDWORD YOffset, LPDWORD lpBytesWritten);
@@ -2774,6 +2781,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu, DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoA(LPSTR szVerStr, LPSTR szManu, LPSTR szProdFam, LPSTR szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoW(LPWSTR szVerStr, LPWSTR szManu, LPWSTR szProdFam, LPWSTR szProdName);
@@ -2794,6 +2802,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG lCapType);
         LONG DTWAIN_GetCapContainerEx(LONG nCap, DTWAIN_BOOL bSetContainer, LPDTWAIN_ARRAY ConTypes);
+        DTWAIN_ARRAY DTWAIN_GetCapContainerEx2(LONG nCap, DTWAIN_BOOL bSetContainer);
         LONG DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
@@ -3927,6 +3936,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE left, DTWAIN_CHARPTRTYPE top, DTWAIN_CHARPTRTYPE right, DTWAIN_CHARPTRTYPE bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringA(DTWAIN_SOURCE Source, LPSTR left, LPSTR top, LPSTR right, LPSTR bottom, LPLONG Unit);
         DTWAIN_BOOL DTWAIN_GetAcquireArea2StringW(DTWAIN_SOURCE Source, LPWSTR left, LPWSTR top, LPWSTR right, LPWSTR bottom, LPLONG Unit);
+        DTWAIN_ARRAY DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, LONG lGetType);
         DTWAIN_BOOL DTWAIN_GetAcquireMetrics(DTWAIN_SOURCE source, LPLONG ImageCount, LPLONG SheetCount);
         HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, LPLONG lpCompression, LPDWORD lpBytesPerRow, LPDWORD lpColumns, LPDWORD lpRows, LPDWORD XOffset, LPDWORD YOffset, LPDWORD lpBytesWritten);
@@ -3940,6 +3950,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetAppInfo(DTWAIN_CHARPTRTYPE szVerStr, DTWAIN_CHARPTRTYPE szManu, DTWAIN_CHARPTRTYPE szProdFam, DTWAIN_CHARPTRTYPE szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoA(LPSTR szVerStr, LPSTR szManu, LPSTR szProdFam, LPSTR szProdName);
         DTWAIN_BOOL DTWAIN_GetAppInfoW(LPWSTR szVerStr, LPWSTR szManu, LPWSTR szProdFam, LPWSTR szProdName);
@@ -3960,6 +3971,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, LONG nCap, LONG lCapType);
         LONG DTWAIN_GetCapContainerEx(LONG nCap, DTWAIN_BOOL bSetContainer, LPDTWAIN_ARRAY ConTypes);
+        DTWAIN_ARRAY DTWAIN_GetCapContainerEx2(LONG nCap, DTWAIN_BOOL bSetContainer);
         LONG DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, LONG nCap);
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);

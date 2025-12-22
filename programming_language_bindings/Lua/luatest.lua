@@ -1,5 +1,5 @@
-local dtwain = require("dtwain")
-local dconstants = require("dtwain_constants")
+local dtwain = require("dtwainapi")
+local dconstants = require("dtwainapi_constants")
 
 -- Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
 -- You can use a full pathname here also, to ensure lua finds the dll
