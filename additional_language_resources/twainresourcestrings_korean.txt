@@ -19,7 +19,7 @@
 1002 잘못된 DTWAIN_SOURCE  
 1003 잘못된 DTWAIN_ARRAY  
 1004 잘못된 DTWAIN_ARRAY 유형  
-1005 DTWAIN_ARRAY의 인덱스가 범위를 벗어났습니다.  
+1005 DTWAIN_ARRAY의 인덱스가 범위를 벗어났습니다. : %1 
 1006 힙 메모리가 부족합니다.  
 1007 DTWAIN이 TWAIN 창을 생성할 수 없습니다.  
 1008 잘못된 픽셀 유형  
@@ -27,7 +27,7 @@
 1010 DTWAIN 세션이 시작되지 않았습니다. DTWAIN_StartTwainSession()을 호출해야 합니다.  
 1011 잘못된 DTWAIN_ACQUIRE 번호  
 1012 잘못된 TWAIN 기능  
-1013 소스가 기능을 지원하지 않습니다.  
+1013 소스가 기능을 지원하지 않습니다. : %1 
 1014 일반 TWAIN 오류. 자세한 정보는 DTWAIN_GetTwainError()를 확인하십시오.  
 1015 애플리케이션 메시지 큐를 후킹하지 못했습니다.  
 1016 잘못된 파일 이름 인수가 전달되었습니다.  
@@ -300,3 +300,15 @@
 9527 TWAIN 상태 코드: 작업 실패(문서가 너무 밝음)  
 9528 TWAIN 상태 코드: 작업 실패(문서가 너무 어둡습니다)  
 9529 TWAIN 상태 코드: 작업 실패(전송할 캡처할 것이 없음)  
+9600 TWAIN 반환 코드: TWRC_SUCCESS  
+9601 TWAIN 반환 코드: TWRC_FAILURE  
+9602 TWAIN 반환 코드: TWRC_CHECKSTATUS  
+9603 TWAIN 반환 코드: TWRC_CANCEL  
+9604 TWAIN 반환 코드: TWRC_DSEVENT  
+9605 TWAIN 반환 코드: TWRC_NOTDSEVENT  
+9606 TWAIN 반환 코드: TWRC_XFERDONE  
+9607 TWAIN 반환 코드: TWRC_ENDOFLIST  
+9608 TWAIN 반환 코드: TWRC_INFONOTSUPPORTED  
+9609 TWAIN 반환 코드: TWRC_DATANOTAVAILABLE  
+9610 TWAIN 반환 코드: TWRC_BUSY  
+9611 TWAIN 반환 코드: TWRC_SCANNERLOCKED

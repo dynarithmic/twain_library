@@ -19,7 +19,7 @@
 1002 Invalido DTWAIN_SOURCE
 1003 Invalido DTWAIN_ARRAY
 1004 Incorretto DTWAIN_ARRAY tipo
-1005 Ago fuori da frontiere da DTWAIN_ARRAY
+1005 Ago fuori da frontiere da DTWAIN_ARRAY: %1
 1006 Fuori da mucchio memoria
 1007 DTWAIN non crei TWAIN finestra
 1008 Invalido Pixel Dattilografa
@@ -27,7 +27,7 @@
 1010 Nessun DTWAIN Seduta cominciò.
 1011 Invalido DTWAIN_ACQUIRE numero
 1012 Invalid TWAIN Capacità
-1013 Fonte non caldeggia capacità
+1013 Fonte non caldeggia capacità: %1
 1014 Generale TWAIN Errore.
 1015 Fallii Agganciare applicazione messaggio coda
 1016 Cattivo Schedario nome discussione passò
@@ -300,3 +300,15 @@
 9527 Codice di Condizione TWAIN: Operazione fallita (documento troppo chiaro)
 9528 Codice di Condizione TWAIN: Operazione fallita (documento troppo scuro)
 9529 Codice di Condizione TWAIN: Operazione fallita (la sorgente non ha nulla da catturare per il trasferimento)
+9600 Codice di ritorno TWAIN: TWRC_SUCCESS
+9601 Codice di ritorno TWAIN: TWRC_FAILURE
+9602 Codice di ritorno TWAIN: TWRC_CHECKSTATUS
+9603 Codice di ritorno TWAIN: TWRC_CANCEL
+9604 Codice di ritorno TWAIN: TWRC_DSEVENT
+9605 Codice di ritorno TWAIN: TWRC_NOTDSEVENT
+9606 Codice di ritorno TWAIN: TWRC_XFERDONE
+9607 Codice di ritorno TWAIN: TWRC_ENDOFLIST
+9608 Codice di ritorno TWAIN: TWRC_INFONOTSUPPORTED
+9609 Codice di ritorno TWAIN: TWRC_DATANOTAVAILABLE
+9610 Codice di ritorno TWAIN: TWRC_BUSY
+9611 Codice di ritorno TWAIN: TWRC_SCANNERLOCKED
