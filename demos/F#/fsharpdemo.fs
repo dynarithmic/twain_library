@@ -19,10 +19,13 @@ let main argv =
         try
             let initResult = TwainAPI.DTWAIN_SysInitialize()
             if initResult = 0 then 
-                printfn "DTWAIN_SysInitialize returned: 0x%08X" (initResult.ToInt64())
+                printfn "No source was selected" 
                 1
             else
+                // Select a Source using the enhanced "Select Source" dialog.  We will center it
+                // on the screen
                 let sourceResult = TwainAPI.DTWAIN_SelectSource2 IntPtr.Zero "Select Source" 0 0 TwainAPI.DTWAIN_DLG_CENTER_SCREEN 
+                
                 if sourceResult = 0 then 
                     printfn "No TWAIN Source was selected"
                     TwainAPI.DTWAIN_SysDestroy() |> ignore
@@ -68,11 +71,8 @@ let main argv =
                         printfn "  UserData = %016X" userData
                         nativeint 1 // Should always return 1 as a default
 
-                    // Create the unmanaged delegate instance
-                    let callbackInst = DTWAIN_CALLBACK_PROC64(myCallback)
-
-                    // Register it by calling DTWAIN_SetCallback64
-                    let previous = TwainAPI.DTWAIN_SetCallback64 callbackInst 0
+                    // Register the callback by calling DTWAIN_SetCallback64
+                    TwainAPI.DTWAIN_SetCallback64 (DTWAIN_CALLBACK_PROC64(myCallback)) (0) |> ignore
 
                     // Now Acquire to a BMP file
                     let mutable status_ = 0

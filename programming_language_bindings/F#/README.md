@@ -1,108 +1,112 @@
-Here is a Rust example using  [dtwainapi.rs](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Rust) file that defines the DTWAIN constants and functions.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
+This is an **F#** example using  [dtwainapi.fs](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/F#) file that defines the DTWAIN API constants and functions.  The program gives an example of 
+1) Selecting a TWAIN device installed on your system, 
 
-```cpp
-use std::ptr;
-use std::mem;
-use std::ffi::{c_char, CStr, CString, c_void};
+2) displaying a list of the capabilities available to the device,
 
-use libloading::{Library};
-use crate::dtwainapi::DTwainAPI;
+3) How to setup a callback function to and 
 
-mod dtwainapi;
+4) Start the TWAIN device and acquire to a BMP file.
 
-pub fn main() -> Result<(), Box<dyn std::error::Error>>{
-    // Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
-    // You can use a full pathname here also, to ensure rust finds the dll
+Please note that the DTWAIN DLL's that are supported are the Unicode versions of the DLL, i.e. dtwain32u.dll, dtwain32ud.dll, dtwain64u.dll, and dtwain64ud.dll.  
 
-    // Check for the rust environment, and load the Unicode 64-bit or 32-bit DLL
-    let mut library_name = "dtwain64u.dll";
-    if mem::size_of::<*const u8>() == 4  // 32-bit
-    {
-        library_name = "dtwain32u.dll";
-    }
+Since the Unicode version of the DTWAIN API also has ANSI equivalent functions (API functions whose names end with the letter "A"), your application can still call the ANSI functions if deemed necessary.
 
-    // Load the library and resolve all the function pointers
-    let library = unsafe { Library::new(library_name)? };
-    let api_func = dtwainapi::DTwainAPI::new(&library).unwrap();
+```fsharp
+open System
+open System.Runtime.InteropServices
+open dtwainapi
+open System.Text
 
-    // Initialize DTWAIN
-    api_func.DTWAIN_SysInitialize();
+[<EntryPoint>]
+let main argv =
+    let dllname =
+        if Environment.Is64BitProcess then
+            "dtwain64u.dll"
+        else
+            "dtwain32u.dll"
 
-    // Select a TWAIN source.  Note that instead of the usual Select Source dialog,
-    // we use the specialized "Select Source" dialog that center's itself on the screen,
-    // plus allows us to title the dialog as "Rust demo"
-    let mut c_string = CString:: new("Rust demo").unwrap();
-    let twain_source = api_func.DTWAIN_SelectSource2A(ptr::null(), c_string.as_ptr(),
-                                                      0, 0, DTwainAPI::DTWAIN_DLG_CENTER_SCREEN);
+    // Load the DLL first — required before any DTWAIN calls
+    TwainAPI.Load dllname
+    printfn "DTWAIN DLL loaded successfully."
 
-    // If a source was selected, display the name
-    if twain_source.is_null()
-    {
-        println!("No source selected");
-    }
-    else
-    {
-        unsafe
-        {
-            // Display the product name.
-            // Note we use the helper function allocate_ansi_buffer to allocate a char buffer
-            // that the DLL function can work with.
-            let char_buffer = dtwainapi::DTwainAPI::allocate_ansi_buffer(256);
-            api_func.DTWAIN_GetSourceProductNameA(twain_source, char_buffer, 256);
+    let exitCode =
+        try
+            let initResult = TwainAPI.DTWAIN_SysInitialize()
+            if initResult = 0 then 
+                printfn "No source was selected" 
+                1
+            else
+                // Select a Source using the enhanced "Select Source" dialog.  We will center it
+                // on the screen
+                let sourceResult = TwainAPI.DTWAIN_SelectSource2 IntPtr.Zero "Select Source" 0 0 TwainAPI.DTWAIN_DLG_CENTER_SCREEN 
+                
+                if sourceResult = 0 then 
+                    printfn "No TWAIN Source was selected"
+                    TwainAPI.DTWAIN_SysDestroy() |> ignore
+                    1
+                else
+                    // This will allow callbacks to be invoked by DTWAIN
+                    TwainAPI.DTWAIN_EnableMsgNotify 1 |> ignore   
 
-            // Get a Rust string from the allocated buffer and display the results
-            let actual_prodname = String::from(CStr::from_ptr(char_buffer as *const c_char).to_str().unwrap());
-            println!("The name of the selected source is: {}", actual_prodname);
+                    // Now get the product name of the TWAIN source that was selected
+                    let prodname = new StringBuilder(256)
+                    let ret = TwainAPI.DTWAIN_GetSourceProductNameW sourceResult prodname 256
+                    printfn "The name of the selected TWAIN Source is: %s" (prodname.ToString())
 
+                    // Example usage of DTWAIN_ARRAY:
+                    // Get the device capabilities supported by the device
+               
+                    // Note: The DTWAIN_ARRAY, DTWAIN_SOURCE, DTWAIN_FRAME, and DTWAIN_RANGE are actually void pointers
+                    // so you have to declare them as IntPtr.Zero if a DTWAIN function requires a parameter to be of this type.
+                    let mutable cap_array = TwainAPI.DTWAIN_EnumSupportedCapsEx2 sourceResult 
 
-            /* Example usage of DTWAIN_ARRAY:
-             Get the device capabilities supported by the device */
+                    // Get the number of items in the array
+                    let mutable arrcount = TwainAPI.DTWAIN_ArrayGetCount cap_array
+                    printfn "There are %d capabilities defined for device %s" (arrcount) (prodname.ToString())
 
-            /* We will use the Ex2 version of DTWAIN_EnumSupportedCaps, since it
-               is easier to handle the returned DTWAIN_ARRAY.
-             */
-            let allcaps = api_func.DTWAIN_EnumSupportedCapsEx2(twain_source);
+                    // print each capability
+                    let mutable long_val = 0
+                    for i = 1 to arrcount do
+                        let index = i - 1
+                        TwainAPI.DTWAIN_ArrayGetAtLong cap_array index &long_val |> ignore
+                        TwainAPI.DTWAIN_GetNameFromCap long_val prodname 256 |> ignore
+                        printfn "Capability %d: %s  Value: %d" (i) (prodname.ToString()) (long_val)
 
-            // Get the number of items in the array
-            let arrcount = api_func.DTWAIN_ArrayGetCount(allcaps);
-            println!("There are {} device capabilities", arrcount);
+                    // Destroy the array when done
+                    TwainAPI.DTWAIN_ArrayDestroy cap_array |> ignore
 
-            // print each capability
-            let mut long_val : i32 = 0;
-            let ptr: *mut i32 = &mut long_val;
-            for i in 0..arrcount
-            {
-                api_func.DTWAIN_ArrayGetAtLong(allcaps, i, ptr);
-                api_func.DTWAIN_GetNameFromCapA(long_val, char_buffer, 256);
-                let actual_capname = String::from(CStr::from_ptr(char_buffer as *const c_char).to_str().unwrap());
-                println!("Capability {}: {}  Value: {}", i + 1, actual_capname, long_val);
-            }
+                    // Example of a callback that will "watch" when the TWAIN
+                    // device acquires an image.  See the DTWAIN documentation
+                    // on the notifications that will be sent to your application
+                    let myCallback wParam lParam (userData: int64) : nativeint =
+                        printfn "DTWAIN Callback called!"
+                        printfn "  wParam = %d" (uint64 wParam)
+                        printfn "  lParam = 0x%016X" (uint64 lParam)
+                        printfn "  UserData = %016X" userData
+                        nativeint 1 // Should always return 1 as a default
 
-            // Get the pixel types by calling DTWAIN_GetCapValues()
-            let mut cap_array = ptr::null_mut();
-            api_func.DTWAIN_GetCapValues(twain_source, DTwainAPI::DTWAIN_CV_ICAPPIXELTYPE, DTwainAPI::DTWAIN_CAPGET, &mut cap_array as *mut *mut c_void);
+                    // Register the callback by calling DTWAIN_SetCallback64
+                    TwainAPI.DTWAIN_SetCallback64 (DTWAIN_CALLBACK_PROC64(myCallback)) (0) |> ignore
 
-            // Print out the pixel types
-            let pixel_count = api_func.DTWAIN_ArrayGetCount(cap_array);
-            let ptr2: *mut i32 = &mut long_val;
-            for i in 0..pixel_count
-            {
-                api_func.DTWAIN_ArrayGetAtLong(cap_array, i, ptr2);
-                println!("pixel type is: {}", long_val);
-            }
+                    // Now Acquire to a BMP file
+                    let mutable status_ = 0
+                    TwainAPI.DTWAIN_AcquireFile sourceResult "TEST.BMP" TwainAPI.DTWAIN_BMP 
+                                               TwainAPI.DTWAIN_USELONGNAME
+                                               TwainAPI.DTWAIN_PT_DEFAULT 1 1 1 &status_ |> ignore
 
-            // Destroy the DTWAIN_ARRAYs
-            api_func.DTWAIN_ArrayDestroy(allcaps);
-            api_func.DTWAIN_ArrayDestroy(cap_array);
+                    TwainAPI.DTWAIN_SysDestroy() |> ignore
 
-            // Now acquire to a bmp file
-            c_string = CString::new("rust.bmp").unwrap();
-            api_func.DTWAIN_AcquireFileA(twain_source, c_string.as_ptr(), DTwainAPI::DTWAIN_BMP, DTwainAPI::DTWAIN_USELONGNAME,
-                                         DTwainAPI::DTWAIN_PT_DEFAULT, 1, 1, 1, ptr::null_mut());
-        }
-        // Close down DTWAIN
-        api_func.DTWAIN_SysDestroy();
-    }
-    Ok(())
-}
+                    0  // success
+        with
+        | ex ->
+            printfn "Error: %s" ex.Message
+            1  // failure
+
+    // Unload the DLL before exiting (no 'finally' used)
+    TwainAPI.Unload()
+    printfn "DLL unloaded."
+    printfn "%d" TwainAPI.DTWAIN_BMP
+
+    // Return the appropriate exit code
+    exitCode
 ```
