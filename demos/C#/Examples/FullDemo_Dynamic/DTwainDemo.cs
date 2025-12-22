@@ -70,14 +70,14 @@ namespace TWAINDemo
         private Boolean initialized;
         private TwainAPI.DTwainCallback theCallback;
 
-        public static Dynarithmic.TwainAPI api = null; 
+        public static Dynarithmic.TwainAPI TwainAPI = null; 
 
         public nint CallbackProc(nint wParam, nint lParam, nint UserData)
         {
             switch (wParam)
             {
-                case Dynarithmic.Constants.DTWAIN_TN_QUERYPAGEDISCARD:
-                    DIBDisplayerDlg2 sDIBDlg = new DIBDisplayerDlg2(api.DTWAIN_GetCurrentAcquiredImage(SelectedSource));
+                case TwainAPI.DTWAIN_TN_QUERYPAGEDISCARD:
+                    DIBDisplayerDlg2 sDIBDlg = new DIBDisplayerDlg2(TwainAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource));
                     if (sDIBDlg.ShowDialog() == DialogResult.Cancel)
                         return 0;
                     break;
@@ -90,14 +90,14 @@ namespace TWAINDemo
             initialized = false;
             InitializeComponent();
 
-            string defaultLib = "dtwain32ud.dll";
+            string defaultLib = "dtwain32u.dll";
             if (IntPtr.Size == 8)
                 defaultLib = "dtwain64u.dll";
 
-            api = new Dynarithmic.TwainAPI(defaultLib);
+            TwainAPI = new Dynarithmic.TwainAPI(defaultLib);
 
             sOrigTitle = this.Text;
-            DTWAIN_HANDLE handle = api.DTWAIN_SysInitialize();
+            DTWAIN_HANDLE handle = TwainAPI.DTWAIN_SysInitialize();
             if (handle == IntPtr.Zero)
             {
                 initialized = false;
@@ -107,15 +107,15 @@ namespace TWAINDemo
             {
                 initialized = true;
                 SelectedSource = IntPtr.Zero;
-                if (api.DTWAIN_IsTwainAvailable() == 0)
+                if (TwainAPI.DTWAIN_IsTwainAvailable() == 0)
                 {
                     SelectSource.Enabled = false;
                     SelectSourceByNameBox.Enabled = false;
                 }
             }
             theCallback += CallbackProc;
-            api.DTWAIN_EnableMsgNotify(1);
-            api.DTWAIN_SetCallback(theCallback, 0);
+            TwainAPI.DTWAIN_EnableMsgNotify(1);
+            TwainAPI.DTWAIN_SetCallback(theCallback, 0);
         }
 
         public Boolean InitializedOk() { return initialized; }
@@ -124,8 +124,8 @@ namespace TWAINDemo
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            if ( api != null )
-                api.DTWAIN_SysDestroy();
+            if ( TwainAPI != null )
+                TwainAPI.DTWAIN_SysDestroy();
             if (disposing)
             {
                 if (components != null)
@@ -486,7 +486,7 @@ namespace TWAINDemo
                                                  "DTWAIN Message", MessageBoxButtons.YesNo);
                 if (nReturn == DialogResult.Yes)
                 {
-                    api.DTWAIN_CloseSource(SelectedSource);
+                    TwainAPI.DTWAIN_CloseSource(SelectedSource);
                     SelectedSource = IntPtr.Zero;
                     // EnableSourceItems( FALSE );
                 }
@@ -495,15 +495,15 @@ namespace TWAINDemo
             }
 
             DTWAIN_ARRAY pArray = System.IntPtr.Zero;
-            if (api.DTWAIN_EnumSources(ref pArray) > 0)
+            if (TwainAPI.DTWAIN_EnumSources(ref pArray) > 0)
             {
                 DTWAIN_SOURCE src = IntPtr.Zero;
-                int nSources = api.DTWAIN_ArrayGetCount(pArray);
+                int nSources = TwainAPI.DTWAIN_ArrayGetCount(pArray);
                 StringBuilder szBuf = new StringBuilder(256);
                 for (int i = 0; i < nSources; ++i)
                 {
-                    api.DTWAIN_ArrayGetSourceAt(pArray, i, ref src);
-                    api.DTWAIN_GetSourceProductName(src, szBuf, 256);
+                    TwainAPI.DTWAIN_ArrayGetSourceAt(pArray, i, ref src);
+                    TwainAPI.DTWAIN_GetSourceProductName(src, szBuf, 256);
                     Console.WriteLine("The source name is " + szBuf);
                 }
             }
@@ -514,9 +514,9 @@ namespace TWAINDemo
             {
                 case 0:
                     // Select the source
-                    SelectedSource = api.DTWAIN_SelectSource2(IntPtr.Zero, null, 0, 0,
-                            Dynarithmic.Constants.DTWAIN_DLG_CENTER_SCREEN | Dynarithmic.Constants.DTWAIN_DLG_HIGHLIGHTFIRST | Dynarithmic.Constants.DTWAIN_DLG_SORTNAMES
-                            | Dynarithmic.Constants.DTWAIN_DLG_TOPMOSTWINDOW);
+                    SelectedSource = TwainAPI.DTWAIN_SelectSource2(IntPtr.Zero, null, 0, 0,
+                            TwainAPI.DTWAIN_DLG_CENTER_SCREEN | TwainAPI.DTWAIN_DLG_HIGHLIGHTFIRST | TwainAPI.DTWAIN_DLG_SORTNAMES
+                            | TwainAPI.DTWAIN_DLG_TOPMOSTWINDOW);
                     break;
 
                 case 1:
@@ -524,28 +524,28 @@ namespace TWAINDemo
                     DialogResult nResult = objSelectSourceByName.ShowDialog();
                     if (nResult == DialogResult.OK)
                     {
-                        SelectedSource = api.DTWAIN_SelectSourceByName(objSelectSourceByName.GetText());
+                        SelectedSource = TwainAPI.DTWAIN_SelectSourceByName(objSelectSourceByName.GetText());
                     }
                     break;
 
                 case 2:
-                    SelectedSource = api.DTWAIN_SelectDefaultSource();
+                    SelectedSource = TwainAPI.DTWAIN_SelectDefaultSource();
                     break;
 
                 case 3:
                     CustomSelectSource customSourceDlg = new CustomSelectSource();
                     DialogResult dResult = customSourceDlg.ShowDialog();
                     if (dResult == DialogResult.OK)
-                        SelectedSource = api.DTWAIN_SelectSourceByName(customSourceDlg.GetSourceName());
+                        SelectedSource = TwainAPI.DTWAIN_SelectSourceByName(customSourceDlg.GetSourceName());
                     break;
             }
             this.Enabled = true;  // re-enable the main form
 
             if (SelectedSource != IntPtr.Zero)
             {
-                if (api.DTWAIN_OpenSource(SelectedSource) != 0)
+                if (TwainAPI.DTWAIN_OpenSource(SelectedSource) != 0)
                 {
-                    api.DTWAIN_EnableFeeder(SelectedSource, 1);
+                    TwainAPI.DTWAIN_EnableFeeder(SelectedSource, 1);
                     SetCaptionToSourceName();
                     EnableSourceItems(true);
                     return;
@@ -559,13 +559,13 @@ namespace TWAINDemo
             }
             else
             {
-                int lastError = api.DTWAIN_GetLastError();
-                if (lastError == Dynarithmic.Constants.DTWAIN_ERR_SOURCESELECTION_CANCELED)
+                int lastError = TwainAPI.DTWAIN_GetLastError();
+                if (lastError == TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED)
                     MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK);
                 else
                 {
                     StringBuilder szErr = new StringBuilder(100);
-                    api.DTWAIN_GetErrorString(lastError, szErr, 100);
+                    TwainAPI.DTWAIN_GetErrorString(lastError, szErr, 100);
                     MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK);
                 }
                 SetCaptionToSourceName();
@@ -587,7 +587,7 @@ namespace TWAINDemo
             string sTitle = sOrigTitle;
             if (SelectedSource != IntPtr.Zero)
             {
-                api.DTWAIN_GetSourceProductName(SelectedSource, szSourceName, 255);
+                TwainAPI.DTWAIN_GetSourceProductName(SelectedSource, szSourceName, 255);
                 sTitle += " - ";
                 sTitle += szSourceName;
                 this.Text = sTitle;
@@ -609,7 +609,7 @@ namespace TWAINDemo
         {
             if (SelectedSource != IntPtr.Zero)
             {
-                api.DTWAIN_CloseSource(SelectedSource);
+                TwainAPI.DTWAIN_CloseSource(SelectedSource);
                 SelectedSource = IntPtr.Zero;
                 SetCaptionToSourceName();
                 EnableSourceItems(false);
@@ -625,36 +625,36 @@ namespace TWAINDemo
         {
             if (SelectedSource != IntPtr.Zero)
             {
-                api.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                      (int)Dynarithmic.Constants.DTWAIN_BP_AUTODISCARD_ANY,
+                TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
+                                                      (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
                                                       DiscardBlankPages.Checked ? 1 : 0);
 
-                DTWAIN_ARRAY acquireArray = api.DTWAIN_CreateAcquisitionArray();
+                DTWAIN_ARRAY acquireArray = TwainAPI.DTWAIN_CreateAcquisitionArray();
                 this.Enabled = false;
                 int status = 0;
                 int retVal = 0;
                 if (nWhich == 0)
-                    retVal = api.DTWAIN_AcquireNativeEx(SelectedSource, Dynarithmic.Constants.DTWAIN_PT_DEFAULT,
-                         Dynarithmic.Constants.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                    retVal = TwainAPI.DTWAIN_AcquireNativeEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
                 else
-                    retVal = api.DTWAIN_AcquireBufferedEx(SelectedSource, Dynarithmic.Constants.DTWAIN_PT_DEFAULT,
-                         Dynarithmic.Constants.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
+                    retVal = TwainAPI.DTWAIN_AcquireBufferedEx(SelectedSource, TwainAPI.DTWAIN_PT_DEFAULT,
+                         TwainAPI.DTWAIN_ACQUIREALL, UseSourceUI.Checked ? 1 : 0, 0, acquireArray, ref status);
                 if (retVal == 0)
                 {
-                    int lastError = api.DTWAIN_GetLastError();
-                    if (status == Dynarithmic.Constants.DTWAIN_TN_ACQUIRECANCELLED)
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
                         MessageBox.Show("No Images Acquired", "TWAIN Information");
                     else
                     {
                         StringBuilder errMsg = new StringBuilder(256);
-                        api.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
                         MessageBox.Show(errMsg.ToString(), "TWAIN Error");
                     }
                     this.Enabled = true;
                     return;
                 }
 
-                if (api.DTWAIN_ArrayGetCount(acquireArray) == 0)
+                if (TwainAPI.DTWAIN_ArrayGetCount(acquireArray) == 0)
                 {
                     MessageBox.Show("No Images Acquired", "");
                     this.Enabled = true;
@@ -700,9 +700,9 @@ namespace TWAINDemo
                 switch (nWhich)
                 {
                     case 0:
-                        FileFlags = Dynarithmic.Constants.DTWAIN_USELONGNAME | Dynarithmic.Constants.DTWAIN_USENATIVE | Dynarithmic.Constants.DTWAIN_CREATE_DIRECTORY;
-                        api.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
-                                                              (int)Dynarithmic.Constants.DTWAIN_BP_AUTODISCARD_ANY,
+                        FileFlags = TwainAPI.DTWAIN_USELONGNAME | TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_CREATE_DIRECTORY;
+                        TwainAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5,
+                                                              (int)TwainAPI.DTWAIN_BP_AUTODISCARD_ANY,
                                                               DiscardBlankPages.Checked ? 1 : 0);
                         FileTypeDlg fDlg = new FileTypeDlg();
                         fDlg.ShowDialog();
@@ -713,12 +713,12 @@ namespace TWAINDemo
                         break;
 
                     case 1:
-                        if (api.DTWAIN_IsFileXferSupported(SelectedSource, Dynarithmic.Constants.DTWAIN_ANYSUPPORT) == 0)
+                        if (TwainAPI.DTWAIN_IsFileXferSupported(SelectedSource, TwainAPI.DTWAIN_ANYSUPPORT) == 0)
                         {
                             MessageBox.Show("Sorry.  The selected driver does not have built-in file transfer support.");
                             return;
                         }
-                        if (api.DTWAIN_IsFileXferSupported(SelectedSource, Dynarithmic.Constants.DTWAIN_FF_BMP) == 0)
+                        if (TwainAPI.DTWAIN_IsFileXferSupported(SelectedSource, TwainAPI.DTWAIN_FF_BMP) == 0)
                         {
                             string sText = "Sorry.  This demo program only supports built-in BMP file transfers.\r\n";
                             sText += "However, the DTWAIN library will support all built-in formats if your driver\r\n";
@@ -727,19 +727,19 @@ namespace TWAINDemo
                             this.Enabled = true;
                             return;
                         }
-                        FileFlags = Dynarithmic.Constants.DTWAIN_USESOURCEMODE | Dynarithmic.Constants.DTWAIN_USELONGNAME;
-                        fileType = Dynarithmic.Constants.DTWAIN_FF_BMP;
+                        FileFlags = TwainAPI.DTWAIN_USESOURCEMODE | TwainAPI.DTWAIN_USELONGNAME;
+                        fileType = TwainAPI.DTWAIN_FF_BMP;
                         tFileName = ".\\IMAGE.BMP";
                         MessageBox.Show("The name of the image file that will be saved is IMAGE.BMP\n");
                         break;
                 }
 
-                bError = api.DTWAIN_AcquireFile(SelectedSource,
+                bError = TwainAPI.DTWAIN_AcquireFile(SelectedSource,
                                      tFileName,
                                      fileType,
                                      (int)FileFlags,
-                                     Dynarithmic.Constants.DTWAIN_PT_DEFAULT, /* Use default */
-                                     Dynarithmic.Constants.DTWAIN_ACQUIREALL, /* Get all pages */
+                                     TwainAPI.DTWAIN_PT_DEFAULT, /* Use default */
+                                     TwainAPI.DTWAIN_ACQUIREALL, /* Get all pages */
                                      UseSourceUI.Checked ? 1 : 0,
                                      1,/* Close Source when UI is closed */
                                      ref status
@@ -747,23 +747,23 @@ namespace TWAINDemo
 
                 if (bError == 0)
                 {
-                    int lastError = api.DTWAIN_GetLastError();
-                    if (status == Dynarithmic.Constants.DTWAIN_TN_ACQUIRECANCELLED)
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    if (status == TwainAPI.DTWAIN_TN_ACQUIRECANCELLED)
                         MessageBox.Show("No Images Acquired", "TWAIN Information");
                     else
                     {
                         StringBuilder errMsg = new StringBuilder(256);
-                        api.DTWAIN_GetErrorString(lastError, errMsg, 256);
+                        TwainAPI.DTWAIN_GetErrorString(lastError, errMsg, 256);
                         MessageBox.Show(errMsg.ToString(), "TWAIN Error");
                     }
                     this.Enabled = true;
                     return;
                 }
                 else
-                if (status == Dynarithmic.Constants.DTWAIN_TN_ACQUIREDONE)
+                if (status == TwainAPI.DTWAIN_TN_ACQUIREDONE)
                     MessageBox.Show("Image file saved successfully");
                 else
-                if (api.DTWAIN_GetSavedFilesCount(SelectedSource) == 0)
+                if (TwainAPI.DTWAIN_GetSavedFilesCount(SelectedSource) == 0)
                     MessageBox.Show("No Images acquired");
                 else
                     MessageBox.Show("The acquisition returned a status of " + status.ToString());
@@ -782,26 +782,26 @@ namespace TWAINDemo
 
         private void LoggingOptions_Click(object sender, EventArgs e)
         {
-            uint LogFlags = Dynarithmic.Constants.DTWAIN_LOG_ALL & ~(Dynarithmic.Constants.DTWAIN_LOG_ISTWAINMSG | Dynarithmic.Constants.DTWAIN_LOG_USEFILE | Dynarithmic.Constants.DTWAIN_LOG_DEBUGMONITOR | Dynarithmic.Constants.DTWAIN_LOG_CONSOLE);
+            uint LogFlags = TwainAPI.DTWAIN_LOG_ALL & ~(TwainAPI.DTWAIN_LOG_ISTWAINMSG | TwainAPI.DTWAIN_LOG_USEFILE | TwainAPI.DTWAIN_LOG_DEBUGMONITOR | TwainAPI.DTWAIN_LOG_CONSOLE);
             LogFileSelectionDlg logDlg = new LogFileSelectionDlg();
             DialogResult nResult = logDlg.ShowDialog();
             if (nResult == DialogResult.OK)
             {
                 int debugOption = logDlg.GetDebugOption();
-                api.DTWAIN_SetTwainLog(0, "");
+                TwainAPI.DTWAIN_SetTwainLog(0, "");
                 switch (debugOption)
                 {
                     case 0:
                     case 1:
                         break;
                     case 2:
-                        api.DTWAIN_SetTwainLog(LogFlags | Dynarithmic.Constants.DTWAIN_LOG_USEFILE, logDlg.GetFileName());
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_USEFILE, logDlg.GetFileName());
                         break;
                     case 3:
-                        api.DTWAIN_SetTwainLog(LogFlags | Dynarithmic.Constants.DTWAIN_LOG_DEBUGMONITOR, "");
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_DEBUGMONITOR, "");
                         break;
                     case 4:
-                        api.DTWAIN_SetTwainLog(LogFlags | Dynarithmic.Constants.DTWAIN_LOG_CONSOLEWITHHANDLER, "");
+                        TwainAPI.DTWAIN_SetTwainLog(LogFlags | TwainAPI.DTWAIN_LOG_CONSOLEWITHHANDLER, "");
                         break;
                 }
             }
@@ -880,7 +880,7 @@ namespace TWAINDemo
 
         private void load_language(string language)
         {
-            int retVal = api.DTWAIN_LoadCustomStringResourcesA(language);
+            int retVal = TwainAPI.DTWAIN_LoadCustomStringResourcesA(language);
             if (retVal == 0)
                 MessageBox.Show("Could not load language resource " + language, "Error", MessageBoxButtons.OK);
             else

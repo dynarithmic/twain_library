@@ -22,7 +22,7 @@ namespace TWAINDemo
 
         private void DisplayTheDib()
         {
-            this.dibBox2.Image = Bitmap.FromHbitmap(DTwainDemo.api.DTWAIN_ConvertDIBToBitmap(theDib, System.IntPtr.Zero), System.IntPtr.Zero);
+            this.dibBox2.Image = Bitmap.FromHbitmap(DTwainDemo.TwainAPI.DTWAIN_ConvertDIBToBitmap(theDib, System.IntPtr.Zero), System.IntPtr.Zero);
             curBMP = (Bitmap)this.dibBox2.Image;
         }
 

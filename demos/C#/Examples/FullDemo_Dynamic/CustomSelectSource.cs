@@ -22,8 +22,8 @@ namespace TWAINDemo
         {
             sourceSelected = false;
             DTWAIN_ARRAY SourceArray = IntPtr.Zero;
-            DTwainDemo.api.DTWAIN_EnumSources(ref SourceArray);
-            int nCount = DTwainDemo.api.DTWAIN_ArrayGetCount(SourceArray);
+            DTwainDemo.TwainAPI.DTWAIN_EnumSources(ref SourceArray);
+            int nCount = DTwainDemo.TwainAPI.DTWAIN_ArrayGetCount(SourceArray);
             if (nCount <= 0)
                 Close();
 
@@ -32,8 +32,8 @@ namespace TWAINDemo
             for (int i = 0; i < nCount; ++i)
             {
                 StringBuilder szName = new StringBuilder(256);
-                DTwainDemo.api.DTWAIN_ArrayGetSourceAt(SourceArray, i, ref CurSource);
-                DTwainDemo.api.DTWAIN_GetSourceProductName(CurSource, szName, 255);
+                DTwainDemo.TwainAPI.DTWAIN_ArrayGetSourceAt(SourceArray, i, ref CurSource);
+                DTwainDemo.TwainAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255);
                 listSources.Items.Add(szName.ToString());
             }
             listSources.SelectedIndex = 0;

@@ -327,19 +327,18 @@ Public Class VB_FullDemo
         sOrigTitle = Me.Text
 
         ' Load the 32-bit or 64-bit DLL, depending on the application type
-        If IntPtr.Size = 8 Then
-            DTWAINAPI = New DTWAINAPI("dtwain64u.dll")
-        Else
-            DTWAINAPI = New DTWAINAPI("dtwain32u.dll")
-        End If
-
         Try
-            TwainOK = DTWAINAPI.DTWAIN_IsTwainAvailable()
+            If IntPtr.Size = 8 Then
+                DTWAINAPI = New DTWAINAPI("dtwain64u.dll")
+            Else
+                DTWAINAPI = New DTWAINAPI("dtwain32u.dll")
+            End If
         Catch ex As System.DllNotFoundException
             MessageBox.Show(ex.Message)
             dllExists = False
             Dispose()
         End Try
+        TwainOK = DTWAINAPI.DTWAIN_IsTwainAvailable()
         SelectedSource = 0
         If TwainOK <> 0 Then
             TwainHandle = DTWAINAPI.DTWAIN_SysInitialize()
