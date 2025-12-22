@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Dynarithmic;
 
-namespace FullDemo
+namespace TWAINDemo
 {
     public partial class DIBDisplayerDlg2 : Form
     {

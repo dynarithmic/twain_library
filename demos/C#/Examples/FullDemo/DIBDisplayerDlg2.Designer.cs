@@ -1,5 +1,5 @@
 ﻿
-namespace FullDemo
+namespace TWAINDemo
 {
     partial class DIBDisplayerDlg2
     {

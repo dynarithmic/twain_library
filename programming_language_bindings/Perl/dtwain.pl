@@ -1653,6 +1653,7 @@ use constant DTWAIN_CONSTANT_CAP => 77;
 use constant DTWAIN_CONSTANT_ICAP => 78;
 use constant DTWAIN_CONSTANT_DTWAIN_CONT => 79;
 use constant DTWAIN_CONSTANT_CAPCODE_MAP => 80;
+use constant DTWAIN_CONSTANT_ACAP => 81;
 use constant DTWAIN_USERRES_START => 20000;
 use constant DTWAIN_USERRES_MAXSIZE => 8192;
 use constant DTWAIN_APIHANDLEOK => 1;

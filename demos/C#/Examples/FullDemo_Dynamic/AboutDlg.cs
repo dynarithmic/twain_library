@@ -18,9 +18,9 @@ namespace TWAINDemo
 
         private void AboutDlg_Load(object sender, EventArgs e)
         {
-            int nChars = DTwainDemo.api.DTWAIN_GetVersionInfo(null, -1);
+            int nChars = DTwainDemo.TwainAPI.DTWAIN_GetVersionInfo(null, -1);
             StringBuilder szInfo = new StringBuilder(nChars);
-            DTwainDemo.api.DTWAIN_GetVersionInfo(szInfo, nChars);
+            DTwainDemo.TwainAPI.DTWAIN_GetVersionInfo(szInfo, nChars);
             edInfo.Text = szInfo.ToString().Replace("\n", "\r\n");
         }
     }

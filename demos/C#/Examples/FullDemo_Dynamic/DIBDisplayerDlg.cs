@@ -37,7 +37,7 @@ namespace TWAINDemo
             // Set up acquisition combo box
             nCurrentAcquisition = 0;
             nCurDib = 0;
-            int nCount = DTwainDemo.api.DTWAIN_GetNumAcquisitions(AcquireArray);
+            int nCount = DTwainDemo.TwainAPI.DTWAIN_GetNumAcquisitions(AcquireArray);
             for (int i = 1; i <= nCount; ++i)
                 this.cmbAcquisition.Items.Add(i.ToString());
             this.cmbAcquisition.SelectedIndex = 0;
@@ -48,7 +48,7 @@ namespace TWAINDemo
 
         private void EnablePageButtons()
         {
-            int nCount = DTwainDemo.api.DTWAIN_GetNumAcquiredImages(AcquireArray, nCurrentAcquisition);
+            int nCount = DTwainDemo.TwainAPI.DTWAIN_GetNumAcquiredImages(AcquireArray, nCurrentAcquisition);
             this.buttonNext.Enabled = (nCurDib < nCount - 1);
             this.buttonPrev.Enabled = (nCurDib > 0);
 
@@ -65,7 +65,7 @@ namespace TWAINDemo
 
         private static Bitmap BitmapFromDIB(IntPtr pDIB)
         {
-            Bitmap theBitmap = Bitmap.FromHbitmap(DTwainDemo.api.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero);
+            Bitmap theBitmap = Bitmap.FromHbitmap(DTwainDemo.TwainAPI.DTWAIN_ConvertDIBToBitmap(pDIB, System.IntPtr.Zero), System.IntPtr.Zero);
             return theBitmap;
         }
 
@@ -89,7 +89,7 @@ namespace TWAINDemo
             }
             else
             {
-                DTWAIN_HANDLE dibToUse = DTwainDemo.api.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
+                DTWAIN_HANDLE dibToUse = DTwainDemo.TwainAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib);
                 if (dibToUse == System.IntPtr.Zero)
                 {
                     MessageBox.Show("Image was discarded or not available", "DTWAIN Message", MessageBoxButtons.OK);
@@ -125,7 +125,7 @@ namespace TWAINDemo
         {
             foreach (KeyValuePair<DibInfo, Bitmap> pair in DibDictionary)
                 DeleteObject(pair.Value.GetHbitmap());
-            DTwainDemo.api.DTWAIN_DestroyAcquisitionArray(AcquireArray, 1);
+            DTwainDemo.TwainAPI.DTWAIN_DestroyAcquisitionArray(AcquireArray, 1);
         }
     }
 }

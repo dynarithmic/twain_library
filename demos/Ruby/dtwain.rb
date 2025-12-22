@@ -21,8 +21,120 @@
 
 #!/usr/bin/env ruby
 require 'fiddle'
+require 'fiddle/pack'
 
 class DTWAINAPI
+    class TW_IDENTITY
+      SIZE = 120
+
+      OFFSETS = {
+        id:                0,
+        version_major:     4,
+        version_minor:     6,
+        version_language:  8,
+        version_country:   10,
+        version_info:      12,
+        protocol_major:    46,
+        protocol_minor:    48,
+        supported_groups:  50,
+        manufacturer:      54,
+        product_family:    88,
+        product_name:      122
+      }
+
+      def initialize
+        @ptr = Fiddle::Pointer.malloc(SIZE)
+        @ptr[0, SIZE] = "\0" * SIZE
+      end
+
+      def pointer
+        @ptr
+      end
+
+      # ---- Integer helpers ----
+      def read_uint16(offset)
+        @ptr[offset, 2].unpack1('S')
+      end
+
+      def write_uint16(offset, value)
+        @ptr[offset, 2] = [value].pack('S')
+      end
+
+      def read_uint32(offset)
+        @ptr[offset, 4].unpack1('L')
+      end
+
+      def write_uint32(offset, value)
+        @ptr[offset, 4] = [value].pack('L')
+      end
+
+      # ---- String helpers (TW_STR32) ----
+      def read_str32(offset)
+        @ptr[offset, 34].split("\0", 2).first
+      end
+
+      def write_str32(offset, value)
+        buf = value.encode('ASCII')[0, 33] + "\0"
+        @ptr[offset, 34] = buf.ljust(34, "\0")
+      end
+
+      # ---- Accessors ----
+      def id
+        read_uint32(0)
+      end
+
+      def id=(v)
+        write_uint32(0, v)
+      end
+
+      def protocol_major
+        read_uint16(10)
+      end
+
+      def protocol_major=(v)
+        write_uint16(10, v)
+      end
+
+      def protocol_minor
+        read_uint16(12)
+      end
+
+      def protocol_minor=(v)
+        write_uint16(12, v)
+      end
+
+      def supported_groups
+        read_uint32(14)
+      end
+
+      def supported_groups=(v)
+        write_uint32(14, v)
+      end
+
+      def manufacturer
+        read_str32(18)
+      end
+
+      def manufacturer=(v)
+        write_str32(18, v)
+      end
+
+      def product_family
+        read_str32(52)
+      end
+
+      def product_family=(v)
+        write_str32(52, v)
+      end
+
+      def product_name
+        read_str32(86)
+      end
+
+      def product_name=(v)
+        write_str32(86, v)
+      end
+    end
    attr_reader :DTWAIN_AcquireAudioFile
    attr_reader :DTWAIN_AcquireAudioFileA
    attr_reader :DTWAIN_AcquireAudioFileW
@@ -2769,6 +2881,7 @@ class DTWAINAPI
    DTWAIN_CONSTANT_ICAP = 78
    DTWAIN_CONSTANT_DTWAIN_CONT = 79
    DTWAIN_CONSTANT_CAPCODE_MAP = 80
+   DTWAIN_CONSTANT_ACAP = 81
    DTWAIN_USERRES_START = 20000
    DTWAIN_USERRES_MAXSIZE = 8192
    DTWAIN_APIHANDLEOK = 1

@@ -25,6 +25,40 @@ import ctypes as ct
 import struct 
 import os
 
+import ctypes
+
+# --- Basic TWAIN types ---
+TW_UINT16 = ct.c_uint16
+TW_UINT32 = ct.c_uint32
+TW_INT16  = ct.c_int16
+
+TW_STR32 = ct.c_char * 34  # TW_STR32 is 34 bytes
+
+# --- TW_VERSION ---
+class TW_VERSION(ct.Structure):
+    _pack_ = 1
+    _fields_ = [
+        ("MajorNum", TW_UINT16),
+        ("MinorNum", TW_UINT16),
+        ("Language", TW_UINT16),
+        ("Country",  TW_UINT16),
+        ("Info",     ct.c_char * 34),
+    ]
+
+# --- TW_IDENTITY ---
+class TW_IDENTITY(ct.Structure):
+    _pack_ = 1
+    _fields_ = [
+        ("Id",              TW_UINT32),
+        ("Version",         TW_VERSION),
+        ("ProtocolMajor",   TW_UINT16),
+        ("ProtocolMinor",   TW_UINT16),
+        ("SupportedGroups", TW_UINT32),
+        ("Manufacturer",    TW_STR32),
+        ("ProductFamily",   TW_STR32),
+        ("ProductName",     TW_STR32),
+    ]
+
 DTWAIN_FF_TIFF = 0
 DTWAIN_FF_PICT = 1
 DTWAIN_FF_BMP = 2
@@ -1659,6 +1693,7 @@ DTWAIN_CONSTANT_CAP = 77
 DTWAIN_CONSTANT_ICAP = 78
 DTWAIN_CONSTANT_DTWAIN_CONT = 79
 DTWAIN_CONSTANT_CAPCODE_MAP = 80
+DTWAIN_CONSTANT_ACAP = 81
 DTWAIN_USERRES_START = 20000
 DTWAIN_USERRES_MAXSIZE = 8192
 DTWAIN_APIHANDLEOK = 1
@@ -3245,7 +3280,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCurrentFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCurrentPageNum.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetCurrentRetryCount.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_GetCurrentTwainTriplet.argtypes = [ct.c_void_p, ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_int64)]
+     theDLL.DTWAIN_GetCurrentTwainTriplet.argtypes = [ct.POINTER(TW_IDENTITY), ct.POINTER(TW_IDENTITY), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_int64)]
      theDLL.DTWAIN_GetCustomDSData.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ubyte), ct.c_ulong, ct.POINTER(ct.c_ulong), ct.c_long]
      theDLL.DTWAIN_GetDSMFullName.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
@@ -3401,7 +3436,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSourceDetailsA.argtypes = [ct.c_char_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSourceDetailsW.argtypes = [ct.c_wchar_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSourceID.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_GetSourceIDEx.argtypes = [ct.c_void_p, ct.c_void_p]
+     theDLL.DTWAIN_GetSourceIDEx.argtypes = [ct.c_void_p, ct.POINTER(TW_IDENTITY)]
      theDLL.DTWAIN_GetSourceManufacturer.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSourceManufacturerA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceManufacturerW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
@@ -3426,7 +3461,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetTimeDate.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetTimeDateA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetTimeDateW.argtypes = [ct.c_void_p, ct.c_wchar_p]
-     theDLL.DTWAIN_GetTwainAppIDEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_GetTwainAppIDEx.argtypes = [ct.POINTER(TW_IDENTITY)]
      theDLL.DTWAIN_GetTwainAvailabilityEx.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainAvailabilityExA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetTwainAvailabilityExW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -5440,7 +5475,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCurrentFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCurrentPageNum.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetCurrentRetryCount.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_GetCurrentTwainTriplet.argtypes = [ct.c_void_p, ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_int64)]
+     theDLL.DTWAIN_GetCurrentTwainTriplet.argtypes = [ct.POINTER(TW_IDENTITY), ct.POINTER(TW_IDENTITY), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_int64)]
      theDLL.DTWAIN_GetCustomDSData.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ubyte), ct.c_ulong, ct.POINTER(ct.c_ulong), ct.c_long]
      theDLL.DTWAIN_GetDSMFullName.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
@@ -5596,7 +5631,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSourceDetailsA.argtypes = [ct.c_char_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSourceDetailsW.argtypes = [ct.c_wchar_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSourceID.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_GetSourceIDEx.argtypes = [ct.c_void_p, ct.c_void_p]
+     theDLL.DTWAIN_GetSourceIDEx.argtypes = [ct.c_void_p, ct.POINTER(TW_IDENTITY)]
      theDLL.DTWAIN_GetSourceManufacturer.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceManufacturerA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceManufacturerW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
@@ -5621,7 +5656,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetTimeDate.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetTimeDateA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetTimeDateW.argtypes = [ct.c_void_p, ct.c_wchar_p]
-     theDLL.DTWAIN_GetTwainAppIDEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_GetTwainAppIDEx.argtypes = [ct.POINTER(TW_IDENTITY)]
      theDLL.DTWAIN_GetTwainAvailabilityEx.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetTwainAvailabilityExA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetTwainAvailabilityExW.argtypes = [ct.c_wchar_p, ct.c_long]

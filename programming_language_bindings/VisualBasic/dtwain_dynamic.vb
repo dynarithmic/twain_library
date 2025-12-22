@@ -26,6 +26,9 @@ Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports System.Text
+Imports System.IO
+Imports System.ComponentModel
+
 
 Namespace Dynarithmic
     Friend Module NativeMethods
@@ -49,16 +52,56 @@ Namespace Dynarithmic
         Implements IDisposable
 
         Private _module As IntPtr
+        Private _sysErrorMessage As String = ""
 
         Public Sub New(dllPath As String)
-            _module = NativeMethods.LoadLibrary(dllPath)
-            If _module = IntPtr.Zero Then
-                Throw New DllNotFoundException(
-                $"Failed to load {dllPath}, error={Marshal.GetLastWin32Error()}"
-            )
+            Dim dll32() As String = {"dtwain32u.dll", "dtwain32ud.dll"}
+            Dim dll64() As String = {"dtwain64u.dll", "dtwain64ud.dll"}
+            Dim filename As String = Path.GetFileName(dllPath).ToLower()
+
+            Dim index1 As Integer = Array.IndexOf(dll32, filename)
+            Dim index2 As Integer = Array.IndexOf(dll64, filename)
+
+            Dim is32Bit As Boolean = False
+            If IntPtr.Size = 4 Then
+                is32Bit = True
+            End If
+
+            Dim is64Bit As Boolean = False
+            If IntPtr.Size = 8 Then
+                is64Bit = True
+            End If
+
+            Dim joinedNames As String
+            If is32Bit Then
+                joinedNames = String.Join(", ", dll32)
+            Else
+                joinedNames = String.Join(", ", dll64)
+            End If
+
+            If index1 = -1 And index2 = -1 Then
+                _sysErrorMessage = "DTWAIN DLL file name " & filename &
+                  " is not valid (must be one of the following: [" & joinedNames & "])"
+            End If
+            If String.IsNullOrEmpty(_sysErrorMessage) And is64Bit And index1 <> -1 Then
+                _sysErrorMessage = "Cannot load 32-bit DTWAIN DLL in a 64-bit process"
+            End If
+            If String.IsNullOrEmpty(_sysErrorMessage) And is32Bit And index2 <> -1 Then
+                _sysErrorMessage = "Cannot load 64-bit DTWAIN DLL in a 32-bit process"
+            End If
+            If String.IsNullOrEmpty(_sysErrorMessage) Then
+                _module = NativeMethods.LoadLibrary(dllPath)
+                If _module = IntPtr.Zero Then
+                    Dim lastError = Marshal.GetLastWin32Error()
+                    Dim message As String = New Win32Exception(CInt(lastError)).Message
+                    _sysErrorMessage = "Failed to load " & dllPath & ", error=" & Marshal.GetLastWin32Error()
+                End If
             End If
         End Sub
 
+        Public Function GetErrorMessage() As String
+            Return _sysErrorMessage
+        End Function
         Public Sub Bind(target As Object)
             Dim t = target.GetType()
 
@@ -138,7 +181,19 @@ Namespace Dynarithmic
 
         Public Sub New(dllPath As String)
             MyBase.New(dllPath)
-            MyBase.Bind(api)
+            Dim errMsg As String = MyBase.GetErrorMessage()
+            Dim isEmpty As Boolean = String.IsNullOrEmpty(errMsg)
+            If Not isEmpty Then
+                If errMsg.StartsWith("Failed") Then
+                    Throw New DllNotFoundException(errMsg)
+                End If
+                Throw New ArgumentOutOfRangeException(NameOf(dllPath), errMsg)
+            End If
+            Try
+                MyBase.Bind(api)
+            Catch ex As Exception
+                Throw ex
+            End Try
         End Sub
 
         Structure DTWAIN_POINTAPI
@@ -582,7 +637,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_ROUNDNEAREST As Integer = 0
         Public Const DTWAIN_ROUNDUP As Integer = 1
         Public Const DTWAIN_ROUNDDOWN As Integer = 2
-        Public Const DTWAIN_FLOATDELTA As Double = (+0.00000001)
+        Public Const DTWAIN_FLOATDELTA As Double = (+1.0e-8)
         Public Const DTWAIN_OR_ROT0 As Integer = 0
         Public Const DTWAIN_OR_ROT90 As Integer = 1
         Public Const DTWAIN_OR_ROT180 As Integer = 2
@@ -590,16 +645,16 @@ Namespace Dynarithmic
         Public Const DTWAIN_OR_PORTRAIT As Integer = DTWAIN_OR_ROT0
         Public Const DTWAIN_OR_LANDSCAPE As Integer = DTWAIN_OR_ROT270
         Public Const DTWAIN_OR_ANYROTATION As Integer = (-1)
-        Public Const DTWAIN_CO_GET As Integer = &H1
-        Public Const DTWAIN_CO_SET As Integer = &H2
-        Public Const DTWAIN_CO_GETDEFAULT As Integer = &H4
-        Public Const DTWAIN_CO_GETCURRENT As Integer = &H8
-        Public Const DTWAIN_CO_RESET As Integer = &H10
-        Public Const DTWAIN_CO_SETCONSTRAINT As Integer = &H20
-        Public Const DTWAIN_CO_CONSTRAINABLE As Integer = &H40
-        Public Const DTWAIN_CO_GETHELP As Integer = &H100
-        Public Const DTWAIN_CO_GETLABEL As Integer = &H200
-        Public Const DTWAIN_CO_GETLABELENUM As Integer = &H400
+        Public Const DTWAIN_CO_GET As Integer = &H0001
+        Public Const DTWAIN_CO_SET As Integer = &H0002
+        Public Const DTWAIN_CO_GETDEFAULT As Integer = &H0004
+        Public Const DTWAIN_CO_GETCURRENT As Integer = &H0008
+        Public Const DTWAIN_CO_RESET As Integer = &H0010
+        Public Const DTWAIN_CO_SETCONSTRAINT As Integer = &H0020
+        Public Const DTWAIN_CO_CONSTRAINABLE As Integer = &H0040
+        Public Const DTWAIN_CO_GETHELP As Integer = &H0100
+        Public Const DTWAIN_CO_GETLABEL As Integer = &H0200
+        Public Const DTWAIN_CO_GETLABELENUM As Integer = &H0400
         Public Const DTWAIN_CNTYAFGHANISTAN As Integer = 1001
         Public Const DTWAIN_CNTYALGERIA As Integer = 213
         Public Const DTWAIN_CNTYAMERICANSAMOA As Integer = 684
@@ -1090,21 +1145,21 @@ Namespace Dynarithmic
         Public Const DTWAIN_PM_SINGLESTRING As Integer = 0
         Public Const DTWAIN_PM_MULTISTRING As Integer = 1
         Public Const DTWAIN_PM_COMPOUNDSTRING As Integer = 2
-        Public Const DTWAIN_TWTY_INT8 As Integer = &H0
-        Public Const DTWAIN_TWTY_INT16 As Integer = &H1
-        Public Const DTWAIN_TWTY_INT32 As Integer = &H2
-        Public Const DTWAIN_TWTY_UINT8 As Integer = &H3
-        Public Const DTWAIN_TWTY_UINT16 As Integer = &H4
-        Public Const DTWAIN_TWTY_UINT32 As Integer = &H5
-        Public Const DTWAIN_TWTY_BOOL As Integer = &H6
-        Public Const DTWAIN_TWTY_FIX32 As Integer = &H7
-        Public Const DTWAIN_TWTY_FRAME As Integer = &H8
-        Public Const DTWAIN_TWTY_STR32 As Integer = &H9
-        Public Const DTWAIN_TWTY_STR64 As Integer = &HA
-        Public Const DTWAIN_TWTY_STR128 As Integer = &HB
-        Public Const DTWAIN_TWTY_STR255 As Integer = &HC
-        Public Const DTWAIN_TWTY_STR1024 As Integer = &HD
-        Public Const DTWAIN_TWTY_UNI512 As Integer = &HE
+        Public Const DTWAIN_TWTY_INT8 As Integer = &H0000
+        Public Const DTWAIN_TWTY_INT16 As Integer = &H0001
+        Public Const DTWAIN_TWTY_INT32 As Integer = &H0002
+        Public Const DTWAIN_TWTY_UINT8 As Integer = &H0003
+        Public Const DTWAIN_TWTY_UINT16 As Integer = &H0004
+        Public Const DTWAIN_TWTY_UINT32 As Integer = &H0005
+        Public Const DTWAIN_TWTY_BOOL As Integer = &H0006
+        Public Const DTWAIN_TWTY_FIX32 As Integer = &H0007
+        Public Const DTWAIN_TWTY_FRAME As Integer = &H0008
+        Public Const DTWAIN_TWTY_STR32 As Integer = &H0009
+        Public Const DTWAIN_TWTY_STR64 As Integer = &H000A
+        Public Const DTWAIN_TWTY_STR128 As Integer = &H000B
+        Public Const DTWAIN_TWTY_STR255 As Integer = &H000C
+        Public Const DTWAIN_TWTY_STR1024 As Integer = &H000D
+        Public Const DTWAIN_TWTY_UNI512 As Integer = &H000E
         Public Const DTWAIN_EI_BARCODEX As Integer = &H1200
         Public Const DTWAIN_EI_BARCODEY As Integer = &H1201
         Public Const DTWAIN_EI_BARCODETEXT As Integer = &H1202
@@ -1210,8 +1265,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_LOG_CONSOLE As UInteger = &H800000
         Public Const DTWAIN_LOG_DEBUGMONITOR As UInteger = &H1000000
         Public Const DTWAIN_LOG_USEWINDOW As UInteger = &H2000000
-        Public Const DTWAIN_LOG_CREATEDIRECTORY As UInteger = &H4000000
-        Public Const DTWAIN_LOG_CONSOLEWITHHANDLER As UInteger = (&H8000000 Or DTWAIN_LOG_CONSOLE)
+        Public Const DTWAIN_LOG_CREATEDIRECTORY As UInteger = &H04000000
+        Public Const DTWAIN_LOG_CONSOLEWITHHANDLER As UInteger = (&H08000000 Or DTWAIN_LOG_CONSOLE)
         Public Const DTWAIN_LOG_ALL As UInteger = (DTWAIN_LOG_DECODE_SOURCE Or DTWAIN_LOG_DECODE_DEST Or DTWAIN_LOG_DECODE_TWEVENT Or DTWAIN_LOG_DECODE_TWMEMREF Or DTWAIN_LOG_CALLSTACK Or DTWAIN_LOG_ISTWAINMSG Or DTWAIN_LOG_INITFAILURE Or DTWAIN_LOG_LOWLEVELTWAIN Or DTWAIN_LOG_NOTIFICATIONS Or DTWAIN_LOG_MISCELLANEOUS Or DTWAIN_LOG_DTWAINERRORS Or DTWAIN_LOG_DECODE_BITMAP)
         Public Const DTWAIN_LOG_ALL_APPEND As UInteger = &HFFFFFFFFUI
         Public Const DTWAIN_TEMPDIR_CREATEDIRECTORY As UInteger = DTWAIN_LOG_CREATEDIRECTORY
@@ -1336,27 +1391,27 @@ Namespace Dynarithmic
         Public Const DTWAIN_MANDUP_SIDE2RESCAN As Integer = 3
         Public Const DTWAIN_MANDUP_RESCANALL As Integer = 4
         Public Const DTWAIN_MANDUP_PAGEMISSING As Integer = 5
-        Public Const DTWAIN_DEMODLL_VERSION As Integer = &H1
-        Public Const DTWAIN_UNLICENSED_VERSION As Integer = &H2
-        Public Const DTWAIN_COMPANY_VERSION As Integer = &H4
-        Public Const DTWAIN_GENERAL_VERSION As Integer = &H8
-        Public Const DTWAIN_DEVELOP_VERSION As Integer = &H10
-        Public Const DTWAIN_JAVA_VERSION As Integer = &H20
-        Public Const DTWAIN_TOOLKIT_VERSION As Integer = &H40
-        Public Const DTWAIN_LIMITEDDLL_VERSION As Integer = &H80
-        Public Const DTWAIN_STATICLIB_VERSION As Integer = &H100
-        Public Const DTWAIN_STATICLIB_STDCALL_VERSION As Integer = &H200
-        Public Const DTWAIN_PDF_VERSION As Integer = &H10000
-        Public Const DTWAIN_TWAINSAVE_VERSION As Integer = &H20000
-        Public Const DTWAIN_OCR_VERSION As Integer = &H40000
-        Public Const DTWAIN_BARCODE_VERSION As Integer = &H80000
-        Public Const DTWAIN_ACTIVEX_VERSION As Integer = &H100000
-        Public Const DTWAIN_32BIT_VERSION As Integer = &H200000
-        Public Const DTWAIN_64BIT_VERSION As Integer = &H400000
-        Public Const DTWAIN_UNICODE_VERSION As Integer = &H800000
-        Public Const DTWAIN_OPENSOURCE_VERSION As Integer = &H1000000
-        Public Const DTWAIN_CALLSTACK_LOGGING As Integer = &H2000000
-        Public Const DTWAIN_CALLSTACK_LOGGING_PLUS As Integer = &H4000000
+        Public Const DTWAIN_DEMODLL_VERSION As Integer = &H00000001
+        Public Const DTWAIN_UNLICENSED_VERSION As Integer = &H00000002
+        Public Const DTWAIN_COMPANY_VERSION As Integer = &H00000004
+        Public Const DTWAIN_GENERAL_VERSION As Integer = &H00000008
+        Public Const DTWAIN_DEVELOP_VERSION As Integer = &H00000010
+        Public Const DTWAIN_JAVA_VERSION As Integer = &H00000020
+        Public Const DTWAIN_TOOLKIT_VERSION As Integer = &H00000040
+        Public Const DTWAIN_LIMITEDDLL_VERSION As Integer = &H00000080
+        Public Const DTWAIN_STATICLIB_VERSION As Integer = &H00000100
+        Public Const DTWAIN_STATICLIB_STDCALL_VERSION As Integer = &H00000200
+        Public Const DTWAIN_PDF_VERSION As Integer = &H00010000
+        Public Const DTWAIN_TWAINSAVE_VERSION As Integer = &H00020000
+        Public Const DTWAIN_OCR_VERSION As Integer = &H00040000
+        Public Const DTWAIN_BARCODE_VERSION As Integer = &H00080000
+        Public Const DTWAIN_ACTIVEX_VERSION As Integer = &H00100000
+        Public Const DTWAIN_32BIT_VERSION As Integer = &H00200000
+        Public Const DTWAIN_64BIT_VERSION As Integer = &H00400000
+        Public Const DTWAIN_UNICODE_VERSION As Integer = &H00800000
+        Public Const DTWAIN_OPENSOURCE_VERSION As Integer = &H01000000
+        Public Const DTWAIN_CALLSTACK_LOGGING As Integer = &H02000000
+        Public Const DTWAIN_CALLSTACK_LOGGING_PLUS As Integer = &H04000000
         Public Const DTWAINOCR_RETURNHANDLE As Integer = 1
         Public Const DTWAINOCR_COPYDATA As Integer = 2
         Public Const DTWAIN_OCRINFO_CHAR As Integer = 0
@@ -1407,11 +1462,11 @@ Namespace Dynarithmic
         Public Const DTWAIN_TWCT_PATCH6 As Integer = 6
         Public Const DTWAIN_AUTOSIZE_NONE As Integer = 0
         Public Const DTWAIN_CV_CAPCUSTOMBASE As Integer = &H8000
-        Public Const DTWAIN_CV_CAPXFERCOUNT As Integer = &H1
-        Public Const DTWAIN_CV_ICAPCOMPRESSION As Integer = &H100
-        Public Const DTWAIN_CV_ICAPPIXELTYPE As Integer = &H101
-        Public Const DTWAIN_CV_ICAPUNITS As Integer = &H102
-        Public Const DTWAIN_CV_ICAPXFERMECH As Integer = &H103
+        Public Const DTWAIN_CV_CAPXFERCOUNT As Integer = &H0001
+        Public Const DTWAIN_CV_ICAPCOMPRESSION As Integer = &H0100
+        Public Const DTWAIN_CV_ICAPPIXELTYPE As Integer = &H0101
+        Public Const DTWAIN_CV_ICAPUNITS As Integer = &H0102
+        Public Const DTWAIN_CV_ICAPXFERMECH As Integer = &H0103
         Public Const DTWAIN_CV_CAPAUTHOR As Integer = &H1000
         Public Const DTWAIN_CV_CAPCAPTION As Integer = &H1001
         Public Const DTWAIN_CV_CAPFEEDERENABLED As Integer = &H1002
@@ -1422,12 +1477,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_CAPAUTOFEED As Integer = &H1007
         Public Const DTWAIN_CV_CAPCLEARPAGE As Integer = &H1008
         Public Const DTWAIN_CV_CAPFEEDPAGE As Integer = &H1009
-        Public Const DTWAIN_CV_CAPREWINDPAGE As Integer = &H100A
-        Public Const DTWAIN_CV_CAPINDICATORS As Integer = &H100B
-        Public Const DTWAIN_CV_CAPSUPPORTEDCAPSEXT As Integer = &H100C
-        Public Const DTWAIN_CV_CAPPAPERDETECTABLE As Integer = &H100D
-        Public Const DTWAIN_CV_CAPUICONTROLLABLE As Integer = &H100E
-        Public Const DTWAIN_CV_CAPDEVICEONLINE As Integer = &H100F
+        Public Const DTWAIN_CV_CAPREWINDPAGE As Integer = &H100a
+        Public Const DTWAIN_CV_CAPINDICATORS As Integer = &H100b
+        Public Const DTWAIN_CV_CAPSUPPORTEDCAPSEXT As Integer = &H100c
+        Public Const DTWAIN_CV_CAPPAPERDETECTABLE As Integer = &H100d
+        Public Const DTWAIN_CV_CAPUICONTROLLABLE As Integer = &H100e
+        Public Const DTWAIN_CV_CAPDEVICEONLINE As Integer = &H100f
         Public Const DTWAIN_CV_CAPAUTOSCAN As Integer = &H1010
         Public Const DTWAIN_CV_CAPTHUMBNAILSENABLED As Integer = &H1011
         Public Const DTWAIN_CV_CAPDUPLEX As Integer = &H1012
@@ -1438,12 +1493,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_CAPJOBCONTROL As Integer = &H1017
         Public Const DTWAIN_CV_CAPALARMS As Integer = &H1018
         Public Const DTWAIN_CV_CAPALARMVOLUME As Integer = &H1019
-        Public Const DTWAIN_CV_CAPAUTOMATICCAPTURE As Integer = &H101A
-        Public Const DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE As Integer = &H101B
-        Public Const DTWAIN_CV_CAPTIMEBETWEENCAPTURES As Integer = &H101C
-        Public Const DTWAIN_CV_CAPCLEARBUFFERS As Integer = &H101D
-        Public Const DTWAIN_CV_CAPMAXBATCHBUFFERS As Integer = &H101E
-        Public Const DTWAIN_CV_CAPDEVICETIMEDATE As Integer = &H101F
+        Public Const DTWAIN_CV_CAPAUTOMATICCAPTURE As Integer = &H101a
+        Public Const DTWAIN_CV_CAPTIMEBEFOREFIRSTCAPTURE As Integer = &H101b
+        Public Const DTWAIN_CV_CAPTIMEBETWEENCAPTURES As Integer = &H101c
+        Public Const DTWAIN_CV_CAPCLEARBUFFERS As Integer = &H101d
+        Public Const DTWAIN_CV_CAPMAXBATCHBUFFERS As Integer = &H101e
+        Public Const DTWAIN_CV_CAPDEVICETIMEDATE As Integer = &H101f
         Public Const DTWAIN_CV_CAPPOWERSUPPLY As Integer = &H1020
         Public Const DTWAIN_CV_CAPCAMERAPREVIEWUI As Integer = &H1021
         Public Const DTWAIN_CV_CAPDEVICEEVENT As Integer = &H1022
@@ -1454,12 +1509,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_CAPPRINTERENABLED As Integer = &H1027
         Public Const DTWAIN_CV_CAPPRINTERINDEX As Integer = &H1028
         Public Const DTWAIN_CV_CAPPRINTERMODE As Integer = &H1029
-        Public Const DTWAIN_CV_CAPPRINTERSTRING As Integer = &H102A
-        Public Const DTWAIN_CV_CAPPRINTERSUFFIX As Integer = &H102B
-        Public Const DTWAIN_CV_CAPLANGUAGE As Integer = &H102C
-        Public Const DTWAIN_CV_CAPFEEDERALIGNMENT As Integer = &H102D
-        Public Const DTWAIN_CV_CAPFEEDERORDER As Integer = &H102E
-        Public Const DTWAIN_CV_CAPPAPERBINDING As Integer = &H102F
+        Public Const DTWAIN_CV_CAPPRINTERSTRING As Integer = &H102a
+        Public Const DTWAIN_CV_CAPPRINTERSUFFIX As Integer = &H102b
+        Public Const DTWAIN_CV_CAPLANGUAGE As Integer = &H102c
+        Public Const DTWAIN_CV_CAPFEEDERALIGNMENT As Integer = &H102d
+        Public Const DTWAIN_CV_CAPFEEDERORDER As Integer = &H102e
+        Public Const DTWAIN_CV_CAPPAPERBINDING As Integer = &H102f
         Public Const DTWAIN_CV_CAPREACQUIREALLOWED As Integer = &H1030
         Public Const DTWAIN_CV_CAPPASSTHRU As Integer = &H1031
         Public Const DTWAIN_CV_CAPBATTERYMINUTES As Integer = &H1032
@@ -1470,12 +1525,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_CAPCAMERAORDER As Integer = &H1037
         Public Const DTWAIN_CV_CAPMICRENABLED As Integer = &H1038
         Public Const DTWAIN_CV_CAPFEEDERPREP As Integer = &H1039
-        Public Const DTWAIN_CV_CAPFEEDERPOCKET As Integer = &H103A
-        Public Const DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM As Integer = &H103B
-        Public Const DTWAIN_CV_CAPCUSTOMINTERFACEGUID As Integer = &H103C
-        Public Const DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE As Integer = &H103D
-        Public Const DTWAIN_CV_CAPSUPPORTEDDATS As Integer = &H103E
-        Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTION As Integer = &H103F
+        Public Const DTWAIN_CV_CAPFEEDERPOCKET As Integer = &H103a
+        Public Const DTWAIN_CV_CAPAUTOMATICSENSEMEDIUM As Integer = &H103b
+        Public Const DTWAIN_CV_CAPCUSTOMINTERFACEGUID As Integer = &H103c
+        Public Const DTWAIN_CV_CAPSUPPORTEDCAPSSEGMENTUNIQUE As Integer = &H103d
+        Public Const DTWAIN_CV_CAPSUPPORTEDDATS As Integer = &H103e
+        Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTION As Integer = &H103f
         Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONLENGTH As Integer = &H1040
         Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONSENSITIVITY As Integer = &H1041
         Public Const DTWAIN_CV_CAPDOUBLEFEEDDETECTIONRESPONSE As Integer = &H1042
@@ -1521,10 +1576,10 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_ICAPFLASHUSED As Integer = &H1107
         Public Const DTWAIN_CV_ICAPGAMMA As Integer = &H1108
         Public Const DTWAIN_CV_ICAPHALFTONES As Integer = &H1109
-        Public Const DTWAIN_CV_ICAPHIGHLIGHT As Integer = &H110A
-        Public Const DTWAIN_CV_ICAPIMAGEFILEFORMAT As Integer = &H110C
-        Public Const DTWAIN_CV_ICAPLAMPSTATE As Integer = &H110D
-        Public Const DTWAIN_CV_ICAPLIGHTSOURCE As Integer = &H110E
+        Public Const DTWAIN_CV_ICAPHIGHLIGHT As Integer = &H110a
+        Public Const DTWAIN_CV_ICAPIMAGEFILEFORMAT As Integer = &H110c
+        Public Const DTWAIN_CV_ICAPLAMPSTATE As Integer = &H110d
+        Public Const DTWAIN_CV_ICAPLIGHTSOURCE As Integer = &H110e
         Public Const DTWAIN_CV_ICAPORIENTATION As Integer = &H1110
         Public Const DTWAIN_CV_ICAPPHYSICALWIDTH As Integer = &H1111
         Public Const DTWAIN_CV_ICAPPHYSICALHEIGHT As Integer = &H1112
@@ -1534,12 +1589,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_ICAPYNATIVERESOLUTION As Integer = &H1117
         Public Const DTWAIN_CV_ICAPXRESOLUTION As Integer = &H1118
         Public Const DTWAIN_CV_ICAPYRESOLUTION As Integer = &H1119
-        Public Const DTWAIN_CV_ICAPMAXFRAMES As Integer = &H111A
-        Public Const DTWAIN_CV_ICAPTILES As Integer = &H111B
-        Public Const DTWAIN_CV_ICAPBITORDER As Integer = &H111C
-        Public Const DTWAIN_CV_ICAPCCITTKFACTOR As Integer = &H111D
-        Public Const DTWAIN_CV_ICAPLIGHTPATH As Integer = &H111E
-        Public Const DTWAIN_CV_ICAPPIXELFLAVOR As Integer = &H111F
+        Public Const DTWAIN_CV_ICAPMAXFRAMES As Integer = &H111a
+        Public Const DTWAIN_CV_ICAPTILES As Integer = &H111b
+        Public Const DTWAIN_CV_ICAPBITORDER As Integer = &H111c
+        Public Const DTWAIN_CV_ICAPCCITTKFACTOR As Integer = &H111d
+        Public Const DTWAIN_CV_ICAPLIGHTPATH As Integer = &H111e
+        Public Const DTWAIN_CV_ICAPPIXELFLAVOR As Integer = &H111f
         Public Const DTWAIN_CV_ICAPPLANARCHUNKY As Integer = &H1120
         Public Const DTWAIN_CV_ICAPROTATION As Integer = &H1121
         Public Const DTWAIN_CV_ICAPSUPPORTEDSIZES As Integer = &H1122
@@ -1549,12 +1604,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_ICAPBITORDERCODES As Integer = &H1126
         Public Const DTWAIN_CV_ICAPPIXELFLAVORCODES As Integer = &H1127
         Public Const DTWAIN_CV_ICAPJPEGPIXELTYPE As Integer = &H1128
-        Public Const DTWAIN_CV_ICAPTIMEFILL As Integer = &H112A
-        Public Const DTWAIN_CV_ICAPBITDEPTH As Integer = &H112B
-        Public Const DTWAIN_CV_ICAPBITDEPTHREDUCTION As Integer = &H112C
-        Public Const DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE As Integer = &H112D
-        Public Const DTWAIN_CV_ICAPIMAGEDATASET As Integer = &H112E
-        Public Const DTWAIN_CV_ICAPEXTIMAGEINFO As Integer = &H112F
+        Public Const DTWAIN_CV_ICAPTIMEFILL As Integer = &H112a
+        Public Const DTWAIN_CV_ICAPBITDEPTH As Integer = &H112b
+        Public Const DTWAIN_CV_ICAPBITDEPTHREDUCTION As Integer = &H112c
+        Public Const DTWAIN_CV_ICAPUNDEFINEDIMAGESIZE As Integer = &H112d
+        Public Const DTWAIN_CV_ICAPIMAGEDATASET As Integer = &H112e
+        Public Const DTWAIN_CV_ICAPEXTIMAGEINFO As Integer = &H112f
         Public Const DTWAIN_CV_ICAPMINIMUMHEIGHT As Integer = &H1130
         Public Const DTWAIN_CV_ICAPMINIMUMWIDTH As Integer = &H1131
         Public Const DTWAIN_CV_ICAPAUTOBORDERDETECTION As Integer = &H1132
@@ -1565,12 +1620,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_ICAPBARCODEDETECTIONENABLED As Integer = &H1137
         Public Const DTWAIN_CV_ICAPSUPPORTEDBARCODETYPES As Integer = &H1138
         Public Const DTWAIN_CV_ICAPBARCODEMAXSEARCHPRIORITIES As Integer = &H1139
-        Public Const DTWAIN_CV_ICAPBARCODESEARCHPRIORITIES As Integer = &H113A
-        Public Const DTWAIN_CV_ICAPBARCODESEARCHMODE As Integer = &H113B
-        Public Const DTWAIN_CV_ICAPBARCODEMAXRETRIES As Integer = &H113C
-        Public Const DTWAIN_CV_ICAPBARCODETIMEOUT As Integer = &H113D
-        Public Const DTWAIN_CV_ICAPZOOMFACTOR As Integer = &H113E
-        Public Const DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED As Integer = &H113F
+        Public Const DTWAIN_CV_ICAPBARCODESEARCHPRIORITIES As Integer = &H113a
+        Public Const DTWAIN_CV_ICAPBARCODESEARCHMODE As Integer = &H113b
+        Public Const DTWAIN_CV_ICAPBARCODEMAXRETRIES As Integer = &H113c
+        Public Const DTWAIN_CV_ICAPBARCODETIMEOUT As Integer = &H113d
+        Public Const DTWAIN_CV_ICAPZOOMFACTOR As Integer = &H113e
+        Public Const DTWAIN_CV_ICAPPATCHCODEDETECTIONENABLED As Integer = &H113f
         Public Const DTWAIN_CV_ICAPSUPPORTEDPATCHCODETYPES As Integer = &H1140
         Public Const DTWAIN_CV_ICAPPATCHCODEMAXSEARCHPRIORITIES As Integer = &H1141
         Public Const DTWAIN_CV_ICAPPATCHCODESEARCHPRIORITIES As Integer = &H1142
@@ -1591,54 +1646,54 @@ Namespace Dynarithmic
         Public Const DTWAIN_CV_ICAPAUTOMATICCROPUSESFRAME As Integer = &H1157
         Public Const DTWAIN_CV_ICAPAUTOMATICLENGTHDETECTION As Integer = &H1158
         Public Const DTWAIN_CV_ICAPAUTOMATICCOLORENABLED As Integer = &H1159
-        Public Const DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE As Integer = &H115A
-        Public Const DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED As Integer = &H115B
-        Public Const DTWAIN_CV_ICAPIMAGEMERGE As Integer = &H115C
-        Public Const DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD As Integer = &H115D
-        Public Const DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO As Integer = &H115E
-        Public Const DTWAIN_CV_ICAPFILMTYPE As Integer = &H115F
+        Public Const DTWAIN_CV_ICAPAUTOMATICCOLORNONCOLORPIXELTYPE As Integer = &H115a
+        Public Const DTWAIN_CV_ICAPCOLORMANAGEMENTENABLED As Integer = &H115b
+        Public Const DTWAIN_CV_ICAPIMAGEMERGE As Integer = &H115c
+        Public Const DTWAIN_CV_ICAPIMAGEMERGEHEIGHTTHRESHOLD As Integer = &H115d
+        Public Const DTWAIN_CV_ICAPSUPPORTEDEXTIMAGEINFO As Integer = &H115e
+        Public Const DTWAIN_CV_ICAPFILMTYPE As Integer = &H115f
         Public Const DTWAIN_CV_ICAPMIRROR As Integer = &H1160
         Public Const DTWAIN_CV_ICAPJPEGSUBSAMPLING As Integer = &H1161
         Public Const DTWAIN_CV_ACAPAUDIOFILEFORMAT As Integer = &H1201
         Public Const DTWAIN_CV_ACAPXFERMECH As Integer = &H1202
         Public Const DTWAIN_CFMCV_CAPCFMSTART As Integer = 2048
-        Public Const DTWAIN_CFMCV_CAPDUPLEXSCANNER As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 10)
-        Public Const DTWAIN_CFMCV_CAPDUPLEXENABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 11)
-        Public Const DTWAIN_CFMCV_CAPSCANNERNAME As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 12)
-        Public Const DTWAIN_CFMCV_CAPSINGLEPASS As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 13)
-        Public Const DTWAIN_CFMCV_CAPERRHANDLING As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 20)
-        Public Const DTWAIN_CFMCV_CAPFEEDERSTATUS As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 21)
-        Public Const DTWAIN_CFMCV_CAPFEEDMEDIUMWAIT As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 22)
-        Public Const DTWAIN_CFMCV_CAPFEEDWAITTIME As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 23)
-        Public Const DTWAIN_CFMCV_ICAPWHITEBALANCE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 24)
-        Public Const DTWAIN_CFMCV_ICAPAUTOBINARY As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 25)
-        Public Const DTWAIN_CFMCV_ICAPIMAGESEPARATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 26)
-        Public Const DTWAIN_CFMCV_ICAPHARDWARECOMPRESSION As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 27)
-        Public Const DTWAIN_CFMCV_ICAPIMAGEEMPHASIS As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 28)
-        Public Const DTWAIN_CFMCV_ICAPOUTLINING As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 29)
-        Public Const DTWAIN_CFMCV_ICAPDYNTHRESHOLD As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 30)
-        Public Const DTWAIN_CFMCV_ICAPVARIANCE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 31)
-        Public Const DTWAIN_CFMCV_CAPENDORSERAVAILABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 32)
-        Public Const DTWAIN_CFMCV_CAPENDORSERENABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 33)
-        Public Const DTWAIN_CFMCV_CAPENDORSERCHARSET As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 34)
-        Public Const DTWAIN_CFMCV_CAPENDORSERSTRINGLENGTH As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 35)
-        Public Const DTWAIN_CFMCV_CAPENDORSERSTRING As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 36)
-        Public Const DTWAIN_CFMCV_ICAPDYNTHRESHOLDCURVE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 48)
-        Public Const DTWAIN_CFMCV_ICAPSMOOTHINGMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 49)
-        Public Const DTWAIN_CFMCV_ICAPFILTERMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 50)
-        Public Const DTWAIN_CFMCV_ICAPGRADATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 51)
-        Public Const DTWAIN_CFMCV_ICAPMIRROR As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 52)
-        Public Const DTWAIN_CFMCV_ICAPEASYSCANMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 53)
-        Public Const DTWAIN_CFMCV_ICAPSOFTWAREINTERPOLATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 54)
-        Public Const DTWAIN_CFMCV_ICAPIMAGESEPARATIONEX As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 55)
-        Public Const DTWAIN_CFMCV_CAPDUPLEXPAGE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 56)
-        Public Const DTWAIN_CFMCV_ICAPINVERTIMAGE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 57)
-        Public Const DTWAIN_CFMCV_ICAPSPECKLEREMOVE As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 58)
-        Public Const DTWAIN_CFMCV_ICAPUSMFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 59)
-        Public Const DTWAIN_CFMCV_ICAPNOISEFILTERCFM As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 60)
-        Public Const DTWAIN_CFMCV_ICAPDESCREENING As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 61)
-        Public Const DTWAIN_CFMCV_ICAPQUALITYFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 62)
-        Public Const DTWAIN_CFMCV_ICAPBINARYFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE + DTWAIN_CFMCV_CAPCFMSTART + 63)
+        Public Const DTWAIN_CFMCV_CAPDUPLEXSCANNER As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+10)
+        Public Const DTWAIN_CFMCV_CAPDUPLEXENABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+11)
+        Public Const DTWAIN_CFMCV_CAPSCANNERNAME As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+12)
+        Public Const DTWAIN_CFMCV_CAPSINGLEPASS As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+13)
+        Public Const DTWAIN_CFMCV_CAPERRHANDLING As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+20)
+        Public Const DTWAIN_CFMCV_CAPFEEDERSTATUS As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+21)
+        Public Const DTWAIN_CFMCV_CAPFEEDMEDIUMWAIT As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+22)
+        Public Const DTWAIN_CFMCV_CAPFEEDWAITTIME As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+23)
+        Public Const DTWAIN_CFMCV_ICAPWHITEBALANCE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+24)
+        Public Const DTWAIN_CFMCV_ICAPAUTOBINARY As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+25)
+        Public Const DTWAIN_CFMCV_ICAPIMAGESEPARATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+26)
+        Public Const DTWAIN_CFMCV_ICAPHARDWARECOMPRESSION As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+27)
+        Public Const DTWAIN_CFMCV_ICAPIMAGEEMPHASIS As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+28)
+        Public Const DTWAIN_CFMCV_ICAPOUTLINING As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+29)
+        Public Const DTWAIN_CFMCV_ICAPDYNTHRESHOLD As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+30)
+        Public Const DTWAIN_CFMCV_ICAPVARIANCE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+31)
+        Public Const DTWAIN_CFMCV_CAPENDORSERAVAILABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+32)
+        Public Const DTWAIN_CFMCV_CAPENDORSERENABLE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+33)
+        Public Const DTWAIN_CFMCV_CAPENDORSERCHARSET As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+34)
+        Public Const DTWAIN_CFMCV_CAPENDORSERSTRINGLENGTH As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+35)
+        Public Const DTWAIN_CFMCV_CAPENDORSERSTRING As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+36)
+        Public Const DTWAIN_CFMCV_ICAPDYNTHRESHOLDCURVE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+48)
+        Public Const DTWAIN_CFMCV_ICAPSMOOTHINGMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+49)
+        Public Const DTWAIN_CFMCV_ICAPFILTERMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+50)
+        Public Const DTWAIN_CFMCV_ICAPGRADATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+51)
+        Public Const DTWAIN_CFMCV_ICAPMIRROR As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+52)
+        Public Const DTWAIN_CFMCV_ICAPEASYSCANMODE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+53)
+        Public Const DTWAIN_CFMCV_ICAPSOFTWAREINTERPOLATION As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+54)
+        Public Const DTWAIN_CFMCV_ICAPIMAGESEPARATIONEX As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+55)
+        Public Const DTWAIN_CFMCV_CAPDUPLEXPAGE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+56)
+        Public Const DTWAIN_CFMCV_ICAPINVERTIMAGE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+57)
+        Public Const DTWAIN_CFMCV_ICAPSPECKLEREMOVE As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+58)
+        Public Const DTWAIN_CFMCV_ICAPUSMFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+59)
+        Public Const DTWAIN_CFMCV_ICAPNOISEFILTERCFM As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+60)
+        Public Const DTWAIN_CFMCV_ICAPDESCREENING As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+61)
+        Public Const DTWAIN_CFMCV_ICAPQUALITYFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+62)
+        Public Const DTWAIN_CFMCV_ICAPBINARYFILTER As Integer = (DTWAIN_CV_CAPCUSTOMBASE+DTWAIN_CFMCV_CAPCFMSTART+63)
         Public Const DTWAIN_OCRCV_IMAGEFILEFORMAT As Integer = &H1000
         Public Const DTWAIN_OCRCV_DESKEW As Integer = &H1001
         Public Const DTWAIN_OCRCV_DESHADE As Integer = &H1002
@@ -1668,31 +1723,31 @@ Namespace Dynarithmic
         Public Const DTWAIN_OCRERROR_MODENONE As Integer = 0
         Public Const DTWAIN_OCRERROR_SHOWMSGBOX As Integer = 1
         Public Const DTWAIN_OCRERROR_WRITEFILE As Integer = 2
-        Public Const DTWAIN_PDFTEXT_ALLPAGES As UInteger = &H1UI
-        Public Const DTWAIN_PDFTEXT_EVENPAGES As UInteger = &H2UI
-        Public Const DTWAIN_PDFTEXT_ODDPAGES As UInteger = &H4UI
-        Public Const DTWAIN_PDFTEXT_FIRSTPAGE As UInteger = &H8UI
-        Public Const DTWAIN_PDFTEXT_LASTPAGE As UInteger = &H10UI
-        Public Const DTWAIN_PDFTEXT_CURRENTPAGE As UInteger = &H20UI
-        Public Const DTWAIN_PDFTEXT_DISABLED As UInteger = &H40UI
-        Public Const DTWAIN_PDFTEXT_TOPLEFT As UInteger = &H100UI
-        Public Const DTWAIN_PDFTEXT_TOPRIGHT As UInteger = &H200UI
-        Public Const DTWAIN_PDFTEXT_HORIZCENTER As UInteger = &H400UI
-        Public Const DTWAIN_PDFTEXT_VERTCENTER As UInteger = &H800UI
-        Public Const DTWAIN_PDFTEXT_BOTTOMLEFT As UInteger = &H1000UI
-        Public Const DTWAIN_PDFTEXT_BOTTOMRIGHT As UInteger = &H2000UI
-        Public Const DTWAIN_PDFTEXT_BOTTOMCENTER As UInteger = &H4000UI
-        Public Const DTWAIN_PDFTEXT_TOPCENTER As UInteger = &H8000UI
-        Public Const DTWAIN_PDFTEXT_XCENTER As UInteger = &H10000UI
-        Public Const DTWAIN_PDFTEXT_YCENTER As UInteger = &H20000UI
-        Public Const DTWAIN_PDFTEXT_NOSCALING As UInteger = &H100000UI
-        Public Const DTWAIN_PDFTEXT_NOCHARSPACING As UInteger = &H200000UI
-        Public Const DTWAIN_PDFTEXT_NOWORDSPACING As UInteger = &H400000UI
-        Public Const DTWAIN_PDFTEXT_NOSTROKEWIDTH As UInteger = &H800000UI
-        Public Const DTWAIN_PDFTEXT_NORENDERMODE As UInteger = &H1000000UI
-        Public Const DTWAIN_PDFTEXT_NORGBCOLOR As UInteger = &H2000000UI
-        Public Const DTWAIN_PDFTEXT_NOFONTSIZE As UInteger = &H4000000UI
-        Public Const DTWAIN_PDFTEXT_NOABSPOSITION As UInteger = &H8000000UI
+        Public Const DTWAIN_PDFTEXT_ALLPAGES As UInteger = &H00000001UI
+        Public Const DTWAIN_PDFTEXT_EVENPAGES As UInteger = &H00000002UI
+        Public Const DTWAIN_PDFTEXT_ODDPAGES As UInteger = &H00000004UI
+        Public Const DTWAIN_PDFTEXT_FIRSTPAGE As UInteger = &H00000008UI
+        Public Const DTWAIN_PDFTEXT_LASTPAGE As UInteger = &H00000010UI
+        Public Const DTWAIN_PDFTEXT_CURRENTPAGE As UInteger = &H00000020UI
+        Public Const DTWAIN_PDFTEXT_DISABLED As UInteger = &H00000040UI
+        Public Const DTWAIN_PDFTEXT_TOPLEFT As UInteger = &H00000100UI
+        Public Const DTWAIN_PDFTEXT_TOPRIGHT As UInteger = &H00000200UI
+        Public Const DTWAIN_PDFTEXT_HORIZCENTER As UInteger = &H00000400UI
+        Public Const DTWAIN_PDFTEXT_VERTCENTER As UInteger = &H00000800UI
+        Public Const DTWAIN_PDFTEXT_BOTTOMLEFT As UInteger = &H00001000UI
+        Public Const DTWAIN_PDFTEXT_BOTTOMRIGHT As UInteger = &H00002000UI
+        Public Const DTWAIN_PDFTEXT_BOTTOMCENTER As UInteger = &H00004000UI
+        Public Const DTWAIN_PDFTEXT_TOPCENTER As UInteger = &H00008000UI
+        Public Const DTWAIN_PDFTEXT_XCENTER As UInteger = &H00010000UI
+        Public Const DTWAIN_PDFTEXT_YCENTER As UInteger = &H00020000UI
+        Public Const DTWAIN_PDFTEXT_NOSCALING As UInteger = &H00100000UI
+        Public Const DTWAIN_PDFTEXT_NOCHARSPACING As UInteger = &H00200000UI
+        Public Const DTWAIN_PDFTEXT_NOWORDSPACING As UInteger = &H00400000UI
+        Public Const DTWAIN_PDFTEXT_NOSTROKEWIDTH As UInteger = &H00800000UI
+        Public Const DTWAIN_PDFTEXT_NORENDERMODE As UInteger = &H01000000UI
+        Public Const DTWAIN_PDFTEXT_NORGBCOLOR As UInteger = &H02000000UI
+        Public Const DTWAIN_PDFTEXT_NOFONTSIZE As UInteger = &H04000000UI
+        Public Const DTWAIN_PDFTEXT_NOABSPOSITION As UInteger = &H08000000UI
         Public Const DTWAIN_PDFTEXT_IGNOREALL As UInteger = &HFFF00000UI
         Public Const DTWAIN_FONT_COURIER As Integer = 0
         Public Const DTWAIN_FONT_COURIERBOLD As Integer = 1
@@ -1843,6 +1898,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_CONSTANT_ICAP As Integer = 78
         Public Const DTWAIN_CONSTANT_DTWAIN_CONT As Integer = 79
         Public Const DTWAIN_CONSTANT_CAPCODE_MAP As Integer = 80
+        Public Const DTWAIN_CONSTANT_ACAP As Integer = 81
         Public Const DTWAIN_USERRES_START As Integer = 20000
         Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
         Public Const DTWAIN_APIHANDLEOK As Integer = 1
@@ -1860,7789 +1916,7789 @@ Namespace Dynarithmic
         Public Delegate Function DTwainLoggerProcW(<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, UserData As Long) As IntPtr
         Public Delegate Function DTwainDIBUpdateProc(TheSource As IntPtr, currentImage As Integer, DibData As IntPtr) As IntPtr
         Public Delegate Function DTwainLoggerProc(<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, UserData As Long) As IntPtr
-
-
+        
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireAudioFileDelegate(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lMaxClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_AcquireAudioFileADelegate(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_AcquireAudioFileWDelegate(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireAudioNativeDelegate(Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireAudioNativeExDelegate(Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireBufferedDelegate(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireBufferedExDelegate(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireFileDelegate(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_AcquireFileADelegate(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireFileExDelegate(Source As System.IntPtr, aFileNames As System.IntPtr, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_AcquireFileWDelegate(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireNativeDelegate(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireNativeExDelegate(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AcquireToClipboardDelegate(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, nTransferMode As Integer, bDiscardDibs As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AddExtImageInfoQueryDelegate(Source As System.IntPtr, ExtImageInfo As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AddFileToAppendDelegate(szFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_AddFileToAppendADelegate(szFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_AddFileToAppendWDelegate(szFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AddPDFTextDelegate(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_AddPDFTextADelegate(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AddPDFTextExDelegate(Source As System.IntPtr, TextElement As System.IntPtr, Flags As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_AddPDFTextWDelegate(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AllocateMemoryDelegate(memSize As UInteger) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AllocateMemory64Delegate(memSize As System.UInt64) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AllocateMemoryExDelegate(memSize As UInteger) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_AppHandlesExceptionsDelegate(bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayANSIStringToFloatDelegate(StringArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddDelegate(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddANSIStringDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddANSIStringNDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFloatDelegate(pArray As System.IntPtr, Val As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFloatNDelegate(pArray As System.IntPtr, Val As System.Double, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringADelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringNDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringNADelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringNWDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddFloatStringWDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFrameDelegate(pArray As System.IntPtr, frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddFrameNDelegate(pArray As System.IntPtr, frame As System.IntPtr, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddLongDelegate(pArray As System.IntPtr, Val As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddLong64Delegate(pArray As System.IntPtr, Val As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddLong64NDelegate(pArray As System.IntPtr, Val As System.Int64, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddLongNDelegate(pArray As System.IntPtr, Val As Integer, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddNDelegate(pArray As System.IntPtr, pVariant As System.IntPtr, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddStringDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddStringADelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayAddStringNDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayAddStringNADelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddStringNWDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddStringWDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddWideStringDelegate(pArray As System.IntPtr, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayAddWideStringNDelegate(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayConvertFix32ToFloatDelegate(Fix32Array As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayConvertFloatToFix32Delegate(FloatArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCopyDelegate(Source As System.IntPtr, Dest As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateDelegate(nEnumType As Integer, nInitialSize As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateCopyDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateFromCapDelegate(Source As System.IntPtr, lCapType As Integer, lSize As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateFromLong64sDelegate(ByRef pCArray As System.Int64, nSize As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateFromLongsDelegate(ByRef pCArray As Integer, nSize As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayCreateFromRealsDelegate(ByRef pCArray As System.Double, nSize As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayDestroyDelegate(pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayDestroyFramesDelegate(FrameArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindDelegate(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayFindANSIStringDelegate(pArray As System.IntPtr, pString As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindFloatDelegate(pArray As System.IntPtr, Val As System.Double, Tolerance As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindFloatStringDelegate(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayFindFloatStringADelegate(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayFindFloatStringWDelegate(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindLongDelegate(pArray As System.IntPtr, Val As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindLong64Delegate(pArray As System.IntPtr, Val As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFindStringDelegate(pArray As System.IntPtr, pString As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayFindStringADelegate(pArray As System.IntPtr, pString As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayFindStringWDelegate(pArray As System.IntPtr, pString As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayFindWideStringDelegate(pArray As System.IntPtr, pString As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFix32GetAtDelegate(aFix32 As System.IntPtr, lPos As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFix32SetAtDelegate(aFix32 As System.IntPtr, lPos As Integer, Whole As Integer, Frac As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFloatToANSIStringDelegate(FloatArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFloatToStringDelegate(FloatArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayFloatToWideStringDelegate(FloatArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtDelegate(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayGetAtANSIStringDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtFloatDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtFloatStringDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayGetAtFloatStringADelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayGetAtFloatStringWDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Val As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtFrameDelegate(FrameArray As System.IntPtr, nWhere As Integer, ByRef pleft As System.Double, ByRef ptop As System.Double, ByRef pright As System.Double, ByRef pbottom As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtFrameExDelegate(FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtFrameStringDelegate(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayGetAtFrameStringADelegate(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayGetAtFrameStringWDelegate(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtLongDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtLong64Delegate(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtSourceDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetAtStringDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> pStr As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayGetAtStringADelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayGetAtStringWDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayGetAtWideStringDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetBufferDelegate(pArray As System.IntPtr, nPos As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetCapValuesDelegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetCapValuesExDelegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetCapValuesEx2Delegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetCountDelegate(pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetMaxStringLengthDelegate(a As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetSourceAtDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetStringLengthDelegate(a As System.IntPtr, nWhichString As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayGetTypeDelegate(pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInitDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtDelegate(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtANSIStringDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtANSIStringNDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatNDelegate(pArray As System.IntPtr, nWhere As Integer, Val As System.Double, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringADelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringNDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringNADelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringNWDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtFloatStringWDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFrameDelegate(pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtFrameNDelegate(pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtLongDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtLong64Delegate(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtLong64NDelegate(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtLongNDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As Integer, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtNDelegate(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringADelegate(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringNDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringNADelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringNWDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtStringWDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtWideStringDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArrayInsertAtWideStringNDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayRemoveAllDelegate(pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayRemoveAtDelegate(pArray As System.IntPtr, nWhere As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayRemoveAtNDelegate(pArray As System.IntPtr, nWhere As Integer, num As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayResizeDelegate(pArray As System.IntPtr, NewSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtDelegate(pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArraySetAtANSIStringDelegate(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtFloatDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtFloatStringDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArraySetAtFloatStringADelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArraySetAtFloatStringWDelegate(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtFrameDelegate(FrameArray As System.IntPtr, nWhere As Integer, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtFrameExDelegate(FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtFrameStringDelegate(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArraySetAtFrameStringADelegate(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArraySetAtFrameStringWDelegate(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtLongDelegate(pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtLong64Delegate(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArraySetAtStringDelegate(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ArraySetAtStringADelegate(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArraySetAtStringWDelegate(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ArraySetAtWideStringDelegate(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayStringToFloatDelegate(StringArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ArrayWideStringToFloatDelegate(StringArray As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CallCallbackDelegate(wParam As Integer, lParam As Integer, UserData As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CallCallback64Delegate(wParam As Integer, lParam As Integer, UserData As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CallDSMProcDelegate(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CheckHandlesDelegate(bCheck As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ClearBuffersDelegate(Source As System.IntPtr, ClearBuffer As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ClearErrorBufferDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ClearPDFTextDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ClearPageDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CloseSourceDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CloseSourceUIDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ConvertDIBToBitmapDelegate(hDib As System.IntPtr, hPalette As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ConvertDIBToFullBitmapDelegate(hDib As System.IntPtr, isBMP As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ConvertToAPIStringDelegate(lpOrigString As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ConvertToAPIStringADelegate(lpOrigString As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ConvertToAPIStringExDelegate(lpOrigString As String, <MarshalAs(UnmanagedType.LPTStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ConvertToAPIStringExADelegate(lpOrigString As String, <MarshalAs(UnmanagedType.LPStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ConvertToAPIStringExWDelegate(lpOrigString As String, <MarshalAs(UnmanagedType.LPWStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ConvertToAPIStringWDelegate(lpOrigString As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CreateAcquisitionArrayDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_CreatePDFTextElementDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_DeleteDIBDelegate(hDib As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_DestroyAcquisitionArrayDelegate(aAcq As System.IntPtr, bDestroyData As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_DestroyPDFTextElementDelegate(TextElement As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_DisableAppWindowDelegate(hWnd As System.IntPtr, bDisable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoBorderDetectDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoBrightDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoDeskewDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoFeedDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoRotateDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutoScanDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableAutomaticSenseMediumDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableDuplexDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableFeederDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableIndicatorDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableJobFileHandlingDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableLampDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableMsgNotifyDelegate(bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnablePatchDetectDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnablePeekMessageLoopDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnablePrinterDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableThumbnailDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnableTripletsNotifyDelegate(bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EndThreadDelegate(DLLHandle As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EndTwainSessionDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAlarmVolumesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, expandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAlarmVolumesExDelegate(Source As System.IntPtr, expandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAlarmsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAlarmsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAudioXferMechsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAudioXferMechsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutoFeedValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutoFeedValuesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutomaticCapturesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutomaticCapturesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutomaticSenseMediumDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumAutomaticSenseMediumExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBitDepthsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBitDepthsExDelegate(Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBitDepthsEx2Delegate(Source As System.IntPtr, PixelType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBottomCamerasDelegate(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBottomCamerasExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBrightnessValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumBrightnessValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCamerasDelegate(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCamerasExDelegate(Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCamerasEx2Delegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCamerasEx3Delegate(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCompressionTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCompressionTypesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCompressionTypesEx2Delegate(Source As System.IntPtr, lFileType As Integer, bUseBufferedMode As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumContrastValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumContrastValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCustomCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumCustomCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumDoubleFeedDetectLengthsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumDoubleFeedDetectLengthsExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumDoubleFeedDetectValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumDoubleFeedDetectValuesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumExtImageInfoTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumExtImageInfoTypesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumExtendedCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumExtendedCapsExDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumExtendedCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumFileTypeBitsPerPixelDelegate(FileType As Integer, ByRef Array As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumFileXferFormatsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumFileXferFormatsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumHalftonesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumHalftonesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumHighlightValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumHighlightValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumJobControlsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumJobControlsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumLightPathsDelegate(Source As System.IntPtr, ByRef LightPath As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumLightPathsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumLightSourcesDelegate(Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumLightSourcesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumMaxBuffersDelegate(Source As System.IntPtr, ByRef pMaxBufs As System.IntPtr, bExpandRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumMaxBuffersExDelegate(Source As System.IntPtr, bExpandRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumNoiseFiltersDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumNoiseFiltersExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOCRInterfacesDelegate(ByRef OCRInterfaces As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOCRSupportedCapsDelegate(Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOrientationsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOrientationsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOverscanValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumOverscanValuesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPaperSizesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPaperSizesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchCodesDelegate(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchCodesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchMaxPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchMaxRetriesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchMaxRetriesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchSearchModesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchSearchModesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchTimeOutValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPatchTimeOutValuesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPixelTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPixelTypesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPrinterStringModesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumPrinterStringModesExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumResolutionValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumResolutionValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumShadowValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumShadowValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSourceUnitsDelegate(Source As System.IntPtr, ByRef lpArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSourceUnitsExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSourceValuesDelegate(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_EnumSourceValuesADelegate(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_EnumSourceValuesWDelegate(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSourcesDelegate(ByRef lpArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSourcesExDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedCapsExDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedExtImageInfoDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedExtImageInfoExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedFileTypesDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedMultiPageFileTypesDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumSupportedSinglePageFileTypesDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumThresholdValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumThresholdValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTopCamerasDelegate(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTopCamerasExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTwainPrintersDelegate(Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTwainPrintersArrayDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTwainPrintersArrayExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumTwainPrintersExDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumXResolutionValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumXResolutionValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumYResolutionValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_EnumYResolutionValuesExDelegate(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ExecuteOCRDelegate(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_ExecuteOCRADelegate(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_ExecuteOCRWDelegate(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FeedPageDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FlipBitmapDelegate(hDib As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FlushAcquiredPagesDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ForceAcquireBitDepthDelegate(Source As System.IntPtr, BitDepth As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ForceScanOnNoUIDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameCreateDelegate(Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameCreateStringDelegate(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_FrameCreateStringADelegate(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_FrameCreateStringWDelegate(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameDestroyDelegate(Frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameGetAllDelegate(Frame As System.IntPtr, ByRef Left As System.Double, ByRef Top As System.Double, ByRef Right As System.Double, ByRef Bottom As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameGetAllStringDelegate(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_FrameGetAllStringADelegate(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_FrameGetAllStringWDelegate(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Bottom As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameGetValueDelegate(Frame As System.IntPtr, nWhich As Integer, ByRef Value As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameGetValueStringDelegate(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> Value As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_FrameGetValueStringADelegate(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> Value As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_FrameGetValueStringWDelegate(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> Value As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameIsValidDelegate(Frame As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameSetAllDelegate(Frame As System.IntPtr, Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameSetAllStringDelegate(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_FrameSetAllStringADelegate(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_FrameSetAllStringWDelegate(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameSetValueDelegate(Frame As System.IntPtr, nWhich As Integer, Value As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FrameSetValueStringDelegate(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_FrameSetValueStringADelegate(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_FrameSetValueStringWDelegate(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FreeExtImageInfoDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FreeMemoryDelegate(h As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_FreeMemoryExDelegate(h As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAPIHandleStatusDelegate(pHandle As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireAreaDelegate(Source As System.IntPtr, lGetType As Integer, ByRef FloatEnum As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireArea2Delegate(Source As System.IntPtr, ByRef left As System.Double, ByRef top As System.Double, ByRef right As System.Double, ByRef bottom As System.Double, ByRef lpUnit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireArea2StringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetAcquireArea2StringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetAcquireArea2StringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireAreaExDelegate(Source As System.IntPtr, lGetType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireMetricsDelegate(source As System.IntPtr, ByRef ImageCount As Integer, ByRef SheetCount As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireStripBufferDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireStripDataDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, ByRef lpBytesPerRow As UInteger, ByRef lpColumns As UInteger, ByRef lpRows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef lpBytesWritten As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquireStripSizesDelegate(Source As System.IntPtr, ByRef lpMin As UInteger, ByRef lpMax As UInteger, ByRef lpPreferred As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquiredImageDelegate(aAcq As System.IntPtr, nWhichAcq As Integer, nWhichDib As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAcquiredImageArrayDelegate(aAcq As System.IntPtr, nWhichAcq As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetActiveDSMPathDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetActiveDSMPathADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetActiveDSMPathWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetActiveDSMVersionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetActiveDSMVersionInfoADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetActiveDSMVersionInfoWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAlarmVolumeDelegate(Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAllSourceDibsDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAppInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetAppInfoADelegate(<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetAppInfoWDelegate(<MarshalAs(UnmanagedType.LPWStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetAuthorDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szAuthor As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetAuthorADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szAuthor As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetAuthorWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szAuthor As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBatteryMinutesDelegate(Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBatteryPercentDelegate(Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBitDepthDelegate(Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBlankPageAutoDetectionDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBrightnessDelegate(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBrightnessStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetBrightnessStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetBrightnessStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetBufferedTransferInfoDelegate(Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCallbackDelegate() As DTwainCallback
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCallback64Delegate() As DTwainCallback64
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapArrayTypeDelegate(Source As System.IntPtr, nCap As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapContainerDelegate(Source As System.IntPtr, nCap As Integer, lCapType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapContainerExDelegate(nCap As Integer, bSetContainer As Integer, ByRef ConTypes As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapContainerEx2Delegate(nCap As Integer, bSetContainer As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapDataTypeDelegate(Source As System.IntPtr, nCap As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapFromNameDelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetCapFromNameADelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetCapFromNameWDelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapOperationsDelegate(Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapValuesDelegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapValuesExDelegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCapValuesEx2Delegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCaptionDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetCaptionADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Caption As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetCaptionWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Caption As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCompressionTypeDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetConditionCodeStringDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetConditionCodeStringADelegate(lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetConditionCodeStringWDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetContrastDelegate(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetContrastStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetContrastStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetContrastStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCountryDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCurrentAcquiredImageDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCurrentFileNameDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetCurrentFileNameADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetCurrentFileNameWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCurrentPageNumDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCurrentRetryCountDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCurrentTwainTripletDelegate(ByRef pAppID As TW_IDENTITY, ByRef pSourceID As TW_IDENTITY, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetCustomDSDataDelegate(Source As System.IntPtr, Data As Byte(), dSize As UInteger, ByRef pActualSize As UInteger, nFlags As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDSMFullNameDelegate(DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetDSMFullNameADelegate(DSMType As Integer, <MarshalAs(UnmanagedType.LPStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetDSMFullNameWDelegate(DSMType As Integer, <MarshalAs(UnmanagedType.LPWStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDSMSearchOrderDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDTWAINHandleDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDeviceEventDelegate(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDeviceEventExDelegate(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDeviceEventInfoDelegate(Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDeviceNotificationsDelegate(Source As System.IntPtr, ByRef DevEvents As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDeviceTimeDateDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetDeviceTimeDateADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetDeviceTimeDateWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDoubleFeedDetectLengthDelegate(Source As System.IntPtr, ByRef Value As System.Double, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDoubleFeedDetectValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetDuplexTypeDelegate(Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetErrorBufferDelegate(ByRef ArrayBuffer As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetErrorBufferThresholdDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetErrorCallbackDelegate() As DTwainErrorProc
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetErrorCallback64Delegate() As DTwainErrorProc64
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetErrorStringDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetErrorStringADelegate(lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetErrorStringWDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtCapFromNameDelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetExtCapFromNameADelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetExtCapFromNameWDelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtImageInfoDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtImageInfoDataDelegate(Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtImageInfoDataExDelegate(Source As System.IntPtr, nWhich As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtImageInfoItemDelegate(Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtImageInfoItemExDelegate(Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer, ByRef ReturnCode As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetExtNameFromCapDelegate(nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetExtNameFromCapADelegate(nValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetExtNameFromCapWDelegate(nValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFeederAlignmentDelegate(Source As System.IntPtr, ByRef lpAlignment As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFeederFuncsDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFeederOrderDelegate(Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFeederWaitTimeDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFileCompressionTypeDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFileTypeExtensionsDelegate(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetFileTypeExtensionsADelegate(nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetFileTypeExtensionsWDelegate(nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFileTypeNameDelegate(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetFileTypeNameADelegate(nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetFileTypeNameWDelegate(nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetHalftoneDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetHalftoneADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetHalftoneWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetHighlightDelegate(Source As System.IntPtr, ByRef Highlight As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetHighlightStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Highlight As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetHighlightStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetHighlightStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Highlight As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetImageInfoDelegate(Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetImageInfoStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetImageInfoStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetImageInfoStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetJobControlDelegate(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetJpegValuesDelegate(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetJpegXRValuesDelegate(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLanguageDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLastErrorDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLibraryPathDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetLibraryPathADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetLibraryPathWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLightPathDelegate(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLightSourceDelegate(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLightSourcesDelegate(Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLoggerCallbackDelegate() As DTwainLoggerProc
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLoggerCallbackADelegate() As DTwainLoggerProcA
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetLoggerCallbackWDelegate() As DTwainLoggerProcW
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetManualDuplexCountDelegate(Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetMaxAcquisitionsDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetMaxBuffersDelegate(Source As System.IntPtr, ByRef pMaxBuf As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetMaxPagesToAcquireDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetMaxRetryAttemptsDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetNameFromCapDelegate(nCapValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetNameFromCapADelegate(nCapValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetNameFromCapWDelegate(nCapValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetNoiseFilterDelegate(Source As System.IntPtr, ByRef lpNoiseFilter As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetNumAcquiredImagesDelegate(aAcq As System.IntPtr, nWhich As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetNumAcquisitionsDelegate(aAcq As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRCapValuesDelegate(Engine As System.IntPtr, OCRCapValue As Integer, TypeOfGet As Integer, ByRef CapValues As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRErrorStringDelegate(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRErrorStringADelegate(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRErrorStringWDelegate(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRLastErrorDelegate(Engine As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRMajorMinorVersionDelegate(Engine As System.IntPtr, ByRef lpMajor As Integer, ByRef lpMinor As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRManufacturerDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szManufacturer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRManufacturerADelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRManufacturerWDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRProductFamilyDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductFamily As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRProductFamilyADelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRProductFamilyWDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRProductNameDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductName As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRProductNameADelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRProductNameWDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextDelegate(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPTStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRTextADelegate(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextInfoFloatDelegate(OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextInfoFloatExDelegate(OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As System.Double, bufSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextInfoHandleDelegate(Engine As System.IntPtr, nPageNo As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextInfoLongDelegate(OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRTextInfoLongExDelegate(OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As Integer, bufSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRTextWDelegate(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPWStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOCRVersionInfoDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> buffer As StringBuilder, maxBufSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetOCRVersionInfoADelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> buffer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetOCRVersionInfoWDelegate(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> buffer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOrientationDelegate(Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetOverscanDelegate(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPDFTextElementFloatDelegate(TextElement As System.IntPtr, ByRef val1 As System.Double, ByRef val2 As System.Double, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPDFTextElementLongDelegate(TextElement As System.IntPtr, ByRef val1 As Integer, ByRef val2 As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPDFTextElementStringDelegate(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetPDFTextElementStringADelegate(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetPDFTextElementStringWDelegate(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPDFType1FontNameDelegate(FontVal As Integer, <MarshalAs(UnmanagedType.LPTStr)> szFont As StringBuilder, nChars As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetPDFType1FontNameADelegate(FontVal As Integer, <MarshalAs(UnmanagedType.LPStr)> szFont As StringBuilder, nChars As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetPDFType1FontNameWDelegate(FontVal As Integer, <MarshalAs(UnmanagedType.LPWStr)> szFont As StringBuilder, nChars As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPaperSizeDelegate(Source As System.IntPtr, ByRef lpPaperSize As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPaperSizeNameDelegate(paperNumber As Integer, <MarshalAs(UnmanagedType.LPTStr)> outName As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetPaperSizeNameADelegate(paperNumber As Integer, <MarshalAs(UnmanagedType.LPStr)> outName As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetPaperSizeNameWDelegate(paperNumber As Integer, <MarshalAs(UnmanagedType.LPWStr)> outName As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPatchMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPatchMaxRetriesDelegate(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPatchPrioritiesDelegate(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPatchSearchModeDelegate(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPatchTimeOutDelegate(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPixelFlavorDelegate(Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPixelTypeDelegate(Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPrinterDelegate(Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPrinterStartNumberDelegate(Source As System.IntPtr, ByRef nStart As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPrinterStringModeDelegate(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPrinterStringsDelegate(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetPrinterSuffixStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetPrinterSuffixStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetPrinterSuffixStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetRegisteredMsgDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetResolutionDelegate(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetResolutionStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetResolutionStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetResolutionStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetResourceStringDelegate(ResourceID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetResourceStringADelegate(ResourceID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetResourceStringWDelegate(ResourceID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetRotationDelegate(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetRotationStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetRotationStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetRotationStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Rotation As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSaveFileNameDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSaveFileNameADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSaveFileNameWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSavedFilesCountDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSessionDetailsDelegate(<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSessionDetailsADelegate(<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSessionDetailsWDelegate(<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetShadowDelegate(Source As System.IntPtr, ByRef Shadow As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetShadowStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Shadow As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetShadowStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Shadow As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetShadowStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Shadow As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetShortVersionStringDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetShortVersionStringADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetShortVersionStringWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceAcquisitionsDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceDetailsDelegate(szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSourceDetailsADelegate(szSources As String, <MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSourceDetailsWDelegate(szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceIDDelegate(Source As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceManufacturerDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSourceManufacturerADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSourceManufacturerWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceProductFamilyDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSourceProductFamilyADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSourceProductFamilyWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceProductNameDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSourceProductNameADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSourceProductNameWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceUnitDelegate(Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceVersionInfoDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetSourceVersionInfoADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSourceVersionInfoWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSourceVersionNumberDelegate(Source As System.IntPtr, ByRef pMajor As Integer, ByRef pMinor As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetStaticLibVersionDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTempFileDirectoryDelegate(<MarshalAs(UnmanagedType.LPTStr)> szFilePath As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTempFileDirectoryADelegate(<MarshalAs(UnmanagedType.LPStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTempFileDirectoryWDelegate(<MarshalAs(UnmanagedType.LPWStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetThresholdDelegate(Source As System.IntPtr, ByRef Threshold As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetThresholdStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Threshold As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetThresholdStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Threshold As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetThresholdStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Threshold As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTimeDateDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTimeDateADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTimeDateWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainAppIDDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainAvailabilityDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainAvailabilityExDelegate(<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainAvailabilityExADelegate(<MarshalAs(UnmanagedType.LPStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainAvailabilityExWDelegate(<MarshalAs(UnmanagedType.LPWStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainCountryNameDelegate(countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainCountryNameADelegate(countryId As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainCountryNameWDelegate(countryId As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainCountryValueDelegate(country As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainCountryValueADelegate(country As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainCountryValueWDelegate(country As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainHwndDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainIDFromNameDelegate(lpszBuffer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainIDFromNameADelegate(lpszBuffer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainIDFromNameWDelegate(lpszBuffer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainLanguageNameDelegate(nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainLanguageNameADelegate(lang As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainLanguageNameWDelegate(lang As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainLanguageValueDelegate(szName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainLanguageValueADelegate(lang As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainLanguageValueWDelegate(lang As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainModeDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainNameFromConstantDelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainNameFromConstantADelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainNameFromConstantWDelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainStringNameDelegate(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetTwainStringNameADelegate(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetTwainStringNameWDelegate(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetTwainTimeoutDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetVersionDelegate(ByRef lpMajor As Integer, ByRef lpMinor As Integer, ByRef lpVersionType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetVersionCopyrightDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetVersionCopyrightADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetVersionCopyrightWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetVersionExDelegate(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetVersionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetVersionInfoADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetVersionInfoWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetVersionStringDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetVersionStringADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetVersionStringWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetWindowsVersionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetWindowsVersionInfoADelegate(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetWindowsVersionInfoWDelegate(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetXResolutionDelegate(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetXResolutionStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetXResolutionStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetXResolutionStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetYResolutionDelegate(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetYResolutionStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_GetYResolutionStringADelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetYResolutionStringWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_InitExtImageInfoDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_InitImageFileAppendDelegate(szFile As String, fType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_InitImageFileAppendADelegate(szFile As String, fType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_InitImageFileAppendWDelegate(szFile As String, fType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_InitOCRInterfaceDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAcquiringDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAudioXferSupportedDelegate(Source As System.IntPtr, supportVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoBorderDetectEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoBorderDetectSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoBrightEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoBrightSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoDeskewEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoDeskewSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoFeedEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoFeedSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoRotateEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoRotateSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutoScanEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutomaticSenseMediumEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsAutomaticSenseMediumSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsBlankPageDetectionOnDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsBufferedTileModeOnDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsBufferedTileModeSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsCapSupportedDelegate(Source As System.IntPtr, lCapability As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsCompressionSupportedDelegate(Source As System.IntPtr, Compression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsCustomDSDataSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDIBBlankDelegate(hDib As System.IntPtr, threshold As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDIBBlankStringDelegate(hDib As System.IntPtr, threshold As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_IsDIBBlankStringADelegate(hDib As System.IntPtr, threshold As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_IsDIBBlankStringWDelegate(hDib As System.IntPtr, threshold As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDeviceEventSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDeviceOnLineDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDoubleFeedDetectLengthSupportedDelegate(Source As System.IntPtr, value As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDoubleFeedDetectSupportedDelegate(Source As System.IntPtr, SupportVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDoublePageCountOnDuplexDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDuplexEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsDuplexSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsExtImageInfoSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFeederEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFeederLoadedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFeederSensitiveDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFeederSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFileSystemSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsFileXferSupportedDelegate(Source As System.IntPtr, lFileType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldALastPageSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldALevelSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldAPrintFormatSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldAValueSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldBLastPageSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldBLevelSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldBPrintFormatSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldBValueSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldCLastPageSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldCLevelSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldCPrintFormatSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldCValueSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldDLastPageSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldDLevelSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldDPrintFormatSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldDValueSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldELastPageSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldELevelSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldEPrintFormatSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIAFieldEValueSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsImageAddressingSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIndicatorEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsIndicatorSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsInitializedDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsJPEGSupportedDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsJobControlSupportedDelegate(Source As System.IntPtr, JobControl As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsLampEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsLampSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsLightPathSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsLightSourceSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsMaxBuffersSupportedDelegate(Source As System.IntPtr, MaxBuf As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsMemFileXferSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsMsgNotifyEnabledDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsNotifyTripletsEnabledDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsOCREngineActivatedDelegate(OCREngine As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsOpenSourcesOnSelectDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsOrientationSupportedDelegate(Source As System.IntPtr, Orientation As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsOverscanSupportedDelegate(Source As System.IntPtr, SupportValue As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPDFSupportedDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPNGSupportedDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPaperDetectableDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPaperSizeSupportedDelegate(Source As System.IntPtr, PaperSize As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPatchCapsSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPatchDetectEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPatchSupportedDelegate(Source As System.IntPtr, PatchCode As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPeekMessageLoopEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPixelTypeSupportedDelegate(Source As System.IntPtr, PixelType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPrinterEnabledDelegate(Source As System.IntPtr, Printer As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsPrinterSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsRotationSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSessionEnabledDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSkipImageInfoErrorDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceAcquiringDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceAcquiringExDelegate(Source As System.IntPtr, bUIOnly As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceInUIOnlyModeDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceOpenDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceSelectedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsSourceValidDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsTIFFSupportedDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsThumbnailEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsThumbnailSupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsTwainAvailableDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsTwainAvailableExDelegate(<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_IsTwainAvailableExADelegate(<MarshalAs(UnmanagedType.LPStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_IsTwainAvailableExWDelegate(<MarshalAs(UnmanagedType.LPWStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsTwainMsgDelegate(ByRef pMsg As WinMsg) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsUIControllableDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsUIEnabledDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_IsUIOnlySupportedDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesDelegate(sLangDLL As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesADelegate(sLangDLL As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesExDelegate(sLangDLL As String, bClear As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesExADelegate(sLangDLL As String, bClear As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesExWDelegate(sLangDLL As String, bClear As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_LoadCustomStringResourcesWDelegate(sLangDLL As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LoadLanguageResourceDelegate(nLanguage As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LockMemoryDelegate(h As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LockMemoryExDelegate(h As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_LogMessageDelegate(message As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_LogMessageADelegate(message As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_LogMessageWDelegate(message As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_MakeRGBDelegate(red As Integer, green As Integer, blue As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_OpenSourceDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_OpenSourcesOnSelectDelegate(bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeCreateDelegate(nEnumType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeCreateFromCapDelegate(Source As System.IntPtr, lCapType As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeDestroyDelegate(pSource As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeExpandDelegate(pSource As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeExpandExDelegate(Range As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetAllDelegate(pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetAllFloatDelegate(pArray As System.IntPtr, ByRef pVariantLow As System.Double, ByRef pVariantUp As System.Double, ByRef pVariantStep As System.Double, ByRef pVariantDefault As System.Double, ByRef pVariantCurrent As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetAllFloatStringDelegate(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeGetAllFloatStringADelegate(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dCurrent As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeGetAllFloatStringWDelegate(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dCurrent As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetAllLongDelegate(pArray As System.IntPtr, ByRef pVariantLow As Integer, ByRef pVariantUp As Integer, ByRef pVariantStep As Integer, ByRef pVariantDefault As Integer, ByRef pVariantCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetCountDelegate(pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetExpValueDelegate(pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetExpValueFloatDelegate(pArray As System.IntPtr, lPos As Integer, ByRef pVal As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetExpValueFloatStringDelegate(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeGetExpValueFloatStringADelegate(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPStr)> pVal As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeGetExpValueFloatStringWDelegate(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> pVal As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetExpValueLongDelegate(pArray As System.IntPtr, lPos As Integer, ByRef pVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetNearestValueDelegate(pArray As System.IntPtr, pVariantIn As System.IntPtr, pVariantOut As System.IntPtr, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetPosDelegate(pArray As System.IntPtr, pVariant As System.IntPtr, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetPosFloatDelegate(pArray As System.IntPtr, Val As System.Double, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetPosFloatStringDelegate(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeGetPosFloatStringADelegate(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeGetPosFloatStringWDelegate(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetPosLongDelegate(pArray As System.IntPtr, Value As Integer, ByRef pPos As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetValueDelegate(pArray As System.IntPtr, nWhich As Integer, pVariant As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetValueFloatDelegate(pArray As System.IntPtr, nWhich As Integer, ByRef pVal As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetValueFloatStringDelegate(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeGetValueFloatStringADelegate(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> dValue As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeGetValueFloatStringWDelegate(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> dValue As StringBuilder) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeGetValueLongDelegate(pArray As System.IntPtr, nWhich As Integer, ByRef pVal As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeIsValidDelegate(Range As System.IntPtr, ByRef pStatus As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeNearestValueFloatDelegate(pArray As System.IntPtr, dIn As System.Double, ByRef pOut As System.Double, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeNearestValueFloatStringDelegate(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPTStr)> pOut As StringBuilder, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeNearestValueFloatStringADelegate(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeNearestValueFloatStringWDelegate(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPWStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeNearestValueLongDelegate(pArray As System.IntPtr, lIn As Integer, ByRef pOut As Integer, RoundType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetAllDelegate(pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetAllFloatDelegate(pArray As System.IntPtr, dLow As System.Double, dUp As System.Double, dStep As System.Double, dDefault As System.Double, dCurrent As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetAllFloatStringDelegate(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeSetAllFloatStringADelegate(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeSetAllFloatStringWDelegate(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetAllLongDelegate(pArray As System.IntPtr, lLow As Integer, lUp As Integer, lStep As Integer, lDefault As Integer, lCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetValueDelegate(pArray As System.IntPtr, nWhich As Integer, pVal As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetValueFloatDelegate(pArray As System.IntPtr, nWhich As Integer, Val As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetValueFloatStringDelegate(pArray As System.IntPtr, nWhich As Integer, Val As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_RangeSetValueFloatStringADelegate(pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_RangeSetValueFloatStringWDelegate(pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RangeSetValueLongDelegate(pArray As System.IntPtr, nWhich As Integer, Val As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ResetPDFTextElementDelegate(TextElement As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_RewindPageDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectDefaultOCREngineDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectDefaultSourceDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectDefaultSourceWithOpenDelegate(bOpen As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectOCREngineDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectOCREngine2Delegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectOCREngine2ADelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectOCREngine2ExDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectOCREngine2ExADelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectOCREngine2ExWDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectOCREngine2WDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectOCREngineByNameDelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectOCREngineByNameADelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectOCREngineByNameWDelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSourceDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSource2Delegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectSource2ADelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSource2ExDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectSource2ExADelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectSource2ExWDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectSource2WDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSourceByNameDelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectSourceByNameADelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectSourceByNameWDelegate(lpszName As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSourceByNameWithOpenDelegate(lpszName As String, bOpen As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SelectSourceByNameWithOpenADelegate(lpszName As String, bOpen As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SelectSourceByNameWithOpenWDelegate(lpszName As String, bOpen As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SelectSourceWithOpenDelegate(bOpen As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireAreaDelegate(Source As System.IntPtr, lSetType As Integer, FloatEnum As System.IntPtr, ActualEnum As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireArea2Delegate(Source As System.IntPtr, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double, lUnit As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireArea2StringDelegate(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetAcquireArea2StringADelegate(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetAcquireArea2StringWDelegate(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireImageNegativeDelegate(Source As System.IntPtr, IsNegative As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireImageScaleDelegate(Source As System.IntPtr, xscale As System.Double, yscale As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireImageScaleStringDelegate(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetAcquireImageScaleStringADelegate(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetAcquireImageScaleStringWDelegate(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireStripBufferDelegate(Source As System.IntPtr, hMem As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAcquireStripSizeDelegate(Source As System.IntPtr, StripSize As UInteger) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAlarmVolumeDelegate(Source As System.IntPtr, Volume As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAlarmsDelegate(Source As System.IntPtr, Alarms As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAllCapsToDefaultDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAppInfoDelegate(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetAppInfoADelegate(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetAppInfoWDelegate(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAuthorDelegate(Source As System.IntPtr, szAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetAuthorADelegate(Source As System.IntPtr, szAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetAuthorWDelegate(Source As System.IntPtr, szAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAvailablePrintersDelegate(Source As System.IntPtr, lpAvailPrinters As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetAvailablePrintersArrayDelegate(Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBitDepthDelegate(Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionDelegate(Source As System.IntPtr, threshold As System.Double, discard_option As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionExDelegate(Source As System.IntPtr, threshold As System.Double, autodetect As Integer, detectOpts As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionExStringDelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionExStringADelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionExStringWDelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionStringDelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionStringADelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetBlankPageDetectionStringWDelegate(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBrightnessDelegate(Source As System.IntPtr, Brightness As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBrightnessStringDelegate(Source As System.IntPtr, Brightness As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetBrightnessStringADelegate(Source As System.IntPtr, Contrast As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetBrightnessStringWDelegate(Source As System.IntPtr, Contrast As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetBufferedTileModeDelegate(Source As System.IntPtr, bTileMode As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCallbackDelegate(Fn As DTwainCallback, UserData As Integer) As DTwainCallback
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCallback64Delegate(Fn As DTwainCallback64, UserData As System.Int64) As DTwainCallback64
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCameraDelegate(Source As System.IntPtr, szCamera As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetCameraADelegate(Source As System.IntPtr, szCamera As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetCameraWDelegate(Source As System.IntPtr, szCamera As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCapValuesDelegate(Source As System.IntPtr, lCap As Integer, lSetType As Integer, pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCapValuesExDelegate(Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCapValuesEx2Delegate(Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, nDataType As Integer, pArray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCaptionDelegate(Source As System.IntPtr, Caption As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetCaptionADelegate(Source As System.IntPtr, Caption As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetCaptionWDelegate(Source As System.IntPtr, Caption As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCompressionTypeDelegate(Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetContrastDelegate(Source As System.IntPtr, Contrast As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetContrastStringDelegate(Source As System.IntPtr, Contrast As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetContrastStringADelegate(Source As System.IntPtr, Contrast As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetContrastStringWDelegate(Source As System.IntPtr, Contrast As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCountryDelegate(nCountry As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCurrentRetryCountDelegate(Source As System.IntPtr, nCount As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetCustomDSDataDelegate(Source As System.IntPtr, hData As System.IntPtr, <MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.U8, SizeParamIndex:=3)> Data As Byte(), dSize As UInteger, nFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDSMSearchOrderDelegate(SearchPath As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDSMSearchOrderExDelegate(SearchOrder As String, UserPath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetDSMSearchOrderExADelegate(SearchOrder As String, szUserPath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetDSMSearchOrderExWDelegate(SearchOrder As String, szUserPath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDefaultSourceDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDeviceNotificationsDelegate(Source As System.IntPtr, DevEvents As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDeviceTimeDateDelegate(Source As System.IntPtr, szTimeDate As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetDeviceTimeDateADelegate(Source As System.IntPtr, szTimeDate As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetDeviceTimeDateWDelegate(Source As System.IntPtr, szTimeDate As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDoubleFeedDetectLengthDelegate(Source As System.IntPtr, Value As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDoubleFeedDetectLengthStringDelegate(Source As System.IntPtr, value As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetDoubleFeedDetectLengthStringADelegate(Source As System.IntPtr, szLength As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetDoubleFeedDetectLengthStringWDelegate(Source As System.IntPtr, szLength As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDoubleFeedDetectValuesDelegate(Source As System.IntPtr, prray As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetDoublePageCountOnDuplexDelegate(Source As System.IntPtr, bDoubleCount As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetEOJDetectValueDelegate(Source As System.IntPtr, nValue As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetErrorBufferThresholdDelegate(nErrors As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetErrorCallbackDelegate(proc As DTwainErrorProc, UserData As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetErrorCallback64Delegate(proc As DTwainErrorProc64, UserData64 As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFeederAlignmentDelegate(Source As System.IntPtr, lpAlignment As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFeederOrderDelegate(Source As System.IntPtr, lOrder As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFeederWaitTimeDelegate(Source As System.IntPtr, waitTime As Integer, flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFileAutoIncrementDelegate(Source As System.IntPtr, Increment As Integer, bResetOnAcquire As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFileCompressionTypeDelegate(Source As System.IntPtr, lCompression As Integer, bIsCustom As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFileSavePosDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetFileSavePosADelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetFileSavePosWDelegate(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetFileXferFormatDelegate(Source As System.IntPtr, lFileType As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetHalftoneDelegate(Source As System.IntPtr, lpHalftone As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetHalftoneADelegate(Source As System.IntPtr, lpHalftone As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetHalftoneWDelegate(Source As System.IntPtr, lpHalftone As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetHighlightDelegate(Source As System.IntPtr, Highlight As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetHighlightStringDelegate(Source As System.IntPtr, Highlight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetHighlightStringADelegate(Source As System.IntPtr, Highlight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetHighlightStringWDelegate(Source As System.IntPtr, Highlight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetJobControlDelegate(Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetJpegValuesDelegate(Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetJpegXRValuesDelegate(Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLanguageDelegate(nLanguage As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLastErrorDelegate(nError As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLightPathDelegate(Source As System.IntPtr, LightPath As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLightPathExDelegate(Source As System.IntPtr, LightPaths As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLightSourceDelegate(Source As System.IntPtr, LightSource As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLightSourcesDelegate(Source As System.IntPtr, LightSources As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLoggerCallbackDelegate(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLoggerCallbackADelegate(logProc As DTwainLoggerProcA, UserData As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetLoggerCallbackWDelegate(logProc As DTwainLoggerProcW, UserData As System.Int64) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetManualDuplexModeDelegate(Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetMaxAcquisitionsDelegate(Source As System.IntPtr, MaxAcquires As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetMaxBuffersDelegate(Source As System.IntPtr, MaxBuf As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetMaxRetryAttemptsDelegate(Source As System.IntPtr, nAttempts As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetMultipageScanModeDelegate(Source As System.IntPtr, ScanType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetNoiseFilterDelegate(Source As System.IntPtr, NoiseFilter As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetOCRCapValuesDelegate(Engine As System.IntPtr, OCRCapValue As Integer, SetType As Integer, CapValues As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetOrientationDelegate(Source As System.IntPtr, Orient As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetOverscanDelegate(Source As System.IntPtr, Value As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFAESEncryptionDelegate(Source As System.IntPtr, nWhichEncryption As Integer, bUseAES As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFASCIICompressionDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFAuthorDelegate(Source As System.IntPtr, lpAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFAuthorADelegate(Source As System.IntPtr, lpAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFAuthorWDelegate(Source As System.IntPtr, lpAuthor As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFCompressionDelegate(Source As System.IntPtr, bCompression As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFCreatorDelegate(Source As System.IntPtr, lpCreator As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFCreatorADelegate(Source As System.IntPtr, lpCreator As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFCreatorWDelegate(Source As System.IntPtr, lpCreator As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFEncryptionDelegate(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFEncryptionADelegate(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFEncryptionWDelegate(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFJpegQualityDelegate(Source As System.IntPtr, Quality As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFKeywordsDelegate(Source As System.IntPtr, lpKeyWords As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFKeywordsADelegate(Source As System.IntPtr, lpKeyWords As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFKeywordsWDelegate(Source As System.IntPtr, lpKeyWords As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFOCRConversionDelegate(Engine As System.IntPtr, PageType As Integer, FileType As Integer, PixelType As Integer, BitDepth As Integer, Options As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFOCRModeDelegate(Source As System.IntPtr, bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFOrientationDelegate(Source As System.IntPtr, lPOrientation As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFPageScaleDelegate(Source As System.IntPtr, nOptions As Integer, xScale As System.Double, yScale As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFPageScaleStringDelegate(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFPageScaleStringADelegate(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFPageScaleStringWDelegate(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFPageSizeDelegate(Source As System.IntPtr, PageSize As Integer, CustomWidth As System.Double, CustomHeight As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFPageSizeStringDelegate(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFPageSizeStringADelegate(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFPageSizeStringWDelegate(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFPolarityDelegate(Source As System.IntPtr, Polarity As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFProducerDelegate(Source As System.IntPtr, lpProducer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFProducerADelegate(Source As System.IntPtr, lpProducer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFProducerWDelegate(Source As System.IntPtr, lpProducer As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFSubjectDelegate(Source As System.IntPtr, lpSubject As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFSubjectADelegate(Source As System.IntPtr, lpSubject As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFSubjectWDelegate(Source As System.IntPtr, lpSubject As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFTextElementFloatDelegate(TextElement As System.IntPtr, val1 As System.Double, val2 As System.Double, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFTextElementLongDelegate(TextElement As System.IntPtr, val1 As Integer, val2 As Integer, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFTextElementStringDelegate(TextElement As System.IntPtr, val1 As String, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFTextElementStringADelegate(TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFTextElementStringWDelegate(TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPDFTitleDelegate(Source As System.IntPtr, lpTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPDFTitleADelegate(Source As System.IntPtr, lpTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPDFTitleWDelegate(Source As System.IntPtr, lpTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPaperSizeDelegate(Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPatchMaxPrioritiesDelegate(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPatchMaxRetriesDelegate(Source As System.IntPtr, nMaxRetries As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPatchPrioritiesDelegate(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPatchSearchModeDelegate(Source As System.IntPtr, nSearchMode As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPatchTimeOutDelegate(Source As System.IntPtr, TimeOutValue As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPixelFlavorDelegate(Source As System.IntPtr, PixelFlavor As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPixelTypeDelegate(Source As System.IntPtr, PixelType As Integer, BitDepth As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPostScriptTitleDelegate(Source As System.IntPtr, szTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPostScriptTitleADelegate(Source As System.IntPtr, szTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPostScriptTitleWDelegate(Source As System.IntPtr, szTitle As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPostScriptTypeDelegate(Source As System.IntPtr, PSType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterDelegate(Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterExDelegate(Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterStartNumberDelegate(Source As System.IntPtr, nStart As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterStringModeDelegate(Source As System.IntPtr, PrinterMode As Integer, bSetCurrent As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterStringsDelegate(Source As System.IntPtr, ArrayString As System.IntPtr, ByRef pNumStrings As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetPrinterSuffixStringDelegate(Source As System.IntPtr, Suffix As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetPrinterSuffixStringADelegate(Source As System.IntPtr, Suffix As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetPrinterSuffixStringWDelegate(Source As System.IntPtr, Suffix As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetQueryCapSupportDelegate(bSet As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetResolutionDelegate(Source As System.IntPtr, Resolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetResolutionStringDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetResolutionStringADelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetResolutionStringWDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetResourcePathDelegate(ResourcePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetResourcePathADelegate(ResourcePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetResourcePathWDelegate(ResourcePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetRotationDelegate(Source As System.IntPtr, Rotation As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetRotationStringDelegate(Source As System.IntPtr, Rotation As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetRotationStringADelegate(Source As System.IntPtr, Rotation As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetRotationStringWDelegate(Source As System.IntPtr, Rotation As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetSaveFileNameDelegate(Source As System.IntPtr, fName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetSaveFileNameADelegate(Source As System.IntPtr, fName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetSaveFileNameWDelegate(Source As System.IntPtr, fName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetShadowDelegate(Source As System.IntPtr, Shadow As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetShadowStringDelegate(Source As System.IntPtr, Shadow As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetShadowStringADelegate(Source As System.IntPtr, Shadow As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetShadowStringWDelegate(Source As System.IntPtr, Shadow As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetSourceUnitDelegate(Source As System.IntPtr, Unit As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTIFFCompressTypeDelegate(Source As System.IntPtr, Setting As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTIFFInvertDelegate(Source As System.IntPtr, Setting As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryDelegate(szFilePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryADelegate(szFilePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryExDelegate(szFilePath As String, CreationFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryExADelegate(szFilePath As String, CreationFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryExWDelegate(szFilePath As String, CreationFlags As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetTempFileDirectoryWDelegate(szFilePath As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetThresholdDelegate(Source As System.IntPtr, Threshold As System.Double, bSetBithDepthReduction As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetThresholdStringDelegate(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetThresholdStringADelegate(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetThresholdStringWDelegate(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTwainDSMDelegate(DSMType As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTwainLogDelegate(LogFlags As UInteger, lpszLogFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetTwainLogADelegate(LogFlags As UInteger, lpszLogFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetTwainLogWDelegate(LogFlags As UInteger, lpszLogFile As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTwainModeDelegate(lAcquireMode As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetTwainTimeoutDelegate(milliseconds As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetUpdateDibProcDelegate(DibProc As DTwainDIBUpdateProc) As DTwainDIBUpdateProc
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetXResolutionDelegate(Source As System.IntPtr, xResolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetXResolutionStringDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetXResolutionStringADelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetXResolutionStringWDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetYResolutionDelegate(Source As System.IntPtr, yResolution As System.Double) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SetYResolutionStringDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SetYResolutionStringADelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SetYResolutionStringWDelegate(Source As System.IntPtr, Resolution As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ShowUIOnlyDelegate(Source As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_ShutdownOCREngineDelegate(OCREngine As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SkipImageInfoErrorDelegate(Source As System.IntPtr, bSkip As Integer) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_StartThreadDelegate(DLLHandle As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_StartTwainSessionDelegate(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_StartTwainSessionADelegate(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_StartTwainSessionWDelegate(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysDestroyDelegate() As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeExDelegate(szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeEx2Delegate(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SysInitializeEx2ADelegate(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SysInitializeEx2WDelegate(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SysInitializeExADelegate(szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SysInitializeExWDelegate(szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeLibDelegate(hInstance As System.IntPtr) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeLibExDelegate(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeLibEx2Delegate(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SysInitializeLibEx2ADelegate(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SysInitializeLibEx2WDelegate(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
         Public Delegate Function DTWAIN_SysInitializeLibExADelegate(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_SysInitializeLibExWDelegate(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_SysInitializeNoBlockingDelegate() As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_TestGetCapDelegate(Source As System.IntPtr, lCapability As Integer) As System.IntPtr
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_UnlockMemoryDelegate(h As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_UnlockMemoryExDelegate(h As System.IntPtr) As Integer
-
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_UseMultipleThreadsDelegate(bSet As Integer) As Integer
         Public Function DTWAIN_AcquireAudioFile(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lMaxClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxClips, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxClips, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireAudioFileA(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireAudioFileA(Source, lpszFile, lFileFlags, lNumClips, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireAudioFileA(Source, lpszFile, lFileFlags, lNumClips, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireAudioFileW(Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireAudioFileW(Source, lpszFile, lFileFlags, lNumClips, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireAudioFileW(Source, lpszFile, lFileFlags, lNumClips, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireAudioNative(Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-            Return api.DTWAIN_AcquireAudioNative(Source, nMaxAudioClips, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireAudioNative(Source, nMaxAudioClips, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireAudioNativeEx(Source As System.IntPtr, nMaxAudioClips As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireAudioNativeEx(Source, nMaxAudioClips, bShowUI, bCloseSource, Acquisitions, pStatus)
+        Return api.DTWAIN_AcquireAudioNativeEx(Source, nMaxAudioClips, bShowUI, bCloseSource, Acquisitions, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireBuffered(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-            Return api.DTWAIN_AcquireBuffered(Source, PixelType, nMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireBuffered(Source, PixelType, nMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireBufferedEx(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireBufferedEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, pStatus)
+        Return api.DTWAIN_AcquireBufferedEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireFile(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireFile(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireFile(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireFileA(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireFileA(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireFileA(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireFileEx(Source As System.IntPtr, aFileNames As System.IntPtr, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireFileEx(Source, aFileNames, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireFileEx(Source, aFileNames, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireFileW(Source As System.IntPtr, lpszFile As String, lFileType As Integer, lFileFlags As Integer, PixelType As Integer, lMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireFileW(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireFileW(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireNative(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-            Return api.DTWAIN_AcquireNative(Source, PixelType, nMaxPages, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireNative(Source, PixelType, nMaxPages, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireNativeEx(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, bShowUI As Integer, bCloseSource As Integer, Acquisitions As System.IntPtr, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_AcquireNativeEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, pStatus)
+        Return api.DTWAIN_AcquireNativeEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AcquireToClipboard(Source As System.IntPtr, PixelType As Integer, nMaxPages As Integer, nTransferMode As Integer, bDiscardDibs As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As System.IntPtr
-            Return api.DTWAIN_AcquireToClipboard(Source, PixelType, nMaxPages, nTransferMode, bDiscardDibs, bShowUI, bCloseSource, pStatus)
+        Return api.DTWAIN_AcquireToClipboard(Source, PixelType, nMaxPages, nTransferMode, bDiscardDibs, bShowUI, bCloseSource, pStatus)
         End Function
-
+        
         Public Function DTWAIN_AddExtImageInfoQuery(Source As System.IntPtr, ExtImageInfo As Integer) As Integer
-            Return api.DTWAIN_AddExtImageInfoQuery(Source, ExtImageInfo)
+        Return api.DTWAIN_AddExtImageInfoQuery(Source, ExtImageInfo)
         End Function
-
+        
         Public Function DTWAIN_AddFileToAppend(szFile As String) As Integer
-            Return api.DTWAIN_AddFileToAppend(szFile)
+        Return api.DTWAIN_AddFileToAppend(szFile)
         End Function
-
+        
         Public Function DTWAIN_AddFileToAppendA(szFile As String) As Integer
-            Return api.DTWAIN_AddFileToAppendA(szFile)
+        Return api.DTWAIN_AddFileToAppendA(szFile)
         End Function
-
+        
         Public Function DTWAIN_AddFileToAppendW(szFile As String) As Integer
-            Return api.DTWAIN_AddFileToAppendW(szFile)
+        Return api.DTWAIN_AddFileToAppendW(szFile)
         End Function
-
+        
         Public Function DTWAIN_AddPDFText(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-            Return api.DTWAIN_AddPDFText(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
+        Return api.DTWAIN_AddPDFText(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
         End Function
-
+        
         Public Function DTWAIN_AddPDFTextA(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-            Return api.DTWAIN_AddPDFTextA(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
+        Return api.DTWAIN_AddPDFTextA(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
         End Function
-
+        
         Public Function DTWAIN_AddPDFTextEx(Source As System.IntPtr, TextElement As System.IntPtr, Flags As UInteger) As Integer
-            Return api.DTWAIN_AddPDFTextEx(Source, TextElement, Flags)
+        Return api.DTWAIN_AddPDFTextEx(Source, TextElement, Flags)
         End Function
-
+        
         Public Function DTWAIN_AddPDFTextW(Source As System.IntPtr, szText As String, xPos As Integer, yPos As Integer, fontName As String, fontSize As System.Double, colorRGB As Integer, renderMode As Integer, scaling As System.Double, charSpacing As System.Double, wordSpacing As System.Double, strokeWidth As Integer, Flags As UInteger) As Integer
-            Return api.DTWAIN_AddPDFTextW(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
+        Return api.DTWAIN_AddPDFTextW(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags)
         End Function
-
+        
         Public Function DTWAIN_AllocateMemory(memSize As UInteger) As System.IntPtr
-            Return api.DTWAIN_AllocateMemory(memSize)
+        Return api.DTWAIN_AllocateMemory(memSize)
         End Function
-
+        
         Public Function DTWAIN_AllocateMemory64(memSize As System.UInt64) As System.IntPtr
-            Return api.DTWAIN_AllocateMemory64(memSize)
+        Return api.DTWAIN_AllocateMemory64(memSize)
         End Function
-
+        
         Public Function DTWAIN_AllocateMemoryEx(memSize As UInteger) As System.IntPtr
-            Return api.DTWAIN_AllocateMemoryEx(memSize)
+        Return api.DTWAIN_AllocateMemoryEx(memSize)
         End Function
-
+        
         Public Function DTWAIN_AppHandlesExceptions(bSet As Integer) As Integer
-            Return api.DTWAIN_AppHandlesExceptions(bSet)
+        Return api.DTWAIN_AppHandlesExceptions(bSet)
         End Function
-
+        
         Public Function DTWAIN_ArrayANSIStringToFloat(StringArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayANSIStringToFloat(StringArray)
+        Return api.DTWAIN_ArrayANSIStringToFloat(StringArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayAdd(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayAdd(pArray, pVariant)
+        Return api.DTWAIN_ArrayAdd(pArray, pVariant)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddANSIString(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddANSIString(pArray, Val)
+        Return api.DTWAIN_ArrayAddANSIString(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddANSIStringN(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddANSIStringN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddANSIStringN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloat(pArray As System.IntPtr, Val As System.Double) As Integer
-            Return api.DTWAIN_ArrayAddFloat(pArray, Val)
+        Return api.DTWAIN_ArrayAddFloat(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatN(pArray As System.IntPtr, Val As System.Double, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddFloatN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddFloatN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatString(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddFloatString(pArray, Val)
+        Return api.DTWAIN_ArrayAddFloatString(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatStringA(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddFloatStringA(pArray, Val)
+        Return api.DTWAIN_ArrayAddFloatStringA(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatStringN(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddFloatStringN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddFloatStringN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatStringNA(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddFloatStringNA(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddFloatStringNA(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatStringNW(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddFloatStringNW(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddFloatStringNW(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFloatStringW(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddFloatStringW(pArray, Val)
+        Return api.DTWAIN_ArrayAddFloatStringW(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFrame(pArray As System.IntPtr, frame As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayAddFrame(pArray, frame)
+        Return api.DTWAIN_ArrayAddFrame(pArray, frame)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddFrameN(pArray As System.IntPtr, frame As System.IntPtr, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddFrameN(pArray, frame, num)
+        Return api.DTWAIN_ArrayAddFrameN(pArray, frame, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddLong(pArray As System.IntPtr, Val As Integer) As Integer
-            Return api.DTWAIN_ArrayAddLong(pArray, Val)
+        Return api.DTWAIN_ArrayAddLong(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddLong64(pArray As System.IntPtr, Val As System.Int64) As Integer
-            Return api.DTWAIN_ArrayAddLong64(pArray, Val)
+        Return api.DTWAIN_ArrayAddLong64(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddLong64N(pArray As System.IntPtr, Val As System.Int64, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddLong64N(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddLong64N(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddLongN(pArray As System.IntPtr, Val As Integer, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddLongN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddLongN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddN(pArray As System.IntPtr, pVariant As System.IntPtr, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddN(pArray, pVariant, num)
+        Return api.DTWAIN_ArrayAddN(pArray, pVariant, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddString(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddString(pArray, Val)
+        Return api.DTWAIN_ArrayAddString(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddStringA(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddStringA(pArray, Val)
+        Return api.DTWAIN_ArrayAddStringA(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddStringN(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddStringN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddStringN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddStringNA(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddStringNA(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddStringNA(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddStringNW(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddStringNW(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddStringNW(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddStringW(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddStringW(pArray, Val)
+        Return api.DTWAIN_ArrayAddStringW(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddWideString(pArray As System.IntPtr, Val As String) As Integer
-            Return api.DTWAIN_ArrayAddWideString(pArray, Val)
+        Return api.DTWAIN_ArrayAddWideString(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayAddWideStringN(pArray As System.IntPtr, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayAddWideStringN(pArray, Val, num)
+        Return api.DTWAIN_ArrayAddWideStringN(pArray, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayConvertFix32ToFloat(Fix32Array As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayConvertFix32ToFloat(Fix32Array)
+        Return api.DTWAIN_ArrayConvertFix32ToFloat(Fix32Array)
         End Function
-
+        
         Public Function DTWAIN_ArrayConvertFloatToFix32(FloatArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayConvertFloatToFix32(FloatArray)
+        Return api.DTWAIN_ArrayConvertFloatToFix32(FloatArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayCopy(Source As System.IntPtr, Dest As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayCopy(Source, Dest)
+        Return api.DTWAIN_ArrayCopy(Source, Dest)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreate(nEnumType As Integer, nInitialSize As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayCreate(nEnumType, nInitialSize)
+        Return api.DTWAIN_ArrayCreate(nEnumType, nInitialSize)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreateCopy(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayCreateCopy(Source)
+        Return api.DTWAIN_ArrayCreateCopy(Source)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreateFromCap(Source As System.IntPtr, lCapType As Integer, lSize As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayCreateFromCap(Source, lCapType, lSize)
+        Return api.DTWAIN_ArrayCreateFromCap(Source, lCapType, lSize)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreateFromLong64s(ByRef pCArray As System.Int64, nSize As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayCreateFromLong64s(pCArray, nSize)
+        Return api.DTWAIN_ArrayCreateFromLong64s(pCArray, nSize)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreateFromLongs(ByRef pCArray As Integer, nSize As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayCreateFromLongs(pCArray, nSize)
+        Return api.DTWAIN_ArrayCreateFromLongs(pCArray, nSize)
         End Function
-
+        
         Public Function DTWAIN_ArrayCreateFromReals(ByRef pCArray As System.Double, nSize As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayCreateFromReals(pCArray, nSize)
+        Return api.DTWAIN_ArrayCreateFromReals(pCArray, nSize)
         End Function
-
+        
         Public Function DTWAIN_ArrayDestroy(pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayDestroy(pArray)
+        Return api.DTWAIN_ArrayDestroy(pArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayDestroyFrames(FrameArray As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayDestroyFrames(FrameArray)
+        Return api.DTWAIN_ArrayDestroyFrames(FrameArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayFind(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayFind(pArray, pVariant)
+        Return api.DTWAIN_ArrayFind(pArray, pVariant)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindANSIString(pArray As System.IntPtr, pString As String) As Integer
-            Return api.DTWAIN_ArrayFindANSIString(pArray, pString)
+        Return api.DTWAIN_ArrayFindANSIString(pArray, pString)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindFloat(pArray As System.IntPtr, Val As System.Double, Tolerance As System.Double) As Integer
-            Return api.DTWAIN_ArrayFindFloat(pArray, Val, Tolerance)
+        Return api.DTWAIN_ArrayFindFloat(pArray, Val, Tolerance)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindFloatString(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-            Return api.DTWAIN_ArrayFindFloatString(pArray, Val, Tolerance)
+        Return api.DTWAIN_ArrayFindFloatString(pArray, Val, Tolerance)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindFloatStringA(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-            Return api.DTWAIN_ArrayFindFloatStringA(pArray, Val, Tolerance)
+        Return api.DTWAIN_ArrayFindFloatStringA(pArray, Val, Tolerance)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindFloatStringW(pArray As System.IntPtr, Val As String, Tolerance As String) As Integer
-            Return api.DTWAIN_ArrayFindFloatStringW(pArray, Val, Tolerance)
+        Return api.DTWAIN_ArrayFindFloatStringW(pArray, Val, Tolerance)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindLong(pArray As System.IntPtr, Val As Integer) As Integer
-            Return api.DTWAIN_ArrayFindLong(pArray, Val)
+        Return api.DTWAIN_ArrayFindLong(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindLong64(pArray As System.IntPtr, Val As System.Int64) As Integer
-            Return api.DTWAIN_ArrayFindLong64(pArray, Val)
+        Return api.DTWAIN_ArrayFindLong64(pArray, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindString(pArray As System.IntPtr, pString As String) As Integer
-            Return api.DTWAIN_ArrayFindString(pArray, pString)
+        Return api.DTWAIN_ArrayFindString(pArray, pString)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindStringA(pArray As System.IntPtr, pString As String) As Integer
-            Return api.DTWAIN_ArrayFindStringA(pArray, pString)
+        Return api.DTWAIN_ArrayFindStringA(pArray, pString)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindStringW(pArray As System.IntPtr, pString As String) As Integer
-            Return api.DTWAIN_ArrayFindStringW(pArray, pString)
+        Return api.DTWAIN_ArrayFindStringW(pArray, pString)
         End Function
-
+        
         Public Function DTWAIN_ArrayFindWideString(pArray As System.IntPtr, pString As String) As Integer
-            Return api.DTWAIN_ArrayFindWideString(pArray, pString)
+        Return api.DTWAIN_ArrayFindWideString(pArray, pString)
         End Function
-
+        
         Public Function DTWAIN_ArrayFix32GetAt(aFix32 As System.IntPtr, lPos As Integer, ByRef Whole As Integer, ByRef Frac As Integer) As Integer
-            Return api.DTWAIN_ArrayFix32GetAt(aFix32, lPos, Whole, Frac)
+        Return api.DTWAIN_ArrayFix32GetAt(aFix32, lPos, Whole, Frac)
         End Function
-
+        
         Public Function DTWAIN_ArrayFix32SetAt(aFix32 As System.IntPtr, lPos As Integer, Whole As Integer, Frac As Integer) As Integer
-            Return api.DTWAIN_ArrayFix32SetAt(aFix32, lPos, Whole, Frac)
+        Return api.DTWAIN_ArrayFix32SetAt(aFix32, lPos, Whole, Frac)
         End Function
-
+        
         Public Function DTWAIN_ArrayFloatToANSIString(FloatArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayFloatToANSIString(FloatArray)
+        Return api.DTWAIN_ArrayFloatToANSIString(FloatArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayFloatToString(FloatArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayFloatToString(FloatArray)
+        Return api.DTWAIN_ArrayFloatToString(FloatArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayFloatToWideString(FloatArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayFloatToWideString(FloatArray)
+        Return api.DTWAIN_ArrayFloatToWideString(FloatArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAt(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetAt(pArray, nWhere, pVariant)
+        Return api.DTWAIN_ArrayGetAt(pArray, nWhere, pVariant)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtANSIString(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtANSIString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArrayGetAtANSIString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFloat(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Double) As Integer
-            Return api.DTWAIN_ArrayGetAtFloat(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayGetAtFloat(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFloatString(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFloatStringA(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> Val As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFloatStringA(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayGetAtFloatStringA(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFloatStringW(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> Val As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFloatStringW(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayGetAtFloatStringW(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFrame(FrameArray As System.IntPtr, nWhere As Integer, ByRef pleft As System.Double, ByRef ptop As System.Double, ByRef pright As System.Double, ByRef pbottom As System.Double) As Integer
-            Return api.DTWAIN_ArrayGetAtFrame(FrameArray, nWhere, pleft, ptop, pright, pbottom)
+        Return api.DTWAIN_ArrayGetAtFrame(FrameArray, nWhere, pleft, ptop, pright, pbottom)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFrameEx(FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetAtFrameEx(FrameArray, nWhere, Frame)
+        Return api.DTWAIN_ArrayGetAtFrameEx(FrameArray, nWhere, Frame)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFrameString(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFrameString(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArrayGetAtFrameString(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFrameStringA(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFrameStringA(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArrayGetAtFrameStringA(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtFrameStringW(FrameArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtFrameStringW(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArrayGetAtFrameStringW(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtLong(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As Integer) As Integer
-            Return api.DTWAIN_ArrayGetAtLong(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayGetAtLong(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtLong64(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
-            Return api.DTWAIN_ArrayGetAtLong64(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayGetAtLong64(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtSource(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetAtSource(pArray, nWhere, ppSource)
+        Return api.DTWAIN_ArrayGetAtSource(pArray, nWhere, ppSource)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtString(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> pStr As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArrayGetAtString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtStringA(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPStr)> pStr As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtStringA(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArrayGetAtStringA(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtStringW(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtStringW(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArrayGetAtStringW(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetAtWideString(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPWStr)> pStr As StringBuilder) As Integer
-            Return api.DTWAIN_ArrayGetAtWideString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArrayGetAtWideString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetBuffer(pArray As System.IntPtr, nPos As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayGetBuffer(pArray, nPos)
+        Return api.DTWAIN_ArrayGetBuffer(pArray, nPos)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetCapValues(Source As System.IntPtr, lCap As Integer, lGetType As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayGetCapValues(Source, lCap, lGetType)
+        Return api.DTWAIN_ArrayGetCapValues(Source, lCap, lGetType)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetCapValuesEx(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayGetCapValuesEx(Source, lCap, lGetType, lContainerType)
+        Return api.DTWAIN_ArrayGetCapValuesEx(Source, lCap, lGetType, lContainerType)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetCapValuesEx2(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer) As System.IntPtr
-            Return api.DTWAIN_ArrayGetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType)
+        Return api.DTWAIN_ArrayGetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetCount(pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetCount(pArray)
+        Return api.DTWAIN_ArrayGetCount(pArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetMaxStringLength(a As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetMaxStringLength(a)
+        Return api.DTWAIN_ArrayGetMaxStringLength(a)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetSourceAt(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetSourceAt(pArray, nWhere, ppSource)
+        Return api.DTWAIN_ArrayGetSourceAt(pArray, nWhere, ppSource)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetStringLength(a As System.IntPtr, nWhichString As Integer) As Integer
-            Return api.DTWAIN_ArrayGetStringLength(a, nWhichString)
+        Return api.DTWAIN_ArrayGetStringLength(a, nWhichString)
         End Function
-
+        
         Public Function DTWAIN_ArrayGetType(pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayGetType(pArray)
+        Return api.DTWAIN_ArrayGetType(pArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayInit() As System.IntPtr
-            Return api.DTWAIN_ArrayInit()
+        Return api.DTWAIN_ArrayInit()
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAt(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayInsertAt(pArray, nWhere, pVariant)
+        Return api.DTWAIN_ArrayInsertAt(pArray, nWhere, pVariant)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtANSIString(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtANSIString(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtANSIString(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtANSIStringN(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtANSIStringN(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtANSIStringN(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloat(pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloat(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtFloat(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatN(pArray As System.IntPtr, nWhere As Integer, Val As System.Double, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatN(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtFloatN(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatString(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatString(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayInsertAtFloatString(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatStringA(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatStringA(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayInsertAtFloatStringA(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatStringN(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatStringN(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtFloatStringN(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatStringNA(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatStringNA(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtFloatStringNA(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatStringNW(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatStringNW(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtFloatStringNW(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFloatStringW(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtFloatStringW(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayInsertAtFloatStringW(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFrame(pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayInsertAtFrame(pArray, nWhere, frame)
+        Return api.DTWAIN_ArrayInsertAtFrame(pArray, nWhere, frame)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtFrameN(pArray As System.IntPtr, nWhere As Integer, frame As System.IntPtr, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtFrameN(pArray, nWhere, frame, num)
+        Return api.DTWAIN_ArrayInsertAtFrameN(pArray, nWhere, frame, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtLong(pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtLong(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtLong(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtLong64(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-            Return api.DTWAIN_ArrayInsertAtLong64(pArray, nWhere, Val)
+        Return api.DTWAIN_ArrayInsertAtLong64(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtLong64N(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtLong64N(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtLong64N(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtLongN(pArray As System.IntPtr, nWhere As Integer, pVal As Integer, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtLongN(pArray, nWhere, pVal, num)
+        Return api.DTWAIN_ArrayInsertAtLongN(pArray, nWhere, pVal, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtN(pArray As System.IntPtr, nWhere As Integer, pVariant As System.IntPtr, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtN(pArray, nWhere, pVariant, num)
+        Return api.DTWAIN_ArrayInsertAtN(pArray, nWhere, pVariant, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtString(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtString(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtString(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtStringA(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtStringA(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtStringA(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtStringN(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtStringN(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtStringN(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtStringNA(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtStringNA(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtStringNA(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtStringNW(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtStringNW(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtStringNW(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtStringW(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtStringW(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtStringW(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtWideString(pArray As System.IntPtr, nWhere As Integer, pVal As String) As Integer
-            Return api.DTWAIN_ArrayInsertAtWideString(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArrayInsertAtWideString(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArrayInsertAtWideStringN(pArray As System.IntPtr, nWhere As Integer, Val As String, num As Integer) As Integer
-            Return api.DTWAIN_ArrayInsertAtWideStringN(pArray, nWhere, Val, num)
+        Return api.DTWAIN_ArrayInsertAtWideStringN(pArray, nWhere, Val, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayRemoveAll(pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_ArrayRemoveAll(pArray)
+        Return api.DTWAIN_ArrayRemoveAll(pArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayRemoveAt(pArray As System.IntPtr, nWhere As Integer) As Integer
-            Return api.DTWAIN_ArrayRemoveAt(pArray, nWhere)
+        Return api.DTWAIN_ArrayRemoveAt(pArray, nWhere)
         End Function
-
+        
         Public Function DTWAIN_ArrayRemoveAtN(pArray As System.IntPtr, nWhere As Integer, num As Integer) As Integer
-            Return api.DTWAIN_ArrayRemoveAtN(pArray, nWhere, num)
+        Return api.DTWAIN_ArrayRemoveAtN(pArray, nWhere, num)
         End Function
-
+        
         Public Function DTWAIN_ArrayResize(pArray As System.IntPtr, NewSize As Integer) As Integer
-            Return api.DTWAIN_ArrayResize(pArray, NewSize)
+        Return api.DTWAIN_ArrayResize(pArray, NewSize)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAt(pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_ArraySetAt(pArray, lPos, pVariant)
+        Return api.DTWAIN_ArraySetAt(pArray, lPos, pVariant)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtANSIString(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-            Return api.DTWAIN_ArraySetAtANSIString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArraySetAtANSIString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFloat(pArray As System.IntPtr, nWhere As Integer, pVal As System.Double) As Integer
-            Return api.DTWAIN_ArraySetAtFloat(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArraySetAtFloat(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFloatString(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArraySetAtFloatString(pArray, nWhere, Val)
+        Return api.DTWAIN_ArraySetAtFloatString(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFloatStringA(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArraySetAtFloatStringA(pArray, nWhere, Val)
+        Return api.DTWAIN_ArraySetAtFloatStringA(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFloatStringW(pArray As System.IntPtr, nWhere As Integer, Val As String) As Integer
-            Return api.DTWAIN_ArraySetAtFloatStringW(pArray, nWhere, Val)
+        Return api.DTWAIN_ArraySetAtFloatStringW(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFrame(FrameArray As System.IntPtr, nWhere As Integer, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double) As Integer
-            Return api.DTWAIN_ArraySetAtFrame(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArraySetAtFrame(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFrameEx(FrameArray As System.IntPtr, nWhere As Integer, Frame As System.IntPtr) As Integer
-            Return api.DTWAIN_ArraySetAtFrameEx(FrameArray, nWhere, Frame)
+        Return api.DTWAIN_ArraySetAtFrameEx(FrameArray, nWhere, Frame)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFrameString(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-            Return api.DTWAIN_ArraySetAtFrameString(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArraySetAtFrameString(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFrameStringA(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-            Return api.DTWAIN_ArraySetAtFrameStringA(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArraySetAtFrameStringA(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtFrameStringW(FrameArray As System.IntPtr, nWhere As Integer, left As String, top As String, right As String, bottom As String) As Integer
-            Return api.DTWAIN_ArraySetAtFrameStringW(FrameArray, nWhere, left, top, right, bottom)
+        Return api.DTWAIN_ArraySetAtFrameStringW(FrameArray, nWhere, left, top, right, bottom)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtLong(pArray As System.IntPtr, nWhere As Integer, pVal As Integer) As Integer
-            Return api.DTWAIN_ArraySetAtLong(pArray, nWhere, pVal)
+        Return api.DTWAIN_ArraySetAtLong(pArray, nWhere, pVal)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtLong64(pArray As System.IntPtr, nWhere As Integer, Val As System.Int64) As Integer
-            Return api.DTWAIN_ArraySetAtLong64(pArray, nWhere, Val)
+        Return api.DTWAIN_ArraySetAtLong64(pArray, nWhere, Val)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtString(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-            Return api.DTWAIN_ArraySetAtString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArraySetAtString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtStringA(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-            Return api.DTWAIN_ArraySetAtStringA(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArraySetAtStringA(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtStringW(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-            Return api.DTWAIN_ArraySetAtStringW(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArraySetAtStringW(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArraySetAtWideString(pArray As System.IntPtr, nWhere As Integer, pStr As String) As Integer
-            Return api.DTWAIN_ArraySetAtWideString(pArray, nWhere, pStr)
+        Return api.DTWAIN_ArraySetAtWideString(pArray, nWhere, pStr)
         End Function
-
+        
         Public Function DTWAIN_ArrayStringToFloat(StringArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayStringToFloat(StringArray)
+        Return api.DTWAIN_ArrayStringToFloat(StringArray)
         End Function
-
+        
         Public Function DTWAIN_ArrayWideStringToFloat(StringArray As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ArrayWideStringToFloat(StringArray)
+        Return api.DTWAIN_ArrayWideStringToFloat(StringArray)
         End Function
-
+        
         Public Function DTWAIN_CallCallback(wParam As Integer, lParam As Integer, UserData As Integer) As Integer
-            Return api.DTWAIN_CallCallback(wParam, lParam, UserData)
+        Return api.DTWAIN_CallCallback(wParam, lParam, UserData)
         End Function
-
+        
         Public Function DTWAIN_CallCallback64(wParam As Integer, lParam As Integer, UserData As System.Int64) As Integer
-            Return api.DTWAIN_CallCallback64(wParam, lParam, UserData)
+        Return api.DTWAIN_CallCallback64(wParam, lParam, UserData)
         End Function
-
+        
         Public Function DTWAIN_CallDSMProc(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
-            Return api.DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData)
+        Return api.DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData)
         End Function
-
+        
         Public Function DTWAIN_CheckHandles(bCheck As Integer) As Integer
-            Return api.DTWAIN_CheckHandles(bCheck)
+        Return api.DTWAIN_CheckHandles(bCheck)
         End Function
-
+        
         Public Function DTWAIN_ClearBuffers(Source As System.IntPtr, ClearBuffer As Integer) As Integer
-            Return api.DTWAIN_ClearBuffers(Source, ClearBuffer)
+        Return api.DTWAIN_ClearBuffers(Source, ClearBuffer)
         End Function
-
+        
         Public Function DTWAIN_ClearErrorBuffer() As Integer
-            Return api.DTWAIN_ClearErrorBuffer()
+        Return api.DTWAIN_ClearErrorBuffer()
         End Function
-
+        
         Public Function DTWAIN_ClearPDFText(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_ClearPDFText(Source)
+        Return api.DTWAIN_ClearPDFText(Source)
         End Function
-
+        
         Public Function DTWAIN_ClearPage(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_ClearPage(Source)
+        Return api.DTWAIN_ClearPage(Source)
         End Function
-
+        
         Public Function DTWAIN_CloseSource(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_CloseSource(Source)
+        Return api.DTWAIN_CloseSource(Source)
         End Function
-
+        
         Public Function DTWAIN_CloseSourceUI(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_CloseSourceUI(Source)
+        Return api.DTWAIN_CloseSourceUI(Source)
         End Function
-
+        
         Public Function DTWAIN_ConvertDIBToBitmap(hDib As System.IntPtr, hPalette As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_ConvertDIBToBitmap(hDib, hPalette)
+        Return api.DTWAIN_ConvertDIBToBitmap(hDib, hPalette)
         End Function
-
+        
         Public Function DTWAIN_ConvertDIBToFullBitmap(hDib As System.IntPtr, isBMP As Integer) As System.IntPtr
-            Return api.DTWAIN_ConvertDIBToFullBitmap(hDib, isBMP)
+        Return api.DTWAIN_ConvertDIBToFullBitmap(hDib, isBMP)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIString(lpOrigString As String) As System.IntPtr
-            Return api.DTWAIN_ConvertToAPIString(lpOrigString)
+        Return api.DTWAIN_ConvertToAPIString(lpOrigString)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIStringA(lpOrigString As String) As System.IntPtr
-            Return api.DTWAIN_ConvertToAPIStringA(lpOrigString)
+        Return api.DTWAIN_ConvertToAPIStringA(lpOrigString)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIStringEx(lpOrigString As String, <MarshalAs(UnmanagedType.LPTStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_ConvertToAPIStringEx(lpOrigString, lpOutString, nSize)
+        Return api.DTWAIN_ConvertToAPIStringEx(lpOrigString, lpOutString, nSize)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIStringExA(lpOrigString As String, <MarshalAs(UnmanagedType.LPStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_ConvertToAPIStringExA(lpOrigString, lpOutString, nSize)
+        Return api.DTWAIN_ConvertToAPIStringExA(lpOrigString, lpOutString, nSize)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIStringExW(lpOrigString As String, <MarshalAs(UnmanagedType.LPWStr)> lpOutString As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_ConvertToAPIStringExW(lpOrigString, lpOutString, nSize)
+        Return api.DTWAIN_ConvertToAPIStringExW(lpOrigString, lpOutString, nSize)
         End Function
-
+        
         Public Function DTWAIN_ConvertToAPIStringW(lpOrigString As String) As System.IntPtr
-            Return api.DTWAIN_ConvertToAPIStringW(lpOrigString)
+        Return api.DTWAIN_ConvertToAPIStringW(lpOrigString)
         End Function
-
+        
         Public Function DTWAIN_CreateAcquisitionArray() As System.IntPtr
-            Return api.DTWAIN_CreateAcquisitionArray()
+        Return api.DTWAIN_CreateAcquisitionArray()
         End Function
-
+        
         Public Function DTWAIN_CreatePDFTextElement(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_CreatePDFTextElement(Source)
+        Return api.DTWAIN_CreatePDFTextElement(Source)
         End Function
-
+        
         Public Function DTWAIN_DeleteDIB(hDib As System.IntPtr) As Integer
-            Return api.DTWAIN_DeleteDIB(hDib)
+        Return api.DTWAIN_DeleteDIB(hDib)
         End Function
-
+        
         Public Function DTWAIN_DestroyAcquisitionArray(aAcq As System.IntPtr, bDestroyData As Integer) As Integer
-            Return api.DTWAIN_DestroyAcquisitionArray(aAcq, bDestroyData)
+        Return api.DTWAIN_DestroyAcquisitionArray(aAcq, bDestroyData)
         End Function
-
+        
         Public Function DTWAIN_DestroyPDFTextElement(TextElement As System.IntPtr) As Integer
-            Return api.DTWAIN_DestroyPDFTextElement(TextElement)
+        Return api.DTWAIN_DestroyPDFTextElement(TextElement)
         End Function
-
+        
         Public Function DTWAIN_DisableAppWindow(hWnd As System.IntPtr, bDisable As Integer) As Integer
-            Return api.DTWAIN_DisableAppWindow(hWnd, bDisable)
+        Return api.DTWAIN_DisableAppWindow(hWnd, bDisable)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoBorderDetect(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableAutoBorderDetect(Source, bEnable)
+        Return api.DTWAIN_EnableAutoBorderDetect(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoBright(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableAutoBright(Source, bSet)
+        Return api.DTWAIN_EnableAutoBright(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoDeskew(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableAutoDeskew(Source, bEnable)
+        Return api.DTWAIN_EnableAutoDeskew(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoFeed(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableAutoFeed(Source, bSet)
+        Return api.DTWAIN_EnableAutoFeed(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoRotate(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableAutoRotate(Source, bSet)
+        Return api.DTWAIN_EnableAutoRotate(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableAutoScan(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableAutoScan(Source, bEnable)
+        Return api.DTWAIN_EnableAutoScan(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableAutomaticSenseMedium(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableAutomaticSenseMedium(Source, bSet)
+        Return api.DTWAIN_EnableAutomaticSenseMedium(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableDuplex(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableDuplex(Source, bEnable)
+        Return api.DTWAIN_EnableDuplex(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableFeeder(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableFeeder(Source, bSet)
+        Return api.DTWAIN_EnableFeeder(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableIndicator(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableIndicator(Source, bEnable)
+        Return api.DTWAIN_EnableIndicator(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableJobFileHandling(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnableJobFileHandling(Source, bSet)
+        Return api.DTWAIN_EnableJobFileHandling(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnableLamp(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableLamp(Source, bEnable)
+        Return api.DTWAIN_EnableLamp(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableMsgNotify(bSet As Integer) As Integer
-            Return api.DTWAIN_EnableMsgNotify(bSet)
+        Return api.DTWAIN_EnableMsgNotify(bSet)
         End Function
-
+        
         Public Function DTWAIN_EnablePatchDetect(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnablePatchDetect(Source, bEnable)
+        Return api.DTWAIN_EnablePatchDetect(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnablePeekMessageLoop(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_EnablePeekMessageLoop(Source, bSet)
+        Return api.DTWAIN_EnablePeekMessageLoop(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_EnablePrinter(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnablePrinter(Source, bEnable)
+        Return api.DTWAIN_EnablePrinter(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableThumbnail(Source As System.IntPtr, bEnable As Integer) As Integer
-            Return api.DTWAIN_EnableThumbnail(Source, bEnable)
+        Return api.DTWAIN_EnableThumbnail(Source, bEnable)
         End Function
-
+        
         Public Function DTWAIN_EnableTripletsNotify(bSet As Integer) As Integer
-            Return api.DTWAIN_EnableTripletsNotify(bSet)
+        Return api.DTWAIN_EnableTripletsNotify(bSet)
         End Function
-
+        
         Public Function DTWAIN_EndThread(DLLHandle As System.IntPtr) As Integer
-            Return api.DTWAIN_EndThread(DLLHandle)
+        Return api.DTWAIN_EndThread(DLLHandle)
         End Function
-
+        
         Public Function DTWAIN_EndTwainSession() As Integer
-            Return api.DTWAIN_EndTwainSession()
+        Return api.DTWAIN_EndTwainSession()
         End Function
-
+        
         Public Function DTWAIN_EnumAlarmVolumes(Source As System.IntPtr, ByRef pArray As System.IntPtr, expandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumAlarmVolumes(Source, pArray, expandIfRange)
+        Return api.DTWAIN_EnumAlarmVolumes(Source, pArray, expandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumAlarmVolumesEx(Source As System.IntPtr, expandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumAlarmVolumesEx(Source, expandIfRange)
+        Return api.DTWAIN_EnumAlarmVolumesEx(Source, expandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumAlarms(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumAlarms(Source, pArray)
+        Return api.DTWAIN_EnumAlarms(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumAlarmsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumAlarmsEx(Source)
+        Return api.DTWAIN_EnumAlarmsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumAudioXferMechs(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumAudioXferMechs(Source, pArray)
+        Return api.DTWAIN_EnumAudioXferMechs(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumAudioXferMechsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumAudioXferMechsEx(Source)
+        Return api.DTWAIN_EnumAudioXferMechsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumAutoFeedValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumAutoFeedValues(Source, pArray)
+        Return api.DTWAIN_EnumAutoFeedValues(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumAutoFeedValuesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumAutoFeedValuesEx(Source)
+        Return api.DTWAIN_EnumAutoFeedValuesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumAutomaticCaptures(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumAutomaticCaptures(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumAutomaticCaptures(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumAutomaticCapturesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumAutomaticCapturesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumAutomaticCapturesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumAutomaticSenseMedium(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumAutomaticSenseMedium(Source, pArray)
+        Return api.DTWAIN_EnumAutomaticSenseMedium(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumAutomaticSenseMediumEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumAutomaticSenseMediumEx(Source)
+        Return api.DTWAIN_EnumAutomaticSenseMediumEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumBitDepths(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumBitDepths(Source, pArray)
+        Return api.DTWAIN_EnumBitDepths(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumBitDepthsEx(Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumBitDepthsEx(Source, PixelType, pArray)
+        Return api.DTWAIN_EnumBitDepthsEx(Source, PixelType, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumBitDepthsEx2(Source As System.IntPtr, PixelType As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumBitDepthsEx2(Source, PixelType)
+        Return api.DTWAIN_EnumBitDepthsEx2(Source, PixelType)
         End Function
-
+        
         Public Function DTWAIN_EnumBottomCameras(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumBottomCameras(Source, Cameras)
+        Return api.DTWAIN_EnumBottomCameras(Source, Cameras)
         End Function
-
+        
         Public Function DTWAIN_EnumBottomCamerasEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumBottomCamerasEx(Source)
+        Return api.DTWAIN_EnumBottomCamerasEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumBrightnessValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumBrightnessValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumBrightnessValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumBrightnessValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumBrightnessValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumBrightnessValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumCameras(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumCameras(Source, Cameras)
+        Return api.DTWAIN_EnumCameras(Source, Cameras)
         End Function
-
+        
         Public Function DTWAIN_EnumCamerasEx(Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumCamerasEx(Source, nWhichCamera, Cameras)
+        Return api.DTWAIN_EnumCamerasEx(Source, nWhichCamera, Cameras)
         End Function
-
+        
         Public Function DTWAIN_EnumCamerasEx2(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumCamerasEx2(Source)
+        Return api.DTWAIN_EnumCamerasEx2(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumCamerasEx3(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumCamerasEx3(Source, nWhichCamera)
+        Return api.DTWAIN_EnumCamerasEx3(Source, nWhichCamera)
         End Function
-
+        
         Public Function DTWAIN_EnumCompressionTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumCompressionTypes(Source, pArray)
+        Return api.DTWAIN_EnumCompressionTypes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumCompressionTypesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumCompressionTypesEx(Source)
+        Return api.DTWAIN_EnumCompressionTypesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumCompressionTypesEx2(Source As System.IntPtr, lFileType As Integer, bUseBufferedMode As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumCompressionTypesEx2(Source, lFileType, bUseBufferedMode)
+        Return api.DTWAIN_EnumCompressionTypesEx2(Source, lFileType, bUseBufferedMode)
         End Function
-
+        
         Public Function DTWAIN_EnumContrastValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumContrastValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumContrastValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumContrastValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumContrastValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumContrastValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumCustomCaps(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumCustomCaps(Source, pArray)
+        Return api.DTWAIN_EnumCustomCaps(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumCustomCapsEx2(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumCustomCapsEx2(Source)
+        Return api.DTWAIN_EnumCustomCapsEx2(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumDoubleFeedDetectLengths(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumDoubleFeedDetectLengths(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumDoubleFeedDetectLengths(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumDoubleFeedDetectLengthsEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumDoubleFeedDetectLengthsEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumDoubleFeedDetectLengthsEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumDoubleFeedDetectValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumDoubleFeedDetectValues(Source, pArray)
+        Return api.DTWAIN_EnumDoubleFeedDetectValues(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumDoubleFeedDetectValuesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumDoubleFeedDetectValuesEx(Source)
+        Return api.DTWAIN_EnumDoubleFeedDetectValuesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumExtImageInfoTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumExtImageInfoTypes(Source, pArray)
+        Return api.DTWAIN_EnumExtImageInfoTypes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumExtImageInfoTypesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumExtImageInfoTypesEx(Source)
+        Return api.DTWAIN_EnumExtImageInfoTypesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumExtendedCaps(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumExtendedCaps(Source, pArray)
+        Return api.DTWAIN_EnumExtendedCaps(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumExtendedCapsEx(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumExtendedCapsEx(Source, pArray)
+        Return api.DTWAIN_EnumExtendedCapsEx(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumExtendedCapsEx2(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumExtendedCapsEx2(Source)
+        Return api.DTWAIN_EnumExtendedCapsEx2(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumFileTypeBitsPerPixel(FileType As Integer, ByRef Array As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumFileTypeBitsPerPixel(FileType, Array)
+        Return api.DTWAIN_EnumFileTypeBitsPerPixel(FileType, Array)
         End Function
-
+        
         Public Function DTWAIN_EnumFileXferFormats(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumFileXferFormats(Source, pArray)
+        Return api.DTWAIN_EnumFileXferFormats(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumFileXferFormatsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumFileXferFormatsEx(Source)
+        Return api.DTWAIN_EnumFileXferFormatsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumHalftones(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumHalftones(Source, pArray)
+        Return api.DTWAIN_EnumHalftones(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumHalftonesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumHalftonesEx(Source)
+        Return api.DTWAIN_EnumHalftonesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumHighlightValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumHighlightValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumHighlightValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumHighlightValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumHighlightValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumHighlightValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumJobControls(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumJobControls(Source, pArray)
+        Return api.DTWAIN_EnumJobControls(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumJobControlsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumJobControlsEx(Source)
+        Return api.DTWAIN_EnumJobControlsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumLightPaths(Source As System.IntPtr, ByRef LightPath As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumLightPaths(Source, LightPath)
+        Return api.DTWAIN_EnumLightPaths(Source, LightPath)
         End Function
-
+        
         Public Function DTWAIN_EnumLightPathsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumLightPathsEx(Source)
+        Return api.DTWAIN_EnumLightPathsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumLightSources(Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumLightSources(Source, LightSources)
+        Return api.DTWAIN_EnumLightSources(Source, LightSources)
         End Function
-
+        
         Public Function DTWAIN_EnumLightSourcesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumLightSourcesEx(Source)
+        Return api.DTWAIN_EnumLightSourcesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumMaxBuffers(Source As System.IntPtr, ByRef pMaxBufs As System.IntPtr, bExpandRange As Integer) As Integer
-            Return api.DTWAIN_EnumMaxBuffers(Source, pMaxBufs, bExpandRange)
+        Return api.DTWAIN_EnumMaxBuffers(Source, pMaxBufs, bExpandRange)
         End Function
-
+        
         Public Function DTWAIN_EnumMaxBuffersEx(Source As System.IntPtr, bExpandRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumMaxBuffersEx(Source, bExpandRange)
+        Return api.DTWAIN_EnumMaxBuffersEx(Source, bExpandRange)
         End Function
-
+        
         Public Function DTWAIN_EnumNoiseFilters(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumNoiseFilters(Source, pArray)
+        Return api.DTWAIN_EnumNoiseFilters(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumNoiseFiltersEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumNoiseFiltersEx(Source)
+        Return api.DTWAIN_EnumNoiseFiltersEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumOCRInterfaces(ByRef OCRInterfaces As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumOCRInterfaces(OCRInterfaces)
+        Return api.DTWAIN_EnumOCRInterfaces(OCRInterfaces)
         End Function
-
+        
         Public Function DTWAIN_EnumOCRSupportedCaps(Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumOCRSupportedCaps(Engine, SupportedCaps)
+        Return api.DTWAIN_EnumOCRSupportedCaps(Engine, SupportedCaps)
         End Function
-
+        
         Public Function DTWAIN_EnumOrientations(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumOrientations(Source, pArray)
+        Return api.DTWAIN_EnumOrientations(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumOrientationsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumOrientationsEx(Source)
+        Return api.DTWAIN_EnumOrientationsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumOverscanValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumOverscanValues(Source, pArray)
+        Return api.DTWAIN_EnumOverscanValues(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumOverscanValuesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumOverscanValuesEx(Source)
+        Return api.DTWAIN_EnumOverscanValuesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPaperSizes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPaperSizes(Source, pArray)
+        Return api.DTWAIN_EnumPaperSizes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPaperSizesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPaperSizesEx(Source)
+        Return api.DTWAIN_EnumPaperSizesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchCodes(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchCodes(Source, PCodes)
+        Return api.DTWAIN_EnumPatchCodes(Source, PCodes)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchCodesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchCodesEx(Source)
+        Return api.DTWAIN_EnumPatchCodesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchMaxPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchMaxPriorities(Source, pArray)
+        Return api.DTWAIN_EnumPatchMaxPriorities(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchMaxPrioritiesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchMaxPrioritiesEx(Source)
+        Return api.DTWAIN_EnumPatchMaxPrioritiesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchMaxRetries(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchMaxRetries(Source, pArray)
+        Return api.DTWAIN_EnumPatchMaxRetries(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchMaxRetriesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchMaxRetriesEx(Source)
+        Return api.DTWAIN_EnumPatchMaxRetriesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchPriorities(Source, pArray)
+        Return api.DTWAIN_EnumPatchPriorities(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchPrioritiesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchPrioritiesEx(Source)
+        Return api.DTWAIN_EnumPatchPrioritiesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchSearchModes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchSearchModes(Source, pArray)
+        Return api.DTWAIN_EnumPatchSearchModes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchSearchModesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchSearchModesEx(Source)
+        Return api.DTWAIN_EnumPatchSearchModesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchTimeOutValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPatchTimeOutValues(Source, pArray)
+        Return api.DTWAIN_EnumPatchTimeOutValues(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPatchTimeOutValuesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPatchTimeOutValuesEx(Source)
+        Return api.DTWAIN_EnumPatchTimeOutValuesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPixelTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPixelTypes(Source, pArray)
+        Return api.DTWAIN_EnumPixelTypes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPixelTypesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPixelTypesEx(Source)
+        Return api.DTWAIN_EnumPixelTypesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumPrinterStringModes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumPrinterStringModes(Source, pArray)
+        Return api.DTWAIN_EnumPrinterStringModes(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumPrinterStringModesEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumPrinterStringModesEx(Source)
+        Return api.DTWAIN_EnumPrinterStringModesEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumResolutionValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumResolutionValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumResolutionValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumResolutionValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumResolutionValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumResolutionValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumShadowValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumShadowValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumShadowValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumShadowValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumShadowValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumShadowValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumSourceUnits(Source As System.IntPtr, ByRef lpArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumSourceUnits(Source, lpArray)
+        Return api.DTWAIN_EnumSourceUnits(Source, lpArray)
         End Function
-
+        
         Public Function DTWAIN_EnumSourceUnitsEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumSourceUnitsEx(Source)
+        Return api.DTWAIN_EnumSourceUnitsEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumSourceValues(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumSourceValues(Source, capName, values, bExpandIfRange)
+        Return api.DTWAIN_EnumSourceValues(Source, capName, values, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumSourceValuesA(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumSourceValuesA(Source, capName, values, bExpandIfRange)
+        Return api.DTWAIN_EnumSourceValuesA(Source, capName, values, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumSourceValuesW(Source As System.IntPtr, capName As String, ByRef values As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumSourceValuesW(Source, capName, values, bExpandIfRange)
+        Return api.DTWAIN_EnumSourceValuesW(Source, capName, values, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumSources(ByRef lpArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumSources(lpArray)
+        Return api.DTWAIN_EnumSources(lpArray)
         End Function
-
+        
         Public Function DTWAIN_EnumSourcesEx() As System.IntPtr
-            Return api.DTWAIN_EnumSourcesEx()
+        Return api.DTWAIN_EnumSourcesEx()
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedCaps(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumSupportedCaps(Source, pArray)
+        Return api.DTWAIN_EnumSupportedCaps(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedCapsEx(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumSupportedCapsEx(Source, pArray)
+        Return api.DTWAIN_EnumSupportedCapsEx(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedCapsEx2(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumSupportedCapsEx2(Source)
+        Return api.DTWAIN_EnumSupportedCapsEx2(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedExtImageInfo(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumSupportedExtImageInfo(Source, pArray)
+        Return api.DTWAIN_EnumSupportedExtImageInfo(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedExtImageInfoEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumSupportedExtImageInfoEx(Source)
+        Return api.DTWAIN_EnumSupportedExtImageInfoEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedFileTypes() As System.IntPtr
-            Return api.DTWAIN_EnumSupportedFileTypes()
+        Return api.DTWAIN_EnumSupportedFileTypes()
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedMultiPageFileTypes() As System.IntPtr
-            Return api.DTWAIN_EnumSupportedMultiPageFileTypes()
+        Return api.DTWAIN_EnumSupportedMultiPageFileTypes()
         End Function
-
+        
         Public Function DTWAIN_EnumSupportedSinglePageFileTypes() As System.IntPtr
-            Return api.DTWAIN_EnumSupportedSinglePageFileTypes()
+        Return api.DTWAIN_EnumSupportedSinglePageFileTypes()
         End Function
-
+        
         Public Function DTWAIN_EnumThresholdValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumThresholdValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumThresholdValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumThresholdValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumThresholdValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumThresholdValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumTopCameras(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumTopCameras(Source, Cameras)
+        Return api.DTWAIN_EnumTopCameras(Source, Cameras)
         End Function
-
+        
         Public Function DTWAIN_EnumTopCamerasEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumTopCamerasEx(Source)
+        Return api.DTWAIN_EnumTopCamerasEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumTwainPrinters(Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumTwainPrinters(Source, lpAvailPrinters)
+        Return api.DTWAIN_EnumTwainPrinters(Source, lpAvailPrinters)
         End Function
-
+        
         Public Function DTWAIN_EnumTwainPrintersArray(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_EnumTwainPrintersArray(Source, pArray)
+        Return api.DTWAIN_EnumTwainPrintersArray(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_EnumTwainPrintersArrayEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumTwainPrintersArrayEx(Source)
+        Return api.DTWAIN_EnumTwainPrintersArrayEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumTwainPrintersEx(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_EnumTwainPrintersEx(Source)
+        Return api.DTWAIN_EnumTwainPrintersEx(Source)
         End Function
-
+        
         Public Function DTWAIN_EnumXResolutionValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumXResolutionValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumXResolutionValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumXResolutionValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumXResolutionValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumXResolutionValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumYResolutionValues(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
-            Return api.DTWAIN_EnumYResolutionValues(Source, pArray, bExpandIfRange)
+        Return api.DTWAIN_EnumYResolutionValues(Source, pArray, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_EnumYResolutionValuesEx(Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
-            Return api.DTWAIN_EnumYResolutionValuesEx(Source, bExpandIfRange)
+        Return api.DTWAIN_EnumYResolutionValuesEx(Source, bExpandIfRange)
         End Function
-
+        
         Public Function DTWAIN_ExecuteOCR(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-            Return api.DTWAIN_ExecuteOCR(Engine, szFileName, nStartPage, nEndPage)
+        Return api.DTWAIN_ExecuteOCR(Engine, szFileName, nStartPage, nEndPage)
         End Function
-
+        
         Public Function DTWAIN_ExecuteOCRA(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-            Return api.DTWAIN_ExecuteOCRA(Engine, szFileName, nStartPage, nEndPage)
+        Return api.DTWAIN_ExecuteOCRA(Engine, szFileName, nStartPage, nEndPage)
         End Function
-
+        
         Public Function DTWAIN_ExecuteOCRW(Engine As System.IntPtr, szFileName As String, nStartPage As Integer, nEndPage As Integer) As Integer
-            Return api.DTWAIN_ExecuteOCRW(Engine, szFileName, nStartPage, nEndPage)
+        Return api.DTWAIN_ExecuteOCRW(Engine, szFileName, nStartPage, nEndPage)
         End Function
-
+        
         Public Function DTWAIN_FeedPage(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_FeedPage(Source)
+        Return api.DTWAIN_FeedPage(Source)
         End Function
-
+        
         Public Function DTWAIN_FlipBitmap(hDib As System.IntPtr) As Integer
-            Return api.DTWAIN_FlipBitmap(hDib)
+        Return api.DTWAIN_FlipBitmap(hDib)
         End Function
-
+        
         Public Function DTWAIN_FlushAcquiredPages(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_FlushAcquiredPages(Source)
+        Return api.DTWAIN_FlushAcquiredPages(Source)
         End Function
-
+        
         Public Function DTWAIN_ForceAcquireBitDepth(Source As System.IntPtr, BitDepth As Integer) As Integer
-            Return api.DTWAIN_ForceAcquireBitDepth(Source, BitDepth)
+        Return api.DTWAIN_ForceAcquireBitDepth(Source, BitDepth)
         End Function
-
+        
         Public Function DTWAIN_ForceScanOnNoUI(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_ForceScanOnNoUI(Source, bSet)
+        Return api.DTWAIN_ForceScanOnNoUI(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_FrameCreate(Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
-            Return api.DTWAIN_FrameCreate(Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameCreate(Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameCreateString(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-            Return api.DTWAIN_FrameCreateString(Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameCreateString(Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameCreateStringA(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-            Return api.DTWAIN_FrameCreateStringA(Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameCreateStringA(Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameCreateStringW(Left As String, Top As String, Right As String, Bottom As String) As System.IntPtr
-            Return api.DTWAIN_FrameCreateStringW(Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameCreateStringW(Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameDestroy(Frame As System.IntPtr) As Integer
-            Return api.DTWAIN_FrameDestroy(Frame)
+        Return api.DTWAIN_FrameDestroy(Frame)
         End Function
-
+        
         Public Function DTWAIN_FrameGetAll(Frame As System.IntPtr, ByRef Left As System.Double, ByRef Top As System.Double, ByRef Right As System.Double, ByRef Bottom As System.Double) As Integer
-            Return api.DTWAIN_FrameGetAll(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameGetAll(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameGetAllString(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> Bottom As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetAllString(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameGetAllString(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameGetAllStringA(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> Bottom As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetAllStringA(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameGetAllStringA(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameGetAllStringW(Frame As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> Bottom As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetAllStringW(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameGetAllStringW(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameGetValue(Frame As System.IntPtr, nWhich As Integer, ByRef Value As System.Double) As Integer
-            Return api.DTWAIN_FrameGetValue(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameGetValue(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameGetValueString(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> Value As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetValueString(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameGetValueString(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameGetValueStringA(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> Value As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetValueStringA(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameGetValueStringA(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameGetValueStringW(Frame As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> Value As StringBuilder) As Integer
-            Return api.DTWAIN_FrameGetValueStringW(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameGetValueStringW(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameIsValid(Frame As System.IntPtr) As Integer
-            Return api.DTWAIN_FrameIsValid(Frame)
+        Return api.DTWAIN_FrameIsValid(Frame)
         End Function
-
+        
         Public Function DTWAIN_FrameSetAll(Frame As System.IntPtr, Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As Integer
-            Return api.DTWAIN_FrameSetAll(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameSetAll(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameSetAllString(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-            Return api.DTWAIN_FrameSetAllString(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameSetAllString(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameSetAllStringA(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-            Return api.DTWAIN_FrameSetAllStringA(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameSetAllStringA(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameSetAllStringW(Frame As System.IntPtr, Left As String, Top As String, Right As String, Bottom As String) As Integer
-            Return api.DTWAIN_FrameSetAllStringW(Frame, Left, Top, Right, Bottom)
+        Return api.DTWAIN_FrameSetAllStringW(Frame, Left, Top, Right, Bottom)
         End Function
-
+        
         Public Function DTWAIN_FrameSetValue(Frame As System.IntPtr, nWhich As Integer, Value As System.Double) As Integer
-            Return api.DTWAIN_FrameSetValue(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameSetValue(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameSetValueString(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-            Return api.DTWAIN_FrameSetValueString(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameSetValueString(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameSetValueStringA(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-            Return api.DTWAIN_FrameSetValueStringA(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameSetValueStringA(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FrameSetValueStringW(Frame As System.IntPtr, nWhich As Integer, Value As String) As Integer
-            Return api.DTWAIN_FrameSetValueStringW(Frame, nWhich, Value)
+        Return api.DTWAIN_FrameSetValueStringW(Frame, nWhich, Value)
         End Function
-
+        
         Public Function DTWAIN_FreeExtImageInfo(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_FreeExtImageInfo(Source)
+        Return api.DTWAIN_FreeExtImageInfo(Source)
         End Function
-
+        
         Public Function DTWAIN_FreeMemory(h As System.IntPtr) As Integer
-            Return api.DTWAIN_FreeMemory(h)
+        Return api.DTWAIN_FreeMemory(h)
         End Function
-
+        
         Public Function DTWAIN_FreeMemoryEx(h As System.IntPtr) As Integer
-            Return api.DTWAIN_FreeMemoryEx(h)
+        Return api.DTWAIN_FreeMemoryEx(h)
         End Function
-
+        
         Public Function DTWAIN_GetAPIHandleStatus(pHandle As System.IntPtr) As Integer
-            Return api.DTWAIN_GetAPIHandleStatus(pHandle)
+        Return api.DTWAIN_GetAPIHandleStatus(pHandle)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireArea(Source As System.IntPtr, lGetType As Integer, ByRef FloatEnum As System.IntPtr) As Integer
-            Return api.DTWAIN_GetAcquireArea(Source, lGetType, FloatEnum)
+        Return api.DTWAIN_GetAcquireArea(Source, lGetType, FloatEnum)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireArea2(Source As System.IntPtr, ByRef left As System.Double, ByRef top As System.Double, ByRef right As System.Double, ByRef bottom As System.Double, ByRef lpUnit As Integer) As Integer
-            Return api.DTWAIN_GetAcquireArea2(Source, left, top, right, bottom, lpUnit)
+        Return api.DTWAIN_GetAcquireArea2(Source, left, top, right, bottom, lpUnit)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireArea2String(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-            Return api.DTWAIN_GetAcquireArea2String(Source, left, top, right, bottom, Unit)
+        Return api.DTWAIN_GetAcquireArea2String(Source, left, top, right, bottom, Unit)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireArea2StringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-            Return api.DTWAIN_GetAcquireArea2StringA(Source, left, top, right, bottom, Unit)
+        Return api.DTWAIN_GetAcquireArea2StringA(Source, left, top, right, bottom, Unit)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireArea2StringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
-            Return api.DTWAIN_GetAcquireArea2StringW(Source, left, top, right, bottom, Unit)
+        Return api.DTWAIN_GetAcquireArea2StringW(Source, left, top, right, bottom, Unit)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireAreaEx(Source As System.IntPtr, lGetType As Integer) As System.IntPtr
-            Return api.DTWAIN_GetAcquireAreaEx(Source, lGetType)
+        Return api.DTWAIN_GetAcquireAreaEx(Source, lGetType)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireMetrics(source As System.IntPtr, ByRef ImageCount As Integer, ByRef SheetCount As Integer) As Integer
-            Return api.DTWAIN_GetAcquireMetrics(source, ImageCount, SheetCount)
+        Return api.DTWAIN_GetAcquireMetrics(source, ImageCount, SheetCount)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireStripBuffer(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_GetAcquireStripBuffer(Source)
+        Return api.DTWAIN_GetAcquireStripBuffer(Source)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireStripData(Source As System.IntPtr, ByRef lpCompression As Integer, ByRef lpBytesPerRow As UInteger, ByRef lpColumns As UInteger, ByRef lpRows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef lpBytesWritten As UInteger) As Integer
-            Return api.DTWAIN_GetAcquireStripData(Source, lpCompression, lpBytesPerRow, lpColumns, lpRows, XOffset, YOffset, lpBytesWritten)
+        Return api.DTWAIN_GetAcquireStripData(Source, lpCompression, lpBytesPerRow, lpColumns, lpRows, XOffset, YOffset, lpBytesWritten)
         End Function
-
+        
         Public Function DTWAIN_GetAcquireStripSizes(Source As System.IntPtr, ByRef lpMin As UInteger, ByRef lpMax As UInteger, ByRef lpPreferred As UInteger) As Integer
-            Return api.DTWAIN_GetAcquireStripSizes(Source, lpMin, lpMax, lpPreferred)
+        Return api.DTWAIN_GetAcquireStripSizes(Source, lpMin, lpMax, lpPreferred)
         End Function
-
+        
         Public Function DTWAIN_GetAcquiredImage(aAcq As System.IntPtr, nWhichAcq As Integer, nWhichDib As Integer) As System.IntPtr
-            Return api.DTWAIN_GetAcquiredImage(aAcq, nWhichAcq, nWhichDib)
+        Return api.DTWAIN_GetAcquiredImage(aAcq, nWhichAcq, nWhichDib)
         End Function
-
+        
         Public Function DTWAIN_GetAcquiredImageArray(aAcq As System.IntPtr, nWhichAcq As Integer) As System.IntPtr
-            Return api.DTWAIN_GetAcquiredImageArray(aAcq, nWhichAcq)
+        Return api.DTWAIN_GetAcquiredImageArray(aAcq, nWhichAcq)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMPath(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMPath(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMPath(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMPathA(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMPathA(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMPathA(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMPathW(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMPathW(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMPathW(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMVersionInfo(<MarshalAs(UnmanagedType.LPTStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMVersionInfo(szDLLInfo, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMVersionInfo(szDLLInfo, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMVersionInfoA(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMVersionInfoA(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMVersionInfoA(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetActiveDSMVersionInfoW(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetActiveDSMVersionInfoW(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetActiveDSMVersionInfoW(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetAlarmVolume(Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
-            Return api.DTWAIN_GetAlarmVolume(Source, lpVolume)
+        Return api.DTWAIN_GetAlarmVolume(Source, lpVolume)
         End Function
-
+        
         Public Function DTWAIN_GetAllSourceDibs(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_GetAllSourceDibs(Source)
+        Return api.DTWAIN_GetAllSourceDibs(Source)
         End Function
-
+        
         Public Function DTWAIN_GetAppInfo(<MarshalAs(UnmanagedType.LPTStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdName As StringBuilder) As Integer
-            Return api.DTWAIN_GetAppInfo(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_GetAppInfo(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_GetAppInfoA(<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
-            Return api.DTWAIN_GetAppInfoA(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_GetAppInfoA(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_GetAppInfoW(<MarshalAs(UnmanagedType.LPWStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> szProdName As StringBuilder) As Integer
-            Return api.DTWAIN_GetAppInfoW(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_GetAppInfoW(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_GetAuthor(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szAuthor As StringBuilder) As Integer
-            Return api.DTWAIN_GetAuthor(Source, szAuthor)
+        Return api.DTWAIN_GetAuthor(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_GetAuthorA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szAuthor As StringBuilder) As Integer
-            Return api.DTWAIN_GetAuthorA(Source, szAuthor)
+        Return api.DTWAIN_GetAuthorA(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_GetAuthorW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szAuthor As StringBuilder) As Integer
-            Return api.DTWAIN_GetAuthorW(Source, szAuthor)
+        Return api.DTWAIN_GetAuthorW(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_GetBatteryMinutes(Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
-            Return api.DTWAIN_GetBatteryMinutes(Source, lpMinutes)
+        Return api.DTWAIN_GetBatteryMinutes(Source, lpMinutes)
         End Function
-
+        
         Public Function DTWAIN_GetBatteryPercent(Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
-            Return api.DTWAIN_GetBatteryPercent(Source, lpPercent)
+        Return api.DTWAIN_GetBatteryPercent(Source, lpPercent)
         End Function
-
+        
         Public Function DTWAIN_GetBitDepth(Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetBitDepth(Source, BitDepth, bCurrent)
+        Return api.DTWAIN_GetBitDepth(Source, BitDepth, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetBlankPageAutoDetection(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetBlankPageAutoDetection(Source)
+        Return api.DTWAIN_GetBlankPageAutoDetection(Source)
         End Function
-
+        
         Public Function DTWAIN_GetBrightness(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
-            Return api.DTWAIN_GetBrightness(Source, Brightness)
+        Return api.DTWAIN_GetBrightness(Source, Brightness)
         End Function
-
+        
         Public Function DTWAIN_GetBrightnessString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
-            Return api.DTWAIN_GetBrightnessString(Source, Brightness)
+        Return api.DTWAIN_GetBrightnessString(Source, Brightness)
         End Function
-
+        
         Public Function DTWAIN_GetBrightnessStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-            Return api.DTWAIN_GetBrightnessStringA(Source, Contrast)
+        Return api.DTWAIN_GetBrightnessStringA(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetBrightnessStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-            Return api.DTWAIN_GetBrightnessStringW(Source, Contrast)
+        Return api.DTWAIN_GetBrightnessStringW(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetBufferedTransferInfo(Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
-            Return api.DTWAIN_GetBufferedTransferInfo(Source, Compression, BytesPerRow, Columns, Rows, XOffset, YOffset, Flags, BytesWritten, MemoryLength)
+        Return api.DTWAIN_GetBufferedTransferInfo(Source, Compression, BytesPerRow, Columns, Rows, XOffset, YOffset, Flags, BytesWritten, MemoryLength)
         End Function
-
+        
         Public Function DTWAIN_GetCallback() As DTwainCallback
-            Return api.DTWAIN_GetCallback()
+        Return api.DTWAIN_GetCallback()
         End Function
-
+        
         Public Function DTWAIN_GetCallback64() As DTwainCallback64
-            Return api.DTWAIN_GetCallback64()
+        Return api.DTWAIN_GetCallback64()
         End Function
-
+        
         Public Function DTWAIN_GetCapArrayType(Source As System.IntPtr, nCap As Integer) As Integer
-            Return api.DTWAIN_GetCapArrayType(Source, nCap)
+        Return api.DTWAIN_GetCapArrayType(Source, nCap)
         End Function
-
+        
         Public Function DTWAIN_GetCapContainer(Source As System.IntPtr, nCap As Integer, lCapType As Integer) As Integer
-            Return api.DTWAIN_GetCapContainer(Source, nCap, lCapType)
+        Return api.DTWAIN_GetCapContainer(Source, nCap, lCapType)
         End Function
-
+        
         Public Function DTWAIN_GetCapContainerEx(nCap As Integer, bSetContainer As Integer, ByRef ConTypes As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCapContainerEx(nCap, bSetContainer, ConTypes)
+        Return api.DTWAIN_GetCapContainerEx(nCap, bSetContainer, ConTypes)
         End Function
-
+        
         Public Function DTWAIN_GetCapContainerEx2(nCap As Integer, bSetContainer As Integer) As System.IntPtr
-            Return api.DTWAIN_GetCapContainerEx2(nCap, bSetContainer)
+        Return api.DTWAIN_GetCapContainerEx2(nCap, bSetContainer)
         End Function
-
+        
         Public Function DTWAIN_GetCapDataType(Source As System.IntPtr, nCap As Integer) As Integer
-            Return api.DTWAIN_GetCapDataType(Source, nCap)
+        Return api.DTWAIN_GetCapDataType(Source, nCap)
         End Function
-
+        
         Public Function DTWAIN_GetCapFromName(szName As String) As Integer
-            Return api.DTWAIN_GetCapFromName(szName)
+        Return api.DTWAIN_GetCapFromName(szName)
         End Function
-
+        
         Public Function DTWAIN_GetCapFromNameA(szName As String) As Integer
-            Return api.DTWAIN_GetCapFromNameA(szName)
+        Return api.DTWAIN_GetCapFromNameA(szName)
         End Function
-
+        
         Public Function DTWAIN_GetCapFromNameW(szName As String) As Integer
-            Return api.DTWAIN_GetCapFromNameW(szName)
+        Return api.DTWAIN_GetCapFromNameW(szName)
         End Function
-
+        
         Public Function DTWAIN_GetCapOperations(Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
-            Return api.DTWAIN_GetCapOperations(Source, lCapability, lpOps)
+        Return api.DTWAIN_GetCapOperations(Source, lCapability, lpOps)
         End Function
-
+        
         Public Function DTWAIN_GetCapValues(Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCapValues(Source, lCap, lGetType, pArray)
+        Return api.DTWAIN_GetCapValues(Source, lCap, lGetType, pArray)
         End Function
-
+        
         Public Function DTWAIN_GetCapValuesEx(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCapValuesEx(Source, lCap, lGetType, lContainerType, pArray)
+        Return api.DTWAIN_GetCapValuesEx(Source, lCap, lGetType, lContainerType, pArray)
         End Function
-
+        
         Public Function DTWAIN_GetCapValuesEx2(Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType, pArray)
+        Return api.DTWAIN_GetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType, pArray)
         End Function
-
+        
         Public Function DTWAIN_GetCaption(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
-            Return api.DTWAIN_GetCaption(Source, Caption)
+        Return api.DTWAIN_GetCaption(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_GetCaptionA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Caption As StringBuilder) As Integer
-            Return api.DTWAIN_GetCaptionA(Source, Caption)
+        Return api.DTWAIN_GetCaptionA(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_GetCaptionW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Caption As StringBuilder) As Integer
-            Return api.DTWAIN_GetCaptionW(Source, Caption)
+        Return api.DTWAIN_GetCaptionW(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
-            Return api.DTWAIN_GetCompressionSize(Source, lBytes)
+        Return api.DTWAIN_GetCompressionSize(Source, lBytes)
         End Function
-
+        
         Public Function DTWAIN_GetCompressionType(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetCompressionType(Source, lpCompression, bCurrent)
+        Return api.DTWAIN_GetCompressionType(Source, lpCompression, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetConditionCodeString(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetConditionCodeStringA(lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetConditionCodeStringA(lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetConditionCodeStringA(lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetConditionCodeStringW(lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetConditionCodeStringW(lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetConditionCodeStringW(lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetContrast(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
-            Return api.DTWAIN_GetContrast(Source, Contrast)
+        Return api.DTWAIN_GetContrast(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetContrastString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
-            Return api.DTWAIN_GetContrastString(Source, Contrast)
+        Return api.DTWAIN_GetContrastString(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetContrastStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
-            Return api.DTWAIN_GetContrastStringA(Source, Contrast)
+        Return api.DTWAIN_GetContrastStringA(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetContrastStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Contrast As StringBuilder) As Integer
-            Return api.DTWAIN_GetContrastStringW(Source, Contrast)
+        Return api.DTWAIN_GetContrastStringW(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_GetCountry() As Integer
-            Return api.DTWAIN_GetCountry()
+        Return api.DTWAIN_GetCountry()
         End Function
-
+        
         Public Function DTWAIN_GetCurrentAcquiredImage(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_GetCurrentAcquiredImage(Source)
+        Return api.DTWAIN_GetCurrentAcquiredImage(Source)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentFileName(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-            Return api.DTWAIN_GetCurrentFileName(Source, szName, MaxLen)
+        Return api.DTWAIN_GetCurrentFileName(Source, szName, MaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentFileNameA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-            Return api.DTWAIN_GetCurrentFileNameA(Source, szName, MaxLen)
+        Return api.DTWAIN_GetCurrentFileNameA(Source, szName, MaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentFileNameW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder, MaxLen As Integer) As Integer
-            Return api.DTWAIN_GetCurrentFileNameW(Source, szName, MaxLen)
+        Return api.DTWAIN_GetCurrentFileNameW(Source, szName, MaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentPageNum(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCurrentPageNum(Source)
+        Return api.DTWAIN_GetCurrentPageNum(Source)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentRetryCount(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetCurrentRetryCount(Source)
+        Return api.DTWAIN_GetCurrentRetryCount(Source)
         End Function
-
+        
         Public Function DTWAIN_GetCurrentTwainTriplet(ByRef pAppID As TW_IDENTITY, ByRef pSourceID As TW_IDENTITY, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
-            Return api.DTWAIN_GetCurrentTwainTriplet(pAppID, pSourceID, lpDG, lpDAT, lpMsg, lpMemRef)
+        Return api.DTWAIN_GetCurrentTwainTriplet(pAppID, pSourceID, lpDG, lpDAT, lpMsg, lpMemRef)
         End Function
-
+        
         Public Function DTWAIN_GetCustomDSData(Source As System.IntPtr, Data As Byte(), dSize As UInteger, ByRef pActualSize As UInteger, nFlags As Integer) As System.IntPtr
-            Return api.DTWAIN_GetCustomDSData(Source, Data, dSize, pActualSize, nFlags)
+        Return api.DTWAIN_GetCustomDSData(Source, Data, dSize, pActualSize, nFlags)
         End Function
-
+        
         Public Function DTWAIN_GetDSMFullName(DSMType As Integer, <MarshalAs(UnmanagedType.LPTStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-            Return api.DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, pWhichSearch)
+        Return api.DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, pWhichSearch)
         End Function
-
+        
         Public Function DTWAIN_GetDSMFullNameA(DSMType As Integer, <MarshalAs(UnmanagedType.LPStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-            Return api.DTWAIN_GetDSMFullNameA(DSMType, szDLLName, nMaxLen, pWhichSearch)
+        Return api.DTWAIN_GetDSMFullNameA(DSMType, szDLLName, nMaxLen, pWhichSearch)
         End Function
-
+        
         Public Function DTWAIN_GetDSMFullNameW(DSMType As Integer, <MarshalAs(UnmanagedType.LPWStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
-            Return api.DTWAIN_GetDSMFullNameW(DSMType, szDLLName, nMaxLen, pWhichSearch)
+        Return api.DTWAIN_GetDSMFullNameW(DSMType, szDLLName, nMaxLen, pWhichSearch)
         End Function
-
+        
         Public Function DTWAIN_GetDSMSearchOrder() As Integer
-            Return api.DTWAIN_GetDSMSearchOrder()
+        Return api.DTWAIN_GetDSMSearchOrder()
         End Function
-
+        
         Public Function DTWAIN_GetDTWAINHandle() As System.IntPtr
-            Return api.DTWAIN_GetDTWAINHandle()
+        Return api.DTWAIN_GetDTWAINHandle()
         End Function
-
+        
         Public Function DTWAIN_GetDeviceEvent(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
-            Return api.DTWAIN_GetDeviceEvent(Source, lpEvent)
+        Return api.DTWAIN_GetDeviceEvent(Source, lpEvent)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceEventEx(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_GetDeviceEventEx(Source, lpEvent, pArray)
+        Return api.DTWAIN_GetDeviceEventEx(Source, lpEvent, pArray)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceEventInfo(Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
-            Return api.DTWAIN_GetDeviceEventInfo(Source, nWhichInfo, pValue)
+        Return api.DTWAIN_GetDeviceEventInfo(Source, nWhichInfo, pValue)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceNotifications(Source As System.IntPtr, ByRef DevEvents As Integer) As Integer
-            Return api.DTWAIN_GetDeviceNotifications(Source, DevEvents)
+        Return api.DTWAIN_GetDeviceNotifications(Source, DevEvents)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceTimeDate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetDeviceTimeDate(Source, szTimeDate)
+        Return api.DTWAIN_GetDeviceTimeDate(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceTimeDateA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetDeviceTimeDateA(Source, szTimeDate)
+        Return api.DTWAIN_GetDeviceTimeDateA(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetDeviceTimeDateW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetDeviceTimeDateW(Source, szTimeDate)
+        Return api.DTWAIN_GetDeviceTimeDateW(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetDoubleFeedDetectLength(Source As System.IntPtr, ByRef Value As System.Double, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetDoubleFeedDetectLength(Source, Value, bCurrent)
+        Return api.DTWAIN_GetDoubleFeedDetectLength(Source, Value, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetDoubleFeedDetectValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_GetDoubleFeedDetectValues(Source, pArray)
+        Return api.DTWAIN_GetDoubleFeedDetectValues(Source, pArray)
         End Function
-
+        
         Public Function DTWAIN_GetDuplexType(Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
-            Return api.DTWAIN_GetDuplexType(Source, lpDupType)
+        Return api.DTWAIN_GetDuplexType(Source, lpDupType)
         End Function
-
+        
         Public Function DTWAIN_GetErrorBuffer(ByRef ArrayBuffer As System.IntPtr) As Integer
-            Return api.DTWAIN_GetErrorBuffer(ArrayBuffer)
+        Return api.DTWAIN_GetErrorBuffer(ArrayBuffer)
         End Function
-
+        
         Public Function DTWAIN_GetErrorBufferThreshold() As Integer
-            Return api.DTWAIN_GetErrorBufferThreshold()
+        Return api.DTWAIN_GetErrorBufferThreshold()
         End Function
-
+        
         Public Function DTWAIN_GetErrorCallback() As DTwainErrorProc
-            Return api.DTWAIN_GetErrorCallback()
+        Return api.DTWAIN_GetErrorCallback()
         End Function
-
+        
         Public Function DTWAIN_GetErrorCallback64() As DTwainErrorProc64
-            Return api.DTWAIN_GetErrorCallback64()
+        Return api.DTWAIN_GetErrorCallback64()
         End Function
-
+        
         Public Function DTWAIN_GetErrorString(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetErrorString(lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetErrorString(lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetErrorStringA(lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetErrorStringA(lError, lpszBuffer, nLength)
+        Return api.DTWAIN_GetErrorStringA(lError, lpszBuffer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetErrorStringW(lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetErrorStringW(lError, lpszBuffer, nLength)
+        Return api.DTWAIN_GetErrorStringW(lError, lpszBuffer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetExtCapFromName(szName As String) As Integer
-            Return api.DTWAIN_GetExtCapFromName(szName)
+        Return api.DTWAIN_GetExtCapFromName(szName)
         End Function
-
+        
         Public Function DTWAIN_GetExtCapFromNameA(szName As String) As Integer
-            Return api.DTWAIN_GetExtCapFromNameA(szName)
+        Return api.DTWAIN_GetExtCapFromNameA(szName)
         End Function
-
+        
         Public Function DTWAIN_GetExtCapFromNameW(szName As String) As Integer
-            Return api.DTWAIN_GetExtCapFromNameW(szName)
+        Return api.DTWAIN_GetExtCapFromNameW(szName)
         End Function
-
+        
         Public Function DTWAIN_GetExtImageInfo(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetExtImageInfo(Source)
+        Return api.DTWAIN_GetExtImageInfo(Source)
         End Function
-
+        
         Public Function DTWAIN_GetExtImageInfoData(Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
-            Return api.DTWAIN_GetExtImageInfoData(Source, nWhich, Data)
+        Return api.DTWAIN_GetExtImageInfoData(Source, nWhich, Data)
         End Function
-
+        
         Public Function DTWAIN_GetExtImageInfoDataEx(Source As System.IntPtr, nWhich As Integer) As System.IntPtr
-            Return api.DTWAIN_GetExtImageInfoDataEx(Source, nWhich)
+        Return api.DTWAIN_GetExtImageInfoDataEx(Source, nWhich)
         End Function
-
+        
         Public Function DTWAIN_GetExtImageInfoItem(Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
-            Return api.DTWAIN_GetExtImageInfoItem(Source, nWhich, InfoID, NumItems, Type)
+        Return api.DTWAIN_GetExtImageInfoItem(Source, nWhich, InfoID, NumItems, Type)
         End Function
-
+        
         Public Function DTWAIN_GetExtImageInfoItemEx(Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer, ByRef ReturnCode As Integer) As Integer
-            Return api.DTWAIN_GetExtImageInfoItemEx(Source, nWhich, InfoID, NumItems, Type, ReturnCode)
+        Return api.DTWAIN_GetExtImageInfoItemEx(Source, nWhich, InfoID, NumItems, Type, ReturnCode)
         End Function
-
+        
         Public Function DTWAIN_GetExtNameFromCap(nValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetExtNameFromCap(nValue, szValue, nMaxLen)
+        Return api.DTWAIN_GetExtNameFromCap(nValue, szValue, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetExtNameFromCapA(nValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetExtNameFromCapA(nValue, szValue, nLength)
+        Return api.DTWAIN_GetExtNameFromCapA(nValue, szValue, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetExtNameFromCapW(nValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetExtNameFromCapW(nValue, szValue, nLength)
+        Return api.DTWAIN_GetExtNameFromCapW(nValue, szValue, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFeederAlignment(Source As System.IntPtr, ByRef lpAlignment As Integer) As Integer
-            Return api.DTWAIN_GetFeederAlignment(Source, lpAlignment)
+        Return api.DTWAIN_GetFeederAlignment(Source, lpAlignment)
         End Function
-
+        
         Public Function DTWAIN_GetFeederFuncs(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetFeederFuncs(Source)
+        Return api.DTWAIN_GetFeederFuncs(Source)
         End Function
-
+        
         Public Function DTWAIN_GetFeederOrder(Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
-            Return api.DTWAIN_GetFeederOrder(Source, lpOrder)
+        Return api.DTWAIN_GetFeederOrder(Source, lpOrder)
         End Function
-
+        
         Public Function DTWAIN_GetFeederWaitTime(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetFeederWaitTime(Source)
+        Return api.DTWAIN_GetFeederWaitTime(Source)
         End Function
-
+        
         Public Function DTWAIN_GetFileCompressionType(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetFileCompressionType(Source)
+        Return api.DTWAIN_GetFileCompressionType(Source)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeExtensions(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeExtensionsA(nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeExtensionsA(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeExtensionsA(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeExtensionsW(nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeExtensionsW(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeExtensionsW(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeName(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeName(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeName(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeNameA(nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeNameA(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeNameA(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetFileTypeNameW(nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetFileTypeNameW(nType, lpszName, nLength)
+        Return api.DTWAIN_GetFileTypeNameW(nType, lpszName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetHalftone(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-            Return api.DTWAIN_GetHalftone(Source, lpHalftone, TypeOfGet)
+        Return api.DTWAIN_GetHalftone(Source, lpHalftone, TypeOfGet)
         End Function
-
+        
         Public Function DTWAIN_GetHalftoneA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-            Return api.DTWAIN_GetHalftoneA(Source, lpHalftone, TypeOfGet)
+        Return api.DTWAIN_GetHalftoneA(Source, lpHalftone, TypeOfGet)
         End Function
-
+        
         Public Function DTWAIN_GetHalftoneW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpHalftone As StringBuilder, TypeOfGet As Integer) As Integer
-            Return api.DTWAIN_GetHalftoneW(Source, lpHalftone, TypeOfGet)
+        Return api.DTWAIN_GetHalftoneW(Source, lpHalftone, TypeOfGet)
         End Function
-
+        
         Public Function DTWAIN_GetHighlight(Source As System.IntPtr, ByRef Highlight As System.Double) As Integer
-            Return api.DTWAIN_GetHighlight(Source, Highlight)
+        Return api.DTWAIN_GetHighlight(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_GetHighlightString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Highlight As StringBuilder) As Integer
-            Return api.DTWAIN_GetHighlightString(Source, Highlight)
+        Return api.DTWAIN_GetHighlightString(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_GetHighlightStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As StringBuilder) As Integer
-            Return api.DTWAIN_GetHighlightStringA(Source, Highlight)
+        Return api.DTWAIN_GetHighlightStringA(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_GetHighlightStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Highlight As StringBuilder) As Integer
-            Return api.DTWAIN_GetHighlightStringW(Source, Highlight)
+        Return api.DTWAIN_GetHighlightStringW(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_GetImageInfo(Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-            Return api.DTWAIN_GetImageInfo(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
+        Return api.DTWAIN_GetImageInfo(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
         End Function
-
+        
         Public Function DTWAIN_GetImageInfoString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-            Return api.DTWAIN_GetImageInfoString(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
+        Return api.DTWAIN_GetImageInfoString(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
         End Function
-
+        
         Public Function DTWAIN_GetImageInfoStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-            Return api.DTWAIN_GetImageInfoStringA(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
+        Return api.DTWAIN_GetImageInfoStringA(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
         End Function
-
+        
         Public Function DTWAIN_GetImageInfoStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
-            Return api.DTWAIN_GetImageInfoStringW(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
+        Return api.DTWAIN_GetImageInfoStringW(Source, lpXResolution, lpYResolution, lpWidth, lpLength, lpNumSamples, lpBitsPerSample, lpBitsPerPixel, lpPlanar, lpPixelType, lpCompression)
         End Function
-
+        
         Public Function DTWAIN_GetJobControl(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetJobControl(Source, pJobControl, bCurrent)
+        Return api.DTWAIN_GetJobControl(Source, pJobControl, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetJpegValues(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-            Return api.DTWAIN_GetJpegValues(Source, pQuality, Progressive)
+        Return api.DTWAIN_GetJpegValues(Source, pQuality, Progressive)
         End Function
-
+        
         Public Function DTWAIN_GetJpegXRValues(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
-            Return api.DTWAIN_GetJpegXRValues(Source, pQuality, Progressive)
+        Return api.DTWAIN_GetJpegXRValues(Source, pQuality, Progressive)
         End Function
-
+        
         Public Function DTWAIN_GetLanguage() As Integer
-            Return api.DTWAIN_GetLanguage()
+        Return api.DTWAIN_GetLanguage()
         End Function
-
+        
         Public Function DTWAIN_GetLastError() As Integer
-            Return api.DTWAIN_GetLastError()
+        Return api.DTWAIN_GetLastError()
         End Function
-
+        
         Public Function DTWAIN_GetLibraryPath(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetLibraryPath(lpszVer, nLength)
+        Return api.DTWAIN_GetLibraryPath(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetLibraryPathA(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetLibraryPathA(lpszVer, nLength)
+        Return api.DTWAIN_GetLibraryPathA(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetLibraryPathW(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetLibraryPathW(lpszVer, nLength)
+        Return api.DTWAIN_GetLibraryPathW(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetLightPath(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
-            Return api.DTWAIN_GetLightPath(Source, lpLightPath)
+        Return api.DTWAIN_GetLightPath(Source, lpLightPath)
         End Function
-
+        
         Public Function DTWAIN_GetLightSource(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
-            Return api.DTWAIN_GetLightSource(Source, LightSource)
+        Return api.DTWAIN_GetLightSource(Source, LightSource)
         End Function
-
+        
         Public Function DTWAIN_GetLightSources(Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
-            Return api.DTWAIN_GetLightSources(Source, LightSources)
+        Return api.DTWAIN_GetLightSources(Source, LightSources)
         End Function
-
+        
         Public Function DTWAIN_GetLoggerCallback() As DTwainLoggerProc
-            Return api.DTWAIN_GetLoggerCallback()
+        Return api.DTWAIN_GetLoggerCallback()
         End Function
-
+        
         Public Function DTWAIN_GetLoggerCallbackA() As DTwainLoggerProcA
-            Return api.DTWAIN_GetLoggerCallbackA()
+        Return api.DTWAIN_GetLoggerCallbackA()
         End Function
-
+        
         Public Function DTWAIN_GetLoggerCallbackW() As DTwainLoggerProcW
-            Return api.DTWAIN_GetLoggerCallbackW()
+        Return api.DTWAIN_GetLoggerCallbackW()
         End Function
-
+        
         Public Function DTWAIN_GetManualDuplexCount(Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
-            Return api.DTWAIN_GetManualDuplexCount(Source, pSide1, pSide2)
+        Return api.DTWAIN_GetManualDuplexCount(Source, pSide1, pSide2)
         End Function
-
+        
         Public Function DTWAIN_GetMaxAcquisitions(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetMaxAcquisitions(Source)
+        Return api.DTWAIN_GetMaxAcquisitions(Source)
         End Function
-
+        
         Public Function DTWAIN_GetMaxBuffers(Source As System.IntPtr, ByRef pMaxBuf As Integer) As Integer
-            Return api.DTWAIN_GetMaxBuffers(Source, pMaxBuf)
+        Return api.DTWAIN_GetMaxBuffers(Source, pMaxBuf)
         End Function
-
+        
         Public Function DTWAIN_GetMaxPagesToAcquire(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetMaxPagesToAcquire(Source)
+        Return api.DTWAIN_GetMaxPagesToAcquire(Source)
         End Function
-
+        
         Public Function DTWAIN_GetMaxRetryAttempts(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetMaxRetryAttempts(Source)
+        Return api.DTWAIN_GetMaxRetryAttempts(Source)
         End Function
-
+        
         Public Function DTWAIN_GetNameFromCap(nCapValue As Integer, <MarshalAs(UnmanagedType.LPTStr)> szValue As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetNameFromCap(nCapValue, szValue, nMaxLen)
+        Return api.DTWAIN_GetNameFromCap(nCapValue, szValue, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetNameFromCapA(nCapValue As Integer, <MarshalAs(UnmanagedType.LPStr)> szValue As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetNameFromCapA(nCapValue, szValue, nLength)
+        Return api.DTWAIN_GetNameFromCapA(nCapValue, szValue, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetNameFromCapW(nCapValue As Integer, <MarshalAs(UnmanagedType.LPWStr)> szValue As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetNameFromCapW(nCapValue, szValue, nLength)
+        Return api.DTWAIN_GetNameFromCapW(nCapValue, szValue, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetNoiseFilter(Source As System.IntPtr, ByRef lpNoiseFilter As Integer) As Integer
-            Return api.DTWAIN_GetNoiseFilter(Source, lpNoiseFilter)
+        Return api.DTWAIN_GetNoiseFilter(Source, lpNoiseFilter)
         End Function
-
+        
         Public Function DTWAIN_GetNumAcquiredImages(aAcq As System.IntPtr, nWhich As Integer) As Integer
-            Return api.DTWAIN_GetNumAcquiredImages(aAcq, nWhich)
+        Return api.DTWAIN_GetNumAcquiredImages(aAcq, nWhich)
         End Function
-
+        
         Public Function DTWAIN_GetNumAcquisitions(aAcq As System.IntPtr) As Integer
-            Return api.DTWAIN_GetNumAcquisitions(aAcq)
+        Return api.DTWAIN_GetNumAcquisitions(aAcq)
         End Function
-
+        
         Public Function DTWAIN_GetOCRCapValues(Engine As System.IntPtr, OCRCapValue As Integer, TypeOfGet As Integer, ByRef CapValues As System.IntPtr) As Integer
-            Return api.DTWAIN_GetOCRCapValues(Engine, OCRCapValue, TypeOfGet, CapValues)
+        Return api.DTWAIN_GetOCRCapValues(Engine, OCRCapValue, TypeOfGet, CapValues)
         End Function
-
+        
         Public Function DTWAIN_GetOCRErrorString(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRErrorStringA(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRErrorStringA(Engine, lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetOCRErrorStringA(Engine, lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRErrorStringW(Engine As System.IntPtr, lError As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRErrorStringW(Engine, lError, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetOCRErrorStringW(Engine, lError, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRLastError(Engine As System.IntPtr) As Integer
-            Return api.DTWAIN_GetOCRLastError(Engine)
+        Return api.DTWAIN_GetOCRLastError(Engine)
         End Function
-
+        
         Public Function DTWAIN_GetOCRMajorMinorVersion(Engine As System.IntPtr, ByRef lpMajor As Integer, ByRef lpMinor As Integer) As Integer
-            Return api.DTWAIN_GetOCRMajorMinorVersion(Engine, lpMajor, lpMinor)
+        Return api.DTWAIN_GetOCRMajorMinorVersion(Engine, lpMajor, lpMinor)
         End Function
-
+        
         Public Function DTWAIN_GetOCRManufacturer(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szManufacturer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nMaxLen)
+        Return api.DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRManufacturerA(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRManufacturerA(Engine, szManufacturer, nLength)
+        Return api.DTWAIN_GetOCRManufacturerA(Engine, szManufacturer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRManufacturerW(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szManufacturer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRManufacturerW(Engine, szManufacturer, nLength)
+        Return api.DTWAIN_GetOCRManufacturerW(Engine, szManufacturer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductFamily(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductFamily As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nMaxLen)
+        Return api.DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductFamilyA(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductFamilyA(Engine, szProductFamily, nLength)
+        Return api.DTWAIN_GetOCRProductFamilyA(Engine, szProductFamily, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductFamilyW(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductFamily As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductFamilyW(Engine, szProductFamily, nLength)
+        Return api.DTWAIN_GetOCRProductFamilyW(Engine, szProductFamily, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductName(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProductName As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductName(Engine, szProductName, nMaxLen)
+        Return api.DTWAIN_GetOCRProductName(Engine, szProductName, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductNameA(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductNameA(Engine, szProductName, nLength)
+        Return api.DTWAIN_GetOCRProductNameA(Engine, szProductName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRProductNameW(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProductName As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRProductNameW(Engine, szProductName, nLength)
+        Return api.DTWAIN_GetOCRProductNameW(Engine, szProductName, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRText(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPTStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-            Return api.DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
+        Return api.DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextA(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-            Return api.DTWAIN_GetOCRTextA(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
+        Return api.DTWAIN_GetOCRTextA(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextInfoFloat(OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As System.Double) As Integer
-            Return api.DTWAIN_GetOCRTextInfoFloat(OCRTextInfo, nCharPos, nWhichItem, pInfo)
+        Return api.DTWAIN_GetOCRTextInfoFloat(OCRTextInfo, nCharPos, nWhichItem, pInfo)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextInfoFloatEx(OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As System.Double, bufSize As Integer) As Integer
-            Return api.DTWAIN_GetOCRTextInfoFloatEx(OCRTextInfo, nWhichItem, pInfo, bufSize)
+        Return api.DTWAIN_GetOCRTextInfoFloatEx(OCRTextInfo, nWhichItem, pInfo, bufSize)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextInfoHandle(Engine As System.IntPtr, nPageNo As Integer) As System.IntPtr
-            Return api.DTWAIN_GetOCRTextInfoHandle(Engine, nPageNo)
+        Return api.DTWAIN_GetOCRTextInfoHandle(Engine, nPageNo)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextInfoLong(OCRTextInfo As System.IntPtr, nCharPos As Integer, nWhichItem As Integer, ByRef pInfo As Integer) As Integer
-            Return api.DTWAIN_GetOCRTextInfoLong(OCRTextInfo, nCharPos, nWhichItem, pInfo)
+        Return api.DTWAIN_GetOCRTextInfoLong(OCRTextInfo, nCharPos, nWhichItem, pInfo)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextInfoLongEx(OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As Integer, bufSize As Integer) As Integer
-            Return api.DTWAIN_GetOCRTextInfoLongEx(OCRTextInfo, nWhichItem, pInfo, bufSize)
+        Return api.DTWAIN_GetOCRTextInfoLongEx(OCRTextInfo, nWhichItem, pInfo, bufSize)
         End Function
-
+        
         Public Function DTWAIN_GetOCRTextW(Engine As System.IntPtr, nPageNo As Integer, <MarshalAs(UnmanagedType.LPWStr)> Data As StringBuilder, dSize As Integer, ByRef pActualSize As Integer, nFlags As Integer) As System.IntPtr
-            Return api.DTWAIN_GetOCRTextW(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
+        Return api.DTWAIN_GetOCRTextW(Engine, nPageNo, Data, dSize, pActualSize, nFlags)
         End Function
-
+        
         Public Function DTWAIN_GetOCRVersionInfo(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> buffer As StringBuilder, maxBufSize As Integer) As Integer
-            Return api.DTWAIN_GetOCRVersionInfo(Engine, buffer, maxBufSize)
+        Return api.DTWAIN_GetOCRVersionInfo(Engine, buffer, maxBufSize)
         End Function
-
+        
         Public Function DTWAIN_GetOCRVersionInfoA(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> buffer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRVersionInfoA(Engine, buffer, nLength)
+        Return api.DTWAIN_GetOCRVersionInfoA(Engine, buffer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOCRVersionInfoW(Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> buffer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetOCRVersionInfoW(Engine, buffer, nLength)
+        Return api.DTWAIN_GetOCRVersionInfoW(Engine, buffer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetOrientation(Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetOrientation(Source, lpOrient, bCurrent)
+        Return api.DTWAIN_GetOrientation(Source, lpOrient, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetOverscan(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetOverscan(Source, lpOverscan, bCurrent)
+        Return api.DTWAIN_GetOverscan(Source, lpOverscan, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPDFTextElementFloat(TextElement As System.IntPtr, ByRef val1 As System.Double, ByRef val2 As System.Double, Flags As Integer) As Integer
-            Return api.DTWAIN_GetPDFTextElementFloat(TextElement, val1, val2, Flags)
+        Return api.DTWAIN_GetPDFTextElementFloat(TextElement, val1, val2, Flags)
         End Function
-
+        
         Public Function DTWAIN_GetPDFTextElementLong(TextElement As System.IntPtr, ByRef val1 As Integer, ByRef val2 As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_GetPDFTextElementLong(TextElement, val1, val2, Flags)
+        Return api.DTWAIN_GetPDFTextElementLong(TextElement, val1, val2, Flags)
         End Function
-
+        
         Public Function DTWAIN_GetPDFTextElementString(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags)
+        Return api.DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags)
         End Function
-
+        
         Public Function DTWAIN_GetPDFTextElementStringA(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_GetPDFTextElementStringA(TextElement, szData, maxLen, Flags)
+        Return api.DTWAIN_GetPDFTextElementStringA(TextElement, szData, maxLen, Flags)
         End Function
-
+        
         Public Function DTWAIN_GetPDFTextElementStringW(TextElement As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szData As StringBuilder, maxLen As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_GetPDFTextElementStringW(TextElement, szData, maxLen, Flags)
+        Return api.DTWAIN_GetPDFTextElementStringW(TextElement, szData, maxLen, Flags)
         End Function
-
+        
         Public Function DTWAIN_GetPDFType1FontName(FontVal As Integer, <MarshalAs(UnmanagedType.LPTStr)> szFont As StringBuilder, nChars As Integer) As Integer
-            Return api.DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars)
+        Return api.DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars)
         End Function
-
+        
         Public Function DTWAIN_GetPDFType1FontNameA(FontVal As Integer, <MarshalAs(UnmanagedType.LPStr)> szFont As StringBuilder, nChars As Integer) As Integer
-            Return api.DTWAIN_GetPDFType1FontNameA(FontVal, szFont, nChars)
+        Return api.DTWAIN_GetPDFType1FontNameA(FontVal, szFont, nChars)
         End Function
-
+        
         Public Function DTWAIN_GetPDFType1FontNameW(FontVal As Integer, <MarshalAs(UnmanagedType.LPWStr)> szFont As StringBuilder, nChars As Integer) As Integer
-            Return api.DTWAIN_GetPDFType1FontNameW(FontVal, szFont, nChars)
+        Return api.DTWAIN_GetPDFType1FontNameW(FontVal, szFont, nChars)
         End Function
-
+        
         Public Function DTWAIN_GetPaperSize(Source As System.IntPtr, ByRef lpPaperSize As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPaperSize(Source, lpPaperSize, bCurrent)
+        Return api.DTWAIN_GetPaperSize(Source, lpPaperSize, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPaperSizeName(paperNumber As Integer, <MarshalAs(UnmanagedType.LPTStr)> outName As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetPaperSizeName(paperNumber, outName, nSize)
+        Return api.DTWAIN_GetPaperSizeName(paperNumber, outName, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetPaperSizeNameA(paperNumber As Integer, <MarshalAs(UnmanagedType.LPStr)> outName As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetPaperSizeNameA(paperNumber, outName, nSize)
+        Return api.DTWAIN_GetPaperSizeNameA(paperNumber, outName, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetPaperSizeNameW(paperNumber As Integer, <MarshalAs(UnmanagedType.LPWStr)> outName As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetPaperSizeNameW(paperNumber, outName, nSize)
+        Return api.DTWAIN_GetPaperSizeNameW(paperNumber, outName, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetPatchMaxPriorities(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPatchMaxPriorities(Source, pMaxPriorities, bCurrent)
+        Return api.DTWAIN_GetPatchMaxPriorities(Source, pMaxPriorities, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPatchMaxRetries(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPatchMaxRetries(Source, pMaxRetries, bCurrent)
+        Return api.DTWAIN_GetPatchMaxRetries(Source, pMaxRetries, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPatchPriorities(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
-            Return api.DTWAIN_GetPatchPriorities(Source, SearchPriorities)
+        Return api.DTWAIN_GetPatchPriorities(Source, SearchPriorities)
         End Function
-
+        
         Public Function DTWAIN_GetPatchSearchMode(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPatchSearchMode(Source, pSearchMode, bCurrent)
+        Return api.DTWAIN_GetPatchSearchMode(Source, pSearchMode, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPatchTimeOut(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPatchTimeOut(Source, pTimeOut, bCurrent)
+        Return api.DTWAIN_GetPatchTimeOut(Source, pTimeOut, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPixelFlavor(Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
-            Return api.DTWAIN_GetPixelFlavor(Source, lpPixelFlavor)
+        Return api.DTWAIN_GetPixelFlavor(Source, lpPixelFlavor)
         End Function
-
+        
         Public Function DTWAIN_GetPixelType(Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPixelType(Source, PixelType, BitDepth, bCurrent)
+        Return api.DTWAIN_GetPixelType(Source, PixelType, BitDepth, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPrinter(Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPrinter(Source, lpPrinter, bCurrent)
+        Return api.DTWAIN_GetPrinter(Source, lpPrinter, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterStartNumber(Source As System.IntPtr, ByRef nStart As Integer) As Integer
-            Return api.DTWAIN_GetPrinterStartNumber(Source, nStart)
+        Return api.DTWAIN_GetPrinterStartNumber(Source, nStart)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterStringMode(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_GetPrinterStringMode(Source, PrinterMode, bCurrent)
+        Return api.DTWAIN_GetPrinterStringMode(Source, PrinterMode, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterStrings(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
-            Return api.DTWAIN_GetPrinterStrings(Source, ArrayString)
+        Return api.DTWAIN_GetPrinterStrings(Source, ArrayString)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterSuffixString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen)
+        Return api.DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterSuffixStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetPrinterSuffixStringA(Source, Suffix, nLength)
+        Return api.DTWAIN_GetPrinterSuffixStringA(Source, Suffix, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetPrinterSuffixStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Suffix As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetPrinterSuffixStringW(Source, Suffix, nLength)
+        Return api.DTWAIN_GetPrinterSuffixStringW(Source, Suffix, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetRegisteredMsg() As Integer
-            Return api.DTWAIN_GetRegisteredMsg()
+        Return api.DTWAIN_GetRegisteredMsg()
         End Function
-
+        
         Public Function DTWAIN_GetResolution(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-            Return api.DTWAIN_GetResolution(Source, Resolution)
+        Return api.DTWAIN_GetResolution(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetResolutionString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetResolutionString(Source, Resolution)
+        Return api.DTWAIN_GetResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetResolutionStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_GetResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetResolutionStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_GetResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetResourceString(ResourceID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetResourceString(ResourceID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetResourceString(ResourceID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetResourceStringA(ResourceID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetResourceStringA(ResourceID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetResourceStringA(ResourceID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetResourceStringW(ResourceID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetResourceStringW(ResourceID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetResourceStringW(ResourceID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetRotation(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
-            Return api.DTWAIN_GetRotation(Source, Rotation)
+        Return api.DTWAIN_GetRotation(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_GetRotationString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
-            Return api.DTWAIN_GetRotationString(Source, Rotation)
+        Return api.DTWAIN_GetRotationString(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_GetRotationStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
-            Return api.DTWAIN_GetRotationStringA(Source, Rotation)
+        Return api.DTWAIN_GetRotationStringA(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_GetRotationStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Rotation As StringBuilder) As Integer
-            Return api.DTWAIN_GetRotationStringW(Source, Rotation)
+        Return api.DTWAIN_GetRotationStringW(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_GetSaveFileName(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSaveFileName(Source, fName, nMaxLen)
+        Return api.DTWAIN_GetSaveFileName(Source, fName, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSaveFileNameA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSaveFileNameA(Source, fName, nMaxLen)
+        Return api.DTWAIN_GetSaveFileNameA(Source, fName, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSaveFileNameW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSaveFileNameW(Source, fName, nMaxLen)
+        Return api.DTWAIN_GetSaveFileNameW(Source, fName, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSavedFilesCount(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_GetSavedFilesCount(Source)
+        Return api.DTWAIN_GetSavedFilesCount(Source)
         End Function
-
+        
         Public Function DTWAIN_GetSessionDetails(<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSessionDetails(szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSessionDetails(szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetSessionDetailsA(<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSessionDetailsA(szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSessionDetailsA(szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetSessionDetailsW(<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSessionDetailsW(szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSessionDetailsW(szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetShadow(Source As System.IntPtr, ByRef Shadow As System.Double) As Integer
-            Return api.DTWAIN_GetShadow(Source, Shadow)
+        Return api.DTWAIN_GetShadow(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_GetShadowString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Shadow As StringBuilder) As Integer
-            Return api.DTWAIN_GetShadowString(Source, Shadow)
+        Return api.DTWAIN_GetShadowString(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_GetShadowStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Shadow As StringBuilder) As Integer
-            Return api.DTWAIN_GetShadowStringA(Source, Shadow)
+        Return api.DTWAIN_GetShadowStringA(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_GetShadowStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Shadow As StringBuilder) As Integer
-            Return api.DTWAIN_GetShadowStringW(Source, Shadow)
+        Return api.DTWAIN_GetShadowStringW(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_GetShortVersionString(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetShortVersionString(lpszVer, nLength)
+        Return api.DTWAIN_GetShortVersionString(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetShortVersionStringA(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetShortVersionStringA(lpszVer, nLength)
+        Return api.DTWAIN_GetShortVersionStringA(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetShortVersionStringW(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetShortVersionStringW(lpszVer, nLength)
+        Return api.DTWAIN_GetShortVersionStringW(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceAcquisitions(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_GetSourceAcquisitions(Source)
+        Return api.DTWAIN_GetSourceAcquisitions(Source)
         End Function
-
+        
         Public Function DTWAIN_GetSourceDetails(szSources As String, <MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSourceDetails(szSources, szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSourceDetails(szSources, szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetSourceDetailsA(szSources As String, <MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSourceDetailsA(szSources, szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSourceDetailsA(szSources, szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetSourceDetailsW(szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
-            Return api.DTWAIN_GetSourceDetailsW(szSources, szBuf, nSize, indentFactor, bRefresh)
+        Return api.DTWAIN_GetSourceDetailsW(szSources, szBuf, nSize, indentFactor, bRefresh)
         End Function
-
+        
         Public Function DTWAIN_GetSourceID(Source As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_GetSourceID(Source)
+        Return api.DTWAIN_GetSourceID(Source)
         End Function
-
+        
         Public Function DTWAIN_GetSourceManufacturer(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSourceManufacturer(Source, szProduct, nMaxLen)
+        Return api.DTWAIN_GetSourceManufacturer(Source, szProduct, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSourceManufacturerA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceManufacturerA(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceManufacturerA(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceManufacturerW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceManufacturerW(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceManufacturerW(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductFamily(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductFamily(Source, szProduct, nMaxLen)
+        Return api.DTWAIN_GetSourceProductFamily(Source, szProduct, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductFamilyA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductFamilyA(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceProductFamilyA(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductFamilyW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductFamilyW(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceProductFamilyW(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductName(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductName(Source, szProduct, nMaxLen)
+        Return api.DTWAIN_GetSourceProductName(Source, szProduct, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductNameA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductNameA(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceProductNameA(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceProductNameW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceProductNameW(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceProductNameW(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceUnit(Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
-            Return api.DTWAIN_GetSourceUnit(Source, lpUnit)
+        Return api.DTWAIN_GetSourceUnit(Source, lpUnit)
         End Function
-
+        
         Public Function DTWAIN_GetSourceVersionInfo(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen)
+        Return api.DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetSourceVersionInfoA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceVersionInfoA(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceVersionInfoA(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceVersionInfoW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetSourceVersionInfoW(Source, szProduct, nLength)
+        Return api.DTWAIN_GetSourceVersionInfoW(Source, szProduct, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetSourceVersionNumber(Source As System.IntPtr, ByRef pMajor As Integer, ByRef pMinor As Integer) As Integer
-            Return api.DTWAIN_GetSourceVersionNumber(Source, pMajor, pMinor)
+        Return api.DTWAIN_GetSourceVersionNumber(Source, pMajor, pMinor)
         End Function
-
+        
         Public Function DTWAIN_GetStaticLibVersion() As Integer
-            Return api.DTWAIN_GetStaticLibVersion()
+        Return api.DTWAIN_GetStaticLibVersion()
         End Function
-
+        
         Public Function DTWAIN_GetTempFileDirectory(<MarshalAs(UnmanagedType.LPTStr)> szFilePath As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetTempFileDirectory(szFilePath, nMaxLen)
+        Return api.DTWAIN_GetTempFileDirectory(szFilePath, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetTempFileDirectoryA(<MarshalAs(UnmanagedType.LPStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetTempFileDirectoryA(szFilePath, nLength)
+        Return api.DTWAIN_GetTempFileDirectoryA(szFilePath, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetTempFileDirectoryW(<MarshalAs(UnmanagedType.LPWStr)> szFilePath As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetTempFileDirectoryW(szFilePath, nLength)
+        Return api.DTWAIN_GetTempFileDirectoryW(szFilePath, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetThreshold(Source As System.IntPtr, ByRef Threshold As System.Double) As Integer
-            Return api.DTWAIN_GetThreshold(Source, Threshold)
+        Return api.DTWAIN_GetThreshold(Source, Threshold)
         End Function
-
+        
         Public Function DTWAIN_GetThresholdString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Threshold As StringBuilder) As Integer
-            Return api.DTWAIN_GetThresholdString(Source, Threshold)
+        Return api.DTWAIN_GetThresholdString(Source, Threshold)
         End Function
-
+        
         Public Function DTWAIN_GetThresholdStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Threshold As StringBuilder) As Integer
-            Return api.DTWAIN_GetThresholdStringA(Source, Threshold)
+        Return api.DTWAIN_GetThresholdStringA(Source, Threshold)
         End Function
-
+        
         Public Function DTWAIN_GetThresholdStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Threshold As StringBuilder) As Integer
-            Return api.DTWAIN_GetThresholdStringW(Source, Threshold)
+        Return api.DTWAIN_GetThresholdStringW(Source, Threshold)
         End Function
-
+        
         Public Function DTWAIN_GetTimeDate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetTimeDate(Source, szTimeDate)
+        Return api.DTWAIN_GetTimeDate(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetTimeDateA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetTimeDateA(Source, szTimeDate)
+        Return api.DTWAIN_GetTimeDateA(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetTimeDateW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
-            Return api.DTWAIN_GetTimeDateW(Source, szTimeDate)
+        Return api.DTWAIN_GetTimeDateW(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_GetTwainAppID() As System.IntPtr
-            Return api.DTWAIN_GetTwainAppID()
+        Return api.DTWAIN_GetTwainAppID()
         End Function
-
+        
         Public Function DTWAIN_GetTwainAvailability() As Integer
-            Return api.DTWAIN_GetTwainAvailability()
+        Return api.DTWAIN_GetTwainAvailability()
         End Function
-
+        
         Public Function DTWAIN_GetTwainAvailabilityEx(<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetTwainAvailabilityEx(directories, nMaxLen)
+        Return api.DTWAIN_GetTwainAvailabilityEx(directories, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetTwainAvailabilityExA(<MarshalAs(UnmanagedType.LPStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetTwainAvailabilityExA(szDirectories, nLength)
+        Return api.DTWAIN_GetTwainAvailabilityExA(szDirectories, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetTwainAvailabilityExW(<MarshalAs(UnmanagedType.LPWStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetTwainAvailabilityExW(szDirectories, nLength)
+        Return api.DTWAIN_GetTwainAvailabilityExW(szDirectories, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryName(countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainCountryName(countryId, szName)
+        Return api.DTWAIN_GetTwainCountryName(countryId, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryNameA(countryId As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainCountryNameA(countryId, szName)
+        Return api.DTWAIN_GetTwainCountryNameA(countryId, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryNameW(countryId As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainCountryNameW(countryId, szName)
+        Return api.DTWAIN_GetTwainCountryNameW(countryId, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryValue(country As String) As Integer
-            Return api.DTWAIN_GetTwainCountryValue(country)
+        Return api.DTWAIN_GetTwainCountryValue(country)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryValueA(country As String) As Integer
-            Return api.DTWAIN_GetTwainCountryValueA(country)
+        Return api.DTWAIN_GetTwainCountryValueA(country)
         End Function
-
+        
         Public Function DTWAIN_GetTwainCountryValueW(country As String) As Integer
-            Return api.DTWAIN_GetTwainCountryValueW(country)
+        Return api.DTWAIN_GetTwainCountryValueW(country)
         End Function
-
+        
         Public Function DTWAIN_GetTwainHwnd() As System.IntPtr
-            Return api.DTWAIN_GetTwainHwnd()
+        Return api.DTWAIN_GetTwainHwnd()
         End Function
-
+        
         Public Function DTWAIN_GetTwainIDFromName(lpszBuffer As String) As Integer
-            Return api.DTWAIN_GetTwainIDFromName(lpszBuffer)
+        Return api.DTWAIN_GetTwainIDFromName(lpszBuffer)
         End Function
-
+        
         Public Function DTWAIN_GetTwainIDFromNameA(lpszBuffer As String) As Integer
-            Return api.DTWAIN_GetTwainIDFromNameA(lpszBuffer)
+        Return api.DTWAIN_GetTwainIDFromNameA(lpszBuffer)
         End Function
-
+        
         Public Function DTWAIN_GetTwainIDFromNameW(lpszBuffer As String) As Integer
-            Return api.DTWAIN_GetTwainIDFromNameW(lpszBuffer)
+        Return api.DTWAIN_GetTwainIDFromNameW(lpszBuffer)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageName(nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainLanguageName(nameId, szName)
+        Return api.DTWAIN_GetTwainLanguageName(nameId, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageNameA(lang As Integer, <MarshalAs(UnmanagedType.LPStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainLanguageNameA(lang, szName)
+        Return api.DTWAIN_GetTwainLanguageNameA(lang, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageNameW(lang As Integer, <MarshalAs(UnmanagedType.LPWStr)> szName As StringBuilder) As Integer
-            Return api.DTWAIN_GetTwainLanguageNameW(lang, szName)
+        Return api.DTWAIN_GetTwainLanguageNameW(lang, szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageValue(szName As String) As Integer
-            Return api.DTWAIN_GetTwainLanguageValue(szName)
+        Return api.DTWAIN_GetTwainLanguageValue(szName)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageValueA(lang As String) As Integer
-            Return api.DTWAIN_GetTwainLanguageValueA(lang)
+        Return api.DTWAIN_GetTwainLanguageValueA(lang)
         End Function
-
+        
         Public Function DTWAIN_GetTwainLanguageValueW(lang As String) As Integer
-            Return api.DTWAIN_GetTwainLanguageValueW(lang)
+        Return api.DTWAIN_GetTwainLanguageValueW(lang)
         End Function
-
+        
         Public Function DTWAIN_GetTwainMode() As Integer
-            Return api.DTWAIN_GetTwainMode()
+        Return api.DTWAIN_GetTwainMode()
         End Function
-
+        
         Public Function DTWAIN_GetTwainNameFromConstant(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetTwainNameFromConstant(lConstantType, lTwainConstant, lpszOut, nSize)
+        Return api.DTWAIN_GetTwainNameFromConstant(lConstantType, lTwainConstant, lpszOut, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetTwainNameFromConstantA(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetTwainNameFromConstantA(lConstantType, lTwainConstant, lpszOut, nSize)
+        Return api.DTWAIN_GetTwainNameFromConstantA(lConstantType, lTwainConstant, lpszOut, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetTwainNameFromConstantW(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-            Return api.DTWAIN_GetTwainNameFromConstantW(lConstantType, lTwainConstant, lpszOut, nSize)
+        Return api.DTWAIN_GetTwainNameFromConstantW(lConstantType, lTwainConstant, lpszOut, nSize)
         End Function
-
+        
         Public Function DTWAIN_GetTwainStringName(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetTwainStringNameA(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetTwainStringNameA(category, TwainID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetTwainStringNameA(category, TwainID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetTwainStringNameW(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetTwainStringNameW(category, TwainID, lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetTwainStringNameW(category, TwainID, lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetTwainTimeout() As Integer
-            Return api.DTWAIN_GetTwainTimeout()
+        Return api.DTWAIN_GetTwainTimeout()
         End Function
-
+        
         Public Function DTWAIN_GetVersion(ByRef lpMajor As Integer, ByRef lpMinor As Integer, ByRef lpVersionType As Integer) As Integer
-            Return api.DTWAIN_GetVersion(lpMajor, lpMinor, lpVersionType)
+        Return api.DTWAIN_GetVersion(lpMajor, lpMinor, lpVersionType)
         End Function
-
+        
         Public Function DTWAIN_GetVersionCopyright(<MarshalAs(UnmanagedType.LPTStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionCopyright(lpszApp, nLength)
+        Return api.DTWAIN_GetVersionCopyright(lpszApp, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionCopyrightA(<MarshalAs(UnmanagedType.LPStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionCopyrightA(lpszApp, nLength)
+        Return api.DTWAIN_GetVersionCopyrightA(lpszApp, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionCopyrightW(<MarshalAs(UnmanagedType.LPWStr)> lpszApp As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionCopyrightW(lpszApp, nLength)
+        Return api.DTWAIN_GetVersionCopyrightW(lpszApp, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionEx(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
-            Return api.DTWAIN_GetVersionEx(lMajor, lMinor, lVersionType, lPatchLevel)
+        Return api.DTWAIN_GetVersionEx(lMajor, lMinor, lVersionType, lPatchLevel)
         End Function
-
+        
         Public Function DTWAIN_GetVersionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionInfo(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionInfo(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionInfoA(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionInfoA(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionInfoA(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionInfoW(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionInfoW(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionInfoW(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionString(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionString(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionString(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionStringA(<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionStringA(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionStringA(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetVersionStringW(<MarshalAs(UnmanagedType.LPWStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
-            Return api.DTWAIN_GetVersionStringW(lpszVer, nLength)
+        Return api.DTWAIN_GetVersionStringW(lpszVer, nLength)
         End Function
-
+        
         Public Function DTWAIN_GetWindowsVersionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetWindowsVersionInfo(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetWindowsVersionInfo(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetWindowsVersionInfoA(<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetWindowsVersionInfoA(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetWindowsVersionInfoA(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetWindowsVersionInfoW(<MarshalAs(UnmanagedType.LPWStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_GetWindowsVersionInfoW(lpszBuffer, nMaxLen)
+        Return api.DTWAIN_GetWindowsVersionInfoW(lpszBuffer, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_GetXResolution(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-            Return api.DTWAIN_GetXResolution(Source, Resolution)
+        Return api.DTWAIN_GetXResolution(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetXResolutionString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetXResolutionString(Source, Resolution)
+        Return api.DTWAIN_GetXResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetXResolutionStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetXResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_GetXResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetXResolutionStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetXResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_GetXResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetYResolution(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
-            Return api.DTWAIN_GetYResolution(Source, Resolution)
+        Return api.DTWAIN_GetYResolution(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetYResolutionString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetYResolutionString(Source, Resolution)
+        Return api.DTWAIN_GetYResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetYResolutionStringA(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetYResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_GetYResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_GetYResolutionStringW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> Resolution As StringBuilder) As Integer
-            Return api.DTWAIN_GetYResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_GetYResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_InitExtImageInfo(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_InitExtImageInfo(Source)
+        Return api.DTWAIN_InitExtImageInfo(Source)
         End Function
-
+        
         Public Function DTWAIN_InitImageFileAppend(szFile As String, fType As Integer) As Integer
-            Return api.DTWAIN_InitImageFileAppend(szFile, fType)
+        Return api.DTWAIN_InitImageFileAppend(szFile, fType)
         End Function
-
+        
         Public Function DTWAIN_InitImageFileAppendA(szFile As String, fType As Integer) As Integer
-            Return api.DTWAIN_InitImageFileAppendA(szFile, fType)
+        Return api.DTWAIN_InitImageFileAppendA(szFile, fType)
         End Function
-
+        
         Public Function DTWAIN_InitImageFileAppendW(szFile As String, fType As Integer) As Integer
-            Return api.DTWAIN_InitImageFileAppendW(szFile, fType)
+        Return api.DTWAIN_InitImageFileAppendW(szFile, fType)
         End Function
-
+        
         Public Function DTWAIN_InitOCRInterface() As Integer
-            Return api.DTWAIN_InitOCRInterface()
+        Return api.DTWAIN_InitOCRInterface()
         End Function
-
+        
         Public Function DTWAIN_IsAcquiring() As Integer
-            Return api.DTWAIN_IsAcquiring()
+        Return api.DTWAIN_IsAcquiring()
         End Function
-
+        
         Public Function DTWAIN_IsAudioXferSupported(Source As System.IntPtr, supportVal As Integer) As Integer
-            Return api.DTWAIN_IsAudioXferSupported(Source, supportVal)
+        Return api.DTWAIN_IsAudioXferSupported(Source, supportVal)
         End Function
-
+        
         Public Function DTWAIN_IsAutoBorderDetectEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoBorderDetectEnabled(Source)
+        Return api.DTWAIN_IsAutoBorderDetectEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoBorderDetectSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoBorderDetectSupported(Source)
+        Return api.DTWAIN_IsAutoBorderDetectSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoBrightEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoBrightEnabled(Source)
+        Return api.DTWAIN_IsAutoBrightEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoBrightSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoBrightSupported(Source)
+        Return api.DTWAIN_IsAutoBrightSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoDeskewEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoDeskewEnabled(Source)
+        Return api.DTWAIN_IsAutoDeskewEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoDeskewSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoDeskewSupported(Source)
+        Return api.DTWAIN_IsAutoDeskewSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoFeedEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoFeedEnabled(Source)
+        Return api.DTWAIN_IsAutoFeedEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoFeedSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoFeedSupported(Source)
+        Return api.DTWAIN_IsAutoFeedSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoRotateEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoRotateEnabled(Source)
+        Return api.DTWAIN_IsAutoRotateEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoRotateSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoRotateSupported(Source)
+        Return api.DTWAIN_IsAutoRotateSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutoScanEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutoScanEnabled(Source)
+        Return api.DTWAIN_IsAutoScanEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutomaticSenseMediumEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutomaticSenseMediumEnabled(Source)
+        Return api.DTWAIN_IsAutomaticSenseMediumEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsAutomaticSenseMediumSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsAutomaticSenseMediumSupported(Source)
+        Return api.DTWAIN_IsAutomaticSenseMediumSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsBlankPageDetectionOn(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsBlankPageDetectionOn(Source)
+        Return api.DTWAIN_IsBlankPageDetectionOn(Source)
         End Function
-
+        
         Public Function DTWAIN_IsBufferedTileModeOn(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsBufferedTileModeOn(Source)
+        Return api.DTWAIN_IsBufferedTileModeOn(Source)
         End Function
-
+        
         Public Function DTWAIN_IsBufferedTileModeSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsBufferedTileModeSupported(Source)
+        Return api.DTWAIN_IsBufferedTileModeSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsCapSupported(Source As System.IntPtr, lCapability As Integer) As Integer
-            Return api.DTWAIN_IsCapSupported(Source, lCapability)
+        Return api.DTWAIN_IsCapSupported(Source, lCapability)
         End Function
-
+        
         Public Function DTWAIN_IsCompressionSupported(Source As System.IntPtr, Compression As Integer) As Integer
-            Return api.DTWAIN_IsCompressionSupported(Source, Compression)
+        Return api.DTWAIN_IsCompressionSupported(Source, Compression)
         End Function
-
+        
         Public Function DTWAIN_IsCustomDSDataSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsCustomDSDataSupported(Source)
+        Return api.DTWAIN_IsCustomDSDataSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsDIBBlank(hDib As System.IntPtr, threshold As System.Double) As Integer
-            Return api.DTWAIN_IsDIBBlank(hDib, threshold)
+        Return api.DTWAIN_IsDIBBlank(hDib, threshold)
         End Function
-
+        
         Public Function DTWAIN_IsDIBBlankString(hDib As System.IntPtr, threshold As String) As Integer
-            Return api.DTWAIN_IsDIBBlankString(hDib, threshold)
+        Return api.DTWAIN_IsDIBBlankString(hDib, threshold)
         End Function
-
+        
         Public Function DTWAIN_IsDIBBlankStringA(hDib As System.IntPtr, threshold As String) As Integer
-            Return api.DTWAIN_IsDIBBlankStringA(hDib, threshold)
+        Return api.DTWAIN_IsDIBBlankStringA(hDib, threshold)
         End Function
-
+        
         Public Function DTWAIN_IsDIBBlankStringW(hDib As System.IntPtr, threshold As String) As Integer
-            Return api.DTWAIN_IsDIBBlankStringW(hDib, threshold)
+        Return api.DTWAIN_IsDIBBlankStringW(hDib, threshold)
         End Function
-
+        
         Public Function DTWAIN_IsDeviceEventSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsDeviceEventSupported(Source)
+        Return api.DTWAIN_IsDeviceEventSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsDeviceOnLine(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsDeviceOnLine(Source)
+        Return api.DTWAIN_IsDeviceOnLine(Source)
         End Function
-
+        
         Public Function DTWAIN_IsDoubleFeedDetectLengthSupported(Source As System.IntPtr, value As System.Double) As Integer
-            Return api.DTWAIN_IsDoubleFeedDetectLengthSupported(Source, value)
+        Return api.DTWAIN_IsDoubleFeedDetectLengthSupported(Source, value)
         End Function
-
+        
         Public Function DTWAIN_IsDoubleFeedDetectSupported(Source As System.IntPtr, SupportVal As Integer) As Integer
-            Return api.DTWAIN_IsDoubleFeedDetectSupported(Source, SupportVal)
+        Return api.DTWAIN_IsDoubleFeedDetectSupported(Source, SupportVal)
         End Function
-
+        
         Public Function DTWAIN_IsDoublePageCountOnDuplex(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsDoublePageCountOnDuplex(Source)
+        Return api.DTWAIN_IsDoublePageCountOnDuplex(Source)
         End Function
-
+        
         Public Function DTWAIN_IsDuplexEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsDuplexEnabled(Source)
+        Return api.DTWAIN_IsDuplexEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsDuplexSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsDuplexSupported(Source)
+        Return api.DTWAIN_IsDuplexSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsExtImageInfoSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsExtImageInfoSupported(Source)
+        Return api.DTWAIN_IsExtImageInfoSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFeederEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsFeederEnabled(Source)
+        Return api.DTWAIN_IsFeederEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFeederLoaded(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsFeederLoaded(Source)
+        Return api.DTWAIN_IsFeederLoaded(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFeederSensitive(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsFeederSensitive(Source)
+        Return api.DTWAIN_IsFeederSensitive(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFeederSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsFeederSupported(Source)
+        Return api.DTWAIN_IsFeederSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFileSystemSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsFileSystemSupported(Source)
+        Return api.DTWAIN_IsFileSystemSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsFileXferSupported(Source As System.IntPtr, lFileType As Integer) As Integer
-            Return api.DTWAIN_IsFileXferSupported(Source, lFileType)
+        Return api.DTWAIN_IsFileXferSupported(Source, lFileType)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldALastPageSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldALastPageSupported(Source)
+        Return api.DTWAIN_IsIAFieldALastPageSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldALevelSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldALevelSupported(Source)
+        Return api.DTWAIN_IsIAFieldALevelSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldAPrintFormatSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldAPrintFormatSupported(Source)
+        Return api.DTWAIN_IsIAFieldAPrintFormatSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldAValueSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldAValueSupported(Source)
+        Return api.DTWAIN_IsIAFieldAValueSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldBLastPageSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldBLastPageSupported(Source)
+        Return api.DTWAIN_IsIAFieldBLastPageSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldBLevelSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldBLevelSupported(Source)
+        Return api.DTWAIN_IsIAFieldBLevelSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldBPrintFormatSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldBPrintFormatSupported(Source)
+        Return api.DTWAIN_IsIAFieldBPrintFormatSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldBValueSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldBValueSupported(Source)
+        Return api.DTWAIN_IsIAFieldBValueSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldCLastPageSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldCLastPageSupported(Source)
+        Return api.DTWAIN_IsIAFieldCLastPageSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldCLevelSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldCLevelSupported(Source)
+        Return api.DTWAIN_IsIAFieldCLevelSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldCPrintFormatSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldCPrintFormatSupported(Source)
+        Return api.DTWAIN_IsIAFieldCPrintFormatSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldCValueSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldCValueSupported(Source)
+        Return api.DTWAIN_IsIAFieldCValueSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldDLastPageSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldDLastPageSupported(Source)
+        Return api.DTWAIN_IsIAFieldDLastPageSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldDLevelSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldDLevelSupported(Source)
+        Return api.DTWAIN_IsIAFieldDLevelSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldDPrintFormatSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldDPrintFormatSupported(Source)
+        Return api.DTWAIN_IsIAFieldDPrintFormatSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldDValueSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldDValueSupported(Source)
+        Return api.DTWAIN_IsIAFieldDValueSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldELastPageSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldELastPageSupported(Source)
+        Return api.DTWAIN_IsIAFieldELastPageSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldELevelSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldELevelSupported(Source)
+        Return api.DTWAIN_IsIAFieldELevelSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldEPrintFormatSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldEPrintFormatSupported(Source)
+        Return api.DTWAIN_IsIAFieldEPrintFormatSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIAFieldEValueSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIAFieldEValueSupported(Source)
+        Return api.DTWAIN_IsIAFieldEValueSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsImageAddressingSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsImageAddressingSupported(Source)
+        Return api.DTWAIN_IsImageAddressingSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIndicatorEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIndicatorEnabled(Source)
+        Return api.DTWAIN_IsIndicatorEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsIndicatorSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsIndicatorSupported(Source)
+        Return api.DTWAIN_IsIndicatorSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsInitialized() As Integer
-            Return api.DTWAIN_IsInitialized()
+        Return api.DTWAIN_IsInitialized()
         End Function
-
+        
         Public Function DTWAIN_IsJPEGSupported() As Integer
-            Return api.DTWAIN_IsJPEGSupported()
+        Return api.DTWAIN_IsJPEGSupported()
         End Function
-
+        
         Public Function DTWAIN_IsJobControlSupported(Source As System.IntPtr, JobControl As Integer) As Integer
-            Return api.DTWAIN_IsJobControlSupported(Source, JobControl)
+        Return api.DTWAIN_IsJobControlSupported(Source, JobControl)
         End Function
-
+        
         Public Function DTWAIN_IsLampEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsLampEnabled(Source)
+        Return api.DTWAIN_IsLampEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsLampSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsLampSupported(Source)
+        Return api.DTWAIN_IsLampSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsLightPathSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsLightPathSupported(Source)
+        Return api.DTWAIN_IsLightPathSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsLightSourceSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsLightSourceSupported(Source)
+        Return api.DTWAIN_IsLightSourceSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsMaxBuffersSupported(Source As System.IntPtr, MaxBuf As Integer) As Integer
-            Return api.DTWAIN_IsMaxBuffersSupported(Source, MaxBuf)
+        Return api.DTWAIN_IsMaxBuffersSupported(Source, MaxBuf)
         End Function
-
+        
         Public Function DTWAIN_IsMemFileXferSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsMemFileXferSupported(Source)
+        Return api.DTWAIN_IsMemFileXferSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsMsgNotifyEnabled() As Integer
-            Return api.DTWAIN_IsMsgNotifyEnabled()
+        Return api.DTWAIN_IsMsgNotifyEnabled()
         End Function
-
+        
         Public Function DTWAIN_IsNotifyTripletsEnabled() As Integer
-            Return api.DTWAIN_IsNotifyTripletsEnabled()
+        Return api.DTWAIN_IsNotifyTripletsEnabled()
         End Function
-
+        
         Public Function DTWAIN_IsOCREngineActivated(OCREngine As System.IntPtr) As Integer
-            Return api.DTWAIN_IsOCREngineActivated(OCREngine)
+        Return api.DTWAIN_IsOCREngineActivated(OCREngine)
         End Function
-
+        
         Public Function DTWAIN_IsOpenSourcesOnSelect() As Integer
-            Return api.DTWAIN_IsOpenSourcesOnSelect()
+        Return api.DTWAIN_IsOpenSourcesOnSelect()
         End Function
-
+        
         Public Function DTWAIN_IsOrientationSupported(Source As System.IntPtr, Orientation As Integer) As Integer
-            Return api.DTWAIN_IsOrientationSupported(Source, Orientation)
+        Return api.DTWAIN_IsOrientationSupported(Source, Orientation)
         End Function
-
+        
         Public Function DTWAIN_IsOverscanSupported(Source As System.IntPtr, SupportValue As Integer) As Integer
-            Return api.DTWAIN_IsOverscanSupported(Source, SupportValue)
+        Return api.DTWAIN_IsOverscanSupported(Source, SupportValue)
         End Function
-
+        
         Public Function DTWAIN_IsPDFSupported() As Integer
-            Return api.DTWAIN_IsPDFSupported()
+        Return api.DTWAIN_IsPDFSupported()
         End Function
-
+        
         Public Function DTWAIN_IsPNGSupported() As Integer
-            Return api.DTWAIN_IsPNGSupported()
+        Return api.DTWAIN_IsPNGSupported()
         End Function
-
+        
         Public Function DTWAIN_IsPaperDetectable(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsPaperDetectable(Source)
+        Return api.DTWAIN_IsPaperDetectable(Source)
         End Function
-
+        
         Public Function DTWAIN_IsPaperSizeSupported(Source As System.IntPtr, PaperSize As Integer) As Integer
-            Return api.DTWAIN_IsPaperSizeSupported(Source, PaperSize)
+        Return api.DTWAIN_IsPaperSizeSupported(Source, PaperSize)
         End Function
-
+        
         Public Function DTWAIN_IsPatchCapsSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsPatchCapsSupported(Source)
+        Return api.DTWAIN_IsPatchCapsSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsPatchDetectEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsPatchDetectEnabled(Source)
+        Return api.DTWAIN_IsPatchDetectEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsPatchSupported(Source As System.IntPtr, PatchCode As Integer) As Integer
-            Return api.DTWAIN_IsPatchSupported(Source, PatchCode)
+        Return api.DTWAIN_IsPatchSupported(Source, PatchCode)
         End Function
-
+        
         Public Function DTWAIN_IsPeekMessageLoopEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsPeekMessageLoopEnabled(Source)
+        Return api.DTWAIN_IsPeekMessageLoopEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsPixelTypeSupported(Source As System.IntPtr, PixelType As Integer) As Integer
-            Return api.DTWAIN_IsPixelTypeSupported(Source, PixelType)
+        Return api.DTWAIN_IsPixelTypeSupported(Source, PixelType)
         End Function
-
+        
         Public Function DTWAIN_IsPrinterEnabled(Source As System.IntPtr, Printer As Integer) As Integer
-            Return api.DTWAIN_IsPrinterEnabled(Source, Printer)
+        Return api.DTWAIN_IsPrinterEnabled(Source, Printer)
         End Function
-
+        
         Public Function DTWAIN_IsPrinterSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsPrinterSupported(Source)
+        Return api.DTWAIN_IsPrinterSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsRotationSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsRotationSupported(Source)
+        Return api.DTWAIN_IsRotationSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSessionEnabled() As Integer
-            Return api.DTWAIN_IsSessionEnabled()
+        Return api.DTWAIN_IsSessionEnabled()
         End Function
-
+        
         Public Function DTWAIN_IsSkipImageInfoError(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSkipImageInfoError(Source)
+        Return api.DTWAIN_IsSkipImageInfoError(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSourceAcquiring(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSourceAcquiring(Source)
+        Return api.DTWAIN_IsSourceAcquiring(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSourceAcquiringEx(Source As System.IntPtr, bUIOnly As Integer) As Integer
-            Return api.DTWAIN_IsSourceAcquiringEx(Source, bUIOnly)
+        Return api.DTWAIN_IsSourceAcquiringEx(Source, bUIOnly)
         End Function
-
+        
         Public Function DTWAIN_IsSourceInUIOnlyMode(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSourceInUIOnlyMode(Source)
+        Return api.DTWAIN_IsSourceInUIOnlyMode(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSourceOpen(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSourceOpen(Source)
+        Return api.DTWAIN_IsSourceOpen(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSourceSelected(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSourceSelected(Source)
+        Return api.DTWAIN_IsSourceSelected(Source)
         End Function
-
+        
         Public Function DTWAIN_IsSourceValid(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsSourceValid(Source)
+        Return api.DTWAIN_IsSourceValid(Source)
         End Function
-
+        
         Public Function DTWAIN_IsTIFFSupported() As Integer
-            Return api.DTWAIN_IsTIFFSupported()
+        Return api.DTWAIN_IsTIFFSupported()
         End Function
-
+        
         Public Function DTWAIN_IsThumbnailEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsThumbnailEnabled(Source)
+        Return api.DTWAIN_IsThumbnailEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsThumbnailSupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsThumbnailSupported(Source)
+        Return api.DTWAIN_IsThumbnailSupported(Source)
         End Function
-
+        
         Public Function DTWAIN_IsTwainAvailable() As Integer
-            Return api.DTWAIN_IsTwainAvailable()
+        Return api.DTWAIN_IsTwainAvailable()
         End Function
-
+        
         Public Function DTWAIN_IsTwainAvailableEx(<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_IsTwainAvailableEx(directories, nMaxLen)
+        Return api.DTWAIN_IsTwainAvailableEx(directories, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_IsTwainAvailableExA(<MarshalAs(UnmanagedType.LPStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_IsTwainAvailableExA(directories, nMaxLen)
+        Return api.DTWAIN_IsTwainAvailableExA(directories, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_IsTwainAvailableExW(<MarshalAs(UnmanagedType.LPWStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
-            Return api.DTWAIN_IsTwainAvailableExW(directories, nMaxLen)
+        Return api.DTWAIN_IsTwainAvailableExW(directories, nMaxLen)
         End Function
-
+        
         Public Function DTWAIN_IsTwainMsg(ByRef pMsg As WinMsg) As Integer
-            Return api.DTWAIN_IsTwainMsg(pMsg)
+        Return api.DTWAIN_IsTwainMsg(pMsg)
         End Function
-
+        
         Public Function DTWAIN_IsUIControllable(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsUIControllable(Source)
+        Return api.DTWAIN_IsUIControllable(Source)
         End Function
-
+        
         Public Function DTWAIN_IsUIEnabled(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsUIEnabled(Source)
+        Return api.DTWAIN_IsUIEnabled(Source)
         End Function
-
+        
         Public Function DTWAIN_IsUIOnlySupported(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_IsUIOnlySupported(Source)
+        Return api.DTWAIN_IsUIOnlySupported(Source)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResources(sLangDLL As String) As Integer
-            Return api.DTWAIN_LoadCustomStringResources(sLangDLL)
+        Return api.DTWAIN_LoadCustomStringResources(sLangDLL)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResourcesA(sLangDLL As String) As Integer
-            Return api.DTWAIN_LoadCustomStringResourcesA(sLangDLL)
+        Return api.DTWAIN_LoadCustomStringResourcesA(sLangDLL)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResourcesEx(sLangDLL As String, bClear As Integer) As Integer
-            Return api.DTWAIN_LoadCustomStringResourcesEx(sLangDLL, bClear)
+        Return api.DTWAIN_LoadCustomStringResourcesEx(sLangDLL, bClear)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResourcesExA(sLangDLL As String, bClear As Integer) As Integer
-            Return api.DTWAIN_LoadCustomStringResourcesExA(sLangDLL, bClear)
+        Return api.DTWAIN_LoadCustomStringResourcesExA(sLangDLL, bClear)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResourcesExW(sLangDLL As String, bClear As Integer) As Integer
-            Return api.DTWAIN_LoadCustomStringResourcesExW(sLangDLL, bClear)
+        Return api.DTWAIN_LoadCustomStringResourcesExW(sLangDLL, bClear)
         End Function
-
+        
         Public Function DTWAIN_LoadCustomStringResourcesW(sLangDLL As String) As Integer
-            Return api.DTWAIN_LoadCustomStringResourcesW(sLangDLL)
+        Return api.DTWAIN_LoadCustomStringResourcesW(sLangDLL)
         End Function
-
+        
         Public Function DTWAIN_LoadLanguageResource(nLanguage As Integer) As Integer
-            Return api.DTWAIN_LoadLanguageResource(nLanguage)
+        Return api.DTWAIN_LoadLanguageResource(nLanguage)
         End Function
-
+        
         Public Function DTWAIN_LockMemory(h As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_LockMemory(h)
+        Return api.DTWAIN_LockMemory(h)
         End Function
-
+        
         Public Function DTWAIN_LockMemoryEx(h As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_LockMemoryEx(h)
+        Return api.DTWAIN_LockMemoryEx(h)
         End Function
-
+        
         Public Function DTWAIN_LogMessage(message As String) As Integer
-            Return api.DTWAIN_LogMessage(message)
+        Return api.DTWAIN_LogMessage(message)
         End Function
-
+        
         Public Function DTWAIN_LogMessageA(message As String) As Integer
-            Return api.DTWAIN_LogMessageA(message)
+        Return api.DTWAIN_LogMessageA(message)
         End Function
-
+        
         Public Function DTWAIN_LogMessageW(message As String) As Integer
-            Return api.DTWAIN_LogMessageW(message)
+        Return api.DTWAIN_LogMessageW(message)
         End Function
-
+        
         Public Function DTWAIN_MakeRGB(red As Integer, green As Integer, blue As Integer) As Integer
-            Return api.DTWAIN_MakeRGB(red, green, blue)
+        Return api.DTWAIN_MakeRGB(red, green, blue)
         End Function
-
+        
         Public Function DTWAIN_OpenSource(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_OpenSource(Source)
+        Return api.DTWAIN_OpenSource(Source)
         End Function
-
+        
         Public Function DTWAIN_OpenSourcesOnSelect(bSet As Integer) As Integer
-            Return api.DTWAIN_OpenSourcesOnSelect(bSet)
+        Return api.DTWAIN_OpenSourcesOnSelect(bSet)
         End Function
-
+        
         Public Function DTWAIN_RangeCreate(nEnumType As Integer) As System.IntPtr
-            Return api.DTWAIN_RangeCreate(nEnumType)
+        Return api.DTWAIN_RangeCreate(nEnumType)
         End Function
-
+        
         Public Function DTWAIN_RangeCreateFromCap(Source As System.IntPtr, lCapType As Integer) As System.IntPtr
-            Return api.DTWAIN_RangeCreateFromCap(Source, lCapType)
+        Return api.DTWAIN_RangeCreateFromCap(Source, lCapType)
         End Function
-
+        
         Public Function DTWAIN_RangeDestroy(pSource As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeDestroy(pSource)
+        Return api.DTWAIN_RangeDestroy(pSource)
         End Function
-
+        
         Public Function DTWAIN_RangeExpand(pSource As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeExpand(pSource, pArray)
+        Return api.DTWAIN_RangeExpand(pSource, pArray)
         End Function
-
+        
         Public Function DTWAIN_RangeExpandEx(Range As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_RangeExpandEx(Range)
+        Return api.DTWAIN_RangeExpandEx(Range)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAll(pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeGetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
+        Return api.DTWAIN_RangeGetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAllFloat(pArray As System.IntPtr, ByRef pVariantLow As System.Double, ByRef pVariantUp As System.Double, ByRef pVariantStep As System.Double, ByRef pVariantDefault As System.Double, ByRef pVariantCurrent As System.Double) As Integer
-            Return api.DTWAIN_RangeGetAllFloat(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
+        Return api.DTWAIN_RangeGetAllFloat(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAllFloatString(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> dCurrent As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeGetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAllFloatStringA(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> dCurrent As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetAllFloatStringA(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeGetAllFloatStringA(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAllFloatStringW(pArray As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> dLow As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dUp As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dStep As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dDefault As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> dCurrent As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetAllFloatStringW(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeGetAllFloatStringW(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetAllLong(pArray As System.IntPtr, ByRef pVariantLow As Integer, ByRef pVariantUp As Integer, ByRef pVariantStep As Integer, ByRef pVariantDefault As Integer, ByRef pVariantCurrent As Integer) As Integer
-            Return api.DTWAIN_RangeGetAllLong(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
+        Return api.DTWAIN_RangeGetAllLong(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeGetCount(pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeGetCount(pArray)
+        Return api.DTWAIN_RangeGetCount(pArray)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValue(pArray As System.IntPtr, lPos As Integer, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeGetExpValue(pArray, lPos, pVariant)
+        Return api.DTWAIN_RangeGetExpValue(pArray, lPos, pVariant)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValueFloat(pArray As System.IntPtr, lPos As Integer, ByRef pVal As System.Double) As Integer
-            Return api.DTWAIN_RangeGetExpValueFloat(pArray, lPos, pVal)
+        Return api.DTWAIN_RangeGetExpValueFloat(pArray, lPos, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValueFloatString(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetExpValueFloatString(pArray, lPos, pVal)
+        Return api.DTWAIN_RangeGetExpValueFloatString(pArray, lPos, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValueFloatStringA(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPStr)> pVal As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetExpValueFloatStringA(pArray, lPos, pVal)
+        Return api.DTWAIN_RangeGetExpValueFloatStringA(pArray, lPos, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValueFloatStringW(pArray As System.IntPtr, lPos As Integer, <MarshalAs(UnmanagedType.LPWStr)> pVal As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetExpValueFloatStringW(pArray, lPos, pVal)
+        Return api.DTWAIN_RangeGetExpValueFloatStringW(pArray, lPos, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetExpValueLong(pArray As System.IntPtr, lPos As Integer, ByRef pVal As Integer) As Integer
-            Return api.DTWAIN_RangeGetExpValueLong(pArray, lPos, pVal)
+        Return api.DTWAIN_RangeGetExpValueLong(pArray, lPos, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetNearestValue(pArray As System.IntPtr, pVariantIn As System.IntPtr, pVariantOut As System.IntPtr, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeGetNearestValue(pArray, pVariantIn, pVariantOut, RoundType)
+        Return api.DTWAIN_RangeGetNearestValue(pArray, pVariantIn, pVariantOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPos(pArray As System.IntPtr, pVariant As System.IntPtr, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPos(pArray, pVariant, pPos)
+        Return api.DTWAIN_RangeGetPos(pArray, pVariant, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPosFloat(pArray As System.IntPtr, Val As System.Double, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPosFloat(pArray, Val, pPos)
+        Return api.DTWAIN_RangeGetPosFloat(pArray, Val, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPosFloatString(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPosFloatString(pArray, Val, pPos)
+        Return api.DTWAIN_RangeGetPosFloatString(pArray, Val, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPosFloatStringA(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPosFloatStringA(pArray, Val, pPos)
+        Return api.DTWAIN_RangeGetPosFloatStringA(pArray, Val, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPosFloatStringW(pArray As System.IntPtr, Val As String, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPosFloatStringW(pArray, Val, pPos)
+        Return api.DTWAIN_RangeGetPosFloatStringW(pArray, Val, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetPosLong(pArray As System.IntPtr, Value As Integer, ByRef pPos As Integer) As Integer
-            Return api.DTWAIN_RangeGetPosLong(pArray, Value, pPos)
+        Return api.DTWAIN_RangeGetPosLong(pArray, Value, pPos)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValue(pArray As System.IntPtr, nWhich As Integer, pVariant As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeGetValue(pArray, nWhich, pVariant)
+        Return api.DTWAIN_RangeGetValue(pArray, nWhich, pVariant)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValueFloat(pArray As System.IntPtr, nWhich As Integer, ByRef pVal As System.Double) As Integer
-            Return api.DTWAIN_RangeGetValueFloat(pArray, nWhich, pVal)
+        Return api.DTWAIN_RangeGetValueFloat(pArray, nWhich, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValueFloatString(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPTStr)> pVal As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetValueFloatString(pArray, nWhich, pVal)
+        Return api.DTWAIN_RangeGetValueFloatString(pArray, nWhich, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValueFloatStringA(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPStr)> dValue As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetValueFloatStringA(pArray, nWhich, dValue)
+        Return api.DTWAIN_RangeGetValueFloatStringA(pArray, nWhich, dValue)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValueFloatStringW(pArray As System.IntPtr, nWhich As Integer, <MarshalAs(UnmanagedType.LPWStr)> dValue As StringBuilder) As Integer
-            Return api.DTWAIN_RangeGetValueFloatStringW(pArray, nWhich, dValue)
+        Return api.DTWAIN_RangeGetValueFloatStringW(pArray, nWhich, dValue)
         End Function
-
+        
         Public Function DTWAIN_RangeGetValueLong(pArray As System.IntPtr, nWhich As Integer, ByRef pVal As Integer) As Integer
-            Return api.DTWAIN_RangeGetValueLong(pArray, nWhich, pVal)
+        Return api.DTWAIN_RangeGetValueLong(pArray, nWhich, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeIsValid(Range As System.IntPtr, ByRef pStatus As Integer) As Integer
-            Return api.DTWAIN_RangeIsValid(Range, pStatus)
+        Return api.DTWAIN_RangeIsValid(Range, pStatus)
         End Function
-
+        
         Public Function DTWAIN_RangeNearestValueFloat(pArray As System.IntPtr, dIn As System.Double, ByRef pOut As System.Double, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeNearestValueFloat(pArray, dIn, pOut, RoundType)
+        Return api.DTWAIN_RangeNearestValueFloat(pArray, dIn, pOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeNearestValueFloatString(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPTStr)> pOut As StringBuilder, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeNearestValueFloatString(pArray, dIn, pOut, RoundType)
+        Return api.DTWAIN_RangeNearestValueFloatString(pArray, dIn, pOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeNearestValueFloatStringA(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeNearestValueFloatStringA(pArray, dIn, dOut, RoundType)
+        Return api.DTWAIN_RangeNearestValueFloatStringA(pArray, dIn, dOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeNearestValueFloatStringW(pArray As System.IntPtr, dIn As String, <MarshalAs(UnmanagedType.LPWStr)> dOut As StringBuilder, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeNearestValueFloatStringW(pArray, dIn, dOut, RoundType)
+        Return api.DTWAIN_RangeNearestValueFloatStringW(pArray, dIn, dOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeNearestValueLong(pArray As System.IntPtr, lIn As Integer, ByRef pOut As Integer, RoundType As Integer) As Integer
-            Return api.DTWAIN_RangeNearestValueLong(pArray, lIn, pOut, RoundType)
+        Return api.DTWAIN_RangeNearestValueLong(pArray, lIn, pOut, RoundType)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAll(pArray As System.IntPtr, pVariantLow As System.IntPtr, pVariantUp As System.IntPtr, pVariantStep As System.IntPtr, pVariantDefault As System.IntPtr, pVariantCurrent As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeSetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
+        Return api.DTWAIN_RangeSetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAllFloat(pArray As System.IntPtr, dLow As System.Double, dUp As System.Double, dStep As System.Double, dDefault As System.Double, dCurrent As System.Double) As Integer
-            Return api.DTWAIN_RangeSetAllFloat(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeSetAllFloat(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAllFloatString(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-            Return api.DTWAIN_RangeSetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeSetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAllFloatStringA(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-            Return api.DTWAIN_RangeSetAllFloatStringA(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeSetAllFloatStringA(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAllFloatStringW(pArray As System.IntPtr, dLow As String, dUp As String, dStep As String, dDefault As String, dCurrent As String) As Integer
-            Return api.DTWAIN_RangeSetAllFloatStringW(pArray, dLow, dUp, dStep, dDefault, dCurrent)
+        Return api.DTWAIN_RangeSetAllFloatStringW(pArray, dLow, dUp, dStep, dDefault, dCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetAllLong(pArray As System.IntPtr, lLow As Integer, lUp As Integer, lStep As Integer, lDefault As Integer, lCurrent As Integer) As Integer
-            Return api.DTWAIN_RangeSetAllLong(pArray, lLow, lUp, lStep, lDefault, lCurrent)
+        Return api.DTWAIN_RangeSetAllLong(pArray, lLow, lUp, lStep, lDefault, lCurrent)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValue(pArray As System.IntPtr, nWhich As Integer, pVal As System.IntPtr) As Integer
-            Return api.DTWAIN_RangeSetValue(pArray, nWhich, pVal)
+        Return api.DTWAIN_RangeSetValue(pArray, nWhich, pVal)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValueFloat(pArray As System.IntPtr, nWhich As Integer, Val As System.Double) As Integer
-            Return api.DTWAIN_RangeSetValueFloat(pArray, nWhich, Val)
+        Return api.DTWAIN_RangeSetValueFloat(pArray, nWhich, Val)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValueFloatString(pArray As System.IntPtr, nWhich As Integer, Val As String) As Integer
-            Return api.DTWAIN_RangeSetValueFloatString(pArray, nWhich, Val)
+        Return api.DTWAIN_RangeSetValueFloatString(pArray, nWhich, Val)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValueFloatStringA(pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-            Return api.DTWAIN_RangeSetValueFloatStringA(pArray, nWhich, dValue)
+        Return api.DTWAIN_RangeSetValueFloatStringA(pArray, nWhich, dValue)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValueFloatStringW(pArray As System.IntPtr, nWhich As Integer, dValue As String) As Integer
-            Return api.DTWAIN_RangeSetValueFloatStringW(pArray, nWhich, dValue)
+        Return api.DTWAIN_RangeSetValueFloatStringW(pArray, nWhich, dValue)
         End Function
-
+        
         Public Function DTWAIN_RangeSetValueLong(pArray As System.IntPtr, nWhich As Integer, Val As Integer) As Integer
-            Return api.DTWAIN_RangeSetValueLong(pArray, nWhich, Val)
+        Return api.DTWAIN_RangeSetValueLong(pArray, nWhich, Val)
         End Function
-
+        
         Public Function DTWAIN_ResetPDFTextElement(TextElement As System.IntPtr) As Integer
-            Return api.DTWAIN_ResetPDFTextElement(TextElement)
+        Return api.DTWAIN_ResetPDFTextElement(TextElement)
         End Function
-
+        
         Public Function DTWAIN_RewindPage(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_RewindPage(Source)
+        Return api.DTWAIN_RewindPage(Source)
         End Function
-
+        
         Public Function DTWAIN_SelectDefaultOCREngine() As System.IntPtr
-            Return api.DTWAIN_SelectDefaultOCREngine()
+        Return api.DTWAIN_SelectDefaultOCREngine()
         End Function
-
+        
         Public Function DTWAIN_SelectDefaultSource() As System.IntPtr
-            Return api.DTWAIN_SelectDefaultSource()
+        Return api.DTWAIN_SelectDefaultSource()
         End Function
-
+        
         Public Function DTWAIN_SelectDefaultSourceWithOpen(bOpen As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectDefaultSourceWithOpen(bOpen)
+        Return api.DTWAIN_SelectDefaultSourceWithOpen(bOpen)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine() As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine()
+        Return api.DTWAIN_SelectOCREngine()
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectOCREngine2(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2A(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2A(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectOCREngine2A(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2Ex(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectOCREngine2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2ExA(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectOCREngine2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2ExW(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2ExW(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectOCREngine2ExW(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngine2W(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngine2W(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectOCREngine2W(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngineByName(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngineByName(lpszName)
+        Return api.DTWAIN_SelectOCREngineByName(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngineByNameA(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngineByNameA(lpszName)
+        Return api.DTWAIN_SelectOCREngineByNameA(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectOCREngineByNameW(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectOCREngineByNameW(lpszName)
+        Return api.DTWAIN_SelectOCREngineByNameW(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectSource() As System.IntPtr
-            Return api.DTWAIN_SelectSource()
+        Return api.DTWAIN_SelectSource()
         End Function
-
+        
         Public Function DTWAIN_SelectSource2(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSource2A(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2A(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectSource2A(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSource2Ex(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeFilter As String, szExcludeFilter As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSource2ExA(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectSource2ExA(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSource2ExW(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, szIncludeNames As String, szExcludeNames As String, szNameMapping As String, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2ExW(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
+        Return api.DTWAIN_SelectSource2ExW(hWndParent, szTitle, xPos, yPos, szIncludeNames, szExcludeNames, szNameMapping, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSource2W(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nOptions As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSource2W(hWndParent, szTitle, xPos, yPos, nOptions)
+        Return api.DTWAIN_SelectSource2W(hWndParent, szTitle, xPos, yPos, nOptions)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByName(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByName(lpszName)
+        Return api.DTWAIN_SelectSourceByName(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByNameA(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByNameA(lpszName)
+        Return api.DTWAIN_SelectSourceByNameA(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByNameW(lpszName As String) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByNameW(lpszName)
+        Return api.DTWAIN_SelectSourceByNameW(lpszName)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByNameWithOpen(lpszName As String, bOpen As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByNameWithOpen(lpszName, bOpen)
+        Return api.DTWAIN_SelectSourceByNameWithOpen(lpszName, bOpen)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByNameWithOpenA(lpszName As String, bOpen As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByNameWithOpenA(lpszName, bOpen)
+        Return api.DTWAIN_SelectSourceByNameWithOpenA(lpszName, bOpen)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceByNameWithOpenW(lpszName As String, bOpen As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSourceByNameWithOpenW(lpszName, bOpen)
+        Return api.DTWAIN_SelectSourceByNameWithOpenW(lpszName, bOpen)
         End Function
-
+        
         Public Function DTWAIN_SelectSourceWithOpen(bOpen As Integer) As System.IntPtr
-            Return api.DTWAIN_SelectSourceWithOpen(bOpen)
+        Return api.DTWAIN_SelectSourceWithOpen(bOpen)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireArea(Source As System.IntPtr, lSetType As Integer, FloatEnum As System.IntPtr, ActualEnum As System.IntPtr) As Integer
-            Return api.DTWAIN_SetAcquireArea(Source, lSetType, FloatEnum, ActualEnum)
+        Return api.DTWAIN_SetAcquireArea(Source, lSetType, FloatEnum, ActualEnum)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireArea2(Source As System.IntPtr, left As System.Double, top As System.Double, right As System.Double, bottom As System.Double, lUnit As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_SetAcquireArea2(Source, left, top, right, bottom, lUnit, Flags)
+        Return api.DTWAIN_SetAcquireArea2(Source, left, top, right, bottom, lUnit, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireArea2String(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_SetAcquireArea2String(Source, left, top, right, bottom, lUnit, Flags)
+        Return api.DTWAIN_SetAcquireArea2String(Source, left, top, right, bottom, lUnit, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireArea2StringA(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_SetAcquireArea2StringA(Source, left, top, right, bottom, lUnit, Flags)
+        Return api.DTWAIN_SetAcquireArea2StringA(Source, left, top, right, bottom, lUnit, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireArea2StringW(Source As System.IntPtr, left As String, top As String, right As String, bottom As String, lUnit As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_SetAcquireArea2StringW(Source, left, top, right, bottom, lUnit, Flags)
+        Return api.DTWAIN_SetAcquireArea2StringW(Source, left, top, right, bottom, lUnit, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireImageNegative(Source As System.IntPtr, IsNegative As Integer) As Integer
-            Return api.DTWAIN_SetAcquireImageNegative(Source, IsNegative)
+        Return api.DTWAIN_SetAcquireImageNegative(Source, IsNegative)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireImageScale(Source As System.IntPtr, xscale As System.Double, yscale As System.Double) As Integer
-            Return api.DTWAIN_SetAcquireImageScale(Source, xscale, yscale)
+        Return api.DTWAIN_SetAcquireImageScale(Source, xscale, yscale)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireImageScaleString(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-            Return api.DTWAIN_SetAcquireImageScaleString(Source, xscale, yscale)
+        Return api.DTWAIN_SetAcquireImageScaleString(Source, xscale, yscale)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireImageScaleStringA(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-            Return api.DTWAIN_SetAcquireImageScaleStringA(Source, xscale, yscale)
+        Return api.DTWAIN_SetAcquireImageScaleStringA(Source, xscale, yscale)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireImageScaleStringW(Source As System.IntPtr, xscale As String, yscale As String) As Integer
-            Return api.DTWAIN_SetAcquireImageScaleStringW(Source, xscale, yscale)
+        Return api.DTWAIN_SetAcquireImageScaleStringW(Source, xscale, yscale)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireStripBuffer(Source As System.IntPtr, hMem As System.IntPtr) As Integer
-            Return api.DTWAIN_SetAcquireStripBuffer(Source, hMem)
+        Return api.DTWAIN_SetAcquireStripBuffer(Source, hMem)
         End Function
-
+        
         Public Function DTWAIN_SetAcquireStripSize(Source As System.IntPtr, StripSize As UInteger) As Integer
-            Return api.DTWAIN_SetAcquireStripSize(Source, StripSize)
+        Return api.DTWAIN_SetAcquireStripSize(Source, StripSize)
         End Function
-
+        
         Public Function DTWAIN_SetAlarmVolume(Source As System.IntPtr, Volume As Integer) As Integer
-            Return api.DTWAIN_SetAlarmVolume(Source, Volume)
+        Return api.DTWAIN_SetAlarmVolume(Source, Volume)
         End Function
-
+        
         Public Function DTWAIN_SetAlarms(Source As System.IntPtr, Alarms As System.IntPtr) As Integer
-            Return api.DTWAIN_SetAlarms(Source, Alarms)
+        Return api.DTWAIN_SetAlarms(Source, Alarms)
         End Function
-
+        
         Public Function DTWAIN_SetAllCapsToDefault(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_SetAllCapsToDefault(Source)
+        Return api.DTWAIN_SetAllCapsToDefault(Source)
         End Function
-
+        
         Public Function DTWAIN_SetAppInfo(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-            Return api.DTWAIN_SetAppInfo(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_SetAppInfo(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_SetAppInfoA(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-            Return api.DTWAIN_SetAppInfoA(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_SetAppInfoA(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_SetAppInfoW(szVerStr As String, szManu As String, szProdFam As String, szProdName As String) As Integer
-            Return api.DTWAIN_SetAppInfoW(szVerStr, szManu, szProdFam, szProdName)
+        Return api.DTWAIN_SetAppInfoW(szVerStr, szManu, szProdFam, szProdName)
         End Function
-
+        
         Public Function DTWAIN_SetAuthor(Source As System.IntPtr, szAuthor As String) As Integer
-            Return api.DTWAIN_SetAuthor(Source, szAuthor)
+        Return api.DTWAIN_SetAuthor(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetAuthorA(Source As System.IntPtr, szAuthor As String) As Integer
-            Return api.DTWAIN_SetAuthorA(Source, szAuthor)
+        Return api.DTWAIN_SetAuthorA(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetAuthorW(Source As System.IntPtr, szAuthor As String) As Integer
-            Return api.DTWAIN_SetAuthorW(Source, szAuthor)
+        Return api.DTWAIN_SetAuthorW(Source, szAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetAvailablePrinters(Source As System.IntPtr, lpAvailPrinters As Integer) As Integer
-            Return api.DTWAIN_SetAvailablePrinters(Source, lpAvailPrinters)
+        Return api.DTWAIN_SetAvailablePrinters(Source, lpAvailPrinters)
         End Function
-
+        
         Public Function DTWAIN_SetAvailablePrintersArray(Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
-            Return api.DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters)
+        Return api.DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters)
         End Function
-
+        
         Public Function DTWAIN_SetBitDepth(Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent)
+        Return api.DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetection(Source As System.IntPtr, threshold As System.Double, discard_option As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetection(Source, threshold, discard_option, bSet)
+        Return api.DTWAIN_SetBlankPageDetection(Source, threshold, discard_option, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionEx(Source As System.IntPtr, threshold As System.Double, autodetect As Integer, detectOpts As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionEx(Source, threshold, autodetect, detectOpts, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionEx(Source, threshold, autodetect, detectOpts, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionExString(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionExString(Source, threshold, autodetect_option, detectOpts, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionExString(Source, threshold, autodetect_option, detectOpts, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionExStringA(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionExStringA(Source, threshold, autodetect_option, detectOpts, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionExStringA(Source, threshold, autodetect_option, detectOpts, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionExStringW(Source As System.IntPtr, threshold As String, autodetect_option As Integer, detectOpts As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionExStringW(Source, threshold, autodetect_option, detectOpts, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionExStringW(Source, threshold, autodetect_option, detectOpts, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionString(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionString(Source, threshold, autodetect_option, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionString(Source, threshold, autodetect_option, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionStringA(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionStringA(Source, threshold, autodetect_option, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionStringA(Source, threshold, autodetect_option, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBlankPageDetectionStringW(Source As System.IntPtr, threshold As String, autodetect_option As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetBlankPageDetectionStringW(Source, threshold, autodetect_option, bSet)
+        Return api.DTWAIN_SetBlankPageDetectionStringW(Source, threshold, autodetect_option, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetBrightness(Source As System.IntPtr, Brightness As System.Double) As Integer
-            Return api.DTWAIN_SetBrightness(Source, Brightness)
+        Return api.DTWAIN_SetBrightness(Source, Brightness)
         End Function
-
+        
         Public Function DTWAIN_SetBrightnessString(Source As System.IntPtr, Brightness As String) As Integer
-            Return api.DTWAIN_SetBrightnessString(Source, Brightness)
+        Return api.DTWAIN_SetBrightnessString(Source, Brightness)
         End Function
-
+        
         Public Function DTWAIN_SetBrightnessStringA(Source As System.IntPtr, Contrast As String) As Integer
-            Return api.DTWAIN_SetBrightnessStringA(Source, Contrast)
+        Return api.DTWAIN_SetBrightnessStringA(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetBrightnessStringW(Source As System.IntPtr, Contrast As String) As Integer
-            Return api.DTWAIN_SetBrightnessStringW(Source, Contrast)
+        Return api.DTWAIN_SetBrightnessStringW(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetBufferedTileMode(Source As System.IntPtr, bTileMode As Integer) As Integer
-            Return api.DTWAIN_SetBufferedTileMode(Source, bTileMode)
+        Return api.DTWAIN_SetBufferedTileMode(Source, bTileMode)
         End Function
-
+        
         Public Function DTWAIN_SetCallback(Fn As DTwainCallback, UserData As Integer) As DTwainCallback
-            Return api.DTWAIN_SetCallback(Fn, UserData)
+        Return api.DTWAIN_SetCallback(Fn, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetCallback64(Fn As DTwainCallback64, UserData As System.Int64) As DTwainCallback64
-            Return api.DTWAIN_SetCallback64(Fn, UserData)
+        Return api.DTWAIN_SetCallback64(Fn, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetCamera(Source As System.IntPtr, szCamera As String) As Integer
-            Return api.DTWAIN_SetCamera(Source, szCamera)
+        Return api.DTWAIN_SetCamera(Source, szCamera)
         End Function
-
+        
         Public Function DTWAIN_SetCameraA(Source As System.IntPtr, szCamera As String) As Integer
-            Return api.DTWAIN_SetCameraA(Source, szCamera)
+        Return api.DTWAIN_SetCameraA(Source, szCamera)
         End Function
-
+        
         Public Function DTWAIN_SetCameraW(Source As System.IntPtr, szCamera As String) As Integer
-            Return api.DTWAIN_SetCameraW(Source, szCamera)
+        Return api.DTWAIN_SetCameraW(Source, szCamera)
         End Function
-
+        
         Public Function DTWAIN_SetCapValues(Source As System.IntPtr, lCap As Integer, lSetType As Integer, pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_SetCapValues(Source, lCap, lSetType, pArray)
+        Return api.DTWAIN_SetCapValues(Source, lCap, lSetType, pArray)
         End Function
-
+        
         Public Function DTWAIN_SetCapValuesEx(Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_SetCapValuesEx(Source, lCap, lSetType, lContainerType, pArray)
+        Return api.DTWAIN_SetCapValuesEx(Source, lCap, lSetType, lContainerType, pArray)
         End Function
-
+        
         Public Function DTWAIN_SetCapValuesEx2(Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, nDataType As Integer, pArray As System.IntPtr) As Integer
-            Return api.DTWAIN_SetCapValuesEx2(Source, lCap, lSetType, lContainerType, nDataType, pArray)
+        Return api.DTWAIN_SetCapValuesEx2(Source, lCap, lSetType, lContainerType, nDataType, pArray)
         End Function
-
+        
         Public Function DTWAIN_SetCaption(Source As System.IntPtr, Caption As String) As Integer
-            Return api.DTWAIN_SetCaption(Source, Caption)
+        Return api.DTWAIN_SetCaption(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_SetCaptionA(Source As System.IntPtr, Caption As String) As Integer
-            Return api.DTWAIN_SetCaptionA(Source, Caption)
+        Return api.DTWAIN_SetCaptionA(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_SetCaptionW(Source As System.IntPtr, Caption As String) As Integer
-            Return api.DTWAIN_SetCaptionW(Source, Caption)
+        Return api.DTWAIN_SetCaptionW(Source, Caption)
         End Function
-
+        
         Public Function DTWAIN_SetCompressionType(Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent)
+        Return api.DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetContrast(Source As System.IntPtr, Contrast As System.Double) As Integer
-            Return api.DTWAIN_SetContrast(Source, Contrast)
+        Return api.DTWAIN_SetContrast(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetContrastString(Source As System.IntPtr, Contrast As String) As Integer
-            Return api.DTWAIN_SetContrastString(Source, Contrast)
+        Return api.DTWAIN_SetContrastString(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetContrastStringA(Source As System.IntPtr, Contrast As String) As Integer
-            Return api.DTWAIN_SetContrastStringA(Source, Contrast)
+        Return api.DTWAIN_SetContrastStringA(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetContrastStringW(Source As System.IntPtr, Contrast As String) As Integer
-            Return api.DTWAIN_SetContrastStringW(Source, Contrast)
+        Return api.DTWAIN_SetContrastStringW(Source, Contrast)
         End Function
-
+        
         Public Function DTWAIN_SetCountry(nCountry As Integer) As Integer
-            Return api.DTWAIN_SetCountry(nCountry)
+        Return api.DTWAIN_SetCountry(nCountry)
         End Function
-
+        
         Public Function DTWAIN_SetCurrentRetryCount(Source As System.IntPtr, nCount As Integer) As Integer
-            Return api.DTWAIN_SetCurrentRetryCount(Source, nCount)
+        Return api.DTWAIN_SetCurrentRetryCount(Source, nCount)
         End Function
-
+        
         Public Function DTWAIN_SetCustomDSData(Source As System.IntPtr, hData As System.IntPtr, <MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.U8, SizeParamIndex:=3)> Data As Byte(), dSize As UInteger, nFlags As Integer) As Integer
-            Return api.DTWAIN_SetCustomDSData(Source, hData, Data, dSize, nFlags)
+        Return api.DTWAIN_SetCustomDSData(Source, hData, Data, dSize, nFlags)
         End Function
-
+        
         Public Function DTWAIN_SetDSMSearchOrder(SearchPath As Integer) As Integer
-            Return api.DTWAIN_SetDSMSearchOrder(SearchPath)
+        Return api.DTWAIN_SetDSMSearchOrder(SearchPath)
         End Function
-
+        
         Public Function DTWAIN_SetDSMSearchOrderEx(SearchOrder As String, UserPath As String) As Integer
-            Return api.DTWAIN_SetDSMSearchOrderEx(SearchOrder, UserPath)
+        Return api.DTWAIN_SetDSMSearchOrderEx(SearchOrder, UserPath)
         End Function
-
+        
         Public Function DTWAIN_SetDSMSearchOrderExA(SearchOrder As String, szUserPath As String) As Integer
-            Return api.DTWAIN_SetDSMSearchOrderExA(SearchOrder, szUserPath)
+        Return api.DTWAIN_SetDSMSearchOrderExA(SearchOrder, szUserPath)
         End Function
-
+        
         Public Function DTWAIN_SetDSMSearchOrderExW(SearchOrder As String, szUserPath As String) As Integer
-            Return api.DTWAIN_SetDSMSearchOrderExW(SearchOrder, szUserPath)
+        Return api.DTWAIN_SetDSMSearchOrderExW(SearchOrder, szUserPath)
         End Function
-
+        
         Public Function DTWAIN_SetDefaultSource(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_SetDefaultSource(Source)
+        Return api.DTWAIN_SetDefaultSource(Source)
         End Function
-
+        
         Public Function DTWAIN_SetDeviceNotifications(Source As System.IntPtr, DevEvents As Integer) As Integer
-            Return api.DTWAIN_SetDeviceNotifications(Source, DevEvents)
+        Return api.DTWAIN_SetDeviceNotifications(Source, DevEvents)
         End Function
-
+        
         Public Function DTWAIN_SetDeviceTimeDate(Source As System.IntPtr, szTimeDate As String) As Integer
-            Return api.DTWAIN_SetDeviceTimeDate(Source, szTimeDate)
+        Return api.DTWAIN_SetDeviceTimeDate(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_SetDeviceTimeDateA(Source As System.IntPtr, szTimeDate As String) As Integer
-            Return api.DTWAIN_SetDeviceTimeDateA(Source, szTimeDate)
+        Return api.DTWAIN_SetDeviceTimeDateA(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_SetDeviceTimeDateW(Source As System.IntPtr, szTimeDate As String) As Integer
-            Return api.DTWAIN_SetDeviceTimeDateW(Source, szTimeDate)
+        Return api.DTWAIN_SetDeviceTimeDateW(Source, szTimeDate)
         End Function
-
+        
         Public Function DTWAIN_SetDoubleFeedDetectLength(Source As System.IntPtr, Value As System.Double) As Integer
-            Return api.DTWAIN_SetDoubleFeedDetectLength(Source, Value)
+        Return api.DTWAIN_SetDoubleFeedDetectLength(Source, Value)
         End Function
-
+        
         Public Function DTWAIN_SetDoubleFeedDetectLengthString(Source As System.IntPtr, value As String) As Integer
-            Return api.DTWAIN_SetDoubleFeedDetectLengthString(Source, value)
+        Return api.DTWAIN_SetDoubleFeedDetectLengthString(Source, value)
         End Function
-
+        
         Public Function DTWAIN_SetDoubleFeedDetectLengthStringA(Source As System.IntPtr, szLength As String) As Integer
-            Return api.DTWAIN_SetDoubleFeedDetectLengthStringA(Source, szLength)
+        Return api.DTWAIN_SetDoubleFeedDetectLengthStringA(Source, szLength)
         End Function
-
+        
         Public Function DTWAIN_SetDoubleFeedDetectLengthStringW(Source As System.IntPtr, szLength As String) As Integer
-            Return api.DTWAIN_SetDoubleFeedDetectLengthStringW(Source, szLength)
+        Return api.DTWAIN_SetDoubleFeedDetectLengthStringW(Source, szLength)
         End Function
-
+        
         Public Function DTWAIN_SetDoubleFeedDetectValues(Source As System.IntPtr, prray As System.IntPtr) As Integer
-            Return api.DTWAIN_SetDoubleFeedDetectValues(Source, prray)
+        Return api.DTWAIN_SetDoubleFeedDetectValues(Source, prray)
         End Function
-
+        
         Public Function DTWAIN_SetDoublePageCountOnDuplex(Source As System.IntPtr, bDoubleCount As Integer) As Integer
-            Return api.DTWAIN_SetDoublePageCountOnDuplex(Source, bDoubleCount)
+        Return api.DTWAIN_SetDoublePageCountOnDuplex(Source, bDoubleCount)
         End Function
-
+        
         Public Function DTWAIN_SetEOJDetectValue(Source As System.IntPtr, nValue As Integer) As Integer
-            Return api.DTWAIN_SetEOJDetectValue(Source, nValue)
+        Return api.DTWAIN_SetEOJDetectValue(Source, nValue)
         End Function
-
+        
         Public Function DTWAIN_SetErrorBufferThreshold(nErrors As Integer) As Integer
-            Return api.DTWAIN_SetErrorBufferThreshold(nErrors)
+        Return api.DTWAIN_SetErrorBufferThreshold(nErrors)
         End Function
-
+        
         Public Function DTWAIN_SetErrorCallback(proc As DTwainErrorProc, UserData As Integer) As Integer
-            Return api.DTWAIN_SetErrorCallback(proc, UserData)
+        Return api.DTWAIN_SetErrorCallback(proc, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetErrorCallback64(proc As DTwainErrorProc64, UserData64 As System.Int64) As Integer
-            Return api.DTWAIN_SetErrorCallback64(proc, UserData64)
+        Return api.DTWAIN_SetErrorCallback64(proc, UserData64)
         End Function
-
+        
         Public Function DTWAIN_SetFeederAlignment(Source As System.IntPtr, lpAlignment As Integer) As Integer
-            Return api.DTWAIN_SetFeederAlignment(Source, lpAlignment)
+        Return api.DTWAIN_SetFeederAlignment(Source, lpAlignment)
         End Function
-
+        
         Public Function DTWAIN_SetFeederOrder(Source As System.IntPtr, lOrder As Integer) As Integer
-            Return api.DTWAIN_SetFeederOrder(Source, lOrder)
+        Return api.DTWAIN_SetFeederOrder(Source, lOrder)
         End Function
-
+        
         Public Function DTWAIN_SetFeederWaitTime(Source As System.IntPtr, waitTime As Integer, flags As Integer) As Integer
-            Return api.DTWAIN_SetFeederWaitTime(Source, waitTime, flags)
+        Return api.DTWAIN_SetFeederWaitTime(Source, waitTime, flags)
         End Function
-
+        
         Public Function DTWAIN_SetFileAutoIncrement(Source As System.IntPtr, Increment As Integer, bResetOnAcquire As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetFileAutoIncrement(Source, Increment, bResetOnAcquire, bSet)
+        Return api.DTWAIN_SetFileAutoIncrement(Source, Increment, bResetOnAcquire, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetFileCompressionType(Source As System.IntPtr, lCompression As Integer, bIsCustom As Integer) As Integer
-            Return api.DTWAIN_SetFileCompressionType(Source, lCompression, bIsCustom)
+        Return api.DTWAIN_SetFileCompressionType(Source, lCompression, bIsCustom)
         End Function
-
+        
         Public Function DTWAIN_SetFileSavePos(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-            Return api.DTWAIN_SetFileSavePos(hWndParent, szTitle, xPos, yPos, nFlags)
+        Return api.DTWAIN_SetFileSavePos(hWndParent, szTitle, xPos, yPos, nFlags)
         End Function
-
+        
         Public Function DTWAIN_SetFileSavePosA(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-            Return api.DTWAIN_SetFileSavePosA(hWndParent, szTitle, xPos, yPos, nFlags)
+        Return api.DTWAIN_SetFileSavePosA(hWndParent, szTitle, xPos, yPos, nFlags)
         End Function
-
+        
         Public Function DTWAIN_SetFileSavePosW(hWndParent As System.IntPtr, szTitle As String, xPos As Integer, yPos As Integer, nFlags As Integer) As Integer
-            Return api.DTWAIN_SetFileSavePosW(hWndParent, szTitle, xPos, yPos, nFlags)
+        Return api.DTWAIN_SetFileSavePosW(hWndParent, szTitle, xPos, yPos, nFlags)
         End Function
-
+        
         Public Function DTWAIN_SetFileXferFormat(Source As System.IntPtr, lFileType As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetFileXferFormat(Source, lFileType, bSetCurrent)
+        Return api.DTWAIN_SetFileXferFormat(Source, lFileType, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetHalftone(Source As System.IntPtr, lpHalftone As String) As Integer
-            Return api.DTWAIN_SetHalftone(Source, lpHalftone)
+        Return api.DTWAIN_SetHalftone(Source, lpHalftone)
         End Function
-
+        
         Public Function DTWAIN_SetHalftoneA(Source As System.IntPtr, lpHalftone As String) As Integer
-            Return api.DTWAIN_SetHalftoneA(Source, lpHalftone)
+        Return api.DTWAIN_SetHalftoneA(Source, lpHalftone)
         End Function
-
+        
         Public Function DTWAIN_SetHalftoneW(Source As System.IntPtr, lpHalftone As String) As Integer
-            Return api.DTWAIN_SetHalftoneW(Source, lpHalftone)
+        Return api.DTWAIN_SetHalftoneW(Source, lpHalftone)
         End Function
-
+        
         Public Function DTWAIN_SetHighlight(Source As System.IntPtr, Highlight As System.Double) As Integer
-            Return api.DTWAIN_SetHighlight(Source, Highlight)
+        Return api.DTWAIN_SetHighlight(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_SetHighlightString(Source As System.IntPtr, Highlight As String) As Integer
-            Return api.DTWAIN_SetHighlightString(Source, Highlight)
+        Return api.DTWAIN_SetHighlightString(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_SetHighlightStringA(Source As System.IntPtr, Highlight As String) As Integer
-            Return api.DTWAIN_SetHighlightStringA(Source, Highlight)
+        Return api.DTWAIN_SetHighlightStringA(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_SetHighlightStringW(Source As System.IntPtr, Highlight As String) As Integer
-            Return api.DTWAIN_SetHighlightStringW(Source, Highlight)
+        Return api.DTWAIN_SetHighlightStringW(Source, Highlight)
         End Function
-
+        
         Public Function DTWAIN_SetJobControl(Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetJobControl(Source, JobControl, bSetCurrent)
+        Return api.DTWAIN_SetJobControl(Source, JobControl, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetJpegValues(Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-            Return api.DTWAIN_SetJpegValues(Source, Quality, Progressive)
+        Return api.DTWAIN_SetJpegValues(Source, Quality, Progressive)
         End Function
-
+        
         Public Function DTWAIN_SetJpegXRValues(Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
-            Return api.DTWAIN_SetJpegXRValues(Source, Quality, Progressive)
+        Return api.DTWAIN_SetJpegXRValues(Source, Quality, Progressive)
         End Function
-
+        
         Public Function DTWAIN_SetLanguage(nLanguage As Integer) As Integer
-            Return api.DTWAIN_SetLanguage(nLanguage)
+        Return api.DTWAIN_SetLanguage(nLanguage)
         End Function
-
+        
         Public Function DTWAIN_SetLastError(nError As Integer) As Integer
-            Return api.DTWAIN_SetLastError(nError)
+        Return api.DTWAIN_SetLastError(nError)
         End Function
-
+        
         Public Function DTWAIN_SetLightPath(Source As System.IntPtr, LightPath As Integer) As Integer
-            Return api.DTWAIN_SetLightPath(Source, LightPath)
+        Return api.DTWAIN_SetLightPath(Source, LightPath)
         End Function
-
+        
         Public Function DTWAIN_SetLightPathEx(Source As System.IntPtr, LightPaths As System.IntPtr) As Integer
-            Return api.DTWAIN_SetLightPathEx(Source, LightPaths)
+        Return api.DTWAIN_SetLightPathEx(Source, LightPaths)
         End Function
-
+        
         Public Function DTWAIN_SetLightSource(Source As System.IntPtr, LightSource As Integer) As Integer
-            Return api.DTWAIN_SetLightSource(Source, LightSource)
+        Return api.DTWAIN_SetLightSource(Source, LightSource)
         End Function
-
+        
         Public Function DTWAIN_SetLightSources(Source As System.IntPtr, LightSources As System.IntPtr) As Integer
-            Return api.DTWAIN_SetLightSources(Source, LightSources)
+        Return api.DTWAIN_SetLightSources(Source, LightSources)
         End Function
-
+        
         Public Function DTWAIN_SetLoggerCallback(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
-            Return api.DTWAIN_SetLoggerCallback(logProc, UserData)
+        Return api.DTWAIN_SetLoggerCallback(logProc, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetLoggerCallbackA(logProc As DTwainLoggerProcA, UserData As System.Int64) As Integer
-            Return api.DTWAIN_SetLoggerCallbackA(logProc, UserData)
+        Return api.DTWAIN_SetLoggerCallbackA(logProc, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetLoggerCallbackW(logProc As DTwainLoggerProcW, UserData As System.Int64) As Integer
-            Return api.DTWAIN_SetLoggerCallbackW(logProc, UserData)
+        Return api.DTWAIN_SetLoggerCallbackW(logProc, UserData)
         End Function
-
+        
         Public Function DTWAIN_SetManualDuplexMode(Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
-            Return api.DTWAIN_SetManualDuplexMode(Source, Flags, bSet)
+        Return api.DTWAIN_SetManualDuplexMode(Source, Flags, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetMaxAcquisitions(Source As System.IntPtr, MaxAcquires As Integer) As Integer
-            Return api.DTWAIN_SetMaxAcquisitions(Source, MaxAcquires)
+        Return api.DTWAIN_SetMaxAcquisitions(Source, MaxAcquires)
         End Function
-
+        
         Public Function DTWAIN_SetMaxBuffers(Source As System.IntPtr, MaxBuf As Integer) As Integer
-            Return api.DTWAIN_SetMaxBuffers(Source, MaxBuf)
+        Return api.DTWAIN_SetMaxBuffers(Source, MaxBuf)
         End Function
-
+        
         Public Function DTWAIN_SetMaxRetryAttempts(Source As System.IntPtr, nAttempts As Integer) As Integer
-            Return api.DTWAIN_SetMaxRetryAttempts(Source, nAttempts)
+        Return api.DTWAIN_SetMaxRetryAttempts(Source, nAttempts)
         End Function
-
+        
         Public Function DTWAIN_SetMultipageScanMode(Source As System.IntPtr, ScanType As Integer) As Integer
-            Return api.DTWAIN_SetMultipageScanMode(Source, ScanType)
+        Return api.DTWAIN_SetMultipageScanMode(Source, ScanType)
         End Function
-
+        
         Public Function DTWAIN_SetNoiseFilter(Source As System.IntPtr, NoiseFilter As Integer) As Integer
-            Return api.DTWAIN_SetNoiseFilter(Source, NoiseFilter)
+        Return api.DTWAIN_SetNoiseFilter(Source, NoiseFilter)
         End Function
-
+        
         Public Function DTWAIN_SetOCRCapValues(Engine As System.IntPtr, OCRCapValue As Integer, SetType As Integer, CapValues As System.IntPtr) As Integer
-            Return api.DTWAIN_SetOCRCapValues(Engine, OCRCapValue, SetType, CapValues)
+        Return api.DTWAIN_SetOCRCapValues(Engine, OCRCapValue, SetType, CapValues)
         End Function
-
+        
         Public Function DTWAIN_SetOrientation(Source As System.IntPtr, Orient As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetOrientation(Source, Orient, bSetCurrent)
+        Return api.DTWAIN_SetOrientation(Source, Orient, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetOverscan(Source As System.IntPtr, Value As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetOverscan(Source, Value, bSetCurrent)
+        Return api.DTWAIN_SetOverscan(Source, Value, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPDFAESEncryption(Source As System.IntPtr, nWhichEncryption As Integer, bUseAES As Integer) As Integer
-            Return api.DTWAIN_SetPDFAESEncryption(Source, nWhichEncryption, bUseAES)
+        Return api.DTWAIN_SetPDFAESEncryption(Source, nWhichEncryption, bUseAES)
         End Function
-
+        
         Public Function DTWAIN_SetPDFASCIICompression(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_SetPDFASCIICompression(Source, bSet)
+        Return api.DTWAIN_SetPDFASCIICompression(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetPDFAuthor(Source As System.IntPtr, lpAuthor As String) As Integer
-            Return api.DTWAIN_SetPDFAuthor(Source, lpAuthor)
+        Return api.DTWAIN_SetPDFAuthor(Source, lpAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetPDFAuthorA(Source As System.IntPtr, lpAuthor As String) As Integer
-            Return api.DTWAIN_SetPDFAuthorA(Source, lpAuthor)
+        Return api.DTWAIN_SetPDFAuthorA(Source, lpAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetPDFAuthorW(Source As System.IntPtr, lpAuthor As String) As Integer
-            Return api.DTWAIN_SetPDFAuthorW(Source, lpAuthor)
+        Return api.DTWAIN_SetPDFAuthorW(Source, lpAuthor)
         End Function
-
+        
         Public Function DTWAIN_SetPDFCompression(Source As System.IntPtr, bCompression As Integer) As Integer
-            Return api.DTWAIN_SetPDFCompression(Source, bCompression)
+        Return api.DTWAIN_SetPDFCompression(Source, bCompression)
         End Function
-
+        
         Public Function DTWAIN_SetPDFCreator(Source As System.IntPtr, lpCreator As String) As Integer
-            Return api.DTWAIN_SetPDFCreator(Source, lpCreator)
+        Return api.DTWAIN_SetPDFCreator(Source, lpCreator)
         End Function
-
+        
         Public Function DTWAIN_SetPDFCreatorA(Source As System.IntPtr, lpCreator As String) As Integer
-            Return api.DTWAIN_SetPDFCreatorA(Source, lpCreator)
+        Return api.DTWAIN_SetPDFCreatorA(Source, lpCreator)
         End Function
-
+        
         Public Function DTWAIN_SetPDFCreatorW(Source As System.IntPtr, lpCreator As String) As Integer
-            Return api.DTWAIN_SetPDFCreatorW(Source, lpCreator)
+        Return api.DTWAIN_SetPDFCreatorW(Source, lpCreator)
         End Function
-
+        
         Public Function DTWAIN_SetPDFEncryption(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-            Return api.DTWAIN_SetPDFEncryption(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
+        Return api.DTWAIN_SetPDFEncryption(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
         End Function
-
+        
         Public Function DTWAIN_SetPDFEncryptionA(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-            Return api.DTWAIN_SetPDFEncryptionA(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
+        Return api.DTWAIN_SetPDFEncryptionA(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
         End Function
-
+        
         Public Function DTWAIN_SetPDFEncryptionW(Source As System.IntPtr, bUseEncryption As Integer, lpszUser As String, lpszOwner As String, Permissions As UInteger, UseStrongEncryption As Integer) As Integer
-            Return api.DTWAIN_SetPDFEncryptionW(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
+        Return api.DTWAIN_SetPDFEncryptionW(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption)
         End Function
-
+        
         Public Function DTWAIN_SetPDFJpegQuality(Source As System.IntPtr, Quality As Integer) As Integer
-            Return api.DTWAIN_SetPDFJpegQuality(Source, Quality)
+        Return api.DTWAIN_SetPDFJpegQuality(Source, Quality)
         End Function
-
+        
         Public Function DTWAIN_SetPDFKeywords(Source As System.IntPtr, lpKeyWords As String) As Integer
-            Return api.DTWAIN_SetPDFKeywords(Source, lpKeyWords)
+        Return api.DTWAIN_SetPDFKeywords(Source, lpKeyWords)
         End Function
-
+        
         Public Function DTWAIN_SetPDFKeywordsA(Source As System.IntPtr, lpKeyWords As String) As Integer
-            Return api.DTWAIN_SetPDFKeywordsA(Source, lpKeyWords)
+        Return api.DTWAIN_SetPDFKeywordsA(Source, lpKeyWords)
         End Function
-
+        
         Public Function DTWAIN_SetPDFKeywordsW(Source As System.IntPtr, lpKeyWords As String) As Integer
-            Return api.DTWAIN_SetPDFKeywordsW(Source, lpKeyWords)
+        Return api.DTWAIN_SetPDFKeywordsW(Source, lpKeyWords)
         End Function
-
+        
         Public Function DTWAIN_SetPDFOCRConversion(Engine As System.IntPtr, PageType As Integer, FileType As Integer, PixelType As Integer, BitDepth As Integer, Options As Integer) As Integer
-            Return api.DTWAIN_SetPDFOCRConversion(Engine, PageType, FileType, PixelType, BitDepth, Options)
+        Return api.DTWAIN_SetPDFOCRConversion(Engine, PageType, FileType, PixelType, BitDepth, Options)
         End Function
-
+        
         Public Function DTWAIN_SetPDFOCRMode(Source As System.IntPtr, bSet As Integer) As Integer
-            Return api.DTWAIN_SetPDFOCRMode(Source, bSet)
+        Return api.DTWAIN_SetPDFOCRMode(Source, bSet)
         End Function
-
+        
         Public Function DTWAIN_SetPDFOrientation(Source As System.IntPtr, lPOrientation As Integer) As Integer
-            Return api.DTWAIN_SetPDFOrientation(Source, lPOrientation)
+        Return api.DTWAIN_SetPDFOrientation(Source, lPOrientation)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageScale(Source As System.IntPtr, nOptions As Integer, xScale As System.Double, yScale As System.Double) As Integer
-            Return api.DTWAIN_SetPDFPageScale(Source, nOptions, xScale, yScale)
+        Return api.DTWAIN_SetPDFPageScale(Source, nOptions, xScale, yScale)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageScaleString(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-            Return api.DTWAIN_SetPDFPageScaleString(Source, nOptions, xScale, yScale)
+        Return api.DTWAIN_SetPDFPageScaleString(Source, nOptions, xScale, yScale)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageScaleStringA(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-            Return api.DTWAIN_SetPDFPageScaleStringA(Source, nOptions, xScale, yScale)
+        Return api.DTWAIN_SetPDFPageScaleStringA(Source, nOptions, xScale, yScale)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageScaleStringW(Source As System.IntPtr, nOptions As Integer, xScale As String, yScale As String) As Integer
-            Return api.DTWAIN_SetPDFPageScaleStringW(Source, nOptions, xScale, yScale)
+        Return api.DTWAIN_SetPDFPageScaleStringW(Source, nOptions, xScale, yScale)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageSize(Source As System.IntPtr, PageSize As Integer, CustomWidth As System.Double, CustomHeight As System.Double) As Integer
-            Return api.DTWAIN_SetPDFPageSize(Source, PageSize, CustomWidth, CustomHeight)
+        Return api.DTWAIN_SetPDFPageSize(Source, PageSize, CustomWidth, CustomHeight)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageSizeString(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-            Return api.DTWAIN_SetPDFPageSizeString(Source, PageSize, CustomWidth, CustomHeight)
+        Return api.DTWAIN_SetPDFPageSizeString(Source, PageSize, CustomWidth, CustomHeight)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageSizeStringA(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-            Return api.DTWAIN_SetPDFPageSizeStringA(Source, PageSize, CustomWidth, CustomHeight)
+        Return api.DTWAIN_SetPDFPageSizeStringA(Source, PageSize, CustomWidth, CustomHeight)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPageSizeStringW(Source As System.IntPtr, PageSize As Integer, CustomWidth As String, CustomHeight As String) As Integer
-            Return api.DTWAIN_SetPDFPageSizeStringW(Source, PageSize, CustomWidth, CustomHeight)
+        Return api.DTWAIN_SetPDFPageSizeStringW(Source, PageSize, CustomWidth, CustomHeight)
         End Function
-
+        
         Public Function DTWAIN_SetPDFPolarity(Source As System.IntPtr, Polarity As Integer) As Integer
-            Return api.DTWAIN_SetPDFPolarity(Source, Polarity)
+        Return api.DTWAIN_SetPDFPolarity(Source, Polarity)
         End Function
-
+        
         Public Function DTWAIN_SetPDFProducer(Source As System.IntPtr, lpProducer As String) As Integer
-            Return api.DTWAIN_SetPDFProducer(Source, lpProducer)
+        Return api.DTWAIN_SetPDFProducer(Source, lpProducer)
         End Function
-
+        
         Public Function DTWAIN_SetPDFProducerA(Source As System.IntPtr, lpProducer As String) As Integer
-            Return api.DTWAIN_SetPDFProducerA(Source, lpProducer)
+        Return api.DTWAIN_SetPDFProducerA(Source, lpProducer)
         End Function
-
+        
         Public Function DTWAIN_SetPDFProducerW(Source As System.IntPtr, lpProducer As String) As Integer
-            Return api.DTWAIN_SetPDFProducerW(Source, lpProducer)
+        Return api.DTWAIN_SetPDFProducerW(Source, lpProducer)
         End Function
-
+        
         Public Function DTWAIN_SetPDFSubject(Source As System.IntPtr, lpSubject As String) As Integer
-            Return api.DTWAIN_SetPDFSubject(Source, lpSubject)
+        Return api.DTWAIN_SetPDFSubject(Source, lpSubject)
         End Function
-
+        
         Public Function DTWAIN_SetPDFSubjectA(Source As System.IntPtr, lpSubject As String) As Integer
-            Return api.DTWAIN_SetPDFSubjectA(Source, lpSubject)
+        Return api.DTWAIN_SetPDFSubjectA(Source, lpSubject)
         End Function
-
+        
         Public Function DTWAIN_SetPDFSubjectW(Source As System.IntPtr, lpSubject As String) As Integer
-            Return api.DTWAIN_SetPDFSubjectW(Source, lpSubject)
+        Return api.DTWAIN_SetPDFSubjectW(Source, lpSubject)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTextElementFloat(TextElement As System.IntPtr, val1 As System.Double, val2 As System.Double, Flags As Integer) As Integer
-            Return api.DTWAIN_SetPDFTextElementFloat(TextElement, val1, val2, Flags)
+        Return api.DTWAIN_SetPDFTextElementFloat(TextElement, val1, val2, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTextElementLong(TextElement As System.IntPtr, val1 As Integer, val2 As Integer, Flags As Integer) As Integer
-            Return api.DTWAIN_SetPDFTextElementLong(TextElement, val1, val2, Flags)
+        Return api.DTWAIN_SetPDFTextElementLong(TextElement, val1, val2, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTextElementString(TextElement As System.IntPtr, val1 As String, Flags As Integer) As Integer
-            Return api.DTWAIN_SetPDFTextElementString(TextElement, val1, Flags)
+        Return api.DTWAIN_SetPDFTextElementString(TextElement, val1, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTextElementStringA(TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-            Return api.DTWAIN_SetPDFTextElementStringA(TextElement, szString, Flags)
+        Return api.DTWAIN_SetPDFTextElementStringA(TextElement, szString, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTextElementStringW(TextElement As System.IntPtr, szString As String, Flags As Integer) As Integer
-            Return api.DTWAIN_SetPDFTextElementStringW(TextElement, szString, Flags)
+        Return api.DTWAIN_SetPDFTextElementStringW(TextElement, szString, Flags)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTitle(Source As System.IntPtr, lpTitle As String) As Integer
-            Return api.DTWAIN_SetPDFTitle(Source, lpTitle)
+        Return api.DTWAIN_SetPDFTitle(Source, lpTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTitleA(Source As System.IntPtr, lpTitle As String) As Integer
-            Return api.DTWAIN_SetPDFTitleA(Source, lpTitle)
+        Return api.DTWAIN_SetPDFTitleA(Source, lpTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPDFTitleW(Source As System.IntPtr, lpTitle As String) As Integer
-            Return api.DTWAIN_SetPDFTitleW(Source, lpTitle)
+        Return api.DTWAIN_SetPDFTitleW(Source, lpTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPaperSize(Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent)
+        Return api.DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPatchMaxPriorities(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
-            Return api.DTWAIN_SetPatchMaxPriorities(Source, nMaxSearchRetries)
+        Return api.DTWAIN_SetPatchMaxPriorities(Source, nMaxSearchRetries)
         End Function
-
+        
         Public Function DTWAIN_SetPatchMaxRetries(Source As System.IntPtr, nMaxRetries As Integer) As Integer
-            Return api.DTWAIN_SetPatchMaxRetries(Source, nMaxRetries)
+        Return api.DTWAIN_SetPatchMaxRetries(Source, nMaxRetries)
         End Function
-
+        
         Public Function DTWAIN_SetPatchPriorities(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
-            Return api.DTWAIN_SetPatchPriorities(Source, SearchPriorities)
+        Return api.DTWAIN_SetPatchPriorities(Source, SearchPriorities)
         End Function
-
+        
         Public Function DTWAIN_SetPatchSearchMode(Source As System.IntPtr, nSearchMode As Integer) As Integer
-            Return api.DTWAIN_SetPatchSearchMode(Source, nSearchMode)
+        Return api.DTWAIN_SetPatchSearchMode(Source, nSearchMode)
         End Function
-
+        
         Public Function DTWAIN_SetPatchTimeOut(Source As System.IntPtr, TimeOutValue As Integer) As Integer
-            Return api.DTWAIN_SetPatchTimeOut(Source, TimeOutValue)
+        Return api.DTWAIN_SetPatchTimeOut(Source, TimeOutValue)
         End Function
-
+        
         Public Function DTWAIN_SetPixelFlavor(Source As System.IntPtr, PixelFlavor As Integer) As Integer
-            Return api.DTWAIN_SetPixelFlavor(Source, PixelFlavor)
+        Return api.DTWAIN_SetPixelFlavor(Source, PixelFlavor)
         End Function
-
+        
         Public Function DTWAIN_SetPixelType(Source As System.IntPtr, PixelType As Integer, BitDepth As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetPixelType(Source, PixelType, BitDepth, bSetCurrent)
+        Return api.DTWAIN_SetPixelType(Source, PixelType, BitDepth, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPostScriptTitle(Source As System.IntPtr, szTitle As String) As Integer
-            Return api.DTWAIN_SetPostScriptTitle(Source, szTitle)
+        Return api.DTWAIN_SetPostScriptTitle(Source, szTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPostScriptTitleA(Source As System.IntPtr, szTitle As String) As Integer
-            Return api.DTWAIN_SetPostScriptTitleA(Source, szTitle)
+        Return api.DTWAIN_SetPostScriptTitleA(Source, szTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPostScriptTitleW(Source As System.IntPtr, szTitle As String) As Integer
-            Return api.DTWAIN_SetPostScriptTitleW(Source, szTitle)
+        Return api.DTWAIN_SetPostScriptTitleW(Source, szTitle)
         End Function
-
+        
         Public Function DTWAIN_SetPostScriptType(Source As System.IntPtr, PSType As Integer) As Integer
-            Return api.DTWAIN_SetPostScriptType(Source, PSType)
+        Return api.DTWAIN_SetPostScriptType(Source, PSType)
         End Function
-
+        
         Public Function DTWAIN_SetPrinter(Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_SetPrinter(Source, Printer, bCurrent)
+        Return api.DTWAIN_SetPrinter(Source, Printer, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterEx(Source As System.IntPtr, Printer As Integer, bCurrent As Integer) As Integer
-            Return api.DTWAIN_SetPrinterEx(Source, Printer, bCurrent)
+        Return api.DTWAIN_SetPrinterEx(Source, Printer, bCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterStartNumber(Source As System.IntPtr, nStart As Integer) As Integer
-            Return api.DTWAIN_SetPrinterStartNumber(Source, nStart)
+        Return api.DTWAIN_SetPrinterStartNumber(Source, nStart)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterStringMode(Source As System.IntPtr, PrinterMode As Integer, bSetCurrent As Integer) As Integer
-            Return api.DTWAIN_SetPrinterStringMode(Source, PrinterMode, bSetCurrent)
+        Return api.DTWAIN_SetPrinterStringMode(Source, PrinterMode, bSetCurrent)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterStrings(Source As System.IntPtr, ArrayString As System.IntPtr, ByRef pNumStrings As Integer) As Integer
-            Return api.DTWAIN_SetPrinterStrings(Source, ArrayString, pNumStrings)
+        Return api.DTWAIN_SetPrinterStrings(Source, ArrayString, pNumStrings)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterSuffixString(Source As System.IntPtr, Suffix As String) As Integer
-            Return api.DTWAIN_SetPrinterSuffixString(Source, Suffix)
+        Return api.DTWAIN_SetPrinterSuffixString(Source, Suffix)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterSuffixStringA(Source As System.IntPtr, Suffix As String) As Integer
-            Return api.DTWAIN_SetPrinterSuffixStringA(Source, Suffix)
+        Return api.DTWAIN_SetPrinterSuffixStringA(Source, Suffix)
         End Function
-
+        
         Public Function DTWAIN_SetPrinterSuffixStringW(Source As System.IntPtr, Suffix As String) As Integer
-            Return api.DTWAIN_SetPrinterSuffixStringW(Source, Suffix)
+        Return api.DTWAIN_SetPrinterSuffixStringW(Source, Suffix)
         End Function
-
+        
         Public Function DTWAIN_SetQueryCapSupport(bSet As Integer) As Integer
-            Return api.DTWAIN_SetQueryCapSupport(bSet)
+        Return api.DTWAIN_SetQueryCapSupport(bSet)
         End Function
-
+        
         Public Function DTWAIN_SetResolution(Source As System.IntPtr, Resolution As System.Double) As Integer
-            Return api.DTWAIN_SetResolution(Source, Resolution)
+        Return api.DTWAIN_SetResolution(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetResolutionString(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetResolutionString(Source, Resolution)
+        Return api.DTWAIN_SetResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetResolutionStringA(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_SetResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetResolutionStringW(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_SetResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetResourcePath(ResourcePath As String) As Integer
-            Return api.DTWAIN_SetResourcePath(ResourcePath)
+        Return api.DTWAIN_SetResourcePath(ResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SetResourcePathA(ResourcePath As String) As Integer
-            Return api.DTWAIN_SetResourcePathA(ResourcePath)
+        Return api.DTWAIN_SetResourcePathA(ResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SetResourcePathW(ResourcePath As String) As Integer
-            Return api.DTWAIN_SetResourcePathW(ResourcePath)
+        Return api.DTWAIN_SetResourcePathW(ResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SetRotation(Source As System.IntPtr, Rotation As System.Double) As Integer
-            Return api.DTWAIN_SetRotation(Source, Rotation)
+        Return api.DTWAIN_SetRotation(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_SetRotationString(Source As System.IntPtr, Rotation As String) As Integer
-            Return api.DTWAIN_SetRotationString(Source, Rotation)
+        Return api.DTWAIN_SetRotationString(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_SetRotationStringA(Source As System.IntPtr, Rotation As String) As Integer
-            Return api.DTWAIN_SetRotationStringA(Source, Rotation)
+        Return api.DTWAIN_SetRotationStringA(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_SetRotationStringW(Source As System.IntPtr, Rotation As String) As Integer
-            Return api.DTWAIN_SetRotationStringW(Source, Rotation)
+        Return api.DTWAIN_SetRotationStringW(Source, Rotation)
         End Function
-
+        
         Public Function DTWAIN_SetSaveFileName(Source As System.IntPtr, fName As String) As Integer
-            Return api.DTWAIN_SetSaveFileName(Source, fName)
+        Return api.DTWAIN_SetSaveFileName(Source, fName)
         End Function
-
+        
         Public Function DTWAIN_SetSaveFileNameA(Source As System.IntPtr, fName As String) As Integer
-            Return api.DTWAIN_SetSaveFileNameA(Source, fName)
+        Return api.DTWAIN_SetSaveFileNameA(Source, fName)
         End Function
-
+        
         Public Function DTWAIN_SetSaveFileNameW(Source As System.IntPtr, fName As String) As Integer
-            Return api.DTWAIN_SetSaveFileNameW(Source, fName)
+        Return api.DTWAIN_SetSaveFileNameW(Source, fName)
         End Function
-
+        
         Public Function DTWAIN_SetShadow(Source As System.IntPtr, Shadow As System.Double) As Integer
-            Return api.DTWAIN_SetShadow(Source, Shadow)
+        Return api.DTWAIN_SetShadow(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_SetShadowString(Source As System.IntPtr, Shadow As String) As Integer
-            Return api.DTWAIN_SetShadowString(Source, Shadow)
+        Return api.DTWAIN_SetShadowString(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_SetShadowStringA(Source As System.IntPtr, Shadow As String) As Integer
-            Return api.DTWAIN_SetShadowStringA(Source, Shadow)
+        Return api.DTWAIN_SetShadowStringA(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_SetShadowStringW(Source As System.IntPtr, Shadow As String) As Integer
-            Return api.DTWAIN_SetShadowStringW(Source, Shadow)
+        Return api.DTWAIN_SetShadowStringW(Source, Shadow)
         End Function
-
+        
         Public Function DTWAIN_SetSourceUnit(Source As System.IntPtr, Unit As Integer) As Integer
-            Return api.DTWAIN_SetSourceUnit(Source, Unit)
+        Return api.DTWAIN_SetSourceUnit(Source, Unit)
         End Function
-
+        
         Public Function DTWAIN_SetTIFFCompressType(Source As System.IntPtr, Setting As Integer) As Integer
-            Return api.DTWAIN_SetTIFFCompressType(Source, Setting)
+        Return api.DTWAIN_SetTIFFCompressType(Source, Setting)
         End Function
-
+        
         Public Function DTWAIN_SetTIFFInvert(Source As System.IntPtr, Setting As Integer) As Integer
-            Return api.DTWAIN_SetTIFFInvert(Source, Setting)
+        Return api.DTWAIN_SetTIFFInvert(Source, Setting)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectory(szFilePath As String) As Integer
-            Return api.DTWAIN_SetTempFileDirectory(szFilePath)
+        Return api.DTWAIN_SetTempFileDirectory(szFilePath)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectoryA(szFilePath As String) As Integer
-            Return api.DTWAIN_SetTempFileDirectoryA(szFilePath)
+        Return api.DTWAIN_SetTempFileDirectoryA(szFilePath)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectoryEx(szFilePath As String, CreationFlags As Integer) As Integer
-            Return api.DTWAIN_SetTempFileDirectoryEx(szFilePath, CreationFlags)
+        Return api.DTWAIN_SetTempFileDirectoryEx(szFilePath, CreationFlags)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectoryExA(szFilePath As String, CreationFlags As Integer) As Integer
-            Return api.DTWAIN_SetTempFileDirectoryExA(szFilePath, CreationFlags)
+        Return api.DTWAIN_SetTempFileDirectoryExA(szFilePath, CreationFlags)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectoryExW(szFilePath As String, CreationFlags As Integer) As Integer
-            Return api.DTWAIN_SetTempFileDirectoryExW(szFilePath, CreationFlags)
+        Return api.DTWAIN_SetTempFileDirectoryExW(szFilePath, CreationFlags)
         End Function
-
+        
         Public Function DTWAIN_SetTempFileDirectoryW(szFilePath As String) As Integer
-            Return api.DTWAIN_SetTempFileDirectoryW(szFilePath)
+        Return api.DTWAIN_SetTempFileDirectoryW(szFilePath)
         End Function
-
+        
         Public Function DTWAIN_SetThreshold(Source As System.IntPtr, Threshold As System.Double, bSetBithDepthReduction As Integer) As Integer
-            Return api.DTWAIN_SetThreshold(Source, Threshold, bSetBithDepthReduction)
+        Return api.DTWAIN_SetThreshold(Source, Threshold, bSetBithDepthReduction)
         End Function
-
+        
         Public Function DTWAIN_SetThresholdString(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-            Return api.DTWAIN_SetThresholdString(Source, Threshold, bSetBitDepthReduction)
+        Return api.DTWAIN_SetThresholdString(Source, Threshold, bSetBitDepthReduction)
         End Function
-
+        
         Public Function DTWAIN_SetThresholdStringA(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-            Return api.DTWAIN_SetThresholdStringA(Source, Threshold, bSetBitDepthReduction)
+        Return api.DTWAIN_SetThresholdStringA(Source, Threshold, bSetBitDepthReduction)
         End Function
-
+        
         Public Function DTWAIN_SetThresholdStringW(Source As System.IntPtr, Threshold As String, bSetBitDepthReduction As Integer) As Integer
-            Return api.DTWAIN_SetThresholdStringW(Source, Threshold, bSetBitDepthReduction)
+        Return api.DTWAIN_SetThresholdStringW(Source, Threshold, bSetBitDepthReduction)
         End Function
-
+        
         Public Function DTWAIN_SetTwainDSM(DSMType As Integer) As Integer
-            Return api.DTWAIN_SetTwainDSM(DSMType)
+        Return api.DTWAIN_SetTwainDSM(DSMType)
         End Function
-
+        
         Public Function DTWAIN_SetTwainLog(LogFlags As UInteger, lpszLogFile As String) As Integer
-            Return api.DTWAIN_SetTwainLog(LogFlags, lpszLogFile)
+        Return api.DTWAIN_SetTwainLog(LogFlags, lpszLogFile)
         End Function
-
+        
         Public Function DTWAIN_SetTwainLogA(LogFlags As UInteger, lpszLogFile As String) As Integer
-            Return api.DTWAIN_SetTwainLogA(LogFlags, lpszLogFile)
+        Return api.DTWAIN_SetTwainLogA(LogFlags, lpszLogFile)
         End Function
-
+        
         Public Function DTWAIN_SetTwainLogW(LogFlags As UInteger, lpszLogFile As String) As Integer
-            Return api.DTWAIN_SetTwainLogW(LogFlags, lpszLogFile)
+        Return api.DTWAIN_SetTwainLogW(LogFlags, lpszLogFile)
         End Function
-
+        
         Public Function DTWAIN_SetTwainMode(lAcquireMode As Integer) As Integer
-            Return api.DTWAIN_SetTwainMode(lAcquireMode)
+        Return api.DTWAIN_SetTwainMode(lAcquireMode)
         End Function
-
+        
         Public Function DTWAIN_SetTwainTimeout(milliseconds As Integer) As Integer
-            Return api.DTWAIN_SetTwainTimeout(milliseconds)
+        Return api.DTWAIN_SetTwainTimeout(milliseconds)
         End Function
-
+        
         Public Function DTWAIN_SetUpdateDibProc(DibProc As DTwainDIBUpdateProc) As DTwainDIBUpdateProc
-            Return api.DTWAIN_SetUpdateDibProc(DibProc)
+        Return api.DTWAIN_SetUpdateDibProc(DibProc)
         End Function
-
+        
         Public Function DTWAIN_SetXResolution(Source As System.IntPtr, xResolution As System.Double) As Integer
-            Return api.DTWAIN_SetXResolution(Source, xResolution)
+        Return api.DTWAIN_SetXResolution(Source, xResolution)
         End Function
-
+        
         Public Function DTWAIN_SetXResolutionString(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetXResolutionString(Source, Resolution)
+        Return api.DTWAIN_SetXResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetXResolutionStringA(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetXResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_SetXResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetXResolutionStringW(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetXResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_SetXResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetYResolution(Source As System.IntPtr, yResolution As System.Double) As Integer
-            Return api.DTWAIN_SetYResolution(Source, yResolution)
+        Return api.DTWAIN_SetYResolution(Source, yResolution)
         End Function
-
+        
         Public Function DTWAIN_SetYResolutionString(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetYResolutionString(Source, Resolution)
+        Return api.DTWAIN_SetYResolutionString(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetYResolutionStringA(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetYResolutionStringA(Source, Resolution)
+        Return api.DTWAIN_SetYResolutionStringA(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_SetYResolutionStringW(Source As System.IntPtr, Resolution As String) As Integer
-            Return api.DTWAIN_SetYResolutionStringW(Source, Resolution)
+        Return api.DTWAIN_SetYResolutionStringW(Source, Resolution)
         End Function
-
+        
         Public Function DTWAIN_ShowUIOnly(Source As System.IntPtr) As Integer
-            Return api.DTWAIN_ShowUIOnly(Source)
+        Return api.DTWAIN_ShowUIOnly(Source)
         End Function
-
+        
         Public Function DTWAIN_ShutdownOCREngine(OCREngine As System.IntPtr) As Integer
-            Return api.DTWAIN_ShutdownOCREngine(OCREngine)
+        Return api.DTWAIN_ShutdownOCREngine(OCREngine)
         End Function
-
+        
         Public Function DTWAIN_SkipImageInfoError(Source As System.IntPtr, bSkip As Integer) As Integer
-            Return api.DTWAIN_SkipImageInfoError(Source, bSkip)
+        Return api.DTWAIN_SkipImageInfoError(Source, bSkip)
         End Function
-
+        
         Public Function DTWAIN_StartThread(DLLHandle As System.IntPtr) As Integer
-            Return api.DTWAIN_StartThread(DLLHandle)
+        Return api.DTWAIN_StartThread(DLLHandle)
         End Function
-
+        
         Public Function DTWAIN_StartTwainSession(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-            Return api.DTWAIN_StartTwainSession(hWndMsg, lpszDLLName)
+        Return api.DTWAIN_StartTwainSession(hWndMsg, lpszDLLName)
         End Function
-
+        
         Public Function DTWAIN_StartTwainSessionA(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-            Return api.DTWAIN_StartTwainSessionA(hWndMsg, lpszDLLName)
+        Return api.DTWAIN_StartTwainSessionA(hWndMsg, lpszDLLName)
         End Function
-
+        
         Public Function DTWAIN_StartTwainSessionW(hWndMsg As System.IntPtr, lpszDLLName As String) As Integer
-            Return api.DTWAIN_StartTwainSessionW(hWndMsg, lpszDLLName)
+        Return api.DTWAIN_StartTwainSessionW(hWndMsg, lpszDLLName)
         End Function
-
+        
         Public Function DTWAIN_SysDestroy() As Integer
-            Return api.DTWAIN_SysDestroy()
+        Return api.DTWAIN_SysDestroy()
         End Function
-
+        
         Public Function DTWAIN_SysInitialize() As System.IntPtr
-            Return api.DTWAIN_SysInitialize()
+        Return api.DTWAIN_SysInitialize()
         End Function
-
+        
         Public Function DTWAIN_SysInitializeEx(szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeEx(szINIPath)
+        Return api.DTWAIN_SysInitializeEx(szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeEx2(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeEx2A(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeEx2A(szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeEx2A(szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeEx2W(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeEx2W(szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeEx2W(szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeExA(szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeExA(szINIPath)
+        Return api.DTWAIN_SysInitializeExA(szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeExW(szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeExW(szINIPath)
+        Return api.DTWAIN_SysInitializeExW(szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLib(hInstance As System.IntPtr) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLib(hInstance)
+        Return api.DTWAIN_SysInitializeLib(hInstance)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibEx(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibEx(hInstance, szINIPath)
+        Return api.DTWAIN_SysInitializeLibEx(hInstance, szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibEx2(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibEx2(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeLibEx2(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibEx2A(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibEx2A(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeLibEx2A(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibEx2W(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibEx2W(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
+        Return api.DTWAIN_SysInitializeLibEx2W(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibExA(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibExA(hInstance, szINIPath)
+        Return api.DTWAIN_SysInitializeLibExA(hInstance, szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeLibExW(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-            Return api.DTWAIN_SysInitializeLibExW(hInstance, szINIPath)
+        Return api.DTWAIN_SysInitializeLibExW(hInstance, szINIPath)
         End Function
-
+        
         Public Function DTWAIN_SysInitializeNoBlocking() As System.IntPtr
-            Return api.DTWAIN_SysInitializeNoBlocking()
+        Return api.DTWAIN_SysInitializeNoBlocking()
         End Function
-
+        
         Public Function DTWAIN_TestGetCap(Source As System.IntPtr, lCapability As Integer) As System.IntPtr
-            Return api.DTWAIN_TestGetCap(Source, lCapability)
+        Return api.DTWAIN_TestGetCap(Source, lCapability)
         End Function
-
+        
         Public Function DTWAIN_UnlockMemory(h As System.IntPtr) As Integer
-            Return api.DTWAIN_UnlockMemory(h)
+        Return api.DTWAIN_UnlockMemory(h)
         End Function
-
+        
         Public Function DTWAIN_UnlockMemoryEx(h As System.IntPtr) As Integer
-            Return api.DTWAIN_UnlockMemoryEx(h)
+        Return api.DTWAIN_UnlockMemoryEx(h)
         End Function
-
+        
         Public Function DTWAIN_UseMultipleThreads(bSet As Integer) As Integer
-            Return api.DTWAIN_UseMultipleThreads(bSet)
+        Return api.DTWAIN_UseMultipleThreads(bSet)
         End Function
         Private Class AllBindings
             Public DTWAIN_AcquireAudioFile As DTWAIN_AcquireAudioFileDelegate

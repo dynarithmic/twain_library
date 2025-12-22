@@ -343,13 +343,7 @@ Public Class VB_FullDemo
         End If
         EnableSourceItems(False)
     End Sub
-    REM Windows callback functions have differing WPARAM And LPARAM sizes, so make sure callback fits the correct
-    REM function prototype
-#If _X64 Then
-    Public Shared Function callbackfn(ByVal wparam As Long, ByVal lparam As Long, ByVal userval As Long) As Long
-#Else
-    Public Shared Function callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
-#End If
+    Public Shared Function callbackfn(ByVal wparam As IntPtr, ByVal lparam As IntPtr, ByVal userval As IntPtr) As IntPtr
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
