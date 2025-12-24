@@ -1,4 +1,4 @@
-Here is a Perl example using the  [dtwain.pl](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Perl) interface files that defines the DTWAIN constants and functions.  
+Here is a Perl example using the  [dtwainapi.pl](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Perl) interface files that defines the DTWAIN constants and functions.  
 
 The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
@@ -9,7 +9,7 @@ use warnings;
 $|++;
 use Win32::API;
 
-# DTWAIN Constants.  See DTWAIN.PL file for these values
+# DTWAIN Constants.  See DTWAINAPI.PL file for these values
 use constant DTWAIN_USENATIVE => 1;
 use constant DTWAIN_BMP => 100;
 use constant DTWAIN_USELONGNAME => 64;

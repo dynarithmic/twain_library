@@ -1,10 +1,10 @@
-Here is a Ruby example using the [Fiddle Foreign Function Interface wrapper](https://github.com/ruby/fiddle), and the  [dtwain.rb](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Ruby) interface file that defines the DTWAIN constants and functions.  
+Here is a Ruby example using the [Fiddle Foreign Function Interface wrapper](https://github.com/ruby/fiddle), and the  [dtwainapi.rb](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Ruby) interface file that defines the DTWAIN constants and functions.  
 
 The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
 ```ruby
 #!/usr/bin/env ruby
-require_relative 'dtwain'
+require_relative 'dtwainapi'
 
 if __FILE__ == $0
   # Initialize DTWAIN
