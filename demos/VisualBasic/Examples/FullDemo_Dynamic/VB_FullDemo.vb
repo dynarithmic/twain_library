@@ -489,7 +489,7 @@ Public Class VB_FullDemo
                 MsgBox(FileName + " has been created")
             Else
                 Dim numFiles As Integer
-                numFiles = DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource)
+                numFiles = DTWAINAPI.DTWAIN_GetFileSavePageCount(SelectedSource)
                 If numFiles = 0 Then
                     MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
                 End If
@@ -616,7 +616,7 @@ Public Class VB_FullDemo
                 End If
                 Return
             End If
-            If DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource) = 0 Then
+            If DTWAINAPI.DTWAIN_GetFileSavePageCount(SelectedSource) = 0 Then
                 MessageBox.Show("No files were saved")
             Else
                 MessageBox.Show("Image file saved successfully")

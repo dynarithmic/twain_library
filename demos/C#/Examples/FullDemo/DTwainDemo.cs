@@ -758,7 +758,7 @@ namespace TWAINDemo
                 if (status == TwainAPI.DTWAIN_TN_ACQUIREDONE)
                     MessageBox.Show("Image file saved successfully");
                 else
-                if (TwainAPI.DTWAIN_GetSavedFilesCount(SelectedSource) == 0)
+                if (TwainAPI.DTWAIN_GetFileSavePageCount(SelectedSource) == 0)
                     MessageBox.Show("No Images acquired");
                 else
                     MessageBox.Show("The acquisition returned a status of " + status.ToString());
