@@ -1,5 +1,5 @@
 #
-#  dtwain.py
+#  dtwainapi.py
 # 
 #  This file is part of the Dynarithmic TWAIN Library (DTWAIN).                          
 #  Copyright (c) 2002-2026 Dynarithmic Software.                                         

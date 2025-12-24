@@ -1,9 +1,9 @@
-Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants and functions.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
+Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwainapi.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants and functions.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
 
 ```python
 from ctypes import *
-import dtwain
+import dtwainapi
 import struct
 import ctypes as ct
 
