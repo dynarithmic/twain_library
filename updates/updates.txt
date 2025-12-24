@@ -28,6 +28,10 @@ DTWAIN Version changes
   calling DTWAIN_SelectSource2() (this fix is only for the Unicode build of the DTWAIN DLL's,
   i.e. dtwain32u.dll, dtwain32ud.dll, dtwain64u.dll, and dtwain64ud.dll)
 
+- Changed undocumented API function name from DTWAIN_GetSavedFilesCount to 
+  DTWAIN_GetFileSavePageCount.  This is a breaking change if your application used this
+  function.  In a future version of DTWAIN, this function will be fully documented.
+
 
 5.7.1
 
