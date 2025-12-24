@@ -2359,6 +2359,7 @@
         public delegate int DTWAIN_GetFeederOrderDelegate(DTWAIN_SOURCE Source, ref int lpOrder);
         public delegate int DTWAIN_GetFeederWaitTimeDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetFileCompressionTypeDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_GetFileSavePageCountDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetFileTypeExtensionsDelegate(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName, int nLength);
         public delegate int DTWAIN_GetFileTypeExtensionsADelegate(int nType, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszName, int nLength);
         public delegate int DTWAIN_GetFileTypeExtensionsWDelegate(int nType, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder lpszName, int nLength);
@@ -2470,7 +2471,6 @@
         public delegate int DTWAIN_GetSaveFileNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder fName, int nMaxLen);
         public delegate int DTWAIN_GetSaveFileNameADelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder fName, int nMaxLen);
         public delegate int DTWAIN_GetSaveFileNameWDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder fName, int nMaxLen);
-        public delegate int DTWAIN_GetSavedFilesCountDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetSessionDetailsDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh);
         public delegate int DTWAIN_GetSessionDetailsADelegate([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh);
         public delegate int DTWAIN_GetSessionDetailsWDelegate([MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh);
@@ -4397,6 +4397,9 @@
         [DTWAINNativeFunction("DTWAIN_GetFileCompressionType")]
         private readonly DTWAIN_GetFileCompressionTypeDelegate  _DTWAIN_GetFileCompressionType;
 
+        [DTWAINNativeFunction("DTWAIN_GetFileSavePageCount")]
+        private readonly DTWAIN_GetFileSavePageCountDelegate  _DTWAIN_GetFileSavePageCount;
+
         [DTWAINNativeFunction("DTWAIN_GetFileTypeExtensions")]
         private readonly DTWAIN_GetFileTypeExtensionsDelegate  _DTWAIN_GetFileTypeExtensions;
 
@@ -4729,9 +4732,6 @@
 
         [DTWAINNativeFunction("DTWAIN_GetSaveFileNameW")]
         private readonly DTWAIN_GetSaveFileNameWDelegate  _DTWAIN_GetSaveFileNameW;
-
-        [DTWAINNativeFunction("DTWAIN_GetSavedFilesCount")]
-        private readonly DTWAIN_GetSavedFilesCountDelegate  _DTWAIN_GetSavedFilesCount;
 
         [DTWAINNativeFunction("DTWAIN_GetSessionDetails")]
         private readonly DTWAIN_GetSessionDetailsDelegate  _DTWAIN_GetSessionDetails;
@@ -7738,6 +7738,9 @@
         public  int DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source)
         => _DTWAIN_GetFileCompressionType(Source);
 
+        public  int DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetFileSavePageCount(Source);
+
         public  int DTWAIN_GetFileTypeExtensions(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName, int nLength)
         => _DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength);
 
@@ -8070,9 +8073,6 @@
 
         public  int DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder fName, int nMaxLen)
         => _DTWAIN_GetSaveFileNameW(Source, fName, nMaxLen);
-
-        public  int DTWAIN_GetSavedFilesCount(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetSavedFilesCount(Source);
 
         public  int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh)
         => _DTWAIN_GetSessionDetails(szBuf, nSize, indentFactor, bRefresh);

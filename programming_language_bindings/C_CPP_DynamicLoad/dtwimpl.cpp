@@ -509,6 +509,7 @@
     D_GETFEEDERORDERFUNC                          DYNDTWAIN_API::DTWAIN_GetFeederOrder = nullptr;
     D_GETFEEDERWAITTIMEFUNC                       DYNDTWAIN_API::DTWAIN_GetFeederWaitTime = nullptr;
     D_GETFILECOMPRESSIONTYPEFUNC                  DYNDTWAIN_API::DTWAIN_GetFileCompressionType = nullptr;
+    D_GETFILESAVEPAGECOUNTFUNC                    DYNDTWAIN_API::DTWAIN_GetFileSavePageCount = nullptr;
     D_GETFILETYPEEXTENSIONSFUNC                   DYNDTWAIN_API::DTWAIN_GetFileTypeExtensions = nullptr;
     D_GETFILETYPEEXTENSIONSAFUNC                  DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsA = nullptr;
     D_GETFILETYPEEXTENSIONSWFUNC                  DYNDTWAIN_API::DTWAIN_GetFileTypeExtensionsW = nullptr;
@@ -620,7 +621,6 @@
     D_GETSAVEFILENAMEFUNC                         DYNDTWAIN_API::DTWAIN_GetSaveFileName = nullptr;
     D_GETSAVEFILENAMEAFUNC                        DYNDTWAIN_API::DTWAIN_GetSaveFileNameA = nullptr;
     D_GETSAVEFILENAMEWFUNC                        DYNDTWAIN_API::DTWAIN_GetSaveFileNameW = nullptr;
-    D_GETSAVEDFILESCOUNTFUNC                      DYNDTWAIN_API::DTWAIN_GetSavedFilesCount = nullptr;
     D_GETSESSIONDETAILSFUNC                       DYNDTWAIN_API::DTWAIN_GetSessionDetails = nullptr;
     D_GETSESSIONDETAILSAFUNC                      DYNDTWAIN_API::DTWAIN_GetSessionDetailsA = nullptr;
     D_GETSESSIONDETAILSWFUNC                      DYNDTWAIN_API::DTWAIN_GetSessionDetailsW = nullptr;
@@ -1694,6 +1694,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetFeederOrder, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFeederWaitTime, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileCompressionType, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetFileSavePageCount, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensions, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensionsA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetFileTypeExtensionsW, hModule);
@@ -1805,7 +1806,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSaveFileNameW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetSavedFilesCount, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSessionDetails, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSessionDetailsA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetSessionDetailsW, hModule);

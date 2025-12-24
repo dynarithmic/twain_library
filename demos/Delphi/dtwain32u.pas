@@ -2296,6 +2296,7 @@ function DTWAIN_GetFeederFuncs(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 
 function DTWAIN_GetFeederOrder(Source:DTWAIN_SOURCE; lpOrder:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederOrder';
 function DTWAIN_GetFeederWaitTime(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFeederWaitTime';
 function DTWAIN_GetFileCompressionType(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileCompressionType';
+function DTWAIN_GetFileSavePageCount(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileSavePageCount';
 function DTWAIN_GetFileTypeExtensions(nType:LONG; lpszName:LPTSTR; nLength:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileTypeExtensions';
 function DTWAIN_GetFileTypeExtensionsA(nType:LONG; lpszName:LPSTR; nLength:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileTypeExtensionsA';
 function DTWAIN_GetFileTypeExtensionsW(nType:LONG; lpszName:LPWSTR; nLength:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetFileTypeExtensionsW';
@@ -2407,7 +2408,6 @@ function DTWAIN_GetRotationStringW(Source:DTWAIN_SOURCE; Rotation:LPWSTR) : BOOL
 function DTWAIN_GetSaveFileName(Source:DTWAIN_SOURCE; fName:LPTSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileName';
 function DTWAIN_GetSaveFileNameA(Source:DTWAIN_SOURCE; fName:LPSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileNameA';
 function DTWAIN_GetSaveFileNameW(Source:DTWAIN_SOURCE; fName:LPWSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileNameW';
-function DTWAIN_GetSavedFilesCount(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSavedFilesCount';
 function DTWAIN_GetSessionDetails(szBuf:LPTSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetails';
 function DTWAIN_GetSessionDetailsA(szBuf:LPSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetailsA';
 function DTWAIN_GetSessionDetailsW(szBuf:LPWSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetailsW';

@@ -2217,6 +2217,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetFeederOrder.restype = ct.c_long
      theDLL.DTWAIN_GetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_GetFileCompressionType.restype = ct.c_long
+     theDLL.DTWAIN_GetFileSavePageCount.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensions.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsA.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsW.restype = ct.c_long
@@ -2328,7 +2329,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameW.restype = ct.c_long
-     theDLL.DTWAIN_GetSavedFilesCount.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetails.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsA.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsW.restype = ct.c_long
@@ -3315,6 +3315,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetFeederOrder.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetFeederWaitTime.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileCompressionType.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_GetFileSavePageCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileTypeExtensions.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -3420,7 +3421,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSaveFileName.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
-     theDLL.DTWAIN_GetSavedFilesCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSessionDetails.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsA.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsW.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
@@ -4412,6 +4412,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetFeederOrder.restype = ct.c_long
      theDLL.DTWAIN_GetFeederWaitTime.restype = ct.c_long
      theDLL.DTWAIN_GetFileCompressionType.restype = ct.c_long
+     theDLL.DTWAIN_GetFileSavePageCount.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensions.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsA.restype = ct.c_long
      theDLL.DTWAIN_GetFileTypeExtensionsW.restype = ct.c_long
@@ -4523,7 +4524,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameW.restype = ct.c_long
-     theDLL.DTWAIN_GetSavedFilesCount.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetails.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsA.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsW.restype = ct.c_long
@@ -5510,6 +5510,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetFeederOrder.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetFeederWaitTime.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileCompressionType.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_GetFileSavePageCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetFileTypeExtensions.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetFileTypeExtensionsW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -5615,7 +5616,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSaveFileName.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
-     theDLL.DTWAIN_GetSavedFilesCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSessionDetails.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsA.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsW.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]

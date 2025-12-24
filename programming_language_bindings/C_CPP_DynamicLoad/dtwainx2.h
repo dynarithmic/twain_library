@@ -502,6 +502,7 @@ typedef LONG (DLLENTRY_DEF * D_GETFEEDERFUNCSFUNC)                              
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETFEEDERORDERFUNC)                       (DTWAIN_SOURCE, LPLONG);
 typedef LONG (DLLENTRY_DEF * D_GETFEEDERWAITTIMEFUNC)                           (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETFILECOMPRESSIONTYPEFUNC)                      (DTWAIN_SOURCE);
+typedef LONG (DLLENTRY_DEF * D_GETFILESAVEPAGECOUNTFUNC)                        (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETFILETYPEEXTENSIONSFUNC)                       (LONG, LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETFILETYPEEXTENSIONSAFUNC)                      (LONG, LPSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETFILETYPEEXTENSIONSWFUNC)                      (LONG, LPWSTR, LONG);
@@ -613,7 +614,6 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETROTATIONSTRINGWFUNC)                   
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEFUNC)                             (DTWAIN_SOURCE, LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEAFUNC)                            (DTWAIN_SOURCE, LPSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEWFUNC)                            (DTWAIN_SOURCE, LPWSTR, LONG);
-typedef LONG (DLLENTRY_DEF * D_GETSAVEDFILESCOUNTFUNC)                          (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSFUNC)                           (LPTSTR, LONG, LONG, BOOL);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSAFUNC)                          (LPSTR, LONG, LONG, BOOL);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSWFUNC)                          (LPWSTR, LONG, LONG, BOOL);
@@ -1637,6 +1637,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETFEEDERORDERFUNC                             DTWAIN_GetFeederOrder;
     STATIC D_GETFEEDERWAITTIMEFUNC                          DTWAIN_GetFeederWaitTime;
     STATIC D_GETFILECOMPRESSIONTYPEFUNC                     DTWAIN_GetFileCompressionType;
+    STATIC D_GETFILESAVEPAGECOUNTFUNC                       DTWAIN_GetFileSavePageCount;
     STATIC D_GETFILETYPEEXTENSIONSFUNC                      DTWAIN_GetFileTypeExtensions;
     STATIC D_GETFILETYPEEXTENSIONSAFUNC                     DTWAIN_GetFileTypeExtensionsA;
     STATIC D_GETFILETYPEEXTENSIONSWFUNC                     DTWAIN_GetFileTypeExtensionsW;
@@ -1748,7 +1749,6 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETSAVEFILENAMEFUNC                            DTWAIN_GetSaveFileName;
     STATIC D_GETSAVEFILENAMEAFUNC                           DTWAIN_GetSaveFileNameA;
     STATIC D_GETSAVEFILENAMEWFUNC                           DTWAIN_GetSaveFileNameW;
-    STATIC D_GETSAVEDFILESCOUNTFUNC                         DTWAIN_GetSavedFilesCount;
     STATIC D_GETSESSIONDETAILSFUNC                          DTWAIN_GetSessionDetails;
     STATIC D_GETSESSIONDETAILSAFUNC                         DTWAIN_GetSessionDetailsA;
     STATIC D_GETSESSIONDETAILSWFUNC                         DTWAIN_GetSessionDetailsW;

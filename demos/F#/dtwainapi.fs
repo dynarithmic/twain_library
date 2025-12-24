@@ -3221,6 +3221,9 @@ module TwainAPI =
     type DTWAIN_GetFileCompressionTypeDelegate = delegate of DTWAIN_SOURCE -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_GetFileSavePageCountDelegate = delegate of DTWAIN_SOURCE -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_GetFileTypeExtensionsDelegate = delegate of LONG * System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
@@ -3552,9 +3555,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetSaveFileNameWDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder * LONG -> LONG
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_GetSavedFilesCountDelegate = delegate of DTWAIN_SOURCE -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_GetSessionDetailsDelegate = delegate of System.Text.StringBuilder * LONG * LONG * BOOL -> LONG
@@ -5627,6 +5627,7 @@ module TwainAPI =
     let private GetFeederOrder = lazy (DynamicDll.Bind "DTWAIN_GetFeederOrder" : DTWAIN_GetFeederOrderDelegate)
     let private GetFeederWaitTime = lazy (DynamicDll.Bind "DTWAIN_GetFeederWaitTime" : DTWAIN_GetFeederWaitTimeDelegate)
     let private GetFileCompressionType = lazy (DynamicDll.Bind "DTWAIN_GetFileCompressionType" : DTWAIN_GetFileCompressionTypeDelegate)
+    let private GetFileSavePageCount = lazy (DynamicDll.Bind "DTWAIN_GetFileSavePageCount" : DTWAIN_GetFileSavePageCountDelegate)
     let private GetFileTypeExtensions = lazy (DynamicDll.Bind "DTWAIN_GetFileTypeExtensions" : DTWAIN_GetFileTypeExtensionsDelegate)
     let private GetFileTypeExtensionsA = lazy (DynamicDll.Bind "DTWAIN_GetFileTypeExtensionsA" : DTWAIN_GetFileTypeExtensionsADelegate)
     let private GetFileTypeExtensionsW = lazy (DynamicDll.Bind "DTWAIN_GetFileTypeExtensionsW" : DTWAIN_GetFileTypeExtensionsWDelegate)
@@ -5738,7 +5739,6 @@ module TwainAPI =
     let private GetSaveFileName = lazy (DynamicDll.Bind "DTWAIN_GetSaveFileName" : DTWAIN_GetSaveFileNameDelegate)
     let private GetSaveFileNameA = lazy (DynamicDll.Bind "DTWAIN_GetSaveFileNameA" : DTWAIN_GetSaveFileNameADelegate)
     let private GetSaveFileNameW = lazy (DynamicDll.Bind "DTWAIN_GetSaveFileNameW" : DTWAIN_GetSaveFileNameWDelegate)
-    let private GetSavedFilesCount = lazy (DynamicDll.Bind "DTWAIN_GetSavedFilesCount" : DTWAIN_GetSavedFilesCountDelegate)
     let private GetSessionDetails = lazy (DynamicDll.Bind "DTWAIN_GetSessionDetails" : DTWAIN_GetSessionDetailsDelegate)
     let private GetSessionDetailsA = lazy (DynamicDll.Bind "DTWAIN_GetSessionDetailsA" : DTWAIN_GetSessionDetailsADelegate)
     let private GetSessionDetailsW = lazy (DynamicDll.Bind "DTWAIN_GetSessionDetailsW" : DTWAIN_GetSessionDetailsWDelegate)
@@ -8118,6 +8118,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetFileCompressionType.Value.Invoke(source)
 
+    let DTWAIN_GetFileSavePageCount (source: DTWAIN_SOURCE) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetFileSavePageCount.Value.Invoke(source)
+
     let DTWAIN_GetFileTypeExtensions (ntype: LONG) (lpszname: System.Text.StringBuilder) (nlength: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetFileTypeExtensions.Value.Invoke(ntype, lpszname, nlength)
@@ -8561,10 +8565,6 @@ module TwainAPI =
     let DTWAIN_GetSaveFileNameW (source: DTWAIN_SOURCE) (fname: System.Text.StringBuilder) (nmaxlen: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetSaveFileNameW.Value.Invoke(source, fname, nmaxlen)
-
-    let DTWAIN_GetSavedFilesCount (source: DTWAIN_SOURCE) : LONG =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetSavedFilesCount.Value.Invoke(source)
 
     let DTWAIN_GetSessionDetails (szbuf: System.Text.StringBuilder) (nsize: LONG) (indentfactor: LONG) (brefresh: BOOL) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

@@ -2201,6 +2201,7 @@ Class DTWAINAPI
     Public Declare Auto Function DTWAIN_GetFeederOrder Lib "dtwain64d.dll" (Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetFeederWaitTime Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer
     Public Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetFileSavePageCount Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer
     Public Declare Ansi Function DTWAIN_GetFileTypeExtensions Lib "dtwain64d.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain64d.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetFileTypeExtensionsW Lib "dtwain64d.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
@@ -2312,7 +2313,6 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetSaveFileName Lib "dtwain64d.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSaveFileNameA Lib "dtwain64d.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSaveFileNameW Lib "dtwain64d.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-    Public Declare Auto Function DTWAIN_GetSavedFilesCount Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer
     Public Declare Ansi Function DTWAIN_GetSessionDetails Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer

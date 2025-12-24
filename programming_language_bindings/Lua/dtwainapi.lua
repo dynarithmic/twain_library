@@ -531,6 +531,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, LPLONG lpOrder);
         LONG DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
+        LONG DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsA(LONG nType, LPSTR lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsW(LONG nType, LPWSTR lpszName, LONG nLength);
@@ -642,7 +643,6 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
-        LONG DTWAIN_GetSavedFilesCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -1700,6 +1700,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, LPLONG lpOrder);
         LONG DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
+        LONG DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsA(LONG nType, LPSTR lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsW(LONG nType, LPWSTR lpszName, LONG nLength);
@@ -1811,7 +1812,6 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
-        LONG DTWAIN_GetSavedFilesCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -2869,6 +2869,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, LPLONG lpOrder);
         LONG DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
+        LONG DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsA(LONG nType, LPSTR lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsW(LONG nType, LPWSTR lpszName, LONG nLength);
@@ -2980,7 +2981,6 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
-        LONG DTWAIN_GetSavedFilesCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -4038,6 +4038,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, LPLONG lpOrder);
         LONG DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
+        LONG DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetFileTypeExtensions(LONG nType, DTWAIN_CHARPTRTYPE lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsA(LONG nType, LPSTR lpszName, LONG nLength);
         LONG DTWAIN_GetFileTypeExtensionsW(LONG nType, LPWSTR lpszName, LONG nLength);
@@ -4149,7 +4150,6 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
-        LONG DTWAIN_GetSavedFilesCount(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
