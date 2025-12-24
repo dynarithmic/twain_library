@@ -68,7 +68,7 @@ begin
               end
               else
               begin
-                  PageCount := DTWAIN_GetSavedFilesCount(SelectedSource);
+                  PageCount := DTWAIN_GetFileSavePageCount(SelectedSource);
                   if (PageCount = 0) then
                   begin
                     { user canceled or no page acquired }

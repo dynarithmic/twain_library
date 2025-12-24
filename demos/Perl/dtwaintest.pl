@@ -10,7 +10,7 @@ use constant DTWAIN_BMP => 100;
 use constant DTWAIN_USELONGNAME => 64;
 use constant DTWAIN_PT_DEFAULT => 1000;
 
-# DTWAIN Functions the app will use.  See DTWAIN.PL file for these values
+# DTWAIN Functions the app will use.  See DTWAINAPI.PL file for these values
 my $dtwain_dllName = 'DTWAIN64.DLL';  # This is for 64-bit Perl.  Change this to 'DTWAIN32.DLL' for 32-bit Perl
 
 # Get these function definitions from DTWAIN.PL
@@ -80,7 +80,7 @@ if ( $isAvail == 1 )
             $DTWAIN_ArrayDestroy->Call($dtwain_array);
 
             # Acquire the image
-            $DTWAIN_AcquireFile->Call($TwainSource, 'c:\saved_images\testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
+            $DTWAIN_AcquireFile->Call($TwainSource, 'testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
                                       DTWAIN_PT_DEFAULT, 1, 1, 1, 0);
        }
    }

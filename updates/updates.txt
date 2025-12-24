@@ -1,5 +1,38 @@
 DTWAIN Version changes
 
+5.7.2
+
+- Fixed potential issue with setting the CAP_CAPTION capability.
+
+- Added Rust language bindings (dtwainapi.rs).
+
+- Added Go language bindings (dtwainapi.go).
+
+- Added F# language bindings (dtwainapi.fs).
+
+- Changed name of python binding to dtwainapi.py.
+
+- Changed name of Ruby binding to dtwainapi.rb.
+
+- Ruby language binding now includes a Ruby definition for the TWAIN TW_IDENTITY struct.
+
+- Updated C# and Visual Basic language bindings to properly handle DTWAIN
+  callback functions.
+
+- Added C# and Visual Basic language bindings that allows the C# or VB application to "manually" 
+  load the DTWAIN DLL at runtime (the names of the binding files are dtwain_dynamic.cs and 
+  dtwain_dynamic.vb, respectively).
+
+- Addressed issues with some language resources (Chinese, Greek, Japanese, etc.)
+  not displaying strings correctly within the TWAIN "Select Source" dialog when 
+  calling DTWAIN_SelectSource2() (this fix is only for the Unicode build of the DTWAIN DLL's,
+  i.e. dtwain32u.dll, dtwain32ud.dll, dtwain64u.dll, and dtwain64ud.dll)
+
+- Changed undocumented API function name from DTWAIN_GetSavedFilesCount to 
+  DTWAIN_GetFileSavePageCount.  This is a breaking change if your application used this
+  function.  In a future version of DTWAIN, this function will be fully documented.
+
+
 5.7.1
 
 - Change name of Ruby binding to dtwain.rb from dynarithmic.rb

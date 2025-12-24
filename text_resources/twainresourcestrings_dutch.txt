@@ -19,7 +19,7 @@
 1002 Kwalijken DTWAIN_SOURCE
 1003 Kwalijken DTWAIN_ARRAY
 1004 Onjuiste DTWAIN_ARRAY type
-1005 Index out of bounds want DTWAIN_ARRAY
+1005 Index buiten de grenzen van DTWAIN_ARRAY: %1
 1006 Out of heap herinnering
 1007 DTWAIN niet geschapen TWAIN raam
 1008 Kwalijken Pixel Getypt
@@ -27,7 +27,7 @@
 1010 No DTWAIN Sessie gestart.   Gebruik DTWAIN _StartTwainSession
 1011 Kwalijken DTWAIN_ACQUIRE nummer
 1012 Kwalijken TWAIN Vermogen
-1013 Bron niet gesteund vermogen
+1013 Bron niet gesteund vermogen: %1
 1014 Algemene TWAIN Vergissing
 1015 Mislukt Hook toepassing boodschap queue
 1016 Kwalijken Bestanden namen argument doorvarend
@@ -260,6 +260,7 @@
 3025 Standaardbron
 3026 Log gestart  
 3027 Log beëindigd
+3028 Laatste fout
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]
@@ -298,3 +299,15 @@
 9527 TWAIN Statuscode: Bewerking mislukt (document is te licht)
 9528 TWAIN Statuscode: Bewerking mislukt (document is te donker)
 9529 TWAIN Statuscode: Bewerking mislukt (bron heeft niets om te capturen voor overdracht)
+9600 TWAIN Retourcode: TWRC_SUCCESS  
+9601 TWAIN Retourcode: TWRC_FAILURE  
+9602 TWAIN Retourcode: TWRC_CHECKSTATUS  
+9603 TWAIN Retourcode: TWRC_CANCEL  
+9604 TWAIN Retourcode: TWRC_DSEVENT  
+9605 TWAIN Retourcode: TWRC_NOTDSEVENT  
+9606 TWAIN Retourcode: TWRC_XFERDONE  
+9607 TWAIN Retourcode: TWRC_ENDOFLIST  
+9608 TWAIN Retourcode: TWRC_INFONOTSUPPORTED  
+9609 TWAIN Retourcode: TWRC_DATANOTAVAILABLE  
+9610 TWAIN Retourcode: TWRC_BUSY  
+9611 TWAIN Retourcode: TWRC_SCANNERLOCKED

@@ -1,6 +1,6 @@
 [PROJECT]
     TARGET_DIR    = .\run
-    VERSION       = 2.3
+    Version = 2.3
     Project.xpj
 
 [Project.xpj]
