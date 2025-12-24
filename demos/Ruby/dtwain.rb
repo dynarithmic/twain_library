@@ -590,6 +590,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetFeederOrder
    attr_reader :DTWAIN_GetFeederWaitTime
    attr_reader :DTWAIN_GetFileCompressionType
+   attr_reader :DTWAIN_GetFileSavePageCount
    attr_reader :DTWAIN_GetFileTypeExtensions
    attr_reader :DTWAIN_GetFileTypeExtensionsA
    attr_reader :DTWAIN_GetFileTypeExtensionsW
@@ -701,7 +702,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetSaveFileName
    attr_reader :DTWAIN_GetSaveFileNameA
    attr_reader :DTWAIN_GetSaveFileNameW
-   attr_reader :DTWAIN_GetSavedFilesCount
    attr_reader :DTWAIN_GetSessionDetails
    attr_reader :DTWAIN_GetSessionDetailsA
    attr_reader :DTWAIN_GetSessionDetailsW
@@ -3387,6 +3387,7 @@ class DTWAINAPI
        @DTWAIN_GetFeederOrder = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederOrder'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetFeederWaitTime = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFeederWaitTime'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileCompressionType'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
+       @DTWAIN_GetFileSavePageCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileSavePageCount'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileTypeExtensions = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileTypeExtensions'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileTypeExtensionsA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileTypeExtensionsA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetFileTypeExtensionsW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetFileTypeExtensionsW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3498,7 +3499,6 @@ class DTWAINAPI
        @DTWAIN_GetSaveFileName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileName'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSaveFileNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSaveFileNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetSavedFilesCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSavedFilesCount'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetails = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetails'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetailsA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetailsA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetailsW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetailsW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)

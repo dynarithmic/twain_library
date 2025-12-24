@@ -10,8 +10,6 @@ DTWAIN Version changes
 
 - Added F# language bindings (dtwainapi.fs).
 
-- Changed names of Lua language bindings to dtwainapi.lua and dtwainapi_constants.lua.
-
 - Updated C# and Visual Basic language bindings to properly handle DTWAIN
   callback functions.
 

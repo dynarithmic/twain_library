@@ -502,6 +502,7 @@ type DtwaingetfeederfuncsFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetfeederorderFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetfeederwaittimeFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetfilecompressiontypeFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwaingetfilesavepagecountFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetfiletypeextensionsFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetfiletypeextensionsaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
 type DtwaingetfiletypeextensionswFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -613,7 +614,6 @@ type DtwaingetrotationstringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -
 type DtwaingetsavefilenameFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetsavefilenameaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32) -> i32;
 type DtwaingetsavefilenamewFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
-type DtwaingetsavedfilescountFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetsessiondetailsFunc = unsafe extern "C" fn(*mut u16,i32,i32,i32) -> i32;
 type DtwaingetsessiondetailsaFunc = unsafe extern "C" fn(*mut c_char,i32,i32,i32) -> i32;
 type DtwaingetsessiondetailswFunc = unsafe extern "C" fn(*mut u16,i32,i32,i32) -> i32;
@@ -1616,6 +1616,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetFeederOrderFunc: Symbol<'a, DtwaingetfeederorderFunc>,
     DTWAIN_GetFeederWaitTimeFunc: Symbol<'a, DtwaingetfeederwaittimeFunc>,
     DTWAIN_GetFileCompressionTypeFunc: Symbol<'a, DtwaingetfilecompressiontypeFunc>,
+    DTWAIN_GetFileSavePageCountFunc: Symbol<'a, DtwaingetfilesavepagecountFunc>,
     DTWAIN_GetFileTypeExtensionsFunc: Symbol<'a, DtwaingetfiletypeextensionsFunc>,
     DTWAIN_GetFileTypeExtensionsAFunc: Symbol<'a, DtwaingetfiletypeextensionsaFunc>,
     DTWAIN_GetFileTypeExtensionsWFunc: Symbol<'a, DtwaingetfiletypeextensionswFunc>,
@@ -1727,7 +1728,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetSaveFileNameFunc: Symbol<'a, DtwaingetsavefilenameFunc>,
     DTWAIN_GetSaveFileNameAFunc: Symbol<'a, DtwaingetsavefilenameaFunc>,
     DTWAIN_GetSaveFileNameWFunc: Symbol<'a, DtwaingetsavefilenamewFunc>,
-    DTWAIN_GetSavedFilesCountFunc: Symbol<'a, DtwaingetsavedfilescountFunc>,
     DTWAIN_GetSessionDetailsFunc: Symbol<'a, DtwaingetsessiondetailsFunc>,
     DTWAIN_GetSessionDetailsAFunc: Symbol<'a, DtwaingetsessiondetailsaFunc>,
     DTWAIN_GetSessionDetailsWFunc: Symbol<'a, DtwaingetsessiondetailswFunc>,
@@ -4377,6 +4377,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetFeederOrder: Symbol<DtwaingetfeederorderFunc> = unsafe { library.get(b"DTWAIN_GetFeederOrder")? };
         let DTWAIN_GetFeederWaitTime: Symbol<DtwaingetfeederwaittimeFunc> = unsafe { library.get(b"DTWAIN_GetFeederWaitTime")? };
         let DTWAIN_GetFileCompressionType: Symbol<DtwaingetfilecompressiontypeFunc> = unsafe { library.get(b"DTWAIN_GetFileCompressionType")? };
+        let DTWAIN_GetFileSavePageCount: Symbol<DtwaingetfilesavepagecountFunc> = unsafe { library.get(b"DTWAIN_GetFileSavePageCount")? };
         let DTWAIN_GetFileTypeExtensions: Symbol<DtwaingetfiletypeextensionsFunc> = unsafe { library.get(b"DTWAIN_GetFileTypeExtensions")? };
         let DTWAIN_GetFileTypeExtensionsA: Symbol<DtwaingetfiletypeextensionsaFunc> = unsafe { library.get(b"DTWAIN_GetFileTypeExtensionsA")? };
         let DTWAIN_GetFileTypeExtensionsW: Symbol<DtwaingetfiletypeextensionswFunc> = unsafe { library.get(b"DTWAIN_GetFileTypeExtensionsW")? };
@@ -4488,7 +4489,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetSaveFileName: Symbol<DtwaingetsavefilenameFunc> = unsafe { library.get(b"DTWAIN_GetSaveFileName")? };
         let DTWAIN_GetSaveFileNameA: Symbol<DtwaingetsavefilenameaFunc> = unsafe { library.get(b"DTWAIN_GetSaveFileNameA")? };
         let DTWAIN_GetSaveFileNameW: Symbol<DtwaingetsavefilenamewFunc> = unsafe { library.get(b"DTWAIN_GetSaveFileNameW")? };
-        let DTWAIN_GetSavedFilesCount: Symbol<DtwaingetsavedfilescountFunc> = unsafe { library.get(b"DTWAIN_GetSavedFilesCount")? };
         let DTWAIN_GetSessionDetails: Symbol<DtwaingetsessiondetailsFunc> = unsafe { library.get(b"DTWAIN_GetSessionDetails")? };
         let DTWAIN_GetSessionDetailsA: Symbol<DtwaingetsessiondetailsaFunc> = unsafe { library.get(b"DTWAIN_GetSessionDetailsA")? };
         let DTWAIN_GetSessionDetailsW: Symbol<DtwaingetsessiondetailswFunc> = unsafe { library.get(b"DTWAIN_GetSessionDetailsW")? };
@@ -5490,6 +5490,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetFeederOrderFunc: DTWAIN_GetFeederOrder,
             DTWAIN_GetFeederWaitTimeFunc: DTWAIN_GetFeederWaitTime,
             DTWAIN_GetFileCompressionTypeFunc: DTWAIN_GetFileCompressionType,
+            DTWAIN_GetFileSavePageCountFunc: DTWAIN_GetFileSavePageCount,
             DTWAIN_GetFileTypeExtensionsFunc: DTWAIN_GetFileTypeExtensions,
             DTWAIN_GetFileTypeExtensionsAFunc: DTWAIN_GetFileTypeExtensionsA,
             DTWAIN_GetFileTypeExtensionsWFunc: DTWAIN_GetFileTypeExtensionsW,
@@ -5601,7 +5602,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetSaveFileNameFunc: DTWAIN_GetSaveFileName,
             DTWAIN_GetSaveFileNameAFunc: DTWAIN_GetSaveFileNameA,
             DTWAIN_GetSaveFileNameWFunc: DTWAIN_GetSaveFileNameW,
-            DTWAIN_GetSavedFilesCountFunc: DTWAIN_GetSavedFilesCount,
             DTWAIN_GetSessionDetailsFunc: DTWAIN_GetSessionDetails,
             DTWAIN_GetSessionDetailsAFunc: DTWAIN_GetSessionDetailsA,
             DTWAIN_GetSessionDetailsWFunc: DTWAIN_GetSessionDetailsW,
@@ -7971,6 +7971,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetFileCompressionTypeFunc)(Source);  }
     }
 
+    pub fn DTWAIN_GetFileSavePageCount(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_GetFileSavePageCountFunc)(Source);  }
+    }
+
     pub fn DTWAIN_GetFileTypeExtensions(&self, nType: i32, lpszName: *mut u16, nLength: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetFileTypeExtensionsFunc)(nType, lpszName, nLength);  }
     }
@@ -8413,10 +8417,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetSaveFileNameW(&self, Source: *mut c_void, fName: *mut u16, nMaxLen: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetSaveFileNameWFunc)(Source, fName, nMaxLen);  }
-    }
-
-    pub fn DTWAIN_GetSavedFilesCount(&self, Source: *mut c_void) -> i32 {
-        unsafe { return (self.DTWAIN_GetSavedFilesCountFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetSessionDetails(&self, szBuf: *mut u16, nSize: i32, indentFactor: i32, bRefresh: i32) -> i32 {

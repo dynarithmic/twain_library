@@ -3284,6 +3284,9 @@ Namespace Dynarithmic
         Public Delegate Function DTWAIN_GetFileCompressionTypeDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
+        Public Delegate Function DTWAIN_GetFileSavePageCountDelegate(Source As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetFileTypeExtensionsDelegate(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
@@ -3615,9 +3618,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Public Delegate Function DTWAIN_GetSaveFileNameWDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
-        Public Delegate Function DTWAIN_GetSavedFilesCountDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Auto)>
         Public Delegate Function DTWAIN_GetSessionDetailsDelegate(<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
@@ -7073,6 +7073,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetFileCompressionType(Source)
         End Function
         
+        Public Function DTWAIN_GetFileSavePageCount(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetFileSavePageCount(Source)
+        End Function
+        
         Public Function DTWAIN_GetFileTypeExtensions(nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
         Return api.DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength)
         End Function
@@ -7515,10 +7519,6 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetSaveFileNameW(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
         Return api.DTWAIN_GetSaveFileNameW(Source, fName, nMaxLen)
-        End Function
-        
-        Public Function DTWAIN_GetSavedFilesCount(Source As System.IntPtr) As Integer
-        Return api.DTWAIN_GetSavedFilesCount(Source)
         End Function
         
         Public Function DTWAIN_GetSessionDetails(<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
@@ -10156,6 +10156,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetFeederOrder As DTWAIN_GetFeederOrderDelegate
             Public DTWAIN_GetFeederWaitTime As DTWAIN_GetFeederWaitTimeDelegate
             Public DTWAIN_GetFileCompressionType As DTWAIN_GetFileCompressionTypeDelegate
+            Public DTWAIN_GetFileSavePageCount As DTWAIN_GetFileSavePageCountDelegate
             Public DTWAIN_GetFileTypeExtensions As DTWAIN_GetFileTypeExtensionsDelegate
             Public DTWAIN_GetFileTypeExtensionsA As DTWAIN_GetFileTypeExtensionsADelegate
             Public DTWAIN_GetFileTypeExtensionsW As DTWAIN_GetFileTypeExtensionsWDelegate
@@ -10267,7 +10268,6 @@ Namespace Dynarithmic
             Public DTWAIN_GetSaveFileName As DTWAIN_GetSaveFileNameDelegate
             Public DTWAIN_GetSaveFileNameA As DTWAIN_GetSaveFileNameADelegate
             Public DTWAIN_GetSaveFileNameW As DTWAIN_GetSaveFileNameWDelegate
-            Public DTWAIN_GetSavedFilesCount As DTWAIN_GetSavedFilesCountDelegate
             Public DTWAIN_GetSessionDetails As DTWAIN_GetSessionDetailsDelegate
             Public DTWAIN_GetSessionDetailsA As DTWAIN_GetSessionDetailsADelegate
             Public DTWAIN_GetSessionDetailsW As DTWAIN_GetSessionDetailsWDelegate
