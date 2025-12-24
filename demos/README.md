@@ -3,10 +3,13 @@
 The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a [Delphi project](https://github.com/dynarithmic/twain_library/tree/master-staging/demos/Delphi/SimpleAcquire).  The other languages do not have "project files", instead the full source code of each demo program is presented in each of the respective language's folder.
 
 ----
+The demo programs for the other languages besides C/C++, C#, Visual Basic, and Delphi, consists of only the DTWAIN language binding file(s), plus a "main" demo program showing just *some* of the features of DTWAIN, but enough to get you started on using DTWAIN with your development language.  Thus you must already be familiar with setting up projects in your development environment, as giving tutorials on setting up Python, Go, Rust, etc. to use the interface files is beyond the scope of the demo programs.
+
+----
 ### <a name="build-demo"></a> Building the demo applications
 ##### C++
 
-If you wish to build the C and C++ demo applications, the **demos\AllDemos.sln** file can be loaded into Visual Studio 2019 or 2022.  Please note that you must build the base libraries first (by building using the **dtwain_5_vs2019.sln** project, mentioned above) before building the demos.  The demos consist of C and C++ language demos, plus C++ demos based on an experimental C++ wrapper library that is currently being developed.
+If you wish to build the C and C++ demo applications, the **demos\C_C++\AllDemos.sln** file can be loaded into Visual Studio 2019 or 2022.  Please note that you must build the base libraries first (by building using the **dtwain_5_vs2019.sln** project, mentioned above) before building the demos.  The demos consist of C and C++ language demos, plus C++ demos based on an experimental C++ wrapper library that is currently being developed.
 
 Please note that the C++ wrapper by default uses **C++17** as the language setting, since the wrapper uses various types and classes that only exist in  C++17 or higher.
 
@@ -19,7 +22,7 @@ and the directory c:\boost_installation should have a folder called **boost** wh
 ----
 ###### C#
 
-The C# demo is **demos\csharp\Examples\FullDemo\CSharp_FullDemo.csproj**
+The C# demo is **demos\C#\Examples\FullDemo\CSharp_FullDemo.csproj**
 This project is by default, setup for 32-bit Unicode (the dtwain32u.cs is part of the projects).  If you want to try 64-bit builds, please replace the dtwain32u.cs with one of the 64-bit .cs files (for example dtwain64u.cs).
 
 ----
