@@ -1,9 +1,9 @@
 ### Demo programs ###
 
-The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a [Delphi project](https://github.com/dynarithmic/twain_library/tree/master-staging/demos/Delphi/SimpleAcquire).  The other languages do not have "project files", instead the full source code of each demo program is presented in each of the respective language's folder.
+The demo programs for C, C# and Visual Basic consist of Visual Studio 2019 projects and a [Delphi project](https://github.com/dynarithmic/twain_library/tree/master-staging/demos/Delphi/SimpleAcquire).  The other languages do not have project files or similar, instead the full source code of each demo program is presented in each of the respective language's folder.
 
 ----
-The demo programs for the other languages besides C/C++, C#, Visual Basic, and Delphi, consists of only the DTWAIN language binding file(s), plus a "main" demo program showing just *some* of the features of DTWAIN, but enough to get you started on using DTWAIN with your development language.  Thus you must already be familiar with setting up projects in your development environment, as giving tutorials on setting up Python, Go, Rust, etc. to use the interface files is beyond the scope of the demo programs.
+The demo programs for the other languages besides C/C++, C#, Visual Basic, and Delphi, consists of only the DTWAIN language binding file(s), plus a main demo program showing just *some* of the features of DTWAIN, but enough to get you started on using DTWAIN with your development language.  Please note that you must already be familiar with setting up projects, directories, etc, in your development environment, as giving tutorials on this topic is beyond the scope of the demos presented here.
 
 ----
 ### <a name="build-demo"></a> Building the demo applications
