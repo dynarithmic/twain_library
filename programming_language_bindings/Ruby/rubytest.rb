@@ -20,7 +20,7 @@
 #
 
 #!/usr/bin/env ruby
-require_relative 'dtwain'
+require_relative 'dtwainapi'
 
 if __FILE__ == $0
   # Initialize DTWAIN

@@ -19,7 +19,7 @@
 1002 无效的 DTWAIN_SOURCE  
 1003 无效的 DTWAIN_ARRAY  
 1004 错误的 DTWAIN_ARRAY 类型  
-1005 DTWAIN_ARRAY 索引超出范围  
+1005 DTWAIN_ARRAY 索引超出范围  : %1
 1006 堆内存不足  
 1007 DTWAIN 无法创建 TWAIN 窗口  
 1008 无效的像素类型  
@@ -27,7 +27,7 @@
 1010 未启动 DTWAIN 会话。您必须调用 DTWAIN_StartTwainSession()  
 1011 无效的 DTWAIN_ACQUIRE 编号  
 1012 无效的 TWAIN 功能  
-1013 源不支持该功能  
+1013 源不支持该功能  : %1
 1014 一般 TWAIN 错误。请检查 DTWAIN_GetTwainError() 以获取更多信息  
 1015 无法挂钩应用程序消息队列  
 1016 传递了错误的文件名参数  
@@ -64,6 +64,7 @@
 1047 错误的能力数据类型  
 1048 能力具有未知数据类型  
 1049 DTWAIN 的演示版本不支持此文件类型  1050 源选择已取消  
+1050 资源选择已取消
 1051 找不到 DTWAIN 资源  
 1052 字符串与数组类型不匹配  
 1053 DTWAIN 数组不是相同类型  
@@ -260,6 +261,7 @@
 3025 默认源
 3026 日志开始  
 3027 日志结束
+3028 最后错误
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 在调用 Twain DSM 时发生异常错误。可能是 Twain 会话损坏？
 10000 [用户消息]
@@ -298,3 +300,15 @@
 9527 TWAIN 状态码：操作失败（文档太浅）  
 9528 TWAIN 状态码：操作失败（文档太暗）  
 9529 TWAIN 状态码：操作失败（源没有可捕获的内容）  
+9600 TWAIN 返回代码：TWRC_SUCCESS  
+9601 TWAIN 返回代码：TWRC_FAILURE  
+9602 TWAIN 返回代码：TWRC_CHECKSTATUS  
+9603 TWAIN 返回代码：TWRC_CANCEL  
+9604 TWAIN 返回代码：TWRC_DSEVENT  
+9605 TWAIN 返回代码：TWRC_NOTDSEVENT  
+9606 TWAIN 返回代码：TWRC_XFERDONE  
+9607 TWAIN 返回代码：TWRC_ENDOFLIST  
+9608 TWAIN 返回代码：TWRC_INFONOTSUPPORTED  
+9609 TWAIN 返回代码：TWRC_DATANOTAVAILABLE  
+9610 TWAIN 返回代码：TWRC_BUSY  
+9611 TWAIN 返回代码：TWRC_SCANNERLOCKED

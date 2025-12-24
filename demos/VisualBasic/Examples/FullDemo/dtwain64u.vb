@@ -1727,6 +1727,7 @@ Class DTWAINAPI
     Public Const DTWAIN_CONSTANT_ICAP As Integer = 78
     Public Const DTWAIN_CONSTANT_DTWAIN_CONT As Integer = 79
     Public Const DTWAIN_CONSTANT_CAPCODE_MAP As Integer = 80
+    Public Const DTWAIN_CONSTANT_ACAP As Integer = 81
     Public Const DTWAIN_USERRES_START As Integer = 20000
     Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
     Public Const DTWAIN_APIHANDLEOK As Integer = 1
@@ -1735,14 +1736,16 @@ Class DTWAINAPI
     Public Const DTWAIN_PDF_AES256 As Integer = 2
     Public Const DTWAIN_FEEDER_TERMINATE As Integer = 1
     Public Const DTWAIN_FEEDER_USEFLATBED As Integer = 2
-    Public Delegate Function DTwainCallback(WParam As Integer, LParam As Integer, UserData As Integer) As Integer
-    Public Delegate Function DTwainCallback64(WParam As Integer, LParam As Integer, UserData As Long) As Integer
-    Public Delegate Function DTwainErrorProc(param1 As Integer, param2 As Integer) As Integer
-    Public Delegate Function DTwainErrorProc64(param1 As Integer, param2 As Long) As Integer
-    Public Delegate Function DTwainLoggerProcA(<MarshalAs(UnmanagedType.LPStr)> lpszName As String, UserData As Long) As Integer
-    Public Delegate Function DTwainLoggerProcW(<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, UserData As Long) As Integer
-    Public Delegate Function DTwainLoggerProc(<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, UserData As Long) As Integer
-    Public Delegate Function DTwainDIBUpdateProc(TheSource As System.IntPtr, currentImage As Integer, DibData As System.IntPtr) As System.IntPtr
+
+    Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
+    Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
+    Public Delegate Function DTwainErrorProc(param1 As Integer, param2 As Integer) As IntPtr
+    Public Delegate Function DTwainErrorProc64(param1 As Integer, param2 As Long) As IntPtr
+    Public Delegate Function DTwainLoggerProcA(<MarshalAs(UnmanagedType.LPStr)> lpszName As String, UserData As Long) As IntPtr
+    Public Delegate Function DTwainLoggerProcW(<MarshalAs(UnmanagedType.LPWStr)> lpszName As String, UserData As Long) As IntPtr
+    Public Delegate Function DTwainDIBUpdateProc(TheSource As IntPtr, currentImage As Integer, DibData As IntPtr) As IntPtr
+    Public Delegate Function DTwainLoggerProc(<MarshalAs(UnmanagedType.LPTStr)> lpszName As String, UserData As Long) As IntPtr
+
 
     Public Declare Auto Function DTWAIN_AcquireAudioFile Lib "dtwain64u.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lMaxClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
     Public Declare Ansi Function DTWAIN_AcquireAudioFileA Lib "dtwain64u.dll" (Source As System.IntPtr, lpszFile As String, lFileFlags As Integer, lNumClips As Integer, bShowUI As Integer, bCloseSource As Integer, ByRef pStatus As Integer) As Integer
@@ -2096,6 +2099,7 @@ Class DTWAINAPI
     Public Declare Auto Function DTWAIN_GetAcquireArea2String Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetAcquireArea2StringA Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetAcquireArea2StringW Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> left As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> top As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> right As StringBuilder, <MarshalAs(UnmanagedType.LPWStr)> bottom As StringBuilder, ByRef Unit As Integer) As Integer
+    Public Declare Auto Function DTWAIN_GetAcquireAreaEx Lib "dtwain64u.dll" (Source As System.IntPtr, lGetType As Integer) As System.IntPtr
     Public Declare Auto Function DTWAIN_GetAcquireMetrics Lib "dtwain64u.dll" (source As System.IntPtr, ByRef ImageCount As Integer, ByRef SheetCount As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetAcquireStripBuffer Lib "dtwain64u.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Auto Function DTWAIN_GetAcquireStripData Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, ByRef lpBytesPerRow As UInteger, ByRef lpColumns As UInteger, ByRef lpRows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef lpBytesWritten As UInteger) As Integer
@@ -2130,6 +2134,7 @@ Class DTWAINAPI
     Public Declare Auto Function DTWAIN_GetCapArrayType Lib "dtwain64u.dll" (Source As System.IntPtr, nCap As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetCapContainer Lib "dtwain64u.dll" (Source As System.IntPtr, nCap As Integer, lCapType As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetCapContainerEx Lib "dtwain64u.dll" (nCap As Integer, bSetContainer As Integer, ByRef ConTypes As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetCapContainerEx2 Lib "dtwain64u.dll" (nCap As Integer, bSetContainer As Integer) As System.IntPtr
     Public Declare Auto Function DTWAIN_GetCapDataType Lib "dtwain64u.dll" (Source As System.IntPtr, nCap As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetCapFromName Lib "dtwain64u.dll" (szName As String) As Integer
     Public Declare Ansi Function DTWAIN_GetCapFromNameA Lib "dtwain64u.dll" (szName As String) As Integer
@@ -2197,6 +2202,7 @@ Class DTWAINAPI
     Public Declare Auto Function DTWAIN_GetFeederOrder Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lpOrder As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetFeederWaitTime Lib "dtwain64u.dll" (Source As System.IntPtr) As Integer
     Public Declare Auto Function DTWAIN_GetFileCompressionType Lib "dtwain64u.dll" (Source As System.IntPtr) As Integer
+    Public Declare Auto Function DTWAIN_GetFileSavePageCount Lib "dtwain64u.dll" (Source As System.IntPtr) As Integer
     Public Declare Auto Function DTWAIN_GetFileTypeExtensions Lib "dtwain64u.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszName As StringBuilder, nLength As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetFileTypeExtensionsA Lib "dtwain64u.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszName As StringBuilder, nLength As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetFileTypeExtensionsW Lib "dtwain64u.dll" (nType As Integer, <MarshalAs(UnmanagedType.LPWStr)> lpszName As StringBuilder, nLength As Integer) As Integer
@@ -2308,7 +2314,6 @@ Class DTWAINAPI
     Public Declare Auto Function DTWAIN_GetSaveFileName Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSaveFileNameA Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSaveFileNameW Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
-    Public Declare Auto Function DTWAIN_GetSavedFilesCount Lib "dtwain64u.dll" (Source As System.IntPtr) As Integer
     Public Declare Auto Function DTWAIN_GetSessionDetails Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSessionDetailsA Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSessionDetailsW Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
@@ -2324,7 +2329,6 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetSourceDetailsA Lib "dtwain64u.dll" (szSources As String, <MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSourceDetailsW Lib "dtwain64u.dll" (szSources As String, <MarshalAs(UnmanagedType.LPWStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Auto Function DTWAIN_GetSourceID Lib "dtwain64u.dll" (Source As System.IntPtr) As System.IntPtr
-    Declare Auto Function DTWAIN_GetSourceIDEx Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef pIdentity As TW_IDENTITY) As TW_IDENTITY
     Public Declare Auto Function DTWAIN_GetSourceManufacturer Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSourceManufacturerA Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nLength As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetSourceManufacturerW Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szProduct As StringBuilder, nLength As Integer) As Integer
@@ -2351,7 +2355,6 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetTimeDateA Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szTimeDate As StringBuilder) As Integer
     Public Declare Unicode Function DTWAIN_GetTimeDateW Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> szTimeDate As StringBuilder) As Integer
     Public Declare Auto Function DTWAIN_GetTwainAppID Lib "dtwain64u.dll" () As System.IntPtr
-    Declare Auto Function DTWAIN_GetTwainAppIDEx Lib "dtwain64u.dll" (ByRef pIdentity As TW_IDENTITY) As TW_IDENTITY
     Public Declare Auto Function DTWAIN_GetTwainAvailability Lib "dtwain64u.dll" () As Integer
     Public Declare Auto Function DTWAIN_GetTwainAvailabilityEx Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetTwainAvailabilityExA Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPStr)> szDirectories As StringBuilder, nLength As Integer) As Integer
