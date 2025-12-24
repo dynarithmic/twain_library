@@ -32,6 +32,12 @@ The Visual Basic demo is **demos\VisualBasic\Examples\FullDemo\VB_FullDemo.vbpro
 This project is by default, setup for 32-bit Unicode (the dtwain32u.vb is part of the projects).  If you want to try a 64-bit builds, please replace the dtwain32u.vb with one of the 64-bit .cs files (for example dtwain64u.vb).
 
 ----
+###### Other languages
+As noted above, you will need to set up your environment to include the interface files for the language you are using.  
+
+For example, if you use Visual Studio Code to develop in Go or Lua, you will need to set up your projects to include the interface file(s) (in these cases, for Go, you would need to add dtwainapi.go to your project, for Lua, the file would be dtwainapi.lua).  
+
+----
 ### Running the demos
 
 1) Make sure that the [DTWAIN DLL's](https://github.com/dynarithmic/twain_library/tree/master/binaries) are available (system PATH, your exe directory, etc.) when the demo program you are running starts.  A missing DLL will result in a "Dynamic Link Library not found" error at runtime.
