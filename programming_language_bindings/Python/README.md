@@ -3,7 +3,7 @@ Here is a python example using the [ctypes](https://docs.python.org/3/library/ct
 
 ```python
 from ctypes import *
-import dtwainapi
+import dtwainapi as dtwain
 import struct
 import ctypes as ct
 
