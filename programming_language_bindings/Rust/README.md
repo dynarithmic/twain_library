@@ -1,3 +1,24 @@
+Please note:
+1) The language binding for Rust will only support the following DTWAIN DLL's loaded at runtime:
+
+```plaintext
+dtwain32u.dll
+dtwain32ud.dll
+dtwain64u.dll
+dtwain64ud.dll
+```
+
+Basically, only the Unicode versions of DTWAIN are compatible with the Rust language binding.  Usage of the ANSI DLL's (dtwain32.dll, dtwain64.dll, etc.) will result in some DTWAIN function calls 
+failing that handle string parameters.
+
+2) The following dependency must be added to the Cargo.toml file:
+
+```plaintext
+[dependencies]
+libloading = "0.9.0"
+```
+----
+
 Here is a Rust example using  [dtwainapi.rs](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Rust) file that defines the DTWAIN constants and functions.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
 
 ```cpp
