@@ -1,5 +1,4 @@
 ﻿open System
-open System.Runtime.InteropServices
 open dtwainapi
 open System.Text
 
@@ -35,9 +34,9 @@ let main argv =
                     TwainAPI.DTWAIN_EnableMsgNotify 1 |> ignore   
 
                     // Now get the product name of the TWAIN source that was selected
-                    let prodname = new StringBuilder(256)
-                    let ret = TwainAPI.DTWAIN_GetSourceProductNameW sourceResult prodname 256
-                    printfn "The name of the selected TWAIN Source is: %s" (prodname.ToString())
+                    let buffer = new StringBuilder(256)
+                    let ret = TwainAPI.DTWAIN_GetSourceProductNameW sourceResult buffer 256
+                    printfn "The name of the selected TWAIN Source is: %s" (buffer.ToString())
 
                     // Example usage of DTWAIN_ARRAY:
                     // Get the device capabilities supported by the device
@@ -48,15 +47,15 @@ let main argv =
 
                     // Get the number of items in the array
                     let mutable arrcount = TwainAPI.DTWAIN_ArrayGetCount cap_array
-                    printfn "There are %d capabilities defined for device %s" (arrcount) (prodname.ToString())
+                    printfn "There are %d capabilities defined for device %s" (arrcount) (buffer.ToString())
 
                     // print each capability
                     let mutable long_val = 0
                     for i = 1 to arrcount do
                         let index = i - 1
                         TwainAPI.DTWAIN_ArrayGetAtLong cap_array index &long_val |> ignore
-                        TwainAPI.DTWAIN_GetNameFromCap long_val prodname 256 |> ignore
-                        printfn "Capability %d: %s  Value: %d" (i) (prodname.ToString()) (long_val)
+                        TwainAPI.DTWAIN_GetNameFromCap long_val buffer 256 |> ignore
+                        printfn "Capability %d: %s  Value: %d" (i) (buffer.ToString()) (long_val)
 
                     // Destroy the array when done
                     TwainAPI.DTWAIN_ArrayDestroy cap_array |> ignore
@@ -64,10 +63,20 @@ let main argv =
                     // Example of a callback that will "watch" when the TWAIN
                     // device acquires an image.  See the DTWAIN documentation
                     // on the notifications that will be sent to your application
-                    let myCallback wParam lParam (userData: int64) : nativeint =
+                    
+                    let get_notification_code (wParam : nativeint) =
+                        TwainAPI.DTWAIN_GetTwainNameFromConstantW (TwainAPI.DTWAIN_CONSTANT_DTWAIN_TN) (wParam.ToInt32()) (buffer) (256)  |> ignore
+                        ()
+                        
+                    let myCallback (wParam) (lParam) (userData: int64) : nativeint =
+
+                        // Get the name of the notification using DTWAIN_GetTwainNameFromConstant utility function
+                        get_notification_code wParam
+
+                        // print the callback information
                         printfn "DTWAIN Callback called!"
-                        printfn "  wParam = %d" (uint64 wParam)
-                        printfn "  lParam = 0x%016X" (uint64 lParam)
+                        printfn "  wParam = %s" (buffer.ToString())
+                        printfn "  lParam = 0x%016X" (uint64 lParam)  // This will have the value of the selected TWAI Source
                         printfn "  UserData = %016X" userData
                         nativeint 1 // Should always return 1 as a default
 

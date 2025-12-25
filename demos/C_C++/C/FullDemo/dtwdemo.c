@@ -733,7 +733,7 @@ void AcquireFile(BOOL bUseSource)
        (to be safe) */
     DTWAIN_ArrayDestroy( AFileNames );
     DTWAIN_OpenSource( g_CurrentSource );
-    LONG pageCount = DTWAIN_GetSavedFilesCount(g_CurrentSource);
+    LONG pageCount = DTWAIN_GetFileSavePageCount(g_CurrentSource);
     if ( !bAcquireOK || pageCount == 0 || !bPageOK )
     {
         if ( !bAcquireOK)
