@@ -346,8 +346,8 @@ To utilize other computer languages, it still requires that one of the [DTWAIN d
 
 DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-  [C/C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
-  [C/C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
+  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
+  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
   [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
   [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
   [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F#)\
