@@ -24,14 +24,20 @@ and the directory c:\boost_installation should have a folder called **boost** wh
 ----
 ###### C#
 
-The C# demo is **demos\C#\Examples\FullDemo\CSharp_FullDemo.csproj**
-This project is by default, setup for 32-bit Unicode (the dtwain32u.cs is part of the projects).  If you want to try 64-bit builds, please replace the dtwain32u.cs with one of the 64-bit .cs files (for example dtwain64u.cs).
+The C# demos are **demos\C#\Examples\FullDemo\CSharp_FullDemo.csproj** and **demos\C#\Examples\FullDemo_Dynamic\CSharp_FullDemo.csproj**.
+
+The **demos\C#\Examples\FullDemo\CSharp_FullDemo.csproj** project is by default, set up for 32-bit Unicode (the dtwain32u.cs is part of the projects).  If you want to try 64-bit builds, please replace the dtwain32u.cs with one of the 64-bit .cs files (for example dtwain64u.cs).
+
+For the **demos\C#\Examples\FullDemo_Dynamic\CSharp_FullDemo.csproj** project, the usage of the interface file **dtwain_dynamic.cs** allows the programmer at runtime to load the desired DTWAIN DLL.  Thus there is no need to change project settings if running 32-bit or 64-bit DTWAIN.
 
 ----
 ###### Visual Basic
 
-The Visual Basic demo is **demos\VisualBasic\Examples\FullDemo\VB_FullDemo.vbproj**
-This project is by default, setup for 32-bit Unicode (the dtwain32u.vb is part of the projects).  If you want to try a 64-bit builds, please replace the dtwain32u.vb with one of the 64-bit .cs files (for example dtwain64u.vb).
+The Visual Basic demos are **demos\VisualBasic\Examples\FullDemo\VB_FullDemo.vbproj** and **demos\VisualBasic\Examples\FullDemo_Dynamic\VB_FullDemo.vbproj**.
+
+The project **demos\VisualBasic\Examples\FullDemo\VB_FullDemo.vbproj** is by default, set up for 32-bit Unicode (the dtwain32u.vb is part of the projects).  If you want to try a 64-bit builds, please replace the dtwain32u.vb with one of the 64-bit .cs files (for example dtwain64u.vb).
+
+For the **demos\VisualBasic\Examples\FullDemo_Dynamic\VB_FullDemo.vbproj** project, the usage of the interface file **dtwain_dynamic.vb** allows the programmer at runtime to load the desired DTWAIN DLL.  Thus there is no need to change project settings if running 32-bit or 64-bit DTWAIN.
 
 ----
 ###### Other languages
