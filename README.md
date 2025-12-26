@@ -16,9 +16,9 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, and numerous other languages.
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, F#, and numerous other languages.
 
-* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
+* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, F#, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
 
@@ -171,7 +171,6 @@ More detailed instructions on adding your own resource file can be found <a href
 
 ----------
 ### Ok, how about a code sample?
-
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
     #include <iostream>
@@ -320,6 +319,8 @@ Of course, if the capability does not exist on the device, or if the values give
 
 In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.  
 
+There are [other demo C and C++ programs](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) that you can use to more advanced features of DTWAIN.
+
 ----------
 
 <a name="alternatecompilers"></a>
@@ -345,7 +346,8 @@ To utilize other computer languages, it still requires that one of the [DTWAIN d
 
 DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-  [C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad)\
+  [C/C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
+  [C/C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.
   [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
   [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
   [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F#)\
