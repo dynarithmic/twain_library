@@ -1,3 +1,18 @@
+This is a **D** example using  [dtwainapi.d](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/D) file that defines the DTWAIN API constants and functions.  The program gives an example of 
+1) Selecting a TWAIN device installed on your system, 
+
+2) displaying a list of the capabilities available to the device,
+
+3) How to setup a callback function to and 
+
+4) Start the TWAIN device and acquire to a BMP file.
+
+Please note that the DTWAIN DLL's that are supported are the Unicode versions of the DLL, i.e. dtwain32u.dll, dtwain32ud.dll, dtwain64u.dll, and dtwain64ud.dll.  
+
+Since the Unicode version of the DTWAIN API also has ANSI equivalent functions (API functions whose names end with the letter "A"), your application can still call the ANSI functions if deemed necessary.
+
+
+```cpp
 import std.stdio;
 import std.conv;
 import dtwainapi;
@@ -43,7 +58,7 @@ void main()
     }
 
     // Select a TWAIN source by using the enhanced 
-        // TWAIN Select Source dialog (we can center it on the screen)
+    // TWAIN Select Source dialog (we can center it on the screen)
     auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_SCREEN);
 
     if ( !TwainSource )
@@ -97,4 +112,5 @@ void main()
     // any callbacks you have set do not fire when DTWAIN is closed.
     dll.DTWAIN_SysDestroy();
 }
+```
 

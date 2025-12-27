@@ -18,7 +18,7 @@
 
 * DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, F#, and numerous other languages.
 
-* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, F#, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
+* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, D, Delphi, F#, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
 
@@ -349,6 +349,7 @@ DTWAIN includes computer language bindings and demo programs for the following c
   [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
   [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
   [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
+  [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)\
   [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
   [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F#)\
   [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)\
