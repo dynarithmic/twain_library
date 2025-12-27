@@ -12,11 +12,11 @@ extern(Windows) ptrint myCallback64(ptrint wParam, ptrint lParam, long userData)
 
     // Get the name of the notification using the DTWAIN utility function to get string versions
     // of most of the TWAIN-related and DTWAIN-related constants
-	char [256] szNotification;
+        char [256] szNotification;
     auto len = theDLL.DTWAIN_GetTwainNameFromConstantA(theDLL.DTWAIN_CONSTANT_DTWAIN_TN, // The constant type
-													   wParam,  // The actual constant value
-													   cast(char *)szNotification, // name is returned here
-													   256); // maximum size of the output buffer 
+                                                       wParam,  // The actual constant value
+                                                       cast(char *)szNotification, // name is returned here
+                                                       256); // maximum size of the output buffer 
 
     immutable log = format("Notification=%s, lParam=%s\n", szNotification[0 .. len-1], lParam);
 
@@ -29,27 +29,28 @@ void main()
 {
     // Load the DTWAIN DLL, depending on the environemnt
     string defaultDLL = "dtwain64u.dll"; // 64-bit
-	static if (ptrint.sizeof == 4) 
+
+    static if (ptrint.sizeof == 4) 
         defaultDLL = "dtwain32u.dll";    // 32-bit
-	auto dll = new DTWAIN_DynamicDLL(defaultDLL);
+    auto dll = new DTWAIN_DynamicDLL(defaultDLL);
 
     // Initialize DTWAIN
     auto dtwain_handle = dll.DTWAIN_SysInitialize();
     if ( !dtwain_handle )
-	{
+    {
         writeln("DTWAIN failed initialization");
         return;
-	}
+    }
 
     // Select a TWAIN source by using the enhanced 
-	// TWAIN Select Source dialog (we can center it on the screen)
+        // TWAIN Select Source dialog (we can center it on the screen)
     auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_SCREEN);
 
     if ( !TwainSource )
-	{
+    {
         writeln("No source was selected");
         return;
-	}
+    }
 
     // Display the source product name
     char [256] szBuffer;
@@ -72,12 +73,12 @@ void main()
     // to DTWAIN_ArrayGetAtLong() each time
     int* ptrCapArray = cast(int *)dll.DTWAIN_ArrayGetBuffer(capArray, 0);
     for (int i = 0; i < arrayCount; ++i)
-	{
+    {
         // Get the name of the capability
         len = dll.DTWAIN_GetNameFromCapA(*ptrCapArray, cast(char*)szBuffer, 256);
         writeln("Capability ", i + 1, ": ", szBuffer[0 .. len-1], "  Value: ", *ptrCapArray);
         ++ptrCapArray; // Go to next cap in the array
-	}
+    }
 
     // Now demonstrate setting up a callback for notification processing.
     // We must enable the notification "engine" first
@@ -89,10 +90,11 @@ void main()
 
     // Now let's acquire a page from the device and save to a BMP file
     dll.DTWAIN_AcquireFileA(TwainSource, "testd.bmp", 
-							dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
+                                                        dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
                            dll.DTWAIN_PT_DEFAULT, 1,1,1, null);
 
     // Now close down DTWAIN.  You *must* do this when done using DTWAIN, so that resources are freed, and that
     // any callbacks you have set do not fire when DTWAIN is closed.
     dll.DTWAIN_SysDestroy();
 }
+

@@ -4,11 +4,12 @@ DTWAIN Version changes
 
 - Fixed potential issue with setting the CAP_CAPTION capability.
 
-- Added Rust language bindings (dtwainapi.rs).
+- Added the following language bindings:
 
-- Added Go language bindings (dtwainapi.go).
-
-- Added F# language bindings (dtwainapi.fs).
+    D    (dtwainapi.d)
+    F#   (dtwainapi.fs).
+    Go   (dtwainapi.go).
+    Rust (dtwainapi.rs).
 
 - Changed name of python binding to dtwainapi.py.
 
