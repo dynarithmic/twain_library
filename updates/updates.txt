@@ -4,7 +4,7 @@ DTWAIN Version changes
 
 - Fixed potential issue with setting the CAP_CAPTION capability.
 
-- Added the following language bindings:
+- Added the following programming language bindings:
 
     D    (dtwainapi.d)
     F#   (dtwainapi.fs).
