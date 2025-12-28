@@ -19,7 +19,7 @@
 1002 DTWAIN_SOURCE invalid  
 1003 DTWAIN_ARRAY invalid  
 1004 Tip DTWAIN_ARRAY incorect  
-1005 Index în afara limitelor pentru DTWAIN_ARRAY  
+1005 Index în afara limitelor pentru DTWAIN_ARRAY: %1  
 1006 Memorie heap epuizată  
 1007 DTWAIN nu a putut crea fereastra TWAIN  
 1008 Tip de pixel invalid  
@@ -27,7 +27,7 @@
 1010 Nici o sesiune DTWAIN nu a fost începută. Trebuie să apelați DTWAIN_StartTwainSession()  
 1011 Număr DTWAIN_ACQUIRE invalid  
 1012 Capacitate TWAIN invalidă  
-1013 Sursa nu suportă capacitatea  
+1013 Sursa nu suportă capacitatea: %1  
 1014 Eroare generală TWAIN. Verificați DTWAIN_GetTwainError() pentru mai multe informații  
 1015 Eșec la conectarea cozii de mesaje a aplicației  
 1016 Argumentul numelui fișierului a fost transmis incorect  
@@ -261,6 +261,7 @@
 3025 Sursa Implicită
 3026 Jurnal început  
 3027 Jurnal încheiat
+3028 Ultima eroare
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
 10000 [Mesaj utilizator]
@@ -299,3 +300,15 @@
 9527 Cod de condiție TWAIN: Operațiune eșuată (document prea deschis)  
 9528 Cod de condiție TWAIN: Operațiune eșuată (document prea întunecat)  
 9529 Cod de condiție TWAIN: Operațiune eșuată (sursa nu are nimic de capturat pentru transfer)  
+9600 Cod de returnare TWAIN: TWRC_SUCCESS
+9601 Cod de returnare TWAIN: TWRC_FAILURE
+9602 Cod de returnare TWAIN: TWRC_CHECKSTATUS
+9603 Cod de returnare TWAIN: TWRC_CANCEL
+9604 Cod de returnare TWAIN: TWRC_DSEVENT
+9605 Cod de returnare TWAIN: TWRC_NOTDSEVENT
+9606 Cod de returnare TWAIN: TWRC_XFERDONE
+9607 Cod de returnare TWAIN: TWRC_ENDOFLIST
+9608 Cod de returnare TWAIN: TWRC_INFONOTSUPPORTED
+9609 Cod de returnare TWAIN: TWRC_DATANOTAVAILABLE
+9610 Cod de returnare TWAIN: TWRC_BUSY
+9611 Cod de returnare TWAIN: TWRC_SCANNERLOCKED

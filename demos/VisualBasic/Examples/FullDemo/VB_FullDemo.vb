@@ -343,8 +343,7 @@ Public Class VB_FullDemo
         End If
         EnableSourceItems(False)
     End Sub
-
-    Public Shared Function callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
+    Public Shared Function callbackfn(ByVal wparam As IntPtr, ByVal lparam As IntPtr, ByVal userval As IntPtr) As IntPtr
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
@@ -441,7 +440,7 @@ Public Class VB_FullDemo
         Me.Enabled = False
         Dim Status As Integer
         If SelectedSource <> 0 Then
-            If DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status) Then
+            If CBool(DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status)) Then
                 'setting clipboard data to picturebox 
                 Me.Focus()
             End If
@@ -481,7 +480,7 @@ Public Class VB_FullDemo
                 MsgBox(FileName + " has been created")
             Else
                 Dim numFiles As Integer
-                numFiles = DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource)
+                numFiles = DTWAINAPI.DTWAIN_GetFileSavePageCount(SelectedSource)
                 If numFiles = 0 Then
                     MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
                 End If
@@ -608,7 +607,7 @@ Public Class VB_FullDemo
                 End If
                 Return
             End If
-            If DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource) = 0 Then
+            If DTWAINAPI.DTWAIN_GetFileSavePageCount(SelectedSource) = 0 Then
                 MessageBox.Show("No files were saved")
             Else
                 MessageBox.Show("Image file saved successfully")

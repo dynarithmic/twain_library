@@ -19,7 +19,7 @@
 1002 Fonte DTWAIN Inválida  
 1003 ARRAY DTWAIN Inválido  
 1004 Tipo de ARRAY DTWAIN Incorreto  
-1005 Índice fora dos limites para ARRAY DTWAIN  
+1005 Índice fora dos limites para ARRAY DTWAIN: %1 
 1006 Fora da memória heap  
 1007 DTWAIN Não conseguiu criar a janela TWAIN  
 1008 Tipo de Pixel Inválido  
@@ -27,7 +27,7 @@
 1010 Nenhuma sessão DTWAIN foi iniciada. Você deve chamar DTWAIN_StartTwainSession()  
 1011 Número DTWAIN_ACQUIRE inválido  
 1012 Capacidade TWAIN inválida  
-1013 Fonte não suporta a capacidade  
+1013 Fonte não suporta a capacidade: %1  
 1014 Erro geral TWAIN. Verifique DTWAIN_GetTwainError() para mais informações  
 1015 Falha ao conectar a fila de mensagens da aplicação  
 1016 Argumento de nome de arquivo inválido foi passado  
@@ -261,6 +261,7 @@
 3025 Fonte Padrão
 3026 Registro iniciado  
 3027 Registro encerrado
+3028 Último erro
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 9999 Ocorreu um erro de exceção durante a chamada ao DSM Twain. Sessão Twain possivelmente corrompida?
@@ -300,3 +301,15 @@
 9527 Código de Condição TWAIN: Operação falhou (documento muito claro)  
 9528 Código de Condição TWAIN: Operação falhou (documento muito escuro)  
 9529 Código de Condição TWAIN: Operação falhou (fonte não tem nada para capturar para transferência)  
+9600 Código de Retorno TWAIN: TWRC_SUCESSO  
+9601 Código de Retorno TWAIN: TWRC_FALHA  
+9602 Código de Retorno TWAIN: TWRC_VERIFICARSTATUS  
+9603 Código de Retorno TWAIN: TWRC_CANCELAR  
+9604 Código de Retorno TWAIN: TWRC_EVENTODSE  
+9605 Código de Retorno TWAIN: TWRC_NAOEVENTODSE  
+9606 Código de Retorno TWAIN: TWRC_TRANSFERENCIACONCLUIDA  
+9607 Código de Retorno TWAIN: TWRC_FIMDALISTA  
+9608 Código de Retorno TWAIN: TWRC_INFORMACAONAOAPOIADA  
+9609 Código de Retorno TWAIN: TWRC_DADOSNAOINDISPONIVEIS  
+9610 Código de Retorno TWAIN: TWRC_OCUPADO  
+9611 Código de Retorno TWAIN: TWRC_SCANNERBLOQUEADO

@@ -19,7 +19,7 @@
 1002 Ungültige DTWAIN_SOURCE
 1003 Ungültiges DTWAIN_ARRAY
 1004 Unrichtiger DTWAIN_ARRAY Type
-1005 Index außerhalb der erlaubten Grenzen für DTWAIN_ARRAY
+1005 Index außerhalb der erlaubten Grenzen für DTWAIN_ARRAY: %1
 1006 Kein Speicher mehr!
 1007 DTWAIN konnte TWAIN Fenster nicht erstellen
 1008 Ungültiger Pixel Typ
@@ -27,7 +27,7 @@
 1010 Es wurde noch keine DTWAIN Session begonnen. Verwenden Sie DTWAIN_StartTwainSession().
 1011 Ungültige DTWAIN_ACQUIRE Nummer
 1012 Ungültige TWAIN Fähigkeit
-1013 Quelle unterstützt die Fähigkeit nicht
+1013 Quelle unterstützt die Fähigkeit nicht: %1
 1014 Allgemeiner TWAIN Fehler. Verwenden Sie DTWAIN_GetTwainError für detailiertere Fehlermeldung.
 1015 Fenster Nachrichtenschleife konnte nicht abgefangen werden
 1016 Ungültiges Dateinamenargument wurde angegeben
@@ -260,6 +260,7 @@
 3025 Standardquelle
 3026 Protokoll gestartet  
 3027 Protokoll beendet
+3028 Letzter Fehler
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Benutzernachricht]
@@ -298,3 +299,15 @@
 9527 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Dokument zu hell)
 9528 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Dokument zu dunkel)
 9529 TWAIN-Bedingungscode: Vorgang fehlgeschlagen (Quelle hat nichts zum Erfassen für die Übertragung)
+9600 TWAIN Rückgabecode: TWRC_SUCCESS  
+9601 TWAIN Rückgabecode: TWRC_FAILURE  
+9602 TWAIN Rückgabecode: TWRC_CHECKSTATUS  
+9603 TWAIN Rückgabecode: TWRC_CANCEL  
+9604 TWAIN Rückgabecode: TWRC_DSEVENT  
+9605 TWAIN Rückgabecode: TWRC_NOTDSEVENT  
+9606 TWAIN Rückgabecode: TWRC_XFERDONE  
+9607 TWAIN Rückgabecode: TWRC_ENDOFLIST  
+9608 TWAIN Rückgabecode: TWRC_INFONOTSUPPORTED  
+9609 TWAIN Rückgabecode: TWRC_DATANOTAVAILABLE  
+9610 TWAIN Rückgabecode: TWRC_BUSY  
+9611 TWAIN Rückgabecode: TWRC_SCANNERLOCKED

@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.7.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.7.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -16,9 +16,9 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Java, Ruby, and numerous other languages.
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, F#, and numerous other languages.
 
-* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, Delphi, Lua, Java, Visual Basic, Perl, Python, Ruby** (and other languages) application, you've come to the right place.  
+* If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, D, Delphi, F#, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
 
@@ -118,6 +118,13 @@ A breakdown of the files contained in **release_libraries.zip** is as follows:
     dtwain64.pdb   --  64-bit PDB (Microsoft debug) files for dtwain64.dll
     dtwain64u.pdb  --  64-bit PDB (Microsoft debug) files for dtwain64u.dll
 
+Please note that the files with the "u" in the name are Unicode aware.  If your application requires Unicode-based string processing, it is always best to use the "u" versions of the above files.  
+
+For example, if you plan to use the [language text resources](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources) that use UTF-8 character sequences that have issues displaying properly using the ANSI version of the library (for example, Greek), you should use one of the "u" DLL's listed above.  More info on the language text resources are found later in this README.
+
+The DTWAIN API has available ANSI-aware functions even in the Unicode versions of the library, in the event your Unicode application needs to process ANSI strings.  This is usually done by the API function ends with "A", for example `DTWAIN_GetSourceProductNameA` for the ANSI version of the function `DTWAIN_GetSourceProductName`.  Similarly, there are Unicode or wide-character functions available for the ANSI version of the DLL's in the event your ANSI-based application needs to process wide/Unicode strings (for example `DTWAIN_GetSourceProductNameW` for the wide-character version of the function `DTWAIN_GetSourceProductName`).
+
+----
 
 ###### Information for C and C++ programmers:
 
@@ -164,7 +171,6 @@ More detailed instructions on adding your own resource file can be found <a href
 
 ----------
 ### Ok, how about a code sample?
-
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
     #include <iostream>
@@ -313,12 +319,12 @@ Of course, if the capability does not exist on the device, or if the values give
 
 In general, DTWAIN can set or get any capability, including custom capabilities that some manufacturers may support, and any future capabilities that may be added to the TWAIN specification.  
 
-
+There are [other demo C and C++ programs](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) that you can use to more advanced features of DTWAIN.
 
 ----------
 
 <a name="alternatecompilers"></a>
-### What if I don't have Visual C++ as the compiler to use when building an application?  The Visual C++ import libraries will not work for me.  I use Embarcadero/g++/clang/MingW (fill in with your favorite compiler or IDE).  So how do I use the library?
+### What if I am a C++ programmer, but I don't have Visual C++ as the compiler to use when building an application?  The Visual C++ import libraries will not work for me.  I use Embarcadero/g++/clang/MingW (fill in with your favorite compiler or IDE).  So how do I use the library?
 
 You can do one of two things:
 
@@ -327,226 +333,44 @@ You can do one of two things:
 
 For the first item, some compilers have external tools that allow you to use Visual Studio generated library files.  However, there still may be some quirks in those tools that do not create correct import libraries.  
 
-For the second item, no import libraries are required, thus makes this choice the recommended option.  
-
-There are many DTWAIN functions, and you might be fearful of having to write code that tediously tries to create function pointers, call **GetProcAddress**, etc.  There is no need to do that, as there are bindings that we have built that facilitate the usage of LoadLibrary/GetProcAddress/FreeLibrary Windows API functions.  It can be [found here](https://github.com/dynarithmic/twain_library/blob/master/programming_language_bindings/C_CPP_DynamicLoad).  
-
-In addition, one of the files in the set of bindings is the C/C++ source file **dtwimpl.cpp** (or **dtwimpl.c** if you are using plain C) -- this file will need to be added to your project, as it contains the needed infrastructure for the binding to work properly.  Failure to add this source file will result in linker errors when building your application.
-
-Here is an example of code that works for both the LoadLibrary/GetProcAddress technique, and the "normal" sDTWAIN usage of import libraries.
-
-    #ifdef USING_LOADLIBRARY
-       /* Include this header */
-        #include "dtwainx2.h"
-        #define API_INSTANCE API.
-        
-        /* declare the API instance and the handle to the loaded library */
-        DYNDTWAIN_API API;
-        HMODULE h;
-    #else
-        #include "dtwain.h"
-        #define API_INSTANCE
-    #endif
-
-    int main()
-    {
-        #ifdef USING_LOADLIBRARY
-        /* Load the library dynamically, and hook up the external functions */  
-        h = LoadLibraryA("dtwain32.dll");
-        if ( !h )
-            return -1; /* DTWAIN DLL was not found or could not be loaded */
-        API_INSTANCE InitDTWAINInterface(&API, h);
-        #endif
-        
-        API_INSTANCE DTWAIN_SysInitialize();
-        DTWAIN_SOURCE Source = API_INSTANCE DTWAIN_SelectSource();
-        if ( Source )
-            API_INSTANCE DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, 
-                                    DTWAIN_USENATIVE | DTWAIN_USENAME, DTWAIN_PT_DEFAULT, 
-                                    DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
-        API_INSTANCE DTWAIN_SysDestroy();         
-    }         
-
-The code above makes use of a preprocessor macro called **USING_LOADLIBRARY** that when defined will use the LoadLibrary technique.  If **USING_LOADLIBRARY** is defined, then the header file **dtwainx2.h** is utilized, otherwise the normal **dtwain.h** header is used.  In addition, the **API_INSTANCE** prefix is set to the **API.** text.
-
-Note that your code has to call **LoadLibrary** with the appropriate DTWAIN DLL name.  If the DLL is found at runtime, the **InitDTWAINInterface** is called with the address of the API instance and the returned module handle from the **LoadLibrary** call.
-
-The **InitDTWAINInterface** function fills the API instance with all of the function pointers that exist in the DLL, where each function pointer matches the name of the DTWAIN function.  Basically, all of the calls to **GetProcAddress** that you would have had to normally write is taken care of in the **InitDTWAINInterface** function.  From there, all you have to do is preface all the DTWAIN calls with **API_INSTANCE**, since it will either be **API.** or blank, depending on whether the **USING_LOADLIBRARY** was defined.
+For the second item, the [C/C++ dynamic bindings](https://github.com/dynarithmic/twain_library/blob/master/programming_language_bindings/C_CPP_DynamicLoad) should be used that easily facilitate usage of LoadLibrary, GetProcAddress, etc. without your application having to do the tedious and error-prone setup of function pointers, parameter types, return types, etc.  
 
 ----------
 
 <a name="otherlanguages"></a>
 ### Wait...What about other computer languages?  Does this library only work for C and C++ applications? ###
 
-Note: To utilize other computer languages, it still requires that one of the [DTWAIN dynamic link libraries (DLL)](#dtwaindllusage) is available at runtime that matches the environment (32-bit or 64-bit), and character set (ANSI, Unicode).  In addition the section on [running your application](#runningapplication) also applies.
+DTWAIN will work with any computer language that can make calls to an external Windows DLL function.  The DTWAIN DLL's export all the API functions with a "C" interface and with the `__stdcall` calling convention (don't worry if you don't know about calling conventions -- basically all the Windows DLL's in your Windows installation have these properties, so DTWAIN is really no different than those other DLL's in terms of how you would call the exported functions).  
 
-----
+To utilize other computer languages, it still requires that one of the [DTWAIN dynamic link libraries (DLL)](#dtwaindllusage) is available at runtime that matches the environment (32-bit or 64-bit), and character set (ANSI, Unicode).  In addition the section on [running your application](#runningapplication) also applies.
 
-DTWAIN includes computer language bindings for the following computer languages and utilities found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
+DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-      C/C++ header and source files for dynamic loading using the Windows API LoadLibrary() and GetProcAddress() functions.
-      C# 
-      Delphi
-      Java (separate repository -- see Note below)
-      Lua
-      Perl
-      Python 
-      Ruby
-      Visual Basic .NET 
-      XBase++ (Alaska Software)
-  
+  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
+  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
+  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
+  [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)\
+  [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
+  [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F#)\
+  [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)\
+  [Java*](https://github.com/dynarithmic/twain_library-java)\
+  [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)\
+  [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)\
+  [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)\
+  [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)\
+  [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)\
+  [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)\
+  [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
+
 * Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
-----
-###### Quick Example (C#)  
-Here is a bare-bones C# language example of selecting a TWAIN device, displaying the capabilities available on the device, and acquiring a BMP image from the TWAIN device.  The only additional requirement is to add one of the <a href="https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/csharp" target="_blank">dtwain*.cs</a> files to the project, depending on the type of application (32-bit / 64-bit, ANSI / Unicode):
-
-```csharp
-using System;
-// The additional dtwain*.cs file needs to be added to your project for these definitions.
-using Dynarithmic; 
-using DTWAIN_ARRAY = System.IntPtr;
-
-namespace Test
-{    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Initialize DTWAIN
-            var TwainHandle = TwainAPI.DTWAIN_SysInitialize();
-            if (TwainHandle == IntPtr.Zero)
-                Console.WriteLine("TWAIN Failed to be initialized.  Exiting...");
-            else
-            {
-                // Select a TWAIN Source from the TWAIN Dialog
-                var SelectedSource = TwainAPI.DTWAIN_SelectSource();
-                if (SelectedSource != IntPtr.Zero)
-                {
-                    // Display the product name of the Source
-                    StringBuilder szInfo = new StringBuilder(256);
-                    TwainAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256);
-                    Console.WriteLine("The source product name is " + szInfo.ToString());
-
-                    // Get the capabilities the device supports
-                    DTWAIN_ARRAY dtwain_array = IntPtr.Zero;
-                    TwainAPI.DTWAIN_EnumSupportedCaps(SelectedSource, ref dtwain_array);
-
-                    // Get the number of items in the array
-                    int arrcount = TwainAPI.DTWAIN_ArrayGetCount(dtwain_array);
-                    Console.WriteLine("There are " + arrcount + " device capabilities");
-
-                    // Print each capability
-                    for (int curCap = 1; curCap <= arrcount; ++curCap)
-                    {
-                        int int_val = 0;
-                        
-                        // Note that LONG values in the DTWAIN API are 32-bit integers.
-                        TwainAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap-1, ref int_val);
-                        TwainAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256);
-                        Console.WriteLine("Capability " + curCap + ": " + szInfo.ToString() + "  Value: " +                     int_val);
-                    }
-
-                    int status = 0;
-                    // Acquire the BMP file named Test.bmp
-                    TwainAPI.DTWAIN_AcquireFile(SelectedSource,
-                                                "Test.bmp",
-                                                 TwainAPI.DTWAIN_BMP,
-                                                 TwainAPI.DTWAIN_USENATIVE | TwainAPI.DTWAIN_USENAME,
-                                                 TwainAPI.DTWAIN_PT_DEFAULT,
-                                                 1,
-                                                 1,
-                                                 1,
-                                                 ref status);
-                }
-                TwainAPI.DTWAIN_SysDestroy();
-            }
-        }
-    }
-}
-```
-----
-###### Quick Example (Python)  
-
-Here is a python example using the [ctypes](https://docs.python.org/3/library/ctypes.html) module and using the [dtwain.py](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/Python) file that defines the DTWAIN constants.  The program gives an example of selecting a TWAIN device installed on your system, displaying a list of the capabilities available to the device, and acquiring a BMP image.
-
-
-```python
-from ctypes import *
-import dtwain
-import struct
-import ctypes as ct
-
-def test_dtwain():
-    # Load the DTWAIN library (make sure "dtwain32u.dll" or "dtwain64u.dll" is accessible)
-    # You can use a full pathname here also, to ensure python finds the dll
-    
-    # Check for the python environment, and load the Unicode 64-bit or 32-bit DLL
-    if struct.calcsize("P") * 8 == 64:
-        dtwain_dll = dtwain.load_dtwaindll("dtwain64u.dll")
-    else:
-        dtwain_dll = dtwain.load_dtwaindll("dtwain32u.dll")
-
-    # Initialize DTWAIN
-    dtwain_dll.DTWAIN_SysInitialize()
-    
-    # Select a TWAIN source
-    TwainSource = dtwain_dll.DTWAIN_SelectSource()
-    if TwainSource:
-
-        # Display the product name of the Source
-        # Create a char buffer to allow calling DTWAIN_GetSourceProductNameA
-        #
-        # If instead you wanted to call DTWAIN_GetSourceProductName, you will need a Unicode
-        # buffer, i.e. ct.create_unicode_buffer(100), as python loaded the Unicode versions
-        # of the DTWAIN DLL
-        #
-        mystrbuf = ct.create_string_buffer(100)
-        dtwain_dll.DTWAIN_GetSourceProductNameA(TwainSource, mystrbuf, len(mystrbuf))
-        print (mystrbuf.value)
-        
-        # Example usage of DTWAIN_ARRAY:
-        # Get the device capabilities supported by the device
-        #
-        # Note: The DTWAIN_ARRAY, DTWAIN_SOURCE, DTWAIN_FRAME, and DTWAIN_RANGE are actually void pointers
-        # so you have to declare them as such if a DTWAIN function requires a parameter to be of this type.
-        dtwain_array = ct.c_void_p(0)
-
-        # Note that the second parameter is the address a DTWAIN_ARRAY, i.e. a LPDTWAIN_ARRAY
-        dtwain_dll.DTWAIN_EnumSupportedCaps(TwainSource, ct.byref(dtwain_array))
-
-        # Get the number of items in the array
-        arrcount = dtwain_dll.DTWAIN_ArrayGetCount(dtwain_array)
-        print(f"There are {arrcount} device capabilities")
-
-        #print each capability
-        for i in range(arrcount):
-            long_val = ct.c_long(0)
-            dtwain_dll.DTWAIN_ArrayGetAtLong(dtwain_array, i, ct.byref(long_val))
-            dtwain_dll.DTWAIN_GetNameFromCapA(long_val, mystrbuf, len(mystrbuf))
-            print(f"Capability {i+1}: {mystrbuf.value}  Value: {long_val.value}")
-
-        # Destroy the array when done
-        dtwain_dll.DTWAIN_ArrayDestroy(dtwain_array)
-
-        # Now Acquire to a BMP file
-        dtwain_dll.DTWAIN_AcquireFile(TwainSource, "TEST.BMP", dtwain.DTWAIN_BMP, dtwain.DTWAIN_USELONGNAME,
-                                       dtwain.DTWAIN_PT_DEFAULT, 1, 1, 1, None)
-    # Close down DTWAIN                                      
-    dtwain_dll.DTWAIN_SysDestroy()
-
-if __name__ == '__main__':
-    test_dtwain()
-```
-----
-Other languages can be supported, as long as the language is capable of calling exported DLL functions.  The ones listed above just have proper interfaces to the exported functions already set up.
+Other languages can be supported, as long as the language is capable of calling exported DLL functions.  The ones listed above have had proper interfaces to the exported functions already set up.
 
 A full C# demo can be found <a href="https://github.com/dynarithmic/twain_library-csharp_demo" target="_blank">here</a>.
 
 A full Visual Basic .NET demo can be found <a href="https://github.com/dynarithmic/twain_library-visualbasic_demo" target="_blank">here</a>.
 
 For Java, it is recommended to look through the numerous demo programs in the [Java interface to DTWAIN repository](https://github.com/dynarithmic/twain_library-java).
-
 
 ----------
 
@@ -699,4 +523,3 @@ Note that issues will **not** be addressed at **dynarithmic.com** (website or em
 The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
 
 In addition to 30+ years in the industry, I have made extensive contributions to the [CodeGuru](http://www.codeguru.com) C++ and Visual C++ forums, being one of the top contributors for over 15 years starting in 1999, and since 2014, moved on to  [StackOverflow](https://stackoverflow.com/users/3133316/paulmckenzie?tab=profile), where hopefully I am making an impact with other passionate programmers.  Also, I have had the distinction of being a Microsoft MVP for 10 years running in the Visual C++ category.
- 

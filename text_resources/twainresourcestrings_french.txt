@@ -19,7 +19,7 @@
 1002 Invalide DTWAIN_SOURCE
 1003 Invalide DTWAIN_ARRAY
 1004 DTWAIN_ARRAY incorrect du caractère
-1005 Index sur bonds pour le DTWAIN_ARRAY
+1005 Index sur bonds pour le DTWAIN_ARRAY: %1
 1006 Sur mémoire de monceau
 1007 DTWAIN TWAIN ne pouvait pas créer fenêtre
 1008 Pixel Invalide Tape
@@ -27,7 +27,7 @@
 1010 Séance aucune de DTWAIN fut démarrée.
 1011 Invalide DTWAIN_ACQUIER chiffre
 1012 Twain Invalid Capacité
-1013 La source ne soutient pas la capacité
+1013 La source ne soutient pas la capacité: %1
 1014 Faute générale de TWAIN.
 1015 Manquai pour Accrocher de la demande message queue
 1016 Discussion de nom mauvais de Dossier fut passée
@@ -261,6 +261,7 @@
 3025 Source par défaut
 3026 Journal démarré  
 3027 Journal terminé
+3028 Dernière erreur
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Message de l'utilisateur]
@@ -300,3 +301,15 @@
 9527 Code d'état TWAIN : Opération échouée (document trop clair)
 9528 Code d'état TWAIN : Opération échouée (document trop sombre)
 9529 Code d'état TWAIN : Opération échouée (la source n'a rien à capturer pour le transfert)
+9600 Code de retour TWAIN : TWRC_SUCCESS  
+9601 Code de retour TWAIN : TWRC_FAILURE  
+9602 Code de retour TWAIN : TWRC_CHECKSTATUS  
+9603 Code de retour TWAIN : TWRC_CANCEL  
+9604 Code de retour TWAIN : TWRC_DSEVENT  
+9605 Code de retour TWAIN : TWRC_NOTDSEVENT  
+9606 Code de retour TWAIN : TWRC_XFERDONE  
+9607 Code de retour TWAIN : TWRC_ENDOFLIST  
+9608 Code de retour TWAIN : TWRC_INFONOTSUPPORTED  
+9609 Code de retour TWAIN : TWRC_DATANOTAVAILABLE  
+9610 Code de retour TWAIN : TWRC_BUSY  
+9611 Code de retour TWAIN : TWRC_SCANNERLOCKED
