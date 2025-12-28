@@ -19,7 +19,7 @@
 1002 無効な DTWAIN_SOURCE  
 1003 無効な DTWAIN_ARRAY  
 1004 不正な DTWAIN_ARRAY タイプ  
-1005 DTWAIN_ARRAY のインデックスが範囲外です  
+1005 DTWAIN_ARRAY のインデックスが範囲外です : %1 
 1006 ヒープメモリが不足しています  
 1007 DTWAIN は TWAIN ウィンドウを作成できませんでした  
 1008 無効なピクセルタイプ  
@@ -27,7 +27,7 @@
 1010 DTWAIN セッションが開始されていません。 DTWAIN_StartTwainSession() を呼び出す必要があります  
 1011 無効な DTWAIN_ACQUIRE 番号  
 1012 無効な TWAIN 機能  
-1013 ソースは機能をサポートしていません  
+1013 ソースは機能をサポートしていません  : %1
 1014 一般的な TWAIN エラー。 詳細については DTWAIN_GetTwainError() を確認してください  
 1015 アプリケーションメッセージキューのフックに失敗しました  
 1016 無効なファイル名引数が渡されました  
@@ -261,6 +261,7 @@
 3025 デフォルトソース
 3026 ログ開始
 3027 ログ終了
+3028 最後のエラー
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9999 Twain DSMへの呼び出し中に例外エラーが発生しました。破損したTwainセッションの可能性がありますか？
 10000 [ユーザーメッセージ]
@@ -299,3 +300,15 @@
 9527 TWAIN 条件コード: 操作に失敗しました（文書が薄すぎます）  
 9528 TWAIN 条件コード: 操作に失敗しました（文書が暗すぎます）  
 9529 TWAIN 条件コード: 操作に失敗しました（転送するためにキャプチャするものがありません）  
+9600 TWAIN リターンコード: TWRC_SUCCESS  
+9601 TWAIN リターンコード: TWRC_FAILURE  
+9602 TWAIN リターンコード: TWRC_CHECKSTATUS  
+9603 TWAIN リターンコード: TWRC_CANCEL  
+9604 TWAIN リターンコード: TWRC_DSEVENT  
+9605 TWAIN リターンコード: TWRC_NOTDSEVENT  
+9606 TWAIN リターンコード: TWRC_XFERDONE  
+9607 TWAIN リターンコード: TWRC_ENDOFLIST  
+9608 TWAIN リターンコード: TWRC_INFONOTSUPPORTED  
+9609 TWAIN リターンコード: TWRC_DATANOTAVAILABLE  
+9610 TWAIN リターンコード: TWRC_BUSY  
+9611 TWAIN リターンコード: TWRC_SCANNERLOCKED
