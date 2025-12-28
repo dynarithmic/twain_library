@@ -348,10 +348,10 @@ DTWAIN includes computer language bindings and demo programs for the following c
 
   [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
   [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
-  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C#)\
+  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)\
   [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)\
   [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
-  [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F#)\
+  [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)\
   [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)\
   [Java*](https://github.com/dynarithmic/twain_library-java)\
   [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)\
@@ -479,7 +479,7 @@ We have language bindings (pinvoke's) for C# and Visual Basic.  However we curre
 ----------
 ### Is there a C++ class wrapper for DTWAIN? ###
 
-If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/cpp_wrapper_lib" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
+If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/C_C%2B%2B/cpp_wrapper_lib" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
 
 ----------
 
