@@ -27,7 +27,7 @@ extern(Windows) ptrint myCallback64(ptrint wParam, ptrint lParam, long userData)
 
     // Get the name of the notification using the DTWAIN utility function to get string versions
     // of most of the TWAIN-related and DTWAIN-related constants
-        char [256] szNotification;
+    char [256] szNotification;
     auto len = theDLL.DTWAIN_GetTwainNameFromConstantA(theDLL.DTWAIN_CONSTANT_DTWAIN_TN, // The constant type
                                                        wParam,  // The actual constant value
                                                        cast(char *)szNotification, // name is returned here
@@ -105,8 +105,8 @@ void main()
 
     // Now let's acquire a page from the device and save to a BMP file
     dll.DTWAIN_AcquireFileA(TwainSource, "testd.bmp", 
-                                                        dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
-                           dll.DTWAIN_PT_DEFAULT, 1,1,1, null);
+                            dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
+                            dll.DTWAIN_PT_DEFAULT, 1,1,1, null);
 
     // Now close down DTWAIN.  You *must* do this when done using DTWAIN, so that resources are freed, and that
     // any callbacks you have set do not fire when DTWAIN is closed.
