@@ -69,6 +69,8 @@ namespace TWAINDemo
         private String sOrigTitle;
         private Boolean initialized;
         private TwainAPI.DTwainCallback theCallback;
+        private DTWAIN_PDFTEXTELEMENT textElement;
+        private int pdf_page_count = 1;
 
         public static Dynarithmic.TwainAPI TwainAPI = null; 
 
@@ -76,17 +78,28 @@ namespace TWAINDemo
         {
             switch (wParam)
             {
+                case TwainAPI.DTWAIN_TN_ACQUIRESTARTED:
+                    pdf_page_count = 1;
+                break;
+
+                // If this is a PDF file this code will put a page stamp on this page 
+                case TwainAPI.DTWAIN_TN_FILEPAGESAVING:
+                    string text = "Page " + pdf_page_count;
+                    ++pdf_page_count;
+                    TwainAPI.DTWAIN_SetPDFTextElementString(textElement, text, TwainAPI.DTWAIN_PDFTEXTELEMENT_TEXT);
+                break;
+
                 case TwainAPI.DTWAIN_TN_QUERYPAGEDISCARD:
                     DIBDisplayerDlg2 sDIBDlg = new DIBDisplayerDlg2(TwainAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource));
                     if (sDIBDlg.ShowDialog() == DialogResult.Cancel)
                         return 0;
-                    break;
+                break;
             }
             return 1;
         }
 
         public DTwainDemo()
-        {
+		{
             initialized = false;
             InitializeComponent();
 
@@ -116,6 +129,10 @@ namespace TWAINDemo
             theCallback += CallbackProc;
             TwainAPI.DTWAIN_EnableMsgNotify(1);
             TwainAPI.DTWAIN_SetCallback(theCallback, 0);
+            textElement = TwainAPI.DTWAIN_CreatePDFTextElement();
+            TwainAPI.DTWAIN_SetPDFTextElementLong(textElement, 100, 100, TwainAPI.DTWAIN_PDFTEXTELEMENT_POSITION);
+            TwainAPI.DTWAIN_SetPDFTextElementLong(textElement, TwainAPI.DTWAIN_PDFTEXT_ALLPAGES, 0, TwainAPI.DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS);
+            TwainAPI.DTWAIN_SetPDFTextElementFloat(textElement, 25, 0, TwainAPI.DTWAIN_PDFTEXTELEMENT_FONTHEIGHT);
         }
 
         public Boolean InitializedOk() { return initialized; }
@@ -545,6 +562,7 @@ namespace TWAINDemo
             {
                 if (TwainAPI.DTWAIN_OpenSource(SelectedSource) != 0)
                 {
+                    TwainAPI.DTWAIN_AddPDFTextElement(SelectedSource, textElement);
                     TwainAPI.DTWAIN_EnableFeeder(SelectedSource, 1);
                     SetCaptionToSourceName();
                     EnableSourceItems(true);

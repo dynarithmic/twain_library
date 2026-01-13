@@ -1633,6 +1633,9 @@ module TwainAPI =
     let public DTWAIN_PDFTEXT_NORGBCOLOR = 0x02000000
     let public DTWAIN_PDFTEXT_NOFONTSIZE = 0x04000000
     let public DTWAIN_PDFTEXT_NOABSPOSITION = 0x08000000
+    let public DTWAIN_PDFTEXT_NOROTATION = 0x10000000
+    let public DTWAIN_PDFTEXT_NOSKEWING = 0x20000000
+    let public DTWAIN_PDFTEXT_NOSCALINGXY = 0x40000000
     let public DTWAIN_PDFTEXT_IGNOREALL = 0xFFF00000
     let public DTWAIN_FONT_COURIER = 0
     let public DTWAIN_FONT_COURIERBOLD = 1
@@ -1669,31 +1672,13 @@ module TwainAPI =
     let public DTWAIN_PDFTEXTELEMENT_TEXTLENGTH = 14
     let public DTWAIN_PDFTEXTELEMENT_SKEWANGLES = 15
     let public DTWAIN_PDFTEXTELEMENT_TRANSFORMORDER = 16
-    let public DTWAIN_PDFTEXTTRANSFORM_TSRK = 0
-    let public DTWAIN_PDFTEXTTRANSFORM_TSKR = 1
-    let public DTWAIN_PDFTEXTTRANSFORM_TKSR = 2
-    let public DTWAIN_PDFTEXTTRANSFORM_TKRS = 3
-    let public DTWAIN_PDFTEXTTRANSFORM_TRSK = 4
-    let public DTWAIN_PDFTEXTTRANSFORM_TRKS = 5
-    let public DTWAIN_PDFTEXTTRANSFORM_STRK = 6
-    let public DTWAIN_PDFTEXTTRANSFORM_STKR = 7
-    let public DTWAIN_PDFTEXTTRANSFORM_SKTR = 8
-    let public DTWAIN_PDFTEXTTRANSFORM_SKRT = 9
-    let public DTWAIN_PDFTEXTTRANSFORM_SRTK = 10
-    let public DTWAIN_PDFTEXTTRANSFORM_SRKT = 11
-    let public DTWAIN_PDFTEXTTRANSFORM_RSTK = 12
-    let public DTWAIN_PDFTEXTTRANSFORM_RSKT = 13
-    let public DTWAIN_PDFTEXTTRANSFORM_RTSK = 14
-    let public DTWAIN_PDFTEXTTRANSFORM_RTKT = 15
-    let public DTWAIN_PDFTEXTTRANSFORM_RKST = 16
-    let public DTWAIN_PDFTEXTTRANSFORM_RKTS = 17
-    let public DTWAIN_PDFTEXTTRANSFORM_KSTR = 18
-    let public DTWAIN_PDFTEXTTRANSFORM_KSRT = 19
-    let public DTWAIN_PDFTEXTTRANSFORM_KRST = 20
-    let public DTWAIN_PDFTEXTTRANSFORM_KRTS = 21
-    let public DTWAIN_PDFTEXTTRANSFORM_KTSR = 22
-    let public DTWAIN_PDFTEXTTRANSFORM_KTRS = 23
-    let public DTWAIN_PDFTEXTTRANFORM_LAST = DTWAIN_PDFTEXTTRANSFORM_KTRS
+    let public DTWAIN_PDFTEXTTRANSFORM_SRK = 0
+    let public DTWAIN_PDFTEXTTRANSFORM_SKR = 1
+    let public DTWAIN_PDFTEXTTRANSFORM_KSR = 2
+    let public DTWAIN_PDFTEXTTRANSFORM_KRS = 3
+    let public DTWAIN_PDFTEXTTRANSFORM_RSK = 4
+    let public DTWAIN_PDFTEXTTRANSFORM_RKS = 5
+    let public DTWAIN_PDFTEXTTRANFORM_LAST = DTWAIN_PDFTEXTTRANSFORM_RKS
     let public DTWAIN_TWDF_ULTRASONIC = 0
     let public DTWAIN_TWDF_BYLENGTH = 1
     let public DTWAIN_TWDF_INFRARED = 2
@@ -1910,16 +1895,25 @@ module TwainAPI =
     type DTWAIN_AddFileToAppendWDelegate = delegate of string -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_AddPDFTextDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * LONG * DWORD -> DTWAIN_BOOL
+    type DTWAIN_AddPDFTextDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
-    type DTWAIN_AddPDFTextADelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * LONG * DWORD -> DTWAIN_BOOL
+    type DTWAIN_AddPDFTextADelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_AddPDFTextExDelegate = delegate of DTWAIN_SOURCE * DTWAIN_PDFTEXTELEMENT * DWORD -> DTWAIN_BOOL
+    type DTWAIN_AddPDFTextElementDelegate = delegate of DTWAIN_SOURCE * DTWAIN_PDFTEXTELEMENT -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_AddPDFTextStringDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * string * LONG * LONG * string * string * string * string * DWORD -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
+    type DTWAIN_AddPDFTextStringADelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * string * LONG * LONG * string * string * string * string * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_AddPDFTextWDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * LONG * DWORD -> DTWAIN_BOOL
+    type DTWAIN_AddPDFTextStringWDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * string * LONG * LONG * string * string * string * string * DWORD -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_AddPDFTextWDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_AllocateMemoryDelegate = delegate of DWORD -> HANDLE
@@ -2141,6 +2135,9 @@ module TwainAPI =
     type DTWAIN_ArrayGetAtSourceDelegate = delegate of DTWAIN_ARRAY * LONG * DTWAIN_SOURCE byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_ArrayGetAtSourceExDelegate = delegate of DTWAIN_ARRAY * LONG -> DTWAIN_SOURCE
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_ArrayGetAtStringDelegate = delegate of DTWAIN_ARRAY * LONG * System.Text.StringBuilder -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
@@ -2348,7 +2345,7 @@ module TwainAPI =
     type DTWAIN_ClearErrorBufferDelegate = delegate of unit -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_ClearPDFTextDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
+    type DTWAIN_ClearPDFTextElementsDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_ClearPageDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
@@ -2387,7 +2384,10 @@ module TwainAPI =
     type DTWAIN_CreateAcquisitionArrayDelegate = delegate of unit -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_CreatePDFTextElementDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_PDFTEXTELEMENT
+    type DTWAIN_CreatePDFTextElementDelegate = delegate of unit -> DTWAIN_PDFTEXTELEMENT
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_CreatePDFTextElementCopyDelegate = delegate of DTWAIN_PDFTEXTELEMENT -> DTWAIN_PDFTEXTELEMENT
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_DeleteDIBDelegate = delegate of HANDLE -> DTWAIN_BOOL
@@ -3308,6 +3308,9 @@ module TwainAPI =
     type DTWAIN_GetLightSourcesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_GetLightSourcesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_GetLoggerCallbackDelegate = delegate of unit -> DTWAIN_LOGGER_PROC
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
@@ -3440,13 +3443,13 @@ module TwainAPI =
     type DTWAIN_GetPDFTextElementLongDelegate = delegate of DTWAIN_PDFTEXTELEMENT * int byref * int byref * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_GetPDFTextElementStringDelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> DTWAIN_BOOL
+    type DTWAIN_GetPDFTextElementStringDelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
-    type DTWAIN_GetPDFTextElementStringADelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> DTWAIN_BOOL
+    type DTWAIN_GetPDFTextElementStringADelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_GetPDFTextElementStringWDelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> DTWAIN_BOOL
+    type DTWAIN_GetPDFTextElementStringWDelegate = delegate of DTWAIN_PDFTEXTELEMENT * System.Text.StringBuilder * LONG * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_GetPDFType1FontNameDelegate = delegate of LONG * System.Text.StringBuilder * LONG -> LONG
@@ -4040,9 +4043,6 @@ module TwainAPI =
     type DTWAIN_IsInitializedDelegate = delegate of unit -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_IsJPEGSupportedDelegate = delegate of unit -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_IsJobControlSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
@@ -4080,12 +4080,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_IsOverscanSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_IsPDFSupportedDelegate = delegate of unit -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_IsPNGSupportedDelegate = delegate of unit -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_IsPaperDetectableDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
@@ -4140,9 +4134,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_IsSourceValidDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_IsTIFFSupportedDelegate = delegate of unit -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_IsThumbnailEnabledDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
@@ -4277,6 +4268,21 @@ module TwainAPI =
     type DTWAIN_RangeGetNearestValueDelegate = delegate of DTWAIN_RANGE * LPVOID * LPVOID * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_RangeGetNearestValueFloatDelegate = delegate of DTWAIN_RANGE * DTWAIN_FLOAT * DTWAIN_FLOAT byref * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_RangeGetNearestValueFloatStringDelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
+    type DTWAIN_RangeGetNearestValueFloatStringADelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_RangeGetNearestValueFloatStringWDelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_RangeGetNearestValueLongDelegate = delegate of DTWAIN_RANGE * LONG * int byref * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_RangeGetPosDelegate = delegate of DTWAIN_RANGE * LPVOID * int byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
@@ -4316,21 +4322,6 @@ module TwainAPI =
     type DTWAIN_RangeIsValidDelegate = delegate of DTWAIN_RANGE * int byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_RangeNearestValueFloatDelegate = delegate of DTWAIN_RANGE * DTWAIN_FLOAT * DTWAIN_FLOAT byref * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_RangeNearestValueFloatStringDelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
-    type DTWAIN_RangeNearestValueFloatStringADelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_RangeNearestValueFloatStringWDelegate = delegate of DTWAIN_RANGE * string * System.Text.StringBuilder * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
-    type DTWAIN_RangeNearestValueLongDelegate = delegate of DTWAIN_RANGE * LONG * int byref * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_RangeSetAllDelegate = delegate of DTWAIN_RANGE * LPVOID * LPVOID * LPVOID * LPVOID * LPVOID -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
@@ -4365,6 +4356,9 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_RangeSetValueLongDelegate = delegate of DTWAIN_RANGE * LONG * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_RemovePDFTextElementDelegate = delegate of DTWAIN_SOURCE * DTWAIN_PDFTEXTELEMENT -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_ResetPDFTextElementDelegate = delegate of DTWAIN_PDFTEXTELEMENT -> DTWAIN_BOOL
@@ -4874,6 +4868,15 @@ module TwainAPI =
     type DTWAIN_SetPDFTextElementFloatDelegate = delegate of DTWAIN_PDFTEXTELEMENT * DTWAIN_FLOAT * DTWAIN_FLOAT * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
+    type DTWAIN_SetPDFTextElementFloatStringDelegate = delegate of DTWAIN_PDFTEXTELEMENT * string * string * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)>]
+    type DTWAIN_SetPDFTextElementFloatStringADelegate = delegate of DTWAIN_PDFTEXTELEMENT * string * string * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_SetPDFTextElementFloatStringWDelegate = delegate of DTWAIN_PDFTEXTELEMENT * string * string * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
     type DTWAIN_SetPDFTextElementLongDelegate = delegate of DTWAIN_PDFTEXTELEMENT * LONG * LONG * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Auto)>]
@@ -5192,7 +5195,10 @@ module TwainAPI =
     let private AddFileToAppendW = lazy (DynamicDll.Bind "DTWAIN_AddFileToAppendW" : DTWAIN_AddFileToAppendWDelegate)
     let private AddPDFText = lazy (DynamicDll.Bind "DTWAIN_AddPDFText" : DTWAIN_AddPDFTextDelegate)
     let private AddPDFTextA = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextA" : DTWAIN_AddPDFTextADelegate)
-    let private AddPDFTextEx = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextEx" : DTWAIN_AddPDFTextExDelegate)
+    let private AddPDFTextElement = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextElement" : DTWAIN_AddPDFTextElementDelegate)
+    let private AddPDFTextString = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextString" : DTWAIN_AddPDFTextStringDelegate)
+    let private AddPDFTextStringA = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextStringA" : DTWAIN_AddPDFTextStringADelegate)
+    let private AddPDFTextStringW = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextStringW" : DTWAIN_AddPDFTextStringWDelegate)
     let private AddPDFTextW = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextW" : DTWAIN_AddPDFTextWDelegate)
     let private AllocateMemory = lazy (DynamicDll.Bind "DTWAIN_AllocateMemory" : DTWAIN_AllocateMemoryDelegate)
     let private AllocateMemory64 = lazy (DynamicDll.Bind "DTWAIN_AllocateMemory64" : DTWAIN_AllocateMemory64Delegate)
@@ -5267,6 +5273,7 @@ module TwainAPI =
     let private ArrayGetAtLong = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtLong" : DTWAIN_ArrayGetAtLongDelegate)
     let private ArrayGetAtLong64 = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtLong64" : DTWAIN_ArrayGetAtLong64Delegate)
     let private ArrayGetAtSource = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtSource" : DTWAIN_ArrayGetAtSourceDelegate)
+    let private ArrayGetAtSourceEx = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtSourceEx" : DTWAIN_ArrayGetAtSourceExDelegate)
     let private ArrayGetAtString = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtString" : DTWAIN_ArrayGetAtStringDelegate)
     let private ArrayGetAtStringA = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtStringA" : DTWAIN_ArrayGetAtStringADelegate)
     let private ArrayGetAtStringW = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtStringW" : DTWAIN_ArrayGetAtStringWDelegate)
@@ -5336,7 +5343,7 @@ module TwainAPI =
     let private CheckHandles = lazy (DynamicDll.Bind "DTWAIN_CheckHandles" : DTWAIN_CheckHandlesDelegate)
     let private ClearBuffers = lazy (DynamicDll.Bind "DTWAIN_ClearBuffers" : DTWAIN_ClearBuffersDelegate)
     let private ClearErrorBuffer = lazy (DynamicDll.Bind "DTWAIN_ClearErrorBuffer" : DTWAIN_ClearErrorBufferDelegate)
-    let private ClearPDFText = lazy (DynamicDll.Bind "DTWAIN_ClearPDFText" : DTWAIN_ClearPDFTextDelegate)
+    let private ClearPDFTextElements = lazy (DynamicDll.Bind "DTWAIN_ClearPDFTextElements" : DTWAIN_ClearPDFTextElementsDelegate)
     let private ClearPage = lazy (DynamicDll.Bind "DTWAIN_ClearPage" : DTWAIN_ClearPageDelegate)
     let private CloseSource = lazy (DynamicDll.Bind "DTWAIN_CloseSource" : DTWAIN_CloseSourceDelegate)
     let private CloseSourceUI = lazy (DynamicDll.Bind "DTWAIN_CloseSourceUI" : DTWAIN_CloseSourceUIDelegate)
@@ -5350,6 +5357,7 @@ module TwainAPI =
     let private ConvertToAPIStringW = lazy (DynamicDll.Bind "DTWAIN_ConvertToAPIStringW" : DTWAIN_ConvertToAPIStringWDelegate)
     let private CreateAcquisitionArray = lazy (DynamicDll.Bind "DTWAIN_CreateAcquisitionArray" : DTWAIN_CreateAcquisitionArrayDelegate)
     let private CreatePDFTextElement = lazy (DynamicDll.Bind "DTWAIN_CreatePDFTextElement" : DTWAIN_CreatePDFTextElementDelegate)
+    let private CreatePDFTextElementCopy = lazy (DynamicDll.Bind "DTWAIN_CreatePDFTextElementCopy" : DTWAIN_CreatePDFTextElementCopyDelegate)
     let private DeleteDIB = lazy (DynamicDll.Bind "DTWAIN_DeleteDIB" : DTWAIN_DeleteDIBDelegate)
     let private DestroyAcquisitionArray = lazy (DynamicDll.Bind "DTWAIN_DestroyAcquisitionArray" : DTWAIN_DestroyAcquisitionArrayDelegate)
     let private DestroyPDFTextElement = lazy (DynamicDll.Bind "DTWAIN_DestroyPDFTextElement" : DTWAIN_DestroyPDFTextElementDelegate)
@@ -5656,6 +5664,7 @@ module TwainAPI =
     let private GetLightPath = lazy (DynamicDll.Bind "DTWAIN_GetLightPath" : DTWAIN_GetLightPathDelegate)
     let private GetLightSource = lazy (DynamicDll.Bind "DTWAIN_GetLightSource" : DTWAIN_GetLightSourceDelegate)
     let private GetLightSources = lazy (DynamicDll.Bind "DTWAIN_GetLightSources" : DTWAIN_GetLightSourcesDelegate)
+    let private GetLightSourcesEx = lazy (DynamicDll.Bind "DTWAIN_GetLightSourcesEx" : DTWAIN_GetLightSourcesExDelegate)
     let private GetLoggerCallback = lazy (DynamicDll.Bind "DTWAIN_GetLoggerCallback" : DTWAIN_GetLoggerCallbackDelegate)
     let private GetLoggerCallbackA = lazy (DynamicDll.Bind "DTWAIN_GetLoggerCallbackA" : DTWAIN_GetLoggerCallbackADelegate)
     let private GetLoggerCallbackW = lazy (DynamicDll.Bind "DTWAIN_GetLoggerCallbackW" : DTWAIN_GetLoggerCallbackWDelegate)
@@ -5900,7 +5909,6 @@ module TwainAPI =
     let private IsIndicatorEnabled = lazy (DynamicDll.Bind "DTWAIN_IsIndicatorEnabled" : DTWAIN_IsIndicatorEnabledDelegate)
     let private IsIndicatorSupported = lazy (DynamicDll.Bind "DTWAIN_IsIndicatorSupported" : DTWAIN_IsIndicatorSupportedDelegate)
     let private IsInitialized = lazy (DynamicDll.Bind "DTWAIN_IsInitialized" : DTWAIN_IsInitializedDelegate)
-    let private IsJPEGSupported = lazy (DynamicDll.Bind "DTWAIN_IsJPEGSupported" : DTWAIN_IsJPEGSupportedDelegate)
     let private IsJobControlSupported = lazy (DynamicDll.Bind "DTWAIN_IsJobControlSupported" : DTWAIN_IsJobControlSupportedDelegate)
     let private IsLampEnabled = lazy (DynamicDll.Bind "DTWAIN_IsLampEnabled" : DTWAIN_IsLampEnabledDelegate)
     let private IsLampSupported = lazy (DynamicDll.Bind "DTWAIN_IsLampSupported" : DTWAIN_IsLampSupportedDelegate)
@@ -5914,8 +5922,6 @@ module TwainAPI =
     let private IsOpenSourcesOnSelect = lazy (DynamicDll.Bind "DTWAIN_IsOpenSourcesOnSelect" : DTWAIN_IsOpenSourcesOnSelectDelegate)
     let private IsOrientationSupported = lazy (DynamicDll.Bind "DTWAIN_IsOrientationSupported" : DTWAIN_IsOrientationSupportedDelegate)
     let private IsOverscanSupported = lazy (DynamicDll.Bind "DTWAIN_IsOverscanSupported" : DTWAIN_IsOverscanSupportedDelegate)
-    let private IsPDFSupported = lazy (DynamicDll.Bind "DTWAIN_IsPDFSupported" : DTWAIN_IsPDFSupportedDelegate)
-    let private IsPNGSupported = lazy (DynamicDll.Bind "DTWAIN_IsPNGSupported" : DTWAIN_IsPNGSupportedDelegate)
     let private IsPaperDetectable = lazy (DynamicDll.Bind "DTWAIN_IsPaperDetectable" : DTWAIN_IsPaperDetectableDelegate)
     let private IsPaperSizeSupported = lazy (DynamicDll.Bind "DTWAIN_IsPaperSizeSupported" : DTWAIN_IsPaperSizeSupportedDelegate)
     let private IsPatchCapsSupported = lazy (DynamicDll.Bind "DTWAIN_IsPatchCapsSupported" : DTWAIN_IsPatchCapsSupportedDelegate)
@@ -5934,7 +5940,6 @@ module TwainAPI =
     let private IsSourceOpen = lazy (DynamicDll.Bind "DTWAIN_IsSourceOpen" : DTWAIN_IsSourceOpenDelegate)
     let private IsSourceSelected = lazy (DynamicDll.Bind "DTWAIN_IsSourceSelected" : DTWAIN_IsSourceSelectedDelegate)
     let private IsSourceValid = lazy (DynamicDll.Bind "DTWAIN_IsSourceValid" : DTWAIN_IsSourceValidDelegate)
-    let private IsTIFFSupported = lazy (DynamicDll.Bind "DTWAIN_IsTIFFSupported" : DTWAIN_IsTIFFSupportedDelegate)
     let private IsThumbnailEnabled = lazy (DynamicDll.Bind "DTWAIN_IsThumbnailEnabled" : DTWAIN_IsThumbnailEnabledDelegate)
     let private IsThumbnailSupported = lazy (DynamicDll.Bind "DTWAIN_IsThumbnailSupported" : DTWAIN_IsThumbnailSupportedDelegate)
     let private IsTwainAvailable = lazy (DynamicDll.Bind "DTWAIN_IsTwainAvailable" : DTWAIN_IsTwainAvailableDelegate)
@@ -5979,6 +5984,11 @@ module TwainAPI =
     let private RangeGetExpValueFloatStringW = lazy (DynamicDll.Bind "DTWAIN_RangeGetExpValueFloatStringW" : DTWAIN_RangeGetExpValueFloatStringWDelegate)
     let private RangeGetExpValueLong = lazy (DynamicDll.Bind "DTWAIN_RangeGetExpValueLong" : DTWAIN_RangeGetExpValueLongDelegate)
     let private RangeGetNearestValue = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValue" : DTWAIN_RangeGetNearestValueDelegate)
+    let private RangeGetNearestValueFloat = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValueFloat" : DTWAIN_RangeGetNearestValueFloatDelegate)
+    let private RangeGetNearestValueFloatString = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValueFloatString" : DTWAIN_RangeGetNearestValueFloatStringDelegate)
+    let private RangeGetNearestValueFloatStringA = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValueFloatStringA" : DTWAIN_RangeGetNearestValueFloatStringADelegate)
+    let private RangeGetNearestValueFloatStringW = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValueFloatStringW" : DTWAIN_RangeGetNearestValueFloatStringWDelegate)
+    let private RangeGetNearestValueLong = lazy (DynamicDll.Bind "DTWAIN_RangeGetNearestValueLong" : DTWAIN_RangeGetNearestValueLongDelegate)
     let private RangeGetPos = lazy (DynamicDll.Bind "DTWAIN_RangeGetPos" : DTWAIN_RangeGetPosDelegate)
     let private RangeGetPosFloat = lazy (DynamicDll.Bind "DTWAIN_RangeGetPosFloat" : DTWAIN_RangeGetPosFloatDelegate)
     let private RangeGetPosFloatString = lazy (DynamicDll.Bind "DTWAIN_RangeGetPosFloatString" : DTWAIN_RangeGetPosFloatStringDelegate)
@@ -5992,11 +6002,6 @@ module TwainAPI =
     let private RangeGetValueFloatStringW = lazy (DynamicDll.Bind "DTWAIN_RangeGetValueFloatStringW" : DTWAIN_RangeGetValueFloatStringWDelegate)
     let private RangeGetValueLong = lazy (DynamicDll.Bind "DTWAIN_RangeGetValueLong" : DTWAIN_RangeGetValueLongDelegate)
     let private RangeIsValid = lazy (DynamicDll.Bind "DTWAIN_RangeIsValid" : DTWAIN_RangeIsValidDelegate)
-    let private RangeNearestValueFloat = lazy (DynamicDll.Bind "DTWAIN_RangeNearestValueFloat" : DTWAIN_RangeNearestValueFloatDelegate)
-    let private RangeNearestValueFloatString = lazy (DynamicDll.Bind "DTWAIN_RangeNearestValueFloatString" : DTWAIN_RangeNearestValueFloatStringDelegate)
-    let private RangeNearestValueFloatStringA = lazy (DynamicDll.Bind "DTWAIN_RangeNearestValueFloatStringA" : DTWAIN_RangeNearestValueFloatStringADelegate)
-    let private RangeNearestValueFloatStringW = lazy (DynamicDll.Bind "DTWAIN_RangeNearestValueFloatStringW" : DTWAIN_RangeNearestValueFloatStringWDelegate)
-    let private RangeNearestValueLong = lazy (DynamicDll.Bind "DTWAIN_RangeNearestValueLong" : DTWAIN_RangeNearestValueLongDelegate)
     let private RangeSetAll = lazy (DynamicDll.Bind "DTWAIN_RangeSetAll" : DTWAIN_RangeSetAllDelegate)
     let private RangeSetAllFloat = lazy (DynamicDll.Bind "DTWAIN_RangeSetAllFloat" : DTWAIN_RangeSetAllFloatDelegate)
     let private RangeSetAllFloatString = lazy (DynamicDll.Bind "DTWAIN_RangeSetAllFloatString" : DTWAIN_RangeSetAllFloatStringDelegate)
@@ -6009,6 +6014,7 @@ module TwainAPI =
     let private RangeSetValueFloatStringA = lazy (DynamicDll.Bind "DTWAIN_RangeSetValueFloatStringA" : DTWAIN_RangeSetValueFloatStringADelegate)
     let private RangeSetValueFloatStringW = lazy (DynamicDll.Bind "DTWAIN_RangeSetValueFloatStringW" : DTWAIN_RangeSetValueFloatStringWDelegate)
     let private RangeSetValueLong = lazy (DynamicDll.Bind "DTWAIN_RangeSetValueLong" : DTWAIN_RangeSetValueLongDelegate)
+    let private RemovePDFTextElement = lazy (DynamicDll.Bind "DTWAIN_RemovePDFTextElement" : DTWAIN_RemovePDFTextElementDelegate)
     let private ResetPDFTextElement = lazy (DynamicDll.Bind "DTWAIN_ResetPDFTextElement" : DTWAIN_ResetPDFTextElementDelegate)
     let private RewindPage = lazy (DynamicDll.Bind "DTWAIN_RewindPage" : DTWAIN_RewindPageDelegate)
     let private SelectDefaultOCREngine = lazy (DynamicDll.Bind "DTWAIN_SelectDefaultOCREngine" : DTWAIN_SelectDefaultOCREngineDelegate)
@@ -6178,6 +6184,9 @@ module TwainAPI =
     let private SetPDFSubjectA = lazy (DynamicDll.Bind "DTWAIN_SetPDFSubjectA" : DTWAIN_SetPDFSubjectADelegate)
     let private SetPDFSubjectW = lazy (DynamicDll.Bind "DTWAIN_SetPDFSubjectW" : DTWAIN_SetPDFSubjectWDelegate)
     let private SetPDFTextElementFloat = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementFloat" : DTWAIN_SetPDFTextElementFloatDelegate)
+    let private SetPDFTextElementFloatString = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementFloatString" : DTWAIN_SetPDFTextElementFloatStringDelegate)
+    let private SetPDFTextElementFloatStringA = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementFloatStringA" : DTWAIN_SetPDFTextElementFloatStringADelegate)
+    let private SetPDFTextElementFloatStringW = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementFloatStringW" : DTWAIN_SetPDFTextElementFloatStringWDelegate)
     let private SetPDFTextElementLong = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementLong" : DTWAIN_SetPDFTextElementLongDelegate)
     let private SetPDFTextElementString = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementString" : DTWAIN_SetPDFTextElementStringDelegate)
     let private SetPDFTextElementStringA = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementStringA" : DTWAIN_SetPDFTextElementStringADelegate)
@@ -6370,19 +6379,31 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddFileToAppendW.Value.Invoke(szfile)
 
-    let DTWAIN_AddPDFText (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: LONG) (flags: DWORD) : DTWAIN_BOOL =
+    let DTWAIN_AddPDFText (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: DTWAIN_FLOAT) (flags: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddPDFText.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
 
-    let DTWAIN_AddPDFTextA (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: LONG) (flags: DWORD) : DTWAIN_BOOL =
+    let DTWAIN_AddPDFTextA (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: DTWAIN_FLOAT) (flags: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddPDFTextA.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
 
-    let DTWAIN_AddPDFTextEx (source: DTWAIN_SOURCE) (textelement: DTWAIN_PDFTEXTELEMENT) (flags: DWORD) : DTWAIN_BOOL =
+    let DTWAIN_AddPDFTextElement (source: DTWAIN_SOURCE) (textelement: DTWAIN_PDFTEXTELEMENT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        AddPDFTextEx.Value.Invoke(source, textelement, flags)
+        AddPDFTextElement.Value.Invoke(source, textelement)
 
-    let DTWAIN_AddPDFTextW (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: LONG) (flags: DWORD) : DTWAIN_BOOL =
+    let DTWAIN_AddPDFTextString (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: string) (colorrgb: LONG) (rendermode: LONG) (scaling: string) (charspacing: string) (wordspacing: string) (strokewidth: string) (flags: DWORD) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        AddPDFTextString.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
+
+    let DTWAIN_AddPDFTextStringA (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: string) (colorrgb: LONG) (rendermode: LONG) (scaling: string) (charspacing: string) (wordspacing: string) (strokewidth: string) (flags: DWORD) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        AddPDFTextStringA.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
+
+    let DTWAIN_AddPDFTextStringW (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: string) (colorrgb: LONG) (rendermode: LONG) (scaling: string) (charspacing: string) (wordspacing: string) (strokewidth: string) (flags: DWORD) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        AddPDFTextStringW.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
+
+    let DTWAIN_AddPDFTextW (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: DTWAIN_FLOAT) (flags: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddPDFTextW.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
 
@@ -6678,6 +6699,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtSource.Value.Invoke(parray, nwhere, &ppsource)
 
+    let DTWAIN_ArrayGetAtSourceEx (parray: DTWAIN_ARRAY) (nwhere: LONG) : DTWAIN_SOURCE =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayGetAtSourceEx.Value.Invoke(parray, nwhere)
+
     let DTWAIN_ArrayGetAtString (parray: DTWAIN_ARRAY) (nwhere: LONG) (pstr: System.Text.StringBuilder) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtString.Value.Invoke(parray, nwhere, pstr)
@@ -6954,9 +6979,9 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ClearErrorBuffer.Value.Invoke()
 
-    let DTWAIN_ClearPDFText (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
+    let DTWAIN_ClearPDFTextElements (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ClearPDFText.Value.Invoke(source)
+        ClearPDFTextElements.Value.Invoke(source)
 
     let DTWAIN_ClearPage (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7006,9 +7031,13 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         CreateAcquisitionArray.Value.Invoke()
 
-    let DTWAIN_CreatePDFTextElement (source: DTWAIN_SOURCE) : DTWAIN_PDFTEXTELEMENT =
+    let DTWAIN_CreatePDFTextElement() : DTWAIN_PDFTEXTELEMENT =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        CreatePDFTextElement.Value.Invoke(source)
+        CreatePDFTextElement.Value.Invoke()
+
+    let DTWAIN_CreatePDFTextElementCopy (textelement: DTWAIN_PDFTEXTELEMENT) : DTWAIN_PDFTEXTELEMENT =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        CreatePDFTextElementCopy.Value.Invoke(textelement)
 
     let DTWAIN_DeleteDIB (hdib: HANDLE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -8234,6 +8263,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetLightSources.Value.Invoke(source, &lightsources)
 
+    let DTWAIN_GetLightSourcesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetLightSourcesEx.Value.Invoke(source)
+
     let DTWAIN_GetLoggerCallback() : DTWAIN_LOGGER_PROC =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetLoggerCallback.Value.Invoke()
@@ -8410,15 +8443,15 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPDFTextElementLong.Value.Invoke(textelement, &val1, &val2, flags)
 
-    let DTWAIN_GetPDFTextElementString (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : DTWAIN_BOOL =
+    let DTWAIN_GetPDFTextElementString (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPDFTextElementString.Value.Invoke(textelement, szdata, maxlen, flags)
 
-    let DTWAIN_GetPDFTextElementStringA (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : DTWAIN_BOOL =
+    let DTWAIN_GetPDFTextElementStringA (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPDFTextElementStringA.Value.Invoke(textelement, szdata, maxlen, flags)
 
-    let DTWAIN_GetPDFTextElementStringW (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : DTWAIN_BOOL =
+    let DTWAIN_GetPDFTextElementStringW (textelement: DTWAIN_PDFTEXTELEMENT) (szdata: System.Text.StringBuilder) (maxlen: LONG) (flags: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPDFTextElementStringW.Value.Invoke(textelement, szdata, maxlen, flags)
 
@@ -9210,10 +9243,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsInitialized.Value.Invoke()
 
-    let DTWAIN_IsJPEGSupported() : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsJPEGSupported.Value.Invoke()
-
     let DTWAIN_IsJobControlSupported (source: DTWAIN_SOURCE) (jobcontrol: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsJobControlSupported.Value.Invoke(source, jobcontrol)
@@ -9265,14 +9294,6 @@ module TwainAPI =
     let DTWAIN_IsOverscanSupported (source: DTWAIN_SOURCE) (supportvalue: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsOverscanSupported.Value.Invoke(source, supportvalue)
-
-    let DTWAIN_IsPDFSupported() : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsPDFSupported.Value.Invoke()
-
-    let DTWAIN_IsPNGSupported() : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsPNGSupported.Value.Invoke()
 
     let DTWAIN_IsPaperDetectable (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -9345,10 +9366,6 @@ module TwainAPI =
     let DTWAIN_IsSourceValid (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsSourceValid.Value.Invoke(source)
-
-    let DTWAIN_IsTIFFSupported() : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsTIFFSupported.Value.Invoke()
 
     let DTWAIN_IsThumbnailEnabled (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -9526,6 +9543,26 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         RangeGetNearestValue.Value.Invoke(parray, pvariantin, pvariantout, roundtype)
 
+    let DTWAIN_RangeGetNearestValueFloat (parray: DTWAIN_RANGE) (din: DTWAIN_FLOAT) (pout: DTWAIN_FLOAT byref) (roundtype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RangeGetNearestValueFloat.Value.Invoke(parray, din, &pout, roundtype)
+
+    let DTWAIN_RangeGetNearestValueFloatString (parray: DTWAIN_RANGE) (din: string) (pout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RangeGetNearestValueFloatString.Value.Invoke(parray, din, pout, roundtype)
+
+    let DTWAIN_RangeGetNearestValueFloatStringA (parray: DTWAIN_RANGE) (din: string) (dout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RangeGetNearestValueFloatStringA.Value.Invoke(parray, din, dout, roundtype)
+
+    let DTWAIN_RangeGetNearestValueFloatStringW (parray: DTWAIN_RANGE) (din: string) (dout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RangeGetNearestValueFloatStringW.Value.Invoke(parray, din, dout, roundtype)
+
+    let DTWAIN_RangeGetNearestValueLong (parray: DTWAIN_RANGE) (lin: LONG) (pout: int byref) (roundtype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RangeGetNearestValueLong.Value.Invoke(parray, lin, &pout, roundtype)
+
     let DTWAIN_RangeGetPos (parray: DTWAIN_RANGE) (pvariant: LPVOID) (ppos: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         RangeGetPos.Value.Invoke(parray, pvariant, &ppos)
@@ -9578,26 +9615,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         RangeIsValid.Value.Invoke(range, &pstatus)
 
-    let DTWAIN_RangeNearestValueFloat (parray: DTWAIN_RANGE) (din: DTWAIN_FLOAT) (pout: DTWAIN_FLOAT byref) (roundtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        RangeNearestValueFloat.Value.Invoke(parray, din, &pout, roundtype)
-
-    let DTWAIN_RangeNearestValueFloatString (parray: DTWAIN_RANGE) (din: string) (pout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        RangeNearestValueFloatString.Value.Invoke(parray, din, pout, roundtype)
-
-    let DTWAIN_RangeNearestValueFloatStringA (parray: DTWAIN_RANGE) (din: string) (dout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        RangeNearestValueFloatStringA.Value.Invoke(parray, din, dout, roundtype)
-
-    let DTWAIN_RangeNearestValueFloatStringW (parray: DTWAIN_RANGE) (din: string) (dout: System.Text.StringBuilder) (roundtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        RangeNearestValueFloatStringW.Value.Invoke(parray, din, dout, roundtype)
-
-    let DTWAIN_RangeNearestValueLong (parray: DTWAIN_RANGE) (lin: LONG) (pout: int byref) (roundtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        RangeNearestValueLong.Value.Invoke(parray, lin, &pout, roundtype)
-
     let DTWAIN_RangeSetAll (parray: DTWAIN_RANGE) (pvariantlow: LPVOID) (pvariantup: LPVOID) (pvariantstep: LPVOID) (pvariantdefault: LPVOID) (pvariantcurrent: LPVOID) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         RangeSetAll.Value.Invoke(parray, pvariantlow, pvariantup, pvariantstep, pvariantdefault, pvariantcurrent)
@@ -9645,6 +9662,10 @@ module TwainAPI =
     let DTWAIN_RangeSetValueLong (parray: DTWAIN_RANGE) (nwhich: LONG) (val1: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         RangeSetValueLong.Value.Invoke(parray, nwhich, val1)
+
+    let DTWAIN_RemovePDFTextElement (source: DTWAIN_SOURCE) (textelement: DTWAIN_PDFTEXTELEMENT) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        RemovePDFTextElement.Value.Invoke(source, textelement)
 
     let DTWAIN_ResetPDFTextElement (textelement: DTWAIN_PDFTEXTELEMENT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -10321,6 +10342,18 @@ module TwainAPI =
     let DTWAIN_SetPDFTextElementFloat (textelement: DTWAIN_PDFTEXTELEMENT) (val1: DTWAIN_FLOAT) (val2: DTWAIN_FLOAT) (flags: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPDFTextElementFloat.Value.Invoke(textelement, val1, val2, flags)
+
+    let DTWAIN_SetPDFTextElementFloatString (textelement: DTWAIN_PDFTEXTELEMENT) (val1: string) (val2: string) (flags: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetPDFTextElementFloatString.Value.Invoke(textelement, val1, val2, flags)
+
+    let DTWAIN_SetPDFTextElementFloatStringA (textelement: DTWAIN_PDFTEXTELEMENT) (val1: string) (val2: string) (flags: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetPDFTextElementFloatStringA.Value.Invoke(textelement, val1, val2, flags)
+
+    let DTWAIN_SetPDFTextElementFloatStringW (textelement: DTWAIN_PDFTEXTELEMENT) (val1: string) (val2: string) (flags: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetPDFTextElementFloatStringW.Value.Invoke(textelement, val1, val2, flags)
 
     let DTWAIN_SetPDFTextElementLong (textelement: DTWAIN_PDFTEXTELEMENT) (val1: LONG) (val2: LONG) (flags: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
