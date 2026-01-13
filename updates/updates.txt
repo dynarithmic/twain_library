@@ -1,5 +1,41 @@
 DTWAIN Version changes
 
+5.8.0
+
+- Improved TWAIN Driver Compatibility
+
+  The default TWAIN message loop has been changed from a blocking 
+  GetMessage() loop to a non-blocking PeekMessage-based loop while 
+  a source is acquiring images.
+
+  While the TWAIN specification uses GetMessage(), recent experience 
+  has shown that some TWAIN drivers assume continuous, non-blocking 
+  message processing and may stall when the application thread blocks. 
+  This behavior is most commonly observed during source UI behavior,  
+  such as non-responsive user-interfaces, long transfers, or cancellation.  
+
+  The new default avoids blocking the message loop, allowing idle-time 
+  processing and re-entrant messaging required by certain drivers. This change 
+  improves stability and compatibility, particularly with legacy, OEM-rebranded, 
+  and network-based sources.
+
+  For applications that require a blocking loop, the previous GetMessage 
+  behavior is still supported and can be explicitly enabled using the
+  DTWAIN_EnablePeekMessageLoop() API function and specifying FALSE (or 0) as the
+  parameter, or creating an entry in the DTWAIN32.INI or DTWAIN64.INI file 
+  under the [TwainLoopGetMsg] section.
+
+- Add ability to rotate and skew text that is added to a PDF page.  
+  See the new DTWAIN_PDFTEXTELEMENT type and the supporting API functions.
+
+- Fix potential memory leak when using functions that takes a pointer
+  to a DTWAIN_ARRAY.
+
+- Ensure that calling DTWAIN_CloseSource() while the Source is acquiring images
+  will not close the source.  Instead, a return value of FALSE will be
+  given, and the last error code is set to DTWAIN_ERR_SOURCE_ACQUIRING.
+
+
 5.7.2
 
 - Fixed potential issue with setting the CAP_CAPTION capability.

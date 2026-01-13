@@ -316,6 +316,8 @@ Public Class VB_FullDemo
     Private sOrigTitle As String
     Private Shared thisObject As VB_FullDemo
     Private dllExists As Boolean
+    Private Shared textElement As System.IntPtr
+    Private Shared pdfPageCount As Integer
     Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf callbackfn)
 
 
@@ -337,6 +339,10 @@ Public Class VB_FullDemo
             If TwainHandle <> 0 Then
                 DTWAINAPI.DTWAIN_EnableMsgNotify(1)
                 DTWAINAPI.DTWAIN_SetCallback(cb, 0)
+                textElement = DTWAINAPI.DTWAIN_CreatePDFTextElement
+                DTWAINAPI.DTWAIN_SetPDFTextElementLong(textElement, 100, 100, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_POSITION)
+                DTWAINAPI.DTWAIN_SetPDFTextElementLong(textElement, DTWAINAPI.DTWAIN_PDFTEXT_ALLPAGES, 0, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS)
+                DTWAINAPI.DTWAIN_SetPDFTextElementFloat(textElement, 25, 0, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_FONTHEIGHT)
             Else
                 Application.Exit()
             End If
@@ -345,6 +351,17 @@ Public Class VB_FullDemo
     End Sub
     Public Shared Function callbackfn(ByVal wparam As IntPtr, ByVal lparam As IntPtr, ByVal userval As IntPtr) As IntPtr
         Select Case wparam
+            Case DTWAINAPI.DTWAIN_TN_ACQUIRESTARTED
+                pdfPageCount = 1
+                Exit Select
+
+            Case DTWAINAPI.DTWAIN_TN_FILEPAGESAVING
+                Dim text As String
+                text = "Page " & pdfPageCount
+                DTWAINAPI.DTWAIN_SetPDFTextElementString(textElement, text, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_TEXT)
+                pdfPageCount = pdfPageCount + 1
+                Exit Select
+
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
                     Dim sDIBDlg As New DibDisplayerDlg2(DTWAINAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource))
@@ -407,6 +424,7 @@ Public Class VB_FullDemo
         Me.Enabled = True
         If SelectedSource <> 0 Then
             If DTWAINAPI.DTWAIN_OpenSource(SelectedSource) <> 0 Then
+                DTWAINAPI.DTWAIN_AddPDFTextElement(SelectedSource, textElement)
                 DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
                 SetCaptionToSourceName()
                 EnableSourceItems(True)

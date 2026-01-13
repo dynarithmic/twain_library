@@ -62,10 +62,13 @@ type DtwainacquirenativeFunc = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i32,
 type DtwainacquirenativeexFunc = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i32,*mut c_void,*mut i32) -> i32;
 type DtwainacquiretoclipboardFunc = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i32,i32,i32,*mut i32) -> *mut c_void;
 type DtwainaddextimageinfoqueryFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
-type DtwainaddpdftextFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,i32,u32) -> i32;
-type DtwainaddpdftextaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,f64,i32,i32,f64,f64,f64,i32,u32) -> i32;
-type DtwainaddpdftextexFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,u32) -> i32;
-type DtwainaddpdftextwFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,i32,u32) -> i32;
+type DtwainaddpdftextFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,f64,u32) -> i32;
+type DtwainaddpdftextaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,f64,i32,i32,f64,f64,f64,f64,u32) -> i32;
+type DtwainaddpdftextelementFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
+type DtwainaddpdftextstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,*const u16,i32,i32,*const u16,*const u16,*const u16,*const u16,u32) -> i32;
+type DtwainaddpdftextstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,*const c_char,i32,i32,*const c_char,*const c_char,*const c_char,*const c_char,u32) -> i32;
+type DtwainaddpdftextstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,*const u16,i32,i32,*const u16,*const u16,*const u16,*const u16,u32) -> i32;
+type DtwainaddpdftextwFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,f64,u32) -> i32;
 type DtwainallocatememoryFunc = unsafe extern "C" fn(u32) -> *mut c_void;
 type Dtwainallocatememory64Func = unsafe extern "C" fn(u64) -> *mut c_void;
 type DtwainallocatememoryexFunc = unsafe extern "C" fn(u32) -> *mut c_void;
@@ -140,6 +143,7 @@ type DtwainarraygetatframestringwFunc = unsafe extern "C" fn(*mut c_void,i32,*mu
 type DtwainarraygetatlongFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32) -> i32;
 type Dtwainarraygetatlong64Func = unsafe extern "C" fn(*mut c_void,i32,*mut i64) -> i32;
 type DtwainarraygetatsourceFunc = unsafe extern "C" fn(*mut c_void,i32,*mut *const ()) -> i32;
+type DtwainarraygetatsourceexFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
 type DtwainarraygetatstringFunc = unsafe extern "C" fn(*mut c_void,i32,*mut u16) -> i32;
 type DtwainarraygetatstringaFunc = unsafe extern "C" fn(*mut c_void,i32,*mut c_char) -> i32;
 type DtwainarraygetatstringptrFunc = unsafe extern "C" fn(*mut c_void,i32) -> *const u16;
@@ -211,7 +215,7 @@ type DtwaincalldsmprocFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,i32,i3
 type DtwaincheckhandlesFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainclearbuffersFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainclearerrorbufferFunc = unsafe extern "C" fn() -> i32;
-type DtwainclearpdftextFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwainclearpdftextelementsFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainclearpageFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainclosesourceFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainclosesourceuiFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -224,7 +228,8 @@ type DtwainconverttoapistringexaFunc = unsafe extern "C" fn(*const c_char,*mut c
 type DtwainconverttoapistringexwFunc = unsafe extern "C" fn(*const u16,*mut u16,i32) -> i32;
 type DtwainconverttoapistringwFunc = unsafe extern "C" fn(*const u16) -> *mut c_void;
 type DtwaincreateacquisitionarrayFunc = unsafe extern "C" fn() -> *mut c_void;
-type DtwaincreatepdftextelementFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
+type DtwaincreatepdftextelementFunc = unsafe extern "C" fn() -> *mut c_void;
+type DtwaincreatepdftextelementcopyFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwaindeletedibFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaindestroyacquisitionarrayFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaindestroypdftextelementFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -531,6 +536,7 @@ type DtwaingetlibrarypathwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetlightpathFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetlightsourceFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetlightsourcesFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
+type DtwaingetlightsourcesexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwaingetloggercallbackFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROC;
 type DtwaingetloggercallbackaFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROCA;
 type DtwaingetloggercallbackwFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROCW;
@@ -774,7 +780,6 @@ type DtwainisimageaddressingsupportedFunc = unsafe extern "C" fn(*mut c_void) ->
 type DtwainisindicatorenabledFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisindicatorsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisinitializedFunc = unsafe extern "C" fn() -> i32;
-type DtwainisjpegsupportedFunc = unsafe extern "C" fn() -> i32;
 type DtwainisjobcontrolsupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainislampenabledFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainislampsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -788,8 +793,6 @@ type DtwainisocrengineactivatedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisopensourcesonselectFunc = unsafe extern "C" fn() -> i32;
 type DtwainisorientationsupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainisoverscansupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
-type DtwainispdfsupportedFunc = unsafe extern "C" fn() -> i32;
-type DtwainispngsupportedFunc = unsafe extern "C" fn() -> i32;
 type DtwainispaperdetectableFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainispapersizesupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainispatchcapssupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -808,7 +811,6 @@ type DtwainissourceinuionlymodeFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainissourceopenFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainissourceselectedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainissourcevalidFunc = unsafe extern "C" fn(*mut c_void) -> i32;
-type DtwainistiffsupportedFunc = unsafe extern "C" fn() -> i32;
 type DtwainisthumbnailenabledFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisthumbnailsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainistwainavailableFunc = unsafe extern "C" fn() -> i32;
@@ -852,6 +854,11 @@ type DtwainrangegetexpvaluefloatstringaFunc = unsafe extern "C" fn(*mut c_void,i
 type DtwainrangegetexpvaluefloatstringwFunc = unsafe extern "C" fn(*mut c_void,i32,*mut u16) -> i32;
 type DtwainrangegetexpvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32) -> i32;
 type DtwainrangegetnearestvalueFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,*mut c_void,i32) -> i32;
+type DtwainrangegetnearestvaluefloatFunc = unsafe extern "C" fn(*mut c_void,f64,*mut f64,i32) -> i32;
+type DtwainrangegetnearestvaluefloatstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,*mut u16,i32) -> i32;
+type DtwainrangegetnearestvaluefloatstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,*mut c_char,i32) -> i32;
+type DtwainrangegetnearestvaluefloatstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16,*mut u16,i32) -> i32;
+type DtwainrangegetnearestvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32,i32) -> i32;
 type DtwainrangegetposFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,*mut i32) -> i32;
 type DtwainrangegetposfloatFunc = unsafe extern "C" fn(*mut c_void,f64,*mut i32) -> i32;
 type DtwainrangegetposfloatstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,*mut i32) -> i32;
@@ -865,11 +872,6 @@ type DtwainrangegetvaluefloatstringaFunc = unsafe extern "C" fn(*mut c_void,i32,
 type DtwainrangegetvaluefloatstringwFunc = unsafe extern "C" fn(*mut c_void,i32,*mut u16) -> i32;
 type DtwainrangegetvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32) -> i32;
 type DtwainrangeisvalidFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
-type DtwainrangenearestvaluefloatFunc = unsafe extern "C" fn(*mut c_void,f64,*mut f64,i32) -> i32;
-type DtwainrangenearestvaluefloatstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,*mut u16,i32) -> i32;
-type DtwainrangenearestvaluefloatstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,*mut c_char,i32) -> i32;
-type DtwainrangenearestvaluefloatstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16,*mut u16,i32) -> i32;
-type DtwainrangenearestvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32,i32) -> i32;
 type DtwainrangesetallFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,*mut c_void,*mut c_void,*mut c_void,*mut c_void) -> i32;
 type DtwainrangesetallfloatFunc = unsafe extern "C" fn(*mut c_void,f64,f64,f64,f64,f64) -> i32;
 type DtwainrangesetallfloatstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,*const u16,*const u16,*const u16,*const u16) -> i32;
@@ -882,6 +884,7 @@ type DtwainrangesetvaluefloatstringFunc = unsafe extern "C" fn(*mut c_void,i32,*
 type DtwainrangesetvaluefloatstringaFunc = unsafe extern "C" fn(*mut c_void,i32,*const c_char) -> i32;
 type DtwainrangesetvaluefloatstringwFunc = unsafe extern "C" fn(*mut c_void,i32,*const u16) -> i32;
 type DtwainrangesetvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
+type DtwainremovepdftextelementFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainresetpdftextelementFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainrewindpageFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainselectdefaultocrengineFunc = unsafe extern "C" fn() -> *mut c_void;
@@ -1058,6 +1061,9 @@ type DtwainsetpdfsubjectFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i
 type DtwainsetpdfsubjectaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> i32;
 type DtwainsetpdfsubjectwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
 type DtwainsetpdftextelementfloatFunc = unsafe extern "C" fn(*mut c_void,f64,f64,i32) -> i32;
+type DtwainsetpdftextelementfloatstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,*const u16,i32) -> i32;
+type DtwainsetpdftextelementfloatstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,*const c_char,i32) -> i32;
+type DtwainsetpdftextelementfloatstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16,*const u16,i32) -> i32;
 type DtwainsetpdftextelementlongFunc = unsafe extern "C" fn(*mut c_void,i32,i32,i32) -> i32;
 type DtwainsetpdftextelementstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32) -> i32;
 type DtwainsetpdftextelementstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32) -> i32;
@@ -1178,7 +1184,10 @@ pub struct DTwainAPI<'a>
     DTWAIN_AddExtImageInfoQueryFunc: Symbol<'a, DtwainaddextimageinfoqueryFunc>,
     DTWAIN_AddPDFTextFunc: Symbol<'a, DtwainaddpdftextFunc>,
     DTWAIN_AddPDFTextAFunc: Symbol<'a, DtwainaddpdftextaFunc>,
-    DTWAIN_AddPDFTextExFunc: Symbol<'a, DtwainaddpdftextexFunc>,
+    DTWAIN_AddPDFTextElementFunc: Symbol<'a, DtwainaddpdftextelementFunc>,
+    DTWAIN_AddPDFTextStringFunc: Symbol<'a, DtwainaddpdftextstringFunc>,
+    DTWAIN_AddPDFTextStringAFunc: Symbol<'a, DtwainaddpdftextstringaFunc>,
+    DTWAIN_AddPDFTextStringWFunc: Symbol<'a, DtwainaddpdftextstringwFunc>,
     DTWAIN_AddPDFTextWFunc: Symbol<'a, DtwainaddpdftextwFunc>,
     DTWAIN_AllocateMemoryFunc: Symbol<'a, DtwainallocatememoryFunc>,
     DTWAIN_AllocateMemory64Func: Symbol<'a, Dtwainallocatememory64Func>,
@@ -1254,6 +1263,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_ArrayGetAtLongFunc: Symbol<'a, DtwainarraygetatlongFunc>,
     DTWAIN_ArrayGetAtLong64Func: Symbol<'a, Dtwainarraygetatlong64Func>,
     DTWAIN_ArrayGetAtSourceFunc: Symbol<'a, DtwainarraygetatsourceFunc>,
+    DTWAIN_ArrayGetAtSourceExFunc: Symbol<'a, DtwainarraygetatsourceexFunc>,
     DTWAIN_ArrayGetAtStringFunc: Symbol<'a, DtwainarraygetatstringFunc>,
     DTWAIN_ArrayGetAtStringAFunc: Symbol<'a, DtwainarraygetatstringaFunc>,
     DTWAIN_ArrayGetAtStringPtrFunc: Symbol<'a, DtwainarraygetatstringptrFunc>,
@@ -1325,7 +1335,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_CheckHandlesFunc: Symbol<'a, DtwaincheckhandlesFunc>,
     DTWAIN_ClearBuffersFunc: Symbol<'a, DtwainclearbuffersFunc>,
     DTWAIN_ClearErrorBufferFunc: Symbol<'a, DtwainclearerrorbufferFunc>,
-    DTWAIN_ClearPDFTextFunc: Symbol<'a, DtwainclearpdftextFunc>,
+    DTWAIN_ClearPDFTextElementsFunc: Symbol<'a, DtwainclearpdftextelementsFunc>,
     DTWAIN_ClearPageFunc: Symbol<'a, DtwainclearpageFunc>,
     DTWAIN_CloseSourceFunc: Symbol<'a, DtwainclosesourceFunc>,
     DTWAIN_CloseSourceUIFunc: Symbol<'a, DtwainclosesourceuiFunc>,
@@ -1339,6 +1349,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_ConvertToAPIStringWFunc: Symbol<'a, DtwainconverttoapistringwFunc>,
     DTWAIN_CreateAcquisitionArrayFunc: Symbol<'a, DtwaincreateacquisitionarrayFunc>,
     DTWAIN_CreatePDFTextElementFunc: Symbol<'a, DtwaincreatepdftextelementFunc>,
+    DTWAIN_CreatePDFTextElementCopyFunc: Symbol<'a, DtwaincreatepdftextelementcopyFunc>,
     DTWAIN_DeleteDIBFunc: Symbol<'a, DtwaindeletedibFunc>,
     DTWAIN_DestroyAcquisitionArrayFunc: Symbol<'a, DtwaindestroyacquisitionarrayFunc>,
     DTWAIN_DestroyPDFTextElementFunc: Symbol<'a, DtwaindestroypdftextelementFunc>,
@@ -1645,6 +1656,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetLightPathFunc: Symbol<'a, DtwaingetlightpathFunc>,
     DTWAIN_GetLightSourceFunc: Symbol<'a, DtwaingetlightsourceFunc>,
     DTWAIN_GetLightSourcesFunc: Symbol<'a, DtwaingetlightsourcesFunc>,
+    DTWAIN_GetLightSourcesExFunc: Symbol<'a, DtwaingetlightsourcesexFunc>,
     DTWAIN_GetLoggerCallbackFunc: Symbol<'a, DtwaingetloggercallbackFunc>,
     DTWAIN_GetLoggerCallbackAFunc: Symbol<'a, DtwaingetloggercallbackaFunc>,
     DTWAIN_GetLoggerCallbackWFunc: Symbol<'a, DtwaingetloggercallbackwFunc>,
@@ -1888,7 +1900,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsIndicatorEnabledFunc: Symbol<'a, DtwainisindicatorenabledFunc>,
     DTWAIN_IsIndicatorSupportedFunc: Symbol<'a, DtwainisindicatorsupportedFunc>,
     DTWAIN_IsInitializedFunc: Symbol<'a, DtwainisinitializedFunc>,
-    DTWAIN_IsJPEGSupportedFunc: Symbol<'a, DtwainisjpegsupportedFunc>,
     DTWAIN_IsJobControlSupportedFunc: Symbol<'a, DtwainisjobcontrolsupportedFunc>,
     DTWAIN_IsLampEnabledFunc: Symbol<'a, DtwainislampenabledFunc>,
     DTWAIN_IsLampSupportedFunc: Symbol<'a, DtwainislampsupportedFunc>,
@@ -1902,8 +1913,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsOpenSourcesOnSelectFunc: Symbol<'a, DtwainisopensourcesonselectFunc>,
     DTWAIN_IsOrientationSupportedFunc: Symbol<'a, DtwainisorientationsupportedFunc>,
     DTWAIN_IsOverscanSupportedFunc: Symbol<'a, DtwainisoverscansupportedFunc>,
-    DTWAIN_IsPDFSupportedFunc: Symbol<'a, DtwainispdfsupportedFunc>,
-    DTWAIN_IsPNGSupportedFunc: Symbol<'a, DtwainispngsupportedFunc>,
     DTWAIN_IsPaperDetectableFunc: Symbol<'a, DtwainispaperdetectableFunc>,
     DTWAIN_IsPaperSizeSupportedFunc: Symbol<'a, DtwainispapersizesupportedFunc>,
     DTWAIN_IsPatchCapsSupportedFunc: Symbol<'a, DtwainispatchcapssupportedFunc>,
@@ -1922,7 +1931,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsSourceOpenFunc: Symbol<'a, DtwainissourceopenFunc>,
     DTWAIN_IsSourceSelectedFunc: Symbol<'a, DtwainissourceselectedFunc>,
     DTWAIN_IsSourceValidFunc: Symbol<'a, DtwainissourcevalidFunc>,
-    DTWAIN_IsTIFFSupportedFunc: Symbol<'a, DtwainistiffsupportedFunc>,
     DTWAIN_IsThumbnailEnabledFunc: Symbol<'a, DtwainisthumbnailenabledFunc>,
     DTWAIN_IsThumbnailSupportedFunc: Symbol<'a, DtwainisthumbnailsupportedFunc>,
     DTWAIN_IsTwainAvailableFunc: Symbol<'a, DtwainistwainavailableFunc>,
@@ -1966,6 +1974,11 @@ pub struct DTwainAPI<'a>
     DTWAIN_RangeGetExpValueFloatStringWFunc: Symbol<'a, DtwainrangegetexpvaluefloatstringwFunc>,
     DTWAIN_RangeGetExpValueLongFunc: Symbol<'a, DtwainrangegetexpvaluelongFunc>,
     DTWAIN_RangeGetNearestValueFunc: Symbol<'a, DtwainrangegetnearestvalueFunc>,
+    DTWAIN_RangeGetNearestValueFloatFunc: Symbol<'a, DtwainrangegetnearestvaluefloatFunc>,
+    DTWAIN_RangeGetNearestValueFloatStringFunc: Symbol<'a, DtwainrangegetnearestvaluefloatstringFunc>,
+    DTWAIN_RangeGetNearestValueFloatStringAFunc: Symbol<'a, DtwainrangegetnearestvaluefloatstringaFunc>,
+    DTWAIN_RangeGetNearestValueFloatStringWFunc: Symbol<'a, DtwainrangegetnearestvaluefloatstringwFunc>,
+    DTWAIN_RangeGetNearestValueLongFunc: Symbol<'a, DtwainrangegetnearestvaluelongFunc>,
     DTWAIN_RangeGetPosFunc: Symbol<'a, DtwainrangegetposFunc>,
     DTWAIN_RangeGetPosFloatFunc: Symbol<'a, DtwainrangegetposfloatFunc>,
     DTWAIN_RangeGetPosFloatStringFunc: Symbol<'a, DtwainrangegetposfloatstringFunc>,
@@ -1979,11 +1992,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_RangeGetValueFloatStringWFunc: Symbol<'a, DtwainrangegetvaluefloatstringwFunc>,
     DTWAIN_RangeGetValueLongFunc: Symbol<'a, DtwainrangegetvaluelongFunc>,
     DTWAIN_RangeIsValidFunc: Symbol<'a, DtwainrangeisvalidFunc>,
-    DTWAIN_RangeNearestValueFloatFunc: Symbol<'a, DtwainrangenearestvaluefloatFunc>,
-    DTWAIN_RangeNearestValueFloatStringFunc: Symbol<'a, DtwainrangenearestvaluefloatstringFunc>,
-    DTWAIN_RangeNearestValueFloatStringAFunc: Symbol<'a, DtwainrangenearestvaluefloatstringaFunc>,
-    DTWAIN_RangeNearestValueFloatStringWFunc: Symbol<'a, DtwainrangenearestvaluefloatstringwFunc>,
-    DTWAIN_RangeNearestValueLongFunc: Symbol<'a, DtwainrangenearestvaluelongFunc>,
     DTWAIN_RangeSetAllFunc: Symbol<'a, DtwainrangesetallFunc>,
     DTWAIN_RangeSetAllFloatFunc: Symbol<'a, DtwainrangesetallfloatFunc>,
     DTWAIN_RangeSetAllFloatStringFunc: Symbol<'a, DtwainrangesetallfloatstringFunc>,
@@ -1996,6 +2004,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_RangeSetValueFloatStringAFunc: Symbol<'a, DtwainrangesetvaluefloatstringaFunc>,
     DTWAIN_RangeSetValueFloatStringWFunc: Symbol<'a, DtwainrangesetvaluefloatstringwFunc>,
     DTWAIN_RangeSetValueLongFunc: Symbol<'a, DtwainrangesetvaluelongFunc>,
+    DTWAIN_RemovePDFTextElementFunc: Symbol<'a, DtwainremovepdftextelementFunc>,
     DTWAIN_ResetPDFTextElementFunc: Symbol<'a, DtwainresetpdftextelementFunc>,
     DTWAIN_RewindPageFunc: Symbol<'a, DtwainrewindpageFunc>,
     DTWAIN_SelectDefaultOCREngineFunc: Symbol<'a, DtwainselectdefaultocrengineFunc>,
@@ -2172,6 +2181,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetPDFSubjectAFunc: Symbol<'a, DtwainsetpdfsubjectaFunc>,
     DTWAIN_SetPDFSubjectWFunc: Symbol<'a, DtwainsetpdfsubjectwFunc>,
     DTWAIN_SetPDFTextElementFloatFunc: Symbol<'a, DtwainsetpdftextelementfloatFunc>,
+    DTWAIN_SetPDFTextElementFloatStringFunc: Symbol<'a, DtwainsetpdftextelementfloatstringFunc>,
+    DTWAIN_SetPDFTextElementFloatStringAFunc: Symbol<'a, DtwainsetpdftextelementfloatstringaFunc>,
+    DTWAIN_SetPDFTextElementFloatStringWFunc: Symbol<'a, DtwainsetpdftextelementfloatstringwFunc>,
     DTWAIN_SetPDFTextElementLongFunc: Symbol<'a, DtwainsetpdftextelementlongFunc>,
     DTWAIN_SetPDFTextElementStringFunc: Symbol<'a, DtwainsetpdftextelementstringFunc>,
     DTWAIN_SetPDFTextElementStringAFunc: Symbol<'a, DtwainsetpdftextelementstringaFunc>,
@@ -3735,31 +3747,34 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_OCRERROR_MODENONE: i32 = 0;
     pub const DTWAIN_OCRERROR_SHOWMSGBOX: i32 = 1;
     pub const DTWAIN_OCRERROR_WRITEFILE: i32 = 2;
-    pub const DTWAIN_PDFTEXT_ALLPAGES: u32 = 0x00000001;
-    pub const DTWAIN_PDFTEXT_EVENPAGES: u32 = 0x00000002;
-    pub const DTWAIN_PDFTEXT_ODDPAGES: u32 = 0x00000004;
-    pub const DTWAIN_PDFTEXT_FIRSTPAGE: u32 = 0x00000008;
-    pub const DTWAIN_PDFTEXT_LASTPAGE: u32 = 0x00000010;
-    pub const DTWAIN_PDFTEXT_CURRENTPAGE: u32 = 0x00000020;
-    pub const DTWAIN_PDFTEXT_DISABLED: u32 = 0x00000040;
-    pub const DTWAIN_PDFTEXT_TOPLEFT: u32 = 0x00000100;
-    pub const DTWAIN_PDFTEXT_TOPRIGHT: u32 = 0x00000200;
-    pub const DTWAIN_PDFTEXT_HORIZCENTER: u32 = 0x00000400;
-    pub const DTWAIN_PDFTEXT_VERTCENTER: u32 = 0x00000800;
-    pub const DTWAIN_PDFTEXT_BOTTOMLEFT: u32 = 0x00001000;
-    pub const DTWAIN_PDFTEXT_BOTTOMRIGHT: u32 = 0x00002000;
-    pub const DTWAIN_PDFTEXT_BOTTOMCENTER: u32 = 0x00004000;
-    pub const DTWAIN_PDFTEXT_TOPCENTER: u32 = 0x00008000;
-    pub const DTWAIN_PDFTEXT_XCENTER: u32 = 0x00010000;
-    pub const DTWAIN_PDFTEXT_YCENTER: u32 = 0x00020000;
-    pub const DTWAIN_PDFTEXT_NOSCALING: u32 = 0x00100000;
-    pub const DTWAIN_PDFTEXT_NOCHARSPACING: u32 = 0x00200000;
-    pub const DTWAIN_PDFTEXT_NOWORDSPACING: u32 = 0x00400000;
-    pub const DTWAIN_PDFTEXT_NOSTROKEWIDTH: u32 = 0x00800000;
-    pub const DTWAIN_PDFTEXT_NORENDERMODE: u32 = 0x01000000;
-    pub const DTWAIN_PDFTEXT_NORGBCOLOR: u32 = 0x02000000;
-    pub const DTWAIN_PDFTEXT_NOFONTSIZE: u32 = 0x04000000;
-    pub const DTWAIN_PDFTEXT_NOABSPOSITION: u32 = 0x08000000;
+    pub const DTWAIN_PDFTEXT_ALLPAGES: i32 = 0x00000001;
+    pub const DTWAIN_PDFTEXT_EVENPAGES: i32 = 0x00000002;
+    pub const DTWAIN_PDFTEXT_ODDPAGES: i32 = 0x00000004;
+    pub const DTWAIN_PDFTEXT_FIRSTPAGE: i32 = 0x00000008;
+    pub const DTWAIN_PDFTEXT_LASTPAGE: i32 = 0x00000010;
+    pub const DTWAIN_PDFTEXT_CURRENTPAGE: i32 = 0x00000020;
+    pub const DTWAIN_PDFTEXT_DISABLED: i32 = 0x00000040;
+    pub const DTWAIN_PDFTEXT_TOPLEFT: i32 = 0x00000100;
+    pub const DTWAIN_PDFTEXT_TOPRIGHT: i32 = 0x00000200;
+    pub const DTWAIN_PDFTEXT_HORIZCENTER: i32 = 0x00000400;
+    pub const DTWAIN_PDFTEXT_VERTCENTER: i32 = 0x00000800;
+    pub const DTWAIN_PDFTEXT_BOTTOMLEFT: i32 = 0x00001000;
+    pub const DTWAIN_PDFTEXT_BOTTOMRIGHT: i32 = 0x00002000;
+    pub const DTWAIN_PDFTEXT_BOTTOMCENTER: i32 = 0x00004000;
+    pub const DTWAIN_PDFTEXT_TOPCENTER: i32 = 0x00008000;
+    pub const DTWAIN_PDFTEXT_XCENTER: i32 = 0x00010000;
+    pub const DTWAIN_PDFTEXT_YCENTER: i32 = 0x00020000;
+    pub const DTWAIN_PDFTEXT_NOSCALING: i32 = 0x00100000;
+    pub const DTWAIN_PDFTEXT_NOCHARSPACING: i32 = 0x00200000;
+    pub const DTWAIN_PDFTEXT_NOWORDSPACING: i32 = 0x00400000;
+    pub const DTWAIN_PDFTEXT_NOSTROKEWIDTH: i32 = 0x00800000;
+    pub const DTWAIN_PDFTEXT_NORENDERMODE: i32 = 0x01000000;
+    pub const DTWAIN_PDFTEXT_NORGBCOLOR: i32 = 0x02000000;
+    pub const DTWAIN_PDFTEXT_NOFONTSIZE: i32 = 0x04000000;
+    pub const DTWAIN_PDFTEXT_NOABSPOSITION: i32 = 0x08000000;
+    pub const DTWAIN_PDFTEXT_NOROTATION: i32 = 0x10000000;
+    pub const DTWAIN_PDFTEXT_NOSKEWING: i32 = 0x20000000;
+    pub const DTWAIN_PDFTEXT_NOSCALINGXY: i32 = 0x40000000;
     pub const DTWAIN_PDFTEXT_IGNOREALL: u32 = 0xFFF00000;
     pub const DTWAIN_FONT_COURIER: i32 = 0;
     pub const DTWAIN_FONT_COURIERBOLD: i32 = 1;
@@ -3796,31 +3811,13 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_PDFTEXTELEMENT_TEXTLENGTH: i32 = 14;
     pub const DTWAIN_PDFTEXTELEMENT_SKEWANGLES: i32 = 15;
     pub const DTWAIN_PDFTEXTELEMENT_TRANSFORMORDER: i32 = 16;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TSRK: i32 = 0;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TSKR: i32 = 1;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TKSR: i32 = 2;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TKRS: i32 = 3;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TRSK: i32 = 4;
-    pub const DTWAIN_PDFTEXTTRANSFORM_TRKS: i32 = 5;
-    pub const DTWAIN_PDFTEXTTRANSFORM_STRK: i32 = 6;
-    pub const DTWAIN_PDFTEXTTRANSFORM_STKR: i32 = 7;
-    pub const DTWAIN_PDFTEXTTRANSFORM_SKTR: i32 = 8;
-    pub const DTWAIN_PDFTEXTTRANSFORM_SKRT: i32 = 9;
-    pub const DTWAIN_PDFTEXTTRANSFORM_SRTK: i32 = 10;
-    pub const DTWAIN_PDFTEXTTRANSFORM_SRKT: i32 = 11;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RSTK: i32 = 12;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RSKT: i32 = 13;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RTSK: i32 = 14;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RTKT: i32 = 15;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RKST: i32 = 16;
-    pub const DTWAIN_PDFTEXTTRANSFORM_RKTS: i32 = 17;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KSTR: i32 = 18;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KSRT: i32 = 19;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KRST: i32 = 20;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KRTS: i32 = 21;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KTSR: i32 = 22;
-    pub const DTWAIN_PDFTEXTTRANSFORM_KTRS: i32 = 23;
-    pub const DTWAIN_PDFTEXTTRANFORM_LAST: i32 = DTwainAPI::DTWAIN_PDFTEXTTRANSFORM_KTRS;
+    pub const DTWAIN_PDFTEXTTRANSFORM_SRK: i32 = 0;
+    pub const DTWAIN_PDFTEXTTRANSFORM_SKR: i32 = 1;
+    pub const DTWAIN_PDFTEXTTRANSFORM_KSR: i32 = 2;
+    pub const DTWAIN_PDFTEXTTRANSFORM_KRS: i32 = 3;
+    pub const DTWAIN_PDFTEXTTRANSFORM_RSK: i32 = 4;
+    pub const DTWAIN_PDFTEXTTRANSFORM_RKS: i32 = 5;
+    pub const DTWAIN_PDFTEXTTRANFORM_LAST: i32 = DTwainAPI::DTWAIN_PDFTEXTTRANSFORM_RKS;
     pub const DTWAIN_TWDF_ULTRASONIC: i32 = 0;
     pub const DTWAIN_TWDF_BYLENGTH: i32 = 1;
     pub const DTWAIN_TWDF_INFRARED: i32 = 2;
@@ -3939,7 +3936,10 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_AddExtImageInfoQuery: Symbol<DtwainaddextimageinfoqueryFunc> = unsafe { library.get(b"DTWAIN_AddExtImageInfoQuery")? };
         let DTWAIN_AddPDFText: Symbol<DtwainaddpdftextFunc> = unsafe { library.get(b"DTWAIN_AddPDFText")? };
         let DTWAIN_AddPDFTextA: Symbol<DtwainaddpdftextaFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextA")? };
-        let DTWAIN_AddPDFTextEx: Symbol<DtwainaddpdftextexFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextEx")? };
+        let DTWAIN_AddPDFTextElement: Symbol<DtwainaddpdftextelementFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextElement")? };
+        let DTWAIN_AddPDFTextString: Symbol<DtwainaddpdftextstringFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextString")? };
+        let DTWAIN_AddPDFTextStringA: Symbol<DtwainaddpdftextstringaFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextStringA")? };
+        let DTWAIN_AddPDFTextStringW: Symbol<DtwainaddpdftextstringwFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextStringW")? };
         let DTWAIN_AddPDFTextW: Symbol<DtwainaddpdftextwFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextW")? };
         let DTWAIN_AllocateMemory: Symbol<DtwainallocatememoryFunc> = unsafe { library.get(b"DTWAIN_AllocateMemory")? };
         let DTWAIN_AllocateMemory64: Symbol<Dtwainallocatememory64Func> = unsafe { library.get(b"DTWAIN_AllocateMemory64")? };
@@ -4015,6 +4015,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_ArrayGetAtLong: Symbol<DtwainarraygetatlongFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtLong")? };
         let DTWAIN_ArrayGetAtLong64: Symbol<Dtwainarraygetatlong64Func> = unsafe { library.get(b"DTWAIN_ArrayGetAtLong64")? };
         let DTWAIN_ArrayGetAtSource: Symbol<DtwainarraygetatsourceFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtSource")? };
+        let DTWAIN_ArrayGetAtSourceEx: Symbol<DtwainarraygetatsourceexFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtSourceEx")? };
         let DTWAIN_ArrayGetAtString: Symbol<DtwainarraygetatstringFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtString")? };
         let DTWAIN_ArrayGetAtStringA: Symbol<DtwainarraygetatstringaFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtStringA")? };
         let DTWAIN_ArrayGetAtStringPtr: Symbol<DtwainarraygetatstringptrFunc> = unsafe { library.get(b"DTWAIN_ArrayGetAtStringPtr")? };
@@ -4086,7 +4087,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_CheckHandles: Symbol<DtwaincheckhandlesFunc> = unsafe { library.get(b"DTWAIN_CheckHandles")? };
         let DTWAIN_ClearBuffers: Symbol<DtwainclearbuffersFunc> = unsafe { library.get(b"DTWAIN_ClearBuffers")? };
         let DTWAIN_ClearErrorBuffer: Symbol<DtwainclearerrorbufferFunc> = unsafe { library.get(b"DTWAIN_ClearErrorBuffer")? };
-        let DTWAIN_ClearPDFText: Symbol<DtwainclearpdftextFunc> = unsafe { library.get(b"DTWAIN_ClearPDFText")? };
+        let DTWAIN_ClearPDFTextElements: Symbol<DtwainclearpdftextelementsFunc> = unsafe { library.get(b"DTWAIN_ClearPDFTextElements")? };
         let DTWAIN_ClearPage: Symbol<DtwainclearpageFunc> = unsafe { library.get(b"DTWAIN_ClearPage")? };
         let DTWAIN_CloseSource: Symbol<DtwainclosesourceFunc> = unsafe { library.get(b"DTWAIN_CloseSource")? };
         let DTWAIN_CloseSourceUI: Symbol<DtwainclosesourceuiFunc> = unsafe { library.get(b"DTWAIN_CloseSourceUI")? };
@@ -4100,6 +4101,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_ConvertToAPIStringW: Symbol<DtwainconverttoapistringwFunc> = unsafe { library.get(b"DTWAIN_ConvertToAPIStringW")? };
         let DTWAIN_CreateAcquisitionArray: Symbol<DtwaincreateacquisitionarrayFunc> = unsafe { library.get(b"DTWAIN_CreateAcquisitionArray")? };
         let DTWAIN_CreatePDFTextElement: Symbol<DtwaincreatepdftextelementFunc> = unsafe { library.get(b"DTWAIN_CreatePDFTextElement")? };
+        let DTWAIN_CreatePDFTextElementCopy: Symbol<DtwaincreatepdftextelementcopyFunc> = unsafe { library.get(b"DTWAIN_CreatePDFTextElementCopy")? };
         let DTWAIN_DeleteDIB: Symbol<DtwaindeletedibFunc> = unsafe { library.get(b"DTWAIN_DeleteDIB")? };
         let DTWAIN_DestroyAcquisitionArray: Symbol<DtwaindestroyacquisitionarrayFunc> = unsafe { library.get(b"DTWAIN_DestroyAcquisitionArray")? };
         let DTWAIN_DestroyPDFTextElement: Symbol<DtwaindestroypdftextelementFunc> = unsafe { library.get(b"DTWAIN_DestroyPDFTextElement")? };
@@ -4406,6 +4408,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetLightPath: Symbol<DtwaingetlightpathFunc> = unsafe { library.get(b"DTWAIN_GetLightPath")? };
         let DTWAIN_GetLightSource: Symbol<DtwaingetlightsourceFunc> = unsafe { library.get(b"DTWAIN_GetLightSource")? };
         let DTWAIN_GetLightSources: Symbol<DtwaingetlightsourcesFunc> = unsafe { library.get(b"DTWAIN_GetLightSources")? };
+        let DTWAIN_GetLightSourcesEx: Symbol<DtwaingetlightsourcesexFunc> = unsafe { library.get(b"DTWAIN_GetLightSourcesEx")? };
         let DTWAIN_GetLoggerCallback: Symbol<DtwaingetloggercallbackFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallback")? };
         let DTWAIN_GetLoggerCallbackA: Symbol<DtwaingetloggercallbackaFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallbackA")? };
         let DTWAIN_GetLoggerCallbackW: Symbol<DtwaingetloggercallbackwFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallbackW")? };
@@ -4649,7 +4652,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsIndicatorEnabled: Symbol<DtwainisindicatorenabledFunc> = unsafe { library.get(b"DTWAIN_IsIndicatorEnabled")? };
         let DTWAIN_IsIndicatorSupported: Symbol<DtwainisindicatorsupportedFunc> = unsafe { library.get(b"DTWAIN_IsIndicatorSupported")? };
         let DTWAIN_IsInitialized: Symbol<DtwainisinitializedFunc> = unsafe { library.get(b"DTWAIN_IsInitialized")? };
-        let DTWAIN_IsJPEGSupported: Symbol<DtwainisjpegsupportedFunc> = unsafe { library.get(b"DTWAIN_IsJPEGSupported")? };
         let DTWAIN_IsJobControlSupported: Symbol<DtwainisjobcontrolsupportedFunc> = unsafe { library.get(b"DTWAIN_IsJobControlSupported")? };
         let DTWAIN_IsLampEnabled: Symbol<DtwainislampenabledFunc> = unsafe { library.get(b"DTWAIN_IsLampEnabled")? };
         let DTWAIN_IsLampSupported: Symbol<DtwainislampsupportedFunc> = unsafe { library.get(b"DTWAIN_IsLampSupported")? };
@@ -4663,8 +4665,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsOpenSourcesOnSelect: Symbol<DtwainisopensourcesonselectFunc> = unsafe { library.get(b"DTWAIN_IsOpenSourcesOnSelect")? };
         let DTWAIN_IsOrientationSupported: Symbol<DtwainisorientationsupportedFunc> = unsafe { library.get(b"DTWAIN_IsOrientationSupported")? };
         let DTWAIN_IsOverscanSupported: Symbol<DtwainisoverscansupportedFunc> = unsafe { library.get(b"DTWAIN_IsOverscanSupported")? };
-        let DTWAIN_IsPDFSupported: Symbol<DtwainispdfsupportedFunc> = unsafe { library.get(b"DTWAIN_IsPDFSupported")? };
-        let DTWAIN_IsPNGSupported: Symbol<DtwainispngsupportedFunc> = unsafe { library.get(b"DTWAIN_IsPNGSupported")? };
         let DTWAIN_IsPaperDetectable: Symbol<DtwainispaperdetectableFunc> = unsafe { library.get(b"DTWAIN_IsPaperDetectable")? };
         let DTWAIN_IsPaperSizeSupported: Symbol<DtwainispapersizesupportedFunc> = unsafe { library.get(b"DTWAIN_IsPaperSizeSupported")? };
         let DTWAIN_IsPatchCapsSupported: Symbol<DtwainispatchcapssupportedFunc> = unsafe { library.get(b"DTWAIN_IsPatchCapsSupported")? };
@@ -4683,7 +4683,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsSourceOpen: Symbol<DtwainissourceopenFunc> = unsafe { library.get(b"DTWAIN_IsSourceOpen")? };
         let DTWAIN_IsSourceSelected: Symbol<DtwainissourceselectedFunc> = unsafe { library.get(b"DTWAIN_IsSourceSelected")? };
         let DTWAIN_IsSourceValid: Symbol<DtwainissourcevalidFunc> = unsafe { library.get(b"DTWAIN_IsSourceValid")? };
-        let DTWAIN_IsTIFFSupported: Symbol<DtwainistiffsupportedFunc> = unsafe { library.get(b"DTWAIN_IsTIFFSupported")? };
         let DTWAIN_IsThumbnailEnabled: Symbol<DtwainisthumbnailenabledFunc> = unsafe { library.get(b"DTWAIN_IsThumbnailEnabled")? };
         let DTWAIN_IsThumbnailSupported: Symbol<DtwainisthumbnailsupportedFunc> = unsafe { library.get(b"DTWAIN_IsThumbnailSupported")? };
         let DTWAIN_IsTwainAvailable: Symbol<DtwainistwainavailableFunc> = unsafe { library.get(b"DTWAIN_IsTwainAvailable")? };
@@ -4727,6 +4726,11 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_RangeGetExpValueFloatStringW: Symbol<DtwainrangegetexpvaluefloatstringwFunc> = unsafe { library.get(b"DTWAIN_RangeGetExpValueFloatStringW")? };
         let DTWAIN_RangeGetExpValueLong: Symbol<DtwainrangegetexpvaluelongFunc> = unsafe { library.get(b"DTWAIN_RangeGetExpValueLong")? };
         let DTWAIN_RangeGetNearestValue: Symbol<DtwainrangegetnearestvalueFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValue")? };
+        let DTWAIN_RangeGetNearestValueFloat: Symbol<DtwainrangegetnearestvaluefloatFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValueFloat")? };
+        let DTWAIN_RangeGetNearestValueFloatString: Symbol<DtwainrangegetnearestvaluefloatstringFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValueFloatString")? };
+        let DTWAIN_RangeGetNearestValueFloatStringA: Symbol<DtwainrangegetnearestvaluefloatstringaFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValueFloatStringA")? };
+        let DTWAIN_RangeGetNearestValueFloatStringW: Symbol<DtwainrangegetnearestvaluefloatstringwFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValueFloatStringW")? };
+        let DTWAIN_RangeGetNearestValueLong: Symbol<DtwainrangegetnearestvaluelongFunc> = unsafe { library.get(b"DTWAIN_RangeGetNearestValueLong")? };
         let DTWAIN_RangeGetPos: Symbol<DtwainrangegetposFunc> = unsafe { library.get(b"DTWAIN_RangeGetPos")? };
         let DTWAIN_RangeGetPosFloat: Symbol<DtwainrangegetposfloatFunc> = unsafe { library.get(b"DTWAIN_RangeGetPosFloat")? };
         let DTWAIN_RangeGetPosFloatString: Symbol<DtwainrangegetposfloatstringFunc> = unsafe { library.get(b"DTWAIN_RangeGetPosFloatString")? };
@@ -4740,11 +4744,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_RangeGetValueFloatStringW: Symbol<DtwainrangegetvaluefloatstringwFunc> = unsafe { library.get(b"DTWAIN_RangeGetValueFloatStringW")? };
         let DTWAIN_RangeGetValueLong: Symbol<DtwainrangegetvaluelongFunc> = unsafe { library.get(b"DTWAIN_RangeGetValueLong")? };
         let DTWAIN_RangeIsValid: Symbol<DtwainrangeisvalidFunc> = unsafe { library.get(b"DTWAIN_RangeIsValid")? };
-        let DTWAIN_RangeNearestValueFloat: Symbol<DtwainrangenearestvaluefloatFunc> = unsafe { library.get(b"DTWAIN_RangeNearestValueFloat")? };
-        let DTWAIN_RangeNearestValueFloatString: Symbol<DtwainrangenearestvaluefloatstringFunc> = unsafe { library.get(b"DTWAIN_RangeNearestValueFloatString")? };
-        let DTWAIN_RangeNearestValueFloatStringA: Symbol<DtwainrangenearestvaluefloatstringaFunc> = unsafe { library.get(b"DTWAIN_RangeNearestValueFloatStringA")? };
-        let DTWAIN_RangeNearestValueFloatStringW: Symbol<DtwainrangenearestvaluefloatstringwFunc> = unsafe { library.get(b"DTWAIN_RangeNearestValueFloatStringW")? };
-        let DTWAIN_RangeNearestValueLong: Symbol<DtwainrangenearestvaluelongFunc> = unsafe { library.get(b"DTWAIN_RangeNearestValueLong")? };
         let DTWAIN_RangeSetAll: Symbol<DtwainrangesetallFunc> = unsafe { library.get(b"DTWAIN_RangeSetAll")? };
         let DTWAIN_RangeSetAllFloat: Symbol<DtwainrangesetallfloatFunc> = unsafe { library.get(b"DTWAIN_RangeSetAllFloat")? };
         let DTWAIN_RangeSetAllFloatString: Symbol<DtwainrangesetallfloatstringFunc> = unsafe { library.get(b"DTWAIN_RangeSetAllFloatString")? };
@@ -4757,6 +4756,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_RangeSetValueFloatStringA: Symbol<DtwainrangesetvaluefloatstringaFunc> = unsafe { library.get(b"DTWAIN_RangeSetValueFloatStringA")? };
         let DTWAIN_RangeSetValueFloatStringW: Symbol<DtwainrangesetvaluefloatstringwFunc> = unsafe { library.get(b"DTWAIN_RangeSetValueFloatStringW")? };
         let DTWAIN_RangeSetValueLong: Symbol<DtwainrangesetvaluelongFunc> = unsafe { library.get(b"DTWAIN_RangeSetValueLong")? };
+        let DTWAIN_RemovePDFTextElement: Symbol<DtwainremovepdftextelementFunc> = unsafe { library.get(b"DTWAIN_RemovePDFTextElement")? };
         let DTWAIN_ResetPDFTextElement: Symbol<DtwainresetpdftextelementFunc> = unsafe { library.get(b"DTWAIN_ResetPDFTextElement")? };
         let DTWAIN_RewindPage: Symbol<DtwainrewindpageFunc> = unsafe { library.get(b"DTWAIN_RewindPage")? };
         let DTWAIN_SelectDefaultOCREngine: Symbol<DtwainselectdefaultocrengineFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultOCREngine")? };
@@ -4933,6 +4933,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetPDFSubjectA: Symbol<DtwainsetpdfsubjectaFunc> = unsafe { library.get(b"DTWAIN_SetPDFSubjectA")? };
         let DTWAIN_SetPDFSubjectW: Symbol<DtwainsetpdfsubjectwFunc> = unsafe { library.get(b"DTWAIN_SetPDFSubjectW")? };
         let DTWAIN_SetPDFTextElementFloat: Symbol<DtwainsetpdftextelementfloatFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementFloat")? };
+        let DTWAIN_SetPDFTextElementFloatString: Symbol<DtwainsetpdftextelementfloatstringFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementFloatString")? };
+        let DTWAIN_SetPDFTextElementFloatStringA: Symbol<DtwainsetpdftextelementfloatstringaFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementFloatStringA")? };
+        let DTWAIN_SetPDFTextElementFloatStringW: Symbol<DtwainsetpdftextelementfloatstringwFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementFloatStringW")? };
         let DTWAIN_SetPDFTextElementLong: Symbol<DtwainsetpdftextelementlongFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementLong")? };
         let DTWAIN_SetPDFTextElementString: Symbol<DtwainsetpdftextelementstringFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementString")? };
         let DTWAIN_SetPDFTextElementStringA: Symbol<DtwainsetpdftextelementstringaFunc> = unsafe { library.get(b"DTWAIN_SetPDFTextElementStringA")? };
@@ -5052,7 +5055,10 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_AddExtImageInfoQueryFunc: DTWAIN_AddExtImageInfoQuery,
             DTWAIN_AddPDFTextFunc: DTWAIN_AddPDFText,
             DTWAIN_AddPDFTextAFunc: DTWAIN_AddPDFTextA,
-            DTWAIN_AddPDFTextExFunc: DTWAIN_AddPDFTextEx,
+            DTWAIN_AddPDFTextElementFunc: DTWAIN_AddPDFTextElement,
+            DTWAIN_AddPDFTextStringFunc: DTWAIN_AddPDFTextString,
+            DTWAIN_AddPDFTextStringAFunc: DTWAIN_AddPDFTextStringA,
+            DTWAIN_AddPDFTextStringWFunc: DTWAIN_AddPDFTextStringW,
             DTWAIN_AddPDFTextWFunc: DTWAIN_AddPDFTextW,
             DTWAIN_AllocateMemoryFunc: DTWAIN_AllocateMemory,
             DTWAIN_AllocateMemory64Func: DTWAIN_AllocateMemory64,
@@ -5128,6 +5134,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_ArrayGetAtLongFunc: DTWAIN_ArrayGetAtLong,
             DTWAIN_ArrayGetAtLong64Func: DTWAIN_ArrayGetAtLong64,
             DTWAIN_ArrayGetAtSourceFunc: DTWAIN_ArrayGetAtSource,
+            DTWAIN_ArrayGetAtSourceExFunc: DTWAIN_ArrayGetAtSourceEx,
             DTWAIN_ArrayGetAtStringFunc: DTWAIN_ArrayGetAtString,
             DTWAIN_ArrayGetAtStringAFunc: DTWAIN_ArrayGetAtStringA,
             DTWAIN_ArrayGetAtStringPtrFunc: DTWAIN_ArrayGetAtStringPtr,
@@ -5199,7 +5206,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_CheckHandlesFunc: DTWAIN_CheckHandles,
             DTWAIN_ClearBuffersFunc: DTWAIN_ClearBuffers,
             DTWAIN_ClearErrorBufferFunc: DTWAIN_ClearErrorBuffer,
-            DTWAIN_ClearPDFTextFunc: DTWAIN_ClearPDFText,
+            DTWAIN_ClearPDFTextElementsFunc: DTWAIN_ClearPDFTextElements,
             DTWAIN_ClearPageFunc: DTWAIN_ClearPage,
             DTWAIN_CloseSourceFunc: DTWAIN_CloseSource,
             DTWAIN_CloseSourceUIFunc: DTWAIN_CloseSourceUI,
@@ -5213,6 +5220,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_ConvertToAPIStringWFunc: DTWAIN_ConvertToAPIStringW,
             DTWAIN_CreateAcquisitionArrayFunc: DTWAIN_CreateAcquisitionArray,
             DTWAIN_CreatePDFTextElementFunc: DTWAIN_CreatePDFTextElement,
+            DTWAIN_CreatePDFTextElementCopyFunc: DTWAIN_CreatePDFTextElementCopy,
             DTWAIN_DeleteDIBFunc: DTWAIN_DeleteDIB,
             DTWAIN_DestroyAcquisitionArrayFunc: DTWAIN_DestroyAcquisitionArray,
             DTWAIN_DestroyPDFTextElementFunc: DTWAIN_DestroyPDFTextElement,
@@ -5519,6 +5527,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetLightPathFunc: DTWAIN_GetLightPath,
             DTWAIN_GetLightSourceFunc: DTWAIN_GetLightSource,
             DTWAIN_GetLightSourcesFunc: DTWAIN_GetLightSources,
+            DTWAIN_GetLightSourcesExFunc: DTWAIN_GetLightSourcesEx,
             DTWAIN_GetLoggerCallbackFunc: DTWAIN_GetLoggerCallback,
             DTWAIN_GetLoggerCallbackAFunc: DTWAIN_GetLoggerCallbackA,
             DTWAIN_GetLoggerCallbackWFunc: DTWAIN_GetLoggerCallbackW,
@@ -5762,7 +5771,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsIndicatorEnabledFunc: DTWAIN_IsIndicatorEnabled,
             DTWAIN_IsIndicatorSupportedFunc: DTWAIN_IsIndicatorSupported,
             DTWAIN_IsInitializedFunc: DTWAIN_IsInitialized,
-            DTWAIN_IsJPEGSupportedFunc: DTWAIN_IsJPEGSupported,
             DTWAIN_IsJobControlSupportedFunc: DTWAIN_IsJobControlSupported,
             DTWAIN_IsLampEnabledFunc: DTWAIN_IsLampEnabled,
             DTWAIN_IsLampSupportedFunc: DTWAIN_IsLampSupported,
@@ -5776,8 +5784,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsOpenSourcesOnSelectFunc: DTWAIN_IsOpenSourcesOnSelect,
             DTWAIN_IsOrientationSupportedFunc: DTWAIN_IsOrientationSupported,
             DTWAIN_IsOverscanSupportedFunc: DTWAIN_IsOverscanSupported,
-            DTWAIN_IsPDFSupportedFunc: DTWAIN_IsPDFSupported,
-            DTWAIN_IsPNGSupportedFunc: DTWAIN_IsPNGSupported,
             DTWAIN_IsPaperDetectableFunc: DTWAIN_IsPaperDetectable,
             DTWAIN_IsPaperSizeSupportedFunc: DTWAIN_IsPaperSizeSupported,
             DTWAIN_IsPatchCapsSupportedFunc: DTWAIN_IsPatchCapsSupported,
@@ -5796,7 +5802,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsSourceOpenFunc: DTWAIN_IsSourceOpen,
             DTWAIN_IsSourceSelectedFunc: DTWAIN_IsSourceSelected,
             DTWAIN_IsSourceValidFunc: DTWAIN_IsSourceValid,
-            DTWAIN_IsTIFFSupportedFunc: DTWAIN_IsTIFFSupported,
             DTWAIN_IsThumbnailEnabledFunc: DTWAIN_IsThumbnailEnabled,
             DTWAIN_IsThumbnailSupportedFunc: DTWAIN_IsThumbnailSupported,
             DTWAIN_IsTwainAvailableFunc: DTWAIN_IsTwainAvailable,
@@ -5840,6 +5845,11 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_RangeGetExpValueFloatStringWFunc: DTWAIN_RangeGetExpValueFloatStringW,
             DTWAIN_RangeGetExpValueLongFunc: DTWAIN_RangeGetExpValueLong,
             DTWAIN_RangeGetNearestValueFunc: DTWAIN_RangeGetNearestValue,
+            DTWAIN_RangeGetNearestValueFloatFunc: DTWAIN_RangeGetNearestValueFloat,
+            DTWAIN_RangeGetNearestValueFloatStringFunc: DTWAIN_RangeGetNearestValueFloatString,
+            DTWAIN_RangeGetNearestValueFloatStringAFunc: DTWAIN_RangeGetNearestValueFloatStringA,
+            DTWAIN_RangeGetNearestValueFloatStringWFunc: DTWAIN_RangeGetNearestValueFloatStringW,
+            DTWAIN_RangeGetNearestValueLongFunc: DTWAIN_RangeGetNearestValueLong,
             DTWAIN_RangeGetPosFunc: DTWAIN_RangeGetPos,
             DTWAIN_RangeGetPosFloatFunc: DTWAIN_RangeGetPosFloat,
             DTWAIN_RangeGetPosFloatStringFunc: DTWAIN_RangeGetPosFloatString,
@@ -5853,11 +5863,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_RangeGetValueFloatStringWFunc: DTWAIN_RangeGetValueFloatStringW,
             DTWAIN_RangeGetValueLongFunc: DTWAIN_RangeGetValueLong,
             DTWAIN_RangeIsValidFunc: DTWAIN_RangeIsValid,
-            DTWAIN_RangeNearestValueFloatFunc: DTWAIN_RangeNearestValueFloat,
-            DTWAIN_RangeNearestValueFloatStringFunc: DTWAIN_RangeNearestValueFloatString,
-            DTWAIN_RangeNearestValueFloatStringAFunc: DTWAIN_RangeNearestValueFloatStringA,
-            DTWAIN_RangeNearestValueFloatStringWFunc: DTWAIN_RangeNearestValueFloatStringW,
-            DTWAIN_RangeNearestValueLongFunc: DTWAIN_RangeNearestValueLong,
             DTWAIN_RangeSetAllFunc: DTWAIN_RangeSetAll,
             DTWAIN_RangeSetAllFloatFunc: DTWAIN_RangeSetAllFloat,
             DTWAIN_RangeSetAllFloatStringFunc: DTWAIN_RangeSetAllFloatString,
@@ -5870,6 +5875,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_RangeSetValueFloatStringAFunc: DTWAIN_RangeSetValueFloatStringA,
             DTWAIN_RangeSetValueFloatStringWFunc: DTWAIN_RangeSetValueFloatStringW,
             DTWAIN_RangeSetValueLongFunc: DTWAIN_RangeSetValueLong,
+            DTWAIN_RemovePDFTextElementFunc: DTWAIN_RemovePDFTextElement,
             DTWAIN_ResetPDFTextElementFunc: DTWAIN_ResetPDFTextElement,
             DTWAIN_RewindPageFunc: DTWAIN_RewindPage,
             DTWAIN_SelectDefaultOCREngineFunc: DTWAIN_SelectDefaultOCREngine,
@@ -6046,6 +6052,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetPDFSubjectAFunc: DTWAIN_SetPDFSubjectA,
             DTWAIN_SetPDFSubjectWFunc: DTWAIN_SetPDFSubjectW,
             DTWAIN_SetPDFTextElementFloatFunc: DTWAIN_SetPDFTextElementFloat,
+            DTWAIN_SetPDFTextElementFloatStringFunc: DTWAIN_SetPDFTextElementFloatString,
+            DTWAIN_SetPDFTextElementFloatStringAFunc: DTWAIN_SetPDFTextElementFloatStringA,
+            DTWAIN_SetPDFTextElementFloatStringWFunc: DTWAIN_SetPDFTextElementFloatStringW,
             DTWAIN_SetPDFTextElementLongFunc: DTWAIN_SetPDFTextElementLong,
             DTWAIN_SetPDFTextElementStringFunc: DTWAIN_SetPDFTextElementString,
             DTWAIN_SetPDFTextElementStringAFunc: DTWAIN_SetPDFTextElementStringA,
@@ -6211,19 +6220,31 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_AddExtImageInfoQueryFunc)(Source, ExtImageInfo);  }
     }
 
-    pub fn DTWAIN_AddPDFText(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: i32, Flags: u32) -> i32 {
+    pub fn DTWAIN_AddPDFText(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, Flags: u32) -> i32 {
         unsafe { return (self.DTWAIN_AddPDFTextFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
     }
 
-    pub fn DTWAIN_AddPDFTextA(&self, Source: *mut c_void, szText: *const c_char, xPos: i32, yPos: i32, fontName: *const c_char, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: i32, Flags: u32) -> i32 {
+    pub fn DTWAIN_AddPDFTextA(&self, Source: *mut c_void, szText: *const c_char, xPos: i32, yPos: i32, fontName: *const c_char, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, Flags: u32) -> i32 {
         unsafe { return (self.DTWAIN_AddPDFTextAFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
     }
 
-    pub fn DTWAIN_AddPDFTextEx(&self, Source: *mut c_void, TextElement: *mut c_void, Flags: u32) -> i32 {
-        unsafe { return (self.DTWAIN_AddPDFTextExFunc)(Source, TextElement, Flags);  }
+    pub fn DTWAIN_AddPDFTextElement(&self, Source: *mut c_void, TextElement: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextElementFunc)(Source, TextElement);  }
     }
 
-    pub fn DTWAIN_AddPDFTextW(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: i32, Flags: u32) -> i32 {
+    pub fn DTWAIN_AddPDFTextString(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: *const u16, colorRGB: i32, renderMode: i32, scaling: *const u16, charSpacing: *const u16, wordSpacing: *const u16, strokeWidth: *const u16, Flags: u32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextStringFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextStringA(&self, Source: *mut c_void, szText: *const c_char, xPos: i32, yPos: i32, fontName: *const c_char, fontSize: *const c_char, colorRGB: i32, renderMode: i32, scaling: *const c_char, charSpacing: *const c_char, wordSpacing: *const c_char, strokeWidth: *const c_char, Flags: u32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextStringAFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextStringW(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: *const u16, colorRGB: i32, renderMode: i32, scaling: *const u16, charSpacing: *const u16, wordSpacing: *const u16, strokeWidth: *const u16, Flags: u32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextStringWFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextW(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, Flags: u32) -> i32 {
         unsafe { return (self.DTWAIN_AddPDFTextWFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);  }
     }
 
@@ -6523,6 +6544,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_ArrayGetAtSourceFunc)(pArray, nWhere, ppSource);  }
     }
 
+    pub fn DTWAIN_ArrayGetAtSourceEx(&self, pArray: *mut c_void, nWhere: i32) -> *mut c_void {
+        unsafe { return (self.DTWAIN_ArrayGetAtSourceExFunc)(pArray, nWhere);  }
+    }
+
     pub fn DTWAIN_ArrayGetAtString(&self, pArray: *mut c_void, nWhere: i32, pStr: *mut u16) -> i32 {
         unsafe { return (self.DTWAIN_ArrayGetAtStringFunc)(pArray, nWhere, pStr);  }
     }
@@ -6807,8 +6832,8 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_ClearErrorBufferFunc)();  }
     }
 
-    pub fn DTWAIN_ClearPDFText(&self, Source: *mut c_void) -> i32 {
-        unsafe { return (self.DTWAIN_ClearPDFTextFunc)(Source);  }
+    pub fn DTWAIN_ClearPDFTextElements(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_ClearPDFTextElementsFunc)(Source);  }
     }
 
     pub fn DTWAIN_ClearPage(&self, Source: *mut c_void) -> i32 {
@@ -6859,8 +6884,12 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_CreateAcquisitionArrayFunc)();  }
     }
 
-    pub fn DTWAIN_CreatePDFTextElement(&self, Source: *mut c_void) -> *mut c_void {
-        unsafe { return (self.DTWAIN_CreatePDFTextElementFunc)(Source);  }
+    pub fn DTWAIN_CreatePDFTextElement(&self) -> *mut c_void {
+        unsafe { return (self.DTWAIN_CreatePDFTextElementFunc)();  }
+    }
+
+    pub fn DTWAIN_CreatePDFTextElementCopy(&self, TextElement: *mut c_void) -> *mut c_void {
+        unsafe { return (self.DTWAIN_CreatePDFTextElementCopyFunc)(TextElement);  }
     }
 
     pub fn DTWAIN_DeleteDIB(&self, hDib: *mut c_void) -> i32 {
@@ -8087,6 +8116,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetLightSourcesFunc)(Source, LightSources);  }
     }
 
+    pub fn DTWAIN_GetLightSourcesEx(&self, Source: *mut c_void) -> *mut c_void {
+        unsafe { return (self.DTWAIN_GetLightSourcesExFunc)(Source);  }
+    }
+
     pub fn DTWAIN_GetLoggerCallback(&self) -> DTWAIN_LOGGER_PROC {
         unsafe { return (self.DTWAIN_GetLoggerCallbackFunc)();  }
     }
@@ -9059,10 +9092,6 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_IsInitializedFunc)();  }
     }
 
-    pub fn DTWAIN_IsJPEGSupported(&self) -> i32 {
-        unsafe { return (self.DTWAIN_IsJPEGSupportedFunc)();  }
-    }
-
     pub fn DTWAIN_IsJobControlSupported(&self, Source: *mut c_void, JobControl: i32) -> i32 {
         unsafe { return (self.DTWAIN_IsJobControlSupportedFunc)(Source, JobControl);  }
     }
@@ -9113,14 +9142,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_IsOverscanSupported(&self, Source: *mut c_void, SupportValue: i32) -> i32 {
         unsafe { return (self.DTWAIN_IsOverscanSupportedFunc)(Source, SupportValue);  }
-    }
-
-    pub fn DTWAIN_IsPDFSupported(&self) -> i32 {
-        unsafe { return (self.DTWAIN_IsPDFSupportedFunc)();  }
-    }
-
-    pub fn DTWAIN_IsPNGSupported(&self) -> i32 {
-        unsafe { return (self.DTWAIN_IsPNGSupportedFunc)();  }
     }
 
     pub fn DTWAIN_IsPaperDetectable(&self, Source: *mut c_void) -> i32 {
@@ -9193,10 +9214,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_IsSourceValid(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_IsSourceValidFunc)(Source);  }
-    }
-
-    pub fn DTWAIN_IsTIFFSupported(&self) -> i32 {
-        unsafe { return (self.DTWAIN_IsTIFFSupportedFunc)();  }
     }
 
     pub fn DTWAIN_IsThumbnailEnabled(&self, Source: *mut c_void) -> i32 {
@@ -9371,6 +9388,26 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_RangeGetNearestValueFunc)(pArray, pVariantIn, pVariantOut, RoundType);  }
     }
 
+    pub fn DTWAIN_RangeGetNearestValueFloat(&self, pArray: *mut c_void, dIn: f64, pOut: *mut f64, RoundType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_RangeGetNearestValueFloatFunc)(pArray, dIn, pOut, RoundType);  }
+    }
+
+    pub fn DTWAIN_RangeGetNearestValueFloatString(&self, pArray: *mut c_void, dIn: *const u16, pOut: *mut u16, RoundType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_RangeGetNearestValueFloatStringFunc)(pArray, dIn, pOut, RoundType);  }
+    }
+
+    pub fn DTWAIN_RangeGetNearestValueFloatStringA(&self, pArray: *mut c_void, dIn: *const c_char, dOut: *mut c_char, RoundType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_RangeGetNearestValueFloatStringAFunc)(pArray, dIn, dOut, RoundType);  }
+    }
+
+    pub fn DTWAIN_RangeGetNearestValueFloatStringW(&self, pArray: *mut c_void, dIn: *const u16, dOut: *mut u16, RoundType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_RangeGetNearestValueFloatStringWFunc)(pArray, dIn, dOut, RoundType);  }
+    }
+
+    pub fn DTWAIN_RangeGetNearestValueLong(&self, pArray: *mut c_void, lIn: i32, pOut: *mut i32, RoundType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_RangeGetNearestValueLongFunc)(pArray, lIn, pOut, RoundType);  }
+    }
+
     pub fn DTWAIN_RangeGetPos(&self, pArray: *mut c_void, pVariant: *mut c_void, pPos: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_RangeGetPosFunc)(pArray, pVariant, pPos);  }
     }
@@ -9423,26 +9460,6 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_RangeIsValidFunc)(Range, pStatus);  }
     }
 
-    pub fn DTWAIN_RangeNearestValueFloat(&self, pArray: *mut c_void, dIn: f64, pOut: *mut f64, RoundType: i32) -> i32 {
-        unsafe { return (self.DTWAIN_RangeNearestValueFloatFunc)(pArray, dIn, pOut, RoundType);  }
-    }
-
-    pub fn DTWAIN_RangeNearestValueFloatString(&self, pArray: *mut c_void, dIn: *const u16, pOut: *mut u16, RoundType: i32) -> i32 {
-        unsafe { return (self.DTWAIN_RangeNearestValueFloatStringFunc)(pArray, dIn, pOut, RoundType);  }
-    }
-
-    pub fn DTWAIN_RangeNearestValueFloatStringA(&self, pArray: *mut c_void, dIn: *const c_char, dOut: *mut c_char, RoundType: i32) -> i32 {
-        unsafe { return (self.DTWAIN_RangeNearestValueFloatStringAFunc)(pArray, dIn, dOut, RoundType);  }
-    }
-
-    pub fn DTWAIN_RangeNearestValueFloatStringW(&self, pArray: *mut c_void, dIn: *const u16, dOut: *mut u16, RoundType: i32) -> i32 {
-        unsafe { return (self.DTWAIN_RangeNearestValueFloatStringWFunc)(pArray, dIn, dOut, RoundType);  }
-    }
-
-    pub fn DTWAIN_RangeNearestValueLong(&self, pArray: *mut c_void, lIn: i32, pOut: *mut i32, RoundType: i32) -> i32 {
-        unsafe { return (self.DTWAIN_RangeNearestValueLongFunc)(pArray, lIn, pOut, RoundType);  }
-    }
-
     pub fn DTWAIN_RangeSetAll(&self, pArray: *mut c_void, pVariantLow: *mut c_void, pVariantUp: *mut c_void, pVariantStep: *mut c_void, pVariantDefault: *mut c_void, pVariantCurrent: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_RangeSetAllFunc)(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent);  }
     }
@@ -9489,6 +9506,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_RangeSetValueLong(&self, pArray: *mut c_void, nWhich: i32, Val: i32) -> i32 {
         unsafe { return (self.DTWAIN_RangeSetValueLongFunc)(pArray, nWhich, Val);  }
+    }
+
+    pub fn DTWAIN_RemovePDFTextElement(&self, Source: *mut c_void, TextElement: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_RemovePDFTextElementFunc)(Source, TextElement);  }
     }
 
     pub fn DTWAIN_ResetPDFTextElement(&self, TextElement: *mut c_void) -> i32 {
@@ -10193,6 +10214,18 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SetPDFTextElementFloat(&self, TextElement: *mut c_void, val1: f64, val2: f64, Flags: i32) -> i32 {
         unsafe { return (self.DTWAIN_SetPDFTextElementFloatFunc)(TextElement, val1, val2, Flags);  }
+    }
+
+    pub fn DTWAIN_SetPDFTextElementFloatString(&self, TextElement: *mut c_void, val1: *const u16, val2: *const u16, Flags: i32) -> i32 {
+        unsafe { return (self.DTWAIN_SetPDFTextElementFloatStringFunc)(TextElement, val1, val2, Flags);  }
+    }
+
+    pub fn DTWAIN_SetPDFTextElementFloatStringA(&self, TextElement: *mut c_void, val1: *const c_char, val2: *const c_char, Flags: i32) -> i32 {
+        unsafe { return (self.DTWAIN_SetPDFTextElementFloatStringAFunc)(TextElement, val1, val2, Flags);  }
+    }
+
+    pub fn DTWAIN_SetPDFTextElementFloatStringW(&self, TextElement: *mut c_void, val1: *const u16, val2: *const u16, Flags: i32) -> i32 {
+        unsafe { return (self.DTWAIN_SetPDFTextElementFloatStringWFunc)(TextElement, val1, val2, Flags);  }
     }
 
     pub fn DTWAIN_SetPDFTextElementLong(&self, TextElement: *mut c_void, val1: i32, val2: i32, Flags: i32) -> i32 {

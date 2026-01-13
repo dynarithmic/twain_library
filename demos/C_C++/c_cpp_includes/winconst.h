@@ -66,8 +66,12 @@
         #pragma message ("Microsoft Visual Studio 2017 compiler defined")
     #elif _MSC_VER >= 1920 && _MSC_VER < 1930
         #pragma message ("Microsoft Visual Studio 2019 compiler defined")
-    #elif _MSC_VER >= 1930
-        #pragma message ("Microsoft Visual Studio 2022 (or greater) compiler defined")
+    #elif _MSC_VER >= 1930 && _MSC_VER < 1940
+        #pragma message ("Microsoft Visual Studio 2022 compiler defined")
+    #elif _MSC_VER >= 1940 && _MSC_VER < 1950
+        #pragma message ("Microsoft Visual Studio 2022 version 17.1x defined")
+    #elif _MSC_VER >= 1950
+        #pragma message ("Microsoft Visual Studio 2026 or higher defined")
     #endif
 #endif
 
