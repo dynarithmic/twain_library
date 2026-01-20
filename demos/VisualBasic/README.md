@@ -27,8 +27,9 @@ In this case, you would add to your Visual Basic project one of the files below,
 | dtwain64u.vb | 64-bit Unicode using dtwain64u.dll |
 | dtwain64ud.vb | 64-bit Debug Unicode using dtwain64ud.dll |
 
-**Additional note: It is highly suggested to use the Unicode version of DTWAIN for Visual Basic applications.**
+**Additional note: It is recommended to use the Unicode version of DTWAIN (dtwain32u.cs, dtwain32ud.cs, dtwain64u.cs or dtwain64ud.cs) for Visual Basic .NET applications.   Although the ANSI version of DTWAIN is usable within a Visual Basic .NET application, using the Unicode version ensures that the .NET marshalling of strings between the application and DTWAIN is done properly.**
 
+----
 Here is a bare-bones Visual Basic example of selecting a TWAIN device, displaying the capabilities available on the device, and acquiring a BMP image from the TWAIN device.  The only additional requirement is to add one of the dtwain*.vb files mentioned above to your project:
 
 ```vbnet
@@ -48,7 +49,7 @@ Module Module1
             If SelectedSource <> IntPtr.Zero Then
                 ' Display the product name of the Source
                 Dim szInfo As New StringBuilder(256)
-                DTWAINAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256)
+                DTWAINAPI.DTWAIN_GetSourceProductName(SelectedSource, szInfo, 256)
                 Console.WriteLine("The source product name is " + szInfo.ToString())
 
                 ' Get the capabilities the device supports
@@ -64,7 +65,7 @@ Module Module1
                     Dim int_val As Integer
                     ' Note that LONG values in the DTWAIN API are 32-bit integers.
                     DTWAINAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap - 1, int_val)
-                    DTWAINAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256)
+                    DTWAINAPI.DTWAIN_GetNameFromCap(int_val, szInfo, 256)
                     Console.WriteLine("Capability " & curCap & ": " & szInfo.ToString() & "  Value: " & int_val)
                 Next
 
@@ -134,7 +135,7 @@ Module Module1
             If SelectedSource <> IntPtr.Zero Then
                 ' Display the product name of the Source
                 Dim szInfo As New StringBuilder(256)
-                DTWAINAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256)
+                DTWAINAPI.DTWAIN_GetSourceProductName(SelectedSource, szInfo, 256)
                 Console.WriteLine("The source product name is " + szInfo.ToString())
 
                 ' Get the capabilities the device supports
@@ -150,7 +151,7 @@ Module Module1
                     Dim int_val As Integer
                     ' Note that LONG values in the DTWAIN API are 32-bit integers.
                     DTWAINAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap - 1, int_val)
-                    DTWAINAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256)
+                    DTWAINAPI.DTWAIN_GetNameFromCap(int_val, szInfo, 256)
                     Console.WriteLine("Capability " & curCap & ": " & szInfo.ToString() & "  Value: " & int_val)
                 Next
 
