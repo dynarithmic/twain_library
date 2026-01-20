@@ -33,8 +33,9 @@ In this case, you would add to your C# project one of the files below, depending
 | dtwain64u.cs | 64-bit Unicode using dtwain64u.dll |
 | dtwain64ud.cs | 64-bit Debug Unicode using dtwain64ud.dll |
 
-**Additional note: It is highly suggested to use the Unicode version of DTWAIN for C# applications.**
+**Additional note: It is recommended to use the Unicode version of DTWAIN (dtwain32u.cs, dtwain32ud.cs, dtwain64u.cs or dtwain64ud.cs) for C# applications.   Although the ANSI version of DTWAIN is usable within a C# application, using the Unicode version ensures that the .NET marshalling of strings between the C# application and DTWAIN is done properly.**
 
+----
 Here is a bare-bones C# language example of selecting a TWAIN device, displaying the capabilities available on the device, and acquiring a BMP image from the TWAIN device.  The only additional requirement is to add one of the dtwain*.cs files mentioned above to your project:
 
 ```csharp
@@ -62,7 +63,7 @@ namespace Test
                 {
                     // Display the product name of the Source
                     StringBuilder szInfo = new StringBuilder(256);
-                    TwainAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256);
+                    TwainAPI.DTWAIN_GetSourceProductName(SelectedSource, szInfo, 256);
                     Console.WriteLine("The source product name is " + szInfo.ToString());
 
                     // Get the capabilities the device supports
@@ -80,7 +81,7 @@ namespace Test
                         
                         // Note that LONG values in the DTWAIN API are 32-bit integers.
                         TwainAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap-1, ref int_val);
-                        TwainAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256);
+                        TwainAPI.DTWAIN_GetNameFromCap(int_val, szInfo, 256);
                         Console.WriteLine("Capability " + curCap + ": " + szInfo.ToString() + "  Value: " +                     int_val);
                     }
 
@@ -158,7 +159,7 @@ namespace Test
                 {
                     // Display the product name of the Source
                     StringBuilder szInfo = new StringBuilder(256);
-                    TwainAPI.DTWAIN_GetSourceProductNameA(SelectedSource, szInfo, 256);
+                    TwainAPI.DTWAIN_GetSourceProductName(SelectedSource, szInfo, 256);
                     Console.WriteLine("The source product name is " + szInfo.ToString());
 
                     // Get the capabilities the device supports
@@ -176,7 +177,7 @@ namespace Test
 
                         // Note that LONG values in the DTWAIN API are 32-bit integers.
                         TwainAPI.DTWAIN_ArrayGetAtLong(dtwain_array, curCap - 1, ref int_val);
-                        TwainAPI.DTWAIN_GetNameFromCapA(int_val, szInfo, 256);
+                        TwainAPI.DTWAIN_GetNameFromCap(int_val, szInfo, 256);
                         Console.WriteLine("Capability " + curCap + ": " + szInfo.ToString() + "  Value: " + int_val);
                     }
 
