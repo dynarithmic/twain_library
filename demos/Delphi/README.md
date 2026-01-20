@@ -79,7 +79,7 @@ begin
                end;
 
                { Acquire a BMP image }
-               RetCode := DTWAIN_AcquireFileA(
+               RetCode := DTWAIN_AcquireFile(
                           SelectedSource,    { the Source }
                           'test.bmp',        { File name to save }
                           DTWAIN_BMP,        { Image format }
