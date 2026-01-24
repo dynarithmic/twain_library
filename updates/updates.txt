@@ -28,12 +28,49 @@ DTWAIN Version changes
 - Add ability to rotate and skew text that is added to a PDF page.  
   See the new DTWAIN_PDFTEXTELEMENT type and the supporting API functions.
 
-- Fix potential memory leak when using functions that takes a pointer
+- Add DTWAIN_DLG_CENTER_CURRENT_MONITOR flag to DTWAIN_SelectSource2() function.
+  This flag allows the "Select Source" dialog to be centered with respect to the 
+  current monitor.
+
+- Fixed the DTWAIN_DLG_CENTER logic in DTWAIN_SelectSource2() to properly center 
+  the "Select Source" dialog box with respect to the parent window if the parent 
+  window is moved to another monitor.
+
+- Fixed potential memory leak when using functions that takes a pointer
   to a DTWAIN_ARRAY.
+
+- Fixed potential illegal memory access if DTWAIN_SetCapValues() is given an 
+  invalid DTWAIN_ARRAY of values.
 
 - Ensure that calling DTWAIN_CloseSource() while the Source is acquiring images
   will not close the source.  Instead, a return value of FALSE will be
   given, and the last error code is set to DTWAIN_ERR_SOURCE_ACQUIRING.
+
+- The DTWDEMO32 and DTWDEMO64 demo programs now contains full capability testing.  This
+  is available through the main menu once a TWAIN Source has been selected:
+
+  Source Selection Test -> Source Properties.. 
+
+  and the lower left "Capability Info" box will contain "Test Capability".  
+  This will have full testing for setting and getting a capability's values.
+
+- The C# full demo project has been updated to include features that
+  exist in the DTWDEMO32/64 program.  This includes the testing of
+  any TWAIN capability using MSG_GET, MSG_GETCURRENT, MSG_GETDEFAULT, etc.
+  options.
+
+- C#, Visual Basic, and F# language bindings have been rewritten to use
+  the .NET string marshalling logic instead of providing separate "A" and
+  "W" functions for ANSI and wide-string functions.  
+
+  Basically this means that existing C#, VB or F# code that calls a 
+  DTWAIN function that uses the language bindings provided will not build
+  if an "A" or "W" function is called.  Instead, the program should
+  call the general function, and the .NET string marshalling logic will 
+  direct the call to the proper function.  For example, if your program
+  currently calls DTWAIN_GetSourceProductNameA or DTWAIN_GetSourceProductNameW,
+  you must instead call DTWAIN_GetSourceProductName.
+  
 
 
 5.7.2

@@ -233,6 +233,8 @@
 2502 Informazioni sull'immagine non valide
 2503 Errore durante la scrittura dei dati nel file
 2504 Operazione non supportata  
+2505 Elemento di testo PDF non valido
+2506 La capacità non è stata impostata. Sono stati utilizzati valori non validi.
 3000 Selezioni Fonte
 3001 &Selezionar
 3002 &Annullare

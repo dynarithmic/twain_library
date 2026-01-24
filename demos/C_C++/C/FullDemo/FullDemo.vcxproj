@@ -160,6 +160,8 @@
     <ClCompile Include="..\DibView\PAINT.c" />
     <ClCompile Include="dibdisplay.c" />
     <ClCompile Include="dtwdemo.c" />
+    <ClCompile Include="SourceProperties.c" />
+    <ClCompile Include="StringUtils.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DibView\DIB.h" />
@@ -171,6 +173,8 @@
     <ClInclude Include="dibdisplay.h" />
     <ClInclude Include="dibdisplayres.h" />
     <ClInclude Include="DTWDEMO.h" />
+    <ClInclude Include="SourceProperties.h" />
+    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="dtwdemo.rc" />

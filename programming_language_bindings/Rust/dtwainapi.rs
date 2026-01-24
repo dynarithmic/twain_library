@@ -65,6 +65,9 @@ type DtwainaddextimageinfoqueryFunc = unsafe extern "C" fn(*mut c_void,i32) -> i
 type DtwainaddpdftextFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,f64,u32) -> i32;
 type DtwainaddpdftextaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,f64,i32,i32,f64,f64,f64,f64,u32) -> i32;
 type DtwainaddpdftextelementFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
+type DtwainaddpdftextexFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,f64,f64,f64,f64,f64,f64,i32) -> i32;
+type DtwainaddpdftextexaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,f64,i32,i32,f64,f64,f64,f64,f64,f64,f64,f64,f64,i32) -> i32;
+type DtwainaddpdftextexwFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,f64,i32,i32,f64,f64,f64,f64,f64,f64,f64,f64,f64,i32) -> i32;
 type DtwainaddpdftextstringFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,*const u16,i32,i32,*const u16,*const u16,*const u16,*const u16,u32) -> i32;
 type DtwainaddpdftextstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char,i32,i32,*const c_char,*const c_char,i32,i32,*const c_char,*const c_char,*const c_char,*const c_char,u32) -> i32;
 type DtwainaddpdftextstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16,i32,i32,*const u16,*const u16,i32,i32,*const u16,*const u16,*const u16,*const u16,u32) -> i32;
@@ -456,6 +459,9 @@ type DtwaingetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i3
 type DtwaingetconditioncodestringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetconditioncodestringaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
 type DtwaingetconditioncodestringwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
+type DtwaingetconstantfromtwainnameFunc = unsafe extern "C" fn(*const u16) -> i32;
+type DtwaingetconstantfromtwainnameaFunc = unsafe extern "C" fn(*const c_char) -> i32;
+type DtwaingetconstantfromtwainnamewFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingetcontrastFunc = unsafe extern "C" fn(*mut c_void,*mut f64) -> i32;
 type DtwaingetcontraststringFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcontraststringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
@@ -674,9 +680,6 @@ type DtwaingettwaincountryvalueFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingettwaincountryvalueaFunc = unsafe extern "C" fn(*const c_char) -> i32;
 type DtwaingettwaincountryvaluewFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingettwainhwndFunc = unsafe extern "C" fn() -> *const c_void;
-type DtwaingettwainidfromnameFunc = unsafe extern "C" fn(*const u16) -> i32;
-type DtwaingettwainidfromnameaFunc = unsafe extern "C" fn(*const c_char) -> i32;
-type DtwaingettwainidfromnamewFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingettwainlanguagenameFunc = unsafe extern "C" fn(i32,*mut u16) -> i32;
 type DtwaingettwainlanguagenameaFunc = unsafe extern "C" fn(i32,*mut c_char) -> i32;
 type DtwaingettwainlanguagenamewFunc = unsafe extern "C" fn(i32,*mut u16) -> i32;
@@ -1185,6 +1188,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_AddPDFTextFunc: Symbol<'a, DtwainaddpdftextFunc>,
     DTWAIN_AddPDFTextAFunc: Symbol<'a, DtwainaddpdftextaFunc>,
     DTWAIN_AddPDFTextElementFunc: Symbol<'a, DtwainaddpdftextelementFunc>,
+    DTWAIN_AddPDFTextExFunc: Symbol<'a, DtwainaddpdftextexFunc>,
+    DTWAIN_AddPDFTextExAFunc: Symbol<'a, DtwainaddpdftextexaFunc>,
+    DTWAIN_AddPDFTextExWFunc: Symbol<'a, DtwainaddpdftextexwFunc>,
     DTWAIN_AddPDFTextStringFunc: Symbol<'a, DtwainaddpdftextstringFunc>,
     DTWAIN_AddPDFTextStringAFunc: Symbol<'a, DtwainaddpdftextstringaFunc>,
     DTWAIN_AddPDFTextStringWFunc: Symbol<'a, DtwainaddpdftextstringwFunc>,
@@ -1576,6 +1582,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetConditionCodeStringFunc: Symbol<'a, DtwaingetconditioncodestringFunc>,
     DTWAIN_GetConditionCodeStringAFunc: Symbol<'a, DtwaingetconditioncodestringaFunc>,
     DTWAIN_GetConditionCodeStringWFunc: Symbol<'a, DtwaingetconditioncodestringwFunc>,
+    DTWAIN_GetConstantFromTwainNameFunc: Symbol<'a, DtwaingetconstantfromtwainnameFunc>,
+    DTWAIN_GetConstantFromTwainNameAFunc: Symbol<'a, DtwaingetconstantfromtwainnameaFunc>,
+    DTWAIN_GetConstantFromTwainNameWFunc: Symbol<'a, DtwaingetconstantfromtwainnamewFunc>,
     DTWAIN_GetContrastFunc: Symbol<'a, DtwaingetcontrastFunc>,
     DTWAIN_GetContrastStringFunc: Symbol<'a, DtwaingetcontraststringFunc>,
     DTWAIN_GetContrastStringAFunc: Symbol<'a, DtwaingetcontraststringaFunc>,
@@ -1794,9 +1803,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetTwainCountryValueAFunc: Symbol<'a, DtwaingettwaincountryvalueaFunc>,
     DTWAIN_GetTwainCountryValueWFunc: Symbol<'a, DtwaingettwaincountryvaluewFunc>,
     DTWAIN_GetTwainHwndFunc: Symbol<'a, DtwaingettwainhwndFunc>,
-    DTWAIN_GetTwainIDFromNameFunc: Symbol<'a, DtwaingettwainidfromnameFunc>,
-    DTWAIN_GetTwainIDFromNameAFunc: Symbol<'a, DtwaingettwainidfromnameaFunc>,
-    DTWAIN_GetTwainIDFromNameWFunc: Symbol<'a, DtwaingettwainidfromnamewFunc>,
     DTWAIN_GetTwainLanguageNameFunc: Symbol<'a, DtwaingettwainlanguagenameFunc>,
     DTWAIN_GetTwainLanguageNameAFunc: Symbol<'a, DtwaingettwainlanguagenameaFunc>,
     DTWAIN_GetTwainLanguageNameWFunc: Symbol<'a, DtwaingettwainlanguagenamewFunc>,
@@ -3129,6 +3135,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_IMAGEINFO_INVALID: i32 = -2502;
     pub const DTWAIN_ERR_WRITEDATA_TOFILE: i32 = -2503;
     pub const DTWAIN_ERR_OPERATION_NOTSUPPORTED: i32 = -2504;
+    pub const DTWAIN_ERR_INVALID_PDFTEXTELEMENT: i32 = -2505;
+    pub const DTWAIN_ERR_SETCAP_FAILED: i32 = -2506;
     pub const DTWAIN_DE_CHKAUTOCAPTURE: i32 = 1;
     pub const DTWAIN_DE_CHKBATTERY: i32 = 2;
     pub const DTWAIN_DE_CHKDEVICEONLINE: i32 = 4;
@@ -3358,6 +3366,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_DLG_NOOPENONSELECT: i32 = 4096;
     pub const DTWAIN_DLG_HIGHLIGHTFIRST: i32 = 8192;
     pub const DTWAIN_DLG_SAVELASTSCREENPOS: i32 = 16384;
+    pub const DTWAIN_DLG_CENTER_CURRENT_MONITOR: i32 = 32768;
     pub const DTWAIN_RES_ENGLISH: i32 = 0;
     pub const DTWAIN_RES_FRENCH: i32 = 1;
     pub const DTWAIN_RES_SPANISH: i32 = 2;
@@ -3908,6 +3917,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_CONSTANT_DTWAIN_CONT: i32 = 79;
     pub const DTWAIN_CONSTANT_CAPCODE_MAP: i32 = 80;
     pub const DTWAIN_CONSTANT_ACAP: i32 = 81;
+    pub const DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC: i32 = 82;
     pub const DTWAIN_USERRES_START: i32 = 20000;
     pub const DTWAIN_USERRES_MAXSIZE: i32 = 8192;
     pub const DTWAIN_APIHANDLEOK: i32 = 1;
@@ -3937,6 +3947,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_AddPDFText: Symbol<DtwainaddpdftextFunc> = unsafe { library.get(b"DTWAIN_AddPDFText")? };
         let DTWAIN_AddPDFTextA: Symbol<DtwainaddpdftextaFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextA")? };
         let DTWAIN_AddPDFTextElement: Symbol<DtwainaddpdftextelementFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextElement")? };
+        let DTWAIN_AddPDFTextEx: Symbol<DtwainaddpdftextexFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextEx")? };
+        let DTWAIN_AddPDFTextExA: Symbol<DtwainaddpdftextexaFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextExA")? };
+        let DTWAIN_AddPDFTextExW: Symbol<DtwainaddpdftextexwFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextExW")? };
         let DTWAIN_AddPDFTextString: Symbol<DtwainaddpdftextstringFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextString")? };
         let DTWAIN_AddPDFTextStringA: Symbol<DtwainaddpdftextstringaFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextStringA")? };
         let DTWAIN_AddPDFTextStringW: Symbol<DtwainaddpdftextstringwFunc> = unsafe { library.get(b"DTWAIN_AddPDFTextStringW")? };
@@ -4328,6 +4341,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetConditionCodeString: Symbol<DtwaingetconditioncodestringFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeString")? };
         let DTWAIN_GetConditionCodeStringA: Symbol<DtwaingetconditioncodestringaFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeStringA")? };
         let DTWAIN_GetConditionCodeStringW: Symbol<DtwaingetconditioncodestringwFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeStringW")? };
+        let DTWAIN_GetConstantFromTwainName: Symbol<DtwaingetconstantfromtwainnameFunc> = unsafe { library.get(b"DTWAIN_GetConstantFromTwainName")? };
+        let DTWAIN_GetConstantFromTwainNameA: Symbol<DtwaingetconstantfromtwainnameaFunc> = unsafe { library.get(b"DTWAIN_GetConstantFromTwainNameA")? };
+        let DTWAIN_GetConstantFromTwainNameW: Symbol<DtwaingetconstantfromtwainnamewFunc> = unsafe { library.get(b"DTWAIN_GetConstantFromTwainNameW")? };
         let DTWAIN_GetContrast: Symbol<DtwaingetcontrastFunc> = unsafe { library.get(b"DTWAIN_GetContrast")? };
         let DTWAIN_GetContrastString: Symbol<DtwaingetcontraststringFunc> = unsafe { library.get(b"DTWAIN_GetContrastString")? };
         let DTWAIN_GetContrastStringA: Symbol<DtwaingetcontraststringaFunc> = unsafe { library.get(b"DTWAIN_GetContrastStringA")? };
@@ -4546,9 +4562,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetTwainCountryValueA: Symbol<DtwaingettwaincountryvalueaFunc> = unsafe { library.get(b"DTWAIN_GetTwainCountryValueA")? };
         let DTWAIN_GetTwainCountryValueW: Symbol<DtwaingettwaincountryvaluewFunc> = unsafe { library.get(b"DTWAIN_GetTwainCountryValueW")? };
         let DTWAIN_GetTwainHwnd: Symbol<DtwaingettwainhwndFunc> = unsafe { library.get(b"DTWAIN_GetTwainHwnd")? };
-        let DTWAIN_GetTwainIDFromName: Symbol<DtwaingettwainidfromnameFunc> = unsafe { library.get(b"DTWAIN_GetTwainIDFromName")? };
-        let DTWAIN_GetTwainIDFromNameA: Symbol<DtwaingettwainidfromnameaFunc> = unsafe { library.get(b"DTWAIN_GetTwainIDFromNameA")? };
-        let DTWAIN_GetTwainIDFromNameW: Symbol<DtwaingettwainidfromnamewFunc> = unsafe { library.get(b"DTWAIN_GetTwainIDFromNameW")? };
         let DTWAIN_GetTwainLanguageName: Symbol<DtwaingettwainlanguagenameFunc> = unsafe { library.get(b"DTWAIN_GetTwainLanguageName")? };
         let DTWAIN_GetTwainLanguageNameA: Symbol<DtwaingettwainlanguagenameaFunc> = unsafe { library.get(b"DTWAIN_GetTwainLanguageNameA")? };
         let DTWAIN_GetTwainLanguageNameW: Symbol<DtwaingettwainlanguagenamewFunc> = unsafe { library.get(b"DTWAIN_GetTwainLanguageNameW")? };
@@ -5056,6 +5069,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_AddPDFTextFunc: DTWAIN_AddPDFText,
             DTWAIN_AddPDFTextAFunc: DTWAIN_AddPDFTextA,
             DTWAIN_AddPDFTextElementFunc: DTWAIN_AddPDFTextElement,
+            DTWAIN_AddPDFTextExFunc: DTWAIN_AddPDFTextEx,
+            DTWAIN_AddPDFTextExAFunc: DTWAIN_AddPDFTextExA,
+            DTWAIN_AddPDFTextExWFunc: DTWAIN_AddPDFTextExW,
             DTWAIN_AddPDFTextStringFunc: DTWAIN_AddPDFTextString,
             DTWAIN_AddPDFTextStringAFunc: DTWAIN_AddPDFTextStringA,
             DTWAIN_AddPDFTextStringWFunc: DTWAIN_AddPDFTextStringW,
@@ -5447,6 +5463,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetConditionCodeStringFunc: DTWAIN_GetConditionCodeString,
             DTWAIN_GetConditionCodeStringAFunc: DTWAIN_GetConditionCodeStringA,
             DTWAIN_GetConditionCodeStringWFunc: DTWAIN_GetConditionCodeStringW,
+            DTWAIN_GetConstantFromTwainNameFunc: DTWAIN_GetConstantFromTwainName,
+            DTWAIN_GetConstantFromTwainNameAFunc: DTWAIN_GetConstantFromTwainNameA,
+            DTWAIN_GetConstantFromTwainNameWFunc: DTWAIN_GetConstantFromTwainNameW,
             DTWAIN_GetContrastFunc: DTWAIN_GetContrast,
             DTWAIN_GetContrastStringFunc: DTWAIN_GetContrastString,
             DTWAIN_GetContrastStringAFunc: DTWAIN_GetContrastStringA,
@@ -5665,9 +5684,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetTwainCountryValueAFunc: DTWAIN_GetTwainCountryValueA,
             DTWAIN_GetTwainCountryValueWFunc: DTWAIN_GetTwainCountryValueW,
             DTWAIN_GetTwainHwndFunc: DTWAIN_GetTwainHwnd,
-            DTWAIN_GetTwainIDFromNameFunc: DTWAIN_GetTwainIDFromName,
-            DTWAIN_GetTwainIDFromNameAFunc: DTWAIN_GetTwainIDFromNameA,
-            DTWAIN_GetTwainIDFromNameWFunc: DTWAIN_GetTwainIDFromNameW,
             DTWAIN_GetTwainLanguageNameFunc: DTWAIN_GetTwainLanguageName,
             DTWAIN_GetTwainLanguageNameAFunc: DTWAIN_GetTwainLanguageNameA,
             DTWAIN_GetTwainLanguageNameWFunc: DTWAIN_GetTwainLanguageNameW,
@@ -6230,6 +6246,18 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_AddPDFTextElement(&self, Source: *mut c_void, TextElement: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_AddPDFTextElementFunc)(Source, TextElement);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextEx(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, rotationAngle: f64, skewAngleX: f64, skewAngleY: f64, scalingX: f64, scalingY: f64, transformType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextExFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, rotationAngle, skewAngleX, skewAngleY, scalingX, scalingY, transformType);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextExA(&self, Source: *mut c_void, szText: *const c_char, xPos: i32, yPos: i32, fontName: *const c_char, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, rotationAngle: f64, skewAngleX: f64, skewAngleY: f64, scalingX: f64, scalingY: f64, transformType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextExAFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, rotationAngle, skewAngleX, skewAngleY, scalingX, scalingY, transformType);  }
+    }
+
+    pub fn DTWAIN_AddPDFTextExW(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: f64, colorRGB: i32, renderMode: i32, scaling: f64, charSpacing: f64, wordSpacing: f64, strokeWidth: f64, rotationAngle: f64, skewAngleX: f64, skewAngleY: f64, scalingX: f64, scalingY: f64, transformType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_AddPDFTextExWFunc)(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, rotationAngle, skewAngleX, skewAngleY, scalingX, scalingY, transformType);  }
     }
 
     pub fn DTWAIN_AddPDFTextString(&self, Source: *mut c_void, szText: *const u16, xPos: i32, yPos: i32, fontName: *const u16, fontSize: *const u16, colorRGB: i32, renderMode: i32, scaling: *const u16, charSpacing: *const u16, wordSpacing: *const u16, strokeWidth: *const u16, Flags: u32) -> i32 {
@@ -7796,6 +7824,18 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetConditionCodeStringWFunc)(lError, lpszBuffer, nMaxLen);  }
     }
 
+    pub fn DTWAIN_GetConstantFromTwainName(&self, lpszBuffer: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_GetConstantFromTwainNameFunc)(lpszBuffer);  }
+    }
+
+    pub fn DTWAIN_GetConstantFromTwainNameA(&self, lpszBuffer: *const c_char) -> i32 {
+        unsafe { return (self.DTWAIN_GetConstantFromTwainNameAFunc)(lpszBuffer);  }
+    }
+
+    pub fn DTWAIN_GetConstantFromTwainNameW(&self, lpszBuffer: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_GetConstantFromTwainNameWFunc)(lpszBuffer);  }
+    }
+
     pub fn DTWAIN_GetContrast(&self, Source: *mut c_void, Contrast: *mut f64) -> i32 {
         unsafe { return (self.DTWAIN_GetContrastFunc)(Source, Contrast);  }
     }
@@ -8666,18 +8706,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetTwainHwnd(&self) -> *const c_void {
         unsafe { return (self.DTWAIN_GetTwainHwndFunc)();  }
-    }
-
-    pub fn DTWAIN_GetTwainIDFromName(&self, lpszBuffer: *const u16) -> i32 {
-        unsafe { return (self.DTWAIN_GetTwainIDFromNameFunc)(lpszBuffer);  }
-    }
-
-    pub fn DTWAIN_GetTwainIDFromNameA(&self, lpszBuffer: *const c_char) -> i32 {
-        unsafe { return (self.DTWAIN_GetTwainIDFromNameAFunc)(lpszBuffer);  }
-    }
-
-    pub fn DTWAIN_GetTwainIDFromNameW(&self, lpszBuffer: *const u16) -> i32 {
-        unsafe { return (self.DTWAIN_GetTwainIDFromNameWFunc)(lpszBuffer);  }
     }
 
     pub fn DTWAIN_GetTwainLanguageName(&self, nameId: i32, szName: *mut u16) -> i32 {

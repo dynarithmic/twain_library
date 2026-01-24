@@ -7,7 +7,6 @@ using DTWAIN_ARRAY = System.IntPtr;
 
 namespace TWAINDemo
 {
-
     public partial class SourcePropsDlg : Form
     {
         public SourcePropsDlg()
@@ -28,18 +27,18 @@ namespace TWAINDemo
             StringBuilder szInfo = new StringBuilder(256);
             StringBuilder szNameInfo = new StringBuilder(256);
             TwainAPI.DTWAIN_GetSourceProductName(m_Source, szNameInfo, 255);
-            this.edProductName.Text = szNameInfo.ToString();
+            edProductName.Text = szNameInfo.ToString();
             TwainAPI.DTWAIN_GetSourceProductFamily(m_Source, szInfo, 255);
-            this.edFamilyName.Text = szInfo.ToString();
+            edFamilyName.Text = szInfo.ToString();
             TwainAPI.DTWAIN_GetSourceManufacturer(m_Source, szInfo, 255);
-            this.edManufacturer.Text = szInfo.ToString();
+            edManufacturer.Text = szInfo.ToString();
             TwainAPI.DTWAIN_GetSourceVersionInfo(m_Source, szInfo, 255);
-            this.edVersionInfo.Text = szInfo.ToString();
+            edVersionInfo.Text = szInfo.ToString();
 
             int lMajor = 0, lMinor = 0;
             TwainAPI.DTWAIN_GetSourceVersionNumber(m_Source, ref lMajor, ref lMinor);
             string sVersion = lMajor.ToString() + "." + lMinor.ToString();
-            this.edVersion.Text = sVersion;
+            edVersion.Text = sVersion;
 
             DTWAIN_ARRAY AllCaps = IntPtr.Zero;
             int Val = 0;
@@ -52,14 +51,16 @@ namespace TWAINDemo
 
                 // get the name from the cap
                 TwainAPI.DTWAIN_GetNameFromCap(Val, szInfo, 255);
-                this.listCaps.Items.Add(szInfo.ToString());
+                listCaps.Items.Add(szInfo.ToString());
             }
 
-            this.edTotalCaps.Text = nSize.ToString();
+            listCaps.SetSelected(0, true);
+
+            edTotalCaps.Text = nSize.ToString();
             TwainAPI.DTWAIN_EnumCustomCaps(m_Source, ref AllCaps);
-            this.edCustomCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
+            edCustomCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
             TwainAPI.DTWAIN_EnumExtendedCaps(m_Source, ref AllCaps);
-            this.edExtendedCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
+            edExtendedCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
 
             uint customDSLength = 0;
             Encoding enc8 = Encoding.UTF8;
@@ -75,7 +76,23 @@ namespace TWAINDemo
             TwainAPI.DTWAIN_GetSourceDetails(sName, szInfo, nBytes, 2, 1);
 
             // Need to convert the JSON new lines to \r\n for edit controls
-            this.txtJSON.Text = szInfo.ToString().Replace("\n", "\r\n");
+            txtJSON.Text = szInfo.ToString().Replace("\n", "\r\n");
+
+            TwainAPI.DTWAIN_ArrayDestroy(AllCaps);
+        }
+
+        private void btnTestCap_Click(object sender, EventArgs e)
+        {
+            TestCapDlg sTestCapDlg = new TestCapDlg(m_Source, listCaps.SelectedItem.ToString());
+            sTestCapDlg.ShowDialog(this);
+        }
+        private void btnResetAllCaps_Click(object sender, EventArgs e)
+        {
+            TwainAPI.DTWAIN_SetAllCapsToDefault(m_Source);
+        }
+        private void SourcePropsDlg_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            TwainAPI.DTWAIN_SetAllCapsToDefault(m_Source);
         }
     }
 }

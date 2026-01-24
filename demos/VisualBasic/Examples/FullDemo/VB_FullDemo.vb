@@ -404,8 +404,8 @@ Public Class VB_FullDemo
             Case 0
                 Dim nullString As String
                 nullString = IntPtr.Zero
-                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2A(IntPtr.Zero, Nothing, 0, 0,
-                                                                DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
+                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, Nothing, 0, 0,
+                                                                DTWAINAPI.DTWAIN_DLG_CENTER_CURRENT_MONITOR Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
             Case 1
                 Dim objSelectSourceByName As SelectSourceByName = New SelectSourceByName()
                 Dim nResult As DialogResult = objSelectSourceByName.ShowDialog()

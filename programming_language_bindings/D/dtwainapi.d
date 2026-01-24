@@ -1107,6 +1107,8 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_ERR_IMAGEINFO_INVALID = (-2502);
     public static const int DTWAIN_ERR_WRITEDATA_TOFILE = (-2503);
     public static const int DTWAIN_ERR_OPERATION_NOTSUPPORTED = (-2504);
+    public static const int DTWAIN_ERR_INVALID_PDFTEXTELEMENT = (-2505);
+    public static const int DTWAIN_ERR_SETCAP_FAILED = (-2506);
     public static const int DTWAIN_DE_CHKAUTOCAPTURE = 1;
     public static const int DTWAIN_DE_CHKBATTERY = 2;
     public static const int DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -1336,6 +1338,7 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_DLG_NOOPENONSELECT = 4096;
     public static const int DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
     public static const int DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
+    public static const int DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768;
     public static const int DTWAIN_RES_ENGLISH = 0;
     public static const int DTWAIN_RES_FRENCH = 1;
     public static const int DTWAIN_RES_SPANISH = 2;
@@ -1886,6 +1889,7 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_CONSTANT_DTWAIN_CONT = 79;
     public static const int DTWAIN_CONSTANT_CAPCODE_MAP = 80;
     public static const int DTWAIN_CONSTANT_ACAP = 81;
+    public static const int DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC = 82;
     public static const int DTWAIN_USERRES_START = 20000;
     public static const int DTWAIN_USERRES_MAXSIZE = 8192;
     public static const int DTWAIN_APIHANDLEOK = 1;
@@ -1917,6 +1921,9 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_CCHARPTRTYPE, DTWAIN_FLOAT, LONG, LONG, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DWORD) DTWAIN_AddPDFText;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR, LONG, LONG, LPCSTR, DTWAIN_FLOAT, LONG, LONG, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DWORD) DTWAIN_AddPDFTextA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_PDFTEXTELEMENT) DTWAIN_AddPDFTextElement;
+    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_CCHARPTRTYPE, DTWAIN_FLOAT, LONG, LONG, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, LONG) DTWAIN_AddPDFTextEx;
+    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR, LONG, LONG, LPCSTR, DTWAIN_FLOAT, LONG, LONG, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, LONG) DTWAIN_AddPDFTextExA;
+    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCWSTR, LONG, LONG, LPCWSTR, DTWAIN_FLOAT, LONG, LONG, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, DTWAIN_FLOAT, LONG) DTWAIN_AddPDFTextExW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_CCHARPTRTYPE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_CCHARPTRTYPE, DTWAIN_CCHARPTRTYPE, DTWAIN_CCHARPTRTYPE, DTWAIN_CCHARPTRTYPE, DWORD) DTWAIN_AddPDFTextString;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR, LONG, LONG, LPCSTR, LPCSTR, LONG, LONG, LPCSTR, LPCSTR, LPCSTR, LPCSTR, DWORD) DTWAIN_AddPDFTextStringA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCWSTR, LONG, LONG, LPCWSTR, LPCWSTR, LONG, LONG, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, DWORD) DTWAIN_AddPDFTextStringW;
@@ -2309,6 +2316,9 @@ class DTWAIN_DynamicDLL
     extern(Windows) LONG function(LONG, DTWAIN_CHARPTRTYPE, LONG) DTWAIN_GetConditionCodeString;
     extern(Windows) LONG function(LONG, LPSTR, LONG) DTWAIN_GetConditionCodeStringA;
     extern(Windows) LONG function(LONG, LPWSTR, LONG) DTWAIN_GetConditionCodeStringW;
+    extern(Windows) LONG function(DTWAIN_CCHARPTRTYPE) DTWAIN_GetConstantFromTwainName;
+    extern(Windows) LONG function(LPCSTR) DTWAIN_GetConstantFromTwainNameA;
+    extern(Windows) LONG function(LPCWSTR) DTWAIN_GetConstantFromTwainNameW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_FLOAT) DTWAIN_GetContrast;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CHARPTRTYPE) DTWAIN_GetContrastString;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPSTR) DTWAIN_GetContrastStringA;
@@ -2522,9 +2532,6 @@ class DTWAIN_DynamicDLL
     extern(Windows) LONG function(LPCSTR) DTWAIN_GetTwainCountryValueA;
     extern(Windows) LONG function(LPCWSTR) DTWAIN_GetTwainCountryValueW;
     extern(Windows) HWND function() DTWAIN_GetTwainHwnd;
-    extern(Windows) LONG function(DTWAIN_CCHARPTRTYPE) DTWAIN_GetTwainIDFromName;
-    extern(Windows) LONG function(LPCSTR) DTWAIN_GetTwainIDFromNameA;
-    extern(Windows) LONG function(LPCWSTR) DTWAIN_GetTwainIDFromNameW;
     extern(Windows) BOOL function(LONG, DTWAIN_CHARPTRTYPE) DTWAIN_GetTwainLanguageName;
     extern(Windows) DTWAIN_BOOL function(LONG, LPSTR) DTWAIN_GetTwainLanguageNameA;
     extern(Windows) DTWAIN_BOOL function(LONG, LPWSTR) DTWAIN_GetTwainLanguageNameW;
@@ -3036,6 +3043,9 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_AddPDFText, "DTWAIN_AddPDFText");
         bindFunction(cast(void**)&DTWAIN_AddPDFTextA, "DTWAIN_AddPDFTextA");
         bindFunction(cast(void**)&DTWAIN_AddPDFTextElement, "DTWAIN_AddPDFTextElement");
+        bindFunction(cast(void**)&DTWAIN_AddPDFTextEx, "DTWAIN_AddPDFTextEx");
+        bindFunction(cast(void**)&DTWAIN_AddPDFTextExA, "DTWAIN_AddPDFTextExA");
+        bindFunction(cast(void**)&DTWAIN_AddPDFTextExW, "DTWAIN_AddPDFTextExW");
         bindFunction(cast(void**)&DTWAIN_AddPDFTextString, "DTWAIN_AddPDFTextString");
         bindFunction(cast(void**)&DTWAIN_AddPDFTextStringA, "DTWAIN_AddPDFTextStringA");
         bindFunction(cast(void**)&DTWAIN_AddPDFTextStringW, "DTWAIN_AddPDFTextStringW");
@@ -3428,6 +3438,9 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetConditionCodeString, "DTWAIN_GetConditionCodeString");
         bindFunction(cast(void**)&DTWAIN_GetConditionCodeStringA, "DTWAIN_GetConditionCodeStringA");
         bindFunction(cast(void**)&DTWAIN_GetConditionCodeStringW, "DTWAIN_GetConditionCodeStringW");
+        bindFunction(cast(void**)&DTWAIN_GetConstantFromTwainName, "DTWAIN_GetConstantFromTwainName");
+        bindFunction(cast(void**)&DTWAIN_GetConstantFromTwainNameA, "DTWAIN_GetConstantFromTwainNameA");
+        bindFunction(cast(void**)&DTWAIN_GetConstantFromTwainNameW, "DTWAIN_GetConstantFromTwainNameW");
         bindFunction(cast(void**)&DTWAIN_GetContrast, "DTWAIN_GetContrast");
         bindFunction(cast(void**)&DTWAIN_GetContrastString, "DTWAIN_GetContrastString");
         bindFunction(cast(void**)&DTWAIN_GetContrastStringA, "DTWAIN_GetContrastStringA");
@@ -3641,9 +3654,6 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetTwainCountryValueA, "DTWAIN_GetTwainCountryValueA");
         bindFunction(cast(void**)&DTWAIN_GetTwainCountryValueW, "DTWAIN_GetTwainCountryValueW");
         bindFunction(cast(void**)&DTWAIN_GetTwainHwnd, "DTWAIN_GetTwainHwnd");
-        bindFunction(cast(void**)&DTWAIN_GetTwainIDFromName, "DTWAIN_GetTwainIDFromName");
-        bindFunction(cast(void**)&DTWAIN_GetTwainIDFromNameA, "DTWAIN_GetTwainIDFromNameA");
-        bindFunction(cast(void**)&DTWAIN_GetTwainIDFromNameW, "DTWAIN_GetTwainIDFromNameW");
         bindFunction(cast(void**)&DTWAIN_GetTwainLanguageName, "DTWAIN_GetTwainLanguageName");
         bindFunction(cast(void**)&DTWAIN_GetTwainLanguageNameA, "DTWAIN_GetTwainLanguageNameA");
         bindFunction(cast(void**)&DTWAIN_GetTwainLanguageNameW, "DTWAIN_GetTwainLanguageNameW");
