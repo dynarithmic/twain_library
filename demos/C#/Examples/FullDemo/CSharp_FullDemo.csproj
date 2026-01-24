@@ -128,7 +128,7 @@
     <Compile Include="DIBDisplayerDlg2.Designer.cs">
       <DependentUpon>DIBDisplayerDlg2.cs</DependentUpon>
     </Compile>
-    <Compile Include="dtwain64u.cs" />
+    <Compile Include="DTWAIN32U.cs" />
     <Compile Include="DTwainDemo.cs">
       <SubType>Form</SubType>
     </Compile>
