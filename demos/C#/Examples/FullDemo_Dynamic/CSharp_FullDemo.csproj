@@ -149,6 +149,12 @@
     <Compile Include="CustomLanguageDlg.Designer.cs">
       <DependentUpon>CustomLanguageDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="BarCodesDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarCodesDlg.Designer.cs">
+      <DependentUpon>BarCodesDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="SourcePropsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,12 @@
       <DependentUpon>LogFileSelectionDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCapDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestCapDlg.Designer.cs">
+      <DependentUpon>TestCapDlg.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutDlg.resx">
       <DependentUpon>AboutDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -188,6 +200,9 @@
     <EmbeddedResource Include="CustomLanguageDlg.resx">
       <DependentUpon>CustomLanguageDlg.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BarCodesDlg.resx">
+      <DependentUpon>BarCodesDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SourcePropsDlg.resx">
       <DependentUpon>SourcePropsDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,6 +224,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestCapDlg.resx">
+      <DependentUpon>TestCapDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -232,6 +232,8 @@
 2502 Ongeldige afbeeldingsinformatie
 2503 Fout bij het schrijven van gegevens naar bestand
 2504 Operatie niet ondersteund  
+2505 Ongeldig PDF-textelement
+2506 Mogelijkheid was niet ingesteld. Ongeldige waarden werden gebruikt.
 3000 Selecteer bron
 3001 &Selecteer
 3002 &Annuleer

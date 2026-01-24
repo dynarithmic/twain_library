@@ -1030,6 +1030,8 @@ const
   DTWAIN_ERR_IMAGEINFO_INVALID = (-2502);
   DTWAIN_ERR_WRITEDATA_TOFILE = (-2503);
   DTWAIN_ERR_OPERATION_NOTSUPPORTED = (-2504);
+  DTWAIN_ERR_INVALID_PDFTEXTELEMENT = (-2505);
+  DTWAIN_ERR_SETCAP_FAILED = (-2506);
   DTWAIN_DE_CHKAUTOCAPTURE = 1;
   DTWAIN_DE_CHKBATTERY = 2;
   DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -1259,6 +1261,7 @@ const
   DTWAIN_DLG_NOOPENONSELECT = 4096;
   DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
   DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
+  DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768;
   DTWAIN_RES_ENGLISH = 0;
   DTWAIN_RES_FRENCH = 1;
   DTWAIN_RES_SPANISH = 2;
@@ -1809,6 +1812,7 @@ const
   DTWAIN_CONSTANT_DTWAIN_CONT = 79;
   DTWAIN_CONSTANT_CAPCODE_MAP = 80;
   DTWAIN_CONSTANT_ACAP = 81;
+  DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC = 82;
   DTWAIN_USERRES_START = 20000;
   DTWAIN_USERRES_MAXSIZE = 8192;
   DTWAIN_APIHANDLEOK = 1;
@@ -1841,6 +1845,9 @@ function DTWAIN_AddFileToAppendW(szFile:LPCWSTR) : BOOL; external 'dtwain64.dll'
 function DTWAIN_AddPDFText(Source:DTWAIN_SOURCE; szText:LPCTSTR; xPos:LONG; yPos:LONG; fontName:LPCTSTR; fontSize:DTWAIN_FLOAT; colorRGB:LONG; renderMode:LONG; scaling:DTWAIN_FLOAT; charSpacing:DTWAIN_FLOAT; wordSpacing:DTWAIN_FLOAT; strokeWidth:DTWAIN_FLOAT; Flags:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFText';
 function DTWAIN_AddPDFTextA(Source:DTWAIN_SOURCE; szText:LPCSTR; xPos:LONG; yPos:LONG; fontName:LPCSTR; fontSize:DTWAIN_FLOAT; colorRGB:LONG; renderMode:LONG; scaling:DTWAIN_FLOAT; charSpacing:DTWAIN_FLOAT; wordSpacing:DTWAIN_FLOAT; strokeWidth:DTWAIN_FLOAT; Flags:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextA';
 function DTWAIN_AddPDFTextElement(Source:DTWAIN_SOURCE; TextElement:DTWAIN_PDFTEXTELEMENT) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextElement';
+function DTWAIN_AddPDFTextEx(Source:DTWAIN_SOURCE; szText:LPCTSTR; xPos:LONG; yPos:LONG; fontName:LPCTSTR; fontSize:DTWAIN_FLOAT; colorRGB:LONG; renderMode:LONG; scaling:DTWAIN_FLOAT; charSpacing:DTWAIN_FLOAT; wordSpacing:DTWAIN_FLOAT; strokeWidth:DTWAIN_FLOAT; rotationAngle:DTWAIN_FLOAT; skewAngleX:DTWAIN_FLOAT; skewAngleY:DTWAIN_FLOAT; scalingX:DTWAIN_FLOAT; scalingY:DTWAIN_FLOAT; transformType:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextEx';
+function DTWAIN_AddPDFTextExA(Source:DTWAIN_SOURCE; szText:LPCSTR; xPos:LONG; yPos:LONG; fontName:LPCSTR; fontSize:DTWAIN_FLOAT; colorRGB:LONG; renderMode:LONG; scaling:DTWAIN_FLOAT; charSpacing:DTWAIN_FLOAT; wordSpacing:DTWAIN_FLOAT; strokeWidth:DTWAIN_FLOAT; rotationAngle:DTWAIN_FLOAT; skewAngleX:DTWAIN_FLOAT; skewAngleY:DTWAIN_FLOAT; scalingX:DTWAIN_FLOAT; scalingY:DTWAIN_FLOAT; transformType:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextExA';
+function DTWAIN_AddPDFTextExW(Source:DTWAIN_SOURCE; szText:LPCWSTR; xPos:LONG; yPos:LONG; fontName:LPCWSTR; fontSize:DTWAIN_FLOAT; colorRGB:LONG; renderMode:LONG; scaling:DTWAIN_FLOAT; charSpacing:DTWAIN_FLOAT; wordSpacing:DTWAIN_FLOAT; strokeWidth:DTWAIN_FLOAT; rotationAngle:DTWAIN_FLOAT; skewAngleX:DTWAIN_FLOAT; skewAngleY:DTWAIN_FLOAT; scalingX:DTWAIN_FLOAT; scalingY:DTWAIN_FLOAT; transformType:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextExW';
 function DTWAIN_AddPDFTextString(Source:DTWAIN_SOURCE; szText:LPCTSTR; xPos:LONG; yPos:LONG; fontName:LPCTSTR; fontSize:LPCTSTR; colorRGB:LONG; renderMode:LONG; scaling:LPCTSTR; charSpacing:LPCTSTR; wordSpacing:LPCTSTR; strokeWidth:LPCTSTR; Flags:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextString';
 function DTWAIN_AddPDFTextStringA(Source:DTWAIN_SOURCE; szText:LPCSTR; xPos:LONG; yPos:LONG; fontName:LPCSTR; fontSize:LPCSTR; colorRGB:LONG; renderMode:LONG; scaling:LPCSTR; charSpacing:LPCSTR; wordSpacing:LPCSTR; strokeWidth:LPCSTR; Flags:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextStringA';
 function DTWAIN_AddPDFTextStringW(Source:DTWAIN_SOURCE; szText:LPCWSTR; xPos:LONG; yPos:LONG; fontName:LPCWSTR; fontSize:LPCWSTR; colorRGB:LONG; renderMode:LONG; scaling:LPCWSTR; charSpacing:LPCWSTR; wordSpacing:LPCWSTR; strokeWidth:LPCWSTR; Flags:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_AddPDFTextStringW';
@@ -2235,6 +2242,9 @@ function DTWAIN_GetCompressionType(Source:DTWAIN_SOURCE; lpCompression:LPLONG; b
 function DTWAIN_GetConditionCodeString(lError:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConditionCodeString';
 function DTWAIN_GetConditionCodeStringA(lError:LONG; lpszBuffer:LPSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConditionCodeStringA';
 function DTWAIN_GetConditionCodeStringW(lError:LONG; lpszBuffer:LPWSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConditionCodeStringW';
+function DTWAIN_GetConstantFromTwainName(lpszBuffer:LPCTSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConstantFromTwainName';
+function DTWAIN_GetConstantFromTwainNameA(lpszBuffer:LPCSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConstantFromTwainNameA';
+function DTWAIN_GetConstantFromTwainNameW(lpszBuffer:LPCWSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConstantFromTwainNameW';
 function DTWAIN_GetContrast(Source:DTWAIN_SOURCE; Contrast:LPDTWAIN_FLOAT) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetContrast';
 function DTWAIN_GetContrastString(Source:DTWAIN_SOURCE; Contrast:LPTSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetContrastString';
 function DTWAIN_GetContrastStringA(Source:DTWAIN_SOURCE; Contrast:LPSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetContrastStringA';
@@ -2453,9 +2463,6 @@ function DTWAIN_GetTwainCountryValue(country:LPCTSTR) : LONG; external 'dtwain64
 function DTWAIN_GetTwainCountryValueA(country:LPCSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetTwainCountryValueA';
 function DTWAIN_GetTwainCountryValueW(country:LPCWSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetTwainCountryValueW';
 function DTWAIN_GetTwainHwnd : NativeInt; external 'dtwain64.dll'  name 'DTWAIN_GetTwainHwnd';
-function DTWAIN_GetTwainIDFromName(lpszBuffer:LPCTSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetTwainIDFromName';
-function DTWAIN_GetTwainIDFromNameA(lpszBuffer:LPCSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetTwainIDFromNameA';
-function DTWAIN_GetTwainIDFromNameW(lpszBuffer:LPCWSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetTwainIDFromNameW';
 function DTWAIN_GetTwainLanguageName(nameId:LONG; szName:LPTSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetTwainLanguageName';
 function DTWAIN_GetTwainLanguageNameA(lang:LONG; szName:LPSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetTwainLanguageNameA';
 function DTWAIN_GetTwainLanguageNameW(lang:LONG; szName:LPWSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetTwainLanguageNameW';

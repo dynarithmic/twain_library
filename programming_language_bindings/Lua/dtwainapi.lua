@@ -95,6 +95,9 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_AddPDFText(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
+        DTWAIN_BOOL DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
         DTWAIN_BOOL DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_CCHARPTRTYPE fontSize, LONG colorRGB, LONG renderMode, DTWAIN_CCHARPTRTYPE scaling, DTWAIN_CCHARPTRTYPE charSpacing, DTWAIN_CCHARPTRTYPE wordSpacing, DTWAIN_CCHARPTRTYPE strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, LPCSTR fontSize, LONG colorRGB, LONG renderMode, LPCSTR scaling, LPCSTR charSpacing, LPCSTR wordSpacing, LPCSTR strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, LPCWSTR fontSize, LONG colorRGB, LONG renderMode, LPCWSTR scaling, LPCWSTR charSpacing, LPCWSTR wordSpacing, LPCWSTR strokeWidth, DWORD Flags);
@@ -486,6 +489,9 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
+        LONG DTWAIN_GetConstantFromTwainName(DTWAIN_CCHARPTRTYPE lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
@@ -701,9 +707,6 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetTwainCountryValueA(LPCSTR country);
         LONG DTWAIN_GetTwainCountryValueW(LPCWSTR country);
         HWND DTWAIN_GetTwainHwnd();
-        LONG DTWAIN_GetTwainIDFromName(DTWAIN_CCHARPTRTYPE lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameA(LPCSTR lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameW(LPCWSTR lpszBuffer);
         BOOL DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameA(LONG lang, LPSTR szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameW(LONG lang, LPWSTR szName);
@@ -1270,6 +1273,9 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_AddPDFText(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
+        DTWAIN_BOOL DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
         DTWAIN_BOOL DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_CCHARPTRTYPE fontSize, LONG colorRGB, LONG renderMode, DTWAIN_CCHARPTRTYPE scaling, DTWAIN_CCHARPTRTYPE charSpacing, DTWAIN_CCHARPTRTYPE wordSpacing, DTWAIN_CCHARPTRTYPE strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, LPCSTR fontSize, LONG colorRGB, LONG renderMode, LPCSTR scaling, LPCSTR charSpacing, LPCSTR wordSpacing, LPCSTR strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, LPCWSTR fontSize, LONG colorRGB, LONG renderMode, LPCWSTR scaling, LPCWSTR charSpacing, LPCWSTR wordSpacing, LPCWSTR strokeWidth, DWORD Flags);
@@ -1661,6 +1667,9 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
+        LONG DTWAIN_GetConstantFromTwainName(DTWAIN_CCHARPTRTYPE lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
@@ -1876,9 +1885,6 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetTwainCountryValueA(LPCSTR country);
         LONG DTWAIN_GetTwainCountryValueW(LPCWSTR country);
         HWND DTWAIN_GetTwainHwnd();
-        LONG DTWAIN_GetTwainIDFromName(DTWAIN_CCHARPTRTYPE lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameA(LPCSTR lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameW(LPCWSTR lpszBuffer);
         BOOL DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameA(LONG lang, LPSTR szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameW(LONG lang, LPWSTR szName);
@@ -2445,6 +2451,9 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_AddPDFText(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
+        DTWAIN_BOOL DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
         DTWAIN_BOOL DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_CCHARPTRTYPE fontSize, LONG colorRGB, LONG renderMode, DTWAIN_CCHARPTRTYPE scaling, DTWAIN_CCHARPTRTYPE charSpacing, DTWAIN_CCHARPTRTYPE wordSpacing, DTWAIN_CCHARPTRTYPE strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, LPCSTR fontSize, LONG colorRGB, LONG renderMode, LPCSTR scaling, LPCSTR charSpacing, LPCSTR wordSpacing, LPCSTR strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, LPCWSTR fontSize, LONG colorRGB, LONG renderMode, LPCWSTR scaling, LPCWSTR charSpacing, LPCWSTR wordSpacing, LPCWSTR strokeWidth, DWORD Flags);
@@ -2836,6 +2845,9 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
+        LONG DTWAIN_GetConstantFromTwainName(DTWAIN_CCHARPTRTYPE lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
@@ -3051,9 +3063,6 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetTwainCountryValueA(LPCSTR country);
         LONG DTWAIN_GetTwainCountryValueW(LPCWSTR country);
         HWND DTWAIN_GetTwainHwnd();
-        LONG DTWAIN_GetTwainIDFromName(DTWAIN_CCHARPTRTYPE lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameA(LPCSTR lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameW(LPCWSTR lpszBuffer);
         BOOL DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameA(LONG lang, LPSTR szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameW(LONG lang, LPWSTR szName);
@@ -3620,6 +3629,9 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_AddPDFText(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
+        DTWAIN_BOOL DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
+        DTWAIN_BOOL DTWAIN_AddPDFTextExW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, DTWAIN_FLOAT fontSize, LONG colorRGB, LONG renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, LONG transformType);
         DTWAIN_BOOL DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE szText, LONG xPos, LONG yPos, DTWAIN_CCHARPTRTYPE fontName, DTWAIN_CCHARPTRTYPE fontSize, LONG colorRGB, LONG renderMode, DTWAIN_CCHARPTRTYPE scaling, DTWAIN_CCHARPTRTYPE charSpacing, DTWAIN_CCHARPTRTYPE wordSpacing, DTWAIN_CCHARPTRTYPE strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringA(DTWAIN_SOURCE Source, LPCSTR szText, LONG xPos, LONG yPos, LPCSTR fontName, LPCSTR fontSize, LONG colorRGB, LONG renderMode, LPCSTR scaling, LPCSTR charSpacing, LPCSTR wordSpacing, LPCSTR strokeWidth, DWORD Flags);
         DTWAIN_BOOL DTWAIN_AddPDFTextStringW(DTWAIN_SOURCE Source, LPCWSTR szText, LONG xPos, LONG yPos, LPCWSTR fontName, LPCWSTR fontSize, LONG colorRGB, LONG renderMode, LPCWSTR scaling, LPCWSTR charSpacing, LPCWSTR wordSpacing, LPCWSTR strokeWidth, DWORD Flags);
@@ -4011,6 +4023,9 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
+        LONG DTWAIN_GetConstantFromTwainName(DTWAIN_CCHARPTRTYPE lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
+        LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
@@ -4226,9 +4241,6 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetTwainCountryValueA(LPCSTR country);
         LONG DTWAIN_GetTwainCountryValueW(LPCWSTR country);
         HWND DTWAIN_GetTwainHwnd();
-        LONG DTWAIN_GetTwainIDFromName(DTWAIN_CCHARPTRTYPE lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameA(LPCSTR lpszBuffer);
-        LONG DTWAIN_GetTwainIDFromNameW(LPCWSTR lpszBuffer);
         BOOL DTWAIN_GetTwainLanguageName(LONG nameId, DTWAIN_CHARPTRTYPE szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameA(LONG lang, LPSTR szName);
         DTWAIN_BOOL DTWAIN_GetTwainLanguageNameW(LONG lang, LPWSTR szName);
