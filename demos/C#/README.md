@@ -33,6 +33,10 @@ In this case, you would add to your C# project one of the files below, depending
 | dtwain64u.cs | 64-bit Unicode using dtwain64u.dll |
 | dtwain64ud.cs | 64-bit Debug Unicode using dtwain64ud.dll |
 
+If you are using Visual Studio, make sure that your project's "Solutions Platform" is set to use the the proper interface file.  For example, if the Solutions Platform setting is `X86`, the interface files that should be used are the ones named `dtwain32*.cs`.  Likewise for `x64`, the interface files that should be used are named `dtwain64*.cs`.  If the Solutions Platform is `Any CPU`, make sure that the CPU setting (32-bit / 64-bit) matches the interface file being used in the project.
+
+Using the incorrect or wrong-matching interface file may cause compilation errors.  If you get compilation errors related to certain callback functions having the incorrect function signatures, this is an indication of using the wrong interface file with respect to the currently set Solution Platform.
+
 **Additional note: It is recommended to use the Unicode version of DTWAIN (dtwain32u.cs, dtwain32ud.cs, dtwain64u.cs or dtwain64ud.cs) for C# applications.   Although the ANSI version of DTWAIN is usable within a C# application, using the Unicode version ensures that the .NET marshalling of strings between the C# application and DTWAIN is done properly.**
 
 ----
