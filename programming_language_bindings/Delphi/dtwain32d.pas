@@ -2262,6 +2262,9 @@ function DTWAIN_GetDSMFullName(DSMType:LONG; szDLLName:LPTSTR; nMaxLen:LONG; pWh
 function DTWAIN_GetDSMFullNameA(DSMType:LONG; szDLLName:LPSTR; nMaxLen:LONG; pWhichSearch:LPLONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMFullNameA';
 function DTWAIN_GetDSMFullNameW(DSMType:LONG; szDLLName:LPWSTR; nMaxLen:LONG; pWhichSearch:LPLONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMFullNameW';
 function DTWAIN_GetDSMSearchOrder : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMSearchOrder';
+function DTWAIN_GetDSMSearchOrderEx(SearchOrder:LPTSTR; UserDirectory:LPTSTR) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMSearchOrderEx';
+function DTWAIN_GetDSMSearchOrderExA(SearchOrder:LPSTR; UserDirectory:LPSTR) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMSearchOrderExA';
+function DTWAIN_GetDSMSearchOrderExW(SearchOrder:LPWSTR; UserDirectory:LPWSTR) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDSMSearchOrderExW';
 function DTWAIN_GetDTWAINHandle : DTWAIN_HANDLE; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDTWAINHandle';
 function DTWAIN_GetDeviceEvent(Source:DTWAIN_SOURCE; lpEvent:LPLONG) : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDeviceEvent';
 function DTWAIN_GetDeviceEventEx(Source:DTWAIN_SOURCE; lpEvent:LPLONG; pArray:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetDeviceEventEx';
@@ -2472,6 +2475,9 @@ function DTWAIN_GetTwainLanguageValueW(lang:LPCWSTR) : LONG; stdcall;  external 
 function DTWAIN_GetTwainMode : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainMode';
 function DTWAIN_GetTwainNameFromConstant(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPTSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstant';
 function DTWAIN_GetTwainNameFromConstantA(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstantA';
+function DTWAIN_GetTwainNameFromConstantEx(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPTSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstantEx';
+function DTWAIN_GetTwainNameFromConstantExA(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstantExA';
+function DTWAIN_GetTwainNameFromConstantExW(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPWSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstantExW';
 function DTWAIN_GetTwainNameFromConstantW(lConstantType:LONG; lTwainConstant:LONG; lpszOut:LPWSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainNameFromConstantW';
 function DTWAIN_GetTwainStringName(category:LONG; TwainID:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainStringName';
 function DTWAIN_GetTwainStringNameA(category:LONG; TwainID:LONG; lpszBuffer:LPSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_GetTwainStringNameA';

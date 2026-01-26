@@ -508,6 +508,9 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetDSMFullNameA(LONG DSMType, LPSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMSearchOrder();
+        LONG DTWAIN_GetDSMSearchOrderEx(DTWAIN_CHARPTRTYPE SearchOrder, DTWAIN_CHARPTRTYPE UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
         DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
         DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
@@ -716,6 +719,9 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetTwainMode();
         LONG DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantEx(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainStringName(LONG category, LONG TwainID, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetTwainStringNameA(LONG category, LONG TwainID, LPSTR lpszBuffer, LONG nMaxLen);
@@ -1686,6 +1692,9 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetDSMFullNameA(LONG DSMType, LPSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMSearchOrder();
+        LONG DTWAIN_GetDSMSearchOrderEx(DTWAIN_CHARPTRTYPE SearchOrder, DTWAIN_CHARPTRTYPE UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
         DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
         DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
@@ -1894,6 +1903,9 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetTwainMode();
         LONG DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantEx(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainStringName(LONG category, LONG TwainID, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetTwainStringNameA(LONG category, LONG TwainID, LPSTR lpszBuffer, LONG nMaxLen);
@@ -2864,6 +2876,9 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetDSMFullNameA(LONG DSMType, LPSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMSearchOrder();
+        LONG DTWAIN_GetDSMSearchOrderEx(DTWAIN_CHARPTRTYPE SearchOrder, DTWAIN_CHARPTRTYPE UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
         DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
         DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
@@ -3072,6 +3087,9 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetTwainMode();
         LONG DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantEx(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainStringName(LONG category, LONG TwainID, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetTwainStringNameA(LONG category, LONG TwainID, LPSTR lpszBuffer, LONG nMaxLen);
@@ -4042,6 +4060,9 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetDSMFullNameA(LONG DSMType, LPSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMFullNameW(LONG DSMType, LPWSTR szDLLName, LONG nMaxLen, LPLONG pWhichSearch);
         LONG DTWAIN_GetDSMSearchOrder();
+        LONG DTWAIN_GetDSMSearchOrderEx(DTWAIN_CHARPTRTYPE SearchOrder, DTWAIN_CHARPTRTYPE UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
+        LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
         DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
         DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
@@ -4250,6 +4271,9 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetTwainMode();
         LONG DTWAIN_GetTwainNameFromConstant(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantEx(LONG lConstantType, LONG lTwainConstant, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExA(LONG lConstantType, LONG lTwainConstant, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetTwainNameFromConstantExW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainNameFromConstantW(LONG lConstantType, LONG lTwainConstant, LPWSTR lpszOut, LONG nSize);
         LONG DTWAIN_GetTwainStringName(LONG category, LONG TwainID, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetTwainStringNameA(LONG category, LONG TwainID, LPSTR lpszBuffer, LONG nMaxLen);

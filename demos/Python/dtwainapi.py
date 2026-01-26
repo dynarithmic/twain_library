@@ -2183,6 +2183,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetDSMFullNameA.restype = ct.c_long
      theDLL.DTWAIN_GetDSMFullNameW.restype = ct.c_long
      theDLL.DTWAIN_GetDSMSearchOrder.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderEx.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderExA.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderExW.restype = ct.c_long
      theDLL.DTWAIN_GetDTWAINHandle.restype = ct.c_void_p
      theDLL.DTWAIN_GetDeviceEvent.restype = ct.c_long
      theDLL.DTWAIN_GetDeviceEventEx.restype = ct.c_long
@@ -2393,6 +2396,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetTwainMode.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstant.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstantA.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantEx.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantExA.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantExW.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstantW.restype = ct.c_long
      theDLL.DTWAIN_GetTwainStringName.restype = ct.c_long
      theDLL.DTWAIN_GetTwainStringNameA.restype = ct.c_long
@@ -3293,6 +3299,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetDSMFullName.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetDSMSearchOrderEx.argtypes = [ct.c_wchar_p, ct.c_wchar_p]
+     theDLL.DTWAIN_GetDSMSearchOrderExA.argtypes = [ct.c_char_p, ct.c_char_p]
+     theDLL.DTWAIN_GetDSMSearchOrderExW.argtypes = [ct.c_wchar_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetDeviceEvent.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDeviceEventEx.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetDeviceEventInfo.argtypes = [ct.c_void_p, ct.c_long, ct.c_void_p]
@@ -3488,6 +3497,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetTwainLanguageValueW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetTwainNameFromConstant.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainNameFromConstantA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantEx.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantExA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantExW.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainNameFromConstantW.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainStringName.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainStringNameA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
@@ -4399,6 +4411,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetDSMFullNameA.restype = ct.c_long
      theDLL.DTWAIN_GetDSMFullNameW.restype = ct.c_long
      theDLL.DTWAIN_GetDSMSearchOrder.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderEx.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderExA.restype = ct.c_long
+     theDLL.DTWAIN_GetDSMSearchOrderExW.restype = ct.c_long
      theDLL.DTWAIN_GetDTWAINHandle.restype = ct.c_void_p
      theDLL.DTWAIN_GetDeviceEvent.restype = ct.c_long
      theDLL.DTWAIN_GetDeviceEventEx.restype = ct.c_long
@@ -4609,6 +4624,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetTwainMode.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstant.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstantA.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantEx.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantExA.restype = ct.c_long
+     theDLL.DTWAIN_GetTwainNameFromConstantExW.restype = ct.c_long
      theDLL.DTWAIN_GetTwainNameFromConstantW.restype = ct.c_long
      theDLL.DTWAIN_GetTwainStringName.restype = ct.c_long
      theDLL.DTWAIN_GetTwainStringNameA.restype = ct.c_long
@@ -5509,6 +5527,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetDSMFullName.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDSMFullNameW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetDSMSearchOrderEx.argtypes = [ct.c_char_p, ct.c_char_p]
+     theDLL.DTWAIN_GetDSMSearchOrderExA.argtypes = [ct.c_char_p, ct.c_char_p]
+     theDLL.DTWAIN_GetDSMSearchOrderExW.argtypes = [ct.c_wchar_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetDeviceEvent.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetDeviceEventEx.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetDeviceEventInfo.argtypes = [ct.c_void_p, ct.c_long, ct.c_void_p]
@@ -5704,6 +5725,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetTwainLanguageValueW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetTwainNameFromConstant.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetTwainNameFromConstantA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantEx.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantExA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetTwainNameFromConstantExW.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainNameFromConstantW.argtypes = [ct.c_long, ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetTwainStringName.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetTwainStringNameA.argtypes = [ct.c_long, ct.c_long, ct.c_char_p, ct.c_long]

@@ -43,7 +43,7 @@ void main()
 
     // Select a TWAIN source by using the enhanced 
 	// TWAIN Select Source dialog (we can center it on the screen)
-    auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_CURRENT_MONITOR);
+    auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_SCREEN);
 
     if ( !TwainSource )
 	{
@@ -88,12 +88,11 @@ void main()
     dll.DTWAIN_SetCallback64(&myCallback64, userDataPtr);
 
     // Now let's acquire a page from the device and save to a BMP file
-    dll.DTWAIN_AcquireFile(TwainSource, "testd.bmp", 
-						   dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
+    dll.DTWAIN_AcquireFileA(TwainSource, "testd.bmp", 
+							dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
                            dll.DTWAIN_PT_DEFAULT, 1,1,1, null);
 
     // Now close down DTWAIN.  You *must* do this when done using DTWAIN, so that resources are freed, and that
     // any callbacks you have set do not fire when DTWAIN is closed.
     dll.DTWAIN_SysDestroy();
 }
-
