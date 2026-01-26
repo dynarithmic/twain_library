@@ -567,6 +567,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetDSMFullNameA
    attr_reader :DTWAIN_GetDSMFullNameW
    attr_reader :DTWAIN_GetDSMSearchOrder
+   attr_reader :DTWAIN_GetDSMSearchOrderEx
+   attr_reader :DTWAIN_GetDSMSearchOrderExA
+   attr_reader :DTWAIN_GetDSMSearchOrderExW
    attr_reader :DTWAIN_GetDTWAINHandle
    attr_reader :DTWAIN_GetDeviceEvent
    attr_reader :DTWAIN_GetDeviceEventEx
@@ -777,6 +780,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetTwainMode
    attr_reader :DTWAIN_GetTwainNameFromConstant
    attr_reader :DTWAIN_GetTwainNameFromConstantA
+   attr_reader :DTWAIN_GetTwainNameFromConstantEx
+   attr_reader :DTWAIN_GetTwainNameFromConstantExA
+   attr_reader :DTWAIN_GetTwainNameFromConstantExW
    attr_reader :DTWAIN_GetTwainNameFromConstantW
    attr_reader :DTWAIN_GetTwainStringName
    attr_reader :DTWAIN_GetTwainStringNameA
@@ -3362,6 +3368,9 @@ class DTWAINAPI
        @DTWAIN_GetDSMFullNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMFullNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetDSMFullNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMFullNameW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetDSMSearchOrder = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMSearchOrder'],[],Fiddle::TYPE_LONG)
+       @DTWAIN_GetDSMSearchOrderEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMSearchOrderEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
+       @DTWAIN_GetDSMSearchOrderExA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMSearchOrderExA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
+       @DTWAIN_GetDSMSearchOrderExW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMSearchOrderExW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetDTWAINHandle = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDTWAINHandle'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetDeviceEvent = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDeviceEvent'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetDeviceEventEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDeviceEventEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3572,6 +3581,9 @@ class DTWAINAPI
        @DTWAIN_GetTwainMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainMode'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstant = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstant'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetTwainNameFromConstantEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantEx'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetTwainNameFromConstantExA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetTwainNameFromConstantExW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainStringName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainStringName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainStringNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainStringNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)

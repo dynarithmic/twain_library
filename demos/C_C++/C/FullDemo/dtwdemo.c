@@ -1058,7 +1058,7 @@ LRESULT CALLBACK DisplayBarCodeInfoProc(HWND hDlg, UINT message, WPARAM wParam, 
                         char szType[100];
 
                         /* Translate the bar code type to a string defined by the TWAIN specification*/
-                        DTWAIN_GetTwainNameFromConstantA(DTWAIN_CONSTANT_TWBT, nType, szType, 100);
+                        DTWAIN_GetTwainNameFromConstantExA(DTWAIN_CONSTANT_TWBT, nType, szType, 100);
                         nChars = wsprintfA(pOrigText, "     Type: %s\r\n\r\n", szType);
                         totalChars += nChars;
                         if (totalChars >= 100000)

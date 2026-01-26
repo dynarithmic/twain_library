@@ -73,7 +73,7 @@ namespace TWAINDemo
                         StringBuilder szType = new StringBuilder(100);
 
                         // Translate the bar code type to a string defined by the TWAIN specification
-                        DTwainDemo.TwainAPI.DTWAIN_GetTwainNameFromConstant(TwainAPI.DTWAIN_CONSTANT_TWBT, nType, szType, 100);
+                        DTwainDemo.TwainAPI.DTWAIN_GetTwainNameFromConstantEx(TwainAPI.DTWAIN_CONSTANT_TWBT, nType, szType, 100);
                         szOrigText.AppendFormat("     Type: {0}\r\n\r\n", szType.ToString());
                     }
 

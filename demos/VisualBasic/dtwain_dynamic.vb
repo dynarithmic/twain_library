@@ -2939,6 +2939,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetDSMSearchOrderDelegate() As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetDSMSearchOrderExDelegate(<MarshalAs(UnmanagedType.LPTStr)> SearchOrder As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> UserDirectory As StringBuilder) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetDTWAINHandleDelegate() As System.IntPtr
         
@@ -3307,6 +3310,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetTwainNameFromConstantDelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetTwainNameFromConstantExDelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetTwainStringNameDelegate(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
@@ -5685,6 +5691,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetDSMSearchOrder()
         End Function
         
+        Public Function DTWAIN_GetDSMSearchOrderEx(<MarshalAs(UnmanagedType.LPTStr)> SearchOrder As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> UserDirectory As StringBuilder) As Integer
+        Return api.DTWAIN_GetDSMSearchOrderEx(SearchOrder, UserDirectory)
+        End Function
+        
         Public Function DTWAIN_GetDTWAINHandle() As System.IntPtr
         Return api.DTWAIN_GetDTWAINHandle()
         End Function
@@ -6175,6 +6185,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetTwainNameFromConstant(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
         Return api.DTWAIN_GetTwainNameFromConstant(lConstantType, lTwainConstant, lpszOut, nSize)
+        End Function
+        
+        Public Function DTWAIN_GetTwainNameFromConstantEx(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        Return api.DTWAIN_GetTwainNameFromConstantEx(lConstantType, lTwainConstant, lpszOut, nSize)
         End Function
         
         Public Function DTWAIN_GetTwainStringName(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
@@ -7857,6 +7871,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetCustomDSData As DTWAIN_GetCustomDSDataDelegate
             Public DTWAIN_GetDSMFullName As DTWAIN_GetDSMFullNameDelegate
             Public DTWAIN_GetDSMSearchOrder As DTWAIN_GetDSMSearchOrderDelegate
+            Public DTWAIN_GetDSMSearchOrderEx As DTWAIN_GetDSMSearchOrderExDelegate
             Public DTWAIN_GetDTWAINHandle As DTWAIN_GetDTWAINHandleDelegate
             Public DTWAIN_GetDeviceEvent As DTWAIN_GetDeviceEventDelegate
             Public DTWAIN_GetDeviceEventEx As DTWAIN_GetDeviceEventExDelegate
@@ -7980,6 +7995,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetTwainLanguageValue As DTWAIN_GetTwainLanguageValueDelegate
             Public DTWAIN_GetTwainMode As DTWAIN_GetTwainModeDelegate
             Public DTWAIN_GetTwainNameFromConstant As DTWAIN_GetTwainNameFromConstantDelegate
+            Public DTWAIN_GetTwainNameFromConstantEx As DTWAIN_GetTwainNameFromConstantExDelegate
             Public DTWAIN_GetTwainStringName As DTWAIN_GetTwainStringNameDelegate
             Public DTWAIN_GetTwainTimeout As DTWAIN_GetTwainTimeoutDelegate
             Public DTWAIN_GetVersion As DTWAIN_GetVersionDelegate

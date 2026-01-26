@@ -2254,6 +2254,8 @@
         public delegate int DTWAIN_GetDSMFullNameDelegate(int DSMType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szDLLName, int nMaxLen, ref int pWhichSearch);
         public delegate int DTWAIN_GetDSMFullNameDelegate_overload(int DSMType, System.IntPtr szDLLName, int nMaxLen, ref int pWhichSearch);
         public delegate int DTWAIN_GetDSMSearchOrderDelegate();
+        public delegate int DTWAIN_GetDSMSearchOrderExDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder SearchOrder, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder UserDirectory);
+        public delegate int DTWAIN_GetDSMSearchOrderExDelegate_overload(System.IntPtr SearchOrder, System.IntPtr UserDirectory);
         public delegate DTWAIN_HANDLE DTWAIN_GetDTWAINHandleDelegate();
         public delegate int DTWAIN_GetDeviceEventDelegate(DTWAIN_SOURCE Source, ref int lpEvent);
         public delegate int DTWAIN_GetDeviceEventExDelegate(DTWAIN_SOURCE Source, ref int lpEvent, ref DTWAIN_ARRAY pArray);
@@ -2418,6 +2420,8 @@
         public delegate int DTWAIN_GetTwainModeDelegate();
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
+        public delegate int DTWAIN_GetTwainNameFromConstantExDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+        public delegate int DTWAIN_GetTwainNameFromConstantExDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainStringNameDelegate(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetTwainStringNameDelegate_overload(int category, int TwainID, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetTwainTimeoutDelegate();
@@ -3861,6 +3865,12 @@
         [DTWAINNativeFunction("DTWAIN_GetDSMSearchOrder")]
         private readonly DTWAIN_GetDSMSearchOrderDelegate  _DTWAIN_GetDSMSearchOrder;
 
+        [DTWAINNativeFunction("DTWAIN_GetDSMSearchOrderEx")]
+        private readonly DTWAIN_GetDSMSearchOrderExDelegate  _DTWAIN_GetDSMSearchOrderEx;
+
+        [DTWAINNativeFunction("DTWAIN_GetDSMSearchOrderEx")]
+        private readonly DTWAIN_GetDSMSearchOrderExDelegate_overload _DTWAIN_GetDSMSearchOrderEx_overload; 
+
         [DTWAINNativeFunction("DTWAIN_GetDTWAINHandle")]
         private readonly DTWAIN_GetDTWAINHandleDelegate  _DTWAIN_GetDTWAINHandle;
 
@@ -4352,6 +4362,12 @@
 
         [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstant")]
         private readonly DTWAIN_GetTwainNameFromConstantDelegate_overload _DTWAIN_GetTwainNameFromConstant_overload; 
+
+        [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstantEx")]
+        private readonly DTWAIN_GetTwainNameFromConstantExDelegate  _DTWAIN_GetTwainNameFromConstantEx;
+
+        [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstantEx")]
+        private readonly DTWAIN_GetTwainNameFromConstantExDelegate_overload _DTWAIN_GetTwainNameFromConstantEx_overload; 
 
         [DTWAINNativeFunction("DTWAIN_GetTwainStringName")]
         private readonly DTWAIN_GetTwainStringNameDelegate  _DTWAIN_GetTwainStringName;
@@ -6473,6 +6489,12 @@
         public  int DTWAIN_GetDSMSearchOrder()
         => _DTWAIN_GetDSMSearchOrder();
 
+        public  int DTWAIN_GetDSMSearchOrderEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder SearchOrder, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder UserDirectory)
+        => _DTWAIN_GetDSMSearchOrderEx(SearchOrder, UserDirectory);
+
+        public  int DTWAIN_GetDSMSearchOrderEx (System.IntPtr SearchOrder, System.IntPtr UserDirectory)
+        => _DTWAIN_GetDSMSearchOrderEx_overload(SearchOrder, UserDirectory);
+
         public  DTWAIN_HANDLE DTWAIN_GetDTWAINHandle()
         => _DTWAIN_GetDTWAINHandle();
 
@@ -6964,6 +6986,12 @@
 
         public  int DTWAIN_GetTwainNameFromConstant (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
         => _DTWAIN_GetTwainNameFromConstant_overload(lConstantType, lTwainConstant, lpszOut, nSize);
+
+        public  int DTWAIN_GetTwainNameFromConstantEx(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
+        => _DTWAIN_GetTwainNameFromConstantEx(lConstantType, lTwainConstant, lpszOut, nSize);
+
+        public  int DTWAIN_GetTwainNameFromConstantEx (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
+        => _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize);
 
         public  int DTWAIN_GetTwainStringName(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
         => _DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen);
