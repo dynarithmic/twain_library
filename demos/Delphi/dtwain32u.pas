@@ -1928,7 +1928,7 @@ function DTWAIN_ArrayGetAtFrameStringA(FrameArray:DTWAIN_ARRAY; nWhere:LONG; lef
 function DTWAIN_ArrayGetAtFrameStringW(FrameArray:DTWAIN_ARRAY; nWhere:LONG; left:LPWSTR; top:LPWSTR; right:LPWSTR; bottom:LPWSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtFrameStringW';
 function DTWAIN_ArrayGetAtLong(pArray:DTWAIN_ARRAY; nWhere:LONG; pVal:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtLong';
 function DTWAIN_ArrayGetAtLong64(pArray:DTWAIN_ARRAY; nWhere:LONG; pVal:LPLONG64) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtLong64';
-function DTWAIN_ArrayGetAtSource(pArray:DTWAIN_ARRAY; nWhere:LONG; ppSource:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtSource';
+function DTWAIN_ArrayGetAtSource(pArray:DTWAIN_ARRAY; nWhere:LONG; ppSource:LPDTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtSource';
 function DTWAIN_ArrayGetAtSourceEx(pArray:DTWAIN_ARRAY; nWhere:LONG) : DTWAIN_SOURCE; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtSourceEx';
 function DTWAIN_ArrayGetAtString(pArray:DTWAIN_ARRAY; nWhere:LONG; pStr:LPTSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtString';
 function DTWAIN_ArrayGetAtStringA(pArray:DTWAIN_ARRAY; nWhere:LONG; pStr:LPSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetAtStringA';
@@ -1942,7 +1942,7 @@ function DTWAIN_ArrayGetCapValuesEx(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LO
 function DTWAIN_ArrayGetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; lContainerType:LONG; nDataType:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetCapValuesEx2';
 function DTWAIN_ArrayGetCount(pArray:DTWAIN_ARRAY) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetCount';
 function DTWAIN_ArrayGetMaxStringLength(a:DTWAIN_ARRAY) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetMaxStringLength';
-function DTWAIN_ArrayGetSourceAt(pArray:DTWAIN_ARRAY; nWhere:LONG; ppSource:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetSourceAt';
+function DTWAIN_ArrayGetSourceAt(pArray:DTWAIN_ARRAY; nWhere:LONG; ppSource:LPDTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetSourceAt';
 function DTWAIN_ArrayGetStringLength(a:DTWAIN_ARRAY; nWhichString:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetStringLength';
 function DTWAIN_ArrayGetType(pArray:DTWAIN_ARRAY) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayGetType';
 function DTWAIN_ArrayInit : DTWAIN_ARRAY; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ArrayInit';
@@ -2681,6 +2681,10 @@ function DTWAIN_RangeSetValueLong(pArray:DTWAIN_RANGE; nWhich:LONG; Val:LONG) : 
 function DTWAIN_RemovePDFTextElement(Source:DTWAIN_SOURCE; TextElement:DTWAIN_PDFTEXTELEMENT) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RemovePDFTextElement';
 function DTWAIN_ResetPDFTextElement(TextElement:DTWAIN_PDFTEXTELEMENT) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_ResetPDFTextElement';
 function DTWAIN_RewindPage(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RewindPage';
+function DTWAIN_RotateDIB(hDib:NativeInt; rotationAngle:DTWAIN_FLOAT) : NativeInt; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RotateDIB';
+function DTWAIN_RotateDIBString(hDib:NativeInt; rotationAngle:LPCTSTR) : NativeInt; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RotateDIBString';
+function DTWAIN_RotateDIBStringA(hDib:NativeInt; rotationAngle:LPCSTR) : NativeInt; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RotateDIBStringA';
+function DTWAIN_RotateDIBStringW(hDib:NativeInt; rotationAngle:LPCWSTR) : NativeInt; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_RotateDIBStringW';
 function DTWAIN_SelectDefaultOCREngine : DTWAIN_OCRENGINE; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SelectDefaultOCREngine';
 function DTWAIN_SelectDefaultSource : DTWAIN_SOURCE; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SelectDefaultSource';
 function DTWAIN_SelectDefaultSourceWithOpen(bOpen:BOOL) : DTWAIN_SOURCE; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SelectDefaultSourceWithOpen';

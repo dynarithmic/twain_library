@@ -905,6 +905,10 @@
     D_REMOVEPDFTEXTELEMENTFUNC                    DYNDTWAIN_API::DTWAIN_RemovePDFTextElement = nullptr;
     D_RESETPDFTEXTELEMENTFUNC                     DYNDTWAIN_API::DTWAIN_ResetPDFTextElement = nullptr;
     D_REWINDPAGEFUNC                              DYNDTWAIN_API::DTWAIN_RewindPage = nullptr;
+    D_ROTATEDIBFUNC                               DYNDTWAIN_API::DTWAIN_RotateDIB = nullptr;
+    D_ROTATEDIBSTRINGFUNC                         DYNDTWAIN_API::DTWAIN_RotateDIBString = nullptr;
+    D_ROTATEDIBSTRINGAFUNC                        DYNDTWAIN_API::DTWAIN_RotateDIBStringA = nullptr;
+    D_ROTATEDIBSTRINGWFUNC                        DYNDTWAIN_API::DTWAIN_RotateDIBStringW = nullptr;
     D_SELECTDEFAULTOCRENGINEFUNC                  DYNDTWAIN_API::DTWAIN_SelectDefaultOCREngine = nullptr;
     D_SELECTDEFAULTSOURCEFUNC                     DYNDTWAIN_API::DTWAIN_SelectDefaultSource = nullptr;
     D_SELECTDEFAULTSOURCEWITHOPENFUNC             DYNDTWAIN_API::DTWAIN_SelectDefaultSourceWithOpen = nullptr;
@@ -2105,6 +2109,10 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_RemovePDFTextElement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ResetPDFTextElement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_RewindPage, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateDIB, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateDIBString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateDIBStringA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateDIBStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultOCREngine, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultSource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultSourceWithOpen, hModule);

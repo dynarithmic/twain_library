@@ -896,6 +896,10 @@ type DtwainrangesetvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> 
 type DtwainremovepdftextelementFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainresetpdftextelementFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainrewindpageFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwainrotatedibFunc = unsafe extern "C" fn(*mut c_void,f64) -> *mut c_void;
+type DtwainrotatedibstringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
+type DtwainrotatedibstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> *mut c_void;
+type DtwainrotatedibstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
 type DtwainselectdefaultocrengineFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainselectdefaultsourceFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainselectdefaultsourcewithopenFunc = unsafe extern "C" fn(i32) -> *mut c_void;
@@ -2025,6 +2029,10 @@ pub struct DTwainAPI<'a>
     DTWAIN_RemovePDFTextElementFunc: Symbol<'a, DtwainremovepdftextelementFunc>,
     DTWAIN_ResetPDFTextElementFunc: Symbol<'a, DtwainresetpdftextelementFunc>,
     DTWAIN_RewindPageFunc: Symbol<'a, DtwainrewindpageFunc>,
+    DTWAIN_RotateDIBFunc: Symbol<'a, DtwainrotatedibFunc>,
+    DTWAIN_RotateDIBStringFunc: Symbol<'a, DtwainrotatedibstringFunc>,
+    DTWAIN_RotateDIBStringAFunc: Symbol<'a, DtwainrotatedibstringaFunc>,
+    DTWAIN_RotateDIBStringWFunc: Symbol<'a, DtwainrotatedibstringwFunc>,
     DTWAIN_SelectDefaultOCREngineFunc: Symbol<'a, DtwainselectdefaultocrengineFunc>,
     DTWAIN_SelectDefaultSourceFunc: Symbol<'a, DtwainselectdefaultsourceFunc>,
     DTWAIN_SelectDefaultSourceWithOpenFunc: Symbol<'a, DtwainselectdefaultsourcewithopenFunc>,
@@ -4790,6 +4798,10 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_RemovePDFTextElement: Symbol<DtwainremovepdftextelementFunc> = unsafe { library.get(b"DTWAIN_RemovePDFTextElement")? };
         let DTWAIN_ResetPDFTextElement: Symbol<DtwainresetpdftextelementFunc> = unsafe { library.get(b"DTWAIN_ResetPDFTextElement")? };
         let DTWAIN_RewindPage: Symbol<DtwainrewindpageFunc> = unsafe { library.get(b"DTWAIN_RewindPage")? };
+        let DTWAIN_RotateDIB: Symbol<DtwainrotatedibFunc> = unsafe { library.get(b"DTWAIN_RotateDIB")? };
+        let DTWAIN_RotateDIBString: Symbol<DtwainrotatedibstringFunc> = unsafe { library.get(b"DTWAIN_RotateDIBString")? };
+        let DTWAIN_RotateDIBStringA: Symbol<DtwainrotatedibstringaFunc> = unsafe { library.get(b"DTWAIN_RotateDIBStringA")? };
+        let DTWAIN_RotateDIBStringW: Symbol<DtwainrotatedibstringwFunc> = unsafe { library.get(b"DTWAIN_RotateDIBStringW")? };
         let DTWAIN_SelectDefaultOCREngine: Symbol<DtwainselectdefaultocrengineFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultOCREngine")? };
         let DTWAIN_SelectDefaultSource: Symbol<DtwainselectdefaultsourceFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultSource")? };
         let DTWAIN_SelectDefaultSourceWithOpen: Symbol<DtwainselectdefaultsourcewithopenFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultSourceWithOpen")? };
@@ -5918,6 +5930,10 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_RemovePDFTextElementFunc: DTWAIN_RemovePDFTextElement,
             DTWAIN_ResetPDFTextElementFunc: DTWAIN_ResetPDFTextElement,
             DTWAIN_RewindPageFunc: DTWAIN_RewindPage,
+            DTWAIN_RotateDIBFunc: DTWAIN_RotateDIB,
+            DTWAIN_RotateDIBStringFunc: DTWAIN_RotateDIBString,
+            DTWAIN_RotateDIBStringAFunc: DTWAIN_RotateDIBStringA,
+            DTWAIN_RotateDIBStringWFunc: DTWAIN_RotateDIBStringW,
             DTWAIN_SelectDefaultOCREngineFunc: DTWAIN_SelectDefaultOCREngine,
             DTWAIN_SelectDefaultSourceFunc: DTWAIN_SelectDefaultSource,
             DTWAIN_SelectDefaultSourceWithOpenFunc: DTWAIN_SelectDefaultSourceWithOpen,
@@ -9594,6 +9610,22 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_RewindPage(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_RewindPageFunc)(Source);  }
+    }
+
+    pub fn DTWAIN_RotateDIB(&self, hDib: *mut c_void, rotationAngle: f64) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateDIBFunc)(hDib, rotationAngle);  }
+    }
+
+    pub fn DTWAIN_RotateDIBString(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateDIBStringFunc)(hDib, rotationAngle);  }
+    }
+
+    pub fn DTWAIN_RotateDIBStringA(&self, hDib: *mut c_void, rotationAngle: *const c_char) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateDIBStringAFunc)(hDib, rotationAngle);  }
+    }
+
+    pub fn DTWAIN_RotateDIBStringW(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateDIBStringWFunc)(hDib, rotationAngle);  }
     }
 
     pub fn DTWAIN_SelectDefaultOCREngine(&self) -> *mut c_void {

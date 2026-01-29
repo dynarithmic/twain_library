@@ -23,7 +23,7 @@ let main argv =
             else
                 // Select a Source using the enhanced "Select Source" dialog.  We will center it
                 // on the screen
-                let sourceResult = TwainAPI.DTWAIN_SelectSource2 IntPtr.Zero "Select Source" 0 0 TwainAPI.DTWAIN_DLG_CENTER_SCREEN 
+                let sourceResult = TwainAPI.DTWAIN_SelectSource2 IntPtr.Zero "Select Source" 0 0 TwainAPI.DTWAIN_DLG_CENTER_CURRENT_MONITOR
                 
                 if sourceResult = 0 then 
                     printfn "No TWAIN Source was selected"
@@ -35,7 +35,7 @@ let main argv =
 
                     // Now get the product name of the TWAIN source that was selected
                     let buffer = new StringBuilder(256)
-                    let ret = TwainAPI.DTWAIN_GetSourceProductNameW sourceResult buffer 256
+                    let ret = TwainAPI.DTWAIN_GetSourceProductName sourceResult buffer 256
                     printfn "The name of the selected TWAIN Source is: %s" (buffer.ToString())
 
                     // Example usage of DTWAIN_ARRAY:
@@ -65,7 +65,7 @@ let main argv =
                     // on the notifications that will be sent to your application
                     
                     let get_notification_code (wParam : nativeint) =
-                        TwainAPI.DTWAIN_GetTwainNameFromConstantW (TwainAPI.DTWAIN_CONSTANT_DTWAIN_TN) (wParam.ToInt32()) (buffer) (256)  |> ignore
+                        TwainAPI.DTWAIN_GetTwainNameFromConstant (TwainAPI.DTWAIN_CONSTANT_DTWAIN_TN) (wParam.ToInt32()) (buffer) (256)  |> ignore
                         ()
                         
                     let myCallback (wParam) (lParam) (userData: int64) : nativeint =

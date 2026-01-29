@@ -2596,6 +2596,8 @@
         public delegate int DTWAIN_RemovePDFTextElementDelegate(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         public delegate int DTWAIN_ResetPDFTextElementDelegate(DTWAIN_PDFTEXTELEMENT TextElement);
         public delegate int DTWAIN_RewindPageDelegate(DTWAIN_SOURCE Source);
+        public delegate HANDLE DTWAIN_RotateDIBDelegate(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        public delegate HANDLE DTWAIN_RotateDIBStringDelegate(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string rotationAngle);
         public delegate DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngineDelegate();
         public delegate DTWAIN_SOURCE DTWAIN_SelectDefaultSourceDelegate();
         public delegate DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpenDelegate(int bOpen);
@@ -4890,6 +4892,12 @@
 
         [DTWAINNativeFunction("DTWAIN_RewindPage")]
         private readonly DTWAIN_RewindPageDelegate  _DTWAIN_RewindPage;
+
+        [DTWAINNativeFunction("DTWAIN_RotateDIB")]
+        private readonly DTWAIN_RotateDIBDelegate  _DTWAIN_RotateDIB;
+
+        [DTWAINNativeFunction("DTWAIN_RotateDIBString")]
+        private readonly DTWAIN_RotateDIBStringDelegate  _DTWAIN_RotateDIBString;
 
         [DTWAINNativeFunction("DTWAIN_SelectDefaultOCREngine")]
         private readonly DTWAIN_SelectDefaultOCREngineDelegate  _DTWAIN_SelectDefaultOCREngine;
@@ -7514,6 +7522,12 @@
 
         public  int DTWAIN_RewindPage(DTWAIN_SOURCE Source)
         => _DTWAIN_RewindPage(Source);
+
+        public  HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle)
+        => _DTWAIN_RotateDIB(hDib, rotationAngle);
+
+        public  HANDLE DTWAIN_RotateDIBString(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string rotationAngle)
+        => _DTWAIN_RotateDIBString(hDib, rotationAngle);
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine()
         => _DTWAIN_SelectDefaultOCREngine();

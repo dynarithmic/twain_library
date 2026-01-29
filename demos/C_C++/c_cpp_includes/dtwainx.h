@@ -617,6 +617,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomFileSave(OPENFILENAME* lpOpenFileStruct
 /*************************************************************************************/
 /* Miscellaneous DIB functions */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FlipBitmap(HANDLE hDib );
+HANDLE      DLLENTRY_DEF DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT angle);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);

@@ -2600,6 +2600,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_ResetPDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_RewindPage.restype = ct.c_long
+     theDLL.DTWAIN_RotateDIB.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBString.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBStringA.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBStringW.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultOCREngine.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSource.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.restype = ct.c_void_p
@@ -3692,6 +3696,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ResetPDFTextElement.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_RewindPage.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_RotateDIB.argtypes = [ct.c_void_p, ct.c_double]
+     theDLL.DTWAIN_RotateDIBString.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_RotateDIBStringA.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateDIBStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.argtypes = [ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2A.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
@@ -4828,6 +4836,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_ResetPDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_RewindPage.restype = ct.c_long
+     theDLL.DTWAIN_RotateDIB.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBString.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBStringA.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateDIBStringW.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultOCREngine.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSource.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.restype = ct.c_void_p
@@ -5920,6 +5932,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ResetPDFTextElement.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_RewindPage.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_RotateDIB.argtypes = [ct.c_void_p, ct.c_double]
+     theDLL.DTWAIN_RotateDIBString.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateDIBStringA.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateDIBStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.argtypes = [ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2A.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]

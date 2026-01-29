@@ -2750,6 +2750,10 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_PDFTEXTELEMENT) DTWAIN_RemovePDFTextElement;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_PDFTEXTELEMENT) DTWAIN_ResetPDFTextElement;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE) DTWAIN_RewindPage;
+    extern(Windows) HANDLE function(HANDLE, DTWAIN_FLOAT) DTWAIN_RotateDIB;
+    extern(Windows) HANDLE function(HANDLE, DTWAIN_CCHARPTRTYPE) DTWAIN_RotateDIBString;
+    extern(Windows) HANDLE function(HANDLE, LPCSTR) DTWAIN_RotateDIBStringA;
+    extern(Windows) HANDLE function(HANDLE, LPCWSTR) DTWAIN_RotateDIBStringW;
     extern(Windows) DTWAIN_OCRENGINE function() DTWAIN_SelectDefaultOCREngine;
     extern(Windows) DTWAIN_SOURCE function() DTWAIN_SelectDefaultSource;
     extern(Windows) DTWAIN_SOURCE function(DTWAIN_BOOL) DTWAIN_SelectDefaultSourceWithOpen;
@@ -3878,6 +3882,10 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_RemovePDFTextElement, "DTWAIN_RemovePDFTextElement");
         bindFunction(cast(void**)&DTWAIN_ResetPDFTextElement, "DTWAIN_ResetPDFTextElement");
         bindFunction(cast(void**)&DTWAIN_RewindPage, "DTWAIN_RewindPage");
+        bindFunction(cast(void**)&DTWAIN_RotateDIB, "DTWAIN_RotateDIB");
+        bindFunction(cast(void**)&DTWAIN_RotateDIBString, "DTWAIN_RotateDIBString");
+        bindFunction(cast(void**)&DTWAIN_RotateDIBStringA, "DTWAIN_RotateDIBStringA");
+        bindFunction(cast(void**)&DTWAIN_RotateDIBStringW, "DTWAIN_RotateDIBStringW");
         bindFunction(cast(void**)&DTWAIN_SelectDefaultOCREngine, "DTWAIN_SelectDefaultOCREngine");
         bindFunction(cast(void**)&DTWAIN_SelectDefaultSource, "DTWAIN_SelectDefaultSource");
         bindFunction(cast(void**)&DTWAIN_SelectDefaultSourceWithOpen, "DTWAIN_SelectDefaultSourceWithOpen");
