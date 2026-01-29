@@ -212,7 +212,7 @@ However, you can customize the "Select Source" dialog box by utilizing the dialo
         
         // Show the "Select Source" with a custom title, 
         // centered on the current monitor, sort the names, and always have it at the topmost window
-        DTWAIN_SOURCE Source = DTWAIN_SelectSource2(NULL, "Custom Title", 0, 0,                      
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource2A(NULL, "Custom Title", 0, 0,                      
                 DTWAIN_DLG_CENTER_CURRENT_MONITOR | DTWAIN_DLG_SORTNAMES | DTWAIN_DLG_TOPMOSTWINDOW);
                 
         if ( Source ) // Will be non-zero if a Source is selected by the user
