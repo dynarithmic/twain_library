@@ -27,7 +27,7 @@ if dtwain_libinit == nil then
 end
 
 -- Select a TWAIN source
-local twain_source = dtwain_lib.DTWAIN_SelectSource()
+local twain_source = dtwain_lib.DTWAIN_SelectSource2A(nil,nil,0,0,dconstants.DTWAIN_DLG_CENTER_CURRENT_MONITOR)
 if twain_source == nil then
     print("No Source was selected")
     dtwain_lib.DTWAIN_SysDestroy()
