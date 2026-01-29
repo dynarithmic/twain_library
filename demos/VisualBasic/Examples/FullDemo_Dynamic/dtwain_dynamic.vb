@@ -3801,6 +3801,12 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_RewindPageDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_RotateDIBDelegate(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_RotateDIBStringDelegate(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SelectDefaultOCREngineDelegate() As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -6839,6 +6845,14 @@ Namespace Dynarithmic
         Return api.DTWAIN_RewindPage(Source)
         End Function
         
+        Public Function DTWAIN_RotateDIB(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
+        Return api.DTWAIN_RotateDIB(hDib, rotationAngle)
+        End Function
+        
+        Public Function DTWAIN_RotateDIBString(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
+        Return api.DTWAIN_RotateDIBString(hDib, rotationAngle)
+        End Function
+        
         Public Function DTWAIN_SelectDefaultOCREngine() As System.IntPtr
         Return api.DTWAIN_SelectDefaultOCREngine()
         End Function
@@ -8158,6 +8172,8 @@ Namespace Dynarithmic
             Public DTWAIN_RemovePDFTextElement As DTWAIN_RemovePDFTextElementDelegate
             Public DTWAIN_ResetPDFTextElement As DTWAIN_ResetPDFTextElementDelegate
             Public DTWAIN_RewindPage As DTWAIN_RewindPageDelegate
+            Public DTWAIN_RotateDIB As DTWAIN_RotateDIBDelegate
+            Public DTWAIN_RotateDIBString As DTWAIN_RotateDIBStringDelegate
             Public DTWAIN_SelectDefaultOCREngine As DTWAIN_SelectDefaultOCREngineDelegate
             Public DTWAIN_SelectDefaultSource As DTWAIN_SelectDefaultSourceDelegate
             Public DTWAIN_SelectDefaultSourceWithOpen As DTWAIN_SelectDefaultSourceWithOpenDelegate

@@ -923,6 +923,10 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
+        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -2107,6 +2111,10 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
+        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -3291,6 +3299,10 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
+        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -4475,6 +4487,10 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
+        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);

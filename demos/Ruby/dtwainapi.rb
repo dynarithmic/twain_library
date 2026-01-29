@@ -984,6 +984,10 @@ class DTWAINAPI
    attr_reader :DTWAIN_RemovePDFTextElement
    attr_reader :DTWAIN_ResetPDFTextElement
    attr_reader :DTWAIN_RewindPage
+   attr_reader :DTWAIN_RotateDIB
+   attr_reader :DTWAIN_RotateDIBString
+   attr_reader :DTWAIN_RotateDIBStringA
+   attr_reader :DTWAIN_RotateDIBStringW
    attr_reader :DTWAIN_SelectDefaultOCREngine
    attr_reader :DTWAIN_SelectDefaultSource
    attr_reader :DTWAIN_SelectDefaultSourceWithOpen
@@ -3785,6 +3789,10 @@ class DTWAINAPI
        @DTWAIN_RemovePDFTextElement = Fiddle::Function::new(dtwain_dll['DTWAIN_RemovePDFTextElement'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ResetPDFTextElement = Fiddle::Function::new(dtwain_dll['DTWAIN_ResetPDFTextElement'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_RewindPage = Fiddle::Function::new(dtwain_dll['DTWAIN_RewindPage'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_RotateDIB = Fiddle::Function::new(dtwain_dll['DTWAIN_RotateDIB'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_VOIDP)
+       @DTWAIN_RotateDIBString = Fiddle::Function::new(dtwain_dll['DTWAIN_RotateDIBString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_RotateDIBStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_RotateDIBStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_RotateDIBStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_RotateDIBStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_SelectDefaultOCREngine = Fiddle::Function::new(dtwain_dll['DTWAIN_SelectDefaultOCREngine'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_SelectDefaultSource = Fiddle::Function::new(dtwain_dll['DTWAIN_SelectDefaultSource'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_SelectDefaultSourceWithOpen = Fiddle::Function::new(dtwain_dll['DTWAIN_SelectDefaultSourceWithOpen'],[Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)

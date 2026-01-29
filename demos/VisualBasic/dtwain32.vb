@@ -2366,6 +2366,8 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_RemovePDFTextElement Lib "dtwain32.dll" (Source As System.IntPtr, TextElement As System.IntPtr) As Integer
     Public Declare Function DTWAIN_ResetPDFTextElement Lib "dtwain32.dll" (TextElement As System.IntPtr) As Integer
     Public Declare Function DTWAIN_RewindPage Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_RotateDIB Lib "dtwain32.dll" (hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
+    Public Declare Ansi Function DTWAIN_RotateDIBString Lib "dtwain32.dll" (hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
     Public Declare Function DTWAIN_SelectDefaultOCREngine Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Function DTWAIN_SelectDefaultSource Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Function DTWAIN_SelectDefaultSourceWithOpen Lib "dtwain32.dll" (bOpen As Integer) As System.IntPtr
