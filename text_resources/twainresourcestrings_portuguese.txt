@@ -233,6 +233,8 @@
 2502 Informações de imagem inválidas ao adquirir imagem  
 2503 Erro ao gravar dados no arquivo  
 2504 Operação não suportada  
+2505 Elemento de Texto PDF Inválido
+2506 Capacidade não foi definida. Valores inválidos foram usados.
 3000 Selecionar Fonte  
 3001 &Selecionar  
 3002 &Cancelar  

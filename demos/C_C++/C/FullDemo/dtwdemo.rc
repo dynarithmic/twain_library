@@ -174,7 +174,8 @@ BEGIN
     EDITTEXT        IDC_edDSData,258,15,153,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
     GROUPBOX        "JSON Details",IDC_STATIC,433,4,199,217
     EDITTEXT        IDC_edJSONDetails,438,15,189,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
-    PUSHBUTTON      "Test Capability (Get)...",IDC_btnTestCap,135,164,81,14
+    PUSHBUTTON      "Test Capability ...",IDC_btnTestCap,135,181,81,14
+    PUSHBUTTON      "Reset All Capabilities",IDC_btnResetCapabilities,136,198,81,14
 END
 
 #include "dibdisplay.rc"
@@ -228,24 +229,38 @@ BEGIN
     EDITTEXT        IDC_edBarCodes,15,15,278,134,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_dlgTestCap DIALOGEX 0, 0, 349, 196
+IDD_dlgTestCap DIALOGEX 0, 0, 385, 264
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Test Capability"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    COMBOBOX        IDC_cmbGetTypes,23,36,77,60,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_cmbContainer,112,36,106,68,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_cmbDataType,243,36,68,67,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "Start test ",IDC_btnTest,104,60,50,14
-    PUSHBUTTON      "Reset to Default",IDC_btnReset,163,60,82,14
-    LISTBOX         IDC_lstResults,25,99,292,53, LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    DEFPUSHBUTTON   "OK",IDOK,120,163,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,179,163,50,14
-    LTEXT           "Get Operation:",IDC_STATIC,25,24,69,8
-    LTEXT           "Container:",IDC_STATIC,115,24,35,8
-    LTEXT           "Data Type:",IDC_STATIC,243,24,37,8
-    LTEXT           "Results:",IDC_STATIC,25,81,27,8
-    LTEXT           "Note: Testing using non-default container or data type may have undesirable results.",IDC_STATIC,30,10,288,8
+    COMBOBOX        IDC_cmbGetTypes,26,36,77,60,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbContainer,113,36,106,68,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbDataType,231,36,68,67,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Test ",IDC_btnTest,163,52,50,14
+    PUSHBUTTON      "Revert",IDC_btnReset,307,35,50,14
+    LISTBOX         IDC_lstResults,25,77,341,53,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbSetTypes,26,163,77,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_cmbContainerSet,113,163,106,68,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Test",IDC_btnTestSet,167,180,50,14
+    COMBOBOX        IDC_cmbDataTypeSet,231,163,68,67,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Revert",IDC_btnResetSet,307,162,50,14
+    EDITTEXT        IDC_edSetInput,22,197,129,45,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LISTBOX         IDC_lstResultsSet,230,197,137,45,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,145,244,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,244,50,14
+    LTEXT           "Get Operation:",IDC_STATIC,26,24,69,8
+    LTEXT           "Container:",IDC_STATIC,113,24,35,8
+    LTEXT           "Data Type:",IDC_STATIC,231,24,37,8
+    LTEXT           "Results:",IDC_STATIC,25,64,27,8
+    LTEXT           "Note: Testing using non-default container or data type may have undesirable results.",IDC_STATIC,48,10,288,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,7,142,369,1
+    LTEXT           "Set Operation:",IDC_staticSetOperation,26,150,69,8
+    LTEXT           "Data Type:",IDC_staticDataType,231,150,37,8
+    LTEXT           "Container:",IDC_staticContainer,113,150,35,8
+    LTEXT           "Results:",IDC_staticResults,228,186,27,8
+    LTEXT           "Input: (One data item per line):",IDC_staticInput,24,186,102,8
+    LTEXT           "",IDC_staticTestGetResults,215,55,49,8
 END
 
 /////////////////////////////////////////////////////////////////////////////

@@ -9,8 +9,6 @@ This is an **F#** example using  [dtwainapi.fs](https://github.com/dynarithmic/t
 
 Please note that the DTWAIN DLL's that are supported are the Unicode versions of the DLL, i.e. dtwain32u.dll, dtwain32ud.dll, dtwain64u.dll, and dtwain64ud.dll.  
 
-Since the Unicode version of the DTWAIN API also has ANSI equivalent functions (API functions whose names end with the letter "A"), your application can still call the ANSI functions if deemed necessary.
-
 ```fsharp
 open System
 open dtwainapi
@@ -49,7 +47,7 @@ let main argv =
 
                     // Now get the product name of the TWAIN source that was selected
                     let buffer = new StringBuilder(256)
-                    let ret = TwainAPI.DTWAIN_GetSourceProductNameW sourceResult buffer 256
+                    let ret = TwainAPI.DTWAIN_GetSourceProductName sourceResult buffer 256
                     printfn "The name of the selected TWAIN Source is: %s" (buffer.ToString())
 
                     // Example usage of DTWAIN_ARRAY:
@@ -79,7 +77,7 @@ let main argv =
                     // on the notifications that will be sent to your application
                     
                     let get_notification_code (wParam : nativeint) =
-                        TwainAPI.DTWAIN_GetTwainNameFromConstantW (TwainAPI.DTWAIN_CONSTANT_DTWAIN_TN) (wParam.ToInt32()) (buffer) (256)  |> ignore
+                        TwainAPI.DTWAIN_GetTwainNameFromConstant (TwainAPI.DTWAIN_CONSTANT_DTWAIN_TN) (wParam.ToInt32()) (buffer) (256)  |> ignore
                         ()
                         
                     let myCallback (wParam) (lParam) (userData: int64) : nativeint =

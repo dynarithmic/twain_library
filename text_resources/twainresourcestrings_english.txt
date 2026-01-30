@@ -233,6 +233,8 @@
 2502 Invalid Image Information on acquiring image
 2503 Error writing data to file
 2504 Operation not supported
+2505 Invalid PDF Text Element
+2506 Capability was not set.  Invalid values were used.
 3000 Select Source
 3001 &Select
 3002 &Cancel

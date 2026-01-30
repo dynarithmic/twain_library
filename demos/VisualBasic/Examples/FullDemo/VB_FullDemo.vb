@@ -5,6 +5,7 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Diagnostics
 
+
 Public Class VB_FullDemo
     Inherits System.Windows.Forms.Form
 
@@ -70,6 +71,11 @@ Public Class VB_FullDemo
     Friend WithEvents menuSimplifiedChinese As MenuItem
     Friend WithEvents menuSpanish As MenuItem
     Friend WithEvents menuCustomLanguage As MenuItem
+    Friend WithEvents menuTraditionalChinese As MenuItem
+    Friend WithEvents menuGreek As MenuItem
+    Friend WithEvents menuJapanese As MenuItem
+    Friend WithEvents menuKorean As MenuItem
+    Friend WithEvents ShowBarcodeInfo As MenuItem
     Friend WithEvents MenuItem9 As System.Windows.Forms.MenuItem
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
@@ -95,13 +101,12 @@ Public Class VB_FullDemo
         Me.DiscardBlankPages = New System.Windows.Forms.MenuItem()
         Me.MenuItem10 = New System.Windows.Forms.MenuItem()
         Me.LoggingOptions = New System.Windows.Forms.MenuItem()
-        Me.MenuItem2 = New System.Windows.Forms.MenuItem()
-        Me.DTWAINVersion = New System.Windows.Forms.MenuItem()
         Me.MenuItem3 = New System.Windows.Forms.MenuItem()
         Me.menuDutch = New System.Windows.Forms.MenuItem()
         Me.menuEnglish = New System.Windows.Forms.MenuItem()
         Me.menuFrench = New System.Windows.Forms.MenuItem()
         Me.menuGerman = New System.Windows.Forms.MenuItem()
+        Me.menuGreek = New System.Windows.Forms.MenuItem()
         Me.menuItalian = New System.Windows.Forms.MenuItem()
         Me.menuPortuguese = New System.Windows.Forms.MenuItem()
         Me.menuRomanian = New System.Windows.Forms.MenuItem()
@@ -109,6 +114,12 @@ Public Class VB_FullDemo
         Me.menuSimplifiedChinese = New System.Windows.Forms.MenuItem()
         Me.menuSpanish = New System.Windows.Forms.MenuItem()
         Me.menuCustomLanguage = New System.Windows.Forms.MenuItem()
+        Me.menuTraditionalChinese = New System.Windows.Forms.MenuItem()
+        Me.menuJapanese = New System.Windows.Forms.MenuItem()
+        Me.MenuItem2 = New System.Windows.Forms.MenuItem()
+        Me.DTWAINVersion = New System.Windows.Forms.MenuItem()
+        Me.menuKorean = New System.Windows.Forms.MenuItem()
+        Me.ShowBarcodeInfo = New System.Windows.Forms.MenuItem()
         Me.SuspendLayout()
         '
         'MainMenu1
@@ -169,7 +180,7 @@ Public Class VB_FullDemo
         'MenuItem9
         '
         Me.MenuItem9.Index = 1
-        Me.MenuItem9.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.AcquireNative, Me.AcquireBuffered, Me.AcquireFile, Me.AcquireFileUsingDriver, Me.MenuItem14, Me.ShowPreview, Me.UseSourceUI, Me.DiscardBlankPages})
+        Me.MenuItem9.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.AcquireNative, Me.AcquireBuffered, Me.AcquireFile, Me.AcquireFileUsingDriver, Me.MenuItem14, Me.ShowPreview, Me.UseSourceUI, Me.DiscardBlankPages, Me.ShowBarcodeInfo})
         Me.MenuItem9.Text = "&Acquire Test"
         '
         'AcquireNative
@@ -225,21 +236,10 @@ Public Class VB_FullDemo
         Me.LoggingOptions.Index = 0
         Me.LoggingOptions.Text = "Logging Options..."
         '
-        'MenuItem2
-        '
-        Me.MenuItem2.Index = 4
-        Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.DTWAINVersion})
-        Me.MenuItem2.Text = "Help"
-        '
-        'DTWAINVersion
-        '
-        Me.DTWAINVersion.Index = 0
-        Me.DTWAINVersion.Text = "DTWAIN Version..."
-        '
         'MenuItem3
         '
         Me.MenuItem3.Index = 3
-        Me.MenuItem3.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.menuDutch, Me.menuEnglish, Me.menuFrench, Me.menuGerman, Me.menuItalian, Me.menuPortuguese, Me.menuRomanian, Me.menuRussian, Me.menuSimplifiedChinese, Me.menuSpanish, Me.menuCustomLanguage})
+        Me.MenuItem3.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.menuDutch, Me.menuEnglish, Me.menuFrench, Me.menuGerman, Me.menuGreek, Me.menuItalian, Me.menuJapanese, Me.menuKorean, Me.menuPortuguese, Me.menuRomanian, Me.menuRussian, Me.menuSimplifiedChinese, Me.menuSpanish, Me.menuTraditionalChinese, Me.menuCustomLanguage})
         Me.MenuItem3.Text = "Language"
         '
         'menuDutch
@@ -262,40 +262,76 @@ Public Class VB_FullDemo
         Me.menuGerman.Index = 3
         Me.menuGerman.Text = "German"
         '
+        'menuGreek
+        '
+        Me.menuGreek.Index = 4
+        Me.menuGreek.Text = "Greek"
+        '
         'menuItalian
         '
-        Me.menuItalian.Index = 4
+        Me.menuItalian.Index = 5
         Me.menuItalian.Text = "Italian"
         '
         'menuPortuguese
         '
-        Me.menuPortuguese.Index = 5
+        Me.menuPortuguese.Index = 8
         Me.menuPortuguese.Text = "Portuguese"
         '
         'menuRomanian
         '
-        Me.menuRomanian.Index = 6
+        Me.menuRomanian.Index = 9
         Me.menuRomanian.Text = "Romanian"
         '
         'menuRussian
         '
-        Me.menuRussian.Index = 7
+        Me.menuRussian.Index = 10
         Me.menuRussian.Text = "Russian"
         '
         'menuSimplifiedChinese
         '
-        Me.menuSimplifiedChinese.Index = 8
+        Me.menuSimplifiedChinese.Index = 11
         Me.menuSimplifiedChinese.Text = "Simplified Chinese"
         '
         'menuSpanish
         '
-        Me.menuSpanish.Index = 9
+        Me.menuSpanish.Index = 12
         Me.menuSpanish.Text = "Spanish"
         '
         'menuCustomLanguage
         '
-        Me.menuCustomLanguage.Index = 10
+        Me.menuCustomLanguage.Index = 14
         Me.menuCustomLanguage.Text = "Cusstom Language..."
+        '
+        'menuTraditionalChinese
+        '
+        Me.menuTraditionalChinese.Index = 13
+        Me.menuTraditionalChinese.Text = "Traditional Chinese"
+        '
+        'menuJapanese
+        '
+        Me.menuJapanese.Index = 6
+        Me.menuJapanese.Text = "Japanese"
+        '
+        'MenuItem2
+        '
+        Me.MenuItem2.Index = 4
+        Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.DTWAINVersion})
+        Me.MenuItem2.Text = "Help"
+        '
+        'DTWAINVersion
+        '
+        Me.DTWAINVersion.Index = 0
+        Me.DTWAINVersion.Text = "DTWAIN Version..."
+        '
+        'menuKorean
+        '
+        Me.menuKorean.Index = 7
+        Me.menuKorean.Text = "Korean"
+        '
+        'ShowBarcodeInfo
+        '
+        Me.ShowBarcodeInfo.Index = 8
+        Me.ShowBarcodeInfo.Text = "Show Barcode Information"
         '
         'VB_FullDemo
         '
@@ -316,6 +352,8 @@ Public Class VB_FullDemo
     Private sOrigTitle As String
     Private Shared thisObject As VB_FullDemo
     Private dllExists As Boolean
+    Private Shared textElement As System.IntPtr
+    Private Shared pdfPageCount As Integer
     Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf callbackfn)
 
 
@@ -337,6 +375,10 @@ Public Class VB_FullDemo
             If TwainHandle <> 0 Then
                 DTWAINAPI.DTWAIN_EnableMsgNotify(1)
                 DTWAINAPI.DTWAIN_SetCallback(cb, 0)
+                textElement = DTWAINAPI.DTWAIN_CreatePDFTextElement
+                DTWAINAPI.DTWAIN_SetPDFTextElementLong(textElement, 100, 100, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_POSITION)
+                DTWAINAPI.DTWAIN_SetPDFTextElementLong(textElement, DTWAINAPI.DTWAIN_PDFTEXT_ALLPAGES, 0, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_DISPLAYFLAGS)
+                DTWAINAPI.DTWAIN_SetPDFTextElementFloat(textElement, 25, 0, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_FONTHEIGHT)
             Else
                 Application.Exit()
             End If
@@ -345,12 +387,28 @@ Public Class VB_FullDemo
     End Sub
     Public Shared Function callbackfn(ByVal wparam As IntPtr, ByVal lparam As IntPtr, ByVal userval As IntPtr) As IntPtr
         Select Case wparam
+            Case DTWAINAPI.DTWAIN_TN_ACQUIRESTARTED
+                pdfPageCount = 1
+                Exit Select
+
+            Case DTWAINAPI.DTWAIN_TN_FILEPAGESAVING
+                Dim text As String
+                text = "Page " & pdfPageCount
+                DTWAINAPI.DTWAIN_SetPDFTextElementString(textElement, text, DTWAINAPI.DTWAIN_PDFTEXTELEMENT_TEXT)
+                pdfPageCount = pdfPageCount + 1
+                Exit Select
+
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.ShowPreview.Checked Then
                     Dim sDIBDlg As New DibDisplayerDlg2(DTWAINAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource))
                     If sDIBDlg.ShowDialog() = DialogResult.Cancel Then
                         Return 0
                     End If
+                End If
+            Case DTWAINAPI.DTWAIN_TN_TRANSFERDONE
+                If thisObject.ShowBarcodeInfo.Checked Then
+                    Dim sBarcodeDlg As BarCodesDlg = New BarCodesDlg(SelectedSource)
+                    sBarcodeDlg.ShowDialog()
                 End If
                 Exit Select
         End Select
@@ -387,8 +445,8 @@ Public Class VB_FullDemo
             Case 0
                 Dim nullString As String
                 nullString = IntPtr.Zero
-                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2A(IntPtr.Zero, Nothing, 0, 0,
-                                                                DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
+                SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, Nothing, 0, 0,
+                                                                DTWAINAPI.DTWAIN_DLG_CENTER_CURRENT_MONITOR Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
             Case 1
                 Dim objSelectSourceByName As SelectSourceByName = New SelectSourceByName()
                 Dim nResult As DialogResult = objSelectSourceByName.ShowDialog()
@@ -407,14 +465,17 @@ Public Class VB_FullDemo
         Me.Enabled = True
         If SelectedSource <> 0 Then
             If DTWAINAPI.DTWAIN_OpenSource(SelectedSource) <> 0 Then
+                DTWAINAPI.DTWAIN_AddPDFTextElement(SelectedSource, textElement)
                 DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
                 SetCaptionToSourceName()
                 EnableSourceItems(True)
+                EnableBarcodeItems(True)
                 Return
             Else
                 MessageBox.Show("Error Opening selected Source", "TWAIN Error", MessageBoxButtons.OK)
                 SetCaptionToSourceName()
                 EnableSourceItems(False)
+                EnableBarcodeItems(False)
             End If
         Else
             Dim lastError As Integer
@@ -428,6 +489,17 @@ Public Class VB_FullDemo
             End If
             SetCaptionToSourceName()
             EnableSourceItems(False)
+        End If
+    End Sub
+    Private Sub EnableBarcodeItems(bEnable As Boolean)
+        Dim supported As Integer = DTWAINAPI.DTWAIN_IsExtImageInfoSupported(SelectedSource)
+        If bEnable And supported = 1 Then
+            ShowBarcodeInfo.Enabled = True
+        Else
+            ShowBarcodeInfo.Enabled = False
+            If supported = 0 Then
+                ShowBarcodeInfo.Checked = False
+            End If
         End If
     End Sub
 
@@ -766,5 +838,20 @@ Public Class VB_FullDemo
         If nResult = DialogResult.OK Then
             LoadLanguage(objCustomLanguage.GetText())
         End If
+    End Sub
+    Private Sub menuTraditionalChinese_Click(sender As Object, e As EventArgs) Handles menuTraditionalChinese.Click
+        LoadLanguage("traditional_chinese")
+    End Sub
+    Private Sub menuGreek_Click(sender As Object, e As EventArgs) Handles menuGreek.Click
+        LoadLanguage("greek")
+    End Sub
+    Private Sub menuJapanese_Click(sender As Object, e As EventArgs) Handles menuJapanese.Click
+        LoadLanguage("japanese")
+    End Sub
+    Private Sub menuKorean_Click(sender As Object, e As EventArgs) Handles menuKorean.Click
+        LoadLanguage("korean")
+    End Sub
+    Private Sub ShowBarcodeInfo_Click(sender As Object, e As EventArgs) Handles ShowBarcodeInfo.Click
+        ShowBarcodeInfo.Checked = Not ShowBarcodeInfo.Checked
     End Sub
 End Class
