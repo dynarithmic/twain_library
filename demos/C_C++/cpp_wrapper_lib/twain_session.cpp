@@ -635,7 +635,7 @@ namespace dynarithmic
 
         int twain_session::get_twain_constant(std::string twainName)
         {
-            auto val = API_INSTANCE DTWAIN_GetTwainIDFromNameA(twainName.c_str());
+            auto val = API_INSTANCE DTWAIN_GetConstantFromTwainNameA(twainName.c_str());
             return val;
         }
 

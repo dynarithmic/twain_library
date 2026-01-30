@@ -30,6 +30,12 @@
     <ClCompile Include="..\DibView\PAINT.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceProperties.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DibView\DIB.h">
@@ -58,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="DTWDEMO.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceProperties.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

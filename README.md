@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.7.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.8.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -181,16 +181,48 @@ The simplest example is probably one that opens the TWAIN "Select Source" dialog
         // display DTWAIN version, just for fun
         std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
 
-        // initialize and acquire image and save to BMP file
+        // initialize the DTWAIN DLL
         DTWAIN_SysInitialize();
+        
+        // Show the "Select Source" TWAIN dialog box
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
-        if ( Source )
+        if ( Source ) // Will be non-zero if a Source is selected by the user
+            // Acquire to a BMP file
             DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, DTWAIN_USENATIVE | DTWAIN_USENAME,
                                 DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
         DTWAIN_SysDestroy();         
     }         
 
 That's it.  
+
+The program above displays the default "Select Source" dialog when choosing a Source.  This dialog is the dialog as defined by the TWAIN standard.  This dialog box cannot be "altered" or customized.
+
+However, you can customize the "Select Source" dialog box by utilizing the dialog box resource defined in the DTWAIN DLL, and then utilize the `DTWAIN_SelectSource2()` function:
+
+    #include <iostream>
+    #include "dtwain.h"
+
+    int main()
+    {
+        // display DTWAIN version, just for fun
+        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
+
+        // initialize the DTWAIN DLL
+        DTWAIN_SysInitialize();
+        
+        // Show the "Select Source" with a custom title, 
+        // centered on the current monitor, sort the names, and always have it at the topmost window
+        DTWAIN_SOURCE Source = DTWAIN_SelectSource2A(NULL, "Custom Title", 0, 0,                      
+                DTWAIN_DLG_CENTER_CURRENT_MONITOR | DTWAIN_DLG_SORTNAMES | DTWAIN_DLG_TOPMOSTWINDOW);
+                
+        if ( Source ) // Will be non-zero if a Source is selected by the user
+            // Acquire to a BMP file
+            DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, DTWAIN_USENATIVE | DTWAIN_USENAME,
+                                DTWAIN_PT_DEFAULT, DTWAIN_MAXACQUIRE, TRUE, TRUE, NULL);
+        DTWAIN_SysDestroy();         
+    }         
+
+----
 
 If you desire to acquire to an image in memory instead of a file, that can be done also.  By default, a Windows-based TWAIN driver always returns a Device Independent Bitmap (DIB) as the memory image.    
 
@@ -215,6 +247,8 @@ If you desire to acquire to an image in memory instead of a file, that can be do
     }         
 
 The above assumes your application knows how to handle DIBs (they are basically BMP files).  Also note that the DTWAIN_GetAcquiredImage function takes three arguments.  The first is a "2 dimensional" array of images that were acquired, and the last two arguments denote the *acquisition number* and the *image number* in the acquisition (this technique is used to remember multipage acquisitions that occur without the user closing the device's user interface). 
+
+----
 
 In addition, you can acquire images without showing a user interface by simply specifying the "show user-interface" parameter to either TRUE (1), or FALSE (0).
 

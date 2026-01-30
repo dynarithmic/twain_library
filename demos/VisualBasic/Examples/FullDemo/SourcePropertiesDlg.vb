@@ -51,6 +51,7 @@ Public Class SourcePropertiesDlg
             Me.listCaps.Items.Add(szInfo.ToString())
         Next i
 
+        listCaps.SetSelected(0, True)
         Me.edTotalCaps.Text = nSize.ToString()
         DTWAINAPI.DTWAIN_EnumCustomCaps(m_Source, AllCaps)
         Me.edCustomCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
@@ -75,5 +76,12 @@ Public Class SourcePropertiesDlg
         ' Convert string to one with /r/n, since these are the types of strings for edit controls
         Dim sNewData As String = szInfo.ToString().Replace(vbLf, vbCrLf)
         Me.txtJSON.Text = sNewData
+    End Sub
+    Private Sub btnTestCap_Click(sender As Object, e As EventArgs) Handles btnTestCap.Click
+        Dim sTestCapDlg As TestCapDlg = New TestCapDlg(m_Source, listCaps.SelectedItem.ToString())
+        sTestCapDlg.ShowDialog(Me)
+    End Sub
+    Private Sub btnResetAllCaps_Click(sender As Object, e As EventArgs) Handles btnResetAllCaps.Click
+        DTWAINAPI.DTWAIN_SetAllCapsToDefault(m_Source)
     End Sub
 End Class

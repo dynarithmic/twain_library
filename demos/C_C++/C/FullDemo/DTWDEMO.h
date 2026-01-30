@@ -87,6 +87,20 @@
 #define IDC_cmbContainer                    8004
 #define IDC_cmbDataType                     8005
 #define IDC_btnReset                        8006
+#define IDC_cmbSetTypes						8007
+#define IDC_cmbDataTypeSet                  8008
+#define IDC_cmbContainerSet                 8009 
+#define IDC_btnTestSet                      8010  
+#define IDC_btnResetSet                     8011
+#define IDC_lstResultsSet                   8012
+#define IDC_edSetInput                      8013
+#define IDC_staticSetOperation              8014 
+#define IDC_staticDataType                  8015
+#define IDC_staticContainer                 8016
+#define IDC_staticResults                   8017
+#define IDC_staticInput                     8018
+#define IDC_btnResetCapabilities            8019
+#define IDC_staticTestGetResults            8020
 
 #define ID_LANGUAGE_ENGLISH             32771
 #define ID_LANGUAGE_FRENCH              32772

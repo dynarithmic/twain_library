@@ -233,6 +233,8 @@
 2502 Informații de imagine invalide la achiziționarea imaginii  
 2503 Eroare la scrierea datelor în fișier  
 2504 Operațiune nesuportată  
+2505 Element text PDF invalid
+2506 Capacitatea nu a fost setată. Au fost folosite valori invalide.
 3000 Selectați sursa  
 3001 &Selectați  
 3002 &Anulați  

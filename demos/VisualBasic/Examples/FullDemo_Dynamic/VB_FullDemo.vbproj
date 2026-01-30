@@ -162,6 +162,12 @@
     <Compile Include="AboutDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BarCodesDlg.Designer.vb">
+      <DependentUpon>BarCodesDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BarCodesDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CustomLanguageDlg.Designer.vb">
       <DependentUpon>CustomLanguageDlg.vb</DependentUpon>
     </Compile>
@@ -211,6 +217,12 @@
     <Compile Include="SourcePropertiesDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TestCapDlg.Designer.vb">
+      <DependentUpon>TestCapDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TestCapDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="VB_FullDemo.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +233,9 @@
     </Compile>
     <EmbeddedResource Include="AboutDlg.resx">
       <DependentUpon>AboutDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarCodesDlg.resx">
+      <DependentUpon>BarCodesDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomLanguageDlg.resx">
       <DependentUpon>CustomLanguageDlg.vb</DependentUpon>
@@ -245,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SourcePropertiesDlg.resx">
       <DependentUpon>SourcePropertiesDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestCapDlg.resx">
+      <DependentUpon>TestCapDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VB_FullDemo.resx">
       <DependentUpon>VB_FullDemo.vb</DependentUpon>

@@ -233,6 +233,8 @@
 2502 Informations sur l'image invalides
 2503 Erreur d'écriture des données dans le fichier
 2504 Opération non supportée  
+2505 Élément de texte PDF invalide
+2506 La capacité n'a pas été définie. Des valeurs invalides ont été utilisées.
 3000 Sélectionner Source
 3001 &Sélectionner
 3002 &Annuler

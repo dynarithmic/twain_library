@@ -52,6 +52,8 @@ Partial Class SourcePropertiesDlg
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.btnTestCap = New System.Windows.Forms.Button()
+        Me.btnResetAllCaps = New System.Windows.Forms.Button()
         Me.groupBox2.SuspendLayout()
         Me.groupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -60,6 +62,8 @@ Partial Class SourcePropertiesDlg
         '
         'groupBox2
         '
+        Me.groupBox2.Controls.Add(Me.btnResetAllCaps)
+        Me.groupBox2.Controls.Add(Me.btnTestCap)
         Me.groupBox2.Controls.Add(Me.label8)
         Me.groupBox2.Controls.Add(Me.label7)
         Me.groupBox2.Controls.Add(Me.label6)
@@ -371,6 +375,24 @@ Partial Class SourcePropertiesDlg
         Me.TextBox7.TabIndex = 1
         Me.TextBox7.TabStop = False
         '
+        'btnTestCap
+        '
+        Me.btnTestCap.Location = New System.Drawing.Point(246, 150)
+        Me.btnTestCap.Name = "btnTestCap"
+        Me.btnTestCap.Size = New System.Drawing.Size(104, 23)
+        Me.btnTestCap.TabIndex = 2
+        Me.btnTestCap.Text = "Test Capability..."
+        Me.btnTestCap.UseVisualStyleBackColor = True
+        '
+        'btnResetAllCaps
+        '
+        Me.btnResetAllCaps.Location = New System.Drawing.Point(246, 181)
+        Me.btnResetAllCaps.Name = "btnResetAllCaps"
+        Me.btnResetAllCaps.Size = New System.Drawing.Size(127, 23)
+        Me.btnResetAllCaps.TabIndex = 4
+        Me.btnResetAllCaps.Text = "Reset All Capabilities"
+        Me.btnResetAllCaps.UseVisualStyleBackColor = True
+        '
         'SourcePropertiesDlg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -429,4 +451,6 @@ Partial Class SourcePropertiesDlg
     Private WithEvents TextBox5 As Windows.Forms.TextBox
     Private WithEvents TextBox6 As Windows.Forms.TextBox
     Private WithEvents TextBox7 As Windows.Forms.TextBox
+    Friend WithEvents btnTestCap As Windows.Forms.Button
+    Private WithEvents btnResetAllCaps As Windows.Forms.Button
 End Class
