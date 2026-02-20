@@ -79,10 +79,10 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>>{
             /* Example usage of DTWAIN_ARRAY:
              Get the device capabilities supported by the device */
 
-            /* We will use the Ex2 version of DTWAIN_EnumSupportedCaps, since it
+            /* We will use the Ex version of DTWAIN_EnumSupportedCaps, since it
                is easier to handle the returned DTWAIN_ARRAY.
              */
-            let allcaps = api_func.DTWAIN_EnumSupportedCapsEx2(twain_source);
+            let allcaps = api_func.DTWAIN_EnumSupportedCapsEx(twain_source);
 
             // Get the number of items in the array
             let arrcount = api_func.DTWAIN_ArrayGetCount(allcaps);
