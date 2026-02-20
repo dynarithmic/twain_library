@@ -23,7 +23,7 @@ my $DTWAIN_AcquireFile = new Win32::API($dtwain_dllName, 'DTWAIN_AcquireFile', '
 my $DTWAIN_ArrayDestroy = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayDestroy', 'N', 'I');
 my $DTWAIN_ArrayGetAtLong = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetAtLong', 'NiP', 'I');
 my $DTWAIN_ArrayGetCount = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetCount', 'N', 'i');
-my $DTWAIN_EnumSupportedCapsEx2 = new Win32::API($dtwain_dllName, 'DTWAIN_EnumSupportedCapsEx2', 'N', 'N');
+my $DTWAIN_EnumSupportedCapsEx = new Win32::API($dtwain_dllName, 'DTWAIN_EnumSupportedCapsEx', 'N', 'N');
 my $DTWAIN_GetNameFromCapA = new Win32::API($dtwain_dllName, 'DTWAIN_GetNameFromCapA', 'iPi', 'i');
 my $DTWAIN_GetSourceProductNameA = new Win32::API($dtwain_dllName, 'DTWAIN_GetSourceProductNameA', 'NPi', 'i');
 my $DTWAIN_IsTwainAvailable = new Win32::API($dtwain_dllName, 'DTWAIN_IsTwainAvailable', '', 'I');
@@ -56,7 +56,7 @@ if ( $isAvail == 1 )
             my $dtwain_array = 0;
 
             # Note that the returned value is a DTWAIN_ARRAY.
-            # For Perl, it is easier to use DTWAIN_EnumSupportedCapsEx2, since there is
+            # For Perl, it is easier to use DTWAIN_EnumSupportedCapsEx, since there is
             # no need to pack/unpack an integer if DTWAIN_EnumSupportedCaps were used instead.
             $dtwain_array = $DTWAIN_EnumSupportedCapsEx->Call($TwainSource);
 
