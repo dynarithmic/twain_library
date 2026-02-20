@@ -58,7 +58,7 @@ if ( $isAvail == 1 )
             # Note that the returned value is a DTWAIN_ARRAY.
             # For Perl, it is easier to use DTWAIN_EnumSupportedCapsEx2, since there is
             # no need to pack/unpack an integer if DTWAIN_EnumSupportedCaps were used instead.
-            $dtwain_array = $DTWAIN_EnumSupportedCapsEx2->Call($TwainSource);
+            $dtwain_array = $DTWAIN_EnumSupportedCapsEx->Call($TwainSource);
 
             # Get the number of items in the array
             my $arrcount = $DTWAIN_ArrayGetCount->Call($dtwain_array);
