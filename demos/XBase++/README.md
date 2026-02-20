@@ -44,7 +44,7 @@ PROCEDURE Main
             ? "The product name of the selected TWAIN source is ", PadL(cBuffer, 32)
 
             // Get the device capabilities of the selected source
-            capArray := DLLCall (nDLLHandle, DLL_STDCALL, "DTWAIN_EnumSupportedCapsEx2", TwainSource)
+            capArray := DLLCall (nDLLHandle, DLL_STDCALL, "DTWAIN_EnumSupportedCapsEx", TwainSource)
 
             // Get the count of the number of items in the array
             capCount :=  DLLCall (nDLLHandle, DLL_STDCALL, "DTWAIN_ArrayGetCount", capArray)
