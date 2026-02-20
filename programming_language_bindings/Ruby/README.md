@@ -52,10 +52,10 @@ if __FILE__ == $0
   #
   # For Ruby, it is much easier to call the DTWAIN function(s) that return DTWAIN_ARRAY's and similar 
   # instead of  the version(s) that allows passing a pointer to a DTWAIN_ARRAY.  So in this case, we call
-  # DTWAIN_EnumSupportedCapsEx2
+  # DTWAIN_EnumSupportedCapsEx
   
   # get the supported caps
-  dtwain_array = dtwain_dll.DTWAIN_EnumSupportedCapsEx2.call(twainSource)
+  dtwain_array = dtwain_dll.DTWAIN_EnumSupportedCapsEx.call(twainSource)
 
   # get the number of items in the array
   arrCount = dtwain_dll.DTWAIN_ArrayGetCount.call(dtwain_array)
