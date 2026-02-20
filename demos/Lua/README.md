@@ -56,8 +56,8 @@ print(out_string)
 -- Get the device capabilities supported by the device
 -- For Lua, it is much easier to call the DTWAIN function(s) that return DTWAIN_ARRAY's and similar 
 -- instead of  the version(s) that allows passing a pointer to a DTWAIN_ARRAY.  So in this case, we call
--- DTWAIN_EnumSupportedCapsEx2
-local supported_caps = dtwain_lib.DTWAIN_EnumSupportedCapsEx2(twain_source)
+-- DTWAIN_EnumSupportedCapsEx
+local supported_caps = dtwain_lib.DTWAIN_EnumSupportedCapsEx(twain_source)
 
 -- Get the number of items in the array
 local arrcount = dtwain_lib.DTWAIN_ArrayGetCount(supported_caps)
