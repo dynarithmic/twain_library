@@ -121,6 +121,7 @@
     D_ARRAYCREATEFROMSTRINGSWFUNC                 DYNDTWAIN_API::DTWAIN_ArrayCreateFromStringsW = nullptr;
     D_ARRAYDESTROYFUNC                            DYNDTWAIN_API::DTWAIN_ArrayDestroy = nullptr;
     D_ARRAYDESTROYFRAMESFUNC                      DYNDTWAIN_API::DTWAIN_ArrayDestroyFrames = nullptr;
+    D_ARRAYDUMPTOLOGFUNC                          DYNDTWAIN_API::DTWAIN_ArrayDumpToLog = nullptr;
     D_ARRAYFINDFUNC                               DYNDTWAIN_API::DTWAIN_ArrayFind = nullptr;
     D_ARRAYFINDANSISTRINGFUNC                     DYNDTWAIN_API::DTWAIN_ArrayFindANSIString = nullptr;
     D_ARRAYFINDFLOATFUNC                          DYNDTWAIN_API::DTWAIN_ArrayFindFloat = nullptr;
@@ -142,6 +143,7 @@
     D_ARRAYGETATANSISTRINGFUNC                    DYNDTWAIN_API::DTWAIN_ArrayGetAtANSIString = nullptr;
     D_ARRAYGETATANSISTRINGPTRFUNC                 DYNDTWAIN_API::DTWAIN_ArrayGetAtANSIStringPtr = nullptr;
     D_ARRAYGETATFLOATFUNC                         DYNDTWAIN_API::DTWAIN_ArrayGetAtFloat = nullptr;
+    D_ARRAYGETATFLOATEXFUNC                       DYNDTWAIN_API::DTWAIN_ArrayGetAtFloatEx = nullptr;
     D_ARRAYGETATFLOATSTRINGFUNC                   DYNDTWAIN_API::DTWAIN_ArrayGetAtFloatString = nullptr;
     D_ARRAYGETATFLOATSTRINGAFUNC                  DYNDTWAIN_API::DTWAIN_ArrayGetAtFloatStringA = nullptr;
     D_ARRAYGETATFLOATSTRINGWFUNC                  DYNDTWAIN_API::DTWAIN_ArrayGetAtFloatStringW = nullptr;
@@ -152,6 +154,8 @@
     D_ARRAYGETATFRAMESTRINGWFUNC                  DYNDTWAIN_API::DTWAIN_ArrayGetAtFrameStringW = nullptr;
     D_ARRAYGETATLONGFUNC                          DYNDTWAIN_API::DTWAIN_ArrayGetAtLong = nullptr;
     D_ARRAYGETATLONG64FUNC                        DYNDTWAIN_API::DTWAIN_ArrayGetAtLong64 = nullptr;
+    D_ARRAYGETATLONG64EXFUNC                      DYNDTWAIN_API::DTWAIN_ArrayGetAtLong64Ex = nullptr;
+    D_ARRAYGETATLONGEXFUNC                        DYNDTWAIN_API::DTWAIN_ArrayGetAtLongEx = nullptr;
     D_ARRAYGETATSOURCEFUNC                        DYNDTWAIN_API::DTWAIN_ArrayGetAtSource = nullptr;
     D_ARRAYGETATSOURCEEXFUNC                      DYNDTWAIN_API::DTWAIN_ArrayGetAtSourceEx = nullptr;
     D_ARRAYGETATSTRINGFUNC                        DYNDTWAIN_API::DTWAIN_ArrayGetAtString = nullptr;
@@ -286,14 +290,13 @@
     D_ENUMCAMERASFUNC                             DYNDTWAIN_API::DTWAIN_EnumCameras = nullptr;
     D_ENUMCAMERASEXFUNC                           DYNDTWAIN_API::DTWAIN_EnumCamerasEx = nullptr;
     D_ENUMCAMERASEX2FUNC                          DYNDTWAIN_API::DTWAIN_EnumCamerasEx2 = nullptr;
-    D_ENUMCAMERASEX3FUNC                          DYNDTWAIN_API::DTWAIN_EnumCamerasEx3 = nullptr;
     D_ENUMCOMPRESSIONTYPESFUNC                    DYNDTWAIN_API::DTWAIN_EnumCompressionTypes = nullptr;
     D_ENUMCOMPRESSIONTYPESEXFUNC                  DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx = nullptr;
     D_ENUMCOMPRESSIONTYPESEX2FUNC                 DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx2 = nullptr;
     D_ENUMCONTRASTVALUESFUNC                      DYNDTWAIN_API::DTWAIN_EnumContrastValues = nullptr;
     D_ENUMCONTRASTVALUESEXFUNC                    DYNDTWAIN_API::DTWAIN_EnumContrastValuesEx = nullptr;
     D_ENUMCUSTOMCAPSFUNC                          DYNDTWAIN_API::DTWAIN_EnumCustomCaps = nullptr;
-    D_ENUMCUSTOMCAPSEX2FUNC                       DYNDTWAIN_API::DTWAIN_EnumCustomCapsEx2 = nullptr;
+    D_ENUMCUSTOMCAPSEXFUNC                        DYNDTWAIN_API::DTWAIN_EnumCustomCapsEx = nullptr;
     D_ENUMDOUBLEFEEDDETECTLENGTHSFUNC             DYNDTWAIN_API::DTWAIN_EnumDoubleFeedDetectLengths = nullptr;
     D_ENUMDOUBLEFEEDDETECTLENGTHSEXFUNC           DYNDTWAIN_API::DTWAIN_EnumDoubleFeedDetectLengthsEx = nullptr;
     D_ENUMDOUBLEFEEDDETECTVALUESFUNC              DYNDTWAIN_API::DTWAIN_EnumDoubleFeedDetectValues = nullptr;
@@ -321,6 +324,7 @@
     D_ENUMNOISEFILTERSFUNC                        DYNDTWAIN_API::DTWAIN_EnumNoiseFilters = nullptr;
     D_ENUMNOISEFILTERSEXFUNC                      DYNDTWAIN_API::DTWAIN_EnumNoiseFiltersEx = nullptr;
     D_ENUMOCRINTERFACESFUNC                       DYNDTWAIN_API::DTWAIN_EnumOCRInterfaces = nullptr;
+    D_ENUMOCRINTERFACESEXFUNC                     DYNDTWAIN_API::DTWAIN_EnumOCRInterfacesEx = nullptr;
     D_ENUMOCRSUPPORTEDCAPSFUNC                    DYNDTWAIN_API::DTWAIN_EnumOCRSupportedCaps = nullptr;
     D_ENUMORIENTATIONSFUNC                        DYNDTWAIN_API::DTWAIN_EnumOrientations = nullptr;
     D_ENUMORIENTATIONSEXFUNC                      DYNDTWAIN_API::DTWAIN_EnumOrientationsEx = nullptr;
@@ -381,8 +385,6 @@
     D_FEEDPAGEFUNC                                DYNDTWAIN_API::DTWAIN_FeedPage = nullptr;
     D_FLIPBITMAPFUNC                              DYNDTWAIN_API::DTWAIN_FlipBitmap = nullptr;
     D_FLUSHACQUIREDPAGESFUNC                      DYNDTWAIN_API::DTWAIN_FlushAcquiredPages = nullptr;
-    D_FORCEACQUIREBITDEPTHFUNC                    DYNDTWAIN_API::DTWAIN_ForceAcquireBitDepth = nullptr;
-    D_FORCESCANONNOUIFUNC                         DYNDTWAIN_API::DTWAIN_ForceScanOnNoUI = nullptr;
     D_FRAMECREATEFUNC                             DYNDTWAIN_API::DTWAIN_FrameCreate = nullptr;
     D_FRAMECREATESTRINGFUNC                       DYNDTWAIN_API::DTWAIN_FrameCreateString = nullptr;
     D_FRAMECREATESTRINGAFUNC                      DYNDTWAIN_API::DTWAIN_FrameCreateStringA = nullptr;
@@ -455,6 +457,7 @@
     D_GETCAPFROMNAMEAFUNC                         DYNDTWAIN_API::DTWAIN_GetCapFromNameA = nullptr;
     D_GETCAPFROMNAMEWFUNC                         DYNDTWAIN_API::DTWAIN_GetCapFromNameW = nullptr;
     D_GETCAPOPERATIONSFUNC                        DYNDTWAIN_API::DTWAIN_GetCapOperations = nullptr;
+    D_GETCAPOPERATIONSEXFUNC                      DYNDTWAIN_API::DTWAIN_GetCapOperationsEx = nullptr;
     D_GETCAPVALUESFUNC                            DYNDTWAIN_API::DTWAIN_GetCapValues = nullptr;
     D_GETCAPVALUESEXFUNC                          DYNDTWAIN_API::DTWAIN_GetCapValuesEx = nullptr;
     D_GETCAPVALUESEX2FUNC                         DYNDTWAIN_API::DTWAIN_GetCapValuesEx2 = nullptr;
@@ -500,6 +503,7 @@
     D_GETDOUBLEFEEDDETECTLENGTHFUNC               DYNDTWAIN_API::DTWAIN_GetDoubleFeedDetectLength = nullptr;
     D_GETDOUBLEFEEDDETECTVALUESFUNC               DYNDTWAIN_API::DTWAIN_GetDoubleFeedDetectValues = nullptr;
     D_GETDUPLEXTYPEFUNC                           DYNDTWAIN_API::DTWAIN_GetDuplexType = nullptr;
+    D_GETDUPLEXTYPEEXFUNC                         DYNDTWAIN_API::DTWAIN_GetDuplexTypeEx = nullptr;
     D_GETERRORBUFFERFUNC                          DYNDTWAIN_API::DTWAIN_GetErrorBuffer = nullptr;
     D_GETERRORBUFFERTHRESHOLDFUNC                 DYNDTWAIN_API::DTWAIN_GetErrorBufferThreshold = nullptr;
     D_GETERRORCALLBACKFUNC                        DYNDTWAIN_API::DTWAIN_GetErrorCallback = nullptr;
@@ -683,19 +687,7 @@
     D_GETTWAINAVAILABILITYEXFUNC                  DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityEx = nullptr;
     D_GETTWAINAVAILABILITYEXAFUNC                 DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExA = nullptr;
     D_GETTWAINAVAILABILITYEXWFUNC                 DYNDTWAIN_API::DTWAIN_GetTwainAvailabilityExW = nullptr;
-    D_GETTWAINCOUNTRYNAMEFUNC                     DYNDTWAIN_API::DTWAIN_GetTwainCountryName = nullptr;
-    D_GETTWAINCOUNTRYNAMEAFUNC                    DYNDTWAIN_API::DTWAIN_GetTwainCountryNameA = nullptr;
-    D_GETTWAINCOUNTRYNAMEWFUNC                    DYNDTWAIN_API::DTWAIN_GetTwainCountryNameW = nullptr;
-    D_GETTWAINCOUNTRYVALUEFUNC                    DYNDTWAIN_API::DTWAIN_GetTwainCountryValue = nullptr;
-    D_GETTWAINCOUNTRYVALUEAFUNC                   DYNDTWAIN_API::DTWAIN_GetTwainCountryValueA = nullptr;
-    D_GETTWAINCOUNTRYVALUEWFUNC                   DYNDTWAIN_API::DTWAIN_GetTwainCountryValueW = nullptr;
     D_GETTWAINHWNDFUNC                            DYNDTWAIN_API::DTWAIN_GetTwainHwnd = nullptr;
-    D_GETTWAINLANGUAGENAMEFUNC                    DYNDTWAIN_API::DTWAIN_GetTwainLanguageName = nullptr;
-    D_GETTWAINLANGUAGENAMEAFUNC                   DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameA = nullptr;
-    D_GETTWAINLANGUAGENAMEWFUNC                   DYNDTWAIN_API::DTWAIN_GetTwainLanguageNameW = nullptr;
-    D_GETTWAINLANGUAGEVALUEFUNC                   DYNDTWAIN_API::DTWAIN_GetTwainLanguageValue = nullptr;
-    D_GETTWAINLANGUAGEVALUEAFUNC                  DYNDTWAIN_API::DTWAIN_GetTwainLanguageValueA = nullptr;
-    D_GETTWAINLANGUAGEVALUEWFUNC                  DYNDTWAIN_API::DTWAIN_GetTwainLanguageValueW = nullptr;
     D_GETTWAINMODEFUNC                            DYNDTWAIN_API::DTWAIN_GetTwainMode = nullptr;
     D_GETTWAINNAMEFROMCONSTANTFUNC                DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstant = nullptr;
     D_GETTWAINNAMEFROMCONSTANTAFUNC               DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantA = nullptr;
@@ -703,9 +695,6 @@
     D_GETTWAINNAMEFROMCONSTANTEXAFUNC             DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantExA = nullptr;
     D_GETTWAINNAMEFROMCONSTANTEXWFUNC             DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantExW = nullptr;
     D_GETTWAINNAMEFROMCONSTANTWFUNC               DYNDTWAIN_API::DTWAIN_GetTwainNameFromConstantW = nullptr;
-    D_GETTWAINSTRINGNAMEFUNC                      DYNDTWAIN_API::DTWAIN_GetTwainStringName = nullptr;
-    D_GETTWAINSTRINGNAMEAFUNC                     DYNDTWAIN_API::DTWAIN_GetTwainStringNameA = nullptr;
-    D_GETTWAINSTRINGNAMEWFUNC                     DYNDTWAIN_API::DTWAIN_GetTwainStringNameW = nullptr;
     D_GETTWAINTIMEOUTFUNC                         DYNDTWAIN_API::DTWAIN_GetTwainTimeout = nullptr;
     D_GETVERSIONFUNC                              DYNDTWAIN_API::DTWAIN_GetVersion = nullptr;
     D_GETVERSIONCOPYRIGHTFUNC                     DYNDTWAIN_API::DTWAIN_GetVersionCopyright = nullptr;
@@ -1325,6 +1314,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromStringsW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroy, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroyFrames, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayDumpToLog, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFind, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFindANSIString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayFindFloat, hModule);
@@ -1346,6 +1336,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtANSIString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtANSIStringPtr, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFloat, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFloatEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFloatString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFloatStringA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFloatStringW, hModule);
@@ -1356,6 +1347,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtFrameStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtLong, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtLong64, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtLong64Ex, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtLongEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtSource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtSourceEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayGetAtString, hModule);
@@ -1490,14 +1483,13 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnumCameras, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx2, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx3, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypes, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypesEx2, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumContrastValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumContrastValuesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCustomCaps, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_EnumCustomCapsEx2, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnumCustomCapsEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumDoubleFeedDetectLengths, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumDoubleFeedDetectLengthsEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumDoubleFeedDetectValues, hModule);
@@ -1525,6 +1517,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnumNoiseFilters, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumNoiseFiltersEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumOCRInterfaces, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnumOCRInterfacesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumOCRSupportedCaps, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumOrientations, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumOrientationsEx, hModule);
@@ -1585,8 +1578,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_FeedPage, hModule);
           LOADFUNCTIONIMPL(DTWAIN_FlipBitmap, hModule);
           LOADFUNCTIONIMPL(DTWAIN_FlushAcquiredPages, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_ForceAcquireBitDepth, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_ForceScanOnNoUI, hModule);
           LOADFUNCTIONIMPL(DTWAIN_FrameCreate, hModule);
           LOADFUNCTIONIMPL(DTWAIN_FrameCreateString, hModule);
           LOADFUNCTIONIMPL(DTWAIN_FrameCreateStringA, hModule);
@@ -1659,6 +1650,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapOperations, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapOperationsEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapValuesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapValuesEx2, hModule);
@@ -1704,6 +1696,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetDoubleFeedDetectLength, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetDoubleFeedDetectValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetDuplexType, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetDuplexTypeEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetErrorBuffer, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetErrorBufferThreshold, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetErrorCallback, hModule);
@@ -1887,19 +1880,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetTwainAvailabilityEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainAvailabilityExA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainAvailabilityExW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryName, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryNameA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryNameW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValue, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainCountryValueW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainHwnd, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageName, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageNameW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageValue, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageValueA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainLanguageValueW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainMode, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstant, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantA, hModule);
@@ -1907,9 +1888,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantExA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantExW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainNameFromConstantW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringName, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringNameA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_GetTwainStringNameW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetTwainTimeout, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersion, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyright, hModule);

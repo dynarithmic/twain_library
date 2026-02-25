@@ -128,7 +128,7 @@ namespace TWAINDemo
                 cmbDataType.SelectedIndex = 0;
         }
 
-        private void SetTestSelection2(string setType)
+        private int SetTestSelection2(string setType)
         {
             Control[] controlsToToggle =
             {
@@ -157,7 +157,7 @@ namespace TWAINDemo
                     {
                         ctrl.Enabled = false;
                     }
-                    return; // Nothing else to do, since this capability does not support having it set
+                    return capOpts; // Nothing else to do, since this capability does not support having it set
                 }
             }
 
@@ -197,6 +197,7 @@ namespace TWAINDemo
                 cmbDataTypeSet.SelectedIndex = 0;
             else
                 cmbDataTypeSet.SelectedIndex = nPos;
+            return capOpts; 
         }
 
         private string GetBestMatchingContainer(int container)
@@ -492,11 +493,24 @@ namespace TWAINDemo
         }
         private void cmbSetTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnTestSet.Enabled = true;
+            int capOpts = SetTestSelection2(cmbSetTypes.SelectedItem.ToString());
             // This is the MSG_RESET 
             if ( cmbSetTypes.SelectedIndex == 1 )
                 EnableSetCapWindows(false);
             else
                 EnableSetCapWindows(true);
+
+            // Now test for MSG_SETCONSTRAINT 
+            if (cmbSetTypes.SelectedIndex == 2)
+            {
+                if ((capOpts & TwainAPI.DTWAIN_CO_SETCONSTRAINT) == 0)
+                {
+                    // Disable controls for constraint, including test button
+                    EnableSetCapWindows(false);
+                    btnTestSet.Enabled = false;
+                }
+            }
         }
         private void EnableSetCapWindows(bool bEnable)
         {

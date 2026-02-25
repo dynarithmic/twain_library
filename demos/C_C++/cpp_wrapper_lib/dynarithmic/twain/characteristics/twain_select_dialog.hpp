@@ -94,7 +94,8 @@ namespace dynarithmic
             static constexpr int usedefaulttitle = DTWAIN_DLG_USEDEFAULTTITLE; /*! Use default tile ("Select Source" for the English language) */
             static constexpr int topmostwindow = DTWAIN_DLG_TOPMOSTWINDOW; /*! Ensure "Select Source" dialog is the topmost window */
             static constexpr int savescreenpos = DTWAIN_DLG_SAVELASTSCREENPOS; /*! Save/Restore the last screen position of the Select Source dialog */
-
+            static constexpr int showcentermonitor = DTWAIN_DLG_CENTER_CURRENT_MONITOR; /*! Show TWAIN Select Source dialog centered on the current monitor */
+            static constexpr int useconsoleasparent = DTWAIN_DLG_CONSOLEASPARENT; /*! Determine monitor by using console window */
             static constexpr int useposition = 2048; /*! Use the position defined by twain_select_dialog::get_position() */
             static constexpr int uselegacy = 4096; /*! Use the legacy (default) TWAIN Select Source dialog. Customization is not possible if this flag is set */
 

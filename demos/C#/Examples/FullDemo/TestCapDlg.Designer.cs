@@ -226,7 +226,7 @@ namespace TWAINDemo
             // cmbContainerSet
             // 
             this.cmbContainerSet.FormattingEnabled = true;
-            this.cmbContainerSet.Location = new System.Drawing.Point(157, 280);
+            this.cmbContainerSet.Location = new System.Drawing.Point(165, 280);
             this.cmbContainerSet.Name = "cmbContainerSet";
             this.cmbContainerSet.Size = new System.Drawing.Size(145, 21);
             this.cmbContainerSet.TabIndex = 17;
@@ -237,7 +237,7 @@ namespace TWAINDemo
             this.cmbSetTypes.FormattingEnabled = true;
             this.cmbSetTypes.Location = new System.Drawing.Point(17, 280);
             this.cmbSetTypes.Name = "cmbSetTypes";
-            this.cmbSetTypes.Size = new System.Drawing.Size(134, 21);
+            this.cmbSetTypes.Size = new System.Drawing.Size(145, 21);
             this.cmbSetTypes.TabIndex = 16;
             this.cmbSetTypes.SelectedIndexChanged += new System.EventHandler(this.cmbSetTypes_SelectedIndexChanged);
             // 
@@ -253,7 +253,7 @@ namespace TWAINDemo
             // lblSetContainer
             // 
             this.lblSetContainer.AutoSize = true;
-            this.lblSetContainer.Location = new System.Drawing.Point(157, 263);
+            this.lblSetContainer.Location = new System.Drawing.Point(165, 263);
             this.lblSetContainer.Name = "lblSetContainer";
             this.lblSetContainer.Size = new System.Drawing.Size(55, 13);
             this.lblSetContainer.TabIndex = 14;

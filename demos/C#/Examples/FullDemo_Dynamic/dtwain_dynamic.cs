@@ -319,6 +319,8 @@
         public const int DTWAIN_BIGTIFFJPEG = 11015;
         public const int DTWAIN_BIGTIFFJPEGMULTI = 11016;
         public const int DTWAIN_JPEGXR = 12000;
+        public const int DTWAIN_SVG = 13000;
+        public const int DTWAIN_SVGZ = 13001;
         public const int DTWAIN_INCHES = 0;
         public const int DTWAIN_CENTIMETERS = 1;
         public const int DTWAIN_PICAS = 2;
@@ -394,12 +396,12 @@
         public const int DTWAIN_CAPSET = 6;
         public const int DTWAIN_CAPRESET = 7;
         public const int DTWAIN_CAPRESETALL = 8;
-        public const int DTWAIN_CAPSETCONSTRAINT = 9;
         public const int DTWAIN_CAPSETAVAILABLE = 8;
         public const int DTWAIN_CAPSETCURRENT = 16;
         public const int DTWAIN_CAPGETHELP = 9;
         public const int DTWAIN_CAPGETLABEL = 10;
         public const int DTWAIN_CAPGETLABELENUM = 11;
+        public const int DTWAIN_CAPSETCONSTRAINT = 12;
         public const int DTWAIN_AREASET = DTWAIN_CAPSET;
         public const int DTWAIN_AREARESET = DTWAIN_CAPRESET;
         public const int DTWAIN_AREACURRENT = DTWAIN_CAPGETCURRENT;
@@ -527,6 +529,8 @@
         public const int DTWAIN_TN_TRANSFERTILEREADY = 1300;
         public const int DTWAIN_TN_TRANSFERTILEDONE = 1301;
         public const int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
+        public const int DTWAIN_TN_SOURCEDETAILS = 1304;
+        public const int DTWAIN_TN_QUERYACQUIREPAGES = 1305;
         public const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const int DTWAIN_MODAL = 0;
@@ -1237,6 +1241,7 @@
         public const int DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
         public const int DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
         public const int DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768;
+        public const int DTWAIN_DLG_CONSOLEASPARENT = 65536;
         public const int DTWAIN_RES_ENGLISH = 0;
         public const int DTWAIN_RES_FRENCH = 1;
         public const int DTWAIN_RES_SPANISH = 2;
@@ -1943,6 +1948,7 @@
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromRealsDelegate(ref DTWAIN_FLOAT pCArray, int nSize);
         public delegate int DTWAIN_ArrayDestroyDelegate(DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_ArrayDestroyFramesDelegate(DTWAIN_ARRAY FrameArray);
+        public delegate int DTWAIN_ArrayDumpToLogDelegate(DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_ArrayFindDelegate(DTWAIN_ARRAY pArray, System.IntPtr pVariant);
         public delegate int DTWAIN_ArrayFindANSIStringDelegate(DTWAIN_ARRAY pArray, string pString);
         public delegate int DTWAIN_ArrayFindFloatDelegate(DTWAIN_ARRAY pArray, DTWAIN_FLOAT Val, DTWAIN_FLOAT Tolerance);
@@ -1959,6 +1965,7 @@
         public delegate int DTWAIN_ArrayGetAtDelegate(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
         public delegate int DTWAIN_ArrayGetAtANSIStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder pStr);
         public delegate int DTWAIN_ArrayGetAtFloatDelegate(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_FLOAT pVal);
+        public delegate DTWAIN_FLOAT DTWAIN_ArrayGetAtFloatExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtFloatStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val);
         public delegate int DTWAIN_ArrayGetAtFloatStringDelegate_overload(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr Val);
         public delegate int DTWAIN_ArrayGetAtFrameDelegate(DTWAIN_ARRAY FrameArray, int nWhere, ref DTWAIN_FLOAT pleft, ref DTWAIN_FLOAT ptop, ref DTWAIN_FLOAT pright, ref DTWAIN_FLOAT pbottom);
@@ -1967,6 +1974,8 @@
         public delegate int DTWAIN_ArrayGetAtFrameStringDelegate_overload(DTWAIN_ARRAY FrameArray, int nWhere, System.IntPtr left, System.IntPtr top, System.IntPtr right, System.IntPtr bottom);
         public delegate int DTWAIN_ArrayGetAtLongDelegate(DTWAIN_ARRAY pArray, int nWhere, ref int pVal);
         public delegate int DTWAIN_ArrayGetAtLong64Delegate(DTWAIN_ARRAY pArray, int nWhere, ref long pVal);
+        public delegate LONG64 DTWAIN_ArrayGetAtLong64ExDelegate(DTWAIN_ARRAY pArray, int nWhere);
+        public delegate int DTWAIN_ArrayGetAtLongExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtSourceDelegate(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource);
         public delegate DTWAIN_SOURCE DTWAIN_ArrayGetAtSourceExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pStr);
@@ -2072,23 +2081,22 @@
         public delegate int DTWAIN_EnumAutomaticSenseMediumDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumAutomaticSenseMediumExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumBitDepthsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumBitDepthsExDelegate(DTWAIN_SOURCE Source, int PixelType, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBitDepthsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx2Delegate(DTWAIN_SOURCE Source, int PixelType);
         public delegate int DTWAIN_EnumBottomCamerasDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBottomCamerasExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumBrightnessValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBrightnessValuesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumCamerasDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras);
-        public delegate int DTWAIN_EnumCamerasExDelegate(DTWAIN_SOURCE Source, int nWhichCamera, ref DTWAIN_ARRAY Cameras);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx2Delegate(DTWAIN_SOURCE Source);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx3Delegate(DTWAIN_SOURCE Source, int nWhichCamera);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasExDelegate(DTWAIN_SOURCE Source);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx2Delegate(DTWAIN_SOURCE Source, int nWhichCamera);
         public delegate int DTWAIN_EnumCompressionTypesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumCompressionTypesExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2Delegate(DTWAIN_SOURCE Source, int lFileType, int bUseBufferedMode);
         public delegate int DTWAIN_EnumContrastValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumContrastValuesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumCustomCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx2Delegate(DTWAIN_SOURCE Source);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCustomCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumDoubleFeedDetectLengthsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectLengthsExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumDoubleFeedDetectValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2096,7 +2104,7 @@
         public delegate int DTWAIN_EnumExtImageInfoTypesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumExtImageInfoTypesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumExtendedCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumExtendedCapsExDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumExtendedCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2Delegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumFileTypeBitsPerPixelDelegate(int FileType, ref DTWAIN_ARRAY Array);
         public delegate int DTWAIN_EnumFileXferFormatsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2116,6 +2124,7 @@
         public delegate int DTWAIN_EnumNoiseFiltersDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumOCRInterfacesDelegate(ref DTWAIN_ARRAY OCRInterfaces);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesExDelegate();
         public delegate int DTWAIN_EnumOCRSupportedCapsDelegate(DTWAIN_OCRENGINE Engine, ref DTWAIN_ARRAY SupportedCaps);
         public delegate int DTWAIN_EnumOrientationsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumOrientationsExDelegate(DTWAIN_SOURCE Source);
@@ -2149,7 +2158,7 @@
         public delegate int DTWAIN_EnumSourcesDelegate(ref DTWAIN_ARRAY lpArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSourcesExDelegate();
         public delegate int DTWAIN_EnumSupportedCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumSupportedCapsExDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2Delegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumSupportedExtImageInfoDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedExtImageInfoExDelegate(DTWAIN_SOURCE Source);
@@ -2172,8 +2181,6 @@
         public delegate int DTWAIN_FeedPageDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_FlipBitmapDelegate(HANDLE hDib);
         public delegate int DTWAIN_FlushAcquiredPagesDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_ForceAcquireBitDepthDelegate(DTWAIN_SOURCE Source, int BitDepth);
-        public delegate int DTWAIN_ForceScanOnNoUIDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate DTWAIN_FRAME DTWAIN_FrameCreateDelegate(DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom);
         public delegate DTWAIN_FRAME DTWAIN_FrameCreateStringDelegate([MarshalAs(UnmanagedType.LPTStr)] string Left, [MarshalAs(UnmanagedType.LPTStr)] string Top, [MarshalAs(UnmanagedType.LPTStr)] string Right, [MarshalAs(UnmanagedType.LPTStr)] string Bottom);
         public delegate int DTWAIN_FrameDestroyDelegate(DTWAIN_FRAME Frame);
@@ -2230,6 +2237,7 @@
         public delegate int DTWAIN_GetCapDataTypeDelegate(DTWAIN_SOURCE Source, int nCap);
         public delegate int DTWAIN_GetCapFromNameDelegate([MarshalAs(UnmanagedType.LPTStr)] string szName);
         public delegate int DTWAIN_GetCapOperationsDelegate(DTWAIN_SOURCE Source, int lCapability, ref int lpOps);
+        public delegate int DTWAIN_GetCapOperationsExDelegate(DTWAIN_SOURCE Source, int lCapability);
         public delegate int DTWAIN_GetCapValuesDelegate(DTWAIN_SOURCE Source, int lCap, int lGetType, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetCapValuesExDelegate(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetCapValuesEx2Delegate(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType, ref DTWAIN_ARRAY pArray);
@@ -2266,6 +2274,7 @@
         public delegate int DTWAIN_GetDoubleFeedDetectLengthDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Value, int bCurrent);
         public delegate int DTWAIN_GetDoubleFeedDetectValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetDuplexTypeDelegate(DTWAIN_SOURCE Source, ref int lpDupType);
+        public delegate int DTWAIN_GetDuplexTypeExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetErrorBufferDelegate(ref DTWAIN_ARRAY ArrayBuffer);
         public delegate int DTWAIN_GetErrorBufferThresholdDelegate();
         public delegate DTwainErrorProc DTWAIN_GetErrorCallbackDelegate();
@@ -2410,20 +2419,12 @@
         public delegate int DTWAIN_GetTwainAvailabilityDelegate();
         public delegate int DTWAIN_GetTwainAvailabilityExDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder directories, int nMaxLen);
         public delegate int DTWAIN_GetTwainAvailabilityExDelegate_overload(System.IntPtr directories, int nMaxLen);
-        public delegate int DTWAIN_GetTwainCountryNameDelegate(int countryId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName);
-        public delegate int DTWAIN_GetTwainCountryNameDelegate_overload(int countryId, System.IntPtr szName);
-        public delegate int DTWAIN_GetTwainCountryValueDelegate([MarshalAs(UnmanagedType.LPTStr)] string country);
         public delegate HWND DTWAIN_GetTwainHwndDelegate();
-        public delegate int DTWAIN_GetTwainLanguageNameDelegate(int nameId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName);
-        public delegate int DTWAIN_GetTwainLanguageNameDelegate_overload(int nameId, System.IntPtr szName);
-        public delegate int DTWAIN_GetTwainLanguageValueDelegate([MarshalAs(UnmanagedType.LPTStr)] string szName);
         public delegate int DTWAIN_GetTwainModeDelegate();
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
-        public delegate int DTWAIN_GetTwainStringNameDelegate(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
-        public delegate int DTWAIN_GetTwainStringNameDelegate_overload(int category, int TwainID, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetTwainTimeoutDelegate();
         public delegate int DTWAIN_GetVersionDelegate(ref int lpMajor, ref int lpMinor, ref int lpVersionType);
         public delegate int DTWAIN_GetVersionCopyrightDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszApp, int nLength);
@@ -2934,6 +2935,9 @@
         [DTWAINNativeFunction("DTWAIN_ArrayDestroyFrames")]
         private readonly DTWAIN_ArrayDestroyFramesDelegate  _DTWAIN_ArrayDestroyFrames;
 
+        [DTWAINNativeFunction("DTWAIN_ArrayDumpToLog")]
+        private readonly DTWAIN_ArrayDumpToLogDelegate  _DTWAIN_ArrayDumpToLog;
+
         [DTWAINNativeFunction("DTWAIN_ArrayFind")]
         private readonly DTWAIN_ArrayFindDelegate  _DTWAIN_ArrayFind;
 
@@ -2982,6 +2986,9 @@
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloat")]
         private readonly DTWAIN_ArrayGetAtFloatDelegate  _DTWAIN_ArrayGetAtFloat;
 
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloatEx")]
+        private readonly DTWAIN_ArrayGetAtFloatExDelegate  _DTWAIN_ArrayGetAtFloatEx;
+
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloatString")]
         private readonly DTWAIN_ArrayGetAtFloatStringDelegate  _DTWAIN_ArrayGetAtFloatString;
 
@@ -3005,6 +3012,12 @@
 
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtLong64")]
         private readonly DTWAIN_ArrayGetAtLong64Delegate  _DTWAIN_ArrayGetAtLong64;
+
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtLong64Ex")]
+        private readonly DTWAIN_ArrayGetAtLong64ExDelegate  _DTWAIN_ArrayGetAtLong64Ex;
+
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtLongEx")]
+        private readonly DTWAIN_ArrayGetAtLongExDelegate  _DTWAIN_ArrayGetAtLongEx;
 
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtSource")]
         private readonly DTWAIN_ArrayGetAtSourceDelegate  _DTWAIN_ArrayGetAtSource;
@@ -3348,9 +3361,6 @@
         [DTWAINNativeFunction("DTWAIN_EnumCamerasEx2")]
         private readonly DTWAIN_EnumCamerasEx2Delegate  _DTWAIN_EnumCamerasEx2;
 
-        [DTWAINNativeFunction("DTWAIN_EnumCamerasEx3")]
-        private readonly DTWAIN_EnumCamerasEx3Delegate  _DTWAIN_EnumCamerasEx3;
-
         [DTWAINNativeFunction("DTWAIN_EnumCompressionTypes")]
         private readonly DTWAIN_EnumCompressionTypesDelegate  _DTWAIN_EnumCompressionTypes;
 
@@ -3369,8 +3379,8 @@
         [DTWAINNativeFunction("DTWAIN_EnumCustomCaps")]
         private readonly DTWAIN_EnumCustomCapsDelegate  _DTWAIN_EnumCustomCaps;
 
-        [DTWAINNativeFunction("DTWAIN_EnumCustomCapsEx2")]
-        private readonly DTWAIN_EnumCustomCapsEx2Delegate  _DTWAIN_EnumCustomCapsEx2;
+        [DTWAINNativeFunction("DTWAIN_EnumCustomCapsEx")]
+        private readonly DTWAIN_EnumCustomCapsExDelegate  _DTWAIN_EnumCustomCapsEx;
 
         [DTWAINNativeFunction("DTWAIN_EnumDoubleFeedDetectLengths")]
         private readonly DTWAIN_EnumDoubleFeedDetectLengthsDelegate  _DTWAIN_EnumDoubleFeedDetectLengths;
@@ -3452,6 +3462,9 @@
 
         [DTWAINNativeFunction("DTWAIN_EnumOCRInterfaces")]
         private readonly DTWAIN_EnumOCRInterfacesDelegate  _DTWAIN_EnumOCRInterfaces;
+
+        [DTWAINNativeFunction("DTWAIN_EnumOCRInterfacesEx")]
+        private readonly DTWAIN_EnumOCRInterfacesExDelegate  _DTWAIN_EnumOCRInterfacesEx;
 
         [DTWAINNativeFunction("DTWAIN_EnumOCRSupportedCaps")]
         private readonly DTWAIN_EnumOCRSupportedCapsDelegate  _DTWAIN_EnumOCRSupportedCaps;
@@ -3621,12 +3634,6 @@
         [DTWAINNativeFunction("DTWAIN_FlushAcquiredPages")]
         private readonly DTWAIN_FlushAcquiredPagesDelegate  _DTWAIN_FlushAcquiredPages;
 
-        [DTWAINNativeFunction("DTWAIN_ForceAcquireBitDepth")]
-        private readonly DTWAIN_ForceAcquireBitDepthDelegate  _DTWAIN_ForceAcquireBitDepth;
-
-        [DTWAINNativeFunction("DTWAIN_ForceScanOnNoUI")]
-        private readonly DTWAIN_ForceScanOnNoUIDelegate  _DTWAIN_ForceScanOnNoUI;
-
         [DTWAINNativeFunction("DTWAIN_FrameCreate")]
         private readonly DTWAIN_FrameCreateDelegate  _DTWAIN_FrameCreate;
 
@@ -3795,6 +3802,9 @@
         [DTWAINNativeFunction("DTWAIN_GetCapOperations")]
         private readonly DTWAIN_GetCapOperationsDelegate  _DTWAIN_GetCapOperations;
 
+        [DTWAINNativeFunction("DTWAIN_GetCapOperationsEx")]
+        private readonly DTWAIN_GetCapOperationsExDelegate  _DTWAIN_GetCapOperationsEx;
+
         [DTWAINNativeFunction("DTWAIN_GetCapValues")]
         private readonly DTWAIN_GetCapValuesDelegate  _DTWAIN_GetCapValues;
 
@@ -3902,6 +3912,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetDuplexType")]
         private readonly DTWAIN_GetDuplexTypeDelegate  _DTWAIN_GetDuplexType;
+
+        [DTWAINNativeFunction("DTWAIN_GetDuplexTypeEx")]
+        private readonly DTWAIN_GetDuplexTypeExDelegate  _DTWAIN_GetDuplexTypeEx;
 
         [DTWAINNativeFunction("DTWAIN_GetErrorBuffer")]
         private readonly DTWAIN_GetErrorBufferDelegate  _DTWAIN_GetErrorBuffer;
@@ -4335,26 +4348,8 @@
         [DTWAINNativeFunction("DTWAIN_GetTwainAvailabilityEx")]
         private readonly DTWAIN_GetTwainAvailabilityExDelegate_overload _DTWAIN_GetTwainAvailabilityEx_overload; 
 
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryName")]
-        private readonly DTWAIN_GetTwainCountryNameDelegate  _DTWAIN_GetTwainCountryName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryName")]
-        private readonly DTWAIN_GetTwainCountryNameDelegate_overload _DTWAIN_GetTwainCountryName_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryValue")]
-        private readonly DTWAIN_GetTwainCountryValueDelegate  _DTWAIN_GetTwainCountryValue;
-
         [DTWAINNativeFunction("DTWAIN_GetTwainHwnd")]
         private readonly DTWAIN_GetTwainHwndDelegate  _DTWAIN_GetTwainHwnd;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageName")]
-        private readonly DTWAIN_GetTwainLanguageNameDelegate  _DTWAIN_GetTwainLanguageName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageName")]
-        private readonly DTWAIN_GetTwainLanguageNameDelegate_overload _DTWAIN_GetTwainLanguageName_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageValue")]
-        private readonly DTWAIN_GetTwainLanguageValueDelegate  _DTWAIN_GetTwainLanguageValue;
 
         [DTWAINNativeFunction("DTWAIN_GetTwainMode")]
         private readonly DTWAIN_GetTwainModeDelegate  _DTWAIN_GetTwainMode;
@@ -4370,12 +4365,6 @@
 
         [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstantEx")]
         private readonly DTWAIN_GetTwainNameFromConstantExDelegate_overload _DTWAIN_GetTwainNameFromConstantEx_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainStringName")]
-        private readonly DTWAIN_GetTwainStringNameDelegate  _DTWAIN_GetTwainStringName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainStringName")]
-        private readonly DTWAIN_GetTwainStringNameDelegate_overload _DTWAIN_GetTwainStringName_overload; 
 
         [DTWAINNativeFunction("DTWAIN_GetTwainTimeout")]
         private readonly DTWAIN_GetTwainTimeoutDelegate  _DTWAIN_GetTwainTimeout;
@@ -5564,6 +5553,9 @@
         public  int DTWAIN_ArrayDestroyFrames(DTWAIN_ARRAY FrameArray)
         => _DTWAIN_ArrayDestroyFrames(FrameArray);
 
+        public  int DTWAIN_ArrayDumpToLog(DTWAIN_ARRAY pArray)
+        => _DTWAIN_ArrayDumpToLog(pArray);
+
         public  int DTWAIN_ArrayFind(DTWAIN_ARRAY pArray, System.IntPtr pVariant)
         => _DTWAIN_ArrayFind(pArray, pVariant);
 
@@ -5612,6 +5604,9 @@
         public  int DTWAIN_ArrayGetAtFloat(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_FLOAT pVal)
         => _DTWAIN_ArrayGetAtFloat(pArray, nWhere, ref pVal);
 
+        public  DTWAIN_FLOAT DTWAIN_ArrayGetAtFloatEx(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtFloatEx(pArray, nWhere);
+
         public  int DTWAIN_ArrayGetAtFloatString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val)
         => _DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val);
 
@@ -5635,6 +5630,12 @@
 
         public  int DTWAIN_ArrayGetAtLong64(DTWAIN_ARRAY pArray, int nWhere, ref long pVal)
         => _DTWAIN_ArrayGetAtLong64(pArray, nWhere, ref pVal);
+
+        public  LONG64 DTWAIN_ArrayGetAtLong64Ex(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtLong64Ex(pArray, nWhere);
+
+        public  int DTWAIN_ArrayGetAtLongEx(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtLongEx(pArray, nWhere);
 
         public  int DTWAIN_ArrayGetAtSource(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource)
         => _DTWAIN_ArrayGetAtSource(pArray, nWhere, ref ppSource);
@@ -5951,8 +5952,8 @@
         public  int DTWAIN_EnumBitDepths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumBitDepths(Source, ref pArray);
 
-        public  int DTWAIN_EnumBitDepthsEx(DTWAIN_SOURCE Source, int PixelType, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBitDepthsEx(Source, PixelType, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBitDepthsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx2(DTWAIN_SOURCE Source, int PixelType)
         => _DTWAIN_EnumBitDepthsEx2(Source, PixelType);
@@ -5972,14 +5973,11 @@
         public  int DTWAIN_EnumCameras(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras)
         => _DTWAIN_EnumCameras(Source, ref Cameras);
 
-        public  int DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, int nWhichCamera, ref DTWAIN_ARRAY Cameras)
-        => _DTWAIN_EnumCamerasEx(Source, nWhichCamera, ref Cameras);
+        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumCamerasEx(Source);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCamerasEx2(Source);
-
-        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx3(DTWAIN_SOURCE Source, int nWhichCamera)
-        => _DTWAIN_EnumCamerasEx3(Source, nWhichCamera);
+        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, int nWhichCamera)
+        => _DTWAIN_EnumCamerasEx2(Source, nWhichCamera);
 
         public  int DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumCompressionTypes(Source, ref pArray);
@@ -5999,8 +5997,8 @@
         public  int DTWAIN_EnumCustomCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumCustomCaps(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCustomCapsEx2(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumCustomCapsEx(Source);
 
         public  int DTWAIN_EnumDoubleFeedDetectLengths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
         => _DTWAIN_EnumDoubleFeedDetectLengths(Source, ref pArray, bExpandIfRange);
@@ -6023,8 +6021,8 @@
         public  int DTWAIN_EnumExtendedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumExtendedCaps(Source, ref pArray);
 
-        public  int DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumExtendedCapsEx(Source, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumExtendedCapsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumExtendedCapsEx2(Source);
@@ -6082,6 +6080,9 @@
 
         public  int DTWAIN_EnumOCRInterfaces(ref DTWAIN_ARRAY OCRInterfaces)
         => _DTWAIN_EnumOCRInterfaces(ref OCRInterfaces);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx()
+        => _DTWAIN_EnumOCRInterfacesEx();
 
         public  int DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, ref DTWAIN_ARRAY SupportedCaps)
         => _DTWAIN_EnumOCRSupportedCaps(Engine, ref SupportedCaps);
@@ -6182,8 +6183,8 @@
         public  int DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumSupportedCaps(Source, ref pArray);
 
-        public  int DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumSupportedCapsEx(Source, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumSupportedCapsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumSupportedCapsEx2(Source);
@@ -6250,12 +6251,6 @@
 
         public  int DTWAIN_FlushAcquiredPages(DTWAIN_SOURCE Source)
         => _DTWAIN_FlushAcquiredPages(Source);
-
-        public  int DTWAIN_ForceAcquireBitDepth(DTWAIN_SOURCE Source, int BitDepth)
-        => _DTWAIN_ForceAcquireBitDepth(Source, BitDepth);
-
-        public  int DTWAIN_ForceScanOnNoUI(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_ForceScanOnNoUI(Source, bSet);
 
         public  DTWAIN_FRAME DTWAIN_FrameCreate(DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom)
         => _DTWAIN_FrameCreate(Left, Top, Right, Bottom);
@@ -6425,6 +6420,9 @@
         public  int DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, int lCapability, ref int lpOps)
         => _DTWAIN_GetCapOperations(Source, lCapability, ref lpOps);
 
+        public  int DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, int lCapability)
+        => _DTWAIN_GetCapOperationsEx(Source, lCapability);
+
         public  int DTWAIN_GetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_GetCapValues(Source, lCap, lGetType, ref pArray);
 
@@ -6532,6 +6530,9 @@
 
         public  int DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, ref int lpDupType)
         => _DTWAIN_GetDuplexType(Source, ref lpDupType);
+
+        public  int DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetDuplexTypeEx(Source);
 
         public  int DTWAIN_GetErrorBuffer(ref DTWAIN_ARRAY ArrayBuffer)
         => _DTWAIN_GetErrorBuffer(ref ArrayBuffer);
@@ -6965,26 +6966,8 @@
         public  int DTWAIN_GetTwainAvailabilityEx (System.IntPtr directories, int nMaxLen)
         => _DTWAIN_GetTwainAvailabilityEx_overload(directories, nMaxLen);
 
-        public  int DTWAIN_GetTwainCountryName(int countryId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName)
-        => _DTWAIN_GetTwainCountryName(countryId, szName);
-
-        public  int DTWAIN_GetTwainCountryName (int countryId, System.IntPtr szName)
-        => _DTWAIN_GetTwainCountryName_overload(countryId, szName);
-
-        public  int DTWAIN_GetTwainCountryValue([MarshalAs(UnmanagedType.LPTStr)] string country)
-        => _DTWAIN_GetTwainCountryValue(country);
-
         public  HWND DTWAIN_GetTwainHwnd()
         => _DTWAIN_GetTwainHwnd();
-
-        public  int DTWAIN_GetTwainLanguageName(int nameId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName)
-        => _DTWAIN_GetTwainLanguageName(nameId, szName);
-
-        public  int DTWAIN_GetTwainLanguageName (int nameId, System.IntPtr szName)
-        => _DTWAIN_GetTwainLanguageName_overload(nameId, szName);
-
-        public  int DTWAIN_GetTwainLanguageValue([MarshalAs(UnmanagedType.LPTStr)] string szName)
-        => _DTWAIN_GetTwainLanguageValue(szName);
 
         public  int DTWAIN_GetTwainMode()
         => _DTWAIN_GetTwainMode();
@@ -7000,12 +6983,6 @@
 
         public  int DTWAIN_GetTwainNameFromConstantEx (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
         => _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize);
-
-        public  int DTWAIN_GetTwainStringName(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen);
-
-        public  int DTWAIN_GetTwainStringName (int category, int TwainID, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetTwainStringName_overload(category, TwainID, lpszBuffer, nMaxLen);
 
         public  int DTWAIN_GetTwainTimeout()
         => _DTWAIN_GetTwainTimeout();

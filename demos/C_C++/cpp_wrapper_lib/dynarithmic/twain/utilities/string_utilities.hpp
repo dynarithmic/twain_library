@@ -34,12 +34,113 @@ namespace dynarithmic
 {
     namespace twain
     {
-        std::string& ltrim(std::string& str);
-        std::string& rtrim(std::string& str);
-        std::string ltrim_copy(std::string str);
-        std::string rtrim_copy(std::string str);
-        std::string trim_copy(std::string str);
-        std::string& trim(std::string& str);
+        template <typename String, typename Pred>
+        String& ltrim_if(String& str, Pred pred)
+        {
+            auto it2 = std::find_if_not(str.begin(), str.end(), pred);
+    	    str.erase(str.begin(), it2);
+			return str;
+        }
+
+        template <typename String, typename Pred>
+        String& rtrim_if(String& str, Pred pred)
+        {
+            auto it1 = std::find_if_not(str.rbegin(), str.rend(), pred);
+			str.erase(it1.base(), str.end());
+			return str;
+        }
+
+        template <typename String, typename Pred>
+        String ltrim_copy_if(String str, Pred pred)
+        {
+			return ltrim_if(str, pred);
+        }
+
+		template <typename String, typename Pred>
+        String rtrim_copy(String str, Pred pred)
+        {
+			return ltrim_if(str, pred);
+        }
+
+		template <typename String, typename Pred>
+        String trim_copy_if(String str, Pred pred)
+        {
+			return ltrim_if(rtrim_if(str, pred), pred);
+        }
+
+		template <typename String, typename Pred>
+        String& trim_if(String& str, Pred pred)
+        {
+			return ltrim_if(rtrim_if(str, pred), pred);
+        }
+
+        template <typename String>
+        String& ltrim(String& str)
+        {
+            if constexpr (std::is_same_v <String, std::wstring>)
+            {
+                return ltrim_if(str, [](unsigned char ch) { return !iswspace(ch); });
+            }
+            else
+            {
+                return ltrim_if(str, [](unsigned char ch) { return !isspace(ch); });
+            }
+            return str;
+        }
+
+		template <typename String>
+        String& rtrim(String& str)
+        {
+			if constexpr (std::is_same_v <String, std::wstring>)
+			{
+				return rtrim_if(str, [](unsigned char ch) { return !iswspace(ch); });
+			}
+			else
+			{
+				return rtrim_if(str, [](unsigned char ch) { return !isspace(ch); });
+			}
+			return str;
+        }
+
+		template <typename String>
+		String ltrim_copy(String str)
+		{
+			if constexpr (std::is_same_v <String, std::wstring>)
+			{
+				return ltrim_if(str, [](unsigned char ch) { return !iswspace(ch); });
+			}
+			else
+			{
+				return ltrim_if(str, [](unsigned char ch) { return !isspace(ch); });
+			}
+			return str;
+		}
+
+		template <typename String>
+		String rtrim_copy(String str)
+		{
+			if constexpr (std::is_same_v <String, std::wstring>)
+			{
+				return rtrim_if(str, [](unsigned char ch) { return !iswspace(ch); });
+			}
+			else
+			{
+				return rtrim_if(str, [](unsigned char ch) { return !isspace(ch); });
+			}
+			return str;
+		}
+
+        template <typename String>
+        String trim_copy(String str)
+        {
+            return ltrim_copy(rtrim_copy(str));
+        }
+
+		template <typename String>
+		String& trim(String& str)
+		{
+			return ltrim_copy(rtrim_copy(str));
+		}
 
         template <typename Container>
         std::string join(const Container& ct, std::string separator)

@@ -106,6 +106,8 @@ namespace dynarithmic
             virtual int filenamechanged(twain_source&) { return 1; }
             virtual int tripletbegin(twain_source&) { return 1; }
             virtual int tripletend(twain_source&) { return 1; }
+            virtual int queryacquirepages(twain_source&) { return 1; }
+            virtual int sourcedetails(twain_source&) { return 1; }
 
         public:
             twain_callback() : m_UserData(0), m_bDefaultHandler(false), m_nNotificationID(0), m_functionMap({
@@ -164,7 +166,9 @@ namespace dynarithmic
                 {DTWAIN_TN_FILENAMECHANGED, &twain_callback::filenamechanged},
                 {DTWAIN_TN_UIOPENFAILURE, &twain_callback::uiopenfailure},
                 {DTWAIN_TN_TWAINTRIPLETBEGIN, &twain_callback::tripletbegin},
-                {DTWAIN_TN_TWAINTRIPLETEND, &twain_callback::tripletend}
+                {DTWAIN_TN_TWAINTRIPLETEND, &twain_callback::tripletend},
+				{DTWAIN_TN_QUERYACQUIREPAGES, &twain_callback::queryacquirepages},
+                {DTWAIN_TN_SOURCEDETAILS, &twain_callback::sourcedetails}
                 })
             {}
 
