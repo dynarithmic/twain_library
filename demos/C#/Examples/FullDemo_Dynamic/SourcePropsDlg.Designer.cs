@@ -41,6 +41,7 @@ namespace TWAINDemo
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnResetAllCaps = new System.Windows.Forms.Button();
             this.btnTestCap = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,17 +51,18 @@ namespace TWAINDemo
             this.edCustomCaps = new System.Windows.Forms.TextBox();
             this.edTotalCaps = new System.Windows.Forms.TextBox();
             this.GroupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRefreshCustomData = new System.Windows.Forms.Button();
+            this.btnShowUIOnly = new System.Windows.Forms.Button();
             this.txtDSData = new System.Windows.Forms.TextBox();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.TextBox3 = new System.Windows.Forms.TextBox();
-            this.OK_button = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtJSON = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.btnResetAllCaps = new System.Windows.Forms.Button();
+            this.OKbutton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.GroupBox3.SuspendLayout();
@@ -199,6 +201,13 @@ namespace TWAINDemo
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Capability Info";
             // 
+            this.btnResetAllCaps.Location = new System.Drawing.Point(246, 182);
+            this.btnResetAllCaps.Name = "btnResetAllCaps";
+            this.btnResetAllCaps.Size = new System.Drawing.Size(127, 23);
+            this.btnResetAllCaps.TabIndex = 3;
+            this.btnResetAllCaps.Text = "Reset All Capabilities";
+            this.btnResetAllCaps.UseVisualStyleBackColor = true;
+            this.btnResetAllCaps.Click += new System.EventHandler(this.btnResetAllCaps_Click);
             // btnTestCap
             // 
             this.btnTestCap.Location = new System.Drawing.Point(246, 152);
@@ -278,6 +287,8 @@ namespace TWAINDemo
             // 
             // GroupBox3
             // 
+            this.GroupBox3.Controls.Add(this.btnRefreshCustomData);
+            this.GroupBox3.Controls.Add(this.btnShowUIOnly);
             this.GroupBox3.Controls.Add(this.txtDSData);
             this.GroupBox3.Controls.Add(this.TextBox1);
             this.GroupBox3.Controls.Add(this.TextBox2);
@@ -289,6 +300,20 @@ namespace TWAINDemo
             this.GroupBox3.TabStop = false;
             this.GroupBox3.Text = "Custom Data";
             // 
+            this.btnRefreshCustomData.Location = new System.Drawing.Point(170, 366);
+            this.btnRefreshCustomData.Name = "btnRefreshCustomData";
+            this.btnRefreshCustomData.Size = new System.Drawing.Size(88, 23);
+            this.btnRefreshCustomData.TabIndex = 4;
+            this.btnRefreshCustomData.Text = "Refresh Data";
+            this.btnRefreshCustomData.UseVisualStyleBackColor = true;
+            this.btnRefreshCustomData.Click += new System.EventHandler(this.btnRefreshCustomData_Click);
+            this.btnShowUIOnly.Location = new System.Drawing.Point(46, 368);
+            this.btnShowUIOnly.Name = "btnShowUIOnly";
+            this.btnShowUIOnly.Size = new System.Drawing.Size(93, 23);
+            this.btnShowUIOnly.TabIndex = 3;
+            this.btnShowUIOnly.Text = "Show UI Only...";
+            this.btnShowUIOnly.UseVisualStyleBackColor = true;
+            this.btnShowUIOnly.Click += new System.EventHandler(this.btnShowUIOnly_Click);
             // txtDSData
             // 
             this.txtDSData.Location = new System.Drawing.Point(7, 19);
@@ -296,7 +321,7 @@ namespace TWAINDemo
             this.txtDSData.Name = "txtDSData";
             this.txtDSData.ReadOnly = true;
             this.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDSData.Size = new System.Drawing.Size(304, 382);
+            this.txtDSData.Size = new System.Drawing.Size(304, 341);
             this.txtDSData.TabIndex = 2;
             // 
             // TextBox1
@@ -331,13 +356,6 @@ namespace TWAINDemo
             // 
             // OK_button
             // 
-            this.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK_button.Location = new System.Drawing.Point(499, 443);
-            this.OK_button.Name = "OK_button";
-            this.OK_button.Size = new System.Drawing.Size(75, 23);
-            this.OK_button.TabIndex = 8;
-            this.OK_button.Text = "OK";
-            this.OK_button.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -394,26 +412,29 @@ namespace TWAINDemo
             // 
             // btnResetAllCaps
             // 
-            this.btnResetAllCaps.Location = new System.Drawing.Point(246, 182);
-            this.btnResetAllCaps.Name = "btnResetAllCaps";
-            this.btnResetAllCaps.Size = new System.Drawing.Size(127, 23);
-            this.btnResetAllCaps.TabIndex = 3;
-            this.btnResetAllCaps.Text = "Reset All Capabilities";
-            this.btnResetAllCaps.UseVisualStyleBackColor = true;
-            this.btnResetAllCaps.Click += new System.EventHandler(this.btnResetAllCaps_Click);
+            this.OKbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.OKbutton.Location = new System.Drawing.Point(490, 437);
+            this.OKbutton.Name = "OKbutton";
+            this.OKbutton.Size = new System.Drawing.Size(93, 23);
+            this.OKbutton.TabIndex = 8;
+            this.OKbutton.Text = "OK";
+            this.OKbutton.UseVisualStyleBackColor = true;
+            this.OKbutton.Click += new System.EventHandler(this.OKbutton_Click);
             // 
             // SourcePropsDlg
             // 
+            this.AcceptButton = this.OKbutton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1072, 479);
-            this.Controls.Add(this.OK_button);
+            this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.GroupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "SourcePropsDlg";
             this.Text = "Source Properties";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SourcePropsDlg_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SourcePropsDlg_FormClosed);
             this.Load += new System.EventHandler(this.SourcePropsDlg_Load);
             this.groupBox1.ResumeLayout(false);
@@ -454,7 +475,6 @@ namespace TWAINDemo
         private System.Windows.Forms.TextBox TextBox1;
         private System.Windows.Forms.TextBox TextBox2;
         private System.Windows.Forms.TextBox TextBox3;
-        private System.Windows.Forms.Button OK_button;
         private System.Windows.Forms.GroupBox groupBox4;
         internal System.Windows.Forms.TextBox txtJSON;
         private System.Windows.Forms.TextBox textBox5;
@@ -462,5 +482,8 @@ namespace TWAINDemo
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Button btnTestCap;
         private System.Windows.Forms.Button btnResetAllCaps;
+        private System.Windows.Forms.Button btnShowUIOnly;
+        private System.Windows.Forms.Button btnRefreshCustomData;
+        private System.Windows.Forms.Button OKbutton;
     }
 }

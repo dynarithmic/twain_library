@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Dynarithmic;
 
@@ -46,6 +41,8 @@ namespace TWAINDemo
                                  new AllTypes("Postscript Level 2 File", TwainAPI.DTWAIN_POSTSCRIPT2MULTI, "test.ps"),
                                  new AllTypes("PNG File", TwainAPI.DTWAIN_PNG, "test.png"),
                                  new AllTypes("Adobe Paintshop (PSD) File", TwainAPI.DTWAIN_PSD, "test.psd"),
+                                 new AllTypes("SVG File", TwainAPI.DTWAIN_SVG, "test.svg"),
+                                 new AllTypes("SVGZ File", TwainAPI.DTWAIN_SVGZ, "test.svgz"),
                                  new AllTypes("Text File", TwainAPI.DTWAIN_TEXTMULTI, "test.txt"),
                                  new AllTypes("TIFF (No compression)", TwainAPI.DTWAIN_TIFFNONEMULTI, "test.tif"),
                                  new AllTypes("TIFF (CCITT Group 3)", TwainAPI.DTWAIN_TIFFG3MULTI, "test.tif"),

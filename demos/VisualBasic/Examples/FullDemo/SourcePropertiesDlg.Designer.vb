@@ -23,6 +23,8 @@ Partial Class SourcePropertiesDlg
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.groupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnResetAllCaps = New System.Windows.Forms.Button()
+        Me.btnTestCap = New System.Windows.Forms.Button()
         Me.label8 = New System.Windows.Forms.Label()
         Me.label7 = New System.Windows.Forms.Label()
         Me.label6 = New System.Windows.Forms.Label()
@@ -43,6 +45,8 @@ Partial Class SourcePropertiesDlg
         Me.label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnShowUIOnly = New System.Windows.Forms.Button()
         Me.txtDSData = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -52,8 +56,6 @@ Partial Class SourcePropertiesDlg
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.btnTestCap = New System.Windows.Forms.Button()
-        Me.btnResetAllCaps = New System.Windows.Forms.Button()
         Me.groupBox2.SuspendLayout()
         Me.groupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -77,6 +79,24 @@ Partial Class SourcePropertiesDlg
         Me.groupBox2.TabIndex = 5
         Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Capability Info"
+        '
+        'btnResetAllCaps
+        '
+        Me.btnResetAllCaps.Location = New System.Drawing.Point(246, 181)
+        Me.btnResetAllCaps.Name = "btnResetAllCaps"
+        Me.btnResetAllCaps.Size = New System.Drawing.Size(127, 23)
+        Me.btnResetAllCaps.TabIndex = 4
+        Me.btnResetAllCaps.Text = "Reset All Capabilities"
+        Me.btnResetAllCaps.UseVisualStyleBackColor = True
+        '
+        'btnTestCap
+        '
+        Me.btnTestCap.Location = New System.Drawing.Point(246, 150)
+        Me.btnTestCap.Name = "btnTestCap"
+        Me.btnTestCap.Size = New System.Drawing.Size(104, 23)
+        Me.btnTestCap.TabIndex = 2
+        Me.btnTestCap.Text = "Test Capability..."
+        Me.btnTestCap.UseVisualStyleBackColor = True
         '
         'label8
         '
@@ -271,6 +291,8 @@ Partial Class SourcePropertiesDlg
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Button1)
+        Me.GroupBox3.Controls.Add(Me.btnShowUIOnly)
         Me.GroupBox3.Controls.Add(Me.txtDSData)
         Me.GroupBox3.Controls.Add(Me.TextBox1)
         Me.GroupBox3.Controls.Add(Me.TextBox2)
@@ -282,6 +304,24 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Custom Data"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(179, 366)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(83, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Refresh Data"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnShowUIOnly
+        '
+        Me.btnShowUIOnly.Location = New System.Drawing.Point(47, 366)
+        Me.btnShowUIOnly.Name = "btnShowUIOnly"
+        Me.btnShowUIOnly.Size = New System.Drawing.Size(97, 23)
+        Me.btnShowUIOnly.TabIndex = 3
+        Me.btnShowUIOnly.Text = "Show UI Only..."
+        Me.btnShowUIOnly.UseVisualStyleBackColor = True
+        '
         'txtDSData
         '
         Me.txtDSData.Location = New System.Drawing.Point(7, 19)
@@ -289,7 +329,7 @@ Partial Class SourcePropertiesDlg
         Me.txtDSData.Name = "txtDSData"
         Me.txtDSData.ReadOnly = True
         Me.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtDSData.Size = New System.Drawing.Size(304, 380)
+        Me.txtDSData.Size = New System.Drawing.Size(304, 339)
         Me.txtDSData.TabIndex = 2
         '
         'TextBox1
@@ -375,24 +415,6 @@ Partial Class SourcePropertiesDlg
         Me.TextBox7.TabIndex = 1
         Me.TextBox7.TabStop = False
         '
-        'btnTestCap
-        '
-        Me.btnTestCap.Location = New System.Drawing.Point(246, 150)
-        Me.btnTestCap.Name = "btnTestCap"
-        Me.btnTestCap.Size = New System.Drawing.Size(104, 23)
-        Me.btnTestCap.TabIndex = 2
-        Me.btnTestCap.Text = "Test Capability..."
-        Me.btnTestCap.UseVisualStyleBackColor = True
-        '
-        'btnResetAllCaps
-        '
-        Me.btnResetAllCaps.Location = New System.Drawing.Point(246, 181)
-        Me.btnResetAllCaps.Name = "btnResetAllCaps"
-        Me.btnResetAllCaps.Size = New System.Drawing.Size(127, 23)
-        Me.btnResetAllCaps.TabIndex = 4
-        Me.btnResetAllCaps.Text = "Reset All Capabilities"
-        Me.btnResetAllCaps.UseVisualStyleBackColor = True
-        '
         'SourcePropertiesDlg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -453,4 +475,6 @@ Partial Class SourcePropertiesDlg
     Private WithEvents TextBox7 As Windows.Forms.TextBox
     Friend WithEvents btnTestCap As Windows.Forms.Button
     Private WithEvents btnResetAllCaps As Windows.Forms.Button
+    Friend WithEvents btnShowUIOnly As Windows.Forms.Button
+    Friend WithEvents Button1 As Windows.Forms.Button
 End Class

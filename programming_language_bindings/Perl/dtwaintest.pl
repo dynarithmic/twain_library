@@ -18,7 +18,7 @@ my $DTWAIN_AcquireFile = new Win32::API($dtwain_dllName, 'DTWAIN_AcquireFile', '
 my $DTWAIN_ArrayDestroy = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayDestroy', 'N', 'I');
 my $DTWAIN_ArrayGetAtLong = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetAtLong', 'NiP', 'I');
 my $DTWAIN_ArrayGetCount = new Win32::API($dtwain_dllName, 'DTWAIN_ArrayGetCount', 'N', 'i');
-my $DTWAIN_EnumSupportedCapsEx2 = new Win32::API($dtwain_dllName, 'DTWAIN_EnumSupportedCapsEx2', 'N', 'N');
+my $DTWAIN_EnumSupportedCapsEx = new Win32::API($dtwain_dllName, 'DTWAIN_EnumSupportedCapsEx', 'N', 'N');
 my $DTWAIN_GetNameFromCapA = new Win32::API($dtwain_dllName, 'DTWAIN_GetNameFromCapA', 'iPi', 'i');
 my $DTWAIN_GetSourceProductNameA = new Win32::API($dtwain_dllName, 'DTWAIN_GetSourceProductNameA', 'NPi', 'i');
 my $DTWAIN_IsTwainAvailable = new Win32::API($dtwain_dllName, 'DTWAIN_IsTwainAvailable', '', 'I');
@@ -51,9 +51,9 @@ if ( $isAvail == 1 )
             my $dtwain_array = 0;
 
             # Note that the returned value is a DTWAIN_ARRAY.
-            # For Perl, it is easier to use DTWAIN_EnumSupportedCapsEx2, since there is
+            # For Perl, it is easier to use DTWAIN_EnumSupportedCapsEx, since there is
             # no need to pack/unpack an integer if DTWAIN_EnumSupportedCaps were used instead.
-            $dtwain_array = $DTWAIN_EnumSupportedCapsEx2->Call($TwainSource);
+            $dtwain_array = $DTWAIN_EnumSupportedCapsEx->Call($TwainSource);
 
             # Get the number of items in the array
             my $arrcount = $DTWAIN_ArrayGetCount->Call($dtwain_array);
@@ -80,7 +80,7 @@ if ( $isAvail == 1 )
             $DTWAIN_ArrayDestroy->Call($dtwain_array);
 
             # Acquire the image
-            $DTWAIN_AcquireFile->Call($TwainSource, 'c:\saved_images\testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
+            $DTWAIN_AcquireFile->Call($TwainSource, 'testperl.bmp', DTWAIN_BMP, DTWAIN_USENATIVE + DTWAIN_USELONGNAME,
                                       DTWAIN_PT_DEFAULT, 1, 1, 1, 0);
        }
    }

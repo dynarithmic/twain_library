@@ -30,10 +30,11 @@ static char g_szInput[32767];
 static LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 static void EnableSetCapWindows(HWND hWnd, int bEnable);
 static void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue);
-static void SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue);
+static LONG SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue);
 static void TestGetCap(HWND hWnd, LONG capValue);
 static void TestSetCap(HWND hWnd, LONG capValue);
 static LONG InitTestControls(HWND hWnd, const char* szName);
+static void RefreshCustomDSData(HWND hWndDSData);
 
 LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 { 
@@ -59,6 +60,7 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             HWND hWndNumExtendedCaps = GetDlgItem(hDlg, IDC_edExtendedCaps);
             HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
             HWND hWndJSONDetails = GetDlgItem(hDlg, IDC_edJSONDetails);
+            HWND hWndShowUIOnly = GetDlgItem(hDlg, IDC_btnShowUIIOnly);
             int maxTextLength = 0;
             int curStringLength;
             HDC hdcList = GetDC(hWndCaps);
@@ -108,32 +110,14 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             wsprintf(szBuf, _T("%d"), (int)DTWAIN_ArrayGetCount(CapArray));
             SetWindowText(hWndNumExtendedCaps, szBuf);
 
-            BYTE* szData = NULL;
-            LONG actualSize;
-            /* First, get the size of the Source's custom DS data */
-            HANDLE h = DTWAIN_GetCustomDSData(g_CurrentSource, NULL, 0, &actualSize, DTWAINGCD_COPYDATA);
-            if (h)
-            {
-                /* Allocate memory for the data.  We add an extra byte,
-                   since the data is not guaranteed to be null-terminated */
-                szData = malloc((actualSize + 1) * sizeof(BYTE));
-                if (szData)
-                {
-                    /* Fill the memory with 0 */
-                    memset(szData, 0, actualSize + 1);
-
-                    /* Second call actually gets the data */
-                    DTWAIN_GetCustomDSData(g_CurrentSource, szData, actualSize, &actualSize, DTWAINGCD_COPYDATA);
-                    SetWindowTextA(hWndDSData, szData);
-                    free(szData);
-                }
-            }
+            RefreshCustomDSData(hWndDSData);
 
             /* Get JSON details of the Source */
             {
                 LONG numChars = DTWAIN_GetSourceDetailsA(szBufName, NULL, 0, 2, TRUE);
                 if (numChars > 0)
                 {
+					BYTE* szData = NULL;
                     szData = malloc(numChars + 1);
                     if (szData)
                     {
@@ -155,6 +139,8 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 }
             }
             DTWAIN_ArrayDestroy(CapArray);
+            // Get whether Source supports "Show UI Only"
+            EnableWindow(hWndShowUIOnly, DTWAIN_IsUIOnlySupported(g_CurrentSource));
             return TRUE;
         }
 
@@ -168,6 +154,11 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 /* Quit the dialog */
                 case IDOK:
                 case IDCANCEL:
+                    if (DTWAIN_IsSourceAcquiringEx(g_CurrentSource, TRUE))
+                    {
+                        MessageBoxA(NULL, "You must close the Source user interface before leaving this dialog", "Information", MB_ICONSTOP);
+                        return FALSE;
+                    }
                     /* User may have done a lot of capability testing, 
                     so make sure we reset all the caps to default when we return */
                     DTWAIN_SetAllCapsToDefault(g_CurrentSource);
@@ -183,6 +174,22 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 break;
                 case IDC_btnResetCapabilities:
                     DTWAIN_SetAllCapsToDefault(g_CurrentSource);
+                break;
+                case IDC_btnShowUIIOnly:
+                {
+                    HWND hWndShowUIOnly = GetDlgItem(hDlg, IDC_btnShowUIIOnly);
+					HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
+                    EnableWindow(hWndShowUIOnly, FALSE);
+                    DTWAIN_ShowUIOnly(g_CurrentSource);
+                    EnableWindow(hWndShowUIOnly, TRUE);
+                    RefreshCustomDSData(hWndDSData);
+                }
+				break;
+                case IDC_btnRefreshShowUIOnly:
+                {
+					HWND hWndDSData = GetDlgItem(hDlg, IDC_edDSData);
+					RefreshCustomDSData(hWndDSData);
+                }
                 break;
             }
         }
@@ -200,6 +207,7 @@ void DisplayTestCapDlg(HWND parent, const char* szCapName)
 LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static LONG curCapValue;
+    LONG capOpts = 0;
     switch (message)
     {
         case WM_INITDIALOG:
@@ -239,12 +247,28 @@ LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPAR
                 {
                     if (nNotification == CBN_SELCHANGE)
                     {
+                        HWND hWndTestSet = GetDlgItem(hDlg, IDC_btnTestSet);
+                        EnableWindow(hWndTestSet, TRUE);
+                        TCHAR szGetType[100];
                         /* This is the MSG_RESET */
                         LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETCURSEL, 0, 0);
+                        SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                        capOpts = SetTestSelection2(hDlg, szGetType, curCapValue);
                         if (nCurSel == 1)
+                        {
                             EnableSetCapWindows(hDlg, FALSE);
+                            break;
+                        }
                         else
                             EnableSetCapWindows(hDlg, TRUE);
+                        if (nCurSel == 2)
+                        {
+                            if (!(capOpts & DTWAIN_CO_SETCONSTRAINT))
+                            {
+                                EnableSetCapWindows(hDlg, FALSE);
+                                EnableWindow(hWndTestSet, FALSE);
+                            }
+                        }
                     }
                 }
                 break;
@@ -394,7 +418,7 @@ void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue)
         SendMessage(hWndDataTypes, CB_SETCURSEL, nPos, 0);
 }
 
-void SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue)
+LONG SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue)
 {
     HWND hWndSetTypes = GetDlgItem(hWnd, IDC_cmbSetTypes);
     HWND hWndContainerTypesSet = GetDlgItem(hWnd, IDC_cmbContainerSet);
@@ -455,9 +479,9 @@ void SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue)
             int i = 0;
             for (i = 0; i < numWindows; ++i)
                 EnableWindow(allWindows[i], FALSE);
-            return;
         }
     }
+    return capOpts;
 }
 
 void TestGetCap(HWND hWnd, LONG capValue)
@@ -784,5 +808,30 @@ void TestSetCap(HWND hWnd, LONG capValue)
          /* Display results */
          SendMessageW(hWndResults, LB_ADDSTRING, 0, (LPARAM)szErrorText);
          SendMessageW(hWndResults, LB_ADDSTRING, 0, (LPARAM)szErrMessage);
+    }
+}
+
+void RefreshCustomDSData(HWND hWndDSData)
+{
+    SetWindowTextA(hWndDSData, "");
+    BYTE* szData = NULL;
+    LONG actualSize;
+    /* First, get the size of the Source's custom DS data */
+    HANDLE h = DTWAIN_GetCustomDSData(g_CurrentSource, NULL, 0, &actualSize, DTWAINGCD_COPYDATA);
+    if (h)
+    {
+        /* Allocate memory for the data.  We add an extra byte,
+           since the data is not guaranteed to be null-terminated */
+        szData = malloc((actualSize + 1) * sizeof(BYTE));
+        if (szData)
+        {
+            /* Fill the memory with 0 */
+            memset(szData, 0, actualSize + 1);
+
+            /* Second call actually gets the data */
+            DTWAIN_GetCustomDSData(g_CurrentSource, szData, actualSize, &actualSize, DTWAINGCD_COPYDATA);
+            SetWindowTextA(hWndDSData, szData);
+            free(szData);
+        }
     }
 }

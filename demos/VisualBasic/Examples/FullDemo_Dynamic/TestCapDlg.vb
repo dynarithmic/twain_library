@@ -112,7 +112,7 @@ Public Class TestCapDlg
         End If
     End Sub
 
-    Private Sub SetTestSelection2(setType As String)
+    Private Function SetTestSelection2(setType As String) As Integer
         Dim controlsToToggle As Control() =
         {
             lblSetOperation,
@@ -137,7 +137,7 @@ Public Class TestCapDlg
                 For Each ctrl As Control In controlsToToggle
                     ctrl.Enabled = False
                 Next
-                Return ' Nothing else to do, since this capability does Not support having it set
+                Return capOpts ' Nothing else to do, since this capability does Not support having it set
             End If
         End If
 
@@ -176,7 +176,8 @@ Public Class TestCapDlg
         Else
             cmbDataTypeSet.SelectedIndex = nPos
         End If
-    End Sub
+        Return capOpts
+    End Function
 
     Private Sub TestSetCap()
         lstResultsSet.Items.Clear()
@@ -477,11 +478,21 @@ Public Class TestCapDlg
     End Sub
 
     Private Sub cmbSetTypes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSetTypes.SelectedIndexChanged
+        btnTestSet.Enabled = True
+        Dim capOpts As Integer
+        capOpts = SetTestSelection2(cmbSetTypes.SelectedItem.ToString())
         ' This Is the MSG_RESET 
         If cmbSetTypes.SelectedIndex = 1 Then
             EnableSetCapWindows(False)
         Else
             EnableSetCapWindows(True)
+        End If
+        ' Now test the MSG_SETCONSTRAINT
+        If cmbSetTypes.SelectedIndex = 2 Then
+            If (capOpts And DTWAINAPI.DTWAIN_CO_SETCONSTRAINT) = 0 Then
+                EnableSetCapWindows(False)
+                btnTestSet.Enabled = False
+            End If
         End If
     End Sub
 

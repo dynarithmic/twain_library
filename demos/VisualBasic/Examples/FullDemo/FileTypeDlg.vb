@@ -46,6 +46,8 @@ Public Class FileTypeDlg
      New AllTypes("Postscript Level 2 File", DTWAINAPI.DTWAIN_POSTSCRIPT2MULTI, "test.ps"),
      New AllTypes("PNG File", DTWAINAPI.DTWAIN_PNG, "test.png"),
      New AllTypes("Adobe Paintshop (PSD) File", DTWAINAPI.DTWAIN_PSD, "test.psd"),
+     New AllTypes("SVG File", DTWAINAPI.DTWAIN_SVG, "test.svg"),
+     New AllTypes("SVGZ File", DTWAINAPI.DTWAIN_SVGZ, "test.svgz"),
      New AllTypes("Text File", DTWAINAPI.DTWAIN_TEXTMULTI, "test.txt"),
      New AllTypes("TIFF (No compression)", DTWAINAPI.DTWAIN_TIFFNONEMULTI, "test.tif"),
      New AllTypes("TIFF (CCITT Group 3)", DTWAINAPI.DTWAIN_TIFFG3MULTI, "test.tif"),

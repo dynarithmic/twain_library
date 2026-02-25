@@ -1,5 +1,38 @@
 DTWAIN Version changes
 
+5.8.1
+
+- Added SVG and SVGZ file formats to DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx().
+  The constants are DTWAIN_SVG and DTWAIN_SVGZ for SVG and SVGZ types, respectively.
+  
+  The SVG that is produced will be vectorized for black=and-white, 1 bit-per-pixel
+  images, and for bit depths greater than 1, the SVG will consist of embedded base-64 
+  encoded PNG data.
+
+- Added DTWAIN_TN_QUERYACQUIREPAGES notification to allow an application to stop acquiring
+  pages during the acquisition process.  Returning a value of 0 from this notification 
+  will stop the acquisition of pages.  Note that this does not guarantee that the
+  physical device (if using a document feeder) will stop feeding pages.
+
+- Fix various issues with DTWAIN_SetCapValues() using the MSG_SETCONSTRAINT set type.
+
+- Eliminate extraneous TWAIN messages from log files if DTWAIN_LOG_ISTWAINMSG option 
+  is turned off.  This change reduces the size of log files by a very large margin.
+
+- Determine at runtime if the client application requires GetMessage() processing instead
+  of PeekMessage() processing when acquiring images.  Some script and automation 
+  applications (for example, Macro Scheduler and others) may require GetMessage() 
+  processing, since the internal architecture of these applications require a blocking 
+  message queue, which GetMessage() provides. 
+
+- Send DTWAIN_TN_SOURCEDETAILS notifications to the application when DTWAIN_GetSessionDetails()
+  or DTWAIN_GetSourceDetails() is called.  The LPARAM of the notification will be a pointer to
+  a null terminated ASCII string that represents the Product Name of the Source that is being processed.
+  The notification is sent for each Source that is being processed during the calls to 
+  DTWAIN_GetSourceDetails() or DTWAIN_GetSessionDetails().  
+
+
+
 5.8.0
 
 - Improved TWAIN Driver Compatibility

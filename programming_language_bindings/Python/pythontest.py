@@ -1,5 +1,5 @@
 from ctypes import *
-import dtwainapi
+import dtwainapi as dtwain
 import struct
 import ctypes as ct
 
@@ -17,7 +17,8 @@ def test_dtwain():
     dtwain_dll.DTWAIN_SysInitialize()
     
     # Select a TWAIN source
-    TwainSource = dtwain_dll.DTWAIN_SelectSource()
+    TwainSource = dtwain_dll.DTWAIN_SelectSource2(ct.c_void_p(0), "Python Select Source", 0, 0, dtwain.DTWAIN_DLG_CENTER_CURRENT_MONITOR | dtwain.DTWAIN_DLG_TOPMOSTWINDOW)
+
     if TwainSource:
 
         # Display the product name of the Source
