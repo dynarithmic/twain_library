@@ -7,7 +7,7 @@ You must add to your Delphi project one of the unit files below, depending on th
 | dtwain32.pas | 32-bit ANSI using dtwain32.dll |
 | dtwain32d.pas | 32-bit Debug ANSI using dtwain32d.dll |
 | dtwain32u.pas | 32-bit Unicode using dtwain32u.dll |
-| dtwain32ud.pas | 32-bit Debug Unicode using dtwain32u.dll |
+| dtwain32ud.pas | 32-bit Debug Unicode using dtwain32ud.dll |
 | dtwain64.pas | 64-bit ANSI using dtwain64.dll |
 | dtwain64d.pas | 64-bit Debug ANSI using dtwain64d.dll |
 | dtwain64u.pas | 64-bit Unicode using dtwain64u.dll |
