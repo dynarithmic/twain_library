@@ -21,7 +21,7 @@ In this case, you would add to your Visual Basic project one of the files below,
 | dtwain32.vb | 32-bit ANSI using dtwain32.dll |
 | dtwain32d.vb | 32-bit Debug ANSI using dtwain32d.dll |
 | dtwain32u.vb | 32-bit Unicode using dtwain32u.dll |
-| dtwain32ud.vb | 32-bit Debug Unicode using dtwain32u.dll |
+| dtwain32ud.vb | 32-bit Debug Unicode using dtwain32ud.dll |
 | dtwain64.vb | 64-bit ANSI using dtwain64.dll |
 | dtwain64d.vb | 64-bit Debug ANSI using dtwain64d.dll |
 | dtwain64u.vb | 64-bit Unicode using dtwain64u.dll |
