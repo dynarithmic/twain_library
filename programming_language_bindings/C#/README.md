@@ -27,7 +27,7 @@ In this case, you would add to your C# project one of the files below, depending
 | dtwain32.cs | 32-bit ANSI using dtwain32.dll |
 | dtwain32d.cs | 32-bit Debug ANSI using dtwain32d.dll |
 | dtwain32u.cs | 32-bit Unicode using dtwain32u.dll |
-| dtwain32ud.cs | 32-bit Debug Unicode using dtwain32u.dll |
+| dtwain32ud.cs | 32-bit Debug Unicode using dtwain32ud.dll |
 | dtwain64.cs | 64-bit ANSI using dtwain64.dll |
 | dtwain64d.cs | 64-bit Debug ANSI using dtwain64d.dll |
 | dtwain64u.cs | 64-bit Unicode using dtwain64u.dll |
