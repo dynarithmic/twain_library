@@ -11,8 +11,14 @@ DTWAIN Version changes
 
 - Added DTWAIN_TN_QUERYACQUIREPAGES notification to allow an application to stop acquiring
   pages during the acquisition process.  Returning a value of 0 from this notification 
-  will stop the acquisition of pages.  Note that this does not guarantee that the
-  physical device (if using a document feeder) will stop feeding pages.
+  will stop the acquisition of pages. 
+
+  Note that returning 0 does not guarantee that the physical device (if using a 
+  document feeder) will stop feeding pages.  Instead, the subsequent pages being fed 
+  will not be processed by DTWAIN (for example, no bitmaps created, no further pages added 
+  to multipage image files, etc.), and will return the acquisition process back to either
+  showing the user-interface (if the user-interface was shown), or back to the caller of
+  the DTWAIN_Acquire...() function if no user-interface was shown.
 
 - Fix various issues with DTWAIN_SetCapValues() using the MSG_SETCONSTRAINT set type.
 
@@ -28,8 +34,11 @@ DTWAIN Version changes
 - Send DTWAIN_TN_SOURCEDETAILS notifications to the application when DTWAIN_GetSessionDetails()
   or DTWAIN_GetSourceDetails() is called.  The LPARAM of the notification will be a pointer to
   a null terminated ASCII string that represents the Product Name of the Source that is being processed.
-  The notification is sent for each Source that is being processed during the calls to 
-  DTWAIN_GetSourceDetails() or DTWAIN_GetSessionDetails().  
+
+- Changed function signature of DTWAIN_EnumSupportedCapsEx().  The function will now return
+  a DTWAIN_ARRAY that consists of all of the device's capabilities.  If your application called 
+  this API functions, you will have to rebuild your application to comply with the new 
+  function signature.
 
 
 
