@@ -2054,8 +2054,10 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetBatteryMinutes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
     Public Declare Function DTWAIN_GetBatteryPercent Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
     Public Declare Function DTWAIN_GetBitDepth Lib "dtwain32.dll" (Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetBitDepthEx Lib "dtwain32.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetBlankPageAutoDetection Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetBrightness Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
+    Public Declare Function DTWAIN_GetBrightnessEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.Double
     Public Declare Ansi Function DTWAIN_GetBrightnessString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Brightness As StringBuilder) As Integer
     Public Declare Function DTWAIN_GetBufferedTransferInfo Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Compression As UInteger, ByRef BytesPerRow As UInteger, ByRef Columns As UInteger, ByRef Rows As UInteger, ByRef XOffset As UInteger, ByRef YOffset As UInteger, ByRef Flags As UInteger, ByRef BytesWritten As UInteger, ByRef MemoryLength As UInteger) As System.IntPtr
     Public Declare Function DTWAIN_GetCallback Lib "dtwain32.dll" () As DTwainCallback
@@ -2074,9 +2076,11 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetCaption Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Caption As StringBuilder) As Integer
     Public Declare Function DTWAIN_GetCompressionSize Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lBytes As Integer) As Integer
     Public Declare Function DTWAIN_GetCompressionType Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetCompressionTypeEx Lib "dtwain32.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetConditionCodeString Lib "dtwain32.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetConstantFromTwainName Lib "dtwain32.dll" (lpszBuffer As String) As Integer
     Public Declare Function DTWAIN_GetContrast Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
+    Public Declare Function DTWAIN_GetContrastEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.Double
     Public Declare Ansi Function DTWAIN_GetContrastString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Contrast As StringBuilder) As Integer
     Public Declare Function DTWAIN_GetCountry Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_GetCurrentAcquiredImage Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
@@ -2124,12 +2128,14 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetImageInfo Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetImageInfoString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControl Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetJobControlEx Lib "dtwain32.dll" (Source As System.IntPtr, bGetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJpegValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
     Public Declare Function DTWAIN_GetJpegXRValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
     Public Declare Function DTWAIN_GetLanguage Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_GetLastError Lib "dtwain32.dll" () As Integer
     Public Declare Ansi Function DTWAIN_GetLibraryPath Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
     Public Declare Function DTWAIN_GetLightPath Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
+    Public Declare Function DTWAIN_GetLightPathEx Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetLightSource Lib "dtwain32.dll" (Source As System.IntPtr, ByRef LightSource As Integer) As Integer
     Public Declare Function DTWAIN_GetLightSources Lib "dtwain32.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetLightSourcesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
@@ -2158,6 +2164,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetOCRTextInfoLongEx Lib "dtwain32.dll" (OCRTextInfo As System.IntPtr, nWhichItem As Integer, ByRef pInfo As Integer, bufSize As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetOCRVersionInfo Lib "dtwain32.dll" (Engine As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> buffer As StringBuilder, maxBufSize As Integer) As Integer
     Public Declare Function DTWAIN_GetOrientation Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetOrientationEx Lib "dtwain32.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetOverscan Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPDFTextElementFloat Lib "dtwain32.dll" (TextElement As System.IntPtr, ByRef val1 As System.Double, ByRef val2 As System.Double, Flags As Integer) As Integer
     Public Declare Function DTWAIN_GetPDFTextElementLong Lib "dtwain32.dll" (TextElement As System.IntPtr, ByRef val1 As Integer, ByRef val2 As Integer, Flags As Integer) As Integer
@@ -2173,15 +2180,21 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetPixelFlavor Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
     Public Declare Function DTWAIN_GetPixelType Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPrinter Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPrinterEx Lib "dtwain32.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPrinterStartNumber Lib "dtwain32.dll" (Source As System.IntPtr, ByRef nStart As Integer) As Integer
+    Public Declare Function DTWAIN_GetPrinterStartNumberEx Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetPrinterStringMode Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPrinterStringModeEx Lib "dtwain32.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPrinterStrings Lib "dtwain32.dll" (Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_GetPrinterStringsEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Ansi Function DTWAIN_GetPrinterSuffixString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetRegisteredMsg Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_GetResolution Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
+    Public Declare Function DTWAIN_GetResolutionEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.Double
     Public Declare Ansi Function DTWAIN_GetResolutionString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Resolution As StringBuilder) As Integer
     Public Declare Ansi Function DTWAIN_GetResourceString Lib "dtwain32.dll" (ResourceID As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetRotation Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
+    Public Declare Function DTWAIN_GetRotationEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.Double
     Public Declare Ansi Function DTWAIN_GetRotationString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
     Public Declare Ansi Function DTWAIN_GetSaveFileName Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSessionDetails Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
@@ -2195,6 +2208,7 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetSourceProductFamily Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetSourceProductName Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetSourceUnit Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
+    Public Declare Function DTWAIN_GetSourceUnitEx Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Ansi Function DTWAIN_GetSourceVersionInfo Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetSourceVersionNumber Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMajor As Integer, ByRef pMinor As Integer) As Integer
     Public Declare Function DTWAIN_GetStaticLibVersion Lib "dtwain32.dll" () As Integer

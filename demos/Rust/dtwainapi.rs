@@ -433,8 +433,10 @@ type DtwaingetauthorwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetbatteryminutesFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetbatterypercentFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetbitdepthFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetbitdepthexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetblankpageautodetectionFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetbrightnessFunc = unsafe extern "C" fn(*mut c_void,*mut f64) -> i32;
+type DtwaingetbrightnessexFunc = unsafe extern "C" fn(*mut c_void) -> f64;
 type DtwaingetbrightnessstringFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetbrightnessstringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetbrightnessstringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -459,6 +461,7 @@ type DtwaingetcaptionaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i3
 type DtwaingetcaptionwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetcompressiontypeexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetconditioncodestringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetconditioncodestringaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
 type DtwaingetconditioncodestringwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -466,6 +469,7 @@ type DtwaingetconstantfromtwainnameFunc = unsafe extern "C" fn(*const u16) -> i3
 type DtwaingetconstantfromtwainnameaFunc = unsafe extern "C" fn(*const c_char) -> i32;
 type DtwaingetconstantfromtwainnamewFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingetcontrastFunc = unsafe extern "C" fn(*mut c_void,*mut f64) -> i32;
+type DtwaingetcontrastexFunc = unsafe extern "C" fn(*mut c_void) -> f64;
 type DtwaingetcontraststringFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcontraststringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetcontraststringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -539,6 +543,7 @@ type DtwaingetimageinfostringFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*m
 type DtwaingetimageinfostringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,*mut c_char,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetimageinfostringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*mut u16,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetjobcontrolFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetjobcontrolexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetjpegvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
 type DtwaingetjpegxrvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
 type DtwaingetlanguageFunc = unsafe extern "C" fn() -> i32;
@@ -547,6 +552,7 @@ type DtwaingetlibrarypathFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetlibrarypathaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetlibrarypathwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetlightpathFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetlightpathexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetlightsourceFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetlightsourcesFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
 type DtwaingetlightsourcesexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
@@ -591,6 +597,7 @@ type DtwaingetocrversioninfoFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32
 type DtwaingetocrversioninfoaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32) -> i32;
 type DtwaingetocrversioninfowFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetorientationFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetorientationexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetoverscanFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetpdftextelementfloatFunc = unsafe extern "C" fn(*mut c_void,*mut f64,*mut f64,i32) -> i32;
 type DtwaingetpdftextelementlongFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32,i32) -> i32;
@@ -612,14 +619,19 @@ type DtwaingetpatchtimeoutFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) 
 type DtwaingetpixelflavorFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetpixeltypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32,i32) -> i32;
 type DtwaingetprinterFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetprinterexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetprinterstartnumberFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetprinterstartnumberexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetprinterstringmodeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
+type DtwaingetprinterstringmodeexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetprinterstringsFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
+type DtwaingetprinterstringsexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwaingetprintersuffixstringFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetprintersuffixstringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32) -> i32;
 type DtwaingetprintersuffixstringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetregisteredmsgFunc = unsafe extern "C" fn() -> i32;
 type DtwaingetresolutionFunc = unsafe extern "C" fn(*mut c_void,*mut f64) -> i32;
+type DtwaingetresolutionexFunc = unsafe extern "C" fn(*mut c_void) -> f64;
 type DtwaingetresolutionstringFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetresolutionstringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetresolutionstringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -627,6 +639,7 @@ type DtwaingetresourcestringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32
 type DtwaingetresourcestringaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
 type DtwaingetresourcestringwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetrotationFunc = unsafe extern "C" fn(*mut c_void,*mut f64) -> i32;
+type DtwaingetrotationexFunc = unsafe extern "C" fn(*mut c_void) -> f64;
 type DtwaingetrotationstringFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetrotationstringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetrotationstringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -659,6 +672,7 @@ type DtwaingetsourceproductnameFunc = unsafe extern "C" fn(*mut c_void,*mut u16,
 type DtwaingetsourceproductnameaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32) -> i32;
 type DtwaingetsourceproductnamewFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetsourceunitFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetsourceunitexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetsourceversioninfoFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
 type DtwaingetsourceversioninfoaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32) -> i32;
 type DtwaingetsourceversioninfowFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32) -> i32;
@@ -1555,8 +1569,10 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetBatteryMinutesFunc: Symbol<'a, DtwaingetbatteryminutesFunc>,
     DTWAIN_GetBatteryPercentFunc: Symbol<'a, DtwaingetbatterypercentFunc>,
     DTWAIN_GetBitDepthFunc: Symbol<'a, DtwaingetbitdepthFunc>,
+    DTWAIN_GetBitDepthExFunc: Symbol<'a, DtwaingetbitdepthexFunc>,
     DTWAIN_GetBlankPageAutoDetectionFunc: Symbol<'a, DtwaingetblankpageautodetectionFunc>,
     DTWAIN_GetBrightnessFunc: Symbol<'a, DtwaingetbrightnessFunc>,
+    DTWAIN_GetBrightnessExFunc: Symbol<'a, DtwaingetbrightnessexFunc>,
     DTWAIN_GetBrightnessStringFunc: Symbol<'a, DtwaingetbrightnessstringFunc>,
     DTWAIN_GetBrightnessStringAFunc: Symbol<'a, DtwaingetbrightnessstringaFunc>,
     DTWAIN_GetBrightnessStringWFunc: Symbol<'a, DtwaingetbrightnessstringwFunc>,
@@ -1581,6 +1597,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetCaptionWFunc: Symbol<'a, DtwaingetcaptionwFunc>,
     DTWAIN_GetCompressionSizeFunc: Symbol<'a, DtwaingetcompressionsizeFunc>,
     DTWAIN_GetCompressionTypeFunc: Symbol<'a, DtwaingetcompressiontypeFunc>,
+    DTWAIN_GetCompressionTypeExFunc: Symbol<'a, DtwaingetcompressiontypeexFunc>,
     DTWAIN_GetConditionCodeStringFunc: Symbol<'a, DtwaingetconditioncodestringFunc>,
     DTWAIN_GetConditionCodeStringAFunc: Symbol<'a, DtwaingetconditioncodestringaFunc>,
     DTWAIN_GetConditionCodeStringWFunc: Symbol<'a, DtwaingetconditioncodestringwFunc>,
@@ -1588,6 +1605,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetConstantFromTwainNameAFunc: Symbol<'a, DtwaingetconstantfromtwainnameaFunc>,
     DTWAIN_GetConstantFromTwainNameWFunc: Symbol<'a, DtwaingetconstantfromtwainnamewFunc>,
     DTWAIN_GetContrastFunc: Symbol<'a, DtwaingetcontrastFunc>,
+    DTWAIN_GetContrastExFunc: Symbol<'a, DtwaingetcontrastexFunc>,
     DTWAIN_GetContrastStringFunc: Symbol<'a, DtwaingetcontraststringFunc>,
     DTWAIN_GetContrastStringAFunc: Symbol<'a, DtwaingetcontraststringaFunc>,
     DTWAIN_GetContrastStringWFunc: Symbol<'a, DtwaingetcontraststringwFunc>,
@@ -1661,6 +1679,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetImageInfoStringAFunc: Symbol<'a, DtwaingetimageinfostringaFunc>,
     DTWAIN_GetImageInfoStringWFunc: Symbol<'a, DtwaingetimageinfostringwFunc>,
     DTWAIN_GetJobControlFunc: Symbol<'a, DtwaingetjobcontrolFunc>,
+    DTWAIN_GetJobControlExFunc: Symbol<'a, DtwaingetjobcontrolexFunc>,
     DTWAIN_GetJpegValuesFunc: Symbol<'a, DtwaingetjpegvaluesFunc>,
     DTWAIN_GetJpegXRValuesFunc: Symbol<'a, DtwaingetjpegxrvaluesFunc>,
     DTWAIN_GetLanguageFunc: Symbol<'a, DtwaingetlanguageFunc>,
@@ -1669,6 +1688,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetLibraryPathAFunc: Symbol<'a, DtwaingetlibrarypathaFunc>,
     DTWAIN_GetLibraryPathWFunc: Symbol<'a, DtwaingetlibrarypathwFunc>,
     DTWAIN_GetLightPathFunc: Symbol<'a, DtwaingetlightpathFunc>,
+    DTWAIN_GetLightPathExFunc: Symbol<'a, DtwaingetlightpathexFunc>,
     DTWAIN_GetLightSourceFunc: Symbol<'a, DtwaingetlightsourceFunc>,
     DTWAIN_GetLightSourcesFunc: Symbol<'a, DtwaingetlightsourcesFunc>,
     DTWAIN_GetLightSourcesExFunc: Symbol<'a, DtwaingetlightsourcesexFunc>,
@@ -1713,6 +1733,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetOCRVersionInfoAFunc: Symbol<'a, DtwaingetocrversioninfoaFunc>,
     DTWAIN_GetOCRVersionInfoWFunc: Symbol<'a, DtwaingetocrversioninfowFunc>,
     DTWAIN_GetOrientationFunc: Symbol<'a, DtwaingetorientationFunc>,
+    DTWAIN_GetOrientationExFunc: Symbol<'a, DtwaingetorientationexFunc>,
     DTWAIN_GetOverscanFunc: Symbol<'a, DtwaingetoverscanFunc>,
     DTWAIN_GetPDFTextElementFloatFunc: Symbol<'a, DtwaingetpdftextelementfloatFunc>,
     DTWAIN_GetPDFTextElementLongFunc: Symbol<'a, DtwaingetpdftextelementlongFunc>,
@@ -1734,14 +1755,19 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetPixelFlavorFunc: Symbol<'a, DtwaingetpixelflavorFunc>,
     DTWAIN_GetPixelTypeFunc: Symbol<'a, DtwaingetpixeltypeFunc>,
     DTWAIN_GetPrinterFunc: Symbol<'a, DtwaingetprinterFunc>,
+    DTWAIN_GetPrinterExFunc: Symbol<'a, DtwaingetprinterexFunc>,
     DTWAIN_GetPrinterStartNumberFunc: Symbol<'a, DtwaingetprinterstartnumberFunc>,
+    DTWAIN_GetPrinterStartNumberExFunc: Symbol<'a, DtwaingetprinterstartnumberexFunc>,
     DTWAIN_GetPrinterStringModeFunc: Symbol<'a, DtwaingetprinterstringmodeFunc>,
+    DTWAIN_GetPrinterStringModeExFunc: Symbol<'a, DtwaingetprinterstringmodeexFunc>,
     DTWAIN_GetPrinterStringsFunc: Symbol<'a, DtwaingetprinterstringsFunc>,
+    DTWAIN_GetPrinterStringsExFunc: Symbol<'a, DtwaingetprinterstringsexFunc>,
     DTWAIN_GetPrinterSuffixStringFunc: Symbol<'a, DtwaingetprintersuffixstringFunc>,
     DTWAIN_GetPrinterSuffixStringAFunc: Symbol<'a, DtwaingetprintersuffixstringaFunc>,
     DTWAIN_GetPrinterSuffixStringWFunc: Symbol<'a, DtwaingetprintersuffixstringwFunc>,
     DTWAIN_GetRegisteredMsgFunc: Symbol<'a, DtwaingetregisteredmsgFunc>,
     DTWAIN_GetResolutionFunc: Symbol<'a, DtwaingetresolutionFunc>,
+    DTWAIN_GetResolutionExFunc: Symbol<'a, DtwaingetresolutionexFunc>,
     DTWAIN_GetResolutionStringFunc: Symbol<'a, DtwaingetresolutionstringFunc>,
     DTWAIN_GetResolutionStringAFunc: Symbol<'a, DtwaingetresolutionstringaFunc>,
     DTWAIN_GetResolutionStringWFunc: Symbol<'a, DtwaingetresolutionstringwFunc>,
@@ -1749,6 +1775,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetResourceStringAFunc: Symbol<'a, DtwaingetresourcestringaFunc>,
     DTWAIN_GetResourceStringWFunc: Symbol<'a, DtwaingetresourcestringwFunc>,
     DTWAIN_GetRotationFunc: Symbol<'a, DtwaingetrotationFunc>,
+    DTWAIN_GetRotationExFunc: Symbol<'a, DtwaingetrotationexFunc>,
     DTWAIN_GetRotationStringFunc: Symbol<'a, DtwaingetrotationstringFunc>,
     DTWAIN_GetRotationStringAFunc: Symbol<'a, DtwaingetrotationstringaFunc>,
     DTWAIN_GetRotationStringWFunc: Symbol<'a, DtwaingetrotationstringwFunc>,
@@ -1781,6 +1808,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetSourceProductNameAFunc: Symbol<'a, DtwaingetsourceproductnameaFunc>,
     DTWAIN_GetSourceProductNameWFunc: Symbol<'a, DtwaingetsourceproductnamewFunc>,
     DTWAIN_GetSourceUnitFunc: Symbol<'a, DtwaingetsourceunitFunc>,
+    DTWAIN_GetSourceUnitExFunc: Symbol<'a, DtwaingetsourceunitexFunc>,
     DTWAIN_GetSourceVersionInfoFunc: Symbol<'a, DtwaingetsourceversioninfoFunc>,
     DTWAIN_GetSourceVersionInfoAFunc: Symbol<'a, DtwaingetsourceversioninfoaFunc>,
     DTWAIN_GetSourceVersionInfoWFunc: Symbol<'a, DtwaingetsourceversioninfowFunc>,
@@ -4318,8 +4346,10 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetBatteryMinutes: Symbol<DtwaingetbatteryminutesFunc> = unsafe { library.get(b"DTWAIN_GetBatteryMinutes")? };
         let DTWAIN_GetBatteryPercent: Symbol<DtwaingetbatterypercentFunc> = unsafe { library.get(b"DTWAIN_GetBatteryPercent")? };
         let DTWAIN_GetBitDepth: Symbol<DtwaingetbitdepthFunc> = unsafe { library.get(b"DTWAIN_GetBitDepth")? };
+        let DTWAIN_GetBitDepthEx: Symbol<DtwaingetbitdepthexFunc> = unsafe { library.get(b"DTWAIN_GetBitDepthEx")? };
         let DTWAIN_GetBlankPageAutoDetection: Symbol<DtwaingetblankpageautodetectionFunc> = unsafe { library.get(b"DTWAIN_GetBlankPageAutoDetection")? };
         let DTWAIN_GetBrightness: Symbol<DtwaingetbrightnessFunc> = unsafe { library.get(b"DTWAIN_GetBrightness")? };
+        let DTWAIN_GetBrightnessEx: Symbol<DtwaingetbrightnessexFunc> = unsafe { library.get(b"DTWAIN_GetBrightnessEx")? };
         let DTWAIN_GetBrightnessString: Symbol<DtwaingetbrightnessstringFunc> = unsafe { library.get(b"DTWAIN_GetBrightnessString")? };
         let DTWAIN_GetBrightnessStringA: Symbol<DtwaingetbrightnessstringaFunc> = unsafe { library.get(b"DTWAIN_GetBrightnessStringA")? };
         let DTWAIN_GetBrightnessStringW: Symbol<DtwaingetbrightnessstringwFunc> = unsafe { library.get(b"DTWAIN_GetBrightnessStringW")? };
@@ -4344,6 +4374,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetCaptionW: Symbol<DtwaingetcaptionwFunc> = unsafe { library.get(b"DTWAIN_GetCaptionW")? };
         let DTWAIN_GetCompressionSize: Symbol<DtwaingetcompressionsizeFunc> = unsafe { library.get(b"DTWAIN_GetCompressionSize")? };
         let DTWAIN_GetCompressionType: Symbol<DtwaingetcompressiontypeFunc> = unsafe { library.get(b"DTWAIN_GetCompressionType")? };
+        let DTWAIN_GetCompressionTypeEx: Symbol<DtwaingetcompressiontypeexFunc> = unsafe { library.get(b"DTWAIN_GetCompressionTypeEx")? };
         let DTWAIN_GetConditionCodeString: Symbol<DtwaingetconditioncodestringFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeString")? };
         let DTWAIN_GetConditionCodeStringA: Symbol<DtwaingetconditioncodestringaFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeStringA")? };
         let DTWAIN_GetConditionCodeStringW: Symbol<DtwaingetconditioncodestringwFunc> = unsafe { library.get(b"DTWAIN_GetConditionCodeStringW")? };
@@ -4351,6 +4382,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetConstantFromTwainNameA: Symbol<DtwaingetconstantfromtwainnameaFunc> = unsafe { library.get(b"DTWAIN_GetConstantFromTwainNameA")? };
         let DTWAIN_GetConstantFromTwainNameW: Symbol<DtwaingetconstantfromtwainnamewFunc> = unsafe { library.get(b"DTWAIN_GetConstantFromTwainNameW")? };
         let DTWAIN_GetContrast: Symbol<DtwaingetcontrastFunc> = unsafe { library.get(b"DTWAIN_GetContrast")? };
+        let DTWAIN_GetContrastEx: Symbol<DtwaingetcontrastexFunc> = unsafe { library.get(b"DTWAIN_GetContrastEx")? };
         let DTWAIN_GetContrastString: Symbol<DtwaingetcontraststringFunc> = unsafe { library.get(b"DTWAIN_GetContrastString")? };
         let DTWAIN_GetContrastStringA: Symbol<DtwaingetcontraststringaFunc> = unsafe { library.get(b"DTWAIN_GetContrastStringA")? };
         let DTWAIN_GetContrastStringW: Symbol<DtwaingetcontraststringwFunc> = unsafe { library.get(b"DTWAIN_GetContrastStringW")? };
@@ -4424,6 +4456,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetImageInfoStringA: Symbol<DtwaingetimageinfostringaFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringA")? };
         let DTWAIN_GetImageInfoStringW: Symbol<DtwaingetimageinfostringwFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringW")? };
         let DTWAIN_GetJobControl: Symbol<DtwaingetjobcontrolFunc> = unsafe { library.get(b"DTWAIN_GetJobControl")? };
+        let DTWAIN_GetJobControlEx: Symbol<DtwaingetjobcontrolexFunc> = unsafe { library.get(b"DTWAIN_GetJobControlEx")? };
         let DTWAIN_GetJpegValues: Symbol<DtwaingetjpegvaluesFunc> = unsafe { library.get(b"DTWAIN_GetJpegValues")? };
         let DTWAIN_GetJpegXRValues: Symbol<DtwaingetjpegxrvaluesFunc> = unsafe { library.get(b"DTWAIN_GetJpegXRValues")? };
         let DTWAIN_GetLanguage: Symbol<DtwaingetlanguageFunc> = unsafe { library.get(b"DTWAIN_GetLanguage")? };
@@ -4432,6 +4465,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetLibraryPathA: Symbol<DtwaingetlibrarypathaFunc> = unsafe { library.get(b"DTWAIN_GetLibraryPathA")? };
         let DTWAIN_GetLibraryPathW: Symbol<DtwaingetlibrarypathwFunc> = unsafe { library.get(b"DTWAIN_GetLibraryPathW")? };
         let DTWAIN_GetLightPath: Symbol<DtwaingetlightpathFunc> = unsafe { library.get(b"DTWAIN_GetLightPath")? };
+        let DTWAIN_GetLightPathEx: Symbol<DtwaingetlightpathexFunc> = unsafe { library.get(b"DTWAIN_GetLightPathEx")? };
         let DTWAIN_GetLightSource: Symbol<DtwaingetlightsourceFunc> = unsafe { library.get(b"DTWAIN_GetLightSource")? };
         let DTWAIN_GetLightSources: Symbol<DtwaingetlightsourcesFunc> = unsafe { library.get(b"DTWAIN_GetLightSources")? };
         let DTWAIN_GetLightSourcesEx: Symbol<DtwaingetlightsourcesexFunc> = unsafe { library.get(b"DTWAIN_GetLightSourcesEx")? };
@@ -4476,6 +4510,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetOCRVersionInfoA: Symbol<DtwaingetocrversioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetOCRVersionInfoA")? };
         let DTWAIN_GetOCRVersionInfoW: Symbol<DtwaingetocrversioninfowFunc> = unsafe { library.get(b"DTWAIN_GetOCRVersionInfoW")? };
         let DTWAIN_GetOrientation: Symbol<DtwaingetorientationFunc> = unsafe { library.get(b"DTWAIN_GetOrientation")? };
+        let DTWAIN_GetOrientationEx: Symbol<DtwaingetorientationexFunc> = unsafe { library.get(b"DTWAIN_GetOrientationEx")? };
         let DTWAIN_GetOverscan: Symbol<DtwaingetoverscanFunc> = unsafe { library.get(b"DTWAIN_GetOverscan")? };
         let DTWAIN_GetPDFTextElementFloat: Symbol<DtwaingetpdftextelementfloatFunc> = unsafe { library.get(b"DTWAIN_GetPDFTextElementFloat")? };
         let DTWAIN_GetPDFTextElementLong: Symbol<DtwaingetpdftextelementlongFunc> = unsafe { library.get(b"DTWAIN_GetPDFTextElementLong")? };
@@ -4497,14 +4532,19 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetPixelFlavor: Symbol<DtwaingetpixelflavorFunc> = unsafe { library.get(b"DTWAIN_GetPixelFlavor")? };
         let DTWAIN_GetPixelType: Symbol<DtwaingetpixeltypeFunc> = unsafe { library.get(b"DTWAIN_GetPixelType")? };
         let DTWAIN_GetPrinter: Symbol<DtwaingetprinterFunc> = unsafe { library.get(b"DTWAIN_GetPrinter")? };
+        let DTWAIN_GetPrinterEx: Symbol<DtwaingetprinterexFunc> = unsafe { library.get(b"DTWAIN_GetPrinterEx")? };
         let DTWAIN_GetPrinterStartNumber: Symbol<DtwaingetprinterstartnumberFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStartNumber")? };
+        let DTWAIN_GetPrinterStartNumberEx: Symbol<DtwaingetprinterstartnumberexFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStartNumberEx")? };
         let DTWAIN_GetPrinterStringMode: Symbol<DtwaingetprinterstringmodeFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStringMode")? };
+        let DTWAIN_GetPrinterStringModeEx: Symbol<DtwaingetprinterstringmodeexFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStringModeEx")? };
         let DTWAIN_GetPrinterStrings: Symbol<DtwaingetprinterstringsFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStrings")? };
+        let DTWAIN_GetPrinterStringsEx: Symbol<DtwaingetprinterstringsexFunc> = unsafe { library.get(b"DTWAIN_GetPrinterStringsEx")? };
         let DTWAIN_GetPrinterSuffixString: Symbol<DtwaingetprintersuffixstringFunc> = unsafe { library.get(b"DTWAIN_GetPrinterSuffixString")? };
         let DTWAIN_GetPrinterSuffixStringA: Symbol<DtwaingetprintersuffixstringaFunc> = unsafe { library.get(b"DTWAIN_GetPrinterSuffixStringA")? };
         let DTWAIN_GetPrinterSuffixStringW: Symbol<DtwaingetprintersuffixstringwFunc> = unsafe { library.get(b"DTWAIN_GetPrinterSuffixStringW")? };
         let DTWAIN_GetRegisteredMsg: Symbol<DtwaingetregisteredmsgFunc> = unsafe { library.get(b"DTWAIN_GetRegisteredMsg")? };
         let DTWAIN_GetResolution: Symbol<DtwaingetresolutionFunc> = unsafe { library.get(b"DTWAIN_GetResolution")? };
+        let DTWAIN_GetResolutionEx: Symbol<DtwaingetresolutionexFunc> = unsafe { library.get(b"DTWAIN_GetResolutionEx")? };
         let DTWAIN_GetResolutionString: Symbol<DtwaingetresolutionstringFunc> = unsafe { library.get(b"DTWAIN_GetResolutionString")? };
         let DTWAIN_GetResolutionStringA: Symbol<DtwaingetresolutionstringaFunc> = unsafe { library.get(b"DTWAIN_GetResolutionStringA")? };
         let DTWAIN_GetResolutionStringW: Symbol<DtwaingetresolutionstringwFunc> = unsafe { library.get(b"DTWAIN_GetResolutionStringW")? };
@@ -4512,6 +4552,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetResourceStringA: Symbol<DtwaingetresourcestringaFunc> = unsafe { library.get(b"DTWAIN_GetResourceStringA")? };
         let DTWAIN_GetResourceStringW: Symbol<DtwaingetresourcestringwFunc> = unsafe { library.get(b"DTWAIN_GetResourceStringW")? };
         let DTWAIN_GetRotation: Symbol<DtwaingetrotationFunc> = unsafe { library.get(b"DTWAIN_GetRotation")? };
+        let DTWAIN_GetRotationEx: Symbol<DtwaingetrotationexFunc> = unsafe { library.get(b"DTWAIN_GetRotationEx")? };
         let DTWAIN_GetRotationString: Symbol<DtwaingetrotationstringFunc> = unsafe { library.get(b"DTWAIN_GetRotationString")? };
         let DTWAIN_GetRotationStringA: Symbol<DtwaingetrotationstringaFunc> = unsafe { library.get(b"DTWAIN_GetRotationStringA")? };
         let DTWAIN_GetRotationStringW: Symbol<DtwaingetrotationstringwFunc> = unsafe { library.get(b"DTWAIN_GetRotationStringW")? };
@@ -4544,6 +4585,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetSourceProductNameA: Symbol<DtwaingetsourceproductnameaFunc> = unsafe { library.get(b"DTWAIN_GetSourceProductNameA")? };
         let DTWAIN_GetSourceProductNameW: Symbol<DtwaingetsourceproductnamewFunc> = unsafe { library.get(b"DTWAIN_GetSourceProductNameW")? };
         let DTWAIN_GetSourceUnit: Symbol<DtwaingetsourceunitFunc> = unsafe { library.get(b"DTWAIN_GetSourceUnit")? };
+        let DTWAIN_GetSourceUnitEx: Symbol<DtwaingetsourceunitexFunc> = unsafe { library.get(b"DTWAIN_GetSourceUnitEx")? };
         let DTWAIN_GetSourceVersionInfo: Symbol<DtwaingetsourceversioninfoFunc> = unsafe { library.get(b"DTWAIN_GetSourceVersionInfo")? };
         let DTWAIN_GetSourceVersionInfoA: Symbol<DtwaingetsourceversioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetSourceVersionInfoA")? };
         let DTWAIN_GetSourceVersionInfoW: Symbol<DtwaingetsourceversioninfowFunc> = unsafe { library.get(b"DTWAIN_GetSourceVersionInfoW")? };
@@ -5439,8 +5481,10 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetBatteryMinutesFunc: DTWAIN_GetBatteryMinutes,
             DTWAIN_GetBatteryPercentFunc: DTWAIN_GetBatteryPercent,
             DTWAIN_GetBitDepthFunc: DTWAIN_GetBitDepth,
+            DTWAIN_GetBitDepthExFunc: DTWAIN_GetBitDepthEx,
             DTWAIN_GetBlankPageAutoDetectionFunc: DTWAIN_GetBlankPageAutoDetection,
             DTWAIN_GetBrightnessFunc: DTWAIN_GetBrightness,
+            DTWAIN_GetBrightnessExFunc: DTWAIN_GetBrightnessEx,
             DTWAIN_GetBrightnessStringFunc: DTWAIN_GetBrightnessString,
             DTWAIN_GetBrightnessStringAFunc: DTWAIN_GetBrightnessStringA,
             DTWAIN_GetBrightnessStringWFunc: DTWAIN_GetBrightnessStringW,
@@ -5465,6 +5509,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetCaptionWFunc: DTWAIN_GetCaptionW,
             DTWAIN_GetCompressionSizeFunc: DTWAIN_GetCompressionSize,
             DTWAIN_GetCompressionTypeFunc: DTWAIN_GetCompressionType,
+            DTWAIN_GetCompressionTypeExFunc: DTWAIN_GetCompressionTypeEx,
             DTWAIN_GetConditionCodeStringFunc: DTWAIN_GetConditionCodeString,
             DTWAIN_GetConditionCodeStringAFunc: DTWAIN_GetConditionCodeStringA,
             DTWAIN_GetConditionCodeStringWFunc: DTWAIN_GetConditionCodeStringW,
@@ -5472,6 +5517,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetConstantFromTwainNameAFunc: DTWAIN_GetConstantFromTwainNameA,
             DTWAIN_GetConstantFromTwainNameWFunc: DTWAIN_GetConstantFromTwainNameW,
             DTWAIN_GetContrastFunc: DTWAIN_GetContrast,
+            DTWAIN_GetContrastExFunc: DTWAIN_GetContrastEx,
             DTWAIN_GetContrastStringFunc: DTWAIN_GetContrastString,
             DTWAIN_GetContrastStringAFunc: DTWAIN_GetContrastStringA,
             DTWAIN_GetContrastStringWFunc: DTWAIN_GetContrastStringW,
@@ -5545,6 +5591,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetImageInfoStringAFunc: DTWAIN_GetImageInfoStringA,
             DTWAIN_GetImageInfoStringWFunc: DTWAIN_GetImageInfoStringW,
             DTWAIN_GetJobControlFunc: DTWAIN_GetJobControl,
+            DTWAIN_GetJobControlExFunc: DTWAIN_GetJobControlEx,
             DTWAIN_GetJpegValuesFunc: DTWAIN_GetJpegValues,
             DTWAIN_GetJpegXRValuesFunc: DTWAIN_GetJpegXRValues,
             DTWAIN_GetLanguageFunc: DTWAIN_GetLanguage,
@@ -5553,6 +5600,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetLibraryPathAFunc: DTWAIN_GetLibraryPathA,
             DTWAIN_GetLibraryPathWFunc: DTWAIN_GetLibraryPathW,
             DTWAIN_GetLightPathFunc: DTWAIN_GetLightPath,
+            DTWAIN_GetLightPathExFunc: DTWAIN_GetLightPathEx,
             DTWAIN_GetLightSourceFunc: DTWAIN_GetLightSource,
             DTWAIN_GetLightSourcesFunc: DTWAIN_GetLightSources,
             DTWAIN_GetLightSourcesExFunc: DTWAIN_GetLightSourcesEx,
@@ -5597,6 +5645,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetOCRVersionInfoAFunc: DTWAIN_GetOCRVersionInfoA,
             DTWAIN_GetOCRVersionInfoWFunc: DTWAIN_GetOCRVersionInfoW,
             DTWAIN_GetOrientationFunc: DTWAIN_GetOrientation,
+            DTWAIN_GetOrientationExFunc: DTWAIN_GetOrientationEx,
             DTWAIN_GetOverscanFunc: DTWAIN_GetOverscan,
             DTWAIN_GetPDFTextElementFloatFunc: DTWAIN_GetPDFTextElementFloat,
             DTWAIN_GetPDFTextElementLongFunc: DTWAIN_GetPDFTextElementLong,
@@ -5618,14 +5667,19 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetPixelFlavorFunc: DTWAIN_GetPixelFlavor,
             DTWAIN_GetPixelTypeFunc: DTWAIN_GetPixelType,
             DTWAIN_GetPrinterFunc: DTWAIN_GetPrinter,
+            DTWAIN_GetPrinterExFunc: DTWAIN_GetPrinterEx,
             DTWAIN_GetPrinterStartNumberFunc: DTWAIN_GetPrinterStartNumber,
+            DTWAIN_GetPrinterStartNumberExFunc: DTWAIN_GetPrinterStartNumberEx,
             DTWAIN_GetPrinterStringModeFunc: DTWAIN_GetPrinterStringMode,
+            DTWAIN_GetPrinterStringModeExFunc: DTWAIN_GetPrinterStringModeEx,
             DTWAIN_GetPrinterStringsFunc: DTWAIN_GetPrinterStrings,
+            DTWAIN_GetPrinterStringsExFunc: DTWAIN_GetPrinterStringsEx,
             DTWAIN_GetPrinterSuffixStringFunc: DTWAIN_GetPrinterSuffixString,
             DTWAIN_GetPrinterSuffixStringAFunc: DTWAIN_GetPrinterSuffixStringA,
             DTWAIN_GetPrinterSuffixStringWFunc: DTWAIN_GetPrinterSuffixStringW,
             DTWAIN_GetRegisteredMsgFunc: DTWAIN_GetRegisteredMsg,
             DTWAIN_GetResolutionFunc: DTWAIN_GetResolution,
+            DTWAIN_GetResolutionExFunc: DTWAIN_GetResolutionEx,
             DTWAIN_GetResolutionStringFunc: DTWAIN_GetResolutionString,
             DTWAIN_GetResolutionStringAFunc: DTWAIN_GetResolutionStringA,
             DTWAIN_GetResolutionStringWFunc: DTWAIN_GetResolutionStringW,
@@ -5633,6 +5687,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetResourceStringAFunc: DTWAIN_GetResourceStringA,
             DTWAIN_GetResourceStringWFunc: DTWAIN_GetResourceStringW,
             DTWAIN_GetRotationFunc: DTWAIN_GetRotation,
+            DTWAIN_GetRotationExFunc: DTWAIN_GetRotationEx,
             DTWAIN_GetRotationStringFunc: DTWAIN_GetRotationString,
             DTWAIN_GetRotationStringAFunc: DTWAIN_GetRotationStringA,
             DTWAIN_GetRotationStringWFunc: DTWAIN_GetRotationStringW,
@@ -5665,6 +5720,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetSourceProductNameAFunc: DTWAIN_GetSourceProductNameA,
             DTWAIN_GetSourceProductNameWFunc: DTWAIN_GetSourceProductNameW,
             DTWAIN_GetSourceUnitFunc: DTWAIN_GetSourceUnit,
+            DTWAIN_GetSourceUnitExFunc: DTWAIN_GetSourceUnitEx,
             DTWAIN_GetSourceVersionInfoFunc: DTWAIN_GetSourceVersionInfo,
             DTWAIN_GetSourceVersionInfoAFunc: DTWAIN_GetSourceVersionInfoA,
             DTWAIN_GetSourceVersionInfoWFunc: DTWAIN_GetSourceVersionInfoW,
@@ -7721,12 +7777,20 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetBitDepthFunc)(Source, BitDepth, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetBitDepthEx(&self, Source: *mut c_void, bCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetBitDepthExFunc)(Source, bCurrent);  }
+    }
+
     pub fn DTWAIN_GetBlankPageAutoDetection(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_GetBlankPageAutoDetectionFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetBrightness(&self, Source: *mut c_void, Brightness: *mut f64) -> i32 {
         unsafe { return (self.DTWAIN_GetBrightnessFunc)(Source, Brightness);  }
+    }
+
+    pub fn DTWAIN_GetBrightnessEx(&self, Source: *mut c_void) -> f64 {
+        unsafe { return (self.DTWAIN_GetBrightnessExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetBrightnessString(&self, Source: *mut c_void, Brightness: *mut u16) -> i32 {
@@ -7825,6 +7889,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetCompressionTypeFunc)(Source, lpCompression, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetCompressionTypeEx(&self, Source: *mut c_void, bCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCompressionTypeExFunc)(Source, bCurrent);  }
+    }
+
     pub fn DTWAIN_GetConditionCodeString(&self, lError: i32, lpszBuffer: *mut u16, nMaxLen: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetConditionCodeStringFunc)(lError, lpszBuffer, nMaxLen);  }
     }
@@ -7851,6 +7919,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetContrast(&self, Source: *mut c_void, Contrast: *mut f64) -> i32 {
         unsafe { return (self.DTWAIN_GetContrastFunc)(Source, Contrast);  }
+    }
+
+    pub fn DTWAIN_GetContrastEx(&self, Source: *mut c_void) -> f64 {
+        unsafe { return (self.DTWAIN_GetContrastExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetContrastString(&self, Source: *mut c_void, Contrast: *mut u16) -> i32 {
@@ -8145,6 +8217,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetJobControlFunc)(Source, pJobControl, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetJobControlEx(&self, Source: *mut c_void, bGetCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetJobControlExFunc)(Source, bGetCurrent);  }
+    }
+
     pub fn DTWAIN_GetJpegValues(&self, Source: *mut c_void, pQuality: *mut i32, Progressive: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetJpegValuesFunc)(Source, pQuality, Progressive);  }
     }
@@ -8175,6 +8251,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetLightPath(&self, Source: *mut c_void, lpLightPath: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetLightPathFunc)(Source, lpLightPath);  }
+    }
+
+    pub fn DTWAIN_GetLightPathEx(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_GetLightPathExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetLightSource(&self, Source: *mut c_void, LightSource: *mut i32) -> i32 {
@@ -8353,6 +8433,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetOrientationFunc)(Source, lpOrient, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetOrientationEx(&self, Source: *mut c_void, bCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetOrientationExFunc)(Source, bCurrent);  }
+    }
+
     pub fn DTWAIN_GetOverscan(&self, Source: *mut c_void, lpOverscan: *mut i32, bCurrent: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetOverscanFunc)(Source, lpOverscan, bCurrent);  }
     }
@@ -8437,16 +8521,32 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetPrinterFunc)(Source, lpPrinter, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetPrinterEx(&self, Source: *mut c_void, bCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetPrinterExFunc)(Source, bCurrent);  }
+    }
+
     pub fn DTWAIN_GetPrinterStartNumber(&self, Source: *mut c_void, nStart: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetPrinterStartNumberFunc)(Source, nStart);  }
+    }
+
+    pub fn DTWAIN_GetPrinterStartNumberEx(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_GetPrinterStartNumberExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetPrinterStringMode(&self, Source: *mut c_void, PrinterMode: *mut i32, bCurrent: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetPrinterStringModeFunc)(Source, PrinterMode, bCurrent);  }
     }
 
+    pub fn DTWAIN_GetPrinterStringModeEx(&self, Source: *mut c_void, bCurrent: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetPrinterStringModeExFunc)(Source, bCurrent);  }
+    }
+
     pub fn DTWAIN_GetPrinterStrings(&self, Source: *mut c_void, ArrayString: *mut *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_GetPrinterStringsFunc)(Source, ArrayString);  }
+    }
+
+    pub fn DTWAIN_GetPrinterStringsEx(&self, Source: *mut c_void) -> *mut c_void {
+        unsafe { return (self.DTWAIN_GetPrinterStringsExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetPrinterSuffixString(&self, Source: *mut c_void, Suffix: *mut u16, nMaxLen: i32) -> i32 {
@@ -8467,6 +8567,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetResolution(&self, Source: *mut c_void, Resolution: *mut f64) -> i32 {
         unsafe { return (self.DTWAIN_GetResolutionFunc)(Source, Resolution);  }
+    }
+
+    pub fn DTWAIN_GetResolutionEx(&self, Source: *mut c_void) -> f64 {
+        unsafe { return (self.DTWAIN_GetResolutionExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetResolutionString(&self, Source: *mut c_void, Resolution: *mut u16) -> i32 {
@@ -8495,6 +8599,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetRotation(&self, Source: *mut c_void, Rotation: *mut f64) -> i32 {
         unsafe { return (self.DTWAIN_GetRotationFunc)(Source, Rotation);  }
+    }
+
+    pub fn DTWAIN_GetRotationEx(&self, Source: *mut c_void) -> f64 {
+        unsafe { return (self.DTWAIN_GetRotationExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetRotationString(&self, Source: *mut c_void, Rotation: *mut u16) -> i32 {
@@ -8623,6 +8731,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetSourceUnit(&self, Source: *mut c_void, lpUnit: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetSourceUnitFunc)(Source, lpUnit);  }
+    }
+
+    pub fn DTWAIN_GetSourceUnitEx(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_GetSourceUnitExFunc)(Source);  }
     }
 
     pub fn DTWAIN_GetSourceVersionInfo(&self, Source: *mut c_void, szProduct: *mut u16, nMaxLen: i32) -> i32 {
