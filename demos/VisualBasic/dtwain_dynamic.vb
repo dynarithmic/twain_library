@@ -2855,10 +2855,16 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetBitDepthDelegate(Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBitDepthExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetBlankPageAutoDetectionDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetBrightnessDelegate(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBrightnessExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetBrightnessStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
@@ -2914,6 +2920,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCompressionTypeDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetCompressionTypeExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetConditionCodeStringDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         
@@ -2922,6 +2931,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetContrastDelegate(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetContrastExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetContrastStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
@@ -3065,6 +3077,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetJobControlDelegate(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetJobControlExDelegate(Source As System.IntPtr, bGetCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetJpegValuesDelegate(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3081,6 +3096,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLightPathDelegate(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetLightPathExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLightSourceDelegate(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
@@ -3167,6 +3185,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetOrientationDelegate(Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetOrientationExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetOverscanDelegate(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3212,13 +3233,25 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetPrinterDelegate(Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStartNumberDelegate(Source As System.IntPtr, ByRef nStart As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStartNumberExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStringModeDelegate(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStringModeExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStringsDelegate(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStringsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetPrinterSuffixStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
@@ -3229,6 +3262,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetResolutionDelegate(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetResolutionExDelegate(Source As System.IntPtr) As System.Double
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetResolutionStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
         
@@ -3237,6 +3273,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetRotationDelegate(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetRotationExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetRotationStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
@@ -3276,6 +3315,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetSourceUnitDelegate(Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetSourceUnitExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetSourceVersionInfoDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
@@ -5579,12 +5621,20 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetBitDepth(Source, BitDepth, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetBitDepthEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBitDepthEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetBlankPageAutoDetection(Source As System.IntPtr) As Integer
         Return api.DTWAIN_GetBlankPageAutoDetection(Source)
         End Function
         
         Public Function DTWAIN_GetBrightness(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
         Return api.DTWAIN_GetBrightness(Source, Brightness)
+        End Function
+        
+        Public Function DTWAIN_GetBrightnessEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetBrightnessEx(Source)
         End Function
         
         Public Function DTWAIN_GetBrightnessString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
@@ -5659,6 +5709,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCompressionType(Source, lpCompression, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetCompressionTypeEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetCompressionTypeEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetConditionCodeString(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         Return api.DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen)
         End Function
@@ -5669,6 +5723,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetContrast(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
         Return api.DTWAIN_GetContrast(Source, Contrast)
+        End Function
+        
+        Public Function DTWAIN_GetContrastEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetContrastEx(Source)
         End Function
         
         Public Function DTWAIN_GetContrastString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
@@ -5859,6 +5917,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetJobControl(Source, pJobControl, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetJobControlEx(Source As System.IntPtr, bGetCurrent As Integer) As Integer
+        Return api.DTWAIN_GetJobControlEx(Source, bGetCurrent)
+        End Function
+        
         Public Function DTWAIN_GetJpegValues(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
         Return api.DTWAIN_GetJpegValues(Source, pQuality, Progressive)
         End Function
@@ -5881,6 +5943,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetLightPath(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
         Return api.DTWAIN_GetLightPath(Source, lpLightPath)
+        End Function
+        
+        Public Function DTWAIN_GetLightPathEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetLightPathEx(Source)
         End Function
         
         Public Function DTWAIN_GetLightSource(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
@@ -5995,6 +6061,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetOrientation(Source, lpOrient, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetOrientationEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetOrientationEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetOverscan(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
         Return api.DTWAIN_GetOverscan(Source, lpOverscan, bCurrent)
         End Function
@@ -6055,16 +6125,32 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetPrinter(Source, lpPrinter, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetPrinterEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPrinterEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetPrinterStartNumber(Source As System.IntPtr, ByRef nStart As Integer) As Integer
         Return api.DTWAIN_GetPrinterStartNumber(Source, nStart)
+        End Function
+        
+        Public Function DTWAIN_GetPrinterStartNumberEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetPrinterStartNumberEx(Source)
         End Function
         
         Public Function DTWAIN_GetPrinterStringMode(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
         Return api.DTWAIN_GetPrinterStringMode(Source, PrinterMode, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetPrinterStringModeEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPrinterStringModeEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetPrinterStrings(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
         Return api.DTWAIN_GetPrinterStrings(Source, ArrayString)
+        End Function
+        
+        Public Function DTWAIN_GetPrinterStringsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_GetPrinterStringsEx(Source)
         End Function
         
         Public Function DTWAIN_GetPrinterSuffixString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
@@ -6079,6 +6165,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetResolution(Source, Resolution)
         End Function
         
+        Public Function DTWAIN_GetResolutionEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetResolutionEx(Source)
+        End Function
+        
         Public Function DTWAIN_GetResolutionString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
         Return api.DTWAIN_GetResolutionString(Source, Resolution)
         End Function
@@ -6089,6 +6179,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetRotation(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
         Return api.DTWAIN_GetRotation(Source, Rotation)
+        End Function
+        
+        Public Function DTWAIN_GetRotationEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetRotationEx(Source)
         End Function
         
         Public Function DTWAIN_GetRotationString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
@@ -6141,6 +6235,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetSourceUnit(Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
         Return api.DTWAIN_GetSourceUnit(Source, lpUnit)
+        End Function
+        
+        Public Function DTWAIN_GetSourceUnitEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetSourceUnitEx(Source)
         End Function
         
         Public Function DTWAIN_GetSourceVersionInfo(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
@@ -7853,8 +7951,10 @@ Namespace Dynarithmic
             Public DTWAIN_GetBatteryMinutes As DTWAIN_GetBatteryMinutesDelegate
             Public DTWAIN_GetBatteryPercent As DTWAIN_GetBatteryPercentDelegate
             Public DTWAIN_GetBitDepth As DTWAIN_GetBitDepthDelegate
+            Public DTWAIN_GetBitDepthEx As DTWAIN_GetBitDepthExDelegate
             Public DTWAIN_GetBlankPageAutoDetection As DTWAIN_GetBlankPageAutoDetectionDelegate
             Public DTWAIN_GetBrightness As DTWAIN_GetBrightnessDelegate
+            Public DTWAIN_GetBrightnessEx As DTWAIN_GetBrightnessExDelegate
             Public DTWAIN_GetBrightnessString As DTWAIN_GetBrightnessStringDelegate
             Public DTWAIN_GetBufferedTransferInfo As DTWAIN_GetBufferedTransferInfoDelegate
             Public DTWAIN_GetCallback As DTWAIN_GetCallbackDelegate
@@ -7873,9 +7973,11 @@ Namespace Dynarithmic
             Public DTWAIN_GetCaption As DTWAIN_GetCaptionDelegate
             Public DTWAIN_GetCompressionSize As DTWAIN_GetCompressionSizeDelegate
             Public DTWAIN_GetCompressionType As DTWAIN_GetCompressionTypeDelegate
+            Public DTWAIN_GetCompressionTypeEx As DTWAIN_GetCompressionTypeExDelegate
             Public DTWAIN_GetConditionCodeString As DTWAIN_GetConditionCodeStringDelegate
             Public DTWAIN_GetConstantFromTwainName As DTWAIN_GetConstantFromTwainNameDelegate
             Public DTWAIN_GetContrast As DTWAIN_GetContrastDelegate
+            Public DTWAIN_GetContrastEx As DTWAIN_GetContrastExDelegate
             Public DTWAIN_GetContrastString As DTWAIN_GetContrastStringDelegate
             Public DTWAIN_GetCountry As DTWAIN_GetCountryDelegate
             Public DTWAIN_GetCurrentAcquiredImage As DTWAIN_GetCurrentAcquiredImageDelegate
@@ -7923,12 +8025,14 @@ Namespace Dynarithmic
             Public DTWAIN_GetImageInfo As DTWAIN_GetImageInfoDelegate
             Public DTWAIN_GetImageInfoString As DTWAIN_GetImageInfoStringDelegate
             Public DTWAIN_GetJobControl As DTWAIN_GetJobControlDelegate
+            Public DTWAIN_GetJobControlEx As DTWAIN_GetJobControlExDelegate
             Public DTWAIN_GetJpegValues As DTWAIN_GetJpegValuesDelegate
             Public DTWAIN_GetJpegXRValues As DTWAIN_GetJpegXRValuesDelegate
             Public DTWAIN_GetLanguage As DTWAIN_GetLanguageDelegate
             Public DTWAIN_GetLastError As DTWAIN_GetLastErrorDelegate
             Public DTWAIN_GetLibraryPath As DTWAIN_GetLibraryPathDelegate
             Public DTWAIN_GetLightPath As DTWAIN_GetLightPathDelegate
+            Public DTWAIN_GetLightPathEx As DTWAIN_GetLightPathExDelegate
             Public DTWAIN_GetLightSource As DTWAIN_GetLightSourceDelegate
             Public DTWAIN_GetLightSources As DTWAIN_GetLightSourcesDelegate
             Public DTWAIN_GetLightSourcesEx As DTWAIN_GetLightSourcesExDelegate
@@ -7957,6 +8061,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetOCRTextInfoLongEx As DTWAIN_GetOCRTextInfoLongExDelegate
             Public DTWAIN_GetOCRVersionInfo As DTWAIN_GetOCRVersionInfoDelegate
             Public DTWAIN_GetOrientation As DTWAIN_GetOrientationDelegate
+            Public DTWAIN_GetOrientationEx As DTWAIN_GetOrientationExDelegate
             Public DTWAIN_GetOverscan As DTWAIN_GetOverscanDelegate
             Public DTWAIN_GetPDFTextElementFloat As DTWAIN_GetPDFTextElementFloatDelegate
             Public DTWAIN_GetPDFTextElementLong As DTWAIN_GetPDFTextElementLongDelegate
@@ -7972,15 +8077,21 @@ Namespace Dynarithmic
             Public DTWAIN_GetPixelFlavor As DTWAIN_GetPixelFlavorDelegate
             Public DTWAIN_GetPixelType As DTWAIN_GetPixelTypeDelegate
             Public DTWAIN_GetPrinter As DTWAIN_GetPrinterDelegate
+            Public DTWAIN_GetPrinterEx As DTWAIN_GetPrinterExDelegate
             Public DTWAIN_GetPrinterStartNumber As DTWAIN_GetPrinterStartNumberDelegate
+            Public DTWAIN_GetPrinterStartNumberEx As DTWAIN_GetPrinterStartNumberExDelegate
             Public DTWAIN_GetPrinterStringMode As DTWAIN_GetPrinterStringModeDelegate
+            Public DTWAIN_GetPrinterStringModeEx As DTWAIN_GetPrinterStringModeExDelegate
             Public DTWAIN_GetPrinterStrings As DTWAIN_GetPrinterStringsDelegate
+            Public DTWAIN_GetPrinterStringsEx As DTWAIN_GetPrinterStringsExDelegate
             Public DTWAIN_GetPrinterSuffixString As DTWAIN_GetPrinterSuffixStringDelegate
             Public DTWAIN_GetRegisteredMsg As DTWAIN_GetRegisteredMsgDelegate
             Public DTWAIN_GetResolution As DTWAIN_GetResolutionDelegate
+            Public DTWAIN_GetResolutionEx As DTWAIN_GetResolutionExDelegate
             Public DTWAIN_GetResolutionString As DTWAIN_GetResolutionStringDelegate
             Public DTWAIN_GetResourceString As DTWAIN_GetResourceStringDelegate
             Public DTWAIN_GetRotation As DTWAIN_GetRotationDelegate
+            Public DTWAIN_GetRotationEx As DTWAIN_GetRotationExDelegate
             Public DTWAIN_GetRotationString As DTWAIN_GetRotationStringDelegate
             Public DTWAIN_GetSaveFileName As DTWAIN_GetSaveFileNameDelegate
             Public DTWAIN_GetSessionDetails As DTWAIN_GetSessionDetailsDelegate
@@ -7994,6 +8105,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetSourceProductFamily As DTWAIN_GetSourceProductFamilyDelegate
             Public DTWAIN_GetSourceProductName As DTWAIN_GetSourceProductNameDelegate
             Public DTWAIN_GetSourceUnit As DTWAIN_GetSourceUnitDelegate
+            Public DTWAIN_GetSourceUnitEx As DTWAIN_GetSourceUnitExDelegate
             Public DTWAIN_GetSourceVersionInfo As DTWAIN_GetSourceVersionInfoDelegate
             Public DTWAIN_GetSourceVersionNumber As DTWAIN_GetSourceVersionNumberDelegate
             Public DTWAIN_GetStaticLibVersion As DTWAIN_GetStaticLibVersionDelegate

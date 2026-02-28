@@ -2762,10 +2762,16 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, int bCurrent);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetBrightness(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Brightness);
@@ -2827,6 +2833,9 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent);
 
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, int bCurrent);
+
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
 
@@ -2838,6 +2847,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetContrast(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetContrastString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Contrast);
@@ -3017,6 +3029,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, int bGetCurrent);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -3036,6 +3051,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetLightPath(DTWAIN_SOURCE Source, ref int lpLightPath);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetLightSource(DTWAIN_SOURCE Source, ref int LightSource);
@@ -3143,6 +3161,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetOrientation(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, int bCurrent);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetOverscan(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -3197,13 +3218,25 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetPrinter(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, int bCurrent);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, ref int nStart);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, int bCurrent);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Suffix, int nMaxLen);
@@ -3216,6 +3249,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Resolution);
@@ -3231,6 +3267,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetRotation(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetRotationString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder Rotation);
@@ -3300,6 +3339,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, ref int lpUnit);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true)]
         public static extern int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szProduct, int nMaxLen);

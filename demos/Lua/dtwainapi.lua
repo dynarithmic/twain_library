@@ -463,8 +463,10 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, LPLONG lpMinutes);
         DTWAIN_BOOL DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source, LPLONG lpPercent);
         DTWAIN_BOOL DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightness(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Brightness);
+        DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Brightness);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -489,6 +491,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
@@ -496,6 +499,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
         LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
+        DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -568,6 +572,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         DTWAIN_BOOL DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         LONG DTWAIN_GetLanguage();
@@ -576,6 +581,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetLightPath(DTWAIN_SOURCE Source, LPLONG lpLightPath);
+        DTWAIN_BOOL DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetLightSource(DTWAIN_SOURCE Source, LPLONG LightSource);
         DTWAIN_BOOL DTWAIN_GetLightSources(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY LightSources);
         DTWAIN_ARRAY DTWAIN_GetLightSourcesEx(DTWAIN_SOURCE Source);
@@ -620,6 +626,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, LPSTR buffer, LONG nLength);
         LONG DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buffer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetOrientation(DTWAIN_SOURCE Source, LPLONG lpOrient, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetOverscan(DTWAIN_SOURCE Source, LPLONG lpOverscan, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, LPDTWAIN_FLOAT val1, LPDTWAIN_FLOAT val2, LONG Flags);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LPLONG val1, LPLONG val2, LONG Flags);
@@ -641,14 +648,19 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, LPLONG nStart);
+        LONG DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, LPLONG PrinterMode, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY ArrayString);
+        DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Suffix, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source, LPSTR Suffix, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source, LPWSTR Suffix, LONG nLength);
         LONG DTWAIN_GetRegisteredMsg();
         DTWAIN_BOOL DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution);
+        DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
@@ -656,6 +668,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetResourceStringA(LONG ResourceID, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetResourceStringW(LONG ResourceID, LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetRotation(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Rotation);
+        DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetRotationString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringA(DTWAIN_SOURCE Source, LPSTR Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringW(DTWAIN_SOURCE Source, LPWSTR Rotation);
@@ -687,6 +700,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, LPLONG lpUnit);
+        LONG DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szProduct, LONG nMaxLen);
         LONG DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
@@ -1640,8 +1654,10 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, LPLONG lpMinutes);
         DTWAIN_BOOL DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source, LPLONG lpPercent);
         DTWAIN_BOOL DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightness(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Brightness);
+        DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Brightness);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -1666,6 +1682,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
@@ -1673,6 +1690,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
         LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
+        DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -1745,6 +1763,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         DTWAIN_BOOL DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         LONG DTWAIN_GetLanguage();
@@ -1753,6 +1772,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetLightPath(DTWAIN_SOURCE Source, LPLONG lpLightPath);
+        DTWAIN_BOOL DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetLightSource(DTWAIN_SOURCE Source, LPLONG LightSource);
         DTWAIN_BOOL DTWAIN_GetLightSources(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY LightSources);
         DTWAIN_ARRAY DTWAIN_GetLightSourcesEx(DTWAIN_SOURCE Source);
@@ -1797,6 +1817,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, LPSTR buffer, LONG nLength);
         LONG DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buffer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetOrientation(DTWAIN_SOURCE Source, LPLONG lpOrient, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetOverscan(DTWAIN_SOURCE Source, LPLONG lpOverscan, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, LPDTWAIN_FLOAT val1, LPDTWAIN_FLOAT val2, LONG Flags);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LPLONG val1, LPLONG val2, LONG Flags);
@@ -1818,14 +1839,19 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, LPLONG nStart);
+        LONG DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, LPLONG PrinterMode, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY ArrayString);
+        DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Suffix, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source, LPSTR Suffix, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source, LPWSTR Suffix, LONG nLength);
         LONG DTWAIN_GetRegisteredMsg();
         DTWAIN_BOOL DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution);
+        DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
@@ -1833,6 +1859,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetResourceStringA(LONG ResourceID, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetResourceStringW(LONG ResourceID, LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetRotation(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Rotation);
+        DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetRotationString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringA(DTWAIN_SOURCE Source, LPSTR Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringW(DTWAIN_SOURCE Source, LPWSTR Rotation);
@@ -1864,6 +1891,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, LPLONG lpUnit);
+        LONG DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szProduct, LONG nMaxLen);
         LONG DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
@@ -2817,8 +2845,10 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, LPLONG lpMinutes);
         DTWAIN_BOOL DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source, LPLONG lpPercent);
         DTWAIN_BOOL DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightness(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Brightness);
+        DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Brightness);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -2843,6 +2873,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
@@ -2850,6 +2881,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
         LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
+        DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -2922,6 +2954,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         DTWAIN_BOOL DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         LONG DTWAIN_GetLanguage();
@@ -2930,6 +2963,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetLightPath(DTWAIN_SOURCE Source, LPLONG lpLightPath);
+        DTWAIN_BOOL DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetLightSource(DTWAIN_SOURCE Source, LPLONG LightSource);
         DTWAIN_BOOL DTWAIN_GetLightSources(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY LightSources);
         DTWAIN_ARRAY DTWAIN_GetLightSourcesEx(DTWAIN_SOURCE Source);
@@ -2974,6 +3008,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, LPSTR buffer, LONG nLength);
         LONG DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buffer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetOrientation(DTWAIN_SOURCE Source, LPLONG lpOrient, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetOverscan(DTWAIN_SOURCE Source, LPLONG lpOverscan, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, LPDTWAIN_FLOAT val1, LPDTWAIN_FLOAT val2, LONG Flags);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LPLONG val1, LPLONG val2, LONG Flags);
@@ -2995,14 +3030,19 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, LPLONG nStart);
+        LONG DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, LPLONG PrinterMode, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY ArrayString);
+        DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Suffix, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source, LPSTR Suffix, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source, LPWSTR Suffix, LONG nLength);
         LONG DTWAIN_GetRegisteredMsg();
         DTWAIN_BOOL DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution);
+        DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
@@ -3010,6 +3050,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetResourceStringA(LONG ResourceID, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetResourceStringW(LONG ResourceID, LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetRotation(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Rotation);
+        DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetRotationString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringA(DTWAIN_SOURCE Source, LPSTR Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringW(DTWAIN_SOURCE Source, LPWSTR Rotation);
@@ -3041,6 +3082,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, LPLONG lpUnit);
+        LONG DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szProduct, LONG nMaxLen);
         LONG DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
@@ -3994,8 +4036,10 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, LPLONG lpMinutes);
         DTWAIN_BOOL DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source, LPLONG lpPercent);
         DTWAIN_BOOL DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightness(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Brightness);
+        DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Brightness);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetBrightnessStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -4020,6 +4064,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringA(LONG lError, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetConditionCodeStringW(LONG lError, LPWSTR lpszBuffer, LONG nMaxLen);
@@ -4027,6 +4072,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetConstantFromTwainNameA(LPCSTR lpszBuffer);
         LONG DTWAIN_GetConstantFromTwainNameW(LPCWSTR lpszBuffer);
         DTWAIN_BOOL DTWAIN_GetContrast(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Contrast);
+        DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetContrastString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringA(DTWAIN_SOURCE Source, LPSTR Contrast);
         DTWAIN_BOOL DTWAIN_GetContrastStringW(DTWAIN_SOURCE Source, LPWSTR Contrast);
@@ -4099,6 +4145,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         DTWAIN_BOOL DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
         LONG DTWAIN_GetLanguage();
@@ -4107,6 +4154,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetLibraryPathA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetLibraryPathW(LPWSTR lpszVer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetLightPath(DTWAIN_SOURCE Source, LPLONG lpLightPath);
+        DTWAIN_BOOL DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetLightSource(DTWAIN_SOURCE Source, LPLONG LightSource);
         DTWAIN_BOOL DTWAIN_GetLightSources(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY LightSources);
         DTWAIN_ARRAY DTWAIN_GetLightSourcesEx(DTWAIN_SOURCE Source);
@@ -4151,6 +4199,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetOCRVersionInfoA(DTWAIN_OCRENGINE Engine, LPSTR buffer, LONG nLength);
         LONG DTWAIN_GetOCRVersionInfoW(DTWAIN_OCRENGINE Engine, LPWSTR buffer, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetOrientation(DTWAIN_SOURCE Source, LPLONG lpOrient, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetOverscan(DTWAIN_SOURCE Source, LPLONG lpOverscan, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, LPDTWAIN_FLOAT val1, LPDTWAIN_FLOAT val2, LONG Flags);
         DTWAIN_BOOL DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LPLONG val1, LPLONG val2, LONG Flags);
@@ -4172,14 +4221,19 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, LPLONG nStart);
+        LONG DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, LPLONG PrinterMode, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY ArrayString);
+        DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Suffix, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringA(DTWAIN_SOURCE Source, LPSTR Suffix, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetPrinterSuffixStringW(DTWAIN_SOURCE Source, LPWSTR Suffix, LONG nLength);
         LONG DTWAIN_GetRegisteredMsg();
         DTWAIN_BOOL DTWAIN_GetResolution(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Resolution);
+        DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringA(DTWAIN_SOURCE Source, LPSTR Resolution);
         DTWAIN_BOOL DTWAIN_GetResolutionStringW(DTWAIN_SOURCE Source, LPWSTR Resolution);
@@ -4187,6 +4241,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetResourceStringA(LONG ResourceID, LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetResourceStringW(LONG ResourceID, LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetRotation(DTWAIN_SOURCE Source, LPDTWAIN_FLOAT Rotation);
+        DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetRotationString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringA(DTWAIN_SOURCE Source, LPSTR Rotation);
         DTWAIN_BOOL DTWAIN_GetRotationStringW(DTWAIN_SOURCE Source, LPWSTR Rotation);
@@ -4218,6 +4273,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSourceProductNameA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceProductNameW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, LPLONG lpUnit);
+        LONG DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szProduct, LONG nMaxLen);
         LONG DTWAIN_GetSourceVersionInfoA(DTWAIN_SOURCE Source, LPSTR szProduct, LONG nLength);
         LONG DTWAIN_GetSourceVersionInfoW(DTWAIN_SOURCE Source, LPWSTR szProduct, LONG nLength);

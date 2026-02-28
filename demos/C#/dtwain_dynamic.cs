@@ -2223,8 +2223,10 @@
         public delegate int DTWAIN_GetBatteryMinutesDelegate(DTWAIN_SOURCE Source, ref int lpMinutes);
         public delegate int DTWAIN_GetBatteryPercentDelegate(DTWAIN_SOURCE Source, ref int lpPercent);
         public delegate int DTWAIN_GetBitDepthDelegate(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent);
+        public delegate int DTWAIN_GetBitDepthExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetBlankPageAutoDetectionDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetBrightnessDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness);
+        public delegate DTWAIN_FLOAT DTWAIN_GetBrightnessExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetBrightnessStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Brightness);
         public delegate int DTWAIN_GetBrightnessStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Brightness);
         public delegate HANDLE DTWAIN_GetBufferedTransferInfoDelegate(DTWAIN_SOURCE Source, ref DWORD Compression, ref DWORD BytesPerRow, ref DWORD Columns, ref DWORD Rows, ref DWORD XOffset, ref DWORD YOffset, ref DWORD Flags, ref DWORD BytesWritten, ref DWORD MemoryLength);
@@ -2245,10 +2247,12 @@
         public delegate int DTWAIN_GetCaptionDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Caption);
         public delegate int DTWAIN_GetCompressionSizeDelegate(DTWAIN_SOURCE Source, ref int lBytes);
         public delegate int DTWAIN_GetCompressionTypeDelegate(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent);
+        public delegate int DTWAIN_GetCompressionTypeExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetConditionCodeStringDelegate(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetConditionCodeStringDelegate_overload(int lError, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetConstantFromTwainNameDelegate([MarshalAs(UnmanagedType.LPTStr)] string lpszBuffer);
         public delegate int DTWAIN_GetContrastDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast);
+        public delegate DTWAIN_FLOAT DTWAIN_GetContrastExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetContrastStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Contrast);
         public delegate int DTWAIN_GetContrastStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Contrast);
         public delegate int DTWAIN_GetCountryDelegate();
@@ -2308,6 +2312,7 @@
         public delegate int DTWAIN_GetImageInfoStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpXResolution, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageInfoStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetJobControlDelegate(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
+        public delegate int DTWAIN_GetJobControlExDelegate(DTWAIN_SOURCE Source, int bGetCurrent);
         public delegate int DTWAIN_GetJpegValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetJpegXRValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetLanguageDelegate();
@@ -2315,6 +2320,7 @@
         public delegate int DTWAIN_GetLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength);
         public delegate int DTWAIN_GetLibraryPathDelegate_overload(System.IntPtr lpszVer, int nLength);
         public delegate int DTWAIN_GetLightPathDelegate(DTWAIN_SOURCE Source, ref int lpLightPath);
+        public delegate int DTWAIN_GetLightPathExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetLightSourceDelegate(DTWAIN_SOURCE Source, ref int LightSource);
         public delegate int DTWAIN_GetLightSourcesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY LightSources);
         public delegate DTWAIN_ARRAY DTWAIN_GetLightSourcesExDelegate(DTWAIN_SOURCE Source);
@@ -2350,6 +2356,7 @@
         public delegate int DTWAIN_GetOCRVersionInfoDelegate(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder buffer, int maxBufSize);
         public delegate int DTWAIN_GetOCRVersionInfoDelegate_overload(DTWAIN_OCRENGINE Engine, System.IntPtr buffer, int maxBufSize);
         public delegate int DTWAIN_GetOrientationDelegate(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent);
+        public delegate int DTWAIN_GetOrientationExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetOverscanDelegate(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent);
         public delegate int DTWAIN_GetPDFTextElementFloatDelegate(DTWAIN_PDFTEXTELEMENT TextElement, ref DTWAIN_FLOAT val1, ref DTWAIN_FLOAT val2, int Flags);
         public delegate int DTWAIN_GetPDFTextElementLongDelegate(DTWAIN_PDFTEXTELEMENT TextElement, ref int val1, ref int val2, int Flags);
@@ -2368,18 +2375,24 @@
         public delegate int DTWAIN_GetPixelFlavorDelegate(DTWAIN_SOURCE Source, ref int lpPixelFlavor);
         public delegate int DTWAIN_GetPixelTypeDelegate(DTWAIN_SOURCE Source, ref int PixelType, ref int BitDepth, int bCurrent);
         public delegate int DTWAIN_GetPrinterDelegate(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent);
+        public delegate int DTWAIN_GetPrinterExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetPrinterStartNumberDelegate(DTWAIN_SOURCE Source, ref int nStart);
+        public delegate int DTWAIN_GetPrinterStartNumberExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetPrinterStringModeDelegate(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent);
+        public delegate int DTWAIN_GetPrinterStringModeExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetPrinterStringsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString);
+        public delegate DTWAIN_ARRAY DTWAIN_GetPrinterStringsExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetPrinterSuffixStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Suffix, int nMaxLen);
         public delegate int DTWAIN_GetPrinterSuffixStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Suffix, int nMaxLen);
         public delegate int DTWAIN_GetRegisteredMsgDelegate();
         public delegate int DTWAIN_GetResolutionDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution);
+        public delegate DTWAIN_FLOAT DTWAIN_GetResolutionExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetResolutionStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution);
         public delegate int DTWAIN_GetResolutionStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Resolution);
         public delegate int DTWAIN_GetResourceStringDelegate(int ResourceID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetResourceStringDelegate_overload(int ResourceID, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetRotationDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation);
+        public delegate DTWAIN_FLOAT DTWAIN_GetRotationExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetRotationStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Rotation);
         public delegate int DTWAIN_GetRotationStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Rotation);
         public delegate int DTWAIN_GetSaveFileNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder fName, int nMaxLen);
@@ -2403,6 +2416,7 @@
         public delegate int DTWAIN_GetSourceProductNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceProductNameDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceUnitDelegate(DTWAIN_SOURCE Source, ref int lpUnit);
+        public delegate int DTWAIN_GetSourceUnitExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetSourceVersionInfoDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionInfoDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionNumberDelegate(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor);
@@ -3760,11 +3774,17 @@
         [DTWAINNativeFunction("DTWAIN_GetBitDepth")]
         private readonly DTWAIN_GetBitDepthDelegate  _DTWAIN_GetBitDepth;
 
+        [DTWAINNativeFunction("DTWAIN_GetBitDepthEx")]
+        private readonly DTWAIN_GetBitDepthExDelegate  _DTWAIN_GetBitDepthEx;
+
         [DTWAINNativeFunction("DTWAIN_GetBlankPageAutoDetection")]
         private readonly DTWAIN_GetBlankPageAutoDetectionDelegate  _DTWAIN_GetBlankPageAutoDetection;
 
         [DTWAINNativeFunction("DTWAIN_GetBrightness")]
         private readonly DTWAIN_GetBrightnessDelegate  _DTWAIN_GetBrightness;
+
+        [DTWAINNativeFunction("DTWAIN_GetBrightnessEx")]
+        private readonly DTWAIN_GetBrightnessExDelegate  _DTWAIN_GetBrightnessEx;
 
         [DTWAINNativeFunction("DTWAIN_GetBrightnessString")]
         private readonly DTWAIN_GetBrightnessStringDelegate  _DTWAIN_GetBrightnessString;
@@ -3826,6 +3846,9 @@
         [DTWAINNativeFunction("DTWAIN_GetCompressionType")]
         private readonly DTWAIN_GetCompressionTypeDelegate  _DTWAIN_GetCompressionType;
 
+        [DTWAINNativeFunction("DTWAIN_GetCompressionTypeEx")]
+        private readonly DTWAIN_GetCompressionTypeExDelegate  _DTWAIN_GetCompressionTypeEx;
+
         [DTWAINNativeFunction("DTWAIN_GetConditionCodeString")]
         private readonly DTWAIN_GetConditionCodeStringDelegate  _DTWAIN_GetConditionCodeString;
 
@@ -3837,6 +3860,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetContrast")]
         private readonly DTWAIN_GetContrastDelegate  _DTWAIN_GetContrast;
+
+        [DTWAINNativeFunction("DTWAIN_GetContrastEx")]
+        private readonly DTWAIN_GetContrastExDelegate  _DTWAIN_GetContrastEx;
 
         [DTWAINNativeFunction("DTWAIN_GetContrastString")]
         private readonly DTWAIN_GetContrastStringDelegate  _DTWAIN_GetContrastString;
@@ -4015,6 +4041,9 @@
         [DTWAINNativeFunction("DTWAIN_GetJobControl")]
         private readonly DTWAIN_GetJobControlDelegate  _DTWAIN_GetJobControl;
 
+        [DTWAINNativeFunction("DTWAIN_GetJobControlEx")]
+        private readonly DTWAIN_GetJobControlExDelegate  _DTWAIN_GetJobControlEx;
+
         [DTWAINNativeFunction("DTWAIN_GetJpegValues")]
         private readonly DTWAIN_GetJpegValuesDelegate  _DTWAIN_GetJpegValues;
 
@@ -4035,6 +4064,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetLightPath")]
         private readonly DTWAIN_GetLightPathDelegate  _DTWAIN_GetLightPath;
+
+        [DTWAINNativeFunction("DTWAIN_GetLightPathEx")]
+        private readonly DTWAIN_GetLightPathExDelegate  _DTWAIN_GetLightPathEx;
 
         [DTWAINNativeFunction("DTWAIN_GetLightSource")]
         private readonly DTWAIN_GetLightSourceDelegate  _DTWAIN_GetLightSource;
@@ -4141,6 +4173,9 @@
         [DTWAINNativeFunction("DTWAIN_GetOrientation")]
         private readonly DTWAIN_GetOrientationDelegate  _DTWAIN_GetOrientation;
 
+        [DTWAINNativeFunction("DTWAIN_GetOrientationEx")]
+        private readonly DTWAIN_GetOrientationExDelegate  _DTWAIN_GetOrientationEx;
+
         [DTWAINNativeFunction("DTWAIN_GetOverscan")]
         private readonly DTWAIN_GetOverscanDelegate  _DTWAIN_GetOverscan;
 
@@ -4195,14 +4230,26 @@
         [DTWAINNativeFunction("DTWAIN_GetPrinter")]
         private readonly DTWAIN_GetPrinterDelegate  _DTWAIN_GetPrinter;
 
+        [DTWAINNativeFunction("DTWAIN_GetPrinterEx")]
+        private readonly DTWAIN_GetPrinterExDelegate  _DTWAIN_GetPrinterEx;
+
         [DTWAINNativeFunction("DTWAIN_GetPrinterStartNumber")]
         private readonly DTWAIN_GetPrinterStartNumberDelegate  _DTWAIN_GetPrinterStartNumber;
+
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStartNumberEx")]
+        private readonly DTWAIN_GetPrinterStartNumberExDelegate  _DTWAIN_GetPrinterStartNumberEx;
 
         [DTWAINNativeFunction("DTWAIN_GetPrinterStringMode")]
         private readonly DTWAIN_GetPrinterStringModeDelegate  _DTWAIN_GetPrinterStringMode;
 
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStringModeEx")]
+        private readonly DTWAIN_GetPrinterStringModeExDelegate  _DTWAIN_GetPrinterStringModeEx;
+
         [DTWAINNativeFunction("DTWAIN_GetPrinterStrings")]
         private readonly DTWAIN_GetPrinterStringsDelegate  _DTWAIN_GetPrinterStrings;
+
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStringsEx")]
+        private readonly DTWAIN_GetPrinterStringsExDelegate  _DTWAIN_GetPrinterStringsEx;
 
         [DTWAINNativeFunction("DTWAIN_GetPrinterSuffixString")]
         private readonly DTWAIN_GetPrinterSuffixStringDelegate  _DTWAIN_GetPrinterSuffixString;
@@ -4215,6 +4262,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetResolution")]
         private readonly DTWAIN_GetResolutionDelegate  _DTWAIN_GetResolution;
+
+        [DTWAINNativeFunction("DTWAIN_GetResolutionEx")]
+        private readonly DTWAIN_GetResolutionExDelegate  _DTWAIN_GetResolutionEx;
 
         [DTWAINNativeFunction("DTWAIN_GetResolutionString")]
         private readonly DTWAIN_GetResolutionStringDelegate  _DTWAIN_GetResolutionString;
@@ -4230,6 +4280,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetRotation")]
         private readonly DTWAIN_GetRotationDelegate  _DTWAIN_GetRotation;
+
+        [DTWAINNativeFunction("DTWAIN_GetRotationEx")]
+        private readonly DTWAIN_GetRotationExDelegate  _DTWAIN_GetRotationEx;
 
         [DTWAINNativeFunction("DTWAIN_GetRotationString")]
         private readonly DTWAIN_GetRotationStringDelegate  _DTWAIN_GetRotationString;
@@ -4299,6 +4352,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetSourceUnit")]
         private readonly DTWAIN_GetSourceUnitDelegate  _DTWAIN_GetSourceUnit;
+
+        [DTWAINNativeFunction("DTWAIN_GetSourceUnitEx")]
+        private readonly DTWAIN_GetSourceUnitExDelegate  _DTWAIN_GetSourceUnitEx;
 
         [DTWAINNativeFunction("DTWAIN_GetSourceVersionInfo")]
         private readonly DTWAIN_GetSourceVersionInfoDelegate  _DTWAIN_GetSourceVersionInfo;
@@ -6378,11 +6434,17 @@
         public  int DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent)
         => _DTWAIN_GetBitDepth(Source, ref BitDepth, bCurrent);
 
+        public  int DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetBitDepthEx(Source, bCurrent);
+
         public  int DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source)
         => _DTWAIN_GetBlankPageAutoDetection(Source);
 
         public  int DTWAIN_GetBrightness(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness)
         => _DTWAIN_GetBrightness(Source, ref Brightness);
+
+        public  DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetBrightnessEx(Source);
 
         public  int DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Brightness)
         => _DTWAIN_GetBrightnessString(Source, Brightness);
@@ -6444,6 +6506,9 @@
         public  int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent)
         => _DTWAIN_GetCompressionType(Source, ref lpCompression, bCurrent);
 
+        public  int DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetCompressionTypeEx(Source, bCurrent);
+
         public  int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
         => _DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen);
 
@@ -6455,6 +6520,9 @@
 
         public  int DTWAIN_GetContrast(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast)
         => _DTWAIN_GetContrast(Source, ref Contrast);
+
+        public  DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetContrastEx(Source);
 
         public  int DTWAIN_GetContrastString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Contrast)
         => _DTWAIN_GetContrastString(Source, Contrast);
@@ -6633,6 +6701,9 @@
         public  int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent)
         => _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent);
 
+        public  int DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, int bGetCurrent)
+        => _DTWAIN_GetJobControlEx(Source, bGetCurrent);
+
         public  int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
         => _DTWAIN_GetJpegValues(Source, ref pQuality, ref Progressive);
 
@@ -6653,6 +6724,9 @@
 
         public  int DTWAIN_GetLightPath(DTWAIN_SOURCE Source, ref int lpLightPath)
         => _DTWAIN_GetLightPath(Source, ref lpLightPath);
+
+        public  int DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetLightPathEx(Source);
 
         public  int DTWAIN_GetLightSource(DTWAIN_SOURCE Source, ref int LightSource)
         => _DTWAIN_GetLightSource(Source, ref LightSource);
@@ -6759,6 +6833,9 @@
         public  int DTWAIN_GetOrientation(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent)
         => _DTWAIN_GetOrientation(Source, ref lpOrient, bCurrent);
 
+        public  int DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetOrientationEx(Source, bCurrent);
+
         public  int DTWAIN_GetOverscan(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent)
         => _DTWAIN_GetOverscan(Source, ref lpOverscan, bCurrent);
 
@@ -6813,14 +6890,26 @@
         public  int DTWAIN_GetPrinter(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent)
         => _DTWAIN_GetPrinter(Source, ref lpPrinter, bCurrent);
 
+        public  int DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetPrinterEx(Source, bCurrent);
+
         public  int DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, ref int nStart)
         => _DTWAIN_GetPrinterStartNumber(Source, ref nStart);
+
+        public  int DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetPrinterStartNumberEx(Source);
 
         public  int DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent)
         => _DTWAIN_GetPrinterStringMode(Source, ref PrinterMode, bCurrent);
 
+        public  int DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetPrinterStringModeEx(Source, bCurrent);
+
         public  int DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString)
         => _DTWAIN_GetPrinterStrings(Source, ref ArrayString);
+
+        public  DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetPrinterStringsEx(Source);
 
         public  int DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Suffix, int nMaxLen)
         => _DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen);
@@ -6833,6 +6922,9 @@
 
         public  int DTWAIN_GetResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution)
         => _DTWAIN_GetResolution(Source, ref Resolution);
+
+        public  DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetResolutionEx(Source);
 
         public  int DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution)
         => _DTWAIN_GetResolutionString(Source, Resolution);
@@ -6848,6 +6940,9 @@
 
         public  int DTWAIN_GetRotation(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation)
         => _DTWAIN_GetRotation(Source, ref Rotation);
+
+        public  DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetRotationEx(Source);
 
         public  int DTWAIN_GetRotationString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Rotation)
         => _DTWAIN_GetRotationString(Source, Rotation);
@@ -6917,6 +7012,9 @@
 
         public  int DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, ref int lpUnit)
         => _DTWAIN_GetSourceUnit(Source, ref lpUnit);
+
+        public  int DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetSourceUnitEx(Source);
 
         public  int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
         => _DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen);

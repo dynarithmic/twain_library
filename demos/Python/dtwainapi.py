@@ -2142,8 +2142,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetBatteryMinutes.restype = ct.c_long
      theDLL.DTWAIN_GetBatteryPercent.restype = ct.c_long
      theDLL.DTWAIN_GetBitDepth.restype = ct.c_long
+     theDLL.DTWAIN_GetBitDepthEx.restype = ct.c_long
      theDLL.DTWAIN_GetBlankPageAutoDetection.restype = ct.c_long
      theDLL.DTWAIN_GetBrightness.restype = ct.c_long
+     theDLL.DTWAIN_GetBrightnessEx.restype = ct.c_double
      theDLL.DTWAIN_GetBrightnessString.restype = ct.c_long
      theDLL.DTWAIN_GetBrightnessStringA.restype = ct.c_long
      theDLL.DTWAIN_GetBrightnessStringW.restype = ct.c_long
@@ -2168,6 +2170,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCaptionW.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionSize.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionType.restype = ct.c_long
+     theDLL.DTWAIN_GetCompressionTypeEx.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeString.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeStringA.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeStringW.restype = ct.c_long
@@ -2175,6 +2178,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetConstantFromTwainNameA.restype = ct.c_long
      theDLL.DTWAIN_GetConstantFromTwainNameW.restype = ct.c_long
      theDLL.DTWAIN_GetContrast.restype = ct.c_long
+     theDLL.DTWAIN_GetContrastEx.restype = ct.c_double
      theDLL.DTWAIN_GetContrastString.restype = ct.c_long
      theDLL.DTWAIN_GetContrastStringA.restype = ct.c_long
      theDLL.DTWAIN_GetContrastStringW.restype = ct.c_long
@@ -2248,6 +2252,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
+     theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
      theDLL.DTWAIN_GetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
@@ -2256,6 +2261,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetLibraryPathA.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_GetLightPath.restype = ct.c_long
+     theDLL.DTWAIN_GetLightPathEx.restype = ct.c_long
      theDLL.DTWAIN_GetLightSource.restype = ct.c_long
      theDLL.DTWAIN_GetLightSources.restype = ct.c_long
      theDLL.DTWAIN_GetLightSourcesEx.restype = ct.c_void_p
@@ -2300,6 +2306,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetOCRVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetOCRVersionInfoW.restype = ct.c_long
      theDLL.DTWAIN_GetOrientation.restype = ct.c_long
+     theDLL.DTWAIN_GetOrientationEx.restype = ct.c_long
      theDLL.DTWAIN_GetOverscan.restype = ct.c_long
      theDLL.DTWAIN_GetPDFTextElementFloat.restype = ct.c_long
      theDLL.DTWAIN_GetPDFTextElementLong.restype = ct.c_long
@@ -2321,14 +2328,19 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPixelFlavor.restype = ct.c_long
      theDLL.DTWAIN_GetPixelType.restype = ct.c_long
      theDLL.DTWAIN_GetPrinter.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStartNumber.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStartNumberEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStringMode.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStringModeEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStrings.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStringsEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetPrinterSuffixString.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterSuffixStringA.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterSuffixStringW.restype = ct.c_long
      theDLL.DTWAIN_GetRegisteredMsg.restype = ct.c_long
      theDLL.DTWAIN_GetResolution.restype = ct.c_long
+     theDLL.DTWAIN_GetResolutionEx.restype = ct.c_double
      theDLL.DTWAIN_GetResolutionString.restype = ct.c_long
      theDLL.DTWAIN_GetResolutionStringA.restype = ct.c_long
      theDLL.DTWAIN_GetResolutionStringW.restype = ct.c_long
@@ -2336,6 +2348,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetResourceStringA.restype = ct.c_long
      theDLL.DTWAIN_GetResourceStringW.restype = ct.c_long
      theDLL.DTWAIN_GetRotation.restype = ct.c_long
+     theDLL.DTWAIN_GetRotationEx.restype = ct.c_double
      theDLL.DTWAIN_GetRotationString.restype = ct.c_long
      theDLL.DTWAIN_GetRotationStringA.restype = ct.c_long
      theDLL.DTWAIN_GetRotationStringW.restype = ct.c_long
@@ -2368,6 +2381,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSourceProductNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSourceProductNameW.restype = ct.c_long
      theDLL.DTWAIN_GetSourceUnit.restype = ct.c_long
+     theDLL.DTWAIN_GetSourceUnitEx.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfo.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfoW.restype = ct.c_long
@@ -3254,8 +3268,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetBatteryMinutes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetBatteryPercent.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetBitDepth.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetBitDepthEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetBlankPageAutoDetection.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetBrightness.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetBrightnessEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetBrightnessString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetBrightnessStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetBrightnessStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -3278,6 +3294,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetCompressionSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetCompressionType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetCompressionTypeEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeString.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeStringA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeStringW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -3285,6 +3302,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetConstantFromTwainNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetConstantFromTwainNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetContrast.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetContrastEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetContrastString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetContrastStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetContrastStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -3352,12 +3370,14 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetLightPath.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetLightPathEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetLightSource.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLightSources.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetLightSourcesEx.argtypes = [ct.c_void_p]
@@ -3399,6 +3419,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetOCRVersionInfoA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetOCRVersionInfoW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetOrientation.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetOrientationEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetOverscan.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPDFTextElementFloat.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double), ct.POINTER(ct.c_double), ct.c_long]
      theDLL.DTWAIN_GetPDFTextElementLong.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
@@ -3420,13 +3441,18 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPixelFlavor.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetPixelType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPrinter.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetPrinterEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterStartNumber.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetPrinterStartNumberEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPrinterStringMode.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetPrinterStringModeEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterStrings.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetPrinterStringsEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPrinterSuffixString.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterSuffixStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterSuffixStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetResolution.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetResolutionEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetResolutionString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetResolutionStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetResolutionStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -3434,6 +3460,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetResourceStringA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetResourceStringW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetRotation.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetRotationEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetRotationString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetRotationStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetRotationStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -3466,6 +3493,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSourceProductNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceProductNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSourceUnit.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetSourceUnitEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSourceVersionInfo.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSourceVersionInfoA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceVersionInfoW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
@@ -4355,8 +4383,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetBatteryMinutes.restype = ct.c_long
      theDLL.DTWAIN_GetBatteryPercent.restype = ct.c_long
      theDLL.DTWAIN_GetBitDepth.restype = ct.c_long
+     theDLL.DTWAIN_GetBitDepthEx.restype = ct.c_long
      theDLL.DTWAIN_GetBlankPageAutoDetection.restype = ct.c_long
      theDLL.DTWAIN_GetBrightness.restype = ct.c_long
+     theDLL.DTWAIN_GetBrightnessEx.restype = ct.c_double
      theDLL.DTWAIN_GetBrightnessString.restype = ct.c_long
      theDLL.DTWAIN_GetBrightnessStringA.restype = ct.c_long
      theDLL.DTWAIN_GetBrightnessStringW.restype = ct.c_long
@@ -4381,6 +4411,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCaptionW.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionSize.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionType.restype = ct.c_long
+     theDLL.DTWAIN_GetCompressionTypeEx.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeString.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeStringA.restype = ct.c_long
      theDLL.DTWAIN_GetConditionCodeStringW.restype = ct.c_long
@@ -4388,6 +4419,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetConstantFromTwainNameA.restype = ct.c_long
      theDLL.DTWAIN_GetConstantFromTwainNameW.restype = ct.c_long
      theDLL.DTWAIN_GetContrast.restype = ct.c_long
+     theDLL.DTWAIN_GetContrastEx.restype = ct.c_double
      theDLL.DTWAIN_GetContrastString.restype = ct.c_long
      theDLL.DTWAIN_GetContrastStringA.restype = ct.c_long
      theDLL.DTWAIN_GetContrastStringW.restype = ct.c_long
@@ -4461,6 +4493,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
+     theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
      theDLL.DTWAIN_GetJpegXRValues.restype = ct.c_long
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
@@ -4469,6 +4502,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetLibraryPathA.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_GetLightPath.restype = ct.c_long
+     theDLL.DTWAIN_GetLightPathEx.restype = ct.c_long
      theDLL.DTWAIN_GetLightSource.restype = ct.c_long
      theDLL.DTWAIN_GetLightSources.restype = ct.c_long
      theDLL.DTWAIN_GetLightSourcesEx.restype = ct.c_void_p
@@ -4513,6 +4547,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetOCRVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetOCRVersionInfoW.restype = ct.c_long
      theDLL.DTWAIN_GetOrientation.restype = ct.c_long
+     theDLL.DTWAIN_GetOrientationEx.restype = ct.c_long
      theDLL.DTWAIN_GetOverscan.restype = ct.c_long
      theDLL.DTWAIN_GetPDFTextElementFloat.restype = ct.c_long
      theDLL.DTWAIN_GetPDFTextElementLong.restype = ct.c_long
@@ -4534,14 +4569,19 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPixelFlavor.restype = ct.c_long
      theDLL.DTWAIN_GetPixelType.restype = ct.c_long
      theDLL.DTWAIN_GetPrinter.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStartNumber.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStartNumberEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStringMode.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStringModeEx.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterStrings.restype = ct.c_long
+     theDLL.DTWAIN_GetPrinterStringsEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetPrinterSuffixString.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterSuffixStringA.restype = ct.c_long
      theDLL.DTWAIN_GetPrinterSuffixStringW.restype = ct.c_long
      theDLL.DTWAIN_GetRegisteredMsg.restype = ct.c_long
      theDLL.DTWAIN_GetResolution.restype = ct.c_long
+     theDLL.DTWAIN_GetResolutionEx.restype = ct.c_double
      theDLL.DTWAIN_GetResolutionString.restype = ct.c_long
      theDLL.DTWAIN_GetResolutionStringA.restype = ct.c_long
      theDLL.DTWAIN_GetResolutionStringW.restype = ct.c_long
@@ -4549,6 +4589,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetResourceStringA.restype = ct.c_long
      theDLL.DTWAIN_GetResourceStringW.restype = ct.c_long
      theDLL.DTWAIN_GetRotation.restype = ct.c_long
+     theDLL.DTWAIN_GetRotationEx.restype = ct.c_double
      theDLL.DTWAIN_GetRotationString.restype = ct.c_long
      theDLL.DTWAIN_GetRotationStringA.restype = ct.c_long
      theDLL.DTWAIN_GetRotationStringW.restype = ct.c_long
@@ -4581,6 +4622,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSourceProductNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSourceProductNameW.restype = ct.c_long
      theDLL.DTWAIN_GetSourceUnit.restype = ct.c_long
+     theDLL.DTWAIN_GetSourceUnitEx.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfo.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfoA.restype = ct.c_long
      theDLL.DTWAIN_GetSourceVersionInfoW.restype = ct.c_long
@@ -5467,8 +5509,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetBatteryMinutes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetBatteryPercent.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetBitDepth.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetBitDepthEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetBlankPageAutoDetection.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetBrightness.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetBrightnessEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetBrightnessString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetBrightnessStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetBrightnessStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -5491,6 +5535,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetCompressionSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetCompressionType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetCompressionTypeEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeString.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeStringA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetConditionCodeStringW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
@@ -5498,6 +5543,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetConstantFromTwainNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetConstantFromTwainNameW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetContrast.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetContrastEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetContrastString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetContrastStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetContrastStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -5565,12 +5611,14 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetLightPath.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetLightPathEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetLightSource.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLightSources.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetLightSourcesEx.argtypes = [ct.c_void_p]
@@ -5612,6 +5660,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetOCRVersionInfoA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetOCRVersionInfoW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetOrientation.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetOrientationEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetOverscan.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPDFTextElementFloat.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double), ct.POINTER(ct.c_double), ct.c_long]
      theDLL.DTWAIN_GetPDFTextElementLong.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
@@ -5633,13 +5682,18 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPixelFlavor.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetPixelType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPrinter.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetPrinterEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterStartNumber.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetPrinterStartNumberEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPrinterStringMode.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
+     theDLL.DTWAIN_GetPrinterStringModeEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterStrings.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
+     theDLL.DTWAIN_GetPrinterStringsEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPrinterSuffixString.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterSuffixStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetPrinterSuffixStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetResolution.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetResolutionEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetResolutionString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetResolutionStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetResolutionStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -5647,6 +5701,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetResourceStringA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetResourceStringW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetRotation.argtypes = [ct.c_void_p, ct.POINTER(ct.c_double)]
+     theDLL.DTWAIN_GetRotationEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetRotationString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetRotationStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetRotationStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -5679,6 +5734,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSourceProductNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceProductNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSourceUnit.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetSourceUnitEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSourceVersionInfo.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceVersionInfoA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSourceVersionInfoW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
