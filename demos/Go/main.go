@@ -58,7 +58,7 @@ func main() {
         }
 
         // Get the capabilities and list them
-        allCaps := api_func.DTWAIN_EnumSupportedCapsEx2(twain_source)
+        allCaps := api_func.DTWAIN_EnumSupportedCapsEx(twain_source)
         allCaps_Size := api_func.DTWAIN_ArrayGetCount(allCaps)
         fmt.Printf("All Caps: %d\n", allCaps_Size)
 

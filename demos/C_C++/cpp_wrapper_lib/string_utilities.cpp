@@ -36,41 +36,6 @@ namespace dynarithmic
 {
 	namespace twain
 	{
-		std::string& ltrim(std::string& str)
-		{
-			auto it2 = std::find_if(str.begin(), str.end(), [](unsigned char ch)
-				{ return !isspace(ch); });
-			str.erase(str.begin(), it2);
-			return str;
-		}
-
-		std::string& rtrim(std::string& str)
-		{
-			auto it1 = std::find_if(str.rbegin(), str.rend(), [](unsigned char ch)
-				{ return !isspace(ch); });
-			str.erase(it1.base(), str.end());
-			return str;
-		}
-
-		std::string ltrim_copy(std::string str)
-		{
-			return ltrim(str);
-		}
-
-		std::string rtrim_copy(std::string str)
-		{
-			return rtrim(str);
-		}
-
-		std::string trim_copy(std::string str)
-		{
-			return ltrim(rtrim(str));
-		}
-
-		std::string& trim(std::string& str)
-		{
-			return ltrim(rtrim(str));
-		}
 	}
 }
 #ifdef _MSC_VER

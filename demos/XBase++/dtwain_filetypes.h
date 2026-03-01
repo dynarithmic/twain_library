@@ -1,6 +1,6 @@
 /*
 This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-Copyright (c) 2002-2025 Dynarithmic Software.
+Copyright (c) 2002-2026 Dynarithmic Software.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -91,4 +91,6 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_BIGTIFFJPEG       11015   /* BigTIFF JPEG */
 #define DTWAIN_BIGTIFFJPEGMULTI  11016   /* BigTIFF JPEG (Multipage) */
 #define DTWAIN_JPEGXR            12000   /* JPEG-XR format */
+#define DTWAIN_SVG               13000   /* SVG format */
+#define DTWAIN_SVGZ              13001   /* SVGZ format */
 #endif

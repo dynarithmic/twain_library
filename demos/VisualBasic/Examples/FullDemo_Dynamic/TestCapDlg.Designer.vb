@@ -178,7 +178,7 @@ Partial Class TestCapDlg
         'lblSetContainer
         '
         Me.lblSetContainer.AutoSize = True
-        Me.lblSetContainer.Location = New System.Drawing.Point(161, 276)
+        Me.lblSetContainer.Location = New System.Drawing.Point(172, 276)
         Me.lblSetContainer.Name = "lblSetContainer"
         Me.lblSetContainer.Size = New System.Drawing.Size(55, 13)
         Me.lblSetContainer.TabIndex = 40
@@ -199,13 +199,13 @@ Partial Class TestCapDlg
         Me.cmbSetTypes.FormattingEnabled = True
         Me.cmbSetTypes.Location = New System.Drawing.Point(21, 293)
         Me.cmbSetTypes.Name = "cmbSetTypes"
-        Me.cmbSetTypes.Size = New System.Drawing.Size(134, 21)
+        Me.cmbSetTypes.Size = New System.Drawing.Size(148, 21)
         Me.cmbSetTypes.TabIndex = 42
         '
         'cmbContainerSet
         '
         Me.cmbContainerSet.FormattingEnabled = True
-        Me.cmbContainerSet.Location = New System.Drawing.Point(161, 293)
+        Me.cmbContainerSet.Location = New System.Drawing.Point(172, 293)
         Me.cmbContainerSet.Name = "cmbContainerSet"
         Me.cmbContainerSet.Size = New System.Drawing.Size(145, 21)
         Me.cmbContainerSet.TabIndex = 43

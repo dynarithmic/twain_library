@@ -486,6 +486,8 @@ namespace dynarithmic
             static constexpr value_type  postscript2 = DTWAIN_POSTSCRIPT2;
             static constexpr value_type  postscript3 = DTWAIN_POSTSCRIPT3;
             static constexpr value_type  psd = DTWAIN_PSD;
+            static constexpr value_type  svg = DTWAIN_SVG;
+            static constexpr value_type  svgz = DTWAIN_SVGZ;
             static constexpr value_type  targa = DTWAIN_TGA;
             static constexpr value_type  targarle = DTWAIN_TGA_RLE;
             static constexpr value_type  text = DTWAIN_TEXT;
@@ -1837,7 +1839,7 @@ namespace dynarithmic
             static constexpr bool is_universal_support(filetype_value::value_type ft)
             {
                 #if __cplusplus >= 202002L
-                constexpr std::array<filetype_value::value_type, 59> supported_types =
+                constexpr std::array<filetype_value::value_type, 61> supported_types =
                 #else    
                 constexpr filetype_value::value_type supported_types [] = 
                 #endif
@@ -1858,6 +1860,8 @@ namespace dynarithmic
                     filetype_value::postscript2,
                     filetype_value::postscript3,
                     filetype_value::psd,
+                    filetype_value::svg,
+                    filetype_value::svgz,
                     filetype_value::targa,
                     filetype_value::targarle,
                     filetype_value::text,

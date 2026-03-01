@@ -419,6 +419,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_BIGTIFFJPEG As Integer = 11015
         Public Const DTWAIN_BIGTIFFJPEGMULTI As Integer = 11016
         Public Const DTWAIN_JPEGXR As Integer = 12000
+        Public Const DTWAIN_SVG As Integer = 13000
+        Public Const DTWAIN_SVGZ As Integer = 13001
         Public Const DTWAIN_INCHES As Integer = 0
         Public Const DTWAIN_CENTIMETERS As Integer = 1
         Public Const DTWAIN_PICAS As Integer = 2
@@ -494,12 +496,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_CAPSET As Integer = 6
         Public Const DTWAIN_CAPRESET As Integer = 7
         Public Const DTWAIN_CAPRESETALL As Integer = 8
-        Public Const DTWAIN_CAPSETCONSTRAINT As Integer = 9
         Public Const DTWAIN_CAPSETAVAILABLE As Integer = 8
         Public Const DTWAIN_CAPSETCURRENT As Integer = 16
         Public Const DTWAIN_CAPGETHELP As Integer = 9
         Public Const DTWAIN_CAPGETLABEL As Integer = 10
         Public Const DTWAIN_CAPGETLABELENUM As Integer = 11
+        Public Const DTWAIN_CAPSETCONSTRAINT As Integer = 12
         Public Const DTWAIN_AREASET As Integer = DTWAIN_CAPSET
         Public Const DTWAIN_AREARESET As Integer = DTWAIN_CAPRESET
         Public Const DTWAIN_AREACURRENT As Integer = DTWAIN_CAPGETCURRENT
@@ -627,6 +629,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_TN_TRANSFERTILEREADY As Integer = 1300
         Public Const DTWAIN_TN_TRANSFERTILEDONE As Integer = 1301
         Public Const DTWAIN_TN_FILECOMPRESSTYPEMISMATCH As Integer = 1302
+        Public Const DTWAIN_TN_SOURCEDETAILS As Integer = 1304
+        Public Const DTWAIN_TN_QUERYACQUIREPAGES As Integer = 1305
         Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
         Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
         Public Const DTWAIN_MODAL As Integer = 0
@@ -1337,6 +1341,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_DLG_HIGHLIGHTFIRST As Integer = 8192
         Public Const DTWAIN_DLG_SAVELASTSCREENPOS As Integer = 16384
         Public Const DTWAIN_DLG_CENTER_CURRENT_MONITOR As Integer = 32768
+        Public Const DTWAIN_DLG_CONSOLEASPARENT As Integer = 65536
         Public Const DTWAIN_RES_ENGLISH As Integer = 0
         Public Const DTWAIN_RES_FRENCH As Integer = 1
         Public Const DTWAIN_RES_SPANISH As Integer = 2
@@ -2058,6 +2063,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_ArrayDestroyFramesDelegate(FrameArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_ArrayDumpToLogDelegate(pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_ArrayFindDelegate(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Ansi)>
@@ -2105,6 +2113,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_ArrayGetAtFloatDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Double) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_ArrayGetAtFloatExDelegate(pArray As System.IntPtr, nWhere As Integer) As System.Double
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_ArrayGetAtFloatStringDelegate(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
         
@@ -2122,6 +2133,12 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_ArrayGetAtLong64Delegate(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_ArrayGetAtLong64ExDelegate(pArray As System.IntPtr, nWhere As Integer) As System.Int64
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_ArrayGetAtLongExDelegate(pArray As System.IntPtr, nWhere As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_ArrayGetAtSourceDelegate(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
@@ -2355,6 +2372,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnableAutomaticSenseMediumDelegate(Source As System.IntPtr, bSet As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnableBarcodeDetectionDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnableDuplexDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2373,7 +2393,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnableMsgNotifyDelegate(bSet As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnablePatchDetectDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
+        Private Delegate Function DTWAIN_EnablePatchcodeDetectionDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnablePeekMessageLoopDelegate(Source As System.IntPtr, bSet As Integer) As Integer
@@ -2430,10 +2450,46 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumAutomaticSenseMediumExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeCodesDelegate(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeCodesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeMaxPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeMaxRetriesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeMaxRetriesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodePrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodePrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeSearchModesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeSearchModesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeTimeOutValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumBarcodeTimeOutValuesExDelegate(Source As System.IntPtr) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumBitDepthsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumBitDepthsExDelegate(Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumBitDepthsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumBitDepthsEx2Delegate(Source As System.IntPtr, PixelType As Integer) As System.IntPtr
@@ -2454,13 +2510,10 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumCamerasDelegate(Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumCamerasExDelegate(Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumCamerasExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumCamerasEx2Delegate(Source As System.IntPtr) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumCamerasEx3Delegate(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumCamerasEx2Delegate(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumCompressionTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -2481,7 +2534,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumCustomCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumCustomCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumCustomCapsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumDoubleFeedDetectLengthsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
@@ -2505,7 +2558,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumExtendedCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumExtendedCapsExDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumExtendedCapsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumExtendedCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
@@ -2565,6 +2618,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumOCRInterfacesDelegate(ByRef OCRInterfaces As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumOCRInterfacesExDelegate() As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumOCRSupportedCapsDelegate(Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2586,40 +2642,40 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumPaperSizesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchCodesDelegate(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodeCodesDelegate(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchCodesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodeCodesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodeMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchMaxPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchMaxRetriesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodeMaxRetriesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchMaxRetriesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodeMaxRetriesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchPrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodePrioritiesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchPrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodePrioritiesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchSearchModesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodeSearchModesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchSearchModesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodeSearchModesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchTimeOutValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumPatchcodeTimeOutValuesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumPatchTimeOutValuesExDelegate(Source As System.IntPtr) As System.IntPtr
+        Private Delegate Function DTWAIN_EnumPatchcodeTimeOutValuesExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumPixelTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -2664,7 +2720,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumSupportedCapsDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumSupportedCapsExDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_EnumSupportedCapsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumSupportedCapsEx2Delegate(Source As System.IntPtr) As System.IntPtr
@@ -2731,12 +2787,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_FlushAcquiredPagesDelegate(Source As System.IntPtr) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_ForceAcquireBitDepthDelegate(Source As System.IntPtr, BitDepth As Integer) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_ForceScanOnNoUIDelegate(Source As System.IntPtr, bSet As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_FrameCreateDelegate(Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
@@ -2835,6 +2885,21 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetAuthorDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szAuthor As StringBuilder) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBarcodeMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBarcodeMaxRetriesDelegate(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBarcodePrioritiesDelegate(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBarcodeSearchModeDelegate(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBarcodeTimeOutDelegate(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetBatteryMinutesDelegate(Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2844,10 +2909,16 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetBitDepthDelegate(Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBitDepthExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetBlankPageAutoDetectionDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetBrightnessDelegate(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetBrightnessExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetBrightnessStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
@@ -2883,6 +2954,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetCapOperationsDelegate(Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetCapOperationsExDelegate(Source As System.IntPtr, lCapability As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCapValuesDelegate(Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2900,6 +2974,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCompressionTypeDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetCompressionTypeExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetConditionCodeStringDelegate(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         
@@ -2908,6 +2985,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetContrastDelegate(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetContrastExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetContrastStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
@@ -2968,6 +3048,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetDuplexTypeDelegate(Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetDuplexTypeExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetErrorBufferDelegate(ByRef ArrayBuffer As System.IntPtr) As Integer
@@ -3048,6 +3131,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetJobControlDelegate(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetJobControlExDelegate(Source As System.IntPtr, bGetCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetJpegValuesDelegate(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3064,6 +3150,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLightPathDelegate(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetLightPathExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLightSourceDelegate(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
@@ -3150,6 +3239,9 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetOrientationDelegate(Source As System.IntPtr, ByRef lpOrient As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetOrientationExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetOverscanDelegate(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3171,19 +3263,19 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetPaperSizeNameDelegate(paperNumber As Integer, <MarshalAs(UnmanagedType.LPTStr)> outName As StringBuilder, nSize As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetPatchMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetPatchcodeMaxPrioritiesDelegate(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetPatchMaxRetriesDelegate(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetPatchcodeMaxRetriesDelegate(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetPatchPrioritiesDelegate(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_GetPatchcodePrioritiesDelegate(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetPatchSearchModeDelegate(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetPatchcodeSearchModeDelegate(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetPatchTimeOutDelegate(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetPatchcodeTimeOutDelegate(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPixelFlavorDelegate(Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
@@ -3195,13 +3287,25 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetPrinterDelegate(Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStartNumberDelegate(Source As System.IntPtr, ByRef nStart As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStartNumberExDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStringModeDelegate(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStringModeExDelegate(Source As System.IntPtr, bCurrent As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetPrinterStringsDelegate(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetPrinterStringsExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetPrinterSuffixStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
@@ -3212,6 +3316,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetResolutionDelegate(Source As System.IntPtr, ByRef Resolution As System.Double) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetResolutionExDelegate(Source As System.IntPtr) As System.Double
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetResolutionStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
         
@@ -3220,6 +3327,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetRotationDelegate(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetRotationExDelegate(Source As System.IntPtr) As System.Double
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetRotationStringDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
@@ -3260,6 +3370,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetSourceUnitDelegate(Source As System.IntPtr, ByRef lpUnit As Integer) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetSourceUnitExDelegate(Source As System.IntPtr) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetSourceVersionInfoDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
         
@@ -3290,20 +3403,8 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetTwainAvailabilityExDelegate(<MarshalAs(UnmanagedType.LPTStr)> directories As StringBuilder, nMaxLen As Integer) As Integer
         
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetTwainCountryNameDelegate(countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetTwainCountryValueDelegate(country As String) As Integer
-        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetTwainHwndDelegate() As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetTwainLanguageNameDelegate(nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetTwainLanguageValueDelegate(szName As String) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetTwainModeDelegate() As Integer
@@ -3313,9 +3414,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetTwainNameFromConstantExDelegate(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetTwainStringNameDelegate(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetTwainTimeoutDelegate() As Integer
@@ -3403,6 +3501,15 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_IsAutomaticSenseMediumSupportedDelegate(Source As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_IsBarcodeCapsSupportedDelegate(Source As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_IsBarcodeDetectionEnabledDelegate(Source As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_IsBarcodeSupportedDelegate(Source As System.IntPtr, BarCode As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_IsBlankPageDetectionOnDelegate(Source As System.IntPtr) As Integer
@@ -3588,13 +3695,13 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_IsPaperSizeSupportedDelegate(Source As System.IntPtr, PaperSize As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_IsPatchCapsSupportedDelegate(Source As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_IsPatchcodeCapsSupportedDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_IsPatchDetectEnabledDelegate(Source As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_IsPatchcodeDetectionEnabledDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_IsPatchSupportedDelegate(Source As System.IntPtr, PatchCode As Integer) As Integer
+        Private Delegate Function DTWAIN_IsPatchcodeSupportedDelegate(Source As System.IntPtr, PatchCode As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_IsPeekMessageLoopEnabledDelegate(Source As System.IntPtr) As Integer
@@ -3891,6 +3998,21 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_SetAvailablePrintersArrayDelegate(Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetBarcodeMaxPrioritiesDelegate(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetBarcodeMaxRetriesDelegate(Source As System.IntPtr, nMaxRetries As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetBarcodePrioritiesDelegate(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetBarcodeSearchModeDelegate(Source As System.IntPtr, nSearchMode As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetBarcodeTimeOutDelegate(Source As System.IntPtr, TimeOutValue As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetBitDepthDelegate(Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -4152,19 +4274,19 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_SetPaperSizeDelegate(Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetPatchMaxPrioritiesDelegate(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+        Private Delegate Function DTWAIN_SetPatchcodeMaxPrioritiesDelegate(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetPatchMaxRetriesDelegate(Source As System.IntPtr, nMaxRetries As Integer) As Integer
+        Private Delegate Function DTWAIN_SetPatchcodeMaxRetriesDelegate(Source As System.IntPtr, nMaxRetries As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetPatchPrioritiesDelegate(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_SetPatchcodePrioritiesDelegate(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetPatchSearchModeDelegate(Source As System.IntPtr, nSearchMode As Integer) As Integer
+        Private Delegate Function DTWAIN_SetPatchcodeSearchModeDelegate(Source As System.IntPtr, nSearchMode As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetPatchTimeOutDelegate(Source As System.IntPtr, TimeOutValue As Integer) As Integer
+        Private Delegate Function DTWAIN_SetPatchcodeTimeOutDelegate(Source As System.IntPtr, TimeOutValue As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetPixelFlavorDelegate(Source As System.IntPtr, PixelFlavor As Integer) As Integer
@@ -4521,6 +4643,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_ArrayDestroyFrames(FrameArray)
         End Function
         
+        Public Function DTWAIN_ArrayDumpToLog(pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_ArrayDumpToLog(pArray)
+        End Function
+        
         Public Function DTWAIN_ArrayFind(pArray As System.IntPtr, pVariant As System.IntPtr) As Integer
         Return api.DTWAIN_ArrayFind(pArray, pVariant)
         End Function
@@ -4585,6 +4711,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_ArrayGetAtFloat(pArray, nWhere, pVal)
         End Function
         
+        Public Function DTWAIN_ArrayGetAtFloatEx(pArray As System.IntPtr, nWhere As Integer) As System.Double
+        Return api.DTWAIN_ArrayGetAtFloatEx(pArray, nWhere)
+        End Function
+        
         Public Function DTWAIN_ArrayGetAtFloatString(pArray As System.IntPtr, nWhere As Integer, <MarshalAs(UnmanagedType.LPTStr)> Val As StringBuilder) As Integer
         Return api.DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val)
         End Function
@@ -4607,6 +4737,14 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_ArrayGetAtLong64(pArray As System.IntPtr, nWhere As Integer, ByRef pVal As System.Int64) As Integer
         Return api.DTWAIN_ArrayGetAtLong64(pArray, nWhere, pVal)
+        End Function
+        
+        Public Function DTWAIN_ArrayGetAtLong64Ex(pArray As System.IntPtr, nWhere As Integer) As System.Int64
+        Return api.DTWAIN_ArrayGetAtLong64Ex(pArray, nWhere)
+        End Function
+        
+        Public Function DTWAIN_ArrayGetAtLongEx(pArray As System.IntPtr, nWhere As Integer) As Integer
+        Return api.DTWAIN_ArrayGetAtLongEx(pArray, nWhere)
         End Function
         
         Public Function DTWAIN_ArrayGetAtSource(pArray As System.IntPtr, nWhere As Integer, ByRef ppSource As System.IntPtr) As Integer
@@ -4917,6 +5055,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnableAutomaticSenseMedium(Source, bSet)
         End Function
         
+        Public Function DTWAIN_EnableBarcodeDetection(Source As System.IntPtr, bEnable As Integer) As Integer
+        Return api.DTWAIN_EnableBarcodeDetection(Source, bEnable)
+        End Function
+        
         Public Function DTWAIN_EnableDuplex(Source As System.IntPtr, bEnable As Integer) As Integer
         Return api.DTWAIN_EnableDuplex(Source, bEnable)
         End Function
@@ -4941,8 +5083,8 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnableMsgNotify(bSet)
         End Function
         
-        Public Function DTWAIN_EnablePatchDetect(Source As System.IntPtr, bEnable As Integer) As Integer
-        Return api.DTWAIN_EnablePatchDetect(Source, bEnable)
+        Public Function DTWAIN_EnablePatchcodeDetection(Source As System.IntPtr, bEnable As Integer) As Integer
+        Return api.DTWAIN_EnablePatchcodeDetection(Source, bEnable)
         End Function
         
         Public Function DTWAIN_EnablePeekMessageLoop(Source As System.IntPtr, bSet As Integer) As Integer
@@ -5017,12 +5159,60 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumAutomaticSenseMediumEx(Source)
         End Function
         
+        Public Function DTWAIN_EnumBarcodeCodes(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodeCodes(Source, PCodes)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeCodesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodeCodesEx(Source)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeMaxPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodeMaxPriorities(Source, pArray)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeMaxPrioritiesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodeMaxPrioritiesEx(Source)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeMaxRetries(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodeMaxRetries(Source, pArray)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeMaxRetriesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodeMaxRetriesEx(Source)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodePriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodePriorities(Source, pArray)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodePrioritiesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodePrioritiesEx(Source)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeSearchModes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodeSearchModes(Source, pArray)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeSearchModesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodeSearchModesEx(Source)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeTimeOutValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumBarcodeTimeOutValues(Source, pArray)
+        End Function
+        
+        Public Function DTWAIN_EnumBarcodeTimeOutValuesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBarcodeTimeOutValuesEx(Source)
+        End Function
+        
         Public Function DTWAIN_EnumBitDepths(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
         Return api.DTWAIN_EnumBitDepths(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumBitDepthsEx(Source As System.IntPtr, PixelType As Integer, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumBitDepthsEx(Source, PixelType, pArray)
+        Public Function DTWAIN_EnumBitDepthsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumBitDepthsEx(Source)
         End Function
         
         Public Function DTWAIN_EnumBitDepthsEx2(Source As System.IntPtr, PixelType As Integer) As System.IntPtr
@@ -5049,16 +5239,12 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumCameras(Source, Cameras)
         End Function
         
-        Public Function DTWAIN_EnumCamerasEx(Source As System.IntPtr, nWhichCamera As Integer, ByRef Cameras As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumCamerasEx(Source, nWhichCamera, Cameras)
+        Public Function DTWAIN_EnumCamerasEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumCamerasEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumCamerasEx2(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumCamerasEx2(Source)
-        End Function
-        
-        Public Function DTWAIN_EnumCamerasEx3(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
-        Return api.DTWAIN_EnumCamerasEx3(Source, nWhichCamera)
+        Public Function DTWAIN_EnumCamerasEx2(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
+        Return api.DTWAIN_EnumCamerasEx2(Source, nWhichCamera)
         End Function
         
         Public Function DTWAIN_EnumCompressionTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -5085,8 +5271,8 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumCustomCaps(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumCustomCapsEx2(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumCustomCapsEx2(Source)
+        Public Function DTWAIN_EnumCustomCapsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumCustomCapsEx(Source)
         End Function
         
         Public Function DTWAIN_EnumDoubleFeedDetectLengths(Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
@@ -5117,8 +5303,8 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumExtendedCaps(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumExtendedCapsEx(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumExtendedCapsEx(Source, pArray)
+        Public Function DTWAIN_EnumExtendedCapsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumExtendedCapsEx(Source)
         End Function
         
         Public Function DTWAIN_EnumExtendedCapsEx2(Source As System.IntPtr) As System.IntPtr
@@ -5197,6 +5383,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumOCRInterfaces(OCRInterfaces)
         End Function
         
+        Public Function DTWAIN_EnumOCRInterfacesEx() As System.IntPtr
+        Return api.DTWAIN_EnumOCRInterfacesEx()
+        End Function
+        
         Public Function DTWAIN_EnumOCRSupportedCaps(Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
         Return api.DTWAIN_EnumOCRSupportedCaps(Engine, SupportedCaps)
         End Function
@@ -5225,52 +5415,52 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumPaperSizesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchCodes(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchCodes(Source, PCodes)
+        Public Function DTWAIN_EnumPatchcodeCodes(Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodeCodes(Source, PCodes)
         End Function
         
-        Public Function DTWAIN_EnumPatchCodesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchCodesEx(Source)
+        Public Function DTWAIN_EnumPatchcodeCodesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodeCodesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchMaxPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchMaxPriorities(Source, pArray)
+        Public Function DTWAIN_EnumPatchcodeMaxPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodeMaxPriorities(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumPatchMaxPrioritiesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchMaxPrioritiesEx(Source)
+        Public Function DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchMaxRetries(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchMaxRetries(Source, pArray)
+        Public Function DTWAIN_EnumPatchcodeMaxRetries(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodeMaxRetries(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumPatchMaxRetriesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchMaxRetriesEx(Source)
+        Public Function DTWAIN_EnumPatchcodeMaxRetriesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodeMaxRetriesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchPriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchPriorities(Source, pArray)
+        Public Function DTWAIN_EnumPatchcodePriorities(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodePriorities(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumPatchPrioritiesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchPrioritiesEx(Source)
+        Public Function DTWAIN_EnumPatchcodePrioritiesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodePrioritiesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchSearchModes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchSearchModes(Source, pArray)
+        Public Function DTWAIN_EnumPatchcodeSearchModes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodeSearchModes(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumPatchSearchModesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchSearchModesEx(Source)
+        Public Function DTWAIN_EnumPatchcodeSearchModesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodeSearchModesEx(Source)
         End Function
         
-        Public Function DTWAIN_EnumPatchTimeOutValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumPatchTimeOutValues(Source, pArray)
+        Public Function DTWAIN_EnumPatchcodeTimeOutValues(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+        Return api.DTWAIN_EnumPatchcodeTimeOutValues(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumPatchTimeOutValuesEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumPatchTimeOutValuesEx(Source)
+        Public Function DTWAIN_EnumPatchcodeTimeOutValuesEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumPatchcodeTimeOutValuesEx(Source)
         End Function
         
         Public Function DTWAIN_EnumPixelTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -5329,8 +5519,8 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumSupportedCaps(Source, pArray)
         End Function
         
-        Public Function DTWAIN_EnumSupportedCapsEx(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumSupportedCapsEx(Source, pArray)
+        Public Function DTWAIN_EnumSupportedCapsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_EnumSupportedCapsEx(Source)
         End Function
         
         Public Function DTWAIN_EnumSupportedCapsEx2(Source As System.IntPtr) As System.IntPtr
@@ -5419,14 +5609,6 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_FlushAcquiredPages(Source As System.IntPtr) As Integer
         Return api.DTWAIN_FlushAcquiredPages(Source)
-        End Function
-        
-        Public Function DTWAIN_ForceAcquireBitDepth(Source As System.IntPtr, BitDepth As Integer) As Integer
-        Return api.DTWAIN_ForceAcquireBitDepth(Source, BitDepth)
-        End Function
-        
-        Public Function DTWAIN_ForceScanOnNoUI(Source As System.IntPtr, bSet As Integer) As Integer
-        Return api.DTWAIN_ForceScanOnNoUI(Source, bSet)
         End Function
         
         Public Function DTWAIN_FrameCreate(Left As System.Double, Top As System.Double, Right As System.Double, Bottom As System.Double) As System.IntPtr
@@ -5557,6 +5739,26 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetAuthor(Source, szAuthor)
         End Function
         
+        Public Function DTWAIN_GetBarcodeMaxPriorities(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBarcodeMaxPriorities(Source, pMaxPriorities, bCurrent)
+        End Function
+        
+        Public Function DTWAIN_GetBarcodeMaxRetries(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBarcodeMaxRetries(Source, pMaxRetries, bCurrent)
+        End Function
+        
+        Public Function DTWAIN_GetBarcodePriorities(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+        Return api.DTWAIN_GetBarcodePriorities(Source, SearchPriorities)
+        End Function
+        
+        Public Function DTWAIN_GetBarcodeSearchMode(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBarcodeSearchMode(Source, pSearchMode, bCurrent)
+        End Function
+        
+        Public Function DTWAIN_GetBarcodeTimeOut(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBarcodeTimeOut(Source, pTimeOut, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetBatteryMinutes(Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
         Return api.DTWAIN_GetBatteryMinutes(Source, lpMinutes)
         End Function
@@ -5569,12 +5771,20 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetBitDepth(Source, BitDepth, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetBitDepthEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetBitDepthEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetBlankPageAutoDetection(Source As System.IntPtr) As Integer
         Return api.DTWAIN_GetBlankPageAutoDetection(Source)
         End Function
         
         Public Function DTWAIN_GetBrightness(Source As System.IntPtr, ByRef Brightness As System.Double) As Integer
         Return api.DTWAIN_GetBrightness(Source, Brightness)
+        End Function
+        
+        Public Function DTWAIN_GetBrightnessEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetBrightnessEx(Source)
         End Function
         
         Public Function DTWAIN_GetBrightnessString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Brightness As StringBuilder) As Integer
@@ -5621,6 +5831,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCapOperations(Source, lCapability, lpOps)
         End Function
         
+        Public Function DTWAIN_GetCapOperationsEx(Source As System.IntPtr, lCapability As Integer) As Integer
+        Return api.DTWAIN_GetCapOperationsEx(Source, lCapability)
+        End Function
+        
         Public Function DTWAIN_GetCapValues(Source As System.IntPtr, lCap As Integer, lGetType As Integer, ByRef pArray As System.IntPtr) As Integer
         Return api.DTWAIN_GetCapValues(Source, lCap, lGetType, pArray)
         End Function
@@ -5645,6 +5859,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCompressionType(Source, lpCompression, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetCompressionTypeEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetCompressionTypeEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetConditionCodeString(lError As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         Return api.DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen)
         End Function
@@ -5655,6 +5873,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetContrast(Source As System.IntPtr, ByRef Contrast As System.Double) As Integer
         Return api.DTWAIN_GetContrast(Source, Contrast)
+        End Function
+        
+        Public Function DTWAIN_GetContrastEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetContrastEx(Source)
         End Function
         
         Public Function DTWAIN_GetContrastString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Contrast As StringBuilder) As Integer
@@ -5735,6 +5957,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetDuplexType(Source As System.IntPtr, ByRef lpDupType As Integer) As Integer
         Return api.DTWAIN_GetDuplexType(Source, lpDupType)
+        End Function
+        
+        Public Function DTWAIN_GetDuplexTypeEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetDuplexTypeEx(Source)
         End Function
         
         Public Function DTWAIN_GetErrorBuffer(ByRef ArrayBuffer As System.IntPtr) As Integer
@@ -5841,6 +6067,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetJobControl(Source, pJobControl, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetJobControlEx(Source As System.IntPtr, bGetCurrent As Integer) As Integer
+        Return api.DTWAIN_GetJobControlEx(Source, bGetCurrent)
+        End Function
+        
         Public Function DTWAIN_GetJpegValues(Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
         Return api.DTWAIN_GetJpegValues(Source, pQuality, Progressive)
         End Function
@@ -5863,6 +6093,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetLightPath(Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
         Return api.DTWAIN_GetLightPath(Source, lpLightPath)
+        End Function
+        
+        Public Function DTWAIN_GetLightPathEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetLightPathEx(Source)
         End Function
         
         Public Function DTWAIN_GetLightSource(Source As System.IntPtr, ByRef LightSource As Integer) As Integer
@@ -5977,6 +6211,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetOrientation(Source, lpOrient, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetOrientationEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetOrientationEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetOverscan(Source As System.IntPtr, ByRef lpOverscan As Integer, bCurrent As Integer) As Integer
         Return api.DTWAIN_GetOverscan(Source, lpOverscan, bCurrent)
         End Function
@@ -6005,24 +6243,24 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetPaperSizeName(paperNumber, outName, nSize)
         End Function
         
-        Public Function DTWAIN_GetPatchMaxPriorities(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
-        Return api.DTWAIN_GetPatchMaxPriorities(Source, pMaxPriorities, bCurrent)
+        Public Function DTWAIN_GetPatchcodeMaxPriorities(Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPatchcodeMaxPriorities(Source, pMaxPriorities, bCurrent)
         End Function
         
-        Public Function DTWAIN_GetPatchMaxRetries(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
-        Return api.DTWAIN_GetPatchMaxRetries(Source, pMaxRetries, bCurrent)
+        Public Function DTWAIN_GetPatchcodeMaxRetries(Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPatchcodeMaxRetries(Source, pMaxRetries, bCurrent)
         End Function
         
-        Public Function DTWAIN_GetPatchPriorities(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
-        Return api.DTWAIN_GetPatchPriorities(Source, SearchPriorities)
+        Public Function DTWAIN_GetPatchcodePriorities(Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+        Return api.DTWAIN_GetPatchcodePriorities(Source, SearchPriorities)
         End Function
         
-        Public Function DTWAIN_GetPatchSearchMode(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
-        Return api.DTWAIN_GetPatchSearchMode(Source, pSearchMode, bCurrent)
+        Public Function DTWAIN_GetPatchcodeSearchMode(Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPatchcodeSearchMode(Source, pSearchMode, bCurrent)
         End Function
         
-        Public Function DTWAIN_GetPatchTimeOut(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
-        Return api.DTWAIN_GetPatchTimeOut(Source, pTimeOut, bCurrent)
+        Public Function DTWAIN_GetPatchcodeTimeOut(Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPatchcodeTimeOut(Source, pTimeOut, bCurrent)
         End Function
         
         Public Function DTWAIN_GetPixelFlavor(Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
@@ -6037,16 +6275,32 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetPrinter(Source, lpPrinter, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetPrinterEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPrinterEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetPrinterStartNumber(Source As System.IntPtr, ByRef nStart As Integer) As Integer
         Return api.DTWAIN_GetPrinterStartNumber(Source, nStart)
+        End Function
+        
+        Public Function DTWAIN_GetPrinterStartNumberEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetPrinterStartNumberEx(Source)
         End Function
         
         Public Function DTWAIN_GetPrinterStringMode(Source As System.IntPtr, ByRef PrinterMode As Integer, bCurrent As Integer) As Integer
         Return api.DTWAIN_GetPrinterStringMode(Source, PrinterMode, bCurrent)
         End Function
         
+        Public Function DTWAIN_GetPrinterStringModeEx(Source As System.IntPtr, bCurrent As Integer) As Integer
+        Return api.DTWAIN_GetPrinterStringModeEx(Source, bCurrent)
+        End Function
+        
         Public Function DTWAIN_GetPrinterStrings(Source As System.IntPtr, ByRef ArrayString As System.IntPtr) As Integer
         Return api.DTWAIN_GetPrinterStrings(Source, ArrayString)
+        End Function
+        
+        Public Function DTWAIN_GetPrinterStringsEx(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_GetPrinterStringsEx(Source)
         End Function
         
         Public Function DTWAIN_GetPrinterSuffixString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Suffix As StringBuilder, nMaxLen As Integer) As Integer
@@ -6061,6 +6315,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetResolution(Source, Resolution)
         End Function
         
+        Public Function DTWAIN_GetResolutionEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetResolutionEx(Source)
+        End Function
+        
         Public Function DTWAIN_GetResolutionString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Resolution As StringBuilder) As Integer
         Return api.DTWAIN_GetResolutionString(Source, Resolution)
         End Function
@@ -6071,6 +6329,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetRotation(Source As System.IntPtr, ByRef Rotation As System.Double) As Integer
         Return api.DTWAIN_GetRotation(Source, Rotation)
+        End Function
+        
+        Public Function DTWAIN_GetRotationEx(Source As System.IntPtr) As System.Double
+        Return api.DTWAIN_GetRotationEx(Source)
         End Function
         
         Public Function DTWAIN_GetRotationString(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Rotation As StringBuilder) As Integer
@@ -6125,6 +6387,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetSourceUnit(Source, lpUnit)
         End Function
         
+        Public Function DTWAIN_GetSourceUnitEx(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_GetSourceUnitEx(Source)
+        End Function
+        
         Public Function DTWAIN_GetSourceVersionInfo(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> szProduct As StringBuilder, nMaxLen As Integer) As Integer
         Return api.DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen)
         End Function
@@ -6165,24 +6431,8 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetTwainAvailabilityEx(directories, nMaxLen)
         End Function
         
-        Public Function DTWAIN_GetTwainCountryName(countryId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-        Return api.DTWAIN_GetTwainCountryName(countryId, szName)
-        End Function
-        
-        Public Function DTWAIN_GetTwainCountryValue(country As String) As Integer
-        Return api.DTWAIN_GetTwainCountryValue(country)
-        End Function
-        
         Public Function DTWAIN_GetTwainHwnd() As System.IntPtr
         Return api.DTWAIN_GetTwainHwnd()
-        End Function
-        
-        Public Function DTWAIN_GetTwainLanguageName(nameId As Integer, <MarshalAs(UnmanagedType.LPTStr)> szName As StringBuilder) As Integer
-        Return api.DTWAIN_GetTwainLanguageName(nameId, szName)
-        End Function
-        
-        Public Function DTWAIN_GetTwainLanguageValue(szName As String) As Integer
-        Return api.DTWAIN_GetTwainLanguageValue(szName)
         End Function
         
         Public Function DTWAIN_GetTwainMode() As Integer
@@ -6195,10 +6445,6 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetTwainNameFromConstantEx(lConstantType As Integer, lTwainConstant As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
         Return api.DTWAIN_GetTwainNameFromConstantEx(lConstantType, lTwainConstant, lpszOut, nSize)
-        End Function
-        
-        Public Function DTWAIN_GetTwainStringName(category As Integer, TwainID As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
-        Return api.DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen)
         End Function
         
         Public Function DTWAIN_GetTwainTimeout() As Integer
@@ -6315,6 +6561,18 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_IsAutomaticSenseMediumSupported(Source As System.IntPtr) As Integer
         Return api.DTWAIN_IsAutomaticSenseMediumSupported(Source)
+        End Function
+        
+        Public Function DTWAIN_IsBarcodeCapsSupported(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_IsBarcodeCapsSupported(Source)
+        End Function
+        
+        Public Function DTWAIN_IsBarcodeDetectionEnabled(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_IsBarcodeDetectionEnabled(Source)
+        End Function
+        
+        Public Function DTWAIN_IsBarcodeSupported(Source As System.IntPtr, BarCode As Integer) As Integer
+        Return api.DTWAIN_IsBarcodeSupported(Source, BarCode)
         End Function
         
         Public Function DTWAIN_IsBlankPageDetectionOn(Source As System.IntPtr) As Integer
@@ -6561,16 +6819,16 @@ Namespace Dynarithmic
         Return api.DTWAIN_IsPaperSizeSupported(Source, PaperSize)
         End Function
         
-        Public Function DTWAIN_IsPatchCapsSupported(Source As System.IntPtr) As Integer
-        Return api.DTWAIN_IsPatchCapsSupported(Source)
+        Public Function DTWAIN_IsPatchcodeCapsSupported(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_IsPatchcodeCapsSupported(Source)
         End Function
         
-        Public Function DTWAIN_IsPatchDetectEnabled(Source As System.IntPtr) As Integer
-        Return api.DTWAIN_IsPatchDetectEnabled(Source)
+        Public Function DTWAIN_IsPatchcodeDetectionEnabled(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_IsPatchcodeDetectionEnabled(Source)
         End Function
         
-        Public Function DTWAIN_IsPatchSupported(Source As System.IntPtr, PatchCode As Integer) As Integer
-        Return api.DTWAIN_IsPatchSupported(Source, PatchCode)
+        Public Function DTWAIN_IsPatchcodeSupported(Source As System.IntPtr, PatchCode As Integer) As Integer
+        Return api.DTWAIN_IsPatchcodeSupported(Source, PatchCode)
         End Function
         
         Public Function DTWAIN_IsPeekMessageLoopEnabled(Source As System.IntPtr) As Integer
@@ -6965,6 +7223,26 @@ Namespace Dynarithmic
         Return api.DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters)
         End Function
         
+        Public Function DTWAIN_SetBarcodeMaxPriorities(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+        Return api.DTWAIN_SetBarcodeMaxPriorities(Source, nMaxSearchRetries)
+        End Function
+        
+        Public Function DTWAIN_SetBarcodeMaxRetries(Source As System.IntPtr, nMaxRetries As Integer) As Integer
+        Return api.DTWAIN_SetBarcodeMaxRetries(Source, nMaxRetries)
+        End Function
+        
+        Public Function DTWAIN_SetBarcodePriorities(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+        Return api.DTWAIN_SetBarcodePriorities(Source, SearchPriorities)
+        End Function
+        
+        Public Function DTWAIN_SetBarcodeSearchMode(Source As System.IntPtr, nSearchMode As Integer) As Integer
+        Return api.DTWAIN_SetBarcodeSearchMode(Source, nSearchMode)
+        End Function
+        
+        Public Function DTWAIN_SetBarcodeTimeOut(Source As System.IntPtr, TimeOutValue As Integer) As Integer
+        Return api.DTWAIN_SetBarcodeTimeOut(Source, TimeOutValue)
+        End Function
+        
         Public Function DTWAIN_SetBitDepth(Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
         Return api.DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent)
         End Function
@@ -7313,24 +7591,24 @@ Namespace Dynarithmic
         Return api.DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent)
         End Function
         
-        Public Function DTWAIN_SetPatchMaxPriorities(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
-        Return api.DTWAIN_SetPatchMaxPriorities(Source, nMaxSearchRetries)
+        Public Function DTWAIN_SetPatchcodeMaxPriorities(Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+        Return api.DTWAIN_SetPatchcodeMaxPriorities(Source, nMaxSearchRetries)
         End Function
         
-        Public Function DTWAIN_SetPatchMaxRetries(Source As System.IntPtr, nMaxRetries As Integer) As Integer
-        Return api.DTWAIN_SetPatchMaxRetries(Source, nMaxRetries)
+        Public Function DTWAIN_SetPatchcodeMaxRetries(Source As System.IntPtr, nMaxRetries As Integer) As Integer
+        Return api.DTWAIN_SetPatchcodeMaxRetries(Source, nMaxRetries)
         End Function
         
-        Public Function DTWAIN_SetPatchPriorities(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
-        Return api.DTWAIN_SetPatchPriorities(Source, SearchPriorities)
+        Public Function DTWAIN_SetPatchcodePriorities(Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+        Return api.DTWAIN_SetPatchcodePriorities(Source, SearchPriorities)
         End Function
         
-        Public Function DTWAIN_SetPatchSearchMode(Source As System.IntPtr, nSearchMode As Integer) As Integer
-        Return api.DTWAIN_SetPatchSearchMode(Source, nSearchMode)
+        Public Function DTWAIN_SetPatchcodeSearchMode(Source As System.IntPtr, nSearchMode As Integer) As Integer
+        Return api.DTWAIN_SetPatchcodeSearchMode(Source, nSearchMode)
         End Function
         
-        Public Function DTWAIN_SetPatchTimeOut(Source As System.IntPtr, TimeOutValue As Integer) As Integer
-        Return api.DTWAIN_SetPatchTimeOut(Source, TimeOutValue)
+        Public Function DTWAIN_SetPatchcodeTimeOut(Source As System.IntPtr, TimeOutValue As Integer) As Integer
+        Return api.DTWAIN_SetPatchcodeTimeOut(Source, TimeOutValue)
         End Function
         
         Public Function DTWAIN_SetPixelFlavor(Source As System.IntPtr, PixelFlavor As Integer) As Integer
@@ -7591,6 +7869,7 @@ Namespace Dynarithmic
             Public DTWAIN_ArrayCreateFromReals As DTWAIN_ArrayCreateFromRealsDelegate
             Public DTWAIN_ArrayDestroy As DTWAIN_ArrayDestroyDelegate
             Public DTWAIN_ArrayDestroyFrames As DTWAIN_ArrayDestroyFramesDelegate
+            Public DTWAIN_ArrayDumpToLog As DTWAIN_ArrayDumpToLogDelegate
             Public DTWAIN_ArrayFind As DTWAIN_ArrayFindDelegate
             Public DTWAIN_ArrayFindANSIString As DTWAIN_ArrayFindANSIStringDelegate
             Public DTWAIN_ArrayFindFloat As DTWAIN_ArrayFindFloatDelegate
@@ -7607,12 +7886,15 @@ Namespace Dynarithmic
             Public DTWAIN_ArrayGetAt As DTWAIN_ArrayGetAtDelegate
             Public DTWAIN_ArrayGetAtANSIString As DTWAIN_ArrayGetAtANSIStringDelegate
             Public DTWAIN_ArrayGetAtFloat As DTWAIN_ArrayGetAtFloatDelegate
+            Public DTWAIN_ArrayGetAtFloatEx As DTWAIN_ArrayGetAtFloatExDelegate
             Public DTWAIN_ArrayGetAtFloatString As DTWAIN_ArrayGetAtFloatStringDelegate
             Public DTWAIN_ArrayGetAtFrame As DTWAIN_ArrayGetAtFrameDelegate
             Public DTWAIN_ArrayGetAtFrameEx As DTWAIN_ArrayGetAtFrameExDelegate
             Public DTWAIN_ArrayGetAtFrameString As DTWAIN_ArrayGetAtFrameStringDelegate
             Public DTWAIN_ArrayGetAtLong As DTWAIN_ArrayGetAtLongDelegate
             Public DTWAIN_ArrayGetAtLong64 As DTWAIN_ArrayGetAtLong64Delegate
+            Public DTWAIN_ArrayGetAtLong64Ex As DTWAIN_ArrayGetAtLong64ExDelegate
+            Public DTWAIN_ArrayGetAtLongEx As DTWAIN_ArrayGetAtLongExDelegate
             Public DTWAIN_ArrayGetAtSource As DTWAIN_ArrayGetAtSourceDelegate
             Public DTWAIN_ArrayGetAtSourceEx As DTWAIN_ArrayGetAtSourceExDelegate
             Public DTWAIN_ArrayGetAtString As DTWAIN_ArrayGetAtStringDelegate
@@ -7690,13 +7972,14 @@ Namespace Dynarithmic
             Public DTWAIN_EnableAutoRotate As DTWAIN_EnableAutoRotateDelegate
             Public DTWAIN_EnableAutoScan As DTWAIN_EnableAutoScanDelegate
             Public DTWAIN_EnableAutomaticSenseMedium As DTWAIN_EnableAutomaticSenseMediumDelegate
+            Public DTWAIN_EnableBarcodeDetection As DTWAIN_EnableBarcodeDetectionDelegate
             Public DTWAIN_EnableDuplex As DTWAIN_EnableDuplexDelegate
             Public DTWAIN_EnableFeeder As DTWAIN_EnableFeederDelegate
             Public DTWAIN_EnableIndicator As DTWAIN_EnableIndicatorDelegate
             Public DTWAIN_EnableJobFileHandling As DTWAIN_EnableJobFileHandlingDelegate
             Public DTWAIN_EnableLamp As DTWAIN_EnableLampDelegate
             Public DTWAIN_EnableMsgNotify As DTWAIN_EnableMsgNotifyDelegate
-            Public DTWAIN_EnablePatchDetect As DTWAIN_EnablePatchDetectDelegate
+            Public DTWAIN_EnablePatchcodeDetection As DTWAIN_EnablePatchcodeDetectionDelegate
             Public DTWAIN_EnablePeekMessageLoop As DTWAIN_EnablePeekMessageLoopDelegate
             Public DTWAIN_EnablePrinter As DTWAIN_EnablePrinterDelegate
             Public DTWAIN_EnableThumbnail As DTWAIN_EnableThumbnailDelegate
@@ -7715,6 +7998,18 @@ Namespace Dynarithmic
             Public DTWAIN_EnumAutomaticCapturesEx As DTWAIN_EnumAutomaticCapturesExDelegate
             Public DTWAIN_EnumAutomaticSenseMedium As DTWAIN_EnumAutomaticSenseMediumDelegate
             Public DTWAIN_EnumAutomaticSenseMediumEx As DTWAIN_EnumAutomaticSenseMediumExDelegate
+            Public DTWAIN_EnumBarcodeCodes As DTWAIN_EnumBarcodeCodesDelegate
+            Public DTWAIN_EnumBarcodeCodesEx As DTWAIN_EnumBarcodeCodesExDelegate
+            Public DTWAIN_EnumBarcodeMaxPriorities As DTWAIN_EnumBarcodeMaxPrioritiesDelegate
+            Public DTWAIN_EnumBarcodeMaxPrioritiesEx As DTWAIN_EnumBarcodeMaxPrioritiesExDelegate
+            Public DTWAIN_EnumBarcodeMaxRetries As DTWAIN_EnumBarcodeMaxRetriesDelegate
+            Public DTWAIN_EnumBarcodeMaxRetriesEx As DTWAIN_EnumBarcodeMaxRetriesExDelegate
+            Public DTWAIN_EnumBarcodePriorities As DTWAIN_EnumBarcodePrioritiesDelegate
+            Public DTWAIN_EnumBarcodePrioritiesEx As DTWAIN_EnumBarcodePrioritiesExDelegate
+            Public DTWAIN_EnumBarcodeSearchModes As DTWAIN_EnumBarcodeSearchModesDelegate
+            Public DTWAIN_EnumBarcodeSearchModesEx As DTWAIN_EnumBarcodeSearchModesExDelegate
+            Public DTWAIN_EnumBarcodeTimeOutValues As DTWAIN_EnumBarcodeTimeOutValuesDelegate
+            Public DTWAIN_EnumBarcodeTimeOutValuesEx As DTWAIN_EnumBarcodeTimeOutValuesExDelegate
             Public DTWAIN_EnumBitDepths As DTWAIN_EnumBitDepthsDelegate
             Public DTWAIN_EnumBitDepthsEx As DTWAIN_EnumBitDepthsExDelegate
             Public DTWAIN_EnumBitDepthsEx2 As DTWAIN_EnumBitDepthsEx2Delegate
@@ -7725,14 +8020,13 @@ Namespace Dynarithmic
             Public DTWAIN_EnumCameras As DTWAIN_EnumCamerasDelegate
             Public DTWAIN_EnumCamerasEx As DTWAIN_EnumCamerasExDelegate
             Public DTWAIN_EnumCamerasEx2 As DTWAIN_EnumCamerasEx2Delegate
-            Public DTWAIN_EnumCamerasEx3 As DTWAIN_EnumCamerasEx3Delegate
             Public DTWAIN_EnumCompressionTypes As DTWAIN_EnumCompressionTypesDelegate
             Public DTWAIN_EnumCompressionTypesEx As DTWAIN_EnumCompressionTypesExDelegate
             Public DTWAIN_EnumCompressionTypesEx2 As DTWAIN_EnumCompressionTypesEx2Delegate
             Public DTWAIN_EnumContrastValues As DTWAIN_EnumContrastValuesDelegate
             Public DTWAIN_EnumContrastValuesEx As DTWAIN_EnumContrastValuesExDelegate
             Public DTWAIN_EnumCustomCaps As DTWAIN_EnumCustomCapsDelegate
-            Public DTWAIN_EnumCustomCapsEx2 As DTWAIN_EnumCustomCapsEx2Delegate
+            Public DTWAIN_EnumCustomCapsEx As DTWAIN_EnumCustomCapsExDelegate
             Public DTWAIN_EnumDoubleFeedDetectLengths As DTWAIN_EnumDoubleFeedDetectLengthsDelegate
             Public DTWAIN_EnumDoubleFeedDetectLengthsEx As DTWAIN_EnumDoubleFeedDetectLengthsExDelegate
             Public DTWAIN_EnumDoubleFeedDetectValues As DTWAIN_EnumDoubleFeedDetectValuesDelegate
@@ -7760,6 +8054,7 @@ Namespace Dynarithmic
             Public DTWAIN_EnumNoiseFilters As DTWAIN_EnumNoiseFiltersDelegate
             Public DTWAIN_EnumNoiseFiltersEx As DTWAIN_EnumNoiseFiltersExDelegate
             Public DTWAIN_EnumOCRInterfaces As DTWAIN_EnumOCRInterfacesDelegate
+            Public DTWAIN_EnumOCRInterfacesEx As DTWAIN_EnumOCRInterfacesExDelegate
             Public DTWAIN_EnumOCRSupportedCaps As DTWAIN_EnumOCRSupportedCapsDelegate
             Public DTWAIN_EnumOrientations As DTWAIN_EnumOrientationsDelegate
             Public DTWAIN_EnumOrientationsEx As DTWAIN_EnumOrientationsExDelegate
@@ -7767,18 +8062,18 @@ Namespace Dynarithmic
             Public DTWAIN_EnumOverscanValuesEx As DTWAIN_EnumOverscanValuesExDelegate
             Public DTWAIN_EnumPaperSizes As DTWAIN_EnumPaperSizesDelegate
             Public DTWAIN_EnumPaperSizesEx As DTWAIN_EnumPaperSizesExDelegate
-            Public DTWAIN_EnumPatchCodes As DTWAIN_EnumPatchCodesDelegate
-            Public DTWAIN_EnumPatchCodesEx As DTWAIN_EnumPatchCodesExDelegate
-            Public DTWAIN_EnumPatchMaxPriorities As DTWAIN_EnumPatchMaxPrioritiesDelegate
-            Public DTWAIN_EnumPatchMaxPrioritiesEx As DTWAIN_EnumPatchMaxPrioritiesExDelegate
-            Public DTWAIN_EnumPatchMaxRetries As DTWAIN_EnumPatchMaxRetriesDelegate
-            Public DTWAIN_EnumPatchMaxRetriesEx As DTWAIN_EnumPatchMaxRetriesExDelegate
-            Public DTWAIN_EnumPatchPriorities As DTWAIN_EnumPatchPrioritiesDelegate
-            Public DTWAIN_EnumPatchPrioritiesEx As DTWAIN_EnumPatchPrioritiesExDelegate
-            Public DTWAIN_EnumPatchSearchModes As DTWAIN_EnumPatchSearchModesDelegate
-            Public DTWAIN_EnumPatchSearchModesEx As DTWAIN_EnumPatchSearchModesExDelegate
-            Public DTWAIN_EnumPatchTimeOutValues As DTWAIN_EnumPatchTimeOutValuesDelegate
-            Public DTWAIN_EnumPatchTimeOutValuesEx As DTWAIN_EnumPatchTimeOutValuesExDelegate
+            Public DTWAIN_EnumPatchcodeCodes As DTWAIN_EnumPatchcodeCodesDelegate
+            Public DTWAIN_EnumPatchcodeCodesEx As DTWAIN_EnumPatchcodeCodesExDelegate
+            Public DTWAIN_EnumPatchcodeMaxPriorities As DTWAIN_EnumPatchcodeMaxPrioritiesDelegate
+            Public DTWAIN_EnumPatchcodeMaxPrioritiesEx As DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate
+            Public DTWAIN_EnumPatchcodeMaxRetries As DTWAIN_EnumPatchcodeMaxRetriesDelegate
+            Public DTWAIN_EnumPatchcodeMaxRetriesEx As DTWAIN_EnumPatchcodeMaxRetriesExDelegate
+            Public DTWAIN_EnumPatchcodePriorities As DTWAIN_EnumPatchcodePrioritiesDelegate
+            Public DTWAIN_EnumPatchcodePrioritiesEx As DTWAIN_EnumPatchcodePrioritiesExDelegate
+            Public DTWAIN_EnumPatchcodeSearchModes As DTWAIN_EnumPatchcodeSearchModesDelegate
+            Public DTWAIN_EnumPatchcodeSearchModesEx As DTWAIN_EnumPatchcodeSearchModesExDelegate
+            Public DTWAIN_EnumPatchcodeTimeOutValues As DTWAIN_EnumPatchcodeTimeOutValuesDelegate
+            Public DTWAIN_EnumPatchcodeTimeOutValuesEx As DTWAIN_EnumPatchcodeTimeOutValuesExDelegate
             Public DTWAIN_EnumPixelTypes As DTWAIN_EnumPixelTypesDelegate
             Public DTWAIN_EnumPixelTypesEx As DTWAIN_EnumPixelTypesExDelegate
             Public DTWAIN_EnumPrinterStringModes As DTWAIN_EnumPrinterStringModesDelegate
@@ -7816,8 +8111,6 @@ Namespace Dynarithmic
             Public DTWAIN_FeedPage As DTWAIN_FeedPageDelegate
             Public DTWAIN_FlipBitmap As DTWAIN_FlipBitmapDelegate
             Public DTWAIN_FlushAcquiredPages As DTWAIN_FlushAcquiredPagesDelegate
-            Public DTWAIN_ForceAcquireBitDepth As DTWAIN_ForceAcquireBitDepthDelegate
-            Public DTWAIN_ForceScanOnNoUI As DTWAIN_ForceScanOnNoUIDelegate
             Public DTWAIN_FrameCreate As DTWAIN_FrameCreateDelegate
             Public DTWAIN_FrameCreateString As DTWAIN_FrameCreateStringDelegate
             Public DTWAIN_FrameDestroy As DTWAIN_FrameDestroyDelegate
@@ -7850,11 +8143,18 @@ Namespace Dynarithmic
             Public DTWAIN_GetAllSourceDibs As DTWAIN_GetAllSourceDibsDelegate
             Public DTWAIN_GetAppInfo As DTWAIN_GetAppInfoDelegate
             Public DTWAIN_GetAuthor As DTWAIN_GetAuthorDelegate
+            Public DTWAIN_GetBarcodeMaxPriorities As DTWAIN_GetBarcodeMaxPrioritiesDelegate
+            Public DTWAIN_GetBarcodeMaxRetries As DTWAIN_GetBarcodeMaxRetriesDelegate
+            Public DTWAIN_GetBarcodePriorities As DTWAIN_GetBarcodePrioritiesDelegate
+            Public DTWAIN_GetBarcodeSearchMode As DTWAIN_GetBarcodeSearchModeDelegate
+            Public DTWAIN_GetBarcodeTimeOut As DTWAIN_GetBarcodeTimeOutDelegate
             Public DTWAIN_GetBatteryMinutes As DTWAIN_GetBatteryMinutesDelegate
             Public DTWAIN_GetBatteryPercent As DTWAIN_GetBatteryPercentDelegate
             Public DTWAIN_GetBitDepth As DTWAIN_GetBitDepthDelegate
+            Public DTWAIN_GetBitDepthEx As DTWAIN_GetBitDepthExDelegate
             Public DTWAIN_GetBlankPageAutoDetection As DTWAIN_GetBlankPageAutoDetectionDelegate
             Public DTWAIN_GetBrightness As DTWAIN_GetBrightnessDelegate
+            Public DTWAIN_GetBrightnessEx As DTWAIN_GetBrightnessExDelegate
             Public DTWAIN_GetBrightnessString As DTWAIN_GetBrightnessStringDelegate
             Public DTWAIN_GetBufferedTransferInfo As DTWAIN_GetBufferedTransferInfoDelegate
             Public DTWAIN_GetCallback As DTWAIN_GetCallbackDelegate
@@ -7866,15 +8166,18 @@ Namespace Dynarithmic
             Public DTWAIN_GetCapDataType As DTWAIN_GetCapDataTypeDelegate
             Public DTWAIN_GetCapFromName As DTWAIN_GetCapFromNameDelegate
             Public DTWAIN_GetCapOperations As DTWAIN_GetCapOperationsDelegate
+            Public DTWAIN_GetCapOperationsEx As DTWAIN_GetCapOperationsExDelegate
             Public DTWAIN_GetCapValues As DTWAIN_GetCapValuesDelegate
             Public DTWAIN_GetCapValuesEx As DTWAIN_GetCapValuesExDelegate
             Public DTWAIN_GetCapValuesEx2 As DTWAIN_GetCapValuesEx2Delegate
             Public DTWAIN_GetCaption As DTWAIN_GetCaptionDelegate
             Public DTWAIN_GetCompressionSize As DTWAIN_GetCompressionSizeDelegate
             Public DTWAIN_GetCompressionType As DTWAIN_GetCompressionTypeDelegate
+            Public DTWAIN_GetCompressionTypeEx As DTWAIN_GetCompressionTypeExDelegate
             Public DTWAIN_GetConditionCodeString As DTWAIN_GetConditionCodeStringDelegate
             Public DTWAIN_GetConstantFromTwainName As DTWAIN_GetConstantFromTwainNameDelegate
             Public DTWAIN_GetContrast As DTWAIN_GetContrastDelegate
+            Public DTWAIN_GetContrastEx As DTWAIN_GetContrastExDelegate
             Public DTWAIN_GetContrastString As DTWAIN_GetContrastStringDelegate
             Public DTWAIN_GetCountry As DTWAIN_GetCountryDelegate
             Public DTWAIN_GetCurrentAcquiredImage As DTWAIN_GetCurrentAcquiredImageDelegate
@@ -7895,6 +8198,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetDoubleFeedDetectLength As DTWAIN_GetDoubleFeedDetectLengthDelegate
             Public DTWAIN_GetDoubleFeedDetectValues As DTWAIN_GetDoubleFeedDetectValuesDelegate
             Public DTWAIN_GetDuplexType As DTWAIN_GetDuplexTypeDelegate
+            Public DTWAIN_GetDuplexTypeEx As DTWAIN_GetDuplexTypeExDelegate
             Public DTWAIN_GetErrorBuffer As DTWAIN_GetErrorBufferDelegate
             Public DTWAIN_GetErrorBufferThreshold As DTWAIN_GetErrorBufferThresholdDelegate
             Public DTWAIN_GetErrorCallback As DTWAIN_GetErrorCallbackDelegate
@@ -7921,12 +8225,14 @@ Namespace Dynarithmic
             Public DTWAIN_GetImageInfo As DTWAIN_GetImageInfoDelegate
             Public DTWAIN_GetImageInfoString As DTWAIN_GetImageInfoStringDelegate
             Public DTWAIN_GetJobControl As DTWAIN_GetJobControlDelegate
+            Public DTWAIN_GetJobControlEx As DTWAIN_GetJobControlExDelegate
             Public DTWAIN_GetJpegValues As DTWAIN_GetJpegValuesDelegate
             Public DTWAIN_GetJpegXRValues As DTWAIN_GetJpegXRValuesDelegate
             Public DTWAIN_GetLanguage As DTWAIN_GetLanguageDelegate
             Public DTWAIN_GetLastError As DTWAIN_GetLastErrorDelegate
             Public DTWAIN_GetLibraryPath As DTWAIN_GetLibraryPathDelegate
             Public DTWAIN_GetLightPath As DTWAIN_GetLightPathDelegate
+            Public DTWAIN_GetLightPathEx As DTWAIN_GetLightPathExDelegate
             Public DTWAIN_GetLightSource As DTWAIN_GetLightSourceDelegate
             Public DTWAIN_GetLightSources As DTWAIN_GetLightSourcesDelegate
             Public DTWAIN_GetLightSourcesEx As DTWAIN_GetLightSourcesExDelegate
@@ -7955,6 +8261,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetOCRTextInfoLongEx As DTWAIN_GetOCRTextInfoLongExDelegate
             Public DTWAIN_GetOCRVersionInfo As DTWAIN_GetOCRVersionInfoDelegate
             Public DTWAIN_GetOrientation As DTWAIN_GetOrientationDelegate
+            Public DTWAIN_GetOrientationEx As DTWAIN_GetOrientationExDelegate
             Public DTWAIN_GetOverscan As DTWAIN_GetOverscanDelegate
             Public DTWAIN_GetPDFTextElementFloat As DTWAIN_GetPDFTextElementFloatDelegate
             Public DTWAIN_GetPDFTextElementLong As DTWAIN_GetPDFTextElementLongDelegate
@@ -7962,23 +8269,29 @@ Namespace Dynarithmic
             Public DTWAIN_GetPDFType1FontName As DTWAIN_GetPDFType1FontNameDelegate
             Public DTWAIN_GetPaperSize As DTWAIN_GetPaperSizeDelegate
             Public DTWAIN_GetPaperSizeName As DTWAIN_GetPaperSizeNameDelegate
-            Public DTWAIN_GetPatchMaxPriorities As DTWAIN_GetPatchMaxPrioritiesDelegate
-            Public DTWAIN_GetPatchMaxRetries As DTWAIN_GetPatchMaxRetriesDelegate
-            Public DTWAIN_GetPatchPriorities As DTWAIN_GetPatchPrioritiesDelegate
-            Public DTWAIN_GetPatchSearchMode As DTWAIN_GetPatchSearchModeDelegate
-            Public DTWAIN_GetPatchTimeOut As DTWAIN_GetPatchTimeOutDelegate
+            Public DTWAIN_GetPatchcodeMaxPriorities As DTWAIN_GetPatchcodeMaxPrioritiesDelegate
+            Public DTWAIN_GetPatchcodeMaxRetries As DTWAIN_GetPatchcodeMaxRetriesDelegate
+            Public DTWAIN_GetPatchcodePriorities As DTWAIN_GetPatchcodePrioritiesDelegate
+            Public DTWAIN_GetPatchcodeSearchMode As DTWAIN_GetPatchcodeSearchModeDelegate
+            Public DTWAIN_GetPatchcodeTimeOut As DTWAIN_GetPatchcodeTimeOutDelegate
             Public DTWAIN_GetPixelFlavor As DTWAIN_GetPixelFlavorDelegate
             Public DTWAIN_GetPixelType As DTWAIN_GetPixelTypeDelegate
             Public DTWAIN_GetPrinter As DTWAIN_GetPrinterDelegate
+            Public DTWAIN_GetPrinterEx As DTWAIN_GetPrinterExDelegate
             Public DTWAIN_GetPrinterStartNumber As DTWAIN_GetPrinterStartNumberDelegate
+            Public DTWAIN_GetPrinterStartNumberEx As DTWAIN_GetPrinterStartNumberExDelegate
             Public DTWAIN_GetPrinterStringMode As DTWAIN_GetPrinterStringModeDelegate
+            Public DTWAIN_GetPrinterStringModeEx As DTWAIN_GetPrinterStringModeExDelegate
             Public DTWAIN_GetPrinterStrings As DTWAIN_GetPrinterStringsDelegate
+            Public DTWAIN_GetPrinterStringsEx As DTWAIN_GetPrinterStringsExDelegate
             Public DTWAIN_GetPrinterSuffixString As DTWAIN_GetPrinterSuffixStringDelegate
             Public DTWAIN_GetRegisteredMsg As DTWAIN_GetRegisteredMsgDelegate
             Public DTWAIN_GetResolution As DTWAIN_GetResolutionDelegate
+            Public DTWAIN_GetResolutionEx As DTWAIN_GetResolutionExDelegate
             Public DTWAIN_GetResolutionString As DTWAIN_GetResolutionStringDelegate
             Public DTWAIN_GetResourceString As DTWAIN_GetResourceStringDelegate
             Public DTWAIN_GetRotation As DTWAIN_GetRotationDelegate
+            Public DTWAIN_GetRotationEx As DTWAIN_GetRotationExDelegate
             Public DTWAIN_GetRotationString As DTWAIN_GetRotationStringDelegate
             Public DTWAIN_GetSaveFileName As DTWAIN_GetSaveFileNameDelegate
             Public DTWAIN_GetSessionDetails As DTWAIN_GetSessionDetailsDelegate
@@ -7992,6 +8305,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetSourceProductFamily As DTWAIN_GetSourceProductFamilyDelegate
             Public DTWAIN_GetSourceProductName As DTWAIN_GetSourceProductNameDelegate
             Public DTWAIN_GetSourceUnit As DTWAIN_GetSourceUnitDelegate
+            Public DTWAIN_GetSourceUnitEx As DTWAIN_GetSourceUnitExDelegate
             Public DTWAIN_GetSourceVersionInfo As DTWAIN_GetSourceVersionInfoDelegate
             Public DTWAIN_GetSourceVersionNumber As DTWAIN_GetSourceVersionNumberDelegate
             Public DTWAIN_GetStaticLibVersion As DTWAIN_GetStaticLibVersionDelegate
@@ -8002,15 +8316,10 @@ Namespace Dynarithmic
             Public DTWAIN_GetTwainAppID As DTWAIN_GetTwainAppIDDelegate
             Public DTWAIN_GetTwainAvailability As DTWAIN_GetTwainAvailabilityDelegate
             Public DTWAIN_GetTwainAvailabilityEx As DTWAIN_GetTwainAvailabilityExDelegate
-            Public DTWAIN_GetTwainCountryName As DTWAIN_GetTwainCountryNameDelegate
-            Public DTWAIN_GetTwainCountryValue As DTWAIN_GetTwainCountryValueDelegate
             Public DTWAIN_GetTwainHwnd As DTWAIN_GetTwainHwndDelegate
-            Public DTWAIN_GetTwainLanguageName As DTWAIN_GetTwainLanguageNameDelegate
-            Public DTWAIN_GetTwainLanguageValue As DTWAIN_GetTwainLanguageValueDelegate
             Public DTWAIN_GetTwainMode As DTWAIN_GetTwainModeDelegate
             Public DTWAIN_GetTwainNameFromConstant As DTWAIN_GetTwainNameFromConstantDelegate
             Public DTWAIN_GetTwainNameFromConstantEx As DTWAIN_GetTwainNameFromConstantExDelegate
-            Public DTWAIN_GetTwainStringName As DTWAIN_GetTwainStringNameDelegate
             Public DTWAIN_GetTwainTimeout As DTWAIN_GetTwainTimeoutDelegate
             Public DTWAIN_GetVersion As DTWAIN_GetVersionDelegate
             Public DTWAIN_GetVersionCopyright As DTWAIN_GetVersionCopyrightDelegate
@@ -8040,6 +8349,9 @@ Namespace Dynarithmic
             Public DTWAIN_IsAutoScanEnabled As DTWAIN_IsAutoScanEnabledDelegate
             Public DTWAIN_IsAutomaticSenseMediumEnabled As DTWAIN_IsAutomaticSenseMediumEnabledDelegate
             Public DTWAIN_IsAutomaticSenseMediumSupported As DTWAIN_IsAutomaticSenseMediumSupportedDelegate
+            Public DTWAIN_IsBarcodeCapsSupported As DTWAIN_IsBarcodeCapsSupportedDelegate
+            Public DTWAIN_IsBarcodeDetectionEnabled As DTWAIN_IsBarcodeDetectionEnabledDelegate
+            Public DTWAIN_IsBarcodeSupported As DTWAIN_IsBarcodeSupportedDelegate
             Public DTWAIN_IsBlankPageDetectionOn As DTWAIN_IsBlankPageDetectionOnDelegate
             Public DTWAIN_IsBufferedTileModeOn As DTWAIN_IsBufferedTileModeOnDelegate
             Public DTWAIN_IsBufferedTileModeSupported As DTWAIN_IsBufferedTileModeSupportedDelegate
@@ -8101,9 +8413,9 @@ Namespace Dynarithmic
             Public DTWAIN_IsOverscanSupported As DTWAIN_IsOverscanSupportedDelegate
             Public DTWAIN_IsPaperDetectable As DTWAIN_IsPaperDetectableDelegate
             Public DTWAIN_IsPaperSizeSupported As DTWAIN_IsPaperSizeSupportedDelegate
-            Public DTWAIN_IsPatchCapsSupported As DTWAIN_IsPatchCapsSupportedDelegate
-            Public DTWAIN_IsPatchDetectEnabled As DTWAIN_IsPatchDetectEnabledDelegate
-            Public DTWAIN_IsPatchSupported As DTWAIN_IsPatchSupportedDelegate
+            Public DTWAIN_IsPatchcodeCapsSupported As DTWAIN_IsPatchcodeCapsSupportedDelegate
+            Public DTWAIN_IsPatchcodeDetectionEnabled As DTWAIN_IsPatchcodeDetectionEnabledDelegate
+            Public DTWAIN_IsPatchcodeSupported As DTWAIN_IsPatchcodeSupportedDelegate
             Public DTWAIN_IsPeekMessageLoopEnabled As DTWAIN_IsPeekMessageLoopEnabledDelegate
             Public DTWAIN_IsPixelTypeSupported As DTWAIN_IsPixelTypeSupportedDelegate
             Public DTWAIN_IsPrinterEnabled As DTWAIN_IsPrinterEnabledDelegate
@@ -8202,6 +8514,11 @@ Namespace Dynarithmic
             Public DTWAIN_SetAuthor As DTWAIN_SetAuthorDelegate
             Public DTWAIN_SetAvailablePrinters As DTWAIN_SetAvailablePrintersDelegate
             Public DTWAIN_SetAvailablePrintersArray As DTWAIN_SetAvailablePrintersArrayDelegate
+            Public DTWAIN_SetBarcodeMaxPriorities As DTWAIN_SetBarcodeMaxPrioritiesDelegate
+            Public DTWAIN_SetBarcodeMaxRetries As DTWAIN_SetBarcodeMaxRetriesDelegate
+            Public DTWAIN_SetBarcodePriorities As DTWAIN_SetBarcodePrioritiesDelegate
+            Public DTWAIN_SetBarcodeSearchMode As DTWAIN_SetBarcodeSearchModeDelegate
+            Public DTWAIN_SetBarcodeTimeOut As DTWAIN_SetBarcodeTimeOutDelegate
             Public DTWAIN_SetBitDepth As DTWAIN_SetBitDepthDelegate
             Public DTWAIN_SetBlankPageDetection As DTWAIN_SetBlankPageDetectionDelegate
             Public DTWAIN_SetBlankPageDetectionEx As DTWAIN_SetBlankPageDetectionExDelegate
@@ -8289,11 +8606,11 @@ Namespace Dynarithmic
             Public DTWAIN_SetPDFTextElementString As DTWAIN_SetPDFTextElementStringDelegate
             Public DTWAIN_SetPDFTitle As DTWAIN_SetPDFTitleDelegate
             Public DTWAIN_SetPaperSize As DTWAIN_SetPaperSizeDelegate
-            Public DTWAIN_SetPatchMaxPriorities As DTWAIN_SetPatchMaxPrioritiesDelegate
-            Public DTWAIN_SetPatchMaxRetries As DTWAIN_SetPatchMaxRetriesDelegate
-            Public DTWAIN_SetPatchPriorities As DTWAIN_SetPatchPrioritiesDelegate
-            Public DTWAIN_SetPatchSearchMode As DTWAIN_SetPatchSearchModeDelegate
-            Public DTWAIN_SetPatchTimeOut As DTWAIN_SetPatchTimeOutDelegate
+            Public DTWAIN_SetPatchcodeMaxPriorities As DTWAIN_SetPatchcodeMaxPrioritiesDelegate
+            Public DTWAIN_SetPatchcodeMaxRetries As DTWAIN_SetPatchcodeMaxRetriesDelegate
+            Public DTWAIN_SetPatchcodePriorities As DTWAIN_SetPatchcodePrioritiesDelegate
+            Public DTWAIN_SetPatchcodeSearchMode As DTWAIN_SetPatchcodeSearchModeDelegate
+            Public DTWAIN_SetPatchcodeTimeOut As DTWAIN_SetPatchcodeTimeOutDelegate
             Public DTWAIN_SetPixelFlavor As DTWAIN_SetPixelFlavorDelegate
             Public DTWAIN_SetPixelType As DTWAIN_SetPixelTypeDelegate
             Public DTWAIN_SetPostScriptTitle As DTWAIN_SetPostScriptTitleDelegate

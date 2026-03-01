@@ -202,6 +202,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_ArrayCreateFromReals
    attr_reader :DTWAIN_ArrayDestroy
    attr_reader :DTWAIN_ArrayDestroyFrames
+   attr_reader :DTWAIN_ArrayDumpToLog
    attr_reader :DTWAIN_ArrayFind
    attr_reader :DTWAIN_ArrayFindANSIString
    attr_reader :DTWAIN_ArrayFindFloat
@@ -223,6 +224,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_ArrayGetAtANSIString
    attr_reader :DTWAIN_ArrayGetAtANSIStringPtr
    attr_reader :DTWAIN_ArrayGetAtFloat
+   attr_reader :DTWAIN_ArrayGetAtFloatEx
    attr_reader :DTWAIN_ArrayGetAtFloatString
    attr_reader :DTWAIN_ArrayGetAtFloatStringA
    attr_reader :DTWAIN_ArrayGetAtFloatStringW
@@ -233,6 +235,8 @@ class DTWAINAPI
    attr_reader :DTWAIN_ArrayGetAtFrameStringW
    attr_reader :DTWAIN_ArrayGetAtLong
    attr_reader :DTWAIN_ArrayGetAtLong64
+   attr_reader :DTWAIN_ArrayGetAtLong64Ex
+   attr_reader :DTWAIN_ArrayGetAtLongEx
    attr_reader :DTWAIN_ArrayGetAtSource
    attr_reader :DTWAIN_ArrayGetAtSourceEx
    attr_reader :DTWAIN_ArrayGetAtString
@@ -332,13 +336,14 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnableAutoRotate
    attr_reader :DTWAIN_EnableAutoScan
    attr_reader :DTWAIN_EnableAutomaticSenseMedium
+   attr_reader :DTWAIN_EnableBarcodeDetection
    attr_reader :DTWAIN_EnableDuplex
    attr_reader :DTWAIN_EnableFeeder
    attr_reader :DTWAIN_EnableIndicator
    attr_reader :DTWAIN_EnableJobFileHandling
    attr_reader :DTWAIN_EnableLamp
    attr_reader :DTWAIN_EnableMsgNotify
-   attr_reader :DTWAIN_EnablePatchDetect
+   attr_reader :DTWAIN_EnablePatchcodeDetection
    attr_reader :DTWAIN_EnablePeekMessageLoop
    attr_reader :DTWAIN_EnablePrinter
    attr_reader :DTWAIN_EnableThumbnail
@@ -357,6 +362,18 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumAutomaticCapturesEx
    attr_reader :DTWAIN_EnumAutomaticSenseMedium
    attr_reader :DTWAIN_EnumAutomaticSenseMediumEx
+   attr_reader :DTWAIN_EnumBarcodeCodes
+   attr_reader :DTWAIN_EnumBarcodeCodesEx
+   attr_reader :DTWAIN_EnumBarcodeMaxPriorities
+   attr_reader :DTWAIN_EnumBarcodeMaxPrioritiesEx
+   attr_reader :DTWAIN_EnumBarcodeMaxRetries
+   attr_reader :DTWAIN_EnumBarcodeMaxRetriesEx
+   attr_reader :DTWAIN_EnumBarcodePriorities
+   attr_reader :DTWAIN_EnumBarcodePrioritiesEx
+   attr_reader :DTWAIN_EnumBarcodeSearchModes
+   attr_reader :DTWAIN_EnumBarcodeSearchModesEx
+   attr_reader :DTWAIN_EnumBarcodeTimeOutValues
+   attr_reader :DTWAIN_EnumBarcodeTimeOutValuesEx
    attr_reader :DTWAIN_EnumBitDepths
    attr_reader :DTWAIN_EnumBitDepthsEx
    attr_reader :DTWAIN_EnumBitDepthsEx2
@@ -367,14 +384,13 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumCameras
    attr_reader :DTWAIN_EnumCamerasEx
    attr_reader :DTWAIN_EnumCamerasEx2
-   attr_reader :DTWAIN_EnumCamerasEx3
    attr_reader :DTWAIN_EnumCompressionTypes
    attr_reader :DTWAIN_EnumCompressionTypesEx
    attr_reader :DTWAIN_EnumCompressionTypesEx2
    attr_reader :DTWAIN_EnumContrastValues
    attr_reader :DTWAIN_EnumContrastValuesEx
    attr_reader :DTWAIN_EnumCustomCaps
-   attr_reader :DTWAIN_EnumCustomCapsEx2
+   attr_reader :DTWAIN_EnumCustomCapsEx
    attr_reader :DTWAIN_EnumDoubleFeedDetectLengths
    attr_reader :DTWAIN_EnumDoubleFeedDetectLengthsEx
    attr_reader :DTWAIN_EnumDoubleFeedDetectValues
@@ -402,6 +418,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumNoiseFilters
    attr_reader :DTWAIN_EnumNoiseFiltersEx
    attr_reader :DTWAIN_EnumOCRInterfaces
+   attr_reader :DTWAIN_EnumOCRInterfacesEx
    attr_reader :DTWAIN_EnumOCRSupportedCaps
    attr_reader :DTWAIN_EnumOrientations
    attr_reader :DTWAIN_EnumOrientationsEx
@@ -409,18 +426,18 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumOverscanValuesEx
    attr_reader :DTWAIN_EnumPaperSizes
    attr_reader :DTWAIN_EnumPaperSizesEx
-   attr_reader :DTWAIN_EnumPatchCodes
-   attr_reader :DTWAIN_EnumPatchCodesEx
-   attr_reader :DTWAIN_EnumPatchMaxPriorities
-   attr_reader :DTWAIN_EnumPatchMaxPrioritiesEx
-   attr_reader :DTWAIN_EnumPatchMaxRetries
-   attr_reader :DTWAIN_EnumPatchMaxRetriesEx
-   attr_reader :DTWAIN_EnumPatchPriorities
-   attr_reader :DTWAIN_EnumPatchPrioritiesEx
-   attr_reader :DTWAIN_EnumPatchSearchModes
-   attr_reader :DTWAIN_EnumPatchSearchModesEx
-   attr_reader :DTWAIN_EnumPatchTimeOutValues
-   attr_reader :DTWAIN_EnumPatchTimeOutValuesEx
+   attr_reader :DTWAIN_EnumPatchcodeCodes
+   attr_reader :DTWAIN_EnumPatchcodeCodesEx
+   attr_reader :DTWAIN_EnumPatchcodeMaxPriorities
+   attr_reader :DTWAIN_EnumPatchcodeMaxPrioritiesEx
+   attr_reader :DTWAIN_EnumPatchcodeMaxRetries
+   attr_reader :DTWAIN_EnumPatchcodeMaxRetriesEx
+   attr_reader :DTWAIN_EnumPatchcodePriorities
+   attr_reader :DTWAIN_EnumPatchcodePrioritiesEx
+   attr_reader :DTWAIN_EnumPatchcodeSearchModes
+   attr_reader :DTWAIN_EnumPatchcodeSearchModesEx
+   attr_reader :DTWAIN_EnumPatchcodeTimeOutValues
+   attr_reader :DTWAIN_EnumPatchcodeTimeOutValuesEx
    attr_reader :DTWAIN_EnumPixelTypes
    attr_reader :DTWAIN_EnumPixelTypesEx
    attr_reader :DTWAIN_EnumPrinterStringModes
@@ -462,8 +479,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_FeedPage
    attr_reader :DTWAIN_FlipBitmap
    attr_reader :DTWAIN_FlushAcquiredPages
-   attr_reader :DTWAIN_ForceAcquireBitDepth
-   attr_reader :DTWAIN_ForceScanOnNoUI
    attr_reader :DTWAIN_FrameCreate
    attr_reader :DTWAIN_FrameCreateString
    attr_reader :DTWAIN_FrameCreateStringA
@@ -516,11 +531,18 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetAuthor
    attr_reader :DTWAIN_GetAuthorA
    attr_reader :DTWAIN_GetAuthorW
+   attr_reader :DTWAIN_GetBarcodeMaxPriorities
+   attr_reader :DTWAIN_GetBarcodeMaxRetries
+   attr_reader :DTWAIN_GetBarcodePriorities
+   attr_reader :DTWAIN_GetBarcodeSearchMode
+   attr_reader :DTWAIN_GetBarcodeTimeOut
    attr_reader :DTWAIN_GetBatteryMinutes
    attr_reader :DTWAIN_GetBatteryPercent
    attr_reader :DTWAIN_GetBitDepth
+   attr_reader :DTWAIN_GetBitDepthEx
    attr_reader :DTWAIN_GetBlankPageAutoDetection
    attr_reader :DTWAIN_GetBrightness
+   attr_reader :DTWAIN_GetBrightnessEx
    attr_reader :DTWAIN_GetBrightnessString
    attr_reader :DTWAIN_GetBrightnessStringA
    attr_reader :DTWAIN_GetBrightnessStringW
@@ -536,6 +558,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetCapFromNameA
    attr_reader :DTWAIN_GetCapFromNameW
    attr_reader :DTWAIN_GetCapOperations
+   attr_reader :DTWAIN_GetCapOperationsEx
    attr_reader :DTWAIN_GetCapValues
    attr_reader :DTWAIN_GetCapValuesEx
    attr_reader :DTWAIN_GetCapValuesEx2
@@ -544,6 +567,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetCaptionW
    attr_reader :DTWAIN_GetCompressionSize
    attr_reader :DTWAIN_GetCompressionType
+   attr_reader :DTWAIN_GetCompressionTypeEx
    attr_reader :DTWAIN_GetConditionCodeString
    attr_reader :DTWAIN_GetConditionCodeStringA
    attr_reader :DTWAIN_GetConditionCodeStringW
@@ -551,6 +575,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetConstantFromTwainNameA
    attr_reader :DTWAIN_GetConstantFromTwainNameW
    attr_reader :DTWAIN_GetContrast
+   attr_reader :DTWAIN_GetContrastEx
    attr_reader :DTWAIN_GetContrastString
    attr_reader :DTWAIN_GetContrastStringA
    attr_reader :DTWAIN_GetContrastStringW
@@ -581,6 +606,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetDoubleFeedDetectLength
    attr_reader :DTWAIN_GetDoubleFeedDetectValues
    attr_reader :DTWAIN_GetDuplexType
+   attr_reader :DTWAIN_GetDuplexTypeEx
    attr_reader :DTWAIN_GetErrorBuffer
    attr_reader :DTWAIN_GetErrorBufferThreshold
    attr_reader :DTWAIN_GetErrorCallback
@@ -623,6 +649,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetImageInfoStringA
    attr_reader :DTWAIN_GetImageInfoStringW
    attr_reader :DTWAIN_GetJobControl
+   attr_reader :DTWAIN_GetJobControlEx
    attr_reader :DTWAIN_GetJpegValues
    attr_reader :DTWAIN_GetJpegXRValues
    attr_reader :DTWAIN_GetLanguage
@@ -631,6 +658,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetLibraryPathA
    attr_reader :DTWAIN_GetLibraryPathW
    attr_reader :DTWAIN_GetLightPath
+   attr_reader :DTWAIN_GetLightPathEx
    attr_reader :DTWAIN_GetLightSource
    attr_reader :DTWAIN_GetLightSources
    attr_reader :DTWAIN_GetLightSourcesEx
@@ -675,6 +703,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetOCRVersionInfoA
    attr_reader :DTWAIN_GetOCRVersionInfoW
    attr_reader :DTWAIN_GetOrientation
+   attr_reader :DTWAIN_GetOrientationEx
    attr_reader :DTWAIN_GetOverscan
    attr_reader :DTWAIN_GetPDFTextElementFloat
    attr_reader :DTWAIN_GetPDFTextElementLong
@@ -688,22 +717,27 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetPaperSizeName
    attr_reader :DTWAIN_GetPaperSizeNameA
    attr_reader :DTWAIN_GetPaperSizeNameW
-   attr_reader :DTWAIN_GetPatchMaxPriorities
-   attr_reader :DTWAIN_GetPatchMaxRetries
-   attr_reader :DTWAIN_GetPatchPriorities
-   attr_reader :DTWAIN_GetPatchSearchMode
-   attr_reader :DTWAIN_GetPatchTimeOut
+   attr_reader :DTWAIN_GetPatchcodeMaxPriorities
+   attr_reader :DTWAIN_GetPatchcodeMaxRetries
+   attr_reader :DTWAIN_GetPatchcodePriorities
+   attr_reader :DTWAIN_GetPatchcodeSearchMode
+   attr_reader :DTWAIN_GetPatchcodeTimeOut
    attr_reader :DTWAIN_GetPixelFlavor
    attr_reader :DTWAIN_GetPixelType
    attr_reader :DTWAIN_GetPrinter
+   attr_reader :DTWAIN_GetPrinterEx
    attr_reader :DTWAIN_GetPrinterStartNumber
+   attr_reader :DTWAIN_GetPrinterStartNumberEx
    attr_reader :DTWAIN_GetPrinterStringMode
+   attr_reader :DTWAIN_GetPrinterStringModeEx
    attr_reader :DTWAIN_GetPrinterStrings
+   attr_reader :DTWAIN_GetPrinterStringsEx
    attr_reader :DTWAIN_GetPrinterSuffixString
    attr_reader :DTWAIN_GetPrinterSuffixStringA
    attr_reader :DTWAIN_GetPrinterSuffixStringW
    attr_reader :DTWAIN_GetRegisteredMsg
    attr_reader :DTWAIN_GetResolution
+   attr_reader :DTWAIN_GetResolutionEx
    attr_reader :DTWAIN_GetResolutionString
    attr_reader :DTWAIN_GetResolutionStringA
    attr_reader :DTWAIN_GetResolutionStringW
@@ -711,6 +745,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetResourceStringA
    attr_reader :DTWAIN_GetResourceStringW
    attr_reader :DTWAIN_GetRotation
+   attr_reader :DTWAIN_GetRotationEx
    attr_reader :DTWAIN_GetRotationString
    attr_reader :DTWAIN_GetRotationStringA
    attr_reader :DTWAIN_GetRotationStringW
@@ -743,6 +778,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetSourceProductNameA
    attr_reader :DTWAIN_GetSourceProductNameW
    attr_reader :DTWAIN_GetSourceUnit
+   attr_reader :DTWAIN_GetSourceUnitEx
    attr_reader :DTWAIN_GetSourceVersionInfo
    attr_reader :DTWAIN_GetSourceVersionInfoA
    attr_reader :DTWAIN_GetSourceVersionInfoW
@@ -764,19 +800,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetTwainAvailabilityEx
    attr_reader :DTWAIN_GetTwainAvailabilityExA
    attr_reader :DTWAIN_GetTwainAvailabilityExW
-   attr_reader :DTWAIN_GetTwainCountryName
-   attr_reader :DTWAIN_GetTwainCountryNameA
-   attr_reader :DTWAIN_GetTwainCountryNameW
-   attr_reader :DTWAIN_GetTwainCountryValue
-   attr_reader :DTWAIN_GetTwainCountryValueA
-   attr_reader :DTWAIN_GetTwainCountryValueW
    attr_reader :DTWAIN_GetTwainHwnd
-   attr_reader :DTWAIN_GetTwainLanguageName
-   attr_reader :DTWAIN_GetTwainLanguageNameA
-   attr_reader :DTWAIN_GetTwainLanguageNameW
-   attr_reader :DTWAIN_GetTwainLanguageValue
-   attr_reader :DTWAIN_GetTwainLanguageValueA
-   attr_reader :DTWAIN_GetTwainLanguageValueW
    attr_reader :DTWAIN_GetTwainMode
    attr_reader :DTWAIN_GetTwainNameFromConstant
    attr_reader :DTWAIN_GetTwainNameFromConstantA
@@ -784,9 +808,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetTwainNameFromConstantExA
    attr_reader :DTWAIN_GetTwainNameFromConstantExW
    attr_reader :DTWAIN_GetTwainNameFromConstantW
-   attr_reader :DTWAIN_GetTwainStringName
-   attr_reader :DTWAIN_GetTwainStringNameA
-   attr_reader :DTWAIN_GetTwainStringNameW
    attr_reader :DTWAIN_GetTwainTimeout
    attr_reader :DTWAIN_GetVersion
    attr_reader :DTWAIN_GetVersionCopyright
@@ -830,6 +851,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_IsAutoScanEnabled
    attr_reader :DTWAIN_IsAutomaticSenseMediumEnabled
    attr_reader :DTWAIN_IsAutomaticSenseMediumSupported
+   attr_reader :DTWAIN_IsBarcodeCapsSupported
+   attr_reader :DTWAIN_IsBarcodeDetectionEnabled
+   attr_reader :DTWAIN_IsBarcodeSupported
    attr_reader :DTWAIN_IsBlankPageDetectionOn
    attr_reader :DTWAIN_IsBufferedTileModeOn
    attr_reader :DTWAIN_IsBufferedTileModeSupported
@@ -892,9 +916,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_IsOverscanSupported
    attr_reader :DTWAIN_IsPaperDetectable
    attr_reader :DTWAIN_IsPaperSizeSupported
-   attr_reader :DTWAIN_IsPatchCapsSupported
-   attr_reader :DTWAIN_IsPatchDetectEnabled
-   attr_reader :DTWAIN_IsPatchSupported
+   attr_reader :DTWAIN_IsPatchcodeCapsSupported
+   attr_reader :DTWAIN_IsPatchcodeDetectionEnabled
+   attr_reader :DTWAIN_IsPatchcodeSupported
    attr_reader :DTWAIN_IsPeekMessageLoopEnabled
    attr_reader :DTWAIN_IsPixelTypeSupported
    attr_reader :DTWAIN_IsPrinterEnabled
@@ -1038,6 +1062,11 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetAuthorW
    attr_reader :DTWAIN_SetAvailablePrinters
    attr_reader :DTWAIN_SetAvailablePrintersArray
+   attr_reader :DTWAIN_SetBarcodeMaxPriorities
+   attr_reader :DTWAIN_SetBarcodeMaxRetries
+   attr_reader :DTWAIN_SetBarcodePriorities
+   attr_reader :DTWAIN_SetBarcodeSearchMode
+   attr_reader :DTWAIN_SetBarcodeTimeOut
    attr_reader :DTWAIN_SetBitDepth
    attr_reader :DTWAIN_SetBlankPageDetection
    attr_reader :DTWAIN_SetBlankPageDetectionEx
@@ -1173,11 +1202,11 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetPDFTitleA
    attr_reader :DTWAIN_SetPDFTitleW
    attr_reader :DTWAIN_SetPaperSize
-   attr_reader :DTWAIN_SetPatchMaxPriorities
-   attr_reader :DTWAIN_SetPatchMaxRetries
-   attr_reader :DTWAIN_SetPatchPriorities
-   attr_reader :DTWAIN_SetPatchSearchMode
-   attr_reader :DTWAIN_SetPatchTimeOut
+   attr_reader :DTWAIN_SetPatchcodeMaxPriorities
+   attr_reader :DTWAIN_SetPatchcodeMaxRetries
+   attr_reader :DTWAIN_SetPatchcodePriorities
+   attr_reader :DTWAIN_SetPatchcodeSearchMode
+   attr_reader :DTWAIN_SetPatchcodeTimeOut
    attr_reader :DTWAIN_SetPixelFlavor
    attr_reader :DTWAIN_SetPixelType
    attr_reader :DTWAIN_SetPostScriptTitle
@@ -1421,6 +1450,8 @@ class DTWAINAPI
    DTWAIN_BIGTIFFJPEG = 11015
    DTWAIN_BIGTIFFJPEGMULTI = 11016
    DTWAIN_JPEGXR = 12000
+   DTWAIN_SVG = 13000
+   DTWAIN_SVGZ = 13001
    DTWAIN_INCHES = 0
    DTWAIN_CENTIMETERS = 1
    DTWAIN_PICAS = 2
@@ -1496,12 +1527,12 @@ class DTWAINAPI
    DTWAIN_CAPSET = 6
    DTWAIN_CAPRESET = 7
    DTWAIN_CAPRESETALL = 8
-   DTWAIN_CAPSETCONSTRAINT = 9
    DTWAIN_CAPSETAVAILABLE = 8
    DTWAIN_CAPSETCURRENT = 16
    DTWAIN_CAPGETHELP = 9
    DTWAIN_CAPGETLABEL = 10
    DTWAIN_CAPGETLABELENUM = 11
+   DTWAIN_CAPSETCONSTRAINT = 12
    DTWAIN_AREASET = DTWAIN_CAPSET
    DTWAIN_AREARESET = DTWAIN_CAPRESET
    DTWAIN_AREACURRENT = DTWAIN_CAPGETCURRENT
@@ -1629,6 +1660,8 @@ class DTWAINAPI
    DTWAIN_TN_TRANSFERTILEREADY = 1300
    DTWAIN_TN_TRANSFERTILEDONE = 1301
    DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302
+   DTWAIN_TN_SOURCEDETAILS = 1304
+   DTWAIN_TN_QUERYACQUIREPAGES = 1305
    DTWAIN_PDFOCR_CLEANTEXT1 = 1
    DTWAIN_PDFOCR_CLEANTEXT2 = 2
    DTWAIN_MODAL = 0
@@ -2339,6 +2372,7 @@ class DTWAINAPI
    DTWAIN_DLG_HIGHLIGHTFIRST = 8192
    DTWAIN_DLG_SAVELASTSCREENPOS = 16384
    DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768
+   DTWAIN_DLG_CONSOLEASPARENT = 65536
    DTWAIN_RES_ENGLISH = 0
    DTWAIN_RES_FRENCH = 1
    DTWAIN_RES_SPANISH = 2
@@ -3007,6 +3041,7 @@ class DTWAINAPI
        @DTWAIN_ArrayCreateFromReals = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayCreateFromReals'],[Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_ArrayDestroy = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayDestroy'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayDestroyFrames = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayDestroyFrames'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_ArrayDumpToLog = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayDumpToLog'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayFind = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayFind'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_ArrayFindANSIString = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayFindANSIString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_ArrayFindFloat = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayFindFloat'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_LONG)
@@ -3028,6 +3063,7 @@ class DTWAINAPI
        @DTWAIN_ArrayGetAtANSIString = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtANSIString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtANSIStringPtr = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtANSIStringPtr'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_ArrayGetAtFloat = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFloat'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_ArrayGetAtFloatEx = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFloatEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_DOUBLE)
        @DTWAIN_ArrayGetAtFloatString = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFloatString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtFloatStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFloatStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtFloatStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFloatStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3038,6 +3074,8 @@ class DTWAINAPI
        @DTWAIN_ArrayGetAtFrameStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtFrameStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtLong = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtLong'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtLong64 = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtLong64'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_ArrayGetAtLong64Ex = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtLong64Ex'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG_LONG)
+       @DTWAIN_ArrayGetAtLongEx = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtLongEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_ArrayGetAtSource = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtSource'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetAtSourceEx = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtSourceEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_ArrayGetAtString = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetAtString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3137,13 +3175,14 @@ class DTWAINAPI
        @DTWAIN_EnableAutoRotate = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableAutoRotate'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableAutoScan = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableAutoScan'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableAutomaticSenseMedium = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableAutomaticSenseMedium'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_EnableBarcodeDetection = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableBarcodeDetection'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableDuplex = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableDuplex'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableFeeder = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableFeeder'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableIndicator = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableIndicator'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableJobFileHandling = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableJobFileHandling'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableLamp = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableLamp'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableMsgNotify = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableMsgNotify'],[Fiddle::TYPE_INT],Fiddle::TYPE_INT)
-       @DTWAIN_EnablePatchDetect = Fiddle::Function::new(dtwain_dll['DTWAIN_EnablePatchDetect'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_EnablePatchcodeDetection = Fiddle::Function::new(dtwain_dll['DTWAIN_EnablePatchcodeDetection'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnablePeekMessageLoop = Fiddle::Function::new(dtwain_dll['DTWAIN_EnablePeekMessageLoop'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnablePrinter = Fiddle::Function::new(dtwain_dll['DTWAIN_EnablePrinter'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_EnableThumbnail = Fiddle::Function::new(dtwain_dll['DTWAIN_EnableThumbnail'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
@@ -3162,24 +3201,35 @@ class DTWAINAPI
        @DTWAIN_EnumAutomaticCapturesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumAutomaticCapturesEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumAutomaticSenseMedium = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumAutomaticSenseMedium'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumAutomaticSenseMediumEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumAutomaticSenseMediumEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodeCodes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeCodes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodeCodesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeCodesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodeMaxPrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeMaxPrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodeMaxRetriesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeMaxRetriesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodePrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodePrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodeSearchModes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeSearchModes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodeSearchModesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeSearchModesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumBarcodeTimeOutValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeTimeOutValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBarcodeTimeOutValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBarcodeTimeOutValuesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumBitDepths = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBitDepths'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumBitDepthsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBitDepthsEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumBitDepthsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBitDepthsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumBitDepthsEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBitDepthsEx2'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumBottomCameras = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBottomCameras'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumBottomCamerasEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBottomCamerasEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumBrightnessValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBrightnessValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_EnumBrightnessValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumBrightnessValuesEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumCameras = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCameras'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumCamerasEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCamerasEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumCamerasEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCamerasEx2'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumCamerasEx3 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCamerasEx3'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumCamerasEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCamerasEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumCamerasEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCamerasEx2'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumCompressionTypes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCompressionTypes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumCompressionTypesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCompressionTypesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumCompressionTypesEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCompressionTypesEx2'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumContrastValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumContrastValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_EnumContrastValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumContrastValuesEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumCustomCaps = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCustomCaps'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumCustomCapsEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCustomCapsEx2'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumCustomCapsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumCustomCapsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumDoubleFeedDetectLengths = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumDoubleFeedDetectLengths'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_EnumDoubleFeedDetectLengthsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumDoubleFeedDetectLengthsEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumDoubleFeedDetectValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumDoubleFeedDetectValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
@@ -3187,7 +3237,7 @@ class DTWAINAPI
        @DTWAIN_EnumExtImageInfoTypes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtImageInfoTypes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumExtImageInfoTypesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtImageInfoTypesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumExtendedCaps = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtendedCaps'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumExtendedCapsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtendedCapsEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumExtendedCapsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtendedCapsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumExtendedCapsEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumExtendedCapsEx2'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumFileTypeBitsPerPixel = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumFileTypeBitsPerPixel'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumFileXferFormats = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumFileXferFormats'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3207,6 +3257,7 @@ class DTWAINAPI
        @DTWAIN_EnumNoiseFilters = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumNoiseFilters'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumNoiseFiltersEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumNoiseFiltersEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumOCRInterfaces = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRInterfaces'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumOCRInterfacesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRInterfacesEx'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumOCRSupportedCaps = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRSupportedCaps'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumOrientations = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOrientations'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumOrientationsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOrientationsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
@@ -3214,18 +3265,18 @@ class DTWAINAPI
        @DTWAIN_EnumOverscanValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOverscanValuesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumPaperSizes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPaperSizes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumPaperSizesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPaperSizesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchCodes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchCodes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchCodesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchCodesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchMaxPrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchMaxPrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchMaxRetriesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchMaxRetriesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchPrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchPrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchSearchModes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchSearchModes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchSearchModesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchSearchModesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_EnumPatchTimeOutValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchTimeOutValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumPatchTimeOutValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchTimeOutValuesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodeCodes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeCodes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodeCodesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeCodesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodeMaxPrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeMaxPrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodeMaxRetriesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeMaxRetriesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodePrioritiesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodePrioritiesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodeSearchModes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeSearchModes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodeSearchModesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeSearchModesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumPatchcodeTimeOutValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeTimeOutValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumPatchcodeTimeOutValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPatchcodeTimeOutValuesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumPixelTypes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPixelTypes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumPixelTypesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPixelTypesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumPrinterStringModes = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumPrinterStringModes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3242,7 +3293,7 @@ class DTWAINAPI
        @DTWAIN_EnumSources = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSources'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumSourcesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSourcesEx'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumSupportedCaps = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedCaps'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumSupportedCapsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedCapsEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumSupportedCapsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedCapsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumSupportedCapsEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedCapsEx2'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumSupportedExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedExtImageInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumSupportedExtImageInfoEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumSupportedExtImageInfoEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
@@ -3267,8 +3318,6 @@ class DTWAINAPI
        @DTWAIN_FeedPage = Fiddle::Function::new(dtwain_dll['DTWAIN_FeedPage'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_FlipBitmap = Fiddle::Function::new(dtwain_dll['DTWAIN_FlipBitmap'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_FlushAcquiredPages = Fiddle::Function::new(dtwain_dll['DTWAIN_FlushAcquiredPages'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_ForceAcquireBitDepth = Fiddle::Function::new(dtwain_dll['DTWAIN_ForceAcquireBitDepth'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_ForceScanOnNoUI = Fiddle::Function::new(dtwain_dll['DTWAIN_ForceScanOnNoUI'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_FrameCreate = Fiddle::Function::new(dtwain_dll['DTWAIN_FrameCreate'],[Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_VOIDP)
        @DTWAIN_FrameCreateString = Fiddle::Function::new(dtwain_dll['DTWAIN_FrameCreateString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_FrameCreateStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_FrameCreateStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
@@ -3321,11 +3370,18 @@ class DTWAINAPI
        @DTWAIN_GetAuthor = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAuthor'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAuthorA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAuthorA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetAuthorW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetAuthorW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetBarcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBarcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetBarcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBarcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetBarcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBarcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetBarcodeSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBarcodeSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetBarcodeTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBarcodeTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetBatteryMinutes = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBatteryMinutes'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetBatteryPercent = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBatteryPercent'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetBitDepth = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBitDepth'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetBitDepthEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBitDepthEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetBlankPageAutoDetection = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBlankPageAutoDetection'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetBrightness = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBrightness'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetBrightnessEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBrightnessEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_DOUBLE)
        @DTWAIN_GetBrightnessString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBrightnessString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetBrightnessStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBrightnessStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetBrightnessStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetBrightnessStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3341,6 +3397,7 @@ class DTWAINAPI
        @DTWAIN_GetCapFromNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapFromNameA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapFromNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapFromNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapOperations = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapOperations'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetCapOperationsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapOperationsEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCapValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCapValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapValuesEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCapValuesEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCapValuesEx2'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3349,6 +3406,7 @@ class DTWAINAPI
        @DTWAIN_GetCaptionW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCaptionW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCompressionSize = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionSize'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetCompressionTypeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionTypeEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetConditionCodeString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetConditionCodeString'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetConditionCodeStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetConditionCodeStringA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetConditionCodeStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetConditionCodeStringW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3356,6 +3414,7 @@ class DTWAINAPI
        @DTWAIN_GetConstantFromTwainNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetConstantFromTwainNameA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetConstantFromTwainNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetConstantFromTwainNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetContrast = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrast'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetContrastEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrastEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_DOUBLE)
        @DTWAIN_GetContrastString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrastString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetContrastStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrastStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetContrastStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrastStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3386,6 +3445,7 @@ class DTWAINAPI
        @DTWAIN_GetDoubleFeedDetectLength = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDoubleFeedDetectLength'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetDoubleFeedDetectValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDoubleFeedDetectValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetDuplexType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDuplexType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetDuplexTypeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDuplexTypeEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetErrorBuffer = Fiddle::Function::new(dtwain_dll['DTWAIN_GetErrorBuffer'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetErrorBufferThreshold = Fiddle::Function::new(dtwain_dll['DTWAIN_GetErrorBufferThreshold'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetErrorCallback = Fiddle::Function::new(dtwain_dll['DTWAIN_GetErrorCallback'],[],Fiddle::TYPE_VOIDP)
@@ -3428,6 +3488,7 @@ class DTWAINAPI
        @DTWAIN_GetImageInfoStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageInfoStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetJobControlEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControlEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetJpegXRValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegXRValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLanguage = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLanguage'],[],Fiddle::TYPE_LONG)
@@ -3436,6 +3497,7 @@ class DTWAINAPI
        @DTWAIN_GetLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLightPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLightPath'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetLightPathEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLightPathEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLightSource = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLightSource'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLightSources = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLightSources'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLightSourcesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLightSourcesEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
@@ -3480,6 +3542,7 @@ class DTWAINAPI
        @DTWAIN_GetOCRVersionInfoA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetOCRVersionInfoA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetOCRVersionInfoW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetOCRVersionInfoW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetOrientation = Fiddle::Function::new(dtwain_dll['DTWAIN_GetOrientation'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetOrientationEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetOrientationEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetOverscan = Fiddle::Function::new(dtwain_dll['DTWAIN_GetOverscan'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetPDFTextElementFloat = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPDFTextElementFloat'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_GetPDFTextElementLong = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPDFTextElementLong'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
@@ -3493,22 +3556,27 @@ class DTWAINAPI
        @DTWAIN_GetPaperSizeName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPaperSizeName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetPaperSizeNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPaperSizeNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetPaperSizeNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPaperSizeNameW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetPatchMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
-       @DTWAIN_GetPatchMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
-       @DTWAIN_GetPatchPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetPatchSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
-       @DTWAIN_GetPatchTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPatchcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPatchcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPatchcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetPatchcodeSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPatchcodeTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetPixelFlavor = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPixelFlavor'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetPixelType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPixelType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetPrinter = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinter'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPrinterEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetPrinterStartNumber = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStartNumber'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetPrinterStartNumberEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStartNumberEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetPrinterStringMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStringMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPrinterStringModeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStringModeEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetPrinterStrings = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStrings'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetPrinterStringsEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterStringsEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetPrinterSuffixString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterSuffixString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_GetPrinterSuffixStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterSuffixStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_GetPrinterSuffixStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinterSuffixStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_GetRegisteredMsg = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRegisteredMsg'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetResolution = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResolution'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetResolutionEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResolutionEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_DOUBLE)
        @DTWAIN_GetResolutionString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResolutionString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetResolutionStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResolutionStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetResolutionStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResolutionStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3516,6 +3584,7 @@ class DTWAINAPI
        @DTWAIN_GetResourceStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResourceStringA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetResourceStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetResourceStringW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetRotation = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRotation'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetRotationEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRotationEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_DOUBLE)
        @DTWAIN_GetRotationString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRotationString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetRotationStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRotationStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetRotationStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetRotationStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3548,6 +3617,7 @@ class DTWAINAPI
        @DTWAIN_GetSourceProductNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceProductNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceProductNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceProductNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceUnit = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceUnit'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetSourceUnitEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceUnitEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceVersionInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceVersionInfoA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionInfoA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceVersionInfoW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionInfoW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3569,19 +3639,7 @@ class DTWAINAPI
        @DTWAIN_GetTwainAvailabilityEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainAvailabilityEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainAvailabilityExA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainAvailabilityExA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainAvailabilityExW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainAvailabilityExW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainCountryName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainCountryNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainCountryNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryNameW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainCountryValue = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryValue'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainCountryValueA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryValueA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainCountryValueW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainCountryValueW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainHwnd = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainHwnd'],[],Fiddle::TYPE_VOIDP)
-       @DTWAIN_GetTwainLanguageName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainLanguageNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainLanguageNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageNameW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetTwainLanguageValue = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageValue'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainLanguageValueA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageValueA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainLanguageValueW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainLanguageValueW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainMode'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstant = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstant'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3589,9 +3647,6 @@ class DTWAINAPI
        @DTWAIN_GetTwainNameFromConstantExA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantExW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainStringName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainStringName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainStringNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainStringNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainStringNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainStringNameW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainTimeout = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainTimeout'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetVersion = Fiddle::Function::new(dtwain_dll['DTWAIN_GetVersion'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetVersionCopyright = Fiddle::Function::new(dtwain_dll['DTWAIN_GetVersionCopyright'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3635,6 +3690,9 @@ class DTWAINAPI
        @DTWAIN_IsAutoScanEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsAutoScanEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsAutomaticSenseMediumEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsAutomaticSenseMediumEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsAutomaticSenseMediumSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsAutomaticSenseMediumSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsBarcodeCapsSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBarcodeCapsSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsBarcodeDetectionEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBarcodeDetectionEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsBarcodeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBarcodeSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsBlankPageDetectionOn = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBlankPageDetectionOn'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsBufferedTileModeOn = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBufferedTileModeOn'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsBufferedTileModeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsBufferedTileModeSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3697,9 +3755,9 @@ class DTWAINAPI
        @DTWAIN_IsOverscanSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOverscanSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsPaperDetectable = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPaperDetectable'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsPaperSizeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPaperSizeSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_IsPatchCapsSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchCapsSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_IsPatchDetectEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchDetectEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_IsPatchSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_IsPatchcodeCapsSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchcodeCapsSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsPatchcodeDetectionEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchcodeDetectionEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsPatchcodeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPatchcodeSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsPeekMessageLoopEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPeekMessageLoopEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsPixelTypeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPixelTypeSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsPrinterEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsPrinterEnabled'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
@@ -3843,6 +3901,11 @@ class DTWAINAPI
        @DTWAIN_SetAuthorW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetAuthorW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetAvailablePrinters = Fiddle::Function::new(dtwain_dll['DTWAIN_SetAvailablePrinters'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetAvailablePrintersArray = Fiddle::Function::new(dtwain_dll['DTWAIN_SetAvailablePrintersArray'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetBarcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBarcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetBarcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBarcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetBarcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBarcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetBarcodeSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBarcodeSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetBarcodeTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBarcodeTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetBitDepth = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBitDepth'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetBlankPageDetection = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBlankPageDetection'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetBlankPageDetectionEx = Fiddle::Function::new(dtwain_dll['DTWAIN_SetBlankPageDetectionEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
@@ -3978,11 +4041,11 @@ class DTWAINAPI
        @DTWAIN_SetPDFTitleA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPDFTitleA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetPDFTitleW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPDFTitleW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetPaperSize = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPaperSize'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
-       @DTWAIN_SetPatchMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_SetPatchMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_SetPatchPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_SetPatchSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_SetPatchTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetPatchcodeMaxPriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchcodeMaxPriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetPatchcodeMaxRetries = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchcodeMaxRetries'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetPatchcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetPatchcodeSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchcodeSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetPatchcodeTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPatchcodeTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetPixelFlavor = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPixelFlavor'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetPixelType = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPixelType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetPostScriptTitle = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPostScriptTitle'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
