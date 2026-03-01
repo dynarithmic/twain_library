@@ -508,6 +508,9 @@ void SelectTheSource(int nWhich)
     {
         if ( DTWAIN_OpenSource(tempSource) )
         {
+            // Enable bar code detection
+            DTWAIN_EnableBarcodeDetection(tempSource, 1);
+
             // We want to make sure that when we acquire to a PDF file, we will "stamp"
             // each PDF page with the text that g_PDFTextElement will have (see TwainCallbackProc)
 			DTWAIN_AddPDFTextElement(tempSource, g_PDFTextElement);

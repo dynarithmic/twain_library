@@ -20,7 +20,11 @@ DTWAIN Version changes
   showing the user-interface (if the user-interface was shown), or back to the caller of
   the DTWAIN_Acquire...() function if no user-interface was shown.
 
-- Fix various issues with DTWAIN_SetCapValues() using the MSG_SETCONSTRAINT set type.
+- Add DTWAIN_EnableBarcodeDetection() function that will enable or disable the 
+  bar code detection for the TWAIN driver.  Internally, this is basically a wrapper for 
+  DTWAIN_SetCapValues() using the ICAP_BARCODEDETECTIONENABLED capability and the 
+  MSG_SET set type.  Note that the TWAIN driver must already support bar code detection
+  for this function to have any effect.
 
 - Eliminate extraneous TWAIN messages from log files if DTWAIN_LOG_ISTWAINMSG option 
   is turned off.  This change reduces the size of log files by a very large margin.
@@ -34,6 +38,14 @@ DTWAIN Version changes
 - Send DTWAIN_TN_SOURCEDETAILS notifications to the application when DTWAIN_GetSessionDetails()
   or DTWAIN_GetSourceDetails() is called.  The LPARAM of the notification will be a pointer to
   a null terminated ASCII string that represents the Product Name of the Source that is being processed.
+
+- Fix various issues with DTWAIN_SetCapValues() using the MSG_SETCONSTRAINT set type.
+
+- Address potential exception thrown when calling DTWAIN_GetSourceDetails() or
+  DTWAIN_GetSessionDetails().  
+
+- Fixed DTWAIN_GetBitDepth() to ensure that the returned DTWAIN_ARRAY is not 
+  destroyed.
 
 - Changed function signature of DTWAIN_EnumSupportedCapsEx().  The function will now return
   a DTWAIN_ARRAY that consists of all of the device's capabilities.  If your application called 

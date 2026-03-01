@@ -1893,13 +1893,14 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_EnableAutoRotate Lib "dtwain32.dll" (Source As System.IntPtr, bSet As Integer) As Integer
     Public Declare Function DTWAIN_EnableAutoScan Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableAutomaticSenseMedium Lib "dtwain32.dll" (Source As System.IntPtr, bSet As Integer) As Integer
+    Public Declare Function DTWAIN_EnableBarcodeDetection Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableDuplex Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableFeeder Lib "dtwain32.dll" (Source As System.IntPtr, bSet As Integer) As Integer
     Public Declare Function DTWAIN_EnableIndicator Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableJobFileHandling Lib "dtwain32.dll" (Source As System.IntPtr, bSet As Integer) As Integer
     Public Declare Function DTWAIN_EnableLamp Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableMsgNotify Lib "dtwain32.dll" (bSet As Integer) As Integer
-    Public Declare Function DTWAIN_EnablePatchDetect Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
+    Public Declare Function DTWAIN_EnablePatchcodeDetection Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnablePeekMessageLoop Lib "dtwain32.dll" (Source As System.IntPtr, bSet As Integer) As Integer
     Public Declare Function DTWAIN_EnablePrinter Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
     Public Declare Function DTWAIN_EnableThumbnail Lib "dtwain32.dll" (Source As System.IntPtr, bEnable As Integer) As Integer
@@ -1918,6 +1919,18 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_EnumAutomaticCapturesEx Lib "dtwain32.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
     Public Declare Function DTWAIN_EnumAutomaticSenseMedium Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumAutomaticSenseMediumEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodeCodes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodeCodesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodeMaxPrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodeMaxRetriesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodePrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodeSearchModes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodeSearchModesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumBarcodeTimeOutValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumBarcodeTimeOutValuesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumBitDepths Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumBitDepthsEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumBitDepthsEx2 Lib "dtwain32.dll" (Source As System.IntPtr, PixelType As Integer) As System.IntPtr
@@ -1970,18 +1983,18 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_EnumOverscanValuesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumPaperSizes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumPaperSizesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchCodes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchCodesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchMaxPrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchMaxRetriesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchPrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchSearchModes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchSearchModesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
-    Public Declare Function DTWAIN_EnumPatchTimeOutValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumPatchTimeOutValuesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodeCodes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PCodes As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodeCodesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodeMaxPrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodeMaxRetriesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodePrioritiesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodeSearchModes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodeSearchModesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumPatchcodeTimeOutValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumPatchcodeTimeOutValuesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumPixelTypes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumPixelTypesEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumPrinterStringModes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -2051,6 +2064,11 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetAllSourceDibs Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Ansi Function DTWAIN_GetAppInfo Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
     Public Declare Ansi Function DTWAIN_GetAuthor Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> szAuthor As StringBuilder) As Integer
+    Public Declare Function DTWAIN_GetBarcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetBarcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetBarcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_GetBarcodeSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetBarcodeTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetBatteryMinutes Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpMinutes As Integer) As Integer
     Public Declare Function DTWAIN_GetBatteryPercent Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPercent As Integer) As Integer
     Public Declare Function DTWAIN_GetBitDepth Lib "dtwain32.dll" (Source As System.IntPtr, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
@@ -2172,11 +2190,11 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetPDFType1FontName Lib "dtwain32.dll" (FontVal As Integer, <MarshalAs(UnmanagedType.LPStr)> szFont As StringBuilder, nChars As Integer) As Integer
     Public Declare Function DTWAIN_GetPaperSize Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPaperSize As Integer, bCurrent As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetPaperSizeName Lib "dtwain32.dll" (paperNumber As Integer, <MarshalAs(UnmanagedType.LPStr)> outName As StringBuilder, nSize As Integer) As Integer
-    Public Declare Function DTWAIN_GetPatchMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
-    Public Declare Function DTWAIN_GetPatchMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
-    Public Declare Function DTWAIN_GetPatchPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_GetPatchSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
-    Public Declare Function DTWAIN_GetPatchTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPatchcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxPriorities As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPatchcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pMaxRetries As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPatchcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_GetPatchcodeSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPatchcodeTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pTimeOut As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPixelFlavor Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
     Public Declare Function DTWAIN_GetPixelType Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPrinter Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
@@ -2252,6 +2270,9 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_IsAutoScanEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsAutomaticSenseMediumEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsAutomaticSenseMediumSupported Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsBarcodeCapsSupported Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsBarcodeDetectionEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsBarcodeSupported Lib "dtwain32.dll" (Source As System.IntPtr, BarCode As Integer) As Integer
     Public Declare Function DTWAIN_IsBlankPageDetectionOn Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsBufferedTileModeOn Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsBufferedTileModeSupported Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
@@ -2313,9 +2334,9 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_IsOverscanSupported Lib "dtwain32.dll" (Source As System.IntPtr, SupportValue As Integer) As Integer
     Public Declare Function DTWAIN_IsPaperDetectable Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsPaperSizeSupported Lib "dtwain32.dll" (Source As System.IntPtr, PaperSize As Integer) As Integer
-    Public Declare Function DTWAIN_IsPatchCapsSupported Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_IsPatchDetectEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_IsPatchSupported Lib "dtwain32.dll" (Source As System.IntPtr, PatchCode As Integer) As Integer
+    Public Declare Function DTWAIN_IsPatchcodeCapsSupported Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsPatchcodeDetectionEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsPatchcodeSupported Lib "dtwain32.dll" (Source As System.IntPtr, PatchCode As Integer) As Integer
     Public Declare Function DTWAIN_IsPeekMessageLoopEnabled Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsPixelTypeSupported Lib "dtwain32.dll" (Source As System.IntPtr, PixelType As Integer) As Integer
     Public Declare Function DTWAIN_IsPrinterEnabled Lib "dtwain32.dll" (Source As System.IntPtr, Printer As Integer) As Integer
@@ -2414,6 +2435,11 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_SetAuthor Lib "dtwain32.dll" (Source As System.IntPtr, szAuthor As String) As Integer
     Public Declare Function DTWAIN_SetAvailablePrinters Lib "dtwain32.dll" (Source As System.IntPtr, lpAvailPrinters As Integer) As Integer
     Public Declare Function DTWAIN_SetAvailablePrintersArray Lib "dtwain32.dll" (Source As System.IntPtr, AvailPrinters As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_SetBarcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+    Public Declare Function DTWAIN_SetBarcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, nMaxRetries As Integer) As Integer
+    Public Declare Function DTWAIN_SetBarcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_SetBarcodeSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, nSearchMode As Integer) As Integer
+    Public Declare Function DTWAIN_SetBarcodeTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, TimeOutValue As Integer) As Integer
     Public Declare Function DTWAIN_SetBitDepth Lib "dtwain32.dll" (Source As System.IntPtr, BitDepth As Integer, bSetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_SetBlankPageDetection Lib "dtwain32.dll" (Source As System.IntPtr, threshold As System.Double, discard_option As Integer, bSet As Integer) As Integer
     Public Declare Function DTWAIN_SetBlankPageDetectionEx Lib "dtwain32.dll" (Source As System.IntPtr, threshold As System.Double, autodetect As Integer, detectOpts As Integer, bSet As Integer) As Integer
@@ -2501,11 +2527,11 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_SetPDFTextElementString Lib "dtwain32.dll" (TextElement As System.IntPtr, val1 As String, Flags As Integer) As Integer
     Public Declare Ansi Function DTWAIN_SetPDFTitle Lib "dtwain32.dll" (Source As System.IntPtr, lpTitle As String) As Integer
     Public Declare Function DTWAIN_SetPaperSize Lib "dtwain32.dll" (Source As System.IntPtr, PaperSize As Integer, bSetCurrent As Integer) As Integer
-    Public Declare Function DTWAIN_SetPatchMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
-    Public Declare Function DTWAIN_SetPatchMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, nMaxRetries As Integer) As Integer
-    Public Declare Function DTWAIN_SetPatchPriorities Lib "dtwain32.dll" (Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_SetPatchSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, nSearchMode As Integer) As Integer
-    Public Declare Function DTWAIN_SetPatchTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, TimeOutValue As Integer) As Integer
+    Public Declare Function DTWAIN_SetPatchcodeMaxPriorities Lib "dtwain32.dll" (Source As System.IntPtr, nMaxSearchRetries As Integer) As Integer
+    Public Declare Function DTWAIN_SetPatchcodeMaxRetries Lib "dtwain32.dll" (Source As System.IntPtr, nMaxRetries As Integer) As Integer
+    Public Declare Function DTWAIN_SetPatchcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, SearchPriorities As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_SetPatchcodeSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, nSearchMode As Integer) As Integer
+    Public Declare Function DTWAIN_SetPatchcodeTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, TimeOutValue As Integer) As Integer
     Public Declare Function DTWAIN_SetPixelFlavor Lib "dtwain32.dll" (Source As System.IntPtr, PixelFlavor As Integer) As Integer
     Public Declare Function DTWAIN_SetPixelType Lib "dtwain32.dll" (Source As System.IntPtr, PixelType As Integer, BitDepth As Integer, bSetCurrent As Integer) As Integer
     Public Declare Ansi Function DTWAIN_SetPostScriptTitle Lib "dtwain32.dll" (Source As System.IntPtr, szTitle As String) As Integer

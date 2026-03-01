@@ -2309,6 +2309,9 @@ module TwainAPI =
     type DTWAIN_EnableAutomaticSenseMediumDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnableBarcodeDetectionDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnableDuplexDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -2327,7 +2330,7 @@ module TwainAPI =
     type DTWAIN_EnableMsgNotifyDelegate = delegate of DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnablePatchDetectDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_EnablePatchcodeDetectionDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnablePeekMessageLoopDelegate = delegate of DTWAIN_SOURCE * BOOL -> DTWAIN_BOOL
@@ -2382,6 +2385,42 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumAutomaticSenseMediumExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeCodesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeCodesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeMaxPrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeMaxRetriesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodePrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeSearchModesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeSearchModesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeTimeOutValuesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumBarcodeTimeOutValuesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumBitDepthsDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
@@ -2540,40 +2579,40 @@ module TwainAPI =
     type DTWAIN_EnumPaperSizesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchCodesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodeCodesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchCodesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodeCodesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchMaxPrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchMaxRetriesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodeMaxRetriesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchPrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodePrioritiesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchSearchModesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodeSearchModesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchSearchModesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodeSearchModesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchTimeOutValuesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_EnumPatchcodeTimeOutValuesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumPatchTimeOutValuesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+    type DTWAIN_EnumPatchcodeTimeOutValuesExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumPixelTypesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
@@ -2781,6 +2820,21 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetAuthorDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetBarcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetBarcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetBatteryMinutesDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
@@ -3146,19 +3200,19 @@ module TwainAPI =
     type DTWAIN_GetPaperSizeNameDelegate = delegate of LONG * System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchMaxRetriesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchSearchModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchTimeOutDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetPixelFlavorDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
@@ -3392,6 +3446,15 @@ module TwainAPI =
     type DTWAIN_IsAutomaticSenseMediumSupportedDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_IsBarcodeCapsSupportedDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_IsBarcodeDetectionEnabledDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_IsBarcodeSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_IsBlankPageDetectionOnDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3575,13 +3638,13 @@ module TwainAPI =
     type DTWAIN_IsPaperSizeSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_IsPatchCapsSupportedDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
+    type DTWAIN_IsPatchcodeCapsSupportedDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_IsPatchDetectEnabledDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
+    type DTWAIN_IsPatchcodeDetectionEnabledDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_IsPatchSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_IsPatchcodeSupportedDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_IsPeekMessageLoopEnabledDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
@@ -3878,6 +3941,21 @@ module TwainAPI =
     type DTWAIN_SetAvailablePrintersArrayDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetBarcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetBarcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetBitDepthDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -4124,19 +4202,19 @@ module TwainAPI =
     type DTWAIN_SetPaperSizeDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchMaxRetriesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchPrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchSearchModeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchTimeOutDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetPixelFlavorDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
@@ -4443,13 +4521,14 @@ module TwainAPI =
     let private EnableAutoRotate = lazy (DynamicDll.Bind "DTWAIN_EnableAutoRotate" : DTWAIN_EnableAutoRotateDelegate)
     let private EnableAutoScan = lazy (DynamicDll.Bind "DTWAIN_EnableAutoScan" : DTWAIN_EnableAutoScanDelegate)
     let private EnableAutomaticSenseMedium = lazy (DynamicDll.Bind "DTWAIN_EnableAutomaticSenseMedium" : DTWAIN_EnableAutomaticSenseMediumDelegate)
+    let private EnableBarcodeDetection = lazy (DynamicDll.Bind "DTWAIN_EnableBarcodeDetection" : DTWAIN_EnableBarcodeDetectionDelegate)
     let private EnableDuplex = lazy (DynamicDll.Bind "DTWAIN_EnableDuplex" : DTWAIN_EnableDuplexDelegate)
     let private EnableFeeder = lazy (DynamicDll.Bind "DTWAIN_EnableFeeder" : DTWAIN_EnableFeederDelegate)
     let private EnableIndicator = lazy (DynamicDll.Bind "DTWAIN_EnableIndicator" : DTWAIN_EnableIndicatorDelegate)
     let private EnableJobFileHandling = lazy (DynamicDll.Bind "DTWAIN_EnableJobFileHandling" : DTWAIN_EnableJobFileHandlingDelegate)
     let private EnableLamp = lazy (DynamicDll.Bind "DTWAIN_EnableLamp" : DTWAIN_EnableLampDelegate)
     let private EnableMsgNotify = lazy (DynamicDll.Bind "DTWAIN_EnableMsgNotify" : DTWAIN_EnableMsgNotifyDelegate)
-    let private EnablePatchDetect = lazy (DynamicDll.Bind "DTWAIN_EnablePatchDetect" : DTWAIN_EnablePatchDetectDelegate)
+    let private EnablePatchcodeDetection = lazy (DynamicDll.Bind "DTWAIN_EnablePatchcodeDetection" : DTWAIN_EnablePatchcodeDetectionDelegate)
     let private EnablePeekMessageLoop = lazy (DynamicDll.Bind "DTWAIN_EnablePeekMessageLoop" : DTWAIN_EnablePeekMessageLoopDelegate)
     let private EnablePrinter = lazy (DynamicDll.Bind "DTWAIN_EnablePrinter" : DTWAIN_EnablePrinterDelegate)
     let private EnableThumbnail = lazy (DynamicDll.Bind "DTWAIN_EnableThumbnail" : DTWAIN_EnableThumbnailDelegate)
@@ -4468,6 +4547,18 @@ module TwainAPI =
     let private EnumAutomaticCapturesEx = lazy (DynamicDll.Bind "DTWAIN_EnumAutomaticCapturesEx" : DTWAIN_EnumAutomaticCapturesExDelegate)
     let private EnumAutomaticSenseMedium = lazy (DynamicDll.Bind "DTWAIN_EnumAutomaticSenseMedium" : DTWAIN_EnumAutomaticSenseMediumDelegate)
     let private EnumAutomaticSenseMediumEx = lazy (DynamicDll.Bind "DTWAIN_EnumAutomaticSenseMediumEx" : DTWAIN_EnumAutomaticSenseMediumExDelegate)
+    let private EnumBarcodeCodes = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeCodes" : DTWAIN_EnumBarcodeCodesDelegate)
+    let private EnumBarcodeCodesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeCodesEx" : DTWAIN_EnumBarcodeCodesExDelegate)
+    let private EnumBarcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeMaxPriorities" : DTWAIN_EnumBarcodeMaxPrioritiesDelegate)
+    let private EnumBarcodeMaxPrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeMaxPrioritiesEx" : DTWAIN_EnumBarcodeMaxPrioritiesExDelegate)
+    let private EnumBarcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeMaxRetries" : DTWAIN_EnumBarcodeMaxRetriesDelegate)
+    let private EnumBarcodeMaxRetriesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeMaxRetriesEx" : DTWAIN_EnumBarcodeMaxRetriesExDelegate)
+    let private EnumBarcodePriorities = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodePriorities" : DTWAIN_EnumBarcodePrioritiesDelegate)
+    let private EnumBarcodePrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodePrioritiesEx" : DTWAIN_EnumBarcodePrioritiesExDelegate)
+    let private EnumBarcodeSearchModes = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeSearchModes" : DTWAIN_EnumBarcodeSearchModesDelegate)
+    let private EnumBarcodeSearchModesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeSearchModesEx" : DTWAIN_EnumBarcodeSearchModesExDelegate)
+    let private EnumBarcodeTimeOutValues = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeTimeOutValues" : DTWAIN_EnumBarcodeTimeOutValuesDelegate)
+    let private EnumBarcodeTimeOutValuesEx = lazy (DynamicDll.Bind "DTWAIN_EnumBarcodeTimeOutValuesEx" : DTWAIN_EnumBarcodeTimeOutValuesExDelegate)
     let private EnumBitDepths = lazy (DynamicDll.Bind "DTWAIN_EnumBitDepths" : DTWAIN_EnumBitDepthsDelegate)
     let private EnumBitDepthsEx = lazy (DynamicDll.Bind "DTWAIN_EnumBitDepthsEx" : DTWAIN_EnumBitDepthsExDelegate)
     let private EnumBitDepthsEx2 = lazy (DynamicDll.Bind "DTWAIN_EnumBitDepthsEx2" : DTWAIN_EnumBitDepthsEx2Delegate)
@@ -4520,18 +4611,18 @@ module TwainAPI =
     let private EnumOverscanValuesEx = lazy (DynamicDll.Bind "DTWAIN_EnumOverscanValuesEx" : DTWAIN_EnumOverscanValuesExDelegate)
     let private EnumPaperSizes = lazy (DynamicDll.Bind "DTWAIN_EnumPaperSizes" : DTWAIN_EnumPaperSizesDelegate)
     let private EnumPaperSizesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPaperSizesEx" : DTWAIN_EnumPaperSizesExDelegate)
-    let private EnumPatchCodes = lazy (DynamicDll.Bind "DTWAIN_EnumPatchCodes" : DTWAIN_EnumPatchCodesDelegate)
-    let private EnumPatchCodesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchCodesEx" : DTWAIN_EnumPatchCodesExDelegate)
-    let private EnumPatchMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_EnumPatchMaxPriorities" : DTWAIN_EnumPatchMaxPrioritiesDelegate)
-    let private EnumPatchMaxPrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchMaxPrioritiesEx" : DTWAIN_EnumPatchMaxPrioritiesExDelegate)
-    let private EnumPatchMaxRetries = lazy (DynamicDll.Bind "DTWAIN_EnumPatchMaxRetries" : DTWAIN_EnumPatchMaxRetriesDelegate)
-    let private EnumPatchMaxRetriesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchMaxRetriesEx" : DTWAIN_EnumPatchMaxRetriesExDelegate)
-    let private EnumPatchPriorities = lazy (DynamicDll.Bind "DTWAIN_EnumPatchPriorities" : DTWAIN_EnumPatchPrioritiesDelegate)
-    let private EnumPatchPrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchPrioritiesEx" : DTWAIN_EnumPatchPrioritiesExDelegate)
-    let private EnumPatchSearchModes = lazy (DynamicDll.Bind "DTWAIN_EnumPatchSearchModes" : DTWAIN_EnumPatchSearchModesDelegate)
-    let private EnumPatchSearchModesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchSearchModesEx" : DTWAIN_EnumPatchSearchModesExDelegate)
-    let private EnumPatchTimeOutValues = lazy (DynamicDll.Bind "DTWAIN_EnumPatchTimeOutValues" : DTWAIN_EnumPatchTimeOutValuesDelegate)
-    let private EnumPatchTimeOutValuesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchTimeOutValuesEx" : DTWAIN_EnumPatchTimeOutValuesExDelegate)
+    let private EnumPatchcodeCodes = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeCodes" : DTWAIN_EnumPatchcodeCodesDelegate)
+    let private EnumPatchcodeCodesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeCodesEx" : DTWAIN_EnumPatchcodeCodesExDelegate)
+    let private EnumPatchcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeMaxPriorities" : DTWAIN_EnumPatchcodeMaxPrioritiesDelegate)
+    let private EnumPatchcodeMaxPrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeMaxPrioritiesEx" : DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate)
+    let private EnumPatchcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeMaxRetries" : DTWAIN_EnumPatchcodeMaxRetriesDelegate)
+    let private EnumPatchcodeMaxRetriesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeMaxRetriesEx" : DTWAIN_EnumPatchcodeMaxRetriesExDelegate)
+    let private EnumPatchcodePriorities = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodePriorities" : DTWAIN_EnumPatchcodePrioritiesDelegate)
+    let private EnumPatchcodePrioritiesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodePrioritiesEx" : DTWAIN_EnumPatchcodePrioritiesExDelegate)
+    let private EnumPatchcodeSearchModes = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeSearchModes" : DTWAIN_EnumPatchcodeSearchModesDelegate)
+    let private EnumPatchcodeSearchModesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeSearchModesEx" : DTWAIN_EnumPatchcodeSearchModesExDelegate)
+    let private EnumPatchcodeTimeOutValues = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeTimeOutValues" : DTWAIN_EnumPatchcodeTimeOutValuesDelegate)
+    let private EnumPatchcodeTimeOutValuesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPatchcodeTimeOutValuesEx" : DTWAIN_EnumPatchcodeTimeOutValuesExDelegate)
     let private EnumPixelTypes = lazy (DynamicDll.Bind "DTWAIN_EnumPixelTypes" : DTWAIN_EnumPixelTypesDelegate)
     let private EnumPixelTypesEx = lazy (DynamicDll.Bind "DTWAIN_EnumPixelTypesEx" : DTWAIN_EnumPixelTypesExDelegate)
     let private EnumPrinterStringModes = lazy (DynamicDll.Bind "DTWAIN_EnumPrinterStringModes" : DTWAIN_EnumPrinterStringModesDelegate)
@@ -4601,6 +4692,11 @@ module TwainAPI =
     let private GetAllSourceDibs = lazy (DynamicDll.Bind "DTWAIN_GetAllSourceDibs" : DTWAIN_GetAllSourceDibsDelegate)
     let private GetAppInfo = lazy (DynamicDll.Bind "DTWAIN_GetAppInfo" : DTWAIN_GetAppInfoDelegate)
     let private GetAuthor = lazy (DynamicDll.Bind "DTWAIN_GetAuthor" : DTWAIN_GetAuthorDelegate)
+    let private GetBarcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_GetBarcodeMaxPriorities" : DTWAIN_GetBarcodeMaxPrioritiesDelegate)
+    let private GetBarcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_GetBarcodeMaxRetries" : DTWAIN_GetBarcodeMaxRetriesDelegate)
+    let private GetBarcodePriorities = lazy (DynamicDll.Bind "DTWAIN_GetBarcodePriorities" : DTWAIN_GetBarcodePrioritiesDelegate)
+    let private GetBarcodeSearchMode = lazy (DynamicDll.Bind "DTWAIN_GetBarcodeSearchMode" : DTWAIN_GetBarcodeSearchModeDelegate)
+    let private GetBarcodeTimeOut = lazy (DynamicDll.Bind "DTWAIN_GetBarcodeTimeOut" : DTWAIN_GetBarcodeTimeOutDelegate)
     let private GetBatteryMinutes = lazy (DynamicDll.Bind "DTWAIN_GetBatteryMinutes" : DTWAIN_GetBatteryMinutesDelegate)
     let private GetBatteryPercent = lazy (DynamicDll.Bind "DTWAIN_GetBatteryPercent" : DTWAIN_GetBatteryPercentDelegate)
     let private GetBitDepth = lazy (DynamicDll.Bind "DTWAIN_GetBitDepth" : DTWAIN_GetBitDepthDelegate)
@@ -4722,11 +4818,11 @@ module TwainAPI =
     let private GetPDFType1FontName = lazy (DynamicDll.Bind "DTWAIN_GetPDFType1FontName" : DTWAIN_GetPDFType1FontNameDelegate)
     let private GetPaperSize = lazy (DynamicDll.Bind "DTWAIN_GetPaperSize" : DTWAIN_GetPaperSizeDelegate)
     let private GetPaperSizeName = lazy (DynamicDll.Bind "DTWAIN_GetPaperSizeName" : DTWAIN_GetPaperSizeNameDelegate)
-    let private GetPatchMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_GetPatchMaxPriorities" : DTWAIN_GetPatchMaxPrioritiesDelegate)
-    let private GetPatchMaxRetries = lazy (DynamicDll.Bind "DTWAIN_GetPatchMaxRetries" : DTWAIN_GetPatchMaxRetriesDelegate)
-    let private GetPatchPriorities = lazy (DynamicDll.Bind "DTWAIN_GetPatchPriorities" : DTWAIN_GetPatchPrioritiesDelegate)
-    let private GetPatchSearchMode = lazy (DynamicDll.Bind "DTWAIN_GetPatchSearchMode" : DTWAIN_GetPatchSearchModeDelegate)
-    let private GetPatchTimeOut = lazy (DynamicDll.Bind "DTWAIN_GetPatchTimeOut" : DTWAIN_GetPatchTimeOutDelegate)
+    let private GetPatchcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeMaxPriorities" : DTWAIN_GetPatchcodeMaxPrioritiesDelegate)
+    let private GetPatchcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeMaxRetries" : DTWAIN_GetPatchcodeMaxRetriesDelegate)
+    let private GetPatchcodePriorities = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodePriorities" : DTWAIN_GetPatchcodePrioritiesDelegate)
+    let private GetPatchcodeSearchMode = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeSearchMode" : DTWAIN_GetPatchcodeSearchModeDelegate)
+    let private GetPatchcodeTimeOut = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeTimeOut" : DTWAIN_GetPatchcodeTimeOutDelegate)
     let private GetPixelFlavor = lazy (DynamicDll.Bind "DTWAIN_GetPixelFlavor" : DTWAIN_GetPixelFlavorDelegate)
     let private GetPixelType = lazy (DynamicDll.Bind "DTWAIN_GetPixelType" : DTWAIN_GetPixelTypeDelegate)
     let private GetPrinter = lazy (DynamicDll.Bind "DTWAIN_GetPrinter" : DTWAIN_GetPrinterDelegate)
@@ -4804,6 +4900,9 @@ module TwainAPI =
     let private IsAutoScanEnabled = lazy (DynamicDll.Bind "DTWAIN_IsAutoScanEnabled" : DTWAIN_IsAutoScanEnabledDelegate)
     let private IsAutomaticSenseMediumEnabled = lazy (DynamicDll.Bind "DTWAIN_IsAutomaticSenseMediumEnabled" : DTWAIN_IsAutomaticSenseMediumEnabledDelegate)
     let private IsAutomaticSenseMediumSupported = lazy (DynamicDll.Bind "DTWAIN_IsAutomaticSenseMediumSupported" : DTWAIN_IsAutomaticSenseMediumSupportedDelegate)
+    let private IsBarcodeCapsSupported = lazy (DynamicDll.Bind "DTWAIN_IsBarcodeCapsSupported" : DTWAIN_IsBarcodeCapsSupportedDelegate)
+    let private IsBarcodeDetectionEnabled = lazy (DynamicDll.Bind "DTWAIN_IsBarcodeDetectionEnabled" : DTWAIN_IsBarcodeDetectionEnabledDelegate)
+    let private IsBarcodeSupported = lazy (DynamicDll.Bind "DTWAIN_IsBarcodeSupported" : DTWAIN_IsBarcodeSupportedDelegate)
     let private IsBlankPageDetectionOn = lazy (DynamicDll.Bind "DTWAIN_IsBlankPageDetectionOn" : DTWAIN_IsBlankPageDetectionOnDelegate)
     let private IsBufferedTileModeOn = lazy (DynamicDll.Bind "DTWAIN_IsBufferedTileModeOn" : DTWAIN_IsBufferedTileModeOnDelegate)
     let private IsBufferedTileModeSupported = lazy (DynamicDll.Bind "DTWAIN_IsBufferedTileModeSupported" : DTWAIN_IsBufferedTileModeSupportedDelegate)
@@ -4865,9 +4964,9 @@ module TwainAPI =
     let private IsOverscanSupported = lazy (DynamicDll.Bind "DTWAIN_IsOverscanSupported" : DTWAIN_IsOverscanSupportedDelegate)
     let private IsPaperDetectable = lazy (DynamicDll.Bind "DTWAIN_IsPaperDetectable" : DTWAIN_IsPaperDetectableDelegate)
     let private IsPaperSizeSupported = lazy (DynamicDll.Bind "DTWAIN_IsPaperSizeSupported" : DTWAIN_IsPaperSizeSupportedDelegate)
-    let private IsPatchCapsSupported = lazy (DynamicDll.Bind "DTWAIN_IsPatchCapsSupported" : DTWAIN_IsPatchCapsSupportedDelegate)
-    let private IsPatchDetectEnabled = lazy (DynamicDll.Bind "DTWAIN_IsPatchDetectEnabled" : DTWAIN_IsPatchDetectEnabledDelegate)
-    let private IsPatchSupported = lazy (DynamicDll.Bind "DTWAIN_IsPatchSupported" : DTWAIN_IsPatchSupportedDelegate)
+    let private IsPatchcodeCapsSupported = lazy (DynamicDll.Bind "DTWAIN_IsPatchcodeCapsSupported" : DTWAIN_IsPatchcodeCapsSupportedDelegate)
+    let private IsPatchcodeDetectionEnabled = lazy (DynamicDll.Bind "DTWAIN_IsPatchcodeDetectionEnabled" : DTWAIN_IsPatchcodeDetectionEnabledDelegate)
+    let private IsPatchcodeSupported = lazy (DynamicDll.Bind "DTWAIN_IsPatchcodeSupported" : DTWAIN_IsPatchcodeSupportedDelegate)
     let private IsPeekMessageLoopEnabled = lazy (DynamicDll.Bind "DTWAIN_IsPeekMessageLoopEnabled" : DTWAIN_IsPeekMessageLoopEnabledDelegate)
     let private IsPixelTypeSupported = lazy (DynamicDll.Bind "DTWAIN_IsPixelTypeSupported" : DTWAIN_IsPixelTypeSupportedDelegate)
     let private IsPrinterEnabled = lazy (DynamicDll.Bind "DTWAIN_IsPrinterEnabled" : DTWAIN_IsPrinterEnabledDelegate)
@@ -4966,6 +5065,11 @@ module TwainAPI =
     let private SetAuthor = lazy (DynamicDll.Bind "DTWAIN_SetAuthor" : DTWAIN_SetAuthorDelegate)
     let private SetAvailablePrinters = lazy (DynamicDll.Bind "DTWAIN_SetAvailablePrinters" : DTWAIN_SetAvailablePrintersDelegate)
     let private SetAvailablePrintersArray = lazy (DynamicDll.Bind "DTWAIN_SetAvailablePrintersArray" : DTWAIN_SetAvailablePrintersArrayDelegate)
+    let private SetBarcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_SetBarcodeMaxPriorities" : DTWAIN_SetBarcodeMaxPrioritiesDelegate)
+    let private SetBarcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_SetBarcodeMaxRetries" : DTWAIN_SetBarcodeMaxRetriesDelegate)
+    let private SetBarcodePriorities = lazy (DynamicDll.Bind "DTWAIN_SetBarcodePriorities" : DTWAIN_SetBarcodePrioritiesDelegate)
+    let private SetBarcodeSearchMode = lazy (DynamicDll.Bind "DTWAIN_SetBarcodeSearchMode" : DTWAIN_SetBarcodeSearchModeDelegate)
+    let private SetBarcodeTimeOut = lazy (DynamicDll.Bind "DTWAIN_SetBarcodeTimeOut" : DTWAIN_SetBarcodeTimeOutDelegate)
     let private SetBitDepth = lazy (DynamicDll.Bind "DTWAIN_SetBitDepth" : DTWAIN_SetBitDepthDelegate)
     let private SetBlankPageDetection = lazy (DynamicDll.Bind "DTWAIN_SetBlankPageDetection" : DTWAIN_SetBlankPageDetectionDelegate)
     let private SetBlankPageDetectionEx = lazy (DynamicDll.Bind "DTWAIN_SetBlankPageDetectionEx" : DTWAIN_SetBlankPageDetectionExDelegate)
@@ -5048,11 +5152,11 @@ module TwainAPI =
     let private SetPDFTextElementString = lazy (DynamicDll.Bind "DTWAIN_SetPDFTextElementString" : DTWAIN_SetPDFTextElementStringDelegate)
     let private SetPDFTitle = lazy (DynamicDll.Bind "DTWAIN_SetPDFTitle" : DTWAIN_SetPDFTitleDelegate)
     let private SetPaperSize = lazy (DynamicDll.Bind "DTWAIN_SetPaperSize" : DTWAIN_SetPaperSizeDelegate)
-    let private SetPatchMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_SetPatchMaxPriorities" : DTWAIN_SetPatchMaxPrioritiesDelegate)
-    let private SetPatchMaxRetries = lazy (DynamicDll.Bind "DTWAIN_SetPatchMaxRetries" : DTWAIN_SetPatchMaxRetriesDelegate)
-    let private SetPatchPriorities = lazy (DynamicDll.Bind "DTWAIN_SetPatchPriorities" : DTWAIN_SetPatchPrioritiesDelegate)
-    let private SetPatchSearchMode = lazy (DynamicDll.Bind "DTWAIN_SetPatchSearchMode" : DTWAIN_SetPatchSearchModeDelegate)
-    let private SetPatchTimeOut = lazy (DynamicDll.Bind "DTWAIN_SetPatchTimeOut" : DTWAIN_SetPatchTimeOutDelegate)
+    let private SetPatchcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_SetPatchcodeMaxPriorities" : DTWAIN_SetPatchcodeMaxPrioritiesDelegate)
+    let private SetPatchcodeMaxRetries = lazy (DynamicDll.Bind "DTWAIN_SetPatchcodeMaxRetries" : DTWAIN_SetPatchcodeMaxRetriesDelegate)
+    let private SetPatchcodePriorities = lazy (DynamicDll.Bind "DTWAIN_SetPatchcodePriorities" : DTWAIN_SetPatchcodePrioritiesDelegate)
+    let private SetPatchcodeSearchMode = lazy (DynamicDll.Bind "DTWAIN_SetPatchcodeSearchMode" : DTWAIN_SetPatchcodeSearchModeDelegate)
+    let private SetPatchcodeTimeOut = lazy (DynamicDll.Bind "DTWAIN_SetPatchcodeTimeOut" : DTWAIN_SetPatchcodeTimeOutDelegate)
     let private SetPixelFlavor = lazy (DynamicDll.Bind "DTWAIN_SetPixelFlavor" : DTWAIN_SetPixelFlavorDelegate)
     let private SetPixelType = lazy (DynamicDll.Bind "DTWAIN_SetPixelType" : DTWAIN_SetPixelTypeDelegate)
     let private SetPostScriptTitle = lazy (DynamicDll.Bind "DTWAIN_SetPostScriptTitle" : DTWAIN_SetPostScriptTitleDelegate)
@@ -5736,6 +5840,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnableAutomaticSenseMedium.Value.Invoke(source, bset)
 
+    let DTWAIN_EnableBarcodeDetection (source: DTWAIN_SOURCE) (benable: DTWAIN_BOOL) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnableBarcodeDetection.Value.Invoke(source, benable)
+
     let DTWAIN_EnableDuplex (source: DTWAIN_SOURCE) (benable: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnableDuplex.Value.Invoke(source, benable)
@@ -5760,9 +5868,9 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnableMsgNotify.Value.Invoke(bset)
 
-    let DTWAIN_EnablePatchDetect (source: DTWAIN_SOURCE) (benable: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_EnablePatchcodeDetection (source: DTWAIN_SOURCE) (benable: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnablePatchDetect.Value.Invoke(source, benable)
+        EnablePatchcodeDetection.Value.Invoke(source, benable)
 
     let DTWAIN_EnablePeekMessageLoop (source: DTWAIN_SOURCE) (bset: BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -5835,6 +5943,54 @@ module TwainAPI =
     let DTWAIN_EnumAutomaticSenseMediumEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnumAutomaticSenseMediumEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodeCodes (source: DTWAIN_SOURCE) (pcodes: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeCodes.Value.Invoke(source, &pcodes)
+
+    let DTWAIN_EnumBarcodeCodesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeCodesEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodeMaxPriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeMaxPriorities.Value.Invoke(source, &parray)
+
+    let DTWAIN_EnumBarcodeMaxPrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeMaxPrioritiesEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodeMaxRetries (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeMaxRetries.Value.Invoke(source, &parray)
+
+    let DTWAIN_EnumBarcodeMaxRetriesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeMaxRetriesEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodePriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodePriorities.Value.Invoke(source, &parray)
+
+    let DTWAIN_EnumBarcodePrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodePrioritiesEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodeSearchModes (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeSearchModes.Value.Invoke(source, &parray)
+
+    let DTWAIN_EnumBarcodeSearchModesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeSearchModesEx.Value.Invoke(source)
+
+    let DTWAIN_EnumBarcodeTimeOutValues (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeTimeOutValues.Value.Invoke(source, &parray)
+
+    let DTWAIN_EnumBarcodeTimeOutValuesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumBarcodeTimeOutValuesEx.Value.Invoke(source)
 
     let DTWAIN_EnumBitDepths (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -6044,53 +6200,53 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnumPaperSizesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchCodes (source: DTWAIN_SOURCE) (pcodes: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodeCodes (source: DTWAIN_SOURCE) (pcodes: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchCodes.Value.Invoke(source, &pcodes)
+        EnumPatchcodeCodes.Value.Invoke(source, &pcodes)
 
-    let DTWAIN_EnumPatchCodesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodeCodesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchCodesEx.Value.Invoke(source)
+        EnumPatchcodeCodesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchMaxPriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchMaxPriorities.Value.Invoke(source, &parray)
+        EnumPatchcodeMaxPriorities.Value.Invoke(source, &parray)
 
-    let DTWAIN_EnumPatchMaxPrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodeMaxPrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchMaxPrioritiesEx.Value.Invoke(source)
+        EnumPatchcodeMaxPrioritiesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchMaxRetries (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodeMaxRetries (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchMaxRetries.Value.Invoke(source, &parray)
+        EnumPatchcodeMaxRetries.Value.Invoke(source, &parray)
 
-    let DTWAIN_EnumPatchMaxRetriesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodeMaxRetriesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchMaxRetriesEx.Value.Invoke(source)
+        EnumPatchcodeMaxRetriesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchPriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodePriorities (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchPriorities.Value.Invoke(source, &parray)
+        EnumPatchcodePriorities.Value.Invoke(source, &parray)
 
-    let DTWAIN_EnumPatchPrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodePrioritiesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchPrioritiesEx.Value.Invoke(source)
+        EnumPatchcodePrioritiesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchSearchModes (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodeSearchModes (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchSearchModes.Value.Invoke(source, &parray)
+        EnumPatchcodeSearchModes.Value.Invoke(source, &parray)
 
-    let DTWAIN_EnumPatchSearchModesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodeSearchModesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchSearchModesEx.Value.Invoke(source)
+        EnumPatchcodeSearchModesEx.Value.Invoke(source)
 
-    let DTWAIN_EnumPatchTimeOutValues (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_EnumPatchcodeTimeOutValues (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchTimeOutValues.Value.Invoke(source, &parray)
+        EnumPatchcodeTimeOutValues.Value.Invoke(source, &parray)
 
-    let DTWAIN_EnumPatchTimeOutValuesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
+    let DTWAIN_EnumPatchcodeTimeOutValuesEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumPatchTimeOutValuesEx.Value.Invoke(source)
+        EnumPatchcodeTimeOutValuesEx.Value.Invoke(source)
 
     let DTWAIN_EnumPixelTypes (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -6367,6 +6523,26 @@ module TwainAPI =
     let DTWAIN_GetAuthor (source: DTWAIN_SOURCE) (szauthor: System.Text.StringBuilder) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetAuthor.Value.Invoke(source, szauthor)
+
+    let DTWAIN_GetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetBarcodeMaxPriorities.Value.Invoke(source, &pmaxpriorities, bcurrent)
+
+    let DTWAIN_GetBarcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetBarcodeMaxRetries.Value.Invoke(source, &pmaxretries, bcurrent)
+
+    let DTWAIN_GetBarcodePriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetBarcodePriorities.Value.Invoke(source, &searchpriorities)
+
+    let DTWAIN_GetBarcodeSearchMode (source: DTWAIN_SOURCE) (psearchmode: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetBarcodeSearchMode.Value.Invoke(source, &psearchmode, bcurrent)
+
+    let DTWAIN_GetBarcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetBarcodeTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
 
     let DTWAIN_GetBatteryMinutes (source: DTWAIN_SOURCE) (lpminutes: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -6852,25 +7028,25 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPaperSizeName.Value.Invoke(papernumber, outname, nsize)
 
-    let DTWAIN_GetPatchMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetPatchMaxPriorities.Value.Invoke(source, &pmaxpriorities, bcurrent)
+        GetPatchcodeMaxPriorities.Value.Invoke(source, &pmaxpriorities, bcurrent)
 
-    let DTWAIN_GetPatchMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetPatchMaxRetries.Value.Invoke(source, &pmaxretries, bcurrent)
+        GetPatchcodeMaxRetries.Value.Invoke(source, &pmaxretries, bcurrent)
 
-    let DTWAIN_GetPatchPriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodePriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetPatchPriorities.Value.Invoke(source, &searchpriorities)
+        GetPatchcodePriorities.Value.Invoke(source, &searchpriorities)
 
-    let DTWAIN_GetPatchSearchMode (source: DTWAIN_SOURCE) (psearchmode: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeSearchMode (source: DTWAIN_SOURCE) (psearchmode: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetPatchSearchMode.Value.Invoke(source, &psearchmode, bcurrent)
+        GetPatchcodeSearchMode.Value.Invoke(source, &psearchmode, bcurrent)
 
-    let DTWAIN_GetPatchTimeOut (source: DTWAIN_SOURCE) (ptimeout: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetPatchTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
+        GetPatchcodeTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
 
     let DTWAIN_GetPixelFlavor (source: DTWAIN_SOURCE) (lppixelflavor: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7180,6 +7356,18 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsAutomaticSenseMediumSupported.Value.Invoke(source)
 
+    let DTWAIN_IsBarcodeCapsSupported (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        IsBarcodeCapsSupported.Value.Invoke(source)
+
+    let DTWAIN_IsBarcodeDetectionEnabled (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        IsBarcodeDetectionEnabled.Value.Invoke(source)
+
+    let DTWAIN_IsBarcodeSupported (source: DTWAIN_SOURCE) (barcode: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        IsBarcodeSupported.Value.Invoke(source, barcode)
+
     let DTWAIN_IsBlankPageDetectionOn (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsBlankPageDetectionOn.Value.Invoke(source)
@@ -7424,17 +7612,17 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsPaperSizeSupported.Value.Invoke(source, papersize)
 
-    let DTWAIN_IsPatchCapsSupported (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
+    let DTWAIN_IsPatchcodeCapsSupported (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsPatchCapsSupported.Value.Invoke(source)
+        IsPatchcodeCapsSupported.Value.Invoke(source)
 
-    let DTWAIN_IsPatchDetectEnabled (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
+    let DTWAIN_IsPatchcodeDetectionEnabled (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsPatchDetectEnabled.Value.Invoke(source)
+        IsPatchcodeDetectionEnabled.Value.Invoke(source)
 
-    let DTWAIN_IsPatchSupported (source: DTWAIN_SOURCE) (patchcode: LONG) : DTWAIN_BOOL =
+    let DTWAIN_IsPatchcodeSupported (source: DTWAIN_SOURCE) (patchcode: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        IsPatchSupported.Value.Invoke(source, patchcode)
+        IsPatchcodeSupported.Value.Invoke(source, patchcode)
 
     let DTWAIN_IsPeekMessageLoopEnabled (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7828,6 +8016,26 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetAvailablePrintersArray.Value.Invoke(source, availprinters)
 
+    let DTWAIN_SetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetBarcodeMaxPriorities.Value.Invoke(source, nmaxsearchretries)
+
+    let DTWAIN_SetBarcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetBarcodeMaxRetries.Value.Invoke(source, nmaxretries)
+
+    let DTWAIN_SetBarcodePriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetBarcodePriorities.Value.Invoke(source, searchpriorities)
+
+    let DTWAIN_SetBarcodeSearchMode (source: DTWAIN_SOURCE) (nsearchmode: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetBarcodeSearchMode.Value.Invoke(source, nsearchmode)
+
+    let DTWAIN_SetBarcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetBarcodeTimeOut.Value.Invoke(source, timeoutvalue)
+
     let DTWAIN_SetBitDepth (source: DTWAIN_SOURCE) (bitdepth: LONG) (bsetcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetBitDepth.Value.Invoke(source, bitdepth, bsetcurrent)
@@ -8156,25 +8364,25 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPaperSize.Value.Invoke(source, papersize, bsetcurrent)
 
-    let DTWAIN_SetPatchMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetPatchMaxPriorities.Value.Invoke(source, nmaxsearchretries)
+        SetPatchcodeMaxPriorities.Value.Invoke(source, nmaxsearchretries)
 
-    let DTWAIN_SetPatchMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetPatchMaxRetries.Value.Invoke(source, nmaxretries)
+        SetPatchcodeMaxRetries.Value.Invoke(source, nmaxretries)
 
-    let DTWAIN_SetPatchPriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodePriorities (source: DTWAIN_SOURCE) (searchpriorities: DTWAIN_ARRAY) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetPatchPriorities.Value.Invoke(source, searchpriorities)
+        SetPatchcodePriorities.Value.Invoke(source, searchpriorities)
 
-    let DTWAIN_SetPatchSearchMode (source: DTWAIN_SOURCE) (nsearchmode: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeSearchMode (source: DTWAIN_SOURCE) (nsearchmode: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetPatchSearchMode.Value.Invoke(source, nsearchmode)
+        SetPatchcodeSearchMode.Value.Invoke(source, nsearchmode)
 
-    let DTWAIN_SetPatchTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetPatchTimeOut.Value.Invoke(source, timeoutvalue)
+        SetPatchcodeTimeOut.Value.Invoke(source, timeoutvalue)
 
     let DTWAIN_SetPixelFlavor (source: DTWAIN_SOURCE) (pixelflavor: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
