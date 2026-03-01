@@ -91,4 +91,6 @@ if you want to acquire using DTWAIN's file mode */
 #define DTWAIN_BIGTIFFJPEG       11015   /* BigTIFF JPEG */
 #define DTWAIN_BIGTIFFJPEGMULTI  11016   /* BigTIFF JPEG (Multipage) */
 #define DTWAIN_JPEGXR            12000   /* JPEG-XR format */
+#define DTWAIN_SVG               13000   /* SVG format */
+#define DTWAIN_SVGZ              13001   /* SVGZ format */
 #endif

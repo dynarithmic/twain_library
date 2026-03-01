@@ -43,7 +43,7 @@ let main argv =
                
                     // Note: The DTWAIN_ARRAY, DTWAIN_SOURCE, DTWAIN_FRAME, and DTWAIN_RANGE are actually void pointers
                     // so you have to declare them as IntPtr.Zero if a DTWAIN function requires a parameter to be of this type.
-                    let mutable cap_array = TwainAPI.DTWAIN_EnumSupportedCapsEx2 sourceResult 
+                    let mutable cap_array = TwainAPI.DTWAIN_EnumSupportedCapsEx sourceResult 
 
                     // Get the number of items in the array
                     let mutable arrcount = TwainAPI.DTWAIN_ArrayGetCount cap_array

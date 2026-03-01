@@ -251,11 +251,11 @@
 #define DTWAIN_CAPSET                6 /* Set one or more values                   */
 #define DTWAIN_CAPRESET              7 /* Set current value to default value       */
 #define DTWAIN_CAPRESETALL           8 /* Reset all capabilities */
-#define DTWAIN_CAPSETCONSTRAINT      9 /* constrain values */
 
 #define DTWAIN_CAPGETHELP            9
 #define DTWAIN_CAPGETLABEL           10
 #define DTWAIN_CAPGETLABELENUM       11
+#define DTWAIN_CAPSETCONSTRAINT      12 /* constrain values */
 
 /* The following values are ORed with the DTWAIN_CAPSET value */
 #define DTWAIN_CAPSETAVAILABLE       8  /* Sets available values  */
@@ -536,6 +536,12 @@
 /* Sent when issuing a file transfer, and the compression chosen is
  * not recognized for the file type */
 #define DTWAIN_TN_FILECOMPRESSTYPEMISMATCH  1302
+
+/* Sent when getting Source details using DTWAIN_GetSourceDetails() */
+#define DTWAIN_TN_SOURCEDETAILS             1304
+
+/* Sent to determine if feeder should continue feeding pages */
+#define DTWAIN_TN_QUERYACQUIREPAGES             1305
 
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
@@ -1409,6 +1415,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_DLG_HIGHLIGHTFIRST       8192
 #define DTWAIN_DLG_SAVELASTSCREENPOS    16384
 #define DTWAIN_DLG_CENTER_CURRENT_MONITOR 32768
+#define DTWAIN_DLG_CONSOLEASPARENT     65536
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0

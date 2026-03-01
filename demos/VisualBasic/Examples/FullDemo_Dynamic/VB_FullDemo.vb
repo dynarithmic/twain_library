@@ -475,6 +475,7 @@ Public Class VB_FullDemo
         Me.Enabled = True
         If SelectedSource <> 0 Then
             If DTWAINAPI.DTWAIN_OpenSource(SelectedSource) <> 0 Then
+                DTWAINAPI.DTWAIN_EnableBarcodeDetection(SelectedSource, 1)
                 DTWAINAPI.DTWAIN_AddPDFTextElement(SelectedSource, textElement)
                 DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
                 SetCaptionToSourceName()

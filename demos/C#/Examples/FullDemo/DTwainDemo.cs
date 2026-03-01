@@ -625,6 +625,7 @@ namespace TWAINDemo
             {
                 if (TwainAPI.DTWAIN_OpenSource(SelectedSource) != 0)
                 {
+                    TwainAPI.DTWAIN_EnableBarcodeDetection(SelectedSource, 1);
                     TwainAPI.DTWAIN_AddPDFTextElement(SelectedSource, textElement);
                     TwainAPI.DTWAIN_EnableFeeder(SelectedSource, 1);
                     SetCaptionToSourceName();

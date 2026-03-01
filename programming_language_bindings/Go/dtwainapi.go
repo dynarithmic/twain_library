@@ -256,6 +256,8 @@ const (
     DTWAIN_BIGTIFFJPEG = 11015
     DTWAIN_BIGTIFFJPEGMULTI = 11016
     DTWAIN_JPEGXR = 12000
+    DTWAIN_SVG = 13000
+    DTWAIN_SVGZ = 13001
     DTWAIN_INCHES = 0
     DTWAIN_CENTIMETERS = 1
     DTWAIN_PICAS = 2
@@ -331,12 +333,12 @@ const (
     DTWAIN_CAPSET = 6
     DTWAIN_CAPRESET = 7
     DTWAIN_CAPRESETALL = 8
-    DTWAIN_CAPSETCONSTRAINT = 9
     DTWAIN_CAPSETAVAILABLE = 8
     DTWAIN_CAPSETCURRENT = 16
     DTWAIN_CAPGETHELP = 9
     DTWAIN_CAPGETLABEL = 10
     DTWAIN_CAPGETLABELENUM = 11
+    DTWAIN_CAPSETCONSTRAINT = 12
     DTWAIN_AREASET = DTWAIN_CAPSET
     DTWAIN_AREARESET = DTWAIN_CAPRESET
     DTWAIN_AREACURRENT = DTWAIN_CAPGETCURRENT
@@ -464,6 +466,8 @@ const (
     DTWAIN_TN_TRANSFERTILEREADY = 1300
     DTWAIN_TN_TRANSFERTILEDONE = 1301
     DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302
+    DTWAIN_TN_SOURCEDETAILS = 1304
+    DTWAIN_TN_QUERYACQUIREPAGES = 1305
     DTWAIN_PDFOCR_CLEANTEXT1 = 1
     DTWAIN_PDFOCR_CLEANTEXT2 = 2
     DTWAIN_MODAL = 0
@@ -1174,6 +1178,7 @@ const (
     DTWAIN_DLG_HIGHLIGHTFIRST = 8192
     DTWAIN_DLG_SAVELASTSCREENPOS = 16384
     DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768
+    DTWAIN_DLG_CONSOLEASPARENT = 65536
     DTWAIN_RES_ENGLISH = 0
     DTWAIN_RES_FRENCH = 1
     DTWAIN_RES_SPANISH = 2
@@ -1749,7 +1754,7 @@ func Load_DTWAINDLL(path string) (*DTWAIN_DLL, error) {
         return nil, err
     }
 
-    var arr [1128] string
+    var arr [1157] string
     arr[0] = "DTWAIN_AcquireAudioFile"
     arr[1] = "DTWAIN_AcquireAudioFileA"
     arr[2] = "DTWAIN_AcquireAudioFileW"
@@ -1817,1067 +1822,1096 @@ func Load_DTWAINDLL(path string) (*DTWAIN_DLL, error) {
     arr[64] = "DTWAIN_ArrayCreateFromReals"
     arr[65] = "DTWAIN_ArrayDestroy"
     arr[66] = "DTWAIN_ArrayDestroyFrames"
-    arr[67] = "DTWAIN_ArrayFind"
-    arr[68] = "DTWAIN_ArrayFindANSIString"
-    arr[69] = "DTWAIN_ArrayFindFloat"
-    arr[70] = "DTWAIN_ArrayFindFloatString"
-    arr[71] = "DTWAIN_ArrayFindFloatStringA"
-    arr[72] = "DTWAIN_ArrayFindFloatStringW"
-    arr[73] = "DTWAIN_ArrayFindLong"
-    arr[74] = "DTWAIN_ArrayFindLong64"
-    arr[75] = "DTWAIN_ArrayFindString"
-    arr[76] = "DTWAIN_ArrayFindStringA"
-    arr[77] = "DTWAIN_ArrayFindStringW"
-    arr[78] = "DTWAIN_ArrayFindWideString"
-    arr[79] = "DTWAIN_ArrayFix32GetAt"
-    arr[80] = "DTWAIN_ArrayFix32SetAt"
-    arr[81] = "DTWAIN_ArrayFloatToANSIString"
-    arr[82] = "DTWAIN_ArrayFloatToString"
-    arr[83] = "DTWAIN_ArrayFloatToWideString"
-    arr[84] = "DTWAIN_ArrayGetAt"
-    arr[85] = "DTWAIN_ArrayGetAtANSIString"
-    arr[86] = "DTWAIN_ArrayGetAtFloat"
-    arr[87] = "DTWAIN_ArrayGetAtFloatString"
-    arr[88] = "DTWAIN_ArrayGetAtFloatStringA"
-    arr[89] = "DTWAIN_ArrayGetAtFloatStringW"
-    arr[90] = "DTWAIN_ArrayGetAtFrame"
-    arr[91] = "DTWAIN_ArrayGetAtFrameEx"
-    arr[92] = "DTWAIN_ArrayGetAtFrameString"
-    arr[93] = "DTWAIN_ArrayGetAtFrameStringA"
-    arr[94] = "DTWAIN_ArrayGetAtFrameStringW"
-    arr[95] = "DTWAIN_ArrayGetAtLong"
-    arr[96] = "DTWAIN_ArrayGetAtLong64"
-    arr[97] = "DTWAIN_ArrayGetAtSource"
-    arr[98] = "DTWAIN_ArrayGetAtSourceEx"
-    arr[99] = "DTWAIN_ArrayGetAtString"
-    arr[100] = "DTWAIN_ArrayGetAtStringA"
-    arr[101] = "DTWAIN_ArrayGetAtStringW"
-    arr[102] = "DTWAIN_ArrayGetAtWideString"
-    arr[103] = "DTWAIN_ArrayGetBuffer"
-    arr[104] = "DTWAIN_ArrayGetCapValues"
-    arr[105] = "DTWAIN_ArrayGetCapValuesEx"
-    arr[106] = "DTWAIN_ArrayGetCapValuesEx2"
-    arr[107] = "DTWAIN_ArrayGetCount"
-    arr[108] = "DTWAIN_ArrayGetMaxStringLength"
-    arr[109] = "DTWAIN_ArrayGetSourceAt"
-    arr[110] = "DTWAIN_ArrayGetStringLength"
-    arr[111] = "DTWAIN_ArrayGetType"
-    arr[112] = "DTWAIN_ArrayInit"
-    arr[113] = "DTWAIN_ArrayInsertAt"
-    arr[114] = "DTWAIN_ArrayInsertAtANSIString"
-    arr[115] = "DTWAIN_ArrayInsertAtANSIStringN"
-    arr[116] = "DTWAIN_ArrayInsertAtFloat"
-    arr[117] = "DTWAIN_ArrayInsertAtFloatN"
-    arr[118] = "DTWAIN_ArrayInsertAtFloatString"
-    arr[119] = "DTWAIN_ArrayInsertAtFloatStringA"
-    arr[120] = "DTWAIN_ArrayInsertAtFloatStringN"
-    arr[121] = "DTWAIN_ArrayInsertAtFloatStringNA"
-    arr[122] = "DTWAIN_ArrayInsertAtFloatStringNW"
-    arr[123] = "DTWAIN_ArrayInsertAtFloatStringW"
-    arr[124] = "DTWAIN_ArrayInsertAtFrame"
-    arr[125] = "DTWAIN_ArrayInsertAtFrameN"
-    arr[126] = "DTWAIN_ArrayInsertAtLong"
-    arr[127] = "DTWAIN_ArrayInsertAtLong64"
-    arr[128] = "DTWAIN_ArrayInsertAtLong64N"
-    arr[129] = "DTWAIN_ArrayInsertAtLongN"
-    arr[130] = "DTWAIN_ArrayInsertAtN"
-    arr[131] = "DTWAIN_ArrayInsertAtString"
-    arr[132] = "DTWAIN_ArrayInsertAtStringA"
-    arr[133] = "DTWAIN_ArrayInsertAtStringN"
-    arr[134] = "DTWAIN_ArrayInsertAtStringNA"
-    arr[135] = "DTWAIN_ArrayInsertAtStringNW"
-    arr[136] = "DTWAIN_ArrayInsertAtStringW"
-    arr[137] = "DTWAIN_ArrayInsertAtWideString"
-    arr[138] = "DTWAIN_ArrayInsertAtWideStringN"
-    arr[139] = "DTWAIN_ArrayRemoveAll"
-    arr[140] = "DTWAIN_ArrayRemoveAt"
-    arr[141] = "DTWAIN_ArrayRemoveAtN"
-    arr[142] = "DTWAIN_ArrayResize"
-    arr[143] = "DTWAIN_ArraySetAt"
-    arr[144] = "DTWAIN_ArraySetAtANSIString"
-    arr[145] = "DTWAIN_ArraySetAtFloat"
-    arr[146] = "DTWAIN_ArraySetAtFloatString"
-    arr[147] = "DTWAIN_ArraySetAtFloatStringA"
-    arr[148] = "DTWAIN_ArraySetAtFloatStringW"
-    arr[149] = "DTWAIN_ArraySetAtFrame"
-    arr[150] = "DTWAIN_ArraySetAtFrameEx"
-    arr[151] = "DTWAIN_ArraySetAtFrameString"
-    arr[152] = "DTWAIN_ArraySetAtFrameStringA"
-    arr[153] = "DTWAIN_ArraySetAtFrameStringW"
-    arr[154] = "DTWAIN_ArraySetAtLong"
-    arr[155] = "DTWAIN_ArraySetAtLong64"
-    arr[156] = "DTWAIN_ArraySetAtString"
-    arr[157] = "DTWAIN_ArraySetAtStringA"
-    arr[158] = "DTWAIN_ArraySetAtStringW"
-    arr[159] = "DTWAIN_ArraySetAtWideString"
-    arr[160] = "DTWAIN_ArrayStringToFloat"
-    arr[161] = "DTWAIN_ArrayWideStringToFloat"
-    arr[162] = "DTWAIN_CallCallback"
-    arr[163] = "DTWAIN_CallCallback64"
-    arr[164] = "DTWAIN_CallDSMProc"
-    arr[165] = "DTWAIN_CheckHandles"
-    arr[166] = "DTWAIN_ClearBuffers"
-    arr[167] = "DTWAIN_ClearErrorBuffer"
-    arr[168] = "DTWAIN_ClearPDFTextElements"
-    arr[169] = "DTWAIN_ClearPage"
-    arr[170] = "DTWAIN_CloseSource"
-    arr[171] = "DTWAIN_CloseSourceUI"
-    arr[172] = "DTWAIN_ConvertDIBToBitmap"
-    arr[173] = "DTWAIN_ConvertDIBToFullBitmap"
-    arr[174] = "DTWAIN_ConvertToAPIString"
-    arr[175] = "DTWAIN_ConvertToAPIStringA"
-    arr[176] = "DTWAIN_ConvertToAPIStringEx"
-    arr[177] = "DTWAIN_ConvertToAPIStringExA"
-    arr[178] = "DTWAIN_ConvertToAPIStringExW"
-    arr[179] = "DTWAIN_ConvertToAPIStringW"
-    arr[180] = "DTWAIN_CreateAcquisitionArray"
-    arr[181] = "DTWAIN_CreatePDFTextElement"
-    arr[182] = "DTWAIN_CreatePDFTextElementCopy"
-    arr[183] = "DTWAIN_DeleteDIB"
-    arr[184] = "DTWAIN_DestroyAcquisitionArray"
-    arr[185] = "DTWAIN_DestroyPDFTextElement"
-    arr[186] = "DTWAIN_DisableAppWindow"
-    arr[187] = "DTWAIN_EnableAutoBorderDetect"
-    arr[188] = "DTWAIN_EnableAutoBright"
-    arr[189] = "DTWAIN_EnableAutoDeskew"
-    arr[190] = "DTWAIN_EnableAutoFeed"
-    arr[191] = "DTWAIN_EnableAutoRotate"
-    arr[192] = "DTWAIN_EnableAutoScan"
-    arr[193] = "DTWAIN_EnableAutomaticSenseMedium"
-    arr[194] = "DTWAIN_EnableDuplex"
-    arr[195] = "DTWAIN_EnableFeeder"
-    arr[196] = "DTWAIN_EnableIndicator"
-    arr[197] = "DTWAIN_EnableJobFileHandling"
-    arr[198] = "DTWAIN_EnableLamp"
-    arr[199] = "DTWAIN_EnableMsgNotify"
-    arr[200] = "DTWAIN_EnablePatchDetect"
-    arr[201] = "DTWAIN_EnablePeekMessageLoop"
-    arr[202] = "DTWAIN_EnablePrinter"
-    arr[203] = "DTWAIN_EnableThumbnail"
-    arr[204] = "DTWAIN_EnableTripletsNotify"
-    arr[205] = "DTWAIN_EndThread"
-    arr[206] = "DTWAIN_EndTwainSession"
-    arr[207] = "DTWAIN_EnumAlarmVolumes"
-    arr[208] = "DTWAIN_EnumAlarmVolumesEx"
-    arr[209] = "DTWAIN_EnumAlarms"
-    arr[210] = "DTWAIN_EnumAlarmsEx"
-    arr[211] = "DTWAIN_EnumAudioXferMechs"
-    arr[212] = "DTWAIN_EnumAudioXferMechsEx"
-    arr[213] = "DTWAIN_EnumAutoFeedValues"
-    arr[214] = "DTWAIN_EnumAutoFeedValuesEx"
-    arr[215] = "DTWAIN_EnumAutomaticCaptures"
-    arr[216] = "DTWAIN_EnumAutomaticCapturesEx"
-    arr[217] = "DTWAIN_EnumAutomaticSenseMedium"
-    arr[218] = "DTWAIN_EnumAutomaticSenseMediumEx"
-    arr[219] = "DTWAIN_EnumBitDepths"
-    arr[220] = "DTWAIN_EnumBitDepthsEx"
-    arr[221] = "DTWAIN_EnumBitDepthsEx2"
-    arr[222] = "DTWAIN_EnumBottomCameras"
-    arr[223] = "DTWAIN_EnumBottomCamerasEx"
-    arr[224] = "DTWAIN_EnumBrightnessValues"
-    arr[225] = "DTWAIN_EnumBrightnessValuesEx"
-    arr[226] = "DTWAIN_EnumCameras"
-    arr[227] = "DTWAIN_EnumCamerasEx"
-    arr[228] = "DTWAIN_EnumCamerasEx2"
-    arr[229] = "DTWAIN_EnumCamerasEx3"
-    arr[230] = "DTWAIN_EnumCompressionTypes"
-    arr[231] = "DTWAIN_EnumCompressionTypesEx"
-    arr[232] = "DTWAIN_EnumCompressionTypesEx2"
-    arr[233] = "DTWAIN_EnumContrastValues"
-    arr[234] = "DTWAIN_EnumContrastValuesEx"
-    arr[235] = "DTWAIN_EnumCustomCaps"
-    arr[236] = "DTWAIN_EnumCustomCapsEx2"
-    arr[237] = "DTWAIN_EnumDoubleFeedDetectLengths"
-    arr[238] = "DTWAIN_EnumDoubleFeedDetectLengthsEx"
-    arr[239] = "DTWAIN_EnumDoubleFeedDetectValues"
-    arr[240] = "DTWAIN_EnumDoubleFeedDetectValuesEx"
-    arr[241] = "DTWAIN_EnumExtImageInfoTypes"
-    arr[242] = "DTWAIN_EnumExtImageInfoTypesEx"
-    arr[243] = "DTWAIN_EnumExtendedCaps"
-    arr[244] = "DTWAIN_EnumExtendedCapsEx"
-    arr[245] = "DTWAIN_EnumExtendedCapsEx2"
-    arr[246] = "DTWAIN_EnumFileTypeBitsPerPixel"
-    arr[247] = "DTWAIN_EnumFileXferFormats"
-    arr[248] = "DTWAIN_EnumFileXferFormatsEx"
-    arr[249] = "DTWAIN_EnumHalftones"
-    arr[250] = "DTWAIN_EnumHalftonesEx"
-    arr[251] = "DTWAIN_EnumHighlightValues"
-    arr[252] = "DTWAIN_EnumHighlightValuesEx"
-    arr[253] = "DTWAIN_EnumJobControls"
-    arr[254] = "DTWAIN_EnumJobControlsEx"
-    arr[255] = "DTWAIN_EnumLightPaths"
-    arr[256] = "DTWAIN_EnumLightPathsEx"
-    arr[257] = "DTWAIN_EnumLightSources"
-    arr[258] = "DTWAIN_EnumLightSourcesEx"
-    arr[259] = "DTWAIN_EnumMaxBuffers"
-    arr[260] = "DTWAIN_EnumMaxBuffersEx"
-    arr[261] = "DTWAIN_EnumNoiseFilters"
-    arr[262] = "DTWAIN_EnumNoiseFiltersEx"
-    arr[263] = "DTWAIN_EnumOCRInterfaces"
-    arr[264] = "DTWAIN_EnumOCRSupportedCaps"
-    arr[265] = "DTWAIN_EnumOrientations"
-    arr[266] = "DTWAIN_EnumOrientationsEx"
-    arr[267] = "DTWAIN_EnumOverscanValues"
-    arr[268] = "DTWAIN_EnumOverscanValuesEx"
-    arr[269] = "DTWAIN_EnumPaperSizes"
-    arr[270] = "DTWAIN_EnumPaperSizesEx"
-    arr[271] = "DTWAIN_EnumPatchCodes"
-    arr[272] = "DTWAIN_EnumPatchCodesEx"
-    arr[273] = "DTWAIN_EnumPatchMaxPriorities"
-    arr[274] = "DTWAIN_EnumPatchMaxPrioritiesEx"
-    arr[275] = "DTWAIN_EnumPatchMaxRetries"
-    arr[276] = "DTWAIN_EnumPatchMaxRetriesEx"
-    arr[277] = "DTWAIN_EnumPatchPriorities"
-    arr[278] = "DTWAIN_EnumPatchPrioritiesEx"
-    arr[279] = "DTWAIN_EnumPatchSearchModes"
-    arr[280] = "DTWAIN_EnumPatchSearchModesEx"
-    arr[281] = "DTWAIN_EnumPatchTimeOutValues"
-    arr[282] = "DTWAIN_EnumPatchTimeOutValuesEx"
-    arr[283] = "DTWAIN_EnumPixelTypes"
-    arr[284] = "DTWAIN_EnumPixelTypesEx"
-    arr[285] = "DTWAIN_EnumPrinterStringModes"
-    arr[286] = "DTWAIN_EnumPrinterStringModesEx"
-    arr[287] = "DTWAIN_EnumResolutionValues"
-    arr[288] = "DTWAIN_EnumResolutionValuesEx"
-    arr[289] = "DTWAIN_EnumShadowValues"
-    arr[290] = "DTWAIN_EnumShadowValuesEx"
-    arr[291] = "DTWAIN_EnumSourceUnits"
-    arr[292] = "DTWAIN_EnumSourceUnitsEx"
-    arr[293] = "DTWAIN_EnumSourceValues"
-    arr[294] = "DTWAIN_EnumSourceValuesA"
-    arr[295] = "DTWAIN_EnumSourceValuesW"
-    arr[296] = "DTWAIN_EnumSources"
-    arr[297] = "DTWAIN_EnumSourcesEx"
-    arr[298] = "DTWAIN_EnumSupportedCaps"
-    arr[299] = "DTWAIN_EnumSupportedCapsEx"
-    arr[300] = "DTWAIN_EnumSupportedCapsEx2"
-    arr[301] = "DTWAIN_EnumSupportedExtImageInfo"
-    arr[302] = "DTWAIN_EnumSupportedExtImageInfoEx"
-    arr[303] = "DTWAIN_EnumSupportedFileTypes"
-    arr[304] = "DTWAIN_EnumSupportedMultiPageFileTypes"
-    arr[305] = "DTWAIN_EnumSupportedSinglePageFileTypes"
-    arr[306] = "DTWAIN_EnumThresholdValues"
-    arr[307] = "DTWAIN_EnumThresholdValuesEx"
-    arr[308] = "DTWAIN_EnumTopCameras"
-    arr[309] = "DTWAIN_EnumTopCamerasEx"
-    arr[310] = "DTWAIN_EnumTwainPrinters"
-    arr[311] = "DTWAIN_EnumTwainPrintersArray"
-    arr[312] = "DTWAIN_EnumTwainPrintersArrayEx"
-    arr[313] = "DTWAIN_EnumTwainPrintersEx"
-    arr[314] = "DTWAIN_EnumXResolutionValues"
-    arr[315] = "DTWAIN_EnumXResolutionValuesEx"
-    arr[316] = "DTWAIN_EnumYResolutionValues"
-    arr[317] = "DTWAIN_EnumYResolutionValuesEx"
-    arr[318] = "DTWAIN_ExecuteOCR"
-    arr[319] = "DTWAIN_ExecuteOCRA"
-    arr[320] = "DTWAIN_ExecuteOCRW"
-    arr[321] = "DTWAIN_FeedPage"
-    arr[322] = "DTWAIN_FlipBitmap"
-    arr[323] = "DTWAIN_FlushAcquiredPages"
-    arr[324] = "DTWAIN_ForceAcquireBitDepth"
-    arr[325] = "DTWAIN_ForceScanOnNoUI"
-    arr[326] = "DTWAIN_FrameCreate"
-    arr[327] = "DTWAIN_FrameCreateString"
-    arr[328] = "DTWAIN_FrameCreateStringA"
-    arr[329] = "DTWAIN_FrameCreateStringW"
-    arr[330] = "DTWAIN_FrameDestroy"
-    arr[331] = "DTWAIN_FrameGetAll"
-    arr[332] = "DTWAIN_FrameGetAllString"
-    arr[333] = "DTWAIN_FrameGetAllStringA"
-    arr[334] = "DTWAIN_FrameGetAllStringW"
-    arr[335] = "DTWAIN_FrameGetValue"
-    arr[336] = "DTWAIN_FrameGetValueString"
-    arr[337] = "DTWAIN_FrameGetValueStringA"
-    arr[338] = "DTWAIN_FrameGetValueStringW"
-    arr[339] = "DTWAIN_FrameIsValid"
-    arr[340] = "DTWAIN_FrameSetAll"
-    arr[341] = "DTWAIN_FrameSetAllString"
-    arr[342] = "DTWAIN_FrameSetAllStringA"
-    arr[343] = "DTWAIN_FrameSetAllStringW"
-    arr[344] = "DTWAIN_FrameSetValue"
-    arr[345] = "DTWAIN_FrameSetValueString"
-    arr[346] = "DTWAIN_FrameSetValueStringA"
-    arr[347] = "DTWAIN_FrameSetValueStringW"
-    arr[348] = "DTWAIN_FreeExtImageInfo"
-    arr[349] = "DTWAIN_FreeMemory"
-    arr[350] = "DTWAIN_FreeMemoryEx"
-    arr[351] = "DTWAIN_GetAPIHandleStatus"
-    arr[352] = "DTWAIN_GetAcquireArea"
-    arr[353] = "DTWAIN_GetAcquireArea2"
-    arr[354] = "DTWAIN_GetAcquireArea2String"
-    arr[355] = "DTWAIN_GetAcquireArea2StringA"
-    arr[356] = "DTWAIN_GetAcquireArea2StringW"
-    arr[357] = "DTWAIN_GetAcquireAreaEx"
-    arr[358] = "DTWAIN_GetAcquireMetrics"
-    arr[359] = "DTWAIN_GetAcquireStripBuffer"
-    arr[360] = "DTWAIN_GetAcquireStripData"
-    arr[361] = "DTWAIN_GetAcquireStripSizes"
-    arr[362] = "DTWAIN_GetAcquiredImage"
-    arr[363] = "DTWAIN_GetAcquiredImageArray"
-    arr[364] = "DTWAIN_GetActiveDSMPath"
-    arr[365] = "DTWAIN_GetActiveDSMPathA"
-    arr[366] = "DTWAIN_GetActiveDSMPathW"
-    arr[367] = "DTWAIN_GetActiveDSMVersionInfo"
-    arr[368] = "DTWAIN_GetActiveDSMVersionInfoA"
-    arr[369] = "DTWAIN_GetActiveDSMVersionInfoW"
-    arr[370] = "DTWAIN_GetAlarmVolume"
-    arr[371] = "DTWAIN_GetAllSourceDibs"
-    arr[372] = "DTWAIN_GetAppInfo"
-    arr[373] = "DTWAIN_GetAppInfoA"
-    arr[374] = "DTWAIN_GetAppInfoW"
-    arr[375] = "DTWAIN_GetAuthor"
-    arr[376] = "DTWAIN_GetAuthorA"
-    arr[377] = "DTWAIN_GetAuthorW"
-    arr[378] = "DTWAIN_GetBatteryMinutes"
-    arr[379] = "DTWAIN_GetBatteryPercent"
-    arr[380] = "DTWAIN_GetBitDepth"
-    arr[381] = "DTWAIN_GetBlankPageAutoDetection"
-    arr[382] = "DTWAIN_GetBrightness"
-    arr[383] = "DTWAIN_GetBrightnessString"
-    arr[384] = "DTWAIN_GetBrightnessStringA"
-    arr[385] = "DTWAIN_GetBrightnessStringW"
-    arr[386] = "DTWAIN_GetBufferedTransferInfo"
-    arr[387] = "DTWAIN_GetCallback"
-    arr[388] = "DTWAIN_GetCallback64"
-    arr[389] = "DTWAIN_GetCapArrayType"
-    arr[390] = "DTWAIN_GetCapContainer"
-    arr[391] = "DTWAIN_GetCapContainerEx"
-    arr[392] = "DTWAIN_GetCapContainerEx2"
-    arr[393] = "DTWAIN_GetCapDataType"
-    arr[394] = "DTWAIN_GetCapFromName"
-    arr[395] = "DTWAIN_GetCapFromNameA"
-    arr[396] = "DTWAIN_GetCapFromNameW"
-    arr[397] = "DTWAIN_GetCapOperations"
-    arr[398] = "DTWAIN_GetCapValues"
-    arr[399] = "DTWAIN_GetCapValuesEx"
-    arr[400] = "DTWAIN_GetCapValuesEx2"
-    arr[401] = "DTWAIN_GetCaption"
-    arr[402] = "DTWAIN_GetCaptionA"
-    arr[403] = "DTWAIN_GetCaptionW"
-    arr[404] = "DTWAIN_GetCompressionSize"
-    arr[405] = "DTWAIN_GetCompressionType"
-    arr[406] = "DTWAIN_GetConditionCodeString"
-    arr[407] = "DTWAIN_GetConditionCodeStringA"
-    arr[408] = "DTWAIN_GetConditionCodeStringW"
-    arr[409] = "DTWAIN_GetConstantFromTwainName"
-    arr[410] = "DTWAIN_GetConstantFromTwainNameA"
-    arr[411] = "DTWAIN_GetConstantFromTwainNameW"
-    arr[412] = "DTWAIN_GetContrast"
-    arr[413] = "DTWAIN_GetContrastString"
-    arr[414] = "DTWAIN_GetContrastStringA"
-    arr[415] = "DTWAIN_GetContrastStringW"
-    arr[416] = "DTWAIN_GetCountry"
-    arr[417] = "DTWAIN_GetCurrentAcquiredImage"
-    arr[418] = "DTWAIN_GetCurrentFileName"
-    arr[419] = "DTWAIN_GetCurrentFileNameA"
-    arr[420] = "DTWAIN_GetCurrentFileNameW"
-    arr[421] = "DTWAIN_GetCurrentPageNum"
-    arr[422] = "DTWAIN_GetCurrentRetryCount"
-    arr[423] = "DTWAIN_GetCurrentTwainTriplet"
-    arr[424] = "DTWAIN_GetCustomDSData"
-    arr[425] = "DTWAIN_GetDSMFullName"
-    arr[426] = "DTWAIN_GetDSMFullNameA"
-    arr[427] = "DTWAIN_GetDSMFullNameW"
-    arr[428] = "DTWAIN_GetDSMSearchOrder"
-    arr[429] = "DTWAIN_GetDSMSearchOrderEx"
-    arr[430] = "DTWAIN_GetDSMSearchOrderExA"
-    arr[431] = "DTWAIN_GetDSMSearchOrderExW"
-    arr[432] = "DTWAIN_GetDTWAINHandle"
-    arr[433] = "DTWAIN_GetDeviceEvent"
-    arr[434] = "DTWAIN_GetDeviceEventEx"
-    arr[435] = "DTWAIN_GetDeviceEventInfo"
-    arr[436] = "DTWAIN_GetDeviceNotifications"
-    arr[437] = "DTWAIN_GetDeviceTimeDate"
-    arr[438] = "DTWAIN_GetDeviceTimeDateA"
-    arr[439] = "DTWAIN_GetDeviceTimeDateW"
-    arr[440] = "DTWAIN_GetDoubleFeedDetectLength"
-    arr[441] = "DTWAIN_GetDoubleFeedDetectValues"
-    arr[442] = "DTWAIN_GetDuplexType"
-    arr[443] = "DTWAIN_GetErrorBuffer"
-    arr[444] = "DTWAIN_GetErrorBufferThreshold"
-    arr[445] = "DTWAIN_GetErrorCallback"
-    arr[446] = "DTWAIN_GetErrorCallback64"
-    arr[447] = "DTWAIN_GetErrorString"
-    arr[448] = "DTWAIN_GetErrorStringA"
-    arr[449] = "DTWAIN_GetErrorStringW"
-    arr[450] = "DTWAIN_GetExtCapFromName"
-    arr[451] = "DTWAIN_GetExtCapFromNameA"
-    arr[452] = "DTWAIN_GetExtCapFromNameW"
-    arr[453] = "DTWAIN_GetExtImageInfo"
-    arr[454] = "DTWAIN_GetExtImageInfoData"
-    arr[455] = "DTWAIN_GetExtImageInfoDataEx"
-    arr[456] = "DTWAIN_GetExtImageInfoItem"
-    arr[457] = "DTWAIN_GetExtImageInfoItemEx"
-    arr[458] = "DTWAIN_GetExtNameFromCap"
-    arr[459] = "DTWAIN_GetExtNameFromCapA"
-    arr[460] = "DTWAIN_GetExtNameFromCapW"
-    arr[461] = "DTWAIN_GetFeederAlignment"
-    arr[462] = "DTWAIN_GetFeederFuncs"
-    arr[463] = "DTWAIN_GetFeederOrder"
-    arr[464] = "DTWAIN_GetFeederWaitTime"
-    arr[465] = "DTWAIN_GetFileCompressionType"
-    arr[466] = "DTWAIN_GetFileSavePageCount"
-    arr[467] = "DTWAIN_GetFileTypeExtensions"
-    arr[468] = "DTWAIN_GetFileTypeExtensionsA"
-    arr[469] = "DTWAIN_GetFileTypeExtensionsW"
-    arr[470] = "DTWAIN_GetFileTypeName"
-    arr[471] = "DTWAIN_GetFileTypeNameA"
-    arr[472] = "DTWAIN_GetFileTypeNameW"
-    arr[473] = "DTWAIN_GetHalftone"
-    arr[474] = "DTWAIN_GetHalftoneA"
-    arr[475] = "DTWAIN_GetHalftoneW"
-    arr[476] = "DTWAIN_GetHighlight"
-    arr[477] = "DTWAIN_GetHighlightString"
-    arr[478] = "DTWAIN_GetHighlightStringA"
-    arr[479] = "DTWAIN_GetHighlightStringW"
-    arr[480] = "DTWAIN_GetImageInfo"
-    arr[481] = "DTWAIN_GetImageInfoString"
-    arr[482] = "DTWAIN_GetImageInfoStringA"
-    arr[483] = "DTWAIN_GetImageInfoStringW"
-    arr[484] = "DTWAIN_GetJobControl"
-    arr[485] = "DTWAIN_GetJpegValues"
-    arr[486] = "DTWAIN_GetJpegXRValues"
-    arr[487] = "DTWAIN_GetLanguage"
-    arr[488] = "DTWAIN_GetLastError"
-    arr[489] = "DTWAIN_GetLibraryPath"
-    arr[490] = "DTWAIN_GetLibraryPathA"
-    arr[491] = "DTWAIN_GetLibraryPathW"
-    arr[492] = "DTWAIN_GetLightPath"
-    arr[493] = "DTWAIN_GetLightSource"
-    arr[494] = "DTWAIN_GetLightSources"
-    arr[495] = "DTWAIN_GetLightSourcesEx"
-    arr[496] = "DTWAIN_GetLoggerCallback"
-    arr[497] = "DTWAIN_GetLoggerCallbackA"
-    arr[498] = "DTWAIN_GetLoggerCallbackW"
-    arr[499] = "DTWAIN_GetManualDuplexCount"
-    arr[500] = "DTWAIN_GetMaxAcquisitions"
-    arr[501] = "DTWAIN_GetMaxBuffers"
-    arr[502] = "DTWAIN_GetMaxPagesToAcquire"
-    arr[503] = "DTWAIN_GetMaxRetryAttempts"
-    arr[504] = "DTWAIN_GetNameFromCap"
-    arr[505] = "DTWAIN_GetNameFromCapA"
-    arr[506] = "DTWAIN_GetNameFromCapW"
-    arr[507] = "DTWAIN_GetNoiseFilter"
-    arr[508] = "DTWAIN_GetNumAcquiredImages"
-    arr[509] = "DTWAIN_GetNumAcquisitions"
-    arr[510] = "DTWAIN_GetOCRCapValues"
-    arr[511] = "DTWAIN_GetOCRErrorString"
-    arr[512] = "DTWAIN_GetOCRErrorStringA"
-    arr[513] = "DTWAIN_GetOCRErrorStringW"
-    arr[514] = "DTWAIN_GetOCRLastError"
-    arr[515] = "DTWAIN_GetOCRMajorMinorVersion"
-    arr[516] = "DTWAIN_GetOCRManufacturer"
-    arr[517] = "DTWAIN_GetOCRManufacturerA"
-    arr[518] = "DTWAIN_GetOCRManufacturerW"
-    arr[519] = "DTWAIN_GetOCRProductFamily"
-    arr[520] = "DTWAIN_GetOCRProductFamilyA"
-    arr[521] = "DTWAIN_GetOCRProductFamilyW"
-    arr[522] = "DTWAIN_GetOCRProductName"
-    arr[523] = "DTWAIN_GetOCRProductNameA"
-    arr[524] = "DTWAIN_GetOCRProductNameW"
-    arr[525] = "DTWAIN_GetOCRText"
-    arr[526] = "DTWAIN_GetOCRTextA"
-    arr[527] = "DTWAIN_GetOCRTextInfoFloat"
-    arr[528] = "DTWAIN_GetOCRTextInfoFloatEx"
-    arr[529] = "DTWAIN_GetOCRTextInfoHandle"
-    arr[530] = "DTWAIN_GetOCRTextInfoLong"
-    arr[531] = "DTWAIN_GetOCRTextInfoLongEx"
-    arr[532] = "DTWAIN_GetOCRTextW"
-    arr[533] = "DTWAIN_GetOCRVersionInfo"
-    arr[534] = "DTWAIN_GetOCRVersionInfoA"
-    arr[535] = "DTWAIN_GetOCRVersionInfoW"
-    arr[536] = "DTWAIN_GetOrientation"
-    arr[537] = "DTWAIN_GetOverscan"
-    arr[538] = "DTWAIN_GetPDFTextElementFloat"
-    arr[539] = "DTWAIN_GetPDFTextElementLong"
-    arr[540] = "DTWAIN_GetPDFTextElementString"
-    arr[541] = "DTWAIN_GetPDFTextElementStringA"
-    arr[542] = "DTWAIN_GetPDFTextElementStringW"
-    arr[543] = "DTWAIN_GetPDFType1FontName"
-    arr[544] = "DTWAIN_GetPDFType1FontNameA"
-    arr[545] = "DTWAIN_GetPDFType1FontNameW"
-    arr[546] = "DTWAIN_GetPaperSize"
-    arr[547] = "DTWAIN_GetPaperSizeName"
-    arr[548] = "DTWAIN_GetPaperSizeNameA"
-    arr[549] = "DTWAIN_GetPaperSizeNameW"
-    arr[550] = "DTWAIN_GetPatchMaxPriorities"
-    arr[551] = "DTWAIN_GetPatchMaxRetries"
-    arr[552] = "DTWAIN_GetPatchPriorities"
-    arr[553] = "DTWAIN_GetPatchSearchMode"
-    arr[554] = "DTWAIN_GetPatchTimeOut"
-    arr[555] = "DTWAIN_GetPixelFlavor"
-    arr[556] = "DTWAIN_GetPixelType"
-    arr[557] = "DTWAIN_GetPrinter"
-    arr[558] = "DTWAIN_GetPrinterStartNumber"
-    arr[559] = "DTWAIN_GetPrinterStringMode"
-    arr[560] = "DTWAIN_GetPrinterStrings"
-    arr[561] = "DTWAIN_GetPrinterSuffixString"
-    arr[562] = "DTWAIN_GetPrinterSuffixStringA"
-    arr[563] = "DTWAIN_GetPrinterSuffixStringW"
-    arr[564] = "DTWAIN_GetRegisteredMsg"
-    arr[565] = "DTWAIN_GetResolution"
-    arr[566] = "DTWAIN_GetResolutionString"
-    arr[567] = "DTWAIN_GetResolutionStringA"
-    arr[568] = "DTWAIN_GetResolutionStringW"
-    arr[569] = "DTWAIN_GetResourceString"
-    arr[570] = "DTWAIN_GetResourceStringA"
-    arr[571] = "DTWAIN_GetResourceStringW"
-    arr[572] = "DTWAIN_GetRotation"
-    arr[573] = "DTWAIN_GetRotationString"
-    arr[574] = "DTWAIN_GetRotationStringA"
-    arr[575] = "DTWAIN_GetRotationStringW"
-    arr[576] = "DTWAIN_GetSaveFileName"
-    arr[577] = "DTWAIN_GetSaveFileNameA"
-    arr[578] = "DTWAIN_GetSaveFileNameW"
-    arr[579] = "DTWAIN_GetSessionDetails"
-    arr[580] = "DTWAIN_GetSessionDetailsA"
-    arr[581] = "DTWAIN_GetSessionDetailsW"
-    arr[582] = "DTWAIN_GetShadow"
-    arr[583] = "DTWAIN_GetShadowString"
-    arr[584] = "DTWAIN_GetShadowStringA"
-    arr[585] = "DTWAIN_GetShadowStringW"
-    arr[586] = "DTWAIN_GetShortVersionString"
-    arr[587] = "DTWAIN_GetShortVersionStringA"
-    arr[588] = "DTWAIN_GetShortVersionStringW"
-    arr[589] = "DTWAIN_GetSourceAcquisitions"
-    arr[590] = "DTWAIN_GetSourceDetails"
-    arr[591] = "DTWAIN_GetSourceDetailsA"
-    arr[592] = "DTWAIN_GetSourceDetailsW"
-    arr[593] = "DTWAIN_GetSourceID"
-    arr[594] = "DTWAIN_GetSourceIDEx"
-    arr[595] = "DTWAIN_GetSourceManufacturer"
-    arr[596] = "DTWAIN_GetSourceManufacturerA"
-    arr[597] = "DTWAIN_GetSourceManufacturerW"
-    arr[598] = "DTWAIN_GetSourceProductFamily"
-    arr[599] = "DTWAIN_GetSourceProductFamilyA"
-    arr[600] = "DTWAIN_GetSourceProductFamilyW"
-    arr[601] = "DTWAIN_GetSourceProductName"
-    arr[602] = "DTWAIN_GetSourceProductNameA"
-    arr[603] = "DTWAIN_GetSourceProductNameW"
-    arr[604] = "DTWAIN_GetSourceUnit"
-    arr[605] = "DTWAIN_GetSourceVersionInfo"
-    arr[606] = "DTWAIN_GetSourceVersionInfoA"
-    arr[607] = "DTWAIN_GetSourceVersionInfoW"
-    arr[608] = "DTWAIN_GetSourceVersionNumber"
-    arr[609] = "DTWAIN_GetStaticLibVersion"
-    arr[610] = "DTWAIN_GetTempFileDirectory"
-    arr[611] = "DTWAIN_GetTempFileDirectoryA"
-    arr[612] = "DTWAIN_GetTempFileDirectoryW"
-    arr[613] = "DTWAIN_GetThreshold"
-    arr[614] = "DTWAIN_GetThresholdString"
-    arr[615] = "DTWAIN_GetThresholdStringA"
-    arr[616] = "DTWAIN_GetThresholdStringW"
-    arr[617] = "DTWAIN_GetTimeDate"
-    arr[618] = "DTWAIN_GetTimeDateA"
-    arr[619] = "DTWAIN_GetTimeDateW"
-    arr[620] = "DTWAIN_GetTwainAppID"
-    arr[621] = "DTWAIN_GetTwainAppIDEx"
-    arr[622] = "DTWAIN_GetTwainAvailability"
-    arr[623] = "DTWAIN_GetTwainAvailabilityEx"
-    arr[624] = "DTWAIN_GetTwainAvailabilityExA"
-    arr[625] = "DTWAIN_GetTwainAvailabilityExW"
-    arr[626] = "DTWAIN_GetTwainCountryName"
-    arr[627] = "DTWAIN_GetTwainCountryNameA"
-    arr[628] = "DTWAIN_GetTwainCountryNameW"
-    arr[629] = "DTWAIN_GetTwainCountryValue"
-    arr[630] = "DTWAIN_GetTwainCountryValueA"
-    arr[631] = "DTWAIN_GetTwainCountryValueW"
-    arr[632] = "DTWAIN_GetTwainHwnd"
-    arr[633] = "DTWAIN_GetTwainLanguageName"
-    arr[634] = "DTWAIN_GetTwainLanguageNameA"
-    arr[635] = "DTWAIN_GetTwainLanguageNameW"
-    arr[636] = "DTWAIN_GetTwainLanguageValue"
-    arr[637] = "DTWAIN_GetTwainLanguageValueA"
-    arr[638] = "DTWAIN_GetTwainLanguageValueW"
-    arr[639] = "DTWAIN_GetTwainMode"
-    arr[640] = "DTWAIN_GetTwainNameFromConstant"
-    arr[641] = "DTWAIN_GetTwainNameFromConstantA"
-    arr[642] = "DTWAIN_GetTwainNameFromConstantEx"
-    arr[643] = "DTWAIN_GetTwainNameFromConstantExA"
-    arr[644] = "DTWAIN_GetTwainNameFromConstantExW"
-    arr[645] = "DTWAIN_GetTwainNameFromConstantW"
-    arr[646] = "DTWAIN_GetTwainStringName"
-    arr[647] = "DTWAIN_GetTwainStringNameA"
-    arr[648] = "DTWAIN_GetTwainStringNameW"
-    arr[649] = "DTWAIN_GetTwainTimeout"
-    arr[650] = "DTWAIN_GetVersion"
-    arr[651] = "DTWAIN_GetVersionCopyright"
-    arr[652] = "DTWAIN_GetVersionCopyrightA"
-    arr[653] = "DTWAIN_GetVersionCopyrightW"
-    arr[654] = "DTWAIN_GetVersionEx"
-    arr[655] = "DTWAIN_GetVersionInfo"
-    arr[656] = "DTWAIN_GetVersionInfoA"
-    arr[657] = "DTWAIN_GetVersionInfoW"
-    arr[658] = "DTWAIN_GetVersionString"
-    arr[659] = "DTWAIN_GetVersionStringA"
-    arr[660] = "DTWAIN_GetVersionStringW"
-    arr[661] = "DTWAIN_GetWindowsVersionInfo"
-    arr[662] = "DTWAIN_GetWindowsVersionInfoA"
-    arr[663] = "DTWAIN_GetWindowsVersionInfoW"
-    arr[664] = "DTWAIN_GetXResolution"
-    arr[665] = "DTWAIN_GetXResolutionString"
-    arr[666] = "DTWAIN_GetXResolutionStringA"
-    arr[667] = "DTWAIN_GetXResolutionStringW"
-    arr[668] = "DTWAIN_GetYResolution"
-    arr[669] = "DTWAIN_GetYResolutionString"
-    arr[670] = "DTWAIN_GetYResolutionStringA"
-    arr[671] = "DTWAIN_GetYResolutionStringW"
-    arr[672] = "DTWAIN_InitExtImageInfo"
-    arr[673] = "DTWAIN_InitImageFileAppend"
-    arr[674] = "DTWAIN_InitImageFileAppendA"
-    arr[675] = "DTWAIN_InitImageFileAppendW"
-    arr[676] = "DTWAIN_InitOCRInterface"
-    arr[677] = "DTWAIN_IsAcquiring"
-    arr[678] = "DTWAIN_IsAudioXferSupported"
-    arr[679] = "DTWAIN_IsAutoBorderDetectEnabled"
-    arr[680] = "DTWAIN_IsAutoBorderDetectSupported"
-    arr[681] = "DTWAIN_IsAutoBrightEnabled"
-    arr[682] = "DTWAIN_IsAutoBrightSupported"
-    arr[683] = "DTWAIN_IsAutoDeskewEnabled"
-    arr[684] = "DTWAIN_IsAutoDeskewSupported"
-    arr[685] = "DTWAIN_IsAutoFeedEnabled"
-    arr[686] = "DTWAIN_IsAutoFeedSupported"
-    arr[687] = "DTWAIN_IsAutoRotateEnabled"
-    arr[688] = "DTWAIN_IsAutoRotateSupported"
-    arr[689] = "DTWAIN_IsAutoScanEnabled"
-    arr[690] = "DTWAIN_IsAutomaticSenseMediumEnabled"
-    arr[691] = "DTWAIN_IsAutomaticSenseMediumSupported"
-    arr[692] = "DTWAIN_IsBlankPageDetectionOn"
-    arr[693] = "DTWAIN_IsBufferedTileModeOn"
-    arr[694] = "DTWAIN_IsBufferedTileModeSupported"
-    arr[695] = "DTWAIN_IsCapSupported"
-    arr[696] = "DTWAIN_IsCompressionSupported"
-    arr[697] = "DTWAIN_IsCustomDSDataSupported"
-    arr[698] = "DTWAIN_IsDIBBlank"
-    arr[699] = "DTWAIN_IsDIBBlankString"
-    arr[700] = "DTWAIN_IsDIBBlankStringA"
-    arr[701] = "DTWAIN_IsDIBBlankStringW"
-    arr[702] = "DTWAIN_IsDeviceEventSupported"
-    arr[703] = "DTWAIN_IsDeviceOnLine"
-    arr[704] = "DTWAIN_IsDoubleFeedDetectLengthSupported"
-    arr[705] = "DTWAIN_IsDoubleFeedDetectSupported"
-    arr[706] = "DTWAIN_IsDuplexEnabled"
-    arr[707] = "DTWAIN_IsDuplexSupported"
-    arr[708] = "DTWAIN_IsExtImageInfoSupported"
-    arr[709] = "DTWAIN_IsFeederEnabled"
-    arr[710] = "DTWAIN_IsFeederLoaded"
-    arr[711] = "DTWAIN_IsFeederSensitive"
-    arr[712] = "DTWAIN_IsFeederSupported"
-    arr[713] = "DTWAIN_IsFileSystemSupported"
-    arr[714] = "DTWAIN_IsFileXferSupported"
-    arr[715] = "DTWAIN_IsIAFieldALastPageSupported"
-    arr[716] = "DTWAIN_IsIAFieldALevelSupported"
-    arr[717] = "DTWAIN_IsIAFieldAPrintFormatSupported"
-    arr[718] = "DTWAIN_IsIAFieldAValueSupported"
-    arr[719] = "DTWAIN_IsIAFieldBLastPageSupported"
-    arr[720] = "DTWAIN_IsIAFieldBLevelSupported"
-    arr[721] = "DTWAIN_IsIAFieldBPrintFormatSupported"
-    arr[722] = "DTWAIN_IsIAFieldBValueSupported"
-    arr[723] = "DTWAIN_IsIAFieldCLastPageSupported"
-    arr[724] = "DTWAIN_IsIAFieldCLevelSupported"
-    arr[725] = "DTWAIN_IsIAFieldCPrintFormatSupported"
-    arr[726] = "DTWAIN_IsIAFieldCValueSupported"
-    arr[727] = "DTWAIN_IsIAFieldDLastPageSupported"
-    arr[728] = "DTWAIN_IsIAFieldDLevelSupported"
-    arr[729] = "DTWAIN_IsIAFieldDPrintFormatSupported"
-    arr[730] = "DTWAIN_IsIAFieldDValueSupported"
-    arr[731] = "DTWAIN_IsIAFieldELastPageSupported"
-    arr[732] = "DTWAIN_IsIAFieldELevelSupported"
-    arr[733] = "DTWAIN_IsIAFieldEPrintFormatSupported"
-    arr[734] = "DTWAIN_IsIAFieldEValueSupported"
-    arr[735] = "DTWAIN_IsImageAddressingSupported"
-    arr[736] = "DTWAIN_IsIndicatorEnabled"
-    arr[737] = "DTWAIN_IsIndicatorSupported"
-    arr[738] = "DTWAIN_IsInitialized"
-    arr[739] = "DTWAIN_IsJobControlSupported"
-    arr[740] = "DTWAIN_IsLampEnabled"
-    arr[741] = "DTWAIN_IsLampSupported"
-    arr[742] = "DTWAIN_IsLightPathSupported"
-    arr[743] = "DTWAIN_IsLightSourceSupported"
-    arr[744] = "DTWAIN_IsMaxBuffersSupported"
-    arr[745] = "DTWAIN_IsMemFileXferSupported"
-    arr[746] = "DTWAIN_IsMsgNotifyEnabled"
-    arr[747] = "DTWAIN_IsNotifyTripletsEnabled"
-    arr[748] = "DTWAIN_IsOCREngineActivated"
-    arr[749] = "DTWAIN_IsOpenSourcesOnSelect"
-    arr[750] = "DTWAIN_IsOrientationSupported"
-    arr[751] = "DTWAIN_IsOverscanSupported"
-    arr[752] = "DTWAIN_IsPaperDetectable"
-    arr[753] = "DTWAIN_IsPaperSizeSupported"
-    arr[754] = "DTWAIN_IsPatchCapsSupported"
-    arr[755] = "DTWAIN_IsPatchDetectEnabled"
-    arr[756] = "DTWAIN_IsPatchSupported"
-    arr[757] = "DTWAIN_IsPeekMessageLoopEnabled"
-    arr[758] = "DTWAIN_IsPixelTypeSupported"
-    arr[759] = "DTWAIN_IsPrinterEnabled"
-    arr[760] = "DTWAIN_IsPrinterSupported"
-    arr[761] = "DTWAIN_IsRotationSupported"
-    arr[762] = "DTWAIN_IsSessionEnabled"
-    arr[763] = "DTWAIN_IsSkipImageInfoError"
-    arr[764] = "DTWAIN_IsSourceAcquiring"
-    arr[765] = "DTWAIN_IsSourceAcquiringEx"
-    arr[766] = "DTWAIN_IsSourceInUIOnlyMode"
-    arr[767] = "DTWAIN_IsSourceOpen"
-    arr[768] = "DTWAIN_IsSourceSelected"
-    arr[769] = "DTWAIN_IsSourceValid"
-    arr[770] = "DTWAIN_IsThumbnailEnabled"
-    arr[771] = "DTWAIN_IsThumbnailSupported"
-    arr[772] = "DTWAIN_IsTwainAvailable"
-    arr[773] = "DTWAIN_IsTwainAvailableEx"
-    arr[774] = "DTWAIN_IsTwainAvailableExA"
-    arr[775] = "DTWAIN_IsTwainAvailableExW"
-    arr[776] = "DTWAIN_IsUIControllable"
-    arr[777] = "DTWAIN_IsUIEnabled"
-    arr[778] = "DTWAIN_IsUIOnlySupported"
-    arr[779] = "DTWAIN_LoadCustomStringResources"
-    arr[780] = "DTWAIN_LoadCustomStringResourcesA"
-    arr[781] = "DTWAIN_LoadCustomStringResourcesEx"
-    arr[782] = "DTWAIN_LoadCustomStringResourcesExA"
-    arr[783] = "DTWAIN_LoadCustomStringResourcesExW"
-    arr[784] = "DTWAIN_LoadCustomStringResourcesW"
-    arr[785] = "DTWAIN_LoadLanguageResource"
-    arr[786] = "DTWAIN_LockMemory"
-    arr[787] = "DTWAIN_LockMemoryEx"
-    arr[788] = "DTWAIN_LogMessage"
-    arr[789] = "DTWAIN_LogMessageA"
-    arr[790] = "DTWAIN_LogMessageW"
-    arr[791] = "DTWAIN_MakeRGB"
-    arr[792] = "DTWAIN_OpenSource"
-    arr[793] = "DTWAIN_OpenSourcesOnSelect"
-    arr[794] = "DTWAIN_RangeCreate"
-    arr[795] = "DTWAIN_RangeCreateFromCap"
-    arr[796] = "DTWAIN_RangeDestroy"
-    arr[797] = "DTWAIN_RangeExpand"
-    arr[798] = "DTWAIN_RangeExpandEx"
-    arr[799] = "DTWAIN_RangeGetAll"
-    arr[800] = "DTWAIN_RangeGetAllFloat"
-    arr[801] = "DTWAIN_RangeGetAllFloatString"
-    arr[802] = "DTWAIN_RangeGetAllFloatStringA"
-    arr[803] = "DTWAIN_RangeGetAllFloatStringW"
-    arr[804] = "DTWAIN_RangeGetAllLong"
-    arr[805] = "DTWAIN_RangeGetCount"
-    arr[806] = "DTWAIN_RangeGetExpValue"
-    arr[807] = "DTWAIN_RangeGetExpValueFloat"
-    arr[808] = "DTWAIN_RangeGetExpValueFloatString"
-    arr[809] = "DTWAIN_RangeGetExpValueFloatStringA"
-    arr[810] = "DTWAIN_RangeGetExpValueFloatStringW"
-    arr[811] = "DTWAIN_RangeGetExpValueLong"
-    arr[812] = "DTWAIN_RangeGetNearestValue"
-    arr[813] = "DTWAIN_RangeGetNearestValueFloat"
-    arr[814] = "DTWAIN_RangeGetNearestValueFloatString"
-    arr[815] = "DTWAIN_RangeGetNearestValueFloatStringA"
-    arr[816] = "DTWAIN_RangeGetNearestValueFloatStringW"
-    arr[817] = "DTWAIN_RangeGetNearestValueLong"
-    arr[818] = "DTWAIN_RangeGetPos"
-    arr[819] = "DTWAIN_RangeGetPosFloat"
-    arr[820] = "DTWAIN_RangeGetPosFloatString"
-    arr[821] = "DTWAIN_RangeGetPosFloatStringA"
-    arr[822] = "DTWAIN_RangeGetPosFloatStringW"
-    arr[823] = "DTWAIN_RangeGetPosLong"
-    arr[824] = "DTWAIN_RangeGetValue"
-    arr[825] = "DTWAIN_RangeGetValueFloat"
-    arr[826] = "DTWAIN_RangeGetValueFloatString"
-    arr[827] = "DTWAIN_RangeGetValueFloatStringA"
-    arr[828] = "DTWAIN_RangeGetValueFloatStringW"
-    arr[829] = "DTWAIN_RangeGetValueLong"
-    arr[830] = "DTWAIN_RangeIsValid"
-    arr[831] = "DTWAIN_RangeSetAll"
-    arr[832] = "DTWAIN_RangeSetAllFloat"
-    arr[833] = "DTWAIN_RangeSetAllFloatString"
-    arr[834] = "DTWAIN_RangeSetAllFloatStringA"
-    arr[835] = "DTWAIN_RangeSetAllFloatStringW"
-    arr[836] = "DTWAIN_RangeSetAllLong"
-    arr[837] = "DTWAIN_RangeSetValue"
-    arr[838] = "DTWAIN_RangeSetValueFloat"
-    arr[839] = "DTWAIN_RangeSetValueFloatString"
-    arr[840] = "DTWAIN_RangeSetValueFloatStringA"
-    arr[841] = "DTWAIN_RangeSetValueFloatStringW"
-    arr[842] = "DTWAIN_RangeSetValueLong"
-    arr[843] = "DTWAIN_RemovePDFTextElement"
-    arr[844] = "DTWAIN_ResetPDFTextElement"
-    arr[845] = "DTWAIN_RewindPage"
-    arr[846] = "DTWAIN_RotateDIB"
-    arr[847] = "DTWAIN_RotateDIBString"
-    arr[848] = "DTWAIN_RotateDIBStringA"
-    arr[849] = "DTWAIN_RotateDIBStringW"
-    arr[850] = "DTWAIN_SelectDefaultOCREngine"
-    arr[851] = "DTWAIN_SelectDefaultSource"
-    arr[852] = "DTWAIN_SelectDefaultSourceWithOpen"
-    arr[853] = "DTWAIN_SelectOCREngine"
-    arr[854] = "DTWAIN_SelectOCREngine2"
-    arr[855] = "DTWAIN_SelectOCREngine2A"
-    arr[856] = "DTWAIN_SelectOCREngine2Ex"
-    arr[857] = "DTWAIN_SelectOCREngine2ExA"
-    arr[858] = "DTWAIN_SelectOCREngine2ExW"
-    arr[859] = "DTWAIN_SelectOCREngine2W"
-    arr[860] = "DTWAIN_SelectOCREngineByName"
-    arr[861] = "DTWAIN_SelectOCREngineByNameA"
-    arr[862] = "DTWAIN_SelectOCREngineByNameW"
-    arr[863] = "DTWAIN_SelectSource"
-    arr[864] = "DTWAIN_SelectSource2"
-    arr[865] = "DTWAIN_SelectSource2A"
-    arr[866] = "DTWAIN_SelectSource2Ex"
-    arr[867] = "DTWAIN_SelectSource2ExA"
-    arr[868] = "DTWAIN_SelectSource2ExW"
-    arr[869] = "DTWAIN_SelectSource2W"
-    arr[870] = "DTWAIN_SelectSourceByName"
-    arr[871] = "DTWAIN_SelectSourceByNameA"
-    arr[872] = "DTWAIN_SelectSourceByNameW"
-    arr[873] = "DTWAIN_SelectSourceByNameWithOpen"
-    arr[874] = "DTWAIN_SelectSourceByNameWithOpenA"
-    arr[875] = "DTWAIN_SelectSourceByNameWithOpenW"
-    arr[876] = "DTWAIN_SelectSourceWithOpen"
-    arr[877] = "DTWAIN_SetAcquireArea"
-    arr[878] = "DTWAIN_SetAcquireArea2"
-    arr[879] = "DTWAIN_SetAcquireArea2String"
-    arr[880] = "DTWAIN_SetAcquireArea2StringA"
-    arr[881] = "DTWAIN_SetAcquireArea2StringW"
-    arr[882] = "DTWAIN_SetAcquireImageNegative"
-    arr[883] = "DTWAIN_SetAcquireImageScale"
-    arr[884] = "DTWAIN_SetAcquireImageScaleString"
-    arr[885] = "DTWAIN_SetAcquireImageScaleStringA"
-    arr[886] = "DTWAIN_SetAcquireImageScaleStringW"
-    arr[887] = "DTWAIN_SetAcquireStripBuffer"
-    arr[888] = "DTWAIN_SetAcquireStripSize"
-    arr[889] = "DTWAIN_SetAlarmVolume"
-    arr[890] = "DTWAIN_SetAlarms"
-    arr[891] = "DTWAIN_SetAllCapsToDefault"
-    arr[892] = "DTWAIN_SetAppInfo"
-    arr[893] = "DTWAIN_SetAppInfoA"
-    arr[894] = "DTWAIN_SetAppInfoW"
-    arr[895] = "DTWAIN_SetAuthor"
-    arr[896] = "DTWAIN_SetAuthorA"
-    arr[897] = "DTWAIN_SetAuthorW"
-    arr[898] = "DTWAIN_SetAvailablePrinters"
-    arr[899] = "DTWAIN_SetAvailablePrintersArray"
-    arr[900] = "DTWAIN_SetBitDepth"
-    arr[901] = "DTWAIN_SetBlankPageDetection"
-    arr[902] = "DTWAIN_SetBlankPageDetectionEx"
-    arr[903] = "DTWAIN_SetBlankPageDetectionExString"
-    arr[904] = "DTWAIN_SetBlankPageDetectionExStringA"
-    arr[905] = "DTWAIN_SetBlankPageDetectionExStringW"
-    arr[906] = "DTWAIN_SetBlankPageDetectionString"
-    arr[907] = "DTWAIN_SetBlankPageDetectionStringA"
-    arr[908] = "DTWAIN_SetBlankPageDetectionStringW"
-    arr[909] = "DTWAIN_SetBrightness"
-    arr[910] = "DTWAIN_SetBrightnessString"
-    arr[911] = "DTWAIN_SetBrightnessStringA"
-    arr[912] = "DTWAIN_SetBrightnessStringW"
-    arr[913] = "DTWAIN_SetBufferedTileMode"
-    arr[914] = "DTWAIN_SetCallback"
-    arr[915] = "DTWAIN_SetCallback64"
-    arr[916] = "DTWAIN_SetCamera"
-    arr[917] = "DTWAIN_SetCameraA"
-    arr[918] = "DTWAIN_SetCameraW"
-    arr[919] = "DTWAIN_SetCapValues"
-    arr[920] = "DTWAIN_SetCapValuesEx"
-    arr[921] = "DTWAIN_SetCapValuesEx2"
-    arr[922] = "DTWAIN_SetCaption"
-    arr[923] = "DTWAIN_SetCaptionA"
-    arr[924] = "DTWAIN_SetCaptionW"
-    arr[925] = "DTWAIN_SetCompressionType"
-    arr[926] = "DTWAIN_SetContrast"
-    arr[927] = "DTWAIN_SetContrastString"
-    arr[928] = "DTWAIN_SetContrastStringA"
-    arr[929] = "DTWAIN_SetContrastStringW"
-    arr[930] = "DTWAIN_SetCountry"
-    arr[931] = "DTWAIN_SetCurrentRetryCount"
-    arr[932] = "DTWAIN_SetCustomDSData"
-    arr[933] = "DTWAIN_SetDSMSearchOrder"
-    arr[934] = "DTWAIN_SetDSMSearchOrderEx"
-    arr[935] = "DTWAIN_SetDSMSearchOrderExA"
-    arr[936] = "DTWAIN_SetDSMSearchOrderExW"
-    arr[937] = "DTWAIN_SetDefaultSource"
-    arr[938] = "DTWAIN_SetDeviceNotifications"
-    arr[939] = "DTWAIN_SetDeviceTimeDate"
-    arr[940] = "DTWAIN_SetDeviceTimeDateA"
-    arr[941] = "DTWAIN_SetDeviceTimeDateW"
-    arr[942] = "DTWAIN_SetDoubleFeedDetectLength"
-    arr[943] = "DTWAIN_SetDoubleFeedDetectLengthString"
-    arr[944] = "DTWAIN_SetDoubleFeedDetectLengthStringA"
-    arr[945] = "DTWAIN_SetDoubleFeedDetectLengthStringW"
-    arr[946] = "DTWAIN_SetDoubleFeedDetectValues"
-    arr[947] = "DTWAIN_SetDoublePageCountOnDuplex"
-    arr[948] = "DTWAIN_SetEOJDetectValue"
-    arr[949] = "DTWAIN_SetErrorBufferThreshold"
-    arr[950] = "DTWAIN_SetErrorCallback"
-    arr[951] = "DTWAIN_SetErrorCallback64"
-    arr[952] = "DTWAIN_SetFeederAlignment"
-    arr[953] = "DTWAIN_SetFeederOrder"
-    arr[954] = "DTWAIN_SetFeederWaitTime"
-    arr[955] = "DTWAIN_SetFileAutoIncrement"
-    arr[956] = "DTWAIN_SetFileCompressionType"
-    arr[957] = "DTWAIN_SetFileSavePos"
-    arr[958] = "DTWAIN_SetFileSavePosA"
-    arr[959] = "DTWAIN_SetFileSavePosW"
-    arr[960] = "DTWAIN_SetFileXferFormat"
-    arr[961] = "DTWAIN_SetHalftone"
-    arr[962] = "DTWAIN_SetHalftoneA"
-    arr[963] = "DTWAIN_SetHalftoneW"
-    arr[964] = "DTWAIN_SetHighlight"
-    arr[965] = "DTWAIN_SetHighlightString"
-    arr[966] = "DTWAIN_SetHighlightStringA"
-    arr[967] = "DTWAIN_SetHighlightStringW"
-    arr[968] = "DTWAIN_SetJobControl"
-    arr[969] = "DTWAIN_SetJpegValues"
-    arr[970] = "DTWAIN_SetJpegXRValues"
-    arr[971] = "DTWAIN_SetLanguage"
-    arr[972] = "DTWAIN_SetLastError"
-    arr[973] = "DTWAIN_SetLightPath"
-    arr[974] = "DTWAIN_SetLightPathEx"
-    arr[975] = "DTWAIN_SetLightSource"
-    arr[976] = "DTWAIN_SetLightSources"
-    arr[977] = "DTWAIN_SetLoggerCallback"
-    arr[978] = "DTWAIN_SetLoggerCallbackA"
-    arr[979] = "DTWAIN_SetLoggerCallbackW"
-    arr[980] = "DTWAIN_SetManualDuplexMode"
-    arr[981] = "DTWAIN_SetMaxAcquisitions"
-    arr[982] = "DTWAIN_SetMaxBuffers"
-    arr[983] = "DTWAIN_SetMaxRetryAttempts"
-    arr[984] = "DTWAIN_SetMultipageScanMode"
-    arr[985] = "DTWAIN_SetNoiseFilter"
-    arr[986] = "DTWAIN_SetOCRCapValues"
-    arr[987] = "DTWAIN_SetOrientation"
-    arr[988] = "DTWAIN_SetOverscan"
-    arr[989] = "DTWAIN_SetPDFAESEncryption"
-    arr[990] = "DTWAIN_SetPDFASCIICompression"
-    arr[991] = "DTWAIN_SetPDFAuthor"
-    arr[992] = "DTWAIN_SetPDFAuthorA"
-    arr[993] = "DTWAIN_SetPDFAuthorW"
-    arr[994] = "DTWAIN_SetPDFCompression"
-    arr[995] = "DTWAIN_SetPDFCreator"
-    arr[996] = "DTWAIN_SetPDFCreatorA"
-    arr[997] = "DTWAIN_SetPDFCreatorW"
-    arr[998] = "DTWAIN_SetPDFEncryption"
-    arr[999] = "DTWAIN_SetPDFEncryptionA"
-    arr[1000] = "DTWAIN_SetPDFEncryptionW"
-    arr[1001] = "DTWAIN_SetPDFJpegQuality"
-    arr[1002] = "DTWAIN_SetPDFKeywords"
-    arr[1003] = "DTWAIN_SetPDFKeywordsA"
-    arr[1004] = "DTWAIN_SetPDFKeywordsW"
-    arr[1005] = "DTWAIN_SetPDFOCRConversion"
-    arr[1006] = "DTWAIN_SetPDFOCRMode"
-    arr[1007] = "DTWAIN_SetPDFOrientation"
-    arr[1008] = "DTWAIN_SetPDFPageScale"
-    arr[1009] = "DTWAIN_SetPDFPageScaleString"
-    arr[1010] = "DTWAIN_SetPDFPageScaleStringA"
-    arr[1011] = "DTWAIN_SetPDFPageScaleStringW"
-    arr[1012] = "DTWAIN_SetPDFPageSize"
-    arr[1013] = "DTWAIN_SetPDFPageSizeString"
-    arr[1014] = "DTWAIN_SetPDFPageSizeStringA"
-    arr[1015] = "DTWAIN_SetPDFPageSizeStringW"
-    arr[1016] = "DTWAIN_SetPDFPolarity"
-    arr[1017] = "DTWAIN_SetPDFProducer"
-    arr[1018] = "DTWAIN_SetPDFProducerA"
-    arr[1019] = "DTWAIN_SetPDFProducerW"
-    arr[1020] = "DTWAIN_SetPDFSubject"
-    arr[1021] = "DTWAIN_SetPDFSubjectA"
-    arr[1022] = "DTWAIN_SetPDFSubjectW"
-    arr[1023] = "DTWAIN_SetPDFTextElementFloat"
-    arr[1024] = "DTWAIN_SetPDFTextElementFloatString"
-    arr[1025] = "DTWAIN_SetPDFTextElementFloatStringA"
-    arr[1026] = "DTWAIN_SetPDFTextElementFloatStringW"
-    arr[1027] = "DTWAIN_SetPDFTextElementLong"
-    arr[1028] = "DTWAIN_SetPDFTextElementString"
-    arr[1029] = "DTWAIN_SetPDFTextElementStringA"
-    arr[1030] = "DTWAIN_SetPDFTextElementStringW"
-    arr[1031] = "DTWAIN_SetPDFTitle"
-    arr[1032] = "DTWAIN_SetPDFTitleA"
-    arr[1033] = "DTWAIN_SetPDFTitleW"
-    arr[1034] = "DTWAIN_SetPaperSize"
-    arr[1035] = "DTWAIN_SetPatchMaxPriorities"
-    arr[1036] = "DTWAIN_SetPatchMaxRetries"
-    arr[1037] = "DTWAIN_SetPatchPriorities"
-    arr[1038] = "DTWAIN_SetPatchSearchMode"
-    arr[1039] = "DTWAIN_SetPatchTimeOut"
-    arr[1040] = "DTWAIN_SetPixelFlavor"
-    arr[1041] = "DTWAIN_SetPixelType"
-    arr[1042] = "DTWAIN_SetPostScriptTitle"
-    arr[1043] = "DTWAIN_SetPostScriptTitleA"
-    arr[1044] = "DTWAIN_SetPostScriptTitleW"
-    arr[1045] = "DTWAIN_SetPostScriptType"
-    arr[1046] = "DTWAIN_SetPrinter"
-    arr[1047] = "DTWAIN_SetPrinterEx"
-    arr[1048] = "DTWAIN_SetPrinterStartNumber"
-    arr[1049] = "DTWAIN_SetPrinterStringMode"
-    arr[1050] = "DTWAIN_SetPrinterStrings"
-    arr[1051] = "DTWAIN_SetPrinterSuffixString"
-    arr[1052] = "DTWAIN_SetPrinterSuffixStringA"
-    arr[1053] = "DTWAIN_SetPrinterSuffixStringW"
-    arr[1054] = "DTWAIN_SetQueryCapSupport"
-    arr[1055] = "DTWAIN_SetResolution"
-    arr[1056] = "DTWAIN_SetResolutionString"
-    arr[1057] = "DTWAIN_SetResolutionStringA"
-    arr[1058] = "DTWAIN_SetResolutionStringW"
-    arr[1059] = "DTWAIN_SetResourcePath"
-    arr[1060] = "DTWAIN_SetResourcePathA"
-    arr[1061] = "DTWAIN_SetResourcePathW"
-    arr[1062] = "DTWAIN_SetRotation"
-    arr[1063] = "DTWAIN_SetRotationString"
-    arr[1064] = "DTWAIN_SetRotationStringA"
-    arr[1065] = "DTWAIN_SetRotationStringW"
-    arr[1066] = "DTWAIN_SetSaveFileName"
-    arr[1067] = "DTWAIN_SetSaveFileNameA"
-    arr[1068] = "DTWAIN_SetSaveFileNameW"
-    arr[1069] = "DTWAIN_SetShadow"
-    arr[1070] = "DTWAIN_SetShadowString"
-    arr[1071] = "DTWAIN_SetShadowStringA"
-    arr[1072] = "DTWAIN_SetShadowStringW"
-    arr[1073] = "DTWAIN_SetSourceUnit"
-    arr[1074] = "DTWAIN_SetTIFFCompressType"
-    arr[1075] = "DTWAIN_SetTIFFInvert"
-    arr[1076] = "DTWAIN_SetTempFileDirectory"
-    arr[1077] = "DTWAIN_SetTempFileDirectoryA"
-    arr[1078] = "DTWAIN_SetTempFileDirectoryEx"
-    arr[1079] = "DTWAIN_SetTempFileDirectoryExA"
-    arr[1080] = "DTWAIN_SetTempFileDirectoryExW"
-    arr[1081] = "DTWAIN_SetTempFileDirectoryW"
-    arr[1082] = "DTWAIN_SetThreshold"
-    arr[1083] = "DTWAIN_SetThresholdString"
-    arr[1084] = "DTWAIN_SetThresholdStringA"
-    arr[1085] = "DTWAIN_SetThresholdStringW"
-    arr[1086] = "DTWAIN_SetTwainDSM"
-    arr[1087] = "DTWAIN_SetTwainLog"
-    arr[1088] = "DTWAIN_SetTwainLogA"
-    arr[1089] = "DTWAIN_SetTwainLogW"
-    arr[1090] = "DTWAIN_SetTwainMode"
-    arr[1091] = "DTWAIN_SetTwainTimeout"
-    arr[1092] = "DTWAIN_SetUpdateDibProc"
-    arr[1093] = "DTWAIN_SetXResolution"
-    arr[1094] = "DTWAIN_SetXResolutionString"
-    arr[1095] = "DTWAIN_SetXResolutionStringA"
-    arr[1096] = "DTWAIN_SetXResolutionStringW"
-    arr[1097] = "DTWAIN_SetYResolution"
-    arr[1098] = "DTWAIN_SetYResolutionString"
-    arr[1099] = "DTWAIN_SetYResolutionStringA"
-    arr[1100] = "DTWAIN_SetYResolutionStringW"
-    arr[1101] = "DTWAIN_ShowUIOnly"
-    arr[1102] = "DTWAIN_ShutdownOCREngine"
-    arr[1103] = "DTWAIN_SkipImageInfoError"
-    arr[1104] = "DTWAIN_StartThread"
-    arr[1105] = "DTWAIN_StartTwainSession"
-    arr[1106] = "DTWAIN_StartTwainSessionA"
-    arr[1107] = "DTWAIN_StartTwainSessionW"
-    arr[1108] = "DTWAIN_SysDestroy"
-    arr[1109] = "DTWAIN_SysInitialize"
-    arr[1110] = "DTWAIN_SysInitializeEx"
-    arr[1111] = "DTWAIN_SysInitializeEx2"
-    arr[1112] = "DTWAIN_SysInitializeEx2A"
-    arr[1113] = "DTWAIN_SysInitializeEx2W"
-    arr[1114] = "DTWAIN_SysInitializeExA"
-    arr[1115] = "DTWAIN_SysInitializeExW"
-    arr[1116] = "DTWAIN_SysInitializeLib"
-    arr[1117] = "DTWAIN_SysInitializeLibEx"
-    arr[1118] = "DTWAIN_SysInitializeLibEx2"
-    arr[1119] = "DTWAIN_SysInitializeLibEx2A"
-    arr[1120] = "DTWAIN_SysInitializeLibEx2W"
-    arr[1121] = "DTWAIN_SysInitializeLibExA"
-    arr[1122] = "DTWAIN_SysInitializeLibExW"
-    arr[1123] = "DTWAIN_SysInitializeNoBlocking"
-    arr[1124] = "DTWAIN_TestGetCap"
-    arr[1125] = "DTWAIN_UnlockMemory"
-    arr[1126] = "DTWAIN_UnlockMemoryEx"
-    arr[1127] = "DTWAIN_UseMultipleThreads"
+    arr[67] = "DTWAIN_ArrayDumpToLog"
+    arr[68] = "DTWAIN_ArrayFind"
+    arr[69] = "DTWAIN_ArrayFindANSIString"
+    arr[70] = "DTWAIN_ArrayFindFloat"
+    arr[71] = "DTWAIN_ArrayFindFloatString"
+    arr[72] = "DTWAIN_ArrayFindFloatStringA"
+    arr[73] = "DTWAIN_ArrayFindFloatStringW"
+    arr[74] = "DTWAIN_ArrayFindLong"
+    arr[75] = "DTWAIN_ArrayFindLong64"
+    arr[76] = "DTWAIN_ArrayFindString"
+    arr[77] = "DTWAIN_ArrayFindStringA"
+    arr[78] = "DTWAIN_ArrayFindStringW"
+    arr[79] = "DTWAIN_ArrayFindWideString"
+    arr[80] = "DTWAIN_ArrayFix32GetAt"
+    arr[81] = "DTWAIN_ArrayFix32SetAt"
+    arr[82] = "DTWAIN_ArrayFloatToANSIString"
+    arr[83] = "DTWAIN_ArrayFloatToString"
+    arr[84] = "DTWAIN_ArrayFloatToWideString"
+    arr[85] = "DTWAIN_ArrayGetAt"
+    arr[86] = "DTWAIN_ArrayGetAtANSIString"
+    arr[87] = "DTWAIN_ArrayGetAtFloat"
+    arr[88] = "DTWAIN_ArrayGetAtFloatEx"
+    arr[89] = "DTWAIN_ArrayGetAtFloatString"
+    arr[90] = "DTWAIN_ArrayGetAtFloatStringA"
+    arr[91] = "DTWAIN_ArrayGetAtFloatStringW"
+    arr[92] = "DTWAIN_ArrayGetAtFrame"
+    arr[93] = "DTWAIN_ArrayGetAtFrameEx"
+    arr[94] = "DTWAIN_ArrayGetAtFrameString"
+    arr[95] = "DTWAIN_ArrayGetAtFrameStringA"
+    arr[96] = "DTWAIN_ArrayGetAtFrameStringW"
+    arr[97] = "DTWAIN_ArrayGetAtLong"
+    arr[98] = "DTWAIN_ArrayGetAtLong64"
+    arr[99] = "DTWAIN_ArrayGetAtLong64Ex"
+    arr[100] = "DTWAIN_ArrayGetAtLongEx"
+    arr[101] = "DTWAIN_ArrayGetAtSource"
+    arr[102] = "DTWAIN_ArrayGetAtSourceEx"
+    arr[103] = "DTWAIN_ArrayGetAtString"
+    arr[104] = "DTWAIN_ArrayGetAtStringA"
+    arr[105] = "DTWAIN_ArrayGetAtStringW"
+    arr[106] = "DTWAIN_ArrayGetAtWideString"
+    arr[107] = "DTWAIN_ArrayGetBuffer"
+    arr[108] = "DTWAIN_ArrayGetCapValues"
+    arr[109] = "DTWAIN_ArrayGetCapValuesEx"
+    arr[110] = "DTWAIN_ArrayGetCapValuesEx2"
+    arr[111] = "DTWAIN_ArrayGetCount"
+    arr[112] = "DTWAIN_ArrayGetMaxStringLength"
+    arr[113] = "DTWAIN_ArrayGetSourceAt"
+    arr[114] = "DTWAIN_ArrayGetStringLength"
+    arr[115] = "DTWAIN_ArrayGetType"
+    arr[116] = "DTWAIN_ArrayInit"
+    arr[117] = "DTWAIN_ArrayInsertAt"
+    arr[118] = "DTWAIN_ArrayInsertAtANSIString"
+    arr[119] = "DTWAIN_ArrayInsertAtANSIStringN"
+    arr[120] = "DTWAIN_ArrayInsertAtFloat"
+    arr[121] = "DTWAIN_ArrayInsertAtFloatN"
+    arr[122] = "DTWAIN_ArrayInsertAtFloatString"
+    arr[123] = "DTWAIN_ArrayInsertAtFloatStringA"
+    arr[124] = "DTWAIN_ArrayInsertAtFloatStringN"
+    arr[125] = "DTWAIN_ArrayInsertAtFloatStringNA"
+    arr[126] = "DTWAIN_ArrayInsertAtFloatStringNW"
+    arr[127] = "DTWAIN_ArrayInsertAtFloatStringW"
+    arr[128] = "DTWAIN_ArrayInsertAtFrame"
+    arr[129] = "DTWAIN_ArrayInsertAtFrameN"
+    arr[130] = "DTWAIN_ArrayInsertAtLong"
+    arr[131] = "DTWAIN_ArrayInsertAtLong64"
+    arr[132] = "DTWAIN_ArrayInsertAtLong64N"
+    arr[133] = "DTWAIN_ArrayInsertAtLongN"
+    arr[134] = "DTWAIN_ArrayInsertAtN"
+    arr[135] = "DTWAIN_ArrayInsertAtString"
+    arr[136] = "DTWAIN_ArrayInsertAtStringA"
+    arr[137] = "DTWAIN_ArrayInsertAtStringN"
+    arr[138] = "DTWAIN_ArrayInsertAtStringNA"
+    arr[139] = "DTWAIN_ArrayInsertAtStringNW"
+    arr[140] = "DTWAIN_ArrayInsertAtStringW"
+    arr[141] = "DTWAIN_ArrayInsertAtWideString"
+    arr[142] = "DTWAIN_ArrayInsertAtWideStringN"
+    arr[143] = "DTWAIN_ArrayRemoveAll"
+    arr[144] = "DTWAIN_ArrayRemoveAt"
+    arr[145] = "DTWAIN_ArrayRemoveAtN"
+    arr[146] = "DTWAIN_ArrayResize"
+    arr[147] = "DTWAIN_ArraySetAt"
+    arr[148] = "DTWAIN_ArraySetAtANSIString"
+    arr[149] = "DTWAIN_ArraySetAtFloat"
+    arr[150] = "DTWAIN_ArraySetAtFloatString"
+    arr[151] = "DTWAIN_ArraySetAtFloatStringA"
+    arr[152] = "DTWAIN_ArraySetAtFloatStringW"
+    arr[153] = "DTWAIN_ArraySetAtFrame"
+    arr[154] = "DTWAIN_ArraySetAtFrameEx"
+    arr[155] = "DTWAIN_ArraySetAtFrameString"
+    arr[156] = "DTWAIN_ArraySetAtFrameStringA"
+    arr[157] = "DTWAIN_ArraySetAtFrameStringW"
+    arr[158] = "DTWAIN_ArraySetAtLong"
+    arr[159] = "DTWAIN_ArraySetAtLong64"
+    arr[160] = "DTWAIN_ArraySetAtString"
+    arr[161] = "DTWAIN_ArraySetAtStringA"
+    arr[162] = "DTWAIN_ArraySetAtStringW"
+    arr[163] = "DTWAIN_ArraySetAtWideString"
+    arr[164] = "DTWAIN_ArrayStringToFloat"
+    arr[165] = "DTWAIN_ArrayWideStringToFloat"
+    arr[166] = "DTWAIN_CallCallback"
+    arr[167] = "DTWAIN_CallCallback64"
+    arr[168] = "DTWAIN_CallDSMProc"
+    arr[169] = "DTWAIN_CheckHandles"
+    arr[170] = "DTWAIN_ClearBuffers"
+    arr[171] = "DTWAIN_ClearErrorBuffer"
+    arr[172] = "DTWAIN_ClearPDFTextElements"
+    arr[173] = "DTWAIN_ClearPage"
+    arr[174] = "DTWAIN_CloseSource"
+    arr[175] = "DTWAIN_CloseSourceUI"
+    arr[176] = "DTWAIN_ConvertDIBToBitmap"
+    arr[177] = "DTWAIN_ConvertDIBToFullBitmap"
+    arr[178] = "DTWAIN_ConvertToAPIString"
+    arr[179] = "DTWAIN_ConvertToAPIStringA"
+    arr[180] = "DTWAIN_ConvertToAPIStringEx"
+    arr[181] = "DTWAIN_ConvertToAPIStringExA"
+    arr[182] = "DTWAIN_ConvertToAPIStringExW"
+    arr[183] = "DTWAIN_ConvertToAPIStringW"
+    arr[184] = "DTWAIN_CreateAcquisitionArray"
+    arr[185] = "DTWAIN_CreatePDFTextElement"
+    arr[186] = "DTWAIN_CreatePDFTextElementCopy"
+    arr[187] = "DTWAIN_DeleteDIB"
+    arr[188] = "DTWAIN_DestroyAcquisitionArray"
+    arr[189] = "DTWAIN_DestroyPDFTextElement"
+    arr[190] = "DTWAIN_DisableAppWindow"
+    arr[191] = "DTWAIN_EnableAutoBorderDetect"
+    arr[192] = "DTWAIN_EnableAutoBright"
+    arr[193] = "DTWAIN_EnableAutoDeskew"
+    arr[194] = "DTWAIN_EnableAutoFeed"
+    arr[195] = "DTWAIN_EnableAutoRotate"
+    arr[196] = "DTWAIN_EnableAutoScan"
+    arr[197] = "DTWAIN_EnableAutomaticSenseMedium"
+    arr[198] = "DTWAIN_EnableBarcodeDetection"
+    arr[199] = "DTWAIN_EnableDuplex"
+    arr[200] = "DTWAIN_EnableFeeder"
+    arr[201] = "DTWAIN_EnableIndicator"
+    arr[202] = "DTWAIN_EnableJobFileHandling"
+    arr[203] = "DTWAIN_EnableLamp"
+    arr[204] = "DTWAIN_EnableMsgNotify"
+    arr[205] = "DTWAIN_EnablePatchcodeDetection"
+    arr[206] = "DTWAIN_EnablePeekMessageLoop"
+    arr[207] = "DTWAIN_EnablePrinter"
+    arr[208] = "DTWAIN_EnableThumbnail"
+    arr[209] = "DTWAIN_EnableTripletsNotify"
+    arr[210] = "DTWAIN_EndThread"
+    arr[211] = "DTWAIN_EndTwainSession"
+    arr[212] = "DTWAIN_EnumAlarmVolumes"
+    arr[213] = "DTWAIN_EnumAlarmVolumesEx"
+    arr[214] = "DTWAIN_EnumAlarms"
+    arr[215] = "DTWAIN_EnumAlarmsEx"
+    arr[216] = "DTWAIN_EnumAudioXferMechs"
+    arr[217] = "DTWAIN_EnumAudioXferMechsEx"
+    arr[218] = "DTWAIN_EnumAutoFeedValues"
+    arr[219] = "DTWAIN_EnumAutoFeedValuesEx"
+    arr[220] = "DTWAIN_EnumAutomaticCaptures"
+    arr[221] = "DTWAIN_EnumAutomaticCapturesEx"
+    arr[222] = "DTWAIN_EnumAutomaticSenseMedium"
+    arr[223] = "DTWAIN_EnumAutomaticSenseMediumEx"
+    arr[224] = "DTWAIN_EnumBarcodeCodes"
+    arr[225] = "DTWAIN_EnumBarcodeCodesEx"
+    arr[226] = "DTWAIN_EnumBarcodeMaxPriorities"
+    arr[227] = "DTWAIN_EnumBarcodeMaxPrioritiesEx"
+    arr[228] = "DTWAIN_EnumBarcodeMaxRetries"
+    arr[229] = "DTWAIN_EnumBarcodeMaxRetriesEx"
+    arr[230] = "DTWAIN_EnumBarcodePriorities"
+    arr[231] = "DTWAIN_EnumBarcodePrioritiesEx"
+    arr[232] = "DTWAIN_EnumBarcodeSearchModes"
+    arr[233] = "DTWAIN_EnumBarcodeSearchModesEx"
+    arr[234] = "DTWAIN_EnumBarcodeTimeOutValues"
+    arr[235] = "DTWAIN_EnumBarcodeTimeOutValuesEx"
+    arr[236] = "DTWAIN_EnumBitDepths"
+    arr[237] = "DTWAIN_EnumBitDepthsEx"
+    arr[238] = "DTWAIN_EnumBitDepthsEx2"
+    arr[239] = "DTWAIN_EnumBottomCameras"
+    arr[240] = "DTWAIN_EnumBottomCamerasEx"
+    arr[241] = "DTWAIN_EnumBrightnessValues"
+    arr[242] = "DTWAIN_EnumBrightnessValuesEx"
+    arr[243] = "DTWAIN_EnumCameras"
+    arr[244] = "DTWAIN_EnumCamerasEx"
+    arr[245] = "DTWAIN_EnumCamerasEx2"
+    arr[246] = "DTWAIN_EnumCompressionTypes"
+    arr[247] = "DTWAIN_EnumCompressionTypesEx"
+    arr[248] = "DTWAIN_EnumCompressionTypesEx2"
+    arr[249] = "DTWAIN_EnumContrastValues"
+    arr[250] = "DTWAIN_EnumContrastValuesEx"
+    arr[251] = "DTWAIN_EnumCustomCaps"
+    arr[252] = "DTWAIN_EnumCustomCapsEx"
+    arr[253] = "DTWAIN_EnumDoubleFeedDetectLengths"
+    arr[254] = "DTWAIN_EnumDoubleFeedDetectLengthsEx"
+    arr[255] = "DTWAIN_EnumDoubleFeedDetectValues"
+    arr[256] = "DTWAIN_EnumDoubleFeedDetectValuesEx"
+    arr[257] = "DTWAIN_EnumExtImageInfoTypes"
+    arr[258] = "DTWAIN_EnumExtImageInfoTypesEx"
+    arr[259] = "DTWAIN_EnumExtendedCaps"
+    arr[260] = "DTWAIN_EnumExtendedCapsEx"
+    arr[261] = "DTWAIN_EnumExtendedCapsEx2"
+    arr[262] = "DTWAIN_EnumFileTypeBitsPerPixel"
+    arr[263] = "DTWAIN_EnumFileXferFormats"
+    arr[264] = "DTWAIN_EnumFileXferFormatsEx"
+    arr[265] = "DTWAIN_EnumHalftones"
+    arr[266] = "DTWAIN_EnumHalftonesEx"
+    arr[267] = "DTWAIN_EnumHighlightValues"
+    arr[268] = "DTWAIN_EnumHighlightValuesEx"
+    arr[269] = "DTWAIN_EnumJobControls"
+    arr[270] = "DTWAIN_EnumJobControlsEx"
+    arr[271] = "DTWAIN_EnumLightPaths"
+    arr[272] = "DTWAIN_EnumLightPathsEx"
+    arr[273] = "DTWAIN_EnumLightSources"
+    arr[274] = "DTWAIN_EnumLightSourcesEx"
+    arr[275] = "DTWAIN_EnumMaxBuffers"
+    arr[276] = "DTWAIN_EnumMaxBuffersEx"
+    arr[277] = "DTWAIN_EnumNoiseFilters"
+    arr[278] = "DTWAIN_EnumNoiseFiltersEx"
+    arr[279] = "DTWAIN_EnumOCRInterfaces"
+    arr[280] = "DTWAIN_EnumOCRInterfacesEx"
+    arr[281] = "DTWAIN_EnumOCRSupportedCaps"
+    arr[282] = "DTWAIN_EnumOrientations"
+    arr[283] = "DTWAIN_EnumOrientationsEx"
+    arr[284] = "DTWAIN_EnumOverscanValues"
+    arr[285] = "DTWAIN_EnumOverscanValuesEx"
+    arr[286] = "DTWAIN_EnumPaperSizes"
+    arr[287] = "DTWAIN_EnumPaperSizesEx"
+    arr[288] = "DTWAIN_EnumPatchcodeCodes"
+    arr[289] = "DTWAIN_EnumPatchcodeCodesEx"
+    arr[290] = "DTWAIN_EnumPatchcodeMaxPriorities"
+    arr[291] = "DTWAIN_EnumPatchcodeMaxPrioritiesEx"
+    arr[292] = "DTWAIN_EnumPatchcodeMaxRetries"
+    arr[293] = "DTWAIN_EnumPatchcodeMaxRetriesEx"
+    arr[294] = "DTWAIN_EnumPatchcodePriorities"
+    arr[295] = "DTWAIN_EnumPatchcodePrioritiesEx"
+    arr[296] = "DTWAIN_EnumPatchcodeSearchModes"
+    arr[297] = "DTWAIN_EnumPatchcodeSearchModesEx"
+    arr[298] = "DTWAIN_EnumPatchcodeTimeOutValues"
+    arr[299] = "DTWAIN_EnumPatchcodeTimeOutValuesEx"
+    arr[300] = "DTWAIN_EnumPixelTypes"
+    arr[301] = "DTWAIN_EnumPixelTypesEx"
+    arr[302] = "DTWAIN_EnumPrinterStringModes"
+    arr[303] = "DTWAIN_EnumPrinterStringModesEx"
+    arr[304] = "DTWAIN_EnumResolutionValues"
+    arr[305] = "DTWAIN_EnumResolutionValuesEx"
+    arr[306] = "DTWAIN_EnumShadowValues"
+    arr[307] = "DTWAIN_EnumShadowValuesEx"
+    arr[308] = "DTWAIN_EnumSourceUnits"
+    arr[309] = "DTWAIN_EnumSourceUnitsEx"
+    arr[310] = "DTWAIN_EnumSourceValues"
+    arr[311] = "DTWAIN_EnumSourceValuesA"
+    arr[312] = "DTWAIN_EnumSourceValuesW"
+    arr[313] = "DTWAIN_EnumSources"
+    arr[314] = "DTWAIN_EnumSourcesEx"
+    arr[315] = "DTWAIN_EnumSupportedCaps"
+    arr[316] = "DTWAIN_EnumSupportedCapsEx"
+    arr[317] = "DTWAIN_EnumSupportedCapsEx2"
+    arr[318] = "DTWAIN_EnumSupportedExtImageInfo"
+    arr[319] = "DTWAIN_EnumSupportedExtImageInfoEx"
+    arr[320] = "DTWAIN_EnumSupportedFileTypes"
+    arr[321] = "DTWAIN_EnumSupportedMultiPageFileTypes"
+    arr[322] = "DTWAIN_EnumSupportedSinglePageFileTypes"
+    arr[323] = "DTWAIN_EnumThresholdValues"
+    arr[324] = "DTWAIN_EnumThresholdValuesEx"
+    arr[325] = "DTWAIN_EnumTopCameras"
+    arr[326] = "DTWAIN_EnumTopCamerasEx"
+    arr[327] = "DTWAIN_EnumTwainPrinters"
+    arr[328] = "DTWAIN_EnumTwainPrintersArray"
+    arr[329] = "DTWAIN_EnumTwainPrintersArrayEx"
+    arr[330] = "DTWAIN_EnumTwainPrintersEx"
+    arr[331] = "DTWAIN_EnumXResolutionValues"
+    arr[332] = "DTWAIN_EnumXResolutionValuesEx"
+    arr[333] = "DTWAIN_EnumYResolutionValues"
+    arr[334] = "DTWAIN_EnumYResolutionValuesEx"
+    arr[335] = "DTWAIN_ExecuteOCR"
+    arr[336] = "DTWAIN_ExecuteOCRA"
+    arr[337] = "DTWAIN_ExecuteOCRW"
+    arr[338] = "DTWAIN_FeedPage"
+    arr[339] = "DTWAIN_FlipBitmap"
+    arr[340] = "DTWAIN_FlushAcquiredPages"
+    arr[341] = "DTWAIN_FrameCreate"
+    arr[342] = "DTWAIN_FrameCreateString"
+    arr[343] = "DTWAIN_FrameCreateStringA"
+    arr[344] = "DTWAIN_FrameCreateStringW"
+    arr[345] = "DTWAIN_FrameDestroy"
+    arr[346] = "DTWAIN_FrameGetAll"
+    arr[347] = "DTWAIN_FrameGetAllString"
+    arr[348] = "DTWAIN_FrameGetAllStringA"
+    arr[349] = "DTWAIN_FrameGetAllStringW"
+    arr[350] = "DTWAIN_FrameGetValue"
+    arr[351] = "DTWAIN_FrameGetValueString"
+    arr[352] = "DTWAIN_FrameGetValueStringA"
+    arr[353] = "DTWAIN_FrameGetValueStringW"
+    arr[354] = "DTWAIN_FrameIsValid"
+    arr[355] = "DTWAIN_FrameSetAll"
+    arr[356] = "DTWAIN_FrameSetAllString"
+    arr[357] = "DTWAIN_FrameSetAllStringA"
+    arr[358] = "DTWAIN_FrameSetAllStringW"
+    arr[359] = "DTWAIN_FrameSetValue"
+    arr[360] = "DTWAIN_FrameSetValueString"
+    arr[361] = "DTWAIN_FrameSetValueStringA"
+    arr[362] = "DTWAIN_FrameSetValueStringW"
+    arr[363] = "DTWAIN_FreeExtImageInfo"
+    arr[364] = "DTWAIN_FreeMemory"
+    arr[365] = "DTWAIN_FreeMemoryEx"
+    arr[366] = "DTWAIN_GetAPIHandleStatus"
+    arr[367] = "DTWAIN_GetAcquireArea"
+    arr[368] = "DTWAIN_GetAcquireArea2"
+    arr[369] = "DTWAIN_GetAcquireArea2String"
+    arr[370] = "DTWAIN_GetAcquireArea2StringA"
+    arr[371] = "DTWAIN_GetAcquireArea2StringW"
+    arr[372] = "DTWAIN_GetAcquireAreaEx"
+    arr[373] = "DTWAIN_GetAcquireMetrics"
+    arr[374] = "DTWAIN_GetAcquireStripBuffer"
+    arr[375] = "DTWAIN_GetAcquireStripData"
+    arr[376] = "DTWAIN_GetAcquireStripSizes"
+    arr[377] = "DTWAIN_GetAcquiredImage"
+    arr[378] = "DTWAIN_GetAcquiredImageArray"
+    arr[379] = "DTWAIN_GetActiveDSMPath"
+    arr[380] = "DTWAIN_GetActiveDSMPathA"
+    arr[381] = "DTWAIN_GetActiveDSMPathW"
+    arr[382] = "DTWAIN_GetActiveDSMVersionInfo"
+    arr[383] = "DTWAIN_GetActiveDSMVersionInfoA"
+    arr[384] = "DTWAIN_GetActiveDSMVersionInfoW"
+    arr[385] = "DTWAIN_GetAlarmVolume"
+    arr[386] = "DTWAIN_GetAllSourceDibs"
+    arr[387] = "DTWAIN_GetAppInfo"
+    arr[388] = "DTWAIN_GetAppInfoA"
+    arr[389] = "DTWAIN_GetAppInfoW"
+    arr[390] = "DTWAIN_GetAuthor"
+    arr[391] = "DTWAIN_GetAuthorA"
+    arr[392] = "DTWAIN_GetAuthorW"
+    arr[393] = "DTWAIN_GetBarcodeMaxPriorities"
+    arr[394] = "DTWAIN_GetBarcodeMaxRetries"
+    arr[395] = "DTWAIN_GetBarcodePriorities"
+    arr[396] = "DTWAIN_GetBarcodeSearchMode"
+    arr[397] = "DTWAIN_GetBarcodeTimeOut"
+    arr[398] = "DTWAIN_GetBatteryMinutes"
+    arr[399] = "DTWAIN_GetBatteryPercent"
+    arr[400] = "DTWAIN_GetBitDepth"
+    arr[401] = "DTWAIN_GetBitDepthEx"
+    arr[402] = "DTWAIN_GetBlankPageAutoDetection"
+    arr[403] = "DTWAIN_GetBrightness"
+    arr[404] = "DTWAIN_GetBrightnessEx"
+    arr[405] = "DTWAIN_GetBrightnessString"
+    arr[406] = "DTWAIN_GetBrightnessStringA"
+    arr[407] = "DTWAIN_GetBrightnessStringW"
+    arr[408] = "DTWAIN_GetBufferedTransferInfo"
+    arr[409] = "DTWAIN_GetCallback"
+    arr[410] = "DTWAIN_GetCallback64"
+    arr[411] = "DTWAIN_GetCapArrayType"
+    arr[412] = "DTWAIN_GetCapContainer"
+    arr[413] = "DTWAIN_GetCapContainerEx"
+    arr[414] = "DTWAIN_GetCapContainerEx2"
+    arr[415] = "DTWAIN_GetCapDataType"
+    arr[416] = "DTWAIN_GetCapFromName"
+    arr[417] = "DTWAIN_GetCapFromNameA"
+    arr[418] = "DTWAIN_GetCapFromNameW"
+    arr[419] = "DTWAIN_GetCapOperations"
+    arr[420] = "DTWAIN_GetCapOperationsEx"
+    arr[421] = "DTWAIN_GetCapValues"
+    arr[422] = "DTWAIN_GetCapValuesEx"
+    arr[423] = "DTWAIN_GetCapValuesEx2"
+    arr[424] = "DTWAIN_GetCaption"
+    arr[425] = "DTWAIN_GetCaptionA"
+    arr[426] = "DTWAIN_GetCaptionW"
+    arr[427] = "DTWAIN_GetCompressionSize"
+    arr[428] = "DTWAIN_GetCompressionType"
+    arr[429] = "DTWAIN_GetCompressionTypeEx"
+    arr[430] = "DTWAIN_GetConditionCodeString"
+    arr[431] = "DTWAIN_GetConditionCodeStringA"
+    arr[432] = "DTWAIN_GetConditionCodeStringW"
+    arr[433] = "DTWAIN_GetConstantFromTwainName"
+    arr[434] = "DTWAIN_GetConstantFromTwainNameA"
+    arr[435] = "DTWAIN_GetConstantFromTwainNameW"
+    arr[436] = "DTWAIN_GetContrast"
+    arr[437] = "DTWAIN_GetContrastEx"
+    arr[438] = "DTWAIN_GetContrastString"
+    arr[439] = "DTWAIN_GetContrastStringA"
+    arr[440] = "DTWAIN_GetContrastStringW"
+    arr[441] = "DTWAIN_GetCountry"
+    arr[442] = "DTWAIN_GetCurrentAcquiredImage"
+    arr[443] = "DTWAIN_GetCurrentFileName"
+    arr[444] = "DTWAIN_GetCurrentFileNameA"
+    arr[445] = "DTWAIN_GetCurrentFileNameW"
+    arr[446] = "DTWAIN_GetCurrentPageNum"
+    arr[447] = "DTWAIN_GetCurrentRetryCount"
+    arr[448] = "DTWAIN_GetCurrentTwainTriplet"
+    arr[449] = "DTWAIN_GetCustomDSData"
+    arr[450] = "DTWAIN_GetDSMFullName"
+    arr[451] = "DTWAIN_GetDSMFullNameA"
+    arr[452] = "DTWAIN_GetDSMFullNameW"
+    arr[453] = "DTWAIN_GetDSMSearchOrder"
+    arr[454] = "DTWAIN_GetDSMSearchOrderEx"
+    arr[455] = "DTWAIN_GetDSMSearchOrderExA"
+    arr[456] = "DTWAIN_GetDSMSearchOrderExW"
+    arr[457] = "DTWAIN_GetDTWAINHandle"
+    arr[458] = "DTWAIN_GetDeviceEvent"
+    arr[459] = "DTWAIN_GetDeviceEventEx"
+    arr[460] = "DTWAIN_GetDeviceEventInfo"
+    arr[461] = "DTWAIN_GetDeviceNotifications"
+    arr[462] = "DTWAIN_GetDeviceTimeDate"
+    arr[463] = "DTWAIN_GetDeviceTimeDateA"
+    arr[464] = "DTWAIN_GetDeviceTimeDateW"
+    arr[465] = "DTWAIN_GetDoubleFeedDetectLength"
+    arr[466] = "DTWAIN_GetDoubleFeedDetectValues"
+    arr[467] = "DTWAIN_GetDuplexType"
+    arr[468] = "DTWAIN_GetDuplexTypeEx"
+    arr[469] = "DTWAIN_GetErrorBuffer"
+    arr[470] = "DTWAIN_GetErrorBufferThreshold"
+    arr[471] = "DTWAIN_GetErrorCallback"
+    arr[472] = "DTWAIN_GetErrorCallback64"
+    arr[473] = "DTWAIN_GetErrorString"
+    arr[474] = "DTWAIN_GetErrorStringA"
+    arr[475] = "DTWAIN_GetErrorStringW"
+    arr[476] = "DTWAIN_GetExtCapFromName"
+    arr[477] = "DTWAIN_GetExtCapFromNameA"
+    arr[478] = "DTWAIN_GetExtCapFromNameW"
+    arr[479] = "DTWAIN_GetExtImageInfo"
+    arr[480] = "DTWAIN_GetExtImageInfoData"
+    arr[481] = "DTWAIN_GetExtImageInfoDataEx"
+    arr[482] = "DTWAIN_GetExtImageInfoItem"
+    arr[483] = "DTWAIN_GetExtImageInfoItemEx"
+    arr[484] = "DTWAIN_GetExtNameFromCap"
+    arr[485] = "DTWAIN_GetExtNameFromCapA"
+    arr[486] = "DTWAIN_GetExtNameFromCapW"
+    arr[487] = "DTWAIN_GetFeederAlignment"
+    arr[488] = "DTWAIN_GetFeederFuncs"
+    arr[489] = "DTWAIN_GetFeederOrder"
+    arr[490] = "DTWAIN_GetFeederWaitTime"
+    arr[491] = "DTWAIN_GetFileCompressionType"
+    arr[492] = "DTWAIN_GetFileSavePageCount"
+    arr[493] = "DTWAIN_GetFileTypeExtensions"
+    arr[494] = "DTWAIN_GetFileTypeExtensionsA"
+    arr[495] = "DTWAIN_GetFileTypeExtensionsW"
+    arr[496] = "DTWAIN_GetFileTypeName"
+    arr[497] = "DTWAIN_GetFileTypeNameA"
+    arr[498] = "DTWAIN_GetFileTypeNameW"
+    arr[499] = "DTWAIN_GetHalftone"
+    arr[500] = "DTWAIN_GetHalftoneA"
+    arr[501] = "DTWAIN_GetHalftoneW"
+    arr[502] = "DTWAIN_GetHighlight"
+    arr[503] = "DTWAIN_GetHighlightString"
+    arr[504] = "DTWAIN_GetHighlightStringA"
+    arr[505] = "DTWAIN_GetHighlightStringW"
+    arr[506] = "DTWAIN_GetImageInfo"
+    arr[507] = "DTWAIN_GetImageInfoString"
+    arr[508] = "DTWAIN_GetImageInfoStringA"
+    arr[509] = "DTWAIN_GetImageInfoStringW"
+    arr[510] = "DTWAIN_GetJobControl"
+    arr[511] = "DTWAIN_GetJobControlEx"
+    arr[512] = "DTWAIN_GetJpegValues"
+    arr[513] = "DTWAIN_GetJpegXRValues"
+    arr[514] = "DTWAIN_GetLanguage"
+    arr[515] = "DTWAIN_GetLastError"
+    arr[516] = "DTWAIN_GetLibraryPath"
+    arr[517] = "DTWAIN_GetLibraryPathA"
+    arr[518] = "DTWAIN_GetLibraryPathW"
+    arr[519] = "DTWAIN_GetLightPath"
+    arr[520] = "DTWAIN_GetLightPathEx"
+    arr[521] = "DTWAIN_GetLightSource"
+    arr[522] = "DTWAIN_GetLightSources"
+    arr[523] = "DTWAIN_GetLightSourcesEx"
+    arr[524] = "DTWAIN_GetLoggerCallback"
+    arr[525] = "DTWAIN_GetLoggerCallbackA"
+    arr[526] = "DTWAIN_GetLoggerCallbackW"
+    arr[527] = "DTWAIN_GetManualDuplexCount"
+    arr[528] = "DTWAIN_GetMaxAcquisitions"
+    arr[529] = "DTWAIN_GetMaxBuffers"
+    arr[530] = "DTWAIN_GetMaxPagesToAcquire"
+    arr[531] = "DTWAIN_GetMaxRetryAttempts"
+    arr[532] = "DTWAIN_GetNameFromCap"
+    arr[533] = "DTWAIN_GetNameFromCapA"
+    arr[534] = "DTWAIN_GetNameFromCapW"
+    arr[535] = "DTWAIN_GetNoiseFilter"
+    arr[536] = "DTWAIN_GetNumAcquiredImages"
+    arr[537] = "DTWAIN_GetNumAcquisitions"
+    arr[538] = "DTWAIN_GetOCRCapValues"
+    arr[539] = "DTWAIN_GetOCRErrorString"
+    arr[540] = "DTWAIN_GetOCRErrorStringA"
+    arr[541] = "DTWAIN_GetOCRErrorStringW"
+    arr[542] = "DTWAIN_GetOCRLastError"
+    arr[543] = "DTWAIN_GetOCRMajorMinorVersion"
+    arr[544] = "DTWAIN_GetOCRManufacturer"
+    arr[545] = "DTWAIN_GetOCRManufacturerA"
+    arr[546] = "DTWAIN_GetOCRManufacturerW"
+    arr[547] = "DTWAIN_GetOCRProductFamily"
+    arr[548] = "DTWAIN_GetOCRProductFamilyA"
+    arr[549] = "DTWAIN_GetOCRProductFamilyW"
+    arr[550] = "DTWAIN_GetOCRProductName"
+    arr[551] = "DTWAIN_GetOCRProductNameA"
+    arr[552] = "DTWAIN_GetOCRProductNameW"
+    arr[553] = "DTWAIN_GetOCRText"
+    arr[554] = "DTWAIN_GetOCRTextA"
+    arr[555] = "DTWAIN_GetOCRTextInfoFloat"
+    arr[556] = "DTWAIN_GetOCRTextInfoFloatEx"
+    arr[557] = "DTWAIN_GetOCRTextInfoHandle"
+    arr[558] = "DTWAIN_GetOCRTextInfoLong"
+    arr[559] = "DTWAIN_GetOCRTextInfoLongEx"
+    arr[560] = "DTWAIN_GetOCRTextW"
+    arr[561] = "DTWAIN_GetOCRVersionInfo"
+    arr[562] = "DTWAIN_GetOCRVersionInfoA"
+    arr[563] = "DTWAIN_GetOCRVersionInfoW"
+    arr[564] = "DTWAIN_GetOrientation"
+    arr[565] = "DTWAIN_GetOrientationEx"
+    arr[566] = "DTWAIN_GetOverscan"
+    arr[567] = "DTWAIN_GetPDFTextElementFloat"
+    arr[568] = "DTWAIN_GetPDFTextElementLong"
+    arr[569] = "DTWAIN_GetPDFTextElementString"
+    arr[570] = "DTWAIN_GetPDFTextElementStringA"
+    arr[571] = "DTWAIN_GetPDFTextElementStringW"
+    arr[572] = "DTWAIN_GetPDFType1FontName"
+    arr[573] = "DTWAIN_GetPDFType1FontNameA"
+    arr[574] = "DTWAIN_GetPDFType1FontNameW"
+    arr[575] = "DTWAIN_GetPaperSize"
+    arr[576] = "DTWAIN_GetPaperSizeName"
+    arr[577] = "DTWAIN_GetPaperSizeNameA"
+    arr[578] = "DTWAIN_GetPaperSizeNameW"
+    arr[579] = "DTWAIN_GetPatchcodeMaxPriorities"
+    arr[580] = "DTWAIN_GetPatchcodeMaxRetries"
+    arr[581] = "DTWAIN_GetPatchcodePriorities"
+    arr[582] = "DTWAIN_GetPatchcodeSearchMode"
+    arr[583] = "DTWAIN_GetPatchcodeTimeOut"
+    arr[584] = "DTWAIN_GetPixelFlavor"
+    arr[585] = "DTWAIN_GetPixelType"
+    arr[586] = "DTWAIN_GetPrinter"
+    arr[587] = "DTWAIN_GetPrinterEx"
+    arr[588] = "DTWAIN_GetPrinterStartNumber"
+    arr[589] = "DTWAIN_GetPrinterStartNumberEx"
+    arr[590] = "DTWAIN_GetPrinterStringMode"
+    arr[591] = "DTWAIN_GetPrinterStringModeEx"
+    arr[592] = "DTWAIN_GetPrinterStrings"
+    arr[593] = "DTWAIN_GetPrinterStringsEx"
+    arr[594] = "DTWAIN_GetPrinterSuffixString"
+    arr[595] = "DTWAIN_GetPrinterSuffixStringA"
+    arr[596] = "DTWAIN_GetPrinterSuffixStringW"
+    arr[597] = "DTWAIN_GetRegisteredMsg"
+    arr[598] = "DTWAIN_GetResolution"
+    arr[599] = "DTWAIN_GetResolutionEx"
+    arr[600] = "DTWAIN_GetResolutionString"
+    arr[601] = "DTWAIN_GetResolutionStringA"
+    arr[602] = "DTWAIN_GetResolutionStringW"
+    arr[603] = "DTWAIN_GetResourceString"
+    arr[604] = "DTWAIN_GetResourceStringA"
+    arr[605] = "DTWAIN_GetResourceStringW"
+    arr[606] = "DTWAIN_GetRotation"
+    arr[607] = "DTWAIN_GetRotationEx"
+    arr[608] = "DTWAIN_GetRotationString"
+    arr[609] = "DTWAIN_GetRotationStringA"
+    arr[610] = "DTWAIN_GetRotationStringW"
+    arr[611] = "DTWAIN_GetSaveFileName"
+    arr[612] = "DTWAIN_GetSaveFileNameA"
+    arr[613] = "DTWAIN_GetSaveFileNameW"
+    arr[614] = "DTWAIN_GetSessionDetails"
+    arr[615] = "DTWAIN_GetSessionDetailsA"
+    arr[616] = "DTWAIN_GetSessionDetailsW"
+    arr[617] = "DTWAIN_GetShadow"
+    arr[618] = "DTWAIN_GetShadowString"
+    arr[619] = "DTWAIN_GetShadowStringA"
+    arr[620] = "DTWAIN_GetShadowStringW"
+    arr[621] = "DTWAIN_GetShortVersionString"
+    arr[622] = "DTWAIN_GetShortVersionStringA"
+    arr[623] = "DTWAIN_GetShortVersionStringW"
+    arr[624] = "DTWAIN_GetSourceAcquisitions"
+    arr[625] = "DTWAIN_GetSourceDetails"
+    arr[626] = "DTWAIN_GetSourceDetailsA"
+    arr[627] = "DTWAIN_GetSourceDetailsW"
+    arr[628] = "DTWAIN_GetSourceID"
+    arr[629] = "DTWAIN_GetSourceIDEx"
+    arr[630] = "DTWAIN_GetSourceManufacturer"
+    arr[631] = "DTWAIN_GetSourceManufacturerA"
+    arr[632] = "DTWAIN_GetSourceManufacturerW"
+    arr[633] = "DTWAIN_GetSourceProductFamily"
+    arr[634] = "DTWAIN_GetSourceProductFamilyA"
+    arr[635] = "DTWAIN_GetSourceProductFamilyW"
+    arr[636] = "DTWAIN_GetSourceProductName"
+    arr[637] = "DTWAIN_GetSourceProductNameA"
+    arr[638] = "DTWAIN_GetSourceProductNameW"
+    arr[639] = "DTWAIN_GetSourceUnit"
+    arr[640] = "DTWAIN_GetSourceUnitEx"
+    arr[641] = "DTWAIN_GetSourceVersionInfo"
+    arr[642] = "DTWAIN_GetSourceVersionInfoA"
+    arr[643] = "DTWAIN_GetSourceVersionInfoW"
+    arr[644] = "DTWAIN_GetSourceVersionNumber"
+    arr[645] = "DTWAIN_GetStaticLibVersion"
+    arr[646] = "DTWAIN_GetTempFileDirectory"
+    arr[647] = "DTWAIN_GetTempFileDirectoryA"
+    arr[648] = "DTWAIN_GetTempFileDirectoryW"
+    arr[649] = "DTWAIN_GetThreshold"
+    arr[650] = "DTWAIN_GetThresholdString"
+    arr[651] = "DTWAIN_GetThresholdStringA"
+    arr[652] = "DTWAIN_GetThresholdStringW"
+    arr[653] = "DTWAIN_GetTimeDate"
+    arr[654] = "DTWAIN_GetTimeDateA"
+    arr[655] = "DTWAIN_GetTimeDateW"
+    arr[656] = "DTWAIN_GetTwainAppID"
+    arr[657] = "DTWAIN_GetTwainAppIDEx"
+    arr[658] = "DTWAIN_GetTwainAvailability"
+    arr[659] = "DTWAIN_GetTwainAvailabilityEx"
+    arr[660] = "DTWAIN_GetTwainAvailabilityExA"
+    arr[661] = "DTWAIN_GetTwainAvailabilityExW"
+    arr[662] = "DTWAIN_GetTwainHwnd"
+    arr[663] = "DTWAIN_GetTwainMode"
+    arr[664] = "DTWAIN_GetTwainNameFromConstant"
+    arr[665] = "DTWAIN_GetTwainNameFromConstantA"
+    arr[666] = "DTWAIN_GetTwainNameFromConstantEx"
+    arr[667] = "DTWAIN_GetTwainNameFromConstantExA"
+    arr[668] = "DTWAIN_GetTwainNameFromConstantExW"
+    arr[669] = "DTWAIN_GetTwainNameFromConstantW"
+    arr[670] = "DTWAIN_GetTwainTimeout"
+    arr[671] = "DTWAIN_GetVersion"
+    arr[672] = "DTWAIN_GetVersionCopyright"
+    arr[673] = "DTWAIN_GetVersionCopyrightA"
+    arr[674] = "DTWAIN_GetVersionCopyrightW"
+    arr[675] = "DTWAIN_GetVersionEx"
+    arr[676] = "DTWAIN_GetVersionInfo"
+    arr[677] = "DTWAIN_GetVersionInfoA"
+    arr[678] = "DTWAIN_GetVersionInfoW"
+    arr[679] = "DTWAIN_GetVersionString"
+    arr[680] = "DTWAIN_GetVersionStringA"
+    arr[681] = "DTWAIN_GetVersionStringW"
+    arr[682] = "DTWAIN_GetWindowsVersionInfo"
+    arr[683] = "DTWAIN_GetWindowsVersionInfoA"
+    arr[684] = "DTWAIN_GetWindowsVersionInfoW"
+    arr[685] = "DTWAIN_GetXResolution"
+    arr[686] = "DTWAIN_GetXResolutionString"
+    arr[687] = "DTWAIN_GetXResolutionStringA"
+    arr[688] = "DTWAIN_GetXResolutionStringW"
+    arr[689] = "DTWAIN_GetYResolution"
+    arr[690] = "DTWAIN_GetYResolutionString"
+    arr[691] = "DTWAIN_GetYResolutionStringA"
+    arr[692] = "DTWAIN_GetYResolutionStringW"
+    arr[693] = "DTWAIN_InitExtImageInfo"
+    arr[694] = "DTWAIN_InitImageFileAppend"
+    arr[695] = "DTWAIN_InitImageFileAppendA"
+    arr[696] = "DTWAIN_InitImageFileAppendW"
+    arr[697] = "DTWAIN_InitOCRInterface"
+    arr[698] = "DTWAIN_IsAcquiring"
+    arr[699] = "DTWAIN_IsAudioXferSupported"
+    arr[700] = "DTWAIN_IsAutoBorderDetectEnabled"
+    arr[701] = "DTWAIN_IsAutoBorderDetectSupported"
+    arr[702] = "DTWAIN_IsAutoBrightEnabled"
+    arr[703] = "DTWAIN_IsAutoBrightSupported"
+    arr[704] = "DTWAIN_IsAutoDeskewEnabled"
+    arr[705] = "DTWAIN_IsAutoDeskewSupported"
+    arr[706] = "DTWAIN_IsAutoFeedEnabled"
+    arr[707] = "DTWAIN_IsAutoFeedSupported"
+    arr[708] = "DTWAIN_IsAutoRotateEnabled"
+    arr[709] = "DTWAIN_IsAutoRotateSupported"
+    arr[710] = "DTWAIN_IsAutoScanEnabled"
+    arr[711] = "DTWAIN_IsAutomaticSenseMediumEnabled"
+    arr[712] = "DTWAIN_IsAutomaticSenseMediumSupported"
+    arr[713] = "DTWAIN_IsBarcodeCapsSupported"
+    arr[714] = "DTWAIN_IsBarcodeDetectionEnabled"
+    arr[715] = "DTWAIN_IsBarcodeSupported"
+    arr[716] = "DTWAIN_IsBlankPageDetectionOn"
+    arr[717] = "DTWAIN_IsBufferedTileModeOn"
+    arr[718] = "DTWAIN_IsBufferedTileModeSupported"
+    arr[719] = "DTWAIN_IsCapSupported"
+    arr[720] = "DTWAIN_IsCompressionSupported"
+    arr[721] = "DTWAIN_IsCustomDSDataSupported"
+    arr[722] = "DTWAIN_IsDIBBlank"
+    arr[723] = "DTWAIN_IsDIBBlankString"
+    arr[724] = "DTWAIN_IsDIBBlankStringA"
+    arr[725] = "DTWAIN_IsDIBBlankStringW"
+    arr[726] = "DTWAIN_IsDeviceEventSupported"
+    arr[727] = "DTWAIN_IsDeviceOnLine"
+    arr[728] = "DTWAIN_IsDoubleFeedDetectLengthSupported"
+    arr[729] = "DTWAIN_IsDoubleFeedDetectSupported"
+    arr[730] = "DTWAIN_IsDuplexEnabled"
+    arr[731] = "DTWAIN_IsDuplexSupported"
+    arr[732] = "DTWAIN_IsExtImageInfoSupported"
+    arr[733] = "DTWAIN_IsFeederEnabled"
+    arr[734] = "DTWAIN_IsFeederLoaded"
+    arr[735] = "DTWAIN_IsFeederSensitive"
+    arr[736] = "DTWAIN_IsFeederSupported"
+    arr[737] = "DTWAIN_IsFileSystemSupported"
+    arr[738] = "DTWAIN_IsFileXferSupported"
+    arr[739] = "DTWAIN_IsIAFieldALastPageSupported"
+    arr[740] = "DTWAIN_IsIAFieldALevelSupported"
+    arr[741] = "DTWAIN_IsIAFieldAPrintFormatSupported"
+    arr[742] = "DTWAIN_IsIAFieldAValueSupported"
+    arr[743] = "DTWAIN_IsIAFieldBLastPageSupported"
+    arr[744] = "DTWAIN_IsIAFieldBLevelSupported"
+    arr[745] = "DTWAIN_IsIAFieldBPrintFormatSupported"
+    arr[746] = "DTWAIN_IsIAFieldBValueSupported"
+    arr[747] = "DTWAIN_IsIAFieldCLastPageSupported"
+    arr[748] = "DTWAIN_IsIAFieldCLevelSupported"
+    arr[749] = "DTWAIN_IsIAFieldCPrintFormatSupported"
+    arr[750] = "DTWAIN_IsIAFieldCValueSupported"
+    arr[751] = "DTWAIN_IsIAFieldDLastPageSupported"
+    arr[752] = "DTWAIN_IsIAFieldDLevelSupported"
+    arr[753] = "DTWAIN_IsIAFieldDPrintFormatSupported"
+    arr[754] = "DTWAIN_IsIAFieldDValueSupported"
+    arr[755] = "DTWAIN_IsIAFieldELastPageSupported"
+    arr[756] = "DTWAIN_IsIAFieldELevelSupported"
+    arr[757] = "DTWAIN_IsIAFieldEPrintFormatSupported"
+    arr[758] = "DTWAIN_IsIAFieldEValueSupported"
+    arr[759] = "DTWAIN_IsImageAddressingSupported"
+    arr[760] = "DTWAIN_IsIndicatorEnabled"
+    arr[761] = "DTWAIN_IsIndicatorSupported"
+    arr[762] = "DTWAIN_IsInitialized"
+    arr[763] = "DTWAIN_IsJobControlSupported"
+    arr[764] = "DTWAIN_IsLampEnabled"
+    arr[765] = "DTWAIN_IsLampSupported"
+    arr[766] = "DTWAIN_IsLightPathSupported"
+    arr[767] = "DTWAIN_IsLightSourceSupported"
+    arr[768] = "DTWAIN_IsMaxBuffersSupported"
+    arr[769] = "DTWAIN_IsMemFileXferSupported"
+    arr[770] = "DTWAIN_IsMsgNotifyEnabled"
+    arr[771] = "DTWAIN_IsNotifyTripletsEnabled"
+    arr[772] = "DTWAIN_IsOCREngineActivated"
+    arr[773] = "DTWAIN_IsOpenSourcesOnSelect"
+    arr[774] = "DTWAIN_IsOrientationSupported"
+    arr[775] = "DTWAIN_IsOverscanSupported"
+    arr[776] = "DTWAIN_IsPaperDetectable"
+    arr[777] = "DTWAIN_IsPaperSizeSupported"
+    arr[778] = "DTWAIN_IsPatchcodeCapsSupported"
+    arr[779] = "DTWAIN_IsPatchcodeDetectionEnabled"
+    arr[780] = "DTWAIN_IsPatchcodeSupported"
+    arr[781] = "DTWAIN_IsPeekMessageLoopEnabled"
+    arr[782] = "DTWAIN_IsPixelTypeSupported"
+    arr[783] = "DTWAIN_IsPrinterEnabled"
+    arr[784] = "DTWAIN_IsPrinterSupported"
+    arr[785] = "DTWAIN_IsRotationSupported"
+    arr[786] = "DTWAIN_IsSessionEnabled"
+    arr[787] = "DTWAIN_IsSkipImageInfoError"
+    arr[788] = "DTWAIN_IsSourceAcquiring"
+    arr[789] = "DTWAIN_IsSourceAcquiringEx"
+    arr[790] = "DTWAIN_IsSourceInUIOnlyMode"
+    arr[791] = "DTWAIN_IsSourceOpen"
+    arr[792] = "DTWAIN_IsSourceSelected"
+    arr[793] = "DTWAIN_IsSourceValid"
+    arr[794] = "DTWAIN_IsThumbnailEnabled"
+    arr[795] = "DTWAIN_IsThumbnailSupported"
+    arr[796] = "DTWAIN_IsTwainAvailable"
+    arr[797] = "DTWAIN_IsTwainAvailableEx"
+    arr[798] = "DTWAIN_IsTwainAvailableExA"
+    arr[799] = "DTWAIN_IsTwainAvailableExW"
+    arr[800] = "DTWAIN_IsUIControllable"
+    arr[801] = "DTWAIN_IsUIEnabled"
+    arr[802] = "DTWAIN_IsUIOnlySupported"
+    arr[803] = "DTWAIN_LoadCustomStringResources"
+    arr[804] = "DTWAIN_LoadCustomStringResourcesA"
+    arr[805] = "DTWAIN_LoadCustomStringResourcesEx"
+    arr[806] = "DTWAIN_LoadCustomStringResourcesExA"
+    arr[807] = "DTWAIN_LoadCustomStringResourcesExW"
+    arr[808] = "DTWAIN_LoadCustomStringResourcesW"
+    arr[809] = "DTWAIN_LoadLanguageResource"
+    arr[810] = "DTWAIN_LockMemory"
+    arr[811] = "DTWAIN_LockMemoryEx"
+    arr[812] = "DTWAIN_LogMessage"
+    arr[813] = "DTWAIN_LogMessageA"
+    arr[814] = "DTWAIN_LogMessageW"
+    arr[815] = "DTWAIN_MakeRGB"
+    arr[816] = "DTWAIN_OpenSource"
+    arr[817] = "DTWAIN_OpenSourcesOnSelect"
+    arr[818] = "DTWAIN_RangeCreate"
+    arr[819] = "DTWAIN_RangeCreateFromCap"
+    arr[820] = "DTWAIN_RangeDestroy"
+    arr[821] = "DTWAIN_RangeExpand"
+    arr[822] = "DTWAIN_RangeExpandEx"
+    arr[823] = "DTWAIN_RangeGetAll"
+    arr[824] = "DTWAIN_RangeGetAllFloat"
+    arr[825] = "DTWAIN_RangeGetAllFloatString"
+    arr[826] = "DTWAIN_RangeGetAllFloatStringA"
+    arr[827] = "DTWAIN_RangeGetAllFloatStringW"
+    arr[828] = "DTWAIN_RangeGetAllLong"
+    arr[829] = "DTWAIN_RangeGetCount"
+    arr[830] = "DTWAIN_RangeGetExpValue"
+    arr[831] = "DTWAIN_RangeGetExpValueFloat"
+    arr[832] = "DTWAIN_RangeGetExpValueFloatString"
+    arr[833] = "DTWAIN_RangeGetExpValueFloatStringA"
+    arr[834] = "DTWAIN_RangeGetExpValueFloatStringW"
+    arr[835] = "DTWAIN_RangeGetExpValueLong"
+    arr[836] = "DTWAIN_RangeGetNearestValue"
+    arr[837] = "DTWAIN_RangeGetNearestValueFloat"
+    arr[838] = "DTWAIN_RangeGetNearestValueFloatString"
+    arr[839] = "DTWAIN_RangeGetNearestValueFloatStringA"
+    arr[840] = "DTWAIN_RangeGetNearestValueFloatStringW"
+    arr[841] = "DTWAIN_RangeGetNearestValueLong"
+    arr[842] = "DTWAIN_RangeGetPos"
+    arr[843] = "DTWAIN_RangeGetPosFloat"
+    arr[844] = "DTWAIN_RangeGetPosFloatString"
+    arr[845] = "DTWAIN_RangeGetPosFloatStringA"
+    arr[846] = "DTWAIN_RangeGetPosFloatStringW"
+    arr[847] = "DTWAIN_RangeGetPosLong"
+    arr[848] = "DTWAIN_RangeGetValue"
+    arr[849] = "DTWAIN_RangeGetValueFloat"
+    arr[850] = "DTWAIN_RangeGetValueFloatString"
+    arr[851] = "DTWAIN_RangeGetValueFloatStringA"
+    arr[852] = "DTWAIN_RangeGetValueFloatStringW"
+    arr[853] = "DTWAIN_RangeGetValueLong"
+    arr[854] = "DTWAIN_RangeIsValid"
+    arr[855] = "DTWAIN_RangeSetAll"
+    arr[856] = "DTWAIN_RangeSetAllFloat"
+    arr[857] = "DTWAIN_RangeSetAllFloatString"
+    arr[858] = "DTWAIN_RangeSetAllFloatStringA"
+    arr[859] = "DTWAIN_RangeSetAllFloatStringW"
+    arr[860] = "DTWAIN_RangeSetAllLong"
+    arr[861] = "DTWAIN_RangeSetValue"
+    arr[862] = "DTWAIN_RangeSetValueFloat"
+    arr[863] = "DTWAIN_RangeSetValueFloatString"
+    arr[864] = "DTWAIN_RangeSetValueFloatStringA"
+    arr[865] = "DTWAIN_RangeSetValueFloatStringW"
+    arr[866] = "DTWAIN_RangeSetValueLong"
+    arr[867] = "DTWAIN_RemovePDFTextElement"
+    arr[868] = "DTWAIN_ResetPDFTextElement"
+    arr[869] = "DTWAIN_RewindPage"
+    arr[870] = "DTWAIN_RotateDIB"
+    arr[871] = "DTWAIN_RotateDIBString"
+    arr[872] = "DTWAIN_RotateDIBStringA"
+    arr[873] = "DTWAIN_RotateDIBStringW"
+    arr[874] = "DTWAIN_SelectDefaultOCREngine"
+    arr[875] = "DTWAIN_SelectDefaultSource"
+    arr[876] = "DTWAIN_SelectDefaultSourceWithOpen"
+    arr[877] = "DTWAIN_SelectOCREngine"
+    arr[878] = "DTWAIN_SelectOCREngine2"
+    arr[879] = "DTWAIN_SelectOCREngine2A"
+    arr[880] = "DTWAIN_SelectOCREngine2Ex"
+    arr[881] = "DTWAIN_SelectOCREngine2ExA"
+    arr[882] = "DTWAIN_SelectOCREngine2ExW"
+    arr[883] = "DTWAIN_SelectOCREngine2W"
+    arr[884] = "DTWAIN_SelectOCREngineByName"
+    arr[885] = "DTWAIN_SelectOCREngineByNameA"
+    arr[886] = "DTWAIN_SelectOCREngineByNameW"
+    arr[887] = "DTWAIN_SelectSource"
+    arr[888] = "DTWAIN_SelectSource2"
+    arr[889] = "DTWAIN_SelectSource2A"
+    arr[890] = "DTWAIN_SelectSource2Ex"
+    arr[891] = "DTWAIN_SelectSource2ExA"
+    arr[892] = "DTWAIN_SelectSource2ExW"
+    arr[893] = "DTWAIN_SelectSource2W"
+    arr[894] = "DTWAIN_SelectSourceByName"
+    arr[895] = "DTWAIN_SelectSourceByNameA"
+    arr[896] = "DTWAIN_SelectSourceByNameW"
+    arr[897] = "DTWAIN_SelectSourceByNameWithOpen"
+    arr[898] = "DTWAIN_SelectSourceByNameWithOpenA"
+    arr[899] = "DTWAIN_SelectSourceByNameWithOpenW"
+    arr[900] = "DTWAIN_SelectSourceWithOpen"
+    arr[901] = "DTWAIN_SetAcquireArea"
+    arr[902] = "DTWAIN_SetAcquireArea2"
+    arr[903] = "DTWAIN_SetAcquireArea2String"
+    arr[904] = "DTWAIN_SetAcquireArea2StringA"
+    arr[905] = "DTWAIN_SetAcquireArea2StringW"
+    arr[906] = "DTWAIN_SetAcquireImageNegative"
+    arr[907] = "DTWAIN_SetAcquireImageScale"
+    arr[908] = "DTWAIN_SetAcquireImageScaleString"
+    arr[909] = "DTWAIN_SetAcquireImageScaleStringA"
+    arr[910] = "DTWAIN_SetAcquireImageScaleStringW"
+    arr[911] = "DTWAIN_SetAcquireStripBuffer"
+    arr[912] = "DTWAIN_SetAcquireStripSize"
+    arr[913] = "DTWAIN_SetAlarmVolume"
+    arr[914] = "DTWAIN_SetAlarms"
+    arr[915] = "DTWAIN_SetAllCapsToDefault"
+    arr[916] = "DTWAIN_SetAppInfo"
+    arr[917] = "DTWAIN_SetAppInfoA"
+    arr[918] = "DTWAIN_SetAppInfoW"
+    arr[919] = "DTWAIN_SetAuthor"
+    arr[920] = "DTWAIN_SetAuthorA"
+    arr[921] = "DTWAIN_SetAuthorW"
+    arr[922] = "DTWAIN_SetAvailablePrinters"
+    arr[923] = "DTWAIN_SetAvailablePrintersArray"
+    arr[924] = "DTWAIN_SetBarcodeMaxPriorities"
+    arr[925] = "DTWAIN_SetBarcodeMaxRetries"
+    arr[926] = "DTWAIN_SetBarcodePriorities"
+    arr[927] = "DTWAIN_SetBarcodeSearchMode"
+    arr[928] = "DTWAIN_SetBarcodeTimeOut"
+    arr[929] = "DTWAIN_SetBitDepth"
+    arr[930] = "DTWAIN_SetBlankPageDetection"
+    arr[931] = "DTWAIN_SetBlankPageDetectionEx"
+    arr[932] = "DTWAIN_SetBlankPageDetectionExString"
+    arr[933] = "DTWAIN_SetBlankPageDetectionExStringA"
+    arr[934] = "DTWAIN_SetBlankPageDetectionExStringW"
+    arr[935] = "DTWAIN_SetBlankPageDetectionString"
+    arr[936] = "DTWAIN_SetBlankPageDetectionStringA"
+    arr[937] = "DTWAIN_SetBlankPageDetectionStringW"
+    arr[938] = "DTWAIN_SetBrightness"
+    arr[939] = "DTWAIN_SetBrightnessString"
+    arr[940] = "DTWAIN_SetBrightnessStringA"
+    arr[941] = "DTWAIN_SetBrightnessStringW"
+    arr[942] = "DTWAIN_SetBufferedTileMode"
+    arr[943] = "DTWAIN_SetCallback"
+    arr[944] = "DTWAIN_SetCallback64"
+    arr[945] = "DTWAIN_SetCamera"
+    arr[946] = "DTWAIN_SetCameraA"
+    arr[947] = "DTWAIN_SetCameraW"
+    arr[948] = "DTWAIN_SetCapValues"
+    arr[949] = "DTWAIN_SetCapValuesEx"
+    arr[950] = "DTWAIN_SetCapValuesEx2"
+    arr[951] = "DTWAIN_SetCaption"
+    arr[952] = "DTWAIN_SetCaptionA"
+    arr[953] = "DTWAIN_SetCaptionW"
+    arr[954] = "DTWAIN_SetCompressionType"
+    arr[955] = "DTWAIN_SetContrast"
+    arr[956] = "DTWAIN_SetContrastString"
+    arr[957] = "DTWAIN_SetContrastStringA"
+    arr[958] = "DTWAIN_SetContrastStringW"
+    arr[959] = "DTWAIN_SetCountry"
+    arr[960] = "DTWAIN_SetCurrentRetryCount"
+    arr[961] = "DTWAIN_SetCustomDSData"
+    arr[962] = "DTWAIN_SetDSMSearchOrder"
+    arr[963] = "DTWAIN_SetDSMSearchOrderEx"
+    arr[964] = "DTWAIN_SetDSMSearchOrderExA"
+    arr[965] = "DTWAIN_SetDSMSearchOrderExW"
+    arr[966] = "DTWAIN_SetDefaultSource"
+    arr[967] = "DTWAIN_SetDeviceNotifications"
+    arr[968] = "DTWAIN_SetDeviceTimeDate"
+    arr[969] = "DTWAIN_SetDeviceTimeDateA"
+    arr[970] = "DTWAIN_SetDeviceTimeDateW"
+    arr[971] = "DTWAIN_SetDoubleFeedDetectLength"
+    arr[972] = "DTWAIN_SetDoubleFeedDetectLengthString"
+    arr[973] = "DTWAIN_SetDoubleFeedDetectLengthStringA"
+    arr[974] = "DTWAIN_SetDoubleFeedDetectLengthStringW"
+    arr[975] = "DTWAIN_SetDoubleFeedDetectValues"
+    arr[976] = "DTWAIN_SetDoublePageCountOnDuplex"
+    arr[977] = "DTWAIN_SetEOJDetectValue"
+    arr[978] = "DTWAIN_SetErrorBufferThreshold"
+    arr[979] = "DTWAIN_SetErrorCallback"
+    arr[980] = "DTWAIN_SetErrorCallback64"
+    arr[981] = "DTWAIN_SetFeederAlignment"
+    arr[982] = "DTWAIN_SetFeederOrder"
+    arr[983] = "DTWAIN_SetFeederWaitTime"
+    arr[984] = "DTWAIN_SetFileAutoIncrement"
+    arr[985] = "DTWAIN_SetFileCompressionType"
+    arr[986] = "DTWAIN_SetFileSavePos"
+    arr[987] = "DTWAIN_SetFileSavePosA"
+    arr[988] = "DTWAIN_SetFileSavePosW"
+    arr[989] = "DTWAIN_SetFileXferFormat"
+    arr[990] = "DTWAIN_SetHalftone"
+    arr[991] = "DTWAIN_SetHalftoneA"
+    arr[992] = "DTWAIN_SetHalftoneW"
+    arr[993] = "DTWAIN_SetHighlight"
+    arr[994] = "DTWAIN_SetHighlightString"
+    arr[995] = "DTWAIN_SetHighlightStringA"
+    arr[996] = "DTWAIN_SetHighlightStringW"
+    arr[997] = "DTWAIN_SetJobControl"
+    arr[998] = "DTWAIN_SetJpegValues"
+    arr[999] = "DTWAIN_SetJpegXRValues"
+    arr[1000] = "DTWAIN_SetLanguage"
+    arr[1001] = "DTWAIN_SetLastError"
+    arr[1002] = "DTWAIN_SetLightPath"
+    arr[1003] = "DTWAIN_SetLightPathEx"
+    arr[1004] = "DTWAIN_SetLightSource"
+    arr[1005] = "DTWAIN_SetLightSources"
+    arr[1006] = "DTWAIN_SetLoggerCallback"
+    arr[1007] = "DTWAIN_SetLoggerCallbackA"
+    arr[1008] = "DTWAIN_SetLoggerCallbackW"
+    arr[1009] = "DTWAIN_SetManualDuplexMode"
+    arr[1010] = "DTWAIN_SetMaxAcquisitions"
+    arr[1011] = "DTWAIN_SetMaxBuffers"
+    arr[1012] = "DTWAIN_SetMaxRetryAttempts"
+    arr[1013] = "DTWAIN_SetMultipageScanMode"
+    arr[1014] = "DTWAIN_SetNoiseFilter"
+    arr[1015] = "DTWAIN_SetOCRCapValues"
+    arr[1016] = "DTWAIN_SetOrientation"
+    arr[1017] = "DTWAIN_SetOverscan"
+    arr[1018] = "DTWAIN_SetPDFAESEncryption"
+    arr[1019] = "DTWAIN_SetPDFASCIICompression"
+    arr[1020] = "DTWAIN_SetPDFAuthor"
+    arr[1021] = "DTWAIN_SetPDFAuthorA"
+    arr[1022] = "DTWAIN_SetPDFAuthorW"
+    arr[1023] = "DTWAIN_SetPDFCompression"
+    arr[1024] = "DTWAIN_SetPDFCreator"
+    arr[1025] = "DTWAIN_SetPDFCreatorA"
+    arr[1026] = "DTWAIN_SetPDFCreatorW"
+    arr[1027] = "DTWAIN_SetPDFEncryption"
+    arr[1028] = "DTWAIN_SetPDFEncryptionA"
+    arr[1029] = "DTWAIN_SetPDFEncryptionW"
+    arr[1030] = "DTWAIN_SetPDFJpegQuality"
+    arr[1031] = "DTWAIN_SetPDFKeywords"
+    arr[1032] = "DTWAIN_SetPDFKeywordsA"
+    arr[1033] = "DTWAIN_SetPDFKeywordsW"
+    arr[1034] = "DTWAIN_SetPDFOCRConversion"
+    arr[1035] = "DTWAIN_SetPDFOCRMode"
+    arr[1036] = "DTWAIN_SetPDFOrientation"
+    arr[1037] = "DTWAIN_SetPDFPageScale"
+    arr[1038] = "DTWAIN_SetPDFPageScaleString"
+    arr[1039] = "DTWAIN_SetPDFPageScaleStringA"
+    arr[1040] = "DTWAIN_SetPDFPageScaleStringW"
+    arr[1041] = "DTWAIN_SetPDFPageSize"
+    arr[1042] = "DTWAIN_SetPDFPageSizeString"
+    arr[1043] = "DTWAIN_SetPDFPageSizeStringA"
+    arr[1044] = "DTWAIN_SetPDFPageSizeStringW"
+    arr[1045] = "DTWAIN_SetPDFPolarity"
+    arr[1046] = "DTWAIN_SetPDFProducer"
+    arr[1047] = "DTWAIN_SetPDFProducerA"
+    arr[1048] = "DTWAIN_SetPDFProducerW"
+    arr[1049] = "DTWAIN_SetPDFSubject"
+    arr[1050] = "DTWAIN_SetPDFSubjectA"
+    arr[1051] = "DTWAIN_SetPDFSubjectW"
+    arr[1052] = "DTWAIN_SetPDFTextElementFloat"
+    arr[1053] = "DTWAIN_SetPDFTextElementFloatString"
+    arr[1054] = "DTWAIN_SetPDFTextElementFloatStringA"
+    arr[1055] = "DTWAIN_SetPDFTextElementFloatStringW"
+    arr[1056] = "DTWAIN_SetPDFTextElementLong"
+    arr[1057] = "DTWAIN_SetPDFTextElementString"
+    arr[1058] = "DTWAIN_SetPDFTextElementStringA"
+    arr[1059] = "DTWAIN_SetPDFTextElementStringW"
+    arr[1060] = "DTWAIN_SetPDFTitle"
+    arr[1061] = "DTWAIN_SetPDFTitleA"
+    arr[1062] = "DTWAIN_SetPDFTitleW"
+    arr[1063] = "DTWAIN_SetPaperSize"
+    arr[1064] = "DTWAIN_SetPatchcodeMaxPriorities"
+    arr[1065] = "DTWAIN_SetPatchcodeMaxRetries"
+    arr[1066] = "DTWAIN_SetPatchcodePriorities"
+    arr[1067] = "DTWAIN_SetPatchcodeSearchMode"
+    arr[1068] = "DTWAIN_SetPatchcodeTimeOut"
+    arr[1069] = "DTWAIN_SetPixelFlavor"
+    arr[1070] = "DTWAIN_SetPixelType"
+    arr[1071] = "DTWAIN_SetPostScriptTitle"
+    arr[1072] = "DTWAIN_SetPostScriptTitleA"
+    arr[1073] = "DTWAIN_SetPostScriptTitleW"
+    arr[1074] = "DTWAIN_SetPostScriptType"
+    arr[1075] = "DTWAIN_SetPrinter"
+    arr[1076] = "DTWAIN_SetPrinterEx"
+    arr[1077] = "DTWAIN_SetPrinterStartNumber"
+    arr[1078] = "DTWAIN_SetPrinterStringMode"
+    arr[1079] = "DTWAIN_SetPrinterStrings"
+    arr[1080] = "DTWAIN_SetPrinterSuffixString"
+    arr[1081] = "DTWAIN_SetPrinterSuffixStringA"
+    arr[1082] = "DTWAIN_SetPrinterSuffixStringW"
+    arr[1083] = "DTWAIN_SetQueryCapSupport"
+    arr[1084] = "DTWAIN_SetResolution"
+    arr[1085] = "DTWAIN_SetResolutionString"
+    arr[1086] = "DTWAIN_SetResolutionStringA"
+    arr[1087] = "DTWAIN_SetResolutionStringW"
+    arr[1088] = "DTWAIN_SetResourcePath"
+    arr[1089] = "DTWAIN_SetResourcePathA"
+    arr[1090] = "DTWAIN_SetResourcePathW"
+    arr[1091] = "DTWAIN_SetRotation"
+    arr[1092] = "DTWAIN_SetRotationString"
+    arr[1093] = "DTWAIN_SetRotationStringA"
+    arr[1094] = "DTWAIN_SetRotationStringW"
+    arr[1095] = "DTWAIN_SetSaveFileName"
+    arr[1096] = "DTWAIN_SetSaveFileNameA"
+    arr[1097] = "DTWAIN_SetSaveFileNameW"
+    arr[1098] = "DTWAIN_SetShadow"
+    arr[1099] = "DTWAIN_SetShadowString"
+    arr[1100] = "DTWAIN_SetShadowStringA"
+    arr[1101] = "DTWAIN_SetShadowStringW"
+    arr[1102] = "DTWAIN_SetSourceUnit"
+    arr[1103] = "DTWAIN_SetTIFFCompressType"
+    arr[1104] = "DTWAIN_SetTIFFInvert"
+    arr[1105] = "DTWAIN_SetTempFileDirectory"
+    arr[1106] = "DTWAIN_SetTempFileDirectoryA"
+    arr[1107] = "DTWAIN_SetTempFileDirectoryEx"
+    arr[1108] = "DTWAIN_SetTempFileDirectoryExA"
+    arr[1109] = "DTWAIN_SetTempFileDirectoryExW"
+    arr[1110] = "DTWAIN_SetTempFileDirectoryW"
+    arr[1111] = "DTWAIN_SetThreshold"
+    arr[1112] = "DTWAIN_SetThresholdString"
+    arr[1113] = "DTWAIN_SetThresholdStringA"
+    arr[1114] = "DTWAIN_SetThresholdStringW"
+    arr[1115] = "DTWAIN_SetTwainDSM"
+    arr[1116] = "DTWAIN_SetTwainLog"
+    arr[1117] = "DTWAIN_SetTwainLogA"
+    arr[1118] = "DTWAIN_SetTwainLogW"
+    arr[1119] = "DTWAIN_SetTwainMode"
+    arr[1120] = "DTWAIN_SetTwainTimeout"
+    arr[1121] = "DTWAIN_SetUpdateDibProc"
+    arr[1122] = "DTWAIN_SetXResolution"
+    arr[1123] = "DTWAIN_SetXResolutionString"
+    arr[1124] = "DTWAIN_SetXResolutionStringA"
+    arr[1125] = "DTWAIN_SetXResolutionStringW"
+    arr[1126] = "DTWAIN_SetYResolution"
+    arr[1127] = "DTWAIN_SetYResolutionString"
+    arr[1128] = "DTWAIN_SetYResolutionStringA"
+    arr[1129] = "DTWAIN_SetYResolutionStringW"
+    arr[1130] = "DTWAIN_ShowUIOnly"
+    arr[1131] = "DTWAIN_ShutdownOCREngine"
+    arr[1132] = "DTWAIN_SkipImageInfoError"
+    arr[1133] = "DTWAIN_StartThread"
+    arr[1134] = "DTWAIN_StartTwainSession"
+    arr[1135] = "DTWAIN_StartTwainSessionA"
+    arr[1136] = "DTWAIN_StartTwainSessionW"
+    arr[1137] = "DTWAIN_SysDestroy"
+    arr[1138] = "DTWAIN_SysInitialize"
+    arr[1139] = "DTWAIN_SysInitializeEx"
+    arr[1140] = "DTWAIN_SysInitializeEx2"
+    arr[1141] = "DTWAIN_SysInitializeEx2A"
+    arr[1142] = "DTWAIN_SysInitializeEx2W"
+    arr[1143] = "DTWAIN_SysInitializeExA"
+    arr[1144] = "DTWAIN_SysInitializeExW"
+    arr[1145] = "DTWAIN_SysInitializeLib"
+    arr[1146] = "DTWAIN_SysInitializeLibEx"
+    arr[1147] = "DTWAIN_SysInitializeLibEx2"
+    arr[1148] = "DTWAIN_SysInitializeLibEx2A"
+    arr[1149] = "DTWAIN_SysInitializeLibEx2W"
+    arr[1150] = "DTWAIN_SysInitializeLibExA"
+    arr[1151] = "DTWAIN_SysInitializeLibExW"
+    arr[1152] = "DTWAIN_SysInitializeNoBlocking"
+    arr[1153] = "DTWAIN_TestGetCap"
+    arr[1154] = "DTWAIN_UnlockMemory"
+    arr[1155] = "DTWAIN_UnlockMemoryEx"
+    arr[1156] = "DTWAIN_UseMultipleThreads"
     for _, name := range arr {
         addr, err := syscall.GetProcAddress(d.Handle, name)
         if err != nil {
@@ -3346,6 +3380,12 @@ func (d *DTWAIN_DLL) DTWAIN_ArrayDestroyFrames(FrameArray DTWAIN_ARRAY) int32 {
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_ArrayDumpToLog(pArray DTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_ArrayDumpToLog"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_ArrayFind(pArray DTWAIN_ARRAY, pVariant LPVOID) int32 {
     theProc := d.procs["DTWAIN_ArrayFind"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(pVariant))
@@ -3470,6 +3510,12 @@ func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtFloat(pArray DTWAIN_ARRAY, nWhere int32, p
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtFloatEx(pArray DTWAIN_ARRAY, nWhere int32) float64 {
+    theProc := d.procs["DTWAIN_ArrayGetAtFloatEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(nWhere))
+    return float64(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtFloatString(pArray DTWAIN_ARRAY, nWhere int32, Val []uint16) int32 {
     theProc := d.procs["DTWAIN_ArrayGetAtFloatString"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(nWhere), uintptr(unsafe.Pointer(&Val[0])))
@@ -3527,6 +3573,18 @@ func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtLong(pArray DTWAIN_ARRAY, nWhere int32, pV
 func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtLong64(pArray DTWAIN_ARRAY, nWhere int32, pVal *int64) int32 {
     theProc := d.procs["DTWAIN_ArrayGetAtLong64"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(nWhere), uintptr(unsafe.Pointer(pVal)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtLong64Ex(pArray DTWAIN_ARRAY, nWhere int32) int64 {
+    theProc := d.procs["DTWAIN_ArrayGetAtLong64Ex"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(nWhere))
+    return int64(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_ArrayGetAtLongEx(pArray DTWAIN_ARRAY, nWhere int32) int32 {
+    theProc := d.procs["DTWAIN_ArrayGetAtLongEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(pArray), uintptr(nWhere))
     return int32(v1)
 }
 
@@ -4127,6 +4185,12 @@ func (d *DTWAIN_DLL) DTWAIN_EnableAutomaticSenseMedium(Source DTWAIN_SOURCE, bSe
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_EnableBarcodeDetection(Source DTWAIN_SOURCE, bEnable int32) int32 {
+    theProc := d.procs["DTWAIN_EnableBarcodeDetection"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bEnable))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_EnableDuplex(Source DTWAIN_SOURCE, bEnable int32) int32 {
     theProc := d.procs["DTWAIN_EnableDuplex"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bEnable))
@@ -4163,8 +4227,8 @@ func (d *DTWAIN_DLL) DTWAIN_EnableMsgNotify(bSet int32) int32 {
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnablePatchDetect(Source DTWAIN_SOURCE, bEnable int32) int32 {
-    theProc := d.procs["DTWAIN_EnablePatchDetect"]
+func (d *DTWAIN_DLL) DTWAIN_EnablePatchcodeDetection(Source DTWAIN_SOURCE, bEnable int32) int32 {
+    theProc := d.procs["DTWAIN_EnablePatchcodeDetection"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bEnable))
     return int32(v1)
 }
@@ -4277,16 +4341,88 @@ func (d *DTWAIN_DLL) DTWAIN_EnumAutomaticSenseMediumEx(Source DTWAIN_SOURCE) DTW
     return DTWAIN_ARRAY(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeCodes(Source DTWAIN_SOURCE, PCodes LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodeCodes"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(PCodes)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeCodesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodeCodesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeMaxPriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodeMaxPriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeMaxPrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodeMaxPrioritiesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeMaxRetries(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodeMaxRetries"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeMaxRetriesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodeMaxRetriesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodePriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodePriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodePrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodePrioritiesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeSearchModes(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodeSearchModes"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeSearchModesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodeSearchModesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeTimeOutValues(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumBarcodeTimeOutValues"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_EnumBarcodeTimeOutValuesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumBarcodeTimeOutValuesEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_EnumBitDepths(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
     theProc := d.procs["DTWAIN_EnumBitDepths"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumBitDepthsEx(Source DTWAIN_SOURCE, PixelType int32, pArray LPDTWAIN_ARRAY) int32 {
+func (d *DTWAIN_DLL) DTWAIN_EnumBitDepthsEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
     theProc := d.procs["DTWAIN_EnumBitDepthsEx"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(PixelType), uintptr(unsafe.Pointer(pArray)))
-    return int32(v1)
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_EnumBitDepthsEx2(Source DTWAIN_SOURCE, PixelType int32) DTWAIN_ARRAY {
@@ -4325,20 +4461,14 @@ func (d *DTWAIN_DLL) DTWAIN_EnumCameras(Source DTWAIN_SOURCE, Cameras LPDTWAIN_A
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumCamerasEx(Source DTWAIN_SOURCE, nWhichCamera int32, Cameras LPDTWAIN_ARRAY) int32 {
+func (d *DTWAIN_DLL) DTWAIN_EnumCamerasEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
     theProc := d.procs["DTWAIN_EnumCamerasEx"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nWhichCamera), uintptr(unsafe.Pointer(Cameras)))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_EnumCamerasEx2(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumCamerasEx2"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumCamerasEx3(Source DTWAIN_SOURCE, nWhichCamera int32) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumCamerasEx3"]
+func (d *DTWAIN_DLL) DTWAIN_EnumCamerasEx2(Source DTWAIN_SOURCE, nWhichCamera int32) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumCamerasEx2"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nWhichCamera))
     return DTWAIN_ARRAY(v1)
 }
@@ -4379,8 +4509,8 @@ func (d *DTWAIN_DLL) DTWAIN_EnumCustomCaps(Source DTWAIN_SOURCE, pArray LPDTWAIN
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumCustomCapsEx2(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumCustomCapsEx2"]
+func (d *DTWAIN_DLL) DTWAIN_EnumCustomCapsEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumCustomCapsEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
@@ -4427,10 +4557,10 @@ func (d *DTWAIN_DLL) DTWAIN_EnumExtendedCaps(Source DTWAIN_SOURCE, pArray LPDTWA
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumExtendedCapsEx(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+func (d *DTWAIN_DLL) DTWAIN_EnumExtendedCapsEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
     theProc := d.procs["DTWAIN_EnumExtendedCapsEx"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
-    return int32(v1)
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_EnumExtendedCapsEx2(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
@@ -4547,6 +4677,12 @@ func (d *DTWAIN_DLL) DTWAIN_EnumOCRInterfaces(OCRInterfaces LPDTWAIN_ARRAY) int3
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_EnumOCRInterfacesEx() DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumOCRInterfacesEx"]
+    v1, _, _ := syscall.SyscallN(theProc)
+    return DTWAIN_ARRAY(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_EnumOCRSupportedCaps(Engine DTWAIN_OCRENGINE, SupportedCaps LPDTWAIN_ARRAY) int32 {
     theProc := d.procs["DTWAIN_EnumOCRSupportedCaps"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Engine), uintptr(unsafe.Pointer(SupportedCaps)))
@@ -4589,74 +4725,74 @@ func (d *DTWAIN_DLL) DTWAIN_EnumPaperSizesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY 
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchCodes(Source DTWAIN_SOURCE, PCodes LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchCodes"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeCodes(Source DTWAIN_SOURCE, PCodes LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodeCodes"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(PCodes)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchCodesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchCodesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeCodesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodeCodesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchMaxPriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchMaxPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeMaxPriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodeMaxPriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchMaxPrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchMaxPrioritiesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodeMaxPrioritiesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchMaxRetries(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchMaxRetries"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeMaxRetries(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodeMaxRetries"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchMaxRetriesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchMaxRetriesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeMaxRetriesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodeMaxRetriesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchPriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodePriorities(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodePriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchPrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchPrioritiesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodePrioritiesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodePrioritiesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchSearchModes(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchSearchModes"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeSearchModes(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodeSearchModes"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchSearchModesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchSearchModesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeSearchModesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodeSearchModesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchTimeOutValues(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_EnumPatchTimeOutValues"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeTimeOutValues(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_EnumPatchcodeTimeOutValues"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumPatchTimeOutValuesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
-    theProc := d.procs["DTWAIN_EnumPatchTimeOutValuesEx"]
+func (d *DTWAIN_DLL) DTWAIN_EnumPatchcodeTimeOutValuesEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_EnumPatchcodeTimeOutValuesEx"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return DTWAIN_ARRAY(v1)
 }
@@ -4758,10 +4894,10 @@ func (d *DTWAIN_DLL) DTWAIN_EnumSupportedCaps(Source DTWAIN_SOURCE, pArray LPDTW
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_EnumSupportedCapsEx(Source DTWAIN_SOURCE, pArray LPDTWAIN_ARRAY) int32 {
+func (d *DTWAIN_DLL) DTWAIN_EnumSupportedCapsEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
     theProc := d.procs["DTWAIN_EnumSupportedCapsEx"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pArray)))
-    return int32(v1)
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_EnumSupportedCapsEx2(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
@@ -4906,18 +5042,6 @@ func (d *DTWAIN_DLL) DTWAIN_FlipBitmap(hDib HANDLE) int32 {
 func (d *DTWAIN_DLL) DTWAIN_FlushAcquiredPages(Source DTWAIN_SOURCE) int32 {
     theProc := d.procs["DTWAIN_FlushAcquiredPages"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_ForceAcquireBitDepth(Source DTWAIN_SOURCE, BitDepth int32) int32 {
-    theProc := d.procs["DTWAIN_ForceAcquireBitDepth"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(BitDepth))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_ForceScanOnNoUI(Source DTWAIN_SOURCE, bSet int32) int32 {
-    theProc := d.procs["DTWAIN_ForceScanOnNoUI"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bSet))
     return int32(v1)
 }
 
@@ -5242,6 +5366,36 @@ func (d *DTWAIN_DLL) DTWAIN_GetAuthorW(Source DTWAIN_SOURCE, szAuthor []uint16) 
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetBarcodeMaxPriorities(Source DTWAIN_SOURCE, pMaxPriorities *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetBarcodeMaxPriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pMaxPriorities)), uintptr(bCurrent))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetBarcodeMaxRetries(Source DTWAIN_SOURCE, pMaxRetries *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetBarcodeMaxRetries"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pMaxRetries)), uintptr(bCurrent))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetBarcodePriorities(Source DTWAIN_SOURCE, SearchPriorities LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_GetBarcodePriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(SearchPriorities)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetBarcodeSearchMode(Source DTWAIN_SOURCE, pSearchMode *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetBarcodeSearchMode"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pSearchMode)), uintptr(bCurrent))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetBarcodeTimeOut(Source DTWAIN_SOURCE, pTimeOut *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetBarcodeTimeOut"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pTimeOut)), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetBatteryMinutes(Source DTWAIN_SOURCE, lpMinutes *int32) int32 {
     theProc := d.procs["DTWAIN_GetBatteryMinutes"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(lpMinutes)))
@@ -5260,6 +5414,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetBitDepth(Source DTWAIN_SOURCE, BitDepth *int32, b
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetBitDepthEx(Source DTWAIN_SOURCE, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetBitDepthEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetBlankPageAutoDetection(Source DTWAIN_SOURCE) int32 {
     theProc := d.procs["DTWAIN_GetBlankPageAutoDetection"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
@@ -5270,6 +5430,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetBrightness(Source DTWAIN_SOURCE, Brightness *floa
     theProc := d.procs["DTWAIN_GetBrightness"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(Brightness)))
     return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetBrightnessEx(Source DTWAIN_SOURCE) float64 {
+    theProc := d.procs["DTWAIN_GetBrightnessEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return float64(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetBrightnessString(Source DTWAIN_SOURCE, Brightness []uint16) int32 {
@@ -5363,6 +5529,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetCapOperations(Source DTWAIN_SOURCE, lCapability i
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetCapOperationsEx(Source DTWAIN_SOURCE, lCapability int32) int32 {
+    theProc := d.procs["DTWAIN_GetCapOperationsEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(lCapability))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetCapValues(Source DTWAIN_SOURCE, lCap int32, lGetType int32, pArray LPDTWAIN_ARRAY) int32 {
     theProc := d.procs["DTWAIN_GetCapValues"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(lCap), uintptr(lGetType), uintptr(unsafe.Pointer(pArray)))
@@ -5411,6 +5583,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetCompressionType(Source DTWAIN_SOURCE, lpCompressi
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetCompressionTypeEx(Source DTWAIN_SOURCE, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetCompressionTypeEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetConditionCodeString(lError int32, lpszBuffer []uint16, nMaxLen int32) int32 {
     theProc := d.procs["DTWAIN_GetConditionCodeString"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(lError), uintptr(unsafe.Pointer(&lpszBuffer[0])), uintptr(nMaxLen))
@@ -5452,6 +5630,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetContrast(Source DTWAIN_SOURCE, Contrast *float64)
     theProc := d.procs["DTWAIN_GetContrast"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(Contrast)))
     return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetContrastEx(Source DTWAIN_SOURCE) float64 {
+    theProc := d.procs["DTWAIN_GetContrastEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return float64(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetContrastString(Source DTWAIN_SOURCE, Contrast []uint16) int32 {
@@ -5631,6 +5815,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetDoubleFeedDetectValues(Source DTWAIN_SOURCE, pArr
 func (d *DTWAIN_DLL) DTWAIN_GetDuplexType(Source DTWAIN_SOURCE, lpDupType *int32) int32 {
     theProc := d.procs["DTWAIN_GetDuplexType"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(lpDupType)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetDuplexTypeEx(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_GetDuplexTypeEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return int32(v1)
 }
 
@@ -5887,6 +6077,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetJobControl(Source DTWAIN_SOURCE, pJobControl *int
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetJobControlEx(Source DTWAIN_SOURCE, bGetCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetJobControlEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bGetCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetJpegValues(Source DTWAIN_SOURCE, pQuality *int32, Progressive *int32) int32 {
     theProc := d.procs["DTWAIN_GetJpegValues"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pQuality)), uintptr(unsafe.Pointer(Progressive)))
@@ -5932,6 +6128,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetLibraryPathW(lpszVer []uint16, nLength int32) int
 func (d *DTWAIN_DLL) DTWAIN_GetLightPath(Source DTWAIN_SOURCE, lpLightPath *int32) int32 {
     theProc := d.procs["DTWAIN_GetLightPath"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(lpLightPath)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetLightPathEx(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_GetLightPathEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return int32(v1)
 }
 
@@ -6199,6 +6401,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetOrientation(Source DTWAIN_SOURCE, lpOrient *int32
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetOrientationEx(Source DTWAIN_SOURCE, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetOrientationEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetOverscan(Source DTWAIN_SOURCE, lpOverscan *int32, bCurrent int32) int32 {
     theProc := d.procs["DTWAIN_GetOverscan"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(lpOverscan)), uintptr(bCurrent))
@@ -6277,32 +6485,32 @@ func (d *DTWAIN_DLL) DTWAIN_GetPaperSizeNameW(paperNumber int32, outName []uint1
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetPatchMaxPriorities(Source DTWAIN_SOURCE, pMaxPriorities *int32, bCurrent int32) int32 {
-    theProc := d.procs["DTWAIN_GetPatchMaxPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_GetPatchcodeMaxPriorities(Source DTWAIN_SOURCE, pMaxPriorities *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPatchcodeMaxPriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pMaxPriorities)), uintptr(bCurrent))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetPatchMaxRetries(Source DTWAIN_SOURCE, pMaxRetries *int32, bCurrent int32) int32 {
-    theProc := d.procs["DTWAIN_GetPatchMaxRetries"]
+func (d *DTWAIN_DLL) DTWAIN_GetPatchcodeMaxRetries(Source DTWAIN_SOURCE, pMaxRetries *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPatchcodeMaxRetries"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pMaxRetries)), uintptr(bCurrent))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetPatchPriorities(Source DTWAIN_SOURCE, SearchPriorities LPDTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_GetPatchPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_GetPatchcodePriorities(Source DTWAIN_SOURCE, SearchPriorities LPDTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_GetPatchcodePriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(SearchPriorities)))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetPatchSearchMode(Source DTWAIN_SOURCE, pSearchMode *int32, bCurrent int32) int32 {
-    theProc := d.procs["DTWAIN_GetPatchSearchMode"]
+func (d *DTWAIN_DLL) DTWAIN_GetPatchcodeSearchMode(Source DTWAIN_SOURCE, pSearchMode *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPatchcodeSearchMode"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pSearchMode)), uintptr(bCurrent))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetPatchTimeOut(Source DTWAIN_SOURCE, pTimeOut *int32, bCurrent int32) int32 {
-    theProc := d.procs["DTWAIN_GetPatchTimeOut"]
+func (d *DTWAIN_DLL) DTWAIN_GetPatchcodeTimeOut(Source DTWAIN_SOURCE, pTimeOut *int32, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPatchcodeTimeOut"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(pTimeOut)), uintptr(bCurrent))
     return int32(v1)
 }
@@ -6325,9 +6533,21 @@ func (d *DTWAIN_DLL) DTWAIN_GetPrinter(Source DTWAIN_SOURCE, lpPrinter *int32, b
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetPrinterEx(Source DTWAIN_SOURCE, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPrinterEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetPrinterStartNumber(Source DTWAIN_SOURCE, nStart *int32) int32 {
     theProc := d.procs["DTWAIN_GetPrinterStartNumber"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(nStart)))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetPrinterStartNumberEx(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_GetPrinterStartNumberEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return int32(v1)
 }
 
@@ -6337,10 +6557,22 @@ func (d *DTWAIN_DLL) DTWAIN_GetPrinterStringMode(Source DTWAIN_SOURCE, PrinterMo
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetPrinterStringModeEx(Source DTWAIN_SOURCE, bCurrent int32) int32 {
+    theProc := d.procs["DTWAIN_GetPrinterStringModeEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(bCurrent))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetPrinterStrings(Source DTWAIN_SOURCE, ArrayString LPDTWAIN_ARRAY) int32 {
     theProc := d.procs["DTWAIN_GetPrinterStrings"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(ArrayString)))
     return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetPrinterStringsEx(Source DTWAIN_SOURCE) DTWAIN_ARRAY {
+    theProc := d.procs["DTWAIN_GetPrinterStringsEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return DTWAIN_ARRAY(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetPrinterSuffixString(Source DTWAIN_SOURCE, Suffix []uint16, nMaxLen int32) int32 {
@@ -6371,6 +6603,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetResolution(Source DTWAIN_SOURCE, Resolution *floa
     theProc := d.procs["DTWAIN_GetResolution"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(Resolution)))
     return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetResolutionEx(Source DTWAIN_SOURCE) float64 {
+    theProc := d.procs["DTWAIN_GetResolutionEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return float64(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetResolutionString(Source DTWAIN_SOURCE, Resolution []uint16) int32 {
@@ -6413,6 +6651,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetRotation(Source DTWAIN_SOURCE, Rotation *float64)
     theProc := d.procs["DTWAIN_GetRotation"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(Rotation)))
     return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetRotationEx(Source DTWAIN_SOURCE) float64 {
+    theProc := d.procs["DTWAIN_GetRotationEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return float64(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetRotationString(Source DTWAIN_SOURCE, Rotation []uint16) int32 {
@@ -6608,6 +6852,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetSourceUnit(Source DTWAIN_SOURCE, lpUnit *int32) i
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetSourceUnitEx(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_GetSourceUnitEx"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetSourceVersionInfo(Source DTWAIN_SOURCE, szProduct []uint16, nMaxLen int32) int32 {
     theProc := d.procs["DTWAIN_GetSourceVersionInfo"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(&szProduct[0])), uintptr(nMaxLen))
@@ -6734,84 +6984,10 @@ func (d *DTWAIN_DLL) DTWAIN_GetTwainAvailabilityExW(szDirectories []uint16, nLen
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryName(countryId int32, szName []uint16) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryName"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(countryId), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryNameA(countryId int32, szName []byte) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryNameA"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(countryId), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryNameW(countryId int32, szName []uint16) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryNameW"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(countryId), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryValue(country uintptr) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryValue"]
-    v1, _, _ := syscall.SyscallN(theProc, country)
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryValueA(country string) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryValueA"]
-    arg_0 := []byte(country)
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&arg_0[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainCountryValueW(country uintptr) int32 {
-    theProc := d.procs["DTWAIN_GetTwainCountryValueW"]
-    v1, _, _ := syscall.SyscallN(theProc, country)
-    return int32(v1)
-}
-
 func (d *DTWAIN_DLL) DTWAIN_GetTwainHwnd() HWND {
     theProc := d.procs["DTWAIN_GetTwainHwnd"]
     v1, _, _ := syscall.SyscallN(theProc)
     return HWND(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageName(nameId int32, szName []uint16) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageName"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(nameId), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageNameA(lang int32, szName []byte) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageNameA"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(lang), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageNameW(lang int32, szName []uint16) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageNameW"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(lang), uintptr(unsafe.Pointer(&szName[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageValue(szName uintptr) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageValue"]
-    v1, _, _ := syscall.SyscallN(theProc, szName)
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageValueA(lang string) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageValueA"]
-    arg_0 := []byte(lang)
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&arg_0[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainLanguageValueW(lang uintptr) int32 {
-    theProc := d.procs["DTWAIN_GetTwainLanguageValueW"]
-    v1, _, _ := syscall.SyscallN(theProc, lang)
-    return int32(v1)
 }
 
 func (d *DTWAIN_DLL) DTWAIN_GetTwainMode() int32 {
@@ -6853,24 +7029,6 @@ func (d *DTWAIN_DLL) DTWAIN_GetTwainNameFromConstantExW(lConstantType int32, lTw
 func (d *DTWAIN_DLL) DTWAIN_GetTwainNameFromConstantW(lConstantType int32, lTwainConstant int32, lpszOut []uint16, nSize int32) int32 {
     theProc := d.procs["DTWAIN_GetTwainNameFromConstantW"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(lConstantType), uintptr(lTwainConstant), uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainStringName(category int32, TwainID int32, lpszBuffer []uint16, nMaxLen int32) int32 {
-    theProc := d.procs["DTWAIN_GetTwainStringName"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(category), uintptr(TwainID), uintptr(unsafe.Pointer(&lpszBuffer[0])), uintptr(nMaxLen))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainStringNameA(category int32, TwainID int32, lpszBuffer []byte, nMaxLen int32) int32 {
-    theProc := d.procs["DTWAIN_GetTwainStringNameA"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(category), uintptr(TwainID), uintptr(unsafe.Pointer(&lpszBuffer[0])), uintptr(nMaxLen))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetTwainStringNameW(category int32, TwainID int32, lpszBuffer []uint16, nMaxLen int32) int32 {
-    theProc := d.procs["DTWAIN_GetTwainStringNameW"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(category), uintptr(TwainID), uintptr(unsafe.Pointer(&lpszBuffer[0])), uintptr(nMaxLen))
     return int32(v1)
 }
 
@@ -7130,6 +7288,24 @@ func (d *DTWAIN_DLL) DTWAIN_IsAutomaticSenseMediumEnabled(Source DTWAIN_SOURCE) 
 func (d *DTWAIN_DLL) DTWAIN_IsAutomaticSenseMediumSupported(Source DTWAIN_SOURCE) int32 {
     theProc := d.procs["DTWAIN_IsAutomaticSenseMediumSupported"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_IsBarcodeCapsSupported(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_IsBarcodeCapsSupported"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_IsBarcodeDetectionEnabled(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_IsBarcodeDetectionEnabled"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_IsBarcodeSupported(Source DTWAIN_SOURCE, BarCode int32) int32 {
+    theProc := d.procs["DTWAIN_IsBarcodeSupported"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(BarCode))
     return int32(v1)
 }
 
@@ -7506,20 +7682,20 @@ func (d *DTWAIN_DLL) DTWAIN_IsPaperSizeSupported(Source DTWAIN_SOURCE, PaperSize
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_IsPatchCapsSupported(Source DTWAIN_SOURCE) int32 {
-    theProc := d.procs["DTWAIN_IsPatchCapsSupported"]
+func (d *DTWAIN_DLL) DTWAIN_IsPatchcodeCapsSupported(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_IsPatchcodeCapsSupported"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_IsPatchDetectEnabled(Source DTWAIN_SOURCE) int32 {
-    theProc := d.procs["DTWAIN_IsPatchDetectEnabled"]
+func (d *DTWAIN_DLL) DTWAIN_IsPatchcodeDetectionEnabled(Source DTWAIN_SOURCE) int32 {
+    theProc := d.procs["DTWAIN_IsPatchcodeDetectionEnabled"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_IsPatchSupported(Source DTWAIN_SOURCE, PatchCode int32) int32 {
-    theProc := d.procs["DTWAIN_IsPatchSupported"]
+func (d *DTWAIN_DLL) DTWAIN_IsPatchcodeSupported(Source DTWAIN_SOURCE, PatchCode int32) int32 {
+    theProc := d.procs["DTWAIN_IsPatchcodeSupported"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(PatchCode))
     return int32(v1)
 }
@@ -8418,6 +8594,36 @@ func (d *DTWAIN_DLL) DTWAIN_SetAvailablePrintersArray(Source DTWAIN_SOURCE, Avai
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_SetBarcodeMaxPriorities(Source DTWAIN_SOURCE, nMaxSearchRetries int32) int32 {
+    theProc := d.procs["DTWAIN_SetBarcodeMaxPriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nMaxSearchRetries))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetBarcodeMaxRetries(Source DTWAIN_SOURCE, nMaxRetries int32) int32 {
+    theProc := d.procs["DTWAIN_SetBarcodeMaxRetries"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nMaxRetries))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetBarcodePriorities(Source DTWAIN_SOURCE, SearchPriorities DTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_SetBarcodePriorities"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(SearchPriorities))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetBarcodeSearchMode(Source DTWAIN_SOURCE, nSearchMode int32) int32 {
+    theProc := d.procs["DTWAIN_SetBarcodeSearchMode"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nSearchMode))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetBarcodeTimeOut(Source DTWAIN_SOURCE, TimeOutValue int32) int32 {
+    theProc := d.procs["DTWAIN_SetBarcodeTimeOut"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(TimeOutValue))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_SetBitDepth(Source DTWAIN_SOURCE, BitDepth int32, bSetCurrent int32) int32 {
     theProc := d.procs["DTWAIN_SetBitDepth"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(BitDepth), uintptr(bSetCurrent))
@@ -9256,32 +9462,32 @@ func (d *DTWAIN_DLL) DTWAIN_SetPaperSize(Source DTWAIN_SOURCE, PaperSize int32, 
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_SetPatchMaxPriorities(Source DTWAIN_SOURCE, nMaxSearchRetries int32) int32 {
-    theProc := d.procs["DTWAIN_SetPatchMaxPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_SetPatchcodeMaxPriorities(Source DTWAIN_SOURCE, nMaxSearchRetries int32) int32 {
+    theProc := d.procs["DTWAIN_SetPatchcodeMaxPriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nMaxSearchRetries))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_SetPatchMaxRetries(Source DTWAIN_SOURCE, nMaxRetries int32) int32 {
-    theProc := d.procs["DTWAIN_SetPatchMaxRetries"]
+func (d *DTWAIN_DLL) DTWAIN_SetPatchcodeMaxRetries(Source DTWAIN_SOURCE, nMaxRetries int32) int32 {
+    theProc := d.procs["DTWAIN_SetPatchcodeMaxRetries"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nMaxRetries))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_SetPatchPriorities(Source DTWAIN_SOURCE, SearchPriorities DTWAIN_ARRAY) int32 {
-    theProc := d.procs["DTWAIN_SetPatchPriorities"]
+func (d *DTWAIN_DLL) DTWAIN_SetPatchcodePriorities(Source DTWAIN_SOURCE, SearchPriorities DTWAIN_ARRAY) int32 {
+    theProc := d.procs["DTWAIN_SetPatchcodePriorities"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(SearchPriorities))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_SetPatchSearchMode(Source DTWAIN_SOURCE, nSearchMode int32) int32 {
-    theProc := d.procs["DTWAIN_SetPatchSearchMode"]
+func (d *DTWAIN_DLL) DTWAIN_SetPatchcodeSearchMode(Source DTWAIN_SOURCE, nSearchMode int32) int32 {
+    theProc := d.procs["DTWAIN_SetPatchcodeSearchMode"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nSearchMode))
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_SetPatchTimeOut(Source DTWAIN_SOURCE, TimeOutValue int32) int32 {
-    theProc := d.procs["DTWAIN_SetPatchTimeOut"]
+func (d *DTWAIN_DLL) DTWAIN_SetPatchcodeTimeOut(Source DTWAIN_SOURCE, TimeOutValue int32) int32 {
+    theProc := d.procs["DTWAIN_SetPatchcodeTimeOut"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(TimeOutValue))
     return int32(v1)
 }

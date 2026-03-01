@@ -62,13 +62,7 @@ namespace TWAINDemo
             TwainAPI.DTWAIN_EnumExtendedCaps(m_Source, ref AllCaps);
             edExtendedCaps.Text = TwainAPI.DTWAIN_ArrayGetCount(AllCaps).ToString();
 
-            uint customDSLength = 0;
-            Encoding enc8 = Encoding.UTF8;
-
-            TwainAPI.DTWAIN_GetCustomDSData(m_Source, null, 0, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
-            byte [] szCustomData = new byte[customDSLength];
-            TwainAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
-            txtDSData.Text = enc8.GetString(szCustomData, 0, (int)customDSLength);
+            RefreshCustomDSData();
 
             string sName = szNameInfo.ToString();
             int nBytes = TwainAPI.DTWAIN_GetSourceDetails(sName, null, 0, 2, 1);
@@ -79,6 +73,8 @@ namespace TWAINDemo
             txtJSON.Text = szInfo.ToString().Replace("\n", "\r\n");
 
             TwainAPI.DTWAIN_ArrayDestroy(AllCaps);
+
+            btnShowUIOnly.Enabled = (TwainAPI.DTWAIN_IsUIOnlySupported(m_Source) == 1);
         }
 
         private void btnTestCap_Click(object sender, EventArgs e)
@@ -93,6 +89,48 @@ namespace TWAINDemo
         private void SourcePropsDlg_FormClosed(object sender, FormClosedEventArgs e)
         {
             TwainAPI.DTWAIN_SetAllCapsToDefault(m_Source);
+        }
+
+        private void btnShowUIOnly_Click(object sender, EventArgs e)
+        {
+            btnShowUIOnly.Enabled = false;
+            OKbutton.Enabled = false;
+            TwainAPI.DTWAIN_ShowUIOnly(m_Source);
+            btnShowUIOnly.Enabled = true;
+            OKbutton.Enabled = true;
+            RefreshCustomDSData();
+        }
+
+        private void btnRefreshCustomData_Click(object sender, EventArgs e)
+        {
+            RefreshCustomDSData();
+        }
+
+        private void RefreshCustomDSData()
+        {
+            uint customDSLength = 0;
+            Encoding enc8 = Encoding.UTF8;
+            TwainAPI.DTWAIN_GetCustomDSData(m_Source, null, 0, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
+            byte[] szCustomData = new byte[customDSLength];
+            TwainAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, ref customDSLength, TwainAPI.DTWAINGCD_COPYDATA);
+            txtDSData.Text = enc8.GetString(szCustomData, 0, (int)customDSLength);
+        }
+        private void SourcePropsDlg_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (TwainAPI.DTWAIN_IsSourceAcquiringEx(m_Source, 1) == 1)
+            {
+                MessageBox.Show("You must close the Source user interface before leaving this dialog");
+                e.Cancel = true;
+            }
+        }
+        private void OKbutton_Click(object sender, EventArgs e)
+        {
+            if (TwainAPI.DTWAIN_IsSourceAcquiringEx(m_Source, 1) == 1)
+            {
+                MessageBox.Show("You must close the Source user interface before leaving this dialog");
+            }
+            else
+                Close();
         }
     }
 }

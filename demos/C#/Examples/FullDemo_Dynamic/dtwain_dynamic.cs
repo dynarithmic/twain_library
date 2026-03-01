@@ -319,6 +319,8 @@
         public const int DTWAIN_BIGTIFFJPEG = 11015;
         public const int DTWAIN_BIGTIFFJPEGMULTI = 11016;
         public const int DTWAIN_JPEGXR = 12000;
+        public const int DTWAIN_SVG = 13000;
+        public const int DTWAIN_SVGZ = 13001;
         public const int DTWAIN_INCHES = 0;
         public const int DTWAIN_CENTIMETERS = 1;
         public const int DTWAIN_PICAS = 2;
@@ -394,12 +396,12 @@
         public const int DTWAIN_CAPSET = 6;
         public const int DTWAIN_CAPRESET = 7;
         public const int DTWAIN_CAPRESETALL = 8;
-        public const int DTWAIN_CAPSETCONSTRAINT = 9;
         public const int DTWAIN_CAPSETAVAILABLE = 8;
         public const int DTWAIN_CAPSETCURRENT = 16;
         public const int DTWAIN_CAPGETHELP = 9;
         public const int DTWAIN_CAPGETLABEL = 10;
         public const int DTWAIN_CAPGETLABELENUM = 11;
+        public const int DTWAIN_CAPSETCONSTRAINT = 12;
         public const int DTWAIN_AREASET = DTWAIN_CAPSET;
         public const int DTWAIN_AREARESET = DTWAIN_CAPRESET;
         public const int DTWAIN_AREACURRENT = DTWAIN_CAPGETCURRENT;
@@ -527,6 +529,8 @@
         public const int DTWAIN_TN_TRANSFERTILEREADY = 1300;
         public const int DTWAIN_TN_TRANSFERTILEDONE = 1301;
         public const int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
+        public const int DTWAIN_TN_SOURCEDETAILS = 1304;
+        public const int DTWAIN_TN_QUERYACQUIREPAGES = 1305;
         public const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const int DTWAIN_MODAL = 0;
@@ -1237,6 +1241,7 @@
         public const int DTWAIN_DLG_HIGHLIGHTFIRST = 8192;
         public const int DTWAIN_DLG_SAVELASTSCREENPOS = 16384;
         public const int DTWAIN_DLG_CENTER_CURRENT_MONITOR = 32768;
+        public const int DTWAIN_DLG_CONSOLEASPARENT = 65536;
         public const int DTWAIN_RES_ENGLISH = 0;
         public const int DTWAIN_RES_FRENCH = 1;
         public const int DTWAIN_RES_SPANISH = 2;
@@ -1943,6 +1948,7 @@
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromRealsDelegate(ref DTWAIN_FLOAT pCArray, int nSize);
         public delegate int DTWAIN_ArrayDestroyDelegate(DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_ArrayDestroyFramesDelegate(DTWAIN_ARRAY FrameArray);
+        public delegate int DTWAIN_ArrayDumpToLogDelegate(DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_ArrayFindDelegate(DTWAIN_ARRAY pArray, System.IntPtr pVariant);
         public delegate int DTWAIN_ArrayFindANSIStringDelegate(DTWAIN_ARRAY pArray, string pString);
         public delegate int DTWAIN_ArrayFindFloatDelegate(DTWAIN_ARRAY pArray, DTWAIN_FLOAT Val, DTWAIN_FLOAT Tolerance);
@@ -1959,6 +1965,7 @@
         public delegate int DTWAIN_ArrayGetAtDelegate(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
         public delegate int DTWAIN_ArrayGetAtANSIStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder pStr);
         public delegate int DTWAIN_ArrayGetAtFloatDelegate(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_FLOAT pVal);
+        public delegate DTWAIN_FLOAT DTWAIN_ArrayGetAtFloatExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtFloatStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val);
         public delegate int DTWAIN_ArrayGetAtFloatStringDelegate_overload(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr Val);
         public delegate int DTWAIN_ArrayGetAtFrameDelegate(DTWAIN_ARRAY FrameArray, int nWhere, ref DTWAIN_FLOAT pleft, ref DTWAIN_FLOAT ptop, ref DTWAIN_FLOAT pright, ref DTWAIN_FLOAT pbottom);
@@ -1967,6 +1974,8 @@
         public delegate int DTWAIN_ArrayGetAtFrameStringDelegate_overload(DTWAIN_ARRAY FrameArray, int nWhere, System.IntPtr left, System.IntPtr top, System.IntPtr right, System.IntPtr bottom);
         public delegate int DTWAIN_ArrayGetAtLongDelegate(DTWAIN_ARRAY pArray, int nWhere, ref int pVal);
         public delegate int DTWAIN_ArrayGetAtLong64Delegate(DTWAIN_ARRAY pArray, int nWhere, ref long pVal);
+        public delegate LONG64 DTWAIN_ArrayGetAtLong64ExDelegate(DTWAIN_ARRAY pArray, int nWhere);
+        public delegate int DTWAIN_ArrayGetAtLongExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtSourceDelegate(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource);
         public delegate DTWAIN_SOURCE DTWAIN_ArrayGetAtSourceExDelegate(DTWAIN_ARRAY pArray, int nWhere);
         public delegate int DTWAIN_ArrayGetAtStringDelegate(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pStr);
@@ -2046,13 +2055,14 @@
         public delegate int DTWAIN_EnableAutoRotateDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate int DTWAIN_EnableAutoScanDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableAutomaticSenseMediumDelegate(DTWAIN_SOURCE Source, int bSet);
+        public delegate int DTWAIN_EnableBarcodeDetectionDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableDuplexDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableFeederDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate int DTWAIN_EnableIndicatorDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableJobFileHandlingDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate int DTWAIN_EnableLampDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableMsgNotifyDelegate(int bSet);
-        public delegate int DTWAIN_EnablePatchDetectDelegate(DTWAIN_SOURCE Source, int bEnable);
+        public delegate int DTWAIN_EnablePatchcodeDetectionDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnablePeekMessageLoopDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate int DTWAIN_EnablePrinterDelegate(DTWAIN_SOURCE Source, int bEnable);
         public delegate int DTWAIN_EnableThumbnailDelegate(DTWAIN_SOURCE Source, int bEnable);
@@ -2071,24 +2081,35 @@
         public delegate DTWAIN_ARRAY DTWAIN_EnumAutomaticCapturesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumAutomaticSenseMediumDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumAutomaticSenseMediumExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodeCodesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodeCodesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxPrioritiesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxRetriesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodePrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodePrioritiesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodeSearchModesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodeSearchModesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumBarcodeTimeOutValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBarcodeTimeOutValuesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumBitDepthsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumBitDepthsExDelegate(DTWAIN_SOURCE Source, int PixelType, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumBitDepthsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx2Delegate(DTWAIN_SOURCE Source, int PixelType);
         public delegate int DTWAIN_EnumBottomCamerasDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBottomCamerasExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumBrightnessValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumBrightnessValuesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumCamerasDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras);
-        public delegate int DTWAIN_EnumCamerasExDelegate(DTWAIN_SOURCE Source, int nWhichCamera, ref DTWAIN_ARRAY Cameras);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx2Delegate(DTWAIN_SOURCE Source);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx3Delegate(DTWAIN_SOURCE Source, int nWhichCamera);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasExDelegate(DTWAIN_SOURCE Source);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCamerasEx2Delegate(DTWAIN_SOURCE Source, int nWhichCamera);
         public delegate int DTWAIN_EnumCompressionTypesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumCompressionTypesExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2Delegate(DTWAIN_SOURCE Source, int lFileType, int bUseBufferedMode);
         public delegate int DTWAIN_EnumContrastValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumContrastValuesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumCustomCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx2Delegate(DTWAIN_SOURCE Source);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumCustomCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumDoubleFeedDetectLengthsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectLengthsExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
         public delegate int DTWAIN_EnumDoubleFeedDetectValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2096,7 +2117,7 @@
         public delegate int DTWAIN_EnumExtImageInfoTypesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumExtImageInfoTypesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumExtendedCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumExtendedCapsExDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumExtendedCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2Delegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumFileTypeBitsPerPixelDelegate(int FileType, ref DTWAIN_ARRAY Array);
         public delegate int DTWAIN_EnumFileXferFormatsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2116,6 +2137,7 @@
         public delegate int DTWAIN_EnumNoiseFiltersDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumOCRInterfacesDelegate(ref DTWAIN_ARRAY OCRInterfaces);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesExDelegate();
         public delegate int DTWAIN_EnumOCRSupportedCapsDelegate(DTWAIN_OCRENGINE Engine, ref DTWAIN_ARRAY SupportedCaps);
         public delegate int DTWAIN_EnumOrientationsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumOrientationsExDelegate(DTWAIN_SOURCE Source);
@@ -2123,18 +2145,18 @@
         public delegate DTWAIN_ARRAY DTWAIN_EnumOverscanValuesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumPaperSizesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumPaperSizesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchCodesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchCodesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchMaxPrioritiesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchMaxRetriesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchMaxRetriesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchPrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchPrioritiesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchSearchModesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchSearchModesExDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_EnumPatchTimeOutValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchTimeOutValuesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodeCodesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodeCodesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxRetriesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodePrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodePrioritiesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodeSearchModesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodeSearchModesExDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_EnumPatchcodeTimeOutValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumPatchcodeTimeOutValuesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumPixelTypesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumPixelTypesExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumPrinterStringModesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2149,7 +2171,7 @@
         public delegate int DTWAIN_EnumSourcesDelegate(ref DTWAIN_ARRAY lpArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSourcesExDelegate();
         public delegate int DTWAIN_EnumSupportedCapsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate int DTWAIN_EnumSupportedCapsExDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
+        public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedCapsExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2Delegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumSupportedExtImageInfoDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate DTWAIN_ARRAY DTWAIN_EnumSupportedExtImageInfoExDelegate(DTWAIN_SOURCE Source);
@@ -2172,8 +2194,6 @@
         public delegate int DTWAIN_FeedPageDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_FlipBitmapDelegate(HANDLE hDib);
         public delegate int DTWAIN_FlushAcquiredPagesDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_ForceAcquireBitDepthDelegate(DTWAIN_SOURCE Source, int BitDepth);
-        public delegate int DTWAIN_ForceScanOnNoUIDelegate(DTWAIN_SOURCE Source, int bSet);
         public delegate DTWAIN_FRAME DTWAIN_FrameCreateDelegate(DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom);
         public delegate DTWAIN_FRAME DTWAIN_FrameCreateStringDelegate([MarshalAs(UnmanagedType.LPTStr)] string Left, [MarshalAs(UnmanagedType.LPTStr)] string Top, [MarshalAs(UnmanagedType.LPTStr)] string Right, [MarshalAs(UnmanagedType.LPTStr)] string Bottom);
         public delegate int DTWAIN_FrameDestroyDelegate(DTWAIN_FRAME Frame);
@@ -2213,11 +2233,18 @@
         public delegate int DTWAIN_GetAppInfoDelegate_overload(System.IntPtr szVerStr, System.IntPtr szManu, System.IntPtr szProdFam, System.IntPtr szProdName);
         public delegate int DTWAIN_GetAuthorDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szAuthor);
         public delegate int DTWAIN_GetAuthorDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szAuthor);
+        public delegate int DTWAIN_GetBarcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent);
+        public delegate int DTWAIN_GetBarcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent);
+        public delegate int DTWAIN_GetBarcodePrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities);
+        public delegate int DTWAIN_GetBarcodeSearchModeDelegate(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent);
+        public delegate int DTWAIN_GetBarcodeTimeOutDelegate(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent);
         public delegate int DTWAIN_GetBatteryMinutesDelegate(DTWAIN_SOURCE Source, ref int lpMinutes);
         public delegate int DTWAIN_GetBatteryPercentDelegate(DTWAIN_SOURCE Source, ref int lpPercent);
         public delegate int DTWAIN_GetBitDepthDelegate(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent);
+        public delegate int DTWAIN_GetBitDepthExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetBlankPageAutoDetectionDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetBrightnessDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness);
+        public delegate DTWAIN_FLOAT DTWAIN_GetBrightnessExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetBrightnessStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Brightness);
         public delegate int DTWAIN_GetBrightnessStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Brightness);
         public delegate HANDLE DTWAIN_GetBufferedTransferInfoDelegate(DTWAIN_SOURCE Source, ref DWORD Compression, ref DWORD BytesPerRow, ref DWORD Columns, ref DWORD Rows, ref DWORD XOffset, ref DWORD YOffset, ref DWORD Flags, ref DWORD BytesWritten, ref DWORD MemoryLength);
@@ -2230,6 +2257,7 @@
         public delegate int DTWAIN_GetCapDataTypeDelegate(DTWAIN_SOURCE Source, int nCap);
         public delegate int DTWAIN_GetCapFromNameDelegate([MarshalAs(UnmanagedType.LPTStr)] string szName);
         public delegate int DTWAIN_GetCapOperationsDelegate(DTWAIN_SOURCE Source, int lCapability, ref int lpOps);
+        public delegate int DTWAIN_GetCapOperationsExDelegate(DTWAIN_SOURCE Source, int lCapability);
         public delegate int DTWAIN_GetCapValuesDelegate(DTWAIN_SOURCE Source, int lCap, int lGetType, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetCapValuesExDelegate(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetCapValuesEx2Delegate(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType, ref DTWAIN_ARRAY pArray);
@@ -2237,10 +2265,12 @@
         public delegate int DTWAIN_GetCaptionDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Caption);
         public delegate int DTWAIN_GetCompressionSizeDelegate(DTWAIN_SOURCE Source, ref int lBytes);
         public delegate int DTWAIN_GetCompressionTypeDelegate(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent);
+        public delegate int DTWAIN_GetCompressionTypeExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetConditionCodeStringDelegate(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetConditionCodeStringDelegate_overload(int lError, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetConstantFromTwainNameDelegate([MarshalAs(UnmanagedType.LPTStr)] string lpszBuffer);
         public delegate int DTWAIN_GetContrastDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast);
+        public delegate DTWAIN_FLOAT DTWAIN_GetContrastExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetContrastStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Contrast);
         public delegate int DTWAIN_GetContrastStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Contrast);
         public delegate int DTWAIN_GetCountryDelegate();
@@ -2266,6 +2296,7 @@
         public delegate int DTWAIN_GetDoubleFeedDetectLengthDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Value, int bCurrent);
         public delegate int DTWAIN_GetDoubleFeedDetectValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetDuplexTypeDelegate(DTWAIN_SOURCE Source, ref int lpDupType);
+        public delegate int DTWAIN_GetDuplexTypeExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetErrorBufferDelegate(ref DTWAIN_ARRAY ArrayBuffer);
         public delegate int DTWAIN_GetErrorBufferThresholdDelegate();
         public delegate DTwainErrorProc DTWAIN_GetErrorCallbackDelegate();
@@ -2299,6 +2330,7 @@
         public delegate int DTWAIN_GetImageInfoStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpXResolution, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageInfoStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetJobControlDelegate(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
+        public delegate int DTWAIN_GetJobControlExDelegate(DTWAIN_SOURCE Source, int bGetCurrent);
         public delegate int DTWAIN_GetJpegValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetJpegXRValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetLanguageDelegate();
@@ -2306,6 +2338,7 @@
         public delegate int DTWAIN_GetLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength);
         public delegate int DTWAIN_GetLibraryPathDelegate_overload(System.IntPtr lpszVer, int nLength);
         public delegate int DTWAIN_GetLightPathDelegate(DTWAIN_SOURCE Source, ref int lpLightPath);
+        public delegate int DTWAIN_GetLightPathExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetLightSourceDelegate(DTWAIN_SOURCE Source, ref int LightSource);
         public delegate int DTWAIN_GetLightSourcesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY LightSources);
         public delegate DTWAIN_ARRAY DTWAIN_GetLightSourcesExDelegate(DTWAIN_SOURCE Source);
@@ -2341,6 +2374,7 @@
         public delegate int DTWAIN_GetOCRVersionInfoDelegate(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder buffer, int maxBufSize);
         public delegate int DTWAIN_GetOCRVersionInfoDelegate_overload(DTWAIN_OCRENGINE Engine, System.IntPtr buffer, int maxBufSize);
         public delegate int DTWAIN_GetOrientationDelegate(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent);
+        public delegate int DTWAIN_GetOrientationExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetOverscanDelegate(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent);
         public delegate int DTWAIN_GetPDFTextElementFloatDelegate(DTWAIN_PDFTEXTELEMENT TextElement, ref DTWAIN_FLOAT val1, ref DTWAIN_FLOAT val2, int Flags);
         public delegate int DTWAIN_GetPDFTextElementLongDelegate(DTWAIN_PDFTEXTELEMENT TextElement, ref int val1, ref int val2, int Flags);
@@ -2351,26 +2385,32 @@
         public delegate int DTWAIN_GetPaperSizeDelegate(DTWAIN_SOURCE Source, ref int lpPaperSize, int bCurrent);
         public delegate int DTWAIN_GetPaperSizeNameDelegate(int paperNumber, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder outName, int nSize);
         public delegate int DTWAIN_GetPaperSizeNameDelegate_overload(int paperNumber, System.IntPtr outName, int nSize);
-        public delegate int DTWAIN_GetPatchMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent);
-        public delegate int DTWAIN_GetPatchMaxRetriesDelegate(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent);
-        public delegate int DTWAIN_GetPatchPrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities);
-        public delegate int DTWAIN_GetPatchSearchModeDelegate(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent);
-        public delegate int DTWAIN_GetPatchTimeOutDelegate(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent);
+        public delegate int DTWAIN_GetPatchcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent);
+        public delegate int DTWAIN_GetPatchcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent);
+        public delegate int DTWAIN_GetPatchcodePrioritiesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities);
+        public delegate int DTWAIN_GetPatchcodeSearchModeDelegate(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent);
+        public delegate int DTWAIN_GetPatchcodeTimeOutDelegate(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent);
         public delegate int DTWAIN_GetPixelFlavorDelegate(DTWAIN_SOURCE Source, ref int lpPixelFlavor);
         public delegate int DTWAIN_GetPixelTypeDelegate(DTWAIN_SOURCE Source, ref int PixelType, ref int BitDepth, int bCurrent);
         public delegate int DTWAIN_GetPrinterDelegate(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent);
+        public delegate int DTWAIN_GetPrinterExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetPrinterStartNumberDelegate(DTWAIN_SOURCE Source, ref int nStart);
+        public delegate int DTWAIN_GetPrinterStartNumberExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetPrinterStringModeDelegate(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent);
+        public delegate int DTWAIN_GetPrinterStringModeExDelegate(DTWAIN_SOURCE Source, int bCurrent);
         public delegate int DTWAIN_GetPrinterStringsDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString);
+        public delegate DTWAIN_ARRAY DTWAIN_GetPrinterStringsExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetPrinterSuffixStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Suffix, int nMaxLen);
         public delegate int DTWAIN_GetPrinterSuffixStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Suffix, int nMaxLen);
         public delegate int DTWAIN_GetRegisteredMsgDelegate();
         public delegate int DTWAIN_GetResolutionDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution);
+        public delegate DTWAIN_FLOAT DTWAIN_GetResolutionExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetResolutionStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution);
         public delegate int DTWAIN_GetResolutionStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Resolution);
         public delegate int DTWAIN_GetResourceStringDelegate(int ResourceID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetResourceStringDelegate_overload(int ResourceID, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetRotationDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation);
+        public delegate DTWAIN_FLOAT DTWAIN_GetRotationExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetRotationStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Rotation);
         public delegate int DTWAIN_GetRotationStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Rotation);
         public delegate int DTWAIN_GetSaveFileNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder fName, int nMaxLen);
@@ -2394,6 +2434,7 @@
         public delegate int DTWAIN_GetSourceProductNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceProductNameDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceUnitDelegate(DTWAIN_SOURCE Source, ref int lpUnit);
+        public delegate int DTWAIN_GetSourceUnitExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetSourceVersionInfoDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionInfoDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionNumberDelegate(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor);
@@ -2410,20 +2451,12 @@
         public delegate int DTWAIN_GetTwainAvailabilityDelegate();
         public delegate int DTWAIN_GetTwainAvailabilityExDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder directories, int nMaxLen);
         public delegate int DTWAIN_GetTwainAvailabilityExDelegate_overload(System.IntPtr directories, int nMaxLen);
-        public delegate int DTWAIN_GetTwainCountryNameDelegate(int countryId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName);
-        public delegate int DTWAIN_GetTwainCountryNameDelegate_overload(int countryId, System.IntPtr szName);
-        public delegate int DTWAIN_GetTwainCountryValueDelegate([MarshalAs(UnmanagedType.LPTStr)] string country);
         public delegate HWND DTWAIN_GetTwainHwndDelegate();
-        public delegate int DTWAIN_GetTwainLanguageNameDelegate(int nameId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName);
-        public delegate int DTWAIN_GetTwainLanguageNameDelegate_overload(int nameId, System.IntPtr szName);
-        public delegate int DTWAIN_GetTwainLanguageValueDelegate([MarshalAs(UnmanagedType.LPTStr)] string szName);
         public delegate int DTWAIN_GetTwainModeDelegate();
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
-        public delegate int DTWAIN_GetTwainStringNameDelegate(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
-        public delegate int DTWAIN_GetTwainStringNameDelegate_overload(int category, int TwainID, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetTwainTimeoutDelegate();
         public delegate int DTWAIN_GetVersionDelegate(ref int lpMajor, ref int lpMinor, ref int lpVersionType);
         public delegate int DTWAIN_GetVersionCopyrightDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszApp, int nLength);
@@ -2459,6 +2492,9 @@
         public delegate int DTWAIN_IsAutoScanEnabledDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsAutomaticSenseMediumEnabledDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsAutomaticSenseMediumSupportedDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsBarcodeCapsSupportedDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsBarcodeDetectionEnabledDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsBarcodeSupportedDelegate(DTWAIN_SOURCE Source, int BarCode);
         public delegate int DTWAIN_IsBlankPageDetectionOnDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsBufferedTileModeOnDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsBufferedTileModeSupportedDelegate(DTWAIN_SOURCE Source);
@@ -2520,9 +2556,9 @@
         public delegate int DTWAIN_IsOverscanSupportedDelegate(DTWAIN_SOURCE Source, int SupportValue);
         public delegate int DTWAIN_IsPaperDetectableDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsPaperSizeSupportedDelegate(DTWAIN_SOURCE Source, int PaperSize);
-        public delegate int DTWAIN_IsPatchCapsSupportedDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_IsPatchDetectEnabledDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_IsPatchSupportedDelegate(DTWAIN_SOURCE Source, int PatchCode);
+        public delegate int DTWAIN_IsPatchcodeCapsSupportedDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsPatchcodeDetectionEnabledDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsPatchcodeSupportedDelegate(DTWAIN_SOURCE Source, int PatchCode);
         public delegate int DTWAIN_IsPeekMessageLoopEnabledDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsPixelTypeSupportedDelegate(DTWAIN_SOURCE Source, int PixelType);
         public delegate int DTWAIN_IsPrinterEnabledDelegate(DTWAIN_SOURCE Source, int Printer);
@@ -2626,6 +2662,11 @@
         public delegate int DTWAIN_SetAuthorDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szAuthor);
         public delegate int DTWAIN_SetAvailablePrintersDelegate(DTWAIN_SOURCE Source, int lpAvailPrinters);
         public delegate int DTWAIN_SetAvailablePrintersArrayDelegate(DTWAIN_SOURCE Source, DTWAIN_ARRAY AvailPrinters);
+        public delegate int DTWAIN_SetBarcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, int nMaxSearchRetries);
+        public delegate int DTWAIN_SetBarcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, int nMaxRetries);
+        public delegate int DTWAIN_SetBarcodePrioritiesDelegate(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities);
+        public delegate int DTWAIN_SetBarcodeSearchModeDelegate(DTWAIN_SOURCE Source, int nSearchMode);
+        public delegate int DTWAIN_SetBarcodeTimeOutDelegate(DTWAIN_SOURCE Source, int TimeOutValue);
         public delegate int DTWAIN_SetBitDepthDelegate(DTWAIN_SOURCE Source, int BitDepth, int bSetCurrent);
         public delegate int DTWAIN_SetBlankPageDetectionDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, int discard_option, int bSet);
         public delegate int DTWAIN_SetBlankPageDetectionExDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, int autodetect, int detectOpts, int bSet);
@@ -2713,11 +2754,11 @@
         public delegate int DTWAIN_SetPDFTextElementStringDelegate(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPTStr)] string val1, int Flags);
         public delegate int DTWAIN_SetPDFTitleDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpTitle);
         public delegate int DTWAIN_SetPaperSizeDelegate(DTWAIN_SOURCE Source, int PaperSize, int bSetCurrent);
-        public delegate int DTWAIN_SetPatchMaxPrioritiesDelegate(DTWAIN_SOURCE Source, int nMaxSearchRetries);
-        public delegate int DTWAIN_SetPatchMaxRetriesDelegate(DTWAIN_SOURCE Source, int nMaxRetries);
-        public delegate int DTWAIN_SetPatchPrioritiesDelegate(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities);
-        public delegate int DTWAIN_SetPatchSearchModeDelegate(DTWAIN_SOURCE Source, int nSearchMode);
-        public delegate int DTWAIN_SetPatchTimeOutDelegate(DTWAIN_SOURCE Source, int TimeOutValue);
+        public delegate int DTWAIN_SetPatchcodeMaxPrioritiesDelegate(DTWAIN_SOURCE Source, int nMaxSearchRetries);
+        public delegate int DTWAIN_SetPatchcodeMaxRetriesDelegate(DTWAIN_SOURCE Source, int nMaxRetries);
+        public delegate int DTWAIN_SetPatchcodePrioritiesDelegate(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities);
+        public delegate int DTWAIN_SetPatchcodeSearchModeDelegate(DTWAIN_SOURCE Source, int nSearchMode);
+        public delegate int DTWAIN_SetPatchcodeTimeOutDelegate(DTWAIN_SOURCE Source, int TimeOutValue);
         public delegate int DTWAIN_SetPixelFlavorDelegate(DTWAIN_SOURCE Source, int PixelFlavor);
         public delegate int DTWAIN_SetPixelTypeDelegate(DTWAIN_SOURCE Source, int PixelType, int BitDepth, int bSetCurrent);
         public delegate int DTWAIN_SetPostScriptTitleDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szTitle);
@@ -2934,6 +2975,9 @@
         [DTWAINNativeFunction("DTWAIN_ArrayDestroyFrames")]
         private readonly DTWAIN_ArrayDestroyFramesDelegate  _DTWAIN_ArrayDestroyFrames;
 
+        [DTWAINNativeFunction("DTWAIN_ArrayDumpToLog")]
+        private readonly DTWAIN_ArrayDumpToLogDelegate  _DTWAIN_ArrayDumpToLog;
+
         [DTWAINNativeFunction("DTWAIN_ArrayFind")]
         private readonly DTWAIN_ArrayFindDelegate  _DTWAIN_ArrayFind;
 
@@ -2982,6 +3026,9 @@
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloat")]
         private readonly DTWAIN_ArrayGetAtFloatDelegate  _DTWAIN_ArrayGetAtFloat;
 
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloatEx")]
+        private readonly DTWAIN_ArrayGetAtFloatExDelegate  _DTWAIN_ArrayGetAtFloatEx;
+
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtFloatString")]
         private readonly DTWAIN_ArrayGetAtFloatStringDelegate  _DTWAIN_ArrayGetAtFloatString;
 
@@ -3005,6 +3052,12 @@
 
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtLong64")]
         private readonly DTWAIN_ArrayGetAtLong64Delegate  _DTWAIN_ArrayGetAtLong64;
+
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtLong64Ex")]
+        private readonly DTWAIN_ArrayGetAtLong64ExDelegate  _DTWAIN_ArrayGetAtLong64Ex;
+
+        [DTWAINNativeFunction("DTWAIN_ArrayGetAtLongEx")]
+        private readonly DTWAIN_ArrayGetAtLongExDelegate  _DTWAIN_ArrayGetAtLongEx;
 
         [DTWAINNativeFunction("DTWAIN_ArrayGetAtSource")]
         private readonly DTWAIN_ArrayGetAtSourceDelegate  _DTWAIN_ArrayGetAtSource;
@@ -3243,6 +3296,9 @@
         [DTWAINNativeFunction("DTWAIN_EnableAutomaticSenseMedium")]
         private readonly DTWAIN_EnableAutomaticSenseMediumDelegate  _DTWAIN_EnableAutomaticSenseMedium;
 
+        [DTWAINNativeFunction("DTWAIN_EnableBarcodeDetection")]
+        private readonly DTWAIN_EnableBarcodeDetectionDelegate  _DTWAIN_EnableBarcodeDetection;
+
         [DTWAINNativeFunction("DTWAIN_EnableDuplex")]
         private readonly DTWAIN_EnableDuplexDelegate  _DTWAIN_EnableDuplex;
 
@@ -3261,8 +3317,8 @@
         [DTWAINNativeFunction("DTWAIN_EnableMsgNotify")]
         private readonly DTWAIN_EnableMsgNotifyDelegate  _DTWAIN_EnableMsgNotify;
 
-        [DTWAINNativeFunction("DTWAIN_EnablePatchDetect")]
-        private readonly DTWAIN_EnablePatchDetectDelegate  _DTWAIN_EnablePatchDetect;
+        [DTWAINNativeFunction("DTWAIN_EnablePatchcodeDetection")]
+        private readonly DTWAIN_EnablePatchcodeDetectionDelegate  _DTWAIN_EnablePatchcodeDetection;
 
         [DTWAINNativeFunction("DTWAIN_EnablePeekMessageLoop")]
         private readonly DTWAIN_EnablePeekMessageLoopDelegate  _DTWAIN_EnablePeekMessageLoop;
@@ -3318,6 +3374,42 @@
         [DTWAINNativeFunction("DTWAIN_EnumAutomaticSenseMediumEx")]
         private readonly DTWAIN_EnumAutomaticSenseMediumExDelegate  _DTWAIN_EnumAutomaticSenseMediumEx;
 
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeCodes")]
+        private readonly DTWAIN_EnumBarcodeCodesDelegate  _DTWAIN_EnumBarcodeCodes;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeCodesEx")]
+        private readonly DTWAIN_EnumBarcodeCodesExDelegate  _DTWAIN_EnumBarcodeCodesEx;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeMaxPriorities")]
+        private readonly DTWAIN_EnumBarcodeMaxPrioritiesDelegate  _DTWAIN_EnumBarcodeMaxPriorities;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeMaxPrioritiesEx")]
+        private readonly DTWAIN_EnumBarcodeMaxPrioritiesExDelegate  _DTWAIN_EnumBarcodeMaxPrioritiesEx;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeMaxRetries")]
+        private readonly DTWAIN_EnumBarcodeMaxRetriesDelegate  _DTWAIN_EnumBarcodeMaxRetries;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeMaxRetriesEx")]
+        private readonly DTWAIN_EnumBarcodeMaxRetriesExDelegate  _DTWAIN_EnumBarcodeMaxRetriesEx;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodePriorities")]
+        private readonly DTWAIN_EnumBarcodePrioritiesDelegate  _DTWAIN_EnumBarcodePriorities;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodePrioritiesEx")]
+        private readonly DTWAIN_EnumBarcodePrioritiesExDelegate  _DTWAIN_EnumBarcodePrioritiesEx;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeSearchModes")]
+        private readonly DTWAIN_EnumBarcodeSearchModesDelegate  _DTWAIN_EnumBarcodeSearchModes;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeSearchModesEx")]
+        private readonly DTWAIN_EnumBarcodeSearchModesExDelegate  _DTWAIN_EnumBarcodeSearchModesEx;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeTimeOutValues")]
+        private readonly DTWAIN_EnumBarcodeTimeOutValuesDelegate  _DTWAIN_EnumBarcodeTimeOutValues;
+
+        [DTWAINNativeFunction("DTWAIN_EnumBarcodeTimeOutValuesEx")]
+        private readonly DTWAIN_EnumBarcodeTimeOutValuesExDelegate  _DTWAIN_EnumBarcodeTimeOutValuesEx;
+
         [DTWAINNativeFunction("DTWAIN_EnumBitDepths")]
         private readonly DTWAIN_EnumBitDepthsDelegate  _DTWAIN_EnumBitDepths;
 
@@ -3348,9 +3440,6 @@
         [DTWAINNativeFunction("DTWAIN_EnumCamerasEx2")]
         private readonly DTWAIN_EnumCamerasEx2Delegate  _DTWAIN_EnumCamerasEx2;
 
-        [DTWAINNativeFunction("DTWAIN_EnumCamerasEx3")]
-        private readonly DTWAIN_EnumCamerasEx3Delegate  _DTWAIN_EnumCamerasEx3;
-
         [DTWAINNativeFunction("DTWAIN_EnumCompressionTypes")]
         private readonly DTWAIN_EnumCompressionTypesDelegate  _DTWAIN_EnumCompressionTypes;
 
@@ -3369,8 +3458,8 @@
         [DTWAINNativeFunction("DTWAIN_EnumCustomCaps")]
         private readonly DTWAIN_EnumCustomCapsDelegate  _DTWAIN_EnumCustomCaps;
 
-        [DTWAINNativeFunction("DTWAIN_EnumCustomCapsEx2")]
-        private readonly DTWAIN_EnumCustomCapsEx2Delegate  _DTWAIN_EnumCustomCapsEx2;
+        [DTWAINNativeFunction("DTWAIN_EnumCustomCapsEx")]
+        private readonly DTWAIN_EnumCustomCapsExDelegate  _DTWAIN_EnumCustomCapsEx;
 
         [DTWAINNativeFunction("DTWAIN_EnumDoubleFeedDetectLengths")]
         private readonly DTWAIN_EnumDoubleFeedDetectLengthsDelegate  _DTWAIN_EnumDoubleFeedDetectLengths;
@@ -3453,6 +3542,9 @@
         [DTWAINNativeFunction("DTWAIN_EnumOCRInterfaces")]
         private readonly DTWAIN_EnumOCRInterfacesDelegate  _DTWAIN_EnumOCRInterfaces;
 
+        [DTWAINNativeFunction("DTWAIN_EnumOCRInterfacesEx")]
+        private readonly DTWAIN_EnumOCRInterfacesExDelegate  _DTWAIN_EnumOCRInterfacesEx;
+
         [DTWAINNativeFunction("DTWAIN_EnumOCRSupportedCaps")]
         private readonly DTWAIN_EnumOCRSupportedCapsDelegate  _DTWAIN_EnumOCRSupportedCaps;
 
@@ -3474,41 +3566,41 @@
         [DTWAINNativeFunction("DTWAIN_EnumPaperSizesEx")]
         private readonly DTWAIN_EnumPaperSizesExDelegate  _DTWAIN_EnumPaperSizesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchCodes")]
-        private readonly DTWAIN_EnumPatchCodesDelegate  _DTWAIN_EnumPatchCodes;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeCodes")]
+        private readonly DTWAIN_EnumPatchcodeCodesDelegate  _DTWAIN_EnumPatchcodeCodes;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchCodesEx")]
-        private readonly DTWAIN_EnumPatchCodesExDelegate  _DTWAIN_EnumPatchCodesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeCodesEx")]
+        private readonly DTWAIN_EnumPatchcodeCodesExDelegate  _DTWAIN_EnumPatchcodeCodesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchMaxPriorities")]
-        private readonly DTWAIN_EnumPatchMaxPrioritiesDelegate  _DTWAIN_EnumPatchMaxPriorities;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeMaxPriorities")]
+        private readonly DTWAIN_EnumPatchcodeMaxPrioritiesDelegate  _DTWAIN_EnumPatchcodeMaxPriorities;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchMaxPrioritiesEx")]
-        private readonly DTWAIN_EnumPatchMaxPrioritiesExDelegate  _DTWAIN_EnumPatchMaxPrioritiesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeMaxPrioritiesEx")]
+        private readonly DTWAIN_EnumPatchcodeMaxPrioritiesExDelegate  _DTWAIN_EnumPatchcodeMaxPrioritiesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchMaxRetries")]
-        private readonly DTWAIN_EnumPatchMaxRetriesDelegate  _DTWAIN_EnumPatchMaxRetries;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeMaxRetries")]
+        private readonly DTWAIN_EnumPatchcodeMaxRetriesDelegate  _DTWAIN_EnumPatchcodeMaxRetries;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchMaxRetriesEx")]
-        private readonly DTWAIN_EnumPatchMaxRetriesExDelegate  _DTWAIN_EnumPatchMaxRetriesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeMaxRetriesEx")]
+        private readonly DTWAIN_EnumPatchcodeMaxRetriesExDelegate  _DTWAIN_EnumPatchcodeMaxRetriesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchPriorities")]
-        private readonly DTWAIN_EnumPatchPrioritiesDelegate  _DTWAIN_EnumPatchPriorities;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodePriorities")]
+        private readonly DTWAIN_EnumPatchcodePrioritiesDelegate  _DTWAIN_EnumPatchcodePriorities;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchPrioritiesEx")]
-        private readonly DTWAIN_EnumPatchPrioritiesExDelegate  _DTWAIN_EnumPatchPrioritiesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodePrioritiesEx")]
+        private readonly DTWAIN_EnumPatchcodePrioritiesExDelegate  _DTWAIN_EnumPatchcodePrioritiesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchSearchModes")]
-        private readonly DTWAIN_EnumPatchSearchModesDelegate  _DTWAIN_EnumPatchSearchModes;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeSearchModes")]
+        private readonly DTWAIN_EnumPatchcodeSearchModesDelegate  _DTWAIN_EnumPatchcodeSearchModes;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchSearchModesEx")]
-        private readonly DTWAIN_EnumPatchSearchModesExDelegate  _DTWAIN_EnumPatchSearchModesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeSearchModesEx")]
+        private readonly DTWAIN_EnumPatchcodeSearchModesExDelegate  _DTWAIN_EnumPatchcodeSearchModesEx;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchTimeOutValues")]
-        private readonly DTWAIN_EnumPatchTimeOutValuesDelegate  _DTWAIN_EnumPatchTimeOutValues;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeTimeOutValues")]
+        private readonly DTWAIN_EnumPatchcodeTimeOutValuesDelegate  _DTWAIN_EnumPatchcodeTimeOutValues;
 
-        [DTWAINNativeFunction("DTWAIN_EnumPatchTimeOutValuesEx")]
-        private readonly DTWAIN_EnumPatchTimeOutValuesExDelegate  _DTWAIN_EnumPatchTimeOutValuesEx;
+        [DTWAINNativeFunction("DTWAIN_EnumPatchcodeTimeOutValuesEx")]
+        private readonly DTWAIN_EnumPatchcodeTimeOutValuesExDelegate  _DTWAIN_EnumPatchcodeTimeOutValuesEx;
 
         [DTWAINNativeFunction("DTWAIN_EnumPixelTypes")]
         private readonly DTWAIN_EnumPixelTypesDelegate  _DTWAIN_EnumPixelTypes;
@@ -3620,12 +3712,6 @@
 
         [DTWAINNativeFunction("DTWAIN_FlushAcquiredPages")]
         private readonly DTWAIN_FlushAcquiredPagesDelegate  _DTWAIN_FlushAcquiredPages;
-
-        [DTWAINNativeFunction("DTWAIN_ForceAcquireBitDepth")]
-        private readonly DTWAIN_ForceAcquireBitDepthDelegate  _DTWAIN_ForceAcquireBitDepth;
-
-        [DTWAINNativeFunction("DTWAIN_ForceScanOnNoUI")]
-        private readonly DTWAIN_ForceScanOnNoUIDelegate  _DTWAIN_ForceScanOnNoUI;
 
         [DTWAINNativeFunction("DTWAIN_FrameCreate")]
         private readonly DTWAIN_FrameCreateDelegate  _DTWAIN_FrameCreate;
@@ -3744,6 +3830,21 @@
         [DTWAINNativeFunction("DTWAIN_GetAuthor")]
         private readonly DTWAIN_GetAuthorDelegate_overload _DTWAIN_GetAuthor_overload; 
 
+        [DTWAINNativeFunction("DTWAIN_GetBarcodeMaxPriorities")]
+        private readonly DTWAIN_GetBarcodeMaxPrioritiesDelegate  _DTWAIN_GetBarcodeMaxPriorities;
+
+        [DTWAINNativeFunction("DTWAIN_GetBarcodeMaxRetries")]
+        private readonly DTWAIN_GetBarcodeMaxRetriesDelegate  _DTWAIN_GetBarcodeMaxRetries;
+
+        [DTWAINNativeFunction("DTWAIN_GetBarcodePriorities")]
+        private readonly DTWAIN_GetBarcodePrioritiesDelegate  _DTWAIN_GetBarcodePriorities;
+
+        [DTWAINNativeFunction("DTWAIN_GetBarcodeSearchMode")]
+        private readonly DTWAIN_GetBarcodeSearchModeDelegate  _DTWAIN_GetBarcodeSearchMode;
+
+        [DTWAINNativeFunction("DTWAIN_GetBarcodeTimeOut")]
+        private readonly DTWAIN_GetBarcodeTimeOutDelegate  _DTWAIN_GetBarcodeTimeOut;
+
         [DTWAINNativeFunction("DTWAIN_GetBatteryMinutes")]
         private readonly DTWAIN_GetBatteryMinutesDelegate  _DTWAIN_GetBatteryMinutes;
 
@@ -3753,11 +3854,17 @@
         [DTWAINNativeFunction("DTWAIN_GetBitDepth")]
         private readonly DTWAIN_GetBitDepthDelegate  _DTWAIN_GetBitDepth;
 
+        [DTWAINNativeFunction("DTWAIN_GetBitDepthEx")]
+        private readonly DTWAIN_GetBitDepthExDelegate  _DTWAIN_GetBitDepthEx;
+
         [DTWAINNativeFunction("DTWAIN_GetBlankPageAutoDetection")]
         private readonly DTWAIN_GetBlankPageAutoDetectionDelegate  _DTWAIN_GetBlankPageAutoDetection;
 
         [DTWAINNativeFunction("DTWAIN_GetBrightness")]
         private readonly DTWAIN_GetBrightnessDelegate  _DTWAIN_GetBrightness;
+
+        [DTWAINNativeFunction("DTWAIN_GetBrightnessEx")]
+        private readonly DTWAIN_GetBrightnessExDelegate  _DTWAIN_GetBrightnessEx;
 
         [DTWAINNativeFunction("DTWAIN_GetBrightnessString")]
         private readonly DTWAIN_GetBrightnessStringDelegate  _DTWAIN_GetBrightnessString;
@@ -3795,6 +3902,9 @@
         [DTWAINNativeFunction("DTWAIN_GetCapOperations")]
         private readonly DTWAIN_GetCapOperationsDelegate  _DTWAIN_GetCapOperations;
 
+        [DTWAINNativeFunction("DTWAIN_GetCapOperationsEx")]
+        private readonly DTWAIN_GetCapOperationsExDelegate  _DTWAIN_GetCapOperationsEx;
+
         [DTWAINNativeFunction("DTWAIN_GetCapValues")]
         private readonly DTWAIN_GetCapValuesDelegate  _DTWAIN_GetCapValues;
 
@@ -3816,6 +3926,9 @@
         [DTWAINNativeFunction("DTWAIN_GetCompressionType")]
         private readonly DTWAIN_GetCompressionTypeDelegate  _DTWAIN_GetCompressionType;
 
+        [DTWAINNativeFunction("DTWAIN_GetCompressionTypeEx")]
+        private readonly DTWAIN_GetCompressionTypeExDelegate  _DTWAIN_GetCompressionTypeEx;
+
         [DTWAINNativeFunction("DTWAIN_GetConditionCodeString")]
         private readonly DTWAIN_GetConditionCodeStringDelegate  _DTWAIN_GetConditionCodeString;
 
@@ -3827,6 +3940,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetContrast")]
         private readonly DTWAIN_GetContrastDelegate  _DTWAIN_GetContrast;
+
+        [DTWAINNativeFunction("DTWAIN_GetContrastEx")]
+        private readonly DTWAIN_GetContrastExDelegate  _DTWAIN_GetContrastEx;
 
         [DTWAINNativeFunction("DTWAIN_GetContrastString")]
         private readonly DTWAIN_GetContrastStringDelegate  _DTWAIN_GetContrastString;
@@ -3902,6 +4018,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetDuplexType")]
         private readonly DTWAIN_GetDuplexTypeDelegate  _DTWAIN_GetDuplexType;
+
+        [DTWAINNativeFunction("DTWAIN_GetDuplexTypeEx")]
+        private readonly DTWAIN_GetDuplexTypeExDelegate  _DTWAIN_GetDuplexTypeEx;
 
         [DTWAINNativeFunction("DTWAIN_GetErrorBuffer")]
         private readonly DTWAIN_GetErrorBufferDelegate  _DTWAIN_GetErrorBuffer;
@@ -4002,6 +4121,9 @@
         [DTWAINNativeFunction("DTWAIN_GetJobControl")]
         private readonly DTWAIN_GetJobControlDelegate  _DTWAIN_GetJobControl;
 
+        [DTWAINNativeFunction("DTWAIN_GetJobControlEx")]
+        private readonly DTWAIN_GetJobControlExDelegate  _DTWAIN_GetJobControlEx;
+
         [DTWAINNativeFunction("DTWAIN_GetJpegValues")]
         private readonly DTWAIN_GetJpegValuesDelegate  _DTWAIN_GetJpegValues;
 
@@ -4022,6 +4144,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetLightPath")]
         private readonly DTWAIN_GetLightPathDelegate  _DTWAIN_GetLightPath;
+
+        [DTWAINNativeFunction("DTWAIN_GetLightPathEx")]
+        private readonly DTWAIN_GetLightPathExDelegate  _DTWAIN_GetLightPathEx;
 
         [DTWAINNativeFunction("DTWAIN_GetLightSource")]
         private readonly DTWAIN_GetLightSourceDelegate  _DTWAIN_GetLightSource;
@@ -4128,6 +4253,9 @@
         [DTWAINNativeFunction("DTWAIN_GetOrientation")]
         private readonly DTWAIN_GetOrientationDelegate  _DTWAIN_GetOrientation;
 
+        [DTWAINNativeFunction("DTWAIN_GetOrientationEx")]
+        private readonly DTWAIN_GetOrientationExDelegate  _DTWAIN_GetOrientationEx;
+
         [DTWAINNativeFunction("DTWAIN_GetOverscan")]
         private readonly DTWAIN_GetOverscanDelegate  _DTWAIN_GetOverscan;
 
@@ -4158,20 +4286,20 @@
         [DTWAINNativeFunction("DTWAIN_GetPaperSizeName")]
         private readonly DTWAIN_GetPaperSizeNameDelegate_overload _DTWAIN_GetPaperSizeName_overload; 
 
-        [DTWAINNativeFunction("DTWAIN_GetPatchMaxPriorities")]
-        private readonly DTWAIN_GetPatchMaxPrioritiesDelegate  _DTWAIN_GetPatchMaxPriorities;
+        [DTWAINNativeFunction("DTWAIN_GetPatchcodeMaxPriorities")]
+        private readonly DTWAIN_GetPatchcodeMaxPrioritiesDelegate  _DTWAIN_GetPatchcodeMaxPriorities;
 
-        [DTWAINNativeFunction("DTWAIN_GetPatchMaxRetries")]
-        private readonly DTWAIN_GetPatchMaxRetriesDelegate  _DTWAIN_GetPatchMaxRetries;
+        [DTWAINNativeFunction("DTWAIN_GetPatchcodeMaxRetries")]
+        private readonly DTWAIN_GetPatchcodeMaxRetriesDelegate  _DTWAIN_GetPatchcodeMaxRetries;
 
-        [DTWAINNativeFunction("DTWAIN_GetPatchPriorities")]
-        private readonly DTWAIN_GetPatchPrioritiesDelegate  _DTWAIN_GetPatchPriorities;
+        [DTWAINNativeFunction("DTWAIN_GetPatchcodePriorities")]
+        private readonly DTWAIN_GetPatchcodePrioritiesDelegate  _DTWAIN_GetPatchcodePriorities;
 
-        [DTWAINNativeFunction("DTWAIN_GetPatchSearchMode")]
-        private readonly DTWAIN_GetPatchSearchModeDelegate  _DTWAIN_GetPatchSearchMode;
+        [DTWAINNativeFunction("DTWAIN_GetPatchcodeSearchMode")]
+        private readonly DTWAIN_GetPatchcodeSearchModeDelegate  _DTWAIN_GetPatchcodeSearchMode;
 
-        [DTWAINNativeFunction("DTWAIN_GetPatchTimeOut")]
-        private readonly DTWAIN_GetPatchTimeOutDelegate  _DTWAIN_GetPatchTimeOut;
+        [DTWAINNativeFunction("DTWAIN_GetPatchcodeTimeOut")]
+        private readonly DTWAIN_GetPatchcodeTimeOutDelegate  _DTWAIN_GetPatchcodeTimeOut;
 
         [DTWAINNativeFunction("DTWAIN_GetPixelFlavor")]
         private readonly DTWAIN_GetPixelFlavorDelegate  _DTWAIN_GetPixelFlavor;
@@ -4182,14 +4310,26 @@
         [DTWAINNativeFunction("DTWAIN_GetPrinter")]
         private readonly DTWAIN_GetPrinterDelegate  _DTWAIN_GetPrinter;
 
+        [DTWAINNativeFunction("DTWAIN_GetPrinterEx")]
+        private readonly DTWAIN_GetPrinterExDelegate  _DTWAIN_GetPrinterEx;
+
         [DTWAINNativeFunction("DTWAIN_GetPrinterStartNumber")]
         private readonly DTWAIN_GetPrinterStartNumberDelegate  _DTWAIN_GetPrinterStartNumber;
+
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStartNumberEx")]
+        private readonly DTWAIN_GetPrinterStartNumberExDelegate  _DTWAIN_GetPrinterStartNumberEx;
 
         [DTWAINNativeFunction("DTWAIN_GetPrinterStringMode")]
         private readonly DTWAIN_GetPrinterStringModeDelegate  _DTWAIN_GetPrinterStringMode;
 
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStringModeEx")]
+        private readonly DTWAIN_GetPrinterStringModeExDelegate  _DTWAIN_GetPrinterStringModeEx;
+
         [DTWAINNativeFunction("DTWAIN_GetPrinterStrings")]
         private readonly DTWAIN_GetPrinterStringsDelegate  _DTWAIN_GetPrinterStrings;
+
+        [DTWAINNativeFunction("DTWAIN_GetPrinterStringsEx")]
+        private readonly DTWAIN_GetPrinterStringsExDelegate  _DTWAIN_GetPrinterStringsEx;
 
         [DTWAINNativeFunction("DTWAIN_GetPrinterSuffixString")]
         private readonly DTWAIN_GetPrinterSuffixStringDelegate  _DTWAIN_GetPrinterSuffixString;
@@ -4202,6 +4342,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetResolution")]
         private readonly DTWAIN_GetResolutionDelegate  _DTWAIN_GetResolution;
+
+        [DTWAINNativeFunction("DTWAIN_GetResolutionEx")]
+        private readonly DTWAIN_GetResolutionExDelegate  _DTWAIN_GetResolutionEx;
 
         [DTWAINNativeFunction("DTWAIN_GetResolutionString")]
         private readonly DTWAIN_GetResolutionStringDelegate  _DTWAIN_GetResolutionString;
@@ -4217,6 +4360,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetRotation")]
         private readonly DTWAIN_GetRotationDelegate  _DTWAIN_GetRotation;
+
+        [DTWAINNativeFunction("DTWAIN_GetRotationEx")]
+        private readonly DTWAIN_GetRotationExDelegate  _DTWAIN_GetRotationEx;
 
         [DTWAINNativeFunction("DTWAIN_GetRotationString")]
         private readonly DTWAIN_GetRotationStringDelegate  _DTWAIN_GetRotationString;
@@ -4287,6 +4433,9 @@
         [DTWAINNativeFunction("DTWAIN_GetSourceUnit")]
         private readonly DTWAIN_GetSourceUnitDelegate  _DTWAIN_GetSourceUnit;
 
+        [DTWAINNativeFunction("DTWAIN_GetSourceUnitEx")]
+        private readonly DTWAIN_GetSourceUnitExDelegate  _DTWAIN_GetSourceUnitEx;
+
         [DTWAINNativeFunction("DTWAIN_GetSourceVersionInfo")]
         private readonly DTWAIN_GetSourceVersionInfoDelegate  _DTWAIN_GetSourceVersionInfo;
 
@@ -4335,26 +4484,8 @@
         [DTWAINNativeFunction("DTWAIN_GetTwainAvailabilityEx")]
         private readonly DTWAIN_GetTwainAvailabilityExDelegate_overload _DTWAIN_GetTwainAvailabilityEx_overload; 
 
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryName")]
-        private readonly DTWAIN_GetTwainCountryNameDelegate  _DTWAIN_GetTwainCountryName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryName")]
-        private readonly DTWAIN_GetTwainCountryNameDelegate_overload _DTWAIN_GetTwainCountryName_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainCountryValue")]
-        private readonly DTWAIN_GetTwainCountryValueDelegate  _DTWAIN_GetTwainCountryValue;
-
         [DTWAINNativeFunction("DTWAIN_GetTwainHwnd")]
         private readonly DTWAIN_GetTwainHwndDelegate  _DTWAIN_GetTwainHwnd;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageName")]
-        private readonly DTWAIN_GetTwainLanguageNameDelegate  _DTWAIN_GetTwainLanguageName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageName")]
-        private readonly DTWAIN_GetTwainLanguageNameDelegate_overload _DTWAIN_GetTwainLanguageName_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainLanguageValue")]
-        private readonly DTWAIN_GetTwainLanguageValueDelegate  _DTWAIN_GetTwainLanguageValue;
 
         [DTWAINNativeFunction("DTWAIN_GetTwainMode")]
         private readonly DTWAIN_GetTwainModeDelegate  _DTWAIN_GetTwainMode;
@@ -4370,12 +4501,6 @@
 
         [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstantEx")]
         private readonly DTWAIN_GetTwainNameFromConstantExDelegate_overload _DTWAIN_GetTwainNameFromConstantEx_overload; 
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainStringName")]
-        private readonly DTWAIN_GetTwainStringNameDelegate  _DTWAIN_GetTwainStringName;
-
-        [DTWAINNativeFunction("DTWAIN_GetTwainStringName")]
-        private readonly DTWAIN_GetTwainStringNameDelegate_overload _DTWAIN_GetTwainStringName_overload; 
 
         [DTWAINNativeFunction("DTWAIN_GetTwainTimeout")]
         private readonly DTWAIN_GetTwainTimeoutDelegate  _DTWAIN_GetTwainTimeout;
@@ -4481,6 +4606,15 @@
 
         [DTWAINNativeFunction("DTWAIN_IsAutomaticSenseMediumSupported")]
         private readonly DTWAIN_IsAutomaticSenseMediumSupportedDelegate  _DTWAIN_IsAutomaticSenseMediumSupported;
+
+        [DTWAINNativeFunction("DTWAIN_IsBarcodeCapsSupported")]
+        private readonly DTWAIN_IsBarcodeCapsSupportedDelegate  _DTWAIN_IsBarcodeCapsSupported;
+
+        [DTWAINNativeFunction("DTWAIN_IsBarcodeDetectionEnabled")]
+        private readonly DTWAIN_IsBarcodeDetectionEnabledDelegate  _DTWAIN_IsBarcodeDetectionEnabled;
+
+        [DTWAINNativeFunction("DTWAIN_IsBarcodeSupported")]
+        private readonly DTWAIN_IsBarcodeSupportedDelegate  _DTWAIN_IsBarcodeSupported;
 
         [DTWAINNativeFunction("DTWAIN_IsBlankPageDetectionOn")]
         private readonly DTWAIN_IsBlankPageDetectionOnDelegate  _DTWAIN_IsBlankPageDetectionOn;
@@ -4665,14 +4799,14 @@
         [DTWAINNativeFunction("DTWAIN_IsPaperSizeSupported")]
         private readonly DTWAIN_IsPaperSizeSupportedDelegate  _DTWAIN_IsPaperSizeSupported;
 
-        [DTWAINNativeFunction("DTWAIN_IsPatchCapsSupported")]
-        private readonly DTWAIN_IsPatchCapsSupportedDelegate  _DTWAIN_IsPatchCapsSupported;
+        [DTWAINNativeFunction("DTWAIN_IsPatchcodeCapsSupported")]
+        private readonly DTWAIN_IsPatchcodeCapsSupportedDelegate  _DTWAIN_IsPatchcodeCapsSupported;
 
-        [DTWAINNativeFunction("DTWAIN_IsPatchDetectEnabled")]
-        private readonly DTWAIN_IsPatchDetectEnabledDelegate  _DTWAIN_IsPatchDetectEnabled;
+        [DTWAINNativeFunction("DTWAIN_IsPatchcodeDetectionEnabled")]
+        private readonly DTWAIN_IsPatchcodeDetectionEnabledDelegate  _DTWAIN_IsPatchcodeDetectionEnabled;
 
-        [DTWAINNativeFunction("DTWAIN_IsPatchSupported")]
-        private readonly DTWAIN_IsPatchSupportedDelegate  _DTWAIN_IsPatchSupported;
+        [DTWAINNativeFunction("DTWAIN_IsPatchcodeSupported")]
+        private readonly DTWAIN_IsPatchcodeSupportedDelegate  _DTWAIN_IsPatchcodeSupported;
 
         [DTWAINNativeFunction("DTWAIN_IsPeekMessageLoopEnabled")]
         private readonly DTWAIN_IsPeekMessageLoopEnabledDelegate  _DTWAIN_IsPeekMessageLoopEnabled;
@@ -4983,6 +5117,21 @@
         [DTWAINNativeFunction("DTWAIN_SetAvailablePrintersArray")]
         private readonly DTWAIN_SetAvailablePrintersArrayDelegate  _DTWAIN_SetAvailablePrintersArray;
 
+        [DTWAINNativeFunction("DTWAIN_SetBarcodeMaxPriorities")]
+        private readonly DTWAIN_SetBarcodeMaxPrioritiesDelegate  _DTWAIN_SetBarcodeMaxPriorities;
+
+        [DTWAINNativeFunction("DTWAIN_SetBarcodeMaxRetries")]
+        private readonly DTWAIN_SetBarcodeMaxRetriesDelegate  _DTWAIN_SetBarcodeMaxRetries;
+
+        [DTWAINNativeFunction("DTWAIN_SetBarcodePriorities")]
+        private readonly DTWAIN_SetBarcodePrioritiesDelegate  _DTWAIN_SetBarcodePriorities;
+
+        [DTWAINNativeFunction("DTWAIN_SetBarcodeSearchMode")]
+        private readonly DTWAIN_SetBarcodeSearchModeDelegate  _DTWAIN_SetBarcodeSearchMode;
+
+        [DTWAINNativeFunction("DTWAIN_SetBarcodeTimeOut")]
+        private readonly DTWAIN_SetBarcodeTimeOutDelegate  _DTWAIN_SetBarcodeTimeOut;
+
         [DTWAINNativeFunction("DTWAIN_SetBitDepth")]
         private readonly DTWAIN_SetBitDepthDelegate  _DTWAIN_SetBitDepth;
 
@@ -5244,20 +5393,20 @@
         [DTWAINNativeFunction("DTWAIN_SetPaperSize")]
         private readonly DTWAIN_SetPaperSizeDelegate  _DTWAIN_SetPaperSize;
 
-        [DTWAINNativeFunction("DTWAIN_SetPatchMaxPriorities")]
-        private readonly DTWAIN_SetPatchMaxPrioritiesDelegate  _DTWAIN_SetPatchMaxPriorities;
+        [DTWAINNativeFunction("DTWAIN_SetPatchcodeMaxPriorities")]
+        private readonly DTWAIN_SetPatchcodeMaxPrioritiesDelegate  _DTWAIN_SetPatchcodeMaxPriorities;
 
-        [DTWAINNativeFunction("DTWAIN_SetPatchMaxRetries")]
-        private readonly DTWAIN_SetPatchMaxRetriesDelegate  _DTWAIN_SetPatchMaxRetries;
+        [DTWAINNativeFunction("DTWAIN_SetPatchcodeMaxRetries")]
+        private readonly DTWAIN_SetPatchcodeMaxRetriesDelegate  _DTWAIN_SetPatchcodeMaxRetries;
 
-        [DTWAINNativeFunction("DTWAIN_SetPatchPriorities")]
-        private readonly DTWAIN_SetPatchPrioritiesDelegate  _DTWAIN_SetPatchPriorities;
+        [DTWAINNativeFunction("DTWAIN_SetPatchcodePriorities")]
+        private readonly DTWAIN_SetPatchcodePrioritiesDelegate  _DTWAIN_SetPatchcodePriorities;
 
-        [DTWAINNativeFunction("DTWAIN_SetPatchSearchMode")]
-        private readonly DTWAIN_SetPatchSearchModeDelegate  _DTWAIN_SetPatchSearchMode;
+        [DTWAINNativeFunction("DTWAIN_SetPatchcodeSearchMode")]
+        private readonly DTWAIN_SetPatchcodeSearchModeDelegate  _DTWAIN_SetPatchcodeSearchMode;
 
-        [DTWAINNativeFunction("DTWAIN_SetPatchTimeOut")]
-        private readonly DTWAIN_SetPatchTimeOutDelegate  _DTWAIN_SetPatchTimeOut;
+        [DTWAINNativeFunction("DTWAIN_SetPatchcodeTimeOut")]
+        private readonly DTWAIN_SetPatchcodeTimeOutDelegate  _DTWAIN_SetPatchcodeTimeOut;
 
         [DTWAINNativeFunction("DTWAIN_SetPixelFlavor")]
         private readonly DTWAIN_SetPixelFlavorDelegate  _DTWAIN_SetPixelFlavor;
@@ -5564,6 +5713,9 @@
         public  int DTWAIN_ArrayDestroyFrames(DTWAIN_ARRAY FrameArray)
         => _DTWAIN_ArrayDestroyFrames(FrameArray);
 
+        public  int DTWAIN_ArrayDumpToLog(DTWAIN_ARRAY pArray)
+        => _DTWAIN_ArrayDumpToLog(pArray);
+
         public  int DTWAIN_ArrayFind(DTWAIN_ARRAY pArray, System.IntPtr pVariant)
         => _DTWAIN_ArrayFind(pArray, pVariant);
 
@@ -5612,6 +5764,9 @@
         public  int DTWAIN_ArrayGetAtFloat(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_FLOAT pVal)
         => _DTWAIN_ArrayGetAtFloat(pArray, nWhere, ref pVal);
 
+        public  DTWAIN_FLOAT DTWAIN_ArrayGetAtFloatEx(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtFloatEx(pArray, nWhere);
+
         public  int DTWAIN_ArrayGetAtFloatString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val)
         => _DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val);
 
@@ -5635,6 +5790,12 @@
 
         public  int DTWAIN_ArrayGetAtLong64(DTWAIN_ARRAY pArray, int nWhere, ref long pVal)
         => _DTWAIN_ArrayGetAtLong64(pArray, nWhere, ref pVal);
+
+        public  LONG64 DTWAIN_ArrayGetAtLong64Ex(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtLong64Ex(pArray, nWhere);
+
+        public  int DTWAIN_ArrayGetAtLongEx(DTWAIN_ARRAY pArray, int nWhere)
+        => _DTWAIN_ArrayGetAtLongEx(pArray, nWhere);
 
         public  int DTWAIN_ArrayGetAtSource(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource)
         => _DTWAIN_ArrayGetAtSource(pArray, nWhere, ref ppSource);
@@ -5873,6 +6034,9 @@
         public  int DTWAIN_EnableAutomaticSenseMedium(DTWAIN_SOURCE Source, int bSet)
         => _DTWAIN_EnableAutomaticSenseMedium(Source, bSet);
 
+        public  int DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, int bEnable)
+        => _DTWAIN_EnableBarcodeDetection(Source, bEnable);
+
         public  int DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, int bEnable)
         => _DTWAIN_EnableDuplex(Source, bEnable);
 
@@ -5891,8 +6055,8 @@
         public  int DTWAIN_EnableMsgNotify(int bSet)
         => _DTWAIN_EnableMsgNotify(bSet);
 
-        public  int DTWAIN_EnablePatchDetect(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnablePatchDetect(Source, bEnable);
+        public  int DTWAIN_EnablePatchcodeDetection(DTWAIN_SOURCE Source, int bEnable)
+        => _DTWAIN_EnablePatchcodeDetection(Source, bEnable);
 
         public  int DTWAIN_EnablePeekMessageLoop(DTWAIN_SOURCE Source, int bSet)
         => _DTWAIN_EnablePeekMessageLoop(Source, bSet);
@@ -5948,11 +6112,47 @@
         public  DTWAIN_ARRAY DTWAIN_EnumAutomaticSenseMediumEx(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumAutomaticSenseMediumEx(Source);
 
+        public  int DTWAIN_EnumBarcodeCodes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes)
+        => _DTWAIN_EnumBarcodeCodes(Source, ref PCodes);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodeCodesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodeCodesEx(Source);
+
+        public  int DTWAIN_EnumBarcodeMaxPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumBarcodeMaxPriorities(Source, ref pArray);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxPrioritiesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodeMaxPrioritiesEx(Source);
+
+        public  int DTWAIN_EnumBarcodeMaxRetries(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumBarcodeMaxRetries(Source, ref pArray);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxRetriesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodeMaxRetriesEx(Source);
+
+        public  int DTWAIN_EnumBarcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumBarcodePriorities(Source, ref pArray);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodePrioritiesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodePrioritiesEx(Source);
+
+        public  int DTWAIN_EnumBarcodeSearchModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumBarcodeSearchModes(Source, ref pArray);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodeSearchModesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodeSearchModesEx(Source);
+
+        public  int DTWAIN_EnumBarcodeTimeOutValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumBarcodeTimeOutValues(Source, ref pArray);
+
+        public  DTWAIN_ARRAY DTWAIN_EnumBarcodeTimeOutValuesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBarcodeTimeOutValuesEx(Source);
+
         public  int DTWAIN_EnumBitDepths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumBitDepths(Source, ref pArray);
 
-        public  int DTWAIN_EnumBitDepthsEx(DTWAIN_SOURCE Source, int PixelType, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBitDepthsEx(Source, PixelType, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumBitDepthsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx2(DTWAIN_SOURCE Source, int PixelType)
         => _DTWAIN_EnumBitDepthsEx2(Source, PixelType);
@@ -5972,14 +6172,11 @@
         public  int DTWAIN_EnumCameras(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras)
         => _DTWAIN_EnumCameras(Source, ref Cameras);
 
-        public  int DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source, int nWhichCamera, ref DTWAIN_ARRAY Cameras)
-        => _DTWAIN_EnumCamerasEx(Source, nWhichCamera, ref Cameras);
+        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumCamerasEx(Source);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCamerasEx2(Source);
-
-        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx3(DTWAIN_SOURCE Source, int nWhichCamera)
-        => _DTWAIN_EnumCamerasEx3(Source, nWhichCamera);
+        public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, int nWhichCamera)
+        => _DTWAIN_EnumCamerasEx2(Source, nWhichCamera);
 
         public  int DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumCompressionTypes(Source, ref pArray);
@@ -5999,8 +6196,8 @@
         public  int DTWAIN_EnumCustomCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumCustomCaps(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCustomCapsEx2(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumCustomCapsEx(Source);
 
         public  int DTWAIN_EnumDoubleFeedDetectLengths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
         => _DTWAIN_EnumDoubleFeedDetectLengths(Source, ref pArray, bExpandIfRange);
@@ -6023,8 +6220,8 @@
         public  int DTWAIN_EnumExtendedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumExtendedCaps(Source, ref pArray);
 
-        public  int DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumExtendedCapsEx(Source, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumExtendedCapsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumExtendedCapsEx2(Source);
@@ -6083,6 +6280,9 @@
         public  int DTWAIN_EnumOCRInterfaces(ref DTWAIN_ARRAY OCRInterfaces)
         => _DTWAIN_EnumOCRInterfaces(ref OCRInterfaces);
 
+        public  DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx()
+        => _DTWAIN_EnumOCRInterfacesEx();
+
         public  int DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, ref DTWAIN_ARRAY SupportedCaps)
         => _DTWAIN_EnumOCRSupportedCaps(Engine, ref SupportedCaps);
 
@@ -6104,41 +6304,41 @@
         public  DTWAIN_ARRAY DTWAIN_EnumPaperSizesEx(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumPaperSizesEx(Source);
 
-        public  int DTWAIN_EnumPatchCodes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes)
-        => _DTWAIN_EnumPatchCodes(Source, ref PCodes);
+        public  int DTWAIN_EnumPatchcodeCodes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes)
+        => _DTWAIN_EnumPatchcodeCodes(Source, ref PCodes);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchCodesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchCodesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeCodesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodeCodesEx(Source);
 
-        public  int DTWAIN_EnumPatchMaxPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchMaxPriorities(Source, ref pArray);
+        public  int DTWAIN_EnumPatchcodeMaxPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumPatchcodeMaxPriorities(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchMaxPrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchMaxPrioritiesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxPrioritiesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source);
 
-        public  int DTWAIN_EnumPatchMaxRetries(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchMaxRetries(Source, ref pArray);
+        public  int DTWAIN_EnumPatchcodeMaxRetries(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumPatchcodeMaxRetries(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchMaxRetriesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchMaxRetriesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxRetriesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodeMaxRetriesEx(Source);
 
-        public  int DTWAIN_EnumPatchPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchPriorities(Source, ref pArray);
+        public  int DTWAIN_EnumPatchcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumPatchcodePriorities(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchPrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchPrioritiesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodePrioritiesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodePrioritiesEx(Source);
 
-        public  int DTWAIN_EnumPatchSearchModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchSearchModes(Source, ref pArray);
+        public  int DTWAIN_EnumPatchcodeSearchModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumPatchcodeSearchModes(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchSearchModesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchSearchModesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeSearchModesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodeSearchModesEx(Source);
 
-        public  int DTWAIN_EnumPatchTimeOutValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchTimeOutValues(Source, ref pArray);
+        public  int DTWAIN_EnumPatchcodeTimeOutValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
+        => _DTWAIN_EnumPatchcodeTimeOutValues(Source, ref pArray);
 
-        public  DTWAIN_ARRAY DTWAIN_EnumPatchTimeOutValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchTimeOutValuesEx(Source);
+        public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeTimeOutValuesEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumPatchcodeTimeOutValuesEx(Source);
 
         public  int DTWAIN_EnumPixelTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumPixelTypes(Source, ref pArray);
@@ -6182,8 +6382,8 @@
         public  int DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_EnumSupportedCaps(Source, ref pArray);
 
-        public  int DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumSupportedCapsEx(Source, ref pArray);
+        public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_EnumSupportedCapsEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumSupportedCapsEx2(Source);
@@ -6250,12 +6450,6 @@
 
         public  int DTWAIN_FlushAcquiredPages(DTWAIN_SOURCE Source)
         => _DTWAIN_FlushAcquiredPages(Source);
-
-        public  int DTWAIN_ForceAcquireBitDepth(DTWAIN_SOURCE Source, int BitDepth)
-        => _DTWAIN_ForceAcquireBitDepth(Source, BitDepth);
-
-        public  int DTWAIN_ForceScanOnNoUI(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_ForceScanOnNoUI(Source, bSet);
 
         public  DTWAIN_FRAME DTWAIN_FrameCreate(DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom)
         => _DTWAIN_FrameCreate(Left, Top, Right, Bottom);
@@ -6374,6 +6568,21 @@
         public  int DTWAIN_GetAuthor (DTWAIN_SOURCE Source, System.IntPtr szAuthor)
         => _DTWAIN_GetAuthor_overload(Source, szAuthor);
 
+        public  int DTWAIN_GetBarcodeMaxPriorities(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent)
+        => _DTWAIN_GetBarcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent);
+
+        public  int DTWAIN_GetBarcodeMaxRetries(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent)
+        => _DTWAIN_GetBarcodeMaxRetries(Source, ref pMaxRetries, bCurrent);
+
+        public  int DTWAIN_GetBarcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities)
+        => _DTWAIN_GetBarcodePriorities(Source, ref SearchPriorities);
+
+        public  int DTWAIN_GetBarcodeSearchMode(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent)
+        => _DTWAIN_GetBarcodeSearchMode(Source, ref pSearchMode, bCurrent);
+
+        public  int DTWAIN_GetBarcodeTimeOut(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent)
+        => _DTWAIN_GetBarcodeTimeOut(Source, ref pTimeOut, bCurrent);
+
         public  int DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, ref int lpMinutes)
         => _DTWAIN_GetBatteryMinutes(Source, ref lpMinutes);
 
@@ -6383,11 +6592,17 @@
         public  int DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent)
         => _DTWAIN_GetBitDepth(Source, ref BitDepth, bCurrent);
 
+        public  int DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetBitDepthEx(Source, bCurrent);
+
         public  int DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source)
         => _DTWAIN_GetBlankPageAutoDetection(Source);
 
         public  int DTWAIN_GetBrightness(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness)
         => _DTWAIN_GetBrightness(Source, ref Brightness);
+
+        public  DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetBrightnessEx(Source);
 
         public  int DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Brightness)
         => _DTWAIN_GetBrightnessString(Source, Brightness);
@@ -6425,6 +6640,9 @@
         public  int DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, int lCapability, ref int lpOps)
         => _DTWAIN_GetCapOperations(Source, lCapability, ref lpOps);
 
+        public  int DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, int lCapability)
+        => _DTWAIN_GetCapOperationsEx(Source, lCapability);
+
         public  int DTWAIN_GetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType, ref DTWAIN_ARRAY pArray)
         => _DTWAIN_GetCapValues(Source, lCap, lGetType, ref pArray);
 
@@ -6446,6 +6664,9 @@
         public  int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent)
         => _DTWAIN_GetCompressionType(Source, ref lpCompression, bCurrent);
 
+        public  int DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetCompressionTypeEx(Source, bCurrent);
+
         public  int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
         => _DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen);
 
@@ -6457,6 +6678,9 @@
 
         public  int DTWAIN_GetContrast(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast)
         => _DTWAIN_GetContrast(Source, ref Contrast);
+
+        public  DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetContrastEx(Source);
 
         public  int DTWAIN_GetContrastString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Contrast)
         => _DTWAIN_GetContrastString(Source, Contrast);
@@ -6532,6 +6756,9 @@
 
         public  int DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, ref int lpDupType)
         => _DTWAIN_GetDuplexType(Source, ref lpDupType);
+
+        public  int DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetDuplexTypeEx(Source);
 
         public  int DTWAIN_GetErrorBuffer(ref DTWAIN_ARRAY ArrayBuffer)
         => _DTWAIN_GetErrorBuffer(ref ArrayBuffer);
@@ -6632,6 +6859,9 @@
         public  int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent)
         => _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent);
 
+        public  int DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, int bGetCurrent)
+        => _DTWAIN_GetJobControlEx(Source, bGetCurrent);
+
         public  int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
         => _DTWAIN_GetJpegValues(Source, ref pQuality, ref Progressive);
 
@@ -6652,6 +6882,9 @@
 
         public  int DTWAIN_GetLightPath(DTWAIN_SOURCE Source, ref int lpLightPath)
         => _DTWAIN_GetLightPath(Source, ref lpLightPath);
+
+        public  int DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetLightPathEx(Source);
 
         public  int DTWAIN_GetLightSource(DTWAIN_SOURCE Source, ref int LightSource)
         => _DTWAIN_GetLightSource(Source, ref LightSource);
@@ -6758,6 +6991,9 @@
         public  int DTWAIN_GetOrientation(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent)
         => _DTWAIN_GetOrientation(Source, ref lpOrient, bCurrent);
 
+        public  int DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetOrientationEx(Source, bCurrent);
+
         public  int DTWAIN_GetOverscan(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent)
         => _DTWAIN_GetOverscan(Source, ref lpOverscan, bCurrent);
 
@@ -6788,20 +7024,20 @@
         public  int DTWAIN_GetPaperSizeName (int paperNumber, System.IntPtr outName, int nSize)
         => _DTWAIN_GetPaperSizeName_overload(paperNumber, outName, nSize);
 
-        public  int DTWAIN_GetPatchMaxPriorities(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent)
-        => _DTWAIN_GetPatchMaxPriorities(Source, ref pMaxPriorities, bCurrent);
+        public  int DTWAIN_GetPatchcodeMaxPriorities(DTWAIN_SOURCE Source, ref int pMaxPriorities, int bCurrent)
+        => _DTWAIN_GetPatchcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent);
 
-        public  int DTWAIN_GetPatchMaxRetries(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent)
-        => _DTWAIN_GetPatchMaxRetries(Source, ref pMaxRetries, bCurrent);
+        public  int DTWAIN_GetPatchcodeMaxRetries(DTWAIN_SOURCE Source, ref int pMaxRetries, int bCurrent)
+        => _DTWAIN_GetPatchcodeMaxRetries(Source, ref pMaxRetries, bCurrent);
 
-        public  int DTWAIN_GetPatchPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_GetPatchPriorities(Source, ref SearchPriorities);
+        public  int DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities)
+        => _DTWAIN_GetPatchcodePriorities(Source, ref SearchPriorities);
 
-        public  int DTWAIN_GetPatchSearchMode(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent)
-        => _DTWAIN_GetPatchSearchMode(Source, ref pSearchMode, bCurrent);
+        public  int DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent)
+        => _DTWAIN_GetPatchcodeSearchMode(Source, ref pSearchMode, bCurrent);
 
-        public  int DTWAIN_GetPatchTimeOut(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent)
-        => _DTWAIN_GetPatchTimeOut(Source, ref pTimeOut, bCurrent);
+        public  int DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, ref int pTimeOut, int bCurrent)
+        => _DTWAIN_GetPatchcodeTimeOut(Source, ref pTimeOut, bCurrent);
 
         public  int DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, ref int lpPixelFlavor)
         => _DTWAIN_GetPixelFlavor(Source, ref lpPixelFlavor);
@@ -6812,14 +7048,26 @@
         public  int DTWAIN_GetPrinter(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent)
         => _DTWAIN_GetPrinter(Source, ref lpPrinter, bCurrent);
 
+        public  int DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetPrinterEx(Source, bCurrent);
+
         public  int DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, ref int nStart)
         => _DTWAIN_GetPrinterStartNumber(Source, ref nStart);
+
+        public  int DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetPrinterStartNumberEx(Source);
 
         public  int DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent)
         => _DTWAIN_GetPrinterStringMode(Source, ref PrinterMode, bCurrent);
 
+        public  int DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, int bCurrent)
+        => _DTWAIN_GetPrinterStringModeEx(Source, bCurrent);
+
         public  int DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString)
         => _DTWAIN_GetPrinterStrings(Source, ref ArrayString);
+
+        public  DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetPrinterStringsEx(Source);
 
         public  int DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Suffix, int nMaxLen)
         => _DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen);
@@ -6832,6 +7080,9 @@
 
         public  int DTWAIN_GetResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution)
         => _DTWAIN_GetResolution(Source, ref Resolution);
+
+        public  DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetResolutionEx(Source);
 
         public  int DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution)
         => _DTWAIN_GetResolutionString(Source, Resolution);
@@ -6847,6 +7098,9 @@
 
         public  int DTWAIN_GetRotation(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation)
         => _DTWAIN_GetRotation(Source, ref Rotation);
+
+        public  DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetRotationEx(Source);
 
         public  int DTWAIN_GetRotationString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Rotation)
         => _DTWAIN_GetRotationString(Source, Rotation);
@@ -6917,6 +7171,9 @@
         public  int DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, ref int lpUnit)
         => _DTWAIN_GetSourceUnit(Source, ref lpUnit);
 
+        public  int DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source)
+        => _DTWAIN_GetSourceUnitEx(Source);
+
         public  int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
         => _DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen);
 
@@ -6965,26 +7222,8 @@
         public  int DTWAIN_GetTwainAvailabilityEx (System.IntPtr directories, int nMaxLen)
         => _DTWAIN_GetTwainAvailabilityEx_overload(directories, nMaxLen);
 
-        public  int DTWAIN_GetTwainCountryName(int countryId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName)
-        => _DTWAIN_GetTwainCountryName(countryId, szName);
-
-        public  int DTWAIN_GetTwainCountryName (int countryId, System.IntPtr szName)
-        => _DTWAIN_GetTwainCountryName_overload(countryId, szName);
-
-        public  int DTWAIN_GetTwainCountryValue([MarshalAs(UnmanagedType.LPTStr)] string country)
-        => _DTWAIN_GetTwainCountryValue(country);
-
         public  HWND DTWAIN_GetTwainHwnd()
         => _DTWAIN_GetTwainHwnd();
-
-        public  int DTWAIN_GetTwainLanguageName(int nameId, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName)
-        => _DTWAIN_GetTwainLanguageName(nameId, szName);
-
-        public  int DTWAIN_GetTwainLanguageName (int nameId, System.IntPtr szName)
-        => _DTWAIN_GetTwainLanguageName_overload(nameId, szName);
-
-        public  int DTWAIN_GetTwainLanguageValue([MarshalAs(UnmanagedType.LPTStr)] string szName)
-        => _DTWAIN_GetTwainLanguageValue(szName);
 
         public  int DTWAIN_GetTwainMode()
         => _DTWAIN_GetTwainMode();
@@ -7000,12 +7239,6 @@
 
         public  int DTWAIN_GetTwainNameFromConstantEx (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
         => _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize);
-
-        public  int DTWAIN_GetTwainStringName(int category, int TwainID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetTwainStringName(category, TwainID, lpszBuffer, nMaxLen);
-
-        public  int DTWAIN_GetTwainStringName (int category, int TwainID, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetTwainStringName_overload(category, TwainID, lpszBuffer, nMaxLen);
 
         public  int DTWAIN_GetTwainTimeout()
         => _DTWAIN_GetTwainTimeout();
@@ -7111,6 +7344,15 @@
 
         public  int DTWAIN_IsAutomaticSenseMediumSupported(DTWAIN_SOURCE Source)
         => _DTWAIN_IsAutomaticSenseMediumSupported(Source);
+
+        public  int DTWAIN_IsBarcodeCapsSupported(DTWAIN_SOURCE Source)
+        => _DTWAIN_IsBarcodeCapsSupported(Source);
+
+        public  int DTWAIN_IsBarcodeDetectionEnabled(DTWAIN_SOURCE Source)
+        => _DTWAIN_IsBarcodeDetectionEnabled(Source);
+
+        public  int DTWAIN_IsBarcodeSupported(DTWAIN_SOURCE Source, int BarCode)
+        => _DTWAIN_IsBarcodeSupported(Source, BarCode);
 
         public  int DTWAIN_IsBlankPageDetectionOn(DTWAIN_SOURCE Source)
         => _DTWAIN_IsBlankPageDetectionOn(Source);
@@ -7295,14 +7537,14 @@
         public  int DTWAIN_IsPaperSizeSupported(DTWAIN_SOURCE Source, int PaperSize)
         => _DTWAIN_IsPaperSizeSupported(Source, PaperSize);
 
-        public  int DTWAIN_IsPatchCapsSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPatchCapsSupported(Source);
+        public  int DTWAIN_IsPatchcodeCapsSupported(DTWAIN_SOURCE Source)
+        => _DTWAIN_IsPatchcodeCapsSupported(Source);
 
-        public  int DTWAIN_IsPatchDetectEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPatchDetectEnabled(Source);
+        public  int DTWAIN_IsPatchcodeDetectionEnabled(DTWAIN_SOURCE Source)
+        => _DTWAIN_IsPatchcodeDetectionEnabled(Source);
 
-        public  int DTWAIN_IsPatchSupported(DTWAIN_SOURCE Source, int PatchCode)
-        => _DTWAIN_IsPatchSupported(Source, PatchCode);
+        public  int DTWAIN_IsPatchcodeSupported(DTWAIN_SOURCE Source, int PatchCode)
+        => _DTWAIN_IsPatchcodeSupported(Source, PatchCode);
 
         public  int DTWAIN_IsPeekMessageLoopEnabled(DTWAIN_SOURCE Source)
         => _DTWAIN_IsPeekMessageLoopEnabled(Source);
@@ -7613,6 +7855,21 @@
         public  int DTWAIN_SetAvailablePrintersArray(DTWAIN_SOURCE Source, DTWAIN_ARRAY AvailPrinters)
         => _DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters);
 
+        public  int DTWAIN_SetBarcodeMaxPriorities(DTWAIN_SOURCE Source, int nMaxSearchRetries)
+        => _DTWAIN_SetBarcodeMaxPriorities(Source, nMaxSearchRetries);
+
+        public  int DTWAIN_SetBarcodeMaxRetries(DTWAIN_SOURCE Source, int nMaxRetries)
+        => _DTWAIN_SetBarcodeMaxRetries(Source, nMaxRetries);
+
+        public  int DTWAIN_SetBarcodePriorities(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities)
+        => _DTWAIN_SetBarcodePriorities(Source, SearchPriorities);
+
+        public  int DTWAIN_SetBarcodeSearchMode(DTWAIN_SOURCE Source, int nSearchMode)
+        => _DTWAIN_SetBarcodeSearchMode(Source, nSearchMode);
+
+        public  int DTWAIN_SetBarcodeTimeOut(DTWAIN_SOURCE Source, int TimeOutValue)
+        => _DTWAIN_SetBarcodeTimeOut(Source, TimeOutValue);
+
         public  int DTWAIN_SetBitDepth(DTWAIN_SOURCE Source, int BitDepth, int bSetCurrent)
         => _DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent);
 
@@ -7874,20 +8131,20 @@
         public  int DTWAIN_SetPaperSize(DTWAIN_SOURCE Source, int PaperSize, int bSetCurrent)
         => _DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent);
 
-        public  int DTWAIN_SetPatchMaxPriorities(DTWAIN_SOURCE Source, int nMaxSearchRetries)
-        => _DTWAIN_SetPatchMaxPriorities(Source, nMaxSearchRetries);
+        public  int DTWAIN_SetPatchcodeMaxPriorities(DTWAIN_SOURCE Source, int nMaxSearchRetries)
+        => _DTWAIN_SetPatchcodeMaxPriorities(Source, nMaxSearchRetries);
 
-        public  int DTWAIN_SetPatchMaxRetries(DTWAIN_SOURCE Source, int nMaxRetries)
-        => _DTWAIN_SetPatchMaxRetries(Source, nMaxRetries);
+        public  int DTWAIN_SetPatchcodeMaxRetries(DTWAIN_SOURCE Source, int nMaxRetries)
+        => _DTWAIN_SetPatchcodeMaxRetries(Source, nMaxRetries);
 
-        public  int DTWAIN_SetPatchPriorities(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_SetPatchPriorities(Source, SearchPriorities);
+        public  int DTWAIN_SetPatchcodePriorities(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities)
+        => _DTWAIN_SetPatchcodePriorities(Source, SearchPriorities);
 
-        public  int DTWAIN_SetPatchSearchMode(DTWAIN_SOURCE Source, int nSearchMode)
-        => _DTWAIN_SetPatchSearchMode(Source, nSearchMode);
+        public  int DTWAIN_SetPatchcodeSearchMode(DTWAIN_SOURCE Source, int nSearchMode)
+        => _DTWAIN_SetPatchcodeSearchMode(Source, nSearchMode);
 
-        public  int DTWAIN_SetPatchTimeOut(DTWAIN_SOURCE Source, int TimeOutValue)
-        => _DTWAIN_SetPatchTimeOut(Source, TimeOutValue);
+        public  int DTWAIN_SetPatchcodeTimeOut(DTWAIN_SOURCE Source, int TimeOutValue)
+        => _DTWAIN_SetPatchcodeTimeOut(Source, TimeOutValue);
 
         public  int DTWAIN_SetPixelFlavor(DTWAIN_SOURCE Source, int PixelFlavor)
         => _DTWAIN_SetPixelFlavor(Source, PixelFlavor);

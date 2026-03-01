@@ -110,6 +110,8 @@ AllTypes g_allTypes[] = {   {_T("BMP File"), DTWAIN_BMP, _T("test.bmp")},
                             {_T("Postscript Level 2 File"), DTWAIN_POSTSCRIPT2MULTI, _T("test.ps")},
                             {_T("PNG File"), DTWAIN_PNG, _T("test.png")},
                             {_T("Adobe Paintshop (PSD) File"), DTWAIN_PSD, _T("test.psd")},
+							{_T("SVG File"), DTWAIN_SVG, _T("test.svg")},
+							{_T("SVGZ File"), DTWAIN_SVGZ, _T("test.svgz")},
                             {_T("Text File"), DTWAIN_TEXTMULTI, _T("test.txt")},
                             {_T("TIFF (No compression)"), DTWAIN_TIFFNONEMULTI, _T("test.tif")},
                             {_T("TIFF (CCITT Group 3)"), DTWAIN_TIFFG3MULTI, _T("test.tif")},
@@ -506,6 +508,9 @@ void SelectTheSource(int nWhich)
     {
         if ( DTWAIN_OpenSource(tempSource) )
         {
+            // Enable bar code detection
+            DTWAIN_EnableBarcodeDetection(tempSource, 1);
+
             // We want to make sure that when we acquire to a PDF file, we will "stamp"
             // each PDF page with the text that g_PDFTextElement will have (see TwainCallbackProc)
 			DTWAIN_AddPDFTextElement(tempSource, g_PDFTextElement);
@@ -733,10 +738,7 @@ void AcquireFile(BOOL bUseSource)
     EnableWindow(g_hWnd, TRUE);
     EnableSourceItems(TRUE);
 
-    /* Reopen source since we closed it after the acquisition
-       (to be safe) */
     DTWAIN_ArrayDestroy( AFileNames );
-    DTWAIN_OpenSource( g_CurrentSource );
     LONG pageCount = DTWAIN_GetFileSavePageCount(g_CurrentSource);
     if ( !bAcquireOK || pageCount == 0 || !bPageOK )
     {
@@ -1329,8 +1331,16 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             HWND hWndEdit = GetDlgItem(hDlg, IDC_edCopyright);
             DTWAIN_GetShortVersionStringA(szBuf, 100);
             SendMessageA(hDlg, WM_SETTEXT, 0, (LPARAM)szBuf);
-            DTWAIN_GetVersionCopyrightA(szBuf, 1000);
-            SendMessageA(hWndEdit, WM_SETTEXT, 0, (LPARAM)szBuf);
+            DTWAIN_GetVersionInfoA(szBuf, 1000);
+			/* Edit controls need \r\n and not \n new lines. */
+			HANDLE h = DTWAIN_ConvertToAPIStringA(szBuf);
+			if (h)
+			{
+				LPCSTR pData = GlobalLock(h);
+				SetWindowTextA(hWndEdit, pData);
+				GlobalUnlock(h);
+				GlobalFree(h);
+			}
             return TRUE;
         }
 
