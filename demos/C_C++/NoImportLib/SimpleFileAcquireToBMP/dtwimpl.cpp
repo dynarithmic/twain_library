@@ -258,6 +258,8 @@
     D_ENABLEBARCODEDETECTIONFUNC                  DYNDTWAIN_API::DTWAIN_EnableBarcodeDetection = nullptr;
     D_ENABLEDUPLEXFUNC                            DYNDTWAIN_API::DTWAIN_EnableDuplex = nullptr;
     D_ENABLEFEEDERFUNC                            DYNDTWAIN_API::DTWAIN_EnableFeeder = nullptr;
+    D_ENABLEGETMESSAGELOOPFUNC                    DYNDTWAIN_API::DTWAIN_EnableGetMessageLoop = nullptr;
+    D_ENABLEGETMESSAGELOOPDETECTIONFUNC           DYNDTWAIN_API::DTWAIN_EnableGetMessageLoopDetection = nullptr;
     D_ENABLEINDICATORFUNC                         DYNDTWAIN_API::DTWAIN_EnableIndicator = nullptr;
     D_ENABLEJOBFILEHANDLINGFUNC                   DYNDTWAIN_API::DTWAIN_EnableJobFileHandling = nullptr;
     D_ENABLELAMPFUNC                              DYNDTWAIN_API::DTWAIN_EnableLamp = nullptr;
@@ -303,6 +305,7 @@
     D_ENUMCAMERASFUNC                             DYNDTWAIN_API::DTWAIN_EnumCameras = nullptr;
     D_ENUMCAMERASEXFUNC                           DYNDTWAIN_API::DTWAIN_EnumCamerasEx = nullptr;
     D_ENUMCAMERASEX2FUNC                          DYNDTWAIN_API::DTWAIN_EnumCamerasEx2 = nullptr;
+    D_ENUMCAPLABELSFUNC                           DYNDTWAIN_API::DTWAIN_EnumCapLabels = nullptr;
     D_ENUMCOMPRESSIONTYPESFUNC                    DYNDTWAIN_API::DTWAIN_EnumCompressionTypes = nullptr;
     D_ENUMCOMPRESSIONTYPESEXFUNC                  DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx = nullptr;
     D_ENUMCOMPRESSIONTYPESEX2FUNC                 DYNDTWAIN_API::DTWAIN_EnumCompressionTypesEx2 = nullptr;
@@ -436,6 +439,7 @@
     D_GETACQUIRESTRIPSIZESFUNC                    DYNDTWAIN_API::DTWAIN_GetAcquireStripSizes = nullptr;
     D_GETACQUIREDIMAGEFUNC                        DYNDTWAIN_API::DTWAIN_GetAcquiredImage = nullptr;
     D_GETACQUIREDIMAGEARRAYFUNC                   DYNDTWAIN_API::DTWAIN_GetAcquiredImageArray = nullptr;
+    D_GETACQUISITIONARRAYFUNC                     DYNDTWAIN_API::DTWAIN_GetAcquisitionArray = nullptr;
     D_GETACTIVEDSMPATHFUNC                        DYNDTWAIN_API::DTWAIN_GetActiveDSMPath = nullptr;
     D_GETACTIVEDSMPATHAFUNC                       DYNDTWAIN_API::DTWAIN_GetActiveDSMPathA = nullptr;
     D_GETACTIVEDSMPATHWFUNC                       DYNDTWAIN_API::DTWAIN_GetActiveDSMPathW = nullptr;
@@ -476,6 +480,12 @@
     D_GETCAPFROMNAMEFUNC                          DYNDTWAIN_API::DTWAIN_GetCapFromName = nullptr;
     D_GETCAPFROMNAMEAFUNC                         DYNDTWAIN_API::DTWAIN_GetCapFromNameA = nullptr;
     D_GETCAPFROMNAMEWFUNC                         DYNDTWAIN_API::DTWAIN_GetCapFromNameW = nullptr;
+    D_GETCAPHELPFUNC                              DYNDTWAIN_API::DTWAIN_GetCapHelp = nullptr;
+    D_GETCAPHELPAFUNC                             DYNDTWAIN_API::DTWAIN_GetCapHelpA = nullptr;
+    D_GETCAPHELPWFUNC                             DYNDTWAIN_API::DTWAIN_GetCapHelpW = nullptr;
+    D_GETCAPLABELFUNC                             DYNDTWAIN_API::DTWAIN_GetCapLabel = nullptr;
+    D_GETCAPLABELAFUNC                            DYNDTWAIN_API::DTWAIN_GetCapLabelA = nullptr;
+    D_GETCAPLABELWFUNC                            DYNDTWAIN_API::DTWAIN_GetCapLabelW = nullptr;
     D_GETCAPOPERATIONSFUNC                        DYNDTWAIN_API::DTWAIN_GetCapOperations = nullptr;
     D_GETCAPOPERATIONSEXFUNC                      DYNDTWAIN_API::DTWAIN_GetCapOperationsEx = nullptr;
     D_GETCAPVALUESFUNC                            DYNDTWAIN_API::DTWAIN_GetCapValues = nullptr;
@@ -797,6 +807,8 @@
     D_ISFEEDERSUPPORTEDFUNC                       DYNDTWAIN_API::DTWAIN_IsFeederSupported = nullptr;
     D_ISFILESYSTEMSUPPORTEDFUNC                   DYNDTWAIN_API::DTWAIN_IsFileSystemSupported = nullptr;
     D_ISFILEXFERSUPPORTEDFUNC                     DYNDTWAIN_API::DTWAIN_IsFileXferSupported = nullptr;
+    D_ISGETMESSAGELOOPDETECTIONONFUNC             DYNDTWAIN_API::DTWAIN_IsGetMessageLoopDetectionOn = nullptr;
+    D_ISGETMESSAGELOOPENABLEDFUNC                 DYNDTWAIN_API::DTWAIN_IsGetMessageLoopEnabled = nullptr;
     D_ISIAFIELDALASTPAGESUPPORTEDFUNC             DYNDTWAIN_API::DTWAIN_IsIAFieldALastPageSupported = nullptr;
     D_ISIAFIELDALEVELSUPPORTEDFUNC                DYNDTWAIN_API::DTWAIN_IsIAFieldALevelSupported = nullptr;
     D_ISIAFIELDAPRINTFORMATSUPPORTEDFUNC          DYNDTWAIN_API::DTWAIN_IsIAFieldAPrintFormatSupported = nullptr;
@@ -929,10 +941,10 @@
     D_REMOVEPDFTEXTELEMENTFUNC                    DYNDTWAIN_API::DTWAIN_RemovePDFTextElement = nullptr;
     D_RESETPDFTEXTELEMENTFUNC                     DYNDTWAIN_API::DTWAIN_ResetPDFTextElement = nullptr;
     D_REWINDPAGEFUNC                              DYNDTWAIN_API::DTWAIN_RewindPage = nullptr;
-    D_ROTATEDIBFUNC                               DYNDTWAIN_API::DTWAIN_RotateDIB = nullptr;
-    D_ROTATEDIBSTRINGFUNC                         DYNDTWAIN_API::DTWAIN_RotateDIBString = nullptr;
-    D_ROTATEDIBSTRINGAFUNC                        DYNDTWAIN_API::DTWAIN_RotateDIBStringA = nullptr;
-    D_ROTATEDIBSTRINGWFUNC                        DYNDTWAIN_API::DTWAIN_RotateDIBStringW = nullptr;
+    D_ROTATEIMAGEFUNC                             DYNDTWAIN_API::DTWAIN_RotateImage = nullptr;
+    D_ROTATEIMAGESTRINGFUNC                       DYNDTWAIN_API::DTWAIN_RotateImageString = nullptr;
+    D_ROTATEIMAGESTRINGAFUNC                      DYNDTWAIN_API::DTWAIN_RotateImageStringA = nullptr;
+    D_ROTATEIMAGESTRINGWFUNC                      DYNDTWAIN_API::DTWAIN_RotateImageStringW = nullptr;
     D_SELECTDEFAULTOCRENGINEFUNC                  DYNDTWAIN_API::DTWAIN_SelectDefaultOCREngine = nullptr;
     D_SELECTDEFAULTSOURCEFUNC                     DYNDTWAIN_API::DTWAIN_SelectDefaultSource = nullptr;
     D_SELECTDEFAULTSOURCEWITHOPENFUNC             DYNDTWAIN_API::DTWAIN_SelectDefaultSourceWithOpen = nullptr;
@@ -1065,6 +1077,7 @@
     D_SETLIGHTPATHEXFUNC                          DYNDTWAIN_API::DTWAIN_SetLightPathEx = nullptr;
     D_SETLIGHTSOURCEFUNC                          DYNDTWAIN_API::DTWAIN_SetLightSource = nullptr;
     D_SETLIGHTSOURCESFUNC                         DYNDTWAIN_API::DTWAIN_SetLightSources = nullptr;
+    D_SETLOGSAVETHRESHOLDFUNC                     DYNDTWAIN_API::DTWAIN_SetLogSaveThreshold = nullptr;
     D_SETLOGGERCALLBACKFUNC                       DYNDTWAIN_API::DTWAIN_SetLoggerCallback = nullptr;
     D_SETLOGGERCALLBACKAFUNC                      DYNDTWAIN_API::DTWAIN_SetLoggerCallbackA = nullptr;
     D_SETLOGGERCALLBACKWFUNC                      DYNDTWAIN_API::DTWAIN_SetLoggerCallbackW = nullptr;
@@ -1216,6 +1229,7 @@
     D_TESTGETCAPFUNC                              DYNDTWAIN_API::DTWAIN_TestGetCap = nullptr;
     D_UNLOCKMEMORYFUNC                            DYNDTWAIN_API::DTWAIN_UnlockMemory = nullptr;
     D_UNLOCKMEMORYEXFUNC                          DYNDTWAIN_API::DTWAIN_UnlockMemoryEx = nullptr;
+    D_UPDATECURRENTACQUIREDIMAGEFUNC              DYNDTWAIN_API::DTWAIN_UpdateCurrentAcquiredImage = nullptr;
     D_USEMULTIPLETHREADSFUNC                      DYNDTWAIN_API::DTWAIN_UseMultipleThreads = nullptr;
 #endif
 
@@ -1491,6 +1505,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnableBarcodeDetection, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableDuplex, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableFeeder, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnableGetMessageLoop, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnableGetMessageLoopDetection, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableIndicator, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableJobFileHandling, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnableLamp, hModule);
@@ -1536,6 +1552,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnumCameras, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCamerasEx2, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_EnumCapLabels, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypes, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypesEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumCompressionTypesEx2, hModule);
@@ -1669,6 +1686,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetAcquireStripSizes, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquiredImage, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAcquiredImageArray, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAcquisitionArray, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPath, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPathA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMPathW, hModule);
@@ -1709,6 +1727,12 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromName, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromNameA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapFromNameW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapHelp, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapHelpA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapHelpW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapLabel, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapLabelA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetCapLabelW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapOperations, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapOperationsEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetCapValues, hModule);
@@ -2030,6 +2054,8 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_IsFeederSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsFileSystemSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsFileXferSupported, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsGetMessageLoopDetectionOn, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_IsGetMessageLoopEnabled, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsIAFieldALastPageSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsIAFieldALevelSupported, hModule);
           LOADFUNCTIONIMPL(DTWAIN_IsIAFieldAPrintFormatSupported, hModule);
@@ -2162,10 +2188,10 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_RemovePDFTextElement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ResetPDFTextElement, hModule);
           LOADFUNCTIONIMPL(DTWAIN_RewindPage, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_RotateDIB, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_RotateDIBString, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_RotateDIBStringA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_RotateDIBStringW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateImage, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateImageString, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateImageStringA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_RotateImageStringW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultOCREngine, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultSource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SelectDefaultSourceWithOpen, hModule);
@@ -2298,6 +2324,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetLightPathEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLightSource, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLightSources, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetLogSaveThreshold, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallbackA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallbackW, hModule);
@@ -2449,6 +2476,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_TestGetCap, hModule);
           LOADFUNCTIONIMPL(DTWAIN_UnlockMemory, hModule);
           LOADFUNCTIONIMPL(DTWAIN_UnlockMemoryEx, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_UpdateCurrentAcquiredImage, hModule);
           LOADFUNCTIONIMPL(DTWAIN_UseMultipleThreads, hModule);
     }
     return 1;

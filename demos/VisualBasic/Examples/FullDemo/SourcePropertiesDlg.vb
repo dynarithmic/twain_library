@@ -106,4 +106,10 @@ Public Class SourcePropertiesDlg
             e.Cancel = True
         End If
     End Sub
+
+    Private Sub SourcePropertiesDlg_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If chkResetCapsOnExit.Checked Then
+            DTWAINAPI.DTWAIN_SetAllCapsToDefault(m_Source)
+        End If
+    End Sub
 End Class

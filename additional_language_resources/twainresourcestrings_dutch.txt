@@ -234,6 +234,7 @@
 2504 Operatie niet ondersteund  
 2505 Ongeldig PDF-textelement
 2506 Mogelijkheid was niet ingesteld. Ongeldige waarden werden gebruikt.
+2507 Mogelijkheid kan niet worden onderhandeld in de huidige staat
 3000 Selecteer bron
 3001 &Selecteer
 3002 &Annuleer

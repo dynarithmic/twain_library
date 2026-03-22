@@ -227,6 +227,7 @@
 2504 Operação não suportada  
 2505 Elemento de texto PDF inválido
 2506 Capacidade não foi definida. Valores inválidos foram usados.
+2507 A capacidade não pode ser negociada no estado atual
 2102 OCR inválido  
 2103 OCR não ativo  
 2104 Tipo de arquivo OCR inválido  

@@ -235,6 +235,7 @@
 2504 Operazione non supportata  
 2505 Elemento di testo PDF non valido
 2506 La capacità non è stata impostata. Sono stati utilizzati valori non validi.
+2507 La capacità non può essere negoziata nello stato attuale
 3000 Selezioni Fonte
 3001 &Selezionar
 3002 &Annullare

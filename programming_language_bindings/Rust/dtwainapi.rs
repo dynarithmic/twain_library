@@ -251,6 +251,8 @@ type DtwainenableautomaticsensemediumFunc = unsafe extern "C" fn(*mut c_void,i32
 type DtwainenablebarcodedetectionFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainenableduplexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainenablefeederFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
+type DtwainenablegetmessageloopFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
+type DtwainenablegetmessageloopdetectionFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainenableindicatorFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainenablejobfilehandlingFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainenablelampFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -296,6 +298,7 @@ type DtwainenumbrightnessvaluesexFunc = unsafe extern "C" fn(*mut c_void,i32) ->
 type DtwainenumcamerasFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
 type DtwainenumcamerasexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type Dtwainenumcamerasex2Func = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
+type DtwainenumcaplabelsFunc = unsafe extern "C" fn(i32) -> *mut c_void;
 type DtwainenumcompressiontypesFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
 type DtwainenumcompressiontypesexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type Dtwainenumcompressiontypesex2Func = unsafe extern "C" fn(*mut c_void,i32,i32) -> *mut c_void;
@@ -429,6 +432,7 @@ type DtwaingetacquirestripdataFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*
 type DtwaingetacquirestripsizesFunc = unsafe extern "C" fn(*mut c_void,*mut u32,*mut u32,*mut u32) -> i32;
 type DtwaingetacquiredimageFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> *mut c_void;
 type DtwaingetacquiredimagearrayFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
+type DtwaingetacquisitionarrayFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwaingetactivedsmpathFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetactivedsmpathaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetactivedsmpathwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
@@ -469,6 +473,12 @@ type DtwaingetcapdatatypeFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetcapfromnameFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwaingetcapfromnameaFunc = unsafe extern "C" fn(*const c_char) -> i32;
 type DtwaingetcapfromnamewFunc = unsafe extern "C" fn(*const u16) -> i32;
+type DtwaingetcaphelpFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
+type DtwaingetcaphelpaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
+type DtwaingetcaphelpwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
+type DtwaingetcaplabelFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
+type DtwaingetcaplabelaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
+type DtwaingetcaplabelwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetcapoperationsFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32) -> i32;
 type DtwaingetcapoperationsexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetcapvaluesFunc = unsafe extern "C" fn(*mut c_void,i32,i32,*mut *mut c_void) -> i32;
@@ -789,6 +799,8 @@ type DtwainisfeedersensitiveFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfeedersupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfilesystemsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfilexfersupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
+type DtwainisgetmessageloopdetectiononFunc = unsafe extern "C" fn() -> i32;
+type DtwainisgetmessageloopenabledFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisiafieldalastpagesupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisiafieldalevelsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisiafieldaprintformatsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -920,10 +932,10 @@ type DtwainrangesetvaluelongFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> 
 type DtwainremovepdftextelementFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainresetpdftextelementFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainrewindpageFunc = unsafe extern "C" fn(*mut c_void) -> i32;
-type DtwainrotatedibFunc = unsafe extern "C" fn(*mut c_void,f64) -> *mut c_void;
-type DtwainrotatedibstringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
-type DtwainrotatedibstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> *mut c_void;
-type DtwainrotatedibstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
+type DtwainrotateimageFunc = unsafe extern "C" fn(*mut c_void,f64) -> *mut c_void;
+type DtwainrotateimagestringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
+type DtwainrotateimagestringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> *mut c_void;
+type DtwainrotateimagestringwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
 type DtwainselectdefaultocrengineFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainselectdefaultsourceFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainselectdefaultsourcewithopenFunc = unsafe extern "C" fn(i32) -> *mut c_void;
@@ -1056,6 +1068,7 @@ type DtwainsetlightpathFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainsetlightpathexFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainsetlightsourceFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainsetlightsourcesFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
+type DtwainsetlogsavethresholdFunc = unsafe extern "C" fn(i64) -> i32;
 type DtwainsetloggercallbackFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROC,i64) -> i32;
 type DtwainsetloggercallbackaFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROCA,i64) -> i32;
 type DtwainsetloggercallbackwFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROCW,i64) -> i32;
@@ -1206,6 +1219,7 @@ type DtwainsysinitializenoblockingFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwaintestgetcapFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
 type DtwainunlockmemoryFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainunlockmemoryexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwainupdatecurrentacquiredimageFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainusemultiplethreadsFunc = unsafe extern "C" fn(i32) -> i32;
 pub struct DTwainAPI<'a>
 {
@@ -1413,6 +1427,8 @@ pub struct DTwainAPI<'a>
     DTWAIN_EnableBarcodeDetectionFunc: Symbol<'a, DtwainenablebarcodedetectionFunc>,
     DTWAIN_EnableDuplexFunc: Symbol<'a, DtwainenableduplexFunc>,
     DTWAIN_EnableFeederFunc: Symbol<'a, DtwainenablefeederFunc>,
+    DTWAIN_EnableGetMessageLoopFunc: Symbol<'a, DtwainenablegetmessageloopFunc>,
+    DTWAIN_EnableGetMessageLoopDetectionFunc: Symbol<'a, DtwainenablegetmessageloopdetectionFunc>,
     DTWAIN_EnableIndicatorFunc: Symbol<'a, DtwainenableindicatorFunc>,
     DTWAIN_EnableJobFileHandlingFunc: Symbol<'a, DtwainenablejobfilehandlingFunc>,
     DTWAIN_EnableLampFunc: Symbol<'a, DtwainenablelampFunc>,
@@ -1458,6 +1474,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_EnumCamerasFunc: Symbol<'a, DtwainenumcamerasFunc>,
     DTWAIN_EnumCamerasExFunc: Symbol<'a, DtwainenumcamerasexFunc>,
     DTWAIN_EnumCamerasEx2Func: Symbol<'a, Dtwainenumcamerasex2Func>,
+    DTWAIN_EnumCapLabelsFunc: Symbol<'a, DtwainenumcaplabelsFunc>,
     DTWAIN_EnumCompressionTypesFunc: Symbol<'a, DtwainenumcompressiontypesFunc>,
     DTWAIN_EnumCompressionTypesExFunc: Symbol<'a, DtwainenumcompressiontypesexFunc>,
     DTWAIN_EnumCompressionTypesEx2Func: Symbol<'a, Dtwainenumcompressiontypesex2Func>,
@@ -1591,6 +1608,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetAcquireStripSizesFunc: Symbol<'a, DtwaingetacquirestripsizesFunc>,
     DTWAIN_GetAcquiredImageFunc: Symbol<'a, DtwaingetacquiredimageFunc>,
     DTWAIN_GetAcquiredImageArrayFunc: Symbol<'a, DtwaingetacquiredimagearrayFunc>,
+    DTWAIN_GetAcquisitionArrayFunc: Symbol<'a, DtwaingetacquisitionarrayFunc>,
     DTWAIN_GetActiveDSMPathFunc: Symbol<'a, DtwaingetactivedsmpathFunc>,
     DTWAIN_GetActiveDSMPathAFunc: Symbol<'a, DtwaingetactivedsmpathaFunc>,
     DTWAIN_GetActiveDSMPathWFunc: Symbol<'a, DtwaingetactivedsmpathwFunc>,
@@ -1631,6 +1649,12 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetCapFromNameFunc: Symbol<'a, DtwaingetcapfromnameFunc>,
     DTWAIN_GetCapFromNameAFunc: Symbol<'a, DtwaingetcapfromnameaFunc>,
     DTWAIN_GetCapFromNameWFunc: Symbol<'a, DtwaingetcapfromnamewFunc>,
+    DTWAIN_GetCapHelpFunc: Symbol<'a, DtwaingetcaphelpFunc>,
+    DTWAIN_GetCapHelpAFunc: Symbol<'a, DtwaingetcaphelpaFunc>,
+    DTWAIN_GetCapHelpWFunc: Symbol<'a, DtwaingetcaphelpwFunc>,
+    DTWAIN_GetCapLabelFunc: Symbol<'a, DtwaingetcaplabelFunc>,
+    DTWAIN_GetCapLabelAFunc: Symbol<'a, DtwaingetcaplabelaFunc>,
+    DTWAIN_GetCapLabelWFunc: Symbol<'a, DtwaingetcaplabelwFunc>,
     DTWAIN_GetCapOperationsFunc: Symbol<'a, DtwaingetcapoperationsFunc>,
     DTWAIN_GetCapOperationsExFunc: Symbol<'a, DtwaingetcapoperationsexFunc>,
     DTWAIN_GetCapValuesFunc: Symbol<'a, DtwaingetcapvaluesFunc>,
@@ -1951,6 +1975,8 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsFeederSupportedFunc: Symbol<'a, DtwainisfeedersupportedFunc>,
     DTWAIN_IsFileSystemSupportedFunc: Symbol<'a, DtwainisfilesystemsupportedFunc>,
     DTWAIN_IsFileXferSupportedFunc: Symbol<'a, DtwainisfilexfersupportedFunc>,
+    DTWAIN_IsGetMessageLoopDetectionOnFunc: Symbol<'a, DtwainisgetmessageloopdetectiononFunc>,
+    DTWAIN_IsGetMessageLoopEnabledFunc: Symbol<'a, DtwainisgetmessageloopenabledFunc>,
     DTWAIN_IsIAFieldALastPageSupportedFunc: Symbol<'a, DtwainisiafieldalastpagesupportedFunc>,
     DTWAIN_IsIAFieldALevelSupportedFunc: Symbol<'a, DtwainisiafieldalevelsupportedFunc>,
     DTWAIN_IsIAFieldAPrintFormatSupportedFunc: Symbol<'a, DtwainisiafieldaprintformatsupportedFunc>,
@@ -2082,10 +2108,10 @@ pub struct DTwainAPI<'a>
     DTWAIN_RemovePDFTextElementFunc: Symbol<'a, DtwainremovepdftextelementFunc>,
     DTWAIN_ResetPDFTextElementFunc: Symbol<'a, DtwainresetpdftextelementFunc>,
     DTWAIN_RewindPageFunc: Symbol<'a, DtwainrewindpageFunc>,
-    DTWAIN_RotateDIBFunc: Symbol<'a, DtwainrotatedibFunc>,
-    DTWAIN_RotateDIBStringFunc: Symbol<'a, DtwainrotatedibstringFunc>,
-    DTWAIN_RotateDIBStringAFunc: Symbol<'a, DtwainrotatedibstringaFunc>,
-    DTWAIN_RotateDIBStringWFunc: Symbol<'a, DtwainrotatedibstringwFunc>,
+    DTWAIN_RotateImageFunc: Symbol<'a, DtwainrotateimageFunc>,
+    DTWAIN_RotateImageStringFunc: Symbol<'a, DtwainrotateimagestringFunc>,
+    DTWAIN_RotateImageStringAFunc: Symbol<'a, DtwainrotateimagestringaFunc>,
+    DTWAIN_RotateImageStringWFunc: Symbol<'a, DtwainrotateimagestringwFunc>,
     DTWAIN_SelectDefaultOCREngineFunc: Symbol<'a, DtwainselectdefaultocrengineFunc>,
     DTWAIN_SelectDefaultSourceFunc: Symbol<'a, DtwainselectdefaultsourceFunc>,
     DTWAIN_SelectDefaultSourceWithOpenFunc: Symbol<'a, DtwainselectdefaultsourcewithopenFunc>,
@@ -2218,6 +2244,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetLightPathExFunc: Symbol<'a, DtwainsetlightpathexFunc>,
     DTWAIN_SetLightSourceFunc: Symbol<'a, DtwainsetlightsourceFunc>,
     DTWAIN_SetLightSourcesFunc: Symbol<'a, DtwainsetlightsourcesFunc>,
+    DTWAIN_SetLogSaveThresholdFunc: Symbol<'a, DtwainsetlogsavethresholdFunc>,
     DTWAIN_SetLoggerCallbackFunc: Symbol<'a, DtwainsetloggercallbackFunc>,
     DTWAIN_SetLoggerCallbackAFunc: Symbol<'a, DtwainsetloggercallbackaFunc>,
     DTWAIN_SetLoggerCallbackWFunc: Symbol<'a, DtwainsetloggercallbackwFunc>,
@@ -2368,6 +2395,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_TestGetCapFunc: Symbol<'a, DtwaintestgetcapFunc>,
     DTWAIN_UnlockMemoryFunc: Symbol<'a, DtwainunlockmemoryFunc>,
     DTWAIN_UnlockMemoryExFunc: Symbol<'a, DtwainunlockmemoryexFunc>,
+    DTWAIN_UpdateCurrentAcquiredImageFunc: Symbol<'a, DtwainupdatecurrentacquiredimageFunc>,
     DTWAIN_UseMultipleThreadsFunc: Symbol<'a, DtwainusemultiplethreadsFunc>
 }
 impl<'a> DTwainAPI<'a>
@@ -2542,6 +2570,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_USESOURCEMODE: i32 = 128;
     pub const DTWAIN_USELIST: i32 = 256;
     pub const DTWAIN_CREATE_DIRECTORY: i32 = 512;
+    pub const DTWAIN_NODELETEDIBS: i32 = 1024;
     pub const DTWAIN_CREATEDIRECTORY: i32 = DTwainAPI::DTWAIN_CREATE_DIRECTORY;
     pub const DTWAIN_ARRAYANY: i32 = 1;
     pub const DTWAIN_ArrayTypePTR: i32 = 1;
@@ -2557,6 +2586,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ARRAYLONG64: i32 = 10;
     pub const DTWAIN_ARRAYANSISTRING: i32 = 11;
     pub const DTWAIN_ARRAYWIDESTRING: i32 = 12;
+    pub const DTWAIN_ARRAYULONG: i32 = 13;
     pub const DTWAIN_ARRAYTWFIX32: i32 = 200;
     pub const DTWAIN_ArrayTypeINVALID: i32 = 0;
     pub const DTWAIN_ARRAYINT16: i32 = 100;
@@ -2565,6 +2595,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ARRAYINT32: i32 = 130;
     pub const DTWAIN_ARRAYINT64: i32 = 140;
     pub const DTWAIN_ARRAYUINT64: i32 = 150;
+    pub const DTWAIN_ARRAYSHORTINT16: i32 = 160;
+    pub const DTWAIN_ARRAYSHORTUINT16: i32 = 170;
     pub const DTWAIN_RANGELONG: i32 = DTwainAPI::DTWAIN_ARRAYLONG;
     pub const DTWAIN_RANGEFLOAT: i32 = DTwainAPI::DTWAIN_ARRAYFLOAT;
     pub const DTWAIN_RANGEMIN: i32 = 0;
@@ -2739,6 +2771,10 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_TN_FILECOMPRESSTYPEMISMATCH: i32 = 1302;
     pub const DTWAIN_TN_SOURCEDETAILS: i32 = 1304;
     pub const DTWAIN_TN_QUERYACQUIREPAGES: i32 = 1305;
+    pub const DTWAIN_TN_ACQUIREPAGESSTOPPING: i32 = 1306;
+    pub const DTWAIN_TN_ACQUIREPAGESSTOPPED: i32 = 1307;
+    pub const DTWAIN_TN_QUERYUPDATEDIBORIG: i32 = 1308;
+    pub const DTWAIN_TN_QUERYUPDATEDIBRESAMPLED: i32 = 1309;
     pub const DTWAIN_PDFOCR_CLEANTEXT1: i32 = 1;
     pub const DTWAIN_PDFOCR_CLEANTEXT2: i32 = 2;
     pub const DTWAIN_MODAL: i32 = 0;
@@ -3219,6 +3255,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_OPERATION_NOTSUPPORTED: i32 = -2504;
     pub const DTWAIN_ERR_INVALID_PDFTEXTELEMENT: i32 = -2505;
     pub const DTWAIN_ERR_SETCAP_FAILED: i32 = -2506;
+    pub const DTWAIN_ERR_CAP_INVALIDSTATE: i32 = -2507;
+    pub const DTWAIN_ERR_GETCAP_FAILED: i32 = -2508;
     pub const DTWAIN_DE_CHKAUTOCAPTURE: i32 = 1;
     pub const DTWAIN_DE_CHKBATTERY: i32 = 2;
     pub const DTWAIN_DE_CHKDEVICEONLINE: i32 = 4;
@@ -4001,6 +4039,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_CONSTANT_CAPCODE_MAP: i32 = 80;
     pub const DTWAIN_CONSTANT_ACAP: i32 = 81;
     pub const DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC: i32 = 82;
+    pub const DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT: i32 = 83;
+    pub const DTWAIN_CONSTANT_ERROR_NAMES: i32 = 84;
     pub const DTWAIN_USERRES_START: i32 = 20000;
     pub const DTWAIN_USERRES_MAXSIZE: i32 = 8192;
     pub const DTWAIN_APIHANDLEOK: i32 = 1;
@@ -4216,6 +4256,8 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_EnableBarcodeDetection: Symbol<DtwainenablebarcodedetectionFunc> = unsafe { library.get(b"DTWAIN_EnableBarcodeDetection")? };
         let DTWAIN_EnableDuplex: Symbol<DtwainenableduplexFunc> = unsafe { library.get(b"DTWAIN_EnableDuplex")? };
         let DTWAIN_EnableFeeder: Symbol<DtwainenablefeederFunc> = unsafe { library.get(b"DTWAIN_EnableFeeder")? };
+        let DTWAIN_EnableGetMessageLoop: Symbol<DtwainenablegetmessageloopFunc> = unsafe { library.get(b"DTWAIN_EnableGetMessageLoop")? };
+        let DTWAIN_EnableGetMessageLoopDetection: Symbol<DtwainenablegetmessageloopdetectionFunc> = unsafe { library.get(b"DTWAIN_EnableGetMessageLoopDetection")? };
         let DTWAIN_EnableIndicator: Symbol<DtwainenableindicatorFunc> = unsafe { library.get(b"DTWAIN_EnableIndicator")? };
         let DTWAIN_EnableJobFileHandling: Symbol<DtwainenablejobfilehandlingFunc> = unsafe { library.get(b"DTWAIN_EnableJobFileHandling")? };
         let DTWAIN_EnableLamp: Symbol<DtwainenablelampFunc> = unsafe { library.get(b"DTWAIN_EnableLamp")? };
@@ -4261,6 +4303,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_EnumCameras: Symbol<DtwainenumcamerasFunc> = unsafe { library.get(b"DTWAIN_EnumCameras")? };
         let DTWAIN_EnumCamerasEx: Symbol<DtwainenumcamerasexFunc> = unsafe { library.get(b"DTWAIN_EnumCamerasEx")? };
         let DTWAIN_EnumCamerasEx2: Symbol<Dtwainenumcamerasex2Func> = unsafe { library.get(b"DTWAIN_EnumCamerasEx2")? };
+        let DTWAIN_EnumCapLabels: Symbol<DtwainenumcaplabelsFunc> = unsafe { library.get(b"DTWAIN_EnumCapLabels")? };
         let DTWAIN_EnumCompressionTypes: Symbol<DtwainenumcompressiontypesFunc> = unsafe { library.get(b"DTWAIN_EnumCompressionTypes")? };
         let DTWAIN_EnumCompressionTypesEx: Symbol<DtwainenumcompressiontypesexFunc> = unsafe { library.get(b"DTWAIN_EnumCompressionTypesEx")? };
         let DTWAIN_EnumCompressionTypesEx2: Symbol<Dtwainenumcompressiontypesex2Func> = unsafe { library.get(b"DTWAIN_EnumCompressionTypesEx2")? };
@@ -4394,6 +4437,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetAcquireStripSizes: Symbol<DtwaingetacquirestripsizesFunc> = unsafe { library.get(b"DTWAIN_GetAcquireStripSizes")? };
         let DTWAIN_GetAcquiredImage: Symbol<DtwaingetacquiredimageFunc> = unsafe { library.get(b"DTWAIN_GetAcquiredImage")? };
         let DTWAIN_GetAcquiredImageArray: Symbol<DtwaingetacquiredimagearrayFunc> = unsafe { library.get(b"DTWAIN_GetAcquiredImageArray")? };
+        let DTWAIN_GetAcquisitionArray: Symbol<DtwaingetacquisitionarrayFunc> = unsafe { library.get(b"DTWAIN_GetAcquisitionArray")? };
         let DTWAIN_GetActiveDSMPath: Symbol<DtwaingetactivedsmpathFunc> = unsafe { library.get(b"DTWAIN_GetActiveDSMPath")? };
         let DTWAIN_GetActiveDSMPathA: Symbol<DtwaingetactivedsmpathaFunc> = unsafe { library.get(b"DTWAIN_GetActiveDSMPathA")? };
         let DTWAIN_GetActiveDSMPathW: Symbol<DtwaingetactivedsmpathwFunc> = unsafe { library.get(b"DTWAIN_GetActiveDSMPathW")? };
@@ -4434,6 +4478,12 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetCapFromName: Symbol<DtwaingetcapfromnameFunc> = unsafe { library.get(b"DTWAIN_GetCapFromName")? };
         let DTWAIN_GetCapFromNameA: Symbol<DtwaingetcapfromnameaFunc> = unsafe { library.get(b"DTWAIN_GetCapFromNameA")? };
         let DTWAIN_GetCapFromNameW: Symbol<DtwaingetcapfromnamewFunc> = unsafe { library.get(b"DTWAIN_GetCapFromNameW")? };
+        let DTWAIN_GetCapHelp: Symbol<DtwaingetcaphelpFunc> = unsafe { library.get(b"DTWAIN_GetCapHelp")? };
+        let DTWAIN_GetCapHelpA: Symbol<DtwaingetcaphelpaFunc> = unsafe { library.get(b"DTWAIN_GetCapHelpA")? };
+        let DTWAIN_GetCapHelpW: Symbol<DtwaingetcaphelpwFunc> = unsafe { library.get(b"DTWAIN_GetCapHelpW")? };
+        let DTWAIN_GetCapLabel: Symbol<DtwaingetcaplabelFunc> = unsafe { library.get(b"DTWAIN_GetCapLabel")? };
+        let DTWAIN_GetCapLabelA: Symbol<DtwaingetcaplabelaFunc> = unsafe { library.get(b"DTWAIN_GetCapLabelA")? };
+        let DTWAIN_GetCapLabelW: Symbol<DtwaingetcaplabelwFunc> = unsafe { library.get(b"DTWAIN_GetCapLabelW")? };
         let DTWAIN_GetCapOperations: Symbol<DtwaingetcapoperationsFunc> = unsafe { library.get(b"DTWAIN_GetCapOperations")? };
         let DTWAIN_GetCapOperationsEx: Symbol<DtwaingetcapoperationsexFunc> = unsafe { library.get(b"DTWAIN_GetCapOperationsEx")? };
         let DTWAIN_GetCapValues: Symbol<DtwaingetcapvaluesFunc> = unsafe { library.get(b"DTWAIN_GetCapValues")? };
@@ -4754,6 +4804,8 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsFeederSupported: Symbol<DtwainisfeedersupportedFunc> = unsafe { library.get(b"DTWAIN_IsFeederSupported")? };
         let DTWAIN_IsFileSystemSupported: Symbol<DtwainisfilesystemsupportedFunc> = unsafe { library.get(b"DTWAIN_IsFileSystemSupported")? };
         let DTWAIN_IsFileXferSupported: Symbol<DtwainisfilexfersupportedFunc> = unsafe { library.get(b"DTWAIN_IsFileXferSupported")? };
+        let DTWAIN_IsGetMessageLoopDetectionOn: Symbol<DtwainisgetmessageloopdetectiononFunc> = unsafe { library.get(b"DTWAIN_IsGetMessageLoopDetectionOn")? };
+        let DTWAIN_IsGetMessageLoopEnabled: Symbol<DtwainisgetmessageloopenabledFunc> = unsafe { library.get(b"DTWAIN_IsGetMessageLoopEnabled")? };
         let DTWAIN_IsIAFieldALastPageSupported: Symbol<DtwainisiafieldalastpagesupportedFunc> = unsafe { library.get(b"DTWAIN_IsIAFieldALastPageSupported")? };
         let DTWAIN_IsIAFieldALevelSupported: Symbol<DtwainisiafieldalevelsupportedFunc> = unsafe { library.get(b"DTWAIN_IsIAFieldALevelSupported")? };
         let DTWAIN_IsIAFieldAPrintFormatSupported: Symbol<DtwainisiafieldaprintformatsupportedFunc> = unsafe { library.get(b"DTWAIN_IsIAFieldAPrintFormatSupported")? };
@@ -4885,10 +4937,10 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_RemovePDFTextElement: Symbol<DtwainremovepdftextelementFunc> = unsafe { library.get(b"DTWAIN_RemovePDFTextElement")? };
         let DTWAIN_ResetPDFTextElement: Symbol<DtwainresetpdftextelementFunc> = unsafe { library.get(b"DTWAIN_ResetPDFTextElement")? };
         let DTWAIN_RewindPage: Symbol<DtwainrewindpageFunc> = unsafe { library.get(b"DTWAIN_RewindPage")? };
-        let DTWAIN_RotateDIB: Symbol<DtwainrotatedibFunc> = unsafe { library.get(b"DTWAIN_RotateDIB")? };
-        let DTWAIN_RotateDIBString: Symbol<DtwainrotatedibstringFunc> = unsafe { library.get(b"DTWAIN_RotateDIBString")? };
-        let DTWAIN_RotateDIBStringA: Symbol<DtwainrotatedibstringaFunc> = unsafe { library.get(b"DTWAIN_RotateDIBStringA")? };
-        let DTWAIN_RotateDIBStringW: Symbol<DtwainrotatedibstringwFunc> = unsafe { library.get(b"DTWAIN_RotateDIBStringW")? };
+        let DTWAIN_RotateImage: Symbol<DtwainrotateimageFunc> = unsafe { library.get(b"DTWAIN_RotateImage")? };
+        let DTWAIN_RotateImageString: Symbol<DtwainrotateimagestringFunc> = unsafe { library.get(b"DTWAIN_RotateImageString")? };
+        let DTWAIN_RotateImageStringA: Symbol<DtwainrotateimagestringaFunc> = unsafe { library.get(b"DTWAIN_RotateImageStringA")? };
+        let DTWAIN_RotateImageStringW: Symbol<DtwainrotateimagestringwFunc> = unsafe { library.get(b"DTWAIN_RotateImageStringW")? };
         let DTWAIN_SelectDefaultOCREngine: Symbol<DtwainselectdefaultocrengineFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultOCREngine")? };
         let DTWAIN_SelectDefaultSource: Symbol<DtwainselectdefaultsourceFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultSource")? };
         let DTWAIN_SelectDefaultSourceWithOpen: Symbol<DtwainselectdefaultsourcewithopenFunc> = unsafe { library.get(b"DTWAIN_SelectDefaultSourceWithOpen")? };
@@ -5021,6 +5073,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetLightPathEx: Symbol<DtwainsetlightpathexFunc> = unsafe { library.get(b"DTWAIN_SetLightPathEx")? };
         let DTWAIN_SetLightSource: Symbol<DtwainsetlightsourceFunc> = unsafe { library.get(b"DTWAIN_SetLightSource")? };
         let DTWAIN_SetLightSources: Symbol<DtwainsetlightsourcesFunc> = unsafe { library.get(b"DTWAIN_SetLightSources")? };
+        let DTWAIN_SetLogSaveThreshold: Symbol<DtwainsetlogsavethresholdFunc> = unsafe { library.get(b"DTWAIN_SetLogSaveThreshold")? };
         let DTWAIN_SetLoggerCallback: Symbol<DtwainsetloggercallbackFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallback")? };
         let DTWAIN_SetLoggerCallbackA: Symbol<DtwainsetloggercallbackaFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallbackA")? };
         let DTWAIN_SetLoggerCallbackW: Symbol<DtwainsetloggercallbackwFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallbackW")? };
@@ -5171,6 +5224,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_TestGetCap: Symbol<DtwaintestgetcapFunc> = unsafe { library.get(b"DTWAIN_TestGetCap")? };
         let DTWAIN_UnlockMemory: Symbol<DtwainunlockmemoryFunc> = unsafe { library.get(b"DTWAIN_UnlockMemory")? };
         let DTWAIN_UnlockMemoryEx: Symbol<DtwainunlockmemoryexFunc> = unsafe { library.get(b"DTWAIN_UnlockMemoryEx")? };
+        let DTWAIN_UpdateCurrentAcquiredImage: Symbol<DtwainupdatecurrentacquiredimageFunc> = unsafe { library.get(b"DTWAIN_UpdateCurrentAcquiredImage")? };
         let DTWAIN_UseMultipleThreads: Symbol<DtwainusemultiplethreadsFunc> = unsafe { library.get(b"DTWAIN_UseMultipleThreads")? };
         Ok(Self {
             DTWAIN_AcquireAudioFileFunc: DTWAIN_AcquireAudioFile,
@@ -5377,6 +5431,8 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_EnableBarcodeDetectionFunc: DTWAIN_EnableBarcodeDetection,
             DTWAIN_EnableDuplexFunc: DTWAIN_EnableDuplex,
             DTWAIN_EnableFeederFunc: DTWAIN_EnableFeeder,
+            DTWAIN_EnableGetMessageLoopFunc: DTWAIN_EnableGetMessageLoop,
+            DTWAIN_EnableGetMessageLoopDetectionFunc: DTWAIN_EnableGetMessageLoopDetection,
             DTWAIN_EnableIndicatorFunc: DTWAIN_EnableIndicator,
             DTWAIN_EnableJobFileHandlingFunc: DTWAIN_EnableJobFileHandling,
             DTWAIN_EnableLampFunc: DTWAIN_EnableLamp,
@@ -5422,6 +5478,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_EnumCamerasFunc: DTWAIN_EnumCameras,
             DTWAIN_EnumCamerasExFunc: DTWAIN_EnumCamerasEx,
             DTWAIN_EnumCamerasEx2Func: DTWAIN_EnumCamerasEx2,
+            DTWAIN_EnumCapLabelsFunc: DTWAIN_EnumCapLabels,
             DTWAIN_EnumCompressionTypesFunc: DTWAIN_EnumCompressionTypes,
             DTWAIN_EnumCompressionTypesExFunc: DTWAIN_EnumCompressionTypesEx,
             DTWAIN_EnumCompressionTypesEx2Func: DTWAIN_EnumCompressionTypesEx2,
@@ -5555,6 +5612,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetAcquireStripSizesFunc: DTWAIN_GetAcquireStripSizes,
             DTWAIN_GetAcquiredImageFunc: DTWAIN_GetAcquiredImage,
             DTWAIN_GetAcquiredImageArrayFunc: DTWAIN_GetAcquiredImageArray,
+            DTWAIN_GetAcquisitionArrayFunc: DTWAIN_GetAcquisitionArray,
             DTWAIN_GetActiveDSMPathFunc: DTWAIN_GetActiveDSMPath,
             DTWAIN_GetActiveDSMPathAFunc: DTWAIN_GetActiveDSMPathA,
             DTWAIN_GetActiveDSMPathWFunc: DTWAIN_GetActiveDSMPathW,
@@ -5595,6 +5653,12 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetCapFromNameFunc: DTWAIN_GetCapFromName,
             DTWAIN_GetCapFromNameAFunc: DTWAIN_GetCapFromNameA,
             DTWAIN_GetCapFromNameWFunc: DTWAIN_GetCapFromNameW,
+            DTWAIN_GetCapHelpFunc: DTWAIN_GetCapHelp,
+            DTWAIN_GetCapHelpAFunc: DTWAIN_GetCapHelpA,
+            DTWAIN_GetCapHelpWFunc: DTWAIN_GetCapHelpW,
+            DTWAIN_GetCapLabelFunc: DTWAIN_GetCapLabel,
+            DTWAIN_GetCapLabelAFunc: DTWAIN_GetCapLabelA,
+            DTWAIN_GetCapLabelWFunc: DTWAIN_GetCapLabelW,
             DTWAIN_GetCapOperationsFunc: DTWAIN_GetCapOperations,
             DTWAIN_GetCapOperationsExFunc: DTWAIN_GetCapOperationsEx,
             DTWAIN_GetCapValuesFunc: DTWAIN_GetCapValues,
@@ -5915,6 +5979,8 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsFeederSupportedFunc: DTWAIN_IsFeederSupported,
             DTWAIN_IsFileSystemSupportedFunc: DTWAIN_IsFileSystemSupported,
             DTWAIN_IsFileXferSupportedFunc: DTWAIN_IsFileXferSupported,
+            DTWAIN_IsGetMessageLoopDetectionOnFunc: DTWAIN_IsGetMessageLoopDetectionOn,
+            DTWAIN_IsGetMessageLoopEnabledFunc: DTWAIN_IsGetMessageLoopEnabled,
             DTWAIN_IsIAFieldALastPageSupportedFunc: DTWAIN_IsIAFieldALastPageSupported,
             DTWAIN_IsIAFieldALevelSupportedFunc: DTWAIN_IsIAFieldALevelSupported,
             DTWAIN_IsIAFieldAPrintFormatSupportedFunc: DTWAIN_IsIAFieldAPrintFormatSupported,
@@ -6046,10 +6112,10 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_RemovePDFTextElementFunc: DTWAIN_RemovePDFTextElement,
             DTWAIN_ResetPDFTextElementFunc: DTWAIN_ResetPDFTextElement,
             DTWAIN_RewindPageFunc: DTWAIN_RewindPage,
-            DTWAIN_RotateDIBFunc: DTWAIN_RotateDIB,
-            DTWAIN_RotateDIBStringFunc: DTWAIN_RotateDIBString,
-            DTWAIN_RotateDIBStringAFunc: DTWAIN_RotateDIBStringA,
-            DTWAIN_RotateDIBStringWFunc: DTWAIN_RotateDIBStringW,
+            DTWAIN_RotateImageFunc: DTWAIN_RotateImage,
+            DTWAIN_RotateImageStringFunc: DTWAIN_RotateImageString,
+            DTWAIN_RotateImageStringAFunc: DTWAIN_RotateImageStringA,
+            DTWAIN_RotateImageStringWFunc: DTWAIN_RotateImageStringW,
             DTWAIN_SelectDefaultOCREngineFunc: DTWAIN_SelectDefaultOCREngine,
             DTWAIN_SelectDefaultSourceFunc: DTWAIN_SelectDefaultSource,
             DTWAIN_SelectDefaultSourceWithOpenFunc: DTWAIN_SelectDefaultSourceWithOpen,
@@ -6182,6 +6248,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetLightPathExFunc: DTWAIN_SetLightPathEx,
             DTWAIN_SetLightSourceFunc: DTWAIN_SetLightSource,
             DTWAIN_SetLightSourcesFunc: DTWAIN_SetLightSources,
+            DTWAIN_SetLogSaveThresholdFunc: DTWAIN_SetLogSaveThreshold,
             DTWAIN_SetLoggerCallbackFunc: DTWAIN_SetLoggerCallback,
             DTWAIN_SetLoggerCallbackAFunc: DTWAIN_SetLoggerCallbackA,
             DTWAIN_SetLoggerCallbackWFunc: DTWAIN_SetLoggerCallbackW,
@@ -6332,6 +6399,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_TestGetCapFunc: DTWAIN_TestGetCap,
             DTWAIN_UnlockMemoryFunc: DTWAIN_UnlockMemory,
             DTWAIN_UnlockMemoryExFunc: DTWAIN_UnlockMemoryEx,
+            DTWAIN_UpdateCurrentAcquiredImageFunc: DTWAIN_UpdateCurrentAcquiredImage,
             DTWAIN_UseMultipleThreadsFunc: DTWAIN_UseMultipleThreads
         })
 }
@@ -7153,6 +7221,14 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_EnableFeederFunc)(Source, bSet);  }
     }
 
+    pub fn DTWAIN_EnableGetMessageLoop(&self, Source: *mut c_void, bSet: i32) -> i32 {
+        unsafe { return (self.DTWAIN_EnableGetMessageLoopFunc)(Source, bSet);  }
+    }
+
+    pub fn DTWAIN_EnableGetMessageLoopDetection(&self, bEnable: i32) -> i32 {
+        unsafe { return (self.DTWAIN_EnableGetMessageLoopDetectionFunc)(bEnable);  }
+    }
+
     pub fn DTWAIN_EnableIndicator(&self, Source: *mut c_void, bEnable: i32) -> i32 {
         unsafe { return (self.DTWAIN_EnableIndicatorFunc)(Source, bEnable);  }
     }
@@ -7331,6 +7407,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_EnumCamerasEx2(&self, Source: *mut c_void, nWhichCamera: i32) -> *mut c_void {
         unsafe { return (self.DTWAIN_EnumCamerasEx2Func)(Source, nWhichCamera);  }
+    }
+
+    pub fn DTWAIN_EnumCapLabels(&self, lCapability: i32) -> *mut c_void {
+        unsafe { return (self.DTWAIN_EnumCapLabelsFunc)(lCapability);  }
     }
 
     pub fn DTWAIN_EnumCompressionTypes(&self, Source: *mut c_void, pArray: *mut *mut c_void) -> i32 {
@@ -7865,6 +7945,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetAcquiredImageArrayFunc)(aAcq, nWhichAcq);  }
     }
 
+    pub fn DTWAIN_GetAcquisitionArray(&self, Source: *mut c_void) -> *mut c_void {
+        unsafe { return (self.DTWAIN_GetAcquisitionArrayFunc)(Source);  }
+    }
+
     pub fn DTWAIN_GetActiveDSMPath(&self, lpszBuffer: *mut u16, nMaxLen: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetActiveDSMPathFunc)(lpszBuffer, nMaxLen);  }
     }
@@ -8023,6 +8107,30 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetCapFromNameW(&self, szName: *const u16) -> i32 {
         unsafe { return (self.DTWAIN_GetCapFromNameWFunc)(szName);  }
+    }
+
+    pub fn DTWAIN_GetCapHelp(&self, lCapability: i32, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapHelpFunc)(lCapability, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetCapHelpA(&self, lCapability: i32, lpszOut: *mut c_char, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapHelpAFunc)(lCapability, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetCapHelpW(&self, lCapability: i32, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapHelpWFunc)(lCapability, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetCapLabel(&self, lCapability: i32, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapLabelFunc)(lCapability, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetCapLabelA(&self, lCapability: i32, lpszOut: *mut c_char, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapLabelAFunc)(lCapability, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetCapLabelW(&self, lCapability: i32, lpszOut: *mut u16, nnSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetCapLabelWFunc)(lCapability, lpszOut, nnSize);  }
     }
 
     pub fn DTWAIN_GetCapOperations(&self, Source: *mut c_void, lCapability: i32, lpOps: *mut i32) -> i32 {
@@ -9305,6 +9413,14 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_IsFileXferSupportedFunc)(Source, lFileType);  }
     }
 
+    pub fn DTWAIN_IsGetMessageLoopDetectionOn(&self) -> i32 {
+        unsafe { return (self.DTWAIN_IsGetMessageLoopDetectionOnFunc)();  }
+    }
+
+    pub fn DTWAIN_IsGetMessageLoopEnabled(&self, Source: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_IsGetMessageLoopEnabledFunc)(Source);  }
+    }
+
     pub fn DTWAIN_IsIAFieldALastPageSupported(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_IsIAFieldALastPageSupportedFunc)(Source);  }
     }
@@ -9829,20 +9945,20 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_RewindPageFunc)(Source);  }
     }
 
-    pub fn DTWAIN_RotateDIB(&self, hDib: *mut c_void, rotationAngle: f64) -> *mut c_void {
-        unsafe { return (self.DTWAIN_RotateDIBFunc)(hDib, rotationAngle);  }
+    pub fn DTWAIN_RotateImage(&self, hDib: *mut c_void, rotationAngle: f64) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateImageFunc)(hDib, rotationAngle);  }
     }
 
-    pub fn DTWAIN_RotateDIBString(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_RotateDIBStringFunc)(hDib, rotationAngle);  }
+    pub fn DTWAIN_RotateImageString(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateImageStringFunc)(hDib, rotationAngle);  }
     }
 
-    pub fn DTWAIN_RotateDIBStringA(&self, hDib: *mut c_void, rotationAngle: *const c_char) -> *mut c_void {
-        unsafe { return (self.DTWAIN_RotateDIBStringAFunc)(hDib, rotationAngle);  }
+    pub fn DTWAIN_RotateImageStringA(&self, hDib: *mut c_void, rotationAngle: *const c_char) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateImageStringAFunc)(hDib, rotationAngle);  }
     }
 
-    pub fn DTWAIN_RotateDIBStringW(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_RotateDIBStringWFunc)(hDib, rotationAngle);  }
+    pub fn DTWAIN_RotateImageStringW(&self, hDib: *mut c_void, rotationAngle: *const u16) -> *mut c_void {
+        unsafe { return (self.DTWAIN_RotateImageStringWFunc)(hDib, rotationAngle);  }
     }
 
     pub fn DTWAIN_SelectDefaultOCREngine(&self) -> *mut c_void {
@@ -10371,6 +10487,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SetLightSources(&self, Source: *mut c_void, LightSources: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_SetLightSourcesFunc)(Source, LightSources);  }
+    }
+
+    pub fn DTWAIN_SetLogSaveThreshold(&self, lineCount: i64) -> i32 {
+        unsafe { return (self.DTWAIN_SetLogSaveThresholdFunc)(lineCount);  }
     }
 
     pub fn DTWAIN_SetLoggerCallback(&self, logProc: DTWAIN_LOGGER_PROC, UserData: i64) -> i32 {
@@ -10971,6 +11091,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_UnlockMemoryEx(&self, h: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_UnlockMemoryExFunc)(h);  }
+    }
+
+    pub fn DTWAIN_UpdateCurrentAcquiredImage(&self, Source: *mut c_void, hNewDib: *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_UpdateCurrentAcquiredImageFunc)(Source, hNewDib);  }
     }
 
     pub fn DTWAIN_UseMultipleThreads(&self, bSet: i32) -> i32 {

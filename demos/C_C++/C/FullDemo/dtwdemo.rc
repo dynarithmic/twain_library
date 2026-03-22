@@ -31,21 +31,85 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "E&xit Demo",                  IDM_EXIT
     END
-
     POPUP "&Acquire Test"
     BEGIN
         MENUITEM "Acquire Native...",           IDM_ACQUIRE_NATIVE
         MENUITEM "Acquire Buffered...",         IDM_ACQUIRE_BUFFERED
-        MENUITEM "Acquire File ...",            IDM_ACQUIRE_FILE_DTWAIN
-        MENUITEM "Acquire File (Source Mode)...", IDM_ACQUIRE_FILE_SOURCE
+        POPUP "Acquire File ..."
+        BEGIN
+            POPUP "BigTIFF"
+            BEGIN
+                MENUITEM "No compression",              IDM_ACQUIREFILE_BIGTIFF_NOCOMPRESSION
+                MENUITEM "Group 3",                     IDM_ACQUIREFILE_BIGTIFF_GROUP3
+                MENUITEM "Group 4",                     IDM_ACQUIREFILE_BIGTIFF_GROUP4
+                MENUITEM "Flate",                       IDM_ACQUIREFILE_BIGTIFF_FLATE
+                MENUITEM "JPEG",                        IDM_ACQUIREFILE_BIGTIFF_JPEG
+                MENUITEM "LZW",                         IDM_ACQUIREFILE_BIGTIFF_LZW
+                MENUITEM "Packbits",                    IDM_ACQUIREFILE_BIGTIFF_PACKBITS
+            END
+            MENUITEM "BMP",                         IDM_ACQUIREFILE_BMP
+            MENUITEM "BMP-RLE",                     IDM_ACQUIREFILE_BMPRLE
+            MENUITEM "DCX",                         IDM_ACQUIREFILE_DCX
+            MENUITEM "Enhanced Meta File (EMF)",    IDM_ACQUIREFILE_ENHANCEDMETAFILE
+            MENUITEM "GIF",                         IDM_ACQUIREFILE_GIF
+            MENUITEM "ICO",                         IDM_ACQUIREFILE_ICO
+            MENUITEM "ICO-Vista",                   IDM_ACQUIREFILE_ICOVISTA
+            MENUITEM "JPEG",                        IDM_ACQUIREFILE_JPEG
+            MENUITEM "JPEG-2000",                   IDM_ACQUIREFILE_JPEG2000
+            MENUITEM "JPEG-XR",                     IDM_ACQUIREFILE_JPEGXR
+            MENUITEM "Paintshop (PSD)",             IDM_ACQUIREFILE_PAINTSHOP
+            MENUITEM "PCX",                         IDM_ACQUIREFILE_PCX
+            MENUITEM "PDF",                         IDM_ACQUIREFILE_PDF
+            MENUITEM "PNG",                         IDM_ACQUIREFILE_PNG
+            MENUITEM "PostScript (Level 1)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL1
+            MENUITEM "PostScript (Level 2)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL2
+            MENUITEM "SVG",                         IDM_ACQUIREFILE_SVG
+            MENUITEM "SVGZ",                        IDM_ACQUIREFILE_SVGZ
+            MENUITEM "Targa (TGA)",                 IDM_ACQUIREFILE_TGA
+            MENUITEM "Targa-RLE",                   IDM_ACQUIREFILE_TGARLE
+            MENUITEM "Text (OCR)",                  IDM_ACQUIREFILE_TEXT
+            POPUP "TIFF"
+            BEGIN
+                MENUITEM "No compression",              IDM_ACQUIREFILE_TIFF_NOCOMPRESSION
+                MENUITEM "Group 3",                     IDM_ACQUIREFILE_TIFF_GROUP3
+                MENUITEM "Group 4",                     IDM_ACQUIREFILE_TIFF_GROUP4
+                MENUITEM "Flate",                       IDM_ACQUIREFILE_TIFF_FLATE
+                MENUITEM "JPEG",                        IDM_ACQUIREFILE_TIFF_JPEG
+                MENUITEM "LZW",                         IDM_ACQUIREFILE_TIFF_LZW
+                MENUITEM "Packbits",                    IDM_ACQUIREFILE_TIFF_PACKBITS
+            END
+            MENUITEM "WEBP",                        IDM_ACQUIREFILE_WEBP
+            MENUITEM "Windows Meta File (WMF)",     IDM_ACQUIREFILE_WINDOWSMETAFILE
+            MENUITEM "Wireless Bitmap (WBMP)",      IDM_ACQUIREFILE_WIRELESSBITMAP
+        END
+        POPUP "Acquire File (Source Mode)..."
+        BEGIN
+            MENUITEM "Windows BMP",                 IDM_ACQUIREFILESOURCE_WINDOWSBMP
+            MENUITEM "JPEG (JFIF)",                 IDM_ACQUIREFILESOURCE_JPEG
+            MENUITEM "TIFF",                        IDM_ACQUIREFILESOURCE_TIFF
+            MENUITEM "TIFF (Multipage)",            IDM_ACQUIREFILESOURCE_TIFFMULTIPAGE
+            MENUITEM "PNG",                         IDM_ACQUIREFILESOURCE_PNG
+            MENUITEM "PDF",                         IDM_ACQUIREFILESOURCE_PDF
+            MENUITEM "PDF/A",                       IDM_ACQUIREFILESOURCE_PDFA
+            MENUITEM "PDF/A2",                      IDM_ACQUIREFILESOURCE_PDFA2
+            MENUITEM "PDFRASTER",                   IDM_ACQUIREFILESOURCE_PDFRASTER
+            MENUITEM "FlashPix (FPX)",              IDM_ACQUIREFILESOURCE_FLASHPIX
+            MENUITEM "EXIF",                        IDM_ACQUIREFILESOURCE_EXIF
+            MENUITEM "SPIFF",                       IDM_ACQUIREFILESOURCE_SPIFF
+            MENUITEM "XBM",                         IDM_ACQUIREFILESOURCE_XBM
+            MENUITEM "Macintosh PICT",              IDM_ACQUIREFILESOURCE_PICT
+            MENUITEM "JP2 (JPEG ISO/IEC 15444-1)",  IDM_ACQUIREFILESOURCE_JP2
+            MENUITEM "JPX (JPEG ISO/IEC 15444-2)",  IDM_ACQUIREFILESOURCE_JPX
+            MENUITEM "DEJAVU",                      IDM_ACQUIREFILESOURCE_DEJAVU
+        END
         MENUITEM SEPARATOR
         MENUITEM "Show Preview",                IDM_SHOW_PREVIEW
         MENUITEM "Use Source UI",               IDM_USE_SOURCE_UI
         MENUITEM "Discard Blank Pages...",      IDM_DISCARD_BLANKS
         MENUITEM "Show Barcode Information",    IDM_SHOW_BARCODEINFO
+        MENUITEM SEPARATOR
+        MENUITEM "Use GetMessage TWAIN Loop",   IDM_ACQUIRETEST_USEGETMESSAGE
     END
-
-
     POPUP "&TWAIN Logging"
     BEGIN
         MENUITEM "Logging Options...",          IDM_LOGGING_OPTIONS
@@ -58,8 +122,8 @@ BEGIN
         MENUITEM "German",                      ID_LANGUAGE_GERMAN
         MENUITEM "Greek",                       ID_LANGUAGE_GREEK
         MENUITEM "Italian",                     ID_LANGUAGE_ITALIAN
-        MENUITEM "Japanese"                     ID_LANGUAGE_JAPANESE
-        MENUITEM "Korean"                       ID_LANGUAGE_KOREAN
+        MENUITEM "Japanese",                    ID_LANGUAGE_JAPANESE
+        MENUITEM "Korean",                      ID_LANGUAGE_KOREAN
         MENUITEM "Portuguese",                  ID_LANGUAGE_PORTUGUESE
         MENUITEM "Romanian",                    ID_LANGUAGE_ROMANIAN
         MENUITEM "Russian",                     ID_LANGUAGE_RUSSIAN
@@ -68,7 +132,6 @@ BEGIN
         MENUITEM "Spanish",                     ID_LANGUAGE_SPANISH
         MENUITEM "Custom Language...",          ID_LANGUAGE_CUSTOMLANGUAGE
     END
-
     POPUP "&Help"
     BEGIN
         MENUITEM "&About ...",                  IDM_ABOUT
@@ -143,8 +206,8 @@ BEGIN
     LTEXT           "Sorted Source Names:",IDC_STATIC,8,3,72,8
 END
 
-IDD_dlgProperties DIALOG DISCARDABLE  0, 0, 643, 245
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_dlgProperties DIALOG DISCARDABLE  0, 0, 643, 260
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Source Properties"
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -153,8 +216,8 @@ BEGIN
     EDITTEXT        IDC_edManufacturer,83,47,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
     EDITTEXT        IDC_edVersionInfo,83,62,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
     EDITTEXT        IDC_edVersion,83,77,155,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    DEFPUSHBUTTON   "OK",IDOK,265,226,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,326,226,50,14
+    DEFPUSHBUTTON   "OK",IDOK,265,241,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,326,241,50,14
     LTEXT           "Product Name:",IDC_STATIC,19,17,48,8
     LTEXT           "Family Name:",IDC_STATIC,24,32,43,8
     LTEXT           "Manufacturer:",IDC_STATIC,22,46,45,8
@@ -168,15 +231,16 @@ BEGIN
     EDITTEXT        IDC_edTotalCaps,197,116,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
     EDITTEXT        IDC_edCustomCaps,197,131,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
     EDITTEXT        IDC_edExtendedCaps,197,146,40,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    GROUPBOX        "Capability Info",IDC_STATIC,6,103,237,119
-    GROUPBOX        "Custom DS Data",IDC_STATIC,250,4,172,217
-    EDITTEXT        IDC_edDSData,258,15,153,178,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
-    GROUPBOX        "JSON Details",IDC_STATIC,433,4,199,217
-    EDITTEXT        IDC_edJSONDetails,438,15,189,200,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    GROUPBOX        "Capability Info",IDC_STATIC,6,103,237,134
+    GROUPBOX        "Custom DS Data",IDC_STATIC,250,4,172,233
+    EDITTEXT        IDC_edDSData,258,15,153,203,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    GROUPBOX        "JSON Details",IDC_STATIC,433,4,199,234
+    EDITTEXT        IDC_edJSONDetails,438,15,189,217,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
     PUSHBUTTON      "Test Capability ...",IDC_btnTestCap,135,181,81,14
     PUSHBUTTON      "Reset All Capabilities",IDC_btnResetCapabilities,136,198,81,14
-    PUSHBUTTON      "Show UI Only",IDC_btnShowUIIOnly,272,195,54,14
-    PUSHBUTTON      "Refresh",IDC_btnRefreshShowUIOnly,345,195,50,14
+    PUSHBUTTON      "Show UI Only",IDC_btnShowUIIOnly,272,220,54,14
+    PUSHBUTTON      "Refresh",IDC_btnRefreshShowUIOnly,345,220,50,14
+    CONTROL         "Reset Caps On Exit",IDC_chkResetCapsOnClose,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,218,103,10
 END
 
 #include "dibdisplay.rc"
@@ -262,6 +326,17 @@ BEGIN
     LTEXT           "Results:",IDC_staticResults,228,186,27,8
     LTEXT           "Input: (One data item per line):",IDC_staticInput,24,186,102,8
     LTEXT           "",IDC_staticTestGetResults,215,55,49,8
+END
+
+IDD_dlgEnterFileName DIALOGEX 0, 0, 271, 61
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save File"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_edSaveFileName,51,7,199,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,82,35,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,136,35,50,14
+    LTEXT           "File Name:",IDC_STATIC,8,9,34,8
 END
 
 /////////////////////////////////////////////////////////////////////////////
