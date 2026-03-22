@@ -1,6 +1,6 @@
 /*
     This file is part of the Dynarithmic TWAIN Library (DTWAIN).
-    Copyright (c) 2002-2025 Dynarithmic Software.
+    Copyright (c) 2002-2026 Dynarithmic Software.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -148,6 +148,7 @@
 #define DTWAIN_USESOURCEMODE      128
 #define DTWAIN_USELIST            256
 #define DTWAIN_CREATE_DIRECTORY   512
+#define DTWAIN_NODELETEDIBS       1024
 
 
 /* DTWAIN_ARRAY types */
@@ -172,6 +173,7 @@
    if compiling UNICODE applications */
 #define DTWAIN_ARRAYWIDESTRING      12
 #define DTWAIN_ARRAYTWFIX32         200
+#define DTWAIN_ARRAYULONG           13
 
 #define DTWAIN_ArrayTypeINVALID     0
 
@@ -186,6 +188,9 @@
 #define DTWAIN_ARRAYINT32         130
 #define DTWAIN_ARRAYINT64         140
 #define DTWAIN_ARRAYUINT64        150
+#define DTWAIN_ARRAYSHORTINT16    160
+#define DTWAIN_ARRAYSHORTUINT16   170
+
 
 /* DTWAIN_RANGE types */
 #define DTWAIN_RANGELONG      DTWAIN_ARRAYLONG
@@ -251,11 +256,11 @@
 #define DTWAIN_CAPSET                6 /* Set one or more values                   */
 #define DTWAIN_CAPRESET              7 /* Set current value to default value       */
 #define DTWAIN_CAPRESETALL           8 /* Reset all capabilities */
-#define DTWAIN_CAPSETCONSTRAINT      9 /* constrain values */
 
 #define DTWAIN_CAPGETHELP            9
 #define DTWAIN_CAPGETLABEL           10
 #define DTWAIN_CAPGETLABELENUM       11
+#define DTWAIN_CAPSETCONSTRAINT      12 /* constrain values */
 
 /* The following values are ORed with the DTWAIN_CAPSET value */
 #define DTWAIN_CAPSETAVAILABLE       8  /* Sets available values  */
@@ -285,7 +290,7 @@
 #define DTWAIN_DX_2PASSDUPLEX  2
 
 /* Twain Pixel Types */
-#define DTWAIN_PT_BW      0
+#define DTWAIN_PT_BW      0 
 #define DTWAIN_PT_GRAY    1
 #define DTWAIN_PT_RGB     2
 #define DTWAIN_PT_PALETTE 3
@@ -451,7 +456,7 @@
 /* Miscellaneous file transfer notifications */
 #define DTWAIN_TN_CLOSEDIBFAILED       1057
 
-/* Sent if a TWAIN Source fails to return a proper bitmap
+/* Sent if a TWAIN Source fails to return a proper bitmap 
    when using TWAINDSM.DLL as the data source manager */
 #define DTWAIN_TN_INVALID_TWAINDSM2_BITMAP 1058
 
@@ -525,6 +530,8 @@
 #define DTWAIN_TN_FEEDERNOTENABLED          1203
 #define DTWAIN_TN_FEEDERNOTSUPPORTED        1204
 #define DTWAIN_TN_FEEDERTOFLATBED           1205
+
+/* Sent before the start of the first acquisition */
 #define DTWAIN_TN_PREACQUIRESTART           1206
 
 /* Sent when tiled data has been sent */
@@ -534,6 +541,16 @@
 /* Sent when issuing a file transfer, and the compression chosen is
  * not recognized for the file type */
 #define DTWAIN_TN_FILECOMPRESSTYPEMISMATCH  1302
+
+/* Sent when getting Source details using DTWAIN_GetSourceDetails() */
+#define DTWAIN_TN_SOURCEDETAILS             1304
+
+/* Sent to determine if feeder should continue feeding pages */
+#define DTWAIN_TN_QUERYACQUIREPAGES             1305
+#define DTWAIN_TN_ACQUIREPAGESSTOPPING          1306
+#define DTWAIN_TN_ACQUIREPAGESSTOPPED           1307
+#define DTWAIN_TN_QUERYUPDATEDIBORIG            1308
+#define DTWAIN_TN_QUERYUPDATEDIBRESAMPLED       1309
 
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
@@ -1049,11 +1066,16 @@
 #define DTWAIN_ERR_IMAGEINFO_INVALID       (-2502)
 #define DTWAIN_ERR_WRITEDATA_TOFILE        (-2503)
 #define DTWAIN_ERR_OPERATION_NOTSUPPORTED  (-2504)
+#define DTWAIN_ERR_INVALID_PDFTEXTELEMENT  (-2505)
+#define DTWAIN_ERR_SETCAP_FAILED           (-2506)
+#define DTWAIN_ERR_CAP_INVALIDSTATE        (-2507)
+#define DTWAIN_ERR_GETCAP_FAILED           (-2508)
 
+#define DTWAIN_ERR_USER_START              (-80000)  
 #define DTWAIN_ERR_LAST                    (DTWAIN_ERR_USER_START + 1)
-#define DTWAIN_ERR_USER_START              (-80000)
 
-/* Device event constants (same as TWAIN 1.8 value plus 1)*/
+/* Device event constants (these values are pow(2, value), where value
+   is the TWAIN 1.8 value)*/
 #define DTWAIN_DE_CHKAUTOCAPTURE    1
 #define DTWAIN_DE_CHKBATTERY        2
 #define DTWAIN_DE_CHKDEVICEONLINE   4
@@ -1346,6 +1368,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_PDF_PORTRAIT         0
 #define DTWAIN_PDF_LANDSCAPE        1
 
+/* PDF AES Encryption options */
 #define DTWAIN_PDF_AES128           1
 #define DTWAIN_PDF_AES256           2
 
@@ -1391,6 +1414,8 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_DLG_NOOPENONSELECT       4096
 #define DTWAIN_DLG_HIGHLIGHTFIRST       8192
 #define DTWAIN_DLG_SAVELASTSCREENPOS    16384
+#define DTWAIN_DLG_CENTER_CURRENT_MONITOR 32768
+#define DTWAIN_DLG_CONSOLEASPARENT     65536
 
 /* DTWAIN Language resource constants */
 #define DTWAIN_RES_ENGLISH              0
@@ -1578,37 +1603,37 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_TWDR     14
 #define DTWAIN_CONSTANT_TWDSK    15
 #define DTWAIN_CONSTANT_TWDX     16
-#define DTWAIN_CONSTANT_TWFA     17
-#define DTWAIN_CONSTANT_TWFE     18
+#define DTWAIN_CONSTANT_TWFA     17   
+#define DTWAIN_CONSTANT_TWFE     18   
 #define DTWAIN_CONSTANT_TWFF     19
-#define DTWAIN_CONSTANT_TWFL     20
-#define DTWAIN_CONSTANT_TWFO     21
-#define DTWAIN_CONSTANT_TWFP     22
-#define DTWAIN_CONSTANT_TWFR     23
-#define DTWAIN_CONSTANT_TWFT     24
-#define DTWAIN_CONSTANT_TWFY     25
-#define DTWAIN_CONSTANT_TWIA     26
-#define DTWAIN_CONSTANT_TWIC     27
-#define DTWAIN_CONSTANT_TWIF     28
-#define DTWAIN_CONSTANT_TWIM     29
-#define DTWAIN_CONSTANT_TWJC     30
-#define DTWAIN_CONSTANT_TWJQ     31
-#define DTWAIN_CONSTANT_TWLP     32
-#define DTWAIN_CONSTANT_TWLS     33
-#define DTWAIN_CONSTANT_TWMD     34
-#define DTWAIN_CONSTANT_TWNF     35
-#define DTWAIN_CONSTANT_TWOR     36
-#define DTWAIN_CONSTANT_TWOV     37
-#define DTWAIN_CONSTANT_TWPA     38
-#define DTWAIN_CONSTANT_TWPC     39
-#define DTWAIN_CONSTANT_TWPCH    40
-#define DTWAIN_CONSTANT_TWPF     41
-#define DTWAIN_CONSTANT_TWPM     42
-#define DTWAIN_CONSTANT_TWPR     43
-#define DTWAIN_CONSTANT_TWPF2    44
-#define DTWAIN_CONSTANT_TWCT     45
-#define DTWAIN_CONSTANT_TWPS     46
-#define DTWAIN_CONSTANT_TWSS     47
+#define DTWAIN_CONSTANT_TWFL     20   
+#define DTWAIN_CONSTANT_TWFO     21  
+#define DTWAIN_CONSTANT_TWFP     22   
+#define DTWAIN_CONSTANT_TWFR     23   
+#define DTWAIN_CONSTANT_TWFT     24   
+#define DTWAIN_CONSTANT_TWFY     25   
+#define DTWAIN_CONSTANT_TWIA     26   
+#define DTWAIN_CONSTANT_TWIC     27   
+#define DTWAIN_CONSTANT_TWIF     28   
+#define DTWAIN_CONSTANT_TWIM     29   
+#define DTWAIN_CONSTANT_TWJC     30   
+#define DTWAIN_CONSTANT_TWJQ     31   
+#define DTWAIN_CONSTANT_TWLP     32   
+#define DTWAIN_CONSTANT_TWLS     33   
+#define DTWAIN_CONSTANT_TWMD     34  
+#define DTWAIN_CONSTANT_TWNF     35  
+#define DTWAIN_CONSTANT_TWOR     36  
+#define DTWAIN_CONSTANT_TWOV     37  
+#define DTWAIN_CONSTANT_TWPA     38  
+#define DTWAIN_CONSTANT_TWPC     39  
+#define DTWAIN_CONSTANT_TWPCH    40  
+#define DTWAIN_CONSTANT_TWPF     41  
+#define DTWAIN_CONSTANT_TWPM     42  
+#define DTWAIN_CONSTANT_TWPR     43  
+#define DTWAIN_CONSTANT_TWPF2    44  
+#define DTWAIN_CONSTANT_TWCT     45  
+#define DTWAIN_CONSTANT_TWPS     46  
+#define DTWAIN_CONSTANT_TWSS     47  
 #define DTWAIN_CONSTANT_TWPH     48
 #define DTWAIN_CONSTANT_TWCI     49
 #define DTWAIN_CONSTANT_FONTNAME 50
@@ -1642,7 +1667,11 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_CONSTANT_ICAP     78
 #define DTWAIN_CONSTANT_DTWAIN_CONT 79
 #define DTWAIN_CONSTANT_CAPCODE_MAP 80
-#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_CAPCODE_MAP + 1)
+#define DTWAIN_CONSTANT_ACAP        81
+#define DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC 82
+#define DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT 83
+#define DTWAIN_CONSTANT_ERROR_NAMES     84
+#define DTWAIN_CONSTANT_LAST     (DTWAIN_CONSTANT_ERROR_NAMES + 1) 
 
 /* This ID is the start of user-defined custom resources */
 #define DTWAIN_USERRES_START     20000
@@ -1650,7 +1679,10 @@ DTWAIN DLL are not displayed */
 /* Maximum length for a resource string*/
 #define DTWAIN_USERRES_MAXSIZE   8192
 
+/* Feeder wait time constants */
 #define DTWAIN_WAIT_INFINITE  (-1)
 #define DTWAIN_FEEDER_TERMINATE 1
 #define DTWAIN_FEEDER_USEFLATBED 2
+
 #endif
+
