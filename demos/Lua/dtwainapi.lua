@@ -281,6 +281,8 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoopDetection(DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_EnableLamp(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
@@ -326,6 +328,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, LONG nWhichCamera);
+        DTWAIN_ARRAY DTWAIN_EnumCapLabels(LONG lCapability);
         DTWAIN_BOOL DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, LONG lFileType, DTWAIN_BOOL bUseBufferedMode);
@@ -459,6 +462,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, LPDWORD lpMin, LPDWORD lpMax, LPDWORD lpPreferred);
         HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq, LONG nWhichAcq, LONG nWhichDib);
         DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, LONG nWhichAcq);
+        DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetActiveDSMPath(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathW(LPWSTR lpszBuffer, LONG nMaxLen);
@@ -499,6 +503,12 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
         LONG DTWAIN_GetCapFromNameW(LPCWSTR szName);
+        LONG DTWAIN_GetCapHelp(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpW(LONG lCapability, LPWSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabel(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelW(LONG lCapability, LPWSTR lpszOut, LONG nnSize);
         DTWAIN_BOOL DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, LONG lCapability, LPLONG lpOps);
         LONG DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_GetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LPDTWAIN_ARRAY pArray);
@@ -816,6 +826,8 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, LONG lFileType);
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopDetectionOn();
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALevelSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldAPrintFormatSupported(DTWAIN_SOURCE Source);
@@ -947,10 +959,10 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
-        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
-        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
+        HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateImageString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateImageStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateImageStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -1083,6 +1095,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightPaths);
         DTWAIN_BOOL DTWAIN_SetLightSource(DTWAIN_SOURCE Source, LONG LightSource);
         DTWAIN_BOOL DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+        DTWAIN_BOOL DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
@@ -1233,6 +1246,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_UnlockMemory(HANDLE h);
         DTWAIN_BOOL DTWAIN_UnlockMemoryEx(HANDLE h);
+        DTWAIN_BOOL DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
         DTWAIN_BOOL DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet);
   ]]
   return ffi.load(DLLToLoad)
@@ -1498,6 +1512,8 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoopDetection(DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_EnableLamp(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
@@ -1543,6 +1559,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, LONG nWhichCamera);
+        DTWAIN_ARRAY DTWAIN_EnumCapLabels(LONG lCapability);
         DTWAIN_BOOL DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, LONG lFileType, DTWAIN_BOOL bUseBufferedMode);
@@ -1676,6 +1693,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, LPDWORD lpMin, LPDWORD lpMax, LPDWORD lpPreferred);
         HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq, LONG nWhichAcq, LONG nWhichDib);
         DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, LONG nWhichAcq);
+        DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetActiveDSMPath(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathW(LPWSTR lpszBuffer, LONG nMaxLen);
@@ -1716,6 +1734,12 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
         LONG DTWAIN_GetCapFromNameW(LPCWSTR szName);
+        LONG DTWAIN_GetCapHelp(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpW(LONG lCapability, LPWSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabel(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelW(LONG lCapability, LPWSTR lpszOut, LONG nnSize);
         DTWAIN_BOOL DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, LONG lCapability, LPLONG lpOps);
         LONG DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_GetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LPDTWAIN_ARRAY pArray);
@@ -2033,6 +2057,8 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, LONG lFileType);
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopDetectionOn();
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALevelSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldAPrintFormatSupported(DTWAIN_SOURCE Source);
@@ -2164,10 +2190,10 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
-        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
-        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
+        HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateImageString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateImageStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateImageStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -2300,6 +2326,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightPaths);
         DTWAIN_BOOL DTWAIN_SetLightSource(DTWAIN_SOURCE Source, LONG LightSource);
         DTWAIN_BOOL DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+        DTWAIN_BOOL DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
@@ -2450,6 +2477,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_UnlockMemory(HANDLE h);
         DTWAIN_BOOL DTWAIN_UnlockMemoryEx(HANDLE h);
+        DTWAIN_BOOL DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
         DTWAIN_BOOL DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet);
   ]]
   return ffi.load(DLLToLoad)
@@ -2715,6 +2743,8 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoopDetection(DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_EnableLamp(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
@@ -2760,6 +2790,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, LONG nWhichCamera);
+        DTWAIN_ARRAY DTWAIN_EnumCapLabels(LONG lCapability);
         DTWAIN_BOOL DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, LONG lFileType, DTWAIN_BOOL bUseBufferedMode);
@@ -2893,6 +2924,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, LPDWORD lpMin, LPDWORD lpMax, LPDWORD lpPreferred);
         HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq, LONG nWhichAcq, LONG nWhichDib);
         DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, LONG nWhichAcq);
+        DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetActiveDSMPath(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathW(LPWSTR lpszBuffer, LONG nMaxLen);
@@ -2933,6 +2965,12 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
         LONG DTWAIN_GetCapFromNameW(LPCWSTR szName);
+        LONG DTWAIN_GetCapHelp(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpW(LONG lCapability, LPWSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabel(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelW(LONG lCapability, LPWSTR lpszOut, LONG nnSize);
         DTWAIN_BOOL DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, LONG lCapability, LPLONG lpOps);
         LONG DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_GetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LPDTWAIN_ARRAY pArray);
@@ -3250,6 +3288,8 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, LONG lFileType);
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopDetectionOn();
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALevelSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldAPrintFormatSupported(DTWAIN_SOURCE Source);
@@ -3381,10 +3421,10 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
-        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
-        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
+        HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateImageString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateImageStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateImageStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -3517,6 +3557,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightPaths);
         DTWAIN_BOOL DTWAIN_SetLightSource(DTWAIN_SOURCE Source, LONG LightSource);
         DTWAIN_BOOL DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+        DTWAIN_BOOL DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
@@ -3667,6 +3708,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_UnlockMemory(HANDLE h);
         DTWAIN_BOOL DTWAIN_UnlockMemoryEx(HANDLE h);
+        DTWAIN_BOOL DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
         DTWAIN_BOOL DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet);
   ]]
   return ffi.load(DLLToLoad)
@@ -3932,6 +3974,8 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
+        DTWAIN_BOOL DTWAIN_EnableGetMessageLoopDetection(DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
         DTWAIN_BOOL DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_EnableLamp(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
@@ -3977,6 +4021,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, LONG nWhichCamera);
+        DTWAIN_ARRAY DTWAIN_EnumCapLabels(LONG lCapability);
         DTWAIN_BOOL DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, LONG lFileType, DTWAIN_BOOL bUseBufferedMode);
@@ -4110,6 +4155,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, LPDWORD lpMin, LPDWORD lpMax, LPDWORD lpPreferred);
         HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq, LONG nWhichAcq, LONG nWhichDib);
         DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, LONG nWhichAcq);
+        DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetActiveDSMPath(DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMPathW(LPWSTR lpszBuffer, LONG nMaxLen);
@@ -4150,6 +4196,12 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetCapFromName(DTWAIN_CCHARPTRTYPE szName);
         LONG DTWAIN_GetCapFromNameA(LPCSTR szName);
         LONG DTWAIN_GetCapFromNameW(LPCWSTR szName);
+        LONG DTWAIN_GetCapHelp(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapHelpW(LONG lCapability, LPWSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabel(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelA(LONG lCapability, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetCapLabelW(LONG lCapability, LPWSTR lpszOut, LONG nnSize);
         DTWAIN_BOOL DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, LONG lCapability, LPLONG lpOps);
         LONG DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_GetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LPDTWAIN_ARRAY pArray);
@@ -4467,6 +4519,8 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, LONG lFileType);
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopDetectionOn();
+        DTWAIN_BOOL DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldALevelSupported(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_IsIAFieldAPrintFormatSupported(DTWAIN_SOURCE Source);
@@ -4598,10 +4652,10 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
         DTWAIN_BOOL DTWAIN_RewindPage(DTWAIN_SOURCE Source);
-        HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
-        HANDLE DTWAIN_RotateDIBString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringA(HANDLE hDib, LPCSTR rotationAngle);
-        HANDLE DTWAIN_RotateDIBStringW(HANDLE hDib, LPCWSTR rotationAngle);
+        HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        HANDLE DTWAIN_RotateImageString(HANDLE hDib, DTWAIN_CCHARPTRTYPE rotationAngle);
+        HANDLE DTWAIN_RotateImageStringA(HANDLE hDib, LPCSTR rotationAngle);
+        HANDLE DTWAIN_RotateImageStringW(HANDLE hDib, LPCWSTR rotationAngle);
         DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSource();
         DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(DTWAIN_BOOL bOpen);
@@ -4734,6 +4788,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightPaths);
         DTWAIN_BOOL DTWAIN_SetLightSource(DTWAIN_SOURCE Source, LONG LightSource);
         DTWAIN_BOOL DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+        DTWAIN_BOOL DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
@@ -4884,6 +4939,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
         DTWAIN_BOOL DTWAIN_UnlockMemory(HANDLE h);
         DTWAIN_BOOL DTWAIN_UnlockMemoryEx(HANDLE h);
+        DTWAIN_BOOL DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
         DTWAIN_BOOL DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet);
   ]]
   return ffi.load(DLLToLoad)

@@ -235,6 +235,7 @@
 2504 Operațiune nesuportată  
 2505 Element text PDF invalid
 2506 Capacitatea nu a fost setată. Au fost folosite valori invalide.
+2507 Capacitatea nu poate fi negociată în starea curentă
 3000 Selectați sursa  
 3001 &Selectați  
 3002 &Anulați  

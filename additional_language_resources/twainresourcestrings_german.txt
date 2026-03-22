@@ -234,6 +234,7 @@
 2504 Operation nicht unterstützt  
 2505 Ungültiges PDF-Text-Element
 2506 Fähigkeit wurde nicht gesetzt. Ungültige Werte wurden verwendet.
+2507 Fähigkeit kann im aktuellen Zustand nicht verhandelt werden
 3000 Wählen TWAIN Quelle
 3001 &Wählen
 3002 &Abbrechen

@@ -235,6 +235,7 @@
 2504 Operación no soportada  
 2505 Elemento de texto PDF no válido
 2506 La capacidad no fue establecida. Se usaron valores no válidos.
+2507 La capacidad no se puede negociar en el estado actual
 3000 Seleccionar Fuente  
 3001 &Seleccionar  
 3002 &Cancelar

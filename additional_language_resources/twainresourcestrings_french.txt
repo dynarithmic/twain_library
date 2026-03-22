@@ -235,6 +235,7 @@
 2504 Opération non supportée  
 2505 Élément de texte PDF invalide
 2506 La capacité n'a pas été définie. Des valeurs invalides ont été utilisées.
+2507 La capacité ne peut pas être négociée dans l'état actuel
 3000 Sélectionner Source
 3001 &Sélectionner
 3002 &Annuler
