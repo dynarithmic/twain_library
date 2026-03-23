@@ -381,8 +381,6 @@ type DtwainenumthresholdvaluesexFunc = unsafe extern "C" fn(*mut c_void,i32) -> 
 type DtwainenumtopcamerasFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
 type DtwainenumtopcamerasexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwainenumtwainprintersFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
-type DtwainenumtwainprintersarrayFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
-type DtwainenumtwainprintersarrayexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwainenumtwainprintersexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwainenumxresolutionvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void,i32) -> i32;
 type DtwainenumxresolutionvaluesexFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
@@ -1557,8 +1555,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_EnumTopCamerasFunc: Symbol<'a, DtwainenumtopcamerasFunc>,
     DTWAIN_EnumTopCamerasExFunc: Symbol<'a, DtwainenumtopcamerasexFunc>,
     DTWAIN_EnumTwainPrintersFunc: Symbol<'a, DtwainenumtwainprintersFunc>,
-    DTWAIN_EnumTwainPrintersArrayFunc: Symbol<'a, DtwainenumtwainprintersarrayFunc>,
-    DTWAIN_EnumTwainPrintersArrayExFunc: Symbol<'a, DtwainenumtwainprintersarrayexFunc>,
     DTWAIN_EnumTwainPrintersExFunc: Symbol<'a, DtwainenumtwainprintersexFunc>,
     DTWAIN_EnumXResolutionValuesFunc: Symbol<'a, DtwainenumxresolutionvaluesFunc>,
     DTWAIN_EnumXResolutionValuesExFunc: Symbol<'a, DtwainenumxresolutionvaluesexFunc>,
@@ -4386,8 +4382,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_EnumTopCameras: Symbol<DtwainenumtopcamerasFunc> = unsafe { library.get(b"DTWAIN_EnumTopCameras")? };
         let DTWAIN_EnumTopCamerasEx: Symbol<DtwainenumtopcamerasexFunc> = unsafe { library.get(b"DTWAIN_EnumTopCamerasEx")? };
         let DTWAIN_EnumTwainPrinters: Symbol<DtwainenumtwainprintersFunc> = unsafe { library.get(b"DTWAIN_EnumTwainPrinters")? };
-        let DTWAIN_EnumTwainPrintersArray: Symbol<DtwainenumtwainprintersarrayFunc> = unsafe { library.get(b"DTWAIN_EnumTwainPrintersArray")? };
-        let DTWAIN_EnumTwainPrintersArrayEx: Symbol<DtwainenumtwainprintersarrayexFunc> = unsafe { library.get(b"DTWAIN_EnumTwainPrintersArrayEx")? };
         let DTWAIN_EnumTwainPrintersEx: Symbol<DtwainenumtwainprintersexFunc> = unsafe { library.get(b"DTWAIN_EnumTwainPrintersEx")? };
         let DTWAIN_EnumXResolutionValues: Symbol<DtwainenumxresolutionvaluesFunc> = unsafe { library.get(b"DTWAIN_EnumXResolutionValues")? };
         let DTWAIN_EnumXResolutionValuesEx: Symbol<DtwainenumxresolutionvaluesexFunc> = unsafe { library.get(b"DTWAIN_EnumXResolutionValuesEx")? };
@@ -5561,8 +5555,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_EnumTopCamerasFunc: DTWAIN_EnumTopCameras,
             DTWAIN_EnumTopCamerasExFunc: DTWAIN_EnumTopCamerasEx,
             DTWAIN_EnumTwainPrintersFunc: DTWAIN_EnumTwainPrinters,
-            DTWAIN_EnumTwainPrintersArrayFunc: DTWAIN_EnumTwainPrintersArray,
-            DTWAIN_EnumTwainPrintersArrayExFunc: DTWAIN_EnumTwainPrintersArrayEx,
             DTWAIN_EnumTwainPrintersExFunc: DTWAIN_EnumTwainPrintersEx,
             DTWAIN_EnumXResolutionValuesFunc: DTWAIN_EnumXResolutionValues,
             DTWAIN_EnumXResolutionValuesExFunc: DTWAIN_EnumXResolutionValuesEx,
@@ -7739,14 +7731,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_EnumTwainPrinters(&self, Source: *mut c_void, lpAvailPrinters: *mut *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_EnumTwainPrintersFunc)(Source, lpAvailPrinters);  }
-    }
-
-    pub fn DTWAIN_EnumTwainPrintersArray(&self, Source: *mut c_void, pArray: *mut *mut c_void) -> i32 {
-        unsafe { return (self.DTWAIN_EnumTwainPrintersArrayFunc)(Source, pArray);  }
-    }
-
-    pub fn DTWAIN_EnumTwainPrintersArrayEx(&self, Source: *mut c_void) -> *mut c_void {
-        unsafe { return (self.DTWAIN_EnumTwainPrintersArrayExFunc)(Source);  }
     }
 
     pub fn DTWAIN_EnumTwainPrintersEx(&self, Source: *mut c_void) -> *mut c_void {

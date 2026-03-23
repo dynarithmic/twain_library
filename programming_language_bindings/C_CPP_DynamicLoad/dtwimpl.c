@@ -388,8 +388,6 @@
     D_ENUMTOPCAMERASFUNC                          DYNDTWAIN_API::DTWAIN_EnumTopCameras = nullptr;
     D_ENUMTOPCAMERASEXFUNC                        DYNDTWAIN_API::DTWAIN_EnumTopCamerasEx = nullptr;
     D_ENUMTWAINPRINTERSFUNC                       DYNDTWAIN_API::DTWAIN_EnumTwainPrinters = nullptr;
-    D_ENUMTWAINPRINTERSARRAYFUNC                  DYNDTWAIN_API::DTWAIN_EnumTwainPrintersArray = nullptr;
-    D_ENUMTWAINPRINTERSARRAYEXFUNC                DYNDTWAIN_API::DTWAIN_EnumTwainPrintersArrayEx = nullptr;
     D_ENUMTWAINPRINTERSEXFUNC                     DYNDTWAIN_API::DTWAIN_EnumTwainPrintersEx = nullptr;
     D_ENUMXRESOLUTIONVALUESFUNC                   DYNDTWAIN_API::DTWAIN_EnumXResolutionValues = nullptr;
     D_ENUMXRESOLUTIONVALUESEXFUNC                 DYNDTWAIN_API::DTWAIN_EnumXResolutionValuesEx = nullptr;
@@ -1635,8 +1633,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_EnumTopCameras, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumTopCamerasEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumTwainPrinters, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_EnumTwainPrintersArray, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_EnumTwainPrintersArrayEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumTwainPrintersEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumXResolutionValues, hModule);
           LOADFUNCTIONIMPL(DTWAIN_EnumXResolutionValuesEx, hModule);

@@ -2714,12 +2714,6 @@ module TwainAPI =
     type DTWAIN_EnumTwainPrintersDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumTwainPrintersArrayDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_EnumTwainPrintersArrayExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumTwainPrintersExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -4694,8 +4688,6 @@ module TwainAPI =
     let private EnumTopCameras = lazy (DynamicDll.Bind "DTWAIN_EnumTopCameras" : DTWAIN_EnumTopCamerasDelegate)
     let private EnumTopCamerasEx = lazy (DynamicDll.Bind "DTWAIN_EnumTopCamerasEx" : DTWAIN_EnumTopCamerasExDelegate)
     let private EnumTwainPrinters = lazy (DynamicDll.Bind "DTWAIN_EnumTwainPrinters" : DTWAIN_EnumTwainPrintersDelegate)
-    let private EnumTwainPrintersArray = lazy (DynamicDll.Bind "DTWAIN_EnumTwainPrintersArray" : DTWAIN_EnumTwainPrintersArrayDelegate)
-    let private EnumTwainPrintersArrayEx = lazy (DynamicDll.Bind "DTWAIN_EnumTwainPrintersArrayEx" : DTWAIN_EnumTwainPrintersArrayExDelegate)
     let private EnumTwainPrintersEx = lazy (DynamicDll.Bind "DTWAIN_EnumTwainPrintersEx" : DTWAIN_EnumTwainPrintersExDelegate)
     let private EnumXResolutionValues = lazy (DynamicDll.Bind "DTWAIN_EnumXResolutionValues" : DTWAIN_EnumXResolutionValuesDelegate)
     let private EnumXResolutionValuesEx = lazy (DynamicDll.Bind "DTWAIN_EnumXResolutionValuesEx" : DTWAIN_EnumXResolutionValuesExDelegate)
@@ -6415,14 +6407,6 @@ module TwainAPI =
     let DTWAIN_EnumTwainPrinters (source: DTWAIN_SOURCE) (lpavailprinters: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnumTwainPrinters.Value.Invoke(source, &lpavailprinters)
-
-    let DTWAIN_EnumTwainPrintersArray (source: DTWAIN_SOURCE) (parray: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumTwainPrintersArray.Value.Invoke(source, &parray)
-
-    let DTWAIN_EnumTwainPrintersArrayEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        EnumTwainPrintersArrayEx.Value.Invoke(source)
 
     let DTWAIN_EnumTwainPrintersEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

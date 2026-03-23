@@ -2257,8 +2257,6 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_EnumTopCameras;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE) DTWAIN_EnumTopCamerasEx;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_EnumTwainPrinters;
-    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_EnumTwainPrintersArray;
-    extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE) DTWAIN_EnumTwainPrintersArrayEx;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE) DTWAIN_EnumTwainPrintersEx;
     extern(Windows) LONG function(DTWAIN_SOURCE, LPDTWAIN_ARRAY, DTWAIN_BOOL) DTWAIN_EnumXResolutionValues;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE, DTWAIN_BOOL) DTWAIN_EnumXResolutionValuesEx;
@@ -3432,8 +3430,6 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_EnumTopCameras, "DTWAIN_EnumTopCameras");
         bindFunction(cast(void**)&DTWAIN_EnumTopCamerasEx, "DTWAIN_EnumTopCamerasEx");
         bindFunction(cast(void**)&DTWAIN_EnumTwainPrinters, "DTWAIN_EnumTwainPrinters");
-        bindFunction(cast(void**)&DTWAIN_EnumTwainPrintersArray, "DTWAIN_EnumTwainPrintersArray");
-        bindFunction(cast(void**)&DTWAIN_EnumTwainPrintersArrayEx, "DTWAIN_EnumTwainPrintersArrayEx");
         bindFunction(cast(void**)&DTWAIN_EnumTwainPrintersEx, "DTWAIN_EnumTwainPrintersEx");
         bindFunction(cast(void**)&DTWAIN_EnumXResolutionValues, "DTWAIN_EnumXResolutionValues");
         bindFunction(cast(void**)&DTWAIN_EnumXResolutionValuesEx, "DTWAIN_EnumXResolutionValuesEx");

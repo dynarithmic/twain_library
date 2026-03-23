@@ -2777,12 +2777,6 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumTwainPrintersDelegate(Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumTwainPrintersArrayDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumTwainPrintersArrayExDelegate(Source As System.IntPtr) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumTwainPrintersExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -5621,14 +5615,6 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumTwainPrinters(Source, lpAvailPrinters)
         End Function
         
-        Public Function DTWAIN_EnumTwainPrintersArray(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumTwainPrintersArray(Source, pArray)
-        End Function
-        
-        Public Function DTWAIN_EnumTwainPrintersArrayEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumTwainPrintersArrayEx(Source)
-        End Function
-        
         Public Function DTWAIN_EnumTwainPrintersEx(Source As System.IntPtr) As System.IntPtr
         Return api.DTWAIN_EnumTwainPrintersEx(Source)
         End Function
@@ -8185,8 +8171,6 @@ Namespace Dynarithmic
             Public DTWAIN_EnumTopCameras As DTWAIN_EnumTopCamerasDelegate
             Public DTWAIN_EnumTopCamerasEx As DTWAIN_EnumTopCamerasExDelegate
             Public DTWAIN_EnumTwainPrinters As DTWAIN_EnumTwainPrintersDelegate
-            Public DTWAIN_EnumTwainPrintersArray As DTWAIN_EnumTwainPrintersArrayDelegate
-            Public DTWAIN_EnumTwainPrintersArrayEx As DTWAIN_EnumTwainPrintersArrayExDelegate
             Public DTWAIN_EnumTwainPrintersEx As DTWAIN_EnumTwainPrintersExDelegate
             Public DTWAIN_EnumXResolutionValues As DTWAIN_EnumXResolutionValuesDelegate
             Public DTWAIN_EnumXResolutionValuesEx As DTWAIN_EnumXResolutionValuesExDelegate

@@ -139,6 +139,15 @@ DTWAIN Version changes
 
 - Fixed potential memory leak when removing images after DTWAIN_AcquireFile(Ex) is called.
 
+- Fixed potential memory access violation where DTWAIN_GetCapValuesEx() and 
+  DTWAIN_GetCapValuesEx2() will return success when given a data type that is not 
+  compatible with the actual data type used by the TWAIN driver.  
+
+  This is a rare case where the driver returns a success code, but the actual results 
+  should be a failure in setting the capability due to the driver not returning any 
+  cap values.  This can occur if the client program calls either of the 
+  DTWAIN_GetCapValuesEx... functions using the wrong data type.
+
 
 5.8.1
 
