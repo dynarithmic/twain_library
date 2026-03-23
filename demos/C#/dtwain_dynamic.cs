@@ -2198,8 +2198,6 @@
         public delegate int DTWAIN_EnumTopCamerasDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras);
         public delegate DTWAIN_ARRAY DTWAIN_EnumTopCamerasExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumTwainPrintersDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpAvailPrinters);
-        public delegate int DTWAIN_EnumTwainPrintersArrayDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayExDelegate(DTWAIN_SOURCE Source);
         public delegate DTWAIN_ARRAY DTWAIN_EnumTwainPrintersExDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_EnumXResolutionValuesDelegate(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange);
         public delegate DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesExDelegate(DTWAIN_SOURCE Source, int bExpandIfRange);
@@ -3712,12 +3710,6 @@
 
         [DTWAINNativeFunction("DTWAIN_EnumTwainPrinters")]
         private readonly DTWAIN_EnumTwainPrintersDelegate  _DTWAIN_EnumTwainPrinters;
-
-        [DTWAINNativeFunction("DTWAIN_EnumTwainPrintersArray")]
-        private readonly DTWAIN_EnumTwainPrintersArrayDelegate  _DTWAIN_EnumTwainPrintersArray;
-
-        [DTWAINNativeFunction("DTWAIN_EnumTwainPrintersArrayEx")]
-        private readonly DTWAIN_EnumTwainPrintersArrayExDelegate  _DTWAIN_EnumTwainPrintersArrayEx;
 
         [DTWAINNativeFunction("DTWAIN_EnumTwainPrintersEx")]
         private readonly DTWAIN_EnumTwainPrintersExDelegate  _DTWAIN_EnumTwainPrintersEx;
@@ -6486,12 +6478,6 @@
 
         public  int DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpAvailPrinters)
         => _DTWAIN_EnumTwainPrinters(Source, ref lpAvailPrinters);
-
-        public  int DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumTwainPrintersArray(Source, ref pArray);
-
-        public  DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumTwainPrintersArrayEx(Source);
 
         public  DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source)
         => _DTWAIN_EnumTwainPrintersEx(Source);

@@ -469,8 +469,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumTopCameras
    attr_reader :DTWAIN_EnumTopCamerasEx
    attr_reader :DTWAIN_EnumTwainPrinters
-   attr_reader :DTWAIN_EnumTwainPrintersArray
-   attr_reader :DTWAIN_EnumTwainPrintersArrayEx
    attr_reader :DTWAIN_EnumTwainPrintersEx
    attr_reader :DTWAIN_EnumXResolutionValues
    attr_reader :DTWAIN_EnumXResolutionValuesEx
@@ -3334,8 +3332,6 @@ class DTWAINAPI
        @DTWAIN_EnumTopCameras = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTopCameras'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumTopCamerasEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTopCamerasEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumTwainPrinters = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTwainPrinters'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumTwainPrintersArray = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTwainPrintersArray'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_EnumTwainPrintersArrayEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTwainPrintersArrayEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumTwainPrintersEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumTwainPrintersEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumXResolutionValues = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumXResolutionValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_EnumXResolutionValuesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumXResolutionValuesEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)

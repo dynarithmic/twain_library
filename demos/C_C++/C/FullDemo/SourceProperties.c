@@ -555,6 +555,8 @@ void TestGetCap(HWND hWnd, LONG capValue)
     {
         SendMessageA(hWndStaticResults, WM_SETTEXT, 0, (LPARAM)"Success");
         char szValues[1024];
+        szValues[0] = 0;
+
         /* Display the results in the list box */
         LONG numItems = DTWAIN_ArrayGetCount(values);
         LONG nArrayType = DTWAIN_ArrayGetType(values);
@@ -619,13 +621,14 @@ void TestGetCap(HWND hWnd, LONG capValue)
                         }
                     }
 
-                    if (!bGotValue && szValues[0] == 0)
+                    if (szValues[0] == 0)
                     {
                         if (nDataType == TWTY_UINT32)
                             sprintf(szValues, rangeFormatU, rangeNameToPrint, (TW_UINT32)lVal);
                         else
                             sprintf(szValues, rangeFormatD, rangeNameToPrint, lVal);
                     }
+
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
                 }
                 break;

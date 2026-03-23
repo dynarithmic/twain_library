@@ -411,8 +411,6 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY lpAvailPrinters);
-        DTWAIN_BOOL DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
-        DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_EnumXResolutionValues(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray, DTWAIN_BOOL bExpandIfRange);
         DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandIfRange);
@@ -1642,8 +1640,6 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY lpAvailPrinters);
-        DTWAIN_BOOL DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
-        DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_EnumXResolutionValues(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray, DTWAIN_BOOL bExpandIfRange);
         DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandIfRange);
@@ -2873,8 +2869,6 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY lpAvailPrinters);
-        DTWAIN_BOOL DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
-        DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_EnumXResolutionValues(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray, DTWAIN_BOOL bExpandIfRange);
         DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandIfRange);
@@ -4104,8 +4098,6 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY Cameras);
         DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY lpAvailPrinters);
-        DTWAIN_BOOL DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
-        DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
         DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
         LONG DTWAIN_EnumXResolutionValues(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray, DTWAIN_BOOL bExpandIfRange);
         DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandIfRange);

@@ -2664,12 +2664,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpAvailPrinters);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]

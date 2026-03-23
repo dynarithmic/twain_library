@@ -2181,8 +2181,6 @@ function DTWAIN_EnumThresholdValuesEx(Source:DTWAIN_SOURCE; bExpandIfRange:BOOL)
 function DTWAIN_EnumTopCameras(Source:DTWAIN_SOURCE; Cameras:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTopCameras';
 function DTWAIN_EnumTopCamerasEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTopCamerasEx';
 function DTWAIN_EnumTwainPrinters(Source:DTWAIN_SOURCE; lpAvailPrinters:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTwainPrinters';
-function DTWAIN_EnumTwainPrintersArray(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTwainPrintersArray';
-function DTWAIN_EnumTwainPrintersArrayEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTwainPrintersArrayEx';
 function DTWAIN_EnumTwainPrintersEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumTwainPrintersEx';
 function DTWAIN_EnumXResolutionValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY; bExpandIfRange:BOOL) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumXResolutionValues';
 function DTWAIN_EnumXResolutionValuesEx(Source:DTWAIN_SOURCE; bExpandIfRange:BOOL) : DTWAIN_ARRAY; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_EnumXResolutionValuesEx';

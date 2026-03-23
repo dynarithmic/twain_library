@@ -2102,8 +2102,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumTopCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumTopCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrinters.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArray.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrintersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumXResolutionValues.restype = ct.c_long
      theDLL.DTWAIN_EnumXResolutionValuesEx.restype = ct.c_void_p
@@ -3268,8 +3266,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumTopCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumTopCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrinters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArray.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrintersEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumXResolutionValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p), ct.c_long]
      theDLL.DTWAIN_EnumXResolutionValuesEx.argtypes = [ct.c_void_p, ct.c_long]
@@ -4422,8 +4418,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumTopCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumTopCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrinters.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArray.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrintersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumXResolutionValues.restype = ct.c_long
      theDLL.DTWAIN_EnumXResolutionValuesEx.restype = ct.c_void_p
@@ -5588,8 +5582,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumTopCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumTopCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrinters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArray.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrintersEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumXResolutionValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p), ct.c_long]
      theDLL.DTWAIN_EnumXResolutionValuesEx.argtypes = [ct.c_void_p, ct.c_long]

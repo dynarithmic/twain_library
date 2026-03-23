@@ -2037,8 +2037,6 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_EnumTopCameras Lib "dtwain64ud.dll" (Source As System.IntPtr, ByRef Cameras As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumTopCamerasEx Lib "dtwain64ud.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumTwainPrinters Lib "dtwain64ud.dll" (Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumTwainPrintersArray Lib "dtwain64ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-    Public Declare Function DTWAIN_EnumTwainPrintersArrayEx Lib "dtwain64ud.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumTwainPrintersEx Lib "dtwain64ud.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_EnumXResolutionValues Lib "dtwain64ud.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr, bExpandIfRange As Integer) As Integer
     Public Declare Function DTWAIN_EnumXResolutionValuesEx Lib "dtwain64ud.dll" (Source As System.IntPtr, bExpandIfRange As Integer) As System.IntPtr
