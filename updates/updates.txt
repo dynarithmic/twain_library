@@ -101,6 +101,14 @@ DTWAIN Version changes
   changing the DIB both when the image is retrieved directly from the device, and after the 
   image has been resampled.
 
+- Reordered ordinal numbers used in the DTWAIN DLL to have consecutive numbering.  The reordering
+  of the ordinal numbers reduces the size of the DTWAIN DLL.
+
+  This should affect a very small number of users who are using a programming environment that
+  relies on explicit usage of the DLL's internal ordinal numbers to identify the 
+  exported DLL functions.  If you are one of the few programmers using the ordinal numbers within
+  the DTWAIN DLL, you will have to change your application to use the new ordinal numbers.
+  
 - Added DTWAIN_RotateImage function that rotates a Device Independent Bitmap by n degrees:  
 
   HANDLE DWAIN_RotateImage(HANDLE originalDib, DTWAIN_FLOAT degrees);
@@ -147,6 +155,9 @@ DTWAIN Version changes
   should be a failure in setting the capability due to the driver not returning any 
   cap values.  This can occur if the client program calls either of the 
   DTWAIN_GetCapValuesEx... functions using the wrong data type.
+
+- Fixed wrong error code being returned if a DTWAIN function that requires the DTWAIN
+  DLL to be initialized is called.
 
 
 5.8.1
