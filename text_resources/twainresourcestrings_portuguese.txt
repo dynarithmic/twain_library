@@ -235,6 +235,7 @@
 2504 Operação não suportada  
 2505 Elemento de Texto PDF Inválido
 2506 Capacidade não foi definida. Valores inválidos foram usados.
+2507 A capacidade não pode ser negociada no estado atual
 3000 Selecionar Fonte  
 3001 &Selecionar  
 3002 &Cancelar  
@@ -265,6 +266,7 @@
 3027 Registro encerrado
 3028 Último erro
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 9999 Ocorreu um erro de exceção durante a chamada ao DSM Twain. Sessão Twain possivelmente corrompida?
 10000 [Mensagem do Usuário]

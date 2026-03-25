@@ -229,6 +229,7 @@ DTWAIN_USELONGNAME = 64
 DTWAIN_USESOURCEMODE = 128
 DTWAIN_USELIST = 256
 DTWAIN_CREATE_DIRECTORY = 512
+DTWAIN_NODELETEDIBS = 1024
 DTWAIN_CREATEDIRECTORY = DTWAIN_CREATE_DIRECTORY
 DTWAIN_ARRAYANY = 1
 DTWAIN_ArrayTypePTR = 1
@@ -244,6 +245,7 @@ DTWAIN_ARRAYUNICODESTRING = 9
 DTWAIN_ARRAYLONG64 = 10
 DTWAIN_ARRAYANSISTRING = 11
 DTWAIN_ARRAYWIDESTRING = 12
+DTWAIN_ARRAYULONG = 13
 DTWAIN_ARRAYTWFIX32 = 200
 DTWAIN_ArrayTypeINVALID = 0
 DTWAIN_ARRAYINT16 = 100
@@ -252,6 +254,8 @@ DTWAIN_ARRAYUINT32 = 120
 DTWAIN_ARRAYINT32 = 130
 DTWAIN_ARRAYINT64 = 140
 DTWAIN_ARRAYUINT64 = 150
+DTWAIN_ARRAYSHORTINT16 = 160
+DTWAIN_ARRAYSHORTUINT16 = 170
 DTWAIN_RANGELONG = DTWAIN_ARRAYLONG
 DTWAIN_RANGEFLOAT = DTWAIN_ARRAYFLOAT
 DTWAIN_RANGEMIN = 0
@@ -426,6 +430,10 @@ DTWAIN_TN_TRANSFERTILEDONE = 1301
 DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302
 DTWAIN_TN_SOURCEDETAILS = 1304
 DTWAIN_TN_QUERYACQUIREPAGES = 1305
+DTWAIN_TN_ACQUIREPAGESSTOPPING = 1306
+DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307
+DTWAIN_TN_QUERYUPDATEDIBORIG = 1308
+DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309
 DTWAIN_PDFOCR_CLEANTEXT1 = 1
 DTWAIN_PDFOCR_CLEANTEXT2 = 2
 DTWAIN_MODAL = 0
@@ -906,6 +914,8 @@ DTWAIN_ERR_WRITEDATA_TOFILE = (-2503)
 DTWAIN_ERR_OPERATION_NOTSUPPORTED = (-2504)
 DTWAIN_ERR_INVALID_PDFTEXTELEMENT = (-2505)
 DTWAIN_ERR_SETCAP_FAILED = (-2506)
+DTWAIN_ERR_CAP_INVALIDSTATE = (-2507)
+DTWAIN_ERR_GETCAP_FAILED = (-2508)
 DTWAIN_DE_CHKAUTOCAPTURE = 1
 DTWAIN_DE_CHKBATTERY = 2
 DTWAIN_DE_CHKDEVICEONLINE = 4
@@ -1688,6 +1698,8 @@ DTWAIN_CONSTANT_DTWAIN_CONT = 79
 DTWAIN_CONSTANT_CAPCODE_MAP = 80
 DTWAIN_CONSTANT_ACAP = 81
 DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC = 82
+DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT = 83
+DTWAIN_CONSTANT_ERROR_NAMES = 84
 DTWAIN_USERRES_START = 20000
 DTWAIN_USERRES_MAXSIZE = 8192
 DTWAIN_APIHANDLEOK = 1
@@ -1960,6 +1972,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnableBarcodeDetection.restype = ct.c_long
      theDLL.DTWAIN_EnableDuplex.restype = ct.c_long
      theDLL.DTWAIN_EnableFeeder.restype = ct.c_long
+     theDLL.DTWAIN_EnableGetMessageLoop.restype = ct.c_long
+     theDLL.DTWAIN_EnableGetMessageLoopDetection.restype = ct.c_long
      theDLL.DTWAIN_EnableIndicator.restype = ct.c_long
      theDLL.DTWAIN_EnableJobFileHandling.restype = ct.c_long
      theDLL.DTWAIN_EnableLamp.restype = ct.c_long
@@ -2005,6 +2019,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCamerasEx2.restype = ct.c_void_p
+     theDLL.DTWAIN_EnumCapLabels.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCompressionTypes.restype = ct.c_long
      theDLL.DTWAIN_EnumCompressionTypesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCompressionTypesEx2.restype = ct.c_void_p
@@ -2087,8 +2102,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumTopCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumTopCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrinters.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArray.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrintersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumXResolutionValues.restype = ct.c_long
      theDLL.DTWAIN_EnumXResolutionValuesEx.restype = ct.c_void_p
@@ -2138,6 +2151,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetAcquireStripSizes.restype = ct.c_long
      theDLL.DTWAIN_GetAcquiredImage.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquiredImageArray.restype = ct.c_void_p
+     theDLL.DTWAIN_GetAcquisitionArray.restype = ct.c_void_p
      theDLL.DTWAIN_GetActiveDSMPath.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMPathA.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMPathW.restype = ct.c_long
@@ -2178,6 +2192,12 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameA.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameW.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelp.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelpA.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelpW.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabel.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabelA.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabelW.restype = ct.c_long
      theDLL.DTWAIN_GetCapOperations.restype = ct.c_long
      theDLL.DTWAIN_GetCapOperationsEx.restype = ct.c_long
      theDLL.DTWAIN_GetCapValues.restype = ct.c_long
@@ -2498,6 +2518,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_IsFeederSupported.restype = ct.c_long
      theDLL.DTWAIN_IsFileSystemSupported.restype = ct.c_long
      theDLL.DTWAIN_IsFileXferSupported.restype = ct.c_long
+     theDLL.DTWAIN_IsGetMessageLoopDetectionOn.restype = ct.c_long
+     theDLL.DTWAIN_IsGetMessageLoopEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldALastPageSupported.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldALevelSupported.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldAPrintFormatSupported.restype = ct.c_long
@@ -2629,10 +2651,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_ResetPDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_RewindPage.restype = ct.c_long
-     theDLL.DTWAIN_RotateDIB.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBString.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBStringA.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBStringW.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImage.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageString.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageStringA.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageStringW.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultOCREngine.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSource.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.restype = ct.c_void_p
@@ -2765,6 +2787,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetLightPathEx.restype = ct.c_long
      theDLL.DTWAIN_SetLightSource.restype = ct.c_long
      theDLL.DTWAIN_SetLightSources.restype = ct.c_long
+     theDLL.DTWAIN_SetLogSaveThreshold.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallback.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallbackA.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallbackW.restype = ct.c_long
@@ -2915,6 +2938,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_TestGetCap.restype = ct.c_void_p
      theDLL.DTWAIN_UnlockMemory.restype = ct.c_long
      theDLL.DTWAIN_UnlockMemoryEx.restype = ct.c_long
+     theDLL.DTWAIN_UpdateCurrentAcquiredImage.restype = ct.c_long
      theDLL.DTWAIN_UseMultipleThreads.restype = ct.c_long
 
      #set up the argument types
@@ -3118,6 +3142,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnableBarcodeDetection.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableDuplex.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableFeeder.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnableGetMessageLoop.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnableGetMessageLoopDetection.argtypes = [ct.c_long]
      theDLL.DTWAIN_EnableIndicator.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableJobFileHandling.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableLamp.argtypes = [ct.c_void_p, ct.c_long]
@@ -3162,6 +3188,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumCamerasEx2.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnumCapLabels.argtypes = [ct.c_long]
      theDLL.DTWAIN_EnumCompressionTypes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumCompressionTypesEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumCompressionTypesEx2.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
@@ -3239,8 +3266,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumTopCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumTopCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrinters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArray.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrintersEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumXResolutionValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p), ct.c_long]
      theDLL.DTWAIN_EnumXResolutionValuesEx.argtypes = [ct.c_void_p, ct.c_long]
@@ -3290,6 +3315,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetAcquireStripSizes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetAcquiredImage.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetAcquiredImageArray.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_GetAcquisitionArray.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetActiveDSMPath.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMPathW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -3328,6 +3354,12 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCapFromName.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetCapFromNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetCapFromNameW.argtypes = [ct.c_wchar_p]
+     theDLL.DTWAIN_GetCapHelp.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetCapHelpA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapHelpW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabel.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabelA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabelW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCapOperations.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetCapOperationsEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.POINTER(ct.c_void_p)]
@@ -3628,6 +3660,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_IsFeederSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsFileSystemSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsFileXferSupported.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_IsGetMessageLoopEnabled.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldALastPageSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldALevelSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldAPrintFormatSupported.argtypes = [ct.c_void_p]
@@ -3753,10 +3786,10 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ResetPDFTextElement.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_RewindPage.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_RotateDIB.argtypes = [ct.c_void_p, ct.c_double]
-     theDLL.DTWAIN_RotateDIBString.argtypes = [ct.c_void_p, ct.c_wchar_p]
-     theDLL.DTWAIN_RotateDIBStringA.argtypes = [ct.c_void_p, ct.c_char_p]
-     theDLL.DTWAIN_RotateDIBStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_RotateImage.argtypes = [ct.c_void_p, ct.c_double]
+     theDLL.DTWAIN_RotateImageString.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_RotateImageStringA.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateImageStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.argtypes = [ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2A.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
@@ -3885,6 +3918,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetLightPathEx.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_SetLightSource.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetLightSources.argtypes = [ct.c_void_p, ct.c_void_p]
+     theDLL.DTWAIN_SetLogSaveThreshold.argtypes = [ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallback.argtypes = [theDLL.SETLOGGERPROC_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallbackA.argtypes = [theDLL.SETLOGGERPROCA_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallbackW.argtypes = [theDLL.SETLOGGERPROCW_TYPE, ct.c_int64]
@@ -4032,6 +4066,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_TestGetCap.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_UnlockMemory.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_UnlockMemoryEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_UpdateCurrentAcquiredImage.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_UseMultipleThreads.argtypes = [ct.c_long]
 
 def setup_ansi(theDLL):
@@ -4253,6 +4288,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnableBarcodeDetection.restype = ct.c_long
      theDLL.DTWAIN_EnableDuplex.restype = ct.c_long
      theDLL.DTWAIN_EnableFeeder.restype = ct.c_long
+     theDLL.DTWAIN_EnableGetMessageLoop.restype = ct.c_long
+     theDLL.DTWAIN_EnableGetMessageLoopDetection.restype = ct.c_long
      theDLL.DTWAIN_EnableIndicator.restype = ct.c_long
      theDLL.DTWAIN_EnableJobFileHandling.restype = ct.c_long
      theDLL.DTWAIN_EnableLamp.restype = ct.c_long
@@ -4298,6 +4335,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCamerasEx2.restype = ct.c_void_p
+     theDLL.DTWAIN_EnumCapLabels.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCompressionTypes.restype = ct.c_long
      theDLL.DTWAIN_EnumCompressionTypesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumCompressionTypesEx2.restype = ct.c_void_p
@@ -4380,8 +4418,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumTopCameras.restype = ct.c_long
      theDLL.DTWAIN_EnumTopCamerasEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrinters.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArray.restype = ct.c_long
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumTwainPrintersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumXResolutionValues.restype = ct.c_long
      theDLL.DTWAIN_EnumXResolutionValuesEx.restype = ct.c_void_p
@@ -4431,6 +4467,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetAcquireStripSizes.restype = ct.c_long
      theDLL.DTWAIN_GetAcquiredImage.restype = ct.c_void_p
      theDLL.DTWAIN_GetAcquiredImageArray.restype = ct.c_void_p
+     theDLL.DTWAIN_GetAcquisitionArray.restype = ct.c_void_p
      theDLL.DTWAIN_GetActiveDSMPath.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMPathA.restype = ct.c_long
      theDLL.DTWAIN_GetActiveDSMPathW.restype = ct.c_long
@@ -4471,6 +4508,12 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameA.restype = ct.c_long
      theDLL.DTWAIN_GetCapFromNameW.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelp.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelpA.restype = ct.c_long
+     theDLL.DTWAIN_GetCapHelpW.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabel.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabelA.restype = ct.c_long
+     theDLL.DTWAIN_GetCapLabelW.restype = ct.c_long
      theDLL.DTWAIN_GetCapOperations.restype = ct.c_long
      theDLL.DTWAIN_GetCapOperationsEx.restype = ct.c_long
      theDLL.DTWAIN_GetCapValues.restype = ct.c_long
@@ -4791,6 +4834,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_IsFeederSupported.restype = ct.c_long
      theDLL.DTWAIN_IsFileSystemSupported.restype = ct.c_long
      theDLL.DTWAIN_IsFileXferSupported.restype = ct.c_long
+     theDLL.DTWAIN_IsGetMessageLoopDetectionOn.restype = ct.c_long
+     theDLL.DTWAIN_IsGetMessageLoopEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldALastPageSupported.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldALevelSupported.restype = ct.c_long
      theDLL.DTWAIN_IsIAFieldAPrintFormatSupported.restype = ct.c_long
@@ -4922,10 +4967,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_ResetPDFTextElement.restype = ct.c_long
      theDLL.DTWAIN_RewindPage.restype = ct.c_long
-     theDLL.DTWAIN_RotateDIB.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBString.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBStringA.restype = ct.c_void_p
-     theDLL.DTWAIN_RotateDIBStringW.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImage.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageString.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageStringA.restype = ct.c_void_p
+     theDLL.DTWAIN_RotateImageStringW.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultOCREngine.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSource.restype = ct.c_void_p
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.restype = ct.c_void_p
@@ -5058,6 +5103,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetLightPathEx.restype = ct.c_long
      theDLL.DTWAIN_SetLightSource.restype = ct.c_long
      theDLL.DTWAIN_SetLightSources.restype = ct.c_long
+     theDLL.DTWAIN_SetLogSaveThreshold.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallback.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallbackA.restype = ct.c_long
      theDLL.DTWAIN_SetLoggerCallbackW.restype = ct.c_long
@@ -5208,6 +5254,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_TestGetCap.restype = ct.c_void_p
      theDLL.DTWAIN_UnlockMemory.restype = ct.c_long
      theDLL.DTWAIN_UnlockMemoryEx.restype = ct.c_long
+     theDLL.DTWAIN_UpdateCurrentAcquiredImage.restype = ct.c_long
      theDLL.DTWAIN_UseMultipleThreads.restype = ct.c_long
 
      #set up the argument types
@@ -5411,6 +5458,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnableBarcodeDetection.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableDuplex.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableFeeder.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnableGetMessageLoop.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnableGetMessageLoopDetection.argtypes = [ct.c_long]
      theDLL.DTWAIN_EnableIndicator.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableJobFileHandling.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnableLamp.argtypes = [ct.c_void_p, ct.c_long]
@@ -5455,6 +5504,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumCamerasEx2.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_EnumCapLabels.argtypes = [ct.c_long]
      theDLL.DTWAIN_EnumCompressionTypes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumCompressionTypesEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumCompressionTypesEx2.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
@@ -5532,8 +5582,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumTopCameras.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumTopCamerasEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrinters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArray.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
-     theDLL.DTWAIN_EnumTwainPrintersArrayEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumTwainPrintersEx.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_EnumXResolutionValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p), ct.c_long]
      theDLL.DTWAIN_EnumXResolutionValuesEx.argtypes = [ct.c_void_p, ct.c_long]
@@ -5583,6 +5631,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetAcquireStripSizes.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetAcquiredImage.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetAcquiredImageArray.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_GetAcquisitionArray.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetActiveDSMPath.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetActiveDSMPathW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -5621,6 +5670,12 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCapFromName.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetCapFromNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetCapFromNameW.argtypes = [ct.c_wchar_p]
+     theDLL.DTWAIN_GetCapHelp.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapHelpA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapHelpW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabel.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabelA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetCapLabelW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCapOperations.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetCapOperationsEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetCapValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long, ct.POINTER(ct.c_void_p)]
@@ -5921,6 +5976,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_IsFeederSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsFileSystemSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsFileXferSupported.argtypes = [ct.c_void_p, ct.c_long]
+     theDLL.DTWAIN_IsGetMessageLoopEnabled.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldALastPageSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldALevelSupported.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_IsIAFieldAPrintFormatSupported.argtypes = [ct.c_void_p]
@@ -6046,10 +6102,10 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_RemovePDFTextElement.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_ResetPDFTextElement.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_RewindPage.argtypes = [ct.c_void_p]
-     theDLL.DTWAIN_RotateDIB.argtypes = [ct.c_void_p, ct.c_double]
-     theDLL.DTWAIN_RotateDIBString.argtypes = [ct.c_void_p, ct.c_char_p]
-     theDLL.DTWAIN_RotateDIBStringA.argtypes = [ct.c_void_p, ct.c_char_p]
-     theDLL.DTWAIN_RotateDIBStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_RotateImage.argtypes = [ct.c_void_p, ct.c_double]
+     theDLL.DTWAIN_RotateImageString.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateImageStringA.argtypes = [ct.c_void_p, ct.c_char_p]
+     theDLL.DTWAIN_RotateImageStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SelectDefaultSourceWithOpen.argtypes = [ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SelectOCREngine2A.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
@@ -6178,6 +6234,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetLightPathEx.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_SetLightSource.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetLightSources.argtypes = [ct.c_void_p, ct.c_void_p]
+     theDLL.DTWAIN_SetLogSaveThreshold.argtypes = [ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallback.argtypes = [theDLL.SETLOGGERPROC_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallbackA.argtypes = [theDLL.SETLOGGERPROCA_TYPE, ct.c_int64]
      theDLL.DTWAIN_SetLoggerCallbackW.argtypes = [theDLL.SETLOGGERPROCW_TYPE, ct.c_int64]
@@ -6325,4 +6382,5 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_TestGetCap.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_UnlockMemory.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_UnlockMemoryEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_UpdateCurrentAcquiredImage.argtypes = [ct.c_void_p, ct.c_void_p]
      theDLL.DTWAIN_UseMultipleThreads.argtypes = [ct.c_long]

@@ -317,6 +317,7 @@ namespace Dynarithmic
         public const int DTWAIN_USESOURCEMODE = 128;
         public const int DTWAIN_USELIST = 256;
         public const int DTWAIN_CREATE_DIRECTORY = 512;
+        public const int DTWAIN_NODELETEDIBS = 1024;
         public const int DTWAIN_CREATEDIRECTORY = DTWAIN_CREATE_DIRECTORY;
         public const int DTWAIN_ARRAYANY = 1;
         public const int DTWAIN_ArrayTypePTR = 1;
@@ -332,6 +333,7 @@ namespace Dynarithmic
         public const int DTWAIN_ARRAYLONG64 = 10;
         public const int DTWAIN_ARRAYANSISTRING = 11;
         public const int DTWAIN_ARRAYWIDESTRING = 12;
+        public const int DTWAIN_ARRAYULONG = 13;
         public const int DTWAIN_ARRAYTWFIX32 = 200;
         public const int DTWAIN_ArrayTypeINVALID = 0;
         public const int DTWAIN_ARRAYINT16 = 100;
@@ -340,6 +342,8 @@ namespace Dynarithmic
         public const int DTWAIN_ARRAYINT32 = 130;
         public const int DTWAIN_ARRAYINT64 = 140;
         public const int DTWAIN_ARRAYUINT64 = 150;
+        public const int DTWAIN_ARRAYSHORTINT16 = 160;
+        public const int DTWAIN_ARRAYSHORTUINT16 = 170;
         public const int DTWAIN_RANGELONG = DTWAIN_ARRAYLONG;
         public const int DTWAIN_RANGEFLOAT = DTWAIN_ARRAYFLOAT;
         public const int DTWAIN_RANGEMIN = 0;
@@ -514,6 +518,10 @@ namespace Dynarithmic
         public const int DTWAIN_TN_FILECOMPRESSTYPEMISMATCH = 1302;
         public const int DTWAIN_TN_SOURCEDETAILS = 1304;
         public const int DTWAIN_TN_QUERYACQUIREPAGES = 1305;
+        public const int DTWAIN_TN_ACQUIREPAGESSTOPPING = 1306;
+        public const int DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307;
+        public const int DTWAIN_TN_QUERYUPDATEDIBORIG = 1308;
+        public const int DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309;
         public const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const int DTWAIN_MODAL = 0;
@@ -994,6 +1002,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_OPERATION_NOTSUPPORTED = (-2504);
         public const int DTWAIN_ERR_INVALID_PDFTEXTELEMENT = (-2505);
         public const int DTWAIN_ERR_SETCAP_FAILED = (-2506);
+        public const int DTWAIN_ERR_CAP_INVALIDSTATE = (-2507);
+        public const int DTWAIN_ERR_GETCAP_FAILED = (-2508);
         public const int DTWAIN_DE_CHKAUTOCAPTURE = 1;
         public const int DTWAIN_DE_CHKBATTERY = 2;
         public const int DTWAIN_DE_CHKDEVICEONLINE = 4;
@@ -1776,6 +1786,8 @@ namespace Dynarithmic
         public const int DTWAIN_CONSTANT_CAPCODE_MAP = 80;
         public const int DTWAIN_CONSTANT_ACAP = 81;
         public const int DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC = 82;
+        public const int DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT = 83;
+        public const int DTWAIN_CONSTANT_ERROR_NAMES = 84;
         public const int DTWAIN_USERRES_START = 20000;
         public const int DTWAIN_USERRES_MAXSIZE = 8192;
         public const int DTWAIN_APIHANDLEOK = 1;
@@ -2268,6 +2280,12 @@ namespace Dynarithmic
         public static extern int DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, int bSet);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, int bSet);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_EnableGetMessageLoopDetection(int bEnable);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, int bEnable);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -2401,6 +2419,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, int nWhichCamera);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumCapLabels(int lCapability);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
@@ -2643,12 +2664,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpAvailPrinters);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern DTWAIN_ARRAY DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -2762,6 +2777,9 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, int nWhichAcq);
 
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
+
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
         public static extern int DTWAIN_GetActiveDSMPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
 
@@ -2860,6 +2878,18 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
         public static extern int DTWAIN_GetCapFromName([MarshalAs(UnmanagedType.LPTStr)] string szName);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_GetCapHelp(int lCapability, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_GetCapHelp(int lCapability, System.IntPtr lpszOut, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_GetCapLabel(int lCapability, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        public static extern int DTWAIN_GetCapLabel(int lCapability, System.IntPtr lpszOut, int nSize);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, int lCapability, ref int lpOps);
@@ -3645,6 +3675,12 @@ namespace Dynarithmic
         public static extern int DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, int lFileType);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_IsGetMessageLoopDetectionOn();
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -3990,10 +4026,10 @@ namespace Dynarithmic
         public static extern int DTWAIN_RewindPage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern HANDLE DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
+        public static extern HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
-        public static extern HANDLE DTWAIN_RotateDIBString(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string rotationAngle);
+        public static extern HANDLE DTWAIN_RotateImageString(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string rotationAngle);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine();
@@ -4252,6 +4288,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_SetLoggerCallback(DTwainLoggerProc logProc, long UserData);
@@ -4522,6 +4561,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_UnlockMemoryEx(HANDLE h);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_UseMultipleThreads(int bSet);

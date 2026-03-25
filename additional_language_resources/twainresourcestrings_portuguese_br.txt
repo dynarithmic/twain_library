@@ -227,6 +227,7 @@
 2504 Operação não suportada  
 2505 Elemento de texto PDF inválido
 2506 Capacidade não foi definida. Valores inválidos foram usados.
+2507 A capacidade não pode ser negociada no estado atual
 2102 OCR inválido  
 2103 OCR não ativo  
 2104 Tipo de arquivo OCR inválido  
@@ -263,6 +264,7 @@
 3027 Registro encerrado
 3028 Último erro
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Ocorreu um erro de exceção durante a chamada para o Twain DSM. Possível sessão Twain corrompida
 10000 [Mensagem do usuário]
 10001 Erro ao fechar o DSM do Twain  

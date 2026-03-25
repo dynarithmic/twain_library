@@ -235,6 +235,7 @@
 2504 Operation not supported
 2505 Invalid PDF Text Element
 2506 Capability was not set.  Invalid values were used.
+2507 Capability cannot be negotiated in current state.
 3000 Select Source
 3001 &Select
 3002 &Cancel
@@ -265,6 +266,7 @@
 3027 Log ended
 3028 Last error
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [User Message]
 10001 Error in closing Twain DSM
