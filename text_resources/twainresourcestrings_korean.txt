@@ -266,6 +266,7 @@
 3027 로그 종료됨
 3028 마지막 오류
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 트윈 DSM 호출 중 예외 오류가 발생했습니다. 손상된 트윈 세션일 가능성이 있습니까?
 10000 [사용자 메시지]
 10001 트윈 DSM을 닫는 중 오류 발생

@@ -1434,6 +1434,7 @@
  113 TWLG_VIETNAMESE            
 -9999    
 9700 DTWAIN#Twain#Library,#v{short_version},#{company_name},#{copyright}
+9701 DTWAIN#Twain#Library,#v{short_version},#{company_name},#{copyright_html}
 -9999
 0x0001 DG_CONTROL
 0x0002 DG_IMAGE  
@@ -2397,5 +2398,5 @@ TWCP_BITFIELDS  [TWFF_BMP]
 TWCP_ZIP [TWFF_TIFF TWFF_TIFFMULTI]
 TWCP_JPEG2000 [TWFF_JP2]
 END
-1939440288
+2849199993
 END END END

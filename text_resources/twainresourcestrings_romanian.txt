@@ -266,6 +266,7 @@
 3027 Jurnal încheiat
 3028 Ultima eroare
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 A apărut o eroare de excepție în timpul apelului la DSM Twain. Sesiune Twain posibil coruptă?
 10000 [Mesaj utilizator]
 10001 Eroare la închiderea DSM Twain  

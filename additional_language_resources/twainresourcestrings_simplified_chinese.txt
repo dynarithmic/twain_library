@@ -266,6 +266,7 @@
 3027 日志结束
 3028 最后错误
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 在调用 Twain DSM 时发生异常错误。可能是 Twain 会话损坏？
 10000 [用户消息]
 10001 关闭 Twain DSM 时出错  
