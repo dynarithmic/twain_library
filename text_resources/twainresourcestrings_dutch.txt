@@ -265,6 +265,7 @@
 3027 Log beëindigd
 3028 Laatste fout
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
 10000 [Gebruikersbericht]
 10001 Fout bij het sluiten van Twain DSM  

@@ -264,6 +264,7 @@
 3027 Registro encerrado
 3028 Último erro
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Ocorreu um erro de exceção durante a chamada para o Twain DSM. Possível sessão Twain corrompida
 10000 [Mensagem do usuário]
 10001 Erro ao fechar o DSM do Twain  
