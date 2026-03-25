@@ -235,6 +235,7 @@
 2504 サポートされていない操作  
 2505 無効なPDFテキスト要素
 2506 能力が設定されていません。無効な値が使用されました。
+2507 現在の状態では能力を交渉できません
 3000 ソースを選択  
 3001 &選択  
 3002 &キャンセル  
@@ -265,6 +266,7 @@
 3027 ログ終了
 3028 最後のエラー
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 Twain DSMへの呼び出し中に例外エラーが発生しました。破損したTwainセッションの可能性がありますか？
 10000 [ユーザーメッセージ]
 10001 Twain DSMの閉鎖中にエラーが発生しました

@@ -235,6 +235,7 @@
 2504 不支持的操作  
 2505 無效的 PDF 文字元素
 2506 未設定能力。使用了無效的值。
+2507 在當前狀態下無法協商能力
 3000 選擇來源  
 3001 &選擇  
 3002 &取消  
@@ -265,6 +266,7 @@
 3027 日誌結束
 3028 最後錯誤
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
 9999 在呼叫 Twain DSM 時發生例外錯誤。可能的損壞 Twain 會話？
 10000 [用戶消息]
 10001 關閉 Twain DSM 時出錯

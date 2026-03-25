@@ -88,7 +88,8 @@ namespace TWAINDemo
         }
         private void SourcePropsDlg_FormClosed(object sender, FormClosedEventArgs e)
         {
-            TwainAPI.DTWAIN_SetAllCapsToDefault(m_Source);
+            if (chkResetCapsOnExit.Checked )
+                TwainAPI.DTWAIN_SetAllCapsToDefault(m_Source);
         }
 
         private void btnShowUIOnly_Click(object sender, EventArgs e)
@@ -131,6 +132,11 @@ namespace TWAINDemo
             }
             else
                 Close();
+        }
+
+        private void chkResetCapsOnExit_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

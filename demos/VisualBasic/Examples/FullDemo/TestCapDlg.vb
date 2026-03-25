@@ -515,6 +515,6 @@ Public Class TestCapDlg
     End Sub
 
     Private Sub TestCapDlg_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        DTWAINAPI.DTWAIN_SetAllCapsToDefault(m_Source)
+
     End Sub
 End Class

@@ -56,6 +56,7 @@ Partial Class SourcePropertiesDlg
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.chkResetCapsOnExit = New System.Windows.Forms.CheckBox()
         Me.groupBox2.SuspendLayout()
         Me.groupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -64,18 +65,19 @@ Partial Class SourcePropertiesDlg
         '
         'groupBox2
         '
+        Me.groupBox2.Controls.Add(Me.chkResetCapsOnExit)
+        Me.groupBox2.Controls.Add(Me.listCaps)
         Me.groupBox2.Controls.Add(Me.btnResetAllCaps)
         Me.groupBox2.Controls.Add(Me.btnTestCap)
         Me.groupBox2.Controls.Add(Me.label8)
         Me.groupBox2.Controls.Add(Me.label7)
         Me.groupBox2.Controls.Add(Me.label6)
-        Me.groupBox2.Controls.Add(Me.listCaps)
         Me.groupBox2.Controls.Add(Me.edExtendedCaps)
         Me.groupBox2.Controls.Add(Me.edCustomCaps)
         Me.groupBox2.Controls.Add(Me.edTotalCaps)
         Me.groupBox2.Location = New System.Drawing.Point(19, 198)
         Me.groupBox2.Name = "groupBox2"
-        Me.groupBox2.Size = New System.Drawing.Size(394, 220)
+        Me.groupBox2.Size = New System.Drawing.Size(394, 251)
         Me.groupBox2.TabIndex = 5
         Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Capability Info"
@@ -168,7 +170,7 @@ Partial Class SourcePropertiesDlg
         'OK_button
         '
         Me.OK_button.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.OK_button.Location = New System.Drawing.Point(511, 424)
+        Me.OK_button.Location = New System.Drawing.Point(513, 455)
         Me.OK_button.Name = "OK_button"
         Me.OK_button.Size = New System.Drawing.Size(75, 23)
         Me.OK_button.TabIndex = 4
@@ -299,14 +301,14 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox3.Controls.Add(Me.TextBox3)
         Me.GroupBox3.Location = New System.Drawing.Point(419, 13)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(317, 405)
+        Me.GroupBox3.Size = New System.Drawing.Size(317, 436)
         Me.GroupBox3.TabIndex = 6
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Custom Data"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(179, 366)
+        Me.Button1.Location = New System.Drawing.Point(179, 405)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 23)
         Me.Button1.TabIndex = 4
@@ -315,7 +317,7 @@ Partial Class SourcePropertiesDlg
         '
         'btnShowUIOnly
         '
-        Me.btnShowUIOnly.Location = New System.Drawing.Point(47, 366)
+        Me.btnShowUIOnly.Location = New System.Drawing.Point(47, 405)
         Me.btnShowUIOnly.Name = "btnShowUIOnly"
         Me.btnShowUIOnly.Size = New System.Drawing.Size(97, 23)
         Me.btnShowUIOnly.TabIndex = 3
@@ -329,7 +331,7 @@ Partial Class SourcePropertiesDlg
         Me.txtDSData.Name = "txtDSData"
         Me.txtDSData.ReadOnly = True
         Me.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtDSData.Size = New System.Drawing.Size(304, 339)
+        Me.txtDSData.Size = New System.Drawing.Size(304, 380)
         Me.txtDSData.TabIndex = 2
         '
         'TextBox1
@@ -370,7 +372,7 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox4.Controls.Add(Me.TextBox7)
         Me.GroupBox4.Location = New System.Drawing.Point(767, 13)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(317, 405)
+        Me.GroupBox4.Size = New System.Drawing.Size(317, 436)
         Me.GroupBox4.TabIndex = 6
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "JSON Details"
@@ -415,11 +417,23 @@ Partial Class SourcePropertiesDlg
         Me.TextBox7.TabIndex = 1
         Me.TextBox7.TabStop = False
         '
+        'chkResetCapsOnExit
+        '
+        Me.chkResetCapsOnExit.AutoSize = True
+        Me.chkResetCapsOnExit.Checked = True
+        Me.chkResetCapsOnExit.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkResetCapsOnExit.Location = New System.Drawing.Point(10, 220)
+        Me.chkResetCapsOnExit.Name = "chkResetCapsOnExit"
+        Me.chkResetCapsOnExit.Size = New System.Drawing.Size(118, 17)
+        Me.chkResetCapsOnExit.TabIndex = 5
+        Me.chkResetCapsOnExit.Text = "Reset Caps On Exit"
+        Me.chkResetCapsOnExit.UseVisualStyleBackColor = True
+        '
         'SourcePropertiesDlg
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1096, 469)
+        Me.ClientSize = New System.Drawing.Size(1096, 490)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.groupBox2)
@@ -477,4 +491,5 @@ Partial Class SourcePropertiesDlg
     Private WithEvents btnResetAllCaps As Windows.Forms.Button
     Friend WithEvents btnShowUIOnly As Windows.Forms.Button
     Friend WithEvents Button1 As Windows.Forms.Button
+    Friend WithEvents chkResetCapsOnExit As Windows.Forms.CheckBox
 End Class

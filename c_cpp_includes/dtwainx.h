@@ -377,8 +377,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumPrinterStringModes(DTWAIN_SOURCE Source, LPD
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumPrinterStringModesEx(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY lpAvailPrinters);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumTwainPrintersArray(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
-DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumTwainPrintersArrayEx(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAvailablePrinters(DTWAIN_SOURCE Source, LONG lpAvailPrinters);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetAvailablePrintersArray(DTWAIN_SOURCE Source, DTWAIN_ARRAY AvailPrinters);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnablePrinter(DTWAIN_SOURCE Source, DTWAIN_BOOL bEnable);
@@ -638,7 +636,7 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomFileSave(OPENFILENAME* lpOpenFileStruct
 /*************************************************************************************/
 /* Miscellaneous DIB functions */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_FlipBitmap(HANDLE hDib );
-HANDLE      DLLENTRY_DEF DTWAIN_RotateDIB(HANDLE hDib, DTWAIN_FLOAT angle);
+HANDLE      DLLENTRY_DEF DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT angle);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumSupportedExtImageInfo(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumSupportedExtImageInfoEx(DTWAIN_SOURCE Source);
@@ -897,9 +895,14 @@ LONG DLLENTRY_DEF DTWAIN_GetTwainTimeout(VOID_PROTOTYPE);
 /* User-defined callback to change DIB */
 DTWAIN_DIBUPDATE_PROC DLLENTRY_DEF DTWAIN_SetUpdateDibProc(DTWAIN_DIBUPDATE_PROC DibProc);
 
+/* Function used for DTWAIN_TN_QUERYUPDATEDIBx notifications */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib);
+
 /* Use PeekMessage() or GetMessage() TWAIN loop */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnablePeekMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsPeekMessageLoopEnabled(DTWAIN_SOURCE Source);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, BOOL bSet);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
 
 /* Error buffer access */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
@@ -1060,6 +1063,20 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsDoublePageCountOnDuplex(DTWAIN_SOURCE Source);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValues(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType); 
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValuesEx(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, LONG lCap, LONG lGetType, LONG lContainerType, LONG nDataType);
+
+/* Set the log file save threshold when logging to a file using DTWAIN_SetTwainLog */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetLogSaveThreshold(LONG64 lineCount);
+
+/* Support MSG_GETLABELENUM */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCapLabels(LONG lCapability);
+
+/* Turn off the GetMessage() testing when determining the TWAIN loop type */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnableGetMessageLoopDetection(DTWAIN_BOOL bEnable);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsGetMessageLoopDetectionOn(VOID_PROTOTYPE);
+
+/* Get acquisition array produced when calling DTWAIN_AcquireFile(Ex) using a file
+   flag of DTWAIN_NODELETEDIBS */
+DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
 
 #include "dtwstrfn.h"
 

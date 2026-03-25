@@ -1,5 +1,165 @@
 DTWAIN Version changes
 
+5.8.2
+
+- [Possible breaking change if you are acquiring in duplex mode]
+
+  Clarified the usage of the "number of pages" argument to the DTWAIN_Acquire...()
+  functions when the device is acquiring in duplex mode.  If the device is in 
+  duplex mode, the number of pages will specify the number of sheets of paper to
+  process (front and back side), and not the number of total images.
+
+  For example:
+  DTWAIN_EnableDuplex(Source, TRUE);  // Enable the duplex unit
+  //...
+  DTWAIN_AcquireFile(Source, "filename", DTWAIN_BMP, DTWAIN_USENATIVE, DTWAIN_PT_DEFAULT,
+                     2, // This is the number of pages argument
+                     1, 1, NULL);
+
+  This will acquire 2 sheets (front and back), making a total of 4 images. 
+
+  Note that if your current code doubled the "number of pages" count due to inconsistencies with 
+  the page count setting, and you upgrade to 5.8.2, you may have to remove the doubling of the 
+  page count, and rebuild / retest the application to ensure that the page count is correct 
+  when the device is in duplex mode.                    
+                        
+- Add a [SheetCount] section to dtwain32.ini and dtwain64.ini.  This section is for
+  devices that support the CAP_SHEETCOUNT capability, but do not implement this 
+  capability correctly when acquiring in duplex mode.  For example:
+
+  [SheetCount]
+  MyScannerName=IMAGES
+
+  will assume that the device named "MyScannerName", if CAP_SHEETCOUNT is supported,
+  will actually require DTWAIN to double the page count specified when a 
+  DTWAIN_Acquire...() function is called.
+
+- The DTWAIN_GetCapValuesEx...(), DTWAIN_SetCapValuesEx...(), DTWAIN_ArrayGetCapValuesEx...()
+  and DTWAIN_ArraySetCapValuesEx...() functions will now accept the TWAIN container constant 
+  names in addition to the DTWAIN container names when specifying the container to use.
+
+  Previously, these functions only accepted the DTWAIN container names, for example,
+  DTWAIN_CONTONEVALUE instead of TWON_ONEVALUE.  Now these functions will accept the 
+  DTWAIN container constant name or the TWAIN container constant name.
+
+- Added function DTWAIN_EnableGetMessageLoopDetection() that will turn on or off
+  the auto-detection by DTWAIN to determine if the user-environment will successfully
+  acquire images using the Windows API GetMessage() instead of the default PeekMessage().  
+
+  By default, the auto detection is on, with the fallback being to use PeekMessage().
+  However, it has been discovered that the auto-detection should always be turned off for 
+  environments such as the Java Virtual Machine (JVM).
+
+- The DTWDEMO32 and DTWDEMO64 demo programs now contains a method of setting most capability 
+  values before acquiring images.  This allows testing of the device's capabilities during
+  the acquisition (for example, auto-deskew, auto-rotate, possibly custom caps, etc.).  
+  The capabilities must be able to be fully negotiated in state 4 (TWAIN Source is open), and not need
+  to be negotiated during states 5, 6, or 7 (this is when the TWAIN Source is showing the user-interface
+  and/or in the process of acquiring images).  
+
+  This new option is available through the main menu once a TWAIN Source has been selected:
+
+  "Source Selection Test -> Source Properties.." 
+
+  and the lower left "Capability Info" box will contain a check box item "Reset Caps On Exit".  
+  If you have set capability values through the "Test Capability" functionality, you must uncheck 
+  the "Reset Caps On Exit" check box, so as to maintain the newly set capability values when the 
+  Source Properties dialog is closed.
+
+- Added sending DTWAIN_TN_ACQUIREPAGESTOPPING and DTWAIN_TN_ACQUIREPAGESTOPPED notifications
+  to the application after the application returns 0 from the DTWAIN_TN_QUERYACQUIREPAGES 
+  notification.  
+
+  The DTWAIN_TN_ACQUIREPAGESTOPPING is sent immediately after receiving a 0
+  from the application on the DTWAIN_TN_QUERYACQUIREPAGES notification.
+
+  The DTWAIN_TN_ACQUIREPAGESSTOPPED is sent once the acquisition has stopped (the Source
+  has either returned to the Source user-interface, or if no user-interface is used,
+  is returning back to the application).
+
+- Added sending DTWAIN_TN_QUERYUPDATEDIBORIG and DTWAIN_TN_QUERYUPDATEDIBRESAMPLED
+  notifications after the image is retrieved from the TWAIN device (DTWAIN_TN_QUERYUPDATEDIBORIG)
+  and after the image has been potentially modified by DTWAIN (DTWAIN_TN_QUERYUPDATEDIBRESAMPLED).
+  
+  These notifications are used for: 
+
+      a) DTWAIN_AcquireNative(Ex), 
+      b) DTWAIN_AcquireBuffered(Ex) using no compression and no user-defined buffer,
+      c) DTWAIN_AcquireFile(Ex) with the DTWAIN_USESOURCEMODE flag not set.
+
+  These notifications give the application the option of adjusting the current acquired image.  
+  To do this the application should call DTWAIN_GetCurrentAcquiredImage() to get the DIB 
+  (Device Independent Bitmap) handle,  and replace the current acquired image by calling 
+  DTWAIN_UpdateCurrentAcquiredImage() with the new DIB.  Note that the bitmaps must be in 
+  DIB format, as this is the image type that the device will use.
+
+  The return value for these notifications should be 1, since DTWAIN on return will only check if the
+  DIB has been updated, and not specifically the return value.
+
+  The DTWAIN_SetUpdateDibProc function that sets up a function that allows changing the DIB will
+  still exist, but it is highly recommended to use the new notifications, as they allow 
+  changing the DIB both when the image is retrieved directly from the device, and after the 
+  image has been resampled.
+
+- Reordered ordinal numbers used in the DTWAIN DLL to have consecutive numbering.  The reordering
+  of the ordinal numbers reduces the size of the DTWAIN DLL.
+
+  This should affect a very small number of users who are using a programming environment that
+  relies on explicit usage of the DLL's internal ordinal numbers to identify the 
+  exported DLL functions.  If you are one of the few programmers using the ordinal numbers within
+  the DTWAIN DLL, you will have to change your application to use the new ordinal numbers.
+  
+- Added DTWAIN_RotateImage function that rotates a Device Independent Bitmap by n degrees:  
+
+  HANDLE DWAIN_RotateImage(HANDLE originalDib, DTWAIN_FLOAT degrees);
+ 
+  The return value will be a copy of the original DIB, but with the image rotated.  The original
+  DIB is not modified.  This function can be used for the notifications mentioned above 
+  (DTWAIN_TN_QUERYUPDATEDIBORIG and  DTWAIN_TN_QUERYUPDATEDIBRESAMPLED).
+
+- Added DTWAIN_NODELETEDIBS file flag to DTWAIN_AcquireFile and DTWAIN_AcquireFileEx.
+  This file flag will allow all of the generated Device Independent Bitmaps to be retained
+  in memory instead of automatically being deleted when the image file is saved.  
+
+  To retrieve the bitmaps, the function DTWAIN_GetAcquisitionArray() should be used after 
+  calling DTWAIN_AcquireFile(Ex).  The return value is a DTWAIN_ARRAY of the acquisitions,
+  similar to the DTWAIN_ARRAY that is returned for DTWAIN_AcquireNativeEx().  
+
+  Example:
+     DTWAIN_SOURCE Source;
+     DTWAIN_AcquireFile(Source, "filename", DTWAIN_BMP, 
+                        DTWAIN_USENATIVE | DTWAIN_NODELETEDIBS, // Do not delete the DIBS
+                        ... other parameters
+                       );
+
+     DTWAIN_ARRAY dibs = DTWAIN_GetAcquisitionArray(Source);
+     // Get the first dib from the first acquisition attempted
+     HANDLE oneDib = DTWAIN_GetAcquiredImage(dibs, 0, 0);  
+     //...
+     // Destroy the acquisition array
+     DTWAIN_DestroyAcquisitionArray(dibs, TRUE);
+
+- Fixed possible NULL being returned when calling DTWAIN_ArrayCreateFromCap() on a 
+  custom capability.
+
+- Fixed potential memory access violation when discarding images during buffered transfers.
+  This can occur if the DTWAIN_TN_QUERYPAGEDISCARD user notification returns 0.
+
+- Fixed potential memory leak when removing images after DTWAIN_AcquireFile(Ex) is called.
+
+- Fixed potential memory access violation where DTWAIN_GetCapValuesEx() and 
+  DTWAIN_GetCapValuesEx2() will return success when given a data type that is not 
+  compatible with the actual data type used by the TWAIN driver.  
+
+  This is a rare case where the driver returns a success code, but the actual results 
+  should be a failure in setting the capability due to the driver not returning any 
+  cap values.  This can occur if the client program calls either of the 
+  DTWAIN_GetCapValuesEx... functions using the wrong data type.
+
+- Fixed wrong error code being returned if a DTWAIN function that requires the DTWAIN
+  DLL to be initialized is called.
+
+
 5.8.1
 
 - Added SVG and SVGZ file formats to DTWAIN_AcquireFile() and DTWAIN_AcquireFileEx().

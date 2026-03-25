@@ -434,6 +434,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_USESOURCEMODE As Integer = 128
         Public Const DTWAIN_USELIST As Integer = 256
         Public Const DTWAIN_CREATE_DIRECTORY As Integer = 512
+        Public Const DTWAIN_NODELETEDIBS As Integer = 1024
         Public Const DTWAIN_CREATEDIRECTORY As Integer = DTWAIN_CREATE_DIRECTORY
         Public Const DTWAIN_ARRAYANY As Integer = 1
         Public Const DTWAIN_ArrayTypePTR As Integer = 1
@@ -449,6 +450,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_ARRAYLONG64 As Integer = 10
         Public Const DTWAIN_ARRAYANSISTRING As Integer = 11
         Public Const DTWAIN_ARRAYWIDESTRING As Integer = 12
+        Public Const DTWAIN_ARRAYULONG As Integer = 13
         Public Const DTWAIN_ARRAYTWFIX32 As Integer = 200
         Public Const DTWAIN_ArrayTypeINVALID As Integer = 0
         Public Const DTWAIN_ARRAYINT16 As Integer = 100
@@ -457,6 +459,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_ARRAYINT32 As Integer = 130
         Public Const DTWAIN_ARRAYINT64 As Integer = 140
         Public Const DTWAIN_ARRAYUINT64 As Integer = 150
+        Public Const DTWAIN_ARRAYSHORTINT16 As Integer = 160
+        Public Const DTWAIN_ARRAYSHORTUINT16 As Integer = 170
         Public Const DTWAIN_RANGELONG As Integer = DTWAIN_ARRAYLONG
         Public Const DTWAIN_RANGEFLOAT As Integer = DTWAIN_ARRAYFLOAT
         Public Const DTWAIN_RANGEMIN As Integer = 0
@@ -631,6 +635,10 @@ Namespace Dynarithmic
         Public Const DTWAIN_TN_FILECOMPRESSTYPEMISMATCH As Integer = 1302
         Public Const DTWAIN_TN_SOURCEDETAILS As Integer = 1304
         Public Const DTWAIN_TN_QUERYACQUIREPAGES As Integer = 1305
+        Public Const DTWAIN_TN_ACQUIREPAGESSTOPPING As Integer = 1306
+        Public Const DTWAIN_TN_ACQUIREPAGESSTOPPED As Integer = 1307
+        Public Const DTWAIN_TN_QUERYUPDATEDIBORIG As Integer = 1308
+        Public Const DTWAIN_TN_QUERYUPDATEDIBRESAMPLED As Integer = 1309
         Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
         Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
         Public Const DTWAIN_MODAL As Integer = 0
@@ -1111,6 +1119,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_ERR_OPERATION_NOTSUPPORTED As Integer = (-2504)
         Public Const DTWAIN_ERR_INVALID_PDFTEXTELEMENT As Integer = (-2505)
         Public Const DTWAIN_ERR_SETCAP_FAILED As Integer = (-2506)
+        Public Const DTWAIN_ERR_CAP_INVALIDSTATE As Integer = (-2507)
+        Public Const DTWAIN_ERR_GETCAP_FAILED As Integer = (-2508)
         Public Const DTWAIN_DE_CHKAUTOCAPTURE As Integer = 1
         Public Const DTWAIN_DE_CHKBATTERY As Integer = 2
         Public Const DTWAIN_DE_CHKDEVICEONLINE As Integer = 4
@@ -1893,6 +1903,8 @@ Namespace Dynarithmic
         Public Const DTWAIN_CONSTANT_CAPCODE_MAP As Integer = 80
         Public Const DTWAIN_CONSTANT_ACAP As Integer = 81
         Public Const DTWAIN_CONSTANT_CAPCODE_NOMNEMONIC As Integer = 82
+        Public Const DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT As Integer = 83
+        Public Const DTWAIN_CONSTANT_ERROR_NAMES As Integer = 84
         Public Const DTWAIN_USERRES_START As Integer = 20000
         Public Const DTWAIN_USERRES_MAXSIZE As Integer = 8192
         Public Const DTWAIN_APIHANDLEOK As Integer = 1
@@ -2381,6 +2393,12 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnableFeederDelegate(Source As System.IntPtr, bSet As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnableGetMessageLoopDelegate(Source As System.IntPtr, bSet As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnableGetMessageLoopDetectionDelegate(bEnable As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnableIndicatorDelegate(Source As System.IntPtr, bEnable As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2514,6 +2532,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumCamerasEx2Delegate(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_EnumCapLabelsDelegate(lCapability As Integer) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumCompressionTypesDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -2756,12 +2777,6 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_EnumTwainPrintersDelegate(Source As System.IntPtr, ByRef lpAvailPrinters As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumTwainPrintersArrayDelegate(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_EnumTwainPrintersArrayExDelegate(Source As System.IntPtr) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_EnumTwainPrintersExDelegate(Source As System.IntPtr) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -2866,6 +2881,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetAcquiredImageArrayDelegate(aAcq As System.IntPtr, nWhichAcq As Integer) As System.IntPtr
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetAcquisitionArrayDelegate(Source As System.IntPtr) As System.IntPtr
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetActiveDSMPathDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         
@@ -2949,6 +2967,12 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetCapFromNameDelegate(szName As String) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetCapHelpDelegate(lCapability As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetCapLabelDelegate(lCapability As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCapOperationsDelegate(Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
@@ -3578,6 +3602,12 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_IsFileXferSupportedDelegate(Source As System.IntPtr, lFileType As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_IsGetMessageLoopDetectionOnDelegate() As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_IsGetMessageLoopEnabledDelegate(Source As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_IsIAFieldALastPageSupportedDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3908,10 +3938,10 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_RewindPageDelegate(Source As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_RotateDIBDelegate(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
+        Private Delegate Function DTWAIN_RotateImageDelegate(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_RotateDIBStringDelegate(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
+        Private Delegate Function DTWAIN_RotateImageStringDelegate(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SelectDefaultOCREngineDelegate() As System.IntPtr
@@ -4170,6 +4200,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetLightSourcesDelegate(Source As System.IntPtr, LightSources As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetLogSaveThresholdDelegate(lineCount As System.Int64) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetLoggerCallbackDelegate(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
@@ -4440,6 +4473,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_UnlockMemoryExDelegate(h As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_UpdateCurrentAcquiredImageDelegate(Source As System.IntPtr, hNewDib As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_UseMultipleThreadsDelegate(bSet As Integer) As Integer
@@ -5067,6 +5103,14 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnableFeeder(Source, bSet)
         End Function
         
+        Public Function DTWAIN_EnableGetMessageLoop(Source As System.IntPtr, bSet As Integer) As Integer
+        Return api.DTWAIN_EnableGetMessageLoop(Source, bSet)
+        End Function
+        
+        Public Function DTWAIN_EnableGetMessageLoopDetection(bEnable As Integer) As Integer
+        Return api.DTWAIN_EnableGetMessageLoopDetection(bEnable)
+        End Function
+        
         Public Function DTWAIN_EnableIndicator(Source As System.IntPtr, bEnable As Integer) As Integer
         Return api.DTWAIN_EnableIndicator(Source, bEnable)
         End Function
@@ -5245,6 +5289,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_EnumCamerasEx2(Source As System.IntPtr, nWhichCamera As Integer) As System.IntPtr
         Return api.DTWAIN_EnumCamerasEx2(Source, nWhichCamera)
+        End Function
+        
+        Public Function DTWAIN_EnumCapLabels(lCapability As Integer) As System.IntPtr
+        Return api.DTWAIN_EnumCapLabels(lCapability)
         End Function
         
         Public Function DTWAIN_EnumCompressionTypes(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
@@ -5567,14 +5615,6 @@ Namespace Dynarithmic
         Return api.DTWAIN_EnumTwainPrinters(Source, lpAvailPrinters)
         End Function
         
-        Public Function DTWAIN_EnumTwainPrintersArray(Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
-        Return api.DTWAIN_EnumTwainPrintersArray(Source, pArray)
-        End Function
-        
-        Public Function DTWAIN_EnumTwainPrintersArrayEx(Source As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_EnumTwainPrintersArrayEx(Source)
-        End Function
-        
         Public Function DTWAIN_EnumTwainPrintersEx(Source As System.IntPtr) As System.IntPtr
         Return api.DTWAIN_EnumTwainPrintersEx(Source)
         End Function
@@ -5715,6 +5755,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetAcquiredImageArray(aAcq, nWhichAcq)
         End Function
         
+        Public Function DTWAIN_GetAcquisitionArray(Source As System.IntPtr) As System.IntPtr
+        Return api.DTWAIN_GetAcquisitionArray(Source)
+        End Function
+        
         Public Function DTWAIN_GetActiveDSMPath(<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
         Return api.DTWAIN_GetActiveDSMPath(lpszBuffer, nMaxLen)
         End Function
@@ -5825,6 +5869,14 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetCapFromName(szName As String) As Integer
         Return api.DTWAIN_GetCapFromName(szName)
+        End Function
+        
+        Public Function DTWAIN_GetCapHelp(lCapability As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        Return api.DTWAIN_GetCapHelp(lCapability, lpszOut, nSize)
+        End Function
+        
+        Public Function DTWAIN_GetCapLabel(lCapability As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        Return api.DTWAIN_GetCapLabel(lCapability, lpszOut, nSize)
         End Function
         
         Public Function DTWAIN_GetCapOperations(Source As System.IntPtr, lCapability As Integer, ByRef lpOps As Integer) As Integer
@@ -6663,6 +6715,14 @@ Namespace Dynarithmic
         Return api.DTWAIN_IsFileXferSupported(Source, lFileType)
         End Function
         
+        Public Function DTWAIN_IsGetMessageLoopDetectionOn() As Integer
+        Return api.DTWAIN_IsGetMessageLoopDetectionOn()
+        End Function
+        
+        Public Function DTWAIN_IsGetMessageLoopEnabled(Source As System.IntPtr) As Integer
+        Return api.DTWAIN_IsGetMessageLoopEnabled(Source)
+        End Function
+        
         Public Function DTWAIN_IsIAFieldALastPageSupported(Source As System.IntPtr) As Integer
         Return api.DTWAIN_IsIAFieldALastPageSupported(Source)
         End Function
@@ -7103,12 +7163,12 @@ Namespace Dynarithmic
         Return api.DTWAIN_RewindPage(Source)
         End Function
         
-        Public Function DTWAIN_RotateDIB(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
-        Return api.DTWAIN_RotateDIB(hDib, rotationAngle)
+        Public Function DTWAIN_RotateImage(hDib As System.IntPtr, rotationAngle As System.Double) As System.IntPtr
+        Return api.DTWAIN_RotateImage(hDib, rotationAngle)
         End Function
         
-        Public Function DTWAIN_RotateDIBString(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
-        Return api.DTWAIN_RotateDIBString(hDib, rotationAngle)
+        Public Function DTWAIN_RotateImageString(hDib As System.IntPtr, rotationAngle As String) As System.IntPtr
+        Return api.DTWAIN_RotateImageString(hDib, rotationAngle)
         End Function
         
         Public Function DTWAIN_SelectDefaultOCREngine() As System.IntPtr
@@ -7453,6 +7513,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_SetLightSources(Source As System.IntPtr, LightSources As System.IntPtr) As Integer
         Return api.DTWAIN_SetLightSources(Source, LightSources)
+        End Function
+        
+        Public Function DTWAIN_SetLogSaveThreshold(lineCount As System.Int64) As Integer
+        Return api.DTWAIN_SetLogSaveThreshold(lineCount)
         End Function
         
         Public Function DTWAIN_SetLoggerCallback(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
@@ -7815,6 +7879,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_UnlockMemoryEx(h)
         End Function
         
+        Public Function DTWAIN_UpdateCurrentAcquiredImage(Source As System.IntPtr, hNewDib As System.IntPtr) As Integer
+        Return api.DTWAIN_UpdateCurrentAcquiredImage(Source, hNewDib)
+        End Function
+        
         Public Function DTWAIN_UseMultipleThreads(bSet As Integer) As Integer
         Return api.DTWAIN_UseMultipleThreads(bSet)
         End Function
@@ -7975,6 +8043,8 @@ Namespace Dynarithmic
             Public DTWAIN_EnableBarcodeDetection As DTWAIN_EnableBarcodeDetectionDelegate
             Public DTWAIN_EnableDuplex As DTWAIN_EnableDuplexDelegate
             Public DTWAIN_EnableFeeder As DTWAIN_EnableFeederDelegate
+            Public DTWAIN_EnableGetMessageLoop As DTWAIN_EnableGetMessageLoopDelegate
+            Public DTWAIN_EnableGetMessageLoopDetection As DTWAIN_EnableGetMessageLoopDetectionDelegate
             Public DTWAIN_EnableIndicator As DTWAIN_EnableIndicatorDelegate
             Public DTWAIN_EnableJobFileHandling As DTWAIN_EnableJobFileHandlingDelegate
             Public DTWAIN_EnableLamp As DTWAIN_EnableLampDelegate
@@ -8020,6 +8090,7 @@ Namespace Dynarithmic
             Public DTWAIN_EnumCameras As DTWAIN_EnumCamerasDelegate
             Public DTWAIN_EnumCamerasEx As DTWAIN_EnumCamerasExDelegate
             Public DTWAIN_EnumCamerasEx2 As DTWAIN_EnumCamerasEx2Delegate
+            Public DTWAIN_EnumCapLabels As DTWAIN_EnumCapLabelsDelegate
             Public DTWAIN_EnumCompressionTypes As DTWAIN_EnumCompressionTypesDelegate
             Public DTWAIN_EnumCompressionTypesEx As DTWAIN_EnumCompressionTypesExDelegate
             Public DTWAIN_EnumCompressionTypesEx2 As DTWAIN_EnumCompressionTypesEx2Delegate
@@ -8100,8 +8171,6 @@ Namespace Dynarithmic
             Public DTWAIN_EnumTopCameras As DTWAIN_EnumTopCamerasDelegate
             Public DTWAIN_EnumTopCamerasEx As DTWAIN_EnumTopCamerasExDelegate
             Public DTWAIN_EnumTwainPrinters As DTWAIN_EnumTwainPrintersDelegate
-            Public DTWAIN_EnumTwainPrintersArray As DTWAIN_EnumTwainPrintersArrayDelegate
-            Public DTWAIN_EnumTwainPrintersArrayEx As DTWAIN_EnumTwainPrintersArrayExDelegate
             Public DTWAIN_EnumTwainPrintersEx As DTWAIN_EnumTwainPrintersExDelegate
             Public DTWAIN_EnumXResolutionValues As DTWAIN_EnumXResolutionValuesDelegate
             Public DTWAIN_EnumXResolutionValuesEx As DTWAIN_EnumXResolutionValuesExDelegate
@@ -8137,6 +8206,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetAcquireStripSizes As DTWAIN_GetAcquireStripSizesDelegate
             Public DTWAIN_GetAcquiredImage As DTWAIN_GetAcquiredImageDelegate
             Public DTWAIN_GetAcquiredImageArray As DTWAIN_GetAcquiredImageArrayDelegate
+            Public DTWAIN_GetAcquisitionArray As DTWAIN_GetAcquisitionArrayDelegate
             Public DTWAIN_GetActiveDSMPath As DTWAIN_GetActiveDSMPathDelegate
             Public DTWAIN_GetActiveDSMVersionInfo As DTWAIN_GetActiveDSMVersionInfoDelegate
             Public DTWAIN_GetAlarmVolume As DTWAIN_GetAlarmVolumeDelegate
@@ -8165,6 +8235,8 @@ Namespace Dynarithmic
             Public DTWAIN_GetCapContainerEx2 As DTWAIN_GetCapContainerEx2Delegate
             Public DTWAIN_GetCapDataType As DTWAIN_GetCapDataTypeDelegate
             Public DTWAIN_GetCapFromName As DTWAIN_GetCapFromNameDelegate
+            Public DTWAIN_GetCapHelp As DTWAIN_GetCapHelpDelegate
+            Public DTWAIN_GetCapLabel As DTWAIN_GetCapLabelDelegate
             Public DTWAIN_GetCapOperations As DTWAIN_GetCapOperationsDelegate
             Public DTWAIN_GetCapOperationsEx As DTWAIN_GetCapOperationsExDelegate
             Public DTWAIN_GetCapValues As DTWAIN_GetCapValuesDelegate
@@ -8374,6 +8446,8 @@ Namespace Dynarithmic
             Public DTWAIN_IsFeederSupported As DTWAIN_IsFeederSupportedDelegate
             Public DTWAIN_IsFileSystemSupported As DTWAIN_IsFileSystemSupportedDelegate
             Public DTWAIN_IsFileXferSupported As DTWAIN_IsFileXferSupportedDelegate
+            Public DTWAIN_IsGetMessageLoopDetectionOn As DTWAIN_IsGetMessageLoopDetectionOnDelegate
+            Public DTWAIN_IsGetMessageLoopEnabled As DTWAIN_IsGetMessageLoopEnabledDelegate
             Public DTWAIN_IsIAFieldALastPageSupported As DTWAIN_IsIAFieldALastPageSupportedDelegate
             Public DTWAIN_IsIAFieldALevelSupported As DTWAIN_IsIAFieldALevelSupportedDelegate
             Public DTWAIN_IsIAFieldAPrintFormatSupported As DTWAIN_IsIAFieldAPrintFormatSupportedDelegate
@@ -8484,8 +8558,8 @@ Namespace Dynarithmic
             Public DTWAIN_RemovePDFTextElement As DTWAIN_RemovePDFTextElementDelegate
             Public DTWAIN_ResetPDFTextElement As DTWAIN_ResetPDFTextElementDelegate
             Public DTWAIN_RewindPage As DTWAIN_RewindPageDelegate
-            Public DTWAIN_RotateDIB As DTWAIN_RotateDIBDelegate
-            Public DTWAIN_RotateDIBString As DTWAIN_RotateDIBStringDelegate
+            Public DTWAIN_RotateImage As DTWAIN_RotateImageDelegate
+            Public DTWAIN_RotateImageString As DTWAIN_RotateImageStringDelegate
             Public DTWAIN_SelectDefaultOCREngine As DTWAIN_SelectDefaultOCREngineDelegate
             Public DTWAIN_SelectDefaultSource As DTWAIN_SelectDefaultSourceDelegate
             Public DTWAIN_SelectDefaultSourceWithOpen As DTWAIN_SelectDefaultSourceWithOpenDelegate
@@ -8572,6 +8646,7 @@ Namespace Dynarithmic
             Public DTWAIN_SetLightPathEx As DTWAIN_SetLightPathExDelegate
             Public DTWAIN_SetLightSource As DTWAIN_SetLightSourceDelegate
             Public DTWAIN_SetLightSources As DTWAIN_SetLightSourcesDelegate
+            Public DTWAIN_SetLogSaveThreshold As DTWAIN_SetLogSaveThresholdDelegate
             Public DTWAIN_SetLoggerCallback As DTWAIN_SetLoggerCallbackDelegate
             Public DTWAIN_SetManualDuplexMode As DTWAIN_SetManualDuplexModeDelegate
             Public DTWAIN_SetMaxAcquisitions As DTWAIN_SetMaxAcquisitionsDelegate
@@ -8662,6 +8737,7 @@ Namespace Dynarithmic
             Public DTWAIN_TestGetCap As DTWAIN_TestGetCapDelegate
             Public DTWAIN_UnlockMemory As DTWAIN_UnlockMemoryDelegate
             Public DTWAIN_UnlockMemoryEx As DTWAIN_UnlockMemoryExDelegate
+            Public DTWAIN_UpdateCurrentAcquiredImage As DTWAIN_UpdateCurrentAcquiredImageDelegate
             Public DTWAIN_UseMultipleThreads As DTWAIN_UseMultipleThreadsDelegate
         End Class
     End Class
