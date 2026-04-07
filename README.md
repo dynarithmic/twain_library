@@ -12,19 +12,21 @@
 
 ----
 
-### Table of Contents
+### <u>Table of Contents</u>
 
 [What is the Dynarithmic Twain Library?](https://github.com/dynarithmic/twain_library#ok-so-what-is-this-dynarithmic-twain-library-or-dtwain-as-you-call-it)
 
-[Is the Dynarithmic Twain Library Open Source?](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+[Is the Dynarithmic Twain Library open source?](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
 
 [Preliminaries](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
 
-[How do I setup DTWAIN?](https://github.com/dynarithmic/twain_library#how-do-i-get-set-up-using-dtwain)
+[Testing without a TWAIN device](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-dont-have-a-twain-device-or-scanner-installed-on-my-system--how-do-i-work-with-dtwain)
+
+[How do I setup DTWAIN (library setup, building, and running the examples)?](https://github.com/dynarithmic/twain_library#how-do-i-get-set-up-using-dtwain)
 
 [Code Samples](https://github.com/dynarithmic/twain_library#ok-how-about-a-code-sample)
 
-[Programmers using g++ or clang compilers](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#what-if-i-am-a-c-programmer-but-i-dont-have-visual-c-as-the-compiler-to-use-when-building-an-application--the-visual-c-import-libraries-will-not-work-for-me--i-use-embarcaderogclangmingw-fill-in-with-your-favorite-compiler-or-ide--so-how-do-i-use-the-library)
+[DTWAIN usage for C++ compilers that are not Visual C++](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#what-if-i-am-a-c-programmer-but-i-dont-have-visual-c-as-the-compiler-to-use-when-building-an-application--the-visual-c-import-libraries-will-not-work-for-me--i-use-embarcaderogclangmingw-fill-in-with-your-favorite-compiler-or-ide--so-how-do-i-use-the-library)
 
 [Using DTWAIN in C#, Visual Basic and other computer languages](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#waitwhat-about-other-computer-languages--does-this-library-only-work-for-c-and-c-applications)
 
@@ -32,8 +34,18 @@
 
 [Obtaining the DTWAIN Library source code](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-am-ambitious-and-would-like-to-build-the-libraries-debug-the-internals-etc--how-do-i-get-started)
 
+[DTWAIN and Linux compatibility](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#is-dtwain-compatible-with-linux)
+
+[Acknowledgements](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#acknowledgments)
+
+[Final note for developers](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#final-note-for-developers)
+
+[Reporting Issues](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-do-i-talk-to-if-i-have-further-questions--what-if-i-have-issues-with-the-dtwain-library)
+
+[Who authored the DTWAIN library?](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-authored-the-dynarithmic-twain-library)
+
 ----
-### What is this Dynarithmic TWAIN library? ###
+### What is the Dynarithmic TWAIN library? ###
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
@@ -46,7 +58,7 @@
 (There is nothing wrong with understanding the TWAIN specification, as this will enhance your knowledge of how the DTWAIN library works internally.  However the high-level of abstraction of the TWAIN protocol makes this library simple for even the novice programmer to use).
 
 ----------
-### Is DTWAIN 5.x really Open Source Software (OSS)? 
+### Is DTWAIN 5.x Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
 
