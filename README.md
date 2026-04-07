@@ -6,13 +6,34 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.8.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.8.3** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
 ----
 
-### Ok, so what is this Dynarithmic TWAIN library, or "DTWAIN" as you call it? ###
+### Table of Contents
+
+[What is the Dynarithmic Twain Library?](https://github.com/dynarithmic/twain_library#ok-so-what-is-this-dynarithmic-twain-library-or-dtwain-as-you-call-it)
+
+[Is the Dynarithmic Twain Library Open Source?](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+
+[Preliminaries](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+
+[How do I setup DTWAIN?](https://github.com/dynarithmic/twain_library#how-do-i-get-set-up-using-dtwain)
+
+[Code Samples](https://github.com/dynarithmic/twain_library#ok-how-about-a-code-sample)
+
+[Programmers using g++ or clang compilers](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#what-if-i-am-a-c-programmer-but-i-dont-have-visual-c-as-the-compiler-to-use-when-building-an-application--the-visual-c-import-libraries-will-not-work-for-me--i-use-embarcaderogclangmingw-fill-in-with-your-favorite-compiler-or-ide--so-how-do-i-use-the-library)
+
+[Using DTWAIN in C#, Visual Basic and other computer languages](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#waitwhat-about-other-computer-languages--does-this-library-only-work-for-c-and-c-applications)
+
+[The TWAIN Event Driven programming model](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#programming-issues-with-an-event-driven-system-such-as-twain)
+
+[Obtaining the DTWAIN Library source code](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-am-ambitious-and-would-like-to-build-the-libraries-debug-the-internals-etc--how-do-i-get-started)
+
+----
+### What is this Dynarithmic TWAIN library? ###
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
@@ -372,7 +393,7 @@ For the second item, the [C/C++ dynamic bindings](https://github.com/dynarithmic
 ----------
 
 <a name="otherlanguages"></a>
-### Wait...What about other computer languages?  Does this library only work for C and C++ applications? ###
+### Does this library only work for C and C++ applications? ###
 
 DTWAIN will work with any computer language that can make calls to an external Windows DLL function.  The DTWAIN DLL's export all the API functions with a "C" interface and with the `__stdcall` calling convention (don't worry if you don't know about calling conventions -- basically all the Windows DLL's in your Windows installation have these properties, so DTWAIN is really no different than those other DLL's in terms of how you would call the exported functions).  
 
@@ -477,7 +498,7 @@ Languages such as C, C++, C#, can use callbacks (sometimes referred to as *deleg
 ----------
 
 
-### I am ambitious and would like to build the libraries, debug the internals, etc.  How do I get started? ###
+### Obtaining the DTWAIN Library source code ###
 
 The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library_source/tree/main). 
 
