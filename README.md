@@ -20,29 +20,29 @@
 
 [Preliminaries](#anchor-preliminaries)
 
-[Testing without a TWAIN device](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-dont-have-a-twain-device-or-scanner-installed-on-my-system--how-do-i-work-with-dtwain)
+[Testing without a TWAIN device](#anchor-no-device)
 
-[How do I setup DTWAIN (library setup, building the application, and running the application)?](https://github.com/dynarithmic/twain_library#how-do-i-get-set-up-using-dtwain)
+[How do I setup DTWAIN (library setup, building the application, and running the application)?](#anchor-dtwain-setup)
 
-[Simple code samples](https://github.com/dynarithmic/twain_library#ok-how-about-a-code-sample)
+[Simple code samples](#anchor-code-samples)
 
-[DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#what-if-i-am-a-c-programmer-but-i-dont-have-visual-c-as-the-compiler-to-use-when-building-an-application--the-visual-c-import-libraries-will-not-work-for-me--i-use-embarcaderogclangmingw-fill-in-with-your-favorite-compiler-or-ide--so-how-do-i-use-the-library)
+[DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](#alternatecompilers)
 
-[Using DTWAIN in C#, Visual Basic and other computer languages](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#waitwhat-about-other-computer-languages--does-this-library-only-work-for-c-and-c-applications)
+[Using DTWAIN in C#, Visual Basic and other computer languages](#otherlanguages)
 
-[The TWAIN Event Driven programming model](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#programming-issues-with-an-event-driven-system-such-as-twain)
+[The TWAIN Event Driven programming model](#anchor-event-driven)
 
-[Obtaining the DTWAIN Library source code](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-am-ambitious-and-would-like-to-build-the-libraries-debug-the-internals-etc--how-do-i-get-started)
+[Obtaining the DTWAIN Library source code](#anchor-source-code)
 
-[DTWAIN and Linux compatibility](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#is-dtwain-compatible-with-linux)
+[DTWAIN and Linux compatibility](#anchor-linux)
 
-[Acknowledgements](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#acknowledgments)
+[Acknowledgments](#anchor-acknowldegements)
 
-[Final note for developers](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#final-note-for-developers)
+[Final note for developers](#anchor-final-note)
 
-[Reporting Issues](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-do-i-talk-to-if-i-have-further-questions--what-if-i-have-issues-with-the-dtwain-library)
+[Reporting Issues](#anchor-issues)
 
-[Who authored the DTWAIN library?](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-authored-the-dynarithmic-twain-library)
+[Who authored the DTWAIN library?](#anchor-author)
 
 ----
 ----
@@ -85,12 +85,13 @@ Since most Windows systems within the past 8 years has the Visual C++ runtime al
 
 ----------
 ----------
+<a id="anchor-no-device"></a>
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
 There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_virtual-drivers).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
 
 ----------
 ----
-
+<a id="anchor-dtwain-setup"></a>
 ### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
 **<u>Building the DTWAIN application</u>**
@@ -209,6 +210,7 @@ More detailed instructions on adding your own resource file can be found <a href
 
 ----------
 ----------
+<a id="anchor-code-samples"></a>
 ### Simple code samples
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
@@ -449,6 +451,7 @@ For Java, it is recommended to look through the numerous demo programs in the [J
 
 ----------
 ----------
+<a name="anchor-event-driven"></a>
 ### Programming issues with an event driven system such as TWAIN.
 
 Since TWAIN is an event-driven system, it is advantageous for whatever language you use to be able to support "callback" functions, i.e. functions that can be called during the TWAIN acquisition / scanning process.  There are a lot of events that occur during the acquisition process that you may want to take advantage of (for example, page about to be scanned, page scanned successfully, immediate access to the acquired image, etc.), and having the ability to capture these events will give your application the most flexibility.  
@@ -517,14 +520,14 @@ Languages such as C, C++, C#, can use callbacks (sometimes referred to as *deleg
 
 ----------
 ----------
-
+<a name="anchor-source-code"></a>
 ### Obtaining the DTWAIN Library source code ###
 
 The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library_source/tree/main). 
 
 ----------
 ----------
-
+<a name="anchor-linux"></a>
 ### Is DTWAIN compatible with Linux? ###
 Currently, there is no official support for Linux, but things are changing rapidly.
 
@@ -561,7 +564,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 ----------
 ----------
 ### Acknowledgments ###
-
+<a name="anchor-acknowldegements"></a>
 * Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
 
   * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
@@ -575,7 +578,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 ----------
 ----------
 ### Final note for developers
-
+<a name="anchor-final-note"></a>
 We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came across a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
 
 Given this, the secondary goal of making DTWAIN open source is for you to contribute your fixes to the current DTWAIN code if you come across a device that doesn't work properly with DTWAIN.  There are literally thousands of TWAIN enabled devices out there, old and new, some manufacturers may have discontinued the device model, or maybe even the device manufacturer has gone out-of-business.  
@@ -584,9 +587,9 @@ Thus, the nature of "fixing" DTWAIN to work with a device that has issues is not
 
 You can download the source code [here](https://github.com/dynarithmic/twain_library_source/tree/main), follow the directions, and thus debug a very simple program that utilizes the device you have in-house.  Note that you should be familiar with C++, as the base library is written in this language.
 
-
 ----------
 ----------
+<a name="anchor-issues"></a>
 ### Who do I talk to if I have further questions?  What if I have issues with the DTWAIN Library?
 
 All questions concerning usage, possible bugs, etc. of the Dynarithmic TWAIN Library must have an issue created on the [Issue page](https://github.com/dynarithmic/twain_library/issues) so as to allow further investigation.
@@ -595,6 +598,7 @@ Note that issues will **not** be addressed at **dynarithmic.com** (website or em
 
 --------
 --------
+<a name="anchor-author"></a>
 ### Who authored the Dynarithmic TWAIN Library?
 
 The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
