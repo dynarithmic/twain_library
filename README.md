@@ -11,8 +11,42 @@
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
 ----
+----
+### <u>Table of Contents</u>
 
-### Ok, so what is this Dynarithmic TWAIN library, or "DTWAIN" as you call it? ###
+[What is the Dynarithmic Twain Library?](https://github.com/dynarithmic/twain_library#ok-so-what-is-this-dynarithmic-twain-library-or-dtwain-as-you-call-it)
+
+[Is the Dynarithmic Twain Library open source?](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+
+[Preliminaries](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+
+[Testing without a TWAIN device](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-dont-have-a-twain-device-or-scanner-installed-on-my-system--how-do-i-work-with-dtwain)
+
+[How do I setup DTWAIN (library setup, building the application, and running the application)?](https://github.com/dynarithmic/twain_library#how-do-i-get-set-up-using-dtwain)
+
+[Simple code samples](https://github.com/dynarithmic/twain_library#ok-how-about-a-code-sample)
+
+[DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#what-if-i-am-a-c-programmer-but-i-dont-have-visual-c-as-the-compiler-to-use-when-building-an-application--the-visual-c-import-libraries-will-not-work-for-me--i-use-embarcaderogclangmingw-fill-in-with-your-favorite-compiler-or-ide--so-how-do-i-use-the-library)
+
+[Using DTWAIN in C#, Visual Basic and other computer languages](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#waitwhat-about-other-computer-languages--does-this-library-only-work-for-c-and-c-applications)
+
+[The TWAIN Event Driven programming model](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#programming-issues-with-an-event-driven-system-such-as-twain)
+
+[Obtaining the DTWAIN Library source code](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-am-ambitious-and-would-like-to-build-the-libraries-debug-the-internals-etc--how-do-i-get-started)
+
+[DTWAIN and Linux compatibility](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#is-dtwain-compatible-with-linux)
+
+[Acknowledgements](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#acknowledgments)
+
+[Final note for developers](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#final-note-for-developers)
+
+[Reporting Issues](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-do-i-talk-to-if-i-have-further-questions--what-if-i-have-issues-with-the-dtwain-library)
+
+[Who authored the DTWAIN library?](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#who-authored-the-dynarithmic-twain-library)
+
+----
+----
+### What is the Dynarithmic TWAIN library? ###
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
 
@@ -25,14 +59,15 @@
 (There is nothing wrong with understanding the TWAIN specification, as this will enhance your knowledge of how the DTWAIN library works internally.  However the high-level of abstraction of the TWAIN protocol makes this library simple for even the novice programmer to use).
 
 ----------
-### Is DTWAIN 5.x really Open Source Software (OSS)? 
+----------
+### Is DTWAIN 5.x Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
 
 * Please note -- since DTWAIN prior to version 5.0 used source code in some modules that could not be released to the general public due to licensing issues, we had to revamp these portions of the codebase so as to allow DTWAIN to become an open source library.  We have made all strives to make sure that these changes to DTWAIN will not cause issues, but as most of you know, bugs can exist.  If bugs are found, we will be addressing them in a short manner.
 
 ----------
-
+----------
 ### Preliminaries
 
 DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
@@ -46,16 +81,16 @@ The "standard" versions of the DTWAIN library ("standard" meaning the DLL's foun
 Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
 ----------
+----------
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
 There are sample virtual TWAIN devices [found here](https://github.com/dynarithmic/twain_virtual-drivers).  Once installed, these devices will be available for selection for acquiring images, similar to an installed scanner.
 
 ----------
 ----
 
-### How do I get set up using DTWAIN? ###
+### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
 **<u>Building the DTWAIN application</u>**
-
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
 
@@ -170,7 +205,8 @@ If you want to use a different resource file or even add your own language resou
 More detailed instructions on adding your own resource file can be found <a href="https://github.com/dynarithmic/twain_library/tree/master/additional_language_resources" target="_blank">here</a>.
 
 ----------
-### Ok, how about a code sample?
+----------
+### Simple code samples
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
     #include <iostream>
@@ -356,11 +392,12 @@ In general, DTWAIN can set or get any capability, including custom capabilities 
 There are [other demo C and C++ programs](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) that you can use to more advanced features of DTWAIN.
 
 ----------
+----------
 
 <a name="alternatecompilers"></a>
-### What if I am a C++ programmer, but I don't have Visual C++ as the compiler to use when building an application?  The Visual C++ import libraries will not work for me.  I use Embarcadero/g++/clang/MingW (fill in with your favorite compiler or IDE).  So how do I use the library?
+### DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.
 
-You can do one of two things:
+For C/C++ compilers that are not in the Microsoft Visual C++ family such as g++, mingw, clang, and others, and thus cannot use the provided Visual C++ import library files directly (or easily) when building your application, you can do one of two things:
 
 1. Attempt to convert the .lib files mentioned above to your compiler's version of an import library, or
 2. Use dynamic library loading using the Windows API LoadLibrary, GetProcAddress, and FreeLibrary calls.  Usage of this method requires no import libraries to be used (which makes this a better choice).
@@ -370,9 +407,10 @@ For the first item, some compilers have external tools that allow you to use Vis
 For the second item, the [C/C++ dynamic bindings](https://github.com/dynarithmic/twain_library/blob/master/programming_language_bindings/C_CPP_DynamicLoad) should be used that easily facilitate usage of LoadLibrary, GetProcAddress, etc. without your application having to do the tedious and error-prone setup of function pointers, parameter types, return types, etc.  
 
 ----------
+----------
 
 <a name="otherlanguages"></a>
-### Wait...What about other computer languages?  Does this library only work for C and C++ applications? ###
+### Using DTWAIN in C#, Visual Basic and other computer languages ###
 
 DTWAIN will work with any computer language that can make calls to an external Windows DLL function.  The DTWAIN DLL's export all the API functions with a "C" interface and with the `__stdcall` calling convention (don't worry if you don't know about calling conventions -- basically all the Windows DLL's in your Windows installation have these properties, so DTWAIN is really no different than those other DLL's in terms of how you would call the exported functions).  
 
@@ -407,7 +445,7 @@ A full Visual Basic .NET demo can be found <a href="https://github.com/dynarithm
 For Java, it is recommended to look through the numerous demo programs in the [Java interface to DTWAIN repository](https://github.com/dynarithmic/twain_library-java).
 
 ----------
-
+----------
 ### Programming issues with an event driven system such as TWAIN.
 
 Since TWAIN is an event-driven system, it is advantageous for whatever language you use to be able to support "callback" functions, i.e. functions that can be called during the TWAIN acquisition / scanning process.  There are a lot of events that occur during the acquisition process that you may want to take advantage of (for example, page about to be scanned, page scanned successfully, immediate access to the acquired image, etc.), and having the ability to capture these events will give your application the most flexibility.  
@@ -475,14 +513,14 @@ Here is an example C++ program that puts a page number on the acquired image fil
 Languages such as C, C++, C#, can use callbacks (sometimes referred to as *delegates* in the .NET world) to allow such functionality.  Other languages also have the capability to set callbacks.  Please refer to the documentation for the language you use to see if callback functionality exists (if you can get the **DTWAIN_SetCallback** or **DTWAIN_SetCallback64** to work for you, then you're not going to have any issues).
 
 ----------
+----------
 
-
-### I am ambitious and would like to build the libraries, debug the internals, etc.  How do I get started? ###
+### Obtaining the DTWAIN Library source code ###
 
 The source code and instructions for building DTWAIN are found [here](https://github.com/dynarithmic/twain_library_source/tree/main). 
 
 ----------
-
+----------
 
 ### Is DTWAIN compatible with Linux? ###
 Currently, there is no official support for Linux, but things are changing rapidly.
@@ -506,17 +544,19 @@ Once the DSM is built and installed, the build of DTWAIN can be done using the f
 This is more or less a proof-of-concept.  We will keep you posted on any further progress.
 
 ----------
+----------
 ### Is there a .NET wrapper for DTWAIN? ###
 
 We have language bindings (pinvoke's) for C# and Visual Basic.  However we currently lack a true .NET component (just did not have the time to create one).  If anyone out there is willing to create such a .NET component, we are willing to add the component to this repository once vetted and well-tested (and of course, give full credit to the author(s)).
 
+----------
 ----------
 ### Is there a C++ class wrapper for DTWAIN? ###
 
 If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/C_C%2B%2B/cpp_wrapper_lib" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
 
 ----------
-
+----------
 ### Acknowledgments ###
 
 * Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
@@ -530,7 +570,7 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 * All other raw image processing, plus the interface to the TWAIN system itself, is done without third-party libraries or third-party source code.  
 
 ----------
-
+----------
 ### Final note for developers
 
 We expect DTWAIN to work flawlessly with almost every TWAIN-enabled device.  However, there can be issues that may happen with devices that either do not behave properly, or exercise DTWAIN in a way that's unexpected (for example, we came across a SamSung TWAIN driver for their phone that didn't follow TWAIN compliance, and thus caused issue with DTWAIN).  
@@ -543,7 +583,7 @@ You can download the source code [here](https://github.com/dynarithmic/twain_lib
 
 
 ----------
-
+----------
 ### Who do I talk to if I have further questions?  What if I have issues with the DTWAIN Library?
 
 All questions concerning usage, possible bugs, etc. of the Dynarithmic TWAIN Library must have an issue created on the [Issue page](https://github.com/dynarithmic/twain_library/issues) so as to allow further investigation.
@@ -551,7 +591,7 @@ All questions concerning usage, possible bugs, etc. of the Dynarithmic TWAIN Lib
 Note that issues will **not** be addressed at **dynarithmic.com** (website or email domain), and instead all issues must be directed to the Github issues page noted above.
 
 --------
-
+--------
 ### Who authored the Dynarithmic TWAIN Library?
 
 The Dynarithmic TWAIN Library's principal developer is Paul McKenzie, and can be reached at [paulm@dynarithmic.com](mailto::paulm@dynarithmic.com).  
