@@ -14,11 +14,11 @@
 ----
 ### <u>Table of Contents</u>
 
-[What is the Dynarithmic Twain Library?](https://github.com/dynarithmic/twain_library#ok-so-what-is-this-dynarithmic-twain-library-or-dtwain-as-you-call-it)
+[What is the Dynarithmic Twain Library?](#anchor-what-is-dtwain)
 
-[Is the Dynarithmic Twain Library open source?](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+[Is the Dynarithmic Twain Library open source?](#anchor-is-dtwain_oss)
 
-[Preliminaries](https://github.com/dynarithmic/twain_library#is-dtwain-5x-really-open-source-software-oss)
+[Preliminaries](#anchor-preliminaries)
 
 [Testing without a TWAIN device](https://github.com/dynarithmic/twain_library?tab=readme-ov-file#i-dont-have-a-twain-device-or-scanner-installed-on-my-system--how-do-i-work-with-dtwain)
 
@@ -46,6 +46,7 @@
 
 ----
 ----
+<a id="anchor-what-is-dtwain"></a>
 ### What is the Dynarithmic TWAIN library? ###
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  
@@ -60,6 +61,7 @@
 
 ----------
 ----------
+<a id="anchor-is-dtwain_oss"></a>
 ### Is DTWAIN 5.x Open Source Software (OSS)? 
  
 * The Dynarithmic® TWAIN Library has been developed over the course of 20 years, so this is a very mature software component.  We have offered this library as a closed source, commercial product over those years, however we have decided to make this library open source under the Apache 2.0 license.    
@@ -68,6 +70,7 @@
 
 ----------
 ----------
+<a id="anchor-preliminaries"></a>
 ### Preliminaries
 
 DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit operating systems. Since the base libraries are built to support the Visual C++ runtime library, version 2015 and above, the minimum version of the Visual C++ runtime that is supported is **Visual C++ 2015**.  
