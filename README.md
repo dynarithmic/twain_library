@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.8.3** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.9.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -567,7 +567,6 @@ If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do
 <a name="anchor-acknowldegements"></a>
 * Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
 
-  * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
   * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
   * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
   
