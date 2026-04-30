@@ -320,6 +320,7 @@
 /* DTWAIN Special Failure codes */
 #define DTWAIN_FAILURE1       (-1)
 #define DTWAIN_FAILURE2       (-2)
+#define DTWAIN_FAILURE3       0xFFFFFFFFU
 
 /* Other miscellaneous constants */
 #define DTWAIN_DELETEALL      (-1)

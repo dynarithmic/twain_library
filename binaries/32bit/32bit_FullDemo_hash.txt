@@ -1,5 +1,5 @@
-﻿MD5 hash of "32bit_FullDemo.zip" (16 bytes) = 3456fd698c8f013ae134b384fb455f63
-﻿SHA1 hash of "32bit_FullDemo.zip" (20 bytes) = 2911cf8e693159e24afdb39b30c0f0934ebc5b9c
-﻿SHA256 hash of "32bit_FullDemo.zip" (32 bytes) = 8735d02d82d1a632423b1fea83854c53c7b233819b51b99240b6acaa38a1fccb
-﻿SHA512 hash of "32bit_FullDemo.zip" (64 bytes) = fb5f73f549f6ff92657936d73bde128cb11ac0edcb9e0e7eacfb93905a178ac6eb91702a3f3b60e6a6e3e6d889ab2dfa8fab63dfb0b0f67aaa55804a32c79d2d
+﻿MD5 hash of "32bit_FullDemo.zip" (16 bytes) = 4a7aed0186d648a207536e9a1531e7a4
+﻿SHA1 hash of "32bit_FullDemo.zip" (20 bytes) = daf2a8eb090c38a31f1b9e524c07608ce7b37141
+﻿SHA256 hash of "32bit_FullDemo.zip" (32 bytes) = 4e5587efa427026018e66f7988be16a154588a1a0cecdd710b62f692c1a9aa71
+﻿SHA512 hash of "32bit_FullDemo.zip" (64 bytes) = 723aa9e28de47c8deda0568abbfb1b4447f96b3b2a271c757f7afbd3a8219ba8db4006e396564f229d9f48f99a86c39d3b9a0a522b076d15e84c1d0640938a88
 
