@@ -300,6 +300,7 @@ local dtwain_constants = {}
    dtwain_constants.DTWAIN_USEMEMFILE = 8
    dtwain_constants.DTWAIN_FAILURE1 = (-1)
    dtwain_constants.DTWAIN_FAILURE2 = (-2)
+   dtwain_constants.DTWAIN_FAILURE3 = 0xFFFFFFFF
    dtwain_constants.DTWAIN_DELETEALL = (-1)
    dtwain_constants.DTWAIN_TN_ACQUIREDONE = 1000
    dtwain_constants.DTWAIN_TN_ACQUIREFAILED = 1001

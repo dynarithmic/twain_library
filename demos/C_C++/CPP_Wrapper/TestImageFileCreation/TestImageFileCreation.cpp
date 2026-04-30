@@ -133,27 +133,35 @@ void TestMultiOrSingleFile(std::string outDir, bool bTestSingle)
     // turn off the user interface
     auto& uiOpts = ac.get_userinterface_options().show(false);
 
-    // loop through all of the available file types
-    for (auto& fileInfo : vectFileTypes)
-    {
-        // get the image type that will be saved
-        auto fileType = fileInfo.get_type();
+	// loop through the color types
+	const char* subdirs[] = { "BW\\", "GRAY\\", "COLOR\\" };
+	color_value::value_type colorTypes[] = { color_value::bw, color_value::gray, color_value::rgb };
+	for (int i = 0; i < 3; ++i)
+	{
+		gOpts.set_pixeltype(colorTypes[i]);
 
-        // Create the base of the file name
-        // we use the first extension of an image file can
-        // have multiple extensions
-        std::string extToUse = fileInfo.get_extensions().front();
+		// loop through all of the available file types
+		for (auto& fileInfo : vectFileTypes)
+		{
+			// get the image type that will be saved
+			auto fileType = fileInfo.get_type();
 
-        // now create the file name
-        std::string fileName = filePrefix + fileInfo.get_name() + "." + extToUse;
+			// Create the base of the file name
+			// we use the first extension of an image file can
+			// have multiple extensions
+			std::string extToUse = fileInfo.get_extensions().front();
 
-        // Set the name and type
-        fc.set_name(fileName).set_type(fileType);
+			// now create the file name
+			std::string fileName = filePrefix + subdirs[i] + fileInfo.get_name() + "." + extToUse;
 
-        // Start the acquisition
-        Source.acquire();
+			// Set the name and type
+			fc.set_name(fileName).set_type(fileType);
 
-        // Output information
-        std::cout << fileInfo.get_name() << " " << fileName << "\n";
-    }
+			// Start the acquisition
+			Source.acquire();
+
+			// Output information
+			std::cout << fileInfo.get_name() << " " << fileName << "\n";
+		}
+	}
 }

@@ -428,6 +428,7 @@ module TwainAPI =
     let public DTWAIN_USEMEMFILE = 8
     let public DTWAIN_FAILURE1 = (-1)
     let public DTWAIN_FAILURE2 = (-2)
+    let public DTWAIN_FAILURE3 = 0xFFFFFFFF
     let public DTWAIN_DELETEALL = (-1)
     let public DTWAIN_TN_ACQUIREDONE = 1000
     let public DTWAIN_TN_ACQUIREFAILED = 1001
@@ -1994,25 +1995,37 @@ module TwainAPI =
     type DTWAIN_ArrayCreateCopyDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayCreateFromANSIStringsDelegate = delegate of [<MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)>] pcArray: string[] * LONG -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayCreateFromCapDelegate = delegate of DTWAIN_SOURCE * LONG * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_ArrayCreateFromLong64sDelegate = delegate of Int64 byref * LONG -> DTWAIN_ARRAY
+    type DTWAIN_ArrayCreateFromFloatsDelegate = delegate of double[] * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_ArrayCreateFromLongsDelegate = delegate of int byref * LONG -> DTWAIN_ARRAY
+    type DTWAIN_ArrayCreateFromLong64sDelegate = delegate of int64[] * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_ArrayCreateFromRealsDelegate = delegate of DTWAIN_FLOAT byref * LONG -> DTWAIN_ARRAY
+    type DTWAIN_ArrayCreateFromLongsDelegate = delegate of int[] * LONG -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayCreateFromStringsDelegate = delegate of [<MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPTStr)>] pcArray: string[] * LONG -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayCreateFromWideStringsDelegate = delegate of [<MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)>] pcArray: string[] * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayDestroyDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayDestroyAllDelegate = delegate of unit -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayDestroyFramesDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_ArrayDumpToLogDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_BOOL
+    type DTWAIN_ArrayDumpToLogDelegate = delegate of DTWAIN_ARRAY * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayFindDelegate = delegate of DTWAIN_ARRAY * LPVOID -> LONG
@@ -2060,6 +2073,9 @@ module TwainAPI =
     type DTWAIN_ArrayGetAtANSIStringDelegate = delegate of DTWAIN_ARRAY * LONG * System.Text.StringBuilder -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayGetAtANSIStringPtrDelegate = delegate of DTWAIN_ARRAY * LONG -> nativeint
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayGetAtFloatDelegate = delegate of DTWAIN_ARRAY * LONG * DTWAIN_FLOAT byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -2098,8 +2114,14 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_ArrayGetAtStringDelegate = delegate of DTWAIN_ARRAY * LONG * System.Text.StringBuilder -> DTWAIN_BOOL
 
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayGetAtStringPtrDelegate = delegate of DTWAIN_ARRAY * LONG -> nativeint
+
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_ArrayGetAtWideStringDelegate = delegate of DTWAIN_ARRAY * LONG * System.Text.StringBuilder -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayGetAtWideStringPtrDelegate = delegate of DTWAIN_ARRAY * LONG -> nativeint
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayGetBufferDelegate = delegate of DTWAIN_ARRAY * LONG -> LPVOID
@@ -2184,6 +2206,9 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_ArrayInsertAtWideStringNDelegate = delegate of DTWAIN_ARRAY * LONG * string * LONG -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayIsValidDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayRemoveAllDelegate = delegate of DTWAIN_ARRAY -> DTWAIN_BOOL
@@ -2834,16 +2859,19 @@ module TwainAPI =
     type DTWAIN_GetAllSourceDibsDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_GetAllSourceInfoDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder * LONG * LONG -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetAppInfoDelegate = delegate of System.Text.StringBuilder * System.Text.StringBuilder * System.Text.StringBuilder * System.Text.StringBuilder -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetAuthorDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetBarcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
@@ -2852,7 +2880,7 @@ module TwainAPI =
     type DTWAIN_GetBarcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetBatteryMinutesDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
@@ -3134,7 +3162,10 @@ module TwainAPI =
     type DTWAIN_GetMaxAcquisitionsDelegate = delegate of DTWAIN_SOURCE -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetMaxBuffersDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
+    type DTWAIN_GetMaxBuffersDelegate = delegate of DTWAIN_SOURCE * DWORD byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetMaxBuffersExDelegate = delegate of DTWAIN_SOURCE -> DWORD
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetMaxPagesToAcquireDelegate = delegate of DTWAIN_SOURCE -> LONG
@@ -3224,10 +3255,10 @@ module TwainAPI =
     type DTWAIN_GetPaperSizeNameDelegate = delegate of LONG * System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetPatchcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY byref -> DTWAIN_BOOL
@@ -3236,7 +3267,7 @@ module TwainAPI =
     type DTWAIN_GetPatchcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
+    type DTWAIN_GetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetPixelFlavorDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
@@ -3251,10 +3282,10 @@ module TwainAPI =
     type DTWAIN_GetPrinterExDelegate = delegate of DTWAIN_SOURCE * DTWAIN_BOOL -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPrinterStartNumberDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
+    type DTWAIN_GetPrinterStartNumberDelegate = delegate of DTWAIN_SOURCE * DWORD byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetPrinterStartNumberExDelegate = delegate of DTWAIN_SOURCE -> LONG
+    type DTWAIN_GetPrinterStartNumberExDelegate = delegate of DTWAIN_SOURCE -> DWORD
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetPrinterStringModeDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
@@ -3971,10 +4002,10 @@ module TwainAPI =
     type DTWAIN_SetAvailablePrintersArrayDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetBarcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetBarcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetBarcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
@@ -3983,7 +4014,7 @@ module TwainAPI =
     type DTWAIN_SetBarcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetBarcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetBitDepthDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
@@ -4142,7 +4173,7 @@ module TwainAPI =
     type DTWAIN_SetMaxAcquisitionsDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetMaxBuffersDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetMaxBuffersDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetMaxRetryAttemptsDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
@@ -4235,10 +4266,10 @@ module TwainAPI =
     type DTWAIN_SetPaperSizeDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeMaxPrioritiesDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeMaxRetriesDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetPatchcodePrioritiesDelegate = delegate of DTWAIN_SOURCE * DTWAIN_ARRAY -> DTWAIN_BOOL
@@ -4247,7 +4278,7 @@ module TwainAPI =
     type DTWAIN_SetPatchcodeSearchModeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetPixelFlavorDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
@@ -4268,7 +4299,7 @@ module TwainAPI =
     type DTWAIN_SetPrinterExDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetPrinterStartNumberDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
+    type DTWAIN_SetPrinterStartNumberDelegate = delegate of DTWAIN_SOURCE * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetPrinterStringModeDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
@@ -4448,11 +4479,15 @@ module TwainAPI =
     let private ArrayCopy = lazy (DynamicDll.Bind "DTWAIN_ArrayCopy" : DTWAIN_ArrayCopyDelegate)
     let private ArrayCreate = lazy (DynamicDll.Bind "DTWAIN_ArrayCreate" : DTWAIN_ArrayCreateDelegate)
     let private ArrayCreateCopy = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateCopy" : DTWAIN_ArrayCreateCopyDelegate)
+    let private ArrayCreateFromANSIStrings = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromANSIStrings" : DTWAIN_ArrayCreateFromANSIStringsDelegate)
     let private ArrayCreateFromCap = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromCap" : DTWAIN_ArrayCreateFromCapDelegate)
+    let private ArrayCreateFromFloats = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromFloats" : DTWAIN_ArrayCreateFromFloatsDelegate)
     let private ArrayCreateFromLong64s = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromLong64s" : DTWAIN_ArrayCreateFromLong64sDelegate)
     let private ArrayCreateFromLongs = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromLongs" : DTWAIN_ArrayCreateFromLongsDelegate)
-    let private ArrayCreateFromReals = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromReals" : DTWAIN_ArrayCreateFromRealsDelegate)
+    let private ArrayCreateFromStrings = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromStrings" : DTWAIN_ArrayCreateFromStringsDelegate)
+    let private ArrayCreateFromWideStrings = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromWideStrings" : DTWAIN_ArrayCreateFromWideStringsDelegate)
     let private ArrayDestroy = lazy (DynamicDll.Bind "DTWAIN_ArrayDestroy" : DTWAIN_ArrayDestroyDelegate)
+    let private ArrayDestroyAll = lazy (DynamicDll.Bind "DTWAIN_ArrayDestroyAll" : DTWAIN_ArrayDestroyAllDelegate)
     let private ArrayDestroyFrames = lazy (DynamicDll.Bind "DTWAIN_ArrayDestroyFrames" : DTWAIN_ArrayDestroyFramesDelegate)
     let private ArrayDumpToLog = lazy (DynamicDll.Bind "DTWAIN_ArrayDumpToLog" : DTWAIN_ArrayDumpToLogDelegate)
     let private ArrayFind = lazy (DynamicDll.Bind "DTWAIN_ArrayFind" : DTWAIN_ArrayFindDelegate)
@@ -4470,6 +4505,7 @@ module TwainAPI =
     let private ArrayFloatToWideString = lazy (DynamicDll.Bind "DTWAIN_ArrayFloatToWideString" : DTWAIN_ArrayFloatToWideStringDelegate)
     let private ArrayGetAt = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAt" : DTWAIN_ArrayGetAtDelegate)
     let private ArrayGetAtANSIString = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtANSIString" : DTWAIN_ArrayGetAtANSIStringDelegate)
+    let private ArrayGetAtANSIStringPtr = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtANSIStringPtr" : DTWAIN_ArrayGetAtANSIStringPtrDelegate)
     let private ArrayGetAtFloat = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtFloat" : DTWAIN_ArrayGetAtFloatDelegate)
     let private ArrayGetAtFloatEx = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtFloatEx" : DTWAIN_ArrayGetAtFloatExDelegate)
     let private ArrayGetAtFloatString = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtFloatString" : DTWAIN_ArrayGetAtFloatStringDelegate)
@@ -4483,7 +4519,9 @@ module TwainAPI =
     let private ArrayGetAtSource = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtSource" : DTWAIN_ArrayGetAtSourceDelegate)
     let private ArrayGetAtSourceEx = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtSourceEx" : DTWAIN_ArrayGetAtSourceExDelegate)
     let private ArrayGetAtString = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtString" : DTWAIN_ArrayGetAtStringDelegate)
+    let private ArrayGetAtStringPtr = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtStringPtr" : DTWAIN_ArrayGetAtStringPtrDelegate)
     let private ArrayGetAtWideString = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtWideString" : DTWAIN_ArrayGetAtWideStringDelegate)
+    let private ArrayGetAtWideStringPtr = lazy (DynamicDll.Bind "DTWAIN_ArrayGetAtWideStringPtr" : DTWAIN_ArrayGetAtWideStringPtrDelegate)
     let private ArrayGetBuffer = lazy (DynamicDll.Bind "DTWAIN_ArrayGetBuffer" : DTWAIN_ArrayGetBufferDelegate)
     let private ArrayGetCapValues = lazy (DynamicDll.Bind "DTWAIN_ArrayGetCapValues" : DTWAIN_ArrayGetCapValuesDelegate)
     let private ArrayGetCapValuesEx = lazy (DynamicDll.Bind "DTWAIN_ArrayGetCapValuesEx" : DTWAIN_ArrayGetCapValuesExDelegate)
@@ -4512,6 +4550,7 @@ module TwainAPI =
     let private ArrayInsertAtStringN = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAtStringN" : DTWAIN_ArrayInsertAtStringNDelegate)
     let private ArrayInsertAtWideString = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAtWideString" : DTWAIN_ArrayInsertAtWideStringDelegate)
     let private ArrayInsertAtWideStringN = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAtWideStringN" : DTWAIN_ArrayInsertAtWideStringNDelegate)
+    let private ArrayIsValid = lazy (DynamicDll.Bind "DTWAIN_ArrayIsValid" : DTWAIN_ArrayIsValidDelegate)
     let private ArrayRemoveAll = lazy (DynamicDll.Bind "DTWAIN_ArrayRemoveAll" : DTWAIN_ArrayRemoveAllDelegate)
     let private ArrayRemoveAt = lazy (DynamicDll.Bind "DTWAIN_ArrayRemoveAt" : DTWAIN_ArrayRemoveAtDelegate)
     let private ArrayRemoveAtN = lazy (DynamicDll.Bind "DTWAIN_ArrayRemoveAtN" : DTWAIN_ArrayRemoveAtNDelegate)
@@ -4728,6 +4767,7 @@ module TwainAPI =
     let private GetActiveDSMVersionInfo = lazy (DynamicDll.Bind "DTWAIN_GetActiveDSMVersionInfo" : DTWAIN_GetActiveDSMVersionInfoDelegate)
     let private GetAlarmVolume = lazy (DynamicDll.Bind "DTWAIN_GetAlarmVolume" : DTWAIN_GetAlarmVolumeDelegate)
     let private GetAllSourceDibs = lazy (DynamicDll.Bind "DTWAIN_GetAllSourceDibs" : DTWAIN_GetAllSourceDibsDelegate)
+    let private GetAllSourceInfo = lazy (DynamicDll.Bind "DTWAIN_GetAllSourceInfo" : DTWAIN_GetAllSourceInfoDelegate)
     let private GetAppInfo = lazy (DynamicDll.Bind "DTWAIN_GetAppInfo" : DTWAIN_GetAppInfoDelegate)
     let private GetAuthor = lazy (DynamicDll.Bind "DTWAIN_GetAuthor" : DTWAIN_GetAuthorDelegate)
     let private GetBarcodeMaxPriorities = lazy (DynamicDll.Bind "DTWAIN_GetBarcodeMaxPriorities" : DTWAIN_GetBarcodeMaxPrioritiesDelegate)
@@ -4829,6 +4869,7 @@ module TwainAPI =
     let private GetManualDuplexCount = lazy (DynamicDll.Bind "DTWAIN_GetManualDuplexCount" : DTWAIN_GetManualDuplexCountDelegate)
     let private GetMaxAcquisitions = lazy (DynamicDll.Bind "DTWAIN_GetMaxAcquisitions" : DTWAIN_GetMaxAcquisitionsDelegate)
     let private GetMaxBuffers = lazy (DynamicDll.Bind "DTWAIN_GetMaxBuffers" : DTWAIN_GetMaxBuffersDelegate)
+    let private GetMaxBuffersEx = lazy (DynamicDll.Bind "DTWAIN_GetMaxBuffersEx" : DTWAIN_GetMaxBuffersExDelegate)
     let private GetMaxPagesToAcquire = lazy (DynamicDll.Bind "DTWAIN_GetMaxPagesToAcquire" : DTWAIN_GetMaxPagesToAcquireDelegate)
     let private GetMaxRetryAttempts = lazy (DynamicDll.Bind "DTWAIN_GetMaxRetryAttempts" : DTWAIN_GetMaxRetryAttemptsDelegate)
     let private GetNameFromCap = lazy (DynamicDll.Bind "DTWAIN_GetNameFromCap" : DTWAIN_GetNameFromCapDelegate)
@@ -5448,33 +5489,49 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayCreateCopy.Value.Invoke(source)
 
+    let DTWAIN_ArrayCreateFromANSIStrings (pcarray: string[]) (nsize: LONG) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayCreateFromANSIStrings.Value.Invoke(pcarray, nsize)
+
     let DTWAIN_ArrayCreateFromCap (source: DTWAIN_SOURCE) (lcaptype: LONG) (lsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayCreateFromCap.Value.Invoke(source, lcaptype, lsize)
 
-    let DTWAIN_ArrayCreateFromLong64s (pcarray: Int64 byref) (nsize: LONG) : DTWAIN_ARRAY =
+    let DTWAIN_ArrayCreateFromFloats (pcarray: double[]) (nsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ArrayCreateFromLong64s.Value.Invoke(&pcarray, nsize)
+        ArrayCreateFromFloats.Value.Invoke(pcarray, nsize)
 
-    let DTWAIN_ArrayCreateFromLongs (pcarray: int byref) (nsize: LONG) : DTWAIN_ARRAY =
+    let DTWAIN_ArrayCreateFromLong64s (pcarray: int64[]) (nsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ArrayCreateFromLongs.Value.Invoke(&pcarray, nsize)
+        ArrayCreateFromLong64s.Value.Invoke(pcarray, nsize)
 
-    let DTWAIN_ArrayCreateFromReals (pcarray: DTWAIN_FLOAT byref) (nsize: LONG) : DTWAIN_ARRAY =
+    let DTWAIN_ArrayCreateFromLongs (pcarray: int[]) (nsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ArrayCreateFromReals.Value.Invoke(&pcarray, nsize)
+        ArrayCreateFromLongs.Value.Invoke(pcarray, nsize)
+
+    let DTWAIN_ArrayCreateFromStrings (pcarray: string[]) (nsize: LONG) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayCreateFromStrings.Value.Invoke(pcarray, nsize)
+
+    let DTWAIN_ArrayCreateFromWideStrings (pcarray: string[]) (nsize: LONG) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayCreateFromWideStrings.Value.Invoke(pcarray, nsize)
 
     let DTWAIN_ArrayDestroy (parray: DTWAIN_ARRAY) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayDestroy.Value.Invoke(parray)
 
+    let DTWAIN_ArrayDestroyAll() : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayDestroyAll.Value.Invoke()
+
     let DTWAIN_ArrayDestroyFrames (framearray: DTWAIN_ARRAY) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayDestroyFrames.Value.Invoke(framearray)
 
-    let DTWAIN_ArrayDumpToLog (parray: DTWAIN_ARRAY) : DTWAIN_BOOL =
+    let DTWAIN_ArrayDumpToLog (parray: DTWAIN_ARRAY) (basunsigned: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ArrayDumpToLog.Value.Invoke(parray)
+        ArrayDumpToLog.Value.Invoke(parray, basunsigned)
 
     let DTWAIN_ArrayFind (parray: DTWAIN_ARRAY) (pvariant: LPVOID) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -5536,6 +5593,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtANSIString.Value.Invoke(parray, nwhere, pstr)
 
+    let DTWAIN_ArrayGetAtANSIStringPtr (parray: DTWAIN_ARRAY) (nwhere: LONG) : nativeint =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayGetAtANSIStringPtr.Value.Invoke(parray, nwhere)
+
     let DTWAIN_ArrayGetAtFloat (parray: DTWAIN_ARRAY) (nwhere: LONG) (pval: DTWAIN_FLOAT byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtFloat.Value.Invoke(parray, nwhere, &pval)
@@ -5588,9 +5649,17 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtString.Value.Invoke(parray, nwhere, pstr)
 
+    let DTWAIN_ArrayGetAtStringPtr (parray: DTWAIN_ARRAY) (nwhere: LONG) : nativeint =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayGetAtStringPtr.Value.Invoke(parray, nwhere)
+
     let DTWAIN_ArrayGetAtWideString (parray: DTWAIN_ARRAY) (nwhere: LONG) (pstr: System.Text.StringBuilder) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetAtWideString.Value.Invoke(parray, nwhere, pstr)
+
+    let DTWAIN_ArrayGetAtWideStringPtr (parray: DTWAIN_ARRAY) (nwhere: LONG) : nativeint =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayGetAtWideStringPtr.Value.Invoke(parray, nwhere)
 
     let DTWAIN_ArrayGetBuffer (parray: DTWAIN_ARRAY) (npos: LONG) : LPVOID =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -5703,6 +5772,10 @@ module TwainAPI =
     let DTWAIN_ArrayInsertAtWideStringN (parray: DTWAIN_ARRAY) (nwhere: LONG) (val1: string) (num: LONG) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayInsertAtWideStringN.Value.Invoke(parray, nwhere, val1, num)
+
+    let DTWAIN_ArrayIsValid (thearray: DTWAIN_ARRAY) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayIsValid.Value.Invoke(thearray)
 
     let DTWAIN_ArrayRemoveAll (parray: DTWAIN_ARRAY) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -6568,6 +6641,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetAllSourceDibs.Value.Invoke(source)
 
+    let DTWAIN_GetAllSourceInfo (source: DTWAIN_SOURCE) (lpszout: System.Text.StringBuilder) (indentfactor: LONG) (nsize: LONG) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetAllSourceInfo.Value.Invoke(source, lpszout, indentfactor, nsize)
+
     let DTWAIN_GetAppInfo (szverstr: System.Text.StringBuilder) (szmanu: System.Text.StringBuilder) (szprodfam: System.Text.StringBuilder) (szprodname: System.Text.StringBuilder) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetAppInfo.Value.Invoke(szverstr, szmanu, szprodfam, szprodname)
@@ -6576,11 +6653,11 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetAuthor.Value.Invoke(source, szauthor)
 
-    let DTWAIN_GetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetBarcodeMaxPriorities.Value.Invoke(source, &pmaxpriorities, bcurrent)
 
-    let DTWAIN_GetBarcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetBarcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetBarcodeMaxRetries.Value.Invoke(source, &pmaxretries, bcurrent)
 
@@ -6592,7 +6669,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetBarcodeSearchMode.Value.Invoke(source, &psearchmode, bcurrent)
 
-    let DTWAIN_GetBarcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetBarcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetBarcodeTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
 
@@ -6968,9 +7045,13 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetMaxAcquisitions.Value.Invoke(source)
 
-    let DTWAIN_GetMaxBuffers (source: DTWAIN_SOURCE) (pmaxbuf: int byref) : DTWAIN_BOOL =
+    let DTWAIN_GetMaxBuffers (source: DTWAIN_SOURCE) (pmaxbuf: DWORD byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetMaxBuffers.Value.Invoke(source, &pmaxbuf)
+
+    let DTWAIN_GetMaxBuffersEx (source: DTWAIN_SOURCE) : DWORD =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetMaxBuffersEx.Value.Invoke(source)
 
     let DTWAIN_GetMaxPagesToAcquire (source: DTWAIN_SOURCE) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7088,11 +7169,11 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPaperSizeName.Value.Invoke(papernumber, outname, nsize)
 
-    let DTWAIN_GetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (pmaxpriorities: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPatchcodeMaxPriorities.Value.Invoke(source, &pmaxpriorities, bcurrent)
 
-    let DTWAIN_GetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (pmaxretries: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPatchcodeMaxRetries.Value.Invoke(source, &pmaxretries, bcurrent)
 
@@ -7104,7 +7185,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPatchcodeSearchMode.Value.Invoke(source, &psearchmode, bcurrent)
 
-    let DTWAIN_GetPatchcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
+    let DTWAIN_GetPatchcodeTimeOut (source: DTWAIN_SOURCE) (ptimeout: DWORD byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPatchcodeTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
 
@@ -7124,11 +7205,11 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPrinterEx.Value.Invoke(source, bcurrent)
 
-    let DTWAIN_GetPrinterStartNumber (source: DTWAIN_SOURCE) (nstart: int byref) : DTWAIN_BOOL =
+    let DTWAIN_GetPrinterStartNumber (source: DTWAIN_SOURCE) (nstart: DWORD byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPrinterStartNumber.Value.Invoke(source, &nstart)
 
-    let DTWAIN_GetPrinterStartNumberEx (source: DTWAIN_SOURCE) : LONG =
+    let DTWAIN_GetPrinterStartNumberEx (source: DTWAIN_SOURCE) : DWORD =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPrinterStartNumberEx.Value.Invoke(source)
 
@@ -8084,11 +8165,11 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetAvailablePrintersArray.Value.Invoke(source, availprinters)
 
-    let DTWAIN_SetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetBarcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxpriorities: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetBarcodeMaxPriorities.Value.Invoke(source, nmaxsearchretries)
+        SetBarcodeMaxPriorities.Value.Invoke(source, nmaxpriorities)
 
-    let DTWAIN_SetBarcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetBarcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetBarcodeMaxRetries.Value.Invoke(source, nmaxretries)
 
@@ -8100,7 +8181,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetBarcodeSearchMode.Value.Invoke(source, nsearchmode)
 
-    let DTWAIN_SetBarcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetBarcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetBarcodeTimeOut.Value.Invoke(source, timeoutvalue)
 
@@ -8312,7 +8393,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetMaxAcquisitions.Value.Invoke(source, maxacquires)
 
-    let DTWAIN_SetMaxBuffers (source: DTWAIN_SOURCE) (maxbuf: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetMaxBuffers (source: DTWAIN_SOURCE) (maxbuf: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetMaxBuffers.Value.Invoke(source, maxbuf)
 
@@ -8436,11 +8517,11 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPaperSize.Value.Invoke(source, papersize, bsetcurrent)
 
-    let DTWAIN_SetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeMaxPriorities (source: DTWAIN_SOURCE) (nmaxsearchretries: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPatchcodeMaxPriorities.Value.Invoke(source, nmaxsearchretries)
 
-    let DTWAIN_SetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeMaxRetries (source: DTWAIN_SOURCE) (nmaxretries: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPatchcodeMaxRetries.Value.Invoke(source, nmaxretries)
 
@@ -8452,7 +8533,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPatchcodeSearchMode.Value.Invoke(source, nsearchmode)
 
-    let DTWAIN_SetPatchcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPatchcodeTimeOut (source: DTWAIN_SOURCE) (timeoutvalue: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPatchcodeTimeOut.Value.Invoke(source, timeoutvalue)
 
@@ -8480,7 +8561,7 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPrinterEx.Value.Invoke(source, printer, bcurrent)
 
-    let DTWAIN_SetPrinterStartNumber (source: DTWAIN_SOURCE) (nstart: LONG) : DTWAIN_BOOL =
+    let DTWAIN_SetPrinterStartNumber (source: DTWAIN_SOURCE) (nstart: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPrinterStartNumber.Value.Invoke(source, nstart)
 
