@@ -63,6 +63,7 @@ BEGIN
             MENUITEM "PNG",                         IDM_ACQUIREFILE_PNG
             MENUITEM "PostScript (Level 1)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL1
             MENUITEM "PostScript (Level 2)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL2
+            MENUITEM "PostScript (Level 3)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL3
             MENUITEM "SVG",                         IDM_ACQUIREFILE_SVG
             MENUITEM "SVGZ",                        IDM_ACQUIREFILE_SVGZ
             MENUITEM "Targa (TGA)",                 IDM_ACQUIREFILE_TGA
@@ -120,6 +121,7 @@ BEGIN
         MENUITEM "English",                     ID_LANGUAGE_ENGLISH
         MENUITEM "French",                      ID_LANGUAGE_FRENCH
         MENUITEM "German",                      ID_LANGUAGE_GERMAN
+        MENUITEM "Spanish",                     ID_LANGUAGE_SPANISH
         MENUITEM "Greek",                       ID_LANGUAGE_GREEK
         MENUITEM "Italian",                     ID_LANGUAGE_ITALIAN
         MENUITEM "Japanese",                    ID_LANGUAGE_JAPANESE
@@ -127,9 +129,9 @@ BEGIN
         MENUITEM "Portuguese",                  ID_LANGUAGE_PORTUGUESE
         MENUITEM "Romanian",                    ID_LANGUAGE_ROMANIAN
         MENUITEM "Russian",                     ID_LANGUAGE_RUSSIAN
+        MENUITEM "Turkish",                     ID_LANGUAGE_TURKISH
         MENUITEM "Simplified Chinese",          ID_LANGUAGE_SIMPLIFIEDCHINESE
-        MENUITEM "Traditioanl Chinese",         ID_LANGUAGE_TRADITIONALCHINESE
-        MENUITEM "Spanish",                     ID_LANGUAGE_SPANISH
+        MENUITEM "Traditional Chinese",         ID_LANGUAGE_TRADITIONALCHINESE
         MENUITEM "Custom Language...",          ID_LANGUAGE_CUSTOMLANGUAGE
     END
     POPUP "&Help"
@@ -244,6 +246,16 @@ BEGIN
 END
 
 #include "dibdisplay.rc"
+IDD_dlgEnterBlankThreshold DIALOG DISCARDABLE 0, 0, 157, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Blank Page Threshold"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,38,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,81,38,50,14
+    LTEXT           "Threshold Percentage:",IDC_STATIC,20,17,74,8
+    EDITTEXT        IDC_edBlankThresholdPct,98,15,25,14,ES_AUTOHSCROLL | ES_NUMBER
+END
 
 IDD_dlgSettings DIALOG DISCARDABLE  0, 0, 152, 63
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU

@@ -51,7 +51,6 @@ void SetCaptionToSourceName();
 void AcquireNative();
 void AcquireBuffered();
 void AcquireFile(BOOL bUseSource, LONG fileType);
-BOOL IsAllSpace(LPCTSTR p);
 void ToggleCheckedItem(UINT resId);
 BOOL GetToggleMenuState(UINT resID);
 void DisplayLoggingOptions();
@@ -59,6 +58,9 @@ void LoadLanguage(int message);
 void LoadLanguageStrings(LPCTSTR szLang);
 void DisplayCustomLangDlg();
 void EnableFileXFerMenuItems(DTWAIN_SOURCE source, BOOL bEnable);
+void SetUpAcquire();
+void DisplayBlankThresholdOptions();
+
 INT_PTR DisplayGetFileNameDlg();
 
 LRESULT CALLBACK EnterCustomLangNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
@@ -78,6 +80,7 @@ LRESULT CALLBACK DisplayCustomSelectProc(HWND hDlg, UINT message, WPARAM wParam,
 LRESULT CALLBACK DisplayBarCodeInfoProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK DisplayAcquireSettingsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK DisplayLoggingProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK DisplayBlankThresholdProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK EnterFileNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 INT_PTR DisplayOneDibPage(HINSTANCE hInstance, HANDLE hDib, UINT resID, HWND wndHandle);
@@ -112,11 +115,12 @@ AllLanguages g_allLanguages[] = { {ID_LANGUAGE_ENGLISH               , _T("engli
                                  {ID_LANGUAGE_DUTCH                 , _T("dutch")},
                                  {ID_LANGUAGE_RUSSIAN               , _T("russian")},
                                  {ID_LANGUAGE_ROMANIAN              , _T("romanian")},
-                                 {ID_LANGUAGE_PORTUGUESE              , _T("portuguese")},
+                                 {ID_LANGUAGE_PORTUGUESE            , _T("portuguese")},
                                  {ID_LANGUAGE_SIMPLIFIEDCHINESE     , _T("simplified_chinese")},
                                  {ID_LANGUAGE_TRADITIONALCHINESE    , _T("traditional_chinese")},
                                  {ID_LANGUAGE_JAPANESE              , _T("japanese")},
-                                 {ID_LANGUAGE_KOREAN                , _T("korean")}
+                                 {ID_LANGUAGE_KOREAN                , _T("korean")},
+                                 {ID_LANGUAGE_TURKISH               , _T("turkish")}
                                 };
 
 AllFileTypes g_allDTWAINFileTypes[] = {
@@ -160,6 +164,7 @@ AllFileTypes g_allDTWAINFileTypes[] = {
         {IDM_ACQUIREFILE_PNG                    ,  DTWAIN_PNG },
         {IDM_ACQUIREFILE_POSTSCRIPTLEVEL1       ,  DTWAIN_POSTSCRIPT1MULTI },
         {IDM_ACQUIREFILE_POSTSCRIPTLEVEL2       ,  DTWAIN_POSTSCRIPT2MULTI },
+		{IDM_ACQUIREFILE_POSTSCRIPTLEVEL3       ,  DTWAIN_POSTSCRIPT3MULTI },
         {IDM_ACQUIREFILE_SVG                    ,  DTWAIN_SVG },
         {IDM_ACQUIREFILE_SVGZ                   ,  DTWAIN_SVGZ },
         {IDM_ACQUIREFILE_TGA                    ,  DTWAIN_TGA },
@@ -181,7 +186,7 @@ const UINT nFirstAcquireSourceID = IDM_ACQUIREFILESOURCE_WINDOWSBMP;
 const UINT nLastAcquireSourceID = IDM_ACQUIREFILESOURCE_DEJAVU;
 
 const UINT nFirstAcquireFileID = IDM_ACQUIREFILE_BIGTIFF_NOCOMPRESSION;
-const UINT nLastAcquireFileID = IDM_ACQUIREFILE_WIRELESSBITMAP;
+const UINT nLastAcquireFileID = IDM_ACQUIREFILE_POSTSCRIPTLEVEL3;
 const UINT numDTWAINFileTypes = sizeof(g_allDTWAINFileTypes) / sizeof(g_allDTWAINFileTypes[0]);
 
 UINT g_AllMenuItems[] = { IDM_SELECT_SOURCE,
@@ -202,8 +207,10 @@ UINT g_AllMenuItems[] = { IDM_SELECT_SOURCE,
 
 TCHAR g_CustomLanguage[256];
 
-
 DTWAIN_PDFTEXTELEMENT g_PDFTextElement;
+int g_BlankThresholdPct = 98;
+
+#include "DebugUtils.h"
 
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -414,6 +421,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
                 case IDM_DISCARD_BLANKS:
                     ToggleCheckedItem(IDM_DISCARD_BLANKS);
+                    if (GetToggleMenuState(IDM_DISCARD_BLANKS))
+                    {
+                        DisplayBlankThresholdOptions();
+                    }
                 break;
 
                 case IDM_SHOW_PREVIEW:
@@ -442,7 +453,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case ID_LANGUAGE_ROMANIAN           : 
                 case ID_LANGUAGE_SIMPLIFIEDCHINESE  : 
                 case ID_LANGUAGE_PORTUGUESE:
-                    LoadLanguage(wmId);
+				case ID_LANGUAGE_TURKISH:
+					LoadLanguage(wmId);
                 break;
 
                 case ID_LANGUAGE_CUSTOMLANGUAGE:
@@ -537,6 +549,7 @@ void SelectTheSource(int nWhich)
         {
             DTWAIN_CloseSource(g_CurrentSource);
             g_CurrentSource = NULL;
+            SetCaptionToSourceName();
             EnableSourceItems(FALSE);
         }
         else
@@ -617,21 +630,28 @@ void SetCaptionToSourceName()
         SetWindowText(g_hWnd, szTitle);
 }
 
+void SetUpAcquire()
+{
+	/* Disable main window */
+	DTWAIN_DisableAppWindow(g_hWnd, TRUE);
+
+	/* Check if feeder or duplex is supported */
+	if (DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
+		DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
+
+	/* Check if we want to discard blank pages */
+    DTWAIN_SetBlankPageDetection(g_CurrentSource, (double)g_BlankThresholdPct, DTWAIN_BP_AUTODISCARD_ANY,
+	                             GetToggleMenuState(IDM_DISCARD_BLANKS));
+
+	BOOL bRet = FALSE;
+	EnableSourceItems(FALSE);
+}
+
 void GenericAcquire(LONG nWhichOne)
 {
+    SetUpAcquire();
+
     LONG ErrStatus;
-    /* Disable main window */
-    DTWAIN_DisableAppWindow(g_hWnd, TRUE);
-
-    /* Check if feeder or duplex is supported */
-    if ( DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
-        DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
-
-    /* Check if we want to discard blank pages */
-    /* Set the threshold to 98% blank */
-    DTWAIN_SetBlankPageDetection(g_CurrentSource, 98.0, DTWAIN_BP_AUTODISCARD_ANY, 
-                                 GetToggleMenuState(IDM_DISCARD_BLANKS));
-
     BOOL bRet = FALSE;
     EnableSourceItems(FALSE);
     g_AcquireArray = DTWAIN_CreateAcquisitionArray();
@@ -747,12 +767,8 @@ void AcquireFile(BOOL bUseSource, LONG fileType)
         }
     }
 
-    /* Disable main window */
-    /* Check if feeder or duplex is supported */
-    if ( DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
-        DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
-    EnableWindow(g_hWnd, FALSE);
-    
+    SetUpAcquire();
+
     /* Create the array of names.  This function is to be used
        since the user may have entered a file name that has
        embedded spaces */
@@ -833,6 +849,12 @@ DTWAIN_SOURCE DisplayCustomDlg()
 void DisplaySourceProps()
 {
     DialogBox(g_hInstance, (LPCTSTR)IDD_dlgProperties, g_hWnd, (DLGPROC)DisplaySourcePropsProc);
+}
+
+
+void DisplayBlankThresholdOptions()
+{
+    DialogBox(g_hInstance, (LPCTSTR)IDD_dlgEnterBlankThreshold, g_hWnd, (DLGPROC)DisplayBlankThresholdProc);
 }
 
 void DisplayLoggingOptions()
@@ -1014,6 +1036,52 @@ LRESULT CALLBACK EnterFileNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
             }
         }
         break;
+    }
+    return FALSE;
+}
+
+
+LRESULT CALLBACK DisplayBlankThresholdProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+        case WM_INITDIALOG:
+        {
+            char szBuf[10];
+            HWND hWndPct = GetDlgItem(hDlg, IDC_edBlankThresholdPct);
+            sprintf(szBuf, "%d", g_BlankThresholdPct);
+            SetWindowTextA(hWndPct, szBuf);
+            return TRUE;
+        }
+
+        case WM_COMMAND:
+        {
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
+			HWND hWndPct = GetDlgItem(hDlg, IDC_edBlankThresholdPct);
+            switch( nControl )
+            {
+                case IDOK:
+                {
+					char szBuf[10];
+                    int nThreshold = 0;
+                    GetWindowTextA(hWndPct, szBuf, 10);
+                    nThreshold = atoi(szBuf);
+                    if (nThreshold > 100)
+                        nThreshold = 100;
+                    g_BlankThresholdPct = nThreshold;
+                    EndDialog(hDlg, LOWORD(wParam));
+                }
+                break;
+                
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                    break;
+            }
+        }
+        break;
+
     }
     return FALSE;
 }
@@ -1346,18 +1414,6 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             break;
     }
     return FALSE;
-}
-
-BOOL IsAllSpace(LPCTSTR p)
-{
-    size_t nLen = lstrlen(p);
-    size_t i;
-    for ( i = 0; i < nLen; i++ )
-    {
-        if ( !_istspace((TCHAR)*p))
-            return FALSE;
-    }
-    return TRUE;
 }
 
 void WaitLoop()
