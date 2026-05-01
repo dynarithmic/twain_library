@@ -91,6 +91,7 @@
 #define IDM_ACQUIREFILE_WEBP                452
 #define IDM_ACQUIREFILE_WINDOWSMETAFILE     453
 #define IDM_ACQUIREFILE_WIRELESSBITMAP      454
+#define IDM_ACQUIREFILE_POSTSCRIPTLEVEL3    455
 
 #define IDD_dlgEnterSourceName              1000
 #define IDC_edSourceName                    1001
@@ -163,6 +164,9 @@
 #define IDC_chkResetCapsOnClose             8023
 #define IDC_edSaveFileName                  8024
 
+#define IDD_dlgEnterBlankThreshold     9000
+#define IDC_edBlankThresholdPct        9001
+
 #define ID_LANGUAGE_ENGLISH             32771
 #define ID_LANGUAGE_FRENCH              32772
 #define ID_LANGUAGE_SPANISH             32773
@@ -178,6 +182,7 @@
 #define ID_LANGUAGE_TRADITIONALCHINESE  32783
 #define ID_LANGUAGE_KOREAN              32784
 #define ID_LANGUAGE_GREEK               32785
+#define ID_LANGUAGE_TURKISH             32786
 
 
 #endif

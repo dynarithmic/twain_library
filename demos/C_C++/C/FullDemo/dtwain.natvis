@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+    <Type Name="tagDTWAIN_SOURCE_DEBUG_VIEW">
+    <DisplayString>{json}</DisplayString>
+    <StringView>json</StringView>
+    <Expand>
+      <Item Name="[json]">json</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="tagDTWAIN_FRAME_DEBUG_ITEM">
+    <DisplayString>{{L={left}, T={top}, R={right}, B={bottom}}}</DisplayString>
+    <Expand>
+        <Item Name="left">left</Item>
+        <Item Name="top">top</Item>
+        <Item Name="right">right</Item>
+        <Item Name="bottom">bottom</Item>
+    </Expand>
+  </Type>
+
+  <Type Name="tagDTWAIN_ARRAY_DEBUG_VIEW">
+    <DisplayString>DTWAIN_ARRAY (count={count}, type={type})</DisplayString>
+
+    <Expand>
+      <Item Name="[count]">count</Item>
+      <Item Name="[type]">type</Item>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_LONG">
+        <Size>count</Size>
+        <ValuePointer>long_data</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_LONGLONG">
+        <Size>count</Size>
+        <ValuePointer>longlong_data</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_FLOAT">
+        <Size>count</Size>
+        <ValuePointer>float_data</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_ASTRING">
+        <Size>count</Size>
+        <ValuePointer>astring_ptrs</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_WIDESTRING">
+        <Size>count</Size>
+        <ValuePointer>widestring_ptrs</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_SOURCE">
+        <Size>count</Size>
+        <ValuePointer>source_views</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_ARRAY">
+        <Size>count</Size>
+        <ValuePointer>nested_views</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_HANDLE">
+        <Size>count</Size>
+        <ValuePointer>handle_data</ValuePointer>
+      </ArrayItems>
+
+      <ArrayItems Condition="type == DTWAIN_DBG_ARRAY_FRAME">
+        <Size>count</Size>
+        <ValuePointer>frame_items</ValuePointer>
+      </ArrayItems>
+
+      <Synthetic Name="[info]" Condition="type == DTWAIN_DBG_ARRAY_UNKNOWN">
+        <DisplayString>Unsupported or unknown DTWAIN array type.</DisplayString>
+      </Synthetic>
+    </Expand>
+  </Type>
+
+</AutoVisualizer>

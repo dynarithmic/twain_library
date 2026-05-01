@@ -158,6 +158,7 @@
     <ClCompile Include="..\DibView\DIB.c" />
     <ClCompile Include="..\DibView\ERRORS.c" />
     <ClCompile Include="..\DibView\PAINT.c" />
+    <ClCompile Include="DebugUtils.c" />
     <ClCompile Include="dibdisplay.c" />
     <ClCompile Include="dtwdemo.c" />
     <ClCompile Include="SourceProperties.c" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\DibView\MASTER.h" />
     <ClInclude Include="..\DibView\PAINT.h" />
     <ClInclude Include="..\DibView\PALETTE.h" />
+    <ClInclude Include="DebugUtils.h" />
     <ClInclude Include="dibdisplay.h" />
     <ClInclude Include="dibdisplayres.h" />
     <ClInclude Include="DTWDEMO.h" />
@@ -181,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DTWDEMO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="dtwain.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

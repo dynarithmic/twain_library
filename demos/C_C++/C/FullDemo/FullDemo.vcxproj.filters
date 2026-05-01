@@ -36,6 +36,9 @@
     <ClCompile Include="StringUtils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DebugUtils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DibView\DIB.h">
@@ -71,6 +74,9 @@
     <ClInclude Include="StringUtils.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="DebugUtils.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="dtwdemo.rc">
@@ -81,5 +87,10 @@
     <Image Include="DTWDEMO.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="dtwain.natvis">
+      <Filter>Source Files</Filter>
+    </Natvis>
   </ItemGroup>
 </Project>
