@@ -2,13 +2,13 @@ DTWAIN Version changes
 
 5.9.0
 
-- Removed usage of the FreeImage library to generate image files.  Removal of FreeImage
-  eliminates the dependency on a third-party library to handle most of the image save options.
-  In addition, this reduced the size of the DTWAIN DLL's by several hundred kilobytes, in additon
+- Removed usage of the FreeImage and CxImage libraries to generate image files.  Removal of FreeImage
+  and CxImage eliminates the dependency on third-party libraries to handle most of the image save options.
+  In addition, this reduced the size of the DTWAIN DLL's by several hundred kilobytes, in addition
   to having overall speed gains in creating the image files.
 
-- Addressed various issues with saving SVG files.  Most of thses issues dealt with some black
-  and white or gray scale SVG files being saved with reverse/negated colors.
+- Addressed various issues with saving SVG, GIF, and Windows ICO files.  Most of these issues dealt 
+  with some black and white or gray scale SVG/GIF/ICO files being saved with reverse/negated colors.
 
 - Improved saving to Postscript files.  The biggest improvement is the quality of the images 
   being saved as PostScript has been upgraded.  Most of the improvement is due to removing 
