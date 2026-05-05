@@ -98,19 +98,19 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the binaries found in [DTWAIN-Binaries-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip) in one of the following directories within the zip file:
 
-**full_logging**
-**partial_logging**
-**full_logging_require_vcruntime**
-**partial_logging_require_vcruntime**
+**full_logging**<br>
+**partial_logging**<br>
+**full_logging_require_vcruntime**<br>
+**partial_logging_require_vcruntime**<br>
 
 ----
 
 For 64-bit applications, use the binaries found in [DTWAIN-Binaries-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip) in one of the following directories within the zip file:
 
-**full_logging**
-**partial_logging**
-**full_logging_require_vcruntime**
-**partial_logging_require_vcruntime**
+**full_logging**<br>
+**partial_logging**<br>
+**full_logging_require_vcruntime**<br>
+**partial_logging_require_vcruntime**<br>
 
 
 ----
