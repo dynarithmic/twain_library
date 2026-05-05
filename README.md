@@ -96,21 +96,21 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 ----
 **<u>Building the DTWAIN application</u>**
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
+For 32-bit applications, use the binaries found in [DTWAIN-Binaries-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip) in one of the following directories within the zip file:
 
-[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes32.txt)</br>
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes32.txt)</br>
-[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging_require_vcruntime/release_ziphashes32.txt)</br>
-[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging_require_vcruntime/release_ziphashes32.txt)</br> 
+**full_logging**
+**partial_logging**
+**full_logging_require_vcruntime**
+**partial_logging_require_vcruntime**
 
 ----
 
-For 64-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
+For 64-bit applications, use the binaries found in [DTWAIN-Binaries-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip) in one of the following directories within the zip file:
 
-[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging/release_ziphashes64.txt)</br>
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging/release_ziphashes64.txt)</br>
-[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging_require_vcruntime/release_ziphashes64.txt)</br>
-[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging_require_vcruntime/release_ziphashes64.txt)</br> 
+**full_logging**
+**partial_logging**
+**full_logging_require_vcruntime**
+**partial_logging_require_vcruntime**
 
 
 ----
