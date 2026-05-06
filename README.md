@@ -36,8 +36,6 @@
 
 [DTWAIN and Linux compatibility](#anchor-linux)
 
-[Acknowledgments](#anchor-acknowldegements)
-
 [Final note for developers](#anchor-final-note)
 
 [Reporting Issues](#anchor-issues)
@@ -96,7 +94,7 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 ----
 **<u>Building the DTWAIN application</u>**
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the binaries found in [DTWAIN-Binaries-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip) in one of the following directories within the zip file:
+For 32-bit applications, use the binaries found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip) in one of the following directories within the zip file:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -105,7 +103,7 @@ For 32-bit applications, use the binaries found in [DTWAIN-Binaries-x86.zip](htt
 
 ----
 
-For 64-bit applications, use the binaries found in [DTWAIN-Binaries-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip) in one of the following directories within the zip file:
+For 64-bit applications, use the binaries found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip) in one of the following directories within the zip file:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -560,19 +558,6 @@ We have language bindings (pinvoke's) for C# and Visual Basic.  However we curre
 ### Is there a C++ class wrapper for DTWAIN? ###
 
 If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/C_C%2B%2B/cpp_wrapper_lib" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
-
-----------
-----------
-### Acknowledgments ###
-<a name="anchor-acknowldegements"></a>
-* Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
-
-  * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
-  * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
-  
-* In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
-  
-* All other raw image processing, plus the interface to the TWAIN system itself, is done without third-party libraries or third-party source code.  
 
 ----------
 ----------
