@@ -92,9 +92,10 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 <a id="anchor-dtwain-setup"></a>
 ### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
-**<u>Building the DTWAIN application</u>**
+**<u>Building the DTWAIN application:</u>**
+
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the binaries found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip) in one of the following directories within the zip file:
+For 32-bit applications, use the DTWAIN binaries found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -103,7 +104,7 @@ For 32-bit applications, use the binaries found in [DTWAIN-Release-x86.zip](http
 
 ----
 
-For 64-bit applications, use the binaries found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip) in one of the following directories within the zip file:
+For 64-bit applications, use the DTWAIN binaries found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -113,11 +114,11 @@ For 64-bit applications, use the binaries found in [DTWAIN-Release-x64.zip](http
 
 ----
 
-The **full_logging** directory contains the DLL's that have the following characteristics: 
+The **full_logging** directory contains the DTWAIN DLL's that have the following characteristics: 
 1) Built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
 2) Does not require an installation of the Visual C++ Runtime on the target system.
 
-The **partial_logging** directory contains the DLL's that are:
+The **partial_logging** directory contains the DTWAIN DLL's that are:
 1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available, and
 2) Does not require an installation of the Visual C++ Runtime on the target system.
 
