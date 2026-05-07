@@ -92,10 +92,17 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 <a id="anchor-dtwain-setup"></a>
 ### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
+
+Basically, all that is required to initially set up DTWAIN is to ensure that the proper DTWAIN DLL's are located where the Windows operating system will find them (usually in a directory specified on the system **PATH**), and that various [mandatory text files](https://github.com/dynarithmic/twain_library/tree/master/text_resources) are also present.  
+
+All of this will be discussed in detail below.
+
+----
+
 **<u>Building the DTWAIN application:</u>**
 
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the DTWAIN binaries found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
+For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -104,13 +111,12 @@ For 32-bit applications, use the DTWAIN binaries found in [DTWAIN-Release-x86.zi
 
 ----
 
-For 64-bit applications, use the DTWAIN binaries found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
+For 64-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
 **full_logging_require_vcruntime**<br>
 **partial_logging_require_vcruntime**<br>
-
 
 ----
 
@@ -136,26 +142,22 @@ If you will install the Visual C++ Runtime yourself, or assume that the systems 
 
 To distinguish between whether the full or partial logging DLL's are in use (since the names of the DTWAIN DLL's themselves are the same, regardless of which ones are used), see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
-In addition, the [release version of the Program Database (.PDB) files](https://github.com/dynarithmic/dtwain-pdb) are available.  This will aid in debugging any issues involving DTWAIN.
+In addition, the release version of the Programing Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
 
 ----
 
-A breakdown of the files contained in **release_libraries.zip** is as follows:
+A breakdown of the main files contained in **DTWAIN-Release-x86.zip** and **DTWAIN-Release-x64.zip** is as follows:
 
     dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
     dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
     dtwain32.lib   --  32-bit ANSI (MBCS) Visual C++ import library
     dtwain32u.lib  --  32-bit Unicode Visual C++ import library
-    dtwain32.pdb   --  32-bit PDB (Microsoft debug) files for dtwain32.dll
-    dtwain32u.pdb  --  32-bit PDB (Microsoft debug) files for dtwain32u.dll
 
     dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
     dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
     dtwain64.lib   --  64-bit ANSI (MBCS) Visual C++ import library
     dtwain64u.lib  --  64-bit Unicode Visual C++ import library
-    dtwain64.pdb   --  64-bit PDB (Microsoft debug) files for dtwain64.dll
-    dtwain64u.pdb  --  64-bit PDB (Microsoft debug) files for dtwain64u.dll
-
+    
 Please note that the files with the "u" in the name are Unicode aware.  If your application requires Unicode-based string processing, it is always best to use the "u" versions of the above files.  
 
 For example, if you plan to use the [language text resources](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources) that use UTF-8 character sequences that have issues displaying properly using the ANSI version of the library (for example, Greek), you should use one of the "u" DLL's listed above.  More info on the language text resources are found later in this README.
@@ -164,7 +166,7 @@ The DTWAIN API has available ANSI-aware functions even in the Unicode versions o
 
 ----
 
-###### Information for C and C++ programmers:
+###### Information for C and C++ programmers only:
 
 If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
 If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
