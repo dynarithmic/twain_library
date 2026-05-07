@@ -14,33 +14,20 @@
 ----
 ### <u>Table of Contents</u>
 
-[What is the Dynarithmic Twain Library?](#anchor-what-is-dtwain)
-
-[Is the Dynarithmic Twain Library open source?](#anchor-is-dtwain_oss)
-
-[Preliminaries](#anchor-preliminaries)
-
-[Testing without a TWAIN device](#anchor-no-device)
-
-[How do I setup DTWAIN (library setup, building the application, and running the application)?](#anchor-dtwain-setup)
-
-[Simple code samples](#anchor-code-samples)
-
-[DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](#alternatecompilers)
-
-[Using DTWAIN in C#, Visual Basic and other computer languages](#otherlanguages)
-
-[The TWAIN Event Driven programming model](#anchor-event-driven)
-
-[Obtaining the DTWAIN Library source code](#anchor-source-code)
-
-[DTWAIN and Linux compatibility](#anchor-linux)
-
-[Final note for developers](#anchor-final-note)
-
-[Reporting Issues](#anchor-issues)
-
-[Who authored the DTWAIN library?](#anchor-author)
+##### [What is the Dynarithmic Twain Library?](#anchor-what-is-dtwain)
+##### [Is the Dynarithmic Twain Library open source?](#anchor-is-dtwain_oss)
+##### [Preliminaries](#anchor-preliminaries)
+##### [Testing without a TWAIN device](#anchor-no-device)
+##### [How do I setup DTWAIN (library setup, building the application, and running the application)?](#anchor-dtwain-setup)
+##### [Simple code samples](#anchor-code-samples)
+##### [DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](#alternatecompilers)
+##### [Using DTWAIN in C#, Visual Basic and other computer languages](#otherlanguages)
+##### [The TWAIN Event Driven programming model](#anchor-event-driven)
+##### [Obtaining the DTWAIN Library source code](#anchor-source-code)
+##### [DTWAIN and Linux compatibility](#anchor-linux)
+##### [Final note for developers](#anchor-final-note)
+##### [Reporting Issues](#anchor-issues)
+##### [Who authored the DTWAIN library?](#anchor-author)
 
 ----
 ----
