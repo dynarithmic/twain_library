@@ -1,0 +1,318 @@
+0 Hata Yok
+1 NULL Pencere Tanıtıcısı
+2 Bellek Tahsis Hatası
+3 Geçersiz DLL Tanıtıcısı
+4 Geçersiz Kaynak Tanıtıcısı
+5 TWAIN Veri Kaynağı Yöneticisi (DSM) Bulunamadı
+6 Geçersiz TWAIN.DLL
+7 Geçersiz Oturum Tanıtıcısı
+8 Geçersiz Twain Yöneticisi
+9 TWAIN.DLL yüklenemedi
+10 TWAIN kaynağı açılamadı
+11 TWAIN kaynağı kapatılamadı
+12 TWAIN kaynağının komutu çalıştırmadan önce açılması gerekiyor.
+27 Tarama tamamlanamadı. X/Y Çözünürlükleri farklı değerlere ayarlanmış
+28 Geçersiz Dosya Adı Belirtildi
+32 TWAIN üçlüsü çalıştırılmadı. Geçersiz Twain Yöneticisi
+1000 ***
+1001 Geçersiz DTWAIN_HANDLE
+1002 Geçersiz DTWAIN_SOURCE
+1003 Geçersiz DTWAIN_ARRAY
+1004 Yanlış DTWAIN_ARRAY türü
+1005 DTWAIN_ARRAY için dizin sınır dışı: %1
+1006 Yığın belleği yetersiz
+1007 DTWAIN, TWAIN penceresi oluşturamadı
+1008 Geçersiz Piksel Türü
+1009 Geçersiz DTWAIN_CAPCONTAINER
+1010 DTWAIN Oturumu başlatılmadı. DTWAIN_StartTwainSession() çağrılmalıdır
+1011 Geçersiz DTWAIN_ACQUIRE numarası
+1012 Geçersiz TWAIN Özelliği
+1013 Kaynak özelliği desteklemiyor: %1
+1014 Genel TWAIN Hatası. Daha fazla bilgi için DTWAIN_GetTwainError() kontrol edin
+1015 Uygulama mesaj kuyruğuna kanca takılamadı
+1016 Geçersiz dosya adı bağımsız değişkeni iletildi
+1017 DTWAIN_ARRAY değer içermiyor
+1018 Geçersiz görüntü dosyası biçimi belirtildi
+1019 Geçersiz Dib sayfası
+1020 Kaynak şu anda görüntü alıyor
+1021 Geçersiz parametre iletildi
+1022 Geçersiz Aralık belirtildi: Üst/alt sınırları veya adım boyutunu kontrol edin
+1023 TWAIN kullanıcı arayüzü başlatılamadı. Cihaz hatası veya edinim için kullanıcı arayüzü gerekiyor.
+1024 Kaynak belirtilen cihaz birimini desteklemiyor
+1025 Dil kaynağı DLL'si bulunamadı
+1026 TWAIN Kaynağı açık değil
+1027 Kaynak Cihaz Olayları desteklenmiyor
+1028 Kaynak Yalnızca Kullanıcı Arayüzü modu desteklenmiyor
+1029 Kaynak kullanıcı arayüzü zaten açık
+1030 Özellik ayarı için destek yok
+1031 Kaynak dosya aktarımlarını desteklemiyor
+1032 Belirtilen bit derinliği desteklenmiyor
+1033 Kaynağın özelliği yok. Muhtemelen bozuk veya donanım arızası
+1034 Döşeme kullanan arabelleğe alınmış aktarımlar desteklenmiyor
+1035 Geçersiz DTWAIN_FRAME. Veri türü DTWAIN_FLOAT olmalı, eleman sayısı 4 olmalıdır
+1036 Bu işlev DTWAIN'in sınırlı sürümünde desteklenmiyor. DTWAIN'in kayıtlı sürümüne yükseltmeniz gerekiyor
+1037 Kaynak veya cihaz belge besleyiciyi desteklemiyor
+1038 Kaynak veya cihaz belge besleyiciye belge yüklenip yüklenmediğini sorgulamayı desteklemiyor
+1039 Twain DSM çağrılırken bellek istisnası hatası. DSM tutarsız durumda olabilir.
+1040 Geçersiz TWAIN durum geçişi
+1041 Desteklenmeyen genişletilmiş görüntü bilgisi türü
+1042 DLL Kaynak dosyası bulunamadı
+1043 DTWAIN başlatılmadı
+1044 TWAIN Kaynağı bulunamadı
+1045 TWAIN yüklü değil
+1046 Yanlış yürütme iş parçacığı
+1047 Hatalı özellik veri türü
+1048 Özelliğin bilinmeyen veri türü var
+1049 DTWAIN Demo Sürümü bu dosya türünü desteklemiyor
+1050 Kaynak seçimi iptal edildi
+1051 DTWAIN Kaynakları bulunamadı
+1052 Dize, dizi türüyle eşleşmiyor
+1053 DTWAIN DİZİSİ aynı türde değil
+1054 Kaynak yüklü değil
+1055 Kaynak bellek dosyası aktarımlarını desteklemiyor
+1056 Alan dizisi çok küçük. Dizide en az 4 öğe olmalıdır.
+1057 DTWAIN günlük dosyası oluşturulamadı.
+1058 Kaynak TWAIN dosya sistemini desteklemiyor.
+1059 Bu TWAIN Kaynağı için döşeme modu desteklenmiyor.
+1060 DTWAIN32.INI bulunamadı
+1061 DTWAIN64.INI bulunamadı
+1062 CRC kontrolü başarısız. Bozuk twaininfo.txt dosyasını kontrol edin
+1063 twaininfo.txt dosyasının sürümü bu DTWAIN sürümü için geçersiz
+1064 Windows API Hatası
+1065 Dizeyle eşleşen TWAIN kimliği yok
+1066 Yinelenen kaynak kimliği bulundu
+1067 Kullanılamayan genişletilmiş görüntü bilgisi değeri
+1068 TWAIN Kaynağı tarafından döndürülen geçersiz bitmap (TWAINDSM 2.x)
+1069 Görüntü alınmadı.
+1070 Görüntü yeniden örnekleme hatası
+1071 Bilinmeyen TWAIN Dönüş Kodu
+1072 Bilinmeyen TWAIN Durum Kodu
+1073 Kaynak veri hatası: İstisna oluştu
+1074 Ses aktarımları desteklenmiyor
+1075 Kaynak besleyicinin kullanılabilir olduğunu bildiriyor, ancak TWAIN uyumluluk testini geçemiyor (CAP_PAPERDETECTABLE).
+1076 Kaynak, hiç özelliği olmadığını bildiriyor. CAP_SUPPORTEDCAPS için uyumluluk testi başarısız
+1077 CAP_SUPPORTEDCAPS için uyumluluk testi başarısız. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE veya ICAP_XFERMECH özellik listesinde eksik
+1078 ICAP_PIXELTYPE için uyumluluk testi başarısız.
+1079 ICAP_PIXELTYPE için uyumluluk testi başarısız. Piksel türü bilgisi yok.
+1080 ICAP_BITDEPTH için uyumluluk testi başarısız.
+1081 ICAP_XFERMECH için uyumluluk testi başarısız.
+1082 Standart özellikler için uyumluluk testi başarısız
+1083 Genişletilmiş Görüntü Bilgisi türü uyumsuzluğu. TWAIN uyumluluk hatası.
+1084 Genişletilmiş Görüntü Bilgisi alınırken hata.
+1085 DTWAIN_RANGE değeri sınır dışında
+1086 DTWAIN_RANGE adım boyutu 0
+1087 Boş veya boşluklu ad algılandı
+1088 Belge besleyicinin kağıt sensörü yok veya kağıt sensörü algılanmadı
+1100 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
+1101 TWAIN Durum Kodu: Hata Yok
+1102 TWAIN Durum Kodu: Bilinmeyen hata nedeni
+1103 TWAIN Durum Kodu: Veri Kaynağı Yok
+1104 TWAIN Durum Kodu: Veri Kaynağı maksimum uygulama sayısına bağlı
+1105 TWAIN Durum Kodu: Veri Kaynağı veya Veri Kaynağı Yöneticisi hata bildirdi. Uygulama sorumlu değil.
+1106 TWAIN Durum Kodu: Bilinmeyen TWAIN özelliğiyle karşılaşıldı
+1107 TWAIN Durum Kodu: Veri parametresi aralık dışında
+1108 TWAIN Durum Kodu: Tanınmayan TWAIN üçlü kombinasyonu
+1109 TWAIN Durum Kodu: TWAIN üçlüsü beklenen sıra dışında
+1110 TWAIN Durum Kodu: DSM_Entry işlevinde bilinmeyen hedef Uygulama
+1111 TWAIN Durum Kodu: Özellik Veri Kaynağı tarafından desteklenmiyor
+1112 TWAIN Durum Kodu: İşlem özellik tarafından desteklenmiyor
+1113 TWAIN Durum Kodu: Özelliğin başka bir özelliğe bağımlılığı var
+1114 TWAIN Durum Kodu: Dosya korumalı
+1115 TWAIN Durum Kodu: Dosya zaten mevcut
+1116 TWAIN Durum Kodu: Dosya bulunamadı
+1117 TWAIN Durum Kodu: Dizin boş değil
+1118 TWAIN Durum Kodu: Besleyici sıkıştı
+1119 TWAIN Durum Kodu: Besleyici birden fazla sayfa algıladı
+1120 TWAIN Durum Kodu: Dosya yazma hatası (disk dolu olabilir)
+1121 TWAIN Durum Kodu: Cihaz işlem sırasında çevrimdışı oldu
+1123 TWAIN Durum Kodu: İşlem başarısız (cihazdaki kapak veya kap açık)
+1124 TWAIN Durum Kodu: İşlem başarısız (belgede hasarlı köşe var)
+1125 TWAIN Durum Kodu: İşlem başarısız (belge yakalama sırasında odak hatası)
+1126 TWAIN Durum Kodu: İşlem başarısız (belge çok açık)
+1127 TWAIN Durum Kodu: İşlem başarısız (belge çok koyu)
+1128 TWAIN Durum Kodu: İşlem başarısız (kaynağın aktarmak için içeriği yok)
+2000
+2001 Yetersiz bellek
+2002 Dosya açılamadı
+2003 Dosya okuma hatası
+2004 Dosya yazma hatası
+2005 Bitmap işlevi için geçersiz parametre belirtildi
+2006 Geçersiz BMP dosyası
+2007 RLE ile geçersiz BMP dosyası
+2008
+2009 Geçersiz JPEG biçimi
+2010 Geçersiz Cihaz Bağlamı
+2011 Geçersiz DIB
+2012
+2013 Kaynak hatası yok
+2014
+2015 Geçersiz PNG dosyası
+2016 PNG dosyası oluşturulamadı
+2017 Dahili hata
+2018 Geçersiz yazı tipi
+2019
+2020 Geçersiz TIFF dosyası
+2021 TIFF LZW sıkıştırması desteklenmiyor
+2022 Geçersiz PCX biçimi
+2023 BMP oluşturulamadı
+2024
+2025
+2026
+2027 Geçersiz Windows Meta Dosyası
+2028 Hatalı Bit Derinliği
+2029 BitBlt başarısız
+2030 Arabellek çok küçük
+2031 Görüntüde çok fazla renk var
+2032 Geçersiz TGA
+2033
+2034
+2035 DIB oluşturulamadı
+2036 LZW sıkıştırması desteklenmiyor
+2037
+2038
+2039
+2040
+2041 Windows Meta Dosyası bitleri ayarlanırken hata
+2042 Windows Meta Dosyası bitleri alınırken hata
+2043 PAX dosyası şifresinde hata
+2044 Geçersiz PAX
+2045 Dosya türü veya kullanıcı seçeneği desteklenmiyor
+2046 Geçersiz PSD biçimi
+2047 PSD desteklenmiyor
+2048 Şifre çözme hatası
+2049 Şifreleme hatası
+2050 Sıkıştırma hatası
+2051 Sıkıştırma açma hatası
+2052
+2053 Kablosuz Bitmap Biçimi (WBMP) için geçersiz bitmap genişliği/yüksekliği
+2054 Geçersiz TIFF Etiketi
+2055
+2056 Geçersiz EXIF biçimi
+2057
+2058 DTWIMG32.DLL bulunamadı
+2059 TIFLIB16.DLL bulunamadı
+2060 PNGLIB16.DLL bulunamadı
+2061 JPGLIB16.DLL bulunamadı
+2062 Geçersiz piksel başına bit sayısı belirtildi
+2063 Yanlış DTWIMG32.DLL sürümü
+2064 DTWPDF32.DLL bulunamadı
+2065 Yanlış DTWPDF32.DLL sürümü
+2066 DTWIMG32.DLL bulunamadı
+2067 Yanlış DTWIMG32.DLL sürümü
+2068 DTWIMG32.DLL bulunamadı
+2069 Yanlış DTWIMG32.DLL sürümü
+2070 DTWIMG32.DLL bulunamadı
+2071 Yanlış DTWIMG32.DLL sürümü
+2072 Manuel Çift Yüz modu bu DTWAIN sürümünde kullanılamıyor
+2073 İşlem zaman aşımına uğradı
+2074 Vista öncesi Windows ICO biçimi için geçersiz bitmap genişliği/yüksekliği
+2075 TWAIN_32.DLL veya belirtilen TWAIN Veri Kaynağı Yöneticisi bulunamadı, bozuk veya açılamadı
+2076 TWAINDSM.DLL veya belirtilen TWAIN Veri Kaynağı Yöneticisi bulunamadı, bozuk veya açılamadı
+2077 Geçersiz veya mevcut olmayan dizin
+2078 Dizin oluşturulamadı
+2079 Transym OCR DLL'si bulunamadı veya yüklenemedi.
+2081 Dosya adı belirtilmedi. -f seçeneğini kullanın
+2082 TWAIN kullanılamıyor
+2083 TWAIN cihazıyla iletişim kurulamıyor
+2084 Çıktı dosyası kaydedilirken hata
+2085 Geçersiz TwainSave komutu
+2086 TwainSave edinimi iptal edildi
+2087 Görüntü alınamadı
+2088 Geçersiz renk uzayı. Yalnızca RGB, Gri Tonlama ve Siyah/Beyaz renk uzayları destekleniyor
+2089 PDF desteklenmiyor.
+2090 DTWTS.DLL eksik veya bozuk. TwainSave kullanılamıyor
+2101 Geçersiz OCR sayfası belirtildi
+2102 Geçersiz OCR Motoru
+2103 OCR Motoru etkin değil
+2104 Geçersiz OCR dosya türü
+2105 Geçersiz OCR piksel türü
+2106 Geçersiz OCR bit derinliği
+2107 OCR Tanıma hatası
+2500 TWAIN kaynağı açılamadı
+2501 TWAIN kaynağı kapatılamadı
+2502 Görüntü alınırken geçersiz görüntü bilgisi
+2503 Dosyaya veri yazılırken hata
+2504 İşlem desteklenmiyor
+2505 Geçersiz PDF Metin Öğesi
+2506 Özellik ayarlanamadı. Geçersiz değerler kullanıldı.
+2507 Özellik mevcut durumda müzakere edilemiyor.
+3000 Kaynak Seç
+3001 &Seç
+3002 &İptal
+3003 Kaynaklar:
+3004 OCR Motoru Seç
+3005 Giriliyor
+3006 Çıkılıyor
+3007 döndürülen değer
+3008 İstisna Hatası
+3009 Modül
+3010 Parametre bilgisi yok
+3011 İşlev için bilgi alınırken hata
+3012 Giriş
+3013 Çıkış: DSM'den dönüş kodu
+3014 Bilgi yok:
+3015 hata kodu döndürüldü
+3016 Hata
+3017 Geçici dosya dizini mevcut değil
+3018 çağrıldı
+3019 Geçici Görüntü Dosyası:
+3020 Geçici Görüntü Dosyası oluşturulurken hata
+3021 Görüntü dosyası başarıyla oluşturuldu
+3022 Dönüşte ayarlanan değerler
+3023 Daha fazla
+3024 Özellik listesi
+3025 Varsayılan Kaynak
+3026 Günlük başlatıldı
+3027 Günlük sonlandırıldı
+3028 Son hata
+9700 DTWAIN Twain Kütüphanesi, v{short_version}, {company_name}, {copyright}
+9701 DTWAIN Twain Kütüphanesi, v{short_version}, {company_name}, {copyright_html}
+9999 Twain DSM çağrısı sırasında istisna hatası oluştu. Twain oturumu bozulmuş olabilir mi?
+10000 [Kullanıcı Mesajı]
+10001 Twain DSM kapatılırken hata
+10002 Twain Oturumu kapatılırken hata
+10003 DTWAIN Yöneticisi kapatılırken hata
+10004 TWAIN Kaynak Yöneticisi, Oturum ve DTWAIN başarıyla kapatıldı
+10005 Alt sınıf kullanıcı penceresinden kaldırılamadı
+10006 Cihaz türü ve TWAIN gerekli türü eşleşmiyor.
+10007 Uyarı: Dosya sıkıştırma türü bilinmiyor veya seçilen görüntü türüyle eşleşmiyor.
+9500 TWAIN Durum Kodu: Hata Yok
+9501 TWAIN Durum Kodu: Bilinmeyen hata nedeni
+9502 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
+9503 TWAIN Durum Kodu: Veri Kaynağı Yok
+9504 TWAIN Durum Kodu: Veri Kaynağı maksimum uygulama sayısına bağlı
+9505 TWAIN Durum Kodu: Veri Kaynağı veya Veri Kaynağı Yöneticisi hata bildirdi. Uygulama sorumlu değil.
+9506 TWAIN Durum Kodu: Bilinmeyen TWAIN özelliğiyle karşılaşıldı
+9509 TWAIN Durum Kodu: Tanınmayan TWAIN üçlü kombinasyonu
+9510 TWAIN Durum Kodu: Veri parametresi aralık dışında
+9511 TWAIN Durum Kodu: TWAIN üçlüsü beklenen sıra dışında
+9512 TWAIN Durum Kodu: DSM_Entry işlevinde bilinmeyen hedef Uygulama
+9513 TWAIN Durum Kodu: Özellik Veri Kaynağı tarafından desteklenmiyor
+9514 TWAIN Durum Kodu: İşlem özellik tarafından desteklenmiyor
+9515 TWAIN Durum Kodu: Özelliğin başka bir özelliğe bağımlılığı var
+9516 TWAIN Durum Kodu: Dosya korumalı
+9517 TWAIN Durum Kodu: Dosya zaten mevcut
+9518 TWAIN Durum Kodu: Dosya bulunamadı
+9519 TWAIN Durum Kodu: Dizin boş değil
+9520 TWAIN Durum Kodu: Besleyici sıkıştı
+9521 TWAIN Durum Kodu: Besleyici birden fazla sayfa algıladı
+9522 TWAIN Durum Kodu: Dosya yazma hatası (disk dolu olabilir)
+9523 TWAIN Durum Kodu: Cihaz işlem sırasında çevrimdışı oldu
+9524 TWAIN Durum Kodu: İşlem başarısız (cihazdaki kapak veya kap açık)
+9525 TWAIN Durum Kodu: İşlem başarısız (belgede hasarlı köşe var)
+9526 TWAIN Durum Kodu: İşlem başarısız (belge yakalama sırasında odak hatası)
+9527 TWAIN Durum Kodu: İşlem başarısız (belge çok açık)
+9528 TWAIN Durum Kodu: İşlem başarısız (belge çok koyu)
+9529 TWAIN Durum Kodu: İşlem başarısız (kaynağın aktarmak için içeriği yok)
+9600 TWAIN Dönüş Kodu: TWRC_SUCCESS
+9601 TWAIN Dönüş Kodu: TWRC_FAILURE
+9602 TWAIN Dönüş Kodu: TWRC_CHECKSTATUS
+9603 TWAIN Dönüş Kodu: TWRC_CANCEL
+9604 TWAIN Dönüş Kodu: TWRC_DSEVENT
+9605 TWAIN Dönüş Kodu: TWRC_NOTDSEVENT
+9606 TWAIN Dönüş Kodu: TWRC_XFERDONE
+9607 TWAIN Dönüş Kodu: TWRC_ENDOFLIST
+9608 TWAIN Dönüş Kodu: TWRC_INFONOTSUPPORTED
+9609 TWAIN Dönüş Kodu: TWRC_DATANOTAVAILABLE
+9610 TWAIN Dönüş Kodu: TWRC_BUSY
+9611 TWAIN Dönüş Kodu: TWRC_SCANNERLOCKED

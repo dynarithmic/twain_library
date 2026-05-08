@@ -610,7 +610,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                         if (nDataType == TWTY_INT32 || nDataType == TWTY_INT16)
                             sprintf(szTempBuf, "%d", lVal);
                         else
-                            sprintf(szTempBuf, "%u", lVal);
+                            sprintf(szTempBuf, "%u", (TW_UINT32)lVal);
                         DTWAIN_GetTwainNameFromConstantExA(nTranslationID, lVal, szValues, 256);
 
                         // Name does not really exist
@@ -630,6 +630,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     }
 
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                    szValues[0] = 0;
                 }
                 break;
 
@@ -642,6 +643,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     else
                         sprintf(szValues, "%lf", dVal);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+					szValues[0] = 0;
                 }
                 break;
 
@@ -649,6 +651,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                 {
                     DTWAIN_ArrayGetAtANSIString(values, i, szValues);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+					szValues[0] = 0;
                 }
                 break;
 
@@ -658,6 +661,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     DTWAIN_ArrayGetAtFrame(values, i, &left, &top, &right, &bottom);
                     sprintf(szValues, "Left: %lf  Top: %lf  Right: %lf  Bottom: %lf", left, top, right, bottom);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+					szValues[0] = 0;
                 }
                 break;
             }

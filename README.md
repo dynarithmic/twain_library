@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.8.2** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.9.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -14,35 +14,20 @@
 ----
 ### <u>Table of Contents</u>
 
-[What is the Dynarithmic Twain Library?](#anchor-what-is-dtwain)
-
-[Is the Dynarithmic Twain Library open source?](#anchor-is-dtwain_oss)
-
-[Preliminaries](#anchor-preliminaries)
-
-[Testing without a TWAIN device](#anchor-no-device)
-
-[How do I setup DTWAIN (library setup, building the application, and running the application)?](#anchor-dtwain-setup)
-
-[Simple code samples](#anchor-code-samples)
-
-[DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](#alternatecompilers)
-
-[Using DTWAIN in C#, Visual Basic and other computer languages](#otherlanguages)
-
-[The TWAIN Event Driven programming model](#anchor-event-driven)
-
-[Obtaining the DTWAIN Library source code](#anchor-source-code)
-
-[DTWAIN and Linux compatibility](#anchor-linux)
-
-[Acknowledgments](#anchor-acknowldegements)
-
-[Final note for developers](#anchor-final-note)
-
-[Reporting Issues](#anchor-issues)
-
-[Who authored the DTWAIN library?](#anchor-author)
+##### [What is the Dynarithmic Twain Library?](#anchor-what-is-dtwain)
+##### [Is the Dynarithmic Twain Library open source?](#anchor-is-dtwain_oss)
+##### [Preliminaries](#anchor-preliminaries)
+##### [Testing without a TWAIN device](#anchor-no-device)
+##### [How do I setup DTWAIN (library setup, building the application, and running the application)?](#anchor-dtwain-setup)
+##### [Simple code samples](#anchor-code-samples)
+##### [DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)](#alternatecompilers)
+##### [Using DTWAIN in C#, Visual Basic and other computer languages](#otherlanguages)
+##### [The TWAIN Event Driven programming model](#anchor-event-driven)
+##### [Obtaining the DTWAIN Library source code](#anchor-source-code)
+##### [DTWAIN and Linux compatibility](#anchor-linux)
+##### [Final note for developers](#anchor-final-note)
+##### [Reporting Issues](#anchor-issues)
+##### [Who authored the DTWAIN library?](#anchor-author)
 
 ----
 ----
@@ -94,32 +79,39 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 <a id="anchor-dtwain-setup"></a>
 ### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
-**<u>Building the DTWAIN application</u>**
+
+Basically, all that is required to initially set up DTWAIN is to ensure that the proper DTWAIN DLL's are located where the Windows operating system will find them (usually in a directory specified on the system **PATH**), and that various [mandatory text files](https://github.com/dynarithmic/twain_library/tree/master/text_resources) are also present.  
+
+All of this will be discussed in detail below.
+
+----
+
+**<u>Building the DTWAIN application:</u>**
+
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
+For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
-[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging/release_ziphashes32.txt)</br>
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging/release_ziphashes32.txt)</br>
-[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/full_logging_require_vcruntime/release_ziphashes32.txt)</br>
-[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/32bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/32bit/partial_logging_require_vcruntime/release_ziphashes32.txt)</br> 
-
-----
-
-For 64-bit applications, use the binaries found in **release_libraries.zip** in one of the following directories:
-
-[full_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging/release_ziphashes64.txt)</br>
-[partial_logging](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging/release_ziphashes64.txt)</br>
-[full_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/full_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/full_logging_require_vcruntime/release_ziphashes64.txt)</br>
-[partial_logging_require_vcruntime](https://github.com/dynarithmic/twain_library/tree/master/binaries/64bit/partial_logging_require_vcruntime) with checksums found here: [checksum values](https://github.com/dynarithmic/twain_library/blob/master/binaries/64bit/partial_logging_require_vcruntime/release_ziphashes64.txt)</br> 
-
+**full_logging**<br>
+**partial_logging**<br>
+**full_logging_require_vcruntime**<br>
+**partial_logging_require_vcruntime**<br>
 
 ----
 
-The **full_logging** directory contains the DLL's that have the following characteristics: 
+For 64-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
+
+**full_logging**<br>
+**partial_logging**<br>
+**full_logging_require_vcruntime**<br>
+**partial_logging_require_vcruntime**<br>
+
+----
+
+The **full_logging** directory contains the DTWAIN DLL's that have the following characteristics: 
 1) Built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
 2) Does not require an installation of the Visual C++ Runtime on the target system.
 
-The **partial_logging** directory contains the DLL's that are:
+The **partial_logging** directory contains the DTWAIN DLL's that are:
 1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available, and
 2) Does not require an installation of the Visual C++ Runtime on the target system.
 
@@ -137,26 +129,22 @@ If you will install the Visual C++ Runtime yourself, or assume that the systems 
 
 To distinguish between whether the full or partial logging DLL's are in use (since the names of the DTWAIN DLL's themselves are the same, regardless of which ones are used), see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
 
-In addition, the [release version of the Program Database (.PDB) files](https://github.com/dynarithmic/dtwain-pdb) are available.  This will aid in debugging any issues involving DTWAIN.
+In addition, the release version of the Programing Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
 
 ----
 
-A breakdown of the files contained in **release_libraries.zip** is as follows:
+A breakdown of the main files contained in **DTWAIN-Release-x86.zip** and **DTWAIN-Release-x64.zip** is as follows:
 
     dtwain32.dll   --  32-bit ANSI (MBCS) Dynamic Link Library
     dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
     dtwain32.lib   --  32-bit ANSI (MBCS) Visual C++ import library
     dtwain32u.lib  --  32-bit Unicode Visual C++ import library
-    dtwain32.pdb   --  32-bit PDB (Microsoft debug) files for dtwain32.dll
-    dtwain32u.pdb  --  32-bit PDB (Microsoft debug) files for dtwain32u.dll
 
     dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
     dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
     dtwain64.lib   --  64-bit ANSI (MBCS) Visual C++ import library
     dtwain64u.lib  --  64-bit Unicode Visual C++ import library
-    dtwain64.pdb   --  64-bit PDB (Microsoft debug) files for dtwain64.dll
-    dtwain64u.pdb  --  64-bit PDB (Microsoft debug) files for dtwain64u.dll
-
+    
 Please note that the files with the "u" in the name are Unicode aware.  If your application requires Unicode-based string processing, it is always best to use the "u" versions of the above files.  
 
 For example, if you plan to use the [language text resources](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources) that use UTF-8 character sequences that have issues displaying properly using the ANSI version of the library (for example, Greek), you should use one of the "u" DLL's listed above.  More info on the language text resources are found later in this README.
@@ -165,7 +153,7 @@ The DTWAIN API has available ANSI-aware functions even in the Unicode versions o
 
 ----
 
-###### Information for C and C++ programmers:
+###### Information for C and C++ programmers only:
 
 If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
 If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
@@ -423,21 +411,21 @@ To utilize other computer languages, it still requires that one of the [DTWAIN d
 
 DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries\
-  [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.\
-  [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)\
-  [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)\
-  [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)\
-  [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)\
-  [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)\
-  [Java*](https://github.com/dynarithmic/twain_library-java)\
-  [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)\
-  [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)\
-  [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)\
-  [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)\
-  [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)\
-  [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)\
-  [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
+  * [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries<br>  
+  * [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.
+  * [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)
+  * [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)
+  * [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
+  * [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)
+  * [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
+  * [Java*](https://github.com/dynarithmic/twain_library-java)
+  * [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)
+  * [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)
+  * [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
+  * [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)
+  * [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
+  * [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)
+  * [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
 
 * Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
@@ -560,20 +548,6 @@ We have language bindings (pinvoke's) for C# and Visual Basic.  However we curre
 ### Is there a C++ class wrapper for DTWAIN? ###
 
 If you're a C++ programmer, and want a wrapper around the DTWAIN libarary, we do have a C++ wrapper for DTWAIN located in the <a href="https://github.com/dynarithmic/twain_library/tree/master/demos/C_C%2B%2B/cpp_wrapper_lib" target="_blank">demos\cpp_wrapper_lib</a> directory.  For more information, see the <a href="https://github.com/dynarithmic/twain_library/blob/master/demos/README.md" target="_blank">README.md</a> in the demos directory.
-
-----------
-----------
-### Acknowledgments ###
-<a name="anchor-acknowldegements"></a>
-* Other than the interface to the TWAIN libraries to allow image acquisition, The Dynarithmic TWAIN Library makes use of the following third-party libraries to process image data.
-
-  * FreeImage  - [Open source Imaging library](http://freeimage.sourceforge.net/).  Note:  We use the FreeImage Public License terms [found here](https://github.com/dynarithmic/twain_library/tree/master/source/FreeImage/license-fi.txt).
-  * SimpleINI  - Open source (MIT License) [INI file parsing library](https://github.com/brofield/simpleini)
-  * nlohmann/JSON library - [Open source C++ JSON library](https://github.com/nlohmann/json)
-  
-* In addition, an interface to the [TOCR OCR library](http://www.transym.com/).  This allows image files to be translated to text files for functions such as DTWAIN_AcquireFile with the type to acquire being DTWAIN_TXT.  To use TOCR requires you to purchase a separate license from Transym (we do not provide the DLL or the libraries, just the function calls to allow usage of the TOCR library).
-  
-* All other raw image processing, plus the interface to the TWAIN system itself, is done without third-party libraries or third-party source code.  
 
 ----------
 ----------

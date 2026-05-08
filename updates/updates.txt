@@ -1,5 +1,97 @@
 DTWAIN Version changes
 
+5.9.0
+
+- Removed usage of the FreeImage and CxImage libraries to generate image files.  Removal of FreeImage
+  and CxImage eliminates the dependency on third-party libraries to handle most of the image save options.
+  In addition, this reduced the size of the DTWAIN DLL's by several hundred kilobytes, in addition
+  to having overall speed gains in creating the image files.
+
+- Addressed various issues with saving SVG, GIF, and Windows ICO files.  Most of these issues dealt 
+  with some black and white or gray scale SVG/GIF/ICO files being saved with reverse/negated colors.
+
+- Improved saving to Postscript files.  The biggest improvement is the quality of the images 
+  being saved as PostScript has been upgraded.  Most of the improvement is due to removing 
+  the usage of having to save the image to a temporary TIFF file, and then using a libtiff 
+  utility to convert the TIFF to PostScript.  Instead of this, all of the PostScript generation 
+  code has now been  written from the ground up, thus not needing to create temporary TIFF 
+  files and using other utilities to convert to PostScript format.
+
+- Improved TIFF file support.  Most of the improvement has to do with a small reduction in TIFF
+  file sizes, and issues where saving to a TIFF using JPEG compression may display a black
+  image if the image type is 1 bit-per-pixel (black and white).  
+
+- Improve blank page handling when acquiring images.  See function DTWAIN_SetBlankPageDetection()
+  to turn on or off blank page detection.  The improvements were mostly dealing with better 
+  detection of blank pages if the image is 4, 8 or 16 bit-per-pixel gray scale images.
+
+- Add dtwain.natvis Visual Studio debugger visualizer for DTWAIN_ARRAY and
+  DTWAIN_SOURCE.  Without the visualizer, the DTWAIN_ARRAY and DTWAIN_SOURCE will
+  show up as void pointers, without any further information.  The visualizer will
+  now allow the debugger to show the internals of the DTWAIN_ARRAY or DTWAIN_SOURCE.
+
+  If using C or C++ under Visual Studio, the Visual Studio debugger will allow you
+  to view the contents of a DTWAIN_ARRAY and DTWAIN_SOURCE types.  The dtwain.natvis 
+  file should be placed either in your project, or installed in your Visual Studio 
+  installation, under the "Visualizers" subdirectory.
+
+  In addition, your application will need the DebugUtils.c and DebugUtils.h files included
+  in your application's project.  These files contain the necessary functions for the debugger to
+  display the contents of a DTWAIN_ARRAY or DTWAIN_SOURCE.  
+
+  The following command should be entered into the Visual Studio's Watch Window or Immediate Window:
+  
+  DTWAIN_CreateArrayDebugView(array_to_view)
+
+  where "array_to_view" is the DTWAIN_ARRAY to view.
+
+  To view a DTWAIN_SOURCE:
+
+  DTWAIN_CreateSourceDebugView(source_to_view)
+
+  where "source_to_view" is the DTWAIN_SOURCE.
+
+  Note that the Visual Studio watch window items may require a "refresh", since the 
+  Visual Studio debugger does not dynamically update the views of the DTWAIN_ARRAY 
+  or DTWAIN_SOURCE when single-stepping through the program using the debugger.
+
+  For a demonstration of the above, the DTWDEMO project includes all of the necessary 
+  files for debugging the DTWAIN_ARRAY and DTWAIN_SOURCE types.
+
+- Add DTWAIN_ArrayIsValid function to test if a DTWAIN_ARRAY is valid.  The prototype is:
+
+  BOOL DTWAIN_ArrayIsValid(DTWAIN_ARRAY array);
+
+  where the return value is either TRUE (1) or FALSE (0).
+
+- Add DTWAIN_GetAllSourceInfo function that returns a small JSON object describing the
+  DTWAIN_SOURCE.
+
+  The prototype is as follows:
+
+  LONG DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE source, LPTSTR szBuffer, LONG indentFactor, LONG maxLength)
+
+  where source is the DTWAIN_SOURCE, szBuffer is where the JSON information will be written to.  The
+  indentFactor is how much to indent each level of the JSON information (for good results, use 2).
+  The maxLength is the maximum size of szBuffer, in characters. 
+
+  The return value is the number of characters copied to szBuffer.  If szBuffer is NULL, then the return
+  value is the total number of characters that would be copied to szBuffer, i.e. the total length of the
+  JSON data, and no data is copied to szBuffer.
+
+  The ANSI version is DTWAIN_GetAllSourceInfoA.  The wide-string version is DTWAIN_GetAllSourceInfoW.
+
+- Fix issue with DTWAIN_GetDeviceEventEx not returning some device events.
+
+- Fix incorrect parameter type sent to DTWAIN_ArrayGetAtFloatStringW
+
+- Fix issue with DTWAIN_ArrayAddFrameN not adding the DTWAIN_FRAME to the array.
+
+- Fix issue with the DTWDEMO program and file acquisitions if blank page detection is turned on.
+
+- Added Turkish string resources.
+
+
 5.8.2
 
 - [Possible breaking change if you are acquiring in duplex mode]
