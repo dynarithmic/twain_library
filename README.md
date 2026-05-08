@@ -418,7 +418,7 @@ There are [other demo C and C++ programs](https://github.com/dynarithmic/twain_l
 ----------
 
 <a name="alternatecompilers"></a>
-### DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.
+### DTWAIN usage for C or C++ compilers that are not Microsoft Visual C++ (examples are g++, mingw, clang, etc.)
 
 For C/C++ compilers that are not in the Microsoft Visual C++ family such as g++, mingw, clang, and others, and thus cannot use the provided Visual C++ import library files directly (or easily) when building your application, you can do one of two things:
 
