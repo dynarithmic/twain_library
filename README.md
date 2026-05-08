@@ -200,6 +200,9 @@ More detailed instructions on adding your own resource file can be found <a href
 ----------
 <a id="anchor-code-samples"></a>
 ### Simple code samples
+
+<small>Please note:  For ease of use, the simple examples below make usage of the "A" version of the DTWAIN functions (the functions that require ANSI strings).  This makes the samples compile successfully "out of the box" for those programmers using C or C++ without having to use wide or Unicode strings directly.</small>  
+
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
     #include <iostream>
@@ -251,9 +254,36 @@ However, you can customize the "Select Source" dialog box by utilizing the dialo
         DTWAIN_SysDestroy();         
     }         
 
+
+In addition to selecting a Source by using the "Select Source" dialog box, you can select a TWAIN Source by using the TWAIN Source's "Product Name", i.e. the name that is used within the dialog box.  
+
+This effectively selects the TWAIN Source without the dialog box appearing.  The function to use would be `DTWAIN_SelectSourceByName` instead of `DTWAIN_SelectSource` or `DTWAIN_SelectSource2`
+
+    #include <iostream>
+    #include "dtwain.h"
+
+    int main()
+    {
+        // display DTWAIN version, just for fun
+        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
+
+        // initialize the DTWAIN DLL
+        DTWAIN_SysInitialize();
+        
+        // Select a TWAIN Source called "My Scanner".  This assumes that "My Scanner" is the name
+        // of one of the TWAIN devices installed on the system
+        DTWAIN_SOURCE Source = DTWAIN_SelectSourceByNameA("My Scanner");
+                
+        if ( Source ) // Will be non-zero if a Source is successfully selected
+        {
+            //...
+        }
+        DTWAIN_SysDestroy();         
+    }         
+
 ----
 
-If you desire to acquire to an image in memory instead of a file, that can be done also.  By default, a Windows-based TWAIN driver always returns a Device Independent Bitmap (DIB) as the memory image.    
+If you desire to acquire to an image in memory instead of an image file, that can be done also.  By default, a Windows-based TWAIN driver always returns a Device Independent Bitmap (DIB) as the memory image.    
 
     #include "dtwain.h"
     int main()
