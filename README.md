@@ -441,21 +441,21 @@ To utilize other computer languages, it still requires that one of the [DTWAIN d
 
 DTWAIN includes computer language bindings and demo programs for the following computer languages found in the [programming language bindings](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings) folder:
 
-  * [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries<br>  
-  * [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.
-  * [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)
-  * [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)
-  * [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
-  * [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)
-  * [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
-  * [Java*](https://github.com/dynarithmic/twain_library-java)
-  * [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)
-  * [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)
-  * [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
-  * [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)
-  * [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
-  * [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)
-  * [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
+  - [C and C++](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C++) -- linking using Visual C++ compatible import libraries<br>  
+  - [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.
+  - [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)
+  - [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)
+  - [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
+  - [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)
+  - [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
+  - [Java*](https://github.com/dynarithmic/twain_library-java)
+  - [Lua (using LuaJit)](https://github.com/dynarithmic/twain_library/tree/master/demos/Lua)
+  - [Perl](https://github.com/dynarithmic/twain_library/tree/master/demos/Perl)
+  - [Python](https://github.com/dynarithmic/twain_library/tree/master/demos/Python)
+  - [Ruby](https://github.com/dynarithmic/twain_library/tree/master/demos/Ruby)
+  - [Rust](https://github.com/dynarithmic/twain_library/tree/master/demos/Rust)
+  - [Visual Basic .NET](https://github.com/dynarithmic/twain_library/tree/master/demos/VisualBasic)
+  - [XBase++ (Alaska Software)](https://github.com/dynarithmic/twain_library/tree/master/demos/XBase%2B%2B)
 
 * Note: The Java interface is a full-featured implementation using DTWAIN, and has a dedicated repository found in [twain_library-java](https://github.com/dynarithmic/twain_library-java).
 
