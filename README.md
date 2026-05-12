@@ -89,7 +89,7 @@ All of this will be discussed in detail below.
 **<u>Building the DTWAIN application:</u>**
 
 <a name="dtwaindllusage"></a>
-For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
+For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
@@ -98,7 +98,7 @@ For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in 
 
 ----
 
-For 64-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
+For 64-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
 
 **full_logging**<br>
 **partial_logging**<br>
