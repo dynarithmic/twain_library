@@ -465,6 +465,8 @@ A full C# demo can be found <a href="https://github.com/dynarithmic/twain_librar
 
 A full Visual Basic .NET demo can be found <a href="https://github.com/dynarithmic/twain_library-visualbasic_demo" target="_blank">here</a>.
 
+A full Python demo can be found [here](https://github.com/dynarithmic/twain_library-python_demo).
+
 For Java, it is recommended to look through the numerous demo programs in the [Java interface to DTWAIN repository](https://github.com/dynarithmic/twain_library-java).
 
 ----------
