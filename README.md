@@ -127,8 +127,6 @@ If you are not concerned with sizes of the DLL's, the **full_logging** DLL's sho
 
 If you will install the Visual C++ Runtime yourself, or assume that the systems you will run DTWAIN on have the Visual C++ Runtime already installed, you can use the DLL's in the "*_require_vcruntime" directories, further reducing the size of the DTWAIN DLL's being used.
 
-To distinguish between whether the full or partial logging DLL's are in use (since the names of the DTWAIN DLL's themselves are the same, regardless of which ones are used), see [the following information](https://github.com/dynarithmic/twain_library_source/tree/main/binaries/32bit#how-to-distinguish-between-full-and-partial-logging-dlls).
-
 In addition, the release version of the Program Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
 
 ----
