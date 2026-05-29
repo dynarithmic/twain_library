@@ -82,6 +82,7 @@ All of this will be discussed in detail below.
 ----
 
 **<u>Building the DTWAIN application:</u>**
+
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
@@ -365,7 +366,7 @@ Here is an example of getting all of the available ICAP_PIXELTYPE values:
             DTWAIN_ARRAY aPixelTypeValues;
             
             // Call function to get all the ICAP_PIXELTYPE capabilities
-            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET,                 &aPixelTypeValues);
+            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET, &aPixelTypeValues);
             
             if ( result )
             {
