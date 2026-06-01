@@ -1720,6 +1720,46 @@ DTWAIN_FEEDER_USEFLATBED = 2
 # 
 # raise exceptions if the DLL name is not valid for the python runtime environment,
 # misspelled DLL name, or if the DLL is not found or cannot be loaded.
+def load_dtwaindll_internal(dllName):
+    # Full path supplied
+    if os.path.isabs(dllName):
+        if not os.path.isfile(dllName):
+            raise FileNotFoundError(f"Could not locate {dllName}")
+        dllPath = dllName
+    else:
+        search_paths = []
+
+        # Current working directory
+        search_paths.append(os.getcwd())
+
+        # Directory containing dtwainapi.py
+        search_paths.append(os.path.dirname(os.path.abspath(__file__)))
+
+        # PATH directories
+        search_paths.extend(
+            p.strip().strip('"')
+            for p in os.environ.get("PATH", "").split(os.pathsep)
+            if p.strip())
+
+        dllPath = None
+        for pathDir in search_paths:
+            candidate = os.path.join(pathDir, dllName)
+            if os.path.isfile(candidate):
+                dllPath = candidate
+                break
+
+        if dllPath is None:
+            raise FileNotFoundError(
+                f"Could not locate '{dllName}' in current directory or PATH"
+            )
+
+    # Make the DLL directory available for dependent DLL resolution
+    try:
+        os.add_dll_directory(os.path.dirname(dllPath))
+    except (AttributeError, OSError):
+        pass
+    return ct.WinDLL(dllPath)
+
 def load_dtwaindll(dllName):
     all64 = ["dtwain64.dll", "dtwain64u.dll", "dtwain64d.dll", "dtwain64ud.dll"]
     all32 = ["dtwain32.dll", "dtwain32u.dll", "dtwain32d.dll", "dtwain32ud.dll"]
@@ -1741,7 +1781,7 @@ def load_dtwaindll(dllName):
         isAnsi = True
     try:
         # load the dll  
-        dtwain_dll = ct.windll.LoadLibrary(dllName)
+        dtwain_dll = load_dtwaindll_internal(dllName)
         setup_windll(dtwain_dll, isAnsi)
         return dtwain_dll
     except FileNotFoundError as e:
