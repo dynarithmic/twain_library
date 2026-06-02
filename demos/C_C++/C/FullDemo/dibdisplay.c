@@ -55,11 +55,11 @@ void DisplayDibPages(HINSTANCE hInstance, DTWAIN_ARRAY AcquireArray, UINT resID,
 
 INT_PTR DisplayOneDibPage(HINSTANCE hInstance, HANDLE hDib, UINT resID, HWND wndHandle)
 {
-	INT_PTR ret;
-	DisplayOne = 1;
-	ret = DialogBoxParam(hInstance, (LPCTSTR)resID, wndHandle, (DLGPROC)DisplayDIBProc, (LPARAM)hDib);
-	DisplayOne = 0;
-	return ret;
+    INT_PTR ret;
+    DisplayOne = 1;
+    ret = DialogBoxParam(hInstance, (LPCTSTR)resID, wndHandle, (DLGPROC)DisplayDIBProc, (LPARAM)hDib);
+    DisplayOne = 0;
+    return ret;
 }
 
 /* Dialog box to display DIB */
@@ -74,9 +74,9 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
     static HWND hWndOf;
     static HWND hwndPage;
     static HWND hwndBlank;
-	static HWND hwndOk;
-	static HWND hwndCancel;
-	static HWND hwndtxtAcquisition;
+    static HWND hwndOk;
+    static HWND hwndCancel;
+    static HWND hwndtxtAcquisition;
     static int nCurDib;
     static HWND Frame;
     static LRESULT nCurrentAcquisition;
@@ -96,11 +96,11 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
             LONG i;
             TCHAR sz[10];
 
-			if (DisplayOne)
-				SetWindowText(hDlg, _T("Image Preview - Do you want to keep or discard image below?"));
+            if (DisplayOne)
+                SetWindowText(hDlg, _T("Image Preview - Do you want to keep or discard image below?"));
             nCurDib = 0;
-			if ( !DisplayOne )
-				AcquireArray = (DTWAIN_ARRAY)lParam;
+            if ( !DisplayOne )
+                AcquireArray = (DTWAIN_ARRAY)lParam;
 
             /* Get handle of Next, Prev buttons */
             hWndNext = GetDlgItem(hDlg, IDC_btnNext);
@@ -115,13 +115,13 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
             /* Get handle of page information fields */
             hWndCurPage = GetDlgItem(hDlg, IDC_edCurPage);
             hWndNumPages = GetDlgItem(hDlg, IDC_edNumPages);
-			hwndtxtAcquisition = GetDlgItem(hDlg, IDC_txtAcquisition);
+            hwndtxtAcquisition = GetDlgItem(hDlg, IDC_txtAcquisition);
 
             /* Get handle of Acquisition Combo */
             hWndAcquisition = GetDlgItem(hDlg, IDC_cmbAcquisition);
 
-			hwndOk = GetDlgItem(hDlg, IDOK);
-			hwndCancel = GetDlgItem(hDlg, IDCANCEL);
+            hwndOk = GetDlgItem(hDlg, IDOK);
+            hwndCancel = GetDlgItem(hDlg, IDCANCEL);
 
             /* Get handle of frame */
             Frame = GetDlgItem( hDlg, IDC_frmImage);
@@ -132,10 +132,10 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
             InflateRect(&rectFrame, -1, -1);
 
             /* Get DIB Width and Height */
-			if (!DisplayOne)
-				hDibLocal = DTWAIN_GetAcquiredImage(AcquireArray, 0, nCurDib);
-			else
-				hDibLocal = (HANDLE)lParam;
+            if (!DisplayOne)
+                hDibLocal = DTWAIN_GetAcquiredImage(AcquireArray, 0, nCurDib);
+            else
+                hDibLocal = (HANDLE)lParam;
 
             if ( hDibLocal )
             {
@@ -153,35 +153,35 @@ LRESULT CALLBACK DisplayDIBProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
             nCurrentAcquisition = 0;
 
             if (!DisplayOne)
-			{
+            {
                 /* Enable/Disable Next, Prev buttons */
                 EnablePageButtons(hWndPrev, hWndNext, hWndCurPage, hWndNumPages,
                     hwndPage, hWndOf, hwndBlank, nCurDib,
                     (int)nCurrentAcquisition, AcquireArray);
 
                 nCount = DTWAIN_GetNumAcquisitions(AcquireArray);
-				for (i = 1; i <= nCount; i++)
-				{
-					wsprintf(sz, _T("%d"), i);
-					SendMessage(hWndAcquisition, CB_ADDSTRING, 0, (LPARAM)sz);
-				}
-				SendMessage(hWndAcquisition, CB_SETCURSEL, 0, 0);
-			}
-			else
-			{
-				ShowWindow(hWndNext, SW_HIDE);
-				ShowWindow(hWndPrev, SW_HIDE);
-				ShowWindow(hWndOf, SW_HIDE);
-				ShowWindow(hwndPage, SW_HIDE);
-				ShowWindow(hwndBlank, SW_HIDE);
-				ShowWindow(hWndCurPage, SW_HIDE);
-				ShowWindow(hWndNumPages, SW_HIDE);
-				ShowWindow(hWndAcquisition, SW_HIDE);
-				ShowWindow(hwndtxtAcquisition, SW_HIDE);
-				SetWindowText(hwndOk, _T("Keep"));
-				SetWindowText(hwndCancel, _T("Discard"));
-			}
-   		    return TRUE;
+                for (i = 1; i <= nCount; i++)
+                {
+                    wsprintf(sz, _T("%d"), i);
+                    SendMessage(hWndAcquisition, CB_ADDSTRING, 0, (LPARAM)sz);
+                }
+                SendMessage(hWndAcquisition, CB_SETCURSEL, 0, 0);
+            }
+            else
+            {
+                ShowWindow(hWndNext, SW_HIDE);
+                ShowWindow(hWndPrev, SW_HIDE);
+                ShowWindow(hWndOf, SW_HIDE);
+                ShowWindow(hwndPage, SW_HIDE);
+                ShowWindow(hwndBlank, SW_HIDE);
+                ShowWindow(hWndCurPage, SW_HIDE);
+                ShowWindow(hWndNumPages, SW_HIDE);
+                ShowWindow(hWndAcquisition, SW_HIDE);
+                ShowWindow(hwndtxtAcquisition, SW_HIDE);
+                SetWindowText(hwndOk, _T("Keep"));
+                SetWindowText(hwndCancel, _T("Discard"));
+            }
+               return TRUE;
         }
 
     case WM_PAINT:

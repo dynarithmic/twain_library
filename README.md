@@ -1,4 +1,4 @@
-### What is this repository for? ###
+### The Dynarithmic TWAIN Library repository ###
 
 * This repository contains the DTWAIN Library, **Version 5.x**, from Dynarithmic Software.  DTWAIN is an open source programmer's library that will allow applications to acquire images from TWAIN-enabled devices using a simple Application Programmer's Interface (API).
 
@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.9.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.9.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -64,11 +64,6 @@ DTWAIN is supported under *Windows 10 / Windows 11 for both 32-bit and 64-bit op
 
 ----
 
-The "standard" versions of the DTWAIN library ("standard" meaning the DLL's found in the **full_logging** and **partial_logging** directories -- See below in the **How do I get set up using DTWAIN** section) will not require an installation of the Visual C++ runtime files, so there shouldn't be an issue when using the standard versions.  However the standard versions are larger in size (up to a megabyte or so) than the versions that require an installation of the Visual C++ runtime already installed on the system that DTWAIN will be running on.
-
-Since most Windows systems within the past 8 years has the Visual C++ runtime already installed by other applications, this may not be an issue and the smaller-sized DTWAIN DLL's can be used.  However, if for some reason your system does not have the proper runtime components, you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
-
-----------
 ----------
 <a id="anchor-no-device"></a>
 ### I don't have a TWAIN device or scanner installed on my system.  How do I work with DTWAIN?
@@ -91,43 +86,35 @@ All of this will be discussed in detail below.
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
-**full_logging**<br>
-**partial_logging**<br>
-**full_logging_require_vcruntime**<br>
-**partial_logging_require_vcruntime**<br>
+* **no_vcruntime**<br>
+* **require_vcruntime**<br>
 
 ----
 
 For 64-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x64.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x64.zip), and within this zip file, one of the following directories:
 
-**full_logging**<br>
-**partial_logging**<br>
-**full_logging_require_vcruntime**<br>
-**partial_logging_require_vcruntime**<br>
+* **no_vcruntime**<br>
+* **require_vcruntime**<br>
 
 ----
 
-The **full_logging** directory contains the DTWAIN DLL's that have the following characteristics: 
-1) Built with full logging capabilities. Full logging consists of logging the call stack and return values when calling DTWAIN functions, plus the lower level calls that DTWAIN makes to the TWAIN Data Source Manager.  This is valuable in detecting issues that may occur when issuing calls to DTWAIN.
-2) Does not require an installation of the Visual C++ Runtime on the target system.
+The **no_vcruntime** directory contains the DTWAIN DLL's that do not require an installation of the Visual C++ Runtime on the target system when utilizing the DTWAIN API functions.
 
-The **partial_logging** directory contains the DTWAIN DLL's that are:
-1) Built without call stack and return values being logged.  These DLL's are around 500K smaller in size than the DLL's in **full_logging**.  Direct calls to the lower level TWAIN DSM are included, but the call stack and return value logging is not available, and
-2) Does not require an installation of the Visual C++ Runtime on the target system.
+The **require_vcruntime** directory contains the DLL's that require an installation of the Visual C++ Runtime on the target system.
 
-The **full_logging_require_vcruntime** directory contains the DLL's that are 
-1) Built with full logging capabilities, exactly the same as **full_logging** described above, and
-2) Requires an installation of the Visual C++ Runtime on the target system.
+Since most Windows systems within the past 10 years has the Visual C++ runtime already installed by other applications, using the **require_vcruntime** version of the DTWAIN_DLL's shouldn't be an issue and can be used.  
 
-The **partial_logging_require_vcruntime** directory contains the DLL's that are 
-1) Built without call stack and return values being logged, exactly the same as **partial_logging** described above, and
-2) Requires an installation of the Visual C++ Runtime on the target system.
+If however you are not sure if the user's of your application using DTWAIN has the Visual C++ runtime installed, you can either:
 
-If you are not concerned with sizes of the DLL's, the **full_logging** DLL's should be used.  If you desire DLL's that are a bit smaller and can "sacrifice" call stack / return value logging, the **partial_logging** DLL's should be used.  
+1) Use the DTWAIN DLL's found in **no_vcruntime**, which require no installation of the Visual C++ runtime or
 
-If you will install the Visual C++ Runtime yourself, or assume that the systems you will run DTWAIN on have the Visual C++ Runtime already installed, you can use the DLL's in the "*_require_vcruntime" directories, further reducing the size of the DTWAIN DLL's being used.
+2) Install the Visual C++ runtime components on the user's system (your installer should do this, or direct the user to install the Visual C++ runtime components below).    
+  
+If you choose option 2), you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
-In addition, the release version of the Program Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
+In addition, the release version of the Programming Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/download/v5.9.0/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
+
+Note: Starting with **DTWAIN 5.9.1**, prebuilt DTWAIN DLLs that had the "no-logging" option, even though a bit smaller than the DLL's that had logging support, are no longer distributed separately.  All standard DTWAIN release DLLs include logging support.  Developers who require no-logging builds may [rebuild DTWAIN from source](https://github.com/dynarithmic/twain_library_source) using the `DTWAIN_ENABLE_LOGCALLSTACK=OFF` in the CMake build options.
 
 ----
 
@@ -137,23 +124,37 @@ A breakdown of the main files contained in **DTWAIN-Release-x86.zip** and **DTWA
     dtwain32u.dll  --  32-bit Unicode Dynamic Link Library
     dtwain32.lib   --  32-bit ANSI (MBCS) Visual C++ import library
     dtwain32u.lib  --  32-bit Unicode Visual C++ import library
+    32bit_FullDemo --  Directory containing the 32-bit demo program (DTWDEMO32U)
 
     dtwain64.dll   --  64-bit ANSI (MBCS) Dynamic Link Library
     dtwain64u.dll  --  64-bit Unicode Dynamic Link Library
     dtwain64.lib   --  64-bit ANSI (MBCS) Visual C++ import library
     dtwain64u.lib  --  64-bit Unicode Visual C++ import library
-    
-Please note that the files with the "u" in the name are Unicode aware.  If your application requires Unicode-based string processing, it is always best to use the "u" versions of the above files.  
+    64bit_FullDemo --  Directory containing the 64-bit demo program (DTWDEMO64U)
+
+Please note that the DLL files that have file names that end with "u" are Unicode-aware, for example `dtwain32u.dll` is Unicode-aware.  If your application requires Unicode-based string processing, it is always best to use the "u" versions of the above files.  
 
 For example, if you plan to use the [language text resources](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources) that use UTF-8 character sequences that have issues displaying properly using the ANSI version of the library (for example, Greek), you should use one of the "u" DLL's listed above.  More info on the language text resources are found later in this README.
 
 The DTWAIN API has available ANSI-aware functions even in the Unicode versions of the library, in the event your Unicode application needs to process ANSI strings.  This is usually done by the API function ends with "A", for example `DTWAIN_GetSourceProductNameA` for the ANSI version of the function `DTWAIN_GetSourceProductName`.  Similarly, there are Unicode or wide-character functions available for the ANSI version of the DLL's in the event your ANSI-based application needs to process wide/Unicode strings (for example `DTWAIN_GetSourceProductNameW` for the wide-character version of the function `DTWAIN_GetSourceProductName`).
 
+**<u>32-bit and 64-bit demo program (DTWDEMO)</u>**
+
+The **32bit_FullDemo** and **64bit_FullDemo** directories contain the full versions of the 32-bit DTWDEMO program (`DTWDEMO32U.exe`) and 64-bit DTWDEMO program (`DTWDEMO64U.EXE`), respectively.  
+
+The DTWDEMO programs can be used to test various aspects of the DTWAIN API and your TWAIN devices (capability testing and setting, acquiring images and files, etc.).  Copy all files from either the **32bit_FullDemo** or **64bit_FullDemo** to an empty directory and run either `DTWDEMO32U.exe` or `DTWDEMO64.exe` directly from the directory.  
+
+Please note that the DTWDEMO program demonstrates just a subset of what the DTWAIN API is capable of.  When running the DTWDEMO program, remember that *all* aspects you are seeing when running DTWDEMO with respect to handling TWAIN devices is done using DTWAIN API calls.  This includes selecting TWAIN devices for acquisition, capability testing, etc.
+
+The source code to the DTWDEMO program (written in C using the Win32 API) can be found [here](https://github.com/dynarithmic/twain_library/tree/master/demos/C_C%2B%2B/C/FullDemo). 
+
+A similar demo program written in Python using the [Python language bindings for DTWAIN ](#otherlanguages) can be found [here](https://github.com/dynarithmic/twain_library-python_demo).
+
 ----
 
 ###### Information for C and C++ programmers only:
 
-If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br><br> 
+If you are using Visual C++, the Visual C++ compatible import libraries necessary to build your 32-bit or 64-bit application (the files with the *.lib extension) are available.<br> 
 If you do not use Visual C++ but instead are using another brand of C++ compiler, see the [section on additional C++ compiler usage](#alternatecompilers) to alleviate the import library issues.  
 
 You will also need to include the header files found in the [c_cpp_includes](https://github.com/dynarithmic/twain_library/tree/master/c_cpp_includes) directory when building your application.  Your build **INCLUDE** path should refer to these header files.
@@ -162,11 +163,13 @@ Basically, you just need to build your application and link it to one of the imp
 
 ----
 <a name="runningapplication"></a>
-**<u>Running the application</u>**
+**<u>Running your DTWAIN application</u>**
 
-After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory (there are other places where the DLL can be located, but that is beyond the scope of this introduction -- please refer to the following link:
+After building your application, for your application to run successfully, you must make sure the DTWAIN dynamic link library itself is located somewhere on the system path, or in your application directory.  
 
-[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order)).
+There are other places that DLL's can be placed so as to be recognized by the application, but that is beyond the scope of this introduction -- please refer to the following link for further information:
+
+[https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
 In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a>, the <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain32.ini" target="_blank">dtwain32.ini</a> for 32-bit applications, and <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain64.ini" target="_blank">dtwain64.ini</a> for 64-bit applications </a> must also be available (by default, these files should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, these files can reside in the directory specified by **DTWAIN_SetResourcePath**).  
 
@@ -208,14 +211,12 @@ The simplest example is probably one that opens the TWAIN "Select Source" dialog
 
     int main()
     {
-        // display DTWAIN version, just for fun
-        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
-
         // initialize the DTWAIN DLL
         DTWAIN_SysInitialize();
         
         // Show the "Select Source" TWAIN dialog box
         DTWAIN_SOURCE Source = DTWAIN_SelectSource();
+        
         if ( Source ) // Will be non-zero if a Source is selected by the user
             // Acquire to a BMP file
             DTWAIN_AcquireFileA(Source, "Test.bmp", DTWAIN_BMP, DTWAIN_USENATIVE | DTWAIN_USENAME,
@@ -234,9 +235,6 @@ However, you can customize the "Select Source" dialog box by utilizing the dialo
 
     int main()
     {
-        // display DTWAIN version, just for fun
-        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
-
         // initialize the DTWAIN DLL
         DTWAIN_SysInitialize();
         
@@ -262,9 +260,6 @@ This effectively selects the TWAIN Source without the dialog box appearing.  The
 
     int main()
     {
-        // display DTWAIN version, just for fun
-        std::cout << "Hello to DTWAIN " << DTWAIN_VERINFO_FILEVERSION << "\n";
-
         // initialize the DTWAIN DLL
         DTWAIN_SysInitialize();
         
@@ -371,7 +366,7 @@ Here is an example of getting all of the available ICAP_PIXELTYPE values:
             DTWAIN_ARRAY aPixelTypeValues;
             
             // Call function to get all the ICAP_PIXELTYPE capabilities
-            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET,                 &aPixelTypeValues);
+            DTWAIN_BOOL result = DTWAIN_GetCapValues(Source, ICAP_PIXELTYPE, DTWAIN_CAPGET, &aPixelTypeValues);
             
             if ( result )
             {

@@ -1,5 +1,28 @@
 DTWAIN Version changes
 
+5.9.1
+
+- Upgraded following internal image libraries:
+
+      libpng --> 1.6.58
+
+- All release versions of the DTWAIN DLL's contain logging capabilities.  This removes 
+  partial logging DLL's from the release repository.  Partial logging DTWAIN DLL's are 
+  now only available by rebuilding the DTWAIN source code using the appropriate CMake options.
+
+- Fix issue with DTWAIN DLL's showing incomplete resource information when
+  viewing Properties of the DLL.
+
+- Allow Python binding to automatically search for the DTWAIN DLL that is to be loaded using the 
+  system path.  The new search order when loading the DTWAIN DLL using load_dtwaindll() is
+  in this order:
+
+  full path name -> current directory -> dtwainapi.py directory -> PATH
+
+- Significant reduction in size of the DTWAIN DLLs due to new internal
+  build system being used to generate the DLLs.  
+
+
 5.9.0
 
 - Removed usage of the FreeImage and CxImage libraries to generate image files.  Removal of FreeImage
