@@ -117,8 +117,8 @@
 #define IDC_chkUseFeeder                    5001
 #define IDC_chkUseDuplex                    5002
 
-#define IDD_dlgFileType						6000
-#define IDC_cmbFileType						6001
+#define IDD_dlgFileType                        6000
+#define IDC_cmbFileType                        6001
 #define IDC_edFileName                      6002
 
 #define IDD_dlgDebug                        7000
@@ -145,7 +145,7 @@
 #define IDC_cmbContainer                    8004
 #define IDC_cmbDataType                     8005
 #define IDC_btnReset                        8006
-#define IDC_cmbSetTypes						8007
+#define IDC_cmbSetTypes                        8007
 #define IDC_cmbDataTypeSet                  8008
 #define IDC_cmbContainerSet                 8009 
 #define IDC_btnTestSet                      8010  

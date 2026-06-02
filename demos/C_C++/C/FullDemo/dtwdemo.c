@@ -60,6 +60,7 @@ void DisplayCustomLangDlg();
 void EnableFileXFerMenuItems(DTWAIN_SOURCE source, BOOL bEnable);
 void SetUpAcquire();
 void DisplayBlankThresholdOptions();
+void DisableFileXFerSubItems();
 
 INT_PTR DisplayGetFileNameDlg();
 
@@ -164,7 +165,7 @@ AllFileTypes g_allDTWAINFileTypes[] = {
         {IDM_ACQUIREFILE_PNG                    ,  DTWAIN_PNG },
         {IDM_ACQUIREFILE_POSTSCRIPTLEVEL1       ,  DTWAIN_POSTSCRIPT1MULTI },
         {IDM_ACQUIREFILE_POSTSCRIPTLEVEL2       ,  DTWAIN_POSTSCRIPT2MULTI },
-		{IDM_ACQUIREFILE_POSTSCRIPTLEVEL3       ,  DTWAIN_POSTSCRIPT3MULTI },
+        {IDM_ACQUIREFILE_POSTSCRIPTLEVEL3       ,  DTWAIN_POSTSCRIPT3MULTI },
         {IDM_ACQUIREFILE_SVG                    ,  DTWAIN_SVG },
         {IDM_ACQUIREFILE_SVGZ                   ,  DTWAIN_SVGZ },
         {IDM_ACQUIREFILE_TGA                    ,  DTWAIN_TGA },
@@ -212,10 +213,7 @@ int g_BlankThresholdPct = 98;
 
 #include "DebugUtils.h"
 
-int APIENTRY WinMain(HINSTANCE hInstance,
-                     HINSTANCE hPrevInstance,
-                     LPSTR     lpCmdLine,
-                     int       nCmdShow)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     MSG msg;
     HACCEL hAccelTable;
@@ -453,8 +451,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case ID_LANGUAGE_ROMANIAN           : 
                 case ID_LANGUAGE_SIMPLIFIEDCHINESE  : 
                 case ID_LANGUAGE_PORTUGUESE:
-				case ID_LANGUAGE_TURKISH:
-					LoadLanguage(wmId);
+                case ID_LANGUAGE_TURKISH:
+                    LoadLanguage(wmId);
                 break;
 
                 case ID_LANGUAGE_CUSTOMLANGUAGE:
@@ -532,10 +530,10 @@ BOOL GetToggleMenuState(UINT resID)
 
 BOOL IsMenuItemEnabled(UINT resID) 
 {
-	UINT nState = GetMenuState(g_Menu, resID, MF_BYCOMMAND);
-	if (nState != -1)
-		return (nState & (MF_DISABLED | MF_GRAYED)) ? FALSE: TRUE;
-	return FALSE;
+    UINT nState = GetMenuState(g_Menu, resID, MF_BYCOMMAND);
+    if (nState != -1)
+        return (nState & (MF_DISABLED | MF_GRAYED)) ? FALSE: TRUE;
+    return FALSE;
 }
 
 void SelectTheSource(int nWhich)
@@ -604,6 +602,9 @@ void SelectTheSource(int nWhich)
     }
     else
     {
+        EnableFileXFerMenuItems(NULL, FALSE);
+        DisableFileXFerSubItems();
+
         LONG lastError = DTWAIN_GetLastError();
         wchar_t szCancelMsg[256];
 
@@ -632,19 +633,19 @@ void SetCaptionToSourceName()
 
 void SetUpAcquire()
 {
-	/* Disable main window */
-	DTWAIN_DisableAppWindow(g_hWnd, TRUE);
+    /* Disable main window */
+    DTWAIN_DisableAppWindow(g_hWnd, TRUE);
 
-	/* Check if feeder or duplex is supported */
-	if (DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
-		DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
+    /* Check if feeder or duplex is supported */
+    if (DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
+        DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);
 
-	/* Check if we want to discard blank pages */
+    /* Check if we want to discard blank pages */
     DTWAIN_SetBlankPageDetection(g_CurrentSource, (double)g_BlankThresholdPct, DTWAIN_BP_AUTODISCARD_ANY,
-	                             GetToggleMenuState(IDM_DISCARD_BLANKS));
+                                 GetToggleMenuState(IDM_DISCARD_BLANKS));
 
-	BOOL bRet = FALSE;
-	EnableSourceItems(FALSE);
+    BOOL bRet = FALSE;
+    EnableSourceItems(FALSE);
 }
 
 void GenericAcquire(LONG nWhichOne)
@@ -703,7 +704,7 @@ void GenericAcquire(LONG nWhichOne)
         return;
     }
     RetrieveAndDisplayDibs(g_hInstance, g_AcquireArray, IDD_dlgDib, g_hWnd);
-    DTWAIN_DestroyAcquisitionArray( g_AcquireArray, FALSE );
+    DTWAIN_DestroyAcquisitionArray( g_AcquireArray, TRUE );
 }
 
 void AcquireNative()
@@ -1058,12 +1059,12 @@ LRESULT CALLBACK DisplayBlankThresholdProc(HWND hDlg, UINT message, WPARAM wPara
         {
             int nControl = LOWORD(wParam);
             int nNotification = HIWORD(wParam);
-			HWND hWndPct = GetDlgItem(hDlg, IDC_edBlankThresholdPct);
+            HWND hWndPct = GetDlgItem(hDlg, IDC_edBlankThresholdPct);
             switch( nControl )
             {
                 case IDOK:
                 {
-					char szBuf[10];
+                    char szBuf[10];
                     int nThreshold = 0;
                     GetWindowTextA(hWndPct, szBuf, 10);
                     nThreshold = atoi(szBuf);
@@ -1561,8 +1562,8 @@ void DisableFileXFerSubItems()
 
 void EnableBarcodeMenuItem(DTWAIN_SOURCE source)
 {
-	EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
-	if (DTWAIN_IsExtImageInfoSupported(source))
+    EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_GRAYED);
+    if (DTWAIN_IsExtImageInfoSupported(source))
     {
         if (DTWAIN_IsBarcodeSupported(source, DTWAIN_ANYSUPPORT))
             EnableMenuItem(g_Menu, IDM_SHOW_BARCODEINFO, MF_BYCOMMAND | MF_ENABLED);
@@ -1571,20 +1572,20 @@ void EnableBarcodeMenuItem(DTWAIN_SOURCE source)
 
 void EnableFileXFerMenuItems(DTWAIN_SOURCE source, BOOL bEnable)
 {
-	HMENU mainMenu = GetMenu(g_hWnd);
-	HMENU hSubMenu = GetSubMenu(mainMenu, 1);
-	HMENU hSubMenu2 = GetSubMenu(hSubMenu, 3);
+    HMENU mainMenu = GetMenu(g_hWnd);
+    HMENU hSubMenu = GetSubMenu(mainMenu, 1);
+    HMENU hSubMenu2 = GetSubMenu(hSubMenu, 3);
 
-	if (bEnable)
-	{
-		EnableMenuItem(hSubMenu, 2, MF_BYPOSITION | MF_ENABLED);
-		EnableMenuItem(hSubMenu, 3, MF_BYPOSITION | MF_ENABLED);
-	}
-	else
-	{
-		EnableMenuItem(hSubMenu, 2, MF_BYPOSITION | MF_GRAYED);
-		EnableMenuItem(hSubMenu, 3, MF_BYPOSITION | MF_GRAYED);
-	}
+    if (bEnable)
+    {
+        EnableMenuItem(hSubMenu, 2, MF_BYPOSITION | MF_ENABLED);
+        EnableMenuItem(hSubMenu, 3, MF_BYPOSITION | MF_ENABLED);
+    }
+    else
+    {
+        EnableMenuItem(hSubMenu, 2, MF_BYPOSITION | MF_GRAYED);
+        EnableMenuItem(hSubMenu, 3, MF_BYPOSITION | MF_GRAYED);
+    }
 
     if (source && bEnable)
     {

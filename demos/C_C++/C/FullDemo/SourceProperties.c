@@ -643,7 +643,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     else
                         sprintf(szValues, "%lf", dVal);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-					szValues[0] = 0;
+                    szValues[0] = 0;
                 }
                 break;
 
@@ -651,7 +651,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                 {
                     DTWAIN_ArrayGetAtANSIString(values, i, szValues);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-					szValues[0] = 0;
+                    szValues[0] = 0;
                 }
                 break;
 
@@ -661,7 +661,7 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     DTWAIN_ArrayGetAtFrame(values, i, &left, &top, &right, &bottom);
                     sprintf(szValues, "Left: %lf  Top: %lf  Right: %lf  Bottom: %lf", left, top, right, bottom);
                     SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-					szValues[0] = 0;
+                    szValues[0] = 0;
                 }
                 break;
             }
@@ -796,27 +796,27 @@ void TestSetCap(HWND hWnd, LONG capValue)
     int arrayType = DTWAIN_ARRAYLONG;
     switch (nDataType)
     {
-    case TWTY_STR32:
-    case TWTY_STR64:
-    case TWTY_STR128:
-    case TWTY_STR255:
-    case TWTY_STR1024:
-    {
-        arrayType = DTWAIN_ARRAYANSISTRING;
-    }
-    break;
+        case TWTY_STR32:
+        case TWTY_STR64:
+        case TWTY_STR128:
+        case TWTY_STR255:
+        case TWTY_STR1024:
+        {
+            arrayType = DTWAIN_ARRAYANSISTRING;
+        }
+        break;
 
-    case TWTY_FIX32:
-    {
-        arrayType = DTWAIN_ARRAYFLOAT;
-    }
-    break;
+        case TWTY_FIX32:
+        {
+            arrayType = DTWAIN_ARRAYFLOAT;
+        }
+        break;
 
-    case TWTY_FRAME:
-    {
-        arrayType = DTWAIN_ARRAYFRAME;
-    }
-    break;
+        case TWTY_FRAME:
+        {
+            arrayType = DTWAIN_ARRAYFRAME;
+        }
+        break;
     }
 
     PARSERINFO pInfo;
