@@ -140,9 +140,9 @@ The DTWAIN API has available ANSI-aware functions even in the Unicode versions o
 
 **<u>32-bit and 64-bit demo program (DTWDEMO)</u>**
 
-The **32bit-FullDemo** and **64bit_FullDemo** directories contain the full versions of the 32-bit DTWDEMO program (`DTWDEMO32U.exe`) and 64-bit DTWDEMO program (`DTWDEMO64U.EXE`), respectively.  
+The **32bit_FullDemo** and **64bit_FullDemo** directories contain the full versions of the 32-bit DTWDEMO program (`DTWDEMO32U.exe`) and 64-bit DTWDEMO program (`DTWDEMO64U.EXE`), respectively.  
 
-The DTWDEMO programs can be used to test various aspects of the DTWAIN API and your TWAIN devices (capability testing and setting, acquiring images and files, etc.).  Copy all files from either the **32bit-FullDemo** or **64bit_FullDemo** to an empty directory and run either `DTWDEMO32U.exe` or `DTWDEMO64.exe` directly from the directory.  
+The DTWDEMO programs can be used to test various aspects of the DTWAIN API and your TWAIN devices (capability testing and setting, acquiring images and files, etc.).  Copy all files from either the **32bit_FullDemo** or **64bit_FullDemo** to an empty directory and run either `DTWDEMO32U.exe` or `DTWDEMO64.exe` directly from the directory.  
 
 Please note that the DTWDEMO program demonstrates just a subset of what the DTWAIN API is capable of.  When running the DTWDEMO program, remember that *all* aspects you are seeing when running DTWDEMO with respect to handling TWAIN devices is done using DTWAIN API calls.  This includes selecting TWAIN devices for acquisition, capability testing, etc.
 
