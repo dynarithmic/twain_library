@@ -584,7 +584,11 @@ Given this, the secondary goal of making DTWAIN open source is for you to contri
 
 Thus, the nature of "fixing" DTWAIN to work with a device that has issues is not possible to be done from a distance without having the device on-hand.  Since there are thousands of devices out there, and more than just a few have TWAIN compliance issues, we rely on our contributors who have the faulty TWAIN device ready and on-hand to debug the issue.  
 
-You can download the source code [here](https://github.com/dynarithmic/twain_library_source/tree/main), follow the directions, and thus debug a very simple program that utilizes the device you have in-house.  Note that you should be familiar with C++, as the base library is written in this language.
+It is highly recommended that you or a developer take advantage of getting the DTWAIN source code and have local builds of the DTWAIN DLL's in the event that the device you are using has issues, and the developer(s) wish to debug the code to see exactly the reason for the issues.
+
+To start, you should download the source code [here](https://github.com/dynarithmic/twain_library_source/tree/main), and follow the directions on the build process for the DLLs.  Note that if you wish to debug the source code (or just trace to see how things actually work), you should be familiar with C and C++, as the base library is written in this language. 
+
+The building of the DTWAIN DLLs, given you have the CMake program and Visual Studio 2019, 2022, or 2026 installed, is automated by running a batch file, thus making the build process painless, even for those who are not familiar with the CMake build process and Visual Studio in general.  
 
 ----------
 ----------
