@@ -114,6 +114,7 @@ type DtwainarraycreatefromfloatsFunc = unsafe extern "C" fn(i32) -> *mut c_void;
 type Dtwainarraycreatefromlong64sFunc = unsafe extern "C" fn(*mut i64,i32) -> *mut c_void;
 type DtwainarraycreatefromlongsFunc = unsafe extern "C" fn(*mut i32,i32) -> *mut c_void;
 type DtwainarraycreatefromstringsFunc = unsafe extern "C" fn(*const *const u16,i32) -> *mut c_void;
+type DtwainarraycreatefromtypeFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> *mut c_void;
 type DtwainarraycreatefromwidestringsFunc = unsafe extern "C" fn(*const *const u16,i32) -> *mut c_void;
 type DtwainarraydestroyFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainarraydestroyallFunc = unsafe extern "C" fn() -> i32;
@@ -1223,6 +1224,7 @@ type Dtwainsysinitializelibex2wFunc = unsafe extern "C" fn(*mut c_void,*const u1
 type DtwainsysinitializelibexaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> *mut c_void;
 type DtwainsysinitializelibexwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
 type DtwainsysinitializenoblockingFunc = unsafe extern "C" fn() -> *mut c_void;
+type DtwainsysinitializenoblockingexFunc = unsafe extern "C" fn(i32) -> *mut c_void;
 type DtwaintestgetcapFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
 type DtwainunlockmemoryFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainunlockmemoryexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -1297,6 +1299,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_ArrayCreateFromLong64sFunc: Symbol<'a, Dtwainarraycreatefromlong64sFunc>,
     DTWAIN_ArrayCreateFromLongsFunc: Symbol<'a, DtwainarraycreatefromlongsFunc>,
     DTWAIN_ArrayCreateFromStringsFunc: Symbol<'a, DtwainarraycreatefromstringsFunc>,
+    DTWAIN_ArrayCreateFromTypeFunc: Symbol<'a, DtwainarraycreatefromtypeFunc>,
     DTWAIN_ArrayCreateFromWideStringsFunc: Symbol<'a, DtwainarraycreatefromwidestringsFunc>,
     DTWAIN_ArrayDestroyFunc: Symbol<'a, DtwainarraydestroyFunc>,
     DTWAIN_ArrayDestroyAllFunc: Symbol<'a, DtwainarraydestroyallFunc>,
@@ -2406,6 +2409,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_SysInitializeLibExAFunc: Symbol<'a, DtwainsysinitializelibexaFunc>,
     DTWAIN_SysInitializeLibExWFunc: Symbol<'a, DtwainsysinitializelibexwFunc>,
     DTWAIN_SysInitializeNoBlockingFunc: Symbol<'a, DtwainsysinitializenoblockingFunc>,
+    DTWAIN_SysInitializeNoBlockingExFunc: Symbol<'a, DtwainsysinitializenoblockingexFunc>,
     DTWAIN_TestGetCapFunc: Symbol<'a, DtwaintestgetcapFunc>,
     DTWAIN_UnlockMemoryFunc: Symbol<'a, DtwainunlockmemoryFunc>,
     DTWAIN_UnlockMemoryExFunc: Symbol<'a, DtwainunlockmemoryexFunc>,
@@ -4134,6 +4138,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_ArrayCreateFromLong64s: Symbol<Dtwainarraycreatefromlong64sFunc> = unsafe { library.get(b"DTWAIN_ArrayCreateFromLong64s")? };
         let DTWAIN_ArrayCreateFromLongs: Symbol<DtwainarraycreatefromlongsFunc> = unsafe { library.get(b"DTWAIN_ArrayCreateFromLongs")? };
         let DTWAIN_ArrayCreateFromStrings: Symbol<DtwainarraycreatefromstringsFunc> = unsafe { library.get(b"DTWAIN_ArrayCreateFromStrings")? };
+        let DTWAIN_ArrayCreateFromType: Symbol<DtwainarraycreatefromtypeFunc> = unsafe { library.get(b"DTWAIN_ArrayCreateFromType")? };
         let DTWAIN_ArrayCreateFromWideStrings: Symbol<DtwainarraycreatefromwidestringsFunc> = unsafe { library.get(b"DTWAIN_ArrayCreateFromWideStrings")? };
         let DTWAIN_ArrayDestroy: Symbol<DtwainarraydestroyFunc> = unsafe { library.get(b"DTWAIN_ArrayDestroy")? };
         let DTWAIN_ArrayDestroyAll: Symbol<DtwainarraydestroyallFunc> = unsafe { library.get(b"DTWAIN_ArrayDestroyAll")? };
@@ -5243,6 +5248,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SysInitializeLibExA: Symbol<DtwainsysinitializelibexaFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibExA")? };
         let DTWAIN_SysInitializeLibExW: Symbol<DtwainsysinitializelibexwFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibExW")? };
         let DTWAIN_SysInitializeNoBlocking: Symbol<DtwainsysinitializenoblockingFunc> = unsafe { library.get(b"DTWAIN_SysInitializeNoBlocking")? };
+        let DTWAIN_SysInitializeNoBlockingEx: Symbol<DtwainsysinitializenoblockingexFunc> = unsafe { library.get(b"DTWAIN_SysInitializeNoBlockingEx")? };
         let DTWAIN_TestGetCap: Symbol<DtwaintestgetcapFunc> = unsafe { library.get(b"DTWAIN_TestGetCap")? };
         let DTWAIN_UnlockMemory: Symbol<DtwainunlockmemoryFunc> = unsafe { library.get(b"DTWAIN_UnlockMemory")? };
         let DTWAIN_UnlockMemoryEx: Symbol<DtwainunlockmemoryexFunc> = unsafe { library.get(b"DTWAIN_UnlockMemoryEx")? };
@@ -5316,6 +5322,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_ArrayCreateFromLong64sFunc: DTWAIN_ArrayCreateFromLong64s,
             DTWAIN_ArrayCreateFromLongsFunc: DTWAIN_ArrayCreateFromLongs,
             DTWAIN_ArrayCreateFromStringsFunc: DTWAIN_ArrayCreateFromStrings,
+            DTWAIN_ArrayCreateFromTypeFunc: DTWAIN_ArrayCreateFromType,
             DTWAIN_ArrayCreateFromWideStringsFunc: DTWAIN_ArrayCreateFromWideStrings,
             DTWAIN_ArrayDestroyFunc: DTWAIN_ArrayDestroy,
             DTWAIN_ArrayDestroyAllFunc: DTWAIN_ArrayDestroyAll,
@@ -6425,6 +6432,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SysInitializeLibExAFunc: DTWAIN_SysInitializeLibExA,
             DTWAIN_SysInitializeLibExWFunc: DTWAIN_SysInitializeLibExW,
             DTWAIN_SysInitializeNoBlockingFunc: DTWAIN_SysInitializeNoBlocking,
+            DTWAIN_SysInitializeNoBlockingExFunc: DTWAIN_SysInitializeNoBlockingEx,
             DTWAIN_TestGetCapFunc: DTWAIN_TestGetCap,
             DTWAIN_UnlockMemoryFunc: DTWAIN_UnlockMemory,
             DTWAIN_UnlockMemoryExFunc: DTWAIN_UnlockMemoryEx,
@@ -6700,6 +6708,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_ArrayCreateFromStrings(&self, pCArray: *const *const u16, nSize: i32) -> *mut c_void {
         unsafe { return (self.DTWAIN_ArrayCreateFromStringsFunc)(pCArray, nSize);  }
+    }
+
+    pub fn DTWAIN_ArrayCreateFromType(&self, Source: *mut c_void, lType: i32, lSize: i32) -> *mut c_void {
+        unsafe { return (self.DTWAIN_ArrayCreateFromTypeFunc)(Source, lType, lSize);  }
     }
 
     pub fn DTWAIN_ArrayCreateFromWideStrings(&self, pCArray: *const *const u16, nSize: i32) -> *mut c_void {
@@ -11136,6 +11148,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SysInitializeNoBlocking(&self) -> *mut c_void {
         unsafe { return (self.DTWAIN_SysInitializeNoBlockingFunc)();  }
+    }
+
+    pub fn DTWAIN_SysInitializeNoBlockingEx(&self, bCreateLogFile: i32) -> *mut c_void {
+        unsafe { return (self.DTWAIN_SysInitializeNoBlockingExFunc)(bCreateLogFile);  }
     }
 
     pub fn DTWAIN_TestGetCap(&self, Source: *mut c_void, lCapability: i32) -> *mut c_void {

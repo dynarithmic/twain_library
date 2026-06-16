@@ -1804,6 +1804,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_ArrayCreateFromLong64s Lib "dtwain64u.dll" (<[In]> pCArray() As System.Int64, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromLongs Lib "dtwain64u.dll" (<[In]> pCArray() As Integer, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromStrings Lib "dtwain64u.dll" (<[In], MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.LPTStr)> pCArray() As String, nSize As Integer) As System.IntPtr
+    Public Declare Function DTWAIN_ArrayCreateFromType Lib "dtwain64u.dll" (Source As System.IntPtr, lType As Integer, lSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromWideStrings Lib "dtwain64u.dll" (<[In], MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.LPWStr)> pCArray() As String, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayDestroy Lib "dtwain64u.dll" (pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_ArrayDestroyAll Lib "dtwain64u.dll" () As Integer
@@ -2611,6 +2612,7 @@ Class DTWAINAPI
     Public Declare Unicode Function DTWAIN_SysInitializeLibEx Lib "dtwain64u.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
     Public Declare Unicode Function DTWAIN_SysInitializeLibEx2 Lib "dtwain64u.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlocking Lib "dtwain64u.dll" () As System.IntPtr
+    Public Declare Function DTWAIN_SysInitializeNoBlockingEx Lib "dtwain64u.dll" (bCreateLogFile As Integer) As System.IntPtr
     Public Declare Function DTWAIN_TestGetCap Lib "dtwain64u.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr
     Public Declare Function DTWAIN_UnlockMemory Lib "dtwain64u.dll" (h As System.IntPtr) As Integer
     Public Declare Function DTWAIN_UnlockMemoryEx Lib "dtwain64u.dll" (h As System.IntPtr) As Integer

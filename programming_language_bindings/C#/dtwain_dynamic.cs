@@ -1961,6 +1961,7 @@
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromLong64sDelegate([In] long[] pCArray, int nSize);
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromLongsDelegate([In] int[] pCArray, int nSize);
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromStringsDelegate([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPTStr)] string[] pCArray, int nSize);
+        public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromTypeDelegate(DTWAIN_SOURCE Source, int lType, int lSize);
         public delegate DTWAIN_ARRAY DTWAIN_ArrayCreateFromWideStringsDelegate([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] pCArray, int nSize);
         public delegate int DTWAIN_ArrayDestroyDelegate(DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_ArrayDestroyAllDelegate();
@@ -2840,6 +2841,7 @@
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeLibExDelegate(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2Delegate(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingDelegate();
+        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingExDelegate(int bCreateLogFile);
         public delegate DTWAIN_ARRAY DTWAIN_TestGetCapDelegate(DTWAIN_SOURCE Source, int lCapability);
         public delegate int DTWAIN_UnlockMemoryDelegate(HANDLE h);
         public delegate int DTWAIN_UnlockMemoryExDelegate(HANDLE h);
@@ -3008,6 +3010,9 @@
 
         [DTWAINNativeFunction("DTWAIN_ArrayCreateFromStrings")]
         private readonly DTWAIN_ArrayCreateFromStringsDelegate  _DTWAIN_ArrayCreateFromStrings;
+
+        [DTWAINNativeFunction("DTWAIN_ArrayCreateFromType")]
+        private readonly DTWAIN_ArrayCreateFromTypeDelegate  _DTWAIN_ArrayCreateFromType;
 
         [DTWAINNativeFunction("DTWAIN_ArrayCreateFromWideStrings")]
         private readonly DTWAIN_ArrayCreateFromWideStringsDelegate  _DTWAIN_ArrayCreateFromWideStrings;
@@ -5646,6 +5651,9 @@
         [DTWAINNativeFunction("DTWAIN_SysInitializeNoBlocking")]
         private readonly DTWAIN_SysInitializeNoBlockingDelegate  _DTWAIN_SysInitializeNoBlocking;
 
+        [DTWAINNativeFunction("DTWAIN_SysInitializeNoBlockingEx")]
+        private readonly DTWAIN_SysInitializeNoBlockingExDelegate  _DTWAIN_SysInitializeNoBlockingEx;
+
         [DTWAINNativeFunction("DTWAIN_TestGetCap")]
         private readonly DTWAIN_TestGetCapDelegate  _DTWAIN_TestGetCap;
 
@@ -5809,6 +5817,9 @@
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromStrings([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPTStr)] string[] pCArray, int nSize)
         => _DTWAIN_ArrayCreateFromStrings(pCArray, nSize);
+
+        public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromType(DTWAIN_SOURCE Source, int lType, int lSize)
+        => _DTWAIN_ArrayCreateFromType(Source, lType, lSize);
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromWideStrings([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] pCArray, int nSize)
         => _DTWAIN_ArrayCreateFromWideStrings(pCArray, nSize);
@@ -8446,6 +8457,9 @@
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking()
         => _DTWAIN_SysInitializeNoBlocking();
+
+        public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(int bCreateLogFile)
+        => _DTWAIN_SysInitializeNoBlockingEx(bCreateLogFile);
 
         public  DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, int lCapability)
         => _DTWAIN_TestGetCap(Source, lCapability);

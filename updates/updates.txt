@@ -1,5 +1,24 @@
 DTWAIN Version changes
 
+5.9.2
+
+- Fix issue with DTWAIN_IsTwainAvailable() and DTWAIN_IsTwainAvailableEx() if these
+  functions are called after a TWAIN session has been started.
+
+- Introduce [AutocloseUI] INI setting.  For DTWAIN64.ini, the setting for the 
+  Canon DR- series of scanners will default to have their user interface auto
+  close after the first acquisition attempted.
+
+- Fix potential buffer overrun issue with opening and closing multiple sources in one
+  TWAIN session.
+
+- Make path specified by DTWAIN_SetResourcePath() also apply to the path where the
+  dtwain32.ini and dtwain64.ini files are found.
+
+- Ensure that open TWAIN Sources have their capabilities logged when DTWAIN_SetTwainLog()
+  is initially called.
+
+
 5.9.1
 
 - Upgraded following internal image libraries:

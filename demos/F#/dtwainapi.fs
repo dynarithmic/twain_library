@@ -2013,6 +2013,9 @@ module TwainAPI =
     type DTWAIN_ArrayCreateFromStringsDelegate = delegate of [<MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPTStr)>] pcArray: string[] * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_ArrayCreateFromTypeDelegate = delegate of DTWAIN_SOURCE * LONG * LONG -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayCreateFromWideStringsDelegate = delegate of [<MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)>] pcArray: string[] * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -4422,6 +4425,9 @@ module TwainAPI =
     type DTWAIN_SysInitializeNoBlockingDelegate = delegate of unit -> DTWAIN_HANDLE
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SysInitializeNoBlockingExDelegate = delegate of DTWAIN_BOOL -> DTWAIN_HANDLE
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_TestGetCapDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -4485,6 +4491,7 @@ module TwainAPI =
     let private ArrayCreateFromLong64s = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromLong64s" : DTWAIN_ArrayCreateFromLong64sDelegate)
     let private ArrayCreateFromLongs = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromLongs" : DTWAIN_ArrayCreateFromLongsDelegate)
     let private ArrayCreateFromStrings = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromStrings" : DTWAIN_ArrayCreateFromStringsDelegate)
+    let private ArrayCreateFromType = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromType" : DTWAIN_ArrayCreateFromTypeDelegate)
     let private ArrayCreateFromWideStrings = lazy (DynamicDll.Bind "DTWAIN_ArrayCreateFromWideStrings" : DTWAIN_ArrayCreateFromWideStringsDelegate)
     let private ArrayDestroy = lazy (DynamicDll.Bind "DTWAIN_ArrayDestroy" : DTWAIN_ArrayDestroyDelegate)
     let private ArrayDestroyAll = lazy (DynamicDll.Bind "DTWAIN_ArrayDestroyAll" : DTWAIN_ArrayDestroyAllDelegate)
@@ -5288,6 +5295,7 @@ module TwainAPI =
     let private SysInitializeLibEx = lazy (DynamicDll.Bind "DTWAIN_SysInitializeLibEx" : DTWAIN_SysInitializeLibExDelegate)
     let private SysInitializeLibEx2 = lazy (DynamicDll.Bind "DTWAIN_SysInitializeLibEx2" : DTWAIN_SysInitializeLibEx2Delegate)
     let private SysInitializeNoBlocking = lazy (DynamicDll.Bind "DTWAIN_SysInitializeNoBlocking" : DTWAIN_SysInitializeNoBlockingDelegate)
+    let private SysInitializeNoBlockingEx = lazy (DynamicDll.Bind "DTWAIN_SysInitializeNoBlockingEx" : DTWAIN_SysInitializeNoBlockingExDelegate)
     let private TestGetCap = lazy (DynamicDll.Bind "DTWAIN_TestGetCap" : DTWAIN_TestGetCapDelegate)
     let private UnlockMemory = lazy (DynamicDll.Bind "DTWAIN_UnlockMemory" : DTWAIN_UnlockMemoryDelegate)
     let private UnlockMemoryEx = lazy (DynamicDll.Bind "DTWAIN_UnlockMemoryEx" : DTWAIN_UnlockMemoryExDelegate)
@@ -5512,6 +5520,10 @@ module TwainAPI =
     let DTWAIN_ArrayCreateFromStrings (pcarray: string[]) (nsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayCreateFromStrings.Value.Invoke(pcarray, nsize)
+
+    let DTWAIN_ArrayCreateFromType (source: DTWAIN_SOURCE) (ltype: LONG) (lsize: LONG) : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        ArrayCreateFromType.Value.Invoke(source, ltype, lsize)
 
     let DTWAIN_ArrayCreateFromWideStrings (pcarray: string[]) (nsize: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -8724,6 +8736,10 @@ module TwainAPI =
     let DTWAIN_SysInitializeNoBlocking() : DTWAIN_HANDLE =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SysInitializeNoBlocking.Value.Invoke()
+
+    let DTWAIN_SysInitializeNoBlockingEx (bcreatelogfile: DTWAIN_BOOL) : DTWAIN_HANDLE =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SysInitializeNoBlockingEx.Value.Invoke(bcreatelogfile)
 
     let DTWAIN_TestGetCap (source: DTWAIN_SOURCE) (lcapability: LONG) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

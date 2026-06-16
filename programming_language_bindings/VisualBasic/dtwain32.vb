@@ -1803,6 +1803,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_ArrayCreateFromLong64s Lib "dtwain32.dll" (<[In]> pCArray() As System.Int64, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromLongs Lib "dtwain32.dll" (<[In]> pCArray() As Integer, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromStrings Lib "dtwain32.dll" (<[In], MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.LPTStr)> pCArray() As String, nSize As Integer) As System.IntPtr
+    Public Declare Function DTWAIN_ArrayCreateFromType Lib "dtwain32.dll" (Source As System.IntPtr, lType As Integer, lSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayCreateFromWideStrings Lib "dtwain32.dll" (<[In], MarshalAs(UnmanagedType.LPArray, ArraySubType:=UnmanagedType.LPWStr)> pCArray() As String, nSize As Integer) As System.IntPtr
     Public Declare Function DTWAIN_ArrayDestroy Lib "dtwain32.dll" (pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_ArrayDestroyAll Lib "dtwain32.dll" () As Integer
@@ -2610,6 +2611,7 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_SysInitializeLibEx Lib "dtwain32.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
     Public Declare Ansi Function DTWAIN_SysInitializeLibEx2 Lib "dtwain32.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlocking Lib "dtwain32.dll" () As System.IntPtr
+    Public Declare Function DTWAIN_SysInitializeNoBlockingEx Lib "dtwain32.dll" (bCreateLogFile As Integer) As System.IntPtr
     Public Declare Function DTWAIN_TestGetCap Lib "dtwain32.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr
     Public Declare Function DTWAIN_UnlockMemory Lib "dtwain32.dll" (h As System.IntPtr) As Integer
     Public Declare Function DTWAIN_UnlockMemoryEx Lib "dtwain32.dll" (h As System.IntPtr) As Integer
