@@ -681,6 +681,15 @@ typedef struct ParserInfo
     int counter;
 } PARSERINFO;
 
+
+static int CharToWide(const char* src, wchar_t* dest, size_t destSize)
+{
+    if (!src || !dest || destSize == 0)
+        return 0;
+    int result = MultiByteToWideChar(CP_ACP, 0, src, -1, dest, (int)(destSize));
+    return result != 0;
+}
+
 int ParseTokenCallback(const char* line, void* userData)
 {
     PARSERINFO* theInfo = (PARSERINFO*)userData;
@@ -735,6 +744,14 @@ int ParseTokenCallback(const char* line, void* userData)
     case TWTY_STR1024:
     {
         DTWAIN_ArrayAddANSIString(theInfo->theArray, line);
+    }
+    break;
+
+    case TWTY_UNI512:
+    {
+        wchar_t wszText[512] = L"/0";
+        CharToWide(line, wszText, _countof(wszText));
+        DTWAIN_ArrayAddWideString(theInfo->theArray, wszText);
     }
     break;
 
@@ -805,7 +822,11 @@ void TestSetCap(HWND hWnd, LONG capValue)
             arrayType = DTWAIN_ARRAYANSISTRING;
         }
         break;
-
+        case TWTY_UNI512:
+        {
+            arrayType = DTWAIN_ARRAYWIDESTRING;
+        }
+        break;
         case TWTY_FIX32:
         {
             arrayType = DTWAIN_ARRAYFLOAT;
@@ -827,7 +848,8 @@ void TestSetCap(HWND hWnd, LONG capValue)
         aValues = DTWAIN_ArrayCreate(arrayType, 0);
     pInfo.dataType = nDataType;
     pInfo.theArray = aValues;
-    ParseTextBySpaces(g_szInput, &ParseTokenCallback, arrayType == DTWAIN_ARRAYANSISTRING, &pInfo);
+    ParseTextBySpaces(g_szInput, &ParseTokenCallback, arrayType == DTWAIN_ARRAYANSISTRING || 
+                                                      arrayType == DTWAIN_ARRAYWIDESTRING, &pInfo);
 
     /* Call the capability function */
     LONG ret = DTWAIN_SetCapValuesEx2(g_CurrentSource, capValue, nSetType, nContainerType, nDataType, aValues);

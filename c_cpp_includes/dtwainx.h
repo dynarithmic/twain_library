@@ -38,6 +38,7 @@ DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitialize(VOID_PROTOTYPE);
 
 /* Initialize DTWAIN without having the "Resources not found" error box blocking the client */
 DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlocking(VOID_PROTOTYPE);
+DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_SysInitializeNoBlockingEx(DTWAIN_BOOL bCreateLogFile);
 
 /* Uninitialize DTWAIN (closes all open sources, shuts down the link to the TWAIN DSM) */
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SysDestroy(VOID_PROTOTYPE);
@@ -201,6 +202,7 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArraySetAtFloat(DTWAIN_ARRAY pArray, LON
 LPVOID         DLLENTRY_DEF      DTWAIN_ArrayGetBuffer(DTWAIN_ARRAY pArray, LONG nPos );
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayDestroy(DTWAIN_ARRAY pArray);
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromCap(DTWAIN_SOURCE Source, LONG lCapType, LONG lSize);
+DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_ArrayCreateFromType(DTWAIN_SOURCE Source, LONG lCapType, LONG lSize);
 
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayDumpToLog(DTWAIN_ARRAY pArray, DTWAIN_BOOL bAsUnsigned);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_ArrayIsValid(DTWAIN_ARRAY theArray);

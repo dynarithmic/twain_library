@@ -235,9 +235,37 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     g_hInstance = hInstance;
     hAccelTable = LoadAccelerators(hInstance, (LPCTSTR)IDC_DTWDEMO);
 
-    /* Initialize DTWAIN.  Quit if error! */
-    if ( !DTWAIN_SysInitialize( ))
-        return 0;
+    /* Initialize DTWAIN */
+    while (1)
+    {
+        /* Try initialization, but do not show error
+           message box if there is a failure */
+        if (DTWAIN_SysInitializeNoBlocking())
+            break; 
+
+        /* Retry initialization with alternate path */
+        DTWAIN_SetResourcePathA(ALTERNATE_RESOURCE_PATH);
+
+        /* Try initialization again using the alternate path */
+        if (DTWAIN_SysInitialize())
+            break;
+
+        /* Reset the resource path to the default (which is the DTWAIN DLL's path) */
+        DTWAIN_SetResourcePathA("");
+
+        /* Failed, so either the user exits the program, or copies the 
+           proper text resource files to a folder (on the path or to the 
+           ALTERNATE_RESOURCE_PATH) */
+        LONG nValue =
+            MessageBox(g_hWnd, _T("Initialization failed.  Select OK to reattempt DTWAIN initialization, Cancel to exit..."), _T("Retry Initialization"), MB_OKCANCEL);
+        if (nValue == IDOK)
+            continue;
+        else
+            return 0;
+    }
+    LONG major, minor, versiontype, patch;
+    DTWAIN_GetVersionEx(&major, &minor, &versiontype, &patch);
+
     DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
 
     /* Allow DTWAIN messages to be sent directly to our Window proc */
@@ -633,9 +661,6 @@ void SetCaptionToSourceName()
 
 void SetUpAcquire()
 {
-    /* Disable main window */
-    DTWAIN_DisableAppWindow(g_hWnd, TRUE);
-
     /* Check if feeder or duplex is supported */
     if (DTWAIN_IsFeederSupported(g_CurrentSource) || DTWAIN_IsDuplexSupported(g_CurrentSource))
         DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSettings, g_hWnd, (DLGPROC)DisplayAcquireSettingsProc);

@@ -1912,6 +1912,7 @@ function DTWAIN_ArrayCreateFromFloats(nSize:LONG) : DTWAIN_ARRAY; stdcall;  exte
 function DTWAIN_ArrayCreateFromLong64s(pCArray:LPLONG64; nSize:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayCreateFromLong64s';
 function DTWAIN_ArrayCreateFromLongs(pCArray:LPLONG; nSize:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayCreateFromLongs';
 function DTWAIN_ArrayCreateFromStrings(pCArray:PPChar; nSize:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayCreateFromStrings';
+function DTWAIN_ArrayCreateFromType(Source:DTWAIN_SOURCE; lType:LONG; lSize:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayCreateFromType';
 function DTWAIN_ArrayCreateFromWideStrings(pCArray:PPWideChar; nSize:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayCreateFromWideStrings';
 function DTWAIN_ArrayDestroy(pArray:DTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayDestroy';
 function DTWAIN_ArrayDestroyAll : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_ArrayDestroyAll';
@@ -3024,6 +3025,7 @@ function DTWAIN_SysInitializeLibEx2W(hInstance:NativeInt; szINIPath:LPCWSTR; szI
 function DTWAIN_SysInitializeLibExA(hInstance:NativeInt; szINIPath:LPCSTR) : DTWAIN_HANDLE; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_SysInitializeLibExA';
 function DTWAIN_SysInitializeLibExW(hInstance:NativeInt; szINIPath:LPCWSTR) : DTWAIN_HANDLE; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_SysInitializeLibExW';
 function DTWAIN_SysInitializeNoBlocking : DTWAIN_HANDLE; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_SysInitializeNoBlocking';
+function DTWAIN_SysInitializeNoBlockingEx(bCreateLogFile:BOOL) : DTWAIN_HANDLE; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_SysInitializeNoBlockingEx';
 function DTWAIN_TestGetCap(Source:DTWAIN_SOURCE; lCapability:LONG) : DTWAIN_ARRAY; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_TestGetCap';
 function DTWAIN_UnlockMemory(h:NativeInt) : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_UnlockMemory';
 function DTWAIN_UnlockMemoryEx(h:NativeInt) : BOOL; stdcall;  external 'dtwain32d.dll'  name 'DTWAIN_UnlockMemoryEx';

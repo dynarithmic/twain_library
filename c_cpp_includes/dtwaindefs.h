@@ -1597,6 +1597,15 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWDF_BYLENGTH            1
 #define DTWAIN_TWDF_INFRARED            2
 
+/* ICAP_AUTOSIZE */
+#define DTWAIN_TWAS_NONE                0  
+#define DTWAIN_TWAS_AUTO                1
+#define DTWAIN_TWAS_CURRENT             2
+
+/* ICAP_FLIPROTATION */
+#define DTWAIN_TWFR_BOOK                0
+#define DTWAIN_TWFR_FANFOLD             1
+
 /* DTWAIN Twain name lookup constants */
 #define DTWAIN_CONSTANT_TWPT     0
 #define DTWAIN_CONSTANT_TWUN     1

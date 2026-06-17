@@ -118,6 +118,7 @@
     D_ARRAYCREATEFROMLONG64SFUNC                  DYNDTWAIN_API::DTWAIN_ArrayCreateFromLong64s = nullptr;
     D_ARRAYCREATEFROMLONGSFUNC                    DYNDTWAIN_API::DTWAIN_ArrayCreateFromLongs = nullptr;
     D_ARRAYCREATEFROMSTRINGSFUNC                  DYNDTWAIN_API::DTWAIN_ArrayCreateFromStrings = nullptr;
+    D_ARRAYCREATEFROMTYPEFUNC                     DYNDTWAIN_API::DTWAIN_ArrayCreateFromType = nullptr;
     D_ARRAYCREATEFROMWIDESTRINGSFUNC              DYNDTWAIN_API::DTWAIN_ArrayCreateFromWideStrings = nullptr;
     D_ARRAYDESTROYFUNC                            DYNDTWAIN_API::DTWAIN_ArrayDestroy = nullptr;
     D_ARRAYDESTROYALLFUNC                         DYNDTWAIN_API::DTWAIN_ArrayDestroyAll = nullptr;
@@ -1230,6 +1231,7 @@
     D_SYSINITIALIZELIBEXAFUNC                     DYNDTWAIN_API::DTWAIN_SysInitializeLibExA = nullptr;
     D_SYSINITIALIZELIBEXWFUNC                     DYNDTWAIN_API::DTWAIN_SysInitializeLibExW = nullptr;
     D_SYSINITIALIZENOBLOCKINGFUNC                 DYNDTWAIN_API::DTWAIN_SysInitializeNoBlocking = nullptr;
+    D_SYSINITIALIZENOBLOCKINGEXFUNC               DYNDTWAIN_API::DTWAIN_SysInitializeNoBlockingEx = nullptr;
     D_TESTGETCAPFUNC                              DYNDTWAIN_API::DTWAIN_TestGetCap = nullptr;
     D_UNLOCKMEMORYFUNC                            DYNDTWAIN_API::DTWAIN_UnlockMemory = nullptr;
     D_UNLOCKMEMORYEXFUNC                          DYNDTWAIN_API::DTWAIN_UnlockMemoryEx = nullptr;
@@ -1369,6 +1371,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromLong64s, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromLongs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromStrings, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromType, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayCreateFromWideStrings, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroy, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ArrayDestroyAll, hModule);
@@ -2481,6 +2484,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibExA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibExW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeNoBlocking, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SysInitializeNoBlockingEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_TestGetCap, hModule);
           LOADFUNCTIONIMPL(DTWAIN_UnlockMemory, hModule);
           LOADFUNCTIONIMPL(DTWAIN_UnlockMemoryEx, hModule);

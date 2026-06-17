@@ -1988,6 +1988,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_ARRAY function(LPLONG64, LONG) DTWAIN_ArrayCreateFromLong64s;
     extern(Windows) DTWAIN_ARRAY function(LPLONG, LONG) DTWAIN_ArrayCreateFromLongs;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_CCHARPTRTYPE*, LONG) DTWAIN_ArrayCreateFromStrings;
+    extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE, LONG, LONG) DTWAIN_ArrayCreateFromType;
     extern(Windows) DTWAIN_ARRAY function(LPCWSTR*, LONG) DTWAIN_ArrayCreateFromWideStrings;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_ARRAY) DTWAIN_ArrayDestroy;
     extern(Windows) DTWAIN_BOOL function() DTWAIN_ArrayDestroyAll;
@@ -3085,6 +3086,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_HANDLE function(HINSTANCE, LPCSTR) DTWAIN_SysInitializeLibExA;
     extern(Windows) DTWAIN_HANDLE function(HINSTANCE, LPCWSTR) DTWAIN_SysInitializeLibExW;
     extern(Windows) DTWAIN_HANDLE function() DTWAIN_SysInitializeNoBlocking;
+    extern(Windows) DTWAIN_HANDLE function(DTWAIN_BOOL) DTWAIN_SysInitializeNoBlockingEx;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE, LONG) DTWAIN_TestGetCap;
     extern(Windows) DTWAIN_BOOL function(HANDLE) DTWAIN_UnlockMemory;
     extern(Windows) DTWAIN_BOOL function(HANDLE) DTWAIN_UnlockMemoryEx;
@@ -3167,6 +3169,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_ArrayCreateFromLong64s, "DTWAIN_ArrayCreateFromLong64s");
         bindFunction(cast(void**)&DTWAIN_ArrayCreateFromLongs, "DTWAIN_ArrayCreateFromLongs");
         bindFunction(cast(void**)&DTWAIN_ArrayCreateFromStrings, "DTWAIN_ArrayCreateFromStrings");
+        bindFunction(cast(void**)&DTWAIN_ArrayCreateFromType, "DTWAIN_ArrayCreateFromType");
         bindFunction(cast(void**)&DTWAIN_ArrayCreateFromWideStrings, "DTWAIN_ArrayCreateFromWideStrings");
         bindFunction(cast(void**)&DTWAIN_ArrayDestroy, "DTWAIN_ArrayDestroy");
         bindFunction(cast(void**)&DTWAIN_ArrayDestroyAll, "DTWAIN_ArrayDestroyAll");
@@ -4264,6 +4267,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_SysInitializeLibExA, "DTWAIN_SysInitializeLibExA");
         bindFunction(cast(void**)&DTWAIN_SysInitializeLibExW, "DTWAIN_SysInitializeLibExW");
         bindFunction(cast(void**)&DTWAIN_SysInitializeNoBlocking, "DTWAIN_SysInitializeNoBlocking");
+        bindFunction(cast(void**)&DTWAIN_SysInitializeNoBlockingEx, "DTWAIN_SysInitializeNoBlockingEx");
         bindFunction(cast(void**)&DTWAIN_TestGetCap, "DTWAIN_TestGetCap");
         bindFunction(cast(void**)&DTWAIN_UnlockMemory, "DTWAIN_UnlockMemory");
         bindFunction(cast(void**)&DTWAIN_UnlockMemoryEx, "DTWAIN_UnlockMemoryEx");
