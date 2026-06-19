@@ -1,5 +1,9 @@
 DTWAIN Version changes
 
+5.9.2 Update 1
+
+- Minor change to DTWDEMO program. Main menu items are now disabled during acquisition to a file
+
 5.9.2
 
 - Fix issue with DTWAIN_IsTwainAvailable() and DTWAIN_IsTwainAvailableEx() if these
