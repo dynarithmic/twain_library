@@ -59,7 +59,7 @@
     #if _MSC_VER < 1800
         #error("Compiler must be Visual Studio 2013 or greater")
     #elif _MSC_VER == 1800
-    #pragma message ("Microsoft Visual Studio 2013 compiler defined")
+        #pragma message ("Microsoft Visual Studio 2013 compiler defined")
     #elif _MSC_VER == 1900
         #pragma message ("Microsoft Visual Studio 2015 compiler defined")
     #elif _MSC_VER >= 1910 && _MSC_VER < 1920

@@ -21,6 +21,10 @@
 #ifndef DTWSTRFN_H
 #define DTWSTRFN_H
 
+#ifdef __cplusplus
+  extern "C" {
+#endif
+
 // ANSI and Wide versions of the DTWAIN functions that take 1 or more string parameters
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileA(DTWAIN_SOURCE Source, LPCSTR lpszFile, LONG lFileType, LONG lFileFlags, LONG PixelType, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AcquireFileW(DTWAIN_SOURCE Source, LPCWSTR lpszFile, LONG lFileType, LONG lFileFlags, LONG PixelType, LONG lMaxPages, DTWAIN_BOOL bShowUI, DTWAIN_BOOL bCloseSource, LPLONG pStatus);
@@ -544,5 +548,7 @@ HANDLE DLLENTRY_DEF DTWAIN_RotateImageString(HANDLE hDib, DTWAIN_CCHARPTRTYPE an
 LONG DLLENTRY_DEF DTWAIN_GetCapLabel(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
 LONG DLLENTRY_DEF DTWAIN_GetCapHelp(LONG lCapability, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
 LONG DLLENTRY_DEF DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpszOut, LONG indentFactor, LONG nSize);
-
+#ifdef __cplusplus
+}
+#endif
 #endif

@@ -1,8 +1,69 @@
 DTWAIN Version changes
 
+5.9.3
+
+- Allow DTWAIN_AcquireFile() to accept file names with embedded space characters.
+  Previously, only DTWAIN_AcquireFileEx() would allow file names with embedded spaces, due
+  to the file names being stored in an array of names.
+
+- The DTWAIN_AcquireFile() file name parser now by default will only accept pipe (|),
+  asterisk (*), and semicolons (:) as delimiters if a list of files are specified.  The
+  space character is no longer a valid delimiter character.
+
+- Update DTWAIN versioning to add build number to version string 
+  (e.g. 5.9.3.x, where "x" is the build number for version 5.9.3)
+
+- Add DTWAIN_CheckDLLVersion() function to check if the version of DTWAIN DLL that is loaded
+  matches the version that the client expects.  This function can be used to enforce within
+  the application the proper version of DTWAIN to use before utilizing the other DTWAIN functions.
+
+    The prototype of this function is as follows:
+
+    BOOL DTWAIN_CheckDLLVersion(LONG major, LONG minor, LONG patch, LONG buildNumber, LONG checkType);
+
+    The DTWAIN DLL version is made up of 4 components.  Here is an example:
+    "a.b.c.d"
+
+    The "a" is the major version.
+    The "b" is the minor version.
+    The "c" is the patch version.
+    The "d" is the build number.
+
+    The buildNumber parameter, if it is 0,  is not included in the check, and only the major, minor, and patch will be compared.
+
+    The checkType parameter can be one of the following constants:
+
+          DTWAIN_CHECKDLLVEREQUAL        (Checks if loaded DTWAIN DLL is equal to the specified version)
+          DTWAIN_CHECKDLLVERLESS         (Checks if loaded DTWAIN DLL is less than the specified version)
+          DTWAIN_CHECKDLLVERLESSEQUAL    (Checks if loaded DTWAIN DLL is less than or equal to the specified version)
+          DTWAIN_CHECKDLLVERGREATER      (Checks if loaded DTWAIN DLL is greater than the specified version)
+          DTWAIN_CHECKDLLVERGREATEREQUAL (Checks if loaded DTWAIN DLL is greeater than or equal to the specified version) 
+
+    For example, if you require your application to use DTWAIN DLL version "5.1.2", the following call can be made:
+
+    BOOL isOk = DTWAIN_CheckDLLVersion(5,1,2,0, DTWAIN_CHECKDLLVEREQUAL);
+
+    If the return is TRUE, then the loaded DTWAIN DLL matches version 5.1.2.
+
+    Note that the DTWAIN_CheckDLLVersion() function can be used to check any loaded DTWAIN DLL that is at least version
+    5.0.0.  Note that the DTWAIN_CheckDLLVersion() function should only be called after the DTWAIN DLL has been loaded, either 
+    automatically at runtime, or through LoadLibrary().
+
+- Fix issues with DTWAIN_IsTwainAvailable() when run on a system without TWAIN_32.DLL installed.
+
+- Fix issue with logging the Windows version if using Windows Server Enterprise Edition.
+
+- Add Cantonese string resources.
+
+
+- Update DTWDEMO program to allow acquiring to PDF files using various
+  PDF options (PDF Author, Title, etc.), as well as using PDF encryption.
+ 
+
 5.9.2 Update 1
 
 - Minor change to DTWDEMO program. Main menu items are now disabled during acquisition to a file
+
 
 5.9.2
 

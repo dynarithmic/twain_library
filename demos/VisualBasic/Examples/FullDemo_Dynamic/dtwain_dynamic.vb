@@ -982,6 +982,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_ERR_RANGE_STEPISZERO As Integer = (-1086)
         Public Const DTWAIN_ERR_BLANKNAMEDETECTED As Integer = (-1087)
         Public Const DTWAIN_ERR_FEEDER_NOPAPERSENSOR As Integer = (-1088)
+        Public Const DTWAIN_ERR_DTWAINDLL_LOADERROR As Integer = (-1089)
         Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
         Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
         Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -1914,6 +1915,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_PDF_AES256 As Integer = 2
         Public Const DTWAIN_FEEDER_TERMINATE As Integer = 1
         Public Const DTWAIN_FEEDER_USEFLATBED As Integer = 2
+        Public Const DTWAIN_CHECKDLLVERLESS As Integer = 0
+        Public Const DTWAIN_CHECKDLLVEREQUAL As Integer = 1
+        Public Const DTWAIN_CHECKDLLVERGREATER As Integer = 2
+        Public Const DTWAIN_CHECKDLLVERLESSEQ As Integer = 3
+        Public Const DTWAIN_CHECKDLLVERGREATEREQ As Integer = 4
+        Public Const DTWAIN_RESOURCE_COPYRIGHT As Integer = 9700
 
         Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
         Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
@@ -2335,6 +2342,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_CallDSMProcDelegate(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_CheckDLLVersionDelegate(lMajor As Integer, lMinor As Integer, lPatchLevel As Integer, lBuildNumber As Integer, MatchType As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_CheckHandlesDelegate(bCheck As Integer) As Integer
@@ -3024,7 +3034,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetCaptionDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
+        Private Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCompressionTypeDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
@@ -3081,10 +3091,10 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetDTWAINHandleDelegate() As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetDeviceEventDelegate(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetDeviceEventDelegate(Source As System.IntPtr, ByRef lpEvent As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetDeviceEventExDelegate(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_GetDeviceEventExDelegate(Source As System.IntPtr, ByRef lpEvent As UInteger, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetDeviceEventInfoDelegate(Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
@@ -3111,7 +3121,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetErrorBufferDelegate(ByRef ArrayBuffer As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetErrorBufferThresholdDelegate() As Integer
+        Private Delegate Function DTWAIN_GetErrorBufferThresholdDelegate() As UInteger
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetErrorCallbackDelegate() As DTwainErrorProc
@@ -3484,6 +3494,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetVersionExDelegate(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetVersionEx2Delegate(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer, ByRef lBuildNumber As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetVersionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -4170,7 +4183,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_SetEOJDetectValueDelegate(Source As System.IntPtr, nValue As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetErrorBufferThresholdDelegate(nErrors As Integer) As Integer
+        Private Delegate Function DTWAIN_SetErrorBufferThresholdDelegate(nErrors As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetErrorCallbackDelegate(proc As DTwainErrorProc, UserData As Integer) As Integer
@@ -5062,6 +5075,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_CallDSMProc(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
         Return api.DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData)
+        End Function
+        
+        Public Function DTWAIN_CheckDLLVersion(lMajor As Integer, lMinor As Integer, lPatchLevel As Integer, lBuildNumber As Integer, MatchType As Integer) As Integer
+        Return api.DTWAIN_CheckDLLVersion(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType)
         End Function
         
         Public Function DTWAIN_CheckHandles(bCheck As Integer) As Integer
@@ -5980,7 +5997,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCaption(Source, Caption)
         End Function
         
-        Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
+        Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         Return api.DTWAIN_GetCompressionSize(Source, lBytes)
         End Function
         
@@ -6056,11 +6073,11 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetDTWAINHandle()
         End Function
         
-        Public Function DTWAIN_GetDeviceEvent(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
+        Public Function DTWAIN_GetDeviceEvent(Source As System.IntPtr, ByRef lpEvent As UInteger) As Integer
         Return api.DTWAIN_GetDeviceEvent(Source, lpEvent)
         End Function
         
-        Public Function DTWAIN_GetDeviceEventEx(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
+        Public Function DTWAIN_GetDeviceEventEx(Source As System.IntPtr, ByRef lpEvent As UInteger, ByRef pArray As System.IntPtr) As Integer
         Return api.DTWAIN_GetDeviceEventEx(Source, lpEvent, pArray)
         End Function
         
@@ -6096,7 +6113,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetErrorBuffer(ArrayBuffer)
         End Function
         
-        Public Function DTWAIN_GetErrorBufferThreshold() As Integer
+        Public Function DTWAIN_GetErrorBufferThreshold() As UInteger
         Return api.DTWAIN_GetErrorBufferThreshold()
         End Function
         
@@ -6594,6 +6611,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetVersionEx(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
         Return api.DTWAIN_GetVersionEx(lMajor, lMinor, lVersionType, lPatchLevel)
+        End Function
+        
+        Public Function DTWAIN_GetVersionEx2(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer, ByRef lBuildNumber As Integer) As Integer
+        Return api.DTWAIN_GetVersionEx2(lMajor, lMinor, lVersionType, lPatchLevel, lBuildNumber)
         End Function
         
         Public Function DTWAIN_GetVersionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -7508,7 +7529,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_SetEOJDetectValue(Source, nValue)
         End Function
         
-        Public Function DTWAIN_SetErrorBufferThreshold(nErrors As Integer) As Integer
+        Public Function DTWAIN_SetErrorBufferThreshold(nErrors As UInteger) As Integer
         Return api.DTWAIN_SetErrorBufferThreshold(nErrors)
         End Function
         
@@ -8109,6 +8130,7 @@ Namespace Dynarithmic
             Public DTWAIN_CallCallback As DTWAIN_CallCallbackDelegate
             Public DTWAIN_CallCallback64 As DTWAIN_CallCallback64Delegate
             Public DTWAIN_CallDSMProc As DTWAIN_CallDSMProcDelegate
+            Public DTWAIN_CheckDLLVersion As DTWAIN_CheckDLLVersionDelegate
             Public DTWAIN_CheckHandles As DTWAIN_CheckHandlesDelegate
             Public DTWAIN_ClearBuffers As DTWAIN_ClearBuffersDelegate
             Public DTWAIN_ClearErrorBuffer As DTWAIN_ClearErrorBufferDelegate
@@ -8492,6 +8514,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetVersion As DTWAIN_GetVersionDelegate
             Public DTWAIN_GetVersionCopyright As DTWAIN_GetVersionCopyrightDelegate
             Public DTWAIN_GetVersionEx As DTWAIN_GetVersionExDelegate
+            Public DTWAIN_GetVersionEx2 As DTWAIN_GetVersionEx2Delegate
             Public DTWAIN_GetVersionInfo As DTWAIN_GetVersionInfoDelegate
             Public DTWAIN_GetVersionString As DTWAIN_GetVersionStringDelegate
             Public DTWAIN_GetWindowsVersionInfo As DTWAIN_GetWindowsVersionInfoDelegate

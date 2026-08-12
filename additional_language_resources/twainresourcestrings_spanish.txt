@@ -103,6 +103,8 @@
 1086 DTWAIN_RANGE tiene un tamaño de paso de 0
 1087 Se detectó un nombre vacío o en blanco.
 1088 El alimentador de documentos no tiene sensor de papel o no se detecta el sensor de papel.
+1089 No se pudo cargar la DLL DTWAIN o no existe
+1090 La DLL DTWAIN no es la versión correcta
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

@@ -229,6 +229,7 @@
     D_CALLCALLBACKFUNC                            DYNDTWAIN_API::DTWAIN_CallCallback = nullptr;
     D_CALLCALLBACK64FUNC                          DYNDTWAIN_API::DTWAIN_CallCallback64 = nullptr;
     D_CALLDSMPROCFUNC                             DYNDTWAIN_API::DTWAIN_CallDSMProc = nullptr;
+    D_CHECKDLLVERSIONFUNC                         DYNDTWAIN_API::DTWAIN_CheckDLLVersion = nullptr;
     D_CHECKHANDLESFUNC                            DYNDTWAIN_API::DTWAIN_CheckHandles = nullptr;
     D_CLEARBUFFERSFUNC                            DYNDTWAIN_API::DTWAIN_ClearBuffers = nullptr;
     D_CLEARERRORBUFFERFUNC                        DYNDTWAIN_API::DTWAIN_ClearErrorBuffer = nullptr;
@@ -748,6 +749,7 @@
     D_GETVERSIONCOPYRIGHTAFUNC                    DYNDTWAIN_API::DTWAIN_GetVersionCopyrightA = nullptr;
     D_GETVERSIONCOPYRIGHTWFUNC                    DYNDTWAIN_API::DTWAIN_GetVersionCopyrightW = nullptr;
     D_GETVERSIONEXFUNC                            DYNDTWAIN_API::DTWAIN_GetVersionEx = nullptr;
+    D_GETVERSIONEX2FUNC                           DYNDTWAIN_API::DTWAIN_GetVersionEx2 = nullptr;
     D_GETVERSIONINFOFUNC                          DYNDTWAIN_API::DTWAIN_GetVersionInfo = nullptr;
     D_GETVERSIONINFOAFUNC                         DYNDTWAIN_API::DTWAIN_GetVersionInfoA = nullptr;
     D_GETVERSIONINFOWFUNC                         DYNDTWAIN_API::DTWAIN_GetVersionInfoW = nullptr;
@@ -1482,6 +1484,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_CallCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CallCallback64, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CallDSMProc, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_CheckDLLVersion, hModule);
           LOADFUNCTIONIMPL(DTWAIN_CheckHandles, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ClearBuffers, hModule);
           LOADFUNCTIONIMPL(DTWAIN_ClearErrorBuffer, hModule);
@@ -2001,6 +2004,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyrightA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionCopyrightW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionEx, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetVersionEx2, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionInfo, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionInfoA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetVersionInfoW, hModule);

@@ -865,6 +865,7 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_RANGE_STEPISZERO = (-1086);
         public const int DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
         public const int DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
+        public const int DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -1797,6 +1798,12 @@ namespace Dynarithmic
         public const int DTWAIN_PDF_AES256 = 2;
         public const int DTWAIN_FEEDER_TERMINATE = 1;
         public const int DTWAIN_FEEDER_USEFLATBED = 2;
+        public const int DTWAIN_CHECKDLLVERLESS = 0;
+        public const int DTWAIN_CHECKDLLVEREQUAL = 1;
+        public const int DTWAIN_CHECKDLLVERGREATER = 2;
+        public const int DTWAIN_CHECKDLLVERLESSEQ = 3;
+        public const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
+        public const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
 
         public const string DTWAIN_LIBRARY = "dtwain64ud.dll";
 
@@ -2219,6 +2226,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, int lDG, int lDAT, int lMSG, System.IntPtr pData);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_CheckDLLVersion(int lMajor, int lMinor, int lPatchLevel, int lBuildNumber, int MatchType);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_CheckHandles(int bCheck);
@@ -2947,7 +2957,7 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetCaption(DTWAIN_SOURCE Source, System.IntPtr Caption);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, ref int lBytes);
+        public static extern int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, ref DWORD lBytes);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent);
@@ -3019,10 +3029,10 @@ namespace Dynarithmic
         public static extern DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, ref int lpEvent);
+        public static extern int DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, ref DWORD lpEvent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, ref int lpEvent, ref DTWAIN_ARRAY pArray);
+        public static extern int DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, ref DWORD lpEvent, ref DTWAIN_ARRAY pArray);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, int nWhichInfo, System.IntPtr pValue);
@@ -3052,7 +3062,7 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetErrorBuffer(ref DTWAIN_ARRAY ArrayBuffer);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_GetErrorBufferThreshold();
+        public static extern uint DTWAIN_GetErrorBufferThreshold();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern DTwainErrorProc DTWAIN_GetErrorCallback();
@@ -3545,6 +3555,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetVersionEx(ref int lMajor, ref int lMinor, ref int lVersionType, ref int lPatchLevel);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetVersionEx2(ref int lMajor, ref int lMinor, ref int lVersionType, ref int lPatchLevel, ref int lBuildNumber);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true)]
         public static extern int DTWAIN_GetVersionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength);
@@ -4261,7 +4274,7 @@ namespace Dynarithmic
         public static extern int DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, int nValue);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
-        public static extern int DTWAIN_SetErrorBufferThreshold(int nErrors);
+        public static extern int DTWAIN_SetErrorBufferThreshold(uint nErrors);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_SetErrorCallback(DTwainErrorProc proc, int UserData);

@@ -225,6 +225,7 @@ type DtwainarraywidestringtofloatFunc = unsafe extern "C" fn(*mut c_void) -> *mu
 type DtwaincallcallbackFunc = unsafe extern "C" fn(i32,i32,i32) -> i32;
 type Dtwaincallcallback64Func = unsafe extern "C" fn(i32,i32,i64) -> i32;
 type DtwaincalldsmprocFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,i32,i32,i32,*mut c_void) -> i32;
+type DtwaincheckdllversionFunc = unsafe extern "C" fn(i32,i32,i32,i32,i32) -> i32;
 type DtwaincheckhandlesFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainclearbuffersFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainclearerrorbufferFunc = unsafe extern "C" fn() -> i32;
@@ -494,7 +495,7 @@ type Dtwaingetcapvaluesex2Func = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i3
 type DtwaingetcaptionFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcaptionaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetcaptionwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
-type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
 type DtwaingetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetcompressiontypeexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetconditioncodestringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -525,8 +526,8 @@ type DtwaingetdsmsearchorderexFunc = unsafe extern "C" fn(*mut u16,*mut u16) -> 
 type DtwaingetdsmsearchorderexaFunc = unsafe extern "C" fn(*mut c_char,*mut c_char) -> i32;
 type DtwaingetdsmsearchorderexwFunc = unsafe extern "C" fn(*mut u16,*mut u16) -> i32;
 type DtwaingetdtwainhandleFunc = unsafe extern "C" fn() -> *mut c_void;
-type DtwaingetdeviceeventFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
-type DtwaingetdeviceeventexFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut *mut c_void) -> i32;
+type DtwaingetdeviceeventFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
+type DtwaingetdeviceeventexFunc = unsafe extern "C" fn(*mut c_void,*mut u32,*mut *mut c_void) -> i32;
 type DtwaingetdeviceeventinfoFunc = unsafe extern "C" fn(*mut c_void,i32,*mut c_void) -> i32;
 type DtwaingetdevicenotificationsFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetdevicetimedateFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -537,7 +538,7 @@ type DtwaingetdoublefeeddetectvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut
 type DtwaingetduplextypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetduplextypeexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingeterrorbufferFunc = unsafe extern "C" fn(*mut *mut c_void) -> i32;
-type DtwaingeterrorbufferthresholdFunc = unsafe extern "C" fn() -> i32;
+type DtwaingeterrorbufferthresholdFunc = unsafe extern "C" fn() -> u32;
 type DtwaingeterrorcallbackFunc = unsafe extern "C" fn() -> DTWAIN_ERROR_PROC;
 type Dtwaingeterrorcallback64Func = unsafe extern "C" fn() -> DTWAIN_ERROR_PROC64;
 type DtwaingeterrorstringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -744,6 +745,7 @@ type DtwaingetversioncopyrightFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversioncopyrightaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetversioncopyrightwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversionexFunc = unsafe extern "C" fn(*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
+type Dtwaingetversionex2Func = unsafe extern "C" fn(*mut i32,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetversioninfoFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversioninfoaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetversioninfowFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
@@ -1048,7 +1050,7 @@ type DtwainsetdoublefeeddetectlengthstringwFunc = unsafe extern "C" fn(*mut c_vo
 type DtwainsetdoublefeeddetectvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainsetdoublepagecountonduplexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainseteojdetectvalueFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
-type DtwainseterrorbufferthresholdFunc = unsafe extern "C" fn(i32) -> i32;
+type DtwainseterrorbufferthresholdFunc = unsafe extern "C" fn(u32) -> i32;
 type DtwainseterrorcallbackFunc = unsafe extern "C" fn(DTWAIN_ERROR_PROC,i32) -> i32;
 type Dtwainseterrorcallback64Func = unsafe extern "C" fn(DTWAIN_ERROR_PROC64,i64) -> i32;
 type DtwainsetfeederalignmentFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -1410,6 +1412,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_CallCallbackFunc: Symbol<'a, DtwaincallcallbackFunc>,
     DTWAIN_CallCallback64Func: Symbol<'a, Dtwaincallcallback64Func>,
     DTWAIN_CallDSMProcFunc: Symbol<'a, DtwaincalldsmprocFunc>,
+    DTWAIN_CheckDLLVersionFunc: Symbol<'a, DtwaincheckdllversionFunc>,
     DTWAIN_CheckHandlesFunc: Symbol<'a, DtwaincheckhandlesFunc>,
     DTWAIN_ClearBuffersFunc: Symbol<'a, DtwainclearbuffersFunc>,
     DTWAIN_ClearErrorBufferFunc: Symbol<'a, DtwainclearerrorbufferFunc>,
@@ -1929,6 +1932,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetVersionCopyrightAFunc: Symbol<'a, DtwaingetversioncopyrightaFunc>,
     DTWAIN_GetVersionCopyrightWFunc: Symbol<'a, DtwaingetversioncopyrightwFunc>,
     DTWAIN_GetVersionExFunc: Symbol<'a, DtwaingetversionexFunc>,
+    DTWAIN_GetVersionEx2Func: Symbol<'a, Dtwaingetversionex2Func>,
     DTWAIN_GetVersionInfoFunc: Symbol<'a, DtwaingetversioninfoFunc>,
     DTWAIN_GetVersionInfoAFunc: Symbol<'a, DtwaingetversioninfoaFunc>,
     DTWAIN_GetVersionInfoWFunc: Symbol<'a, DtwaingetversioninfowFunc>,
@@ -3136,6 +3140,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_RANGE_STEPISZERO: i32 = -1086;
     pub const DTWAIN_ERR_BLANKNAMEDETECTED: i32 = -1087;
     pub const DTWAIN_ERR_FEEDER_NOPAPERSENSOR: i32 = -1088;
+    pub const DTWAIN_ERR_DTWAINDLL_LOADERROR: i32 = -1089;
     pub const TWAIN_ERR_LOW_MEMORY: i32 = -1100;
     pub const TWAIN_ERR_FALSE_ALARM: i32 = -1101;
     pub const TWAIN_ERR_BUMMER: i32 = -1102;
@@ -4068,6 +4073,12 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_PDF_AES256: i32 = 2;
     pub const DTWAIN_FEEDER_TERMINATE: i32 = 1;
     pub const DTWAIN_FEEDER_USEFLATBED: i32 = 2;
+    pub const DTWAIN_CHECKDLLVERLESS: i32 = 0;
+    pub const DTWAIN_CHECKDLLVEREQUAL: i32 = 1;
+    pub const DTWAIN_CHECKDLLVERGREATER: i32 = 2;
+    pub const DTWAIN_CHECKDLLVERLESSEQ: i32 = 3;
+    pub const DTWAIN_CHECKDLLVERGREATEREQ: i32 = 4;
+    pub const DTWAIN_RESOURCE_COPYRIGHT: i32 = 9700;
 
     pub fn new(library: &'a Library) -> Result<Self, Box<dyn std::error::Error>>
     {
@@ -4249,6 +4260,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_CallCallback: Symbol<DtwaincallcallbackFunc> = unsafe { library.get(b"DTWAIN_CallCallback")? };
         let DTWAIN_CallCallback64: Symbol<Dtwaincallcallback64Func> = unsafe { library.get(b"DTWAIN_CallCallback64")? };
         let DTWAIN_CallDSMProc: Symbol<DtwaincalldsmprocFunc> = unsafe { library.get(b"DTWAIN_CallDSMProc")? };
+        let DTWAIN_CheckDLLVersion: Symbol<DtwaincheckdllversionFunc> = unsafe { library.get(b"DTWAIN_CheckDLLVersion")? };
         let DTWAIN_CheckHandles: Symbol<DtwaincheckhandlesFunc> = unsafe { library.get(b"DTWAIN_CheckHandles")? };
         let DTWAIN_ClearBuffers: Symbol<DtwainclearbuffersFunc> = unsafe { library.get(b"DTWAIN_ClearBuffers")? };
         let DTWAIN_ClearErrorBuffer: Symbol<DtwainclearerrorbufferFunc> = unsafe { library.get(b"DTWAIN_ClearErrorBuffer")? };
@@ -4768,6 +4780,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetVersionCopyrightA: Symbol<DtwaingetversioncopyrightaFunc> = unsafe { library.get(b"DTWAIN_GetVersionCopyrightA")? };
         let DTWAIN_GetVersionCopyrightW: Symbol<DtwaingetversioncopyrightwFunc> = unsafe { library.get(b"DTWAIN_GetVersionCopyrightW")? };
         let DTWAIN_GetVersionEx: Symbol<DtwaingetversionexFunc> = unsafe { library.get(b"DTWAIN_GetVersionEx")? };
+        let DTWAIN_GetVersionEx2: Symbol<Dtwaingetversionex2Func> = unsafe { library.get(b"DTWAIN_GetVersionEx2")? };
         let DTWAIN_GetVersionInfo: Symbol<DtwaingetversioninfoFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfo")? };
         let DTWAIN_GetVersionInfoA: Symbol<DtwaingetversioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfoA")? };
         let DTWAIN_GetVersionInfoW: Symbol<DtwaingetversioninfowFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfoW")? };
@@ -5433,6 +5446,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_CallCallbackFunc: DTWAIN_CallCallback,
             DTWAIN_CallCallback64Func: DTWAIN_CallCallback64,
             DTWAIN_CallDSMProcFunc: DTWAIN_CallDSMProc,
+            DTWAIN_CheckDLLVersionFunc: DTWAIN_CheckDLLVersion,
             DTWAIN_CheckHandlesFunc: DTWAIN_CheckHandles,
             DTWAIN_ClearBuffersFunc: DTWAIN_ClearBuffers,
             DTWAIN_ClearErrorBufferFunc: DTWAIN_ClearErrorBuffer,
@@ -5952,6 +5966,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetVersionCopyrightAFunc: DTWAIN_GetVersionCopyrightA,
             DTWAIN_GetVersionCopyrightWFunc: DTWAIN_GetVersionCopyrightW,
             DTWAIN_GetVersionExFunc: DTWAIN_GetVersionEx,
+            DTWAIN_GetVersionEx2Func: DTWAIN_GetVersionEx2,
             DTWAIN_GetVersionInfoFunc: DTWAIN_GetVersionInfo,
             DTWAIN_GetVersionInfoAFunc: DTWAIN_GetVersionInfoA,
             DTWAIN_GetVersionInfoWFunc: DTWAIN_GetVersionInfoW,
@@ -7154,6 +7169,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_CallDSMProcFunc)(AppID, SourceId, lDG, lDAT, lMSG, pData);  }
     }
 
+    pub fn DTWAIN_CheckDLLVersion(&self, lMajor: i32, lMinor: i32, lPatchLevel: i32, lBuildNumber: i32, MatchType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_CheckDLLVersionFunc)(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType);  }
+    }
+
     pub fn DTWAIN_CheckHandles(&self, bCheck: i32) -> i32 {
         unsafe { return (self.DTWAIN_CheckHandlesFunc)(bCheck);  }
     }
@@ -8230,7 +8249,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetCaptionWFunc)(Source, Caption);  }
     }
 
-    pub fn DTWAIN_GetCompressionSize(&self, Source: *mut c_void, lBytes: *mut i32) -> i32 {
+    pub fn DTWAIN_GetCompressionSize(&self, Source: *mut c_void, lBytes: *mut u32) -> i32 {
         unsafe { return (self.DTWAIN_GetCompressionSizeFunc)(Source, lBytes);  }
     }
 
@@ -8354,11 +8373,11 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetDTWAINHandleFunc)();  }
     }
 
-    pub fn DTWAIN_GetDeviceEvent(&self, Source: *mut c_void, lpEvent: *mut i32) -> i32 {
+    pub fn DTWAIN_GetDeviceEvent(&self, Source: *mut c_void, lpEvent: *mut u32) -> i32 {
         unsafe { return (self.DTWAIN_GetDeviceEventFunc)(Source, lpEvent);  }
     }
 
-    pub fn DTWAIN_GetDeviceEventEx(&self, Source: *mut c_void, lpEvent: *mut i32, pArray: *mut *mut c_void) -> i32 {
+    pub fn DTWAIN_GetDeviceEventEx(&self, Source: *mut c_void, lpEvent: *mut u32, pArray: *mut *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_GetDeviceEventExFunc)(Source, lpEvent, pArray);  }
     }
 
@@ -8402,7 +8421,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetErrorBufferFunc)(ArrayBuffer);  }
     }
 
-    pub fn DTWAIN_GetErrorBufferThreshold(&self) -> i32 {
+    pub fn DTWAIN_GetErrorBufferThreshold(&self) -> u32 {
         unsafe { return (self.DTWAIN_GetErrorBufferThresholdFunc)();  }
     }
 
@@ -9228,6 +9247,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetVersionEx(&self, lMajor: *mut i32, lMinor: *mut i32, lVersionType: *mut i32, lPatchLevel: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetVersionExFunc)(lMajor, lMinor, lVersionType, lPatchLevel);  }
+    }
+
+    pub fn DTWAIN_GetVersionEx2(&self, lMajor: *mut i32, lMinor: *mut i32, lVersionType: *mut i32, lPatchLevel: *mut i32, lBuildNumber: *mut i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetVersionEx2Func)(lMajor, lMinor, lVersionType, lPatchLevel, lBuildNumber);  }
     }
 
     pub fn DTWAIN_GetVersionInfo(&self, lpszVer: *mut u16, nLength: i32) -> i32 {
@@ -10446,7 +10469,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_SetEOJDetectValueFunc)(Source, nValue);  }
     }
 
-    pub fn DTWAIN_SetErrorBufferThreshold(&self, nErrors: i32) -> i32 {
+    pub fn DTWAIN_SetErrorBufferThreshold(&self, nErrors: u32) -> i32 {
         unsafe { return (self.DTWAIN_SetErrorBufferThresholdFunc)(nErrors);  }
     }
 
