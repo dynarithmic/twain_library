@@ -105,6 +105,7 @@
 1088 Document feeder has no paper sensor or paper sensor not detected
 1089 DTWAIN DLL could not be loaded or does not exist
 1090 DTWAIN DLL is not the correct version.
+1091 TWAIN session is currently active
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

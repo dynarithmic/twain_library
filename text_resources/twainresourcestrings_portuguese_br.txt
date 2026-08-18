@@ -105,6 +105,7 @@
 1088 O alimentador de documentos não possui sensor de papel ou o sensor de papel não foi detectado
 1089 A DLL DTWAIN não pôde ser carregada ou não existe
 1090 DTWAIN DLL não é a versão correta
+1091 A sessão TWAIN está atualmente ativa
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

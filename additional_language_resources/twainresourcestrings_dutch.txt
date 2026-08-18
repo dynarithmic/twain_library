@@ -105,6 +105,7 @@
 1088 De documentinvoer heeft geen papiersensor of de papiersensor wordt niet gedetecteerd.
 1089 DTWAIN DLL kon niet worden geladen of bestaat niet
 1090 DTWAIN DLL is niet de juiste versie
+1091 TWAIN-sessie is momenteel actief
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

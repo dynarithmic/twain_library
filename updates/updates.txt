@@ -10,6 +10,17 @@ DTWAIN Version changes
   asterisk (*), and semicolons (:) as delimiters if a list of files are specified.  The
   space character is no longer a valid delimiter character.
 
+- Calling the DTWAIN_SetTwainDSM() function when the TWAIN Data Source Manager is active will 
+  now result in a -1019 error being produced (DTWAIN_ERR_ACTIVE_TWAINDSM).  
+
+      The DTWAIN_SetTwainDSM() can only be called successfully 
+
+      1) before a TWAIN session has started (directly after DTWAIN_SysInitialize() is 
+         called and before accessing any TWAIN Sources) or
+
+      2) after a TWAIN session has been terminated (either by calling 
+         DTWAIN_EndTwainSession() or DTWAIN_SysDestroy()).  
+
 - Update DTWAIN versioning to add build number to version string 
   (e.g. 5.9.3.x, where "x" is the build number for version 5.9.3)
 
@@ -54,7 +65,6 @@ DTWAIN Version changes
 - Fix issue with logging the Windows version if using Windows Server Enterprise Edition.
 
 - Add Cantonese string resources.
-
 
 - Update DTWDEMO program to allow acquiring to PDF files using various
   PDF options (PDF Author, Title, etc.), as well as using PDF encryption.

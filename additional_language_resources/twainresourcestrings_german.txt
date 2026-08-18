@@ -105,6 +105,7 @@
 1088 Der Dokumenteneinzug hat keinen Papiersensor oder der Papiersensor wird nicht erkannt.
 1089 DTWAIN DLL konnte nicht geladen werden oder existiert nicht
 1090 DTWAIN DLL ist nicht die korrekte Version
+1091 TWAIN-Sitzung ist derzeit aktiv
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

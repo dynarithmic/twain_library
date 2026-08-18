@@ -105,6 +105,7 @@
 1088 Alimentatorul de documente nu are senzor de hârtie sau senzorul de hârtie nu este detectat
 1089 DTWAIN DLL nu a putut fi încărcat sau nu există
 1090 DLL DTWAIN nu este versiunea corectă
+1091 Sesiunea TWAIN este activă în prezent
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  
