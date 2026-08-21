@@ -624,6 +624,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -1109,6 +1110,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -1866,6 +1868,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -2351,6 +2354,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -3108,6 +3112,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -3593,6 +3598,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -4350,6 +4356,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -4835,6 +4842,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);

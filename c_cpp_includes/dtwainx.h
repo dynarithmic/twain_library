@@ -1088,6 +1088,10 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
 /* Destroy all "active" DTWAIN_ARRAYs */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayDestroyAll(VOID_PROTOTYPE);
 
+/* Set the application's major/minor TW_IDENTITY components */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
+
 #ifdef __cplusplus
 }
 #endif

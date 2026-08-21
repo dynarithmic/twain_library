@@ -683,6 +683,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetLoggerCallback
    attr_reader :DTWAIN_GetLoggerCallbackA
    attr_reader :DTWAIN_GetLoggerCallbackW
+   attr_reader :DTWAIN_GetMajorMinorVersion
    attr_reader :DTWAIN_GetManualDuplexCount
    attr_reader :DTWAIN_GetMaxAcquisitions
    attr_reader :DTWAIN_GetMaxBuffers
@@ -1170,6 +1171,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetLoggerCallback
    attr_reader :DTWAIN_SetLoggerCallbackA
    attr_reader :DTWAIN_SetLoggerCallbackW
+   attr_reader :DTWAIN_SetMajorMinorVersion
    attr_reader :DTWAIN_SetManualDuplexMode
    attr_reader :DTWAIN_SetMaxAcquisitions
    attr_reader :DTWAIN_SetMaxBuffers
@@ -2039,6 +2041,8 @@ class DTWAINAPI
    DTWAIN_ERR_BLANKNAMEDETECTED = (-1087)
    DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088)
    DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089)
+   DTWAIN_ERR_DTWAINDLL_VERSION = (-1090)
+   DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091)
    TWAIN_ERR_LOW_MEMORY = (-1100)
    TWAIN_ERR_FALSE_ALARM = (-1101)
    TWAIN_ERR_BUMMER = (-1102)
@@ -3567,6 +3571,7 @@ class DTWAINAPI
        @DTWAIN_GetLoggerCallback = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLoggerCallback'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetLoggerCallbackA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLoggerCallbackA'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetLoggerCallbackW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLoggerCallbackW'],[],Fiddle::TYPE_VOIDP)
+       @DTWAIN_GetMajorMinorVersion = Fiddle::Function::new(dtwain_dll['DTWAIN_GetMajorMinorVersion'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetManualDuplexCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetManualDuplexCount'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetMaxAcquisitions = Fiddle::Function::new(dtwain_dll['DTWAIN_GetMaxAcquisitions'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetMaxBuffers = Fiddle::Function::new(dtwain_dll['DTWAIN_GetMaxBuffers'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4054,6 +4059,7 @@ class DTWAINAPI
        @DTWAIN_SetLoggerCallback = Fiddle::Function::new(dtwain_dll['DTWAIN_SetLoggerCallback'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetLoggerCallbackA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetLoggerCallbackA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetLoggerCallbackW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetLoggerCallbackW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetMajorMinorVersion = Fiddle::Function::new(dtwain_dll['DTWAIN_SetMajorMinorVersion'],[Fiddle::TYPE_UINT, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
        @DTWAIN_SetManualDuplexMode = Fiddle::Function::new(dtwain_dll['DTWAIN_SetManualDuplexMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetMaxAcquisitions = Fiddle::Function::new(dtwain_dll['DTWAIN_SetMaxAcquisitions'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetMaxBuffers = Fiddle::Function::new(dtwain_dll['DTWAIN_SetMaxBuffers'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)

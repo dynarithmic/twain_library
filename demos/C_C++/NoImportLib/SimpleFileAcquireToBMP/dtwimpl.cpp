@@ -599,6 +599,7 @@
     D_GETLOGGERCALLBACKFUNC                       DYNDTWAIN_API::DTWAIN_GetLoggerCallback = nullptr;
     D_GETLOGGERCALLBACKAFUNC                      DYNDTWAIN_API::DTWAIN_GetLoggerCallbackA = nullptr;
     D_GETLOGGERCALLBACKWFUNC                      DYNDTWAIN_API::DTWAIN_GetLoggerCallbackW = nullptr;
+    D_GETMAJORMINORVERSIONFUNC                    DYNDTWAIN_API::DTWAIN_GetMajorMinorVersion = nullptr;
     D_GETMANUALDUPLEXCOUNTFUNC                    DYNDTWAIN_API::DTWAIN_GetManualDuplexCount = nullptr;
     D_GETMAXACQUISITIONSFUNC                      DYNDTWAIN_API::DTWAIN_GetMaxAcquisitions = nullptr;
     D_GETMAXBUFFERSFUNC                           DYNDTWAIN_API::DTWAIN_GetMaxBuffers = nullptr;
@@ -1088,6 +1089,7 @@
     D_SETLOGGERCALLBACKFUNC                       DYNDTWAIN_API::DTWAIN_SetLoggerCallback = nullptr;
     D_SETLOGGERCALLBACKAFUNC                      DYNDTWAIN_API::DTWAIN_SetLoggerCallbackA = nullptr;
     D_SETLOGGERCALLBACKWFUNC                      DYNDTWAIN_API::DTWAIN_SetLoggerCallbackW = nullptr;
+    D_SETMAJORMINORVERSIONFUNC                    DYNDTWAIN_API::DTWAIN_SetMajorMinorVersion = nullptr;
     D_SETMANUALDUPLEXMODEFUNC                     DYNDTWAIN_API::DTWAIN_SetManualDuplexMode = nullptr;
     D_SETMAXACQUISITIONSFUNC                      DYNDTWAIN_API::DTWAIN_SetMaxAcquisitions = nullptr;
     D_SETMAXBUFFERSFUNC                           DYNDTWAIN_API::DTWAIN_SetMaxBuffers = nullptr;
@@ -1854,6 +1856,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetLoggerCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetLoggerCallbackA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetLoggerCallbackW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetMajorMinorVersion, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetManualDuplexCount, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetMaxAcquisitions, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetMaxBuffers, hModule);
@@ -2343,6 +2346,7 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallback, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallbackA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetLoggerCallbackW, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_SetMajorMinorVersion, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetManualDuplexMode, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetMaxAcquisitions, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SetMaxBuffers, hModule);

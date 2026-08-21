@@ -913,6 +913,8 @@ const
   DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
   DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
   DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
+  DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
+  DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -2405,6 +2407,7 @@ function DTWAIN_GetLightSourcesEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; external
 function DTWAIN_GetLoggerCallback : DTwainLoggerProc; external 'dtwain64u.dll'  name 'DTWAIN_GetLoggerCallback';
 function DTWAIN_GetLoggerCallbackA : DTwainLoggerProcA; external 'dtwain64u.dll'  name 'DTWAIN_GetLoggerCallbackA';
 function DTWAIN_GetLoggerCallbackW : DTwainLoggerProcW; external 'dtwain64u.dll'  name 'DTWAIN_GetLoggerCallbackW';
+function DTWAIN_GetMajorMinorVersion(nMajor:LPDWORD; nMinor:LPDWORD) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_GetMajorMinorVersion';
 function DTWAIN_GetManualDuplexCount(Source:DTWAIN_SOURCE; pSide1:LPLONG; pSide2:LPLONG) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_GetManualDuplexCount';
 function DTWAIN_GetMaxAcquisitions(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64u.dll'  name 'DTWAIN_GetMaxAcquisitions';
 function DTWAIN_GetMaxBuffers(Source:DTWAIN_SOURCE; pMaxBuf:LPDWORD) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_GetMaxBuffers';
@@ -2894,6 +2897,7 @@ function DTWAIN_SetLogSaveThreshold(lineCount:Int64) : BOOL; external 'dtwain64u
 function DTWAIN_SetLoggerCallback(logProc:DTwainLoggerProc; UserData:Int64) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetLoggerCallback';
 function DTWAIN_SetLoggerCallbackA(logProc:DTwainLoggerProcA; UserData:Int64) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetLoggerCallbackA';
 function DTWAIN_SetLoggerCallbackW(logProc:DTwainLoggerProcW; UserData:Int64) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetLoggerCallbackW';
+function DTWAIN_SetMajorMinorVersion(nMajor:DWORD; nMinor:DWORD) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetMajorMinorVersion';
 function DTWAIN_SetManualDuplexMode(Source:DTWAIN_SOURCE; Flags:LONG; bSet:BOOL) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetManualDuplexMode';
 function DTWAIN_SetMaxAcquisitions(Source:DTWAIN_SOURCE; MaxAcquires:LONG) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetMaxAcquisitions';
 function DTWAIN_SetMaxBuffers(Source:DTWAIN_SOURCE; MaxBuf:DWORD) : BOOL; external 'dtwain64u.dll'  name 'DTWAIN_SetMaxBuffers';

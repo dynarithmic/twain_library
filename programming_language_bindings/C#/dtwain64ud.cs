@@ -866,6 +866,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
         public const int DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
         public const int DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
+        public const int DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
+        public const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -3197,6 +3199,9 @@ namespace Dynarithmic
         public static extern DTwainLoggerProc DTWAIN_GetLoggerCallback();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_GetMajorMinorVersion(ref DWORD nMajor, ref DWORD nMinor);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, ref int pSide1, ref int pSide2);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
@@ -4344,6 +4349,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_SetLoggerCallback(DTwainLoggerProc logProc, long UserData);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
+        public static extern int DTWAIN_SetMajorMinorVersion(uint nMajor, uint nMinor);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true)]
         public static extern int DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, int Flags, int bSet);

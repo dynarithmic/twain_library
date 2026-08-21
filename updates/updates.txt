@@ -21,6 +21,15 @@ DTWAIN Version changes
       2) after a TWAIN session has been terminated (either by calling 
          DTWAIN_EndTwainSession() or DTWAIN_SysDestroy()).  
 
+- Add DTWAIN_SetMajorMinorVersion() function to allow setting the TWAIN session's
+  major and minor version number (basically, the same items in the TW_IDENTITY structure for
+  the TWAIN session).  
+
+  The prototype of this function is as follows:
+
+    BOOL DTWAIN_SetMajorMinorVersion(LONG major, LONG minor);
+
+
 - Update DTWAIN versioning to add build number to version string 
   (e.g. 5.9.3.x, where "x" is the build number for version 5.9.3)
 

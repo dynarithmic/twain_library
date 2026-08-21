@@ -985,6 +985,8 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
     public static const int DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
     public static const int DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
+    public static const int DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
+    public static const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
     public static const int TWAIN_ERR_LOW_MEMORY = (-1100);
     public static const int TWAIN_ERR_FALSE_ALARM = (-1101);
     public static const int TWAIN_ERR_BUMMER = (-1102);
@@ -2469,6 +2471,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG) DTWAIN_GetLightSource;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_GetLightSources;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE) DTWAIN_GetLightSourcesEx;
+    extern(Windows) DTWAIN_BOOL function(LPDWORD, LPDWORD) DTWAIN_GetMajorMinorVersion;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, LPLONG) DTWAIN_GetManualDuplexCount;
     extern(Windows) LONG function(DTWAIN_SOURCE) DTWAIN_GetMaxAcquisitions;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDWORD) DTWAIN_GetMaxBuffers;
@@ -2951,6 +2954,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_SetLightSource;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_ARRAY) DTWAIN_SetLightSources;
     extern(Windows) DTWAIN_BOOL function(LONG64) DTWAIN_SetLogSaveThreshold;
+    extern(Windows) DTWAIN_BOOL function(DWORD, DWORD) DTWAIN_SetMajorMinorVersion;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, DTWAIN_BOOL) DTWAIN_SetManualDuplexMode;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_SetMaxAcquisitions;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DWORD) DTWAIN_SetMaxBuffers;
@@ -3652,6 +3656,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetLightSource, "DTWAIN_GetLightSource");
         bindFunction(cast(void**)&DTWAIN_GetLightSources, "DTWAIN_GetLightSources");
         bindFunction(cast(void**)&DTWAIN_GetLightSourcesEx, "DTWAIN_GetLightSourcesEx");
+        bindFunction(cast(void**)&DTWAIN_GetMajorMinorVersion, "DTWAIN_GetMajorMinorVersion");
         bindFunction(cast(void**)&DTWAIN_GetManualDuplexCount, "DTWAIN_GetManualDuplexCount");
         bindFunction(cast(void**)&DTWAIN_GetMaxAcquisitions, "DTWAIN_GetMaxAcquisitions");
         bindFunction(cast(void**)&DTWAIN_GetMaxBuffers, "DTWAIN_GetMaxBuffers");
@@ -4134,6 +4139,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_SetLightSource, "DTWAIN_SetLightSource");
         bindFunction(cast(void**)&DTWAIN_SetLightSources, "DTWAIN_SetLightSources");
         bindFunction(cast(void**)&DTWAIN_SetLogSaveThreshold, "DTWAIN_SetLogSaveThreshold");
+        bindFunction(cast(void**)&DTWAIN_SetMajorMinorVersion, "DTWAIN_SetMajorMinorVersion");
         bindFunction(cast(void**)&DTWAIN_SetManualDuplexMode, "DTWAIN_SetManualDuplexMode");
         bindFunction(cast(void**)&DTWAIN_SetMaxAcquisitions, "DTWAIN_SetMaxAcquisitions");
         bindFunction(cast(void**)&DTWAIN_SetMaxBuffers, "DTWAIN_SetMaxBuffers");

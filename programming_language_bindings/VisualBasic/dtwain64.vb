@@ -812,6 +812,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_BLANKNAMEDETECTED As Integer = (-1087)
     Public Const DTWAIN_ERR_FEEDER_NOPAPERSENSOR As Integer = (-1088)
     Public Const DTWAIN_ERR_DTWAINDLL_LOADERROR As Integer = (-1089)
+    Public Const DTWAIN_ERR_DTWAINDLL_VERSION As Integer = (-1090)
+    Public Const DTWAIN_ERR_ACTIVE_TWAINSESSION As Integer = (-1091)
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -2193,6 +2195,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetLightSources Lib "dtwain64.dll" (Source As System.IntPtr, ByRef LightSources As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetLightSourcesEx Lib "dtwain64.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Function DTWAIN_GetLoggerCallback Lib "dtwain64.dll" () As DTwainLoggerProc
+    Public Declare Function DTWAIN_GetMajorMinorVersion Lib "dtwain64.dll" (ByRef nMajor As UInteger, ByRef nMinor As UInteger) As Integer
     Public Declare Function DTWAIN_GetManualDuplexCount Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
     Public Declare Function DTWAIN_GetMaxAcquisitions Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetMaxBuffers Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pMaxBuf As UInteger) As Integer
@@ -2534,6 +2537,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_SetLightSources Lib "dtwain64.dll" (Source As System.IntPtr, LightSources As System.IntPtr) As Integer
     Public Declare Function DTWAIN_SetLogSaveThreshold Lib "dtwain64.dll" (lineCount As System.Int64) As Integer
     Public Declare Function DTWAIN_SetLoggerCallback Lib "dtwain64.dll" (logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
+    Public Declare Function DTWAIN_SetMajorMinorVersion Lib "dtwain64.dll" (nMajor As UInteger, nMinor As UInteger) As Integer
     Public Declare Function DTWAIN_SetManualDuplexMode Lib "dtwain64.dll" (Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
     Public Declare Function DTWAIN_SetMaxAcquisitions Lib "dtwain64.dll" (Source As System.IntPtr, MaxAcquires As Integer) As Integer
     Public Declare Function DTWAIN_SetMaxBuffers Lib "dtwain64.dll" (Source As System.IntPtr, MaxBuf As UInteger) As Integer
