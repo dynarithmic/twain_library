@@ -103,6 +103,9 @@
 1086 DTWAIN_RANGE adım boyutu 0
 1087 Boş veya boşluklu ad algılandı
 1088 Belge besleyicinin kağıt sensörü yok veya kağıt sensörü algılanmadı
+1089 DTWAIN DLL yüklenemedi veya mevcut değil
+1090 DTWAIN DLL doğru sürüm değil
+1091 TWAIN oturumu şu anda aktif
 1100 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
 1101 TWAIN Durum Kodu: Hata Yok
 1102 TWAIN Durum Kodu: Bilinmeyen hata nedeni

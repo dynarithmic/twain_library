@@ -13,3 +13,4 @@ simplified_chinese
 traditional_chinese
 japanese
 korean
+cantonese

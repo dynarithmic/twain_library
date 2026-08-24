@@ -225,6 +225,7 @@ type DtwainarraywidestringtofloatFunc = unsafe extern "C" fn(*mut c_void) -> *mu
 type DtwaincallcallbackFunc = unsafe extern "C" fn(i32,i32,i32) -> i32;
 type Dtwaincallcallback64Func = unsafe extern "C" fn(i32,i32,i64) -> i32;
 type DtwaincalldsmprocFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,i32,i32,i32,*mut c_void) -> i32;
+type DtwaincheckdllversionFunc = unsafe extern "C" fn(i32,i32,i32,i32,i32) -> i32;
 type DtwaincheckhandlesFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainclearbuffersFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainclearerrorbufferFunc = unsafe extern "C" fn() -> i32;
@@ -444,6 +445,9 @@ type DtwaingetactivedsmversioninfoFunc = unsafe extern "C" fn(*mut u16,i32) -> i
 type DtwaingetactivedsmversioninfoaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetactivedsmversioninfowFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetalarmvolumeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetallsessioninfoFunc = unsafe extern "C" fn(*mut u16,i32,i32) -> i32;
+type DtwaingetallsessioninfoaFunc = unsafe extern "C" fn(*mut c_char,i32,i32) -> i32;
+type DtwaingetallsessioninfowFunc = unsafe extern "C" fn(*mut u16,i32,i32) -> i32;
 type DtwaingetallsourcedibsFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
 type DtwaingetallsourceinfoFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i32,i32) -> i32;
 type DtwaingetallsourceinfoaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,i32,i32) -> i32;
@@ -494,7 +498,7 @@ type Dtwaingetcapvaluesex2Func = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i3
 type DtwaingetcaptionFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcaptionaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetcaptionwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
-type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
 type DtwaingetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetcompressiontypeexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetconditioncodestringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -525,8 +529,8 @@ type DtwaingetdsmsearchorderexFunc = unsafe extern "C" fn(*mut u16,*mut u16) -> 
 type DtwaingetdsmsearchorderexaFunc = unsafe extern "C" fn(*mut c_char,*mut c_char) -> i32;
 type DtwaingetdsmsearchorderexwFunc = unsafe extern "C" fn(*mut u16,*mut u16) -> i32;
 type DtwaingetdtwainhandleFunc = unsafe extern "C" fn() -> *mut c_void;
-type DtwaingetdeviceeventFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
-type DtwaingetdeviceeventexFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut *mut c_void) -> i32;
+type DtwaingetdeviceeventFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
+type DtwaingetdeviceeventexFunc = unsafe extern "C" fn(*mut c_void,*mut u32,*mut *mut c_void) -> i32;
 type DtwaingetdeviceeventinfoFunc = unsafe extern "C" fn(*mut c_void,i32,*mut c_void) -> i32;
 type DtwaingetdevicenotificationsFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetdevicetimedateFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
@@ -537,7 +541,7 @@ type DtwaingetdoublefeeddetectvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut
 type DtwaingetduplextypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
 type DtwaingetduplextypeexFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingeterrorbufferFunc = unsafe extern "C" fn(*mut *mut c_void) -> i32;
-type DtwaingeterrorbufferthresholdFunc = unsafe extern "C" fn() -> i32;
+type DtwaingeterrorbufferthresholdFunc = unsafe extern "C" fn() -> u32;
 type DtwaingeterrorcallbackFunc = unsafe extern "C" fn() -> DTWAIN_ERROR_PROC;
 type Dtwaingeterrorcallback64Func = unsafe extern "C" fn() -> DTWAIN_ERROR_PROC64;
 type DtwaingeterrorstringFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
@@ -594,6 +598,7 @@ type DtwaingetlightsourcesexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_v
 type DtwaingetloggercallbackFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROC;
 type DtwaingetloggercallbackaFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROCA;
 type DtwaingetloggercallbackwFunc = unsafe extern "C" fn() -> DTWAIN_LOGGER_PROCW;
+type DtwaingetmajorminorversionFunc = unsafe extern "C" fn(*mut u32,*mut u32) -> i32;
 type DtwaingetmanualduplexcountFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
 type DtwaingetmaxacquisitionsFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetmaxbuffersFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
@@ -744,6 +749,7 @@ type DtwaingetversioncopyrightFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversioncopyrightaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetversioncopyrightwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversionexFunc = unsafe extern "C" fn(*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
+type Dtwaingetversionex2Func = unsafe extern "C" fn(*mut i32,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetversioninfoFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetversioninfoaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
 type DtwaingetversioninfowFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
@@ -1048,7 +1054,7 @@ type DtwainsetdoublefeeddetectlengthstringwFunc = unsafe extern "C" fn(*mut c_vo
 type DtwainsetdoublefeeddetectvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> i32;
 type DtwainsetdoublepagecountonduplexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainseteojdetectvalueFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
-type DtwainseterrorbufferthresholdFunc = unsafe extern "C" fn(i32) -> i32;
+type DtwainseterrorbufferthresholdFunc = unsafe extern "C" fn(u32) -> i32;
 type DtwainseterrorcallbackFunc = unsafe extern "C" fn(DTWAIN_ERROR_PROC,i32) -> i32;
 type Dtwainseterrorcallback64Func = unsafe extern "C" fn(DTWAIN_ERROR_PROC64,i64) -> i32;
 type DtwainsetfeederalignmentFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -1080,6 +1086,7 @@ type DtwainsetlogsavethresholdFunc = unsafe extern "C" fn(i64) -> i32;
 type DtwainsetloggercallbackFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROC,i64) -> i32;
 type DtwainsetloggercallbackaFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROCA,i64) -> i32;
 type DtwainsetloggercallbackwFunc = unsafe extern "C" fn(DTWAIN_LOGGER_PROCW,i64) -> i32;
+type DtwainsetmajorminorversionFunc = unsafe extern "C" fn(u32,u32) -> i32;
 type DtwainsetmanualduplexmodeFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetmaxacquisitionsFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainsetmaxbuffersFunc = unsafe extern "C" fn(*mut c_void,u32) -> i32;
@@ -1216,13 +1223,6 @@ type Dtwainsysinitializeex2aFunc = unsafe extern "C" fn(*const c_char,*const c_c
 type Dtwainsysinitializeex2wFunc = unsafe extern "C" fn(*const u16,*const u16,*const u16) -> *mut c_void;
 type DtwainsysinitializeexaFunc = unsafe extern "C" fn(*const c_char) -> *mut c_void;
 type DtwainsysinitializeexwFunc = unsafe extern "C" fn(*const u16) -> *mut c_void;
-type DtwainsysinitializelibFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
-type DtwainsysinitializelibexFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
-type Dtwainsysinitializelibex2Func = unsafe extern "C" fn(*mut c_void,*const u16,*const u16,*const u16) -> *mut c_void;
-type Dtwainsysinitializelibex2aFunc = unsafe extern "C" fn(*mut c_void,*const c_char,*const c_char,*const c_char) -> *mut c_void;
-type Dtwainsysinitializelibex2wFunc = unsafe extern "C" fn(*mut c_void,*const u16,*const u16,*const u16) -> *mut c_void;
-type DtwainsysinitializelibexaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> *mut c_void;
-type DtwainsysinitializelibexwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> *mut c_void;
 type DtwainsysinitializenoblockingFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainsysinitializenoblockingexFunc = unsafe extern "C" fn(i32) -> *mut c_void;
 type DtwaintestgetcapFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
@@ -1410,6 +1410,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_CallCallbackFunc: Symbol<'a, DtwaincallcallbackFunc>,
     DTWAIN_CallCallback64Func: Symbol<'a, Dtwaincallcallback64Func>,
     DTWAIN_CallDSMProcFunc: Symbol<'a, DtwaincalldsmprocFunc>,
+    DTWAIN_CheckDLLVersionFunc: Symbol<'a, DtwaincheckdllversionFunc>,
     DTWAIN_CheckHandlesFunc: Symbol<'a, DtwaincheckhandlesFunc>,
     DTWAIN_ClearBuffersFunc: Symbol<'a, DtwainclearbuffersFunc>,
     DTWAIN_ClearErrorBufferFunc: Symbol<'a, DtwainclearerrorbufferFunc>,
@@ -1629,6 +1630,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetActiveDSMVersionInfoAFunc: Symbol<'a, DtwaingetactivedsmversioninfoaFunc>,
     DTWAIN_GetActiveDSMVersionInfoWFunc: Symbol<'a, DtwaingetactivedsmversioninfowFunc>,
     DTWAIN_GetAlarmVolumeFunc: Symbol<'a, DtwaingetalarmvolumeFunc>,
+    DTWAIN_GetAllSessionInfoFunc: Symbol<'a, DtwaingetallsessioninfoFunc>,
+    DTWAIN_GetAllSessionInfoAFunc: Symbol<'a, DtwaingetallsessioninfoaFunc>,
+    DTWAIN_GetAllSessionInfoWFunc: Symbol<'a, DtwaingetallsessioninfowFunc>,
     DTWAIN_GetAllSourceDibsFunc: Symbol<'a, DtwaingetallsourcedibsFunc>,
     DTWAIN_GetAllSourceInfoFunc: Symbol<'a, DtwaingetallsourceinfoFunc>,
     DTWAIN_GetAllSourceInfoAFunc: Symbol<'a, DtwaingetallsourceinfoaFunc>,
@@ -1779,6 +1783,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetLoggerCallbackFunc: Symbol<'a, DtwaingetloggercallbackFunc>,
     DTWAIN_GetLoggerCallbackAFunc: Symbol<'a, DtwaingetloggercallbackaFunc>,
     DTWAIN_GetLoggerCallbackWFunc: Symbol<'a, DtwaingetloggercallbackwFunc>,
+    DTWAIN_GetMajorMinorVersionFunc: Symbol<'a, DtwaingetmajorminorversionFunc>,
     DTWAIN_GetManualDuplexCountFunc: Symbol<'a, DtwaingetmanualduplexcountFunc>,
     DTWAIN_GetMaxAcquisitionsFunc: Symbol<'a, DtwaingetmaxacquisitionsFunc>,
     DTWAIN_GetMaxBuffersFunc: Symbol<'a, DtwaingetmaxbuffersFunc>,
@@ -1929,6 +1934,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetVersionCopyrightAFunc: Symbol<'a, DtwaingetversioncopyrightaFunc>,
     DTWAIN_GetVersionCopyrightWFunc: Symbol<'a, DtwaingetversioncopyrightwFunc>,
     DTWAIN_GetVersionExFunc: Symbol<'a, DtwaingetversionexFunc>,
+    DTWAIN_GetVersionEx2Func: Symbol<'a, Dtwaingetversionex2Func>,
     DTWAIN_GetVersionInfoFunc: Symbol<'a, DtwaingetversioninfoFunc>,
     DTWAIN_GetVersionInfoAFunc: Symbol<'a, DtwaingetversioninfoaFunc>,
     DTWAIN_GetVersionInfoWFunc: Symbol<'a, DtwaingetversioninfowFunc>,
@@ -2265,6 +2271,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetLoggerCallbackFunc: Symbol<'a, DtwainsetloggercallbackFunc>,
     DTWAIN_SetLoggerCallbackAFunc: Symbol<'a, DtwainsetloggercallbackaFunc>,
     DTWAIN_SetLoggerCallbackWFunc: Symbol<'a, DtwainsetloggercallbackwFunc>,
+    DTWAIN_SetMajorMinorVersionFunc: Symbol<'a, DtwainsetmajorminorversionFunc>,
     DTWAIN_SetManualDuplexModeFunc: Symbol<'a, DtwainsetmanualduplexmodeFunc>,
     DTWAIN_SetMaxAcquisitionsFunc: Symbol<'a, DtwainsetmaxacquisitionsFunc>,
     DTWAIN_SetMaxBuffersFunc: Symbol<'a, DtwainsetmaxbuffersFunc>,
@@ -2401,13 +2408,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_SysInitializeEx2WFunc: Symbol<'a, Dtwainsysinitializeex2wFunc>,
     DTWAIN_SysInitializeExAFunc: Symbol<'a, DtwainsysinitializeexaFunc>,
     DTWAIN_SysInitializeExWFunc: Symbol<'a, DtwainsysinitializeexwFunc>,
-    DTWAIN_SysInitializeLibFunc: Symbol<'a, DtwainsysinitializelibFunc>,
-    DTWAIN_SysInitializeLibExFunc: Symbol<'a, DtwainsysinitializelibexFunc>,
-    DTWAIN_SysInitializeLibEx2Func: Symbol<'a, Dtwainsysinitializelibex2Func>,
-    DTWAIN_SysInitializeLibEx2AFunc: Symbol<'a, Dtwainsysinitializelibex2aFunc>,
-    DTWAIN_SysInitializeLibEx2WFunc: Symbol<'a, Dtwainsysinitializelibex2wFunc>,
-    DTWAIN_SysInitializeLibExAFunc: Symbol<'a, DtwainsysinitializelibexaFunc>,
-    DTWAIN_SysInitializeLibExWFunc: Symbol<'a, DtwainsysinitializelibexwFunc>,
     DTWAIN_SysInitializeNoBlockingFunc: Symbol<'a, DtwainsysinitializenoblockingFunc>,
     DTWAIN_SysInitializeNoBlockingExFunc: Symbol<'a, DtwainsysinitializenoblockingexFunc>,
     DTWAIN_TestGetCapFunc: Symbol<'a, DtwaintestgetcapFunc>,
@@ -3136,6 +3136,9 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_RANGE_STEPISZERO: i32 = -1086;
     pub const DTWAIN_ERR_BLANKNAMEDETECTED: i32 = -1087;
     pub const DTWAIN_ERR_FEEDER_NOPAPERSENSOR: i32 = -1088;
+    pub const DTWAIN_ERR_DTWAINDLL_LOADERROR: i32 = -1089;
+    pub const DTWAIN_ERR_DTWAINDLL_VERSION: i32 = -1090;
+    pub const DTWAIN_ERR_ACTIVE_TWAINSESSION: i32 = -1091;
     pub const TWAIN_ERR_LOW_MEMORY: i32 = -1100;
     pub const TWAIN_ERR_FALSE_ALARM: i32 = -1101;
     pub const TWAIN_ERR_BUMMER: i32 = -1102;
@@ -4068,6 +4071,12 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_PDF_AES256: i32 = 2;
     pub const DTWAIN_FEEDER_TERMINATE: i32 = 1;
     pub const DTWAIN_FEEDER_USEFLATBED: i32 = 2;
+    pub const DTWAIN_CHECKDLLVERLESS: i32 = 0;
+    pub const DTWAIN_CHECKDLLVEREQUAL: i32 = 1;
+    pub const DTWAIN_CHECKDLLVERGREATER: i32 = 2;
+    pub const DTWAIN_CHECKDLLVERLESSEQ: i32 = 3;
+    pub const DTWAIN_CHECKDLLVERGREATEREQ: i32 = 4;
+    pub const DTWAIN_RESOURCE_COPYRIGHT: i32 = 9700;
 
     pub fn new(library: &'a Library) -> Result<Self, Box<dyn std::error::Error>>
     {
@@ -4249,6 +4258,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_CallCallback: Symbol<DtwaincallcallbackFunc> = unsafe { library.get(b"DTWAIN_CallCallback")? };
         let DTWAIN_CallCallback64: Symbol<Dtwaincallcallback64Func> = unsafe { library.get(b"DTWAIN_CallCallback64")? };
         let DTWAIN_CallDSMProc: Symbol<DtwaincalldsmprocFunc> = unsafe { library.get(b"DTWAIN_CallDSMProc")? };
+        let DTWAIN_CheckDLLVersion: Symbol<DtwaincheckdllversionFunc> = unsafe { library.get(b"DTWAIN_CheckDLLVersion")? };
         let DTWAIN_CheckHandles: Symbol<DtwaincheckhandlesFunc> = unsafe { library.get(b"DTWAIN_CheckHandles")? };
         let DTWAIN_ClearBuffers: Symbol<DtwainclearbuffersFunc> = unsafe { library.get(b"DTWAIN_ClearBuffers")? };
         let DTWAIN_ClearErrorBuffer: Symbol<DtwainclearerrorbufferFunc> = unsafe { library.get(b"DTWAIN_ClearErrorBuffer")? };
@@ -4468,6 +4478,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetActiveDSMVersionInfoA: Symbol<DtwaingetactivedsmversioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetActiveDSMVersionInfoA")? };
         let DTWAIN_GetActiveDSMVersionInfoW: Symbol<DtwaingetactivedsmversioninfowFunc> = unsafe { library.get(b"DTWAIN_GetActiveDSMVersionInfoW")? };
         let DTWAIN_GetAlarmVolume: Symbol<DtwaingetalarmvolumeFunc> = unsafe { library.get(b"DTWAIN_GetAlarmVolume")? };
+        let DTWAIN_GetAllSessionInfo: Symbol<DtwaingetallsessioninfoFunc> = unsafe { library.get(b"DTWAIN_GetAllSessionInfo")? };
+        let DTWAIN_GetAllSessionInfoA: Symbol<DtwaingetallsessioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetAllSessionInfoA")? };
+        let DTWAIN_GetAllSessionInfoW: Symbol<DtwaingetallsessioninfowFunc> = unsafe { library.get(b"DTWAIN_GetAllSessionInfoW")? };
         let DTWAIN_GetAllSourceDibs: Symbol<DtwaingetallsourcedibsFunc> = unsafe { library.get(b"DTWAIN_GetAllSourceDibs")? };
         let DTWAIN_GetAllSourceInfo: Symbol<DtwaingetallsourceinfoFunc> = unsafe { library.get(b"DTWAIN_GetAllSourceInfo")? };
         let DTWAIN_GetAllSourceInfoA: Symbol<DtwaingetallsourceinfoaFunc> = unsafe { library.get(b"DTWAIN_GetAllSourceInfoA")? };
@@ -4618,6 +4631,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetLoggerCallback: Symbol<DtwaingetloggercallbackFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallback")? };
         let DTWAIN_GetLoggerCallbackA: Symbol<DtwaingetloggercallbackaFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallbackA")? };
         let DTWAIN_GetLoggerCallbackW: Symbol<DtwaingetloggercallbackwFunc> = unsafe { library.get(b"DTWAIN_GetLoggerCallbackW")? };
+        let DTWAIN_GetMajorMinorVersion: Symbol<DtwaingetmajorminorversionFunc> = unsafe { library.get(b"DTWAIN_GetMajorMinorVersion")? };
         let DTWAIN_GetManualDuplexCount: Symbol<DtwaingetmanualduplexcountFunc> = unsafe { library.get(b"DTWAIN_GetManualDuplexCount")? };
         let DTWAIN_GetMaxAcquisitions: Symbol<DtwaingetmaxacquisitionsFunc> = unsafe { library.get(b"DTWAIN_GetMaxAcquisitions")? };
         let DTWAIN_GetMaxBuffers: Symbol<DtwaingetmaxbuffersFunc> = unsafe { library.get(b"DTWAIN_GetMaxBuffers")? };
@@ -4768,6 +4782,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetVersionCopyrightA: Symbol<DtwaingetversioncopyrightaFunc> = unsafe { library.get(b"DTWAIN_GetVersionCopyrightA")? };
         let DTWAIN_GetVersionCopyrightW: Symbol<DtwaingetversioncopyrightwFunc> = unsafe { library.get(b"DTWAIN_GetVersionCopyrightW")? };
         let DTWAIN_GetVersionEx: Symbol<DtwaingetversionexFunc> = unsafe { library.get(b"DTWAIN_GetVersionEx")? };
+        let DTWAIN_GetVersionEx2: Symbol<Dtwaingetversionex2Func> = unsafe { library.get(b"DTWAIN_GetVersionEx2")? };
         let DTWAIN_GetVersionInfo: Symbol<DtwaingetversioninfoFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfo")? };
         let DTWAIN_GetVersionInfoA: Symbol<DtwaingetversioninfoaFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfoA")? };
         let DTWAIN_GetVersionInfoW: Symbol<DtwaingetversioninfowFunc> = unsafe { library.get(b"DTWAIN_GetVersionInfoW")? };
@@ -5104,6 +5119,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetLoggerCallback: Symbol<DtwainsetloggercallbackFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallback")? };
         let DTWAIN_SetLoggerCallbackA: Symbol<DtwainsetloggercallbackaFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallbackA")? };
         let DTWAIN_SetLoggerCallbackW: Symbol<DtwainsetloggercallbackwFunc> = unsafe { library.get(b"DTWAIN_SetLoggerCallbackW")? };
+        let DTWAIN_SetMajorMinorVersion: Symbol<DtwainsetmajorminorversionFunc> = unsafe { library.get(b"DTWAIN_SetMajorMinorVersion")? };
         let DTWAIN_SetManualDuplexMode: Symbol<DtwainsetmanualduplexmodeFunc> = unsafe { library.get(b"DTWAIN_SetManualDuplexMode")? };
         let DTWAIN_SetMaxAcquisitions: Symbol<DtwainsetmaxacquisitionsFunc> = unsafe { library.get(b"DTWAIN_SetMaxAcquisitions")? };
         let DTWAIN_SetMaxBuffers: Symbol<DtwainsetmaxbuffersFunc> = unsafe { library.get(b"DTWAIN_SetMaxBuffers")? };
@@ -5240,13 +5256,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SysInitializeEx2W: Symbol<Dtwainsysinitializeex2wFunc> = unsafe { library.get(b"DTWAIN_SysInitializeEx2W")? };
         let DTWAIN_SysInitializeExA: Symbol<DtwainsysinitializeexaFunc> = unsafe { library.get(b"DTWAIN_SysInitializeExA")? };
         let DTWAIN_SysInitializeExW: Symbol<DtwainsysinitializeexwFunc> = unsafe { library.get(b"DTWAIN_SysInitializeExW")? };
-        let DTWAIN_SysInitializeLib: Symbol<DtwainsysinitializelibFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLib")? };
-        let DTWAIN_SysInitializeLibEx: Symbol<DtwainsysinitializelibexFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibEx")? };
-        let DTWAIN_SysInitializeLibEx2: Symbol<Dtwainsysinitializelibex2Func> = unsafe { library.get(b"DTWAIN_SysInitializeLibEx2")? };
-        let DTWAIN_SysInitializeLibEx2A: Symbol<Dtwainsysinitializelibex2aFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibEx2A")? };
-        let DTWAIN_SysInitializeLibEx2W: Symbol<Dtwainsysinitializelibex2wFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibEx2W")? };
-        let DTWAIN_SysInitializeLibExA: Symbol<DtwainsysinitializelibexaFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibExA")? };
-        let DTWAIN_SysInitializeLibExW: Symbol<DtwainsysinitializelibexwFunc> = unsafe { library.get(b"DTWAIN_SysInitializeLibExW")? };
         let DTWAIN_SysInitializeNoBlocking: Symbol<DtwainsysinitializenoblockingFunc> = unsafe { library.get(b"DTWAIN_SysInitializeNoBlocking")? };
         let DTWAIN_SysInitializeNoBlockingEx: Symbol<DtwainsysinitializenoblockingexFunc> = unsafe { library.get(b"DTWAIN_SysInitializeNoBlockingEx")? };
         let DTWAIN_TestGetCap: Symbol<DtwaintestgetcapFunc> = unsafe { library.get(b"DTWAIN_TestGetCap")? };
@@ -5433,6 +5442,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_CallCallbackFunc: DTWAIN_CallCallback,
             DTWAIN_CallCallback64Func: DTWAIN_CallCallback64,
             DTWAIN_CallDSMProcFunc: DTWAIN_CallDSMProc,
+            DTWAIN_CheckDLLVersionFunc: DTWAIN_CheckDLLVersion,
             DTWAIN_CheckHandlesFunc: DTWAIN_CheckHandles,
             DTWAIN_ClearBuffersFunc: DTWAIN_ClearBuffers,
             DTWAIN_ClearErrorBufferFunc: DTWAIN_ClearErrorBuffer,
@@ -5652,6 +5662,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetActiveDSMVersionInfoAFunc: DTWAIN_GetActiveDSMVersionInfoA,
             DTWAIN_GetActiveDSMVersionInfoWFunc: DTWAIN_GetActiveDSMVersionInfoW,
             DTWAIN_GetAlarmVolumeFunc: DTWAIN_GetAlarmVolume,
+            DTWAIN_GetAllSessionInfoFunc: DTWAIN_GetAllSessionInfo,
+            DTWAIN_GetAllSessionInfoAFunc: DTWAIN_GetAllSessionInfoA,
+            DTWAIN_GetAllSessionInfoWFunc: DTWAIN_GetAllSessionInfoW,
             DTWAIN_GetAllSourceDibsFunc: DTWAIN_GetAllSourceDibs,
             DTWAIN_GetAllSourceInfoFunc: DTWAIN_GetAllSourceInfo,
             DTWAIN_GetAllSourceInfoAFunc: DTWAIN_GetAllSourceInfoA,
@@ -5802,6 +5815,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetLoggerCallbackFunc: DTWAIN_GetLoggerCallback,
             DTWAIN_GetLoggerCallbackAFunc: DTWAIN_GetLoggerCallbackA,
             DTWAIN_GetLoggerCallbackWFunc: DTWAIN_GetLoggerCallbackW,
+            DTWAIN_GetMajorMinorVersionFunc: DTWAIN_GetMajorMinorVersion,
             DTWAIN_GetManualDuplexCountFunc: DTWAIN_GetManualDuplexCount,
             DTWAIN_GetMaxAcquisitionsFunc: DTWAIN_GetMaxAcquisitions,
             DTWAIN_GetMaxBuffersFunc: DTWAIN_GetMaxBuffers,
@@ -5952,6 +5966,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetVersionCopyrightAFunc: DTWAIN_GetVersionCopyrightA,
             DTWAIN_GetVersionCopyrightWFunc: DTWAIN_GetVersionCopyrightW,
             DTWAIN_GetVersionExFunc: DTWAIN_GetVersionEx,
+            DTWAIN_GetVersionEx2Func: DTWAIN_GetVersionEx2,
             DTWAIN_GetVersionInfoFunc: DTWAIN_GetVersionInfo,
             DTWAIN_GetVersionInfoAFunc: DTWAIN_GetVersionInfoA,
             DTWAIN_GetVersionInfoWFunc: DTWAIN_GetVersionInfoW,
@@ -6288,6 +6303,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetLoggerCallbackFunc: DTWAIN_SetLoggerCallback,
             DTWAIN_SetLoggerCallbackAFunc: DTWAIN_SetLoggerCallbackA,
             DTWAIN_SetLoggerCallbackWFunc: DTWAIN_SetLoggerCallbackW,
+            DTWAIN_SetMajorMinorVersionFunc: DTWAIN_SetMajorMinorVersion,
             DTWAIN_SetManualDuplexModeFunc: DTWAIN_SetManualDuplexMode,
             DTWAIN_SetMaxAcquisitionsFunc: DTWAIN_SetMaxAcquisitions,
             DTWAIN_SetMaxBuffersFunc: DTWAIN_SetMaxBuffers,
@@ -6424,13 +6440,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SysInitializeEx2WFunc: DTWAIN_SysInitializeEx2W,
             DTWAIN_SysInitializeExAFunc: DTWAIN_SysInitializeExA,
             DTWAIN_SysInitializeExWFunc: DTWAIN_SysInitializeExW,
-            DTWAIN_SysInitializeLibFunc: DTWAIN_SysInitializeLib,
-            DTWAIN_SysInitializeLibExFunc: DTWAIN_SysInitializeLibEx,
-            DTWAIN_SysInitializeLibEx2Func: DTWAIN_SysInitializeLibEx2,
-            DTWAIN_SysInitializeLibEx2AFunc: DTWAIN_SysInitializeLibEx2A,
-            DTWAIN_SysInitializeLibEx2WFunc: DTWAIN_SysInitializeLibEx2W,
-            DTWAIN_SysInitializeLibExAFunc: DTWAIN_SysInitializeLibExA,
-            DTWAIN_SysInitializeLibExWFunc: DTWAIN_SysInitializeLibExW,
             DTWAIN_SysInitializeNoBlockingFunc: DTWAIN_SysInitializeNoBlocking,
             DTWAIN_SysInitializeNoBlockingExFunc: DTWAIN_SysInitializeNoBlockingEx,
             DTWAIN_TestGetCapFunc: DTWAIN_TestGetCap,
@@ -7152,6 +7161,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_CallDSMProc(&self, AppID: *mut c_void, SourceId: *mut c_void, lDG: i32, lDAT: i32, lMSG: i32, pData: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_CallDSMProcFunc)(AppID, SourceId, lDG, lDAT, lMSG, pData);  }
+    }
+
+    pub fn DTWAIN_CheckDLLVersion(&self, lMajor: i32, lMinor: i32, lPatchLevel: i32, lBuildNumber: i32, MatchType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_CheckDLLVersionFunc)(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType);  }
     }
 
     pub fn DTWAIN_CheckHandles(&self, bCheck: i32) -> i32 {
@@ -8030,6 +8043,18 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetAlarmVolumeFunc)(Source, lpVolume);  }
     }
 
+    pub fn DTWAIN_GetAllSessionInfo(&self, lpszOut: *mut u16, indentFactor: i32, nMaxLen: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetAllSessionInfoFunc)(lpszOut, indentFactor, nMaxLen);  }
+    }
+
+    pub fn DTWAIN_GetAllSessionInfoA(&self, lpszOut: *mut c_char, indentFactor: i32, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetAllSessionInfoAFunc)(lpszOut, indentFactor, nSize);  }
+    }
+
+    pub fn DTWAIN_GetAllSessionInfoW(&self, lpszOut: *mut u16, indentFactor: i32, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetAllSessionInfoWFunc)(lpszOut, indentFactor, nSize);  }
+    }
+
     pub fn DTWAIN_GetAllSourceDibs(&self, Source: *mut c_void) -> *mut c_void {
         unsafe { return (self.DTWAIN_GetAllSourceDibsFunc)(Source);  }
     }
@@ -8230,7 +8255,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetCaptionWFunc)(Source, Caption);  }
     }
 
-    pub fn DTWAIN_GetCompressionSize(&self, Source: *mut c_void, lBytes: *mut i32) -> i32 {
+    pub fn DTWAIN_GetCompressionSize(&self, Source: *mut c_void, lBytes: *mut u32) -> i32 {
         unsafe { return (self.DTWAIN_GetCompressionSizeFunc)(Source, lBytes);  }
     }
 
@@ -8354,11 +8379,11 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetDTWAINHandleFunc)();  }
     }
 
-    pub fn DTWAIN_GetDeviceEvent(&self, Source: *mut c_void, lpEvent: *mut i32) -> i32 {
+    pub fn DTWAIN_GetDeviceEvent(&self, Source: *mut c_void, lpEvent: *mut u32) -> i32 {
         unsafe { return (self.DTWAIN_GetDeviceEventFunc)(Source, lpEvent);  }
     }
 
-    pub fn DTWAIN_GetDeviceEventEx(&self, Source: *mut c_void, lpEvent: *mut i32, pArray: *mut *mut c_void) -> i32 {
+    pub fn DTWAIN_GetDeviceEventEx(&self, Source: *mut c_void, lpEvent: *mut u32, pArray: *mut *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_GetDeviceEventExFunc)(Source, lpEvent, pArray);  }
     }
 
@@ -8402,7 +8427,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetErrorBufferFunc)(ArrayBuffer);  }
     }
 
-    pub fn DTWAIN_GetErrorBufferThreshold(&self) -> i32 {
+    pub fn DTWAIN_GetErrorBufferThreshold(&self) -> u32 {
         unsafe { return (self.DTWAIN_GetErrorBufferThresholdFunc)();  }
     }
 
@@ -8628,6 +8653,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetLoggerCallbackW(&self) -> DTWAIN_LOGGER_PROCW {
         unsafe { return (self.DTWAIN_GetLoggerCallbackWFunc)();  }
+    }
+
+    pub fn DTWAIN_GetMajorMinorVersion(&self, nMajor: *mut u32, nMinor: *mut u32) -> i32 {
+        unsafe { return (self.DTWAIN_GetMajorMinorVersionFunc)(nMajor, nMinor);  }
     }
 
     pub fn DTWAIN_GetManualDuplexCount(&self, Source: *mut c_void, pSide1: *mut i32, pSide2: *mut i32) -> i32 {
@@ -9228,6 +9257,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetVersionEx(&self, lMajor: *mut i32, lMinor: *mut i32, lVersionType: *mut i32, lPatchLevel: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetVersionExFunc)(lMajor, lMinor, lVersionType, lPatchLevel);  }
+    }
+
+    pub fn DTWAIN_GetVersionEx2(&self, lMajor: *mut i32, lMinor: *mut i32, lVersionType: *mut i32, lPatchLevel: *mut i32, lBuildNumber: *mut i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetVersionEx2Func)(lMajor, lMinor, lVersionType, lPatchLevel, lBuildNumber);  }
     }
 
     pub fn DTWAIN_GetVersionInfo(&self, lpszVer: *mut u16, nLength: i32) -> i32 {
@@ -10446,7 +10479,7 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_SetEOJDetectValueFunc)(Source, nValue);  }
     }
 
-    pub fn DTWAIN_SetErrorBufferThreshold(&self, nErrors: i32) -> i32 {
+    pub fn DTWAIN_SetErrorBufferThreshold(&self, nErrors: u32) -> i32 {
         unsafe { return (self.DTWAIN_SetErrorBufferThresholdFunc)(nErrors);  }
     }
 
@@ -10572,6 +10605,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SetLoggerCallbackW(&self, logProc: DTWAIN_LOGGER_PROCW, UserData: i64) -> i32 {
         unsafe { return (self.DTWAIN_SetLoggerCallbackWFunc)(logProc, UserData);  }
+    }
+
+    pub fn DTWAIN_SetMajorMinorVersion(&self, nMajor: u32, nMinor: u32) -> i32 {
+        unsafe { return (self.DTWAIN_SetMajorMinorVersionFunc)(nMajor, nMinor);  }
     }
 
     pub fn DTWAIN_SetManualDuplexMode(&self, Source: *mut c_void, Flags: i32, bSet: i32) -> i32 {
@@ -11116,34 +11153,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SysInitializeExW(&self, szINIPath: *const u16) -> *mut c_void {
         unsafe { return (self.DTWAIN_SysInitializeExWFunc)(szINIPath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLib(&self, hInstance: *mut c_void) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibFunc)(hInstance);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibEx(&self, hInstance: *mut c_void, szINIPath: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibExFunc)(hInstance, szINIPath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibEx2(&self, hInstance: *mut c_void, szINIPath: *const u16, szImageDLLPath: *const u16, szLangResourcePath: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibEx2Func)(hInstance, szINIPath, szImageDLLPath, szLangResourcePath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibEx2A(&self, hInstance: *mut c_void, szINIPath: *const c_char, szImageDLLPath: *const c_char, szLangResourcePath: *const c_char) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibEx2AFunc)(hInstance, szINIPath, szImageDLLPath, szLangResourcePath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibEx2W(&self, hInstance: *mut c_void, szINIPath: *const u16, szImageDLLPath: *const u16, szLangResourcePath: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibEx2WFunc)(hInstance, szINIPath, szImageDLLPath, szLangResourcePath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibExA(&self, hInstance: *mut c_void, szINIPath: *const c_char) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibExAFunc)(hInstance, szINIPath);  }
-    }
-
-    pub fn DTWAIN_SysInitializeLibExW(&self, hInstance: *mut c_void, szINIPath: *const u16) -> *mut c_void {
-        unsafe { return (self.DTWAIN_SysInitializeLibExWFunc)(hInstance, szINIPath);  }
     }
 
     pub fn DTWAIN_SysInitializeNoBlocking(&self) -> *mut c_void {

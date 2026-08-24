@@ -907,6 +907,9 @@ const
   DTWAIN_ERR_RANGE_STEPISZERO = (-1086);
   DTWAIN_ERR_BLANKNAMEDETECTED = (-1087);
   DTWAIN_ERR_FEEDER_NOPAPERSENSOR = (-1088);
+  DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
+  DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
+  DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
   TWAIN_ERR_LOW_MEMORY = (-1100);
   TWAIN_ERR_FALSE_ALARM = (-1101);
   TWAIN_ERR_BUMMER = (-1102);
@@ -1839,6 +1842,12 @@ const
   DTWAIN_PDF_AES256 = 2;
   DTWAIN_FEEDER_TERMINATE = 1;
   DTWAIN_FEEDER_USEFLATBED = 2;
+  DTWAIN_CHECKDLLVERLESS = 0;
+  DTWAIN_CHECKDLLVEREQUAL = 1;
+  DTWAIN_CHECKDLLVERGREATER = 2;
+  DTWAIN_CHECKDLLVERLESSEQ = 3;
+  DTWAIN_CHECKDLLVERGREATEREQ = 4;
+  DTWAIN_RESOURCE_COPYRIGHT = 9700;
 
 { DTWAIN DLL functional interface }
 
@@ -2023,6 +2032,7 @@ function DTWAIN_ArrayWideStringToFloat(StringArray:DTWAIN_ARRAY) : DTWAIN_ARRAY;
 function DTWAIN_CallCallback(wParam:WPARAM; lParam:LPARAM; UserData:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_CallCallback';
 function DTWAIN_CallCallback64(wParam:WPARAM; lParam:LPARAM; UserData:Int64) : LONG; external 'dtwain64.dll'  name 'DTWAIN_CallCallback64';
 function DTWAIN_CallDSMProc(AppID:DTWAIN_IDENTITY; SourceId:DTWAIN_IDENTITY; lDG:LONG; lDAT:LONG; lMSG:LONG; pData:LPVOID) : LONG; external 'dtwain64.dll'  name 'DTWAIN_CallDSMProc';
+function DTWAIN_CheckDLLVersion(lMajor:LONG; lMinor:LONG; lPatchLevel:LONG; lBuildNumber:LONG; MatchType:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_CheckDLLVersion';
 function DTWAIN_CheckHandles(bCheck:BOOL) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_CheckHandles';
 function DTWAIN_ClearBuffers(Source:DTWAIN_SOURCE; ClearBuffer:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_ClearBuffers';
 function DTWAIN_ClearErrorBuffer : BOOL; external 'dtwain64.dll'  name 'DTWAIN_ClearErrorBuffer';
@@ -2242,6 +2252,9 @@ function DTWAIN_GetActiveDSMVersionInfo(szDLLInfo:LPTSTR; nMaxLen:LONG) : LONG; 
 function DTWAIN_GetActiveDSMVersionInfoA(lpszBuffer:LPSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetActiveDSMVersionInfoA';
 function DTWAIN_GetActiveDSMVersionInfoW(lpszBuffer:LPWSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetActiveDSMVersionInfoW';
 function DTWAIN_GetAlarmVolume(Source:DTWAIN_SOURCE; lpVolume:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetAlarmVolume';
+function DTWAIN_GetAllSessionInfo(lpszOut:LPTSTR; indentFactor:LONG; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetAllSessionInfo';
+function DTWAIN_GetAllSessionInfoA(lpszOut:LPSTR; indentFactor:LONG; nSize:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetAllSessionInfoA';
+function DTWAIN_GetAllSessionInfoW(lpszOut:LPWSTR; indentFactor:LONG; nSize:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetAllSessionInfoW';
 function DTWAIN_GetAllSourceDibs(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; external 'dtwain64.dll'  name 'DTWAIN_GetAllSourceDibs';
 function DTWAIN_GetAllSourceInfo(Source:DTWAIN_SOURCE; lpszOut:LPTSTR; indentFactor:LONG; nSize:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetAllSourceInfo';
 function DTWAIN_GetAllSourceInfoA(Source:DTWAIN_SOURCE; lpszOut:LPSTR; indentFactor:LONG; nSize:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetAllSourceInfoA';
@@ -2292,7 +2305,7 @@ function DTWAIN_GetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; 
 function DTWAIN_GetCaption(Source:DTWAIN_SOURCE; Caption:LPTSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCaption';
 function DTWAIN_GetCaptionA(Source:DTWAIN_SOURCE; Caption:LPSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCaptionA';
 function DTWAIN_GetCaptionW(Source:DTWAIN_SOURCE; Caption:LPWSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCaptionW';
-function DTWAIN_GetCompressionSize(Source:DTWAIN_SOURCE; lBytes:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCompressionSize';
+function DTWAIN_GetCompressionSize(Source:DTWAIN_SOURCE; lBytes:LPDWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCompressionSize';
 function DTWAIN_GetCompressionType(Source:DTWAIN_SOURCE; lpCompression:LPLONG; bCurrent:BOOL) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetCompressionType';
 function DTWAIN_GetCompressionTypeEx(Source:DTWAIN_SOURCE; bCurrent:BOOL) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetCompressionTypeEx';
 function DTWAIN_GetConditionCodeString(lError:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetConditionCodeString';
@@ -2323,8 +2336,8 @@ function DTWAIN_GetDSMSearchOrderEx(SearchOrder:LPTSTR; UserDirectory:LPTSTR) : 
 function DTWAIN_GetDSMSearchOrderExA(SearchOrder:LPSTR; UserDirectory:LPSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetDSMSearchOrderExA';
 function DTWAIN_GetDSMSearchOrderExW(SearchOrder:LPWSTR; UserDirectory:LPWSTR) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetDSMSearchOrderExW';
 function DTWAIN_GetDTWAINHandle : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_GetDTWAINHandle';
-function DTWAIN_GetDeviceEvent(Source:DTWAIN_SOURCE; lpEvent:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceEvent';
-function DTWAIN_GetDeviceEventEx(Source:DTWAIN_SOURCE; lpEvent:LPLONG; pArray:LPDTWAIN_ARRAY) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceEventEx';
+function DTWAIN_GetDeviceEvent(Source:DTWAIN_SOURCE; lpEvent:LPDWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceEvent';
+function DTWAIN_GetDeviceEventEx(Source:DTWAIN_SOURCE; lpEvent:LPDWORD; pArray:LPDTWAIN_ARRAY) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceEventEx';
 function DTWAIN_GetDeviceEventInfo(Source:DTWAIN_SOURCE; nWhichInfo:LONG; pValue:LPVOID) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceEventInfo';
 function DTWAIN_GetDeviceNotifications(Source:DTWAIN_SOURCE; DevEvents:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceNotifications';
 function DTWAIN_GetDeviceTimeDate(Source:DTWAIN_SOURCE; szTimeDate:LPTSTR) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDeviceTimeDate';
@@ -2335,7 +2348,7 @@ function DTWAIN_GetDoubleFeedDetectValues(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_
 function DTWAIN_GetDuplexType(Source:DTWAIN_SOURCE; lpDupType:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetDuplexType';
 function DTWAIN_GetDuplexTypeEx(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetDuplexTypeEx';
 function DTWAIN_GetErrorBuffer(ArrayBuffer:LPDTWAIN_ARRAY) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetErrorBuffer';
-function DTWAIN_GetErrorBufferThreshold : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetErrorBufferThreshold';
+function DTWAIN_GetErrorBufferThreshold : DWORD; external 'dtwain64.dll'  name 'DTWAIN_GetErrorBufferThreshold';
 function DTWAIN_GetErrorCallback : DTwainErrorProc; external 'dtwain64.dll'  name 'DTWAIN_GetErrorCallback';
 function DTWAIN_GetErrorCallback64 : DTwainErrorProc64; external 'dtwain64.dll'  name 'DTWAIN_GetErrorCallback64';
 function DTWAIN_GetErrorString(lError:LONG; lpszBuffer:LPTSTR; nMaxLen:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetErrorString';
@@ -2392,6 +2405,7 @@ function DTWAIN_GetLightSourcesEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; external
 function DTWAIN_GetLoggerCallback : DTwainLoggerProc; external 'dtwain64.dll'  name 'DTWAIN_GetLoggerCallback';
 function DTWAIN_GetLoggerCallbackA : DTwainLoggerProcA; external 'dtwain64.dll'  name 'DTWAIN_GetLoggerCallbackA';
 function DTWAIN_GetLoggerCallbackW : DTwainLoggerProcW; external 'dtwain64.dll'  name 'DTWAIN_GetLoggerCallbackW';
+function DTWAIN_GetMajorMinorVersion(nMajor:LPDWORD; nMinor:LPDWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetMajorMinorVersion';
 function DTWAIN_GetManualDuplexCount(Source:DTWAIN_SOURCE; pSide1:LPLONG; pSide2:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetManualDuplexCount';
 function DTWAIN_GetMaxAcquisitions(Source:DTWAIN_SOURCE) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetMaxAcquisitions';
 function DTWAIN_GetMaxBuffers(Source:DTWAIN_SOURCE; pMaxBuf:LPDWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetMaxBuffers';
@@ -2542,6 +2556,7 @@ function DTWAIN_GetVersionCopyright(lpszApp:LPTSTR; nLength:LONG) : LONG; extern
 function DTWAIN_GetVersionCopyrightA(lpszApp:LPSTR; nLength:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetVersionCopyrightA';
 function DTWAIN_GetVersionCopyrightW(lpszApp:LPWSTR; nLength:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetVersionCopyrightW';
 function DTWAIN_GetVersionEx(lMajor:LPLONG; lMinor:LPLONG; lVersionType:LPLONG; lPatchLevel:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetVersionEx';
+function DTWAIN_GetVersionEx2(lMajor:LPLONG; lMinor:LPLONG; lVersionType:LPLONG; lPatchLevel:LPLONG; lBuildNumber:LPLONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_GetVersionEx2';
 function DTWAIN_GetVersionInfo(lpszVer:LPTSTR; nLength:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetVersionInfo';
 function DTWAIN_GetVersionInfoA(lpszVer:LPSTR; nLength:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetVersionInfoA';
 function DTWAIN_GetVersionInfoW(lpszVer:LPWSTR; nLength:LONG) : LONG; external 'dtwain64.dll'  name 'DTWAIN_GetVersionInfoW';
@@ -2848,7 +2863,7 @@ function DTWAIN_SetDoubleFeedDetectLengthStringW(Source:DTWAIN_SOURCE; szLength:
 function DTWAIN_SetDoubleFeedDetectValues(Source:DTWAIN_SOURCE; prray:DTWAIN_ARRAY) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetDoubleFeedDetectValues';
 function DTWAIN_SetDoublePageCountOnDuplex(Source:DTWAIN_SOURCE; bDoubleCount:BOOL) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetDoublePageCountOnDuplex';
 function DTWAIN_SetEOJDetectValue(Source:DTWAIN_SOURCE; nValue:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetEOJDetectValue';
-function DTWAIN_SetErrorBufferThreshold(nErrors:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetErrorBufferThreshold';
+function DTWAIN_SetErrorBufferThreshold(nErrors:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetErrorBufferThreshold';
 function DTWAIN_SetErrorCallback(proc:DTwainErrorProc; UserData:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetErrorCallback';
 function DTWAIN_SetErrorCallback64(proc:DTwainErrorProc64; UserData64:Int64) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetErrorCallback64';
 function DTWAIN_SetFeederAlignment(Source:DTWAIN_SOURCE; lpAlignment:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetFeederAlignment';
@@ -2880,6 +2895,7 @@ function DTWAIN_SetLogSaveThreshold(lineCount:Int64) : BOOL; external 'dtwain64.
 function DTWAIN_SetLoggerCallback(logProc:DTwainLoggerProc; UserData:Int64) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetLoggerCallback';
 function DTWAIN_SetLoggerCallbackA(logProc:DTwainLoggerProcA; UserData:Int64) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetLoggerCallbackA';
 function DTWAIN_SetLoggerCallbackW(logProc:DTwainLoggerProcW; UserData:Int64) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetLoggerCallbackW';
+function DTWAIN_SetMajorMinorVersion(nMajor:DWORD; nMinor:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetMajorMinorVersion';
 function DTWAIN_SetManualDuplexMode(Source:DTWAIN_SOURCE; Flags:LONG; bSet:BOOL) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetManualDuplexMode';
 function DTWAIN_SetMaxAcquisitions(Source:DTWAIN_SOURCE; MaxAcquires:LONG) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetMaxAcquisitions';
 function DTWAIN_SetMaxBuffers(Source:DTWAIN_SOURCE; MaxBuf:DWORD) : BOOL; external 'dtwain64.dll'  name 'DTWAIN_SetMaxBuffers';
@@ -3017,13 +3033,6 @@ function DTWAIN_SysInitializeEx2A(szINIPath:LPCSTR; szImageDLLPath:LPCSTR; szLan
 function DTWAIN_SysInitializeEx2W(szINIPath:LPCWSTR; szImageDLLPath:LPCWSTR; szLangResourcePath:LPCWSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeEx2W';
 function DTWAIN_SysInitializeExA(szINIPath:LPCSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeExA';
 function DTWAIN_SysInitializeExW(szINIPath:LPCWSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeExW';
-function DTWAIN_SysInitializeLib(hInstance:NativeInt) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLib';
-function DTWAIN_SysInitializeLibEx(hInstance:NativeInt; szINIPath:LPCTSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibEx';
-function DTWAIN_SysInitializeLibEx2(hInstance:NativeInt; szINIPath:LPCTSTR; szImageDLLPath:LPCTSTR; szLangResourcePath:LPCTSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibEx2';
-function DTWAIN_SysInitializeLibEx2A(hInstance:NativeInt; szINIPath:LPCSTR; szImageDLLPath:LPCSTR; szLangResourcePath:LPCSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibEx2A';
-function DTWAIN_SysInitializeLibEx2W(hInstance:NativeInt; szINIPath:LPCWSTR; szImageDLLPath:LPCWSTR; szLangResourcePath:LPCWSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibEx2W';
-function DTWAIN_SysInitializeLibExA(hInstance:NativeInt; szINIPath:LPCSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibExA';
-function DTWAIN_SysInitializeLibExW(hInstance:NativeInt; szINIPath:LPCWSTR) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeLibExW';
 function DTWAIN_SysInitializeNoBlocking : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeNoBlocking';
 function DTWAIN_SysInitializeNoBlockingEx(bCreateLogFile:BOOL) : DTWAIN_HANDLE; external 'dtwain64.dll'  name 'DTWAIN_SysInitializeNoBlockingEx';
 function DTWAIN_TestGetCap(Source:DTWAIN_SOURCE; lCapability:LONG) : DTWAIN_ARRAY; external 'dtwain64.dll'  name 'DTWAIN_TestGetCap';

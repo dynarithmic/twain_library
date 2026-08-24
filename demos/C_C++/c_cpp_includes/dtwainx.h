@@ -349,8 +349,8 @@ DTWAIN_BOOL          DLLENTRY_DEF    DTWAIN_SetAcquireImageScale(DTWAIN_SOURCE S
 /* Setting special events from Source */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetDeviceNotifications(DTWAIN_SOURCE Source, LONG DevEvents);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, LPLONG DevEvents);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPDWORD lpEvent);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPDWORD lpEvent, LPDTWAIN_ARRAY pArray);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, LONG nWhichInfo, LPVOID pValue);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsDeviceEventSupported(DTWAIN_SOURCE Source);
 
@@ -372,7 +372,7 @@ LONG        DLLENTRY_DEF DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetFileCompressionType(DTWAIN_SOURCE Source, LONG lCompression, DTWAIN_BOOL bIsCustom);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes );
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCompressionSupported(DTWAIN_SOURCE Source, LONG Compression);
 
 /* Imprinter / Endorser functions */
@@ -466,9 +466,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EnumFileTypeBitsPerPixel(LONG FileType, LPDTWAIN
 HANDLE DLLENTRY_DEF DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, LPBYTE Data, DWORD dSize, LPDWORD pActualSize,LONG nFlags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, LPCBYTE Data, DWORD dSize, LONG nFlags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsCustomDSDataSupported(DTWAIN_SOURCE Source);
-
-/* Only to be used by static libraries.  This is mapped to DTWAIN_SysInitializexxx() for DLL */
-DTWAIN_HANDLE DLLENTRY_DEF  DTWAIN_SysInitializeLib(HINSTANCE hInstance);
 
 /* Set JPEG Quality for JPEG file transfers */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
@@ -882,6 +879,9 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_DisableAppWindow(HWND hWnd, DTWAIN_BOOL bDisable
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_OpenSourcesOnSelect(DTWAIN_BOOL bSet);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsOpenSourcesOnSelect(VOID_PROTOTYPE);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetVersionEx(LPLONG lMajor, LPLONG lMinor,LPLONG lVersionType, LPLONG lPatchLevel);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetVersionEx2(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel, LPLONG lBuildNumber);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG lPatchLevel, LONG lBuildNumber, LONG MatchType);
+
 LONG        DLLENTRY_DEF DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
@@ -911,8 +911,8 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source);
 /* Error buffer access */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ClearErrorBuffer(VOID_PROTOTYPE);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorBufferThreshold(LONG nErrors);
-LONG        DLLENTRY_DEF DTWAIN_GetErrorBufferThreshold(VOID_PROTOTYPE);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetErrorBufferThreshold(DWORD nErrors);
+DWORD       DLLENTRY_DEF DTWAIN_GetErrorBufferThreshold(VOID_PROTOTYPE);
 
 /* Throw exceptions */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AppHandlesExceptions(DTWAIN_BOOL bSet);
@@ -1085,10 +1085,15 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source);
 /* Destroy all "active" DTWAIN_ARRAYs */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayDestroyAll(VOID_PROTOTYPE);
 
-#include "dtwstrfn.h"
+/* Set the application's major/minor TW_IDENTITY components */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
 
 #ifdef __cplusplus
 }
 #endif
+
+#include "dtwstrfn.h"
+
 #endif
 

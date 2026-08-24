@@ -255,6 +255,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserData);
         LONG DTWAIN_CallCallback64(WPARAM wParam, LPARAM lParam, LONGLONG UserData);
         LONG DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, LONG lDG, LONG lDAT, LONG lMSG, LPVOID pData);
+        DTWAIN_BOOL DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG lPatchLevel, LONG lBuildNumber, LONG MatchType);
         DTWAIN_BOOL DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
         DTWAIN_BOOL DTWAIN_ClearBuffers(DTWAIN_SOURCE Source, LONG ClearBuffer);
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
@@ -474,6 +475,9 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        LONG DTWAIN_GetAllSessionInfo(LPTSTR lpszOut, LONG indentFactor, LONG nMaxLen);
+        LONG DTWAIN_GetAllSessionInfoA(LPSTR lpszOut, LONG indentFactor, LONG nSize);
+        LONG DTWAIN_GetAllSessionInfoW(LPWSTR lpszOut, LONG indentFactor, LONG nSize);
         DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpszOut, LONG indentFactor, LONG nSize);
         LONG DTWAIN_GetAllSourceInfoA(DTWAIN_SOURCE Source, LPSTR lpszOut, LONG indentFactor, LONG nSize);
@@ -524,7 +528,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
-        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
+        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -554,8 +558,8 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
         LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
-        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
-        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
+        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPDWORD lpEvent);
+        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPDWORD lpEvent, LPDTWAIN_ARRAY pArray);
         DTWAIN_BOOL DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, LONG nWhichInfo, LPVOID pValue);
         DTWAIN_BOOL DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, LPLONG DevEvents);
         DTWAIN_BOOL DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szTimeDate);
@@ -566,7 +570,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, LPLONG lpDupType);
         LONG DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
-        LONG DTWAIN_GetErrorBufferThreshold();
+        DWORD DTWAIN_GetErrorBufferThreshold();
         DTWAIN_ERROR_PROC DTWAIN_GetErrorCallback();
         DTWAIN_ERROR_PROC64 DTWAIN_GetErrorCallback64();
         LONG DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -623,6 +627,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -771,6 +776,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength);
         LONG DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetVersionEx(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel);
+        DTWAIN_BOOL DTWAIN_GetVersionEx2(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel, LPLONG lBuildNumber);
         LONG DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength);
@@ -1075,7 +1081,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, DTWAIN_ARRAY prray);
         DTWAIN_BOOL DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bDoubleCount);
         DTWAIN_BOOL DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
-        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(LONG nErrors);
+        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(DWORD nErrors);
         DTWAIN_BOOL DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC proc, LONG UserData);
         DTWAIN_BOOL DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 proc, DTWAIN_LONG64 UserData64);
         DTWAIN_BOOL DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source, LONG lpAlignment);
@@ -1107,6 +1113,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -1243,13 +1250,6 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_HANDLE DTWAIN_SysInitializeEx2W(LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExA(LPCSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExW(LPCWSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLib(HINSTANCE hInstance);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath, DTWAIN_CCHARPTRTYPE szImageDLLPath, DTWAIN_CCHARPTRTYPE szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2A(HINSTANCE hInstance, LPCSTR szINIPath, LPCSTR szImageDLLPath, LPCSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2W(HINSTANCE hInstance, LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExA(HINSTANCE hInstance, LPCSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExW(HINSTANCE hInstance, LPCWSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking();
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(DTWAIN_BOOL bCreateLogFile);
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
@@ -1495,6 +1495,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserData);
         LONG DTWAIN_CallCallback64(WPARAM wParam, LPARAM lParam, LONGLONG UserData);
         LONG DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, LONG lDG, LONG lDAT, LONG lMSG, LPVOID pData);
+        DTWAIN_BOOL DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG lPatchLevel, LONG lBuildNumber, LONG MatchType);
         DTWAIN_BOOL DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
         DTWAIN_BOOL DTWAIN_ClearBuffers(DTWAIN_SOURCE Source, LONG ClearBuffer);
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
@@ -1714,6 +1715,9 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        LONG DTWAIN_GetAllSessionInfo(LPTSTR lpszOut, LONG indentFactor, LONG nMaxLen);
+        LONG DTWAIN_GetAllSessionInfoA(LPSTR lpszOut, LONG indentFactor, LONG nSize);
+        LONG DTWAIN_GetAllSessionInfoW(LPWSTR lpszOut, LONG indentFactor, LONG nSize);
         DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpszOut, LONG indentFactor, LONG nSize);
         LONG DTWAIN_GetAllSourceInfoA(DTWAIN_SOURCE Source, LPSTR lpszOut, LONG indentFactor, LONG nSize);
@@ -1764,7 +1768,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
-        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
+        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -1794,8 +1798,8 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
         LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
-        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
-        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
+        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPDWORD lpEvent);
+        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPDWORD lpEvent, LPDTWAIN_ARRAY pArray);
         DTWAIN_BOOL DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, LONG nWhichInfo, LPVOID pValue);
         DTWAIN_BOOL DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, LPLONG DevEvents);
         DTWAIN_BOOL DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szTimeDate);
@@ -1806,7 +1810,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, LPLONG lpDupType);
         LONG DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
-        LONG DTWAIN_GetErrorBufferThreshold();
+        DWORD DTWAIN_GetErrorBufferThreshold();
         DTWAIN_ERROR_PROC DTWAIN_GetErrorCallback();
         DTWAIN_ERROR_PROC64 DTWAIN_GetErrorCallback64();
         LONG DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -1863,6 +1867,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -2011,6 +2016,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength);
         LONG DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetVersionEx(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel);
+        DTWAIN_BOOL DTWAIN_GetVersionEx2(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel, LPLONG lBuildNumber);
         LONG DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength);
@@ -2315,7 +2321,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, DTWAIN_ARRAY prray);
         DTWAIN_BOOL DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bDoubleCount);
         DTWAIN_BOOL DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
-        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(LONG nErrors);
+        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(DWORD nErrors);
         DTWAIN_BOOL DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC proc, LONG UserData);
         DTWAIN_BOOL DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 proc, DTWAIN_LONG64 UserData64);
         DTWAIN_BOOL DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source, LONG lpAlignment);
@@ -2347,6 +2353,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -2483,13 +2490,6 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_HANDLE DTWAIN_SysInitializeEx2W(LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExA(LPCSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExW(LPCWSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLib(HINSTANCE hInstance);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath, DTWAIN_CCHARPTRTYPE szImageDLLPath, DTWAIN_CCHARPTRTYPE szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2A(HINSTANCE hInstance, LPCSTR szINIPath, LPCSTR szImageDLLPath, LPCSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2W(HINSTANCE hInstance, LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExA(HINSTANCE hInstance, LPCSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExW(HINSTANCE hInstance, LPCWSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking();
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(DTWAIN_BOOL bCreateLogFile);
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
@@ -2735,6 +2735,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserData);
         LONG DTWAIN_CallCallback64(WPARAM wParam, LPARAM lParam, LONGLONG UserData);
         LONG DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, LONG lDG, LONG lDAT, LONG lMSG, LPVOID pData);
+        DTWAIN_BOOL DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG lPatchLevel, LONG lBuildNumber, LONG MatchType);
         DTWAIN_BOOL DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
         DTWAIN_BOOL DTWAIN_ClearBuffers(DTWAIN_SOURCE Source, LONG ClearBuffer);
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
@@ -2954,6 +2955,9 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        LONG DTWAIN_GetAllSessionInfo(LPTSTR lpszOut, LONG indentFactor, LONG nMaxLen);
+        LONG DTWAIN_GetAllSessionInfoA(LPSTR lpszOut, LONG indentFactor, LONG nSize);
+        LONG DTWAIN_GetAllSessionInfoW(LPWSTR lpszOut, LONG indentFactor, LONG nSize);
         DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpszOut, LONG indentFactor, LONG nSize);
         LONG DTWAIN_GetAllSourceInfoA(DTWAIN_SOURCE Source, LPSTR lpszOut, LONG indentFactor, LONG nSize);
@@ -3004,7 +3008,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
-        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
+        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -3034,8 +3038,8 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
         LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
-        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
-        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
+        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPDWORD lpEvent);
+        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPDWORD lpEvent, LPDTWAIN_ARRAY pArray);
         DTWAIN_BOOL DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, LONG nWhichInfo, LPVOID pValue);
         DTWAIN_BOOL DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, LPLONG DevEvents);
         DTWAIN_BOOL DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szTimeDate);
@@ -3046,7 +3050,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, LPLONG lpDupType);
         LONG DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
-        LONG DTWAIN_GetErrorBufferThreshold();
+        DWORD DTWAIN_GetErrorBufferThreshold();
         DTWAIN_ERROR_PROC DTWAIN_GetErrorCallback();
         DTWAIN_ERROR_PROC64 DTWAIN_GetErrorCallback64();
         LONG DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -3103,6 +3107,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -3251,6 +3256,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength);
         LONG DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetVersionEx(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel);
+        DTWAIN_BOOL DTWAIN_GetVersionEx2(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel, LPLONG lBuildNumber);
         LONG DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength);
@@ -3555,7 +3561,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, DTWAIN_ARRAY prray);
         DTWAIN_BOOL DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bDoubleCount);
         DTWAIN_BOOL DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
-        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(LONG nErrors);
+        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(DWORD nErrors);
         DTWAIN_BOOL DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC proc, LONG UserData);
         DTWAIN_BOOL DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 proc, DTWAIN_LONG64 UserData64);
         DTWAIN_BOOL DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source, LONG lpAlignment);
@@ -3587,6 +3593,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -3723,13 +3730,6 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_HANDLE DTWAIN_SysInitializeEx2W(LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExA(LPCSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExW(LPCWSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLib(HINSTANCE hInstance);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath, DTWAIN_CCHARPTRTYPE szImageDLLPath, DTWAIN_CCHARPTRTYPE szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2A(HINSTANCE hInstance, LPCSTR szINIPath, LPCSTR szImageDLLPath, LPCSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2W(HINSTANCE hInstance, LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExA(HINSTANCE hInstance, LPCSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExW(HINSTANCE hInstance, LPCWSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking();
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(DTWAIN_BOOL bCreateLogFile);
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);
@@ -3975,6 +3975,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_CallCallback(WPARAM wParam, LPARAM lParam, LONG UserData);
         LONG DTWAIN_CallCallback64(WPARAM wParam, LPARAM lParam, LONGLONG UserData);
         LONG DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, LONG lDG, LONG lDAT, LONG lMSG, LPVOID pData);
+        DTWAIN_BOOL DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG lPatchLevel, LONG lBuildNumber, LONG MatchType);
         DTWAIN_BOOL DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
         DTWAIN_BOOL DTWAIN_ClearBuffers(DTWAIN_SOURCE Source, LONG ClearBuffer);
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
@@ -4194,6 +4195,9 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetActiveDSMVersionInfoA(LPSTR lpszBuffer, LONG nMaxLen);
         LONG DTWAIN_GetActiveDSMVersionInfoW(LPWSTR lpszBuffer, LONG nMaxLen);
         DTWAIN_BOOL DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, LPLONG lpVolume);
+        LONG DTWAIN_GetAllSessionInfo(LPTSTR lpszOut, LONG indentFactor, LONG nMaxLen);
+        LONG DTWAIN_GetAllSessionInfoA(LPSTR lpszOut, LONG indentFactor, LONG nSize);
+        LONG DTWAIN_GetAllSessionInfoW(LPWSTR lpszOut, LONG indentFactor, LONG nSize);
         DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpszOut, LONG indentFactor, LONG nSize);
         LONG DTWAIN_GetAllSourceInfoA(DTWAIN_SOURCE Source, LPSTR lpszOut, LONG indentFactor, LONG nSize);
@@ -4244,7 +4248,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
-        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPLONG lBytes);
+        DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetConditionCodeString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -4274,8 +4278,8 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetDSMSearchOrderExA(LPSTR SearchOrder, LPSTR UserDirectory);
         LONG DTWAIN_GetDSMSearchOrderExW(LPWSTR SearchOrder, LPWSTR UserDirectory);
         DTWAIN_HANDLE DTWAIN_GetDTWAINHandle();
-        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPLONG lpEvent);
-        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPLONG lpEvent, LPDTWAIN_ARRAY pArray);
+        DTWAIN_BOOL DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, LPDWORD lpEvent);
+        DTWAIN_BOOL DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, LPDWORD lpEvent, LPDTWAIN_ARRAY pArray);
         DTWAIN_BOOL DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, LONG nWhichInfo, LPVOID pValue);
         DTWAIN_BOOL DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, LPLONG DevEvents);
         DTWAIN_BOOL DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE szTimeDate);
@@ -4286,7 +4290,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, LPLONG lpDupType);
         LONG DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetErrorBuffer(LPDTWAIN_ARRAY ArrayBuffer);
-        LONG DTWAIN_GetErrorBufferThreshold();
+        DWORD DTWAIN_GetErrorBufferThreshold();
         DTWAIN_ERROR_PROC DTWAIN_GetErrorCallback();
         DTWAIN_ERROR_PROC64 DTWAIN_GetErrorCallback64();
         LONG DTWAIN_GetErrorString(LONG lError, DTWAIN_CHARPTRTYPE lpszBuffer, LONG nMaxLen);
@@ -4343,6 +4347,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_LOGGER_PROC DTWAIN_GetLoggerCallback();
         DTWAIN_LOGGER_PROCA DTWAIN_GetLoggerCallbackA();
         DTWAIN_LOGGER_PROCW DTWAIN_GetLoggerCallbackW();
+        DTWAIN_BOOL DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
         DTWAIN_BOOL DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, LPLONG pSide1, LPLONG pSide2);
         LONG DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, LPDWORD pMaxBuf);
@@ -4491,6 +4496,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetVersionCopyrightA(LPSTR lpszApp, LONG nLength);
         LONG DTWAIN_GetVersionCopyrightW(LPWSTR lpszApp, LONG nLength);
         DTWAIN_BOOL DTWAIN_GetVersionEx(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel);
+        DTWAIN_BOOL DTWAIN_GetVersionEx2(LPLONG lMajor, LPLONG lMinor, LPLONG lVersionType, LPLONG lPatchLevel, LPLONG lBuildNumber);
         LONG DTWAIN_GetVersionInfo(DTWAIN_CHARPTRTYPE lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoA(LPSTR lpszVer, LONG nLength);
         LONG DTWAIN_GetVersionInfoW(LPWSTR lpszVer, LONG nLength);
@@ -4795,7 +4801,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, DTWAIN_ARRAY prray);
         DTWAIN_BOOL DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, DTWAIN_BOOL bDoubleCount);
         DTWAIN_BOOL DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
-        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(LONG nErrors);
+        DTWAIN_BOOL DTWAIN_SetErrorBufferThreshold(DWORD nErrors);
         DTWAIN_BOOL DTWAIN_SetErrorCallback(DTWAIN_ERROR_PROC proc, LONG UserData);
         DTWAIN_BOOL DTWAIN_SetErrorCallback64(DTWAIN_ERROR_PROC64 proc, DTWAIN_LONG64 UserData64);
         DTWAIN_BOOL DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source, LONG lpAlignment);
@@ -4827,6 +4833,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetLoggerCallback(DTWAIN_LOGGER_PROC logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackA(DTWAIN_LOGGER_PROCA logProc, DTWAIN_LONG64 UserData);
         DTWAIN_BOOL DTWAIN_SetLoggerCallbackW(DTWAIN_LOGGER_PROCW logProc, DTWAIN_LONG64 UserData);
+        DTWAIN_BOOL DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
         DTWAIN_BOOL DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, LONG Flags, DTWAIN_BOOL bSet);
         DTWAIN_BOOL DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, LONG MaxAcquires);
         DTWAIN_BOOL DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, DWORD MaxBuf);
@@ -4963,13 +4970,6 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_HANDLE DTWAIN_SysInitializeEx2W(LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExA(LPCSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeExW(LPCWSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLib(HINSTANCE hInstance);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, DTWAIN_CCHARPTRTYPE szINIPath, DTWAIN_CCHARPTRTYPE szImageDLLPath, DTWAIN_CCHARPTRTYPE szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2A(HINSTANCE hInstance, LPCSTR szINIPath, LPCSTR szImageDLLPath, LPCSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2W(HINSTANCE hInstance, LPCWSTR szINIPath, LPCWSTR szImageDLLPath, LPCWSTR szLangResourcePath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExA(HINSTANCE hInstance, LPCSTR szINIPath);
-        DTWAIN_HANDLE DTWAIN_SysInitializeLibExW(HINSTANCE hInstance, LPCWSTR szINIPath);
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking();
         DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(DTWAIN_BOOL bCreateLogFile);
         DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, LONG lCapability);

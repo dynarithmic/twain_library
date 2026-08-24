@@ -28,6 +28,8 @@ static TCHAR* g_AllSetTypes[] = { _T("MSG_SET"), _T("MSG_RESET"), _T("MSG_SETCON
 static char g_szInput[32767];
 
 static LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+static LRESULT CALLBACK DisplayBadCapsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+
 static void EnableSetCapWindows(HWND hWnd, int bEnable);
 static void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue);
 static LONG SetTestSelection2(HWND hWnd, TCHAR* setType, int capValue);
@@ -160,13 +162,14 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
                 MessageBoxA(NULL, "You must close the Source user interface before leaving this dialog", "Information", MB_ICONSTOP);
                 return FALSE;
             }
-            /* User may have done a lot of capability testing, 
+            /* User may have done a lot of capability testing,
             so make sure we reset all the caps to default when we return if requested */
             LRESULT checkState = SendMessage(hCheckBox, BM_GETCHECK, 0, 0);
             if (checkState == BST_CHECKED)
                 DTWAIN_SetAllCapsToDefault(g_CurrentSource);
             EndDialog(hDlg, 1);
-            break;
+        break;
+
         case IDC_btnTestCap:
         {
             char szCap[100];
@@ -175,9 +178,18 @@ LRESULT CALLBACK DisplaySourcePropsProc(HWND hDlg, UINT message, WPARAM wParam, 
             DisplayTestCapDlg(hDlg, szCap);
         }
         break;
+
         case IDC_btnResetCapabilities:
             DTWAIN_SetAllCapsToDefault(g_CurrentSource);
-            break;
+        break;
+
+        case IDC_btnCapabilityErrors:
+        {
+            char szCap[100];
+            DisplayBadCapDlg(hDlg);
+        }
+        break;
+
         case IDC_btnShowUIIOnly:
         {
             HWND hWndShowUIOnly = GetDlgItem(hDlg, IDC_btnShowUIIOnly);
@@ -207,119 +219,184 @@ void DisplayTestCapDlg(HWND parent, const char* szCapName)
     DialogBoxParam(g_hInstance, (LPCTSTR)IDD_dlgTestCap, parent, (DLGPROC)DisplayTestCapProc, (LPARAM)(capValue));
 }
 
+void DisplayBadCapDlg(HWND parent)
+{
+    char szBufName[256];
+    DTWAIN_GetSourceProductNameA(g_CurrentSource, szBufName, 255);
+    DialogBoxParam(g_hInstance, (LPCTSTR)IDD_dlgBadCapabilities, parent, (DLGPROC)DisplayBadCapsProc, (LPARAM)(szBufName));
+}
+
+LRESULT CALLBACK DisplayBadCapsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    static LONG curCapValue;
+    LONG capOpts = 0;
+    switch (message)
+    {
+        case WM_INITDIALOG:
+        {
+            HWND hWndList = GetDlgItem(hDlg, IDC_lstBadCapabilities);
+            char szBuf[256];
+            const char* pSourceName = (const char*)(lParam);
+            SetWindowTextA(hDlg, pSourceName);
+            DTWAIN_ARRAY CapArray;
+            DTWAIN_EnumSupportedCaps(g_CurrentSource, &CapArray);
+            LONG nCapCount = DTWAIN_ArrayGetCount(CapArray);
+            LONG nCapValue;
+            BOOL bOneBadCap = FALSE;
+            for (LONG nIndex = 0; nIndex < nCapCount; nIndex++)
+            {
+                DTWAIN_ArrayGetAt(CapArray, nIndex, &nCapValue);
+                DTWAIN_GetNameFromCapA(nCapValue, szBuf, 255);
+                LONG bestContainer = DTWAIN_GetCapContainer(g_CurrentSource, nCapValue, MSG_GET);
+                if (bestContainer == 0)
+                {
+                    SendMessageA(hWndList, LB_ADDSTRING, 0, (LPARAM)szBuf);
+                    bOneBadCap = TRUE;
+                }
+            }
+            DTWAIN_ArrayDestroy(CapArray);
+            if ( !bOneBadCap )
+                SendMessageA(hWndList, LB_ADDSTRING, 0, (LPARAM)"No Bad Capabilities detected");
+            return TRUE;
+        }
+        break;
+        case WM_COMMAND:
+        {
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
+
+            switch (nControl)
+            {
+                /* Quit the dialog */
+                case IDOK:
+                {
+                    EndDialog(hDlg, 1);
+                }
+                break;
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+    }
+    return FALSE;
+}
+
 LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static LONG curCapValue;
     LONG capOpts = 0;
     switch (message)
     {
-    case WM_INITDIALOG:
-    {
-        int capValue = (int)lParam;
-        char szName[100];
-        DTWAIN_GetNameFromCapA(capValue, szName, 100);
-        char szTitle[256];
-        strcpy(szTitle, "Test Capability (");
-        strcat(szTitle, szName);
-        strcat(szTitle, ")");
-        SetWindowTextA(hDlg, szTitle);
-        curCapValue = InitTestControls(hDlg, szName);
-        return TRUE;
-    }
-    break;
-    case WM_COMMAND:
-    {
-        int nControl = LOWORD(wParam);
-        int nNotification = HIWORD(wParam);
-
-        switch (nControl)
+        case WM_INITDIALOG:
         {
-        case IDC_cmbGetTypes:
-        {
-            if (nNotification == CBN_SELCHANGE)
-            {
-                TCHAR szGetType[100];
-                LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
-                SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
-                SetTestSelection(hDlg, szGetType, curCapValue);
-            }
+            int capValue = (int)lParam;
+            char szName[100];
+            DTWAIN_GetNameFromCapA(capValue, szName, 100);
+            char szTitle[256];
+            strcpy(szTitle, "Test Capability (");
+            strcat(szTitle, szName);
+            strcat(szTitle, ")");
+            SetWindowTextA(hDlg, szTitle);
+            curCapValue = InitTestControls(hDlg, szName);
+            return TRUE;
         }
         break;
-
-        case IDC_cmbSetTypes:
+        case WM_COMMAND:
         {
-            if (nNotification == CBN_SELCHANGE)
-            {
-                HWND hWndTestSet = GetDlgItem(hDlg, IDC_btnTestSet);
-                EnableWindow(hWndTestSet, TRUE);
-                TCHAR szGetType[100];
-                /* This is the MSG_RESET */
-                LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETCURSEL, 0, 0);
-                SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
-                capOpts = SetTestSelection2(hDlg, szGetType, curCapValue);
-                if (nCurSel == 1)
-                {
-                    EnableSetCapWindows(hDlg, FALSE);
-                    break;
-                }
-                else
-                    EnableSetCapWindows(hDlg, TRUE);
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
 
-                /* Now test for MSG_SETCONSTRAINT */
-                if (nCurSel == 2)
+            switch (nControl)
+            {
+                case IDC_cmbGetTypes:
                 {
-                    if (!(capOpts & DTWAIN_CO_SETCONSTRAINT))
+                    if (nNotification == CBN_SELCHANGE)
                     {
-                        // Disable controls for constraint, including test button
-                        EnableSetCapWindows(hDlg, FALSE);
-                        EnableWindow(hWndTestSet, FALSE);
+                        TCHAR szGetType[100];
+                        LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
+                        SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                        SetTestSelection(hDlg, szGetType, curCapValue);
                     }
                 }
+                break;
+
+                case IDC_cmbSetTypes:
+                {
+                    if (nNotification == CBN_SELCHANGE)
+                    {
+                        HWND hWndTestSet = GetDlgItem(hDlg, IDC_btnTestSet);
+                        EnableWindow(hWndTestSet, TRUE);
+                        TCHAR szGetType[100];
+                        /* This is the MSG_RESET */
+                        LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETCURSEL, 0, 0);
+                        SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                        capOpts = SetTestSelection2(hDlg, szGetType, curCapValue);
+                        if (nCurSel == 1)
+                        {
+                            EnableSetCapWindows(hDlg, FALSE);
+                            break;
+                        }
+                        else
+                            EnableSetCapWindows(hDlg, TRUE);
+
+                        /* Now test for MSG_SETCONSTRAINT */
+                        if (nCurSel == 2)
+                        {
+                            if (!(capOpts & DTWAIN_CO_SETCONSTRAINT))
+                            {
+                                // Disable controls for constraint, including test button
+                                EnableSetCapWindows(hDlg, FALSE);
+                                EnableWindow(hWndTestSet, FALSE);
+                            }
+                        }
+                    }
+                }
+                break;
+
+                case IDC_btnTest:
+                    TestGetCap(hDlg, curCapValue);
+                break;
+
+                case IDC_btnReset:
+                {
+                    /* Get the Get type*/
+                    TCHAR szGetType[100];
+                    LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
+                    SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
+                    SetTestSelection(hDlg, szGetType, curCapValue);
+                }
+                break;
+
+                case IDC_btnResetSet:
+                {
+                    /* Get the Get type*/
+                    TCHAR szSetType[100];
+                    LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETCURSEL, 0, 0);
+                    SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szSetType);
+                    SetTestSelection2(hDlg, szSetType, curCapValue);
+                }
+                break;
+
+                case IDC_btnTestSet:
+                    TestSetCap(hDlg, curCapValue);
+                break;
+
+                    /* Quit the dialog */
+                case IDOK:
+                {
+                    EndDialog(hDlg, 1);
+                }
+                break;
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                break;
             }
         }
         break;
-
-        case IDC_btnTest:
-            TestGetCap(hDlg, curCapValue);
-            break;
-
-        case IDC_btnReset:
-        {
-            /* Get the Get type*/
-            TCHAR szGetType[100];
-            LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETCURSEL, 0, 0);
-            SendMessage(GetDlgItem(hDlg, IDC_cmbGetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szGetType);
-            SetTestSelection(hDlg, szGetType, curCapValue);
-        }
-        break;
-
-        case IDC_btnResetSet:
-        {
-            /* Get the Get type*/
-            TCHAR szSetType[100];
-            LRESULT nCurSel = SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETCURSEL, 0, 0);
-            SendMessage(GetDlgItem(hDlg, IDC_cmbSetTypes), CB_GETLBTEXT, nCurSel, (LPARAM)szSetType);
-            SetTestSelection2(hDlg, szSetType, curCapValue);
-        }
-        break;
-
-        case IDC_btnTestSet:
-            TestSetCap(hDlg, curCapValue);
-            break;
-
-            /* Quit the dialog */
-        case IDOK:
-        {
-            EndDialog(hDlg, 1);
-        }
-        break;
-        case IDCANCEL:
-            EndDialog(hDlg, LOWORD(wParam));
-            return TRUE;
-            break;
-        }
-    }
-    break;
     }
     return FALSE;
 }
@@ -396,6 +473,7 @@ void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue)
     HWND hWndGetTypes = GetDlgItem(hWnd, IDC_cmbGetTypes);
     HWND hWndContainerTypes = GetDlgItem(hWnd, IDC_cmbContainer);
     HWND hWndDataTypes = GetDlgItem(hWnd, IDC_cmbDataType);
+    HWND hWndGetResults = GetDlgItem(hWnd, IDC_lstResults);
 
     int nPos = ComboBox_FindString(hWndGetTypes, -1, getType);
     SendMessage(hWndGetTypes, CB_SETCURSEL, nPos, 0);
@@ -406,12 +484,20 @@ void SetTestSelection(HWND hWnd, TCHAR* getType, int capValue)
     /* Choose the best container type for the capability */
     LONG bestContainer = DTWAIN_GetCapContainer(g_CurrentSource, capValue, nID);
 
-    TCHAR szBestContainer[100];
-    DTWAIN_GetTwainNameFromConstant(DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT, bestContainer, szBestContainer, 100);
+    if (bestContainer == 0)
+    {
+        SendMessageA(hWndGetResults, LB_ADDSTRING, 0, (LPARAM)"Error in retrieving capability container type");
+    }
 
-    nPos = ComboBox_FindString(hWndContainerTypes, -1, szBestContainer);
-    if (nPos != CB_ERR)
-        SendMessage(hWndContainerTypes, CB_SETCURSEL, nPos, 0);
+    else
+    {
+        TCHAR szBestContainer[100];
+        DTWAIN_GetTwainNameFromConstant(DTWAIN_CONSTANT_DTWAINCONT_TWAINCONT, bestContainer, szBestContainer, 100);
+
+        nPos = ComboBox_FindString(hWndContainerTypes, -1, szBestContainer);
+        if (nPos != CB_ERR)
+            SendMessage(hWndContainerTypes, CB_SETCURSEL, nPos, 0);
+    }
 
     /* Choose the data type */
     LONG bestDataType = DTWAIN_GetCapDataType(g_CurrentSource, capValue);
@@ -572,98 +658,98 @@ void TestGetCap(HWND hWnd, LONG capValue)
             }
             switch (nArrayType)
             {
-                case DTWAIN_ARRAYLONG:
+            case DTWAIN_ARRAYLONG:
+            {
+                LONG lVal;
+                BOOL isRange = (nContainerType == DTWAIN_CONTRANGE);
+                const char* rangeFormatU = "%s%u";
+                const char* rangeFormatD = "%s%d";
+                const char* rangeNameToPrint = "";
+                if (isRange)
                 {
-                    LONG lVal;
-                    BOOL isRange = (nContainerType == DTWAIN_CONTRANGE);
-                    const char* rangeFormatU = "%s%u";
-                    const char* rangeFormatD = "%s%d";
-                    const char* rangeNameToPrint = "";
-                    if (isRange)
-                    {
-                        rangeFormatU = "%s: %u";
-                        rangeFormatD = "%s: %d";
-                        rangeNameToPrint = rangeName[i];
-                    }
+                    rangeFormatU = "%s: %u";
+                    rangeFormatD = "%s: %d";
+                    rangeNameToPrint = rangeName[i];
+                }
 
-                    DTWAIN_ArrayGetAtLong(values, i, &lVal);
-                    if (capValue == CAP_SUPPORTEDDATS)
-                    {
-                        char szHi[100];
-                        char szLo[100];
-                        int hiWord = lVal >> 16;
-                        int loWord = lVal & 0x0000FFFF;
-                        DTWAIN_GetTwainNameFromConstantExA(DTWAIN_CONSTANT_DG, hiWord, szHi, 100);
-                        DTWAIN_GetTwainNameFromConstantExA(DTWAIN_CONSTANT_DAT, loWord, szLo, 100);
-                        sprintf(szValues, "%s / %s", szHi, szLo);
-                    }
-                    else
+                DTWAIN_ArrayGetAtLong(values, i, &lVal);
+                if (capValue == CAP_SUPPORTEDDATS)
+                {
+                    char szHi[100];
+                    char szLo[100];
+                    int hiWord = lVal >> 16;
+                    int loWord = lVal & 0x0000FFFF;
+                    DTWAIN_GetTwainNameFromConstantExA(DTWAIN_CONSTANT_DG, hiWord, szHi, 100);
+                    DTWAIN_GetTwainNameFromConstantExA(DTWAIN_CONSTANT_DAT, loWord, szLo, 100);
+                    sprintf(szValues, "%s / %s", szHi, szLo);
+                }
+                else
                     if (bIsCapNameSupported)
                         DTWAIN_GetNameFromCapA(lVal, szValues, 256);
                     else
-                    if (nDataType == TWTY_BOOL)
-                        sprintf(szValues, "%s", lVal == 1 ? "TRUE" : "FALSE");
-                    else
-                    if (bGotID)
-                    {
-                        char szTempBuf[100];
-                        if (nDataType == TWTY_INT32 || nDataType == TWTY_INT16)
-                            sprintf(szTempBuf, "%d", lVal);
+                        if (nDataType == TWTY_BOOL)
+                            sprintf(szValues, "%s", lVal == 1 ? "TRUE" : "FALSE");
                         else
-                            sprintf(szTempBuf, "%u", (TW_UINT32)lVal);
-                        DTWAIN_GetTwainNameFromConstantExA(nTranslationID, lVal, szValues, 256);
+                            if (bGotID)
+                            {
+                                char szTempBuf[100];
+                                if (nDataType == TWTY_INT32 || nDataType == TWTY_INT16)
+                                    sprintf(szTempBuf, "%d", lVal);
+                                else
+                                    sprintf(szTempBuf, "%u", (TW_UINT32)lVal);
+                                DTWAIN_GetTwainNameFromConstantExA(nTranslationID, lVal, szValues, 256);
 
-                        // Name does not really exist
-                        if (strcmp(szTempBuf, szValues) == 0)
-                        {
-                            bGotValue = FALSE;
-                            szValues[0] = 0;
-                        }
-                    }
+                                // Name does not really exist
+                                if (strcmp(szTempBuf, szValues) == 0)
+                                {
+                                    bGotValue = FALSE;
+                                    szValues[0] = 0;
+                                }
+                            }
 
-                    if (szValues[0] == 0)
-                    {
-                        if (nDataType == TWTY_UINT32)
-                            sprintf(szValues, rangeFormatU, rangeNameToPrint, (TW_UINT32)lVal);
-                        else
-                            sprintf(szValues, rangeFormatD, rangeNameToPrint, lVal);
-                    }
-
-                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-                    szValues[0] = 0;
-                }
-                break;
-
-                case DTWAIN_ARRAYFLOAT:
+                if (szValues[0] == 0)
                 {
-                    double dVal;
-                    DTWAIN_ArrayGetAtFloat(values, i, &dVal);
-                    if (nContainerType == DTWAIN_CONTRANGE)
-                        sprintf(szValues, "%s: %lf", rangeName[i], dVal);
+                    if (nDataType == TWTY_UINT32)
+                        sprintf(szValues, rangeFormatU, rangeNameToPrint, (TW_UINT32)lVal);
                     else
-                        sprintf(szValues, "%lf", dVal);
-                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-                    szValues[0] = 0;
+                        sprintf(szValues, rangeFormatD, rangeNameToPrint, lVal);
                 }
-                break;
 
-                case DTWAIN_ARRAYANSISTRING:
-                {
-                    DTWAIN_ArrayGetAtANSIString(values, i, szValues);
-                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-                    szValues[0] = 0;
-                }
-                break;
+                SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                szValues[0] = 0;
+            }
+            break;
 
-                case DTWAIN_ARRAYFRAME:
-                {
-                    double left, top, right, bottom;
-                    DTWAIN_ArrayGetAtFrame(values, i, &left, &top, &right, &bottom);
-                    sprintf(szValues, "Left: %lf  Top: %lf  Right: %lf  Bottom: %lf", left, top, right, bottom);
-                    SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
-                    szValues[0] = 0;
-                }
-                break;
+            case DTWAIN_ARRAYFLOAT:
+            {
+                double dVal;
+                DTWAIN_ArrayGetAtFloat(values, i, &dVal);
+                if (nContainerType == DTWAIN_CONTRANGE)
+                    sprintf(szValues, "%s: %lf", rangeName[i], dVal);
+                else
+                    sprintf(szValues, "%lf", dVal);
+                SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                szValues[0] = 0;
+            }
+            break;
+
+            case DTWAIN_ARRAYANSISTRING:
+            {
+                DTWAIN_ArrayGetAtANSIString(values, i, szValues);
+                SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                szValues[0] = 0;
+            }
+            break;
+
+            case DTWAIN_ARRAYFRAME:
+            {
+                double left, top, right, bottom;
+                DTWAIN_ArrayGetAtFrame(values, i, &left, &top, &right, &bottom);
+                sprintf(szValues, "Left: %lf  Top: %lf  Right: %lf  Bottom: %lf", left, top, right, bottom);
+                SendMessageA(hWndResults, LB_ADDSTRING, 0, (LPARAM)szValues);
+                szValues[0] = 0;
+            }
+            break;
             }
         }
         DTWAIN_ArrayDestroy(values);
@@ -813,31 +899,31 @@ void TestSetCap(HWND hWnd, LONG capValue)
     int arrayType = DTWAIN_ARRAYLONG;
     switch (nDataType)
     {
-        case TWTY_STR32:
-        case TWTY_STR64:
-        case TWTY_STR128:
-        case TWTY_STR255:
-        case TWTY_STR1024:
-        {
-            arrayType = DTWAIN_ARRAYANSISTRING;
-        }
-        break;
-        case TWTY_UNI512:
-        {
-            arrayType = DTWAIN_ARRAYWIDESTRING;
-        }
-        break;
-        case TWTY_FIX32:
-        {
-            arrayType = DTWAIN_ARRAYFLOAT;
-        }
-        break;
+    case TWTY_STR32:
+    case TWTY_STR64:
+    case TWTY_STR128:
+    case TWTY_STR255:
+    case TWTY_STR1024:
+    {
+        arrayType = DTWAIN_ARRAYANSISTRING;
+    }
+    break;
+    case TWTY_UNI512:
+    {
+        arrayType = DTWAIN_ARRAYWIDESTRING;
+    }
+    break;
+    case TWTY_FIX32:
+    {
+        arrayType = DTWAIN_ARRAYFLOAT;
+    }
+    break;
 
-        case TWTY_FRAME:
-        {
-            arrayType = DTWAIN_ARRAYFRAME;
-        }
-        break;
+    case TWTY_FRAME:
+    {
+        arrayType = DTWAIN_ARRAYFRAME;
+    }
+    break;
     }
 
     PARSERINFO pInfo;
@@ -848,8 +934,8 @@ void TestSetCap(HWND hWnd, LONG capValue)
         aValues = DTWAIN_ArrayCreate(arrayType, 0);
     pInfo.dataType = nDataType;
     pInfo.theArray = aValues;
-    ParseTextBySpaces(g_szInput, &ParseTokenCallback, arrayType == DTWAIN_ARRAYANSISTRING || 
-                                                      arrayType == DTWAIN_ARRAYWIDESTRING, &pInfo);
+    ParseTextBySpaces(g_szInput, &ParseTokenCallback, arrayType == DTWAIN_ARRAYANSISTRING ||
+        arrayType == DTWAIN_ARRAYWIDESTRING, &pInfo);
 
     /* Call the capability function */
     LONG ret = DTWAIN_SetCapValuesEx2(g_CurrentSource, capValue, nSetType, nContainerType, nDataType, aValues);

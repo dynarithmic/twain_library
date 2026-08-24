@@ -982,6 +982,9 @@ Namespace Dynarithmic
         Public Const DTWAIN_ERR_RANGE_STEPISZERO As Integer = (-1086)
         Public Const DTWAIN_ERR_BLANKNAMEDETECTED As Integer = (-1087)
         Public Const DTWAIN_ERR_FEEDER_NOPAPERSENSOR As Integer = (-1088)
+        Public Const DTWAIN_ERR_DTWAINDLL_LOADERROR As Integer = (-1089)
+        Public Const DTWAIN_ERR_DTWAINDLL_VERSION As Integer = (-1090)
+        Public Const DTWAIN_ERR_ACTIVE_TWAINSESSION As Integer = (-1091)
         Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
         Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
         Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -1914,6 +1917,12 @@ Namespace Dynarithmic
         Public Const DTWAIN_PDF_AES256 As Integer = 2
         Public Const DTWAIN_FEEDER_TERMINATE As Integer = 1
         Public Const DTWAIN_FEEDER_USEFLATBED As Integer = 2
+        Public Const DTWAIN_CHECKDLLVERLESS As Integer = 0
+        Public Const DTWAIN_CHECKDLLVEREQUAL As Integer = 1
+        Public Const DTWAIN_CHECKDLLVERGREATER As Integer = 2
+        Public Const DTWAIN_CHECKDLLVERLESSEQ As Integer = 3
+        Public Const DTWAIN_CHECKDLLVERGREATEREQ As Integer = 4
+        Public Const DTWAIN_RESOURCE_COPYRIGHT As Integer = 9700
 
         Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
         Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
@@ -2335,6 +2344,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_CallDSMProcDelegate(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_CheckDLLVersionDelegate(lMajor As Integer, lMinor As Integer, lPatchLevel As Integer, lBuildNumber As Integer, MatchType As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_CheckHandlesDelegate(bCheck As Integer) As Integer
@@ -2921,6 +2933,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetAlarmVolumeDelegate(Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetAllSessionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetAllSourceDibsDelegate(Source As System.IntPtr) As System.IntPtr
         
@@ -3024,7 +3039,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetCaptionDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
+        Private Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCompressionTypeDelegate(Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
@@ -3081,10 +3096,10 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetDTWAINHandleDelegate() As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetDeviceEventDelegate(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
+        Private Delegate Function DTWAIN_GetDeviceEventDelegate(Source As System.IntPtr, ByRef lpEvent As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetDeviceEventExDelegate(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
+        Private Delegate Function DTWAIN_GetDeviceEventExDelegate(Source As System.IntPtr, ByRef lpEvent As UInteger, ByRef pArray As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetDeviceEventInfoDelegate(Source As System.IntPtr, nWhichInfo As Integer, pValue As System.IntPtr) As Integer
@@ -3111,7 +3126,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetErrorBufferDelegate(ByRef ArrayBuffer As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetErrorBufferThresholdDelegate() As Integer
+        Private Delegate Function DTWAIN_GetErrorBufferThresholdDelegate() As UInteger
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetErrorCallbackDelegate() As DTwainErrorProc
@@ -3220,6 +3235,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLoggerCallbackDelegate() As DTwainLoggerProc
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetMajorMinorVersionDelegate(ByRef nMajor As UInteger, ByRef nMinor As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetManualDuplexCountDelegate(Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
@@ -3484,6 +3502,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetVersionExDelegate(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetVersionEx2Delegate(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer, ByRef lBuildNumber As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetVersionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -4170,7 +4191,7 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_SetEOJDetectValueDelegate(Source As System.IntPtr, nValue As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SetErrorBufferThresholdDelegate(nErrors As Integer) As Integer
+        Private Delegate Function DTWAIN_SetErrorBufferThresholdDelegate(nErrors As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetErrorCallbackDelegate(proc As DTwainErrorProc, UserData As Integer) As Integer
@@ -4240,6 +4261,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetLoggerCallbackDelegate(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_SetMajorMinorVersionDelegate(nMajor As UInteger, nMinor As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetManualDuplexModeDelegate(Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
@@ -4486,15 +4510,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_SysInitializeEx2Delegate(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SysInitializeLibDelegate(hInstance As System.IntPtr) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_SysInitializeLibExDelegate(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_SysInitializeLibEx2Delegate(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SysInitializeNoBlockingDelegate() As System.IntPtr
@@ -5062,6 +5077,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_CallDSMProc(AppID As System.IntPtr, SourceId As System.IntPtr, lDG As Integer, lDAT As Integer, lMSG As Integer, pData As System.IntPtr) As Integer
         Return api.DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData)
+        End Function
+        
+        Public Function DTWAIN_CheckDLLVersion(lMajor As Integer, lMinor As Integer, lPatchLevel As Integer, lBuildNumber As Integer, MatchType As Integer) As Integer
+        Return api.DTWAIN_CheckDLLVersion(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType)
         End Function
         
         Public Function DTWAIN_CheckHandles(bCheck As Integer) As Integer
@@ -5844,6 +5863,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetAlarmVolume(Source, lpVolume)
         End Function
         
+        Public Function DTWAIN_GetAllSessionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
+        Return api.DTWAIN_GetAllSessionInfo(lpszOut, indentFactor, nMaxLen)
+        End Function
+        
         Public Function DTWAIN_GetAllSourceDibs(Source As System.IntPtr) As System.IntPtr
         Return api.DTWAIN_GetAllSourceDibs(Source)
         End Function
@@ -5980,7 +6003,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCaption(Source, Caption)
         End Function
         
-        Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As Integer) As Integer
+        Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         Return api.DTWAIN_GetCompressionSize(Source, lBytes)
         End Function
         
@@ -6056,11 +6079,11 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetDTWAINHandle()
         End Function
         
-        Public Function DTWAIN_GetDeviceEvent(Source As System.IntPtr, ByRef lpEvent As Integer) As Integer
+        Public Function DTWAIN_GetDeviceEvent(Source As System.IntPtr, ByRef lpEvent As UInteger) As Integer
         Return api.DTWAIN_GetDeviceEvent(Source, lpEvent)
         End Function
         
-        Public Function DTWAIN_GetDeviceEventEx(Source As System.IntPtr, ByRef lpEvent As Integer, ByRef pArray As System.IntPtr) As Integer
+        Public Function DTWAIN_GetDeviceEventEx(Source As System.IntPtr, ByRef lpEvent As UInteger, ByRef pArray As System.IntPtr) As Integer
         Return api.DTWAIN_GetDeviceEventEx(Source, lpEvent, pArray)
         End Function
         
@@ -6096,7 +6119,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetErrorBuffer(ArrayBuffer)
         End Function
         
-        Public Function DTWAIN_GetErrorBufferThreshold() As Integer
+        Public Function DTWAIN_GetErrorBufferThreshold() As UInteger
         Return api.DTWAIN_GetErrorBufferThreshold()
         End Function
         
@@ -6242,6 +6265,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetLoggerCallback() As DTwainLoggerProc
         Return api.DTWAIN_GetLoggerCallback()
+        End Function
+        
+        Public Function DTWAIN_GetMajorMinorVersion(ByRef nMajor As UInteger, ByRef nMinor As UInteger) As Integer
+        Return api.DTWAIN_GetMajorMinorVersion(nMajor, nMinor)
         End Function
         
         Public Function DTWAIN_GetManualDuplexCount(Source As System.IntPtr, ByRef pSide1 As Integer, ByRef pSide2 As Integer) As Integer
@@ -6594,6 +6621,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetVersionEx(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer) As Integer
         Return api.DTWAIN_GetVersionEx(lMajor, lMinor, lVersionType, lPatchLevel)
+        End Function
+        
+        Public Function DTWAIN_GetVersionEx2(ByRef lMajor As Integer, ByRef lMinor As Integer, ByRef lVersionType As Integer, ByRef lPatchLevel As Integer, ByRef lBuildNumber As Integer) As Integer
+        Return api.DTWAIN_GetVersionEx2(lMajor, lMinor, lVersionType, lPatchLevel, lBuildNumber)
         End Function
         
         Public Function DTWAIN_GetVersionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -7508,7 +7539,7 @@ Namespace Dynarithmic
         Return api.DTWAIN_SetEOJDetectValue(Source, nValue)
         End Function
         
-        Public Function DTWAIN_SetErrorBufferThreshold(nErrors As Integer) As Integer
+        Public Function DTWAIN_SetErrorBufferThreshold(nErrors As UInteger) As Integer
         Return api.DTWAIN_SetErrorBufferThreshold(nErrors)
         End Function
         
@@ -7602,6 +7633,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_SetLoggerCallback(logProc As DTwainLoggerProc, UserData As System.Int64) As Integer
         Return api.DTWAIN_SetLoggerCallback(logProc, UserData)
+        End Function
+        
+        Public Function DTWAIN_SetMajorMinorVersion(nMajor As UInteger, nMinor As UInteger) As Integer
+        Return api.DTWAIN_SetMajorMinorVersion(nMajor, nMinor)
         End Function
         
         Public Function DTWAIN_SetManualDuplexMode(Source As System.IntPtr, Flags As Integer, bSet As Integer) As Integer
@@ -7932,18 +7967,6 @@ Namespace Dynarithmic
         Return api.DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
         
-        Public Function DTWAIN_SysInitializeLib(hInstance As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLib(hInstance)
-        End Function
-        
-        Public Function DTWAIN_SysInitializeLibEx(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLibEx(hInstance, szINIPath)
-        End Function
-        
-        Public Function DTWAIN_SysInitializeLibEx2(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLibEx2(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
-        End Function
-        
         Public Function DTWAIN_SysInitializeNoBlocking() As System.IntPtr
         Return api.DTWAIN_SysInitializeNoBlocking()
         End Function
@@ -8109,6 +8132,7 @@ Namespace Dynarithmic
             Public DTWAIN_CallCallback As DTWAIN_CallCallbackDelegate
             Public DTWAIN_CallCallback64 As DTWAIN_CallCallback64Delegate
             Public DTWAIN_CallDSMProc As DTWAIN_CallDSMProcDelegate
+            Public DTWAIN_CheckDLLVersion As DTWAIN_CheckDLLVersionDelegate
             Public DTWAIN_CheckHandles As DTWAIN_CheckHandlesDelegate
             Public DTWAIN_ClearBuffers As DTWAIN_ClearBuffersDelegate
             Public DTWAIN_ClearErrorBuffer As DTWAIN_ClearErrorBufferDelegate
@@ -8304,6 +8328,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetActiveDSMPath As DTWAIN_GetActiveDSMPathDelegate
             Public DTWAIN_GetActiveDSMVersionInfo As DTWAIN_GetActiveDSMVersionInfoDelegate
             Public DTWAIN_GetAlarmVolume As DTWAIN_GetAlarmVolumeDelegate
+            Public DTWAIN_GetAllSessionInfo As DTWAIN_GetAllSessionInfoDelegate
             Public DTWAIN_GetAllSourceDibs As DTWAIN_GetAllSourceDibsDelegate
             Public DTWAIN_GetAllSourceInfo As DTWAIN_GetAllSourceInfoDelegate
             Public DTWAIN_GetAppInfo As DTWAIN_GetAppInfoDelegate
@@ -8404,6 +8429,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetLightSources As DTWAIN_GetLightSourcesDelegate
             Public DTWAIN_GetLightSourcesEx As DTWAIN_GetLightSourcesExDelegate
             Public DTWAIN_GetLoggerCallback As DTWAIN_GetLoggerCallbackDelegate
+            Public DTWAIN_GetMajorMinorVersion As DTWAIN_GetMajorMinorVersionDelegate
             Public DTWAIN_GetManualDuplexCount As DTWAIN_GetManualDuplexCountDelegate
             Public DTWAIN_GetMaxAcquisitions As DTWAIN_GetMaxAcquisitionsDelegate
             Public DTWAIN_GetMaxBuffers As DTWAIN_GetMaxBuffersDelegate
@@ -8492,6 +8518,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetVersion As DTWAIN_GetVersionDelegate
             Public DTWAIN_GetVersionCopyright As DTWAIN_GetVersionCopyrightDelegate
             Public DTWAIN_GetVersionEx As DTWAIN_GetVersionExDelegate
+            Public DTWAIN_GetVersionEx2 As DTWAIN_GetVersionEx2Delegate
             Public DTWAIN_GetVersionInfo As DTWAIN_GetVersionInfoDelegate
             Public DTWAIN_GetVersionString As DTWAIN_GetVersionStringDelegate
             Public DTWAIN_GetWindowsVersionInfo As DTWAIN_GetWindowsVersionInfoDelegate
@@ -8744,6 +8771,7 @@ Namespace Dynarithmic
             Public DTWAIN_SetLightSources As DTWAIN_SetLightSourcesDelegate
             Public DTWAIN_SetLogSaveThreshold As DTWAIN_SetLogSaveThresholdDelegate
             Public DTWAIN_SetLoggerCallback As DTWAIN_SetLoggerCallbackDelegate
+            Public DTWAIN_SetMajorMinorVersion As DTWAIN_SetMajorMinorVersionDelegate
             Public DTWAIN_SetManualDuplexMode As DTWAIN_SetManualDuplexModeDelegate
             Public DTWAIN_SetMaxAcquisitions As DTWAIN_SetMaxAcquisitionsDelegate
             Public DTWAIN_SetMaxBuffers As DTWAIN_SetMaxBuffersDelegate
@@ -8826,9 +8854,6 @@ Namespace Dynarithmic
             Public DTWAIN_SysInitialize As DTWAIN_SysInitializeDelegate
             Public DTWAIN_SysInitializeEx As DTWAIN_SysInitializeExDelegate
             Public DTWAIN_SysInitializeEx2 As DTWAIN_SysInitializeEx2Delegate
-            Public DTWAIN_SysInitializeLib As DTWAIN_SysInitializeLibDelegate
-            Public DTWAIN_SysInitializeLibEx As DTWAIN_SysInitializeLibExDelegate
-            Public DTWAIN_SysInitializeLibEx2 As DTWAIN_SysInitializeLibEx2Delegate
             Public DTWAIN_SysInitializeNoBlocking As DTWAIN_SysInitializeNoBlockingDelegate
             Public DTWAIN_SysInitializeNoBlockingEx As DTWAIN_SysInitializeNoBlockingExDelegate
             Public DTWAIN_TestGetCap As DTWAIN_TestGetCapDelegate
