@@ -21,6 +21,26 @@ DTWAIN Version changes
       2) after a TWAIN session has been terminated (either by calling 
          DTWAIN_EndTwainSession() or DTWAIN_SysDestroy()).  
 
+- Ensure that DTWAIN ANSI and Wide character-specific API functions that have strings as parameters,
+  (the functions with names that end with the letter "A" and "W"), will return 0 characters 
+  copied if the length argument provided by the user is 0.  This is only for functions that copy data
+  to the user-provided string buffer on return.  
+
+      Currently in some circumstances, even though no characters are copied to the user's buffer
+      if the length argument is 0, the DTWAIN function may return a non-zero, positive number.  Examples would be 
+      DTWAIN_GetErrorStringA() and DTWAIN_GetErrorStringW() will now always return 0 if the length argument 
+      provided by the user is 0. 
+
+- Changed the following resource files from Windows-1252 format to UTF-8 format 
+  (this change allows text from these languages to show up correctly in the DTWAIN log files):
+
+      twainresourcestrings_french.txt
+      twainresourcestrings_german.txt
+      twainresourcestrings_italian.txt
+      twainresourcestrings_portuguese.txt
+      twainresourcestrings_portuguese_br.txt
+      twainresourcestrings_spanish.txt
+
 - Add DTWAIN_SetMajorMinorVersion() function to allow setting the TWAIN session's
   major and minor version number (basically, the same items in the TW_IDENTITY structure for
   the TWAIN session).  
@@ -68,6 +88,22 @@ DTWAIN Version changes
     Note that the DTWAIN_CheckDLLVersion() function can be used to check any loaded DTWAIN DLL that is at least version
     5.0.0.  Note that the DTWAIN_CheckDLLVersion() function should only be called after the DTWAIN DLL has been loaded, either 
     automatically at runtime, or through LoadLibrary().
+
+- Removed the following obsolete API functions:
+    DTWAIN_SysInitializeLib
+    DTWAIN_SysInitializeLibEx  
+    DTWAIN_SysInitializeLibEx2 
+    DTWAIN_SysInitializeLibExW    
+    DTWAIN_SysInitializeLibExA    
+    DTWAIN_SysInitializeLibEx2W   
+    DTWAIN_SysInitializeLibEx2A   
+
+- Sorted exported names in the DLL's export table.  This required reordering of the ordinal numbers used in the DTWAIN DLL.  
+
+  This should affect a very small number of users who are using a programming environment that relies on explicit 
+  usage of the DLL's internal ordinal numbers to identify the exported DLL functions.  If you are one of the 
+  few programmers using the ordinal numbers within the DTWAIN DLL, you will have to change your 
+  application to use the new ordinal numbers.
 
 - Fix issues with DTWAIN_IsTwainAvailable() when run on a system without TWAIN_32.DLL installed.
 

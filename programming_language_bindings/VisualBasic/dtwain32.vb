@@ -2095,6 +2095,7 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetActiveDSMPath Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetAlarmVolume Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetAllSessionInfo Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetAllSourceDibs Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Ansi Function DTWAIN_GetAllSourceInfo Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, indentFactor As Integer, nSize As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetAppInfo Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> szProdName As StringBuilder) As Integer
@@ -2620,9 +2621,6 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_SysInitialize Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Ansi Function DTWAIN_SysInitializeEx Lib "dtwain32.dll" (szINIPath As String) As System.IntPtr
     Public Declare Ansi Function DTWAIN_SysInitializeEx2 Lib "dtwain32.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Public Declare Function DTWAIN_SysInitializeLib Lib "dtwain32.dll" (hInstance As System.IntPtr) As System.IntPtr
-    Public Declare Ansi Function DTWAIN_SysInitializeLibEx Lib "dtwain32.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-    Public Declare Ansi Function DTWAIN_SysInitializeLibEx2 Lib "dtwain32.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlocking Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlockingEx Lib "dtwain32.dll" (bCreateLogFile As Integer) As System.IntPtr
     Public Declare Function DTWAIN_TestGetCap Lib "dtwain32.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr

@@ -449,6 +449,9 @@
     D_GETACTIVEDSMVERSIONINFOAFUNC                DYNDTWAIN_API::DTWAIN_GetActiveDSMVersionInfoA = nullptr;
     D_GETACTIVEDSMVERSIONINFOWFUNC                DYNDTWAIN_API::DTWAIN_GetActiveDSMVersionInfoW = nullptr;
     D_GETALARMVOLUMEFUNC                          DYNDTWAIN_API::DTWAIN_GetAlarmVolume = nullptr;
+    D_GETALLSESSIONINFOFUNC                       DYNDTWAIN_API::DTWAIN_GetAllSessionInfo = nullptr;
+    D_GETALLSESSIONINFOAFUNC                      DYNDTWAIN_API::DTWAIN_GetAllSessionInfoA = nullptr;
+    D_GETALLSESSIONINFOWFUNC                      DYNDTWAIN_API::DTWAIN_GetAllSessionInfoW = nullptr;
     D_GETALLSOURCEDIBSFUNC                        DYNDTWAIN_API::DTWAIN_GetAllSourceDibs = nullptr;
     D_GETALLSOURCEINFOFUNC                        DYNDTWAIN_API::DTWAIN_GetAllSourceInfo = nullptr;
     D_GETALLSOURCEINFOAFUNC                       DYNDTWAIN_API::DTWAIN_GetAllSourceInfoA = nullptr;
@@ -1227,13 +1230,6 @@
     D_SYSINITIALIZEEX2WFUNC                       DYNDTWAIN_API::DTWAIN_SysInitializeEx2W = nullptr;
     D_SYSINITIALIZEEXAFUNC                        DYNDTWAIN_API::DTWAIN_SysInitializeExA = nullptr;
     D_SYSINITIALIZEEXWFUNC                        DYNDTWAIN_API::DTWAIN_SysInitializeExW = nullptr;
-    D_SYSINITIALIZELIBFUNC                        DYNDTWAIN_API::DTWAIN_SysInitializeLib = nullptr;
-    D_SYSINITIALIZELIBEXFUNC                      DYNDTWAIN_API::DTWAIN_SysInitializeLibEx = nullptr;
-    D_SYSINITIALIZELIBEX2FUNC                     DYNDTWAIN_API::DTWAIN_SysInitializeLibEx2 = nullptr;
-    D_SYSINITIALIZELIBEX2AFUNC                    DYNDTWAIN_API::DTWAIN_SysInitializeLibEx2A = nullptr;
-    D_SYSINITIALIZELIBEX2WFUNC                    DYNDTWAIN_API::DTWAIN_SysInitializeLibEx2W = nullptr;
-    D_SYSINITIALIZELIBEXAFUNC                     DYNDTWAIN_API::DTWAIN_SysInitializeLibExA = nullptr;
-    D_SYSINITIALIZELIBEXWFUNC                     DYNDTWAIN_API::DTWAIN_SysInitializeLibExW = nullptr;
     D_SYSINITIALIZENOBLOCKINGFUNC                 DYNDTWAIN_API::DTWAIN_SysInitializeNoBlocking = nullptr;
     D_SYSINITIALIZENOBLOCKINGEXFUNC               DYNDTWAIN_API::DTWAIN_SysInitializeNoBlockingEx = nullptr;
     D_TESTGETCAPFUNC                              DYNDTWAIN_API::DTWAIN_TestGetCap = nullptr;
@@ -1706,6 +1702,9 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMVersionInfoA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetActiveDSMVersionInfoW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAlarmVolume, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAllSessionInfo, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAllSessionInfoA, hModule);
+          LOADFUNCTIONIMPL(DTWAIN_GetAllSessionInfoW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAllSourceDibs, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAllSourceInfo, hModule);
           LOADFUNCTIONIMPL(DTWAIN_GetAllSourceInfoA, hModule);
@@ -2484,13 +2483,6 @@ int LoadFunction(Fn& apifn, HMODULE hModule, const char *fnName)
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeEx2W, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeExA, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeExW, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLib, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibEx, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibEx2, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibEx2A, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibEx2W, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibExA, hModule);
-          LOADFUNCTIONIMPL(DTWAIN_SysInitializeLibExW, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeNoBlocking, hModule);
           LOADFUNCTIONIMPL(DTWAIN_SysInitializeNoBlockingEx, hModule);
           LOADFUNCTIONIMPL(DTWAIN_TestGetCap, hModule);

@@ -2933,6 +2933,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetAlarmVolumeDelegate(Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetAllSessionInfoDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetAllSourceDibsDelegate(Source As System.IntPtr) As System.IntPtr
         
@@ -4509,15 +4512,6 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_SysInitializeEx2Delegate(szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_SysInitializeLibDelegate(hInstance As System.IntPtr) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_SysInitializeLibExDelegate(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_SysInitializeLibEx2Delegate(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SysInitializeNoBlockingDelegate() As System.IntPtr
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -5867,6 +5861,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetAlarmVolume(Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
         Return api.DTWAIN_GetAlarmVolume(Source, lpVolume)
+        End Function
+        
+        Public Function DTWAIN_GetAllSessionInfo(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
+        Return api.DTWAIN_GetAllSessionInfo(lpszOut, indentFactor, nMaxLen)
         End Function
         
         Public Function DTWAIN_GetAllSourceDibs(Source As System.IntPtr) As System.IntPtr
@@ -7969,18 +7967,6 @@ Namespace Dynarithmic
         Return api.DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath)
         End Function
         
-        Public Function DTWAIN_SysInitializeLib(hInstance As System.IntPtr) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLib(hInstance)
-        End Function
-        
-        Public Function DTWAIN_SysInitializeLibEx(hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLibEx(hInstance, szINIPath)
-        End Function
-        
-        Public Function DTWAIN_SysInitializeLibEx2(hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-        Return api.DTWAIN_SysInitializeLibEx2(hInstance, szINIPath, szImageDLLPath, szLangResourcePath)
-        End Function
-        
         Public Function DTWAIN_SysInitializeNoBlocking() As System.IntPtr
         Return api.DTWAIN_SysInitializeNoBlocking()
         End Function
@@ -8342,6 +8328,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetActiveDSMPath As DTWAIN_GetActiveDSMPathDelegate
             Public DTWAIN_GetActiveDSMVersionInfo As DTWAIN_GetActiveDSMVersionInfoDelegate
             Public DTWAIN_GetAlarmVolume As DTWAIN_GetAlarmVolumeDelegate
+            Public DTWAIN_GetAllSessionInfo As DTWAIN_GetAllSessionInfoDelegate
             Public DTWAIN_GetAllSourceDibs As DTWAIN_GetAllSourceDibsDelegate
             Public DTWAIN_GetAllSourceInfo As DTWAIN_GetAllSourceInfoDelegate
             Public DTWAIN_GetAppInfo As DTWAIN_GetAppInfoDelegate
@@ -8867,9 +8854,6 @@ Namespace Dynarithmic
             Public DTWAIN_SysInitialize As DTWAIN_SysInitializeDelegate
             Public DTWAIN_SysInitializeEx As DTWAIN_SysInitializeExDelegate
             Public DTWAIN_SysInitializeEx2 As DTWAIN_SysInitializeEx2Delegate
-            Public DTWAIN_SysInitializeLib As DTWAIN_SysInitializeLibDelegate
-            Public DTWAIN_SysInitializeLibEx As DTWAIN_SysInitializeLibExDelegate
-            Public DTWAIN_SysInitializeLibEx2 As DTWAIN_SysInitializeLibEx2Delegate
             Public DTWAIN_SysInitializeNoBlocking As DTWAIN_SysInitializeNoBlockingDelegate
             Public DTWAIN_SysInitializeNoBlockingEx As DTWAIN_SysInitializeNoBlockingExDelegate
             Public DTWAIN_TestGetCap As DTWAIN_TestGetCapDelegate

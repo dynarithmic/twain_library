@@ -2262,6 +2262,8 @@
         public delegate int DTWAIN_GetActiveDSMVersionInfoDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szDLLInfo, int nMaxLen);
         public delegate int DTWAIN_GetActiveDSMVersionInfoDelegate_overload(System.IntPtr szDLLInfo, int nMaxLen);
         public delegate int DTWAIN_GetAlarmVolumeDelegate(DTWAIN_SOURCE Source, ref int lpVolume);
+        public delegate int DTWAIN_GetAllSessionInfoDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int indentFactor, int nMaxLen);
+        public delegate int DTWAIN_GetAllSessionInfoDelegate_overload(System.IntPtr lpszOut, int indentFactor, int nMaxLen);
         public delegate DTWAIN_ARRAY DTWAIN_GetAllSourceDibsDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetAllSourceInfoDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int indentFactor, int nSize);
         public delegate int DTWAIN_GetAllSourceInfoDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr lpszOut, int indentFactor, int nSize);
@@ -2850,9 +2852,6 @@
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeDelegate();
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeExDelegate([MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeEx2Delegate([MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
-        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeLibDelegate(HINSTANCE hInstance);
-        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeLibExDelegate(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
-        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2Delegate(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingDelegate();
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingExDelegate(int bCreateLogFile);
         public delegate DTWAIN_ARRAY DTWAIN_TestGetCapDelegate(DTWAIN_SOURCE Source, int lCapability);
@@ -3899,6 +3898,12 @@
 
         [DTWAINNativeFunction("DTWAIN_GetAlarmVolume")]
         private readonly DTWAIN_GetAlarmVolumeDelegate  _DTWAIN_GetAlarmVolume;
+
+        [DTWAINNativeFunction("DTWAIN_GetAllSessionInfo")]
+        private readonly DTWAIN_GetAllSessionInfoDelegate  _DTWAIN_GetAllSessionInfo;
+
+        [DTWAINNativeFunction("DTWAIN_GetAllSessionInfo")]
+        private readonly DTWAIN_GetAllSessionInfoDelegate_overload _DTWAIN_GetAllSessionInfo_overload; 
 
         [DTWAINNativeFunction("DTWAIN_GetAllSourceDibs")]
         private readonly DTWAIN_GetAllSourceDibsDelegate  _DTWAIN_GetAllSourceDibs;
@@ -5664,15 +5669,6 @@
         [DTWAINNativeFunction("DTWAIN_SysInitializeEx2")]
         private readonly DTWAIN_SysInitializeEx2Delegate  _DTWAIN_SysInitializeEx2;
 
-        [DTWAINNativeFunction("DTWAIN_SysInitializeLib")]
-        private readonly DTWAIN_SysInitializeLibDelegate  _DTWAIN_SysInitializeLib;
-
-        [DTWAINNativeFunction("DTWAIN_SysInitializeLibEx")]
-        private readonly DTWAIN_SysInitializeLibExDelegate  _DTWAIN_SysInitializeLibEx;
-
-        [DTWAINNativeFunction("DTWAIN_SysInitializeLibEx2")]
-        private readonly DTWAIN_SysInitializeLibEx2Delegate  _DTWAIN_SysInitializeLibEx2;
-
         [DTWAINNativeFunction("DTWAIN_SysInitializeNoBlocking")]
         private readonly DTWAIN_SysInitializeNoBlockingDelegate  _DTWAIN_SysInitializeNoBlocking;
 
@@ -6718,6 +6714,12 @@
 
         public  int DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, ref int lpVolume)
         => _DTWAIN_GetAlarmVolume(Source, ref lpVolume);
+
+        public  int DTWAIN_GetAllSessionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int indentFactor, int nMaxLen)
+        => _DTWAIN_GetAllSessionInfo(lpszOut, indentFactor, nMaxLen);
+
+        public  int DTWAIN_GetAllSessionInfo (System.IntPtr lpszOut, int indentFactor, int nMaxLen)
+        => _DTWAIN_GetAllSessionInfo_overload(lpszOut, indentFactor, nMaxLen);
 
         public  DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source)
         => _DTWAIN_GetAllSourceDibs(Source);
@@ -8482,15 +8484,6 @@
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeEx2([MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath)
         => _DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath);
-
-        public  DTWAIN_HANDLE DTWAIN_SysInitializeLib(HINSTANCE hInstance)
-        => _DTWAIN_SysInitializeLib(hInstance);
-
-        public  DTWAIN_HANDLE DTWAIN_SysInitializeLibEx(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath)
-        => _DTWAIN_SysInitializeLibEx(hInstance, szINIPath);
-
-        public  DTWAIN_HANDLE DTWAIN_SysInitializeLibEx2(HINSTANCE hInstance, [MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath)
-        => _DTWAIN_SysInitializeLibEx2(hInstance, szINIPath, szImageDLLPath, szLangResourcePath);
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking()
         => _DTWAIN_SysInitializeNoBlocking();

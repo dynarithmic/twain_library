@@ -2096,6 +2096,7 @@ Class DTWAINAPI
     Public Declare Unicode Function DTWAIN_GetActiveDSMPath Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetActiveDSMVersionInfo Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szDLLInfo As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetAlarmVolume Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lpVolume As Integer) As Integer
+    Public Declare Unicode Function DTWAIN_GetAllSessionInfo Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nMaxLen As Integer) As Integer
     Public Declare Function DTWAIN_GetAllSourceDibs Lib "dtwain64u.dll" (Source As System.IntPtr) As System.IntPtr
     Public Declare Unicode Function DTWAIN_GetAllSourceInfo Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, indentFactor As Integer, nSize As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetAppInfo Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> szVerStr As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szManu As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdFam As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> szProdName As StringBuilder) As Integer
@@ -2621,9 +2622,6 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_SysInitialize Lib "dtwain64u.dll" () As System.IntPtr
     Public Declare Unicode Function DTWAIN_SysInitializeEx Lib "dtwain64u.dll" (szINIPath As String) As System.IntPtr
     Public Declare Unicode Function DTWAIN_SysInitializeEx2 Lib "dtwain64u.dll" (szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
-    Public Declare Function DTWAIN_SysInitializeLib Lib "dtwain64u.dll" (hInstance As System.IntPtr) As System.IntPtr
-    Public Declare Unicode Function DTWAIN_SysInitializeLibEx Lib "dtwain64u.dll" (hInstance As System.IntPtr, szINIPath As String) As System.IntPtr
-    Public Declare Unicode Function DTWAIN_SysInitializeLibEx2 Lib "dtwain64u.dll" (hInstance As System.IntPtr, szINIPath As String, szImageDLLPath As String, szLangResourcePath As String) As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlocking Lib "dtwain64u.dll" () As System.IntPtr
     Public Declare Function DTWAIN_SysInitializeNoBlockingEx Lib "dtwain64u.dll" (bCreateLogFile As Integer) As System.IntPtr
     Public Declare Function DTWAIN_TestGetCap Lib "dtwain64u.dll" (Source As System.IntPtr, lCapability As Integer) As System.IntPtr
