@@ -168,6 +168,8 @@ There are other places that DLL's can be placed so as to be recognized by the ap
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
+The main entry point function to the DTWAIN library is **DTWAIN_SysInitialize** (see examples below).  The application must call this function to setup the resources and other definitions required for the other DTWAIN API functions to operate correctly.
+
 If **DTWAIN_SysInitialize** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
 
 ----
@@ -189,7 +191,6 @@ More detailed instructions on adding your own resource file can be found <a href
 
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()
@@ -213,7 +214,6 @@ The program above displays the default "Select Source" dialog when choosing a So
 
 However, you can customize the "Select Source" dialog box by utilizing the dialog box resource defined in the DTWAIN DLL, and then utilize the `DTWAIN_SelectSource2()` function:
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()
@@ -238,7 +238,6 @@ In addition to selecting a Source by using the "Select Source" dialog box, you c
 
 This effectively selects the TWAIN Source without the dialog box appearing.  The function to use would be `DTWAIN_SelectSourceByName` instead of `DTWAIN_SelectSource` or `DTWAIN_SelectSource2`
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()
