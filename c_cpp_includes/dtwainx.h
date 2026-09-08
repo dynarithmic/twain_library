@@ -25,6 +25,7 @@
 #include "twain.h"
 #include "winconst.h"
 #include "capconst.h"
+#include "dtwainc.h"
 /* ///////////////////////////////// DTWAIN Exported functions //////////////////////////// */
 #ifdef __cplusplus
   extern "C" {
@@ -47,8 +48,6 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_IsInitialized(VOID_PROTOTYPE);
 LONG           DLLENTRY_DEF      DTWAIN_GetRegisteredMsg(VOID_PROTOTYPE);
 DTWAIN_HANDLE  DLLENTRY_DEF      DTWAIN_GetDTWAINHandle(VOID_PROTOTYPE);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetVersion(LPLONG lpMajor, LPLONG lpMinor,LPLONG lpVersionType);
-
-LONG           DLLENTRY_DEF      DTWAIN_GetStaticLibVersion(VOID_PROTOTYPE);
 
 /* DTWAIN Error message handling */
 LONG           DLLENTRY_DEF      DTWAIN_GetLastError(VOID_PROTOTYPE);
@@ -118,6 +117,8 @@ DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_SetCapValuesEx2(DTWAIN_SOURCE Source,LON
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetCapValues(DTWAIN_SOURCE Source,LONG  lCap,LONG  lGetType,LPDTWAIN_ARRAY pArray);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetCapValuesEx(DTWAIN_SOURCE Source,LONG  lCap,LONG  lGetType,LONG  lContainerType,LPDTWAIN_ARRAY pArray);
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetCapValuesEx2(DTWAIN_SOURCE Source,LONG lCap,LONG lGetType,LONG lContainerType,LONG nDataType,LPDTWAIN_ARRAY pArray );
+
+DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_GetLastCapEnumIndices(DTWAIN_SOURCE Source, LPLONG pCurrentIndex, LPLONG pDefaultIndex);
 
 DTWAIN_BOOL    DLLENTRY_DEF      DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source,LPDTWAIN_ARRAY pArray );
 DTWAIN_ARRAY   DLLENTRY_DEF      DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source);
@@ -597,11 +598,6 @@ DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumExtImageInfoTypesEx(DTWAIN_SOURCE Source);
    will exist */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
 
-/* Application adds an item to query the image information.  Before getting the Extended
-Image Information, the application will call DTWAIN_AddExtImageInfoQuery multiple times,
-each time for each Image Information desired  */
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, LONG ExtImageInfo);
-
 /* This returns the data that the Source returned when the item is queried.  */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, LONG nWhich, LPDTWAIN_ARRAY Data);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_GetExtImageInfoDataEx(DTWAIN_SOURCE Source, LONG nWhich);
@@ -885,16 +881,11 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_CheckDLLVersion(LONG lMajor, LONG lMinor, LONG l
 LONG        DLLENTRY_DEF DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, LONG nValue);
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetQueryCapSupport(DTWAIN_BOOL bSet);
 
 /* Threading functions */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_StartThread( DTWAIN_HANDLE DLLHandle );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_EndThread( DTWAIN_HANDLE DLLHandle );
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_UseMultipleThreads(DTWAIN_BOOL bSet);
-
-/* TWAIN time-out values */
-DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetTwainTimeout( LONG milliseconds );
-LONG DLLENTRY_DEF DTWAIN_GetTwainTimeout(VOID_PROTOTYPE);
 
 /* User-defined callback to change DIB */
 DTWAIN_DIBUPDATE_PROC DLLENTRY_DEF DTWAIN_SetUpdateDibProc(DTWAIN_DIBUPDATE_PROC DibProc);
@@ -1029,7 +1020,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFPolarity(DTWAIN_SOURCE Source, LONG Polari
 LPCTSTR DLLENTRY_DEF DTWAIN_ArrayGetAtStringPtr(DTWAIN_ARRAY pArray, LONG nWhere);
 LPCWSTR DLLENTRY_DEF  DTWAIN_ArrayGetAtWideStringPtr(DTWAIN_ARRAY pArray, LONG nWhere);
 LPCSTR DLLENTRY_DEF  DTWAIN_ArrayGetAtANSIStringPtr(DTWAIN_ARRAY pArray, LONG nWhere);
-DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_ArrayInit(VOID_PROTOTYPE);
 
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_CheckHandles(DTWAIN_BOOL bCheck);
 LONG DLLENTRY_DEF DTWAIN_MakeRGB(LONG red, LONG green, LONG blue);

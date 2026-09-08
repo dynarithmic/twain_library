@@ -885,6 +885,8 @@
         public const int DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
         public const int DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
         public const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
+        public const int DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092);
+        public const int DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -1673,6 +1675,7 @@
         public const int DTWAIN_PDFTEXT_NOROTATION = 0x10000000;
         public const int DTWAIN_PDFTEXT_NOSKEWING = 0x20000000;
         public const int DTWAIN_PDFTEXT_NOSCALINGXY = 0x40000000;
+        public const int DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x80000000;
         public const uint DTWAIN_PDFTEXT_IGNOREALL = 0xFFF00000U;
         public const int DTWAIN_FONT_COURIER = 0;
         public const int DTWAIN_FONT_COURIERBOLD = 1;
@@ -1930,11 +1933,8 @@
         public delegate DTWAIN_ARRAY DTWAIN_AcquireNativeDelegate(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, ref int pStatus);
         public delegate int DTWAIN_AcquireNativeExDelegate(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, DTWAIN_ARRAY Acquisitions, ref int pStatus);
         public delegate DTWAIN_ARRAY DTWAIN_AcquireToClipboardDelegate(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int nTransferMode, int bDiscardDibs, int bShowUI, int bCloseSource, ref int pStatus);
-        public delegate int DTWAIN_AddExtImageInfoQueryDelegate(DTWAIN_SOURCE Source, int ExtImageInfo);
-        public delegate int DTWAIN_AddFileToAppendDelegate([MarshalAs(UnmanagedType.LPTStr)] string szFile);
         public delegate int DTWAIN_AddPDFTextDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, uint Flags);
         public delegate int DTWAIN_AddPDFTextElementDelegate(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
-        public delegate int DTWAIN_AddPDFTextExDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, int transformType);
         public delegate int DTWAIN_AddPDFTextStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, [MarshalAs(UnmanagedType.LPTStr)] string fontSize, int colorRGB, int renderMode, [MarshalAs(UnmanagedType.LPTStr)] string scaling, [MarshalAs(UnmanagedType.LPTStr)] string charSpacing, [MarshalAs(UnmanagedType.LPTStr)] string wordSpacing, [MarshalAs(UnmanagedType.LPTStr)] string strokeWidth, uint Flags);
         public delegate HANDLE DTWAIN_AllocateMemoryDelegate(uint memSize);
         public delegate HANDLE DTWAIN_AllocateMemory64Delegate(ULONG64 memSize);
@@ -2020,7 +2020,6 @@
         public delegate int DTWAIN_ArrayGetSourceAtDelegate(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource);
         public delegate int DTWAIN_ArrayGetStringLengthDelegate(DTWAIN_ARRAY a, int nWhichString);
         public delegate int DTWAIN_ArrayGetTypeDelegate(DTWAIN_ARRAY pArray);
-        public delegate DTWAIN_ARRAY DTWAIN_ArrayInitDelegate();
         public delegate int DTWAIN_ArrayInsertAtDelegate(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
         public delegate int DTWAIN_ArrayInsertAtANSIStringDelegate(DTWAIN_ARRAY pArray, int nWhere, string pVal);
         public delegate int DTWAIN_ArrayInsertAtANSIStringNDelegate(DTWAIN_ARRAY pArray, int nWhere, string Val, int num);
@@ -2317,6 +2316,8 @@
         public delegate int DTWAIN_GetContrastStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Contrast);
         public delegate int DTWAIN_GetCountryDelegate();
         public delegate HANDLE DTWAIN_GetCurrentAcquiredImageDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_GetCurrentCustomResourceNameDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nMaxLen);
+        public delegate int DTWAIN_GetCurrentCustomResourceNameDelegate_overload(System.IntPtr lpszOut, int nMaxLen);
         public delegate int DTWAIN_GetCurrentFileNameDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int MaxLen);
         public delegate int DTWAIN_GetCurrentFileNameDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szName, int MaxLen);
         public delegate int DTWAIN_GetCurrentPageNumDelegate(DTWAIN_SOURCE Source);
@@ -2376,6 +2377,7 @@
         public delegate int DTWAIN_GetJpegValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetJpegXRValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetLanguageDelegate();
+        public delegate int DTWAIN_GetLastCapEnumIndicesDelegate(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex);
         public delegate int DTWAIN_GetLastErrorDelegate();
         public delegate int DTWAIN_GetLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength);
         public delegate int DTWAIN_GetLibraryPathDelegate_overload(System.IntPtr lpszVer, int nLength);
@@ -2482,7 +2484,6 @@
         public delegate int DTWAIN_GetSourceVersionInfoDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionInfoDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen);
         public delegate int DTWAIN_GetSourceVersionNumberDelegate(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor);
-        public delegate int DTWAIN_GetStaticLibVersionDelegate();
         public delegate int DTWAIN_GetTempFileDirectoryDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFilePath, int nMaxLen);
         public delegate int DTWAIN_GetTempFileDirectoryDelegate_overload(System.IntPtr szFilePath, int nMaxLen);
         public delegate int DTWAIN_GetThresholdDelegate(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Threshold);
@@ -2501,7 +2502,6 @@
         public delegate int DTWAIN_GetTwainNameFromConstantDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
         public delegate int DTWAIN_GetTwainNameFromConstantExDelegate_overload(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
-        public delegate int DTWAIN_GetTwainTimeoutDelegate();
         public delegate int DTWAIN_GetVersionDelegate(ref int lpMajor, ref int lpMinor, ref int lpVersionType);
         public delegate int DTWAIN_GetVersionCopyrightDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszApp, int nLength);
         public delegate int DTWAIN_GetVersionCopyrightDelegate_overload(System.IntPtr lpszApp, int nLength);
@@ -2520,7 +2520,6 @@
         public delegate int DTWAIN_GetYResolutionStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution);
         public delegate int DTWAIN_GetYResolutionStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Resolution);
         public delegate int DTWAIN_InitExtImageInfoDelegate(DTWAIN_SOURCE Source);
-        public delegate int DTWAIN_InitImageFileAppendDelegate([MarshalAs(UnmanagedType.LPTStr)] string szFile, int fType);
         public delegate int DTWAIN_InitOCRInterfaceDelegate();
         public delegate int DTWAIN_IsAcquiringDelegate();
         public delegate int DTWAIN_IsAudioXferSupportedDelegate(DTWAIN_SOURCE Source, int supportVal);
@@ -2818,7 +2817,6 @@
         public delegate int DTWAIN_SetPrinterStringModeDelegate(DTWAIN_SOURCE Source, int PrinterMode, int bSetCurrent);
         public delegate int DTWAIN_SetPrinterStringsDelegate(DTWAIN_SOURCE Source, DTWAIN_ARRAY ArrayString, ref int pNumStrings);
         public delegate int DTWAIN_SetPrinterSuffixStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Suffix);
-        public delegate int DTWAIN_SetQueryCapSupportDelegate(int bSet);
         public delegate int DTWAIN_SetResolutionDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT Resolution);
         public delegate int DTWAIN_SetResolutionStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Resolution);
         public delegate int DTWAIN_SetResourcePathDelegate([MarshalAs(UnmanagedType.LPTStr)] string ResourcePath);
@@ -2837,7 +2835,6 @@
         public delegate int DTWAIN_SetTwainDSMDelegate(int DSMType);
         public delegate int DTWAIN_SetTwainLogDelegate(uint LogFlags, [MarshalAs(UnmanagedType.LPTStr)] string lpszLogFile);
         public delegate int DTWAIN_SetTwainModeDelegate(int lAcquireMode);
-        public delegate int DTWAIN_SetTwainTimeoutDelegate(int milliseconds);
         public delegate DTwainDIBUpdateProc DTWAIN_SetUpdateDibProcDelegate(DTwainDIBUpdateProc DibProc);
         public delegate int DTWAIN_SetXResolutionDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT xResolution);
         public delegate int DTWAIN_SetXResolutionStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Resolution);
@@ -2850,8 +2847,6 @@
         public delegate int DTWAIN_StartTwainSessionDelegate(HWND hWndMsg, [MarshalAs(UnmanagedType.LPTStr)] string lpszDLLName);
         public delegate int DTWAIN_SysDestroyDelegate();
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeDelegate();
-        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeExDelegate([MarshalAs(UnmanagedType.LPTStr)] string szINIPath);
-        public delegate DTWAIN_HANDLE DTWAIN_SysInitializeEx2Delegate([MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath);
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingDelegate();
         public delegate DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingExDelegate(int bCreateLogFile);
         public delegate DTWAIN_ARRAY DTWAIN_TestGetCapDelegate(DTWAIN_SOURCE Source, int lCapability);
@@ -2903,20 +2898,11 @@
         [DTWAINNativeFunction("DTWAIN_AcquireToClipboard")]
         private readonly DTWAIN_AcquireToClipboardDelegate  _DTWAIN_AcquireToClipboard;
 
-        [DTWAINNativeFunction("DTWAIN_AddExtImageInfoQuery")]
-        private readonly DTWAIN_AddExtImageInfoQueryDelegate  _DTWAIN_AddExtImageInfoQuery;
-
-        [DTWAINNativeFunction("DTWAIN_AddFileToAppend")]
-        private readonly DTWAIN_AddFileToAppendDelegate  _DTWAIN_AddFileToAppend;
-
         [DTWAINNativeFunction("DTWAIN_AddPDFText")]
         private readonly DTWAIN_AddPDFTextDelegate  _DTWAIN_AddPDFText;
 
         [DTWAINNativeFunction("DTWAIN_AddPDFTextElement")]
         private readonly DTWAIN_AddPDFTextElementDelegate  _DTWAIN_AddPDFTextElement;
-
-        [DTWAINNativeFunction("DTWAIN_AddPDFTextEx")]
-        private readonly DTWAIN_AddPDFTextExDelegate  _DTWAIN_AddPDFTextEx;
 
         [DTWAINNativeFunction("DTWAIN_AddPDFTextString")]
         private readonly DTWAIN_AddPDFTextStringDelegate  _DTWAIN_AddPDFTextString;
@@ -3172,9 +3158,6 @@
 
         [DTWAINNativeFunction("DTWAIN_ArrayGetType")]
         private readonly DTWAIN_ArrayGetTypeDelegate  _DTWAIN_ArrayGetType;
-
-        [DTWAINNativeFunction("DTWAIN_ArrayInit")]
-        private readonly DTWAIN_ArrayInitDelegate  _DTWAIN_ArrayInit;
 
         [DTWAINNativeFunction("DTWAIN_ArrayInsertAt")]
         private readonly DTWAIN_ArrayInsertAtDelegate  _DTWAIN_ArrayInsertAt;
@@ -4064,6 +4047,12 @@
         [DTWAINNativeFunction("DTWAIN_GetCurrentAcquiredImage")]
         private readonly DTWAIN_GetCurrentAcquiredImageDelegate  _DTWAIN_GetCurrentAcquiredImage;
 
+        [DTWAINNativeFunction("DTWAIN_GetCurrentCustomResourceName")]
+        private readonly DTWAIN_GetCurrentCustomResourceNameDelegate  _DTWAIN_GetCurrentCustomResourceName;
+
+        [DTWAINNativeFunction("DTWAIN_GetCurrentCustomResourceName")]
+        private readonly DTWAIN_GetCurrentCustomResourceNameDelegate_overload _DTWAIN_GetCurrentCustomResourceName_overload; 
+
         [DTWAINNativeFunction("DTWAIN_GetCurrentFileName")]
         private readonly DTWAIN_GetCurrentFileNameDelegate  _DTWAIN_GetCurrentFileName;
 
@@ -4240,6 +4229,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetLanguage")]
         private readonly DTWAIN_GetLanguageDelegate  _DTWAIN_GetLanguage;
+
+        [DTWAINNativeFunction("DTWAIN_GetLastCapEnumIndices")]
+        private readonly DTWAIN_GetLastCapEnumIndicesDelegate  _DTWAIN_GetLastCapEnumIndices;
 
         [DTWAINNativeFunction("DTWAIN_GetLastError")]
         private readonly DTWAIN_GetLastErrorDelegate  _DTWAIN_GetLastError;
@@ -4559,9 +4551,6 @@
         [DTWAINNativeFunction("DTWAIN_GetSourceVersionNumber")]
         private readonly DTWAIN_GetSourceVersionNumberDelegate  _DTWAIN_GetSourceVersionNumber;
 
-        [DTWAINNativeFunction("DTWAIN_GetStaticLibVersion")]
-        private readonly DTWAIN_GetStaticLibVersionDelegate  _DTWAIN_GetStaticLibVersion;
-
         [DTWAINNativeFunction("DTWAIN_GetTempFileDirectory")]
         private readonly DTWAIN_GetTempFileDirectoryDelegate  _DTWAIN_GetTempFileDirectory;
 
@@ -4616,9 +4605,6 @@
         [DTWAINNativeFunction("DTWAIN_GetTwainNameFromConstantEx")]
         private readonly DTWAIN_GetTwainNameFromConstantExDelegate_overload _DTWAIN_GetTwainNameFromConstantEx_overload; 
 
-        [DTWAINNativeFunction("DTWAIN_GetTwainTimeout")]
-        private readonly DTWAIN_GetTwainTimeoutDelegate  _DTWAIN_GetTwainTimeout;
-
         [DTWAINNativeFunction("DTWAIN_GetVersion")]
         private readonly DTWAIN_GetVersionDelegate  _DTWAIN_GetVersion;
 
@@ -4672,9 +4658,6 @@
 
         [DTWAINNativeFunction("DTWAIN_InitExtImageInfo")]
         private readonly DTWAIN_InitExtImageInfoDelegate  _DTWAIN_InitExtImageInfo;
-
-        [DTWAINNativeFunction("DTWAIN_InitImageFileAppend")]
-        private readonly DTWAIN_InitImageFileAppendDelegate  _DTWAIN_InitImageFileAppend;
 
         [DTWAINNativeFunction("DTWAIN_InitOCRInterface")]
         private readonly DTWAIN_InitOCRInterfaceDelegate  _DTWAIN_InitOCRInterface;
@@ -5567,9 +5550,6 @@
         [DTWAINNativeFunction("DTWAIN_SetPrinterSuffixString")]
         private readonly DTWAIN_SetPrinterSuffixStringDelegate  _DTWAIN_SetPrinterSuffixString;
 
-        [DTWAINNativeFunction("DTWAIN_SetQueryCapSupport")]
-        private readonly DTWAIN_SetQueryCapSupportDelegate  _DTWAIN_SetQueryCapSupport;
-
         [DTWAINNativeFunction("DTWAIN_SetResolution")]
         private readonly DTWAIN_SetResolutionDelegate  _DTWAIN_SetResolution;
 
@@ -5624,9 +5604,6 @@
         [DTWAINNativeFunction("DTWAIN_SetTwainMode")]
         private readonly DTWAIN_SetTwainModeDelegate  _DTWAIN_SetTwainMode;
 
-        [DTWAINNativeFunction("DTWAIN_SetTwainTimeout")]
-        private readonly DTWAIN_SetTwainTimeoutDelegate  _DTWAIN_SetTwainTimeout;
-
         [DTWAINNativeFunction("DTWAIN_SetUpdateDibProc")]
         private readonly DTWAIN_SetUpdateDibProcDelegate  _DTWAIN_SetUpdateDibProc;
 
@@ -5662,12 +5639,6 @@
 
         [DTWAINNativeFunction("DTWAIN_SysInitialize")]
         private readonly DTWAIN_SysInitializeDelegate  _DTWAIN_SysInitialize;
-
-        [DTWAINNativeFunction("DTWAIN_SysInitializeEx")]
-        private readonly DTWAIN_SysInitializeExDelegate  _DTWAIN_SysInitializeEx;
-
-        [DTWAINNativeFunction("DTWAIN_SysInitializeEx2")]
-        private readonly DTWAIN_SysInitializeEx2Delegate  _DTWAIN_SysInitializeEx2;
 
         [DTWAINNativeFunction("DTWAIN_SysInitializeNoBlocking")]
         private readonly DTWAIN_SysInitializeNoBlockingDelegate  _DTWAIN_SysInitializeNoBlocking;
@@ -5719,20 +5690,11 @@
         public  DTWAIN_ARRAY DTWAIN_AcquireToClipboard(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int nTransferMode, int bDiscardDibs, int bShowUI, int bCloseSource, ref int pStatus)
         => _DTWAIN_AcquireToClipboard(Source, PixelType, nMaxPages, nTransferMode, bDiscardDibs, bShowUI, bCloseSource, ref pStatus);
 
-        public  int DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, int ExtImageInfo)
-        => _DTWAIN_AddExtImageInfoQuery(Source, ExtImageInfo);
-
-        public  int DTWAIN_AddFileToAppend([MarshalAs(UnmanagedType.LPTStr)] string szFile)
-        => _DTWAIN_AddFileToAppend(szFile);
-
         public  int DTWAIN_AddPDFText(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, uint Flags)
         => _DTWAIN_AddPDFText(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);
 
         public  int DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement)
         => _DTWAIN_AddPDFTextElement(Source, TextElement);
-
-        public  int DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, int transformType)
-        => _DTWAIN_AddPDFTextEx(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, rotationAngle, skewAngleX, skewAngleY, scalingX, scalingY, transformType);
 
         public  int DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, [MarshalAs(UnmanagedType.LPTStr)] string fontSize, int colorRGB, int renderMode, [MarshalAs(UnmanagedType.LPTStr)] string scaling, [MarshalAs(UnmanagedType.LPTStr)] string charSpacing, [MarshalAs(UnmanagedType.LPTStr)] string wordSpacing, [MarshalAs(UnmanagedType.LPTStr)] string strokeWidth, uint Flags)
         => _DTWAIN_AddPDFTextString(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);
@@ -5988,9 +5950,6 @@
 
         public  int DTWAIN_ArrayGetType(DTWAIN_ARRAY pArray)
         => _DTWAIN_ArrayGetType(pArray);
-
-        public  DTWAIN_ARRAY DTWAIN_ArrayInit()
-        => _DTWAIN_ArrayInit();
 
         public  int DTWAIN_ArrayInsertAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant)
         => _DTWAIN_ArrayInsertAt(pArray, nWhere, pVariant);
@@ -6880,6 +6839,12 @@
         public  HANDLE DTWAIN_GetCurrentAcquiredImage(DTWAIN_SOURCE Source)
         => _DTWAIN_GetCurrentAcquiredImage(Source);
 
+        public  int DTWAIN_GetCurrentCustomResourceName([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nMaxLen)
+        => _DTWAIN_GetCurrentCustomResourceName(lpszOut, nMaxLen);
+
+        public  int DTWAIN_GetCurrentCustomResourceName (System.IntPtr lpszOut, int nMaxLen)
+        => _DTWAIN_GetCurrentCustomResourceName_overload(lpszOut, nMaxLen);
+
         public  int DTWAIN_GetCurrentFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int MaxLen)
         => _DTWAIN_GetCurrentFileName(Source, szName, MaxLen);
 
@@ -7056,6 +7021,9 @@
 
         public  int DTWAIN_GetLanguage()
         => _DTWAIN_GetLanguage();
+
+        public  int DTWAIN_GetLastCapEnumIndices(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex)
+        => _DTWAIN_GetLastCapEnumIndices(Source, ref pCurrentIndex, ref pDefaultIndex);
 
         public  int DTWAIN_GetLastError()
         => _DTWAIN_GetLastError();
@@ -7375,9 +7343,6 @@
         public  int DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor)
         => _DTWAIN_GetSourceVersionNumber(Source, ref pMajor, ref pMinor);
 
-        public  int DTWAIN_GetStaticLibVersion()
-        => _DTWAIN_GetStaticLibVersion();
-
         public  int DTWAIN_GetTempFileDirectory([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFilePath, int nMaxLen)
         => _DTWAIN_GetTempFileDirectory(szFilePath, nMaxLen);
 
@@ -7432,9 +7397,6 @@
         public  int DTWAIN_GetTwainNameFromConstantEx (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
         => _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize);
 
-        public  int DTWAIN_GetTwainTimeout()
-        => _DTWAIN_GetTwainTimeout();
-
         public  int DTWAIN_GetVersion(ref int lpMajor, ref int lpMinor, ref int lpVersionType)
         => _DTWAIN_GetVersion(ref lpMajor, ref lpMinor, ref lpVersionType);
 
@@ -7488,9 +7450,6 @@
 
         public  int DTWAIN_InitExtImageInfo(DTWAIN_SOURCE Source)
         => _DTWAIN_InitExtImageInfo(Source);
-
-        public  int DTWAIN_InitImageFileAppend([MarshalAs(UnmanagedType.LPTStr)] string szFile, int fType)
-        => _DTWAIN_InitImageFileAppend(szFile, fType);
 
         public  int DTWAIN_InitOCRInterface()
         => _DTWAIN_InitOCRInterface();
@@ -8383,9 +8342,6 @@
         public  int DTWAIN_SetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Suffix)
         => _DTWAIN_SetPrinterSuffixString(Source, Suffix);
 
-        public  int DTWAIN_SetQueryCapSupport(int bSet)
-        => _DTWAIN_SetQueryCapSupport(bSet);
-
         public  int DTWAIN_SetResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT Resolution)
         => _DTWAIN_SetResolution(Source, Resolution);
 
@@ -8440,9 +8396,6 @@
         public  int DTWAIN_SetTwainMode(int lAcquireMode)
         => _DTWAIN_SetTwainMode(lAcquireMode);
 
-        public  int DTWAIN_SetTwainTimeout(int milliseconds)
-        => _DTWAIN_SetTwainTimeout(milliseconds);
-
         public  DTwainDIBUpdateProc DTWAIN_SetUpdateDibProc(DTwainDIBUpdateProc DibProc)
         => _DTWAIN_SetUpdateDibProc(DibProc);
 
@@ -8478,12 +8431,6 @@
 
         public  DTWAIN_HANDLE DTWAIN_SysInitialize()
         => _DTWAIN_SysInitialize();
-
-        public  DTWAIN_HANDLE DTWAIN_SysInitializeEx([MarshalAs(UnmanagedType.LPTStr)] string szINIPath)
-        => _DTWAIN_SysInitializeEx(szINIPath);
-
-        public  DTWAIN_HANDLE DTWAIN_SysInitializeEx2([MarshalAs(UnmanagedType.LPTStr)] string szINIPath, [MarshalAs(UnmanagedType.LPTStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPTStr)] string szLangResourcePath)
-        => _DTWAIN_SysInitializeEx2(szINIPath, szImageDLLPath, szLangResourcePath);
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking()
         => _DTWAIN_SysInitializeNoBlocking();

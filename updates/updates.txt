@@ -1,5 +1,75 @@
 DTWAIN Version changes
 
+5.10.0
+
+- The main twain resource files, twaininfo.txt, dtwain32.ini, and dtwain64.ini are now
+  embedded into the DTWAIN DLL files.  This will remove the mandatory prerequisite that these
+  resource files are available when DTWAIN_SysInitialize() is called.  
+
+  For most DTWAIN users, the only difference would be that the twaininfo.txt, dtwain32.ini, 
+  and dtwain64.ini as external files are no longer necessary for DTWAIN_SysInitialize() to 
+  correctly initialize DTWAIN.
+
+  If there already is an existing dtwain32.ini or dtwain64.ini file that has been customized, the 
+  external settings in these INI files are merged into the default, embedded INI settings when
+  DTWAIN_SysInitialize() is called.
+
+  Note that the foreign language resources, for example, twainresourcestrings_french.txt, will still be 
+  required to be external files.
+
+- The DTWAIN_SetDefaultSource() function will now issue an error code of DTWAIN_ERR_DSMVERSION_NOTSUPPORTED (-1019)
+  and return FALSE if this function is called on a TWAIN DSM version that is less than 2.x (in other words, 
+  if TWAIN_32.DLL is the current TWAIN Data Source Manager in use).  
+
+  The TWAIN specification does not allow setting the default TWAIN Source for DSM versions less than 2.x, thus 
+  issuing this call will result in an error.
+
+- Fix issue with DTWAIN_SetAppInfo() possibly resetting the TWAIN application ID, causing
+  issues when selecting a TWAIN Source using DTWAIN_SelectSource().
+
+- Fix issue if DTWAIN_EnumSources() is called before a TWAIN session has been started.  
+  The symptoms are subsequent calls to DTWAIN_SelectSource() (the default TWAIN Select Source 
+  dialog) may not select the Source.  Calls to other Source selection functions were not
+  affected by this defect.
+
+- Removed the following obsolete and undocumented DTWAIN API functions:
+
+    DTWAIN_AddExtImageInfoQuery 
+    DTWAIN_AddFileToAppend      
+    DTWAIN_AddFileToAppendA     
+    DTWAIN_AddFileToAppendW     
+    DTWAIN_AddPDFTextEx        
+    DTWAIN_AddPDFTextExA       
+    DTWAIN_AddPDFTextExW       
+    DTWAIN_ArrayInit
+    DTWAIN_GetStaticLibVersion
+    DTWAIN_GetTwainTimeout
+    DTWAIN_InitImageFileAppend       
+    DTWAIN_InitImageFileAppendA      
+    DTWAIN_InitImageFileAppendW      
+    DTWAIN_SetQueryCapSupport
+    DTWAIN_SetTwainTimeout
+    DTWAIN_SysInitializeEx                       
+    DTWAIN_SysInitializeEx2                      
+    DTWAIN_SysInitializeEx2A                     
+    DTWAIN_SysInitializeEx2W                     
+    DTWAIN_SysInitializeExA                      
+    DTWAIN_SysInitializeExW         
+
+- For DTWDEMO, added PDF option to stamp page number on each PDF page acquired.             
+
+- Upgraded following internal image related libraries:
+
+      libtiff --> 4.7.2
+      zlib    --> 1.3.2
+
+
+
+5.9.3-Update-1
+
+- Update python language bindings to address issues with 32-bit callback functions.
+
+
 5.9.3
 
 - Allow DTWAIN_AcquireFile() to accept file names with embedded space characters.

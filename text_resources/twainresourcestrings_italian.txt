@@ -106,6 +106,7 @@
 1089 DTWAIN DLL non può essere caricata o non esiste
 1090 La DLL DTWAIN non è della versione corretta
 1091 La sessione TWAIN è attualmente attiva
+1092 L'operazione richiede TWAIN DSM 2.x o successivo
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

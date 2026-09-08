@@ -92,6 +92,11 @@
 #define IDM_ACQUIREFILE_WINDOWSMETAFILE     453
 #define IDM_ACQUIREFILE_WIRELESSBITMAP      454
 #define IDM_ACQUIREFILE_POSTSCRIPTLEVEL3    455
+#define IDM_ACQUIREFILE_PDF_RC4_40BIT       456
+#define IDM_ACQUIREFILE_PDF_RC4_128BIT      457
+#define IDM_ACQUIREFILE_PDF_AES_128BIT      458 
+#define IDM_ACQUIREFILE_PDF_AES_256BIT      459
+#define IDM_ACQUIREFILE_PDF_ASCII85         460
 
 #define IDD_dlgEnterSourceName              1000
 #define IDC_edSourceName                    1001
@@ -166,6 +171,19 @@
 #define IDC_edSaveFileName                  8024
 #define IDC_btnCapabilityErrors             8025
 #define IDD_dlgBadCapabilities              8026
+#define IDD_dlgPDFOptions                   8027
+#define IDC_edPDFTitle                      8028  
+#define IDC_edPDFSubject                    8029
+#define IDC_edPDFAuthor                     8030 
+#define IDC_edPDFCreator                    8031
+#define IDC_edPDFKeywords                   8032   
+#define IDC_edPDFProducer                   8033   
+#define IDC_txtProducer                     8034  
+#define IDC_edUserPassword                  8035  
+#define IDC_edOwnerPassword                 8036  
+#define IDC_txtUserPassword                 8037  
+#define IDC_txtOwnerPassword                8038  
+#define IDC_chkStampPageNumbers             8039
 
 #define IDD_dlgEnterBlankThreshold     9000
 #define IDC_edBlankThresholdPct        9001
