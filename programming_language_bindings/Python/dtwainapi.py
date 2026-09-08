@@ -4121,16 +4121,16 @@ def setup_unicode(theDLL):
 def setup_ansi(theDLL):
      # set up the callback types
      from ctypes.wintypes import WPARAM, LPARAM
-     theDLL.SETCALLBACK_TYPE = ct.CFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_long)
-     theDLL.SETCALLBACK64_TYPE = ct.CFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_int64)
-     theDLL.SETERRORPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
-     theDLL.SETERRORPROC64_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
-     theDLL.SETLOGGERPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
-     theDLL.SETLOGGERPROCA_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
-     theDLL.SETLOGGERPROCW_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_wchar_p, ct.c_int64)
-     theDLL.ERRORPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
-     theDLL.ERRORPROC64_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
-     theDLL.DIBUPDATEPROC_TYPE = ct.CFUNCTYPE(ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_void_p)
+     theDLL.SETCALLBACK_TYPE = ct.WINFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_long)
+     theDLL.SETCALLBACK64_TYPE = ct.WINFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_int64)
+     theDLL.SETERRORPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
+     theDLL.SETERRORPROC64_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
+     theDLL.SETLOGGERPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
+     theDLL.SETLOGGERPROCA_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
+     theDLL.SETLOGGERPROCW_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_wchar_p, ct.c_int64)
+     theDLL.ERRORPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
+     theDLL.ERRORPROC64_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
+     theDLL.DIBUPDATEPROC_TYPE = ct.WINFUNCTYPE(ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_void_p)
 
      #set up the return types
      theDLL.DTWAIN_AcquireAudioFile.restype = ct.c_long
