@@ -1,5 +1,21 @@
 DTWAIN Version changes
 
+5.9.4
+
+- Fix issue with DTWAIN_SetAppInfo() possibly resetting the TWAIN application ID, causing
+  issues when selecting a TWAIN Source using DTWAIN_SelectSource().
+
+- Fix issue if DTWAIN_EnumSources() is called before a TWAIN session has been started.  
+  The symptoms are subsequent calls to DTWAIN_SelectSource() (the default TWAIN Select Source 
+  dialog) may not select the Source.  Calls to other Source selection functions were not
+  affected by this defect.
+
+
+5.9.3-Update-1
+
+- Update python language bindings to address issues with 32-bit callback functions.
+
+
 5.9.3
 
 - Allow DTWAIN_AcquireFile() to accept file names with embedded space characters.
