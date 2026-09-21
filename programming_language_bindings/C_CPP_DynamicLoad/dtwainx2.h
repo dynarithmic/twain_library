@@ -30,6 +30,11 @@
 #include <winconst.h>
 #include <dtwaindefs.h>
 #include <dtwain_version.h>
+#ifdef __cplusplus
+    #include <iostream>
+#else
+    #include <stdio.h>
+#endif
 #include <dtwpdft.h>
 #ifndef DTWAIN_NOIMPORTLIB
     #define DTWAIN_NOIMPORTLIB
@@ -573,6 +578,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETIMAGEINFOFUNC)                         
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETIMAGEINFOSTRINGFUNC)                   (DTWAIN_SOURCE, LPTSTR, LPTSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETIMAGEINFOSTRINGAFUNC)                  (DTWAIN_SOURCE, LPSTR, LPSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETIMAGEINFOSTRINGWFUNC)                  (DTWAIN_SOURCE, LPWSTR, LPWSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETIMAGELAYOUTINFOFUNC)                   (DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETJOBCONTROLFUNC)                        (DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL);
 typedef LONG (DLLENTRY_DEF * D_GETJOBCONTROLEXFUNC)                             (DTWAIN_SOURCE, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETJPEGVALUESFUNC)                        (DTWAIN_SOURCE, LPLONG, LPLONG);
@@ -650,6 +656,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPATCHCODEMAXRETRIESFUNC)               
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPATCHCODEPRIORITIESFUNC)               (DTWAIN_SOURCE, LPDTWAIN_ARRAY);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPATCHCODESEARCHMODEFUNC)               (DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPATCHCODETIMEOUTFUNC)                  (DTWAIN_SOURCE, LPDWORD, DTWAIN_BOOL);
+typedef LONG (DLLENTRY_DEF * D_GETPENDINGXFERCOUNTFUNC)                         (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPIXELFLAVORFUNC)                       (DTWAIN_SOURCE, LPLONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPIXELTYPEFUNC)                         (DTWAIN_SOURCE, LPLONG, LPLONG, DTWAIN_BOOL);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETPRINTERFUNC)                           (DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL);
@@ -680,6 +687,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETROTATIONSTRINGWFUNC)                   
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEFUNC)                             (DTWAIN_SOURCE, LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEAFUNC)                            (DTWAIN_SOURCE, LPSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETSAVEFILENAMEWFUNC)                            (DTWAIN_SOURCE, LPWSTR, LONG);
+typedef LONG (DLLENTRY_DEF * D_GETSAVEFILETYPEFUNC)                             (DTWAIN_SOURCE);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSFUNC)                           (LPTSTR, LONG, LONG, BOOL);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSAFUNC)                          (LPSTR, LONG, LONG, BOOL);
 typedef LONG (DLLENTRY_DEF * D_GETSESSIONDETAILSWFUNC)                          (LPWSTR, LONG, LONG, BOOL);
@@ -1165,6 +1173,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETROTATIONSTRINGWFUNC)                   
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSAVEFILENAMEFUNC)                      (DTWAIN_SOURCE, LPCTSTR);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSAVEFILENAMEAFUNC)                     (DTWAIN_SOURCE, LPCSTR);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSAVEFILENAMEWFUNC)                     (DTWAIN_SOURCE, LPCWSTR);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSAVEFILETYPEFUNC)                      (DTWAIN_SOURCE, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSHADOWFUNC)                            (DTWAIN_SOURCE, DTWAIN_FLOAT);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSHADOWSTRINGFUNC)                      (DTWAIN_SOURCE, LPCTSTR);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_SETSHADOWSTRINGAFUNC)                     (DTWAIN_SOURCE, LPCSTR);
@@ -1759,6 +1768,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETIMAGEINFOSTRINGFUNC                         DTWAIN_GetImageInfoString;
     STATIC D_GETIMAGEINFOSTRINGAFUNC                        DTWAIN_GetImageInfoStringA;
     STATIC D_GETIMAGEINFOSTRINGWFUNC                        DTWAIN_GetImageInfoStringW;
+    STATIC D_GETIMAGELAYOUTINFOFUNC                         DTWAIN_GetImageLayoutInfo;
     STATIC D_GETJOBCONTROLFUNC                              DTWAIN_GetJobControl;
     STATIC D_GETJOBCONTROLEXFUNC                            DTWAIN_GetJobControlEx;
     STATIC D_GETJPEGVALUESFUNC                              DTWAIN_GetJpegValues;
@@ -1836,6 +1846,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETPATCHCODEPRIORITIESFUNC                     DTWAIN_GetPatchcodePriorities;
     STATIC D_GETPATCHCODESEARCHMODEFUNC                     DTWAIN_GetPatchcodeSearchMode;
     STATIC D_GETPATCHCODETIMEOUTFUNC                        DTWAIN_GetPatchcodeTimeOut;
+    STATIC D_GETPENDINGXFERCOUNTFUNC                        DTWAIN_GetPendingXferCount;
     STATIC D_GETPIXELFLAVORFUNC                             DTWAIN_GetPixelFlavor;
     STATIC D_GETPIXELTYPEFUNC                               DTWAIN_GetPixelType;
     STATIC D_GETPRINTERFUNC                                 DTWAIN_GetPrinter;
@@ -1866,6 +1877,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETSAVEFILENAMEFUNC                            DTWAIN_GetSaveFileName;
     STATIC D_GETSAVEFILENAMEAFUNC                           DTWAIN_GetSaveFileNameA;
     STATIC D_GETSAVEFILENAMEWFUNC                           DTWAIN_GetSaveFileNameW;
+    STATIC D_GETSAVEFILETYPEFUNC                            DTWAIN_GetSaveFileType;
     STATIC D_GETSESSIONDETAILSFUNC                          DTWAIN_GetSessionDetails;
     STATIC D_GETSESSIONDETAILSAFUNC                         DTWAIN_GetSessionDetailsA;
     STATIC D_GETSESSIONDETAILSWFUNC                         DTWAIN_GetSessionDetailsW;
@@ -2351,6 +2363,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_SETSAVEFILENAMEFUNC                            DTWAIN_SetSaveFileName;
     STATIC D_SETSAVEFILENAMEAFUNC                           DTWAIN_SetSaveFileNameA;
     STATIC D_SETSAVEFILENAMEWFUNC                           DTWAIN_SetSaveFileNameW;
+    STATIC D_SETSAVEFILETYPEFUNC                            DTWAIN_SetSaveFileType;
     STATIC D_SETSHADOWFUNC                                  DTWAIN_SetShadow;
     STATIC D_SETSHADOWSTRINGFUNC                            DTWAIN_SetShadowString;
     STATIC D_SETSHADOWSTRINGAFUNC                           DTWAIN_SetShadowStringA;
@@ -2457,16 +2470,6 @@ public:
 #else
 } DYNDTWAIN_API;
 int InitDTWAINInterface(DYNDTWAIN_API* pApi, HMODULE h);
-#endif
-
-#ifdef IGNORE_FUNC_ERRORS
-    #define DTWAINAPI_ASSERT(x) (x)
-#else
-#ifndef _DEBUG
-    #define DTWAINAPI_ASSERT(x) { if (!(x)) return 0; }
-#else
-    #define DTWAINAPI_ASSERT(x) assert(x);
-#endif
 #endif
 #endif
 

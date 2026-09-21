@@ -42,7 +42,7 @@ begin
       { Initialize DTWAIN }
       if (DTWAIN_SysInitialize <> 0) then
       begin
-           SelectedSource := DTWAIN_SelectSource2A(0, 'Select Source',0,0,DTWAIN_DLG_CENTER_SCREEN);
+           SelectedSource := DTWAIN_SelectSource2A(0, 'Select Source',0,0, DTWAIN_DLG_CENTER_CURRENT_MONITOR);
            if SelectedSource <> 0 then
            begin
               { Open the source }

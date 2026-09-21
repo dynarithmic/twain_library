@@ -435,6 +435,7 @@ DTWAIN_TN_ACQUIREPAGESSTOPPING = 1306
 DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307
 DTWAIN_TN_QUERYUPDATEDIBORIG = 1308
 DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309
+DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310
 DTWAIN_PDFOCR_CLEANTEXT1 = 1
 DTWAIN_PDFOCR_CLEANTEXT2 = 2
 DTWAIN_MODAL = 0
@@ -688,6 +689,21 @@ DTWAIN_LANGSPANISH = 11
 DTWAIN_LANGSWEDISH = 12
 DTWAIN_LANGUSAENGLISH = 13
 DTWAIN_NO_ERROR = (0)
+DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501)
+DTWAIN_ERR_ALLOCATION_FAILURE = (-502)
+DTWAIN_ERR_INVALID_DLLHANDLE = (-503)
+DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504)
+DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505)
+DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506)
+DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507)
+DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508)
+DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509)
+DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510)
+DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511)
+DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512)
+DTWAIN_ERR_XYRESOLUTION_MATCH = (-527)
+DTWAIN_ERR_INVALID_FILENAME = (-528)
+DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532)
 DTWAIN_ERR_FIRST = (-1000)
 DTWAIN_ERR_BAD_HANDLE = (-1001)
 DTWAIN_ERR_BAD_SOURCE = (-1002)
@@ -1549,6 +1565,7 @@ DTWAIN_PDFTEXT_FIRSTPAGE = 0x00000008
 DTWAIN_PDFTEXT_LASTPAGE = 0x00000010
 DTWAIN_PDFTEXT_CURRENTPAGE = 0x00000020
 DTWAIN_PDFTEXT_DISABLED = 0x00000040
+DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x00000080
 DTWAIN_PDFTEXT_TOPLEFT = 0x00000100
 DTWAIN_PDFTEXT_TOPRIGHT = 0x00000200
 DTWAIN_PDFTEXT_HORIZCENTER = 0x00000400
@@ -1570,7 +1587,6 @@ DTWAIN_PDFTEXT_NOABSPOSITION = 0x08000000
 DTWAIN_PDFTEXT_NOROTATION = 0x10000000
 DTWAIN_PDFTEXT_NOSKEWING = 0x20000000
 DTWAIN_PDFTEXT_NOSCALINGXY = 0x40000000
-DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x80000000
 DTWAIN_PDFTEXT_IGNOREALL = 0xFFF00000
 DTWAIN_FONT_COURIER = 0
 DTWAIN_FONT_COURIERBOLD = 1
@@ -2353,6 +2369,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoString.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
+     theDLL.DTWAIN_GetImageLayoutInfo.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
@@ -2430,6 +2447,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPatchcodePriorities.restype = ct.c_long
      theDLL.DTWAIN_GetPatchcodeSearchMode.restype = ct.c_long
      theDLL.DTWAIN_GetPatchcodeTimeOut.restype = ct.c_long
+     theDLL.DTWAIN_GetPendingXferCount.restype = ct.c_long
      theDLL.DTWAIN_GetPixelFlavor.restype = ct.c_long
      theDLL.DTWAIN_GetPixelType.restype = ct.c_long
      theDLL.DTWAIN_GetPrinter.restype = ct.c_long
@@ -2460,6 +2478,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameW.restype = ct.c_long
+     theDLL.DTWAIN_GetSaveFileType.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetails.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsA.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsW.restype = ct.c_long
@@ -2943,6 +2962,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_SetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_SetSaveFileNameW.restype = ct.c_long
+     theDLL.DTWAIN_SetSaveFileType.restype = ct.c_long
      theDLL.DTWAIN_SetShadow.restype = ct.c_long
      theDLL.DTWAIN_SetShadowString.restype = ct.c_long
      theDLL.DTWAIN_SetShadowStringA.restype = ct.c_long
@@ -3506,6 +3526,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoString.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetImageLayoutInfo.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -3578,6 +3599,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetPatchcodePriorities.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetPatchcodeSearchMode.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPatchcodeTimeOut.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong), ct.c_long]
+     theDLL.DTWAIN_GetPendingXferCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPixelFlavor.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetPixelType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPrinter.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
@@ -3607,6 +3629,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetSaveFileName.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetSaveFileType.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSessionDetails.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsA.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsW.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
@@ -4073,6 +4096,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetSaveFileName.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_SetSaveFileType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetShadow.argtypes = [ct.c_void_p, ct.c_double]
      theDLL.DTWAIN_SetShadowString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetShadowStringA.argtypes = [ct.c_void_p, ct.c_char_p]
@@ -4121,16 +4145,16 @@ def setup_unicode(theDLL):
 def setup_ansi(theDLL):
      # set up the callback types
      from ctypes.wintypes import WPARAM, LPARAM
-     theDLL.SETCALLBACK_TYPE = ct.WINFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_long)
-     theDLL.SETCALLBACK64_TYPE = ct.WINFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_int64)
-     theDLL.SETERRORPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
-     theDLL.SETERRORPROC64_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
-     theDLL.SETLOGGERPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
-     theDLL.SETLOGGERPROCA_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
-     theDLL.SETLOGGERPROCW_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_wchar_p, ct.c_int64)
-     theDLL.ERRORPROC_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
-     theDLL.ERRORPROC64_TYPE = ct.WINFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
-     theDLL.DIBUPDATEPROC_TYPE = ct.WINFUNCTYPE(ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_void_p)
+     theDLL.SETCALLBACK_TYPE = ct.CFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_long)
+     theDLL.SETCALLBACK64_TYPE = ct.CFUNCTYPE(ct.c_long, WPARAM, LPARAM, ct.c_int64)
+     theDLL.SETERRORPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
+     theDLL.SETERRORPROC64_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
+     theDLL.SETLOGGERPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
+     theDLL.SETLOGGERPROCA_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_char_p, ct.c_int64)
+     theDLL.SETLOGGERPROCW_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_wchar_p, ct.c_int64)
+     theDLL.ERRORPROC_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_long)
+     theDLL.ERRORPROC64_TYPE = ct.CFUNCTYPE(ct.c_long, ct.c_long, ct.c_int64)
+     theDLL.DIBUPDATEPROC_TYPE = ct.CFUNCTYPE(ct.c_void_p, ct.c_void_p, ct.c_long, ct.c_void_p)
 
      #set up the return types
      theDLL.DTWAIN_AcquireAudioFile.restype = ct.c_long
@@ -4665,6 +4689,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoString.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
+     theDLL.DTWAIN_GetImageLayoutInfo.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
@@ -4742,6 +4767,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPatchcodePriorities.restype = ct.c_long
      theDLL.DTWAIN_GetPatchcodeSearchMode.restype = ct.c_long
      theDLL.DTWAIN_GetPatchcodeTimeOut.restype = ct.c_long
+     theDLL.DTWAIN_GetPendingXferCount.restype = ct.c_long
      theDLL.DTWAIN_GetPixelFlavor.restype = ct.c_long
      theDLL.DTWAIN_GetPixelType.restype = ct.c_long
      theDLL.DTWAIN_GetPrinter.restype = ct.c_long
@@ -4772,6 +4798,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_GetSaveFileNameW.restype = ct.c_long
+     theDLL.DTWAIN_GetSaveFileType.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetails.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsA.restype = ct.c_long
      theDLL.DTWAIN_GetSessionDetailsW.restype = ct.c_long
@@ -5255,6 +5282,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetSaveFileName.restype = ct.c_long
      theDLL.DTWAIN_SetSaveFileNameA.restype = ct.c_long
      theDLL.DTWAIN_SetSaveFileNameW.restype = ct.c_long
+     theDLL.DTWAIN_SetSaveFileType.restype = ct.c_long
      theDLL.DTWAIN_SetShadow.restype = ct.c_long
      theDLL.DTWAIN_SetShadowString.restype = ct.c_long
      theDLL.DTWAIN_SetShadowStringA.restype = ct.c_long
@@ -5818,6 +5846,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoString.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetImageLayoutInfo.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -5890,6 +5919,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetPatchcodePriorities.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetPatchcodeSearchMode.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPatchcodeTimeOut.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong), ct.c_long]
+     theDLL.DTWAIN_GetPendingXferCount.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetPixelFlavor.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetPixelType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetPrinter.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
@@ -5919,6 +5949,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetSaveFileName.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetSaveFileType.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetSessionDetails.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsA.argtypes = [ct.c_char_p, ct.c_long, ct.c_long, ct.c_long]
      theDLL.DTWAIN_GetSessionDetailsW.argtypes = [ct.c_wchar_p, ct.c_long, ct.c_long, ct.c_long]
@@ -6385,6 +6416,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetSaveFileName.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetSaveFileNameA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetSaveFileNameW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_SetSaveFileType.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_SetShadow.argtypes = [ct.c_void_p, ct.c_double]
      theDLL.DTWAIN_SetShadowString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetShadowStringA.argtypes = [ct.c_void_p, ct.c_char_p]

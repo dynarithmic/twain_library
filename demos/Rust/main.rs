@@ -30,7 +30,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>>{
     // plus allows us to title the dialog as "Rust demo"
     let mut c_string = CString:: new("Rust demo").unwrap();
     let twain_source = api_func.DTWAIN_SelectSource2A(ptr::null(), c_string.as_ptr(),
-                                                      0, 0, DTwainAPI::DTWAIN_DLG_CENTER_SCREEN);
+                                                      0, 0, DTwainAPI::DTWAIN_DLG_CENTER_CURRENT_MONITOR);
 
     // If a source was selected, display the name
     if twain_source.is_null()
@@ -55,10 +55,10 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>>{
             /* Example usage of DTWAIN_ARRAY:
              Get the device capabilities supported by the device */
 
-            /* We will use the Ex version of DTWAIN_EnumSupportedCaps, since it
+            /* We will use the Ex2 version of DTWAIN_EnumSupportedCaps, since it
                is easier to handle the returned DTWAIN_ARRAY.
              */
-            let allcaps = api_func.DTWAIN_EnumSupportedCapsEx(twain_source);
+            let allcaps = api_func.DTWAIN_EnumSupportedCapsEx2(twain_source);
 
             // Get the number of items in the array
             let arrcount = api_func.DTWAIN_ArrayGetCount(allcaps);
@@ -70,7 +70,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>>{
             for i in 0..arrcount
             {
                 api_func.DTWAIN_ArrayGetAtLong(allcaps, i, ptr);
-                api_func.DTWAIN_GetNameFromCapA(long_val, char_buffer, 256);
+                api_func.DTWAIN_GetNameFromCapA( long_val, char_buffer, 256);
                 let actual_capname = String::from(CStr::from_ptr(char_buffer as *const c_char).to_str().unwrap());
                 println!("Capability {}: {}  Value: {}", i + 1, actual_capname, long_val);
             }

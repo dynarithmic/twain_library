@@ -1,19 +1,19 @@
 0 Sin errores
-1 Ventana nula Maneja
-2 El Fracaso De Asignación De Memoria
-3 Los DLL inválido Maneja
-4 Origena Inválida Maneja
-5 Los DLL TWAIN no Funda
-6 Le Invalid a la TWAIN DLL
-7 Sesión Inválida Maneja
-8 Le Invalid A Twain Gerente
-9 No le podríamos cargar a la TWAIN DLL
-10 No le podríamos abrir a TWAIN origen
-11 No le podríamos tapar a TWAIN origen
-12 Origen de TWAIN abre a ejecutar el mandato adelante.
-27 No podríamos completar la scan.   Los X/Y o los las Resoluciones sienta para los valores diferentes
-28 Inválido Lima Nombre Especificado
-32 triplete TWAIN no ejecutado. El administrador de Twain no es válido.
+501 Ventana nula Maneja
+502 El Fracaso De Asignación De Memoria
+503 Los DLL inválido Maneja
+504 Origena Inválida Maneja
+505 Los DLL TWAIN no Funda
+506 Le Invalid a la TWAIN DLL
+507 Sesión Inválida Maneja
+508 Le Invalid A Twain Gerente
+509 No le podríamos cargar a la TWAIN DLL
+510 No le podríamos abrir a TWAIN origen
+511 No le podríamos tapar a TWAIN origen
+512 Origen de TWAIN abre a ejecutar el mandato adelante.
+527 No podríamos completar la scan.   Los X/Y o los las Resoluciones sienta para los valores diferentes
+528 Inválido Lima Nombre Especificado
+532 triplete TWAIN no ejecutado. El administrador de Twain no es válido.
 1000 ***
 1001 Los  inválido DTWAIN_HANDLE
 1002 Invalid los DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 La DLL DTWAIN no es la versión correcta
 1091 La sesión TWAIN está activa actualmente
 1092 La operación requiere TWAIN DSM 2.x o posterior
+1093 El contenedor TWON_ENUMERATOR no se utilizó para esta operación.
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

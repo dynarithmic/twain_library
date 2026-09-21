@@ -1,19 +1,19 @@
 0 Sem Erro  
-1 Manipulador de Janela NULL  
-2 Falha na Alocação de Memória  
-3 Manipulador de DLL Inválido  
-4 Manipulador de Fonte Inválido  
-5 Gerenciador de Fonte de Dados TWAIN (DSM) Não Encontrado  
-6 TWAIN.DLL Inválido  
-7 Manipulador de Sessão Inválido  
-8 Gerenciador Twain Inválido  
-9 Não foi possível carregar TWAIN.DLL  
-10 Não foi possível abrir a fonte TWAIN  
-11 Não foi possível fechar a fonte TWAIN  
-12 A fonte TWAIN deve ser aberta antes de executar o comando.  
-27 Não foi possível completar a digitalização. Resoluções X/Y definidas para valores diferentes  
-28 Nome de Arquivo Inválido Especificado  
-32 Triplo TWAIN não executado. Gerenciador Twain inválido.
+501 Manipulador de Janela NULL  
+502 Falha na Alocação de Memória  
+503 Manipulador de DLL Inválido  
+504 Manipulador de Fonte Inválido  
+505 Gerenciador de Fonte de Dados TWAIN (DSM) Não Encontrado  
+506 TWAIN.DLL Inválido  
+507 Manipulador de Sessão Inválido  
+508 Gerenciador Twain Inválido  
+509 Não foi possível carregar TWAIN.DLL  
+510 Não foi possível abrir a fonte TWAIN  
+511 Não foi possível fechar a fonte TWAIN  
+512 A fonte TWAIN deve ser aberta antes de executar o comando.  
+527 Não foi possível completar a digitalização. Resoluções X/Y definidas para valores diferentes  
+528 Nome de Arquivo Inválido Especificado  
+532 Triplo TWAIN não executado. Gerenciador Twain inválido.
 1000 ***  
 1001 Manipulador DTWAIN Inválido  
 1002 Fonte DTWAIN Inválida  
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL não é a versão correta
 1091 A sessão TWAIN está atualmente ativa
 1092 A operação requer TWAIN DSM 2.x ou posterior
+1093 O contêiner TWON_ENUMERATOR não foi usado para esta operação.
 1100 Código de Condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erro  
 1102 Código de Condição TWAIN: Causa desconhecida da falha  

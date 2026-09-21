@@ -1,19 +1,19 @@
 0 Nessun errore
-1 NULL Finestra Maneggia
-2 Memoria Allocazione Fallimento
-3 Invalido DLL Maneggia
-4 Invalido Fonte Maneggia
-5 TWAIN. DLL non Basa
-6 Invalid TWAIN. DLL
-7 Invalido Seduta Maneggia
-8 Invalid Twain Dirigente
-9 Non colmando TWAIN. DLL
-10 Non aprendo TWAIN Fonte
-11 Non chiudendo TWAIN Fonte
-12 TWAIN Fonte apra avanti eseguendo comando.
-27 Non finendo scan.   X/Y o Risolutezze calo da diverso valute
-28 Invalido Archivia Nome Precisato
-32 triplet TWAIN non eseguito.  Twain Manager non valido.
+501 NULL Finestra Maneggia
+502 Memoria Allocazione Fallimento
+503 Invalido DLL Maneggia
+504 Invalido Fonte Maneggia
+505 TWAIN. DLL non Basa
+506 Invalid TWAIN. DLL
+507 Invalido Seduta Maneggia
+508 Invalid Twain Dirigente
+509 Non colmando TWAIN. DLL
+510 Non aprendo TWAIN Fonte
+511 Non chiudendo TWAIN Fonte
+512 TWAIN Fonte apra avanti eseguendo comando.
+527 Non finendo scan.   X/Y o Risolutezze calo da diverso valute
+528 Invalido Archivia Nome Precisato
+532 triplet TWAIN non eseguito.  Twain Manager non valido.
 1000 ***
 1001 Invalido DTWAIN_HANDLE
 1002 Invalido DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 La DLL DTWAIN non è della versione corretta
 1091 La sessione TWAIN è attualmente attiva
 1092 L'operazione richiede TWAIN DSM 2.x o successivo
+1093 Il contenitore TWON_ENUMERATOR non è stato utilizzato per questa operazione.
 1100 TWAIN Condizione non Cifri: non finendo operazione.   Insufficiente Memoria.
 1101 TWAIN Condizione Codice: Errore
 1102 TWAIN Condiziona Codice: Unknown causa di fallimento

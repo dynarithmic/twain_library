@@ -1,19 +1,19 @@
 0 Nenhum erro
-1 Identificador de janela NULL
-2 Falha na alocação de memória
-3 Identificador de DLL inválido
-4 Identificador de origem inválido
-5 Gerenciador de fonte de dados TWAIN (DSM) não encontrado
-6 TWAIN.DLL inválida
-7 Identificador de sessão inválido
-8 Gerenciador Twain inválido
-9 Não foi possível carregar a TWAIN.DLL
-10 Não foi possível abrir o dispositivo TWAIN
-11 Não foi possível fechar o dispositivo TWAIN
-12 O dispositivo TWAIN deve ser aberto antes da execução do comando.
-27 Não foi possível concluir a verificação. Resoluções X / Y definidas para valores diferentes
-28 Nome de arquivo especificado é inválido
-32 Triplo TWAIN não executado. Gerenciador Twain inválido.
+501 Identificador de janela NULL
+502 Falha na alocação de memória
+503 Identificador de DLL inválido
+504 Identificador de origem inválido
+505 Gerenciador de fonte de dados TWAIN (DSM) não encontrado
+506 TWAIN.DLL inválida
+507 Identificador de sessão inválido
+508 Gerenciador Twain inválido
+509 Não foi possível carregar a TWAIN.DLL
+510 Não foi possível abrir o dispositivo TWAIN
+511 Não foi possível fechar o dispositivo TWAIN
+512 O dispositivo TWAIN deve ser aberto antes da execução do comando.
+527 Não foi possível concluir a verificação. Resoluções X / Y definidas para valores diferentes
+528 Nome de arquivo especificado é inválido
+532 Triplo TWAIN não executado. Gerenciador Twain inválido.
 1000 ***
 1001 DTWAIN_HANDLE inválido
 1002 DTWAIN_SOURCE inválido
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL não é a versão correta
 1091 A sessão TWAIN está atualmente ativa
 1092 A operação requer TWAIN DSM 2.x ou posterior
+1093 O contêiner TWON_ENUMERATOR não foi usado para esta operação.
 1100 Código de Condição TWAIN: Não foi possível concluir a operação. Memória insuficiente.
 1101 Código de Condição TWAIN: Sem Erros
 1102 Código de Condição TWAIN: Falha de causa desconhecida

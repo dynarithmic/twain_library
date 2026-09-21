@@ -615,7 +615,9 @@ void SelectTheSource(int nWhich)
     switch (nWhich)
     {
         case IDM_SELECT_SOURCE:
-            tempSource = DTWAIN_SelectSource2(NULL, NULL,0,0, DTWAIN_DLG_CENTER_CURRENT_MONITOR | DTWAIN_DLG_SORTNAMES);
+            tempSource = DTWAIN_SelectSource2(NULL, NULL,0,0, 
+                DTWAIN_DLG_CENTER_CURRENT_MONITOR | DTWAIN_DLG_SORTNAMES 
+                | DTWAIN_DLG_TOPMOSTWINDOW | DTWAIN_DLG_HIGHLIGHTFIRST);
         break;
 
         case IDM_SELECT_DEFAULT_SOURCE:
@@ -734,19 +736,24 @@ void GenericAcquire(LONG nWhichOne)
                                 &ErrStatus /* Error Status */
                             );
     }
-    EnableSourceItems(TRUE);
+
     if (!bRet)
     {
         LONG lastError = DTWAIN_GetLastError();
         char szError[1024];
         if (ErrStatus == DTWAIN_TN_ACQUIRECANCELED)
-            MessageBox(NULL, _T("Acquisition cancelled without acquiring any images"), _T("Information"), MB_ICONSTOP);
+        {
+            TCHAR szErrorW[1024];
+            DTWAIN_GetResourceString(DTWAIN_ERR_ACQUISITION_CANCELED, szErrorW, 1023);
+            MessageBox(NULL, szErrorW, _T("Information"), MB_ICONSTOP);
+        }
         else
         {
             DTWAIN_GetErrorStringA(lastError, szError, 1023);
             MessageBoxA(NULL, szError, "TWAIN Error", MB_ICONSTOP);
         }
         DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
+        EnableSourceItems(TRUE);
         return;
     }
 
@@ -755,10 +762,12 @@ void GenericAcquire(LONG nWhichOne)
     {
         MessageBox(g_hWnd, _T("No Images Acquired"), _T(""), MB_ICONSTOP);
         DTWAIN_DestroyAcquisitionArray(g_AcquireArray, FALSE);
+        EnableSourceItems(TRUE);
         return;
     }
     RetrieveAndDisplayDibs(g_hInstance, g_AcquireArray, IDD_dlgDib, g_hWnd);
     DTWAIN_DestroyAcquisitionArray( g_AcquireArray, TRUE );
+    EnableSourceItems(TRUE);
 }
 
 void AcquireNative()

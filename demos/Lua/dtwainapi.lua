@@ -608,6 +608,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpXResolution, DTWAIN_CHARPTRTYPE lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
+        DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -685,6 +686,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY SearchPriorities);
         DTWAIN_BOOL DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, LPLONG pSearchMode, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, LPDWORD pTimeOut, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
@@ -715,6 +717,7 @@ function load32bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
+        LONG DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -1196,6 +1199,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameA(DTWAIN_SOURCE Source, LPCSTR fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameW(DTWAIN_SOURCE Source, LPCWSTR fName);
+        DTWAIN_BOOL DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, LONG FileType);
         DTWAIN_BOOL DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowStringA(DTWAIN_SOURCE Source, LPCSTR Shadow);
@@ -1834,6 +1838,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpXResolution, DTWAIN_CHARPTRTYPE lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
+        DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -1911,6 +1916,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY SearchPriorities);
         DTWAIN_BOOL DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, LPLONG pSearchMode, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, LPDWORD pTimeOut, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
@@ -1941,6 +1947,7 @@ function load32bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
+        LONG DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -2422,6 +2429,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameA(DTWAIN_SOURCE Source, LPCSTR fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameW(DTWAIN_SOURCE Source, LPCWSTR fName);
+        DTWAIN_BOOL DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, LONG FileType);
         DTWAIN_BOOL DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowStringA(DTWAIN_SOURCE Source, LPCSTR Shadow);
@@ -3060,6 +3068,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpXResolution, DTWAIN_CHARPTRTYPE lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
+        DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -3137,6 +3146,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY SearchPriorities);
         DTWAIN_BOOL DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, LPLONG pSearchMode, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, LPDWORD pTimeOut, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
@@ -3167,6 +3177,7 @@ function load64bitAnsi(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
+        LONG DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -3648,6 +3659,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameA(DTWAIN_SOURCE Source, LPCSTR fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameW(DTWAIN_SOURCE Source, LPCWSTR fName);
+        DTWAIN_BOOL DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, LONG FileType);
         DTWAIN_BOOL DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowStringA(DTWAIN_SOURCE Source, LPCSTR Shadow);
@@ -4286,6 +4298,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE lpXResolution, DTWAIN_CHARPTRTYPE lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
+        DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -4363,6 +4376,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY SearchPriorities);
         DTWAIN_BOOL DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, LPLONG pSearchMode, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, LPDWORD pTimeOut, DTWAIN_BOOL bCurrent);
+        LONG DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, LPLONG lpPixelFlavor);
         DTWAIN_BOOL DTWAIN_GetPixelType(DTWAIN_SOURCE Source, LPLONG PixelType, LPLONG BitDepth, DTWAIN_BOOL bCurrent);
         DTWAIN_BOOL DTWAIN_GetPrinter(DTWAIN_SOURCE Source, LPLONG lpPrinter, DTWAIN_BOOL bCurrent);
@@ -4393,6 +4407,7 @@ function load64bitUnicode(DLLToLoad)
         LONG DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameA(DTWAIN_SOURCE Source, LPSTR fName, LONG nMaxLen);
         LONG DTWAIN_GetSaveFileNameW(DTWAIN_SOURCE Source, LPWSTR fName, LONG nMaxLen);
+        LONG DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
         LONG DTWAIN_GetSessionDetails(DTWAIN_CHARPTRTYPE szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsA(LPSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
         LONG DTWAIN_GetSessionDetailsW(LPWSTR szBuf, LONG nSize, LONG indentFactor, BOOL bRefresh);
@@ -4874,6 +4889,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameA(DTWAIN_SOURCE Source, LPCSTR fName);
         DTWAIN_BOOL DTWAIN_SetSaveFileNameW(DTWAIN_SOURCE Source, LPCWSTR fName);
+        DTWAIN_BOOL DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, LONG FileType);
         DTWAIN_BOOL DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Shadow);
         DTWAIN_BOOL DTWAIN_SetShadowStringA(DTWAIN_SOURCE Source, LPCSTR Shadow);

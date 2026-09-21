@@ -497,9 +497,6 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT Tex
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LONG val1, LONG val2, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement);
 DTWAIN_PDFTEXTELEMENT DLLENTRY_DEF DTWAIN_CreatePDFTextElementCopy(DTWAIN_PDFTEXTELEMENT TextElement);
-
-
-
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, LPDTWAIN_FLOAT val1, LPDTWAIN_FLOAT val2, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, LPLONG val1, LPLONG val2, LONG Flags);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source);
@@ -1078,6 +1075,16 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_ArrayDestroyAll(VOID_PROTOTYPE);
 /* Set the application's major/minor TW_IDENTITY components */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetMajorMinorVersion(DWORD nMajor, DWORD nMinor);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetMajorMinorVersion(LPDWORD nMajor, LPDWORD nMinor);
+
+/* Get the pending image transfer count */
+LONG DLLENTRY_DEF DTWAIN_GetPendingXferCount(DTWAIN_SOURCE source);
+
+/* Set the file save type (only available for single page file types) */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, LONG FileType);
+LONG DLLENTRY_DEF DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
+
+/* Get document info (document number, page number, frame number */
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
 
 #ifdef __cplusplus
 }

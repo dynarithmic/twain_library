@@ -222,6 +222,7 @@
     <Compile Include="TestCapDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TwainConstants.vb" />
     <Compile Include="VB_FullDemo.vb">
       <SubType>Form</SubType>
     </Compile>

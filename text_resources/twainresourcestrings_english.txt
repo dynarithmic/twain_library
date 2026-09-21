@@ -1,19 +1,19 @@
 0 No Error
-1 NULL Window Handle
-2 Memory Allocation Failure
-3 Invalid DLL Handle
-4 Invalid Source Handle
-5 TWAIN Data Source Manager (DSM) Not Found
-6 Invalid TWAIN.DLL
-7 Invalid Session Handle
-8 Invalid Twain Manager
-9 Could not load TWAIN.DLL
-10 Could not open TWAIN source
-11 Could not close TWAIN source
-12 TWAIN source must be opened before executing command.
-27 Could not complete scan.  X/Y Resolutions set for different values
-28 Invalid File Name Specified
-32 TWAIN triplet not executed.  Invalid Twain Manager
+501 NULL Window Handle
+502 Memory Allocation Failure
+503 Invalid DLL Handle
+504 Invalid Source Handle
+505 TWAIN Data Source Manager (DSM) Not Found
+506 Invalid TWAIN.DLL
+507 Invalid Session Handle
+508 Invalid Twain Manager
+509 Could not load TWAIN.DLL
+510 Could not open TWAIN source
+511 Could not close TWAIN source
+512 TWAIN source must be opened before executing command.
+527 Could not complete scan.  X/Y Resolutions set for different values
+528 Invalid File Name Specified
+532 TWAIN triplet not executed.  Invalid Twain Manager
 1000 ***
 1001 Invalid DTWAIN_HANDLE
 1002 Invalid DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL is not the correct version.
 1091 TWAIN session is currently active
 1092 Operation requires TWAIN DSM 2.x or later
+1093 TWON_ENUMERATOR container was not used for this operation.
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure

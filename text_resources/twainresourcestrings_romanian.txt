@@ -1,19 +1,19 @@
 0 Nicio eroare  
-1 Mâner de fereastră NULL  
-2 Eșec la alocarea memoriei  
-3 Mâner DLL invalid  
-4 Mâner sursă invalid  
-5 Managerul sursei de date TWAIN (DSM) nu a fost găsit  
-6 TWAIN.DLL invalid  
-7 Mâner de sesiune invalid  
-8 Manager Twain invalid  
-9 Nu s-a putut încărca TWAIN.DLL  
-10 Nu s-a putut deschide sursa TWAIN  
-11 Nu s-a putut închide sursa TWAIN  
-12 Sursa TWAIN trebuie să fie deschisă înainte de a executa comanda.  
-27 Nu s-a putut finaliza scanarea. Rezoluțiile X/Y setate pentru valori diferite  
-28 Nume de fișier specificat invalid  
-32 TWAIN triplet nu a fost executat. Managerul Twain este invalid.
+501 Mâner de fereastră NULL  
+502 Eșec la alocarea memoriei  
+503 Mâner DLL invalid  
+504 Mâner sursă invalid  
+505 Managerul sursei de date TWAIN (DSM) nu a fost găsit  
+506 TWAIN.DLL invalid  
+507 Mâner de sesiune invalid  
+508 Manager Twain invalid  
+509 Nu s-a putut încărca TWAIN.DLL  
+510 Nu s-a putut deschide sursa TWAIN  
+511 Nu s-a putut închide sursa TWAIN  
+512 Sursa TWAIN trebuie să fie deschisă înainte de a executa comanda.  
+527 Nu s-a putut finaliza scanarea. Rezoluțiile X/Y setate pentru valori diferite  
+528 Nume de fișier specificat invalid  
+532 TWAIN triplet nu a fost executat. Managerul Twain este invalid.
 1000 ***  
 1001 DTWAIN_HANDLE invalid  
 1002 DTWAIN_SOURCE invalid  
@@ -107,6 +107,7 @@
 1090 DLL DTWAIN nu este versiunea corectă
 1091 Sesiunea TWAIN este activă în prezent
 1092 Operațiunea necesită TWAIN DSM 2.x sau o versiune ulterioară
+1093 Containerul TWON_ENUMERATOR nu a fost folosit pentru această operațiune.
 1100 Codul de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.  
 1101 Codul de condiție TWAIN: Fără eroare  
 1102 Codul de condiție TWAIN: Cauza eșecului este necunoscută  

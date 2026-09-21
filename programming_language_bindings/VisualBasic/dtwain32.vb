@@ -469,6 +469,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_ACQUIREPAGESSTOPPED As Integer = 1307
     Public Const DTWAIN_TN_QUERYUPDATEDIBORIG As Integer = 1308
     Public Const DTWAIN_TN_QUERYUPDATEDIBRESAMPLED As Integer = 1309
+    Public Const DTWAIN_TN_PENDINGXFERSRETRIEVED As Integer = 1310
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
     Public Const DTWAIN_MODAL As Integer = 0
@@ -722,6 +723,21 @@ Class DTWAINAPI
     Public Const DTWAIN_LANGSWEDISH As Integer = 12
     Public Const DTWAIN_LANGUSAENGLISH As Integer = 13
     Public Const DTWAIN_NO_ERROR As Integer = (0)
+    Public Const DTWAIN_ERR_NULL_WINDOW_HANDLE As Integer = (-501)
+    Public Const DTWAIN_ERR_ALLOCATION_FAILURE As Integer = (-502)
+    Public Const DTWAIN_ERR_INVALID_DLLHANDLE As Integer = (-503)
+    Public Const DTWAIN_ERR_INVALID_SOURCE_HANDLE As Integer = (-504)
+    Public Const DTWAIN_ERR_TWAINDSM_NOT_FOUND As Integer = (-505)
+    Public Const DTWAIN_ERR_INVALID_TWAINDSM_DLL As Integer = (-506)
+    Public Const DTWAIN_ERR_INVALID_SESSION_HANDLE As Integer = (-507)
+    Public Const DTWAIN_ERR_INVALID_TWAIN_MANAGER As Integer = (-508)
+    Public Const DTWAIN_ERR_TWAINDSM_LOAD_ERROR As Integer = (-509)
+    Public Const DTWAIN_ERR_SOURCE_OPEN_ERROR As Integer = (-510)
+    Public Const DTWAIN_ERR_SOURCE_CLOSE_ERROR As Integer = (-511)
+    Public Const DTWAIN_ERR_SOURCE_REQUIRED_OPEN As Integer = (-512)
+    Public Const DTWAIN_ERR_XYRESOLUTION_MATCH As Integer = (-527)
+    Public Const DTWAIN_ERR_INVALID_FILENAME As Integer = (-528)
+    Public Const DTWAIN_ERR_TRIPLET_NOTEXECUTED As Integer = (-532)
     Public Const DTWAIN_ERR_FIRST As Integer = (-1000)
     Public Const DTWAIN_ERR_BAD_HANDLE As Integer = (-1001)
     Public Const DTWAIN_ERR_BAD_SOURCE As Integer = (-1002)
@@ -1583,6 +1599,7 @@ Class DTWAINAPI
     Public Const DTWAIN_PDFTEXT_LASTPAGE As Integer = &H00000010
     Public Const DTWAIN_PDFTEXT_CURRENTPAGE As Integer = &H00000020
     Public Const DTWAIN_PDFTEXT_DISABLED As Integer = &H00000040
+    Public Const DTWAIN_PDFTEXT_COPYTEXTELEMENT As Integer = &H00000080
     Public Const DTWAIN_PDFTEXT_TOPLEFT As Integer = &H00000100
     Public Const DTWAIN_PDFTEXT_TOPRIGHT As Integer = &H00000200
     Public Const DTWAIN_PDFTEXT_HORIZCENTER As Integer = &H00000400
@@ -1604,7 +1621,6 @@ Class DTWAINAPI
     Public Const DTWAIN_PDFTEXT_NOROTATION As Integer = &H10000000
     Public Const DTWAIN_PDFTEXT_NOSKEWING As Integer = &H20000000
     Public Const DTWAIN_PDFTEXT_NOSCALINGXY As Integer = &H40000000
-    Public Const DTWAIN_PDFTEXT_COPYTEXTELEMENT As Integer = &H80000000
     Public Const DTWAIN_PDFTEXT_IGNOREALL As UInteger = &HFFF00000UI
     Public Const DTWAIN_FONT_COURIER As Integer = 0
     Public Const DTWAIN_FONT_COURIERBOLD As Integer = 1
@@ -2183,6 +2199,7 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_GetHighlightString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Highlight As StringBuilder) As Integer
     Public Declare Function DTWAIN_GetImageInfo Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetImageInfoString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
+    Public Declare Function DTWAIN_GetImageLayoutInfo Lib "dtwain32.dll" (Source As System.IntPtr, lGetType As Integer, ByRef DocumentNumber As Integer, ByRef PageNumber As Integer, ByRef FrameNumber As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControl Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControlEx Lib "dtwain32.dll" (Source As System.IntPtr, bGetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJpegValues Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
@@ -2236,6 +2253,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetPatchcodePriorities Lib "dtwain32.dll" (Source As System.IntPtr, ByRef SearchPriorities As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetPatchcodeSearchMode Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pSearchMode As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPatchcodeTimeOut Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pTimeOut As UInteger, bCurrent As Integer) As Integer
+    Public Declare Function DTWAIN_GetPendingXferCount Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetPixelFlavor Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPixelFlavor As Integer) As Integer
     Public Declare Function DTWAIN_GetPixelType Lib "dtwain32.dll" (Source As System.IntPtr, ByRef PixelType As Integer, ByRef BitDepth As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetPrinter Lib "dtwain32.dll" (Source As System.IntPtr, ByRef lpPrinter As Integer, bCurrent As Integer) As Integer
@@ -2256,6 +2274,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetRotationEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.Double
     Public Declare Ansi Function DTWAIN_GetRotationString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Rotation As StringBuilder) As Integer
     Public Declare Ansi Function DTWAIN_GetSaveFileName Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> fName As StringBuilder, nMaxLen As Integer) As Integer
+    Public Declare Function DTWAIN_GetSaveFileType Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Ansi Function DTWAIN_GetSessionDetails Lib "dtwain32.dll" (<MarshalAs(UnmanagedType.LPStr)> szBuf As StringBuilder, nSize As Integer, indentFactor As Integer, bRefresh As Integer) As Integer
     Public Declare Function DTWAIN_GetShadow Lib "dtwain32.dll" (Source As System.IntPtr, ByRef Shadow As System.Double) As Integer
     Public Declare Ansi Function DTWAIN_GetShadowString Lib "dtwain32.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> Shadow As StringBuilder) As Integer
@@ -2591,6 +2610,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_SetRotation Lib "dtwain32.dll" (Source As System.IntPtr, Rotation As System.Double) As Integer
     Public Declare Ansi Function DTWAIN_SetRotationString Lib "dtwain32.dll" (Source As System.IntPtr, Rotation As String) As Integer
     Public Declare Ansi Function DTWAIN_SetSaveFileName Lib "dtwain32.dll" (Source As System.IntPtr, fName As String) As Integer
+    Public Declare Function DTWAIN_SetSaveFileType Lib "dtwain32.dll" (Source As System.IntPtr, FileType As Integer) As Integer
     Public Declare Function DTWAIN_SetShadow Lib "dtwain32.dll" (Source As System.IntPtr, Shadow As System.Double) As Integer
     Public Declare Ansi Function DTWAIN_SetShadowString Lib "dtwain32.dll" (Source As System.IntPtr, Shadow As String) As Integer
     Public Declare Function DTWAIN_SetSourceUnit Lib "dtwain32.dll" (Source As System.IntPtr, Unit As Integer) As Integer

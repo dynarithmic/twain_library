@@ -642,6 +642,7 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307;
     public static const int DTWAIN_TN_QUERYUPDATEDIBORIG = 1308;
     public static const int DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309;
+    public static const int DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310;
     public static const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
     public static const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
     public static const int DTWAIN_MODAL = 0;
@@ -895,6 +896,21 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_LANGSWEDISH = 12;
     public static const int DTWAIN_LANGUSAENGLISH = 13;
     public static const int DTWAIN_NO_ERROR = (0);
+    public static const int DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501);
+    public static const int DTWAIN_ERR_ALLOCATION_FAILURE = (-502);
+    public static const int DTWAIN_ERR_INVALID_DLLHANDLE = (-503);
+    public static const int DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504);
+    public static const int DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505);
+    public static const int DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506);
+    public static const int DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507);
+    public static const int DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508);
+    public static const int DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509);
+    public static const int DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510);
+    public static const int DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511);
+    public static const int DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512);
+    public static const int DTWAIN_ERR_XYRESOLUTION_MATCH = (-527);
+    public static const int DTWAIN_ERR_INVALID_FILENAME = (-528);
+    public static const int DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532);
     public static const int DTWAIN_ERR_FIRST = (-1000);
     public static const int DTWAIN_ERR_BAD_HANDLE = (-1001);
     public static const int DTWAIN_ERR_BAD_SOURCE = (-1002);
@@ -1756,6 +1772,7 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_PDFTEXT_LASTPAGE = 0x00000010;
     public static const int DTWAIN_PDFTEXT_CURRENTPAGE = 0x00000020;
     public static const int DTWAIN_PDFTEXT_DISABLED = 0x00000040;
+    public static const int DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x00000080;
     public static const int DTWAIN_PDFTEXT_TOPLEFT = 0x00000100;
     public static const int DTWAIN_PDFTEXT_TOPRIGHT = 0x00000200;
     public static const int DTWAIN_PDFTEXT_HORIZCENTER = 0x00000400;
@@ -1777,7 +1794,6 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_PDFTEXT_NOROTATION = 0x10000000;
     public static const int DTWAIN_PDFTEXT_NOSKEWING = 0x20000000;
     public static const int DTWAIN_PDFTEXT_NOSCALINGXY = 0x40000000;
-    public static const int DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x80000000;
     public static const uint DTWAIN_PDFTEXT_IGNOREALL = 0xFFF00000U;
     public static const int DTWAIN_FONT_COURIER = 0;
     public static const int DTWAIN_FONT_COURIERBOLD = 1;
@@ -2458,6 +2474,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CHARPTRTYPE, DTWAIN_CHARPTRTYPE, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageInfoString;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPSTR, LPSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageInfoStringA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPWSTR, LPWSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageInfoStringW;
+    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageLayoutInfo;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL) DTWAIN_GetJobControl;
     extern(Windows) LONG function(DTWAIN_SOURCE, DTWAIN_BOOL) DTWAIN_GetJobControlEx;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, LPLONG) DTWAIN_GetJpegValues;
@@ -2532,6 +2549,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_GetPatchcodePriorities;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL) DTWAIN_GetPatchcodeSearchMode;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDWORD, DTWAIN_BOOL) DTWAIN_GetPatchcodeTimeOut;
+    extern(Windows) LONG function(DTWAIN_SOURCE) DTWAIN_GetPendingXferCount;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG) DTWAIN_GetPixelFlavor;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, LPLONG, DTWAIN_BOOL) DTWAIN_GetPixelType;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL) DTWAIN_GetPrinter;
@@ -2562,6 +2580,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) LONG function(DTWAIN_SOURCE, DTWAIN_CHARPTRTYPE, LONG) DTWAIN_GetSaveFileName;
     extern(Windows) LONG function(DTWAIN_SOURCE, LPSTR, LONG) DTWAIN_GetSaveFileNameA;
     extern(Windows) LONG function(DTWAIN_SOURCE, LPWSTR, LONG) DTWAIN_GetSaveFileNameW;
+    extern(Windows) LONG function(DTWAIN_SOURCE) DTWAIN_GetSaveFileType;
     extern(Windows) LONG function(DTWAIN_CHARPTRTYPE, LONG, LONG, BOOL) DTWAIN_GetSessionDetails;
     extern(Windows) LONG function(LPSTR, LONG, LONG, BOOL) DTWAIN_GetSessionDetailsA;
     extern(Windows) LONG function(LPWSTR, LONG, LONG, BOOL) DTWAIN_GetSessionDetailsW;
@@ -3040,6 +3059,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE) DTWAIN_SetSaveFileName;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR) DTWAIN_SetSaveFileNameA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCWSTR) DTWAIN_SetSaveFileNameW;
+    extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_SetSaveFileType;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_FLOAT) DTWAIN_SetShadow;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE) DTWAIN_SetShadowString;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR) DTWAIN_SetShadowStringA;
@@ -3622,6 +3642,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetImageInfoString, "DTWAIN_GetImageInfoString");
         bindFunction(cast(void**)&DTWAIN_GetImageInfoStringA, "DTWAIN_GetImageInfoStringA");
         bindFunction(cast(void**)&DTWAIN_GetImageInfoStringW, "DTWAIN_GetImageInfoStringW");
+        bindFunction(cast(void**)&DTWAIN_GetImageLayoutInfo, "DTWAIN_GetImageLayoutInfo");
         bindFunction(cast(void**)&DTWAIN_GetJobControl, "DTWAIN_GetJobControl");
         bindFunction(cast(void**)&DTWAIN_GetJobControlEx, "DTWAIN_GetJobControlEx");
         bindFunction(cast(void**)&DTWAIN_GetJpegValues, "DTWAIN_GetJpegValues");
@@ -3696,6 +3717,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetPatchcodePriorities, "DTWAIN_GetPatchcodePriorities");
         bindFunction(cast(void**)&DTWAIN_GetPatchcodeSearchMode, "DTWAIN_GetPatchcodeSearchMode");
         bindFunction(cast(void**)&DTWAIN_GetPatchcodeTimeOut, "DTWAIN_GetPatchcodeTimeOut");
+        bindFunction(cast(void**)&DTWAIN_GetPendingXferCount, "DTWAIN_GetPendingXferCount");
         bindFunction(cast(void**)&DTWAIN_GetPixelFlavor, "DTWAIN_GetPixelFlavor");
         bindFunction(cast(void**)&DTWAIN_GetPixelType, "DTWAIN_GetPixelType");
         bindFunction(cast(void**)&DTWAIN_GetPrinter, "DTWAIN_GetPrinter");
@@ -3726,6 +3748,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetSaveFileName, "DTWAIN_GetSaveFileName");
         bindFunction(cast(void**)&DTWAIN_GetSaveFileNameA, "DTWAIN_GetSaveFileNameA");
         bindFunction(cast(void**)&DTWAIN_GetSaveFileNameW, "DTWAIN_GetSaveFileNameW");
+        bindFunction(cast(void**)&DTWAIN_GetSaveFileType, "DTWAIN_GetSaveFileType");
         bindFunction(cast(void**)&DTWAIN_GetSessionDetails, "DTWAIN_GetSessionDetails");
         bindFunction(cast(void**)&DTWAIN_GetSessionDetailsA, "DTWAIN_GetSessionDetailsA");
         bindFunction(cast(void**)&DTWAIN_GetSessionDetailsW, "DTWAIN_GetSessionDetailsW");
@@ -4204,6 +4227,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_SetSaveFileName, "DTWAIN_SetSaveFileName");
         bindFunction(cast(void**)&DTWAIN_SetSaveFileNameA, "DTWAIN_SetSaveFileNameA");
         bindFunction(cast(void**)&DTWAIN_SetSaveFileNameW, "DTWAIN_SetSaveFileNameW");
+        bindFunction(cast(void**)&DTWAIN_SetSaveFileType, "DTWAIN_SetSaveFileType");
         bindFunction(cast(void**)&DTWAIN_SetShadow, "DTWAIN_SetShadow");
         bindFunction(cast(void**)&DTWAIN_SetShadowString, "DTWAIN_SetShadowString");
         bindFunction(cast(void**)&DTWAIN_SetShadowStringA, "DTWAIN_SetShadowStringA");

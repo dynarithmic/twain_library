@@ -1,19 +1,19 @@
 0 Geen fout
-1 NULL Raam Hanteert
-2 Herinnering Allocation Mislukking
-3 Kwalijken DLL Hanteert
-4 Kwalijken Bron Hanteert
-5 TWAIN. DLL niet Grondend
-6 Kwalijken TWAIN. DLL
-7 Kwalijken Sessie Hanteert
-8 Kwalijken Twain Manager
-9 Niet laden TWAIN. DLL
-10 Niet open TWAIN bron
-11 Niet afsluiten TWAIN bron
-12 TWAIN bron before uitgevoerd bevel.
-27 Niet voleindigde scan.   X/Y Resolutions want verschillende waarden
-28 Kwalijkene File Namen Gespecificeerd
-32 TWAIN-drieling niet uitgevoerd. Ongeldige Twain Manager
+501 NULL Raam Hanteert
+502 Herinnering Allocation Mislukking
+503 Kwalijken DLL Hanteert
+504 Kwalijken Bron Hanteert
+505 TWAIN. DLL niet Grondend
+506 Kwalijken TWAIN. DLL
+507 Kwalijken Sessie Hanteert
+508 Kwalijken Twain Manager
+509 Niet laden TWAIN. DLL
+510 Niet open TWAIN bron
+511 Niet afsluiten TWAIN bron
+512 TWAIN bron before uitgevoerd bevel.
+527 Niet voleindigde scan.   X/Y Resolutions want verschillende waarden
+528 Kwalijkene File Namen Gespecificeerd
+532 TWAIN-drieling niet uitgevoerd. Ongeldige Twain Manager
 1000 ***
 1001 Kwalijken DTWAIN_HANDLE
 1002 Kwalijken DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL is niet de juiste versie
 1091 TWAIN-sessie is momenteel actief
 1092 Voor de bewerking is TWAIN DSM 2.x of later vereist
+1093 TWON_ENUMERATOR-container werd niet gebruikt voor deze bewerking.
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

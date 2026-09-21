@@ -1,19 +1,19 @@
 ﻿0 Aucune erreur
-1 Fenêtre inefficace Manipule
-2 Raté D'Affectation De Mémoire
-3 Mauvais DLL Manipule
-4 Mauvaise Source Manipule
-5 DLL de Twain. ne Fonde pas
-6 DLL mauvais de TWAIN.
-7 Mauvaise Séance Manipule
-8 Mauvais Tenancier De Twain
-9 Ne pouvions pas charger TWAIN. DLL
-10 Ne pouvions pas ouvrir TWAIN la source
-11 Ne pouvions pas fermer TWAIN la source
-12 Source de Twain doit être ouverte au-devant exécuter le commande
-27 Ne pouvions pas parachever échographie.   X/Y ou Résolutions met pour les valeurs différentes
-28 Mauvais Dossier Nomme Spécifié
-32 triplet TWAIN non exécuté. Gestionnaire Twain invalide.
+501 Fenêtre inefficace Manipule
+502 Raté D'Affectation De Mémoire
+503 Mauvais DLL Manipule
+504 Mauvaise Source Manipule
+505 DLL de Twain. ne Fonde pas
+506 DLL mauvais de TWAIN.
+507 Mauvaise Séance Manipule
+508 Mauvais Tenancier De Twain
+509 Ne pouvions pas charger TWAIN. DLL
+510 Ne pouvions pas ouvrir TWAIN la source
+511 Ne pouvions pas fermer TWAIN la source
+512 Source de Twain doit être ouverte au-devant exécuter le commande
+527 Ne pouvions pas parachever échographie.   X/Y ou Résolutions met pour les valeurs différentes
+528 Mauvais Dossier Nomme Spécifié
+532 triplet TWAIN non exécuté. Gestionnaire Twain invalide.
 1000 ***
 1001 Invalide DTWAIN_HANDLE
 1002 Invalide DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 La DLL DTWAIN n’est pas de la bonne version
 1091 La session TWAIN est actuellement active
 1092 L'opération nécessite TWAIN DSM 2.x ou une version ultérieure
+1093 Le conteneur TWON_ENUMERATOR n'a pas été utilisé pour cette opération.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

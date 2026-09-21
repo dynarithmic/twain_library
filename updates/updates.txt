@@ -24,13 +24,20 @@ DTWAIN Version changes
   The TWAIN specification does not allow setting the default TWAIN Source for DSM versions less than 2.x, thus 
   issuing this call will result in an error.
 
-- Fix issue with DTWAIN_SetAppInfo() possibly resetting the TWAIN application ID, causing
-  issues when selecting a TWAIN Source using DTWAIN_SelectSource().
+- The DTWAIN_GetDeviceEvent() and DTWAIN_GetDeviceEventEx() functions will now return 9999 for an unknown device
+  event.  
 
-- Fix issue if DTWAIN_EnumSources() is called before a TWAIN session has been started.  
-  The symptoms are subsequent calls to DTWAIN_SelectSource() (the default TWAIN Select Source 
-  dialog) may not select the Source.  Calls to other Source selection functions were not
-  affected by this defect.
+- Fix issue with DTWAIN_GetAcquireArea() possibly not returning the values used for the area of acquisition.
+
+- Added function DTWAIN_GetImageLayoutInfo() that returns the document number, frame number, and page number 
+  when acquiring images.  The prototype for this function is as follows:
+
+    DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
+
+    The DocumentNumber, PageNumber, and FrameNumber will be filled in with the relevant information on return of this function (any of 
+    these parameters can also be NULL, meaning that the value should be ignored).
+
+- Fix C language compilation issues using the LoadLibrary() / GetProcAddress() language wrapper (dtwimpl.c)
 
 - Removed the following obsolete and undocumented DTWAIN API functions:
 
@@ -63,6 +70,15 @@ DTWAIN Version changes
       libtiff --> 4.7.2
       zlib    --> 1.3.2
 
+5.9.4
+
+- Fix issue with DTWAIN_SetAppInfo() possibly resetting the TWAIN application ID, causing
+  issues when selecting a TWAIN Source using DTWAIN_SelectSource().
+
+- Fix issue if DTWAIN_EnumSources() is called before a TWAIN session has been started.  
+  The symptoms are subsequent calls to DTWAIN_SelectSource() (the default TWAIN Select Source 
+  dialog) may not select the Source.  Calls to other Source selection functions were not
+  affected by this defect.
 
 
 5.9.3-Update-1

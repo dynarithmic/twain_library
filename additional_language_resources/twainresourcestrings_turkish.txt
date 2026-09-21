@@ -1,19 +1,19 @@
 0 Hata Yok
-1 NULL Pencere Tanıtıcısı
-2 Bellek Tahsis Hatası
-3 Geçersiz DLL Tanıtıcısı
-4 Geçersiz Kaynak Tanıtıcısı
-5 TWAIN Veri Kaynağı Yöneticisi (DSM) Bulunamadı
-6 Geçersiz TWAIN.DLL
-7 Geçersiz Oturum Tanıtıcısı
-8 Geçersiz Twain Yöneticisi
-9 TWAIN.DLL yüklenemedi
-10 TWAIN kaynağı açılamadı
-11 TWAIN kaynağı kapatılamadı
-12 TWAIN kaynağının komutu çalıştırmadan önce açılması gerekiyor.
-27 Tarama tamamlanamadı. X/Y Çözünürlükleri farklı değerlere ayarlanmış
-28 Geçersiz Dosya Adı Belirtildi
-32 TWAIN üçlüsü çalıştırılmadı. Geçersiz Twain Yöneticisi
+501 NULL Pencere Tanıtıcısı
+502 Bellek Tahsis Hatası
+503 Geçersiz DLL Tanıtıcısı
+504 Geçersiz Kaynak Tanıtıcısı
+505 TWAIN Veri Kaynağı Yöneticisi (DSM) Bulunamadı
+506 Geçersiz TWAIN.DLL
+507 Geçersiz Oturum Tanıtıcısı
+508 Geçersiz Twain Yöneticisi
+509 TWAIN.DLL yüklenemedi
+510 TWAIN kaynağı açılamadı
+511 TWAIN kaynağı kapatılamadı
+512 TWAIN kaynağının komutu çalıştırmadan önce açılması gerekiyor.
+527 Tarama tamamlanamadı. X/Y Çözünürlükleri farklı değerlere ayarlanmış
+528 Geçersiz Dosya Adı Belirtildi
+532 TWAIN üçlüsü çalıştırılmadı. Geçersiz Twain Yöneticisi
 1000 ***
 1001 Geçersiz DTWAIN_HANDLE
 1002 Geçersiz DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL doğru sürüm değil
 1091 TWAIN oturumu şu anda aktif
 1092 İşlem TWAIN DSM 2.x veya daha yenisini gerektirir
+1093 TWON_ENUMERATOR kapsayıcısı bu işlem için kullanılmadı.
 1100 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
 1101 TWAIN Durum Kodu: Hata Yok
 1102 TWAIN Durum Kodu: Bilinmeyen hata nedeni

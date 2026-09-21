@@ -570,6 +570,7 @@ const
   DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307;
   DTWAIN_TN_QUERYUPDATEDIBORIG = 1308;
   DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309;
+  DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310;
   DTWAIN_PDFOCR_CLEANTEXT1 = 1;
   DTWAIN_PDFOCR_CLEANTEXT2 = 2;
   DTWAIN_MODAL = 0;
@@ -823,6 +824,21 @@ const
   DTWAIN_LANGSWEDISH = 12;
   DTWAIN_LANGUSAENGLISH = 13;
   DTWAIN_NO_ERROR = (0);
+  DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501);
+  DTWAIN_ERR_ALLOCATION_FAILURE = (-502);
+  DTWAIN_ERR_INVALID_DLLHANDLE = (-503);
+  DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504);
+  DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505);
+  DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506);
+  DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507);
+  DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508);
+  DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509);
+  DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510);
+  DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511);
+  DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512);
+  DTWAIN_ERR_XYRESOLUTION_MATCH = (-527);
+  DTWAIN_ERR_INVALID_FILENAME = (-528);
+  DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532);
   DTWAIN_ERR_FIRST = (-1000);
   DTWAIN_ERR_BAD_HANDLE = (-1001);
   DTWAIN_ERR_BAD_SOURCE = (-1002);
@@ -1684,6 +1700,7 @@ const
   DTWAIN_PDFTEXT_LASTPAGE = $00000010;
   DTWAIN_PDFTEXT_CURRENTPAGE = $00000020;
   DTWAIN_PDFTEXT_DISABLED = $00000040;
+  DTWAIN_PDFTEXT_COPYTEXTELEMENT = $00000080;
   DTWAIN_PDFTEXT_TOPLEFT = $00000100;
   DTWAIN_PDFTEXT_TOPRIGHT = $00000200;
   DTWAIN_PDFTEXT_HORIZCENTER = $00000400;
@@ -1705,7 +1722,6 @@ const
   DTWAIN_PDFTEXT_NOROTATION = $10000000;
   DTWAIN_PDFTEXT_NOSKEWING = $20000000;
   DTWAIN_PDFTEXT_NOSCALINGXY = $40000000;
-  DTWAIN_PDFTEXT_COPYTEXTELEMENT = $80000000;
   DTWAIN_PDFTEXT_IGNOREALL = $FFF00000;
   DTWAIN_FONT_COURIER = 0;
   DTWAIN_FONT_COURIERBOLD = 1;
@@ -2391,6 +2407,7 @@ function DTWAIN_GetImageInfo(Source:DTWAIN_SOURCE; lpXResolution:LPDTWAIN_FLOAT;
 function DTWAIN_GetImageInfoString(Source:DTWAIN_SOURCE; lpXResolution:LPTSTR; lpYResolution:LPTSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetImageInfoString';
 function DTWAIN_GetImageInfoStringA(Source:DTWAIN_SOURCE; lpXResolution:LPSTR; lpYResolution:LPSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetImageInfoStringA';
 function DTWAIN_GetImageInfoStringW(Source:DTWAIN_SOURCE; lpXResolution:LPWSTR; lpYResolution:LPWSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetImageInfoStringW';
+function DTWAIN_GetImageLayoutInfo(Source:DTWAIN_SOURCE; lGetType:LONG; DocumentNumber:LPLONG; PageNumber:LPLONG; FrameNumber:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetImageLayoutInfo';
 function DTWAIN_GetJobControl(Source:DTWAIN_SOURCE; pJobControl:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetJobControl';
 function DTWAIN_GetJobControlEx(Source:DTWAIN_SOURCE; bGetCurrent:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetJobControlEx';
 function DTWAIN_GetJpegValues(Source:DTWAIN_SOURCE; pQuality:LPLONG; Progressive:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetJpegValues';
@@ -2468,6 +2485,7 @@ function DTWAIN_GetPatchcodeMaxRetries(Source:DTWAIN_SOURCE; pMaxRetries:LPDWORD
 function DTWAIN_GetPatchcodePriorities(Source:DTWAIN_SOURCE; SearchPriorities:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPatchcodePriorities';
 function DTWAIN_GetPatchcodeSearchMode(Source:DTWAIN_SOURCE; pSearchMode:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPatchcodeSearchMode';
 function DTWAIN_GetPatchcodeTimeOut(Source:DTWAIN_SOURCE; pTimeOut:LPDWORD; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPatchcodeTimeOut';
+function DTWAIN_GetPendingXferCount(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPendingXferCount';
 function DTWAIN_GetPixelFlavor(Source:DTWAIN_SOURCE; lpPixelFlavor:LPLONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPixelFlavor';
 function DTWAIN_GetPixelType(Source:DTWAIN_SOURCE; PixelType:LPLONG; BitDepth:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPixelType';
 function DTWAIN_GetPrinter(Source:DTWAIN_SOURCE; lpPrinter:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetPrinter';
@@ -2498,6 +2516,7 @@ function DTWAIN_GetRotationStringW(Source:DTWAIN_SOURCE; Rotation:LPWSTR) : BOOL
 function DTWAIN_GetSaveFileName(Source:DTWAIN_SOURCE; fName:LPTSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileName';
 function DTWAIN_GetSaveFileNameA(Source:DTWAIN_SOURCE; fName:LPSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileNameA';
 function DTWAIN_GetSaveFileNameW(Source:DTWAIN_SOURCE; fName:LPWSTR; nMaxLen:LONG) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileNameW';
+function DTWAIN_GetSaveFileType(Source:DTWAIN_SOURCE) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSaveFileType';
 function DTWAIN_GetSessionDetails(szBuf:LPTSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetails';
 function DTWAIN_GetSessionDetailsA(szBuf:LPSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetailsA';
 function DTWAIN_GetSessionDetailsW(szBuf:LPWSTR; nSize:LONG; indentFactor:LONG; bRefresh:BOOL) : LONG; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_GetSessionDetailsW';
@@ -2983,6 +3002,7 @@ function DTWAIN_SetRotationStringW(Source:DTWAIN_SOURCE; Rotation:LPCWSTR) : BOO
 function DTWAIN_SetSaveFileName(Source:DTWAIN_SOURCE; fName:LPCTSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetSaveFileName';
 function DTWAIN_SetSaveFileNameA(Source:DTWAIN_SOURCE; fName:LPCSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetSaveFileNameA';
 function DTWAIN_SetSaveFileNameW(Source:DTWAIN_SOURCE; fName:LPCWSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetSaveFileNameW';
+function DTWAIN_SetSaveFileType(Source:DTWAIN_SOURCE; FileType:LONG) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetSaveFileType';
 function DTWAIN_SetShadow(Source:DTWAIN_SOURCE; Shadow:DTWAIN_FLOAT) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetShadow';
 function DTWAIN_SetShadowString(Source:DTWAIN_SOURCE; Shadow:LPCTSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetShadowString';
 function DTWAIN_SetShadowStringA(Source:DTWAIN_SOURCE; Shadow:LPCSTR) : BOOL; stdcall;  external 'dtwain32u.dll'  name 'DTWAIN_SetShadowStringA';

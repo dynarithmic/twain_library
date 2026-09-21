@@ -1,19 +1,19 @@
 0 Kein Fehler
-1 Ungültiges Fenster Handle
-2 Speicherallokierung fehlgeschlagen
-3 Ungültiges DLL Handle
-4 Ungültiges Twain Source Handle
-5 TWAIN.DLL nicht gefunden
-6 Ungültige TWAIN.DLL
-7 Ungültiges Session Handle
-8 Ungültiger Twain Manager
-9 TWAIN.DLL Konnte nicht geladen werden
-10 TWAIN Quelle konnte nicht geöffnet werden
-11 TWAIN Quelle konnte nicht geschlossen werden
-12 TWAIN Quelle muß geöffnet werden bevor dieser Befehl ausgeführt werden kann.
-27 Scanvorgang konnte nicht vollständig ausgeführt werden. X/Y Auflösung enthält unterschiedliche Werte
-28 Ungültiger Dateiname
-32 TWAIN-Dreifach nicht ausgeführt. Ungültiger Twain-Manager
+501 Ungültiges Fenster Handle
+502 Speicherallokierung fehlgeschlagen
+503 Ungültiges DLL Handle
+504 Ungültiges Twain Source Handle
+505 TWAIN.DLL nicht gefunden
+506 Ungültige TWAIN.DLL
+507 Ungültiges Session Handle
+508 Ungültiger Twain Manager
+509 TWAIN.DLL Konnte nicht geladen werden
+510 TWAIN Quelle konnte nicht geöffnet werden
+511 TWAIN Quelle konnte nicht geschlossen werden
+512 TWAIN Quelle muß geöffnet werden bevor dieser Befehl ausgeführt werden kann.
+527 Scanvorgang konnte nicht vollständig ausgeführt werden. X/Y Auflösung enthält unterschiedliche Werte
+528 Ungültiger Dateiname
+532 TWAIN-Dreifach nicht ausgeführt. Ungültiger Twain-Manager
 1000 ***
 1001 Ungültiges DTWAIN_HANDLE
 1002 Ungültige DTWAIN_SOURCE
@@ -107,6 +107,7 @@
 1090 DTWAIN DLL ist nicht die korrekte Version
 1091 TWAIN-Sitzung ist derzeit aktiv
 1092 Der Vorgang erfordert TWAIN DSM 2.x oder höher
+1093 TWON_ENUMERATOR Container wurde für diesen Vorgang nicht verwendet.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache
