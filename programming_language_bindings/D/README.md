@@ -32,11 +32,13 @@ extern(Windows) ptrint myCallback64(ptrint wParam, ptrint lParam, long userData)
                                                        wParam,  // The actual constant value
                                                        cast(char *)szNotification, // name is returned here
                                                        256); // maximum size of the output buffer 
+    if (len > 0)
+    {
+        immutable log = format("Notification=%s, lParam=%s\n", szNotification[0 .. len-1], lParam);
 
-    immutable log = format("Notification=%s, lParam=%s\n", szNotification[0 .. len-1], lParam);
-
-    // Log this to the debug monitor (the Output Window if you are using the Visual Studio IDE)
-    OutputDebugStringW(toUTF16z(log));
+        // Log this to the debug monitor (the Output Window if you are using the Visual Studio IDE)
+        OutputDebugStringW(toUTF16z(log));
+    }
     return 1;
 }
 
