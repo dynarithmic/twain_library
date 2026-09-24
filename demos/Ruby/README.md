@@ -21,7 +21,7 @@ if __FILE__ == $0
   #dll found and loaded, so start the initialization
   dtwain_dll.DTWAIN_SysInitialize.call()
 
-  # Select a TWAIN souce
+  # Select a TWAIN source
   twainSource = dtwain_dll.DTWAIN_SelectSource.call()
 
   if twainSource.null?
