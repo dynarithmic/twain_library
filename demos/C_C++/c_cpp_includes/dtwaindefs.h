@@ -466,6 +466,7 @@
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
+#define  DTWAIN_TN_DEVICEEVENTFAILED              1101
 
 /* Sent if TWAIN driver sends cancel code during acquisition */
 #define DTWAIN_TN_TWAINPAGECANCELLED       1105
@@ -1573,6 +1574,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWAINDSM_LEGACY                  1
 #define DTWAIN_TWAINDSM_VERSION2                2
 #define DTWAIN_TWAINDSM_LATESTVERSION           4
+#define DTWAIN_TWAINDSM_VERSION2FALLBACK        8
 
 /* Windows TWAIN DSM search logic constants */
 #define DTWAIN_TWAINDSMSEARCH_NOTFOUND         (-1)

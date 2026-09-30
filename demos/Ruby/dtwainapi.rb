@@ -636,7 +636,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetExtCapFromName
    attr_reader :DTWAIN_GetExtCapFromNameA
    attr_reader :DTWAIN_GetExtCapFromNameW
-   attr_reader :DTWAIN_GetExtImageInfo
    attr_reader :DTWAIN_GetExtImageInfoData
    attr_reader :DTWAIN_GetExtImageInfoDataEx
    attr_reader :DTWAIN_GetExtImageInfoItem
@@ -675,6 +674,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetLanguage
    attr_reader :DTWAIN_GetLastCapEnumIndices
    attr_reader :DTWAIN_GetLastError
+   attr_reader :DTWAIN_GetLastTwainError
    attr_reader :DTWAIN_GetLibraryPath
    attr_reader :DTWAIN_GetLibraryPathA
    attr_reader :DTWAIN_GetLibraryPathW
@@ -1642,6 +1642,7 @@ class DTWAINAPI
    DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
    DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
    DTWAIN_TN_DEVICEEVENT = 1100
+   DTWAIN_TN_DEVICEEVENTFAILED = 1101
    DTWAIN_TN_TWAINPAGECANCELLED = 1105
    DTWAIN_TN_TWAINPAGEFAILED = 1106
    DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -2512,6 +2513,7 @@ class DTWAINAPI
    DTWAIN_TWAINDSM_LEGACY = 1
    DTWAIN_TWAINDSM_VERSION2 = 2
    DTWAIN_TWAINDSM_LATESTVERSION = 4
+   DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
    DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1)
    DTWAIN_TWAINDSMSEARCH_WSO = 0
    DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -2986,12 +2988,28 @@ class DTWAINAPI
    DTWAIN_CHECKDLLVERLESSEQ = 3
    DTWAIN_CHECKDLLVERGREATEREQ = 4
    DTWAIN_RESOURCE_COPYRIGHT = 9700
-
    @isinit = false
 
    def isInitialized()
        return @isinit
    end
+
+   def resolve_dll_path(dllname)
+       return File.expand_path(dllname) if File.file?(dllname)
+
+       # An explicit path must refer to that file; do not search by basename.
+       return nil unless File.basename(dllname) == dllname
+
+       ENV.fetch('PATH', '').split(File::PATH_SEPARATOR).each do |dir|
+           next if dir.empty?
+
+           candidate = File.join(dir, dllname)
+           return File.expand_path(candidate) if File.file?(candidate)
+       end
+
+       nil
+   end
+   private :resolve_dll_path
 
    def initialize(dllname)
 
@@ -3018,15 +3036,23 @@ class DTWAINAPI
            end  
        end
 
-       # Load the DLL 
-       dtwain_dll = Fiddle.dlopen(dllname)
-
-       if dtwain_dll.nil?
+       dllpath = resolve_dll_path(dllname)
+       if dllpath.nil?
+           puts "Unable to locate #{dllname}."
            @isinit = false
            return
-       else
-           @isinit = true
        end
+
+       begin
+           dtwain_dll = Fiddle.dlopen(dllpath)
+       rescue Fiddle::DLError => e
+           puts "Unable to load DTWAIN DLL: #{dllpath}"
+           puts e.message
+           @isinit = false
+           return
+       end
+
+       @isinit = true
 
        @DTWAIN_AcquireAudioFile = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireAudioFile'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_AcquireAudioFileA = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireAudioFileA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3529,7 +3555,6 @@ class DTWAINAPI
        @DTWAIN_GetExtCapFromName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromName'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtCapFromNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtCapFromNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfo'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoDataEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoDataEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetExtImageInfoItem = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItem'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3568,6 +3593,7 @@ class DTWAINAPI
        @DTWAIN_GetLanguage = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLanguage'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetLastCapEnumIndices = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastCapEnumIndices'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLastError = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastError'],[],Fiddle::TYPE_LONG)
+       @DTWAIN_GetLastTwainError = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastTwainError'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPath'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)

@@ -483,6 +483,7 @@ module TwainAPI =
     let public DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
     let public DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
     let public DTWAIN_TN_DEVICEEVENT = 1100
+    let public DTWAIN_TN_DEVICEEVENTFAILED = 1101
     let public DTWAIN_TN_TWAINPAGECANCELLED = 1105
     let public DTWAIN_TN_TWAINPAGEFAILED = 1106
     let public DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -1353,6 +1354,7 @@ module TwainAPI =
     let public DTWAIN_TWAINDSM_LEGACY = 1
     let public DTWAIN_TWAINDSM_VERSION2 = 2
     let public DTWAIN_TWAINDSM_LATESTVERSION = 4
+    let public DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
     let public DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1)
     let public DTWAIN_TWAINDSMSEARCH_WSO = 0
     let public DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -3088,9 +3090,6 @@ module TwainAPI =
     type DTWAIN_GetExtCapFromNameDelegate = delegate of string -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetExtImageInfoDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetExtImageInfoDataDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3167,6 +3166,9 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetLastErrorDelegate = delegate of unit -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetLastTwainErrorDelegate = delegate of DWORD byref * DWORD byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetLibraryPathDelegate = delegate of System.Text.StringBuilder * LONG -> LONG
@@ -4859,7 +4861,6 @@ module TwainAPI =
     let private GetErrorCallback64 = lazy (DynamicDll.Bind "DTWAIN_GetErrorCallback64" : DTWAIN_GetErrorCallback64Delegate)
     let private GetErrorString = lazy (DynamicDll.Bind "DTWAIN_GetErrorString" : DTWAIN_GetErrorStringDelegate)
     let private GetExtCapFromName = lazy (DynamicDll.Bind "DTWAIN_GetExtCapFromName" : DTWAIN_GetExtCapFromNameDelegate)
-    let private GetExtImageInfo = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfo" : DTWAIN_GetExtImageInfoDelegate)
     let private GetExtImageInfoData = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoData" : DTWAIN_GetExtImageInfoDataDelegate)
     let private GetExtImageInfoDataEx = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoDataEx" : DTWAIN_GetExtImageInfoDataExDelegate)
     let private GetExtImageInfoItem = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoItem" : DTWAIN_GetExtImageInfoItemDelegate)
@@ -4886,6 +4887,7 @@ module TwainAPI =
     let private GetLanguage = lazy (DynamicDll.Bind "DTWAIN_GetLanguage" : DTWAIN_GetLanguageDelegate)
     let private GetLastCapEnumIndices = lazy (DynamicDll.Bind "DTWAIN_GetLastCapEnumIndices" : DTWAIN_GetLastCapEnumIndicesDelegate)
     let private GetLastError = lazy (DynamicDll.Bind "DTWAIN_GetLastError" : DTWAIN_GetLastErrorDelegate)
+    let private GetLastTwainError = lazy (DynamicDll.Bind "DTWAIN_GetLastTwainError" : DTWAIN_GetLastTwainErrorDelegate)
     let private GetLibraryPath = lazy (DynamicDll.Bind "DTWAIN_GetLibraryPath" : DTWAIN_GetLibraryPathDelegate)
     let private GetLightPath = lazy (DynamicDll.Bind "DTWAIN_GetLightPath" : DTWAIN_GetLightPathDelegate)
     let private GetLightPathEx = lazy (DynamicDll.Bind "DTWAIN_GetLightPathEx" : DTWAIN_GetLightPathExDelegate)
@@ -6933,10 +6935,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetExtCapFromName.Value.Invoke(szname)
 
-    let DTWAIN_GetExtImageInfo (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetExtImageInfo.Value.Invoke(source)
-
     let DTWAIN_GetExtImageInfoData (source: DTWAIN_SOURCE) (nwhich: LONG) (data: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetExtImageInfoData.Value.Invoke(source, nwhich, &data)
@@ -7040,6 +7038,10 @@ module TwainAPI =
     let DTWAIN_GetLastError() : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetLastError.Value.Invoke()
+
+    let DTWAIN_GetLastTwainError (rcerror: DWORD byref) (ccerror: DWORD byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetLastTwainError.Value.Invoke(&rcerror, &ccerror)
 
     let DTWAIN_GetLibraryPath (lpszver: System.Text.StringBuilder) (nlength: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

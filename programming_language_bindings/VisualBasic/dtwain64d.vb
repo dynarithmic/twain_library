@@ -427,6 +427,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_INVALID_TWAINDSM2_BITMAP As Integer = 1058
     Public Const DTWAIN_TN_IMAGE_RESAMPLE_FAILURE As Integer = 1059
     Public Const DTWAIN_TN_DEVICEEVENT As Integer = 1100
+    Public Const DTWAIN_TN_DEVICEEVENTFAILED As Integer = 1101
     Public Const DTWAIN_TN_TWAINPAGECANCELLED As Integer = 1105
     Public Const DTWAIN_TN_TWAINPAGEFAILED As Integer = 1106
     Public Const DTWAIN_TN_APPUPDATEDDIB As Integer = 1107
@@ -1297,6 +1298,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TWAINDSM_LEGACY As Integer = 1
     Public Const DTWAIN_TWAINDSM_VERSION2 As Integer = 2
     Public Const DTWAIN_TWAINDSM_LATESTVERSION As Integer = 4
+    Public Const DTWAIN_TWAINDSM_VERSION2FALLBACK As Integer = 8
     Public Const DTWAIN_TWAINDSMSEARCH_NOTFOUND As Integer = (-1)
     Public Const DTWAIN_TWAINDSMSEARCH_WSO As Integer = 0
     Public Const DTWAIN_TWAINDSMSEARCH_WOS As Integer = 1
@@ -2180,7 +2182,6 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetErrorCallback64 Lib "dtwain64d.dll" () As DTwainErrorProc64
     Public Declare Ansi Function DTWAIN_GetErrorString Lib "dtwain64d.dll" (lError As Integer, <MarshalAs(UnmanagedType.LPStr)> lpszBuffer As StringBuilder, nMaxLen As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetExtCapFromName Lib "dtwain64d.dll" (szName As String) As Integer
-    Public Declare Function DTWAIN_GetExtImageInfo Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetExtImageInfoData Lib "dtwain64d.dll" (Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetExtImageInfoDataEx Lib "dtwain64d.dll" (Source As System.IntPtr, nWhich As Integer) As System.IntPtr
     Public Declare Function DTWAIN_GetExtImageInfoItem Lib "dtwain64d.dll" (Source As System.IntPtr, nWhich As Integer, ByRef InfoID As Integer, ByRef NumItems As Integer, ByRef Type As Integer) As Integer
@@ -2207,6 +2208,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetLanguage Lib "dtwain64d.dll" () As Integer
     Public Declare Function DTWAIN_GetLastCapEnumIndices Lib "dtwain64d.dll" (Source As System.IntPtr, ByRef pCurrentIndex As Integer, ByRef pDefaultIndex As Integer) As Integer
     Public Declare Function DTWAIN_GetLastError Lib "dtwain64d.dll" () As Integer
+    Public Declare Function DTWAIN_GetLastTwainError Lib "dtwain64d.dll" (ByRef rcError As UInteger, ByRef ccError As UInteger) As Integer
     Public Declare Ansi Function DTWAIN_GetLibraryPath Lib "dtwain64d.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
     Public Declare Function DTWAIN_GetLightPath Lib "dtwain64d.dll" (Source As System.IntPtr, ByRef lpLightPath As Integer) As Integer
     Public Declare Function DTWAIN_GetLightPathEx Lib "dtwain64d.dll" (Source As System.IntPtr) As Integer

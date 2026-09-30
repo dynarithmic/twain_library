@@ -480,6 +480,7 @@ namespace Dynarithmic
         public const int DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
         public const int DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059;
         public const int DTWAIN_TN_DEVICEEVENT = 1100;
+        public const int DTWAIN_TN_DEVICEEVENTFAILED = 1101;
         public const int DTWAIN_TN_TWAINPAGECANCELLED = 1105;
         public const int DTWAIN_TN_TWAINPAGEFAILED = 1106;
         public const int DTWAIN_TN_APPUPDATEDDIB = 1107;
@@ -1350,6 +1351,7 @@ namespace Dynarithmic
         public const int DTWAIN_TWAINDSM_LEGACY = 1;
         public const int DTWAIN_TWAINDSM_VERSION2 = 2;
         public const int DTWAIN_TWAINDSM_LATESTVERSION = 4;
+        public const int DTWAIN_TWAINDSM_VERSION2FALLBACK = 8;
         public const int DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1);
         public const int DTWAIN_TWAINDSMSEARCH_WSO = 0;
         public const int DTWAIN_TWAINDSMSEARCH_WOS = 1;
@@ -3100,9 +3102,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetExtCapFromName([MarshalAs(UnmanagedType.LPStr)] string szName);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3197,6 +3196,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetLastError();
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLastTwainError(ref DWORD rcError, ref DWORD ccError);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetLibraryPath([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszVer, int nLength);

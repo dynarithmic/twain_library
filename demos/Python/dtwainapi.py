@@ -393,6 +393,7 @@ DTWAIN_TN_CLOSEDIBFAILED = 1057
 DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
 DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
 DTWAIN_TN_DEVICEEVENT = 1100
+DTWAIN_TN_DEVICEEVENTFAILED = 1101
 DTWAIN_TN_TWAINPAGECANCELLED = 1105
 DTWAIN_TN_TWAINPAGEFAILED = 1106
 DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -1263,6 +1264,7 @@ DTWAIN_PDFPAGETYPE_BW = 1
 DTWAIN_TWAINDSM_LEGACY = 1
 DTWAIN_TWAINDSM_VERSION2 = 2
 DTWAIN_TWAINDSM_LATESTVERSION = 4
+DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
 DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1)
 DTWAIN_TWAINDSMSEARCH_WSO = 0
 DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -2338,7 +2340,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetExtCapFromNameA.restype = ct.c_long
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
-     theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
@@ -2377,6 +2378,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
      theDLL.DTWAIN_GetLastCapEnumIndices.restype = ct.c_long
      theDLL.DTWAIN_GetLastError.restype = ct.c_long
+     theDLL.DTWAIN_GetLastTwainError.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPath.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathA.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathW.restype = ct.c_long
@@ -3495,7 +3497,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetExtCapFromName.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_GetExtCapFromNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
-     theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -3532,6 +3533,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLastCapEnumIndices.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetLastTwainError.argtypes = [ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
@@ -4658,7 +4660,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromName.restype = ct.c_long
      theDLL.DTWAIN_GetExtCapFromNameA.restype = ct.c_long
      theDLL.DTWAIN_GetExtCapFromNameW.restype = ct.c_long
-     theDLL.DTWAIN_GetExtImageInfo.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoData.restype = ct.c_long
      theDLL.DTWAIN_GetExtImageInfoDataEx.restype = ct.c_void_p
      theDLL.DTWAIN_GetExtImageInfoItem.restype = ct.c_long
@@ -4697,6 +4698,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetLanguage.restype = ct.c_long
      theDLL.DTWAIN_GetLastCapEnumIndices.restype = ct.c_long
      theDLL.DTWAIN_GetLastError.restype = ct.c_long
+     theDLL.DTWAIN_GetLastTwainError.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPath.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathA.restype = ct.c_long
      theDLL.DTWAIN_GetLibraryPathW.restype = ct.c_long
@@ -5815,7 +5817,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetExtCapFromName.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetExtCapFromNameA.argtypes = [ct.c_char_p]
      theDLL.DTWAIN_GetExtCapFromNameW.argtypes = [ct.c_wchar_p]
-     theDLL.DTWAIN_GetExtImageInfo.argtypes = [ct.c_void_p]
      theDLL.DTWAIN_GetExtImageInfoData.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_GetExtImageInfoDataEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetExtImageInfoItem.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -5852,6 +5853,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetJpegXRValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetLastCapEnumIndices.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
+     theDLL.DTWAIN_GetLastTwainError.argtypes = [ct.POINTER(ct.c_ulong), ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetLibraryPath.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
      theDLL.DTWAIN_GetLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]

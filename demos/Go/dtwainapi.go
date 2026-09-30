@@ -435,6 +435,7 @@ const (
     DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
     DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
     DTWAIN_TN_DEVICEEVENT = 1100
+    DTWAIN_TN_DEVICEEVENTFAILED = 1101
     DTWAIN_TN_TWAINPAGECANCELLED = 1105
     DTWAIN_TN_TWAINPAGEFAILED = 1106
     DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -1305,6 +1306,7 @@ const (
     DTWAIN_TWAINDSM_LEGACY = 1
     DTWAIN_TWAINDSM_VERSION2 = 2
     DTWAIN_TWAINDSM_LATESTVERSION = 4
+    DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
     DTWAIN_TWAINDSMSEARCH_NOTFOUND = -1
     DTWAIN_TWAINDSMSEARCH_WSO = 0
     DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -2295,45 +2297,45 @@ func Load_DTWAINDLL(path string) (*DTWAIN_DLL, error) {
     arr[496] = "DTWAIN_GetExtCapFromName"
     arr[497] = "DTWAIN_GetExtCapFromNameA"
     arr[498] = "DTWAIN_GetExtCapFromNameW"
-    arr[499] = "DTWAIN_GetExtImageInfo"
-    arr[500] = "DTWAIN_GetExtImageInfoData"
-    arr[501] = "DTWAIN_GetExtImageInfoDataEx"
-    arr[502] = "DTWAIN_GetExtImageInfoItem"
-    arr[503] = "DTWAIN_GetExtImageInfoItemEx"
-    arr[504] = "DTWAIN_GetExtNameFromCap"
-    arr[505] = "DTWAIN_GetExtNameFromCapA"
-    arr[506] = "DTWAIN_GetExtNameFromCapW"
-    arr[507] = "DTWAIN_GetFeederAlignment"
-    arr[508] = "DTWAIN_GetFeederFuncs"
-    arr[509] = "DTWAIN_GetFeederOrder"
-    arr[510] = "DTWAIN_GetFeederWaitTime"
-    arr[511] = "DTWAIN_GetFileCompressionType"
-    arr[512] = "DTWAIN_GetFileSavePageCount"
-    arr[513] = "DTWAIN_GetFileTypeExtensions"
-    arr[514] = "DTWAIN_GetFileTypeExtensionsA"
-    arr[515] = "DTWAIN_GetFileTypeExtensionsW"
-    arr[516] = "DTWAIN_GetFileTypeName"
-    arr[517] = "DTWAIN_GetFileTypeNameA"
-    arr[518] = "DTWAIN_GetFileTypeNameW"
-    arr[519] = "DTWAIN_GetHalftone"
-    arr[520] = "DTWAIN_GetHalftoneA"
-    arr[521] = "DTWAIN_GetHalftoneW"
-    arr[522] = "DTWAIN_GetHighlight"
-    arr[523] = "DTWAIN_GetHighlightString"
-    arr[524] = "DTWAIN_GetHighlightStringA"
-    arr[525] = "DTWAIN_GetHighlightStringW"
-    arr[526] = "DTWAIN_GetImageInfo"
-    arr[527] = "DTWAIN_GetImageInfoString"
-    arr[528] = "DTWAIN_GetImageInfoStringA"
-    arr[529] = "DTWAIN_GetImageInfoStringW"
-    arr[530] = "DTWAIN_GetImageLayoutInfo"
-    arr[531] = "DTWAIN_GetJobControl"
-    arr[532] = "DTWAIN_GetJobControlEx"
-    arr[533] = "DTWAIN_GetJpegValues"
-    arr[534] = "DTWAIN_GetJpegXRValues"
-    arr[535] = "DTWAIN_GetLanguage"
-    arr[536] = "DTWAIN_GetLastCapEnumIndices"
-    arr[537] = "DTWAIN_GetLastError"
+    arr[499] = "DTWAIN_GetExtImageInfoData"
+    arr[500] = "DTWAIN_GetExtImageInfoDataEx"
+    arr[501] = "DTWAIN_GetExtImageInfoItem"
+    arr[502] = "DTWAIN_GetExtImageInfoItemEx"
+    arr[503] = "DTWAIN_GetExtNameFromCap"
+    arr[504] = "DTWAIN_GetExtNameFromCapA"
+    arr[505] = "DTWAIN_GetExtNameFromCapW"
+    arr[506] = "DTWAIN_GetFeederAlignment"
+    arr[507] = "DTWAIN_GetFeederFuncs"
+    arr[508] = "DTWAIN_GetFeederOrder"
+    arr[509] = "DTWAIN_GetFeederWaitTime"
+    arr[510] = "DTWAIN_GetFileCompressionType"
+    arr[511] = "DTWAIN_GetFileSavePageCount"
+    arr[512] = "DTWAIN_GetFileTypeExtensions"
+    arr[513] = "DTWAIN_GetFileTypeExtensionsA"
+    arr[514] = "DTWAIN_GetFileTypeExtensionsW"
+    arr[515] = "DTWAIN_GetFileTypeName"
+    arr[516] = "DTWAIN_GetFileTypeNameA"
+    arr[517] = "DTWAIN_GetFileTypeNameW"
+    arr[518] = "DTWAIN_GetHalftone"
+    arr[519] = "DTWAIN_GetHalftoneA"
+    arr[520] = "DTWAIN_GetHalftoneW"
+    arr[521] = "DTWAIN_GetHighlight"
+    arr[522] = "DTWAIN_GetHighlightString"
+    arr[523] = "DTWAIN_GetHighlightStringA"
+    arr[524] = "DTWAIN_GetHighlightStringW"
+    arr[525] = "DTWAIN_GetImageInfo"
+    arr[526] = "DTWAIN_GetImageInfoString"
+    arr[527] = "DTWAIN_GetImageInfoStringA"
+    arr[528] = "DTWAIN_GetImageInfoStringW"
+    arr[529] = "DTWAIN_GetImageLayoutInfo"
+    arr[530] = "DTWAIN_GetJobControl"
+    arr[531] = "DTWAIN_GetJobControlEx"
+    arr[532] = "DTWAIN_GetJpegValues"
+    arr[533] = "DTWAIN_GetJpegXRValues"
+    arr[534] = "DTWAIN_GetLanguage"
+    arr[535] = "DTWAIN_GetLastCapEnumIndices"
+    arr[536] = "DTWAIN_GetLastError"
+    arr[537] = "DTWAIN_GetLastTwainError"
     arr[538] = "DTWAIN_GetLibraryPath"
     arr[539] = "DTWAIN_GetLibraryPathA"
     arr[540] = "DTWAIN_GetLibraryPathW"
@@ -6058,12 +6060,6 @@ func (d *DTWAIN_DLL) DTWAIN_GetExtCapFromNameW(szName uintptr) int32 {
     return int32(v1)
 }
 
-func (d *DTWAIN_DLL) DTWAIN_GetExtImageInfo(Source DTWAIN_SOURCE) int32 {
-    theProc := d.procs["DTWAIN_GetExtImageInfo"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(Source))
-    return int32(v1)
-}
-
 func (d *DTWAIN_DLL) DTWAIN_GetExtImageInfoData(Source DTWAIN_SOURCE, nWhich int32, Data LPDTWAIN_ARRAY) int32 {
     theProc := d.procs["DTWAIN_GetExtImageInfoData"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(nWhich), uintptr(unsafe.Pointer(Data)))
@@ -6289,6 +6285,12 @@ func (d *DTWAIN_DLL) DTWAIN_GetLastCapEnumIndices(Source DTWAIN_SOURCE, pCurrent
 func (d *DTWAIN_DLL) DTWAIN_GetLastError() int32 {
     theProc := d.procs["DTWAIN_GetLastError"]
     v1, _, _ := syscall.SyscallN(theProc)
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetLastTwainError(rcError *uint32, ccError *uint32) int32 {
+    theProc := d.procs["DTWAIN_GetLastTwainError"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(rcError)), uintptr(unsafe.Pointer(ccError)))
     return int32(v1)
 }
 

@@ -614,7 +614,6 @@ int InitDTWAINInterface(DYNDTWAIN_API* pApi, HMODULE hModule)
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtCapFromName", D_GETEXTCAPFROMNAMEFUNC, pApi->DTWAIN_GetExtCapFromName);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtCapFromNameA", D_GETEXTCAPFROMNAMEAFUNC, pApi->DTWAIN_GetExtCapFromNameA);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtCapFromNameW", D_GETEXTCAPFROMNAMEWFUNC, pApi->DTWAIN_GetExtCapFromNameW);
-          LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtImageInfo", D_GETEXTIMAGEINFOFUNC, pApi->DTWAIN_GetExtImageInfo);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtImageInfoData", D_GETEXTIMAGEINFODATAFUNC, pApi->DTWAIN_GetExtImageInfoData);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtImageInfoDataEx", D_GETEXTIMAGEINFODATAEXFUNC, pApi->DTWAIN_GetExtImageInfoDataEx);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetExtImageInfoItem", D_GETEXTIMAGEINFOITEMFUNC, pApi->DTWAIN_GetExtImageInfoItem);
@@ -653,6 +652,7 @@ int InitDTWAINInterface(DYNDTWAIN_API* pApi, HMODULE hModule)
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLanguage", D_GETLANGUAGEFUNC, pApi->DTWAIN_GetLanguage);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLastCapEnumIndices", D_GETLASTCAPENUMINDICESFUNC, pApi->DTWAIN_GetLastCapEnumIndices);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLastError", D_GETLASTERRORFUNC, pApi->DTWAIN_GetLastError);
+          LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLastTwainError", D_GETLASTTWAINERRORFUNC, pApi->DTWAIN_GetLastTwainError);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLibraryPath", D_GETLIBRARYPATHFUNC, pApi->DTWAIN_GetLibraryPath);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLibraryPathA", D_GETLIBRARYPATHAFUNC, pApi->DTWAIN_GetLibraryPathA);
           LOADFUNCTIONIMPL(hModule, "DTWAIN_GetLibraryPathW", D_GETLIBRARYPATHWFUNC, pApi->DTWAIN_GetLibraryPathW);

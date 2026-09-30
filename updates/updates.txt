@@ -27,7 +27,17 @@ DTWAIN Version changes
 - The DTWAIN_GetDeviceEvent() and DTWAIN_GetDeviceEventEx() functions will now return 9999 for an unknown device
   event.  
 
-- Fix issue with DTWAIN_GetAcquireArea() possibly not returning the values used for the area of acquisition.
+- Added to function DTWAIN_SetTwainDSM() the following option:
+
+       DTWAIN_TWAINDSM_VERSION2FALLBACK
+
+  For example:
+
+    DTWAIN_SetTwainDSM(DTWAIN_TWAINDSM_VERSION2FALLBACK);
+
+  This option will only apply to 32-bit applications, as 64-bit applications will ignore this option.  
+  This option allows loading the 32-bit TWAINDSM.DLL TWAIN Data Source Manager if it is found.  
+  If TWAINDSM.DLL is not found, the "normal" TWAIN_32.DLL Data Source Manager will be used.
 
 - Added function DTWAIN_GetImageLayoutInfo() that returns the document number, frame number, and page number 
   when acquiring images.  The prototype for this function is as follows:
@@ -36,6 +46,9 @@ DTWAIN Version changes
 
     The DocumentNumber, PageNumber, and FrameNumber will be filled in with the relevant information on return of this function (any of 
     these parameters can also be NULL, meaning that the value should be ignored).
+
+
+- Fix issue with DTWAIN_GetAcquireArea() possibly not returning the values used for the area of acquisition.
 
 - Fix C language compilation issues using the LoadLibrary() / GetProcAddress() language wrapper (dtwimpl.c)
 

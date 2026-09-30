@@ -523,6 +523,7 @@ const
   DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
   DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059;
   DTWAIN_TN_DEVICEEVENT = 1100;
+  DTWAIN_TN_DEVICEEVENTFAILED = 1101;
   DTWAIN_TN_TWAINPAGECANCELLED = 1105;
   DTWAIN_TN_TWAINPAGEFAILED = 1106;
   DTWAIN_TN_APPUPDATEDDIB = 1107;
@@ -1393,6 +1394,7 @@ const
   DTWAIN_TWAINDSM_LEGACY = 1;
   DTWAIN_TWAINDSM_VERSION2 = 2;
   DTWAIN_TWAINDSM_LATESTVERSION = 4;
+  DTWAIN_TWAINDSM_VERSION2FALLBACK = 8;
   DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1);
   DTWAIN_TWAINDSMSEARCH_WSO = 0;
   DTWAIN_TWAINDSMSEARCH_WOS = 1;
@@ -2371,7 +2373,6 @@ function DTWAIN_GetErrorStringW(lError:LONG; lpszBuffer:LPWSTR; nLength:LONG) : 
 function DTWAIN_GetExtCapFromName(szName:LPCTSTR) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetExtCapFromName';
 function DTWAIN_GetExtCapFromNameA(szName:LPCSTR) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetExtCapFromNameA';
 function DTWAIN_GetExtCapFromNameW(szName:LPCWSTR) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetExtCapFromNameW';
-function DTWAIN_GetExtImageInfo(Source:DTWAIN_SOURCE) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetExtImageInfo';
 function DTWAIN_GetExtImageInfoData(Source:DTWAIN_SOURCE; nWhich:LONG; Data:LPDTWAIN_ARRAY) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetExtImageInfoData';
 function DTWAIN_GetExtImageInfoDataEx(Source:DTWAIN_SOURCE; nWhich:LONG) : DTWAIN_ARRAY; external 'dtwain64d.dll'  name 'DTWAIN_GetExtImageInfoDataEx';
 function DTWAIN_GetExtImageInfoItem(Source:DTWAIN_SOURCE; nWhich:LONG; InfoID:LPLONG; NumItems:LPLONG; Type_:LPLONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetExtImageInfoItem';
@@ -2410,6 +2411,7 @@ function DTWAIN_GetJpegXRValues(Source:DTWAIN_SOURCE; pQuality:LPLONG; Progressi
 function DTWAIN_GetLanguage : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetLanguage';
 function DTWAIN_GetLastCapEnumIndices(Source:DTWAIN_SOURCE; pCurrentIndex:LPLONG; pDefaultIndex:LPLONG) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetLastCapEnumIndices';
 function DTWAIN_GetLastError : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetLastError';
+function DTWAIN_GetLastTwainError(rcError:LPDWORD; ccError:LPDWORD) : BOOL; external 'dtwain64d.dll'  name 'DTWAIN_GetLastTwainError';
 function DTWAIN_GetLibraryPath(lpszVer:LPTSTR; nLength:LONG) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetLibraryPath';
 function DTWAIN_GetLibraryPathA(lpszVer:LPSTR; nLength:LONG) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetLibraryPathA';
 function DTWAIN_GetLibraryPathW(lpszVer:LPWSTR; nLength:LONG) : LONG; external 'dtwain64d.dll'  name 'DTWAIN_GetLibraryPathW';

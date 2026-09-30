@@ -598,6 +598,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_TN_INVALID_TWAINDSM2_BITMAP As Integer = 1058
         Public Const DTWAIN_TN_IMAGE_RESAMPLE_FAILURE As Integer = 1059
         Public Const DTWAIN_TN_DEVICEEVENT As Integer = 1100
+        Public Const DTWAIN_TN_DEVICEEVENTFAILED As Integer = 1101
         Public Const DTWAIN_TN_TWAINPAGECANCELLED As Integer = 1105
         Public Const DTWAIN_TN_TWAINPAGEFAILED As Integer = 1106
         Public Const DTWAIN_TN_APPUPDATEDDIB As Integer = 1107
@@ -1468,6 +1469,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_TWAINDSM_LEGACY As Integer = 1
         Public Const DTWAIN_TWAINDSM_VERSION2 As Integer = 2
         Public Const DTWAIN_TWAINDSM_LATESTVERSION As Integer = 4
+        Public Const DTWAIN_TWAINDSM_VERSION2FALLBACK As Integer = 8
         Public Const DTWAIN_TWAINDSMSEARCH_NOTFOUND As Integer = (-1)
         Public Const DTWAIN_TWAINDSMSEARCH_WSO As Integer = 0
         Public Const DTWAIN_TWAINDSMSEARCH_WOS As Integer = 1
@@ -3151,9 +3153,6 @@ Namespace Dynarithmic
         Private Delegate Function DTWAIN_GetExtCapFromNameDelegate(szName As String) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
-        Private Delegate Function DTWAIN_GetExtImageInfoDelegate(Source As System.IntPtr) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetExtImageInfoDataDelegate(Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
@@ -3230,6 +3229,9 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetLastErrorDelegate() As Integer
+        
+        <UnmanagedFunctionPointer(CallingConvention.StdCall)>
+        Private Delegate Function DTWAIN_GetLastTwainErrorDelegate(ByRef rcError As UInteger, ByRef ccError As UInteger) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetLibraryPathDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -6131,10 +6133,6 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetExtCapFromName(szName)
         End Function
         
-        Public Function DTWAIN_GetExtImageInfo(Source As System.IntPtr) As Integer
-        Return api.DTWAIN_GetExtImageInfo(Source)
-        End Function
-        
         Public Function DTWAIN_GetExtImageInfoData(Source As System.IntPtr, nWhich As Integer, ByRef Data As System.IntPtr) As Integer
         Return api.DTWAIN_GetExtImageInfoData(Source, nWhich, Data)
         End Function
@@ -6237,6 +6235,10 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetLastError() As Integer
         Return api.DTWAIN_GetLastError()
+        End Function
+        
+        Public Function DTWAIN_GetLastTwainError(ByRef rcError As UInteger, ByRef ccError As UInteger) As Integer
+        Return api.DTWAIN_GetLastTwainError(rcError, ccError)
         End Function
         
         Public Function DTWAIN_GetLibraryPath(<MarshalAs(UnmanagedType.LPTStr)> lpszVer As StringBuilder, nLength As Integer) As Integer
@@ -8378,7 +8380,6 @@ Namespace Dynarithmic
             Public DTWAIN_GetErrorCallback64 As DTWAIN_GetErrorCallback64Delegate
             Public DTWAIN_GetErrorString As DTWAIN_GetErrorStringDelegate
             Public DTWAIN_GetExtCapFromName As DTWAIN_GetExtCapFromNameDelegate
-            Public DTWAIN_GetExtImageInfo As DTWAIN_GetExtImageInfoDelegate
             Public DTWAIN_GetExtImageInfoData As DTWAIN_GetExtImageInfoDataDelegate
             Public DTWAIN_GetExtImageInfoDataEx As DTWAIN_GetExtImageInfoDataExDelegate
             Public DTWAIN_GetExtImageInfoItem As DTWAIN_GetExtImageInfoItemDelegate
@@ -8405,6 +8406,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetLanguage As DTWAIN_GetLanguageDelegate
             Public DTWAIN_GetLastCapEnumIndices As DTWAIN_GetLastCapEnumIndicesDelegate
             Public DTWAIN_GetLastError As DTWAIN_GetLastErrorDelegate
+            Public DTWAIN_GetLastTwainError As DTWAIN_GetLastTwainErrorDelegate
             Public DTWAIN_GetLibraryPath As DTWAIN_GetLibraryPathDelegate
             Public DTWAIN_GetLightPath As DTWAIN_GetLightPathDelegate
             Public DTWAIN_GetLightPathEx As DTWAIN_GetLightPathExDelegate

@@ -148,7 +148,7 @@
             GC.SuppressFinalize(this);
         }
 
-        ~DTWAINNativeLibraryBase() => Dispose();
+        ~DTWAINNativeLibraryBase() { Dispose(); }
 
         // ---------------- Win32 ----------------
 
@@ -498,6 +498,7 @@
         public const int DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
         public const int DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059;
         public const int DTWAIN_TN_DEVICEEVENT = 1100;
+        public const int DTWAIN_TN_DEVICEEVENTFAILED = 1101;
         public const int DTWAIN_TN_TWAINPAGECANCELLED = 1105;
         public const int DTWAIN_TN_TWAINPAGEFAILED = 1106;
         public const int DTWAIN_TN_APPUPDATEDDIB = 1107;
@@ -1368,6 +1369,7 @@
         public const int DTWAIN_TWAINDSM_LEGACY = 1;
         public const int DTWAIN_TWAINDSM_VERSION2 = 2;
         public const int DTWAIN_TWAINDSM_LATESTVERSION = 4;
+        public const int DTWAIN_TWAINDSM_VERSION2FALLBACK = 8;
         public const int DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1);
         public const int DTWAIN_TWAINDSMSEARCH_WSO = 0;
         public const int DTWAIN_TWAINDSMSEARCH_WOS = 1;
@@ -2363,7 +2365,6 @@
         public delegate int DTWAIN_GetErrorStringDelegate(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetErrorStringDelegate_overload(int lError, System.IntPtr lpszBuffer, int nMaxLen);
         public delegate int DTWAIN_GetExtCapFromNameDelegate([MarshalAs(UnmanagedType.LPTStr)] string szName);
-        public delegate int DTWAIN_GetExtImageInfoDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetExtImageInfoDataDelegate(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data);
         public delegate DTWAIN_ARRAY DTWAIN_GetExtImageInfoDataExDelegate(DTWAIN_SOURCE Source, int nWhich);
         public delegate int DTWAIN_GetExtImageInfoItemDelegate(DTWAIN_SOURCE Source, int nWhich, ref int InfoID, ref int NumItems, ref int Type);
@@ -2396,6 +2397,7 @@
         public delegate int DTWAIN_GetLanguageDelegate();
         public delegate int DTWAIN_GetLastCapEnumIndicesDelegate(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex);
         public delegate int DTWAIN_GetLastErrorDelegate();
+        public delegate int DTWAIN_GetLastTwainErrorDelegate(ref DWORD rcError, ref DWORD ccError);
         public delegate int DTWAIN_GetLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength);
         public delegate int DTWAIN_GetLibraryPathDelegate_overload(System.IntPtr lpszVer, int nLength);
         public delegate int DTWAIN_GetLightPathDelegate(DTWAIN_SOURCE Source, ref int lpLightPath);
@@ -4160,9 +4162,6 @@
         [DTWAINNativeFunction("DTWAIN_GetExtCapFromName")]
         private readonly DTWAIN_GetExtCapFromNameDelegate  _DTWAIN_GetExtCapFromName;
 
-        [DTWAINNativeFunction("DTWAIN_GetExtImageInfo")]
-        private readonly DTWAIN_GetExtImageInfoDelegate  _DTWAIN_GetExtImageInfo;
-
         [DTWAINNativeFunction("DTWAIN_GetExtImageInfoData")]
         private readonly DTWAIN_GetExtImageInfoDataDelegate  _DTWAIN_GetExtImageInfoData;
 
@@ -4258,6 +4257,9 @@
 
         [DTWAINNativeFunction("DTWAIN_GetLastError")]
         private readonly DTWAIN_GetLastErrorDelegate  _DTWAIN_GetLastError;
+
+        [DTWAINNativeFunction("DTWAIN_GetLastTwainError")]
+        private readonly DTWAIN_GetLastTwainErrorDelegate  _DTWAIN_GetLastTwainError;
 
         [DTWAINNativeFunction("DTWAIN_GetLibraryPath")]
         private readonly DTWAIN_GetLibraryPathDelegate  _DTWAIN_GetLibraryPath;
@@ -5693,2808 +5695,2808 @@
         [DTWAINNativeFunction("DTWAIN_UseMultipleThreads")]
         private readonly DTWAIN_UseMultipleThreadsDelegate  _DTWAIN_UseMultipleThreads;
         public  int DTWAIN_AcquireAudioFile(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszFile, int lFileFlags, int lMaxClips, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxClips, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireAudioFile(Source, lpszFile, lFileFlags, lMaxClips, bShowUI, bCloseSource, ref pStatus); }
 
         public  DTWAIN_ARRAY DTWAIN_AcquireAudioNative(DTWAIN_SOURCE Source, int nMaxAudioClips, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireAudioNative(Source, nMaxAudioClips, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireAudioNative(Source, nMaxAudioClips, bShowUI, bCloseSource, ref pStatus); }
 
         public  int DTWAIN_AcquireAudioNativeEx(DTWAIN_SOURCE Source, int nMaxAudioClips, int bShowUI, int bCloseSource, DTWAIN_ARRAY Acquisitions, ref int pStatus)
-        => _DTWAIN_AcquireAudioNativeEx(Source, nMaxAudioClips, bShowUI, bCloseSource, Acquisitions, ref pStatus);
+        { return _DTWAIN_AcquireAudioNativeEx(Source, nMaxAudioClips, bShowUI, bCloseSource, Acquisitions, ref pStatus); }
 
         public  DTWAIN_ARRAY DTWAIN_AcquireBuffered(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireBuffered(Source, PixelType, nMaxPages, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireBuffered(Source, PixelType, nMaxPages, bShowUI, bCloseSource, ref pStatus); }
 
         public  int DTWAIN_AcquireBufferedEx(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, DTWAIN_ARRAY Acquisitions, ref int pStatus)
-        => _DTWAIN_AcquireBufferedEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, ref pStatus);
+        { return _DTWAIN_AcquireBufferedEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, ref pStatus); }
 
         public  int DTWAIN_AcquireFile(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpszFile, int lFileType, int lFileFlags, int PixelType, int lMaxPages, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireFile(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireFile(Source, lpszFile, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, ref pStatus); }
 
         public  int DTWAIN_AcquireFileEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY aFileNames, int lFileType, int lFileFlags, int PixelType, int lMaxPages, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireFileEx(Source, aFileNames, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireFileEx(Source, aFileNames, lFileType, lFileFlags, PixelType, lMaxPages, bShowUI, bCloseSource, ref pStatus); }
 
         public  DTWAIN_ARRAY DTWAIN_AcquireNative(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireNative(Source, PixelType, nMaxPages, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireNative(Source, PixelType, nMaxPages, bShowUI, bCloseSource, ref pStatus); }
 
         public  int DTWAIN_AcquireNativeEx(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int bShowUI, int bCloseSource, DTWAIN_ARRAY Acquisitions, ref int pStatus)
-        => _DTWAIN_AcquireNativeEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, ref pStatus);
+        { return _DTWAIN_AcquireNativeEx(Source, PixelType, nMaxPages, bShowUI, bCloseSource, Acquisitions, ref pStatus); }
 
         public  DTWAIN_ARRAY DTWAIN_AcquireToClipboard(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int nTransferMode, int bDiscardDibs, int bShowUI, int bCloseSource, ref int pStatus)
-        => _DTWAIN_AcquireToClipboard(Source, PixelType, nMaxPages, nTransferMode, bDiscardDibs, bShowUI, bCloseSource, ref pStatus);
+        { return _DTWAIN_AcquireToClipboard(Source, PixelType, nMaxPages, nTransferMode, bDiscardDibs, bShowUI, bCloseSource, ref pStatus); }
 
         public  int DTWAIN_AddPDFText(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, uint Flags)
-        => _DTWAIN_AddPDFText(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);
+        { return _DTWAIN_AddPDFText(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags); }
 
         public  int DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement)
-        => _DTWAIN_AddPDFTextElement(Source, TextElement);
+        { return _DTWAIN_AddPDFTextElement(Source, TextElement); }
 
         public  int DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string fontName, [MarshalAs(UnmanagedType.LPTStr)] string fontSize, int colorRGB, int renderMode, [MarshalAs(UnmanagedType.LPTStr)] string scaling, [MarshalAs(UnmanagedType.LPTStr)] string charSpacing, [MarshalAs(UnmanagedType.LPTStr)] string wordSpacing, [MarshalAs(UnmanagedType.LPTStr)] string strokeWidth, uint Flags)
-        => _DTWAIN_AddPDFTextString(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags);
+        { return _DTWAIN_AddPDFTextString(Source, szText, xPos, yPos, fontName, fontSize, colorRGB, renderMode, scaling, charSpacing, wordSpacing, strokeWidth, Flags); }
 
         public  HANDLE DTWAIN_AllocateMemory(uint memSize)
-        => _DTWAIN_AllocateMemory(memSize);
+        { return _DTWAIN_AllocateMemory(memSize); }
 
         public  HANDLE DTWAIN_AllocateMemory64(ULONG64 memSize)
-        => _DTWAIN_AllocateMemory64(memSize);
+        { return _DTWAIN_AllocateMemory64(memSize); }
 
         public  HANDLE DTWAIN_AllocateMemoryEx(uint memSize)
-        => _DTWAIN_AllocateMemoryEx(memSize);
+        { return _DTWAIN_AllocateMemoryEx(memSize); }
 
         public  int DTWAIN_AppHandlesExceptions(int bSet)
-        => _DTWAIN_AppHandlesExceptions(bSet);
+        { return _DTWAIN_AppHandlesExceptions(bSet); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayANSIStringToFloat(DTWAIN_ARRAY StringArray)
-        => _DTWAIN_ArrayANSIStringToFloat(StringArray);
+        { return _DTWAIN_ArrayANSIStringToFloat(StringArray); }
 
         public  int DTWAIN_ArrayAdd(DTWAIN_ARRAY pArray, System.IntPtr pVariant)
-        => _DTWAIN_ArrayAdd(pArray, pVariant);
+        { return _DTWAIN_ArrayAdd(pArray, pVariant); }
 
         public  int DTWAIN_ArrayAddANSIString(DTWAIN_ARRAY pArray, string Val)
-        => _DTWAIN_ArrayAddANSIString(pArray, Val);
+        { return _DTWAIN_ArrayAddANSIString(pArray, Val); }
 
         public  int DTWAIN_ArrayAddANSIStringN(DTWAIN_ARRAY pArray, string Val, int num)
-        => _DTWAIN_ArrayAddANSIStringN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddANSIStringN(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddFloat(DTWAIN_ARRAY pArray, DTWAIN_FLOAT Val)
-        => _DTWAIN_ArrayAddFloat(pArray, Val);
+        { return _DTWAIN_ArrayAddFloat(pArray, Val); }
 
         public  int DTWAIN_ArrayAddFloatN(DTWAIN_ARRAY pArray, DTWAIN_FLOAT Val, int num)
-        => _DTWAIN_ArrayAddFloatN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddFloatN(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddFloatString(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val)
-        => _DTWAIN_ArrayAddFloatString(pArray, Val);
+        { return _DTWAIN_ArrayAddFloatString(pArray, Val); }
 
         public  int DTWAIN_ArrayAddFloatStringN(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val, int num)
-        => _DTWAIN_ArrayAddFloatStringN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddFloatStringN(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddFrame(DTWAIN_ARRAY pArray, DTWAIN_FRAME frame)
-        => _DTWAIN_ArrayAddFrame(pArray, frame);
+        { return _DTWAIN_ArrayAddFrame(pArray, frame); }
 
         public  int DTWAIN_ArrayAddFrameN(DTWAIN_ARRAY pArray, DTWAIN_FRAME frame, int num)
-        => _DTWAIN_ArrayAddFrameN(pArray, frame, num);
+        { return _DTWAIN_ArrayAddFrameN(pArray, frame, num); }
 
         public  int DTWAIN_ArrayAddLong(DTWAIN_ARRAY pArray, int Val)
-        => _DTWAIN_ArrayAddLong(pArray, Val);
+        { return _DTWAIN_ArrayAddLong(pArray, Val); }
 
         public  int DTWAIN_ArrayAddLong64(DTWAIN_ARRAY pArray, LONG64 Val)
-        => _DTWAIN_ArrayAddLong64(pArray, Val);
+        { return _DTWAIN_ArrayAddLong64(pArray, Val); }
 
         public  int DTWAIN_ArrayAddLong64N(DTWAIN_ARRAY pArray, LONG64 Val, int num)
-        => _DTWAIN_ArrayAddLong64N(pArray, Val, num);
+        { return _DTWAIN_ArrayAddLong64N(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddLongN(DTWAIN_ARRAY pArray, int Val, int num)
-        => _DTWAIN_ArrayAddLongN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddLongN(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddN(DTWAIN_ARRAY pArray, System.IntPtr pVariant, int num)
-        => _DTWAIN_ArrayAddN(pArray, pVariant, num);
+        { return _DTWAIN_ArrayAddN(pArray, pVariant, num); }
 
         public  int DTWAIN_ArrayAddString(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val)
-        => _DTWAIN_ArrayAddString(pArray, Val);
+        { return _DTWAIN_ArrayAddString(pArray, Val); }
 
         public  int DTWAIN_ArrayAddStringN(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val, int num)
-        => _DTWAIN_ArrayAddStringN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddStringN(pArray, Val, num); }
 
         public  int DTWAIN_ArrayAddWideString(DTWAIN_ARRAY pArray, string Val)
-        => _DTWAIN_ArrayAddWideString(pArray, Val);
+        { return _DTWAIN_ArrayAddWideString(pArray, Val); }
 
         public  int DTWAIN_ArrayAddWideStringN(DTWAIN_ARRAY pArray, string Val, int num)
-        => _DTWAIN_ArrayAddWideStringN(pArray, Val, num);
+        { return _DTWAIN_ArrayAddWideStringN(pArray, Val, num); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayConvertFix32ToFloat(DTWAIN_ARRAY Fix32Array)
-        => _DTWAIN_ArrayConvertFix32ToFloat(Fix32Array);
+        { return _DTWAIN_ArrayConvertFix32ToFloat(Fix32Array); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayConvertFloatToFix32(DTWAIN_ARRAY FloatArray)
-        => _DTWAIN_ArrayConvertFloatToFix32(FloatArray);
+        { return _DTWAIN_ArrayConvertFloatToFix32(FloatArray); }
 
         public  int DTWAIN_ArrayCopy(DTWAIN_ARRAY Source, DTWAIN_ARRAY Dest)
-        => _DTWAIN_ArrayCopy(Source, Dest);
+        { return _DTWAIN_ArrayCopy(Source, Dest); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreate(int nEnumType, int nInitialSize)
-        => _DTWAIN_ArrayCreate(nEnumType, nInitialSize);
+        { return _DTWAIN_ArrayCreate(nEnumType, nInitialSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateCopy(DTWAIN_ARRAY Source)
-        => _DTWAIN_ArrayCreateCopy(Source);
+        { return _DTWAIN_ArrayCreateCopy(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromANSIStrings([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromANSIStrings(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromANSIStrings(pCArray, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromCap(DTWAIN_SOURCE Source, int lCapType, int lSize)
-        => _DTWAIN_ArrayCreateFromCap(Source, lCapType, lSize);
+        { return _DTWAIN_ArrayCreateFromCap(Source, lCapType, lSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromFloats([In] double[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromFloats(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromFloats(pCArray, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromLong64s([In] long[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromLong64s(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromLong64s(pCArray, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromLongs([In] int[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromLongs(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromLongs(pCArray, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromStrings([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPTStr)] string[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromStrings(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromStrings(pCArray, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromType(DTWAIN_SOURCE Source, int lType, int lSize)
-        => _DTWAIN_ArrayCreateFromType(Source, lType, lSize);
+        { return _DTWAIN_ArrayCreateFromType(Source, lType, lSize); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayCreateFromWideStrings([In, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)] string[] pCArray, int nSize)
-        => _DTWAIN_ArrayCreateFromWideStrings(pCArray, nSize);
+        { return _DTWAIN_ArrayCreateFromWideStrings(pCArray, nSize); }
 
         public  int DTWAIN_ArrayDestroy(DTWAIN_ARRAY pArray)
-        => _DTWAIN_ArrayDestroy(pArray);
+        { return _DTWAIN_ArrayDestroy(pArray); }
 
         public  int DTWAIN_ArrayDestroyAll()
-        => _DTWAIN_ArrayDestroyAll();
+        { return _DTWAIN_ArrayDestroyAll(); }
 
         public  int DTWAIN_ArrayDestroyFrames(DTWAIN_ARRAY FrameArray)
-        => _DTWAIN_ArrayDestroyFrames(FrameArray);
+        { return _DTWAIN_ArrayDestroyFrames(FrameArray); }
 
         public  int DTWAIN_ArrayDumpToLog(DTWAIN_ARRAY pArray, int bAsUnsigned)
-        => _DTWAIN_ArrayDumpToLog(pArray, bAsUnsigned);
+        { return _DTWAIN_ArrayDumpToLog(pArray, bAsUnsigned); }
 
         public  int DTWAIN_ArrayFind(DTWAIN_ARRAY pArray, System.IntPtr pVariant)
-        => _DTWAIN_ArrayFind(pArray, pVariant);
+        { return _DTWAIN_ArrayFind(pArray, pVariant); }
 
         public  int DTWAIN_ArrayFindANSIString(DTWAIN_ARRAY pArray, string pString)
-        => _DTWAIN_ArrayFindANSIString(pArray, pString);
+        { return _DTWAIN_ArrayFindANSIString(pArray, pString); }
 
         public  int DTWAIN_ArrayFindFloat(DTWAIN_ARRAY pArray, DTWAIN_FLOAT Val, DTWAIN_FLOAT Tolerance)
-        => _DTWAIN_ArrayFindFloat(pArray, Val, Tolerance);
+        { return _DTWAIN_ArrayFindFloat(pArray, Val, Tolerance); }
 
         public  int DTWAIN_ArrayFindFloatString(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val, [MarshalAs(UnmanagedType.LPTStr)] string Tolerance)
-        => _DTWAIN_ArrayFindFloatString(pArray, Val, Tolerance);
+        { return _DTWAIN_ArrayFindFloatString(pArray, Val, Tolerance); }
 
         public  int DTWAIN_ArrayFindLong(DTWAIN_ARRAY pArray, int Val)
-        => _DTWAIN_ArrayFindLong(pArray, Val);
+        { return _DTWAIN_ArrayFindLong(pArray, Val); }
 
         public  int DTWAIN_ArrayFindLong64(DTWAIN_ARRAY pArray, LONG64 Val)
-        => _DTWAIN_ArrayFindLong64(pArray, Val);
+        { return _DTWAIN_ArrayFindLong64(pArray, Val); }
 
         public  int DTWAIN_ArrayFindString(DTWAIN_ARRAY pArray, [MarshalAs(UnmanagedType.LPTStr)] string pString)
-        => _DTWAIN_ArrayFindString(pArray, pString);
+        { return _DTWAIN_ArrayFindString(pArray, pString); }
 
         public  int DTWAIN_ArrayFindWideString(DTWAIN_ARRAY pArray, string pString)
-        => _DTWAIN_ArrayFindWideString(pArray, pString);
+        { return _DTWAIN_ArrayFindWideString(pArray, pString); }
 
         public  int DTWAIN_ArrayFix32GetAt(DTWAIN_ARRAY aFix32, int lPos, ref int Whole, ref int Frac)
-        => _DTWAIN_ArrayFix32GetAt(aFix32, lPos, ref Whole, ref Frac);
+        { return _DTWAIN_ArrayFix32GetAt(aFix32, lPos, ref Whole, ref Frac); }
 
         public  int DTWAIN_ArrayFix32SetAt(DTWAIN_ARRAY aFix32, int lPos, int Whole, int Frac)
-        => _DTWAIN_ArrayFix32SetAt(aFix32, lPos, Whole, Frac);
+        { return _DTWAIN_ArrayFix32SetAt(aFix32, lPos, Whole, Frac); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayFloatToANSIString(DTWAIN_ARRAY FloatArray)
-        => _DTWAIN_ArrayFloatToANSIString(FloatArray);
+        { return _DTWAIN_ArrayFloatToANSIString(FloatArray); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayFloatToString(DTWAIN_ARRAY FloatArray)
-        => _DTWAIN_ArrayFloatToString(FloatArray);
+        { return _DTWAIN_ArrayFloatToString(FloatArray); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayFloatToWideString(DTWAIN_ARRAY FloatArray)
-        => _DTWAIN_ArrayFloatToWideString(FloatArray);
+        { return _DTWAIN_ArrayFloatToWideString(FloatArray); }
 
         public  int DTWAIN_ArrayGetAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant)
-        => _DTWAIN_ArrayGetAt(pArray, nWhere, pVariant);
+        { return _DTWAIN_ArrayGetAt(pArray, nWhere, pVariant); }
 
         public  int DTWAIN_ArrayGetAtANSIString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder pStr)
-        => _DTWAIN_ArrayGetAtANSIString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArrayGetAtANSIString(pArray, nWhere, pStr); }
 
         public  System.IntPtr DTWAIN_ArrayGetAtANSIStringPtr(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtANSIStringPtr(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtANSIStringPtr(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtFloat(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_FLOAT pVal)
-        => _DTWAIN_ArrayGetAtFloat(pArray, nWhere, ref pVal);
+        { return _DTWAIN_ArrayGetAtFloat(pArray, nWhere, ref pVal); }
 
         public  DTWAIN_FLOAT DTWAIN_ArrayGetAtFloatEx(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtFloatEx(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtFloatEx(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtFloatString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Val)
-        => _DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val);
+        { return _DTWAIN_ArrayGetAtFloatString(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArrayGetAtFloatString (DTWAIN_ARRAY pArray, int nWhere, System.IntPtr Val)
-        => _DTWAIN_ArrayGetAtFloatString_overload(pArray, nWhere, Val);
+        { return _DTWAIN_ArrayGetAtFloatString_overload(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArrayGetAtFrame(DTWAIN_ARRAY FrameArray, int nWhere, ref DTWAIN_FLOAT pleft, ref DTWAIN_FLOAT ptop, ref DTWAIN_FLOAT pright, ref DTWAIN_FLOAT pbottom)
-        => _DTWAIN_ArrayGetAtFrame(FrameArray, nWhere, ref pleft, ref ptop, ref pright, ref pbottom);
+        { return _DTWAIN_ArrayGetAtFrame(FrameArray, nWhere, ref pleft, ref ptop, ref pright, ref pbottom); }
 
         public  int DTWAIN_ArrayGetAtFrameEx(DTWAIN_ARRAY FrameArray, int nWhere, DTWAIN_FRAME Frame)
-        => _DTWAIN_ArrayGetAtFrameEx(FrameArray, nWhere, Frame);
+        { return _DTWAIN_ArrayGetAtFrameEx(FrameArray, nWhere, Frame); }
 
         public  int DTWAIN_ArrayGetAtFrameString(DTWAIN_ARRAY FrameArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder left, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder top, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder right, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder bottom)
-        => _DTWAIN_ArrayGetAtFrameString(FrameArray, nWhere, left, top, right, bottom);
+        { return _DTWAIN_ArrayGetAtFrameString(FrameArray, nWhere, left, top, right, bottom); }
 
         public  int DTWAIN_ArrayGetAtFrameString (DTWAIN_ARRAY FrameArray, int nWhere, System.IntPtr left, System.IntPtr top, System.IntPtr right, System.IntPtr bottom)
-        => _DTWAIN_ArrayGetAtFrameString_overload(FrameArray, nWhere, left, top, right, bottom);
+        { return _DTWAIN_ArrayGetAtFrameString_overload(FrameArray, nWhere, left, top, right, bottom); }
 
         public  int DTWAIN_ArrayGetAtLong(DTWAIN_ARRAY pArray, int nWhere, ref int pVal)
-        => _DTWAIN_ArrayGetAtLong(pArray, nWhere, ref pVal);
+        { return _DTWAIN_ArrayGetAtLong(pArray, nWhere, ref pVal); }
 
         public  int DTWAIN_ArrayGetAtLong64(DTWAIN_ARRAY pArray, int nWhere, ref long pVal)
-        => _DTWAIN_ArrayGetAtLong64(pArray, nWhere, ref pVal);
+        { return _DTWAIN_ArrayGetAtLong64(pArray, nWhere, ref pVal); }
 
         public  LONG64 DTWAIN_ArrayGetAtLong64Ex(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtLong64Ex(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtLong64Ex(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtLongEx(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtLongEx(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtLongEx(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtSource(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource)
-        => _DTWAIN_ArrayGetAtSource(pArray, nWhere, ref ppSource);
+        { return _DTWAIN_ArrayGetAtSource(pArray, nWhere, ref ppSource); }
 
         public  DTWAIN_SOURCE DTWAIN_ArrayGetAtSourceEx(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtSourceEx(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtSourceEx(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pStr)
-        => _DTWAIN_ArrayGetAtString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArrayGetAtString(pArray, nWhere, pStr); }
 
         public  int DTWAIN_ArrayGetAtString (DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pStr)
-        => _DTWAIN_ArrayGetAtString_overload(pArray, nWhere, pStr);
+        { return _DTWAIN_ArrayGetAtString_overload(pArray, nWhere, pStr); }
 
         public  System.IntPtr DTWAIN_ArrayGetAtStringPtr(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtStringPtr(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtStringPtr(pArray, nWhere); }
 
         public  int DTWAIN_ArrayGetAtWideString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPWStr)] System.Text.StringBuilder pStr)
-        => _DTWAIN_ArrayGetAtWideString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArrayGetAtWideString(pArray, nWhere, pStr); }
 
         public  System.IntPtr DTWAIN_ArrayGetAtWideStringPtr(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayGetAtWideStringPtr(pArray, nWhere);
+        { return _DTWAIN_ArrayGetAtWideStringPtr(pArray, nWhere); }
 
         public  System.IntPtr DTWAIN_ArrayGetBuffer(DTWAIN_ARRAY pArray, int nPos)
-        => _DTWAIN_ArrayGetBuffer(pArray, nPos);
+        { return _DTWAIN_ArrayGetBuffer(pArray, nPos); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayGetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType)
-        => _DTWAIN_ArrayGetCapValues(Source, lCap, lGetType);
+        { return _DTWAIN_ArrayGetCapValues(Source, lCap, lGetType); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType)
-        => _DTWAIN_ArrayGetCapValuesEx(Source, lCap, lGetType, lContainerType);
+        { return _DTWAIN_ArrayGetCapValuesEx(Source, lCap, lGetType, lContainerType); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayGetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType)
-        => _DTWAIN_ArrayGetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType);
+        { return _DTWAIN_ArrayGetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType); }
 
         public  int DTWAIN_ArrayGetCount(DTWAIN_ARRAY pArray)
-        => _DTWAIN_ArrayGetCount(pArray);
+        { return _DTWAIN_ArrayGetCount(pArray); }
 
         public  int DTWAIN_ArrayGetMaxStringLength(DTWAIN_ARRAY a)
-        => _DTWAIN_ArrayGetMaxStringLength(a);
+        { return _DTWAIN_ArrayGetMaxStringLength(a); }
 
         public  int DTWAIN_ArrayGetSourceAt(DTWAIN_ARRAY pArray, int nWhere, ref DTWAIN_SOURCE ppSource)
-        => _DTWAIN_ArrayGetSourceAt(pArray, nWhere, ref ppSource);
+        { return _DTWAIN_ArrayGetSourceAt(pArray, nWhere, ref ppSource); }
 
         public  int DTWAIN_ArrayGetStringLength(DTWAIN_ARRAY a, int nWhichString)
-        => _DTWAIN_ArrayGetStringLength(a, nWhichString);
+        { return _DTWAIN_ArrayGetStringLength(a, nWhichString); }
 
         public  int DTWAIN_ArrayGetType(DTWAIN_ARRAY pArray)
-        => _DTWAIN_ArrayGetType(pArray);
+        { return _DTWAIN_ArrayGetType(pArray); }
 
         public  int DTWAIN_ArrayInsertAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant)
-        => _DTWAIN_ArrayInsertAt(pArray, nWhere, pVariant);
+        { return _DTWAIN_ArrayInsertAt(pArray, nWhere, pVariant); }
 
         public  int DTWAIN_ArrayInsertAtANSIString(DTWAIN_ARRAY pArray, int nWhere, string pVal)
-        => _DTWAIN_ArrayInsertAtANSIString(pArray, nWhere, pVal);
+        { return _DTWAIN_ArrayInsertAtANSIString(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArrayInsertAtANSIStringN(DTWAIN_ARRAY pArray, int nWhere, string Val, int num)
-        => _DTWAIN_ArrayInsertAtANSIStringN(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtANSIStringN(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayInsertAtFloat(DTWAIN_ARRAY pArray, int nWhere, DTWAIN_FLOAT pVal)
-        => _DTWAIN_ArrayInsertAtFloat(pArray, nWhere, pVal);
+        { return _DTWAIN_ArrayInsertAtFloat(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArrayInsertAtFloatN(DTWAIN_ARRAY pArray, int nWhere, DTWAIN_FLOAT Val, int num)
-        => _DTWAIN_ArrayInsertAtFloatN(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtFloatN(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayInsertAtFloatString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val)
-        => _DTWAIN_ArrayInsertAtFloatString(pArray, nWhere, Val);
+        { return _DTWAIN_ArrayInsertAtFloatString(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArrayInsertAtFloatStringN(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, int num)
-        => _DTWAIN_ArrayInsertAtFloatStringN(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtFloatStringN(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayInsertAtFrame(DTWAIN_ARRAY pArray, int nWhere, DTWAIN_FRAME frame)
-        => _DTWAIN_ArrayInsertAtFrame(pArray, nWhere, frame);
+        { return _DTWAIN_ArrayInsertAtFrame(pArray, nWhere, frame); }
 
         public  int DTWAIN_ArrayInsertAtFrameN(DTWAIN_ARRAY pArray, int nWhere, DTWAIN_FRAME frame, int num)
-        => _DTWAIN_ArrayInsertAtFrameN(pArray, nWhere, frame, num);
+        { return _DTWAIN_ArrayInsertAtFrameN(pArray, nWhere, frame, num); }
 
         public  int DTWAIN_ArrayInsertAtLong(DTWAIN_ARRAY pArray, int nWhere, int pVal)
-        => _DTWAIN_ArrayInsertAtLong(pArray, nWhere, pVal);
+        { return _DTWAIN_ArrayInsertAtLong(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArrayInsertAtLong64(DTWAIN_ARRAY pArray, int nWhere, LONG64 Val)
-        => _DTWAIN_ArrayInsertAtLong64(pArray, nWhere, Val);
+        { return _DTWAIN_ArrayInsertAtLong64(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArrayInsertAtLong64N(DTWAIN_ARRAY pArray, int nWhere, LONG64 Val, int num)
-        => _DTWAIN_ArrayInsertAtLong64N(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtLong64N(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayInsertAtLongN(DTWAIN_ARRAY pArray, int nWhere, int pVal, int num)
-        => _DTWAIN_ArrayInsertAtLongN(pArray, nWhere, pVal, num);
+        { return _DTWAIN_ArrayInsertAtLongN(pArray, nWhere, pVal, num); }
 
         public  int DTWAIN_ArrayInsertAtN(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant, int num)
-        => _DTWAIN_ArrayInsertAtN(pArray, nWhere, pVariant, num);
+        { return _DTWAIN_ArrayInsertAtN(pArray, nWhere, pVariant, num); }
 
         public  int DTWAIN_ArrayInsertAtString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string pVal)
-        => _DTWAIN_ArrayInsertAtString(pArray, nWhere, pVal);
+        { return _DTWAIN_ArrayInsertAtString(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArrayInsertAtStringN(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val, int num)
-        => _DTWAIN_ArrayInsertAtStringN(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtStringN(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayInsertAtWideString(DTWAIN_ARRAY pArray, int nWhere, string pVal)
-        => _DTWAIN_ArrayInsertAtWideString(pArray, nWhere, pVal);
+        { return _DTWAIN_ArrayInsertAtWideString(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArrayInsertAtWideStringN(DTWAIN_ARRAY pArray, int nWhere, string Val, int num)
-        => _DTWAIN_ArrayInsertAtWideStringN(pArray, nWhere, Val, num);
+        { return _DTWAIN_ArrayInsertAtWideStringN(pArray, nWhere, Val, num); }
 
         public  int DTWAIN_ArrayIsValid(DTWAIN_ARRAY theArray)
-        => _DTWAIN_ArrayIsValid(theArray);
+        { return _DTWAIN_ArrayIsValid(theArray); }
 
         public  int DTWAIN_ArrayRemoveAll(DTWAIN_ARRAY pArray)
-        => _DTWAIN_ArrayRemoveAll(pArray);
+        { return _DTWAIN_ArrayRemoveAll(pArray); }
 
         public  int DTWAIN_ArrayRemoveAt(DTWAIN_ARRAY pArray, int nWhere)
-        => _DTWAIN_ArrayRemoveAt(pArray, nWhere);
+        { return _DTWAIN_ArrayRemoveAt(pArray, nWhere); }
 
         public  int DTWAIN_ArrayRemoveAtN(DTWAIN_ARRAY pArray, int nWhere, int num)
-        => _DTWAIN_ArrayRemoveAtN(pArray, nWhere, num);
+        { return _DTWAIN_ArrayRemoveAtN(pArray, nWhere, num); }
 
         public  int DTWAIN_ArrayResize(DTWAIN_ARRAY pArray, int NewSize)
-        => _DTWAIN_ArrayResize(pArray, NewSize);
+        { return _DTWAIN_ArrayResize(pArray, NewSize); }
 
         public  int DTWAIN_ArraySetAt(DTWAIN_ARRAY pArray, int lPos, System.IntPtr pVariant)
-        => _DTWAIN_ArraySetAt(pArray, lPos, pVariant);
+        { return _DTWAIN_ArraySetAt(pArray, lPos, pVariant); }
 
         public  int DTWAIN_ArraySetAtANSIString(DTWAIN_ARRAY pArray, int nWhere, string pStr)
-        => _DTWAIN_ArraySetAtANSIString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArraySetAtANSIString(pArray, nWhere, pStr); }
 
         public  int DTWAIN_ArraySetAtFloat(DTWAIN_ARRAY pArray, int nWhere, DTWAIN_FLOAT pVal)
-        => _DTWAIN_ArraySetAtFloat(pArray, nWhere, pVal);
+        { return _DTWAIN_ArraySetAtFloat(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArraySetAtFloatString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string Val)
-        => _DTWAIN_ArraySetAtFloatString(pArray, nWhere, Val);
+        { return _DTWAIN_ArraySetAtFloatString(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArraySetAtFrame(DTWAIN_ARRAY FrameArray, int nWhere, DTWAIN_FLOAT left, DTWAIN_FLOAT top, DTWAIN_FLOAT right, DTWAIN_FLOAT bottom)
-        => _DTWAIN_ArraySetAtFrame(FrameArray, nWhere, left, top, right, bottom);
+        { return _DTWAIN_ArraySetAtFrame(FrameArray, nWhere, left, top, right, bottom); }
 
         public  int DTWAIN_ArraySetAtFrameEx(DTWAIN_ARRAY FrameArray, int nWhere, DTWAIN_FRAME Frame)
-        => _DTWAIN_ArraySetAtFrameEx(FrameArray, nWhere, Frame);
+        { return _DTWAIN_ArraySetAtFrameEx(FrameArray, nWhere, Frame); }
 
         public  int DTWAIN_ArraySetAtFrameString(DTWAIN_ARRAY FrameArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string left, [MarshalAs(UnmanagedType.LPTStr)] string top, [MarshalAs(UnmanagedType.LPTStr)] string right, [MarshalAs(UnmanagedType.LPTStr)] string bottom)
-        => _DTWAIN_ArraySetAtFrameString(FrameArray, nWhere, left, top, right, bottom);
+        { return _DTWAIN_ArraySetAtFrameString(FrameArray, nWhere, left, top, right, bottom); }
 
         public  int DTWAIN_ArraySetAtLong(DTWAIN_ARRAY pArray, int nWhere, int pVal)
-        => _DTWAIN_ArraySetAtLong(pArray, nWhere, pVal);
+        { return _DTWAIN_ArraySetAtLong(pArray, nWhere, pVal); }
 
         public  int DTWAIN_ArraySetAtLong64(DTWAIN_ARRAY pArray, int nWhere, LONG64 Val)
-        => _DTWAIN_ArraySetAtLong64(pArray, nWhere, Val);
+        { return _DTWAIN_ArraySetAtLong64(pArray, nWhere, Val); }
 
         public  int DTWAIN_ArraySetAtString(DTWAIN_ARRAY pArray, int nWhere, [MarshalAs(UnmanagedType.LPTStr)] string pStr)
-        => _DTWAIN_ArraySetAtString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArraySetAtString(pArray, nWhere, pStr); }
 
         public  int DTWAIN_ArraySetAtWideString(DTWAIN_ARRAY pArray, int nWhere, string pStr)
-        => _DTWAIN_ArraySetAtWideString(pArray, nWhere, pStr);
+        { return _DTWAIN_ArraySetAtWideString(pArray, nWhere, pStr); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayStringToFloat(DTWAIN_ARRAY StringArray)
-        => _DTWAIN_ArrayStringToFloat(StringArray);
+        { return _DTWAIN_ArrayStringToFloat(StringArray); }
 
         public  DTWAIN_ARRAY DTWAIN_ArrayWideStringToFloat(DTWAIN_ARRAY StringArray)
-        => _DTWAIN_ArrayWideStringToFloat(StringArray);
+        { return _DTWAIN_ArrayWideStringToFloat(StringArray); }
 
         public  int DTWAIN_CallCallback(int wParam, int lParam, int UserData)
-        => _DTWAIN_CallCallback(wParam, lParam, UserData);
+        { return _DTWAIN_CallCallback(wParam, lParam, UserData); }
 
         public  int DTWAIN_CallCallback64(int wParam, int lParam, LONGLONG UserData)
-        => _DTWAIN_CallCallback64(wParam, lParam, UserData);
+        { return _DTWAIN_CallCallback64(wParam, lParam, UserData); }
 
         public  int DTWAIN_CallDSMProc(DTWAIN_IDENTITY AppID, DTWAIN_IDENTITY SourceId, int lDG, int lDAT, int lMSG, System.IntPtr pData)
-        => _DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData);
+        { return _DTWAIN_CallDSMProc(AppID, SourceId, lDG, lDAT, lMSG, pData); }
 
         public  int DTWAIN_CheckDLLVersion(int lMajor, int lMinor, int lPatchLevel, int lBuildNumber, int MatchType)
-        => _DTWAIN_CheckDLLVersion(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType);
+        { return _DTWAIN_CheckDLLVersion(lMajor, lMinor, lPatchLevel, lBuildNumber, MatchType); }
 
         public  int DTWAIN_CheckHandles(int bCheck)
-        => _DTWAIN_CheckHandles(bCheck);
+        { return _DTWAIN_CheckHandles(bCheck); }
 
         public  int DTWAIN_ClearBuffers(DTWAIN_SOURCE Source, int ClearBuffer)
-        => _DTWAIN_ClearBuffers(Source, ClearBuffer);
+        { return _DTWAIN_ClearBuffers(Source, ClearBuffer); }
 
         public  int DTWAIN_ClearErrorBuffer()
-        => _DTWAIN_ClearErrorBuffer();
+        { return _DTWAIN_ClearErrorBuffer(); }
 
         public  int DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source)
-        => _DTWAIN_ClearPDFTextElements(Source);
+        { return _DTWAIN_ClearPDFTextElements(Source); }
 
         public  int DTWAIN_ClearPage(DTWAIN_SOURCE Source)
-        => _DTWAIN_ClearPage(Source);
+        { return _DTWAIN_ClearPage(Source); }
 
         public  int DTWAIN_CloseSource(DTWAIN_SOURCE Source)
-        => _DTWAIN_CloseSource(Source);
+        { return _DTWAIN_CloseSource(Source); }
 
         public  int DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source)
-        => _DTWAIN_CloseSourceUI(Source);
+        { return _DTWAIN_CloseSourceUI(Source); }
 
         public  HANDLE DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette)
-        => _DTWAIN_ConvertDIBToBitmap(hDib, hPalette);
+        { return _DTWAIN_ConvertDIBToBitmap(hDib, hPalette); }
 
         public  HANDLE DTWAIN_ConvertDIBToFullBitmap(HANDLE hDib, int isBMP)
-        => _DTWAIN_ConvertDIBToFullBitmap(hDib, isBMP);
+        { return _DTWAIN_ConvertDIBToFullBitmap(hDib, isBMP); }
 
         public  HANDLE DTWAIN_ConvertToAPIString([MarshalAs(UnmanagedType.LPTStr)] string lpOrigString)
-        => _DTWAIN_ConvertToAPIString(lpOrigString);
+        { return _DTWAIN_ConvertToAPIString(lpOrigString); }
 
         public  int DTWAIN_ConvertToAPIStringEx([MarshalAs(UnmanagedType.LPTStr)] string lpOrigString, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpOutString, int nSize)
-        => _DTWAIN_ConvertToAPIStringEx(lpOrigString, lpOutString, nSize);
+        { return _DTWAIN_ConvertToAPIStringEx(lpOrigString, lpOutString, nSize); }
 
         public  int DTWAIN_ConvertToAPIStringEx ([MarshalAs(UnmanagedType.LPTStr)] string lpOrigString, System.IntPtr lpOutString, int nSize)
-        => _DTWAIN_ConvertToAPIStringEx_overload(lpOrigString, lpOutString, nSize);
+        { return _DTWAIN_ConvertToAPIStringEx_overload(lpOrigString, lpOutString, nSize); }
 
         public  DTWAIN_ARRAY DTWAIN_CreateAcquisitionArray()
-        => _DTWAIN_CreateAcquisitionArray();
+        { return _DTWAIN_CreateAcquisitionArray(); }
 
         public  DTWAIN_PDFTEXTELEMENT DTWAIN_CreatePDFTextElement()
-        => _DTWAIN_CreatePDFTextElement();
+        { return _DTWAIN_CreatePDFTextElement(); }
 
         public  DTWAIN_PDFTEXTELEMENT DTWAIN_CreatePDFTextElementCopy(DTWAIN_PDFTEXTELEMENT TextElement)
-        => _DTWAIN_CreatePDFTextElementCopy(TextElement);
+        { return _DTWAIN_CreatePDFTextElementCopy(TextElement); }
 
         public  int DTWAIN_DeleteDIB(HANDLE hDib)
-        => _DTWAIN_DeleteDIB(hDib);
+        { return _DTWAIN_DeleteDIB(hDib); }
 
         public  int DTWAIN_DestroyAcquisitionArray(DTWAIN_ARRAY aAcq, int bDestroyData)
-        => _DTWAIN_DestroyAcquisitionArray(aAcq, bDestroyData);
+        { return _DTWAIN_DestroyAcquisitionArray(aAcq, bDestroyData); }
 
         public  int DTWAIN_DestroyPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement)
-        => _DTWAIN_DestroyPDFTextElement(TextElement);
+        { return _DTWAIN_DestroyPDFTextElement(TextElement); }
 
         public  int DTWAIN_DisableAppWindow(HWND hWnd, int bDisable)
-        => _DTWAIN_DisableAppWindow(hWnd, bDisable);
+        { return _DTWAIN_DisableAppWindow(hWnd, bDisable); }
 
         public  int DTWAIN_EnableAutoBorderDetect(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableAutoBorderDetect(Source, bEnable);
+        { return _DTWAIN_EnableAutoBorderDetect(Source, bEnable); }
 
         public  int DTWAIN_EnableAutoBright(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableAutoBright(Source, bSet);
+        { return _DTWAIN_EnableAutoBright(Source, bSet); }
 
         public  int DTWAIN_EnableAutoDeskew(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableAutoDeskew(Source, bEnable);
+        { return _DTWAIN_EnableAutoDeskew(Source, bEnable); }
 
         public  int DTWAIN_EnableAutoFeed(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableAutoFeed(Source, bSet);
+        { return _DTWAIN_EnableAutoFeed(Source, bSet); }
 
         public  int DTWAIN_EnableAutoRotate(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableAutoRotate(Source, bSet);
+        { return _DTWAIN_EnableAutoRotate(Source, bSet); }
 
         public  int DTWAIN_EnableAutoScan(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableAutoScan(Source, bEnable);
+        { return _DTWAIN_EnableAutoScan(Source, bEnable); }
 
         public  int DTWAIN_EnableAutomaticSenseMedium(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableAutomaticSenseMedium(Source, bSet);
+        { return _DTWAIN_EnableAutomaticSenseMedium(Source, bSet); }
 
         public  int DTWAIN_EnableBarcodeDetection(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableBarcodeDetection(Source, bEnable);
+        { return _DTWAIN_EnableBarcodeDetection(Source, bEnable); }
 
         public  int DTWAIN_EnableDuplex(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableDuplex(Source, bEnable);
+        { return _DTWAIN_EnableDuplex(Source, bEnable); }
 
         public  int DTWAIN_EnableFeeder(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableFeeder(Source, bSet);
+        { return _DTWAIN_EnableFeeder(Source, bSet); }
 
         public  int DTWAIN_EnableGetMessageLoop(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableGetMessageLoop(Source, bSet);
+        { return _DTWAIN_EnableGetMessageLoop(Source, bSet); }
 
         public  int DTWAIN_EnableGetMessageLoopDetection(int bEnable)
-        => _DTWAIN_EnableGetMessageLoopDetection(bEnable);
+        { return _DTWAIN_EnableGetMessageLoopDetection(bEnable); }
 
         public  int DTWAIN_EnableIndicator(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableIndicator(Source, bEnable);
+        { return _DTWAIN_EnableIndicator(Source, bEnable); }
 
         public  int DTWAIN_EnableJobFileHandling(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnableJobFileHandling(Source, bSet);
+        { return _DTWAIN_EnableJobFileHandling(Source, bSet); }
 
         public  int DTWAIN_EnableLamp(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableLamp(Source, bEnable);
+        { return _DTWAIN_EnableLamp(Source, bEnable); }
 
         public  int DTWAIN_EnableMsgNotify(int bSet)
-        => _DTWAIN_EnableMsgNotify(bSet);
+        { return _DTWAIN_EnableMsgNotify(bSet); }
 
         public  int DTWAIN_EnablePatchcodeDetection(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnablePatchcodeDetection(Source, bEnable);
+        { return _DTWAIN_EnablePatchcodeDetection(Source, bEnable); }
 
         public  int DTWAIN_EnablePeekMessageLoop(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_EnablePeekMessageLoop(Source, bSet);
+        { return _DTWAIN_EnablePeekMessageLoop(Source, bSet); }
 
         public  int DTWAIN_EnablePrinter(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnablePrinter(Source, bEnable);
+        { return _DTWAIN_EnablePrinter(Source, bEnable); }
 
         public  int DTWAIN_EnableThumbnail(DTWAIN_SOURCE Source, int bEnable)
-        => _DTWAIN_EnableThumbnail(Source, bEnable);
+        { return _DTWAIN_EnableThumbnail(Source, bEnable); }
 
         public  int DTWAIN_EnableTripletsNotify(int bSet)
-        => _DTWAIN_EnableTripletsNotify(bSet);
+        { return _DTWAIN_EnableTripletsNotify(bSet); }
 
         public  int DTWAIN_EndThread(DTWAIN_HANDLE DLLHandle)
-        => _DTWAIN_EndThread(DLLHandle);
+        { return _DTWAIN_EndThread(DLLHandle); }
 
         public  int DTWAIN_EndTwainSession()
-        => _DTWAIN_EndTwainSession();
+        { return _DTWAIN_EndTwainSession(); }
 
         public  int DTWAIN_EnumAlarmVolumes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int expandIfRange)
-        => _DTWAIN_EnumAlarmVolumes(Source, ref pArray, expandIfRange);
+        { return _DTWAIN_EnumAlarmVolumes(Source, ref pArray, expandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAlarmVolumesEx(DTWAIN_SOURCE Source, int expandIfRange)
-        => _DTWAIN_EnumAlarmVolumesEx(Source, expandIfRange);
+        { return _DTWAIN_EnumAlarmVolumesEx(Source, expandIfRange); }
 
         public  int DTWAIN_EnumAlarms(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumAlarms(Source, ref pArray);
+        { return _DTWAIN_EnumAlarms(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAlarmsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumAlarmsEx(Source);
+        { return _DTWAIN_EnumAlarmsEx(Source); }
 
         public  int DTWAIN_EnumAudioXferMechs(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumAudioXferMechs(Source, ref pArray);
+        { return _DTWAIN_EnumAudioXferMechs(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAudioXferMechsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumAudioXferMechsEx(Source);
+        { return _DTWAIN_EnumAudioXferMechsEx(Source); }
 
         public  int DTWAIN_EnumAutoFeedValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumAutoFeedValues(Source, ref pArray);
+        { return _DTWAIN_EnumAutoFeedValues(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAutoFeedValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumAutoFeedValuesEx(Source);
+        { return _DTWAIN_EnumAutoFeedValuesEx(Source); }
 
         public  int DTWAIN_EnumAutomaticCaptures(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumAutomaticCaptures(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumAutomaticCaptures(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAutomaticCapturesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumAutomaticCapturesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumAutomaticCapturesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumAutomaticSenseMedium(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumAutomaticSenseMedium(Source, ref pArray);
+        { return _DTWAIN_EnumAutomaticSenseMedium(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumAutomaticSenseMediumEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumAutomaticSenseMediumEx(Source);
+        { return _DTWAIN_EnumAutomaticSenseMediumEx(Source); }
 
         public  int DTWAIN_EnumBarcodeCodes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes)
-        => _DTWAIN_EnumBarcodeCodes(Source, ref PCodes);
+        { return _DTWAIN_EnumBarcodeCodes(Source, ref PCodes); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodeCodesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodeCodesEx(Source);
+        { return _DTWAIN_EnumBarcodeCodesEx(Source); }
 
         public  int DTWAIN_EnumBarcodeMaxPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBarcodeMaxPriorities(Source, ref pArray);
+        { return _DTWAIN_EnumBarcodeMaxPriorities(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxPrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodeMaxPrioritiesEx(Source);
+        { return _DTWAIN_EnumBarcodeMaxPrioritiesEx(Source); }
 
         public  int DTWAIN_EnumBarcodeMaxRetries(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBarcodeMaxRetries(Source, ref pArray);
+        { return _DTWAIN_EnumBarcodeMaxRetries(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodeMaxRetriesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodeMaxRetriesEx(Source);
+        { return _DTWAIN_EnumBarcodeMaxRetriesEx(Source); }
 
         public  int DTWAIN_EnumBarcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBarcodePriorities(Source, ref pArray);
+        { return _DTWAIN_EnumBarcodePriorities(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodePrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodePrioritiesEx(Source);
+        { return _DTWAIN_EnumBarcodePrioritiesEx(Source); }
 
         public  int DTWAIN_EnumBarcodeSearchModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBarcodeSearchModes(Source, ref pArray);
+        { return _DTWAIN_EnumBarcodeSearchModes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodeSearchModesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodeSearchModesEx(Source);
+        { return _DTWAIN_EnumBarcodeSearchModesEx(Source); }
 
         public  int DTWAIN_EnumBarcodeTimeOutValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBarcodeTimeOutValues(Source, ref pArray);
+        { return _DTWAIN_EnumBarcodeTimeOutValues(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBarcodeTimeOutValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBarcodeTimeOutValuesEx(Source);
+        { return _DTWAIN_EnumBarcodeTimeOutValuesEx(Source); }
 
         public  int DTWAIN_EnumBitDepths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumBitDepths(Source, ref pArray);
+        { return _DTWAIN_EnumBitDepths(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBitDepthsEx(Source);
+        { return _DTWAIN_EnumBitDepthsEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBitDepthsEx2(DTWAIN_SOURCE Source, int PixelType)
-        => _DTWAIN_EnumBitDepthsEx2(Source, PixelType);
+        { return _DTWAIN_EnumBitDepthsEx2(Source, PixelType); }
 
         public  int DTWAIN_EnumBottomCameras(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras)
-        => _DTWAIN_EnumBottomCameras(Source, ref Cameras);
+        { return _DTWAIN_EnumBottomCameras(Source, ref Cameras); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBottomCamerasEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumBottomCamerasEx(Source);
+        { return _DTWAIN_EnumBottomCamerasEx(Source); }
 
         public  int DTWAIN_EnumBrightnessValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumBrightnessValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumBrightnessValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumBrightnessValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumBrightnessValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumBrightnessValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumCameras(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras)
-        => _DTWAIN_EnumCameras(Source, ref Cameras);
+        { return _DTWAIN_EnumCameras(Source, ref Cameras); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCamerasEx(Source);
+        { return _DTWAIN_EnumCamerasEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCamerasEx2(DTWAIN_SOURCE Source, int nWhichCamera)
-        => _DTWAIN_EnumCamerasEx2(Source, nWhichCamera);
+        { return _DTWAIN_EnumCamerasEx2(Source, nWhichCamera); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCapLabels(int lCapability)
-        => _DTWAIN_EnumCapLabels(lCapability);
+        { return _DTWAIN_EnumCapLabels(lCapability); }
 
         public  int DTWAIN_EnumCompressionTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumCompressionTypes(Source, ref pArray);
+        { return _DTWAIN_EnumCompressionTypes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCompressionTypesEx(Source);
+        { return _DTWAIN_EnumCompressionTypesEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, int lFileType, int bUseBufferedMode)
-        => _DTWAIN_EnumCompressionTypesEx2(Source, lFileType, bUseBufferedMode);
+        { return _DTWAIN_EnumCompressionTypesEx2(Source, lFileType, bUseBufferedMode); }
 
         public  int DTWAIN_EnumContrastValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumContrastValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumContrastValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumContrastValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumContrastValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumContrastValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumCustomCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumCustomCaps(Source, ref pArray);
+        { return _DTWAIN_EnumCustomCaps(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumCustomCapsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumCustomCapsEx(Source);
+        { return _DTWAIN_EnumCustomCapsEx(Source); }
 
         public  int DTWAIN_EnumDoubleFeedDetectLengths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumDoubleFeedDetectLengths(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumDoubleFeedDetectLengths(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectLengthsEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumDoubleFeedDetectLengthsEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumDoubleFeedDetectLengthsEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumDoubleFeedDetectValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumDoubleFeedDetectValues(Source, ref pArray);
+        { return _DTWAIN_EnumDoubleFeedDetectValues(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumDoubleFeedDetectValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumDoubleFeedDetectValuesEx(Source);
+        { return _DTWAIN_EnumDoubleFeedDetectValuesEx(Source); }
 
         public  int DTWAIN_EnumExtImageInfoTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumExtImageInfoTypes(Source, ref pArray);
+        { return _DTWAIN_EnumExtImageInfoTypes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumExtImageInfoTypesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumExtImageInfoTypesEx(Source);
+        { return _DTWAIN_EnumExtImageInfoTypesEx(Source); }
 
         public  int DTWAIN_EnumExtendedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumExtendedCaps(Source, ref pArray);
+        { return _DTWAIN_EnumExtendedCaps(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumExtendedCapsEx(Source);
+        { return _DTWAIN_EnumExtendedCapsEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumExtendedCapsEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumExtendedCapsEx2(Source);
+        { return _DTWAIN_EnumExtendedCapsEx2(Source); }
 
         public  int DTWAIN_EnumFileTypeBitsPerPixel(int FileType, ref DTWAIN_ARRAY Array)
-        => _DTWAIN_EnumFileTypeBitsPerPixel(FileType, ref Array);
+        { return _DTWAIN_EnumFileTypeBitsPerPixel(FileType, ref Array); }
 
         public  int DTWAIN_EnumFileXferFormats(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumFileXferFormats(Source, ref pArray);
+        { return _DTWAIN_EnumFileXferFormats(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumFileXferFormatsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumFileXferFormatsEx(Source);
+        { return _DTWAIN_EnumFileXferFormatsEx(Source); }
 
         public  int DTWAIN_EnumHalftones(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumHalftones(Source, ref pArray);
+        { return _DTWAIN_EnumHalftones(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumHalftonesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumHalftonesEx(Source);
+        { return _DTWAIN_EnumHalftonesEx(Source); }
 
         public  int DTWAIN_EnumHighlightValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumHighlightValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumHighlightValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumHighlightValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumHighlightValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumHighlightValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumJobControls(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumJobControls(Source, ref pArray);
+        { return _DTWAIN_EnumJobControls(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumJobControlsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumJobControlsEx(Source);
+        { return _DTWAIN_EnumJobControlsEx(Source); }
 
         public  int DTWAIN_EnumLightPaths(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY LightPath)
-        => _DTWAIN_EnumLightPaths(Source, ref LightPath);
+        { return _DTWAIN_EnumLightPaths(Source, ref LightPath); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumLightPathsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumLightPathsEx(Source);
+        { return _DTWAIN_EnumLightPathsEx(Source); }
 
         public  int DTWAIN_EnumLightSources(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY LightSources)
-        => _DTWAIN_EnumLightSources(Source, ref LightSources);
+        { return _DTWAIN_EnumLightSources(Source, ref LightSources); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumLightSourcesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumLightSourcesEx(Source);
+        { return _DTWAIN_EnumLightSourcesEx(Source); }
 
         public  int DTWAIN_EnumMaxBuffers(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pMaxBufs, int bExpandRange)
-        => _DTWAIN_EnumMaxBuffers(Source, ref pMaxBufs, bExpandRange);
+        { return _DTWAIN_EnumMaxBuffers(Source, ref pMaxBufs, bExpandRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumMaxBuffersEx(DTWAIN_SOURCE Source, int bExpandRange)
-        => _DTWAIN_EnumMaxBuffersEx(Source, bExpandRange);
+        { return _DTWAIN_EnumMaxBuffersEx(Source, bExpandRange); }
 
         public  int DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumNoiseFilters(Source, ref pArray);
+        { return _DTWAIN_EnumNoiseFilters(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumNoiseFiltersEx(Source);
+        { return _DTWAIN_EnumNoiseFiltersEx(Source); }
 
         public  int DTWAIN_EnumOCRInterfaces(ref DTWAIN_ARRAY OCRInterfaces)
-        => _DTWAIN_EnumOCRInterfaces(ref OCRInterfaces);
+        { return _DTWAIN_EnumOCRInterfaces(ref OCRInterfaces); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx()
-        => _DTWAIN_EnumOCRInterfacesEx();
+        { return _DTWAIN_EnumOCRInterfacesEx(); }
 
         public  int DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, ref DTWAIN_ARRAY SupportedCaps)
-        => _DTWAIN_EnumOCRSupportedCaps(Engine, ref SupportedCaps);
+        { return _DTWAIN_EnumOCRSupportedCaps(Engine, ref SupportedCaps); }
 
         public  int DTWAIN_EnumOrientations(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumOrientations(Source, ref pArray);
+        { return _DTWAIN_EnumOrientations(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumOrientationsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumOrientationsEx(Source);
+        { return _DTWAIN_EnumOrientationsEx(Source); }
 
         public  int DTWAIN_EnumOverscanValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumOverscanValues(Source, ref pArray);
+        { return _DTWAIN_EnumOverscanValues(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumOverscanValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumOverscanValuesEx(Source);
+        { return _DTWAIN_EnumOverscanValuesEx(Source); }
 
         public  int DTWAIN_EnumPaperSizes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPaperSizes(Source, ref pArray);
+        { return _DTWAIN_EnumPaperSizes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPaperSizesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPaperSizesEx(Source);
+        { return _DTWAIN_EnumPaperSizesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodeCodes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY PCodes)
-        => _DTWAIN_EnumPatchcodeCodes(Source, ref PCodes);
+        { return _DTWAIN_EnumPatchcodeCodes(Source, ref PCodes); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeCodesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodeCodesEx(Source);
+        { return _DTWAIN_EnumPatchcodeCodesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodeMaxPriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchcodeMaxPriorities(Source, ref pArray);
+        { return _DTWAIN_EnumPatchcodeMaxPriorities(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxPrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source);
+        { return _DTWAIN_EnumPatchcodeMaxPrioritiesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodeMaxRetries(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchcodeMaxRetries(Source, ref pArray);
+        { return _DTWAIN_EnumPatchcodeMaxRetries(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeMaxRetriesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodeMaxRetriesEx(Source);
+        { return _DTWAIN_EnumPatchcodeMaxRetriesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchcodePriorities(Source, ref pArray);
+        { return _DTWAIN_EnumPatchcodePriorities(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodePrioritiesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodePrioritiesEx(Source);
+        { return _DTWAIN_EnumPatchcodePrioritiesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodeSearchModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchcodeSearchModes(Source, ref pArray);
+        { return _DTWAIN_EnumPatchcodeSearchModes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeSearchModesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodeSearchModesEx(Source);
+        { return _DTWAIN_EnumPatchcodeSearchModesEx(Source); }
 
         public  int DTWAIN_EnumPatchcodeTimeOutValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPatchcodeTimeOutValues(Source, ref pArray);
+        { return _DTWAIN_EnumPatchcodeTimeOutValues(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPatchcodeTimeOutValuesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPatchcodeTimeOutValuesEx(Source);
+        { return _DTWAIN_EnumPatchcodeTimeOutValuesEx(Source); }
 
         public  int DTWAIN_EnumPixelTypes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPixelTypes(Source, ref pArray);
+        { return _DTWAIN_EnumPixelTypes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPixelTypesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPixelTypesEx(Source);
+        { return _DTWAIN_EnumPixelTypesEx(Source); }
 
         public  int DTWAIN_EnumPrinterStringModes(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumPrinterStringModes(Source, ref pArray);
+        { return _DTWAIN_EnumPrinterStringModes(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumPrinterStringModesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumPrinterStringModesEx(Source);
+        { return _DTWAIN_EnumPrinterStringModesEx(Source); }
 
         public  int DTWAIN_EnumResolutionValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumResolutionValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumResolutionValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumResolutionValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumResolutionValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumResolutionValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumShadowValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumShadowValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumShadowValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumShadowValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumShadowValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumShadowValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumSourceUnits(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpArray)
-        => _DTWAIN_EnumSourceUnits(Source, ref lpArray);
+        { return _DTWAIN_EnumSourceUnits(Source, ref lpArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSourceUnitsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumSourceUnitsEx(Source);
+        { return _DTWAIN_EnumSourceUnitsEx(Source); }
 
         public  int DTWAIN_EnumSourceValues(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string capName, ref DTWAIN_ARRAY values, int bExpandIfRange)
-        => _DTWAIN_EnumSourceValues(Source, capName, ref values, bExpandIfRange);
+        { return _DTWAIN_EnumSourceValues(Source, capName, ref values, bExpandIfRange); }
 
         public  int DTWAIN_EnumSources(ref DTWAIN_ARRAY lpArray)
-        => _DTWAIN_EnumSources(ref lpArray);
+        { return _DTWAIN_EnumSources(ref lpArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSourcesEx()
-        => _DTWAIN_EnumSourcesEx();
+        { return _DTWAIN_EnumSourcesEx(); }
 
         public  int DTWAIN_EnumSupportedCaps(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumSupportedCaps(Source, ref pArray);
+        { return _DTWAIN_EnumSupportedCaps(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumSupportedCapsEx(Source);
+        { return _DTWAIN_EnumSupportedCapsEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedCapsEx2(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumSupportedCapsEx2(Source);
+        { return _DTWAIN_EnumSupportedCapsEx2(Source); }
 
         public  int DTWAIN_EnumSupportedExtImageInfo(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_EnumSupportedExtImageInfo(Source, ref pArray);
+        { return _DTWAIN_EnumSupportedExtImageInfo(Source, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedExtImageInfoEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumSupportedExtImageInfoEx(Source);
+        { return _DTWAIN_EnumSupportedExtImageInfoEx(Source); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedFileTypes()
-        => _DTWAIN_EnumSupportedFileTypes();
+        { return _DTWAIN_EnumSupportedFileTypes(); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedMultiPageFileTypes()
-        => _DTWAIN_EnumSupportedMultiPageFileTypes();
+        { return _DTWAIN_EnumSupportedMultiPageFileTypes(); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumSupportedSinglePageFileTypes()
-        => _DTWAIN_EnumSupportedSinglePageFileTypes();
+        { return _DTWAIN_EnumSupportedSinglePageFileTypes(); }
 
         public  int DTWAIN_EnumThresholdValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumThresholdValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumThresholdValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumThresholdValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumThresholdValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumThresholdValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumTopCameras(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY Cameras)
-        => _DTWAIN_EnumTopCameras(Source, ref Cameras);
+        { return _DTWAIN_EnumTopCameras(Source, ref Cameras); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumTopCamerasEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumTopCamerasEx(Source);
+        { return _DTWAIN_EnumTopCamerasEx(Source); }
 
         public  int DTWAIN_EnumTwainPrinters(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY lpAvailPrinters)
-        => _DTWAIN_EnumTwainPrinters(Source, ref lpAvailPrinters);
+        { return _DTWAIN_EnumTwainPrinters(Source, ref lpAvailPrinters); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumTwainPrintersEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_EnumTwainPrintersEx(Source);
+        { return _DTWAIN_EnumTwainPrintersEx(Source); }
 
         public  int DTWAIN_EnumXResolutionValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumXResolutionValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumXResolutionValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumXResolutionValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumXResolutionValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumXResolutionValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_EnumYResolutionValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray, int bExpandIfRange)
-        => _DTWAIN_EnumYResolutionValues(Source, ref pArray, bExpandIfRange);
+        { return _DTWAIN_EnumYResolutionValues(Source, ref pArray, bExpandIfRange); }
 
         public  DTWAIN_ARRAY DTWAIN_EnumYResolutionValuesEx(DTWAIN_SOURCE Source, int bExpandIfRange)
-        => _DTWAIN_EnumYResolutionValuesEx(Source, bExpandIfRange);
+        { return _DTWAIN_EnumYResolutionValuesEx(Source, bExpandIfRange); }
 
         public  int DTWAIN_ExecuteOCR(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] string szFileName, int nStartPage, int nEndPage)
-        => _DTWAIN_ExecuteOCR(Engine, szFileName, nStartPage, nEndPage);
+        { return _DTWAIN_ExecuteOCR(Engine, szFileName, nStartPage, nEndPage); }
 
         public  int DTWAIN_FeedPage(DTWAIN_SOURCE Source)
-        => _DTWAIN_FeedPage(Source);
+        { return _DTWAIN_FeedPage(Source); }
 
         public  int DTWAIN_FlipBitmap(HANDLE hDib)
-        => _DTWAIN_FlipBitmap(hDib);
+        { return _DTWAIN_FlipBitmap(hDib); }
 
         public  int DTWAIN_FlushAcquiredPages(DTWAIN_SOURCE Source)
-        => _DTWAIN_FlushAcquiredPages(Source);
+        { return _DTWAIN_FlushAcquiredPages(Source); }
 
         public  DTWAIN_FRAME DTWAIN_FrameCreate(DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom)
-        => _DTWAIN_FrameCreate(Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameCreate(Left, Top, Right, Bottom); }
 
         public  DTWAIN_FRAME DTWAIN_FrameCreateString([MarshalAs(UnmanagedType.LPTStr)] string Left, [MarshalAs(UnmanagedType.LPTStr)] string Top, [MarshalAs(UnmanagedType.LPTStr)] string Right, [MarshalAs(UnmanagedType.LPTStr)] string Bottom)
-        => _DTWAIN_FrameCreateString(Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameCreateString(Left, Top, Right, Bottom); }
 
         public  int DTWAIN_FrameDestroy(DTWAIN_FRAME Frame)
-        => _DTWAIN_FrameDestroy(Frame);
+        { return _DTWAIN_FrameDestroy(Frame); }
 
         public  int DTWAIN_FrameGetAll(DTWAIN_FRAME Frame, ref DTWAIN_FLOAT Left, ref DTWAIN_FLOAT Top, ref DTWAIN_FLOAT Right, ref DTWAIN_FLOAT Bottom)
-        => _DTWAIN_FrameGetAll(Frame, ref Left, ref Top, ref Right, ref Bottom);
+        { return _DTWAIN_FrameGetAll(Frame, ref Left, ref Top, ref Right, ref Bottom); }
 
         public  int DTWAIN_FrameGetAllString(DTWAIN_FRAME Frame, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Left, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Top, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Right, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Bottom)
-        => _DTWAIN_FrameGetAllString(Frame, Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameGetAllString(Frame, Left, Top, Right, Bottom); }
 
         public  int DTWAIN_FrameGetAllString (DTWAIN_FRAME Frame, System.IntPtr Left, System.IntPtr Top, System.IntPtr Right, System.IntPtr Bottom)
-        => _DTWAIN_FrameGetAllString_overload(Frame, Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameGetAllString_overload(Frame, Left, Top, Right, Bottom); }
 
         public  int DTWAIN_FrameGetValue(DTWAIN_FRAME Frame, int nWhich, ref DTWAIN_FLOAT Value)
-        => _DTWAIN_FrameGetValue(Frame, nWhich, ref Value);
+        { return _DTWAIN_FrameGetValue(Frame, nWhich, ref Value); }
 
         public  int DTWAIN_FrameGetValueString(DTWAIN_FRAME Frame, int nWhich, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Value)
-        => _DTWAIN_FrameGetValueString(Frame, nWhich, Value);
+        { return _DTWAIN_FrameGetValueString(Frame, nWhich, Value); }
 
         public  int DTWAIN_FrameGetValueString (DTWAIN_FRAME Frame, int nWhich, System.IntPtr Value)
-        => _DTWAIN_FrameGetValueString_overload(Frame, nWhich, Value);
+        { return _DTWAIN_FrameGetValueString_overload(Frame, nWhich, Value); }
 
         public  int DTWAIN_FrameIsValid(DTWAIN_FRAME Frame)
-        => _DTWAIN_FrameIsValid(Frame);
+        { return _DTWAIN_FrameIsValid(Frame); }
 
         public  int DTWAIN_FrameSetAll(DTWAIN_FRAME Frame, DTWAIN_FLOAT Left, DTWAIN_FLOAT Top, DTWAIN_FLOAT Right, DTWAIN_FLOAT Bottom)
-        => _DTWAIN_FrameSetAll(Frame, Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameSetAll(Frame, Left, Top, Right, Bottom); }
 
         public  int DTWAIN_FrameSetAllString(DTWAIN_FRAME Frame, [MarshalAs(UnmanagedType.LPTStr)] string Left, [MarshalAs(UnmanagedType.LPTStr)] string Top, [MarshalAs(UnmanagedType.LPTStr)] string Right, [MarshalAs(UnmanagedType.LPTStr)] string Bottom)
-        => _DTWAIN_FrameSetAllString(Frame, Left, Top, Right, Bottom);
+        { return _DTWAIN_FrameSetAllString(Frame, Left, Top, Right, Bottom); }
 
         public  int DTWAIN_FrameSetValue(DTWAIN_FRAME Frame, int nWhich, DTWAIN_FLOAT Value)
-        => _DTWAIN_FrameSetValue(Frame, nWhich, Value);
+        { return _DTWAIN_FrameSetValue(Frame, nWhich, Value); }
 
         public  int DTWAIN_FrameSetValueString(DTWAIN_FRAME Frame, int nWhich, [MarshalAs(UnmanagedType.LPTStr)] string Value)
-        => _DTWAIN_FrameSetValueString(Frame, nWhich, Value);
+        { return _DTWAIN_FrameSetValueString(Frame, nWhich, Value); }
 
         public  int DTWAIN_FreeExtImageInfo(DTWAIN_SOURCE Source)
-        => _DTWAIN_FreeExtImageInfo(Source);
+        { return _DTWAIN_FreeExtImageInfo(Source); }
 
         public  int DTWAIN_FreeMemory(HANDLE h)
-        => _DTWAIN_FreeMemory(h);
+        { return _DTWAIN_FreeMemory(h); }
 
         public  int DTWAIN_FreeMemoryEx(HANDLE h)
-        => _DTWAIN_FreeMemoryEx(h);
+        { return _DTWAIN_FreeMemoryEx(h); }
 
         public  int DTWAIN_GetAPIHandleStatus(DTWAIN_HANDLE pHandle)
-        => _DTWAIN_GetAPIHandleStatus(pHandle);
+        { return _DTWAIN_GetAPIHandleStatus(pHandle); }
 
         public  int DTWAIN_GetAcquireArea(DTWAIN_SOURCE Source, int lGetType, ref DTWAIN_ARRAY FloatEnum)
-        => _DTWAIN_GetAcquireArea(Source, lGetType, ref FloatEnum);
+        { return _DTWAIN_GetAcquireArea(Source, lGetType, ref FloatEnum); }
 
         public  int DTWAIN_GetAcquireArea2(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT left, ref DTWAIN_FLOAT top, ref DTWAIN_FLOAT right, ref DTWAIN_FLOAT bottom, ref int lpUnit)
-        => _DTWAIN_GetAcquireArea2(Source, ref left, ref top, ref right, ref bottom, ref lpUnit);
+        { return _DTWAIN_GetAcquireArea2(Source, ref left, ref top, ref right, ref bottom, ref lpUnit); }
 
         public  int DTWAIN_GetAcquireArea2String(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder left, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder top, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder right, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder bottom, ref int Unit)
-        => _DTWAIN_GetAcquireArea2String(Source, left, top, right, bottom, ref Unit);
+        { return _DTWAIN_GetAcquireArea2String(Source, left, top, right, bottom, ref Unit); }
 
         public  int DTWAIN_GetAcquireArea2String (DTWAIN_SOURCE Source, System.IntPtr left, System.IntPtr top, System.IntPtr right, System.IntPtr bottom, ref int Unit)
-        => _DTWAIN_GetAcquireArea2String_overload(Source, left, top, right, bottom, ref Unit);
+        { return _DTWAIN_GetAcquireArea2String_overload(Source, left, top, right, bottom, ref Unit); }
 
         public  DTWAIN_ARRAY DTWAIN_GetAcquireAreaEx(DTWAIN_SOURCE Source, int lGetType)
-        => _DTWAIN_GetAcquireAreaEx(Source, lGetType);
+        { return _DTWAIN_GetAcquireAreaEx(Source, lGetType); }
 
         public  int DTWAIN_GetAcquireMetrics(DTWAIN_SOURCE source, ref int ImageCount, ref int SheetCount)
-        => _DTWAIN_GetAcquireMetrics(source, ref ImageCount, ref SheetCount);
+        { return _DTWAIN_GetAcquireMetrics(source, ref ImageCount, ref SheetCount); }
 
         public  HANDLE DTWAIN_GetAcquireStripBuffer(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetAcquireStripBuffer(Source);
+        { return _DTWAIN_GetAcquireStripBuffer(Source); }
 
         public  int DTWAIN_GetAcquireStripData(DTWAIN_SOURCE Source, ref int lpCompression, ref DWORD lpBytesPerRow, ref DWORD lpColumns, ref DWORD lpRows, ref DWORD XOffset, ref DWORD YOffset, ref DWORD lpBytesWritten)
-        => _DTWAIN_GetAcquireStripData(Source, ref lpCompression, ref lpBytesPerRow, ref lpColumns, ref lpRows, ref XOffset, ref YOffset, ref lpBytesWritten);
+        { return _DTWAIN_GetAcquireStripData(Source, ref lpCompression, ref lpBytesPerRow, ref lpColumns, ref lpRows, ref XOffset, ref YOffset, ref lpBytesWritten); }
 
         public  int DTWAIN_GetAcquireStripSizes(DTWAIN_SOURCE Source, ref DWORD lpMin, ref DWORD lpMax, ref DWORD lpPreferred)
-        => _DTWAIN_GetAcquireStripSizes(Source, ref lpMin, ref lpMax, ref lpPreferred);
+        { return _DTWAIN_GetAcquireStripSizes(Source, ref lpMin, ref lpMax, ref lpPreferred); }
 
         public  HANDLE DTWAIN_GetAcquiredImage(DTWAIN_ARRAY aAcq, int nWhichAcq, int nWhichDib)
-        => _DTWAIN_GetAcquiredImage(aAcq, nWhichAcq, nWhichDib);
+        { return _DTWAIN_GetAcquiredImage(aAcq, nWhichAcq, nWhichDib); }
 
         public  DTWAIN_ARRAY DTWAIN_GetAcquiredImageArray(DTWAIN_ARRAY aAcq, int nWhichAcq)
-        => _DTWAIN_GetAcquiredImageArray(aAcq, nWhichAcq);
+        { return _DTWAIN_GetAcquiredImageArray(aAcq, nWhichAcq); }
 
         public  DTWAIN_ARRAY DTWAIN_GetAcquisitionArray(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetAcquisitionArray(Source);
+        { return _DTWAIN_GetAcquisitionArray(Source); }
 
         public  int DTWAIN_GetActiveDSMPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetActiveDSMPath(lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetActiveDSMPath(lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetActiveDSMPath (System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetActiveDSMPath_overload(lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetActiveDSMPath_overload(lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetActiveDSMVersionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szDLLInfo, int nMaxLen)
-        => _DTWAIN_GetActiveDSMVersionInfo(szDLLInfo, nMaxLen);
+        { return _DTWAIN_GetActiveDSMVersionInfo(szDLLInfo, nMaxLen); }
 
         public  int DTWAIN_GetActiveDSMVersionInfo (System.IntPtr szDLLInfo, int nMaxLen)
-        => _DTWAIN_GetActiveDSMVersionInfo_overload(szDLLInfo, nMaxLen);
+        { return _DTWAIN_GetActiveDSMVersionInfo_overload(szDLLInfo, nMaxLen); }
 
         public  int DTWAIN_GetAlarmVolume(DTWAIN_SOURCE Source, ref int lpVolume)
-        => _DTWAIN_GetAlarmVolume(Source, ref lpVolume);
+        { return _DTWAIN_GetAlarmVolume(Source, ref lpVolume); }
 
         public  int DTWAIN_GetAllSessionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int indentFactor, int nMaxLen)
-        => _DTWAIN_GetAllSessionInfo(lpszOut, indentFactor, nMaxLen);
+        { return _DTWAIN_GetAllSessionInfo(lpszOut, indentFactor, nMaxLen); }
 
         public  int DTWAIN_GetAllSessionInfo (System.IntPtr lpszOut, int indentFactor, int nMaxLen)
-        => _DTWAIN_GetAllSessionInfo_overload(lpszOut, indentFactor, nMaxLen);
+        { return _DTWAIN_GetAllSessionInfo_overload(lpszOut, indentFactor, nMaxLen); }
 
         public  DTWAIN_ARRAY DTWAIN_GetAllSourceDibs(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetAllSourceDibs(Source);
+        { return _DTWAIN_GetAllSourceDibs(Source); }
 
         public  int DTWAIN_GetAllSourceInfo(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int indentFactor, int nSize)
-        => _DTWAIN_GetAllSourceInfo(Source, lpszOut, indentFactor, nSize);
+        { return _DTWAIN_GetAllSourceInfo(Source, lpszOut, indentFactor, nSize); }
 
         public  int DTWAIN_GetAllSourceInfo (DTWAIN_SOURCE Source, System.IntPtr lpszOut, int indentFactor, int nSize)
-        => _DTWAIN_GetAllSourceInfo_overload(Source, lpszOut, indentFactor, nSize);
+        { return _DTWAIN_GetAllSourceInfo_overload(Source, lpszOut, indentFactor, nSize); }
 
         public  int DTWAIN_GetAppInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szVerStr, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szManu, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProdFam, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProdName)
-        => _DTWAIN_GetAppInfo(szVerStr, szManu, szProdFam, szProdName);
+        { return _DTWAIN_GetAppInfo(szVerStr, szManu, szProdFam, szProdName); }
 
         public  int DTWAIN_GetAppInfo (System.IntPtr szVerStr, System.IntPtr szManu, System.IntPtr szProdFam, System.IntPtr szProdName)
-        => _DTWAIN_GetAppInfo_overload(szVerStr, szManu, szProdFam, szProdName);
+        { return _DTWAIN_GetAppInfo_overload(szVerStr, szManu, szProdFam, szProdName); }
 
         public  int DTWAIN_GetAuthor(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szAuthor)
-        => _DTWAIN_GetAuthor(Source, szAuthor);
+        { return _DTWAIN_GetAuthor(Source, szAuthor); }
 
         public  int DTWAIN_GetAuthor (DTWAIN_SOURCE Source, System.IntPtr szAuthor)
-        => _DTWAIN_GetAuthor_overload(Source, szAuthor);
+        { return _DTWAIN_GetAuthor_overload(Source, szAuthor); }
 
         public  int DTWAIN_GetBarcodeMaxPriorities(DTWAIN_SOURCE Source, ref DWORD pMaxPriorities, int bCurrent)
-        => _DTWAIN_GetBarcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent);
+        { return _DTWAIN_GetBarcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent); }
 
         public  int DTWAIN_GetBarcodeMaxRetries(DTWAIN_SOURCE Source, ref DWORD pMaxRetries, int bCurrent)
-        => _DTWAIN_GetBarcodeMaxRetries(Source, ref pMaxRetries, bCurrent);
+        { return _DTWAIN_GetBarcodeMaxRetries(Source, ref pMaxRetries, bCurrent); }
 
         public  int DTWAIN_GetBarcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_GetBarcodePriorities(Source, ref SearchPriorities);
+        { return _DTWAIN_GetBarcodePriorities(Source, ref SearchPriorities); }
 
         public  int DTWAIN_GetBarcodeSearchMode(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent)
-        => _DTWAIN_GetBarcodeSearchMode(Source, ref pSearchMode, bCurrent);
+        { return _DTWAIN_GetBarcodeSearchMode(Source, ref pSearchMode, bCurrent); }
 
         public  int DTWAIN_GetBarcodeTimeOut(DTWAIN_SOURCE Source, ref DWORD pTimeOut, int bCurrent)
-        => _DTWAIN_GetBarcodeTimeOut(Source, ref pTimeOut, bCurrent);
+        { return _DTWAIN_GetBarcodeTimeOut(Source, ref pTimeOut, bCurrent); }
 
         public  int DTWAIN_GetBatteryMinutes(DTWAIN_SOURCE Source, ref int lpMinutes)
-        => _DTWAIN_GetBatteryMinutes(Source, ref lpMinutes);
+        { return _DTWAIN_GetBatteryMinutes(Source, ref lpMinutes); }
 
         public  int DTWAIN_GetBatteryPercent(DTWAIN_SOURCE Source, ref int lpPercent)
-        => _DTWAIN_GetBatteryPercent(Source, ref lpPercent);
+        { return _DTWAIN_GetBatteryPercent(Source, ref lpPercent); }
 
         public  int DTWAIN_GetBitDepth(DTWAIN_SOURCE Source, ref int BitDepth, int bCurrent)
-        => _DTWAIN_GetBitDepth(Source, ref BitDepth, bCurrent);
+        { return _DTWAIN_GetBitDepth(Source, ref BitDepth, bCurrent); }
 
         public  int DTWAIN_GetBitDepthEx(DTWAIN_SOURCE Source, int bCurrent)
-        => _DTWAIN_GetBitDepthEx(Source, bCurrent);
+        { return _DTWAIN_GetBitDepthEx(Source, bCurrent); }
 
         public  int DTWAIN_GetBlankPageAutoDetection(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetBlankPageAutoDetection(Source);
+        { return _DTWAIN_GetBlankPageAutoDetection(Source); }
 
         public  int DTWAIN_GetBrightness(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Brightness)
-        => _DTWAIN_GetBrightness(Source, ref Brightness);
+        { return _DTWAIN_GetBrightness(Source, ref Brightness); }
 
         public  DTWAIN_FLOAT DTWAIN_GetBrightnessEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetBrightnessEx(Source);
+        { return _DTWAIN_GetBrightnessEx(Source); }
 
         public  int DTWAIN_GetBrightnessString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Brightness)
-        => _DTWAIN_GetBrightnessString(Source, Brightness);
+        { return _DTWAIN_GetBrightnessString(Source, Brightness); }
 
         public  int DTWAIN_GetBrightnessString (DTWAIN_SOURCE Source, System.IntPtr Brightness)
-        => _DTWAIN_GetBrightnessString_overload(Source, Brightness);
+        { return _DTWAIN_GetBrightnessString_overload(Source, Brightness); }
 
         public  HANDLE DTWAIN_GetBufferedTransferInfo(DTWAIN_SOURCE Source, ref DWORD Compression, ref DWORD BytesPerRow, ref DWORD Columns, ref DWORD Rows, ref DWORD XOffset, ref DWORD YOffset, ref DWORD Flags, ref DWORD BytesWritten, ref DWORD MemoryLength)
-        => _DTWAIN_GetBufferedTransferInfo(Source, ref Compression, ref BytesPerRow, ref Columns, ref Rows, ref XOffset, ref YOffset, ref Flags, ref BytesWritten, ref MemoryLength);
+        { return _DTWAIN_GetBufferedTransferInfo(Source, ref Compression, ref BytesPerRow, ref Columns, ref Rows, ref XOffset, ref YOffset, ref Flags, ref BytesWritten, ref MemoryLength); }
 
         public  DTwainCallback DTWAIN_GetCallback()
-        => _DTWAIN_GetCallback();
+        { return _DTWAIN_GetCallback(); }
 
         public  DTwainCallback64 DTWAIN_GetCallback64()
-        => _DTWAIN_GetCallback64();
+        { return _DTWAIN_GetCallback64(); }
 
         public  int DTWAIN_GetCapArrayType(DTWAIN_SOURCE Source, int nCap)
-        => _DTWAIN_GetCapArrayType(Source, nCap);
+        { return _DTWAIN_GetCapArrayType(Source, nCap); }
 
         public  int DTWAIN_GetCapContainer(DTWAIN_SOURCE Source, int nCap, int lCapType)
-        => _DTWAIN_GetCapContainer(Source, nCap, lCapType);
+        { return _DTWAIN_GetCapContainer(Source, nCap, lCapType); }
 
         public  int DTWAIN_GetCapContainerEx(int nCap, int bSetContainer, ref DTWAIN_ARRAY ConTypes)
-        => _DTWAIN_GetCapContainerEx(nCap, bSetContainer, ref ConTypes);
+        { return _DTWAIN_GetCapContainerEx(nCap, bSetContainer, ref ConTypes); }
 
         public  DTWAIN_ARRAY DTWAIN_GetCapContainerEx2(int nCap, int bSetContainer)
-        => _DTWAIN_GetCapContainerEx2(nCap, bSetContainer);
+        { return _DTWAIN_GetCapContainerEx2(nCap, bSetContainer); }
 
         public  int DTWAIN_GetCapDataType(DTWAIN_SOURCE Source, int nCap)
-        => _DTWAIN_GetCapDataType(Source, nCap);
+        { return _DTWAIN_GetCapDataType(Source, nCap); }
 
         public  int DTWAIN_GetCapFromName([MarshalAs(UnmanagedType.LPTStr)] string szName)
-        => _DTWAIN_GetCapFromName(szName);
+        { return _DTWAIN_GetCapFromName(szName); }
 
         public  int DTWAIN_GetCapHelp(int lCapability, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
-        => _DTWAIN_GetCapHelp(lCapability, lpszOut, nSize);
+        { return _DTWAIN_GetCapHelp(lCapability, lpszOut, nSize); }
 
         public  int DTWAIN_GetCapHelp (int lCapability, System.IntPtr lpszOut, int nSize)
-        => _DTWAIN_GetCapHelp_overload(lCapability, lpszOut, nSize);
+        { return _DTWAIN_GetCapHelp_overload(lCapability, lpszOut, nSize); }
 
         public  int DTWAIN_GetCapLabel(int lCapability, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
-        => _DTWAIN_GetCapLabel(lCapability, lpszOut, nSize);
+        { return _DTWAIN_GetCapLabel(lCapability, lpszOut, nSize); }
 
         public  int DTWAIN_GetCapLabel (int lCapability, System.IntPtr lpszOut, int nSize)
-        => _DTWAIN_GetCapLabel_overload(lCapability, lpszOut, nSize);
+        { return _DTWAIN_GetCapLabel_overload(lCapability, lpszOut, nSize); }
 
         public  int DTWAIN_GetCapOperations(DTWAIN_SOURCE Source, int lCapability, ref int lpOps)
-        => _DTWAIN_GetCapOperations(Source, lCapability, ref lpOps);
+        { return _DTWAIN_GetCapOperations(Source, lCapability, ref lpOps); }
 
         public  int DTWAIN_GetCapOperationsEx(DTWAIN_SOURCE Source, int lCapability)
-        => _DTWAIN_GetCapOperationsEx(Source, lCapability);
+        { return _DTWAIN_GetCapOperationsEx(Source, lCapability); }
 
         public  int DTWAIN_GetCapValues(DTWAIN_SOURCE Source, int lCap, int lGetType, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_GetCapValues(Source, lCap, lGetType, ref pArray);
+        { return _DTWAIN_GetCapValues(Source, lCap, lGetType, ref pArray); }
 
         public  int DTWAIN_GetCapValuesEx(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_GetCapValuesEx(Source, lCap, lGetType, lContainerType, ref pArray);
+        { return _DTWAIN_GetCapValuesEx(Source, lCap, lGetType, lContainerType, ref pArray); }
 
         public  int DTWAIN_GetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_GetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType, ref pArray);
+        { return _DTWAIN_GetCapValuesEx2(Source, lCap, lGetType, lContainerType, nDataType, ref pArray); }
 
         public  int DTWAIN_GetCaption(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Caption)
-        => _DTWAIN_GetCaption(Source, Caption);
+        { return _DTWAIN_GetCaption(Source, Caption); }
 
         public  int DTWAIN_GetCaption (DTWAIN_SOURCE Source, System.IntPtr Caption)
-        => _DTWAIN_GetCaption_overload(Source, Caption);
+        { return _DTWAIN_GetCaption_overload(Source, Caption); }
 
         public  int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, ref DWORD lBytes)
-        => _DTWAIN_GetCompressionSize(Source, ref lBytes);
+        { return _DTWAIN_GetCompressionSize(Source, ref lBytes); }
 
         public  int DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent)
-        => _DTWAIN_GetCompressionType(Source, ref lpCompression, bCurrent);
+        { return _DTWAIN_GetCompressionType(Source, ref lpCompression, bCurrent); }
 
         public  int DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, int bCurrent)
-        => _DTWAIN_GetCompressionTypeEx(Source, bCurrent);
+        { return _DTWAIN_GetCompressionTypeEx(Source, bCurrent); }
 
         public  int DTWAIN_GetConditionCodeString(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetConditionCodeString(lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetConditionCodeString (int lError, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetConditionCodeString_overload(lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetConditionCodeString_overload(lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetConstantFromTwainName([MarshalAs(UnmanagedType.LPTStr)] string lpszBuffer)
-        => _DTWAIN_GetConstantFromTwainName(lpszBuffer);
+        { return _DTWAIN_GetConstantFromTwainName(lpszBuffer); }
 
         public  int DTWAIN_GetContrast(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Contrast)
-        => _DTWAIN_GetContrast(Source, ref Contrast);
+        { return _DTWAIN_GetContrast(Source, ref Contrast); }
 
         public  DTWAIN_FLOAT DTWAIN_GetContrastEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetContrastEx(Source);
+        { return _DTWAIN_GetContrastEx(Source); }
 
         public  int DTWAIN_GetContrastString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Contrast)
-        => _DTWAIN_GetContrastString(Source, Contrast);
+        { return _DTWAIN_GetContrastString(Source, Contrast); }
 
         public  int DTWAIN_GetContrastString (DTWAIN_SOURCE Source, System.IntPtr Contrast)
-        => _DTWAIN_GetContrastString_overload(Source, Contrast);
+        { return _DTWAIN_GetContrastString_overload(Source, Contrast); }
 
         public  int DTWAIN_GetCountry()
-        => _DTWAIN_GetCountry();
+        { return _DTWAIN_GetCountry(); }
 
         public  HANDLE DTWAIN_GetCurrentAcquiredImage(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetCurrentAcquiredImage(Source);
+        { return _DTWAIN_GetCurrentAcquiredImage(Source); }
 
         public  int DTWAIN_GetCurrentCustomResourceName([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nMaxLen)
-        => _DTWAIN_GetCurrentCustomResourceName(lpszOut, nMaxLen);
+        { return _DTWAIN_GetCurrentCustomResourceName(lpszOut, nMaxLen); }
 
         public  int DTWAIN_GetCurrentCustomResourceName (System.IntPtr lpszOut, int nMaxLen)
-        => _DTWAIN_GetCurrentCustomResourceName_overload(lpszOut, nMaxLen);
+        { return _DTWAIN_GetCurrentCustomResourceName_overload(lpszOut, nMaxLen); }
 
         public  int DTWAIN_GetCurrentFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szName, int MaxLen)
-        => _DTWAIN_GetCurrentFileName(Source, szName, MaxLen);
+        { return _DTWAIN_GetCurrentFileName(Source, szName, MaxLen); }
 
         public  int DTWAIN_GetCurrentFileName (DTWAIN_SOURCE Source, System.IntPtr szName, int MaxLen)
-        => _DTWAIN_GetCurrentFileName_overload(Source, szName, MaxLen);
+        { return _DTWAIN_GetCurrentFileName_overload(Source, szName, MaxLen); }
 
         public  int DTWAIN_GetCurrentPageNum(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetCurrentPageNum(Source);
+        { return _DTWAIN_GetCurrentPageNum(Source); }
 
         public  int DTWAIN_GetCurrentRetryCount(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetCurrentRetryCount(Source);
+        { return _DTWAIN_GetCurrentRetryCount(Source); }
 
         public  int DTWAIN_GetCurrentTwainTriplet([In, Out] TW_IDENTITY pAppID, [In, Out] TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef)
-        => _DTWAIN_GetCurrentTwainTriplet(pAppID, pSourceID, ref lpDG, ref lpDAT, ref lpMsg, ref lpMemRef);
+        { return _DTWAIN_GetCurrentTwainTriplet(pAppID, pSourceID, ref lpDG, ref lpDAT, ref lpMsg, ref lpMemRef); }
 
         public  HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] Data, uint dSize, ref DWORD pActualSize, int nFlags)
-        => _DTWAIN_GetCustomDSData(Source, Data, dSize, ref pActualSize, nFlags);
+        { return _DTWAIN_GetCustomDSData(Source, Data, dSize, ref pActualSize, nFlags); }
 
         public  int DTWAIN_GetDSMFullName(int DSMType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szDLLName, int nMaxLen, ref int pWhichSearch)
-        => _DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, ref pWhichSearch);
+        { return _DTWAIN_GetDSMFullName(DSMType, szDLLName, nMaxLen, ref pWhichSearch); }
 
         public  int DTWAIN_GetDSMFullName (int DSMType, System.IntPtr szDLLName, int nMaxLen, ref int pWhichSearch)
-        => _DTWAIN_GetDSMFullName_overload(DSMType, szDLLName, nMaxLen, ref pWhichSearch);
+        { return _DTWAIN_GetDSMFullName_overload(DSMType, szDLLName, nMaxLen, ref pWhichSearch); }
 
         public  int DTWAIN_GetDSMSearchOrder()
-        => _DTWAIN_GetDSMSearchOrder();
+        { return _DTWAIN_GetDSMSearchOrder(); }
 
         public  int DTWAIN_GetDSMSearchOrderEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder SearchOrder, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder UserDirectory)
-        => _DTWAIN_GetDSMSearchOrderEx(SearchOrder, UserDirectory);
+        { return _DTWAIN_GetDSMSearchOrderEx(SearchOrder, UserDirectory); }
 
         public  int DTWAIN_GetDSMSearchOrderEx (System.IntPtr SearchOrder, System.IntPtr UserDirectory)
-        => _DTWAIN_GetDSMSearchOrderEx_overload(SearchOrder, UserDirectory);
+        { return _DTWAIN_GetDSMSearchOrderEx_overload(SearchOrder, UserDirectory); }
 
         public  DTWAIN_HANDLE DTWAIN_GetDTWAINHandle()
-        => _DTWAIN_GetDTWAINHandle();
+        { return _DTWAIN_GetDTWAINHandle(); }
 
         public  int DTWAIN_GetDeviceEvent(DTWAIN_SOURCE Source, ref DWORD lpEvent)
-        => _DTWAIN_GetDeviceEvent(Source, ref lpEvent);
+        { return _DTWAIN_GetDeviceEvent(Source, ref lpEvent); }
 
         public  int DTWAIN_GetDeviceEventEx(DTWAIN_SOURCE Source, ref DWORD lpEvent, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_GetDeviceEventEx(Source, ref lpEvent, ref pArray);
+        { return _DTWAIN_GetDeviceEventEx(Source, ref lpEvent, ref pArray); }
 
         public  int DTWAIN_GetDeviceEventInfo(DTWAIN_SOURCE Source, int nWhichInfo, System.IntPtr pValue)
-        => _DTWAIN_GetDeviceEventInfo(Source, nWhichInfo, pValue);
+        { return _DTWAIN_GetDeviceEventInfo(Source, nWhichInfo, pValue); }
 
         public  int DTWAIN_GetDeviceNotifications(DTWAIN_SOURCE Source, ref int DevEvents)
-        => _DTWAIN_GetDeviceNotifications(Source, ref DevEvents);
+        { return _DTWAIN_GetDeviceNotifications(Source, ref DevEvents); }
 
         public  int DTWAIN_GetDeviceTimeDate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szTimeDate)
-        => _DTWAIN_GetDeviceTimeDate(Source, szTimeDate);
+        { return _DTWAIN_GetDeviceTimeDate(Source, szTimeDate); }
 
         public  int DTWAIN_GetDeviceTimeDate (DTWAIN_SOURCE Source, System.IntPtr szTimeDate)
-        => _DTWAIN_GetDeviceTimeDate_overload(Source, szTimeDate);
+        { return _DTWAIN_GetDeviceTimeDate_overload(Source, szTimeDate); }
 
         public  int DTWAIN_GetDoubleFeedDetectLength(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Value, int bCurrent)
-        => _DTWAIN_GetDoubleFeedDetectLength(Source, ref Value, bCurrent);
+        { return _DTWAIN_GetDoubleFeedDetectLength(Source, ref Value, bCurrent); }
 
         public  int DTWAIN_GetDoubleFeedDetectValues(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_GetDoubleFeedDetectValues(Source, ref pArray);
+        { return _DTWAIN_GetDoubleFeedDetectValues(Source, ref pArray); }
 
         public  int DTWAIN_GetDuplexType(DTWAIN_SOURCE Source, ref int lpDupType)
-        => _DTWAIN_GetDuplexType(Source, ref lpDupType);
+        { return _DTWAIN_GetDuplexType(Source, ref lpDupType); }
 
         public  int DTWAIN_GetDuplexTypeEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetDuplexTypeEx(Source);
+        { return _DTWAIN_GetDuplexTypeEx(Source); }
 
         public  int DTWAIN_GetErrorBuffer(ref DTWAIN_ARRAY ArrayBuffer)
-        => _DTWAIN_GetErrorBuffer(ref ArrayBuffer);
+        { return _DTWAIN_GetErrorBuffer(ref ArrayBuffer); }
 
         public  uint DTWAIN_GetErrorBufferThreshold()
-        => _DTWAIN_GetErrorBufferThreshold();
+        { return _DTWAIN_GetErrorBufferThreshold(); }
 
         public  DTwainErrorProc DTWAIN_GetErrorCallback()
-        => _DTWAIN_GetErrorCallback();
+        { return _DTWAIN_GetErrorCallback(); }
 
         public  DTwainErrorProc64 DTWAIN_GetErrorCallback64()
-        => _DTWAIN_GetErrorCallback64();
+        { return _DTWAIN_GetErrorCallback64(); }
 
         public  int DTWAIN_GetErrorString(int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetErrorString(lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetErrorString(lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetErrorString (int lError, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetErrorString_overload(lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetErrorString_overload(lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetExtCapFromName([MarshalAs(UnmanagedType.LPTStr)] string szName)
-        => _DTWAIN_GetExtCapFromName(szName);
-
-        public  int DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetExtImageInfo(Source);
+        { return _DTWAIN_GetExtCapFromName(szName); }
 
         public  int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data)
-        => _DTWAIN_GetExtImageInfoData(Source, nWhich, ref Data);
+        { return _DTWAIN_GetExtImageInfoData(Source, nWhich, ref Data); }
 
         public  DTWAIN_ARRAY DTWAIN_GetExtImageInfoDataEx(DTWAIN_SOURCE Source, int nWhich)
-        => _DTWAIN_GetExtImageInfoDataEx(Source, nWhich);
+        { return _DTWAIN_GetExtImageInfoDataEx(Source, nWhich); }
 
         public  int DTWAIN_GetExtImageInfoItem(DTWAIN_SOURCE Source, int nWhich, ref int InfoID, ref int NumItems, ref int Type)
-        => _DTWAIN_GetExtImageInfoItem(Source, nWhich, ref InfoID, ref NumItems, ref Type);
+        { return _DTWAIN_GetExtImageInfoItem(Source, nWhich, ref InfoID, ref NumItems, ref Type); }
 
         public  int DTWAIN_GetExtImageInfoItemEx(DTWAIN_SOURCE Source, int nWhich, ref int InfoID, ref int NumItems, ref int Type, ref int ReturnCode)
-        => _DTWAIN_GetExtImageInfoItemEx(Source, nWhich, ref InfoID, ref NumItems, ref Type, ref ReturnCode);
+        { return _DTWAIN_GetExtImageInfoItemEx(Source, nWhich, ref InfoID, ref NumItems, ref Type, ref ReturnCode); }
 
         public  int DTWAIN_GetExtNameFromCap(int nValue, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szValue, int nMaxLen)
-        => _DTWAIN_GetExtNameFromCap(nValue, szValue, nMaxLen);
+        { return _DTWAIN_GetExtNameFromCap(nValue, szValue, nMaxLen); }
 
         public  int DTWAIN_GetExtNameFromCap (int nValue, System.IntPtr szValue, int nMaxLen)
-        => _DTWAIN_GetExtNameFromCap_overload(nValue, szValue, nMaxLen);
+        { return _DTWAIN_GetExtNameFromCap_overload(nValue, szValue, nMaxLen); }
 
         public  int DTWAIN_GetFeederAlignment(DTWAIN_SOURCE Source, ref int lpAlignment)
-        => _DTWAIN_GetFeederAlignment(Source, ref lpAlignment);
+        { return _DTWAIN_GetFeederAlignment(Source, ref lpAlignment); }
 
         public  int DTWAIN_GetFeederFuncs(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetFeederFuncs(Source);
+        { return _DTWAIN_GetFeederFuncs(Source); }
 
         public  int DTWAIN_GetFeederOrder(DTWAIN_SOURCE Source, ref int lpOrder)
-        => _DTWAIN_GetFeederOrder(Source, ref lpOrder);
+        { return _DTWAIN_GetFeederOrder(Source, ref lpOrder); }
 
         public  int DTWAIN_GetFeederWaitTime(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetFeederWaitTime(Source);
+        { return _DTWAIN_GetFeederWaitTime(Source); }
 
         public  int DTWAIN_GetFileCompressionType(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetFileCompressionType(Source);
+        { return _DTWAIN_GetFileCompressionType(Source); }
 
         public  int DTWAIN_GetFileSavePageCount(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetFileSavePageCount(Source);
+        { return _DTWAIN_GetFileSavePageCount(Source); }
 
         public  int DTWAIN_GetFileTypeExtensions(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName, int nLength)
-        => _DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength);
+        { return _DTWAIN_GetFileTypeExtensions(nType, lpszName, nLength); }
 
         public  int DTWAIN_GetFileTypeExtensions (int nType, System.IntPtr lpszName, int nLength)
-        => _DTWAIN_GetFileTypeExtensions_overload(nType, lpszName, nLength);
+        { return _DTWAIN_GetFileTypeExtensions_overload(nType, lpszName, nLength); }
 
         public  int DTWAIN_GetFileTypeName(int nType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszName, int nLength)
-        => _DTWAIN_GetFileTypeName(nType, lpszName, nLength);
+        { return _DTWAIN_GetFileTypeName(nType, lpszName, nLength); }
 
         public  int DTWAIN_GetFileTypeName (int nType, System.IntPtr lpszName, int nLength)
-        => _DTWAIN_GetFileTypeName_overload(nType, lpszName, nLength);
+        { return _DTWAIN_GetFileTypeName_overload(nType, lpszName, nLength); }
 
         public  int DTWAIN_GetHalftone(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpHalftone, int GetType)
-        => _DTWAIN_GetHalftone(Source, lpHalftone, GetType);
+        { return _DTWAIN_GetHalftone(Source, lpHalftone, GetType); }
 
         public  int DTWAIN_GetHalftone (DTWAIN_SOURCE Source, System.IntPtr lpHalftone, int GetType)
-        => _DTWAIN_GetHalftone_overload(Source, lpHalftone, GetType);
+        { return _DTWAIN_GetHalftone_overload(Source, lpHalftone, GetType); }
 
         public  int DTWAIN_GetHighlight(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Highlight)
-        => _DTWAIN_GetHighlight(Source, ref Highlight);
+        { return _DTWAIN_GetHighlight(Source, ref Highlight); }
 
         public  int DTWAIN_GetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Highlight)
-        => _DTWAIN_GetHighlightString(Source, Highlight);
+        { return _DTWAIN_GetHighlightString(Source, Highlight); }
 
         public  int DTWAIN_GetHighlightString (DTWAIN_SOURCE Source, System.IntPtr Highlight)
-        => _DTWAIN_GetHighlightString_overload(Source, Highlight);
+        { return _DTWAIN_GetHighlightString_overload(Source, Highlight); }
 
         public  int DTWAIN_GetImageInfo(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT lpXResolution, ref DTWAIN_FLOAT lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression)
-        => _DTWAIN_GetImageInfo(Source, ref lpXResolution, ref lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression);
+        { return _DTWAIN_GetImageInfo(Source, ref lpXResolution, ref lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression); }
 
         public  int DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpXResolution, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression)
-        => _DTWAIN_GetImageInfoString(Source, lpXResolution, lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression);
+        { return _DTWAIN_GetImageInfoString(Source, lpXResolution, lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression); }
 
         public  int DTWAIN_GetImageInfoString (DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression)
-        => _DTWAIN_GetImageInfoString_overload(Source, lpXResolution, lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression);
+        { return _DTWAIN_GetImageInfoString_overload(Source, lpXResolution, lpYResolution, ref lpWidth, ref lpLength, ref lpNumSamples, ref lpBitsPerSample, ref lpBitsPerPixel, ref lpPlanar, ref lpPixelType, ref lpCompression); }
 
         public  int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber)
-        => _DTWAIN_GetImageLayoutInfo(Source, lGetType, ref DocumentNumber, ref PageNumber, ref FrameNumber);
+        { return _DTWAIN_GetImageLayoutInfo(Source, lGetType, ref DocumentNumber, ref PageNumber, ref FrameNumber); }
 
         public  int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent)
-        => _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent);
+        { return _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent); }
 
         public  int DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, int bGetCurrent)
-        => _DTWAIN_GetJobControlEx(Source, bGetCurrent);
+        { return _DTWAIN_GetJobControlEx(Source, bGetCurrent); }
 
         public  int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
-        => _DTWAIN_GetJpegValues(Source, ref pQuality, ref Progressive);
+        { return _DTWAIN_GetJpegValues(Source, ref pQuality, ref Progressive); }
 
         public  int DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
-        => _DTWAIN_GetJpegXRValues(Source, ref pQuality, ref Progressive);
+        { return _DTWAIN_GetJpegXRValues(Source, ref pQuality, ref Progressive); }
 
         public  int DTWAIN_GetLanguage()
-        => _DTWAIN_GetLanguage();
+        { return _DTWAIN_GetLanguage(); }
 
         public  int DTWAIN_GetLastCapEnumIndices(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex)
-        => _DTWAIN_GetLastCapEnumIndices(Source, ref pCurrentIndex, ref pDefaultIndex);
+        { return _DTWAIN_GetLastCapEnumIndices(Source, ref pCurrentIndex, ref pDefaultIndex); }
 
         public  int DTWAIN_GetLastError()
-        => _DTWAIN_GetLastError();
+        { return _DTWAIN_GetLastError(); }
+
+        public  int DTWAIN_GetLastTwainError(ref DWORD rcError, ref DWORD ccError)
+        { return _DTWAIN_GetLastTwainError(ref rcError, ref ccError); }
 
         public  int DTWAIN_GetLibraryPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength)
-        => _DTWAIN_GetLibraryPath(lpszVer, nLength);
+        { return _DTWAIN_GetLibraryPath(lpszVer, nLength); }
 
         public  int DTWAIN_GetLibraryPath (System.IntPtr lpszVer, int nLength)
-        => _DTWAIN_GetLibraryPath_overload(lpszVer, nLength);
+        { return _DTWAIN_GetLibraryPath_overload(lpszVer, nLength); }
 
         public  int DTWAIN_GetLightPath(DTWAIN_SOURCE Source, ref int lpLightPath)
-        => _DTWAIN_GetLightPath(Source, ref lpLightPath);
+        { return _DTWAIN_GetLightPath(Source, ref lpLightPath); }
 
         public  int DTWAIN_GetLightPathEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetLightPathEx(Source);
+        { return _DTWAIN_GetLightPathEx(Source); }
 
         public  int DTWAIN_GetLightSource(DTWAIN_SOURCE Source, ref int LightSource)
-        => _DTWAIN_GetLightSource(Source, ref LightSource);
+        { return _DTWAIN_GetLightSource(Source, ref LightSource); }
 
         public  int DTWAIN_GetLightSources(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY LightSources)
-        => _DTWAIN_GetLightSources(Source, ref LightSources);
+        { return _DTWAIN_GetLightSources(Source, ref LightSources); }
 
         public  DTWAIN_ARRAY DTWAIN_GetLightSourcesEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetLightSourcesEx(Source);
+        { return _DTWAIN_GetLightSourcesEx(Source); }
 
         public  DTwainLoggerProc DTWAIN_GetLoggerCallback()
-        => _DTWAIN_GetLoggerCallback();
+        { return _DTWAIN_GetLoggerCallback(); }
 
         public  int DTWAIN_GetMajorMinorVersion(ref DWORD nMajor, ref DWORD nMinor)
-        => _DTWAIN_GetMajorMinorVersion(ref nMajor, ref nMinor);
+        { return _DTWAIN_GetMajorMinorVersion(ref nMajor, ref nMinor); }
 
         public  int DTWAIN_GetManualDuplexCount(DTWAIN_SOURCE Source, ref int pSide1, ref int pSide2)
-        => _DTWAIN_GetManualDuplexCount(Source, ref pSide1, ref pSide2);
+        { return _DTWAIN_GetManualDuplexCount(Source, ref pSide1, ref pSide2); }
 
         public  int DTWAIN_GetMaxAcquisitions(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetMaxAcquisitions(Source);
+        { return _DTWAIN_GetMaxAcquisitions(Source); }
 
         public  int DTWAIN_GetMaxBuffers(DTWAIN_SOURCE Source, ref DWORD pMaxBuf)
-        => _DTWAIN_GetMaxBuffers(Source, ref pMaxBuf);
+        { return _DTWAIN_GetMaxBuffers(Source, ref pMaxBuf); }
 
         public  uint DTWAIN_GetMaxBuffersEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetMaxBuffersEx(Source);
+        { return _DTWAIN_GetMaxBuffersEx(Source); }
 
         public  int DTWAIN_GetMaxPagesToAcquire(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetMaxPagesToAcquire(Source);
+        { return _DTWAIN_GetMaxPagesToAcquire(Source); }
 
         public  int DTWAIN_GetMaxRetryAttempts(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetMaxRetryAttempts(Source);
+        { return _DTWAIN_GetMaxRetryAttempts(Source); }
 
         public  int DTWAIN_GetNameFromCap(int nCapValue, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szValue, int nMaxLen)
-        => _DTWAIN_GetNameFromCap(nCapValue, szValue, nMaxLen);
+        { return _DTWAIN_GetNameFromCap(nCapValue, szValue, nMaxLen); }
 
         public  int DTWAIN_GetNameFromCap (int nCapValue, System.IntPtr szValue, int nMaxLen)
-        => _DTWAIN_GetNameFromCap_overload(nCapValue, szValue, nMaxLen);
+        { return _DTWAIN_GetNameFromCap_overload(nCapValue, szValue, nMaxLen); }
 
         public  int DTWAIN_GetNoiseFilter(DTWAIN_SOURCE Source, ref int lpNoiseFilter)
-        => _DTWAIN_GetNoiseFilter(Source, ref lpNoiseFilter);
+        { return _DTWAIN_GetNoiseFilter(Source, ref lpNoiseFilter); }
 
         public  int DTWAIN_GetNumAcquiredImages(DTWAIN_ARRAY aAcq, int nWhich)
-        => _DTWAIN_GetNumAcquiredImages(aAcq, nWhich);
+        { return _DTWAIN_GetNumAcquiredImages(aAcq, nWhich); }
 
         public  int DTWAIN_GetNumAcquisitions(DTWAIN_ARRAY aAcq)
-        => _DTWAIN_GetNumAcquisitions(aAcq);
+        { return _DTWAIN_GetNumAcquisitions(aAcq); }
 
         public  int DTWAIN_GetOCRCapValues(DTWAIN_OCRENGINE Engine, int OCRCapValue, int GetType, ref DTWAIN_ARRAY CapValues)
-        => _DTWAIN_GetOCRCapValues(Engine, OCRCapValue, GetType, ref CapValues);
+        { return _DTWAIN_GetOCRCapValues(Engine, OCRCapValue, GetType, ref CapValues); }
 
         public  int DTWAIN_GetOCRErrorString(DTWAIN_OCRENGINE Engine, int lError, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetOCRErrorString(Engine, lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetOCRErrorString (DTWAIN_OCRENGINE Engine, int lError, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetOCRErrorString_overload(Engine, lError, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetOCRErrorString_overload(Engine, lError, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetOCRLastError(DTWAIN_OCRENGINE Engine)
-        => _DTWAIN_GetOCRLastError(Engine);
+        { return _DTWAIN_GetOCRLastError(Engine); }
 
         public  int DTWAIN_GetOCRMajorMinorVersion(DTWAIN_OCRENGINE Engine, ref int lpMajor, ref int lpMinor)
-        => _DTWAIN_GetOCRMajorMinorVersion(Engine, ref lpMajor, ref lpMinor);
+        { return _DTWAIN_GetOCRMajorMinorVersion(Engine, ref lpMajor, ref lpMinor); }
 
         public  int DTWAIN_GetOCRManufacturer(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szManufacturer, int nMaxLen)
-        => _DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nMaxLen);
+        { return _DTWAIN_GetOCRManufacturer(Engine, szManufacturer, nMaxLen); }
 
         public  int DTWAIN_GetOCRManufacturer (DTWAIN_OCRENGINE Engine, System.IntPtr szManufacturer, int nMaxLen)
-        => _DTWAIN_GetOCRManufacturer_overload(Engine, szManufacturer, nMaxLen);
+        { return _DTWAIN_GetOCRManufacturer_overload(Engine, szManufacturer, nMaxLen); }
 
         public  int DTWAIN_GetOCRProductFamily(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProductFamily, int nMaxLen)
-        => _DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nMaxLen);
+        { return _DTWAIN_GetOCRProductFamily(Engine, szProductFamily, nMaxLen); }
 
         public  int DTWAIN_GetOCRProductFamily (DTWAIN_OCRENGINE Engine, System.IntPtr szProductFamily, int nMaxLen)
-        => _DTWAIN_GetOCRProductFamily_overload(Engine, szProductFamily, nMaxLen);
+        { return _DTWAIN_GetOCRProductFamily_overload(Engine, szProductFamily, nMaxLen); }
 
         public  int DTWAIN_GetOCRProductName(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProductName, int nMaxLen)
-        => _DTWAIN_GetOCRProductName(Engine, szProductName, nMaxLen);
+        { return _DTWAIN_GetOCRProductName(Engine, szProductName, nMaxLen); }
 
         public  int DTWAIN_GetOCRProductName (DTWAIN_OCRENGINE Engine, System.IntPtr szProductName, int nMaxLen)
-        => _DTWAIN_GetOCRProductName_overload(Engine, szProductName, nMaxLen);
+        { return _DTWAIN_GetOCRProductName_overload(Engine, szProductName, nMaxLen); }
 
         public  HANDLE DTWAIN_GetOCRText(DTWAIN_OCRENGINE Engine, int nPageNo, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Data, int dSize, ref int pActualSize, int nFlags)
-        => _DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, ref pActualSize, nFlags);
+        { return _DTWAIN_GetOCRText(Engine, nPageNo, Data, dSize, ref pActualSize, nFlags); }
 
         public  HANDLE DTWAIN_GetOCRText (DTWAIN_OCRENGINE Engine, int nPageNo, System.IntPtr Data, int dSize, ref int pActualSize, int nFlags)
-        => _DTWAIN_GetOCRText_overload(Engine, nPageNo, Data, dSize, ref pActualSize, nFlags);
+        { return _DTWAIN_GetOCRText_overload(Engine, nPageNo, Data, dSize, ref pActualSize, nFlags); }
 
         public  int DTWAIN_GetOCRTextInfoFloat(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo, int nCharPos, int nWhichItem, ref DTWAIN_FLOAT pInfo)
-        => _DTWAIN_GetOCRTextInfoFloat(OCRTextInfo, nCharPos, nWhichItem, ref pInfo);
+        { return _DTWAIN_GetOCRTextInfoFloat(OCRTextInfo, nCharPos, nWhichItem, ref pInfo); }
 
         public  int DTWAIN_GetOCRTextInfoFloatEx(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo, int nWhichItem, ref DTWAIN_FLOAT pInfo, int bufSize)
-        => _DTWAIN_GetOCRTextInfoFloatEx(OCRTextInfo, nWhichItem, ref pInfo, bufSize);
+        { return _DTWAIN_GetOCRTextInfoFloatEx(OCRTextInfo, nWhichItem, ref pInfo, bufSize); }
 
         public  DTWAIN_OCRTEXTINFOHANDLE DTWAIN_GetOCRTextInfoHandle(DTWAIN_OCRENGINE Engine, int nPageNo)
-        => _DTWAIN_GetOCRTextInfoHandle(Engine, nPageNo);
+        { return _DTWAIN_GetOCRTextInfoHandle(Engine, nPageNo); }
 
         public  int DTWAIN_GetOCRTextInfoLong(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo, int nCharPos, int nWhichItem, ref int pInfo)
-        => _DTWAIN_GetOCRTextInfoLong(OCRTextInfo, nCharPos, nWhichItem, ref pInfo);
+        { return _DTWAIN_GetOCRTextInfoLong(OCRTextInfo, nCharPos, nWhichItem, ref pInfo); }
 
         public  int DTWAIN_GetOCRTextInfoLongEx(DTWAIN_OCRTEXTINFOHANDLE OCRTextInfo, int nWhichItem, ref int pInfo, int bufSize)
-        => _DTWAIN_GetOCRTextInfoLongEx(OCRTextInfo, nWhichItem, ref pInfo, bufSize);
+        { return _DTWAIN_GetOCRTextInfoLongEx(OCRTextInfo, nWhichItem, ref pInfo, bufSize); }
 
         public  int DTWAIN_GetOCRVersionInfo(DTWAIN_OCRENGINE Engine, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder buffer, int maxBufSize)
-        => _DTWAIN_GetOCRVersionInfo(Engine, buffer, maxBufSize);
+        { return _DTWAIN_GetOCRVersionInfo(Engine, buffer, maxBufSize); }
 
         public  int DTWAIN_GetOCRVersionInfo (DTWAIN_OCRENGINE Engine, System.IntPtr buffer, int maxBufSize)
-        => _DTWAIN_GetOCRVersionInfo_overload(Engine, buffer, maxBufSize);
+        { return _DTWAIN_GetOCRVersionInfo_overload(Engine, buffer, maxBufSize); }
 
         public  int DTWAIN_GetOrientation(DTWAIN_SOURCE Source, ref int lpOrient, int bCurrent)
-        => _DTWAIN_GetOrientation(Source, ref lpOrient, bCurrent);
+        { return _DTWAIN_GetOrientation(Source, ref lpOrient, bCurrent); }
 
         public  int DTWAIN_GetOrientationEx(DTWAIN_SOURCE Source, int bCurrent)
-        => _DTWAIN_GetOrientationEx(Source, bCurrent);
+        { return _DTWAIN_GetOrientationEx(Source, bCurrent); }
 
         public  int DTWAIN_GetOverscan(DTWAIN_SOURCE Source, ref int lpOverscan, int bCurrent)
-        => _DTWAIN_GetOverscan(Source, ref lpOverscan, bCurrent);
+        { return _DTWAIN_GetOverscan(Source, ref lpOverscan, bCurrent); }
 
         public  int DTWAIN_GetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, ref DTWAIN_FLOAT val1, ref DTWAIN_FLOAT val2, int Flags)
-        => _DTWAIN_GetPDFTextElementFloat(TextElement, ref val1, ref val2, Flags);
+        { return _DTWAIN_GetPDFTextElementFloat(TextElement, ref val1, ref val2, Flags); }
 
         public  int DTWAIN_GetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, ref int val1, ref int val2, int Flags)
-        => _DTWAIN_GetPDFTextElementLong(TextElement, ref val1, ref val2, Flags);
+        { return _DTWAIN_GetPDFTextElementLong(TextElement, ref val1, ref val2, Flags); }
 
         public  int DTWAIN_GetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szData, int maxLen, int Flags)
-        => _DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags);
+        { return _DTWAIN_GetPDFTextElementString(TextElement, szData, maxLen, Flags); }
 
         public  int DTWAIN_GetPDFTextElementString (DTWAIN_PDFTEXTELEMENT TextElement, System.IntPtr szData, int maxLen, int Flags)
-        => _DTWAIN_GetPDFTextElementString_overload(TextElement, szData, maxLen, Flags);
+        { return _DTWAIN_GetPDFTextElementString_overload(TextElement, szData, maxLen, Flags); }
 
         public  int DTWAIN_GetPDFType1FontName(int FontVal, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFont, int nChars)
-        => _DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars);
+        { return _DTWAIN_GetPDFType1FontName(FontVal, szFont, nChars); }
 
         public  int DTWAIN_GetPDFType1FontName (int FontVal, System.IntPtr szFont, int nChars)
-        => _DTWAIN_GetPDFType1FontName_overload(FontVal, szFont, nChars);
+        { return _DTWAIN_GetPDFType1FontName_overload(FontVal, szFont, nChars); }
 
         public  int DTWAIN_GetPaperSize(DTWAIN_SOURCE Source, ref int lpPaperSize, int bCurrent)
-        => _DTWAIN_GetPaperSize(Source, ref lpPaperSize, bCurrent);
+        { return _DTWAIN_GetPaperSize(Source, ref lpPaperSize, bCurrent); }
 
         public  int DTWAIN_GetPaperSizeName(int paperNumber, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder outName, int nSize)
-        => _DTWAIN_GetPaperSizeName(paperNumber, outName, nSize);
+        { return _DTWAIN_GetPaperSizeName(paperNumber, outName, nSize); }
 
         public  int DTWAIN_GetPaperSizeName (int paperNumber, System.IntPtr outName, int nSize)
-        => _DTWAIN_GetPaperSizeName_overload(paperNumber, outName, nSize);
+        { return _DTWAIN_GetPaperSizeName_overload(paperNumber, outName, nSize); }
 
         public  int DTWAIN_GetPatchcodeMaxPriorities(DTWAIN_SOURCE Source, ref DWORD pMaxPriorities, int bCurrent)
-        => _DTWAIN_GetPatchcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent);
+        { return _DTWAIN_GetPatchcodeMaxPriorities(Source, ref pMaxPriorities, bCurrent); }
 
         public  int DTWAIN_GetPatchcodeMaxRetries(DTWAIN_SOURCE Source, ref DWORD pMaxRetries, int bCurrent)
-        => _DTWAIN_GetPatchcodeMaxRetries(Source, ref pMaxRetries, bCurrent);
+        { return _DTWAIN_GetPatchcodeMaxRetries(Source, ref pMaxRetries, bCurrent); }
 
         public  int DTWAIN_GetPatchcodePriorities(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_GetPatchcodePriorities(Source, ref SearchPriorities);
+        { return _DTWAIN_GetPatchcodePriorities(Source, ref SearchPriorities); }
 
         public  int DTWAIN_GetPatchcodeSearchMode(DTWAIN_SOURCE Source, ref int pSearchMode, int bCurrent)
-        => _DTWAIN_GetPatchcodeSearchMode(Source, ref pSearchMode, bCurrent);
+        { return _DTWAIN_GetPatchcodeSearchMode(Source, ref pSearchMode, bCurrent); }
 
         public  int DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, ref DWORD pTimeOut, int bCurrent)
-        => _DTWAIN_GetPatchcodeTimeOut(Source, ref pTimeOut, bCurrent);
+        { return _DTWAIN_GetPatchcodeTimeOut(Source, ref pTimeOut, bCurrent); }
 
         public  int DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetPendingXferCount(Source);
+        { return _DTWAIN_GetPendingXferCount(Source); }
 
         public  int DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, ref int lpPixelFlavor)
-        => _DTWAIN_GetPixelFlavor(Source, ref lpPixelFlavor);
+        { return _DTWAIN_GetPixelFlavor(Source, ref lpPixelFlavor); }
 
         public  int DTWAIN_GetPixelType(DTWAIN_SOURCE Source, ref int PixelType, ref int BitDepth, int bCurrent)
-        => _DTWAIN_GetPixelType(Source, ref PixelType, ref BitDepth, bCurrent);
+        { return _DTWAIN_GetPixelType(Source, ref PixelType, ref BitDepth, bCurrent); }
 
         public  int DTWAIN_GetPrinter(DTWAIN_SOURCE Source, ref int lpPrinter, int bCurrent)
-        => _DTWAIN_GetPrinter(Source, ref lpPrinter, bCurrent);
+        { return _DTWAIN_GetPrinter(Source, ref lpPrinter, bCurrent); }
 
         public  int DTWAIN_GetPrinterEx(DTWAIN_SOURCE Source, int bCurrent)
-        => _DTWAIN_GetPrinterEx(Source, bCurrent);
+        { return _DTWAIN_GetPrinterEx(Source, bCurrent); }
 
         public  int DTWAIN_GetPrinterStartNumber(DTWAIN_SOURCE Source, ref DWORD nStart)
-        => _DTWAIN_GetPrinterStartNumber(Source, ref nStart);
+        { return _DTWAIN_GetPrinterStartNumber(Source, ref nStart); }
 
         public  uint DTWAIN_GetPrinterStartNumberEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetPrinterStartNumberEx(Source);
+        { return _DTWAIN_GetPrinterStartNumberEx(Source); }
 
         public  int DTWAIN_GetPrinterStringMode(DTWAIN_SOURCE Source, ref int PrinterMode, int bCurrent)
-        => _DTWAIN_GetPrinterStringMode(Source, ref PrinterMode, bCurrent);
+        { return _DTWAIN_GetPrinterStringMode(Source, ref PrinterMode, bCurrent); }
 
         public  int DTWAIN_GetPrinterStringModeEx(DTWAIN_SOURCE Source, int bCurrent)
-        => _DTWAIN_GetPrinterStringModeEx(Source, bCurrent);
+        { return _DTWAIN_GetPrinterStringModeEx(Source, bCurrent); }
 
         public  int DTWAIN_GetPrinterStrings(DTWAIN_SOURCE Source, ref DTWAIN_ARRAY ArrayString)
-        => _DTWAIN_GetPrinterStrings(Source, ref ArrayString);
+        { return _DTWAIN_GetPrinterStrings(Source, ref ArrayString); }
 
         public  DTWAIN_ARRAY DTWAIN_GetPrinterStringsEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetPrinterStringsEx(Source);
+        { return _DTWAIN_GetPrinterStringsEx(Source); }
 
         public  int DTWAIN_GetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Suffix, int nMaxLen)
-        => _DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen);
+        { return _DTWAIN_GetPrinterSuffixString(Source, Suffix, nMaxLen); }
 
         public  int DTWAIN_GetPrinterSuffixString (DTWAIN_SOURCE Source, System.IntPtr Suffix, int nMaxLen)
-        => _DTWAIN_GetPrinterSuffixString_overload(Source, Suffix, nMaxLen);
+        { return _DTWAIN_GetPrinterSuffixString_overload(Source, Suffix, nMaxLen); }
 
         public  int DTWAIN_GetRegisteredMsg()
-        => _DTWAIN_GetRegisteredMsg();
+        { return _DTWAIN_GetRegisteredMsg(); }
 
         public  int DTWAIN_GetResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution)
-        => _DTWAIN_GetResolution(Source, ref Resolution);
+        { return _DTWAIN_GetResolution(Source, ref Resolution); }
 
         public  DTWAIN_FLOAT DTWAIN_GetResolutionEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetResolutionEx(Source);
+        { return _DTWAIN_GetResolutionEx(Source); }
 
         public  int DTWAIN_GetResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution)
-        => _DTWAIN_GetResolutionString(Source, Resolution);
+        { return _DTWAIN_GetResolutionString(Source, Resolution); }
 
         public  int DTWAIN_GetResolutionString (DTWAIN_SOURCE Source, System.IntPtr Resolution)
-        => _DTWAIN_GetResolutionString_overload(Source, Resolution);
+        { return _DTWAIN_GetResolutionString_overload(Source, Resolution); }
 
         public  int DTWAIN_GetResourceString(int ResourceID, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetResourceString(ResourceID, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetResourceString(ResourceID, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetResourceString (int ResourceID, System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetResourceString_overload(ResourceID, lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetResourceString_overload(ResourceID, lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetRotation(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Rotation)
-        => _DTWAIN_GetRotation(Source, ref Rotation);
+        { return _DTWAIN_GetRotation(Source, ref Rotation); }
 
         public  DTWAIN_FLOAT DTWAIN_GetRotationEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetRotationEx(Source);
+        { return _DTWAIN_GetRotationEx(Source); }
 
         public  int DTWAIN_GetRotationString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Rotation)
-        => _DTWAIN_GetRotationString(Source, Rotation);
+        { return _DTWAIN_GetRotationString(Source, Rotation); }
 
         public  int DTWAIN_GetRotationString (DTWAIN_SOURCE Source, System.IntPtr Rotation)
-        => _DTWAIN_GetRotationString_overload(Source, Rotation);
+        { return _DTWAIN_GetRotationString_overload(Source, Rotation); }
 
         public  int DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder fName, int nMaxLen)
-        => _DTWAIN_GetSaveFileName(Source, fName, nMaxLen);
+        { return _DTWAIN_GetSaveFileName(Source, fName, nMaxLen); }
 
         public  int DTWAIN_GetSaveFileName (DTWAIN_SOURCE Source, System.IntPtr fName, int nMaxLen)
-        => _DTWAIN_GetSaveFileName_overload(Source, fName, nMaxLen);
+        { return _DTWAIN_GetSaveFileName_overload(Source, fName, nMaxLen); }
 
         public  int DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetSaveFileType(Source);
+        { return _DTWAIN_GetSaveFileType(Source); }
 
         public  int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh)
-        => _DTWAIN_GetSessionDetails(szBuf, nSize, indentFactor, bRefresh);
+        { return _DTWAIN_GetSessionDetails(szBuf, nSize, indentFactor, bRefresh); }
 
         public  int DTWAIN_GetSessionDetails (System.IntPtr szBuf, int nSize, int indentFactor, int bRefresh)
-        => _DTWAIN_GetSessionDetails_overload(szBuf, nSize, indentFactor, bRefresh);
+        { return _DTWAIN_GetSessionDetails_overload(szBuf, nSize, indentFactor, bRefresh); }
 
         public  int DTWAIN_GetShadow(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Shadow)
-        => _DTWAIN_GetShadow(Source, ref Shadow);
+        { return _DTWAIN_GetShadow(Source, ref Shadow); }
 
         public  int DTWAIN_GetShadowString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Shadow)
-        => _DTWAIN_GetShadowString(Source, Shadow);
+        { return _DTWAIN_GetShadowString(Source, Shadow); }
 
         public  int DTWAIN_GetShadowString (DTWAIN_SOURCE Source, System.IntPtr Shadow)
-        => _DTWAIN_GetShadowString_overload(Source, Shadow);
+        { return _DTWAIN_GetShadowString_overload(Source, Shadow); }
 
         public  int DTWAIN_GetShortVersionString([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength)
-        => _DTWAIN_GetShortVersionString(lpszVer, nLength);
+        { return _DTWAIN_GetShortVersionString(lpszVer, nLength); }
 
         public  int DTWAIN_GetShortVersionString (System.IntPtr lpszVer, int nLength)
-        => _DTWAIN_GetShortVersionString_overload(lpszVer, nLength);
+        { return _DTWAIN_GetShortVersionString_overload(lpszVer, nLength); }
 
         public  DTWAIN_ARRAY DTWAIN_GetSourceAcquisitions(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetSourceAcquisitions(Source);
+        { return _DTWAIN_GetSourceAcquisitions(Source); }
 
         public  int DTWAIN_GetSourceDetails([MarshalAs(UnmanagedType.LPTStr)] string szSources, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh)
-        => _DTWAIN_GetSourceDetails(szSources, szBuf, nSize, indentFactor, bRefresh);
+        { return _DTWAIN_GetSourceDetails(szSources, szBuf, nSize, indentFactor, bRefresh); }
 
         public  int DTWAIN_GetSourceDetails ([MarshalAs(UnmanagedType.LPTStr)] string szSources, System.IntPtr szBuf, int nSize, int indentFactor, int bRefresh)
-        => _DTWAIN_GetSourceDetails_overload(szSources, szBuf, nSize, indentFactor, bRefresh);
+        { return _DTWAIN_GetSourceDetails_overload(szSources, szBuf, nSize, indentFactor, bRefresh); }
 
         public  DTWAIN_IDENTITY DTWAIN_GetSourceID(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetSourceID(Source);
+        { return _DTWAIN_GetSourceID(Source); }
 
         public  TW_IDENTITY DTWAIN_GetSourceIDEx(DTWAIN_SOURCE Source, [In, Out] TW_IDENTITY pIdentity)
-        => _DTWAIN_GetSourceIDEx(Source, pIdentity);
+        { return _DTWAIN_GetSourceIDEx(Source, pIdentity); }
 
         public  int DTWAIN_GetSourceManufacturer(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceManufacturer(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceManufacturer(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceManufacturer (DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceManufacturer_overload(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceManufacturer_overload(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceProductFamily(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceProductFamily(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceProductFamily(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceProductFamily (DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceProductFamily_overload(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceProductFamily_overload(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceProductName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceProductName(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceProductName(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceProductName (DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceProductName_overload(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceProductName_overload(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceUnit(DTWAIN_SOURCE Source, ref int lpUnit)
-        => _DTWAIN_GetSourceUnit(Source, ref lpUnit);
+        { return _DTWAIN_GetSourceUnit(Source, ref lpUnit); }
 
         public  int DTWAIN_GetSourceUnitEx(DTWAIN_SOURCE Source)
-        => _DTWAIN_GetSourceUnitEx(Source);
+        { return _DTWAIN_GetSourceUnitEx(Source); }
 
         public  int DTWAIN_GetSourceVersionInfo(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceVersionInfo(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceVersionInfo (DTWAIN_SOURCE Source, System.IntPtr szProduct, int nMaxLen)
-        => _DTWAIN_GetSourceVersionInfo_overload(Source, szProduct, nMaxLen);
+        { return _DTWAIN_GetSourceVersionInfo_overload(Source, szProduct, nMaxLen); }
 
         public  int DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor)
-        => _DTWAIN_GetSourceVersionNumber(Source, ref pMajor, ref pMinor);
+        { return _DTWAIN_GetSourceVersionNumber(Source, ref pMajor, ref pMinor); }
 
         public  int DTWAIN_GetTempFileDirectory([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szFilePath, int nMaxLen)
-        => _DTWAIN_GetTempFileDirectory(szFilePath, nMaxLen);
+        { return _DTWAIN_GetTempFileDirectory(szFilePath, nMaxLen); }
 
         public  int DTWAIN_GetTempFileDirectory (System.IntPtr szFilePath, int nMaxLen)
-        => _DTWAIN_GetTempFileDirectory_overload(szFilePath, nMaxLen);
+        { return _DTWAIN_GetTempFileDirectory_overload(szFilePath, nMaxLen); }
 
         public  int DTWAIN_GetThreshold(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Threshold)
-        => _DTWAIN_GetThreshold(Source, ref Threshold);
+        { return _DTWAIN_GetThreshold(Source, ref Threshold); }
 
         public  int DTWAIN_GetThresholdString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Threshold)
-        => _DTWAIN_GetThresholdString(Source, Threshold);
+        { return _DTWAIN_GetThresholdString(Source, Threshold); }
 
         public  int DTWAIN_GetThresholdString (DTWAIN_SOURCE Source, System.IntPtr Threshold)
-        => _DTWAIN_GetThresholdString_overload(Source, Threshold);
+        { return _DTWAIN_GetThresholdString_overload(Source, Threshold); }
 
         public  int DTWAIN_GetTimeDate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szTimeDate)
-        => _DTWAIN_GetTimeDate(Source, szTimeDate);
+        { return _DTWAIN_GetTimeDate(Source, szTimeDate); }
 
         public  int DTWAIN_GetTimeDate (DTWAIN_SOURCE Source, System.IntPtr szTimeDate)
-        => _DTWAIN_GetTimeDate_overload(Source, szTimeDate);
+        { return _DTWAIN_GetTimeDate_overload(Source, szTimeDate); }
 
         public  DTWAIN_IDENTITY DTWAIN_GetTwainAppID()
-        => _DTWAIN_GetTwainAppID();
+        { return _DTWAIN_GetTwainAppID(); }
 
         public  TW_IDENTITY DTWAIN_GetTwainAppIDEx([In, Out] TW_IDENTITY pIdentity)
-        => _DTWAIN_GetTwainAppIDEx(pIdentity);
+        { return _DTWAIN_GetTwainAppIDEx(pIdentity); }
 
         public  int DTWAIN_GetTwainAvailability()
-        => _DTWAIN_GetTwainAvailability();
+        { return _DTWAIN_GetTwainAvailability(); }
 
         public  int DTWAIN_GetTwainAvailabilityEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder directories, int nMaxLen)
-        => _DTWAIN_GetTwainAvailabilityEx(directories, nMaxLen);
+        { return _DTWAIN_GetTwainAvailabilityEx(directories, nMaxLen); }
 
         public  int DTWAIN_GetTwainAvailabilityEx (System.IntPtr directories, int nMaxLen)
-        => _DTWAIN_GetTwainAvailabilityEx_overload(directories, nMaxLen);
+        { return _DTWAIN_GetTwainAvailabilityEx_overload(directories, nMaxLen); }
 
         public  HWND DTWAIN_GetTwainHwnd()
-        => _DTWAIN_GetTwainHwnd();
+        { return _DTWAIN_GetTwainHwnd(); }
 
         public  int DTWAIN_GetTwainMode()
-        => _DTWAIN_GetTwainMode();
+        { return _DTWAIN_GetTwainMode(); }
 
         public  int DTWAIN_GetTwainNameFromConstant(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
-        => _DTWAIN_GetTwainNameFromConstant(lConstantType, lTwainConstant, lpszOut, nSize);
+        { return _DTWAIN_GetTwainNameFromConstant(lConstantType, lTwainConstant, lpszOut, nSize); }
 
         public  int DTWAIN_GetTwainNameFromConstant (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
-        => _DTWAIN_GetTwainNameFromConstant_overload(lConstantType, lTwainConstant, lpszOut, nSize);
+        { return _DTWAIN_GetTwainNameFromConstant_overload(lConstantType, lTwainConstant, lpszOut, nSize); }
 
         public  int DTWAIN_GetTwainNameFromConstantEx(int lConstantType, int lTwainConstant, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
-        => _DTWAIN_GetTwainNameFromConstantEx(lConstantType, lTwainConstant, lpszOut, nSize);
+        { return _DTWAIN_GetTwainNameFromConstantEx(lConstantType, lTwainConstant, lpszOut, nSize); }
 
         public  int DTWAIN_GetTwainNameFromConstantEx (int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize)
-        => _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize);
+        { return _DTWAIN_GetTwainNameFromConstantEx_overload(lConstantType, lTwainConstant, lpszOut, nSize); }
 
         public  int DTWAIN_GetVersion(ref int lpMajor, ref int lpMinor, ref int lpVersionType)
-        => _DTWAIN_GetVersion(ref lpMajor, ref lpMinor, ref lpVersionType);
+        { return _DTWAIN_GetVersion(ref lpMajor, ref lpMinor, ref lpVersionType); }
 
         public  int DTWAIN_GetVersionCopyright([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszApp, int nLength)
-        => _DTWAIN_GetVersionCopyright(lpszApp, nLength);
+        { return _DTWAIN_GetVersionCopyright(lpszApp, nLength); }
 
         public  int DTWAIN_GetVersionCopyright (System.IntPtr lpszApp, int nLength)
-        => _DTWAIN_GetVersionCopyright_overload(lpszApp, nLength);
+        { return _DTWAIN_GetVersionCopyright_overload(lpszApp, nLength); }
 
         public  int DTWAIN_GetVersionEx(ref int lMajor, ref int lMinor, ref int lVersionType, ref int lPatchLevel)
-        => _DTWAIN_GetVersionEx(ref lMajor, ref lMinor, ref lVersionType, ref lPatchLevel);
+        { return _DTWAIN_GetVersionEx(ref lMajor, ref lMinor, ref lVersionType, ref lPatchLevel); }
 
         public  int DTWAIN_GetVersionEx2(ref int lMajor, ref int lMinor, ref int lVersionType, ref int lPatchLevel, ref int lBuildNumber)
-        => _DTWAIN_GetVersionEx2(ref lMajor, ref lMinor, ref lVersionType, ref lPatchLevel, ref lBuildNumber);
+        { return _DTWAIN_GetVersionEx2(ref lMajor, ref lMinor, ref lVersionType, ref lPatchLevel, ref lBuildNumber); }
 
         public  int DTWAIN_GetVersionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength)
-        => _DTWAIN_GetVersionInfo(lpszVer, nLength);
+        { return _DTWAIN_GetVersionInfo(lpszVer, nLength); }
 
         public  int DTWAIN_GetVersionInfo (System.IntPtr lpszVer, int nLength)
-        => _DTWAIN_GetVersionInfo_overload(lpszVer, nLength);
+        { return _DTWAIN_GetVersionInfo_overload(lpszVer, nLength); }
 
         public  int DTWAIN_GetVersionString([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszVer, int nLength)
-        => _DTWAIN_GetVersionString(lpszVer, nLength);
+        { return _DTWAIN_GetVersionString(lpszVer, nLength); }
 
         public  int DTWAIN_GetVersionString (System.IntPtr lpszVer, int nLength)
-        => _DTWAIN_GetVersionString_overload(lpszVer, nLength);
+        { return _DTWAIN_GetVersionString_overload(lpszVer, nLength); }
 
         public  int DTWAIN_GetWindowsVersionInfo([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetWindowsVersionInfo(lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetWindowsVersionInfo(lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetWindowsVersionInfo (System.IntPtr lpszBuffer, int nMaxLen)
-        => _DTWAIN_GetWindowsVersionInfo_overload(lpszBuffer, nMaxLen);
+        { return _DTWAIN_GetWindowsVersionInfo_overload(lpszBuffer, nMaxLen); }
 
         public  int DTWAIN_GetXResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution)
-        => _DTWAIN_GetXResolution(Source, ref Resolution);
+        { return _DTWAIN_GetXResolution(Source, ref Resolution); }
 
         public  int DTWAIN_GetXResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution)
-        => _DTWAIN_GetXResolutionString(Source, Resolution);
+        { return _DTWAIN_GetXResolutionString(Source, Resolution); }
 
         public  int DTWAIN_GetXResolutionString (DTWAIN_SOURCE Source, System.IntPtr Resolution)
-        => _DTWAIN_GetXResolutionString_overload(Source, Resolution);
+        { return _DTWAIN_GetXResolutionString_overload(Source, Resolution); }
 
         public  int DTWAIN_GetYResolution(DTWAIN_SOURCE Source, ref DTWAIN_FLOAT Resolution)
-        => _DTWAIN_GetYResolution(Source, ref Resolution);
+        { return _DTWAIN_GetYResolution(Source, ref Resolution); }
 
         public  int DTWAIN_GetYResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Resolution)
-        => _DTWAIN_GetYResolutionString(Source, Resolution);
+        { return _DTWAIN_GetYResolutionString(Source, Resolution); }
 
         public  int DTWAIN_GetYResolutionString (DTWAIN_SOURCE Source, System.IntPtr Resolution)
-        => _DTWAIN_GetYResolutionString_overload(Source, Resolution);
+        { return _DTWAIN_GetYResolutionString_overload(Source, Resolution); }
 
         public  int DTWAIN_InitExtImageInfo(DTWAIN_SOURCE Source)
-        => _DTWAIN_InitExtImageInfo(Source);
+        { return _DTWAIN_InitExtImageInfo(Source); }
 
         public  int DTWAIN_InitOCRInterface()
-        => _DTWAIN_InitOCRInterface();
+        { return _DTWAIN_InitOCRInterface(); }
 
         public  int DTWAIN_IsAcquiring()
-        => _DTWAIN_IsAcquiring();
+        { return _DTWAIN_IsAcquiring(); }
 
         public  int DTWAIN_IsAudioXferSupported(DTWAIN_SOURCE Source, int supportVal)
-        => _DTWAIN_IsAudioXferSupported(Source, supportVal);
+        { return _DTWAIN_IsAudioXferSupported(Source, supportVal); }
 
         public  int DTWAIN_IsAutoBorderDetectEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoBorderDetectEnabled(Source);
+        { return _DTWAIN_IsAutoBorderDetectEnabled(Source); }
 
         public  int DTWAIN_IsAutoBorderDetectSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoBorderDetectSupported(Source);
+        { return _DTWAIN_IsAutoBorderDetectSupported(Source); }
 
         public  int DTWAIN_IsAutoBrightEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoBrightEnabled(Source);
+        { return _DTWAIN_IsAutoBrightEnabled(Source); }
 
         public  int DTWAIN_IsAutoBrightSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoBrightSupported(Source);
+        { return _DTWAIN_IsAutoBrightSupported(Source); }
 
         public  int DTWAIN_IsAutoDeskewEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoDeskewEnabled(Source);
+        { return _DTWAIN_IsAutoDeskewEnabled(Source); }
 
         public  int DTWAIN_IsAutoDeskewSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoDeskewSupported(Source);
+        { return _DTWAIN_IsAutoDeskewSupported(Source); }
 
         public  int DTWAIN_IsAutoFeedEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoFeedEnabled(Source);
+        { return _DTWAIN_IsAutoFeedEnabled(Source); }
 
         public  int DTWAIN_IsAutoFeedSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoFeedSupported(Source);
+        { return _DTWAIN_IsAutoFeedSupported(Source); }
 
         public  int DTWAIN_IsAutoRotateEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoRotateEnabled(Source);
+        { return _DTWAIN_IsAutoRotateEnabled(Source); }
 
         public  int DTWAIN_IsAutoRotateSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoRotateSupported(Source);
+        { return _DTWAIN_IsAutoRotateSupported(Source); }
 
         public  int DTWAIN_IsAutoScanEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutoScanEnabled(Source);
+        { return _DTWAIN_IsAutoScanEnabled(Source); }
 
         public  int DTWAIN_IsAutomaticSenseMediumEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutomaticSenseMediumEnabled(Source);
+        { return _DTWAIN_IsAutomaticSenseMediumEnabled(Source); }
 
         public  int DTWAIN_IsAutomaticSenseMediumSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsAutomaticSenseMediumSupported(Source);
+        { return _DTWAIN_IsAutomaticSenseMediumSupported(Source); }
 
         public  int DTWAIN_IsBarcodeCapsSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsBarcodeCapsSupported(Source);
+        { return _DTWAIN_IsBarcodeCapsSupported(Source); }
 
         public  int DTWAIN_IsBarcodeDetectionEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsBarcodeDetectionEnabled(Source);
+        { return _DTWAIN_IsBarcodeDetectionEnabled(Source); }
 
         public  int DTWAIN_IsBarcodeSupported(DTWAIN_SOURCE Source, int BarCode)
-        => _DTWAIN_IsBarcodeSupported(Source, BarCode);
+        { return _DTWAIN_IsBarcodeSupported(Source, BarCode); }
 
         public  int DTWAIN_IsBlankPageDetectionOn(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsBlankPageDetectionOn(Source);
+        { return _DTWAIN_IsBlankPageDetectionOn(Source); }
 
         public  int DTWAIN_IsBufferedTileModeOn(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsBufferedTileModeOn(Source);
+        { return _DTWAIN_IsBufferedTileModeOn(Source); }
 
         public  int DTWAIN_IsBufferedTileModeSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsBufferedTileModeSupported(Source);
+        { return _DTWAIN_IsBufferedTileModeSupported(Source); }
 
         public  int DTWAIN_IsCapSupported(DTWAIN_SOURCE Source, int lCapability)
-        => _DTWAIN_IsCapSupported(Source, lCapability);
+        { return _DTWAIN_IsCapSupported(Source, lCapability); }
 
         public  int DTWAIN_IsCompressionSupported(DTWAIN_SOURCE Source, int Compression)
-        => _DTWAIN_IsCompressionSupported(Source, Compression);
+        { return _DTWAIN_IsCompressionSupported(Source, Compression); }
 
         public  int DTWAIN_IsCustomDSDataSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsCustomDSDataSupported(Source);
+        { return _DTWAIN_IsCustomDSDataSupported(Source); }
 
         public  int DTWAIN_IsDIBBlank(HANDLE hDib, DTWAIN_FLOAT threshold)
-        => _DTWAIN_IsDIBBlank(hDib, threshold);
+        { return _DTWAIN_IsDIBBlank(hDib, threshold); }
 
         public  int DTWAIN_IsDIBBlankString(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string threshold)
-        => _DTWAIN_IsDIBBlankString(hDib, threshold);
+        { return _DTWAIN_IsDIBBlankString(hDib, threshold); }
 
         public  int DTWAIN_IsDeviceEventSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsDeviceEventSupported(Source);
+        { return _DTWAIN_IsDeviceEventSupported(Source); }
 
         public  int DTWAIN_IsDeviceOnLine(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsDeviceOnLine(Source);
+        { return _DTWAIN_IsDeviceOnLine(Source); }
 
         public  int DTWAIN_IsDoubleFeedDetectLengthSupported(DTWAIN_SOURCE Source, DTWAIN_FLOAT value)
-        => _DTWAIN_IsDoubleFeedDetectLengthSupported(Source, value);
+        { return _DTWAIN_IsDoubleFeedDetectLengthSupported(Source, value); }
 
         public  int DTWAIN_IsDoubleFeedDetectSupported(DTWAIN_SOURCE Source, int SupportVal)
-        => _DTWAIN_IsDoubleFeedDetectSupported(Source, SupportVal);
+        { return _DTWAIN_IsDoubleFeedDetectSupported(Source, SupportVal); }
 
         public  int DTWAIN_IsDoublePageCountOnDuplex(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsDoublePageCountOnDuplex(Source);
+        { return _DTWAIN_IsDoublePageCountOnDuplex(Source); }
 
         public  int DTWAIN_IsDuplexEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsDuplexEnabled(Source);
+        { return _DTWAIN_IsDuplexEnabled(Source); }
 
         public  int DTWAIN_IsDuplexSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsDuplexSupported(Source);
+        { return _DTWAIN_IsDuplexSupported(Source); }
 
         public  int DTWAIN_IsExtImageInfoSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsExtImageInfoSupported(Source);
+        { return _DTWAIN_IsExtImageInfoSupported(Source); }
 
         public  int DTWAIN_IsFeederEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsFeederEnabled(Source);
+        { return _DTWAIN_IsFeederEnabled(Source); }
 
         public  int DTWAIN_IsFeederLoaded(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsFeederLoaded(Source);
+        { return _DTWAIN_IsFeederLoaded(Source); }
 
         public  int DTWAIN_IsFeederSensitive(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsFeederSensitive(Source);
+        { return _DTWAIN_IsFeederSensitive(Source); }
 
         public  int DTWAIN_IsFeederSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsFeederSupported(Source);
+        { return _DTWAIN_IsFeederSupported(Source); }
 
         public  int DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsFileSystemSupported(Source);
+        { return _DTWAIN_IsFileSystemSupported(Source); }
 
         public  int DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, int lFileType)
-        => _DTWAIN_IsFileXferSupported(Source, lFileType);
+        { return _DTWAIN_IsFileXferSupported(Source, lFileType); }
 
         public  int DTWAIN_IsGetMessageLoopDetectionOn()
-        => _DTWAIN_IsGetMessageLoopDetectionOn();
+        { return _DTWAIN_IsGetMessageLoopDetectionOn(); }
 
         public  int DTWAIN_IsGetMessageLoopEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsGetMessageLoopEnabled(Source);
+        { return _DTWAIN_IsGetMessageLoopEnabled(Source); }
 
         public  int DTWAIN_IsIAFieldALastPageSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldALastPageSupported(Source);
+        { return _DTWAIN_IsIAFieldALastPageSupported(Source); }
 
         public  int DTWAIN_IsIAFieldALevelSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldALevelSupported(Source);
+        { return _DTWAIN_IsIAFieldALevelSupported(Source); }
 
         public  int DTWAIN_IsIAFieldAPrintFormatSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldAPrintFormatSupported(Source);
+        { return _DTWAIN_IsIAFieldAPrintFormatSupported(Source); }
 
         public  int DTWAIN_IsIAFieldAValueSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldAValueSupported(Source);
+        { return _DTWAIN_IsIAFieldAValueSupported(Source); }
 
         public  int DTWAIN_IsIAFieldBLastPageSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldBLastPageSupported(Source);
+        { return _DTWAIN_IsIAFieldBLastPageSupported(Source); }
 
         public  int DTWAIN_IsIAFieldBLevelSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldBLevelSupported(Source);
+        { return _DTWAIN_IsIAFieldBLevelSupported(Source); }
 
         public  int DTWAIN_IsIAFieldBPrintFormatSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldBPrintFormatSupported(Source);
+        { return _DTWAIN_IsIAFieldBPrintFormatSupported(Source); }
 
         public  int DTWAIN_IsIAFieldBValueSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldBValueSupported(Source);
+        { return _DTWAIN_IsIAFieldBValueSupported(Source); }
 
         public  int DTWAIN_IsIAFieldCLastPageSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldCLastPageSupported(Source);
+        { return _DTWAIN_IsIAFieldCLastPageSupported(Source); }
 
         public  int DTWAIN_IsIAFieldCLevelSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldCLevelSupported(Source);
+        { return _DTWAIN_IsIAFieldCLevelSupported(Source); }
 
         public  int DTWAIN_IsIAFieldCPrintFormatSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldCPrintFormatSupported(Source);
+        { return _DTWAIN_IsIAFieldCPrintFormatSupported(Source); }
 
         public  int DTWAIN_IsIAFieldCValueSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldCValueSupported(Source);
+        { return _DTWAIN_IsIAFieldCValueSupported(Source); }
 
         public  int DTWAIN_IsIAFieldDLastPageSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldDLastPageSupported(Source);
+        { return _DTWAIN_IsIAFieldDLastPageSupported(Source); }
 
         public  int DTWAIN_IsIAFieldDLevelSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldDLevelSupported(Source);
+        { return _DTWAIN_IsIAFieldDLevelSupported(Source); }
 
         public  int DTWAIN_IsIAFieldDPrintFormatSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldDPrintFormatSupported(Source);
+        { return _DTWAIN_IsIAFieldDPrintFormatSupported(Source); }
 
         public  int DTWAIN_IsIAFieldDValueSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldDValueSupported(Source);
+        { return _DTWAIN_IsIAFieldDValueSupported(Source); }
 
         public  int DTWAIN_IsIAFieldELastPageSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldELastPageSupported(Source);
+        { return _DTWAIN_IsIAFieldELastPageSupported(Source); }
 
         public  int DTWAIN_IsIAFieldELevelSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldELevelSupported(Source);
+        { return _DTWAIN_IsIAFieldELevelSupported(Source); }
 
         public  int DTWAIN_IsIAFieldEPrintFormatSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldEPrintFormatSupported(Source);
+        { return _DTWAIN_IsIAFieldEPrintFormatSupported(Source); }
 
         public  int DTWAIN_IsIAFieldEValueSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIAFieldEValueSupported(Source);
+        { return _DTWAIN_IsIAFieldEValueSupported(Source); }
 
         public  int DTWAIN_IsImageAddressingSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsImageAddressingSupported(Source);
+        { return _DTWAIN_IsImageAddressingSupported(Source); }
 
         public  int DTWAIN_IsIndicatorEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIndicatorEnabled(Source);
+        { return _DTWAIN_IsIndicatorEnabled(Source); }
 
         public  int DTWAIN_IsIndicatorSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsIndicatorSupported(Source);
+        { return _DTWAIN_IsIndicatorSupported(Source); }
 
         public  int DTWAIN_IsInitialized()
-        => _DTWAIN_IsInitialized();
+        { return _DTWAIN_IsInitialized(); }
 
         public  int DTWAIN_IsJobControlSupported(DTWAIN_SOURCE Source, int JobControl)
-        => _DTWAIN_IsJobControlSupported(Source, JobControl);
+        { return _DTWAIN_IsJobControlSupported(Source, JobControl); }
 
         public  int DTWAIN_IsLampEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsLampEnabled(Source);
+        { return _DTWAIN_IsLampEnabled(Source); }
 
         public  int DTWAIN_IsLampSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsLampSupported(Source);
+        { return _DTWAIN_IsLampSupported(Source); }
 
         public  int DTWAIN_IsLightPathSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsLightPathSupported(Source);
+        { return _DTWAIN_IsLightPathSupported(Source); }
 
         public  int DTWAIN_IsLightSourceSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsLightSourceSupported(Source);
+        { return _DTWAIN_IsLightSourceSupported(Source); }
 
         public  int DTWAIN_IsMaxBuffersSupported(DTWAIN_SOURCE Source, int MaxBuf)
-        => _DTWAIN_IsMaxBuffersSupported(Source, MaxBuf);
+        { return _DTWAIN_IsMaxBuffersSupported(Source, MaxBuf); }
 
         public  int DTWAIN_IsMemFileXferSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsMemFileXferSupported(Source);
+        { return _DTWAIN_IsMemFileXferSupported(Source); }
 
         public  int DTWAIN_IsMsgNotifyEnabled()
-        => _DTWAIN_IsMsgNotifyEnabled();
+        { return _DTWAIN_IsMsgNotifyEnabled(); }
 
         public  int DTWAIN_IsNotifyTripletsEnabled()
-        => _DTWAIN_IsNotifyTripletsEnabled();
+        { return _DTWAIN_IsNotifyTripletsEnabled(); }
 
         public  int DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine)
-        => _DTWAIN_IsOCREngineActivated(OCREngine);
+        { return _DTWAIN_IsOCREngineActivated(OCREngine); }
 
         public  int DTWAIN_IsOpenSourcesOnSelect()
-        => _DTWAIN_IsOpenSourcesOnSelect();
+        { return _DTWAIN_IsOpenSourcesOnSelect(); }
 
         public  int DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source, int Orientation)
-        => _DTWAIN_IsOrientationSupported(Source, Orientation);
+        { return _DTWAIN_IsOrientationSupported(Source, Orientation); }
 
         public  int DTWAIN_IsOverscanSupported(DTWAIN_SOURCE Source, int SupportValue)
-        => _DTWAIN_IsOverscanSupported(Source, SupportValue);
+        { return _DTWAIN_IsOverscanSupported(Source, SupportValue); }
 
         public  int DTWAIN_IsPaperDetectable(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPaperDetectable(Source);
+        { return _DTWAIN_IsPaperDetectable(Source); }
 
         public  int DTWAIN_IsPaperSizeSupported(DTWAIN_SOURCE Source, int PaperSize)
-        => _DTWAIN_IsPaperSizeSupported(Source, PaperSize);
+        { return _DTWAIN_IsPaperSizeSupported(Source, PaperSize); }
 
         public  int DTWAIN_IsPatchcodeCapsSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPatchcodeCapsSupported(Source);
+        { return _DTWAIN_IsPatchcodeCapsSupported(Source); }
 
         public  int DTWAIN_IsPatchcodeDetectionEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPatchcodeDetectionEnabled(Source);
+        { return _DTWAIN_IsPatchcodeDetectionEnabled(Source); }
 
         public  int DTWAIN_IsPatchcodeSupported(DTWAIN_SOURCE Source, int PatchCode)
-        => _DTWAIN_IsPatchcodeSupported(Source, PatchCode);
+        { return _DTWAIN_IsPatchcodeSupported(Source, PatchCode); }
 
         public  int DTWAIN_IsPeekMessageLoopEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPeekMessageLoopEnabled(Source);
+        { return _DTWAIN_IsPeekMessageLoopEnabled(Source); }
 
         public  int DTWAIN_IsPixelTypeSupported(DTWAIN_SOURCE Source, int PixelType)
-        => _DTWAIN_IsPixelTypeSupported(Source, PixelType);
+        { return _DTWAIN_IsPixelTypeSupported(Source, PixelType); }
 
         public  int DTWAIN_IsPrinterEnabled(DTWAIN_SOURCE Source, int Printer)
-        => _DTWAIN_IsPrinterEnabled(Source, Printer);
+        { return _DTWAIN_IsPrinterEnabled(Source, Printer); }
 
         public  int DTWAIN_IsPrinterSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsPrinterSupported(Source);
+        { return _DTWAIN_IsPrinterSupported(Source); }
 
         public  int DTWAIN_IsRotationSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsRotationSupported(Source);
+        { return _DTWAIN_IsRotationSupported(Source); }
 
         public  int DTWAIN_IsSessionEnabled()
-        => _DTWAIN_IsSessionEnabled();
+        { return _DTWAIN_IsSessionEnabled(); }
 
         public  int DTWAIN_IsSkipImageInfoError(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSkipImageInfoError(Source);
+        { return _DTWAIN_IsSkipImageInfoError(Source); }
 
         public  int DTWAIN_IsSourceAcquiring(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSourceAcquiring(Source);
+        { return _DTWAIN_IsSourceAcquiring(Source); }
 
         public  int DTWAIN_IsSourceAcquiringEx(DTWAIN_SOURCE Source, int bUIOnly)
-        => _DTWAIN_IsSourceAcquiringEx(Source, bUIOnly);
+        { return _DTWAIN_IsSourceAcquiringEx(Source, bUIOnly); }
 
         public  int DTWAIN_IsSourceInUIOnlyMode(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSourceInUIOnlyMode(Source);
+        { return _DTWAIN_IsSourceInUIOnlyMode(Source); }
 
         public  int DTWAIN_IsSourceOpen(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSourceOpen(Source);
+        { return _DTWAIN_IsSourceOpen(Source); }
 
         public  int DTWAIN_IsSourceSelected(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSourceSelected(Source);
+        { return _DTWAIN_IsSourceSelected(Source); }
 
         public  int DTWAIN_IsSourceValid(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsSourceValid(Source);
+        { return _DTWAIN_IsSourceValid(Source); }
 
         public  int DTWAIN_IsThumbnailEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsThumbnailEnabled(Source);
+        { return _DTWAIN_IsThumbnailEnabled(Source); }
 
         public  int DTWAIN_IsThumbnailSupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsThumbnailSupported(Source);
+        { return _DTWAIN_IsThumbnailSupported(Source); }
 
         public  int DTWAIN_IsTwainAvailable()
-        => _DTWAIN_IsTwainAvailable();
+        { return _DTWAIN_IsTwainAvailable(); }
 
         public  int DTWAIN_IsTwainAvailableEx([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder directories, int nMaxLen)
-        => _DTWAIN_IsTwainAvailableEx(directories, nMaxLen);
+        { return _DTWAIN_IsTwainAvailableEx(directories, nMaxLen); }
 
         public  int DTWAIN_IsTwainAvailableEx (System.IntPtr directories, int nMaxLen)
-        => _DTWAIN_IsTwainAvailableEx_overload(directories, nMaxLen);
+        { return _DTWAIN_IsTwainAvailableEx_overload(directories, nMaxLen); }
 
         public  int DTWAIN_IsTwainMsg(ref POINT pMsg)
-        => _DTWAIN_IsTwainMsg(ref pMsg);
+        { return _DTWAIN_IsTwainMsg(ref pMsg); }
 
         public  int DTWAIN_IsUIControllable(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsUIControllable(Source);
+        { return _DTWAIN_IsUIControllable(Source); }
 
         public  int DTWAIN_IsUIEnabled(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsUIEnabled(Source);
+        { return _DTWAIN_IsUIEnabled(Source); }
 
         public  int DTWAIN_IsUIOnlySupported(DTWAIN_SOURCE Source)
-        => _DTWAIN_IsUIOnlySupported(Source);
+        { return _DTWAIN_IsUIOnlySupported(Source); }
 
         public  int DTWAIN_LoadCustomStringResources([MarshalAs(UnmanagedType.LPTStr)] string sLangDLL)
-        => _DTWAIN_LoadCustomStringResources(sLangDLL);
+        { return _DTWAIN_LoadCustomStringResources(sLangDLL); }
 
         public  int DTWAIN_LoadCustomStringResourcesEx([MarshalAs(UnmanagedType.LPTStr)] string sLangDLL, int bClear)
-        => _DTWAIN_LoadCustomStringResourcesEx(sLangDLL, bClear);
+        { return _DTWAIN_LoadCustomStringResourcesEx(sLangDLL, bClear); }
 
         public  int DTWAIN_LoadLanguageResource(int nLanguage)
-        => _DTWAIN_LoadLanguageResource(nLanguage);
+        { return _DTWAIN_LoadLanguageResource(nLanguage); }
 
         public  DTWAIN_MEMORY_PTR DTWAIN_LockMemory(HANDLE h)
-        => _DTWAIN_LockMemory(h);
+        { return _DTWAIN_LockMemory(h); }
 
         public  DTWAIN_MEMORY_PTR DTWAIN_LockMemoryEx(HANDLE h)
-        => _DTWAIN_LockMemoryEx(h);
+        { return _DTWAIN_LockMemoryEx(h); }
 
         public  int DTWAIN_LogMessage([MarshalAs(UnmanagedType.LPTStr)] string message)
-        => _DTWAIN_LogMessage(message);
+        { return _DTWAIN_LogMessage(message); }
 
         public  int DTWAIN_MakeRGB(int red, int green, int blue)
-        => _DTWAIN_MakeRGB(red, green, blue);
+        { return _DTWAIN_MakeRGB(red, green, blue); }
 
         public  int DTWAIN_OpenSource(DTWAIN_SOURCE Source)
-        => _DTWAIN_OpenSource(Source);
+        { return _DTWAIN_OpenSource(Source); }
 
         public  int DTWAIN_OpenSourcesOnSelect(int bSet)
-        => _DTWAIN_OpenSourcesOnSelect(bSet);
+        { return _DTWAIN_OpenSourcesOnSelect(bSet); }
 
         public  DTWAIN_RANGE DTWAIN_RangeCreate(int nEnumType)
-        => _DTWAIN_RangeCreate(nEnumType);
+        { return _DTWAIN_RangeCreate(nEnumType); }
 
         public  DTWAIN_RANGE DTWAIN_RangeCreateFromCap(DTWAIN_SOURCE Source, int lCapType)
-        => _DTWAIN_RangeCreateFromCap(Source, lCapType);
+        { return _DTWAIN_RangeCreateFromCap(Source, lCapType); }
 
         public  int DTWAIN_RangeDestroy(DTWAIN_RANGE pSource)
-        => _DTWAIN_RangeDestroy(pSource);
+        { return _DTWAIN_RangeDestroy(pSource); }
 
         public  int DTWAIN_RangeExpand(DTWAIN_RANGE pSource, ref DTWAIN_ARRAY pArray)
-        => _DTWAIN_RangeExpand(pSource, ref pArray);
+        { return _DTWAIN_RangeExpand(pSource, ref pArray); }
 
         public  DTWAIN_ARRAY DTWAIN_RangeExpandEx(DTWAIN_RANGE Range)
-        => _DTWAIN_RangeExpandEx(Range);
+        { return _DTWAIN_RangeExpandEx(Range); }
 
         public  int DTWAIN_RangeGetAll(DTWAIN_RANGE pArray, System.IntPtr pVariantLow, System.IntPtr pVariantUp, System.IntPtr pVariantStep, System.IntPtr pVariantDefault, System.IntPtr pVariantCurrent)
-        => _DTWAIN_RangeGetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent);
+        { return _DTWAIN_RangeGetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent); }
 
         public  int DTWAIN_RangeGetAllFloat(DTWAIN_RANGE pArray, ref DTWAIN_FLOAT pVariantLow, ref DTWAIN_FLOAT pVariantUp, ref DTWAIN_FLOAT pVariantStep, ref DTWAIN_FLOAT pVariantDefault, ref DTWAIN_FLOAT pVariantCurrent)
-        => _DTWAIN_RangeGetAllFloat(pArray, ref pVariantLow, ref pVariantUp, ref pVariantStep, ref pVariantDefault, ref pVariantCurrent);
+        { return _DTWAIN_RangeGetAllFloat(pArray, ref pVariantLow, ref pVariantUp, ref pVariantStep, ref pVariantDefault, ref pVariantCurrent); }
 
         public  int DTWAIN_RangeGetAllFloatString(DTWAIN_RANGE pArray, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder dLow, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder dUp, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder dStep, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder dDefault, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder dCurrent)
-        => _DTWAIN_RangeGetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent);
+        { return _DTWAIN_RangeGetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent); }
 
         public  int DTWAIN_RangeGetAllFloatString (DTWAIN_RANGE pArray, System.IntPtr dLow, System.IntPtr dUp, System.IntPtr dStep, System.IntPtr dDefault, System.IntPtr dCurrent)
-        => _DTWAIN_RangeGetAllFloatString_overload(pArray, dLow, dUp, dStep, dDefault, dCurrent);
+        { return _DTWAIN_RangeGetAllFloatString_overload(pArray, dLow, dUp, dStep, dDefault, dCurrent); }
 
         public  int DTWAIN_RangeGetAllLong(DTWAIN_RANGE pArray, ref int pVariantLow, ref int pVariantUp, ref int pVariantStep, ref int pVariantDefault, ref int pVariantCurrent)
-        => _DTWAIN_RangeGetAllLong(pArray, ref pVariantLow, ref pVariantUp, ref pVariantStep, ref pVariantDefault, ref pVariantCurrent);
+        { return _DTWAIN_RangeGetAllLong(pArray, ref pVariantLow, ref pVariantUp, ref pVariantStep, ref pVariantDefault, ref pVariantCurrent); }
 
         public  int DTWAIN_RangeGetCount(DTWAIN_RANGE pArray)
-        => _DTWAIN_RangeGetCount(pArray);
+        { return _DTWAIN_RangeGetCount(pArray); }
 
         public  int DTWAIN_RangeGetExpValue(DTWAIN_RANGE pArray, int lPos, System.IntPtr pVariant)
-        => _DTWAIN_RangeGetExpValue(pArray, lPos, pVariant);
+        { return _DTWAIN_RangeGetExpValue(pArray, lPos, pVariant); }
 
         public  int DTWAIN_RangeGetExpValueFloat(DTWAIN_RANGE pArray, int lPos, ref DTWAIN_FLOAT pVal)
-        => _DTWAIN_RangeGetExpValueFloat(pArray, lPos, ref pVal);
+        { return _DTWAIN_RangeGetExpValueFloat(pArray, lPos, ref pVal); }
 
         public  int DTWAIN_RangeGetExpValueFloatString(DTWAIN_RANGE pArray, int lPos, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pVal)
-        => _DTWAIN_RangeGetExpValueFloatString(pArray, lPos, pVal);
+        { return _DTWAIN_RangeGetExpValueFloatString(pArray, lPos, pVal); }
 
         public  int DTWAIN_RangeGetExpValueFloatString (DTWAIN_RANGE pArray, int lPos, System.IntPtr pVal)
-        => _DTWAIN_RangeGetExpValueFloatString_overload(pArray, lPos, pVal);
+        { return _DTWAIN_RangeGetExpValueFloatString_overload(pArray, lPos, pVal); }
 
         public  int DTWAIN_RangeGetExpValueLong(DTWAIN_RANGE pArray, int lPos, ref int pVal)
-        => _DTWAIN_RangeGetExpValueLong(pArray, lPos, ref pVal);
+        { return _DTWAIN_RangeGetExpValueLong(pArray, lPos, ref pVal); }
 
         public  int DTWAIN_RangeGetNearestValue(DTWAIN_RANGE pArray, System.IntPtr pVariantIn, System.IntPtr pVariantOut, int RoundType)
-        => _DTWAIN_RangeGetNearestValue(pArray, pVariantIn, pVariantOut, RoundType);
+        { return _DTWAIN_RangeGetNearestValue(pArray, pVariantIn, pVariantOut, RoundType); }
 
         public  int DTWAIN_RangeGetNearestValueFloat(DTWAIN_RANGE pArray, DTWAIN_FLOAT dIn, ref DTWAIN_FLOAT pOut, int RoundType)
-        => _DTWAIN_RangeGetNearestValueFloat(pArray, dIn, ref pOut, RoundType);
+        { return _DTWAIN_RangeGetNearestValueFloat(pArray, dIn, ref pOut, RoundType); }
 
         public  int DTWAIN_RangeGetNearestValueFloatString(DTWAIN_RANGE pArray, [MarshalAs(UnmanagedType.LPTStr)] string dIn, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pOut, int RoundType)
-        => _DTWAIN_RangeGetNearestValueFloatString(pArray, dIn, pOut, RoundType);
+        { return _DTWAIN_RangeGetNearestValueFloatString(pArray, dIn, pOut, RoundType); }
 
         public  int DTWAIN_RangeGetNearestValueFloatString (DTWAIN_RANGE pArray, [MarshalAs(UnmanagedType.LPTStr)] string dIn, System.IntPtr pOut, int RoundType)
-        => _DTWAIN_RangeGetNearestValueFloatString_overload(pArray, dIn, pOut, RoundType);
+        { return _DTWAIN_RangeGetNearestValueFloatString_overload(pArray, dIn, pOut, RoundType); }
 
         public  int DTWAIN_RangeGetNearestValueLong(DTWAIN_RANGE pArray, int lIn, ref int pOut, int RoundType)
-        => _DTWAIN_RangeGetNearestValueLong(pArray, lIn, ref pOut, RoundType);
+        { return _DTWAIN_RangeGetNearestValueLong(pArray, lIn, ref pOut, RoundType); }
 
         public  int DTWAIN_RangeGetPos(DTWAIN_RANGE pArray, System.IntPtr pVariant, ref int pPos)
-        => _DTWAIN_RangeGetPos(pArray, pVariant, ref pPos);
+        { return _DTWAIN_RangeGetPos(pArray, pVariant, ref pPos); }
 
         public  int DTWAIN_RangeGetPosFloat(DTWAIN_RANGE pArray, DTWAIN_FLOAT Val, ref int pPos)
-        => _DTWAIN_RangeGetPosFloat(pArray, Val, ref pPos);
+        { return _DTWAIN_RangeGetPosFloat(pArray, Val, ref pPos); }
 
         public  int DTWAIN_RangeGetPosFloatString(DTWAIN_RANGE pArray, [MarshalAs(UnmanagedType.LPTStr)] string Val, ref int pPos)
-        => _DTWAIN_RangeGetPosFloatString(pArray, Val, ref pPos);
+        { return _DTWAIN_RangeGetPosFloatString(pArray, Val, ref pPos); }
 
         public  int DTWAIN_RangeGetPosLong(DTWAIN_RANGE pArray, int Value, ref int pPos)
-        => _DTWAIN_RangeGetPosLong(pArray, Value, ref pPos);
+        { return _DTWAIN_RangeGetPosLong(pArray, Value, ref pPos); }
 
         public  int DTWAIN_RangeGetValue(DTWAIN_RANGE pArray, int nWhich, System.IntPtr pVariant)
-        => _DTWAIN_RangeGetValue(pArray, nWhich, pVariant);
+        { return _DTWAIN_RangeGetValue(pArray, nWhich, pVariant); }
 
         public  int DTWAIN_RangeGetValueFloat(DTWAIN_RANGE pArray, int nWhich, ref DTWAIN_FLOAT pVal)
-        => _DTWAIN_RangeGetValueFloat(pArray, nWhich, ref pVal);
+        { return _DTWAIN_RangeGetValueFloat(pArray, nWhich, ref pVal); }
 
         public  int DTWAIN_RangeGetValueFloatString(DTWAIN_RANGE pArray, int nWhich, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder pVal)
-        => _DTWAIN_RangeGetValueFloatString(pArray, nWhich, pVal);
+        { return _DTWAIN_RangeGetValueFloatString(pArray, nWhich, pVal); }
 
         public  int DTWAIN_RangeGetValueFloatString (DTWAIN_RANGE pArray, int nWhich, System.IntPtr pVal)
-        => _DTWAIN_RangeGetValueFloatString_overload(pArray, nWhich, pVal);
+        { return _DTWAIN_RangeGetValueFloatString_overload(pArray, nWhich, pVal); }
 
         public  int DTWAIN_RangeGetValueLong(DTWAIN_RANGE pArray, int nWhich, ref int pVal)
-        => _DTWAIN_RangeGetValueLong(pArray, nWhich, ref pVal);
+        { return _DTWAIN_RangeGetValueLong(pArray, nWhich, ref pVal); }
 
         public  int DTWAIN_RangeIsValid(DTWAIN_RANGE Range, ref int pStatus)
-        => _DTWAIN_RangeIsValid(Range, ref pStatus);
+        { return _DTWAIN_RangeIsValid(Range, ref pStatus); }
 
         public  int DTWAIN_RangeSetAll(DTWAIN_RANGE pArray, System.IntPtr pVariantLow, System.IntPtr pVariantUp, System.IntPtr pVariantStep, System.IntPtr pVariantDefault, System.IntPtr pVariantCurrent)
-        => _DTWAIN_RangeSetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent);
+        { return _DTWAIN_RangeSetAll(pArray, pVariantLow, pVariantUp, pVariantStep, pVariantDefault, pVariantCurrent); }
 
         public  int DTWAIN_RangeSetAllFloat(DTWAIN_RANGE pArray, DTWAIN_FLOAT dLow, DTWAIN_FLOAT dUp, DTWAIN_FLOAT dStep, DTWAIN_FLOAT dDefault, DTWAIN_FLOAT dCurrent)
-        => _DTWAIN_RangeSetAllFloat(pArray, dLow, dUp, dStep, dDefault, dCurrent);
+        { return _DTWAIN_RangeSetAllFloat(pArray, dLow, dUp, dStep, dDefault, dCurrent); }
 
         public  int DTWAIN_RangeSetAllFloatString(DTWAIN_RANGE pArray, [MarshalAs(UnmanagedType.LPTStr)] string dLow, [MarshalAs(UnmanagedType.LPTStr)] string dUp, [MarshalAs(UnmanagedType.LPTStr)] string dStep, [MarshalAs(UnmanagedType.LPTStr)] string dDefault, [MarshalAs(UnmanagedType.LPTStr)] string dCurrent)
-        => _DTWAIN_RangeSetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent);
+        { return _DTWAIN_RangeSetAllFloatString(pArray, dLow, dUp, dStep, dDefault, dCurrent); }
 
         public  int DTWAIN_RangeSetAllLong(DTWAIN_RANGE pArray, int lLow, int lUp, int lStep, int lDefault, int lCurrent)
-        => _DTWAIN_RangeSetAllLong(pArray, lLow, lUp, lStep, lDefault, lCurrent);
+        { return _DTWAIN_RangeSetAllLong(pArray, lLow, lUp, lStep, lDefault, lCurrent); }
 
         public  int DTWAIN_RangeSetValue(DTWAIN_RANGE pArray, int nWhich, System.IntPtr pVal)
-        => _DTWAIN_RangeSetValue(pArray, nWhich, pVal);
+        { return _DTWAIN_RangeSetValue(pArray, nWhich, pVal); }
 
         public  int DTWAIN_RangeSetValueFloat(DTWAIN_RANGE pArray, int nWhich, DTWAIN_FLOAT Val)
-        => _DTWAIN_RangeSetValueFloat(pArray, nWhich, Val);
+        { return _DTWAIN_RangeSetValueFloat(pArray, nWhich, Val); }
 
         public  int DTWAIN_RangeSetValueFloatString(DTWAIN_RANGE pArray, int nWhich, [MarshalAs(UnmanagedType.LPTStr)] string Val)
-        => _DTWAIN_RangeSetValueFloatString(pArray, nWhich, Val);
+        { return _DTWAIN_RangeSetValueFloatString(pArray, nWhich, Val); }
 
         public  int DTWAIN_RangeSetValueLong(DTWAIN_RANGE pArray, int nWhich, int Val)
-        => _DTWAIN_RangeSetValueLong(pArray, nWhich, Val);
+        { return _DTWAIN_RangeSetValueLong(pArray, nWhich, Val); }
 
         public  int DTWAIN_RemovePDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement)
-        => _DTWAIN_RemovePDFTextElement(Source, TextElement);
+        { return _DTWAIN_RemovePDFTextElement(Source, TextElement); }
 
         public  int DTWAIN_ResetPDFTextElement(DTWAIN_PDFTEXTELEMENT TextElement)
-        => _DTWAIN_ResetPDFTextElement(TextElement);
+        { return _DTWAIN_ResetPDFTextElement(TextElement); }
 
         public  int DTWAIN_RewindPage(DTWAIN_SOURCE Source)
-        => _DTWAIN_RewindPage(Source);
+        { return _DTWAIN_RewindPage(Source); }
 
         public  HANDLE DTWAIN_RotateImage(HANDLE hDib, DTWAIN_FLOAT rotationAngle)
-        => _DTWAIN_RotateImage(hDib, rotationAngle);
+        { return _DTWAIN_RotateImage(hDib, rotationAngle); }
 
         public  HANDLE DTWAIN_RotateImageString(HANDLE hDib, [MarshalAs(UnmanagedType.LPTStr)] string rotationAngle)
-        => _DTWAIN_RotateImageString(hDib, rotationAngle);
+        { return _DTWAIN_RotateImageString(hDib, rotationAngle); }
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectDefaultOCREngine()
-        => _DTWAIN_SelectDefaultOCREngine();
+        { return _DTWAIN_SelectDefaultOCREngine(); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectDefaultSource()
-        => _DTWAIN_SelectDefaultSource();
+        { return _DTWAIN_SelectDefaultSource(); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectDefaultSourceWithOpen(int bOpen)
-        => _DTWAIN_SelectDefaultSourceWithOpen(bOpen);
+        { return _DTWAIN_SelectDefaultSourceWithOpen(bOpen); }
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectOCREngine()
-        => _DTWAIN_SelectOCREngine();
+        { return _DTWAIN_SelectOCREngine(); }
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectOCREngine2(HWND hWndParent, [MarshalAs(UnmanagedType.LPTStr)] string szTitle, int xPos, int yPos, int nOptions)
-        => _DTWAIN_SelectOCREngine2(hWndParent, szTitle, xPos, yPos, nOptions);
+        { return _DTWAIN_SelectOCREngine2(hWndParent, szTitle, xPos, yPos, nOptions); }
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectOCREngine2Ex(HWND hWndParent, [MarshalAs(UnmanagedType.LPTStr)] string szTitle, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string szIncludeFilter, [MarshalAs(UnmanagedType.LPTStr)] string szExcludeFilter, [MarshalAs(UnmanagedType.LPTStr)] string szNameMapping, int nOptions)
-        => _DTWAIN_SelectOCREngine2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions);
+        { return _DTWAIN_SelectOCREngine2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions); }
 
         public  DTWAIN_OCRENGINE DTWAIN_SelectOCREngineByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName)
-        => _DTWAIN_SelectOCREngineByName(lpszName);
+        { return _DTWAIN_SelectOCREngineByName(lpszName); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSource()
-        => _DTWAIN_SelectSource();
+        { return _DTWAIN_SelectSource(); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSource2(HWND hWndParent, [MarshalAs(UnmanagedType.LPTStr)] string szTitle, int xPos, int yPos, int nOptions)
-        => _DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions);
+        { return _DTWAIN_SelectSource2(hWndParent, szTitle, xPos, yPos, nOptions); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSource2Ex(HWND hWndParent, [MarshalAs(UnmanagedType.LPTStr)] string szTitle, int xPos, int yPos, [MarshalAs(UnmanagedType.LPTStr)] string szIncludeFilter, [MarshalAs(UnmanagedType.LPTStr)] string szExcludeFilter, [MarshalAs(UnmanagedType.LPTStr)] string szNameMapping, int nOptions)
-        => _DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions);
+        { return _DTWAIN_SelectSource2Ex(hWndParent, szTitle, xPos, yPos, szIncludeFilter, szExcludeFilter, szNameMapping, nOptions); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSourceByName([MarshalAs(UnmanagedType.LPTStr)] string lpszName)
-        => _DTWAIN_SelectSourceByName(lpszName);
+        { return _DTWAIN_SelectSourceByName(lpszName); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSourceByNameWithOpen([MarshalAs(UnmanagedType.LPTStr)] string lpszName, int bOpen)
-        => _DTWAIN_SelectSourceByNameWithOpen(lpszName, bOpen);
+        { return _DTWAIN_SelectSourceByNameWithOpen(lpszName, bOpen); }
 
         public  DTWAIN_SOURCE DTWAIN_SelectSourceWithOpen(int bOpen)
-        => _DTWAIN_SelectSourceWithOpen(bOpen);
+        { return _DTWAIN_SelectSourceWithOpen(bOpen); }
 
         public  int DTWAIN_SetAcquireArea(DTWAIN_SOURCE Source, int lSetType, DTWAIN_ARRAY FloatEnum, DTWAIN_ARRAY ActualEnum)
-        => _DTWAIN_SetAcquireArea(Source, lSetType, FloatEnum, ActualEnum);
+        { return _DTWAIN_SetAcquireArea(Source, lSetType, FloatEnum, ActualEnum); }
 
         public  int DTWAIN_SetAcquireArea2(DTWAIN_SOURCE Source, DTWAIN_FLOAT left, DTWAIN_FLOAT top, DTWAIN_FLOAT right, DTWAIN_FLOAT bottom, int lUnit, int Flags)
-        => _DTWAIN_SetAcquireArea2(Source, left, top, right, bottom, lUnit, Flags);
+        { return _DTWAIN_SetAcquireArea2(Source, left, top, right, bottom, lUnit, Flags); }
 
         public  int DTWAIN_SetAcquireArea2String(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string left, [MarshalAs(UnmanagedType.LPTStr)] string top, [MarshalAs(UnmanagedType.LPTStr)] string right, [MarshalAs(UnmanagedType.LPTStr)] string bottom, int lUnit, int Flags)
-        => _DTWAIN_SetAcquireArea2String(Source, left, top, right, bottom, lUnit, Flags);
+        { return _DTWAIN_SetAcquireArea2String(Source, left, top, right, bottom, lUnit, Flags); }
 
         public  int DTWAIN_SetAcquireImageNegative(DTWAIN_SOURCE Source, int IsNegative)
-        => _DTWAIN_SetAcquireImageNegative(Source, IsNegative);
+        { return _DTWAIN_SetAcquireImageNegative(Source, IsNegative); }
 
         public  int DTWAIN_SetAcquireImageScale(DTWAIN_SOURCE Source, DTWAIN_FLOAT xscale, DTWAIN_FLOAT yscale)
-        => _DTWAIN_SetAcquireImageScale(Source, xscale, yscale);
+        { return _DTWAIN_SetAcquireImageScale(Source, xscale, yscale); }
 
         public  int DTWAIN_SetAcquireImageScaleString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string xscale, [MarshalAs(UnmanagedType.LPTStr)] string yscale)
-        => _DTWAIN_SetAcquireImageScaleString(Source, xscale, yscale);
+        { return _DTWAIN_SetAcquireImageScaleString(Source, xscale, yscale); }
 
         public  int DTWAIN_SetAcquireStripBuffer(DTWAIN_SOURCE Source, HANDLE hMem)
-        => _DTWAIN_SetAcquireStripBuffer(Source, hMem);
+        { return _DTWAIN_SetAcquireStripBuffer(Source, hMem); }
 
         public  int DTWAIN_SetAcquireStripSize(DTWAIN_SOURCE Source, uint StripSize)
-        => _DTWAIN_SetAcquireStripSize(Source, StripSize);
+        { return _DTWAIN_SetAcquireStripSize(Source, StripSize); }
 
         public  int DTWAIN_SetAlarmVolume(DTWAIN_SOURCE Source, int Volume)
-        => _DTWAIN_SetAlarmVolume(Source, Volume);
+        { return _DTWAIN_SetAlarmVolume(Source, Volume); }
 
         public  int DTWAIN_SetAlarms(DTWAIN_SOURCE Source, DTWAIN_ARRAY Alarms)
-        => _DTWAIN_SetAlarms(Source, Alarms);
+        { return _DTWAIN_SetAlarms(Source, Alarms); }
 
         public  int DTWAIN_SetAllCapsToDefault(DTWAIN_SOURCE Source)
-        => _DTWAIN_SetAllCapsToDefault(Source);
+        { return _DTWAIN_SetAllCapsToDefault(Source); }
 
         public  int DTWAIN_SetAppInfo([MarshalAs(UnmanagedType.LPTStr)] string szVerStr, [MarshalAs(UnmanagedType.LPTStr)] string szManu, [MarshalAs(UnmanagedType.LPTStr)] string szProdFam, [MarshalAs(UnmanagedType.LPTStr)] string szProdName)
-        => _DTWAIN_SetAppInfo(szVerStr, szManu, szProdFam, szProdName);
+        { return _DTWAIN_SetAppInfo(szVerStr, szManu, szProdFam, szProdName); }
 
         public  int DTWAIN_SetAuthor(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szAuthor)
-        => _DTWAIN_SetAuthor(Source, szAuthor);
+        { return _DTWAIN_SetAuthor(Source, szAuthor); }
 
         public  int DTWAIN_SetAvailablePrinters(DTWAIN_SOURCE Source, int lpAvailPrinters)
-        => _DTWAIN_SetAvailablePrinters(Source, lpAvailPrinters);
+        { return _DTWAIN_SetAvailablePrinters(Source, lpAvailPrinters); }
 
         public  int DTWAIN_SetAvailablePrintersArray(DTWAIN_SOURCE Source, DTWAIN_ARRAY AvailPrinters)
-        => _DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters);
+        { return _DTWAIN_SetAvailablePrintersArray(Source, AvailPrinters); }
 
         public  int DTWAIN_SetBarcodeMaxPriorities(DTWAIN_SOURCE Source, uint nMaxPriorities)
-        => _DTWAIN_SetBarcodeMaxPriorities(Source, nMaxPriorities);
+        { return _DTWAIN_SetBarcodeMaxPriorities(Source, nMaxPriorities); }
 
         public  int DTWAIN_SetBarcodeMaxRetries(DTWAIN_SOURCE Source, uint nMaxRetries)
-        => _DTWAIN_SetBarcodeMaxRetries(Source, nMaxRetries);
+        { return _DTWAIN_SetBarcodeMaxRetries(Source, nMaxRetries); }
 
         public  int DTWAIN_SetBarcodePriorities(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_SetBarcodePriorities(Source, SearchPriorities);
+        { return _DTWAIN_SetBarcodePriorities(Source, SearchPriorities); }
 
         public  int DTWAIN_SetBarcodeSearchMode(DTWAIN_SOURCE Source, int nSearchMode)
-        => _DTWAIN_SetBarcodeSearchMode(Source, nSearchMode);
+        { return _DTWAIN_SetBarcodeSearchMode(Source, nSearchMode); }
 
         public  int DTWAIN_SetBarcodeTimeOut(DTWAIN_SOURCE Source, uint TimeOutValue)
-        => _DTWAIN_SetBarcodeTimeOut(Source, TimeOutValue);
+        { return _DTWAIN_SetBarcodeTimeOut(Source, TimeOutValue); }
 
         public  int DTWAIN_SetBitDepth(DTWAIN_SOURCE Source, int BitDepth, int bSetCurrent)
-        => _DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent);
+        { return _DTWAIN_SetBitDepth(Source, BitDepth, bSetCurrent); }
 
         public  int DTWAIN_SetBlankPageDetection(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, int discard_option, int bSet)
-        => _DTWAIN_SetBlankPageDetection(Source, threshold, discard_option, bSet);
+        { return _DTWAIN_SetBlankPageDetection(Source, threshold, discard_option, bSet); }
 
         public  int DTWAIN_SetBlankPageDetectionEx(DTWAIN_SOURCE Source, DTWAIN_FLOAT threshold, int autodetect, int detectOpts, int bSet)
-        => _DTWAIN_SetBlankPageDetectionEx(Source, threshold, autodetect, detectOpts, bSet);
+        { return _DTWAIN_SetBlankPageDetectionEx(Source, threshold, autodetect, detectOpts, bSet); }
 
         public  int DTWAIN_SetBlankPageDetectionExString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string threshold, int autodetect_option, int detectOpts, int bSet)
-        => _DTWAIN_SetBlankPageDetectionExString(Source, threshold, autodetect_option, detectOpts, bSet);
+        { return _DTWAIN_SetBlankPageDetectionExString(Source, threshold, autodetect_option, detectOpts, bSet); }
 
         public  int DTWAIN_SetBlankPageDetectionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string threshold, int autodetect_option, int bSet)
-        => _DTWAIN_SetBlankPageDetectionString(Source, threshold, autodetect_option, bSet);
+        { return _DTWAIN_SetBlankPageDetectionString(Source, threshold, autodetect_option, bSet); }
 
         public  int DTWAIN_SetBrightness(DTWAIN_SOURCE Source, DTWAIN_FLOAT Brightness)
-        => _DTWAIN_SetBrightness(Source, Brightness);
+        { return _DTWAIN_SetBrightness(Source, Brightness); }
 
         public  int DTWAIN_SetBrightnessString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Brightness)
-        => _DTWAIN_SetBrightnessString(Source, Brightness);
+        { return _DTWAIN_SetBrightnessString(Source, Brightness); }
 
         public  int DTWAIN_SetBufferedTileMode(DTWAIN_SOURCE Source, int bTileMode)
-        => _DTWAIN_SetBufferedTileMode(Source, bTileMode);
+        { return _DTWAIN_SetBufferedTileMode(Source, bTileMode); }
 
         public  DTwainCallback DTWAIN_SetCallback(DTwainCallback Fn, int UserData)
-        => _DTWAIN_SetCallback(Fn, UserData);
+        { return _DTWAIN_SetCallback(Fn, UserData); }
 
         public  DTwainCallback64 DTWAIN_SetCallback64(DTwainCallback64 Fn, long UserData)
-        => _DTWAIN_SetCallback64(Fn, UserData);
+        { return _DTWAIN_SetCallback64(Fn, UserData); }
 
         public  int DTWAIN_SetCamera(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szCamera)
-        => _DTWAIN_SetCamera(Source, szCamera);
+        { return _DTWAIN_SetCamera(Source, szCamera); }
 
         public  int DTWAIN_SetCapValues(DTWAIN_SOURCE Source, int lCap, int lSetType, DTWAIN_ARRAY pArray)
-        => _DTWAIN_SetCapValues(Source, lCap, lSetType, pArray);
+        { return _DTWAIN_SetCapValues(Source, lCap, lSetType, pArray); }
 
         public  int DTWAIN_SetCapValuesEx(DTWAIN_SOURCE Source, int lCap, int lSetType, int lContainerType, DTWAIN_ARRAY pArray)
-        => _DTWAIN_SetCapValuesEx(Source, lCap, lSetType, lContainerType, pArray);
+        { return _DTWAIN_SetCapValuesEx(Source, lCap, lSetType, lContainerType, pArray); }
 
         public  int DTWAIN_SetCapValuesEx2(DTWAIN_SOURCE Source, int lCap, int lSetType, int lContainerType, int nDataType, DTWAIN_ARRAY pArray)
-        => _DTWAIN_SetCapValuesEx2(Source, lCap, lSetType, lContainerType, nDataType, pArray);
+        { return _DTWAIN_SetCapValuesEx2(Source, lCap, lSetType, lContainerType, nDataType, pArray); }
 
         public  int DTWAIN_SetCaption(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Caption)
-        => _DTWAIN_SetCaption(Source, Caption);
+        { return _DTWAIN_SetCaption(Source, Caption); }
 
         public  int DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, int lCompression, int bSetCurrent)
-        => _DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent);
+        { return _DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent); }
 
         public  int DTWAIN_SetContrast(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast)
-        => _DTWAIN_SetContrast(Source, Contrast);
+        { return _DTWAIN_SetContrast(Source, Contrast); }
 
         public  int DTWAIN_SetContrastString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Contrast)
-        => _DTWAIN_SetContrastString(Source, Contrast);
+        { return _DTWAIN_SetContrastString(Source, Contrast); }
 
         public  int DTWAIN_SetCountry(int nCountry)
-        => _DTWAIN_SetCountry(nCountry);
+        { return _DTWAIN_SetCountry(nCountry); }
 
         public  int DTWAIN_SetCurrentRetryCount(DTWAIN_SOURCE Source, int nCount)
-        => _DTWAIN_SetCurrentRetryCount(Source, nCount);
+        { return _DTWAIN_SetCurrentRetryCount(Source, nCount); }
 
         public  int DTWAIN_SetCustomDSData(DTWAIN_SOURCE Source, HANDLE hData, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U8, SizeParamIndex = 3)] byte[] Data, uint dSize, int nFlags)
-        => _DTWAIN_SetCustomDSData(Source, hData, Data, dSize, nFlags);
+        { return _DTWAIN_SetCustomDSData(Source, hData, Data, dSize, nFlags); }
 
         public  int DTWAIN_SetDSMSearchOrder(int SearchPath)
-        => _DTWAIN_SetDSMSearchOrder(SearchPath);
+        { return _DTWAIN_SetDSMSearchOrder(SearchPath); }
 
         public  int DTWAIN_SetDSMSearchOrderEx([MarshalAs(UnmanagedType.LPTStr)] string SearchOrder, [MarshalAs(UnmanagedType.LPTStr)] string UserPath)
-        => _DTWAIN_SetDSMSearchOrderEx(SearchOrder, UserPath);
+        { return _DTWAIN_SetDSMSearchOrderEx(SearchOrder, UserPath); }
 
         public  int DTWAIN_SetDefaultSource(DTWAIN_SOURCE Source)
-        => _DTWAIN_SetDefaultSource(Source);
+        { return _DTWAIN_SetDefaultSource(Source); }
 
         public  int DTWAIN_SetDeviceNotifications(DTWAIN_SOURCE Source, int DevEvents)
-        => _DTWAIN_SetDeviceNotifications(Source, DevEvents);
+        { return _DTWAIN_SetDeviceNotifications(Source, DevEvents); }
 
         public  int DTWAIN_SetDeviceTimeDate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szTimeDate)
-        => _DTWAIN_SetDeviceTimeDate(Source, szTimeDate);
+        { return _DTWAIN_SetDeviceTimeDate(Source, szTimeDate); }
 
         public  int DTWAIN_SetDoubleFeedDetectLength(DTWAIN_SOURCE Source, DTWAIN_FLOAT Value)
-        => _DTWAIN_SetDoubleFeedDetectLength(Source, Value);
+        { return _DTWAIN_SetDoubleFeedDetectLength(Source, Value); }
 
         public  int DTWAIN_SetDoubleFeedDetectLengthString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string value)
-        => _DTWAIN_SetDoubleFeedDetectLengthString(Source, value);
+        { return _DTWAIN_SetDoubleFeedDetectLengthString(Source, value); }
 
         public  int DTWAIN_SetDoubleFeedDetectValues(DTWAIN_SOURCE Source, DTWAIN_ARRAY prray)
-        => _DTWAIN_SetDoubleFeedDetectValues(Source, prray);
+        { return _DTWAIN_SetDoubleFeedDetectValues(Source, prray); }
 
         public  int DTWAIN_SetDoublePageCountOnDuplex(DTWAIN_SOURCE Source, int bDoubleCount)
-        => _DTWAIN_SetDoublePageCountOnDuplex(Source, bDoubleCount);
+        { return _DTWAIN_SetDoublePageCountOnDuplex(Source, bDoubleCount); }
 
         public  int DTWAIN_SetEOJDetectValue(DTWAIN_SOURCE Source, int nValue)
-        => _DTWAIN_SetEOJDetectValue(Source, nValue);
+        { return _DTWAIN_SetEOJDetectValue(Source, nValue); }
 
         public  int DTWAIN_SetErrorBufferThreshold(uint nErrors)
-        => _DTWAIN_SetErrorBufferThreshold(nErrors);
+        { return _DTWAIN_SetErrorBufferThreshold(nErrors); }
 
         public  int DTWAIN_SetErrorCallback(DTwainErrorProc proc, int UserData)
-        => _DTWAIN_SetErrorCallback(proc, UserData);
+        { return _DTWAIN_SetErrorCallback(proc, UserData); }
 
         public  int DTWAIN_SetErrorCallback64(DTwainErrorProc64 proc, long UserData64)
-        => _DTWAIN_SetErrorCallback64(proc, UserData64);
+        { return _DTWAIN_SetErrorCallback64(proc, UserData64); }
 
         public  int DTWAIN_SetFeederAlignment(DTWAIN_SOURCE Source, int lpAlignment)
-        => _DTWAIN_SetFeederAlignment(Source, lpAlignment);
+        { return _DTWAIN_SetFeederAlignment(Source, lpAlignment); }
 
         public  int DTWAIN_SetFeederOrder(DTWAIN_SOURCE Source, int lOrder)
-        => _DTWAIN_SetFeederOrder(Source, lOrder);
+        { return _DTWAIN_SetFeederOrder(Source, lOrder); }
 
         public  int DTWAIN_SetFeederWaitTime(DTWAIN_SOURCE Source, int waitTime, int flags)
-        => _DTWAIN_SetFeederWaitTime(Source, waitTime, flags);
+        { return _DTWAIN_SetFeederWaitTime(Source, waitTime, flags); }
 
         public  int DTWAIN_SetFileAutoIncrement(DTWAIN_SOURCE Source, int Increment, int bResetOnAcquire, int bSet)
-        => _DTWAIN_SetFileAutoIncrement(Source, Increment, bResetOnAcquire, bSet);
+        { return _DTWAIN_SetFileAutoIncrement(Source, Increment, bResetOnAcquire, bSet); }
 
         public  int DTWAIN_SetFileCompressionType(DTWAIN_SOURCE Source, int lCompression, int bIsCustom)
-        => _DTWAIN_SetFileCompressionType(Source, lCompression, bIsCustom);
+        { return _DTWAIN_SetFileCompressionType(Source, lCompression, bIsCustom); }
 
         public  int DTWAIN_SetFileSavePos(HWND hWndParent, [MarshalAs(UnmanagedType.LPTStr)] string szTitle, int xPos, int yPos, int nFlags)
-        => _DTWAIN_SetFileSavePos(hWndParent, szTitle, xPos, yPos, nFlags);
+        { return _DTWAIN_SetFileSavePos(hWndParent, szTitle, xPos, yPos, nFlags); }
 
         public  int DTWAIN_SetFileXferFormat(DTWAIN_SOURCE Source, int lFileType, int bSetCurrent)
-        => _DTWAIN_SetFileXferFormat(Source, lFileType, bSetCurrent);
+        { return _DTWAIN_SetFileXferFormat(Source, lFileType, bSetCurrent); }
 
         public  int DTWAIN_SetHalftone(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpHalftone)
-        => _DTWAIN_SetHalftone(Source, lpHalftone);
+        { return _DTWAIN_SetHalftone(Source, lpHalftone); }
 
         public  int DTWAIN_SetHighlight(DTWAIN_SOURCE Source, DTWAIN_FLOAT Highlight)
-        => _DTWAIN_SetHighlight(Source, Highlight);
+        { return _DTWAIN_SetHighlight(Source, Highlight); }
 
         public  int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight)
-        => _DTWAIN_SetHighlightString(Source, Highlight);
+        { return _DTWAIN_SetHighlightString(Source, Highlight); }
 
         public  int DTWAIN_SetJobControl(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent)
-        => _DTWAIN_SetJobControl(Source, JobControl, bSetCurrent);
+        { return _DTWAIN_SetJobControl(Source, JobControl, bSetCurrent); }
 
         public  int DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, int Quality, int Progressive)
-        => _DTWAIN_SetJpegValues(Source, Quality, Progressive);
+        { return _DTWAIN_SetJpegValues(Source, Quality, Progressive); }
 
         public  int DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, int Quality, int Progressive)
-        => _DTWAIN_SetJpegXRValues(Source, Quality, Progressive);
+        { return _DTWAIN_SetJpegXRValues(Source, Quality, Progressive); }
 
         public  int DTWAIN_SetLanguage(int nLanguage)
-        => _DTWAIN_SetLanguage(nLanguage);
+        { return _DTWAIN_SetLanguage(nLanguage); }
 
         public  int DTWAIN_SetLastError(int nError)
-        => _DTWAIN_SetLastError(nError);
+        { return _DTWAIN_SetLastError(nError); }
 
         public  int DTWAIN_SetLightPath(DTWAIN_SOURCE Source, int LightPath)
-        => _DTWAIN_SetLightPath(Source, LightPath);
+        { return _DTWAIN_SetLightPath(Source, LightPath); }
 
         public  int DTWAIN_SetLightPathEx(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightPaths)
-        => _DTWAIN_SetLightPathEx(Source, LightPaths);
+        { return _DTWAIN_SetLightPathEx(Source, LightPaths); }
 
         public  int DTWAIN_SetLightSource(DTWAIN_SOURCE Source, int LightSource)
-        => _DTWAIN_SetLightSource(Source, LightSource);
+        { return _DTWAIN_SetLightSource(Source, LightSource); }
 
         public  int DTWAIN_SetLightSources(DTWAIN_SOURCE Source, DTWAIN_ARRAY LightSources)
-        => _DTWAIN_SetLightSources(Source, LightSources);
+        { return _DTWAIN_SetLightSources(Source, LightSources); }
 
         public  int DTWAIN_SetLogSaveThreshold(LONG64 lineCount)
-        => _DTWAIN_SetLogSaveThreshold(lineCount);
+        { return _DTWAIN_SetLogSaveThreshold(lineCount); }
 
         public  int DTWAIN_SetLoggerCallback(DTwainLoggerProc logProc, long UserData)
-        => _DTWAIN_SetLoggerCallback(logProc, UserData);
+        { return _DTWAIN_SetLoggerCallback(logProc, UserData); }
 
         public  int DTWAIN_SetMajorMinorVersion(uint nMajor, uint nMinor)
-        => _DTWAIN_SetMajorMinorVersion(nMajor, nMinor);
+        { return _DTWAIN_SetMajorMinorVersion(nMajor, nMinor); }
 
         public  int DTWAIN_SetManualDuplexMode(DTWAIN_SOURCE Source, int Flags, int bSet)
-        => _DTWAIN_SetManualDuplexMode(Source, Flags, bSet);
+        { return _DTWAIN_SetManualDuplexMode(Source, Flags, bSet); }
 
         public  int DTWAIN_SetMaxAcquisitions(DTWAIN_SOURCE Source, int MaxAcquires)
-        => _DTWAIN_SetMaxAcquisitions(Source, MaxAcquires);
+        { return _DTWAIN_SetMaxAcquisitions(Source, MaxAcquires); }
 
         public  int DTWAIN_SetMaxBuffers(DTWAIN_SOURCE Source, uint MaxBuf)
-        => _DTWAIN_SetMaxBuffers(Source, MaxBuf);
+        { return _DTWAIN_SetMaxBuffers(Source, MaxBuf); }
 
         public  int DTWAIN_SetMaxRetryAttempts(DTWAIN_SOURCE Source, int nAttempts)
-        => _DTWAIN_SetMaxRetryAttempts(Source, nAttempts);
+        { return _DTWAIN_SetMaxRetryAttempts(Source, nAttempts); }
 
         public  int DTWAIN_SetMultipageScanMode(DTWAIN_SOURCE Source, int ScanType)
-        => _DTWAIN_SetMultipageScanMode(Source, ScanType);
+        { return _DTWAIN_SetMultipageScanMode(Source, ScanType); }
 
         public  int DTWAIN_SetNoiseFilter(DTWAIN_SOURCE Source, int NoiseFilter)
-        => _DTWAIN_SetNoiseFilter(Source, NoiseFilter);
+        { return _DTWAIN_SetNoiseFilter(Source, NoiseFilter); }
 
         public  int DTWAIN_SetOCRCapValues(DTWAIN_OCRENGINE Engine, int OCRCapValue, int SetType, DTWAIN_ARRAY CapValues)
-        => _DTWAIN_SetOCRCapValues(Engine, OCRCapValue, SetType, CapValues);
+        { return _DTWAIN_SetOCRCapValues(Engine, OCRCapValue, SetType, CapValues); }
 
         public  int DTWAIN_SetOrientation(DTWAIN_SOURCE Source, int Orient, int bSetCurrent)
-        => _DTWAIN_SetOrientation(Source, Orient, bSetCurrent);
+        { return _DTWAIN_SetOrientation(Source, Orient, bSetCurrent); }
 
         public  int DTWAIN_SetOverscan(DTWAIN_SOURCE Source, int Value, int bSetCurrent)
-        => _DTWAIN_SetOverscan(Source, Value, bSetCurrent);
+        { return _DTWAIN_SetOverscan(Source, Value, bSetCurrent); }
 
         public  int DTWAIN_SetPDFAESEncryption(DTWAIN_SOURCE Source, int nWhichEncryption, int bUseAES)
-        => _DTWAIN_SetPDFAESEncryption(Source, nWhichEncryption, bUseAES);
+        { return _DTWAIN_SetPDFAESEncryption(Source, nWhichEncryption, bUseAES); }
 
         public  int DTWAIN_SetPDFASCIICompression(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_SetPDFASCIICompression(Source, bSet);
+        { return _DTWAIN_SetPDFASCIICompression(Source, bSet); }
 
         public  int DTWAIN_SetPDFAuthor(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpAuthor)
-        => _DTWAIN_SetPDFAuthor(Source, lpAuthor);
+        { return _DTWAIN_SetPDFAuthor(Source, lpAuthor); }
 
         public  int DTWAIN_SetPDFCompression(DTWAIN_SOURCE Source, int bCompression)
-        => _DTWAIN_SetPDFCompression(Source, bCompression);
+        { return _DTWAIN_SetPDFCompression(Source, bCompression); }
 
         public  int DTWAIN_SetPDFCreator(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpCreator)
-        => _DTWAIN_SetPDFCreator(Source, lpCreator);
+        { return _DTWAIN_SetPDFCreator(Source, lpCreator); }
 
         public  int DTWAIN_SetPDFEncryption(DTWAIN_SOURCE Source, int bUseEncryption, [MarshalAs(UnmanagedType.LPTStr)] string lpszUser, [MarshalAs(UnmanagedType.LPTStr)] string lpszOwner, uint Permissions, int UseStrongEncryption)
-        => _DTWAIN_SetPDFEncryption(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption);
+        { return _DTWAIN_SetPDFEncryption(Source, bUseEncryption, lpszUser, lpszOwner, Permissions, UseStrongEncryption); }
 
         public  int DTWAIN_SetPDFJpegQuality(DTWAIN_SOURCE Source, int Quality)
-        => _DTWAIN_SetPDFJpegQuality(Source, Quality);
+        { return _DTWAIN_SetPDFJpegQuality(Source, Quality); }
 
         public  int DTWAIN_SetPDFKeywords(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpKeyWords)
-        => _DTWAIN_SetPDFKeywords(Source, lpKeyWords);
+        { return _DTWAIN_SetPDFKeywords(Source, lpKeyWords); }
 
         public  int DTWAIN_SetPDFOCRConversion(DTWAIN_OCRENGINE Engine, int PageType, int FileType, int PixelType, int BitDepth, int Options)
-        => _DTWAIN_SetPDFOCRConversion(Engine, PageType, FileType, PixelType, BitDepth, Options);
+        { return _DTWAIN_SetPDFOCRConversion(Engine, PageType, FileType, PixelType, BitDepth, Options); }
 
         public  int DTWAIN_SetPDFOCRMode(DTWAIN_SOURCE Source, int bSet)
-        => _DTWAIN_SetPDFOCRMode(Source, bSet);
+        { return _DTWAIN_SetPDFOCRMode(Source, bSet); }
 
         public  int DTWAIN_SetPDFOrientation(DTWAIN_SOURCE Source, int lPOrientation)
-        => _DTWAIN_SetPDFOrientation(Source, lPOrientation);
+        { return _DTWAIN_SetPDFOrientation(Source, lPOrientation); }
 
         public  int DTWAIN_SetPDFPageScale(DTWAIN_SOURCE Source, int nOptions, DTWAIN_FLOAT xScale, DTWAIN_FLOAT yScale)
-        => _DTWAIN_SetPDFPageScale(Source, nOptions, xScale, yScale);
+        { return _DTWAIN_SetPDFPageScale(Source, nOptions, xScale, yScale); }
 
         public  int DTWAIN_SetPDFPageScaleString(DTWAIN_SOURCE Source, int nOptions, [MarshalAs(UnmanagedType.LPTStr)] string xScale, [MarshalAs(UnmanagedType.LPTStr)] string yScale)
-        => _DTWAIN_SetPDFPageScaleString(Source, nOptions, xScale, yScale);
+        { return _DTWAIN_SetPDFPageScaleString(Source, nOptions, xScale, yScale); }
 
         public  int DTWAIN_SetPDFPageSize(DTWAIN_SOURCE Source, int PageSize, DTWAIN_FLOAT CustomWidth, DTWAIN_FLOAT CustomHeight)
-        => _DTWAIN_SetPDFPageSize(Source, PageSize, CustomWidth, CustomHeight);
+        { return _DTWAIN_SetPDFPageSize(Source, PageSize, CustomWidth, CustomHeight); }
 
         public  int DTWAIN_SetPDFPageSizeString(DTWAIN_SOURCE Source, int PageSize, [MarshalAs(UnmanagedType.LPTStr)] string CustomWidth, [MarshalAs(UnmanagedType.LPTStr)] string CustomHeight)
-        => _DTWAIN_SetPDFPageSizeString(Source, PageSize, CustomWidth, CustomHeight);
+        { return _DTWAIN_SetPDFPageSizeString(Source, PageSize, CustomWidth, CustomHeight); }
 
         public  int DTWAIN_SetPDFPolarity(DTWAIN_SOURCE Source, int Polarity)
-        => _DTWAIN_SetPDFPolarity(Source, Polarity);
+        { return _DTWAIN_SetPDFPolarity(Source, Polarity); }
 
         public  int DTWAIN_SetPDFProducer(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpProducer)
-        => _DTWAIN_SetPDFProducer(Source, lpProducer);
+        { return _DTWAIN_SetPDFProducer(Source, lpProducer); }
 
         public  int DTWAIN_SetPDFSubject(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpSubject)
-        => _DTWAIN_SetPDFSubject(Source, lpSubject);
+        { return _DTWAIN_SetPDFSubject(Source, lpSubject); }
 
         public  int DTWAIN_SetPDFTextElementFloat(DTWAIN_PDFTEXTELEMENT TextElement, DTWAIN_FLOAT val1, DTWAIN_FLOAT val2, int Flags)
-        => _DTWAIN_SetPDFTextElementFloat(TextElement, val1, val2, Flags);
+        { return _DTWAIN_SetPDFTextElementFloat(TextElement, val1, val2, Flags); }
 
         public  int DTWAIN_SetPDFTextElementFloatString(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPTStr)] string val1, [MarshalAs(UnmanagedType.LPTStr)] string val2, int Flags)
-        => _DTWAIN_SetPDFTextElementFloatString(TextElement, val1, val2, Flags);
+        { return _DTWAIN_SetPDFTextElementFloatString(TextElement, val1, val2, Flags); }
 
         public  int DTWAIN_SetPDFTextElementLong(DTWAIN_PDFTEXTELEMENT TextElement, int val1, int val2, int Flags)
-        => _DTWAIN_SetPDFTextElementLong(TextElement, val1, val2, Flags);
+        { return _DTWAIN_SetPDFTextElementLong(TextElement, val1, val2, Flags); }
 
         public  int DTWAIN_SetPDFTextElementString(DTWAIN_PDFTEXTELEMENT TextElement, [MarshalAs(UnmanagedType.LPTStr)] string val1, int Flags)
-        => _DTWAIN_SetPDFTextElementString(TextElement, val1, Flags);
+        { return _DTWAIN_SetPDFTextElementString(TextElement, val1, Flags); }
 
         public  int DTWAIN_SetPDFTitle(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpTitle)
-        => _DTWAIN_SetPDFTitle(Source, lpTitle);
+        { return _DTWAIN_SetPDFTitle(Source, lpTitle); }
 
         public  int DTWAIN_SetPaperSize(DTWAIN_SOURCE Source, int PaperSize, int bSetCurrent)
-        => _DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent);
+        { return _DTWAIN_SetPaperSize(Source, PaperSize, bSetCurrent); }
 
         public  int DTWAIN_SetPatchcodeMaxPriorities(DTWAIN_SOURCE Source, uint nMaxSearchRetries)
-        => _DTWAIN_SetPatchcodeMaxPriorities(Source, nMaxSearchRetries);
+        { return _DTWAIN_SetPatchcodeMaxPriorities(Source, nMaxSearchRetries); }
 
         public  int DTWAIN_SetPatchcodeMaxRetries(DTWAIN_SOURCE Source, uint nMaxRetries)
-        => _DTWAIN_SetPatchcodeMaxRetries(Source, nMaxRetries);
+        { return _DTWAIN_SetPatchcodeMaxRetries(Source, nMaxRetries); }
 
         public  int DTWAIN_SetPatchcodePriorities(DTWAIN_SOURCE Source, DTWAIN_ARRAY SearchPriorities)
-        => _DTWAIN_SetPatchcodePriorities(Source, SearchPriorities);
+        { return _DTWAIN_SetPatchcodePriorities(Source, SearchPriorities); }
 
         public  int DTWAIN_SetPatchcodeSearchMode(DTWAIN_SOURCE Source, int nSearchMode)
-        => _DTWAIN_SetPatchcodeSearchMode(Source, nSearchMode);
+        { return _DTWAIN_SetPatchcodeSearchMode(Source, nSearchMode); }
 
         public  int DTWAIN_SetPatchcodeTimeOut(DTWAIN_SOURCE Source, uint TimeOutValue)
-        => _DTWAIN_SetPatchcodeTimeOut(Source, TimeOutValue);
+        { return _DTWAIN_SetPatchcodeTimeOut(Source, TimeOutValue); }
 
         public  int DTWAIN_SetPixelFlavor(DTWAIN_SOURCE Source, int PixelFlavor)
-        => _DTWAIN_SetPixelFlavor(Source, PixelFlavor);
+        { return _DTWAIN_SetPixelFlavor(Source, PixelFlavor); }
 
         public  int DTWAIN_SetPixelType(DTWAIN_SOURCE Source, int PixelType, int BitDepth, int bSetCurrent)
-        => _DTWAIN_SetPixelType(Source, PixelType, BitDepth, bSetCurrent);
+        { return _DTWAIN_SetPixelType(Source, PixelType, BitDepth, bSetCurrent); }
 
         public  int DTWAIN_SetPostScriptTitle(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string szTitle)
-        => _DTWAIN_SetPostScriptTitle(Source, szTitle);
+        { return _DTWAIN_SetPostScriptTitle(Source, szTitle); }
 
         public  int DTWAIN_SetPostScriptType(DTWAIN_SOURCE Source, int PSType)
-        => _DTWAIN_SetPostScriptType(Source, PSType);
+        { return _DTWAIN_SetPostScriptType(Source, PSType); }
 
         public  int DTWAIN_SetPrinter(DTWAIN_SOURCE Source, int Printer, int bCurrent)
-        => _DTWAIN_SetPrinter(Source, Printer, bCurrent);
+        { return _DTWAIN_SetPrinter(Source, Printer, bCurrent); }
 
         public  int DTWAIN_SetPrinterEx(DTWAIN_SOURCE Source, int Printer, int bCurrent)
-        => _DTWAIN_SetPrinterEx(Source, Printer, bCurrent);
+        { return _DTWAIN_SetPrinterEx(Source, Printer, bCurrent); }
 
         public  int DTWAIN_SetPrinterStartNumber(DTWAIN_SOURCE Source, uint nStart)
-        => _DTWAIN_SetPrinterStartNumber(Source, nStart);
+        { return _DTWAIN_SetPrinterStartNumber(Source, nStart); }
 
         public  int DTWAIN_SetPrinterStringMode(DTWAIN_SOURCE Source, int PrinterMode, int bSetCurrent)
-        => _DTWAIN_SetPrinterStringMode(Source, PrinterMode, bSetCurrent);
+        { return _DTWAIN_SetPrinterStringMode(Source, PrinterMode, bSetCurrent); }
 
         public  int DTWAIN_SetPrinterStrings(DTWAIN_SOURCE Source, DTWAIN_ARRAY ArrayString, ref int pNumStrings)
-        => _DTWAIN_SetPrinterStrings(Source, ArrayString, ref pNumStrings);
+        { return _DTWAIN_SetPrinterStrings(Source, ArrayString, ref pNumStrings); }
 
         public  int DTWAIN_SetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Suffix)
-        => _DTWAIN_SetPrinterSuffixString(Source, Suffix);
+        { return _DTWAIN_SetPrinterSuffixString(Source, Suffix); }
 
         public  int DTWAIN_SetResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT Resolution)
-        => _DTWAIN_SetResolution(Source, Resolution);
+        { return _DTWAIN_SetResolution(Source, Resolution); }
 
         public  int DTWAIN_SetResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Resolution)
-        => _DTWAIN_SetResolutionString(Source, Resolution);
+        { return _DTWAIN_SetResolutionString(Source, Resolution); }
 
         public  int DTWAIN_SetResourcePath([MarshalAs(UnmanagedType.LPTStr)] string ResourcePath)
-        => _DTWAIN_SetResourcePath(ResourcePath);
+        { return _DTWAIN_SetResourcePath(ResourcePath); }
 
         public  int DTWAIN_SetRotation(DTWAIN_SOURCE Source, DTWAIN_FLOAT Rotation)
-        => _DTWAIN_SetRotation(Source, Rotation);
+        { return _DTWAIN_SetRotation(Source, Rotation); }
 
         public  int DTWAIN_SetRotationString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Rotation)
-        => _DTWAIN_SetRotationString(Source, Rotation);
+        { return _DTWAIN_SetRotationString(Source, Rotation); }
 
         public  int DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string fName)
-        => _DTWAIN_SetSaveFileName(Source, fName);
+        { return _DTWAIN_SetSaveFileName(Source, fName); }
 
         public  int DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, int FileType)
-        => _DTWAIN_SetSaveFileType(Source, FileType);
+        { return _DTWAIN_SetSaveFileType(Source, FileType); }
 
         public  int DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow)
-        => _DTWAIN_SetShadow(Source, Shadow);
+        { return _DTWAIN_SetShadow(Source, Shadow); }
 
         public  int DTWAIN_SetShadowString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Shadow)
-        => _DTWAIN_SetShadowString(Source, Shadow);
+        { return _DTWAIN_SetShadowString(Source, Shadow); }
 
         public  int DTWAIN_SetSourceUnit(DTWAIN_SOURCE Source, int Unit)
-        => _DTWAIN_SetSourceUnit(Source, Unit);
+        { return _DTWAIN_SetSourceUnit(Source, Unit); }
 
         public  int DTWAIN_SetTIFFCompressType(DTWAIN_SOURCE Source, int Setting)
-        => _DTWAIN_SetTIFFCompressType(Source, Setting);
+        { return _DTWAIN_SetTIFFCompressType(Source, Setting); }
 
         public  int DTWAIN_SetTIFFInvert(DTWAIN_SOURCE Source, int Setting)
-        => _DTWAIN_SetTIFFInvert(Source, Setting);
+        { return _DTWAIN_SetTIFFInvert(Source, Setting); }
 
         public  int DTWAIN_SetTempFileDirectory([MarshalAs(UnmanagedType.LPTStr)] string szFilePath)
-        => _DTWAIN_SetTempFileDirectory(szFilePath);
+        { return _DTWAIN_SetTempFileDirectory(szFilePath); }
 
         public  int DTWAIN_SetTempFileDirectoryEx([MarshalAs(UnmanagedType.LPTStr)] string szFilePath, int CreationFlags)
-        => _DTWAIN_SetTempFileDirectoryEx(szFilePath, CreationFlags);
+        { return _DTWAIN_SetTempFileDirectoryEx(szFilePath, CreationFlags); }
 
         public  int DTWAIN_SetThreshold(DTWAIN_SOURCE Source, DTWAIN_FLOAT Threshold, int bSetBithDepthReduction)
-        => _DTWAIN_SetThreshold(Source, Threshold, bSetBithDepthReduction);
+        { return _DTWAIN_SetThreshold(Source, Threshold, bSetBithDepthReduction); }
 
         public  int DTWAIN_SetThresholdString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Threshold, int bSetBitDepthReduction)
-        => _DTWAIN_SetThresholdString(Source, Threshold, bSetBitDepthReduction);
+        { return _DTWAIN_SetThresholdString(Source, Threshold, bSetBitDepthReduction); }
 
         public  int DTWAIN_SetTwainDSM(int DSMType)
-        => _DTWAIN_SetTwainDSM(DSMType);
+        { return _DTWAIN_SetTwainDSM(DSMType); }
 
         public  int DTWAIN_SetTwainLog(uint LogFlags, [MarshalAs(UnmanagedType.LPTStr)] string lpszLogFile)
-        => _DTWAIN_SetTwainLog(LogFlags, lpszLogFile);
+        { return _DTWAIN_SetTwainLog(LogFlags, lpszLogFile); }
 
         public  int DTWAIN_SetTwainMode(int lAcquireMode)
-        => _DTWAIN_SetTwainMode(lAcquireMode);
+        { return _DTWAIN_SetTwainMode(lAcquireMode); }
 
         public  DTwainDIBUpdateProc DTWAIN_SetUpdateDibProc(DTwainDIBUpdateProc DibProc)
-        => _DTWAIN_SetUpdateDibProc(DibProc);
+        { return _DTWAIN_SetUpdateDibProc(DibProc); }
 
         public  int DTWAIN_SetXResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT xResolution)
-        => _DTWAIN_SetXResolution(Source, xResolution);
+        { return _DTWAIN_SetXResolution(Source, xResolution); }
 
         public  int DTWAIN_SetXResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Resolution)
-        => _DTWAIN_SetXResolutionString(Source, Resolution);
+        { return _DTWAIN_SetXResolutionString(Source, Resolution); }
 
         public  int DTWAIN_SetYResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT yResolution)
-        => _DTWAIN_SetYResolution(Source, yResolution);
+        { return _DTWAIN_SetYResolution(Source, yResolution); }
 
         public  int DTWAIN_SetYResolutionString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Resolution)
-        => _DTWAIN_SetYResolutionString(Source, Resolution);
+        { return _DTWAIN_SetYResolutionString(Source, Resolution); }
 
         public  int DTWAIN_ShowUIOnly(DTWAIN_SOURCE Source)
-        => _DTWAIN_ShowUIOnly(Source);
+        { return _DTWAIN_ShowUIOnly(Source); }
 
         public  int DTWAIN_ShutdownOCREngine(DTWAIN_OCRENGINE OCREngine)
-        => _DTWAIN_ShutdownOCREngine(OCREngine);
+        { return _DTWAIN_ShutdownOCREngine(OCREngine); }
 
         public  int DTWAIN_SkipImageInfoError(DTWAIN_SOURCE Source, int bSkip)
-        => _DTWAIN_SkipImageInfoError(Source, bSkip);
+        { return _DTWAIN_SkipImageInfoError(Source, bSkip); }
 
         public  int DTWAIN_StartThread(DTWAIN_HANDLE DLLHandle)
-        => _DTWAIN_StartThread(DLLHandle);
+        { return _DTWAIN_StartThread(DLLHandle); }
 
         public  int DTWAIN_StartTwainSession(HWND hWndMsg, [MarshalAs(UnmanagedType.LPTStr)] string lpszDLLName)
-        => _DTWAIN_StartTwainSession(hWndMsg, lpszDLLName);
+        { return _DTWAIN_StartTwainSession(hWndMsg, lpszDLLName); }
 
         public  int DTWAIN_SysDestroy()
-        => _DTWAIN_SysDestroy();
+        { return _DTWAIN_SysDestroy(); }
 
         public  DTWAIN_HANDLE DTWAIN_SysInitialize()
-        => _DTWAIN_SysInitialize();
+        { return _DTWAIN_SysInitialize(); }
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking()
-        => _DTWAIN_SysInitializeNoBlocking();
+        { return _DTWAIN_SysInitializeNoBlocking(); }
 
         public  DTWAIN_HANDLE DTWAIN_SysInitializeNoBlockingEx(int bCreateLogFile)
-        => _DTWAIN_SysInitializeNoBlockingEx(bCreateLogFile);
+        { return _DTWAIN_SysInitializeNoBlockingEx(bCreateLogFile); }
 
         public  DTWAIN_ARRAY DTWAIN_TestGetCap(DTWAIN_SOURCE Source, int lCapability)
-        => _DTWAIN_TestGetCap(Source, lCapability);
+        { return _DTWAIN_TestGetCap(Source, lCapability); }
 
         public  int DTWAIN_UnlockMemory(HANDLE h)
-        => _DTWAIN_UnlockMemory(h);
+        { return _DTWAIN_UnlockMemory(h); }
 
         public  int DTWAIN_UnlockMemoryEx(HANDLE h)
-        => _DTWAIN_UnlockMemoryEx(h);
+        { return _DTWAIN_UnlockMemoryEx(h); }
 
         public  int DTWAIN_UpdateCurrentAcquiredImage(DTWAIN_SOURCE Source, HANDLE hNewDib)
-        => _DTWAIN_UpdateCurrentAcquiredImage(Source, hNewDib);
+        { return _DTWAIN_UpdateCurrentAcquiredImage(Source, hNewDib); }
 
         public  int DTWAIN_UseMultipleThreads(int bSet)
-        => _DTWAIN_UseMultipleThreads(bSet);
+        { return _DTWAIN_UseMultipleThreads(bSet); }
     }
 }

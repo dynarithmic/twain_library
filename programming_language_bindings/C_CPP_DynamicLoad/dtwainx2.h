@@ -547,7 +547,6 @@ typedef LONG (DLLENTRY_DEF * D_GETERRORSTRINGWFUNC)                             
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEFUNC)                           (LPCTSTR);
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEAFUNC)                          (LPCSTR);
 typedef LONG (DLLENTRY_DEF * D_GETEXTCAPFROMNAMEWFUNC)                          (LPCWSTR);
-typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFOFUNC)                      (DTWAIN_SOURCE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFODATAFUNC)                  (DTWAIN_SOURCE, LONG, LPDTWAIN_ARRAY);
 typedef DTWAIN_ARRAY (DLLENTRY_DEF * D_GETEXTIMAGEINFODATAEXFUNC)               (DTWAIN_SOURCE, LONG);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETEXTIMAGEINFOITEMFUNC)                  (DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG);
@@ -586,6 +585,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETJPEGXRVALUESFUNC)                      
 typedef LONG (DLLENTRY_DEF * D_GETLANGUAGEFUNC)                                 (VOID_PROTOTYPE);
 typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETLASTCAPENUMINDICESFUNC)                (DTWAIN_SOURCE, LPLONG, LPLONG);
 typedef LONG (DLLENTRY_DEF * D_GETLASTERRORFUNC)                                (VOID_PROTOTYPE);
+typedef DTWAIN_BOOL (DLLENTRY_DEF * D_GETLASTTWAINERRORFUNC)                    (LPDWORD, LPDWORD);
 typedef LONG (DLLENTRY_DEF * D_GETLIBRARYPATHFUNC)                              (LPTSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETLIBRARYPATHAFUNC)                             (LPSTR, LONG);
 typedef LONG (DLLENTRY_DEF * D_GETLIBRARYPATHWFUNC)                             (LPWSTR, LONG);
@@ -1737,7 +1737,6 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETEXTCAPFROMNAMEFUNC                          DTWAIN_GetExtCapFromName;
     STATIC D_GETEXTCAPFROMNAMEAFUNC                         DTWAIN_GetExtCapFromNameA;
     STATIC D_GETEXTCAPFROMNAMEWFUNC                         DTWAIN_GetExtCapFromNameW;
-    STATIC D_GETEXTIMAGEINFOFUNC                            DTWAIN_GetExtImageInfo;
     STATIC D_GETEXTIMAGEINFODATAFUNC                        DTWAIN_GetExtImageInfoData;
     STATIC D_GETEXTIMAGEINFODATAEXFUNC                      DTWAIN_GetExtImageInfoDataEx;
     STATIC D_GETEXTIMAGEINFOITEMFUNC                        DTWAIN_GetExtImageInfoItem;
@@ -1776,6 +1775,7 @@ typedef DTWAIN_BOOL (DLLENTRY_DEF * D_USEMULTIPLETHREADSFUNC)                   
     STATIC D_GETLANGUAGEFUNC                                DTWAIN_GetLanguage;
     STATIC D_GETLASTCAPENUMINDICESFUNC                      DTWAIN_GetLastCapEnumIndices;
     STATIC D_GETLASTERRORFUNC                               DTWAIN_GetLastError;
+    STATIC D_GETLASTTWAINERRORFUNC                          DTWAIN_GetLastTwainError;
     STATIC D_GETLIBRARYPATHFUNC                             DTWAIN_GetLibraryPath;
     STATIC D_GETLIBRARYPATHAFUNC                            DTWAIN_GetLibraryPathA;
     STATIC D_GETLIBRARYPATHWFUNC                            DTWAIN_GetLibraryPathW;
