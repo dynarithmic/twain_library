@@ -2469,7 +2469,6 @@ public:
 };
 #else
 } DYNDTWAIN_API;
+#endif
 int InitDTWAINInterface(DYNDTWAIN_API* pApi, HMODULE h);
 #endif
-#endif
-
