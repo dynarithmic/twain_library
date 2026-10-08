@@ -17,11 +17,13 @@ extern(Windows) ptrint myCallback64(ptrint wParam, ptrint lParam, long userData)
 													   wParam,  // The actual constant value
 													   cast(char *)szNotification, // name is returned here
 													   256); // maximum size of the output buffer 
+    if ( len > 0)
+	{
+        immutable log = format("Notification=%s, lParam=%s\n", szNotification[0 .. len-1], lParam);
 
-    immutable log = format("Notification=%s, lParam=%s\n", szNotification[0 .. len-1], lParam);
-
-    // Log this to the debug monitor (the Output Window if you are using the Visual Studio IDE)
-    OutputDebugStringW(toUTF16z(log));
+        // Log this to the debug monitor (the Output Window if you are using the Visual Studio IDE)
+        OutputDebugStringW(toUTF16z(log));
+	}
     return 1;
 }
 
@@ -43,7 +45,7 @@ void main()
 
     // Select a TWAIN source by using the enhanced 
 	// TWAIN Select Source dialog (we can center it on the screen)
-    auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_SCREEN);
+    auto TwainSource = dll.DTWAIN_SelectSource2W(null, "This is a test", 0, 0, dll.DTWAIN_DLG_CENTER_CURRENT_MONITOR);
 
     if ( !TwainSource )
 	{
@@ -89,7 +91,7 @@ void main()
 
     // Now let's acquire a page from the device and save to a BMP file
     dll.DTWAIN_AcquireFileA(TwainSource, "testd.bmp", 
-							dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
+                           dll.DTWAIN_BMP, dll.DTWAIN_USELONGNAME,
                            dll.DTWAIN_PT_DEFAULT, 1,1,1, null);
 
     // Now close down DTWAIN.  You *must* do this when done using DTWAIN, so that resources are freed, and that
