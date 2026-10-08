@@ -31,7 +31,7 @@ var
    SelectedSource: DTWAIN_SOURCE;
    ErrStatus: LONG;
    AcquisitionArray: DWORD;
-   SourceName, SourceDetails: AnsiString;
+   SourceName, SourceDetails: DTWAIN_TSTRING;
    NumChars: LONG;
    RetCode : BOOL;
    PageCount : LONG;
@@ -42,14 +42,14 @@ begin
       { Initialize DTWAIN }
       if (DTWAIN_SysInitialize <> 0) then
       begin
-           SelectedSource := DTWAIN_SelectSource2A(0, 'Select Source',0,0,DTWAIN_DLG_CENTER_SCREEN);
+           SelectedSource := DTWAIN_SelectSource2(0, 'Select Source',0,0, DTWAIN_DLG_CENTER_CURRENT_MONITOR);
            if SelectedSource <> 0 then
            begin
               { Open the source }
               DTWAIN_OpenSource(SelectedSource);
               { Acquire a BMP image }
 
-              RetCode := DTWAIN_AcquireFileA(
+              RetCode := DTWAIN_AcquireFile(
                           SelectedSource,    { the Source }
                           'test.bmp',        { File name to save }
                           DTWAIN_BMP,        { Image format }

@@ -30,7 +30,7 @@ pub fn main() -> Result<(), Box<dyn std::error::Error>>{
     // plus allows us to title the dialog as "Rust demo"
     let mut c_string = CString:: new("Rust demo").unwrap();
     let twain_source = api_func.DTWAIN_SelectSource2A(ptr::null(), c_string.as_ptr(),
-                                                      0, 0, DTwainAPI::DTWAIN_DLG_CENTER_SCREEN);
+                                                      0, 0, DTwainAPI::DTWAIN_DLG_CENTER_CURRENT_MONITOR);
 
     // If a source was selected, display the name
     if twain_source.is_null()

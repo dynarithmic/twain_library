@@ -59,7 +59,15 @@ BEGIN
             MENUITEM "JPEG-XR",                     IDM_ACQUIREFILE_JPEGXR
             MENUITEM "Paintshop (PSD)",             IDM_ACQUIREFILE_PAINTSHOP
             MENUITEM "PCX",                         IDM_ACQUIREFILE_PCX
-            MENUITEM "PDF",                         IDM_ACQUIREFILE_PDF
+            POPUP "PDF",                         
+            BEGIN
+                MENUITEM "No Encryption"            IDM_ACQUIREFILE_PDF
+                MENUITEM "ASCII85 Encoding"         IDM_ACQUIREFILE_PDF_ASCII85
+                MENUITEM "40-BIT RC4 Encryption"    IDM_ACQUIREFILE_PDF_RC4_40BIT
+                MENUITEM "128-BIT RC4 Encryption"   IDM_ACQUIREFILE_PDF_RC4_128BIT
+                MENUITEM "128-BIT AES Encryption"   IDM_ACQUIREFILE_PDF_AES_128BIT
+                MENUITEM "256-BIT AES Encryption"   IDM_ACQUIREFILE_PDF_AES_256BIT
+            END 
             MENUITEM "PNG",                         IDM_ACQUIREFILE_PNG
             MENUITEM "PostScript (Level 1)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL1
             MENUITEM "PostScript (Level 2)",        IDM_ACQUIREFILE_POSTSCRIPTLEVEL2
@@ -373,7 +381,7 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,136,35,50,14
     LTEXT           "File Name:",IDC_STATIC,8,9,34,8
 END
-
+    
 IDD_dlgBadCapabilities DIALOGEX 0, 0, 177, 162
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
@@ -383,6 +391,32 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,93,135,50,14
     LTEXT           "Bad Capabilities",IDC_STATIC,20,17,51,8
     LISTBOX         IDC_lstBadCapabilities,19,27,140,98,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_dlgPDFOptions DIALOGEX 0, 0, 453, 190
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PDF Options"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_edPDFTitle,77,20,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edPDFSubject,77,35,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edPDFAuthor,77,50,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edPDFCreator,77,64,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edPDFKeywords,77,93,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edUserPassword,77,111,348,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_edOwnerPassword,77,126,348,14,ES_AUTOHSCROLL
+    CONTROL         "Stamp Page Numbers",IDC_chkStampPageNumbers,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,149,93,10
+    DEFPUSHBUTTON   "OK",IDOK,160,169,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,241,169,50,14
+    LTEXT           "Subject:",IDC_STATIC,19,36,28,8
+    LTEXT           "Title:",IDC_STATIC,19,22,17,8
+    LTEXT           "Author:",IDC_STATIC,19,51,26,8
+    LTEXT           "Creator:",IDC_STATIC,19,65,28,8
+    EDITTEXT        IDC_edPDFProducer,77,79,348,14,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Producer:",IDC_txtProducer,20,80,32,8
+    LTEXT           "Keywords:",IDC_STATIC,20,94,35,8
+    LTEXT           "User Password:",IDC_txtUserPassword,20,112,51,8
+    LTEXT           "Owner Password:",IDC_txtOwnerPassword,19,127,58,8
 END
 
 /////////////////////////////////////////////////////////////////////////////

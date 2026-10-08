@@ -483,6 +483,7 @@ module TwainAPI =
     let public DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
     let public DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
     let public DTWAIN_TN_DEVICEEVENT = 1100
+    let public DTWAIN_TN_DEVICEEVENTFAILED = 1101
     let public DTWAIN_TN_TWAINPAGECANCELLED = 1105
     let public DTWAIN_TN_TWAINPAGEFAILED = 1106
     let public DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -525,6 +526,7 @@ module TwainAPI =
     let public DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307
     let public DTWAIN_TN_QUERYUPDATEDIBORIG = 1308
     let public DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309
+    let public DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310
     let public DTWAIN_PDFOCR_CLEANTEXT1 = 1
     let public DTWAIN_PDFOCR_CLEANTEXT2 = 2
     let public DTWAIN_MODAL = 0
@@ -778,6 +780,21 @@ module TwainAPI =
     let public DTWAIN_LANGSWEDISH = 12
     let public DTWAIN_LANGUSAENGLISH = 13
     let public DTWAIN_NO_ERROR = (0)
+    let public DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501)
+    let public DTWAIN_ERR_ALLOCATION_FAILURE = (-502)
+    let public DTWAIN_ERR_INVALID_DLLHANDLE = (-503)
+    let public DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504)
+    let public DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505)
+    let public DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506)
+    let public DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507)
+    let public DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508)
+    let public DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509)
+    let public DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510)
+    let public DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511)
+    let public DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512)
+    let public DTWAIN_ERR_XYRESOLUTION_MATCH = (-527)
+    let public DTWAIN_ERR_INVALID_FILENAME = (-528)
+    let public DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532)
     let public DTWAIN_ERR_FIRST = (-1000)
     let public DTWAIN_ERR_BAD_HANDLE = (-1001)
     let public DTWAIN_ERR_BAD_SOURCE = (-1002)
@@ -870,6 +887,8 @@ module TwainAPI =
     let public DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089)
     let public DTWAIN_ERR_DTWAINDLL_VERSION = (-1090)
     let public DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091)
+    let public DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092)
+    let public DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093)
     let public TWAIN_ERR_LOW_MEMORY = (-1100)
     let public TWAIN_ERR_FALSE_ALARM = (-1101)
     let public TWAIN_ERR_BUMMER = (-1102)
@@ -1335,6 +1354,7 @@ module TwainAPI =
     let public DTWAIN_TWAINDSM_LEGACY = 1
     let public DTWAIN_TWAINDSM_VERSION2 = 2
     let public DTWAIN_TWAINDSM_LATESTVERSION = 4
+    let public DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
     let public DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1)
     let public DTWAIN_TWAINDSMSEARCH_WSO = 0
     let public DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -1637,6 +1657,7 @@ module TwainAPI =
     let public DTWAIN_PDFTEXT_LASTPAGE = 0x00000010
     let public DTWAIN_PDFTEXT_CURRENTPAGE = 0x00000020
     let public DTWAIN_PDFTEXT_DISABLED = 0x00000040
+    let public DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x00000080
     let public DTWAIN_PDFTEXT_TOPLEFT = 0x00000100
     let public DTWAIN_PDFTEXT_TOPRIGHT = 0x00000200
     let public DTWAIN_PDFTEXT_HORIZCENTER = 0x00000400
@@ -1901,20 +1922,11 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_AcquireToClipboardDelegate = delegate of DTWAIN_SOURCE * LONG * LONG * LONG * DTWAIN_BOOL * DTWAIN_BOOL * DTWAIN_BOOL * int byref -> DTWAIN_ARRAY
 
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_AddExtImageInfoQueryDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_AddFileToAppendDelegate = delegate of string -> DTWAIN_BOOL
-
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_AddPDFTextDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DWORD -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_AddPDFTextElementDelegate = delegate of DTWAIN_SOURCE * DTWAIN_PDFTEXTELEMENT -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_AddPDFTextExDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * DTWAIN_FLOAT * LONG * LONG * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * DTWAIN_FLOAT * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_AddPDFTextStringDelegate = delegate of DTWAIN_SOURCE * string * LONG * LONG * string * string * LONG * LONG * string * string * string * string * DWORD -> DTWAIN_BOOL
@@ -2161,9 +2173,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayGetTypeDelegate = delegate of DTWAIN_ARRAY -> LONG
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_ArrayInitDelegate = delegate of unit -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_ArrayInsertAtDelegate = delegate of DTWAIN_ARRAY * LONG * LPVOID -> DTWAIN_BOOL
@@ -3006,6 +3015,9 @@ module TwainAPI =
     type DTWAIN_GetCurrentAcquiredImageDelegate = delegate of DTWAIN_SOURCE -> HANDLE
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_GetCurrentCustomResourceNameDelegate = delegate of System.Text.StringBuilder * LONG -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetCurrentFileNameDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3078,9 +3090,6 @@ module TwainAPI =
     type DTWAIN_GetExtCapFromNameDelegate = delegate of string -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetExtImageInfoDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetExtImageInfoDataDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_ARRAY byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3135,6 +3144,9 @@ module TwainAPI =
     type DTWAIN_GetImageInfoStringDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder * System.Text.StringBuilder * int byref * int byref * int byref * DTWAIN_ARRAY byref * int byref * int byref * int byref * int byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetImageLayoutInfoDelegate = delegate of DTWAIN_SOURCE * LONG * int byref * int byref * int byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetJobControlDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3150,7 +3162,13 @@ module TwainAPI =
     type DTWAIN_GetLanguageDelegate = delegate of unit -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetLastCapEnumIndicesDelegate = delegate of DTWAIN_SOURCE * int byref * int byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetLastErrorDelegate = delegate of unit -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetLastTwainErrorDelegate = delegate of DWORD byref * DWORD byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetLibraryPathDelegate = delegate of System.Text.StringBuilder * LONG -> LONG
@@ -3291,6 +3309,9 @@ module TwainAPI =
     type DTWAIN_GetPatchcodeTimeOutDelegate = delegate of DTWAIN_SOURCE * DWORD byref * DTWAIN_BOOL -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetPendingXferCountDelegate = delegate of DTWAIN_SOURCE -> LONG
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetPixelFlavorDelegate = delegate of DTWAIN_SOURCE * int byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -3350,6 +3371,9 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetSaveFileNameDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder * LONG -> LONG
 
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_GetSaveFileTypeDelegate = delegate of DTWAIN_SOURCE -> LONG
+
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetSessionDetailsDelegate = delegate of System.Text.StringBuilder * LONG * LONG * BOOL -> LONG
 
@@ -3395,9 +3419,6 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetSourceVersionNumberDelegate = delegate of DTWAIN_SOURCE * int byref * int byref -> DTWAIN_BOOL
 
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetStaticLibVersionDelegate = delegate of unit -> LONG
-
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetTempFileDirectoryDelegate = delegate of System.Text.StringBuilder * LONG -> LONG
 
@@ -3435,9 +3456,6 @@ module TwainAPI =
     type DTWAIN_GetTwainNameFromConstantExDelegate = delegate of LONG * LONG * System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_GetTwainTimeoutDelegate = delegate of unit -> LONG
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetVersionDelegate = delegate of int byref * int byref * int byref -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
@@ -3472,9 +3490,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_InitExtImageInfoDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_InitImageFileAppendDelegate = delegate of string * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_InitOCRInterfaceDelegate = delegate of unit -> DTWAIN_BOOL
@@ -4338,9 +4353,6 @@ module TwainAPI =
     type DTWAIN_SetPrinterSuffixStringDelegate = delegate of DTWAIN_SOURCE * string -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetQueryCapSupportDelegate = delegate of DTWAIN_BOOL -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetResolutionDelegate = delegate of DTWAIN_SOURCE * DTWAIN_FLOAT -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
@@ -4357,6 +4369,9 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_SetSaveFileNameDelegate = delegate of DTWAIN_SOURCE * string -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_SetSaveFileTypeDelegate = delegate of DTWAIN_SOURCE * LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetShadowDelegate = delegate of DTWAIN_SOURCE * DTWAIN_FLOAT -> DTWAIN_BOOL
@@ -4395,9 +4410,6 @@ module TwainAPI =
     type DTWAIN_SetTwainModeDelegate = delegate of LONG -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
-    type DTWAIN_SetTwainTimeoutDelegate = delegate of LONG -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetXResolutionDelegate = delegate of DTWAIN_SOURCE * DTWAIN_FLOAT -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
@@ -4430,12 +4442,6 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SysInitializeDelegate = delegate of unit -> DTWAIN_HANDLE
 
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_SysInitializeExDelegate = delegate of string -> DTWAIN_HANDLE
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_SysInitializeEx2Delegate = delegate of string * string * string -> DTWAIN_HANDLE
-
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SysInitializeNoBlockingDelegate = delegate of unit -> DTWAIN_HANDLE
 
@@ -4466,11 +4472,8 @@ module TwainAPI =
     let private AcquireNative = lazy (DynamicDll.Bind "DTWAIN_AcquireNative" : DTWAIN_AcquireNativeDelegate)
     let private AcquireNativeEx = lazy (DynamicDll.Bind "DTWAIN_AcquireNativeEx" : DTWAIN_AcquireNativeExDelegate)
     let private AcquireToClipboard = lazy (DynamicDll.Bind "DTWAIN_AcquireToClipboard" : DTWAIN_AcquireToClipboardDelegate)
-    let private AddExtImageInfoQuery = lazy (DynamicDll.Bind "DTWAIN_AddExtImageInfoQuery" : DTWAIN_AddExtImageInfoQueryDelegate)
-    let private AddFileToAppend = lazy (DynamicDll.Bind "DTWAIN_AddFileToAppend" : DTWAIN_AddFileToAppendDelegate)
     let private AddPDFText = lazy (DynamicDll.Bind "DTWAIN_AddPDFText" : DTWAIN_AddPDFTextDelegate)
     let private AddPDFTextElement = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextElement" : DTWAIN_AddPDFTextElementDelegate)
-    let private AddPDFTextEx = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextEx" : DTWAIN_AddPDFTextExDelegate)
     let private AddPDFTextString = lazy (DynamicDll.Bind "DTWAIN_AddPDFTextString" : DTWAIN_AddPDFTextStringDelegate)
     let private AllocateMemory = lazy (DynamicDll.Bind "DTWAIN_AllocateMemory" : DTWAIN_AllocateMemoryDelegate)
     let private AllocateMemory64 = lazy (DynamicDll.Bind "DTWAIN_AllocateMemory64" : DTWAIN_AllocateMemory64Delegate)
@@ -4553,7 +4556,6 @@ module TwainAPI =
     let private ArrayGetSourceAt = lazy (DynamicDll.Bind "DTWAIN_ArrayGetSourceAt" : DTWAIN_ArrayGetSourceAtDelegate)
     let private ArrayGetStringLength = lazy (DynamicDll.Bind "DTWAIN_ArrayGetStringLength" : DTWAIN_ArrayGetStringLengthDelegate)
     let private ArrayGetType = lazy (DynamicDll.Bind "DTWAIN_ArrayGetType" : DTWAIN_ArrayGetTypeDelegate)
-    let private ArrayInit = lazy (DynamicDll.Bind "DTWAIN_ArrayInit" : DTWAIN_ArrayInitDelegate)
     let private ArrayInsertAt = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAt" : DTWAIN_ArrayInsertAtDelegate)
     let private ArrayInsertAtANSIString = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAtANSIString" : DTWAIN_ArrayInsertAtANSIStringDelegate)
     let private ArrayInsertAtANSIStringN = lazy (DynamicDll.Bind "DTWAIN_ArrayInsertAtANSIStringN" : DTWAIN_ArrayInsertAtANSIStringNDelegate)
@@ -4834,6 +4836,7 @@ module TwainAPI =
     let private GetContrastString = lazy (DynamicDll.Bind "DTWAIN_GetContrastString" : DTWAIN_GetContrastStringDelegate)
     let private GetCountry = lazy (DynamicDll.Bind "DTWAIN_GetCountry" : DTWAIN_GetCountryDelegate)
     let private GetCurrentAcquiredImage = lazy (DynamicDll.Bind "DTWAIN_GetCurrentAcquiredImage" : DTWAIN_GetCurrentAcquiredImageDelegate)
+    let private GetCurrentCustomResourceName = lazy (DynamicDll.Bind "DTWAIN_GetCurrentCustomResourceName" : DTWAIN_GetCurrentCustomResourceNameDelegate)
     let private GetCurrentFileName = lazy (DynamicDll.Bind "DTWAIN_GetCurrentFileName" : DTWAIN_GetCurrentFileNameDelegate)
     let private GetCurrentPageNum = lazy (DynamicDll.Bind "DTWAIN_GetCurrentPageNum" : DTWAIN_GetCurrentPageNumDelegate)
     let private GetCurrentRetryCount = lazy (DynamicDll.Bind "DTWAIN_GetCurrentRetryCount" : DTWAIN_GetCurrentRetryCountDelegate)
@@ -4858,7 +4861,6 @@ module TwainAPI =
     let private GetErrorCallback64 = lazy (DynamicDll.Bind "DTWAIN_GetErrorCallback64" : DTWAIN_GetErrorCallback64Delegate)
     let private GetErrorString = lazy (DynamicDll.Bind "DTWAIN_GetErrorString" : DTWAIN_GetErrorStringDelegate)
     let private GetExtCapFromName = lazy (DynamicDll.Bind "DTWAIN_GetExtCapFromName" : DTWAIN_GetExtCapFromNameDelegate)
-    let private GetExtImageInfo = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfo" : DTWAIN_GetExtImageInfoDelegate)
     let private GetExtImageInfoData = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoData" : DTWAIN_GetExtImageInfoDataDelegate)
     let private GetExtImageInfoDataEx = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoDataEx" : DTWAIN_GetExtImageInfoDataExDelegate)
     let private GetExtImageInfoItem = lazy (DynamicDll.Bind "DTWAIN_GetExtImageInfoItem" : DTWAIN_GetExtImageInfoItemDelegate)
@@ -4877,12 +4879,15 @@ module TwainAPI =
     let private GetHighlightString = lazy (DynamicDll.Bind "DTWAIN_GetHighlightString" : DTWAIN_GetHighlightStringDelegate)
     let private GetImageInfo = lazy (DynamicDll.Bind "DTWAIN_GetImageInfo" : DTWAIN_GetImageInfoDelegate)
     let private GetImageInfoString = lazy (DynamicDll.Bind "DTWAIN_GetImageInfoString" : DTWAIN_GetImageInfoStringDelegate)
+    let private GetImageLayoutInfo = lazy (DynamicDll.Bind "DTWAIN_GetImageLayoutInfo" : DTWAIN_GetImageLayoutInfoDelegate)
     let private GetJobControl = lazy (DynamicDll.Bind "DTWAIN_GetJobControl" : DTWAIN_GetJobControlDelegate)
     let private GetJobControlEx = lazy (DynamicDll.Bind "DTWAIN_GetJobControlEx" : DTWAIN_GetJobControlExDelegate)
     let private GetJpegValues = lazy (DynamicDll.Bind "DTWAIN_GetJpegValues" : DTWAIN_GetJpegValuesDelegate)
     let private GetJpegXRValues = lazy (DynamicDll.Bind "DTWAIN_GetJpegXRValues" : DTWAIN_GetJpegXRValuesDelegate)
     let private GetLanguage = lazy (DynamicDll.Bind "DTWAIN_GetLanguage" : DTWAIN_GetLanguageDelegate)
+    let private GetLastCapEnumIndices = lazy (DynamicDll.Bind "DTWAIN_GetLastCapEnumIndices" : DTWAIN_GetLastCapEnumIndicesDelegate)
     let private GetLastError = lazy (DynamicDll.Bind "DTWAIN_GetLastError" : DTWAIN_GetLastErrorDelegate)
+    let private GetLastTwainError = lazy (DynamicDll.Bind "DTWAIN_GetLastTwainError" : DTWAIN_GetLastTwainErrorDelegate)
     let private GetLibraryPath = lazy (DynamicDll.Bind "DTWAIN_GetLibraryPath" : DTWAIN_GetLibraryPathDelegate)
     let private GetLightPath = lazy (DynamicDll.Bind "DTWAIN_GetLightPath" : DTWAIN_GetLightPathDelegate)
     let private GetLightPathEx = lazy (DynamicDll.Bind "DTWAIN_GetLightPathEx" : DTWAIN_GetLightPathExDelegate)
@@ -4929,6 +4934,7 @@ module TwainAPI =
     let private GetPatchcodePriorities = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodePriorities" : DTWAIN_GetPatchcodePrioritiesDelegate)
     let private GetPatchcodeSearchMode = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeSearchMode" : DTWAIN_GetPatchcodeSearchModeDelegate)
     let private GetPatchcodeTimeOut = lazy (DynamicDll.Bind "DTWAIN_GetPatchcodeTimeOut" : DTWAIN_GetPatchcodeTimeOutDelegate)
+    let private GetPendingXferCount = lazy (DynamicDll.Bind "DTWAIN_GetPendingXferCount" : DTWAIN_GetPendingXferCountDelegate)
     let private GetPixelFlavor = lazy (DynamicDll.Bind "DTWAIN_GetPixelFlavor" : DTWAIN_GetPixelFlavorDelegate)
     let private GetPixelType = lazy (DynamicDll.Bind "DTWAIN_GetPixelType" : DTWAIN_GetPixelTypeDelegate)
     let private GetPrinter = lazy (DynamicDll.Bind "DTWAIN_GetPrinter" : DTWAIN_GetPrinterDelegate)
@@ -4949,6 +4955,7 @@ module TwainAPI =
     let private GetRotationEx = lazy (DynamicDll.Bind "DTWAIN_GetRotationEx" : DTWAIN_GetRotationExDelegate)
     let private GetRotationString = lazy (DynamicDll.Bind "DTWAIN_GetRotationString" : DTWAIN_GetRotationStringDelegate)
     let private GetSaveFileName = lazy (DynamicDll.Bind "DTWAIN_GetSaveFileName" : DTWAIN_GetSaveFileNameDelegate)
+    let private GetSaveFileType = lazy (DynamicDll.Bind "DTWAIN_GetSaveFileType" : DTWAIN_GetSaveFileTypeDelegate)
     let private GetSessionDetails = lazy (DynamicDll.Bind "DTWAIN_GetSessionDetails" : DTWAIN_GetSessionDetailsDelegate)
     let private GetShadow = lazy (DynamicDll.Bind "DTWAIN_GetShadow" : DTWAIN_GetShadowDelegate)
     let private GetShadowString = lazy (DynamicDll.Bind "DTWAIN_GetShadowString" : DTWAIN_GetShadowStringDelegate)
@@ -4964,7 +4971,6 @@ module TwainAPI =
     let private GetSourceUnitEx = lazy (DynamicDll.Bind "DTWAIN_GetSourceUnitEx" : DTWAIN_GetSourceUnitExDelegate)
     let private GetSourceVersionInfo = lazy (DynamicDll.Bind "DTWAIN_GetSourceVersionInfo" : DTWAIN_GetSourceVersionInfoDelegate)
     let private GetSourceVersionNumber = lazy (DynamicDll.Bind "DTWAIN_GetSourceVersionNumber" : DTWAIN_GetSourceVersionNumberDelegate)
-    let private GetStaticLibVersion = lazy (DynamicDll.Bind "DTWAIN_GetStaticLibVersion" : DTWAIN_GetStaticLibVersionDelegate)
     let private GetTempFileDirectory = lazy (DynamicDll.Bind "DTWAIN_GetTempFileDirectory" : DTWAIN_GetTempFileDirectoryDelegate)
     let private GetThreshold = lazy (DynamicDll.Bind "DTWAIN_GetThreshold" : DTWAIN_GetThresholdDelegate)
     let private GetThresholdString = lazy (DynamicDll.Bind "DTWAIN_GetThresholdString" : DTWAIN_GetThresholdStringDelegate)
@@ -4977,7 +4983,6 @@ module TwainAPI =
     let private GetTwainMode = lazy (DynamicDll.Bind "DTWAIN_GetTwainMode" : DTWAIN_GetTwainModeDelegate)
     let private GetTwainNameFromConstant = lazy (DynamicDll.Bind "DTWAIN_GetTwainNameFromConstant" : DTWAIN_GetTwainNameFromConstantDelegate)
     let private GetTwainNameFromConstantEx = lazy (DynamicDll.Bind "DTWAIN_GetTwainNameFromConstantEx" : DTWAIN_GetTwainNameFromConstantExDelegate)
-    let private GetTwainTimeout = lazy (DynamicDll.Bind "DTWAIN_GetTwainTimeout" : DTWAIN_GetTwainTimeoutDelegate)
     let private GetVersion = lazy (DynamicDll.Bind "DTWAIN_GetVersion" : DTWAIN_GetVersionDelegate)
     let private GetVersionCopyright = lazy (DynamicDll.Bind "DTWAIN_GetVersionCopyright" : DTWAIN_GetVersionCopyrightDelegate)
     let private GetVersionEx = lazy (DynamicDll.Bind "DTWAIN_GetVersionEx" : DTWAIN_GetVersionExDelegate)
@@ -4990,7 +4995,6 @@ module TwainAPI =
     let private GetYResolution = lazy (DynamicDll.Bind "DTWAIN_GetYResolution" : DTWAIN_GetYResolutionDelegate)
     let private GetYResolutionString = lazy (DynamicDll.Bind "DTWAIN_GetYResolutionString" : DTWAIN_GetYResolutionStringDelegate)
     let private InitExtImageInfo = lazy (DynamicDll.Bind "DTWAIN_InitExtImageInfo" : DTWAIN_InitExtImageInfoDelegate)
-    let private InitImageFileAppend = lazy (DynamicDll.Bind "DTWAIN_InitImageFileAppend" : DTWAIN_InitImageFileAppendDelegate)
     let private InitOCRInterface = lazy (DynamicDll.Bind "DTWAIN_InitOCRInterface" : DTWAIN_InitOCRInterfaceDelegate)
     let private IsAcquiring = lazy (DynamicDll.Bind "DTWAIN_IsAcquiring" : DTWAIN_IsAcquiringDelegate)
     let private IsAudioXferSupported = lazy (DynamicDll.Bind "DTWAIN_IsAudioXferSupported" : DTWAIN_IsAudioXferSupportedDelegate)
@@ -5278,13 +5282,13 @@ module TwainAPI =
     let private SetPrinterStringMode = lazy (DynamicDll.Bind "DTWAIN_SetPrinterStringMode" : DTWAIN_SetPrinterStringModeDelegate)
     let private SetPrinterStrings = lazy (DynamicDll.Bind "DTWAIN_SetPrinterStrings" : DTWAIN_SetPrinterStringsDelegate)
     let private SetPrinterSuffixString = lazy (DynamicDll.Bind "DTWAIN_SetPrinterSuffixString" : DTWAIN_SetPrinterSuffixStringDelegate)
-    let private SetQueryCapSupport = lazy (DynamicDll.Bind "DTWAIN_SetQueryCapSupport" : DTWAIN_SetQueryCapSupportDelegate)
     let private SetResolution = lazy (DynamicDll.Bind "DTWAIN_SetResolution" : DTWAIN_SetResolutionDelegate)
     let private SetResolutionString = lazy (DynamicDll.Bind "DTWAIN_SetResolutionString" : DTWAIN_SetResolutionStringDelegate)
     let private SetResourcePath = lazy (DynamicDll.Bind "DTWAIN_SetResourcePath" : DTWAIN_SetResourcePathDelegate)
     let private SetRotation = lazy (DynamicDll.Bind "DTWAIN_SetRotation" : DTWAIN_SetRotationDelegate)
     let private SetRotationString = lazy (DynamicDll.Bind "DTWAIN_SetRotationString" : DTWAIN_SetRotationStringDelegate)
     let private SetSaveFileName = lazy (DynamicDll.Bind "DTWAIN_SetSaveFileName" : DTWAIN_SetSaveFileNameDelegate)
+    let private SetSaveFileType = lazy (DynamicDll.Bind "DTWAIN_SetSaveFileType" : DTWAIN_SetSaveFileTypeDelegate)
     let private SetShadow = lazy (DynamicDll.Bind "DTWAIN_SetShadow" : DTWAIN_SetShadowDelegate)
     let private SetShadowString = lazy (DynamicDll.Bind "DTWAIN_SetShadowString" : DTWAIN_SetShadowStringDelegate)
     let private SetSourceUnit = lazy (DynamicDll.Bind "DTWAIN_SetSourceUnit" : DTWAIN_SetSourceUnitDelegate)
@@ -5297,7 +5301,6 @@ module TwainAPI =
     let private SetTwainDSM = lazy (DynamicDll.Bind "DTWAIN_SetTwainDSM" : DTWAIN_SetTwainDSMDelegate)
     let private SetTwainLog = lazy (DynamicDll.Bind "DTWAIN_SetTwainLog" : DTWAIN_SetTwainLogDelegate)
     let private SetTwainMode = lazy (DynamicDll.Bind "DTWAIN_SetTwainMode" : DTWAIN_SetTwainModeDelegate)
-    let private SetTwainTimeout = lazy (DynamicDll.Bind "DTWAIN_SetTwainTimeout" : DTWAIN_SetTwainTimeoutDelegate)
     let private SetXResolution = lazy (DynamicDll.Bind "DTWAIN_SetXResolution" : DTWAIN_SetXResolutionDelegate)
     let private SetXResolutionString = lazy (DynamicDll.Bind "DTWAIN_SetXResolutionString" : DTWAIN_SetXResolutionStringDelegate)
     let private SetYResolution = lazy (DynamicDll.Bind "DTWAIN_SetYResolution" : DTWAIN_SetYResolutionDelegate)
@@ -5309,8 +5312,6 @@ module TwainAPI =
     let private StartTwainSession = lazy (DynamicDll.Bind "DTWAIN_StartTwainSession" : DTWAIN_StartTwainSessionDelegate)
     let private SysDestroy = lazy (DynamicDll.Bind "DTWAIN_SysDestroy" : DTWAIN_SysDestroyDelegate)
     let private SysInitialize = lazy (DynamicDll.Bind "DTWAIN_SysInitialize" : DTWAIN_SysInitializeDelegate)
-    let private SysInitializeEx = lazy (DynamicDll.Bind "DTWAIN_SysInitializeEx" : DTWAIN_SysInitializeExDelegate)
-    let private SysInitializeEx2 = lazy (DynamicDll.Bind "DTWAIN_SysInitializeEx2" : DTWAIN_SysInitializeEx2Delegate)
     let private SysInitializeNoBlocking = lazy (DynamicDll.Bind "DTWAIN_SysInitializeNoBlocking" : DTWAIN_SysInitializeNoBlockingDelegate)
     let private SysInitializeNoBlockingEx = lazy (DynamicDll.Bind "DTWAIN_SysInitializeNoBlockingEx" : DTWAIN_SysInitializeNoBlockingExDelegate)
     let private TestGetCap = lazy (DynamicDll.Bind "DTWAIN_TestGetCap" : DTWAIN_TestGetCapDelegate)
@@ -5378,14 +5379,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AcquireToClipboard.Value.Invoke(source, pixeltype, nmaxpages, ntransfermode, bdiscarddibs, bshowui, bclosesource, &pstatus)
 
-    let DTWAIN_AddExtImageInfoQuery (source: DTWAIN_SOURCE) (extimageinfo: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        AddExtImageInfoQuery.Value.Invoke(source, extimageinfo)
-
-    let DTWAIN_AddFileToAppend (szfile: string) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        AddFileToAppend.Value.Invoke(szfile)
-
     let DTWAIN_AddPDFText (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: DTWAIN_FLOAT) (flags: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddPDFText.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, flags)
@@ -5393,10 +5386,6 @@ module TwainAPI =
     let DTWAIN_AddPDFTextElement (source: DTWAIN_SOURCE) (textelement: DTWAIN_PDFTEXTELEMENT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         AddPDFTextElement.Value.Invoke(source, textelement)
-
-    let DTWAIN_AddPDFTextEx (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: DTWAIN_FLOAT) (colorrgb: LONG) (rendermode: LONG) (scaling: DTWAIN_FLOAT) (charspacing: DTWAIN_FLOAT) (wordspacing: DTWAIN_FLOAT) (strokewidth: DTWAIN_FLOAT) (rotationangle: DTWAIN_FLOAT) (skewanglex: DTWAIN_FLOAT) (skewangley: DTWAIN_FLOAT) (scalingx: DTWAIN_FLOAT) (scalingy: DTWAIN_FLOAT) (transformtype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        AddPDFTextEx.Value.Invoke(source, sztext, xpos, ypos, fontname, fontsize, colorrgb, rendermode, scaling, charspacing, wordspacing, strokewidth, rotationangle, skewanglex, skewangley, scalingx, scalingy, transformtype)
 
     let DTWAIN_AddPDFTextString (source: DTWAIN_SOURCE) (sztext: string) (xpos: LONG) (ypos: LONG) (fontname: string) (fontsize: string) (colorrgb: LONG) (rendermode: LONG) (scaling: string) (charspacing: string) (wordspacing: string) (strokewidth: string) (flags: DWORD) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -5725,10 +5714,6 @@ module TwainAPI =
     let DTWAIN_ArrayGetType (parray: DTWAIN_ARRAY) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ArrayGetType.Value.Invoke(parray)
-
-    let DTWAIN_ArrayInit() : DTWAIN_ARRAY =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        ArrayInit.Value.Invoke()
 
     let DTWAIN_ArrayInsertAt (parray: DTWAIN_ARRAY) (nwhere: LONG) (pvariant: LPVOID) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -6850,6 +6835,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetCurrentAcquiredImage.Value.Invoke(source)
 
+    let DTWAIN_GetCurrentCustomResourceName (lpszout: System.Text.StringBuilder) (nmaxlen: LONG) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetCurrentCustomResourceName.Value.Invoke(lpszout, nmaxlen)
+
     let DTWAIN_GetCurrentFileName (source: DTWAIN_SOURCE) (szname: System.Text.StringBuilder) (maxlen: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetCurrentFileName.Value.Invoke(source, szname, maxlen)
@@ -6946,10 +6935,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetExtCapFromName.Value.Invoke(szname)
 
-    let DTWAIN_GetExtImageInfo (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetExtImageInfo.Value.Invoke(source)
-
     let DTWAIN_GetExtImageInfoData (source: DTWAIN_SOURCE) (nwhich: LONG) (data: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetExtImageInfoData.Value.Invoke(source, nwhich, &data)
@@ -7022,6 +7007,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetImageInfoString.Value.Invoke(source, lpxresolution, lpyresolution, &lpwidth, &lplength, &lpnumsamples, &lpbitspersample, &lpbitsperpixel, &lpplanar, &lppixeltype, &lpcompression)
 
+    let DTWAIN_GetImageLayoutInfo (source: DTWAIN_SOURCE) (lgettype: LONG) (documentnumber: int byref) (pagenumber: int byref) (framenumber: int byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetImageLayoutInfo.Value.Invoke(source, lgettype, &documentnumber, &pagenumber, &framenumber)
+
     let DTWAIN_GetJobControl (source: DTWAIN_SOURCE) (pjobcontrol: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetJobControl.Value.Invoke(source, &pjobcontrol, bcurrent)
@@ -7042,9 +7031,17 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetLanguage.Value.Invoke()
 
+    let DTWAIN_GetLastCapEnumIndices (source: DTWAIN_SOURCE) (pcurrentindex: int byref) (pdefaultindex: int byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetLastCapEnumIndices.Value.Invoke(source, &pcurrentindex, &pdefaultindex)
+
     let DTWAIN_GetLastError() : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetLastError.Value.Invoke()
+
+    let DTWAIN_GetLastTwainError (rcerror: DWORD byref) (ccerror: DWORD byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetLastTwainError.Value.Invoke(&rcerror, &ccerror)
 
     let DTWAIN_GetLibraryPath (lpszver: System.Text.StringBuilder) (nlength: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7230,6 +7227,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPatchcodeTimeOut.Value.Invoke(source, &ptimeout, bcurrent)
 
+    let DTWAIN_GetPendingXferCount (source: DTWAIN_SOURCE) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetPendingXferCount.Value.Invoke(source)
+
     let DTWAIN_GetPixelFlavor (source: DTWAIN_SOURCE) (lppixelflavor: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetPixelFlavor.Value.Invoke(source, &lppixelflavor)
@@ -7310,6 +7311,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetSaveFileName.Value.Invoke(source, fname, nmaxlen)
 
+    let DTWAIN_GetSaveFileType (source: DTWAIN_SOURCE) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetSaveFileType.Value.Invoke(source)
+
     let DTWAIN_GetSessionDetails (szbuf: System.Text.StringBuilder) (nsize: LONG) (indentfactor: LONG) (brefresh: BOOL) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetSessionDetails.Value.Invoke(szbuf, nsize, indentfactor, brefresh)
@@ -7370,10 +7375,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetSourceVersionNumber.Value.Invoke(source, &pmajor, &pminor)
 
-    let DTWAIN_GetStaticLibVersion() : LONG =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetStaticLibVersion.Value.Invoke()
-
     let DTWAIN_GetTempFileDirectory (szfilepath: System.Text.StringBuilder) (nmaxlen: LONG) : LONG =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetTempFileDirectory.Value.Invoke(szfilepath, nmaxlen)
@@ -7422,10 +7423,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetTwainNameFromConstantEx.Value.Invoke(lconstanttype, ltwainconstant, lpszout, nsize)
 
-    let DTWAIN_GetTwainTimeout() : LONG =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetTwainTimeout.Value.Invoke()
-
     let DTWAIN_GetVersion (lpmajor: int byref) (lpminor: int byref) (lpversiontype: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetVersion.Value.Invoke(&lpmajor, &lpminor, &lpversiontype)
@@ -7473,10 +7470,6 @@ module TwainAPI =
     let DTWAIN_InitExtImageInfo (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         InitExtImageInfo.Value.Invoke(source)
-
-    let DTWAIN_InitImageFileAppend (szfile: string) (ftype: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        InitImageFileAppend.Value.Invoke(szfile, ftype)
 
     let DTWAIN_InitOCRInterface() : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -8626,10 +8619,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetPrinterSuffixString.Value.Invoke(source, suffix)
 
-    let DTWAIN_SetQueryCapSupport (bset: DTWAIN_BOOL) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetQueryCapSupport.Value.Invoke(bset)
-
     let DTWAIN_SetResolution (source: DTWAIN_SOURCE) (resolution: DTWAIN_FLOAT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetResolution.Value.Invoke(source, resolution)
@@ -8653,6 +8642,10 @@ module TwainAPI =
     let DTWAIN_SetSaveFileName (source: DTWAIN_SOURCE) (fname: string) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetSaveFileName.Value.Invoke(source, fname)
+
+    let DTWAIN_SetSaveFileType (source: DTWAIN_SOURCE) (filetype: LONG) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetSaveFileType.Value.Invoke(source, filetype)
 
     let DTWAIN_SetShadow (source: DTWAIN_SOURCE) (shadow: DTWAIN_FLOAT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -8702,10 +8695,6 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetTwainMode.Value.Invoke(lacquiremode)
 
-    let DTWAIN_SetTwainTimeout (milliseconds: LONG) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetTwainTimeout.Value.Invoke(milliseconds)
-
     let DTWAIN_SetXResolution (source: DTWAIN_SOURCE) (xresolution: DTWAIN_FLOAT) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetXResolution.Value.Invoke(source, xresolution)
@@ -8749,14 +8738,6 @@ module TwainAPI =
     let DTWAIN_SysInitialize() : DTWAIN_HANDLE =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SysInitialize.Value.Invoke()
-
-    let DTWAIN_SysInitializeEx (szinipath: string) : DTWAIN_HANDLE =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SysInitializeEx.Value.Invoke(szinipath)
-
-    let DTWAIN_SysInitializeEx2 (szinipath: string) (szimagedllpath: string) (szlangresourcepath: string) : DTWAIN_HANDLE =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SysInitializeEx2.Value.Invoke(szinipath, szimagedllpath, szlangresourcepath)
 
     let DTWAIN_SysInitializeNoBlocking() : DTWAIN_HANDLE =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

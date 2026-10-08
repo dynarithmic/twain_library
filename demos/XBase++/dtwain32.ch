@@ -320,6 +320,7 @@
 /* DTWAIN Special Failure codes */
 #define DTWAIN_FAILURE1       (-1)
 #define DTWAIN_FAILURE2       (-2)
+#define DTWAIN_FAILURE3       0xFFFFFFFFU
 
 /* Other miscellaneous constants */
 #define DTWAIN_DELETEALL      (-1)
@@ -465,6 +466,7 @@
 
 /* Device event for TWAIN 1.8 Sources */
 #define  DTWAIN_TN_DEVICEEVENT                    1100
+#define  DTWAIN_TN_DEVICEEVENTFAILED              1101
 
 /* Sent if TWAIN driver sends cancel code during acquisition */
 #define DTWAIN_TN_TWAINPAGECANCELLED       1105
@@ -829,6 +831,22 @@
 
 /* Error codes (returned by DTWAIN_GetLastError() */
 #define DTWAIN_NO_ERROR               (0)
+#define DTWAIN_ERR_NULL_WINDOW_HANDLE     (-501)
+#define DTWAIN_ERR_ALLOCATION_FAILURE     (-502)
+#define DTWAIN_ERR_INVALID_DLLHANDLE      (-503)
+#define DTWAIN_ERR_INVALID_SOURCE_HANDLE  (-504)
+#define DTWAIN_ERR_TWAINDSM_NOT_FOUND     (-505)
+#define DTWAIN_ERR_INVALID_TWAINDSM_DLL   (-506)
+#define DTWAIN_ERR_INVALID_SESSION_HANDLE (-507)
+#define DTWAIN_ERR_INVALID_TWAIN_MANAGER  (-508)
+#define DTWAIN_ERR_TWAINDSM_LOAD_ERROR    (-509)
+#define DTWAIN_ERR_SOURCE_OPEN_ERROR      (-510)
+#define DTWAIN_ERR_SOURCE_CLOSE_ERROR     (-511)
+#define DTWAIN_ERR_SOURCE_REQUIRED_OPEN   (-512)
+#define DTWAIN_ERR_XYRESOLUTION_MATCH     (-527)
+#define DTWAIN_ERR_INVALID_FILENAME       (-528)
+#define DTWAIN_ERR_TRIPLET_NOTEXECUTED    (-532)
+
 #define DTWAIN_ERR_FIRST              (-1000)
 #define DTWAIN_ERR_BAD_HANDLE         (-1001)
 #define DTWAIN_ERR_BAD_SOURCE         (-1002)
@@ -918,8 +936,11 @@
 #define DTWAIN_ERR_RANGE_STEPISZERO       (-1086)
 #define DTWAIN_ERR_BLANKNAMEDETECTED   (-1087)
 #define DTWAIN_ERR_FEEDER_NOPAPERSENSOR   (-1088)
-
-#define DTWAIN_ERR_LAST_1           DTWAIN_ERR_FEEDER_NOPAPERSENSOR
+#define DTWAIN_ERR_DTWAINDLL_LOADERROR (-1089)
+#define DTWAIN_ERR_DTWAINDLL_VERSION   (-1090)
+#define DTWAIN_ERR_ACTIVE_TWAINSESSION (-1091)
+#define DTWAIN_ERR_DSMVERSION_NOTSUPPORTED (-1092)
+#define DTWAIN_ERR_TWENUMERATOR_NOTUSED (-1093)
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1585,6 +1606,15 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWDF_BYLENGTH            1
 #define DTWAIN_TWDF_INFRARED            2
 
+/* ICAP_AUTOSIZE */
+#define DTWAIN_TWAS_NONE                0  
+#define DTWAIN_TWAS_AUTO                1
+#define DTWAIN_TWAS_CURRENT             2
+
+/* ICAP_FLIPROTATION */
+#define DTWAIN_TWFR_BOOK                0
+#define DTWAIN_TWFR_FANFOLD             1
+
 /* DTWAIN Twain name lookup constants */
 #define DTWAIN_CONSTANT_TWPT     0
 #define DTWAIN_CONSTANT_TWUN     1
@@ -1684,5 +1714,14 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_FEEDER_TERMINATE 1
 #define DTWAIN_FEEDER_USEFLATBED 2
 
+/* DTWAIN Check DLL version constants */
+#define DTWAIN_CHECKDLLVERLESS 0
+#define DTWAIN_CHECKDLLVEREQUAL 1
+#define DTWAIN_CHECKDLLVERGREATER 2
+#define DTWAIN_CHECKDLLVERLESSEQ 3
+#define DTWAIN_CHECKDLLVERGREATEREQ 4
+
+/* DTWAIN Copyright string resource constant */
+#define DTWAIN_RESOURCE_COPYRIGHT  9700
 #endif
 

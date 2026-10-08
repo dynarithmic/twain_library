@@ -81,8 +81,15 @@
         #if _MSC_VER < 1920
             #error("Visual C++ compiler must be Visual Studio 2019 or greater to build DTWAIN")
         #endif
-        #if (__cplusplus < 201703L)
-            #error("Visual C++ Compiler must use C++17 standard or greaater to build DTWAIN")
+
+        #if (_MSVC_LANG < 201703L)
+            #error("Visual C++ Compiler must use C++17 standard or greater to build DTWAIN")
+        #endif
+
+        #if (_MSVC_LANG >= 202002L)
+            #pragma message("DTWAIN: Compiling using C++20")
+        #elif (_MSVC_LANG >= 201703L)
+            #pragma message("DTWAIN: Compiling using C++17")
         #endif
     #endif
 #endif

@@ -33,6 +33,7 @@
 #define DTWAIN_PDFTEXT_LASTPAGE       0x00000010
 #define DTWAIN_PDFTEXT_CURRENTPAGE    0x00000020
 #define DTWAIN_PDFTEXT_DISABLED       0x00000040  // text is ignored
+#define DTWAIN_PDFTEXT_COPYTEXTELEMENT 0x00000080
 
 /* Where to print the text (overrides absolute coordinates) */
 #define DTWAIN_PDFTEXT_TOPLEFT        0x00000100

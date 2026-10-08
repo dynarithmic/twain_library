@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.9.4** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.10.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -75,14 +75,11 @@ There are sample virtual TWAIN devices [found here](https://github.com/dynarithm
 ### How do I setup DTWAIN (library setup, building the application, and running the application)? ###
 ----
 
-Basically, all that is required to initially set up DTWAIN is to ensure that the proper DTWAIN DLL's are located where the Windows operating system will find them (usually in a directory specified on the system **PATH**), and that various [mandatory text files](https://github.com/dynarithmic/twain_library/tree/master/text_resources) are also present.  
-
-All of this will be discussed in detail below.
+Basically, all that is required to initially set up DTWAIN is to ensure that the proper DTWAIN DLL's are located where the Windows operating system will find them (usually in a directory specified on the system **PATH**).
 
 ----
 
 **<u>Building the DTWAIN application:</u>**
-
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
@@ -171,27 +168,13 @@ There are other places that DLL's can be placed so as to be recognized by the ap
 
 [https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order](https://docs.microsoft.com/en-us/windows/desktop/dlls/dynamic-link-library-search-order).
 
-In addition to the DLL files, the <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources/twaininfo.txt" target="_blank">text resource file</a>, the <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain32.ini" target="_blank">dtwain32.ini</a> for 32-bit applications, and <a href="https://github.com/dynarithmic/twain_library/blob/master/text_resources/dtwain64.ini" target="_blank">dtwain64.ini</a> for 64-bit applications </a> must also be available (by default, these files should reside in the same directory as the DLL files above, however as of version **5.2.0.2**, these files can reside in the directory specified by **DTWAIN_SetResourcePath**).  
+The main entry point function to the DTWAIN library is **DTWAIN_SysInitialize** (see examples below).  The application must call this function to setup the resources and other definitions required for the other DTWAIN API functions to operate correctly.
 
-If **twaininfo.txt** or the INI files are not found, corrupted, incorrect version, or some other issue that prevents these files from being loaded, you will receive the following message box displayed, with one or more reasons for the error listed:
-
-![following error when running your application](/images/resource_error.jpg)
-
-The error message will differ depending on the reason for the error.
-
-Note: If your application wants to suppress the above message box, but still receive an error return code, your application should issue a call to the API function **DTWAIN_SysInitializeNoBlocking** instead of **DTWAIN_SysInitialize** (see the examples below -- simply change **DTWAIN_SysInitialize** to **DTWAIN_SysInitializeNoBlocking**).  
-
-* Make sure that you are running the latest version of **twaininfo.txt**, as changes to this file can affect how your application will run when using future versions of DTWAIN.  The simplest way to ensure that you are running the latest version is to always get the latest **twaininfo.txt** file whenever you use a newer release of the DTWAIN DLL's.  
-
-An internal check for the resource version is done by DTWAIN.  If DTWAIN detects that the resources are corrupted or out-of-date, **DTWAIN_SysInitialize** will return a NULL handle indicating an error.  
-
-If **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
+If **DTWAIN_SysInitialize** returns a 0 or null handle, you should call **DTWAIN_GetLastError** to get the error value.  In addition, you can call **DTWAIN_GetErrorString** with the error number to get a string description of the error.
 
 ----
 
-In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.
-
-These files should be placed in the same directory as the **twaininfo.txt** file and INI files.
+In addition, there are [optional string resource files available](https://github.com/dynarithmic/twain_library/tree/master-staging/additional_language_resources).  These files allow you to customize the language used when DTWAIN logs or reports errors.  Note that these files are loaded only after **DTWAIN_SysInitialize** or **DTWAIN_SysInitializeNoBlocking** returns without error.  These files should be placed in the same directory as the DTWAIN DLL's.
 
 If you want to use a different resource file or even add your own language resource, it is recommended you copy the file in question, rename the file, make the changes required, and then utilize the new file by calling the **DTWAIN_LoadCustomStringResources** API function.  
 
@@ -206,7 +189,6 @@ More detailed instructions on adding your own resource file can be found <a href
 
 The simplest example is probably one that opens the TWAIN "Select Source" dialog, allows the user to choose the TWAIN device.  Once chosen, the device acquires an image and saves the image as a BMP file named "Test.bmp".  Here is an entire C++ example that demonstrates this:
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()
@@ -230,7 +212,6 @@ The program above displays the default "Select Source" dialog when choosing a So
 
 However, you can customize the "Select Source" dialog box by utilizing the dialog box resource defined in the DTWAIN DLL, and then utilize the `DTWAIN_SelectSource2()` function:
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()
@@ -255,7 +236,6 @@ In addition to selecting a Source by using the "Select Source" dialog box, you c
 
 This effectively selects the TWAIN Source without the dialog box appearing.  The function to use would be `DTWAIN_SelectSourceByName` instead of `DTWAIN_SelectSource` or `DTWAIN_SelectSource2`
 
-    #include <iostream>
     #include "dtwain.h"
 
     int main()

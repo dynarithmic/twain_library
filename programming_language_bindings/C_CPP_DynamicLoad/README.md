@@ -35,8 +35,12 @@ int main()
         if ( !h )
             return -1; /* DTWAIN DLL was not found or could not be loaded */
             
-        /* This is the binding function that retrieves all of the function pointers */    
-        API_INSTANCE InitDTWAINInterface(&API, h);
+        /* This is the binding function that retrieves all of the function pointers */
+        #ifdef __cplusplus
+        API_INSTANCE InitDTWAINInterface(&API, h);  /* For C++ usage */
+        #else
+        InitDTWAINInterface(&API, h);  /* For C language usage */
+        #endif
     #endif
     
     API_INSTANCE DTWAIN_SysInitialize();

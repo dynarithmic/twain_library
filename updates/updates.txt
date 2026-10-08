@@ -1,5 +1,94 @@
 DTWAIN Version changes
 
+5.10.0
+
+- The main twain resource files, twaininfo.txt, dtwain32.ini, and dtwain64.ini are now
+  embedded into the DTWAIN DLL files.  This will remove the mandatory prerequisite that these
+  resource files are available when DTWAIN_SysInitialize() is called.  
+
+  For most DTWAIN users, the only difference would be that the twaininfo.txt, dtwain32.ini, 
+  and dtwain64.ini as external files are no longer necessary for DTWAIN_SysInitialize() to 
+  correctly initialize DTWAIN.
+
+  If there already is an existing dtwain32.ini or dtwain64.ini file that has been customized, the 
+  external settings in these INI files are merged into the default, embedded INI settings when
+  DTWAIN_SysInitialize() is called.
+
+  Note that the foreign language resources, for example, twainresourcestrings_french.txt, will still be 
+  required to be external files.
+
+- The DTWAIN_SetDefaultSource() function will now issue an error code of DTWAIN_ERR_DSMVERSION_NOTSUPPORTED (-1019)
+  and return FALSE if this function is called on a TWAIN DSM version that is less than 2.x (in other words, 
+  if TWAIN_32.DLL is the current TWAIN Data Source Manager in use).  
+
+  The TWAIN specification does not allow setting the default TWAIN Source for DSM versions less than 2.x, thus 
+  issuing this call will result in an error.
+
+- The DTWAIN_GetDeviceEvent() and DTWAIN_GetDeviceEventEx() functions will now return 9999 for an unknown device
+  event.  
+
+- Added to function DTWAIN_SetTwainDSM() the following option:
+
+       DTWAIN_TWAINDSM_VERSION2FALLBACK
+
+  For example:
+
+    DTWAIN_SetTwainDSM(DTWAIN_TWAINDSM_VERSION2FALLBACK);
+
+  This option will only apply to 32-bit applications, as 64-bit applications will ignore this option.  
+  This option allows loading the 32-bit TWAINDSM.DLL TWAIN Data Source Manager if it is found.  
+  If TWAINDSM.DLL is not found, the "normal" TWAIN_32.DLL Data Source Manager will be used.
+
+- Added function DTWAIN_GetImageLayoutInfo() that returns the document number, frame number, and page number 
+  when acquiring images.  The prototype for this function is as follows:
+
+    DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
+
+    The DocumentNumber, PageNumber, and FrameNumber will be filled in with the relevant information on return of this function (any of 
+    these parameters can also be NULL, meaning that the value should be ignored).
+
+
+- Fix Delphi language bindings to properly handle LPTSTR and LPCTSTR pointer types.  Currently the Delphi application can only
+  consistently use the DTWAIN API functions that are either ANSI aware or Unicode aware, but not the "generic" calls.  For example:
+
+     DTWAIN_GetSourceProductName requires an LPTSTR pointer to retrieve the name (which for Delphi did not work consistently).
+     On the other hand (DTWAIN_GetSourceProductNameA and DTWAIN_GetSourceProductNameW) would work consistently.
+
+- Fix issue with DTWAIN_GetAcquireArea() possibly not returning the values used for the area of acquisition.
+
+- Fix C language compilation issues using the LoadLibrary() / GetProcAddress() language wrapper (dtwimpl.c)
+
+- Removed the following obsolete and undocumented DTWAIN API functions:
+
+    DTWAIN_AddExtImageInfoQuery 
+    DTWAIN_AddFileToAppend      
+    DTWAIN_AddFileToAppendA     
+    DTWAIN_AddFileToAppendW     
+    DTWAIN_AddPDFTextEx        
+    DTWAIN_AddPDFTextExA       
+    DTWAIN_AddPDFTextExW       
+    DTWAIN_ArrayInit
+    DTWAIN_GetStaticLibVersion
+    DTWAIN_GetTwainTimeout
+    DTWAIN_InitImageFileAppend       
+    DTWAIN_InitImageFileAppendA      
+    DTWAIN_InitImageFileAppendW      
+    DTWAIN_SetQueryCapSupport
+    DTWAIN_SetTwainTimeout
+    DTWAIN_SysInitializeEx                       
+    DTWAIN_SysInitializeEx2                      
+    DTWAIN_SysInitializeEx2A                     
+    DTWAIN_SysInitializeEx2W                     
+    DTWAIN_SysInitializeExA                      
+    DTWAIN_SysInitializeExW         
+
+- For DTWDEMO, added PDF option to stamp page number on each PDF page acquired.             
+
+- Upgraded following internal image related libraries:
+
+      libtiff --> 4.7.2
+      zlib    --> 1.3.2
+
 5.9.4
 
 - Fix issue with DTWAIN_SetAppInfo() possibly resetting the TWAIN application ID, causing

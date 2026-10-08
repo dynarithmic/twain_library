@@ -149,13 +149,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_AcquireNative
    attr_reader :DTWAIN_AcquireNativeEx
    attr_reader :DTWAIN_AcquireToClipboard
-   attr_reader :DTWAIN_AddExtImageInfoQuery
    attr_reader :DTWAIN_AddPDFText
    attr_reader :DTWAIN_AddPDFTextA
    attr_reader :DTWAIN_AddPDFTextElement
-   attr_reader :DTWAIN_AddPDFTextEx
-   attr_reader :DTWAIN_AddPDFTextExA
-   attr_reader :DTWAIN_AddPDFTextExW
    attr_reader :DTWAIN_AddPDFTextString
    attr_reader :DTWAIN_AddPDFTextStringA
    attr_reader :DTWAIN_AddPDFTextStringW
@@ -259,7 +255,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_ArrayGetSourceAt
    attr_reader :DTWAIN_ArrayGetStringLength
    attr_reader :DTWAIN_ArrayGetType
-   attr_reader :DTWAIN_ArrayInit
    attr_reader :DTWAIN_ArrayInsertAt
    attr_reader :DTWAIN_ArrayInsertAtANSIString
    attr_reader :DTWAIN_ArrayInsertAtANSIStringN
@@ -602,6 +597,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetContrastStringW
    attr_reader :DTWAIN_GetCountry
    attr_reader :DTWAIN_GetCurrentAcquiredImage
+   attr_reader :DTWAIN_GetCurrentCustomResourceName
+   attr_reader :DTWAIN_GetCurrentCustomResourceNameA
+   attr_reader :DTWAIN_GetCurrentCustomResourceNameW
    attr_reader :DTWAIN_GetCurrentFileName
    attr_reader :DTWAIN_GetCurrentFileNameA
    attr_reader :DTWAIN_GetCurrentFileNameW
@@ -638,7 +636,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetExtCapFromName
    attr_reader :DTWAIN_GetExtCapFromNameA
    attr_reader :DTWAIN_GetExtCapFromNameW
-   attr_reader :DTWAIN_GetExtImageInfo
    attr_reader :DTWAIN_GetExtImageInfoData
    attr_reader :DTWAIN_GetExtImageInfoDataEx
    attr_reader :DTWAIN_GetExtImageInfoItem
@@ -669,12 +666,15 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetImageInfoString
    attr_reader :DTWAIN_GetImageInfoStringA
    attr_reader :DTWAIN_GetImageInfoStringW
+   attr_reader :DTWAIN_GetImageLayoutInfo
    attr_reader :DTWAIN_GetJobControl
    attr_reader :DTWAIN_GetJobControlEx
    attr_reader :DTWAIN_GetJpegValues
    attr_reader :DTWAIN_GetJpegXRValues
    attr_reader :DTWAIN_GetLanguage
+   attr_reader :DTWAIN_GetLastCapEnumIndices
    attr_reader :DTWAIN_GetLastError
+   attr_reader :DTWAIN_GetLastTwainError
    attr_reader :DTWAIN_GetLibraryPath
    attr_reader :DTWAIN_GetLibraryPathA
    attr_reader :DTWAIN_GetLibraryPathW
@@ -745,6 +745,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetPatchcodePriorities
    attr_reader :DTWAIN_GetPatchcodeSearchMode
    attr_reader :DTWAIN_GetPatchcodeTimeOut
+   attr_reader :DTWAIN_GetPendingXferCount
    attr_reader :DTWAIN_GetPixelFlavor
    attr_reader :DTWAIN_GetPixelType
    attr_reader :DTWAIN_GetPrinter
@@ -775,6 +776,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetSaveFileName
    attr_reader :DTWAIN_GetSaveFileNameA
    attr_reader :DTWAIN_GetSaveFileNameW
+   attr_reader :DTWAIN_GetSaveFileType
    attr_reader :DTWAIN_GetSessionDetails
    attr_reader :DTWAIN_GetSessionDetailsA
    attr_reader :DTWAIN_GetSessionDetailsW
@@ -806,7 +808,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetSourceVersionInfoA
    attr_reader :DTWAIN_GetSourceVersionInfoW
    attr_reader :DTWAIN_GetSourceVersionNumber
-   attr_reader :DTWAIN_GetStaticLibVersion
    attr_reader :DTWAIN_GetTempFileDirectory
    attr_reader :DTWAIN_GetTempFileDirectoryA
    attr_reader :DTWAIN_GetTempFileDirectoryW
@@ -831,7 +832,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetTwainNameFromConstantExA
    attr_reader :DTWAIN_GetTwainNameFromConstantExW
    attr_reader :DTWAIN_GetTwainNameFromConstantW
-   attr_reader :DTWAIN_GetTwainTimeout
    attr_reader :DTWAIN_GetVersion
    attr_reader :DTWAIN_GetVersionCopyright
    attr_reader :DTWAIN_GetVersionCopyrightA
@@ -856,9 +856,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetYResolutionStringA
    attr_reader :DTWAIN_GetYResolutionStringW
    attr_reader :DTWAIN_InitExtImageInfo
-   attr_reader :DTWAIN_InitImageFileAppend
-   attr_reader :DTWAIN_InitImageFileAppendA
-   attr_reader :DTWAIN_InitImageFileAppendW
    attr_reader :DTWAIN_InitOCRInterface
    attr_reader :DTWAIN_IsAcquiring
    attr_reader :DTWAIN_IsAudioXferSupported
@@ -1249,7 +1246,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetPrinterSuffixString
    attr_reader :DTWAIN_SetPrinterSuffixStringA
    attr_reader :DTWAIN_SetPrinterSuffixStringW
-   attr_reader :DTWAIN_SetQueryCapSupport
    attr_reader :DTWAIN_SetResolution
    attr_reader :DTWAIN_SetResolutionString
    attr_reader :DTWAIN_SetResolutionStringA
@@ -1264,6 +1260,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetSaveFileName
    attr_reader :DTWAIN_SetSaveFileNameA
    attr_reader :DTWAIN_SetSaveFileNameW
+   attr_reader :DTWAIN_SetSaveFileType
    attr_reader :DTWAIN_SetShadow
    attr_reader :DTWAIN_SetShadowString
    attr_reader :DTWAIN_SetShadowStringA
@@ -1286,7 +1283,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetTwainLogA
    attr_reader :DTWAIN_SetTwainLogW
    attr_reader :DTWAIN_SetTwainMode
-   attr_reader :DTWAIN_SetTwainTimeout
    attr_reader :DTWAIN_SetUpdateDibProc
    attr_reader :DTWAIN_SetXResolution
    attr_reader :DTWAIN_SetXResolutionString
@@ -1305,12 +1301,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_StartTwainSessionW
    attr_reader :DTWAIN_SysDestroy
    attr_reader :DTWAIN_SysInitialize
-   attr_reader :DTWAIN_SysInitializeEx
-   attr_reader :DTWAIN_SysInitializeEx2
-   attr_reader :DTWAIN_SysInitializeEx2A
-   attr_reader :DTWAIN_SysInitializeEx2W
-   attr_reader :DTWAIN_SysInitializeExA
-   attr_reader :DTWAIN_SysInitializeExW
    attr_reader :DTWAIN_SysInitializeNoBlocking
    attr_reader :DTWAIN_SysInitializeNoBlockingEx
    attr_reader :DTWAIN_TestGetCap
@@ -1652,6 +1642,7 @@ class DTWAINAPI
    DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058
    DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059
    DTWAIN_TN_DEVICEEVENT = 1100
+   DTWAIN_TN_DEVICEEVENTFAILED = 1101
    DTWAIN_TN_TWAINPAGECANCELLED = 1105
    DTWAIN_TN_TWAINPAGEFAILED = 1106
    DTWAIN_TN_APPUPDATEDDIB = 1107
@@ -1694,6 +1685,7 @@ class DTWAINAPI
    DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307
    DTWAIN_TN_QUERYUPDATEDIBORIG = 1308
    DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309
+   DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310
    DTWAIN_PDFOCR_CLEANTEXT1 = 1
    DTWAIN_PDFOCR_CLEANTEXT2 = 2
    DTWAIN_MODAL = 0
@@ -1947,6 +1939,21 @@ class DTWAINAPI
    DTWAIN_LANGSWEDISH = 12
    DTWAIN_LANGUSAENGLISH = 13
    DTWAIN_NO_ERROR = (0)
+   DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501)
+   DTWAIN_ERR_ALLOCATION_FAILURE = (-502)
+   DTWAIN_ERR_INVALID_DLLHANDLE = (-503)
+   DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504)
+   DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505)
+   DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506)
+   DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507)
+   DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508)
+   DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509)
+   DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510)
+   DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511)
+   DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512)
+   DTWAIN_ERR_XYRESOLUTION_MATCH = (-527)
+   DTWAIN_ERR_INVALID_FILENAME = (-528)
+   DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532)
    DTWAIN_ERR_FIRST = (-1000)
    DTWAIN_ERR_BAD_HANDLE = (-1001)
    DTWAIN_ERR_BAD_SOURCE = (-1002)
@@ -2039,6 +2046,8 @@ class DTWAINAPI
    DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089)
    DTWAIN_ERR_DTWAINDLL_VERSION = (-1090)
    DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091)
+   DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092)
+   DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093)
    TWAIN_ERR_LOW_MEMORY = (-1100)
    TWAIN_ERR_FALSE_ALARM = (-1101)
    TWAIN_ERR_BUMMER = (-1102)
@@ -2504,6 +2513,7 @@ class DTWAINAPI
    DTWAIN_TWAINDSM_LEGACY = 1
    DTWAIN_TWAINDSM_VERSION2 = 2
    DTWAIN_TWAINDSM_LATESTVERSION = 4
+   DTWAIN_TWAINDSM_VERSION2FALLBACK = 8
    DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1)
    DTWAIN_TWAINDSMSEARCH_WSO = 0
    DTWAIN_TWAINDSMSEARCH_WOS = 1
@@ -2806,6 +2816,7 @@ class DTWAINAPI
    DTWAIN_PDFTEXT_LASTPAGE = 0x00000010
    DTWAIN_PDFTEXT_CURRENTPAGE = 0x00000020
    DTWAIN_PDFTEXT_DISABLED = 0x00000040
+   DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x00000080
    DTWAIN_PDFTEXT_TOPLEFT = 0x00000100
    DTWAIN_PDFTEXT_TOPRIGHT = 0x00000200
    DTWAIN_PDFTEXT_HORIZCENTER = 0x00000400
@@ -2977,12 +2988,28 @@ class DTWAINAPI
    DTWAIN_CHECKDLLVERLESSEQ = 3
    DTWAIN_CHECKDLLVERGREATEREQ = 4
    DTWAIN_RESOURCE_COPYRIGHT = 9700
-
    @isinit = false
 
    def isInitialized()
        return @isinit
    end
+
+   def resolve_dll_path(dllname)
+       return File.expand_path(dllname) if File.file?(dllname)
+
+       # An explicit path must refer to that file; do not search by basename.
+       return nil unless File.basename(dllname) == dllname
+
+       ENV.fetch('PATH', '').split(File::PATH_SEPARATOR).each do |dir|
+           next if dir.empty?
+
+           candidate = File.join(dir, dllname)
+           return File.expand_path(candidate) if File.file?(candidate)
+       end
+
+       nil
+   end
+   private :resolve_dll_path
 
    def initialize(dllname)
 
@@ -3009,15 +3036,23 @@ class DTWAINAPI
            end  
        end
 
-       # Load the DLL 
-       dtwain_dll = Fiddle.dlopen(dllname)
-
-       if dtwain_dll.nil?
+       dllpath = resolve_dll_path(dllname)
+       if dllpath.nil?
+           puts "Unable to locate #{dllname}."
            @isinit = false
            return
-       else
-           @isinit = true
        end
+
+       begin
+           dtwain_dll = Fiddle.dlopen(dllpath)
+       rescue Fiddle::DLError => e
+           puts "Unable to load DTWAIN DLL: #{dllpath}"
+           puts e.message
+           @isinit = false
+           return
+       end
+
+       @isinit = true
 
        @DTWAIN_AcquireAudioFile = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireAudioFile'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_AcquireAudioFileA = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireAudioFileA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3033,13 +3068,9 @@ class DTWAINAPI
        @DTWAIN_AcquireNative = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireNative'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_AcquireNativeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireNativeEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_AcquireToClipboard = Fiddle::Function::new(dtwain_dll['DTWAIN_AcquireToClipboard'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_INT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_AddExtImageInfoQuery = Fiddle::Function::new(dtwain_dll['DTWAIN_AddExtImageInfoQuery'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFText = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFText'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFTextA = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFTextElement = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextElement'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_AddPDFTextEx = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_AddPDFTextExA = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextExA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_AddPDFTextExW = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextExW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_DOUBLE, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFTextString = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFTextStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
        @DTWAIN_AddPDFTextStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_AddPDFTextStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_UINT],Fiddle::TYPE_INT)
@@ -3143,7 +3174,6 @@ class DTWAINAPI
        @DTWAIN_ArrayGetSourceAt = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetSourceAt'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayGetStringLength = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetStringLength'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_ArrayGetType = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayGetType'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_ArrayInit = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayInit'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_ArrayInsertAt = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayInsertAt'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayInsertAtANSIString = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayInsertAtANSIString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ArrayInsertAtANSIStringN = Fiddle::Function::new(dtwain_dll['DTWAIN_ArrayInsertAtANSIStringN'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
@@ -3486,6 +3516,9 @@ class DTWAINAPI
        @DTWAIN_GetContrastStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetContrastStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCountry = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCountry'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentAcquiredImage = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentAcquiredImage'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_GetCurrentCustomResourceName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentCustomResourceName'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetCurrentCustomResourceNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentCustomResourceNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetCurrentCustomResourceNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentCustomResourceNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentFileName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentFileName'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentFileNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentFileNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentFileNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentFileNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3522,7 +3555,6 @@ class DTWAINAPI
        @DTWAIN_GetExtCapFromName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromName'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtCapFromNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetExtCapFromNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtCapFromNameW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
-       @DTWAIN_GetExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfo'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetExtImageInfoDataEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoDataEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetExtImageInfoItem = Fiddle::Function::new(dtwain_dll['DTWAIN_GetExtImageInfoItem'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3553,12 +3585,15 @@ class DTWAINAPI
        @DTWAIN_GetImageInfoString = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageInfoStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageInfoStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetImageLayoutInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageLayoutInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetJobControlEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControlEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetJpegXRValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegXRValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLanguage = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLanguage'],[],Fiddle::TYPE_LONG)
+       @DTWAIN_GetLastCapEnumIndices = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastCapEnumIndices'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLastError = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastError'],[],Fiddle::TYPE_LONG)
+       @DTWAIN_GetLastTwainError = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastTwainError'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPath'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLibraryPathW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3629,6 +3664,7 @@ class DTWAINAPI
        @DTWAIN_GetPatchcodePriorities = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodePriorities'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetPatchcodeSearchMode = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeSearchMode'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetPatchcodeTimeOut = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPatchcodeTimeOut'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
+       @DTWAIN_GetPendingXferCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPendingXferCount'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetPixelFlavor = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPixelFlavor'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetPixelType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPixelType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetPrinter = Fiddle::Function::new(dtwain_dll['DTWAIN_GetPrinter'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
@@ -3659,6 +3695,7 @@ class DTWAINAPI
        @DTWAIN_GetSaveFileName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileName'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSaveFileNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSaveFileNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetSaveFileType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSaveFileType'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetails = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetails'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetailsA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetailsA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetSessionDetailsW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSessionDetailsW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
@@ -3690,7 +3727,6 @@ class DTWAINAPI
        @DTWAIN_GetSourceVersionInfoA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionInfoA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceVersionInfoW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionInfoW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetSourceVersionNumber = Fiddle::Function::new(dtwain_dll['DTWAIN_GetSourceVersionNumber'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetStaticLibVersion = Fiddle::Function::new(dtwain_dll['DTWAIN_GetStaticLibVersion'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetTempFileDirectory = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTempFileDirectory'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTempFileDirectoryA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTempFileDirectoryA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTempFileDirectoryW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTempFileDirectoryW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3715,7 +3751,6 @@ class DTWAINAPI
        @DTWAIN_GetTwainNameFromConstantExA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantExW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantExW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetTwainNameFromConstantW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainNameFromConstantW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetTwainTimeout = Fiddle::Function::new(dtwain_dll['DTWAIN_GetTwainTimeout'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetVersion = Fiddle::Function::new(dtwain_dll['DTWAIN_GetVersion'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetVersionCopyright = Fiddle::Function::new(dtwain_dll['DTWAIN_GetVersionCopyright'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetVersionCopyrightA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetVersionCopyrightA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
@@ -3740,9 +3775,6 @@ class DTWAINAPI
        @DTWAIN_GetYResolutionStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetYResolutionStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetYResolutionStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetYResolutionStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_InitExtImageInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_InitExtImageInfo'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_InitImageFileAppend = Fiddle::Function::new(dtwain_dll['DTWAIN_InitImageFileAppend'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_InitImageFileAppendA = Fiddle::Function::new(dtwain_dll['DTWAIN_InitImageFileAppendA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_InitImageFileAppendW = Fiddle::Function::new(dtwain_dll['DTWAIN_InitImageFileAppendW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_InitOCRInterface = Fiddle::Function::new(dtwain_dll['DTWAIN_InitOCRInterface'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsAcquiring = Fiddle::Function::new(dtwain_dll['DTWAIN_IsAcquiring'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsAudioXferSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsAudioXferSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
@@ -4133,7 +4165,6 @@ class DTWAINAPI
        @DTWAIN_SetPrinterSuffixString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPrinterSuffixString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetPrinterSuffixStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPrinterSuffixStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetPrinterSuffixStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetPrinterSuffixStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_SetQueryCapSupport = Fiddle::Function::new(dtwain_dll['DTWAIN_SetQueryCapSupport'],[Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetResolution = Fiddle::Function::new(dtwain_dll['DTWAIN_SetResolution'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_INT)
        @DTWAIN_SetResolutionString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetResolutionString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetResolutionStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetResolutionStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4148,6 +4179,7 @@ class DTWAINAPI
        @DTWAIN_SetSaveFileName = Fiddle::Function::new(dtwain_dll['DTWAIN_SetSaveFileName'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetSaveFileNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetSaveFileNameA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetSaveFileNameW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetSaveFileNameW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetSaveFileType = Fiddle::Function::new(dtwain_dll['DTWAIN_SetSaveFileType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetShadow = Fiddle::Function::new(dtwain_dll['DTWAIN_SetShadow'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_INT)
        @DTWAIN_SetShadowString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetShadowString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetShadowStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetShadowStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4170,7 +4202,6 @@ class DTWAINAPI
        @DTWAIN_SetTwainLogA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetTwainLogA'],[Fiddle::TYPE_UINT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetTwainLogW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetTwainLogW'],[Fiddle::TYPE_UINT, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetTwainMode = Fiddle::Function::new(dtwain_dll['DTWAIN_SetTwainMode'],[Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
-       @DTWAIN_SetTwainTimeout = Fiddle::Function::new(dtwain_dll['DTWAIN_SetTwainTimeout'],[Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetUpdateDibProc = Fiddle::Function::new(dtwain_dll['DTWAIN_SetUpdateDibProc'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_SetXResolution = Fiddle::Function::new(dtwain_dll['DTWAIN_SetXResolution'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_INT)
        @DTWAIN_SetXResolutionString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetXResolutionString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4189,12 +4220,6 @@ class DTWAINAPI
        @DTWAIN_StartTwainSessionW = Fiddle::Function::new(dtwain_dll['DTWAIN_StartTwainSessionW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SysDestroy = Fiddle::Function::new(dtwain_dll['DTWAIN_SysDestroy'],[],Fiddle::TYPE_INT)
        @DTWAIN_SysInitialize = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitialize'],[],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeEx2 = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeEx2'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeEx2A = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeEx2A'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeEx2W = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeEx2W'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeExA = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeExA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
-       @DTWAIN_SysInitializeExW = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeExW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
        @DTWAIN_SysInitializeNoBlocking = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeNoBlocking'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_SysInitializeNoBlockingEx = Fiddle::Function::new(dtwain_dll['DTWAIN_SysInitializeNoBlockingEx'],[Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_TestGetCap = Fiddle::Function::new(dtwain_dll['DTWAIN_TestGetCap'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)

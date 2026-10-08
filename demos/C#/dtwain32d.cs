@@ -480,6 +480,7 @@ namespace Dynarithmic
         public const int DTWAIN_TN_INVALID_TWAINDSM2_BITMAP = 1058;
         public const int DTWAIN_TN_IMAGE_RESAMPLE_FAILURE = 1059;
         public const int DTWAIN_TN_DEVICEEVENT = 1100;
+        public const int DTWAIN_TN_DEVICEEVENTFAILED = 1101;
         public const int DTWAIN_TN_TWAINPAGECANCELLED = 1105;
         public const int DTWAIN_TN_TWAINPAGEFAILED = 1106;
         public const int DTWAIN_TN_APPUPDATEDDIB = 1107;
@@ -522,6 +523,7 @@ namespace Dynarithmic
         public const int DTWAIN_TN_ACQUIREPAGESSTOPPED = 1307;
         public const int DTWAIN_TN_QUERYUPDATEDIBORIG = 1308;
         public const int DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309;
+        public const int DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310;
         public const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const int DTWAIN_MODAL = 0;
@@ -775,6 +777,21 @@ namespace Dynarithmic
         public const int DTWAIN_LANGSWEDISH = 12;
         public const int DTWAIN_LANGUSAENGLISH = 13;
         public const int DTWAIN_NO_ERROR = (0);
+        public const int DTWAIN_ERR_NULL_WINDOW_HANDLE = (-501);
+        public const int DTWAIN_ERR_ALLOCATION_FAILURE = (-502);
+        public const int DTWAIN_ERR_INVALID_DLLHANDLE = (-503);
+        public const int DTWAIN_ERR_INVALID_SOURCE_HANDLE = (-504);
+        public const int DTWAIN_ERR_TWAINDSM_NOT_FOUND = (-505);
+        public const int DTWAIN_ERR_INVALID_TWAINDSM_DLL = (-506);
+        public const int DTWAIN_ERR_INVALID_SESSION_HANDLE = (-507);
+        public const int DTWAIN_ERR_INVALID_TWAIN_MANAGER = (-508);
+        public const int DTWAIN_ERR_TWAINDSM_LOAD_ERROR = (-509);
+        public const int DTWAIN_ERR_SOURCE_OPEN_ERROR = (-510);
+        public const int DTWAIN_ERR_SOURCE_CLOSE_ERROR = (-511);
+        public const int DTWAIN_ERR_SOURCE_REQUIRED_OPEN = (-512);
+        public const int DTWAIN_ERR_XYRESOLUTION_MATCH = (-527);
+        public const int DTWAIN_ERR_INVALID_FILENAME = (-528);
+        public const int DTWAIN_ERR_TRIPLET_NOTEXECUTED = (-532);
         public const int DTWAIN_ERR_FIRST = (-1000);
         public const int DTWAIN_ERR_BAD_HANDLE = (-1001);
         public const int DTWAIN_ERR_BAD_SOURCE = (-1002);
@@ -867,6 +884,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_DTWAINDLL_LOADERROR = (-1089);
         public const int DTWAIN_ERR_DTWAINDLL_VERSION = (-1090);
         public const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
+        public const int DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092);
+        public const int DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -1332,6 +1351,7 @@ namespace Dynarithmic
         public const int DTWAIN_TWAINDSM_LEGACY = 1;
         public const int DTWAIN_TWAINDSM_VERSION2 = 2;
         public const int DTWAIN_TWAINDSM_LATESTVERSION = 4;
+        public const int DTWAIN_TWAINDSM_VERSION2FALLBACK = 8;
         public const int DTWAIN_TWAINDSMSEARCH_NOTFOUND = (-1);
         public const int DTWAIN_TWAINDSMSEARCH_WSO = 0;
         public const int DTWAIN_TWAINDSMSEARCH_WOS = 1;
@@ -1634,6 +1654,7 @@ namespace Dynarithmic
         public const int DTWAIN_PDFTEXT_LASTPAGE = 0x00000010;
         public const int DTWAIN_PDFTEXT_CURRENTPAGE = 0x00000020;
         public const int DTWAIN_PDFTEXT_DISABLED = 0x00000040;
+        public const int DTWAIN_PDFTEXT_COPYTEXTELEMENT = 0x00000080;
         public const int DTWAIN_PDFTEXT_TOPLEFT = 0x00000100;
         public const int DTWAIN_PDFTEXT_TOPRIGHT = 0x00000200;
         public const int DTWAIN_PDFTEXT_HORIZCENTER = 0x00000400;
@@ -1838,20 +1859,11 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_ARRAY DTWAIN_AcquireToClipboard(DTWAIN_SOURCE Source, int PixelType, int nMaxPages, int nTransferMode, int bDiscardDibs, int bShowUI, int bCloseSource, ref int pStatus);
 
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddExtImageInfoQuery(DTWAIN_SOURCE Source, int ExtImageInfo);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddFileToAppend([MarshalAs(UnmanagedType.LPStr)] string szFile);
-
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_AddPDFText(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, uint Flags);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_AddPDFTextElement(DTWAIN_SOURCE Source, DTWAIN_PDFTEXTELEMENT TextElement);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_AddPDFTextEx(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPStr)] string fontName, DTWAIN_FLOAT fontSize, int colorRGB, int renderMode, DTWAIN_FLOAT scaling, DTWAIN_FLOAT charSpacing, DTWAIN_FLOAT wordSpacing, DTWAIN_FLOAT strokeWidth, DTWAIN_FLOAT rotationAngle, DTWAIN_FLOAT skewAngleX, DTWAIN_FLOAT skewAngleY, DTWAIN_FLOAT scalingX, DTWAIN_FLOAT scalingY, int transformType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_AddPDFTextString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string szText, int xPos, int yPos, [MarshalAs(UnmanagedType.LPStr)] string fontName, [MarshalAs(UnmanagedType.LPStr)] string fontSize, int colorRGB, int renderMode, [MarshalAs(UnmanagedType.LPStr)] string scaling, [MarshalAs(UnmanagedType.LPStr)] string charSpacing, [MarshalAs(UnmanagedType.LPStr)] string wordSpacing, [MarshalAs(UnmanagedType.LPStr)] string strokeWidth, uint Flags);
@@ -2107,9 +2119,6 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_ArrayGetType(DTWAIN_ARRAY pArray);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern DTWAIN_ARRAY DTWAIN_ArrayInit();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_ArrayInsertAt(DTWAIN_ARRAY pArray, int nWhere, System.IntPtr pVariant);
@@ -3000,6 +3009,12 @@ namespace Dynarithmic
         public static extern HANDLE DTWAIN_GetCurrentAcquiredImage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetCurrentCustomResourceName([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszOut, int nMaxLen);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetCurrentCustomResourceName(System.IntPtr lpszOut, int nMaxLen);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetCurrentFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szName, int MaxLen);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3087,9 +3102,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetExtCapFromName([MarshalAs(UnmanagedType.LPStr)] string szName);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetExtImageInfo(DTWAIN_SOURCE Source);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetExtImageInfoData(DTWAIN_SOURCE Source, int nWhich, ref DTWAIN_ARRAY Data);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3162,6 +3174,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetImageInfoString(DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3177,7 +3192,13 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetLanguage();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLastCapEnumIndices(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetLastError();
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetLastTwainError(ref DWORD rcError, ref DWORD ccError);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetLibraryPath([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszVer, int nLength);
@@ -3351,6 +3372,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetPatchcodeTimeOut(DTWAIN_SOURCE Source, ref DWORD pTimeOut, int bCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetPendingXferCount(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetPixelFlavor(DTWAIN_SOURCE Source, ref int lpPixelFlavor);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3425,6 +3449,9 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetSaveFileName(DTWAIN_SOURCE Source, System.IntPtr fName, int nMaxLen);
 
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetSaveFileType(DTWAIN_SOURCE Source);
+
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetSessionDetails([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szBuf, int nSize, int indentFactor, int bRefresh);
 
@@ -3494,9 +3521,6 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetSourceVersionNumber(DTWAIN_SOURCE Source, ref int pMajor, ref int pMinor);
 
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetStaticLibVersion();
-
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetTempFileDirectory([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder szFilePath, int nMaxLen);
 
@@ -3552,9 +3576,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetTwainNameFromConstantEx(int lConstantType, int lTwainConstant, System.IntPtr lpszOut, int nSize);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetTwainTimeout();
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetVersion(ref int lpMajor, ref int lpMinor, ref int lpVersionType);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3607,9 +3628,6 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_InitExtImageInfo(DTWAIN_SOURCE Source);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_InitImageFileAppend([MarshalAs(UnmanagedType.LPStr)] string szFile, int fType);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_InitOCRInterface();
@@ -4503,9 +4521,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_SetPrinterSuffixString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string Suffix);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetQueryCapSupport(int bSet);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetResolution(DTWAIN_SOURCE Source, DTWAIN_FLOAT Resolution);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -4522,6 +4537,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetSaveFileName(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string fName);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetSaveFileType(DTWAIN_SOURCE Source, int FileType);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetShadow(DTWAIN_SOURCE Source, DTWAIN_FLOAT Shadow);
@@ -4560,9 +4578,6 @@ namespace Dynarithmic
         public static extern int DTWAIN_SetTwainMode(int lAcquireMode);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetTwainTimeout(int milliseconds);
-
-        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTwainDIBUpdateProc DTWAIN_SetUpdateDibProc(DTwainDIBUpdateProc DibProc);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -4597,12 +4612,6 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_HANDLE DTWAIN_SysInitialize();
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx([MarshalAs(UnmanagedType.LPStr)] string szINIPath);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern DTWAIN_HANDLE DTWAIN_SysInitializeEx2([MarshalAs(UnmanagedType.LPStr)] string szINIPath, [MarshalAs(UnmanagedType.LPStr)] string szImageDLLPath, [MarshalAs(UnmanagedType.LPStr)] string szLangResourcePath);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_HANDLE DTWAIN_SysInitializeNoBlocking();
