@@ -48,6 +48,12 @@ DTWAIN Version changes
     these parameters can also be NULL, meaning that the value should be ignored).
 
 
+- Fix Delphi language bindings to properly handle LPTSTR and LPCTSTR pointer types.  Currently the Delphi application can only
+  consistently use the DTWAIN API functions that are either ANSI aware or Unicode aware, but not the "generic" calls.  For example:
+
+     DTWAIN_GetSourceProductName requires an LPTSTR pointer to retrieve the name (which for Delphi did not work consistently).
+     On the other hand (DTWAIN_GetSourceProductNameA and DTWAIN_GetSourceProductNameW) would work consistently.
+
 - Fix issue with DTWAIN_GetAcquireArea() possibly not returning the values used for the area of acquisition.
 
 - Fix C language compilation issues using the LoadLibrary() / GetProcAddress() language wrapper (dtwimpl.c)

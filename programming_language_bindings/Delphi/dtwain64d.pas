@@ -35,12 +35,20 @@ type
   PWChar = PWideChar;
   HWND = NativeInt;
 
+  PPAnsiChar = ^PAnsiChar;
+  PPWideChar = ^PWideChar;
+  PPChar = ^PChar;
+
   LPSTR = PAnsiChar;
   LPCSTR = PAnsiChar;
   LPWSTR = PWideChar;
   LPCWSTR = PWideChar;
+
   LPCTSTR = PAnsiChar;
   LPTSTR = PAnsiChar;
+  DTWAIN_TSTRING = AnsiString;
+  DTWAIN_TCHARPTR = PAnsiChar;
+  
   LPVOID = Pointer;
   DTWAIN_CALLBACK_PROC = Pointer;
   DTWAIN_CALLBACK_PROC64 = Pointer;
