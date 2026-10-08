@@ -33,7 +33,7 @@ var
    SelectedSource: DTWAIN_SOURCE;
    ErrStatus: LONG;
    AcquisitionArray: DWORD;
-   StringBuffer: string;
+   StringBuffer: DTWAIN_TSTRING;
    NumChars: LONG;
    RetCode : BOOL;
    PageCount : LONG;
@@ -55,7 +55,7 @@ begin
            begin
                { Display the Product Name of the Source that was selected }
                SetLength(StringBuffer, MAX_PATH);
-               len := DTWAIN_GetSourceProductName(SelectedSource, PChar(StringBuffer),
+               len := DTWAIN_GetSourceProductName(SelectedSource, DTWAIN_TCHARPTR(StringBuffer),
                                                Length(StringBuffer));
                SetLength(StringBuffer, len); // trim to actual size
                Writeln('The name of the selected TWAIN Source is ' + StringBuffer);
@@ -73,13 +73,13 @@ begin
                begin
                    SetLength(StringBuffer, MAX_PATH);
                    DTWAIN_ArrayGetAtLong(CapArray, i-1, @ArrayValue);
-                   len := DTWAIN_GetNameFromCap(ArrayValue, PChar(StringBuffer), Length(StringBuffer));
+                   len := DTWAIN_GetNameFromCap(ArrayValue, DTWAIN_TCHARPTR(StringBuffer), Length(StringBuffer));
                    SetLength(StringBuffer, len); // trim to actual size
                    Writeln(Format('Capability %d: %s  Value: %d', [i, StringBuffer, ArrayValue]));
                end;
 
                { Acquire a BMP image }
-               RetCode := DTWAIN_AcquireFileA(
+               RetCode := DTWAIN_AcquireFile(
                           SelectedSource,    { the Source }
                           'test.bmp',        { File name to save }
                           DTWAIN_BMP,        { Image format }
