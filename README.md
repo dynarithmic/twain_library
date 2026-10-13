@@ -79,7 +79,7 @@ Basically, all that is required to initially set up DTWAIN is to ensure that the
 
 ----
 
-**<u>Building the DTWAIN application:</u>**
+**<u>Building the DTWAIN application:</u>**<br><br>
 <a name="dtwaindllusage"></a>
 For 32-bit applications, use the DTWAIN dynamic link libraries (DLL's) found in [DTWAIN-Release-x86.zip](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-Release-x86.zip), and within this zip file, one of the following directories:
 
