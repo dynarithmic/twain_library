@@ -606,6 +606,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetCurrentPageNum
    attr_reader :DTWAIN_GetCurrentRetryCount
    attr_reader :DTWAIN_GetCurrentTwainTriplet
+   attr_reader :DTWAIN_GetCurrentTwainTripletEx
    attr_reader :DTWAIN_GetCustomDSData
    attr_reader :DTWAIN_GetDSMFullName
    attr_reader :DTWAIN_GetDSMFullNameA
@@ -667,9 +668,14 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetImageInfoStringA
    attr_reader :DTWAIN_GetImageInfoStringW
    attr_reader :DTWAIN_GetImageLayoutInfo
+   attr_reader :DTWAIN_GetJXLLibraryPath
+   attr_reader :DTWAIN_GetJXLLibraryPathA
+   attr_reader :DTWAIN_GetJXLLibraryPathW
    attr_reader :DTWAIN_GetJobControl
    attr_reader :DTWAIN_GetJobControlEx
    attr_reader :DTWAIN_GetJpegValues
+   attr_reader :DTWAIN_GetJpegXLQuality
+   attr_reader :DTWAIN_GetJpegXLThreadCount
    attr_reader :DTWAIN_GetJpegXRValues
    attr_reader :DTWAIN_GetLanguage
    attr_reader :DTWAIN_GetLastCapEnumIndices
@@ -897,6 +903,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_IsFeederSensitive
    attr_reader :DTWAIN_IsFeederSupported
    attr_reader :DTWAIN_IsFileSystemSupported
+   attr_reader :DTWAIN_IsFileTypeSupported
    attr_reader :DTWAIN_IsFileXferSupported
    attr_reader :DTWAIN_IsGetMessageLoopDetectionOn
    attr_reader :DTWAIN_IsGetMessageLoopEnabled
@@ -1158,8 +1165,13 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetHighlightString
    attr_reader :DTWAIN_SetHighlightStringA
    attr_reader :DTWAIN_SetHighlightStringW
+   attr_reader :DTWAIN_SetJXLLibraryPath
+   attr_reader :DTWAIN_SetJXLLibraryPathA
+   attr_reader :DTWAIN_SetJXLLibraryPathW
    attr_reader :DTWAIN_SetJobControl
    attr_reader :DTWAIN_SetJpegValues
+   attr_reader :DTWAIN_SetJpegXLQuality
+   attr_reader :DTWAIN_SetJpegXLThreadCount
    attr_reader :DTWAIN_SetJpegXRValues
    attr_reader :DTWAIN_SetLanguage
    attr_reader :DTWAIN_SetLastError
@@ -1465,6 +1477,7 @@ class DTWAINAPI
    DTWAIN_JPEGXR = 12000
    DTWAIN_SVG = 13000
    DTWAIN_SVGZ = 13001
+   DTWAIN_JPEGXL = 14000
    DTWAIN_INCHES = 0
    DTWAIN_CENTIMETERS = 1
    DTWAIN_PICAS = 2
@@ -2048,6 +2061,9 @@ class DTWAINAPI
    DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091)
    DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092)
    DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093)
+   DTWAIN_ERR_JXL_NOTAVAILABLE = (-1094)
+   DTWAIN_ERR_JXL_ALREADYLOADED = (-1095)
+   DTWAIN_ERR_INVALID_PATH = (-1096)
    TWAIN_ERR_LOW_MEMORY = (-1100)
    TWAIN_ERR_FALSE_ALARM = (-1101)
    TWAIN_ERR_BUMMER = (-1102)
@@ -3525,6 +3541,7 @@ class DTWAINAPI
        @DTWAIN_GetCurrentPageNum = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentPageNum'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentRetryCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentRetryCount'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetCurrentTwainTriplet = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentTwainTriplet'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetCurrentTwainTripletEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCurrentTwainTripletEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCustomDSData = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCustomDSData'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_UINT, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_VOIDP)
        @DTWAIN_GetDSMFullName = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMFullName'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
        @DTWAIN_GetDSMFullNameA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetDSMFullNameA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_LONG)
@@ -3586,9 +3603,14 @@ class DTWAINAPI
        @DTWAIN_GetImageInfoStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageInfoStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageLayoutInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageLayoutInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetJXLLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPath'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetJXLLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPathA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetJXLLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPathW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetJobControlEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControlEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetJpegXLQuality = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegXLQuality'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetJpegXLThreadCount = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegXLThreadCount'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetJpegXRValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegXRValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetLanguage = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLanguage'],[],Fiddle::TYPE_LONG)
        @DTWAIN_GetLastCapEnumIndices = Fiddle::Function::new(dtwain_dll['DTWAIN_GetLastCapEnumIndices'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3816,6 +3838,7 @@ class DTWAINAPI
        @DTWAIN_IsFeederSensitive = Fiddle::Function::new(dtwain_dll['DTWAIN_IsFeederSensitive'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsFeederSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsFeederSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_IsFileSystemSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsFileSystemSupported'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsFileTypeSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsFileTypeSupported'],[Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsFileXferSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsFileXferSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsGetMessageLoopDetectionOn = Fiddle::Function::new(dtwain_dll['DTWAIN_IsGetMessageLoopDetectionOn'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsGetMessageLoopEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsGetMessageLoopEnabled'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4077,8 +4100,13 @@ class DTWAINAPI
        @DTWAIN_SetHighlightString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetHighlightStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetHighlightStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetJXLLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPath'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetJXLLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPathA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetJXLLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPathW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetJpegXLQuality = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegXLQuality'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
+       @DTWAIN_SetJpegXLThreadCount = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegXLThreadCount'],[Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetJpegXRValues = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegXRValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetLanguage = Fiddle::Function::new(dtwain_dll['DTWAIN_SetLanguage'],[Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetLastError = Fiddle::Function::new(dtwain_dll['DTWAIN_SetLastError'],[Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)

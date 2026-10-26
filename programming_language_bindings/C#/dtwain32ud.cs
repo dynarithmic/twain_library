@@ -304,6 +304,7 @@ namespace Dynarithmic
         public const int DTWAIN_JPEGXR = 12000;
         public const int DTWAIN_SVG = 13000;
         public const int DTWAIN_SVGZ = 13001;
+        public const int DTWAIN_JPEGXL = 14000;
         public const int DTWAIN_INCHES = 0;
         public const int DTWAIN_CENTIMETERS = 1;
         public const int DTWAIN_PICAS = 2;
@@ -887,6 +888,9 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
         public const int DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092);
         public const int DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093);
+        public const int DTWAIN_ERR_JXL_NOTAVAILABLE = (-1094);
+        public const int DTWAIN_ERR_JXL_ALREADYLOADED = (-1095);
+        public const int DTWAIN_ERR_INVALID_PATH = (-1096);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -3031,6 +3035,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_GetCurrentTwainTriplet([In, Out] TW_IDENTITY pAppID, [In, Out] TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetCurrentTwainTripletEx(TW_IDENTITY pAppID, TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] Data, uint dSize, ref DWORD pActualSize, int nFlags);
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -3177,6 +3184,12 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetJXLLibraryPath(System.IntPtr lpszOut, int nSize);
+
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
 
@@ -3185,6 +3198,12 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetJpegXLQuality(DTWAIN_SOURCE Source, ref int pQuality);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetJpegXLThreadCount();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
@@ -3749,6 +3768,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsFileTypeSupported(int fileType);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, int lFileType);
@@ -4341,11 +4363,20 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] string sFilePath);
+
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetJobControl(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, int Quality, int Progressive);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, int Quality);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetJpegXLThreadCount(int ThreadCount);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, int Quality, int Progressive);

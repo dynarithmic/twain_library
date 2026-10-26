@@ -97,6 +97,7 @@
 #define IDM_ACQUIREFILE_PDF_AES_128BIT      458 
 #define IDM_ACQUIREFILE_PDF_AES_256BIT      459
 #define IDM_ACQUIREFILE_PDF_ASCII85         460
+#define IDM_ACQUIREFILE_JPEGXL              461
 
 #define IDD_dlgEnterSourceName              1000
 #define IDC_edSourceName                    1001

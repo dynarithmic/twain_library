@@ -519,6 +519,7 @@ namespace dynarithmic
             static constexpr value_type  tiffpackbitsmulti = DTWAIN_TIFFPACKBITSMULTI;
             static constexpr value_type  textmulti = DTWAIN_TEXTMULTI;
             static constexpr value_type  jpegxr = DTWAIN_JPEGXR;
+            static constexpr value_type  jpegxl = DTWAIN_JPEGXL;
             static constexpr value_type  bigtifflzw = DTWAIN_BIGTIFFLZW;
             static constexpr value_type  bigtifflzwmulti = DTWAIN_BIGTIFFLZWMULTI;
             static constexpr value_type  bigtiffnocompress = DTWAIN_BIGTIFFNONE;

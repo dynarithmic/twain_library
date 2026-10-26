@@ -475,6 +475,10 @@ DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, LONG Quality);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetJpegXLQuality(DTWAIN_SOURCE Source, LPLONG pQuality);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJpegXLThreadCount(LONG ThreadCount);
+LONG DLLENTRY_DEF DTWAIN_GetJpegXLThreadCount(VOID_PROTOTYPE);
 
 /* Set PDF Options for PDF file transfers */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetPDFOrientation(DTWAIN_SOURCE Source, LONG lPOrientation);
@@ -1033,12 +1037,15 @@ HANDLE DLLENTRY_DEF DTWAIN_ConvertDIBToFullBitmap(HANDLE hDib, DTWAIN_BOOL isBMP
 /* Get Current TWAIN triplet information being processed
   (use for DTWAIN_TN_TWAINTRIPLETBEGIN and DTWAIN_TN_TWAINTRIPLETEND notifications) */
 DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCurrentTwainTriplet(TW_IDENTITY* pAppID, TW_IDENTITY* pSourceID, LPLONG lpDG, LPLONG lpDAT, LPLONG lpMsg, LPLONG64 lpMemRef);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_GetCurrentTwainTripletEx(TWAIN_IDENTITY pAppID, TWAIN_IDENTITY pSourceID, LPLONG lpDG, LPLONG lpDAT, LPLONG lpMsg, LPLONG64 lpMemRef);
 
 /* Return all of the image file types that DTWAIN supports natively for DTWAIN_AcquireFile and similar
  * functions.  Other image file types must be supported by the device. */
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumSupportedFileTypes(VOID_PROTOTYPE);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumSupportedMultiPageFileTypes(VOID_PROTOTYPE);
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumSupportedSinglePageFileTypes(VOID_PROTOTYPE);
+DTWAIN_BOOL DLLENTRY_DEF DTWAIN_IsFileTypeSupported(LONG fileType);
+ 
 DTWAIN_ARRAY DLLENTRY_DEF DTWAIN_EnumCompressionTypesEx2(DTWAIN_SOURCE Source, LONG lFileType, DTWAIN_BOOL bUseBufferedMode);
 
 /* Customize doubling the page count if acquiring in duplex mode */

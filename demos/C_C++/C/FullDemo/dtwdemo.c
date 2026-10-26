@@ -184,6 +184,7 @@ AllFileTypes g_allDTWAINFileTypes[] = {
         {IDM_ACQUIREFILE_JPEG                   ,  DTWAIN_JPEG },
         {IDM_ACQUIREFILE_JPEG2000               ,  DTWAIN_JPEG2000 },
         {IDM_ACQUIREFILE_JPEGXR                 ,  DTWAIN_JPEGXR },
+        {IDM_ACQUIREFILE_JPEGXL                 ,  DTWAIN_JPEGXL },
         {IDM_ACQUIREFILE_PAINTSHOP              ,  DTWAIN_PSD },
         {IDM_ACQUIREFILE_PCX                    ,  DTWAIN_PCX },
         {IDM_ACQUIREFILE_PDF                    ,  DTWAIN_PDFMULTI },
@@ -217,7 +218,7 @@ const UINT nFirstAcquireSourceID = IDM_ACQUIREFILESOURCE_WINDOWSBMP;
 const UINT nLastAcquireSourceID = IDM_ACQUIREFILESOURCE_DEJAVU;
 
 const UINT nFirstAcquireFileID = IDM_ACQUIREFILE_BIGTIFF_NOCOMPRESSION;
-const UINT nLastAcquireFileID = IDM_ACQUIREFILE_PDF_ASCII85;
+const UINT nLastAcquireFileID = IDM_ACQUIREFILE_JPEGXL;
 const UINT numDTWAINFileTypes = sizeof(g_allDTWAINFileTypes) / sizeof(g_allDTWAINFileTypes[0]);
 
 
@@ -282,9 +283,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         else
             return 0;
     }
-
-    LONG major, minor, versiontype, patch;
-    DTWAIN_GetVersionEx(&major, &minor, &versiontype, &patch);
 
     DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
 
@@ -1608,6 +1606,15 @@ void WaitLoop()
     }
 }
 
+BOOL PromptUserToCorrectJxlInstallation()
+{
+    LONG nValue = MessageBox(g_hWnd, _T("JPEG-XL library not found. " 
+        "Please install JPEG-XL components now and select OK to try again, or Cancel to exit..."), _T("JPEG-XL error"), MB_OKCANCEL);
+    if (nValue == IDOK)
+        return TRUE;
+    return FALSE;
+}
+
 LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserData)
 {
     static int pdf_page_count = 1;
@@ -1657,6 +1664,24 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
 
                 /* Increment the page count*/
                 ++pdf_page_count;
+            }
+            else 
+            if ( g_FileType == DTWAIN_JPEGXL )
+            {
+                /* Ensure the JPEG-XL components are installed */
+                while (!DTWAIN_IsFileTypeSupported(DTWAIN_JPEGXL))
+                {
+                    // Display a dialog explaining that the JPEG XL
+                    // components are unavailable.
+                    //
+                    // Allow the user to install/correct the components
+                    // or cancel the operation.
+
+                    if (!PromptUserToCorrectJxlInstallation())
+                    {
+                        return 0;  // Discard the scanned page.
+                    }
+                }
             }
             return 1;
         }

@@ -556,6 +556,7 @@ type DtwaingetcurrentfilenamewFunc = unsafe extern "C" fn(*mut c_void,*mut u16,i
 type DtwaingetcurrentpagenumFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetcurrentretrycountFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwaingetcurrenttwaintripletFunc = unsafe extern "C" fn(*mut *mut c_void,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i64) -> i32;
+type DtwaingetcurrenttwaintripletexFunc = unsafe extern "C" fn(*mut c_void,*mut c_void,*mut i32,*mut i32,*mut i32,*mut i64) -> i32;
 type DtwaingetcustomdsdataFunc = unsafe extern "C" fn(*mut c_void,*mut u8,u32,*mut u32,i32) -> *mut c_void;
 type DtwaingetdsmfullnameFunc = unsafe extern "C" fn(i32,*mut u16,i32,*mut i32) -> i32;
 type DtwaingetdsmfullnameaFunc = unsafe extern "C" fn(i32,*mut c_char,i32,*mut i32) -> i32;
@@ -617,9 +618,14 @@ type DtwaingetimageinfostringFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*m
 type DtwaingetimageinfostringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,*mut c_char,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetimageinfostringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*mut u16,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetimagelayoutinfoFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32,*mut i32,*mut i32) -> i32;
+type DtwaingetjxllibrarypathFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
+type DtwaingetjxllibrarypathaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
+type DtwaingetjxllibrarypathwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetjobcontrolFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetjobcontrolexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetjpegvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
+type DtwaingetjpegxlqualityFunc = unsafe extern "C" fn(*mut c_void,*mut i32) -> i32;
+type DtwaingetjpegxlthreadcountFunc = unsafe extern "C" fn() -> i32;
 type DtwaingetjpegxrvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
 type DtwaingetlanguageFunc = unsafe extern "C" fn() -> i32;
 type DtwaingetlastcapenumindicesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
@@ -847,6 +853,7 @@ type DtwainisfeederloadedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfeedersensitiveFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfeedersupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainisfilesystemsupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwainisfiletypesupportedFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainisfilexfersupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainisgetmessageloopdetectiononFunc = unsafe extern "C" fn() -> i32;
 type DtwainisgetmessageloopenabledFunc = unsafe extern "C" fn(*mut c_void) -> i32;
@@ -1108,8 +1115,13 @@ type DtwainsethighlightFunc = unsafe extern "C" fn(*mut c_void,f64) -> i32;
 type DtwainsethighlightstringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
 type DtwainsethighlightstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> i32;
 type DtwainsethighlightstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
+type DtwainsetjxllibrarypathFunc = unsafe extern "C" fn(*const u16) -> i32;
+type DtwainsetjxllibrarypathaFunc = unsafe extern "C" fn(*const c_char) -> i32;
+type DtwainsetjxllibrarypathwFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwainsetjobcontrolFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetjpegvaluesFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
+type DtwainsetjpegxlqualityFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
+type DtwainsetjpegxlthreadcountFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainsetjpegxrvaluesFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetlanguageFunc = unsafe extern "C" fn(i32) -> i32;
 type DtwainsetlasterrorFunc = unsafe extern "C" fn(i32) -> i32;
@@ -1731,6 +1743,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetCurrentPageNumFunc: Symbol<'a, DtwaingetcurrentpagenumFunc>,
     DTWAIN_GetCurrentRetryCountFunc: Symbol<'a, DtwaingetcurrentretrycountFunc>,
     DTWAIN_GetCurrentTwainTripletFunc: Symbol<'a, DtwaingetcurrenttwaintripletFunc>,
+    DTWAIN_GetCurrentTwainTripletExFunc: Symbol<'a, DtwaingetcurrenttwaintripletexFunc>,
     DTWAIN_GetCustomDSDataFunc: Symbol<'a, DtwaingetcustomdsdataFunc>,
     DTWAIN_GetDSMFullNameFunc: Symbol<'a, DtwaingetdsmfullnameFunc>,
     DTWAIN_GetDSMFullNameAFunc: Symbol<'a, DtwaingetdsmfullnameaFunc>,
@@ -1792,9 +1805,14 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetImageInfoStringAFunc: Symbol<'a, DtwaingetimageinfostringaFunc>,
     DTWAIN_GetImageInfoStringWFunc: Symbol<'a, DtwaingetimageinfostringwFunc>,
     DTWAIN_GetImageLayoutInfoFunc: Symbol<'a, DtwaingetimagelayoutinfoFunc>,
+    DTWAIN_GetJXLLibraryPathFunc: Symbol<'a, DtwaingetjxllibrarypathFunc>,
+    DTWAIN_GetJXLLibraryPathAFunc: Symbol<'a, DtwaingetjxllibrarypathaFunc>,
+    DTWAIN_GetJXLLibraryPathWFunc: Symbol<'a, DtwaingetjxllibrarypathwFunc>,
     DTWAIN_GetJobControlFunc: Symbol<'a, DtwaingetjobcontrolFunc>,
     DTWAIN_GetJobControlExFunc: Symbol<'a, DtwaingetjobcontrolexFunc>,
     DTWAIN_GetJpegValuesFunc: Symbol<'a, DtwaingetjpegvaluesFunc>,
+    DTWAIN_GetJpegXLQualityFunc: Symbol<'a, DtwaingetjpegxlqualityFunc>,
+    DTWAIN_GetJpegXLThreadCountFunc: Symbol<'a, DtwaingetjpegxlthreadcountFunc>,
     DTWAIN_GetJpegXRValuesFunc: Symbol<'a, DtwaingetjpegxrvaluesFunc>,
     DTWAIN_GetLanguageFunc: Symbol<'a, DtwaingetlanguageFunc>,
     DTWAIN_GetLastCapEnumIndicesFunc: Symbol<'a, DtwaingetlastcapenumindicesFunc>,
@@ -2022,6 +2040,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsFeederSensitiveFunc: Symbol<'a, DtwainisfeedersensitiveFunc>,
     DTWAIN_IsFeederSupportedFunc: Symbol<'a, DtwainisfeedersupportedFunc>,
     DTWAIN_IsFileSystemSupportedFunc: Symbol<'a, DtwainisfilesystemsupportedFunc>,
+    DTWAIN_IsFileTypeSupportedFunc: Symbol<'a, DtwainisfiletypesupportedFunc>,
     DTWAIN_IsFileXferSupportedFunc: Symbol<'a, DtwainisfilexfersupportedFunc>,
     DTWAIN_IsGetMessageLoopDetectionOnFunc: Symbol<'a, DtwainisgetmessageloopdetectiononFunc>,
     DTWAIN_IsGetMessageLoopEnabledFunc: Symbol<'a, DtwainisgetmessageloopenabledFunc>,
@@ -2283,8 +2302,13 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetHighlightStringFunc: Symbol<'a, DtwainsethighlightstringFunc>,
     DTWAIN_SetHighlightStringAFunc: Symbol<'a, DtwainsethighlightstringaFunc>,
     DTWAIN_SetHighlightStringWFunc: Symbol<'a, DtwainsethighlightstringwFunc>,
+    DTWAIN_SetJXLLibraryPathFunc: Symbol<'a, DtwainsetjxllibrarypathFunc>,
+    DTWAIN_SetJXLLibraryPathAFunc: Symbol<'a, DtwainsetjxllibrarypathaFunc>,
+    DTWAIN_SetJXLLibraryPathWFunc: Symbol<'a, DtwainsetjxllibrarypathwFunc>,
     DTWAIN_SetJobControlFunc: Symbol<'a, DtwainsetjobcontrolFunc>,
     DTWAIN_SetJpegValuesFunc: Symbol<'a, DtwainsetjpegvaluesFunc>,
+    DTWAIN_SetJpegXLQualityFunc: Symbol<'a, DtwainsetjpegxlqualityFunc>,
+    DTWAIN_SetJpegXLThreadCountFunc: Symbol<'a, DtwainsetjpegxlthreadcountFunc>,
     DTWAIN_SetJpegXRValuesFunc: Symbol<'a, DtwainsetjpegxrvaluesFunc>,
     DTWAIN_SetLanguageFunc: Symbol<'a, DtwainsetlanguageFunc>,
     DTWAIN_SetLastErrorFunc: Symbol<'a, DtwainsetlasterrorFunc>,
@@ -2593,6 +2617,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_JPEGXR: i32 = 12000;
     pub const DTWAIN_SVG: i32 = 13000;
     pub const DTWAIN_SVGZ: i32 = 13001;
+    pub const DTWAIN_JPEGXL: i32 = 14000;
     pub const DTWAIN_INCHES: i32 = 0;
     pub const DTWAIN_CENTIMETERS: i32 = 1;
     pub const DTWAIN_PICAS: i32 = 2;
@@ -3176,6 +3201,9 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_ACTIVE_TWAINSESSION: i32 = -1091;
     pub const DTWAIN_ERR_DSMVERSION_NOTSUPPORTED: i32 = -1092;
     pub const DTWAIN_ERR_TWENUMERATOR_NOTUSED: i32 = -1093;
+    pub const DTWAIN_ERR_JXL_NOTAVAILABLE: i32 = -1094;
+    pub const DTWAIN_ERR_JXL_ALREADYLOADED: i32 = -1095;
+    pub const DTWAIN_ERR_INVALID_PATH: i32 = -1096;
     pub const TWAIN_ERR_LOW_MEMORY: i32 = -1100;
     pub const TWAIN_ERR_FALSE_ALARM: i32 = -1101;
     pub const TWAIN_ERR_BUMMER: i32 = -1102;
@@ -4590,6 +4618,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetCurrentPageNum: Symbol<DtwaingetcurrentpagenumFunc> = unsafe { library.get(b"DTWAIN_GetCurrentPageNum")? };
         let DTWAIN_GetCurrentRetryCount: Symbol<DtwaingetcurrentretrycountFunc> = unsafe { library.get(b"DTWAIN_GetCurrentRetryCount")? };
         let DTWAIN_GetCurrentTwainTriplet: Symbol<DtwaingetcurrenttwaintripletFunc> = unsafe { library.get(b"DTWAIN_GetCurrentTwainTriplet")? };
+        let DTWAIN_GetCurrentTwainTripletEx: Symbol<DtwaingetcurrenttwaintripletexFunc> = unsafe { library.get(b"DTWAIN_GetCurrentTwainTripletEx")? };
         let DTWAIN_GetCustomDSData: Symbol<DtwaingetcustomdsdataFunc> = unsafe { library.get(b"DTWAIN_GetCustomDSData")? };
         let DTWAIN_GetDSMFullName: Symbol<DtwaingetdsmfullnameFunc> = unsafe { library.get(b"DTWAIN_GetDSMFullName")? };
         let DTWAIN_GetDSMFullNameA: Symbol<DtwaingetdsmfullnameaFunc> = unsafe { library.get(b"DTWAIN_GetDSMFullNameA")? };
@@ -4651,9 +4680,14 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetImageInfoStringA: Symbol<DtwaingetimageinfostringaFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringA")? };
         let DTWAIN_GetImageInfoStringW: Symbol<DtwaingetimageinfostringwFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringW")? };
         let DTWAIN_GetImageLayoutInfo: Symbol<DtwaingetimagelayoutinfoFunc> = unsafe { library.get(b"DTWAIN_GetImageLayoutInfo")? };
+        let DTWAIN_GetJXLLibraryPath: Symbol<DtwaingetjxllibrarypathFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPath")? };
+        let DTWAIN_GetJXLLibraryPathA: Symbol<DtwaingetjxllibrarypathaFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPathA")? };
+        let DTWAIN_GetJXLLibraryPathW: Symbol<DtwaingetjxllibrarypathwFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPathW")? };
         let DTWAIN_GetJobControl: Symbol<DtwaingetjobcontrolFunc> = unsafe { library.get(b"DTWAIN_GetJobControl")? };
         let DTWAIN_GetJobControlEx: Symbol<DtwaingetjobcontrolexFunc> = unsafe { library.get(b"DTWAIN_GetJobControlEx")? };
         let DTWAIN_GetJpegValues: Symbol<DtwaingetjpegvaluesFunc> = unsafe { library.get(b"DTWAIN_GetJpegValues")? };
+        let DTWAIN_GetJpegXLQuality: Symbol<DtwaingetjpegxlqualityFunc> = unsafe { library.get(b"DTWAIN_GetJpegXLQuality")? };
+        let DTWAIN_GetJpegXLThreadCount: Symbol<DtwaingetjpegxlthreadcountFunc> = unsafe { library.get(b"DTWAIN_GetJpegXLThreadCount")? };
         let DTWAIN_GetJpegXRValues: Symbol<DtwaingetjpegxrvaluesFunc> = unsafe { library.get(b"DTWAIN_GetJpegXRValues")? };
         let DTWAIN_GetLanguage: Symbol<DtwaingetlanguageFunc> = unsafe { library.get(b"DTWAIN_GetLanguage")? };
         let DTWAIN_GetLastCapEnumIndices: Symbol<DtwaingetlastcapenumindicesFunc> = unsafe { library.get(b"DTWAIN_GetLastCapEnumIndices")? };
@@ -4881,6 +4915,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsFeederSensitive: Symbol<DtwainisfeedersensitiveFunc> = unsafe { library.get(b"DTWAIN_IsFeederSensitive")? };
         let DTWAIN_IsFeederSupported: Symbol<DtwainisfeedersupportedFunc> = unsafe { library.get(b"DTWAIN_IsFeederSupported")? };
         let DTWAIN_IsFileSystemSupported: Symbol<DtwainisfilesystemsupportedFunc> = unsafe { library.get(b"DTWAIN_IsFileSystemSupported")? };
+        let DTWAIN_IsFileTypeSupported: Symbol<DtwainisfiletypesupportedFunc> = unsafe { library.get(b"DTWAIN_IsFileTypeSupported")? };
         let DTWAIN_IsFileXferSupported: Symbol<DtwainisfilexfersupportedFunc> = unsafe { library.get(b"DTWAIN_IsFileXferSupported")? };
         let DTWAIN_IsGetMessageLoopDetectionOn: Symbol<DtwainisgetmessageloopdetectiononFunc> = unsafe { library.get(b"DTWAIN_IsGetMessageLoopDetectionOn")? };
         let DTWAIN_IsGetMessageLoopEnabled: Symbol<DtwainisgetmessageloopenabledFunc> = unsafe { library.get(b"DTWAIN_IsGetMessageLoopEnabled")? };
@@ -5142,8 +5177,13 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetHighlightString: Symbol<DtwainsethighlightstringFunc> = unsafe { library.get(b"DTWAIN_SetHighlightString")? };
         let DTWAIN_SetHighlightStringA: Symbol<DtwainsethighlightstringaFunc> = unsafe { library.get(b"DTWAIN_SetHighlightStringA")? };
         let DTWAIN_SetHighlightStringW: Symbol<DtwainsethighlightstringwFunc> = unsafe { library.get(b"DTWAIN_SetHighlightStringW")? };
+        let DTWAIN_SetJXLLibraryPath: Symbol<DtwainsetjxllibrarypathFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPath")? };
+        let DTWAIN_SetJXLLibraryPathA: Symbol<DtwainsetjxllibrarypathaFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPathA")? };
+        let DTWAIN_SetJXLLibraryPathW: Symbol<DtwainsetjxllibrarypathwFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPathW")? };
         let DTWAIN_SetJobControl: Symbol<DtwainsetjobcontrolFunc> = unsafe { library.get(b"DTWAIN_SetJobControl")? };
         let DTWAIN_SetJpegValues: Symbol<DtwainsetjpegvaluesFunc> = unsafe { library.get(b"DTWAIN_SetJpegValues")? };
+        let DTWAIN_SetJpegXLQuality: Symbol<DtwainsetjpegxlqualityFunc> = unsafe { library.get(b"DTWAIN_SetJpegXLQuality")? };
+        let DTWAIN_SetJpegXLThreadCount: Symbol<DtwainsetjpegxlthreadcountFunc> = unsafe { library.get(b"DTWAIN_SetJpegXLThreadCount")? };
         let DTWAIN_SetJpegXRValues: Symbol<DtwainsetjpegxrvaluesFunc> = unsafe { library.get(b"DTWAIN_SetJpegXRValues")? };
         let DTWAIN_SetLanguage: Symbol<DtwainsetlanguageFunc> = unsafe { library.get(b"DTWAIN_SetLanguage")? };
         let DTWAIN_SetLastError: Symbol<DtwainsetlasterrorFunc> = unsafe { library.get(b"DTWAIN_SetLastError")? };
@@ -5764,6 +5804,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetCurrentPageNumFunc: DTWAIN_GetCurrentPageNum,
             DTWAIN_GetCurrentRetryCountFunc: DTWAIN_GetCurrentRetryCount,
             DTWAIN_GetCurrentTwainTripletFunc: DTWAIN_GetCurrentTwainTriplet,
+            DTWAIN_GetCurrentTwainTripletExFunc: DTWAIN_GetCurrentTwainTripletEx,
             DTWAIN_GetCustomDSDataFunc: DTWAIN_GetCustomDSData,
             DTWAIN_GetDSMFullNameFunc: DTWAIN_GetDSMFullName,
             DTWAIN_GetDSMFullNameAFunc: DTWAIN_GetDSMFullNameA,
@@ -5825,9 +5866,14 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetImageInfoStringAFunc: DTWAIN_GetImageInfoStringA,
             DTWAIN_GetImageInfoStringWFunc: DTWAIN_GetImageInfoStringW,
             DTWAIN_GetImageLayoutInfoFunc: DTWAIN_GetImageLayoutInfo,
+            DTWAIN_GetJXLLibraryPathFunc: DTWAIN_GetJXLLibraryPath,
+            DTWAIN_GetJXLLibraryPathAFunc: DTWAIN_GetJXLLibraryPathA,
+            DTWAIN_GetJXLLibraryPathWFunc: DTWAIN_GetJXLLibraryPathW,
             DTWAIN_GetJobControlFunc: DTWAIN_GetJobControl,
             DTWAIN_GetJobControlExFunc: DTWAIN_GetJobControlEx,
             DTWAIN_GetJpegValuesFunc: DTWAIN_GetJpegValues,
+            DTWAIN_GetJpegXLQualityFunc: DTWAIN_GetJpegXLQuality,
+            DTWAIN_GetJpegXLThreadCountFunc: DTWAIN_GetJpegXLThreadCount,
             DTWAIN_GetJpegXRValuesFunc: DTWAIN_GetJpegXRValues,
             DTWAIN_GetLanguageFunc: DTWAIN_GetLanguage,
             DTWAIN_GetLastCapEnumIndicesFunc: DTWAIN_GetLastCapEnumIndices,
@@ -6055,6 +6101,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsFeederSensitiveFunc: DTWAIN_IsFeederSensitive,
             DTWAIN_IsFeederSupportedFunc: DTWAIN_IsFeederSupported,
             DTWAIN_IsFileSystemSupportedFunc: DTWAIN_IsFileSystemSupported,
+            DTWAIN_IsFileTypeSupportedFunc: DTWAIN_IsFileTypeSupported,
             DTWAIN_IsFileXferSupportedFunc: DTWAIN_IsFileXferSupported,
             DTWAIN_IsGetMessageLoopDetectionOnFunc: DTWAIN_IsGetMessageLoopDetectionOn,
             DTWAIN_IsGetMessageLoopEnabledFunc: DTWAIN_IsGetMessageLoopEnabled,
@@ -6316,8 +6363,13 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetHighlightStringFunc: DTWAIN_SetHighlightString,
             DTWAIN_SetHighlightStringAFunc: DTWAIN_SetHighlightStringA,
             DTWAIN_SetHighlightStringWFunc: DTWAIN_SetHighlightStringW,
+            DTWAIN_SetJXLLibraryPathFunc: DTWAIN_SetJXLLibraryPath,
+            DTWAIN_SetJXLLibraryPathAFunc: DTWAIN_SetJXLLibraryPathA,
+            DTWAIN_SetJXLLibraryPathWFunc: DTWAIN_SetJXLLibraryPathW,
             DTWAIN_SetJobControlFunc: DTWAIN_SetJobControl,
             DTWAIN_SetJpegValuesFunc: DTWAIN_SetJpegValues,
+            DTWAIN_SetJpegXLQualityFunc: DTWAIN_SetJpegXLQuality,
+            DTWAIN_SetJpegXLThreadCountFunc: DTWAIN_SetJpegXLThreadCount,
             DTWAIN_SetJpegXRValuesFunc: DTWAIN_SetJpegXRValues,
             DTWAIN_SetLanguageFunc: DTWAIN_SetLanguage,
             DTWAIN_SetLastErrorFunc: DTWAIN_SetLastError,
@@ -8354,6 +8406,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetCurrentTwainTripletFunc)(pAppID, pSourceID, lpDG, lpDAT, lpMsg, lpMemRef);  }
     }
 
+    pub fn DTWAIN_GetCurrentTwainTripletEx(&self, pAppID: *mut c_void, pSourceID: *mut c_void, lpDG: *mut i32, lpDAT: *mut i32, lpMsg: *mut i32, lpMemRef: *mut i64) -> i32 {
+        unsafe { return (self.DTWAIN_GetCurrentTwainTripletExFunc)(pAppID, pSourceID, lpDG, lpDAT, lpMsg, lpMemRef);  }
+    }
+
     pub fn DTWAIN_GetCustomDSData(&self, Source: *mut c_void, Data: *mut u8, dSize: u32, pActualSize: *mut u32, nFlags: i32) -> *mut c_void {
         unsafe { return (self.DTWAIN_GetCustomDSDataFunc)(Source, Data, dSize, pActualSize, nFlags);  }
     }
@@ -8598,6 +8654,18 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetImageLayoutInfoFunc)(Source, lGetType, DocumentNumber, PageNumber, FrameNumber);  }
     }
 
+    pub fn DTWAIN_GetJXLLibraryPath(&self, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetJXLLibraryPathFunc)(lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetJXLLibraryPathA(&self, lpszOut: *mut c_char, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetJXLLibraryPathAFunc)(lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetJXLLibraryPathW(&self, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetJXLLibraryPathWFunc)(lpszOut, nSize);  }
+    }
+
     pub fn DTWAIN_GetJobControl(&self, Source: *mut c_void, pJobControl: *mut i32, bCurrent: i32) -> i32 {
         unsafe { return (self.DTWAIN_GetJobControlFunc)(Source, pJobControl, bCurrent);  }
     }
@@ -8608,6 +8676,14 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetJpegValues(&self, Source: *mut c_void, pQuality: *mut i32, Progressive: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetJpegValuesFunc)(Source, pQuality, Progressive);  }
+    }
+
+    pub fn DTWAIN_GetJpegXLQuality(&self, Source: *mut c_void, pQuality: *mut i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetJpegXLQualityFunc)(Source, pQuality);  }
+    }
+
+    pub fn DTWAIN_GetJpegXLThreadCount(&self) -> i32 {
+        unsafe { return (self.DTWAIN_GetJpegXLThreadCountFunc)();  }
     }
 
     pub fn DTWAIN_GetJpegXRValues(&self, Source: *mut c_void, pQuality: *mut i32, Progressive: *mut i32) -> i32 {
@@ -9516,6 +9592,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_IsFileSystemSupported(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_IsFileSystemSupportedFunc)(Source);  }
+    }
+
+    pub fn DTWAIN_IsFileTypeSupported(&self, fileType: i32) -> i32 {
+        unsafe { return (self.DTWAIN_IsFileTypeSupportedFunc)(fileType);  }
     }
 
     pub fn DTWAIN_IsFileXferSupported(&self, Source: *mut c_void, lFileType: i32) -> i32 {
@@ -10562,12 +10642,32 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_SetHighlightStringWFunc)(Source, Highlight);  }
     }
 
+    pub fn DTWAIN_SetJXLLibraryPath(&self, sFilePath: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_SetJXLLibraryPathFunc)(sFilePath);  }
+    }
+
+    pub fn DTWAIN_SetJXLLibraryPathA(&self, szFilePath: *const c_char) -> i32 {
+        unsafe { return (self.DTWAIN_SetJXLLibraryPathAFunc)(szFilePath);  }
+    }
+
+    pub fn DTWAIN_SetJXLLibraryPathW(&self, sFilePath: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_SetJXLLibraryPathWFunc)(sFilePath);  }
+    }
+
     pub fn DTWAIN_SetJobControl(&self, Source: *mut c_void, JobControl: i32, bSetCurrent: i32) -> i32 {
         unsafe { return (self.DTWAIN_SetJobControlFunc)(Source, JobControl, bSetCurrent);  }
     }
 
     pub fn DTWAIN_SetJpegValues(&self, Source: *mut c_void, Quality: i32, Progressive: i32) -> i32 {
         unsafe { return (self.DTWAIN_SetJpegValuesFunc)(Source, Quality, Progressive);  }
+    }
+
+    pub fn DTWAIN_SetJpegXLQuality(&self, Source: *mut c_void, Quality: i32) -> i32 {
+        unsafe { return (self.DTWAIN_SetJpegXLQualityFunc)(Source, Quality);  }
+    }
+
+    pub fn DTWAIN_SetJpegXLThreadCount(&self, ThreadCount: i32) -> i32 {
+        unsafe { return (self.DTWAIN_SetJpegXLThreadCountFunc)(ThreadCount);  }
     }
 
     pub fn DTWAIN_SetJpegXRValues(&self, Source: *mut c_void, Quality: i32, Progressive: i32) -> i32 {

@@ -250,6 +250,7 @@ Class DTWAINAPI
     Public Const DTWAIN_JPEGXR As Integer = 12000
     Public Const DTWAIN_SVG As Integer = 13000
     Public Const DTWAIN_SVGZ As Integer = 13001
+    Public Const DTWAIN_JPEGXL As Integer = 14000
     Public Const DTWAIN_INCHES As Integer = 0
     Public Const DTWAIN_CENTIMETERS As Integer = 1
     Public Const DTWAIN_PICAS As Integer = 2
@@ -833,6 +834,9 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_ACTIVE_TWAINSESSION As Integer = (-1091)
     Public Const DTWAIN_ERR_DSMVERSION_NOTSUPPORTED As Integer = (-1092)
     Public Const DTWAIN_ERR_TWENUMERATOR_NOTUSED As Integer = (-1093)
+    Public Const DTWAIN_ERR_JXL_NOTAVAILABLE As Integer = (-1094)
+    Public Const DTWAIN_ERR_JXL_ALREADYLOADED As Integer = (-1095)
+    Public Const DTWAIN_ERR_INVALID_PATH As Integer = (-1096)
     Public Const TWAIN_ERR_LOW_MEMORY As Integer = (-1100)
     Public Const TWAIN_ERR_FALSE_ALARM As Integer = (-1101)
     Public Const TWAIN_ERR_BUMMER As Integer = (-1102)
@@ -2162,6 +2166,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetCurrentPageNum Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetCurrentRetryCount Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetCurrentTwainTriplet Lib "dtwain64.dll" (ByRef pAppID As TW_IDENTITY, ByRef pSourceID As TW_IDENTITY, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
+    Public Declare Function DTWAIN_GetCurrentTwainTripletEx Lib "dtwain64.dll" (pAppID As System.IntPtr, pSourceID As System.IntPtr, ByRef lpDG As Integer, ByRef lpDAT As Integer, ByRef lpMsg As Integer, ByRef lpMemRef As System.Int64) As Integer
     Public Declare Function DTWAIN_GetCustomDSData Lib "dtwain64.dll" (Source As System.IntPtr, Data As Byte(), dSize As UInteger, ByRef pActualSize As UInteger, nFlags As Integer) As System.IntPtr
     Public Declare Ansi Function DTWAIN_GetDSMFullName Lib "dtwain64.dll" (DSMType As Integer, <MarshalAs(UnmanagedType.LPStr)> szDLLName As StringBuilder, nMaxLen As Integer, ByRef pWhichSearch As Integer) As Integer
     Public Declare Function DTWAIN_GetDSMSearchOrder Lib "dtwain64.dll" () As Integer
@@ -2201,9 +2206,12 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetImageInfo Lib "dtwain64.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Ansi Function DTWAIN_GetImageInfoString Lib "dtwain64.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Function DTWAIN_GetImageLayoutInfo Lib "dtwain64.dll" (Source As System.IntPtr, lGetType As Integer, ByRef DocumentNumber As Integer, ByRef PageNumber As Integer, ByRef FrameNumber As Integer) As Integer
+    Public Declare Ansi Function DTWAIN_GetJXLLibraryPath Lib "dtwain64.dll" (<MarshalAs(UnmanagedType.LPStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControl Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControlEx Lib "dtwain64.dll" (Source As System.IntPtr, bGetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJpegValues Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
+    Public Declare Function DTWAIN_GetJpegXLQuality Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pQuality As Integer) As Integer
+    Public Declare Function DTWAIN_GetJpegXLThreadCount Lib "dtwain64.dll" () As Integer
     Public Declare Function DTWAIN_GetJpegXRValues Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
     Public Declare Function DTWAIN_GetLanguage Lib "dtwain64.dll" () As Integer
     Public Declare Function DTWAIN_GetLastCapEnumIndices Lib "dtwain64.dll" (Source As System.IntPtr, ByRef pCurrentIndex As Integer, ByRef pDefaultIndex As Integer) As Integer
@@ -2354,6 +2362,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_IsFeederSensitive Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsFeederSupported Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_IsFileSystemSupported Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsFileTypeSupported Lib "dtwain64.dll" (fileType As Integer) As Integer
     Public Declare Function DTWAIN_IsFileXferSupported Lib "dtwain64.dll" (Source As System.IntPtr, lFileType As Integer) As Integer
     Public Declare Function DTWAIN_IsGetMessageLoopDetectionOn Lib "dtwain64.dll" () As Integer
     Public Declare Function DTWAIN_IsGetMessageLoopEnabled Lib "dtwain64.dll" (Source As System.IntPtr) As Integer
@@ -2546,8 +2555,11 @@ Class DTWAINAPI
     Public Declare Ansi Function DTWAIN_SetHalftone Lib "dtwain64.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
     Public Declare Function DTWAIN_SetHighlight Lib "dtwain64.dll" (Source As System.IntPtr, Highlight As System.Double) As Integer
     Public Declare Ansi Function DTWAIN_SetHighlightString Lib "dtwain64.dll" (Source As System.IntPtr, Highlight As String) As Integer
+    Public Declare Ansi Function DTWAIN_SetJXLLibraryPath Lib "dtwain64.dll" (sFilePath As String) As Integer
     Public Declare Function DTWAIN_SetJobControl Lib "dtwain64.dll" (Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_SetJpegValues Lib "dtwain64.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
+    Public Declare Function DTWAIN_SetJpegXLQuality Lib "dtwain64.dll" (Source As System.IntPtr, Quality As Integer) As Integer
+    Public Declare Function DTWAIN_SetJpegXLThreadCount Lib "dtwain64.dll" (ThreadCount As Integer) As Integer
     Public Declare Function DTWAIN_SetJpegXRValues Lib "dtwain64.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
     Public Declare Function DTWAIN_SetLanguage Lib "dtwain64.dll" (nLanguage As Integer) As Integer
     Public Declare Function DTWAIN_SetLastError Lib "dtwain64.dll" (nError As Integer) As Integer

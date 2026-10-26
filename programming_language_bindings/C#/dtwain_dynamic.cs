@@ -321,6 +321,7 @@
         public const int DTWAIN_JPEGXR = 12000;
         public const int DTWAIN_SVG = 13000;
         public const int DTWAIN_SVGZ = 13001;
+        public const int DTWAIN_JPEGXL = 14000;
         public const int DTWAIN_INCHES = 0;
         public const int DTWAIN_CENTIMETERS = 1;
         public const int DTWAIN_PICAS = 2;
@@ -904,6 +905,9 @@
         public const int DTWAIN_ERR_ACTIVE_TWAINSESSION = (-1091);
         public const int DTWAIN_ERR_DSMVERSION_NOTSUPPORTED = (-1092);
         public const int DTWAIN_ERR_TWENUMERATOR_NOTUSED = (-1093);
+        public const int DTWAIN_ERR_JXL_NOTAVAILABLE = (-1094);
+        public const int DTWAIN_ERR_JXL_ALREADYLOADED = (-1095);
+        public const int DTWAIN_ERR_INVALID_PATH = (-1096);
         public const int TWAIN_ERR_LOW_MEMORY = (-1100);
         public const int TWAIN_ERR_FALSE_ALARM = (-1101);
         public const int TWAIN_ERR_BUMMER = (-1102);
@@ -2341,6 +2345,7 @@
         public delegate int DTWAIN_GetCurrentPageNumDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetCurrentRetryCountDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_GetCurrentTwainTripletDelegate([In, Out] TW_IDENTITY pAppID, [In, Out] TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef);
+        public delegate int DTWAIN_GetCurrentTwainTripletExDelegate(TW_IDENTITY pAppID, TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef);
         public delegate HANDLE DTWAIN_GetCustomDSDataDelegate(DTWAIN_SOURCE Source, byte[] Data, uint dSize, ref DWORD pActualSize, int nFlags);
         public delegate int DTWAIN_GetDSMFullNameDelegate(int DSMType, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder szDLLName, int nMaxLen, ref int pWhichSearch);
         public delegate int DTWAIN_GetDSMFullNameDelegate_overload(int DSMType, System.IntPtr szDLLName, int nMaxLen, ref int pWhichSearch);
@@ -2390,9 +2395,13 @@
         public delegate int DTWAIN_GetImageInfoStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpXResolution, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageInfoStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageLayoutInfoDelegate(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber);
+        public delegate int DTWAIN_GetJXLLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+        public delegate int DTWAIN_GetJXLLibraryPathDelegate_overload(System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetJobControlDelegate(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
         public delegate int DTWAIN_GetJobControlExDelegate(DTWAIN_SOURCE Source, int bGetCurrent);
         public delegate int DTWAIN_GetJpegValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
+        public delegate int DTWAIN_GetJpegXLQualityDelegate(DTWAIN_SOURCE Source, ref int pQuality);
+        public delegate int DTWAIN_GetJpegXLThreadCountDelegate();
         public delegate int DTWAIN_GetJpegXRValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
         public delegate int DTWAIN_GetLanguageDelegate();
         public delegate int DTWAIN_GetLastCapEnumIndicesDelegate(DTWAIN_SOURCE Source, ref int pCurrentIndex, ref int pDefaultIndex);
@@ -2581,6 +2590,7 @@
         public delegate int DTWAIN_IsFeederSensitiveDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsFeederSupportedDelegate(DTWAIN_SOURCE Source);
         public delegate int DTWAIN_IsFileSystemSupportedDelegate(DTWAIN_SOURCE Source);
+        public delegate int DTWAIN_IsFileTypeSupportedDelegate(int fileType);
         public delegate int DTWAIN_IsFileXferSupportedDelegate(DTWAIN_SOURCE Source, int lFileType);
         public delegate int DTWAIN_IsGetMessageLoopDetectionOnDelegate();
         public delegate int DTWAIN_IsGetMessageLoopEnabledDelegate(DTWAIN_SOURCE Source);
@@ -2778,8 +2788,11 @@
         public delegate int DTWAIN_SetHalftoneDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpHalftone);
         public delegate int DTWAIN_SetHighlightDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT Highlight);
         public delegate int DTWAIN_SetHighlightStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight);
+        public delegate int DTWAIN_SetJXLLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] string sFilePath);
         public delegate int DTWAIN_SetJobControlDelegate(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent);
         public delegate int DTWAIN_SetJpegValuesDelegate(DTWAIN_SOURCE Source, int Quality, int Progressive);
+        public delegate int DTWAIN_SetJpegXLQualityDelegate(DTWAIN_SOURCE Source, int Quality);
+        public delegate int DTWAIN_SetJpegXLThreadCountDelegate(int ThreadCount);
         public delegate int DTWAIN_SetJpegXRValuesDelegate(DTWAIN_SOURCE Source, int Quality, int Progressive);
         public delegate int DTWAIN_SetLanguageDelegate(int nLanguage);
         public delegate int DTWAIN_SetLastErrorDelegate(int nError);
@@ -4090,6 +4103,9 @@
         [DTWAINNativeFunction("DTWAIN_GetCurrentTwainTriplet")]
         private readonly DTWAIN_GetCurrentTwainTripletDelegate  _DTWAIN_GetCurrentTwainTriplet;
 
+        [DTWAINNativeFunction("DTWAIN_GetCurrentTwainTripletEx")]
+        private readonly DTWAIN_GetCurrentTwainTripletExDelegate  _DTWAIN_GetCurrentTwainTripletEx;
+
         [DTWAINNativeFunction("DTWAIN_GetCustomDSData")]
         private readonly DTWAIN_GetCustomDSDataDelegate  _DTWAIN_GetCustomDSData;
 
@@ -4237,6 +4253,12 @@
         [DTWAINNativeFunction("DTWAIN_GetImageLayoutInfo")]
         private readonly DTWAIN_GetImageLayoutInfoDelegate  _DTWAIN_GetImageLayoutInfo;
 
+        [DTWAINNativeFunction("DTWAIN_GetJXLLibraryPath")]
+        private readonly DTWAIN_GetJXLLibraryPathDelegate  _DTWAIN_GetJXLLibraryPath;
+
+        [DTWAINNativeFunction("DTWAIN_GetJXLLibraryPath")]
+        private readonly DTWAIN_GetJXLLibraryPathDelegate_overload _DTWAIN_GetJXLLibraryPath_overload; 
+
         [DTWAINNativeFunction("DTWAIN_GetJobControl")]
         private readonly DTWAIN_GetJobControlDelegate  _DTWAIN_GetJobControl;
 
@@ -4245,6 +4267,12 @@
 
         [DTWAINNativeFunction("DTWAIN_GetJpegValues")]
         private readonly DTWAIN_GetJpegValuesDelegate  _DTWAIN_GetJpegValues;
+
+        [DTWAINNativeFunction("DTWAIN_GetJpegXLQuality")]
+        private readonly DTWAIN_GetJpegXLQualityDelegate  _DTWAIN_GetJpegXLQuality;
+
+        [DTWAINNativeFunction("DTWAIN_GetJpegXLThreadCount")]
+        private readonly DTWAIN_GetJpegXLThreadCountDelegate  _DTWAIN_GetJpegXLThreadCount;
 
         [DTWAINNativeFunction("DTWAIN_GetJpegXRValues")]
         private readonly DTWAIN_GetJpegXRValuesDelegate  _DTWAIN_GetJpegXRValues;
@@ -4809,6 +4837,9 @@
 
         [DTWAINNativeFunction("DTWAIN_IsFileSystemSupported")]
         private readonly DTWAIN_IsFileSystemSupportedDelegate  _DTWAIN_IsFileSystemSupported;
+
+        [DTWAINNativeFunction("DTWAIN_IsFileTypeSupported")]
+        private readonly DTWAIN_IsFileTypeSupportedDelegate  _DTWAIN_IsFileTypeSupported;
 
         [DTWAINNativeFunction("DTWAIN_IsFileXferSupported")]
         private readonly DTWAIN_IsFileXferSupportedDelegate  _DTWAIN_IsFileXferSupported;
@@ -5401,11 +5432,20 @@
         [DTWAINNativeFunction("DTWAIN_SetHighlightString")]
         private readonly DTWAIN_SetHighlightStringDelegate  _DTWAIN_SetHighlightString;
 
+        [DTWAINNativeFunction("DTWAIN_SetJXLLibraryPath")]
+        private readonly DTWAIN_SetJXLLibraryPathDelegate  _DTWAIN_SetJXLLibraryPath;
+
         [DTWAINNativeFunction("DTWAIN_SetJobControl")]
         private readonly DTWAIN_SetJobControlDelegate  _DTWAIN_SetJobControl;
 
         [DTWAINNativeFunction("DTWAIN_SetJpegValues")]
         private readonly DTWAIN_SetJpegValuesDelegate  _DTWAIN_SetJpegValues;
+
+        [DTWAINNativeFunction("DTWAIN_SetJpegXLQuality")]
+        private readonly DTWAIN_SetJpegXLQualityDelegate  _DTWAIN_SetJpegXLQuality;
+
+        [DTWAINNativeFunction("DTWAIN_SetJpegXLThreadCount")]
+        private readonly DTWAIN_SetJpegXLThreadCountDelegate  _DTWAIN_SetJpegXLThreadCount;
 
         [DTWAINNativeFunction("DTWAIN_SetJpegXRValues")]
         private readonly DTWAIN_SetJpegXRValuesDelegate  _DTWAIN_SetJpegXRValues;
@@ -6894,6 +6934,9 @@
         public  int DTWAIN_GetCurrentTwainTriplet([In, Out] TW_IDENTITY pAppID, [In, Out] TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef)
         { return _DTWAIN_GetCurrentTwainTriplet(pAppID, pSourceID, ref lpDG, ref lpDAT, ref lpMsg, ref lpMemRef); }
 
+        public  int DTWAIN_GetCurrentTwainTripletEx(TW_IDENTITY pAppID, TW_IDENTITY pSourceID, ref int lpDG, ref int lpDAT, ref int lpMsg, ref long lpMemRef)
+        { return _DTWAIN_GetCurrentTwainTripletEx(pAppID, pSourceID, ref lpDG, ref lpDAT, ref lpMsg, ref lpMemRef); }
+
         public  HANDLE DTWAIN_GetCustomDSData(DTWAIN_SOURCE Source, byte[] Data, uint dSize, ref DWORD pActualSize, int nFlags)
         { return _DTWAIN_GetCustomDSData(Source, Data, dSize, ref pActualSize, nFlags); }
 
@@ -7041,6 +7084,12 @@
         public  int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber)
         { return _DTWAIN_GetImageLayoutInfo(Source, lGetType, ref DocumentNumber, ref PageNumber, ref FrameNumber); }
 
+        public  int DTWAIN_GetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
+        { return _DTWAIN_GetJXLLibraryPath(lpszOut, nSize); }
+
+        public  int DTWAIN_GetJXLLibraryPath (System.IntPtr lpszOut, int nSize)
+        { return _DTWAIN_GetJXLLibraryPath_overload(lpszOut, nSize); }
+
         public  int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent)
         { return _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent); }
 
@@ -7049,6 +7098,12 @@
 
         public  int DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
         { return _DTWAIN_GetJpegValues(Source, ref pQuality, ref Progressive); }
+
+        public  int DTWAIN_GetJpegXLQuality(DTWAIN_SOURCE Source, ref int pQuality)
+        { return _DTWAIN_GetJpegXLQuality(Source, ref pQuality); }
+
+        public  int DTWAIN_GetJpegXLThreadCount()
+        { return _DTWAIN_GetJpegXLThreadCount(); }
 
         public  int DTWAIN_GetJpegXRValues(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive)
         { return _DTWAIN_GetJpegXRValues(Source, ref pQuality, ref Progressive); }
@@ -7613,6 +7668,9 @@
 
         public  int DTWAIN_IsFileSystemSupported(DTWAIN_SOURCE Source)
         { return _DTWAIN_IsFileSystemSupported(Source); }
+
+        public  int DTWAIN_IsFileTypeSupported(int fileType)
+        { return _DTWAIN_IsFileTypeSupported(fileType); }
 
         public  int DTWAIN_IsFileXferSupported(DTWAIN_SOURCE Source, int lFileType)
         { return _DTWAIN_IsFileXferSupported(Source, lFileType); }
@@ -8205,11 +8263,20 @@
         public  int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight)
         { return _DTWAIN_SetHighlightString(Source, Highlight); }
 
+        public  int DTWAIN_SetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] string sFilePath)
+        { return _DTWAIN_SetJXLLibraryPath(sFilePath); }
+
         public  int DTWAIN_SetJobControl(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent)
         { return _DTWAIN_SetJobControl(Source, JobControl, bSetCurrent); }
 
         public  int DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, int Quality, int Progressive)
         { return _DTWAIN_SetJpegValues(Source, Quality, Progressive); }
+
+        public  int DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, int Quality)
+        { return _DTWAIN_SetJpegXLQuality(Source, Quality); }
+
+        public  int DTWAIN_SetJpegXLThreadCount(int ThreadCount)
+        { return _DTWAIN_SetJpegXLThreadCount(ThreadCount); }
 
         public  int DTWAIN_SetJpegXRValues(DTWAIN_SOURCE Source, int Quality, int Progressive)
         { return _DTWAIN_SetJpegXRValues(Source, Quality, Progressive); }

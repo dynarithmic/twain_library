@@ -56,6 +56,7 @@ BEGIN
             MENUITEM "ICO-Vista",                   IDM_ACQUIREFILE_ICOVISTA
             MENUITEM "JPEG",                        IDM_ACQUIREFILE_JPEG
             MENUITEM "JPEG-2000",                   IDM_ACQUIREFILE_JPEG2000
+            MENUITEM "JPEG-XL",                     IDM_ACQUIREFILE_JPEGXL
             MENUITEM "JPEG-XR",                     IDM_ACQUIREFILE_JPEGXR
             MENUITEM "Paintshop (PSD)",             IDM_ACQUIREFILE_PAINTSHOP
             MENUITEM "PCX",                         IDM_ACQUIREFILE_PCX
