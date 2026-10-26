@@ -48,7 +48,6 @@ For example, if you use Visual Studio Code to develop in Go or Lua, you will nee
 ----
 ### Running the demos
 
-1) Make sure that the [DTWAIN DLL's](https://github.com/dynarithmic/twain_library/tree/master/binaries) are available (system PATH, your exe directory, etc.) when the demo program you are running starts.  A missing DLL will result in a "Dynamic Link Library not found" error at runtime.
+Make sure that the [DTWAIN DLL's](https://github.com/dynarithmic/twain_library/tree/master/binaries) are available (system PATH, your exe directory, etc.) when the demo program you are running starts.  A missing DLL will result in a "Dynamic Link Library not found" error at runtime.
 
-2) Make sure the files found in <a href="https://github.com/dynarithmic/twain_library/tree/master/text_resources" target="_blank">text_resources</a> are available in the same directory as the DTWAIN DLL's.  Missing text resources will result in a "DTWAIN Resources not found" error.
 
