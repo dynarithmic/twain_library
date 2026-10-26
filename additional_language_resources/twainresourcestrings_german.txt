@@ -108,6 +108,9 @@
 1091 TWAIN-Sitzung ist derzeit aktiv
 1092 Der Vorgang erfordert TWAIN DSM 2.x oder höher
 1093 TWON_ENUMERATOR Container wurde für diesen Vorgang nicht verwendet.
+1094 Eine JPEG XL-DLL oder Abhängigkeit fehlt, hat ein ungültiges Format oder eine inkompatible Architektur.
+1095 Die JPEG-XL-Bibliothek ist bereits im DTWAIN-DLL-Prozessraum geladen.
+1096 Ein ungültiger Dateipfad wurde angegeben.
 1100 TWAIN Zustandscode: Zu wenig Speicher
 1101 TWAIN Zustandscode: Kein Fehler
 1102 TWAIN Zustandscode: Unbekannte Fehlerursache

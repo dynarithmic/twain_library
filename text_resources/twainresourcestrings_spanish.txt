@@ -108,6 +108,9 @@
 1091 La sesión TWAIN está activa actualmente
 1092 La operación requiere TWAIN DSM 2.x o posterior
 1093 El contenedor TWON_ENUMERATOR no se utilizó para esta operación.
+1094 Falta una DLL o dependencia de JPEG XL, tiene un formato no válido o una arquitectura incompatible.
+1095 La biblioteca JPEG XL ya está cargada dentro del espacio de proceso del DLL DTWAIN.
+1096 Se especificó una ruta de archivo no válida.
 1100 Condición de TWAIN no podría Codificar a no podríamos completar funcionamiento.   Memoria Insuficiente.
 1101 Error de Código de Condición de TWAIN
 1102 TWAIN Condiciona Código Unknown causa del fracaso

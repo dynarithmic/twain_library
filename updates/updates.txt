@@ -1,5 +1,118 @@
 DTWAIN Version changes
 
+5.10.1
+
+- New: JPEG XL (JXL) Image Format Support
+
+  DTWAIN now supports saving scanned images in the JPEG XL (JXL) image format using the DTWAIN_JPEGXL file type.
+
+  JPEG XL support is available in both 32-bit and 64-bit DTWAIN and uses the JPEG XL libraries supplied separately from DTWAIN.
+
+  **Requirements:**
+  - The appropriate 32-bit or 64-bit JPEG XL DLLs and their dependencies must be available to the application.
+  - The Microsoft Visual C++ Redistributable required by the JPEG XL libraries must be installed.
+  - JPEG XL libraries are loaded on demand and are not required for other DTWAIN image formats.
+
+  If the JPEG XL components are unavailable or cannot be loaded, DTWAIN returns DTWAIN_ERR_JXL_UNAVAILABLE if attempting to
+  save to a JPEG-XL file using DTWAIN_AcquireFile() or similar functions.  Note:  Applications can correct missing JPEG XL 
+  dependencies and retry without restarting the DTWAIN application.
+
+
+- New JPEG XL Library Path Functions
+
+  DTWAIN provides two new functions that allow applications to configure and retrieve the directory used to locate the JPEG XL (JXL) runtime DLLs.
+
+  These functions are useful when an application needs to explicitly specify the location of the 32-bit or 64-bit JPEG XL libraries instead of 
+  relying on the default Windows DLL search mechanism.
+
+      DTWAIN_BOOL DLLENTRY_DEF DTWAIN_SetJXLLibraryPath(LPCTSTR sFilePath);
+
+  Sets the directory containing the JPEG XL runtime DLLs, including jxl.dll and jxl_threads.dll.
+
+  - **Non-NULL path:** Specifies the directory from which DTWAIN will load the JPEG XL libraries.
+  - **NULL path:** Resets the configuration to use the default Windows DLL search mechanism.
+  - **Empty string:** Also selects the default Windows DLL search mechanism.
+  - **Return value:** TRUE if the path was successfully configured; FALSE otherwise.
+
+  **Important:** The library path cannot be changed once the JPEG XL libraries have been successfully loaded. In this case, the function returns FALSE.
+
+  Applications should configure the path before checking JPEG XL availability or attempting JPEG XL image acquisition.
+
+      LONG DLLENTRY_DEF DTWAIN_GetJXLLibraryPath(LPTSTR lpszOut, LONG nSize);
+
+  Retrieves the currently configured JPEG XL library directory.
+
+  - **lpszOut:** Buffer that receives the directory path.
+  - **nSize:** Size of the supplied buffer, in characters.
+  - **Return value:** When lpszOut is NULL, returns the number of characters required to allocate a buffer for the path, including the terminating null character.
+
+  Passing NULL for lpszOut allows applications to determine the required buffer size before retrieving the path.
+
+  Both functions are available in ANSI and Unicode versions:
+
+      DTWAIN_SetJXLLibraryPathA(...)
+      DTWAIN_SetJXLLibraryPathW(...)
+
+      DTWAIN_GetJXLLibraryPathA(...)
+      DTWAIN_GetJXLLibraryPathW(...)
+
+  The generic function names resolve to the appropriate ANSI or Unicode versions according to the application's character-set configuration.
+
+  Example (C++):
+
+        // Configure the JPEG XL library directory.
+        DTWAIN_SetJXLLibraryPath(_T("C:\\DTWAIN\\JXL\\x64"));
+
+        // Determine the required buffer size.
+        LONG nSize = DTWAIN_GetJXLLibraryPath(nullptr, 0);
+
+        if (nSize > 0)
+        {
+            std::vector<TCHAR> buffer(nSize);
+
+            // Retrieve the configured directory.
+            DTWAIN_GetJXLLibraryPath(buffer.data(), nSize);
+        }
+
+        // Restore default Windows DLL searching.
+        // This succeeds only if the JPEG XL libraries
+        // have not already been loaded.
+        DTWAIN_SetJXLLibraryPath(nullptr);
+
+  **Note:** JPEG XL libraries are loaded dynamically when required. Configuring the directory does not itself load the libraries. Applications 
+  that do not specify a directory can continue using JPEG XL through the standard Windows DLL search mechanism.
+
+- New API: DTWAIN_IsFileTypeAvailable()
+
+  The new DTWAIN_IsFileTypeAvailable() function determines whether a specified DTWAIN image file format is currently available for saving.
+
+      DTWAIN_BOOL DTWAIN_IsFileTypeAvailable(LONG FileType);
+
+   The function accepts an existing DTWAIN file-type constant and returns `TRUE` if the format is available, or `FALSE` otherwise.
+
+   **Requirements:**
+   - DTWAIN_SysInitialize() must have been called successfully.
+   - No TWAIN session needs to be started.
+   - No TWAIN Source needs to be selected or opened.
+
+       For example:
+
+       if (DTWAIN_IsFileTypeAvailable(DTWAIN_JPEGXL))
+       {
+          // JPEG XL output is available.
+       }
+
+    The function can be called repeatedly to detect changes in format availability during application execution.
+
+    Applications can also call this function during acquisition notifications, such as `DTWAIN_TN_QUERYDISCARDPAGE`, to check JPEG XL availability before saving an acquired image.
+
+- Returning 0 from DTWAIN_TN_FILEPAGESAVING notification when acquiring to image files will now stop the file page being saved.
+
+- Upgraded following internal image related libraries:
+
+      libpng --> 1.6.59
+
+
 5.10.0
 
 - The main twain resource files, twaininfo.txt, dtwain32.ini, and dtwain64.ini are now
@@ -1345,7 +1458,7 @@ DTWAIN_FRAME related functions.
       libpng   --> 1.6.43
       libwebp  --> 1.4.0
       zlib     --> 1.3.1
-      	
+        
 - Fixed issue with saving to files using the DTWAIN_USEPROMPT flag when calling DTWAIN_AcquireFile.
 
 - Fixed issue with DTWAIN_AcquireFileEx when using the DTWAIN_CREATE_DIRECTORY file flag.
@@ -1417,7 +1530,7 @@ duplexing to work properly if the user desired to enable duplexing.
 5.4.0
 
 - DTWAIN Version numbering will now use 3 components: 
-	  MajorVersion.MinorVersion.PatchVersion
+          MajorVersion.MinorVersion.PatchVersion
 
 - For DTWAIN_AcquireFile(), DTWAIN_AcquireFileEx(), added image file type DTWAIN_ICO_RESIZED
   and DTWAIN_WBMP_RESIZED.  These are Windows ICON file and Wireless Bitmap files, respectively,
@@ -1430,17 +1543,17 @@ duplexing to work properly if the user desired to enable duplexing.
 
 - Added DTWAIN_SelectSource alternative functions:
 
-	DTWAIN_SelectSourceByNameWithOpen       
-	DTWAIN_SelectSourceByNameWithOpenA      
-	DTWAIN_SelectSourceByNameWithOpenW      
-	DTWAIN_SelectSourceWithOpen             
-	DTWAIN_SelectDefaultSourceWithOpen      
+        DTWAIN_SelectSourceByNameWithOpen       
+        DTWAIN_SelectSourceByNameWithOpenA      
+        DTWAIN_SelectSourceByNameWithOpenW      
+        DTWAIN_SelectSourceWithOpen             
+        DTWAIN_SelectDefaultSourceWithOpen      
 
   Each of these functions allow selecting a TWAIN source with the option to also open the 
   source once it has been selected.  For example:
 
         DTWAIN_SOURCE source = DTWAIN_SelectSourceWithOpen(FALSE);  // Select, but do not open the source
-	DTWAIN_OpenSource(source); // Open the selected source
+        DTWAIN_OpenSource(source); // Open the selected source
 
   This will easily allow applications to just select the source, if there is a possibility
   that opening the source after selection may cause issues (hardware issue, driver issue, etc.).
@@ -1511,7 +1624,7 @@ duplexing to work properly if the user desired to enable duplexing.
 
 
 
-5.3.0.3		  
+5.3.0.3           
 
 - Handle issue WIA-based drivers that close the user-interface of the TWAIN source before issuing a request to
   start acquiring pages.  
@@ -1537,7 +1650,7 @@ duplexing to work properly if the user desired to enable duplexing.
     b) Added CXImage code to allow for more bitmap transformations to be done.
 
 
-5.3.0.2		  
+5.3.0.2           
 
 - Internal TWAIN message loop has now been restructured to start before the source UI is displayed.
 
@@ -1553,12 +1666,12 @@ duplexing to work properly if the user desired to enable duplexing.
   files under the [Sources] section.
 
 
-5.3.0.1		  
+5.3.0.1           
 
 - Fix issue with buffered mode file transfers.
 
 
-5.3.0.0		  
+5.3.0.0           
 
 - Initial support for latest TWAIN 2.5 capabilities (mostly Image Addressing).
 
@@ -1577,15 +1690,15 @@ duplexing to work properly if the user desired to enable duplexing.
 - Initial release of the C++ object-oriented wrapper of DTWAIN.
 
 - Miscellaneous bug fixes.
-						
+                                                
 
-5.2.0.10		  
+5.2.0.10                  
 
 - Fixed issue when acquiring a file using memory/buffered transfer, where an invalid bitmap was sent to the
   application to query if the bitmap should be discarded.
 
 
-5.2.0.9		  
+5.2.0.9           
 
 - Added DTWAIN_SysInitializeNoBlocking() --
 
@@ -1608,7 +1721,7 @@ duplexing to work properly if the user desired to enable duplexing.
 
   DTWAIN_BP_DETECTORIGINAL - Detect blank pages for the original image that the device generated.
   DTWAIN_BP_DETECTADJUSTED - Detect blank pages for the adjusted image (after cropping, rescaling etc.)
-  DTWAIN_BP_DETECTALL	   - Detect blank pages for both the original and adjusted images (this is the legacy behavior).
+  DTWAIN_BP_DETECTALL      - Detect blank pages for both the original and adjusted images (this is the legacy behavior).
 
 - Corrected blank page handling for gray-scale images
 
@@ -1663,7 +1776,7 @@ duplexing to work properly if the user desired to enable duplexing.
 - Corrected issue with duplex scanning only scanning the first page if pending image count was not 0.
 
 
-5.2.0.6		  
+5.2.0.6           
 - Added following function:
   DTWAIN_ConvertDIBToBitmap -- Converts a Device Independent Bitmap to a Device Dependent Bitmap
 
@@ -1679,7 +1792,7 @@ duplexing to work properly if the user desired to enable duplexing.
 - Miscellaneous code refactoring.
 
 
-5.2.0.5		  
+5.2.0.5           
 - Added following functions:
   DTWAIN_ArrayGetSourceAt -- Use this function in conjunction with DTWAIN_EnumSources to easily retrieve each TWAIN Source found.
   DTWAIN_GetTwainAppIDEx --  Use this function to fill in a TW_IDENTITY structure that describes the TWAIN application ID values.
@@ -1692,7 +1805,7 @@ duplexing to work properly if the user desired to enable duplexing.
   DTWAIN_EnableAutomaticSenseMedium
  
 
-5.2.0.4		  
+5.2.0.4           
 - Changed DTWAIN ANSI and wide string functions to use the "length" parameters correctly.
 
 - Updated dtwainx.h and dtwstrnfn.h to add missing exported API function declarations.
@@ -1702,7 +1815,7 @@ duplexing to work properly if the user desired to enable duplexing.
 - Updated copyright message to stated year 2021.
 
 
-5.2.0.3		  
+5.2.0.3           
 - Added functions DTWAIN_SelectSource2Ex to allow customization of the files listed in the TWAIN Select Source dialog box.
   Customization includes including and excluding TWAIN source names in the dialog box, as well as aliasing your own names for
   a device name.  This function can be used to only display devices that are pertinent for your application.
@@ -1723,7 +1836,7 @@ duplexing to work properly if the user desired to enable duplexing.
   of the function. 
 
 
-5.2.0.2		  
+5.2.0.2           
 - Fixed DLL Version Information in the DLL resources.
 
 - Fixed generation of multipage TIFF files if the compression used on pages will vary.  This fix required 
@@ -1733,7 +1846,7 @@ duplexing to work properly if the user desired to enable duplexing.
 
 - Added function DTWAIN_SetDSMSearchOrderEx to allow applications to customize where DTWAIN will search for the 
   TWAIN Data Source Manager.  This differs from DTWAIN_SetDSMSearchOrder in that the Ex version will now allow
-  searching in a custom directory.		  
+  searching in a custom directory.                
 
 - Added initial support for MSG_GETHELP, MSG_GETLABEL, and MSG_GETLABELENUM using DTWAIN_GetCapValues and related functions.
   Note that these messages were always available using the lower-level DTWAIN_CallDSM function, but now the library has made
@@ -1749,7 +1862,7 @@ duplexing to work properly if the user desired to enable duplexing.
   TWAIN Source is actually NULL if the TWAIN dialog is cancelled, but this additional code is added for clarity.
 
 - DTWAIN Log now shows local time stamp intstead of UTC.
-					   
+                                           
 - Other miscellaneous fixes
 
 
@@ -1770,7 +1883,7 @@ duplexing to work properly if the user desired to enable duplexing.
 - Added DTWAIN_SetTwainDialogFont() to adjust font used in TWAIN Select Source dialog (only is available
   when calling DTWAIN_SelectSource2() function)  Usage:
 
-	DTWAIN_SetTwainDialogFont(HFONT font)
+        DTWAIN_SetTwainDialogFont(HFONT font)
 
   where HFONT is a handle to a Windows HFONT.  If font is 0, the default font (MS Sans Serif) is used.
 

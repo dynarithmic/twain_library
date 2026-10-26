@@ -108,6 +108,9 @@
 1091 La session TWAIN est actuellement active
 1092 L'opération nécessite TWAIN DSM 2.x ou une version ultérieure
 1093 Le conteneur TWON_ENUMERATOR n'a pas été utilisé pour cette opération.
+1094 Une DLL JPEG XL ou une dépendance est manquante, a un format invalide ou une architecture incompatible.
+1095 La bibliothèque JPEG XL est déjà chargée dans l’espace de processus de la DLL DTWAIN.
+1096 Un chemin de fichier invalide a été spécifié.
 1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
 1101 Faute de Code : de Condition de Twain
 1102 Twain Conditionne Code : Inconnu de la cause du raté

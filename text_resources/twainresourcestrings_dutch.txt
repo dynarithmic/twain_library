@@ -108,6 +108,9 @@
 1091 TWAIN-sessie is momenteel actief
 1092 Voor de bewerking is TWAIN DSM 2.x of later vereist
 1093 TWON_ENUMERATOR-container werd niet gebruikt voor deze bewerking.
+1094 Er ontbreekt een JPEG XL DLL of afhankelijkheid, heeft een ongeldig formaat, of een incompatibele architectuur.
+1095 De JPEG XL-bibliotheek is al geladen binnen de DTWAIN DLL-processruimte.
+1096 Er is een ongeldig bestandspad opgegeven.
 1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
 1101 TWAIN Gesteldheid Code: Vergissing
 1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking

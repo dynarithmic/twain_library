@@ -108,6 +108,9 @@
 1091 TWAIN oturumu şu anda aktif
 1092 İşlem TWAIN DSM 2.x veya daha yenisini gerektirir
 1093 TWON_ENUMERATOR kapsayıcısı bu işlem için kullanılmadı.
+1094 Bir JPEG XL DLL veya bağımlılık eksik, geçersiz bir biçime sahip ya da uyumsuz bir mimariye sahip.
+1095 JPEG XL kitaplığı, DTWAIN DLL işlem alanında zaten yüklü.
+1096 Geçersiz bir dosya yolu belirtildi.
 1100 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
 1101 TWAIN Durum Kodu: Hata Yok
 1102 TWAIN Durum Kodu: Bilinmeyen hata nedeni
