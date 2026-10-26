@@ -120,6 +120,8 @@ This function is intended **exclusively for device-native file transfers**, usin
 
 It does not determine whether DTWAIN can acquire images using its built-in single-page or multipage file formats.
 
+----
+
 ### Important Distinction
 
 - **DTWAIN-encoded formats:** Available for all TWAIN devices. DTWAIN handles the image encoding and file generation.
