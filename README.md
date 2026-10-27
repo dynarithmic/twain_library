@@ -6,7 +6,7 @@
 * The DTWAIN Library online help file can be found [here](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/Dynarithmic%20TWAIN%20Library,%20Version%205.x.html), and in .CHM (Windows Help) format [here](https://github.com/dynarithmic/twain_library-helpdocs/tree/main/windows).  
 
     The .CHM file and online-help are being updated to version 5.x on a constant basis.  Updates will be made available in the [help repository](https://github.com/dynarithmic/twain_library-helpdocs/tree/main), as it may have information that pertains to the older commercial version of DTWAIN that will have to be updated or removed.
-* The current version of DTWAIN is [**5.10.0** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
+* The current version of DTWAIN is [**5.10.1** (See Version History)](https://github.com/dynarithmic/twain_library/tree/master/updates/updates.txt).
 
 **Please note that the source code and sample programs for the Dynarithmic TWAIN Library has moved to [this repository](https://github.com/dynarithmic/twain_library_source/tree/main)**.
 
@@ -110,6 +110,10 @@ If however you are not sure if the user's of your application using DTWAIN has t
 If you choose option 2), you can get the Visual C++ runtime libraries <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version" target="_blank">here</a>.  When downloading, choose **vc_redist.x86.exe** for 32-bit applications, and/or **vc_redist.x64.exe** for 64-bit applications.
 
 In addition, the release version of the Programming Database (.PDB) files are available [here for 32-bit](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-ReleasePDB-x86.zip) and [here for 64-bit](https://github.com/dynarithmic/twain_library/releases/latest/download/DTWAIN-ReleasePDB-x64.zip).  This will aid in debugging any issues involving DTWAIN utilizing the Microsoft Visual Studio debugger and/or the WinDBG Microsoft debugger.
+
+----
+
+Note:  To acquire images to the JPEG-XL format, additional support DLL's are required.  These DLL's can be found in the [jpegxl_binaries.zip]() file and must be installed and accessible.  The `jxl32` folder will contain the 32-bit JPEG-XL libraries, while the 64-bit JPEG-XL libraries are found in the `jxl64` folder.  You can use the `DTWAIN_SetJXLLibraryPath` DTWAIN API function to set the path where the DLL's are found, or you can place the DLL's in the same directory as the DTWAIN DLL's).  
 
 Note: Starting with **DTWAIN 5.9.1**, prebuilt DTWAIN DLLs that had the "no-logging" option, even though a bit smaller than the DLL's that had logging support, are no longer distributed separately.  All standard DTWAIN release DLLs include logging support.  Developers who require no-logging builds may [rebuild DTWAIN from source](https://github.com/dynarithmic/twain_library_source) using the `DTWAIN_ENABLE_LOGCALLSTACK=OFF` in the CMake build options.
 
