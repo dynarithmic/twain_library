@@ -422,6 +422,7 @@ DTWAIN includes computer language bindings and demo programs for the following c
   - [C and C++](https://github.com/dynarithmic/twain_library/tree/master/programming_language_bindings/C_CPP_DynamicLoad) -- using no import libraries.
   - [C#](https://github.com/dynarithmic/twain_library/tree/master/demos/C%23)
   - [D](https://github.com/dynarithmic/twain_library/tree/master/demos/D)
+  - [Dart](https://github.com/dynarithmic/twain_library/tree/master/demos/Dart)
   - [Delphi](https://github.com/dynarithmic/twain_library/tree/master/demos/Delphi)
   - [F#](https://github.com/dynarithmic/twain_library/tree/master/demos/F%23)
   - [Go](https://github.com/dynarithmic/twain_library/tree/master/demos/Go)
