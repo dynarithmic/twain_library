@@ -1830,6 +1830,7 @@ namespace Dynarithmic
         public const int DTWAIN_CHECKDLLVERLESSEQ = 3;
         public const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
         public const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
+        public const int DTWAIN_COMPONENT_JPEGXL = 1;
 
         public const string DTWAIN_LIBRARY = "dtwain32d.dll";
 
@@ -2976,6 +2977,12 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetCaption(DTWAIN_SOURCE Source, System.IntPtr Caption);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetComponentPath(int nComponent, [MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszOut, int nSize);
+
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_GetComponentPath(int nComponent, System.IntPtr lpszOut, int nSize);
+
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, ref DWORD lBytes);
 
@@ -3182,12 +3189,6 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetJXLLibraryPath([MarshalAs(UnmanagedType.LPStr)] System.Text.StringBuilder lpszOut, int nSize);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_GetJXLLibraryPath(System.IntPtr lpszOut, int nSize);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
@@ -4275,6 +4276,9 @@ namespace Dynarithmic
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetCaption(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string Caption);
 
+        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_SetComponentPath(int nComponent, [MarshalAs(UnmanagedType.LPStr)] string sFilePath);
+
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, int lCompression, int bSetCurrent);
 
@@ -4361,9 +4365,6 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPStr)] string Highlight);
-
-        [DllImport(DTWAIN_LIBRARY, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        public static extern int DTWAIN_SetJXLLibraryPath([MarshalAs(UnmanagedType.LPStr)] string sFilePath);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_SetJobControl(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent);

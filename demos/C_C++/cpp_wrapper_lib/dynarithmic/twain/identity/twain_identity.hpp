@@ -112,7 +112,7 @@ namespace dynarithmic
                 }
                 if (ret.empty())
                     return "<unknown>";
-                return join(ret, ",");
+                return join<std::string>(ret, ",");
             }
 
             TW_IDENTITY& get_identity()             { return m_identity; };

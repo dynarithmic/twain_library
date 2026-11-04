@@ -1785,6 +1785,7 @@ const (
     DTWAIN_CHECKDLLVERLESSEQ = 3
     DTWAIN_CHECKDLLVERGREATEREQ = 4
     DTWAIN_RESOURCE_COPYRIGHT = 9700
+    DTWAIN_COMPONENT_JPEGXL = 1
 )
 
 // DLL represents a runtime-loaded Windows DLL.
@@ -2246,96 +2247,96 @@ func Load_DTWAINDLL(path string) (*DTWAIN_DLL, error) {
     arr[441] = "DTWAIN_GetCaption"
     arr[442] = "DTWAIN_GetCaptionA"
     arr[443] = "DTWAIN_GetCaptionW"
-    arr[444] = "DTWAIN_GetCompressionSize"
-    arr[445] = "DTWAIN_GetCompressionType"
-    arr[446] = "DTWAIN_GetCompressionTypeEx"
-    arr[447] = "DTWAIN_GetConditionCodeString"
-    arr[448] = "DTWAIN_GetConditionCodeStringA"
-    arr[449] = "DTWAIN_GetConditionCodeStringW"
-    arr[450] = "DTWAIN_GetConstantFromTwainName"
-    arr[451] = "DTWAIN_GetConstantFromTwainNameA"
-    arr[452] = "DTWAIN_GetConstantFromTwainNameW"
-    arr[453] = "DTWAIN_GetContrast"
-    arr[454] = "DTWAIN_GetContrastEx"
-    arr[455] = "DTWAIN_GetContrastString"
-    arr[456] = "DTWAIN_GetContrastStringA"
-    arr[457] = "DTWAIN_GetContrastStringW"
-    arr[458] = "DTWAIN_GetCountry"
-    arr[459] = "DTWAIN_GetCurrentAcquiredImage"
-    arr[460] = "DTWAIN_GetCurrentCustomResourceName"
-    arr[461] = "DTWAIN_GetCurrentCustomResourceNameA"
-    arr[462] = "DTWAIN_GetCurrentCustomResourceNameW"
-    arr[463] = "DTWAIN_GetCurrentFileName"
-    arr[464] = "DTWAIN_GetCurrentFileNameA"
-    arr[465] = "DTWAIN_GetCurrentFileNameW"
-    arr[466] = "DTWAIN_GetCurrentPageNum"
-    arr[467] = "DTWAIN_GetCurrentRetryCount"
-    arr[468] = "DTWAIN_GetCurrentTwainTriplet"
-    arr[469] = "DTWAIN_GetCurrentTwainTripletEx"
-    arr[470] = "DTWAIN_GetCustomDSData"
-    arr[471] = "DTWAIN_GetDSMFullName"
-    arr[472] = "DTWAIN_GetDSMFullNameA"
-    arr[473] = "DTWAIN_GetDSMFullNameW"
-    arr[474] = "DTWAIN_GetDSMSearchOrder"
-    arr[475] = "DTWAIN_GetDSMSearchOrderEx"
-    arr[476] = "DTWAIN_GetDSMSearchOrderExA"
-    arr[477] = "DTWAIN_GetDSMSearchOrderExW"
-    arr[478] = "DTWAIN_GetDTWAINHandle"
-    arr[479] = "DTWAIN_GetDeviceEvent"
-    arr[480] = "DTWAIN_GetDeviceEventEx"
-    arr[481] = "DTWAIN_GetDeviceEventInfo"
-    arr[482] = "DTWAIN_GetDeviceNotifications"
-    arr[483] = "DTWAIN_GetDeviceTimeDate"
-    arr[484] = "DTWAIN_GetDeviceTimeDateA"
-    arr[485] = "DTWAIN_GetDeviceTimeDateW"
-    arr[486] = "DTWAIN_GetDoubleFeedDetectLength"
-    arr[487] = "DTWAIN_GetDoubleFeedDetectValues"
-    arr[488] = "DTWAIN_GetDuplexType"
-    arr[489] = "DTWAIN_GetDuplexTypeEx"
-    arr[490] = "DTWAIN_GetErrorBuffer"
-    arr[491] = "DTWAIN_GetErrorBufferThreshold"
-    arr[492] = "DTWAIN_GetErrorCallback"
-    arr[493] = "DTWAIN_GetErrorCallback64"
-    arr[494] = "DTWAIN_GetErrorString"
-    arr[495] = "DTWAIN_GetErrorStringA"
-    arr[496] = "DTWAIN_GetErrorStringW"
-    arr[497] = "DTWAIN_GetExtCapFromName"
-    arr[498] = "DTWAIN_GetExtCapFromNameA"
-    arr[499] = "DTWAIN_GetExtCapFromNameW"
-    arr[500] = "DTWAIN_GetExtImageInfoData"
-    arr[501] = "DTWAIN_GetExtImageInfoDataEx"
-    arr[502] = "DTWAIN_GetExtImageInfoItem"
-    arr[503] = "DTWAIN_GetExtImageInfoItemEx"
-    arr[504] = "DTWAIN_GetExtNameFromCap"
-    arr[505] = "DTWAIN_GetExtNameFromCapA"
-    arr[506] = "DTWAIN_GetExtNameFromCapW"
-    arr[507] = "DTWAIN_GetFeederAlignment"
-    arr[508] = "DTWAIN_GetFeederFuncs"
-    arr[509] = "DTWAIN_GetFeederOrder"
-    arr[510] = "DTWAIN_GetFeederWaitTime"
-    arr[511] = "DTWAIN_GetFileCompressionType"
-    arr[512] = "DTWAIN_GetFileSavePageCount"
-    arr[513] = "DTWAIN_GetFileTypeExtensions"
-    arr[514] = "DTWAIN_GetFileTypeExtensionsA"
-    arr[515] = "DTWAIN_GetFileTypeExtensionsW"
-    arr[516] = "DTWAIN_GetFileTypeName"
-    arr[517] = "DTWAIN_GetFileTypeNameA"
-    arr[518] = "DTWAIN_GetFileTypeNameW"
-    arr[519] = "DTWAIN_GetHalftone"
-    arr[520] = "DTWAIN_GetHalftoneA"
-    arr[521] = "DTWAIN_GetHalftoneW"
-    arr[522] = "DTWAIN_GetHighlight"
-    arr[523] = "DTWAIN_GetHighlightString"
-    arr[524] = "DTWAIN_GetHighlightStringA"
-    arr[525] = "DTWAIN_GetHighlightStringW"
-    arr[526] = "DTWAIN_GetImageInfo"
-    arr[527] = "DTWAIN_GetImageInfoString"
-    arr[528] = "DTWAIN_GetImageInfoStringA"
-    arr[529] = "DTWAIN_GetImageInfoStringW"
-    arr[530] = "DTWAIN_GetImageLayoutInfo"
-    arr[531] = "DTWAIN_GetJXLLibraryPath"
-    arr[532] = "DTWAIN_GetJXLLibraryPathA"
-    arr[533] = "DTWAIN_GetJXLLibraryPathW"
+    arr[444] = "DTWAIN_GetComponentPath"
+    arr[445] = "DTWAIN_GetComponentPathA"
+    arr[446] = "DTWAIN_GetComponentPathW"
+    arr[447] = "DTWAIN_GetCompressionSize"
+    arr[448] = "DTWAIN_GetCompressionType"
+    arr[449] = "DTWAIN_GetCompressionTypeEx"
+    arr[450] = "DTWAIN_GetConditionCodeString"
+    arr[451] = "DTWAIN_GetConditionCodeStringA"
+    arr[452] = "DTWAIN_GetConditionCodeStringW"
+    arr[453] = "DTWAIN_GetConstantFromTwainName"
+    arr[454] = "DTWAIN_GetConstantFromTwainNameA"
+    arr[455] = "DTWAIN_GetConstantFromTwainNameW"
+    arr[456] = "DTWAIN_GetContrast"
+    arr[457] = "DTWAIN_GetContrastEx"
+    arr[458] = "DTWAIN_GetContrastString"
+    arr[459] = "DTWAIN_GetContrastStringA"
+    arr[460] = "DTWAIN_GetContrastStringW"
+    arr[461] = "DTWAIN_GetCountry"
+    arr[462] = "DTWAIN_GetCurrentAcquiredImage"
+    arr[463] = "DTWAIN_GetCurrentCustomResourceName"
+    arr[464] = "DTWAIN_GetCurrentCustomResourceNameA"
+    arr[465] = "DTWAIN_GetCurrentCustomResourceNameW"
+    arr[466] = "DTWAIN_GetCurrentFileName"
+    arr[467] = "DTWAIN_GetCurrentFileNameA"
+    arr[468] = "DTWAIN_GetCurrentFileNameW"
+    arr[469] = "DTWAIN_GetCurrentPageNum"
+    arr[470] = "DTWAIN_GetCurrentRetryCount"
+    arr[471] = "DTWAIN_GetCurrentTwainTriplet"
+    arr[472] = "DTWAIN_GetCurrentTwainTripletEx"
+    arr[473] = "DTWAIN_GetCustomDSData"
+    arr[474] = "DTWAIN_GetDSMFullName"
+    arr[475] = "DTWAIN_GetDSMFullNameA"
+    arr[476] = "DTWAIN_GetDSMFullNameW"
+    arr[477] = "DTWAIN_GetDSMSearchOrder"
+    arr[478] = "DTWAIN_GetDSMSearchOrderEx"
+    arr[479] = "DTWAIN_GetDSMSearchOrderExA"
+    arr[480] = "DTWAIN_GetDSMSearchOrderExW"
+    arr[481] = "DTWAIN_GetDTWAINHandle"
+    arr[482] = "DTWAIN_GetDeviceEvent"
+    arr[483] = "DTWAIN_GetDeviceEventEx"
+    arr[484] = "DTWAIN_GetDeviceEventInfo"
+    arr[485] = "DTWAIN_GetDeviceNotifications"
+    arr[486] = "DTWAIN_GetDeviceTimeDate"
+    arr[487] = "DTWAIN_GetDeviceTimeDateA"
+    arr[488] = "DTWAIN_GetDeviceTimeDateW"
+    arr[489] = "DTWAIN_GetDoubleFeedDetectLength"
+    arr[490] = "DTWAIN_GetDoubleFeedDetectValues"
+    arr[491] = "DTWAIN_GetDuplexType"
+    arr[492] = "DTWAIN_GetDuplexTypeEx"
+    arr[493] = "DTWAIN_GetErrorBuffer"
+    arr[494] = "DTWAIN_GetErrorBufferThreshold"
+    arr[495] = "DTWAIN_GetErrorCallback"
+    arr[496] = "DTWAIN_GetErrorCallback64"
+    arr[497] = "DTWAIN_GetErrorString"
+    arr[498] = "DTWAIN_GetErrorStringA"
+    arr[499] = "DTWAIN_GetErrorStringW"
+    arr[500] = "DTWAIN_GetExtCapFromName"
+    arr[501] = "DTWAIN_GetExtCapFromNameA"
+    arr[502] = "DTWAIN_GetExtCapFromNameW"
+    arr[503] = "DTWAIN_GetExtImageInfoData"
+    arr[504] = "DTWAIN_GetExtImageInfoDataEx"
+    arr[505] = "DTWAIN_GetExtImageInfoItem"
+    arr[506] = "DTWAIN_GetExtImageInfoItemEx"
+    arr[507] = "DTWAIN_GetExtNameFromCap"
+    arr[508] = "DTWAIN_GetExtNameFromCapA"
+    arr[509] = "DTWAIN_GetExtNameFromCapW"
+    arr[510] = "DTWAIN_GetFeederAlignment"
+    arr[511] = "DTWAIN_GetFeederFuncs"
+    arr[512] = "DTWAIN_GetFeederOrder"
+    arr[513] = "DTWAIN_GetFeederWaitTime"
+    arr[514] = "DTWAIN_GetFileCompressionType"
+    arr[515] = "DTWAIN_GetFileSavePageCount"
+    arr[516] = "DTWAIN_GetFileTypeExtensions"
+    arr[517] = "DTWAIN_GetFileTypeExtensionsA"
+    arr[518] = "DTWAIN_GetFileTypeExtensionsW"
+    arr[519] = "DTWAIN_GetFileTypeName"
+    arr[520] = "DTWAIN_GetFileTypeNameA"
+    arr[521] = "DTWAIN_GetFileTypeNameW"
+    arr[522] = "DTWAIN_GetHalftone"
+    arr[523] = "DTWAIN_GetHalftoneA"
+    arr[524] = "DTWAIN_GetHalftoneW"
+    arr[525] = "DTWAIN_GetHighlight"
+    arr[526] = "DTWAIN_GetHighlightString"
+    arr[527] = "DTWAIN_GetHighlightStringA"
+    arr[528] = "DTWAIN_GetHighlightStringW"
+    arr[529] = "DTWAIN_GetImageInfo"
+    arr[530] = "DTWAIN_GetImageInfoString"
+    arr[531] = "DTWAIN_GetImageInfoStringA"
+    arr[532] = "DTWAIN_GetImageInfoStringW"
+    arr[533] = "DTWAIN_GetImageLayoutInfo"
     arr[534] = "DTWAIN_GetJobControl"
     arr[535] = "DTWAIN_GetJobControlEx"
     arr[536] = "DTWAIN_GetJpegValues"
@@ -2787,52 +2788,52 @@ func Load_DTWAINDLL(path string) (*DTWAIN_DLL, error) {
     arr[982] = "DTWAIN_SetCaption"
     arr[983] = "DTWAIN_SetCaptionA"
     arr[984] = "DTWAIN_SetCaptionW"
-    arr[985] = "DTWAIN_SetCompressionType"
-    arr[986] = "DTWAIN_SetContrast"
-    arr[987] = "DTWAIN_SetContrastString"
-    arr[988] = "DTWAIN_SetContrastStringA"
-    arr[989] = "DTWAIN_SetContrastStringW"
-    arr[990] = "DTWAIN_SetCountry"
-    arr[991] = "DTWAIN_SetCurrentRetryCount"
-    arr[992] = "DTWAIN_SetCustomDSData"
-    arr[993] = "DTWAIN_SetDSMSearchOrder"
-    arr[994] = "DTWAIN_SetDSMSearchOrderEx"
-    arr[995] = "DTWAIN_SetDSMSearchOrderExA"
-    arr[996] = "DTWAIN_SetDSMSearchOrderExW"
-    arr[997] = "DTWAIN_SetDefaultSource"
-    arr[998] = "DTWAIN_SetDeviceNotifications"
-    arr[999] = "DTWAIN_SetDeviceTimeDate"
-    arr[1000] = "DTWAIN_SetDeviceTimeDateA"
-    arr[1001] = "DTWAIN_SetDeviceTimeDateW"
-    arr[1002] = "DTWAIN_SetDoubleFeedDetectLength"
-    arr[1003] = "DTWAIN_SetDoubleFeedDetectLengthString"
-    arr[1004] = "DTWAIN_SetDoubleFeedDetectLengthStringA"
-    arr[1005] = "DTWAIN_SetDoubleFeedDetectLengthStringW"
-    arr[1006] = "DTWAIN_SetDoubleFeedDetectValues"
-    arr[1007] = "DTWAIN_SetDoublePageCountOnDuplex"
-    arr[1008] = "DTWAIN_SetEOJDetectValue"
-    arr[1009] = "DTWAIN_SetErrorBufferThreshold"
-    arr[1010] = "DTWAIN_SetErrorCallback"
-    arr[1011] = "DTWAIN_SetErrorCallback64"
-    arr[1012] = "DTWAIN_SetFeederAlignment"
-    arr[1013] = "DTWAIN_SetFeederOrder"
-    arr[1014] = "DTWAIN_SetFeederWaitTime"
-    arr[1015] = "DTWAIN_SetFileAutoIncrement"
-    arr[1016] = "DTWAIN_SetFileCompressionType"
-    arr[1017] = "DTWAIN_SetFileSavePos"
-    arr[1018] = "DTWAIN_SetFileSavePosA"
-    arr[1019] = "DTWAIN_SetFileSavePosW"
-    arr[1020] = "DTWAIN_SetFileXferFormat"
-    arr[1021] = "DTWAIN_SetHalftone"
-    arr[1022] = "DTWAIN_SetHalftoneA"
-    arr[1023] = "DTWAIN_SetHalftoneW"
-    arr[1024] = "DTWAIN_SetHighlight"
-    arr[1025] = "DTWAIN_SetHighlightString"
-    arr[1026] = "DTWAIN_SetHighlightStringA"
-    arr[1027] = "DTWAIN_SetHighlightStringW"
-    arr[1028] = "DTWAIN_SetJXLLibraryPath"
-    arr[1029] = "DTWAIN_SetJXLLibraryPathA"
-    arr[1030] = "DTWAIN_SetJXLLibraryPathW"
+    arr[985] = "DTWAIN_SetComponentPath"
+    arr[986] = "DTWAIN_SetComponentPathA"
+    arr[987] = "DTWAIN_SetComponentPathW"
+    arr[988] = "DTWAIN_SetCompressionType"
+    arr[989] = "DTWAIN_SetContrast"
+    arr[990] = "DTWAIN_SetContrastString"
+    arr[991] = "DTWAIN_SetContrastStringA"
+    arr[992] = "DTWAIN_SetContrastStringW"
+    arr[993] = "DTWAIN_SetCountry"
+    arr[994] = "DTWAIN_SetCurrentRetryCount"
+    arr[995] = "DTWAIN_SetCustomDSData"
+    arr[996] = "DTWAIN_SetDSMSearchOrder"
+    arr[997] = "DTWAIN_SetDSMSearchOrderEx"
+    arr[998] = "DTWAIN_SetDSMSearchOrderExA"
+    arr[999] = "DTWAIN_SetDSMSearchOrderExW"
+    arr[1000] = "DTWAIN_SetDefaultSource"
+    arr[1001] = "DTWAIN_SetDeviceNotifications"
+    arr[1002] = "DTWAIN_SetDeviceTimeDate"
+    arr[1003] = "DTWAIN_SetDeviceTimeDateA"
+    arr[1004] = "DTWAIN_SetDeviceTimeDateW"
+    arr[1005] = "DTWAIN_SetDoubleFeedDetectLength"
+    arr[1006] = "DTWAIN_SetDoubleFeedDetectLengthString"
+    arr[1007] = "DTWAIN_SetDoubleFeedDetectLengthStringA"
+    arr[1008] = "DTWAIN_SetDoubleFeedDetectLengthStringW"
+    arr[1009] = "DTWAIN_SetDoubleFeedDetectValues"
+    arr[1010] = "DTWAIN_SetDoublePageCountOnDuplex"
+    arr[1011] = "DTWAIN_SetEOJDetectValue"
+    arr[1012] = "DTWAIN_SetErrorBufferThreshold"
+    arr[1013] = "DTWAIN_SetErrorCallback"
+    arr[1014] = "DTWAIN_SetErrorCallback64"
+    arr[1015] = "DTWAIN_SetFeederAlignment"
+    arr[1016] = "DTWAIN_SetFeederOrder"
+    arr[1017] = "DTWAIN_SetFeederWaitTime"
+    arr[1018] = "DTWAIN_SetFileAutoIncrement"
+    arr[1019] = "DTWAIN_SetFileCompressionType"
+    arr[1020] = "DTWAIN_SetFileSavePos"
+    arr[1021] = "DTWAIN_SetFileSavePosA"
+    arr[1022] = "DTWAIN_SetFileSavePosW"
+    arr[1023] = "DTWAIN_SetFileXferFormat"
+    arr[1024] = "DTWAIN_SetHalftone"
+    arr[1025] = "DTWAIN_SetHalftoneA"
+    arr[1026] = "DTWAIN_SetHalftoneW"
+    arr[1027] = "DTWAIN_SetHighlight"
+    arr[1028] = "DTWAIN_SetHighlightString"
+    arr[1029] = "DTWAIN_SetHighlightStringA"
+    arr[1030] = "DTWAIN_SetHighlightStringW"
     arr[1031] = "DTWAIN_SetJobControl"
     arr[1032] = "DTWAIN_SetJpegValues"
     arr[1033] = "DTWAIN_SetJpegXLQuality"
@@ -5744,6 +5745,24 @@ func (d *DTWAIN_DLL) DTWAIN_GetCaptionW(Source DTWAIN_SOURCE, Caption []uint16) 
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_GetComponentPath(nComponent int32, lpszOut []uint16, nSize int32) int32 {
+    theProc := d.procs["DTWAIN_GetComponentPath"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetComponentPathA(nComponent int32, lpszOut []byte, nSize int32) int32 {
+    theProc := d.procs["DTWAIN_GetComponentPathA"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_GetComponentPathW(nComponent int32, lpszOut []uint16, nSize int32) int32 {
+    theProc := d.procs["DTWAIN_GetComponentPathW"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_GetCompressionSize(Source DTWAIN_SOURCE, lBytes *uint32) int32 {
     theProc := d.procs["DTWAIN_GetCompressionSize"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(unsafe.Pointer(lBytes)))
@@ -6265,24 +6284,6 @@ func (d *DTWAIN_DLL) DTWAIN_GetImageInfoStringW(Source DTWAIN_SOURCE, lpXResolut
 func (d *DTWAIN_DLL) DTWAIN_GetImageLayoutInfo(Source DTWAIN_SOURCE, lGetType int32, DocumentNumber *int32, PageNumber *int32, FrameNumber *int32) int32 {
     theProc := d.procs["DTWAIN_GetImageLayoutInfo"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(lGetType), uintptr(unsafe.Pointer(DocumentNumber)), uintptr(unsafe.Pointer(PageNumber)), uintptr(unsafe.Pointer(FrameNumber)))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetJXLLibraryPath(lpszOut []uint16, nSize int32) int32 {
-    theProc := d.procs["DTWAIN_GetJXLLibraryPath"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetJXLLibraryPathA(lpszOut []byte, nSize int32) int32 {
-    theProc := d.procs["DTWAIN_GetJXLLibraryPathA"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_GetJXLLibraryPathW(lpszOut []uint16, nSize int32) int32 {
-    theProc := d.procs["DTWAIN_GetJXLLibraryPathW"]
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&lpszOut[0])), uintptr(nSize))
     return int32(v1)
 }
 
@@ -9035,6 +9036,25 @@ func (d *DTWAIN_DLL) DTWAIN_SetCaptionW(Source DTWAIN_SOURCE, Caption uintptr) i
     return int32(v1)
 }
 
+func (d *DTWAIN_DLL) DTWAIN_SetComponentPath(nComponent int32, sFilePath uintptr) int32 {
+    theProc := d.procs["DTWAIN_SetComponentPath"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), sFilePath)
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetComponentPathA(nComponent int32, szFilePath string) int32 {
+    theProc := d.procs["DTWAIN_SetComponentPathA"]
+    arg_0 := []byte(szFilePath)
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), uintptr(unsafe.Pointer(&arg_0[0])))
+    return int32(v1)
+}
+
+func (d *DTWAIN_DLL) DTWAIN_SetComponentPathW(nComponent int32, sFilePath uintptr) int32 {
+    theProc := d.procs["DTWAIN_SetComponentPathW"]
+    v1, _, _ := syscall.SyscallN(theProc, uintptr(nComponent), sFilePath)
+    return int32(v1)
+}
+
 func (d *DTWAIN_DLL) DTWAIN_SetCompressionType(Source DTWAIN_SOURCE, lCompression int32, bSetCurrent int32) int32 {
     theProc := d.procs["DTWAIN_SetCompressionType"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), uintptr(lCompression), uintptr(bSetCurrent))
@@ -9298,25 +9318,6 @@ func (d *DTWAIN_DLL) DTWAIN_SetHighlightStringA(Source DTWAIN_SOURCE, Highlight 
 func (d *DTWAIN_DLL) DTWAIN_SetHighlightStringW(Source DTWAIN_SOURCE, Highlight uintptr) int32 {
     theProc := d.procs["DTWAIN_SetHighlightStringW"]
     v1, _, _ := syscall.SyscallN(theProc, uintptr(Source), Highlight)
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_SetJXLLibraryPath(sFilePath uintptr) int32 {
-    theProc := d.procs["DTWAIN_SetJXLLibraryPath"]
-    v1, _, _ := syscall.SyscallN(theProc, sFilePath)
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_SetJXLLibraryPathA(szFilePath string) int32 {
-    theProc := d.procs["DTWAIN_SetJXLLibraryPathA"]
-    arg_0 := []byte(szFilePath)
-    v1, _, _ := syscall.SyscallN(theProc, uintptr(unsafe.Pointer(&arg_0[0])))
-    return int32(v1)
-}
-
-func (d *DTWAIN_DLL) DTWAIN_SetJXLLibraryPathW(sFilePath uintptr) int32 {
-    theProc := d.procs["DTWAIN_SetJXLLibraryPathW"]
-    v1, _, _ := syscall.SyscallN(theProc, sFilePath)
     return int32(v1)
 }
 

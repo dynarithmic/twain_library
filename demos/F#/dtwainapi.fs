@@ -1833,6 +1833,7 @@ module TwainAPI =
     let public DTWAIN_CHECKDLLVERLESSEQ = 3
     let public DTWAIN_CHECKDLLVERGREATEREQ = 4
     let public DTWAIN_RESOURCE_COPYRIGHT = 9700
+    let public DTWAIN_COMPONENT_JPEGXL = 1
 
     // Public state exposed after successful Load
     let mutable private IsLoaded = false
@@ -2988,6 +2989,9 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_GetCaptionDelegate = delegate of DTWAIN_SOURCE * System.Text.StringBuilder -> DTWAIN_BOOL
 
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_GetComponentPathDelegate = delegate of LONG * System.Text.StringBuilder * LONG -> LONG
+
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetCompressionSizeDelegate = delegate of DTWAIN_SOURCE * DWORD byref -> DTWAIN_BOOL
 
@@ -3152,9 +3156,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetImageLayoutInfoDelegate = delegate of DTWAIN_SOURCE * LONG * int byref * int byref * int byref -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_GetJXLLibraryPathDelegate = delegate of System.Text.StringBuilder * LONG -> LONG
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_GetJobControlDelegate = delegate of DTWAIN_SOURCE * int byref * DTWAIN_BOOL -> DTWAIN_BOOL
@@ -4113,6 +4114,9 @@ module TwainAPI =
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_SetCaptionDelegate = delegate of DTWAIN_SOURCE * string -> DTWAIN_BOOL
 
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
+    type DTWAIN_SetComponentPathDelegate = delegate of LONG * string -> DTWAIN_BOOL
+
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetCompressionTypeDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
 
@@ -4193,9 +4197,6 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
     type DTWAIN_SetHighlightStringDelegate = delegate of DTWAIN_SOURCE * string -> DTWAIN_BOOL
-
-    [<UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Unicode)>]
-    type DTWAIN_SetJXLLibraryPathDelegate = delegate of string -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_SetJobControlDelegate = delegate of DTWAIN_SOURCE * LONG * DTWAIN_BOOL -> DTWAIN_BOOL
@@ -4854,6 +4855,7 @@ module TwainAPI =
     let private GetCapValuesEx = lazy (DynamicDll.Bind "DTWAIN_GetCapValuesEx" : DTWAIN_GetCapValuesExDelegate)
     let private GetCapValuesEx2 = lazy (DynamicDll.Bind "DTWAIN_GetCapValuesEx2" : DTWAIN_GetCapValuesEx2Delegate)
     let private GetCaption = lazy (DynamicDll.Bind "DTWAIN_GetCaption" : DTWAIN_GetCaptionDelegate)
+    let private GetComponentPath = lazy (DynamicDll.Bind "DTWAIN_GetComponentPath" : DTWAIN_GetComponentPathDelegate)
     let private GetCompressionSize = lazy (DynamicDll.Bind "DTWAIN_GetCompressionSize" : DTWAIN_GetCompressionSizeDelegate)
     let private GetCompressionType = lazy (DynamicDll.Bind "DTWAIN_GetCompressionType" : DTWAIN_GetCompressionTypeDelegate)
     let private GetCompressionTypeEx = lazy (DynamicDll.Bind "DTWAIN_GetCompressionTypeEx" : DTWAIN_GetCompressionTypeExDelegate)
@@ -4909,7 +4911,6 @@ module TwainAPI =
     let private GetImageInfo = lazy (DynamicDll.Bind "DTWAIN_GetImageInfo" : DTWAIN_GetImageInfoDelegate)
     let private GetImageInfoString = lazy (DynamicDll.Bind "DTWAIN_GetImageInfoString" : DTWAIN_GetImageInfoStringDelegate)
     let private GetImageLayoutInfo = lazy (DynamicDll.Bind "DTWAIN_GetImageLayoutInfo" : DTWAIN_GetImageLayoutInfoDelegate)
-    let private GetJXLLibraryPath = lazy (DynamicDll.Bind "DTWAIN_GetJXLLibraryPath" : DTWAIN_GetJXLLibraryPathDelegate)
     let private GetJobControl = lazy (DynamicDll.Bind "DTWAIN_GetJobControl" : DTWAIN_GetJobControlDelegate)
     let private GetJobControlEx = lazy (DynamicDll.Bind "DTWAIN_GetJobControlEx" : DTWAIN_GetJobControlExDelegate)
     let private GetJpegValues = lazy (DynamicDll.Bind "DTWAIN_GetJpegValues" : DTWAIN_GetJpegValuesDelegate)
@@ -5229,6 +5230,7 @@ module TwainAPI =
     let private SetCapValuesEx = lazy (DynamicDll.Bind "DTWAIN_SetCapValuesEx" : DTWAIN_SetCapValuesExDelegate)
     let private SetCapValuesEx2 = lazy (DynamicDll.Bind "DTWAIN_SetCapValuesEx2" : DTWAIN_SetCapValuesEx2Delegate)
     let private SetCaption = lazy (DynamicDll.Bind "DTWAIN_SetCaption" : DTWAIN_SetCaptionDelegate)
+    let private SetComponentPath = lazy (DynamicDll.Bind "DTWAIN_SetComponentPath" : DTWAIN_SetComponentPathDelegate)
     let private SetCompressionType = lazy (DynamicDll.Bind "DTWAIN_SetCompressionType" : DTWAIN_SetCompressionTypeDelegate)
     let private SetContrast = lazy (DynamicDll.Bind "DTWAIN_SetContrast" : DTWAIN_SetContrastDelegate)
     let private SetContrastString = lazy (DynamicDll.Bind "DTWAIN_SetContrastString" : DTWAIN_SetContrastStringDelegate)
@@ -5256,7 +5258,6 @@ module TwainAPI =
     let private SetHalftone = lazy (DynamicDll.Bind "DTWAIN_SetHalftone" : DTWAIN_SetHalftoneDelegate)
     let private SetHighlight = lazy (DynamicDll.Bind "DTWAIN_SetHighlight" : DTWAIN_SetHighlightDelegate)
     let private SetHighlightString = lazy (DynamicDll.Bind "DTWAIN_SetHighlightString" : DTWAIN_SetHighlightStringDelegate)
-    let private SetJXLLibraryPath = lazy (DynamicDll.Bind "DTWAIN_SetJXLLibraryPath" : DTWAIN_SetJXLLibraryPathDelegate)
     let private SetJobControl = lazy (DynamicDll.Bind "DTWAIN_SetJobControl" : DTWAIN_SetJobControlDelegate)
     let private SetJpegValues = lazy (DynamicDll.Bind "DTWAIN_SetJpegValues" : DTWAIN_SetJpegValuesDelegate)
     let private SetJpegXLQuality = lazy (DynamicDll.Bind "DTWAIN_SetJpegXLQuality" : DTWAIN_SetJpegXLQualityDelegate)
@@ -6831,6 +6832,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetCaption.Value.Invoke(source, caption)
 
+    let DTWAIN_GetComponentPath (ncomponent: LONG) (lpszout: System.Text.StringBuilder) (nsize: LONG) : LONG =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        GetComponentPath.Value.Invoke(ncomponent, lpszout, nsize)
+
     let DTWAIN_GetCompressionSize (source: DTWAIN_SOURCE) (lbytes: DWORD byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetCompressionSize.Value.Invoke(source, &lbytes)
@@ -7050,10 +7055,6 @@ module TwainAPI =
     let DTWAIN_GetImageLayoutInfo (source: DTWAIN_SOURCE) (lgettype: LONG) (documentnumber: int byref) (pagenumber: int byref) (framenumber: int byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         GetImageLayoutInfo.Value.Invoke(source, lgettype, &documentnumber, &pagenumber, &framenumber)
-
-    let DTWAIN_GetJXLLibraryPath (lpszout: System.Text.StringBuilder) (nsize: LONG) : LONG =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        GetJXLLibraryPath.Value.Invoke(lpszout, nsize)
 
     let DTWAIN_GetJobControl (source: DTWAIN_SOURCE) (pjobcontrol: int byref) (bcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -8331,6 +8332,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetCaption.Value.Invoke(source, caption)
 
+    let DTWAIN_SetComponentPath (ncomponent: LONG) (sfilepath: string) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        SetComponentPath.Value.Invoke(ncomponent, sfilepath)
+
     let DTWAIN_SetCompressionType (source: DTWAIN_SOURCE) (lcompression: LONG) (bsetcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetCompressionType.Value.Invoke(source, lcompression, bsetcurrent)
@@ -8438,10 +8443,6 @@ module TwainAPI =
     let DTWAIN_SetHighlightString (source: DTWAIN_SOURCE) (highlight: string) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         SetHighlightString.Value.Invoke(source, highlight)
-
-    let DTWAIN_SetJXLLibraryPath (sfilepath: string) : DTWAIN_BOOL =
-        if not IsLoaded then failwith "Call TwainAPI.Load first"
-        SetJXLLibraryPath.Value.Invoke(sfilepath)
 
     let DTWAIN_SetJobControl (source: DTWAIN_SOURCE) (jobcontrol: LONG) (bsetcurrent: DTWAIN_BOOL) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

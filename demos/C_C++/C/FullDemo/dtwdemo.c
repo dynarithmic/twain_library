@@ -94,6 +94,7 @@ LRESULT CALLBACK DisplayTestCapProc(HWND hDlg, UINT message, WPARAM wParam, LPAR
 LRESULT CALLBACK EnterFileNameProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK PDFSettingsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 INT_PTR DisplayOneDibPage(HINSTANCE hInstance, HANDLE hDib, UINT resID, HWND wndHandle);
+void PromptUserToCorrectJxlInstallation();
 
 
 // File types structure
@@ -384,7 +385,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             wmId    = LOWORD(wParam);
             wmEvent = HIWORD(wParam);
 
-            /* See if the acquisition is to a file using source mode */
             UINT i;
             if (wmId >= nFirstAcquireSourceID && wmId <= nLastAcquireFileID)
             {
@@ -394,6 +394,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                     {
                         EnableAllMenuItems(FALSE);
                         g_FileType = g_allDTWAINFileTypes[i].dtwainType;
+
+                        /* If JPEG-XL, make sure that the JPEG-XL components are installed */
+                        if ( g_FileType == DTWAIN_JPEGXL )
+                        {
+                            if ( !DTWAIN_IsFileTypeSupported(DTWAIN_JPEGXL) )
+                            {
+                                // Display a dialog explaining that the JPEG XL
+                                // components are unavailable.
+                                PromptUserToCorrectJxlInstallation();
+                                EnableAllMenuItems(TRUE);
+                                return 0;
+                            }
+                        }
                         AcquireFile(g_allDTWAINFileTypes[i].resourceId < nFirstAcquireFileID, 
                                               g_allDTWAINFileTypes[i].resourceId, 
                                               g_allDTWAINFileTypes[i].dtwainType);
@@ -1606,13 +1619,10 @@ void WaitLoop()
     }
 }
 
-BOOL PromptUserToCorrectJxlInstallation()
+void PromptUserToCorrectJxlInstallation()
 {
-    LONG nValue = MessageBox(g_hWnd, _T("JPEG-XL library not found. " 
-        "Please install JPEG-XL components now and select OK to try again, or Cancel to exit..."), _T("JPEG-XL error"), MB_OKCANCEL);
-    if (nValue == IDOK)
-        return TRUE;
-    return FALSE;
+    MessageBox(g_hWnd, _T("JPEG-XL library not found or one or more JPEG-XL dependencies were not found. " 
+        "Please install JPEG-XL components now and select JPEG-XL again..."), _T("JPEG-XL error"), MB_OKCANCEL);
 }
 
 LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserData)
@@ -1664,24 +1674,6 @@ LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserDa
 
                 /* Increment the page count*/
                 ++pdf_page_count;
-            }
-            else 
-            if ( g_FileType == DTWAIN_JPEGXL )
-            {
-                /* Ensure the JPEG-XL components are installed */
-                while (!DTWAIN_IsFileTypeSupported(DTWAIN_JPEGXL))
-                {
-                    // Display a dialog explaining that the JPEG XL
-                    // components are unavailable.
-                    //
-                    // Allow the user to install/correct the components
-                    // or cancel the operation.
-
-                    if (!PromptUserToCorrectJxlInstallation())
-                    {
-                        return 0;  // Discard the scanned page.
-                    }
-                }
             }
             return 1;
         }

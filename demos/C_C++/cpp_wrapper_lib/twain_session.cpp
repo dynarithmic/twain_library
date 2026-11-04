@@ -50,44 +50,90 @@ namespace dynarithmic
             return static_cast<uint64_t>(reinterpret_cast<uintptr_t>(ptr));
         }                
 
-        bool twain_session::start(bool bCleanStart)
+        bool twain_session::check_dtwaindll_version()
         {
-#ifdef DTWAIN_CPP_NOIMPORTLIB
+            // Test for minimal DTWAIN version if checking is on
+            bool dll_ok = true;
+            auto& dllcheck = m_twain_characteristics.get_check_version();
+            if (dllcheck.dll_major > 0 ||
+                dllcheck.dll_minor > 0 ||
+                dllcheck.dll_patch > 0)
+            {
+                dll_ok = API_INSTANCE DTWAIN_CheckDLLVersion(dllcheck.dll_major, dllcheck.dll_minor, dllcheck.dll_patch,
+                    dllcheck.dll_buildnum, dllcheck.check_type);
+                if (!dll_ok)
+                {
+                    m_error_logger.add_error(DTWAIN_ERR_DTWAINDLL_VERSION);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        bool twain_session::start_minimal(bool bCleanStart)
+        {
+            m_last_error = 0;
+            #ifdef DTWAIN_CPP_NOIMPORTLIB
             if (bCleanStart && !get_dllhandle())
             {
-#ifndef DTWAIN_USELOADEDLIB
+            #ifndef DTWAIN_USELOADEDLIB
                 HMODULE hDTwainModule = ::LoadLibraryA(DTWAIN_DLLNAME);
-#else
+            #else
                 HMODULE hDTwainModule = ::GetModuleHandleA(DTWAIN_DLLNAME);
-#endif
+            #endif
                 if (hDTwainModule)
-                    set_dllhandle(hDTwainModule);
+                {
+                    bool verOk = check_dtwaindll_version();
+                    if (verOk)
+                        set_dllhandle(hDTwainModule);
+                    else
+                    {
+                        m_error_logger.add_error(DTWAIN_ERR_DTWAINDLL_VERSION);
+                        return false;
+                    }
+                }
                 else
+                {
+                    m_error_logger.add_error(DTWAIN_ERR_DTWAINDLL_LOADERROR);
                     return false;
+                }
             }
-#endif 
-#ifdef DTWAIN_USELOADEDLIB
-            return true;
-#else
-            m_source_detail_map.clear();
-            m_error_logger.clear();
-            m_error_logger.set_maxsize(m_twain_characteristics.get_errorlogger_details().get_maxsize());
-
+            #endif 
+            #ifdef DTWAIN_USELOADEDLIB
+                return true;
+            #else
             if (bCleanStart && !API_INSTANCE DTWAIN_IsTwainAvailable())
             {
                 m_error_logger.add_error(DTWAIN_ERR_TWAIN_NOT_INSTALLED);
                 return false;
             }
 
-            API_INSTANCE DTWAIN_SetResourcePathA(m_twain_characteristics.get_resource_directory().c_str());
             if (!API_INSTANCE DTWAIN_IsInitialized())
             {
                 if (bCleanStart)
                 {
                     m_bOCRStarted = false;
-                    m_Handle = API_INSTANCE DTWAIN_SysInitialize();
+                    if ( m_bInitNoBlocking )
+                        m_Handle = API_INSTANCE DTWAIN_SysInitializeNoBlockingEx(false);
+                    else 
+                        m_Handle = API_INSTANCE DTWAIN_SysInitialize();
                     if (m_Handle)
                     {
+                        // Test for minimal DTWAIN version if checking is on
+                        bool dll_ok = true;
+                        auto& dllcheck = m_twain_characteristics.get_check_version();
+                        if (dllcheck.dll_major > 0 ||
+                            dllcheck.dll_minor > 0 ||
+                            dllcheck.dll_patch > 0)
+                        {
+                            dll_ok = API_INSTANCE DTWAIN_CheckDLLVersion(dllcheck.dll_major, dllcheck.dll_minor, dllcheck.dll_patch,
+                                                                         dllcheck.dll_buildnum, dllcheck.check_type);
+                            if (!dll_ok)
+                            {
+                                m_error_logger.add_error(DTWAIN_ERR_DTWAINDLL_VERSION);
+                                return false;
+                            }
+                        }
                         if (!API_INSTANCE DTWAIN_InitOCRInterface())
                             m_error_logger.add_error(API_INSTANCE DTWAIN_GetLastError());
                         else
@@ -96,10 +142,19 @@ namespace dynarithmic
                 }
                 if (!m_Handle)
                 {
-                    m_error_logger.add_error(DTWAIN_ERR_NOT_INITIALIZED);
+                    m_error_logger.add_error(API_INSTANCE DTWAIN_GetLastError());
                     return false;
                 }
             }
+            #endif
+            return true;
+        }
+
+        bool twain_session::start(bool bCleanStart)
+        {
+            bool bStartMinimal = start_minimal(bCleanStart);
+            if (!bStartMinimal)
+                return false;
 
             API_INSTANCE DTWAIN_SetErrorCallback64(error_callback_proc, PtrToInt64(this)); 
             API_INSTANCE DTWAIN_LoadCustomStringResourcesA(m_twain_characteristics.get_language().c_str());
@@ -124,9 +179,9 @@ namespace dynarithmic
 
             if (m_logger.second/* && m_logger.second->is_enabled()*/)
                 setup_logging();
-#ifdef _WIN64
+    #ifdef _WIN64
             m_twain_characteristics.set_dsm(dsm_type::version2_dsm);
-#endif
+    #endif
             API_INSTANCE DTWAIN_SetTwainDSM(static_cast<int32_t>(m_twain_characteristics.get_dsm()));
             twain_app_info aInfo = m_twain_characteristics.get_app_info();
             API_INSTANCE DTWAIN_SetAppInfoA(aInfo.get_version_info().c_str(),
@@ -177,7 +232,6 @@ namespace dynarithmic
                 return true;
             }
             return false;
-    #endif
         }
 
 
@@ -268,6 +322,13 @@ namespace dynarithmic
             if (started())
                 return true;
             return start(true); // a clean start
+        }
+
+        bool twain_session::start_minimal()
+        {
+            if (started())
+                return true;
+            return start_minimal(true); // a clean start
         }
 
         /// Stops the TWAIN Data Source Manager (DSM).  
@@ -398,6 +459,13 @@ namespace dynarithmic
         {
             char sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
             API_INSTANCE DTWAIN_GetResourceStringA(resource_id, sz, DTWAIN_USERRES_MAXSIZE);
+            return sz;
+        }
+
+        std::wstring twain_session::get_resource_string_wide(int32_t resource_id)
+        {
+            wchar_t sz[DTWAIN_USERRES_MAXSIZE + 1] = {};
+            API_INSTANCE DTWAIN_GetResourceStringW(resource_id, sz, DTWAIN_USERRES_MAXSIZE);
             return sz;
         }
 
@@ -614,7 +682,7 @@ namespace dynarithmic
             }
             if (aValidSources.empty())
                 return {};
-            std::string sources = join_strings_(aValidSources, "|");
+            std::string sources = dynarithmic::twain::join<std::string>(aValidSources, "|");
             LONG nChars = API_INSTANCE DTWAIN_GetSessionDetailsA(nullptr, 0, info.indentFactor, TRUE);
             if (nChars > 0)
             {

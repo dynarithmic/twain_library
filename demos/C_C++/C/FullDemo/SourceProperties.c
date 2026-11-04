@@ -684,30 +684,31 @@ void TestGetCap(HWND hWnd, LONG capValue)
                     sprintf(szValues, "%s / %s", szHi, szLo);
                 }
                 else
-                    if (bIsCapNameSupported)
-                        DTWAIN_GetNameFromCapA(lVal, szValues, 256);
+                if (bIsCapNameSupported)
+                    DTWAIN_GetNameFromCapA(lVal, szValues, 256);
+                else
+                if (nDataType == TWTY_BOOL)
+                    sprintf(szValues, "%s", lVal == 1 ? "TRUE" : "FALSE");
+                else
+                if (bGotID)
+                {
+                    char szTempBuf[100];
+                    if (nDataType == TWTY_INT32 || nDataType == TWTY_INT16)
+                        sprintf(szTempBuf, "%d", lVal);
                     else
-                        if (nDataType == TWTY_BOOL)
-                            sprintf(szValues, "%s", lVal == 1 ? "TRUE" : "FALSE");
-                        else
-                            if (bGotID)
-                            {
-                                char szTempBuf[100];
-                                if (nDataType == TWTY_INT32 || nDataType == TWTY_INT16)
-                                    sprintf(szTempBuf, "%d", lVal);
-                                else
-                                    sprintf(szTempBuf, "%u", (TW_UINT32)lVal);
-                                DTWAIN_GetTwainNameFromConstantExA(nTranslationID, lVal, szValues, 256);
+                        sprintf(szTempBuf, "%u", (TW_UINT32)lVal);
+                    DTWAIN_GetTwainNameFromConstantExA(nTranslationID, lVal, szValues, 256);
 
-                                // Name does not really exist
-                                if (strcmp(szTempBuf, szValues) == 0)
-                                {
-                                    bGotValue = FALSE;
-                                    szValues[0] = 0;
-                                }
-                            }
+                    // Name does not really exist
+                    if (strcmp(szTempBuf, szValues) == 0)
+                    {
+                        bGotValue = FALSE;
+                        szValues[0] = 0;
+                        strcpy(szValues, szTempBuf);
+                    }
+                }
 
-                if (szValues[0] == 0)
+                if (szValues[0] == 0 || isRange)
                 {
                     if (nDataType == TWTY_UINT32)
                         sprintf(szValues, rangeFormatU, rangeNameToPrint, (TW_UINT32)lVal);

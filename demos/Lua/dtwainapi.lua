@@ -523,6 +523,9 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
+        LONG DTWAIN_GetComponentPath(LONG nComponent, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathA(LONG nComponent, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathW(LONG nComponent, LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
@@ -609,9 +612,6 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
-        LONG DTWAIN_GetJXLLibraryPath(DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathA(LPSTR lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathW(LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -1061,6 +1061,9 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetCaption(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionA(DTWAIN_SOURCE Source, LPCSTR Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionW(DTWAIN_SOURCE Source, LPCWSTR Caption);
+        DTWAIN_BOOL DTWAIN_SetComponentPath(LONG nComponent, DTWAIN_CCHARPTRTYPE sFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathA(LONG nComponent, LPCSTR szFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathW(LONG nComponent, LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, LONG lCompression, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetContrast(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_SetContrastString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Contrast);
@@ -1104,9 +1107,6 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringA(DTWAIN_SOURCE Source, LPCSTR Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringW(DTWAIN_SOURCE Source, LPCWSTR Highlight);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPath(DTWAIN_CCHARPTRTYPE sFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathA(LPCSTR szFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathW(LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetJobControl(DTWAIN_SOURCE Source, LONG JobControl, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
         DTWAIN_BOOL DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, LONG Quality);
@@ -1765,6 +1765,9 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
+        LONG DTWAIN_GetComponentPath(LONG nComponent, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathA(LONG nComponent, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathW(LONG nComponent, LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
@@ -1851,9 +1854,6 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
-        LONG DTWAIN_GetJXLLibraryPath(DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathA(LPSTR lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathW(LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -2303,6 +2303,9 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetCaption(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionA(DTWAIN_SOURCE Source, LPCSTR Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionW(DTWAIN_SOURCE Source, LPCWSTR Caption);
+        DTWAIN_BOOL DTWAIN_SetComponentPath(LONG nComponent, DTWAIN_CCHARPTRTYPE sFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathA(LONG nComponent, LPCSTR szFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathW(LONG nComponent, LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, LONG lCompression, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetContrast(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_SetContrastString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Contrast);
@@ -2346,9 +2349,6 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringA(DTWAIN_SOURCE Source, LPCSTR Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringW(DTWAIN_SOURCE Source, LPCWSTR Highlight);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPath(DTWAIN_CCHARPTRTYPE sFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathA(LPCSTR szFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathW(LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetJobControl(DTWAIN_SOURCE Source, LONG JobControl, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
         DTWAIN_BOOL DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, LONG Quality);
@@ -3007,6 +3007,9 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
+        LONG DTWAIN_GetComponentPath(LONG nComponent, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathA(LONG nComponent, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathW(LONG nComponent, LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
@@ -3093,9 +3096,6 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
-        LONG DTWAIN_GetJXLLibraryPath(DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathA(LPSTR lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathW(LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -3545,6 +3545,9 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetCaption(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionA(DTWAIN_SOURCE Source, LPCSTR Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionW(DTWAIN_SOURCE Source, LPCWSTR Caption);
+        DTWAIN_BOOL DTWAIN_SetComponentPath(LONG nComponent, DTWAIN_CCHARPTRTYPE sFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathA(LONG nComponent, LPCSTR szFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathW(LONG nComponent, LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, LONG lCompression, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetContrast(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_SetContrastString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Contrast);
@@ -3588,9 +3591,6 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringA(DTWAIN_SOURCE Source, LPCSTR Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringW(DTWAIN_SOURCE Source, LPCWSTR Highlight);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPath(DTWAIN_CCHARPTRTYPE sFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathA(LPCSTR szFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathW(LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetJobControl(DTWAIN_SOURCE Source, LONG JobControl, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
         DTWAIN_BOOL DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, LONG Quality);
@@ -4249,6 +4249,9 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetCaption(DTWAIN_SOURCE Source, DTWAIN_CHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionA(DTWAIN_SOURCE Source, LPSTR Caption);
         DTWAIN_BOOL DTWAIN_GetCaptionW(DTWAIN_SOURCE Source, LPWSTR Caption);
+        LONG DTWAIN_GetComponentPath(LONG nComponent, DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathA(LONG nComponent, LPSTR lpszOut, LONG nSize);
+        LONG DTWAIN_GetComponentPathW(LONG nComponent, LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes);
         DTWAIN_BOOL DTWAIN_GetCompressionType(DTWAIN_SOURCE Source, LPLONG lpCompression, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetCompressionTypeEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bCurrent);
@@ -4335,9 +4338,6 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_GetImageInfoStringA(DTWAIN_SOURCE Source, LPSTR lpXResolution, LPSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageInfoStringW(DTWAIN_SOURCE Source, LPWSTR lpXResolution, LPWSTR lpYResolution, LPLONG lpWidth, LPLONG lpLength, LPLONG lpNumSamples, LPDTWAIN_ARRAY lpBitsPerSample, LPLONG lpBitsPerPixel, LPLONG lpPlanar, LPLONG lpPixelType, LPLONG lpCompression);
         DTWAIN_BOOL DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, LONG lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber);
-        LONG DTWAIN_GetJXLLibraryPath(DTWAIN_CHARPTRTYPE lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathA(LPSTR lpszOut, LONG nSize);
-        LONG DTWAIN_GetJXLLibraryPathW(LPWSTR lpszOut, LONG nSize);
         DTWAIN_BOOL DTWAIN_GetJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, DTWAIN_BOOL bCurrent);
         LONG DTWAIN_GetJobControlEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bGetCurrent);
         DTWAIN_BOOL DTWAIN_GetJpegValues(DTWAIN_SOURCE Source, LPLONG pQuality, LPLONG Progressive);
@@ -4787,6 +4787,9 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetCaption(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionA(DTWAIN_SOURCE Source, LPCSTR Caption);
         DTWAIN_BOOL DTWAIN_SetCaptionW(DTWAIN_SOURCE Source, LPCWSTR Caption);
+        DTWAIN_BOOL DTWAIN_SetComponentPath(LONG nComponent, DTWAIN_CCHARPTRTYPE sFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathA(LONG nComponent, LPCSTR szFilePath);
+        DTWAIN_BOOL DTWAIN_SetComponentPathW(LONG nComponent, LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, LONG lCompression, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetContrast(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast);
         DTWAIN_BOOL DTWAIN_SetContrastString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Contrast);
@@ -4830,9 +4833,6 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, DTWAIN_CCHARPTRTYPE Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringA(DTWAIN_SOURCE Source, LPCSTR Highlight);
         DTWAIN_BOOL DTWAIN_SetHighlightStringW(DTWAIN_SOURCE Source, LPCWSTR Highlight);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPath(DTWAIN_CCHARPTRTYPE sFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathA(LPCSTR szFilePath);
-        DTWAIN_BOOL DTWAIN_SetJXLLibraryPathW(LPCWSTR sFilePath);
         DTWAIN_BOOL DTWAIN_SetJobControl(DTWAIN_SOURCE Source, LONG JobControl, DTWAIN_BOOL bSetCurrent);
         DTWAIN_BOOL DTWAIN_SetJpegValues(DTWAIN_SOURCE Source, LONG Quality, LONG Progressive);
         DTWAIN_BOOL DTWAIN_SetJpegXLQuality(DTWAIN_SOURCE Source, LONG Quality);

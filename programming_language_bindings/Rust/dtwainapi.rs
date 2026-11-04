@@ -531,6 +531,9 @@ type Dtwaingetcapvaluesex2Func = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i3
 type DtwaingetcaptionFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
 type DtwaingetcaptionaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char) -> i32;
 type DtwaingetcaptionwFunc = unsafe extern "C" fn(*mut c_void,*mut u16) -> i32;
+type DtwaingetcomponentpathFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
+type DtwaingetcomponentpathaFunc = unsafe extern "C" fn(i32,*mut c_char,i32) -> i32;
+type DtwaingetcomponentpathwFunc = unsafe extern "C" fn(i32,*mut u16,i32) -> i32;
 type DtwaingetcompressionsizeFunc = unsafe extern "C" fn(*mut c_void,*mut u32) -> i32;
 type DtwaingetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetcompressiontypeexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -618,9 +621,6 @@ type DtwaingetimageinfostringFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*m
 type DtwaingetimageinfostringaFunc = unsafe extern "C" fn(*mut c_void,*mut c_char,*mut c_char,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetimageinfostringwFunc = unsafe extern "C" fn(*mut c_void,*mut u16,*mut u16,*mut i32,*mut i32,*mut i32,*mut *mut c_void,*mut i32,*mut i32,*mut i32,*mut i32) -> i32;
 type DtwaingetimagelayoutinfoFunc = unsafe extern "C" fn(*mut c_void,i32,*mut i32,*mut i32,*mut i32) -> i32;
-type DtwaingetjxllibrarypathFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
-type DtwaingetjxllibrarypathaFunc = unsafe extern "C" fn(*mut c_char,i32) -> i32;
-type DtwaingetjxllibrarypathwFunc = unsafe extern "C" fn(*mut u16,i32) -> i32;
 type DtwaingetjobcontrolFunc = unsafe extern "C" fn(*mut c_void,*mut i32,i32) -> i32;
 type DtwaingetjobcontrolexFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwaingetjpegvaluesFunc = unsafe extern "C" fn(*mut c_void,*mut i32,*mut i32) -> i32;
@@ -1072,6 +1072,9 @@ type Dtwainsetcapvaluesex2Func = unsafe extern "C" fn(*mut c_void,i32,i32,i32,i3
 type DtwainsetcaptionFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
 type DtwainsetcaptionaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> i32;
 type DtwainsetcaptionwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
+type DtwainsetcomponentpathFunc = unsafe extern "C" fn(i32,*const u16) -> i32;
+type DtwainsetcomponentpathaFunc = unsafe extern "C" fn(i32,*const c_char) -> i32;
+type DtwainsetcomponentpathwFunc = unsafe extern "C" fn(i32,*const u16) -> i32;
 type DtwainsetcompressiontypeFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetcontrastFunc = unsafe extern "C" fn(*mut c_void,f64) -> i32;
 type DtwainsetcontraststringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
@@ -1115,9 +1118,6 @@ type DtwainsethighlightFunc = unsafe extern "C" fn(*mut c_void,f64) -> i32;
 type DtwainsethighlightstringFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
 type DtwainsethighlightstringaFunc = unsafe extern "C" fn(*mut c_void,*const c_char) -> i32;
 type DtwainsethighlightstringwFunc = unsafe extern "C" fn(*mut c_void,*const u16) -> i32;
-type DtwainsetjxllibrarypathFunc = unsafe extern "C" fn(*const u16) -> i32;
-type DtwainsetjxllibrarypathaFunc = unsafe extern "C" fn(*const c_char) -> i32;
-type DtwainsetjxllibrarypathwFunc = unsafe extern "C" fn(*const u16) -> i32;
 type DtwainsetjobcontrolFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetjpegvaluesFunc = unsafe extern "C" fn(*mut c_void,i32,i32) -> i32;
 type DtwainsetjpegxlqualityFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -1718,6 +1718,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetCaptionFunc: Symbol<'a, DtwaingetcaptionFunc>,
     DTWAIN_GetCaptionAFunc: Symbol<'a, DtwaingetcaptionaFunc>,
     DTWAIN_GetCaptionWFunc: Symbol<'a, DtwaingetcaptionwFunc>,
+    DTWAIN_GetComponentPathFunc: Symbol<'a, DtwaingetcomponentpathFunc>,
+    DTWAIN_GetComponentPathAFunc: Symbol<'a, DtwaingetcomponentpathaFunc>,
+    DTWAIN_GetComponentPathWFunc: Symbol<'a, DtwaingetcomponentpathwFunc>,
     DTWAIN_GetCompressionSizeFunc: Symbol<'a, DtwaingetcompressionsizeFunc>,
     DTWAIN_GetCompressionTypeFunc: Symbol<'a, DtwaingetcompressiontypeFunc>,
     DTWAIN_GetCompressionTypeExFunc: Symbol<'a, DtwaingetcompressiontypeexFunc>,
@@ -1805,9 +1808,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_GetImageInfoStringAFunc: Symbol<'a, DtwaingetimageinfostringaFunc>,
     DTWAIN_GetImageInfoStringWFunc: Symbol<'a, DtwaingetimageinfostringwFunc>,
     DTWAIN_GetImageLayoutInfoFunc: Symbol<'a, DtwaingetimagelayoutinfoFunc>,
-    DTWAIN_GetJXLLibraryPathFunc: Symbol<'a, DtwaingetjxllibrarypathFunc>,
-    DTWAIN_GetJXLLibraryPathAFunc: Symbol<'a, DtwaingetjxllibrarypathaFunc>,
-    DTWAIN_GetJXLLibraryPathWFunc: Symbol<'a, DtwaingetjxllibrarypathwFunc>,
     DTWAIN_GetJobControlFunc: Symbol<'a, DtwaingetjobcontrolFunc>,
     DTWAIN_GetJobControlExFunc: Symbol<'a, DtwaingetjobcontrolexFunc>,
     DTWAIN_GetJpegValuesFunc: Symbol<'a, DtwaingetjpegvaluesFunc>,
@@ -2259,6 +2259,9 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetCaptionFunc: Symbol<'a, DtwainsetcaptionFunc>,
     DTWAIN_SetCaptionAFunc: Symbol<'a, DtwainsetcaptionaFunc>,
     DTWAIN_SetCaptionWFunc: Symbol<'a, DtwainsetcaptionwFunc>,
+    DTWAIN_SetComponentPathFunc: Symbol<'a, DtwainsetcomponentpathFunc>,
+    DTWAIN_SetComponentPathAFunc: Symbol<'a, DtwainsetcomponentpathaFunc>,
+    DTWAIN_SetComponentPathWFunc: Symbol<'a, DtwainsetcomponentpathwFunc>,
     DTWAIN_SetCompressionTypeFunc: Symbol<'a, DtwainsetcompressiontypeFunc>,
     DTWAIN_SetContrastFunc: Symbol<'a, DtwainsetcontrastFunc>,
     DTWAIN_SetContrastStringFunc: Symbol<'a, DtwainsetcontraststringFunc>,
@@ -2302,9 +2305,6 @@ pub struct DTwainAPI<'a>
     DTWAIN_SetHighlightStringFunc: Symbol<'a, DtwainsethighlightstringFunc>,
     DTWAIN_SetHighlightStringAFunc: Symbol<'a, DtwainsethighlightstringaFunc>,
     DTWAIN_SetHighlightStringWFunc: Symbol<'a, DtwainsethighlightstringwFunc>,
-    DTWAIN_SetJXLLibraryPathFunc: Symbol<'a, DtwainsetjxllibrarypathFunc>,
-    DTWAIN_SetJXLLibraryPathAFunc: Symbol<'a, DtwainsetjxllibrarypathaFunc>,
-    DTWAIN_SetJXLLibraryPathWFunc: Symbol<'a, DtwainsetjxllibrarypathwFunc>,
     DTWAIN_SetJobControlFunc: Symbol<'a, DtwainsetjobcontrolFunc>,
     DTWAIN_SetJpegValuesFunc: Symbol<'a, DtwainsetjpegvaluesFunc>,
     DTWAIN_SetJpegXLQualityFunc: Symbol<'a, DtwainsetjpegxlqualityFunc>,
@@ -4144,6 +4144,7 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_CHECKDLLVERLESSEQ: i32 = 3;
     pub const DTWAIN_CHECKDLLVERGREATEREQ: i32 = 4;
     pub const DTWAIN_RESOURCE_COPYRIGHT: i32 = 9700;
+    pub const DTWAIN_COMPONENT_JPEGXL: i32 = 1;
 
     pub fn new(library: &'a Library) -> Result<Self, Box<dyn std::error::Error>>
     {
@@ -4593,6 +4594,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetCaption: Symbol<DtwaingetcaptionFunc> = unsafe { library.get(b"DTWAIN_GetCaption")? };
         let DTWAIN_GetCaptionA: Symbol<DtwaingetcaptionaFunc> = unsafe { library.get(b"DTWAIN_GetCaptionA")? };
         let DTWAIN_GetCaptionW: Symbol<DtwaingetcaptionwFunc> = unsafe { library.get(b"DTWAIN_GetCaptionW")? };
+        let DTWAIN_GetComponentPath: Symbol<DtwaingetcomponentpathFunc> = unsafe { library.get(b"DTWAIN_GetComponentPath")? };
+        let DTWAIN_GetComponentPathA: Symbol<DtwaingetcomponentpathaFunc> = unsafe { library.get(b"DTWAIN_GetComponentPathA")? };
+        let DTWAIN_GetComponentPathW: Symbol<DtwaingetcomponentpathwFunc> = unsafe { library.get(b"DTWAIN_GetComponentPathW")? };
         let DTWAIN_GetCompressionSize: Symbol<DtwaingetcompressionsizeFunc> = unsafe { library.get(b"DTWAIN_GetCompressionSize")? };
         let DTWAIN_GetCompressionType: Symbol<DtwaingetcompressiontypeFunc> = unsafe { library.get(b"DTWAIN_GetCompressionType")? };
         let DTWAIN_GetCompressionTypeEx: Symbol<DtwaingetcompressiontypeexFunc> = unsafe { library.get(b"DTWAIN_GetCompressionTypeEx")? };
@@ -4680,9 +4684,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_GetImageInfoStringA: Symbol<DtwaingetimageinfostringaFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringA")? };
         let DTWAIN_GetImageInfoStringW: Symbol<DtwaingetimageinfostringwFunc> = unsafe { library.get(b"DTWAIN_GetImageInfoStringW")? };
         let DTWAIN_GetImageLayoutInfo: Symbol<DtwaingetimagelayoutinfoFunc> = unsafe { library.get(b"DTWAIN_GetImageLayoutInfo")? };
-        let DTWAIN_GetJXLLibraryPath: Symbol<DtwaingetjxllibrarypathFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPath")? };
-        let DTWAIN_GetJXLLibraryPathA: Symbol<DtwaingetjxllibrarypathaFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPathA")? };
-        let DTWAIN_GetJXLLibraryPathW: Symbol<DtwaingetjxllibrarypathwFunc> = unsafe { library.get(b"DTWAIN_GetJXLLibraryPathW")? };
         let DTWAIN_GetJobControl: Symbol<DtwaingetjobcontrolFunc> = unsafe { library.get(b"DTWAIN_GetJobControl")? };
         let DTWAIN_GetJobControlEx: Symbol<DtwaingetjobcontrolexFunc> = unsafe { library.get(b"DTWAIN_GetJobControlEx")? };
         let DTWAIN_GetJpegValues: Symbol<DtwaingetjpegvaluesFunc> = unsafe { library.get(b"DTWAIN_GetJpegValues")? };
@@ -5134,6 +5135,9 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetCaption: Symbol<DtwainsetcaptionFunc> = unsafe { library.get(b"DTWAIN_SetCaption")? };
         let DTWAIN_SetCaptionA: Symbol<DtwainsetcaptionaFunc> = unsafe { library.get(b"DTWAIN_SetCaptionA")? };
         let DTWAIN_SetCaptionW: Symbol<DtwainsetcaptionwFunc> = unsafe { library.get(b"DTWAIN_SetCaptionW")? };
+        let DTWAIN_SetComponentPath: Symbol<DtwainsetcomponentpathFunc> = unsafe { library.get(b"DTWAIN_SetComponentPath")? };
+        let DTWAIN_SetComponentPathA: Symbol<DtwainsetcomponentpathaFunc> = unsafe { library.get(b"DTWAIN_SetComponentPathA")? };
+        let DTWAIN_SetComponentPathW: Symbol<DtwainsetcomponentpathwFunc> = unsafe { library.get(b"DTWAIN_SetComponentPathW")? };
         let DTWAIN_SetCompressionType: Symbol<DtwainsetcompressiontypeFunc> = unsafe { library.get(b"DTWAIN_SetCompressionType")? };
         let DTWAIN_SetContrast: Symbol<DtwainsetcontrastFunc> = unsafe { library.get(b"DTWAIN_SetContrast")? };
         let DTWAIN_SetContrastString: Symbol<DtwainsetcontraststringFunc> = unsafe { library.get(b"DTWAIN_SetContrastString")? };
@@ -5177,9 +5181,6 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_SetHighlightString: Symbol<DtwainsethighlightstringFunc> = unsafe { library.get(b"DTWAIN_SetHighlightString")? };
         let DTWAIN_SetHighlightStringA: Symbol<DtwainsethighlightstringaFunc> = unsafe { library.get(b"DTWAIN_SetHighlightStringA")? };
         let DTWAIN_SetHighlightStringW: Symbol<DtwainsethighlightstringwFunc> = unsafe { library.get(b"DTWAIN_SetHighlightStringW")? };
-        let DTWAIN_SetJXLLibraryPath: Symbol<DtwainsetjxllibrarypathFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPath")? };
-        let DTWAIN_SetJXLLibraryPathA: Symbol<DtwainsetjxllibrarypathaFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPathA")? };
-        let DTWAIN_SetJXLLibraryPathW: Symbol<DtwainsetjxllibrarypathwFunc> = unsafe { library.get(b"DTWAIN_SetJXLLibraryPathW")? };
         let DTWAIN_SetJobControl: Symbol<DtwainsetjobcontrolFunc> = unsafe { library.get(b"DTWAIN_SetJobControl")? };
         let DTWAIN_SetJpegValues: Symbol<DtwainsetjpegvaluesFunc> = unsafe { library.get(b"DTWAIN_SetJpegValues")? };
         let DTWAIN_SetJpegXLQuality: Symbol<DtwainsetjpegxlqualityFunc> = unsafe { library.get(b"DTWAIN_SetJpegXLQuality")? };
@@ -5779,6 +5780,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetCaptionFunc: DTWAIN_GetCaption,
             DTWAIN_GetCaptionAFunc: DTWAIN_GetCaptionA,
             DTWAIN_GetCaptionWFunc: DTWAIN_GetCaptionW,
+            DTWAIN_GetComponentPathFunc: DTWAIN_GetComponentPath,
+            DTWAIN_GetComponentPathAFunc: DTWAIN_GetComponentPathA,
+            DTWAIN_GetComponentPathWFunc: DTWAIN_GetComponentPathW,
             DTWAIN_GetCompressionSizeFunc: DTWAIN_GetCompressionSize,
             DTWAIN_GetCompressionTypeFunc: DTWAIN_GetCompressionType,
             DTWAIN_GetCompressionTypeExFunc: DTWAIN_GetCompressionTypeEx,
@@ -5866,9 +5870,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_GetImageInfoStringAFunc: DTWAIN_GetImageInfoStringA,
             DTWAIN_GetImageInfoStringWFunc: DTWAIN_GetImageInfoStringW,
             DTWAIN_GetImageLayoutInfoFunc: DTWAIN_GetImageLayoutInfo,
-            DTWAIN_GetJXLLibraryPathFunc: DTWAIN_GetJXLLibraryPath,
-            DTWAIN_GetJXLLibraryPathAFunc: DTWAIN_GetJXLLibraryPathA,
-            DTWAIN_GetJXLLibraryPathWFunc: DTWAIN_GetJXLLibraryPathW,
             DTWAIN_GetJobControlFunc: DTWAIN_GetJobControl,
             DTWAIN_GetJobControlExFunc: DTWAIN_GetJobControlEx,
             DTWAIN_GetJpegValuesFunc: DTWAIN_GetJpegValues,
@@ -6320,6 +6321,9 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetCaptionFunc: DTWAIN_SetCaption,
             DTWAIN_SetCaptionAFunc: DTWAIN_SetCaptionA,
             DTWAIN_SetCaptionWFunc: DTWAIN_SetCaptionW,
+            DTWAIN_SetComponentPathFunc: DTWAIN_SetComponentPath,
+            DTWAIN_SetComponentPathAFunc: DTWAIN_SetComponentPathA,
+            DTWAIN_SetComponentPathWFunc: DTWAIN_SetComponentPathW,
             DTWAIN_SetCompressionTypeFunc: DTWAIN_SetCompressionType,
             DTWAIN_SetContrastFunc: DTWAIN_SetContrast,
             DTWAIN_SetContrastStringFunc: DTWAIN_SetContrastString,
@@ -6363,9 +6367,6 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_SetHighlightStringFunc: DTWAIN_SetHighlightString,
             DTWAIN_SetHighlightStringAFunc: DTWAIN_SetHighlightStringA,
             DTWAIN_SetHighlightStringWFunc: DTWAIN_SetHighlightStringW,
-            DTWAIN_SetJXLLibraryPathFunc: DTWAIN_SetJXLLibraryPath,
-            DTWAIN_SetJXLLibraryPathAFunc: DTWAIN_SetJXLLibraryPathA,
-            DTWAIN_SetJXLLibraryPathWFunc: DTWAIN_SetJXLLibraryPathW,
             DTWAIN_SetJobControlFunc: DTWAIN_SetJobControl,
             DTWAIN_SetJpegValuesFunc: DTWAIN_SetJpegValues,
             DTWAIN_SetJpegXLQualityFunc: DTWAIN_SetJpegXLQuality,
@@ -8306,6 +8307,18 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_GetCaptionWFunc)(Source, Caption);  }
     }
 
+    pub fn DTWAIN_GetComponentPath(&self, nComponent: i32, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetComponentPathFunc)(nComponent, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetComponentPathA(&self, nComponent: i32, lpszOut: *mut c_char, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetComponentPathAFunc)(nComponent, lpszOut, nSize);  }
+    }
+
+    pub fn DTWAIN_GetComponentPathW(&self, nComponent: i32, lpszOut: *mut u16, nSize: i32) -> i32 {
+        unsafe { return (self.DTWAIN_GetComponentPathWFunc)(nComponent, lpszOut, nSize);  }
+    }
+
     pub fn DTWAIN_GetCompressionSize(&self, Source: *mut c_void, lBytes: *mut u32) -> i32 {
         unsafe { return (self.DTWAIN_GetCompressionSizeFunc)(Source, lBytes);  }
     }
@@ -8652,18 +8665,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_GetImageLayoutInfo(&self, Source: *mut c_void, lGetType: i32, DocumentNumber: *mut i32, PageNumber: *mut i32, FrameNumber: *mut i32) -> i32 {
         unsafe { return (self.DTWAIN_GetImageLayoutInfoFunc)(Source, lGetType, DocumentNumber, PageNumber, FrameNumber);  }
-    }
-
-    pub fn DTWAIN_GetJXLLibraryPath(&self, lpszOut: *mut u16, nSize: i32) -> i32 {
-        unsafe { return (self.DTWAIN_GetJXLLibraryPathFunc)(lpszOut, nSize);  }
-    }
-
-    pub fn DTWAIN_GetJXLLibraryPathA(&self, lpszOut: *mut c_char, nSize: i32) -> i32 {
-        unsafe { return (self.DTWAIN_GetJXLLibraryPathAFunc)(lpszOut, nSize);  }
-    }
-
-    pub fn DTWAIN_GetJXLLibraryPathW(&self, lpszOut: *mut u16, nSize: i32) -> i32 {
-        unsafe { return (self.DTWAIN_GetJXLLibraryPathWFunc)(lpszOut, nSize);  }
     }
 
     pub fn DTWAIN_GetJobControl(&self, Source: *mut c_void, pJobControl: *mut i32, bCurrent: i32) -> i32 {
@@ -10470,6 +10471,18 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_SetCaptionWFunc)(Source, Caption);  }
     }
 
+    pub fn DTWAIN_SetComponentPath(&self, nComponent: i32, sFilePath: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_SetComponentPathFunc)(nComponent, sFilePath);  }
+    }
+
+    pub fn DTWAIN_SetComponentPathA(&self, nComponent: i32, szFilePath: *const c_char) -> i32 {
+        unsafe { return (self.DTWAIN_SetComponentPathAFunc)(nComponent, szFilePath);  }
+    }
+
+    pub fn DTWAIN_SetComponentPathW(&self, nComponent: i32, sFilePath: *const u16) -> i32 {
+        unsafe { return (self.DTWAIN_SetComponentPathWFunc)(nComponent, sFilePath);  }
+    }
+
     pub fn DTWAIN_SetCompressionType(&self, Source: *mut c_void, lCompression: i32, bSetCurrent: i32) -> i32 {
         unsafe { return (self.DTWAIN_SetCompressionTypeFunc)(Source, lCompression, bSetCurrent);  }
     }
@@ -10640,18 +10653,6 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_SetHighlightStringW(&self, Source: *mut c_void, Highlight: *const u16) -> i32 {
         unsafe { return (self.DTWAIN_SetHighlightStringWFunc)(Source, Highlight);  }
-    }
-
-    pub fn DTWAIN_SetJXLLibraryPath(&self, sFilePath: *const u16) -> i32 {
-        unsafe { return (self.DTWAIN_SetJXLLibraryPathFunc)(sFilePath);  }
-    }
-
-    pub fn DTWAIN_SetJXLLibraryPathA(&self, szFilePath: *const c_char) -> i32 {
-        unsafe { return (self.DTWAIN_SetJXLLibraryPathAFunc)(szFilePath);  }
-    }
-
-    pub fn DTWAIN_SetJXLLibraryPathW(&self, sFilePath: *const u16) -> i32 {
-        unsafe { return (self.DTWAIN_SetJXLLibraryPathWFunc)(sFilePath);  }
     }
 
     pub fn DTWAIN_SetJobControl(&self, Source: *mut c_void, JobControl: i32, bSetCurrent: i32) -> i32 {

@@ -1666,4 +1666,5 @@ local dtwain_constants = {}
    dtwain_constants.DTWAIN_CHECKDLLVERLESSEQ = 3
    dtwain_constants.DTWAIN_CHECKDLLVERGREATEREQ = 4
    dtwain_constants.DTWAIN_RESOURCE_COPYRIGHT = 9700
+   dtwain_constants.DTWAIN_COMPONENT_JPEGXL = 1
 return dtwain_constants

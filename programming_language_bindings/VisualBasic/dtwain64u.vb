@@ -1777,6 +1777,7 @@ Class DTWAINAPI
     Public Const DTWAIN_CHECKDLLVERLESSEQ As Integer = 3
     Public Const DTWAIN_CHECKDLLVERGREATEREQ As Integer = 4
     Public Const DTWAIN_RESOURCE_COPYRIGHT As Integer = 9700
+    Public Const DTWAIN_COMPONENT_JPEGXL As Integer = 1
 
     Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
     Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
@@ -2152,6 +2153,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetCapValuesEx Lib "dtwain64u.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_GetCapValuesEx2 Lib "dtwain64u.dll" (Source As System.IntPtr, lCap As Integer, lGetType As Integer, lContainerType As Integer, nDataType As Integer, ByRef pArray As System.IntPtr) As Integer
     Public Declare Unicode Function DTWAIN_GetCaption Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
+    Public Declare Unicode Function DTWAIN_GetComponentPath Lib "dtwain64u.dll" (nComponent As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
     Public Declare Function DTWAIN_GetCompressionSize Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
     Public Declare Function DTWAIN_GetCompressionType Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lpCompression As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetCompressionTypeEx Lib "dtwain64u.dll" (Source As System.IntPtr, bCurrent As Integer) As Integer
@@ -2207,7 +2209,6 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_GetImageInfo Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef lpXResolution As System.Double, ByRef lpYResolution As System.Double, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Unicode Function DTWAIN_GetImageInfoString Lib "dtwain64u.dll" (Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpXResolution As StringBuilder, <MarshalAs(UnmanagedType.LPTStr)> lpYResolution As StringBuilder, ByRef lpWidth As Integer, ByRef lpLength As Integer, ByRef lpNumSamples As Integer, ByRef lpBitsPerSample As System.IntPtr, ByRef lpBitsPerPixel As Integer, ByRef lpPlanar As Integer, ByRef lpPixelType As Integer, ByRef lpCompression As Integer) As Integer
     Public Declare Function DTWAIN_GetImageLayoutInfo Lib "dtwain64u.dll" (Source As System.IntPtr, lGetType As Integer, ByRef DocumentNumber As Integer, ByRef PageNumber As Integer, ByRef FrameNumber As Integer) As Integer
-    Public Declare Unicode Function DTWAIN_GetJXLLibraryPath Lib "dtwain64u.dll" (<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControl Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJobControlEx Lib "dtwain64u.dll" (Source As System.IntPtr, bGetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_GetJpegValues Lib "dtwain64u.dll" (Source As System.IntPtr, ByRef pQuality As Integer, ByRef Progressive As Integer) As Integer
@@ -2527,6 +2528,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_SetCapValuesEx Lib "dtwain64u.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_SetCapValuesEx2 Lib "dtwain64u.dll" (Source As System.IntPtr, lCap As Integer, lSetType As Integer, lContainerType As Integer, nDataType As Integer, pArray As System.IntPtr) As Integer
     Public Declare Unicode Function DTWAIN_SetCaption Lib "dtwain64u.dll" (Source As System.IntPtr, Caption As String) As Integer
+    Public Declare Unicode Function DTWAIN_SetComponentPath Lib "dtwain64u.dll" (nComponent As Integer, sFilePath As String) As Integer
     Public Declare Function DTWAIN_SetCompressionType Lib "dtwain64u.dll" (Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_SetContrast Lib "dtwain64u.dll" (Source As System.IntPtr, Contrast As System.Double) As Integer
     Public Declare Unicode Function DTWAIN_SetContrastString Lib "dtwain64u.dll" (Source As System.IntPtr, Contrast As String) As Integer
@@ -2556,7 +2558,6 @@ Class DTWAINAPI
     Public Declare Unicode Function DTWAIN_SetHalftone Lib "dtwain64u.dll" (Source As System.IntPtr, lpHalftone As String) As Integer
     Public Declare Function DTWAIN_SetHighlight Lib "dtwain64u.dll" (Source As System.IntPtr, Highlight As System.Double) As Integer
     Public Declare Unicode Function DTWAIN_SetHighlightString Lib "dtwain64u.dll" (Source As System.IntPtr, Highlight As String) As Integer
-    Public Declare Unicode Function DTWAIN_SetJXLLibraryPath Lib "dtwain64u.dll" (sFilePath As String) As Integer
     Public Declare Function DTWAIN_SetJobControl Lib "dtwain64u.dll" (Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
     Public Declare Function DTWAIN_SetJpegValues Lib "dtwain64u.dll" (Source As System.IntPtr, Quality As Integer, Progressive As Integer) As Integer
     Public Declare Function DTWAIN_SetJpegXLQuality Lib "dtwain64u.dll" (Source As System.IntPtr, Quality As Integer) As Integer

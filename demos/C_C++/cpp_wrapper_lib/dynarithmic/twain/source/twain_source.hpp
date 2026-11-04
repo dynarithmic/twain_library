@@ -100,6 +100,7 @@ namespace dynarithmic
                 twain_session* m_pSession = nullptr;
                 bool m_bCloseable = true;
                 std::string m_source_details;
+                std::string m_source_name;
                 DTWAIN_SOURCE m_theSource;
                 bool m_bUIOnlyOn;
                 tribool::tribool m_bUIOnlySupported;
@@ -151,6 +152,8 @@ namespace dynarithmic
                 image_information get_current_image_information() const;
                 bool set_current_camera(const cameraside_value::value_type& camera);
                 DTWAIN_SOURCE get_source() const noexcept { return m_theSource; }
+                std::string get_source_name() const { return m_source_name; }
+                twain_source& set_source_name(const std::string& name) { m_source_name = name; return *this; }
 
                 custom_data_container_type get_custom_data() const;
                 bool set_custom_data(const custom_data_container_type& s) const

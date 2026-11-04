@@ -1950,6 +1950,7 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_CHECKDLLVERLESSEQ = 3;
     public static const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
     public static const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
+    public static const int DTWAIN_COMPONENT_JPEGXL = 1;
 
     /************ Core API ************/
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_BOOL, DTWAIN_BOOL, LPLONG) DTWAIN_AcquireAudioFile;
@@ -2396,6 +2397,9 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CHARPTRTYPE) DTWAIN_GetCaption;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPSTR) DTWAIN_GetCaptionA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPWSTR) DTWAIN_GetCaptionW;
+    extern(Windows) LONG function(LONG, DTWAIN_CHARPTRTYPE, LONG) DTWAIN_GetComponentPath;
+    extern(Windows) LONG function(LONG, LPSTR, LONG) DTWAIN_GetComponentPathA;
+    extern(Windows) LONG function(LONG, LPWSTR, LONG) DTWAIN_GetComponentPathW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDWORD) DTWAIN_GetCompressionSize;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL) DTWAIN_GetCompressionType;
     extern(Windows) LONG function(DTWAIN_SOURCE, DTWAIN_BOOL) DTWAIN_GetCompressionTypeEx;
@@ -2481,9 +2485,6 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPSTR, LPSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageInfoStringA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPWSTR, LPWSTR, LPLONG, LPLONG, LPLONG, LPDTWAIN_ARRAY, LPLONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageInfoStringW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, LPLONG, LPLONG, LPLONG) DTWAIN_GetImageLayoutInfo;
-    extern(Windows) LONG function(DTWAIN_CHARPTRTYPE, LONG) DTWAIN_GetJXLLibraryPath;
-    extern(Windows) LONG function(LPSTR, LONG) DTWAIN_GetJXLLibraryPathA;
-    extern(Windows) LONG function(LPWSTR, LONG) DTWAIN_GetJXLLibraryPathW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, DTWAIN_BOOL) DTWAIN_GetJobControl;
     extern(Windows) LONG function(DTWAIN_SOURCE, DTWAIN_BOOL) DTWAIN_GetJobControlEx;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPLONG, LPLONG) DTWAIN_GetJpegValues;
@@ -2932,6 +2933,9 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE) DTWAIN_SetCaption;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR) DTWAIN_SetCaptionA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCWSTR) DTWAIN_SetCaptionW;
+    extern(Windows) DTWAIN_BOOL function(LONG, DTWAIN_CCHARPTRTYPE) DTWAIN_SetComponentPath;
+    extern(Windows) DTWAIN_BOOL function(LONG, LPCSTR) DTWAIN_SetComponentPathA;
+    extern(Windows) DTWAIN_BOOL function(LONG, LPCWSTR) DTWAIN_SetComponentPathW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, DTWAIN_BOOL) DTWAIN_SetCompressionType;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_FLOAT) DTWAIN_SetContrast;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE) DTWAIN_SetContrastString;
@@ -2973,9 +2977,6 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE) DTWAIN_SetHighlightString;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCSTR) DTWAIN_SetHighlightStringA;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPCWSTR) DTWAIN_SetHighlightStringW;
-    extern(Windows) DTWAIN_BOOL function(DTWAIN_CCHARPTRTYPE) DTWAIN_SetJXLLibraryPath;
-    extern(Windows) DTWAIN_BOOL function(LPCSTR) DTWAIN_SetJXLLibraryPathA;
-    extern(Windows) DTWAIN_BOOL function(LPCWSTR) DTWAIN_SetJXLLibraryPathW;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, DTWAIN_BOOL) DTWAIN_SetJobControl;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG, LONG) DTWAIN_SetJpegValues;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_SetJpegXLQuality;
@@ -3576,6 +3577,9 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetCaption, "DTWAIN_GetCaption");
         bindFunction(cast(void**)&DTWAIN_GetCaptionA, "DTWAIN_GetCaptionA");
         bindFunction(cast(void**)&DTWAIN_GetCaptionW, "DTWAIN_GetCaptionW");
+        bindFunction(cast(void**)&DTWAIN_GetComponentPath, "DTWAIN_GetComponentPath");
+        bindFunction(cast(void**)&DTWAIN_GetComponentPathA, "DTWAIN_GetComponentPathA");
+        bindFunction(cast(void**)&DTWAIN_GetComponentPathW, "DTWAIN_GetComponentPathW");
         bindFunction(cast(void**)&DTWAIN_GetCompressionSize, "DTWAIN_GetCompressionSize");
         bindFunction(cast(void**)&DTWAIN_GetCompressionType, "DTWAIN_GetCompressionType");
         bindFunction(cast(void**)&DTWAIN_GetCompressionTypeEx, "DTWAIN_GetCompressionTypeEx");
@@ -3661,9 +3665,6 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_GetImageInfoStringA, "DTWAIN_GetImageInfoStringA");
         bindFunction(cast(void**)&DTWAIN_GetImageInfoStringW, "DTWAIN_GetImageInfoStringW");
         bindFunction(cast(void**)&DTWAIN_GetImageLayoutInfo, "DTWAIN_GetImageLayoutInfo");
-        bindFunction(cast(void**)&DTWAIN_GetJXLLibraryPath, "DTWAIN_GetJXLLibraryPath");
-        bindFunction(cast(void**)&DTWAIN_GetJXLLibraryPathA, "DTWAIN_GetJXLLibraryPathA");
-        bindFunction(cast(void**)&DTWAIN_GetJXLLibraryPathW, "DTWAIN_GetJXLLibraryPathW");
         bindFunction(cast(void**)&DTWAIN_GetJobControl, "DTWAIN_GetJobControl");
         bindFunction(cast(void**)&DTWAIN_GetJobControlEx, "DTWAIN_GetJobControlEx");
         bindFunction(cast(void**)&DTWAIN_GetJpegValues, "DTWAIN_GetJpegValues");
@@ -4112,6 +4113,9 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_SetCaption, "DTWAIN_SetCaption");
         bindFunction(cast(void**)&DTWAIN_SetCaptionA, "DTWAIN_SetCaptionA");
         bindFunction(cast(void**)&DTWAIN_SetCaptionW, "DTWAIN_SetCaptionW");
+        bindFunction(cast(void**)&DTWAIN_SetComponentPath, "DTWAIN_SetComponentPath");
+        bindFunction(cast(void**)&DTWAIN_SetComponentPathA, "DTWAIN_SetComponentPathA");
+        bindFunction(cast(void**)&DTWAIN_SetComponentPathW, "DTWAIN_SetComponentPathW");
         bindFunction(cast(void**)&DTWAIN_SetCompressionType, "DTWAIN_SetCompressionType");
         bindFunction(cast(void**)&DTWAIN_SetContrast, "DTWAIN_SetContrast");
         bindFunction(cast(void**)&DTWAIN_SetContrastString, "DTWAIN_SetContrastString");
@@ -4153,9 +4157,6 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_SetHighlightString, "DTWAIN_SetHighlightString");
         bindFunction(cast(void**)&DTWAIN_SetHighlightStringA, "DTWAIN_SetHighlightStringA");
         bindFunction(cast(void**)&DTWAIN_SetHighlightStringW, "DTWAIN_SetHighlightStringW");
-        bindFunction(cast(void**)&DTWAIN_SetJXLLibraryPath, "DTWAIN_SetJXLLibraryPath");
-        bindFunction(cast(void**)&DTWAIN_SetJXLLibraryPathA, "DTWAIN_SetJXLLibraryPathA");
-        bindFunction(cast(void**)&DTWAIN_SetJXLLibraryPathW, "DTWAIN_SetJXLLibraryPathW");
         bindFunction(cast(void**)&DTWAIN_SetJobControl, "DTWAIN_SetJobControl");
         bindFunction(cast(void**)&DTWAIN_SetJpegValues, "DTWAIN_SetJpegValues");
         bindFunction(cast(void**)&DTWAIN_SetJpegXLQuality, "DTWAIN_SetJpegXLQuality");

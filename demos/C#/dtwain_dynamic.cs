@@ -1848,6 +1848,7 @@
         public const int DTWAIN_CHECKDLLVERLESSEQ = 3;
         public const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
         public const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
+        public const int DTWAIN_COMPONENT_JPEGXL = 1;
         // string type constants
         // these include room for the strings and a null char
         public enum TWSTR : int
@@ -2326,6 +2327,8 @@
         public delegate int DTWAIN_GetCapValuesEx2Delegate(DTWAIN_SOURCE Source, int lCap, int lGetType, int lContainerType, int nDataType, ref DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_GetCaptionDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder Caption);
         public delegate int DTWAIN_GetCaptionDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr Caption);
+        public delegate int DTWAIN_GetComponentPathDelegate(int nComponent, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
+        public delegate int DTWAIN_GetComponentPathDelegate_overload(int nComponent, System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetCompressionSizeDelegate(DTWAIN_SOURCE Source, ref DWORD lBytes);
         public delegate int DTWAIN_GetCompressionTypeDelegate(DTWAIN_SOURCE Source, ref int lpCompression, int bCurrent);
         public delegate int DTWAIN_GetCompressionTypeExDelegate(DTWAIN_SOURCE Source, int bCurrent);
@@ -2395,8 +2398,6 @@
         public delegate int DTWAIN_GetImageInfoStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpXResolution, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageInfoStringDelegate_overload(DTWAIN_SOURCE Source, System.IntPtr lpXResolution, System.IntPtr lpYResolution, ref int lpWidth, ref int lpLength, ref int lpNumSamples, ref DTWAIN_ARRAY lpBitsPerSample, ref int lpBitsPerPixel, ref int lpPlanar, ref int lpPixelType, ref int lpCompression);
         public delegate int DTWAIN_GetImageLayoutInfoDelegate(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber);
-        public delegate int DTWAIN_GetJXLLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize);
-        public delegate int DTWAIN_GetJXLLibraryPathDelegate_overload(System.IntPtr lpszOut, int nSize);
         public delegate int DTWAIN_GetJobControlDelegate(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent);
         public delegate int DTWAIN_GetJobControlExDelegate(DTWAIN_SOURCE Source, int bGetCurrent);
         public delegate int DTWAIN_GetJpegValuesDelegate(DTWAIN_SOURCE Source, ref int pQuality, ref int Progressive);
@@ -2759,6 +2760,7 @@
         public delegate int DTWAIN_SetCapValuesExDelegate(DTWAIN_SOURCE Source, int lCap, int lSetType, int lContainerType, DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_SetCapValuesEx2Delegate(DTWAIN_SOURCE Source, int lCap, int lSetType, int lContainerType, int nDataType, DTWAIN_ARRAY pArray);
         public delegate int DTWAIN_SetCaptionDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Caption);
+        public delegate int DTWAIN_SetComponentPathDelegate(int nComponent, [MarshalAs(UnmanagedType.LPTStr)] string sFilePath);
         public delegate int DTWAIN_SetCompressionTypeDelegate(DTWAIN_SOURCE Source, int lCompression, int bSetCurrent);
         public delegate int DTWAIN_SetContrastDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT Contrast);
         public delegate int DTWAIN_SetContrastStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Contrast);
@@ -2788,7 +2790,6 @@
         public delegate int DTWAIN_SetHalftoneDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string lpHalftone);
         public delegate int DTWAIN_SetHighlightDelegate(DTWAIN_SOURCE Source, DTWAIN_FLOAT Highlight);
         public delegate int DTWAIN_SetHighlightStringDelegate(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight);
-        public delegate int DTWAIN_SetJXLLibraryPathDelegate([MarshalAs(UnmanagedType.LPTStr)] string sFilePath);
         public delegate int DTWAIN_SetJobControlDelegate(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent);
         public delegate int DTWAIN_SetJpegValuesDelegate(DTWAIN_SOURCE Source, int Quality, int Progressive);
         public delegate int DTWAIN_SetJpegXLQualityDelegate(DTWAIN_SOURCE Source, int Quality);
@@ -4046,6 +4047,12 @@
         [DTWAINNativeFunction("DTWAIN_GetCaption")]
         private readonly DTWAIN_GetCaptionDelegate_overload _DTWAIN_GetCaption_overload; 
 
+        [DTWAINNativeFunction("DTWAIN_GetComponentPath")]
+        private readonly DTWAIN_GetComponentPathDelegate  _DTWAIN_GetComponentPath;
+
+        [DTWAINNativeFunction("DTWAIN_GetComponentPath")]
+        private readonly DTWAIN_GetComponentPathDelegate_overload _DTWAIN_GetComponentPath_overload; 
+
         [DTWAINNativeFunction("DTWAIN_GetCompressionSize")]
         private readonly DTWAIN_GetCompressionSizeDelegate  _DTWAIN_GetCompressionSize;
 
@@ -4252,12 +4259,6 @@
 
         [DTWAINNativeFunction("DTWAIN_GetImageLayoutInfo")]
         private readonly DTWAIN_GetImageLayoutInfoDelegate  _DTWAIN_GetImageLayoutInfo;
-
-        [DTWAINNativeFunction("DTWAIN_GetJXLLibraryPath")]
-        private readonly DTWAIN_GetJXLLibraryPathDelegate  _DTWAIN_GetJXLLibraryPath;
-
-        [DTWAINNativeFunction("DTWAIN_GetJXLLibraryPath")]
-        private readonly DTWAIN_GetJXLLibraryPathDelegate_overload _DTWAIN_GetJXLLibraryPath_overload; 
 
         [DTWAINNativeFunction("DTWAIN_GetJobControl")]
         private readonly DTWAIN_GetJobControlDelegate  _DTWAIN_GetJobControl;
@@ -5345,6 +5346,9 @@
         [DTWAINNativeFunction("DTWAIN_SetCaption")]
         private readonly DTWAIN_SetCaptionDelegate  _DTWAIN_SetCaption;
 
+        [DTWAINNativeFunction("DTWAIN_SetComponentPath")]
+        private readonly DTWAIN_SetComponentPathDelegate  _DTWAIN_SetComponentPath;
+
         [DTWAINNativeFunction("DTWAIN_SetCompressionType")]
         private readonly DTWAIN_SetCompressionTypeDelegate  _DTWAIN_SetCompressionType;
 
@@ -5431,9 +5435,6 @@
 
         [DTWAINNativeFunction("DTWAIN_SetHighlightString")]
         private readonly DTWAIN_SetHighlightStringDelegate  _DTWAIN_SetHighlightString;
-
-        [DTWAINNativeFunction("DTWAIN_SetJXLLibraryPath")]
-        private readonly DTWAIN_SetJXLLibraryPathDelegate  _DTWAIN_SetJXLLibraryPath;
 
         [DTWAINNativeFunction("DTWAIN_SetJobControl")]
         private readonly DTWAIN_SetJobControlDelegate  _DTWAIN_SetJobControl;
@@ -6877,6 +6878,12 @@
         public  int DTWAIN_GetCaption (DTWAIN_SOURCE Source, System.IntPtr Caption)
         { return _DTWAIN_GetCaption_overload(Source, Caption); }
 
+        public  int DTWAIN_GetComponentPath(int nComponent, [MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
+        { return _DTWAIN_GetComponentPath(nComponent, lpszOut, nSize); }
+
+        public  int DTWAIN_GetComponentPath (int nComponent, System.IntPtr lpszOut, int nSize)
+        { return _DTWAIN_GetComponentPath_overload(nComponent, lpszOut, nSize); }
+
         public  int DTWAIN_GetCompressionSize(DTWAIN_SOURCE Source, ref DWORD lBytes)
         { return _DTWAIN_GetCompressionSize(Source, ref lBytes); }
 
@@ -7083,12 +7090,6 @@
 
         public  int DTWAIN_GetImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, ref int DocumentNumber, ref int PageNumber, ref int FrameNumber)
         { return _DTWAIN_GetImageLayoutInfo(Source, lGetType, ref DocumentNumber, ref PageNumber, ref FrameNumber); }
-
-        public  int DTWAIN_GetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] System.Text.StringBuilder lpszOut, int nSize)
-        { return _DTWAIN_GetJXLLibraryPath(lpszOut, nSize); }
-
-        public  int DTWAIN_GetJXLLibraryPath (System.IntPtr lpszOut, int nSize)
-        { return _DTWAIN_GetJXLLibraryPath_overload(lpszOut, nSize); }
 
         public  int DTWAIN_GetJobControl(DTWAIN_SOURCE Source, ref int pJobControl, int bCurrent)
         { return _DTWAIN_GetJobControl(Source, ref pJobControl, bCurrent); }
@@ -8176,6 +8177,9 @@
         public  int DTWAIN_SetCaption(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Caption)
         { return _DTWAIN_SetCaption(Source, Caption); }
 
+        public  int DTWAIN_SetComponentPath(int nComponent, [MarshalAs(UnmanagedType.LPTStr)] string sFilePath)
+        { return _DTWAIN_SetComponentPath(nComponent, sFilePath); }
+
         public  int DTWAIN_SetCompressionType(DTWAIN_SOURCE Source, int lCompression, int bSetCurrent)
         { return _DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent); }
 
@@ -8262,9 +8266,6 @@
 
         public  int DTWAIN_SetHighlightString(DTWAIN_SOURCE Source, [MarshalAs(UnmanagedType.LPTStr)] string Highlight)
         { return _DTWAIN_SetHighlightString(Source, Highlight); }
-
-        public  int DTWAIN_SetJXLLibraryPath([MarshalAs(UnmanagedType.LPTStr)] string sFilePath)
-        { return _DTWAIN_SetJXLLibraryPath(sFilePath); }
 
         public  int DTWAIN_SetJobControl(DTWAIN_SOURCE Source, int JobControl, int bSetCurrent)
         { return _DTWAIN_SetJobControl(Source, JobControl, bSetCurrent); }

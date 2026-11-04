@@ -494,6 +494,9 @@
     D_GETCAPTIONFUNC                              DYNDTWAIN_API::DTWAIN_GetCaption = nullptr;
     D_GETCAPTIONAFUNC                             DYNDTWAIN_API::DTWAIN_GetCaptionA = nullptr;
     D_GETCAPTIONWFUNC                             DYNDTWAIN_API::DTWAIN_GetCaptionW = nullptr;
+    D_GETCOMPONENTPATHFUNC                        DYNDTWAIN_API::DTWAIN_GetComponentPath = nullptr;
+    D_GETCOMPONENTPATHAFUNC                       DYNDTWAIN_API::DTWAIN_GetComponentPathA = nullptr;
+    D_GETCOMPONENTPATHWFUNC                       DYNDTWAIN_API::DTWAIN_GetComponentPathW = nullptr;
     D_GETCOMPRESSIONSIZEFUNC                      DYNDTWAIN_API::DTWAIN_GetCompressionSize = nullptr;
     D_GETCOMPRESSIONTYPEFUNC                      DYNDTWAIN_API::DTWAIN_GetCompressionType = nullptr;
     D_GETCOMPRESSIONTYPEEXFUNC                    DYNDTWAIN_API::DTWAIN_GetCompressionTypeEx = nullptr;
@@ -581,9 +584,6 @@
     D_GETIMAGEINFOSTRINGAFUNC                     DYNDTWAIN_API::DTWAIN_GetImageInfoStringA = nullptr;
     D_GETIMAGEINFOSTRINGWFUNC                     DYNDTWAIN_API::DTWAIN_GetImageInfoStringW = nullptr;
     D_GETIMAGELAYOUTINFOFUNC                      DYNDTWAIN_API::DTWAIN_GetImageLayoutInfo = nullptr;
-    D_GETJXLLIBRARYPATHFUNC                       DYNDTWAIN_API::DTWAIN_GetJXLLibraryPath = nullptr;
-    D_GETJXLLIBRARYPATHAFUNC                      DYNDTWAIN_API::DTWAIN_GetJXLLibraryPathA = nullptr;
-    D_GETJXLLIBRARYPATHWFUNC                      DYNDTWAIN_API::DTWAIN_GetJXLLibraryPathW = nullptr;
     D_GETJOBCONTROLFUNC                           DYNDTWAIN_API::DTWAIN_GetJobControl = nullptr;
     D_GETJOBCONTROLEXFUNC                         DYNDTWAIN_API::DTWAIN_GetJobControlEx = nullptr;
     D_GETJPEGVALUESFUNC                           DYNDTWAIN_API::DTWAIN_GetJpegValues = nullptr;
@@ -1037,6 +1037,9 @@
     D_SETCAPTIONFUNC                              DYNDTWAIN_API::DTWAIN_SetCaption = nullptr;
     D_SETCAPTIONAFUNC                             DYNDTWAIN_API::DTWAIN_SetCaptionA = nullptr;
     D_SETCAPTIONWFUNC                             DYNDTWAIN_API::DTWAIN_SetCaptionW = nullptr;
+    D_SETCOMPONENTPATHFUNC                        DYNDTWAIN_API::DTWAIN_SetComponentPath = nullptr;
+    D_SETCOMPONENTPATHAFUNC                       DYNDTWAIN_API::DTWAIN_SetComponentPathA = nullptr;
+    D_SETCOMPONENTPATHWFUNC                       DYNDTWAIN_API::DTWAIN_SetComponentPathW = nullptr;
     D_SETCOMPRESSIONTYPEFUNC                      DYNDTWAIN_API::DTWAIN_SetCompressionType = nullptr;
     D_SETCONTRASTFUNC                             DYNDTWAIN_API::DTWAIN_SetContrast = nullptr;
     D_SETCONTRASTSTRINGFUNC                       DYNDTWAIN_API::DTWAIN_SetContrastString = nullptr;
@@ -1080,9 +1083,6 @@
     D_SETHIGHLIGHTSTRINGFUNC                      DYNDTWAIN_API::DTWAIN_SetHighlightString = nullptr;
     D_SETHIGHLIGHTSTRINGAFUNC                     DYNDTWAIN_API::DTWAIN_SetHighlightStringA = nullptr;
     D_SETHIGHLIGHTSTRINGWFUNC                     DYNDTWAIN_API::DTWAIN_SetHighlightStringW = nullptr;
-    D_SETJXLLIBRARYPATHFUNC                       DYNDTWAIN_API::DTWAIN_SetJXLLibraryPath = nullptr;
-    D_SETJXLLIBRARYPATHAFUNC                      DYNDTWAIN_API::DTWAIN_SetJXLLibraryPathA = nullptr;
-    D_SETJXLLIBRARYPATHWFUNC                      DYNDTWAIN_API::DTWAIN_SetJXLLibraryPathW = nullptr;
     D_SETJOBCONTROLFUNC                           DYNDTWAIN_API::DTWAIN_SetJobControl = nullptr;
     D_SETJPEGVALUESFUNC                           DYNDTWAIN_API::DTWAIN_SetJpegValues = nullptr;
     D_SETJPEGXLQUALITYFUNC                        DYNDTWAIN_API::DTWAIN_SetJpegXLQuality = nullptr;
@@ -1766,6 +1766,9 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCaption, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCaptionA, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCaptionW, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_GetComponentPath, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_GetComponentPathA, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_GetComponentPathW, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCompressionSize, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCompressionType, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetCompressionTypeEx, hModule)
@@ -1853,9 +1856,6 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetImageInfoStringA, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetImageInfoStringW, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetImageLayoutInfo, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_GetJXLLibraryPath, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_GetJXLLibraryPathA, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_GetJXLLibraryPathW, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetJobControl, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetJobControlEx, hModule)
           LOADFUNCTIONIMPL(DTWAIN_GetJpegValues, hModule)
@@ -2309,6 +2309,9 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetCaption, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetCaptionA, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetCaptionW, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_SetComponentPath, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_SetComponentPathA, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_SetComponentPathW, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetCompressionType, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetContrast, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetContrastString, hModule)
@@ -2352,9 +2355,6 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetHighlightString, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetHighlightStringA, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetHighlightStringW, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_SetJXLLibraryPath, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_SetJXLLibraryPathA, hModule)
-          LOADFUNCTIONIMPL(DTWAIN_SetJXLLibraryPathW, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetJobControl, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetJpegValues, hModule)
           LOADFUNCTIONIMPL(DTWAIN_SetJpegXLQuality, hModule)

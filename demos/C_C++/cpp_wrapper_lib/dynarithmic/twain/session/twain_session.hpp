@@ -304,6 +304,7 @@ namespace dynarithmic
             bool m_bStarted = false;
             bool m_bOCRStarted = false;
             bool m_bTripletsNotify = false;
+            bool m_bInitNoBlocking = false;
             std::string m_dsm_path;
             std::string m_long_name;
             std::string m_short_name;
@@ -318,6 +319,7 @@ namespace dynarithmic
             std::unordered_map<std::string, source_status> m_source_status_map;
             std::unordered_map<std::string, DTWAIN_SOURCE> m_source_name_to_handle;
             std::set<twain_source*> m_selected_sources;
+            int m_last_error = 0;
         #ifdef DTWAIN_CPP_NOIMPORTLIB
             HMODULE m_DynamicHandle = 0;
             bool    m_bCacheHandle = true;
@@ -349,6 +351,7 @@ namespace dynarithmic
                 static LRESULT CALLBACK error_callback_proc(LONG error, LONG64 UserData);
 
                 bool start(bool bCleanStart);
+                bool start_minimal(bool bCleanStart);
                 void update_source_status(const twain_source& ts);
 
                 template <typename SourceSelector>
@@ -470,6 +473,7 @@ namespace dynarithmic
                 /// @note Only a single TWAIN session can be started per thread.
                 /// @see stop() get_twain_characteristics()
                 bool start();
+                bool start_minimal();
 
                 /// Stops the TWAIN Data Source Manager (DSM).
                 ///
@@ -513,6 +517,13 @@ namespace dynarithmic
                 /// @returns A resource string
                 /// @note The string will be in the language specified by twain_characteristics::get_language()
                 static std::string get_resource_string(int32_t resource_id);
+
+                /// Returns a resource string
+                ///
+                /// @param[in] resource id.  For user-defined resources, this value should be >= DTWAIN_USERRES_START
+                /// @returns A resource string
+                /// @note The string will be in the language specified by twain_characteristics::get_language()
+                static std::wstring get_resource_string_wide(int32_t resource_id);
 
                 /// Returns the last error encountered by the underlying DTWAIN library
                 ///
@@ -626,6 +637,11 @@ namespace dynarithmic
             ///
             /// @returns reference to the object that identifies this session by TWAIN.
             twain_session& enable_triplets_notification(bool bEnable);
+
+            twain_session& init_noblocking(bool bNoBlocking) { m_bInitNoBlocking = bNoBlocking; return *this; }
+            bool is_initnoblocking() const { return m_bInitNoBlocking; }
+
+            bool check_dtwaindll_version();
 
             /// Returns the complete object that represents this TWAIN session's identity.
             ///

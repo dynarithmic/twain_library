@@ -1948,6 +1948,7 @@ Namespace Dynarithmic
         Public Const DTWAIN_CHECKDLLVERLESSEQ As Integer = 3
         Public Const DTWAIN_CHECKDLLVERGREATEREQ As Integer = 4
         Public Const DTWAIN_RESOURCE_COPYRIGHT As Integer = 9700
+        Public Const DTWAIN_COMPONENT_JPEGXL As Integer = 1
 
         Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
         Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
@@ -3051,6 +3052,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_GetCaptionDelegate(Source As System.IntPtr, <MarshalAs(UnmanagedType.LPTStr)> Caption As StringBuilder) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_GetComponentPathDelegate(nComponent As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetCompressionSizeDelegate(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         
@@ -3215,9 +3219,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetImageLayoutInfoDelegate(Source As System.IntPtr, lGetType As Integer, ByRef DocumentNumber As Integer, ByRef PageNumber As Integer, ByRef FrameNumber As Integer) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_GetJXLLibraryPathDelegate(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_GetJobControlDelegate(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
@@ -4176,6 +4177,9 @@ Namespace Dynarithmic
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_SetCaptionDelegate(Source As System.IntPtr, Caption As String) As Integer
         
+        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
+        Private Delegate Function DTWAIN_SetComponentPathDelegate(nComponent As Integer, sFilePath As String) As Integer
+        
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetCompressionTypeDelegate(Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
         
@@ -4262,9 +4266,6 @@ Namespace Dynarithmic
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
         Private Delegate Function DTWAIN_SetHighlightStringDelegate(Source As System.IntPtr, Highlight As String) As Integer
-        
-        <UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet:=CharSet.Unicode)>
-        Private Delegate Function DTWAIN_SetJXLLibraryPathDelegate(sFilePath As String) As Integer
         
         <UnmanagedFunctionPointer(CallingConvention.StdCall)>
         Private Delegate Function DTWAIN_SetJobControlDelegate(Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
@@ -6021,6 +6022,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_GetCaption(Source, Caption)
         End Function
         
+        Public Function DTWAIN_GetComponentPath(nComponent As Integer, <MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
+        Return api.DTWAIN_GetComponentPath(nComponent, lpszOut, nSize)
+        End Function
+        
         Public Function DTWAIN_GetCompressionSize(Source As System.IntPtr, ByRef lBytes As UInteger) As Integer
         Return api.DTWAIN_GetCompressionSize(Source, lBytes)
         End Function
@@ -6239,10 +6244,6 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_GetImageLayoutInfo(Source As System.IntPtr, lGetType As Integer, ByRef DocumentNumber As Integer, ByRef PageNumber As Integer, ByRef FrameNumber As Integer) As Integer
         Return api.DTWAIN_GetImageLayoutInfo(Source, lGetType, DocumentNumber, PageNumber, FrameNumber)
-        End Function
-        
-        Public Function DTWAIN_GetJXLLibraryPath(<MarshalAs(UnmanagedType.LPTStr)> lpszOut As StringBuilder, nSize As Integer) As Integer
-        Return api.DTWAIN_GetJXLLibraryPath(lpszOut, nSize)
         End Function
         
         Public Function DTWAIN_GetJobControl(Source As System.IntPtr, ByRef pJobControl As Integer, bCurrent As Integer) As Integer
@@ -7521,6 +7522,10 @@ Namespace Dynarithmic
         Return api.DTWAIN_SetCaption(Source, Caption)
         End Function
         
+        Public Function DTWAIN_SetComponentPath(nComponent As Integer, sFilePath As String) As Integer
+        Return api.DTWAIN_SetComponentPath(nComponent, sFilePath)
+        End Function
+        
         Public Function DTWAIN_SetCompressionType(Source As System.IntPtr, lCompression As Integer, bSetCurrent As Integer) As Integer
         Return api.DTWAIN_SetCompressionType(Source, lCompression, bSetCurrent)
         End Function
@@ -7635,10 +7640,6 @@ Namespace Dynarithmic
         
         Public Function DTWAIN_SetHighlightString(Source As System.IntPtr, Highlight As String) As Integer
         Return api.DTWAIN_SetHighlightString(Source, Highlight)
-        End Function
-        
-        Public Function DTWAIN_SetJXLLibraryPath(sFilePath As String) As Integer
-        Return api.DTWAIN_SetJXLLibraryPath(sFilePath)
         End Function
         
         Public Function DTWAIN_SetJobControl(Source As System.IntPtr, JobControl As Integer, bSetCurrent As Integer) As Integer
@@ -8405,6 +8406,7 @@ Namespace Dynarithmic
             Public DTWAIN_GetCapValuesEx As DTWAIN_GetCapValuesExDelegate
             Public DTWAIN_GetCapValuesEx2 As DTWAIN_GetCapValuesEx2Delegate
             Public DTWAIN_GetCaption As DTWAIN_GetCaptionDelegate
+            Public DTWAIN_GetComponentPath As DTWAIN_GetComponentPathDelegate
             Public DTWAIN_GetCompressionSize As DTWAIN_GetCompressionSizeDelegate
             Public DTWAIN_GetCompressionType As DTWAIN_GetCompressionTypeDelegate
             Public DTWAIN_GetCompressionTypeEx As DTWAIN_GetCompressionTypeExDelegate
@@ -8460,7 +8462,6 @@ Namespace Dynarithmic
             Public DTWAIN_GetImageInfo As DTWAIN_GetImageInfoDelegate
             Public DTWAIN_GetImageInfoString As DTWAIN_GetImageInfoStringDelegate
             Public DTWAIN_GetImageLayoutInfo As DTWAIN_GetImageLayoutInfoDelegate
-            Public DTWAIN_GetJXLLibraryPath As DTWAIN_GetJXLLibraryPathDelegate
             Public DTWAIN_GetJobControl As DTWAIN_GetJobControlDelegate
             Public DTWAIN_GetJobControlEx As DTWAIN_GetJobControlExDelegate
             Public DTWAIN_GetJpegValues As DTWAIN_GetJpegValuesDelegate
@@ -8780,6 +8781,7 @@ Namespace Dynarithmic
             Public DTWAIN_SetCapValuesEx As DTWAIN_SetCapValuesExDelegate
             Public DTWAIN_SetCapValuesEx2 As DTWAIN_SetCapValuesEx2Delegate
             Public DTWAIN_SetCaption As DTWAIN_SetCaptionDelegate
+            Public DTWAIN_SetComponentPath As DTWAIN_SetComponentPathDelegate
             Public DTWAIN_SetCompressionType As DTWAIN_SetCompressionTypeDelegate
             Public DTWAIN_SetContrast As DTWAIN_SetContrastDelegate
             Public DTWAIN_SetContrastString As DTWAIN_SetContrastStringDelegate
@@ -8809,7 +8811,6 @@ Namespace Dynarithmic
             Public DTWAIN_SetHalftone As DTWAIN_SetHalftoneDelegate
             Public DTWAIN_SetHighlight As DTWAIN_SetHighlightDelegate
             Public DTWAIN_SetHighlightString As DTWAIN_SetHighlightStringDelegate
-            Public DTWAIN_SetJXLLibraryPath As DTWAIN_SetJXLLibraryPathDelegate
             Public DTWAIN_SetJobControl As DTWAIN_SetJobControlDelegate
             Public DTWAIN_SetJpegValues As DTWAIN_SetJpegValuesDelegate
             Public DTWAIN_SetJpegXLQuality As DTWAIN_SetJpegXLQualityDelegate

@@ -1740,5 +1740,9 @@ DTWAIN DLL are not displayed */
 
 /* DTWAIN Copyright string resource constant */
 #define DTWAIN_RESOURCE_COPYRIGHT  9700
+
+/* DTWAIN add on component path constants */
+#define DTWAIN_COMPONENT_JPEGXL        1
+
 #endif
 

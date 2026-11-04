@@ -54,6 +54,15 @@ namespace dynarithmic
             std::string m_strlibLanguage;
             std::string m_strResourcePath;
             std::string m_strSearchDirectory;
+            struct dll_version
+            {
+                long dll_major = 0;
+                long dll_minor = 0;
+                long dll_patch = 0;
+                long dll_buildnum = 0;
+                long check_type = DTWAIN_CHECKDLLVERGREATEREQ;
+            };
+            dll_version m_dllcheckversion;
             int m_classicSearchOrder;
             bool m_bUsingCustomLoop;
             bool m_bCheckHandles;
@@ -221,6 +230,11 @@ namespace dynarithmic
             /// @returns string representing the current language that will be used.
             /// @see set_resource_directory()
             std::string get_resource_directory() const noexcept { return m_strResourcePath; }
+
+            twain_characteristics& set_check_version(const dll_version& sLeastVersion) 
+                { m_dllcheckversion = sLeastVersion; return *this; }
+
+            auto& get_check_version() { return m_dllcheckversion; }
         };
     }
 }

@@ -44,9 +44,22 @@ namespace dynarithmic
 
             const auto it = m_functionMap.find(static_cast<LONG>(wParm));
             if (it != m_functionMap.end())
-                return (this->*((*it).second))(*pSource);
+            {
+                switch (it->first)
+                {
+                    case DTWAIN_TN_SOURCEDETAILS:
+                    {
+                        const char* ptrName = (const char*)(lParm);
+                        std::string sName = ptrName;
+                        twain_source temp{};
+                        temp.set_source_name(sName);
+                        return (this->*((*it).second))(temp);
+                    }
+                    default:
+                        return (this->*((*it).second))(*pSource);
+                }
+            }
             return defaulthandler(*pSource, wParm, lParm, m_UserData);
-
         }
     }
 }

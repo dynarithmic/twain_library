@@ -581,6 +581,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetCaption
    attr_reader :DTWAIN_GetCaptionA
    attr_reader :DTWAIN_GetCaptionW
+   attr_reader :DTWAIN_GetComponentPath
+   attr_reader :DTWAIN_GetComponentPathA
+   attr_reader :DTWAIN_GetComponentPathW
    attr_reader :DTWAIN_GetCompressionSize
    attr_reader :DTWAIN_GetCompressionType
    attr_reader :DTWAIN_GetCompressionTypeEx
@@ -668,9 +671,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_GetImageInfoStringA
    attr_reader :DTWAIN_GetImageInfoStringW
    attr_reader :DTWAIN_GetImageLayoutInfo
-   attr_reader :DTWAIN_GetJXLLibraryPath
-   attr_reader :DTWAIN_GetJXLLibraryPathA
-   attr_reader :DTWAIN_GetJXLLibraryPathW
    attr_reader :DTWAIN_GetJobControl
    attr_reader :DTWAIN_GetJobControlEx
    attr_reader :DTWAIN_GetJpegValues
@@ -1122,6 +1122,9 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetCaption
    attr_reader :DTWAIN_SetCaptionA
    attr_reader :DTWAIN_SetCaptionW
+   attr_reader :DTWAIN_SetComponentPath
+   attr_reader :DTWAIN_SetComponentPathA
+   attr_reader :DTWAIN_SetComponentPathW
    attr_reader :DTWAIN_SetCompressionType
    attr_reader :DTWAIN_SetContrast
    attr_reader :DTWAIN_SetContrastString
@@ -1165,9 +1168,6 @@ class DTWAINAPI
    attr_reader :DTWAIN_SetHighlightString
    attr_reader :DTWAIN_SetHighlightStringA
    attr_reader :DTWAIN_SetHighlightStringW
-   attr_reader :DTWAIN_SetJXLLibraryPath
-   attr_reader :DTWAIN_SetJXLLibraryPathA
-   attr_reader :DTWAIN_SetJXLLibraryPathW
    attr_reader :DTWAIN_SetJobControl
    attr_reader :DTWAIN_SetJpegValues
    attr_reader :DTWAIN_SetJpegXLQuality
@@ -3004,6 +3004,7 @@ class DTWAINAPI
    DTWAIN_CHECKDLLVERLESSEQ = 3
    DTWAIN_CHECKDLLVERGREATEREQ = 4
    DTWAIN_RESOURCE_COPYRIGHT = 9700
+   DTWAIN_COMPONENT_JPEGXL = 1
    @isinit = false
 
    def isInitialized()
@@ -3516,6 +3517,9 @@ class DTWAINAPI
        @DTWAIN_GetCaption = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCaption'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCaptionA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCaptionA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCaptionW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCaptionW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_GetComponentPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetComponentPath'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetComponentPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetComponentPathA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
+       @DTWAIN_GetComponentPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetComponentPathW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetCompressionSize = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionSize'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetCompressionTypeEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetCompressionTypeEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
@@ -3603,9 +3607,6 @@ class DTWAINAPI
        @DTWAIN_GetImageInfoStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageInfoStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageInfoStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_GetImageLayoutInfo = Fiddle::Function::new(dtwain_dll['DTWAIN_GetImageLayoutInfo'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_GetJXLLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPath'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetJXLLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPathA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
-       @DTWAIN_GetJXLLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJXLLibraryPathW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_LONG)
        @DTWAIN_GetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_GetJobControlEx = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJobControlEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_LONG)
        @DTWAIN_GetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_GetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4057,6 +4058,9 @@ class DTWAINAPI
        @DTWAIN_SetCaption = Fiddle::Function::new(dtwain_dll['DTWAIN_SetCaption'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetCaptionA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetCaptionA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetCaptionW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetCaptionW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetComponentPath = Fiddle::Function::new(dtwain_dll['DTWAIN_SetComponentPath'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetComponentPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetComponentPathA'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_SetComponentPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetComponentPathW'],[Fiddle::TYPE_LONG, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetCompressionType = Fiddle::Function::new(dtwain_dll['DTWAIN_SetCompressionType'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetContrast = Fiddle::Function::new(dtwain_dll['DTWAIN_SetContrast'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_DOUBLE],Fiddle::TYPE_INT)
        @DTWAIN_SetContrastString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetContrastString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -4100,9 +4104,6 @@ class DTWAINAPI
        @DTWAIN_SetHighlightString = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightString'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetHighlightStringA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightStringA'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetHighlightStringW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetHighlightStringW'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_SetJXLLibraryPath = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPath'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_SetJXLLibraryPathA = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPathA'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
-       @DTWAIN_SetJXLLibraryPathW = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJXLLibraryPathW'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_SetJobControl = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJobControl'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_INT],Fiddle::TYPE_INT)
        @DTWAIN_SetJpegValues = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegValues'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_SetJpegXLQuality = Fiddle::Function::new(dtwain_dll['DTWAIN_SetJpegXLQuality'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)

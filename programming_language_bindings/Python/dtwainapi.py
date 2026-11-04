@@ -1743,6 +1743,7 @@ DTWAIN_CHECKDLLVERGREATER = 2
 DTWAIN_CHECKDLLVERLESSEQ = 3
 DTWAIN_CHECKDLLVERGREATEREQ = 4
 DTWAIN_RESOURCE_COPYRIGHT = 9700
+DTWAIN_COMPONENT_JPEGXL = 1
 
 # Example:
 # load the 64-bit unicode version of the dtwain dll
@@ -2289,6 +2290,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCaption.restype = ct.c_long
      theDLL.DTWAIN_GetCaptionA.restype = ct.c_long
      theDLL.DTWAIN_GetCaptionW.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPath.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPathA.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPathW.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionSize.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionType.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionTypeEx.restype = ct.c_long
@@ -2376,9 +2380,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetImageLayoutInfo.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPath.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPathA.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
@@ -2830,6 +2831,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetCaption.restype = ct.c_long
      theDLL.DTWAIN_SetCaptionA.restype = ct.c_long
      theDLL.DTWAIN_SetCaptionW.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPath.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPathA.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPathW.restype = ct.c_long
      theDLL.DTWAIN_SetCompressionType.restype = ct.c_long
      theDLL.DTWAIN_SetContrast.restype = ct.c_long
      theDLL.DTWAIN_SetContrastString.restype = ct.c_long
@@ -2873,9 +2877,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetHighlightString.restype = ct.c_long
      theDLL.DTWAIN_SetHighlightStringA.restype = ct.c_long
      theDLL.DTWAIN_SetHighlightStringW.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPath.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPathA.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_SetJobControl.restype = ct.c_long
      theDLL.DTWAIN_SetJpegValues.restype = ct.c_long
      theDLL.DTWAIN_SetJpegXLQuality.restype = ct.c_long
@@ -3464,6 +3465,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetCaption.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_GetCaptionA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_GetComponentPath.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
+     theDLL.DTWAIN_GetComponentPathA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetComponentPathW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCompressionSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetCompressionType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetCompressionTypeEx.argtypes = [ct.c_void_p, ct.c_long]
@@ -3545,9 +3549,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageLayoutInfo.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
-     theDLL.DTWAIN_GetJXLLibraryPath.argtypes = [ct.c_wchar_p, ct.c_long]
-     theDLL.DTWAIN_GetJXLLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
-     theDLL.DTWAIN_GetJXLLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -3975,6 +3976,9 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetCaption.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetCaptionA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_SetComponentPath.argtypes = [ct.c_long, ct.c_wchar_p]
+     theDLL.DTWAIN_SetComponentPathA.argtypes = [ct.c_long, ct.c_char_p]
+     theDLL.DTWAIN_SetComponentPathW.argtypes = [ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_SetCompressionType.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetContrast.argtypes = [ct.c_void_p, ct.c_double]
      theDLL.DTWAIN_SetContrastString.argtypes = [ct.c_void_p, ct.c_wchar_p]
@@ -4018,9 +4022,6 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_SetHighlightString.argtypes = [ct.c_void_p, ct.c_wchar_p]
      theDLL.DTWAIN_SetHighlightStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetHighlightStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
-     theDLL.DTWAIN_SetJXLLibraryPath.argtypes = [ct.c_wchar_p]
-     theDLL.DTWAIN_SetJXLLibraryPathA.argtypes = [ct.c_char_p]
-     theDLL.DTWAIN_SetJXLLibraryPathW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_SetJobControl.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegXLQuality.argtypes = [ct.c_void_p, ct.c_long]
@@ -4632,6 +4633,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCaption.restype = ct.c_long
      theDLL.DTWAIN_GetCaptionA.restype = ct.c_long
      theDLL.DTWAIN_GetCaptionW.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPath.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPathA.restype = ct.c_long
+     theDLL.DTWAIN_GetComponentPathW.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionSize.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionType.restype = ct.c_long
      theDLL.DTWAIN_GetCompressionTypeEx.restype = ct.c_long
@@ -4719,9 +4723,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.restype = ct.c_long
      theDLL.DTWAIN_GetImageInfoStringW.restype = ct.c_long
      theDLL.DTWAIN_GetImageLayoutInfo.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPath.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPathA.restype = ct.c_long
-     theDLL.DTWAIN_GetJXLLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_GetJobControl.restype = ct.c_long
      theDLL.DTWAIN_GetJobControlEx.restype = ct.c_long
      theDLL.DTWAIN_GetJpegValues.restype = ct.c_long
@@ -5173,6 +5174,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetCaption.restype = ct.c_long
      theDLL.DTWAIN_SetCaptionA.restype = ct.c_long
      theDLL.DTWAIN_SetCaptionW.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPath.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPathA.restype = ct.c_long
+     theDLL.DTWAIN_SetComponentPathW.restype = ct.c_long
      theDLL.DTWAIN_SetCompressionType.restype = ct.c_long
      theDLL.DTWAIN_SetContrast.restype = ct.c_long
      theDLL.DTWAIN_SetContrastString.restype = ct.c_long
@@ -5216,9 +5220,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetHighlightString.restype = ct.c_long
      theDLL.DTWAIN_SetHighlightStringA.restype = ct.c_long
      theDLL.DTWAIN_SetHighlightStringW.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPath.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPathA.restype = ct.c_long
-     theDLL.DTWAIN_SetJXLLibraryPathW.restype = ct.c_long
      theDLL.DTWAIN_SetJobControl.restype = ct.c_long
      theDLL.DTWAIN_SetJpegValues.restype = ct.c_long
      theDLL.DTWAIN_SetJpegXLQuality.restype = ct.c_long
@@ -5807,6 +5808,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetCaption.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetCaptionA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_GetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_GetComponentPath.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetComponentPathA.argtypes = [ct.c_long, ct.c_char_p, ct.c_long]
+     theDLL.DTWAIN_GetComponentPathW.argtypes = [ct.c_long, ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetCompressionSize.argtypes = [ct.c_void_p, ct.POINTER(ct.c_ulong)]
      theDLL.DTWAIN_GetCompressionType.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetCompressionTypeEx.argtypes = [ct.c_void_p, ct.c_long]
@@ -5888,9 +5892,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_GetImageInfoStringA.argtypes = [ct.c_void_p, ct.c_char_p, ct.c_char_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageInfoStringW.argtypes = [ct.c_void_p, ct.c_wchar_p, ct.c_wchar_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_void_p), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
      theDLL.DTWAIN_GetImageLayoutInfo.argtypes = [ct.c_void_p, ct.c_long, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
-     theDLL.DTWAIN_GetJXLLibraryPath.argtypes = [ct.c_char_p, ct.c_long]
-     theDLL.DTWAIN_GetJXLLibraryPathA.argtypes = [ct.c_char_p, ct.c_long]
-     theDLL.DTWAIN_GetJXLLibraryPathW.argtypes = [ct.c_wchar_p, ct.c_long]
      theDLL.DTWAIN_GetJobControl.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.c_long]
      theDLL.DTWAIN_GetJobControlEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_GetJpegValues.argtypes = [ct.c_void_p, ct.POINTER(ct.c_long), ct.POINTER(ct.c_long)]
@@ -6318,6 +6319,9 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetCaption.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetCaptionA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetCaptionW.argtypes = [ct.c_void_p, ct.c_wchar_p]
+     theDLL.DTWAIN_SetComponentPath.argtypes = [ct.c_long, ct.c_char_p]
+     theDLL.DTWAIN_SetComponentPathA.argtypes = [ct.c_long, ct.c_char_p]
+     theDLL.DTWAIN_SetComponentPathW.argtypes = [ct.c_long, ct.c_wchar_p]
      theDLL.DTWAIN_SetCompressionType.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetContrast.argtypes = [ct.c_void_p, ct.c_double]
      theDLL.DTWAIN_SetContrastString.argtypes = [ct.c_void_p, ct.c_char_p]
@@ -6361,9 +6365,6 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_SetHighlightString.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetHighlightStringA.argtypes = [ct.c_void_p, ct.c_char_p]
      theDLL.DTWAIN_SetHighlightStringW.argtypes = [ct.c_void_p, ct.c_wchar_p]
-     theDLL.DTWAIN_SetJXLLibraryPath.argtypes = [ct.c_char_p]
-     theDLL.DTWAIN_SetJXLLibraryPathA.argtypes = [ct.c_char_p]
-     theDLL.DTWAIN_SetJXLLibraryPathW.argtypes = [ct.c_wchar_p]
      theDLL.DTWAIN_SetJobControl.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegValues.argtypes = [ct.c_void_p, ct.c_long, ct.c_long]
      theDLL.DTWAIN_SetJpegXLQuality.argtypes = [ct.c_void_p, ct.c_long]

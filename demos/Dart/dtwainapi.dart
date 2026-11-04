@@ -1707,6 +1707,7 @@ const int DTWAIN_CHECKDLLVERGREATER = 2;
 const int DTWAIN_CHECKDLLVERLESSEQ = 3;
 const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
 const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
+const int DTWAIN_COMPONENT_JPEGXL = 1;
 typedef DTWAIN_SOURCE = Pointer<Void>;
 typedef DTWAIN_BOOL = Int32;
 typedef BOOL = Int32;
@@ -2823,6 +2824,9 @@ typedef _GetCapValuesEx2Dart = int Function(DTWAIN_SOURCE, int, int, int, int, L
 typedef _GetCaptionNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,DTWAIN_CHARPTRTYPE);
 typedef _GetCaptionDart = int Function(DTWAIN_SOURCE, Pointer<Utf16>);
 
+typedef _GetComponentPathNative = LONG Function(LONG,DTWAIN_CHARPTRTYPE,LONG);
+typedef _GetComponentPathDart = int Function(int, Pointer<Utf16>, int);
+
 typedef _GetCompressionSizeNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,LPDWORD);
 typedef _GetCompressionSizeDart = int Function(DTWAIN_SOURCE, LPDWORD);
 
@@ -2978,9 +2982,6 @@ typedef _GetImageInfoStringDart = int Function(DTWAIN_SOURCE, Pointer<Utf16>, Po
 
 typedef _GetImageLayoutInfoNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,LONG,LPLONG,LPLONG,LPLONG);
 typedef _GetImageLayoutInfoDart = int Function(DTWAIN_SOURCE, int, LPLONG, LPLONG, LPLONG);
-
-typedef _GetJXLLibraryPathNative = LONG Function(DTWAIN_CHARPTRTYPE,LONG);
-typedef _GetJXLLibraryPathDart = int Function(Pointer<Utf16>, int);
 
 typedef _GetJobControlNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,LPLONG,DTWAIN_BOOL);
 typedef _GetJobControlDart = int Function(DTWAIN_SOURCE, LPLONG, int);
@@ -3927,6 +3928,9 @@ typedef _SetCapValuesEx2Dart = int Function(DTWAIN_SOURCE, int, int, int, int, D
 typedef _SetCaptionNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,DTWAIN_CCHARPTRTYPE);
 typedef _SetCaptionDart = int Function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE);
 
+typedef _SetComponentPathNative = DTWAIN_BOOL Function(LONG,DTWAIN_CCHARPTRTYPE);
+typedef _SetComponentPathDart = int Function(int, DTWAIN_CCHARPTRTYPE);
+
 typedef _SetCompressionTypeNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,LONG,DTWAIN_BOOL);
 typedef _SetCompressionTypeDart = int Function(DTWAIN_SOURCE, int, int);
 
@@ -4007,9 +4011,6 @@ typedef _SetHighlightDart = int Function(DTWAIN_SOURCE, double);
 
 typedef _SetHighlightStringNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,DTWAIN_CCHARPTRTYPE);
 typedef _SetHighlightStringDart = int Function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE);
-
-typedef _SetJXLLibraryPathNative = DTWAIN_BOOL Function(DTWAIN_CCHARPTRTYPE);
-typedef _SetJXLLibraryPathDart = int Function(DTWAIN_CCHARPTRTYPE);
 
 typedef _SetJobControlNative = DTWAIN_BOOL Function(DTWAIN_SOURCE,LONG,DTWAIN_BOOL);
 typedef _SetJobControlDart = int Function(DTWAIN_SOURCE, int, int);
@@ -4663,6 +4664,7 @@ class DTWAIN {
   late final _GetCapValuesExDart _getCapValuesEx;
   late final _GetCapValuesEx2Dart _getCapValuesEx2;
   late final _GetCaptionDart _getCaption;
+  late final _GetComponentPathDart _getComponentPath;
   late final _GetCompressionSizeDart _getCompressionSize;
   late final _GetCompressionTypeDart _getCompressionType;
   late final _GetCompressionTypeExDart _getCompressionTypeEx;
@@ -4715,7 +4717,6 @@ class DTWAIN {
   late final _GetImageInfoDart _getImageInfo;
   late final _GetImageInfoStringDart _getImageInfoString;
   late final _GetImageLayoutInfoDart _getImageLayoutInfo;
-  late final _GetJXLLibraryPathDart _getJXLLibraryPath;
   late final _GetJobControlDart _getJobControl;
   late final _GetJobControlExDart _getJobControlEx;
   late final _GetJpegValuesDart _getJpegValues;
@@ -5031,6 +5032,7 @@ class DTWAIN {
   late final _SetCapValuesExDart _setCapValuesEx;
   late final _SetCapValuesEx2Dart _setCapValuesEx2;
   late final _SetCaptionDart _setCaption;
+  late final _SetComponentPathDart _setComponentPath;
   late final _SetCompressionTypeDart _setCompressionType;
   late final _SetContrastDart _setContrast;
   late final _SetContrastStringDart _setContrastString;
@@ -5058,7 +5060,6 @@ class DTWAIN {
   late final _SetHalftoneDart _setHalftone;
   late final _SetHighlightDart _setHighlight;
   late final _SetHighlightStringDart _setHighlightString;
-  late final _SetJXLLibraryPathDart _setJXLLibraryPath;
   late final _SetJobControlDart _setJobControl;
   late final _SetJpegValuesDart _setJpegValues;
   late final _SetJpegXLQualityDart _setJpegXLQuality;
@@ -5537,6 +5538,7 @@ class DTWAIN {
   _getCapValuesEx = _dll.lookupFunction<_GetCapValuesExNative, _GetCapValuesExDart>('DTWAIN_GetCapValuesEx');
   _getCapValuesEx2 = _dll.lookupFunction<_GetCapValuesEx2Native, _GetCapValuesEx2Dart>('DTWAIN_GetCapValuesEx2');
   _getCaption = _dll.lookupFunction<_GetCaptionNative, _GetCaptionDart>('DTWAIN_GetCaption');
+  _getComponentPath = _dll.lookupFunction<_GetComponentPathNative, _GetComponentPathDart>('DTWAIN_GetComponentPath');
   _getCompressionSize = _dll.lookupFunction<_GetCompressionSizeNative, _GetCompressionSizeDart>('DTWAIN_GetCompressionSize');
   _getCompressionType = _dll.lookupFunction<_GetCompressionTypeNative, _GetCompressionTypeDart>('DTWAIN_GetCompressionType');
   _getCompressionTypeEx = _dll.lookupFunction<_GetCompressionTypeExNative, _GetCompressionTypeExDart>('DTWAIN_GetCompressionTypeEx');
@@ -5589,7 +5591,6 @@ class DTWAIN {
   _getImageInfo = _dll.lookupFunction<_GetImageInfoNative, _GetImageInfoDart>('DTWAIN_GetImageInfo');
   _getImageInfoString = _dll.lookupFunction<_GetImageInfoStringNative, _GetImageInfoStringDart>('DTWAIN_GetImageInfoString');
   _getImageLayoutInfo = _dll.lookupFunction<_GetImageLayoutInfoNative, _GetImageLayoutInfoDart>('DTWAIN_GetImageLayoutInfo');
-  _getJXLLibraryPath = _dll.lookupFunction<_GetJXLLibraryPathNative, _GetJXLLibraryPathDart>('DTWAIN_GetJXLLibraryPath');
   _getJobControl = _dll.lookupFunction<_GetJobControlNative, _GetJobControlDart>('DTWAIN_GetJobControl');
   _getJobControlEx = _dll.lookupFunction<_GetJobControlExNative, _GetJobControlExDart>('DTWAIN_GetJobControlEx');
   _getJpegValues = _dll.lookupFunction<_GetJpegValuesNative, _GetJpegValuesDart>('DTWAIN_GetJpegValues');
@@ -5905,6 +5906,7 @@ class DTWAIN {
   _setCapValuesEx = _dll.lookupFunction<_SetCapValuesExNative, _SetCapValuesExDart>('DTWAIN_SetCapValuesEx');
   _setCapValuesEx2 = _dll.lookupFunction<_SetCapValuesEx2Native, _SetCapValuesEx2Dart>('DTWAIN_SetCapValuesEx2');
   _setCaption = _dll.lookupFunction<_SetCaptionNative, _SetCaptionDart>('DTWAIN_SetCaption');
+  _setComponentPath = _dll.lookupFunction<_SetComponentPathNative, _SetComponentPathDart>('DTWAIN_SetComponentPath');
   _setCompressionType = _dll.lookupFunction<_SetCompressionTypeNative, _SetCompressionTypeDart>('DTWAIN_SetCompressionType');
   _setContrast = _dll.lookupFunction<_SetContrastNative, _SetContrastDart>('DTWAIN_SetContrast');
   _setContrastString = _dll.lookupFunction<_SetContrastStringNative, _SetContrastStringDart>('DTWAIN_SetContrastString');
@@ -5932,7 +5934,6 @@ class DTWAIN {
   _setHalftone = _dll.lookupFunction<_SetHalftoneNative, _SetHalftoneDart>('DTWAIN_SetHalftone');
   _setHighlight = _dll.lookupFunction<_SetHighlightNative, _SetHighlightDart>('DTWAIN_SetHighlight');
   _setHighlightString = _dll.lookupFunction<_SetHighlightStringNative, _SetHighlightStringDart>('DTWAIN_SetHighlightString');
-  _setJXLLibraryPath = _dll.lookupFunction<_SetJXLLibraryPathNative, _SetJXLLibraryPathDart>('DTWAIN_SetJXLLibraryPath');
   _setJobControl = _dll.lookupFunction<_SetJobControlNative, _SetJobControlDart>('DTWAIN_SetJobControl');
   _setJpegValues = _dll.lookupFunction<_SetJpegValuesNative, _SetJpegValuesDart>('DTWAIN_SetJpegValues');
   _setJpegXLQuality = _dll.lookupFunction<_SetJpegXLQualityNative, _SetJpegXLQualityDart>('DTWAIN_SetJpegXLQuality');
@@ -8026,6 +8027,11 @@ class DTWAIN {
     return _getCaption(Source, Caption);  
   }  
   
+  int getComponentPath(int nComponent, Pointer<Utf16> lpszOut, int nSize)  
+  {  
+    return _getComponentPath(nComponent, lpszOut, nSize);  
+  }  
+  
   int getCompressionSize(DTWAIN_SOURCE Source, LPDWORD lBytes)  
   {  
     return _getCompressionSize(Source, lBytes);  
@@ -8298,11 +8304,6 @@ class DTWAIN {
   int getImageLayoutInfo(DTWAIN_SOURCE Source, int lGetType, LPLONG DocumentNumber, LPLONG PageNumber, LPLONG FrameNumber)  
   {  
     return _getImageLayoutInfo(Source, lGetType, DocumentNumber, PageNumber, FrameNumber);  
-  }  
-  
-  int getJXLLibraryPath(Pointer<Utf16> lpszOut, int nSize)  
-  {  
-    return _getJXLLibraryPath(lpszOut, nSize);  
   }  
   
   int getJobControl(DTWAIN_SOURCE Source, LPLONG pJobControl, int bCurrent)  
@@ -10130,6 +10131,18 @@ class DTWAIN {
     }  
   }  
   
+  int setComponentPath(int nComponent, String? sFilePath)  
+  {  
+    final Pointer<Utf16> sFilePathPtr = sFilePath == null ? nullptr : sFilePath.toNativeUtf16();  
+    try {  
+      return _setComponentPath(nComponent, sFilePathPtr);  
+    } finally {  
+        if (sFilePathPtr != nullptr) {  
+          calloc.free(sFilePathPtr);  
+        }  
+    }  
+  }  
+  
   int setCompressionType(DTWAIN_SOURCE Source, int lCompression, int bSetCurrent)  
   {  
     return _setCompressionType(Source, lCompression, bSetCurrent);  
@@ -10314,18 +10327,6 @@ class DTWAIN {
     } finally {  
         if (HighlightPtr != nullptr) {  
           calloc.free(HighlightPtr);  
-        }  
-    }  
-  }  
-  
-  int setJXLLibraryPath(String? sFilePath)  
-  {  
-    final Pointer<Utf16> sFilePathPtr = sFilePath == null ? nullptr : sFilePath.toNativeUtf16();  
-    try {  
-      return _setJXLLibraryPath(sFilePathPtr);  
-    } finally {  
-        if (sFilePathPtr != nullptr) {  
-          calloc.free(sFilePathPtr);  
         }  
     }  
   }  

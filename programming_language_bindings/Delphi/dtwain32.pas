@@ -1881,6 +1881,7 @@ const
   DTWAIN_CHECKDLLVERLESSEQ = 3;
   DTWAIN_CHECKDLLVERGREATEREQ = 4;
   DTWAIN_RESOURCE_COPYRIGHT = 9700;
+  DTWAIN_COMPONENT_JPEGXL = 1;
 
 { DTWAIN DLL functional interface }
 
@@ -2330,6 +2331,9 @@ function DTWAIN_GetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lGetType:LONG; 
 function DTWAIN_GetCaption(Source:DTWAIN_SOURCE; Caption:LPTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCaption';
 function DTWAIN_GetCaptionA(Source:DTWAIN_SOURCE; Caption:LPSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCaptionA';
 function DTWAIN_GetCaptionW(Source:DTWAIN_SOURCE; Caption:LPWSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCaptionW';
+function DTWAIN_GetComponentPath(nComponent:LONG; lpszOut:LPTSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetComponentPath';
+function DTWAIN_GetComponentPathA(nComponent:LONG; lpszOut:LPSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetComponentPathA';
+function DTWAIN_GetComponentPathW(nComponent:LONG; lpszOut:LPWSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetComponentPathW';
 function DTWAIN_GetCompressionSize(Source:DTWAIN_SOURCE; lBytes:LPDWORD) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCompressionSize';
 function DTWAIN_GetCompressionType(Source:DTWAIN_SOURCE; lpCompression:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCompressionType';
 function DTWAIN_GetCompressionTypeEx(Source:DTWAIN_SOURCE; bCurrent:BOOL) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetCompressionTypeEx';
@@ -2417,9 +2421,6 @@ function DTWAIN_GetImageInfoString(Source:DTWAIN_SOURCE; lpXResolution:LPTSTR; l
 function DTWAIN_GetImageInfoStringA(Source:DTWAIN_SOURCE; lpXResolution:LPSTR; lpYResolution:LPSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetImageInfoStringA';
 function DTWAIN_GetImageInfoStringW(Source:DTWAIN_SOURCE; lpXResolution:LPWSTR; lpYResolution:LPWSTR; lpWidth:LPLONG; lpLength:LPLONG; lpNumSamples:LPLONG; lpBitsPerSample:LPDTWAIN_ARRAY; lpBitsPerPixel:LPLONG; lpPlanar:LPLONG; lpPixelType:LPLONG; lpCompression:LPLONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetImageInfoStringW';
 function DTWAIN_GetImageLayoutInfo(Source:DTWAIN_SOURCE; lGetType:LONG; DocumentNumber:LPLONG; PageNumber:LPLONG; FrameNumber:LPLONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetImageLayoutInfo';
-function DTWAIN_GetJXLLibraryPath(lpszOut:LPTSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJXLLibraryPath';
-function DTWAIN_GetJXLLibraryPathA(lpszOut:LPSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJXLLibraryPathA';
-function DTWAIN_GetJXLLibraryPathW(lpszOut:LPWSTR; nSize:LONG) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJXLLibraryPathW';
 function DTWAIN_GetJobControl(Source:DTWAIN_SOURCE; pJobControl:LPLONG; bCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJobControl';
 function DTWAIN_GetJobControlEx(Source:DTWAIN_SOURCE; bGetCurrent:BOOL) : LONG; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJobControlEx';
 function DTWAIN_GetJpegValues(Source:DTWAIN_SOURCE; pQuality:LPLONG; Progressive:LPLONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_GetJpegValues';
@@ -2873,6 +2874,9 @@ function DTWAIN_SetCapValuesEx2(Source:DTWAIN_SOURCE; lCap:LONG; lSetType:LONG; 
 function DTWAIN_SetCaption(Source:DTWAIN_SOURCE; Caption:LPCTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetCaption';
 function DTWAIN_SetCaptionA(Source:DTWAIN_SOURCE; Caption:LPCSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetCaptionA';
 function DTWAIN_SetCaptionW(Source:DTWAIN_SOURCE; Caption:LPCWSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetCaptionW';
+function DTWAIN_SetComponentPath(nComponent:LONG; sFilePath:LPCTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetComponentPath';
+function DTWAIN_SetComponentPathA(nComponent:LONG; szFilePath:LPCSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetComponentPathA';
+function DTWAIN_SetComponentPathW(nComponent:LONG; sFilePath:LPCWSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetComponentPathW';
 function DTWAIN_SetCompressionType(Source:DTWAIN_SOURCE; lCompression:LONG; bSetCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetCompressionType';
 function DTWAIN_SetContrast(Source:DTWAIN_SOURCE; Contrast:DTWAIN_FLOAT) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetContrast';
 function DTWAIN_SetContrastString(Source:DTWAIN_SOURCE; Contrast:LPCTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetContrastString';
@@ -2916,9 +2920,6 @@ function DTWAIN_SetHighlight(Source:DTWAIN_SOURCE; Highlight:DTWAIN_FLOAT) : BOO
 function DTWAIN_SetHighlightString(Source:DTWAIN_SOURCE; Highlight:LPCTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetHighlightString';
 function DTWAIN_SetHighlightStringA(Source:DTWAIN_SOURCE; Highlight:LPCSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetHighlightStringA';
 function DTWAIN_SetHighlightStringW(Source:DTWAIN_SOURCE; Highlight:LPCWSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetHighlightStringW';
-function DTWAIN_SetJXLLibraryPath(sFilePath:LPCTSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJXLLibraryPath';
-function DTWAIN_SetJXLLibraryPathA(szFilePath:LPCSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJXLLibraryPathA';
-function DTWAIN_SetJXLLibraryPathW(sFilePath:LPCWSTR) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJXLLibraryPathW';
 function DTWAIN_SetJobControl(Source:DTWAIN_SOURCE; JobControl:LONG; bSetCurrent:BOOL) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJobControl';
 function DTWAIN_SetJpegValues(Source:DTWAIN_SOURCE; Quality:LONG; Progressive:LONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJpegValues';
 function DTWAIN_SetJpegXLQuality(Source:DTWAIN_SOURCE; Quality:LONG) : BOOL; stdcall;  external 'dtwain32.dll'  name 'DTWAIN_SetJpegXLQuality';
