@@ -18,7 +18,7 @@ DTWAIN supports acquiring images to the following single-page file formats. **Al
 - **JPEG XL** — `DTWAIN_JPEGXL`
   - Requires additional JPEG XL runtime DLLs to be installed and accessible.
   - Required libraries include `jxl.dll`, `jxl_threads.dll`, `jxl_cms.dll`, and their dependent libraries, such as the Brotli DLLs (`brotlidec.dll`, `brotlienc.dll`, and `brotlicommon.dll`).
-  - Applications can use `DTWAIN_SetJXLLibraryPath()` to specify the directory containing the JPEG XL libraries.
+  - Applications can use `DTWAIN_SetComponentPath()` to specify the directory containing the JPEG XL libraries.
   - If no directory is specified, DTWAIN uses the default Windows DLL search mechanism.
   - Applications can call `DTWAIN_IsFileTypeAvailable(DTWAIN_JPEGXL)` to determine whether JPEG XL support is available.
 - **JPEG XR** — `DTWAIN_JPEGXR`
