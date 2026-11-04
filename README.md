@@ -525,7 +525,7 @@ The source code and instructions for building DTWAIN are found [here](https://gi
 ----------
 <a name="anchor-linux"></a>
 ### Is DTWAIN compatible with Linux? ###
-Currently, there is no official support for Linux, but things are changing rapidly.
+Currently, there is no official support for Linux.
 
 As some may be aware, the TWAIN standard itself is implemented for Linux, but my opinion is that the support is poor.  There is little in terms of actual TWAIN sources to run tests against, and only certain Linux distributions are "supported" (I put this in quotes, since it is still difficult to find TWAIN drivers to run tests against).
 
@@ -533,7 +533,7 @@ The Linux distribution must have the Data Source Manager (DSM) installed (**usr/
 
 Since there are no pre-built DSM binaries, you can find the DSM source code [here on Github](https://github.com/twain/twain-dsm) and attempt to build the binaries yourself.  However, you may need to change the build scripts, since some of them are hard-coded for certain Ubuntu versions.
 
-Once the DSM is built and installed, the build of DTWAIN can be done using the files in the source directory.  We used the CodeBlocks IDE (using g++ 6.x or higher) to organize the project (we don't currently have a CMake for DTWAIN, but one is in the works).  We also used a custom FreeImage script to do the FreeImage build.  Once done, we found no issues communicating with the Linux DSM with a small test program:
+Once the DSM is built and installed, the build of DTWAIN can be done using the files in the source directory.  We used the CodeBlocks IDE (using g++ 6.x or higher) to organize the project.  Once done, we found no issues communicating with the Linux DSM with a small test program:
 
     #include "dtwain.h"
     int main()
