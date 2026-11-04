@@ -36,13 +36,11 @@
 
 * The Dynarithmic TWAIN Library (also known as DTWAIN) is an open source, powerful programmer's library that will allow you to easily integrate TWAIN image acquisition from any TWAIN scanner or digital camera into your applications.  The images can be acquired to memory (Windows Device Independent Bitmaps) memory compressed images (if the device supports compression) or saved to [various file formats](https://github.com/dynarithmic/twain_library/SupportedFileFormats.md).
 
-* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows any Windows-based computer language that can call exported DLL functions (directly or indirectly) to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, F#, and numerous other languages.
+* DTWAIN is implemented as a 32-bit and 64-bit Windows Dynamic Link Library (DLL), and to communicate with the DLL, exported functions are provided.  This allows [any computer language](#otherlanguages) that can call exported Windows DLL functions to be able to use DTWAIN.  This includes C, C++, C#, Visual Basic, Python, Delphi, Lua, Java, Ruby, Rust, Go, F#, and numerous other languages.
 
 * If you are not familiar with the TWAIN standard and image acquisition from TWAIN-enabled devices, please head to the official TWAIN website at [http://www.twain.org](http://www.twain.org) for more information.  If you've ever bought or used a scanner, and came across the words "TWAIN compliant" or "TWAIN driver", well you're on the right track.  If you're interested in getting these devices to work in your **C, C++, C#, D, Delphi, F#, Lua, Java, Visual Basic, Perl, Python, Ruby, Rust, Go** (and other languages) application, you've come to the right place.  
 
 * The DTWAIN library relieves the programmer of having to get into the details of writing low-level code that follows the TWAIN specification to retrieve images from a TWAIN device -- just a few function calls to initialize and acquire images from the TWAIN device is all that's required.  
-
-(There is nothing wrong with understanding the TWAIN specification, as this will enhance your knowledge of how the DTWAIN library works internally.  However the high-level of abstraction of the TWAIN protocol makes this library simple for even the novice programmer to use).
 
 ----------
 ----------
