@@ -111,9 +111,7 @@ In addition, the release version of the Programming Database (.PDB) files are av
 
 ----
 
-Note:  To acquire images to the JPEG-XL format, additional support DLL's are required.  These DLL's can be found in the [jpegxl_binaries.zip]() file and must be installed and accessible.  The `jxl32` folder will contain the 32-bit JPEG-XL libraries, while the 64-bit JPEG-XL libraries are found in the `jxl64` folder.  You can use the `DTWAIN_SetJXLLibraryPath` DTWAIN API function to set the path where the DLL's are found, or you can place the DLL's in the same directory as the DTWAIN DLL's).  
-
-Note: Starting with **DTWAIN 5.9.1**, prebuilt DTWAIN DLLs that had the "no-logging" option, even though a bit smaller than the DLL's that had logging support, are no longer distributed separately.  All standard DTWAIN release DLLs include logging support.  Developers who require no-logging builds may [rebuild DTWAIN from source](https://github.com/dynarithmic/twain_library_source) using the `DTWAIN_ENABLE_LOGCALLSTACK=OFF` in the CMake build options.
+Note:  To acquire images to the JPEG-XL format, additional support DLL's are required.  These DLL's can be found in the [jpegxl_binaries.zip]() file and must be installed and accessible.  The `jxl32` folder will contain the 32-bit JPEG-XL libraries, while the 64-bit JPEG-XL libraries are found in the `jxl64` folder.  You can use the `DTWAIN_SetComponentPath` DTWAIN API function to set the path where the DLL's are found, or you can place the DLL's in the same directory as the DTWAIN DLL's).  
 
 ----
 
