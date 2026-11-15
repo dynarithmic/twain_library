@@ -22,81 +22,70 @@ Partial Class FileTypeDlg
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.OKbutton = New System.Windows.Forms.Button
-        Me.edFileName = New System.Windows.Forms.TextBox
-        Me.cmbFileType = New System.Windows.Forms.ComboBox
-        Me.label2 = New System.Windows.Forms.Label
-        Me.label1 = New System.Windows.Forms.Label
-        Me.SuspendLayout()
+        Me.OKbutton = New System.Windows.Forms.Button()
+        Me.edFileName = New System.Windows.Forms.TextBox()
+        Me.label2 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.SuspendLayout
         '
         'OKbutton
         '
         Me.OKbutton.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.OKbutton.Location = New System.Drawing.Point(97, 183)
+        Me.OKbutton.Location = New System.Drawing.Point(54, 92)
         Me.OKbutton.Name = "OKbutton"
-        Me.OKbutton.Size = New System.Drawing.Size(75, 30)
+        Me.OKbutton.Size = New System.Drawing.Size(75, 23)
         Me.OKbutton.TabIndex = 8
         Me.OKbutton.Text = "OK"
-        Me.OKbutton.UseVisualStyleBackColor = True
+        Me.OKbutton.UseVisualStyleBackColor = true
         '
         'edFileName
         '
-        Me.edFileName.Location = New System.Drawing.Point(20, 133)
+        Me.edFileName.Location = New System.Drawing.Point(9, 36)
         Me.edFileName.Name = "edFileName"
-        Me.edFileName.Size = New System.Drawing.Size(223, 20)
+        Me.edFileName.Size = New System.Drawing.Size(244, 20)
         Me.edFileName.TabIndex = 7
-        '
-        'cmbFileType
-        '
-        Me.cmbFileType.FormattingEnabled = True
-        Me.cmbFileType.Location = New System.Drawing.Point(18, 35)
-        Me.cmbFileType.Name = "cmbFileType"
-        Me.cmbFileType.Size = New System.Drawing.Size(225, 21)
-        Me.cmbFileType.TabIndex = 6
         '
         'label2
         '
-        Me.label2.AutoSize = True
-        Me.label2.Location = New System.Drawing.Point(17, 116)
+        Me.label2.AutoSize = true
+        Me.label2.Location = New System.Drawing.Point(6, 19)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(96, 13)
+        Me.label2.Size = New System.Drawing.Size(57, 13)
         Me.label2.TabIndex = 4
-        Me.label2.Text = "Choose File Name:"
+        Me.label2.Text = "File Name:"
         '
-        'label1
+        'btnCancel
         '
-        Me.label1.AutoSize = True
-        Me.label1.Location = New System.Drawing.Point(15, 18)
-        Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(92, 13)
-        Me.label1.TabIndex = 5
-        Me.label1.Text = "Choose File Type:"
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(135, 92)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 9
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = true
         '
         'FileTypeDlg
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(265, 229)
+        Me.ClientSize = New System.Drawing.Size(265, 130)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.OKbutton)
         Me.Controls.Add(Me.edFileName)
-        Me.Controls.Add(Me.cmbFileType)
         Me.Controls.Add(Me.label2)
-        Me.Controls.Add(Me.label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
+        Me.MaximizeBox = false
+        Me.MinimizeBox = false
         Me.Name = "FileTypeDlg"
-        Me.ShowInTaskbar = False
+        Me.ShowInTaskbar = false
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "DTWAIN File Types"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.Text = "File Name"
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Private WithEvents OKbutton As System.Windows.Forms.Button
     Private WithEvents edFileName As System.Windows.Forms.TextBox
-    Private WithEvents cmbFileType As System.Windows.Forms.ComboBox
     Private WithEvents label2 As System.Windows.Forms.Label
-    Private WithEvents label1 As System.Windows.Forms.Label
-
+    Friend WithEvents btnCancel As Windows.Forms.Button
 End Class

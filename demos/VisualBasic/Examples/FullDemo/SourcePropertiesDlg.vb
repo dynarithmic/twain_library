@@ -3,33 +3,33 @@ Imports System.Windows.Forms
 
 Public Class SourcePropertiesDlg
 
-    Private m_Source As System.IntPtr
+    Private m_Source As IntPtr
 
-    Public Sub New(ByVal item As System.IntPtr)
+    Public Sub New(item As IntPtr)
         InitializeComponent() ' This call is required by the Windows Form Designer.
         m_Source = item
     End Sub
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+    Private Sub OK_Button_Click(sender As System.Object, e As EventArgs)
+        DialogResult = DialogResult.OK
+        Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+    Private Sub Cancel_Button_Click(sender As System.Object, e As EventArgs) Handles OK_button.Click
+        DialogResult = DialogResult.Cancel
+        Close()
     End Sub
 
-    Private Sub SourcePropertiesDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim szInfo As New System.Text.StringBuilder(256)
-        Dim szInfoName As New System.Text.StringBuilder(256)
+    Private Sub SourcePropertiesDlg_Load(sender As System.Object, e As EventArgs) Handles MyBase.Load
+        Dim szInfo As New StringBuilder(256)
+        Dim szInfoName As New StringBuilder(256)
         DTWAINAPI.DTWAIN_GetSourceProductName(m_Source, szInfoName, 255)
-        Me.edProductName.Text = szInfoName.ToString()
+        edProductName.Text = szInfoName.ToString()
         DTWAINAPI.DTWAIN_GetSourceProductFamily(m_Source, szInfo, 255)
-        Me.edFamilyName.Text = szInfo.ToString()
+        edFamilyName.Text = szInfo.ToString()
         DTWAINAPI.DTWAIN_GetSourceManufacturer(m_Source, szInfo, 255)
-        Me.edManufacturer.Text = szInfo.ToString()
+        edManufacturer.Text = szInfo.ToString()
         DTWAINAPI.DTWAIN_GetSourceVersionInfo(m_Source, szInfo, 255)
-        Me.edVersionInfo.Text = szInfo.ToString()
+        edVersionInfo.Text = szInfo.ToString()
 
         Dim lMajor As Integer
         Dim lMinor As Integer
@@ -38,9 +38,9 @@ Public Class SourcePropertiesDlg
         DTWAINAPI.DTWAIN_GetSourceVersionNumber(m_Source, lMajor, lMinor)
         Dim sVersion As String
         sVersion = lMajor.ToString() + "." + lMinor.ToString()
-        Me.edVersion.Text = sVersion
+        edVersion.Text = sVersion
 
-        Dim AllCaps As System.IntPtr
+        Dim AllCaps As IntPtr
         Dim Val As Integer
         DTWAINAPI.DTWAIN_EnumSupportedCaps(m_Source, AllCaps)
         Dim nSize As Integer
@@ -48,15 +48,15 @@ Public Class SourcePropertiesDlg
         For i As Integer = 0 To nSize - 1
             DTWAINAPI.DTWAIN_ArrayGetAtLong(AllCaps, i, Val)
             DTWAINAPI.DTWAIN_GetNameFromCap(Val, szInfo, 255)
-            Me.listCaps.Items.Add(szInfo.ToString())
+            listCaps.Items.Add(szInfo.ToString())
         Next i
 
         listCaps.SetSelected(0, True)
-        Me.edTotalCaps.Text = nSize.ToString()
+        edTotalCaps.Text = nSize.ToString()
         DTWAINAPI.DTWAIN_EnumCustomCaps(m_Source, AllCaps)
-        Me.edCustomCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
+        edCustomCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
         DTWAINAPI.DTWAIN_EnumExtendedCaps(m_Source, AllCaps)
-        Me.edExtendedCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
+        edExtendedCaps.Text = DTWAINAPI.DTWAIN_ArrayGetCount(AllCaps).ToString()
 
         RefreshCustomDSData()
 
@@ -69,7 +69,7 @@ Public Class SourcePropertiesDlg
 
         ' Convert string to one with /r/n, since these are the types of strings for edit controls
         Dim sNewData As String = szInfo.ToString().Replace(vbLf, vbCrLf)
-        Me.txtJSON.Text = sNewData
+        txtJSON.Text = sNewData
     End Sub
     Private Sub btnTestCap_Click(sender As Object, e As EventArgs) Handles btnTestCap.Click
         Dim sTestCapDlg As TestCapDlg = New TestCapDlg(m_Source, listCaps.SelectedItem.ToString())
@@ -98,9 +98,9 @@ Public Class SourcePropertiesDlg
         DTWAINAPI.DTWAIN_GetCustomDSData(m_Source, szCustomData, customDSLength, customDSLength, DTWAINAPI.DTWAINGCD_COPYDATA)
         Dim contents As String
         contents = enc8.GetString(szCustomData, 0, customDSLength)
-        Me.txtDSData.Text = contents
+        txtDSData.Text = contents
     End Sub
-    Private Sub SourcePropertiesDlg_FormClosing(sender As Object, e As Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub SourcePropertiesDlg_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If DTWAINAPI.DTWAIN_IsSourceAcquiringEx(m_Source, 1) Then
             MessageBox.Show("You must close the Source user interface before leaving this dialog")
             e.Cancel = True

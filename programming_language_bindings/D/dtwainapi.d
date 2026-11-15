@@ -1139,7 +1139,8 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105);
     public static const int DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106);
     public static const int DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
-    public static const int DTWAIN_ERR_OCR_LAST = (-2108);
+    public static const int DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108);
+    public static const int DTWAIN_ERR_OCR_LAST = (-2109);
     public static const int DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
     public static const int DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500);
     public static const int DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501);
@@ -1951,6 +1952,8 @@ class DTWAIN_DynamicDLL
     public static const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
     public static const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
     public static const int DTWAIN_COMPONENT_JPEGXL = 1;
+    public static const int DTWAIN_COMPONENT_RESOURCES = 2;
+    public static const int DTWAIN_COMPONENT_TRANSYMOCR = 3;
 
     /************ Core API ************/
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, DTWAIN_CCHARPTRTYPE, LONG, LONG, DTWAIN_BOOL, DTWAIN_BOOL, LPLONG) DTWAIN_AcquireAudioFile;
@@ -2132,6 +2135,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function() DTWAIN_ClearErrorBuffer;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE) DTWAIN_ClearPDFTextElements;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE) DTWAIN_ClearPage;
+    extern(Windows) DTWAIN_BOOL function() DTWAIN_CloseOCRInterface;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE) DTWAIN_CloseSource;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE) DTWAIN_CloseSourceUI;
     extern(Windows) HANDLE function(HANDLE, HANDLE) DTWAIN_ConvertDIBToBitmap;
@@ -2240,6 +2244,8 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE, DTWAIN_BOOL) DTWAIN_EnumMaxBuffersEx;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LPDTWAIN_ARRAY) DTWAIN_EnumNoiseFilters;
     extern(Windows) DTWAIN_ARRAY function(DTWAIN_SOURCE) DTWAIN_EnumNoiseFiltersEx;
+    extern(Windows) DTWAIN_BOOL function(LPDTWAIN_ARRAY) DTWAIN_EnumOCREngines;
+    extern(Windows) DTWAIN_ARRAY function() DTWAIN_EnumOCREnginesEx;
     extern(Windows) DTWAIN_BOOL function(LPDTWAIN_ARRAY) DTWAIN_EnumOCRInterfaces;
     extern(Windows) DTWAIN_ARRAY function() DTWAIN_EnumOCRInterfacesEx;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_OCRENGINE, LPDTWAIN_ARRAY) DTWAIN_EnumOCRSupportedCaps;
@@ -2753,6 +2759,7 @@ class DTWAIN_DynamicDLL
     extern(Windows) DTWAIN_BOOL function() DTWAIN_IsMsgNotifyEnabled;
     extern(Windows) DTWAIN_BOOL function() DTWAIN_IsNotifyTripletsEnabled;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_OCRENGINE) DTWAIN_IsOCREngineActivated;
+    extern(Windows) DTWAIN_BOOL function() DTWAIN_IsOCRInterfaceInitialized;
     extern(Windows) DTWAIN_BOOL function() DTWAIN_IsOpenSourcesOnSelect;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_IsOrientationSupported;
     extern(Windows) DTWAIN_BOOL function(DTWAIN_SOURCE, LONG) DTWAIN_IsOverscanSupported;
@@ -3312,6 +3319,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_ClearErrorBuffer, "DTWAIN_ClearErrorBuffer");
         bindFunction(cast(void**)&DTWAIN_ClearPDFTextElements, "DTWAIN_ClearPDFTextElements");
         bindFunction(cast(void**)&DTWAIN_ClearPage, "DTWAIN_ClearPage");
+        bindFunction(cast(void**)&DTWAIN_CloseOCRInterface, "DTWAIN_CloseOCRInterface");
         bindFunction(cast(void**)&DTWAIN_CloseSource, "DTWAIN_CloseSource");
         bindFunction(cast(void**)&DTWAIN_CloseSourceUI, "DTWAIN_CloseSourceUI");
         bindFunction(cast(void**)&DTWAIN_ConvertDIBToBitmap, "DTWAIN_ConvertDIBToBitmap");
@@ -3420,6 +3428,8 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_EnumMaxBuffersEx, "DTWAIN_EnumMaxBuffersEx");
         bindFunction(cast(void**)&DTWAIN_EnumNoiseFilters, "DTWAIN_EnumNoiseFilters");
         bindFunction(cast(void**)&DTWAIN_EnumNoiseFiltersEx, "DTWAIN_EnumNoiseFiltersEx");
+        bindFunction(cast(void**)&DTWAIN_EnumOCREngines, "DTWAIN_EnumOCREngines");
+        bindFunction(cast(void**)&DTWAIN_EnumOCREnginesEx, "DTWAIN_EnumOCREnginesEx");
         bindFunction(cast(void**)&DTWAIN_EnumOCRInterfaces, "DTWAIN_EnumOCRInterfaces");
         bindFunction(cast(void**)&DTWAIN_EnumOCRInterfacesEx, "DTWAIN_EnumOCRInterfacesEx");
         bindFunction(cast(void**)&DTWAIN_EnumOCRSupportedCaps, "DTWAIN_EnumOCRSupportedCaps");
@@ -3933,6 +3943,7 @@ class DTWAIN_DynamicDLL
         bindFunction(cast(void**)&DTWAIN_IsMsgNotifyEnabled, "DTWAIN_IsMsgNotifyEnabled");
         bindFunction(cast(void**)&DTWAIN_IsNotifyTripletsEnabled, "DTWAIN_IsNotifyTripletsEnabled");
         bindFunction(cast(void**)&DTWAIN_IsOCREngineActivated, "DTWAIN_IsOCREngineActivated");
+        bindFunction(cast(void**)&DTWAIN_IsOCRInterfaceInitialized, "DTWAIN_IsOCRInterfaceInitialized");
         bindFunction(cast(void**)&DTWAIN_IsOpenSourcesOnSelect, "DTWAIN_IsOpenSourcesOnSelect");
         bindFunction(cast(void**)&DTWAIN_IsOrientationSupported, "DTWAIN_IsOrientationSupported");
         bindFunction(cast(void**)&DTWAIN_IsOverscanSupported, "DTWAIN_IsOverscanSupported");

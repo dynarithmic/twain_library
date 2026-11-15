@@ -205,6 +205,12 @@
     <Compile Include="LogFileSelectionDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PDFOptionsDlg.Designer.vb">
+      <DependentUpon>PDFOptionsDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PDFOptionsDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SelectSourceByName.Designer.vb">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>
     </Compile>
@@ -255,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogFileSelectionDlg.resx">
       <DependentUpon>LogFileSelectionDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PDFOptionsDlg.resx">
+      <DependentUpon>PDFOptionsDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectSourceByName.resx">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>

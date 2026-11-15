@@ -236,6 +236,7 @@
 2105 Geçersiz OCR piksel türü
 2106 Geçersiz OCR bit derinliği
 2107 OCR Tanıma hatası
+2108 Bir veya daha fazla OCR motoru kapatılamadı
 2500 TWAIN kaynağı açılamadı
 2501 TWAIN kaynağı kapatılamadı
 2502 Görüntü alınırken geçersiz görüntü bilgisi

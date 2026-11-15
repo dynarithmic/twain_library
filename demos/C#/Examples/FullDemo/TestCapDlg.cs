@@ -284,6 +284,7 @@ namespace TWAINDemo
                         // Display long values.  This includes boolean TRUE and FALSE
                         case TwainAPI.DTWAIN_ARRAYLONG:
                         {
+                            bool isRange = (cmbContainer.SelectedItem.ToString() == "TW_RANGE");
                             int lVal = 0;
                             TwainAPI.DTWAIN_ArrayGetAtLong(values, i, ref lVal);
                             // The CAP_SUPPORTEDDATS is special in that the values
@@ -309,14 +310,13 @@ namespace TWAINDemo
                             // This is for the special ICAP_SUPPORTEDCAPS, ICAP_EXTENDEDCAPS, and
                             // ICAP_SUPPORTEDCAPSSEGMENTUNIQUE capabilities.  We display the name
                             // not the value
-                            if (bGotID == 1)
-                                TwainAPI.DTWAIN_GetTwainNameFromConstant(nTranslationID, lVal, szValues, 256);
+                            if (bGotID == 1 && !isRange)
+                                TwainAPI.DTWAIN_GetTwainNameFromConstantEx(nTranslationID, lVal, szValues, 256);
                             else
                             {
                                 string sPrefix = "";
                                 // Check if this is a range.  If so, there will always be 5 values
                                 // where item i is either Minimum, Maximum, Step, Default, or Current
-                                bool isRange = (cmbContainer.SelectedItem.ToString() == "TW_RANGE");
                                 if (isRange)
                                     sPrefix = allRangeNames[i];
                                 szValues.AppendFormat("{0}{1}", sPrefix, lVal);

@@ -23,8 +23,8 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionExplicit>On</OptionExplicit>
     <OptionStrict>Off</OptionStrict>
-    <RootNamespace>VB_FullDemo</RootNamespace>
-    <StartupObject>VB_FullDemo.VB_FullDemo</StartupObject>
+    <RootNamespace>TWAINDemo</RootNamespace>
+    <StartupObject>TWAINDemo.VB_FullDemo</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
@@ -204,6 +204,12 @@
     <Compile Include="LogFileSelectionDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PDFOptionsDlg.Designer.vb">
+      <DependentUpon>PDFOptionsDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PDFOptionsDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SelectSourceByName.Designer.vb">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>
     </Compile>
@@ -254,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogFileSelectionDlg.resx">
       <DependentUpon>LogFileSelectionDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PDFOptionsDlg.resx">
+      <DependentUpon>PDFOptionsDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectSourceByName.resx">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>

@@ -238,6 +238,7 @@
 2105 Tipo di pixel OCR non valido  
 2106 Profondità di bit OCR non valida  
 2107 Errore di riconoscimento OCR  
+2108 Uno o più motori OCR hanno riscontrato un errore durante l'arresto
 2502 Informazioni sull'immagine non valide
 2503 Errore durante la scrittura dei dati nel file
 2504 Operazione non supportata  

@@ -966,7 +966,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_OCR_INVALIDPIXELTYPE As Integer = (-2105)
     Public Const DTWAIN_ERR_OCR_INVALIDBITDEPTH As Integer = (-2106)
     Public Const DTWAIN_ERR_OCR_RECOGNITIONERROR As Integer = (-2107)
-    Public Const DTWAIN_ERR_OCR_LAST As Integer = (-2108)
+    Public Const DTWAIN_ERR_OCR_SHUTDOWNFAILURE As Integer = (-2108)
+    Public Const DTWAIN_ERR_OCR_LAST As Integer = (-2109)
     Public Const DTWAIN_ERR_LAST As Integer = DTWAIN_ERR_OCR_LAST
     Public Const DTWAIN_ERR_SOURCE_COULD_NOT_OPEN As Integer = (-2500)
     Public Const DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE As Integer = (-2501)
@@ -1778,6 +1779,8 @@ Class DTWAINAPI
     Public Const DTWAIN_CHECKDLLVERGREATEREQ As Integer = 4
     Public Const DTWAIN_RESOURCE_COPYRIGHT As Integer = 9700
     Public Const DTWAIN_COMPONENT_JPEGXL As Integer = 1
+    Public Const DTWAIN_COMPONENT_RESOURCES As Integer = 2
+    Public Const DTWAIN_COMPONENT_TRANSYMOCR As Integer = 3
 
     Public Delegate Function DTwainCallback(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
     Public Delegate Function DTwainCallback64(WParam As IntPtr, LParam As IntPtr, UserData As IntPtr) As IntPtr
@@ -1927,6 +1930,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_ClearErrorBuffer Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_ClearPDFTextElements Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_ClearPage Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_CloseOCRInterface Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_CloseSource Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_CloseSourceUI Lib "dtwain32.dll" (Source As System.IntPtr) As Integer
     Public Declare Function DTWAIN_ConvertDIBToBitmap Lib "dtwain32.dll" (hDib As System.IntPtr, hPalette As System.IntPtr) As System.IntPtr
@@ -2031,6 +2035,8 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_EnumMaxBuffersEx Lib "dtwain32.dll" (Source As System.IntPtr, bExpandRange As Integer) As System.IntPtr
     Public Declare Function DTWAIN_EnumNoiseFilters Lib "dtwain32.dll" (Source As System.IntPtr, ByRef pArray As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumNoiseFiltersEx Lib "dtwain32.dll" (Source As System.IntPtr) As System.IntPtr
+    Public Declare Function DTWAIN_EnumOCREngines Lib "dtwain32.dll" (ByRef OCRInterfaces As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_EnumOCREnginesEx Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Function DTWAIN_EnumOCRInterfaces Lib "dtwain32.dll" (ByRef OCRInterfaces As System.IntPtr) As Integer
     Public Declare Function DTWAIN_EnumOCRInterfacesEx Lib "dtwain32.dll" () As System.IntPtr
     Public Declare Function DTWAIN_EnumOCRSupportedCaps Lib "dtwain32.dll" (Engine As System.IntPtr, ByRef SupportedCaps As System.IntPtr) As Integer
@@ -2401,6 +2407,7 @@ Class DTWAINAPI
     Public Declare Function DTWAIN_IsMsgNotifyEnabled Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_IsNotifyTripletsEnabled Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_IsOCREngineActivated Lib "dtwain32.dll" (OCREngine As System.IntPtr) As Integer
+    Public Declare Function DTWAIN_IsOCRInterfaceInitialized Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_IsOpenSourcesOnSelect Lib "dtwain32.dll" () As Integer
     Public Declare Function DTWAIN_IsOrientationSupported Lib "dtwain32.dll" (Source As System.IntPtr, Orientation As Integer) As Integer
     Public Declare Function DTWAIN_IsOverscanSupported Lib "dtwain32.dll" (Source As System.IntPtr, SupportValue As Integer) As Integer

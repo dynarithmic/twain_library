@@ -114,6 +114,8 @@ DTWAIN Version changes
 
 - Returning 0 from DTWAIN_TN_FILEPAGESAVING notification when acquiring to image files will now stop the file page being saved.
 
+- Fixed issue when unloading the Transym TOCR DLL on DTWAIN shutdown.
+
 - Upgraded following internal image related libraries:
 
       libpng --> 1.6.59
@@ -166,6 +168,10 @@ DTWAIN Version changes
     The DocumentNumber, PageNumber, and FrameNumber will be filled in with the relevant information on return of this function (any of 
     these parameters can also be NULL, meaning that the value should be ignored).
 
+- When using the DTWAIN_ICO (Windows ICON) file type when calling DTWAIN_AcquireFile(), the resulting ICO file will now have a scaled
+  image if the width or height of the original acquired image is greater than 255 pixels (ICO files are limited to a maximum width 
+  and height of 255 x 255).  Currently, an error occurs if using DTWAIN_ICO and the height and/or width exceeds 255 pixels.  The current
+  workaround is to use the DTWAIN_ICO_VISTA type, which can handle images with height/width greater than 255 pixels.
 
 - Fix Delphi language bindings to properly handle LPTSTR and LPCTSTR pointer types.  Currently the Delphi application can only
   consistently use the DTWAIN API functions that are either ANSI aware or Unicode aware, but not the "generic" calls.  For example:

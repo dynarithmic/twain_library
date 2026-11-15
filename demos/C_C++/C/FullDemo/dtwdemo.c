@@ -180,7 +180,7 @@ AllFileTypes g_allDTWAINFileTypes[] = {
         {IDM_ACQUIREFILE_DCX                    ,  DTWAIN_DCX },
         {IDM_ACQUIREFILE_ENHANCEDMETAFILE       ,  DTWAIN_EMF },
         {IDM_ACQUIREFILE_GIF                    ,  DTWAIN_GIF },
-        {IDM_ACQUIREFILE_ICO                    ,  DTWAIN_ICO_RESIZED },
+        {IDM_ACQUIREFILE_ICO                    ,  DTWAIN_ICO },
         {IDM_ACQUIREFILE_ICOVISTA               ,  DTWAIN_ICO_VISTA },
         {IDM_ACQUIREFILE_JPEG                   ,  DTWAIN_JPEG },
         {IDM_ACQUIREFILE_JPEG2000               ,  DTWAIN_JPEG2000 },
@@ -256,6 +256,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         return FALSE;
     }
 
+
     // Initialize global strings
     LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadString(hInstance, IDC_DTWDEMO, szWindowClass, MAX_LOADSTRING);
@@ -289,8 +290,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     /* Allow DTWAIN messages to be sent directly to our Window proc */
     DTWAIN_StartTwainSession(g_hWnd, NULL);
-    // DTWAIN_SetTwainMode(DTWAIN_MODELESS);
+
     DTWAIN_EnableMsgNotify(TRUE);
+
+    /* Enable the OCR interface */
+    DTWAIN_InitOCRInterface();
 
     /* Also allow DTWAIN messages to be sent to our callback */
     DTWAIN_SetCallback(TwainCallbackProc,0);
@@ -407,6 +411,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                                 return 0;
                             }
                         }
+                        else
+                        /* Check if TEXT type is acquired */
+                        if ( g_FileType == DTWAIN_TEXTMULTI )
+                        {
+                            /* Initialize the OCR engine if it's available */
+                            if (!DTWAIN_IsFileTypeSupported(DTWAIN_TEXTMULTI) )
+                            {
+                                MessageBox(g_hWnd, _T("Text mode requires OCR engine installed"), _T("No OCR engines detected"), MB_ICONSTOP);
+                                EnableAllMenuItems(TRUE);
+                                return 0;
+                            }
+                        }
+
                         AcquireFile(g_allDTWAINFileTypes[i].resourceId < nFirstAcquireFileID, 
                                               g_allDTWAINFileTypes[i].resourceId, 
                                               g_allDTWAINFileTypes[i].dtwainType);
@@ -861,19 +878,10 @@ void AcquireFile(BOOL bUseSource, LONG resourceID, LONG fileType)
     /* Check if TEXT type is acquired */
     if ( fileType == DTWAIN_TEXTMULTI )
     {
-        /* Initialize the OCR engine if it's available */
-        if (!DTWAIN_InitOCRInterface() )
+        if ( !DTWAIN_SelectDefaultOCREngine() )
         {
-            MessageBox(g_hWnd, _T("Text mode requires OCR engine installed"), _T("No OCR engines detected"), MB_ICONSTOP);
+            MessageBox(g_hWnd, _T("OCR engine could not be selected"), _T("OCR engine error"), MB_ICONSTOP);
             return;
-        }
-        else
-        {
-            if ( !DTWAIN_SelectDefaultOCREngine() )
-            {
-                MessageBox(g_hWnd, _T("OCR engine could not be selected"), _T("OCR engine error"), MB_ICONSTOP);
-                return;
-            }
         }
     }
 

@@ -237,6 +237,7 @@
 2105 Invalid OCR pixel type
 2106 Invalid OCR bit depth
 2107 OCR Recognition error
+2108 One or more OCR engines had a shutdown failure
 2500 Could not open TWAIN source
 2501 Could not close TWAIN source
 2502 Invalid Image Information on acquiring image

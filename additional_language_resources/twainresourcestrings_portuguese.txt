@@ -236,6 +236,7 @@
 2105 Tipo de pixel OCR inválido  
 2106 Profundidade de bits OCR inválida  
 2107 Erro de reconhecimento OCR  
+2108 Um ou mais mecanismos de OCR falharam ao encerrar
 2500 Não foi possível abrir a fonte TWAIN  
 2501 Não foi possível fechar a fonte TWAIN  
 2502 Informações de imagem inválidas ao adquirir imagem  

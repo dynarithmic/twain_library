@@ -236,6 +236,7 @@
 2105 Tipo de píxel OCR inválido  
 2106 Profundidad de bits OCR inválida  
 2107 Error de reconocimiento OCR  
+2108 Uno o más motores OCR fallaron al apagarse
 2500 No le podríamos abrir a TWAIN origen
 2501 No le podríamos tapar a TWAIN origen
 2502 Información de imagen no válida

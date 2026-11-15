@@ -256,6 +256,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
         DTWAIN_BOOL DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_ClearPage(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_CloseOCRInterface();
         DTWAIN_BOOL DTWAIN_CloseSource(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source);
         HANDLE DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette);
@@ -364,6 +365,8 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_EnumMaxBuffersEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandRange);
         DTWAIN_BOOL DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_EnumOCREngines(LPDTWAIN_ARRAY OCRInterfaces);
+        DTWAIN_ARRAY DTWAIN_EnumOCREnginesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRInterfaces(LPDTWAIN_ARRAY OCRInterfaces);
         DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, LPDTWAIN_ARRAY SupportedCaps);
@@ -880,6 +883,7 @@ function load32bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsMsgNotifyEnabled();
         DTWAIN_BOOL DTWAIN_IsNotifyTripletsEnabled();
         DTWAIN_BOOL DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
+        DTWAIN_BOOL DTWAIN_IsOCRInterfaceInitialized();
         DTWAIN_BOOL DTWAIN_IsOpenSourcesOnSelect();
         DTWAIN_BOOL DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source, LONG Orientation);
         DTWAIN_BOOL DTWAIN_IsOverscanSupported(DTWAIN_SOURCE Source, LONG SupportValue);
@@ -1498,6 +1502,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
         DTWAIN_BOOL DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_ClearPage(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_CloseOCRInterface();
         DTWAIN_BOOL DTWAIN_CloseSource(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source);
         HANDLE DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette);
@@ -1606,6 +1611,8 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_EnumMaxBuffersEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandRange);
         DTWAIN_BOOL DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_EnumOCREngines(LPDTWAIN_ARRAY OCRInterfaces);
+        DTWAIN_ARRAY DTWAIN_EnumOCREnginesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRInterfaces(LPDTWAIN_ARRAY OCRInterfaces);
         DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, LPDTWAIN_ARRAY SupportedCaps);
@@ -2122,6 +2129,7 @@ function load32bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsMsgNotifyEnabled();
         DTWAIN_BOOL DTWAIN_IsNotifyTripletsEnabled();
         DTWAIN_BOOL DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
+        DTWAIN_BOOL DTWAIN_IsOCRInterfaceInitialized();
         DTWAIN_BOOL DTWAIN_IsOpenSourcesOnSelect();
         DTWAIN_BOOL DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source, LONG Orientation);
         DTWAIN_BOOL DTWAIN_IsOverscanSupported(DTWAIN_SOURCE Source, LONG SupportValue);
@@ -2740,6 +2748,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
         DTWAIN_BOOL DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_ClearPage(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_CloseOCRInterface();
         DTWAIN_BOOL DTWAIN_CloseSource(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source);
         HANDLE DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette);
@@ -2848,6 +2857,8 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_EnumMaxBuffersEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandRange);
         DTWAIN_BOOL DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_EnumOCREngines(LPDTWAIN_ARRAY OCRInterfaces);
+        DTWAIN_ARRAY DTWAIN_EnumOCREnginesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRInterfaces(LPDTWAIN_ARRAY OCRInterfaces);
         DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, LPDTWAIN_ARRAY SupportedCaps);
@@ -3364,6 +3375,7 @@ function load64bitAnsi(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsMsgNotifyEnabled();
         DTWAIN_BOOL DTWAIN_IsNotifyTripletsEnabled();
         DTWAIN_BOOL DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
+        DTWAIN_BOOL DTWAIN_IsOCRInterfaceInitialized();
         DTWAIN_BOOL DTWAIN_IsOpenSourcesOnSelect();
         DTWAIN_BOOL DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source, LONG Orientation);
         DTWAIN_BOOL DTWAIN_IsOverscanSupported(DTWAIN_SOURCE Source, LONG SupportValue);
@@ -3982,6 +3994,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_ClearErrorBuffer();
         DTWAIN_BOOL DTWAIN_ClearPDFTextElements(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_ClearPage(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_CloseOCRInterface();
         DTWAIN_BOOL DTWAIN_CloseSource(DTWAIN_SOURCE Source);
         DTWAIN_BOOL DTWAIN_CloseSourceUI(DTWAIN_SOURCE Source);
         HANDLE DTWAIN_ConvertDIBToBitmap(HANDLE hDib, HANDLE hPalette);
@@ -4090,6 +4103,8 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_ARRAY DTWAIN_EnumMaxBuffersEx(DTWAIN_SOURCE Source, DTWAIN_BOOL bExpandRange);
         DTWAIN_BOOL DTWAIN_EnumNoiseFilters(DTWAIN_SOURCE Source, LPDTWAIN_ARRAY pArray);
         DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source);
+        DTWAIN_BOOL DTWAIN_EnumOCREngines(LPDTWAIN_ARRAY OCRInterfaces);
+        DTWAIN_ARRAY DTWAIN_EnumOCREnginesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRInterfaces(LPDTWAIN_ARRAY OCRInterfaces);
         DTWAIN_ARRAY DTWAIN_EnumOCRInterfacesEx();
         DTWAIN_BOOL DTWAIN_EnumOCRSupportedCaps(DTWAIN_OCRENGINE Engine, LPDTWAIN_ARRAY SupportedCaps);
@@ -4606,6 +4621,7 @@ function load64bitUnicode(DLLToLoad)
         DTWAIN_BOOL DTWAIN_IsMsgNotifyEnabled();
         DTWAIN_BOOL DTWAIN_IsNotifyTripletsEnabled();
         DTWAIN_BOOL DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
+        DTWAIN_BOOL DTWAIN_IsOCRInterfaceInitialized();
         DTWAIN_BOOL DTWAIN_IsOpenSourcesOnSelect();
         DTWAIN_BOOL DTWAIN_IsOrientationSupported(DTWAIN_SOURCE Source, LONG Orientation);
         DTWAIN_BOOL DTWAIN_IsOverscanSupported(DTWAIN_SOURCE Source, LONG SupportValue);

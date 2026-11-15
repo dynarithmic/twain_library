@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.36128.20
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VB_FullDemo", "VB_FullDemo.vbproj", "{CAC7D43F-D9D1-40AC-877A-0EDFB72CF163}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BDB746F5-ADAD-4995-A381-57E0702CF1E9}"
+	ProjectSection(SolutionItems) = preProject
+		PDFOptionsDlg.resx = PDFOptionsDlg.resx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

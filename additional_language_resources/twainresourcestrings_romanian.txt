@@ -236,6 +236,7 @@
 2105 Tip de pixel OCR invalid  
 2106 Adâncime de bit OCR invalidă  
 2107 Eroare de recunoaștere OCR  
+2108 Unul sau mai multe motoare OCR au întâmpinat o eroare la oprire
 2500 Nu s-a putut deschide sursa TWAIN  
 2501 Nu s-a putut închide sursa TWAIN  
 2502 Informații de imagine invalide la achiziționarea imaginii  

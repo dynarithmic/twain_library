@@ -150,6 +150,12 @@
     <Compile Include="BarCodesDlg.Designer.cs">
       <DependentUpon>BarCodesDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="PDFOptionsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PDFOptionsDlg.Designer.cs">
+      <DependentUpon>PDFOptionsDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="SourcePropsDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BarCodesDlg.resx">
       <DependentUpon>BarCodesDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PDFOptionsDlg.resx">
+      <DependentUpon>PDFOptionsDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SourcePropsDlg.resx">
       <DependentUpon>SourcePropsDlg.cs</DependentUpon>

@@ -235,6 +235,7 @@
 2105 Ongeldig OCR-pixeltype  
 2106 Ongeldige OCR-bitdiepte  
 2107 OCR-herkenningsfout  
+2108 Een of meer OCR-engines hadden een afsluitfout
 2500 Niet open TWAIN bron
 2501 Niet afsluiten TWAIN bron
 2502 Ongeldige afbeeldingsinformatie

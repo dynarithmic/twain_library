@@ -1022,7 +1022,8 @@ module TwainAPI =
     let public DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105)
     let public DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106)
     let public DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107)
-    let public DTWAIN_ERR_OCR_LAST = (-2108)
+    let public DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108)
+    let public DTWAIN_ERR_OCR_LAST = (-2109)
     let public DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST
     let public DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500)
     let public DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501)
@@ -1834,6 +1835,8 @@ module TwainAPI =
     let public DTWAIN_CHECKDLLVERGREATEREQ = 4
     let public DTWAIN_RESOURCE_COPYRIGHT = 9700
     let public DTWAIN_COMPONENT_JPEGXL = 1
+    let public DTWAIN_COMPONENT_RESOURCES = 2
+    let public DTWAIN_COMPONENT_TRANSYMOCR = 3
 
     // Public state exposed after successful Load
     let mutable private IsLoaded = false
@@ -2315,6 +2318,9 @@ module TwainAPI =
     type DTWAIN_ClearPageDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_CloseOCRInterfaceDelegate = delegate of unit -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_CloseSourceDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -2625,6 +2631,12 @@ module TwainAPI =
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumNoiseFiltersExDelegate = delegate of DTWAIN_SOURCE -> DTWAIN_ARRAY
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumOCREnginesDelegate = delegate of DTWAIN_ARRAY byref -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_EnumOCREnginesExDelegate = delegate of unit -> DTWAIN_ARRAY
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_EnumOCRInterfacesDelegate = delegate of DTWAIN_ARRAY byref -> DTWAIN_BOOL
@@ -3743,6 +3755,9 @@ module TwainAPI =
     type DTWAIN_IsOCREngineActivatedDelegate = delegate of DTWAIN_OCRENGINE -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
+    type DTWAIN_IsOCRInterfaceInitializedDelegate = delegate of unit -> DTWAIN_BOOL
+
+    [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
     type DTWAIN_IsOpenSourcesOnSelectDelegate = delegate of unit -> DTWAIN_BOOL
 
     [<UnmanagedFunctionPointer(CallingConvention.StdCall )>]
@@ -4630,6 +4645,7 @@ module TwainAPI =
     let private ClearErrorBuffer = lazy (DynamicDll.Bind "DTWAIN_ClearErrorBuffer" : DTWAIN_ClearErrorBufferDelegate)
     let private ClearPDFTextElements = lazy (DynamicDll.Bind "DTWAIN_ClearPDFTextElements" : DTWAIN_ClearPDFTextElementsDelegate)
     let private ClearPage = lazy (DynamicDll.Bind "DTWAIN_ClearPage" : DTWAIN_ClearPageDelegate)
+    let private CloseOCRInterface = lazy (DynamicDll.Bind "DTWAIN_CloseOCRInterface" : DTWAIN_CloseOCRInterfaceDelegate)
     let private CloseSource = lazy (DynamicDll.Bind "DTWAIN_CloseSource" : DTWAIN_CloseSourceDelegate)
     let private CloseSourceUI = lazy (DynamicDll.Bind "DTWAIN_CloseSourceUI" : DTWAIN_CloseSourceUIDelegate)
     let private ConvertDIBToBitmap = lazy (DynamicDll.Bind "DTWAIN_ConvertDIBToBitmap" : DTWAIN_ConvertDIBToBitmapDelegate)
@@ -4734,6 +4750,8 @@ module TwainAPI =
     let private EnumMaxBuffersEx = lazy (DynamicDll.Bind "DTWAIN_EnumMaxBuffersEx" : DTWAIN_EnumMaxBuffersExDelegate)
     let private EnumNoiseFilters = lazy (DynamicDll.Bind "DTWAIN_EnumNoiseFilters" : DTWAIN_EnumNoiseFiltersDelegate)
     let private EnumNoiseFiltersEx = lazy (DynamicDll.Bind "DTWAIN_EnumNoiseFiltersEx" : DTWAIN_EnumNoiseFiltersExDelegate)
+    let private EnumOCREngines = lazy (DynamicDll.Bind "DTWAIN_EnumOCREngines" : DTWAIN_EnumOCREnginesDelegate)
+    let private EnumOCREnginesEx = lazy (DynamicDll.Bind "DTWAIN_EnumOCREnginesEx" : DTWAIN_EnumOCREnginesExDelegate)
     let private EnumOCRInterfaces = lazy (DynamicDll.Bind "DTWAIN_EnumOCRInterfaces" : DTWAIN_EnumOCRInterfacesDelegate)
     let private EnumOCRInterfacesEx = lazy (DynamicDll.Bind "DTWAIN_EnumOCRInterfacesEx" : DTWAIN_EnumOCRInterfacesExDelegate)
     let private EnumOCRSupportedCaps = lazy (DynamicDll.Bind "DTWAIN_EnumOCRSupportedCaps" : DTWAIN_EnumOCRSupportedCapsDelegate)
@@ -5106,6 +5124,7 @@ module TwainAPI =
     let private IsMsgNotifyEnabled = lazy (DynamicDll.Bind "DTWAIN_IsMsgNotifyEnabled" : DTWAIN_IsMsgNotifyEnabledDelegate)
     let private IsNotifyTripletsEnabled = lazy (DynamicDll.Bind "DTWAIN_IsNotifyTripletsEnabled" : DTWAIN_IsNotifyTripletsEnabledDelegate)
     let private IsOCREngineActivated = lazy (DynamicDll.Bind "DTWAIN_IsOCREngineActivated" : DTWAIN_IsOCREngineActivatedDelegate)
+    let private IsOCRInterfaceInitialized = lazy (DynamicDll.Bind "DTWAIN_IsOCRInterfaceInitialized" : DTWAIN_IsOCRInterfaceInitializedDelegate)
     let private IsOpenSourcesOnSelect = lazy (DynamicDll.Bind "DTWAIN_IsOpenSourcesOnSelect" : DTWAIN_IsOpenSourcesOnSelectDelegate)
     let private IsOrientationSupported = lazy (DynamicDll.Bind "DTWAIN_IsOrientationSupported" : DTWAIN_IsOrientationSupportedDelegate)
     let private IsOverscanSupported = lazy (DynamicDll.Bind "DTWAIN_IsOverscanSupported" : DTWAIN_IsOverscanSupportedDelegate)
@@ -5932,6 +5951,10 @@ module TwainAPI =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         ClearPage.Value.Invoke(source)
 
+    let DTWAIN_CloseOCRInterface() : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        CloseOCRInterface.Value.Invoke()
+
     let DTWAIN_CloseSource (source: DTWAIN_SOURCE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         CloseSource.Value.Invoke(source)
@@ -6347,6 +6370,14 @@ module TwainAPI =
     let DTWAIN_EnumNoiseFiltersEx (source: DTWAIN_SOURCE) : DTWAIN_ARRAY =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         EnumNoiseFiltersEx.Value.Invoke(source)
+
+    let DTWAIN_EnumOCREngines (ocrinterfaces: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumOCREngines.Value.Invoke(&ocrinterfaces)
+
+    let DTWAIN_EnumOCREnginesEx() : DTWAIN_ARRAY =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        EnumOCREnginesEx.Value.Invoke()
 
     let DTWAIN_EnumOCRInterfaces (ocrinterfaces: DTWAIN_ARRAY byref) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
@@ -7835,6 +7866,10 @@ module TwainAPI =
     let DTWAIN_IsOCREngineActivated (ocrengine: DTWAIN_OCRENGINE) : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"
         IsOCREngineActivated.Value.Invoke(ocrengine)
+
+    let DTWAIN_IsOCRInterfaceInitialized() : DTWAIN_BOOL =
+        if not IsLoaded then failwith "Call TwainAPI.Load first"
+        IsOCRInterfaceInitialized.Value.Invoke()
 
     let DTWAIN_IsOpenSourcesOnSelect() : DTWAIN_BOOL =
         if not IsLoaded then failwith "Call TwainAPI.Load first"

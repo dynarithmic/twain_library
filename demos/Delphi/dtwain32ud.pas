@@ -1070,7 +1070,8 @@ const
   DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105);
   DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106);
   DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
-  DTWAIN_ERR_OCR_LAST = (-2108);
+  DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108);
+  DTWAIN_ERR_OCR_LAST = (-2109);
   DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
   DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500);
   DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501);
@@ -1882,6 +1883,8 @@ const
   DTWAIN_CHECKDLLVERGREATEREQ = 4;
   DTWAIN_RESOURCE_COPYRIGHT = 9700;
   DTWAIN_COMPONENT_JPEGXL = 1;
+  DTWAIN_COMPONENT_RESOURCES = 2;
+  DTWAIN_COMPONENT_TRANSYMOCR = 3;
 
 { DTWAIN DLL functional interface }
 
@@ -2064,6 +2067,7 @@ function DTWAIN_ClearBuffers(Source:DTWAIN_SOURCE; ClearBuffer:LONG) : BOOL; std
 function DTWAIN_ClearErrorBuffer : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_ClearErrorBuffer';
 function DTWAIN_ClearPDFTextElements(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_ClearPDFTextElements';
 function DTWAIN_ClearPage(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_ClearPage';
+function DTWAIN_CloseOCRInterface : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_CloseOCRInterface';
 function DTWAIN_CloseSource(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_CloseSource';
 function DTWAIN_CloseSourceUI(Source:DTWAIN_SOURCE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_CloseSourceUI';
 function DTWAIN_ConvertDIBToBitmap(hDib:NativeInt; hPalette:NativeInt) : NativeInt; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_ConvertDIBToBitmap';
@@ -2172,6 +2176,8 @@ function DTWAIN_EnumMaxBuffers(Source:DTWAIN_SOURCE; pMaxBufs:LPDTWAIN_ARRAY; bE
 function DTWAIN_EnumMaxBuffersEx(Source:DTWAIN_SOURCE; bExpandRange:BOOL) : DTWAIN_ARRAY; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumMaxBuffersEx';
 function DTWAIN_EnumNoiseFilters(Source:DTWAIN_SOURCE; pArray:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumNoiseFilters';
 function DTWAIN_EnumNoiseFiltersEx(Source:DTWAIN_SOURCE) : DTWAIN_ARRAY; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumNoiseFiltersEx';
+function DTWAIN_EnumOCREngines(OCRInterfaces:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumOCREngines';
+function DTWAIN_EnumOCREnginesEx : DTWAIN_ARRAY; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumOCREnginesEx';
 function DTWAIN_EnumOCRInterfaces(OCRInterfaces:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumOCRInterfaces';
 function DTWAIN_EnumOCRInterfacesEx : DTWAIN_ARRAY; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumOCRInterfacesEx';
 function DTWAIN_EnumOCRSupportedCaps(Engine:DTWAIN_OCRENGINE; SupportedCaps:LPDTWAIN_ARRAY) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_EnumOCRSupportedCaps';
@@ -2692,6 +2698,7 @@ function DTWAIN_IsMemFileXferSupported(Source:DTWAIN_SOURCE) : BOOL; stdcall;  e
 function DTWAIN_IsMsgNotifyEnabled : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsMsgNotifyEnabled';
 function DTWAIN_IsNotifyTripletsEnabled : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsNotifyTripletsEnabled';
 function DTWAIN_IsOCREngineActivated(OCREngine:DTWAIN_OCRENGINE) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsOCREngineActivated';
+function DTWAIN_IsOCRInterfaceInitialized : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsOCRInterfaceInitialized';
 function DTWAIN_IsOpenSourcesOnSelect : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsOpenSourcesOnSelect';
 function DTWAIN_IsOrientationSupported(Source:DTWAIN_SOURCE; Orientation:LONG) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsOrientationSupported';
 function DTWAIN_IsOverscanSupported(Source:DTWAIN_SOURCE; SupportValue:LONG) : BOOL; stdcall;  external 'dtwain32ud.dll'  name 'DTWAIN_IsOverscanSupported';

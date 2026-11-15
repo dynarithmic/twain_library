@@ -1082,7 +1082,8 @@
 #define DTWAIN_ERR_OCR_INVALIDPIXELTYPE    (-2105)
 #define DTWAIN_ERR_OCR_INVALIDBITDEPTH     (-2106)
 #define DTWAIN_ERR_OCR_RECOGNITIONERROR    (-2107)
-#define DTWAIN_ERR_OCR_LAST                (-2108)
+#define DTWAIN_ERR_OCR_SHUTDOWNFAILURE     (-2108)
+#define DTWAIN_ERR_OCR_LAST                (-2109)
 
 /* Extra TWAIN Source errors */
 #define DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   (-2500)
@@ -1743,6 +1744,8 @@ DTWAIN DLL are not displayed */
 
 /* DTWAIN add on component path constants */
 #define DTWAIN_COMPONENT_JPEGXL        1
+#define DTWAIN_COMPONENT_RESOURCES     2
+#define DTWAIN_COMPONENT_TRANSYMOCR    3
 
 #endif
 

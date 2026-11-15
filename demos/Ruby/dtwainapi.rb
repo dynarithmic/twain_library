@@ -314,6 +314,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_ClearErrorBuffer
    attr_reader :DTWAIN_ClearPDFTextElements
    attr_reader :DTWAIN_ClearPage
+   attr_reader :DTWAIN_CloseOCRInterface
    attr_reader :DTWAIN_CloseSource
    attr_reader :DTWAIN_CloseSourceUI
    attr_reader :DTWAIN_ConvertDIBToBitmap
@@ -422,6 +423,8 @@ class DTWAINAPI
    attr_reader :DTWAIN_EnumMaxBuffersEx
    attr_reader :DTWAIN_EnumNoiseFilters
    attr_reader :DTWAIN_EnumNoiseFiltersEx
+   attr_reader :DTWAIN_EnumOCREngines
+   attr_reader :DTWAIN_EnumOCREnginesEx
    attr_reader :DTWAIN_EnumOCRInterfaces
    attr_reader :DTWAIN_EnumOCRInterfacesEx
    attr_reader :DTWAIN_EnumOCRSupportedCaps
@@ -941,6 +944,7 @@ class DTWAINAPI
    attr_reader :DTWAIN_IsMsgNotifyEnabled
    attr_reader :DTWAIN_IsNotifyTripletsEnabled
    attr_reader :DTWAIN_IsOCREngineActivated
+   attr_reader :DTWAIN_IsOCRInterfaceInitialized
    attr_reader :DTWAIN_IsOpenSourcesOnSelect
    attr_reader :DTWAIN_IsOrientationSupported
    attr_reader :DTWAIN_IsOverscanSupported
@@ -2193,7 +2197,8 @@ class DTWAINAPI
    DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105)
    DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106)
    DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107)
-   DTWAIN_ERR_OCR_LAST = (-2108)
+   DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108)
+   DTWAIN_ERR_OCR_LAST = (-2109)
    DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST
    DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500)
    DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501)
@@ -3005,6 +3010,8 @@ class DTWAINAPI
    DTWAIN_CHECKDLLVERGREATEREQ = 4
    DTWAIN_RESOURCE_COPYRIGHT = 9700
    DTWAIN_COMPONENT_JPEGXL = 1
+   DTWAIN_COMPONENT_RESOURCES = 2
+   DTWAIN_COMPONENT_TRANSYMOCR = 3
    @isinit = false
 
    def isInitialized()
@@ -3250,6 +3257,7 @@ class DTWAINAPI
        @DTWAIN_ClearErrorBuffer = Fiddle::Function::new(dtwain_dll['DTWAIN_ClearErrorBuffer'],[],Fiddle::TYPE_INT)
        @DTWAIN_ClearPDFTextElements = Fiddle::Function::new(dtwain_dll['DTWAIN_ClearPDFTextElements'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ClearPage = Fiddle::Function::new(dtwain_dll['DTWAIN_ClearPage'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_CloseOCRInterface = Fiddle::Function::new(dtwain_dll['DTWAIN_CloseOCRInterface'],[],Fiddle::TYPE_INT)
        @DTWAIN_CloseSource = Fiddle::Function::new(dtwain_dll['DTWAIN_CloseSource'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_CloseSourceUI = Fiddle::Function::new(dtwain_dll['DTWAIN_CloseSourceUI'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_ConvertDIBToBitmap = Fiddle::Function::new(dtwain_dll['DTWAIN_ConvertDIBToBitmap'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
@@ -3358,6 +3366,8 @@ class DTWAINAPI
        @DTWAIN_EnumMaxBuffersEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumMaxBuffersEx'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_INT],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumNoiseFilters = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumNoiseFilters'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumNoiseFiltersEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumNoiseFiltersEx'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_VOIDP)
+       @DTWAIN_EnumOCREngines = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCREngines'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_EnumOCREnginesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCREnginesEx'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumOCRInterfaces = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRInterfaces'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
        @DTWAIN_EnumOCRInterfacesEx = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRInterfacesEx'],[],Fiddle::TYPE_VOIDP)
        @DTWAIN_EnumOCRSupportedCaps = Fiddle::Function::new(dtwain_dll['DTWAIN_EnumOCRSupportedCaps'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
@@ -3877,6 +3887,7 @@ class DTWAINAPI
        @DTWAIN_IsMsgNotifyEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsMsgNotifyEnabled'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsNotifyTripletsEnabled = Fiddle::Function::new(dtwain_dll['DTWAIN_IsNotifyTripletsEnabled'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsOCREngineActivated = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOCREngineActivated'],[Fiddle::TYPE_VOIDP],Fiddle::TYPE_INT)
+       @DTWAIN_IsOCRInterfaceInitialized = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOCRInterfaceInitialized'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsOpenSourcesOnSelect = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOpenSourcesOnSelect'],[],Fiddle::TYPE_INT)
        @DTWAIN_IsOrientationSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOrientationSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)
        @DTWAIN_IsOverscanSupported = Fiddle::Function::new(dtwain_dll['DTWAIN_IsOverscanSupported'],[Fiddle::TYPE_VOIDP, Fiddle::TYPE_LONG],Fiddle::TYPE_INT)

@@ -893,7 +893,8 @@ local dtwain_constants = {}
    dtwain_constants.DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105)
    dtwain_constants.DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106)
    dtwain_constants.DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107)
-   dtwain_constants.DTWAIN_ERR_OCR_LAST = (-2108)
+   dtwain_constants.DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108)
+   dtwain_constants.DTWAIN_ERR_OCR_LAST = (-2109)
    dtwain_constants.DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST
    dtwain_constants.DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500)
    dtwain_constants.DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501)
@@ -1667,4 +1668,6 @@ local dtwain_constants = {}
    dtwain_constants.DTWAIN_CHECKDLLVERGREATEREQ = 4
    dtwain_constants.DTWAIN_RESOURCE_COPYRIGHT = 9700
    dtwain_constants.DTWAIN_COMPONENT_JPEGXL = 1
+   dtwain_constants.DTWAIN_COMPONENT_RESOURCES = 2
+   dtwain_constants.DTWAIN_COMPONENT_TRANSYMOCR = 3
 return dtwain_constants

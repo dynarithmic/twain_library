@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="TwainConstants.fs" />
     <Compile Include="dtwainapi.fs" />
     <Compile Include="fsharpdemo.fs" />
   </ItemGroup>

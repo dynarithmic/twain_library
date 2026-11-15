@@ -1019,7 +1019,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105);
         public const int DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106);
         public const int DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
-        public const int DTWAIN_ERR_OCR_LAST = (-2108);
+        public const int DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108);
+        public const int DTWAIN_ERR_OCR_LAST = (-2109);
         public const int DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
         public const int DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500);
         public const int DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501);
@@ -1831,6 +1832,8 @@ namespace Dynarithmic
         public const int DTWAIN_CHECKDLLVERGREATEREQ = 4;
         public const int DTWAIN_RESOURCE_COPYRIGHT = 9700;
         public const int DTWAIN_COMPONENT_JPEGXL = 1;
+        public const int DTWAIN_COMPONENT_RESOURCES = 2;
+        public const int DTWAIN_COMPONENT_TRANSYMOCR = 3;
 
         public const string DTWAIN_LIBRARY = "dtwain32d.dll";
 
@@ -2261,6 +2264,9 @@ namespace Dynarithmic
         public static extern int DTWAIN_ClearPage(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_CloseOCRInterface();
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_CloseSource(DTWAIN_SOURCE Source);
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -2574,6 +2580,12 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern DTWAIN_ARRAY DTWAIN_EnumNoiseFiltersEx(DTWAIN_SOURCE Source);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_EnumOCREngines(ref DTWAIN_ARRAY OCRInterfaces);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern DTWAIN_ARRAY DTWAIN_EnumOCREnginesEx();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_EnumOCRInterfaces(ref DTWAIN_ARRAY OCRInterfaces);
@@ -3882,6 +3894,9 @@ namespace Dynarithmic
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_IsOCREngineActivated(DTWAIN_OCRENGINE OCREngine);
+
+        [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern int DTWAIN_IsOCRInterfaceInitialized();
 
         [DllImport(DTWAIN_LIBRARY,  ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern int DTWAIN_IsOpenSourcesOnSelect();

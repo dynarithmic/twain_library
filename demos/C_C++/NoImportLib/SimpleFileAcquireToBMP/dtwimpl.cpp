@@ -227,6 +227,7 @@
     D_CLEARERRORBUFFERFUNC                        DYNDTWAIN_API::DTWAIN_ClearErrorBuffer = nullptr;
     D_CLEARPDFTEXTELEMENTSFUNC                    DYNDTWAIN_API::DTWAIN_ClearPDFTextElements = nullptr;
     D_CLEARPAGEFUNC                               DYNDTWAIN_API::DTWAIN_ClearPage = nullptr;
+    D_CLOSEOCRINTERFACEFUNC                       DYNDTWAIN_API::DTWAIN_CloseOCRInterface = nullptr;
     D_CLOSESOURCEFUNC                             DYNDTWAIN_API::DTWAIN_CloseSource = nullptr;
     D_CLOSESOURCEUIFUNC                           DYNDTWAIN_API::DTWAIN_CloseSourceUI = nullptr;
     D_CONVERTDIBTOBITMAPFUNC                      DYNDTWAIN_API::DTWAIN_ConvertDIBToBitmap = nullptr;
@@ -335,6 +336,8 @@
     D_ENUMMAXBUFFERSEXFUNC                        DYNDTWAIN_API::DTWAIN_EnumMaxBuffersEx = nullptr;
     D_ENUMNOISEFILTERSFUNC                        DYNDTWAIN_API::DTWAIN_EnumNoiseFilters = nullptr;
     D_ENUMNOISEFILTERSEXFUNC                      DYNDTWAIN_API::DTWAIN_EnumNoiseFiltersEx = nullptr;
+    D_ENUMOCRENGINESFUNC                          DYNDTWAIN_API::DTWAIN_EnumOCREngines = nullptr;
+    D_ENUMOCRENGINESEXFUNC                        DYNDTWAIN_API::DTWAIN_EnumOCREnginesEx = nullptr;
     D_ENUMOCRINTERFACESFUNC                       DYNDTWAIN_API::DTWAIN_EnumOCRInterfaces = nullptr;
     D_ENUMOCRINTERFACESEXFUNC                     DYNDTWAIN_API::DTWAIN_EnumOCRInterfacesEx = nullptr;
     D_ENUMOCRSUPPORTEDCAPSFUNC                    DYNDTWAIN_API::DTWAIN_EnumOCRSupportedCaps = nullptr;
@@ -855,6 +858,7 @@
     D_ISMSGNOTIFYENABLEDFUNC                      DYNDTWAIN_API::DTWAIN_IsMsgNotifyEnabled = nullptr;
     D_ISNOTIFYTRIPLETSENABLEDFUNC                 DYNDTWAIN_API::DTWAIN_IsNotifyTripletsEnabled = nullptr;
     D_ISOCRENGINEACTIVATEDFUNC                    DYNDTWAIN_API::DTWAIN_IsOCREngineActivated = nullptr;
+    D_ISOCRINTERFACEINITIALIZEDFUNC               DYNDTWAIN_API::DTWAIN_IsOCRInterfaceInitialized = nullptr;
     D_ISOPENSOURCESONSELECTFUNC                   DYNDTWAIN_API::DTWAIN_IsOpenSourcesOnSelect = nullptr;
     D_ISORIENTATIONSUPPORTEDFUNC                  DYNDTWAIN_API::DTWAIN_IsOrientationSupported = nullptr;
     D_ISOVERSCANSUPPORTEDFUNC                     DYNDTWAIN_API::DTWAIN_IsOverscanSupported = nullptr;
@@ -1499,6 +1503,7 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_ClearErrorBuffer, hModule)
           LOADFUNCTIONIMPL(DTWAIN_ClearPDFTextElements, hModule)
           LOADFUNCTIONIMPL(DTWAIN_ClearPage, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_CloseOCRInterface, hModule)
           LOADFUNCTIONIMPL(DTWAIN_CloseSource, hModule)
           LOADFUNCTIONIMPL(DTWAIN_CloseSourceUI, hModule)
           LOADFUNCTIONIMPL(DTWAIN_ConvertDIBToBitmap, hModule)
@@ -1607,6 +1612,8 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumMaxBuffersEx, hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumNoiseFilters, hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumNoiseFiltersEx, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_EnumOCREngines, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_EnumOCREnginesEx, hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumOCRInterfaces, hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumOCRInterfacesEx, hModule)
           LOADFUNCTIONIMPL(DTWAIN_EnumOCRSupportedCaps, hModule)
@@ -2127,6 +2134,7 @@ int DYNDTWAIN_API::InitDTWAINInterface(DYNDTWAIN_API*, HMODULE hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsMsgNotifyEnabled, hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsNotifyTripletsEnabled, hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsOCREngineActivated, hModule)
+          LOADFUNCTIONIMPL(DTWAIN_IsOCRInterfaceInitialized, hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsOpenSourcesOnSelect, hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsOrientationSupported, hModule)
           LOADFUNCTIONIMPL(DTWAIN_IsOverscanSupported, hModule)

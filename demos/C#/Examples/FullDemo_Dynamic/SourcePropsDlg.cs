@@ -7,7 +7,6 @@ using DTWAIN_ARRAY = System.IntPtr;
 
 namespace TWAINDemo
 {
-
     public partial class SourcePropsDlg : Form
     {
         public SourcePropsDlg()

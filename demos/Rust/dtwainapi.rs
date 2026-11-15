@@ -264,6 +264,7 @@ type DtwainclearbuffersFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainclearerrorbufferFunc = unsafe extern "C" fn() -> i32;
 type DtwainclearpdftextelementsFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainclearpageFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwaincloseocrinterfaceFunc = unsafe extern "C" fn() -> i32;
 type DtwainclosesourceFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainclosesourceuiFunc = unsafe extern "C" fn(*mut c_void) -> i32;
 type DtwainconvertdibtobitmapFunc = unsafe extern "C" fn(*mut c_void,*mut c_void) -> *mut c_void;
@@ -372,6 +373,8 @@ type DtwainenummaxbuffersFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_voi
 type DtwainenummaxbuffersexFunc = unsafe extern "C" fn(*mut c_void,i32) -> *mut c_void;
 type DtwainenumnoisefiltersFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
 type DtwainenumnoisefiltersexFunc = unsafe extern "C" fn(*mut c_void) -> *mut c_void;
+type DtwainenumocrenginesFunc = unsafe extern "C" fn(*mut *mut c_void) -> i32;
+type DtwainenumocrenginesexFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainenumocrinterfacesFunc = unsafe extern "C" fn(*mut *mut c_void) -> i32;
 type DtwainenumocrinterfacesexFunc = unsafe extern "C" fn() -> *mut c_void;
 type DtwainenumocrsupportedcapsFunc = unsafe extern "C" fn(*mut c_void,*mut *mut c_void) -> i32;
@@ -891,6 +894,7 @@ type DtwainismemfilexfersupportedFunc = unsafe extern "C" fn(*mut c_void) -> i32
 type DtwainismsgnotifyenabledFunc = unsafe extern "C" fn() -> i32;
 type DtwainisnotifytripletsenabledFunc = unsafe extern "C" fn() -> i32;
 type DtwainisocrengineactivatedFunc = unsafe extern "C" fn(*mut c_void) -> i32;
+type DtwainisocrinterfaceinitializedFunc = unsafe extern "C" fn() -> i32;
 type DtwainisopensourcesonselectFunc = unsafe extern "C" fn() -> i32;
 type DtwainisorientationsupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
 type DtwainisoverscansupportedFunc = unsafe extern "C" fn(*mut c_void,i32) -> i32;
@@ -1451,6 +1455,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_ClearErrorBufferFunc: Symbol<'a, DtwainclearerrorbufferFunc>,
     DTWAIN_ClearPDFTextElementsFunc: Symbol<'a, DtwainclearpdftextelementsFunc>,
     DTWAIN_ClearPageFunc: Symbol<'a, DtwainclearpageFunc>,
+    DTWAIN_CloseOCRInterfaceFunc: Symbol<'a, DtwaincloseocrinterfaceFunc>,
     DTWAIN_CloseSourceFunc: Symbol<'a, DtwainclosesourceFunc>,
     DTWAIN_CloseSourceUIFunc: Symbol<'a, DtwainclosesourceuiFunc>,
     DTWAIN_ConvertDIBToBitmapFunc: Symbol<'a, DtwainconvertdibtobitmapFunc>,
@@ -1559,6 +1564,8 @@ pub struct DTwainAPI<'a>
     DTWAIN_EnumMaxBuffersExFunc: Symbol<'a, DtwainenummaxbuffersexFunc>,
     DTWAIN_EnumNoiseFiltersFunc: Symbol<'a, DtwainenumnoisefiltersFunc>,
     DTWAIN_EnumNoiseFiltersExFunc: Symbol<'a, DtwainenumnoisefiltersexFunc>,
+    DTWAIN_EnumOCREnginesFunc: Symbol<'a, DtwainenumocrenginesFunc>,
+    DTWAIN_EnumOCREnginesExFunc: Symbol<'a, DtwainenumocrenginesexFunc>,
     DTWAIN_EnumOCRInterfacesFunc: Symbol<'a, DtwainenumocrinterfacesFunc>,
     DTWAIN_EnumOCRInterfacesExFunc: Symbol<'a, DtwainenumocrinterfacesexFunc>,
     DTWAIN_EnumOCRSupportedCapsFunc: Symbol<'a, DtwainenumocrsupportedcapsFunc>,
@@ -2078,6 +2085,7 @@ pub struct DTwainAPI<'a>
     DTWAIN_IsMsgNotifyEnabledFunc: Symbol<'a, DtwainismsgnotifyenabledFunc>,
     DTWAIN_IsNotifyTripletsEnabledFunc: Symbol<'a, DtwainisnotifytripletsenabledFunc>,
     DTWAIN_IsOCREngineActivatedFunc: Symbol<'a, DtwainisocrengineactivatedFunc>,
+    DTWAIN_IsOCRInterfaceInitializedFunc: Symbol<'a, DtwainisocrinterfaceinitializedFunc>,
     DTWAIN_IsOpenSourcesOnSelectFunc: Symbol<'a, DtwainisopensourcesonselectFunc>,
     DTWAIN_IsOrientationSupportedFunc: Symbol<'a, DtwainisorientationsupportedFunc>,
     DTWAIN_IsOverscanSupportedFunc: Symbol<'a, DtwainisoverscansupportedFunc>,
@@ -3333,7 +3341,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_ERR_OCR_INVALIDPIXELTYPE: i32 = -2105;
     pub const DTWAIN_ERR_OCR_INVALIDBITDEPTH: i32 = -2106;
     pub const DTWAIN_ERR_OCR_RECOGNITIONERROR: i32 = -2107;
-    pub const DTWAIN_ERR_OCR_LAST: i32 = -2108;
+    pub const DTWAIN_ERR_OCR_SHUTDOWNFAILURE: i32 = -2108;
+    pub const DTWAIN_ERR_OCR_LAST: i32 = -2109;
     pub const DTWAIN_ERR_LAST: i32 = DTwainAPI::DTWAIN_ERR_OCR_LAST;
     pub const DTWAIN_ERR_SOURCE_COULD_NOT_OPEN: i32 = -2500;
     pub const DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE: i32 = -2501;
@@ -4145,6 +4154,8 @@ impl<'a> DTwainAPI<'a>
     pub const DTWAIN_CHECKDLLVERGREATEREQ: i32 = 4;
     pub const DTWAIN_RESOURCE_COPYRIGHT: i32 = 9700;
     pub const DTWAIN_COMPONENT_JPEGXL: i32 = 1;
+    pub const DTWAIN_COMPONENT_RESOURCES: i32 = 2;
+    pub const DTWAIN_COMPONENT_TRANSYMOCR: i32 = 3;
 
     pub fn new(library: &'a Library) -> Result<Self, Box<dyn std::error::Error>>
     {
@@ -4327,6 +4338,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_ClearErrorBuffer: Symbol<DtwainclearerrorbufferFunc> = unsafe { library.get(b"DTWAIN_ClearErrorBuffer")? };
         let DTWAIN_ClearPDFTextElements: Symbol<DtwainclearpdftextelementsFunc> = unsafe { library.get(b"DTWAIN_ClearPDFTextElements")? };
         let DTWAIN_ClearPage: Symbol<DtwainclearpageFunc> = unsafe { library.get(b"DTWAIN_ClearPage")? };
+        let DTWAIN_CloseOCRInterface: Symbol<DtwaincloseocrinterfaceFunc> = unsafe { library.get(b"DTWAIN_CloseOCRInterface")? };
         let DTWAIN_CloseSource: Symbol<DtwainclosesourceFunc> = unsafe { library.get(b"DTWAIN_CloseSource")? };
         let DTWAIN_CloseSourceUI: Symbol<DtwainclosesourceuiFunc> = unsafe { library.get(b"DTWAIN_CloseSourceUI")? };
         let DTWAIN_ConvertDIBToBitmap: Symbol<DtwainconvertdibtobitmapFunc> = unsafe { library.get(b"DTWAIN_ConvertDIBToBitmap")? };
@@ -4435,6 +4447,8 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_EnumMaxBuffersEx: Symbol<DtwainenummaxbuffersexFunc> = unsafe { library.get(b"DTWAIN_EnumMaxBuffersEx")? };
         let DTWAIN_EnumNoiseFilters: Symbol<DtwainenumnoisefiltersFunc> = unsafe { library.get(b"DTWAIN_EnumNoiseFilters")? };
         let DTWAIN_EnumNoiseFiltersEx: Symbol<DtwainenumnoisefiltersexFunc> = unsafe { library.get(b"DTWAIN_EnumNoiseFiltersEx")? };
+        let DTWAIN_EnumOCREngines: Symbol<DtwainenumocrenginesFunc> = unsafe { library.get(b"DTWAIN_EnumOCREngines")? };
+        let DTWAIN_EnumOCREnginesEx: Symbol<DtwainenumocrenginesexFunc> = unsafe { library.get(b"DTWAIN_EnumOCREnginesEx")? };
         let DTWAIN_EnumOCRInterfaces: Symbol<DtwainenumocrinterfacesFunc> = unsafe { library.get(b"DTWAIN_EnumOCRInterfaces")? };
         let DTWAIN_EnumOCRInterfacesEx: Symbol<DtwainenumocrinterfacesexFunc> = unsafe { library.get(b"DTWAIN_EnumOCRInterfacesEx")? };
         let DTWAIN_EnumOCRSupportedCaps: Symbol<DtwainenumocrsupportedcapsFunc> = unsafe { library.get(b"DTWAIN_EnumOCRSupportedCaps")? };
@@ -4954,6 +4968,7 @@ impl<'a> DTwainAPI<'a>
         let DTWAIN_IsMsgNotifyEnabled: Symbol<DtwainismsgnotifyenabledFunc> = unsafe { library.get(b"DTWAIN_IsMsgNotifyEnabled")? };
         let DTWAIN_IsNotifyTripletsEnabled: Symbol<DtwainisnotifytripletsenabledFunc> = unsafe { library.get(b"DTWAIN_IsNotifyTripletsEnabled")? };
         let DTWAIN_IsOCREngineActivated: Symbol<DtwainisocrengineactivatedFunc> = unsafe { library.get(b"DTWAIN_IsOCREngineActivated")? };
+        let DTWAIN_IsOCRInterfaceInitialized: Symbol<DtwainisocrinterfaceinitializedFunc> = unsafe { library.get(b"DTWAIN_IsOCRInterfaceInitialized")? };
         let DTWAIN_IsOpenSourcesOnSelect: Symbol<DtwainisopensourcesonselectFunc> = unsafe { library.get(b"DTWAIN_IsOpenSourcesOnSelect")? };
         let DTWAIN_IsOrientationSupported: Symbol<DtwainisorientationsupportedFunc> = unsafe { library.get(b"DTWAIN_IsOrientationSupported")? };
         let DTWAIN_IsOverscanSupported: Symbol<DtwainisoverscansupportedFunc> = unsafe { library.get(b"DTWAIN_IsOverscanSupported")? };
@@ -5513,6 +5528,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_ClearErrorBufferFunc: DTWAIN_ClearErrorBuffer,
             DTWAIN_ClearPDFTextElementsFunc: DTWAIN_ClearPDFTextElements,
             DTWAIN_ClearPageFunc: DTWAIN_ClearPage,
+            DTWAIN_CloseOCRInterfaceFunc: DTWAIN_CloseOCRInterface,
             DTWAIN_CloseSourceFunc: DTWAIN_CloseSource,
             DTWAIN_CloseSourceUIFunc: DTWAIN_CloseSourceUI,
             DTWAIN_ConvertDIBToBitmapFunc: DTWAIN_ConvertDIBToBitmap,
@@ -5621,6 +5637,8 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_EnumMaxBuffersExFunc: DTWAIN_EnumMaxBuffersEx,
             DTWAIN_EnumNoiseFiltersFunc: DTWAIN_EnumNoiseFilters,
             DTWAIN_EnumNoiseFiltersExFunc: DTWAIN_EnumNoiseFiltersEx,
+            DTWAIN_EnumOCREnginesFunc: DTWAIN_EnumOCREngines,
+            DTWAIN_EnumOCREnginesExFunc: DTWAIN_EnumOCREnginesEx,
             DTWAIN_EnumOCRInterfacesFunc: DTWAIN_EnumOCRInterfaces,
             DTWAIN_EnumOCRInterfacesExFunc: DTWAIN_EnumOCRInterfacesEx,
             DTWAIN_EnumOCRSupportedCapsFunc: DTWAIN_EnumOCRSupportedCaps,
@@ -6140,6 +6158,7 @@ impl<'a> DTwainAPI<'a>
             DTWAIN_IsMsgNotifyEnabledFunc: DTWAIN_IsMsgNotifyEnabled,
             DTWAIN_IsNotifyTripletsEnabledFunc: DTWAIN_IsNotifyTripletsEnabled,
             DTWAIN_IsOCREngineActivatedFunc: DTWAIN_IsOCREngineActivated,
+            DTWAIN_IsOCRInterfaceInitializedFunc: DTWAIN_IsOCRInterfaceInitialized,
             DTWAIN_IsOpenSourcesOnSelectFunc: DTWAIN_IsOpenSourcesOnSelect,
             DTWAIN_IsOrientationSupportedFunc: DTWAIN_IsOrientationSupported,
             DTWAIN_IsOverscanSupportedFunc: DTWAIN_IsOverscanSupported,
@@ -7239,6 +7258,10 @@ impl<'a> DTwainAPI<'a>
         unsafe { return (self.DTWAIN_ClearPageFunc)(Source);  }
     }
 
+    pub fn DTWAIN_CloseOCRInterface(&self) -> i32 {
+        unsafe { return (self.DTWAIN_CloseOCRInterfaceFunc)();  }
+    }
+
     pub fn DTWAIN_CloseSource(&self, Source: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_CloseSourceFunc)(Source);  }
     }
@@ -7669,6 +7692,14 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_EnumNoiseFiltersEx(&self, Source: *mut c_void) -> *mut c_void {
         unsafe { return (self.DTWAIN_EnumNoiseFiltersExFunc)(Source);  }
+    }
+
+    pub fn DTWAIN_EnumOCREngines(&self, OCRInterfaces: *mut *mut c_void) -> i32 {
+        unsafe { return (self.DTWAIN_EnumOCREnginesFunc)(OCRInterfaces);  }
+    }
+
+    pub fn DTWAIN_EnumOCREnginesEx(&self) -> *mut c_void {
+        unsafe { return (self.DTWAIN_EnumOCREnginesExFunc)();  }
     }
 
     pub fn DTWAIN_EnumOCRInterfaces(&self, OCRInterfaces: *mut *mut c_void) -> i32 {
@@ -9745,6 +9776,10 @@ impl<'a> DTwainAPI<'a>
 
     pub fn DTWAIN_IsOCREngineActivated(&self, OCREngine: *mut c_void) -> i32 {
         unsafe { return (self.DTWAIN_IsOCREngineActivatedFunc)(OCREngine);  }
+    }
+
+    pub fn DTWAIN_IsOCRInterfaceInitialized(&self) -> i32 {
+        unsafe { return (self.DTWAIN_IsOCRInterfaceInitializedFunc)();  }
     }
 
     pub fn DTWAIN_IsOpenSourcesOnSelect(&self) -> i32 {

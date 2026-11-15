@@ -932,7 +932,8 @@ DTWAIN_ERR_OCR_INVALIDFILETYPE = (-2104)
 DTWAIN_ERR_OCR_INVALIDPIXELTYPE = (-2105)
 DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106)
 DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107)
-DTWAIN_ERR_OCR_LAST = (-2108)
+DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108)
+DTWAIN_ERR_OCR_LAST = (-2109)
 DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST
 DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500)
 DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501)
@@ -1744,6 +1745,8 @@ DTWAIN_CHECKDLLVERLESSEQ = 3
 DTWAIN_CHECKDLLVERGREATEREQ = 4
 DTWAIN_RESOURCE_COPYRIGHT = 9700
 DTWAIN_COMPONENT_JPEGXL = 1
+DTWAIN_COMPONENT_RESOURCES = 2
+DTWAIN_COMPONENT_TRANSYMOCR = 3
 
 # Example:
 # load the 64-bit unicode version of the dtwain dll
@@ -2023,6 +2026,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_ClearErrorBuffer.restype = ct.c_long
      theDLL.DTWAIN_ClearPDFTextElements.restype = ct.c_long
      theDLL.DTWAIN_ClearPage.restype = ct.c_long
+     theDLL.DTWAIN_CloseOCRInterface.restype = ct.c_long
      theDLL.DTWAIN_CloseSource.restype = ct.c_long
      theDLL.DTWAIN_CloseSourceUI.restype = ct.c_long
      theDLL.DTWAIN_ConvertDIBToBitmap.restype = ct.c_void_p
@@ -2131,6 +2135,8 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumMaxBuffersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumNoiseFilters.restype = ct.c_long
      theDLL.DTWAIN_EnumNoiseFiltersEx.restype = ct.c_void_p
+     theDLL.DTWAIN_EnumOCREngines.restype = ct.c_long
+     theDLL.DTWAIN_EnumOCREnginesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumOCRInterfaces.restype = ct.c_long
      theDLL.DTWAIN_EnumOCRInterfacesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumOCRSupportedCaps.restype = ct.c_long
@@ -2650,6 +2656,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_IsMsgNotifyEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsNotifyTripletsEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsOCREngineActivated.restype = ct.c_long
+     theDLL.DTWAIN_IsOCRInterfaceInitialized.restype = ct.c_long
      theDLL.DTWAIN_IsOpenSourcesOnSelect.restype = ct.c_long
      theDLL.DTWAIN_IsOrientationSupported.restype = ct.c_long
      theDLL.DTWAIN_IsOverscanSupported.restype = ct.c_long
@@ -3313,6 +3320,7 @@ def setup_unicode(theDLL):
      theDLL.DTWAIN_EnumMaxBuffersEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnumNoiseFilters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumNoiseFiltersEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_EnumOCREngines.argtypes = [ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOCRInterfaces.argtypes = [ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOCRSupportedCaps.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOrientations.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
@@ -4366,6 +4374,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_ClearErrorBuffer.restype = ct.c_long
      theDLL.DTWAIN_ClearPDFTextElements.restype = ct.c_long
      theDLL.DTWAIN_ClearPage.restype = ct.c_long
+     theDLL.DTWAIN_CloseOCRInterface.restype = ct.c_long
      theDLL.DTWAIN_CloseSource.restype = ct.c_long
      theDLL.DTWAIN_CloseSourceUI.restype = ct.c_long
      theDLL.DTWAIN_ConvertDIBToBitmap.restype = ct.c_void_p
@@ -4474,6 +4483,8 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumMaxBuffersEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumNoiseFilters.restype = ct.c_long
      theDLL.DTWAIN_EnumNoiseFiltersEx.restype = ct.c_void_p
+     theDLL.DTWAIN_EnumOCREngines.restype = ct.c_long
+     theDLL.DTWAIN_EnumOCREnginesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumOCRInterfaces.restype = ct.c_long
      theDLL.DTWAIN_EnumOCRInterfacesEx.restype = ct.c_void_p
      theDLL.DTWAIN_EnumOCRSupportedCaps.restype = ct.c_long
@@ -4993,6 +5004,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_IsMsgNotifyEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsNotifyTripletsEnabled.restype = ct.c_long
      theDLL.DTWAIN_IsOCREngineActivated.restype = ct.c_long
+     theDLL.DTWAIN_IsOCRInterfaceInitialized.restype = ct.c_long
      theDLL.DTWAIN_IsOpenSourcesOnSelect.restype = ct.c_long
      theDLL.DTWAIN_IsOrientationSupported.restype = ct.c_long
      theDLL.DTWAIN_IsOverscanSupported.restype = ct.c_long
@@ -5656,6 +5668,7 @@ def setup_ansi(theDLL):
      theDLL.DTWAIN_EnumMaxBuffersEx.argtypes = [ct.c_void_p, ct.c_long]
      theDLL.DTWAIN_EnumNoiseFilters.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumNoiseFiltersEx.argtypes = [ct.c_void_p]
+     theDLL.DTWAIN_EnumOCREngines.argtypes = [ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOCRInterfaces.argtypes = [ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOCRSupportedCaps.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
      theDLL.DTWAIN_EnumOrientations.argtypes = [ct.c_void_p, ct.POINTER(ct.c_void_p)]
