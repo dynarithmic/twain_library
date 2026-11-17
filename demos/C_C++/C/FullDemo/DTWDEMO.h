@@ -14,6 +14,7 @@
 #define IDI_SMALL                       108
 #define IDC_DTWDEMO                     109
 #define IDR_MAINFRAME                   128
+#define IDM_HELP_OPTIONS                129
 #define IDM_RETRIEVE_DIB                32773
 #define IDC_STATIC                      -1
 
@@ -185,6 +186,8 @@
 #define IDC_txtUserPassword                 8037  
 #define IDC_txtOwnerPassword                8038  
 #define IDC_chkStampPageNumbers             8039
+#define IDD_dlgOptions                      8040
+#define IDC_edJXLPath                       8041
 
 #define IDD_dlgEnterBlankThreshold     9000
 #define IDC_edBlankThresholdPct        9001

@@ -27,6 +27,7 @@ Public Class CustomSelectSource
             VB_FullDemo.DTWAINAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255)
             listSources.Items.Add(szName.ToString())
         Next
+        VB_FullDemo.DTWAINAPI.DTWAIN_ArrayDestroy(SourceArray)
         listSources.SelectedIndex = 0
         ' Display Info about sources
         Dim sText As String = nCount.ToString() & " TWAIN Source(s) Available for Selection"

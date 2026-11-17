@@ -29,6 +29,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK DisplayOptionsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 
 // Global Variables
@@ -49,8 +50,8 @@ void EnableSourceItems(BOOL bEnable);
 void EnableSelectSourceItems(BOOL bEnable);
 void EnableAllMenuItems(BOOL bEnable);
 void EnableBarcodeMenuItem(DTWAIN_SOURCE source);
-DTWAIN_SOURCE DisplayGetNameDlg();
-DTWAIN_SOURCE DisplayCustomDlg();
+DTWAIN_SOURCE DisplayGetNameDlg(LONG* result);
+DTWAIN_SOURCE DisplayCustomDlg(LONG* result);
 void DisplaySourceProps();
 void SetCaptionToSourceName();
 void AcquireNative();
@@ -68,6 +69,7 @@ void DisplayBlankThresholdOptions();
 void DisableFileXFerSubItems();
 BOOL IsAcquirePDFEncrypted(int PDFType);
 BOOL IsAcquirePDF(int PDFType);
+void DisplayOptions();
 
 INT_PTR DisplayGetFileNameDlg();
 INT_PTR DisplayPDFOptionsDlg(BOOL bUseEncryption);
@@ -240,6 +242,7 @@ UINT g_AllMenuItems[] = { IDM_SELECT_SOURCE,
                           IDM_SHOW_BARCODEINFO };
 
 TCHAR g_CustomLanguage[256];
+TCHAR g_JPEGXLPath[_MAX_PATH];
 
 DTWAIN_PDFTEXTELEMENT g_PDFTextElement;
 int g_BlankThresholdPct = 98;
@@ -285,6 +288,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         else
             return 0;
     }
+
+    g_JPEGXLPath[0] = 0;
 
     DTWAIN_SetAppInfoA("1.0","Demo Program Menu", "Demo Program Family", "Demo Program Name");
 
@@ -440,6 +445,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case IDM_ABOUT:
                    DialogBox(hInst, (LPCTSTR)IDD_ABOUTBOX, hWnd, (DLGPROC)About);
                    break;
+
+                case IDM_HELP_OPTIONS:
+                    DisplayOptions();
+                    break;
 
                 case IDM_SELECT_SOURCE:
                 case IDM_SELECT_SOURCE_BY_NAME:
@@ -624,6 +633,7 @@ BOOL IsMenuItemEnabled(UINT resID)
 void SelectTheSource(int nWhich)
 {
     DTWAIN_SOURCE tempSource=NULL;
+    LONG customSelectionRetCode = 0;
     if ( g_CurrentSource )
     {
         int nReturn = MessageBox(g_hWnd, _T("For this demo, only one Source can be opened.\r\n")
@@ -653,11 +663,11 @@ void SelectTheSource(int nWhich)
         break;
 
         case IDM_SELECT_SOURCE_BY_NAME:
-            tempSource = DisplayGetNameDlg();
+            tempSource = DisplayGetNameDlg(&customSelectionRetCode);
         break;
 
         case IDM_SELECT_SOURCE_CUSTOM:
-            tempSource = DisplayCustomDlg();
+            tempSource = DisplayCustomDlg(&customSelectionRetCode);
         break;
     }
     EnableSelectSourceItems(TRUE);
@@ -693,11 +703,18 @@ void SelectTheSource(int nWhich)
         DisableFileXFerSubItems();
 
         LONG lastError = DTWAIN_GetLastError();
-        wchar_t szCancelMsg[256];
+        if ( lastError == DTWAIN_ERR_SOURCESELECTION_CANCELED || customSelectionRetCode == IDCANCEL)
+        {
+            MessageBoxW(g_hWnd, L"Source selection cancelled",L"Information", MB_ICONINFORMATION);
+        }
+        else
+        {
+            wchar_t szCancelMsg[256];
 
-        // We will use the wide version, to ensure we get the proper UTF-8 string
-        DTWAIN_GetErrorStringW(lastError, szCancelMsg, 256);
-        MessageBoxW(g_hWnd, szCancelMsg, L"Information", MB_ICONSTOP);
+            // We will use the wide version, to ensure we get the proper UTF-8 string
+            DTWAIN_GetErrorStringW(lastError, szCancelMsg, 256);
+            MessageBoxW(g_hWnd, szCancelMsg, L"Information", MB_ICONSTOP);
+        }
     }
 }
 
@@ -924,10 +941,10 @@ void AcquireFile(BOOL bUseSource, LONG resourceID, LONG fileType)
 }
 
 
-DTWAIN_SOURCE DisplayGetNameDlg()
+DTWAIN_SOURCE DisplayGetNameDlg(LONG *result)
 {
     g_NamedSource = NULL;
-    DialogBox(g_hInstance, (LPCTSTR)IDD_dlgEnterSourceName, g_hWnd, (DLGPROC)EnterSourceNameProc);
+    *result = DialogBox(g_hInstance, (LPCTSTR)IDD_dlgEnterSourceName, g_hWnd, (DLGPROC)EnterSourceNameProc);
     return g_NamedSource;
 }
 
@@ -952,11 +969,19 @@ void DisplayBarCodeInfo()
     DialogBox(g_hInstance, (LPCTSTR)IDD_dlgBarCodes, g_hWnd, (DLGPROC)DisplayBarCodeInfoProc);
 }
 
-DTWAIN_SOURCE DisplayCustomDlg()
+DTWAIN_SOURCE DisplayCustomDlg(LONG* result)
 {
     g_NamedSource = NULL;
-    DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSelectCustom, g_hWnd, (DLGPROC)DisplayCustomSelectProc);
+    *result = DialogBox(g_hInstance, (LPCTSTR)IDD_dlgSelectCustom, g_hWnd, (DLGPROC)DisplayCustomSelectProc);
     return g_NamedSource;
+}
+
+void DisplayOptions()
+{
+    if ( DialogBox(g_hInstance, (LPCTSTR)IDD_dlgOptions, g_hWnd, (DLGPROC)DisplayOptionsProc) == IDOK)
+    {
+        DTWAIN_SetComponentPath(DTWAIN_COMPONENT_JPEGXL, g_JPEGXLPath);
+    }
 }
 
 void DisplaySourceProps()
@@ -1446,6 +1471,46 @@ LRESULT CALLBACK DisplayBarCodeInfoProc(HWND hDlg, UINT message, WPARAM wParam, 
     return FALSE;
 }
 
+LRESULT CALLBACK DisplayOptionsProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+        case WM_INITDIALOG:
+        {
+            /* Populate the JPEG-XL path edit control */
+            HWND hWndJXLPath = GetDlgItem(hDlg, IDC_edJXLPath);
+            SetWindowText(hWndJXLPath, g_JPEGXLPath);
+            return TRUE;
+        }
+        break;
+        case WM_COMMAND:
+        {
+            int nControl = LOWORD(wParam);
+            int nNotification = HIWORD(wParam);
+
+            switch (nControl)
+            {
+               /* Quit the dialog */
+                case IDOK:
+                {
+                    HWND hWndJXLPath = GetDlgItem(hDlg, IDC_edJXLPath);
+                    GetWindowText(hWndJXLPath, g_JPEGXLPath, _MAX_PATH);
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                }
+                break;
+
+                case IDCANCEL:
+                    EndDialog(hDlg, LOWORD(wParam));
+                    return TRUE;
+                    break;
+            }
+        }
+        break;
+    }
+    return FALSE;
+}
+
 LRESULT CALLBACK DisplayCustomSelectProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -1505,7 +1570,7 @@ LRESULT CALLBACK DisplayCustomSelectProc(HWND hDlg, UINT message, WPARAM wParam,
                     if ( tempSource )
                     {
                         g_NamedSource = tempSource;
-                        EndDialog(hDlg, 1);
+                        EndDialog(hDlg, LOWORD(wParam));
                     }
                     else
                     {

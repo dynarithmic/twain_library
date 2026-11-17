@@ -343,6 +343,7 @@ Public Class TestCapDlg
                     Case DTWAINAPI.DTWAIN_ARRAYLONG
                         Dim lVal As Integer = 0
                         DTWAINAPI.DTWAIN_ArrayGetAtLong(values, i, lVal)
+                        Dim isRange As Boolean = (cmbContainer.SelectedItem.ToString() = "TW_RANGE")
                         ' The CAP_SUPPORTEDDATS Is special in that the values
                         ' represent DG And DAT names, where the DG Is in the hi-word
                         '' of the value, And the DAT Is the low-word of the value.
@@ -367,13 +368,12 @@ Public Class TestCapDlg
                                 ' This Is for the special ICAP_SUPPORTEDCAPS, ICAP_EXTENDEDCAPS, And
                                 ' ICAP_SUPPORTEDCAPSSEGMENTUNIQUE capabilities.  We display the name
                                 ' Not the value
-                                If bGotID = 1 Then
-                                    DTWAINAPI.DTWAIN_GetTwainNameFromConstant(nTranslationID, lVal, szValues, 256)
+                                If bGotID = 1 And Not isRange Then
+                                    DTWAINAPI.DTWAIN_GetTwainNameFromConstantEx(nTranslationID, lVal, szValues, 256)
                                 Else
                                     Dim sPrefix As String = ""
                                     ' Check if this Is a range.  If so, there will always be 5 values
                                     ' where item i Is either Minimum, Maximum, Step, Default, Or Current
-                                    Dim isRange As Boolean = (cmbContainer.SelectedItem.ToString() = "TW_RANGE")
                                     If isRange Then
                                         sPrefix = allRangeNames(i)
                                     End If

@@ -344,6 +344,7 @@ Public Class TestCapDlg
                     Case DTWAINAPI.DTWAIN_ARRAYLONG
                         Dim lVal As Integer = 0
                         VB_FullDemo.DTWAINAPI.DTWAIN_ArrayGetAtLong(values, i, lVal)
+                        Dim isRange As Boolean = (cmbContainer.SelectedItem.ToString() = "TW_RANGE")
                         ' The CAP_SUPPORTEDDATS Is special in that the values
                         ' represent DG And DAT names, where the DG Is in the hi-word
                         '' of the value, And the DAT Is the low-word of the value.
@@ -374,7 +375,6 @@ Public Class TestCapDlg
                                     Dim sPrefix As String = ""
                                     ' Check if this Is a range.  If so, there will always be 5 values
                                     ' where item i Is either Minimum, Maximum, Step, Default, Or Current
-                                    Dim isRange As Boolean = (cmbContainer.SelectedItem.ToString() = "TW_RANGE")
                                     If isRange Then
                                         sPrefix = allRangeNames(i)
                                     End If

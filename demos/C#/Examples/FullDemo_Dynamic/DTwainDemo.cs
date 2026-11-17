@@ -154,6 +154,7 @@ namespace TWAINDemo
         private MenuItem menuItem10;
         private MenuItem idlang_cantonese;
         private MenuItem idlang_turkish;
+        private MenuItem GeneralOptions;
         private Dictionary<int, MenuItem> fileDriverMap = new Dictionary<int, MenuItem>();
 
         public static Dynarithmic.TwainAPI TwainAPI = null; 
@@ -349,10 +350,12 @@ namespace TWAINDemo
             this.UseSourceUI = new System.Windows.Forms.MenuItem();
             this.DiscardBlankPages = new System.Windows.Forms.MenuItem();
             this.ShowBarcodeInfo = new System.Windows.Forms.MenuItem();
+            this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.UseGetMessage = new System.Windows.Forms.MenuItem();
             this.TwainLogging = new System.Windows.Forms.MenuItem();
             this.LoggingOptions = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.idlang_cantonese = new System.Windows.Forms.MenuItem();
             this.idlang_dutch = new System.Windows.Forms.MenuItem();
             this.idlang_english = new System.Windows.Forms.MenuItem();
             this.idlang_french = new System.Windows.Forms.MenuItem();
@@ -367,12 +370,11 @@ namespace TWAINDemo
             this.idlang_simplified_chinese = new System.Windows.Forms.MenuItem();
             this.idlang_spanish = new System.Windows.Forms.MenuItem();
             this.idlang_traditional_chinese = new System.Windows.Forms.MenuItem();
+            this.idlang_turkish = new System.Windows.Forms.MenuItem();
             this.idlang_custom = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.About = new System.Windows.Forms.MenuItem();
-            this.menuItem10 = new System.Windows.Forms.MenuItem();
-            this.idlang_cantonese = new System.Windows.Forms.MenuItem();
-            this.idlang_turkish = new System.Windows.Forms.MenuItem();
+            this.GeneralOptions = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -985,6 +987,11 @@ namespace TWAINDemo
             this.ShowBarcodeInfo.Text = "Show Barcode Information";
             this.ShowBarcodeInfo.Click += new System.EventHandler(this.ShowBarcodeInfo_Click);
             // 
+            // menuItem10
+            // 
+            this.menuItem10.Index = 9;
+            this.menuItem10.Text = "-";
+            // 
             // UseGetMessage
             // 
             this.UseGetMessage.Index = 10;
@@ -1026,6 +1033,12 @@ namespace TWAINDemo
             this.idlang_turkish,
             this.idlang_custom});
             this.menuItem6.Text = "Language";
+            // 
+            // idlang_cantonese
+            // 
+            this.idlang_cantonese.Index = 0;
+            this.idlang_cantonese.Text = "Cantonese";
+            this.idlang_cantonese.Click += new System.EventHandler(this.idlang_cantonese_Click);
             // 
             // idlang_dutch
             // 
@@ -1111,6 +1124,12 @@ namespace TWAINDemo
             this.idlang_traditional_chinese.Text = "Traditional Chinese";
             this.idlang_traditional_chinese.Click += new System.EventHandler(this.idlang_traditional_chinese_Click);
             // 
+            // idlang_turkish
+            // 
+            this.idlang_turkish.Index = 15;
+            this.idlang_turkish.Text = "Turkish";
+            this.idlang_turkish.Click += new System.EventHandler(this.idlang_turkish_Click);
+            // 
             // idlang_custom
             // 
             this.idlang_custom.Index = 16;
@@ -1121,31 +1140,21 @@ namespace TWAINDemo
             // 
             this.menuItem2.Index = 4;
             this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.GeneralOptions,
             this.About});
             this.menuItem2.Text = "Help";
             // 
             // About
             // 
-            this.About.Index = 0;
+            this.About.Index = 1;
             this.About.Text = "About...";
             this.About.Click += new System.EventHandler(this.About_Click);
             // 
-            // menuItem10
+            // GeneralOptions
             // 
-            this.menuItem10.Index = 9;
-            this.menuItem10.Text = "-";
-            // 
-            // idlang_cantonese
-            // 
-            this.idlang_cantonese.Index = 0;
-            this.idlang_cantonese.Text = "Cantonese";
-            this.idlang_cantonese.Click += new System.EventHandler(this.idlang_cantonese_Click);
-            // 
-            // idlang_turkish
-            // 
-            this.idlang_turkish.Index = 15;
-            this.idlang_turkish.Text = "Turkish";
-            this.idlang_turkish.Click += new System.EventHandler(this.idlang_turkish_Click);
+            this.GeneralOptions.Index = 0;
+            this.GeneralOptions.Text = "Options...";
+            this.GeneralOptions.Click += new System.EventHandler(this.GeneralOptions_Click);
             // 
             // DTwainDemo
             // 
@@ -1198,6 +1207,7 @@ namespace TWAINDemo
 
         private void SelectTheSource(int nWhich)
         {
+            var customLastSelection = DialogResult.OK;
             if (SelectedSource != IntPtr.Zero)
             {
                 DialogResult nReturn;
@@ -1240,8 +1250,8 @@ namespace TWAINDemo
 
                 case 1:
                     SelectSourceByNameBox objSelectSourceByName = new SelectSourceByNameBox();
-                    DialogResult nResult = objSelectSourceByName.ShowDialog(this);
-                    if (nResult == DialogResult.OK)
+                    customLastSelection = objSelectSourceByName.ShowDialog(this);
+                    if (customLastSelection == DialogResult.OK)
                     {
                         SelectedSource = TwainAPI.DTWAIN_SelectSourceByName(objSelectSourceByName.GetText());
                     }
@@ -1253,8 +1263,8 @@ namespace TWAINDemo
 
                 case 3:
                     CustomSelectSource customSourceDlg = new CustomSelectSource();
-                    DialogResult dResult = customSourceDlg.ShowDialog(this);
-                    if (dResult == DialogResult.OK)
+                    customLastSelection = customSourceDlg.ShowDialog(this);
+                    if (customLastSelection == DialogResult.OK)
                         SelectedSource = TwainAPI.DTWAIN_SelectSourceByName(customSourceDlg.GetSourceName());
                 break;
             }
@@ -1285,7 +1295,8 @@ namespace TWAINDemo
             else
             {
                 int lastError = TwainAPI.DTWAIN_GetLastError();
-                if (lastError == TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED)
+                if (lastError == TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED ||
+                    customLastSelection == DialogResult.Cancel)
                     MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK);
                 else
                 {
@@ -2069,6 +2080,21 @@ namespace TWAINDemo
         private void idlang_turkish_Click(object sender, EventArgs e)
         {
             load_language("turkish");
+        }
+
+        private void GeneralOptions_Click(object sender, EventArgs e)
+        {
+            GeneralOptionsDlg.GeneralOptionsData origData = new GeneralOptionsDlg.GeneralOptionsData();
+            StringBuilder curJXLPath = new StringBuilder(256);
+            TwainAPI.DTWAIN_GetComponentPath(TwainAPI.DTWAIN_COMPONENT_JPEGXL, curJXLPath, 256);
+            origData.sJXLPath = curJXLPath.ToString();
+            GeneralOptionsDlg dlg = new GeneralOptionsDlg(origData);
+            dlg.StartPosition = FormStartPosition.CenterParent;
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                string jxlPath = dlg.GetGeneraoOptionsData().sJXLPath;
+                TwainAPI.DTWAIN_SetComponentPath(TwainAPI.DTWAIN_COMPONENT_JPEGXL, jxlPath);
+            }
         }
     }
 }

@@ -44,6 +44,7 @@ namespace TWAINDemo
                 TwainAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255);
                 listSources.Items.Add(szName.ToString());
             }
+            TwainAPI.DTWAIN_ArrayDestroy(SourceArray);
             listSources.SelectedIndex = 0;
             // Display Info about sources
             string sText = nCount.ToString() + " TWAIN Source(s) Available for Selection";

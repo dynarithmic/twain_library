@@ -67,6 +67,7 @@ Public Class VB_FullDemo
     Friend WithEvents menuTurkish As MenuItem
     Friend WithEvents TEXTOCR As MenuItem
     Friend WithEvents MenuItem12 As MenuItem
+    Friend WithEvents GeneralOptions As MenuItem
     Public Shared stamp_pdf As Boolean = True
     
     Public Sub New()
@@ -245,6 +246,7 @@ Public Class VB_FullDemo
         Me.UseSourceUI = New System.Windows.Forms.MenuItem()
         Me.DiscardBlankPages = New System.Windows.Forms.MenuItem()
         Me.ShowBarcodeInfo = New System.Windows.Forms.MenuItem()
+        Me.MenuItem12 = New System.Windows.Forms.MenuItem()
         Me.UseGetMessage = New System.Windows.Forms.MenuItem()
         Me.MenuItem10 = New System.Windows.Forms.MenuItem()
         Me.LoggingOptions = New System.Windows.Forms.MenuItem()
@@ -268,7 +270,7 @@ Public Class VB_FullDemo
         Me.menuCustomLanguage = New System.Windows.Forms.MenuItem()
         Me.MenuItem2 = New System.Windows.Forms.MenuItem()
         Me.DTWAINVersion = New System.Windows.Forms.MenuItem()
-        Me.MenuItem12 = New System.Windows.Forms.MenuItem()
+        Me.GeneralOptions = New System.Windows.Forms.MenuItem()
         Me.SuspendLayout
         '
         'MainMenu1
@@ -709,6 +711,11 @@ Public Class VB_FullDemo
         Me.ShowBarcodeInfo.Index = 8
         Me.ShowBarcodeInfo.Text = "Show Barcode Information"
         '
+        'MenuItem12
+        '
+        Me.MenuItem12.Index = 9
+        Me.MenuItem12.Text = "-"
+        '
         'UseGetMessage
         '
         Me.UseGetMessage.Index = 10
@@ -819,18 +826,18 @@ Public Class VB_FullDemo
         'MenuItem2
         '
         Me.MenuItem2.Index = 4
-        Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.DTWAINVersion})
+        Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.GeneralOptions, Me.DTWAINVersion})
         Me.MenuItem2.Text = "Help"
         '
         'DTWAINVersion
         '
-        Me.DTWAINVersion.Index = 0
+        Me.DTWAINVersion.Index = 1
         Me.DTWAINVersion.Text = "DTWAIN Version..."
         '
-        'MenuItem12
+        'GeneralOptions
         '
-        Me.MenuItem12.Index = 9
-        Me.MenuItem12.Text = "-"
+        Me.GeneralOptions.Index = 0
+        Me.GeneralOptions.Text = "Options..."
         '
         'VB_FullDemo
         '
@@ -971,6 +978,7 @@ End Sub
             End If
         End If
         Enabled = False
+        Dim customLastSelection As DialogResult = DialogResult.OK
         Select Case nWhich
             Case 0
                 SelectedSource = DTWAINAPI.DTWAIN_SelectSource2(IntPtr.Zero, Nothing, 0, 0,
@@ -978,16 +986,16 @@ End Sub
                                                                 DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW Or DTWAINAPI.DTWAIN_DLG_SORTNAMES)
             Case 1
                 Dim objSelectSourceByName = New SelectSourceByName()
-                Dim nResult As DialogResult = objSelectSourceByName.ShowDialog()
-                If nResult = DialogResult.OK Then
+                customLastSelection = objSelectSourceByName.ShowDialog()
+                If customLastSelection = DialogResult.OK Then
                     SelectedSource = DTWAINAPI.DTWAIN_SelectSourceByName(objSelectSourceByName.GetText())
                 End If
             Case 2
                 SelectedSource = DTWAINAPI.DTWAIN_SelectDefaultSource
             Case 3
                 Dim customSourceDlg As New CustomSelectSource()
-                Dim dResult As DialogResult = customSourceDlg.ShowDialog()
-                If dResult = DialogResult.OK Then
+                customLastSelection = customSourceDlg.ShowDialog()
+                If customLastSelection = DialogResult.OK Then
                     SelectedSource = DTWAINAPI.DTWAIN_SelectSourceByName(customSourceDlg.GetSourceName())
                 End If
         End Select
@@ -1012,12 +1020,12 @@ End Sub
         Else
             Dim lastError As Integer
             lastError = DTWAINAPI.DTWAIN_GetLastError()
-            If lastError = DTWAINAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED Then
+            If lastError = DTWAINAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED Or customLastSelection = DialogResult.Cancel Then
                 MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK)
             Else
                 Dim szErr = New StringBuilder(100)
                 DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
-                MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
+                MessageBox.Show("Error Selecting and/or opening Source.  " + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
             End If
             SetCaptionToSourceName()
             EnableSourceItems(False)
@@ -1658,5 +1666,18 @@ End Sub
     Private Sub UseGetMessage_Click(sender As Object, e As EventArgs) Handles UseGetMessage.Click
         UseGetMessage.Checked = Not UseGetMessage.Checked
         SetGetMessageLoopProcessing()
+    End Sub
+
+    Private Sub GeneralOptions_Click(sender As Object, e As EventArgs) Handles GeneralOptions.Click
+        Dim origData As GeneralOptionsDlg.GeneralOptionsData = new GeneralOptionsDlg.GeneralOptionsData()
+        Dim curJXLPath As StringBuilder = new StringBuilder(256)
+        DTWAINAPI.DTWAIN_GetComponentPath(DTWAINAPI.DTWAIN_COMPONENT_JPEGXL, curJXLPath, 256)
+        origData.sJXLPath = curJXLPath.ToString()
+        Dim dlg As GeneralOptionsDlg = new GeneralOptionsDlg(origData)
+        dlg.StartPosition = FormStartPosition.CenterParent
+        If dlg.ShowDialog(Me) = DialogResult.OK Then
+            Dim jxlPath As string = dlg.GetGeneraoOptionsData().sJXLPath
+            DTWAINAPI.DTWAIN_SetComponentPath(DTWAINAPI.DTWAIN_COMPONENT_JPEGXL, jxlPath)
+        End If
     End Sub
 End Class

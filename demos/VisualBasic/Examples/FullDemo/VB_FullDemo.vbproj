@@ -198,6 +198,12 @@
     <Compile Include="FileTypeDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GeneralOptionsDlg.Designer.vb">
+      <DependentUpon>GeneralOptionsDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralOptionsDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LogFileSelectionDlg.Designer.vb">
       <DependentUpon>LogFileSelectionDlg.vb</DependentUpon>
     </Compile>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FileTypeDlg.resx">
       <DependentUpon>FileTypeDlg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneralOptionsDlg.resx">
+      <DependentUpon>GeneralOptionsDlg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogFileSelectionDlg.resx">
       <DependentUpon>LogFileSelectionDlg.vb</DependentUpon>
