@@ -113,7 +113,7 @@ The INI setting alone does not load the JPEG XL DLLs. Loading occurs when JPEG X
 An existing directory does **not** guarantee that the correct JPEG XL DLLs and dependencies are present or loadable. Applications can check whether the JPEG XL components can be loaded:
 
 ```cpp
-if (DTWAIN_IsFileTypeAvailable(DTWAIN_JPEGXL))
+if (DTWAIN_IsFileTypeSupported(DTWAIN_JPEGXL))
 {
     // JPEG XL support is available.
 }
@@ -138,7 +138,7 @@ If JPEG XL output cannot be initialized, check the following:
 2. **Dependencies:** The complete set of required DLLs from the matching `jxl32` or `jxl64` directory has been deployed.
 3. **Directory:** The configured component path points to the directory containing `libjxl.dll`. INI paths are not validated during `DTWAIN_SysInitialize()`.
 4. **Timing:** `DTWAIN_SetComponentPath()` was called after `DTWAIN_SysInitialize()` but before JPEG XL was loaded. A subsequent path change fails with `DTWAIN_ERR_JXL_ALREADYLOADED` (`-1095`).
-5. **Availability:** `DTWAIN_IsFileTypeAvailable(DTWAIN_JPEGXL)` confirms that the JPEG XL components can be loaded.
+5. **Availability:** `DTWAIN_IsFileTypeSupported(DTWAIN_JPEGXL)` confirms that the JPEG XL components can be loaded.
 6. **Loading:** Windows can load the DLLs and their dependencies from the deployed locations.
 
 The JPEG XL runtime components are optional; applications that do not use JPEG XL do not need to deploy them.

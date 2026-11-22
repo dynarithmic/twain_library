@@ -46,10 +46,14 @@ DTWAIN supports acquiring images to the following single-page file formats. **Al
 - **BigTIFF (Large TIFF Format)** — Supports the same compression methods as standard TIFF.
 - **WebP (Google WebP Image Format)** — `DTWAIN_WEBP`
 - **WBMP (Wireless Bitmap)** — `DTWAIN_WBMP`
+- **TEXT (Plain Text via OCR)** — `DTWAIN_TEXT`
+  - Recognizes text from a single acquired page using an available OCR engine and saves the result as a text file.
+  - Unlike image formats, TEXT output requires [OCR support to be configured and available](https://github.com/dynarithmic/twain_library/OCRLibrary_Installation.md).
 
 ### Additional Notes
 
 - **Device independence:** DTWAIN handles image encoding independently of the TWAIN device. The device does not need native support for the destination file format.
+- **OCR-generated TEXT:** `DTWAIN_TEXT` produces recognized text rather than an image file and requires an available OCR engine.
 - **JPEG XL dependencies:** JPEG XL is an optional format that requires the appropriate runtime DLLs. Applications can check availability using `DTWAIN_IsFileTypeAvailable(DTWAIN_JPEGXL)`.
 - **BMP and TARGA compression:** Both formats support standard uncompressed output and RLE-compressed output through separate DTWAIN file-type constants.
 - **TIFF and BigTIFF:** Multiple compression methods are available, subject to the image characteristics and compression requirements.
@@ -89,14 +93,19 @@ The following multipage formats are supported for all TWAIN devices, regardless 
   - Applications can configure document properties and encryption settings through the DTWAIN API.
   - Uses DTWAIN multipage PDF file-type constants corresponding to the single-page PDF formats.
 
+- **TEXT (Multipage Plain Text via OCR)** — `DTWAIN_TEXTMULTI`
+  - Recognizes text from multiple acquired pages and writes the results into a single text file.
+  - Requires an [available OCR engine](https://github.com/dynarithmic/twain_library/OCRLibrary_Installation.md); the scanner itself does not need to support text output.
+
 - **DCX (Multipage PCX)** — `DTWAIN_DCX`
   - Supports storing multiple PCX images within a single DCX file.
   - DCX is the multipage extension of the PCX image format.
 
 ### Additional Notes
 
-- **Device independence:** Multipage file generation is handled by DTWAIN. The TWAIN device does not need native support for multipage TIFF, PDF, or DCX.
+- **Device independence:** Multipage file generation is handled by DTWAIN. The TWAIN device does not need native support for multipage TIFF, PDF, DCX, or OCR-generated TEXT.
 - **File-type constants:** Multipage TIFF and PDF use separate DTWAIN constants that are similar to their single-page counterparts. DCX uses `DTWAIN_DCX`.
+- **Multipage OCR text:** `DTWAIN_TEXTMULTI` combines recognized text from multiple scanned pages into one output file, rather than storing page images.
 - **Automatic page handling:** DTWAIN can combine multiple acquired images into a single multipage output file during acquisition.
 - **Advanced format options:** TIFF supports page-specific compression, while PDF supports document metadata and encryption settings.
 ----
@@ -124,7 +133,7 @@ It does not determine whether DTWAIN can acquire images using its built-in singl
 
 ### Important Distinction
 
-- **DTWAIN-encoded formats:** Available for all TWAIN devices. DTWAIN handles the image encoding and file generation.
+- **DTWAIN-generated formats:** DTWAIN handles output file generation independently of device-native file transfer support. OCR-generated TEXT additionally requires an available OCR engine.
 - **Device-native formats:** Available only when supported by the TWAIN device. The device handles the image encoding and file generation.
 
 Applications should use `DTWAIN_IsFileXferSupported()` when checking support for a device-native file transfer format.
