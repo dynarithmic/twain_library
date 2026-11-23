@@ -56,6 +56,38 @@ If initialization fails, verify that the TOCR product is installed and licensed,
 
 Once an OCR engine has been loaded, changing its library directory requires ending the DTWAIN session with `DTWAIN_SysDestroy()` and starting a new one with `DTWAIN_SysInitialize()`. The application can update the INI setting between sessions; restarting the application itself is not required.
 
+## Selecting an OCR engine
+
+After calling `DTWAIN_SysInitialize()` and `DTWAIN_InitOCRInterface()`, the application can select which initialized OCR engine to use. DTWAIN provides a **TWAIN-like OCR engine selection interface**, similar to selecting a TWAIN scanner source.
+
+The following selection functions are available:
+
+| Function | Description |
+| --- | --- |
+| [`DTWAIN_SelectOCREngine()`](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectOCREngine.html) | Displays the **Select OCR Engine** dialog, allowing the user to choose an OCR engine from the available engines. |
+| `DTWAIN_SelectOCREngine2()` | Displays the OCR selection dialog with additional options, such as centering the dialog and sorting the OCR engine names, similar to `DTWAIN_SelectSource2()`. |
+| [`DTWAIN_SelectDefaultOCREngine()`](https://www.dynarithmic.com/onlinehelp/dtwain/dtwain_selectdefaultocrengine.htm) | Selects the default OCR engine without displaying a selection dialog. |
+| [`DTWAIN_SelectOCREngineByName()`](https://www.dynarithmic.com/onlinehelp/dtwain/dtwain_selectocrenginebyname.htm) | Selects an OCR engine by its product name without displaying a selection dialog. |
+
+For example, an application that allows the user to choose an OCR engine can use:
+
+```cpp
+DTWAIN_SysInitialize();
+
+if (DTWAIN_InitOCRInterface())
+{
+    DTWAIN_OCRENGINE engine = DTWAIN_SelectOCREngine();
+    if (engine)
+    {
+        // Use the selected OCR engine for OCR operations.
+    }
+}
+```
+
+`DTWAIN_SelectOCREngine()` returns a `DTWAIN_OCRENGINE` handle when an engine is selected, or `NULL` if selection fails or the user cancels. To distinguish cancellation from an error, check `DTWAIN_GetLastError()`; a zero error code indicates cancellation.
+
+For unattended applications, `DTWAIN_SelectDefaultOCREngine()` or `DTWAIN_SelectOCREngineByName()` avoids displaying a selection dialog. The selected engine handle can be used with DTWAIN's OCR functions. For further information, see the [DTWAIN OCR documentation](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectOCREngine.html).
+
 ## OCR-generated text formats
 
 DTWAIN supports the following OCR-based output formats:
@@ -66,6 +98,24 @@ DTWAIN supports the following OCR-based output formats:
 | `DTWAIN_TEXTMULTI` | Recognized text from multiple scanned pages in one output file |
 
 These formats require a usable OCR engine. Unlike device-native file transfer, text recognition is performed through the configured OCR engine rather than by requiring the TWAIN scanner to support text output.
+
+### Checking OCR file-type support
+
+After calling `DTWAIN_InitOCRInterface()`, an application can check whether an OCR engine is properly installed and initialized by using `DTWAIN_IsFileTypeSupported()`:
+
+```cpp
+if (DTWAIN_IsFileTypeSupported(DTWAIN_TEXT))
+{
+    // Single-page OCR text output is supported.
+}
+
+if (DTWAIN_IsFileTypeSupported(DTWAIN_TEXTMULTI))
+{
+    // Multipage OCR text output is supported.
+}
+```
+
+These checks determine whether **any supported OCR engine** is available and initialized; they are not specific to Transym TOCR. They do not replace the explicit call to `DTWAIN_InitOCRInterface()`.
 
 ## Future support: Tesseract
 
