@@ -65,9 +65,9 @@ The following selection functions are available:
 | Function | Description |
 | --- | --- |
 | [`DTWAIN_SelectOCREngine()`](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectOCREngine.html) | Displays the **Select OCR Engine** dialog, allowing the user to choose an OCR engine from the available engines. |
-| `DTWAIN_SelectOCREngine2()` | Displays the OCR selection dialog with additional options, such as centering the dialog and sorting the OCR engine names, similar to `DTWAIN_SelectSource2()`. |
-| [`DTWAIN_SelectDefaultOCREngine()`](https://www.dynarithmic.com/onlinehelp/dtwain/dtwain_selectdefaultocrengine.htm) | Selects the default OCR engine without displaying a selection dialog. |
-| [`DTWAIN_SelectOCREngineByName()`](https://www.dynarithmic.com/onlinehelp/dtwain/dtwain_selectocrenginebyname.htm) | Selects an OCR engine by its product name without displaying a selection dialog. |
+| [`DTWAIN_SelectOCREngine2()`](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectOCREngine2.html) | Displays the OCR selection dialog with additional options, such as centering the dialog and sorting the OCR engine names, similar to `DTWAIN_SelectSource2()`. |
+| [`DTWAIN_SelectDefaultOCREngine()`](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectDefaultOCREngine.html) | Selects the default OCR engine without displaying a selection dialog. |
+| [`DTWAIN_SelectOCREngineByName()`](https://www.dynarithmic.com/onlinehelp/dtwain/newversion/DTWAIN_SelectOCREngineByName.html) | Selects an OCR engine by its product name without displaying a selection dialog. |
 
 For example, an application that allows the user to choose an OCR engine can use:
 
