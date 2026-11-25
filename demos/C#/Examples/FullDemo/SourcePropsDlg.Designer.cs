@@ -41,6 +41,7 @@ namespace TWAINDemo
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkResetCapsOnExit = new System.Windows.Forms.CheckBox();
             this.btnResetAllCaps = new System.Windows.Forms.Button();
             this.btnTestCap = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@ namespace TWAINDemo
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.OKbutton = new System.Windows.Forms.Button();
-            this.chkResetCapsOnExit = new System.Windows.Forms.CheckBox();
+            this.btnListBadCaps = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.GroupBox3.SuspendLayout();
@@ -186,6 +187,7 @@ namespace TWAINDemo
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnListBadCaps);
             this.groupBox2.Controls.Add(this.chkResetCapsOnExit);
             this.groupBox2.Controls.Add(this.btnResetAllCaps);
             this.groupBox2.Controls.Add(this.btnTestCap);
@@ -203,9 +205,22 @@ namespace TWAINDemo
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Capability Info";
             // 
+            // chkResetCapsOnExit
+            // 
+            this.chkResetCapsOnExit.AutoSize = true;
+            this.chkResetCapsOnExit.Checked = true;
+            this.chkResetCapsOnExit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkResetCapsOnExit.Location = new System.Drawing.Point(11, 233);
+            this.chkResetCapsOnExit.Name = "chkResetCapsOnExit";
+            this.chkResetCapsOnExit.Size = new System.Drawing.Size(118, 17);
+            this.chkResetCapsOnExit.TabIndex = 4;
+            this.chkResetCapsOnExit.Text = "Reset Caps On Exit";
+            this.chkResetCapsOnExit.UseVisualStyleBackColor = true;
+            this.chkResetCapsOnExit.CheckedChanged += new System.EventHandler(this.chkResetCapsOnExit_CheckedChanged);
+            // 
             // btnResetAllCaps
             // 
-            this.btnResetAllCaps.Location = new System.Drawing.Point(246, 182);
+            this.btnResetAllCaps.Location = new System.Drawing.Point(246, 152);
             this.btnResetAllCaps.Name = "btnResetAllCaps";
             this.btnResetAllCaps.Size = new System.Drawing.Size(127, 23);
             this.btnResetAllCaps.TabIndex = 3;
@@ -215,7 +230,7 @@ namespace TWAINDemo
             // 
             // btnTestCap
             // 
-            this.btnTestCap.Location = new System.Drawing.Point(246, 152);
+            this.btnTestCap.Location = new System.Drawing.Point(246, 122);
             this.btnTestCap.Name = "btnTestCap";
             this.btnTestCap.Size = new System.Drawing.Size(128, 23);
             this.btnTestCap.TabIndex = 2;
@@ -226,7 +241,7 @@ namespace TWAINDemo
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(243, 112);
+            this.label8.Location = new System.Drawing.Point(243, 87);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(82, 13);
             this.label8.TabIndex = 1;
@@ -235,7 +250,7 @@ namespace TWAINDemo
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(253, 72);
+            this.label7.Location = new System.Drawing.Point(253, 59);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(72, 13);
             this.label7.TabIndex = 1;
@@ -429,18 +444,15 @@ namespace TWAINDemo
             this.OKbutton.UseVisualStyleBackColor = true;
             this.OKbutton.Click += new System.EventHandler(this.OKbutton_Click);
             // 
-            // chkResetCapsOnExit
+            // btnListBadCaps
             // 
-            this.chkResetCapsOnExit.AutoSize = true;
-            this.chkResetCapsOnExit.Checked = true;
-            this.chkResetCapsOnExit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkResetCapsOnExit.Location = new System.Drawing.Point(11, 233);
-            this.chkResetCapsOnExit.Name = "chkResetCapsOnExit";
-            this.chkResetCapsOnExit.Size = new System.Drawing.Size(118, 17);
-            this.chkResetCapsOnExit.TabIndex = 4;
-            this.chkResetCapsOnExit.Text = "Reset Caps On Exit";
-            this.chkResetCapsOnExit.UseVisualStyleBackColor = true;
-            this.chkResetCapsOnExit.CheckedChanged += new System.EventHandler(this.chkResetCapsOnExit_CheckedChanged);
+            this.btnListBadCaps.Location = new System.Drawing.Point(246, 182);
+            this.btnListBadCaps.Name = "btnListBadCaps";
+            this.btnListBadCaps.Size = new System.Drawing.Size(127, 23);
+            this.btnListBadCaps.TabIndex = 5;
+            this.btnListBadCaps.Text = "List Bad Capabilities...";
+            this.btnListBadCaps.UseVisualStyleBackColor = true;
+            this.btnListBadCaps.Click += new System.EventHandler(this.btnListBadCaps_Click);
             // 
             // SourcePropsDlg
             // 
@@ -453,6 +465,7 @@ namespace TWAINDemo
             this.Controls.Add(this.GroupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SourcePropsDlg";
             this.Text = "Source Properties";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SourcePropsDlg_FormClosing);
@@ -507,5 +520,6 @@ namespace TWAINDemo
         private System.Windows.Forms.Button btnRefreshCustomData;
         private System.Windows.Forms.Button OKbutton;
         private System.Windows.Forms.CheckBox chkResetCapsOnExit;
+        private System.Windows.Forms.Button btnListBadCaps;
     }
 }

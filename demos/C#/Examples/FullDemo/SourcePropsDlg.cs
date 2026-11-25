@@ -138,5 +138,11 @@ namespace TWAINDemo
         {
 
         }
+
+        private void btnListBadCaps_Click(object sender, EventArgs e)
+        {
+            BadCapabilitiesDlg dlg = new BadCapabilitiesDlg(m_Source);
+            dlg.ShowDialog();
+        }
     }
 }

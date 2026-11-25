@@ -236,6 +236,7 @@
 2106 Ungültige OCR-Bittiefe  
 2107 OCR-Erkennungsfehler  
 2108 Bei mindestens einer OCR-Engine ist beim Herunterfahren ein Fehler aufgetreten.
+2109 Fehler bei der Initialisierung der OCR-Engine
 2500 TWAIN Quelle konnte nicht geöffnet werden
 2501 TWAIN Quelle konnte nicht geschlossen werden
 2502 Ungültige Bildinformationen

@@ -161,6 +161,10 @@
     <Compile Include="AboutDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BadCapabilitiesDlg.Designer.vb" />
+    <Compile Include="BadCapabilitiesDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BarCodesDlg.Designer.vb">
       <DependentUpon>BarCodesDlg.vb</DependentUpon>
     </Compile>
@@ -246,6 +250,7 @@
     <EmbeddedResource Include="AboutDlg.resx">
       <DependentUpon>AboutDlg.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BadCapabilitiesDlg.resx" />
     <EmbeddedResource Include="BarCodesDlg.resx">
       <DependentUpon>BarCodesDlg.vb</DependentUpon>
     </EmbeddedResource>

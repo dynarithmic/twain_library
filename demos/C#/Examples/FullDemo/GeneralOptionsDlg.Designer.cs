@@ -82,6 +82,7 @@ namespace TWAINDemo
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtJXLPath);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GeneralOptionsDlg";
             this.Text = "Options";
             this.Load += new System.EventHandler(this.GeneralOptionsDlg_Load);

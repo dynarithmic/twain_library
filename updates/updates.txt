@@ -110,7 +110,30 @@ DTWAIN Version changes
 
     The function can be called repeatedly to detect changes in format availability during application execution.
 
-    Applications can also call this function during acquisition notifications, such as `DTWAIN_TN_QUERYDISCARDPAGE`, to check JPEG XL availability before saving an acquired image.
+    Applications can also call this function during acquisition notifications, such as `DTWAIN_TN_QUERYDISCARDPAGE`, to check JPEG XL 
+    availability before saving an acquired image.
+
+- TWAIN Message Loop Detection Change:
+
+  Automatic GetMessage() TWAIN loop detection is now disabled by default. DTWAIN uses PeekMessage() unless otherwise configured.
+  This change prevents potential hangs caused by the message-loop detection routine.  This change disables automatic message-loop detection, 
+  not the GetMessage() implementation itself. Both message-loop implementations remain available.
+
+  To re-enable GetMessage() loop detection, this can be done either: 
+
+     a) programatically with the existing API function DTWAIN_EnableGetMessageLoopDetection(TRUE). 
+
+     or
+
+     b) Creating a custom `dtwain32.ini` or `dtwain64.ini` file and adding the following section and data:
+
+           [TwainLoopPeek]
+           Testget = 1
+
+     The INI files should then reside in the same directory as the DTWAIN DLL's.
+
+- Fixed issue when DTWAIN_AcquireBuffered() or DTWAIN_AcquiredBufferedEx() is called, and the device returns non-word unaligned DIB data.
+  The symptoms of the issue would be that the returned DIB could have the "staircase" effect when viewed.
 
 - Returning 0 from DTWAIN_TN_FILEPAGESAVING notification when acquiring to image files will now stop the file page being saved.
 

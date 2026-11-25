@@ -237,6 +237,7 @@
 2106 Profondeur de bits OCR invalide  
 2107 Erreur de reconnaissance OCR  
 2108 Échec de l’arrêt d’un ou plusieurs moteurs OCR
+2109 Échec de l’initialisation du moteur OCR
 2500 Ne pouvions pas ouvrir TWAIN la source
 2501 Ne pouvions pas fermer TWAIN la source
 2502 Informations sur l'image invalides

@@ -113,4 +113,9 @@ Public Class SourcePropertiesDlg
             VB_FullDemo.DTWAINAPI.DTWAIN_SetAllCapsToDefault(m_Source)
         End If
     End Sub
+
+    Private Sub btnListBadCaps_Click(sender As Object, e As EventArgs) Handles btnListBadCaps.Click
+        Dim dlg As BadCapabilitiesDlg = new BadCapabilitiesDlg(m_Source)
+        dlg.ShowDialog()
+    End Sub
 End Class

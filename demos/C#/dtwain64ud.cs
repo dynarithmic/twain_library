@@ -526,6 +526,7 @@ namespace Dynarithmic
         public const int DTWAIN_TN_QUERYUPDATEDIBORIG = 1308;
         public const int DTWAIN_TN_QUERYUPDATEDIBRESAMPLED = 1309;
         public const int DTWAIN_TN_PENDINGXFERSRETRIEVED = 1310;
+        public const int DTWAIN_TN_STRIPALIGNMENTFAILURE = 1311;
         public const int DTWAIN_PDFOCR_CLEANTEXT1 = 1;
         public const int DTWAIN_PDFOCR_CLEANTEXT2 = 2;
         public const int DTWAIN_MODAL = 0;
@@ -1021,7 +1022,8 @@ namespace Dynarithmic
         public const int DTWAIN_ERR_OCR_INVALIDBITDEPTH = (-2106);
         public const int DTWAIN_ERR_OCR_RECOGNITIONERROR = (-2107);
         public const int DTWAIN_ERR_OCR_SHUTDOWNFAILURE = (-2108);
-        public const int DTWAIN_ERR_OCR_LAST = (-2109);
+        public const int DTWAIN_ERR_OCR_INITFAILURE = (-2109);
+        public const int DTWAIN_ERR_OCR_LAST = (-2110);
         public const int DTWAIN_ERR_LAST = DTWAIN_ERR_OCR_LAST;
         public const int DTWAIN_ERR_SOURCE_COULD_NOT_OPEN = (-2500);
         public const int DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE = (-2501);

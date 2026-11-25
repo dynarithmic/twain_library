@@ -23,12 +23,13 @@ Partial Class SourcePropertiesDlg
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.groupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkResetCapsOnExit = New System.Windows.Forms.CheckBox()
+        Me.listCaps = New System.Windows.Forms.ListBox()
         Me.btnResetAllCaps = New System.Windows.Forms.Button()
         Me.btnTestCap = New System.Windows.Forms.Button()
         Me.label8 = New System.Windows.Forms.Label()
         Me.label7 = New System.Windows.Forms.Label()
         Me.label6 = New System.Windows.Forms.Label()
-        Me.listCaps = New System.Windows.Forms.ListBox()
         Me.edExtendedCaps = New System.Windows.Forms.TextBox()
         Me.edCustomCaps = New System.Windows.Forms.TextBox()
         Me.edTotalCaps = New System.Windows.Forms.TextBox()
@@ -56,15 +57,16 @@ Partial Class SourcePropertiesDlg
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.chkResetCapsOnExit = New System.Windows.Forms.CheckBox()
-        Me.groupBox2.SuspendLayout()
-        Me.groupBox1.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.SuspendLayout()
+        Me.btnListBadCaps = New System.Windows.Forms.Button()
+        Me.groupBox2.SuspendLayout
+        Me.groupBox1.SuspendLayout
+        Me.GroupBox3.SuspendLayout
+        Me.GroupBox4.SuspendLayout
+        Me.SuspendLayout
         '
         'groupBox2
         '
+        Me.groupBox2.Controls.Add(Me.btnListBadCaps)
         Me.groupBox2.Controls.Add(Me.chkResetCapsOnExit)
         Me.groupBox2.Controls.Add(Me.listCaps)
         Me.groupBox2.Controls.Add(Me.btnResetAllCaps)
@@ -79,31 +81,53 @@ Partial Class SourcePropertiesDlg
         Me.groupBox2.Name = "groupBox2"
         Me.groupBox2.Size = New System.Drawing.Size(394, 251)
         Me.groupBox2.TabIndex = 5
-        Me.groupBox2.TabStop = False
+        Me.groupBox2.TabStop = false
         Me.groupBox2.Text = "Capability Info"
+        '
+        'chkResetCapsOnExit
+        '
+        Me.chkResetCapsOnExit.AutoSize = true
+        Me.chkResetCapsOnExit.Checked = true
+        Me.chkResetCapsOnExit.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkResetCapsOnExit.Location = New System.Drawing.Point(10, 220)
+        Me.chkResetCapsOnExit.Name = "chkResetCapsOnExit"
+        Me.chkResetCapsOnExit.Size = New System.Drawing.Size(118, 17)
+        Me.chkResetCapsOnExit.TabIndex = 5
+        Me.chkResetCapsOnExit.Text = "Reset Caps On Exit"
+        Me.chkResetCapsOnExit.UseVisualStyleBackColor = true
+        '
+        'listCaps
+        '
+        Me.listCaps.FormattingEnabled = true
+        Me.listCaps.HorizontalScrollbar = true
+        Me.listCaps.Location = New System.Drawing.Point(10, 20)
+        Me.listCaps.Name = "listCaps"
+        Me.listCaps.Size = New System.Drawing.Size(217, 186)
+        Me.listCaps.Sorted = true
+        Me.listCaps.TabIndex = 0
         '
         'btnResetAllCaps
         '
-        Me.btnResetAllCaps.Location = New System.Drawing.Point(246, 181)
+        Me.btnResetAllCaps.Location = New System.Drawing.Point(233, 144)
         Me.btnResetAllCaps.Name = "btnResetAllCaps"
         Me.btnResetAllCaps.Size = New System.Drawing.Size(127, 23)
         Me.btnResetAllCaps.TabIndex = 4
         Me.btnResetAllCaps.Text = "Reset All Capabilities"
-        Me.btnResetAllCaps.UseVisualStyleBackColor = True
+        Me.btnResetAllCaps.UseVisualStyleBackColor = true
         '
         'btnTestCap
         '
-        Me.btnTestCap.Location = New System.Drawing.Point(246, 150)
+        Me.btnTestCap.Location = New System.Drawing.Point(233, 113)
         Me.btnTestCap.Name = "btnTestCap"
         Me.btnTestCap.Size = New System.Drawing.Size(104, 23)
         Me.btnTestCap.TabIndex = 2
         Me.btnTestCap.Text = "Test Capability..."
-        Me.btnTestCap.UseVisualStyleBackColor = True
+        Me.btnTestCap.UseVisualStyleBackColor = true
         '
         'label8
         '
-        Me.label8.AutoSize = True
-        Me.label8.Location = New System.Drawing.Point(243, 112)
+        Me.label8.AutoSize = true
+        Me.label8.Location = New System.Drawing.Point(244, 64)
         Me.label8.Name = "label8"
         Me.label8.Size = New System.Drawing.Size(82, 13)
         Me.label8.TabIndex = 1
@@ -111,8 +135,8 @@ Partial Class SourcePropertiesDlg
         '
         'label7
         '
-        Me.label7.AutoSize = True
-        Me.label7.Location = New System.Drawing.Point(253, 72)
+        Me.label7.AutoSize = true
+        Me.label7.Location = New System.Drawing.Point(244, 48)
         Me.label7.Name = "label7"
         Me.label7.Size = New System.Drawing.Size(72, 13)
         Me.label7.TabIndex = 1
@@ -120,52 +144,42 @@ Partial Class SourcePropertiesDlg
         '
         'label6
         '
-        Me.label6.AutoSize = True
-        Me.label6.Location = New System.Drawing.Point(264, 32)
+        Me.label6.AutoSize = true
+        Me.label6.Location = New System.Drawing.Point(244, 32)
         Me.label6.Name = "label6"
         Me.label6.Size = New System.Drawing.Size(61, 13)
         Me.label6.TabIndex = 1
         Me.label6.Text = "Total Caps:"
         '
-        'listCaps
-        '
-        Me.listCaps.FormattingEnabled = True
-        Me.listCaps.HorizontalScrollbar = True
-        Me.listCaps.Location = New System.Drawing.Point(10, 20)
-        Me.listCaps.Name = "listCaps"
-        Me.listCaps.Size = New System.Drawing.Size(217, 186)
-        Me.listCaps.Sorted = True
-        Me.listCaps.TabIndex = 0
-        '
         'edExtendedCaps
         '
         Me.edExtendedCaps.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.edExtendedCaps.Location = New System.Drawing.Point(331, 113)
+        Me.edExtendedCaps.Location = New System.Drawing.Point(332, 65)
         Me.edExtendedCaps.Name = "edExtendedCaps"
-        Me.edExtendedCaps.ReadOnly = True
+        Me.edExtendedCaps.ReadOnly = true
         Me.edExtendedCaps.Size = New System.Drawing.Size(42, 13)
         Me.edExtendedCaps.TabIndex = 1
-        Me.edExtendedCaps.TabStop = False
+        Me.edExtendedCaps.TabStop = false
         '
         'edCustomCaps
         '
         Me.edCustomCaps.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.edCustomCaps.Location = New System.Drawing.Point(331, 72)
+        Me.edCustomCaps.Location = New System.Drawing.Point(322, 48)
         Me.edCustomCaps.Name = "edCustomCaps"
-        Me.edCustomCaps.ReadOnly = True
+        Me.edCustomCaps.ReadOnly = true
         Me.edCustomCaps.Size = New System.Drawing.Size(42, 13)
         Me.edCustomCaps.TabIndex = 1
-        Me.edCustomCaps.TabStop = False
+        Me.edCustomCaps.TabStop = false
         '
         'edTotalCaps
         '
         Me.edTotalCaps.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.edTotalCaps.Location = New System.Drawing.Point(331, 32)
+        Me.edTotalCaps.Location = New System.Drawing.Point(311, 32)
         Me.edTotalCaps.Name = "edTotalCaps"
-        Me.edTotalCaps.ReadOnly = True
+        Me.edTotalCaps.ReadOnly = true
         Me.edTotalCaps.Size = New System.Drawing.Size(42, 13)
         Me.edTotalCaps.TabIndex = 1
-        Me.edTotalCaps.TabStop = False
+        Me.edTotalCaps.TabStop = false
         '
         'OK_button
         '
@@ -175,7 +189,7 @@ Partial Class SourcePropertiesDlg
         Me.OK_button.Size = New System.Drawing.Size(75, 23)
         Me.OK_button.TabIndex = 4
         Me.OK_button.Text = "OK"
-        Me.OK_button.UseVisualStyleBackColor = True
+        Me.OK_button.UseVisualStyleBackColor = true
         '
         'groupBox1
         '
@@ -193,7 +207,7 @@ Partial Class SourcePropertiesDlg
         Me.groupBox1.Name = "groupBox1"
         Me.groupBox1.Size = New System.Drawing.Size(394, 173)
         Me.groupBox1.TabIndex = 3
-        Me.groupBox1.TabStop = False
+        Me.groupBox1.TabStop = false
         Me.groupBox1.Text = "General Info"
         '
         'edVersion
@@ -201,54 +215,54 @@ Partial Class SourcePropertiesDlg
         Me.edVersion.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.edVersion.Location = New System.Drawing.Point(91, 144)
         Me.edVersion.Name = "edVersion"
-        Me.edVersion.ReadOnly = True
+        Me.edVersion.ReadOnly = true
         Me.edVersion.Size = New System.Drawing.Size(282, 13)
         Me.edVersion.TabIndex = 1
-        Me.edVersion.TabStop = False
+        Me.edVersion.TabStop = false
         '
         'edVersionInfo
         '
         Me.edVersionInfo.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.edVersionInfo.Location = New System.Drawing.Point(91, 113)
         Me.edVersionInfo.Name = "edVersionInfo"
-        Me.edVersionInfo.ReadOnly = True
+        Me.edVersionInfo.ReadOnly = true
         Me.edVersionInfo.Size = New System.Drawing.Size(282, 13)
         Me.edVersionInfo.TabIndex = 1
-        Me.edVersionInfo.TabStop = False
+        Me.edVersionInfo.TabStop = false
         '
         'edManufacturer
         '
         Me.edManufacturer.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.edManufacturer.Location = New System.Drawing.Point(91, 82)
         Me.edManufacturer.Name = "edManufacturer"
-        Me.edManufacturer.ReadOnly = True
+        Me.edManufacturer.ReadOnly = true
         Me.edManufacturer.Size = New System.Drawing.Size(282, 13)
         Me.edManufacturer.TabIndex = 1
-        Me.edManufacturer.TabStop = False
+        Me.edManufacturer.TabStop = false
         '
         'edFamilyName
         '
         Me.edFamilyName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.edFamilyName.Location = New System.Drawing.Point(91, 51)
         Me.edFamilyName.Name = "edFamilyName"
-        Me.edFamilyName.ReadOnly = True
+        Me.edFamilyName.ReadOnly = true
         Me.edFamilyName.Size = New System.Drawing.Size(282, 13)
         Me.edFamilyName.TabIndex = 1
-        Me.edFamilyName.TabStop = False
+        Me.edFamilyName.TabStop = false
         '
         'edProductName
         '
         Me.edProductName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.edProductName.Location = New System.Drawing.Point(91, 19)
         Me.edProductName.Name = "edProductName"
-        Me.edProductName.ReadOnly = True
+        Me.edProductName.ReadOnly = true
         Me.edProductName.Size = New System.Drawing.Size(282, 13)
         Me.edProductName.TabIndex = 1
-        Me.edProductName.TabStop = False
+        Me.edProductName.TabStop = false
         '
         'label5
         '
-        Me.label5.AutoSize = True
+        Me.label5.AutoSize = true
         Me.label5.Location = New System.Drawing.Point(40, 144)
         Me.label5.Name = "label5"
         Me.label5.Size = New System.Drawing.Size(45, 13)
@@ -257,7 +271,7 @@ Partial Class SourcePropertiesDlg
         '
         'label4
         '
-        Me.label4.AutoSize = True
+        Me.label4.AutoSize = true
         Me.label4.Location = New System.Drawing.Point(19, 113)
         Me.label4.Name = "label4"
         Me.label4.Size = New System.Drawing.Size(66, 13)
@@ -266,7 +280,7 @@ Partial Class SourcePropertiesDlg
         '
         'label3
         '
-        Me.label3.AutoSize = True
+        Me.label3.AutoSize = true
         Me.label3.Location = New System.Drawing.Point(12, 82)
         Me.label3.Name = "label3"
         Me.label3.Size = New System.Drawing.Size(73, 13)
@@ -275,7 +289,7 @@ Partial Class SourcePropertiesDlg
         '
         'label2
         '
-        Me.label2.AutoSize = True
+        Me.label2.AutoSize = true
         Me.label2.Location = New System.Drawing.Point(15, 51)
         Me.label2.Name = "label2"
         Me.label2.Size = New System.Drawing.Size(70, 13)
@@ -284,7 +298,7 @@ Partial Class SourcePropertiesDlg
         '
         'label1
         '
-        Me.label1.AutoSize = True
+        Me.label1.AutoSize = true
         Me.label1.Location = New System.Drawing.Point(7, 20)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(78, 13)
@@ -303,7 +317,7 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(317, 436)
         Me.GroupBox3.TabIndex = 6
-        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.TabStop = false
         Me.GroupBox3.Text = "Custom Data"
         '
         'Button1
@@ -313,7 +327,7 @@ Partial Class SourcePropertiesDlg
         Me.Button1.Size = New System.Drawing.Size(83, 23)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Refresh Data"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'btnShowUIOnly
         '
@@ -322,14 +336,14 @@ Partial Class SourcePropertiesDlg
         Me.btnShowUIOnly.Size = New System.Drawing.Size(97, 23)
         Me.btnShowUIOnly.TabIndex = 3
         Me.btnShowUIOnly.Text = "Show UI Only..."
-        Me.btnShowUIOnly.UseVisualStyleBackColor = True
+        Me.btnShowUIOnly.UseVisualStyleBackColor = true
         '
         'txtDSData
         '
         Me.txtDSData.Location = New System.Drawing.Point(7, 19)
-        Me.txtDSData.Multiline = True
+        Me.txtDSData.Multiline = true
         Me.txtDSData.Name = "txtDSData"
-        Me.txtDSData.ReadOnly = True
+        Me.txtDSData.ReadOnly = true
         Me.txtDSData.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtDSData.Size = New System.Drawing.Size(304, 380)
         Me.txtDSData.TabIndex = 2
@@ -339,30 +353,30 @@ Partial Class SourcePropertiesDlg
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Location = New System.Drawing.Point(331, 113)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ReadOnly = true
         Me.TextBox1.Size = New System.Drawing.Size(42, 13)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.TabStop = False
+        Me.TextBox1.TabStop = false
         '
         'TextBox2
         '
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox2.Location = New System.Drawing.Point(331, 72)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.ReadOnly = true
         Me.TextBox2.Size = New System.Drawing.Size(42, 13)
         Me.TextBox2.TabIndex = 1
-        Me.TextBox2.TabStop = False
+        Me.TextBox2.TabStop = false
         '
         'TextBox3
         '
         Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox3.Location = New System.Drawing.Point(331, 32)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.ReadOnly = true
         Me.TextBox3.Size = New System.Drawing.Size(42, 13)
         Me.TextBox3.TabIndex = 1
-        Me.TextBox3.TabStop = False
+        Me.TextBox3.TabStop = false
         '
         'GroupBox4
         '
@@ -374,15 +388,15 @@ Partial Class SourcePropertiesDlg
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(317, 436)
         Me.GroupBox4.TabIndex = 6
-        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.TabStop = false
         Me.GroupBox4.Text = "JSON Details"
         '
         'txtJSON
         '
         Me.txtJSON.Location = New System.Drawing.Point(7, 19)
-        Me.txtJSON.Multiline = True
+        Me.txtJSON.Multiline = true
         Me.txtJSON.Name = "txtJSON"
-        Me.txtJSON.ReadOnly = True
+        Me.txtJSON.ReadOnly = true
         Me.txtJSON.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtJSON.Size = New System.Drawing.Size(304, 380)
         Me.txtJSON.TabIndex = 2
@@ -392,46 +406,43 @@ Partial Class SourcePropertiesDlg
         Me.TextBox5.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox5.Location = New System.Drawing.Point(331, 113)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.ReadOnly = true
         Me.TextBox5.Size = New System.Drawing.Size(42, 13)
         Me.TextBox5.TabIndex = 1
-        Me.TextBox5.TabStop = False
+        Me.TextBox5.TabStop = false
         '
         'TextBox6
         '
         Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox6.Location = New System.Drawing.Point(331, 72)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
+        Me.TextBox6.ReadOnly = true
         Me.TextBox6.Size = New System.Drawing.Size(42, 13)
         Me.TextBox6.TabIndex = 1
-        Me.TextBox6.TabStop = False
+        Me.TextBox6.TabStop = false
         '
         'TextBox7
         '
         Me.TextBox7.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox7.Location = New System.Drawing.Point(331, 32)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
+        Me.TextBox7.ReadOnly = true
         Me.TextBox7.Size = New System.Drawing.Size(42, 13)
         Me.TextBox7.TabIndex = 1
-        Me.TextBox7.TabStop = False
+        Me.TextBox7.TabStop = false
         '
-        'chkResetCapsOnExit
+        'btnListBadCaps
         '
-        Me.chkResetCapsOnExit.AutoSize = True
-        Me.chkResetCapsOnExit.Checked = True
-        Me.chkResetCapsOnExit.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkResetCapsOnExit.Location = New System.Drawing.Point(10, 220)
-        Me.chkResetCapsOnExit.Name = "chkResetCapsOnExit"
-        Me.chkResetCapsOnExit.Size = New System.Drawing.Size(118, 17)
-        Me.chkResetCapsOnExit.TabIndex = 5
-        Me.chkResetCapsOnExit.Text = "Reset Caps On Exit"
-        Me.chkResetCapsOnExit.UseVisualStyleBackColor = True
+        Me.btnListBadCaps.Location = New System.Drawing.Point(234, 175)
+        Me.btnListBadCaps.Name = "btnListBadCaps"
+        Me.btnListBadCaps.Size = New System.Drawing.Size(126, 23)
+        Me.btnListBadCaps.TabIndex = 6
+        Me.btnListBadCaps.Text = "List Bad Capabilities..."
+        Me.btnListBadCaps.UseVisualStyleBackColor = true
         '
         'SourcePropertiesDlg
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1096, 490)
         Me.Controls.Add(Me.GroupBox4)
@@ -440,23 +451,23 @@ Partial Class SourcePropertiesDlg
         Me.Controls.Add(Me.OK_button)
         Me.Controls.Add(Me.groupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
+        Me.MaximizeBox = false
+        Me.MinimizeBox = false
         Me.Name = "SourcePropertiesDlg"
-        Me.ShowInTaskbar = False
+        Me.ShowInTaskbar = false
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Source Properties"
-        Me.groupBox2.ResumeLayout(False)
-        Me.groupBox2.PerformLayout()
-        Me.groupBox1.ResumeLayout(False)
-        Me.groupBox1.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.ResumeLayout(False)
+        Me.groupBox2.ResumeLayout(false)
+        Me.groupBox2.PerformLayout
+        Me.groupBox1.ResumeLayout(false)
+        Me.groupBox1.PerformLayout
+        Me.GroupBox3.ResumeLayout(false)
+        Me.GroupBox3.PerformLayout
+        Me.GroupBox4.ResumeLayout(false)
+        Me.GroupBox4.PerformLayout
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Private WithEvents groupBox2 As System.Windows.Forms.GroupBox
     Private WithEvents label8 As System.Windows.Forms.Label
     Private WithEvents label7 As System.Windows.Forms.Label
@@ -492,4 +503,5 @@ Partial Class SourcePropertiesDlg
     Friend WithEvents btnShowUIOnly As Windows.Forms.Button
     Friend WithEvents Button1 As Windows.Forms.Button
     Friend WithEvents chkResetCapsOnExit As Windows.Forms.CheckBox
+    Friend WithEvents btnListBadCaps As Windows.Forms.Button
 End Class

@@ -472,6 +472,7 @@ Class DTWAINAPI
     Public Const DTWAIN_TN_QUERYUPDATEDIBORIG As Integer = 1308
     Public Const DTWAIN_TN_QUERYUPDATEDIBRESAMPLED As Integer = 1309
     Public Const DTWAIN_TN_PENDINGXFERSRETRIEVED As Integer = 1310
+    Public Const DTWAIN_TN_STRIPALIGNMENTFAILURE As Integer = 1311
     Public Const DTWAIN_PDFOCR_CLEANTEXT1 As Integer = 1
     Public Const DTWAIN_PDFOCR_CLEANTEXT2 As Integer = 2
     Public Const DTWAIN_MODAL As Integer = 0
@@ -967,7 +968,8 @@ Class DTWAINAPI
     Public Const DTWAIN_ERR_OCR_INVALIDBITDEPTH As Integer = (-2106)
     Public Const DTWAIN_ERR_OCR_RECOGNITIONERROR As Integer = (-2107)
     Public Const DTWAIN_ERR_OCR_SHUTDOWNFAILURE As Integer = (-2108)
-    Public Const DTWAIN_ERR_OCR_LAST As Integer = (-2109)
+    Public Const DTWAIN_ERR_OCR_INITFAILURE As Integer = (-2109)
+    Public Const DTWAIN_ERR_OCR_LAST As Integer = (-2110)
     Public Const DTWAIN_ERR_LAST As Integer = DTWAIN_ERR_OCR_LAST
     Public Const DTWAIN_ERR_SOURCE_COULD_NOT_OPEN As Integer = (-2500)
     Public Const DTWAIN_ERR_SOURCE_COULD_NOT_CLOSE As Integer = (-2501)

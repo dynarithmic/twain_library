@@ -243,6 +243,8 @@
 2105 Tipo de pixel OCR inválido  
 2106 Profundidade de bits OCR inválida  
 2107 Erro de reconhecimento OCR  
+2108 Um ou mais mecanismos de OCR falharam ao encerrar
+2109 Falha na inicialização do mecanismo de OCR
 3000 Selecionar fonte
 3001 &Select
 3002 &Cancel
