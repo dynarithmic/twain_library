@@ -553,6 +553,10 @@
 #define DTWAIN_TN_ACQUIREPAGESSTOPPED           1307
 #define DTWAIN_TN_QUERYUPDATEDIBORIG            1308
 #define DTWAIN_TN_QUERYUPDATEDIBRESAMPLED       1309
+#define DTWAIN_TN_PENDINGXFERSRETRIEVED         1310
+
+/* Sent when buffered transferred strip is misaligned */
+#define DTWAIN_TN_STRIPALIGNMENTFAILURE         1311
 
 /* PDF OCR clean text flags */
 #define DTWAIN_PDFOCR_CLEANTEXT1            1
@@ -941,6 +945,9 @@
 #define DTWAIN_ERR_ACTIVE_TWAINSESSION (-1091)
 #define DTWAIN_ERR_DSMVERSION_NOTSUPPORTED (-1092)
 #define DTWAIN_ERR_TWENUMERATOR_NOTUSED (-1093)
+#define DTWAIN_ERR_JXL_NOTAVAILABLE (-1094)
+#define DTWAIN_ERR_JXL_ALREADYLOADED (-1095)
+#define DTWAIN_ERR_INVALID_PATH      (-1096)
 
 #define TWAIN_ERR_LOW_MEMORY        (-1100)
 #define TWAIN_ERR_FALSE_ALARM       (-1101)
@@ -1054,6 +1061,7 @@
 #define DTWAIN_ERR_CREATE_DIRECTORY (-2078)
 #define DTWAIN_ERR_OCRLIBRARY_NOTFOUND (-2079)
 
+
 /* TwainSave errors */
 #define DTWAIN_TWAINSAVE_OK                (0)
 #define DTWAIN_ERR_TS_FIRST                (-2080)
@@ -1077,7 +1085,9 @@
 #define DTWAIN_ERR_OCR_INVALIDPIXELTYPE    (-2105)
 #define DTWAIN_ERR_OCR_INVALIDBITDEPTH     (-2106)
 #define DTWAIN_ERR_OCR_RECOGNITIONERROR    (-2107)
-#define DTWAIN_ERR_OCR_LAST                (-2108)
+#define DTWAIN_ERR_OCR_SHUTDOWNFAILURE     (-2108)
+#define DTWAIN_ERR_OCR_INITFAILURE         (-2109)
+#define DTWAIN_ERR_OCR_LAST                (-2110)
 
 /* Extra TWAIN Source errors */
 #define DTWAIN_ERR_SOURCE_COULD_NOT_OPEN   (-2500)
@@ -1561,6 +1571,7 @@ DTWAIN DLL are not displayed */
 #define DTWAIN_TWAINDSM_LEGACY                  1
 #define DTWAIN_TWAINDSM_VERSION2                2
 #define DTWAIN_TWAINDSM_LATESTVERSION           4
+#define DTWAIN_TWAINDSM_VERSION2FALLBACK        8
 
 /* Windows TWAIN DSM search logic constants */
 #define DTWAIN_TWAINDSMSEARCH_NOTFOUND         (-1)
@@ -1723,5 +1734,11 @@ DTWAIN DLL are not displayed */
 
 /* DTWAIN Copyright string resource constant */
 #define DTWAIN_RESOURCE_COPYRIGHT  9700
+
+/* DTWAIN add on component path constants */
+#define DTWAIN_COMPONENT_JPEGXL        1
+#define DTWAIN_COMPONENT_RESOURCES     2
+#define DTWAIN_COMPONENT_TRANSYMOCR    3
+
 #endif
 
