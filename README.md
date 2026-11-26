@@ -113,6 +113,8 @@ In addition, the release version of the Programming Database (.PDB) files are av
 
 Note:  To acquire images to the JPEG-XL format, additional support DLL's are required.  These DLL's can be found in the [jpegxl_binaries.zip]() file and must be installed and accessible.  The `jxl32` folder will contain the 32-bit JPEG-XL libraries, while the 64-bit JPEG-XL libraries are found in the `jxl64` folder.  You can use the `DTWAIN_SetComponentPath` DTWAIN API function to set the path where the DLL's are found, or you can place the DLL's in the same directory as the DTWAIN DLL's).  
 
+More information on acquiring images to the JPEG-XL format, including setup, can be found [here](https://github.com/dynarithmic/twain_library/blob/master/JPEGXL_Installation.md).
+
 ----
 
 A breakdown of the main files contained in **DTWAIN-Release-x86.zip** and **DTWAIN-Release-x64.zip** is as follows:
