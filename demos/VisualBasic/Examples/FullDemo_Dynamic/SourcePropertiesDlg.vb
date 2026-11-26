@@ -116,6 +116,6 @@ Public Class SourcePropertiesDlg
 
     Private Sub btnListBadCaps_Click(sender As Object, e As EventArgs) Handles btnListBadCaps.Click
         Dim dlg As BadCapabilitiesDlg = new BadCapabilitiesDlg(m_Source)
-        dlg.ShowDialog()
+        dlg.ShowDialog(Me)
     End Sub
 End Class
