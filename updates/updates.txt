@@ -2,7 +2,15 @@ DTWAIN Version changes
 
 5.10.1
 
-- The Dart programming language binding, dtwainapi.dart, has been added to access the DTWAIN API functions from Dart.  
+- Buffered Memory Transfer Improvements
+
+  DTWAIN 5.10.1 includes important fixes to buffered memory image transfers, particularly for TWAIN drivers 
+  that return image data with non-DWORD-aligned scanlines.
+
+  Developers who previously encountered corrupted, distorted, or incorrectly rendered images when using 
+  DTWAIN_AcquireBuffered() or DTWAIN_AcquireBufferedEx() are encouraged to retry these functions using the 
+  latest version of DTWAIN.
+
 
 - New: JPEG XL (JXL) Image Format Support
 
@@ -113,6 +121,7 @@ DTWAIN Version changes
     Applications can also call this function during acquisition notifications, such as `DTWAIN_TN_QUERYDISCARDPAGE`, to check JPEG XL 
     availability before saving an acquired image.
 
+
 - TWAIN Message Loop Detection Change:
 
   Automatic GetMessage() TWAIN loop detection is now disabled by default. DTWAIN uses PeekMessage() unless otherwise configured.
@@ -132,16 +141,20 @@ DTWAIN Version changes
 
      The INI files should then reside in the same directory as the DTWAIN DLL's.
 
-- Fixed issue when DTWAIN_AcquireBuffered() or DTWAIN_AcquiredBufferedEx() is called, and the device returns non-word unaligned DIB data.
-  The symptoms of the issue would be that the returned DIB could have the "staircase" effect when viewed.
+
+- The Dart programming language binding, dtwainapi.dart, has been added to access the DTWAIN API functions from Dart.  
+
 
 - Returning 0 from DTWAIN_TN_FILEPAGESAVING notification when acquiring to image files will now stop the file page being saved.
 
+
 - Fixed issue when unloading the Transym TOCR DLL on DTWAIN shutdown.
+
 
 - Upgraded following internal image related libraries:
 
       libpng --> 1.6.59
+
 
 
 5.10.0
