@@ -249,7 +249,7 @@
 2507 Fähigkeit kann im aktuellen Zustand nicht ausgehandelt werden.
 3000 Quelle auswählen
 3001 &Auswählen
-3002 &Abbrechen
+3002 A&bbrechen
 3003 Quellen:
 3004 OCR-Engine auswählen
 3005 Eintritt in
