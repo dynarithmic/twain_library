@@ -1,322 +1,329 @@
-0 Geen fout
-501 NULL Raam Hanteert
-502 Herinnering Allocation Mislukking
-503 Kwalijken DLL Hanteert
-504 Kwalijken Bron Hanteert
-505 TWAIN. DLL niet Grondend
-506 Kwalijken TWAIN. DLL
-507 Kwalijken Sessie Hanteert
-508 Kwalijken Twain Manager
-509 Niet laden TWAIN. DLL
-510 Niet open TWAIN bron
-511 Niet afsluiten TWAIN bron
-512 TWAIN bron before uitgevoerd bevel.
-527 Niet voleindigde scan.   X/Y Resolutions want verschillende waarden
-528 Kwalijkene File Namen Gespecificeerd
-532 TWAIN-drieling niet uitgevoerd. Ongeldige Twain Manager
+﻿0 Geen fout
+501 NULL-vensterhandle
+502 Geheugentoewijzing mislukt
+503 Ongeldige DLL-handle
+504 Ongeldige bronhandle
+505 TWAIN Data Source Manager (DSM) niet gevonden
+506 Ongeldige TWAIN.DLL
+507 Ongeldige sessiehandle
+508 Ongeldige TWAIN-manager
+509 Kan TWAIN.DLL niet laden
+510 Kan TWAIN-bron niet openen
+511 Kan TWAIN-bron niet sluiten
+512 De TWAIN-bron moet worden geopend voordat de opdracht wordt uitgevoerd.
+527 Kan de scan niet voltooien. De X- en Y-resoluties hebben verschillende waarden
+528 Ongeldige bestandsnaam opgegeven
+532 TWAIN-triplet niet uitgevoerd. Ongeldige TWAIN-manager
 1000 ***
-1001 Kwalijken DTWAIN_HANDLE
-1002 Kwalijken DTWAIN_SOURCE
-1003 Kwalijken DTWAIN_ARRAY
-1004 Onjuiste DTWAIN_ARRAY type
-1005 Index buiten de grenzen van DTWAIN_ARRAY: %1
-1006 Out of heap herinnering
-1007 DTWAIN niet geschapen TWAIN raam
-1008 Kwalijken Pixel Getypt
-1009 Kwalijken DTWAIN_CAPCONTAINER
-1010 No DTWAIN Sessie gestart.   Gebruik DTWAIN _StartTwainSession
-1011 Kwalijken DTWAIN_ACQUIRE nummer
-1012 Kwalijken TWAIN Vermogen
-1013 Bron niet gesteund vermogen: %1
-1014 Algemene TWAIN Vergissing
-1015 Mislukt Hook toepassing boodschap queue
-1016 Kwalijken Bestanden namen argument doorvarend
-1017 DTWAIN niet _ARRAY niet inhoudt waarden
-1018 Kwalijken beeld file formaat gespecificeerd
-1019 Kwalijken Dib page
-1020 Bron huidig verwerven beeld
-1021 Kwalijken parameter doorvarend
-1022 Kwalijken Reikwijdte gespecificeerd: Check boven lageren limits or stap formaat
-1023 TWAIN gebruikeren interface niet gestart.   Middel vergissing or Verwerven heeft gebruikeren interface
-1024 Bron niet gesteund gespecificeerd middel eenheden
-1025 Sprake hulpbron DLL niet grondend
-1026 TWAIN Bron is openen
-1027 Bron Middel Gebeurtenis niet gesteund
-1028 Bron UI Slechts wijze niet gesteund
-1029 Vergissing. Kan niet open Bron UI opnieuw
-1030 No gesteund want setting vermogen
-1031 Bron niet gesteund bestanden overplaatsing
-1032 Gespecificeerd beetje diepten niet gesteund
-1033 Bron niet heeft vermogen.   Possibly corrumpeert or apparatuur mislukking
-1034 Buffered overplaatsing aanwendend Dakpan niet gesteund
-1035 Kwalijken DTWAIN_FRAMED.   Nulpunt type stel DTWAIN element geteld must= 4
-1036 Dit functies niet gesteund in gelimiteerd versie of DTWAIN.   Je upgrade naar geregistreerde versie of DTWAIN
-1037 Bron or middel niet gesteund document feeder
-1038 Bron or middel niet gesteund querying of document laden in document feeder
-1039 Herinnering uitzondering vergissing while belt Twain DSM.   DSM stel in inconsistenten staat
-1040 Invalid TWAIN state transition
-1041 Niet-ondersteund type van uitgebreide afbeeldingsinformatie
-1042 DLL-bronbestand niet gevonden  
-1043 DTWAIN Niet geïnitialiseerd  
-1044 Geen TWAIN-bronnen gevonden  
-1045 TWAIN is niet geïnstalleerd  
-1046 Onjuiste uitvoeringsdraad  
-1047 Slechte capaciteitsgegevens type  
-1048 Capaciteit heeft onbekend gegevenstype  
-1049 Demo Version of DTWAIN does not support this file type
-1050 Selectie Geannuleerd
-1051 DTWAIN Resources not found
-1052 String komt niet overeen met arraytype
-1053 DTWAIN ARRAY not the same type
-1054 Bron niet geïnstalleerd  
-1055 Bron ondersteunt geen geheugenbestandoverdrachten
-1056 Area array is te klein. Array moet ten minste 4 items bevatten
-1057 Kan logbestand niet maken.
-1058 Bron ondersteunt het TWAIN-bestandssysteem niet.
+1001 Ongeldige DTWAIN_HANDLE
+1002 Ongeldige DTWAIN_SOURCE
+1003 Ongeldige DTWAIN_ARRAY
+1004 Onjuist DTWAIN_ARRAY-type
+1005 Index buiten het bereik van DTWAIN_ARRAY: %1
+1006 Onvoldoende heapgeheugen
+1007 DTWAIN kan geen TWAIN-venster maken
+1008 Ongeldig pixeltype
+1009 Ongeldige DTWAIN_CAPCONTAINER
+1010 Er is geen DTWAIN-sessie gestart. U moet DTWAIN_StartTwainSession() aanroepen
+1011 Ongeldig DTWAIN_ACQUIRE-nummer
+1012 Ongeldige TWAIN-capaciteit
+1013 De bron ondersteunt de capaciteit niet: %1
+1014 Algemene TWAIN-fout. Raadpleeg DTWAIN_GetTwainError() voor meer informatie
+1015 Kan geen hook installeren voor de berichtenwachtrij van de toepassing
+1016 Ongeldige bestandsnaam als argument doorgegeven
+1017 DTWAIN_ARRAY bevat geen waarden
+1018 Ongeldig afbeeldingsbestandsformaat opgegeven
+1019 Ongeldige DIB-pagina
+1020 De bron is momenteel bezig met het verwerven van een afbeelding
+1021 Ongeldige parameter doorgegeven
+1022 Ongeldig bereik opgegeven: controleer de boven- en ondergrens of de stapgrootte
+1023 Kan de TWAIN-gebruikersinterface niet starten. Apparaatfout of de acquisitie vereist een gebruikersinterface.
+1024 De bron ondersteunt de opgegeven apparaateenheid niet
+1025 DLL met taalresources niet gevonden
+1026 De TWAIN-bron is niet geopend
+1027 Apparaatgebeurtenissen worden niet ondersteund door de bron
+1028 De modus met uitsluitend de gebruikersinterface wordt niet ondersteund door de bron
+1029 De gebruikersinterface van de bron is al geopend
+1030 Het instellen van de capaciteit wordt niet ondersteund
+1031 De bron ondersteunt geen bestandsoverdrachten
+1032 De opgegeven bitdiepte wordt niet ondersteund
+1033 De bron heeft geen capaciteiten. Mogelijk beschadigd of een hardwarestoring
+1034 Gebufferde overdrachten met tegels worden niet ondersteund
+1035 Ongeldige DTWAIN_FRAME. Het gegevenstype moet DTWAIN_FLOAT zijn en het aantal elementen moet 4 zijn
+1036 Deze functie wordt niet ondersteund in de beperkte versie van DTWAIN. U moet upgraden naar de geregistreerde versie van DTWAIN
+1037 De bron of het apparaat ondersteunt geen documentinvoer
+1038 De bron of het apparaat ondersteunt niet het opvragen of er documenten in de documentinvoer aanwezig zijn
+1039 Geheugenuitzondering bij het aanroepen van de TWAIN DSM. De DSM bevindt zich mogelijk in een inconsistente toestand.
+1040 Ongeldige TWAIN-toestandsovergang
+1041 Niet-ondersteund type uitgebreide afbeeldingsinformatie
+1042 DLL-resourcebestand niet gevonden
+1043 DTWAIN is niet geïnitialiseerd
+1044 Geen TWAIN-bronnen gevonden
+1045 TWAIN is niet geïnstalleerd
+1046 Onjuiste uitvoeringsthread
+1047 Onjuist gegevenstype van de capaciteit
+1048 De capaciteit heeft een onbekend gegevenstype
+1049 De demoversie van DTWAIN ondersteunt dit bestandstype niet
+1050 Bronselectie geannuleerd
+1051 DTWAIN-resources niet gevonden
+1052 De tekenreeks komt niet overeen met het arraytype
+1053 DTWAIN-arrays hebben niet hetzelfde type
+1054 Bron niet geïnstalleerd
+1055 De bron ondersteunt geen bestandsoverdrachten via het geheugen
+1056 De array voor het afbeeldingsgebied is te klein. De array moet ten minste 4 elementen bevatten.
+1057 Kan het DTWAIN-logbestand niet maken.
+1058 De bron ondersteunt het TWAIN-bestandssysteem niet.
 1059 Tegelmodus wordt niet ondersteund voor deze TWAIN-bron.
-1060 DTWAIN32.INI niet gevonden  
-1061 DTWAIN64.INI niet gevonden  
-1062 CRC-controle mislukt. Controleer op een beschadigd twaininfo.txt-bestand  
-1063 De versie van het twaininfo.txt-bestand is ongeldig voor deze versie van DTWAIN  
-1064 Windows API-fout  
-1065 Geen TWAIN-ID komt overeen met de string  
-1066 Dubbele resource-ID gevonden  
-1067 Beschikbare uitgebreide afbeeldingsinformatie waarde
-1068 Ongeldig bitmap teruggegeven door TWAIN-bron (TWAINDSM 2.x)
-1069 Geen afbeeldingen verkregen.
-1070 Afbeeldingsfout  
-1071 Onbekende TWAIN Terugkeer Code  
-1072 Onbekende TWAIN Voorwaarde Code 
-1073 Hulpbron gegevensfout: Uitzondering opgetreden
-1074 Audiotransfers worden niet ondersteund 
-1075 Bronrapport feeder is beschikbaar, maar slaagt niet voor de TWAIN-conformiteitstest (CAP_PAPERDETECTABLE)
-1076 Bron meldt dat er geen mogelijkheden zijn. Mislukte conformiteitstest voor CAP_SUPPORTEDCAPS  
-1077 Mislukking van het conformiteitstest voor CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE of ICAP_XFERMECH ontbreekt op de lijst van mogelijkheden  
-1078 Mislukking van het conformiteitstest voor ICAP_PIXELTYPE.  
-1079 Mislukking van het conformiteitstest voor ICAP_PIXELTYPE. Geen pixeltype-informatie.  
-1080 Mislukking van het conformiteitstest voor ICAP_BITDEPTH.
-1081 Fout bij de conformiteitstest voor ICAP_XFERMECH.
-1082 Fout bij de conformiteitstest voor de standaardmogelijkheden.
-1083 Mismatch in het type uitgebreide afbeeldingsinformatie. Fout bij de TWAIN-conformiteit.
+1060 DTWAIN32.INI niet gevonden
+1061 DTWAIN64.INI niet gevonden
+1062 CRC-controle mislukt. Controleer of het bestand twaininfo.txt beschadigd is
+1063 De versie van het bestand twaininfo.txt is ongeldig voor deze versie van DTWAIN
+1064 Windows API-fout
+1065 Geen TWAIN-ID komt overeen met de tekenreeks
+1066 Dubbele resource-ID gevonden
+1067 Waarde van uitgebreide afbeeldingsinformatie niet beschikbaar
+1068 Ongeldige bitmap geretourneerd door de TWAIN-bron (TWAINDSM 2.x)
+1069 Geen afbeeldingen verworven.
+1070 Fout bij het resamplen van de afbeelding
+1071 Onbekende TWAIN-retourcode
+1072 Onbekende TWAIN-conditiecode
+1073 Fout in resourcegegevens: uitzondering opgetreden
+1074 Audio-overdrachten worden niet ondersteund
+1075 De bron meldt dat documentinvoer beschikbaar is, maar voldoet niet aan de TWAIN-conformiteitstest (CAP_PAPERDETECTABLE).
+1076 De bron meldt dat er geen capaciteiten zijn. Conformiteitstest voor CAP_SUPPORTEDCAPS mislukt
+1077 Conformiteitstest voor CAP_SUPPORTEDCAPS mislukt. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE of ICAP_XFERMECH ontbreekt in de lijst met capaciteiten
+1078 Conformiteitstest voor ICAP_PIXELTYPE mislukt.
+1079 Conformiteitstest voor ICAP_PIXELTYPE mislukt. Geen informatie over het pixeltype.
+1080 Conformiteitstest voor ICAP_BITDEPTH mislukt.
+1081 Conformiteitstest voor ICAP_XFERMECH mislukt.
+1082 Conformiteitstest voor de standaardcapaciteiten mislukt
+1083 Type uitgebreide afbeeldingsinformatie komt niet overeen. Niet conform de TWAIN-specificatie.
 1084 Fout bij het ophalen van uitgebreide afbeeldingsinformatie.
-1085 DTWAIN_RANGE waarde is buiten de grenzen
+1085 DTWAIN_RANGE-waarde ligt buiten het bereik
 1086 DTWAIN_RANGE heeft een stapgrootte van 0
-1087 Leeg of blanco naam gedetecteerd
-1088 De documentinvoer heeft geen papiersensor of de papiersensor wordt niet gedetecteerd.
-1089 DTWAIN DLL kon niet worden geladen of bestaat niet
-1090 DTWAIN DLL is niet de juiste versie
-1091 TWAIN-sessie is momenteel actief
-1092 Voor de bewerking is TWAIN DSM 2.x of later vereist
-1093 TWON_ENUMERATOR-container werd niet gebruikt voor deze bewerking.
-1100 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
-1101 TWAIN Gesteldheid Code: Vergissing
-1102 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
-1103 TWAIN Gesteldheid Code: Nulpunt Bron
-1104 TWAIN Gesteldheid Code: Nulpunt Bron verbonden naar maximaal mogelijke toepassing
-1105 TWAIN Gesteldheid Code: Nulpunt Bron of Nulpunt Bron Manager rapporteert vergissing.   Toepassing niet verantwoordelijken
-1106 TWAIN Gesteldheid Code: Unknown TWAIN vermogen tegenkomt
-1107 TWAIN Gesteldheid Code: Nulpunt parameter stel out of reikwijdte
-1108 TWAIN Gesteldheid Code: Unrecognized TWAIN triplet combinatie
-1109 TWAIN Condition Code: TWAIN triplet out of verwachtte opeenvolging
-1110 TWAIN Gesteldheid Code: Onbekenden bestemming Toepassing in DSM _Entry functies
-1111 TWAIN Gesteldheid Code: Vermogen niet gesteund bij Nulpunt Bron
-1112 TWAIN Gesteldheid Code: Operaties niet gesteund bij vermogen
-1113 TWAIN Gesteldheid Code: Vermogen heeft dependancy op een andere vermogen
-1114 TWAIN Gesteldheid Code: Bestanden beschermde
-1115 TWAIN Gesteldheid Code: File reeds bestaan
-1116 TWAIN Gesteldheid Code: niet File niet grondend
-1117 TWAIN Gesteldheid Code: Adresboek is empty
-1118 TWAIN Gesteldheid Code: Feeder Vergissing
-1119 TWAIN Gesteldheid Code: Feeder detected multiple pagina
-1120 TWAIN Gesteldheid Code: Vergissing geschreven file (schijf stel vollen
-1121 TWAIN Gesteldheid Code: Middel ging offline overdag operaties
-1123 TWAIN Condition Code: Operation failed (cover or door on device is opened)
-1124 TWAIN Condition Code: Operation failed (document has a damaged corner)
-1125 TWAIN Condition Code: Operation failed (focus error during document capture)
-1126 TWAIN Condition Code: Operation failed (document too light)
-1127 TWAIN Condition Code: Operation failed (document too dark)
-1128 TWAIN Condition Code: Operation failed (source has nothing to capture for transfer)
+1087 Een lege naam of een naam met uitsluitend witruimte is gedetecteerd
+1088 De documentinvoer heeft geen papiersensor of de papiersensor is niet gedetecteerd
+1089 De DTWAIN-DLL kan niet worden geladen of bestaat niet
+1090 De DTWAIN-DLL heeft niet de juiste versie.
+1091 De TWAIN-sessie is momenteel actief
+1092 Voor deze bewerking is TWAIN DSM 2.x of hoger vereist
+1093 De TWON_ENUMERATOR-container is niet gebruikt voor deze bewerking.
+1094 Een JPEG XL-DLL of een afhankelijkheid ontbreekt, heeft een ongeldig formaat of een incompatibele architectuur.
+1095 De JPEG XL-bibliotheek is al geladen in de procesruimte van de DTWAIN-DLL.
+1096 Er is een ongeldig bestandspad opgegeven.
+
+1100 TWAIN-conditiecode: Kan de bewerking niet voltooien. Onvoldoende geheugen.
+1101 TWAIN-conditiecode: Geen fout
+1102 TWAIN-conditiecode: Onbekende oorzaak van de fout
+1103 TWAIN-conditiecode: Geen gegevensbron
+1104 TWAIN-conditiecode: De gegevensbron is verbonden met het maximaal mogelijke aantal toepassingen
+1105 TWAIN-conditiecode: De gegevensbron of de Data Source Manager heeft een fout gemeld. De toepassing is niet verantwoordelijk.
+1106 TWAIN-conditiecode: Onbekende TWAIN-capaciteit aangetroffen
+1107 TWAIN-conditiecode: Gegevensparameter ligt buiten het bereik
+1108 TWAIN-conditiecode: Onbekende combinatie van TWAIN-triplets
+1109 TWAIN-conditiecode: TWAIN-triplet valt buiten de verwachte volgorde
+1110 TWAIN-conditiecode: Onbekende doeltoepassing in de functie DSM_Entry
+1111 TWAIN-conditiecode: De capaciteit wordt niet ondersteund door de gegevensbron
+1112 TWAIN-conditiecode: De bewerking wordt niet ondersteund door de capaciteit
+1113 TWAIN-conditiecode: De capaciteit is afhankelijk van een andere capaciteit
+1114 TWAIN-conditiecode: Het bestand is beveiligd
+1115 TWAIN-conditiecode: Het bestand bestaat al
+1116 TWAIN-conditiecode: Bestand niet gevonden
+1117 TWAIN-conditiecode: De map is niet leeg
+1118 TWAIN-conditiecode: Papierstoring in de documentinvoer
+1119 TWAIN-conditiecode: De documentinvoer heeft meerdere pagina’s gedetecteerd
+1120 TWAIN-conditiecode: Fout bij het schrijven naar het bestand (de schijf is mogelijk vol)
+1121 TWAIN-conditiecode: Het apparaat is tijdens de bewerking offline gegaan
+1123 TWAIN-conditiecode: Bewerking mislukt (deksel of klep van het apparaat is geopend)
+1124 TWAIN-conditiecode: Bewerking mislukt (het document heeft een beschadigde hoek)
+1125 TWAIN-conditiecode: Bewerking mislukt (scherpstellingsfout tijdens het vastleggen van het document)
+1126 TWAIN-conditiecode: Bewerking mislukt (document te licht)
+1127 TWAIN-conditiecode: Bewerking mislukt (document te donker)
+1128 TWAIN-conditiecode: Bewerking mislukt (de bron heeft niets om vast te leggen voor overdracht)
 2000  
-2001 Out of herinnering
-2002 Bestanden niet opened
-2003 Vergissing lezing
-2004 Vergissing geschreven
-2005 Invalid parameter gespecificeerd want bitplattegrond functies
-2006 Invalid BMP
-2007 Invalid BMP file met RLE
+2001 Onvoldoende geheugen
+2002 Kan het bestand niet openen
+2003 Fout bij het lezen van het bestand
+2004 Fout bij het schrijven naar het bestand
+2005 Ongeldige parameter opgegeven voor de bitmapfunctie
+2006 Ongeldig BMP-bestand
+2007 Ongeldig BMP-bestand met RLE
 2008  
-2009 Invalid JPEG format
-2010 Invalid Middel Context
-2011 Invalid DIB
+2009 Ongeldig JPEG-formaat
+2010 Ongeldige apparaatcontext
+2011 Ongeldige DIB
 2012  
-2013 No hulpbron vergissing
+2013 Geen resourcefout
 2014  
-2015 Invalid PNG
-2016 Niet geschapen PNG bestanden
-2017 Interne vergissing
-2018 Invalid letterfamilie
+2015 Ongeldig PNG-bestand
+2016 Kan het PNG-bestand niet maken
+2017 Interne fout
+2018 Ongeldig lettertype
 2019  
-2020 Invalid TIFF
-2021 TIFF LZW comprimering niet gesteund
-2022 Invalid PCX format
-2023 Niet geschapen BMP
+2020 Ongeldig TIFF-bestand
+2021 TIFF-compressie met LZW wordt niet ondersteund
+2022 Ongeldig PCX-formaat
+2023 Kan geen BMP-bestand maken
 2024  
 2025  
 2026  
-2027 Invalid Raam Metafile
-2028 Kwalijken Bijten Diepten
+2027 Ongeldig Windows-metabestand
+2028 Ongeldige bitdiepte
 2029 BitBlt mislukt
-2030 Buffer too kleiner
-2031 Beeld heeft too meeste kleur
-2032 Invalid TGA
+2030 Buffer te klein
+2031 De afbeelding heeft te veel kleuren
+2032 Ongeldige TGA
 2033  
 2034  
-2035 DIB niet geschapen
-2036 LZW comprimering niet gesteund
+2035 Kan geen DIB maken
+2036 LZW-compressie wordt niet ondersteund
 2037  
 2038  
 2039  
 2040  
-2041 Vergissing setting Raam Metafile beetje
-2042 Vergissing krijgen Raam Metafile beetje
-2043 Vergissing in PAX file wachtwoord
-2044 Invalid PAX
-2045  
-2046 Invalid PSD format
-2047 PSD Niet gesteund
-2048 Decryption vergissing
-2049 Encryption vergissing
-2050 Comprimering vergissing
-2051 Decompressie vergissing
+2041 Fout bij het instellen van de bits van het Windows-metabestand
+2042 Fout bij het ophalen van de bits van het Windows-metabestand
+2043 Fout in het wachtwoord van het PAX-bestand
+2044 Ongeldige PAX
+2045 Bestandstype of gebruikersoptie wordt niet ondersteund
+2046 Ongeldig PSD-formaat
+2047 PSD wordt niet ondersteund
+2048 Fout bij ontsleuteling
+2049 Fout bij versleuteling
+2050 Compressiefout
+2051 Decompressiefout
 2052  
-2053  
-2054 Invalid TIFF
+2053 Ongeldige bitmapbreedte of -hoogte voor het Wireless Bitmap-formaat (WBMP)
+2054 Ongeldige TIFF-tag
 2055  
-2056 Invalid EXIF format
+2056 Ongeldig EXIF-formaat
 2057  
-2058 TIFLIB32. DLL niet grondend
-2059 TIFLIB16. DLL niet grondend
-2060 PNGLIB16. DLL niet grondend
-2061 JPGLIB16. DLL niet grondend
-2062 Invalid Beetje- per- pixel gespecificeerd
+2058 DTWIMG32.DLL niet gevonden
+2059 TIFLIB16.DLL niet gevonden
+2060 PNGLIB16.DLL niet gevonden
+2061 JPGLIB16.DLL niet gevonden
+2062 Ongeldig aantal bits per pixel opgegeven
 2063 Verkeerde versie van DTWIMG32.DLL
-2064 DTWPDF32.DLL niet grondend
+2064 DTWPDF32.DLL niet gevonden
 2065 Verkeerde versie van DTWPDF32.DLL
-2066 DTWIMG32.DLL niet grondend
+2066 DTWIMG32.DLL niet gevonden
 2067 Verkeerde versie van DTWIMG32.DLL
-2068 DTWIMG32.DLL niet grondend
+2068 DTWIMG32.DLL niet gevonden
 2069 Verkeerde versie van DTWIMG32.DLL
-2070 DTWIMG32.DLL not found
-2071 Wrong version of DTWIMG32.DLL
-2072 Manual Duplex mode unavailable in this version of DTWAIN
-2073 De bewerking is verlopen
-2074 Invalid bitmap width/height for non-Vista Windows ICO format
-2075 TWAIN_32.DLL niet grondend
-2076 TWAINDSM.DLL niet grondend
-2078 Kon map niet aanmaken 
-2079 Transym OCR DLL niet grondend
-2081 No filename specified.  Use -f option
-2082 TWAIN not available
-2083 Cannot communicate with TWAIN device
-2084 Error saving output file
-2085 Illegal TwainSave command
-2086 TwainSave acquisition was cancelled
-2087 Failure to acquire image
-2088 Invalid color space.  Only RGB, Grayscale, and Black/White color spaces are supported
-2089 PDF not supported.
-2090 Missing or corrupt DTWTS.DLL.  TwainSave not available
-2101 Ongeldig OCR-pagina opgegeven  
-2102 Ongeldig OCR  
-2103 OCR niet actief  
-2104 Ongeldig OCR-bestandstype  
-2105 Ongeldig OCR-pixeltype  
-2106 Ongeldige OCR-bitdiepte  
-2107 OCR-herkenningsfout  
-2500 Niet open TWAIN bron
-2501 Niet afsluiten TWAIN bron
-2502 Ongeldige afbeeldingsinformatie
-2503 Fout bij het schrijven van gegevens naar bestand
-2504 Operatie niet ondersteund  
-2505 Ongeldig PDF-textelement
-2506 Mogelijkheid was niet ingesteld. Ongeldige waarden werden gebruikt.
-2507 Mogelijkheid kan niet worden onderhandeld in de huidige staat
-3000 Selecteer bron
-3001 &Selecteer
-3002 &Annuleer
-3003 Bronen:
-3004 Selecteer OCR
-3005 Binnenkomen
-3006 Afsluiten
-3007 terugkerende waarde van
-3008 Exception Error
+2070 DTWIMG32.DLL niet gevonden
+2071 Verkeerde versie van DTWIMG32.DLL
+2072 Handmatige duplexmodus is niet beschikbaar in deze versie van DTWAIN
+2073 De wachttijd voor de bewerking is verstreken
+2074 Ongeldige bitmapbreedte of -hoogte voor het Windows ICO-formaat zonder Vista-ondersteuning
+2075 TWAIN_32.DLL of de opgegeven TWAIN Data Source Manager is niet gevonden, is beschadigd of kan niet worden geopend
+2076 TWAINDSM.DLL of de opgegeven TWAIN Data Source Manager is niet gevonden, is beschadigd of kan niet worden geopend
+2077 Ongeldige of niet-bestaande map 
+2078 Kan de map niet maken
+2079 De Transym OCR-DLL is niet gevonden of kan niet worden geladen.
+2081 Geen bestandsnaam opgegeven. Gebruik de optie -f
+2082 TWAIN is niet beschikbaar
+2083 Kan niet communiceren met het TWAIN-apparaat
+2084 Fout bij het opslaan van het uitvoerbestand
+2085 Ongeldige TwainSave-opdracht
+2086 De TwainSave-acquisitie is geannuleerd
+2087 Acquisitie van de afbeelding mislukt
+2088 Ongeldige kleurruimte. Alleen RGB, grijswaarden en zwart-wit worden ondersteund
+2089 PDF wordt niet ondersteund.
+2090 DTWTS.DLL ontbreekt of is beschadigd. TwainSave is niet beschikbaar
+2101 Ongeldige OCR-pagina opgegeven
+2102 Ongeldige OCR-engine
+2103 OCR-engine is niet actief
+2104 Ongeldig OCR-bestandstype
+2105 Ongeldig OCR-pixeltype
+2106 Ongeldige OCR-bitdiepte
+2107 OCR-herkenningsfout
+2108 Een of meer OCR-engines konden niet worden afgesloten
+2109 Initialisatie van de OCR-engine mislukt
+2500 Kan TWAIN-bron niet openen
+2501 Kan TWAIN-bron niet sluiten
+2502 Ongeldige afbeeldingsinformatie bij het verwerven van de afbeelding
+2503 Fout bij het schrijven van gegevens naar het bestand
+2504 Bewerking wordt niet ondersteund
+2505 Ongeldig PDF-tekstelement
+2506 De capaciteit is niet ingesteld. Er zijn ongeldige waarden gebruikt.
+2507 De capaciteit kan in de huidige toestand niet worden onderhandeld.
+3000 Bron selecteren
+3001 &Selecteren
+3002 &Annuleren
+3003 Bronnen:
+3004 OCR-engine selecteren
+3005 Begin van
+3006 Einde van
+3007 retourneert de waarde van
+3008 Uitzonderingsfout
 3009 Module
-3010 No parameter info
-3011 Error in getting information for function
+3010 Geen parameterinformatie
+3011 Fout bij het ophalen van informatie over de functie
 3012 Invoer
 3013 Uitvoer: retourcode van DSM
-3014 No information for 
-3015 returned error code
+3014 Geen informatie voor 
+3015 retourneerde foutcode
 3016 Fout
-3017 Tijdelijke bestandsmap bestaat niet
-3018 werd gebeld
-3019 Tijdelijk beeldbestand is
+3017 De map voor tijdelijke bestanden bestaat niet
+3018 aangeroepen
+3019 Tijdelijk afbeeldingsbestand is
 3020 Fout bij het maken van een tijdelijk afbeeldingsbestand
-3021 Afbeeldingsbestand is succesvol aangemaakt
+3021 Afbeeldingsbestand succesvol aangemaakt
 3022 Waarden ingesteld bij terugkeer
 3023 Meer
-3024 Capaciteitenlijst
+3024 Lijst met capaciteiten
 3025 Standaardbron
-3026 Log gestart  
-3027 Log beëindigd
+3026 Logboek gestart
+3027 Logboek beëindigd
 3028 Laatste fout
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
-9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
+9999 Uitzondering opgetreden bij het aanroepen van de TWAIN DSM. Mogelijk beschadigde TWAIN-sessie?
 10000 [Gebruikersbericht]
-10001 Fout bij het sluiten van Twain DSM  
-10002 Fout bij het sluiten van Twain-sessie  
-10003 Fout bij het sluiten van DTWAIN Manager  
-10004 TWAIN Source Manager, sessie en DTWAIN succesvol gesloten  
-10005 Kon subklasse niet verwijderen van gebruikersvenster  
-10006 Apparaattype en vereiste TWAIN-type komen niet overeen.
-10007 Waarschuwing: Bestandscompressietype is onbekend of komt niet overeen met het gekozen afbeeldings type.
-9500 TWAIN Gesteldheid Code: Vergissing
-9501 TWAIN Gesteldheid Code: Unknown oorzaak of mislukking
-9502 TWAIN Gesteldheid niet Code: niet voleindigde operaties.   Ontoerijkende Herinnering
-9503 TWAIN Gesteldheid Code: Nulpunt Bron
-9504 TWAIN Gesteldheid Code: Nulpunt Bron verbonden naar maximaal mogelijke toepassing
-9505 TWAIN Gesteldheid Code: Nulpunt Bron of Nulpunt Bron Manager rapporteert vergissing.   Toepassing niet verantwoordelijken
-9506 TWAIN Gesteldheid Code: Unknown TWAIN vermogen tegenkomt
-9509 TWAIN Gesteldheid Code: Unrecognized TWAIN triplet combinatie
-9510 TWAIN Gesteldheid Code: Nulpunt parameter stel out of reikwijdte
-9511 TWAIN Condition Code: TWAIN triplet out of verwachtte opeenvolging
-9512 TWAIN Gesteldheid Code: Onbekenden bestemming Toepassing in DSM _Entry functies
-9513 TWAIN Gesteldheid Code: Vermogen niet gesteund bij Nulpunt Bron
-9514 TWAIN Gesteldheid Code: Operaties niet gesteund bij vermogen
-9515 TWAIN Gesteldheid Code: Vermogen heeft dependancy op een andere vermogen
-9516 TWAIN Gesteldheid Code: Bestanden beschermde
-9517 TWAIN Gesteldheid Code: File reeds bestaan
-9518 TWAIN Gesteldheid Code: niet File niet grondend
-9519 TWAIN Gesteldheid Code: Adresboek is empty
-9520 TWAIN Gesteldheid Code: Feeder Vergissing
-9521 TWAIN Gesteldheid Code: Feeder detected multiple pagina
-9522 TWAIN Gesteldheid Code: Vergissing geschreven file (schijf stel vollen
-9523 TWAIN Gesteldheid Code: Middel ging offline overdag operaties
-9524 TWAIN Statuscode: Bewerking mislukt (deksel of klep van het apparaat is geopend)
-9525 TWAIN Statuscode: Bewerking mislukt (document heeft een beschadigde hoek)
-9526 TWAIN Statuscode: Bewerking mislukt (fout bij scherpstelling tijdens documentcaptatie)
-9527 TWAIN Statuscode: Bewerking mislukt (document is te licht)
-9528 TWAIN Statuscode: Bewerking mislukt (document is te donker)
-9529 TWAIN Statuscode: Bewerking mislukt (bron heeft niets om te capturen voor overdracht)
-9600 TWAIN Retourcode: TWRC_SUCCESS  
-9601 TWAIN Retourcode: TWRC_FAILURE  
-9602 TWAIN Retourcode: TWRC_CHECKSTATUS  
-9603 TWAIN Retourcode: TWRC_CANCEL  
-9604 TWAIN Retourcode: TWRC_DSEVENT  
-9605 TWAIN Retourcode: TWRC_NOTDSEVENT  
-9606 TWAIN Retourcode: TWRC_XFERDONE  
-9607 TWAIN Retourcode: TWRC_ENDOFLIST  
-9608 TWAIN Retourcode: TWRC_INFONOTSUPPORTED  
-9609 TWAIN Retourcode: TWRC_DATANOTAVAILABLE  
-9610 TWAIN Retourcode: TWRC_BUSY  
-9611 TWAIN Retourcode: TWRC_SCANNERLOCKED
+10001 Fout bij het sluiten van de TWAIN DSM
+10002 Fout bij het sluiten van de TWAIN-sessie
+10003 Fout bij het sluiten van de DTWAIN-manager
+10004 TWAIN Source Manager, sessie en DTWAIN succesvol gesloten
+10005 Kan de subclassing van het gebruikersvenster niet ongedaan maken
+10006 Het apparaattype komt niet overeen met het door TWAIN vereiste type.
+10007 Waarschuwing: het bestandscompressietype is onbekend of komt niet overeen met het gekozen afbeeldingstype.
+9500 TWAIN-conditiecode: Geen fout
+9501 TWAIN-conditiecode: Onbekende oorzaak van de fout
+9502 TWAIN-conditiecode: Kan de bewerking niet voltooien. Onvoldoende geheugen.
+9503 TWAIN-conditiecode: Geen gegevensbron
+9504 TWAIN-conditiecode: De gegevensbron is verbonden met het maximaal mogelijke aantal toepassingen
+9505 TWAIN-conditiecode: De gegevensbron of de Data Source Manager heeft een fout gemeld. De toepassing is niet verantwoordelijk.
+9506 TWAIN-conditiecode: Onbekende TWAIN-capaciteit aangetroffen
+9509 TWAIN-conditiecode: Onbekende combinatie van TWAIN-triplets
+9510 TWAIN-conditiecode: Gegevensparameter ligt buiten het bereik
+9511 TWAIN-conditiecode: TWAIN-triplet valt buiten de verwachte volgorde
+9512 TWAIN-conditiecode: Onbekende doeltoepassing in de functie DSM_Entry
+9513 TWAIN-conditiecode: De capaciteit wordt niet ondersteund door de gegevensbron
+9514 TWAIN-conditiecode: De bewerking wordt niet ondersteund door de capaciteit
+9515 TWAIN-conditiecode: De capaciteit is afhankelijk van een andere capaciteit
+9516 TWAIN-conditiecode: Het bestand is beveiligd
+9517 TWAIN-conditiecode: Het bestand bestaat al
+9518 TWAIN-conditiecode: Bestand niet gevonden
+9519 TWAIN-conditiecode: De map is niet leeg
+9520 TWAIN-conditiecode: Papierstoring in de documentinvoer
+9521 TWAIN-conditiecode: De documentinvoer heeft meerdere pagina’s gedetecteerd
+9522 TWAIN-conditiecode: Fout bij het schrijven naar het bestand (de schijf is mogelijk vol)
+9523 TWAIN-conditiecode: Het apparaat is tijdens de bewerking offline gegaan
+9524 TWAIN-conditiecode: Bewerking mislukt (deksel of klep van het apparaat is geopend)
+9525 TWAIN-conditiecode: Bewerking mislukt (het document heeft een beschadigde hoek)
+9526 TWAIN-conditiecode: Bewerking mislukt (scherpstellingsfout tijdens het vastleggen van het document)
+9527 TWAIN-conditiecode: Bewerking mislukt (document te licht)
+9528 TWAIN-conditiecode: Bewerking mislukt (document te donker)
+9529 TWAIN-conditiecode: Bewerking mislukt (de bron heeft niets om vast te leggen voor overdracht)
+9600 TWAIN-retourcode: TWRC_SUCCESS
+9601 TWAIN-retourcode: TWRC_FAILURE
+9602 TWAIN-retourcode: TWRC_CHECKSTATUS
+9603 TWAIN-retourcode: TWRC_CANCEL
+9604 TWAIN-retourcode: TWRC_DSEVENT 
+9605 TWAIN-retourcode: TWRC_NOTDSEVENT
+9606 TWAIN-retourcode: TWRC_XFERDONE         
+9607 TWAIN-retourcode: TWRC_ENDOFLIST        
+9608 TWAIN-retourcode: TWRC_INFONOTSUPPORTED 
+9609 TWAIN-retourcode: TWRC_DATANOTAVAILABLE 
+9610 TWAIN-retourcode: TWRC_BUSY             
+9611 TWAIN-retourcode: TWRC_SCANNERLOCKED    

@@ -1,5 +1,14 @@
 DTWAIN Version changes
 
+5.10.0-r1
+
+- This patch release includes revised foreign language resource files with improved translations, corrected technical 
+  terminology, and restored missing error messages. 
+
+  The DTWAIN DLLs and executables remain unchanged from version 5.10.0. Existing DTWAIN 5.10.0 users need only replace 
+  their foreign language resource files.  No application recompilation or DLL replacement is required.
+
+
 5.10.0
 
 - The main twain resource files, twaininfo.txt, dtwain32.ini, and dtwain64.ini are now

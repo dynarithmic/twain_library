@@ -1,264 +1,269 @@
 ﻿0 Aucune erreur
-501 Fenêtre inefficace Manipule
-502 Raté D'Affectation De Mémoire
-503 Mauvais DLL Manipule
-504 Mauvaise Source Manipule
-505 DLL de Twain. ne Fonde pas
-506 DLL mauvais de TWAIN.
-507 Mauvaise Séance Manipule
-508 Mauvais Tenancier De Twain
-509 Ne pouvions pas charger TWAIN. DLL
-510 Ne pouvions pas ouvrir TWAIN la source
-511 Ne pouvions pas fermer TWAIN la source
-512 Source de Twain doit être ouverte au-devant exécuter le commande
-527 Ne pouvions pas parachever échographie.   X/Y ou Résolutions met pour les valeurs différentes
-528 Mauvais Dossier Nomme Spécifié
-532 triplet TWAIN non exécuté. Gestionnaire Twain invalide.
+501 Handle de fenêtre NULL
+502 Échec de l'allocation de mémoire
+503 Handle de DLL invalide
+504 Handle de source invalide
+505 Gestionnaire de sources de données TWAIN (DSM) introuvable
+506 TWAIN.DLL invalide
+507 Handle de session invalide
+508 Gestionnaire de sources TWAIN invalide
+509 Impossible de charger TWAIN.DLL
+510 Impossible d'ouvrir la source TWAIN
+511 Impossible de fermer la source TWAIN
+512 La source TWAIN doit être ouverte avant l'exécution de la commande
+527 Impossible de terminer la numérisation. Les résolutions X et Y ont des valeurs différentes.
+528 Nom de fichier spécifié invalide
+532 Triplet TWAIN non exécuté. Gestionnaire de sources TWAIN invalide.
 1000 ***
-1001 Invalide DTWAIN_HANDLE
-1002 Invalide DTWAIN_SOURCE
-1003 Invalide DTWAIN_ARRAY
-1004 DTWAIN_ARRAY incorrect du caractère
-1005 Index sur bonds pour le DTWAIN_ARRAY: %1
-1006 Sur mémoire de monceau
-1007 DTWAIN TWAIN ne pouvait pas créer fenêtre
-1008 Pixel Invalide Tape
+1001 DTWAIN_HANDLE invalide
+1002 DTWAIN_SOURCE invalide
+1003 DTWAIN_ARRAY invalide
+1004 Type de DTWAIN_ARRAY incorrect
+1005 Indice hors limites pour le DTWAIN_ARRAY : %1
+1006 Mémoire du tas insuffisante
+1007 DTWAIN n'a pas pu créer la fenêtre TWAIN
+1008 Type de pixel invalide
 1009 DTWAIN_CAPCONTAINER invalide
-1010 Séance aucune de DTWAIN fut démarrée.
-1011 Invalide DTWAIN_ACQUIER chiffre
-1012 Twain Invalid Capacité
-1013 La source ne soutient pas la capacité: %1
-1014 Faute générale de TWAIN.
-1015 Manquai pour Accrocher de la demande message queue
-1016 Discussion de nom mauvais de Dossier fut passée
-1017 DTWAIN_ARRAY pas ne contient pas des valeurs
-1018 Image invalide classe format spécifié
-1019 Dib invalide pagine
-1020 La source est en train d'actuellement acquérir une image
-1021 Paramètre invalide fut passé
-1022 Éventail invalide spécifia : Contrôle limites supérieures ou plus basses ou étape dimension
-1023 Interface d'utilisateur de Twain ne pouvait pas être démarrée.   Faute d'appareil ou Acquiers doivent avoir un utilisateur interface.
-1024 La source ne soutient pas la spécifié unité d'appareil
-1025 DLL de ressource de langue ne fonde pas
-1026 Source de Twain n'est pas ouvert
-1027 Circonstances d'Appareil de source pas soutins
-1028 UI de source Que mode pas soutins
-1029 UI de source est déjà ouvert
-1030 Non soutiens pour la capacité mettante
-1031 La source ne soutient pas dossier des transferts
-1032 Spécifiai morceau la profondeur pas soutins
-1033 La source n'a pas des capacités.   Possibly corrompit raté de quincaillerie ou
-1034 Des transferts utilisant des Tuiles Buffered pas soutins
-1035 Invalide DTWAIN_FRAME   Caractère de données doit être DTWAIN_FLOAT, élément compte le moût= 4
-1036 Cette fonction n'est pas soutenue dedans limité version de DTWAIN.   Vous devez moderniser à version recommandée de DTWAIN
-1037 Source ou appareil ne soutient pas un document alimenteur
-1038 Source ou appareil ne soutient pas querying que des documents sont chargés dans l'alimenteur de document
-1039 Faute d'exception de mémoire while appelant Twain DSM.   DSM peuvent être contradictoire dans état.
+1010 Aucune session DTWAIN n'a été démarrée. Vous devez appeler DTWAIN_StartTwainSession()
+1011 Numéro DTWAIN_ACQUIRE invalide
+1012 Capacité TWAIN invalide
+1013 La source ne prend pas en charge la capacité : %1
+1014 Erreur générale TWAIN. Consultez DTWAIN_GetTwainError() pour plus d'informations
+1015 Impossible d'installer un hook sur la file de messages de l'application
+1016 Argument de nom de fichier invalide
+1017 DTWAIN_ARRAY ne contient aucune valeur
+1018 Format de fichier image spécifié invalide
+1019 Page DIB invalide
+1020 La source est déjà en cours d'acquisition d'une image
+1021 Un paramètre invalide a été transmis
+1022 Plage spécifiée invalide : vérifiez les limites inférieure et supérieure ainsi que le pas
+1023 Impossible d'ouvrir l'interface utilisateur TWAIN. Erreur du périphérique ou acquisition nécessitant une interface utilisateur.
+1024 La source ne prend pas en charge l'unité de mesure spécifiée
+1025 DLL de ressources linguistiques introuvable
+1026 La source TWAIN n'est pas ouverte
+1027 Les événements du périphérique ne sont pas pris en charge par la source
+1028 Le mode d'affichage de l'interface utilisateur seule n'est pas pris en charge par la source
+1029 L'interface utilisateur de la source est déjà ouverte
+1030 La modification de la capacité n'est pas prise en charge
+1031 La source ne prend pas en charge les transferts de fichiers
+1032 La profondeur de bits spécifiée n'est pas prise en charge
+1033 La source ne dispose d'aucune capacité. Source potentiellement corrompue ou défaillance matérielle.
+1034 Les transferts en mémoire par tuiles ne sont pas pris en charge
+1035 DTWAIN_FRAME invalide. Le type de données doit être DTWAIN_FLOAT et le nombre d'éléments doit être égal à 4
+1036 Cette fonction n'est pas prise en charge dans la version limitée de DTWAIN. Vous devez passer à la version enregistrée de DTWAIN
+1037 La source ou le périphérique ne prend pas en charge le chargeur de documents
+1038 La source ou le périphérique ne permet pas de vérifier si des documents sont présents dans le chargeur
+1039 Exception mémoire lors de l'appel au DSM TWAIN. Le DSM peut se trouver dans un état incohérent.
 1040 Transition d'état TWAIN non valide
-1041 Type d'information d'image étendue non pris en charge
-1042 Fichier de ressources DLL non trouvé  
+1041 Type d'informations d'image étendues non pris en charge
+1042 DLL de ressources introuvable  
 1043 DTWAIN non initialisé  
 1044 Aucune source TWAIN trouvée  
 1045 TWAIN n'est pas installé  
-1046 Fil d'exécution incorrect  
-1047 Mauvais type de données de capacité  
+1046 Thread d'exécution incorrect  
+1047 Type de données de la capacité incorrect  
 1048 La capacité a un type de données inconnu  
-1049 Demo Version of DTWAIN does not support this file type
-1050 Sélection Annulée
-1051 DTWAIN Resources not found
+1049 La version de démonstration de DTWAIN ne prend pas en charge ce type de fichier
+1050 Sélection de la source annulée
+1051 Ressources DTWAIN introuvables
 1052 La chaîne ne correspond pas au type de tableau
-1053 DTWAIN ARRAY not the same type
-1054 Source non installé  
-1055 Source ne prend pas en charge les transferts de fichiers en mémoire
-1056 Area array est trop petit. Le tableau doit comporter au moins 4 éléments.
-1057 Impossible de créer le fichier journal.
+1053 Les tableaux DTWAIN ne sont pas du même type
+1054 Source non installée  
+1055 La source ne prend pas en charge les transferts de fichiers en mémoire
+1056 Le tableau de la zone est trop petit. Le tableau doit comporter au moins 4 éléments.
+1057 Impossible de créer le fichier journal de DTWAIN.
 1058 La source ne prend pas en charge le système de fichiers TWAIN.
 1059 Le mode de tuiles n'est pas pris en charge pour cette source TWAIN.
-1060 DTWAIN32.INI non trouvé  
-1061 DTWAIN64.INI non trouvé  
-1062 Échec de la vérification CRC. Vérifiez le fichier twaininfo.txt corrompu  
+1060 DTWAIN32.INI introuvable  
+1061 DTWAIN64.INI introuvable  
+1062 Échec de la vérification CRC. Vérifiez si le fichier twaininfo.txt est corrompu  
 1063 La version du fichier twaininfo.txt est invalide pour cette version de DTWAIN  
 1064 Erreur de l'API Windows  
 1065 Aucun ID TWAIN ne correspond à la chaîne  
-1066 ID de ressource dupliqué trouvé  
-1067 Valeur d'information d'image étendue indisponible  
-1068 Bitmap invalide retourné par la source TWAIN (TWAINDSM 2.x)
+1066 Identifiant de ressource en double détecté  
+1067 Valeur d'informations d'image étendues indisponible  
+1068 Bitmap invalide renvoyé par la source TWAIN (TWAINDSM 2.x)
 1069 Aucune image acquise.
-1070 Erreur d'image  
+1070 Erreur de rééchantillonnage de l'image  
 1071 Code de retour TWAIN inconnu  
 1072 Code de condition TWAIN inconnu  
-1073 Erreur de données de ressource: Exception levée
+1073 Erreur de données de ressources : exception levée
 1074 Les transferts audio ne sont pas pris en charge.
 1075 La source signale que le chargeur est disponible, mais échoue au test de conformité TWAIN (CAP_PAPERDETECTABLE)
-1076 La source rapporte qu'il n'y a pas de capacités. Échec du test de conformité pour CAP_SUPPORTEDCAPS  
-1077 Échec du test de conformité pour CAP_SUPPORTEDCAPS. CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE ou ICAP_XFERMECH est manquant dans la liste des capacités  
+1076 La source indique qu'elle ne dispose d'aucune capacité. Échec du test de conformité pour CAP_SUPPORTEDCAPS  
+1077 Échec du test de conformité pour CAP_SUPPORTEDCAPS. Au moins une des capacités CAP_SUPPORTEDCAPS, ICAP_PIXELTYPE ou ICAP_XFERMECH est absente de la liste des capacités  
 1078 Échec du test de conformité pour ICAP_PIXELTYPE.  
 1079 Échec du test de conformité pour ICAP_PIXELTYPE. Aucune information sur le type de pixel.  
 1080 Échec du test de conformité pour ICAP_BITDEPTH.    
 1081 Échec du test de conformité pour ICAP_XFERMECH.  
 1082 Échec du test de conformité pour les capacités standard.  
-1083 Incompatibilité de type d'informations d'image étendues. Échec de conformité TWAIN.
+1083 Incompatibilité du type de données des informations d'image étendues. Échec du test de conformité TWAIN.
 1084 Erreur lors de la récupération des informations d'image étendues.
 1085 La valeur DTWAIN_RANGE est hors des limites  
-1086 DTWAIN_RANGE a une taille de pas de 0
-1087 Un nom vide ou vide a été détecté
+1086 Le pas de DTWAIN_RANGE est égal à 0
+1087 Un nom vide ou composé uniquement d'espaces a été détecté
 1088 Le chargeur de documents ne dispose pas de capteur de papier ou le capteur de papier n'est pas détecté.
 1089 La DLL DTWAIN n'a pas pu être chargée ou n'existe pas
 1090 La DLL DTWAIN n’est pas de la bonne version
 1091 La session TWAIN est actuellement active
 1092 L'opération nécessite TWAIN DSM 2.x ou une version ultérieure
 1093 Le conteneur TWON_ENUMERATOR n'a pas été utilisé pour cette opération.
-1100 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
-1101 Faute de Code : de Condition de Twain
-1102 Twain Conditionne Code : Inconnu de la cause du raté
-1103 Source de Données de Code : de Condition de Twain
-1104 Source de Données de Code : de Condition de Twain est reliée à demandes maximales possibles
-1105 Source de Données de Code : de Condition de Twain de Tenancier de Source de Données rapporta de la faute.   De la demande pas responsable.
-1106 Twain Conditionne Code : Inconnu TWAIN la capacité rencontré
-1107 Paramètre de Données de Code : de Condition de Twain est sur éventail
-1108 Code : de Condition de Twain combinaison Méconnue de triplé de TWAIN
-1109 Twain Conditionne Code : TWAIN le triplé sur est attendu de la séquence
-1110 Code : de Condition de Twain Demande Inconnue de destination dans le DSM fonction _Entry
-1111 Capacité de Code : de Condition de Twain n'est pas soutenue par la Source de Données
-1112 Opération de Code : de Condition de Twain n'est pas soutenue par la capacité
-1113 Capacité de Code : de Condition de Twain a dependancy sur autre la capacité
-1114 Dossier de Code : de Condition de Twain est protégé
-1115 Code : de Condition de Twain Classe déjà existe
-1116 Code : de Condition de Twain ne Classe pas ne se fonder pas
-1117 Annuaire de Code : de Condition de Twain n'est pas empty
-1118 Alimenteur de Code : de Condition de Twain est embouteillé
-1119 Alimenteur de Code : de Condition de Twain dépista multiple des pages
-1120 Faute écrivant de Code : de Condition de Twain classe que (disque peut être plein)
-1121 Appareil de Code : de Condition de Twain alla offline durant opération
-1123 TWAIN Condition Code: Operation failed (cover or door on device is opened)
-1124 TWAIN Condition Code: Operation failed (document has a damaged corner)
-1125 TWAIN Condition Code: Operation failed (focus error during document capture)
-1126 TWAIN Condition Code: Operation failed (document too light)
-1127 TWAIN Condition Code: Operation failed (document too dark)
-1128 TWAIN Condition Code: Operation failed (source has nothing to capture for transfer)
+1094 Une DLL JPEG XL ou une dépendance est manquante, a un format invalide ou une architecture incompatible.
+1095 La bibliothèque JPEG XL est déjà chargée dans l'espace mémoire du processus hébergeant la DLL DTWAIN.
+1096 Un chemin de fichier invalide a été spécifié.
+1100 Code de condition TWAIN : Impossible de terminer l'opération. Mémoire insuffisante.
+1101 Code de condition TWAIN : Aucune erreur
+1102 Code de condition TWAIN : Cause de l'échec inconnue
+1103 Code de condition TWAIN : Aucune source de données
+1104 Code de condition TWAIN : La source de données a atteint le nombre maximal de connexions aux applications
+1105 Code de condition TWAIN : La source de données ou le gestionnaire de sources a signalé une erreur. L'application n'est pas en cause.
+1106 Code de condition TWAIN : Capacité TWAIN inconnue
+1107 Code de condition TWAIN : Paramètre de données hors limites
+1108 Code de condition TWAIN : Combinaison de triplet TWAIN non reconnue
+1109 Code de condition TWAIN : Triplet TWAIN exécuté hors séquence
+1110 Code de condition TWAIN : Application de destination inconnue dans la fonction DSM_Entry
+1111 Code de condition TWAIN : Capacité non prise en charge par la source de données
+1112 Code de condition TWAIN : Opération non prise en charge par la capacité
+1113 Code de condition TWAIN : La capacité dépend d'une autre capacité
+1114 Code de condition TWAIN : Fichier protégé
+1115 Code de condition TWAIN : Le fichier existe déjà
+1116 Code de condition TWAIN : Fichier introuvable
+1117 Code de condition TWAIN : Le répertoire n'est pas vide
+1118 Code de condition TWAIN : Bourrage papier dans le chargeur
+1119 Code de condition TWAIN : Le chargeur a détecté une alimentation multiple de pages
+1120 Code de condition TWAIN : Erreur d'écriture du fichier (le disque est peut-être plein)
+1121 Code de condition TWAIN : Le périphérique est passé hors ligne pendant l'opération
+1123 Code de condition TWAIN : Échec de l'opération (le capot ou la porte du périphérique est ouvert)
+1124 Code de condition TWAIN : Échec de l'opération (coin du document endommagé)
+1125 Code de condition TWAIN : Échec de l'opération (erreur de mise au point lors de la capture du document)
+1126 Code de condition TWAIN : Échec de l'opération (document trop clair)
+1127 Code de condition TWAIN : Échec de l'opération (document trop sombre)
+1128 Code de condition TWAIN : Échec de l'opération (la source ne dispose d'aucune image à capturer pour le transfert)
 2000  
-2001 Hors de la mémoire
+2001 Mémoire insuffisante
 2002 Le fichier n'a pas pu être ouvert
-2003 Fichier de relevé d'erreurs
-2004 Fichier d'écriture d'erreur
-2005 Paramètre incorrect indiqué pour la fonction à mémoire d'image
-2006 Fichier incorrect de BMP
-2007 Fichier incorrect de BMP avec RLE
+2003 Erreur de lecture du fichier
+2004 Erreur d'écriture du fichier
+2005 Paramètre invalide spécifié pour la fonction de traitement de bitmap
+2006 Fichier BMP invalide
+2007 Fichier BMP avec compression RLE invalide
 2008  
-2009 Format incorrect de JPEG
-2010 Contexte Incorrect De Dispositif
-2011 Dib Incorrect
+2009 Format JPEG invalide
+2010 Contexte de périphérique invalide
+2011 DIB invalide
 2012  
 2013 Aucune erreur de ressource
 2014  
-2015 Fichier incorrect de png
-2016 N'a pas pu créer le fichier de png
+2015 Fichier PNG invalide
+2016 Impossible de créer le fichier PNG
 2017 Erreur interne
-2018 Fonte incorrecte
+2018 Police de caractères invalide
 2019  
-2020 Fichier incorrect de tiff
-2021 Compactage de tiff LZW non supporté
-2022 Format incorrect de PCX
-2023 N'a pas pu créer BMP
+2020 Fichier TIFF invalide
+2021 Compression LZW du format TIFF non prise en charge
+2022 Format PCX invalide
+2023 Impossible de créer le fichier BMP
 2024  
 2025  
 2026  
-2027 Métafichier Incorrect De Windows
-2028 Mauvaise Profondeur De Bit
-2029 BitBlt échouent
+2027 Métafichier Windows invalide
+2028 Profondeur de bits invalide
+2029 Échec de BitBlt
 2030 Mémoire tampon trop petite
 2031 L'image a trop de couleurs
-2032 Tga Incorrect
+2032 Fichier TGA invalide
 2033  
 2034  
-2035 DIB ne pourrait pas être créé
-2036 Compactage de LZW non supporté
+2035 Impossible de créer le DIB
+2036 Compression LZW non prise en charge
 2037  
 2038  
 2039  
 2040  
-2041 Erreur plaçant des bits de métafichier de Windows
-2042 Erreur obtenant des bits de métafichier de Windows
-2043 Erreur dans le mot de passe de fichier de Pax
-2044 Pax Incorrect
+2041 Erreur lors de la définition des bits du métafichier Windows
+2042 Erreur lors de la récupération des bits du métafichier Windows
+2043 Erreur dans le mot de passe du fichier PAX
+2044 Fichier PAX invalide
 2045 Type de fichier ou option utilisateur non pris en charge
-2046 Format incorrect de PSD
-2047 PSD non supporté
+2046 Format PSD invalide
+2047 Format PSD non pris en charge
 2048 Erreur de déchiffrage
 2049 Erreur de chiffrement
-2050 Erreur de compactage
+2050 Erreur de compression
 2051 Erreur de décompression
 2052  
-2053 Largeur/hauteur de bitmap invalide pour le format Wireless Bitmap (WBMP)
-2054 Étiquette Incorrecte De Tiff
+2053 Largeur ou hauteur du bitmap invalide pour le format Wireless Bitmap (WBMP)
+2054 Balise TIFF invalide
 2055  
-2056 Format incorrect d'cExif
+2056 Format EXIF invalide
 2057  
-2058 DTWIMG32.DLL non trouvé
-2059 TIFLIB16.DLL non trouvé
-2060 PNGLIB16.DLL non trouvé
-2061 JPGLIB16.DLL non trouvé
-2062 Bit-par-Pixel incorrect indiqué
-2063 Version fausse de DTWIMG32.DLL
-2064 DTWPDF32.DLL non trouvé
-2065 Version fausse de DTWPDF32.DL
-2066 DTWIMG32.DLL non trouvé
-2067 Version fausse de DTWIMG32.DLL
-2068 DTWIMG32.DLL non trouvé
-2069 Version fausse de DTWIMG32.DLL	  
-2070 DTWIMG32.DLL not found
-2071 Wrong version of DTWIMG32.DLL
-2072 Manual Duplex mode unavailable in this version of DTWAIN
-2073 L'opération a expiré
-2074 Invalid bitmap width/height for non-Vista Windows ICO format
-2075 TWAIN_32.DLL non trouvé
-2076 TWAINDSM.DLL non trouvé  
-2077 Répertoire de fichiers invalide
+2058 DTWIMG32.DLL introuvable
+2059 TIFLIB16.DLL introuvable
+2060 PNGLIB16.DLL introuvable
+2061 JPGLIB16.DLL introuvable
+2062 Nombre de bits par pixel spécifié invalide
+2063 Version incorrecte de DTWIMG32.DLL
+2064 DTWPDF32.DLL introuvable
+2065 Version incorrecte de DTWPDF32.DLL
+2066 DTWIMG32.DLL introuvable
+2067 Version incorrecte de DTWIMG32.DLL
+2068 DTWIMG32.DLL introuvable
+2069 Version incorrecte de DTWIMG32.DLL	  
+2070 DTWIMG32.DLL introuvable
+2071 Version incorrecte de DTWIMG32.DLL
+2072 Le mode recto verso manuel n'est pas disponible dans cette version de DTWAIN
+2073 Le délai d'attente de l'opération a expiré
+2074 Largeur ou hauteur du bitmap invalide pour le format ICO de Windows hors Vista
+2075 TWAIN_32.DLL ou le gestionnaire de sources de données TWAIN spécifié est introuvable, corrompu ou n'a pas pu être ouvert
+2076 TWAINDSM.DLL ou le gestionnaire de sources de données TWAIN spécifié est introuvable, corrompu ou n'a pas pu être ouvert  
+2077 Répertoire invalide ou inexistant
 2078 Impossible de créer le répertoire
-2079 Transym OCR DLL non trouvé 
-2081 No filename specified.  Use -f option
-2082 TWAIN not available
-2083 Cannot communicate with TWAIN device
-2084 Error saving output file
-2085 Illegal TwainSave command
-2086 TwainSave acquisition was cancelled
-2087 Failure to acquire image
-2088 Invalid color space.  Only RGB, Grayscale, and Black/White color spaces are supported
-2089 PDF not supported.
-2090 Missing or corrupt DTWTS.DLL.  TwainSave not available
+2079 DLL Transym OCR introuvable ou impossible à charger. 
+2081 Aucun nom de fichier spécifié.  Utilisez l'option -f
+2082 TWAIN non disponible
+2083 Impossible de communiquer avec le périphérique TWAIN
+2084 Erreur lors de l'enregistrement du fichier de sortie
+2085 Commande TwainSave non valide
+2086 L'acquisition TwainSave a été annulée
+2087 Échec de l'acquisition de l'image
+2088 Espace colorimétrique invalide. Seuls les modes RVB, niveaux de gris et noir et blanc sont pris en charge
+2089 PDF non pris en charge.
+2090 DTWTS.DLL manquante ou corrompue. TwainSave n'est pas disponible
 2101 Page OCR invalide spécifiée  
-2102 OCR invalide  
-2103 OCR inactif  
+2102 Moteur OCR invalide  
+2103 Moteur OCR inactif  
 2104 Type de fichier OCR invalide  
 2105 Type de pixel OCR invalide  
 2106 Profondeur de bits OCR invalide  
 2107 Erreur de reconnaissance OCR  
-2500 Ne pouvions pas ouvrir TWAIN la source
-2501 Ne pouvions pas fermer TWAIN la source
-2502 Informations sur l'image invalides
+2108 Échec de l’arrêt d’un ou plusieurs moteurs OCR
+2109 Échec de l’initialisation du moteur OCR
+2500 Impossible d'ouvrir la source TWAIN
+2501 Impossible de fermer la source TWAIN
+2502 Informations sur l'image invalides lors de l'acquisition
 2503 Erreur d'écriture des données dans le fichier
-2504 Opération non supportée  
+2504 Opération non prise en charge  
 2505 Élément de texte PDF invalide
 2506 La capacité n'a pas été définie. Des valeurs invalides ont été utilisées.
 2507 La capacité ne peut pas être négociée dans l'état actuel
-3000 Sélectionner Source
+3000 Sélectionner une source
 3001 &Sélectionner
 3002 &Annuler
-3003 Sources:
-3004 Sélectionner OCR
-3005 Entrer
-3006 Sortie
-3007 valeur de retour de
-3008 Exception Error
+3003 Sources :
+3004 Sélectionner un moteur OCR
+3005 Entrée dans
+3006 Sortie de
+3007 renvoie la valeur de
+3008 Erreur : exception levée
 3009 Module
-3010 No parameter info
-3011 Error in getting information for function
-3012 Saisir
-3013 Sortir: code retour de DSM
-3014 No information for 
-3015 returned error code
+3010 Aucune information sur les paramètres
+3011 Erreur lors de la récupération des informations sur la fonction
+3012 Entrée
+3013 Sortie : code de retour du DSM
+3014 Aucune information pour 
+3015 a renvoyé le code d'erreur
 3016 Erreur
-3017 Le répertoire de fichiers temporaires n'existe pas
+3017 Le répertoire des fichiers temporaires n'existe pas
 3018 appelé
 3019 Le fichier image temporaire est
 3020 Erreur lors de la création du fichier image temporaire
@@ -272,44 +277,44 @@
 3028 Dernière erreur
 9700 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright}
 9701 DTWAIN Twain Library, v{short_version}, {company_name}, {copyright_html}
-9999 Exception error occurred during call to Twain DSM.  Possible corrupted Twain session?
+9999 Une exception s'est produite lors de l'appel au DSM TWAIN.  Session TWAIN éventuellement corrompue ?
 10000 [Message de l'utilisateur]
-10001 Erreur lors de la fermeture de Twain DSM  
-10002 Erreur lors de la fermeture de la session Twain  
+10001 Erreur lors de la fermeture du DSM TWAIN  
+10002 Erreur lors de la fermeture de la session TWAIN  
 10003 Erreur lors de la fermeture du gestionnaire DTWAIN  
-10004 Gestionnaire de source TWAIN, session et DTWAIN fermés avec succès  
-10005 Impossible de retirer la sous-classe de la fenêtre utilisateur  
+10004 Gestionnaire de sources TWAIN, session TWAIN et DTWAIN fermés avec succès  
+10005 Impossible d'annuler le sous-classement de la fenêtre utilisateur  
 10006 Le type de périphérique et le type requis par TWAIN ne correspondent pas.
 10007 Avertissement : Le type de compression de fichier est inconnu ou ne correspond pas au type d'image choisi.
 
-9500 Faute de Code : de Condition de Twain
-9501 Twain Conditionne Code : Inconnu de la cause du raté
-9502 Condition de Twain ne pouvait pas Coder : ne pouvions pas parachever de l'opération.   Mémoire Insuffisante.
-9503 Source de Données de Code : de Condition de Twain
-9504 Source de Données de Code : de Condition de Twain est reliée à demandes maximales possibles
-9505 Source de Données de Code : de Condition de Twain de Tenancier de Source de Données rapporta de la faute.   De la demande pas responsable.
-9506 Twain Conditionne Code : Inconnu TWAIN la capacité rencontré
-9509 Code : de Condition de Twain combinaison Méconnue de triplé de TWAIN
-9510 Paramètre de Données de Code : de Condition de Twain est sur éventail
-9511 Twain Conditionne Code : TWAIN le triplé sur est attendu de la séquence
-9512 Code : de Condition de Twain Demande Inconnue de destination dans le DSM fonction _Entry
-9513 Capacité de Code : de Condition de Twain n'est pas soutenue par la Source de Données
-9514 Opération de Code : de Condition de Twain n'est pas soutenue par la capacité
-9515 Capacité de Code : de Condition de Twain a dependancy sur autre la capacité
-9516 Dossier de Code : de Condition de Twain est protégé
-9517 Code : de Condition de Twain Classe déjà existe
-9518 Code : de Condition de Twain ne Classe pas ne se fonder pas
-9519 Annuaire de Code : de Condition de Twain n'est pas empty
-9520 Alimenteur de Code : de Condition de Twain est embouteillé
-9521 Alimenteur de Code : de Condition de Twain dépista multiple des pages
-9522 Faute écrivant de Code : de Condition de Twain classe que (disque peut être plein)
-9523 Appareil de Code : de Condition de Twain alla offline durant opération
-9524 Code d'état TWAIN : Opération échouée (couvercle ou porte de l'appareil ouvert)
-9525 Code d'état TWAIN : Opération échouée (le document a un coin endommagé)
-9526 Code d'état TWAIN : Opération échouée (erreur de mise au point lors de la capture du document)
-9527 Code d'état TWAIN : Opération échouée (document trop clair)
-9528 Code d'état TWAIN : Opération échouée (document trop sombre)
-9529 Code d'état TWAIN : Opération échouée (la source n'a rien à capturer pour le transfert)
+9500 Code de condition TWAIN : Aucune erreur
+9501 Code de condition TWAIN : Cause de l'échec inconnue
+9502 Code de condition TWAIN : Impossible de terminer l'opération. Mémoire insuffisante.
+9503 Code de condition TWAIN : Aucune source de données
+9504 Code de condition TWAIN : La source de données a atteint le nombre maximal de connexions aux applications
+9505 Code de condition TWAIN : La source de données ou le gestionnaire de sources a signalé une erreur. L'application n'est pas en cause.
+9506 Code de condition TWAIN : Capacité TWAIN inconnue
+9509 Code de condition TWAIN : Combinaison de triplet TWAIN non reconnue
+9510 Code de condition TWAIN : Paramètre de données hors limites
+9511 Code de condition TWAIN : Triplet TWAIN exécuté hors séquence
+9512 Code de condition TWAIN : Application de destination inconnue dans la fonction DSM_Entry
+9513 Code de condition TWAIN : Capacité non prise en charge par la source de données
+9514 Code de condition TWAIN : Opération non prise en charge par la capacité
+9515 Code de condition TWAIN : La capacité dépend d'une autre capacité
+9516 Code de condition TWAIN : Fichier protégé
+9517 Code de condition TWAIN : Le fichier existe déjà
+9518 Code de condition TWAIN : Fichier introuvable
+9519 Code de condition TWAIN : Le répertoire n'est pas vide
+9520 Code de condition TWAIN : Bourrage papier dans le chargeur
+9521 Code de condition TWAIN : Le chargeur a détecté une alimentation multiple de pages
+9522 Code de condition TWAIN : Erreur d'écriture du fichier (le disque est peut-être plein)
+9523 Code de condition TWAIN : Le périphérique est passé hors ligne pendant l'opération
+9524 Code de condition TWAIN : Échec de l'opération (le capot ou la porte du périphérique est ouvert)
+9525 Code de condition TWAIN : Échec de l'opération (coin du document endommagé)
+9526 Code de condition TWAIN : Échec de l'opération (erreur de mise au point lors de la capture du document)
+9527 Code de condition TWAIN : Échec de l'opération (document trop clair)
+9528 Code de condition TWAIN : Échec de l'opération (document trop sombre)
+9529 Code de condition TWAIN : Échec de l'opération (la source ne dispose d'aucune image à capturer pour le transfert)
 9600 Code de retour TWAIN : TWRC_SUCCESS  
 9601 Code de retour TWAIN : TWRC_FAILURE  
 9602 Code de retour TWAIN : TWRC_CHECKSTATUS  

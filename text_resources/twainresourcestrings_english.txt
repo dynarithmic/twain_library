@@ -108,6 +108,10 @@
 1091 TWAIN session is currently active
 1092 Operation requires TWAIN DSM 2.x or later
 1093 TWON_ENUMERATOR container was not used for this operation.
+1094 A JPEG XL DLL or dependency is missing, has an invalid format, or incompatible architecture.
+1095 The JPEG XL library is already loaded within the DTWAIN DLL process space.
+1096 An invalid file path was specified.
+
 1100 TWAIN Condition Code: Could not complete operation.  Insufficient Memory.
 1101 TWAIN Condition Code: No Error
 1102 TWAIN Condition Code: Unknown cause of failure
@@ -233,6 +237,8 @@
 2105 Invalid OCR pixel type
 2106 Invalid OCR bit depth
 2107 OCR Recognition error
+2108 One or more OCR engines had a shutdown failure
+2109 OCR engine initialization failure
 2500 Could not open TWAIN source
 2501 Could not close TWAIN source
 2502 Invalid Image Information on acquiring image
