@@ -41,6 +41,7 @@ namespace TWAINDemo
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnListBadCaps = new System.Windows.Forms.Button();
             this.chkResetCapsOnExit = new System.Windows.Forms.CheckBox();
             this.btnResetAllCaps = new System.Windows.Forms.Button();
             this.btnTestCap = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@ namespace TWAINDemo
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.OKbutton = new System.Windows.Forms.Button();
-            this.btnListBadCaps = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.GroupBox3.SuspendLayout();
@@ -205,6 +205,16 @@ namespace TWAINDemo
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Capability Info";
             // 
+            // btnListBadCaps
+            // 
+            this.btnListBadCaps.Location = new System.Drawing.Point(246, 182);
+            this.btnListBadCaps.Name = "btnListBadCaps";
+            this.btnListBadCaps.Size = new System.Drawing.Size(127, 23);
+            this.btnListBadCaps.TabIndex = 5;
+            this.btnListBadCaps.Text = "List Bad Capabilities...";
+            this.btnListBadCaps.UseVisualStyleBackColor = true;
+            this.btnListBadCaps.Click += new System.EventHandler(this.btnListBadCaps_Click);
+            // 
             // chkResetCapsOnExit
             // 
             this.chkResetCapsOnExit.AutoSize = true;
@@ -278,7 +288,7 @@ namespace TWAINDemo
             // edExtendedCaps
             // 
             this.edExtendedCaps.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.edExtendedCaps.Location = new System.Drawing.Point(331, 113);
+            this.edExtendedCaps.Location = new System.Drawing.Point(331, 87);
             this.edExtendedCaps.Name = "edExtendedCaps";
             this.edExtendedCaps.ReadOnly = true;
             this.edExtendedCaps.Size = new System.Drawing.Size(42, 13);
@@ -288,7 +298,7 @@ namespace TWAINDemo
             // edCustomCaps
             // 
             this.edCustomCaps.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.edCustomCaps.Location = new System.Drawing.Point(331, 72);
+            this.edCustomCaps.Location = new System.Drawing.Point(331, 59);
             this.edCustomCaps.Name = "edCustomCaps";
             this.edCustomCaps.ReadOnly = true;
             this.edCustomCaps.Size = new System.Drawing.Size(42, 13);
@@ -443,16 +453,6 @@ namespace TWAINDemo
             this.OKbutton.Text = "OK";
             this.OKbutton.UseVisualStyleBackColor = true;
             this.OKbutton.Click += new System.EventHandler(this.OKbutton_Click);
-            // 
-            // btnListBadCaps
-            // 
-            this.btnListBadCaps.Location = new System.Drawing.Point(246, 182);
-            this.btnListBadCaps.Name = "btnListBadCaps";
-            this.btnListBadCaps.Size = new System.Drawing.Size(127, 23);
-            this.btnListBadCaps.TabIndex = 5;
-            this.btnListBadCaps.Text = "List Bad Capabilities...";
-            this.btnListBadCaps.UseVisualStyleBackColor = true;
-            this.btnListBadCaps.Click += new System.EventHandler(this.btnListBadCaps_Click);
             // 
             // SourcePropsDlg
             // 

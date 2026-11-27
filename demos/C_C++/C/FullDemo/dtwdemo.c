@@ -705,7 +705,13 @@ void SelectTheSource(int nWhich)
         LONG lastError = DTWAIN_GetLastError();
         if ( lastError == DTWAIN_ERR_SOURCESELECTION_CANCELED || customSelectionRetCode == IDCANCEL)
         {
-            MessageBoxW(g_hWnd, L"Source selection cancelled",L"Information", MB_ICONINFORMATION);
+            lastError = DTWAIN_ERR_SOURCESELECTION_CANCELED;
+            TCHAR sMsg[1024];
+            LONG len = DTWAIN_GetErrorString(lastError, sMsg, 1024);
+            if ( len == 0 )
+                MessageBox(g_hWnd, _T("Source selection cancelled"),_T("Information"), MB_ICONINFORMATION);
+            else
+                MessageBox(g_hWnd, sMsg,_T("Information"), MB_ICONINFORMATION);
         }
         else
         {
@@ -1700,8 +1706,8 @@ void WaitLoop()
 
 void PromptUserToCorrectJxlInstallation()
 {
-    MessageBox(g_hWnd, _T("JPEG-XL library not found or one or more JPEG-XL dependencies were not found. " 
-        "Please install JPEG-XL components now and select JPEG-XL again..."), _T("JPEG-XL error"), MB_OKCANCEL);
+    MessageBox(g_hWnd, _T("JPEG-XL library not found or one or more JPEG-XL dependencies were not found.\r\n\r\nPlease install JPEG-XL components now (choose Help -> Options...) and select JPEG-XL again..."), 
+             _T("JPEG-XL error"), MB_OKCANCEL);
 }
 
 LRESULT CALLBACK TwainCallbackProc(WPARAM wParam, LPARAM lParam, LONG_PTR UserData)

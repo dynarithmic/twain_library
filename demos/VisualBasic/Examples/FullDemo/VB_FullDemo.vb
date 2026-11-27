@@ -1411,7 +1411,10 @@ End Sub
     Private Sub JPEGXL_Click(sender As Object, e As EventArgs) Handles JPEGXL.Click
         Dim isSupported As Integer = DTWAINAPI.DTWAIN_IsFileTypeSupported(DTWAINAPI.DTWAIN_JPEGXL)
         If isSupported = 0 Then
-            MessageBox.Show("JPEG-XL library not found or one or more JPEG-XL dependencies were not found. Please install JPEG-XL components now and select JPEG-XL again...")
+            MessageBox.Show(
+                "JPEG-XL library not found or one or more JPEG-XL dependencies were not found." & vbCrLf & vbCrLf &
+                "Please install JPEG-XL components now (choose Help -> Options...) and select JPEG-XL again...",
+                "JPEG-XL Error")
             Return
         Else
             AcquireToFile(0, DTWAINAPI.DTWAIN_JPEGXL)
@@ -1455,6 +1458,13 @@ End Sub
         DTWAINAPI.DTWAIN_SetPDFSubject(SelectedSource, optionsData.sPDFSubject)
 
         Dim useStrong = 0
+
+        REM Turn off encryption And encoding by default
+        DTWAINAPI.DTWAIN_SetPDFEncryption(SelectedSource, 0, "", "", 0, 0)
+        DTWAINAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, DTWAINAPI.DTWAIN_PDF_AES128, 0)
+        DTWAINAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, DTWAINAPI.DTWAIN_PDF_AES256, 0)
+        DTWAINAPI.DTWAIN_SetPDFASCIICompression(SelectedSource, 0)
+
         If pdfEncrypted Then
             Select Case encryptionType
                 Case PDF_128BitAES_Encryption_Value:

@@ -1768,7 +1768,9 @@ namespace TWAINDemo
             int isSupported = TwainAPI.DTWAIN_IsFileTypeSupported(TwainAPI.DTWAIN_JPEGXL);
             if ( isSupported == 0 )
             {
-                MessageBox.Show("JPEG-XL library not found or one or more JPEG-XL dependencies were not found. Please install JPEG-XL components now and select JPEG-XL again...");
+                MessageBox.Show(
+                "JPEG-XL library not found or one or more JPEG-XL dependencies were not found.\r\n\r\nPlease install JPEG-XL components now (choose Help -> Options...) and select JPEG-XL again...",
+                "JPEG-XL Error");
             }
             else
                 AcquireToFile(0, TwainAPI.DTWAIN_JPEGXL);
@@ -1803,6 +1805,12 @@ namespace TWAINDemo
             TwainAPI.DTWAIN_SetPDFSubject(SelectedSource, optionsData.sPDFSubject);
 
             bool useStrong = false;
+
+            // Turn off encryption and encoding by default
+            TwainAPI.DTWAIN_SetPDFEncryption(SelectedSource, 0, "", "",0,0);
+            TwainAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, TwainAPI.DTWAIN_PDF_AES128, 0);
+            TwainAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, TwainAPI.DTWAIN_PDF_AES256, 0);
+            TwainAPI.DTWAIN_SetPDFASCIICompression(SelectedSource, 0);
             if (pdfEncrypted)
             {
                 switch (encryptionType)
