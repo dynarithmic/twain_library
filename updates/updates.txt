@@ -1,6 +1,6 @@
 DTWAIN Version changes
 
-5.10.0-r1
+5.10.0-Update-1
 
 - This patch release includes revised foreign language resource files with improved translations, corrected technical 
   terminology, and restored missing error messages. 
