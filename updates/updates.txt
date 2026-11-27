@@ -122,6 +122,15 @@ DTWAIN Version changes
     availability before saving an acquired image.
 
 
+- The DTWDEMO32U.exe and DTWDEMO64U.exe full demo programs allows setting the path to the JPEG-XL library (libjxl components).  
+
+  From the main menu, choose:
+      Help -> Options...
+
+  If testing the acquisition of images to JPEG-XL, ensure that the path to the libjxl components is valid and contains 
+  all the libjxl DLL files.
+
+
 - TWAIN Message Loop Detection Change:
 
   Automatic GetMessage() TWAIN loop detection is now disabled by default. DTWAIN uses PeekMessage() unless otherwise configured.
@@ -154,6 +163,16 @@ DTWAIN Version changes
 - Upgraded following internal image related libraries:
 
       libpng --> 1.6.59
+
+
+
+5.10.0-Update-1
+
+- This patch release includes revised foreign language resource files with improved translations, corrected technical 
+  terminology, and restored missing error messages. 
+
+  The DTWAIN DLLs and executables remain unchanged from version 5.10.0. Existing DTWAIN 5.10.0 users need only replace 
+  their foreign language resource files.  No application recompilation or DLL replacement is required.
 
 
 
