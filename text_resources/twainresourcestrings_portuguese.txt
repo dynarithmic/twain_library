@@ -108,10 +108,6 @@
 1091 A sessão TWAIN está atualmente ativa
 1092 A operação requer TWAIN DSM 2.x ou posterior
 1093 O contentor TWON_ENUMERATOR não foi usado nesta operação.
-1094 Uma DLL do JPEG XL ou uma dependência está ausente, possui formato inválido ou arquitetura incompatível.
-1095 A biblioteca JPEG XL já está carregada no espaço de endereçamento do processo da DLL do DTWAIN.
-1096 Um caminho de ficheiro inválido foi especificado.
-
 1100 Código de condição TWAIN: Não foi possível completar a operação. Memória insuficiente.
 1101 Código de condição TWAIN: Sem Erro
 1102 Código de condição TWAIN: Causa desconhecida da falha
@@ -140,7 +136,7 @@
 1126 Código de condição TWAIN: Operação falhou (documento muito claro)
 1127 Código de condição TWAIN: Operação falhou (documento muito escuro)
 1128 Código de condição TWAIN: Falha na operação (a fonte de dados não tem nada para capturar e transferir)
-2000  
+2000 
 2001 Memória insuficiente
 2002 O ficheiro não pôde ser aberto
 2003 Erro ao ler o ficheiro
@@ -148,39 +144,39 @@
 2005 Parâmetro inválido especificado para a função bitmap
 2006 Ficheiro BMP inválido
 2007 Ficheiro BMP com RLE inválido
-2008  
+2008 
 2009 Formato JPEG inválido
 2010 Contexto de dispositivo inválido
 2011 DIB inválido
-2012  
+2012 
 2013 Nenhum erro de recurso
-2014  
+2014 
 2015 Ficheiro PNG inválido
 2016 Não foi possível criar o ficheiro PNG
 2017 Erro interno
 2018 Fonte tipográfica inválida
-2019  
+2019 
 2020 Ficheiro TIFF inválido
 2021 Compressão TIFF LZW não suportada
 2022 Formato PCX inválido
 2023 Não foi possível criar o BMP
-2024  
-2025  
-2026  
+2024 
+2025 
+2026 
 2027 Metficheiro do Windows inválido
 2028 Profundidade de bit inválida
 2029 BitBlt falhou
 2030 Buffer muito pequeno
 2031 A imagem possui cores demais
 2032 TGA inválido
-2033  
-2034  
+2033 
+2034 
 2035 DIB não pôde ser criado
 2036 Compressão LZW não suportada
-2037  
-2038  
-2039  
-2040  
+2037 
+2038 
+2039 
+2040 
 2041 Erro ao definir os bits do Metficheiro do Windows
 2042 Erro ao obter os bits do Metficheiro do Windows
 2043 Erro na palavra-passe do ficheiro PAX
@@ -192,12 +188,12 @@
 2049 Erro de cifragem
 2050 Erro de compressão
 2051 Erro de descompressão
-2052  
+2052 
 2053 Largura ou altura do bitmap inválida para o formato Wireless Bitmap (WBMP)
 2054 Tag TIFF inválida
-2055  
+2055 
 2056 Formato EXIF inválido
-2057  
+2057 
 2058 DTWIMG32.DLL não encontrada
 2059 TIFLIB16.DLL não encontrada
 2060 PNGLIB16.DLL não encontrada
@@ -217,7 +213,7 @@
 2074 Largura ou altura do bitmap inválida para o formato ICO do Windows anterior ao Vista
 2075 TWAIN_32.DLL ou gestor de fontes de dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto
 2076 TWAINDSM.DLL ou gestor de fontes de dados TWAIN especificado não encontrado, corrompido ou não pôde ser aberto
-2077 Diretório inválido ou inexistente
+2077 Diretório inválido ou inexistente 
 2078 Não foi possível criar o diretório
 2079 DLL do Transym OCR não encontrada ou não pôde ser carregada.
 2081 Nenhum nome de ficheiro especificado. Use a opção -f
@@ -237,8 +233,6 @@
 2105 Tipo de pixel OCR inválido
 2106 Profundidade de bits OCR inválida
 2107 Erro de reconhecimento OCR
-2108 Falha ao encerrar um ou mais mecanismos de OCR
-2109 Falha na inicialização do mecanismo de OCR
 2500 Não foi possível abrir a fonte de dados TWAIN
 2501 Não foi possível fechar a fonte de dados TWAIN
 2502 Informações de imagem inválidas durante a aquisição
@@ -319,11 +313,11 @@
 9601 Código de retorno TWAIN: TWRC_FAILURE
 9602 Código de retorno TWAIN: TWRC_CHECKSTATUS
 9603 Código de retorno TWAIN: TWRC_CANCEL
-9604 Código de retorno TWAIN: TWRC_DSEVENT
+9604 Código de retorno TWAIN: TWRC_DSEVENT 
 9605 Código de retorno TWAIN: TWRC_NOTDSEVENT
-9606 Código de retorno TWAIN: TWRC_XFERDONE
-9607 Código de retorno TWAIN: TWRC_ENDOFLIST
-9608 Código de retorno TWAIN: TWRC_INFONOTSUPPORTED
-9609 Código de retorno TWAIN: TWRC_DATANOTAVAILABLE
-9610 Código de retorno TWAIN: TWRC_BUSY
-9611 Código de retorno TWAIN: TWRC_SCANNERLOCKED
+9606 Código de retorno TWAIN: TWRC_XFERDONE         
+9607 Código de retorno TWAIN: TWRC_ENDOFLIST        
+9608 Código de retorno TWAIN: TWRC_INFONOTSUPPORTED 
+9609 Código de retorno TWAIN: TWRC_DATANOTAVAILABLE 
+9610 Código de retorno TWAIN: TWRC_BUSY             
+9611 Código de retorno TWAIN: TWRC_SCANNERLOCKED    

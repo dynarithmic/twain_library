@@ -108,9 +108,6 @@
 1091 La sessione TWAIN è attualmente attiva
 1092 L'operazione richiede TWAIN DSM 2.x o successivo
 1093 Il contenitore TWON_ENUMERATOR non è stato utilizzato per questa operazione.
-1094 Una DLL o dipendenza JPEG XL è mancante, ha un formato non valido o un'architettura incompatibile.
-1095 La libreria JPEG XL è già caricata nello spazio di indirizzamento del processo della DLL DTWAIN.
-1096 È stato specificato un percorso di file non valido.
 1100 Codice di condizione TWAIN: Impossibile completare l'operazione. Memoria insufficiente.
 1101 Codice di condizione TWAIN: Nessun errore
 1102 Codice di condizione TWAIN: Causa dell'errore sconosciuta
@@ -216,7 +213,7 @@
 2074 Larghezza o altezza della bitmap non valida per il formato ICO di Windows precedente a Vista
 2075 TWAIN_32.DLL o il gestore delle sorgenti dati TWAIN specificato non è stato trovato, è danneggiato o non può essere aperto
 2076 TWAINDSM.DLL o il gestore delle sorgenti dati TWAIN specificato non è stato trovato, è danneggiato o non può essere aperto
-2077 Directory non valida o inesistente
+2077 Directory non valida o inesistente 
 2078 Impossibile creare la directory
 2079 DLL Transym OCR non trovata o impossibile da caricare.
 2081 Nessun nome file specificato. Utilizzare l'opzione -f
@@ -236,8 +233,6 @@
 2105 Tipo di pixel OCR non valido
 2106 Profondità di bit OCR non valida
 2107 Errore di riconoscimento OCR
-2108 Uno o più motori OCR hanno riscontrato un errore durante l'arresto
-2109 Errore di inizializzazione del motore OCR
 2500 Impossibile aprire la sorgente TWAIN
 2501 Impossibile chiudere la sorgente TWAIN
 2502 Informazioni sull'immagine non valide durante l'acquisizione
@@ -318,11 +313,11 @@
 9601 Codice di ritorno TWAIN: TWRC_FAILURE
 9602 Codice di ritorno TWAIN: TWRC_CHECKSTATUS
 9603 Codice di ritorno TWAIN: TWRC_CANCEL
-9604 Codice di ritorno TWAIN: TWRC_DSEVENT
+9604 Codice di ritorno TWAIN: TWRC_DSEVENT 
 9605 Codice di ritorno TWAIN: TWRC_NOTDSEVENT
-9606 Codice di ritorno TWAIN: TWRC_XFERDONE
-9607 Codice di ritorno TWAIN: TWRC_ENDOFLIST
-9608 Codice di ritorno TWAIN: TWRC_INFONOTSUPPORTED
-9609 Codice di ritorno TWAIN: TWRC_DATANOTAVAILABLE
-9610 Codice di ritorno TWAIN: TWRC_BUSY
-9611 Codice di ritorno TWAIN: TWRC_SCANNERLOCKED
+9606 Codice di ritorno TWAIN: TWRC_XFERDONE         
+9607 Codice di ritorno TWAIN: TWRC_ENDOFLIST        
+9608 Codice di ritorno TWAIN: TWRC_INFONOTSUPPORTED 
+9609 Codice di ritorno TWAIN: TWRC_DATANOTAVAILABLE 
+9610 Codice di ritorno TWAIN: TWRC_BUSY             
+9611 Codice di ritorno TWAIN: TWRC_SCANNERLOCKED    

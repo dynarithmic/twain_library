@@ -108,10 +108,6 @@
 1091 TWAIN 工作階段目前處於啟用狀態
 1092 操作需要 TWAIN DSM 2.x 或更新版本
 1093 TWON_ENUMERATOR 容器未用於此作業。
-1094 JPEG XL DLL 或相依元件遺失、具有無效格式或不相容的架構。
-1095 JPEG XL 程式庫已載入 DTWAIN DLL 處理程序空間中。
-1096 指定了無效的檔案路徑。
-
 1100 TWAIN 條件代碼：無法完成操作。記憶體不足。
 1101 TWAIN 條件代碼：無錯誤
 1102 TWAIN 條件代碼：未知的故障原因
@@ -217,7 +213,7 @@
 2074 無效的非 Vista Windows ICO 格式的點陣圖寬度/高度
 2075 TWAIN_32.DLL 或指定的 TWAIN 資料來源管理員不存在、已損毀或無法開啟
 2076 TWAINDSM.DLL 或指定的 TWAIN 資料來源管理員不存在、已損毀或無法開啟
-2077 無效或不存在的目錄
+2077 無效或不存在的目錄 
 2078 無法建立目錄
 2079 找不到 Transym OCR DLL 或無法載入。
 2081 未指定檔名。使用 -f 選項
@@ -237,8 +233,6 @@
 2105 無效的 OCR 像素類型
 2106 無效的 OCR 位元深度
 2107 OCR 辨識錯誤
-2108 一個或多個 OCR 引擎關閉失敗
-2109 OCR 引擎初始化失敗
 2500 無法開啟 TWAIN 資料來源
 2501 無法關閉 TWAIN 資料來源
 2502 擷取影像時取得的影像資訊無效
@@ -319,11 +313,11 @@
 9601 TWAIN 傳回代碼：TWRC_FAILURE
 9602 TWAIN 傳回代碼：TWRC_CHECKSTATUS
 9603 TWAIN 傳回代碼：TWRC_CANCEL
-9604 TWAIN 傳回代碼：TWRC_DSEVENT
+9604 TWAIN 傳回代碼：TWRC_DSEVENT 
 9605 TWAIN 傳回代碼：TWRC_NOTDSEVENT
-9606 TWAIN 傳回代碼：TWRC_XFERDONE
-9607 TWAIN 傳回代碼：TWRC_ENDOFLIST
-9608 TWAIN 傳回代碼：TWRC_INFONOTSUPPORTED
-9609 TWAIN 傳回代碼：TWRC_DATANOTAVAILABLE
-9610 TWAIN 傳回代碼：TWRC_BUSY
-9611 TWAIN 傳回代碼：TWRC_SCANNERLOCKED
+9606 TWAIN 傳回代碼：TWRC_XFERDONE         
+9607 TWAIN 傳回代碼：TWRC_ENDOFLIST        
+9608 TWAIN 傳回代碼：TWRC_INFONOTSUPPORTED 
+9609 TWAIN 傳回代碼：TWRC_DATANOTAVAILABLE 
+9610 TWAIN 傳回代碼：TWRC_BUSY             
+9611 TWAIN 傳回代碼：TWRC_SCANNERLOCKED    

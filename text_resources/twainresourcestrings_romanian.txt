@@ -108,10 +108,6 @@
 1091 Sesiunea TWAIN este activă în prezent
 1092 Operațiunea necesită TWAIN DSM 2.x sau o versiune ulterioară
 1093 Containerul TWON_ENUMERATOR nu a fost folosit pentru această operațiune.
-1094 Un DLL JPEG XL sau o dependență a acestuia lipsește, are un format invalid sau o arhitectură incompatibilă.
-1095 Biblioteca JPEG XL este deja încărcată în spațiul de adrese al procesului în care este încărcat DLL-ul DTWAIN.
-1096 A fost specificată o cale de fișier nevalidă.
-
 1100 Cod de condiție TWAIN: Nu s-a putut finaliza operațiunea. Memorie insuficientă.
 1101 Cod de condiție TWAIN: Nicio eroare
 1102 Cod de condiție TWAIN: Cauza eșecului este necunoscută
@@ -140,7 +136,7 @@
 1126 Cod de condiție TWAIN: Operațiune eșuată (document prea luminos)
 1127 Cod de condiție TWAIN: Operațiune eșuată (document prea întunecat)
 1128 Cod de condiție TWAIN: Operațiune eșuată (sursa nu are nimic de capturat pentru transfer)
-2000  
+2000 
 2001 Memorie insuficientă
 2002 Fișierul nu a putut fi deschis
 2003 Eroare la citirea fișierului
@@ -148,39 +144,39 @@
 2005 Parametru invalid specificat pentru funcția bitmap
 2006 Fișier BMP invalid
 2007 Fișier BMP invalid cu RLE
-2008  
+2008 
 2009 Format JPEG invalid
 2010 Context de dispozitiv invalid
 2011 DIB invalid
-2012  
+2012 
 2013 Eroare: lipsă de resurse
-2014  
+2014 
 2015 Fișier PNG invalid
 2016 Nu s-a putut crea fișier PNG
 2017 Eroare internă
 2018 Font invalid
-2019  
+2019 
 2020 Fișier TIFF invalid
 2021 Compresia LZW pentru TIFF nu este acceptată
 2022 Format PCX invalid
 2023 Nu s-a putut crea BMP
-2024  
-2025  
-2026  
+2024 
+2025 
+2026 
 2027 Metafișier Windows invalid
 2028 Adâncime de biți incorectă
 2029 Apelul BitBlt a eșuat
 2030 Buffer prea mic
 2031 Imaginea are prea multe culori
 2032 TGA invalid
-2033  
-2034  
+2033 
+2034 
 2035 DIB nu a putut fi creat
 2036 Compresia LZW nu este acceptată
-2037  
-2038  
-2039  
-2040  
+2037 
+2038 
+2039 
+2040 
 2041 Eroare la setarea biților metafișierului Windows
 2042 Eroare la obținerea biților metafișierului Windows
 2043 Eroare privind parola fișierului PAX
@@ -192,12 +188,12 @@
 2049 Eroare de criptare
 2050 Eroare de compresie
 2051 Eroare de decomprimare
-2052  
+2052 
 2053 Lățime sau înălțime invalidă a bitmapului pentru formatul Wireless Bitmap (WBMP)
 2054 Etichetă TIFF invalidă
-2055  
+2055 
 2056 Format EXIF invalid
-2057  
+2057 
 2058 DTWIMG32.DLL nu a fost găsit
 2059 TIFLIB16.DLL nu a fost găsit
 2060 PNGLIB16.DLL nu a fost găsit
@@ -217,7 +213,7 @@
 2074 Lățime sau înălțime invalidă a bitmapului pentru formatul ICO Windows anterior versiunii Vista
 2075 TWAIN_32.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis
 2076 TWAINDSM.DLL sau Managerul de surse de date TWAIN specificat nu a fost găsit, este corupt sau nu a putut fi deschis
-2077 Director invalid sau inexistent
+2077 Director invalid sau inexistent 
 2078 Nu s-a putut crea directorul
 2079 DLL-ul Transym OCR nu a fost găsit sau nu a putut fi încărcat.
 2081 Niciun nume de fișier specificat. Folosiți opțiunea -f
@@ -237,8 +233,6 @@
 2105 Tip de pixel OCR invalid
 2106 Adâncime de biți OCR invalidă
 2107 Eroare de recunoaștere OCR
-2108 Unul sau mai multe motoare OCR au întâmpinat o eroare la oprire
-2109 Eșec la inițializarea motorului OCR
 2500 Nu s-a putut deschide sursa TWAIN
 2501 Nu s-a putut închide sursa TWAIN
 2502 Informații invalide despre imagine în timpul achiziției
@@ -319,11 +313,11 @@
 9601 Cod de returnare TWAIN: TWRC_FAILURE
 9602 Cod de returnare TWAIN: TWRC_CHECKSTATUS
 9603 Cod de returnare TWAIN: TWRC_CANCEL
-9604 Cod de returnare TWAIN: TWRC_DSEVENT
+9604 Cod de returnare TWAIN: TWRC_DSEVENT 
 9605 Cod de returnare TWAIN: TWRC_NOTDSEVENT
-9606 Cod de returnare TWAIN: TWRC_XFERDONE
-9607 Cod de returnare TWAIN: TWRC_ENDOFLIST
-9608 Cod de returnare TWAIN: TWRC_INFONOTSUPPORTED
-9609 Cod de returnare TWAIN: TWRC_DATANOTAVAILABLE
-9610 Cod de returnare TWAIN: TWRC_BUSY
-9611 Cod de returnare TWAIN: TWRC_SCANNERLOCKED
+9606 Cod de returnare TWAIN: TWRC_XFERDONE         
+9607 Cod de returnare TWAIN: TWRC_ENDOFLIST        
+9608 Cod de returnare TWAIN: TWRC_INFONOTSUPPORTED 
+9609 Cod de returnare TWAIN: TWRC_DATANOTAVAILABLE 
+9610 Cod de returnare TWAIN: TWRC_BUSY             
+9611 Cod de returnare TWAIN: TWRC_SCANNERLOCKED    

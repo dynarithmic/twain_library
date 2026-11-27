@@ -108,9 +108,6 @@
 1091 TWAIN oturumu şu anda aktif
 1092 İşlem TWAIN DSM 2.x veya daha yenisini gerektirir
 1093 TWON_ENUMERATOR kapsayıcısı bu işlem için kullanılmadı.
-1094 Bir JPEG XL DLL'si veya bağımlılığı eksik, geçersiz biçimde ya da uyumsuz mimaride.
-1095 JPEG XL kitaplığı, DTWAIN DLL'sinin işlem adres alanında zaten yüklü.
-1096 Geçersiz bir dosya yolu belirtildi.
 1100 TWAIN Durum Kodu: İşlem tamamlanamadı. Yetersiz Bellek.
 1101 TWAIN Durum Kodu: Hata Yok
 1102 TWAIN Durum Kodu: Bilinmeyen hata nedeni
@@ -216,7 +213,7 @@
 2074 Vista öncesi Windows ICO biçimi için geçersiz bitmap genişliği/yüksekliği
 2075 TWAIN_32.DLL veya belirtilen TWAIN Veri Kaynağı Yöneticisi bulunamadı, bozuk ya da açılamıyor
 2076 TWAINDSM.DLL veya belirtilen TWAIN Veri Kaynağı Yöneticisi bulunamadı, bozuk ya da açılamıyor
-2077 Geçersiz veya mevcut olmayan dizin
+2077 Geçersiz veya mevcut olmayan dizin 
 2078 Dizin oluşturulamadı
 2079 Transym OCR DLL'si bulunamadı veya yüklenemedi.
 2081 Dosya adı belirtilmedi. -f seçeneğini kullanın
@@ -236,8 +233,6 @@
 2105 Geçersiz OCR piksel türü
 2106 Geçersiz OCR bit derinliği
 2107 OCR Tanıma hatası
-2108 Bir veya daha fazla OCR motoru kapatılamadı
-2109 OCR motoru başlatma hatası
 2500 TWAIN kaynağı açılamadı
 2501 TWAIN kaynağı kapatılamadı
 2502 Görüntü alınırken geçersiz görüntü bilgisi
@@ -260,7 +255,7 @@
 3011 İşlev için bilgi alınırken hata
 3012 Giriş
 3013 Çıkış: DSM'den dönüş kodu
-3014 Şunun için bilgi yok:
+3014 Şunun için bilgi yok: 
 3015 hata kodu döndürüldü
 3016 Hata
 3017 Geçici dosya dizini mevcut değil
@@ -318,11 +313,11 @@
 9601 TWAIN Dönüş Kodu: TWRC_FAILURE
 9602 TWAIN Dönüş Kodu: TWRC_CHECKSTATUS
 9603 TWAIN Dönüş Kodu: TWRC_CANCEL
-9604 TWAIN Dönüş Kodu: TWRC_DSEVENT
+9604 TWAIN Dönüş Kodu: TWRC_DSEVENT 
 9605 TWAIN Dönüş Kodu: TWRC_NOTDSEVENT
-9606 TWAIN Dönüş Kodu: TWRC_XFERDONE
-9607 TWAIN Dönüş Kodu: TWRC_ENDOFLIST
-9608 TWAIN Dönüş Kodu: TWRC_INFONOTSUPPORTED
-9609 TWAIN Dönüş Kodu: TWRC_DATANOTAVAILABLE
-9610 TWAIN Dönüş Kodu: TWRC_BUSY
-9611 TWAIN Dönüş Kodu: TWRC_SCANNERLOCKED
+9606 TWAIN Dönüş Kodu: TWRC_XFERDONE         
+9607 TWAIN Dönüş Kodu: TWRC_ENDOFLIST        
+9608 TWAIN Dönüş Kodu: TWRC_INFONOTSUPPORTED 
+9609 TWAIN Dönüş Kodu: TWRC_DATANOTAVAILABLE 
+9610 TWAIN Dönüş Kodu: TWRC_BUSY             
+9611 TWAIN Dönüş Kodu: TWRC_SCANNERLOCKED    
