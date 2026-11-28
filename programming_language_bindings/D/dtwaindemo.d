@@ -14,7 +14,7 @@ extern(Windows) ptrint myCallback64(ptrint wParam, ptrint lParam, long userData)
     // of most of the TWAIN-related and DTWAIN-related constants
     char [256] szNotification;
     auto len = theDLL.DTWAIN_GetTwainNameFromConstantA(theDLL.DTWAIN_CONSTANT_DTWAIN_TN, // The constant type
-                                                       wParam,  // The actual constant value
+                                                       cast(LONG)wParam,  // The actual constant value
                                                        cast(char *)szNotification, // name is returned here
                                                        256); // maximum size of the output buffer 
     if ( len > 0) 
