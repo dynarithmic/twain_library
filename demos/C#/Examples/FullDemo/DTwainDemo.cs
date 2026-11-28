@@ -1282,7 +1282,13 @@ namespace TWAINDemo
                 }
                 else
                 {
-                    MessageBox.Show("Error Opening Source", "TWAIN Error", MessageBoxButtons.OK);
+                    int lastError = TwainAPI.DTWAIN_GetLastError();
+                    StringBuilder szErr = new StringBuilder(100);
+                    int len = TwainAPI.DTWAIN_GetErrorString(lastError, szErr, 100);
+                    if ( len > 0 )
+                        MessageBox.Show(szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK);
+                    else
+                        MessageBox.Show("Error Opening or selection TWAIN Source", "TWAIN Error", MessageBoxButtons.OK);
                     SetCaptionToSourceName();
                     EnableSourceItems(false);
                     EnableBarcodeItems(false);
@@ -1291,15 +1297,14 @@ namespace TWAINDemo
             else
             {
                 int lastError = TwainAPI.DTWAIN_GetLastError();
-                if (lastError == TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED ||
-                    customLastSelection == DialogResult.Cancel)
-                    MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK);
+                if (customLastSelection == DialogResult.Cancel)
+                    lastError = TwainAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED;
+                StringBuilder szErr = new StringBuilder(100);
+                int len = TwainAPI.DTWAIN_GetErrorString(lastError, szErr, 100);
+                if (len == 0)
+                    MessageBox.Show(this, "Source selection cancelled", "Information", MessageBoxButtons.OK);
                 else
-                {
-                    StringBuilder szErr = new StringBuilder(100);
-                    TwainAPI.DTWAIN_GetErrorString(lastError, szErr, 100);
-                    MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK);
-                }
+                    MessageBox.Show(this, szErr.ToString(), "Information", MessageBoxButtons.OK);
                 SetCaptionToSourceName();
                 EnableSourceItems(false);
             }
@@ -1801,12 +1806,6 @@ namespace TWAINDemo
             TwainAPI.DTWAIN_SetPDFSubject(SelectedSource, optionsData.sPDFSubject);
 
             bool useStrong = false;
-
-            // Turn off encryption and encoding by default
-            TwainAPI.DTWAIN_SetPDFEncryption(SelectedSource, 0, "", "",0,0);
-            TwainAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, TwainAPI.DTWAIN_PDF_AES128, 0);
-            TwainAPI.DTWAIN_SetPDFAESEncryption(SelectedSource, TwainAPI.DTWAIN_PDF_AES256, 0);
-            TwainAPI.DTWAIN_SetPDFASCIICompression(SelectedSource, 0);
             if (pdfEncrypted)
             {
                 switch (encryptionType)

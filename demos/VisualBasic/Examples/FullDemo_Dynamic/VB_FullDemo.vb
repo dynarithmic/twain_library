@@ -1024,20 +1024,29 @@ End Sub
                 SetGetMessageLoopProcessing()
                 Return
             Else
-                MessageBox.Show("Error Opening selected Source", "TWAIN Error", MessageBoxButtons.OK)
+                Dim lastError As Integer = DTWAINAPI.DTWAIN_GetLastError()
+                Dim szErr As StringBuilder = new StringBuilder(100)
+                Dim len As Integer = DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
+                If  len > 0 Then
+                    MessageBox.Show(szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
+                Else
+                    MessageBox.Show("Error Opening or selection TWAIN Source", "TWAIN Error", MessageBoxButtons.OK)
+                End If
                 SetCaptionToSourceName()
                 EnableSourceItems(False)
                 EnableBarcodeItems(False)
             End If
         Else
-            Dim lastError As Integer
-            lastError = DTWAINAPI.DTWAIN_GetLastError()
-            If lastError = DTWAINAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED Or customLastSelection = DialogResult.Cancel Then
-                MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK)
+            Dim lastError As Integer = DTWAINAPI.DTWAIN_GetLastError()
+            If customLastSelection = DialogResult.Cancel Then
+               lastError = DTWAINAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED
+            End If
+            Dim szErr As StringBuilder = new StringBuilder(100)
+            Dim len As Integer = DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
+            If len = 0 Then
+                MessageBox.Show(Me, "Source selection cancelled", "Information", MessageBoxButtons.OK)
             Else
-                Dim szErr = New StringBuilder(100)
-                DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
-                MessageBox.Show("Error Selecting and/or opening Source.  " + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
+                MessageBox.Show(Me, szErr.ToString(), "Information", MessageBoxButtons.OK)
             End If
             SetCaptionToSourceName()
             EnableSourceItems(False)
